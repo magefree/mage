@@ -10,7 +10,6 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
 
 import java.util.Collection;
 import java.util.List;
@@ -74,7 +73,7 @@ class MarvinMurderousMimicEffect extends ContinuousEffectImpl {
                         source.getControllerId(), source, game
                 )
                 .stream()
-                .filter(p -> !CardUtil.haveSameNames(p, permanent))
+                .filter(p -> !p.sharesName(permanent, game))
                 .map(p -> p.getAbilities(game))
                 .flatMap(Collection::stream)
                 .filter(Ability::isActivatedAbility)

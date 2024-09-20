@@ -1,12 +1,11 @@
 package mage.cards.s;
 
-import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -14,9 +13,11 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author Plopman
  */
 public final class SignalTheClans extends CardImpl {
@@ -61,32 +62,22 @@ class SignalTheClansEffect extends SearchEffect {
             return false;
         }
         //Search your library for three creature cards
-        if (controller.searchLibrary(target, source, game)) {
-            boolean shuffleDone = false;
-            if (!target.getTargets().isEmpty()) {
-                Cards cards = new CardsImpl(target.getTargets());
-                //Reveal them
-                controller.revealCards(source, cards, game);
-                Card cardsArray[] = cards.getCards(game).toArray(new Card[0]);
-                //If you reveal three cards with different names
-                if (Stream.of(cardsArray).map(MageObject::getName).collect(Collectors.toSet()).size() == 3) {
-                    //Choose one of them at random and put that card into your hand
-                    Card randomCard = cards.getRandom(game);
-                    controller.moveCards(randomCard, Zone.HAND, source, game);
-                    cards.remove(randomCard);
-                }
-                // Shuffle the rest into your library
-                if (!cards.isEmpty()) {
-                    controller.shuffleCardsToLibrary(cards, game, source);
-                    shuffleDone = true;
-                }
-            }
-            if (!shuffleDone) {
-                controller.shuffleLibrary(source, game);
-            }
-            return true;
+        controller.searchLibrary(target, source, game);
+        Cards cards = new CardsImpl(target.getTargets());
+        //Reveal them
+        controller.revealCards(source, cards, game);
+        //If you reveal three cards with different names
+        if (CardUtil.differentlyNamedAmongCollection(cards.getCards(game), game) >= 3) {
+            //Choose one of them at random and put that card into your hand
+            controller.moveCards(cards.getRandom(game), Zone.HAND, source, game);
         }
-        return false;
+        cards.retainZone(Zone.LIBRARY, game);
+        // Shuffle the rest into your library
+        if (!cards.isEmpty()) {
+            controller.shuffleCardsToLibrary(cards, game, source);
+        }
+        controller.shuffleLibrary(source, game);
+        return true;
     }
 
 }

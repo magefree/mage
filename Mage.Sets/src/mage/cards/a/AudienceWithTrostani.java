@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -11,10 +10,12 @@ import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.PlantToken;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -45,8 +46,14 @@ public final class AudienceWithTrostani extends CardImpl {
 
 enum AudienceWithTrostaniValue implements DynamicValue {
     instance;
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+
+    static {
+        filter.add(TokenPredicate.TRUE);
+    }
+
     private static final Hint hint = new ValueHint(
-            "Different names among creature tokens you control", instance
+            "Differently named creature tokens you control", instance
     );
 
     public static Hint getHint() {
@@ -55,19 +62,11 @@ enum AudienceWithTrostaniValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game
-                .getBattlefield()
-                .getActivePermanents(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        sourceAbility.getControllerId(), sourceAbility, game
-                )
-                .stream()
-                .filter(PermanentToken.class::isInstance)
-                .map(MageObject::getName)
-                .filter(s -> !s.isEmpty())
-                .distinct()
-                .mapToInt(x -> 1)
-                .sum();
+        return CardUtil.differentlyNamedAmongCollection(
+                game.getBattlefield().getActivePermanents(
+                        filter, sourceAbility.getControllerId(), sourceAbility, game
+                ), game
+        );
     }
 
     @Override

@@ -1,6 +1,5 @@
 package mage.cards.e;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -90,32 +89,33 @@ class EerieUltimatumTarget extends TargetCardInYourGraveyard {
 
     @Override
     public boolean canTarget(UUID playerId, UUID id, Ability ability, Game game) {
-        if (super.canTarget(playerId, id, ability, game)) {
-            Set<String> names = this.getTargets()
+        if (!super.canTarget(playerId, id, ability, game)) {
+            return false;
+        }
+        Set<Card> cards = this.getTargets()
                 .stream()
                 .map(game::getCard)
-                .map(MageObject::getName)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
-            Card card = game.getCard(id);
-            return card != null && !names.contains(card.getName());            
-        }
-        return false;
+        Card card = game.getCard(id);
+        return card != null
+                && cards
+                .stream()
+                .noneMatch(c -> c.sharesName(card, game));
     }
 
-    
+
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        Set<String> names = this.getTargets()
+        Set<Card> cards = this.getTargets()
                 .stream()
                 .map(game::getCard)
-                .map(MageObject::getName)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         possibleTargets.removeIf(uuid -> {
             Card card = game.getCard(uuid);
-            return card != null && names.contains(card.getName());
+            return card != null && cards.stream().anyMatch(c -> c.sharesName(card, game));
         });
         return possibleTargets;
     }

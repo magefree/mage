@@ -10,6 +10,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -17,15 +18,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -43,20 +43,20 @@ public final class MazesEnd extends CardImpl {
     public MazesEnd(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
-
         // Maze's End enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {T}: Add 1.
         this.addAbility(new ColorlessManaAbility());
 
-        // 3, {T}, Return Maze's End  to its owner's hand: Search your library for a Gate card, put it onto the battlefield, then shuffle your library. If you control ten or more Gates with different names, you win the game.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterCard)), new GenericManaCost(3));
-        ability.addEffect(new MazesEndEffect());
+        // {3}, {T}, Return Maze's End to its owner's hand: Search your library for a Gate card, put it onto the battlefield, then shuffle your library. If you control ten or more Gates with different names, you win the game.
+        Ability ability = new SimpleActivatedAbility(
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterCard)), new GenericManaCost(3)
+        );
         ability.addCost(new TapSourceCost());
         ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
-        ability.addHint(new ValueHint("Gates with different names you control", GatesWithDifferentNamesYouControlCount.instance));
-        this.addAbility(ability);
+        ability.addEffect(new MazesEndEffect());
+        this.addAbility(ability.addHint(GatesWithDifferentNamesYouControlCount.getHint()));
     }
 
     private MazesEnd(final MazesEnd card) {
@@ -70,20 +70,21 @@ public final class MazesEnd extends CardImpl {
 }
 
 enum GatesWithDifferentNamesYouControlCount implements DynamicValue {
-
     instance;
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.GATE);
+    private static final Hint hint = new ValueHint("Gates with different names you control", instance);
+
+    public static Hint getHint() {
+        return hint;
+    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        List<String> names = new ArrayList<>();
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(sourceAbility.getControllerId())) {
-            if (permanent.hasSubtype(SubType.GATE, game)) {
-                if (!names.contains(permanent.getName())) {
-                    names.add(permanent.getName());
-                }
-            }
-        }
-        return names.size();
+        return CardUtil.differentlyNamedAmongCollection(
+                game.getBattlefield().getActivePermanents(
+                        filter, sourceAbility.getControllerId(), sourceAbility, game
+                ), game
+        );
     }
 
     @Override
@@ -121,13 +122,13 @@ class MazesEndEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int count = GatesWithDifferentNamesYouControlCount.instance.calculate(game, source, this);
-        if (count >= 10) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                controller.won(game);
-            }
+        if (GatesWithDifferentNamesYouControlCount.instance.calculate(game, source, this) < 10) {
+            return false;
         }
-        return false;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            controller.won(game);
+        }
+        return true;
     }
 }

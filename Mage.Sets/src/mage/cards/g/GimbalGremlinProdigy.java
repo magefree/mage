@@ -1,7 +1,6 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -12,14 +11,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.GremlinArtifactToken;
 import mage.game.permanent.token.Token;
+import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -60,6 +61,12 @@ public final class GimbalGremlinProdigy extends CardImpl {
 
 class GimbalGremlinProdigyEffect extends OneShotEffect {
 
+    private static final FilterPermanent filter = new FilterArtifactPermanent();
+
+    static {
+        filter.add(TokenPredicate.TRUE);
+    }
+
     GimbalGremlinProdigyEffect() {
         super(Outcome.Benefit);
         staticText = "create a 0/0 red Gremlin artifact creature token. Put X +1/+1 counters on it, " +
@@ -79,20 +86,14 @@ class GimbalGremlinProdigyEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Token token = new GremlinArtifactToken();
         token.putOntoBattlefield(1, game, source);
-        int amount = game
-                .getBattlefield()
-                .getActivePermanents(
-                        StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT,
-                        source.getControllerId(), source, game
-                )
-                .stream()
-                .filter(PermanentToken.class::isInstance)
-                .map(MageObject::getName)
-                .filter(Objects::nonNull)
-                .filter(s -> !s.isEmpty())
-                .distinct()
-                .mapToInt(i -> 1)
-                .sum();
+        int amount = CardUtil.differentlyNamedAmongCollection(
+                game.getBattlefield().getActivePermanents(
+                        filter, source.getControllerId(), source, game
+                ), game
+        );
+        if (amount < 1) {
+            return true;
+        }
         for (UUID tokenId : token.getLastAddedTokenIds()) {
             Permanent permanent = game.getPermanent(tokenId);
             if (permanent != null) {

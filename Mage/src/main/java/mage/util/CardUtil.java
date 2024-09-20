@@ -794,6 +794,11 @@ public final class CardUtil {
         return object == null || haveEmptyName(object.getName());
     }
 
+    public static int differentlyNamedAmongCollection(Collection<? extends MageObject> collection, Game game) {
+        // TODO: Implement this
+        return 0;
+    }
+
     public static UUID getMainCardId(Game game, UUID objectId) {
         Card card = game.getCard(objectId);
         return card != null ? card.getMainCard().getId() : objectId;

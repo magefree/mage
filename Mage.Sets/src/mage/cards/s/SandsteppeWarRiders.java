@@ -1,7 +1,6 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -19,8 +18,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
+import mage.util.CardUtil;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -40,7 +39,9 @@ public final class SandsteppeWarRiders extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of combat on your turn, bolster X, where X is the number of differently named artifact tokens you control.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new BolsterEffect(SandsteppeWarRidersValue.instance), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(
+                new BolsterEffect(SandsteppeWarRidersValue.instance), TargetController.YOU, false
+        ).addHint(SandsteppeWarRidersValue.getHint()));
     }
 
     private SandsteppeWarRiders(final SandsteppeWarRiders card) {
@@ -63,18 +64,17 @@ enum SandsteppeWarRidersValue implements DynamicValue {
 
     private static final Hint hint = new ValueHint("Different artifact token names you control", instance);
 
+    public static Hint getHint() {
+        return hint;
+    }
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game
-                .getBattlefield()
-                .getActivePermanents(filter, sourceAbility.getControllerId(), sourceAbility, game)
-                .stream()
-                .map(MageObject::getName)
-                .filter(Objects::nonNull)
-                .filter(s -> !s.isEmpty())
-                .distinct()
-                .mapToInt(x -> 1)
-                .sum();
+        return CardUtil.differentlyNamedAmongCollection(
+                game.getBattlefield().getActivePermanents(
+                        filter, sourceAbility.getControllerId(), sourceAbility, game
+                ), game
+        );
     }
 
     @Override

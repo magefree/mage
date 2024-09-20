@@ -1,7 +1,6 @@
 package mage.cards.o;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -127,15 +126,14 @@ class OrmosArchiveKeeperTarget extends TargetCardInHand {
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        Set<String> names = this.getTargets()
+        Set<Card> cards = this.getTargets()
                 .stream()
                 .map(game::getCard)
-                .map(MageObject::getName)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         possibleTargets.removeIf(uuid -> {
             Card card = game.getCard(uuid);
-            return card != null && names.contains(card.getName());
+            return card != null && cards.stream().anyMatch(c -> c.sharesName(card, game));
         });
         return possibleTargets;
     }

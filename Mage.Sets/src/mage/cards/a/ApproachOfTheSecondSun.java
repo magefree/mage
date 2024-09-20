@@ -103,7 +103,7 @@ class ApproachOfTheSecondSunWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) { //A copy of a spell isn’t cast, so it won’t count as the first nor as the second Approach of the Second Sun. (2017-04-18)
             Spell spell = game.getStack().getSpell(event.getSourceId());
-            if (spell != null && spell.getName().equals("Approach of the Second Sun")) {
+            if (spell != null && spell.hasName("Approach of the Second Sun", game)) {
                 approachesCast.put(event.getPlayerId(), getApproachesCast(event.getPlayerId()) + 1);
             }
         }

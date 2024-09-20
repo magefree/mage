@@ -18,6 +18,7 @@ import mage.game.Game;
 import mage.game.permanent.token.PlantToken;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -63,18 +64,12 @@ enum TheNecrobloomCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        return game
-                .getBattlefield()
-                .getAllActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), game)
-                .stream()
-                .map(permanent -> permanent.getName())
-                .filter(s -> s.length() > 0)
-                .distinct()
-                .count() > 6;
+        return CardUtil.differentlyNamedAmongCollection(
+                game.getBattlefield().getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
+                        source.getControllerId(), source, game
+                ), game
+        ) >= 7;
     }
 }
 
