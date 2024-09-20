@@ -16,6 +16,7 @@ import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.hint.common.CitysBlessingHint;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.*;
@@ -2070,6 +2071,7 @@ public class VerifyCardDataTest {
         cardHints.put(CitysBlessingHint.class, "city's blessing");
         cardHints.put(MonarchHint.class, "the monarch");
         cardHints.put(InitiativeHint.class, "the initiative");
+        cardHints.put(CurrentDungeonHint.class, "venture into");
         for (Class hintClass : cardHints.keySet()) {
             String lookupText = cardHints.get(hintClass);
             boolean needHint = ref.text.contains(lookupText);

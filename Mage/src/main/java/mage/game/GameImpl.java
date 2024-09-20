@@ -560,14 +560,14 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void ventureIntoDungeon(UUID playerId, boolean undercity) {
+    public void ventureIntoDungeon(UUID playerId, boolean isEnterToUndercity) {
         if (playerId == null) {
             return;
         }
         if (replaceEvent(GameEvent.getEvent(GameEvent.EventType.VENTURE, playerId, null, playerId))) {
             return;
         }
-        this.getOrCreateDungeon(playerId, undercity).moveToNextRoom(playerId, this);
+        this.getOrCreateDungeon(playerId, isEnterToUndercity).moveToNextRoom(playerId, this);
         fireEvent(GameEvent.getEvent(GameEvent.EventType.VENTURED, playerId, null, playerId));
     }
 
