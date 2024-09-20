@@ -1,15 +1,12 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -25,20 +22,13 @@ public final class SixSidedDie extends CardImpl {
 
     public SixSidedDie(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{B}");
-
         // Choose target creature. Roll a six-sided die.
-        //
-        //1 — It has base toughness 1 until end of turn.
-        //
-        //2 — Put two -1/-1 counters on it.
-        //
-        //3 — Six-Sided Die deals 3 damage to it, and you gain 3 life.
-        //
-        //4 — It gets -4/-4 until end of turn.
-        //
-        //5 — Destroy it.
-        //
-        //6 — Exile it.
+        // 1 — It has base toughness 1 until end of turn.
+        // 2 — Put two -1/-1 counters on it.
+        // 3 — Six-Sided Die deals 3 damage to it, and you gain 3 life.
+        // 4 — It gets -4/-4 until end of turn.
+        // 5 — Destroy it.
+        // 6 — Exile it.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new SixSidedDieEffect());
     }
@@ -56,7 +46,8 @@ public final class SixSidedDie extends CardImpl {
 class SixSidedDieEffect extends OneShotEffect {
 
     SixSidedDieEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Detriment);
+
         setText("choose target creature. Roll a six-sided die." +
                 "<br>1 — It has base toughness 1 until end of turn." +
                 "<br>2 — Put two -1/-1 counters on it." +
@@ -82,10 +73,11 @@ class SixSidedDieEffect extends OneShotEffect {
         if (player == null || permanent == null) {
             return false;
         }
-        int result = player.rollDice(outcome, source, game, 1);
+        int result = player.rollDice(outcome, source, game, 6);
         switch (result) {
-            case 6:
-                game.addEffect(new SetBasePowerToughnessTargetEffect(1, 1, Duration.EndOfTurn), source);
+            case 1:
+                //Based on Chariot of the Sun
+                game.addEffect(new SixSidedDieToughnessEffect(), source);
                 break;
             case 2:
                 permanent.addCounters(CounterType.M1M1.createInstance(2), source, game);
@@ -100,10 +92,34 @@ class SixSidedDieEffect extends OneShotEffect {
             case 5:
                 permanent.destroy(source, game);
                 break;
-            case 1:
+            case 6:
+
                 player.moveCards(permanent, Zone.EXILED, source, game);
                 break;
         }
+        return true;
+    }
+}
+
+class SixSidedDieToughnessEffect extends ContinuousEffectImpl {
+
+    SixSidedDieToughnessEffect() {
+        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.UnboostCreature);
+    }
+
+    private SixSidedDieToughnessEffect(final SixSidedDieToughnessEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public SixSidedDieToughnessEffect copy() {
+        return new SixSidedDieToughnessEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        permanent.getToughness().setModifiedBaseValue(1);
         return true;
     }
 }

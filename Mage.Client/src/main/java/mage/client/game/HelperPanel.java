@@ -1,6 +1,7 @@
 package mage.client.game;
 
 import mage.client.SessionHandler;
+import mage.client.cards.BigCard;
 import mage.client.components.MageTextArea;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
@@ -89,8 +90,9 @@ public class HelperPanel extends JPanel {
         initComponents();
     }
 
-    public void init(UUID gameId) {
+    public void init(UUID gameId, BigCard bigCard) {
         this.gameId = gameId;
+        this.dialogTextArea.setGameData(gameId, bigCard);
     }
 
     public void changeGUISize() {

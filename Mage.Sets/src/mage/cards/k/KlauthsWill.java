@@ -40,7 +40,7 @@ public final class KlauthsWill extends CardImpl {
         this.getSpellAbility().getModes().setChooseText(
                 "Choose one. If you control a commander as you cast this spell, you may choose both."
         );
-        this.getSpellAbility().getModes().setMoreCondition(ControlACommanderCondition.instance);
+        this.getSpellAbility().getModes().setMoreCondition(2, ControlACommanderCondition.instance);
 
         // • Breathe Flame — Klauth's Will deals X damage to each creature without flying.
         this.getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, filter));

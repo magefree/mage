@@ -9,6 +9,7 @@ import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +33,8 @@ public final class CloisterGargoyle extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Cloister Gargoyle enters the battlefield, venture into the dungeon.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new VentureIntoTheDungeonEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new VentureIntoTheDungeonEffect())
+                .addHint(CurrentDungeonHint.instance));
 
         // As long as you've completed a dungeon, Cloister Gargoyle gets +3/+0 and has flying.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(

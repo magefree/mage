@@ -8,6 +8,7 @@ import mage.abilities.condition.common.CompletedDungeonCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,7 +45,8 @@ public final class BarrowinOfClanUndurr extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Barrowin of Clan Undurr enters the battlefield, venture into the dungeon.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new VentureIntoTheDungeonEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new VentureIntoTheDungeonEffect())
+                .addHint(CurrentDungeonHint.instance));
 
         // Whenever Barrowin of Clan Undurr attacks, return up to one creature card with mana value 3 or less from your graveyard to the battlefield if you've completed a dungeon.
         Ability ability = new AttacksTriggeredAbility(new ConditionalOneShotEffect(

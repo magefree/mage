@@ -10,6 +10,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.continuous.AddCardSubTypeSourceEffect;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.constants.*;
@@ -45,8 +46,8 @@ public final class Adrestia extends CardImpl {
         // Whenever Adrestia attacks, if an Assassin crewed it this turn, draw a card. Adrestia becomes an Assassin in addition to its other types until end of turn.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new DrawCardSourceControllerEffect(1), false),
-                condition, "Whenever Adrestia attacks, if an Assassin crewed it this turn, draw a card. Adrestia becomes an Assassin in addition to its other types until end of turn.");
-        ability.addEffect(new AdrestiaEffect());
+                condition, "Whenever {this} attacks, if an Assassin crewed it this turn, draw a card. {this} becomes an Assassin in addition to its other types until end of turn.");
+        ability.addEffect(new AddCardSubTypeSourceEffect(Duration.EndOfTurn, true, SubType.ASSASSIN));
         ability.addHint(AdrestiaCondition.getHint());
         this.addAbility(ability, new AdrestiaWatcher());
 
@@ -62,32 +63,6 @@ public final class Adrestia extends CardImpl {
     @Override
     public Adrestia copy() {
         return new Adrestia(this);
-    }
-}
-
-class AdrestiaEffect extends ContinuousEffectImpl {
-
-    public AdrestiaEffect() {
-        super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
-    }
-
-    protected AdrestiaEffect(final AdrestiaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AdrestiaEffect copy() {
-        return new AdrestiaEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
-        permanent.addSubType(game, SubType.ASSASSIN);
-        return true;
     }
 }
 

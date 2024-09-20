@@ -14,24 +14,28 @@ import mage.players.Player;
  * @author notgreat
  */
 public class LookAtOpponentFaceDownCreaturesAnyTimeEffect extends ContinuousEffectImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-down creatures you don't control");
 
-    static {
-        filter.add(FaceDownPredicate.instance);
-        filter.add(TargetController.NOT_YOU.getControllerPredicate());
-    }
+    private final FilterCreaturePermanent filter;
 
     public LookAtOpponentFaceDownCreaturesAnyTimeEffect() {
         this(Duration.WhileOnBattlefield);
     }
 
     public LookAtOpponentFaceDownCreaturesAnyTimeEffect(Duration duration) {
+        this(duration, TargetController.NOT_YOU);
+    }
+
+    public LookAtOpponentFaceDownCreaturesAnyTimeEffect(Duration duration, TargetController targetController) {
         super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = (duration.toString().isEmpty() ? "" : duration.toString() + ", ") + "you may look at face-down creatures you don't control any time";
+        staticText = makeText(duration, targetController);
+        filter = new FilterCreaturePermanent();
+        filter.add(FaceDownPredicate.instance);
+        filter.add(targetController.getControllerPredicate());
     }
 
     protected LookAtOpponentFaceDownCreaturesAnyTimeEffect(final LookAtOpponentFaceDownCreaturesAnyTimeEffect effect) {
         super(effect);
+        this.filter = effect.filter.copy();
     }
 
     //Based on LookAtTopCardOfLibraryAnyTimeEffect
@@ -55,5 +59,23 @@ public class LookAtOpponentFaceDownCreaturesAnyTimeEffect extends ContinuousEffe
     @Override
     public LookAtOpponentFaceDownCreaturesAnyTimeEffect copy() {
         return new LookAtOpponentFaceDownCreaturesAnyTimeEffect(this);
+    }
+
+    private static String makeText(Duration duration, TargetController targetController) {
+        StringBuilder sb = new StringBuilder();
+        if (!duration.toString().isEmpty()) {
+            sb.append(duration);
+            sb.append(", ");
+        }
+        sb.append("you may look at face-down creatures ");
+        switch (targetController) {
+            case NOT_YOU:
+                sb.append("you don't control ");
+                break;
+            case OPPONENT:
+                sb.append("your opponents control ");
+        }
+        sb.append("any time");
+        return sb.toString();
     }
 }

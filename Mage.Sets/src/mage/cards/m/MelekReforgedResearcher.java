@@ -71,13 +71,13 @@ public final class MelekReforgedResearcher extends CardImpl {
     }
 }
 
-enum MelekReforgedResearcherPredicate implements ObjectSourcePlayerPredicate<Controllable> {
+enum MelekReforgedResearcherPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override
-    public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
-        if (input.getObject() instanceof Card &&
-                ((Card) input.getObject()).isInstantOrSorcery(game)) {
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
+        if (input.getObject() != null &&
+                input.getObject().isInstantOrSorcery(game)) {
             MelekReforgedResearcherWatcher watcher = game.getState().getWatcher(MelekReforgedResearcherWatcher.class);
             return watcher != null &&
                     watcher.getInstantOrSorcerySpellsCastThisTurn(input.getPlayerId()) == 0;

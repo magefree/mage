@@ -39,7 +39,7 @@ public final class ViolentUrge extends CardImpl {
                 new AddContinuousEffectToGame(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance())),
                 DeliriumCondition.instance, AbilityWord.DELIRIUM.formatWord() + "If there are four or more " +
                 "card types among cards in your graveyard, that creature gains double strike until end of turn"
-        ));
+        ).concatBy("<br>"));
         this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
     }
 
