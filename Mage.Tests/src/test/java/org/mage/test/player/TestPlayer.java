@@ -1126,17 +1126,10 @@ public class TestPlayer implements Player {
 
     private Permanent findPermanentWithAssert(PlayerAction action, Game game, Player player, String cardName) {
         for (Permanent perm : game.getBattlefield().getAllActivePermanents(player.getId())) {
-            // need by controller
-            if (!perm.getControllerId().equals(player.getId())) {
-                continue;
-            }
-
             // need by alias or by name
             if (!hasObjectTargetNameOrAlias(perm, cardName)) {
                 continue;
             }
-
-            // all fine
             return perm;
         }
         printStart(game, "Permanents of " + player.getName());
