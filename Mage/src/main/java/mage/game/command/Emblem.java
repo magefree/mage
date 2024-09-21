@@ -19,7 +19,6 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
-import mage.util.CardUtil;
 import mage.util.SubTypes;
 
 import java.util.Collections;
@@ -59,7 +58,7 @@ public abstract class Emblem extends CommandObjectImpl {
         return frameStyle;
     }
 
-    public void setSourceObject(MageObject sourceObject) {
+    public void setSourceObjectAndInitImage(MageObject sourceObject) {
         this.sourceObject = sourceObject;
 
         // choose set code due source

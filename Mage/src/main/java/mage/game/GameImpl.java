@@ -583,11 +583,10 @@ public abstract class GameImpl implements Game {
         if (emblem != null) {
             return emblem;
         }
+
         TheRingEmblem newEmblem = new TheRingEmblem(playerId);
-
-        // TODO: add image info
-
         state.addCommandObject(newEmblem);
+
         return newEmblem;
     }
 
@@ -1966,16 +1965,13 @@ public abstract class GameImpl implements Game {
     @Override
     public void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId) {
         Emblem newEmblem = emblem.copy();
-        newEmblem.setSourceObject(sourceObject);
+        newEmblem.setSourceObjectAndInitImage(sourceObject);
         newEmblem.setControllerId(toPlayerId);
         newEmblem.assignNewId();
         newEmblem.getAbilities().newId();
         for (Ability ability : newEmblem.getAbilities()) {
             ability.setSourceId(newEmblem.getId());
         }
-
-        // image info setup in setSourceObject
-
         state.addCommandObject(newEmblem);
     }
 
@@ -1997,17 +1993,15 @@ public abstract class GameImpl implements Game {
             }
         }
         Plane newPlane = plane.copy();
-        newPlane.setSourceObject();
+        newPlane.setSourceObjectAndInitImage();
         newPlane.setControllerId(toPlayerId);
         newPlane.assignNewId();
         newPlane.getAbilities().newId();
         for (Ability ability : newPlane.getAbilities()) {
             ability.setSourceId(newPlane.getId());
         }
-
-        // image info setup in setSourceObject
-
         state.addCommandObject(newPlane);
+
         informPlayers("You have planeswalked to " + newPlane.getLogName());
 
         // Fire off the planeswalked event
@@ -2028,7 +2022,6 @@ public abstract class GameImpl implements Game {
     @Override
     public Dungeon addDungeon(Dungeon dungeon, UUID playerId) {
         dungeon.setControllerId(playerId);
-        dungeon.setSourceObject();
         state.addCommandObject(dungeon);
         return dungeon;
     }

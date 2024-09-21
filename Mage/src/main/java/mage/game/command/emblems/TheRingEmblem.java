@@ -12,6 +12,8 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.cards.repository.TokenInfo;
+import mage.cards.repository.TokenRepository;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -41,6 +43,19 @@ public final class TheRingEmblem extends Emblem {
     public TheRingEmblem(UUID controllerId) {
         super("The Ring");
         this.setControllerId(controllerId);
+
+        // ring don't have source, so image can be initialized immediately
+        TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_THE_RING, null);
+        if (foundInfo != null) {
+            this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setUsesVariousArt(false);
+            this.setCardNumber("");
+            this.setImageFileName(""); // use default
+            this.setImageNumber(foundInfo.getImageNumber());
+        } else {
+            // how-to fix: add emblem to the tokens-database TokenRepository->loadXmageTokens
+            throw new IllegalArgumentException("Wrong code usage: can't find xmage token info for: " + TokenRepository.XMAGE_IMAGE_NAME_THE_RING);
+        }
     }
 
     private TheRingEmblem(final TheRingEmblem card) {
