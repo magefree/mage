@@ -96,7 +96,7 @@ public class GameController implements GameCallback {
         this.tableId = tableId;
         this.choosingPlayerId = choosingPlayerId;
         this.gameOptions = gameOptions;
-        this.useResponseIdleTimeout = game.getPlayers().values().stream().anyMatch(Player::isHuman);
+        this.useResponseIdleTimeout = game.getPlayers().values().stream().filter(Player::isHuman).count() > 1;
         init();
     }
 
