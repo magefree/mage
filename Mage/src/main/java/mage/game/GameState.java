@@ -1412,7 +1412,12 @@ public class GameState implements Serializable, Copyable<GameState> {
             newAbility.newId();
         }
         newAbility.setSourceId(attachedTo.getId());
-        newAbility.setControllerId(attachedTo.getOwnerId());
+        if(ability.getControllerId() != null) {
+            newAbility.setControllerId(ability.getControllerId());
+        }
+        else {
+            newAbility.setControllerId(attachedTo.getOwnerId());
+        }
         if (!cardState.containsKey(attachedTo.getId())) {
             cardState.put(attachedTo.getId(), new CardState());
         }

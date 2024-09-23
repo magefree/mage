@@ -43,12 +43,13 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Arcbound Whelp", 410, Rarity.UNCOMMON, mage.cards.a.ArcboundWhelp.class));
         cards.add(new SetCardInfo("Archfiend of Sorrows", 285, Rarity.UNCOMMON, mage.cards.a.ArchfiendOfSorrows.class));
         cards.add(new SetCardInfo("Archmage's Charm", 166, Rarity.RARE, mage.cards.a.ArchmagesCharm.class));
-        cards.add(new SetCardInfo("Assault Strobe", 786, Rarity.COMMON, mage.cards.a.AssaultStrobe.class));
         cards.add(new SetCardInfo("Arcus Acolyte", 678, Rarity.UNCOMMON, mage.cards.a.ArcusAcolyte.class));
+        cards.add(new SetCardInfo("Assault Strobe", 786, Rarity.COMMON, mage.cards.a.AssaultStrobe.class));
         cards.add(new SetCardInfo("Asylum Visitor", 286, Rarity.RARE, mage.cards.a.AsylumVisitor.class));
         cards.add(new SetCardInfo("Awaken the Bear", 542, Rarity.COMMON, mage.cards.a.AwakenTheBear.class));
         cards.add(new SetCardInfo("Ayula, Queen Among Bears", 543, Rarity.RARE, mage.cards.a.AyulaQueenAmongBears.class));
         cards.add(new SetCardInfo("Azra Smokeshaper", 287, Rarity.COMMON, mage.cards.a.AzraSmokeshaper.class));
+        cards.add(new SetCardInfo("Baffling Defenses", 2, Rarity.COMMON, mage.cards.b.BafflingDefenses.class));
         cards.add(new SetCardInfo("Bannerhide Krushok", 544, Rarity.COMMON, mage.cards.b.BannerhideKrushok.class));
         cards.add(new SetCardInfo("Barbed Spike", 50, Rarity.UNCOMMON, mage.cards.b.BarbedSpike.class));
         cards.add(new SetCardInfo("Batterbone", 735, Rarity.UNCOMMON, mage.cards.b.Batterbone.class));
@@ -58,6 +59,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Bazaar Trademage", 169, Rarity.RARE, mage.cards.b.BazaarTrademage.class));
         cards.add(new SetCardInfo("Bear Cub", 546, Rarity.COMMON, mage.cards.b.BearCub.class));
         cards.add(new SetCardInfo("Belligerent Sliver", 415, Rarity.UNCOMMON, mage.cards.b.BelligerentSliver.class));
+        cards.add(new SetCardInfo("Benalish Partisan", 3, Rarity.RARE, mage.cards.b.BenalishPartisan.class));
         cards.add(new SetCardInfo("Bestial Menace", 547, Rarity.UNCOMMON, mage.cards.b.BestialMenace.class));
         cards.add(new SetCardInfo("Birthing Boughs", 736, Rarity.UNCOMMON, mage.cards.b.BirthingBoughs.class));
         cards.add(new SetCardInfo("Blade Splicer", 54, Rarity.RARE, mage.cards.b.BladeSplicer.class));
@@ -100,6 +102,8 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Crocanura", 557, Rarity.COMMON, mage.cards.c.Crocanura.class));
         cards.add(new SetCardInfo("Dark Salvation", 308, Rarity.RARE, mage.cards.d.DarkSalvation.class));
         cards.add(new SetCardInfo("Dark Ritual", 783, Rarity.COMMON, mage.cards.d.DarkRitual.class));
+        cards.add(new SetCardInfo("Davriel's Withering", 16, Rarity.COMMON, mage.cards.d.DavrielsWithering.class));
+        cards.add(new SetCardInfo("Davriel, Soul Broker", 15, Rarity.MYTHIC, mage.cards.d.DavrielSoulBroker.class));
         cards.add(new SetCardInfo("Death Wind", 314, Rarity.COMMON, mage.cards.d.DeathWind.class));
         cards.add(new SetCardInfo("Deepwood Denizen", 558, Rarity.COMMON, mage.cards.d.DeepwoodDenizen.class));
         cards.add(new SetCardInfo("Devouring Light", 67, Rarity.UNCOMMON, mage.cards.d.DevouringLight.class));
@@ -118,6 +122,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Duskshell Crawler", 561, Rarity.COMMON, mage.cards.d.DuskshellCrawler.class));
         cards.add(new SetCardInfo("Echoing Return", 320, Rarity.COMMON, mage.cards.e.EchoingReturn.class));
         cards.add(new SetCardInfo("Elusive Krasis", 688, Rarity.UNCOMMON, mage.cards.e.ElusiveKrasis.class));
+        cards.add(new SetCardInfo("Ethereal Grasp", 9, Rarity.COMMON, mage.cards.e.EtherealGrasp.class));
         cards.add(new SetCardInfo("Endling", 322, Rarity.RARE, mage.cards.e.Endling.class));
         cards.add(new SetCardInfo("Enduring Sliver", 74, Rarity.COMMON, mage.cards.e.EnduringSliver.class));
         cards.add(new SetCardInfo("Esper Sentinel", 75, Rarity.RARE, mage.cards.e.EsperSentinel.class));
@@ -143,6 +148,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Force Spike", 780, Rarity.COMMON, mage.cards.f.ForceSpike.class));
         cards.add(new SetCardInfo("Foul Watcher", 194, Rarity.COMMON, mage.cards.f.FoulWatcher.class));
         cards.add(new SetCardInfo("Foundry Street Denizen", 446, Rarity.COMMON, mage.cards.f.FoundryStreetDenizen.class));
+        cards.add(new SetCardInfo("Freyalise, Skyshroud Partisan", 26, Rarity.MYTHIC, mage.cards.f.FreyaliseSkyshroudPartisan.class));
         cards.add(new SetCardInfo("Funnel-Web Recluse", 573, Rarity.COMMON, mage.cards.f.FunnelWebRecluse.class));
         cards.add(new SetCardInfo("Furyblade Vampire", 448, Rarity.UNCOMMON, mage.cards.f.FurybladeVampire.class));
         cards.add(new SetCardInfo("Galvanic Relay", 450, Rarity.COMMON, mage.cards.g.GalvanicRelay.class));
@@ -205,19 +211,24 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Lazotep Chancellor", 702, Rarity.UNCOMMON, mage.cards.l.LazotepChancellor.class));
         cards.add(new SetCardInfo("Leeching Sliver", 344, Rarity.UNCOMMON, mage.cards.l.LeechingSliver.class));
         cards.add(new SetCardInfo("Legion Vanguard", 345, Rarity.UNCOMMON, mage.cards.l.LegionVanguard.class));
+        cards.add(new SetCardInfo("Leonin Sanctifier", 4, Rarity.COMMON, mage.cards.l.LeoninSanctifier.class));
         cards.add(new SetCardInfo("Lightning Bolt", 787, Rarity.COMMON, mage.cards.l.LightningBolt.class));
         cards.add(new SetCardInfo("Lightning Spear", 484, Rarity.COMMON, mage.cards.l.LightningSpear.class));
         cards.add(new SetCardInfo("Light of Hope", 777, Rarity.COMMON, mage.cards.l.LightOfHope.class));
         cards.add(new SetCardInfo("Llanowar Tribe", 598, Rarity.UNCOMMON, mage.cards.l.LlanowarTribe.class));
+        cards.add(new SetCardInfo("Longtusk Stalker", 27, Rarity.UNCOMMON, mage.cards.l.LongtuskStalker.class));
         cards.add(new SetCardInfo("Lonis, Cryptozoologist", 703, Rarity.RARE, mage.cards.l.LonisCryptozoologist.class));
+        cards.add(new SetCardInfo("Lumbering Lightshield", 5, Rarity.COMMON, mage.cards.l.LumberingLightshield.class));
         cards.add(new SetCardInfo("Mad Prophet", 487, Rarity.COMMON, mage.cards.m.MadProphet.class));
         cards.add(new SetCardInfo("Man-o'-War", 212, Rarity.COMMON, mage.cards.m.ManOWar.class));
+        cards.add(new SetCardInfo("Managorger Phoenix", 20, Rarity.RARE, mage.cards.m.ManagorgerPhoenix.class));
         cards.add(new SetCardInfo("Manaweft Sliver", 601, Rarity.UNCOMMON, mage.cards.m.ManaweftSliver.class));
         cards.add(new SetCardInfo("Manic Scribe", 211, Rarity.UNCOMMON, mage.cards.m.ManicScribe.class));
         cards.add(new SetCardInfo("Manor Guardian", 17, Rarity.UNCOMMON, mage.cards.m.ManorGuardian.class));
         cards.add(new SetCardInfo("Markov Crusader", 354, Rarity.UNCOMMON, mage.cards.m.MarkovCrusader.class));
         cards.add(new SetCardInfo("Marrow-Gnawer", 355, Rarity.RARE, mage.cards.m.MarrowGnawer.class));
         cards.add(new SetCardInfo("Master of the Pearl Trident", 214, Rarity.RARE, mage.cards.m.MasterOfThePearlTrident.class));
+        cards.add(new SetCardInfo("Mentor of Evos Isle", 11, Rarity.COMMON, mage.cards.m.MentorOfEvosIsle.class));
         cards.add(new SetCardInfo("Mind Rake", 357, Rarity.COMMON, mage.cards.m.MindRake.class));
         cards.add(new SetCardInfo("Mist-Syndicate Naga", 218, Rarity.RARE, mage.cards.m.MistSyndicateNaga.class));
         cards.add(new SetCardInfo("Mob", 359, Rarity.COMMON, mage.cards.m.Mob.class));
@@ -247,6 +258,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Pashalik Mons", 495, Rarity.RARE, mage.cards.p.PashalikMons.class));
         cards.add(new SetCardInfo("Phantasmal Form", 229, Rarity.COMMON, mage.cards.p.PhantasmalForm.class));
         cards.add(new SetCardInfo("Phantom Ninja", 230, Rarity.COMMON, mage.cards.p.PhantomNinja.class));
+        cards.add(new SetCardInfo("Plaguecrafter's Familiar", 18, Rarity.COMMON, mage.cards.p.PlaguecraftersFamiliar.class));
         cards.add(new SetCardInfo("Ponder", 782, Rarity.COMMON, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Pondering Mage", 231, Rarity.COMMON, mage.cards.p.PonderingMage.class));
         cards.add(new SetCardInfo("Predatory Sliver", 619, Rarity.COMMON, mage.cards.p.PredatorySliver.class));
@@ -267,6 +279,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Recalibrate", 235, Rarity.COMMON, mage.cards.r.Recalibrate.class));
         cards.add(new SetCardInfo("Reckless Charge", 500, Rarity.COMMON, mage.cards.r.RecklessCharge.class));
         cards.add(new SetCardInfo("Reckless Racer", 501, Rarity.UNCOMMON, mage.cards.r.RecklessRacer.class));
+        cards.add(new SetCardInfo("Reckless Ringleader", 21, Rarity.COMMON, mage.cards.r.RecklessRingleader.class));
         cards.add(new SetCardInfo("Reckless Wurm", 502, Rarity.UNCOMMON, mage.cards.r.RecklessWurm.class));
         cards.add(new SetCardInfo("Regal Force", 791, Rarity.RARE, mage.cards.r.RegalForce.class));
         cards.add(new SetCardInfo("Renegade Tactics", 503, Rarity.COMMON, mage.cards.r.RenegadeTactics.class));
@@ -284,8 +297,10 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Sanctum Weaver", 627, Rarity.RARE, mage.cards.s.SanctumWeaver.class));
         cards.add(new SetCardInfo("Sandsteppe Outcast", 121, Rarity.COMMON, mage.cards.s.SandsteppeOutcast.class));
         cards.add(new SetCardInfo("Sarkhan's Scorn", 23, Rarity.COMMON, mage.cards.s.SarkhansScorn.class));
+        cards.add(new SetCardInfo("Sarkhan, Wanderer to Shiv", 22, Rarity.MYTHIC, mage.cards.s.SarkhanWandererToShiv.class));
         cards.add(new SetCardInfo("Savage Swipe", 630, Rarity.COMMON, mage.cards.s.SavageSwipe.class));
         cards.add(new SetCardInfo("Scale Up", 631, Rarity.UNCOMMON, mage.cards.s.ScaleUp.class));
+        cards.add(new SetCardInfo("Scion of Shiv", 24, Rarity.COMMON, mage.cards.s.ScionOfShiv.class));
         cards.add(new SetCardInfo("Scour All Possibilities", 242, Rarity.COMMON, mage.cards.s.ScourAllPossibilities.class));
         cards.add(new SetCardInfo("Scour the Desert", 122, Rarity.UNCOMMON, mage.cards.s.ScourTheDesert.class));
         cards.add(new SetCardInfo("Scour the Laboratory", 243, Rarity.UNCOMMON, mage.cards.s.ScourTheLaboratory.class));
@@ -347,6 +362,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Tempered Sliver", 652, Rarity.UNCOMMON, mage.cards.t.TemperedSliver.class));
         cards.add(new SetCardInfo("Terminal Agony", 723, Rarity.COMMON, mage.cards.t.TerminalAgony.class));
         cards.add(new SetCardInfo("Territorial Kavu", 724, Rarity.RARE, mage.cards.t.TerritorialKavu.class));
+        cards.add(new SetCardInfo("Teyo, Aegis Adept", 6, Rarity.MYTHIC, mage.cards.t.TeyoAegisAdept.class));
         cards.add(new SetCardInfo("Thalia's Lieutenant", 148, Rarity.RARE, mage.cards.t.ThaliasLieutenant.class));
         cards.add(new SetCardInfo("The First Sliver", 691, Rarity.MYTHIC, mage.cards.t.TheFirstSliver.class));
         cards.add(new SetCardInfo("Thought Monitor", 261, Rarity.RARE, mage.cards.t.ThoughtMonitor.class));
@@ -373,6 +389,7 @@ public final class JumpstartHistoricHorizons extends ExpansionSet {
         cards.add(new SetCardInfo("Verdant Command", 664, Rarity.RARE, mage.cards.v.VerdantCommand.class));
         cards.add(new SetCardInfo("Vermin Gorger", 401, Rarity.COMMON, mage.cards.v.VerminGorger.class));
         cards.add(new SetCardInfo("Vesperlark", 156, Rarity.UNCOMMON, mage.cards.v.Vesperlark.class));
+        cards.add(new SetCardInfo("Veteran Charger", 31, Rarity.COMMON, mage.cards.v.VeteranCharger.class));
         cards.add(new SetCardInfo("Viashino Lashclaw", 530, Rarity.COMMON, mage.cards.v.ViashinoLashclaw.class));
         cards.add(new SetCardInfo("Wall of One Thousand Cuts", 157, Rarity.COMMON, mage.cards.w.WallOfOneThousandCuts.class));
         cards.add(new SetCardInfo("Warteye Witch", 404, Rarity.COMMON, mage.cards.w.WarteyeWitch.class));

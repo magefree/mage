@@ -1,7 +1,10 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.PerpetuallyEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -114,9 +117,26 @@ public class MeldEffect extends OneShotEffect {
         }
         MeldCard meldCard = (MeldCard) cardInfoList.get(0).createCard().copy();
         meldCard.setOwnerId(controller.getId());
+
+        if(!game.isSimulation()) {
+            ContinuousEffects effects = game.getContinuousEffects();
+            List<ContinuousEffect> sourcePerpetuallyEffects = effects.getPerpetuallyEffectsByCard(sourceCard, game);
+            List<ContinuousEffect>  meldWithPerpetuallyEffects = effects.getPerpetuallyEffectsByCard(meldWithCard, game);
+            for(ContinuousEffect effect : sourcePerpetuallyEffects) {
+                ((PerpetuallyEffect) effect).addTarget(meldCard, game);
+            }
+            for(ContinuousEffect effect : meldWithPerpetuallyEffects) {
+                ((PerpetuallyEffect) effect).addTarget(meldCard, game);
+            }
+            effects.removePerpetuallyEffectsByCard(sourceCard, game);
+            effects.removePerpetuallyEffectsByCard(meldWithCard, game);
+        }
+
+
         meldCard.setTopHalfCard(meldWithCard, game);
         meldCard.setBottomHalfCard(sourceCard, game);
         meldCard.setMelded(true, game);
+
         game.addMeldCard(meldCard.getId(), meldCard);
         game.getState().addCard(meldCard);
         meldCard.setZone(Zone.EXILED, game);

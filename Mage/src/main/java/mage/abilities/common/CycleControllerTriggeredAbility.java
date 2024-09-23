@@ -25,7 +25,10 @@ public class CycleControllerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public CycleControllerTriggeredAbility(Effect effect, boolean optional, boolean excludeSource) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, optional, excludeSource);
+    }
+    public CycleControllerTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean excludeSource) {
+        super(zone, effect, optional);
         this.excludeSource = excludeSource;
         setTriggerPhrase("Whenever you cycle " + (excludeSource ? "another" : "a") + " card, ");
     }

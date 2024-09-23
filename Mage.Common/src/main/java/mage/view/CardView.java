@@ -372,7 +372,7 @@ public class CardView extends SimpleCardView {
                 this.color = card.getColor(null).copy();
                 this.superTypes = new ArrayList<>(card.getSuperType());
                 this.subTypes = card.getSubtype().copy();
-                this.rules = new ArrayList<>(card.getRules());
+                this.rules = new ArrayList<>(card.getRules(game));
             }
 
             // GUI: enable day/night button to view original face up card

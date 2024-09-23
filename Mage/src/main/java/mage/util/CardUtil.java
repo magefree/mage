@@ -1300,7 +1300,17 @@ public final class CardUtil {
         try {
             List<String> rules = rulesSource.getRules();
 
-            if (game == null || game.getPhase() == null) {
+            if (game == null) {
+                // dynamic hints for started game only
+                return rules;
+            }
+
+            Map<MageObjectReference, Set<String>> cardRulesMap = game.getState().getContinuousEffects().getPerpetuallyAffectedObjectsRules();
+            if(!cardRulesMap.isEmpty()) {
+                handlePerpetualEffectsRules(object, cardRulesMap, rules);
+            }
+
+            if(game.getPhase() == null) {
                 // dynamic hints for started game only
                 return rules;
             }
@@ -1338,7 +1348,38 @@ public final class CardUtil {
         }
         return RULES_ERROR_INFO;
     }
+    private static void handlePerpetualEffectsRules(MageObject object, Map<MageObjectReference, Set<String>> cardRulesMap, List<String> rules) {
+        for (Map.Entry<MageObjectReference, Set<String>> entry : cardRulesMap.entrySet()) {
+            MageObjectReference entryKey = entry.getKey();
+            if (entryKey.getSourceId() == object.getId()) {
+                for (int i = 0; i < rules.size(); i++) {
+                    String rule = rules.get(i);
+                    if (cardRulesMap.get(entryKey).contains(rule)) {
+                        long ruleCounts =
+                                rules.stream()
+                                        .filter(r -> r.equals(rule))
+                                        .count();
+                        if (ruleCounts != 1) {
+                            String duplicatedRule = String.format("<font color=#9A4FFE>%s</font>", rule + " (x" + ruleCounts + ")");
+                            rules.set(i, duplicatedRule);
+                            ruleCounts--;
 
+                            while (ruleCounts > 0) {
+                                rules.remove(rule);
+                                ruleCounts--;
+                            }
+
+                            cardRulesMap.get(entryKey).remove(rule);
+                            cardRulesMap.get(entryKey).add(duplicatedRule);
+                        } else {
+                            String coloredRule = String.format("<font color=#9A4FFE>%s</font>", rule);
+                            rules.set(i, coloredRule);
+                        }
+                    }
+                }
+            }
+        }
+    }
     /**
      * Take control under another player, use it in inner effects like Word of Commands. Don't forget to end it in same code.
      *

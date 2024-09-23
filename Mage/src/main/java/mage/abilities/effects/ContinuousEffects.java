@@ -2,6 +2,7 @@ package mage.abilities.effects;
 
 import mage.ApprovingObject;
 import mage.MageObject;
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
@@ -57,6 +58,8 @@ public class ContinuousEffects implements Serializable {
 
     private final Map<String, ContinuousEffectsList<ContinuousEffect>> lastEffectsListOnLayer = new HashMap<>(); // helps to find out new effect timestamps on layers
 
+    private final Map<MageObjectReference, Set<String>> perpetuallyAffectedObjectsRules = new HashMap<>(); // is used to find the rules of abilities that should be colored as perpetually added
+
     public ContinuousEffects() {
         applyStatus = new ApplyStatusEffect();
         auraReplacementEffect = new AuraReplacementEffect();
@@ -81,6 +84,10 @@ public class ContinuousEffects implements Serializable {
         spliceCardEffects = effect.spliceCardEffects.copy();
         for (Map.Entry<String, ContinuousEffectsList<ContinuousEffect>> entry : effect.lastEffectsListOnLayer.entrySet()) {
             lastEffectsListOnLayer.put(entry.getKey(), entry.getValue().copy());
+        }
+
+        for (Map.Entry<MageObjectReference, Set<String>> entry : effect.perpetuallyAffectedObjectsRules.entrySet()) {
+            perpetuallyAffectedObjectsRules.put(entry.getKey(), new HashSet<>(entry.getValue()));
         }
         collectAllEffects();
         order = effect.order;
@@ -1391,6 +1398,38 @@ public class ContinuousEffects implements Serializable {
         return controllerFound;
     }
 
+    public Map<MageObjectReference, Set<String>> getPerpetuallyAffectedObjectsRules() {
+        return perpetuallyAffectedObjectsRules;
+    }
+    public List<ContinuousEffect> getPerpetuallyEffectsByCard(Card card, Game game) {
+        List<ContinuousEffect> perpetuallyEffectList = new ArrayList<>();
+        for(ContinuousEffect effect : layeredEffects) {
+            if(effect instanceof PerpetuallyEffect) {
+                if(((PerpetuallyEffect) effect).affectsCard(card, game)) {
+                    perpetuallyEffectList.add(effect);
+                }
+            }
+        }
+        return perpetuallyEffectList;
+    }
+    public void removePerpetuallyEffectsByCard(Card card, Game game) {
+        List<ContinuousEffect> perpetuallyEffectList = getPerpetuallyEffectsByCard(card, game);
+        for(ContinuousEffect effect : perpetuallyEffectList) {
+            ((PerpetuallyEffect) effect).removeTarget(card, game);
+        }
+    }
+
+    public boolean hasPerpetuallyEffectOn(Card card, Game game) {
+        for(ContinuousEffect effect : layeredEffects) {
+            if(effect instanceof PerpetuallyEffect) {
+                PerpetuallyEffect perpetuallyEffect = (PerpetuallyEffect) effect;
+                if(perpetuallyEffect.affectsCard(card, game)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     /**
      * Debug only: prints out a status of the currently existing continuous effects
      *
