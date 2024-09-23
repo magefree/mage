@@ -25,6 +25,7 @@ public final class AlchemyInnistrad extends ExpansionSet {
         cards.add(new SetCardInfo("Cursebound Witch", 24, Rarity.UNCOMMON, mage.cards.c.CurseboundWitch.class));
         cards.add(new SetCardInfo("Expedition Supplier", 6, Rarity.RARE, mage.cards.e.ExpeditionSupplier.class));
         cards.add(new SetCardInfo("Faithful Disciple", 7, Rarity.UNCOMMON, mage.cards.f.FaithfulDisciple.class));
+        cards.add(new SetCardInfo("Fearsome Whelp", 40, Rarity.UNCOMMON, mage.cards.f.FearsomeWhelp.class));
         cards.add(new SetCardInfo("Ishkanah, Broodmother", 52, Rarity.MYTHIC, mage.cards.i.IshkanahBroodmother.class));
         cards.add(new SetCardInfo("Key to the Archive", 59, Rarity.RARE, mage.cards.k.KeyToTheArchive.class));
         cards.add(new SetCardInfo("Kindred Denial", 18, Rarity.UNCOMMON, mage.cards.k.KindredDenial.class));
