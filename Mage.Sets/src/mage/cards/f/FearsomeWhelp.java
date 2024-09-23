@@ -4,7 +4,8 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+
+import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CardsInYourHandPerpetuallyGainEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
@@ -32,9 +33,9 @@ public final class FearsomeWhelp extends CardImpl {
 
         // At the beginning of your end step, each Dragon card in your hand perpetually gains “This spell costs {1} less to cast.”
         Ability reduceCostAbility = new SimpleStaticAbility(new SpellCostReductionSourceEffect(1));
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CardsInYourHandPerpetuallyGainEffect(reduceCostAbility, new FilterBySubtypeCard(SubType.DRAGON)),
-                TargetController.YOU,
+        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(
+                new CardsInYourHandPerpetuallyGainEffect(reduceCostAbility, new FilterBySubtypeCard(SubType.DRAGON))
+                        .setText(" each Dragon card in your hand perpetually gains \"This spell costs {1} less to cast.\""),
                 false));
     }
 
