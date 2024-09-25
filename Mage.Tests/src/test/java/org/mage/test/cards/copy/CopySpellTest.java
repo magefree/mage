@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author LevelX2, JayDi85
  */
 public class CopySpellTest extends CardTestPlayerBase {
 
@@ -904,5 +904,57 @@ public class CopySpellTest extends CardTestPlayerBase {
         if (zone1 != zone2 || zcc1 != zcc2) {
             Assert.fail(infoPrefix + " - " + "cards must have same zone and zcc: " + zcc1 + " - " + zone1 + " != " + zcc2 + " - " + zone2);
         }
+    }
+
+    /**
+     * Bug: If Swan Song is used to counter a copied spell, no tokens are created #12883
+     */
+    @Test
+    public void test_LKI() {
+        // Counter target enchantment, instant, or sorcery spell.
+        // Its controller creates a 2/2 blue Bird creature token with flying.
+        addCard(Zone.HAND, playerA, "Swan Song", 1); // {U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        //
+        // Until end of turn, whenever a player casts an instant or sorcery spell, that player copies it and
+        // may choose new targets for the copy.
+        addCard(Zone.HAND, playerA, "Bonus Round", 1); // {1}{R}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        //
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1); // {R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Augmenting Automaton", 1);
+
+        checkPermanentCount("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, playerA, "Bird Token", 0);
+        checkPermanentCount("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, playerB, "Grizzly Bears", 1);
+        checkPermanentCount("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, playerB, "Augmenting Automaton", 1);
+
+        // prepare copy effect
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 3);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bonus Round");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // cast and duplicate bolt
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
+        addTarget(playerA, "Grizzly Bears"); // original target
+        setChoice(playerA, true); // use new target
+        addTarget(playerA, "Augmenting Automaton"); // copy target
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true); // resolve copy trigger
+        checkStackObject("on copy", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Lightning Bolt", 2);
+
+        // counter copy and save Augmenting Automaton
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {U}", 1);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swan Song", "Lightning Bolt[only copy]", "Lightning Bolt", StackClause.WHILE_COPY_ON_STACK);
+        setChoice(playerA, false); // no change target for duplicated counter spell (non-relevant here)
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, playerA, "Bird Token", 1);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, playerB, "Grizzly Bears", 0);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, playerB, "Augmenting Automaton", 1);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_COMBAT);
+        execute();
     }
 }

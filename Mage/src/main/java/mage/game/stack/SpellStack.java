@@ -83,7 +83,7 @@ public class SpellStack extends ArrayDeque<StackObject> {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, source, stackObject.getControllerId()))) {
                 // spells are removed from stack by the card movement
                 if (!(stackObject instanceof Spell) 
-                        || stackObject.isCopy()) { // ensure that copies of stackobjects have their history recorded ie: Swan Song 
+                        || stackObject.isCopy()) { // !ensure that copies of stackobjects have their history recorded ie: Swan Song
                     this.remove(stackObject, game);
                     game.rememberLKI(Zone.STACK, stackObject);
                 }
