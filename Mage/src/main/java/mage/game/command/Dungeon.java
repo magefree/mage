@@ -173,7 +173,7 @@ public class Dungeon extends CommandObjectImpl {
                 }
         }
 
-        // source don't have source, so image data can be initialized immediately
+        // dungeon don't have source, so image data can be initialized immediately
         if (res != null) {
             res.setSourceObjectAndInitImage();
         }
