@@ -489,6 +489,11 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public void newId(UUID newID) {
+        this.ability.newId(newID);
+    }
+
+    @Override
     public void newOriginalId() {
     }
 

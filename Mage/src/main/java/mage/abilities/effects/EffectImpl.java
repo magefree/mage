@@ -106,8 +106,13 @@ public abstract class EffectImpl implements Effect {
 
     @Override
     public void newId() {
+        this.newId(UUID.randomUUID());
+    }
+
+    @Override
+    public void newId(UUID newID){
         if (!(this instanceof MageSingleton)) {
-            this.id = UUID.randomUUID();
+            this.id = newID;
         }
     }
 
