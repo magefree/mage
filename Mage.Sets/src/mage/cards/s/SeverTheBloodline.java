@@ -4,21 +4,21 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author North
@@ -28,10 +28,10 @@ public final class SeverTheBloodline extends CardImpl {
     public SeverTheBloodline(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
 
-
         // Exile target creature and all other creatures with the same name as that creature.
         this.getSpellAbility().addEffect(new SeverTheBloodlineEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+
         // Flashback {5}{B}{B}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{5}{B}{B}")));
     }
@@ -64,20 +64,21 @@ class SeverTheBloodlineEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
+        Player player = game.getPlayer(source.getControllerId());
         Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (controller != null && targetPermanent != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            if (CardUtil.haveEmptyName(targetPermanent)) {
-                filter.add(new PermanentIdPredicate(targetPermanent.getId()));  // if no name (face down creature) only the creature itself is selected
-            } else {
-                filter.add(new NamePredicate(targetPermanent.getName()));
-            }
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                controller.moveCardToExileWithInfo(permanent, null, "", source, game, Zone.BATTLEFIELD, true);
-            }
-            return true;
+        if (player == null || targetPermanent == null) {
+            return false;
         }
-        return false;
+        Set<Card> set = game
+                .getBattlefield()
+                .getActivePermanents(
+                        StaticFilters.FILTER_PERMANENT_CREATURE,
+                        source.getControllerId(), source, game
+                )
+                .stream()
+                .filter(permanent -> permanent.sharesName(targetPermanent, game))
+                .collect(Collectors.toSet());
+        set.add(targetPermanent);
+        return player.moveCards(set, Zone.EXILED, source, game);
     }
 }

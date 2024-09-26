@@ -1,6 +1,5 @@
 package mage.cards.h;
 
-import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -9,30 +8,42 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterInstantOrSorcerySpell;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.StaticFilters;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.watchers.common.CastFromHandWatcher;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class HarnessTheStorm extends CardImpl {
 
+    private static final FilterCard filter = new FilterCard("card with the same name as that spell from your graveyard");
+
+    static {
+        filter.add(HarnessTheStormPredicate.instance);
+    }
+
     public HarnessTheStorm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
-        // Whenever you cast an instant or sorcery spell from your hand, you may cast 
-        // target card with the same name as that spell from your graveyard.
-        this.addAbility(new HarnessTheStormTriggeredAbility(), new CastFromHandWatcher());
+        // Whenever you cast an instant or sorcery spell from your hand, you may cast target card with the same name as that spell from your graveyard.
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                Zone.BATTLEFIELD, new HarnessTheStormEffect(),
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
+                false, SetTargetPointer.NONE, Zone.HAND
+        );
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        this.addAbility(ability);
     }
 
     private HarnessTheStorm(final HarnessTheStorm card) {
@@ -46,41 +57,21 @@ public final class HarnessTheStorm extends CardImpl {
 
 }
 
-class HarnessTheStormTriggeredAbility extends SpellCastControllerTriggeredAbility {
-
-    private static final FilterInstantOrSorcerySpell filterSpell = new FilterInstantOrSorcerySpell("an instant or sorcery spell from your hand");
-
-    HarnessTheStormTriggeredAbility() {
-        super(new HarnessTheStormEffect(), filterSpell, false);
-    }
-
-    private HarnessTheStormTriggeredAbility(final HarnessTheStormTriggeredAbility ability) {
-        super(ability);
-    }
+enum HarnessTheStormPredicate implements ObjectSourcePlayerPredicate<Card> {
+    instance;
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game)) {
-            CastFromHandWatcher watcher = game.getState().getWatcher(CastFromHandWatcher.class);
-            if (watcher != null && watcher.spellWasCastFromHand(event.getSourceId())) {
-                Spell spell = game.getState().getStack().getSpell(event.getSourceId());
-                if (spell != null) {
-                    FilterCard filterCard = new FilterCard("a card named " + spell.getName() + " in your graveyard");
-                    filterCard.add(new NamePredicate(spell.getName()));
-                    this.getTargets().clear();
-                    this.getTargets().add(new TargetCardInYourGraveyard(filterCard));
-                    return true;
-                }
-            }
-        }
-        return false;
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
+        return input
+                .getSource()
+                .getEffects()
+                .stream()
+                .map(effect -> effect.getValue("spellCast"))
+                .map(Spell.class::cast)
+                .findFirst()
+                .map(spell -> spell.sharesName(input.getObject(), game))
+                .orElse(false);
     }
-
-    @Override
-    public HarnessTheStormTriggeredAbility copy() {
-        return new HarnessTheStormTriggeredAbility(this);
-    }
-
 }
 
 class HarnessTheStormEffect extends OneShotEffect {
@@ -103,20 +94,8 @@ class HarnessTheStormEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        Card card = controller.getGraveyard().get(getTargetPointer().getFirst(game, source), game);
-        if (card == null) {
-            return false;
-        }
-        if (controller.chooseUse(outcome, "Cast " + card.getIdName() + " from your graveyard?", source, game)) {
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
-            controller.cast(controller.chooseAbilityForCast(card, game, false),
-                    game, false, new ApprovingObject(source, game));
-            game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), null);
-        }
-        return true;
-
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
+        return controller != null && card != null
+                && CardUtil.castSpellWithAttributesForFree(controller, source, game, card);
     }
 }

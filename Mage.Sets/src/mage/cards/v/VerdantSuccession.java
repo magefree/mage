@@ -1,12 +1,8 @@
-
 package mage.cards.v;
 
-import java.util.*;
-
-import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -15,30 +11,35 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
- * @author jeffwadsworth, jimga150
+ * @author TheElk801
  */
 public final class VerdantSuccession extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent("a green nontoken creature");
+
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
+        filter.add(TokenPredicate.FALSE);
+    }
 
     public VerdantSuccession(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
 
-        // Whenever a green nontoken creature dies, that creature's controller may search their library for a card
-        // with the same name as that creature and put it onto the battlefield. If that player does, they shuffle their library.
-        this.addAbility(new VerdantSuccessionTriggeredAbility());
-
+        // Whenever a green nontoken creature dies, that creature's controller may search their library for a card with the same name as that creature and put it onto the battlefield. If that player does, they shuffle their library.
+        this.addAbility(new DiesCreatureTriggeredAbility(new VerdantSuccessionEffect(), false, filter));
     }
 
     private VerdantSuccession(final VerdantSuccession card) {
@@ -51,70 +52,16 @@ public final class VerdantSuccession extends CardImpl {
     }
 }
 
-class VerdantSuccessionTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green nontoken creature");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.GREEN));
-        filter.add(TokenPredicate.FALSE);
-    }
-
-    VerdantSuccessionTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, true);
-    }
-
-    private VerdantSuccessionTriggeredAbility(final VerdantSuccessionTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VerdantSuccessionTriggeredAbility copy() {
-        return new VerdantSuccessionTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
-        if (zoneChangeEvent.isDiesEvent()) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            MageObject mageObject = game.getObject(sourceId);
-            if (permanent != null && mageObject != null
-                    && filter.match(permanent, game)) {
-                this.getEffects().clear();
-                this.addEffect(new VerdantSuccessionEffect(permanent.getName(), permanent.getControllerId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a green nontoken creature dies, that creature's controller may search their library for a card with the same name as that creature, put it onto the battlefield, then shuffle.";
-    }
-}
-
 class VerdantSuccessionEffect extends OneShotEffect {
 
-    private final String creatureName;
-    private final UUID controllerId;
-
-    VerdantSuccessionEffect(String creatureName, UUID controllerId) {
-        super(Outcome.PutCardInPlay);
-        this.creatureName = creatureName;
-        this.controllerId = controllerId;
+    VerdantSuccessionEffect() {
+        super(Outcome.Benefit);
+        staticText = "that creature's controller may search their library for a card " +
+                "with the same name as that creature, put it onto the battlefield, then shuffle.";
     }
 
     private VerdantSuccessionEffect(final VerdantSuccessionEffect effect) {
         super(effect);
-        this.creatureName = effect.creatureName;
-        this.controllerId = effect.controllerId;
     }
 
     @Override
@@ -124,26 +71,25 @@ class VerdantSuccessionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(controllerId);
-        if (controller == null) {
+        Permanent permanent = (Permanent) getValue("creatureDied");
+        if (permanent == null) {
             return false;
         }
-        MageObject mageObject = game.getObject(source);
-        if (mageObject == null) {
+        Player player = game.getPlayer(permanent.getControllerId());
+        if (player == null || !player.chooseUse(
+                Outcome.PutCreatureInPlay, "Search for a card with the same name?", source, game
+        )) {
             return false;
         }
-        FilterCard filterCard = new FilterCard("Card named " + creatureName);
-        filterCard.add(new NamePredicate(creatureName));
-        TargetCardInLibrary target = new TargetCardInLibrary(filterCard);
-        controller.searchLibrary(target, source, game);
-        if (target.getTargets().isEmpty()) {
-            return false;
+        FilterCard filter = new FilterCard("card with the same name");
+        filter.add(new SharesNamePredicate(permanent));
+        TargetCardInLibrary target = new TargetCardInLibrary(filter);
+        player.searchLibrary(target, source, game);
+        Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+        if (card != null) {
+            player.moveCards(card, Zone.BATTLEFIELD, source, game);
         }
-        Card card = game.getCard(target.getFirstTarget());
-        if (card != null
-                && controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-            controller.shuffleLibrary(source, game);
-        }
+        player.shuffleLibrary(source, game);
         return true;
     }
 }

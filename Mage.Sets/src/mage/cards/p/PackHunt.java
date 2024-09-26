@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import mage.abilities.Ability;
@@ -9,8 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInLibrary;
@@ -19,7 +17,6 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author ciaccona007
  */
 public final class PackHunt extends CardImpl {
@@ -41,11 +38,13 @@ public final class PackHunt extends CardImpl {
         return new PackHunt(this);
     }
 }
+
 class PackHuntEffect extends OneShotEffect {
 
     PackHuntEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search your library for up to three cards with the same name as target creature, reveal them, and put them into your hand. Then shuffle";
+        this.staticText = "search your library for up to three cards with the same name as " +
+                "target creature, reveal them, and put them into your hand. Then shuffle";
     }
 
     private PackHuntEffect(final PackHuntEffect effect) {
@@ -59,9 +58,14 @@ class PackHuntEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        FilterCard filter = new FilterPermanentCard();
-        filter.add(new NamePredicate(permanent.getName()));
-        return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0,3, filter), true).apply(game, source);
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent == null) {
+            return false;
+        }
+        FilterCard filter = new FilterCard();
+        filter.add(new SharesNamePredicate(permanent));
+        return new SearchLibraryPutInHandEffect(
+                new TargetCardInLibrary(0, 3, filter), true
+        ).apply(game, source);
     }
 }
