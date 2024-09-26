@@ -43,7 +43,7 @@ public final class TegwyllsScouring extends CardImpl {
         Ability ability = new PayMoreToCastAsThoughtItHadFlashAbility(this, costs);
         ability.addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
         ability.addEffect(new CreateTokenEffect(new FaerieRogueToken(), 3));
-        this.addAbility(ability.setRuleAtTheTop(true));
+        this.addAbility(ability);
 
         // Destroy all creatures.
         this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
