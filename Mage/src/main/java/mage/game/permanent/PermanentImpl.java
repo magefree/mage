@@ -445,8 +445,8 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
             // needed so that source can get an ability multiple times (e.g. Raging Ravine)
             // Deterministic to allow repeated ability copies to have same UUID
             // (see https://github.com/magefree/mage/issues/10372)
-            long msb = ability.getId().getMostSignificantBits() + getId().getMostSignificantBits() + 1;
-            long lsb = ability.getId().getLeastSignificantBits() + getId().getMostSignificantBits() + 1;
+            long msb = ability.getId().getMostSignificantBits() ^ getId().getMostSignificantBits();
+            long lsb = ability.getId().getLeastSignificantBits() ^ getId().getLeastSignificantBits();
             copyAbility.newId(new UUID(msb, lsb));
 //            copyAbility.newId();
 
