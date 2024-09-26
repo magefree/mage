@@ -135,11 +135,7 @@ class HelgaSkittishSeerManaEffect extends ManaEffect {
         List<Mana> netMana = new ArrayList<>();
         if (game != null){
             int currentPower = power.calculate(game, source, this);
-            netMana.add(manaBuilder.setMana(Mana.BlackMana(currentPower), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.BlueMana(currentPower), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.RedMana(currentPower), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.GreenMana(currentPower), source, game).build());
-            netMana.add(manaBuilder.setMana(Mana.WhiteMana(currentPower), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.AnyMana(currentPower), source, game).build());
         }
         return netMana;
     }

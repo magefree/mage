@@ -91,11 +91,7 @@ class FoodChainManaEffect extends ManaEffect {
                 }
             }
             if (cmc != -1) {
-                netMana.add(manaBuilder.setMana(Mana.BlackMana(cmc + 1), source, game).build());
-                netMana.add(manaBuilder.setMana(Mana.BlueMana(cmc + 1), source, game).build());
-                netMana.add(manaBuilder.setMana(Mana.RedMana(cmc + 1), source, game).build());
-                netMana.add(manaBuilder.setMana(Mana.GreenMana(cmc + 1), source, game).build());
-                netMana.add(manaBuilder.setMana(Mana.WhiteMana(cmc + 1), source, game).build());
+                netMana.add(manaBuilder.setMana(Mana.AnyMana(cmc + 1), source, game).build());
             }
         }
         return netMana;
