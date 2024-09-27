@@ -134,7 +134,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Harsh Mentor", 165, Rarity.RARE, mage.cards.h.HarshMentor.class));
         cards.add(new SetCardInfo("Haywire Mite", 247, Rarity.UNCOMMON, mage.cards.h.HaywireMite.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 284, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
-        cards.add(new SetCardInfo("Hornet Queen", 184, Rarity.MYTHIC, mage.cards.h.HornetQueen.class));
+        cards.add(new SetCardInfo("Hornet Queen", 184, Rarity.RARE, mage.cards.h.HornetQueen.class));
         cards.add(new SetCardInfo("Hydra Omnivore", 185, Rarity.MYTHIC, mage.cards.h.HydraOmnivore.class));
         cards.add(new SetCardInfo("Infernal Grasp", 143, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Inkshield", 221, Rarity.RARE, mage.cards.i.Inkshield.class));
