@@ -32,7 +32,7 @@ public class ExileTopXMayPlayUntilEffect extends OneShotEffect {
         makeText(amount.toString().equals("1") ? "that card" : "those cards", duration == Duration.EndOfTurn);
     }
 
-    private ExileTopXMayPlayUntilEffect(final ExileTopXMayPlayUntilEffect effect) {
+    protected ExileTopXMayPlayUntilEffect(final ExileTopXMayPlayUntilEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.duration = effect.duration;
@@ -60,8 +60,13 @@ public class ExileTopXMayPlayUntilEffect extends OneShotEffect {
         if (!cards.isEmpty()) {
             game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, duration)
                     .setTargetPointer(new FixedTargets(cards, game)), source);
+            effectCards(game, source, cards);
         }
         return true;
+    }
+
+    protected void effectCards(Game game, Ability source, Set<Card> cards) {
+        //Do nothing, used for derived classes
     }
 
     /**
