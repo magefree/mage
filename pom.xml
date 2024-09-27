@@ -96,6 +96,25 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- code coverage tracking via coveralls -->
+            <!-- https://github.com/trautonen/coveralls-maven-plugin -->
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>4.3.0</version>
+
+                <configuration>
+                  <jacocoReports>
+                    <jacocoReport>${root.dir}/Mage.Reports/target/site/jacoco-aggregate/jacoco.xml</jacocoReport>
+                  </jacocoReports>
+
+                  <excludes>
+                    <exclude>${root.dir}/**/generated-sources/**/*.java</exclude>
+                    <exclude>${root.dir}/Mage.Server/target/generated-sources/**/*.java</exclude>
+                  </excludes>
+                </configuration>
+            </plugin>
         </plugins>
 
         <pluginManagement>
