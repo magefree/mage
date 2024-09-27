@@ -1,25 +1,23 @@
 package mage.cards.c;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardWithSameNameAsPermanents;
 import mage.target.common.TargetControlledPermanent;
-import mage.util.CardUtil;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 /**
  * @author North
@@ -74,68 +72,14 @@ class ClarionUltimatumEffect extends OneShotEffect {
         TargetPermanent targetPermanent = new TargetControlledPermanent(Math.max(permCount, 5));
         targetPermanent.withNotTarget(true);
         player.choose(outcome, targetPermanent, source, game);
-        Set<String> names = targetPermanent
-                .getTargets()
-                .stream()
-                .map(game::getCard)
-                .filter(Objects::nonNull)
-                .map(MageObject::getName)
-                .collect(Collectors.toSet());
-        TargetCardInLibrary targetCardInLibrary = new ClarionUltimatumTarget(names);
-        player.searchLibrary(targetCardInLibrary, source, game);
-        Cards cards = new CardsImpl(targetCardInLibrary.getTargets());
-        player.moveCards(cards.getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
+        TargetCardInLibrary target = new TargetCardWithSameNameAsPermanents(targetPermanent.getTargets());
+        player.searchLibrary(target, source, game);
+        Cards cards = new CardsImpl(target.getTargets());
+        player.moveCards(
+                cards.getCards(game), Zone.BATTLEFIELD, source, game,
+                true, false, false, null
+        );
         player.shuffleLibrary(source, game);
         return true;
-    }
-}
-
-class ClarionUltimatumTarget extends TargetCardInLibrary {
-
-    private final Map<String, Integer> nameMap = new HashMap<>();
-
-    ClarionUltimatumTarget(Set<String> names) {
-        super(0, names.size(), makeFilter(names));
-        this.populateNameMap(names);
-    }
-
-    private ClarionUltimatumTarget(final ClarionUltimatumTarget target) {
-        super(target);
-        this.nameMap.putAll(target.nameMap);
-    }
-
-    @Override
-    public ClarionUltimatumTarget copy() {
-        return new ClarionUltimatumTarget(this);
-    }
-
-    private static FilterCard makeFilter(Set<String> names) {
-        FilterCard filter = new FilterCard();
-        filter.add(Predicates.or(names.stream().map(name -> new NamePredicate(name)).collect(Collectors.toSet())));
-        return filter;
-    }
-
-    private void populateNameMap(Set<String> names) {
-        names.stream().forEach(name -> this.nameMap.compute(name, CardUtil::setOrIncrementValue));
-    }
-
-    @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(playerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        if (card == null) {
-            return false;
-        }
-        Map<String, Integer> alreadyChosen = new HashMap<>();
-        this.getTargets()
-                .stream()
-                .map(game::getCard)
-                .filter(Objects::nonNull)
-                .map(MageObject::getName)
-                .forEach(name -> alreadyChosen.compute(name, CardUtil::setOrIncrementValue));
-        return nameMap.getOrDefault(card.getName(), 0)
-                > alreadyChosen.getOrDefault(card.getName(), 0);
     }
 }
