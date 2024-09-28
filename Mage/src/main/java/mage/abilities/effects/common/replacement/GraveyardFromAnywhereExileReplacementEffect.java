@@ -7,6 +7,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -20,37 +21,40 @@ import mage.util.CardUtil;
 public class GraveyardFromAnywhereExileReplacementEffect extends ReplacementEffectImpl {
 
     private final FilterCard filter;
-    private final boolean only_you;
+    private final boolean onlyYou;
     private final boolean tokens;
 
-    public GraveyardFromAnywhereExileReplacementEffect(FilterCard filter, boolean only_you) {
-        this(Duration.WhileOnBattlefield, filter, only_you, false);
+    public GraveyardFromAnywhereExileReplacementEffect(FilterCard filter, boolean onlyYou) {
+        this(Duration.WhileOnBattlefield, filter, onlyYou, false);
     }
 
-    public GraveyardFromAnywhereExileReplacementEffect(boolean only_you, boolean tokens) {
-        this(Duration.WhileOnBattlefield, null, only_you, tokens);
+    public GraveyardFromAnywhereExileReplacementEffect(boolean onlyYou, boolean tokens) {
+        this(Duration.WhileOnBattlefield, StaticFilters.FILTER_CARD_A, onlyYou, tokens);
     }
 
-    public GraveyardFromAnywhereExileReplacementEffect(Duration duration, FilterCard filter, boolean only_you, boolean tokens) {
+    public GraveyardFromAnywhereExileReplacementEffect(Duration duration) {
+        this(duration, StaticFilters.FILTER_CARD_A, true, false);
+    }
+    protected GraveyardFromAnywhereExileReplacementEffect(Duration duration, FilterCard filter, boolean onlyYou, boolean tokens) {
         super(duration, Outcome.Exile);
         this.filter = filter;
-        this.only_you = only_you;
+        this.onlyYou = onlyYou;
         this.tokens = tokens;
-        this.set_text();
+        this.setText();
     }
 
     private GraveyardFromAnywhereExileReplacementEffect(final GraveyardFromAnywhereExileReplacementEffect effect) {
         super(effect);
         this.filter = effect.filter;
-        this.only_you = effect.only_you;
+        this.onlyYou = effect.onlyYou;
         this.tokens = effect.tokens;
     }
 
-    private void set_text() {
-        this.staticText = "If " + (filter != null ? CardUtil.addArticle(filter.getMessage()) : "a card") + (tokens ? " or token" : "")
-                + " would be put into " + (only_you ? "your" : "a") + " graveyard from anywhere"
+    private void setText() {
+        this.staticText = "If " + CardUtil.addArticle(filter.getMessage()) + (tokens ? " or token" : "")
+                + " would be put into " + (onlyYou ? "your" : "a") + " graveyard from anywhere"
                 + (duration == Duration.EndOfTurn ? " this turn" : "") + ", exile "
-                + ((filter == null && !tokens) ? "that card" : "it") + " instead";
+                + ((filter == StaticFilters.FILTER_CARD_A && !tokens) ? "that card" : "it") + " instead";
     }
 
     @Override
@@ -76,11 +80,11 @@ public class GraveyardFromAnywhereExileReplacementEffect extends ReplacementEffe
             return false;
         }
         Card card = game.getCard(event.getTargetId());
-        if (card != null && (!only_you || card.isOwnedBy(source.getControllerId())) && (filter == null || filter.match(card, game))) {
+        if (card != null && (!onlyYou || card.isOwnedBy(source.getControllerId())) && (filter == null || filter.match(card, game))) {
             return true;
         }
         Permanent token = game.getPermanent(event.getTargetId());
-        if (tokens && (token instanceof PermanentToken && (!only_you || token.isOwnedBy(source.getControllerId())))) {
+        if (tokens && (token instanceof PermanentToken && (!onlyYou || token.isOwnedBy(source.getControllerId())))) {
             return true;
         }
         return false;

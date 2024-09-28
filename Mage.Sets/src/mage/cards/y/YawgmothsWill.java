@@ -25,7 +25,7 @@ public final class YawgmothsWill extends CardImpl {
         this.getSpellAbility().addEffect(new CanPlayCardsFromGraveyardEffect());
 
         // If a card would be put into your graveyard from anywhere this turn, exile that card instead.
-        this.getSpellAbility().addEffect(new GraveyardFromAnywhereExileReplacementEffect(Duration.EndOfTurn, null, true, false).concatBy("<br>"));
+        this.getSpellAbility().addEffect(new GraveyardFromAnywhereExileReplacementEffect(Duration.EndOfTurn).concatBy("<br>"));
     }
 
     private YawgmothsWill(final YawgmothsWill card) {

@@ -32,7 +32,7 @@ public final class GaeasWill extends CardImpl {
         this.getSpellAbility().addEffect(new GaeasWillGraveyardEffect());
 
         // If a card would be put into your graveyard from anywhere this turn, exile that card instead.
-        this.addAbility(new SimpleStaticAbility(new GraveyardFromAnywhereExileReplacementEffect(Duration.EndOfTurn, null, true, false)));
+        this.addAbility(new SimpleStaticAbility(new GraveyardFromAnywhereExileReplacementEffect(Duration.EndOfTurn)));
     }
 
     private GaeasWill(final GaeasWill card) {
