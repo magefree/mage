@@ -3,6 +3,10 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
 
 /**
  * @author TheElk801
@@ -570,7 +574,7 @@ class PhyrexiaAllWillBeOneCollator implements BoosterCollator {
             AAABBBBCCC, AAABBBBCCC, AAABBBBCCC, AAABBBBCCC, AAABBBBCCC,
             AAABBBBCCC, AAABBBBCCC, AAABBBBCCC, AAABBBBCCC, AAABBBBCCC,
             AAABBBBCCC, AAABBBBCCC, AAABBBBCCC, AAABBBBCCC, AAABBBBCCC,
-            AAABBBBCCC, AAABBBBCCC, AAABBBBCCC, AAABBBBCCC,
+            AAABBBBCCC, AAABBBBCCC, AAABBBBCCC, AAABBBBCCC
     );
 
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(U3);
