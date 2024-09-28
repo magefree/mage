@@ -8,6 +8,8 @@ import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
 import mage.collation.RarityConfiguration;
 
+import java.util.ArrayList;
+import java.util.List;
 /**
  * @author TheElk801
  */
@@ -520,7 +522,7 @@ public final class PhyrexiaAllWillBeOne extends ExpansionSet {
 
 // Booster collation info from https://www.lethe.xyz/mtg/collation/one.html
 // Using Japanese collation for common, no collation for uncommons
-// Using 2:1 for each rare:mythic which results is 1/7 packs upgrading to mythic
+// Using 2:1 for each rare:mythic which results in (1/7) 14.29% mythic packs, matching the advertised ~14%
 class PhyrexiaAllWillBeOneCollator implements BoosterCollator {
     private final CardRun commonA = new CardRun(true, "54", "251", "44", "77", "243", "49", "228", "45", "231", "55", "260", "58", "60", "238", "65", "187", "54", "253", "59", "252", "52", "44", "224", "62", "251", "50", "139", "48", "236", "77", "238", "59", "53", "253", "65", "50", "187", "60", "228", "48", "260", "55", "251", "53", "231", "58", "252", "49", "243", "45", "224", "52", "236", "54", "139", "62", "44", "252", "58", "48", "238", "55", "243", "59", "139", "52", "260", "62", "54", "231", "50", "228", "44", "253", "77", "224", "49", "251", "65", "60", "236", "53", "187", "45", "228", "55", "52", "253", "50", "260", "77", "236", "58", "238", "45", "252", "65", "139", "49", "187", "59", "243", "48", "62", "231", "60", "53", "224");
     private final CardRun commonB = new CardRun(true, "16", "94", "111", "15", "7", "97", "12", "96", "102", "20", "120", "110", "9", "25", "103", "6", "40", "94", "4", "247", "117", "13", "137", "88", "39", "225", "109", "22", "151", "116", "28", "226", "92", "21", "12", "97", "8", "20", "111", "261", "39", "89", "28", "36", "117", "21", "120", "116", "8", "247", "103", "13", "40", "110", "22", "16", "102", "225", "4", "88", "151", "9", "109", "226", "7", "96", "137", "25", "92", "36", "6", "116", "261", "15", "109", "21", "39", "110", "16", "13", "102", "22", "137", "94", "25", "15", "111", "247", "8", "89", "12", "225", "117", "9", "120", "97", "7", "261", "103", "36", "40", "88", "28", "20", "92", "226", "4", "96", "151", "6", "89");
@@ -552,7 +554,6 @@ class PhyrexiaAllWillBeOneCollator implements BoosterCollator {
     // 2.67 A commons (270 / 101)
     // 3.66 B commons (370 / 101)
     // 3.66 C commons (370 / 101)
-    // Approximately 1 in 4 boosters contains a basic land instead of a common
     private final RarityConfiguration commonRuns = new RarityConfiguration(
             AABBBBCCCC, AABBBBCCCC, AABBBBCCCC, AABBBBCCCC, AABBBBCCCC,
             AABBBBCCCC, AABBBBCCCC, AABBBBCCCC, AABBBBCCCC, AABBBBCCCC,
