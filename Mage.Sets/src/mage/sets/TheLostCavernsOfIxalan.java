@@ -544,7 +544,7 @@ class TheLostCavernsOfIxalanCollator implements BoosterCollator {
     private final BoosterStructure AAABBBCCC = new BoosterStructure(
             commonA, commonA, commonA,
             commonB, commonB, commonB,
-            commonC, commonC, commonC,
+            commonC, commonC, commonC
     );
     private final BoosterStructure BCC = new BoosterStructure(uncommonB, uncommonC, uncommonC);
     private final BoosterStructure BBC = new BoosterStructure(uncommonB, uncommonB, uncommonC);
