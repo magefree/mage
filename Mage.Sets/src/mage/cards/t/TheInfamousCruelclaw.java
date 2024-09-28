@@ -39,7 +39,7 @@ public final class TheInfamousCruelclaw extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever The Infamous Cruelclaw deals combat damage to a player, exile cards from the top of your library until you exile a nonland card. You may cast that card by discarding a card rather than paying its mana cost.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new InfamousCruelclawEffect()));
