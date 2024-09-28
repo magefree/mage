@@ -9,15 +9,13 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.replacement.GraveyardFromAnywhereExileReplacementEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -35,7 +33,7 @@ public final class FestivalOfEmbers extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new FestivalOfEmbersCastEffect()));
 
         // If a card or token would be put into your graveyard from anywhere, exile it instead.
-        this.addAbility(new SimpleStaticAbility(new FestivalOfEmbersReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new GraveyardFromAnywhereExileReplacementEffect(true, true)));
 
         // {1}{R}: Sacrifice Festival of Embers.
         this.addAbility(new SimpleActivatedAbility(new SacrificeSourceEffect(), new ManaCostsImpl<>("{1}{R}")));
@@ -95,39 +93,5 @@ class FestivalOfEmbersCastEffect extends AsThoughEffectImpl {
                 card.getId(), card.getManaCost(), newCosts
         );
         return true;
-    }
-}
-
-// Exact copy of RestInPeaceReplacementEffect
-class FestivalOfEmbersReplacementEffect extends ReplacementEffectImpl {
-
-    FestivalOfEmbersReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Exile);
-        staticText = "If a card or token would be put into a graveyard from anywhere, exile it instead";
-    }
-
-    private FestivalOfEmbersReplacementEffect(final FestivalOfEmbersReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FestivalOfEmbersReplacementEffect copy() {
-        return new FestivalOfEmbersReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD;
     }
 }
