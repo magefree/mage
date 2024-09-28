@@ -76,13 +76,9 @@ class ZimoneMysteryUnravelerEffect extends OneShotEffect {
         FilterControlledPermanent filter = new FilterControlledPermanent("a permanent you control");
         filter.add(FaceDownPredicate.instance);
         if (controller != null) {
-            TargetControlledPermanent target = new TargetControlledPermanent(filter);
-            if (controller.chooseUse(Outcome.Benefit, "Turn a permanent you control face up?", source, game) && controller.choose(Outcome.BoostCreature, target, source, game)) {
-                Permanent permanent = game.getPermanent(target.getFirstTarget());
-                if (permanent != null) {
-                    return permanent.turnFaceUp(source, game, source.getControllerId());
-                }
-            }
+            TargetControlledPermanent target = new TargetControlledPermanent(0, 1, filter, true);
+            Permanent permanent = game.getPermanent(target.getFirstTarget());
+            return permanent != null && permanent.turnFaceUp(source, game, source.getControllerId());
         }
         return false;
     }
