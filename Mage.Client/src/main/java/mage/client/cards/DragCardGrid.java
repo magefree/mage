@@ -857,7 +857,7 @@ public class DragCardGrid extends JPanel implements DragCardSource, DragCardTarg
 
         JPanel toolbar = new JPanel(new BorderLayout());
         JPanel toolbarInner = new JPanel();
-        toolbar.setBackground(new Color(250, 250, 250, 150));
+        toolbar.setBackground(PreferencesDialog.getCurrentTheme().getDeckEditorToolbarBackgroundColor());
         toolbar.setOpaque(true);
         toolbarInner.setOpaque(false);
         toolbarInner.add(deckNameAndCountLabel);
