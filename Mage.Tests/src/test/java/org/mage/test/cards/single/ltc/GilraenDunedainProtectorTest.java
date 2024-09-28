@@ -26,7 +26,7 @@ public class GilraenDunedainProtectorTest extends CardTestPlayerBase {
      * {W}
      * Enchantment
      * <p>
-     * Whenever a creature enters the battlefield under your control, you gain 1 life.
+     * Whenever a creature you control enters, you gain 1 life.
      */
     private final String welcome = "Ajani's Welcome";
 

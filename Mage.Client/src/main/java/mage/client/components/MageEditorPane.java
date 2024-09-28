@@ -8,16 +8,21 @@ import mage.client.cards.BigCard;
 import mage.client.cards.VirtualCardInfo;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.game.GamePanel;
+import mage.game.command.Dungeon;
 import mage.game.command.Plane;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.view.CardView;
+import mage.view.DungeonView;
 import mage.view.PlaneView;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.text.*;
-import javax.swing.text.html.*;
+import javax.swing.text.html.CSS;
+import javax.swing.text.html.HTML;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -25,6 +30,14 @@ import java.util.*;
 
 /**
  * GUI: improved editor pane with html, hyperlinks/popup support
+ * <p>
+ * Can be used as:
+ * - read only text panel (example: chats and game logs)
+ * - read only text label (example: header messages in choice dialogs)
+ * <p>
+ * Call in form's constructor or show dialog:
+ * - xxx.enableTextLabelMode to enable text label mode
+ * - xxx.enableHyperlinksAndCardPopups + xxx.setGameData to enable card popup support
  *
  * @author JayDi85
  */
@@ -36,7 +49,6 @@ public class MageEditorPane extends JEditorPane {
     final HTMLEditorKit kit = new HTMLEditorKit();
     final HTMLDocument doc;
 
-
     public MageEditorPane() {
         super();
         // merge with UI.setHTMLEditorKit
@@ -45,6 +57,30 @@ public class MageEditorPane extends JEditorPane {
 
         // improved style: browser's url style with underline on mouse over and hand cursor
         kit.getStyleSheet().addRule(" a { text-decoration: none; } ");
+
+        changeGUISize(this.getFont());
+    }
+
+    public void changeGUISize(Font font) {
+        this.setFont(font);
+
+        // workaround to change editor's font at runtime
+        String bodyRule = "body { "
+                + " font-family: " + font.getFamily() + "; "
+                + " font-size: " + font.getSize() + "pt; "
+                + "}";
+        kit.getStyleSheet().addRule(bodyRule);
+    }
+
+    /**
+     * Simulate JLabel (non-editable and transparent background)
+     */
+    public void enableTextLabelMode() {
+        this.setOpaque(false);
+        this.setFocusable(false);
+        this.setBorder(null);
+        this.setAutoscrolls(false);
+        this.setBackground(new Color(0, 0, 0, 0)); // transparent background
     }
 
     // cards popup info
@@ -122,7 +158,7 @@ public class MageEditorPane extends JEditorPane {
                 // show real object by priority (workable card hints and actual info)
                 CardView cardView = needCard;
 
-                // if no game object found then show default card
+                // if no game object found then show default card/object
                 if (cardView == null) {
                     CardInfo card = CardRepository.instance.findCards(cardName).stream().findFirst().orElse(null);
                     if (card != null) {
@@ -134,7 +170,15 @@ public class MageEditorPane extends JEditorPane {
                 if (cardView == null) {
                     Plane plane = Plane.createPlaneByFullName(cardName);
                     if (plane != null) {
-                        cardView = new CardView(new PlaneView(plane));
+                        cardView = new CardView(new PlaneView(plane, null));
+                    }
+                }
+
+                // dungeon
+                if (cardView == null) {
+                    Dungeon dungeon = Dungeon.createDungeon(cardName, false);
+                    if (dungeon != null) {
+                        cardView = new CardView(new DungeonView(dungeon));
                     }
                 }
 
@@ -246,6 +290,4 @@ public class MageEditorPane extends JEditorPane {
         hyperlinkEnabled = true;
         addHyperlinkHandlers();
     }
-
-
 }

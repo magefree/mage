@@ -36,7 +36,7 @@ public final class TolsimirFriendToWolves extends CardImpl {
         // When Tolsimir, Friend to Wolves enters the battlefield, create Voja, Friend to Elves, a legendary 3/3 green and white Wolf creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new VojaFriendToElvesToken())));
 
-        // Whenever a Wolf enters the battlefield under your control, you gain 3 life and that creature fights up to one target creature an opponent controls.
+        // Whenever a Wolf you control enters, you gain 3 life and that creature fights up to one target creature an opponent controls.
         this.addAbility(new TolsimirFriendToWolvesTriggeredAbility());
     }
 
@@ -86,7 +86,7 @@ class TolsimirFriendToWolvesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a Wolf enters the battlefield under your control, " +
+        return "Whenever a Wolf you control enters, " +
                 "you gain 3 life and that creature fights up to one target creature an opponent controls.";
     }
 

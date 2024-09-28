@@ -65,7 +65,7 @@ class TooGreedilyTooDeepEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(card, Zone.BATTLEFIELD, source, game);
-        game.getState().processAction(game);
+        game.processAction();
         Permanent returnedCreature = game.getPermanent(card.getId());
         if (returnedCreature != null && returnedCreature.getPower().getValue() > 0) {
             for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), source, game)) {

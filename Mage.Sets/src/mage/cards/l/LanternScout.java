@@ -27,7 +27,7 @@ public final class LanternScout extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // <i>Rally</i> &mdash; Whenever Lantern Scout or another Ally enters the battlefield under your control, creatures you control gain lifelink until end of turn.
+        // <i>Rally</i> &mdash; Whenever Lantern Scout or another Ally you control enters, creatures you control gain lifelink until end of turn.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new GainAbilityAllEffect(
                 LifelinkAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURES

@@ -67,11 +67,11 @@ class OutbreakEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Choice typeChoice = new ChoiceCreatureType(game.getObject(source));
+        Choice typeChoice = new ChoiceCreatureType(game, source);
         if (player != null && player.choose(outcome, typeChoice, game)) {
-            game.informPlayers(player.getLogName() + " has chosen " + typeChoice.getChoice());
+            game.informPlayers(player.getLogName() + " has chosen " + typeChoice.getChoiceKey());
             FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures of the chosen type");
-            filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
+            filter.add(SubType.byDescription(typeChoice.getChoiceKey()).getPredicate());
             ContinuousEffect effect = new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, filter, false);
             game.addEffect(effect, source);
             return true;

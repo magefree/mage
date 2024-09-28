@@ -180,7 +180,7 @@ class RodOfAbsorptionCastEffect extends OneShotEffect {
 
         CardUtil.castMultipleWithAttributeForFree(
                 player, source, game, cards, StaticFilters.FILTER_CARD, Integer.MAX_VALUE,
-                new RodOfAbsorptionTracker(source.getManaCostsToPay().getX())
+                new RodOfAbsorptionTracker(CardUtil.getSourceCostsTag(game, source, "X", 0))
         );
         return true;
     }

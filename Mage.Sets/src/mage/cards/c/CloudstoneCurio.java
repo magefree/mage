@@ -31,7 +31,7 @@ public final class CloudstoneCurio extends CardImpl {
     public CloudstoneCurio(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // Whenever a nonartifact permanent enters the battlefield under your control, you may return another permanent you control that shares a card type with it to its owner's hand.
+        // Whenever a nonartifact permanent you control enters, you may return another permanent you control that shares a card type with it to its owner's hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new CloudstoneCurioEffect(), filter, true, SetTargetPointer.PERMANENT));
 
     }

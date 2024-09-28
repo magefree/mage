@@ -63,7 +63,7 @@ public class PermanentsEnterBattlefieldTappedEffect extends ReplacementEffectImp
             return staticText;
         }
         return filter.getMessage()
-                + " enter the battlefield tapped"
+                + " enter tapped"
                 + (duration == Duration.EndOfTurn ? " this turn" : "");
     }
 }

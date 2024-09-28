@@ -64,7 +64,7 @@ public class SyrixCarrierOfTheFlame extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(
                 Zone.GRAVEYARD,
                 new SyrixCarrierOfTheFlameCastEffect(),
-                true,
+                false, // already accounted for in effect
                 anotherPhoenixFilter,
                 false)
         );

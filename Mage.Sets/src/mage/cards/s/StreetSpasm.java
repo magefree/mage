@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -36,10 +36,10 @@ public final class StreetSpasm extends CardImpl {
 
         // Street Spasm deals X damage to target creature without flying you don't control.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
 
         // Overload {X}{X}{R}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new DamageAllEffect(ManacostVariableValue.REGULAR, filter), new ManaCostsImpl<>("{X}{X}{R}{R}")));
+        this.addAbility(new OverloadAbility(this, new DamageAllEffect(GetXValue.instance, filter), new ManaCostsImpl<>("{X}{X}{R}{R}")));
     }
 
     private StreetSpasm(final StreetSpasm card) {

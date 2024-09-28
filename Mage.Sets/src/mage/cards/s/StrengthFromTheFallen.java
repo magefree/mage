@@ -24,7 +24,7 @@ public final class StrengthFromTheFallen extends CardImpl {
     public StrengthFromTheFallen(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{G}");
 
-        // Constellation - Whenever Strength from the Fallen or another entchantment enters the battlefield under your control,
+        // Constellation - Whenever Strength from the Fallen or another entchantment you control enters,
         // target creature gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.
         Ability ability = new ConstellationAbility(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());

@@ -1,6 +1,5 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.SpellAbility;
@@ -9,14 +8,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.abilities.hint.common.ArtifactYouControlHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -25,8 +20,9 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class SaheeliTheGifted extends CardImpl {
@@ -46,7 +42,7 @@ public final class SaheeliTheGifted extends CardImpl {
         // +1: The next spell you cast this turn costs {1} less to cast for each artifact you control as you cast it.
         this.addAbility(new LoyaltyAbility(
                 new SaheeliTheGiftedCostReductionEffect(), 1
-        ));
+        ).addHint(ArtifactYouControlHint.instance));
 
         // -7: For each artifact you control, create a token that's a copy of it. Those tokens gain haste. Exile those tokens at the beginning of the next end step.
         this.addAbility(new LoyaltyAbility(

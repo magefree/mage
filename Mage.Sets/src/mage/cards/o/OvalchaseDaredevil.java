@@ -22,7 +22,7 @@ public final class OvalchaseDaredevil extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 
-        // Whenever an artifact enters the battlefield under your control, you may return Ovalchase Daredevil from your graveyard to your hand.
+        // Whenever an artifact you control enters, you may return Ovalchase Daredevil from your graveyard to your hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), StaticFilters.FILTER_PERMANENT_ARTIFACT,
                 true, SetTargetPointer.NONE

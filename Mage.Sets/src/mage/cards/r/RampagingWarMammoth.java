@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
 import mage.target.common.TargetArtifactPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -79,7 +80,7 @@ class RampagingWarMammothTriggeredAbility extends ZoneChangeTriggeredAbility {
         CyclingAbility cyclingAbility = (CyclingAbility) object.getStackAbility();
         // If X is 0, or cycling from another ability that does not have {X} in cost,
         // this should trigger (but do nothing).
-        int xValue = cyclingAbility.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, cyclingAbility, "X", 0);
 
         this.getEffects().clear();
         this.getTargets().clear();
@@ -87,6 +88,7 @@ class RampagingWarMammothTriggeredAbility extends ZoneChangeTriggeredAbility {
         this.addEffect(new DestroyTargetEffect());
         // Target up to X artifacts
         this.addTarget(new TargetArtifactPermanent(0, xValue));
+        this.getHints().clear();
         this.addHint(new StaticHint("X = " + xValue));
 
         return true;

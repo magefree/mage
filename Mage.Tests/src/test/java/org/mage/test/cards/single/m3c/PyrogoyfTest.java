@@ -14,7 +14,7 @@ public class PyrogoyfTest extends CardTestPlayerBase {
      * {@link mage.cards.p.Pyrogoyf} {3}{R}
      * Creature — Lhurgoyf
      * Pyrogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.
-     * Whenever Pyrogoyf or another Lhurgoyf creature enters the battlefield under your control, that creature deals damage equal to its power to any target.
+     * Whenever Pyrogoyf or another Lhurgoyf creature you control enters, that creature deals damage equal to its power to any target.
      * * / 1+*
      */
     private static final String pyrogoyf = "Pyrogoyf";

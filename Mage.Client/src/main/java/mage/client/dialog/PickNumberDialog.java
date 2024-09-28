@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Game GUI: choose number
+ * Game GUI: choose number dialog
  *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class PickNumberDialog extends MageDialog {
 
     private boolean cancel;
+    private PickNumberCallback callback = null;
 
     public PickNumberDialog() {
         initComponents();
@@ -24,10 +25,15 @@ public class PickNumberDialog extends MageDialog {
         this.setModal(true);
     }
 
-    public void showDialog(int min, int max, String message) {
+    public interface PickNumberCallback {
+        void onChoiceDone();
+    }
+
+    public void showDialog(int min, int max, String message, PickNumberCallback callback) {
         this.editAmount.setModel(new SpinnerNumberModel(min, min, max, 1));
         this.textMessage.setContentType("text/html");
         this.textMessage.setText(message);
+        this.callback = callback;
 
         List<String> limits = new ArrayList<>();
         if (min != Integer.MIN_VALUE) {
@@ -42,11 +48,7 @@ public class PickNumberDialog extends MageDialog {
 
         // window settings
         MageFrame.getDesktop().remove(this);
-        if (this.isModal()) {
-            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-        } else {
-            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-        }
+        MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
 
         this.getRootPane().setDefaultButton(this.buttonOk); // restore default button after root panel change (no need actually)
 
@@ -73,7 +75,7 @@ public class PickNumberDialog extends MageDialog {
 
         this.makeWindowCentered();
 
-        // TODO: need to fix focus restore on second popup (it's not focues, test on Manamorphose)
+        // TODO: need to fix focus restore on second popup (it's not get focus, test on Manamorphose)
         this.setVisible(true);
     }
 
@@ -83,6 +85,13 @@ public class PickNumberDialog extends MageDialog {
 
     public boolean isCancel() {
         return cancel;
+    }
+
+    private void doClose() {
+        this.hideDialog();
+        if (this.callback != null) {
+            this.callback.onChoiceDone();
+        }
     }
 
     /**
@@ -188,12 +197,12 @@ public class PickNumberDialog extends MageDialog {
 
     private void buttonOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOkActionPerformed
         this.cancel = false;
-        this.hideDialog();
+        doClose();
     }//GEN-LAST:event_buttonOkActionPerformed
 
     private void buttonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelActionPerformed
         this.cancel = true;
-        this.hideDialog();
+        doClose();
     }//GEN-LAST:event_buttonCancelActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

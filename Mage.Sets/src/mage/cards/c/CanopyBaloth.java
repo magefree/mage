@@ -23,7 +23,7 @@ public final class CanopyBaloth extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // Landfall — Whenever a land enters the battlefield under your control, Canopy Baloth gets +2/+2 until end of turn.
+        // Landfall — Whenever a land you control enters, Canopy Baloth gets +2/+2 until end of turn.
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn)));
     }
 

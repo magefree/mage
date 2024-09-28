@@ -20,7 +20,7 @@ public final class MephiticDraught extends CardImpl {
 
         // When Mephitic Draught enters the battlefield or is put into a graveyard from the battlefield, you draw a card and you lose 1 life.
         Ability ability = new EntersBattlefieldOrDiesSourceTriggeredAbility(
-                new DrawCardSourceControllerEffect(1, "you"), false, false);
+                new DrawCardSourceControllerEffect(1, true), false, false);
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
 

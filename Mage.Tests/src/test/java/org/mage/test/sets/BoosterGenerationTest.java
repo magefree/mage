@@ -10,7 +10,7 @@ import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardScanner;
 import mage.constants.Rarity;
 import mage.constants.SubType;
-import mage.game.draft.RemixedSet;
+import mage.game.draft.ReshuffledSet;
 import mage.sets.*;
 import mage.util.CardUtil;
 import org.junit.Assert;
@@ -541,12 +541,12 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
 
     @Ignore // debug only
     @Test
-    public void test_RemixedBoosterStats() {
+    public void test_ReshuffledBoosterStats() {
         List<ExpansionSet> sets = new ArrayList<>();
         sets.add(ScarsOfMirrodin.getInstance());
         sets.add(MirrodinBesieged.getInstance());
         sets.add(NewPhyrexia.getInstance());
-        RemixedSet setToAnalyse = new RemixedSet(sets, 10, 3, 1);
+        ReshuffledSet setToAnalyse = new ReshuffledSet(sets, 10, 3, 1);
         int openBoosters = 10000;
 
         Map<String, Integer> resRatio = new HashMap<>();

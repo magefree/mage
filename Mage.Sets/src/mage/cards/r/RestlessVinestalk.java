@@ -48,8 +48,8 @@ public final class RestlessVinestalk extends CardImpl {
                 new CreatureToken(5, 5, "5/5 green and blue Plant creature with trample")
                         .withColor("GU").withSubType(SubType.PLANT)
                         .withAbility(TrampleAbility.getInstance()),
-                CardType.LAND, Duration.EndOfTurn, true
-        ), new ManaCostsImpl<>("{3}{G}{U}")));
+                CardType.LAND, Duration.EndOfTurn
+        ).withDurationRuleAtStart(true), new ManaCostsImpl<>("{3}{G}{U}")));
 
         // Whenever Restless Vinestalk attacks, up to one other target creature has base power and toughness 3/3 until end of turn.
         Ability ability = new AttacksTriggeredAbility(new SetBasePowerToughnessTargetEffect(3, 3, Duration.EndOfTurn), false);

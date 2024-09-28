@@ -1,5 +1,6 @@
 package mage.view;
 
+import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.command.emblems.EmblemOfCard;
 import mage.players.PlayableObjectStats;
@@ -23,13 +24,13 @@ public class EmblemView implements CommandObjectView, Serializable {
     protected List<String> rules;
     protected PlayableObjectStats playableStats = new PlayableObjectStats();
 
-    public EmblemView(Emblem emblem) {
+    public EmblemView(Emblem emblem, Game game) {
         this.id = emblem.getId();
         this.name = emblem.getName();
         this.imageFileName = emblem.getImageFileName();
         this.imageNumber = emblem.getImageNumber();
         this.expansionSetCode = emblem.getExpansionSetCode();
-        this.rules = emblem.getAbilities().getRules(emblem.getName());
+        this.rules = emblem.getAbilities().getRules(game, emblem);
         if (emblem instanceof EmblemOfCard) {
             cardNumber = emblem.getCardNumber();
             usesVariousArt = ((EmblemOfCard) emblem).getUsesVariousArt();

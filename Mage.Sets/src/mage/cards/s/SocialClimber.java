@@ -23,7 +23,7 @@ public final class SocialClimber extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Alliance — Whenever another creature enters the battlefield under your control, you gain 1 life.
+        // Alliance — Whenever another creature you control enters, you gain 1 life.
         this.addAbility(new AllianceAbility(new GainLifeEffect(1)));
     }
 

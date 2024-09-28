@@ -14,8 +14,8 @@ import mage.game.permanent.Permanent;
 public class ZoneChangeEvent extends GameEvent {
 
     private Zone fromZone;
-    private Zone toZone;
-    private Zone originalToZone;
+    private Zone toZone; // real toZone after apply some replacements effects
+    private Zone originalToZone; // original toZone before any replacement effects
     private Permanent target;
     private Ability source; // link to source ability, can be null in rare situations
 

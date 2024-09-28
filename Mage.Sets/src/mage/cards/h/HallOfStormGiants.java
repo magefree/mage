@@ -38,7 +38,7 @@ public final class HallOfStormGiants extends CardImpl {
 
         // If you control two or more other lands, Hall of Storm Giants enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldAbility(
-                new TapSourceEffect(), condition, "If you control two or more other lands, {this} enters the battlefield tapped.", null
+                new TapSourceEffect(), condition, "If you control two or more other lands, {this} enters tapped.", null
         ));
 
         // {T}: Add {U}.

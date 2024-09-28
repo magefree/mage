@@ -20,24 +20,18 @@ import java.util.concurrent.TimeoutException;
 public class ResetPasswordDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(ResetPasswordDialog.class);
-    private final ConnectDialog connectDialog;
     private Connection connection;
     private GetAuthTokenTask getAuthTokenTask;
     private ResetPasswordTask resetPasswordTask;
 
-    /**
-     * Creates new form ResetPasswordDialog
-     */
-    public ResetPasswordDialog(ConnectDialog connectDialog) {
+    public ResetPasswordDialog() {
         initComponents();
-        this.connectDialog = connectDialog;
     }
 
-    public void showDialog() {
-        String serverAddress = this.connectDialog.getServer();
-        this.txtServer.setText(serverAddress);
-        this.txtPort.setText(this.connectDialog.getPort());
-        this.txtEmail.setText(MagePreferences.getEmail(serverAddress));
+    public void showDialog(String server, String port) {
+        this.txtServer.setText(server);
+        this.txtPort.setText(port);
+        this.txtEmail.setText(MagePreferences.getEmail(server));
         this.lblStatus.setText("");
 
         this.setModal(true);

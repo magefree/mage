@@ -160,9 +160,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jToggleCardView.setToolTipText(jToggleCardView.getToolTipText() + " (works only up to " + CardGrid.MAX_IMAGES + " cards).");
     }
 
-    /**
-     * Free all references
-     */
     public void cleanUp() {
         this.cardGrid.clear();
         this.mainModel.clear();
@@ -184,7 +181,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private void setGUISize() {
         mainTable.getTableHeader().setFont(GUISizeHelper.tableFont);
         mainTable.setFont(GUISizeHelper.tableFont);
-        mainTable.setRowHeight(GUISizeHelper.getTableRowHeight());
+        mainTable.setRowHeight(GUISizeHelper.tableRowHeight);
 
     }
 
@@ -1471,44 +1468,45 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private void btnExpansionSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpansionSearchActionPerformed
         // search and check multiple items
 
-        int[] oldChecks = listCodeSelected.getCheckedIndices();
+        final int[] oldChecks = listCodeSelected.getCheckedIndices();
 
         // call dialog
-        FastSearchUtil.showFastSearchForStringComboBox(listCodeSelected, FastSearchUtil.DEFAULT_EXPANSION_SEARCH_MESSAGE);
-
-        int[] newChecks = listCodeSelected.getCheckedIndices();
-        if (Arrays.equals(oldChecks, newChecks)) {
-            // no changes or cancel
-            return;
-        }
-
-        isSetsFilterLoading = true;
-        try {
-            // delete old item
-            if (cbExpansionSet.getItemAt(0).startsWith(MULTI_SETS_SELECTION_TEXT)) {
-                cbExpansionSet.removeItemAt(0);
+        FastSearchUtil.showFastSearchForStringComboBox(listCodeSelected, FastSearchUtil.DEFAULT_EXPANSION_SEARCH_MESSAGE, () -> {
+            // data update on good choice
+            int[] newChecks = listCodeSelected.getCheckedIndices();
+            if (Arrays.equals(oldChecks, newChecks)) {
+                // no changes or cancel
+                return;
             }
 
-            // set new selection
-            if (newChecks.length == 0) {
-                // all
-                cbExpansionSet.setSelectedIndex(0);
-            } else if (newChecks.length == 1) {
-                // one
-                setSetsSelection(listCodeSelected.getModel().getElementAt(newChecks[0]).toString());
-            } else {
-                // multiple
-                // insert custom text
-                String message = String.format("%s: %d", MULTI_SETS_SELECTION_TEXT, newChecks.length);
-                cbExpansionSet.insertItemAt(message, 0);
-                cbExpansionSet.setSelectedIndex(0);
-            }
-        } finally {
-            isSetsFilterLoading = false;
-        }
+            isSetsFilterLoading = true;
+            try {
+                // delete old item
+                if (cbExpansionSet.getItemAt(0).startsWith(MULTI_SETS_SELECTION_TEXT)) {
+                    cbExpansionSet.removeItemAt(0);
+                }
 
-        // update data
-        filterCards();
+                // set new selection
+                if (newChecks.length == 0) {
+                    // all
+                    cbExpansionSet.setSelectedIndex(0);
+                } else if (newChecks.length == 1) {
+                    // one
+                    setSetsSelection(listCodeSelected.getModel().getElementAt(newChecks[0]).toString());
+                } else {
+                    // multiple
+                    // insert custom text
+                    String message = String.format("%s: %d", MULTI_SETS_SELECTION_TEXT, newChecks.length);
+                    cbExpansionSet.insertItemAt(message, 0);
+                    cbExpansionSet.setSelectedIndex(0);
+                }
+            } finally {
+                isSetsFilterLoading = false;
+            }
+
+            // update data
+            filterCards();
+        });
     }//GEN-LAST:event_btnExpansionSearchActionPerformed
 
     private void tbCommonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbCommonActionPerformed

@@ -1,7 +1,6 @@
 package mage.cards.n;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.FinalChapterAbilityResolvesTriggeredAbility;
 import mage.abilities.common.SacrificePermanentTriggeredAbility;
@@ -18,7 +17,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.target.targetpointer.FixedTarget;
+import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
@@ -41,13 +40,13 @@ public final class NarciFableSinger extends CardImpl {
 
         // Whenever you sacrifice an enchantment, draw a card.
         this.addAbility(new SacrificePermanentTriggeredAbility(
-            new DrawCardSourceControllerEffect(1),
-            StaticFilters.FILTER_PERMANENT_ENCHANTMENT
+                new DrawCardSourceControllerEffect(1),
+                StaticFilters.FILTER_PERMANENT_ENCHANTMENT
         ));
 
         // Whenever the final chapter ability of a Saga you control resolves, each opponent loses X life and you gain X life, where X is that Saga's mana value.
         this.addAbility(new FinalChapterAbilityResolvesTriggeredAbility(
-            new NarciFableSingerEffect(), true
+                new NarciFableSingerEffect(), true
         ));
     }
 
@@ -79,12 +78,7 @@ class NarciFableSingerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FixedTarget fixedTarget = getTargetPointer().getFirstAsFixedTarget(game, source);
-        if (fixedTarget == null) {
-            return false;
-        }
-
-        MageObject saga = game.getObject(fixedTarget.getTarget());
+        Permanent saga = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (saga == null) {
             return false;
         }

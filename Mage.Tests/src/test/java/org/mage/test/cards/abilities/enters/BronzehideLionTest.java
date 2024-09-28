@@ -24,6 +24,8 @@ public class BronzehideLionTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Terror", lion);
+        setChoice(playerA, "Grizzly Bears"); // to enchant
+
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertGraveyardCount(playerA, lion, 0);
@@ -39,6 +41,7 @@ public class BronzehideLionTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Terror", lion);
+        setStrictChooseMode(false); // auto choose, no legal target
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
         assertGraveyardCount(playerA, lion, 1);

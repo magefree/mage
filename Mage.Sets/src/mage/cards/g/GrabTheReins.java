@@ -19,7 +19,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetSacrifice;
 
@@ -44,12 +43,12 @@ public final class GrabTheReins extends CardImpl {
         effect.setText("and it gains haste");
         this.getSpellAbility().addEffect(effect);
         TargetCreaturePermanent target = new TargetCreaturePermanent();
-        target.setTargetName("a creature to take control of");
+        target.withTargetName("a creature to take control of");
         this.getSpellAbility().addTarget(target);
         // or sacrifice a creature, then Grab the Reins deals damage equal to that creature's power to any target.
         Mode mode = new Mode(new GrabTheReinsEffect());
         TargetAnyTarget target2 = new TargetAnyTarget();
-        target2.setTargetName("a creature or player to damage");
+        target2.withTargetName("a creature or player to damage");
         mode.addTarget(target2);
         this.getSpellAbility().getModes().addMode(mode);
 

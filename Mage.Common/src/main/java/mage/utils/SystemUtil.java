@@ -352,21 +352,21 @@ public final class SystemUtil {
                 logger.info("Found " + groups.size() + " groups. Need to select.");
 
                 // choice dialog
-                Map<String, String> list = new LinkedHashMap<>();
-                Map<String, Integer> sort = new LinkedHashMap<>();
-                for (int i = 0; i < groups.size(); i++) {
-                    list.put(Integer.toString(i + 1), groups.get(i).getPrintNameWithStats());
-                    sort.put(Integer.toString(i + 1), i);
-                }
-
                 Choice groupChoice = new ChoiceImpl(false);
                 groupChoice.setMessage("Choose commands group to run");
-                groupChoice.setKeyChoices(list);
-                groupChoice.setSortData(sort);
+                for (int i = 0; i < groups.size(); i++) {
+                    groupChoice.withItem(
+                            Integer.toString(i + 1),
+                            groups.get(i).getPrintNameWithStats(),
+                            i,
+                            ChoiceHintType.TEXT,
+                            String.join("<br>", groups.get(i).commands)
+                    );
+                }
 
                 if (feedbackPlayer.choose(Outcome.Benefit, groupChoice, game)) {
                     String need = groupChoice.getChoiceKey();
-                    if ((need != null) && list.containsKey(need)) {
+                    if (need != null) {
                         runGroup = groups.get(Integer.parseInt(need) - 1);
                     }
                 }
@@ -440,7 +440,7 @@ public final class SystemUtil {
                             choices.put(ability.getId().toString(), object.getName() + ": " + ability.toString());
                         });
                         // TODO: set priority for us?
-                        Choice choice = new ChoiceImpl();
+                        Choice choice = new ChoiceImpl(false);
                         choice.setMessage("Choose playable ability to activate by opponent " + opponent.getName());
                         choice.setKeyChoices(choices);
                         if (feedbackPlayer.choose(Outcome.Detriment, choice, game) && choice.getChoiceKey() != null) {

@@ -30,6 +30,7 @@ public final class ZendikarRising extends ExpansionSet {
         this.blockName = "Zendikar Rising";
         this.hasBasicLands = true;
         this.hasBoosters = true;
+        this.rotationSet = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

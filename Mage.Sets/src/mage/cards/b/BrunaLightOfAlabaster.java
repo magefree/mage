@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.ArrayList;
@@ -100,24 +99,34 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
         List<Permanent> fromBattlefield = new ArrayList<>();
         List<Card> fromHandGraveyard = new ArrayList<>();
 
-        int countBattlefield = game.getBattlefield().getActivePermanents(filterAura, source.getControllerId(), source, game).size() - sourcePermanent.getAttachments().size();
+        int countBattlefield = (int) (game.getBattlefield().getActivePermanents(filterAura, source.getControllerId(), source, game).size()
+                - sourcePermanent.getAttachments().stream().map(game::getPermanent).filter(permanent -> permanent != null
+                && permanent.hasSubtype(SubType.AURA, game)).count());
         while (controller.canRespond()
                 && countBattlefield > 0
                 && controller.chooseUse(Outcome.Benefit, "Attach an Aura from the battlefield?", source, game)) {
             Target targetAura = new TargetPermanent(filterAura);
             targetAura.withNotTarget(true);
-            if (!controller.choose(Outcome.Benefit, targetAura, source, game)) { continue; }
+            if (!controller.choose(Outcome.Benefit, targetAura, source, game)) {
+                continue;
+            }
 
             Permanent aura = game.getPermanent(targetAura.getFirstTarget());
-            if (aura == null) { continue; }
+            if (aura == null) {
+                continue;
+            }
 
             Target target = aura.getSpellAbility().getTargets().get(0);
-            if (target == null) { continue; }
+            if (target == null) {
+                continue;
+            }
 
             fromBattlefield.add(aura);
             filterAura.add(Predicates.not(new CardIdPredicate(aura.getId())));
 
-            countBattlefield = game.getBattlefield().getActivePermanents(filterAura, source.getControllerId(), source, game).size() - sourcePermanent.getAttachments().size();
+            countBattlefield = (int) (game.getBattlefield().getActivePermanents(filterAura, source.getControllerId(), source, game).size()
+                    - sourcePermanent.getAttachments().stream().map(game::getPermanent).filter(permanent -> permanent != null
+                    && permanent.hasSubtype(SubType.AURA, game)).count());
         }
 
         int countHand = controller.getHand().count(filterAuraCard, game);
@@ -125,13 +134,19 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 && countHand > 0
                 && controller.chooseUse(Outcome.Benefit, "Attach an Aura from your hand?", source, game)) {
             TargetCard targetAura = new TargetCard(Zone.HAND, filterAuraCard);
-            if (!controller.choose(Outcome.Benefit, controller.getHand(), targetAura, source, game)) { continue; }
+            if (!controller.choose(Outcome.Benefit, controller.getHand(), targetAura, source, game)) {
+                continue;
+            }
 
             Card aura = game.getCard(targetAura.getFirstTarget());
-            if (aura == null) { continue; }
+            if (aura == null) {
+                continue;
+            }
 
             Target target = aura.getSpellAbility().getTargets().get(0);
-            if (target == null) { continue; }
+            if (target == null) {
+                continue;
+            }
             fromHandGraveyard.add(aura);
             filterAuraCard.add(Predicates.not(new CardIdPredicate(aura.getId())));
 
@@ -143,13 +158,19 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
                 && countGraveyard > 0
                 && controller.chooseUse(Outcome.Benefit, "Attach an Aura from your graveyard?", source, game)) {
             TargetCard targetAura = new TargetCard(Zone.GRAVEYARD, filterAuraCard);
-            if (!controller.choose(Outcome.Benefit, controller.getGraveyard(), targetAura, source, game)) { continue; }
+            if (!controller.choose(Outcome.Benefit, controller.getGraveyard(), targetAura, source, game)) {
+                continue;
+            }
 
             Card aura = game.getCard(targetAura.getFirstTarget());
-            if (aura == null) { continue; }
+            if (aura == null) {
+                continue;
+            }
 
             Target target = aura.getSpellAbility().getTargets().get(0);
-            if (target == null) { continue; }
+            if (target == null) {
+                continue;
+            }
 
             fromHandGraveyard.add(aura);
             filterAuraCard.add(Predicates.not(new CardIdPredicate(aura.getId())));
@@ -168,7 +189,9 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect {
 
         // Move cards
         for (Card aura : fromHandGraveyard) {
-            if (aura == null) { continue; }
+            if (aura == null) {
+                continue;
+            }
 
             game.getState().setValue("attachTo:" + aura.getId(), sourcePermanent);
             controller.moveCards(aura, Zone.BATTLEFIELD, source, game);

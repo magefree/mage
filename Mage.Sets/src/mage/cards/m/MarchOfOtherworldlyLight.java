@@ -44,8 +44,8 @@ public final class MarchOfOtherworldlyLight extends CardImpl {
         this.getSpellAbility().addEffect(new ExileTargetEffect(
                 "exile target artifact, creature, or enchantment with mana value X or less"
         ));
-        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
         this.getSpellAbility().addTarget(new TargetPermanent(filter2));
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
     }
 
     private MarchOfOtherworldlyLight(final MarchOfOtherworldlyLight card) {

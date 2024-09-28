@@ -30,7 +30,7 @@ public final class KamiOfTerribleSecrets extends CardImpl {
         // When Kami of Terrible Secrets enters the battlefield, if you control an artifact and an enchantment, you draw a card and you gain 1 life.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
-                ControlArtifactAndEnchantmentCondition.instance, "When {this} enters the battlefield, " +
+                ControlArtifactAndEnchantmentCondition.instance, "When {this} enters, " +
                 "if you control an artifact and an enchantment, you draw a card and you gain 1 life."
         );
         ability.addEffect(new GainLifeEffect(1));

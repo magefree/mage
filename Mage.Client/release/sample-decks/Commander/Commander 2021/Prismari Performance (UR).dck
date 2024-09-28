@@ -1,0 +1,85 @@
+1 [CMM:72] Aether Gale
+1 [M15:44] Aetherspouts
+1 [M19:129] Apex of Power
+1 [ELD:331] Arcane Signet
+1 [ISD:130] Blasphemous Act
+1 [BFZ:229] Blighted Cataract
+1 [MMQ:61] Brainstorm
+1 [RIX:94] Brass's Bounty
+1 [EVE:98] Call the Skybreaker
+1 [ISD:134] Charmbreaker Devils
+1 [ELD:333] Command Tower
+1 [GRN:163] Crackling Drake
+1 [C21:376] Creative Technique
+1 [OTC:93] Dazzling Sphinx
+1 [HOU:170] Desert of the Fervent
+1 [HOU:173] Desert of the Mindful
+1 [KTK:36] Dig Through Time
+1 [GTC:33] Diluvian Primordial
+1 [C21:165] Dualcaster Mage
+1 [STX:182] Elemental Masterpiece
+1 [C21:403] Elementalist's Palette
+1 [RTR:159] Epic Experiment
+1 [GRN:98] Erratic Cyclops
+1 [RIX:100] Etali, Primal Storm
+1 [CON:142] Exotic Orchard
+1 [STX:186] Expressive Iteration
+1 [DKA:87] Faithless Looting
+1 [C21:378] Fiery Encore
+1 [CON:63] Fiery Fall
+1 [ONS:317] Forgotten Cave
+1 [BFZ:223] Hedron Archive
+1 [FRF:104] Humble Defector
+1 [C21:379] Inferno Project
+1 [WHO:216] Inspiring Refrain
+10 [OTJ:273] Island
+1 [CLU:239] Izzet Boilerworks
+1 [CLU:224] Izzet Signet
+1 [DOM:132] Jaya Ballard
+1 [STX:256] Letter of Acceptance
+1 [DTK:61] Living Lore
+1 [ONS:320] Lonely Sandbar
+1 [ORI:249] Mage-Ring Network
+1 [5DN:75] Mana Geyser
+1 [DOM:243] Memorial to Genius
+1 [KLD:56] Metallurgic Summonings
+1 [10E:335] Mind Stone
+1 [SCG:41] Mind's Desire
+9 [BLB:274] Mountain
+1 [C21:28] Muse Vortex
+1 [M3C:358] Myriad Landscape
+1 [DOM:59] Naru Meha, Master Wizard
+1 [OTC:103] Octavia, Living Thesis
+1 [M12:73] Ponder
+1 [STX:270] Prismari Campus
+1 [ORI:236] Pyromancer's Goggles
+1 [C21:381] Radiant Performer
+1 [C21:400] Reinterpret
+1 [M19:254] Reliquary Tower
+1 [STX:51] Resculpt
+1 [C21:382] Rionya, Fire Dancer
+1 [STX:227] Rootha, Mercurial Artist
+1 [OTC:178] Rousing Refrain
+1 [HOU:182] Scavenger Grounds
+1 [9ED:216] Seething Song
+1 [5DN:36] Serum Visions
+1 [DMU:255] Shivan Reef
+1 [CLB:736] Sly Instigator
+1 [SUM:274] Sol Ring
+1 [STX:115] Storm-Kiln Artist
+1 [C21:80] Study Hall
+1 [XLN:165] Sunbird's Invocation
+1 [C21:385] Surge to Victory
+1 [HOU:50] Swarm Intelligence
+1 [M3C:308] Talisman of Creativity
+1 [M13:72] Talrand, Sky Summoner
+1 [M21:252] Temple of Epiphany
+1 [SCG:143] Temple of the False God
+1 [CON:36] Traumatic Visions
+1 [KTK:59] Treasure Cruise
+1 [OTC:248] Veyran, Voice of Duality
+1 [DTK:167] Volcanic Vision
+1 [SCD:170] Wildfire Devils
+SB: 1 [C21:331] Zaffai, Thunder Conductor
+LAYOUT MAIN:(1,7)(CARD_TYPE,false,55)|([ELD:331],[C21:403],[BFZ:223],[CLU:224],[STX:256],[10E:335],[ORI:236],[SUM:274],[M3C:308])([ISD:134],[GRN:163],[OTC:93],[GTC:33],[C21:165],[GRN:98],[RIX:100],[FRF:104],[C21:379],[DTK:61],[DOM:59],[OTC:103],[C21:381],[C21:382],[STX:227],[CLB:736],[STX:115],[M13:72],[OTC:248],[SCD:170])([KLD:56],[XLN:165],[HOU:50])([M15:44],[MMQ:61],[KTK:36],[CON:63],[C21:400],[STX:51],[9ED:216],[CON:36])([BFZ:229],[ELD:333],[HOU:170],[HOU:173],[CON:142],[ONS:317],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[CLU:239],[ONS:320],[ORI:249],[DOM:243],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[M3C:358],[STX:270],[M19:254],[HOU:182],[DMU:255],[C21:80],[M21:252],[SCG:143])([DOM:132])([CMM:72],[M19:129],[ISD:130],[RIX:94],[EVE:98],[C21:376],[STX:182],[RTR:159],[STX:186],[DKA:87],[C21:378],[WHO:216],[5DN:75],[SCG:41],[C21:28],[M12:73],[OTC:178],[5DN:36],[C21:385],[KTK:59],[DTK:167])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([C21:331])

@@ -25,6 +25,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Afterlife Insurance", 23, Rarity.UNCOMMON, mage.cards.a.AfterlifeInsurance.class));
         cards.add(new SetCardInfo("Ajani's Pridemate", 52, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
         cards.add(new SetCardInfo("Angel of Vitality", 53, Rarity.UNCOMMON, mage.cards.a.AngelOfVitality.class));
+        cards.add(new SetCardInfo("Apothecary White", 1, Rarity.RARE, mage.cards.a.ApothecaryWhite.class));
         cards.add(new SetCardInfo("Azorius Arrester", 54, Rarity.COMMON, mage.cards.a.AzoriusArrester.class));
         cards.add(new SetCardInfo("Azorius Chancery", 229, Rarity.COMMON, mage.cards.a.AzoriusChancery.class));
         cards.add(new SetCardInfo("Azorius Guildgate", 230, Rarity.COMMON, mage.cards.a.AzoriusGuildgate.class));
@@ -81,6 +82,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Duskmantle Seer", 188, Rarity.MYTHIC, mage.cards.d.DuskmantleSeer.class));
         cards.add(new SetCardInfo("Duskshell Crawler", 161, Rarity.COMMON, mage.cards.d.DuskshellCrawler.class));
         cards.add(new SetCardInfo("Ecstatic Electromancer", 31, Rarity.UNCOMMON, mage.cards.e.EcstaticElectromancer.class));
+        cards.add(new SetCardInfo("Emissary Green", 5, Rarity.RARE, mage.cards.e.EmissaryGreen.class));
         cards.add(new SetCardInfo("Enforcer Griffin", 60, Rarity.COMMON, mage.cards.e.EnforcerGriffin.class));
         cards.add(new SetCardInfo("Enraged Ceratok", 162, Rarity.UNCOMMON, mage.cards.e.EnragedCeratok.class));
         cards.add(new SetCardInfo("Erratic Visionary", 85, Rarity.COMMON, mage.cards.e.ErraticVisionary.class));

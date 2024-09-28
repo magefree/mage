@@ -21,7 +21,7 @@ public final class RiveteersInitiate extends CardImpl {
     public RiveteersInitiate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.CITIZEN);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

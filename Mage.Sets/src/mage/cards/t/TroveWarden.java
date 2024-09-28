@@ -45,7 +45,7 @@ public final class TroveWarden extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // Landfall — Whenever a land enters the battlefield under your control, exile target permanent card with converted mana cost 3 or less from your graveyard.
+        // Landfall — Whenever a land you control enters, exile target permanent card with converted mana cost 3 or less from your graveyard.
         Ability ability = new LandfallAbility(new ExileTargetForSourceEffect());
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

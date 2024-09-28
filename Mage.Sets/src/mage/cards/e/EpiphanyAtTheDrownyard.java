@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.RevealAndSeparatePilesEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public final class EpiphanyAtTheDrownyard extends CardImpl {
 
-    private static final DynamicValue xValue = new IntPlusDynamicValue(1, ManacostVariableValue.REGULAR);
+    private static final DynamicValue xValue = new IntPlusDynamicValue(1, GetXValue.instance);
 
     public EpiphanyAtTheDrownyard(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{U}");

@@ -28,7 +28,7 @@ public class ExileTargetTest extends CardTestCommander4Players {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
         //addTarget(playerA, "Balduvian Bears"); // disable to activate AI target choose
 
-        //setStrictChooseMode(true); // disable strict mode to activate AI for choosing
+        setStrictChooseMode(false); // disable strict mode to activate AI for choosing
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 

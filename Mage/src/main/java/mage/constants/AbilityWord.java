@@ -25,6 +25,7 @@ public enum AbilityWord {
     DESCEND_4("Descend 4"),
     DESCEND_8("Descend 8"),
     DOMAIN("Domain"),
+    EERIE("Eerie"),
     EMINENCE("Eminence"),
     ENRAGE("Enrage"),
     FATEFUL_HOUR("Fateful hour"),
@@ -54,10 +55,12 @@ public enum AbilityWord {
     SECRET_COUNCIL("Secret council"),
     SPELL_MASTERY("Spell mastery"),
     STRIVE("Strive"),
+    SURVIVAL("Survival"),
     SWEEP("Sweep"),
     TEMPTING_OFFER("Tempting offer"),
     THRESHOLD("Threshold"),
     UNDERGROWTH("Undergrowth"),
+    VALIANT("Valiant"),
     WILL_OF_THE_COUNCIL("Will of the council"),
     WILL_OF_THE_PLANESWALKERS("Will of the planeswalkers");
 

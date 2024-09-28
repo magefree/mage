@@ -21,7 +21,7 @@ public final class HonorTheGodPharaoh extends CardImpl {
         this.getSpellAbility().addCost(new DiscardCardCost(false));
 
         // Draw two cards. Amass 1.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("draw two cards"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
         this.getSpellAbility().addEffect(new AmassEffect(1, SubType.ZOMBIE));
     }
 
