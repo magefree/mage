@@ -44,8 +44,8 @@ public final class MarchOfBurgeoningLife extends CardImpl {
 
         // Choose target creature with mana value less than X. Search your library for a creature card with the same name as that creature, put it onto the battlefield tapped, then shuffle.
         this.getSpellAbility().addEffect(new MarchOfBurgeoningLifeEffect());
-        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.FEWER_THAN));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.FEWER_THAN));
     }
 
     private MarchOfBurgeoningLife(final MarchOfBurgeoningLife card) {

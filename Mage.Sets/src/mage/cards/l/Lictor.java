@@ -36,7 +36,7 @@ public final class Lictor extends CardImpl {
         // Pheromone Trail -- When Lictor enters the battlefield, if a creature entered the battlefield under an opponent's control this turn, create a 3/3 green Tyranid Warrior creature token with trample.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TyranidWarriorToken())),
-                LictorCondition.instance, "When {this} enters the battlefield, " +
+                LictorCondition.instance, "When {this} enters, " +
                 "if a creature entered the battlefield under an opponent's control this turn, " +
                 "create a 3/3 green Tyranid Warrior creature token with trample."
         ).withFlavorWord("Pheromone Trail"), new CreatureEnteredControllerWatcher());

@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
@@ -22,7 +22,7 @@ public final class Starstorm extends CardImpl {
 
 
         // Starstorm deals X damage to each creature.
-        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, new FilterCreaturePermanent()));
         // Cycling {3}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}")));
     }

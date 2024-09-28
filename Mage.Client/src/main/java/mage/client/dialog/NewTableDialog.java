@@ -35,7 +35,7 @@ public class NewTableDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(NewTableDialog.class);
 
-    private CustomOptionsDialog customOptions;
+    private final CustomOptionsDialog customOptions;
     private TableView table;
     private UUID playerId;
     private UUID roomId;
@@ -45,14 +45,11 @@ public class NewTableDialog extends MageDialog {
 
     private static final String LIMITED = "Limited";
 
-    /**
-     * Creates new form NewTableDialog
-     */
     public NewTableDialog() {
         lastSessionId = "";
         initComponents();
         this.customOptions = new CustomOptionsDialog(CustomOptionsDialog.SaveLoadKeys.TABLE, btnCustomOptions);
-        MageFrame.getDesktop().add(customOptions, JLayeredPane.MODAL_LAYER);
+        MageFrame.getDesktop().add(customOptions, customOptions.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         player1Panel.showLevel(false);
         this.spnNumWins.setModel(new SpinnerNumberModel(1, 1, 5, 1));
         this.spnQuitRatio.setModel(new SpinnerNumberModel(100, 0, 100, 5));
@@ -480,11 +477,18 @@ public class NewTableDialog extends MageDialog {
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.table = null;
         this.playerId = null;
-        this.hideDialog();
+        doClose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnPreviousConfigurationActionPerformed(java.awt.event.ActionEvent evt, int i) {//GEN-FIRST:event_btnPreviousConfigurationActionPerformed
     }//GEN-LAST:event_btnPreviousConfigurationActionPerformed
+
+    private void doClose() {
+        if (this.customOptions.isVisible()) {
+            this.customOptions.hideDialog();
+        }
+        this.hideDialog();
+    }
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
 
@@ -524,7 +528,7 @@ public class NewTableDialog extends MageDialog {
                     DeckImporter.importDeckFromFile(this.player1Panel.getDeckFile(), true),
                     this.txtPassword.getText())) {
                 // all fine, can close create dialog (join dialog will be opened after feedback from server)
-                this.hideDialog();
+                doClose();
                 return;
             }
         } catch (ClassNotFoundException | IOException ex) {
@@ -786,9 +790,9 @@ public class NewTableDialog extends MageDialog {
         this.repaint();
     }
 
-    private void handleError(Exception ex) {
-        logger.fatal("Error loading deck", ex);
-        MageFrame.getInstance().showErrorDialog("Error loading deck", ex.getMessage());
+    private void handleError(Exception e) {
+        logger.fatal("Can't join table due " + e, e);
+        MageFrame.getInstance().showErrorDialog("CLIENT - error on join table", e);
     }
 
     public void showDialog(UUID roomId) {

@@ -14,13 +14,12 @@ import mage.constants.CastManaAdjustment;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.card.OwnerIdPredicate;
+import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInOpponentsGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -29,6 +28,8 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class DiluvianPrimordial extends CardImpl {
+
+    private static final FilterCard filter = new FilterInstantOrSorceryCard("instant or sorcery card from that player's graveyard");
 
     public DiluvianPrimordial(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
@@ -40,9 +41,10 @@ public final class DiluvianPrimordial extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Diluvian Primordial enters the battlefield, for each opponent, you may cast up to one target instant or sorcery card from that  player's graveyard without paying its mana cost. If a card cast this way would be put into a graveyard this turn, exile it instead.
+        // When Diluvian Primordial enters the battlefield, for each opponent, you may cast up to one target instant or sorcery card from that player's graveyard without paying its mana cost. If a card cast this way would be put into a graveyard this turn, exile it instead.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DiluvianPrimordialEffect(), false);
-        ability.setTargetAdjuster(DiluvianPrimordialAdjuster.instance);
+        ability.addTarget(new TargetCardInOpponentsGraveyard(0, 1, filter));
+        ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster(true));
         this.addAbility(ability);
     }
 
@@ -53,27 +55,6 @@ public final class DiluvianPrimordial extends CardImpl {
     @Override
     public DiluvianPrimordial copy() {
         return new DiluvianPrimordial(this);
-    }
-}
-
-enum DiluvianPrimordialAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent == null) {
-                continue;
-            }
-            FilterCard filter = new FilterCard("instant or sorcery card from "
-                    + opponent.getLogName() + "'s graveyard");
-            filter.add(new OwnerIdPredicate(opponentId));
-            filter.add(Predicates.or(CardType.INSTANT.getPredicate(), CardType.SORCERY.getPredicate()));
-            TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(0, 1, filter);
-            ability.addTarget(target);
-        }
     }
 }
 

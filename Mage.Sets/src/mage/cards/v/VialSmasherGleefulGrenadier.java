@@ -38,7 +38,7 @@ public final class VialSmasherGleefulGrenadier extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Whenever another outlaw enters the battlefield under your control, Vial Smasher, Gleeful Grenadier deals 1 damage to target opponent.
+        // Whenever another outlaw you control enters, Vial Smasher, Gleeful Grenadier deals 1 damage to target opponent.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new DamageTargetEffect(1), filter);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

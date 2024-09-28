@@ -79,7 +79,7 @@ class RamsesAssassinLordTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return RamsesAssassinLordWatcher.check(event.getTargetId(), getSourceId(), game);
+        return RamsesAssassinLordWatcher.check(event.getTargetId(), getControllerId(), game);
     }
 
     @Override

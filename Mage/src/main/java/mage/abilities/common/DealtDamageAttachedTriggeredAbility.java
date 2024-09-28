@@ -1,17 +1,15 @@
-
 package mage.abilities.common;
-
-import java.util.UUID;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author LoneFox
@@ -27,7 +25,7 @@ public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
     public DealtDamageAttachedTriggeredAbility(Zone zone, Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever enchanted creature is dealt damage, ");
+        setTriggerPhrase(getWhen() + "enchanted creature is dealt damage, ");
     }
 
     protected DealtDamageAttachedTriggeredAbility(final DealtDamageAttachedTriggeredAbility ability) {

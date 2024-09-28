@@ -8,10 +8,11 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 public final class FeatherToken extends TokenImpl {
 
-    private static final FilterCard filter = new FilterCard("Phoenix card");
+    private static final FilterCard filter = new FilterCard("Phoenix card from your graveyard");
 
     static {
         filter.add(SubType.PHOENIX.getPredicate());
@@ -25,6 +26,7 @@ public final class FeatherToken extends TokenImpl {
                 new ReturnFromGraveyardToBattlefieldTargetEffect(true), new GenericManaCost(1)
         );
         ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 

@@ -27,7 +27,7 @@ public final class OakheartDryads extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Constellation - Whenever Oakheart Dryads or another enchantment enters the battlefield under your control, target creature gets +1/+1 until end of turn.
+        // Constellation - Whenever Oakheart Dryads or another enchantment you control enters, target creature gets +1/+1 until end of turn.
         Ability ability = new ConstellationAbility(new BoostTargetEffect(1,1, Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

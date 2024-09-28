@@ -30,8 +30,8 @@ public final class CurseOfTheSwine extends CardImpl {
         this.getSpellAbility().addEffect(new CurseOfTheSwineEffect());
 
         // Correct number of targets will be set in adjustTargets
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
 
     }
 
@@ -94,7 +94,7 @@ class CurseOfTheSwineEffect extends OneShotEffect {
                             playersWithTargets.getOrDefault(lkiP.getControllerId(), 0) + 1);
                 }
             }
-            game.getState().processAction(game);
+            game.processAction();
             Boar2Token swineToken = new Boar2Token();
             for (Map.Entry<UUID, Integer> exiledByController : playersWithTargets.entrySet()) {
                 swineToken.putOntoBattlefield(exiledByController.getValue(), game, source, exiledByController.getKey());

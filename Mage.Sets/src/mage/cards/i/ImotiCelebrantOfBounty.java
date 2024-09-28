@@ -30,7 +30,7 @@ public final class ImotiCelebrantOfBounty extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{U}");
 
         this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);

@@ -36,7 +36,7 @@ public final class ZhalfirinLancer extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever another Knight enters the battlefield under your control, Zhalfirin Lancer gets +1/+1 and gains vigilance until end of turn.
+        // Whenever another Knight you control enters, Zhalfirin Lancer gets +1/+1 and gains vigilance until end of turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn)
                         .setText("{this} gets +1/+1"), filter

@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -9,8 +8,6 @@ import mage.abilities.effects.common.PreventAllDamageByAllPermanentsEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -21,6 +18,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -82,8 +81,7 @@ class RevealingWindEffect extends OneShotEffect {
                 if (controller.chooseTarget(outcome, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
-                        Cards cards = new CardsImpl(card);
-                        controller.lookAtCards(sourceObject.getName(), cards, game);
+                        controller.lookAtCards(sourceObject.getName(), card, game);
                         game.informPlayers(controller.getLogName() + " look at a face-down attacking creature");
                     }
                 }

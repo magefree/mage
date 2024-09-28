@@ -1,0 +1,80 @@
+1 [KTK:2] Abzan Falconer
+1 [KTK:3] Ainok Bond-Kin
+1 [AVR:1] Angel of Glory's Rise
+1 [ELD:331] Arcane Signet
+1 [ISD:170] Avacyn's Pilgrim
+1 [LTC:162] Bastion Protector
+1 [NPH:103] Beast Within
+1 [WWK:97] Bestial Menace
+1 [RNA:123] Biogenic Upgrade
+1 [BFZ:233] Blighted Woodland
+1 [BFZ:234] Canopy Vista
+1 [MIC:24] Celebrate the Harvest
+1 [MIC:43] Celestial Judgment
+1 [AVR:171] Champion of Lambholt
+1 [FRF:8] Citadel Siege
+1 [M19:9] Cleansing Nova
+1 [ELD:333] Command Tower
+1 [MIC:25] Curse of Clinging Webs
+1 [MIC:44] Curse of Conformity
+1 [VOC:82] Custodi Soulbinders
+1 [MID:216] Dawnhart Wardens
+1 [ISD:9] Dearly Departed
+1 [RTR:121] Death's Presence
+1 [FRF:12] Elite Scaleguard
+1 [DTK:222] Enduring Scalelord
+1 [5DN:86] Eternal Witness
+1 [CON:142] Exotic Orchard
+12 [OTJ:276] Forest
+1 [SOI:274] Fortified Village
+1 [ROE:186] Growth Spasm
+1 [GTC:123] Gyre Sage
+1 [AVR:24] Herald of War
+1 [EMN:185] Heron's Grace Champion
+1 [MIC:26] Heronblade Elite
+1 [RAV:21] Hour of Reckoning
+1 [DTK:191] Inspiring Call
+1 [CSP:130] Juniper Order Ranger
+1 [ISD:189] Kessig Cagebreakers
+1 [ORI:21] Knight of the White Orchid
+1 [JUD:141] Krosan Verge
+1 [MIC:27] Kurbis, Harvest Celebrant
+1 [MIC:4] Kyler, Sigardian Emissary
+1 [AER:162] Lifecrafter's Bestiary
+1 [ISD:23] Mikaeus, the Lunarch
+1 [MID:255] Moonsilver Key
+1 [MIC:45] Moorland Rescuer
+1 [M3C:358] Myriad Landscape
+1 [M13:23] Odric, Master Tactician
+1 [MKC:77] Orzhov Advokist
+1 [M3C:363] Path of Ancestry
+12 [OTJ:272] Plains
+1 [TSP:39] Return to Dust
+1 [AVR:33] Riders of Gavony
+1 [ORI:250] Rogue's Passage
+1 [LCC:255] Ruinous Intrusion
+1 [CLU:246] Selesnya Sanctuary
+1 [FRF:138] Shamanic Revelation
+1 [MIC:46] Sigarda's Vanguard
+1 [SOI:250] Sigarda, Heron's Grace
+1 [MIC:29] Sigardian Zealot
+1 [SUM:274] Sol Ring
+1 [MIC:30] Somberwald Beastmaster
+1 [AVR:194] Somberwald Sage
+1 [MIC:47] Stalwart Pathlighter
+1 [ODY:328] Sungrass Prairie
+1 [M12:219] Swiftfoot Boots
+1 [ICE:54] Swords to Plowshares
+1 [MRD:257] Talisman of Unity
+1 [THB:248] Temple of Plenty
+1 [SCG:143] Temple of the False God
+1 [DGM:110] Trostani's Summoner
+1 [RNA:29] Unbreakable Formation
+1 [KLD:172] Verdurous Gearhulk
+1 [THB:289] Victory's Envoy
+1 [MIC:10] Wall of Mourning
+1 [RTR:139] Wild Beastmaster
+1 [UDS:124] Yavimaya Elder
+SB: 1 [MIC:1] Leinore, Autumn Sovereign
+LAYOUT MAIN:(1,7)(CARD_TYPE,false,61)|([KLD:172])([ELD:331],[AER:162],[MID:255],[SUM:274],[M12:219],[MRD:257])([KTK:2],[KTK:3],[AVR:1],[ISD:170],[LTC:162],[AVR:171],[VOC:82],[MID:216],[ISD:9],[FRF:12],[DTK:222],[5DN:86],[GTC:123],[AVR:24],[EMN:185],[MIC:26],[CSP:130],[ISD:189],[ORI:21],[MIC:27],[MIC:4],[ISD:23],[MIC:45],[M13:23],[MKC:77],[AVR:33],[MIC:46],[SOI:250],[MIC:29],[MIC:30],[AVR:194],[MIC:47],[DGM:110],[THB:289],[MIC:10],[RTR:139],[UDS:124])([FRF:8],[MIC:25],[MIC:44],[RTR:121])([NPH:103],[DTK:191],[TSP:39],[LCC:255],[ICE:54],[RNA:29])([BFZ:233],[BFZ:234],[ELD:333],[CON:142],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[SOI:274],[JUD:141],[M3C:358],[M3C:363],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[ORI:250],[CLU:246],[ODY:328],[THB:248],[SCG:143])([WWK:97],[RNA:123],[MIC:24],[MIC:43],[M19:9],[ROE:186],[RAV:21],[FRF:138])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([MIC:1])

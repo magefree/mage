@@ -83,20 +83,27 @@ public final class TransformedImageCache {
         GraphicsConfiguration gc = gs.getDefaultConfiguration();
 
         BufferedImage result = gc.createCompatibleImage(newWidth, newHeight, Transparency.TRANSLUCENT);
-        Graphics2D g = result.createGraphics();
-        g.translate((newWidth - width) / 2, (newHeight - height) / 2);
-        g.rotate(angle, width / 2, height / 2);
-        g.drawRenderedImage(image, null);
-        g.dispose();
+        Graphics2D g2 = result.createGraphics();
+        try {
+            g2.translate((newWidth - width) / 2, (newHeight - height) / 2);
+            g2.rotate(angle, width / 2, height / 2);
+            g2.drawRenderedImage(image, null);
+        } finally {
+            g2.dispose();
+        }
+
         return result;
     }
 
     private static BufferedImage resizeImage(BufferedImage original, int width, int height) {
         Image scaled = original.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         BufferedImage output = new BufferedImage(width, height, original.getType());
-        Graphics2D graphics = output.createGraphics();
-        graphics.drawImage(scaled, 0, 0, null);
-        graphics.dispose();
+        Graphics2D g2 = output.createGraphics();
+        try {
+            g2.drawImage(scaled, 0, 0, null);
+        } finally {
+            g2.dispose();
+        }
         return output;
     }
 

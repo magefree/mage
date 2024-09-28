@@ -53,8 +53,8 @@ public final class RuthlessTechnomancer extends CardImpl {
                 new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new SacrificeXTargetCost(filter, false, 1));
-        ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
         this.addAbility(ability);
     }
 

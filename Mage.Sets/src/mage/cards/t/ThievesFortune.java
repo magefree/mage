@@ -16,7 +16,7 @@ import mage.constants.SubType;
 public final class ThievesFortune extends CardImpl {
 
     public ThievesFortune(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.INSTANT}, "{2}{U}");
         this.subtype.add(SubType.ROGUE);
 
         // Prowl {U}

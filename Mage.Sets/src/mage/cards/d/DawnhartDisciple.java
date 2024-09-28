@@ -32,7 +32,7 @@ public final class DawnhartDisciple extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another Human enters the battlefield under your control, Dawnhart Disciple gets +1/+1 until end of turn.
+        // Whenever another Human you control enters, Dawnhart Disciple gets +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter
         ));

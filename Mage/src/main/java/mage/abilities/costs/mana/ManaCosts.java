@@ -19,9 +19,11 @@ public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
 
     List<VariableCost> getVariableCosts();
 
+    /**
+     *
+     * @return if the mana cost contains an X - note that this is specifically for *mana* X costs
+     */
     boolean containsX();
-
-    int getX();
 
     /**
      * @param xValue final X value -- announced X * xMultiplier, where xMultiplier can be changed by replace events like Unbound Flourishing)

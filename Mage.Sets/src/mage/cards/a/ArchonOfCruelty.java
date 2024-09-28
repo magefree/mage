@@ -40,7 +40,7 @@ public final class ArchonOfCruelty extends CardImpl {
         ability.addTarget(new TargetOpponent());
         ability.addEffect(new DiscardTargetEffect(1, false).setText(", discards a card"));
         ability.addEffect(new LoseLifeTargetEffect(3).setText(", and loses 3 life."));
-        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("You"));
+        ability.addEffect(new DrawCardSourceControllerEffect(1, true));
         ability.addEffect(new GainLifeEffect(3).setText("and gain 3 life"));
         this.addAbility(ability);
     }

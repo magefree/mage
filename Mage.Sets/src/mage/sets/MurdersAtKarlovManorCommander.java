@@ -160,6 +160,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lonis, Cryptozoologist", 215, Rarity.RARE, mage.cards.l.LonisCryptozoologist.class));
         cards.add(new SetCardInfo("Loran of the Third Path", 71, Rarity.RARE, mage.cards.l.LoranOfTheThirdPath.class));
         cards.add(new SetCardInfo("Martial Impetus", 72, Rarity.UNCOMMON, mage.cards.m.MartialImpetus.class));
+        cards.add(new SetCardInfo("Marvo, Deep Operative", 7, Rarity.MYTHIC, mage.cards.m.MarvoDeepOperative.class));
         cards.add(new SetCardInfo("Massacre Wurm", 130, Rarity.MYTHIC, mage.cards.m.MassacreWurm.class));
         cards.add(new SetCardInfo("Master of Death", 216, Rarity.RARE, mage.cards.m.MasterOfDeath.class));
         cards.add(new SetCardInfo("Master of Pearls", 73, Rarity.RARE, mage.cards.m.MasterOfPearls.class));
@@ -197,6 +198,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Orzhov Advokist", 77, Rarity.UNCOMMON, mage.cards.o.OrzhovAdvokist.class));
         cards.add(new SetCardInfo("Otherworldly Gaze", 115, Rarity.COMMON, mage.cards.o.OtherworldlyGaze.class));
         cards.add(new SetCardInfo("Overseer of the Damned", 132, Rarity.RARE, mage.cards.o.OverseerOfTheDamned.class));
+        cards.add(new SetCardInfo("Panoptic Projektor", 44, Rarity.RARE, mage.cards.p.PanopticProjektor.class));
         cards.add(new SetCardInfo("Path of Ancestry", 279, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Path to Exile", 78, Rarity.UNCOMMON, mage.cards.p.PathToExile.class));
         cards.add(new SetCardInfo("Phyrexian Arena", 133, Rarity.RARE, mage.cards.p.PhyrexianArena.class));

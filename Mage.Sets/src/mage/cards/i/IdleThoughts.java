@@ -10,6 +10,7 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.Zone;
 
 /**
@@ -24,7 +25,7 @@ public final class IdleThoughts extends CardImpl {
 
         // {2}: Draw a card if you have no cards in hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalOneShotEffect(
-                new DrawCardSourceControllerEffect(2), new CardsInHandCondition(), "Draw a card if you have no cards in hand"), new ManaCostsImpl<>("{2}")));
+                new DrawCardSourceControllerEffect(2), new CardsInHandCondition(ComparisonType.EQUAL_TO, 0), "Draw a card if you have no cards in hand"), new ManaCostsImpl<>("{2}")));
     }
 
     private IdleThoughts(final IdleThoughts card) {

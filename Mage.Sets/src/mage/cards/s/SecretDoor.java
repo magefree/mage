@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +31,7 @@ public final class SecretDoor extends CardImpl {
         // {4}{U}: Venture into the dungeon. Activate only as a sorcery.
         this.addAbility(new ActivateAsSorceryActivatedAbility(
                 new VentureIntoTheDungeonEffect(), new ManaCostsImpl<>("{4}{U}")
-        ));
+        ).addHint(CurrentDungeonHint.instance));
     }
 
     private SecretDoor(final SecretDoor card) {

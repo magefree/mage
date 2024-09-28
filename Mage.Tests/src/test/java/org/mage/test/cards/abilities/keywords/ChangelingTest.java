@@ -150,8 +150,9 @@ public class ChangelingTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Merfolk Trickster");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Merfolk Trickster");
-        // Game-Trail Changeling autochosen
+        addTarget(playerA, "Game-Trail Changeling");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.watchers.common.CelebrationWatcher;
+import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 import java.util.UUID;
 
@@ -37,7 +37,7 @@ public final class GallantPieWielder extends CardImpl {
                 new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance()),
                 CelebrationCondition.instance, "{this} has double strike as long as two or " +
                 "more nonland permanents entered the battlefield under your control this turn"
-        )).addHint(CelebrationCondition.getHint()).setAbilityWord(AbilityWord.CELEBRATION), new CelebrationWatcher());
+        )).addHint(CelebrationCondition.getHint()).setAbilityWord(AbilityWord.CELEBRATION), new PermanentsEnteredBattlefieldWatcher());
     }
 
     private GallantPieWielder(final GallantPieWielder card) {

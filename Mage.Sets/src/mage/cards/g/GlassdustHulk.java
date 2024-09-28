@@ -36,7 +36,7 @@ public final class GlassdustHulk extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
 
-        // Whenever another artifact enters the battlefield under your control, Glassdust Hulk gets +1/+1 until end of turn and can't be blocked this turn.
+        // Whenever another artifact you control enters, Glassdust Hulk gets +1/+1 until end of turn and can't be blocked this turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter);
         ability.addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn).setText("and can't be blocked this turn"));
         this.addAbility(ability);

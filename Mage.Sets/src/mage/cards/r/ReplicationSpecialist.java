@@ -40,7 +40,7 @@ public final class ReplicationSpecialist extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever a nontoken artifact enters the battlefield under your control, you may pay {1}{U}. If you do, create a token that's a copy of that artifact.
+        // Whenever a nontoken artifact you control enters, you may pay {1}{U}. If you do, create a token that's a copy of that artifact.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DoIfCostPaid(

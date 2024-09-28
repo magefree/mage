@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class MistformWarchief extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("Creature spells you cast that share a creature type with {this}");
 
     static {
         filter.add(new MistformWarchiefPredicate());
@@ -41,7 +41,6 @@ public final class MistformWarchief extends CardImpl {
         // Creature spells you cast that share a creature type with Mistform Warchief cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(
                 new SpellsCostReductionControllerEffect(filter, 1)
-                        .setText("Creature spells you cast that share a creature type with {this} cost {1} less to cast")
         ));
 
         // {tap}: Mistform Warchief becomes the creature type of your choice until end of turn.

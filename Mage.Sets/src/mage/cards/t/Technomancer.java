@@ -1,23 +1,28 @@
 package mage.cards.t;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -80,17 +85,16 @@ class TechnomancerEffect extends OneShotEffect {
 
 class TechnomancerTarget extends TargetCardInYourGraveyard {
 
-    private static final FilterCard filter = new FilterCreatureCard(
+    private static final FilterCard filterStatic = new FilterCreatureCard(
             "artifact creature cards with total mana value 6 or less from your graveyard"
     );
 
     static {
-        filter.add(CardType.ARTIFACT.getPredicate());
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 7));
+        filterStatic.add(CardType.ARTIFACT.getPredicate());
     }
 
     TechnomancerTarget() {
-        super(0, Integer.MAX_VALUE, filter, true);
+        super(0, Integer.MAX_VALUE, filterStatic, true);
     }
 
     private TechnomancerTarget(final TechnomancerTarget target) {
@@ -104,15 +108,26 @@ class TechnomancerTarget extends TargetCardInYourGraveyard {
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(controllerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        return card != null &&
-                this.getTargets()
-                        .stream()
-                        .map(game::getCard)
-                        .mapToInt(Card::getManaValue)
-                        .sum() + card.getManaValue() <= 6;
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, MageObject::getManaValue, 6, game);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this.getTargets(),
+                super.possibleTargets(sourceControllerId, source, game),
+                MageObject::getManaValue, 6, game);
+    }
+
+    @Override
+    public String getMessage(Game game) {
+        // shows selected total
+        int selectedValue = this.getTargets().stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .mapToInt(MageObject::getManaValue)
+                .sum();
+        return super.getMessage(game) + " (selected total mana value " + selectedValue + ")";
     }
 }

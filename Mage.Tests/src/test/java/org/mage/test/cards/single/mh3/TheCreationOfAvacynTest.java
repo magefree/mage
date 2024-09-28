@@ -83,7 +83,7 @@ public class TheCreationOfAvacynTest extends CardTestPlayerBase {
 
     @Test
     public void test_StrionicResonator_DoubleCreature() {
-        //setStrictChooseMode(true); // targetting the first saga ability is difficult in test
+        setStrictChooseMode(false); // targetting the first saga ability is difficult in test
 
         // {2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy.
         addCard(Zone.BATTLEFIELD, playerA, "Strionic Resonator");
@@ -111,7 +111,7 @@ public class TheCreationOfAvacynTest extends CardTestPlayerBase {
 
     @Test
     public void test_StrionicResonator_CreatureAndPermanent() {
-        //setStrictChooseMode(true); // targetting the first saga ability is difficult in test
+        setStrictChooseMode(false); // targetting the first saga ability is difficult in test
 
         // {2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy.
         addCard(Zone.BATTLEFIELD, playerA, "Strionic Resonator");
@@ -139,7 +139,7 @@ public class TheCreationOfAvacynTest extends CardTestPlayerBase {
 
     @Test
     public void test_StrionicResonator_CreatureAndSpell() {
-        //setStrictChooseMode(true); // targetting the first saga ability is difficult in test
+        setStrictChooseMode(false); // targetting the first saga ability is difficult in test
 
         // {2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy.
         addCard(Zone.BATTLEFIELD, playerA, "Strionic Resonator");

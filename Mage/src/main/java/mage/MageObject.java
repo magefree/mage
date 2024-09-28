@@ -251,12 +251,12 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
         return getCardType(game).contains(CardType.PLANESWALKER);
     }
 
-    default boolean isTribal() {
-        return isTribal(null);
+    default boolean isKindred() {
+        return isKindred(null);
     }
 
-    default boolean isTribal(Game game) {
-        return getCardType(game).contains(CardType.TRIBAL);
+    default boolean isKindred(Game game) {
+        return getCardType(game).contains(CardType.KINDRED);
     }
 
     default boolean isBattle() {
@@ -567,10 +567,10 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
     }
 
     default boolean shareCreatureTypes(Game game, MageObject otherCard) {
-        if (!isCreature(game) && !isTribal(game)) {
+        if (!isCreature(game) && !isKindred(game)) {
             return false;
         }
-        if (!otherCard.isCreature(game) && !otherCard.isTribal(game)) {
+        if (!otherCard.isCreature(game) && !otherCard.isKindred(game)) {
             return false;
         }
         boolean isAllA = this.isAllCreatureTypes(game);

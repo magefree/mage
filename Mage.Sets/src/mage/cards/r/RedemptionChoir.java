@@ -45,7 +45,7 @@ public final class RedemptionChoir extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldOrAttacksSourceTriggeredAbility(
                         new ReturnFromGraveyardToBattlefieldTargetEffect()
-                ), CovenCondition.instance, "Whenever {this} enters the battlefield or attacks, " +
+                ), CovenCondition.instance, "Whenever {this} enters or attacks, " +
                 "if you control three or more creatures with different powers, " +
                 "return target permanent card with mana value 3 or less from your graveyard to the battlefield."
         );

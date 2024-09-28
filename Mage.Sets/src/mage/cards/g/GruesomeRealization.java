@@ -22,7 +22,7 @@ public final class GruesomeRealization extends CardImpl {
 
         // Choose one --
         // * You draw two cards and you lose 2 life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("you draw two cards"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2, true));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and"));
 
         // * Creatures your opponents control get -1/-1 until end of turn.

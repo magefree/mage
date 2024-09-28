@@ -11,7 +11,7 @@ import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.watchers.common.CelebrationWatcher;
+import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 import java.util.UUID;
 
@@ -32,7 +32,7 @@ public final class ArmoryMice extends CardImpl {
                 new BoostSourceEffect(0, 2, Duration.WhileOnBattlefield),
                 CelebrationCondition.instance, "{this} gets +0/+2 as long as two or more " +
                 "nonland permanents entered the battlefield under your control this turn"
-        )).addHint(CelebrationCondition.getHint()).setAbilityWord(AbilityWord.CELEBRATION), new CelebrationWatcher());
+        )).addHint(CelebrationCondition.getHint()).setAbilityWord(AbilityWord.CELEBRATION), new PermanentsEnteredBattlefieldWatcher());
     }
 
     private ArmoryMice(final ArmoryMice card) {

@@ -38,7 +38,7 @@ public final class CracklingSpellslinger extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new NextSpellCastHasAbilityEffect(new StormAbility(), filter)),
                 CastFromEverywhereSourceCondition.instance,
-                "When {this} enters the battlefield, if you cast it, "
+                "When {this} enters, if you cast it, "
                         + "the next instant or sorcery spell you cast this turn has storm"
         ));
     }

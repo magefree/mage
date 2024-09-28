@@ -32,7 +32,7 @@ public final class FugitiveDruid extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Fugitive Druid becomes the target of an Aura spell, you draw a card.
-        this.addAbility(new BecomesTargetSourceTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), filter));
+        this.addAbility(new BecomesTargetSourceTriggeredAbility(new DrawCardSourceControllerEffect(1, true), filter));
     }
 
     private FugitiveDruid(final FugitiveDruid card) {

@@ -7,6 +7,7 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import mage.util.DebugUtil;
 import mage.util.JarVersion;
 import org.apache.log4j.Logger;
 
@@ -39,22 +40,26 @@ public final class RepositoryUtil {
         logger.info(" - emblems: " + TokenRepository.instance.getByType(TokenType.EMBLEM).size());
         logger.info(" - planes: " + TokenRepository.instance.getByType(TokenType.PLANE).size());
         logger.info(" - dungeons: " + TokenRepository.instance.getByType(TokenType.DUNGEON).size());
+
+        if (DebugUtil.DATABASE_SHOW_CACHE_AND_MEMORY_STATS_ON_STARTUP) {
+            CardRepository.instance.printDatabaseStats("on startup");
+        }
     }
 
     public static boolean isDatabaseObsolete(ConnectionSource connectionSource, String entityName, long version) throws SQLException {
         TableUtils.createTableIfNotExists(connectionSource, DatabaseVersion.class);
-        Dao<DatabaseVersion, Object> dbVersionDao = DaoManager.createDao(connectionSource, DatabaseVersion.class);
+        Dao<DatabaseVersion, Object> versionDao = DaoManager.createDao(connectionSource, DatabaseVersion.class);
 
-        QueryBuilder<DatabaseVersion, Object> queryBuilder = dbVersionDao.queryBuilder();
+        QueryBuilder<DatabaseVersion, Object> queryBuilder = versionDao.queryBuilder();
         queryBuilder.where().eq("entity", new SelectArg(entityName))
                 .and().eq("version", new SelectArg(version));
-        List<DatabaseVersion> dbVersions = dbVersionDao.query(queryBuilder.prepare());
+        List<DatabaseVersion> dbVersions = versionDao.query(queryBuilder.prepare());
 
         if (dbVersions.isEmpty()) {
             DatabaseVersion dbVersion = new DatabaseVersion();
             dbVersion.setEntity(entityName);
             dbVersion.setVersion(version);
-            dbVersionDao.create(dbVersion);
+            versionDao.create(dbVersion);
         }
         return dbVersions.isEmpty();
     }
@@ -68,48 +73,48 @@ public final class RepositoryUtil {
         }
 
         TableUtils.createTableIfNotExists(connectionSource, DatabaseBuild.class);
-        Dao<DatabaseBuild, Object> dbBuildDao = DaoManager.createDao(connectionSource, DatabaseBuild.class);
+        Dao<DatabaseBuild, Object> buildDao = DaoManager.createDao(connectionSource, DatabaseBuild.class);
 
-        QueryBuilder<DatabaseBuild, Object> queryBuilder = dbBuildDao.queryBuilder();
+        QueryBuilder<DatabaseBuild, Object> queryBuilder = buildDao.queryBuilder();
         queryBuilder.where().eq("entity", new SelectArg(entityName))
                 .and().eq("last_build", new SelectArg(currentBuild));
-        List<DatabaseBuild> dbBuilds = dbBuildDao.query(queryBuilder.prepare());
+        List<DatabaseBuild> dbBuilds = buildDao.query(queryBuilder.prepare());
 
         if (dbBuilds.isEmpty()) {
             DatabaseBuild dbBuild = new DatabaseBuild();
             dbBuild.setEntity(entityName);
             dbBuild.setLastBuild(currentBuild);
-            dbBuildDao.create(dbBuild);
+            buildDao.create(dbBuild);
         }
         return dbBuilds.isEmpty();
     }
 
     public static void updateVersion(ConnectionSource connectionSource, String entityName, long version) throws SQLException {
         TableUtils.createTableIfNotExists(connectionSource, DatabaseVersion.class);
-        Dao<DatabaseVersion, Object> dbVersionDao = DaoManager.createDao(connectionSource, DatabaseVersion.class);
+        Dao<DatabaseVersion, Object> versionDao = DaoManager.createDao(connectionSource, DatabaseVersion.class);
 
-        QueryBuilder<DatabaseVersion, Object> queryBuilder = dbVersionDao.queryBuilder();
+        QueryBuilder<DatabaseVersion, Object> queryBuilder = versionDao.queryBuilder();
         queryBuilder.where().eq("entity", new SelectArg(entityName));
-        List<DatabaseVersion> dbVersions = dbVersionDao.query(queryBuilder.prepare());
+        List<DatabaseVersion> dbVersions = versionDao.query(queryBuilder.prepare());
 
         if (!dbVersions.isEmpty()) {
-            DeleteBuilder<DatabaseVersion, Object> deleteBuilder = dbVersionDao.deleteBuilder();
+            DeleteBuilder<DatabaseVersion, Object> deleteBuilder = versionDao.deleteBuilder();
             deleteBuilder.where().eq("entity", new SelectArg(entityName));
             deleteBuilder.delete();
         }
         DatabaseVersion databaseVersion = new DatabaseVersion();
         databaseVersion.setEntity(entityName);
         databaseVersion.setVersion(version);
-        dbVersionDao.create(databaseVersion);
+        versionDao.create(databaseVersion);
     }
 
     public static long getDatabaseVersion(ConnectionSource connectionSource, String entityName) throws SQLException {
         TableUtils.createTableIfNotExists(connectionSource, DatabaseVersion.class);
-        Dao<DatabaseVersion, Object> dbVersionDao = DaoManager.createDao(connectionSource, DatabaseVersion.class);
+        Dao<DatabaseVersion, Object> versionDao = DaoManager.createDao(connectionSource, DatabaseVersion.class);
 
-        QueryBuilder<DatabaseVersion, Object> queryBuilder = dbVersionDao.queryBuilder();
+        QueryBuilder<DatabaseVersion, Object> queryBuilder = versionDao.queryBuilder();
         queryBuilder.where().eq("entity", new SelectArg(entityName));
-        List<DatabaseVersion> dbVersions = dbVersionDao.query(queryBuilder.prepare());
+        List<DatabaseVersion> dbVersions = versionDao.query(queryBuilder.prepare());
         if (dbVersions.isEmpty()) {
             return 0;
         } else {

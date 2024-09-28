@@ -20,6 +20,7 @@ public class Commander extends AbstractCommander {
         banned.add("Braids, Cabal Minion");
         banned.add("Channel");
         banned.add("Coalition Victory");
+        banned.add("Dockside Extortionist");
         banned.add("Emrakul, the Aeons Torn");
         banned.add("Erayo, Soratami Ascendant");
         banned.add("Fastbond");
@@ -29,17 +30,20 @@ public class Commander extends AbstractCommander {
         banned.add("Griselbrand");
         banned.add("Hullbreacher");
         banned.add("Iona, Shield of Emeria");
+        banned.add("Jeweled Lotus");
         banned.add("Jihad");
         banned.add("Karakas");
         banned.add("Leovold, Emissary of Trest");
         banned.add("Library of Alexandria");
         banned.add("Limited Resources");
         banned.add("Lutri, the Spellchaser");
+        banned.add("Mana Crypt");
         banned.add("Mox Emerald");
         banned.add("Mox Jet");
         banned.add("Mox Pearl");
         banned.add("Mox Ruby");
         banned.add("Mox Sapphire");
+        banned.add("Nadu, Winged Wisdom");
         banned.add("Panoptic Mirror");
         banned.add("Paradox Engine");
         banned.add("Primeval Titan");

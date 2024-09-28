@@ -8,6 +8,7 @@ import mage.abilities.condition.common.SourceAttackingAloneCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +36,8 @@ public final class YuanTiMalison extends CardImpl {
         )));
 
         // Whenever Yuan-Ti Malison deals combat damage to a player, venture into the dungeon.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new VentureIntoTheDungeonEffect(), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new VentureIntoTheDungeonEffect(), false)
+                .addHint(CurrentDungeonHint.instance));
     }
 
     private YuanTiMalison(final YuanTiMalison card) {

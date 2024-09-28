@@ -3,6 +3,7 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +28,8 @@ public final class PlanarAlly extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Planar Ally attacks, venture into the dungeon.
-        this.addAbility(new AttacksTriggeredAbility(new VentureIntoTheDungeonEffect(), false));
+        this.addAbility(new AttacksTriggeredAbility(new VentureIntoTheDungeonEffect(), false)
+                .addHint(CurrentDungeonHint.instance));
     }
 
     private PlanarAlly(final PlanarAlly card) {

@@ -11,6 +11,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
@@ -36,10 +37,10 @@ public final class RebelSalvo extends CardImpl {
         // Affinity for Equipment
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new AffinityEffect(filter)).addHint(hint));
 
-        // Rebel Salvo deals 5 damage to target creature or planeswalker. That permanent loses indestructible unil end of turn.
+        // Rebel Salvo deals 5 damage to target creature or planeswalker. That permanent loses indestructible until end of turn.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
-        this.getSpellAbility().addEffect(new LoseAbilityTargetEffect(IndestructibleAbility.getInstance())
+        this.getSpellAbility().addEffect(new LoseAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn)
                 .setText("that permanent loses indestructible until end of turn"));
     }
 

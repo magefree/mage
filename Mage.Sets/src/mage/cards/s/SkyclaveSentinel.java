@@ -44,10 +44,10 @@ public final class SkyclaveSentinel extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
 
-        // If Skyclave Sentinel was kicked, it enters the battlefield with two +1/+1 counters on it.
+        // If Skyclave Sentinel was kicked, it enters with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.ONCE,
-                "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it.", ""
+                "If {this} was kicked, it enters with two +1/+1 counters on it.", ""
         ));
 
         // As long as Skyclave Sentinel has a +1/+1 counter on it, it can attack as though it didn't have defender.

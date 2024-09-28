@@ -268,16 +268,6 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     }
 
     @Override
-    public int getX() {
-        int amount = 0;
-        List<VariableCost> variableCosts = getVariableCosts();
-        if (!variableCosts.isEmpty()) {
-            amount = variableCosts.get(0).getAmount();
-        }
-        return amount;
-    }
-
-    @Override
     public void setX(int xValue, int xPay) {
         List<VariableCost> variableCosts = getVariableCosts();
         if (!variableCosts.isEmpty()) {
@@ -428,10 +418,13 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                     game.undo(playerId);
                     this.clearPaid();
 
-                    // TODO: checks Word of Command with Unbound Flourishing's X multiplier
                     // TODO: checks Word of Command with {X}{X} cards
-                    int xValue = referenceCosts.getX();
-                    this.setX(xValue, xValue);
+                    int amount = 0;
+                    List<VariableCost> variableCosts = getVariableCosts();
+                    if (!variableCosts.isEmpty()) {
+                        amount = variableCosts.get(0).getAmount();
+                    }
+                    this.setX(amount, amount);
 
                     player.getManaPool().restoreMana(pool.getPoolBookmark());
                     game.bookmarkState();

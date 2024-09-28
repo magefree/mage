@@ -1,14 +1,14 @@
 
 package mage.cards.p;
 
-import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -21,9 +21,7 @@ public final class PoisonTheWell extends CardImpl {
 
         // Destroy target land. Poison the Well deals 2 damage to that land's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Effect effect = new DamageTargetControllerEffect(2);
-        effect.setText("{this} deals 2 damage to that land's controller");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DamageTargetControllerEffect(2, "land"));
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 

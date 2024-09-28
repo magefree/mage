@@ -16,7 +16,7 @@ import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.game.permanent.token.WraithToken;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -57,8 +57,8 @@ public final class InTheDarknessBindThem extends CardImpl {
                     ability.addEffect(new TheRingTemptsYouEffect());
 
                     ability.getEffects().setTargetPointer(new EachTargetPointer());
-                    ability.setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
                     ability.addTarget(new TargetCreaturePermanent(0,1));
+                    ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
                 }
         );
 

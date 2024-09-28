@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.PayCostToAttackBlockEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -45,7 +45,7 @@ public final class WarTax extends CardImpl {
 
 class WarTaxCantAttackUnlessPaysEffect extends PayCostToAttackBlockEffectImpl {
 
-    DynamicValue xCosts = ManacostVariableValue.REGULAR;
+    DynamicValue xCosts = GetXValue.instance;
 
     WarTaxCantAttackUnlessPaysEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral, RestrictType.ATTACK);

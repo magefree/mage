@@ -38,8 +38,8 @@ public final class RotHulk extends CardImpl {
         // When Rot Hulk enters the battlefield, return up to X target Zombie cards from your graveyard to the battlefield, where X is the number of opponents you have.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("return up to X target Zombie cards from your graveyard to the battlefield, where X is the number of opponents you have."));
-        ability.setTargetAdjuster(new TargetsCountAdjuster(OpponentsCount.instance));
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, filterZombie));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(OpponentsCount.instance));
         this.addAbility(ability);
     }
 

@@ -19,7 +19,7 @@ import java.util.*;
  */
 public class AddManaInAnyCombinationEffect extends ManaEffect {
 
-    private ArrayList<ColoredManaSymbol> manaSymbols = new ArrayList<>();
+    private List<ColoredManaSymbol> manaSymbols = new ArrayList<>();
     private final DynamicValue amount;
     private final DynamicValue netAmount;
 
@@ -43,21 +43,6 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
         this.amount = amount;
         this.staticText = setText();
         this.netAmount = netAmount;
-    }
-
-    public AddManaInAnyCombinationEffect(int amount, String text) {
-        this(amount);
-        this.staticText = text;
-    }
-
-    public AddManaInAnyCombinationEffect(int amount, String text, ColoredManaSymbol... coloredManaSymbols) {
-        this(amount, coloredManaSymbols);
-        this.staticText = text;
-    }
-
-    public AddManaInAnyCombinationEffect(DynamicValue amount, DynamicValue netAmount, String text, ColoredManaSymbol... coloredManaSymbols) {
-        this(amount, netAmount, coloredManaSymbols);
-        this.staticText = text;
     }
 
     protected AddManaInAnyCombinationEffect(final AddManaInAnyCombinationEffect effect) {

@@ -33,7 +33,7 @@ public final class CaptainStormCosmiumRaider extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever an artifact enters the battlefield under your control, put a +1/+1 on target Pirate you control.
+        // Whenever an artifact you control enters, put a +1/+1 on target Pirate you control.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 StaticFilters.FILTER_PERMANENT_ARTIFACT_AN

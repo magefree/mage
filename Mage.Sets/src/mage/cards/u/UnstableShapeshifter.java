@@ -8,7 +8,6 @@ import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import static mage.cards.u.UnstableShapeshifter.filterAnotherCreature;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
@@ -77,7 +76,7 @@ class UnstableShapeshifterEffect extends OneShotEffect {
         if (targetCreature != null && permanent != null) {
             Permanent blueprintPermanent = game.copyPermanent(Duration.Custom, targetCreature, permanent.getId(), source, new EmptyCopyApplier());
             blueprintPermanent.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                    new UnstableShapeshifterEffect(), filterAnotherCreature, false, SetTargetPointer.PERMANENT), source.getSourceId(), game);
+                    new UnstableShapeshifterEffect(), UnstableShapeshifter.filterAnotherCreature, false, SetTargetPointer.PERMANENT), source.getSourceId(), game);
             return true;
         }
         return false;

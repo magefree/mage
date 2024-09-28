@@ -56,7 +56,7 @@ public final class WingmantleChaplain extends CardImpl {
         // When Wingmantle Chaplain enters the battlefield, create a 1/1 white Bird creature token with flying for each creature with defender you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BirdToken(), xValue)));
 
-        // Whenever another creature with defender enters the battlefield under your control, create a 1/1 white Bird creature token with flying.
+        // Whenever another creature with defender you control enters, create a 1/1 white Bird creature token with flying.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new CreateTokenEffect(new BirdToken()), filter2));
     }
 

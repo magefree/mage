@@ -55,7 +55,7 @@ public final class BalduvianAtrocity extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BalduvianAtrocityEffect()),
                 KickedCondition.ONCE,
-                "When {this} enters the battlefield, if it was kicked, return target creature card with mana value 3 or less from your graveyard to the battlefield. It gains haste. Sacrifice it at the beginning of the next end step."
+                "When {this} enters, if it was kicked, return target creature card with mana value 3 or less from your graveyard to the battlefield. It gains haste. Sacrifice it at the beginning of the next end step."
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

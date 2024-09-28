@@ -13,6 +13,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInOpponentsGraveyard;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -64,7 +65,7 @@ class SufferThePastEffect extends OneShotEffect {
         if (you == null || targetPlayer == null) {
             return false;
         }
-        int numberToTarget = Math.min(targetPlayer.getGraveyard().size(), source.getManaCostsToPay().getX());
+        int numberToTarget = Math.min(targetPlayer.getGraveyard().size(), CardUtil.getSourceCostsTag(game, source, "X", 0));
         if (numberToTarget < 1) {
             return false;
         }

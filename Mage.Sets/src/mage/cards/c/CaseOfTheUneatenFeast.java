@@ -42,7 +42,7 @@ public final class CaseOfTheUneatenFeast extends CardImpl {
 
         this.subtype.add(SubType.CASE);
 
-        // Whenever a creature enters the battlefield under your control, you gain 1 life.
+        // Whenever a creature you control enters, you gain 1 life.
         Ability initialAbility = new EntersBattlefieldControlledTriggeredAbility(
                 new GainLifeEffect(1), StaticFilters.FILTER_PERMANENT_CREATURE);
         // To solve -- You've gained 5 or more life this turn.

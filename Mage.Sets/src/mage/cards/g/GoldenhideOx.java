@@ -26,7 +26,7 @@ public final class GoldenhideOx extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
-        // Constellation - Whenever Goldenhide Ox or another enchantment enters the battlefield under your control, target creature must be blocked this turn if able.
+        // Constellation - Whenever Goldenhide Ox or another enchantment you control enters, target creature must be blocked this turn if able.
         Ability ability = new ConstellationAbility(new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
