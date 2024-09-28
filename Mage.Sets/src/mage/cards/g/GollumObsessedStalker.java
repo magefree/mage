@@ -1,7 +1,6 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
@@ -40,15 +39,11 @@ public final class GollumObsessedStalker extends CardImpl {
         this.addAbility(new SkulkAbility());
 
         // At the beginning of your end step, each opponent dealt combat damage this game by a creature named Gollum, Obsessed Stalker loses life equal to the amount of life you gained this turn.
-        Ability ability = new BeginningOfYourEndStepTriggeredAbility(
-                new GollumObsessedStalkerEffect(),
-                false
-        );
+        Ability ability = new BeginningOfYourEndStepTriggeredAbility(new GollumObsessedStalkerEffect(), false);
         ability.addWatcher(new PlayerGainedLifeWatcher());
         ability.addWatcher(new GollumObsessedStalkerWatcher());
         ability.addHint(ControllerGainedLifeCount.getHint());
         ability.addHint(GollumObsessedStalkerHint.instance);
-
         this.addAbility(ability);
     }
 
@@ -64,8 +59,8 @@ public final class GollumObsessedStalker extends CardImpl {
 
 class GollumObsessedStalkerWatcher extends Watcher {
 
-    // For each creature name, the players damaged by them during combat.
-    private final Map<String, Set<UUID>> playersPerName = new HashMap<>();
+    // Players damaged by creatures named Gollum, Obsessed Stalker during combat.
+    private final Set<UUID> players = new HashSet<>();
 
     public GollumObsessedStalkerWatcher() {
         super(WatcherScope.GAME);
@@ -78,22 +73,14 @@ class GollumObsessedStalkerWatcher extends Watcher {
             return;
         }
         Permanent creature = game.getPermanent(event.getSourceId());
-        if (creature == null) {
-            return;
+        if (creature != null && creature.isCreature(game)
+                && creature.hasName("Gollum, Obsessed Stalker", game)) {
+            players.add(event.getPlayerId());
         }
-
-        String name = creature.getName();
-        UUID playerId = event.getPlayerId();
-        if (creature.getName().isEmpty() || playerId == null) {
-            return;
-        }
-
-        playersPerName.computeIfAbsent(name, k -> new HashSet<>());
-        playersPerName.get(name).add(playerId);
     }
 
-    public Set<UUID> getPlayersDamagedByNamed(String name) {
-        return playersPerName.getOrDefault(name, new HashSet<>());
+    public Set<UUID> getPlayersDamagedByNamed() {
+        return players;
     }
 }
 
@@ -101,8 +88,8 @@ class GollumObsessedStalkerEffect extends OneShotEffect {
 
     GollumObsessedStalkerEffect() {
         super(Outcome.LoseLife);
-        staticText = "each opponent dealt combat damage this game by a creature named "
-                + "{this} loses life equal to the amount of life you gained this turn.";
+        staticText = "each opponent dealt combat damage this game by a creature named " +
+                "Gollum, Obsessed Stalker loses life equal to the amount of life you gained this turn.";
     }
 
     private GollumObsessedStalkerEffect(final GollumObsessedStalkerEffect effect) {
@@ -118,14 +105,12 @@ class GollumObsessedStalkerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         GollumObsessedStalkerWatcher damageWatcher = game.getState().getWatcher(GollumObsessedStalkerWatcher.class);
         PlayerGainedLifeWatcher lifeWatcher = game.getState().getWatcher(PlayerGainedLifeWatcher.class);
-        Permanent gollum = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (damageWatcher == null || lifeWatcher == null || gollum == null) {
+        if (damageWatcher == null || lifeWatcher == null) {
             return false;
         }
 
-        String name = gollum.getName();
         int amount = lifeWatcher.getLifeGained(source.getControllerId());
-        Set<UUID> playersDamaged = damageWatcher.getPlayersDamagedByNamed(name);
+        Set<UUID> playersDamaged = damageWatcher.getPlayersDamagedByNamed();
 
         if (amount == 0 || playersDamaged.isEmpty()) {
             return true;
@@ -135,12 +120,10 @@ class GollumObsessedStalkerEffect extends OneShotEffect {
             if (!playersDamaged.contains(playerId)) {
                 continue;
             }
-
             Player player = game.getPlayer(playerId);
             if (player == null) {
                 continue;
             }
-
             player.loseLife(amount, game, source, false);
         }
 
@@ -153,39 +136,19 @@ enum GollumObsessedStalkerHint implements Hint {
 
     @Override
     public String getText(Game game, Ability ability) {
-        GollumObsessedStalkerWatcher watcher = game.getState().getWatcher(GollumObsessedStalkerWatcher.class);
-        if (watcher == null) {
-            return "";
-        }
-
-        String name = null;
-        Permanent gollum = game.getPermanentOrLKIBattlefield(ability.getSourceId());
-        if (gollum != null) {
-            // Gollum is or was in play, its name is using LKI.
-            name = gollum.getName();
-        } else {
-            // if Gollum LKI not in play (like in hand or in command zone),
-            // find the object.
-            MageObject gollumObj = game.getObject(ability.getSourceId());
-            if (gollumObj != null) {
-                name = gollumObj.getName();
-            }
-        }
-        if (name == null || name.isEmpty()) {
-            return "";
-        }
-
         // Not filtering by opponent intentionally, just to provide full info everywhere.
-        List<String> namesOfPlayersDealtDamage =
-                watcher.getPlayersDamagedByNamed(name)
-                       .stream()
-                       .map(game::getPlayer)
-                       .filter(Objects::nonNull)
-                       .map(Player::getName)
-                       .filter(n -> !n.isEmpty())
-                       .collect(Collectors.toList());
+        List<String> namesOfPlayersDealtDamage = game
+                .getState()
+                .getWatcher(GollumObsessedStalkerWatcher.class)
+                .getPlayersDamagedByNamed()
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .map(Player::getName)
+                .filter(n -> !n.isEmpty())
+                .collect(Collectors.toList());
 
-        return "Players dealt combat damage by creatures named " + name + " this game: ["
+        return "Players dealt combat damage by creatures named Gollum, Obsessed Stalker this game: ["
                 + String.join(", ", namesOfPlayersDealtDamage)
                 + "]";
     }

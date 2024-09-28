@@ -18,9 +18,7 @@ import mage.util.CardUtil;
 
 import java.util.Set;
 import java.util.UUID;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author LevelX2
@@ -75,13 +73,10 @@ class SphinxOfTheChimesTarget extends TargetCardInHand {
                     break;
                 }
                 Set<UUID> set = CardUtil
-                        .streamPairsWithMap(
+                        .streamAllPairwiseMatches(
                                 possibleTargets,
                                 (u1, u2) -> game.getCard(u1).sharesName(game.getCard(u2), game)
-                                        ? Stream.of(u1, u2)
-                                        : Stream.<UUID>empty()
                         )
-                        .flatMap(Function.identity())
                         .collect(Collectors.toSet());
                 possibleTargets.clear();
                 possibleTargets.addAll(set);

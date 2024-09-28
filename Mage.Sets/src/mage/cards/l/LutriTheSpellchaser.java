@@ -1,7 +1,6 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
@@ -20,11 +19,11 @@ import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.target.TargetSpell;
+import mage.util.CardUtil;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -84,14 +83,10 @@ enum LutriTheSpellchaserCompanionCondition implements CompanionCondition {
 
     @Override
     public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
-        Map<String, Integer> cardMap = new HashMap<>();
-        deck.stream()
+        Set<Card> cards = deck
+                .stream()
                 .filter(card -> !card.hasCardTypeForDeckbuilding(CardType.LAND))
-                .map(MageObject::getName)
-                .forEach(s -> {
-                    cardMap.putIfAbsent(s, 0);
-                    cardMap.compute(s, (str, i) -> i + 1);
-                });
-        return cardMap.values().stream().noneMatch(i -> i > 1);
+                .collect(Collectors.toSet());
+        return cards.size() == CardUtil.differentlyNamedAmongCollection(cards, null);
     }
 }

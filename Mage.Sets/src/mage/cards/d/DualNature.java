@@ -1,9 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
@@ -20,15 +17,18 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class DualNature extends CardImpl {
@@ -129,7 +129,7 @@ class DualNatureCreatureLeavesEffect extends OneShotEffect {
         if (creature != null) {
             FilterPermanent filter = new FilterPermanent();
             filter.add(TokenPredicate.TRUE);
-            filter.add(new NamePredicate(creature.getName()));
+            filter.add(new SharesNamePredicate(creature));
             new ExileAllEffect(filter).apply(game, source);
             return true;
         }

@@ -1,7 +1,5 @@
-
 package mage.cards.h;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -21,7 +19,6 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class HourOfGlory extends CardImpl {
@@ -63,28 +60,27 @@ class HourOfGloryEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (targetCreature != null) {
-                controller.moveCards(targetCreature, Zone.EXILED, source, game);
-                if (targetCreature.hasSubtype(SubType.GOD, game)) {
-                    game.processAction();
-                    Player targetController = game.getPlayer(targetCreature.getControllerId());
-                    if (targetController != null) {
-                        targetController.revealCards(sourceObject.getIdName(), targetController.getHand(), game);
-                        Set<Card> toExile = new HashSet<>();
-                        for (Card card : targetController.getHand().getCards(game)) {
-                            if (card.getName().equals(targetCreature.getName())) {
-                                toExile.add(card);
-                            }
-                        }
-                        targetController.moveCards(toExile, Zone.EXILED, source, game);
-                    }
-                }
-            }
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (controller == null || targetCreature == null) {
+            return false;
+        }
+        controller.moveCards(targetCreature, Zone.EXILED, source, game);
+        if (!targetCreature.hasSubtype(SubType.GOD, game)) {
             return true;
         }
-        return false;
+        game.processAction();
+        Player targetController = game.getPlayer(targetCreature.getControllerId());
+        if (targetController == null) {
+            return true;
+        }
+        targetController.revealCards(source, targetController.getHand(), game);
+        Set<Card> toExile = new HashSet<>();
+        for (Card card : targetController.getHand().getCards(game)) {
+            if (card.sharesName(targetCreature, game)) {
+                toExile.add(card);
+            }
+        }
+        targetController.moveCards(toExile, Zone.EXILED, source, game);
+        return true;
     }
 }

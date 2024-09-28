@@ -1,26 +1,29 @@
 package mage.cards.r;
 
-import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetOpponent;
-import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author jeffwadsworth
@@ -36,7 +39,6 @@ public final class ReapIntellect extends CardImpl {
         // same name as that card and exile them. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new ReapIntellectEffect());
         this.getSpellAbility().addTarget(new TargetOpponent());
-
     }
 
     private ReapIntellect(final ReapIntellect card) {
@@ -50,12 +52,6 @@ public final class ReapIntellect extends CardImpl {
 }
 
 class ReapIntellectEffect extends OneShotEffect {
-
-    private static final FilterCard filterNonLands = new FilterCard("up to X nonland cards");
-
-    static {
-        filterNonLands.add(Predicates.not(CardType.LAND.getPredicate()));
-    }
 
     public ReapIntellectEffect() {
         super(Outcome.Exile);
@@ -72,82 +68,51 @@ class ReapIntellectEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = game.getObject(source);
-        if (targetPlayer != null && sourceObject != null && controller != null) {
-
-            // reveal hand of target player
-            targetPlayer.revealCards(sourceObject.getName(), targetPlayer.getHand(), game);
-
-            // Chose cards to exile from hand
-            Cards exiledCards = new CardsImpl();
-            int xCost = Math.min(CardUtil.getSourceCostsTag(game, source, "X", 0), targetPlayer.getHand().size());
-            TargetCard target = new TargetCard(0, xCost, Zone.HAND, filterNonLands);
-            target.withNotTarget(true);
-            controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game);
-            for (UUID cardId : target.getTargets()) {
-                Card chosenCard = game.getCard(cardId);
-                if (chosenCard != null) {
-                    controller.moveCardToExileWithInfo(chosenCard, null, "", source, game, Zone.HAND, true);
-                    exiledCards.add(chosenCard);
-                }
-            }
-            // Exile other cards with the same name
-            // 4/15/2013  If you don't exile any cards from the player's hand, you don't search that player's library
-            if (!exiledCards.isEmpty()) {
-
-                // Building a card filter with all names
-                List<NamePredicate> names = new ArrayList<>();
-                FilterCard filterNamedCards = new FilterCard();
-                for (Card card : exiledCards.getCards(game)) {
-                    String nameToSearch = CardUtil.getCardNameForSameNameSearch(card);
-                    if (exiledCards.size() == 1) {
-                        filterNamedCards.add(new NamePredicate(nameToSearch));
-                    } else {
-                        names.add(new NamePredicate(nameToSearch));
-                    }
-                }
-                if (exiledCards.size() > 1) {
-                    filterNamedCards.add(Predicates.or(names));
-                }
-
-                // search cards in graveyard
-                TargetCardInGraveyard targetCardsGraveyard = new TargetCardInGraveyard(0, Integer.MAX_VALUE, filterNamedCards);
-                controller.chooseTarget(outcome, targetPlayer.getGraveyard(), targetCardsGraveyard, source, game);
-                for (UUID cardId : targetCardsGraveyard.getTargets()) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.GRAVEYARD, true);
-                    }
-                }
-
-                // search cards in hand
-                TargetCard targetCardsHand = new TargetCard(0, Integer.MAX_VALUE, Zone.HAND, filterNamedCards);
-                controller.chooseTarget(Outcome.Benefit, targetPlayer.getGraveyard(), targetCardsHand, source, game);
-                for (UUID cardId : targetCardsHand.getTargets()) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.HAND, true);
-                    }
-                }
-
-                // search cards in Library
-                TargetCardInLibrary targetCardsLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterNamedCards);
-                controller.searchLibrary(targetCardsLibrary, source, game, targetPlayer.getId());
-                for (UUID cardId : targetCardsLibrary.getTargets()) {
-                    Card card = game.getCard(cardId);
-                    if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.LIBRARY, true);
-                    }
-                }
-
-            }
-
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (controller == null || targetPlayer == null) {
+            return false;
+        }
+        targetPlayer.revealCards(source, targetPlayer.getHand(), game);
+        TargetCard target = new TargetCardInHand(
+                0,
+                GetXValue.instance.calculate(game, source, this),
+                StaticFilters.FILTER_CARDS_NON_LAND
+        );
+        controller.chooseTarget(Outcome.Benefit, targetPlayer.getHand(), target, source, game);
+        Cards exiledCards = new CardsImpl(target.getTargets());
+        controller.moveCards(exiledCards, Zone.EXILED, source, game);
+        exiledCards.retainZone(Zone.EXILED, game);
+        if (exiledCards.isEmpty()) {
             targetPlayer.shuffleLibrary(source, game);
             return true;
         }
-        return false;
+        FilterCard filterCard = new FilterCard("cards with the same name");
+        filterCard.add(Predicates.or(
+                exiledCards
+                        .getCards(game)
+                        .stream()
+                        .map(SharesNamePredicate::new)
+                        .collect(Collectors.toSet())
+        ));
+        exiledCards.clear();
+
+        TargetCardInGraveyard targetCardInGraveyard = new TargetCardInGraveyard(0, Integer.MAX_VALUE, filterCard, true);
+        controller.choose(Outcome.Exile, targetPlayer.getGraveyard(), targetCardInGraveyard, source, game);
+        exiledCards.addAll(targetCardInGraveyard.getTargets());
+
+        TargetCardInHand targetCardInHand = new TargetCardInHand(0, Integer.MAX_VALUE, filterCard);
+        controller.choose(Outcome.Exile, targetPlayer.getHand(), targetCardInHand, source, game);
+        exiledCards.addAll(targetCardInHand.getTargets());
+
+        TargetCardInLibrary targetCardInLibrary = new TargetCardInLibrary(0, Integer.MAX_VALUE, filterCard);
+        controller.searchLibrary(targetCardInLibrary, source, game, targetPlayer.getId());
+        for (UUID cardId : targetCardInLibrary.getTargets()) {
+            exiledCards.add(targetPlayer.getLibrary().getCard(cardId, game));
+        }
+
+        targetPlayer.shuffleLibrary(source, game);
+        return true;
     }
 
     @Override

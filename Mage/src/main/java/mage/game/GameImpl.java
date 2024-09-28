@@ -37,7 +37,7 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.LegendRuleAppliesPredicate;
 import mage.game.combat.Combat;
@@ -2869,7 +2869,7 @@ public abstract class GameImpl implements Game {
             for (Permanent legend : legendary) {
                 FilterPermanent filterLegendName = new FilterPermanent();
                 filterLegendName.add(SuperType.LEGENDARY.getPredicate());
-                filterLegendName.add(new NamePredicate(legend.getName()));
+                filterLegendName.add(new SharesNamePredicate(legend));
                 filterLegendName.add(new ControllerIdPredicate(legend.getControllerId()));
                 filterLegendName.add(LegendRuleAppliesPredicate.instance);
                 if (!getBattlefield().contains(filterLegendName, legend.getControllerId(), null, this, 2)) {

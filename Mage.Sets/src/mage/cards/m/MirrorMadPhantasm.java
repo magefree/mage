@@ -1,18 +1,13 @@
 
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -21,8 +16,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward
  */
 public final class MirrorMadPhantasm extends CardImpl {
@@ -74,7 +70,7 @@ class MirrorMadPhantasmEffect extends OneShotEffect {
                 Card phantasmCard = null;
                 for (Card card : owner.getLibrary().getCards(game)) {
                     cards.add(card);
-                    if (card.getName().equals("Mirror-Mad Phantasm")) {
+                    if (card.hasName("Mirror-Mad Phantasm", game)) {
                         phantasmCard = card;
                         break;
                     }

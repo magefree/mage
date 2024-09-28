@@ -58,6 +58,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -2169,6 +2170,19 @@ public final class CardUtil {
         return stream.filter(clazz::isInstance).map(clazz::cast).filter(Objects::nonNull);
     }
 
+    public static <T> boolean checkAnyPairs(Collection<T> collection, BiPredicate<T, T> predicate) {
+        return streamPairsWithMap(collection, (t1, t2) -> predicate.test(t1, t2)).anyMatch(x -> x);
+    }
+
+    public static <T> Stream<T> streamAllPairwiseMatches(Collection<T> collection, BiPredicate<T, T> predicate) {
+        return streamPairsWithMap(
+                collection,
+                (t1, t2) -> predicate.test(t1, t2)
+                        ? Stream.of(t1, t2)
+                        : Stream.<T>empty()
+        ).flatMap(Function.identity()).distinct();
+    }
+
     private static class IntPairIterator implements Iterator<AbstractMap.SimpleImmutableEntry<Integer, Integer>> {
         private final int amount;
         private int firstCounter = 0;
@@ -2201,13 +2215,7 @@ public final class CardUtil {
         }
     }
 
-    public static <T> boolean checkAnyPairs(Collection<T> collection, BiPredicate<T, T> predicate) {
-        return streamPairsWithMap(collection, (t1, t2) -> predicate.test(t1, t2)).anyMatch(x -> x);
-    }
-
-    public static <T, U> Stream<U> streamPairsWithMap(
-            Collection<T> collection,
-            BiFunction<T, T, U> function) {
+    public static <T, U> Stream<U> streamPairsWithMap(Collection<T> collection, BiFunction<T, T, U> function) {
         if (collection.size() < 2) {
             return Stream.empty();
         }

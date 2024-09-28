@@ -1,6 +1,5 @@
 package mage.cards.g;
 
-import java.util.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -28,8 +27,9 @@ import mage.target.targetpointer.FirstTargetPointer;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.*;
+
 /**
- *
  * @author LevelX2
  */
 public final class Godsend extends CardImpl {
@@ -201,7 +201,7 @@ class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
                 ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
                 if ((exileZone != null)) {
                     for (Card card : exileZone.getCards(game)) {
-                        if ((card.getName().equals(object.getName()))) {
+                        if ((card.sharesName(object, game))) {
                             return true;
                         }
                     }

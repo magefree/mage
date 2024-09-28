@@ -2,8 +2,12 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
+import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -11,19 +15,16 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterControlledArtifactPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.Token;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.util.functions.CopyTokenFunction;
+import mage.util.RandomUtil;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -37,14 +38,20 @@ public final class MechanizedProduction extends CardImpl {
         this.subtype.add(SubType.AURA);
 
         // Enchant artifact you control
-        TargetPermanent auraTarget = new TargetControlledPermanent(new FilterControlledArtifactPermanent());
+        TargetPermanent auraTarget = new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Copy));
-        Ability ability = new EnchantAbility(auraTarget);
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of your upkeep, create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MechanizedProductionEffect(), TargetController.YOU, false));
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                new MechanizedProductionEffect(), TargetController.YOU, false
+        );
+        ability.addEffect(new ConditionalOneShotEffect(
+                new WinGameSourceControllerEffect(), MechanizedProductionCondition.instance,
+                "Then if you control eight or more artifacts with the same name as one another, you win the game"
+        ));
+        this.addAbility(ability);
     }
 
     private MechanizedProduction(final MechanizedProduction card) {
@@ -61,7 +68,7 @@ class MechanizedProductionEffect extends OneShotEffect {
 
     MechanizedProductionEffect() {
         super(Outcome.Benefit);
-        this.staticText = "create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game";
+        this.staticText = "create a token that's a copy of enchanted artifact";
     }
 
     private MechanizedProductionEffect(final MechanizedProductionEffect effect) {
@@ -75,30 +82,40 @@ class MechanizedProductionEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        if (sourceObject != null && sourceObject.getAttachedTo() != null) {
-            Permanent enchantedArtifact = game.getPermanentOrLKIBattlefield(sourceObject.getAttachedTo());
-            if (enchantedArtifact != null) {
-                Token token = CopyTokenFunction.createTokenCopy(enchantedArtifact, game);
-                token.putOntoBattlefield(1, game, source, source.getControllerId());
-            }
-            Map<String, Integer> countNames = new HashMap<>();
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), source.getControllerId(), game)) {
-                int counter = countNames.getOrDefault(permanent.getName(), 0);
-                countNames.put(permanent.getName(), counter + 1);
-            }
-            for (Entry<String, Integer> entry : countNames.entrySet()) {
-                if (entry.getValue() > 7) {
-                    Player controller = game.getPlayer(source.getControllerId());
-                    if (controller != null) {
-                        game.informPlayers(controller.getLogName() + " controls eight or more artifacts with the same name as one another (" + entry.getKey() + ").");
-                        controller.won(game);
-                        return true;
-                    }
+        Permanent enchantedArtifact = Optional
+                .ofNullable(source.getSourcePermanentOrLKI(game))
+                .map(Permanent::getAttachedTo)
+                .map(game::getPermanentOrLKIBattlefield)
+                .orElse(null);
+        return enchantedArtifact != null
+                && new CreateTokenCopyTargetEffect()
+                .setSavedPermanent(enchantedArtifact)
+                .apply(game, source);
+    }
+}
+
+enum MechanizedProductionCondition implements Condition {
+    instance;
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Set<Permanent> artifacts = new HashSet<>(game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT,
+                source.getControllerId(), source, game
+        ));
+        while (artifacts.size() >= 8) {
+            Permanent artifact = RandomUtil.randomFromCollection(artifacts);
+            artifacts.remove(artifact);
+            int amount = 0;
+            for (Permanent permanent : artifacts) {
+                if (!permanent.sharesName(artifact, game)) {
+                    continue;
+                }
+                amount++;
+                if (amount >= 8) {
+                    return true;
                 }
             }
-            return true;
-
         }
         return false;
     }

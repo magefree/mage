@@ -1,35 +1,35 @@
 package mage.cards.s;
 
-import java.util.ArrayList;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.TapForManaAllTriggeredManaAbility;
 import mage.abilities.costs.common.RevealHandSourceControllerCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.mana.ManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.choices.Choice;
+import mage.choices.ChoiceColor;
 import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.players.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.abilities.effects.Effect;
-import mage.choices.Choice;
-import mage.choices.ChoiceColor;
 
 /**
  * @author LevelX2
@@ -143,14 +143,14 @@ class SasayasEssenceManaEffect extends ManaEffect {
         if (controller != null && producedMana != null && permanent != null) {
             FilterPermanent filter = new FilterLandPermanent();
             filter.add(Predicates.not(new PermanentIdPredicate(permanent.getId())));
-            filter.add(new NamePredicate(permanent.getName()));
+            filter.add(new SharesNamePredicate(permanent));
             int count = game.getBattlefield().countAll(filter, controller.getId(), game);
             if (count > 0) {
-               if (producedMana.getBlack() > 0) {
-                   netMana.add(Mana.BlackMana(count));
+                if (producedMana.getBlack() > 0) {
+                    netMana.add(Mana.BlackMana(count));
                 }
                 if (producedMana.getRed() > 0) {
-                   netMana.add(Mana.RedMana(count));
+                    netMana.add(Mana.RedMana(count));
                 }
                 if (producedMana.getBlue() > 0) {
                     netMana.add(Mana.BlueMana(count));
@@ -163,7 +163,7 @@ class SasayasEssenceManaEffect extends ManaEffect {
                 }
                 if (producedMana.getColorless() > 0) {
                     netMana.add(Mana.ColorlessMana(count));
-                }                
+                }
             }
         }
         return netMana;
@@ -174,12 +174,12 @@ class SasayasEssenceManaEffect extends ManaEffect {
      * RULINGS 6/1/2005 If Sasaya’s Essence’s controller has four Forests and
      * taps one of them for Green, the Essence will add GreenGreenGreen to that
      * player’s mana pool for a total of GreenGreenGreenGreen.
-     *
+     * <p>
      * 6/1/2005 If Sasaya’s Essence’s controller has four Mossfire Valley and
      * taps one of them for RedGreen, the Essence will add three mana (one for
      * each other Mossfire Valley) of any combination of Red and/or Green to
      * that player’s mana pool.
-     *
+     * <p>
      * 6/1/2005 If Sasaya’s Essence’s controller has two Brushlands and taps one
      * of them for White, Sasaya’s Essence adds another White to that player’s
      * mana pool. It won’t produce Green or Colorless unless the land was tapped
@@ -197,7 +197,7 @@ class SasayasEssenceManaEffect extends ManaEffect {
         if (controller != null && mana != null && permanent != null) {
             FilterPermanent filter = new FilterLandPermanent();
             filter.add(Predicates.not(new PermanentIdPredicate(permanent.getId())));
-            filter.add(new NamePredicate(permanent.getName()));
+            filter.add(new SharesNamePredicate(permanent));
             int count = game.getBattlefield().countAll(filter, controller.getId(), game);
             if (count > 0) {
                 Choice choice = new ChoiceColor(true);

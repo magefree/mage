@@ -65,16 +65,16 @@ class EscapedShapeshifterEffect extends ContinuousEffectImpl {
         if (sourcePermanent == null) {
             return false;
         }
-
         game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE,
                         source.getControllerId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
-                .filter(permanent -> !permanent.getName().equals("Escaped Shapeshifter"))
+                .filter(permanent -> !permanent.hasName("Escaped Shapeshifter", game))
                 .map(Permanent::getAbilities)
-                .flatMap(Collection::stream).filter(EscapedShapeshifterEffect::checkAbility)
+                .flatMap(Collection::stream)
+                .filter(EscapedShapeshifterEffect::checkAbility)
                 .forEach(ability -> sourcePermanent.addAbility(ability, source.getSourceId(), game));
         return true;
     }

@@ -155,7 +155,7 @@ class YidaroWanderingMonsterWatcher extends Watcher {
             return;
         }
         Card card = game.getCard(object.getSourceId());
-        if (card != null && "Yidaro, Wandering Monster".equals(card.getName())) {
+        if (card != null && card.hasName("Yidaro, Wandering Monster", game)) {
             countMap.merge(object.getControllerId(), 1, Integer::sum);
         }
     }

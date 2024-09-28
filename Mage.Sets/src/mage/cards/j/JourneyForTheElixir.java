@@ -1,6 +1,5 @@
 package mage.cards.j;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -131,12 +130,11 @@ class JourneyForTheElixirLibraryTarget extends TargetCardInLibrary {
                 .anyMatch(c -> c.isLand(game))) {
             return false;
         }
-        if (name.equals(card.getName())
+        if (card.hasName(name, game)
                 && cards
                 .getCards(game)
                 .stream()
-                .map(MageObject::getName)
-                .anyMatch(name::equals)) {
+                .anyMatch(c -> c.hasName(name, game))) {
             return false;
         }
         return true;
@@ -198,13 +196,12 @@ class JourneyForTheElixirGraveyardTarget extends TargetCardInYourGraveyard {
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .map(MageObject::getName)
-                .anyMatch(name::equals);
+                .anyMatch(card -> card.hasName(name, game));
         possibleTargets.removeIf(uuid -> {
             Card card = game.getCard(uuid);
             return card != null
                     && hasYanggu
-                    && name.equals(card.getName());
+                    && card.hasName(name, game);
         });
         return possibleTargets;
     }
