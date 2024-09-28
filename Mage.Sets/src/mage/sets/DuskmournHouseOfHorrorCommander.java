@@ -292,5 +292,6 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Yavimaya Coast", 327, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Yavimaya Elder", 208, Rarity.COMMON, mage.cards.y.YavimayaElder.class));
         cards.add(new SetCardInfo("Yedora, Grave Gardener", 209, Rarity.UNCOMMON, mage.cards.y.YedoraGraveGardener.class));
+        cards.add(new SetCardInfo("Zimone, Mystery Unraveler", 8, Rarity.MYTHIC, mage.cards.z.ZimoneMysteryUnraveler.class));
     }
 }
