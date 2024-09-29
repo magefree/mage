@@ -135,7 +135,7 @@ jobs:
                 });
 
               if (body.length > 65536) {
-                console.log(`Issue body for ${set[0]} (${set[1]}) too long! Length: ${body.length}`);
+                console.log(`Issue body for ${set[0]} (${set[1]}) too long! Length: ${body.length}. Attempting to trim down size...`);
                 const trimmedBody = mustache.render(cardIssueTemplate, {
                   hasUnimplementedCards: unimplemented.length > 0,
                   hasImplementedCards: implemented.length > 0,
@@ -144,8 +144,12 @@ jobs:
                   unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`
                 }).replaceAll("--", "-").replaceAll("https://", "").replaceAll(`+e:${set[1]}`, "");
                 console.log(`Trimmed body length: ${trimmedBody.length}`);
-                console.log(`${trimmedBody}`);
-                continue;
+                if (trimmedBody.length > 65536) {
+                  console.log(`Could not create issue for ${set[0]} (${set[1]}). Please track this manually.`);
+                  continue;
+                } else {
+                  body = trimmedBody;
+                }
               }
               
               if (foundIssue !== undefined) {
