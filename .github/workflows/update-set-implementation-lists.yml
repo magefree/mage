@@ -82,7 +82,7 @@ jobs:
               const unimplemented = [];
               const implemented = [];
               
-              cards.forEach(cardData => {
+              for (const cardData of cards) {
                 const className = toCamelCase(cardData[0].replace(/[+]/g, ' Plus ').replace(/[_]+/g, ' Blank ').replace(/[']/g, '').replace(/[-+,.!?`@#$%^&*()_=<>:";~\\|/]/g, ' '));
                 const cleanCardName = cardData[0].replace(/[-,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '').toLowerCase();
                 const cardPath = path.join('Mage.Sets', 'src', 'mage', 'cards', className.substring(0, 1), `${className.charAt(0).toUpperCase()+className.slice(1)}.java`);
@@ -109,8 +109,8 @@ jobs:
                     scryfall: `https://scryfall.com/search?q=!"${cleanCardName}"+e:${set[1]}`
                   });
                 }
-              });
-              const cleanCards = cards.map(card => card[0].replace(/[-,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '').toLowerCase());
+              }
+              
               if (foundIssue !== undefined) {
                 foundIssue.body = mustache.render(cardIssueTemplate, {
                   hasUnimplementedCards: unimplemented.length > 0,
