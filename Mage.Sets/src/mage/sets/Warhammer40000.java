@@ -224,6 +224,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("Scoured Barrens", 293, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Screamer-Killer", 84, Rarity.RARE, mage.cards.s.ScreamerKiller.class));
         cards.add(new SetCardInfo("Sculpting Steel", 247, Rarity.RARE, mage.cards.s.SculptingSteel.class));
+        cards.add(new SetCardInfo("Seeker of Slaanesh", 85, Rarity.UNCOMMON, mage.cards.s.SeekerOfSlaanesh.class));
         cards.add(new SetCardInfo("Shadow in the Warp", 140, Rarity.RARE, mage.cards.s.ShadowInTheWarp.class));
         cards.add(new SetCardInfo("Shard of the Nightbringer", 55, Rarity.RARE, mage.cards.s.ShardOfTheNightbringer.class));
         cards.add(new SetCardInfo("Shard of the Void Dragon", 56, Rarity.RARE, mage.cards.s.ShardOfTheVoidDragon.class));
@@ -265,6 +266,7 @@ public final class Warhammer40000 extends ExpansionSet {
         cards.add(new SetCardInfo("The Golden Throne", 157, Rarity.RARE, mage.cards.t.TheGoldenThrone.class));
         cards.add(new SetCardInfo("The Horus Heresy", 126, Rarity.RARE, mage.cards.t.TheHorusHeresy.class));
         cards.add(new SetCardInfo("The Lost and the Damned", 129, Rarity.UNCOMMON, mage.cards.t.TheLostAndTheDamned.class));
+        cards.add(new SetCardInfo("The Ruinous Powers", 139, Rarity.RARE, mage.cards.t.TheRuinousPowers.class));
         cards.add(new SetCardInfo("The Swarmlord", 4, Rarity.MYTHIC, mage.cards.t.TheSwarmlord.class));
         cards.add(new SetCardInfo("The War in Heaven", 69, Rarity.RARE, mage.cards.t.TheWarInHeaven.class));
         cards.add(new SetCardInfo("Their Name Is Death", 62, Rarity.RARE, mage.cards.t.TheirNameIsDeath.class));

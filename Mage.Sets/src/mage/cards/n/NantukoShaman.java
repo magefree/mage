@@ -41,7 +41,7 @@ public final class NantukoShaman extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0),
-                "When {this} enters the battlefield, if you control no tapped lands, draw a card.");
+                "When {this} enters, if you control no tapped lands, draw a card.");
         this.addAbility(ability);
 
         // Suspend 1-{2}{G}{G}

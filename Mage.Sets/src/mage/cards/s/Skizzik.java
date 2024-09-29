@@ -1,10 +1,11 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.effects.common.SacrificeSourceUnlessConditionEffect;
+import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -13,6 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,14 +32,19 @@ public final class Skizzik extends CardImpl {
 
         // Kicker {R}
         this.addAbility(new KickerAbility("{R}"));
+
         // Trample
         this.addAbility(TrampleAbility.getInstance());
+
         // Haste
         this.addAbility(HasteAbility.getInstance());
-        // At the beginning of the end step, sacrifice Skizzik unless it was kicked.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new SacrificeSourceUnlessConditionEffect(KickedCondition.ONCE)
-                        .setText("if {this} wasn't kicked, sacrifice it"), TargetController.NEXT, false));
+
+        // At the beginning of the end step, if Skizzik wasn't kicked, sacrifice it.
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
+                new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false),
+                new InvertCondition(KickedCondition.ONCE),
+                "At the beginning of the end step, if {this} wasn't kicked, sacrifice it"
+        ));
     }
 
     private Skizzik(final Skizzik card) {

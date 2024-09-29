@@ -54,7 +54,7 @@ public final class GoShintaiOfLifesOrigin extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 
-        // Whenever Go-Shintai of Life's Origin or another nontoken Shrine enters the battlefield under your control, create a 1/1 colorless Shrine enchantment creature token.
+        // Whenever Go-Shintai of Life's Origin or another nontoken Shrine you control enters, create a 1/1 colorless Shrine enchantment creature token.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new ShrineToken()),
                 filter2, false, true

@@ -43,7 +43,7 @@ public final class HuatliRadiantChampion extends CardImpl {
         ability2.addHint(CreaturesYouControlHint.instance);
         this.addAbility(ability2);
 
-        // -8: You get an emblem with "Whenever a creature enters the battlefield under your control, you may draw a card."
+        // -8: You get an emblem with "Whenever a creature you control enters, you may draw a card."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new HuatliRadiantChampionEmblem()), -8));
     }
 

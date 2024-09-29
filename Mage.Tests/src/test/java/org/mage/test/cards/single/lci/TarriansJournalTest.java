@@ -15,7 +15,7 @@ public class TarriansJournalTest extends CardTestPlayerBase {
     private static final String tj = "Tarrian's Journal";
     private static final String transformAbility = "{2}, {T}, Discard your hand: Transform";
     private static final String mayCastAbility = "{T}: You may cast a creature spell from your graveyard this turn. ";
-    // If you do, it enters the battlefield with a finality counter on it and is a Vampire in addition to its other types.
+    // If you do, it enters with a finality counter on it and is a Vampire in addition to its other types.
     private static final String edgarMarkov = "Edgar Markov";
     // Whenever you cast another Vampire spell, if Edgar Markov is in the command zone or on the battlefield, create a 1/1 black Vampire creature token.
     private static final String kraken = "Kraken Hatchling"; // not a vampire

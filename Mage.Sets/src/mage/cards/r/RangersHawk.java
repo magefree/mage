@@ -7,6 +7,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -49,6 +50,7 @@ public final class RangersHawk extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
+        ability.addHint(CurrentDungeonHint.instance);
         this.addAbility(ability);
     }
 

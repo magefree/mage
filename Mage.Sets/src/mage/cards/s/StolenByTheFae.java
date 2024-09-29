@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
@@ -23,10 +23,10 @@ public final class StolenByTheFae extends CardImpl {
         // Return target creature with converted mana cost X to its owner's hand. You create X 1/1 blue Faerie creature tokens with flying.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect()
                 .setText("Return target creature with mana value X to its owner's hand"));
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new FaerieToken(), ManacostVariableValue.REGULAR)
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new FaerieToken(), GetXValue.instance)
                 .setText("You create X 1/1 blue Faerie creature tokens with flying"));
-        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
     }
 
     private StolenByTheFae(final StolenByTheFae card) {

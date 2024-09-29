@@ -46,7 +46,7 @@ public final class AnnieFlashTheVeteran extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(true)),
                 CastFromEverywhereSourceCondition.instance,
-                "When {this} enters the battlefield, if you cast it, "
+                "When {this} enters, if you cast it, "
                         + "return target permanent card with mana value 3 or less from your graveyard to the battlefield tapped"
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));

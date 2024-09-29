@@ -1,11 +1,10 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -21,6 +20,9 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -90,7 +92,7 @@ class BaneFireEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        int damage = source.getManaCostsToPay().getX();
+        int damage = CardUtil.getSourceCostsTag(game, source, "X", 0);
         boolean preventable = damage < 5;
         if (targetPlayer != null) {
             targetPlayer.damage(damage, source.getSourceId(), source, game, false, preventable);
@@ -106,7 +108,7 @@ class BaneFireEffect extends OneShotEffect {
 
 class BanefireCantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
-    private Condition condition = new testCondition(ManacostVariableValue.REGULAR, 5);
+    private Condition condition = new testCondition(GetXValue.instance, 5);
 
     public BanefireCantCounterEffect() {
         super(Duration.WhileOnStack, Outcome.Benefit);

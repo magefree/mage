@@ -45,7 +45,7 @@ public final class KembaKhaEnduring extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Kemba, Kha Enduring or another Cat enters the battlefield under your control, attach up to one target Equipment you control to that creature.
+        // Whenever Kemba, Kha Enduring or another Cat you control enters, attach up to one target Equipment you control to that creature.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new KembaKhaEnduringEffect(), filter, false, true
         );

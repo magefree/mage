@@ -35,7 +35,7 @@ public final class NebelgastHerald extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Nebelgast Herald or another Spirit enters the battlefield under your control, tap target creature an opponent controls.
+        // Whenever Nebelgast Herald or another Spirit you control enters, tap target creature an opponent controls.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new TapTargetEffect(), filter, false, true
         );

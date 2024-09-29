@@ -10,6 +10,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DontUntapInControllersNextUntapStepTargetEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -44,6 +45,7 @@ public final class FiftyFeetOfRope extends CardImpl {
         // Rappel Down — {4}, {T}: Venture into the dungeon. Activate only as a sorcery.
         ability = new ActivateAsSorceryActivatedAbility(new VentureIntoTheDungeonEffect(), new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
+        ability.addHint(CurrentDungeonHint.instance);
         this.addAbility(ability.withFlavorWord("Rappel Down"));
     }
 

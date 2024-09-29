@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,6 +14,9 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +59,7 @@ class FromUnderTheFloorboardsManacostVariableValue implements DynamicValue {
         if (manaCosts.getVariableCosts().isEmpty()) {
             return 3;
         }
-        return sourceAbility.getManaCostsToPay().getX();
+        return CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0);
     }
 
     @Override

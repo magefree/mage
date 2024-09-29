@@ -22,6 +22,8 @@ public class CobraTrapTest extends CardTestPlayerBase {
      */
     @Test
     public void testCard() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.HAND, playerA, "Cobra Trap");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);
@@ -29,6 +31,7 @@ public class CobraTrapTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Stone Rain", "Forest");
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cobra Trap");
+        setChoice(playerA, "Cast with alternative cost: {G}");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
@@ -44,6 +47,8 @@ public class CobraTrapTest extends CardTestPlayerBase {
      */
     @Test
     public void testCardNegative() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
         addCard(Zone.HAND, playerA, "Cobra Trap");
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 3);

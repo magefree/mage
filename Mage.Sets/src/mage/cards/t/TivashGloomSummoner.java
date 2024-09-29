@@ -25,7 +25,7 @@ import java.util.UUID;
  */
 public final class TivashGloomSummoner extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0);
+    private static final Condition condition = new YouGainedLifeCondition();
 
     public TivashGloomSummoner(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");

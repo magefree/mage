@@ -1,0 +1,84 @@
+1 [C21:334] Alibou, Ancient Witness
+1 [MRD:278] Ancient Den
+1 [MH3:262] Angel of the Ruins
+1 [ELD:331] Arcane Signet
+1 [LCC:101] Archaeomancer's Map
+1 [BRC:112] Audacious Reshapers
+1 [BRO:257] Battlefield Forge
+1 [C21:375] Battlemage's Bracers
+1 [GTC:148] Boros Charm
+1 [CLU:231] Boros Garrison
+1 [GRN:231] Boros Locket
+1 [MRD:147] Bosh, Iron Golem
+1 [BRC:70] Bronze Guardian
+1 [THS:213] Burnished Hart
+1 [WWK:74] Chain Reaction
+1 [M19:9] Cleansing Nova
+1 [KLD:112] Combustible Gearhulk
+1 [ELD:333] Command Tower
+1 [LCC:301] Commander's Sphere
+1 [MH3:279] Cursed Mirror
+1 [CMM:213] Daretti, Scrap Savant
+1 [M15:242] Darksteel Citadel
+1 [CMM:21] Darksteel Mutation
+1 [BRC:71] Digsite Engineer
+1 [NPH:7] Dispatch
+1 [ALA:8] Dispeller's Capsule
+1 [MRD:165] Duplicant
+1 [C21:16] Excavation Technique
+1 [CON:142] Exotic Orchard
+1 [DKA:87] Faithless Looting
+1 [MOC:277] Feldon of the Third Path
+1 [ONS:317] Forgotten Cave
+1 [MRD:282] Great Furnace
+1 [BFZ:223] Hedron Archive
+1 [MBS:65] Hellkite Igniter
+1 [GTC:94] Hellkite Tyrant
+1 [SOM:93] Hoard-Smelter Dragon
+1 [MBS:110] Ichor Wellspring
+1 [NPH:128] Jor Kadeen, the Prevailer
+1 [KLD:220] Key to the City
+1 [MH3:281] Laelia, the Blade Reforged
+1 [STX:268] Lorehold Campus
+1 [CMM:38] Losheel, Clockwork Scholar
+1 [M20:232] Meteor Golem
+1 [10E:335] Mind Stone
+1 [C21:19] Monologue Tax
+12 [BLB:274] Mountain
+1 [NPH:145] Mycosynth Wellspring
+1 [SOM:180] Myr Battlesphere
+1 [M3C:358] Myriad Landscape
+1 [NPH:165] Phyrexia's Core
+1 [KLD:124] Pia Nalaar
+1 [BFZ:226] Pilgrim's Eye
+8 [OTJ:272] Plains
+1 [KLD:125] Quicksmith Genius
+1 [STX:222] Reconstruct History
+1 [TSP:39] Return to Dust
+1 [STX:225] Rip Apart
+1 [ORI:250] Rogue's Passage
+1 [INV:34] Rout
+1 [C21:384] Ruin Grinder
+1 [ALA:24] Sanctum Gargoyle
+1 [AER:175] Scrap Trawler
+1 [10E:342] Sculpting Steel
+1 [ONS:324] Secluded Steppe
+1 [STX:26] Secret Rendezvous
+1 [AVR:229] Slayers' Stronghold
+1 [SUM:274] Sol Ring
+1 [M21:239] Solemn Simulacrum
+1 [SOM:205] Steel Hellkite
+1 [M20:239] Steel Overseer
+1 [C21:80] Study Hall
+1 [M12:39] Sun Titan
+1 [RAV:282] Sunhome, Fortress of the Legion
+1 [M21:256] Temple of Triumph
+1 [SCG:143] Temple of the False God
+1 [ORI:165] Thopter Engineer
+1 [LRW:263] Thousand-Year Elixir
+1 [C21:406] Triplicate Titan
+1 [CMM:416] Unstable Obelisk
+1 [PIP:221] Wake the Past
+SB: 1 [C21:335] Osgir, the Reconstructor
+LAYOUT MAIN:(1,9)(CARD_TYPE,false,55)|([C21:334],[MH3:262],[MRD:147],[BRC:70],[THS:213],[KLD:112],[MRD:165],[M20:232],[SOM:180],[BFZ:226],[C21:384],[ALA:24],[AER:175],[M21:239],[SOM:205],[M20:239],[C21:406])([MRD:278],[M15:242],[MRD:282])([ELD:331],[LCC:101],[C21:375],[GRN:231],[LCC:301],[MH3:279],[ALA:8],[BFZ:223],[MBS:110],[KLD:220],[10E:335],[NPH:145],[10E:342],[SUM:274],[LRW:263],[CMM:416])([BRC:112],[BRC:71],[MOC:277],[MBS:65],[GTC:94],[SOM:93],[NPH:128],[MH3:281],[CMM:38],[KLD:124],[KLD:125],[M12:39],[ORI:165])([CMM:21],[C21:19])([GTC:148],[NPH:7],[TSP:39])([BRO:257],[CLU:231],[ELD:333],[CON:142],[ONS:317],[STX:268],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[M3C:358],[NPH:165],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[ORI:250],[ONS:324],[AVR:229],[C21:80],[RAV:282],[M21:256],[SCG:143])([CMM:213])([WWK:74],[M19:9],[C21:16],[DKA:87],[STX:222],[STX:225],[INV:34],[STX:26],[PIP:221])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([C21:335])

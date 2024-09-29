@@ -31,8 +31,8 @@ public final class OpenIntoWonder extends CardImpl {
         Ability abilityToGain = new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(abilityToGain, Duration.EndOfTurn,
                 "Until end of turn, those creatures gain \"Whenever this creature deals combat damage to a player, draw a card.\""));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private OpenIntoWonder(final OpenIntoWonder card) {

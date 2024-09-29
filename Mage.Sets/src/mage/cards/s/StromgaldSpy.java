@@ -1,7 +1,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
@@ -9,21 +8,16 @@ import mage.abilities.condition.common.SourceRemainsInZoneCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author L_J
  */
 public final class StromgaldSpy extends CardImpl {
@@ -39,10 +33,10 @@ public final class StromgaldSpy extends CardImpl {
         // for as long as Stromgald Spy remains on the battlefield. If you do, Stromgald Spy assigns no combat damage this turn.
         Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(
                 new ConditionalContinuousEffect(
-                                new StromgaldSpyEffect(),
-                                new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
-                                "you may have defending player play with their hand revealed for as long as {this} remains on the battlefield"),
-                true, true);
+                        new StromgaldSpyEffect(),
+                        new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
+                        "you may have defending player play with their hand revealed for as long as {this} remains on the battlefield"),
+                true, SetTargetPointer.PLAYER);
         ability.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn, true));
         this.addAbility(ability);
     }

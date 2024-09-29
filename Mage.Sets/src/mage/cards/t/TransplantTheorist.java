@@ -29,7 +29,7 @@ public final class TransplantTheorist extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Whenever Transplant Theorist or another artifact enters the battlefield under your control, you may draw a card. If you do, discard a card.
+        // Whenever Transplant Theorist or another artifact you control enters, you may draw a card. If you do, discard a card.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new DrawDiscardControllerEffect(1, 1, true),
                 StaticFilters.FILTER_PERMANENT_ARTIFACT, false, true

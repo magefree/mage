@@ -44,7 +44,7 @@ public final class CaseOfThePilferedProof extends CardImpl {
 
         this.subtype.add(SubType.CASE);
 
-        // Whenever a Detective enters the battlefield under your control and whenever a Detective you control is turned face up, put a +1/+1 counter on it.
+        // Whenever a Detective you control enters and whenever a Detective you control is turned face up, put a +1/+1 counter on it.
         Ability initialAbility = new CaseOfThePilferedProofTriggeredAbility();
         // To solve -- You control three or more Detectives.
         Condition toSolveCondition = new PermanentsOnTheBattlefieldCondition(
@@ -72,7 +72,7 @@ class CaseOfThePilferedProofTriggeredAbility extends TriggeredAbilityImpl {
 
     CaseOfThePilferedProofTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()).setText("put a +1/+1 counter on it"));
-        this.setTriggerPhrase("Whenever a Detective enters the battlefield under your control and whenever a Detective you control is turned face up, ");
+        this.setTriggerPhrase("Whenever a Detective you control enters and whenever a Detective you control is turned face up, ");
     }
 
     private CaseOfThePilferedProofTriggeredAbility(final CaseOfThePilferedProofTriggeredAbility ability) {

@@ -31,7 +31,7 @@ import java.util.UUID;
  */
 public final class ShadowInTheWarp extends CardImpl {
 
-    private static final FilterCreatureCard filterCost = new FilterCreatureCard("The first creature spell");
+    private static final FilterCreatureCard filterCost = new FilterCreatureCard("The first creature spell you cast each turn");
 
     static {
         filterCost.add(new FirstCastCreatureSpellPredicate());
@@ -42,7 +42,6 @@ public final class ShadowInTheWarp extends CardImpl {
 
         // The first creature spell you cast each turn costs {2} less to cast.
         Effect effect = new SpellsCostReductionControllerEffect(filterCost, 2);
-        effect.setText("The first creature spell you cast each turn costs {2} less to cast.");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new ShadowInTheWarpWatcher());
 
         // Whenever an opponent casts their first noncreature spell each turn, Shadow in the Warp deals 2 damage to that player.
@@ -89,12 +88,12 @@ class ShadowInTheWarpWatcher extends Watcher {
     }
 }
 
-class FirstCastCreatureSpellPredicate implements ObjectSourcePlayerPredicate<Controllable> {
+class FirstCastCreatureSpellPredicate implements ObjectSourcePlayerPredicate<Card> {
 
     @Override
-    public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
-        if (input.getObject() instanceof Card
-                && ((Card) input.getObject()).isCreature(game)) {
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
+        if (input.getObject() != null
+                && input.getObject().isCreature(game)) {
             ShadowInTheWarpWatcher watcher = game.getState().getWatcher(ShadowInTheWarpWatcher.class);
             return watcher != null && watcher.creatureSpellsCastThisTurn(input.getPlayerId()) == 0;
         }

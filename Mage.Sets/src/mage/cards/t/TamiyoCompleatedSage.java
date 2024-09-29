@@ -57,8 +57,8 @@ public final class TamiyoCompleatedSage extends CardImpl {
 
         // −X: Exile target nonland permanent card with mana value X from your graveyard. Create a token that's a copy of that card.
         Ability ability2 = new LoyaltyAbility(new TamiyoCompleatedSageEffect());
-        ability2.setTargetAdjuster(new XManaValueTargetAdjuster());
         ability2.addTarget(new TargetCardInYourGraveyard(filter));
+        ability2.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability2);
 
         // −7: Create Tamiyo's Notebook, a legendary colorless artifact token with "Spells you cast cost {2} less to cast" and "{T}: Draw a card."

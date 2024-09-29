@@ -42,7 +42,7 @@ public final class MoonlitScavengers extends CardImpl {
         // When Moonlit Scavengers enters the battlefield, if you control an artifact or enchantment, return target creature an opponent controls to its owner's hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect()), condition,
-                "When {this} enters the battlefield, if you control an artifact or enchantment, " +
+                "When {this} enters, if you control an artifact or enchantment, " +
                         "return target creature an opponent controls to its owner's hand."
         );
         ability.addTarget(new TargetOpponentsCreaturePermanent());

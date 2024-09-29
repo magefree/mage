@@ -54,8 +54,8 @@ public final class SorinVengefulBloodlord extends CardImpl {
                 "Return target creature card with mana value X from your graveyard to the battlefield"
         ));
         ability.addEffect(new SorinVengefulBloodlordEffect());
-        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
     }
 

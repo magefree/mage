@@ -30,7 +30,7 @@ public final class SeeDouble extends CardImpl {
         this.getSpellAbility().getModes().setChooseText(
                 "Choose one. If an opponent has eight or more cards in their graveyard, you may choose both."
         );
-        this.getSpellAbility().getModes().setMoreCondition(CardsInOpponentGraveyardCondition.EIGHT);
+        this.getSpellAbility().getModes().setMoreCondition(2, CardsInOpponentGraveyardCondition.EIGHT);
         this.getSpellAbility().addHint(CardsInOpponentGraveyardCondition.EIGHT.getHint());
 
         // * Copy target spell. You may choose new targets for the copy.

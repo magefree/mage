@@ -53,13 +53,14 @@ public class ReturnToHandTest extends CardTestPlayerBase {
     @Test
     public void VeilbornGhoulTest1() {
         // Veilborn Ghoul can't block.
-        // Whenever a Swamp enters the battlefield under your control, you may return Veilborn Ghoul from your graveyard to your hand.
+        // Whenever a Swamp you control enters, you may return Veilborn Ghoul from your graveyard to your hand.
         addCard(Zone.GRAVEYARD, playerA, "Veilborn Ghoul");
         addCard(Zone.HAND, playerA, "Swamp");
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Swamp");
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setChoice(playerA, true);
 
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Swamp", 1);
@@ -74,7 +75,7 @@ public class ReturnToHandTest extends CardTestPlayerBase {
     @Test
     public void VeilbornGhoulTest2() {
         // Veilborn Ghoul can't block.
-        // Whenever a Swamp enters the battlefield under your control, you may return Veilborn Ghoul from your graveyard to your hand.
+        // Whenever a Swamp you control enters, you may return Veilborn Ghoul from your graveyard to your hand.
         addCard(Zone.GRAVEYARD, playerA, "Veilborn Ghoul");
         addCard(Zone.HAND, playerA, "Flood Plain");
 
@@ -82,8 +83,9 @@ public class ReturnToHandTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Urborg, Tomb of Yawgmoth", 1);
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flood Plain");
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        setChoice(playerA, true);
 
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Flood Plain", 1);

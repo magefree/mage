@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class CordialVampire extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Cordial Vampire or another creature dies, put a +1/+1 counter on each vampire creature you control.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false
         ));
     }

@@ -34,7 +34,7 @@ public final class UlamogsDespoiler extends CardImpl {
 
         // As Ulamog's Despoiler enters the battlefield, you may put two cards your opponents own from exile into their owners' graveyards. If you do, Ulamog's Despoiler enters the battlefield with four +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new UlamogsDespoilerEffect(), null,
-                "As {this} enters the battlefield, you may put two cards your opponents own from exile into their owners' graveyards. If you do, {this} enters the battlefield with four +1/+1 counters on it", null));
+                "As {this} enters, you may put two cards your opponents own from exile into their owners' graveyards. If you do, {this} enters with four +1/+1 counters on it", null));
     }
 
     private UlamogsDespoiler(final UlamogsDespoiler card) {
@@ -57,7 +57,7 @@ class UlamogsDespoilerEffect extends OneShotEffect {
 
     public UlamogsDespoilerEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "you may put two cards your opponents own from exile into their owners' graveyards. If you do, {this} enters the battlefield with four +1/+1 counters on it";
+        this.staticText = "you may put two cards your opponents own from exile into their owners' graveyards. If you do, {this} enters with four +1/+1 counters on it";
     }
 
     private UlamogsDespoilerEffect(final UlamogsDespoilerEffect effect) {

@@ -1,10 +1,7 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealtDamageAttachedAndDiedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -15,18 +12,12 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.target.targetpointer.TargetPointer;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,7 +34,7 @@ public final class ScytheOfTheWretched extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2, Duration.WhileOnBattlefield)));
 
         // Whenever a creature dealt damage by equipped creature this turn dies, return that card to the battlefield under your control. Attach Scythe of the Wretched to that creature.
-        this.addAbility(new ScytheOfTheWretchedTriggeredAbility());
+        this.addAbility(new DealtDamageAttachedAndDiedTriggeredAbility(new ScytheOfTheWretchedReanimateEffect(), false));
 
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4), false));
@@ -56,59 +47,6 @@ public final class ScytheOfTheWretched extends CardImpl {
     @Override
     public ScytheOfTheWretched copy() {
         return new ScytheOfTheWretched(this);
-    }
-}
-
-class ScytheOfTheWretchedTriggeredAbility extends TriggeredAbilityImpl {
-
-    public ScytheOfTheWretchedTriggeredAbility() {
-        super(Zone.ALL, new ScytheOfTheWretchedReanimateEffect(), false);
-        setTriggerPhrase("Whenever a creature dealt damage by equipped creature this turn dies, ");
-    }
-
-    private ScytheOfTheWretchedTriggeredAbility(final ScytheOfTheWretchedTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ScytheOfTheWretchedTriggeredAbility copy() {
-        return new ScytheOfTheWretchedTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zoneChange = (ZoneChangeEvent) event;
-        if (zoneChange.isDiesEvent() && zoneChange.getTarget().isCreature(game)) {
-            Permanent equippedCreature = getEquippedCreature(game);
-            for (MageObjectReference mor : zoneChange.getTarget().getDealtDamageByThisTurn()) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(mor.getSourceId(), Zone.BATTLEFIELD);
-                if ((equippedCreature != null && mor.refersTo(equippedCreature, game))
-                        || (permanent != null && permanent.getAttachments().contains(getSourceId()))) {
-                    setTarget(new FixedTarget(event.getTargetId()));
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private void setTarget(TargetPointer target) {
-        for (Effect effect : getEffects()) {
-            effect.setTargetPointer(target);
-        }
-    }
-
-    private Permanent getEquippedCreature(Game game) {
-        Permanent equipment = game.getPermanent(getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            return game.getPermanent(equipment.getAttachedTo());
-        }
-        return null;
     }
 }
 
@@ -134,7 +72,6 @@ class ScytheOfTheWretchedReanimateEffect extends OneShotEffect {
             effect.apply(game, source);
             return true;
         }
-
         return false;
     }
 

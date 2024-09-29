@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesWithLessPowerEffect;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.abilities.keyword.ProwessAbility;
@@ -38,10 +38,10 @@ public final class ElusiveOtter extends AdventureCard {
         // Grove's Bounty
         // Distribute X +1/+1 counters among any number of target creatures you control.
         this.getSpellCard().getSpellAbility().addEffect(new DistributeCountersEffect(
-                CounterType.P1P1, ManacostVariableValue.REGULAR, false,
+                CounterType.P1P1, GetXValue.instance, false,
                 "any number of target creatures you control"
         ));
-        Target target = new TargetCreaturePermanentAmount(ManacostVariableValue.REGULAR, StaticFilters.FILTER_CONTROLLED_CREATURES);
+        Target target = new TargetCreaturePermanentAmount(GetXValue.instance, StaticFilters.FILTER_CONTROLLED_CREATURES);
         target.setMinNumberOfTargets(0);
         target.setMaxNumberOfTargets(Integer.MAX_VALUE);
         this.getSpellCard().getSpellAbility().addTarget(target);

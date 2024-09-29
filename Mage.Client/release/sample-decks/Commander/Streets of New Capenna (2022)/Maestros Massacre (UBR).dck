@@ -1,0 +1,87 @@
+1 [SNC:47] A Little Chat
+1 [ELD:331] Arcane Signet
+1 [ISD:87] Army of the Damned
+1 [M3C:318] Ash Barrens
+1 [NCC:44] Audacious Swap
+1 [RNA:157] Bedevil
+1 [KTK:66] Bloodsoaked Champion
+1 [NCC:34] Body Count
+1 [EVE:98] Call the Skybreaker
+1 [EVE:175] Cascade Bluffs
+1 [WWK:74] Chain Reaction
+1 [SOI:270] Choked Estuary
+1 [DTK:48] Clone Legion
+1 [ELD:333] Command Tower
+1 [LCC:301] Commander's Sphere
+1 [SNC:177] Cormela, Glamour Thief
+1 [ALA:222] Crumbling Necropolis
+1 [NCC:70] Cryptic Pursuit
+1 [DTK:93] Damnable Pact
+1 [ODY:319] Darkwater Catacombs
+1 [TOR:36] Deep Analysis
+1 [NCC:45] Determined Iteration
+1 [KTK:36] Dig Through Time
+1 [CLU:221] Dimir Signet
+1 [MKC:127] Dogged Detective
+1 [M21:142] Double Vision
+1 [M20:56] Drawn from Dreams
+1 [NCC:249] Dread Summons
+1 [CON:142] Exotic Orchard
+1 [NCC:25] Extravagant Replication
+1 [INV:57] Fact or Fiction
+1 [ZNR:102] Feed the Swarm
+1 [9ED:297] Fellwar Stone
+1 [NCC:26] Flawless Forgery
+1 [SOI:272] Foreboding Ruins
+1 [ULG:32] Frantic Search
+1 [GRN:174] Goblin Electromancer
+1 [ALA:224] Grixis Panorama
+1 [RAV:89] Hex
+7 [OTJ:273] Island
+1 [CLU:224] Izzet Signet
+1 [NCC:344] Kess, Dissident Mage
+1 [MRD:199] Lightning Greaves
+1 [SNC:199] Maestros Charm
+1 [NCC:75] Maestros Confluence
+1 [SNC:251] Maestros Theater
+1 [NCC:37] Make an Example
+1 [SOM:175] Mimic Vat
+5 [BLB:274] Mountain
+1 [M3C:358] Myriad Landscape
+1 [CMM:108] Mystic Confluence
+1 [NCC:8] Parnesse, the Subtle Brush
+1 [M3C:363] Path of Ancestry
+1 [M12:73] Ponder
+1 [M11:70] Preordain
+1 [SHM:75] Puppeteer Clique
+1 [CLU:226] Rakdos Signet
+1 [SCD:102] Reign of the Pit
+1 [RIX:111] Rekindling Phoenix
+1 [MKC:159] Rite of the Raging Storm
+1 [XLN:71] River's Rebuke
+1 [ISD:115] Sever the Bloodline
+1 [ODY:326] Shadowblood Ridge
+1 [NCC:30] Sinister Concierge
+1 [ZNR:125] Skyclave Shade
+1 [BFZ:247] Smoldering Marsh
+1 [NCC:84] Smuggler's Buggy
+1 [SUM:274] Sol Ring
+1 [NCC:53] Spellbinding Soprano
+1 [DOM:146] Squee, the Immortal
+1 [BFZ:249] Sunken Hollow
+6 [OTJ:274] Swamp
+1 [NCC:80] Syrix, Carrier of the Flame
+1 [M13:73] Talrand's Invocation
+1 [M21:252] Temple of Epiphany
+1 [CLU:249] Thriving Bluff
+1 [CLU:252] Thriving Isle
+1 [CLU:253] Thriving Moor
+1 [NCC:383] Twinning Staff
+1 [NCC:40] Waste Management
+1 [5DN:165] Wayfarer's Bauble
+1 [THB:123] Woe Strider
+1 [NCC:43] Xander's Pact
+1 [NCC:240] Zndrsplt's Judgment
+SB: 1 [NCC:1] Anhelo, the Painter
+LAYOUT MAIN:(1,6)(CARD_TYPE,false,61)|([ELD:331],[LCC:301],[CLU:221],[9ED:297],[CLU:224],[MRD:199],[SOM:175],[CLU:226],[NCC:84],[SUM:274],[NCC:383],[5DN:165])([KTK:66],[SNC:177],[MKC:127],[GRN:174],[NCC:344],[NCC:8],[SHM:75],[RIX:111],[NCC:30],[ZNR:125],[NCC:53],[DOM:146],[NCC:80],[THB:123])([NCC:70],[NCC:45],[M21:142],[NCC:25],[MKC:159])([SNC:47],[NCC:44],[RNA:157],[NCC:34],[KTK:36],[INV:57],[ULG:32],[SNC:199],[CMM:108],[NCC:40])([M3C:318],[EVE:175],[SOI:270],[ELD:333],[ALA:222],[ODY:319],[CON:142],[SOI:272],[ALA:224],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[SNC:251],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[BLB:274],[M3C:358],[M3C:363],[ODY:326],[BFZ:247],[BFZ:249],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[M21:252],[CLU:249],[CLU:252],[CLU:253])([ISD:87],[EVE:98],[WWK:74],[DTK:48],[DTK:93],[TOR:36],[M20:56],[NCC:249],[ZNR:102],[NCC:26],[RAV:89],[NCC:75],[NCC:37],[M12:73],[M11:70],[SCD:102],[XLN:71],[ISD:115],[M13:73],[NCC:43],[NCC:240])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([NCC:1])

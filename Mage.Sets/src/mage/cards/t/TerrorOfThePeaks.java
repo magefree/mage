@@ -43,7 +43,7 @@ public final class TerrorOfThePeaks extends CardImpl {
         // Spells your opponents cast that target Terror of the Peaks cost an additional 3 life to cast.
         this.addAbility(new SimpleStaticAbility(new TerrorOfThePeaksCostIncreaseEffect()));
 
-        // Whenever another creature enters the battlefield under your control, Terror of the Peaks deals damage equal to that creature's power to any target.
+        // Whenever another creature you control enters, Terror of the Peaks deals damage equal to that creature's power to any target.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new DamageTargetEffect(TerrorOfThePeaksValue.instance).setText("{this} deals damage equal to that creature's power to any target"),
                 StaticFilters.FILTER_ANOTHER_CREATURE

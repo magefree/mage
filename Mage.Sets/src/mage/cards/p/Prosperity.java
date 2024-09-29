@@ -2,7 +2,7 @@
 package mage.cards.p;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,7 +19,7 @@ public final class Prosperity extends CardImpl {
 
 
         // Each player draws X cards.
-        this.getSpellAbility().addEffect(new DrawCardAllEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardAllEffect(GetXValue.instance));
     }
 
     private Prosperity(final Prosperity card) {

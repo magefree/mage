@@ -25,8 +25,8 @@ public final class KaerveksPurge extends CardImpl {
 
         // Destroy target creature with converted mana cost X. If that creature dies this way, Kaervek's Purge deals damage equal to the creature's power to the creature's controller.
         this.getSpellAbility().addEffect(new KaerveksPurgeEffect());
-        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster());
     }
 
     private KaerveksPurge(final KaerveksPurge card) {
@@ -63,7 +63,7 @@ class KaerveksPurgeEffect extends OneShotEffect {
         // Destroy target creature with converted mana cost X.
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature != null && targetCreature.destroy(source, game, false)) {
-            game.getState().processAction(game);
+            game.processAction();
             if (targetCreature.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(targetCreature.getId())
                     && game.getState().getZone(targetCreature.getId()) != Zone.GRAVEYARD) {
                 // A replacement effect has moved the card to another zone as graveyard

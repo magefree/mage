@@ -185,11 +185,15 @@ public class SvgUtils {
             Image shadow = Toolkit.getDefaultToolkit().createImage(prod);
             // result
             BufferedImage result = new BufferedImage(originImage.getWidth() + shadowX, originImage.getHeight() + shadowY, originImage.getType());
-            Graphics2D g = (Graphics2D) result.getGraphics();
-            // draw shadow with offset (left bottom)
-            g.drawImage(shadow, -1 * shadowX, shadowY, null);
-            // draw original image
-            g.drawImage(originImage, 0, 0, null);
+            Graphics2D g2 = result.createGraphics();
+            try {
+                // draw shadow with offset (left bottom)
+                g2.drawImage(shadow, -1 * shadowX, shadowY, null);
+                // draw original image
+                g2.drawImage(originImage, 0, 0, null);
+            } finally {
+                g2.dispose();
+            }
             return result;
         } else {
             // return origin image without shadow

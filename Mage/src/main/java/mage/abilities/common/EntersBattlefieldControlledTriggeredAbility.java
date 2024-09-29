@@ -7,6 +7,7 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -27,7 +28,7 @@ public class EntersBattlefieldControlledTriggeredAbility extends EntersBattlefie
 
     public EntersBattlefieldControlledTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, filter, optional, setTargetPointer);
-        setTriggerPhrase(getTriggerPhraseFromFilter() + " under your control, ");
+        makeTriggerPhrase();
     }
 
     protected EntersBattlefieldControlledTriggeredAbility(final EntersBattlefieldControlledTriggeredAbility ability) {
@@ -41,6 +42,14 @@ public class EntersBattlefieldControlledTriggeredAbility extends EntersBattlefie
             return false;
         }
         return super.checkTrigger(event, game);
+    }
+
+    private void makeTriggerPhrase() {
+        String filterMessage = filter.getMessage();
+        if (filterMessage.startsWith("one or more")) {
+            setTriggerPhrase(getWhen() + filterMessage + " you control enter, ");
+        }
+        setTriggerPhrase(getWhen() + CardUtil.addArticle(filterMessage) + " you control enters, ");
     }
 
     @Override

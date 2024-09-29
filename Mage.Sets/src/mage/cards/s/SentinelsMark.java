@@ -51,7 +51,7 @@ public final class SentinelsMark extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainAbilityAttachedEffect(
                         LifelinkAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn
-                )), AddendumCondition.instance, "<br><i>Addendum</i> &mdash; When {this} enters the battlefield, " +
+                )), AddendumCondition.instance, "<br><i>Addendum</i> &mdash; When {this} enters, " +
                 "if you cast it during your main phase, enchanted creature gains lifelink until end of turn."
         ));
     }

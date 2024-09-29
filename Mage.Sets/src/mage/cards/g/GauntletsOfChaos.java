@@ -61,7 +61,7 @@ class GauntletsOfChaosFirstTarget extends TargetControlledPermanent {
                 CardType.ARTIFACT.getPredicate(),
                 CardType.CREATURE.getPredicate(),
                 CardType.LAND.getPredicate()));
-        setTargetName("artifact, creature, or land you control");
+        withTargetName("artifact, creature, or land you control");
     }
 
     private GauntletsOfChaosFirstTarget(final GauntletsOfChaosFirstTarget target) {
@@ -131,7 +131,7 @@ class GauntletsOfChaosSecondTarget extends TargetPermanent {
         super();
         this.filter = this.filter.copy();
         filter.add(TargetController.OPPONENT.getControllerPredicate());
-        setTargetName("permanent an opponent controls that shares one of those types with it");
+        withTargetName("permanent an opponent controls that shares one of those types with it");
     }
 
     private GauntletsOfChaosSecondTarget(final GauntletsOfChaosSecondTarget target) {

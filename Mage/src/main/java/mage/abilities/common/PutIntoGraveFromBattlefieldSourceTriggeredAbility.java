@@ -21,7 +21,7 @@ public class PutIntoGraveFromBattlefieldSourceTriggeredAbility extends Triggered
     }
 
     public PutIntoGraveFromBattlefieldSourceTriggeredAbility(Effect effect, boolean optional, boolean onlyToControllerGraveyard) {
-        super(Zone.ALL, effect, optional);
+        super(Zone.BATTLEFIELD, effect, optional);
         setLeavesTheBattlefieldTrigger(true);
         this.onlyToControllerGraveyard = onlyToControllerGraveyard;
         setTriggerPhrase("When {this} is put into " + (onlyToControllerGraveyard ? "your" : "a") + " graveyard from the battlefield, ");

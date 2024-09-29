@@ -3,6 +3,7 @@ package mage.cards.y;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -30,7 +31,7 @@ public final class YuanTiFangBlade extends CardImpl {
         // Whenever Yuan-Ti Fang-Blade deals combat damage to a player, venture into the dungeon.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new VentureIntoTheDungeonEffect(), false
-        ));
+        ).addHint(CurrentDungeonHint.instance));
     }
 
     private YuanTiFangBlade(final YuanTiFangBlade card) {

@@ -39,7 +39,7 @@ public class KnightsOfRen extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(
                         new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE), true),
                 HateCondition.instance,
-                "<i>Hate</i> &mdash; When {this} enters the battlefield, if an opponent lost life from a source other than combat damage this turn, you may have each player sacrifice a creature");
+                "<i>Hate</i> &mdash; When {this} enters, if an opponent lost life from a source other than combat damage this turn, you may have each player sacrifice a creature");
         Ability abilityAttacks = new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(
                         new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE), true),

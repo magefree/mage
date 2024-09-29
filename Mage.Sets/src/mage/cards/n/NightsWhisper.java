@@ -19,7 +19,7 @@ public final class NightsWhisper extends CardImpl {
 
 
         // You draw two cards and you lose 2 life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).setText("you draw two cards"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2, true));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and"));
     }
 

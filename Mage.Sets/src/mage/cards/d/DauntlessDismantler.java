@@ -16,6 +16,7 @@ import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -81,7 +82,7 @@ class DauntlessDismantlerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         FilterPermanent filter = new FilterArtifactPermanent();
-        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, CardUtil.getSourceCostsTag(game, source, "X", 0)));
 
         boolean destroyed = false;
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {

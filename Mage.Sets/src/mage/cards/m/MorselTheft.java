@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class MorselTheft extends CardImpl {
 
     public MorselTheft(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{2}{B}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.SORCERY}, "{2}{B}{B}");
         this.subtype.add(SubType.ROGUE);
 
         // Prowl {1}{B}

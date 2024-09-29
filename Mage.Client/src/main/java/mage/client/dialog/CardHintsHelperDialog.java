@@ -163,7 +163,7 @@ public class CardHintsHelperDialog extends MageDialog implements MageDesktopIcon
         settings.add(this.currentGroup.toString());
 
         // from search
-        if (this.currentSearch.length() > 0 && !this.currentSearch.equals(SEARCH_EMPTY_TEXT)) {
+        if (!this.currentSearch.isEmpty() && !this.currentSearch.equals(SEARCH_EMPTY_TEXT)) {
             settings.add(this.currentSearch);
         }
 
@@ -233,6 +233,11 @@ public class CardHintsHelperDialog extends MageDialog implements MageDesktopIcon
         // hand
         this.lastGameView.getMyHand().values().forEach(card -> {
             this.lastHints.add(new CardHintInfo(currentPlayer, "hand", card));
+        });
+
+        // helper emblems for better UX
+        this.lastGameView.getMyHelperEmblems().values().forEach(card -> {
+            this.lastHints.add(new CardHintInfo(currentPlayer, "xmage", card));
         });
 
         // stack
@@ -506,13 +511,21 @@ public class CardHintsHelperDialog extends MageDialog implements MageDesktopIcon
 
     @Override
     public void changeGUISize() {
-        setGUISize(GUISizeHelper.chatFont);
+        setGUISize(GUISizeHelper.dialogFont);
         this.validate();
         this.repaint();
     }
 
     private void setGUISize(Font font) {
-        this.hintsView.setFont(font);
+        this.comboFilterBy.setFont(font);
+        this.comboGroupBy.setFont(font);
+        this.search.setFont(font);
+        this.searchClear.setFont(font);
+        // workaround to auto-size button
+        // TODO: add support of big/HQ button image
+        this.searchClear.setPreferredSize(GUISizeHelper.dialogGuiScaleSize(this.searchClear.getPreferredSize()));
+
+        this.hintsView.changeGUISize(font);
         this.scrollView.setFont(font);
         this.scrollView.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
         this.scrollView.getHorizontalScrollBar().setPreferredSize(new Dimension(0, GUISizeHelper.scrollBarSize));

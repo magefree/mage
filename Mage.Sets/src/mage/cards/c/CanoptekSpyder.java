@@ -45,7 +45,7 @@ public final class CanoptekSpyder extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Fabricator Claw Array -- Whenever another nontoken artifact creature or Vehicle enters the battlefield under your control, draw a card.
+        // Fabricator Claw Array -- Whenever another nontoken artifact creature or Vehicle you control enters, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), filter
         ).withFlavorWord("Fabricator Claw Array"));

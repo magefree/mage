@@ -30,7 +30,7 @@ public final class FallajiVanguard extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
 
-        // Whenever Fallaji Vanguard or another creature enters the battlefield under your control, target creature gets +2/+0 until end of turn.
+        // Whenever Fallaji Vanguard or another creature you control enters, target creature gets +2/+0 until end of turn.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new BoostTargetEffect(2, 0),
                 StaticFilters.FILTER_PERMANENT_CREATURE,
