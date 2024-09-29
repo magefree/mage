@@ -1,8 +1,8 @@
 name: Update set implementation lists
 on:
-  # push:
-  #  branches: [master]
-  workflow_dispatch:
+  push:
+   branches: [master]
+  #workflow_dispatch:
 concurrency:
   group: set-impl
   cancel-in-progress: true
