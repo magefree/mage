@@ -142,7 +142,7 @@ jobs:
                   unimplementedCards: unimplemented,
                   implementedCards: implemented,
                   unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`
-                }).replaceAll("--", "-").replaceAll("https://", "").replaceAll(`+e${set[1]}`, "");
+                }).replaceAll("--", "-").replaceAll("https://", "").replaceAll(`+e:${set[1]}`, "");
                 console.log(`Trimmed body length: ${trimmedBody.length}`);
                 console.log(`${trimmedBody}`);
                 continue;
