@@ -139,7 +139,7 @@ jobs:
             //console.log("Issues to update: ", issuesToUpdate);
             //console.log("Issues to create: ", issuesToCreate);
 
-            issuesToUpdate.forEach(issue => {
+            for (const issue of issuesToUpdate) {
               github.rest.issues.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -147,27 +147,24 @@ jobs:
                 body: issue.body,
                 state: issue.state
               });
-            });
-            issuesToCreate.slice(0, 1).forEach(issue => {
-              const act = async () =>  {
-                const result = await github.rest.issues.create({
+            }
+            for (const issue of issuesToCreate.slice(0, 1)) {
+              const result = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issue.title,
+                body: issue.body,
+                labels: ["tracking set"]
+              });
+              if (issue.state === "closed") {
+                github.rest.issues.update({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  title: issue.title,
-                  body: issue.body,
-                  labels: ["tracking set"]
+                  issue_number: result.number,
+                  state: issue.state
                 });
-                if (issue.state === "closed") {
-                  github.rest.issues.update({
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    issue_number: result.number,
-                    state: issue.state
-                  });
-                }
-              };
-              //act();
-            });
+              }
+            }
       - uses: actions/github-script@v6.4.1
         id: updatesetimplementations
         with:
