@@ -27,7 +27,7 @@ public class DominariaRemastered extends ExpansionSet {
         this.hasBoosters = true;
         this.hasBasicLands = true;
         this.maxCardNumberInBooster = 261;
-        this.numBoosterCommon = 10; // Frame/art variants not yet implemented for booster generation
+        this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 7; // 60 rare, 20 mythic
