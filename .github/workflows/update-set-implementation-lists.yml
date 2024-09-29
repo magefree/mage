@@ -124,6 +124,8 @@ jobs:
                   });
                 }
               }
+              implemented.sort((a, b) => a.name.localeCompare(b.name));
+              unimplemented.sort((a, b) => a.name.localeCompare(b.name));
               const body = mustache.render(cardIssueTemplate, {
                   hasUnimplementedCards: unimplemented.length > 0,
                   hasImplementedCards: implemented.length > 0,
