@@ -48,7 +48,7 @@ Set Name  |  # Cards | # Missing |
 [Commander 2021 Edition](https://github.com/ExpensiveKoala/mage/issues/48) | 0 | 0
 [Commander Legends](https://github.com/ExpensiveKoala/mage/issues/50) | 712 | 4
 [Commander Legends: Battle for Baldur's Gate](https://github.com/ExpensiveKoala/mage/issues/49) | 676 | 37
-[Champions of Kamigawa](https://www.github.com/mage/magefree) | 296 | 11
+[Champions of Kamigawa](https://github.com/ExpensiveKoala/mage/issues/51) | 296 | 11
 [Chronicles](https://www.github.com/mage/magefree) | 116 | 1
 [Clash Pack](https://www.github.com/mage/magefree) | 12 | 0
 [Commander Anthology](https://www.github.com/mage/magefree) | 285 | 0
