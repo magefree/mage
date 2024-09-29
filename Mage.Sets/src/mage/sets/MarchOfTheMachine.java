@@ -5,6 +5,8 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 import mage.util.RandomUtil;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
