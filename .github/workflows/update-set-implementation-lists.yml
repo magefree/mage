@@ -185,7 +185,7 @@ jobs:
               }).replace(/\s+/g, '')
             }
             
-            const setImplementationTemplate = fs.readFileSync(path.join('.github', 'templates', 'set-tracking-wiki.md'), 'utf8');
+            const setImplementationTemplate = fs.readFileSync(path.join('.github', 'templates', 'set-tracking-list.md'), 'utf8');
             
             const setsData = fs.readFileSync(path.join('Utils', 'mtg-sets-data.txt'), 'utf8')
               .split('\n')
