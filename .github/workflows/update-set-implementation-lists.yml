@@ -148,7 +148,7 @@ jobs:
                 state: issue.state
               });
             }
-            for (const issue of issuesToCreate.slice(0, 1)) {
+            for (const issue of issuesToCreate) {
               const result = await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
