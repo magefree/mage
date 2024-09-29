@@ -92,7 +92,7 @@ class PreacherOfTheSchismFirstTrigger extends TriggeredAbilityImpl {
 class PreacherOfTheSchismSecondTrigger extends TriggeredAbilityImpl {
 
     public PreacherOfTheSchismSecondTrigger() {
-        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1, "you"), false);
+        super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1, true), false);
         this.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         setTriggerPhrase("Whenever {this} attacks while you have the most life or are tied for most life, ");
     }

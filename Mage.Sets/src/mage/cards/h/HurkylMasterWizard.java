@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.dynamicvalue.common.CardTypeAssignment;
+import mage.abilities.assignment.common.CardTypeAssignment;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.*;

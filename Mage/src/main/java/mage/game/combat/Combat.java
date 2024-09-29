@@ -562,7 +562,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
             TargetDefender target = new TargetDefender(defendersToChooseFrom);
             target.setRequired(true);
-            target.setTargetName("permanent or player for " + creature.getLogName() + " to attack (must attack effect)");
+            target.withTargetName("permanent or player for " + creature.getLogName() + " to attack (must attack effect)");
             if (player.chooseTarget(Outcome.Damage, target, null, game)) {
                 player.declareAttacker(creature.getId(), target.getFirstTarget(), game, false);
             }
@@ -1347,7 +1347,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                     break;
                 case MULTIPLE:
-                    attackablePlayers.addAll(game.getOpponents(attackingPlayerId));
+                    attackablePlayers.addAll(game.getOpponents(attackingPlayerId, true));
                     break;
             }
         }

@@ -174,7 +174,7 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // TODO: need to fix Trove of Temptation effect (player must attack by one creature)
+    @Ignore // TODO: need to fix Trove of Temptation effect (player must be attacked by one creature)
     public void test_ForceAttack_1_small_vs_1_big_b() {
         addCard(Zone.BATTLEFIELD, playerA, "Arbor Elf", 1); // 1/1
         addCard(Zone.BATTLEFIELD, playerB, "Ancient Brontodon", 1); // 9/9
@@ -183,6 +183,24 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         addCard(Zone.BATTLEFIELD, playerB, "Trove of Temptation", 1); // 9/9
 
         block(1, playerB, "Ancient Brontodon", "Arbor Elf");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertGraveyardCount(playerA, "Arbor Elf", 1);
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+    }
+
+    @Test
+    @Ignore // TODO: need to fix Seeker of Slaanesh effect (players must attack by one creature)
+    public void test_ForceAttack_any() {
+        addCard(Zone.BATTLEFIELD, playerA, "Arbor Elf", 1); // 1/1
+        // Each opponent must attack with at least one creature each combat if able.
+        addCard(Zone.BATTLEFIELD, playerB, "Seeker of Slaanesh", 1); // 3/3
+
+        block(1, playerB, "Seeker of Slaanesh", "Arbor Elf");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);

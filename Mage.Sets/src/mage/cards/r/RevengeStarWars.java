@@ -1,8 +1,8 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.YouLostLifeCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -18,21 +18,22 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.common.PlayerLostLifeWatcher;
+
+import java.util.UUID;
 
 /**
- *
  * @author Styxo
  */
 public final class RevengeStarWars extends CardImpl {
+
+    private static final Condition condition = new YouLostLifeCondition();
 
     public RevengeStarWars(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{R}");
 
         // Target creature you control gets +4/+0 until end of turn before it fights if you lost life this turn.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new RevengeEffect(),
-                LostLifeCondition.instance,
+                new RevengeEffect(), condition,
                 "Target creature you control gets +4/+0 until end of turn before it fights if you lost life this turn"));
 
         // Target creature you control fights target creature an opponent controls.
@@ -50,22 +51,6 @@ public final class RevengeStarWars extends CardImpl {
     public RevengeStarWars copy() {
         return new RevengeStarWars(this);
     }
-}
-
-enum LostLifeCondition implements Condition {
-
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
-        UUID player = source.getControllerId();
-        if (watcher != null && player != null) {
-            return watcher.getLifeLost(player) > 0;
-        }
-        return false;
-    }
-
 }
 
 class RevengeEffect extends OneShotEffect {

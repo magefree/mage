@@ -36,7 +36,7 @@ public final class JuniperOrderRootweaver extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(
                         new AddCountersTargetEffect(CounterType.P1P1.createInstance())
-                ), KickedCondition.ONCE, "When {this} enters the battlefield, " +
+                ), KickedCondition.ONCE, "When {this} enters, " +
                 "if it was kicked, put a +1/+1 counter on target creature you control.");
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

@@ -30,21 +30,21 @@ public final class Nothic extends CardImpl {
         // 1-9 | You draw a card and you lose 1 life.
         effect.addTableEntry(
                 1, 9,
-                new DrawCardSourceControllerEffect(1, "you"),
+                new DrawCardSourceControllerEffect(1, true),
                 new LoseLifeSourceControllerEffect(1).concatBy("and")
         );
 
         // 10-19 | You draw two cards and you lose 2 life.
         effect.addTableEntry(
                 10, 19,
-                new DrawCardSourceControllerEffect(2, "you"),
+                new DrawCardSourceControllerEffect(2, true),
                 new LoseLifeSourceControllerEffect(2).concatBy("and")
         );
 
         // 20 | You draw seven cards and you lose 7 life.
         effect.addTableEntry(
                 20, 20,
-                new DrawCardSourceControllerEffect(7, "you"),
+                new DrawCardSourceControllerEffect(7, true),
                 new LoseLifeSourceControllerEffect(7).concatBy("and")
         );
 

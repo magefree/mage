@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import static java.lang.Integer.min;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -69,7 +68,7 @@ class RansackEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getFirstTarget());
         FilterCard filter = new FilterCard("cards to put on the bottom of your library");
         if (player != null) {
-            int number = min(player.getLibrary().size(), 5);
+            int number = Integer.min(player.getLibrary().size(), 5);
             Set<Card> cards = player.getLibrary().getTopCards(game, number);
             Cards cardsRemaining = new CardsImpl();
             cardsRemaining.addAllCards(cards);

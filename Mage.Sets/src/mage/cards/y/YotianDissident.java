@@ -27,7 +27,7 @@ public final class YotianDissident extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever an artifact enters the battlefield under your control, put +1/+1 counter on target creature you control.
+        // Whenever an artifact you control enters, put +1/+1 counter on target creature you control.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN

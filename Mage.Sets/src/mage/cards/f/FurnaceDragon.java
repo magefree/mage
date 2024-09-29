@@ -44,7 +44,7 @@ public final class FurnaceDragon extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ExileAllEffect(filter), false),
                 CastFromHandSourcePermanentCondition.instance,
-                "When {this} enters the battlefield, if you cast it from your hand, exile all artifacts."),
+                "When {this} enters, if you cast it from your hand, exile all artifacts."),
                 new CastFromHandWatcher());
     }
 

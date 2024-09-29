@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
@@ -28,7 +28,7 @@ public final class Mindswipe extends CardImpl {
 
 
         // Counter target spell unless its controller pays {X}.  Mindswipe deals X damage to that spell's controller.
-        Effect effect = new CounterUnlessPaysEffect(ManacostVariableValue.REGULAR);
+        Effect effect = new CounterUnlessPaysEffect(GetXValue.instance);
         effect.setText("Counter target spell unless its controller pays {X}.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetSpell());
@@ -73,7 +73,7 @@ class MindswipeEffect extends OneShotEffect {
                 Spell spell = (Spell) object;
                 Player spellController = game.getPlayer(spell.getControllerId());
                 if (spellController != null) {
-                    int damage = ManacostVariableValue.REGULAR.calculate(game, source, this);
+                    int damage = GetXValue.instance.calculate(game, source, this);
                     spellController.damage(damage, source.getSourceId(), source, game);
                 }
                 return true;

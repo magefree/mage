@@ -34,7 +34,7 @@ public final class MajaBretagardProtector extends CardImpl {
                 1, 1, Duration.WhileOnBattlefield, true
         )));
 
-        // Whenever a land enters the battlefield under your control, create a 1/1 white Human Warrior creature token.
+        // Whenever a land you control enters, create a 1/1 white Human Warrior creature token.
         this.addAbility(new LandfallAbility(new CreateTokenEffect(new HumanWarriorToken())));
     }
 

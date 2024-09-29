@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.common.SacrificePermanentTriggeredAbility;
+import mage.abilities.common.SacrificeOneOrMorePermanentsTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -53,10 +53,11 @@ public final class ForgeNeverwinterCharlatan extends CardImpl {
         ).setText("{this} gets +2/+0 for each Treasure you control")).addHint(hint));
 
         // Whenever one or more players sacrifice one or more creatures, you create a tapped Treasure token. This ability triggers only once each turn.
-        this.addAbility(new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
-                new CreateTokenEffect(new TreasureToken(), 1, true),
-                StaticFilters.FILTER_PERMANENT_CREATURE, TargetController.ANY, SetTargetPointer.NONE, false
-        ).setTriggersLimitEachTurn(1).setTriggerPhrase("Whenever one or more players sacrifice one or more creatures, "));
+        this.addAbility(new SacrificeOneOrMorePermanentsTriggeredAbility(Zone.BATTLEFIELD,
+                new CreateTokenEffect(new TreasureToken(), 1, true)
+                        .setText("you create a tapped Treasure token"),
+                StaticFilters.FILTER_PERMANENT_CREATURES, TargetController.ANY, SetTargetPointer.NONE, false
+        ).setTriggersLimitEachTurn(1));
     }
 
     private ForgeNeverwinterCharlatan(final ForgeNeverwinterCharlatan card) {

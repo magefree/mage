@@ -45,7 +45,7 @@ public final class SpringheartNantuko extends CardImpl {
         // Enchanted creature gets +1/+1
         this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 1)));
 
-        // Landfall — Whenever a land enters the battlefield under your control, you may pay {1}{G} if Springheart Nantuko is attached to a creature you control. If you do, create a token that's a copy of that creature. If you didn't create a token this way, create a 1/1 green Insect creature token.
+        // Landfall — Whenever a land you control enters, you may pay {1}{G} if Springheart Nantuko is attached to a creature you control. If you do, create a token that's a copy of that creature. If you didn't create a token this way, create a 1/1 green Insect creature token.
         this.addAbility(new LandfallAbility(new SpringheartNantukoEffect()));
     }
 

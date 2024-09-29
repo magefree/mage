@@ -56,7 +56,7 @@ class PlanarNexusEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "{this} is every nonbasic land type. " +
                 "<i>(Nonbasic land types include Cave, Desert, Gate, Lair, " +
-                "Locus, Mine, Power-Plant, Sphere, Tower, and Urza's.)</i>.";
+                "Locus, Mine, Power-Plant, Sphere, Tower, and Urza's.)</i>";
     }
 
     private PlanarNexusEffect(final PlanarNexusEffect effect) {

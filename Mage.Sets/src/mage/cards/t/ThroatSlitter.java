@@ -1,36 +1,38 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPermanent;
+import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
+
+import java.util.UUID;
 
 /**
- *
- * @author LevelX2
+ * @author notgreat
  */
 public final class ThroatSlitter extends CardImpl {
 
+    private static final FilterCreaturePermanent filter
+            = new FilterCreaturePermanent("nonblack creature that player controls");
+
+    static {
+        filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
+    }
+
     public ThroatSlitter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{B}");
         this.subtype.add(SubType.RAT);
         this.subtype.add(SubType.NINJA);
 
@@ -41,7 +43,10 @@ public final class ThroatSlitter extends CardImpl {
         this.addAbility(new NinjutsuAbility("{2}{B}"));
 
         // Whenever Throat Slitter deals combat damage to a player, destroy target nonblack creature that player controls.
-        this.addAbility(new ThroatSlitterTriggeredAbility());
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DestroyTargetEffect(), false, true);
+        ability.addTarget(new TargetPermanent(filter));
+        ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
+        this.addAbility(ability);
     }
 
     private ThroatSlitter(final ThroatSlitter card) {
@@ -51,47 +56,5 @@ public final class ThroatSlitter extends CardImpl {
     @Override
     public ThroatSlitter copy() {
         return new ThroatSlitter(this);
-    }
-}
-
-class ThroatSlitterTriggeredAbility extends TriggeredAbilityImpl {
-
-    ThroatSlitterTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
-    }
-
-    private ThroatSlitterTriggeredAbility(final ThroatSlitterTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ThroatSlitterTriggeredAbility copy() {
-        return new ThroatSlitterTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (((DamagedPlayerEvent) event).isCombatDamage() 
-                && event.getSourceId().equals(sourceId)) {
-
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature that player controls");
-            filter.add(new ControllerIdPredicate(event.getPlayerId()));
-            filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-            filter.setMessage("nonblack creature controlled by " + game.getPlayer(event.getTargetId()).getLogName());
-            this.getTargets().clear();
-            this.addTarget(new TargetPermanent(filter));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, destroy target nonblack creature that player controls.";
     }
 }

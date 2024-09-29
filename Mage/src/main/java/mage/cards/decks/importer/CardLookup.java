@@ -52,7 +52,7 @@ public class CardLookup {
             if (result.isPresent()) {
                 return result;
             }
-        } catch (NumberFormatException ignored) {
+        } catch (NumberFormatException ignore) {
             /* ignored */
         }
 

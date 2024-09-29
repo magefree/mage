@@ -36,7 +36,7 @@ public final class MurmuringBosk extends CardImpl {
         // <i>({tap}: Add {G}.)</i>
         this.addAbility(new GreenManaAbility());
         // As Murmuring Bosk enters the battlefield, you may reveal a Treefolk card from your hand. If you don't, Murmuring Bosk enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Treefolk card from your hand. If you don't, {this} enters the battlefield tapped"));
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Treefolk card from your hand. If you don't, {this} enters tapped"));
         // {tap}: Add {W} or {B}. Murmuring Bosk deals 1 damage to you.
         Ability ability = new WhiteManaAbility();
         ability.addEffect(new DamageControllerEffect(1));

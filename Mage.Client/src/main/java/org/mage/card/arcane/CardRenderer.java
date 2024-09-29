@@ -335,18 +335,23 @@ public abstract class CardRenderer {
                             break;
                     }
                     double scale = (0.1 * 0.25 * cardWidth);
+
                     Graphics2D g2 = (Graphics2D) g.create();
-                    g2.translate(xPos, yPos);
-                    g2.scale(scale, scale);
-                    g2.setColor(Color.white);
-                    g2.fillPolygon(p);
-                    g2.setColor(Color.black);
-                    g2.drawPolygon(p);
-                    g2.setFont(new Font("Arial", Font.BOLD, 7));
-                    String cstr = String.valueOf(v.getCount());
-                    int strW = g2.getFontMetrics().stringWidth(cstr);
-                    g2.drawString(cstr, 5 - strW / 2, 8);
-                    g2.dispose();
+                    try {
+                        g2.translate(xPos, yPos);
+                        g2.scale(scale, scale);
+                        g2.setColor(Color.white);
+                        g2.fillPolygon(p);
+                        g2.setColor(Color.black);
+                        g2.drawPolygon(p);
+                        g2.setFont(new Font("Arial", Font.BOLD, 7));
+                        String cstr = String.valueOf(v.getCount());
+                        int strW = g2.getFontMetrics().stringWidth(cstr);
+                        g2.drawString(cstr, 5 - strW / 2, 8);
+                    } finally {
+                        g2.dispose();
+                    }
+
                     yPos += ((int) (0.30 * cardWidth));
                 }
             }

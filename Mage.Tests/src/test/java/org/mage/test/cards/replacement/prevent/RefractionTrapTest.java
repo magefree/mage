@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -19,6 +18,8 @@ public class RefractionTrapTest extends CardTestPlayerBase {
      */
     @Test
     public void testPreventDamageFromSpell() {
+        setStrictChooseMode(true);
+
         addCard(Zone.HAND, playerA, "Lightning Bolt");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
@@ -30,10 +31,10 @@ public class RefractionTrapTest extends CardTestPlayerBase {
         // deals that much damage to any target.
         addCard(Zone.HAND, playerB, "Refraction Trap");
         addCard(Zone.BATTLEFIELD, playerB, "Plains");
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Refraction Trap", "Silvercoat Lion", "Lightning Bolt");
-        setChoice(playerB, true);
+        setChoice(playerB, "Cast with alternative cost: {W} (source: Refraction Trap");
         setChoice(playerB, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -44,9 +45,9 @@ public class RefractionTrapTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertGraveyardCount(playerB, "Refraction Trap", 1);
-        
+
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
-        
+
     }
 
 }

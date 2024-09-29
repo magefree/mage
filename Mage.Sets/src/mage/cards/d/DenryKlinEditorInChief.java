@@ -41,14 +41,14 @@ public class DenryKlinEditorInChief extends CardImpl {
                 new AddCounterChoiceSourceEffect(CounterType.P1P1, CounterType.FIRST_STRIKE, CounterType.VIGILANCE)
         ));
 
-        // Whenever a nontoken creature enters the battlefield under your control,
+        // Whenever a nontoken creature you control enters,
         // if Denry has counters on it, put the same number of each kind of counter on that creature.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(
                         new DenryKlinEditorInChiefCopyCountersEffect(),
                         StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN),
                 SourceHasCountersCondition.instance,
-                "Whenever a nontoken creature enters the battlefield under your control, " +
+                "Whenever a nontoken creature you control enters, " +
                 "if Denry has counters on it, put the same number of each kind of counter on that creature.")
         );
 

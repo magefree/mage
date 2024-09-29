@@ -39,12 +39,12 @@ public final class NightscapeBattlemage extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
         ability.addTarget(new TargetCreaturePermanent(0, 2, StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK, false));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new KickedCostCondition("{2}{U}"),
-            "When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, return up to two target nonblack creatures to their owners' hands."));
+            "When {this} enters, if it was kicked with its {2}{U} kicker, return up to two target nonblack creatures to their owners' hands."));
         // When Nightscape Battlemage enters the battlefield, if it was kicked with its {2}{R} kicker, destroy target land.
         ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new KickedCostCondition("{2}{R}"),
-            "When {this} enters the battlefield, if it was kicked with its {2}{R} kicker, destroy target land."));
+            "When {this} enters, if it was kicked with its {2}{R} kicker, destroy target land."));
     }
 
     private NightscapeBattlemage(final NightscapeBattlemage card) {

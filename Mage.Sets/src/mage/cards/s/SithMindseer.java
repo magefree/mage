@@ -40,7 +40,7 @@ public final class SithMindseer extends CardImpl {
                                 new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
                                 "gain control of target creature for as long as {this} remains on the battlefield")),                        
                 HateCondition.instance,
-                "<i>Hate</i> &mdash; When {this} enters the battlefield, if an opponent loses life from a source other than combat damage,"
+                "<i>Hate</i> &mdash; When {this} enters, if an opponent loses life from a source other than combat damage,"
                         + " gain control of target creature for as long as {this} remains on the battlefield.");
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());

@@ -1,11 +1,10 @@
-
 package mage.abilities.keyword;
 
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DevourEffect;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
 
 /**
  * 502.82. Devour
@@ -45,12 +44,12 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public class DevourAbility extends SimpleStaticAbility {
 
-    private static final FilterControlledPermanent filterCreature = new FilterControlledCreaturePermanent("creature");
+    private static final FilterPermanent filterCreature = new FilterControlledCreaturePermanent("creature");
 
     // Integer.MAX_VALUE is a special value
     // for "devour X, where X is the number of devored permanents"
     // see DevourEffect for the full details.
-    public static DevourAbility DevourX() {
+    public static DevourAbility devourX() {
         return new DevourAbility(Integer.MAX_VALUE);
     }
 
@@ -58,7 +57,7 @@ public class DevourAbility extends SimpleStaticAbility {
         this(devourFactor, filterCreature);
     }
 
-    public DevourAbility(int devourFactor, FilterControlledPermanent filterDevoured) {
+    public DevourAbility(int devourFactor, FilterPermanent filterDevoured) {
         super(Zone.ALL, new DevourEffect(devourFactor, filterDevoured));
     }
 

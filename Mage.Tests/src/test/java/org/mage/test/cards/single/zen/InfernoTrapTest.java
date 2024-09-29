@@ -10,7 +10,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * {@link mage.cards.i.InfernoTrap Inferno Trap}
  * {3}{R}
  * Instant — Trap
- *
+ * <p>
  * If you’ve been dealt damage by two or more creatures this turn, you may pay {R} rather than pay this spell’s mana cost.
  * Inferno Trap deals 4 damage to target creature.
  *
@@ -20,6 +20,8 @@ public class InfernoTrapTest extends CardTestPlayerBase {
 
     @Test
     public void testTwoDamageStepsCountOnlyAsOneCreature() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         // Instant {3}{R}
         addCard(Zone.HAND, playerA, "Inferno Trap");
@@ -43,6 +45,8 @@ public class InfernoTrapTest extends CardTestPlayerBase {
 
     @Test
     public void testPlayByAlternateCost() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         // If you've been dealt damage by two or more creatures this turn, you may pay {R} rather than pay Inferno Trap's mana cost.
         // Inferno Trap deals 4 damage to target creature.
@@ -56,6 +60,7 @@ public class InfernoTrapTest extends CardTestPlayerBase {
         attack(2, playerB, "Silvercoat Lion");
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Inferno Trap", "Skyhunter Skirmisher");
+        setChoice(playerA, "Cast with alternative cost: {R}"); // Use the alternative cost (regular cost can not be paid if chosen)
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
@@ -65,6 +70,7 @@ public class InfernoTrapTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Inferno Trap", 1);
         assertGraveyardCount(playerB, "Skyhunter Skirmisher", 1);
+        assertTapped("Mountain", true);
     }
 
 }

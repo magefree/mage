@@ -43,7 +43,8 @@ package mage.constants;
  * @author LevelX2
  */
 public enum MageObjectType {
-    ABILITY_STACK("Ability on the Stack", false, false, false),
+    ABILITY_STACK_FROM_CARD("Ability on the Stack", false, false, false),
+    ABILITY_STACK_FROM_TOKEN("Ability on the Stack", false, false, true),
     CARD("Card", false, true, false),
     COPY_CARD("Copy of a Card", false, true, false),
     TOKEN("Token", true, true, true),

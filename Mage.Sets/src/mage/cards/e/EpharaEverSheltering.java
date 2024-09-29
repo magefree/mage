@@ -66,7 +66,7 @@ public final class EpharaEverSheltering extends CardImpl {
         ));
         this.addAbility(ability.addHint(hint));
 
-        // Whenever another enchantment enters the battlefield under your control, draw a card.
+        // Whenever another enchantment you control enters, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter));
     }
 

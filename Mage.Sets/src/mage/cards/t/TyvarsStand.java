@@ -1,6 +1,6 @@
 package mage.cards.t;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HexproofAbility;
@@ -23,7 +23,7 @@ public final class TyvarsStand extends CardImpl {
 
         // Target creature you control gets +X/+X and gains hexproof and indestructible until end of turn.
         this.getSpellAbility().addEffect(new BoostTargetEffect(
-                ManacostVariableValue.REGULAR, ManacostVariableValue.REGULAR, Duration.EndOfTurn
+                GetXValue.instance, GetXValue.instance, Duration.EndOfTurn
         ).setText("target creature you control gets +X/+X"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance())
                 .setText("and gains hexproof"));

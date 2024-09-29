@@ -29,7 +29,7 @@ public final class AuntiesHovel extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // As Auntie's Hovel enters the battlefield, you may reveal a Goblin card from your hand. If you don't, Auntie's Hovel enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Goblin card from your hand. If you don't, {this} enters the battlefield tapped"));
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal a Goblin card from your hand. If you don't, {this} enters tapped"));
         // {tap}: Add {B} or {R}.
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());

@@ -1,6 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -12,17 +13,17 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -74,16 +75,12 @@ public final class TocasiaDigSiteMentor extends CardImpl {
 
 class TocasiaDigSiteMentorTarget extends TargetCardInYourGraveyard {
 
-    private static final FilterCard filter = new FilterArtifactCard(
+    private static final FilterArtifactCard filterStatic = new FilterArtifactCard(
             "artifact cards with total mana value 10 or less from your graveyard"
     );
 
-    static {
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 11));
-    }
-
     TocasiaDigSiteMentorTarget() {
-        super(0, Integer.MAX_VALUE, filter, false);
+        super(0, Integer.MAX_VALUE, filterStatic, false);
     }
 
     private TocasiaDigSiteMentorTarget(final TocasiaDigSiteMentorTarget target) {
@@ -97,15 +94,26 @@ class TocasiaDigSiteMentorTarget extends TargetCardInYourGraveyard {
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(controllerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        return card != null &&
-                this.getTargets()
-                        .stream()
-                        .map(game::getCard)
-                        .mapToInt(Card::getManaValue)
-                        .sum() + card.getManaValue() <= 10;
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, MageObject::getManaValue, 10, game);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this.getTargets(),
+                super.possibleTargets(sourceControllerId, source, game),
+                MageObject::getManaValue, 10, game);
+    }
+
+    @Override
+    public String getMessage(Game game) {
+        // shows selected total
+        int selectedValue = this.getTargets().stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .mapToInt(MageObject::getManaValue)
+                .sum();
+        return super.getMessage(game) + " (selected total mana value " + selectedValue + ")";
     }
 }

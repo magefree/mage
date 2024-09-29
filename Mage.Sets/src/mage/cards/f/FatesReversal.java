@@ -2,6 +2,7 @@ package mage.cards.f;
 
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,6 +25,7 @@ public final class FatesReversal extends CardImpl {
                 0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
         ));
         this.getSpellAbility().addEffect(new VentureIntoTheDungeonEffect().concatBy("."));
+        this.getSpellAbility().addHint(CurrentDungeonHint.instance);
     }
 
     private FatesReversal(final FatesReversal card) {

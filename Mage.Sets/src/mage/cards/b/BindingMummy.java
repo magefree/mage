@@ -35,7 +35,7 @@ public final class BindingMummy extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another Zombie enters the battlefield under your control, you may tap target artifact or creature.
+        // Whenever another Zombie you control enters, you may tap target artifact or creature.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect(), filter, true);
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);

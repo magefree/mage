@@ -34,7 +34,7 @@ public final class MoltenCollapse extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}{R}");
 
         // Choose one. If you descended this turn, you may choose both instead.
-        this.getSpellAbility().getModes().setMoreCondition(DescendedThisTurnCondition.instance);
+        this.getSpellAbility().getModes().setMoreCondition(2, DescendedThisTurnCondition.instance);
         this.getSpellAbility().getModes().setChooseText(
                 "Choose one. If you descended this turn, you may choose both instead."
         );

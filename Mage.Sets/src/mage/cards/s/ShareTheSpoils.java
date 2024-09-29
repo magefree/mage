@@ -92,7 +92,7 @@ class ShareTheSpoilsExileETBAndPlayerLossAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield or an opponent loses the game, " +
+        return "When {this} enters or an opponent loses the game, " +
                 "exile the top card of each player's library.";
     }
 }

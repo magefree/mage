@@ -35,7 +35,7 @@ public final class MetastaticEvangel extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-        // Whenever another nontoken creature enters the battlefield under your control, proliferate.
+        // Whenever another nontoken creature you control enters, proliferate.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ProliferateEffect(false), filter));
     }
 

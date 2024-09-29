@@ -22,7 +22,7 @@ public class EyeOfMalcator extends CardImpl {
         //When Eye of Malcator enters the battlefield, scry 2.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(2)));
 
-        //Whenever another artifact enters the battlefield under your control, Eye of Malcator becomes a 4/4 Phyrexian
+        //Whenever another artifact you control enters, Eye of Malcator becomes a 4/4 Phyrexian
         //Eye artifact creature until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new BecomesCreatureSourceEffect(
@@ -31,7 +31,7 @@ public class EyeOfMalcator extends CardImpl {
                         ).withType(CardType.ARTIFACT), CardType.ARTIFACT, Duration.EndOfTurn
                 ).setText("{this} becomes a 4/4 Phyrexian Eye artifact creature until end of turn"),
                 StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT
-        ).setTriggerPhrase("Whenever another artifact enters the battlefield under your control, "));
+        ).setTriggerPhrase("Whenever another artifact you control enters, "));
     }
 
     private EyeOfMalcator(final EyeOfMalcator card) {

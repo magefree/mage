@@ -72,9 +72,13 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         boolean toRet = false;
         for (TriggeredAbility ability : triggeredAbilities) {
+            for (Effect e : getEffects()) { //Add effects to the sub-abilities so that they can set target pointers
+                ability.addEffect(e);
+            }
             if (ability.checkEventType(event, game) && ability.checkTrigger(event, game)) {
                 toRet = true;
             }
+            ability.getEffects().clear(); //Remove afterwards, ensures that they remain synced even with copying
         }
         return toRet;
     }

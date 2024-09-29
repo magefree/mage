@@ -97,7 +97,7 @@ public class OneWithTheStarsTest extends CardTestPlayerBase {
         execute();
 
         assertType(blossom, CardType.ENCHANTMENT, true);
-        assertType(blossom, CardType.TRIBAL, false);
+        assertType(blossom, CardType.KINDRED, false);
         assertNotSubtype(blossom, SubType.FAERIE);
     }
 }

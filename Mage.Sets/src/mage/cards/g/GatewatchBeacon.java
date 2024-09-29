@@ -38,7 +38,7 @@ public final class GatewatchBeacon extends CardImpl {
         // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());
 
-        // Whenever a planeswalker enters the battlefield under your control, if Gatewatch Beacon has loyalty
+        // Whenever a planeswalker you control enters, if Gatewatch Beacon has loyalty
         // counters on it, you may move a loyalty counter from Gatewatch Beacon onto that planeswalker.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(
@@ -46,7 +46,7 @@ public final class GatewatchBeacon extends CardImpl {
                         new GatewatchBeaconMoveCounterEffect(),
                         StaticFilters.FILTER_PERMANENT_PLANESWALKER,
                         true
-                ), GatewatchBeaconCondition.instance, "Whenever a planeswalker enters the battlefield under your control, if {this} has " +
+                ), GatewatchBeaconCondition.instance, "Whenever a planeswalker you control enters, if {this} has " +
                 "loyalty counters on it, you may move a loyalty counter from {this} onto that planeswalker"
         ));
     }

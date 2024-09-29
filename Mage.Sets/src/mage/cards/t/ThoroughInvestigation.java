@@ -4,6 +4,7 @@ import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,7 +24,8 @@ public final class ThoroughInvestigation extends CardImpl {
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new InvestigateEffect(), 1));
 
         // Whenever you sacrifice a Clue, venture into the dungeon.
-        this.addAbility(new SacrificePermanentTriggeredAbility(new VentureIntoTheDungeonEffect(), StaticFilters.FILTER_CONTROLLED_CLUE));
+        this.addAbility(new SacrificePermanentTriggeredAbility(new VentureIntoTheDungeonEffect(), StaticFilters.FILTER_CONTROLLED_CLUE)
+                .addHint(CurrentDungeonHint.instance));
     }
 
     private ThoroughInvestigation(final ThoroughInvestigation card) {

@@ -47,7 +47,7 @@ public class Watchers extends HashMap<String, Watcher> {
         if (containsKey(key)) {
             return super.get(key);
         }
-        // can't add game exeption here because it's an easy way to ruin any game with bugged card
+        // can't add game exception here because it's an easy way to ruin any game with bugged card
         logger.error(key + " not found in watchers", new Throwable());
         return null;
     }

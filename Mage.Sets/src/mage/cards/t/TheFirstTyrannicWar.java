@@ -39,7 +39,7 @@ public final class TheFirstTyrannicWar extends CardImpl {
         // (As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)
         SagaAbility sagaAbility = new SagaAbility(this);
 
-        // I -- You may put a creature card from your hand onto the battlefield. If its mana cost contains {X}, it enters the battlefield with a number of +1/+1 counters on it equal to the number of lands you control.
+        // I -- You may put a creature card from your hand onto the battlefield. If its mana cost contains {X}, it enters with a number of +1/+1 counters on it equal to the number of lands you control.
         sagaAbility.addChapterEffect(this, SagaChapter.CHAPTER_I, new TheFirstTyrannicWarFirstEffect());
 
         // II, III -- Double the number of each kind of counter on target creature you control.
@@ -65,7 +65,7 @@ class TheFirstTyrannicWarFirstEffect extends OneShotEffect {
     TheFirstTyrannicWarFirstEffect() {
         super(Outcome.Benefit);
         staticText = "you may put a creature card from your hand onto the battlefield. " +
-                "If its mana cost contains {X}, it enters the battlefield " +
+                "If its mana cost contains {X}, it enters " +
                 "with a number of +1/+1 counters on it equal to the number of lands you control";
     }
 

@@ -5,10 +5,17 @@ import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.TxtDeckImporter;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.CardScanner;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class TxtDeckImporterTest {
+
+    @Before
+    public void setUp() {
+        CardScanner.scan();
+    }
 
     @Test
     public void testImportWithBlankLineAboveSideboard() {

@@ -54,7 +54,7 @@ public final class SatyaAetherfluxGenius extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Haste
         this.addAbility(HasteAbility.getInstance());

@@ -1,10 +1,8 @@
 
 package mage.cards.o;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -18,6 +16,9 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.OozeToken;
 import mage.game.permanent.token.Token;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -66,13 +67,7 @@ class OozeFluxCreateTokenEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = 0;
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof RemoveVariableCountersTargetCost) {
-                xValue = ((RemoveVariableCountersTargetCost) cost).getAmount();
-                break;
-            }
-        }
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Token tokenCopy = token.copy();
         tokenCopy.getAbilities().newId();
         tokenCopy.getPower().setModifiedBaseValue(xValue);

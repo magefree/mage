@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.ActivateAbilityTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.CopyStackObjectEffect;
@@ -10,11 +10,12 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterStackObject;
+import mage.filter.common.FilterActivatedOrTriggeredAbility;
+import mage.filter.predicate.other.NotManaAbilityPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.StackAbility;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -23,7 +24,11 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class LocusOfEnlightenment extends CardImpl {
+    private static final FilterStackObject filter = new FilterActivatedOrTriggeredAbility("an ability that isn't a mana ability");
 
+    static {
+        filter.add(NotManaAbilityPredicate.instance);
+    }
     public LocusOfEnlightenment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "");
 
@@ -35,7 +40,7 @@ public final class LocusOfEnlightenment extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LocusOfEnlightenmentEffect()));
 
         // Whenever you activate an ability that isn't a mana ability, copy it. You may choose new targets for the copy.
-        this.addAbility(new LocusOfEnlightenmentTriggeredAbility());
+        this.addAbility(new ActivateAbilityTriggeredAbility(new CopyStackObjectEffect("it"), filter, SetTargetPointer.SPELL));
     }
 
     private LocusOfEnlightenment(final LocusOfEnlightenment card) {
@@ -88,41 +93,6 @@ class LocusOfEnlightenmentEffect extends ContinuousEffectImpl {
                 }
             }
         }
-        return true;
-    }
-}
-
-class LocusOfEnlightenmentTriggeredAbility extends TriggeredAbilityImpl {
-
-    LocusOfEnlightenmentTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CopyStackObjectEffect().setText("copy it. You may choose new targets for the copy"));
-        this.setTriggerPhrase("Whenever you activate an ability that isn't a mana ability, ");
-    }
-
-    private LocusOfEnlightenmentTriggeredAbility(final LocusOfEnlightenmentTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public LocusOfEnlightenmentTriggeredAbility copy() {
-        return new LocusOfEnlightenmentTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ACTIVATED_ABILITY;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!event.getPlayerId().equals(getControllerId())) {
-            return false;
-        }
-        StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility == null || stackAbility.isManaAbility()) {
-            return false;
-        }
-        this.getEffects().setValue("stackObject", stackAbility);
         return true;
     }
 }

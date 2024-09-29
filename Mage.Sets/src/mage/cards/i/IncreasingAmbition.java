@@ -1,7 +1,6 @@
 package mage.cards.i;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.CastFromGraveyardSourceCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
@@ -9,10 +8,7 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -29,7 +25,7 @@ public final class IncreasingAmbition extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(2, StaticFilters.FILTER_CARD), false),
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(), false),
-                IncreasingAmbitionCondition.instance, "Search your library for a card " +
+                CastFromGraveyardSourceCondition.instance, "Search your library for a card " +
                 "and put that card into your hand. If this spell was cast from a graveyard, " +
                 "instead search your library for two cards and put those cards into your hand. " +
                 "Then shuffle."
@@ -46,15 +42,5 @@ public final class IncreasingAmbition extends CardImpl {
     @Override
     public IncreasingAmbition copy() {
         return new IncreasingAmbition(this);
-    }
-}
-
-enum IncreasingAmbitionCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpell(source.getSourceId());
-        return spell != null && spell.getFromZone() == Zone.GRAVEYARD;
     }
 }

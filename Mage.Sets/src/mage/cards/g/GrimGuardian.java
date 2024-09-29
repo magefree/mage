@@ -23,7 +23,7 @@ public final class GrimGuardian extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
-        // Constellation - Whenever Grim Guardian or another enchantment enters the battlefield under your control, each opponent loses 1 life.
+        // Constellation - Whenever Grim Guardian or another enchantment you control enters, each opponent loses 1 life.
         this.addAbility(new ConstellationAbility(new LoseLifeOpponentsEffect(1), false));
     }
 

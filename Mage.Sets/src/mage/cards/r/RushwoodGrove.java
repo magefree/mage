@@ -9,7 +9,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class RushwoodGrove extends CardImpl {
         // {T}, Remove any number of storage counters from Rushwood Grove: Add {G} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.GreenMana(1),
-                RemovedCountersForCostValue.instance,
+                GetXValue.instance,
                 new TapSourceCost(),
                 "Add {G} for each storage counter removed this way",
                 true, new CountersSourceCount(CounterType.STORAGE));
