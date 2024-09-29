@@ -44,7 +44,7 @@ public final class TitaniaNaturesForce extends CardImpl {
         // You may play Forests from your graveyard.
         this.addAbility(new SimpleStaticAbility(new PlayLandsFromGraveyardControllerEffect(filter)));
 
-        // Whenever a Forest enters the battlefield under your control, create a 5/3 green Elemental creature token.
+        // Whenever a Forest you control enters, create a 5/3 green Elemental creature token.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new CreateTokenEffect(new TitaniaProtectorOfArgothElementalToken()), filter2
         ));

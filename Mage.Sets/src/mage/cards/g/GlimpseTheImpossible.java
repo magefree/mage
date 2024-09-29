@@ -96,7 +96,7 @@ class GlimpseTheImpossibleEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl(exileZone.getCards(game));
         controller.moveCards(cards, Zone.GRAVEYARD, source, game);
-        game.getState().processAction(game);
+        game.processAction();
         cards.retainZone(Zone.GRAVEYARD, game);
         new CreateTokenEffect(new EldraziSpawnToken(), cards.size())
                 .apply(game, source);

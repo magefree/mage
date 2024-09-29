@@ -36,7 +36,7 @@ public final class SoulTransfer extends CardImpl {
         this.getSpellAbility().getModes().setChooseText(
                 "Choose one. If you control an artifact and an enchantment as you cast this spell, you may choose both."
         );
-        this.getSpellAbility().getModes().setMoreCondition(SoulTransferCondition.instance);
+        this.getSpellAbility().getModes().setMoreCondition(2, SoulTransferCondition.instance);
 
         // • Exile target creature or planeswalker.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

@@ -31,7 +31,7 @@ public final class UnderhandedDesigns extends CardImpl {
     public UnderhandedDesigns(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}");
 
-        // Whenever an artifact enters the battlefield under your control, you may pay {1}. If you do, each opponent loses 1 life and you gain 1 life.
+        // Whenever an artifact you control enters, you may pay {1}. If you do, each opponent loses 1 life and you gain 1 life.
         DoIfCostPaid doIfCostPaid = new DoIfCostPaid(new LoseLifeOpponentsEffect(1), new GenericManaCost(1));
         doIfCostPaid.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,

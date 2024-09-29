@@ -9,7 +9,7 @@
 [![Join the chat at https://gitter.im/magefree/mage](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/magefree/mage?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 XMage allows you to play Magic against one or more online players or computer opponents. 
-It includes full rules enforcement for over **25 000** unique cards and more than 65 000 reprints from different editions. 
+It includes full rules enforcement for over **28 000** unique cards and more than 73 000 reprints from different editions. 
 You can also find custom sets like Star Wars. All regular sets have nearly all implemented cards.
 
 It supports single matches and tournaments with dozens of game modes like duel, multiplayer, standard, modern, commander, 
@@ -75,6 +75,7 @@ Github issues page contain [popular problems and fixes](https://github.com/magef
 * [Any: can't run client, could not open ...jvm.cfg](https://github.com/magefree/mage/issues/1272#issuecomment-529789018);
 * [Any: no texts or small buttons in launcher](https://github.com/magefree/mage/issues/4126);
 * [Windows: ugly cards, buttons or other GUI drawing artifacts](https://github.com/magefree/mage/issues/4626#issuecomment-374640070);
+* [Windows: pixilated images, icons and texts](https://github.com/magefree/mage/issues/12768#issuecomment-2347125602);
 * [MacOS: can't run on M1/M2](https://github.com/magefree/mage/issues/8406#issuecomment-1011720728);
 * [MacOS: can't open launcher](https://www.reddit.com/r/XMage/comments/kf8l34/updated_java_on_osx_xmage_not_working/ggej8cq/);
 * [MacOS: client freezes in GUI (on connect dialog, on new match)](https://github.com/magefree/mage/issues/4920#issuecomment-517944308);
@@ -115,7 +116,7 @@ More info about [XRender](https://docs.oracle.com/javase/8/docs/technotes/guides
 This is not guaranteed to yield improvements, but it depends on your use-case. 
 If you have a lot of RAM to spare, you can increase the initial heap size for good measure.
 More details about [memory settings](https://stackoverflow.com/a/57839720/8401696):
-* `-Xms1G -Xmx2G`
+* `-Xmx2G`
 
 ## Developer
 

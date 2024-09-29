@@ -31,7 +31,7 @@ public final class RisenReef extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Whenever Risen Reef or another Elemental enters the battlefield under your control, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. If you don't put the card onto the battlefield, put it into your hand.
+        // Whenever Risen Reef or another Elemental you control enters, look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. If you don't put the card onto the battlefield, put it into your hand.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new RisenReefEffect(), filter, false, true
         ));
@@ -75,10 +75,10 @@ class RisenReefEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        player.lookAtCards("", card, game);
+        player.lookAtCards("Top card of library", card, game);
         if (card.isLand(game) && player.chooseUse(
                 outcome, "Put " + card.getName() + " onto the battlefield tapped?",
-                "(otherwise put it into your hand", "To battlefield",
+                "(otherwise put it into your hand)", "To battlefield",
                 "To hand", source, game)) {
             player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
         } else {

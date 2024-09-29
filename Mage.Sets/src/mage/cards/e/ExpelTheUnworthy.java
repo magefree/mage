@@ -17,7 +17,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -26,6 +26,12 @@ import java.util.UUID;
  */
 public final class ExpelTheUnworthy extends CardImpl {
 
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value 3 or less");
+
+    static {
+        filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, 3));
+    }
 
     public ExpelTheUnworthy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{W}");
@@ -37,7 +43,9 @@ public final class ExpelTheUnworthy extends CardImpl {
         this.getSpellAbility().addEffect(new InfoEffect("Choose target creature with mana value 3 or less. If this spell was kicked, instead choose target creature."));
         this.getSpellAbility().addEffect(new ExileTargetEffect().setText("Exile the chosen creature"));
         this.getSpellAbility().addEffect(new ExpelTheUnworthyEffect());
-        this.getSpellAbility().setTargetAdjuster(ExpelTheUnworthyAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
+                new TargetCreaturePermanent()));
     }
 
     private ExpelTheUnworthy(final ExpelTheUnworthy card) {
@@ -49,27 +57,6 @@ public final class ExpelTheUnworthy extends CardImpl {
         return new ExpelTheUnworthy(this);
     }
 }
-
-enum ExpelTheUnworthyAdjuster implements TargetAdjuster {
-    instance;
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with mana value 3 or less");
-
-    static {
-        filter.add(new ManaValuePredicate(ComparisonType.OR_LESS, 3));
-    }
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        if (KickedCondition.ONCE.apply(game, ability)) {
-            ability.addTarget(new TargetCreaturePermanent());
-        } else {
-            ability.addTarget(new TargetCreaturePermanent(filter));
-        }
-    }
-}
-
 
 class ExpelTheUnworthyEffect extends OneShotEffect {
 

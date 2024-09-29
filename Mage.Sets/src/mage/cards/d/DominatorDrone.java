@@ -50,7 +50,7 @@ public final class DominatorDrone extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,
                 new PermanentsOnTheBattlefieldCondition(filter),
-                "When {this} enters the battlefield, if you control another colorless creature, each opponent loses 2 life."));
+                "When {this} enters, if you control another colorless creature, each opponent loses 2 life."));
 
     }
 

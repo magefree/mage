@@ -92,7 +92,7 @@ class OlorinsSearingLightEffect extends OneShotEffect {
                 }
             }
             if (SpellMasteryCondition.instance.apply(game, source)){
-                game.getState().processAction(game);
+                game.processAction();
                 for (Map.Entry<Player, Integer> entry : damageList) {
                     entry.getKey().damage(entry.getValue(), source, game);
                 }

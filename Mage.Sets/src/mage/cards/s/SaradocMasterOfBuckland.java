@@ -50,7 +50,7 @@ public final class SaradocMasterOfBuckland extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Whenever Saradoc, Master of Buckland or another nontoken creature with power 2 or less enters the battlefield under your control, create a 1/1 white Halfling creature token.
+        // Whenever Saradoc, Master of Buckland or another nontoken creature with power 2 or less you control enters, create a 1/1 white Halfling creature token.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new HalflingToken()), filter, false, true
         ));

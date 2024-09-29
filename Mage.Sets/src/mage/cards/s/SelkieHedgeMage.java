@@ -34,8 +34,8 @@ public final class SelkieHedgeMage extends CardImpl {
         filter3.add(TappedPredicate.TAPPED);
     }
 
-    private static final String rule1 = "When {this} enters the battlefield, if you control two or more Forests, you may gain 3 life.";
-    private static final String rule2 = "When {this} enters the battlefield, if you control two or more Islands, you may return target tapped creature to its owner's hand.";
+    private static final String rule1 = "When {this} enters, if you control two or more Forests, you may gain 3 life.";
+    private static final String rule2 = "When {this} enters, if you control two or more Islands, you may return target tapped creature to its owner's hand.";
 
     public SelkieHedgeMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G/U}");

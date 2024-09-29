@@ -35,7 +35,7 @@ public final class KyloxVisionaryInventor extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{R}");
 
         this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.ARTIFICER);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);

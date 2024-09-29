@@ -39,12 +39,10 @@ public final class SpecimenCollector extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Specimen Collector enters the battlefield, create a 1/1 green Squirrel creature token and a 0/3 blue Crab creature token.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SquirrelToken()));
-        ability.addEffect(new CreateTokenEffect(new CrabToken()).setText("and a 0/3 blue Crab creature token"));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SquirrelToken()).withAdditionalTokens(new CrabToken())));
 
         // When Specimen Collector dies, create a token that's a copy of target token you control.
-        ability = new DiesSourceTriggeredAbility(new CreateTokenCopyTargetEffect());
+        Ability ability = new DiesSourceTriggeredAbility(new CreateTokenCopyTargetEffect());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

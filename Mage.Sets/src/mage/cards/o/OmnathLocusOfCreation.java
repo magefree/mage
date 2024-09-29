@@ -38,7 +38,7 @@ public final class OmnathLocusOfCreation extends CardImpl {
         // When Omnath, Locus of Creation enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
-        // Landfall — Whenever a land enters the battlefield under your control, you gain 4 life if this is the first time this ability has resolved this turn. If it's the second time, add {R}{G}{W}{U}. If it's the third time, Omnath deals 4 damage to each opponent and each planeswalker you don't control.
+        // Landfall — Whenever a land you control enters, you gain 4 life if this is the first time this ability has resolved this turn. If it's the second time, add {R}{G}{W}{U}. If it's the third time, Omnath deals 4 damage to each opponent and each planeswalker you don't control.
         Ability ability = new LandfallAbility(new IfAbilityHasResolvedXTimesEffect(
                 Outcome.GainLife, 1, new GainLifeEffect(4)
         ).setText("you gain 4 life if this is the first time this ability has resolved this turn."), false);

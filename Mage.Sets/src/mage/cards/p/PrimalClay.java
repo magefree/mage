@@ -55,7 +55,7 @@ public final class PrimalClay extends CardImpl {
 
         public PrimalPlasmaReplacementEffect() {
             super(Duration.WhileOnBattlefield, Outcome.Benefit);
-            staticText = "As {this} enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types";
+            staticText = "As {this} enters, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types";
         }
 
         private PrimalPlasmaReplacementEffect(final PrimalPlasmaReplacementEffect effect) {

@@ -26,7 +26,7 @@ public final class AmbuscadeShaman extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Ambuscade Shaman or another creature enters the battlefield under your control, that creature gets +2/+2 until end of turn.
+        // Whenever Ambuscade Shaman or another creature you control enters, that creature gets +2/+2 until end of turn.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new BoostTargetEffect(2, 2, Duration.EndOfTurn)
                         .setText("that creature gets +2/+2 until end of turn"),

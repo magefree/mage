@@ -1,5 +1,6 @@
 package org.mage.test.cards.triggers;
 
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -452,6 +453,95 @@ public class BecomesTargetTriggerTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, felidar, 1);
         assertPowerToughness(playerA, mariner, 3, 3);
+    }
+
+    // Reported bugs with modal spells: #11539, #12439
+
+    private static final String hostility = "Borrowed Hostility"; // R Instant
+    // Escalate {3} (Pay this cost for each mode chosen beyond the first.)
+    // Choose one or both —
+    //        • Target creature gets +3/+0 until end of turn.
+    //        • Target creature gains first strike until end of turn.
+
+    private static final String protector = "Angelic Protector"; // 2/2 Flying
+    // Whenever Angelic Protector becomes the target of a spell or ability, Angelic Protector gets +0/+3 until end of turn.
+
+    private static final String dragon = "Goldspan Dragon"; // 4/4 Flying, haste
+    // Whenever Goldspan Dragon attacks or becomes the target of a spell, create a Treasure token.
+
+    @Test
+    public void testFirstMode() {
+        addCard(Zone.BATTLEFIELD, playerA, protector);
+        addCard(Zone.BATTLEFIELD, playerA, dragon);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, hostility);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hostility);
+        setModeChoice(playerA, "1");
+        addTarget(playerA, protector);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, protector, 5, 5);
+        assertAbility(playerA, protector, FirstStrikeAbility.getInstance(), false);
+        assertPowerToughness(playerA, dragon, 4, 4);
+        assertAbility(playerA, dragon, FirstStrikeAbility.getInstance(), false);
+        assertPermanentCount(playerA, "Treasure Token", 0);
+        assertTappedCount("Mountain", true, 1);
+        assertTappedCount("Mountain", false, 3);
+    }
+
+    @Test
+    public void testSecondMode() {
+        addCard(Zone.BATTLEFIELD, playerA, protector);
+        addCard(Zone.BATTLEFIELD, playerA, dragon);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, hostility);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hostility);
+        setModeChoice(playerA, "2");
+        addTarget(playerA, dragon);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, protector, 2, 2);
+        assertAbility(playerA, protector, FirstStrikeAbility.getInstance(), false);
+        assertPowerToughness(playerA, dragon, 4, 4);
+        assertAbility(playerA, dragon, FirstStrikeAbility.getInstance(), true);
+        assertPermanentCount(playerA, "Treasure Token", 1);
+        assertTappedCount("Mountain", true, 1);
+        assertTappedCount("Mountain", false, 3);
+    }
+
+    @Test
+    public void testBothModes() {
+        addCard(Zone.BATTLEFIELD, playerA, protector);
+        addCard(Zone.BATTLEFIELD, playerA, dragon);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.HAND, playerA, hostility);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, hostility);
+        setModeChoice(playerA, "1");
+        setModeChoice(playerA, "2");
+        addTarget(playerA, protector); // +3/+0
+        addTarget(playerA, dragon); // first strike
+        setChoice(playerA, "Whenever {this} attacks"); // order triggers
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertPowerToughness(playerA, protector, 5, 5);
+        assertAbility(playerA, protector, FirstStrikeAbility.getInstance(), false);
+        assertPowerToughness(playerA, dragon, 4, 4);
+        assertAbility(playerA, dragon, FirstStrikeAbility.getInstance(), true);
+        assertPermanentCount(playerA, "Treasure Token", 1);
+        assertTappedCount("Mountain", true, 4);
+        assertTappedCount("Mountain", false, 0);
     }
 
 }

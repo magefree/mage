@@ -81,6 +81,6 @@ class BloodSeekerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature enters the battlefield under an opponent's control, you may have that player lose 1 life.";
+        return "Whenever a creature an opponent controls enters, you may have that player lose 1 life.";
     }
 }

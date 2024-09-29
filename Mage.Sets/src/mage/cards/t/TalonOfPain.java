@@ -9,7 +9,7 @@ import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -23,6 +23,7 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -42,7 +43,7 @@ public final class TalonOfPain extends CardImpl {
         this.addAbility(new TalonOfPainTriggeredAbility());
 
         // {X}, {T}, Remove X charge counters from Talon of Pain: Talon of Pain deals X damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(ManacostVariableValue.REGULAR, "it"), new ManaCostsImpl<>("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(GetXValue.instance, "it"), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TalonOfPainRemoveVariableCountersSourceCost(CounterType.CHARGE.createInstance()));
         ability.addTarget(new TargetAnyTarget());
@@ -161,7 +162,7 @@ class TalonOfPainRemoveVariableCountersSourceCost extends VariableCostImpl {
 
     @Override
     public int announceXValue(Ability source, Game game) {
-        return source.getManaCostsToPay().getX();
+        return CardUtil.getSourceCostsTag(game, source, "X", 0);
     }
 
 }

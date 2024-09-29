@@ -21,7 +21,7 @@ public class HybridManaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
 
         // Other Scarecrow creatures you control get +1/+1.
-        // Whenever another Scarecrow enters the battlefield under your control, destroy target permanent.
+        // Whenever another Scarecrow you control enters, destroy target permanent.
         addCard(Zone.HAND, playerA, "Reaper King", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Reaper King");

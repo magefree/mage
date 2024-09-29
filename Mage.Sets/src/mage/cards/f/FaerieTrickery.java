@@ -24,7 +24,7 @@ public final class FaerieTrickery extends CardImpl {
     }
 
     public FaerieTrickery(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{1}{U}{U}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.INSTANT},"{1}{U}{U}");
         this.subtype.add(SubType.FAERIE);
 
 

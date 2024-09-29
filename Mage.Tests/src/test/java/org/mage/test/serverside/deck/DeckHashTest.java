@@ -4,8 +4,10 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLayout;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardScanner;
 import mage.game.GameException;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestPlayerBase;
 
@@ -24,12 +26,25 @@ public class DeckHashTest extends MageTestPlayerBase {
     private static final DeckCardInfo GOOD_CARD_1_x3 = new DeckCardInfo("Lightning Bolt", "141", "CLU", 3);
     private static final DeckCardInfo GOOD_CARD_2 = new DeckCardInfo("Bear's Companion", "182", "2x2");
     private static final DeckCardInfo GOOD_CARD_3 = new DeckCardInfo("Amplifire", "92", "RNA");
+    private static final DeckCardInfo GOOD_CARD_4_BASIC_LAND = new DeckCardInfo("Forest", "276", "XLN");
+    private static final DeckCardInfo GOOD_CARD_5_BASIC_LAND = new DeckCardInfo("Plains", "260", "XLN");
+    private static final DeckCardInfo GOOD_CARD_6_BASIC_LAND_SNOW = new DeckCardInfo("Snow-Covered Forest", "383", "ICE");
+    private static final DeckCardInfo GOOD_CARD_7_WASTES = new DeckCardInfo("Wastes", "408", "M3C");
+
+    @Before
+    public void setUp() {
+        CardScanner.scan();
+    }
 
     private void assertDecks(String check, boolean mustBeSame, Deck deck1, Deck deck2) {
+        assertDecks(check, mustBeSame, deck1, deck2, false);
+    }
+
+    private void assertDecks(String check, boolean mustBeSame, Deck deck1, Deck deck2, boolean ignoreBasicLands) {
         Assert.assertEquals(
                 check + " - " + (mustBeSame ? "hash code must be same" : "hash code must be different"),
                 mustBeSame,
-                deck1.getDeckHash() == deck2.getDeckHash()
+                deck1.getDeckHash(ignoreBasicLands) == deck2.getDeckHash(ignoreBasicLands)
         );
     }
 
@@ -237,5 +252,79 @@ public class DeckHashTest extends MageTestPlayerBase {
             }
         }
         Assert.fail("must raise exception on too big amount");
+    }
+
+    @Test
+    public void test_IgnoreBasicLands() {
+        // related rules:
+        // Players may add an unlimited number of cards named Plains, Island, Swamp, Mountain, or Forest to their
+        // deck and sideboard. They may not add additional snow basic land cards (e.g., Snow-Covered Forest, etc)
+        // or Wastes basic land cards, even in formats in which they are legal.
+
+        assertDecks(
+                "same basic lands - strict mode",
+                true,
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_4_BASIC_LAND, GOOD_CARD_2), Arrays.asList()),
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_4_BASIC_LAND, GOOD_CARD_2), Arrays.asList()),
+                false
+        );
+
+        assertDecks(
+                "same basic lands - ignore mode",
+                true,
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_4_BASIC_LAND, GOOD_CARD_2), Arrays.asList()),
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_4_BASIC_LAND, GOOD_CARD_2), Arrays.asList()),
+                true
+        );
+
+        assertDecks(
+                "diff basic lands - strict mode",
+                false,
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_4_BASIC_LAND, GOOD_CARD_2), Arrays.asList()),
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_5_BASIC_LAND, GOOD_CARD_2), Arrays.asList()),
+                false
+        );
+
+        assertDecks(
+                "diff basic lands - ignore mode",
+                true,
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_4_BASIC_LAND, GOOD_CARD_2), Arrays.asList()),
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_5_BASIC_LAND, GOOD_CARD_2), Arrays.asList()),
+                true
+        );
+
+        // snow covered and wastes must be checked as normal cards (not ignore)
+
+        assertDecks(
+                "diff snow-covered basic lands - strict mode",
+                false,
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_4_BASIC_LAND, GOOD_CARD_2), Arrays.asList()),
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_6_BASIC_LAND_SNOW, GOOD_CARD_2), Arrays.asList()),
+                false
+        );
+
+        assertDecks(
+                "diff snow-covered basic lands - ignore mode",
+                false,
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_4_BASIC_LAND, GOOD_CARD_2), Arrays.asList()),
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_6_BASIC_LAND_SNOW, GOOD_CARD_2), Arrays.asList()),
+                true
+        );
+
+        assertDecks(
+                "diff wastes basic lands - strict mode",
+                false,
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_4_BASIC_LAND, GOOD_CARD_2), Arrays.asList()),
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_7_WASTES, GOOD_CARD_2), Arrays.asList()),
+                false
+        );
+
+        assertDecks(
+                "diff wastes basic lands - ignore mode",
+                false,
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_4_BASIC_LAND, GOOD_CARD_2), Arrays.asList()),
+                prepareCardsDeck(Arrays.asList(GOOD_CARD_1, GOOD_CARD_7_WASTES, GOOD_CARD_2), Arrays.asList()),
+                true
+        );
     }
 }

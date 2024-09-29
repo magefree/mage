@@ -50,7 +50,7 @@ public final class MonstrousWarLeech extends CardImpl {
         // As Monstrous War-Leech enters the battlefield, if it was kicked, mill four cards.
         this.addAbility(new EntersBattlefieldAbility(
                 new MillCardsControllerEffect(4), KickedCondition.ONCE,
-                "As {this} enters the battlefield, if it was kicked, mill four cards.", ""
+                "As {this} enters, if it was kicked, mill four cards.", ""
         ));
 
         // Monstrous War-Leech's power and toughness are each equal to the highest mana value among cards in your graveyard.

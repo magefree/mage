@@ -43,7 +43,7 @@ public final class OverseerOfVault76 extends CardImpl {
         this.toughness = new MageInt(3);
 
         // First Contact -- Whenever Overseer of Vault 76 or another creature with power 3 or less
-        // enters the battlefield under your control, put a quest counter on Overseer of Vault 76.
+        // you control enters, put a quest counter on Overseer of Vault 76.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.QUEST.createInstance()), filter, false, true)
                 .withFlavorWord("First Contact"));

@@ -78,7 +78,7 @@ class AlmsCollectorReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DRAW_CARDS;
+        return event.getType() == GameEvent.EventType.DRAW_TWO_OR_MORE_CARDS;
     }
 
     @Override

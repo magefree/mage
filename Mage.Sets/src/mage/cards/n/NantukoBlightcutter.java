@@ -1,29 +1,23 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public final class NantukoBlightcutter extends CardImpl {
@@ -35,8 +29,10 @@ public final class NantukoBlightcutter extends CardImpl {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
     }
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
+
     public NantukoBlightcutter(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.INSECT);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
@@ -44,13 +40,13 @@ public final class NantukoBlightcutter extends CardImpl {
 
         // Protection from black
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
+
         // Threshold - Nantuko Blightcutter gets +1/+1 for each black permanent your opponents control as long as seven or more cards are in your graveyard.
-        PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
-            new BoostSourceEffect(count, count, Duration.WhileOnBattlefield), new CardsInControllerGraveyardCondition(7),
-            "{this} gets +1/+1 for each black permanent your opponents control as long as seven or more cards are in your graveyard"));
-        ability.setAbilityWord(AbilityWord.THRESHOLD);
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
+                new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield),
+                ThresholdCondition.instance, "{this} gets +1/+1 for each black permanent " +
+                "your opponents control as long as seven or more cards are in your graveyard"
+        )).setAbilityWord(AbilityWord.THRESHOLD));
     }
 
     private NantukoBlightcutter(final NantukoBlightcutter card) {

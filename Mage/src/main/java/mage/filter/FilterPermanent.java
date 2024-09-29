@@ -5,6 +5,7 @@ import mage.constants.SubType;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -12,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author North
@@ -64,6 +64,10 @@ public class FilterPermanent extends FilterObject<Permanent> implements FilterIn
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
+
+        // verify check
+        Predicates.makeSurePredicateCompatibleWithFilter(predicate, Permanent.class);
+
         extraPredicates.add(predicate);
     }
 

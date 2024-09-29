@@ -35,9 +35,7 @@ public final class WurmcoilLarva extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Wurmcoil Larva dies, create a 1/2 black Phyrexian Wurm artifact creature token with deathtouch and a 2/1 black Phyrexian Wurm artifact creature token with lifelink.
-        Ability ability = new DiesSourceTriggeredAbility(new CreateTokenEffect(new PhyrexianWurm12DeathtouchToken()), false);
-        ability.addEffect(new CreateTokenEffect(new PhyrexianWurm21LifelinkToken())
-                .setText("and a 2/1 black Phyrexian Wurm artifact creature token with lifelink"));
+        Ability ability = new DiesSourceTriggeredAbility(new CreateTokenEffect(new PhyrexianWurm12DeathtouchToken()).withAdditionalTokens(new PhyrexianWurm21LifelinkToken()), false);
         this.addAbility(ability);
     }
 

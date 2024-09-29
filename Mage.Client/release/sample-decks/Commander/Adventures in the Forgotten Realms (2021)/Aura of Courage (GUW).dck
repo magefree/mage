@@ -1,0 +1,91 @@
+1 [AVR:167] Abundant Growth
+1 [M13:159] Acidic Slime
+1 [MOC:169] Angel of Finality
+1 [M20:5] Angelic Gift
+1 [ELD:331] Arcane Signet
+1 [SOM:137] Argentum Armor
+1 [CLU:229] Azorius Chancery
+1 [ALA:155] Bant Charm
+1 [ALA:221] Bant Panorama
+1 [WWK:122] Basilisk Collar
+1 [ARB:65] Behemoth Sledge
+1 [AFC:307] Belt of Giant Strength
+1 [MMQ:61] Brainstorm
+1 [BFZ:234] Canopy Vista
+1 [AFC:313] Catti-brie of Mithral Hall
+1 [AFC:58] Clay Golem
+1 [EVE:149] Cold-Eyed Selkie
+1 [M20:223] Colossus Hammer
+1 [ELD:333] Command Tower
+1 [CLB:717] Curse of Verbosity
+1 [AFC:15] Diviner's Portent
+1 [AFC:60] Ebony Fly
+1 [ROE:65] Eel Umbra
+1 [WOE:256] Evolving Wilds
+1 [CON:142] Exotic Orchard
+1 [ZEN:202] Explorer's Scope
+1 [LRW:211] Fertile Ground
+1 [AFC:274] Fey Steed
+1 [THS:193] Fleecemane Lion
+1 [MIR:326] Flood Plain
+8 [OTJ:276] Forest
+1 [SOI:274] Fortified Village
+1 [MIR:327] Grasslands
+1 [9ED:245] Greater Good
+1 [SOI:20] Gryff's Boon
+1 [WWK:137] Halimar Depths
+1 [M21:188] Heroic Intervention
+1 [AFC:275] Holy Avenger
+1 [EMN:65] Imprisoned in the Moon
+4 [OTJ:273] Island
+1 [ELD:164] Kenrith's Transformation
+1 [GRN:183] Knight of Autumn
+1 [BFZ:239] Lumbering Falls
+1 [PIP:165] Mantle of the Ancients
+1 [PIP:234] Masterwork of Ingenuity
+1 [4ED:361] Mishra's Factory
+1 [AVR:217] Moonsilver Spear
+1 [5ED:316] Nature's Lore
+1 [AFC:17] Netherese Puzzle-Ward
+1 [WAR:171] Paradise Druid
+1 [M3C:363] Path of Ancestry
+2 [OTJ:272] Plains
+1 [SOI:278] Port Town
+1 [BFZ:241] Prairie Stream
+1 [THS:60] Prognostic Sphinx
+1 [CLU:92] Psychic Impetus
+1 [NPH:20] Puresteel Paladin
+1 [M13:185] Rancor
+1 [ELD:26] Realm-Cloaked Giant
+1 [AFC:325] Ride the Avalanche
+1 [RIX:48] Riverwise Augur
+1 [AFC:11] Robe of Stars
+1 [ALA:229] Seaside Citadel
+1 [5DN:36] Serum Visions
+1 [DIS:147] Shielding Plax
+1 [CLU:247] Simic Growth Chamber
+1 [ODY:327] Skycloud Expanse
+1 [SUM:274] Sol Ring
+1 [AFC:311] Song of Inspiration
+1 [AER:23] Sram, Senior Edificer
+1 [AFC:327] Storvald, Frost Giant Jarl
+1 [ODY:328] Sungrass Prairie
+1 [M12:219] Swiftfoot Boots
+1 [AFC:61] Sword of Hours
+1 [ORI:240] Sword of the Animist
+1 [ONE:261] Terramorphic Expanse
+1 [CLU:250] Thriving Grove
+1 [CLU:251] Thriving Heath
+1 [CLU:252] Thriving Isle
+1 [DIS:99] Utopia Sprawl
+1 [AFC:13] Valiant Endeavor
+1 [VOW:42] Valorous Stance
+1 [TSP:232] Verdant Embrace
+1 [MRD:270] Viridian Longbow
+1 [RAV:285] Vitu-Ghazi, the City-Tree
+1 [7ED:282] Wild Growth
+1 [TMP:52] Winds of Rath
+1 [OTC:124] Winged Boots
+SB: 1 [AFC:1] Galea, Kindler of Hope
+LAYOUT MAIN:(1,7)(CARD_TYPE,false,55)|([AFC:58])([ELD:331],[SOM:137],[WWK:122],[ARB:65],[AFC:307],[M20:223],[AFC:60],[ZEN:202],[AFC:275],[PIP:234],[AVR:217],[AFC:11],[SUM:274],[M12:219],[AFC:61],[ORI:240],[MRD:270],[OTC:124])([M13:159],[MOC:169],[AFC:313],[EVE:149],[AFC:274],[THS:193],[GRN:183],[WAR:171],[THS:60],[NPH:20],[ELD:26],[RIX:48],[AER:23],[AFC:327])([AVR:167],[M20:5],[CLB:717],[ROE:65],[LRW:211],[9ED:245],[SOI:20],[EMN:65],[ELD:164],[PIP:165],[AFC:17],[CLU:92],[M13:185],[DIS:147],[DIS:99],[TSP:232],[7ED:282])([ALA:155],[MMQ:61],[AFC:15],[M21:188],[AFC:325],[AFC:311],[VOW:42])([CLU:229],[ALA:221],[BFZ:234],[ELD:333],[WOE:256],[CON:142],[MIR:326],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[OTJ:276],[SOI:274],[MIR:327],[WWK:137],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[BFZ:239],[4ED:361],[M3C:363],[OTJ:272],[OTJ:272],[SOI:278],[BFZ:241],[ALA:229],[CLU:247],[ODY:327],[ODY:328],[ONE:261],[CLU:250],[CLU:251],[CLU:252],[RAV:285])([5ED:316],[5DN:36],[AFC:13],[TMP:52])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([AFC:1])

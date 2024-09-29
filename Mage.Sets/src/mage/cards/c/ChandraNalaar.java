@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
@@ -33,7 +32,7 @@ public final class ChandraNalaar extends CardImpl {
         this.addAbility(ability1);
 
         // -X: Chandra Nalaar deals X damage to target creature.
-        LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(GetXLoyaltyValue.instance));
+        LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(GetXValue.instance));
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
 

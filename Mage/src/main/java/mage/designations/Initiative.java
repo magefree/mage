@@ -3,6 +3,7 @@ package mage.designations;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Controllable;
@@ -113,6 +114,7 @@ class InitiativeVentureTriggeredAbility extends TriggeredAbilityImpl {
 
     InitiativeVentureTriggeredAbility() {
         super(Zone.ALL, new InitiativeUndercityEffect());
+        addHint(CurrentDungeonHint.instance);
     }
 
     private InitiativeVentureTriggeredAbility(final InitiativeVentureTriggeredAbility ability) {

@@ -51,7 +51,7 @@ public class ExileAndReturnUnderYourControl extends CardTestPlayerBase {
         // Courser of Kruphix {1}{G}{G}
         // Play with the top card of your library revealed.
         // You may play the top card of your library if it's a land card.
-        // Whenever a land enters the battlefield under your control, you gain 1 life.
+        // Whenever a land you control enters, you gain 1 life.
         addCard(Zone.LIBRARY, playerB, "Courser of Kruphix");
         skipInitShuffling(); // to keep this card on top of library
 

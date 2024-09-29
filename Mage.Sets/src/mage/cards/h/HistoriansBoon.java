@@ -38,7 +38,7 @@ public final class HistoriansBoon extends CardImpl {
     public HistoriansBoon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
-        // Whenever Historian's Boon or another nontoken enchantment enters the battlefield under your control, create a 1/1 white Soldier creature token.
+        // Whenever Historian's Boon or another nontoken enchantment you control enters, create a 1/1 white Soldier creature token.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new SoldierToken()), filter, false, true
         ));

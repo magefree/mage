@@ -30,7 +30,7 @@ public final class MarduWoeReaper extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        // Whenever Mardu Woe-Reaper or another Warrior enters the battlefield under your control, you may exile target creature card from a graveyard. If you do, you gain 1 life.
+        // Whenever Mardu Woe-Reaper or another Warrior you control enters, you may exile target creature card from a graveyard. If you do, you gain 1 life.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new ExileTargetEffect("exile target creature card from a graveyard.")
                 , filter, true, true

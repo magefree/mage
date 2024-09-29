@@ -40,7 +40,7 @@ public class LaezelsAcrobaticsTest extends CardTestPlayerBase {
         checkExileCount("Exiled", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, auramancer, 1);
         checkExileCount("Exiled", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, dwarf, 1);
 
-        setChoice(playerA, "When {this} enters the battlefield, create"); // order triggers
+        setChoice(playerA, "When {this} enters, create"); // order triggers
         setChoice(playerA, true); // Auramancer: yes to return
         addTarget(playerA, wings); // enchantment to return
 
@@ -67,7 +67,7 @@ public class LaezelsAcrobaticsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, knight);
         setDieRollResult(playerA, 10);
         castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, acrobatics);
-        setChoice(playerA, "When {this} enters the battlefield, create"); // order triggers
+        setChoice(playerA, "When {this} enters, create"); // order triggers
         setChoice(playerA, true); // Auramancer: yes to return
         addTarget(playerA, wings); // enchantment to return
 
@@ -75,7 +75,7 @@ public class LaezelsAcrobaticsTest extends CardTestPlayerBase {
         checkExileCount("Exiled", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, auramancer, 1);
         checkExileCount("Exiled", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, dwarf, 1);
 
-        setChoice(playerA, "When {this} enters the battlefield, create"); // order triggers
+        setChoice(playerA, "When {this} enters, create"); // order triggers
         setChoice(playerA, true); // Auramancer: yes to return
         addTarget(playerA, wings); // enchantment to return
 

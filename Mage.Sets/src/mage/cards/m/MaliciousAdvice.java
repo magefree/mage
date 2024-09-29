@@ -1,7 +1,7 @@
 
 package mage.cards.m;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -37,9 +37,9 @@ public final class MaliciousAdvice extends CardImpl {
         Effect effect = new TapTargetEffect();
         effect.setText("Tap X target artifacts, creatures, and/or lands");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(ManacostVariableValue.REGULAR));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private MaliciousAdvice(final MaliciousAdvice card) {

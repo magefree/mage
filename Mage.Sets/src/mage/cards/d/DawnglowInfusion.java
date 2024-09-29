@@ -5,13 +5,12 @@ import java.util.UUID;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 
 /**
  *
@@ -23,7 +22,7 @@ public final class DawnglowInfusion extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G/W}");
 
         // You gain X life if {G} was spent to cast Dawnglow Infusion and X life if {W} was spent to cast it.
-        DynamicValue xValue = ManacostVariableValue.REGULAR;
+        DynamicValue xValue = GetXValue.instance;
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GainLifeEffect(xValue),
                 ManaWasSpentCondition.GREEN, "You gain X life if {G} was spent to cast this spell"));

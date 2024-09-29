@@ -32,7 +32,7 @@ public final class GameTrail extends CardImpl {
 
         // As Game Trail enters the battlefield, you may reveal a Mountain or Forest card from your hand. If you don't, Game Trail enters the battlefield tapped.
         this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))),
-                "you may reveal a Mountain or Forest card from your hand. If you don't, {this} enters the battlefield tapped"));
+                "you may reveal a Mountain or Forest card from your hand. If you don't, {this} enters tapped"));
 
         // {T}: Add {R} or {G}.
         this.addAbility(new RedManaAbility());

@@ -33,7 +33,7 @@
       */
      public GameEndDialog(GameEndView gameEndView) {
          initComponents();
-         this.modal = true;
+         setModal(true);
 
          pnlText.setOpaque(true);
          pnlText.setBackground(new Color(240, 240, 240, 140));

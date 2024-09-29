@@ -586,7 +586,7 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
         checkPlayableAbility("escape cast not allowed", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Uro, Titan of Nature's Wrath with Escape", false);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Uro, Titan of Nature's Wrath");
-        setChoice(playerA, "Whenever {this} enters the battlefield or attacks"); // gain life trigger first, sacrifice next
+        setChoice(playerA, "Whenever {this} enters or attacks"); // gain life trigger first, sacrifice next
         setChoice(playerA, false); // keep in graveyard
         setChoice(playerA, true); // put land to battlefield
         setChoice(playerA, "Swamp"); // put a Swamp

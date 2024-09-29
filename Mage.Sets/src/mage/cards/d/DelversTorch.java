@@ -6,6 +6,7 @@ import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
@@ -27,7 +28,8 @@ public final class DelversTorch extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
 
         // Whenever equipped creature attacks, venture into the dungeon.
-        this.addAbility(new AttacksAttachedTriggeredAbility(new VentureIntoTheDungeonEffect()));
+        this.addAbility(new AttacksAttachedTriggeredAbility(new VentureIntoTheDungeonEffect())
+                .addHint(CurrentDungeonHint.instance));
 
         // Equip {3}
         this.addAbility(new EquipAbility(3));

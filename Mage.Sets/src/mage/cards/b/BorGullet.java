@@ -21,7 +21,7 @@ public final class BorGullet extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
         
         this.subtype.add(SubType.HORROR);
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 

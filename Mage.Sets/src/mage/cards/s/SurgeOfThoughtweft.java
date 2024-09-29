@@ -26,7 +26,7 @@ public final class SurgeOfThoughtweft extends CardImpl {
     }
 
     public SurgeOfThoughtweft(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{1}{W}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.INSTANT},"{1}{W}");
         this.subtype.add(SubType.KITHKIN);
 
         // Creatures you control get +1/+1 until end of turn.

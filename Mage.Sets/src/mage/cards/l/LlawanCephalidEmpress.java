@@ -38,7 +38,7 @@ public final class LlawanCephalidEmpress extends CardImpl {
     public LlawanCephalidEmpress(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.CEPHALID, SubType.NOBLE);
+        this.subtype.add(SubType.OCTOPUS, SubType.NOBLE);
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);

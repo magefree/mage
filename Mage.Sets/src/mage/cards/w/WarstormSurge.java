@@ -25,7 +25,7 @@ public final class WarstormSurge extends CardImpl {
     public WarstormSurge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
 
-        // Whenever a creature enters the battlefield under your control, it deals damage equal to its power to any target.
+        // Whenever a creature you control enters, it deals damage equal to its power to any target.
         Ability ability = new WarstormSurgeTriggeredAbility();
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
@@ -71,7 +71,7 @@ class WarstormSurgeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a creature enters the battlefield under your control, it deals damage equal to its power to any target.";
+        return "Whenever a creature you control enters, it deals damage equal to its power to any target.";
     }
 
     @Override

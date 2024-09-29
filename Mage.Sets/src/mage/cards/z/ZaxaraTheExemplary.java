@@ -19,6 +19,7 @@ import mage.game.permanent.token.Token;
 import mage.game.permanent.token.ZaxaraTheExemplaryHydraToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -119,7 +120,8 @@ class ZaxaraTheExemplaryHydraTokenEffect extends OneShotEffect {
             // create token
             if (needObject instanceof Spell) {
                 Spell spell = (Spell) needObject;
-                int xValue = spell.getSpellAbility().getManaCostsToPay().getX();
+
+                int xValue = CardUtil.getSourceCostsTag(game, spell.getSpellAbility(), "X", 0);
 
                 Token hydraToken = new ZaxaraTheExemplaryHydraToken();
                 hydraToken.putOntoBattlefield(1, game, source, source.getControllerId());

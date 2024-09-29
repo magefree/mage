@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,10 +32,10 @@ public final class SequenceEngine extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addEffect(FractalToken.getEffect(
-                ManacostVariableValue.REGULAR, "Put X +1/+1 counters on it"
+                GetXValue.instance, "Put X +1/+1 counters on it"
         ));
-        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
     }
 

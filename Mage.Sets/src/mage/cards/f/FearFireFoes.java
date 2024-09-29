@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -34,7 +34,7 @@ public final class FearFireFoes extends CardImpl {
         this.getSpellAbility().addEffect(new DamageCantBePreventedEffect(
                 Duration.EndOfTurn
         ));
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
         this.getSpellAbility().addEffect(new FearFireFoesEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

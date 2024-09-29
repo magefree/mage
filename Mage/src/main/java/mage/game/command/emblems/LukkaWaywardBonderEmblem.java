@@ -17,7 +17,7 @@ import mage.target.common.TargetAnyTarget;
  */
 public final class LukkaWaywardBonderEmblem extends Emblem {
 
-    // −7: You get an emblem with "Whenever a creature enters the battlefield under your control, it deals damage equal to its power to any target."
+    // −7: You get an emblem with "Whenever a creature you control enters, it deals damage equal to its power to any target."
     public LukkaWaywardBonderEmblem() {
         super("Emblem Lukka");
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(

@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -33,6 +34,7 @@ public final class BarTheGate extends CardImpl {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addEffect(new VentureIntoTheDungeonEffect());
+        this.getSpellAbility().addHint(CurrentDungeonHint.instance);
     }
 
     private BarTheGate(final BarTheGate card) {

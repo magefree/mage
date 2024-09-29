@@ -1,24 +1,24 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.constants.AbilityWord;
-import mage.constants.Duration;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class CabalInitiate extends CardImpl {
@@ -32,12 +32,13 @@ public final class CabalInitiate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Discard a card: Cabal Initiate gains lifelink until end of turn.
-        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(
+                new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost()
+        ));
 
         // Threshold — Cabal Initiate gets +1/+2 as long as seven or more cards are in your graveyard.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
-                new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
-                new CardsInControllerGraveyardCondition(7),
+                new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield), ThresholdCondition.instance,
                 "{this} gets +1/+2 as long as seven or more cards are in your graveyard"
         )).setAbilityWord(AbilityWord.THRESHOLD));
     }

@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.common.SacrificePermanentTriggeredAbility;
+import mage.abilities.common.SacrificeOneOrMorePermanentsTriggeredAbility;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class ForgeBoss extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("one or more other creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -33,7 +33,7 @@ public final class ForgeBoss extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you sacrifice one or more other creatures, Forge Boss deals 2 damage to each opponent. This ability triggers only once each turn.
-        this.addAbility(new SacrificePermanentTriggeredAbility(
+        this.addAbility(new SacrificeOneOrMorePermanentsTriggeredAbility(
                 new DamagePlayersEffect(2, TargetController.OPPONENT), filter
         ).setTriggersLimitEachTurn(1));
     }

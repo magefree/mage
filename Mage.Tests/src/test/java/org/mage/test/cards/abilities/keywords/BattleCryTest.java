@@ -1,5 +1,3 @@
-
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -34,6 +32,7 @@ public class BattleCryTest extends CardTestPlayerBase {
         attack(2, playerB, "Signal Pest");
         attack(2, playerB, "Signal Pest");
         attack(2, playerB, "Signal Pest");
+        setChoice(playerB, "Battle cry", 2); // order triggers
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -56,6 +55,7 @@ public class BattleCryTest extends CardTestPlayerBase {
         attack(2, playerB, "Signal Pest");
         attack(2, playerB, "Signal Pest");
         attack(2, playerB, "Signal Pest");
+        setChoice(playerB, "Battle cry", 2); // order triggers
 
         setStopAt(3, PhaseStep.UPKEEP);
         execute();

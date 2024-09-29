@@ -1,21 +1,20 @@
-
 package mage.cards.m;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
+
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -27,12 +26,8 @@ public final class MarchFromTheTomb extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{W}{B}");
 
         // Return any number of target Ally creature cards with total converted mana cost of 8 or less from your graveyard to the battlefield.
-        Effect effect = new ReturnFromGraveyardToBattlefieldTargetEffect();
-        effect.setText("Return any number of target Ally creature cards with total mana value 8 or less from your graveyard to the battlefield");
-        this.getSpellAbility().addEffect(effect);
-        FilterCard filter = new FilterCreatureCard();
-        filter.add(SubType.ALLY.getPredicate());
-        this.getSpellAbility().addTarget(new MarchFromTheTombTarget(0, Integer.MAX_VALUE, filter));
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
+        this.getSpellAbility().addTarget(new MarchFromTheTombTarget());
     }
 
     private MarchFromTheTomb(final MarchFromTheTomb card) {
@@ -47,8 +42,13 @@ public final class MarchFromTheTomb extends CardImpl {
 
 class MarchFromTheTombTarget extends TargetCardInYourGraveyard {
 
-    public MarchFromTheTombTarget(int minNumTargets, int maxNumTargets, FilterCard filter) {
-        super(minNumTargets, maxNumTargets, filter);
+    private static final FilterCreatureCard filterStatic = new FilterCreatureCard("Ally creature cards with total mana value 8 or less from your graveyard");
+    static {
+        filterStatic.add(SubType.ALLY.getPredicate());
+    }
+
+    MarchFromTheTombTarget() {
+        super(0, Integer.MAX_VALUE, filterStatic);
     }
 
     private MarchFromTheTombTarget(final MarchFromTheTombTarget target) {
@@ -56,40 +56,28 @@ class MarchFromTheTombTarget extends TargetCardInYourGraveyard {
     }
 
     @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
-        int cmcLeft = 8;
-        for (UUID targetId : this.getTargets()) {
-            Card card = game.getCard(targetId);
-            if (card != null) {
-                cmcLeft -= card.getManaValue();
-            }
-        }
-        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        Set<UUID> leftPossibleTargets = new HashSet<>();
-        for (UUID targetId : possibleTargets) {
-            Card card = game.getCard(targetId);
-            if (card != null && card.getManaValue() <= cmcLeft) {
-                leftPossibleTargets.add(targetId);
-            }
-        }
-        setTargetName("any number of target Ally creature cards with total mana value of 8 or less (" + cmcLeft + " left) from your graveyard");
-        return leftPossibleTargets;
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, MageObject::getManaValue, 8, game);
     }
 
     @Override
-    public boolean canTarget(UUID playerId, UUID objectId, Ability source, Game game) {
-        if (super.canTarget(playerId, objectId, source, game)) {
-            int cmcLeft = 8;
-            for (UUID targetId : this.getTargets()) {
-                Card card = game.getCard(targetId);
-                if (card != null) {
-                    cmcLeft -= card.getManaValue();
-                }
-            }
-            Card card = game.getCard(objectId);
-            return card != null && card.getManaValue() <= cmcLeft;
-        }
-        return false;
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this.getTargets(),
+                super.possibleTargets(sourceControllerId, source, game),
+                MageObject::getManaValue, 8, game);
+    }
+
+    @Override
+    public String getMessage(Game game) {
+        // shows selected total
+        int selectedValue = this.getTargets().stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .mapToInt(MageObject::getManaValue)
+                .sum();
+        return super.getMessage(game) + " (selected total mana value " + selectedValue + ")";
     }
 
     @Override

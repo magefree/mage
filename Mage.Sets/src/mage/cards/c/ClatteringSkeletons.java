@@ -3,6 +3,7 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,7 +24,8 @@ public final class ClatteringSkeletons extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Clattering Skeletons dies, venture into the dungeon.
-        this.addAbility(new DiesSourceTriggeredAbility(new VentureIntoTheDungeonEffect()));
+        this.addAbility(new DiesSourceTriggeredAbility(new VentureIntoTheDungeonEffect())
+                .addHint(CurrentDungeonHint.instance));
     }
 
     private ClatteringSkeletons(final ClatteringSkeletons card) {
