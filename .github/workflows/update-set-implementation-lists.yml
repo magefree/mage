@@ -134,11 +134,13 @@ jobs:
 
               if (body.length > 65536) {
                 console.log(`Issue body for ${set[0]} (${set[1]}) too long! Length: ${body.length}`);
-                const splitBody = splitter(body, 65536);
-                console.log(`Body was split into ${splitBody.length} chunks`);
-                splitBody.forEach(b => {
-                  console.log(b.length);
-                });
+                console.log("Shortened?: " + mustache.render(cardIssueTemplate, {
+                  hasUnimplementedCards: unimplemented.length > 0,
+                  hasImplementedCards: implemented.length > 0,
+                  unimplementedCards: unimplemented,
+                  implementedCards: implemented,
+                  unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName)`
+                }).length);
                 //continue;
               }
               
