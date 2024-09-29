@@ -133,7 +133,8 @@ jobs:
                   hasImplementedCards: implemented.length > 0,
                   unimplementedCards: unimplemented,
                   implementedCards: implemented,
-                  unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`
+                  unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`,
+                  setName: set[0]
                 });
 
               // GH API has a max character length of 65536 for issue body. We can try to cut down on unnecessary fat to try to get it to fit.
@@ -144,7 +145,8 @@ jobs:
                   hasImplementedCards: implemented.length > 0,
                   unimplementedCards: unimplemented,
                   implementedCards: implemented,
-                  unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`
+                  unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`,
+                  setName: set[0]
                 }).replaceAll("--", "-").replaceAll("https://", "").replaceAll(`+e:${set[1]}`, "");
                 console.log(`Trimmed body length: ${trimmedBody.length}`);
                 if (trimmedBody.length > 65536) {
