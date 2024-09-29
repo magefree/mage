@@ -1,6 +1,6 @@
 Set Name  |  # Cards | # Missing |
 --- | --- | --- |
-[Tenth Edition](https://www.github.com/mage/magefree) | 363 | 1
+[Tenth Edition](https://github.com/ExpensiveKoala/mage/issues/3) | 363 | 1
 [Unlimited Edition](https://www.github.com/mage/magefree) | 287 | 7
 [Revised Edition](https://www.github.com/mage/magefree) | 291 | 5
 [Fourth Edition](https://www.github.com/mage/magefree) | 363 | 6
