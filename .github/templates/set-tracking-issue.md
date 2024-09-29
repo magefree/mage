@@ -29,6 +29,7 @@ All cards are implemented
   {{#hasImplementedCards}}
   {{#implementedCards}}
   * [{{#pr}}*{{/pr}}{{^pr}} {{/pr}}]  Done -- [{{name}}]({{scryfall}})
+
   {{/implementedCards}}
   {{/hasImplementedCards}}
 </details>
