@@ -19,8 +19,6 @@ import java.nio.file.Paths;
  */
 public class DatabaseCompatibleTest {
 
-    private final String JDBC_URL = "jdbc:h2:file:%s;AUTO_SERVER=TRUE";
-
     @Rule
     public TemporaryFolder tempFolder = new TemporaryFolder();
 
@@ -38,9 +36,8 @@ public class DatabaseCompatibleTest {
             );
             Assert.assertTrue(Files.exists(Paths.get(dbFullFileName)));
 
-            AuthorizedUserRepository dbUsers = new AuthorizedUserRepository(
-                    String.format(JDBC_URL, dbFullName)
-            );
+            String connectionString = String.format("jdbc:h2:file:%s;AUTO_SERVER=TRUE", dbFullName);
+            AuthorizedUserRepository dbUsers = new AuthorizedUserRepository(connectionString);
 
             // search
             Assert.assertNotNull(dbUsers.getByName("user1"));

@@ -2,16 +2,12 @@
 package mage.cards.u;
 
 import java.util.UUID;
-import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.mana.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 
 /**
  *
@@ -24,10 +20,10 @@ public final class UndergroundRiver extends CardImpl {
 
         this.addAbility(new ColorlessManaAbility());
 
-        Ability blueManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlueMana(1), new TapSourceCost());
+        Ability blueManaAbility = new BlueManaAbility();
         blueManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blueManaAbility);
-        Ability blackManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new TapSourceCost());
+        Ability blackManaAbility = new BlackManaAbility();
         blackManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blackManaAbility);
     }

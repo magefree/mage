@@ -17,6 +17,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -96,7 +97,7 @@ class VerrakWarpedSengirTriggeredAbility extends TriggeredAbilityImpl {
         if (lifePaid > 0) {
             this.getEffects().clear();
             this.addEffect(new DoIfCostPaid(new CopyStackObjectEffect(), new PayLifeCost(lifePaid)));
-            this.getEffects().setValue("stackObject", stackAbility);
+            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }
         return false;

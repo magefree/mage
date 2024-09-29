@@ -30,9 +30,12 @@ public class BufferedImageBuilder {
             return null;
         }
         BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), type);
-        Graphics2D g = bufferedImage.createGraphics();
-        g.drawImage(image, null, null);
-        //waitForImage(bufferedImage);
+        Graphics2D g2 = bufferedImage.createGraphics();
+        try {
+            g2.drawImage(image, null, null);
+        } finally {
+            g2.dispose();
+        }
         return bufferedImage;
     }
 
@@ -41,10 +44,14 @@ public class BufferedImageBuilder {
             return null;
         }
         BufferedImage bufferedImage = new BufferedImage(image.getWidth(null), image.getHeight(null), type);
-        Graphics2D g = bufferedImage.createGraphics();
-        g.drawImage(image, null, null);
-        g.setColor(color);
-        g.fillRect(0, 0, image.getWidth(null), image.getHeight(null));
+        Graphics2D g2 = bufferedImage.createGraphics();
+        try {
+            g2.drawImage(image, null, null);
+            g2.setColor(color);
+            g2.fillRect(0, 0, image.getWidth(null), image.getHeight(null));
+        } finally {
+            g2.dispose();
+        }
         return bufferedImage;
     }
 

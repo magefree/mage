@@ -31,6 +31,7 @@ public final class DominariaUnited extends ExpansionSet {
         super("Dominaria United", "DMU", ExpansionSet.buildDate(2022, 9, 9), SetType.EXPANSION);
         this.blockName = "Dominaria United";
         this.hasBoosters = true;
+        this.rotationSet = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

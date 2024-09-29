@@ -39,7 +39,7 @@ public class SimpleMageClient implements MageClient {
     }
 
     @Override
-    public void disconnected(boolean askToReconnect) {
+    public void disconnected(boolean askToReconnect, boolean keepMySessionActive) {
         // do nothing
     }
 

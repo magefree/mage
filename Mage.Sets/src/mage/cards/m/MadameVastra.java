@@ -1,7 +1,6 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.DealtDamageAndDiedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -36,9 +35,7 @@ public final class MadameVastra extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
 
         // Whenever a creature dealt damage by Madame Vastra this turn dies, create a Clue token and a Food token.
-        TriggeredAbility trigger = new DealtDamageAndDiedTriggeredAbility(new CreateTokenEffect(new ClueArtifactToken()));
-        trigger.addEffect(new CreateTokenEffect(new FoodToken()).setText("and a Food token"));
-        this.addAbility(trigger);
+        this.addAbility(new DealtDamageAndDiedTriggeredAbility(new CreateTokenEffect(new ClueArtifactToken()).withAdditionalTokens(new FoodToken())));
     }
 
     private MadameVastra(final MadameVastra card) {

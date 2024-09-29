@@ -43,6 +43,7 @@ public enum SubType {
     CLASS("Class", SubTypeSet.EnchantmentType),
     CURSE("Curse", SubTypeSet.EnchantmentType),
     ROLE("Role", SubTypeSet.EnchantmentType),
+    ROOM("Room", SubTypeSet.EnchantmentType),
     RUNE("Rune", SubTypeSet.EnchantmentType),
     SAGA("Saga", SubTypeSet.EnchantmentType),
     SHARD("Shard", SubTypeSet.EnchantmentType),
@@ -62,7 +63,7 @@ public enum SubType {
     POWERSTONE("Powerstone", SubTypeSet.ArtifactType),
     TREASURE("Treasure", SubTypeSet.ArtifactType),
     VEHICLE("Vehicle", SubTypeSet.ArtifactType),
-    // 205.3m : Creatures and tribals share their lists of subtypes; these subtypes are called creature types.
+    // 205.3m : Creatures and kindreds share their lists of subtypes; these subtypes are called creature types.
     // A
     ADVISOR("Advisor", SubTypeSet.CreatureType),
     AETHERBORN("Aetherborn", SubTypeSet.CreatureType),
@@ -90,6 +91,7 @@ public enum SubType {
     AZRA("Azra", SubTypeSet.CreatureType),
     // B
     BADGER("Badger", SubTypeSet.CreatureType),
+    BALLOON("Balloon", SubTypeSet.CreatureType),
     BARABEL("Barabel", SubTypeSet.CreatureType, true), // Star Wars
     BARBARIAN("Barbarian", SubTypeSet.CreatureType),
     BARD("Bard", SubTypeSet.CreatureType),
@@ -118,7 +120,6 @@ public enum SubType {
     CARRIER("Carrier", SubTypeSet.CreatureType),
     CAT("Cat", SubTypeSet.CreatureType),
     CENTAUR("Centaur", SubTypeSet.CreatureType),
-    CEPHALID("Cephalid", SubTypeSet.CreatureType),
     CEREAN("Cerean", SubTypeSet.CreatureType, true), // Star Wars
     CHIMERA("Chimera", SubTypeSet.CreatureType),
     CHISS("Chiss", SubTypeSet.CreatureType, true),
@@ -189,6 +190,7 @@ public enum SubType {
     GERM("Germ", SubTypeSet.CreatureType),
     GIANT("Giant", SubTypeSet.CreatureType),
     GITH("Gith", SubTypeSet.CreatureType),
+    GLIMMER("Glimmer", SubTypeSet.CreatureType),
     GNOLL("Gnoll", SubTypeSet.CreatureType),
     GNOME("Gnome", SubTypeSet.CreatureType),
     GOAT("Goat", SubTypeSet.CreatureType),
@@ -278,7 +280,6 @@ public enum SubType {
     MYR("Myr", SubTypeSet.CreatureType),
     MYSTIC("Mystic", SubTypeSet.CreatureType),
     // N
-    NAGA("Naga", SubTypeSet.CreatureType),
     NAUTILUS("Nautilus", SubTypeSet.CreatureType),
     NAUTOLAN("Nautolan", SubTypeSet.CreatureType, true), // Star Wars
     NECRON("Necron", SubTypeSet.CreatureType),
@@ -308,6 +309,7 @@ public enum SubType {
     PEASANT("Peasant", SubTypeSet.CreatureType),
     PEGASUS("Pegasus", SubTypeSet.CreatureType),
     PENTAVITE("Pentavite", SubTypeSet.CreatureType),
+    PERFORMER("Performer", SubTypeSet.CreatureType),
     PEST("Pest", SubTypeSet.CreatureType),
     PHELDDAGRIF("Phelddagrif", SubTypeSet.CreatureType),
     PHOENIX("Phoenix", SubTypeSet.CreatureType),
@@ -362,6 +364,7 @@ public enum SubType {
     SIREN("Siren", SubTypeSet.CreatureType),
     SITH("Sith", SubTypeSet.CreatureType),
     SKELETON("Skeleton", SubTypeSet.CreatureType),
+    SKUNK("Skunk", SubTypeSet.CreatureType),
     SLITH("Slith", SubTypeSet.CreatureType),
     SLIVER("Sliver", SubTypeSet.CreatureType),
     SLOTH("Sloth", SubTypeSet.CreatureType),
@@ -396,6 +399,7 @@ public enum SubType {
     THRULL("Thrull", SubTypeSet.CreatureType),
     TIEFLING("Tiefling", SubTypeSet.CreatureType),
     TIME_LORD("Time Lord", SubTypeSet.CreatureType),
+    TOY("Toy", SubTypeSet.CreatureType),
     TRANDOSHAN("Trandoshan", SubTypeSet.CreatureType, true), // Star Wars
     TREEFOLK("Treefolk", SubTypeSet.CreatureType),
     TRILOBITE("Trilobite", SubTypeSet.CreatureType),
@@ -413,7 +417,6 @@ public enum SubType {
     VAMPIRE("Vampire", SubTypeSet.CreatureType),
     VARMINT("Varmint", SubTypeSet.CreatureType),
     VEDALKEN("Vedalken", SubTypeSet.CreatureType),
-    VIASHINO("Viashino", SubTypeSet.CreatureType),
     VILLAIN("Villain", SubTypeSet.CreatureType, true), // Unstable
     VOLVER("Volver", SubTypeSet.CreatureType),
     // W
@@ -421,6 +424,7 @@ public enum SubType {
     WALRUS("Walrus", SubTypeSet.CreatureType),
     WARLOCK("Warlock", SubTypeSet.CreatureType),
     WARRIOR("Warrior", SubTypeSet.CreatureType),
+    WEASEL("Weasel", SubTypeSet.CreatureType),
     WEEQUAY("Weequay", SubTypeSet.CreatureType, true),
     WEIRD("Weird", SubTypeSet.CreatureType),
     WEREWOLF("Werewolf", SubTypeSet.CreatureType),
@@ -650,7 +654,7 @@ public enum SubType {
     public boolean canGain(Game game, MageObject mageObject) {
         switch (subTypeSet) {
             case CreatureType:
-                return mageObject.isCreature(game) || mageObject.isTribal(game);
+                return mageObject.isCreature(game) || mageObject.isKindred(game);
             case BasicLandType:
             case NonBasicLandType:
                 return mageObject.isLand(game);

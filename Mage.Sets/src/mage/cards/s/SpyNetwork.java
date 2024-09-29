@@ -8,8 +8,6 @@ import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.abilities.effects.common.LookLibraryTopCardTargetPlayerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
@@ -114,10 +112,7 @@ class SpyNetworkFaceDownEffect extends OneShotEffect {
                     }
                     Permanent faceDownCreature = game.getPermanent(target.getFirstTarget());
                     if (faceDownCreature != null) {
-                        Permanent copyFaceDown = faceDownCreature.copy();
-                        copyFaceDown.setFaceDown(false, game);
-                        Cards cards = new CardsImpl(copyFaceDown);
-                        controller.lookAtCards("face down card - " + mageObject.getName(), cards, game);
+                        controller.lookAtCards("face down card - " + mageObject.getName(), faceDownCreature, game);
                         game.informPlayers(controller.getLogName() + " looks at a face down creature controlled by " + player.getLogName());
                     }
                 }

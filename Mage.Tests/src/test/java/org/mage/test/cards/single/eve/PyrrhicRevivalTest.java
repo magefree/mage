@@ -29,7 +29,7 @@ public class PyrrhicRevivalTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, revival);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, revival);
-        setChoice(playerA, "When {this} enters the battlefield, you gain 3 life.");
+        setChoice(playerA, "When {this} enters, you gain 3 life.");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

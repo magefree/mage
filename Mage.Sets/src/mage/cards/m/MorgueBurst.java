@@ -1,7 +1,6 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -66,12 +65,12 @@ class MorgueBurstEffect extends OneShotEffect {
             if (player != null) {
                 player.moveCards(card, Zone.HAND, source, game);
                 int damage = card.getPower().getValue();
-                Permanent creature = game.getPermanent(source.getTargets().get(1).getTargets().get(0));
+                Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
                 if (creature != null) {
                     creature.damage(damage, source.getSourceId(), source, game, false, true);
                     return true;
                 }
-                Player targetPlayer = game.getPlayer(source.getTargets().get(1).getTargets().get(0));
+                Player targetPlayer = game.getPlayer(source.getTargets().get(1).getFirstTarget());
                 if (targetPlayer != null) {
                     targetPlayer.damage(damage, source.getSourceId(), source, game);
                     return true;

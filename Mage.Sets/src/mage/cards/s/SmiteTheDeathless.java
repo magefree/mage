@@ -7,6 +7,7 @@ import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -21,7 +22,7 @@ public final class SmiteTheDeathless extends CardImpl {
 
         // Smite the Deathless deals 3 damage to target creature. That creature loses indestructible until end of turn. If that creature would die this turn, exile it instead.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addEffect(new LoseAbilityTargetEffect(IndestructibleAbility.getInstance())
+        this.getSpellAbility().addEffect(new LoseAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn)
                 .setText("that creature loses indestructible until end of turn"));
         this.getSpellAbility().addEffect(new ExileTargetIfDiesEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

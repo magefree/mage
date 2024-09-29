@@ -40,7 +40,7 @@ public final class Hydradoodle extends CardImpl {
         // As Hydradoodle enters the battlefield, roll X six-sided dice. Hydradoodle enters the battlefield with a number of +1/+1 counters on it equal to the total of those results.
         this.addAbility(new EntersBattlefieldAbility(new HydradoodleEffect(),
                 null,
-                "As {this} enters the battlefield, roll X six-sided dice. {this} enters the battlefield with a number of +1/+1 counters on it equal to the total of those results",
+                "As {this} enters, roll X six-sided dice. {this} enters with a number of +1/+1 counters on it equal to the total of those results",
                 null));
         // Reach
         this.addAbility(ReachAbility.getInstance());
@@ -69,7 +69,7 @@ class HydradoodleEffect extends OneShotEffect {
 
     HydradoodleEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "roll X six-sided dice. {this} enters the battlefield with a number of +1/+1 counters on it equal to the total of those results";
+        this.staticText = "roll X six-sided dice. {this} enters with a number of +1/+1 counters on it equal to the total of those results";
     }
 
     private HydradoodleEffect(final HydradoodleEffect effect) {

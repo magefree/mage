@@ -90,7 +90,7 @@ class TheGreatAuroraEffect extends OneShotEffect {
                 }
             }
 
-            game.getState().processAction(game); // so effects from creatures that were on the battlefield won't trigger from draw or put into play
+            game.processAction(); // so effects from creatures that were on the battlefield won't trigger from draw or put into play
 
             // Draw cards
             for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {

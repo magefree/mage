@@ -4,7 +4,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class BloodArtist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Blood Artist or another creature dies, target player loses 1 life and you gain 1 life.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new LoseLifeTargetEffect(1), false);
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(new LoseLifeTargetEffect(1), false);
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         Target target = new TargetPlayer();
         ability.addTarget(target);

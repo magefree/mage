@@ -42,16 +42,16 @@ public final class SunscapeBattlemage extends CardImpl {
         kickerAbility.addKickerCost("{2}{U}");
         this.addAbility(kickerAbility);
 
-        // When {this} enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
+        // When {this} enters, if it was kicked with its {1}{G} kicker, destroy target creature with flying.
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new KickedCostCondition("{1}{G}"),
-                "When {this} enters the battlefield, if it was kicked with its {1}{G} kicker, destroy target creature with flying."));
+                "When {this} enters, if it was kicked with its {1}{G} kicker, destroy target creature with flying."));
 
-        // When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards.
+        // When {this} enters, if it was kicked with its {2}{U} kicker, draw two cards.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                 new DrawCardSourceControllerEffect(2)), new KickedCostCondition("{2}{U}"),
-                "When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, draw two cards."));
+                "When {this} enters, if it was kicked with its {2}{U} kicker, draw two cards."));
     }
 
     private SunscapeBattlemage(final SunscapeBattlemage card) {

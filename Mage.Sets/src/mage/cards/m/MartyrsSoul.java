@@ -48,7 +48,7 @@ public final class MartyrsSoul extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(2)
-                )), condition, "When {this} enters the battlefield, " +
+                )), condition, "When {this} enters, " +
                 "if you control no tapped lands, put two +1/+1 counters on it."
         ));
     }

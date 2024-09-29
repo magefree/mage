@@ -14,7 +14,7 @@ public class SpringheartNantukoTest extends CardTestPlayerBase {
      * {@link mage.cards.s.SpringheartNantuko Springheart Nantuko} {1}{G}
      * Bestow {1}{G}
      * Enchanted creature gets +1/+1
-     * Landfall — Whenever a land enters the battlefield under your control, you may pay {1}{G} if Springheart Nantuko is attached to a creature you control. If you do, create a token that's a copy of that creature. If you didn't create a token this way, create a 1/1 green Insect creature token.
+     * Landfall — Whenever a land you control enters, you may pay {1}{G} if Springheart Nantuko is attached to a creature you control. If you do, create a token that's a copy of that creature. If you didn't create a token this way, create a 1/1 green Insect creature token.
      */
     private static final String nantuko = "Springheart Nantuko";
 

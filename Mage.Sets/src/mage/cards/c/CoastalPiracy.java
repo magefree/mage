@@ -7,7 +7,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -22,7 +21,7 @@ public final class CoastalPiracy extends CardImpl {
 
         // Whenever a creature you control deals combat damage to an opponent, you may draw a card.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
+                new DrawCardSourceControllerEffect(1),
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE, true, SetTargetPointer.PLAYER,
                 true, true, TargetController.OPPONENT
         ));

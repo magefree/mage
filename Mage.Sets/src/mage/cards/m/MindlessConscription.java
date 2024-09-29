@@ -23,7 +23,7 @@ public final class MindlessConscription extends CardImpl {
         // When Mindless Conscription enters the battlefield and whenever you draw your third card each turn, amass Zombies 3.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD,
                 new AmassEffect(3, SubType.ZOMBIE),
-                false, "When {this} enters the battlefield and whenever you draw your third card each turn, ",
+                false, "When {this} enters and whenever you draw your third card each turn, ",
                 new EntersBattlefieldTriggeredAbility(null),
                 new DrawNthCardTriggeredAbility(null, false, 3)
         ));

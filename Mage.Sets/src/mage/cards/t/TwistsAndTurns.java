@@ -41,12 +41,12 @@ public final class TwistsAndTurns extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
-        // When a land enters the battlefield under your control, if you control seven or more lands, transform Twists and Turns.
+        // When a land you control enters, if you control seven or more lands, transform Twists and Turns.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldControlledTriggeredAbility(new TransformSourceEffect(), StaticFilters.FILTER_LAND),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_LANDS, ComparisonType.MORE_THAN, 6, true),
-                "When a land enters the battlefield under your control, if you control seven or more lands, transform {this}."
+                "When a land you control enters, if you control seven or more lands, transform {this}."
         ));
 
     }

@@ -21,6 +21,7 @@ public enum CollectedEvidenceCondition implements Condition {
 
     @Override
     public String toString() {
-        return "Evidence was collected";
+        // must use "used" instead "collected" because it can be visible as card hint on stack before real collect
+        return "Evidence was used";
     }
 }

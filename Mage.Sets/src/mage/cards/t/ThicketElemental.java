@@ -33,7 +33,7 @@ public final class ThicketElemental extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new RevealCardsFromLibraryUntilEffect(
                         StaticFilters.FILTER_CARD_CREATURE, PutCards.BATTLEFIELD, PutCards.SHUFFLE
-                )), KickedCondition.ONCE, "When {this} enters the battlefield, if it was kicked, " +
+                )), KickedCondition.ONCE, "When {this} enters, if it was kicked, " +
                 "you may reveal cards from the top of your library until you reveal a creature card. If you do, " +
                 "put that card onto the battlefield and shuffle all other cards revealed this way into your library."
         ));

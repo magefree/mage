@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
@@ -40,7 +40,7 @@ public final class SilklashSpider extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
         // {X}{G}{G}: Silklash Spider deals X damage to each creature with flying.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new DamageAllEffect(ManacostVariableValue.REGULAR, filter),
+                new DamageAllEffect(GetXValue.instance, filter),
                 new ManaCostsImpl<>("{X}{G}{G}")));
     }
 

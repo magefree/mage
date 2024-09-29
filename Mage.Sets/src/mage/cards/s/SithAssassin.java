@@ -32,7 +32,7 @@ public final class SithAssassin extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true),
                 HateCondition.instance,
-                "<i>Hate</i> &mdash; When {this} enters the battlefield, if an opponent lost life from a source other than combat damage this turn, you may destroy target nonblack creature.");
+                "<i>Hate</i> &mdash; When {this} enters, if an opponent lost life from a source other than combat damage this turn, you may destroy target nonblack creature.");
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }

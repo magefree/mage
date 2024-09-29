@@ -44,8 +44,8 @@ public final class LostInTheMaze extends CardImpl {
         // When Lost in the Maze enters the battlefield, tap X target creatures. Put a stun counter on each of those creatures you don't control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect("tap X target creatures"));
         ability.addEffect(new LostInTheMazeEffect());
-        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         ability.addTarget(new TargetCreaturePermanent());
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         this.addAbility(ability);
 
         // Tapped creatures you control have hexproof.

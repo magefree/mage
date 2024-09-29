@@ -44,7 +44,7 @@ public final class ArchonOfSunsGrace extends CardImpl {
                 LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter
         )));
 
-        // Constellation—Whenever an enchantment enters the battlefield under your control, create a 2/2 white Pegasus creature token with flying.
+        // Constellation—Whenever an enchantment you control enters, create a 2/2 white Pegasus creature token with flying.
         this.addAbility(new ConstellationAbility(
                 new CreateTokenEffect(new PegasusToken2()), false, false
         ));

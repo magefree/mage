@@ -12,6 +12,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -62,7 +63,7 @@ class DisplacementWaveEffect extends OneShotEffect {
         }
         Cards cards = new CardsImpl();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (!permanent.isLand(game) && permanent.getManaValue() <= source.getManaCostsToPay().getX()) {
+            if (!permanent.isLand(game) && permanent.getManaValue() <= CardUtil.getSourceCostsTag(game, source, "X", 0)) {
                 cards.add(permanent);
             }
         }

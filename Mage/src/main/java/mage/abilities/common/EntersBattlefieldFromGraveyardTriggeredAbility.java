@@ -50,7 +50,7 @@ public class EntersBattlefieldFromGraveyardTriggeredAbility extends TriggeredAbi
     }
 
     private String generateTriggerPhrase() {
-        StringBuilder sb = new StringBuilder("When {this} enters the battlefield from ");
+        StringBuilder sb = new StringBuilder("When {this} enters from ");
         switch (targetController) {
             case YOU:
                 sb.append("your");

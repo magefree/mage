@@ -30,7 +30,7 @@ public final class ElrondLordOfRivendell extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Whenever Elrond, Lord of Rivendell or another creature enters the battlefield under your control, scry 1. If this is the second time this ability has resolved this turn, the Ring tempts you.
+        // Whenever Elrond, Lord of Rivendell or another creature you control enters, scry 1. If this is the second time this ability has resolved this turn, the Ring tempts you.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new ScryEffect(1, false),
                 StaticFilters.FILTER_PERMANENT_CREATURE, false, true

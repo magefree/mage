@@ -26,11 +26,11 @@ public final class OnduSpiritdancer extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever an enchantment enters the battlefield under your control, you may create a token that's a copy of it. Do this only once each turn.
+        // Whenever an enchantment you control enters, you may create a token that's a copy of it. Do this only once each turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new CreateTokenCopyTargetEffect().setText("create a token that's a copy of it"),
                 StaticFilters.FILTER_PERMANENT_ENCHANTMENT, true, SetTargetPointer.PERMANENT
-        ).setDoOnlyOnceEachTurn(true).setTriggerPhrase("Whenever an enchantment enters the battlefield under your control, "));
+        ).setDoOnlyOnceEachTurn(true).setTriggerPhrase("Whenever an enchantment you control enters, "));
     }
 
     private OnduSpiritdancer(final OnduSpiritdancer card) {

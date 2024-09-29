@@ -2,7 +2,7 @@
 package mage.cards.c;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -27,7 +27,7 @@ public final class CorrosiveGale extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{G/P}");
 
 
-        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, filter));
+        this.getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, filter));
     }
 
     private CorrosiveGale(final CorrosiveGale card) {

@@ -18,7 +18,7 @@ public class TournamentType implements Serializable {
     protected boolean limited;      // else Constructed
     protected boolean elimination;  // else Swiss
     protected boolean isRandom;     // chaos draft
-    protected boolean isRemixed;    // boosters generated containing cards from multiple sets
+    protected boolean isReshuffled;    // boosters generated containing cards from multiple sets
     protected boolean isRichMan;    // new boosters generated for each pick
     protected boolean isJumpstart;
 
@@ -66,8 +66,8 @@ public class TournamentType implements Serializable {
         return this.isRandom;
     }
 
-    public boolean isRemixed() {
-        return this.isRemixed;
+    public boolean isReshuffled() {
+        return this.isReshuffled;
     }
 
     public boolean isRichMan() {

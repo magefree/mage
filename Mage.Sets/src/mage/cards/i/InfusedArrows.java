@@ -6,7 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.SunburstAbility;
@@ -23,7 +23,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class InfusedArrows extends CardImpl {
 
-    private static final DynamicValue xValue = new SignInversionDynamicValue(RemovedCountersForCostValue.instance);
+    private static final DynamicValue xValue = new SignInversionDynamicValue(GetXValue.instance);
 
     public InfusedArrows(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");

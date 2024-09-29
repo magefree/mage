@@ -156,9 +156,7 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice a Fo");
         setChoice(playerA, "Forest"); // sacrifice
-        setChoice(playerA, "Green");
-        setChoice(playerA, "Green");
-        setChoice(playerA, "Green");
+        setChoiceAmount(playerA, 0, 3); // x0 red, x3 green
         checkManaPool("must produce green", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "G", 3);
 
         setStrictChooseMode(true);
@@ -177,9 +175,7 @@ public class TappedForManaFromMultipleEffects extends CardTestPlayerBase {
 
         activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Sacrifice a Fo");
         setChoice(playerA, "Forest"); // sacrifice
-        setChoice(playerA, "Green");
-        setChoice(playerA, "Green");
-        setChoice(playerA, "Green");
+        setChoiceAmount(playerA, 0, 3); // x0 red, x3 green
         checkManaPool("must produce green", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "G", 3 * 2); // double by mana reflect
 
         setStrictChooseMode(true);

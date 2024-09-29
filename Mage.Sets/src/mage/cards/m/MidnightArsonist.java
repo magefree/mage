@@ -44,8 +44,8 @@ public final class MidnightArsonist extends CardImpl {
         // When Midnight Arsonist enters the battlefield, destroy up to X target artifacts without mana abilities, where X is the number of Vampires you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect()
                 .setText("destroy up to X target artifacts without mana abilities, where X is the number of Vampires you control"));
-        ability.setTargetAdjuster(new TargetsCountAdjuster(new PermanentsOnBattlefieldCount(filter)));
         ability.addTarget(new TargetPermanent(0, 1, filter2));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(new PermanentsOnBattlefieldCount(filter)));
         ability.addHint(new ValueHint("Vampires you control", new PermanentsOnBattlefieldCount(filter)));
         this.addAbility(ability);
     }

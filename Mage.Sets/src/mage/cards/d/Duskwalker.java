@@ -33,10 +33,10 @@ public final class Duskwalker extends CardImpl {
         // Kicker {3}{B}
         this.addAbility(new KickerAbility("{3}{B}"));
         
-        // If Duskwalker was kicked, it enters the battlefield with two +1/+1 counters on it and with fear.
+        // If Duskwalker was kicked, it enters with two +1/+1 counters on it and with fear.
         Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
                 KickedCondition.ONCE,
-                "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it and with fear.", "");
+                "If {this} was kicked, it enters with two +1/+1 counters on it and with fear.", "");
         ability.addEffect(new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
@@ -50,4 +50,3 @@ public final class Duskwalker extends CardImpl {
         return new Duskwalker(this);
     }
 }
-

@@ -23,7 +23,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
-import java.util.Collection;
 import java.util.UUID;
 
 /**
@@ -56,7 +55,6 @@ public final class FirkraagCunningInstigator extends CardImpl {
 
         // Whenever a creature deals combat damage to one of your opponents, if that creature had to attack this combat, you put a +1/+1 counter on Firkraag, Cunning Instigator and you draw a card.
         Ability ability = new DealsDamageToAPlayerAllTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                         .setText("you put a +1/+1 counter on {this}"),
                 filter, false, SetTargetPointer.NONE,

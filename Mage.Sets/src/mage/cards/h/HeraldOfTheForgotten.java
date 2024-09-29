@@ -45,7 +45,7 @@ public final class HeraldOfTheForgotten extends CardImpl {
         // When Herald of the Forgotten enters the battlefield, if you cast it, return any number of target permanent cards with cycling abilities from your graveyard to the battlefield.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters the battlefield, if you cast it, " +
+                CastFromEverywhereSourceCondition.instance, "When {this} enters, if you cast it, " +
                 "return any number of target permanent cards with cycling abilities from your graveyard to the battlefield."
         );
         ability.addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter));

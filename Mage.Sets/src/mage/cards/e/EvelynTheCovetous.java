@@ -43,7 +43,7 @@ public final class EvelynTheCovetous extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
 
-        // Whenever Evelyn, the Covetous or another Vampire enters the battlefield under your control, exile the top card of each player's library with a collection counter on it.
+        // Whenever Evelyn, the Covetous or another Vampire you control enters, exile the top card of each player's library with a collection counter on it.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new EvelynTheCovetousExileEffect(), filter, false, true
         ), new EvelynTheCovetousWatcher());

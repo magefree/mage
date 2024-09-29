@@ -15,6 +15,7 @@ import mage.client.plugins.impl.Plugins;
  */
 public class DraftPane extends MagePane {
 
+    UUID tableId = null;
     UUID draftId = null;
 
     public DraftPane() {
@@ -42,7 +43,8 @@ public class DraftPane extends MagePane {
         draftPanel1.changeGUISize();
     }
 
-    public void showDraft(UUID draftId) {
+    public void showDraft(UUID tableId, UUID draftId) {
+        this.tableId = tableId;
         this.draftId = draftId;
         this.setTitle("Draft - " + draftId);
         this.draftPanel1.showDraft(draftId);
@@ -56,6 +58,11 @@ public class DraftPane extends MagePane {
     public void removeDraft() {
         draftPanel1.cleanUp();
         this.removeFrame();
+    }
+
+    @Override
+    public UUID getSortTableId() {
+        return tableId;
     }
 
     /**

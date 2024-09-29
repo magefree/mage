@@ -85,7 +85,6 @@ public final class GoblinWelder extends CardImpl {
                 return false;
             }
             boolean sacrifice = artifact.sacrifice(source, game);
-            game.getState().processAction(game); // bug #7672
             boolean putOnBF = owner.moveCards(card, Zone.BATTLEFIELD, source, game);
             if (sacrifice || putOnBF) {
                 return true;

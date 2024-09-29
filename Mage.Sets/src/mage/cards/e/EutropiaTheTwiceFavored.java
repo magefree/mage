@@ -31,7 +31,7 @@ public final class EutropiaTheTwiceFavored extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Constellation—Whenever an enchantment enters the battlefield under your control, put a +1/+1 counter on target creature. That creature gains flying until end of turn.
+        // Constellation—Whenever an enchantment you control enters, put a +1/+1 counter on target creature. That creature gains flying until end of turn.
         Ability ability = new ConstellationAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false, false
         );

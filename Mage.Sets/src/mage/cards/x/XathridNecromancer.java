@@ -4,7 +4,7 @@ package mage.cards.x;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -38,7 +38,7 @@ public final class XathridNecromancer extends CardImpl {
 
         // Whenever Xathrid Necromancer or another Human creature you control dies, create a tapped 2/2 black Zombie creature token.
         Effect effect = new CreateTokenEffect(new ZombieToken(), 1, true, false);
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(effect, false, filter);
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(effect, false, filter);
         this.addAbility(ability);
 
     }

@@ -1,9 +1,8 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -13,6 +12,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +26,7 @@ public final class ForceLightning extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
 
         // Force Lightning deals X damage to any target.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
 
         // Scry X.
@@ -62,7 +64,7 @@ class ForceLightningEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int x = source.getManaCostsToPay().getX();
+            int x = CardUtil.getSourceCostsTag(game, source, "X", 0);
             if (x > 0) {
                 return controller.scry(x, source, game);
             }

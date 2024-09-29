@@ -22,7 +22,7 @@ public final class ImpactTremors extends CardImpl {
     public ImpactTremors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
 
-        // Whenever a creature enters the battlefield under your control, Impact Tremors deals 1 damage to each opponent.
+        // Whenever a creature you control enters, Impact Tremors deals 1 damage to each opponent.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new DamagePlayersEffect(Outcome.Damage, StaticValue.get(1), TargetController.OPPONENT),
                 StaticFilters.FILTER_PERMANENT_A_CREATURE,

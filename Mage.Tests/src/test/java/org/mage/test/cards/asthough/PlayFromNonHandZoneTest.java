@@ -17,7 +17,7 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         // Creature - Phoenix {3}{R}
         // Flying
         // You may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost.
-        // If you do, it enters the battlefield with two +1/+1 counters on it.
+        // If you do, it enters with two +1/+1 counters on it.
         addCard(Zone.HAND, playerA, "Worldheart Phoenix");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
@@ -35,7 +35,7 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         // Creature - Phoenix {3}{R}
         // Flying
         // You may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost.
-        // If you do, it enters the battlefield with two +1/+1 counters on it.
+        // If you do, it enters with two +1/+1 counters on it.
         addCard(Zone.GRAVEYARD, playerA, "Worldheart Phoenix");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
 
@@ -61,7 +61,7 @@ public class PlayFromNonHandZoneTest extends CardTestPlayerBaseWithAIHelps {
         // Creature - Phoenix {3}{R}
         // Flying
         // You may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost.
-        // If you do, it enters the battlefield with two +1/+1 counters on it.
+        // If you do, it enters with two +1/+1 counters on it.
         addCard(Zone.GRAVEYARD, playerA, "Worldheart Phoenix");
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 1);

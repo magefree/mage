@@ -355,24 +355,48 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
                     totalContentInset + 3, typeLineY + boxHeight * 3 - 1,
                     contentWidth / 2 - 8, cardHeight - borderWidth * 3 - typeLineY - boxHeight * 3 + 2, false);
         } else if (isAftermath()) {
-            drawSplitHalfFrame(getUnmodifiedHalfContext(g), attribs, leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
-            drawSplitHalfFrame(getAftermathHalfContext(g), attribs, rightHalf, (rightHalf.ch - boxHeight) / 2);
+            Graphics2D g2 = getUnmodifiedHalfContext(g);
+            try {
+                drawSplitHalfFrame(g2, attribs, leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
+            } finally {
+                g2.dispose();
+            }
+            g2 = getAftermathHalfContext(g);
+            try {
+                drawSplitHalfFrame(g2, attribs, rightHalf, (rightHalf.ch - boxHeight) / 2);
+            } finally {
+                g2.dispose();
+            }
         } else {
-            drawSplitHalfFrame(getLeftHalfContext(g), attribs, leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
-            drawSplitHalfFrame(getRightHalfContext(g), attribs, rightHalf, (int) (rightHalf.ch * TYPE_LINE_Y_FRAC));
+            Graphics2D g2 = getLeftHalfContext(g);
+            try {
+                drawSplitHalfFrame(g2, attribs, leftHalf, (int) (leftHalf.ch * TYPE_LINE_Y_FRAC));
+            } finally {
+                g2.dispose();
+            }
+            g2 = getRightHalfContext(g);
+            try {
+                drawSplitHalfFrame(g2, attribs, rightHalf, (int) (rightHalf.ch * TYPE_LINE_Y_FRAC));
+            } finally {
+                g2.dispose();
+            }
             if (isFuse()) {
-                Graphics2D g2 = getRightHalfContext(g);
-                int totalFuseBoxWidth = rightHalf.cw * 2 + 2 * borderWidth + dividerSize;
-                Paint boxColor = getTextboxPaint(cardView.getColor(), ONLY_LAND_TYPE, totalFuseBoxWidth, false);
-                Paint borderPaint = getBorderPaint(cardView.getColor(), ONLY_LAND_TYPE, totalFuseBoxWidth);
-                CardRendererUtils.drawRoundedBox(g2,
-                        -borderWidth, rightHalf.ch,
-                        totalFuseBoxWidth, boxHeight,
-                        contentInset,
-                        borderPaint, boxColor);
-                drawNameLine(g2, attribs, SplitCard.FUSE_RULE, "",
-                        0, rightHalf.ch,
-                        totalFuseBoxWidth - 2 * borderWidth, boxHeight);
+                g2 = getRightHalfContext(g);
+                try {
+                    int totalFuseBoxWidth = rightHalf.cw * 2 + 2 * borderWidth + dividerSize;
+                    Paint boxColor = getTextboxPaint(cardView.getColor(), ONLY_LAND_TYPE, totalFuseBoxWidth, false);
+                    Paint borderPaint = getBorderPaint(cardView.getColor(), ONLY_LAND_TYPE, totalFuseBoxWidth);
+                    CardRendererUtils.drawRoundedBox(g2,
+                            -borderWidth, rightHalf.ch,
+                            totalFuseBoxWidth, boxHeight,
+                            contentInset,
+                            borderPaint, boxColor);
+                    drawNameLine(g2, attribs, SplitCard.FUSE_RULE, "",
+                            0, rightHalf.ch,
+                            totalFuseBoxWidth - 2 * borderWidth, boxHeight);
+                } finally {
+                    g2.dispose();
+                }
             }
         }
     }

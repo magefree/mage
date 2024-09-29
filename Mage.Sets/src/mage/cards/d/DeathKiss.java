@@ -48,8 +48,8 @@ public final class DeathKiss extends CardImpl {
         Ability ability = new BecomesMonstrousSourceTriggeredAbility(
                 new GoadTargetEffect().setText("goad up to X target creatures your opponents control")
         );
-        ability.setTargetAdjuster(new TargetsCountAdjuster(GetMonstrosityXValue.instance));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(GetMonstrosityXValue.instance));
         this.addAbility(ability);
     }
 

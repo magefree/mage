@@ -36,6 +36,7 @@ public class CascadeTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Sejiri Merfolk");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Predatory Advantage");
+        setChoice(playerA, true); // yes to cast
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();
@@ -59,6 +60,7 @@ public class CascadeTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Sejiri Merfolk");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Predatory Advantage");
+        setChoice(playerA, true); // yes to cast
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Nacatl Outlander");
 
         setStopAt(1, PhaseStep.END_TURN);
@@ -147,9 +149,11 @@ public class CascadeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Unsummon"); // Instant  {U}
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Enlisted Wurm");
+        setChoice(playerA, true); // yes to cast
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Unsummon", "Enlisted Wurm", true);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Enlisted Wurm");
+        setChoice(playerA, true); // yes to cast
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
