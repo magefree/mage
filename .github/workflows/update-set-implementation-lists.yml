@@ -201,5 +201,5 @@ jobs:
           git config user.email github-actions@github.com
           # Stage the Set-implementation-list.md file, commit, then push
           git add ./wiki/*
-          git commit -m "Update Set-implementation-list.md"
+          git commit -m "Update Set-implementation-list.md" || exit 0
           git push
