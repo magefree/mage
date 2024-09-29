@@ -67,6 +67,16 @@ jobs:
                 }
                 return true;
               });
+
+              let issueComments = undefined;
+              if (foundIssue) {
+                issueComments = await github.paginate(github.rest.issues.listComments, {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: foundIssue.number
+                });
+                console.log(`Found ${issueComments.length} comments on issue`);
+              }
               
               const cards = cardsData.filter(card => card[1] === set[0]);
               const unimplemented = [];
@@ -76,16 +86,24 @@ jobs:
                 const className = toCamelCase(cardData[0].replace(/[+]/g, ' Plus ').replace(/[_]+/g, ' Blank ').replace(/[']/g, '').replace(/[-+,.!?`@#$%^&*()_=<>:";~\\|/]/g, ' '));
                 const cleanCardName = cardData[0].replace(/[-,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '').toLowerCase();
                 const cardPath = path.join('Mage.Sets', 'src', 'mage', 'cards', className.substring(0, 1), `${className.charAt(0).toUpperCase()+className.slice(1)}.java`);
+                const claimed = false;
+                issueComments && issueComments.forEach(comment => {
+                  if (comment.body && comment.body.search(new RegExp(cleanCardName, "i") != -1) {
+                    console.log(`Found a comment by ${comment.user.login} claiming card ${cardData[0]}`);
+                    claimed = true;
+                  }
+                });
+                
                 if (fs.existsSync(cardPath)) {
                   implemented.push({
-                    pr: true, //TODO: check to see if there is a PR for this card
+                    pr: true,
                     name: cardData[0],
                     cleanName: cleanCardName,
                     scryfall: `https://scryfall.com/search?q=!"${cleanCardName}"+e:${set[1]}`
                   });
                 } else {
                   unimplemented.push({
-                    pr: false, //TODO: check to see if there is a PR for this card
+                    pr: claimed,
                     name: cardData[0],
                     cleanName: cleanCardName,
                     scryfall: `https://scryfall.com/search?q=!"${cleanCardName}"+e:${set[1]}`
