@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
@@ -49,7 +48,7 @@ public class GainsChoiceOfAbilitiesEffect extends OneShotEffect {
         this.includeEnd = includeEnd;
         this.abilityMap = new LinkedHashMap<>();
         for (Ability ability : abilities) {
-            this.abilityMap.put(ability.getRule(), ability);
+            this.abilityMap.put(CardUtil.stripReminderText(ability.getRule()), ability);
         }
     }
 

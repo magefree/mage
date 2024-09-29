@@ -2454,6 +2454,9 @@ public class ScryfallImageSupportTokens {
             put("BLB/Treasure", "https://api.scryfall.com/cards/tblb/29/en?format=image");
             put("BLB/Wall", "https://api.scryfall.com/cards/tblb/4/en?format=image");
 
+            // BLC
+            put("BLC/Raccoon", "https://api.scryfall.com/cards/tblc/29/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

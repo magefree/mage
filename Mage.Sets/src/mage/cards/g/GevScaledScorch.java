@@ -101,7 +101,8 @@ class GevScaledScorchEntersEffect extends ReplacementEffectImpl {
         int num = game.getOpponents(controller.getId())
                 .stream()
                 .mapToInt(watcher::getLifeLost)
-                .reduce(0, Integer::sum);
+                .map(x -> x > 0 ? 1 : 0)
+                .sum();
         if (num > 0) {
             creature.addCounters(CounterType.P1P1.createInstance(num), source.getControllerId(), source, game);
         }

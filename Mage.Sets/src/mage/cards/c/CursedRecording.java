@@ -33,11 +33,11 @@ public final class CursedRecording extends CardImpl {
         // Whenever you cast an instant or sorcery spell, put a time counter on Cursed Recording. Then if there are seven or more time counters on it, remove those counters and it deals 20 damage to you.
         Ability ability = new SpellCastControllerTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.TIME.createInstance()),
-                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, true
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new RemoveAllCountersSourceEffect(CounterType.TIME),
-                condition, "then if there are seven or more time counters on it, " +
+                condition, "Then if there are seven or more time counters on it, " +
                 "remove those counters and it deals 20 damage to you"
         ).addEffect(new DamageControllerEffect(20)));
         this.addAbility(ability);

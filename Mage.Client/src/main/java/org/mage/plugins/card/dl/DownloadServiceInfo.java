@@ -17,7 +17,5 @@ public interface DownloadServiceInfo {
     
     void updateProgressMessage(String text, int progressCurrent, int progressNeed);
 
-    void showDownloadControls(boolean needToShow);
-
     Object getSync();
 }

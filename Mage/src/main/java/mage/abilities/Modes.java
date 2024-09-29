@@ -38,6 +38,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     private int maxPawPrints;
     private Filter maxModesFilter; // calculates the max number of available modes
     private Condition moreCondition; // allows multiple modes choose (example: choose one... if condition, you may choose both)
+    private int moreLimit; // if multiple modes are allowed, this limits how many additional modes may be chosen
 
     private boolean limitUsageByOnce = false; // limit mode selection to once per game
     private boolean limitUsageResetOnNewTurn = false; // reset once per game limit on new turn, example: Galadriel, Light of Valinor
@@ -73,6 +74,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         this.maxPawPrints = modes.maxPawPrints;
         this.maxModesFilter = modes.maxModesFilter; // can't change so no copy needed
         this.moreCondition = modes.moreCondition;
+        this.moreLimit = modes.moreLimit;
 
         this.limitUsageByOnce = modes.limitUsageByOnce;
         this.limitUsageResetOnNewTurn = modes.limitUsageResetOnNewTurn;
@@ -197,7 +199,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
         return count;
     }
 
-    public int getSelectedPawPrints(){
+    public int getSelectedPawPrints() {
         return this.selectedModes.stream()
                 .mapToInt(modeID -> get(modeID).getPawPrintValue())
                 .sum();
@@ -241,9 +243,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             return realMaxModes;
         }
 
-        // use case: make two modes chooseable (all cards that use this currently go from one to two)
+        // use case: make more modes chooseable
         if (moreCondition != null && moreCondition.apply(game, source)) {
-            realMaxModes = 2;
+            realMaxModes = Math.min(this.moreLimit, this.size());
         }
 
         // use case: limit max modes by opponents (example: choose one or more... each mode must target a different player)
@@ -292,16 +294,17 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
     }
 
     public void addMode(Mode mode) {
-        if (this.maxPawPrints > 0 && mode.getPawPrintValue() == 0){
+        if (this.maxPawPrints > 0 && mode.getPawPrintValue() == 0) {
             throw new IllegalArgumentException("Mode must have nonzero pawprints value in a pawprints mode set.");
         }
-        if (this.maxPawPrints == 0 && mode.getPawPrintValue() > 0){
+        if (this.maxPawPrints == 0 && mode.getPawPrintValue() > 0) {
             throw new IllegalArgumentException("Cannot add pawprints mode to non-pawprints mode set.");
         }
         this.put(mode.getId(), mode);
     }
 
-    public void setMoreCondition(Condition moreCondition) {
+    public void setMoreCondition(int moreLimit, Condition moreCondition) {
+        this.moreLimit = moreLimit;
         this.moreCondition = moreCondition;
     }
 
@@ -552,7 +555,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
             if (isLimitUsageByOnce() && nonAvailableModes.contains(mode.getId())) {
                 continue;
             }
-            if (getMaxPawPrints() > 0 && getSelectedPawPrints() + mode.getPawPrintValue() > getMaxPawPrints()){
+            if (getMaxPawPrints() > 0 && getSelectedPawPrints() + mode.getPawPrintValue() > getMaxPawPrints()) {
                 continue;
             }
             availableModes.add(mode);
@@ -574,7 +577,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
                 }
                 sb.append("choose ");
             }
-            if (this.getMaxPawPrints() > 0){
+            if (this.getMaxPawPrints() > 0) {
                 sb.append("up to ").append(CardUtil.numberToText(this.getMaxPawPrints())).append(" {P} worth of modes");
             } else if (this.getMinModes() == 0 && this.getMaxModes(null, null) == 1) {
                 sb.append("up to one");
@@ -620,7 +623,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> implements Copyable<Modes> 
                 sb.append(mode.getCost().getText());
                 sb.append(" &mdash; ");
             } else if (mode.getPawPrintValue() > 0) {
-                for (int i = 0; i < mode.getPawPrintValue(); ++i){
+                for (int i = 0; i < mode.getPawPrintValue(); ++i) {
                     sb.append("{P}");
                 }
                 sb.append(" &mdash; ");

@@ -65,6 +65,7 @@ Gift|card|
 Haste|instance|
 Hexproof|instance|
 Hideaway|number|
+Impending|manaString|
 Improvise|new|
 Indestructible|instance|
 Infect|instance|

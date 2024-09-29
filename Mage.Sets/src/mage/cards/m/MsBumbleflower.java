@@ -47,7 +47,7 @@ public final class MsBumbleflower extends CardImpl {
         draw.setTargetPointer(new FirstTargetPointer());
         Effect counters = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         counters.setTargetPointer(new SecondTargetPointer());
-        Effect flying = new GainAbilityTargetEffect(FlyingAbility.getInstance()).setText(" It gains flying until end of turn.");
+        Effect flying = new GainAbilityTargetEffect(FlyingAbility.getInstance()).setText("It gains flying until end of turn.");
         flying.setTargetPointer(new SecondTargetPointer());
         Ability ability = new SpellCastControllerTriggeredAbility(draw,StaticFilters.FILTER_SPELL_A, false);
         ability.addTarget(new TargetOpponent());

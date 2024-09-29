@@ -27,9 +27,7 @@ import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.designations.CitysBlessing;
 import mage.designations.Monarch;
-import mage.game.Game;
-import mage.game.GameException;
-import mage.game.GameImpl;
+import mage.game.*;
 import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
@@ -113,11 +111,7 @@ public class TestCardRenderDialog extends MageDialog {
 
         // windows settings
         MageFrame.getDesktop().remove(this);
-        if (this.isModal()) {
-            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-        } else {
-            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-        }
+        MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         this.makeWindowCentered();
 
         // Close on "ESC"
@@ -274,8 +268,8 @@ public class TestCardRenderDialog extends MageDialog {
 
         // prepare fake game and players without real match
         // it's a workaround with minimum code and data init
-        this.match = new TestMatch();
-        this.game = new TestGame(MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7);
+        this.match = new FakeMatch();
+        this.game = new FakeGame();
         Deck deck = new Deck();
         Player playerYou = new StubPlayer("player1", RangeOfInfluence.ALL);
         playerYou.addDesignation(new CitysBlessing());
@@ -981,68 +975,4 @@ public class TestCardRenderDialog extends MageDialog {
     private javax.swing.JSpinner spinnerCardIconsAdditionalAmount;
     private javax.swing.JSpinner spinnerCardIconsMaxVisible;
     // End of variables declaration//GEN-END:variables
-}
-
-class TestGame extends GameImpl {
-
-    private int numPlayers;
-
-    public TestGame(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startHandSize) {
-        super(attackOption, range, mulligan, 60, startLife, startHandSize);
-    }
-
-    public TestGame(final TestGame game) {
-        super(game);
-        this.numPlayers = game.numPlayers;
-    }
-
-    @Override
-    public MatchType getGameType() {
-        return new TestGameType();
-    }
-
-    @Override
-    public int getNumPlayers() {
-        return numPlayers;
-    }
-
-    @Override
-    public TestGame copy() {
-        return new TestGame(this);
-    }
-
-}
-
-class TestGameType extends MatchType {
-
-    public TestGameType() {
-        this.name = "Test Game Type";
-        this.maxPlayers = 10;
-        this.minPlayers = 3;
-        this.numTeams = 0;
-        this.useAttackOption = true;
-        this.useRange = true;
-        this.sideboardingAllowed = true;
-    }
-
-    protected TestGameType(final TestGameType matchType) {
-        super(matchType);
-    }
-
-    @Override
-    public TestGameType copy() {
-        return new TestGameType(this);
-    }
-}
-
-class TestMatch extends MatchImpl {
-
-    public TestMatch() {
-        super(new MatchOptions("fake match", "fake game type", true, 2));
-    }
-
-    @Override
-    public void startGame() throws GameException {
-        throw new IllegalStateException("Can't start fake match");
-    }
 }

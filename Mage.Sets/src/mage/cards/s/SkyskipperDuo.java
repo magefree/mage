@@ -31,7 +31,8 @@ public final class SkyskipperDuo extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Skyskipper Duo enters, exile up to one other target creature you control. Return it to the battlefield under its owner's control at the beginning of the next end step.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileReturnBattlefieldNextEndStepTargetEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileReturnBattlefieldNextEndStepTargetEffect()
+                .withTextThatCard(false));
         ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }

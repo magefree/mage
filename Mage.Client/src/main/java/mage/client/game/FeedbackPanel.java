@@ -2,6 +2,7 @@ package mage.client.game;
 
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
+import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanelBasic;
 import mage.client.dialog.MageDialog;
 import mage.client.util.audio.AudioManager;
@@ -56,9 +57,9 @@ public class FeedbackPanel extends javax.swing.JPanel {
         customInitComponents();
     }
 
-    public void init(UUID gameId) {
+    public void init(UUID gameId, BigCard bigCard) {
         this.gameId = gameId;
-        helper.init(gameId);
+        helper.init(gameId, bigCard);
         setGUISize();
     }
 

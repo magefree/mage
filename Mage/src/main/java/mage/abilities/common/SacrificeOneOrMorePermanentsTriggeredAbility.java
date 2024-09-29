@@ -115,7 +115,7 @@ public class SacrificeOneOrMorePermanentsTriggeredAbility extends TriggeredAbili
                 targetControllerText = "an opponent sacrifices one or more ";
                 break;
             case ANY:
-                targetControllerText = "one or more players sacrifices one or more ";
+                targetControllerText = "one or more players sacrifice one or more ";
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported TargetController in SacrificePermanentTriggeredAbility: " + sacrificingPlayer);

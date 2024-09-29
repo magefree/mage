@@ -94,11 +94,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static final String LITE_MODE_ARG = "-lite";
     private static final String GRAY_MODE_ARG = "-gray";
     private static final String FULL_SCREEN_PROP = "xmage.fullScreen"; // -Dxmage.fullScreen=false
+    private static final String GUI_MODAL_MODE_PROP = "xmage.guiModalMode"; // -Dxmage.guiModalMode=false
     private static final String SKIP_DONE_SYMBOLS = "-skipDoneSymbols";
-    private static final String USER_ARG = "-user";
-    private static final String PASSWORD_ARG = "-pw";
-    private static final String SERVER_ARG = "-server";
-    private static final String PORT_ARG = "-port";
     private static final String DEBUG_ARG = "-debug"; // enable debug button in main menu
 
     private static final String NOT_CONNECTED_TEXT = "<not connected>";
@@ -121,11 +118,8 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static boolean grayMode = false;
     private static boolean macOsFullScreenEnabled = true;
     private static boolean skipSmallSymbolGenerationForExisting = false;
-    private static String startUser = null;
-    private static String startPassword = "";
-    private static String startServer = "localhost";
-    private static int startPort = -1;
     private static boolean debugMode = false;
+    private static boolean guiModalModeEnabled = false; // non-blocking UI mode enabled by default
 
     private JToggleButton switchPanelsButton = null; // from main menu
     private static String SWITCH_PANELS_BUTTON_NAME = "Switch panels";
@@ -165,6 +159,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public static boolean isSkipSmallSymbolGenerationForExisting() {
         return skipSmallSymbolGenerationForExisting;
+    }
+
+    public static boolean isGuiModalModeEnabled() {
+        return guiModalModeEnabled;
     }
 
     @Override
@@ -305,10 +303,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         SessionHandler.startSession(this);
         callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
-        desktopPane.add(connectDialog, JLayeredPane.MODAL_LAYER);
+        desktopPane.add(connectDialog, connectDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         errorDialog = new ErrorDialog();
         errorDialog.setLocation(100, 100);
-        desktopPane.add(errorDialog, JLayeredPane.MODAL_LAYER);
+        desktopPane.add(errorDialog, errorDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
 
         try {
             this.whatsNewDialog = new WhatsNewDialog();
@@ -387,15 +385,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         setGUISize();
         setConnectButtonText(NOT_CONNECTED_BUTTON);
         SwingUtilities.invokeLater(() -> {
-            disableButtons();
             updateMemUsageTask.execute();
             LOGGER.info("Client start up time: " + ((System.currentTimeMillis() - startTime) / 1000 + " seconds"));
-            if (autoConnect()) {
-                enableButtons();
+
+            if (Boolean.parseBoolean(MageFrame.getPreferences().get("autoConnect", "false"))) {
+                startAutoConnect();
             } else {
-                connectDialog.showDialog();
+                connectDialog.showDialog(this::setWindowTitle);
             }
-            setWindowTitle();
+
+            setWindowTitle(); // make sure title is actual on startup
         });
 
         // run what's new checks (loading in background)
@@ -446,7 +445,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             return;
         }
         cardInfoPane.setLocation(40, 40);
-        cardInfoPane.setBackground(new Color(0, 0, 0, 255)); // use non-transparent background to full draw, see bug example in #12261
         UI.addComponent(MageComponents.CARD_INFO_PANE, cardInfoPane);
 
         MageRoundPane popupContainer = new MageRoundPane();
@@ -866,13 +864,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void showGameEndDialog(GameEndView gameEndView) {
         GameEndDialog gameEndDialog = new GameEndDialog(gameEndView);
-        desktopPane.add(gameEndDialog, JLayeredPane.MODAL_LAYER);
+        desktopPane.add(gameEndDialog, gameEndDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         gameEndDialog.showDialog();
     }
 
     public void showTableWaitingDialog(UUID roomId, UUID tableId, boolean isTournament) {
         TableWaitingDialog tableWaitingDialog = new TableWaitingDialog();
-        desktopPane.add(tableWaitingDialog, JLayeredPane.MODAL_LAYER);
+        desktopPane.add(tableWaitingDialog, tableWaitingDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         tableWaitingDialog.showDialog(roomId, tableId, isTournament);
     }
 
@@ -886,14 +884,23 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         return SessionHandler.stopConnecting();
     }
 
-    public boolean autoConnect() {
-        boolean autoConnectParamValue = startUser != null || Boolean.parseBoolean(MageFrame.getPreferences().get("autoConnect", "false"));
-        boolean status = false;
-        if (autoConnectParamValue) {
-            LOGGER.info("Auto-connecting to " + MagePreferences.getServerAddress());
-            status = performConnect(false);
-        }
-        return status;
+    public void startAutoConnect() {
+        LOGGER.info("Auto-connecting to " + MagePreferences.getServerAddress());
+        setConnectButtonText("AUTO-CONNECT to " + MagePreferences.getLastServerAddress());
+
+        SwingUtilities.invokeLater(() -> {
+            // TODO: run it as task, not in GUI thread - it can help to enable auto-connect cancel button like ConnectionDialog
+            boolean isConnected = false;
+            try {
+                isConnected = performConnect(false);
+            } finally {
+                // on bad - change text manual
+                // on good - it will be changed inside connection code
+                if (!isConnected) {
+                    setConnectButtonText(NOT_CONNECTED_BUTTON);
+                }
+            }
+        });
     }
 
     private boolean performConnect(boolean reconnect) {
@@ -907,7 +914,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             ProxyType proxyType = ProxyType.valueByText(MageFrame.getPreferences().get("proxyType", "None"));
             String proxyUsername = MageFrame.getPreferences().get("proxyUsername", "");
             String proxyPassword = MageFrame.getPreferences().get("proxyPassword", "");
-            setCursor(new Cursor(Cursor.WAIT_CURSOR));
             currentConnection = new Connection();
             currentConnection.setUsername(userName);
             currentConnection.setPassword(password);
@@ -927,6 +933,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             setUserPrefsToConnection(currentConnection);
         }
 
+        setCursor(new Cursor(Cursor.WAIT_CURSOR));
         try {
             LOGGER.debug("connecting (auto): " + currentConnection.getProxyType().toString()
                     + ' ' + currentConnection.getProxyHost() + ' ' + currentConnection.getProxyPort() + ' ' + currentConnection.getProxyUsername());
@@ -1172,13 +1179,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (SessionHandler.isConnected()) {
             tryDisconnectOrExit(false);
         } else {
-            connectDialog.showDialog();
-            setWindowTitle();
+            connectDialog.showDialog(this::setWindowTitle);
         }
     }//GEN-LAST:event_btnConnectActionPerformed
 
     public void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
-        JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.MODAL_LAYER);
+        JInternalFrame[] windows = desktopPane.getAllFrames();
         for (JInternalFrame window : windows) {
             if (window instanceof AboutDialog) {
                 // don't open the window twice.
@@ -1186,7 +1192,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
         }
         AboutDialog aboutDialog = new AboutDialog();
-        desktopPane.add(aboutDialog, JLayeredPane.MODAL_LAYER);
+        desktopPane.add(aboutDialog, aboutDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         aboutDialog.showDialog(VERSION);
     }//GEN-LAST:event_btnAboutActionPerformed
 
@@ -1284,16 +1290,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             message.setWindowSizeRatio(windowSizeRatio);
             MageFrame.getInstance().showUserRequestDialog(message);
         }
-    }
-
-    public void enableButtons() {
-        btnConnect.setEnabled(true);
-        btnDeckEditor.setEnabled(true);
-    }
-
-    public void disableButtons() {
-        btnConnect.setEnabled(true);
-        btnDeckEditor.setEnabled(true);
     }
 
     public void hideServerLobby() {
@@ -1416,7 +1412,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private void innerShowUserRequestDialog(final UserRequestMessage userRequestMessage) {
         UserRequestDialog userRequestDialog = new UserRequestDialog();
         userRequestDialog.setLocation(100, 100);
-        desktopPane.add(userRequestDialog, JLayeredPane.MODAL_LAYER);
+        desktopPane.add(userRequestDialog, userRequestDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         userRequestDialog.showDialog(userRequestMessage);
     }
 
@@ -1463,8 +1459,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void showErrorDialog(String errorType, String errorTitle, String errorText) {
         if (SwingUtilities.isEventDispatchThread()) {
+            // calls from gui
             errorDialog.showDialog(errorType, errorTitle, errorText);
         } else {
+            // calls from another thread like download images or game events
             SwingUtilities.invokeLater(() -> errorDialog.showDialog(errorType, errorTitle, errorText));
         }
     }
@@ -1519,31 +1517,19 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 if (arg.startsWith(GRAY_MODE_ARG)) {
                     grayMode = true;
                 }
-                if (System.getProperty(FULL_SCREEN_PROP) != null) {
-                    macOsFullScreenEnabled = Boolean.parseBoolean(System.getProperty(FULL_SCREEN_PROP));
-                }
                 if (arg.startsWith(SKIP_DONE_SYMBOLS)) {
                     skipSmallSymbolGenerationForExisting = true;
-                }
-                if (arg.startsWith(USER_ARG)) {
-                    startUser = args[i + 1];
-                    i++;
-                }
-                if (arg.startsWith(PASSWORD_ARG)) {
-                    startPassword = args[i + 1];
-                    i++;
-                }
-                if (arg.startsWith(SERVER_ARG)) {
-                    startServer = args[i + 1];
-                    i++;
-                }
-                if (arg.startsWith(PORT_ARG)) {
-                    startPort = Integer.parseInt(args[i + 1]);
-                    i++;
                 }
                 if (arg.startsWith(DEBUG_ARG)) {
                     debugMode = true;
                 }
+            }
+
+            if (System.getProperty(FULL_SCREEN_PROP) != null) {
+                macOsFullScreenEnabled = Boolean.parseBoolean(System.getProperty(FULL_SCREEN_PROP));
+            }
+            if (System.getProperty(GUI_MODAL_MODE_PROP) != null) {
+                guiModalModeEnabled = Boolean.parseBoolean(System.getProperty(GUI_MODAL_MODE_PROP));
             }
 
             // enable debug menu by default for developer build (if you run it from source code)
@@ -1571,19 +1557,19 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             if (settingsVersion == 0) {
                 // fresh install or first run after 2024-08-14
                 // find best GUI size settings due screen resolution and DPI
-                LOGGER.info("settings: it's a first run, trying to apply GUI size settings");
+                LOGGER.info("Settings: it's a first run, trying to apply GUI size settings");
 
                 int screenDPI = Toolkit.getDefaultToolkit().getScreenResolution();
                 int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
-                LOGGER.info(String.format("settings: screen DPI - %d, screen height - %d", screenDPI, screenHeight));
+                LOGGER.info(String.format("Settings: screen DPI - %d, screen height - %d", screenDPI, screenHeight));
 
                 // find preset for
                 String preset = PreferencesDialog.getDefaultSizeSettings().findBestPreset(screenDPI, screenHeight);
                 if (preset != null) {
-                    LOGGER.info("settings: selected preset " + preset);
+                    LOGGER.info("Settings: selected preset " + preset);
                     PreferencesDialog.getDefaultSizeSettings().applyPreset(preset);
                 } else {
-                    LOGGER.info("settings: WARNING, can't find compatible preset, use Preferences - GUI Size to setup your app");
+                    LOGGER.info("Settings: WARNING, can't find compatible preset, use Preferences - GUI Size to setup your app");
                 }
 
                 PreferencesDialog.saveValue(PreferencesDialog.KEY_SETTINGS_VERSION, String.valueOf(1));
@@ -1598,21 +1584,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             }
 
             // debug menu
+            if (debugMode) {
+                LOGGER.info("Settings: debug menu enabled");
+            }
             instance.separatorDebug.setVisible(debugMode);
             instance.btnDebug.setVisible(debugMode);
 
-            if (startUser != null) {
-                instance.currentConnection = new Connection();
-                instance.currentConnection.setUsername(startUser);
-                instance.currentConnection.setHost(startServer);
-                if (startPort > 0) {
-                    instance.currentConnection.setPort(startPort);
-                } else {
-                    instance.currentConnection.setPort(MagePreferences.getServerPortWithDefault(ClientDefaultSettings.port));
-                }
-                PreferencesDialog.setProxyInformation(instance.currentConnection);
-                instance.currentConnection.setPassword(startPassword);
-            }
             instance.setVisible(true);
         });
     }
@@ -1735,7 +1712,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public void connected(final String message) {
         SwingUtilities.invokeLater(() -> {
             setConnectButtonText(message);
-            enableButtons();
         });
     }
 
@@ -1756,7 +1732,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             // TODO: why it ignore askToReconnect here, but use custom reconnect dialog later?! Need research
             SessionHandler.disconnect(false, keepMySessionActive);
             setConnectButtonText(NOT_CONNECTED_BUTTON);
-            disableButtons();
             hideGames();
             hideServerLobby();
             if (askToReconnect) {
@@ -1845,9 +1820,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 SessionHandler.removeTable(userRequestMessage.getRoomId(), userRequestMessage.getTableId());
                 break;
             case CLIENT_RECONNECT:
-                if (performConnect(true)) {
-                    enableButtons();
-                }
+                performConnect(true);
                 break;
             case CLIENT_REPLAY_ACTION:
                 SessionHandler.stopReplay(userRequestMessage.getGameId());

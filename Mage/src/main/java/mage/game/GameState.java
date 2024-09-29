@@ -930,21 +930,21 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
-    public void addSimultaneousSacrificedPermanentToBatch(GameEvent sacrificedEvent, Game game) {
+    public void addSimultaneousSacrificedPermanentToBatch(SacrificedPermanentEvent sacrificedPermanentEvent, Game game) {
         // Combine multiple sacrificed permanent events in the single event (batch)
 
         // existing batch
         boolean isBatchUsed = false;
         for (GameEvent event : simultaneousEvents) {
             if (event instanceof SacrificedPermanentBatchEvent) {
-                ((SacrificedPermanentBatchEvent) event).addEvent(sacrificedEvent);
+                ((SacrificedPermanentBatchEvent) event).addEvent(sacrificedPermanentEvent);
                 isBatchUsed = true;
             }
         }
 
         // new batch
         if (!isBatchUsed) {
-            addSimultaneousEvent(new SacrificedPermanentBatchEvent(sacrificedEvent), game);
+            addSimultaneousEvent(new SacrificedPermanentBatchEvent(sacrificedPermanentEvent), game);
         }
     }
 
@@ -1239,6 +1239,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.isPlaneChase = isPlaneChase;
     }
 
+    /**
+     * Add object to command zone.
+     * <p>
+     * Warning, all object data must be initialized before adding, including image info
+     */
     public void addCommandObject(CommandObject commandObject) {
         getCommand().add(commandObject);
         setZone(commandObject.getId(), Zone.COMMAND);

@@ -49,7 +49,7 @@ public final class RottenmouthViper extends CardImpl {
         // Whenever Rottenmouth Viper enters or attacks, put a blight counter on it. Then for each blight counter on it, each opponent loses 4 life unless that player sacrifices a nonland permanent or discards a card.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.BLIGHT.createInstance())
-        );
+        ).withRuleTextReplacement(true);
         ability.addEffect(new RottenmouthViperEffect(new CountersSourceCount(CounterType.BLIGHT)));
         this.addAbility(ability);
     }
@@ -103,10 +103,8 @@ class RottenmouthViperEffect extends OneShotEffect{
                             target.withNotTarget(true);
                             if (opponent.choose(Outcome.Sacrifice, target, source, game)) {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
-                                if (permanent != null) {
-                                    if (permanent.sacrifice(source, game)) {
-                                        continue;
-                                    }
+                                if (permanent != null && permanent.sacrifice(source, game)) {
+                                    continue;
                                 }
                             }
                         }

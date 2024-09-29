@@ -878,7 +878,8 @@ public class CardView extends SimpleCardView {
         this.displayName = name;
         this.displayFullName = name;
         this.rules = new ArrayList<>(emblem.getRules());
-        // emblem images are always with common (black) symbol
+
+        // image - emblem are always with common (black) symbol
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = emblem.getExpansionSetCode();
         this.cardNumber = emblem.getCardNumber();
@@ -901,12 +902,13 @@ public class CardView extends SimpleCardView {
         this.displayName = name;
         this.displayFullName = name;
         this.rules = new ArrayList<>(dungeon.getRules());
-        // emblem images are always with common (black) symbol
-        this.frameStyle = FrameStyle.M15_NORMAL;
+
+        // image
+        this.frameStyle = FrameStyle.M15_NORMAL; // TODO: needs in full art? Test dungeon choose dialog
         this.expansionSetCode = dungeon.getExpansionSetCode();
         this.cardNumber = "";
-        this.imageFileName = "";
-        this.imageNumber = 0;
+        this.imageFileName = dungeon.getImageFileName();
+        this.imageNumber = dungeon.getImageNumber();
         this.rarity = Rarity.SPECIAL;
 
         this.playableStats = dungeon.playableStats.copy();
@@ -923,7 +925,8 @@ public class CardView extends SimpleCardView {
         this.displayName = name;
         this.displayFullName = name;
         this.rules = new ArrayList<>(plane.getRules());
-        // Display the plane in landscape (similar to Fused cards)
+
+        // image - display the plane in landscape (similar to Fused cards)
         this.rotate = true;
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.expansionSetCode = plane.getExpansionSetCode();
@@ -947,6 +950,8 @@ public class CardView extends SimpleCardView {
         this.displayFullName = name;
         this.rules = new ArrayList<>();
         this.rules.add(stackAbility.getRule(designation.getName()));
+
+        // image
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.cardNumber = designation.getCardNumber();
         this.expansionSetCode = designation.getExpansionSetCode();
@@ -954,6 +959,7 @@ public class CardView extends SimpleCardView {
         this.imageFileName = "";
         this.imageNumber = 0;
         this.rarity = Rarity.SPECIAL;
+
         // no playable/chooseable marks for designations
     }
 
@@ -1134,13 +1140,13 @@ public class CardView extends SimpleCardView {
             this.targets = new ArrayList<>();
         }
 
-        // need only unique targets for arrow drawning
-        Set<UUID> newTargets = new HashSet<>();
+        // need only unique targets for arrow drawing
+        Set<UUID> uniqueTarget = new LinkedHashSet<>(); // use linked, so it will use stable sort order
 
         // from normal targets
         for (Target target : targets) {
             if (target.isChosen(game)) {
-                newTargets.addAll(target.getTargets());
+                uniqueTarget.addAll(target.getTargets());
             }
         }
 
@@ -1151,9 +1157,9 @@ public class CardView extends SimpleCardView {
                 .map(p -> p.getTargets(game, source))
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
-        newTargets.addAll(fromPointers);
+        uniqueTarget.addAll(fromPointers);
 
-        this.targets.addAll(newTargets);
+        this.targets.addAll(uniqueTarget);
     }
 
     private void setOriginalValues(MageObject object) {

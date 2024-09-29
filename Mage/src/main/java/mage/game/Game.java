@@ -88,7 +88,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Dungeon getDungeon(UUID objectId);
 
-    Dungeon getPlayerDungeon(UUID objectId);
+    Dungeon getPlayerDungeon(UUID playerId);
 
     UUID getControllerId(UUID objectId);
 
@@ -456,7 +456,12 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Dungeon addDungeon(Dungeon dungeon, UUID playerId);
 
-    void ventureIntoDungeon(UUID playerId, boolean undercity);
+    /**
+     * Enter to dungeon or go to next room
+     *
+     * @param isEnterToUndercity - enter to Undercity instead choose a new dungeon
+     */
+    void ventureIntoDungeon(UUID playerId, boolean isEnterToUndercity);
 
     void temptWithTheRing(UUID playerId);
 

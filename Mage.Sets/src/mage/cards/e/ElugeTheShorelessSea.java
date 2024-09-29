@@ -93,13 +93,13 @@ public final class ElugeTheShorelessSea extends CardImpl {
     }
 }
 
-enum ElugeTheShorelessSeaPredicate implements ObjectSourcePlayerPredicate<Controllable> {
+enum ElugeTheShorelessSeaPredicate implements ObjectSourcePlayerPredicate<Card> {
     instance;
 
     @Override
-    public boolean apply(ObjectSourcePlayer<Controllable> input, Game game) {
-        if (input.getObject() instanceof Card &&
-                ((Card) input.getObject()).isInstantOrSorcery(game)) {
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
+        if (input.getObject() != null &&
+                input.getObject().isInstantOrSorcery(game)) {
             ElugeTheShorelessSeaWatcher watcher = game.getState().getWatcher(ElugeTheShorelessSeaWatcher.class);
             return watcher != null &&
                     watcher.getInstantOrSorcerySpellsCastThisTurn(input.getPlayerId()) == 0;

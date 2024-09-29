@@ -5,6 +5,7 @@ import mage.abilities.effects.common.discard.LookTargetHandChooseDiscardEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -18,7 +19,7 @@ public final class MindWarp extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{3}{B}");
 
         // Look at target player's hand and choose X cards from it. That player discards those cards.
-        this.getSpellAbility().addEffect(new LookTargetHandChooseDiscardEffect(false, GetXValue.instance));
+        this.getSpellAbility().addEffect(new LookTargetHandChooseDiscardEffect(false, GetXValue.instance, StaticFilters.FILTER_CARD_CARDS));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

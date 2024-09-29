@@ -45,13 +45,15 @@ import java.util.stream.Collectors;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 /**
- * Images downloader
+ * App GUI: card images downloader service (for GUI control see DownloadImagesDialog)
  *
  * @author JayDi85
  */
 public class DownloadPicturesService extends DefaultBoundedRangeModel implements DownloadServiceInfo, Runnable {
 
-    private static DownloadPicturesService instance;
+    private static DownloadPicturesService instance = null;
+    private static Thread loadMissingDataThread = null;
+
     private static final Logger logger = Logger.getLogger(DownloadPicturesService.class);
 
     private static final String ALL_IMAGES = "- ALL images from selected source (can be slow)";
@@ -79,7 +81,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private final List<CardDownloadData> cardsDownloadQueue;
 
     private final List<String> selectedSets = new ArrayList<>();
-    private static CardImageSource selectedSource;
+    private CardImageSource selectedSource;
 
     private final Object sync = new Object();
 
@@ -114,31 +116,47 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         return instance;
     }
 
-    public static void main(String[] args) {
-        startDownload();
-    }
-
     public static void startDownload() {
-        // load images info in background task
-        instance = new DownloadPicturesService(MageFrame.getInstance());
-        new Thread(new LoadMissingCardDataNew(instance)).start();
+        // workaround to keep first db connection in main thread (not images thread) - so it will keep connection after close
+        // TODO: no needs?
+        CardRepository.instance.getNonLandAndNonCreatureNames();
 
-        // show dialog
+        // load images info in background task
+        if (instance == null) {
+            instance = new DownloadPicturesService();
+        }
+
+        if (loadMissingDataThread != null) {
+            // stop old thread
+            //loadMissingDataThread.interrupt();
+        }
+
+        // refresh ui
+        instance.uiDialog.setGlobalInfo("Initializing image download...");
+        instance.uiDialog.getProgressBar().setValue(0);
+
+        // start new thread
+        loadMissingDataThread = new Thread(new LoadMissingCardDataNew(instance));
+        loadMissingDataThread.setDaemon(true);
+        loadMissingDataThread.start();
+
+        // show control dialog
         instance.setNeedCancel(false);
         instance.resetErrorCount();
-        instance.uiDialog.showDialog();
-        instance.uiDialog.dispose();
-        instance.setNeedCancel(true);
+        instance.uiDialog.showDialog(() -> {
+            // on finish/close/cancel
+            doStopAndClose();
+        });
+    }
 
-        // IMAGES CHECK (download process can broke some files, so fix it here too)
-        // code executes on cancel/close download dialog (but not executes on app's close -- it's ok)
-        logger.info("Images: search broken files...");
-        CardImageUtils.checkAndFixImageFiles();
+    static private void doStopAndClose() {
+        instance.setNeedCancel(true);
+        instance.uiDialog.hideDialog();
     }
 
     @Override
     public boolean isNeedCancel() {
-        return this.needCancel || (this.errorCount > MAX_ERRORS_COUNT_BEFORE_CANCEL);
+        return this.needCancel || (this.errorCount > MAX_ERRORS_COUNT_BEFORE_CANCEL) || Thread.interrupted();
     }
 
     private void setNeedCancel(boolean needCancel) {
@@ -158,15 +176,12 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         this.errorCount = 0;
     }
 
-    public DownloadPicturesService(JFrame frame) {
+    public DownloadPicturesService() {
         // init service and dialog
         cardsAll = Collections.synchronizedList(new ArrayList<>());
         cardsMissing = Collections.synchronizedList(new ArrayList<>());
         cardsDownloadQueue = Collections.synchronizedList(new ArrayList<>());
         uiDialog = new DownloadImagesDialog();
-
-        // MESSAGE
-        uiDialog.setGlobalInfo("Initializing image download...");
 
         // SOURCES - scryfall is default source
         uiDialog.getSourcesCombo().setModel(new DefaultComboBoxModel(DownloadSources.values()));
@@ -215,11 +230,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         });
 
         // BUTTON CANCEL (dialog and loading)
-        uiDialog.getCancelButton().addActionListener(e -> uiDialog.setVisible(false));
-        uiDialog.getStopButton().addActionListener(e -> uiDialog.setVisible(false));
-
-        // PROGRESS BAR
-        uiDialog.getProgressBar().setValue(0);
+        uiDialog.getCancelButton().addActionListener(e -> doStopAndClose());
+        uiDialog.getStopButton().addActionListener(e -> doStopAndClose());
     }
 
     public void findMissingCards() {
@@ -228,21 +240,30 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         this.cardsMissing.clear();
         this.cardsDownloadQueue.clear();
 
-        updateGlobalMessage("Loading cards list...");
-        this.cardsAll = Collections.synchronizedList(CardRepository.instance.findCards(
-                new CardCriteria().nightCard(null) // meld cards need to be in the target cards, so we allow for night cards
-        ));
+        try {
+            updateGlobalMessage("Loading cards list...");
+            this.cardsAll.addAll(CardRepository.instance.findCards(
+                    new CardCriteria().nightCard(null) // meld cards need to be in the target cards, so we allow for night cards
+            ));
+            if (isNeedCancel()) {
+                // fast stop on cancel
+                return;
+            }
 
-        updateGlobalMessage("Finding missing images...");
-        this.cardsMissing = prepareMissingCards(this.cardsAll, uiDialog.getRedownloadCheckbox().isSelected());
+            updateGlobalMessage("Finding missing images...");
+            this.cardsMissing.addAll(prepareMissingCards(this.cardsAll, uiDialog.getRedownloadCheckbox().isSelected()));
+            if (isNeedCancel()) {
+                // fast stop on cancel
+                return;
+            }
 
-        updateGlobalMessage("Finding available sets from selected source...");
-        this.uiDialog.getSetsCombo().setModel(new DefaultComboBoxModel<>(getSetsForCurrentImageSource()));
-        reloadCardsToDownload(this.uiDialog.getSetsCombo().getSelectedItem().toString());
-
-        this.uiDialog.showDownloadControls(true);
-        updateGlobalMessage("");
-        showDownloadControls(true);
+            updateGlobalMessage("Finding available sets from selected source...");
+            this.uiDialog.getSetsCombo().setModel(new DefaultComboBoxModel<>(getSetsForCurrentImageSource()));
+            reloadCardsToDownload(this.uiDialog.getSetsCombo().getSelectedItem().toString());
+        } finally {
+            updateGlobalMessage("");
+            this.uiDialog.showDownloadControls(true);
+        }
     }
 
     private void reloadLanguagesForSelectedSource() {
@@ -284,12 +305,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         // set values to 0 to disable progress bar
         this.uiDialog.getProgressBar().setMaximum(progressNeed);
         this.uiDialog.getProgressBar().setValue(progressCurrent);
-    }
-
-    @Override
-    public void showDownloadControls(boolean needToShow) {
-        // auto-size form on show
-        this.uiDialog.showDownloadControls(needToShow);
     }
 
     private String getSetNameWithYear(ExpansionSet exp) {
@@ -419,7 +434,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
         try {
             this.cardsMissing.clear();
-            this.cardsMissing = prepareMissingCards(this.cardsAll, uiDialog.getRedownloadCheckbox().isSelected());
+            this.cardsMissing.addAll(prepareMissingCards(this.cardsAll, uiDialog.getRedownloadCheckbox().isSelected()));
             reloadCardsToDownload(uiDialog.getSetsCombo().getSelectedItem().toString());
         } finally {
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -577,7 +592,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 allCardsUrls.add(card);
             });
         } catch (Exception e) {
-            logger.error(e);
+            logger.error("Error on prepare images list: " + e, e);
         }
 
         // find missing files
@@ -691,12 +706,15 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 }
 
                 executor.shutdown();
-                while (!executor.isTerminated()) {
-                    try {
-                        TimeUnit.SECONDS.sleep(1);
-                    } catch (InterruptedException ignore) {
-                    }
+                try {
+                    executor.awaitTermination(30, TimeUnit.SECONDS);
+                } catch (InterruptedException ignore) {
                 }
+
+                // IMAGES CHECK (download process can break some files, so fix it here too)
+                // code executes on finish/cancel download (but not executes on app's close -- it's ok)
+                logger.info("Images: search broken files...");
+                CardImageUtils.checkAndFixImageFiles();
             }
         } catch (Throwable e) {
             logger.error("Catch unknown error while downloading: " + e, e);
@@ -997,9 +1015,5 @@ class LoadMissingCardDataNew implements Runnable {
     @Override
     public void run() {
         downloadPicturesService.findMissingCards();
-    }
-
-    public static void main() {
-        (new Thread(new LoadMissingCardDataNew(downloadPicturesService))).start();
     }
 }

@@ -40,6 +40,7 @@ public class PickChoiceDialog extends MageDialog {
 
     java.util.List<KeyValueItem> allItems = new ArrayList<>();
     KeyValueItem biggestItem = null; // for render optimization
+    PickChoiceCallback callback = null;
 
     final private static String HTML_HEADERS_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
 
@@ -58,14 +59,19 @@ public class PickChoiceDialog extends MageDialog {
         this.setModal(true);
     }
 
-    public void showDialog(Choice choice, String startSelectionValue) {
-        showDialog(choice, startSelectionValue, null, null, null);
+    public interface PickChoiceCallback {
+        void onChoiceDone();
     }
 
-    public void showDialog(Choice choice, String startSelectionValue, UUID objectId, MageDialogState mageDialogState, BigCard bigCard) {
+    public void showDialog(Choice choice, String startSelectionValue, PickChoiceCallback callback) {
+        showDialog(choice, startSelectionValue, null, null, null, callback);
+    }
+
+    public void showDialog(Choice choice, String startSelectionValue, UUID objectId, MageDialogState mageDialogState, BigCard bigCard, PickChoiceCallback callback) {
         this.choice = choice;
         this.bigCard = bigCard;
         this.gameId = objectId;
+        this.callback = callback;
 
         changeGUISize();
 
@@ -244,11 +250,7 @@ public class PickChoiceDialog extends MageDialog {
 
         // window settings
         MageFrame.getDesktop().remove(this);
-        if (this.isModal()) {
-            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-        } else {
-            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-        }
+        MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         if (mageDialogState != null) {
             mageDialogState.setStateToDialog(this);
         } else {
@@ -311,8 +313,8 @@ public class PickChoiceDialog extends MageDialog {
                         // as card name
                         cardInfo.init(item.getHint(), this.bigCard, this.gameId);
                     } else if (item.getHintType() == ChoiceHintType.CARD_DUNGEON) {
-                        // as card name
-                        CardView cardView = new CardView(new DungeonView(Dungeon.createDungeon(item.getHint())));
+                        // as dungeon name
+                        CardView cardView = new CardView(new DungeonView(Dungeon.createDungeon(item.getHint(), true)));
                         cardInfo.init(cardView, this.bigCard, this.gameId);
                     } else if (item.getHintType() == ChoiceHintType.GAME_OBJECT) {
                         // as object
@@ -421,14 +423,21 @@ public class PickChoiceDialog extends MageDialog {
 
     private void doChoose() {
         if (setChoice()) {
-            this.hideDialog();
+            doClose();
         }
     }
 
     private void doCancel() {
         this.listChoices.clearSelection();
         this.choice.clearChoice();
-        hideDialog();
+        doClose();
+    }
+
+    private void doClose() {
+        this.hideDialog();
+        if (this.callback != null) {
+            this.callback.onChoiceDone();
+        }
     }
 
     public boolean setChoice() {

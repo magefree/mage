@@ -150,6 +150,7 @@ public enum CounterType {
     MUSIC("music"),
     MUSTER("muster"),
     NECRODERMIS("necrodermis"),
+    NEST("nest"),
     NET("net"),
     NIGHT("night"),
     OIL("oil"),
@@ -174,6 +175,7 @@ public enum CounterType {
     POLYP("polyp"),
     POINT("point"),
     POISON("poison"),
+    POSSESSION("possession"),
     PRESSURE("pressure"),
     PREY("prey"),
     PUPA("pupa"),
@@ -259,8 +261,6 @@ public enum CounterType {
 
     /**
      * Get counter string name.
-     *
-     * @return
      */
     public String getName() {
         return this.name;
@@ -272,8 +272,6 @@ public enum CounterType {
 
     /**
      * Create instance of counter type with amount equal to 1.
-     *
-     * @return
      */
     public Counter createInstance() {
         return createInstance(1);
@@ -284,7 +282,6 @@ public enum CounterType {
      * given type.
      *
      * @param amount amount of counters of the given type.
-     * @return
      */
     public Counter createInstance(int amount) {
         switch (this) {

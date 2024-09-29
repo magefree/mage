@@ -8,6 +8,7 @@ import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -48,7 +49,7 @@ public final class RadiantSolar extends CardImpl {
         // Whenever Radiant Solar or another nontoken creature you control enters, venture into the dungeon.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new VentureIntoTheDungeonEffect(), filter, false, true
-        ));
+        ).addHint(CurrentDungeonHint.instance));
 
         // {W}, Discard Radiant Solar: Venture into the dungeon and you gain 3 life.
         Ability ability = new SimpleActivatedAbility(

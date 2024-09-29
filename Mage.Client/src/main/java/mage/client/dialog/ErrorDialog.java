@@ -7,6 +7,7 @@ import mage.util.CardUtil;
 
 /**
  * GUI: error dialog with copyable error message
+ * // TODO: add game logs and data for game errors (client side info from GameView)
  *
  * @author JayDi85
  */

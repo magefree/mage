@@ -29,7 +29,7 @@ public final class JeskasWill extends CardImpl {
         this.getSpellAbility().getModes().setChooseText(
                 "Choose one. If you control a commander as you cast this spell, you may choose both instead."
         );
-        this.getSpellAbility().getModes().setMoreCondition(ControlACommanderCondition.instance);
+        this.getSpellAbility().getModes().setMoreCondition(2, ControlACommanderCondition.instance);
 
         // • Add {R} for each card in target opponent's hand.
         this.getSpellAbility().addEffect(new JeskasWillEffect());

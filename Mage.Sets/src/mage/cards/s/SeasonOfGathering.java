@@ -44,7 +44,7 @@ public final class SeasonOfGathering extends CardImpl {
 
         // {P} -- Put a +1/+1 counter on a creature you control. It gains vigilance and trample until end of turn.
         this.getSpellAbility().addEffect(new SeasonOfGatheringCounterEffect());
-        this.spellAbility.getModes().getMode().withPawPrintValue(1);
+        this.getSpellAbility().getModes().getMode().withPawPrintValue(1);
 
         // {P}{P} -- Choose artifact or enchantment. Destroy all permanents of the chosen type.
         Mode mode2 = new Mode(new SeasonOfGatheringRemovalEffect());

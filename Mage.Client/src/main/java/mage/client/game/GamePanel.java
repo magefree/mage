@@ -196,11 +196,20 @@ public final class GamePanel extends javax.swing.JPanel {
                 player.getGraveyard().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
                 Optional.ofNullable(player.getTopCard()).ifPresent(c -> this.allCardsIndex.put(c.getId(), c));
                 // TODO: add support of dungeon, emblem all another non-card objects
+                // commanders and custom emblems
                 player.getCommandObjectList()
-                        .stream()
-                        .filter(c -> c instanceof CardView)
-                        .map(c -> (CardView) c)
-                        .forEach(c -> this.allCardsIndex.put(c.getId(), c));
+                        .forEach(object -> {
+                            if (object instanceof CardView) {
+                                // commanders and custom emblems
+                                this.allCardsIndex.put(object.getId(), (CardView) object);
+                            } else if (object instanceof DungeonView) {
+                                // dungeons
+                                this.allCardsIndex.put(object.getId(), new CardView((DungeonView) object));
+                            } else {
+                                // TODO: enable after all view types added here?
+                                //throw new IllegalArgumentException("Unsupported object type: " + object.getName() + " - " + object.getClass().getSimpleName());
+                            }
+                        });
             });
         }
 
@@ -277,10 +286,10 @@ public final class GamePanel extends javax.swing.JPanel {
         pnlShortCuts.add(btnStopWatching);
 
         pickNumber = new PickNumberDialog();
-        MageFrame.getDesktop().add(pickNumber, JLayeredPane.MODAL_LAYER);
+        MageFrame.getDesktop().add(pickNumber, pickNumber.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
 
         pickMultiNumber = new PickMultiNumberDialog();
-        MageFrame.getDesktop().add(pickMultiNumber, JLayeredPane.MODAL_LAYER);
+        MageFrame.getDesktop().add(pickMultiNumber, pickMultiNumber.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
 
         this.feedbackPanel.setConnectedChatPanel(this.userChatPanel);
 
@@ -808,7 +817,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gamePane = gamePane;
         this.playerId = playerId;
         MageFrame.addGame(gameId, this);
-        this.feedbackPanel.init(gameId);
+        this.feedbackPanel.init(gameId, bigCard);
         this.feedbackPanel.clear();
         this.abilityPicker.init(gameId, bigCard);
         this.btnConcede.setVisible(true);
@@ -851,7 +860,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gamePane = gamePane;
         this.playerId = null;
         MageFrame.addGame(gameId, this);
-        this.feedbackPanel.init(gameId);
+        this.feedbackPanel.init(gameId, bigCard);
         this.feedbackPanel.clear();
 
         this.btnConcede.setVisible(false);
@@ -886,7 +895,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gameId = gameId;
         this.playerId = null;
         MageFrame.addGame(gameId, this);
-        this.feedbackPanel.init(gameId);
+        this.feedbackPanel.init(gameId, bigCard);
         this.feedbackPanel.clear();
         this.btnConcede.setVisible(false);
         this.btnSkipToNextTurn.setVisible(false);
@@ -1226,7 +1235,7 @@ public final class GamePanel extends javax.swing.JPanel {
             if (exileWindow == null) {
                 exileWindow = new CardInfoWindowDialog(ShowType.EXILE, exile.getName());
                 exiles.put(exile.getId(), exileWindow);
-                MageFrame.getDesktop().add(exileWindow, JLayeredPane.PALETTE_LAYER);
+                MageFrame.getDesktop().add(exileWindow, exileWindow.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
                 exileWindow.show();
             }
             exileWindow.loadCardsAndShow(exile, bigCard, gameId);
@@ -1607,7 +1616,7 @@ public final class GamePanel extends javax.swing.JPanel {
         }
         CardInfoWindowDialog newGraveyard = new CardInfoWindowDialog(ShowType.GRAVEYARD, playerName);
         graveyardWindows.put(playerName, newGraveyard);
-        MageFrame.getDesktop().add(newGraveyard, JLayeredPane.PALETTE_LAYER);
+        MageFrame.getDesktop().add(newGraveyard, newGraveyard.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         // use graveyards to sync selection (don't use player data here)
         newGraveyard.loadCardsAndShow(graveyards.get(playerName), bigCard, gameId, false);
     }
@@ -1632,7 +1641,7 @@ public final class GamePanel extends javax.swing.JPanel {
         newDialog.setSize(GUISizeHelper.dialogGuiScaleSize(newDialog.getSize()));
         newDialog.setGameData(this.lastGameData.game, this.gameId, this.bigCard);
         cardHintsWindows.put(code + UUID.randomUUID(), newDialog);
-        MageFrame.getDesktop().add(newDialog, JLayeredPane.PALETTE_LAYER);
+        MageFrame.getDesktop().add(newDialog, newDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         newDialog.loadHints(lastGameData.game);
     }
 
@@ -1661,7 +1670,7 @@ public final class GamePanel extends javax.swing.JPanel {
 
         CardInfoWindowDialog windowDialog = new CardInfoWindowDialog(ShowType.SIDEBOARD, playerView.getName());
         sideboardWindows.put(playerView.getName(), windowDialog);
-        MageFrame.getDesktop().add(windowDialog, JLayeredPane.PALETTE_LAYER);
+        MageFrame.getDesktop().add(windowDialog, windowDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         // use sideboards to sync selection (don't use player data here)
         windowDialog.loadCardsAndShow(sideboards.get(playerView.getName()), bigCard, gameId, false);
     }
@@ -1714,7 +1723,7 @@ public final class GamePanel extends javax.swing.JPanel {
         if (!windowMap.containsKey(name)) {
             cardInfoWindowDialog = new CardInfoWindowDialog(showType, name);
             windowMap.put(name, cardInfoWindowDialog);
-            MageFrame.getDesktop().add(cardInfoWindowDialog, JLayeredPane.PALETTE_LAYER);
+            MageFrame.getDesktop().add(cardInfoWindowDialog, cardInfoWindowDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         } else {
             cardInfoWindowDialog = windowMap.get(name);
         }
@@ -2153,12 +2162,13 @@ public final class GamePanel extends javax.swing.JPanel {
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
-        pickNumber.showDialog(min, max, message);
-        if (pickNumber.isCancel()) {
-            SessionHandler.sendPlayerBoolean(gameId, false);
-        } else {
-            SessionHandler.sendPlayerInteger(gameId, pickNumber.getAmount());
-        }
+        pickNumber.showDialog(min, max, message, () -> {
+            if (pickNumber.isCancel()) {
+                SessionHandler.sendPlayerBoolean(gameId, false);
+            } else {
+                SessionHandler.sendPlayerInteger(gameId, pickNumber.getAmount());
+            }
+        });
     }
 
     public void getMultiAmount(int messageId, GameView gameView, List<MultiAmountMessage> messages, Map<String, Serializable> options,
@@ -2167,12 +2177,13 @@ public final class GamePanel extends javax.swing.JPanel {
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
-        pickMultiNumber.showDialog(messages, min, max, lastGameData.options);
-        if (pickMultiNumber.isCancel()) {
-            SessionHandler.sendPlayerBoolean(gameId, false);
-        } else {
-            SessionHandler.sendPlayerString(gameId, pickMultiNumber.getMultiAmount());
-        }
+        pickMultiNumber.showDialog(messages, min, max, lastGameData.options, () -> {
+            if (pickMultiNumber.isCancel()) {
+                SessionHandler.sendPlayerBoolean(gameId, false);
+            } else {
+                SessionHandler.sendPlayerString(gameId, pickMultiNumber.getMultiAmount());
+            }
+        });
     }
 
     public void getChoice(int messageId, GameView gameView, Map<String, Serializable> options, Choice choice, UUID objectId) {
@@ -2182,23 +2193,23 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // TODO: remember last choices and search incremental for same events?
         PickChoiceDialog pickChoice = new PickChoiceDialog();
-        pickChoice.showDialog(choice, null, objectId, choiceWindowState, bigCard);
+        pickChoice.showDialog(choice, null, objectId, choiceWindowState, bigCard, () -> {
+            // special mode adds # to the answer (server side code must process that prefix, see replacementEffectChoice)
+            String specialPrefix = choice.isChosenSpecial() ? "#" : "";
 
-        // special mode adds # to the answer (server side code must process that prefix, see replacementEffectChoice)
-        String specialPrefix = choice.isChosenSpecial() ? "#" : "";
+            String valueToSend;
+            if (choice.isKeyChoice()) {
+                valueToSend = choice.getChoiceKey();
+            } else {
+                valueToSend = choice.getChoice();
+            }
+            SessionHandler.sendPlayerString(gameId, valueToSend == null ? null : specialPrefix + valueToSend);
 
-        String valueToSend;
-        if (choice.isKeyChoice()) {
-            valueToSend = choice.getChoiceKey();
-        } else {
-            valueToSend = choice.getChoice();
-        }
-        SessionHandler.sendPlayerString(gameId, valueToSend == null ? null : specialPrefix + valueToSend);
+            // keep dialog position
+            choiceWindowState = new MageDialogState(pickChoice);
 
-        // keep dialog position
-        choiceWindowState = new MageDialogState(pickChoice);
-
-        pickChoice.removeDialog();
+            pickChoice.removeDialog();
+        });
     }
 
     public void pickPile(int messageId, GameView gameView, Map<String, Serializable> options, String message, CardsView pile1, CardsView pile2) {
@@ -2212,12 +2223,11 @@ public final class GamePanel extends javax.swing.JPanel {
         PickPileDialog pickPileDialog = new PickPileDialog();
         this.pickPile.add(pickPileDialog);
 
-        pickPileDialog.loadCards(message, pile1, pile2, bigCard, gameId);
-        if (pickPileDialog.isPickedOK()) {
-            SessionHandler.sendPlayerBoolean(gameId, pickPileDialog.isPickedPile1());
-        }
-        pickPileDialog.cleanUp();
-        pickPileDialog.removeDialog();
+        pickPileDialog.showDialog(message, pile1, pile2, bigCard, gameId, () -> {
+            if (pickPileDialog.isPickedOK()) {
+                SessionHandler.sendPlayerBoolean(gameId, pickPileDialog.isPickedPile1());
+            }
+        });
     }
 
     public Map<UUID, PlayAreaPanel> getPlayers() {

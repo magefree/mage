@@ -2,16 +2,12 @@
 package mage.cards.l;
 
 import java.util.UUID;
-import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageControllerEffect;
-import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
+import mage.abilities.mana.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 
 /**
  *
@@ -26,10 +22,10 @@ public final class LlanowarWastes extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // Tap: Add Black or Green. Llanowar Wastes deals 1 damage to you.
-        Ability blackManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(1), new TapSourceCost());
+        Ability blackManaAbility = new BlackManaAbility();
         blackManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(blackManaAbility);
-        Ability greenManaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(1), new TapSourceCost());
+        Ability greenManaAbility = new GreenManaAbility();
         greenManaAbility.addEffect(new DamageControllerEffect(1));
         this.addAbility(greenManaAbility);
     }

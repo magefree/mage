@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SacrificeOneOrMorePermanentsTriggeredAbility;
@@ -11,15 +10,17 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
-import mage.constants.*;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.SquirrelToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,11 +28,15 @@ import mage.game.permanent.token.SquirrelToken;
  */
 public final class CamelliaTheSeedmiser extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filterSquirrels =
+    private static final FilterControlledCreaturePermanent filterSquirrelCreatures =
             new FilterControlledCreaturePermanent("Squirrels");
 
+    private static final FilterControlledCreaturePermanent filterSquirrels =
+            new FilterControlledCreaturePermanent("other Squirrel you control");
 
     static {
+        filterSquirrelCreatures.add(SubType.SQUIRREL.getPredicate());
+        filterSquirrelCreatures.add(AnotherPredicate.instance);
         filterSquirrels.add(SubType.SQUIRREL.getPredicate());
         filterSquirrels.add(AnotherPredicate.instance);
     }
@@ -54,7 +59,7 @@ public final class CamelliaTheSeedmiser extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,new GainAbilityControlledEffect(
                 new MenaceAbility(false),
                 Duration.WhileOnBattlefield,
-                filterSquirrels,
+                filterSquirrelCreatures,
                 true
         )));
         // Whenever you sacrifice one or more Foods, create a 1/1 green Squirrel creature token.

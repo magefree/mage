@@ -560,14 +560,14 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void ventureIntoDungeon(UUID playerId, boolean undercity) {
+    public void ventureIntoDungeon(UUID playerId, boolean isEnterToUndercity) {
         if (playerId == null) {
             return;
         }
         if (replaceEvent(GameEvent.getEvent(GameEvent.EventType.VENTURE, playerId, null, playerId))) {
             return;
         }
-        this.getOrCreateDungeon(playerId, undercity).moveToNextRoom(playerId, this);
+        this.getOrCreateDungeon(playerId, isEnterToUndercity).moveToNextRoom(playerId, this);
         fireEvent(GameEvent.getEvent(GameEvent.EventType.VENTURED, playerId, null, playerId));
     }
 
@@ -583,8 +583,10 @@ public abstract class GameImpl implements Game {
         if (emblem != null) {
             return emblem;
         }
+
         TheRingEmblem newEmblem = new TheRingEmblem(playerId);
         state.addCommandObject(newEmblem);
+
         return newEmblem;
     }
 
@@ -1963,15 +1965,14 @@ public abstract class GameImpl implements Game {
     @Override
     public void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId) {
         Emblem newEmblem = emblem.copy();
-        newEmblem.setSourceObject(sourceObject);
+        newEmblem.setSourceObjectAndInitImage(sourceObject);
         newEmblem.setControllerId(toPlayerId);
         newEmblem.assignNewId();
         newEmblem.getAbilities().newId();
         for (Ability ability : newEmblem.getAbilities()) {
             ability.setSourceId(newEmblem.getId());
         }
-
-        state.addCommandObject(newEmblem); // TODO: generate image for emblem here?
+        state.addCommandObject(newEmblem);
     }
 
     /**
@@ -1992,7 +1993,7 @@ public abstract class GameImpl implements Game {
             }
         }
         Plane newPlane = plane.copy();
-        newPlane.setSourceObject();
+        newPlane.setSourceObjectAndInitImage();
         newPlane.setControllerId(toPlayerId);
         newPlane.assignNewId();
         newPlane.getAbilities().newId();
@@ -2000,6 +2001,7 @@ public abstract class GameImpl implements Game {
             ability.setSourceId(newPlane.getId());
         }
         state.addCommandObject(newPlane);
+
         informPlayers("You have planeswalked to " + newPlane.getLogName());
 
         // Fire off the planeswalked event

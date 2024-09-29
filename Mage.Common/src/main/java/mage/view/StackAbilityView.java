@@ -17,9 +17,7 @@ import mage.target.Target;
 import mage.target.targetpointer.TargetPointer;
 import mage.util.GameLog;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -34,7 +32,7 @@ public class StackAbilityView extends CardView {
 
     public StackAbilityView(Game game, StackAbility ability, String sourceName, MageObject sourceObject, CardView sourceView) {
         this.id = ability.getId();
-        this.mageObjectType = MageObjectType.ABILITY_STACK;
+        this.mageObjectType = sourceView.getMageObjectType().isUseTokensRepository() ? MageObjectType.ABILITY_STACK_FROM_TOKEN : MageObjectType.ABILITY_STACK_FROM_CARD;
         this.abilityType = ability.getStackAbility().getAbilityType();
         this.sourceCard = sourceView;
         this.sourceCard.setMageObjectType(mageObjectType);
@@ -86,15 +84,16 @@ public class StackAbilityView extends CardView {
             if (!mode.getTargets().isEmpty()) {
                 addTargets(mode.getTargets(), mode.getEffects(), ability, game);
             } else {
-                List<UUID> targetList = new ArrayList<>();
+                // need only unique targets for arrow drawing
+                Set<UUID> uniqueTargets = new LinkedHashSet<>(); // use linked, so it will use stable sort order
                 for (Effect effect : mode.getEffects()) {
                     TargetPointer targetPointer = effect.getTargetPointer();
-                    targetList.addAll(targetPointer.getTargets(game, ability));
+                    uniqueTargets.addAll(targetPointer.getTargets(game, ability));
                 }
-                if (!targetList.isEmpty()) {
-                    overrideTargets(targetList);
+                if (!uniqueTargets.isEmpty()) {
+                    overrideTargets(new ArrayList<>(uniqueTargets));
 
-                    for (UUID uuid : targetList) {
+                    for (UUID uuid : uniqueTargets) {
                         MageObject mageObject = game.getObject(uuid);
                         if (mageObject != null) {
                             if ((mageObject instanceof Card) && ((Card) mageObject).isFaceDown(game)) {

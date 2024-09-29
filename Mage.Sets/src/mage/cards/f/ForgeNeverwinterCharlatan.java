@@ -19,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.TreasureToken;
 
 import java.util.UUID;
@@ -55,8 +54,9 @@ public final class ForgeNeverwinterCharlatan extends CardImpl {
 
         // Whenever one or more players sacrifice one or more creatures, you create a tapped Treasure token. This ability triggers only once each turn.
         this.addAbility(new SacrificeOneOrMorePermanentsTriggeredAbility(Zone.BATTLEFIELD,
-                new CreateTokenEffect(new TreasureToken(), 1, true),
-                new FilterCreaturePermanent("creatures"), TargetController.ANY, SetTargetPointer.NONE, false
+                new CreateTokenEffect(new TreasureToken(), 1, true)
+                        .setText("you create a tapped Treasure token"),
+                StaticFilters.FILTER_PERMANENT_CREATURES, TargetController.ANY, SetTargetPointer.NONE, false
         ).setTriggersLimitEachTurn(1));
     }
 
