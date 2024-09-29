@@ -1,0 +1,400 @@
+[Settings]
+{
+# common collation US only
+# uncommon collation US only
+    "name": "NPH with US printrun collation",
+    "withReplacement": true,
+    "showSlots": true,
+    "boostersPerPlayer": 3,
+    
+    "layouts": {
+# US packs - common A(33) B(27) - uncommon A(33) B(27)
+# 3  *  33,34,34  *  (45),4,31
+        "Ja_ABC_AABBBBCCCC": { "weight": 4455, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaA": 1, "uncommon##JaB": 1, "uncommon##JaC": 1,
+            "common##JaA": 2, "common##JaB": 4, "common##JaC": 4 }},
+        "Ja_ABC_AAABBBCCCC": { "weight": 4590, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaA": 1, "uncommon##JaB": 1, "uncommon##JaC": 1,
+            "common##JaA": 2, "common##JaB": 4, "common##JaC": 4 }},
+        "Ja_ABC_AAABBBBCCC": { "weight": 4590, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaA": 1, "uncommon##JaB": 1, "uncommon##JaC": 1,
+            "common##JaA": 2, "common##JaB": 4, "common##JaC": 4 }},
+
+# 3  *  33,34,34  *  45,(4),31
+        "Ja_BBC_AABBBBCCCC": { "weight": 396, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaB": 2, "uncommon##JaC": 1,
+            "common##JaA": 2, "common##JaB": 4, "common##JaC": 4 }},
+        "Ja_BBC_AAABBBCCCC": { "weight": 408, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaB": 2, "uncommon##JaC": 1,
+            "common##JaA": 2, "common##JaB": 4, "common##JaC": 4 }},
+        "Ja_BBC_AAABBBBCCC": { "weight": 408, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaB": 2, "uncommon##JaC": 1,
+            "common##JaA": 2, "common##JaB": 4, "common##JaC": 4 }},
+
+# 3  *  33,34,34  *  45,4,(31)
+        "Ja_BCC_AABBBBCCCC": { "weight": 3069, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaB": 1, "uncommon##JaC": 2,
+            "common##JaA": 2, "common##JaB": 4, "common##JaC": 4 }},
+        "Ja_BCC_AAABBBCCCC": { "weight": 3162, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaB": 1, "uncommon##JaC": 2,
+            "common##JaA": 2, "common##JaB": 4, "common##JaC": 4 }},
+        "Ja_BCC_AAABBBBCCC": { "weight": 3162, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaB": 1, "uncommon##JaC": 2,
+            "common##JaA": 2, "common##JaB": 4, "common##JaC": 4 }},
+
+# Japanese packs - land displacing a common
+# 1  *  41,30,30  *  (45),4,31
+        "Ja_ABC_AAABBBCCC": { "weight": 1845, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaA": 1, "uncommon##JaB": 1, "uncommon##JaC": 1,
+            "common##JaA": 3, "common##JaB": 3, "common##JaC": 3,
+            "Land": 1 }},
+        "Ja_ABC_AABBBCCCC": { "weight": 1350, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaA": 1, "uncommon##JaB": 1, "uncommon##JaC": 1,
+            "common##JaA": 2, "common##JaB": 3, "common##JaC": 4,
+            "Land": 1 }},
+        "Ja_ABC_AABBBBCCC": { "weight": 1350, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaA": 1, "uncommon##JaB": 1, "uncommon##JaC": 1,
+            "common##JaA": 2, "common##JaB": 4, "common##JaC": 3,
+            "Land": 1 }},
+
+# 1  *  41,30,30  *  45,(4),31
+        "Ja_BBC_AAABBBCCC": { "weight": 164, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaB": 2, "uncommon##JaC": 1,
+            "common##JaA": 3, "common##JaB": 3, "common##JaC": 3,
+            "Land": 1 }},
+        "Ja_BBC_AABBBCCCC": { "weight": 120, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaB": 2, "uncommon##JaC": 1,
+            "common##JaA": 2, "common##JaB": 3, "common##JaC": 4,
+            "Land": 1 }},
+        "Ja_BBC_AABBBBCCC": { "weight": 120, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaB": 2, "uncommon##JaC": 1,
+            "common##JaA": 2, "common##JaB": 4, "common##JaC": 3,
+            "Land": 1 }},
+
+# 1  *  41,30,30  *  45,4,(31)
+        "Ja_BCC_AAABBBCCC": { "weight": 1271, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaB": 1, "uncommon##JaC": 2,
+            "common##JaA": 3, "common##JaB": 3, "common##JaC": 3,
+            "Land": 1 }},
+        "Ja_BCC_AABBBCCCC": { "weight": 930, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaB": 1, "uncommon##JaC": 2,
+            "common##JaA": 2, "common##JaB": 3, "common##JaC": 4,
+            "Land": 1 }},
+        "Ja_BCC_AABBBBCCC": { "weight": 930, "slots": {
+            "brr": 1, "rare":  1, "uncommon##JaB": 1, "uncommon##JaC": 2,
+            "common##JaA": 2, "common##JaB": 4, "common##JaC": 3,
+            "Land": 1 }},
+    }
+}
+[common##USA {"collation":"printRun"}]
+Defensive Stance (nph) 34
+Victorious Destruction (nph) 99
+Glistener Elf (nph) 111
+Blinding Souleater (nph) 131
+Mortis Dogs (nph) 66
+Chained Throatseeker (nph) 30
+Sensor Splicer (nph) 22
+Ogre Menial (nph) 89
+Immolating Souleater (nph) 139
+Leeching Bite (nph) 113
+Dementia Bat (nph) 55
+Apostle's Blessing (nph) 2
+Vapor Snag (nph) 48
+Blinding Souleater (nph) 131
+Maul Splicer (nph) 114
+Ruthless Invasion (nph) 93
+Suture Priest (nph) 25
+Vault Skirge (nph) 76
+Gitaxian Probe (nph) 35
+Hovermyr (nph) 138
+Glistener Elf (nph) 111
+Flameborn Viron (nph) 83
+Forced Worship (nph) 11
+Dementia Bat (nph) 55
+Rotted Hystrix (nph) 120
+Victorious Destruction (nph) 99
+Psychic Barrier (nph) 43
+Phyrexian Hulk (nph) 150
+Viridian Harvest (nph) 125
+Sensor Splicer (nph) 22
+Flameborn Viron (nph) 83
+Toxic Nim (nph) 75
+Remember the Fallen (nph) 21
+Defensive Stance (nph) 34
+Leeching Bite (nph) 113
+Insatiable Souleater (nph) 140
+Loxodon Convert (nph) 14
+Evil Presence (nph) 60
+Scrapyard Salvo (nph) 94
+Forced Worship (nph) 11
+Viridian Betrayers (nph) 124
+Vapor Snag (nph) 48
+Immolating Souleater (nph) 139
+Rotted Hystrix (nph) 120
+Suture Priest (nph) 25
+Toxic Nim (nph) 75
+Scrapyard Salvo (nph) 94
+Chained Throatseeker (nph) 30
+Viridian Harvest (nph) 125
+Insatiable Souleater (nph) 140
+Apostle's Blessing (nph) 2
+Mycosynth Wellspring (nph) 145
+Mortis Dogs (nph) 66
+Ogre Menial (nph) 89
+Psychic Barrier (nph) 43
+Maul Splicer (nph) 114
+Loxodon Convert (nph) 14
+Hovermyr (nph) 138
+Evil Presence (nph) 60
+Gitaxian Probe (nph) 35
+Ruthless Invasion (nph) 93
+Viridian Betrayers (nph) 124
+Vault Skirge (nph) 76
+Remember the Fallen (nph) 21
+Mycosynth Wellspring (nph) 145
+Phyrexian Hulk (nph) 150
+# "34", "99", "111", "131", "66", "30", "22", "89", "139", "113", "55", "2", "48", "131", "114", "93", "25", "76", "35", "138", "111", "83", "11", "55", "120", "99", "43", "150", "125", "22", "83", "75", "21", "34", "113", "140", "14", "60", "94", "11", "124", "48", "139", "120", "25", "75", "94", "30", "125", "140", "2", "145", "66", "89", "43", "114", "14", "138", "60", "35", "93", "124", "76", "21", "145", "150",
+
+[common##USB {"collation":"printRun"}]
+Thundering Tanadon (nph) 122
+Spined Thopter (nph) 45
+Pith Driller (nph) 69
+Furnace Scamp (nph) 84
+Trespassing Souleater (nph) 163
+War Report (nph) 26
+Slash Panther (nph) 96
+Glissa's Scorn (nph) 110
+Parasitic Implant (nph) 67
+Numbing Dose (nph) 40
+Volt Charge (nph) 100
+Shriek Raptor (nph) 24
+Pestilent Souleater (nph) 149
+Impaler Shrike (nph) 36
+Pith Driller (nph) 69
+Mutagenic Growth (nph) 116
+Artillerize (nph) 79
+Geth's Verdict (nph) 61
+War Report (nph) 26
+Pristine Talisman (nph) 151
+Spire Monitor (nph) 46
+Razor Swine (nph) 92
+Lost Leonin (nph) 13
+Death-Hood Cobra (nph) 108
+Spined Thopter (nph) 45
+Grim Affliction (nph) 63
+Volt Charge (nph) 100
+Parasitic Implant (nph) 67
+Trespassing Souleater (nph) 163
+Shriek Raptor (nph) 24
+Blighted Agent (nph) 29
+Artillerize (nph) 79
+Spire Monitor (nph) 46
+Slash Panther (nph) 96
+Grim Affliction (nph) 63
+Porcelain Legionnaire (nph) 19
+Numbing Dose (nph) 40
+Blind Zealot (nph) 52
+Glissa's Scorn (nph) 110
+Pestilent Souleater (nph) 149
+Furnace Scamp (nph) 84
+Gremlin Mine (nph) 136
+Blighted Agent (nph) 29
+Lost Leonin (nph) 13
+Thundering Tanadon (nph) 122
+Geth's Verdict (nph) 61
+Pristine Talisman (nph) 151
+Death-Hood Cobra (nph) 108
+Impaler Shrike (nph) 36
+Razor Swine (nph) 92
+Blind Zealot (nph) 52
+Mutagenic Growth (nph) 116
+Gremlin Mine (nph) 136
+Porcelain Legionnaire (nph) 19
+# "122", "45", "69", "84", "163", "26", "96", "110", "67", "40", "100", "24", "149", "36", "69", "116", "79", "61", "26", "151", "46", "92", "13", "108", "45", "63", "100", "67", "163", "24", "29", "79", "46", "96", "63", "19", "40", "52", "110", "149", "84", "136", "29", "13", "122", "61", "151", "108", "36", "92", "52", "116", "136", "19",
+
+[uncommon##USA {"collation":"printRun"}]
+Cathedral Membrane (nph) 5
+Despise (nph) 56
+Darksteel Relic (nph) 134
+Vital Splicer (nph) 126
+Whipflare (nph) 102
+Arm with Aether (nph) 28
+Caress of Phyrexia (nph) 53
+Due Respect (nph) 8
+Darksteel Relic (nph) 134
+Corrosive Gale (nph) 107
+Shrine of Limitless Power (nph) 154
+Despise (nph) 56
+Noxious Revival (nph) 118
+Shrine of Piercing Vision (nph) 156
+Whipflare (nph) 102
+Inquisitor Exarch (nph) 12
+Conversion Chamber (nph) 133
+Corrosive Gale (nph) 107
+Deceiver Exarch (nph) 33
+Phyrexia's Core (nph) 165
+Caress of Phyrexia (nph) 53
+Shrine of Limitless Power (nph) 154
+Vital Splicer (nph) 126
+Rage Extractor (nph) 91
+Kiln Walker (nph) 142
+Due Respect (nph) 8
+Deceiver Exarch (nph) 33
+Greenhilt Trainee (nph) 112
+Whispering Specter (nph) 77
+Priest of Urabrask (nph) 90
+Alloy Myr (nph) 129
+Marrow Shards (nph) 15
+Mindculling (nph) 39
+Shrine of Boundless Growth (nph) 152
+Ichor Explosion (nph) 64
+Priest of Urabrask (nph) 90
+Kiln Walker (nph) 142
+Inquisitor Exarch (nph) 12
+Greenhilt Trainee (nph) 112
+Corrupted Resolve (nph) 32
+Whispering Specter (nph) 77
+Alloy Myr (nph) 129
+Vulshok Refugee (nph) 101
+Mycosynth Fiend (nph) 117
+Shrine of Piercing Vision (nph) 156
+Reaper of Sheoldred (nph) 72
+Cathedral Membrane (nph) 5
+Vulshok Refugee (nph) 101
+Mindculling (nph) 39
+Mycosynth Fiend (nph) 117
+Phyrexia's Core (nph) 165
+Auriok Survivors (nph) 3
+Ichor Explosion (nph) 64
+Conversion Chamber (nph) 133
+Necropouncer (nph) 147
+Rage Extractor (nph) 91
+Auriok Survivors (nph) 3
+Corrupted Resolve (nph) 32
+Reaper of Sheoldred (nph) 72
+Necropouncer (nph) 147
+Gut Shot (nph) 86
+Marrow Shards (nph) 15
+Noxious Revival (nph) 118
+Arm with Aether (nph) 28
+Shrine of Boundless Growth (nph) 152
+Gut Shot (nph) 86
+# "5", "56", "134", "126", "102", "28", "53", "8", "134", "107", "154", "56", "118", "156", "102", "12", "133", "107", "33", "165", "53", "154", "126", "91", "142", "8", "33", "112", "77", "90", "129", "15", "39", "152", "64", "90", "142", "12", "112", "32", "77", "129", "101", "117", "156", "72", "5", "101", "39", "117", "165", "3", "64", "133", "147", "91", "3", "32", "72", "147", "86", "15", "118", "28", "152", "86",
+
+[uncommon##USB {"collation":"printRun"}]
+Surge Node (nph) 160
+Brutalizer Exarch (nph) 105
+Mindcrank (nph) 144
+Triumph of the Hordes (nph) 123
+Entomber Exarch (nph) 59
+Argent Mutation (nph) 27
+Tezzeret's Gambit (nph) 47
+Beast Within (nph) 103
+Mindcrank (nph) 144
+Tormentor Exarch (nph) 97
+Isolation Cell (nph) 141
+Sickleslicer (nph) 157
+Spinebiter (nph) 121
+Mental Misstep (nph) 38
+Fallen Ferromancer (nph) 82
+Dismember (nph) 57
+Shattered Angel (nph) 23
+Sickleslicer (nph) 157
+Master Splicer (nph) 16
+Viral Drake (nph) 49
+Fallen Ferromancer (nph) 82
+Enslave (nph) 58
+Exclusion Ritual (nph) 10
+Geosurge (nph) 85
+Shrine of Loyal Legions (nph) 155
+Beast Within (nph) 103
+Mental Misstep (nph) 38
+Shrine of Burning Rage (nph) 153
+Act of Aggression (nph) 78
+Entomber Exarch (nph) 59
+Shrine of Loyal Legions (nph) 155
+Argent Mutation (nph) 27
+Dispatch (nph) 7
+Surge Node (nph) 160
+Wing Splicer (nph) 50
+Enslave (nph) 58
+Isolation Cell (nph) 141
+Act of Aggression (nph) 78
+Triumph of the Hordes (nph) 123
+Wing Splicer (nph) 50
+Geosurge (nph) 85
+Dismember (nph) 57
+Tormentor Exarch (nph) 97
+Shattered Angel (nph) 23
+Tezzeret's Gambit (nph) 47
+Postmortem Lunge (nph) 70
+Dispatch (nph) 7
+Brutalizer Exarch (nph) 105
+Exclusion Ritual (nph) 10
+Viral Drake (nph) 49
+Postmortem Lunge (nph) 70
+Shrine of Burning Rage (nph) 153
+Spinebiter (nph) 121
+Master Splicer (nph) 16
+# "160", "105", "144", "123", "59", "27", "47", "103", "144", "97", "141", "157", "121", "38", "82", "57", "23", "157", "16", "49", "82", "58", "10", "85", "155", "103", "38", "153", "78", "59", "155", "27", "7", "160", "50", "58", "141", "78", "123", "50", "85", "57", "97", "23", "47", "70", "7", "105", "10", "49", "70", "153", "121", "16",
+
+[rare]
+1 Batterskull (nph) 130
+2 Birthing Pod (nph) 104
+2 Blade Splicer (nph) 4
+2 Bludgeon Brawl (nph) 80
+2 Caged Sun (nph) 132
+2 Chancellor of the Annex (nph) 6
+2 Chancellor of the Dross (nph) 54
+2 Chancellor of the Forge (nph) 81
+2 Chancellor of the Spires (nph) 31
+2 Chancellor of the Tangle (nph) 106
+1 Elesh Norn, Grand Cenobite (nph) 9
+1 Etched Monstrosity (nph) 135
+2 Fresh Meat (nph) 109
+2 Glistening Oil (nph) 62
+2 Hex Parasite (nph) 137
+2 Invader Parasite (nph) 87
+1 Jin-Gitaxias, Core Augur (nph) 37
+2 Jor Kadeen, the Prevailer (nph) 128
+1 Karn Liberated (nph) 1
+2 Lashwrithe (nph) 143
+2 Life's Finale (nph) 65
+2 Melira, Sylvok Outcast (nph) 115
+2 Moltensteel Dragon (nph) 88
+2 Myr Superion (nph) 146
+2 Norn's Annex (nph) 17
+2 Omen Machine (nph) 148
+2 Phyrexian Ingester (nph) 41
+2 Phyrexian Metamorph (nph) 42
+1 Phyrexian Obliterator (nph) 68
+2 Phyrexian Swarmlord (nph) 119
+2 Phyrexian Unlife (nph) 18
+2 Praetor's Grasp (nph) 71
+2 Psychic Surgery (nph) 44
+2 Puresteel Paladin (nph) 20
+1 Sheoldred, Whispering One (nph) 73
+2 Slag Fiend (nph) 95
+2 Soul Conduit (nph) 158
+2 Spellskite (nph) 159
+2 Surgical Extraction (nph) 74
+1 Sword of War and Peace (nph) 161
+2 Torpor Orb (nph) 162
+2 Unwinding Clock (nph) 164
+1 Urabrask the Hidden (nph) 98
+1 Vorinclex, Voice of Hunger (nph) 127
+2 Xenograft (nph) 51
+# "130", "104", "104", "4", "4", "80", "80", "132", "132", "6", "6", "54", "54", "81", "81", "31", "31", "106", "106", "9", "135", "109", "109", "62", "62", "137", "137", "87", "87", "37", "128", "128", "1", "143", "143", "65", "65", "115", "115", "88", "88", "146", "146", "17", "17", "148", "148", "41", "41", "42", "42", "68", "119", "119", "18", "18", "71", "71", "44", "44", "20", "20", "73", "95", "95", "158", "158", "159", "159", "74", "74", "161", "162", "162", "164", "164", "98", "127", "51", "51",
+[Land]
+1 Plains (nph) 166
+1 Plains (nph) 167
+1 Island (nph) 168
+1 Island (nph) 169
+1 Swamp (nph) 170
+1 Swamp (nph) 171
+1 Mountain (nph) 172
+1 Mountain (nph) 173
+1 Forest (nph) 174
+1 Forest (nph) 175
+# "166", "167", "168", "169", "170", "171", "172", "173", "174", "175",
+
