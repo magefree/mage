@@ -66,7 +66,7 @@ jobs:
               labels: 'tracking set',
               state: 'all'
             });
-            console.log("Found list of existing tracking set issues:", issues);
+            //console.log("Found list of existing tracking set issues:", issues);
             
             const issuesToUpdate = [];
             const issuesToCreate = [];
@@ -100,9 +100,11 @@ jobs:
                 const className = toCamelCase(cardData[0].replace(/[+]/g, ' Plus ').replace(/[_]+/g, ' Blank ').replace(/[']/g, '').replace(/[-+,.!?`@#$%^&*()_=<>:";~\\|/]/g, ' '));
                 const cleanCardName = cardData[0].replace(/[-,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '').toLowerCase();
                 const cardPath = path.join('Mage.Sets', 'src', 'mage', 'cards', className.substring(0, 1), `${className.charAt(0).toUpperCase()+className.slice(1)}.java`);
+
+                // Find if someone left a comment with the card name (if someone did, we will put a check mark on the item)
                 let claimed = false;
                 issueComments && issueComments.forEach(comment => {
-                  if (comment.body && comment.body.search(new RegExp(cleanCardName, "i")) != -1) {
+                  if (comment.body && comment.body.search(new RegExp(cardData[0], "i")) != -1 || comment.body.search(new RegExp(cleanCardName, "i") != -1) {
                     console.log(`Found a comment by ${comment.user.login} claiming card ${cardData[0]}`);
                     claimed = true;
                   }
@@ -134,6 +136,7 @@ jobs:
                   unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`
                 });
 
+              // GH API has a max character length of 65536 for issue body. We can try to cut down on unnecessary fat to try to get it to fit.
               if (body.length > 65536) {
                 console.log(`Issue body for ${set[0]} (${set[1]}) too long! Length: ${body.length}. Attempting to trim down size...`);
                 const trimmedBody = mustache.render(cardIssueTemplate, {
@@ -165,8 +168,6 @@ jobs:
               }
             }
             
-            //console.log("Issues to update: ", issuesToUpdate);
-            //console.log("Issues to create: ", issuesToCreate);
             console.log(`Updating ${issuesToUpdate.length} issues`);
             for (const issue of issuesToUpdate) {
               github.rest.issues.update({
