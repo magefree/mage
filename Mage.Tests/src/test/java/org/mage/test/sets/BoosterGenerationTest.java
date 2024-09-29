@@ -514,8 +514,9 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
     @Ignore // debug only: collect info about cards in boosters, see https://github.com/magefree/mage/issues/8081
     @Test
     public void test_CollectBoosterStats() {
-        ExpansionSet setToAnalyse = ModernHorizons3.getInstance();
-        int openBoosters = 10000;
+        ExpansionSet setToAnalyse = NewPhyrexia.getInstance();
+        // Takes about a minute for 100,000 boosters
+        int openBoosters = 100000;
 
         Map<String, Integer> resRatio = new HashMap<>();
         int totalCards = 0;
@@ -523,10 +524,22 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
             List<Card> booster = setToAnalyse.createBooster();
             totalCards += booster.size();
             booster.forEach(card -> {
-                String code = String.format("%s %s %s", card.getExpansionSetCode(), card.getRarity().getCode(), card.getName());
+                String code = String.format("%s %s %s", card.getExpansionSetCode(), card.getRarity().toString().charAt(0), card.getName());
                 resRatio.putIfAbsent(code, 0);
                 resRatio.computeIfPresent(code, (u, count) -> count + 1);
             });
+        }
+        System.out.println(setToAnalyse.getName() + " - boosters opened: " + openBoosters + ". Found cards: " + totalCards + "\n");
+        for (char rarity : Arrays.asList('C', 'U', 'R', 'M', 'S', 'L', 'B')) {
+            List<Integer> rarityCounts = resRatio.entrySet().stream()
+                    .filter(e -> e.getKey().charAt(4) == rarity)
+                    .map(Map.Entry::getValue)
+                    .collect(Collectors.toList());
+            if (!rarityCounts.isEmpty()) {
+                System.out.println(rarity + String.format(": %s unique, min %s, max %s, total %s",
+                        rarityCounts.size(), Collections.min(rarityCounts), Collections.max(rarityCounts),
+                        rarityCounts.stream().mapToInt(x -> x).sum()));
+            }
         }
         List<String> info = resRatio.entrySet().stream()
                 .sorted((o1, o2) -> Integer.compare(o2.getValue(), o1.getValue()))
@@ -535,8 +548,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
                         e.getValue()
                 ))
                 .collect(Collectors.toList());
-        System.out.println(setToAnalyse.getName() + " - boosters opened: " + openBoosters + ". Found cards: " + totalCards + "\n"
-                + String.join("\n", info));
+        System.out.println("\n" + String.join("\n", info));
     }
 
     @Ignore // debug only
