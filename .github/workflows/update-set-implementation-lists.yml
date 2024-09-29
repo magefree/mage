@@ -130,6 +130,23 @@ jobs:
                 state: issue.state
               });
             });
+            issuesToCreate.slice(0, 1).forEach(issue => {
+              const result = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: issue.title,
+                body: issue.body,
+                labels: ["tracking set"]
+              });
+              if (issue.state === "closed") {
+                github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: result.number,
+                  state: issue.state
+                });
+              }
+            });
       - uses: actions/github-script@v6.4.1
         id: updatesetimplementations
         with:
