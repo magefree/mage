@@ -104,7 +104,7 @@ jobs:
                 // Find if someone left a comment with the card name (if someone did, we will put a check mark on the item)
                 let claimed = false;
                 issueComments && issueComments.forEach(comment => {
-                  if (comment.body && comment.body.search(new RegExp(cardData[0], "i")) != -1 || comment.body.search(new RegExp(cleanCardName, "i") != -1) {
+                  if (comment.body && comment.body.search(new RegExp(cardData[0], "i")) != -1 || comment.body.search(new RegExp(cleanCardName, "i")) != -1) {
                     console.log(`Found a comment by ${comment.user.login} claiming card ${cardData[0]}`);
                     claimed = true;
                   }
