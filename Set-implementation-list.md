@@ -51,7 +51,7 @@ Set Name  |  # Cards | # Missing |
 [Champions of Kamigawa](https://github.com/ExpensiveKoala/mage/issues/51) | 296 | 11
 [Chronicles](https://github.com/ExpensiveKoala/mage/issues/52) | 116 | 1
 [Clash Pack](https://github.com/ExpensiveKoala/mage/issues/53) | 12 | 0
-[Commander Anthology](https://www.github.com/mage/magefree) | 285 | 0
+[Commander Anthology](https://github.com/ExpensiveKoala/mage/issues/54) | 285 | 0
 [Commander Anthology 2018](https://www.github.com/mage/magefree) | 0 | 0
 [Commander's Arsenal](https://www.github.com/mage/magefree) | 27 | 0
 [Commander Masters](https://www.github.com/mage/magefree) | 732 | 1
