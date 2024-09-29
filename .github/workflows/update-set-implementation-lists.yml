@@ -72,6 +72,7 @@ jobs:
             const issuesToCreate = [];
             
             for (const set of setsData) {
+              if (!set || !set[0] || !set[1]) continue;
               let foundIssue = undefined;
               issues.every(issue => {
                 if(issue && issue.title && issue.title.startsWith(set[1])) {
