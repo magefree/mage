@@ -28,7 +28,7 @@ public final class BenalishInfantry extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public BenalishInfantry (final BenalishInfantry card) {
+    private BenalishInfantry(final BenalishInfantry card) {
         super(card);
     }
 

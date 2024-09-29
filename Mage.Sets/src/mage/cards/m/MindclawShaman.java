@@ -26,7 +26,7 @@ public final class MindclawShaman extends CardImpl {
 
     public MindclawShaman(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(2);
@@ -51,13 +51,13 @@ public final class MindclawShaman extends CardImpl {
 
 class MindclawShamanEffect extends OneShotEffect {
 
-    public MindclawShamanEffect() {
+    MindclawShamanEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "target opponent reveals their hand. You may cast "
-                + "an instant or sorcery card from it without paying its mana cost";
+                + "an instant or sorcery spell from among those cards without paying its mana cost";
     }
 
-    public MindclawShamanEffect(final MindclawShamanEffect effect) {
+    private MindclawShamanEffect(final MindclawShamanEffect effect) {
         super(effect);
     }
 

@@ -46,12 +46,12 @@ public final class Peacekeeper extends CardImpl {
 
 class PeacekeeperCantAttackEffect extends RestrictionEffect {
 
-    public PeacekeeperCantAttackEffect() {
+    PeacekeeperCantAttackEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Creatures can't attack";
     }
 
-    public PeacekeeperCantAttackEffect(final PeacekeeperCantAttackEffect effect) {
+    private PeacekeeperCantAttackEffect(final PeacekeeperCantAttackEffect effect) {
         super(effect);
     }
 

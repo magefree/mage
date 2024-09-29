@@ -75,7 +75,7 @@ class TavernBrawlerEffect extends OneShotEffect {
         }
         player.moveCards(card, Zone.EXILED, source, game);
         game.addEffect(new BoostSourceEffect(card.getManaValue(), 0, Duration.EndOfTurn), source);
-        CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, false);
+        CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
         return true;
     }
 }

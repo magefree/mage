@@ -29,8 +29,7 @@ public final class EverlastingTorment extends CardImpl {
 
         // Damage can't be prevented.
         this.addAbility(new SimpleStaticAbility(new DamageCantBePreventedEffect(
-                Duration.WhileOnBattlefield, "Damage can't be prevented",
-                true, false
+                Duration.WhileOnBattlefield
         )));
 
         // All damage is dealt as though its source had wither.
@@ -61,11 +60,6 @@ class DamageDealtAsIfSourceHadWitherEffect extends ReplacementEffectImpl {
     @Override
     public DamageDealtAsIfSourceHadWitherEffect copy() {
         return new DamageDealtAsIfSourceHadWitherEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

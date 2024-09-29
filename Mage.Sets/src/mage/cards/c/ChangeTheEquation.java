@@ -26,7 +26,7 @@ public final class ChangeTheEquation extends CardImpl {
     static {
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 3));
         filter2.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, 7));
-        filter.add(Predicates.or(
+        filter2.add(Predicates.or(
                 new ColorPredicate(ObjectColor.RED),
                 new ColorPredicate(ObjectColor.GREEN)
         ));

@@ -35,7 +35,7 @@ public final class JenaraAsuraOfWar extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{1}{W}")));
     }
 
-    public JenaraAsuraOfWar (final JenaraAsuraOfWar card) {
+    private JenaraAsuraOfWar(final JenaraAsuraOfWar card) {
         super(card);
     }
 

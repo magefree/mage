@@ -1,7 +1,7 @@
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MultikickerAbility;
@@ -14,7 +14,10 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.TargetsCountAdjuster;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author noxx
@@ -29,8 +32,8 @@ public final class StrengthOfTheTajuru extends CardImpl {
 
         // Choose target creature, then choose another target creature for each time Strength of the Tajuru was kicked. Put X +1/+1 counters on each of them.
         this.getSpellAbility().addEffect(new StrengthOfTheTajuruAddCountersTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
-        this.getSpellAbility().setTargetAdjuster(StrengthOfTheTajuruAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(new IntPlusDynamicValue(1, MultikickerCount.instance)));
     }
 
     private StrengthOfTheTajuru(final StrengthOfTheTajuru card) {
@@ -43,34 +46,23 @@ public final class StrengthOfTheTajuru extends CardImpl {
     }
 }
 
-enum StrengthOfTheTajuruAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int numbTargets = MultikickerCount.instance.calculate(game, ability, null) + 1;
-        ability.addTarget(new TargetCreaturePermanent(0, numbTargets));
-    }
-}
-
 class StrengthOfTheTajuruAddCountersTargetEffect extends OneShotEffect {
 
-    public StrengthOfTheTajuruAddCountersTargetEffect() {
+    StrengthOfTheTajuruAddCountersTargetEffect() {
         super(Outcome.BoostCreature);
         staticText = "Choose target creature, then choose another target creature for each time this spell was kicked. Put X +1/+1 counters on each of them";
     }
 
-    public StrengthOfTheTajuruAddCountersTargetEffect(final StrengthOfTheTajuruAddCountersTargetEffect effect) {
+    private StrengthOfTheTajuruAddCountersTargetEffect(final StrengthOfTheTajuruAddCountersTargetEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        int amount = source.getManaCostsToPay().getX();
+        int amount = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Counter counter = CounterType.P1P1.createInstance(amount);
-        for (UUID uuid : targetPointer.getTargets(game, source)) {
+        for (UUID uuid : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(uuid);
             if (permanent != null) {
                 permanent.addCounters(counter.copy(), source.getControllerId(), source, game);

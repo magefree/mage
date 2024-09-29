@@ -58,19 +58,19 @@ class MindblazeEffect extends OneShotEffect {
                 "{this} deals 8 damage to that player. Then that player shuffles";
     }
 
-    MindblazeEffect(final MindblazeEffect effect) {
+    private MindblazeEffect(final MindblazeEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player playerControls = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (player == null || playerControls == null || sourceObject == null) {
             return false;
         }
-        Choice numberChoice = new ChoiceImpl();
+        Choice numberChoice = new ChoiceImpl(false);
         numberChoice.setMessage("Choose a number greater than 0");
         Set<String> numbers = new HashSet<>();
         for (int i = 1; i <= 4; i++) {
@@ -83,7 +83,7 @@ class MindblazeEffect extends OneShotEffect {
         game.informPlayers(sourceObject.getIdName() + " - Chosen number: [" + numberChoice.getChoice() + ']');
 
         Cards cards = new CardsImpl();
-        cards.addAll(player.getLibrary().getCards(game));
+        cards.addAllCards(player.getLibrary().getCards(game));
         playerControls.revealCards("Library", cards, game);
         FilterCard filter = new FilterCard();
         filter.add(new NamePredicate(cardName));

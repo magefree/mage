@@ -14,6 +14,7 @@ import mage.counters.Counters;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.Ownerable;
 import mage.game.permanent.Permanent;
 import mage.util.ManaUtil;
 import mage.watchers.common.CommanderPlaysCountWatcher;
@@ -21,11 +22,11 @@ import mage.watchers.common.CommanderPlaysCountWatcher;
 import java.util.List;
 import java.util.UUID;
 
-public interface Card extends MageObject {
-
-    UUID getOwnerId();
+public interface Card extends MageObject, Ownerable {
 
     Rarity getRarity(); // null for tokens
+
+    void setRarity(Rarity rarity);
 
     void setOwnerId(UUID ownerId);
 
@@ -46,7 +47,11 @@ public interface Card extends MageObject {
 
     List<String> getRules(Game game);  // gets card rules + in game modifications
 
-    void checkForCountersToAdd(Permanent permanent, Ability source, Game game);
+    /**
+     * Find ETB counters and apply it to permanent.
+     * Warning, it's one time action, use it before a put to battlefield only.
+     */
+    void applyEnterWithCounters(Permanent permanent, Ability source, Game game);
 
     void setFaceDown(boolean value, Game game);
 
@@ -54,6 +59,7 @@ public interface Card extends MageObject {
 
     boolean turnFaceUp(Ability source, Game game, UUID playerId);
 
+    // TODO: need research, is it lost morph and other face down statuses?
     boolean turnFaceDown(Ability source, Game game, UUID playerId);
 
     boolean isFlipCard();
@@ -78,6 +84,15 @@ public interface Card extends MageObject {
 
     default Card getMeldsToCard() {
         return null;
+    }
+
+    /**
+     * Is this an extra deck card? (such as contraptions and attractions)
+     *
+     * @return true if this is an extra deck card, false otherwise
+     */
+    default boolean isExtraDeckCard() {
+        return false;
     }
 
     void assignNewId();
@@ -135,11 +150,6 @@ public interface Card extends MageObject {
 
     List<Mana> getMana();
 
-    /**
-     * @return true if there exists various art images for this card
-     */
-    boolean getUsesVariousArt();
-
     Counters getCounters(Game game);
 
     Counters getCounters(GameState state);
@@ -160,9 +170,64 @@ public interface Card extends MageObject {
 
     boolean addCounters(Counter counter, UUID playerAddingCounters, Ability source, Game game, List<UUID> appliedEffects, boolean isEffect, int maxCounters);
 
-    void removeCounters(String name, int amount, Ability source, Game game);
+    /**
+     * Remove {@param amount} counters of the specified kind.
+     */
+    default void removeCounters(String counterName, int amount, Ability source, Game game) {
+        removeCounters(counterName, amount, source, game, false);
+    }
 
-    void removeCounters(Counter counter, Ability source, Game game);
+    /**
+     * Remove {@param amount} counters of the specified kind.
+     *
+     * @param isDamage if the counter removal is a result of being damaged (e.g. for Deification to work)
+     */
+    void removeCounters(String counterName, int amount, Ability source, Game game, boolean isDamage);
+
+    default void removeCounters(Counter counter, Ability source, Game game) {
+        removeCounters(counter, source, game, false);
+    }
+
+    /**
+     * Remove all counters of any kind.
+     *
+     * @param isDamage if the counter removal is a result of being damaged (e.g. for Deification to work)
+     */
+    void removeCounters(Counter counter, Ability source, Game game, boolean isDamage);
+
+    /**
+     * Remove all counters of any kind.
+     *
+     * @return the amount of counters removed this way.
+     */
+    default int removeAllCounters(Ability source, Game game) {
+        return removeAllCounters(source, game, false);
+    }
+
+    /**
+     * Remove all counters of any kind.
+     *
+     * @param isDamage if the counter removal is a result of being damaged (e.g. for Deification to work)
+     * @return the amount of counters removed this way.
+     */
+    int removeAllCounters(Ability source, Game game, boolean isDamage);
+
+    /**
+     * Remove all counters of a specific kind. Return the amount of counters removed this way.
+     *
+     * @return the amount of counters removed this way.
+     */
+    default int removeAllCounters(String counterName, Ability source, Game game) {
+        return removeAllCounters(counterName, source, game, false);
+    }
+
+    /**
+     * Remove all counters of a specific kind. Return the amount of counters removed this way.
+     *
+     * @param isDamage if the counter removal is a result of being damaged (e.g. for Deification to work)
+     * @return the amount of counters removed this way.
+     */
+    int removeAllCounters(String counterName, Ability source, Game game, boolean isDamage);
 
     @Override
     Card copy();
@@ -203,7 +268,7 @@ public interface Card extends MageObject {
         CommanderPlaysCountWatcher watcher = game.getState().getWatcher(CommanderPlaysCountWatcher.class);
         int castCount = watcher.getPlaysCount(getMainCard().getId());
         if (castCount > 0) {
-            abilityToModify.getManaCostsToPay().add(ManaUtil.createManaCost(2 * castCount, false));
+            abilityToModify.addManaCostsToPay(ManaUtil.createManaCost(2 * castCount, false));
         }
         return true;
     }

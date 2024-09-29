@@ -9,8 +9,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
-import static mage.constants.Duration.EndOfTurn;
-
 /**
  * @author North
  */
@@ -35,7 +33,7 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
         if (!filter.getMessage().equals("creature")) {
             sb.append(' ').append(filter.getMessage());
         }
-        if (duration == EndOfTurn) {
+        if (duration == Duration.EndOfTurn) {
             sb.append(" this turn");
         } else if (!duration.toString().isEmpty()) {
             sb.append(' ').append(duration.toString());
@@ -43,7 +41,7 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
         staticText = sb.toString();
     }
 
-    public CantBlockAttachedEffect(final CantBlockAttachedEffect effect) {
+    protected CantBlockAttachedEffect(final CantBlockAttachedEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -51,7 +49,7 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             Permanent equipment = game.getPermanent(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
                 this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game.getState().getZoneChangeCounter(equipment.getAttachedTo())));
@@ -61,8 +59,8 @@ public class CantBlockAttachedEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (affectedObjectsSet) {
-            return targetPointer.getFirst(game, source).equals(permanent.getId());
+        if (getAffectedObjectsSet()) {
+            return getTargetPointer().getFirst(game, source).equals(permanent.getId());
         }
         return permanent.getAttachments().contains(source.getSourceId());
     }

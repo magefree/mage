@@ -57,15 +57,10 @@ class AegisOfHonorEffect extends RedirectionEffect {
         		+ "damage to you this turn, that spell deals that damage to its controller instead";
     }
 
-    public AegisOfHonorEffect(final AegisOfHonorEffect card) {
+    private AegisOfHonorEffect(final AegisOfHonorEffect card) {
         super(card);
     }
 
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {

@@ -2,18 +2,15 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
+import mage.abilities.effects.mana.UntilEndOfTurnManaEffect;
 import mage.abilities.keyword.BoastAbility;
 import mage.cards.CardSetInfo;
 import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -37,7 +34,7 @@ public final class BirgiGodOfStorytelling extends ModalDoubleFacedCard {
 
         // Whenever you cast a spell, add {R}. Until end of turn, you don't lose this mana as steps and phases end.
         this.getLeftHalfCard().addAbility(new SpellCastControllerTriggeredAbility(
-                new BirgiGodOfStorytellingManaEffect(), false
+                new UntilEndOfTurnManaEffect(Mana.RedMana(1)), false
         ));
 
         // Creatures you control can boast twice during each of your turns rather than once.
@@ -48,7 +45,7 @@ public final class BirgiGodOfStorytelling extends ModalDoubleFacedCard {
         // Legendary Artifact
         // Discard a card: Exile the top two cards of your library. You may play those cards this turn.
         this.getRightHalfCard().addAbility(new SimpleActivatedAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(2), new DiscardCardCost()
+                new ExileTopXMayPlayUntilEffect(2, Duration.EndOfTurn).withTextOptions("those cards", true), new DiscardCardCost()
         ));
     }
 
@@ -59,32 +56,5 @@ public final class BirgiGodOfStorytelling extends ModalDoubleFacedCard {
     @Override
     public BirgiGodOfStorytelling copy() {
         return new BirgiGodOfStorytelling(this);
-    }
-}
-
-class BirgiGodOfStorytellingManaEffect extends OneShotEffect {
-
-    BirgiGodOfStorytellingManaEffect() {
-        super(Outcome.Benefit);
-        staticText = "add {R}. Until end of turn, you don't lose this mana as steps and phases end";
-    }
-
-    private BirgiGodOfStorytellingManaEffect(final BirgiGodOfStorytellingManaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BirgiGodOfStorytellingManaEffect copy() {
-        return new BirgiGodOfStorytellingManaEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        player.getManaPool().addMana(new Mana(ManaType.RED, 1), game, source, true);
-        return true;
     }
 }

@@ -6,13 +6,10 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -56,7 +53,7 @@ public final class SyrCarahTheBold extends CardImpl {
 class SyrCarahTheBoldTriggeredAbility extends TriggeredAbilityImpl {
 
     SyrCarahTheBoldTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEndOfTurnEffect(1), false);
+        super(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), false);
     }
 
     private SyrCarahTheBoldTriggeredAbility(final SyrCarahTheBoldTriggeredAbility ability) {

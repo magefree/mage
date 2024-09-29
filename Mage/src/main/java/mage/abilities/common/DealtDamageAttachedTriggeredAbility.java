@@ -1,19 +1,17 @@
-
 package mage.abilities.common;
 
-import java.util.UUID;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LoneFox
  */
 public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
@@ -27,10 +25,10 @@ public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
     public DealtDamageAttachedTriggeredAbility(Zone zone, Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase("Whenever enchanted creature is dealt damage, ");
+        setTriggerPhrase(getWhen() + "enchanted creature is dealt damage, ");
     }
 
-    public DealtDamageAttachedTriggeredAbility(final DealtDamageAttachedTriggeredAbility ability) {
+    protected DealtDamageAttachedTriggeredAbility(final DealtDamageAttachedTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }
@@ -42,17 +40,17 @@ public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent enchantment = game.getPermanent(sourceId);
         UUID targetId = event.getTargetId();
-        if(enchantment != null && enchantment.getAttachedTo() != null && targetId.equals(enchantment.getAttachedTo())) {
-            for(Effect effect : this.getEffects()) {
+        if (enchantment != null && enchantment.getAttachedTo() != null && targetId.equals(enchantment.getAttachedTo())) {
+            for (Effect effect : this.getEffects()) {
                 effect.setValue("damage", event.getAmount());
-                switch(setTargetPointer) {
+                switch (setTargetPointer) {
                     case PERMANENT:
                         effect.setTargetPointer(new FixedTarget(targetId, game));
                         break;

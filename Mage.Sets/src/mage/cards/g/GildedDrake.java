@@ -56,12 +56,12 @@ public final class GildedDrake extends CardImpl {
 
 class GildedDrakeEffect extends OneShotEffect {
 
-    public GildedDrakeEffect() {
+    GildedDrakeEffect() {
         super(Outcome.GainControl);
         this.staticText = "exchange control of {this} and up to one target creature an opponent controls. If you don't or can't make an exchange, sacrifice {this}. This ability still resolves if its target becomes illegal";
     }
 
-    public GildedDrakeEffect(final GildedDrakeEffect effect) {
+    private GildedDrakeEffect(final GildedDrakeEffect effect) {
         super(effect);
     }
 
@@ -81,13 +81,13 @@ class GildedDrakeEffect extends OneShotEffect {
             return false;
         }
 
-        if (targetPointer.getFirst(game, source) == null || game.getPermanent(targetPointer.getFirst(game, source)) == null) {
+        if (getTargetPointer().getFirst(game, source) == null || game.getPermanent(getTargetPointer().getFirst(game, source)) == null) {
             sourceObject.sacrifice(source, game);
             return true;
         }
 
         ContinuousEffect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, "", true);
-        effect.setTargetPointer(targetPointer);
+        effect.setTargetPointer(this.getTargetPointer().copy());
         game.addEffect(effect, source);
         return true;
     }

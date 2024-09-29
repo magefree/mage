@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,7 +25,7 @@ public final class RotcrownGhoul extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Rotcrown Ghoul dies, target player puts the top five cards of their library into their graveyard.
-        Ability ability = new DiesSourceTriggeredAbility(new PutLibraryIntoGraveTargetEffect(5));
+        Ability ability = new DiesSourceTriggeredAbility(new MillCardsTargetEffect(5));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

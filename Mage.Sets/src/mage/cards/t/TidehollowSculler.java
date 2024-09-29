@@ -57,12 +57,12 @@ public final class TidehollowSculler extends CardImpl {
 
 class TidehollowScullerExileEffect extends OneShotEffect {
 
-    public TidehollowScullerExileEffect() {
+    TidehollowScullerExileEffect() {
         super(Outcome.Exile);
         this.staticText = "target opponent reveals their hand and you choose a nonland card from it. Exile that card";
     }
 
-    public TidehollowScullerExileEffect(final TidehollowScullerExileEffect effect) {
+    private TidehollowScullerExileEffect(final TidehollowScullerExileEffect effect) {
         super(effect);
     }
 
@@ -104,12 +104,12 @@ class TidehollowScullerExileEffect extends OneShotEffect {
 
 class TidehollowScullerLeaveEffect extends OneShotEffect {
 
-    public TidehollowScullerLeaveEffect() {
+    TidehollowScullerLeaveEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "return the exiled card to its owner's hand";
     }
 
-    public TidehollowScullerLeaveEffect(final TidehollowScullerLeaveEffect effect) {
+    private TidehollowScullerLeaveEffect(final TidehollowScullerLeaveEffect effect) {
         super(effect);
     }
 

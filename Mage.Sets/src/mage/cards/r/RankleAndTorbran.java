@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrBattleTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateTokenAllEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
@@ -48,14 +48,13 @@ public final class RankleAndTorbran extends CardImpl {
 
         // Whenever Rankle and Torbran deals combat damage to a player or battle, choose any number --
         // * Each player creates a Treasure token.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-                new CreateTokenAllEffect(new TreasureToken(), TargetController.EACH_PLAYER), false
-        ).setOrBattle(true);
+        Ability ability = new DealsCombatDamageToAPlayerOrBattleTriggeredAbility(
+                new CreateTokenAllEffect(new TreasureToken(), TargetController.EACH_PLAYER), false);
         ability.getModes().setMinModes(0);
         ability.getModes().setMaxModes(3);
 
         // * Each player sacrifices a creature.
-        ability.addMode(new Mode(new SacrificeAllEffect(1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)));
+        ability.addMode(new Mode(new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE)));
 
         // * If a source would deal damage to a player or battle this turn, it deals that much damage plus 2 instead.
         ability.addMode(new Mode(new RankleAndTorbranEffect()));
@@ -100,11 +99,6 @@ class RankleAndTorbranEffect extends ReplacementEffectImpl {
         }
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null && permanent.isBattle(game);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

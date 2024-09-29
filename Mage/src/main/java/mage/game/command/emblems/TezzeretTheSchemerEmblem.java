@@ -9,10 +9,9 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
 import mage.target.TargetPermanent;
-
-import static mage.filter.StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT;
 
 /**
  * @author spjspj
@@ -28,7 +27,7 @@ public final class TezzeretTheSchemerEmblem extends Emblem {
         effect = new SetBasePowerToughnessTargetEffect(5, 5, Duration.EndOfGame);
         effect.setText("with base power and toughness 5/5");
         ability.addEffect(effect);
-        ability.addTarget(new TargetPermanent(FILTER_CONTROLLED_PERMANENT_ARTIFACT));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT));
         this.getAbilities().add(ability);
     }
 

@@ -38,7 +38,7 @@ public class BecomesCreatureTypeTargetEffect extends ContinuousEffectImpl {
         this.loseOther = loseOther;
     }
 
-    public BecomesCreatureTypeTargetEffect(final BecomesCreatureTypeTargetEffect effect) {
+    protected BecomesCreatureTypeTargetEffect(final BecomesCreatureTypeTargetEffect effect) {
         super(effect);
         this.subtypes.addAll(effect.subtypes);
         this.loseOther = effect.loseOther;
@@ -52,7 +52,7 @@ public class BecomesCreatureTypeTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean flag = false;
-        for (UUID targetPermanent : targetPointer.getTargets(game, source)) {
+        for (UUID targetPermanent : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetPermanent);
             if (permanent == null) {
                 continue;

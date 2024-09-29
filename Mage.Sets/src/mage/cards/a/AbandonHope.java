@@ -4,18 +4,18 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.DiscardTargetCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.InfoEffect;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.abilities.effects.common.discard.LookTargetHandChooseDiscardEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -35,9 +35,7 @@ public final class AbandonHope extends CardImpl {
         this.addAbility(ability);
 
         // Look at target opponent's hand and choose X cards from it. That player discards those cards.
-        this.getSpellAbility().addEffect(
-                new DiscardCardYouChooseTargetEffect(ManacostVariableValue.REGULAR, TargetController.ANY)
-                .setText("Look at target opponent's hand and choose X cards from it. That player discards those cards"));
+        this.getSpellAbility().addEffect(new LookTargetHandChooseDiscardEffect(false, GetXValue.instance, StaticFilters.FILTER_CARD_CARDS));
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().setCostAdjuster(AbandonHopeAdjuster.instance);
     }
@@ -57,7 +55,7 @@ enum AbandonHopeAdjuster implements CostAdjuster {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         if (xValue > 0) {
             ability.addCost(new DiscardTargetCost(new TargetCardInHand(xValue, xValue, StaticFilters.FILTER_CARD_CARDS)));
         }

@@ -58,12 +58,12 @@ public final class Taniwha extends CardImpl {
 
 class TaniwhaEffect extends OneShotEffect {
 
-    public TaniwhaEffect() {
+    TaniwhaEffect() {
         super(Outcome.Detriment);
         this.staticText = "all lands you control phase out";
     }
 
-    public TaniwhaEffect(final TaniwhaEffect effect) {
+    private TaniwhaEffect(final TaniwhaEffect effect) {
         super(effect);
     }
 

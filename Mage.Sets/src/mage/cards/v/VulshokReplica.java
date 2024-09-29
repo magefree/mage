@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -26,7 +25,7 @@ public final class VulshokReplica extends CardImpl {
         this.subtype.add(SubType.BERSERKER);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new ManaCostsImpl<>("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3, "it"), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);

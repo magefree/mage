@@ -49,6 +49,8 @@ public final class BlessedHippogriff extends AdventureCard {
         // Target creature gains indestructible until end of turn.
         this.getSpellCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance()));
         this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanent());
+
+        this.finalizeAdventure();
     }
 
     private BlessedHippogriff(final BlessedHippogriff card) {

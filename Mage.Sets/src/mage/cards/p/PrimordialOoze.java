@@ -49,12 +49,12 @@ public final class PrimordialOoze extends CardImpl {
 
 class PrimordialOozeEffect extends OneShotEffect {
 
-    public PrimordialOozeEffect() {
+    PrimordialOozeEffect() {
         super(Outcome.Detriment);
         this.staticText = "Then you may pay {X}, where X is the number of +1/+1 counters on it. If you don't, tap {this} and it deals X damage to you";
     }
 
-    public PrimordialOozeEffect(final PrimordialOozeEffect effect) {
+    private PrimordialOozeEffect(final PrimordialOozeEffect effect) {
         super(effect);
     }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -46,10 +45,10 @@ public final class StonehoofChieftain extends CardImpl {
 
         // Whenever another creature you control attacks, it gains trample and indestructible until end of turn.
         GainAbilityTargetEffect effect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("it gains trample ");
+        effect.setText("it gains trample");
         Ability ability = new AttacksAllTriggeredAbility(effect, false, filter, SetTargetPointer.PERMANENT, false);
         GainAbilityTargetEffect effect2 = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn);
-        effect2.setText(" and indestructible until end of turn");
+        effect2.setText("and indestructible until end of turn");
         ability.addEffect(effect2);
         this.addAbility(ability);
     }

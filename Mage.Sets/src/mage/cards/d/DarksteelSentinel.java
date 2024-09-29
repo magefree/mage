@@ -28,7 +28,7 @@ public final class DarksteelSentinel extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
     }
 
-    public DarksteelSentinel (final DarksteelSentinel card) {
+    private DarksteelSentinel(final DarksteelSentinel card) {
         super(card);
     }
 

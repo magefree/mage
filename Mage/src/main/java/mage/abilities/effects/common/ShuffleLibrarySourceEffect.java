@@ -7,7 +7,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author emerald000
  */
 public class ShuffleLibrarySourceEffect extends OneShotEffect {
@@ -24,7 +23,7 @@ public class ShuffleLibrarySourceEffect extends OneShotEffect {
         this.staticText = optional ? "you may shuffle" : "shuffle your library";
     }
 
-    public ShuffleLibrarySourceEffect(final ShuffleLibrarySourceEffect effect) {
+    protected ShuffleLibrarySourceEffect(final ShuffleLibrarySourceEffect effect) {
         super(effect);
         this.optional = effect.optional;
     }

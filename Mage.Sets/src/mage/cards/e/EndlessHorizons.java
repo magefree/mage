@@ -115,7 +115,7 @@ class EndlessHorizonsEffect2 extends OneShotEffect {
         TargetCard target = new TargetCardInExile(
                 0, 1, filter, CardUtil.getExileZoneId(game, source)
         );
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(outcome, target, source, game);
         Card card = game.getCard(target.getFirstTarget());
         return card != null && controller.moveCards(card, Zone.HAND, source, game);

@@ -30,7 +30,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl {
         setText();
     }
 
-    public LoseCreatureTypeSourceEffect(final LoseCreatureTypeSourceEffect effect) {
+    protected LoseCreatureTypeSourceEffect(final LoseCreatureTypeSourceEffect effect) {
         super(effect);
         this.dynamicValue = effect.dynamicValue;
         this.lessThan = effect.lessThan;
@@ -43,7 +43,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game);
         if (duration.isOnlyValidIfNoZoneChange()) {
             // If source permanent is no longer onto battlefield discard the effect
             if (source.getSourcePermanentIfItStillExists(game) == null) {
@@ -62,7 +62,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl {
             return false;
         }
         permanent.removeCardType(game, CardType.CREATURE);
-        if (!permanent.isTribal(game)) {
+        if (!permanent.isKindred(game)) {
             permanent.removeAllCreatureTypes(game);
         }
         if (permanent.isAttacking() || permanent.getBlocking() > 0) {

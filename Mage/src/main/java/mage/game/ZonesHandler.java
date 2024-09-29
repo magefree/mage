@@ -26,7 +26,7 @@ public final class ZonesHandler {
 
     public static boolean cast(ZoneChangeInfo info, Ability source, Game game) {
         if (maybeRemoveFromSourceZone(info, game, source)) {
-            placeInDestinationZone(info,0, source, game);
+            placeInDestinationZone(info, 0, source, game);
             // create a group zone change event if a card is moved to stack for casting (it's always only one card, but some effects check for group events (one or more xxx))
             Set<Card> cards = new HashSet<>();
             Set<PermanentToken> tokens = new HashSet<>();
@@ -37,12 +37,12 @@ public final class ZonesHandler {
                 cards.add(targetCard);
             }
             game.fireEvent(new ZoneChangeGroupEvent(
-                    cards, 
-                    tokens, 
-                    info.event.getSourceId(), 
-                    info.event.getSource(), 
-                    info.event.getPlayerId(), 
-                    info.event.getFromZone(), 
+                    cards,
+                    tokens,
+                    info.event.getSourceId(),
+                    info.event.getSource(),
+                    info.event.getPlayerId(),
+                    info.event.getFromZone(),
                     info.event.getToZone()));
             // normal movement
             game.fireEvent(info.event);
@@ -58,14 +58,19 @@ public final class ZonesHandler {
     }
 
     public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Ability source, Game game) {
-        // Handle Unmelded Meld Cards
+        // handle unmelded meld cards (if something moved a melded card to non-battlefield then parts must be moved too)
         for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext(); ) {
             ZoneChangeInfo info = itr.next();
+            if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
+                continue;
+            }
             MeldCard card = game.getMeldCard(info.event.getTargetId());
             // Copies should be handled as normal cards.
             if (card != null && !card.isMelded(game) && !card.isCopy()) {
+                // TODO: WTF, never worked code here. Need research possible typo: !card.isMelded(game) -> card.isMelded(game)
                 ZoneChangeInfo.Unmelded unmelded = new ZoneChangeInfo.Unmelded(info, game);
-                if (unmelded.subInfo.isEmpty()) {
+                if (unmelded.additionalMoves.isEmpty()) {
+                    // already moved halves somehow
                     itr.remove();
                 } else {
                     itr.set(unmelded);
@@ -123,9 +128,9 @@ public final class ZonesHandler {
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
             Zone toZone = null;
-            for (ZoneChangeInfo subInfo : unmelded.subInfo) {
-                toZone = subInfo.event.getToZone();
-                placeInDestinationZone(subInfo, createOrder, source, game);
+            for (ZoneChangeInfo additionalMove : unmelded.additionalMoves) {
+                toZone = additionalMove.event.getToZone();
+                placeInDestinationZone(additionalMove, createOrder, source, game);
             }
             // We arbitrarily prefer the bottom half card. This should never be relevant.
             if (toZone != null) {
@@ -303,54 +308,77 @@ public final class ZonesHandler {
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
             MeldCard meld = game.getMeldCard(event.getTargetId());
-            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext(); ) {
-                ZoneChangeInfo subInfo = itr.next();
-                if (!maybeRemoveFromSourceZone(subInfo, game, source)) {
+            for (Iterator<ZoneChangeInfo> itr = unmelded.additionalMoves.iterator(); itr.hasNext(); ) {
+                ZoneChangeInfo additionalMove = itr.next();
+                if (!maybeRemoveFromSourceZone(additionalMove, game, source)) {
                     itr.remove();
-                } else if (Objects.equals(subInfo.event.getTargetId(), meld.getTopHalfCard().getId())) {
+                } else if (Objects.equals(additionalMove.event.getTargetId(), meld.getTopHalfCard().getId())) {
                     meld.setTopLastZoneChangeCounter(meld.getTopHalfCard().getZoneChangeCounter(game));
-                } else if (Objects.equals(subInfo.event.getTargetId(), meld.getBottomHalfCard().getId())) {
+                } else if (Objects.equals(additionalMove.event.getTargetId(), meld.getBottomHalfCard().getId())) {
                     meld.setBottomLastZoneChangeCounter(meld.getBottomHalfCard().getZoneChangeCounter(game));
                 }
             }
-            if (unmelded.subInfo.isEmpty()) {
+            if (unmelded.additionalMoves.isEmpty()) {
                 return false;
             }
             // We arbitrarily prefer the bottom half card. This should never be relevant.
-            meld.updateZoneChangeCounter(game, unmelded.subInfo.get(unmelded.subInfo.size() - 1).event);
+            meld.updateZoneChangeCounter(game, unmelded.additionalMoves.get(unmelded.additionalMoves.size() - 1).event);
             return true;
         }
 
         // Handle all normal cases
         Card card = getTargetCard(game, event.getTargetId());
         if (card == null) {
-            // If we can't find the card we can't remove it.
+            // if we can't find the card we can't remove it.
             return false;
         }
 
-        boolean success = false;
+        boolean isGoodToMove = false;
         if (info.faceDown) {
-            card.setFaceDown(true, game);
+            // any card can be moved as face down (doubled faced cards also support face down)
+            isGoodToMove = true;
         } else if (event.getToZone().equals(Zone.BATTLEFIELD)) {
-            if (!card.isPermanent(game)
-                    && (!card.isTransformable() || Boolean.FALSE.equals(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId())))) {
-                // Non permanents (Instants, Sorceries, ... stay in the zone they are if an abilty/effect tries to move it to the battlefield
-                return false;
+            // non-permanents can't move to battlefield
+            // TODO: possible bug with Nightbound, search all usage of getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED and insert additional check Ability.checkCard
+            /*
+             * 712.14a. If a spell or ability puts a transforming double-faced card onto the battlefield "transformed"
+             * or "converted," it enters the battlefield with its back face up. If a player is instructed to put a card
+             * that isn't a transforming double-faced card onto the battlefield transformed or converted, that card stays in
+             * its current zone.
+             */
+            boolean wantToTransform = Boolean.TRUE.equals(game.getState().getValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + card.getId()));
+            if (wantToTransform) {
+                isGoodToMove = card.isTransformable() && card.getSecondCardFace().isPermanent(game);
+            } else {
+                isGoodToMove = card.isPermanent(game);
             }
+        } else {
+            // other zones allows to move
+            isGoodToMove = true;
+        }
+        if (!isGoodToMove) {
+            return false;
         }
 
+        // TODO: is it buggy? Card characteristics are global - if you change face down then it will be
+        //  changed in original card too, not in blueprint only
+        card.setFaceDown(info.faceDown, game);
+
+        boolean success = false;
         if (!game.replaceEvent(event)) {
             Zone fromZone = event.getFromZone();
             if (event.getToZone() == Zone.BATTLEFIELD) {
-                // prepare card and permanent
-                // If needed take attributes from the spell (e.g. color of spell was changed)
-                card = takeAttributesFromSpell(card, event, game);
+                // PUT TO BATTLEFIELD AS PERMANENT
+                // prepare card and permanent (card must contain full data, even for face down)
+                // if needed to take attributes from the spell (e.g. color of spell was changed)
+                card = prepareBlueprintCardFromSpell(card, event, game);
+
                 // controlling player can be replaced so use event player now
                 Permanent permanent;
                 if (card instanceof MeldCard) {
                     permanent = new PermanentMeld(card, event.getPlayerId(), game);
                 } else if (card instanceof ModalDoubleFacedCard) {
-                    // main mdf card must be processed before that call (e.g. only halfes can be moved to battlefield)
+                    // main mdf card must be processed before that call (e.g. only halves can be moved to battlefield)
                     throw new IllegalStateException("Unexpected trying of move mdf card to battlefield instead half");
                 } else if (card instanceof Permanent) {
                     throw new IllegalStateException("Unexpected trying of move permanent to battlefield instead card");
@@ -360,35 +388,49 @@ public final class ZonesHandler {
 
                 // put onto battlefield with possible counters
                 game.getPermanentsEntering().put(permanent.getId(), permanent);
-                card.checkForCountersToAdd(permanent, source, game);
+                card.applyEnterWithCounters(permanent, source, game);
+
                 permanent.setTapped(info instanceof ZoneChangeInfo.Battlefield
                         && ((ZoneChangeInfo.Battlefield) info).tapped);
 
+                // if need prototyped version
+                if (Zone.STACK == event.getFromZone()) {
+                    Spell spell = game.getStack().getSpell(event.getTargetId());
+                    if (spell != null) {
+                        permanent.setPrototyped(spell.isPrototyped());
+                    }
+                }
+
                 permanent.setFaceDown(info.faceDown, game);
                 if (info.faceDown) {
-                    card.setFaceDown(false, game);
+                    // TODO: need research cards with "setFaceDown(false"
+                    // TODO: delete after new release and new face down bugs (old code remove face down status from a card for unknown reason), 2024-02-20
+                    //card.setFaceDown(false, game);
                 }
 
                 // make sure the controller of all continuous effects of this card are switched to the current controller
                 game.setScopeRelevant(true);
-                game.getContinuousEffects().setController(permanent.getId(), permanent.getControllerId());
-                if (permanent.entersBattlefield(source, game, fromZone, true)
-                        && card.removeFromZone(game, fromZone, source)) {
-                    success = true;
-                    event.setTarget(permanent);
-                } else {
-                    // revert controller to owner if permanent does not enter
-                    game.getContinuousEffects().setController(permanent.getId(), permanent.getOwnerId());
-                    game.getPermanentsEntering().remove(permanent.getId());
+                try {
+                    game.getContinuousEffects().setController(permanent.getId(), permanent.getControllerId());
+                    if (permanent.entersBattlefield(source, game, fromZone, true)
+                            && card.removeFromZone(game, fromZone, source)) {
+                        success = true;
+                        event.setTarget(permanent);
+                    } else {
+                        // revert controller to owner if permanent does not enter
+                        game.getContinuousEffects().setController(permanent.getId(), permanent.getOwnerId());
+                        game.getPermanentsEntering().remove(permanent.getId());
+                    }
+                } finally {
+                    game.setScopeRelevant(false);
                 }
-                game.setScopeRelevant(false);
             } else if (event.getTarget() != null) {
-                card.setFaceDown(info.faceDown, game);
+                // PUT PERMANENT TO OTHER ZONE (e.g. remove only)
                 Permanent target = event.getTarget();
                 success = target.removeFromZone(game, fromZone, source)
                         && game.getPlayer(target.getControllerId()).removeFromBattlefield(target, source, game);
             } else {
-                card.setFaceDown(info.faceDown, game);
+                // PUT CARD TO OTHER ZONE
                 success = card.removeFromZone(game, fromZone, source);
             }
         }
@@ -421,18 +463,32 @@ public final class ZonesHandler {
             cards.remove(targetObjectId);
             target.clearChosen();
         }
-        order.add(cards.getCards(game).iterator().next());
+        order.addAll(cards.getCards(game));
         return order;
     }
 
-    private static Card takeAttributesFromSpell(Card card, ZoneChangeEvent event, Game game) {
+    private static Card prepareBlueprintCardFromSpell(Card card, ZoneChangeEvent event, Game game) {
         card = card.copy();
         if (Zone.STACK == event.getFromZone()) {
+            // TODO: wtf, why only colors!? Must research and remove colors workaround or add all other data like types too
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && !spell.isFaceDown(game)) {
+
+            // old version
+            if (false && spell != null && !spell.isFaceDown(game)) {
                 if (!card.getColor(game).equals(spell.getColor(game))) {
                     // the card that is referenced to in the permanent is copied and the spell attributes are set to this copied card
                     card.getColor(game).setColor(spell.getColor(game));
+                }
+            }
+
+            // new version
+            if (true && spell != null && spell.getSpellAbility() != null) {
+                Card characteristics = spell.getSpellAbility().getCharacteristics(game);
+                if (!characteristics.isFaceDown(game)) {
+                    if (!card.getColor(game).equals(characteristics.getColor(game))) {
+                        // TODO: don't work with prototyped spells (setColor can't set colorless color)
+                        card.getColor(game).setColor(characteristics.getColor(game));
+                    }
                 }
             }
         }

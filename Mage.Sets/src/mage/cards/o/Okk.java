@@ -54,7 +54,7 @@ class OkkAttackEffect extends RestrictionEffect {
         staticText = "{this} can't attack unless a creature with greater power also attacks";
     }
 
-    public OkkAttackEffect(final OkkAttackEffect effect) {
+    private OkkAttackEffect(final OkkAttackEffect effect) {
         super(effect);
     }
 
@@ -92,7 +92,7 @@ class OkkBlockEffect extends RestrictionEffect {
         staticText = "{this} can't block unless a creature with greater power also blocks.";
     }
 
-    public OkkBlockEffect(final OkkBlockEffect effect) {
+    private OkkBlockEffect(final OkkBlockEffect effect) {
         super(effect);
     }
 

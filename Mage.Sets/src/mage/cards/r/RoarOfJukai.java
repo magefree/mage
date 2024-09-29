@@ -69,7 +69,7 @@ class RoarOfJukaiEffect extends OneShotEffect {
         this.staticText = "If you control a Forest, each blocked creature gets +2/+2 until end of turn";
     }
 
-    public RoarOfJukaiEffect(final RoarOfJukaiEffect effect) {
+    private RoarOfJukaiEffect(final RoarOfJukaiEffect effect) {
         super(effect);
     }
 

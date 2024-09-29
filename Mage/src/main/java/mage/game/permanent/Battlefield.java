@@ -22,7 +22,7 @@ public class Battlefield implements Serializable {
     public Battlefield() {
     }
 
-    public Battlefield(final Battlefield battlefield) {
+    protected Battlefield(final Battlefield battlefield) {
         for (Entry<UUID, Permanent> entry : battlefield.field.entrySet()) {
             field.put(entry.getKey(), entry.getValue().copy());
         }
@@ -49,11 +49,6 @@ public class Battlefield implements Serializable {
      * Some filter predicates do not work here (e.g. AnotherPredicate() because
      * filter.match() is called without controllerId. To use this predicates you
      * can use count() instead of countAll()
-     *
-     * @param filter
-     * @param controllerId
-     * @param game
-     * @return count
      */
     public int countAll(FilterPermanent filter, UUID controllerId, Game game) {
         return (int) field.values()
@@ -68,12 +63,6 @@ public class Battlefield implements Serializable {
     /**
      * Returns a count of all {@link Permanent} that are within the range of
      * influence of the specified player id and that match the supplied filter.
-     *
-     * @param filter
-     * @param sourcePlayerId
-     * @param source
-     * @param game
-     * @return count
      */
     public int count(FilterPermanent filter, UUID sourcePlayerId, Ability source, Game game) {
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
@@ -101,12 +90,7 @@ public class Battlefield implements Serializable {
      * that matches the filter and is controlled by controllerId. This method
      * ignores the range of influence.
      *
-     * @param filter
      * @param controllerId controller and source can be different (from different players)
-     * @param source
-     * @param game
-     * @param num
-     * @return boolean
      */
     public boolean containsControlled(FilterPermanent filter, UUID controllerId, Ability source, Game game, int num) {
         return field.values()
@@ -125,13 +109,6 @@ public class Battlefield implements Serializable {
      * Returns true if the battlefield contains num or more {@link Permanent}
      * that is within the range of influence of the specified player id and that
      * matches the supplied filter.
-     *
-     * @param filter
-     * @param sourcePlayerId
-     * @param source
-     * @param game
-     * @param num
-     * @return boolean
      */
     public boolean contains(FilterPermanent filter, UUID sourcePlayerId, Ability source, Game game, int num) {
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
@@ -158,8 +135,8 @@ public class Battlefield implements Serializable {
      * If you are working with cards and want to know if it is on the battlefield then use game.getState().getZone() instead.
      * Note that the card ID and permanant ID may be different (e.g. MDFC puts a half card on the battlefield, not the main card).
      *
-     * @param key   the UUID of a permanent to be retrieved
-     * @return      the permanent matching the passed in UUID
+     * @param key the UUID of a permanent to be retrieved
+     * @return the permanent matching the passed in UUID
      */
     public Permanent getPermanent(UUID key) {
         return field.get(key);
@@ -172,8 +149,8 @@ public class Battlefield implements Serializable {
     /**
      * Check whether the battlefield contains a permanent with the passed in UUID.
      *
-     * @param key   the UUID whose existence we're checking for among permanents on the battlefield
-     * @return      whether the passed in UUID matches a permanent on the battlefield
+     * @param key the UUID whose existence we're checking for among permanents on the battlefield
+     * @return whether the passed in UUID matches a permanent on the battlefield
      */
     public boolean containsPermanent(UUID key) {
         return field.containsKey(key);
@@ -185,7 +162,7 @@ public class Battlefield implements Serializable {
         }
     }
 
-    public void endOfTurn(UUID controllerId, Game game) {
+    public void endOfTurn(Game game) {
         for (Permanent perm : field.values()) {
             perm.endOfTurn(game);
         }
@@ -193,10 +170,6 @@ public class Battlefield implements Serializable {
 
     public Collection<Permanent> getAllPermanents() {
         return field.values();
-    }
-
-    public Set<UUID> getAllPermanentIds() {
-        return field.keySet();
     }
 
     public List<Permanent> getAllActivePermanents() {
@@ -209,10 +182,6 @@ public class Battlefield implements Serializable {
     /**
      * Returns all {@link Permanent} on the battlefield that are controlled by
      * the specified player id. The method ignores the range of influence.
-     *
-     * @param controllerId
-     * @return a list of {@link Permanent}
-     * @see Permanent
      */
     public List<Permanent> getAllActivePermanents(UUID controllerId) {
         return field.values()
@@ -225,12 +194,9 @@ public class Battlefield implements Serializable {
     /**
      * Returns all {@link Permanent} on the battlefield that match the specified
      * {@link CardType}. This method ignores the range of influence.
-     *
-     * @param type
-     * @param game
-     * @return a list of {@link Permanent}
-     * @see Permanent
+     * @deprecated
      */
+    @Deprecated
     public List<Permanent> getAllActivePermanents(CardType type, Game game) {
         return field.values()
                 .stream()
@@ -242,12 +208,9 @@ public class Battlefield implements Serializable {
      * Returns all {@link Permanent} on the battlefield that match the supplied
      * filter. This method ignores the range of influence and ignores
      * ObjectSourcePlayer predicates in the filter (e.g. controller predicates)
-     *
-     * @param filter
-     * @param game
-     * @return a list of {@link Permanent}
-     * @see Permanent
+     * @deprecated
      */
+    @Deprecated
     public List<Permanent> getAllActivePermanents(FilterPermanent filter, Game game) {
         return field.values()
                 .stream()
@@ -259,12 +222,6 @@ public class Battlefield implements Serializable {
      * Returns all {@link Permanent} that match the filter and are controlled by
      * controllerId. This method ignores the range of influence and ignores
      * ObjectSourcePlayer predicates in the filter
-     *
-     * @param filter
-     * @param controllerId
-     * @param game
-     * @return a list of {@link Permanent}
-     * @see Permanent
      */
     public List<Permanent> getAllActivePermanents(FilterPermanent filter, UUID controllerId, Game game) {
         return field.values()
@@ -276,12 +233,6 @@ public class Battlefield implements Serializable {
     /**
      * Returns all {@link Permanent} that are within the range of influence of
      * the specified player id and that match the supplied filter.
-     *
-     * @param filter
-     * @param sourcePlayerId
-     * @param game
-     * @return a list of {@link Permanent}
-     * @see Permanent
      */
     public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, Game game) {
         return getActivePermanents(filter, sourcePlayerId, null, game);
@@ -290,13 +241,6 @@ public class Battlefield implements Serializable {
     /**
      * Returns all {@link Permanent} that are within the range of influence of
      * the specified player id and that match the supplied filter.
-     *
-     * @param filter
-     * @param sourcePlayerId
-     * @param source
-     * @param game
-     * @return a list of {@link Permanent}
-     * @see Permanent
      */
     public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, Ability source, Game game) {
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
@@ -316,11 +260,6 @@ public class Battlefield implements Serializable {
     /**
      * Returns all {@link Permanent} that are within the range of influence of
      * the specified player id.
-     *
-     * @param sourcePlayerId
-     * @param game
-     * @return a list of {@link Permanent}
-     * @see Permanent
      */
     public List<Permanent> getActivePermanents(UUID sourcePlayerId, Game game) {
         if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
@@ -336,7 +275,10 @@ public class Battlefield implements Serializable {
         }
     }
 
-    public List<Permanent> getPhasedIn(Game game, UUID controllerId) {
+    /**
+     * Returns controlled permanents with phasing ability that are phased in, so that they can be phased out
+     */
+    public List<Permanent> getPhasingOut(Game game, UUID controllerId) {
         return field.values()
                 .stream()
                 .filter(perm -> perm.hasAbility(PhasingAbility.getInstance(), game)
@@ -345,7 +287,10 @@ public class Battlefield implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    public List<Permanent> getPhasedOut(Game game, UUID controllerId) {
+    /**
+     * Returns controlled permanents that are phased out, so that they can be phased in
+     */
+    public List<Permanent> getPhasedOut(UUID controllerId) {
         return field.values()
                 .stream()
                 .filter(perm -> !perm.isPhasedIn() && perm.isControlledBy(controllerId))
@@ -364,9 +309,6 @@ public class Battlefield implements Serializable {
      * since control could change several times during applyEvents we only want
      * to fire control changed events after all control change effects have been
      * applied
-     *
-     * @param game
-     * @return
      */
     public boolean fireControlChangeEvents(Game game) {
         boolean controlChanged = false;

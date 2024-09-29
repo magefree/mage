@@ -50,12 +50,12 @@ public final class ThespiansStage extends CardImpl {
 
 class ThespiansStageCopyEffect extends OneShotEffect {
 
-    public ThespiansStageCopyEffect() {
+    ThespiansStageCopyEffect() {
         super(Outcome.Benefit);
         this.staticText = "{this} becomes a copy of target land, except it has this ability";
     }
 
-    public ThespiansStageCopyEffect(final ThespiansStageCopyEffect effect) {
+    private ThespiansStageCopyEffect(final ThespiansStageCopyEffect effect) {
         super(effect);
     }
 

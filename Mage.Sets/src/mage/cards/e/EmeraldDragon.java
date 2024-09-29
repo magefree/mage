@@ -46,6 +46,8 @@ public final class EmeraldDragon extends AdventureCard {
         // Counter target activated or triggered ability from a noncreature source.
         this.getSpellCard().getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellCard().getSpellAbility().addTarget(new TargetActivatedOrTriggeredAbility(filter));
+
+        this.finalizeAdventure();
     }
 
     private EmeraldDragon(final EmeraldDragon card) {

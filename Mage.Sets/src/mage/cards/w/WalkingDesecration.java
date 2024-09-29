@@ -50,12 +50,12 @@ public final class WalkingDesecration extends CardImpl {
 
 class WalkingDesecrationEffect extends OneShotEffect {
 
-    public WalkingDesecrationEffect() {
+    WalkingDesecrationEffect() {
         super(Outcome.UnboostCreature);
         staticText = "Creatures of the creature type of your choice attack this turn if able";
     }
 
-    public WalkingDesecrationEffect(final WalkingDesecrationEffect effect) {
+    private WalkingDesecrationEffect(final WalkingDesecrationEffect effect) {
         super(effect);
     }
 
@@ -65,11 +65,11 @@ class WalkingDesecrationEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source);
         if (player != null) {
             if (sourceObject != null) {
-                Choice typeChoice = new ChoiceCreatureType(sourceObject);
+                Choice typeChoice = new ChoiceCreatureType(game, source);
                 if (player.choose(outcome, typeChoice, game)) {
-                    game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
+                    game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoiceKey());
                     FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                    filter.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
+                    filter.add(SubType.byDescription(typeChoice.getChoiceKey()).getPredicate());
                     RequirementEffect effect = new AttacksIfAbleAllEffect(filter, Duration.EndOfTurn);
                     game.addEffect(effect, source);
                     return true;

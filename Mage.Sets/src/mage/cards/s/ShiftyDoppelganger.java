@@ -53,7 +53,7 @@ public final class ShiftyDoppelganger extends CardImpl {
 
 class ShiftyDoppelgangerExileEffect extends OneShotEffect {
 
-    public ShiftyDoppelgangerExileEffect() {
+    ShiftyDoppelgangerExileEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "You may put a creature card from your hand onto the battlefield. If you do, " +
                 "that creature gains haste until end of turn. At the beginning of the next end step, " +

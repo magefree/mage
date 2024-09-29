@@ -35,9 +35,9 @@ public final class TrialOfAmbition extends CardImpl {
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 
-        // When a Cartouche enters the battlefield under your control, return Trial of Ambition to its owner's hand.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ReturnToHandSourceEffect(), filter,
-                "When a Cartouche enters the battlefield under your control, return {this} to its owner's hand"));
+        // When a Cartouche you control enters, return Trial of Ambition to its owner's hand.
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ReturnToHandSourceEffect(), filter
+        ));
     }
 
     private TrialOfAmbition(final TrialOfAmbition card) {

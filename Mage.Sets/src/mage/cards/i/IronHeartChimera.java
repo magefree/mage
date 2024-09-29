@@ -1,4 +1,3 @@
-
 package mage.cards.i;
 
 import mage.MageInt;
@@ -26,7 +25,7 @@ import java.util.UUID;
  */
 public final class IronHeartChimera extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Chimera creature you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Chimera creature");
 
     static {
         filter.add(SubType.CHIMERA.getPredicate());
@@ -44,7 +43,8 @@ public final class IronHeartChimera extends CardImpl {
 
         // Sacrifice Iron-Heart Chimera: Put a +2/+2 counter on target Chimera creature. It gains vigilance.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
-        ability.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield));
+        ability.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield)
+                .setText("It gains vigilance. <i>(This effect lasts indefinitely.)</i>"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         addAbility(ability);
     }

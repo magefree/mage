@@ -16,7 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -39,7 +39,8 @@ public final class OrimsThunder extends CardImpl {
                 KickedCondition.ONCE,
                 "If this spell was kicked, it deals damage equal to that permanent's mana value to target creature")
         );
-        this.getSpellAbility().setTargetAdjuster(OrimsThunderAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
+                new TargetCreaturePermanent()));
     }
 
     private OrimsThunder(final OrimsThunder card) {
@@ -52,25 +53,13 @@ public final class OrimsThunder extends CardImpl {
     }
 }
 
-enum OrimsThunderAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (KickedCondition.ONCE.apply(game, ability)) {
-            ability.addTarget(new TargetCreaturePermanent());
-        }
-    }
-
-}
-
 class OrimsThunderEffect2 extends OneShotEffect {
 
     OrimsThunderEffect2() {
         super(Outcome.Damage);
     }
 
-    OrimsThunderEffect2(final OrimsThunderEffect2 effect) {
+    private OrimsThunderEffect2(final OrimsThunderEffect2 effect) {
         super(effect);
     }
 
@@ -103,7 +92,7 @@ class OrimsThunderEffect extends OneShotEffect {
         staticText = "Destroy target artifact or enchantment";
     }
 
-    OrimsThunderEffect(final OrimsThunderEffect effect) {
+    private OrimsThunderEffect(final OrimsThunderEffect effect) {
         super(effect);
     }
 

@@ -19,7 +19,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.DefendingPlayerControlsPredicate;
+import mage.filter.predicate.permanent.DefendingPlayerControlsSourceAttackingPredicate;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -33,7 +33,7 @@ public final class AetherstormRoc extends CardImpl {
             = new FilterCreaturePermanent("creature defending player controls");
 
     static {
-        filter.add(DefendingPlayerControlsPredicate.instance);
+        filter.add(DefendingPlayerControlsSourceAttackingPredicate.instance);
     }
 
     public AetherstormRoc(UUID ownerId, CardSetInfo setInfo) {
@@ -45,7 +45,7 @@ public final class AetherstormRoc extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever Aetherstorm Roc or another creature enters the battlefield under your control, you get {E}.
+        // Whenever Aetherstorm Roc or another creature you control enters, you get {E}.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new GetEnergyCountersControllerEffect(1),
                 StaticFilters.FILTER_PERMANENT_CREATURE, false, true

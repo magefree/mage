@@ -16,11 +16,9 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 import mage.target.common.TargetCreaturePermanentAmount;
-import mage.target.targetadjustment.TargetAdjuster;
 
 import java.util.UUID;
 
@@ -47,8 +45,6 @@ public final class VivienArkbowRanger extends CardImpl {
         target.setMinNumberOfTargets(0);
         target.setMaxNumberOfTargets(2);
         ability.addTarget(target);
-
-        // ability.setTargetAdjuster(VivienArkbowRangerAdjuster.instance);
         this.addAbility(ability);
 
         // −3: Target creature you control deals damage equal to its power to target creature or planeswalker.
@@ -69,18 +65,5 @@ public final class VivienArkbowRanger extends CardImpl {
     @Override
     public VivienArkbowRanger copy() {
         return new VivienArkbowRanger(this);
-    }
-
-    enum VivienArkbowRangerAdjuster implements TargetAdjuster {
-        instance;
-
-        @Override
-        public void adjustTargets(Ability ability, Game game) {
-            // if targets are available, switch over to a working target method
-            if (game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, game).size() > 0) {
-                ability.getTargets().clear();
-                ability.addTarget(new TargetCreaturePermanentAmount(2));
-            }
-        }
     }
 }

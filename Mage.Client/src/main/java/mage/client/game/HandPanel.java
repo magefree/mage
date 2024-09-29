@@ -66,7 +66,7 @@ public class HandPanel extends JPanel {
     }
 
     public void loadCards(CardsView cards, BigCard bigCard, UUID gameId) {
-        hand.loadCards(cards, bigCard, gameId, true);
+        hand.loadCards(cards, bigCard, gameId, false);
     }
 
     private JPanel jPanel;

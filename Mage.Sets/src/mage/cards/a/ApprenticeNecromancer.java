@@ -60,12 +60,12 @@ public final class ApprenticeNecromancer extends CardImpl {
 
 class ApprenticeNecromancerEffect extends OneShotEffect {
 
-    public ApprenticeNecromancerEffect() {
+    ApprenticeNecromancerEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Return target creature card from your graveyard to the battlefield. That creature gains haste. At the beginning of the next end step, sacrifice it";
     }
 
-    public ApprenticeNecromancerEffect(final ApprenticeNecromancerEffect effect) {
+    private ApprenticeNecromancerEffect(final ApprenticeNecromancerEffect effect) {
         super(effect);
     }
 

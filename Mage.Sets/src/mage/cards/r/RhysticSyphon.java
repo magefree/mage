@@ -20,10 +20,10 @@ public final class RhysticSyphon extends CardImpl {
     public RhysticSyphon(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{B}{B}");
 
-        // Unless target player pays {3}, they lose 5 life and you gain 5 life.
+        // Unless target player pays {3}, that player loses 5 life and you gain 5 life.
         DoUnlessTargetPlayerOrTargetsControllerPaysEffect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new LoseLifeTargetEffect(5), new ManaCostsImpl<>("{3}"));
         effect.addEffect(new GainLifeEffect(5));
-        effect.setText("Unless target player pays {3}, they lose 5 life and you gain 5 life");
+        effect.setText("Unless target player pays {3}, that player loses 5 life and you gain 5 life");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetPlayer());
     }

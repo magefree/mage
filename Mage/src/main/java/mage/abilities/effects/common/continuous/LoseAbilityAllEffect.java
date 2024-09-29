@@ -1,7 +1,5 @@
 package mage.abilities.effects.common.continuous;
 
-import java.util.Iterator;
-
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
@@ -14,6 +12,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+
+import java.util.Iterator;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -51,7 +51,7 @@ public class LoseAbilityAllEffect extends ContinuousEffectImpl {
         this.excludeSource = excludeSource;
     }
 
-    public LoseAbilityAllEffect(final LoseAbilityAllEffect effect) {
+    protected LoseAbilityAllEffect(final LoseAbilityAllEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         this.filter = effect.filter.copy();
@@ -61,7 +61,7 @@ public class LoseAbilityAllEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (!(excludeSource && perm.getId().equals(source.getSourceId()))) {
                     affectedObjectList.add(new MageObjectReference(perm, game));
@@ -77,8 +77,8 @@ public class LoseAbilityAllEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (this.affectedObjectsSet) {
-            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext();) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
+        if (getAffectedObjectsSet()) {
+            for (Iterator<MageObjectReference> it = affectedObjectList.iterator(); it.hasNext(); ) { // filter may not be used again, because object can have changed filter relevant attributes but still geets boost
                 Permanent perm = it.next().getPermanentOrLKIBattlefield(game); //LKI is neccessary for "dies triggered abilities" to work given to permanets  (e.g. Showstopper)
                 if (perm != null) {
                     perm.removeAbilities(ability, source.getSourceId(), game);

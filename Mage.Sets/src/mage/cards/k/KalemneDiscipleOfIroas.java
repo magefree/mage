@@ -1,11 +1,9 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.SourceControllerCountersCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -16,8 +14,6 @@ import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -53,8 +49,13 @@ public final class KalemneDiscipleOfIroas extends CardImpl {
         ), filterSpell, false));
 
         // Kalemne, Disciple of Iroas gets +1/+1 for each experience counter you have.
-        DynamicValue value = new SourceControllerExperienceCountersCount();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(
+                new BoostSourceEffect(
+                        SourceControllerCountersCount.EXPERIENCE,
+                        SourceControllerCountersCount.EXPERIENCE,
+                        Duration.WhileOnBattlefield
+                )
+        ));
     }
 
     private KalemneDiscipleOfIroas(final KalemneDiscipleOfIroas card) {
@@ -64,33 +65,5 @@ public final class KalemneDiscipleOfIroas extends CardImpl {
     @Override
     public KalemneDiscipleOfIroas copy() {
         return new KalemneDiscipleOfIroas(this);
-    }
-}
-
-class SourceControllerExperienceCountersCount implements DynamicValue {
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int amount = 0;
-        Player player = game.getPlayer(sourceAbility.getControllerId());
-        if (player != null) {
-            amount = player.getCounters().getCount(CounterType.EXPERIENCE);
-        }
-        return amount;
-    }
-
-    @Override
-    public SourceControllerExperienceCountersCount copy() {
-        return new SourceControllerExperienceCountersCount();
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "experience counter you have";
     }
 }

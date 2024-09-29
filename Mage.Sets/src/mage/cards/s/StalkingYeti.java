@@ -40,7 +40,7 @@ public final class StalkingYeti extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new StalkingYetiEffect()),
                 SourceOnBattlefieldCondition.instance,
-                "When {this} enters the battlefield, if it's on the battlefield, "
+                "When {this} enters, if it's on the battlefield, "
                 + "it deals damage equal to its power to target creature an opponent controls "
                 + "and that creature deals damage equal to its power to {this}."
         );
@@ -69,7 +69,7 @@ class StalkingYetiEffect extends OneShotEffect {
                 + "and that creature deals damage equal to its power to {this}";
     }
 
-    StalkingYetiEffect(final StalkingYetiEffect effect) {
+    private StalkingYetiEffect(final StalkingYetiEffect effect) {
         super(effect);
     }
 

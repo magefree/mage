@@ -23,7 +23,7 @@ public class AddCardSuperTypeAttachedEffect extends ContinuousEffectImpl {
         setText();
     }
 
-    public AddCardSuperTypeAttachedEffect(final AddCardSuperTypeAttachedEffect effect) {
+    protected AddCardSuperTypeAttachedEffect(final AddCardSuperTypeAttachedEffect effect) {
         super(effect);
         this.addedSuperType = effect.addedSuperType;
         this.attachmentType = effect.attachmentType;

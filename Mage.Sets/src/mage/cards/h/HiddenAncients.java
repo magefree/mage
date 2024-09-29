@@ -60,7 +60,7 @@ class HiddenAncientsTreefolkToken extends TokenImpl {
         power = new MageInt(5);
         toughness = new MageInt(5);
     }
-    public HiddenAncientsTreefolkToken(final HiddenAncientsTreefolkToken token) {
+    private HiddenAncientsTreefolkToken(final HiddenAncientsTreefolkToken token) {
         super(token);
     }
 

@@ -60,7 +60,7 @@ class DinOfTheFireherdEffect extends OneShotEffect {
         this.staticText = "create a 5/5 black and red Elemental creature token. Target opponent sacrifices a creature for each black creature you control, then sacrifices a land for each red creature you control";
     }
 
-    public DinOfTheFireherdEffect(final DinOfTheFireherdEffect effect) {
+    private DinOfTheFireherdEffect(final DinOfTheFireherdEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class DinOfTheFireherdEffect extends OneShotEffect {
         int blackCreaturesControllerControls = game.getBattlefield().countAll(blackCreatureFilter, source.getControllerId(), game);
         int redCreaturesControllerControls = game.getBattlefield().countAll(redCreatureFilter, source.getControllerId(), game);
 
-        Player targetOpponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetOpponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetOpponent != null) {
             Effect effect = new SacrificeEffect(new FilterControlledCreaturePermanent(), blackCreaturesControllerControls, "Target Opponent");
             effect.setTargetPointer(new FixedTarget(targetOpponent.getId()));

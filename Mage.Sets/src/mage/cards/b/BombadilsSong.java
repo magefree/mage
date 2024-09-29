@@ -7,7 +7,7 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -23,9 +23,9 @@ public final class BombadilsSong extends CardImpl {
         this.getSpellAbility().addEffect(new BoostTargetEffect(1, 1)
                 .setText("target creature you control gets +1/+1"));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance())
-                .setText("and gains hexproof until the end of turn"));
+                .setText("and gains hexproof until end of turn"));
         this.getSpellAbility().addEffect(new TheRingTemptsYouEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
     }
 
     private BombadilsSong(final BombadilsSong card) {

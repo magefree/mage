@@ -11,7 +11,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -26,7 +26,7 @@ public final class WinterBlast extends CardImpl {
         // Tap X target creatures. Winter Blast deals 2 damage to each of those creatures with flying.
         this.getSpellAbility().addEffect(new WinterBlastEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(WinterBlastAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private WinterBlast(final WinterBlast card) {
@@ -39,16 +39,6 @@ public final class WinterBlast extends CardImpl {
     }
 }
 
-enum WinterBlastAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        ability.addTarget(new TargetCreaturePermanent(ability.getManaCostsToPay().getX()));
-    }
-}
-
 class WinterBlastEffect extends OneShotEffect {
 
     WinterBlastEffect() {
@@ -56,7 +46,7 @@ class WinterBlastEffect extends OneShotEffect {
         this.staticText = "Tap X target creatures. {this} deals 2 damage to each of those creatures with flying.";
     }
 
-    WinterBlastEffect(final WinterBlastEffect effect) {
+    private WinterBlastEffect(final WinterBlastEffect effect) {
         super(effect);
     }
 
@@ -68,7 +58,7 @@ class WinterBlastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(permanentId);
             if (permanent != null) {
                 permanent.tap(source, game);

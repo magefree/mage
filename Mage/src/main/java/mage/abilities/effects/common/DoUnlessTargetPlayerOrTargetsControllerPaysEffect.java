@@ -49,7 +49,7 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
         this.genericMana = genericMana;
     }
 
-    public DoUnlessTargetPlayerOrTargetsControllerPaysEffect(final DoUnlessTargetPlayerOrTargetsControllerPaysEffect effect) {
+    protected DoUnlessTargetPlayerOrTargetsControllerPaysEffect(final DoUnlessTargetPlayerOrTargetsControllerPaysEffect effect) {
         super(effect);
         this.executingEffects = effect.executingEffects.copy();
         this.otherwiseEffect = effect.otherwiseEffect;
@@ -69,7 +69,7 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        Permanent targetPermanent = game.getPermanentOrLKIBattlefield(this.getTargetPointer().getFirst(game, source));
+        Permanent targetPermanent = this.getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (targetPermanent != null) {
             player = game.getPlayer(targetPermanent.getControllerId());
         }
@@ -110,7 +110,7 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
             // do the effects if not paid
             if (doEffect) {
                 for (Effect effect : executingEffects) {
-                    effect.setTargetPointer(this.targetPointer);
+                    effect.setTargetPointer(this.getTargetPointer().copy());
                     if (effect instanceof OneShotEffect) {
                         result &= effect.apply(game, source);
                     } else {
@@ -118,7 +118,7 @@ public class DoUnlessTargetPlayerOrTargetsControllerPaysEffect extends OneShotEf
                     }
                 }
             } else if (otherwiseEffect != null) {
-                otherwiseEffect.setTargetPointer(this.targetPointer);
+                otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
                 if (otherwiseEffect instanceof OneShotEffect) {
                     result &= otherwiseEffect.apply(game, source);
                 } else {

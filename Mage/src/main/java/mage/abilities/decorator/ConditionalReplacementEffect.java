@@ -13,7 +13,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author LevelX2
  */
 public class ConditionalReplacementEffect extends ReplacementEffectImpl {
@@ -36,7 +35,7 @@ public class ConditionalReplacementEffect extends ReplacementEffectImpl {
         this.otherwiseEffect = otherwiseEffect;
     }
 
-    public ConditionalReplacementEffect(final ConditionalReplacementEffect effect) {
+    protected ConditionalReplacementEffect(final ConditionalReplacementEffect effect) {
         super(effect);
         this.effect = (ReplacementEffect) effect.effect.copy();
         if (effect.otherwiseEffect != null) {
@@ -61,10 +60,10 @@ public class ConditionalReplacementEffect extends ReplacementEffectImpl {
         } else {
             condition = baseCondition;
         }
-        effect.setTargetPointer(this.targetPointer);
+        effect.setTargetPointer(this.getTargetPointer().copy());
         effect.init(source, game);
         if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             otherwiseEffect.init(source, game);
         }
         initDone = true;
@@ -73,10 +72,10 @@ public class ConditionalReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         if (conditionState) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.replaceEvent(event, source, game);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             return otherwiseEffect.replaceEvent(event, source, game);
         }
         if (!conditionState && effect.getDuration() == Duration.OneUse) {
@@ -86,11 +85,6 @@ public class ConditionalReplacementEffect extends ReplacementEffectImpl {
             this.discard();
         }
         return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override
@@ -106,10 +100,10 @@ public class ConditionalReplacementEffect extends ReplacementEffectImpl {
         }
         conditionState = condition.apply(game, source);
         if (conditionState) {
-            effect.setTargetPointer(this.targetPointer);
+            effect.setTargetPointer(this.getTargetPointer().copy());
             return effect.applies(event, source, game);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.setTargetPointer(this.getTargetPointer().copy());
             return otherwiseEffect.applies(event, source, game);
         }
         return false;

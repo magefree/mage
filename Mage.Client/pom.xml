@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-root</artifactId>
-        <version>1.4.50</version>
+        <version>1.4.54</version>
     </parent>
 
     <artifactId>mage-client</artifactId>
@@ -48,6 +48,10 @@
             <groupId>org.unbescape</groupId>
             <artifactId>unbescape</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+        </dependency>
 
         <dependency>
             <!-- inner lib for jboss network implementation -->
@@ -57,7 +61,8 @@
         </dependency>
 
         <dependency>
-            <!-- wtf lib, related to plugins system TODO: unused and can be deleted? -->
+            <!-- used in the plugins system -->
+            <!-- imported as net.xeoh.plugins -->
             <groupId>com.googlecode.jspf</groupId>
             <artifactId>jspf-core</artifactId>
             <version>0.9.1</version>
@@ -109,12 +114,6 @@
             <artifactId>beansbinding</artifactId>
             <version>1.2.1</version>
         </dependency>
-        <dependency>
-            <!-- scraping lib to download and parse symbols/images/svg -->
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>1.14.3</version>
-        </dependency>
 
         <!-- music player START -->
         <dependency>
@@ -134,13 +133,6 @@
         </dependency>
         <!-- music player END -->
 
-        <dependency>
-            <!-- GUI lib for balloon popup TODO: unused and can be deleted? -->
-            <groupId>net.java.balloontip</groupId>
-            <artifactId>balloontip</artifactId>
-            <version>1.2.4.1</version>
-        </dependency>
-
         <!-- svg support START -->
         <!--
             for "SAX2 driver class org.apache.crimson.parser.XMLReaderImpl not found" error looks here:
@@ -149,16 +141,27 @@
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-transcoder</artifactId>
-            <version>1.13</version>
+            <version>1.17</version>
         </dependency>
         <!-- svg support END -->
 
+        <!-- JavaFX support (build-in browser) START -->
         <dependency>
-            <!-- time lib for GUI time info -->
-            <groupId>org.ocpsoft.prettytime</groupId>
-            <artifactId>prettytime</artifactId>
-            <version>4.0.6.Final</version>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>11.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>11.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>11.0.2</version>
+        </dependency>
+        <!-- JavaFX support (build-in browser) END -->
     </dependencies>
 
     <!-- to get the reference to local repository with com\googlecode\jspf\jspf-core\0.9.1\ -->
@@ -225,6 +228,7 @@
     </build>
 
     <properties>
+        <root.dir>${project.basedir}/..</root.dir>
         <manifest.file>src/main/resources/META-INF/MANIFEST.MF</manifest.file>
     </properties>
 

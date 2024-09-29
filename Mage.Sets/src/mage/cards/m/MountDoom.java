@@ -110,7 +110,7 @@ class MountDoomEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetCreaturePermanent(0, 2);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         target.withChooseHint("the rest will be destroyed");
         player.choose(outcome, target, source, game);
         FilterPermanent filter = new FilterCreaturePermanent();

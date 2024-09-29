@@ -35,6 +35,7 @@ public final class XyrisTheWrithingStorm extends CardImpl {
 
         // Whenever an opponent draws a card except the first one they draw in each of their draw steps, create a 1/1 green Snake creature token.
         this.addAbility(new OpponentDrawCardExceptFirstCardDrawStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SnakeToken(), 1), false));
+
         // Whenever Xyris, the Writhing Storm deals combat damage to a player, you and that player each draw that many cards.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new XyrisTheWrithingStormCombatDamageEffect(), false, true));
     }
@@ -52,12 +53,12 @@ public final class XyrisTheWrithingStorm extends CardImpl {
 
 class XyrisTheWrithingStormCombatDamageEffect extends OneShotEffect {
 
-    public XyrisTheWrithingStormCombatDamageEffect() {
+    XyrisTheWrithingStormCombatDamageEffect() {
         super(Outcome.DrawCard);
         this.staticText = "you and that player each draw that many cards.";
     }
 
-    public XyrisTheWrithingStormCombatDamageEffect(final XyrisTheWrithingStormCombatDamageEffect effect) {
+    private XyrisTheWrithingStormCombatDamageEffect(final XyrisTheWrithingStormCombatDamageEffect effect) {
         super(effect);
     }
 

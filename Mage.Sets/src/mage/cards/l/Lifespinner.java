@@ -13,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
 import mage.target.common.TargetCardInLibrary;
@@ -25,6 +26,7 @@ import mage.target.common.TargetControlledPermanent;
 public final class Lifespinner extends CardImpl {
 
     private static final FilterPermanentCard filter = new FilterPermanentCard("legendary Spirit permanent card");
+    private static final FilterPermanent filterSac = new FilterPermanent(SubType.SPIRIT, "Spirits");
 
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());
@@ -42,7 +44,7 @@ public final class Lifespinner extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)),
                 new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledCreaturePermanent(SubType.SPIRIT, "Spirits"), false)));
+        ability.addCost(new SacrificeTargetCost(3, filterSac));
         this.addAbility(ability);
     }
 

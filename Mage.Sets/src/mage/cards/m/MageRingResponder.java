@@ -60,7 +60,7 @@ class MageRingResponderAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(7));
     }
 
-    public MageRingResponderAbility(final MageRingResponderAbility ability) {
+    private MageRingResponderAbility(final MageRingResponderAbility ability) {
         super(ability);
     }
 

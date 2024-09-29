@@ -67,8 +67,8 @@ public class UrborgPanther extends CardImpl {
                         1, 1, filterCard
                 ), false, true),
                 new CompositeCost(new CompositeCost(
-                        new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter1)),
-                        new SacrificeTargetCost(new TargetControlledCreaturePermanent(filter2)),
+                        new SacrificeTargetCost(filter1),
+                        new SacrificeTargetCost(filter2),
                         ""
                 ), new SacrificeSourceCost(), "sacrifice a creature named Feral Shadow, " +
                         "a creature named Breathstealer, and {this}")

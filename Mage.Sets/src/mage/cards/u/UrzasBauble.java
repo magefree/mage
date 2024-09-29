@@ -35,7 +35,7 @@ public final class UrzasBauble extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookAtRandomCardEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1)), false));
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextUpkeepDelayedTriggeredAbility(new DrawCardSourceControllerEffect(1, true)), false));
         this.addAbility(ability);
     }
 
@@ -51,12 +51,12 @@ public final class UrzasBauble extends CardImpl {
 
 class LookAtRandomCardEffect extends OneShotEffect {
 
-    public LookAtRandomCardEffect() {
+    LookAtRandomCardEffect() {
         super(Outcome.Benefit);
         this.staticText = "Look at a card at random in target player's hand";
     }
 
-    public LookAtRandomCardEffect(final LookAtRandomCardEffect effect) {
+    private LookAtRandomCardEffect(final LookAtRandomCardEffect effect) {
         super(effect);
     }
 

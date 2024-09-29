@@ -48,12 +48,12 @@ public final class WarsToll extends CardImpl {
 
 class WarsTollTapEffect extends OneShotEffect {
 
-    public WarsTollTapEffect() {
+    WarsTollTapEffect() {
         super(Outcome.Tap);
         staticText = "tap all lands that player controls";
     }
 
-    public WarsTollTapEffect(final WarsTollTapEffect effect) {
+    private WarsTollTapEffect(final WarsTollTapEffect effect) {
         super(effect);
     }
 
@@ -76,12 +76,12 @@ class WarsTollTapEffect extends OneShotEffect {
 
 class WarsTollAttackRestrictionEffect extends RestrictionEffect {
 
-    public WarsTollAttackRestrictionEffect() {
+    WarsTollAttackRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "If a creature an opponent controls attacks, all creatures that opponent controls attack if able";
     }
 
-    public WarsTollAttackRestrictionEffect(final WarsTollAttackRestrictionEffect effect) {
+    private WarsTollAttackRestrictionEffect(final WarsTollAttackRestrictionEffect effect) {
         super(effect);
     }
 

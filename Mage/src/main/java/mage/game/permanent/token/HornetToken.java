@@ -26,7 +26,7 @@ public final class HornetToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    public HornetToken(final HornetToken token) {
+    private HornetToken(final HornetToken token) {
         super(token);
     }
 

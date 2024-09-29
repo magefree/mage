@@ -37,7 +37,7 @@ public final class ZenithChronicler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever a player casts their first multicolored spell each turn, each other player draws a card.
-        this.addAbility(new ZenithChroniclerTriggeredAbility(), new SpellsCastWatcher());
+        this.addAbility(new ZenithChroniclerTriggeredAbility());
 
     }
 
@@ -76,7 +76,7 @@ class ZenithChroniclerTriggeredAbility extends TriggeredAbilityImpl {
         Player controller = game.getPlayer(getControllerId());
         Spell spell = game.getSpell(event.getTargetId());
         SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        if (controller != null && spell != null && watcher != null) {
+        if (controller != null && spell != null && watcher != null && spell.getColor(game).isMulticolored()) {
             int multicoloredSpell = 0;
             for (Spell spellCastThisTurn : watcher.getSpellsCastThisTurn(spell.getControllerId())) {
                 if (spellCastThisTurn.getColor(game).isMulticolored() && ++multicoloredSpell > 1) {
@@ -101,7 +101,7 @@ class ZenithChroniclerTriggeredAbility extends TriggeredAbilityImpl {
 
 class ZenithChroniclerEffect extends OneShotEffect {
 
-    public ZenithChroniclerEffect() {
+    ZenithChroniclerEffect() {
         super(Outcome.DrawCard);
     }
 

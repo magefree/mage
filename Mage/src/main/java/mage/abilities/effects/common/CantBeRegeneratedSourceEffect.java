@@ -2,6 +2,7 @@
 package mage.abilities.effects.common;
 
 import java.util.Objects;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -12,7 +13,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author jeffwadsworth
  */
 public class CantBeRegeneratedSourceEffect extends ContinuousRuleModifyingEffectImpl {
@@ -22,7 +22,7 @@ public class CantBeRegeneratedSourceEffect extends ContinuousRuleModifyingEffect
         this.staticText = buildStaticText();
     }
 
-    public CantBeRegeneratedSourceEffect(final CantBeRegeneratedSourceEffect effect) {
+    protected CantBeRegeneratedSourceEffect(final CantBeRegeneratedSourceEffect effect) {
         super(effect);
     }
 
@@ -32,18 +32,13 @@ public class CantBeRegeneratedSourceEffect extends ContinuousRuleModifyingEffect
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.REGENERATE;
     }
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game); //To change body of generated methods, choose Tools | Templates.
+        super.init(source, game);
         if (duration.isOnlyValidIfNoZoneChange()) {
             // If source permanent is no longer onto battlefield discard the effect
             if (source.getSourcePermanentIfItStillExists(game) == null) {

@@ -74,7 +74,7 @@ class TheUrDragonTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public TheUrDragonTriggeredAbility(final TheUrDragonTriggeredAbility ability) {
+    private TheUrDragonTriggeredAbility(final TheUrDragonTriggeredAbility ability) {
         super(ability);
     }
 

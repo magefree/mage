@@ -31,8 +31,8 @@ public class Limited extends DeckValidator {
         boolean valid = true;
         errorsList.clear();
         //20091005 - 100.2b
-        if (deck.getCards().size() < getDeckMinSize()) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain at least " + getDeckMinSize() + " cards: has only " + deck.getCards().size() + " cards");
+        if (deck.getMaindeckCards().size() < getDeckMinSize()) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain at least " + getDeckMinSize() + " cards: has only " + deck.getMaindeckCards().size() + " cards");
             valid = false;
         }
         Map<String, Integer> counts = new HashMap<>();

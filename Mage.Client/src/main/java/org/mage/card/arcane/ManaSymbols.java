@@ -22,13 +22,15 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.List;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
+/**
+ * Mana symbol resources
+ */
 public final class ManaSymbols {
 
     private static final Logger logger = Logger.getLogger(ManaSymbols.class);
@@ -73,19 +75,19 @@ public final class ManaSymbols {
     private static final String[] symbols = new String[]{
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
             "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
-            "B", "BG", "BR", "BP", "2B",
-            "G", "GU", "GW", "GP", "2G",
-            "R", "RG", "RW", "RP", "2R",
+            "B", "BG", "BR", "BP", "2B", "CB",
+            "G", "GU", "GW", "GP", "2G", "CG",
+            "R", "RG", "RW", "RP", "2R", "CR",
             "S", "T", "Q",
-            "U", "UB", "UR", "UP", "2U",
-            "W", "WB", "WU", "WP", "2W",
-            "X", "C", "E",
+            "U", "UB", "UR", "UP", "2U", "CU",
+            "W", "WB", "WU", "WP", "2W", "CW",
+            "X", "C", "E", "P", "H",
             "BGP", "BRP", "GUP", "GWP", "RGP", "RWP", "UBP", "URP", "WBP", "WUP"};
 
     private static final JLabel labelRender = new JLabel(); // render mana text
 
     public static void loadImages() {
-        logger.info("Loading symbols...");
+        logger.info("Symbols: loading...");
 
         // TODO: delete files rename jpg->gif (it was for backward compatibility for one of the old version?)
         renameSymbols(getResourceSymbolsPath(ResourceSymbolSize.SMALL));
@@ -120,18 +122,13 @@ public final class ManaSymbols {
                         ImageIO.write(image, "png", newFile);
                     }
                 } catch (Exception e) {
-                    logger.warn("Can't generate png image for symbol:" + symbol);
+                    logger.warn("Symbols: can't generate png image for symbol:" + symbol);
                 }
             }
         }
 
         // preload set images
         java.util.List<String> setCodes = ExpansionRepository.instance.getSetCodes();
-        if (setCodes == null) {
-            // the cards db file is probaly not included in the client. It will be created after the first connect to a server.
-            logger.warn("No db information for sets found. Connect to a server to create database file on client side. Then try to restart the client.");
-            return;
-        }
         for (String set : setCodes) {
 
             if (withoutSymbols.contains(set)) {
@@ -224,6 +221,8 @@ public final class ManaSymbols {
             } catch (Exception e) {
             }
         }
+
+        logger.info("Symbols: done");
     }
 
     public static File getSymbolFileNameAsSVG(String symbol) {
@@ -289,9 +288,9 @@ public final class ManaSymbols {
         // priority: SVG -> GIF
         // gif remain for backward compatibility
 
-        AtomicIntegerArray iconErrors = new AtomicIntegerArray(2); // 0 - svg, 1 - gif
+        final List<String> svgFails = new ArrayList<>(); // scryfall
+        final List<String> otherFails = new ArrayList<>(); // gatherer
 
-        AtomicBoolean fileErrors = new AtomicBoolean(false);
         Map<String, BufferedImage> sizedSymbols = new ConcurrentHashMap<>();
         IntStream.range(0, symbols.length).parallel().forEach(i -> {
             String symbol = symbols[i];
@@ -302,53 +301,55 @@ public final class ManaSymbols {
             if (SvgUtils.haveSvgSupport()) {
                 file = getSymbolFileNameAsSVG(symbol);
                 if (file.exists()) {
-                    try {
-                        InputStream fileStream = new FileInputStream(file);
+                    try(InputStream fileStream = Files.newInputStream(file.toPath())) {
                         image = loadSymbolAsSVG(fileStream, file.getPath(), size, size);
-                    } catch (FileNotFoundException e) {
-                        // it's ok to hide error
+                    } catch (IOException ignore) {
                     }
                 }
             }
-
-            // gif
             if (image == null) {
+                synchronized (svgFails) {
+                    svgFails.add(symbol);
+                }
+            }
 
-                iconErrors.incrementAndGet(0); // svg fail
-
+            // gif (if svg fails)
+            if (image == null) {
                 file = getSymbolFileNameAsGIF(symbol, size);
                 if (file.exists()) {
                     image = loadSymbolAsGIF(file, size, size);
+                }
+            }
+            if (image == null) {
+                synchronized (otherFails) {
+                    otherFails.add(symbol);
                 }
             }
 
             // save
             if (image != null) {
                 sizedSymbols.put(symbol, image);
-            } else {
-                iconErrors.incrementAndGet(1); // gif fail
-                fileErrors.set(true);
             }
         });
 
         // total errors
         String errorInfo = "";
-        if (iconErrors.get(0) > 0) {
-            errorInfo += "SVG fails - " + iconErrors.get(0);
+        if (!svgFails.isEmpty()) {
+            errorInfo += String.format("SVG miss - %s and %d others", svgFails.get(0), svgFails.size() - 1);
         }
-        if (iconErrors.get(1) > 0) {
+        if (!otherFails.isEmpty()) {
             if (!errorInfo.isEmpty()) {
                 errorInfo += ", ";
             }
-            errorInfo += "GIF fails - " + iconErrors.get(1);
+            errorInfo += String.format("GIF miss - %s and %d others", otherFails.get(0), otherFails.size() - 1);
         }
 
         if (!errorInfo.isEmpty()) {
-            logger.warn("Symbols can't be load for size " + size + ": " + errorInfo);
+            logger.warn("Symbols: can't load, make sure you download it by main menu - size " + size + ", " + errorInfo);
         }
 
         manaImages.put(size, sizedSymbols);
-        return !fileErrors.get();
+        return errorInfo.isEmpty();
     }
 
     private static void renameSymbols(String path) {
@@ -488,6 +489,7 @@ public final class ManaSymbols {
         BufferedImage image = new BufferedImage(d.width, d.height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D gg = image.createGraphics();
         manaPanel.paint(gg);
+        gg.dispose()
         g.drawImage(image, x, y, null);
          */
         // OLD version with custom draw
@@ -539,10 +541,14 @@ public final class ManaSymbols {
                 // render component to new position
                 // need to copy graphics, overvise it draw at top left corner
                 // https://stackoverflow.com/questions/4974268/java-paint-problem
-                Graphics2D labelG = (Graphics2D) g.create(x, y, symbolWidth, symbolWidth);
-                labelG.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-                labelG.fillOval(x + 1, y + 1, symbolWidth - 2, symbolWidth - 2);
-                labelRender.paint(labelG);
+                Graphics2D g2 = (Graphics2D) g.create(x, y, symbolWidth, symbolWidth);
+                try {
+                    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                    g2.fillOval(x + 1, y + 1, symbolWidth - 2, symbolWidth - 2);
+                    labelRender.paint(g2);
+                } finally {
+                    g2.dispose();
+                }
             } else {
                 // ICON draw
                 g.drawImage(image, x, y, null);
@@ -580,9 +586,8 @@ public final class ManaSymbols {
     }
 
 
-
     public enum Type {
-        TABLE,
+        TABLE, // TODO: merge TABLE and DIALOG into WINDOW
         CHAT,
         DIALOG,
         TOOLTIP,
@@ -600,18 +605,13 @@ public final class ManaSymbols {
     }
 
     /**
-     * Replace images/icons code by real html links. Uses in many places.
-     *
-     * @param value
-     * @param type
-     * @return
+     * Replace images/icons code by real html images. Client side code.
      */
-    public static synchronized String replaceSymbolsWithHTML(String value, Type type) {
-
+    public static String replaceSymbolsWithHTML(String value, Type destType) {
         // mana cost to HTML images (urls to files)
-        // do not use it for new code - try to suppotr svg render
+        // do not use it for new code - try to support svg render
         int symbolSize;
-        switch (type) {
+        switch (destType) {
             case TABLE:
                 symbolSize = GUISizeHelper.symbolTableSize;
                 break;
@@ -622,23 +622,21 @@ public final class ManaSymbols {
                 symbolSize = GUISizeHelper.symbolDialogSize;
                 break;
             case TOOLTIP:
+            case CARD_ICON_HINT:
                 symbolSize = GUISizeHelper.symbolTooltipSize;
                 break;
-            case CARD_ICON_HINT:
             default:
                 symbolSize = 11;
                 break;
         }
 
-        // auto size
-        ResourceSymbolSize needSize = null;
-        if (symbolSize <= 15) {
-            needSize = ResourceSymbolSize.SMALL;
-        } else if (symbolSize <= 25) {
-            needSize = ResourceSymbolSize.MEDIUM;
-        } else {
-            needSize = ResourceSymbolSize.LARGE;
-        }
+        return replaceSymbolsWithHTML(value, symbolSize);
+    }
+
+    /**
+     * Replace images/icons code by real html images. Client side code.
+     */
+    public static String replaceSymbolsWithHTML(String value, int symbolsSize) {
 
         // replace every {symbol} to <img> link
         // ignore data backup
@@ -654,26 +652,26 @@ public final class ManaSymbols {
         replaced = replaced.replace(CardInfo.SPLIT_MANA_SEPARATOR_FULL, CardInfo.SPLIT_MANA_SEPARATOR_RENDER);
         replaced = REPLACE_SYMBOLS_PATTERN.matcher(replaced).replaceAll(
                 "<img src='" + filePathToUrl(htmlImagesPath) + "$1$2$3" + ".png' alt='$1$2$3' width="
-                        + symbolSize + " height=" + symbolSize + '>');
+                        + symbolsSize + " height=" + symbolsSize + '>');
 
         // replace hint icons
         if (replaced.contains(HintUtils.HINT_ICON_GOOD)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_GOOD, GuiDisplayUtil.getHintIconHtml("good", symbolSize) + "&nbsp;");
+            replaced = replaced.replace(HintUtils.HINT_ICON_GOOD, GuiDisplayUtil.getHintIconHtml("good", symbolsSize) + "&nbsp;");
         }
         if (replaced.contains(HintUtils.HINT_ICON_BAD)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_BAD, GuiDisplayUtil.getHintIconHtml("bad", symbolSize) + "&nbsp;");
+            replaced = replaced.replace(HintUtils.HINT_ICON_BAD, GuiDisplayUtil.getHintIconHtml("bad", symbolsSize) + "&nbsp;");
         }
         if (replaced.contains(HintUtils.HINT_ICON_RESTRICT)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_RESTRICT, GuiDisplayUtil.getHintIconHtml("restrict", symbolSize) + "&nbsp;");
+            replaced = replaced.replace(HintUtils.HINT_ICON_RESTRICT, GuiDisplayUtil.getHintIconHtml("restrict", symbolsSize) + "&nbsp;");
         }
         if (replaced.contains(HintUtils.HINT_ICON_REQUIRE)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_REQUIRE, GuiDisplayUtil.getHintIconHtml("require", symbolSize) + "&nbsp;");
+            replaced = replaced.replace(HintUtils.HINT_ICON_REQUIRE, GuiDisplayUtil.getHintIconHtml("require", symbolsSize) + "&nbsp;");
         }
         if (replaced.contains(HintUtils.HINT_ICON_DUNGEON_ROOM_CURRENT)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_DUNGEON_ROOM_CURRENT, GuiDisplayUtil.getHintIconHtml("arrow-right-square-fill-green", symbolSize) + "&nbsp;");
+            replaced = replaced.replace(HintUtils.HINT_ICON_DUNGEON_ROOM_CURRENT, GuiDisplayUtil.getHintIconHtml("arrow-right-square-fill-green", symbolsSize) + "&nbsp;");
         }
         if (replaced.contains(HintUtils.HINT_ICON_DUNGEON_ROOM_NEXT)) {
-            replaced = replaced.replace(HintUtils.HINT_ICON_DUNGEON_ROOM_NEXT, GuiDisplayUtil.getHintIconHtml("arrow-down-right-square fill-yellow", symbolSize) + "&nbsp;");
+            replaced = replaced.replace(HintUtils.HINT_ICON_DUNGEON_ROOM_NEXT, GuiDisplayUtil.getHintIconHtml("arrow-down-right-square fill-yellow", symbolsSize) + "&nbsp;");
         }
 
         // ignored data restore

@@ -25,7 +25,7 @@ public final class GlimpseOfNature extends CardImpl {
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new GlimpseOfNatureTriggeredAbility()));
     }
 
-    public GlimpseOfNature (final GlimpseOfNature card) {
+    private GlimpseOfNature(final GlimpseOfNature card) {
         super(card);
     }
 
@@ -42,7 +42,7 @@ class GlimpseOfNatureTriggeredAbility extends DelayedTriggeredAbility {
         super(new DrawCardSourceControllerEffect(1), Duration.EndOfTurn, false);
     }
 
-    public GlimpseOfNatureTriggeredAbility(GlimpseOfNatureTriggeredAbility ability) {
+    private GlimpseOfNatureTriggeredAbility(final GlimpseOfNatureTriggeredAbility ability) {
         super(ability);
     }
 

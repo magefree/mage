@@ -1,4 +1,3 @@
-
 package mage.abilities.condition;
 
 import mage.abilities.Ability;
@@ -6,7 +5,6 @@ import mage.constants.ComparisonType;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 public abstract class IntCompareCondition implements Condition {
@@ -14,7 +12,7 @@ public abstract class IntCompareCondition implements Condition {
     protected final ComparisonType type;
     protected final int value;
 
-    public IntCompareCondition(ComparisonType type, int value) {
+    protected IntCompareCondition(ComparisonType type, int value) {
         this.type = type;
         this.value = value;
     }
@@ -24,7 +22,7 @@ public abstract class IntCompareCondition implements Condition {
     @Override
     public final boolean apply(Game game, Ability source) {
         int inputValue = getInputValue(game, source);
-        return ComparisonType.compare(inputValue , type, value);
+        return ComparisonType.compare(inputValue, type, value);
     }
 
     @Override

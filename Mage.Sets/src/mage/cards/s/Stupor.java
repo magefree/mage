@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -20,7 +19,7 @@ public final class Stupor extends CardImpl {
 
         // Target opponent discards a card at random, then discards a card.
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1, true));
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
+        this.getSpellAbility().addEffect(new DiscardTargetEffect(1).setText(", then discards a card"));
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 

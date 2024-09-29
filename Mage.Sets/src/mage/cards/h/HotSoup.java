@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.Objects;
@@ -18,7 +17,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -55,11 +53,11 @@ public final class HotSoup extends CardImpl {
 class HotSoupTriggeredAbility extends TriggeredAbilityImpl {
     
     HotSoupTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DestroyTargetEffect(), false);
+        super(Zone.BATTLEFIELD, new DestroyTargetEffect().setText("destroy it"), false);
         setTriggerPhrase("Whenever equipped creature is dealt damage, ");
     }
     
-    HotSoupTriggeredAbility(final HotSoupTriggeredAbility ability) {
+    private HotSoupTriggeredAbility(final HotSoupTriggeredAbility ability) {
         super(ability);
     }
     

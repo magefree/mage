@@ -21,6 +21,7 @@ import mage.constants.*;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.watchers.common.DamageDoneWatcher;
 
 /**
  *
@@ -52,7 +53,7 @@ public final class ChandraFireOfKaladesh extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED,Pronoun.SHE), new SourceDealtDamageCondition(3)));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
-        this.addAbility(ability);
+        this.addAbility(ability, new DamageDoneWatcher());
 
     }
 

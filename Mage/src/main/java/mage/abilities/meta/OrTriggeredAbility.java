@@ -37,10 +37,15 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     public OrTriggeredAbility(Zone zone, Effect effect, boolean optional, String ruleTrigger, TriggeredAbility... abilities) {
         super(zone, effect, optional);
         this.ruleTrigger = ruleTrigger;
+        this.withRuleTextReplacement(false);
         Collections.addAll(this.triggeredAbilities, abilities);
         for (TriggeredAbility ability : triggeredAbilities) {
             //Remove useless data
             ability.getEffects().clear();
+
+            for(Watcher watcher : ability.getWatchers()) {
+                super.addWatcher(watcher);
+            }
         }
         setTriggerPhrase(generateTriggerPhrase());
     }
@@ -67,9 +72,13 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         boolean toRet = false;
         for (TriggeredAbility ability : triggeredAbilities) {
+            for (Effect e : getEffects()) { //Add effects to the sub-abilities so that they can set target pointers
+                ability.addEffect(e);
+            }
             if (ability.checkEventType(event, game) && ability.checkTrigger(event, game)) {
                 toRet = true;
             }
+            ability.getEffects().clear(); //Remove afterwards, ensures that they remain synced even with copying
         }
         return toRet;
     }

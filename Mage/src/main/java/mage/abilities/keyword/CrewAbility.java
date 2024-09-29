@@ -11,7 +11,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.continuous.AddCardTypeSourceEffect;
 import mage.abilities.hint.HintUtils;
-import mage.abilities.icon.abilities.CrewAbilityIcon;
+import mage.abilities.icon.CardIconImpl;
+import mage.abilities.icon.CardIconType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -47,9 +48,11 @@ public class CrewAbility extends SimpleActivatedAbility {
                 Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE
         ), new CrewCost(value, altCost));
         this.addEffect(new CrewEventEffect());
-        this.addIcon(CrewAbilityIcon.instance);
+        this.addIcon(new CardIconImpl(CardIconType.ABILITY_CREW, "Crew " + value));
         this.value = value;
         if (altCost != null) {
+            //TODO: the entire alternative cost should be included in the subability, not just the hint text
+            // Heart of Kiran's alternative crew cost is a static ability, not part of the activated ability directly
             this.addSubAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect(
                     "you may " + CardUtil.addCostVerb(altCost.getText())
                             + " rather than pay {this}'s crew cost"
@@ -57,7 +60,7 @@ public class CrewAbility extends SimpleActivatedAbility {
         }
     }
 
-    public CrewAbility(final CrewAbility ability) {
+    protected CrewAbility(final CrewAbility ability) {
         super(ability);
         this.value = ability.value;
     }
@@ -69,8 +72,9 @@ public class CrewAbility extends SimpleActivatedAbility {
 
     @Override
     public String getRule() {
-        return "Crew " + value + " <i>(Tap any number of creatures you control with total power "
-                + value + " or more: This Vehicle becomes an artifact creature until end of turn.)</i>";
+        return "Crew " + value + (this.maxActivationsPerTurn == 1 ? ". Activate only once each turn." : "") +
+                " <i>(Tap any number of creatures you control with total power " + value +
+                " or more: This Vehicle becomes an artifact creature until end of turn.)</i>";
     }
 }
 
@@ -147,10 +151,10 @@ class CrewCost extends CostImpl {
         }
         Target target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true) {
             @Override
-            public String getMessage() {
+            public String getMessage(Game game) {
                 // shows selected power
-                int selectedPower = this.targets.entrySet().stream()
-                        .map(entry -> (game.getPermanent(entry.getKey())))
+                int selectedPower = this.targets.keySet().stream()
+                        .map(game::getPermanent)
                         .filter(Objects::nonNull)
                         .mapToInt(p -> (getCrewPower(p, game)))
                         .sum();
@@ -158,7 +162,7 @@ class CrewCost extends CostImpl {
                 if (selectedPower >= value) {
                     extraInfo = HintUtils.prepareText(extraInfo, Color.GREEN);
                 }
-                return super.getMessage() + " " + extraInfo;
+                return super.getMessage(game) + " " + extraInfo;
             }
         };
 

@@ -2,14 +2,12 @@
 
 package mage.cards.basiclands;
 
-import java.util.UUID;
-import mage.ObjectColor;
 import mage.abilities.mana.GreenManaAbility;
-import mage.cards.Card;
 import mage.cards.CardSetInfo;
 
+import java.util.UUID;
+
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class Forest extends BasicLand {
@@ -18,12 +16,12 @@ public class Forest extends BasicLand {
         this.frameColor.setGreen(true);
     }
 
-    public Forest(final Forest land) {
+    private Forest(final Forest land) {
         super(land);
     }
 
     @Override
-    public Card copy() {
+    public Forest copy() {
         return new Forest(this);
     }
 }

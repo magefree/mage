@@ -15,7 +15,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Controllable;
 import mage.game.Game;
-import mage.game.permanent.token.SalamnderWarriorToken;
+import mage.game.permanent.token.SalamanderWarriorToken;
 import mage.game.permanent.token.Token;
 import mage.util.CardUtil;
 
@@ -99,7 +99,7 @@ class GorMuldrakAmphinologistEffect extends OneShotEffect {
                 .forEach(uuid -> creatureMap.compute(uuid, CardUtil::setOrIncrementValue));
         int minValue = creatureMap.values().stream().mapToInt(x -> x).min().orElse(0);
         minValue = Math.max(minValue, 0);
-        Token token = new SalamnderWarriorToken();
+        Token token = new SalamanderWarriorToken();
         for (Map.Entry<UUID, Integer> entry : creatureMap.entrySet()) {
             if (entry.getValue() > minValue) {
                 continue;

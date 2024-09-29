@@ -25,10 +25,10 @@ public final class DreadDrone extends CardImpl {
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(1);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 2)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken(), 2).withTextOptions(true)));
     }
 
-    public DreadDrone (final DreadDrone card) {
+    private DreadDrone(final DreadDrone card) {
         super(card);
     }
 

@@ -46,7 +46,7 @@ public class LukesLightsaber extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));
     }
 
-    public LukesLightsaber(final LukesLightsaber card) {
+    private LukesLightsaber(final LukesLightsaber card) {
         super(card);
     }
 

@@ -3,7 +3,6 @@ package mage.cards.h;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BecomesSubtypeAllEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -37,7 +36,7 @@ public final class Hivestone extends CardImpl {
     }
 
     @Override
-    public Card copy() {
+    public Hivestone copy() {
         return new Hivestone(this);
     }
 

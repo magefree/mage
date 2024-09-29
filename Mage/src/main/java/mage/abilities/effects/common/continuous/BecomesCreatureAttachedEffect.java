@@ -38,7 +38,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
         staticText = text;
     }
 
-    public BecomesCreatureAttachedEffect(final BecomesCreatureAttachedEffect effect) {
+    protected BecomesCreatureAttachedEffect(final BecomesCreatureAttachedEffect effect) {
         super(effect);
         this.token = effect.token.copy();
         this.type = effect.type;
@@ -112,7 +112,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl {
                         break;
                 }
                 for (Ability ability : token.getAbilities()) {
-                    permanent.addAbility(ability, source.getSourceId(), game);
+                    permanent.addAbility(ability, source.getSourceId(), game, true);
                 }
                 break;
 

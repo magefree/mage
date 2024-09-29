@@ -218,6 +218,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 223, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 224, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sword of the Ages", 202, Rarity.RARE, mage.cards.s.SwordOfTheAges.class));
+        cards.add(new SetCardInfo("Takklemaggot", 76, Rarity.UNCOMMON, mage.cards.t.Takklemaggot.class));
         cards.add(new SetCardInfo("Tetsuo Umezawa", 179, Rarity.RARE, mage.cards.t.TetsuoUmezawa.class));
         cards.add(new SetCardInfo("The Abyss", 77, Rarity.RARE, mage.cards.t.TheAbyss.class));
         cards.add(new SetCardInfo("The Lady of the Mountain", 180, Rarity.COMMON, mage.cards.t.TheLadyOfTheMountain.class));

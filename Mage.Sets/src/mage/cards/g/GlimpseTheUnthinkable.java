@@ -2,7 +2,7 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,7 +19,7 @@ public final class GlimpseTheUnthinkable extends CardImpl {
 
 
         // Target player puts the top ten cards of their library into their graveyard.
-        this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(10));
+        this.getSpellAbility().addEffect(new MillCardsTargetEffect(10));
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 

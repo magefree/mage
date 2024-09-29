@@ -20,7 +20,7 @@ public final class Mortuary extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
 
         // Whenever a creature is put into your graveyard from the battlefield, put that card on top of your library.
-        Ability ability = new PutIntoGraveFromBattlefieldAllTriggeredAbility(new PutOnLibraryTargetEffect(true, "put that card on top of your library."), false, StaticFilters.FILTER_PERMANENT_CREATURE, true, true);
+        Ability ability = new PutIntoGraveFromBattlefieldAllTriggeredAbility(new PutOnLibraryTargetEffect(true, "put that card on top of your library."), false, StaticFilters.FILTER_PERMANENT_A_CREATURE, true, true);
         this.addAbility(ability);
     }
 

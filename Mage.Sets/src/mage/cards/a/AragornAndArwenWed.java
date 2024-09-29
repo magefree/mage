@@ -52,7 +52,7 @@ public final class AragornAndArwenWed extends CardImpl {
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)
         );
-        ability.addEffect(new GainLifeEffect(xValue));
+        ability.addEffect(new GainLifeEffect(xValue).setText("you gain 1 life for each other creature you control"));
         ability.addHint(hint);
         this.addAbility(ability);
     }

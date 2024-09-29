@@ -6,7 +6,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class WitchOfTheMoors extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0);
+    private static final Condition condition = new YouGainedLifeCondition();
 
     public WitchOfTheMoors(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
@@ -54,7 +54,7 @@ public final class WitchOfTheMoors extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
         ));
-        this.addAbility(ability.addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        this.addAbility(ability.addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private WitchOfTheMoors(final WitchOfTheMoors card) {

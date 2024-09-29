@@ -4,10 +4,7 @@ import mage.abilities.ActivatedAbility;
 import mage.util.Copyable;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Contains stats with all playable cards for the player
@@ -25,7 +22,7 @@ public class PlayableObjectsList implements Serializable, Copyable<PlayableObjec
         load(playableObjects);
     }
 
-    public PlayableObjectsList(final PlayableObjectsList source) {
+    protected PlayableObjectsList(final PlayableObjectsList source) {
         source.objects.entrySet().forEach(entry -> {
             this.objects.put(entry.getKey(), entry.getValue().copy());
         });
@@ -65,5 +62,9 @@ public class PlayableObjectsList implements Serializable, Copyable<PlayableObjec
         } else {
             return 0;
         }
+    }
+
+    public Map<UUID, PlayableObjectStats> getObjects() {
+        return objects;
     }
 }

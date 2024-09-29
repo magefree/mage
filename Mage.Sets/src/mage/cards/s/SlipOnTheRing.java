@@ -2,14 +2,12 @@ package mage.cards.s;
 
 import java.util.UUID;
 
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.effects.keyword.TheRingTemptsYouEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -28,11 +26,9 @@ public final class SlipOnTheRing extends CardImpl {
     public SlipOnTheRing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{W}");
 
-        // Exile target creature you own
+        // Exile target creature you own, then return it to the battlefield under your control.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        // , then return it to the battlefield under your control.
-        this.getSpellAbility().addEffect(new ReturnFromExileEffect(Zone.BATTLEFIELD, ", then return it to the battlefield under your control."));
+        this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(true, false));
         // The Ring tempts you.
         this.getSpellAbility().addEffect(new TheRingTemptsYouEffect());
     }

@@ -1,5 +1,6 @@
 package mage.abilities.keyword;
 
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
@@ -19,8 +20,7 @@ import mage.constants.TimingRule;
 import mage.game.Game;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author TheElk801
@@ -42,7 +42,7 @@ public class BlitzAbility extends SpellAbility {
         ability.addEffect(new BlitzAddDelayedTriggeredAbilityEffect());
         ability.setRuleVisible(false);
         addSubAbility(ability);
-        this.ruleAdditionalCostsVisible = false;
+        this.setAdditionalCostsRuleVisible(false);
         this.timing = TimingRule.SORCERY;
     }
 
@@ -58,15 +58,15 @@ public class BlitzAbility extends SpellAbility {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder("Blitz");
-        if (costs.isEmpty()) {
+        if (getCosts().isEmpty()) {
             sb.append(' ');
         } else {
             sb.append("&mdash;");
         }
-        sb.append(manaCosts.getText());
-        if (!costs.isEmpty()) {
+        sb.append(getManaCosts().getText());
+        if (!getCosts().isEmpty()) {
             sb.append(", ");
-            sb.append(costs.getText());
+            sb.append(getCosts().getText());
             sb.append('.');
         }
         sb.append(" <i>(If you cast this spell for its blitz cost, it gains haste ");
@@ -76,19 +76,11 @@ public class BlitzAbility extends SpellAbility {
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (!super.activate(game, noMana)) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (!super.activate(game, allowedIdentifiers, noMana)) {
             return false;
         }
-        Object obj = game.getState().getValue(BLITZ_ACTIVATION_VALUE_KEY + getSourceId());
-        List<Integer> blitzActivations;
-        if (obj != null) {
-            blitzActivations = (List<Integer>) obj;
-        } else {
-            blitzActivations = new ArrayList<>();
-            game.getState().setValue(BLITZ_ACTIVATION_VALUE_KEY + getSourceId(), blitzActivations);
-        }
-        blitzActivations.add(game.getState().getZoneChangeCounter(getSourceId()));
+        this.setCostsTag(BLITZ_ACTIVATION_VALUE_KEY, null);
         return true;
     }
 }

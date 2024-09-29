@@ -50,7 +50,7 @@ class YusriFortunesFlameEffect extends OneShotEffect {
     YusriFortunesFlameEffect() {
         super(Outcome.Benefit);
         staticText = "choose a number between 1 and 5. Flip that many coins. For each flip you win, draw a card. " +
-                "For each flip you lose, {this} deals 2 damage to you. You you won five flips this way, " +
+                "For each flip you lose, {this} deals 2 damage to you. If you won five flips this way, " +
                 "you may cast spells from your hand this turn without paying their mana costs";
     }
 

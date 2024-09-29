@@ -90,7 +90,7 @@ class RimefeatherOwlEffect extends ContinuousEffectImpl {
         this.staticText = "Permanents with ice counters on them are snow.";
     }
 
-    public RimefeatherOwlEffect(final RimefeatherOwlEffect effect) {
+    private RimefeatherOwlEffect(final RimefeatherOwlEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

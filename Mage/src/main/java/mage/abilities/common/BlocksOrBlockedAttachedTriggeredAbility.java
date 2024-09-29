@@ -2,6 +2,7 @@ package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.AttachmentType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -13,16 +14,22 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BlocksOrBlockedAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
-    public BlocksOrBlockedAttachedTriggeredAbility(Effect effect) {
-        this(effect, false);
-    }
-    public BlocksOrBlockedAttachedTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("Whenever enchanted creature blocks or becomes blocked, ");
+    // Type of attachment: AURA or EQUIPMENT
+    private final AttachmentType attachmentType;
+
+    public BlocksOrBlockedAttachedTriggeredAbility(Effect effect, AttachmentType attachmentType) {
+        this(effect, attachmentType, false);
     }
 
-    public BlocksOrBlockedAttachedTriggeredAbility(final BlocksOrBlockedAttachedTriggeredAbility ability) {
+    public BlocksOrBlockedAttachedTriggeredAbility(Effect effect, AttachmentType attachmentType, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        setTriggerPhrase("Whenever " + attachmentType.verb().toLowerCase() + " creature blocks or becomes blocked, ");
+        this.attachmentType = attachmentType;
+    }
+
+    protected BlocksOrBlockedAttachedTriggeredAbility(final BlocksOrBlockedAttachedTriggeredAbility ability) {
         super(ability);
+        this.attachmentType = ability.attachmentType;
     }
 
     @Override

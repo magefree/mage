@@ -22,7 +22,7 @@ public final class GolemXXToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    public GolemXXToken(final GolemXXToken token) {
+    private GolemXXToken(final GolemXXToken token) {
         super(token);
     }
 

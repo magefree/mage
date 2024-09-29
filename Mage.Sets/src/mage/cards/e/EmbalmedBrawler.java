@@ -1,4 +1,3 @@
-
 package mage.cards.e;
 
 import java.util.UUID;
@@ -29,7 +28,8 @@ public final class EmbalmedBrawler extends CardImpl {
         // Amplify 1
         this.addAbility(new AmplifyAbility(AmplifyEffect.AmplifyFactor.Amplify1));
         // Whenever Embalmed Brawler attacks or blocks, you lose 1 life for each +1/+1 counter on it.
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new LoseLifeSourceControllerEffect(new CountersSourceCount(CounterType.P1P1)), false));
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new LoseLifeSourceControllerEffect(new CountersSourceCount(CounterType.P1P1))
+                .setText("you lose 1 life for each +1/+1 counter on it"), false));
     }
 
     private EmbalmedBrawler(final EmbalmedBrawler card) {

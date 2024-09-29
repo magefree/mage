@@ -50,7 +50,7 @@ public final class PiaNalaar extends CardImpl {
         // {1}, Sacrifice an artifact: Target creature can't block this turn.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new GenericManaCost(1));
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT));
         this.addAbility(ability);
     }
 

@@ -25,7 +25,7 @@ public final class MakindiGriffin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public MakindiGriffin (final MakindiGriffin card) {
+    private MakindiGriffin(final MakindiGriffin card) {
         super(card);
     }
 

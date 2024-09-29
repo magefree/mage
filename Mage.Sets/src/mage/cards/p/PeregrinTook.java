@@ -43,7 +43,7 @@ public final class PeregrinTook extends CardImpl {
         // Sacrifice three Foods: Draw a card.
         this.addAbility(new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(new TargetControlledPermanent(3, filter))
+                new SacrificeTargetCost(3, filter)
         ));
     }
 
@@ -59,7 +59,7 @@ public final class PeregrinTook extends CardImpl {
 
 class PeregrinTookReplacementEffect extends ReplacementEffectImpl {
 
-    public PeregrinTookReplacementEffect() {
+    PeregrinTookReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         this.staticText = "If one or more tokens would be created under your control, those tokens plus an additional Food token are created instead";
     }

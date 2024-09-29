@@ -72,7 +72,7 @@ class VarinaLichQueenTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public VarinaLichQueenTriggeredAbility(final VarinaLichQueenTriggeredAbility ability) {
+    private VarinaLichQueenTriggeredAbility(final VarinaLichQueenTriggeredAbility ability) {
         super(ability);
     }
 

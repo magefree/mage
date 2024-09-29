@@ -18,7 +18,7 @@ public class FilterNoncreatureCard extends FilterCard {
         this.add(Predicates.not(CardType.CREATURE.getPredicate()));
     }
 
-    public FilterNoncreatureCard(final FilterNoncreatureCard filter) {
+    protected FilterNoncreatureCard(final FilterNoncreatureCard filter) {
         super(filter);
     }
 

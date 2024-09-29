@@ -35,7 +35,7 @@ public class ForecastAbility extends ActivatedAbilityImpl {
         this.addCost(new RevealSourceFromYourHandCost());
     }
 
-    public ForecastAbility(final ForecastAbility ability) {
+    protected ForecastAbility(final ForecastAbility ability) {
         super(ability);
     }
 

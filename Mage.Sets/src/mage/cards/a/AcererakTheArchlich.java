@@ -10,18 +10,21 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 import mage.watchers.common.CompletedDungeonWatcher;
 
 import java.util.UUID;
@@ -43,12 +46,14 @@ public final class AcererakTheArchlich extends CardImpl {
         // When Acererak the Archlich enters the battlefield, if you have not completed Tomb of Annihilation, return Acererak the Archlich to its owner's hand and venture into the dungeon.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ReturnToHandSourceEffect(true)),
-                AcererakTheArchlichCondition.instance, "When {this} enters the battlefield, " +
+                AcererakTheArchlichCondition.instance, "When {this} enters, " +
                 "if you haven't completed Tomb of Annihilation, return {this} " +
                 "to its owner's hand and venture into the dungeon."
         );
         ability.addEffect(new VentureIntoTheDungeonEffect());
-        this.addAbility(ability.addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
+        ability.addHint(CurrentDungeonHint.instance);
+        ability.addHint(CompletedDungeonCondition.getHint());
+        this.addAbility(ability, new CompletedDungeonWatcher());
 
         // Whenever Acererak the Archlich attacks, for each opponent, you create a 2/2 black Zombie creature token unless that player sacrifices a creature.
         this.addAbility(new AttacksTriggeredAbility(new AcererakTheArchlichEffect()));
@@ -101,8 +106,7 @@ class AcererakTheArchlichEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            TargetPermanent target = new TargetControlledCreaturePermanent(0, 1);
-            target.setNotTarget(true);
+            TargetSacrifice target = new TargetSacrifice(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE);
             player.choose(Outcome.Sacrifice, target, source, game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null && permanent.sacrifice(source, game)) {

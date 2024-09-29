@@ -25,7 +25,7 @@ public final class CorruptionOfTowashi extends CardImpl {
         // When Corruption of Towashi enters the battlefield, incubate 4.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new IncubateEffect(4)));
 
-        // Whenever a permanent you control transforms or a permanent enters the battlefield under your control transformed, you may draw a card. Do this only once each turn.
+        // Whenever a permanent you control transforms or a permanent you control enters transformed, you may draw a card. Do this only once each turn.
         this.addAbility(new CorruptionOfTowashiTriggeredAbility());
     }
 
@@ -44,8 +44,8 @@ class CorruptionOfTowashiTriggeredAbility extends TriggeredAbilityImpl {
     CorruptionOfTowashiTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
         this.setTriggerPhrase("Whenever a permanent you control transforms " +
-                "or a permanent enters the battlefield under your control transformed, ");
-        this.setDoOnlyOnce(true);
+                "or a permanent you control enters transformed, ");
+        this.setDoOnlyOnceEachTurn(true);
     }
 
     private CorruptionOfTowashiTriggeredAbility(final CorruptionOfTowashiTriggeredAbility ability) {

@@ -48,7 +48,7 @@ public class WarRoomStarWars extends CardImpl {
         this.addAbility(limitedTimesPerTurnActivatedAbility, new AttackedOrBlockedThisCombatWatcher());
     }
 
-    public WarRoomStarWars(final WarRoomStarWars card) {
+    private WarRoomStarWars(final WarRoomStarWars card) {
         super(card);
     }
 

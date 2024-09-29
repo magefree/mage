@@ -83,7 +83,7 @@ class TomeboundLichTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} enters the battlefield or deals combat damage " +
+        return "Whenever {this} enters or deals combat damage " +
                 "to a player, draw a card, then discard a card.";
     }
 

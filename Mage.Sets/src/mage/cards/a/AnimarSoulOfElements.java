@@ -61,7 +61,7 @@ class AnimarCostReductionEffect extends CostModificationEffectImpl {
         staticText = "Creature spells you cast cost {1} less to cast for each +1/+1 counter on Animar";
     }
 
-    AnimarCostReductionEffect(AnimarCostReductionEffect effect) {
+    private AnimarCostReductionEffect(final AnimarCostReductionEffect effect) {
         super(effect);
     }
 

@@ -35,7 +35,7 @@ public final class OpalPalace extends CardImpl {
 
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
-        // {1}, {tap}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters the battlefield with a number of +1/+1 counters on it equal to the number of times it's been cast from the command zone this game.
+        // {1}, {tap}: Add one mana of any color in your commander's color identity. If you spend this mana to cast your commander, it enters with a number of +1/+1 counters on it equal to the number of times it's been cast from the command zone this game.
         Ability ability = new CommanderColorIdentityManaAbility(new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability, new OpalPalaceWatcher(ability.getOriginalId().toString()));
@@ -103,9 +103,9 @@ class OpalPalaceWatcher extends Watcher {
 
 class OpalPalaceEntersBattlefieldEffect extends ReplacementEffectImpl {
 
-    public OpalPalaceEntersBattlefieldEffect() {
+    OpalPalaceEntersBattlefieldEffect() {
         super(Duration.EndOfGame, Outcome.BoostCreature, false);
-        staticText = "If you spend this mana to cast your commander, it enters the battlefield with a number of +1/+1 counters on it equal to the number of times it's been cast from the command zone this game";
+        staticText = "If you spend this mana to cast your commander, it enters with a number of +1/+1 counters on it equal to the number of times it's been cast from the command zone this game";
     }
 
     private OpalPalaceEntersBattlefieldEffect(OpalPalaceEntersBattlefieldEffect effect) {

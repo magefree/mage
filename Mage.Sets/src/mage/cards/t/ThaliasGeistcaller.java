@@ -47,7 +47,7 @@ public final class ThaliasGeistcaller extends CardImpl {
         // Sacrifice a Spirit: Thalia's Geistcaller gains indestructible until end of turn.
         this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
                 IndestructibleAbility.getInstance(), Duration.EndOfTurn
-        ), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        ), new SacrificeTargetCost(filter)));
     }
 
     private ThaliasGeistcaller(final ThaliasGeistcaller card) {

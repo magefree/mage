@@ -60,7 +60,7 @@ public final class PrimalAdversary extends CardImpl {
 
 class PrimalAdversaryEffect extends OneShotEffect {
 
-    public PrimalAdversaryEffect() {
+    PrimalAdversaryEffect() {
         super(Outcome.Benefit);
         staticText = "put that many +1/+1 counters on Primal Adversary, " +
                 "then up to that many target lands you control become 3/3 Wolf creatures with haste that are still lands";

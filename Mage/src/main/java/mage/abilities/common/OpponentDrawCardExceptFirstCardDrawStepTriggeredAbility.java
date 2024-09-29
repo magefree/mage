@@ -34,9 +34,7 @@ public class OpponentDrawCardExceptFirstCardDrawStepTriggeredAbility extends Tri
             if (game.isActivePlayer(event.getPlayerId())
                     && game.getPhase().getStep().getType() == PhaseStep.DRAW) {
                 CardsDrawnDuringDrawStepWatcher watcher = game.getState().getWatcher(CardsDrawnDuringDrawStepWatcher.class);
-                if (watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 1) {
-                    return true;
-                }
+                return watcher != null && watcher.getAmountCardsDrawn(event.getPlayerId()) > 1;
             } else {
                 return true;
             }

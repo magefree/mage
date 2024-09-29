@@ -44,9 +44,7 @@ public final class OrmendahlTheCorrupter extends CardImpl {
         // Sacrifice another creature: Draw a card.
         this.addAbility(new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(new TargetControlledPermanent(
-                        StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-                ))
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
         ));
     }
 

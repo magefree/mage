@@ -1,6 +1,6 @@
 package org.mage.test.cards.copy;
 
-import mage.abilities.common.BecomesTargetTriggeredAbility;
+import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.constants.PhaseStep;
@@ -629,7 +629,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertTrue("Phantasmal Image should not be a creature", !staffA.isCreature(currentGame));
         assertTrue("Phantasmal Image should not be an Illusion", !staffA.hasSubtype(SubType.ILLUSION, currentGame));
         assertTrue("Phantasmal Image should not be a Construct", !staffA.hasSubtype(SubType.CONSTRUCT, currentGame));
-        assertTrue("Phantasmal Image should have the sacrifice trigger", staffA.getAbilities(currentGame).containsClass(BecomesTargetTriggeredAbility.class));
+        assertTrue("Phantasmal Image should have the sacrifice trigger", staffA.getAbilities(currentGame).containsClass(BecomesTargetSourceTriggeredAbility.class));
 
         Permanent staffB = getPermanent("Chimeric Staff", playerB);
         assertTrue("Chimeric Staff should be an artifact", staffB.isArtifact(currentGame));
@@ -638,7 +638,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void testAnimatedTribal() {
+    public void testAnimatedKindred() {
         addCard(Zone.BATTLEFIELD, playerB, "Cloak and Dagger");
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         addCard(Zone.HAND, playerA, "Karn's Touch");
@@ -654,17 +654,17 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         Permanent cloakA = getPermanent("Cloak and Dagger", playerA);
         assertTrue("Phantasmal Image should be an artifact", cloakA.isArtifact(currentGame));
-        assertTrue("Phantasmal Image should be tribal", cloakA.isTribal(currentGame));
+        assertTrue("Phantasmal Image should be kindred", cloakA.isKindred(currentGame));
         assertTrue("Phantasmal Image should not be a creature", !cloakA.isCreature(currentGame));
         assertTrue("Phantasmal Image should be a Rogue", cloakA.hasSubtype(SubType.ROGUE, currentGame));
         assertTrue("Phantasmal Image should be an Illusion", cloakA.hasSubtype(SubType.ILLUSION, currentGame));
         assertTrue("Phantasmal Image should be an Equipment", cloakA.hasSubtype(SubType.EQUIPMENT, currentGame));
-        assertTrue("Phantasmal Image should have the sacrifice trigger", cloakA.getAbilities(currentGame).containsClass(BecomesTargetTriggeredAbility.class));
+        assertTrue("Phantasmal Image should have the sacrifice trigger", cloakA.getAbilities(currentGame).containsClass(BecomesTargetSourceTriggeredAbility.class));
 
         Permanent cloakB = getPermanent("Cloak and Dagger", playerB);
         assertTrue("Cloak and Dagger should be an artifact", cloakB.isArtifact(currentGame));
         assertTrue("Cloak and Dagger should be a creature", cloakB.isCreature(currentGame));
-        assertTrue("Cloak and Dagger should be tribal", cloakB.isTribal(currentGame));
+        assertTrue("Cloak and Dagger should be kindred", cloakB.isKindred(currentGame));
         assertTrue("Cloak and Dagger should be a Rogue", cloakB.hasSubtype(SubType.ROGUE, currentGame));
         assertTrue("Cloak and Dagger should be an Equipment", cloakB.hasSubtype(SubType.EQUIPMENT, currentGame));
     }

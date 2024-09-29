@@ -27,7 +27,7 @@ public final class TimberWolves extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
     }
 
-    public TimberWolves (final TimberWolves card) {
+    private TimberWolves(final TimberWolves card) {
         super(card);
     }
 

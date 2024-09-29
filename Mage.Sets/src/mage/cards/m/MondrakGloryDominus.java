@@ -16,6 +16,7 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -53,7 +54,7 @@ public final class MondrakGloryDominus extends CardImpl {
                         CounterType.INDESTRUCTIBLE.createInstance()
                 ),
                 new ManaCostsImpl<>("{1}{W/P}{W/P}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, filter)));
+        ability.addCost(new SacrificeTargetCost(2, filter));
         this.addAbility(ability);
     }
 

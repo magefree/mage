@@ -48,7 +48,7 @@ public final class CalixGuidedByFate extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Constellation--Whenever Calix, Guided by Fate or another enchantment enters the battlefield under your control, put a +1/+1 counter on target creature.
+        // Constellation--Whenever Calix, Guided by Fate or another enchantment you control enters, put a +1/+1 counter on target creature.
         Ability ability = new ConstellationAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -56,7 +56,7 @@ public final class CalixGuidedByFate extends CardImpl {
         // Whenever Calix or an enchanted creature you control deals combat damage to a player, you may create a token that's a copy of a nonlegendary enchantment you control. Do this only once each turn.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(
                 new CalixGuidedByFateEffect(), filter, true, SetTargetPointer.NONE, true
-        ).setDoOnlyOnce(true));
+        ).setDoOnlyOnceEachTurn(true));
     }
 
     private CalixGuidedByFate(final CalixGuidedByFate card) {

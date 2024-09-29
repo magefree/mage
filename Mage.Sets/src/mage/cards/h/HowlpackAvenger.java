@@ -15,8 +15,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedBatchEvent;
-import mage.game.events.DamagedPermanentBatchEvent;
+import mage.game.events.DamagedBatchForPermanentsEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetAnyTarget;
 
@@ -77,13 +76,12 @@ class HowlpackAvengerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PERMANENTS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchEvent dEvent = (DamagedBatchEvent) event;
-        int damage = dEvent
+        int damage = ((DamagedBatchForPermanentsEvent) event)
                 .getEvents()
                 .stream()
                 .filter(damagedEvent -> isControlledBy(game.getControllerId(damagedEvent.getTargetId())))

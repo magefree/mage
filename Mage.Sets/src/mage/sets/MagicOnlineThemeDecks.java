@@ -125,7 +125,7 @@ public class MagicOnlineThemeDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Man-o'-War", "A26", Rarity.COMMON, mage.cards.m.ManOWar.class));
         cards.add(new SetCardInfo("Mangara of Corondor", "B7", Rarity.RARE, mage.cards.m.MangaraOfCorondor.class));
         cards.add(new SetCardInfo("Massacre", "A44", Rarity.UNCOMMON, mage.cards.m.Massacre.class));
-        cards.add(new SetCardInfo("Merfolk Looter", "A27", Rarity.COMMON, mage.cards.m.MerfolkLooter.class));
+        cards.add(new SetCardInfo("Merfolk Looter", "A27", Rarity.UNCOMMON, mage.cards.m.MerfolkLooter.class));
         cards.add(new SetCardInfo("Mirari's Wake", "A100", Rarity.RARE, mage.cards.m.MirarisWake.class));
         cards.add(new SetCardInfo("Miren, the Moaning Well", "A132", Rarity.RARE, mage.cards.m.MirenTheMoaningWell.class));
         cards.add(new SetCardInfo("Mishra's Factory", "B33", Rarity.UNCOMMON, mage.cards.m.MishrasFactory.class));
@@ -158,7 +158,7 @@ public class MagicOnlineThemeDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Price of Progress", "B23", Rarity.UNCOMMON, mage.cards.p.PriceOfProgress.class));
         cards.add(new SetCardInfo("Prison Term", "A13", Rarity.UNCOMMON, mage.cards.p.PrisonTerm.class));
         cards.add(new SetCardInfo("Putrefy", "A102", Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
-        cards.add(new SetCardInfo("Pyroblast", "B24", Rarity.COMMON, mage.cards.p.Pyroblast.class));
+        cards.add(new SetCardInfo("Pyroblast", "B24", Rarity.UNCOMMON, mage.cards.p.Pyroblast.class));
         cards.add(new SetCardInfo("Pyrostatic Pillar", "B25", Rarity.UNCOMMON, mage.cards.p.PyrostaticPillar.class));
         cards.add(new SetCardInfo("Questing Phelddagrif", "A103", Rarity.RARE, mage.cards.q.QuestingPhelddagrif.class));
         cards.add(new SetCardInfo("Rakdos Carnarium", "A133", Rarity.COMMON, mage.cards.r.RakdosCarnarium.class));
@@ -191,7 +191,7 @@ public class MagicOnlineThemeDecks extends ExpansionSet {
         cards.add(new SetCardInfo("Simic Signet", "A119", Rarity.COMMON, mage.cards.s.SimicSignet.class));
         cards.add(new SetCardInfo("Skullclamp", "A120", Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
         cards.add(new SetCardInfo("Sterling Grove", "A106", Rarity.UNCOMMON, mage.cards.s.SterlingGrove.class));
-        cards.add(new SetCardInfo("Stinkweed Imp", "A49", Rarity.UNCOMMON, mage.cards.s.StinkweedImp.class));
+        cards.add(new SetCardInfo("Stinkweed Imp", "A49", Rarity.COMMON, mage.cards.s.StinkweedImp.class));
         cards.add(new SetCardInfo("Stonecloaker", "A16", Rarity.UNCOMMON, mage.cards.s.Stonecloaker.class));
         cards.add(new SetCardInfo("Stoneforge Mystic", "B11", Rarity.RARE, mage.cards.s.StoneforgeMystic.class));
         cards.add(new SetCardInfo("Swamp", "A148", Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));

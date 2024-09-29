@@ -24,7 +24,7 @@ public final class MakindiOx extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Landfall - Whenever a land enters the battlefield under your control, tap target creature an opponent controls.
+        // Landfall - Whenever a land you control enters, tap target creature an opponent controls.
         Ability ability = new LandfallAbility(new TapTargetEffect());
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);

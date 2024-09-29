@@ -46,7 +46,7 @@ class FinalPartingEffect extends OneShotEffect {
         staticText = "Search your library for two cards. Put one into your hand and the other into your graveyard. Then shuffle";
     }
 
-    public FinalPartingEffect(final FinalPartingEffect effect) {
+    private FinalPartingEffect(final FinalPartingEffect effect) {
         super(effect);
     }
 

@@ -11,7 +11,6 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class PreventDamageToAttachedEffect extends PreventionEffectImpl {
@@ -28,7 +27,7 @@ public class PreventDamageToAttachedEffect extends PreventionEffectImpl {
         staticText = setText();
     }
 
-    public PreventDamageToAttachedEffect(final PreventDamageToAttachedEffect effect) {
+    protected PreventDamageToAttachedEffect(final PreventDamageToAttachedEffect effect) {
         super(effect);
         this.attachmentType = effect.attachmentType;
     }

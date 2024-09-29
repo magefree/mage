@@ -19,7 +19,7 @@ public class GainAllCreatureTypesAttachedEffect extends ContinuousEffectImpl {
         staticText = "and is every creature type";
     }
 
-    public GainAllCreatureTypesAttachedEffect(final GainAllCreatureTypesAttachedEffect effect) {
+    protected GainAllCreatureTypesAttachedEffect(final GainAllCreatureTypesAttachedEffect effect) {
         super(effect);
     }
 

@@ -1,8 +1,11 @@
 package mage.client;
 
 import mage.cards.decks.DeckCardLists;
+import static mage.cards.decks.DeckFormats.XMAGE;
 import mage.client.chat.LocalCommands;
+import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.preference.MagePreferences;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.game.match.MatchOptions;
@@ -16,13 +19,19 @@ import mage.remote.SessionImpl;
 import mage.view.*;
 import org.apache.log4j.Logger;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Created by IGOUDT on 15-9-2016.
+ * Network: client side session
+ *
+ * Only one session/server per GUI's client supports
+ *
+ * @author IGOUDT
  */
 public final class SessionHandler {
-
 
     private static final Logger logger = Logger.getLogger(SessionHandler.class);
 
@@ -33,7 +42,6 @@ public final class SessionHandler {
     }
 
     public static void startSession(MageFrame mageFrame) {
-
         session = new SessionImpl(mageFrame);
         session.setJsonLogActive("true".equals(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_JSON_GAME_LOG_AUTO_SAVE, "true")));
     }
@@ -56,10 +64,22 @@ public final class SessionHandler {
 
     public static boolean connect(Connection connection) {
         lastConnectError = "";
-        if (session.connect(connection)) {
+
+        // restore last used session
+        String restoreSessionId = MagePreferences.findRestoreSession(connection.getHost(), connection.getUsername());
+        if (!restoreSessionId.isEmpty()) {
+            logger.info("Connect: trying to restore old session for user " + connection.getUsername());
+            session.setRestoreSessionId(restoreSessionId);
+        }
+
+        // connect
+        if (session.connectStart(connection)) {
+            // save current session for restore
+            MagePreferences.saveRestoreSession(connection.getHost(), connection.getUsername(), getSessionId());
             return true;
         } else {
             lastConnectError = session.getLastError();
+            disconnect(false, true);
             return false;
         }
     }
@@ -69,15 +89,23 @@ public final class SessionHandler {
     }
 
     public static boolean stopConnecting() {
-        return session.stopConnecting();
+        return session.connectAbort();
     }
 
-    public static void disconnect(boolean showmessage) {
-        session.disconnect(showmessage);
+    public static void disconnect(boolean askForReconnect, boolean keepMySessionActive) {
+        if (!keepMySessionActive) {
+            String serverName = session.getServerHost();
+            String userName = session.getUserName();
+            if (!serverName.isEmpty() && !userName.isEmpty()) {
+                MagePreferences.saveRestoreSession(serverName, userName, "");
+            }
+        }
+
+        session.connectStop(askForReconnect, keepMySessionActive);
     }
 
-    public static void sendPlayerAction(PlayerAction playerAction, UUID gameId, Object relatedUserId) {
-        session.sendPlayerAction(playerAction, gameId, relatedUserId);
+    public static void sendPlayerAction(PlayerAction playerAction, UUID gameId, Object data) {
+        session.sendPlayerAction(playerAction, gameId, data);
     }
 
     public static void quitTournament(UUID tournamentId) {
@@ -191,7 +219,6 @@ public final class SessionHandler {
             logger.info(e);
             return null;
         }
-
     }
 
     public static String getUserName() {
@@ -218,8 +245,8 @@ public final class SessionHandler {
         return session.isTestMode();
     }
 
-    public static void cheat(UUID gameId, UUID playerId, DeckCardLists deckCardLists) {
-        session.cheat(gameId, playerId, deckCardLists);
+    public static void cheatShow(UUID gameId, UUID playerId) {
+        session.cheatShow(gameId, playerId);
     }
 
     public static String getSessionId() {
@@ -230,8 +257,27 @@ public final class SessionHandler {
         return session.getTournamentTypes();
     }
 
-    public static boolean submitDeck(UUID tableId, DeckCardLists deckCardLists) {
-        return session.submitDeck(tableId, deckCardLists);
+    private static void autoSaveLimitedDeck(DeckCardLists deckList) {
+        String autoSave = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_LIMITED_DECK_AUTO_SAVE, "true");
+        if(autoSave.equals("true")){
+            // Log the submitted deck in the log folder.
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
+            String logFilename = sdf.format(new Date()) + "_limited" + ".dck";
+            try {
+                XMAGE.getExporter().writeDeck(new File("gamelogs"), logFilename, deckList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static boolean submitDeck(DeckEditorMode mode, UUID tableId, DeckCardLists deckCardLists) {
+        boolean success = session.submitDeck(tableId, deckCardLists);
+        if(DeckEditorMode.LIMITED_BUILDING.equals(mode)) {
+            // AutoSaving is done after submitting, to not let the server wait.
+            autoSaveLimitedDeck(deckCardLists);
+        }
+        return success;
     }
 
     public static String[] getDeckTypes() {
@@ -273,7 +319,7 @@ public final class SessionHandler {
     public static void sendCardMark(UUID draftId, UUID id) {
         session.sendCardMark(draftId, id);
     }
-    
+
     public static void setBoosterLoaded(UUID draftId) {
         session.setBoosterLoaded(draftId);
     }
@@ -350,14 +396,14 @@ public final class SessionHandler {
     }
 
     public static boolean emailAuthToken(Connection connection) {
-        return session.emailAuthToken(connection);
+        return session.sendAuthSendTokenToEmail(connection);
     }
 
     public static boolean resetPassword(Connection connection) {
-        return session.resetPassword(connection);
+        return session.sendAuthResetPassword(connection);
     }
 
     public static boolean register(Connection connection) {
-        return session.register(connection);
+        return session.sendAuthRegister(connection);
     }
 }

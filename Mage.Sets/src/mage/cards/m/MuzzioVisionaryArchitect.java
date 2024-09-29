@@ -54,12 +54,12 @@ public final class MuzzioVisionaryArchitect extends CardImpl {
 
 class MuzzioVisionaryArchitectEffect extends OneShotEffect {
 
-    public MuzzioVisionaryArchitectEffect() {
+    MuzzioVisionaryArchitectEffect() {
         super(Outcome.Benefit);
         this.staticText = "look at the top X cards of your library, where X is the highest mana value among artifacts you control. You may put an artifact card from among them onto the battlefield. Put the rest on the bottom of your library in any order";
     }
 
-    public MuzzioVisionaryArchitectEffect(final MuzzioVisionaryArchitectEffect effect) {
+    private MuzzioVisionaryArchitectEffect(final MuzzioVisionaryArchitectEffect effect) {
         super(effect);
     }
 

@@ -1,6 +1,5 @@
 package org.mage.test.cards.single.c19;
 
-import java.io.FileNotFoundException;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
@@ -12,14 +11,15 @@ import mage.game.mulligan.MulliganType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestMultiPlayerBase;
 
+import java.io.FileNotFoundException;
+
 /**
- *
  * @author azra1l <algee2005@gmail.com>
  */
 public class AeonEngineTest extends CardTestMultiPlayerBase {
     @Override
     protected Game createNewGameAndPlayers() throws GameException {
-        Game game = new FreeForAll(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20);
+        Game game = new FreeForAll(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7);
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, "PlayerA");
         playerB = createPlayer(game, "PlayerB");
@@ -27,7 +27,7 @@ public class AeonEngineTest extends CardTestMultiPlayerBase {
         playerD = createPlayer(game, "PlayerD");
         return game;
     }
-    
+
     @Test
     public void testEnterTappedNormalTurnOrder() {
         // Aeon Engine - Artefact - {5}
@@ -47,7 +47,7 @@ public class AeonEngineTest extends CardTestMultiPlayerBase {
 
         //check if aeon engine is tapped
         assertTapped("Aeon Engine", true);
-    
+
         //check if turn was passed to correct player - should be D
         assertActivePlayer(playerD);
         assertLife(playerA, 17);
@@ -82,7 +82,7 @@ public class AeonEngineTest extends CardTestMultiPlayerBase {
 
         //check if aeon engine has been exiled
         assertExileCount(playerA, "Aeon Engine", 1);
-                
+
         //check if turn was passed to correct player each turn - should be B
         assertActivePlayer(playerB);
         assertLife(playerA, 8);
@@ -93,7 +93,7 @@ public class AeonEngineTest extends CardTestMultiPlayerBase {
         assertGraveyardCount(playerC, "Agonizing Syphon", 1);
         assertGraveyardCount(playerD, "Agonizing Syphon", 1);
     }
-    
+
     @Test
     public void testExileCostReversedTurnOrderDouble() throws GameException, FileNotFoundException {
         // Aeon Engine - Artefact - {5}
@@ -119,7 +119,7 @@ public class AeonEngineTest extends CardTestMultiPlayerBase {
         castSpell(7, PhaseStep.PRECOMBAT_MAIN, playerC, "Agonizing Syphon", playerA);
         activateAbility(8, PhaseStep.PRECOMBAT_MAIN, playerD, "{T}, Exile {this}:");
         castSpell(9, PhaseStep.PRECOMBAT_MAIN, playerC, "Agonizing Syphon", playerA);
-        
+
         setStrictChooseMode(true);
         setStopAt(9, PhaseStep.END_TURN);
         execute();
@@ -127,7 +127,7 @@ public class AeonEngineTest extends CardTestMultiPlayerBase {
         //check if aeon engine's have been exiled
         assertExileCount(playerA, "Aeon Engine", 1);
         assertExileCount(playerD, "Aeon Engine", 1);
-                
+
         //check if turn was passed to correct player each turn - should be C
         assertActivePlayer(playerC);
         assertLife(playerA, 5);

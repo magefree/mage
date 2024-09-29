@@ -21,7 +21,7 @@ public final class GrandPrixPromos extends ExpansionSet {
         this.hasBoosters = false;
         this.hasBasicLands = true;
 
-        cards.add(new SetCardInfo("All Is Dust", "2013b", Rarity.RARE, mage.cards.a.AllIsDust.class));
+        cards.add(new SetCardInfo("All Is Dust", "2013b", Rarity.MYTHIC, mage.cards.a.AllIsDust.class));
         cards.add(new SetCardInfo("Batterskull", 2014, Rarity.MYTHIC, mage.cards.b.Batterskull.class));
         cards.add(new SetCardInfo("Call of the Herd", 2008, Rarity.RARE, mage.cards.c.CallOfTheHerd.class));
         cards.add(new SetCardInfo("Chrome Mox", 2009, Rarity.RARE, mage.cards.c.ChromeMox.class));

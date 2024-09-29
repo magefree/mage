@@ -31,7 +31,7 @@ public final class AshlingsPrerogative extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
 
         // As Ashling's Prerogative enters the battlefield, choose odd or even.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Odd or even?", "Odd", "Even"), null, "As {this} enters the battlefield, choose odd or even. <i>(Zero is even.)</i>", ""));
+        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Odd or even?", "Odd", "Even"), null, "As {this} enters, choose odd or even. <i>(Zero is even.)</i>", ""));
 
         // Each creature with converted mana cost of the chosen value has haste.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AshlingsPrerogativeCorrectOddityEffect()));
@@ -61,7 +61,7 @@ class AshlingsPrerogativeIncorrectOddityEffect extends PermanentsEnterBattlefiel
         staticText = "Each creature without mana value of the chosen quality enters the battlefield tapped.";
     }
     
-    public AshlingsPrerogativeIncorrectOddityEffect(final AshlingsPrerogativeIncorrectOddityEffect effect) {
+    private AshlingsPrerogativeIncorrectOddityEffect(final AshlingsPrerogativeIncorrectOddityEffect effect) {
         super(effect);   
     }
 
@@ -95,7 +95,7 @@ class AshlingsPrerogativeCorrectOddityEffect extends GainAbilityAllEffect {
         super(HasteAbility.getInstance(), Duration.WhileOnBattlefield, creaturefilter);
         staticText = "Each creature with mana value of the chosen quality has haste.";
     }
-    public AshlingsPrerogativeCorrectOddityEffect(final AshlingsPrerogativeCorrectOddityEffect effect) {
+    private AshlingsPrerogativeCorrectOddityEffect(final AshlingsPrerogativeCorrectOddityEffect effect) {
         super(effect);   
     }
 

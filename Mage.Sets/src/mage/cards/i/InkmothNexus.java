@@ -37,7 +37,7 @@ public final class InkmothNexus extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1)));
     }
 
-    public InkmothNexus (final InkmothNexus card) {
+    private InkmothNexus(final InkmothNexus card) {
         super(card);
     }
 
@@ -59,7 +59,7 @@ class InkmothNexusToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(InfectAbility.getInstance());
     }
-    public InkmothNexusToken(final InkmothNexusToken token) {
+    private InkmothNexusToken(final InkmothNexusToken token) {
         super(token);
     }
 

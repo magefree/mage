@@ -35,7 +35,7 @@ public final class FlametongueYearling extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Multikicker {2}
-        this.addAbility(new MultikickerAbility(new GenericManaCost(2)));
+        this.addAbility(new MultikickerAbility("{2}"));
 
         // Flametongue Yearling enters the battlefield with a +1/+1 counter on it for each time it was kicked.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(

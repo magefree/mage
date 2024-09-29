@@ -9,16 +9,17 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.watchers.common.SpellsCastWatcher;
 
 import java.util.UUID;
-import mage.filter.FilterCard;
-import mage.game.stack.Spell;
 
 /**
- * @author TheElk801
+ * @author TheElk801, Susucr
  */
 public final class SeeTheTruth extends CardImpl {
 
@@ -65,9 +66,13 @@ class SeeTheTruthEffect extends OneShotEffect {
         if (player == null || sourceSpell == null) {
             return false;
         }
+
+        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
+        boolean wasCast = watcher != null && watcher.getAllSpellsCastThisTurn().anyMatch(s -> s.getId().equals(source.getId()));
+
         Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 3));
         if (!cards.isEmpty()) {
-            if (sourceSpell.isCopy() || Zone.HAND.equals(sourceSpell.getFromZone())) { // A copied spell was NOT cast at all
+            if (!wasCast || Zone.HAND.equals(sourceSpell.getFromZone())) {
                 TargetCardInLibrary target = new TargetCardInLibrary(new FilterCard("card to put into your hand"));
                 player.chooseTarget(outcome, cards, target, source, game);
                 cards.removeIf(target.getFirstTarget()::equals);

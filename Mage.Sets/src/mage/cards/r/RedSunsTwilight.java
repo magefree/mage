@@ -14,8 +14,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 import mage.target.targetpointer.FixedTargets;
+import mage.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +33,8 @@ public class RedSunsTwilight extends CardImpl {
         // Destroy up to X target artifacts.
         // If X is 5 or more, for each artifact destroyed this way, create a token that's a copy of it.
         // Those tokens gain haste. Exile them at the beginning of the next end step.
-        this.getSpellAbility().addTarget(new TargetArtifactPermanent());
-        this.getSpellAbility().setTargetAdjuster(RedSunsTwilightAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetArtifactPermanent(0, 1));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addEffect(new RedSunsTwilightEffect());
     }
 
@@ -44,18 +45,6 @@ public class RedSunsTwilight extends CardImpl {
     @Override
     public RedSunsTwilight copy() {
         return new RedSunsTwilight(this);
-    }
-}
-
-enum RedSunsTwilightAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int xValue = ability.getManaCostsToPay().getX();
-        // Select up to X artifacts
-        ability.addTarget(new TargetArtifactPermanent(0, xValue));
     }
 }
 
@@ -79,18 +68,18 @@ class RedSunsTwilightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
             return false;
         }
         // Try to destroy the artifacts
         List<Permanent> destroyedArtifacts = new ArrayList<>();
-        for (UUID targetID : this.targetPointer.getTargets(game, source)) {
+        for (UUID targetID : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetID);
             if (permanent != null) {
                 if (permanent.destroy(source, game, false)) {
-                    game.getState().processAction(game);
+                    game.processAction();
                     // Note which were destroyed
                     destroyedArtifacts.add(permanent);
                 }

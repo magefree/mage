@@ -40,11 +40,11 @@ public final class StainTheMind extends CardImpl {
 
 class StainTheMindEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
-    public StainTheMindEffect() {
+    StainTheMindEffect() {
         super(true, "target player's", "any number of cards with that name");
     }
 
-    public StainTheMindEffect(final StainTheMindEffect effect) {
+    private StainTheMindEffect(final StainTheMindEffect effect) {
         super(effect);
     }
 
@@ -54,7 +54,7 @@ class StainTheMindEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
         if (cardName == null) {
             return false;
         }
-        return super.applySearchAndExile(game, source, cardName, targetPointer.getFirst(game, source));
+        return super.applySearchAndExile(game, source, cardName, getTargetPointer().getFirst(game, source));
     }
 
     @Override

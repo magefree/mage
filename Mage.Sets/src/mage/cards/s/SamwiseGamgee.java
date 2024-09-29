@@ -48,13 +48,13 @@ public final class SamwiseGamgee extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another nontoken creature enters the battlefield under your control, create a Food token.
+        // Whenever another nontoken creature you control enters, create a Food token.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new CreateTokenEffect(new FoodToken()), filter));
 
         // Sacrifice three Foods: Return target historic card from your graveyard to your hand.
         Ability ability = new SimpleActivatedAbility(
                 new ReturnFromGraveyardToHandTargetEffect(),
-                new SacrificeTargetCost(new TargetControlledPermanent(3, filter2))
+                new SacrificeTargetCost(3, filter2)
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter3));
         this.addAbility(ability);

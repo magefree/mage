@@ -11,9 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterArtifactSpell;
 import mage.game.permanent.token.InsectToken;
 
 import java.util.UUID;
@@ -24,7 +23,6 @@ import java.util.UUID;
 public final class InfestedRoothold extends CardImpl {
 
     private static final FilterCard filter = new FilterArtifactCard("artifacts");
-    private static final FilterSpell filter2 = new FilterArtifactSpell("an artifact spell");
 
     public InfestedRoothold(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
@@ -41,7 +39,7 @@ public final class InfestedRoothold extends CardImpl {
 
         // Whenever an opponent casts an artifact spell, you may create a 1/1 green Insect creature token.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
-                new CreateTokenEffect(new InsectToken()), filter2, true)
+                new CreateTokenEffect(new InsectToken()), StaticFilters.FILTER_SPELL_AN_ARTIFACT, true)
         );
 
     }

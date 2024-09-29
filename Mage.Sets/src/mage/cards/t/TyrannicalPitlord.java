@@ -62,7 +62,7 @@ public final class TyrannicalPitlord extends CardImpl {
 
 class TyrannicalPitlordBoostEffect extends ContinuousEffectImpl {
 
-    public TyrannicalPitlordBoostEffect() {
+    TyrannicalPitlordBoostEffect() {
         super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.staticText = "the chosen creature gets +3/+3";
     }
@@ -94,7 +94,7 @@ class TyrannicalPitlordBoostEffect extends ContinuousEffectImpl {
 
 class TyrannicalPitlordGainFlyingEffect extends ContinuousEffectImpl {
 
-    public TyrannicalPitlordGainFlyingEffect() {
+    TyrannicalPitlordGainFlyingEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "and has flying";
     }
@@ -125,7 +125,7 @@ class TyrannicalPitlordGainFlyingEffect extends ContinuousEffectImpl {
 
 class TyrannicalPitlordSacrificeEffect extends OneShotEffect {
 
-    public TyrannicalPitlordSacrificeEffect() {
+    TyrannicalPitlordSacrificeEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "sacrifice the chosen creature";
     }

@@ -96,11 +96,11 @@ class YedoraGraveGardenerEffect extends OneShotEffect {
 
 class YedoraGraveGardenerContinuousEffect extends ContinuousEffectImpl {
 
-    public YedoraGraveGardenerContinuousEffect() {
+    YedoraGraveGardenerContinuousEffect() {
         super(Duration.Custom, Layer.CopyEffects_1, SubLayer.FaceDownEffects_1b, Outcome.Neutral);
     }
 
-    public YedoraGraveGardenerContinuousEffect(final YedoraGraveGardenerContinuousEffect effect) {
+    private YedoraGraveGardenerContinuousEffect(final YedoraGraveGardenerContinuousEffect effect) {
         super(effect);
     }
 
@@ -111,7 +111,7 @@ class YedoraGraveGardenerContinuousEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent target = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (target == null || !target.isFaceDown(game)) {
             discard();
             return false;

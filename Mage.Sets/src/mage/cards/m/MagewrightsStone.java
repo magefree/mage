@@ -11,7 +11,6 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
@@ -64,10 +63,8 @@ class HasAbilityWithTapSymbolPredicate implements Predicate<MageObject> {
         }
 
         for (Ability ability : abilities) {
-            if ((ability.getAbilityType() == AbilityType.ACTIVATED || ability.getAbilityType() == AbilityType.MANA) && !ability.getCosts().isEmpty()) {
-                if (ability.hasTapCost()) {
-                        return true;
-                }
+            if (ability.isActivatedAbility() && ability.hasTapCost()) {
+                return true;
             }
         }
         return false;

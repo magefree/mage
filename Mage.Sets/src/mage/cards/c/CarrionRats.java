@@ -49,12 +49,12 @@ public final class CarrionRats extends CardImpl {
 
 class CarrionRatsEffect extends OneShotEffect {
 
-    public CarrionRatsEffect() {
+    CarrionRatsEffect() {
         super(Outcome.Neutral);
         this.staticText = "any player may exile a card from their graveyard. If a player does, {this} assigns no combat damage this turn";
     }
 
-    public CarrionRatsEffect(final CarrionRatsEffect effect) {
+    private CarrionRatsEffect(final CarrionRatsEffect effect) {
         super(effect);
     }
 

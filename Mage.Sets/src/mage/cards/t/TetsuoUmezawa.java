@@ -67,12 +67,12 @@ public final class TetsuoUmezawa extends CardImpl {
 
 class TetsuoUmezawaEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public TetsuoUmezawaEffect() {
+    TetsuoUmezawaEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "{this} can't be the target of Aura spells";
     }
 
-    public TetsuoUmezawaEffect(final TetsuoUmezawaEffect effect) {
+    private TetsuoUmezawaEffect(final TetsuoUmezawaEffect effect) {
         super(effect);
     }
 
@@ -84,11 +84,6 @@ class TetsuoUmezawaEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.TARGET;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

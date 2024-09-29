@@ -42,7 +42,7 @@ public final class LoxodonLifechanter extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(
                 LoxodonLifechanterValue2.instance,
                 LoxodonLifechanterValue2.instance,
-                Duration.EndOfTurn, true
+                Duration.EndOfTurn
         ), new ManaCostsImpl<>("{5}{W}")));
     }
 

@@ -60,7 +60,7 @@ public final class InstrumentOfTheBards extends CardImpl {
 
 class InstrumentOfTheBardsEffect extends OneShotEffect {
 
-    public InstrumentOfTheBardsEffect() {
+    InstrumentOfTheBardsEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Search your library for a creature card with mana value equal to the number of harmony " +
                 "counters on {this}, reveal it, and put it into your hand. " +

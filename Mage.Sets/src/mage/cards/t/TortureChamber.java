@@ -66,7 +66,7 @@ class TortureChamberEffect1 extends OneShotEffect {
         this.staticText = "{this} deals damage to you equal to the number of pain counters on it";
     }
 
-    public TortureChamberEffect1(final TortureChamberEffect1 effect) {
+    private TortureChamberEffect1(final TortureChamberEffect1 effect) {
         super(effect);
     }
 
@@ -95,7 +95,7 @@ class TortureChamberEffect2 extends OneShotEffect {
         this.staticText = "{this} deals damage to target creature equal to the number of pain counters removed this way";
     }
 
-    public TortureChamberEffect2(final TortureChamberEffect2 effect) {
+    private TortureChamberEffect2(final TortureChamberEffect2 effect) {
         super(effect);
     }
 

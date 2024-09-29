@@ -113,7 +113,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
         }
     }
 
-    public UrzaAcademyHeadmasterRandomEffect(final UrzaAcademyHeadmasterRandomEffect effect) {
+    private UrzaAcademyHeadmasterRandomEffect(final UrzaAcademyHeadmasterRandomEffect effect) {
         super(effect);
         this.selection = effect.selection;
         this.setInfo = effect.setInfo.copy();
@@ -268,7 +268,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 8: // JACE MEMORY ADEPT 2
                                 sb.append("Target player mills ten cards.");
-                                effects.add(new PutLibraryIntoGraveTargetEffect(10));
+                                effects.add(new MillCardsTargetEffect(10));
                                 target = new TargetPlayer();
                                 break;
                             case 9: // JACE ARCHITECT OF THOUGHT 2
@@ -359,7 +359,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                             case 6: // CHANDRA NALAAR 3
                                 sb.append("Urza deals 10 damage to target player and each creature they control.");
                                 effects.add(new DamageTargetEffect(10));
-                                effects.add(new DamageAllControlledTargetEffect(10, new FilterCreaturePermanent()));
+                                effects.add(new DamageAllControlledTargetEffect(10));
                                 target = new TargetPlayerOrPlaneswalker();
                                 break;
                             case 7: // DOMRI RADE 3
@@ -389,7 +389,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 effects.add(new GetEmblemEffect(new VenserTheSojournerEmblem()));
                                 break;
                             case 13: // KIORA MASTER OF THE DEPTHS 3
-                                sb.append("You get an emblem with “Whenever a creature enters the battlefield under your control, you may have it fight target creature.” Then create three 8/8 blue Octopus creature tokens.");
+                                sb.append("You get an emblem with “Whenever a creature you control enters, you may have it fight target creature.” Then create three 8/8 blue Octopus creature tokens.");
                                 effects.add(new CreateTokenEffect(new OctopusToken(), 3));
                                 effects.add(new GetEmblemEffect(new KioraMasterOfTheDepthsEmblem()));
                                 break;
@@ -443,7 +443,7 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                     }
                     source.addTarget(target);
                 }
-                if (target == null || target.isChosen()) {
+                if (target == null || target.isChosen(game)) {
                     for (Effect effect : effects) {
                         if (effect instanceof ContinuousEffect) {
                             game.addEffect((ContinuousEffect) effect, source);
@@ -468,11 +468,11 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
 
 class UrzaAcademyHeadmasterManaEffect extends OneShotEffect {
 
-    public UrzaAcademyHeadmasterManaEffect() {
+    UrzaAcademyHeadmasterManaEffect() {
         super(Outcome.PutManaInPool);
     }
 
-    public UrzaAcademyHeadmasterManaEffect(final UrzaAcademyHeadmasterManaEffect effect) {
+    private UrzaAcademyHeadmasterManaEffect(final UrzaAcademyHeadmasterManaEffect effect) {
         super(effect);
     }
 
@@ -486,7 +486,7 @@ class UrzaAcademyHeadmasterManaEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             int x = game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game);
-            Choice manaChoice = new ChoiceImpl();
+            Choice manaChoice = new ChoiceImpl(false);
             Set<String> choices = new LinkedHashSet<>();
             choices.add("White");
             choices.add("Blue");
@@ -531,12 +531,12 @@ class UrzaAcademyHeadmasterManaEffect extends OneShotEffect {
 
 class UrzaAcademyHeadmasterBrainstormEffect extends OneShotEffect {
 
-    public UrzaAcademyHeadmasterBrainstormEffect() {
+    UrzaAcademyHeadmasterBrainstormEffect() {
         super(Outcome.DrawCard);
         staticText = "draw three cards, then put a card from your hand on top of your library";
     }
 
-    public UrzaAcademyHeadmasterBrainstormEffect(final UrzaAcademyHeadmasterBrainstormEffect effect) {
+    private UrzaAcademyHeadmasterBrainstormEffect(final UrzaAcademyHeadmasterBrainstormEffect effect) {
         super(effect);
     }
 

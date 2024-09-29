@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -7,7 +6,6 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -55,12 +53,12 @@ class WojekEmbermageEffect extends OneShotEffect {
 
     private static final FilterCreaturePermanent FILTER = new FilterCreaturePermanent();
 
-    public WojekEmbermageEffect() {
+    WojekEmbermageEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals 1 damage to target creature and each other creature that shares a color with it";
     }
 
-    public WojekEmbermageEffect(final WojekEmbermageEffect effect) {
+    private WojekEmbermageEffect(final WojekEmbermageEffect effect) {
         super(effect);
     }
 
@@ -80,7 +78,7 @@ class WojekEmbermageEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public WojekEmbermageEffect copy() {
         return new WojekEmbermageEffect(this);
     }
 }

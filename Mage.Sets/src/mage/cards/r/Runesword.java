@@ -68,12 +68,12 @@ public final class Runesword extends CardImpl {
 
 class RuneswordCreateTriggeredAbilityEffect extends OneShotEffect {
 
-    public RuneswordCreateTriggeredAbilityEffect() {
+    RuneswordCreateTriggeredAbilityEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "When that creature leaves the battlefield this turn, sacrifice {this}";
     }
 
-    public RuneswordCreateTriggeredAbilityEffect(final RuneswordCreateTriggeredAbilityEffect effect) {
+    private RuneswordCreateTriggeredAbilityEffect(final RuneswordCreateTriggeredAbilityEffect effect) {
         super(effect);
     }
 
@@ -109,7 +109,7 @@ class RuneswordCantBeRegeneratedEffect extends ContinuousRuleModifyingEffectImpl
         this.staticText = "If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn";
     }
 
-    public RuneswordCantBeRegeneratedEffect(final RuneswordCantBeRegeneratedEffect effect) {
+    private RuneswordCantBeRegeneratedEffect(final RuneswordCantBeRegeneratedEffect effect) {
         super(effect);
         targetCreatureId = effect.targetCreatureId;
     }
@@ -120,12 +120,8 @@ class RuneswordCantBeRegeneratedEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     public void init(Ability source, Game game) {
+        super.init(source, game);
         targetCreatureId = getTargetPointer().getFirst(game, source);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

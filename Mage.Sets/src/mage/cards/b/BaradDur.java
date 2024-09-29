@@ -2,25 +2,22 @@ package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
 import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.keyword.AmassEffect;
-import mage.abilities.hint.ConditionHint;
-import mage.abilities.hint.Hint;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.Game;
 
 import java.util.UUID;
 
@@ -29,15 +26,13 @@ import java.util.UUID;
  */
 public final class BaradDur extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a legendary creature");
 
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0);
-    private static final Hint hint = new ConditionHint(condition, "You control a legendary creature");
+    private static final YouControlPermanentCondition condition = new YouControlPermanentCondition(filter);
 
     public BaradDur(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -45,17 +40,17 @@ public final class BaradDur extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Barad-dur enters the battlefield tapped unless you control a legendary creature.
-        this.addAbility(new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(new TapSourceEffect(), condition, ""),
-                "tapped unless you control a legendary creature"
-        ).addHint(hint));
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
 
         // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());
 
         // {X}{X}{B}, {T}: Amass Orcs X. Activate only if a creature died this turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, new BaradDurEffect(), new ManaCostsImpl<>("{X}{X}{B}"), MorbidCondition.instance
+                Zone.BATTLEFIELD,
+                new AmassEffect(GetXValue.instance, SubType.ORC, false),
+                new ManaCostsImpl<>("{X}{X}{B}"),
+                MorbidCondition.instance
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -68,27 +63,5 @@ public final class BaradDur extends CardImpl {
     @Override
     public BaradDur copy() {
         return new BaradDur(this);
-    }
-}
-
-class BaradDurEffect extends OneShotEffect {
-
-    BaradDurEffect() {
-        super(Outcome.Benefit);
-        staticText = "amass Orcs X";
-    }
-
-    private BaradDurEffect(final BaradDurEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BaradDurEffect copy() {
-        return new BaradDurEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return AmassEffect.doAmass(source.getManaCostsToPay().getX(), SubType.ORC, game, source) != null;
     }
 }

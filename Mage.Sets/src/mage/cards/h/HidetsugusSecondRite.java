@@ -38,12 +38,12 @@ public final class HidetsugusSecondRite extends CardImpl {
 
 class HidetsugusSecondRiteEffect extends OneShotEffect {
 
-    public HidetsugusSecondRiteEffect() {
+    HidetsugusSecondRiteEffect() {
         super(Outcome.Damage);
-        this.staticText = "If target player has exactly 10 life, Hidetsugu's Second Rite deals 10 damage to that player";
+        this.staticText = "If target player has exactly 10 life, {this} deals 10 damage to that player";
     }
 
-    public HidetsugusSecondRiteEffect(final HidetsugusSecondRiteEffect effect) {
+    private HidetsugusSecondRiteEffect(final HidetsugusSecondRiteEffect effect) {
         super(effect);
     }
 
@@ -54,7 +54,7 @@ class HidetsugusSecondRiteEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             if (targetPlayer.getLife() == 10) {
                 targetPlayer.damage(10, source.getSourceId(), source, game);

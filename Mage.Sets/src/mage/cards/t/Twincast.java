@@ -1,6 +1,6 @@
 package mage.cards.t;
 
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,7 +18,7 @@ public final class Twincast extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{U}{U}");
 
         // Copy target instant or sorcery spell. You may choose new targets for the copy.
-        this.getSpellAbility().addEffect(new CopyTargetSpellEffect());
+        this.getSpellAbility().addEffect(new CopyTargetStackObjectEffect());
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));
     }
 

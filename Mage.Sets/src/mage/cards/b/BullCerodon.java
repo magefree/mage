@@ -28,7 +28,7 @@ public final class BullCerodon extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public BullCerodon (final BullCerodon card) {
+    private BullCerodon(final BullCerodon card) {
         super(card);
     }
 

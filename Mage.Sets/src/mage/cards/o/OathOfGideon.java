@@ -51,7 +51,7 @@ class OathOfGideonReplacementEffect extends ReplacementEffectImpl {
         staticText = "Each planeswalker you control enters the battlefield with an additional loyalty counter on it";
     }
 
-    OathOfGideonReplacementEffect(OathOfGideonReplacementEffect effect) {
+    private OathOfGideonReplacementEffect(final OathOfGideonReplacementEffect effect) {
         super(effect);
     }
 
@@ -66,11 +66,6 @@ class OathOfGideonReplacementEffect extends ReplacementEffectImpl {
         return creature != null && creature.isControlledBy(source.getControllerId())
                 && creature.isPlaneswalker(game)
                 && !event.getTargetId().equals(source.getSourceId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

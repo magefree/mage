@@ -40,7 +40,8 @@ public final class SpurnmageAdvocate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Return two target cards from an opponent's graveyard to their hand. Destroy target attacking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect()
+                .setText("return two target cards from an opponent's graveyard to their hand"), new TapSourceCost());
         ability.addTarget(new TargetCardInASingleGraveyard(2, 2, filter));
         Effect effect = new DestroyTargetEffect();
         effect.setTargetPointer(new SecondTargetPointer());

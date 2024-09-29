@@ -35,7 +35,7 @@ public final class GuiltyConscience extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature deals damage, Guilty Conscience deals that much damage to that creature.
-        this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new DamageAttachedEffect(SavedDamageValue.MUCH).setText("that much damage to that creature"), false));
+        this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new DamageAttachedEffect(SavedDamageValue.MUCH).setText("{this} deals that much damage to that creature"), false));
     }
 
     private GuiltyConscience(final GuiltyConscience card) {

@@ -1,19 +1,16 @@
-
 package mage.abilities.effects.common.continuous;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.Optional;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public class CantGainLifeAllEffect extends ContinuousEffectImpl {
@@ -35,7 +32,7 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
 
     }
 
-    public CantGainLifeAllEffect(final CantGainLifeAllEffect effect) {
+    protected CantGainLifeAllEffect(final CantGainLifeAllEffect effect) {
         super(effect);
         this.targetController = effect.targetController;
     }
@@ -48,41 +45,47 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            switch (targetController) {
-                case YOU:
-                    controller.setCanGainLife(false);
-                    break;
-                case NOT_YOU:
-                    for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                        Player player = game.getPlayer(playerId);
-                        if (player != null && !player.equals(controller)) {
-                            player.setCanGainLife(false);
-                        }
+        if (controller == null) {
+            return false;
+        }
+        switch (targetController) {
+            case YOU:
+                controller.setCanGainLife(false);
+                break;
+            case NOT_YOU:
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null && !player.equals(controller)) {
+                        player.setCanGainLife(false);
                     }
-                    break;
-                case OPPONENT:
-                    for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                        if (controller.hasOpponent(playerId, game)) {
-                            Player player = game.getPlayer(playerId);
-                            if (player != null) {
-                                player.setCanGainLife(false);
-                            }
-                        }
-                    }
-                    break;
-                case ANY:
-                    for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                }
+                break;
+            case OPPONENT:
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                    if (controller.hasOpponent(playerId, game)) {
                         Player player = game.getPlayer(playerId);
                         if (player != null) {
                             player.setCanGainLife(false);
                         }
                     }
-                    break;
-            }
-            return true;
+                }
+                break;
+            case ANY:
+                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        player.setCanGainLife(false);
+                    }
+                }
+                break;
+            case ENCHANTED:
+                Optional
+                        .ofNullable(source.getSourcePermanentIfItStillExists(game))
+                        .map(Permanent::getAttachedTo)
+                        .map(game::getPlayer)
+                        .ifPresent(player -> player.setCanGainLife(false));
         }
-        return false;
+        return true;
     }
 
     private String setText() {
@@ -100,6 +103,8 @@ public class CantGainLifeAllEffect extends ContinuousEffectImpl {
             case ANY:
                 sb.append("Players");
                 break;
+            case ENCHANTED:
+                sb.append("enchanted player");
         }
         sb.append(" can't gain life");
         if (!this.duration.toString().isEmpty()) {

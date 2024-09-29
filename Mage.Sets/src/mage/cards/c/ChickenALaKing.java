@@ -9,11 +9,10 @@ import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -28,7 +27,7 @@ import java.util.UUID;
  */
 public final class ChickenALaKing extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Bird you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Bird you control");
 
     static {
         filter.add(TappedPredicate.UNTAPPED);
@@ -47,7 +46,7 @@ public final class ChickenALaKing extends CardImpl {
         this.addAbility(new ChickenALaKingTriggeredAbility());
 
         // Tap an untapped Bird you control: Roll a six-sided die.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RollDiceEffect(null, Outcome.Benefit, 6), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RollDiceEffect(6), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
     }
 
     private ChickenALaKing(final ChickenALaKing card) {
@@ -72,7 +71,7 @@ class ChickenALaKingTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter));
     }
 
-    public ChickenALaKingTriggeredAbility(final ChickenALaKingTriggeredAbility ability) {
+    private ChickenALaKingTriggeredAbility(final ChickenALaKingTriggeredAbility ability) {
         super(ability);
     }
 
@@ -97,6 +96,6 @@ class ChickenALaKingTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a 6 is rolled on a six-sided die, put a +1/+1 counter on each Bird";
+        return "Whenever a 6 is rolled on a six-sided die, put a +1/+1 counter on each Bird.";
     }
 }

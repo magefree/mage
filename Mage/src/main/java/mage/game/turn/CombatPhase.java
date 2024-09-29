@@ -1,12 +1,9 @@
-
-
 package mage.game.turn;
 
 import mage.constants.TurnPhase;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class CombatPhase extends Phase {
@@ -19,12 +16,12 @@ public class CombatPhase extends Phase {
         this.steps.add(new BeginCombatStep());
         this.steps.add(new DeclareAttackersStep());
         this.steps.add(new DeclareBlockersStep());
-        this.steps.add(new FirstCombatDamageStep());
-        this.steps.add(new CombatDamageStep());
+        this.steps.add(new CombatDamageStep(true));
+        this.steps.add(new CombatDamageStep(false));
         this.steps.add(new EndOfCombatStep());
     }
 
-    public CombatPhase(final CombatPhase phase) {
+    protected CombatPhase(final CombatPhase phase) {
         super(phase);
     }
 

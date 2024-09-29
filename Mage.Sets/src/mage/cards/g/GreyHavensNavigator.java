@@ -3,6 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.keyword.ScryEffect;
+import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -22,6 +23,9 @@ public final class GreyHavensNavigator extends CardImpl {
         this.subtype.add(SubType.PILOT);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
+
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
 
         // When Grey Havens Navigator enters the battlefield, scry 1.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1, false)));

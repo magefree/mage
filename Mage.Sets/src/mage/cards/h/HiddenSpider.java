@@ -64,7 +64,7 @@ class HiddenSpiderToken extends TokenImpl {
         toughness = new MageInt(5);
         this.addAbility(ReachAbility.getInstance());
     }
-    public HiddenSpiderToken(final HiddenSpiderToken token) {
+    private HiddenSpiderToken(final HiddenSpiderToken token) {
         super(token);
     }
 

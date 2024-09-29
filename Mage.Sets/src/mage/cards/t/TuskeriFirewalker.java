@@ -3,8 +3,9 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.BoastAbility;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +26,7 @@ public final class TuskeriFirewalker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Boast — {1}: Exile the top card of your library. You may play that card this turn.
-        this.addAbility(new BoastAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(1), new GenericManaCost(1)));
+        this.addAbility(new BoastAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), new GenericManaCost(1)));
     }
 
     private TuskeriFirewalker(final TuskeriFirewalker card) {

@@ -26,7 +26,7 @@ public class LoseAbilityAttachedEffect extends ContinuousEffectImpl {
         setText();
     }
 
-    public LoseAbilityAttachedEffect(final LoseAbilityAttachedEffect effect) {
+    protected LoseAbilityAttachedEffect(final LoseAbilityAttachedEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         this.attachmentType = effect.attachmentType;

@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -24,9 +23,7 @@ public final class PoisonbellyOgre extends CardImpl {
     static {
         filter.add(AnotherPredicate.instance);
     }
-    
-    private static final String RULE = "Whenever another creature enters the battlefield, its controller loses 1 life.";
-    
+
     public PoisonbellyOgre(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{B}");
         this.subtype.add(SubType.OGRE);
@@ -35,8 +32,9 @@ public final class PoisonbellyOgre extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another creature enters the battlefield, its controller loses 1 life.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), filter, false, SetTargetPointer.PLAYER, RULE, false));
-        
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
+                new LoseLifeTargetEffect(1).setText("its controller loses 1 life"),
+                filter, false, SetTargetPointer.PLAYER));
     }
 
     private PoisonbellyOgre(final PoisonbellyOgre card) {

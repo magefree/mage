@@ -20,7 +20,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  */
 public final class OvergrownBattlement extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with defender you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control with defender");
 
     static {
         filter.add(new AbilityPredicate(DefenderAbility.class));

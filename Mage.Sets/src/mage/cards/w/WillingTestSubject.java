@@ -42,7 +42,7 @@ public final class WillingTestSubject extends CardImpl {
         this.addAbility(new WillingTestSubjectTriggeredAbility());
 
         // 6: Roll a six-sided die.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RollDiceEffect(null, 6), new GenericManaCost(6));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RollDiceEffect(6), new GenericManaCost(6));
         this.addAbility(ability);
     }
 
@@ -62,7 +62,7 @@ class WillingTestSubjectTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
     }
 
-    public WillingTestSubjectTriggeredAbility(final WillingTestSubjectTriggeredAbility ability) {
+    private WillingTestSubjectTriggeredAbility(final WillingTestSubjectTriggeredAbility ability) {
         super(ability);
     }
 
@@ -80,7 +80,7 @@ class WillingTestSubjectTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DieRolledEvent drEvent = (DieRolledEvent) event;
         // silver border card must look for "result" instead "natural result"
-        return this.isControlledBy(event.getPlayerId()) && drEvent.getResult() >= 4;
+        return this.isControlledBy(event.getTargetId()) && drEvent.getResult() >= 4;
     }
 
     @Override

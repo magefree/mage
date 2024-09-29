@@ -48,7 +48,7 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl {
         staticText = "Mountains you control have '{T}: This land deals 1 damage to any target.'";
     }
 
-    public KothOfTheHammerThirdEffect(final KothOfTheHammerThirdEffect effect) {
+    protected KothOfTheHammerThirdEffect(final KothOfTheHammerThirdEffect effect) {
         super(effect);
     }
 

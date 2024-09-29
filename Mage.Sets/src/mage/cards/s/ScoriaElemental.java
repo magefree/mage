@@ -23,7 +23,7 @@ public final class ScoriaElemental extends CardImpl {
         this.toughness = new MageInt(1);
     }
 
-    public ScoriaElemental (final ScoriaElemental card) {
+    private ScoriaElemental(final ScoriaElemental card) {
         super(card);
     }
 

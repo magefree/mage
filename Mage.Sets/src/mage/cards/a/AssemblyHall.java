@@ -51,14 +51,14 @@ public final class AssemblyHall extends CardImpl {
 
 class AssemblyHallEffect extends OneShotEffect {
 
-    public AssemblyHallEffect() {
+    AssemblyHallEffect() {
         super(Outcome.Benefit);
-        this.staticText = "reveal a creature card from your hand. "
+        this.staticText = "reveal a creature card in your hand. "
                 + "Search your library for a card with the same name as that card, "
-                + "reveal it, and put it into your hand. Then shuffle";
+                + "reveal it, put it into your hand, then shuffle";
     }
 
-    public AssemblyHallEffect(final AssemblyHallEffect effect) {
+    private AssemblyHallEffect(final AssemblyHallEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class AssemblyHallEffect extends OneShotEffect {
         }
         Card cardToReveal = null;
         Target target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (controller.chooseTarget(outcome, target, source, game)) {
             cardToReveal = game.getCard(target.getFirstTarget());
         }

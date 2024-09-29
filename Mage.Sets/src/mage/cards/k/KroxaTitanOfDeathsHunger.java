@@ -63,7 +63,7 @@ public final class KroxaTitanOfDeathsHunger extends CardImpl {
 class KroxaTitanOfDeathsHungerEntersEffect extends OneShotEffect {
 
     KroxaTitanOfDeathsHungerEntersEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Sacrifice);
         staticText = "sacrifice it unless it escaped";
     }
 

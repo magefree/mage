@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesSubtypeAllEffect;
 import mage.cards.CardImpl;
@@ -44,13 +43,13 @@ public final class Standardize extends CardImpl {
 
 class StandardizeEffect extends OneShotEffect {
 
-    public StandardizeEffect() {
+    StandardizeEffect() {
         super(Outcome.BoostCreature);
         staticText = "choose a creature type other than Wall. Each creature becomes that type until end of turn";
 
     }
 
-    public StandardizeEffect(final StandardizeEffect effect) {
+    private StandardizeEffect(final StandardizeEffect effect) {
         super(effect);
     }
 
@@ -60,14 +59,14 @@ class StandardizeEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source);
         String chosenType = "";
         if (player != null && sourceObject != null) {
-            Choice typeChoice = new ChoiceCreatureType(sourceObject);
+            Choice typeChoice = new ChoiceCreatureType(game, source);
             typeChoice.setMessage("Choose a creature type other than Wall");
-            typeChoice.getChoices().remove("Wall");
+            typeChoice.getKeyChoices().keySet().removeIf(c -> c.equals("Wall"));
             if (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
                 return false;
             }
-            game.informPlayers(sourceObject.getLogName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
-            chosenType = typeChoice.getChoice();
+            game.informPlayers(sourceObject.getLogName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoiceKey());
+            chosenType = typeChoice.getChoiceKey();
             if (chosenType != null && !chosenType.isEmpty()) {
                 // ADD TYPE TO TARGET
                 game.addEffect(new BecomesSubtypeAllEffect(
@@ -82,7 +81,7 @@ class StandardizeEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public StandardizeEffect copy() {
         return new StandardizeEffect(this);
     }
 }

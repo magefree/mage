@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.continuous.PlayAdditionalLandsControllerEffect;
@@ -35,7 +35,7 @@ public final class SwordOfForgeAndFrontier extends CardImpl {
                 "and has protection from red and from green"));
         this.addAbility(ability);
         // Whenever equipped creature deals combat damage to a player, exile the top two cards of your library. You may play those cards this turn. You may play an additional land this turn.
-        Ability ability2 = new DealsDamageToAPlayerAttachedTriggeredAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(2),"equipped creature", false);
+        Ability ability2 = new DealsDamageToAPlayerAttachedTriggeredAbility(new ExileTopXMayPlayUntilEffect(2, Duration.EndOfTurn),"equipped creature", false);
         ability2.addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
         this.addAbility(ability2);
 

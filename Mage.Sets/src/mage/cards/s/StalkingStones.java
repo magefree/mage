@@ -47,7 +47,7 @@ class StalkingStonesToken extends TokenImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
     }
-    public StalkingStonesToken(final StalkingStonesToken token) {
+    private StalkingStonesToken(final StalkingStonesToken token) {
         super(token);
     }
 

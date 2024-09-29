@@ -21,7 +21,7 @@ public class AttackIfAbleTargetRandomOpponentSourceEffect extends OneShotEffect 
         this.staticText = "choose an opponent at random. {this} attacks that player this combat if able";
     }
 
-    public AttackIfAbleTargetRandomOpponentSourceEffect(final AttackIfAbleTargetRandomOpponentSourceEffect effect) {
+    protected AttackIfAbleTargetRandomOpponentSourceEffect(final AttackIfAbleTargetRandomOpponentSourceEffect effect) {
         super(effect);
     }
 

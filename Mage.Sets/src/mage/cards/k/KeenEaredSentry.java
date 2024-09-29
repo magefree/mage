@@ -6,6 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.continuous.GainAbilityControllerEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +36,7 @@ public final class KeenEaredSentry extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControllerEffect(HexproofAbility.getInstance())));
 
         // Your opponents can't venture into the dungeon more than once each turn.
-        this.addAbility(new SimpleStaticAbility(new KeenEaredSentryEffect()), new KeenEaredSentryWatcher());
+        this.addAbility(new SimpleStaticAbility(new KeenEaredSentryEffect()).addHint(CurrentDungeonHint.instance), new KeenEaredSentryWatcher());
     }
 
     private KeenEaredSentry(final KeenEaredSentry card) {
@@ -82,11 +83,6 @@ class KeenEaredSentryEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         return game.getOpponents(source.getControllerId()).contains(event.getTargetId())
                 && KeenEaredSentryWatcher.checkPlayer(event.getTargetId(), game);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 }
 

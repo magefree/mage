@@ -64,7 +64,7 @@ class AtarkaWorldRenderEffect extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public AtarkaWorldRenderEffect(final AtarkaWorldRenderEffect ability) {
+    private AtarkaWorldRenderEffect(final AtarkaWorldRenderEffect ability) {
         super(ability);
     }
 

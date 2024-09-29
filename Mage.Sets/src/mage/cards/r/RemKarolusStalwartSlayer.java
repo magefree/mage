@@ -59,7 +59,7 @@ public final class RemKarolusStalwartSlayer extends CardImpl {
 
 class RemKarolusStalwartSlayerPreventionEffect extends PreventionEffectImpl {
 
-    public RemKarolusStalwartSlayerPreventionEffect() {
+    RemKarolusStalwartSlayerPreventionEffect() {
         super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false, false);
         staticText = "If a spell would deal damage to you or another permanent you control, prevent that damage";
     }
@@ -99,7 +99,7 @@ class RemKarolusStalwartSlayerPreventionEffect extends PreventionEffectImpl {
 
 class RemKarolusStalwartSlayerReplacementEffect extends ReplacementEffectImpl {
 
-    public RemKarolusStalwartSlayerReplacementEffect() {
+    RemKarolusStalwartSlayerReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If a spell would deal damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead";
     }

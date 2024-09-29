@@ -37,7 +37,7 @@ public class EternalizeAbility extends ActivatedAbilityImpl {
         this.timing = TimingRule.SORCERY;
     }
 
-    public EternalizeAbility(final EternalizeAbility ability) {
+    protected EternalizeAbility(final EternalizeAbility ability) {
         super(ability);
         this.rule = ability.rule;
     }
@@ -70,7 +70,7 @@ class EternalizeEffect extends OneShotEffect {
         super(Outcome.PutCreatureInPlay);
     }
 
-    public EternalizeEffect(final EternalizeEffect effect) {
+    protected EternalizeEffect(final EternalizeEffect effect) {
         super(effect);
     }
 

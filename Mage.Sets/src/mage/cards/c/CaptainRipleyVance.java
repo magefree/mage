@@ -34,7 +34,7 @@ public final class CaptainRipleyVance extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you cast your third spell each turn, put a +1/+1 counter on Captain Ripley Vance, then it deals damage equal to its power to any target.
-        this.addAbility(new CaptainRipleyVanceTriggeredAbility(), new SpellsCastWatcher());
+        this.addAbility(new CaptainRipleyVanceTriggeredAbility());
     }
 
     private CaptainRipleyVance(final CaptainRipleyVance card) {

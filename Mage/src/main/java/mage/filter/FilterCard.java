@@ -34,7 +34,7 @@ public class FilterCard extends FilterObject<Card> {
         super(name);
     }
 
-    public FilterCard(FilterCard filter) {
+    protected FilterCard(final FilterCard filter) {
         super(filter);
         this.extraPredicates.addAll(filter.extraPredicates);
     }
@@ -73,7 +73,9 @@ public class FilterCard extends FilterObject<Card> {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
 
+        // verify check
         checkPredicateIsSuitableForCardFilter(predicate);
+        Predicates.makeSurePredicateCompatibleWithFilter(predicate, Card.class);
 
         extraPredicates.add(predicate);
     }
@@ -91,12 +93,17 @@ public class FilterCard extends FilterObject<Card> {
         return new FilterCard(this);
     }
 
+    @Override
+    public List<Predicate> getExtraPredicates() {
+        return new ArrayList<>(extraPredicates);
+    }
+
     public static void checkPredicateIsSuitableForCardFilter(Predicate predicate) {
         // card filter can't contain controller predicate (only permanents on battlefield have controller)
         List<Predicate> list = new ArrayList<>();
         Predicates.collectAllComponents(predicate, list);
         if (list.stream().anyMatch(TargetController.ControllerPredicate.class::isInstance)) {
-            throw new IllegalArgumentException("Card filter doesn't support controller predicate");
+            throw new IllegalArgumentException("Wrong code usage: card filter doesn't support controller predicate");
         }
     }
 

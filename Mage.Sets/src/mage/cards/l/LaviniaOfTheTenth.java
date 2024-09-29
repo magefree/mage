@@ -49,7 +49,7 @@ public final class LaviniaOfTheTenth  extends CardImpl {
 
     }
 
-    public LaviniaOfTheTenth (final LaviniaOfTheTenth card) {
+    private LaviniaOfTheTenth(final LaviniaOfTheTenth card) {
         super(card);
     }
 

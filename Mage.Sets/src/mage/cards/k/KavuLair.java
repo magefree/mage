@@ -30,8 +30,9 @@ public final class KavuLair extends CardImpl {
 
         // Whenever a creature with power 4 or greater enters the battlefield, its controller draws a card.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
-                new DrawCardTargetEffect(1), filter, false, SetTargetPointer.PLAYER,
-                "Whenever a creature with power 4 or greater enters the battlefield, its controller draws a card."));        
+                new DrawCardTargetEffect(1).setText("its controller draws a card"),
+                filter, false, SetTargetPointer.PLAYER
+        ));
     }
 
     private KavuLair(final KavuLair card) {

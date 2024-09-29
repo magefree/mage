@@ -72,12 +72,12 @@ public final class AngrathTheFlameChained extends CardImpl {
 
 class AngrathTheFlameUltimateEffect extends OneShotEffect {
 
-    public AngrathTheFlameUltimateEffect() {
+    AngrathTheFlameUltimateEffect() {
         super(Outcome.Benefit);
         this.staticText = "Each opponent loses life equal to the number of cards in their graveyard";
     }
 
-    public AngrathTheFlameUltimateEffect(final AngrathTheFlameUltimateEffect effect) {
+    private AngrathTheFlameUltimateEffect(final AngrathTheFlameUltimateEffect effect) {
         super(effect);
     }
 
@@ -100,12 +100,12 @@ class AngrathTheFlameUltimateEffect extends OneShotEffect {
 
 class AngrathTheFlameCreateDelayedTriggerEffect extends OneShotEffect {
 
-    public AngrathTheFlameCreateDelayedTriggerEffect() {
+    AngrathTheFlameCreateDelayedTriggerEffect() {
         super(Outcome.Sacrifice);
         staticText = "Sacrifice it at the beginning of the next end step if it has mana value 3 or less";
     }
 
-    public AngrathTheFlameCreateDelayedTriggerEffect(final AngrathTheFlameCreateDelayedTriggerEffect effect) {
+    private AngrathTheFlameCreateDelayedTriggerEffect(final AngrathTheFlameCreateDelayedTriggerEffect effect) {
         super(effect);
     }
 
@@ -134,7 +134,7 @@ class AngrathTheFlameChainedDelayedTriggeredAbility extends DelayedTriggeredAbil
         super(effect, Duration.Custom);
     }
 
-    public AngrathTheFlameChainedDelayedTriggeredAbility(final AngrathTheFlameChainedDelayedTriggeredAbility ability) {
+    private AngrathTheFlameChainedDelayedTriggeredAbility(final AngrathTheFlameChainedDelayedTriggeredAbility ability) {
         super(ability);
     }
 

@@ -45,7 +45,7 @@ public final class MukotaiSoulripper extends CardImpl {
         // Whenever Mukotai Soulripper attacks, you may sacrifice another artifact or creature. If you do, put a +1/+1 counter on Mukotai Soulripper and it gains menace until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new SacrificeTargetCost(filter)
         ).addEffect(new GainAbilitySourceEffect(
                 new MenaceAbility(false), Duration.EndOfTurn
         ).setText("and it gains menace until end of turn"))));

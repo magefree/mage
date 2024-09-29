@@ -38,18 +38,13 @@ public final class Luminesce extends CardImpl {
 
 class LuminescePreventionEffect extends PreventionEffectImpl {
 
-    public LuminescePreventionEffect() {
+    LuminescePreventionEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
         staticText = "Prevent all damage that black sources and red sources would deal this turn";
     }
 
-    public LuminescePreventionEffect(LuminescePreventionEffect effect) {
+    private LuminescePreventionEffect(final LuminescePreventionEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

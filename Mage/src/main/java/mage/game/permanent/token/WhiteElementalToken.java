@@ -20,7 +20,7 @@ public final class WhiteElementalToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public WhiteElementalToken(final WhiteElementalToken token) {
+    private WhiteElementalToken(final WhiteElementalToken token) {
         super(token);
     }
 

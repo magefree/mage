@@ -77,7 +77,7 @@ class TheGreatSynthesisCastEffect extends OneShotEffect {
         this.staticText = "you may cast any number of spells from your hand without paying their mana costs";
     }
 
-    public TheGreatSynthesisCastEffect(final TheGreatSynthesisCastEffect effect) {
+    private TheGreatSynthesisCastEffect(final TheGreatSynthesisCastEffect effect) {
         super(effect);
     }
 

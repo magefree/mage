@@ -19,11 +19,11 @@ public final class MordorMuster extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
         // You draw a card and you lose 1 life.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1, "you"));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1, true));
         this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
 
         // Amass Orcs 1.
-        this.getSpellAbility().addEffect(new AmassEffect(1, SubType.ORC));
+        this.getSpellAbility().addEffect(new AmassEffect(1, SubType.ORC).concatBy("<br>"));
     }
 
     private MordorMuster(final MordorMuster card) {

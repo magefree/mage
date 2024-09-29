@@ -47,12 +47,12 @@ public final class MirageMirror extends CardImpl {
 
 class MirageMirrorCopyEffect extends OneShotEffect {
 
-    public MirageMirrorCopyEffect() {
+    MirageMirrorCopyEffect() {
         super(Outcome.Copy);
         this.staticText = "{this} becomes a copy of target artifact, creature, enchantment, or land until end of turn";
     }
 
-    public MirageMirrorCopyEffect(final MirageMirrorCopyEffect effect) {
+    private MirageMirrorCopyEffect(final MirageMirrorCopyEffect effect) {
         super(effect);
     }
 

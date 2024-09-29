@@ -58,12 +58,12 @@ public final class Rey extends CardImpl {
 
 class ReyEffect extends OneShotEffect {
 
-    public ReyEffect() {
+    ReyEffect() {
         super(Outcome.Detriment);
         staticText = "reveal the top card of target player's library. You gain life equal to that card's mana value";
     }
 
-    public ReyEffect(final ReyEffect effect) {
+    private ReyEffect(final ReyEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class ReyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if(targetPlayer != null && controller != null) {
             if(targetPlayer.getLibrary().hasCards()) {
                 // reveal the top card of target player's library.

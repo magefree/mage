@@ -11,15 +11,10 @@ public class AdditionalCombatPhaseEffect extends OneShotEffect {
 
     public AdditionalCombatPhaseEffect() {
         super(Outcome.Benefit);
-        staticText = "After this phase, there is an additional combat phase";
+        staticText = "after this phase, there is an additional combat phase";
     }
 
-    public AdditionalCombatPhaseEffect(String staticText) {
-        this();
-        this.staticText = staticText;
-    }
-
-    public AdditionalCombatPhaseEffect(final AdditionalCombatPhaseEffect effect) {
+    protected AdditionalCombatPhaseEffect(final AdditionalCombatPhaseEffect effect) {
         super(effect);
     }
 
@@ -30,8 +25,7 @@ public class AdditionalCombatPhaseEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(game.getState().getActivePlayerId(),
-                TurnPhase.COMBAT, null, false));
+        game.getState().getTurnMods().add(new TurnMod(game.getState().getActivePlayerId()).withExtraPhase(TurnPhase.COMBAT));
         return true;
     }
 }

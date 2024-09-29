@@ -71,12 +71,12 @@ public final class RhonasTheIndomitable extends CardImpl {
 
 class RhonasTheIndomitableRestrictionEffect extends RestrictionEffect {
 
-    public RhonasTheIndomitableRestrictionEffect() {
+    RhonasTheIndomitableRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless you control another creature with power 4 or greater";
     }
 
-    public RhonasTheIndomitableRestrictionEffect(final RhonasTheIndomitableRestrictionEffect effect) {
+    private RhonasTheIndomitableRestrictionEffect(final RhonasTheIndomitableRestrictionEffect effect) {
         super(effect);
     }
 

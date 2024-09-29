@@ -33,7 +33,8 @@ public final class GwaihirTheWindlord extends CardImpl {
 
         // This spell costs {2} less to cast as long as you've drawn two or more cards this turn.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(1, DrewTwoOrMoreCardsCondition.instance)
+                Zone.ALL, new SpellCostReductionSourceEffect(2, DrewTwoOrMoreCardsCondition.instance)
+                .setText("this spell costs {2} less to cast as long as you've drawn two or more cards this turn")
         ).setRuleAtTheTop(true).addHint(CardsDrawnThisTurnDynamicValue.getHint()));
 
         // Flying

@@ -46,7 +46,7 @@ public final class JaliraMasterPolymorphist extends CardImpl {
                 filterCard, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM
         ), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
 
     }

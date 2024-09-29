@@ -21,7 +21,7 @@ public class GainMenaceAbilityAsSingletonTest extends CardTestPlayerBase {
         // https://github.com/magefree/mage/issues/6720
 
         // {3}{R}{R}
-        // Whenever Sethron, Hurloon General or another nontoken Minotaur enters the battlefield under your control, create a 2/3 red Minotaur creature token.
+        // Whenever Sethron, Hurloon General or another nontoken Minotaur you control enters, create a 2/3 red Minotaur creature token.
         // {2}{B/R}: Minotaurs you control get +1/+0 and gain menace and haste until end of turn. ({B/R} can be paid with either {B} or {R}.)
         addCard(Zone.HAND, playerA, "Sethron, Hurloon General", 7);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5 + 3 * 3);

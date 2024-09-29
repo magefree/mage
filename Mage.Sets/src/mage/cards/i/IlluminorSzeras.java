@@ -7,7 +7,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.HighestCMCOfPermanentValue;
-import mage.abilities.dynamicvalue.common.SacrificeCostConvertedMana;
+import mage.abilities.dynamicvalue.common.SacrificeCostManaValue;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class IlluminorSzeras extends CardImpl {
 
-    private static final DynamicValue xValue = new SacrificeCostConvertedMana("creature");
+    private static final DynamicValue xValue = SacrificeCostManaValue.CREATURE;
     private static final DynamicValue netValue = new HighestCMCOfPermanentValue(
             StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
     );

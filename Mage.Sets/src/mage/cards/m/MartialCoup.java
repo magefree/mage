@@ -1,8 +1,6 @@
 
 package mage.cards.m;
 
-import java.util.List;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -13,6 +11,10 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
+import mage.util.CardUtil;
+
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -46,7 +48,7 @@ class MartialCoupEffect extends OneShotEffect {
         staticText = "create X 1/1 white Soldier creature tokens. If X is 5 or more, destroy all other creatures";
     }
 
-    public MartialCoupEffect(final MartialCoupEffect effect) {
+    private MartialCoupEffect(final MartialCoupEffect effect) {
         super(effect);
     }
 
@@ -57,7 +59,7 @@ class MartialCoupEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = source.getManaCostsToPay().getX();
+        int amount = CardUtil.getSourceCostsTag(game, source, "X", 0);
         token.putOntoBattlefield(amount, game, source, source.getControllerId());
         List<UUID> tokens = token.getLastAddedTokenIds();
         if (amount > 4) {

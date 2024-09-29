@@ -4,11 +4,12 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 
 /**
@@ -30,8 +31,8 @@ public final class AerialCaravan extends CardImpl {
 
         // {1}{U}{U}: Exile the top card of your library. Until end of turn, you may play that card.
         this.addAbility(new SimpleActivatedAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1).setText("Exile the top card of your library. " +
-                                "Until end of turn, you may play that card. <i>(Reveal the card as you exile it.)</i>"),
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
+                        .withTextOptions("that card. <i>(Reveal the card as you exile it.)</i>", false),
                 new ManaCostsImpl<>("{1}{U}{U}")));
     }
 

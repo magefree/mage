@@ -75,7 +75,7 @@ class ClanGuildmageToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public ClanGuildmageToken(final ClanGuildmageToken token) {
+    private ClanGuildmageToken(final ClanGuildmageToken token) {
         super(token);
     }
 

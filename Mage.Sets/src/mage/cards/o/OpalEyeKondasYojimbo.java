@@ -70,15 +70,15 @@ class OpalEyeKondasYojimboRedirectionEffect extends ReplacementEffectImpl {
         this.target = new TargetSource();
     }
 
-    OpalEyeKondasYojimboRedirectionEffect(final OpalEyeKondasYojimboRedirectionEffect effect) {
+    private OpalEyeKondasYojimboRedirectionEffect(final OpalEyeKondasYojimboRedirectionEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }
     
     @Override
     public void init(Ability source, Game game) {
-        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override

@@ -14,7 +14,6 @@ import mage.constants.Zone;
 import mage.game.Game;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -28,7 +27,7 @@ public class GainSuspendEffect extends ContinuousEffectImpl {
         staticText = "{this} gains suspend";
     }
 
-    public GainSuspendEffect(final GainSuspendEffect effect) {
+    protected GainSuspendEffect(final GainSuspendEffect effect) {
         super(effect);
         this.mor = effect.mor;
     }

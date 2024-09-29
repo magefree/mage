@@ -50,7 +50,7 @@ class EchoingRuinEffect extends OneShotEffect {
         staticText = "Destroy target artifact and all other artifacts with the same name as that artifact";
     }
 
-    EchoingRuinEffect(final EchoingRuinEffect effect) {
+    private EchoingRuinEffect(final EchoingRuinEffect effect) {
         super(effect);
     }
 

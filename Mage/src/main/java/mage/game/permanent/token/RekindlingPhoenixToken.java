@@ -35,7 +35,7 @@ public final class RekindlingPhoenixToken extends TokenImpl {
     }
 
 
-    public RekindlingPhoenixToken(final RekindlingPhoenixToken token) {
+    private RekindlingPhoenixToken(final RekindlingPhoenixToken token) {
         super(token);
     }
 

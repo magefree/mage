@@ -28,7 +28,7 @@ public final class CabalCoffers extends CardImpl {
     }
 
     private static final Hint hint = new ValueHint(
-            "Number of Swamps you control", new PermanentsOnBattlefieldCount(filter)
+            "Swamps you control", new PermanentsOnBattlefieldCount(filter)
     );
 
     public CabalCoffers(UUID ownerId, CardSetInfo setInfo) {

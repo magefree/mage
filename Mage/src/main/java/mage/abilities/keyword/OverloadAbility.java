@@ -37,7 +37,7 @@ public class OverloadAbility extends SpellAbility {
         this.timing = (card.isSorcery(null) ? TimingRule.SORCERY : TimingRule.INSTANT);
     }
 
-    public OverloadAbility(final OverloadAbility ability) {
+    protected OverloadAbility(final OverloadAbility ability) {
         super(ability);
     }
 

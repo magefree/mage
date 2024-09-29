@@ -46,7 +46,7 @@ public final class YahenniUndyingPartisan extends CardImpl {
         // Sacrifice another creature: Yahenni gains indestructible until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE))
+                new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
         ));
     }
 

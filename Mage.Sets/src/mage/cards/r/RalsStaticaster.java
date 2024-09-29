@@ -34,7 +34,7 @@ public final class RalsStaticaster extends CardImpl {
     public RalsStaticaster(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
 
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
@@ -46,7 +46,7 @@ public final class RalsStaticaster extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(new BoostSourceEffect(
                         CardsInControllerHandCount.instance, StaticValue.get(0),
-                        Duration.EndOfTurn, true), false),
+                        Duration.EndOfTurn), false),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "Whenever {this} attacks, if you control a Ral planeswalker, "
                 + "{this} gets +1/+0 for each card in your hand until end of turn."

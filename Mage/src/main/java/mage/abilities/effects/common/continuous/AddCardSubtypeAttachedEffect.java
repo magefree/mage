@@ -1,5 +1,3 @@
-
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -7,25 +5,24 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  * @author nantuko
  */
 public class AddCardSubtypeAttachedEffect extends ContinuousEffectImpl {
-    private SubType addedSubtype;
-    private AttachmentType attachmentType;
+    private final SubType addedSubtype;
 
-    public AddCardSubtypeAttachedEffect(SubType addedSubtype, Duration duration, AttachmentType attachmentType) {
-        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
+    public AddCardSubtypeAttachedEffect(SubType addedSubtype, AttachmentType attachmentType) {
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedSubtype = addedSubtype;
-        this.attachmentType = attachmentType;
-        setText();
+        staticText = attachmentType.verb() +
+                " creature becomes " + CardUtil.addArticle(addedSubtype.getDescription()) + " in addition to its other types";
     }
 
-    public AddCardSubtypeAttachedEffect(final AddCardSubtypeAttachedEffect effect) {
+    protected AddCardSubtypeAttachedEffect(final AddCardSubtypeAttachedEffect effect) {
         super(effect);
         this.addedSubtype = effect.addedSubtype;
-        this.attachmentType = effect.attachmentType;
     }
 
     @Override
@@ -44,11 +41,4 @@ public class AddCardSubtypeAttachedEffect extends ContinuousEffectImpl {
         return new AddCardSubtypeAttachedEffect(this);
     }
 
-    private void setText() {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(attachmentType.verb());
-        sb.append(" creature becomes ").append(addedSubtype).append(" in addition to its other types"); //TODO add attacked card type detection
-        staticText = sb.toString();
-    }
 }

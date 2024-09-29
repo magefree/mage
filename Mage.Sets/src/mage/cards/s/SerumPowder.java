@@ -51,7 +51,7 @@ class SerumPowderReplaceEffect extends ReplacementEffectImpl {
         staticText = "Any time you could mulligan and {this} is in your hand, you may exile all the cards from your hand, then draw that many cards";
     }
 
-    SerumPowderReplaceEffect(final SerumPowderReplaceEffect effect) {
+    private SerumPowderReplaceEffect(final SerumPowderReplaceEffect effect) {
         super(effect);
     }
 

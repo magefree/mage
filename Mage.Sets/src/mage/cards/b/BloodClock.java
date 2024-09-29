@@ -60,7 +60,7 @@ class BloodClockEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player == null) {
             return false;
         }
@@ -72,7 +72,7 @@ class BloodClockEffect extends OneShotEffect {
             return true;
         }
         Target target = new TargetControlledPermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(player.getId(), source, game)
                 || !player.chooseTarget(outcome, target, source, game)) {
             return false;

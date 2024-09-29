@@ -41,7 +41,7 @@ class WrennAndRealmbreakerEmblemEffect extends AsThoughEffectImpl {
         staticText = "you may play lands and cast permanent spells from your graveyard";
     }
 
-    public WrennAndRealmbreakerEmblemEffect(final WrennAndRealmbreakerEmblemEffect effect) {
+    protected WrennAndRealmbreakerEmblemEffect(final WrennAndRealmbreakerEmblemEffect effect) {
         super(effect);
     }
 

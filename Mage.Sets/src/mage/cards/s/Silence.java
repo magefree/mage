@@ -39,23 +39,18 @@ public final class Silence extends CardImpl {
 
 class SilenceEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public SilenceEffect() {
+    SilenceEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Your opponents can't cast spells this turn. <i>(Spells cast before this resolves are unaffected.)</i>";
     }
 
-    public SilenceEffect(final SilenceEffect effect) {
+    private SilenceEffect(final SilenceEffect effect) {
         super(effect);
     }
 
     @Override
     public SilenceEffect copy() {
         return new SilenceEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

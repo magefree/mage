@@ -2,12 +2,10 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -19,7 +17,10 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -34,7 +35,7 @@ public final class ApocalypseHydra extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        // Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.
+        // Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters with an additional X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new ApocalypseHydraEffect()));
 
         // {1}{R}, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to any target.
@@ -60,7 +61,7 @@ class ApocalypseHydraEffect extends OneShotEffect {
 
     ApocalypseHydraEffect() {
         super(Outcome.BoostCreature);
-        staticText = "with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it";
+        staticText = "with X +1/+1 counters on it. If X is 5 or more, it enters with an additional X +1/+1 counters on it";
     }
 
     private ApocalypseHydraEffect(final ApocalypseHydraEffect effect) {
@@ -70,24 +71,19 @@ class ApocalypseHydraEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanentEntering(source.getSourceId());
-        if (permanent == null) {
-            return false;
-        }
-        SpellAbility spellAbility = (SpellAbility) getValue(EntersBattlefieldEffect.SOURCE_CAST_SPELL_ABILITY);
-        if (spellAbility == null
-                || !spellAbility.getSourceId().equals(source.getSourceId())
-                || permanent.getZoneChangeCounter(game) != spellAbility.getSourceObjectZoneChangeCounter()) {
-            return false;
-        }
-        int amount = spellAbility.getManaCostsToPay().getX();
-        if (amount > 0) {
-            if (amount < 5) {
-                permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game);
-            } else {
-                permanent.addCounters(CounterType.P1P1.createInstance(amount * 2), source.getControllerId(), source, game);
+        if (permanent != null) {
+            int amount = CardUtil.getSourceCostsTag(game, source, "X", 0);
+            if (amount > 0) {
+                List<UUID> appliedEffects = (ArrayList<UUID>) this.getValue("appliedEffects");
+                if (amount < 5) {
+                    permanent.addCounters(CounterType.P1P1.createInstance(amount), source.getControllerId(), source, game, appliedEffects);
+                } else {
+                    permanent.addCounters(CounterType.P1P1.createInstance(amount * 2), source.getControllerId(), source, game, appliedEffects);
+                }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override

@@ -25,6 +25,9 @@ public class DeckTestUtils {
     }
 
     public static Deck buildRandomDeck(String colors, boolean onlyBasicLands, String allowedSets) {
+        if (colors.isEmpty()) {
+            colors = "WGUBR";
+        }
 
         List<ColoredManaSymbol> allowedColors = new ArrayList<>();
         for (int i = 0; i < colors.length(); i++) {

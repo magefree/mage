@@ -31,7 +31,7 @@ public final class TriskelaviteToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public TriskelaviteToken(final TriskelaviteToken token) {
+    private TriskelaviteToken(final TriskelaviteToken token) {
         super(token);
     }
 

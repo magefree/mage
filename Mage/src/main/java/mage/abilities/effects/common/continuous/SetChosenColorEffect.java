@@ -21,7 +21,7 @@ public class SetChosenColorEffect extends ContinuousEffectImpl {
         staticText = "{this} is the chosen color.";
     }
 
-    public SetChosenColorEffect(final SetChosenColorEffect effect) {
+    protected SetChosenColorEffect(final SetChosenColorEffect effect) {
         super(effect);
     }
 
@@ -33,7 +33,7 @@ public class SetChosenColorEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color") ;
+        ObjectColor color = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         if (permanent != null && color != null) {
             permanent.getColor().setColor(color);
             return true;

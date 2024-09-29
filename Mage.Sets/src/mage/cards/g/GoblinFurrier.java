@@ -45,12 +45,12 @@ public final class GoblinFurrier extends CardImpl {
 
 class GoblinFurrierPreventEffectEffect extends PreventionEffectImpl {
 
-    public GoblinFurrierPreventEffectEffect(Duration duration) {
+    GoblinFurrierPreventEffectEffect(Duration duration) {
         super(duration, Integer.MAX_VALUE, false);
         staticText = "Prevent all damage that {this} would deal to snow creatures";
     }
 
-    public GoblinFurrierPreventEffectEffect(final GoblinFurrierPreventEffectEffect effect) {
+    private GoblinFurrierPreventEffectEffect(final GoblinFurrierPreventEffectEffect effect) {
         super(effect);
     }
 

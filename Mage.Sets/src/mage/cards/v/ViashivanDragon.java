@@ -34,7 +34,7 @@ public final class ViashivanDragon extends CardImpl {
 
     }
 
-    public ViashivanDragon(ViashivanDragon other){
+    private ViashivanDragon(final ViashivanDragon other){
         super(other);
     }
 

@@ -91,7 +91,7 @@ class GlimpseOfTomorrowEffect extends OneShotEffect {
         toBattlefield.clear();
         cards.retainZone(Zone.LIBRARY, game);
 
-        toBattlefield.addAll(cards.getCards(StaticFilters.FILTER_CARD_PERMANENT, game));
+        toBattlefield.addAllCards(cards.getCards(StaticFilters.FILTER_CARD_PERMANENT, game));
         toBattlefield.removeIf(uuid -> !game.getCard(uuid).hasSubtype(SubType.AURA, game));
         player.moveCards(toBattlefield, Zone.BATTLEFIELD, source, game);
         cards.retainZone(Zone.LIBRARY, game);

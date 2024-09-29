@@ -9,11 +9,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -42,12 +44,12 @@ public final class ManaSeism extends CardImpl {
 
 class ManaSeismEffect extends OneShotEffect {
 
-    public ManaSeismEffect() {
+    ManaSeismEffect() {
         super(Outcome.Neutral);
         staticText  = "Sacrifice any number of lands, then add that much {C}";
     }
 
-    public ManaSeismEffect(final ManaSeismEffect effect) {
+    private ManaSeismEffect(final ManaSeismEffect effect) {
         super(effect);
     }
 
@@ -63,11 +65,11 @@ class ManaSeismEffect extends OneShotEffect {
             return false;
         }
         int amount = 0;
-        TargetControlledPermanent sacrificeLand = new TargetControlledPermanent(0, Integer.MAX_VALUE, new FilterControlledLandPermanent(), true);
-        if(player.chooseTarget(Outcome.Sacrifice, sacrificeLand, source, game)){
-            for(UUID uuid : sacrificeLand.getTargets()){
+        TargetSacrifice sacrificeLand = new TargetSacrifice(0, Integer.MAX_VALUE, StaticFilters.FILTER_LAND);
+        if (player.choose(Outcome.Sacrifice, sacrificeLand, source, game)) {
+            for (UUID uuid : sacrificeLand.getTargets()) {
                 Permanent land = game.getPermanent(uuid);
-                if(land != null){
+                if (land != null) {
                     land.sacrifice(source, game);
                     amount++;
                 }

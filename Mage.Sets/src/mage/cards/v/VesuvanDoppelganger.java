@@ -56,13 +56,13 @@ public final class VesuvanDoppelganger extends CardImpl {
 
 class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
 
-    private static final String rule2 = "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color and it has this ability.";
+    private static final String rule2 = "At the beginning of your upkeep, you may have this creature become a copy of target creature, except it doesn't copy that creature's color and it has this ability.";
 
     public VesuvanDoppelgangerCopyEffect() {
         super(Outcome.Copy);
     }
 
-    public VesuvanDoppelgangerCopyEffect(final VesuvanDoppelgangerCopyEffect effect) {
+    private VesuvanDoppelgangerCopyEffect(final VesuvanDoppelgangerCopyEffect effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
             if (source instanceof SimpleStaticAbility) {
                 target = new TargetPermanent(new FilterCreaturePermanent("creature (you copy from)"));
                 target.setRequired(false);
-                target.setNotTarget(true);
+                target.withNotTarget(true);
             }
             if (target.canChoose(source.getControllerId(), source, game)) {
                 controller.choose(Outcome.Copy, target, source, game);

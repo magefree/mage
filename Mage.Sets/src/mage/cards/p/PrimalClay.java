@@ -55,10 +55,10 @@ public final class PrimalClay extends CardImpl {
 
         public PrimalPlasmaReplacementEffect() {
             super(Duration.WhileOnBattlefield, Outcome.Benefit);
-            staticText = "As {this} enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types";
+            staticText = "As {this} enters, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types";
         }
 
-        public PrimalPlasmaReplacementEffect(PrimalPlasmaReplacementEffect effect) {
+        private PrimalPlasmaReplacementEffect(final PrimalPlasmaReplacementEffect effect) {
             super(effect);
         }
 
@@ -74,11 +74,6 @@ public final class PrimalClay extends CardImpl {
             }
             Permanent sourcePermanent = ((EntersTheBattlefieldEvent) event).getTarget();
             return sourcePermanent != null && !sourcePermanent.isFaceDown(game);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return false;
         }
 
         @Override
@@ -114,7 +109,7 @@ public final class PrimalClay extends CardImpl {
                     game.addEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance(), Duration.Custom), source);
                     break;
             }
-            game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield, SubLayer.CharacteristicDefining_7a), source);
+            game.addEffect(new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield), source);
             return false;
         }
 

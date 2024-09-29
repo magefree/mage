@@ -3,7 +3,7 @@ package mage.cards.w;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class WallOfLostThoughts extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // When Wall of Lost Thoughts enters the battlefield, target player puts the top four cards of their library into their graveyard.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new PutLibraryIntoGraveTargetEffect(4));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsTargetEffect(4));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

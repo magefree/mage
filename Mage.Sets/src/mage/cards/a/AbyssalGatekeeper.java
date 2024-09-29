@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import java.util.UUID;
@@ -9,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class AbyssalGatekeeper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Abyssal Gatekeeper dies, each player sacrifices a creature.
-        this.addAbility(new DiesSourceTriggeredAbility(new SacrificeAllEffect(1, new FilterControlledCreaturePermanent("creature"))));
+        this.addAbility(new DiesSourceTriggeredAbility(new SacrificeAllEffect(1, StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
     private AbyssalGatekeeper(final AbyssalGatekeeper card) {

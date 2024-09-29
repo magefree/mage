@@ -75,8 +75,8 @@ enum EliteArcanistAdjuster implements CostAdjuster {
         }
         int cmc = imprintedInstant.getManaValue();
         if (cmc > 0) {
-            ability.getManaCostsToPay().clear();
-            ability.getManaCostsToPay().add(new GenericManaCost(cmc));
+            ability.clearManaCostsToPay();
+            ability.addManaCostsToPay(new GenericManaCost(cmc));
         }
     }
 }
@@ -94,7 +94,7 @@ class EliteArcanistImprintEffect extends OneShotEffect {
         staticText = "you may exile an instant card from your hand";
     }
 
-    public EliteArcanistImprintEffect(EliteArcanistImprintEffect effect) {
+    private EliteArcanistImprintEffect(final EliteArcanistImprintEffect effect) {
         super(effect);
     }
 
@@ -129,13 +129,13 @@ class EliteArcanistImprintEffect extends OneShotEffect {
 
 class EliteArcanistCopyEffect extends OneShotEffect {
 
-    public EliteArcanistCopyEffect() {
+    EliteArcanistCopyEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "Copy the exiled card. You may cast the copy "
                 + "without paying its mana cost. X is the mana value of the exiled card";
     }
 
-    public EliteArcanistCopyEffect(final EliteArcanistCopyEffect effect) {
+    private EliteArcanistCopyEffect(final EliteArcanistCopyEffect effect) {
         super(effect);
     }
 

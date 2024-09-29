@@ -57,7 +57,7 @@ class NarcolepsyTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
         super(new NarcolepsyEffect(), TargetController.ANY, false);
     }
     
-    NarcolepsyTriggeredAbility(final NarcolepsyTriggeredAbility ability) {
+    private NarcolepsyTriggeredAbility(final NarcolepsyTriggeredAbility ability) {
         super(ability);
     }
 
@@ -90,7 +90,7 @@ class NarcolepsyEffect extends OneShotEffect {
         super(Outcome.Tap);
     }
 
-    NarcolepsyEffect(final NarcolepsyEffect effect) {
+    private NarcolepsyEffect(final NarcolepsyEffect effect) {
         super(effect);
     }
 

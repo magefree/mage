@@ -44,7 +44,7 @@ class LocketOfYesterdaysCostReductionEffect extends CostModificationEffectImpl {
         staticText = "Spells you cast cost {1} less to cast for each card with the same name as that spell in your graveyard";
     }
 
-    LocketOfYesterdaysCostReductionEffect(LocketOfYesterdaysCostReductionEffect effect) {
+    private LocketOfYesterdaysCostReductionEffect(final LocketOfYesterdaysCostReductionEffect effect) {
         super(effect);
     }
 

@@ -1,18 +1,15 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
@@ -21,8 +18,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetPermanentOrPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class SkyshipPlunderer extends CardImpl {
@@ -56,12 +54,12 @@ public final class SkyshipPlunderer extends CardImpl {
 
 class SkyshipPlundererEffect extends OneShotEffect {
 
-    public SkyshipPlundererEffect() {
+    SkyshipPlundererEffect() {
         super(Outcome.Neutral);
         this.staticText = "for each kind of counter on target permanent or player, give that permanent or player another counter of that kind";
     }
 
-    public SkyshipPlundererEffect(final SkyshipPlundererEffect effect) {
+    private SkyshipPlundererEffect(final SkyshipPlundererEffect effect) {
         super(effect);
     }
 
@@ -71,7 +69,7 @@ class SkyshipPlundererEffect extends OneShotEffect {
         if (controller != null) {
             Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null) {
-                Counters counters = player.getCounters().copy();
+                Counters counters = player.getCountersAsCopy();
                 for (Counter counter : counters.values()) {
                     CounterType counterType = CounterType.findByName(counter.getName());
                     Counter counterToAdd;
@@ -105,7 +103,7 @@ class SkyshipPlundererEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public SkyshipPlundererEffect copy() {
         return new SkyshipPlundererEffect(this);
     }
 

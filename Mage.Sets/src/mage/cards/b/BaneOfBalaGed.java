@@ -47,12 +47,12 @@ public final class BaneOfBalaGed extends CardImpl {
 
 class BaneOfBalaGedEffect extends OneShotEffect {
 
-    public BaneOfBalaGedEffect() {
+    BaneOfBalaGedEffect() {
         super(Outcome.Benefit);
         this.staticText = "defending player exiles two permanents they control";
     }
 
-    public BaneOfBalaGedEffect(final BaneOfBalaGedEffect effect) {
+    private BaneOfBalaGedEffect(final BaneOfBalaGedEffect effect) {
         super(effect);
     }
 

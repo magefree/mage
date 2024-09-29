@@ -18,8 +18,6 @@ import mage.util.CardUtil;
 
 import java.util.UUID;
 
-import static mage.constants.Outcome.Benefit;
-
 /**
  * @author TheElk801
  */
@@ -57,7 +55,7 @@ public final class TamiyoCollectorOfTales extends CardImpl {
 class TamiyoCollectorOfTalesRuleEffect extends ContinuousRuleModifyingEffectImpl {
 
     TamiyoCollectorOfTalesRuleEffect() {
-        super(Duration.WhileOnBattlefield, Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Spells and abilities your opponents control can't "
                 + "cause you to discard cards or sacrifice permanents";
     }

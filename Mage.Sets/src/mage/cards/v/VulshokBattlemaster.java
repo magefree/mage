@@ -50,7 +50,7 @@ public final class VulshokBattlemaster extends CardImpl {
             this.staticText = "attach all Equipment on the battlefield to it";
         }
 
-        public VulshokBattlemasterEffect(final VulshokBattlemasterEffect effect) {
+        private VulshokBattlemasterEffect(final VulshokBattlemasterEffect effect) {
             super(effect);
         }
 
@@ -65,7 +65,7 @@ public final class VulshokBattlemaster extends CardImpl {
             if (battlemaster != null) {
                 FilterPermanent filter = new FilterPermanent();
                 filter.add(SubType.EQUIPMENT.getPredicate());
-                for (Permanent equipment : game.getBattlefield().getAllActivePermanents(filter, game)) {
+                for (Permanent equipment : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     if (equipment != null) {
                         //If an Equipment can't equip Vulshok Battlemaster, it isn't attached to the Battlemaster, and it doesn't become unattached (if it's attached to a creature). (https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=48125)
                         if (!battlemaster.cantBeAttachedBy(equipment, source, game, false)) {

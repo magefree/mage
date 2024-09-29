@@ -31,7 +31,7 @@ public final class DarksteelPlate extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));
     }
 
-    public DarksteelPlate (final DarksteelPlate card) {
+    private DarksteelPlate(final DarksteelPlate card) {
         super(card);
     }
 

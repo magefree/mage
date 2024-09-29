@@ -2,6 +2,7 @@
 package mage.abilities.effects.common.combat;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.constants.Duration;
@@ -10,13 +11,13 @@ import mage.game.permanent.Permanent;
 
 /**
  * !! This effect does only support one target.
- *
- *
+ * <p>
+ * <p>
  * http://tappedout.net/mtg-questions/must-be-blocked-if-able-effect-makes-other-attacking-creatures-essentially-unblockable/
- *
+ * <p>
  * When you Declare Blockers, you choose an arrangement for your blockers, then
  * check to see if there are any restrictions or requirements.
- *
+ * <p>
  * If any restrictions are violated, the block is illegal. (For example, trying
  * to block with Sightless Ghoul) If any requirements are violated, the least
  * possible number of requirements must be violated, otherwise the block is
@@ -48,7 +49,7 @@ public class MustBeBlockedByAtLeastOneTargetEffect extends RequirementEffect {
         staticText = "target creature must be blocked this turn if able";
     }
 
-    public MustBeBlockedByAtLeastOneTargetEffect(final MustBeBlockedByAtLeastOneTargetEffect effect) {
+    protected MustBeBlockedByAtLeastOneTargetEffect(final MustBeBlockedByAtLeastOneTargetEffect effect) {
         super(effect);
     }
 

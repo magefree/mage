@@ -50,7 +50,7 @@ public final class FlorianVoldarenScion extends CardImpl {
 
 class FlorianVoldarenScionEffect extends OneShotEffect {
 
-    public FlorianVoldarenScionEffect() {
+    FlorianVoldarenScionEffect() {
         super(Outcome.Benefit);
         staticText = "look at the top X cards of your library, where X is the total amount of life your opponents lost this turn. "
                 + "Exile one of those cards and put the rest on the bottom of your library in a random order. You may play the exiled card this turn";

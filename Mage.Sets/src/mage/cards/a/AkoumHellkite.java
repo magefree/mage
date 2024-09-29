@@ -75,12 +75,18 @@ class AkoumHellkiteTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
-        if (permanent == null) { return false; }
+        if (permanent == null) {
+            return false;
+        }
 
-        if (!permanent.isLand(game) || !permanent.isControlledBy(getControllerId())) { return false; }
+        if (!permanent.isLand(game) || !permanent.isControlledBy(getControllerId())) {
+            return false;
+        }
 
         Permanent sourcePermanent = game.getPermanent(getSourceId());
-        if (sourcePermanent == null) { return false; }
+        if (sourcePermanent == null) {
+            return false;
+        }
 
         for (Effect effect : getEffects()) {
             if (effect instanceof AkoumHellkiteDamageEffect) {
@@ -95,18 +101,18 @@ class AkoumHellkiteTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "<i>Landfall</i> &mdash; Whenever a land enters the battlefield under your control, " +
+        return "<i>Landfall</i> &mdash; Whenever a land you control enters, " +
                 "{this} deals 1 damage to any target. If that land is a Mountain, {this} deals 2 damage instead.";
     }
 }
 
 class AkoumHellkiteDamageEffect extends OneShotEffect {
 
-    public AkoumHellkiteDamageEffect() {
+    AkoumHellkiteDamageEffect() {
         super(Outcome.Damage);
     }
 
-    public AkoumHellkiteDamageEffect(final AkoumHellkiteDamageEffect effect) {
+    private AkoumHellkiteDamageEffect(final AkoumHellkiteDamageEffect effect) {
         super(effect);
     }
 
@@ -118,14 +124,18 @@ class AkoumHellkiteDamageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent land = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if (land == null) { return false; }
+        if (land == null) {
+            return false;
+        }
 
         int damage = land.hasSubtype(SubType.MOUNTAIN, game) ? 2 : 1;
 
         // Get target for damange
         Player player = game.getPlayer(source.getFirstTarget());
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (player == null && permanent == null) { return false; }
+        if (player == null && permanent == null) {
+            return false;
+        }
 
         if (player != null) {
             // Target is a player

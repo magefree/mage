@@ -67,7 +67,7 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an Aura or Equipment you control is put into a graveyard from the battlefield, ");
     }
 
-    TianaShipsCaretakerTriggeredAbility(final TianaShipsCaretakerTriggeredAbility ability) {
+    private TianaShipsCaretakerTriggeredAbility(final TianaShipsCaretakerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -107,7 +107,7 @@ class TianaShipsCaretakerEffect extends OneShotEffect {
         this.staticText = "you may return that card to its owner's hand at the beginning of the next end step";
     }
 
-    TianaShipsCaretakerEffect(final TianaShipsCaretakerEffect effect) {
+    private TianaShipsCaretakerEffect(final TianaShipsCaretakerEffect effect) {
         super(effect);
     }
 

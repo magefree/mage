@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -22,6 +21,8 @@ import mage.game.command.emblems.TamiyoTheMoonSageEmblem;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -44,7 +45,7 @@ public final class TamiyoTheMoonSage extends CardImpl {
         this.addAbility(ability);
 
         // -2: Draw a card for each tapped creature target player controls.
-        ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(new TappedCreaturesControlledByTargetCount()), -2);
+        ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(TappedCreaturesControlledByTargetCount.instance), -2);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
@@ -62,7 +63,8 @@ public final class TamiyoTheMoonSage extends CardImpl {
     }
 }
 
-class TappedCreaturesControlledByTargetCount implements DynamicValue {
+enum TappedCreaturesControlledByTargetCount implements DynamicValue {
+    instance;
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
@@ -77,7 +79,7 @@ class TappedCreaturesControlledByTargetCount implements DynamicValue {
 
     @Override
     public TappedCreaturesControlledByTargetCount copy() {
-        return new TappedCreaturesControlledByTargetCount();
+        return this;
     }
 
     @Override

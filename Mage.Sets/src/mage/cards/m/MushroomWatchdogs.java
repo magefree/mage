@@ -13,7 +13,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -21,8 +21,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class MushroomWatchdogs extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.FOOD, "a Food");
 
     public MushroomWatchdogs(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -33,7 +31,7 @@ public final class MushroomWatchdogs extends CardImpl {
 
         // Sacrifice a Food: Put a +1/+1 counter on Mushroom Watchdogs. It gains vigilance until end of turn. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new SacrificeTargetCost(filter)
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_FOOD)
         );
         ability.addEffect(new GainAbilitySourceEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn

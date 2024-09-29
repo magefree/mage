@@ -39,7 +39,7 @@ public final class ViridianClaw extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1), false));
     }
 
-    public ViridianClaw (final ViridianClaw card) {
+    private ViridianClaw(final ViridianClaw card) {
         super(card);
     }
 

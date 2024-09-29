@@ -58,7 +58,7 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
         this.addHint(new ValueHint("Untapped artifacts you control", untappedCount));
     }
 
-    public ImproviseAbility(final ImproviseAbility ability) {
+    protected ImproviseAbility(final ImproviseAbility ability) {
         super(ability);
     }
 
@@ -89,7 +89,7 @@ public class ImproviseAbility extends SimpleStaticAbility implements AlternateMa
                 specialAction.setSourceId(source.getSourceId());
                 // create filter for possible artifacts to tap
                 Target target = new TargetControlledPermanent(1, unpaid.getMana().getGeneric(), filterUntapped, true);
-                target.setTargetName("artifact to tap as Improvise's pay");
+                target.withTargetName("artifact to tap as Improvise's pay");
                 specialAction.addTarget(target);
                 if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {
                     game.getState().getSpecialActions().add(specialAction);
@@ -119,7 +119,7 @@ class ImproviseSpecialAction extends SpecialAction {
         this.addEffect(new ImproviseEffect(unpaid));
     }
 
-    public ImproviseSpecialAction(final ImproviseSpecialAction ability) {
+    protected ImproviseSpecialAction(final ImproviseSpecialAction ability) {
         super(ability);
     }
 
@@ -139,7 +139,7 @@ class ImproviseEffect extends OneShotEffect {
         this.staticText = "Improvise (Your artifacts can help cast this spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)";
     }
 
-    public ImproviseEffect(final ImproviseEffect effect) {
+    protected ImproviseEffect(final ImproviseEffect effect) {
         super(effect);
         this.unpaid = effect.unpaid;
     }

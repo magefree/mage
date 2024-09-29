@@ -61,7 +61,7 @@ public final class BalanWanderingKnight extends CardImpl {
             this.staticText = "Attach all Equipment you control to {this}.";
         }
 
-        public BalanWanderingKnightEffect(final BalanWanderingKnightEffect effect) {
+        private BalanWanderingKnightEffect(final BalanWanderingKnightEffect effect) {
             super(effect);
         }
 

@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -18,7 +17,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
 /**
@@ -26,7 +25,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class SunCrestedPterodon extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filterAnotherDino = new FilterControlledCreaturePermanent();
+    private static final FilterControlledPermanent filterAnotherDino = new FilterControlledPermanent();
     static {
         filterAnotherDino.add(AnotherPredicate.instance);
         filterAnotherDino.add(SubType.DINOSAUR.getPredicate());

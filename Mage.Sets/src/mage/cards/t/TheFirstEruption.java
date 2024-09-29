@@ -1,20 +1,19 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SagaChapter;
+import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -24,15 +23,16 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class TheFirstEruption extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature without flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
@@ -80,7 +80,7 @@ class TheFirstEruptionEffect extends OneShotEffect {
         this.staticText = "Sacrifice a Mountain. If you do, {this} deals 3 damage to each creature";
     }
 
-    TheFirstEruptionEffect(final TheFirstEruptionEffect effect) {
+    private TheFirstEruptionEffect(final TheFirstEruptionEffect effect) {
         super(effect);
     }
 
@@ -97,11 +97,11 @@ class TheFirstEruptionEffect extends OneShotEffect {
             return false;
         }
 
-        Target target = new TargetControlledPermanent(1, 1, filter, false);
+        Target target = new TargetSacrifice(filter);
         boolean sacrificed = false;
         if (target.canChoose(controller.getId(), source, game)) {
-            while (controller.canRespond() && !target.isChosen() && target.canChoose(controller.getId(), source, game)) {
-                controller.chooseTarget(Outcome.Sacrifice, target, source, game);
+            while (controller.canRespond() && !target.isChosen(game) && target.canChoose(controller.getId(), source, game)) {
+                controller.choose(Outcome.Sacrifice, target, source, game);
             }
 
             for (int idx = 0; idx < target.getTargets().size(); idx++) {

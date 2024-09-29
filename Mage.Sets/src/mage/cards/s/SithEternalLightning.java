@@ -35,7 +35,7 @@ public class SithEternalLightning extends CardImpl {
         this.getSpellAbility().addEffect(new ScryEffect(4));
     }
 
-    public SithEternalLightning(final SithEternalLightning card) {
+    private SithEternalLightning(final SithEternalLightning card) {
         super(card);
     }
 
@@ -47,12 +47,12 @@ public class SithEternalLightning extends CardImpl {
 
 class SithEternalLightningEffect extends OneShotEffect {
 
-    public SithEternalLightningEffect() {
+    SithEternalLightningEffect() {
         super(Outcome.Benefit);
         this.staticText = "Tap all creatures your opponents control. Those creatures don't untap during their controller's next untap step.";
     }
 
-    public SithEternalLightningEffect(final SithEternalLightningEffect effect) {
+    private SithEternalLightningEffect(final SithEternalLightningEffect effect) {
         super(effect);
     }
 
@@ -64,12 +64,15 @@ class SithEternalLightningEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
         Set<UUID> opponents = game.getOpponents(controller.getId());
-        if (controller != null && opponents != null) {
+        if (opponents != null) {
             for (UUID opponent : opponents) {
                 List<Permanent> permanents = game.getBattlefield().getActivePermanents(opponent, game);
                 for (Permanent permanent : permanents) {
-                    if (permanent.isCreature() && permanent.getControllerId() == opponent) {
+                    if (permanent.isCreature(game) && opponent.equals(permanent.getControllerId())) {
                         permanent.tap(source, game);
                         DontUntapInControllersNextUntapStepTargetEffect effect = new DontUntapInControllersNextUntapStepTargetEffect();
                         effect.setTargetPointer(new FixedTarget(permanent.getId(), game));

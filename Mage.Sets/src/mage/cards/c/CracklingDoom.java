@@ -7,12 +7,10 @@ import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.filter.predicate.permanent.GreatestPowerControlledPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -50,12 +48,16 @@ public final class CracklingDoom extends CardImpl {
 
 class CracklingDoomEffect extends OneShotEffect {
 
+    static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with the greatest power among creatures you control");
+    static {
+        filter.add(GreatestPowerControlledPredicate.instance);
+    }
     public CracklingDoomEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Each opponent sacrifices a creature with the greatest power among creatures that player controls";
     }
 
-    public CracklingDoomEffect(final CracklingDoomEffect effect) {
+    private CracklingDoomEffect(final CracklingDoomEffect effect) {
         super(effect);
     }
 
@@ -73,31 +75,12 @@ class CracklingDoomEffect extends OneShotEffect {
                 if (controller.hasOpponent(playerId, game)) {
                     Player opponent = game.getPlayer(playerId);
                     if (opponent != null) {
-                        int greatestPower = Integer.MIN_VALUE;
-                        int numberOfCreatures = 0;
-                        Permanent permanentToSacrifice = null;
-                        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, playerId, game)) {
-                            if (permanent.getPower().getValue() > greatestPower) {
-                                greatestPower = permanent.getPower().getValue();
-                                numberOfCreatures = 1;
-                                permanentToSacrifice = permanent;
-                            } else if (permanent.getPower().getValue() == greatestPower) {
-                                numberOfCreatures++;
-                            }
-                        }
-                        if (numberOfCreatures == 1) {
-                            if (permanentToSacrifice != null) {
-                                toSacrifice.add(permanentToSacrifice);
-                            }
-                        } else if (greatestPower != Integer.MIN_VALUE) {
-                            FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature to sacrifice with power equal to " + greatestPower);
-                            filter.add(new PowerPredicate(ComparisonType.EQUAL_TO, greatestPower));
-                            Target target = new TargetControlledCreaturePermanent(filter);
-                            if (opponent.choose(outcome, target, source, game)) {
-                                Permanent permanent = game.getPermanent(target.getFirstTarget());
-                                if (permanent != null) {
-                                    toSacrifice.add(permanent);
-                                }
+                        Target target = new TargetControlledCreaturePermanent(filter);
+                        target.withNotTarget(true);
+                        if (opponent.choose(outcome, target, source, game)) {
+                            Permanent permanent = game.getPermanent(target.getFirstTarget());
+                            if (permanent != null) {
+                                toSacrifice.add(permanent);
                             }
                         }
                     }

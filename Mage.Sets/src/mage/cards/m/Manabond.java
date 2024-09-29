@@ -43,12 +43,12 @@ public final class Manabond extends CardImpl {
 
 class ManabondEffect extends OneShotEffect {
 
-    public ManabondEffect() {
+    ManabondEffect() {
         super(Outcome.PutCardInPlay);
         staticText = "reveal your hand and put all land cards from it onto the battlefield. If you do, discard your hand";
     }
 
-    public ManabondEffect(final ManabondEffect effect) {
+    private ManabondEffect(final ManabondEffect effect) {
         super(effect);
     }
 

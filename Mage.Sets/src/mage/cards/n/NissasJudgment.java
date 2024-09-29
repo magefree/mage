@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -49,12 +48,13 @@ public final class NissasJudgment extends CardImpl {
 
 class NissasJudgmentEffect extends OneShotEffect {
 
-    public NissasJudgmentEffect() {
+    NissasJudgmentEffect() {
         super(Outcome.Damage);
         this.staticText = "Choose up to one target creature an opponent controls. Each creature you control with a +1/+1 counter on it deals damage equal to its power to that creature";
+        this.concatPrefix = "<br>";
     }
 
-    public NissasJudgmentEffect(final NissasJudgmentEffect effect) {
+    private NissasJudgmentEffect(final NissasJudgmentEffect effect) {
         super(effect);
     }
 

@@ -49,7 +49,7 @@ class CongregationAtDawnEffect extends OneShotEffect {
                 "then shuffle and put those cards on top in any order";
     }
 
-    public CongregationAtDawnEffect(final CongregationAtDawnEffect effect) {
+    private CongregationAtDawnEffect(final CongregationAtDawnEffect effect) {
         super(effect);
     }
 

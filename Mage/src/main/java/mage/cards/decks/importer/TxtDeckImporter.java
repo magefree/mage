@@ -12,7 +12,9 @@ import java.util.Locale;
 import java.util.Set;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * Deck import: text deck, compatible with MTGO and many other apps/services
+ *
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class TxtDeckImporter extends PlainTextDeckImporter {
 

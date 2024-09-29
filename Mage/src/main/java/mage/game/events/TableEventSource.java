@@ -26,7 +26,12 @@ public class TableEventSource implements EventSource<TableEvent>, Serializable {
     }
 
     @Override
-    public void removeAllListener() {
+    public void removeListener(Listener<TableEvent> listener) {
+        dispatcher.removeListener(listener);
+    }
+
+    @Override
+    public void removeAllListeners() {
         dispatcher.removeAllListener();
     }
 

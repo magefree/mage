@@ -28,7 +28,7 @@ public class UnleashAbility extends SimpleStaticAbility {
         this.addEffect(new UnleashRestrictionEffect());
     }
 
-    public UnleashAbility(final UnleashAbility ability) {
+    protected UnleashAbility(final UnleashAbility ability) {
         super(ability);
     }
 
@@ -39,7 +39,7 @@ public class UnleashAbility extends SimpleStaticAbility {
 
     @Override
     public String getRule() {
-        return "Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>";
+        return "unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>";
     }
 }
 
@@ -61,11 +61,6 @@ class UnleashReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getTargetId().equals(source.getSourceId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override
@@ -101,7 +96,7 @@ class UnleashRestrictionEffect extends RestrictionEffect {
         super(Duration.WhileOnBattlefield);
     }
 
-    public UnleashRestrictionEffect(final UnleashRestrictionEffect effect) {
+    protected UnleashRestrictionEffect(final UnleashRestrictionEffect effect) {
         super(effect);
     }
 

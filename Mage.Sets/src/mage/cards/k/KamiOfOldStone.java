@@ -23,7 +23,7 @@ public final class KamiOfOldStone extends CardImpl {
         this.toughness = new MageInt(7);
     }
 
-    public KamiOfOldStone (final KamiOfOldStone card) {
+    private KamiOfOldStone(final KamiOfOldStone card) {
         super(card);
     }
 

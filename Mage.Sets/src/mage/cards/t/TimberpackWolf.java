@@ -55,7 +55,7 @@ public final class TimberpackWolf extends CardImpl {
             staticText = "{this} gets +1/+1 for each other creature you control named Timberpack Wolf";
         }
 
-        public TimberpackWolfEffect(final TimberpackWolfEffect effect) {
+        private TimberpackWolfEffect(final TimberpackWolfEffect effect) {
             super(effect);
         }
 

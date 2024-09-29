@@ -9,7 +9,6 @@ import mage.game.FreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.mulligan.MulliganType;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -23,7 +22,7 @@ public class BattleMultiplayerTest extends BattleBaseTest {
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {
         Game game = new FreeForAll(
                 MultiplayerAttackOption.MULTIPLE, RangeOfInfluence.ALL,
-                MulliganType.GAME_DEFAULT.getMulligan(0), 20
+                MulliganType.GAME_DEFAULT.getMulligan(0), 20, 7
         );
         // Player order: A -> D -> C -> B
         playerA = createPlayer(game, "PlayerA");
@@ -71,7 +70,6 @@ public class BattleMultiplayerTest extends BattleBaseTest {
         assertCounterCount(belenon, CounterType.DEFENSE, 5 - 2);
     }
 
-    @Ignore // TODO: this test fails randomly and it's not clear exactly why, it works correctly though
     @Test
     public void testAttackBattleBlock() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);

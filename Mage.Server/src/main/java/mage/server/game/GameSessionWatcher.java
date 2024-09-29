@@ -58,7 +58,7 @@ public class GameSessionWatcher {
 
     public void inform(final String message) {
         if (!killed) {
-            userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_INFORM, game.getId(), new GameClientMessage(getGameView(), null, message))));
+            userManager.getUser(userId).ifPresent(user -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_UPDATE_AND_INFORM, game.getId(), new GameClientMessage(getGameView(), null, message))));
         }
 
     }
@@ -97,17 +97,20 @@ public class GameSessionWatcher {
     }
 
     public GameView getGameView() {
-        GameView gameView = new GameView(game.getState(), game, null, userId);
-        processWatchedHands(game, userId, gameView);
+        // game view calculation can take some time and can be called from non-game thread,
+        // so use copy for thread save (protection from ConcurrentModificationException)
+        Game sourceGame = game.copy();
+
+        GameView gameView = new GameView(sourceGame.getState(), sourceGame, null, userId);
+        processWatchedHands(sourceGame, userId, gameView);
         return gameView;
     }
 
     protected static void processWatchedHands(Game game, UUID userId, GameView gameView) {
-        Map<String, SimpleCardsView> handCards = new HashMap<>();
+        gameView.getWatchedHands().clear();
         for (Player player : game.getPlayers().values()) {
             if (player.hasUserPermissionToSeeHand(userId)) {
-                handCards.put(player.getName(), new SimpleCardsView(player.getHand().getCards(game), true));
-                gameView.setWatchedHands(handCards);
+                gameView.getWatchedHands().put(player.getName(), new SimpleCardsView(player.getHand().getCards(game), true));
             }
         }
     }

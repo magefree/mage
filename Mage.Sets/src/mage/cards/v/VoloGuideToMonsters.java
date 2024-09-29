@@ -2,10 +2,11 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterSpell;
@@ -43,9 +44,9 @@ public final class VoloGuideToMonsters extends CardImpl {
 
         // Whenever you cast a creature spell that doesn't share a creature type with a creature you control or a creature card in your graveyard, copy that spell.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetSpellEffect(true)
+                new CopyTargetStackObjectEffect(true)
                         .setText("copy that spell"),
-                filter, false, true
+                filter, false, SetTargetPointer.SPELL
         ));
     }
 

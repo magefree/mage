@@ -46,12 +46,12 @@ public final class IllusionistsGambit extends CardImpl {
 
 class IllusionistsGambitRemoveFromCombatEffect extends OneShotEffect {
 
-    public IllusionistsGambitRemoveFromCombatEffect() {
+    IllusionistsGambitRemoveFromCombatEffect() {
         super(Outcome.Benefit);
         this.staticText = "Remove all attacking creatures from combat and untap them. After this phase, there is an additional combat phase. Each of those creatures attacks that combat if able. They can't attack you or planeswalkers you control that combat";
     }
 
-    public IllusionistsGambitRemoveFromCombatEffect(final IllusionistsGambitRemoveFromCombatEffect effect) {
+    private IllusionistsGambitRemoveFromCombatEffect(final IllusionistsGambitRemoveFromCombatEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class IllusionistsGambitRemoveFromCombatEffect extends OneShotEffect {
         }
         if (!attackers.isEmpty()) {
             Phase phase = game.getTurn().getPhase();
-            game.getState().getTurnMods().add(new TurnMod(game.getActivePlayerId(), TurnPhase.COMBAT, null, false));
+            game.getState().getTurnMods().add(new TurnMod(game.getActivePlayerId()).withExtraPhase(TurnPhase.COMBAT));
             ContinuousEffect effect = new IllusionistsGambitRequirementEffect(attackers, phase);
             game.addEffect(effect, source);
             effect = new IllusionistsGambitRestrictionEffect(attackers, phase);
@@ -95,7 +95,7 @@ class IllusionistsGambitRequirementEffect extends RequirementEffect {
         this.staticText = "Each of those creatures attacks that combat if able";
     }
 
-    public IllusionistsGambitRequirementEffect(final IllusionistsGambitRequirementEffect effect) {
+    private IllusionistsGambitRequirementEffect(final IllusionistsGambitRequirementEffect effect) {
         super(effect);
         this.attackers = effect.attackers;
         this.phase = effect.phase;
@@ -145,7 +145,7 @@ class IllusionistsGambitRestrictionEffect extends RestrictionEffect {
         staticText = "They can't attack you or planeswalkers you control that combat";
     }
 
-    public IllusionistsGambitRestrictionEffect(final IllusionistsGambitRestrictionEffect effect) {
+    private IllusionistsGambitRestrictionEffect(final IllusionistsGambitRestrictionEffect effect) {
         super(effect);
         this.attackers = effect.attackers;
         this.phase = effect.phase;

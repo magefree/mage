@@ -46,7 +46,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
         setText();
     }
 
-    public SearchLibraryPutInPlayEffect(final SearchLibraryPutInPlayEffect effect) {
+    protected SearchLibraryPutInPlayEffect(final SearchLibraryPutInPlayEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
         this.textThatCard = effect.textThatCard;
@@ -96,7 +96,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect {
         if (tapped) {
             sb.append(" tapped");
         }
-        sb.append( ", then shuffle");
+        sb.append(", then shuffle");
         staticText = sb.toString();
     }
 

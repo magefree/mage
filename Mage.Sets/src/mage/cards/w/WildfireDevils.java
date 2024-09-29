@@ -34,7 +34,7 @@ public final class WildfireDevils extends CardImpl {
         // When Wildfire Devils enters the battlefield and at the beginning of your upkeep, choose a player at random. That player exiles an instant or sorcery card from their graveyard. Copy that card. You may cast the copy without paying its mana cost.
         this.addAbility(new OrTriggeredAbility(
                 Zone.BATTLEFIELD, new WildfireDevilsEffect(), false,
-                "When {this} enters the battlefield and at the beginning of your upkeep, ",
+                "When {this} enters and at the beginning of your upkeep, ",
                 new EntersBattlefieldTriggeredAbility(null, false),
                 new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false)
         ));
@@ -86,7 +86,7 @@ class WildfireDevilsEffect extends OneShotEffect {
             return false;
         }
         TargetCardInGraveyard targetCard = new TargetCardInGraveyard(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY);
-        targetCard.setNotTarget(true);
+        targetCard.withNotTarget(true);
         if (!randomPlayer.choose(Outcome.Discard, randomPlayer.getGraveyard(), targetCard, source, game)) {
             return false;
         }

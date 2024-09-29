@@ -79,7 +79,7 @@ class DefiantVanguardTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
     }
 
-    DefiantVanguardTriggeredAbility(final DefiantVanguardTriggeredAbility ability) {
+    private DefiantVanguardTriggeredAbility(final DefiantVanguardTriggeredAbility ability) {
         super(ability);
     }
 
@@ -116,19 +116,19 @@ class DefiantVanguardTriggeredAbility extends TriggeredAbilityImpl {
 
 class DefiantVanguardEffect extends OneShotEffect {
 
-    public DefiantVanguardEffect() {
+    DefiantVanguardEffect() {
         super(Outcome.DestroyPermanent);
         staticText = "destroy it and all creatures it blocked this turn";
     }
 
-    public DefiantVanguardEffect(final DefiantVanguardEffect effect) {
+    private DefiantVanguardEffect(final DefiantVanguardEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        Permanent blockedCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent blockedCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         Permanent defiantVanguard = game.getPermanent(source.getSourceId());
         if (blockedCreature != null) {
             if (game.getState().getValue(blockedCreature.toString()).equals(blockedCreature.getZoneChangeCounter(game))) { // true if it did not change zones

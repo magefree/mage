@@ -57,7 +57,7 @@ public final class OjutaiMonument extends CardImpl {
             this.addAbility(FlyingAbility.getInstance());
         }
 
-        public OjutaiMonumentToken(final OjutaiMonumentToken token) {
+        private OjutaiMonumentToken(final OjutaiMonumentToken token) {
             super(token);
         }
 

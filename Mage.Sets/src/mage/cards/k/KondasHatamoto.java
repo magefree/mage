@@ -46,7 +46,7 @@ public final class KondasHatamoto extends CardImpl {
 
     }
 
-    public KondasHatamoto (final KondasHatamoto card) {
+    private KondasHatamoto(final KondasHatamoto card) {
         super(card);
     }
 

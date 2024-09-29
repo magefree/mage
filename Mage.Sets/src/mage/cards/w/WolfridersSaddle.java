@@ -4,9 +4,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenAttachSourceEffect;
-import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByMoreThanOneAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,8 +31,7 @@ public final class WolfridersSaddle extends CardImpl {
 
         // Equipped creature gets +1/+1 and can't be blocked by more than one creature.
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 1));
-        ability.addEffect(new GainAbilityAttachedEffect(
-                new SimpleStaticAbility(new CantBeBlockedByMoreThanOneSourceEffect()), AttachmentType.EQUIPMENT
+        ability.addEffect(new CantBeBlockedByMoreThanOneAttachedEffect(AttachmentType.EQUIPMENT
         ).setText("and can't be blocked by more than one creature"));
         this.addAbility(ability);
 

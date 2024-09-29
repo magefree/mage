@@ -8,7 +8,6 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,6 +17,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackAbility;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -84,7 +84,7 @@ class VerrakWarpedSengirTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         StackAbility stackAbility = (StackAbility) game.getStack().getStackObject(event.getSourceId());
-        if (stackAbility == null || stackAbility.getStackAbility() instanceof ActivatedManaAbilityImpl) {
+        if (stackAbility == null || stackAbility.getStackAbility().isManaActivatedAbility()) {
             return false;
         }
         int lifePaid = CardUtil.castStream(
@@ -97,7 +97,7 @@ class VerrakWarpedSengirTriggeredAbility extends TriggeredAbilityImpl {
         if (lifePaid > 0) {
             this.getEffects().clear();
             this.addEffect(new DoIfCostPaid(new CopyStackObjectEffect(), new PayLifeCost(lifePaid)));
-            this.getEffects().setValue("stackObject", stackAbility);
+            this.getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
             return true;
         }
         return false;

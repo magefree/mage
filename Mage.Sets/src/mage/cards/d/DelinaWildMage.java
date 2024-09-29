@@ -84,7 +84,7 @@ class DelinaWildMageEffect extends OneShotEffect {
         effect.addAdditionalAbilities(new EndOfCombatTriggeredAbility(
                 new ExileSourceEffect(), false, "Exile this creature at end of combat."
         ));
-        effect.setTargetPointer(getTargetPointer());
+        effect.setTargetPointer(this.getTargetPointer().copy());
         while (true) {
             int result = player.rollDice(outcome, source, game, 20);
             effect.apply(game, source);

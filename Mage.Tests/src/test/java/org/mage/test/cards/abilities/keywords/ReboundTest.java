@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -39,6 +35,7 @@ public class ReboundTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Distortion Strike", "Memnite");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -63,6 +60,11 @@ public class ReboundTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Distortion Strike", "Memnite");
 
+        // Yes to rebound
+        setChoice(playerA, true);
+        addTarget(playerA, "Memnite");
+
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -91,6 +93,7 @@ public class ReboundTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Distortion Strike", "Memnite");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Counterspell", "Distortion Strike");
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 

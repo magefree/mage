@@ -67,7 +67,7 @@ class IvySeerEffect extends OneShotEffect {
                 + "Target creature gets +X/+X until end of turn, where X is the number of cards revealed this way";
     }
 
-    public IvySeerEffect(final IvySeerEffect effect) {
+    private IvySeerEffect(final IvySeerEffect effect) {
         super(effect);
     }
 

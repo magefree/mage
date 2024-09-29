@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.*;
-import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -13,6 +12,7 @@ import mage.cards.FrameStyle;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.SubTypes;
@@ -55,10 +55,9 @@ public class Commander extends CommandObjectImpl {
                     case ADVENTURE_SPELL:
                         // can be used from command zone
                         if (canUseAbilityFromCommandZone(spellAbility)) {
-                            abilities.add(new CastCommanderAbility(card, spellAbility));
+                            abilities.add(spellAbility.copyWithZone(Zone.COMMAND));
                         }
                         break;
-                    case FACE_DOWN_CREATURE: // dynamic added spell for alternative cost like cast as face down
                     case SPLICE: // only from hand
                     case SPLIT_AFTERMATH: // only from graveyard
                         // can't use from command zone
@@ -126,6 +125,11 @@ public class Commander extends CommandObjectImpl {
     @Override
     public UUID getControllerId() {
         return sourceObject.getOwnerId();
+    }
+
+    @Override
+    public UUID getControllerOrOwnerId() {
+        return getControllerId();
     }
 
     @Override
@@ -240,6 +244,11 @@ public class Commander extends CommandObjectImpl {
     }
 
     @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
     public int getManaValue() {
         return sourceObject.getManaValue();
     }
@@ -305,6 +314,21 @@ public class Commander extends CommandObjectImpl {
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
         sourceObject.setIsAllCreatureTypes(game, value);
+    }
+
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return sourceObject.isAllNonbasicLandTypes(game);
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+        sourceObject.setIsAllNonbasicLandTypes(value);
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+        sourceObject.setIsAllNonbasicLandTypes(game, value);
     }
 
     @Override

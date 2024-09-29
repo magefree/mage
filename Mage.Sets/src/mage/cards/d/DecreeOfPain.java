@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -48,12 +47,12 @@ public final class DecreeOfPain extends CardImpl {
 
 class DecreeOfPainEffect extends OneShotEffect {
 
-    public DecreeOfPainEffect() {
+    DecreeOfPainEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creatures. They can't be regenerated. Draw a card for each creature destroyed this way";
     }
 
-    public DecreeOfPainEffect(final DecreeOfPainEffect effect) {
+    private DecreeOfPainEffect(final DecreeOfPainEffect effect) {
         super(effect);
     }
 
@@ -67,12 +66,13 @@ class DecreeOfPainEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int destroyedCreature = 0;
-            for (Permanent creature : game.getState().getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
+            for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, controller.getId(), game)) {
                 if (creature.destroy(source, game, true)) {
                     destroyedCreature++;
                 }
             }
             if (destroyedCreature > 0) {
+                game.processAction();
                 controller.drawCards(destroyedCreature, source, game);
             }
             return true;

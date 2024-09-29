@@ -94,8 +94,8 @@ class JourneyToTheLostCityEffect extends RollDieWithResultTableEffect {
             return false;
         }
         if (amount <= 9) {
-            TargetCard target = new TargetCardInExile(0, 1, StaticFilters.FILTER_CARD_LAND, null);
-            target.setNotTarget(true);
+            TargetCard target = new TargetCardInExile(0, 1, StaticFilters.FILTER_CARD_LAND);
+            target.withNotTarget(true);
             player.choose(outcome, cards, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             return card != null && player.moveCards(card, Zone.BATTLEFIELD, source, game);

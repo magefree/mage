@@ -71,7 +71,7 @@ public final class TawnosSolemnSurvivor extends CardImpl {
                 new TawnosSolemnSurvivorEffect(), new ManaCostsImpl<>("{1}{W}{U}{B}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, filter2)));
+        ability.addCost(new SacrificeTargetCost(2, filter2));
         ability.addCost(new ExileFromGraveCost(
                 new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_OR_CREATURE)
         ));

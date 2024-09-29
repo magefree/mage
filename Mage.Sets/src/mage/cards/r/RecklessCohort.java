@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.UUID;
@@ -11,7 +10,7 @@ import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
 /**
@@ -20,7 +19,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
  */
 public final class RecklessCohort extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another Ally");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another Ally");
 
     static {
         filter.add(AnotherPredicate.instance);

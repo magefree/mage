@@ -56,12 +56,12 @@ public final class RithTheAwakener extends CardImpl {
 
 class RithTheAwakenerEffect extends OneShotEffect {
 
-    public RithTheAwakenerEffect() {
+    RithTheAwakenerEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose a color, then create a 1/1 green Saproling creature token for each permanent of that color";
     }
 
-    public RithTheAwakenerEffect(final RithTheAwakenerEffect effect) {
+    private RithTheAwakenerEffect(final RithTheAwakenerEffect effect) {
         super(effect);
     }
 

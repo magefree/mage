@@ -46,7 +46,7 @@ class DeathsPresenceTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public DeathsPresenceTriggeredAbility(final DeathsPresenceTriggeredAbility ability) {
+    private DeathsPresenceTriggeredAbility(final DeathsPresenceTriggeredAbility ability) {
         super(ability);
     }
 

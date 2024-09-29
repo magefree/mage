@@ -8,7 +8,7 @@ import mage.abilities.condition.common.FullPartyCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.hint.common.PartyCountHint;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -51,9 +51,7 @@ public final class NaliaDeArnise extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast Cleric, Rogue, Warrior, and Wizard spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(
-                TargetController.YOU, filter, false
-        )));
+        this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter)));
 
         // At the beginning of combat on your turn, if you have a full party, put a +1/+1 counter on each creature you control and those creatures gain deathtouch until end of turn.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(

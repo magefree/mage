@@ -8,7 +8,7 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class SproutbackTrudge extends CardImpl {
 
-    private static final Condition condition = new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0);
+    private static final Condition condition = new YouGainedLifeCondition();
 
     public SproutbackTrudge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{7}{G}{G}");
@@ -39,8 +39,8 @@ public final class SproutbackTrudge extends CardImpl {
 
         // This spell costs {X} less to cast, where X is the amount of life you gained this turn.
         this.addAbility(new SimpleStaticAbility(
-                Zone.ALL, new SpellCostReductionSourceEffect(ControllerGotLifeCount.instance)
-        ).addHint(ControllerGotLifeCount.getHint()).setRuleAtTheTop(true), new PlayerGainedLifeWatcher());
+                Zone.ALL, new SpellCostReductionSourceEffect(ControllerGainedLifeCount.instance)
+        ).addHint(ControllerGainedLifeCount.getHint()).setRuleAtTheTop(true), new PlayerGainedLifeWatcher());
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());
@@ -80,11 +80,10 @@ class SproutbackTrudgeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (player == null || !(sourceObject instanceof Card)) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (player == null || card == null) {
             return false;
         }
-        Card card = (Card) sourceObject;
         game.getState().setValue("PlayFromNotOwnHandZone" + card.getId(), Boolean.TRUE);
         player.cast(
                 player.chooseAbilityForCast(card, game, false),

@@ -21,8 +21,9 @@ import mage.game.tournament.TournamentPlayer;
 import mage.players.PlayerType;
 import mage.server.User;
 import mage.server.draft.DraftController;
-import mage.server.managers.TableManager;
 import mage.server.managers.ManagerFactory;
+import mage.server.managers.TableManager;
+import mage.util.ThreadUtils;
 import mage.view.ChatMessage.MessageColor;
 import mage.view.ChatMessage.MessageType;
 import mage.view.ChatMessage.SoundToPlay;
@@ -109,7 +110,7 @@ public class TournamentController {
                 (Listener<PlayerQueryEvent>) event -> {
                     try {
                         switch (event.getQueryType()) {
-                            case CONSTRUCT:
+                            case TOURNAMENT_CONSTRUCT:
                                 construct(event.getPlayerId(), event.getMax());
                                 break;
                         }
@@ -128,7 +129,7 @@ public class TournamentController {
         checkStart();
     }
 
-    public synchronized void join(UUID userId) {
+    public void join(UUID userId) {
         UUID playerId = userPlayerMap.get(userId);
         if (playerId == null) {
             if (logger.isDebugEnabled()) {
@@ -142,21 +143,23 @@ public class TournamentController {
             logger.debug("player reopened tournament panel userId: " + userId + " tournamentId: " + tournament.getId());
             return;
         }
+
         // first join of player
+        User user = managerFactory.userManager().getUser(userId).orElse(null);
+        if (user == null) {
+            logger.error("User not found  userId: " + userId + "   tournamentId: " + tournament.getId());
+            return;
+        }
+
         TournamentSession tournamentSession = new TournamentSession(managerFactory, tournament, userId, tableId, playerId);
         tournamentSessions.put(playerId, tournamentSession);
-        Optional<User> _user = managerFactory.userManager().getUser(userId);
-        if (_user.isPresent()) {
-            User user = _user.get();
-            user.addTournament(playerId, tournament.getId());
-            TournamentPlayer player = tournament.getPlayer(playerId);
-            player.setJoined();
-            logger.debug("player " + player.getPlayer().getName() + " - client has joined tournament " + tournament.getId());
-            managerFactory.chatManager().broadcast(chatId, "", player.getPlayer().getLogName() + " has joined the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, null);
-            checkStart();
-        } else {
-            logger.error("User not found  userId: " + userId + "   tournamentId: " + tournament.getId());
-        }
+        user.addTournament(playerId, tournament.getId());
+        TournamentPlayer player = tournament.getPlayer(playerId);
+        player.setJoined();
+        logger.debug("player " + player.getPlayer().getName() + " - client has joined tournament " + tournament.getId());
+        managerFactory.chatManager().broadcast(chatId, "", player.getPlayer().getLogName() + " has joined the tournament", MessageColor.BLACK, true, null, MessageType.STATUS, null);
+
+        checkStart();
     }
 
     public void rejoin(UUID playerId) {
@@ -172,9 +175,9 @@ public class TournamentController {
         tournamentSession.update();
     }
 
-    private void checkStart() {
+    private synchronized void checkStart() {
         if (!started && allJoined()) {
-            managerFactory.threadExecutor().getCallExecutor().execute(this::startTournament);
+            managerFactory.threadExecutor().getTourneyExecutor().execute(this::startTournament);
         }
     }
 
@@ -190,7 +193,8 @@ public class TournamentController {
         return true;
     }
 
-    private synchronized void startTournament() {
+    private void startTournament() {
+        Thread.currentThread().setName(ThreadUtils.THREAD_PREFIX_TOURNEY + " " + tableId);
         for (final TournamentSession tournamentSession : tournamentSessions.values()) {
             if (!tournamentSession.init()) {
                 logger.fatal("Unable to initialize client userId: " + tournamentSession.userId + "  tournamentId " + tournament.getId());
@@ -220,7 +224,7 @@ public class TournamentController {
         try {
             TableManager tableManager = managerFactory.tableManager();
             Table table = tableManager.createTable(managerFactory.gamesRoomManager().getMainRoomId(), matchOptions);
-            table.setTournamentSubTable(true);
+            table.setTournamentSubTable(this.tableId);
             table.setTournament(tournament);
             table.setState(TableState.WAITING);
             TournamentPlayer player1 = pair.getPlayer1();
@@ -263,7 +267,7 @@ public class TournamentController {
         try {
             TableManager tableManager = managerFactory.tableManager();
             Table table = tableManager.createTable(managerFactory.gamesRoomManager().getMainRoomId(), matchOptions);
-            table.setTournamentSubTable(true);
+            table.setTournamentSubTable(this.tableId);
             table.setTournament(tournament);
             table.setState(TableState.WAITING);
             if (round.getAllPlayers().stream().allMatch(tournamentPlayer -> getPlayerUserId(tournamentPlayer.getPlayer().getId()).isPresent())) {
@@ -324,11 +328,13 @@ public class TournamentController {
         }
     }
 
-    public boolean updateDeck(UUID playerId, Deck deck) {
-        if (tournamentSessions.containsKey(playerId)) {
-            return tournamentSessions.get(playerId).updateDeck(deck);
+    public void updateDeck(UUID playerId, Deck deck, boolean ignoreMainBasicLands) {
+        TournamentSession session = tournamentSessions.getOrDefault(playerId, null);
+        if (session == null) {
+            return;
         }
-        return false;
+
+        session.updateDeck(deck, ignoreMainBasicLands);
     }
 
     public void timeout(UUID userId) {
@@ -391,7 +397,7 @@ public class TournamentController {
                 } else {
                     managerFactory.draftManager().getController(tableId).ifPresent(draftController -> {
                         draftController.getDraftSession(playerId).ifPresent(draftSession
-                                -> managerFactory.draftManager().kill(draftSession.getDraftId(), userId));
+                                -> managerFactory.draftManager().kill(draftSession.getDraft().getId(), userId));
 
                     });
                 }
@@ -519,5 +525,9 @@ public class TournamentController {
             return false;
         }
         return true;
+    }
+
+    public UUID getTableId() {
+        return tableId;
     }
 }

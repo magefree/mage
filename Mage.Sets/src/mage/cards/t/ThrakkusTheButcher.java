@@ -57,7 +57,7 @@ class ThrakkusTheButcherEffect extends OneShotEffect {
 
     ThrakkusTheButcherEffect() {
         super(Outcome.Benefit);
-        staticText = "double the power of each dragon you control until end of turn";
+        staticText = "double the power of each Dragon you control until end of turn";
     }
 
     private ThrakkusTheButcherEffect(final ThrakkusTheButcherEffect effect) {

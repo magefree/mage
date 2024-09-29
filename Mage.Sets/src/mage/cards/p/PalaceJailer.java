@@ -12,6 +12,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -42,7 +43,7 @@ public final class PalaceJailer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Palace Jailer enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect(), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // When Palace Jailer enters the battlefield, exile target creature an opponent controls until an opponent becomes the monarch. (That creature returns under its owner's control.)
         Ability ability = new EntersBattlefieldTriggeredAbility(new PalaceJailerExileEffect());
@@ -63,12 +64,12 @@ public final class PalaceJailer extends CardImpl {
 
 class PalaceJailerExileEffect extends OneShotEffect {
 
-    public PalaceJailerExileEffect() {
+    PalaceJailerExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile target creature an opponent controls until an opponent becomes the monarch. <i>(That creature returns under its owner's control.)</i>";
     }
 
-    public PalaceJailerExileEffect(final PalaceJailerExileEffect effect) {
+    private PalaceJailerExileEffect(final PalaceJailerExileEffect effect) {
         super(effect);
     }
 
@@ -95,7 +96,7 @@ class OnOpponentBecomesMonarchReturnExiledToBattlefieldAbility extends DelayedTr
         this.setRuleVisible(false);
     }
 
-    public OnOpponentBecomesMonarchReturnExiledToBattlefieldAbility(final OnOpponentBecomesMonarchReturnExiledToBattlefieldAbility ability) {
+    private OnOpponentBecomesMonarchReturnExiledToBattlefieldAbility(final OnOpponentBecomesMonarchReturnExiledToBattlefieldAbility ability) {
         super(ability);
     }
 
@@ -117,12 +118,12 @@ class OnOpponentBecomesMonarchReturnExiledToBattlefieldAbility extends DelayedTr
 
 class PalaceJailerReturnExiledPermanentsEffect extends OneShotEffect {
 
-    public PalaceJailerReturnExiledPermanentsEffect() {
+    PalaceJailerReturnExiledPermanentsEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return exiled creature";
     }
 
-    public PalaceJailerReturnExiledPermanentsEffect(final PalaceJailerReturnExiledPermanentsEffect effect) {
+    private PalaceJailerReturnExiledPermanentsEffect(final PalaceJailerReturnExiledPermanentsEffect effect) {
         super(effect);
     }
 

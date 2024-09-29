@@ -63,7 +63,7 @@ class OathOfNissaSpendAnyManaEffect extends AsThoughEffectImpl implements AsThou
         staticText = "you may spend mana as though it were mana of any color to cast planeswalker spells";
     }
 
-    public OathOfNissaSpendAnyManaEffect(final OathOfNissaSpendAnyManaEffect effect) {
+    private OathOfNissaSpendAnyManaEffect(final OathOfNissaSpendAnyManaEffect effect) {
         super(effect);
     }
 

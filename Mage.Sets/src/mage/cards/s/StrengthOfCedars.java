@@ -29,7 +29,7 @@ public final class StrengthOfCedars extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public StrengthOfCedars (final StrengthOfCedars card) {
+    private StrengthOfCedars(final StrengthOfCedars card) {
         super(card);
     }
 

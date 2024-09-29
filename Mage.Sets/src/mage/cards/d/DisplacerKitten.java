@@ -3,8 +3,7 @@ package mage.cards.d;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,9 +37,8 @@ public final class DisplacerKitten extends CardImpl {
 
         // Avoidance — Whenever you cast a noncreature spell, exile up to one target nonland permanent you control, then return that card to the battlefield under its owner's control.
         Ability ability = new SpellCastControllerTriggeredAbility(
-                new ExileTargetForSourceEffect(), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
+                new ExileThenReturnTargetEffect(false, true), StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         );
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false).concatBy(", then"));
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability.withFlavorWord("Avoidance"));
     }

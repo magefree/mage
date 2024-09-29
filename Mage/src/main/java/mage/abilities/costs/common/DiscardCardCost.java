@@ -24,7 +24,7 @@ public class DiscardCardCost extends DiscardTargetCost {
         super(new TargetCardInHand(filter).withChooseHint("discard cost"), randomDiscard);
     }
 
-    public DiscardCardCost(final DiscardCardCost cost) {
+    protected DiscardCardCost(final DiscardCardCost cost) {
         super(cost);
     }
 

@@ -64,7 +64,10 @@ public final class UvildaDeanOfPerfection extends ModalDoubleFacedCard {
         ));
 
         // Whenever you cast a spell from exile, put a +1/+1 counter on Nassari, Dean of Expression.
-        this.getRightHalfCard().addAbility(new NassariDeanOfExpressionTriggeredAbility());
+        this.getRightHalfCard().addAbility(SpellCastControllerTriggeredAbility.createWithFromZone(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                null, false, Zone.EXILED
+        ));
     }
 
     private UvildaDeanOfPerfection(final UvildaDeanOfPerfection card) {
@@ -192,10 +195,10 @@ class UvildaDeanOfPerfectionTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        MageObject sourceObject = getSourceObjectIfItStillExists(game);
+        Card card = getSourceCardIfItStillExists(game);
         return event.getTargetId().equals(this.getSourceId())
-                && sourceObject instanceof Card
-                && ((Card) sourceObject).getCounters(game).getCount(CounterType.HONE) == 0
+                && card != null
+                && card.getCounters(game).getCount(CounterType.HONE) == 0
                 && event.getAmount() > 0
                 && event.getData().equals(CounterType.HONE.getName());
     }
@@ -235,11 +238,10 @@ class UvildaDeanOfPerfectionCastEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObjectIfItStillExists(game);
-        if (player == null || !(sourceObject instanceof Card)) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (player == null || card == null) {
             return false;
         }
-        Card card = (Card) sourceObject;
         if (!player.chooseUse(outcome, "Cast " + card.getName() + '?', source, game)) {
             return false;
         }
@@ -293,30 +295,8 @@ class NassariDeanOfExpressionEffect extends OneShotEffect {
             return false;
         }
         for (Card card : cards.getCards(game)) {
-            CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+            CardUtil.makeCardPlayable(game, source, card, true, Duration.EndOfTurn, true);
         }
         return true;
-    }
-}
-
-class NassariDeanOfExpressionTriggeredAbility extends SpellCastControllerTriggeredAbility {
-
-    NassariDeanOfExpressionTriggeredAbility() {
-        super(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-        this.rule = "Whenever you cast a spell from exile, put a +1/+1 counter on {this}.";
-    }
-
-    private NassariDeanOfExpressionTriggeredAbility(final NassariDeanOfExpressionTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public NassariDeanOfExpressionTriggeredAbility copy() {
-        return new NassariDeanOfExpressionTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getZone() == Zone.EXILED && super.checkTrigger(event, game);
     }
 }

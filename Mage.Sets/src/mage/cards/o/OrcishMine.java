@@ -71,7 +71,7 @@ class OrcishMineAbility extends TriggeredAbilityImpl {
         this.addEffect(new DamageAttachedControllerEffect(2));
     }
 
-    public OrcishMineAbility(final OrcishMineAbility ability) {
+    private OrcishMineAbility(final OrcishMineAbility ability) {
         super(ability);
     }
 

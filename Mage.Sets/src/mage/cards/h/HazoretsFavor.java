@@ -61,7 +61,7 @@ public final class HazoretsFavor extends CardImpl {
             this.staticText = "If you do, sacrifice it at the beginning of the next end step";
         }
 
-        public HazoretsFavorSacrificeEffect(final HazoretsFavorSacrificeEffect effect) {
+        private HazoretsFavorSacrificeEffect(final HazoretsFavorSacrificeEffect effect) {
             super(effect);
         }
 

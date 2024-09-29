@@ -10,6 +10,7 @@ import mage.cards.repository.*;
 import mage.client.MageFrame;
 import mage.client.cards.*;
 import mage.client.constants.Constants.SortBy;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.deckeditor.table.TableModel;
 import mage.client.dialog.CheckBoxList;
 import mage.client.util.GUISizeHelper;
@@ -76,7 +77,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         // prepare search dialog with checkboxes
         listCodeSelected = new CheckBoxList();
         List<String> checkboxes = new ArrayList<>();
-        for (String item : ConstructedFormats.getTypes()) {
+        for (String item : ConstructedFormats.getTypes(false)) {
             if (!item.equals(ConstructedFormats.ALL_SETS)) {
                 checkboxes.add(item);
             }
@@ -97,11 +98,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jTextFieldSearch.addActionListener(searchAction);
 
         // make the components more readable
-        tbColor.setBackground(new Color(250, 250, 250, 150));
+        tbColor.setBackground(PreferencesDialog.getCurrentTheme().getDeckEditorToolbarBackgroundColor());
         tbColor.setOpaque(true); // false = transparent
-        tbTypes.setBackground(new Color(250, 250, 250, 150));
+        tbTypes.setBackground(PreferencesDialog.getCurrentTheme().getDeckEditorToolbarBackgroundColor());
         tbTypes.setOpaque(true); // false = transparent
-        cardSelectorBottomPanel.setBackground(new Color(250, 250, 250, 150));
+        cardSelectorBottomPanel.setBackground(PreferencesDialog.getCurrentTheme().getDeckEditorToolbarBackgroundColor());
         cardSelectorBottomPanel.setOpaque(true); // false = transparent
     }
 
@@ -143,6 +144,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         mainTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
+                }
                 if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0) && !e.isConsumed()) { // double clicks and repeated double clicks
                     e.consume();
                     if (e.isAltDown()) {
@@ -157,9 +161,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jToggleCardView.setToolTipText(jToggleCardView.getToolTipText() + " (works only up to " + CardGrid.MAX_IMAGES + " cards).");
     }
 
-    /**
-     * Free all references
-     */
     public void cleanUp() {
         this.cardGrid.clear();
         this.mainModel.clear();
@@ -167,6 +168,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         MageFrame.getPreferences().put(KEY_DECK_EDITOR_SEARCH_RULES, Boolean.toString(chkRules.isSelected()));
         MageFrame.getPreferences().put(KEY_DECK_EDITOR_SEARCH_TYPES, Boolean.toString(chkTypes.isSelected()));
         MageFrame.getPreferences().put(KEY_DECK_EDITOR_SEARCH_UNIQUE, Boolean.toString(chkUnique.isSelected()));
+        ExpansionRepository.instance.unsubscribe(setsDbListener);
     }
 
     public void changeGUISize() {
@@ -180,7 +182,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private void setGUISize() {
         mainTable.getTableHeader().setFont(GUISizeHelper.tableFont);
         mainTable.setFont(GUISizeHelper.tableFont);
-        mainTable.setRowHeight(GUISizeHelper.getTableRowHeight());
+        mainTable.setRowHeight(GUISizeHelper.tableRowHeight);
 
     }
 
@@ -476,7 +478,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                         }
                     }
                     // filter by settings
-                    Card card = cardInfo.getMockCard();
+                    Card card = cardInfo.createMockCard();
                     if (!filter.match(card, null)) {
                         continue;
                     }
@@ -536,7 +538,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }
 
     private void reloadSetsCombobox() {
-        DefaultComboBoxModel model = new DefaultComboBoxModel<>(ConstructedFormats.getTypes());
+        DefaultComboBoxModel model = new DefaultComboBoxModel<>(ConstructedFormats.getTypes(false).toArray());
         cbExpansionSet.setModel(model);
     }
 
@@ -1467,44 +1469,45 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private void btnExpansionSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpansionSearchActionPerformed
         // search and check multiple items
 
-        int[] oldChecks = listCodeSelected.getCheckedIndices();
+        final int[] oldChecks = listCodeSelected.getCheckedIndices();
 
         // call dialog
-        FastSearchUtil.showFastSearchForStringComboBox(listCodeSelected, FastSearchUtil.DEFAULT_EXPANSION_SEARCH_MESSAGE);
-
-        int[] newChecks = listCodeSelected.getCheckedIndices();
-        if (Arrays.equals(oldChecks, newChecks)) {
-            // no changes or cancel
-            return;
-        }
-
-        isSetsFilterLoading = true;
-        try {
-            // delete old item
-            if (cbExpansionSet.getItemAt(0).startsWith(MULTI_SETS_SELECTION_TEXT)) {
-                cbExpansionSet.removeItemAt(0);
+        FastSearchUtil.showFastSearchForStringComboBox(listCodeSelected, FastSearchUtil.DEFAULT_EXPANSION_SEARCH_MESSAGE, () -> {
+            // data update on good choice
+            int[] newChecks = listCodeSelected.getCheckedIndices();
+            if (Arrays.equals(oldChecks, newChecks)) {
+                // no changes or cancel
+                return;
             }
 
-            // set new selection
-            if (newChecks.length == 0) {
-                // all
-                cbExpansionSet.setSelectedIndex(0);
-            } else if (newChecks.length == 1) {
-                // one
-                setSetsSelection(listCodeSelected.getModel().getElementAt(newChecks[0]).toString());
-            } else {
-                // multiple
-                // insert custom text
-                String message = String.format("%s: %d", MULTI_SETS_SELECTION_TEXT, newChecks.length);
-                cbExpansionSet.insertItemAt(message, 0);
-                cbExpansionSet.setSelectedIndex(0);
-            }
-        } finally {
-            isSetsFilterLoading = false;
-        }
+            isSetsFilterLoading = true;
+            try {
+                // delete old item
+                if (cbExpansionSet.getItemAt(0).startsWith(MULTI_SETS_SELECTION_TEXT)) {
+                    cbExpansionSet.removeItemAt(0);
+                }
 
-        // update data
-        filterCards();
+                // set new selection
+                if (newChecks.length == 0) {
+                    // all
+                    cbExpansionSet.setSelectedIndex(0);
+                } else if (newChecks.length == 1) {
+                    // one
+                    setSetsSelection(listCodeSelected.getModel().getElementAt(newChecks[0]).toString());
+                } else {
+                    // multiple
+                    // insert custom text
+                    String message = String.format("%s: %d", MULTI_SETS_SELECTION_TEXT, newChecks.length);
+                    cbExpansionSet.insertItemAt(message, 0);
+                    cbExpansionSet.setSelectedIndex(0);
+                }
+            } finally {
+                isSetsFilterLoading = false;
+            }
+
+            // update data
+            filterCards();
+        });
     }//GEN-LAST:event_btnExpansionSearchActionPerformed
 
     private void tbCommonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbCommonActionPerformed

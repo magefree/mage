@@ -120,10 +120,9 @@ class DranaAndLinvalaGainAbilitiesEffect extends ContinuousEffectImpl {
                 .map(permanent -> permanent.getAbilities(game))
                 .flatMap(Collection::stream)
                 .filter(Objects::nonNull)
-                .filter(ability -> ability.getAbilityType() == AbilityType.ACTIVATED
-                        || ability.getAbilityType() == AbilityType.MANA)
+                .filter(Ability::isActivatedAbility)
                 .collect(Collectors.toList())) {
-            Ability addedAbility = perm.addAbility(ability, source.getSourceId(), game);
+            Ability addedAbility = perm.addAbility(ability, source.getSourceId(), game, true);
             if (addedAbility != null) {
                 addedAbility.getEffects().setValue("dranaLinvalaFlag", true);
             }

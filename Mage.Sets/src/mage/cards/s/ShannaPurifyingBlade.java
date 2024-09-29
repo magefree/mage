@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class ShannaPurifyingBlade extends CardImpl {
         // At the beginning of your end step, you may pay {X}. If you do, draw X cards. X can't be greater than the amount of life you gained this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new ShannaPurifyingBladeEffect(), TargetController.YOU, false
-        ).addHint(ControllerGotLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private ShannaPurifyingBlade(final ShannaPurifyingBlade card) {
@@ -72,7 +72,7 @@ class ShannaPurifyingBladeEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int lifeGained = ControllerGotLifeCount.instance.calculate(game, source, this);
+        int lifeGained = ControllerGainedLifeCount.instance.calculate(game, source, this);
         if (lifeGained < 1) {
             return false;
         }

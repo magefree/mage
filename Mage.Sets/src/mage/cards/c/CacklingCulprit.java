@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -32,7 +32,7 @@ public final class CacklingCulprit extends CardImpl {
         this.nightCard = true;
 
         // Whenever Cackling Culprit or another creature you control dies, you gain 1 life.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
                 new GainLifeEffect(1), false, StaticFilters.FILTER_CONTROLLED_CREATURE
         ));
 

@@ -1,5 +1,3 @@
-
-
 package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
@@ -11,8 +9,13 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 public enum AttachedToTappedCondition implements Condition {
-    instance;
+    TAPPED(true),
+    UNTAPPED(false);
+    private final boolean tapped;
 
+    AttachedToTappedCondition(boolean tapped) {
+        this.tapped = tapped;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -24,6 +27,6 @@ public enum AttachedToTappedCondition implements Condition {
         if (attachedTo == null) {
             return false;
         }
-        return attachedTo.isTapped();
+        return attachedTo.isTapped() == this.tapped;
     }
 }

@@ -46,7 +46,7 @@ class ClearTheLandEffect extends OneShotEffect {
         this.staticText = "Each player reveals the top five cards of their library, puts all land cards revealed this way onto the battlefield tapped, and exiles the rest.";
     }
     
-    public ClearTheLandEffect(final ClearTheLandEffect effect) {
+    private ClearTheLandEffect(final ClearTheLandEffect effect) {
         super(effect);
     }
     
@@ -68,7 +68,7 @@ class ClearTheLandEffect extends OneShotEffect {
                 if (player != null) {
                     Library library = player.getLibrary();
                     Cards cardsToReveal = new CardsImpl();
-                    cardsToReveal.addAll(library.getTopCards(game, 5));
+                    cardsToReveal.addAllCards(library.getTopCards(game, 5));
                     if (!cardsToReveal.isEmpty()) {
                         player.revealCards(source, "Revealed cards for " + player.getName(), cardsToReveal, game);
                         Cards cardsToPutOnBattlefield = new CardsImpl();

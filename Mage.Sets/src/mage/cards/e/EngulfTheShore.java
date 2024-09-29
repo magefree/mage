@@ -54,7 +54,7 @@ class EngulfTheShoreEffect extends OneShotEffect {
         this.staticText = "Return to their owners' hands all creatures with toughness less than or equal to the number of Islands you control";
     }
 
-    public EngulfTheShoreEffect(final EngulfTheShoreEffect effect) {
+    private EngulfTheShoreEffect(final EngulfTheShoreEffect effect) {
         super(effect);
     }
 

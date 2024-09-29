@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class GainAbilityControllerEffect extends ContinuousEffectImpl {
@@ -21,6 +20,7 @@ public class GainAbilityControllerEffect extends ContinuousEffectImpl {
 
     /**
      * Add ability with Duration.WhileOnBattlefield
+     *
      * @param ability
      */
     public GainAbilityControllerEffect(Ability ability) {
@@ -28,7 +28,6 @@ public class GainAbilityControllerEffect extends ContinuousEffectImpl {
     }
 
     /**
-     * 
      * @param ability
      * @param duration custom - effect will be discarded as soon there is no sourceId - permanent on the battlefield
      */
@@ -41,7 +40,7 @@ public class GainAbilityControllerEffect extends ContinuousEffectImpl {
         }
     }
 
-    public GainAbilityControllerEffect(final GainAbilityControllerEffect effect) {
+    protected GainAbilityControllerEffect(final GainAbilityControllerEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
     }

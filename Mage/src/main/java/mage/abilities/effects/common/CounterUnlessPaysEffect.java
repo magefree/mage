@@ -42,7 +42,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
         this.exile = exile;
     }
 
-    public CounterUnlessPaysEffect(final CounterUnlessPaysEffect effect) {
+    protected CounterUnlessPaysEffect(final CounterUnlessPaysEffect effect) {
         super(effect);
         if (effect.cost != null) {
             this.cost = effect.cost.copy();
@@ -60,7 +60,7 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackObject spell = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (spell == null) {
             return false;
         }
@@ -84,7 +84,8 @@ public class CounterUnlessPaysEffect extends OneShotEffect {
         message += costValueMessage + '?';
 
         costToPay.clearPaid();
-        if (!(player.chooseUse(Outcome.Benefit, message, source, game)
+        if (!(costToPay.canPay(source, source, player.getId(), game)
+                && player.chooseUse(Outcome.Benefit, message, source, game)
                 && costToPay.pay(source, game, source, spell.getControllerId(), false, null))) {
             game.informPlayers(player.getLogName() + " chooses not to pay " + costValueMessage + " to prevent the counter effect");
             game.getStack().counter(spell.getId(), source, game, exile ? PutCards.EXILED : PutCards.GRAVEYARD);

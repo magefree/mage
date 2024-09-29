@@ -20,7 +20,8 @@ import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedBatchEvent;
+import mage.game.events.DamagedBatchAllEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -91,16 +92,15 @@ class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH
-                || event.getType() == GameEvent.EventType.DAMAGED_PERMANENT_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ALL;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchEvent dEvent = (DamagedBatchEvent) event;
-        List<Permanent> permanents = dEvent
+        List<Permanent> permanents = ((DamagedBatchAllEvent) event)
                 .getEvents()
                 .stream()
+                .filter(DamagedEvent::isCombatDamage)
                 .map(e -> {
                     Permanent permanent = game.getPermanent(e.getSourceId());
                     Permanent defender = game.getPermanent(e.getTargetId());

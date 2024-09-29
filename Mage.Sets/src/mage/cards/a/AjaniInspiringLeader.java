@@ -2,8 +2,9 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.GainLifeTargetControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -13,9 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -39,8 +37,9 @@ public final class AjaniInspiringLeader extends CardImpl {
         this.addAbility(ability);
 
         // −3: Exile target creature. Its controller gains 2 life.
-        ability = new LoyaltyAbility(new AjaniInspiringLeaderEffect(), -3);
+        ability = new LoyaltyAbility(new ExileTargetEffect(), -3);
         ability.addTarget(new TargetCreaturePermanent());
+        ability.addEffect(new GainLifeTargetControllerEffect(2));
         this.addAbility(ability);
 
         // −10: Creatures you control gain flying and double strike until end of turn.
@@ -62,36 +61,5 @@ public final class AjaniInspiringLeader extends CardImpl {
     @Override
     public AjaniInspiringLeader copy() {
         return new AjaniInspiringLeader(this);
-    }
-}
-
-class AjaniInspiringLeaderEffect extends OneShotEffect {
-
-    AjaniInspiringLeaderEffect() {
-        super(Outcome.Benefit);
-        staticText = "Exile target creature. Its controller gains 2 life.";
-    }
-
-    private AjaniInspiringLeaderEffect(final AjaniInspiringLeaderEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AjaniInspiringLeaderEffect copy() {
-        return new AjaniInspiringLeaderEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (permanent == null) {
-            return false;
-        }
-        Player player = game.getPlayer(permanent.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        player.gainLife(2, game, source);
-        return player.moveCards(permanent, Zone.EXILED, source, game);
     }
 }

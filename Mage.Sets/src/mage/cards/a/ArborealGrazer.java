@@ -20,7 +20,7 @@ public final class ArborealGrazer extends CardImpl {
     public ArborealGrazer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
 
-        this.subtype.add(SubType.BEAST);
+        this.subtype.add(SubType.SLOTH, SubType.BEAST);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
 

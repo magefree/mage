@@ -41,7 +41,7 @@ public final class EleshNornGrandCenobite extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostOpponentsEffect(-2, -2, Duration.WhileOnBattlefield)));
     }
 
-    public EleshNornGrandCenobite (final EleshNornGrandCenobite card) {
+    private EleshNornGrandCenobite(final EleshNornGrandCenobite card) {
         super(card);
     }
 

@@ -18,7 +18,7 @@ public final class GlimmerOfGenius extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
         // Scry 2, then draw two card. You get {E}{E}.
-        this.getSpellAbility().addEffect(new ScryEffect(2));
+        this.getSpellAbility().addEffect(new ScryEffect(2, false));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2).concatBy(", then"));
         this.getSpellAbility().addEffect(new GetEnergyCountersControllerEffect(2));
     }

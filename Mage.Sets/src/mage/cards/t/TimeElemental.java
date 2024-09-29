@@ -43,7 +43,8 @@ public final class TimeElemental extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Time Elemental attacks or blocks, at end of combat, sacrifice it and it deals 5 damage to you.
-        DelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect().setText("at end of combat, sacrifice it"));
+        DelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect()
+                .setText("at end of combat, sacrifice it")).setTriggerPhrase("");
         ability.addEffect(new DamageControllerEffect(5).setText("and it deals 5 damage to you"));
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(ability, true), false));
         

@@ -44,7 +44,7 @@ class JadeIdolToken extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
-    public JadeIdolToken(final JadeIdolToken token) {
+    private JadeIdolToken(final JadeIdolToken token) {
         super(token);
     }
 

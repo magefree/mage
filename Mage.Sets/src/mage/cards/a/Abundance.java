@@ -47,18 +47,13 @@ class AbundanceReplacementEffect extends ReplacementEffectImpl {
         staticText = "If you would draw a card, you may instead choose land or nonland and reveal cards from the top of your library until you reveal a card of the chosen kind. Put that card into your hand and put all other cards revealed this way on the bottom of your library in any order";
     }
 
-    AbundanceReplacementEffect(final AbundanceReplacementEffect effect) {
+    private AbundanceReplacementEffect(final AbundanceReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public AbundanceReplacementEffect copy() {
         return new AbundanceReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

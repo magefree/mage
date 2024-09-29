@@ -10,6 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.StaticFilters;
 import mage.game.permanent.token.GoblinToken;
 
 import java.util.UUID;
@@ -31,7 +32,7 @@ public final class GoblinWarParty extends CardImpl {
                 1, 1, Duration.EndOfTurn
         ).setText("creatures you control get +1/+1"));
         mode.addEffect(new GainAbilityControlledEffect(
-                HasteAbility.getInstance(), Duration.EndOfTurn
+                HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES
         ).setText("and gain haste until end of turn"));
         this.getSpellAbility().addMode(mode);
 

@@ -20,7 +20,7 @@ public final class BeastToken4 extends TokenImpl {
 
     }
 
-    public BeastToken4(final BeastToken4 token) {
+    protected BeastToken4(final BeastToken4 token) {
         super(token);
     }
 

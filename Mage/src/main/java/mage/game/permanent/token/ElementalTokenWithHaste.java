@@ -20,7 +20,7 @@ public final class ElementalTokenWithHaste extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public ElementalTokenWithHaste(final ElementalTokenWithHaste token) {
+    protected ElementalTokenWithHaste(final ElementalTokenWithHaste token) {
         super(token);
     }
 

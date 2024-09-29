@@ -2,8 +2,8 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -42,7 +42,7 @@ public final class HaldirLorienLieutenant extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Haldir, Lorien Lieutenant enters the battlefield with X +1/+1 counters on it.
-        this.addAbility(new SimpleStaticAbility(
+        this.addAbility(new EntersBattlefieldAbility(
                 new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())
         ));
 
@@ -54,7 +54,7 @@ public final class HaldirLorienLieutenant extends CardImpl {
                 VigilanceAbility.getInstance(), Duration.EndOfTurn, filter, true
         ).setText("until end of turn, other Elves you control gain vigilance"), new ManaCostsImpl<>("{5}{G}"));
         ability.addEffect(new BoostControlledEffect(
-                xValue, xValue, Duration.EndOfTurn, filter2, true, true
+                xValue, xValue, Duration.EndOfTurn, filter2, true
         ).setText("and get +1/+1 for each +1/+1 counter on {this}"));
         this.addAbility(ability);
     }

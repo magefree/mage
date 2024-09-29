@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.MageInt;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.keyword.AmassEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class WarbeastOfGorgoroth extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Warbeast of Gorgoroth or another creature you control with power 4 or greater dies, amass Orcs 2.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
                 new AmassEffect(2, SubType.ORC), false, filter
         ));
     }

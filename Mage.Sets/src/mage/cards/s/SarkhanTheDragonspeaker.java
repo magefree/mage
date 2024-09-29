@@ -67,7 +67,7 @@ class SarkhanTheDragonspeakerEffect extends ContinuousEffectImpl {
         staticText = "Until end of turn, {this} becomes a legendary 4/4 red Dragon creature with flying, indestructible, and haste.";
     }
 
-    SarkhanTheDragonspeakerEffect(final SarkhanTheDragonspeakerEffect effect) {
+    private SarkhanTheDragonspeakerEffect(final SarkhanTheDragonspeakerEffect effect) {
         super(effect);
     }
 

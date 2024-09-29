@@ -55,12 +55,12 @@ public final class GlissaSunseeker extends CardImpl {
 
 class GlissaSunseekerEffect extends OneShotEffect {
 
-    public GlissaSunseekerEffect() {
+    GlissaSunseekerEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target artifact if its mana value is equal to the amount of unspent mana you have";
     }
 
-    public GlissaSunseekerEffect(final GlissaSunseekerEffect effect) {
+    private GlissaSunseekerEffect(final GlissaSunseekerEffect effect) {
         super(effect);
     }
 

@@ -29,7 +29,7 @@ public final class FieryFall extends CardImpl {
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl<>("{1}{R}")));
     }
 
-    public FieryFall (final FieryFall card) {
+    private FieryFall(final FieryFall card) {
         super(card);
     }
 

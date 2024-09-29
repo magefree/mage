@@ -77,7 +77,7 @@ class VisionsOfDreadEffect extends OneShotEffect {
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(
                 StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
         );
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         opponent.choose(Outcome.Detriment, target, source, game);
         return controller.moveCards(game.getCard(target.getFirstTarget()), Zone.BATTLEFIELD, source, game);
     }

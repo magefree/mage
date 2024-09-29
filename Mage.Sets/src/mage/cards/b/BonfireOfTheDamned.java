@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetPlayerOrPlaneswalker;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -55,11 +56,11 @@ class BonfireOfTheDamnedEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int damage = source.getManaCostsToPay().getX();
+        int damage = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (damage < 1) {
             return false;
         }
-        game.damagePlayerOrPlaneswalker(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
+        game.damagePlayerOrPermanent(source.getFirstTarget(), damage, source.getSourceId(), source, game, false, true);
         Player player = game.getPlayerOrPlaneswalkerController(source.getFirstTarget());
         if (player == null) {
             return true;

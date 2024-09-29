@@ -16,7 +16,7 @@ public final class KorAllyToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public KorAllyToken(final KorAllyToken token) {
+    private KorAllyToken(final KorAllyToken token) {
         super(token);
     }
 

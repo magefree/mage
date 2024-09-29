@@ -2,12 +2,10 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.token.TreasureAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -31,7 +29,7 @@ public final class MinimusContainment extends CardImpl {
         // Enchant nonland permanent
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_NON_LAND);
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
@@ -51,16 +49,10 @@ public final class MinimusContainment extends CardImpl {
 
 class MinimusContainmentEffect extends ContinuousEffectImpl {
 
-    private static final Ability ability = new AnyColorManaAbility();
-
-    static {
-        Cost cost = new SacrificeSourceCost();
-        cost.setText("sacrifice this artifact");
-        ability.addCost(cost);
-    }
+    private static final Ability ability = new TreasureAbility(false);
 
     MinimusContainmentEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.LoseAbility);
         staticText = "enchanted permanent is a Treasure artifact with " +
                 "\"{T}, Sacrifice this artifact: Add one mana of any color,\" and it loses all other abilities";
     }

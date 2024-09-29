@@ -38,13 +38,13 @@ public class MtgArenaDeckExporter extends DeckExporter {
         for (DeckCardInfo card : sourceCards) {
             String setCode = card.getSetCode().toUpperCase(Locale.ENGLISH);
             setCode = SET_CODE_REPLACEMENTS.getOrDefault(setCode, setCode);
-            String name = card.getCardName() + " (" + setCode + ") " + card.getCardNum();
+            String name = card.getCardName() + " (" + setCode + ") " + card.getCardNumber();
             String code = prefix + name;
             int curAmount = amount.getOrDefault(code, 0);
             if (curAmount == 0) {
                 res.add(name);
             }
-            amount.put(code, curAmount + card.getQuantity());
+            amount.put(code, curAmount + card.getAmount());
         }
         return res;
     }

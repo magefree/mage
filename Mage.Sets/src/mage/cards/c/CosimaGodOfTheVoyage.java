@@ -45,7 +45,7 @@ public final class CosimaGodOfTheVoyage extends ModalDoubleFacedCard {
         // Legendary Creature - God
         this.getLeftHalfCard().setPT(new MageInt(2), new MageInt(4));
 
-        // At the beginning of your upkeep, you may exile Cosima. If you do, it gains "Whenever a land enters the battlefield under your control, if Cosima is exiled, you may put a voyage counter on it. If you don't, return Cosima to the battlefield with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it.
+        // At the beginning of your upkeep, you may exile Cosima. If you do, it gains "Whenever a land you control enters, if Cosima is exiled, you may put a voyage counter on it. If you don't, return Cosima to the battlefield with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it.
         this.getLeftHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new CosimaGodOfTheVoyageEffect(), TargetController.YOU, true
         ));
@@ -80,7 +80,7 @@ class CosimaGodOfTheVoyageEffect extends OneShotEffect {
     CosimaGodOfTheVoyageEffect() {
         super(Outcome.Benefit);
         staticText = "exile {this}. If you do, it gains " +
-                "\"Whenever a land enters the battlefield under your control, if {this} is exiled, " +
+                "\"Whenever a land you control enters, if {this} is exiled, " +
                 "you may put a voyage counter on it. If you don't, return {this} to the battlefield " +
                 "with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it.\"";
     }
@@ -183,7 +183,7 @@ class CosimaGodOfTheVoyageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a land enters the battlefield under your control, if {this} is exiled, " +
+        return "Whenever a land you control enters, if {this} is exiled, " +
                 "you may put a voyage counter on it. If you don't, return {this} to the battlefield " +
                 "with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it.";
     }
@@ -258,7 +258,7 @@ class TheOmenkeelEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         int damage = (Integer) getValue("damage");
         if (player == null || damage < 1) {
             return false;

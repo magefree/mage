@@ -2,10 +2,9 @@ package mage.cards.s;
 
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
@@ -23,7 +22,7 @@ import java.util.UUID;
  */
 public final class SeaGateRestoration extends ModalDoubleFacedCard {
 
-    private static final DynamicValue xValue = new AdditiveDynamicValue(CardsInControllerHandCount.instance, StaticValue.get(1));
+    private static final DynamicValue xValue = new IntPlusDynamicValue(1, CardsInControllerHandCount.instance);
 
     public SeaGateRestoration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
@@ -47,10 +46,10 @@ public final class SeaGateRestoration extends ModalDoubleFacedCard {
         // Sea Gate, Reborn
         // Land
 
-        // As Sea Gate, Reborn enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        // As Sea Gate, Reborn enters the battlefield, you may pay 3 life. If you don't, it enters tapped.
         this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(
                 new TapSourceUnlessPaysEffect(new PayLifeCost(3)),
-                "you may pay 3 life. If you don't, it enters the battlefield tapped"
+                "you may pay 3 life. If you don't, it enters tapped"
         ));
 
         // {T}: Add {U}.

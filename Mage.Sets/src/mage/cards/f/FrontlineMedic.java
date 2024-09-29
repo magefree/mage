@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import mage.MageInt;
@@ -18,7 +17,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.mageobject.VariableManaCostPredicate;
 import mage.target.TargetSpell;
 
@@ -45,8 +44,7 @@ public final class FrontlineMedic extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Battalion - Whenever Frontline Medic and at least two other creatures attack, creatures you control gain indestructible until end of turn.
-        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), false);
-        effect.setText("creatures you control gain indestructible until end of turn");
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, false);
         this.addAbility(new BattalionAbility(effect));
 
         // Sacrifice Frontline Medic: Counter target spell with {X} in its mana cost unless its controller pays {3}.

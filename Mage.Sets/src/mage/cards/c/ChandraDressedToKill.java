@@ -7,6 +7,7 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
@@ -72,7 +73,7 @@ public final class ChandraDressedToKill extends CardImpl {
 // Ex. MDFCs like Mila, Crafty Companion.  Back half cannot be played from the +1 but it can from the -7.
 class ChandraDressedToKillExile1Effect extends OneShotEffect {
 
-    public ChandraDressedToKillExile1Effect() {
+    ChandraDressedToKillExile1Effect() {
         super(Outcome.Benefit);
         staticText = "Exile the top card of your library. If it's red, you may cast it this turn";
     }
@@ -110,7 +111,7 @@ class ChandraDressedToKillExile1Effect extends OneShotEffect {
 
 class ChandraDressedToKillExile5Effect extends OneShotEffect {
 
-    public ChandraDressedToKillExile5Effect() {
+    ChandraDressedToKillExile5Effect() {
         super(Outcome.Benefit);
         staticText = "Exile the top five cards of your library. You may cast red spells from among them this turn";
     }
@@ -150,7 +151,7 @@ class ChandraDressedToKillExile5Effect extends OneShotEffect {
 // Only used for the -7 ability (see comment at top)
 class ChandraDressedToKillPlayEffect extends PlayFromNotOwnHandZoneTargetEffect {
 
-    public ChandraDressedToKillPlayEffect() {
+    ChandraDressedToKillPlayEffect() {
         super(Zone.EXILED, TargetController.YOU, Duration.EndOfTurn, false, true);
     }
 
@@ -165,10 +166,10 @@ class ChandraDressedToKillPlayEffect extends PlayFromNotOwnHandZoneTargetEffect 
 
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
-        if (!super.applies(objectId, affectedAbility, source, game, playerId)) {
+        if (!(super.applies(objectId, affectedAbility, source, game, playerId) && affectedAbility instanceof SpellAbility)) {
             return false;
         }
-        Card card = game.getCard(objectId);
+        Card card = ((SpellAbility) affectedAbility).getCharacteristics(game);
         return card != null && card.getColor(game).isRed();
     }
 }

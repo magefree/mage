@@ -35,7 +35,7 @@ public final class DeepFreeze extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
@@ -70,7 +70,7 @@ class DeepFreezeToken extends TokenImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public DeepFreezeToken(final DeepFreezeToken token) {
+    private DeepFreezeToken(final DeepFreezeToken token) {
         super(token);
     }
 

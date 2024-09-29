@@ -52,7 +52,7 @@ class RemorselessPunishmentEffect extends OneShotEffect {
         this.staticText = "Target opponent loses 5 life unless that player discards two cards or sacrifices a creature or planeswalker. Repeat this process once";
     }
 
-    public RemorselessPunishmentEffect(final RemorselessPunishmentEffect effect) {
+    private RemorselessPunishmentEffect(final RemorselessPunishmentEffect effect) {
         super(effect);
     }
 

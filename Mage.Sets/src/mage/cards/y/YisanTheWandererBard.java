@@ -61,12 +61,12 @@ public final class YisanTheWandererBard extends CardImpl {
 
 class YisanTheWandererBardEffect extends OneShotEffect {
 
-    public YisanTheWandererBardEffect() {
+    YisanTheWandererBardEffect() {
         super(Outcome.Benefit);
         this.staticText = "Search your library for a creature card with mana value equal to the number of verse counters on {this}, put it onto the battlefield, then shuffle";
     }
 
-    public YisanTheWandererBardEffect(final YisanTheWandererBardEffect effect) {
+    private YisanTheWandererBardEffect(final YisanTheWandererBardEffect effect) {
         super(effect);
     }
 

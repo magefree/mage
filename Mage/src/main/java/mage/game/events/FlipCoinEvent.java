@@ -54,6 +54,6 @@ public class FlipCoinEvent extends GameEvent {
     }
 
     public CoinFlippedEvent createFlippedEvent() {
-        return new CoinFlippedEvent(playerId, sourceId, result, chosen, winnable);
+        return new CoinFlippedEvent(playerId, sourceId, flipCount, result, chosen, winnable);
     }
 }

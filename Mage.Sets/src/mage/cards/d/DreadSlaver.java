@@ -44,12 +44,12 @@ public final class DreadSlaver extends CardImpl {
 
 class DreadSlaverEffect extends OneShotEffect {
 
-    public DreadSlaverEffect() {
+    DreadSlaverEffect() {
         super(Outcome.Benefit);
         staticText = "return it to the battlefield under your control. That creature is a black Zombie in addition to its other colors and types";
     }
 
-    public DreadSlaverEffect(final DreadSlaverEffect effect) {
+    private DreadSlaverEffect(final DreadSlaverEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class DreadSlaverEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
                 ContinuousEffect effect = new AddCreatureTypeAdditionEffect(SubType.ZOMBIE, true);

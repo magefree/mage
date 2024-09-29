@@ -54,18 +54,18 @@ public final class MeletisCharlatan extends CardImpl {
 
 class MeletisCharlatanCopyTargetSpellEffect extends OneShotEffect {
 
-    public MeletisCharlatanCopyTargetSpellEffect() {
+    MeletisCharlatanCopyTargetSpellEffect() {
         super(Outcome.Copy);
         staticText = "The controller of target instant or sorcery spell copies it. That player may choose new targets for the copy";
     }
 
-    public MeletisCharlatanCopyTargetSpellEffect(final MeletisCharlatanCopyTargetSpellEffect effect) {
+    private MeletisCharlatanCopyTargetSpellEffect(final MeletisCharlatanCopyTargetSpellEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         if (spell != null) {
             spell.createCopyOnStack(game, source, spell.getControllerId(), true);
             return true;

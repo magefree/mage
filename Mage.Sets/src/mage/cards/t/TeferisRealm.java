@@ -63,7 +63,7 @@ class TeferisRealmEffect extends OneShotEffect {
         this.staticText = "that player chooses artifact, creature, land, or non-Aura enchantment. All nontoken permanents of that type phase out";
     }
 
-    public TeferisRealmEffect(final TeferisRealmEffect effect) {
+    private TeferisRealmEffect(final TeferisRealmEffect effect) {
         super(effect);
     }
 

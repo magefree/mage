@@ -81,7 +81,7 @@ class AzamukiTreacheryIncarnate extends TokenImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    public AzamukiTreacheryIncarnate(final AzamukiTreacheryIncarnate token) {
+    private AzamukiTreacheryIncarnate(final AzamukiTreacheryIncarnate token) {
         super(token);
     }
 

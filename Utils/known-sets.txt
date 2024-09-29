@@ -1,3 +1,4 @@
+Alchemy: Dominaria|AlchemyDominaria|
 Alchemy: Innistrad|AlchemyInnistrad|
 Adventures in the Forgotten Realms|AdventuresInTheForgottenRealms|
 Forgotten Realms Commander|ForgottenRealmsCommander|
@@ -10,12 +11,16 @@ Apocalypse|Apocalypse|
 Archenemy|Archenemy|
 Archenemy: Nicol Bolas|ArchenemyNicolBolas|
 Arabian Nights|ArabianNights|
+Arena Beginner Set|ArenaBeginnerSet|
 Arena League|ArenaLeague|
 Asia Pacific Land Program|AsiaPacificLandProgram|
+Assassin's Creed|AssassinsCreed|
 Avacyn Restored|AvacynRestored|
 Battlebond|Battlebond|
 Battle for Zendikar|BattleForZendikar|
 Betrayers of Kamigawa|BetrayersOfKamigawa|
+Bloomburrow|Bloomburrow|
+Bloomburrow Commander|BloomburrowCommander|
 Born of the Gods|BornOfTheGods|
 Champions of Kamigawa|ChampionsOfKamigawa|
 Champs|Champs|
@@ -46,6 +51,7 @@ Core Set 2021|CoreSet2021|
 Dark Ascension|DarkAscension|
 Darksteel|Darksteel|
 Dissension|Dissension|
+Doctor Who|DoctorWho|
 Dominaria|Dominaria|
 Dominaria United|DominariaUnited|
 Dominaria United Commander|DominariaUnitedCommander|
@@ -76,6 +82,8 @@ Duel Decks: Speed vs. Cunning|DuelDecksSpeedVsCunning|
 Duel Decks: Venser vs. Koth|DuelDecksVenserVsKoth|
 Duel Decks: Zendikar vs. Eldrazi|DuelDecksZendikarVsEldrazi|
 Duels of the Planeswalkers|DuelsOfThePlaneswalkers|
+Duskmourn: House of Horror|DuskmournHouseOfHorror|
+Duskmourn: House of Horror Commander|DuskmournHouseOfHorrorCommander|
 Eighth Edition|EighthEdition|
 Eldritch Moon|EldritchMoon|
 Eternal Masters|EternalMasters|
@@ -83,10 +91,12 @@ European Land Program|EuropeanLandProgram|
 Eventide|Eventide|
 Exodus|Exodus|
 Explorers of Ixalan|ExplorersOfIxalan|
+Fallout|Fallout|
 Fallen Empires|FallenEmpires|
 Fate Reforged|FateReforged|
 Fifth Dawn|FifthDawn|
 Fifth Edition|FifthEdition|
+Foundations|Foundations|
 Fourth Edition|FourthEdition|
 Friday Night Magic|FridayNightMagic|
 From the Vault: Angels|FromTheVaultAngels|
@@ -131,6 +141,7 @@ Judgment|Judgment|
 Jumpstart|Jumpstart|
 Jumpstart: Historic Horizons|JumpstartHistoricHorizons|
 Jumpstart 2022|Jumpstart2022|
+Jurassic World Collection|JurassicWorldCollection|
 Kaladesh|Kaladesh|
 Kaldheim|Kaldheim|
 Kaldheim Commander|KaldheimCommander|
@@ -145,6 +156,8 @@ Limited Edition Beta|LimitedEditionBeta|
 The Lord of the Rings: Tales of Middle-earth|TheLordOfTheRingsTalesOfMiddleEarth|
 Tales of Middle-earth Commander|TalesOfMiddleEarthCommander|
 Lorwyn|Lorwyn|
+The Lost Caverns of Ixalan|TheLostCavernsOfIxalan|
+Lost Caverns of Ixalan Commander|LostCavernsOfIxalanCommander|
 Magic 2010|Magic2010|
 Magic 2011|Magic2011|
 Magic 2012|Magic2012|
@@ -172,16 +185,25 @@ Mirrodin|Mirrodin|
 Mirrodin Besieged|MirrodinBesieged|
 Modern Horizons|ModernHorizons|
 Modern Horizons 2|ModernHorizons2|
+Modern Horizons 3|ModernHorizons3|
+Modern Horizons 3 Commander|ModernHorizons3Commander|
 Modern Masters|ModernMasters|
 Modern Masters 2015|ModernMasters2015|
 Modern Masters 2017|ModernMasters2017|
 Morningtide|Morningtide|
+Murders at Karlov Manor|MurdersAtKarlovManor|
+Murders at Karlov Manor Commander|MurdersAtKarlovManorCommander|
+Mystery Booster 2|MysteryBooster2|
+Ravnica: Clue Edition|RavnicaClueEdition|
 Nemesis|Nemesis|
 New Phyrexia|NewPhyrexia|
 Ninth Edition|NinthEdition|
 Oath of the Gatewatch|OathOfTheGatewatch|
 Odyssey|Odyssey|
 Onslaught|Onslaught|
+Outlaws of Thunder Junction|OutlawsOfThunderJunction|
+Outlaws of Thunder Junction Commander|OutlawsOfThunderJunctionCommander|
+The Big Score|TheBigScore|
 Phyrexia: All Will Be One|PhyrexiaAllWillBeOne|
 Phyrexia: All Will Be One Commander|PhyrexiaAllWillBeOneCommander|
 Planar Chaos|PlanarChaos|
@@ -204,15 +226,19 @@ Revised Edition|RevisedEdition|
 Rise of the Eldrazi|RiseOfTheEldrazi|
 Rivals of Ixalan|RivalsOfIxalan|
 Saviors of Kamigawa|SaviorsOfKamigawa|
+Sega Dreamcast Cards|SegaDreamcastCards|
 Scars of Mirrodin|ScarsOfMirrodin|
 Scourge|Scourge|
 Secret Lair Drop|SecretLairDrop|
+Secret Lair Showdown|SecretLairShowdown|
 Seventh Edition|SeventhEdition|
 Shadowmoor|Shadowmoor|
 Shadows over Innistrad|ShadowsOverInnistrad|
 Shards of Alara|ShardsOfAlara|
+Special Guests|SpecialGuests|
 Starter 1999|Starter1999|
 Starter 2000|Starter2000|
+Starter Commander Decks|StarterCommanderDecks|
 Star Wars|StarWars|
 Streets of New Capenna|StreetsOfNewCapenna|
 New Capenna Commander|NewCapennaCommander|
@@ -248,6 +274,8 @@ War of the Spark|WarOfTheSpark|
 Weatherlight|Weatherlight|
 Welcome Deck 2016|WelcomeDeck2016|
 Welcome Deck 2017|WelcomeDeck2017|
+Wilds of Eldraine|WildsOfEldraine|
+Wilds of Eldraine Commander|WildsOfEldraineCommander|
 World Magic Cup Qualifier|WorldMagicCupQualifier|
 Worldwake|Worldwake|
 WPN Gateway|WPNAndGatewayPromos|

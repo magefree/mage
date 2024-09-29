@@ -47,9 +47,7 @@ public final class PortcullisVine extends CardImpl {
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(2)
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(filter)
-        ));
+        ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
     }
 

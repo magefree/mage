@@ -1,5 +1,6 @@
 package mage.watchers.common;
 
+import mage.MageObjectReference;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -16,7 +17,7 @@ import java.util.UUID;
 public class PlayLandWatcher extends Watcher {
 
     private final Set<UUID> playerPlayedLand = new HashSet<>(); // player that played land
-    private final Set<UUID> landPlayed = new HashSet<>(); // land played
+    private final Set<MageObjectReference> landPlayed = new HashSet<>(); // land played
 
     public PlayLandWatcher() {
         super(WatcherScope.GAME);
@@ -26,11 +27,10 @@ public class PlayLandWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.LAND_PLAYED) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-            if (permanent != null
-                    && permanent.isLand(game)
-                    && !playerPlayedLand.contains(event.getPlayerId())) {
+            if (permanent != null && permanent.isLand(game)) {
+                MageObjectReference mor = new MageObjectReference(permanent, game);
+                landPlayed.add(mor);
                 playerPlayedLand.add(event.getPlayerId());
-                landPlayed.add(event.getTargetId());
             }
         }
     }
@@ -46,7 +46,7 @@ public class PlayLandWatcher extends Watcher {
         return playerPlayedLand.contains(playerId);
     }
 
-    public boolean wasLandPlayed(UUID landId) {
-        return landPlayed.contains(landId);
+    public boolean wasLandPlayed(Permanent land, Game game) {
+        return landPlayed.contains(new MageObjectReference(land, game));
     }
 }

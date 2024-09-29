@@ -32,7 +32,7 @@ public final class MonasterySiege extends CardImpl {
 
         // As Monastery Siege enters the battlefield, choose Khans or Dragons.
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,
-                "As {this} enters the battlefield, choose Khans or Dragons.", ""));
+                "As {this} enters, choose Khans or Dragons.", ""));
 
         // * Khans - At the beginning of your draw step, draw an additional card, then discard a card.
         this.addAbility(new ConditionalTriggeredAbility(
@@ -63,7 +63,7 @@ class MonasterySiegeCostIncreaseEffect extends CostModificationEffectImpl {
         staticText = "&bull; Dragons &mdash; Spells your opponents cast that target you or a permanent you control cost {2} more to cast";
     }
 
-    MonasterySiegeCostIncreaseEffect(MonasterySiegeCostIncreaseEffect effect) {
+    private MonasterySiegeCostIncreaseEffect(final MonasterySiegeCostIncreaseEffect effect) {
         super(effect);
     }
 

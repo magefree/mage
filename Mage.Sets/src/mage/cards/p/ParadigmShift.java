@@ -40,7 +40,7 @@ public final class ParadigmShift extends CardImpl {
 
 class ParadigmShiftExileLibraryEffect extends OneShotEffect {
 
-    public ParadigmShiftExileLibraryEffect() {
+    ParadigmShiftExileLibraryEffect() {
         super(Outcome.Exile);
         staticText = "Exile all cards from your library. Then shuffle your graveyard into your library";
     }

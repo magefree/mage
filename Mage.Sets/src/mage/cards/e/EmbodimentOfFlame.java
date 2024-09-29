@@ -6,11 +6,12 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -40,8 +41,7 @@ public final class EmbodimentOfFlame extends CardImpl {
 
         // {1}, Remove a flame counter from Embodiment of Flame: Exile the top card of your library. You may play that card this turn.
         Ability ability = new SimpleActivatedAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1)
-                        .setText("exile the top card of your library. You may play that card this turn"),
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn),
                 new GenericManaCost(1)
         );
         ability.addCost(new RemoveCountersSourceCost(CounterType.FLAME.createInstance()));

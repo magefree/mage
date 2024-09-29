@@ -57,7 +57,7 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
         super(new ArcbondEffect(), Duration.EndOfTurn, false);
     }
 
-    public ArcbondDelayedTriggeredAbility(ArcbondDelayedTriggeredAbility ability) {
+    private ArcbondDelayedTriggeredAbility(final ArcbondDelayedTriggeredAbility ability) {
         super(ability);
         this.targetObject = ability.targetObject;
     }
@@ -84,7 +84,7 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
 
     @Override
@@ -112,11 +112,11 @@ class ArcbondDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
 class ArcbondEffect extends OneShotEffect {
 
-    public ArcbondEffect() {
+    ArcbondEffect() {
         super(Outcome.Benefit);
     }
 
-    public ArcbondEffect(final ArcbondEffect effect) {
+    private ArcbondEffect(final ArcbondEffect effect) {
         super(effect);
     }
 

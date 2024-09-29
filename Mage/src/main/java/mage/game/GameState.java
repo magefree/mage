@@ -16,6 +16,7 @@ import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
 import mage.game.command.CommandObject;
+import mage.game.command.Emblem;
 import mage.game.command.Plane;
 import mage.game.events.*;
 import mage.game.permanent.Battlefield;
@@ -44,8 +45,6 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static java.util.Collections.emptyList;
-
 /**
  * @author BetaSteward_at_googlemail.com
  * <p>
@@ -63,8 +62,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     // warning, do not use another keys with same starting text cause copy code search and clean all related values
     public static final String COPIED_CARD_KEY = "CopiedCard";
 
-    private final Players players;
-    private final PlayerList playerList;
+    private final Players players; // full players by ID (static list, table added order)
+    private final PlayerList playerList; // full players (static list, turn order e.g. apnap)
     private UUID choosingPlayerId; // player that makes a choice at game start
 
     // revealed cards <Name, <Cards>>, will be reset if all players pass priority
@@ -72,13 +71,12 @@ public class GameState implements Serializable, Copyable<GameState> {
     private final Map<UUID, LookedAt> lookedAt = new HashMap<>();
     private final Revealed companion;
 
-    private DelayedTriggeredAbilities delayed;
     private SpecialActions specialActions;
     private Watchers watchers;
     private Turn turn;
-    private TurnMods turnMods;
+    private TurnMods turnMods; // one time turn modifications (turn, phase or step)
     private UUID activePlayerId; // playerId which turn it is
-    private UUID priorityPlayerId; // player that has currently priority
+    private UUID priorityPlayerId; // player that has currently priority (setup before any choose)
     private UUID playerByOrderId; // player that has currently priority
     private UUID monarchId; // player that is the monarch
     private UUID initiativeId; // player that has the initiative
@@ -87,22 +85,24 @@ public class GameState implements Serializable, Copyable<GameState> {
     private boolean isPlaneChase;
     private List<String> seenPlanes = new ArrayList<>();
     private List<Designation> designations = new ArrayList<>();
+    private List<Emblem> helperEmblems = new ArrayList<>(); // fake emblems for inner usage like better UX
     private Exile exile;
     private Battlefield battlefield;
     private int turnNum = 1;
     private int stepNum = 0;
-    private UUID turnId = null;
-    private boolean extraTurn = false;
+    private UUID extraTurnId = null; // id of the current extra turn (null on normal turn or after game stopped)
     private boolean gameOver;
     private boolean paused;
     private ContinuousEffects effects;
-    private TriggeredAbilities triggers;
-    private List<TriggeredAbility> triggered = new ArrayList<>();
+    private TriggeredAbilities triggers; // all normal triggers
+    private DelayedTriggeredAbilities delayed; // all delayed triggers
+    private List<TriggeredAbility> triggered = new ArrayList<>(); // raised triggers, waiting to resolve (can contains both normal and delayed)
     private Combat combat;
     private Map<String, Object> values = new HashMap<>();
     private Map<UUID, Zone> zones = new HashMap<>();
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
     private Map<UUID, CardState> cardState = new HashMap<>();
+    private Map<MageObjectReference, Map<String, Object>> permanentCostsTags = new HashMap<>(); // Permanent reference -> map of (tag -> values) describing how the permanent's spell was cast
     private Map<UUID, MageObjectAttribute> mageObjectAttribute = new HashMap<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
@@ -136,7 +136,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         applyEffectsCounter = 0;
     }
 
-    public GameState(final GameState state) {
+    protected GameState(final GameState state) {
         this.players = state.players.copy();
         this.playerList = state.playerList.copy();
         this.choosingPlayerId = state.choosingPlayerId;
@@ -158,42 +158,26 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.isPlaneChase = state.isPlaneChase;
         this.seenPlanes.addAll(state.seenPlanes);
         this.designations.addAll(state.designations);
+        this.helperEmblems = CardUtil.deepCopyObject(state.helperEmblems);
         this.exile = state.exile.copy();
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
         this.stepNum = state.stepNum;
-        this.extraTurn = state.extraTurn;
+        this.extraTurnId = state.extraTurnId;
         this.effects = state.effects.copy();
-        for (TriggeredAbility trigger : state.triggered) {
-            this.triggered.add(trigger.copy());
-        }
+        this.triggered = CardUtil.deepCopyObject(state.triggered);
         this.triggers = state.triggers.copy();
         this.delayed = state.delayed.copy();
         this.specialActions = state.specialActions.copy();
         this.combat = state.combat.copy();
         this.turnMods = state.turnMods.copy();
         this.watchers = state.watchers.copy();
-        for (Map.Entry<String, Object> entry : state.values.entrySet()) {
-            if (entry.getValue() instanceof HashSet) {
-                this.values.put(entry.getKey(), ((HashSet) entry.getValue()).clone());
-            } else if (entry.getValue() instanceof EnumSet) {
-                this.values.put(entry.getKey(), ((EnumSet) entry.getValue()).clone());
-            } else if (entry.getValue() instanceof HashMap) {
-                this.values.put(entry.getKey(), ((HashMap) entry.getValue()).clone());
-            } else if (entry.getValue() instanceof List) {
-                this.values.put(entry.getKey(), ((List) entry.getValue()).stream().collect(Collectors.toList()));
-            } else {
-                this.values.put(entry.getKey(), entry.getValue());
-            }
-        }
+        this.values = CardUtil.deepCopyObject(state.values);
         this.zones.putAll(state.zones);
         this.simultaneousEvents.addAll(state.simultaneousEvents);
-        for (Map.Entry<UUID, CardState> entry : state.cardState.entrySet()) {
-            cardState.put(entry.getKey(), entry.getValue().copy());
-        }
-        for (Map.Entry<UUID, MageObjectAttribute> entry : state.mageObjectAttribute.entrySet()) {
-            mageObjectAttribute.put(entry.getKey(), entry.getValue().copy());
-        }
+        this.cardState = CardUtil.deepCopyObject(state.cardState);
+        this.permanentCostsTags = CardUtil.deepCopyObject(state.permanentCostsTags);
+        this.mageObjectAttribute = CardUtil.deepCopyObject(state.mageObjectAttribute);
         this.zoneChangeCounter.putAll(state.zoneChangeCounter);
         this.copiedCards.putAll(state.copiedCards);
         this.permanentOrderNumber = state.permanentOrderNumber;
@@ -222,6 +206,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         exile.clear();
         command.clear();
         designations.clear();
+        helperEmblems.clear();
         seenPlanes.clear();
         isPlaneChase = false;
         revealed.clear();
@@ -229,10 +214,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         companion.clear();
         turnNum = 1;
         stepNum = 0;
-        extraTurn = false;
+        extraTurnId = null;
         gameOver = false;
         specialActions.clear();
         cardState.clear();
+        permanentCostsTags.clear();
         combat.clear();
         turnMods.clear();
         watchers.clear();
@@ -250,6 +236,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void restore(GameState state) {
+        // no needs in copy here cause GameState already copied on save and it will be used only one time here
         this.activePlayerId = state.activePlayerId;
         this.playerList.setCurrent(state.activePlayerId);
         this.playerByOrderId = state.playerByOrderId;
@@ -261,11 +248,12 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.isPlaneChase = state.isPlaneChase;
         this.seenPlanes = state.seenPlanes;
         this.designations = state.designations;
+        this.helperEmblems = state.helperEmblems;
         this.exile = state.exile;
         this.battlefield = state.battlefield;
         this.turnNum = state.turnNum;
         this.stepNum = state.stepNum;
-        this.extraTurn = state.extraTurn;
+        this.extraTurnId = state.extraTurnId;
         this.effects = state.effects;
         this.triggered = state.triggered;
         this.triggers = state.triggers;
@@ -282,6 +270,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.zones = state.zones;
         this.simultaneousEvents = state.simultaneousEvents;
         this.cardState = state.cardState;
+        this.permanentCostsTags = state.permanentCostsTags;
         this.mageObjectAttribute = state.mageObjectAttribute;
         this.zoneChangeCounter = state.zoneChangeCounter;
         this.copiedCards = state.copiedCards;
@@ -305,6 +294,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         playerList.add(player.getId());
     }
 
+    /**
+     * AI related: monitor changes in game state (if it changed then AI must re-calculate current actions chain)
+     */
     public String getValue(boolean useHidden) {
         StringBuilder sb = threadLocalBuilder.get();
 
@@ -343,6 +335,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         return sb.toString();
     }
 
+    /**
+     * AI related: monitor changes in game state (if it changed then AI must re-calculate current actions chain)
+     */
     public String getValue(boolean useHidden, Game game) {
         StringBuilder sb = threadLocalBuilder.get();
 
@@ -396,6 +391,9 @@ public class GameState implements Serializable, Copyable<GameState> {
         return sb.toString();
     }
 
+    /**
+     * AI related: monitor changes in game state (if it changed then AI must re-calculate current actions chain)
+     */
     public String getValue(Game game, UUID playerId) {
         StringBuilder sb = threadLocalBuilder.get();
 
@@ -521,8 +519,12 @@ public class GameState implements Serializable, Copyable<GameState> {
         return designations;
     }
 
+    public List<Emblem> getHelperEmblems() {
+        return helperEmblems;
+    }
+
     public Plane getCurrentPlane() {
-        if (command != null && command.size() > 0) {
+        if (command != null && !command.isEmpty()) {
             for (CommandObject cobject : command) {
                 if (cobject instanceof Plane) {
                     return (Plane) cobject;
@@ -616,20 +618,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.turnNum = turnNum;
     }
 
-    public UUID getTurnId() {
-        return this.turnId;
+    public UUID getExtraTurnId() {
+        return this.extraTurnId;
     }
 
-    public void setTurnId(UUID turnId) {
-        this.turnId = turnId;
+    public void setExtraTurnId(UUID extraTurnId) {
+        this.extraTurnId = extraTurnId;
     }
 
     public boolean isExtraTurn() {
-        return extraTurn;
-    }
-
-    public void setExtraTurn(boolean extraTurn) {
-        this.extraTurn = extraTurn;
+        return this.extraTurnId != null;
     }
 
     public boolean isGameOver() {
@@ -640,16 +638,23 @@ public class GameState implements Serializable, Copyable<GameState> {
         return this.turnMods;
     }
 
+    /**
+     * Find game scope watcher
+     */
     public <T extends Watcher> T getWatcher(Class<T> watcherClass) {
-        return watcherClass.cast(watchers.get(watcherClass.getSimpleName()));
+        return getWatcher(watcherClass, null);
     }
 
+    /**
+     * Find card/player scope watcher
+     */
     public <T extends Watcher> T getWatcher(Class<T> watcherClass, UUID uuid) {
-        return watcherClass.cast(watchers.get(watcherClass.getSimpleName(), uuid.toString()));
+        String watcherKey = (uuid == null ? "" : uuid.toString()) + watcherClass.getSimpleName();
+        return watcherClass.cast(getWatcher(watcherKey));
     }
 
-    public <T extends Watcher> T getWatcher(Class<T> watcherClass, String prefix) {
-        return watcherClass.cast(watchers.get(watcherClass.getSimpleName(), prefix));
+    public Watcher getWatcher(String key) {
+        return watchers.get(key);
     }
 
     public SpecialActions getSpecialActions() {
@@ -660,13 +665,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.gameOver = true;
     }
 
-    // 608.2e
-    public void processAction(Game game) {
-        game.getState().handleSimultaneousEvent(game);
-        game.applyEffects();
-    }
-
-    public void applyEffects(Game game) {
+    void applyEffects(Game game) {
         applyEffectsCounter++;
         for (Player player : players.values()) {
             player.reset();
@@ -693,6 +692,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         game.applyEffects();
     }
 
+    public void removeTurnStartEffect(Game game) {
+        delayed.removeStartOfNewTurn(game);
+    }
+
     public void addEffect(ContinuousEffect effect, Ability source) {
         addEffect(effect, null, source);
     }
@@ -717,7 +720,7 @@ public class GameState implements Serializable, Copyable<GameState> {
      * Returns a list of all players of the game ignoring range or if a player
      * has lost or left the game.
      *
-     * @return playerList
+     * Warning, it's ignore range, must be used by game engine only.
      */
     public PlayerList getPlayerList() {
         return playerList;
@@ -727,13 +730,12 @@ public class GameState implements Serializable, Copyable<GameState> {
      * Returns a list of all active players of the game, setting the playerId to
      * the current player of the list.
      *
-     * @param playerId
-     * @return playerList
+     * Warning, it's ignore range, must be used by game engine only.
      */
     public PlayerList getPlayerList(UUID playerId) {
         PlayerList newPlayerList = new PlayerList();
         for (Player player : players.values()) {
-            if (!player.hasLeft() && !player.hasLost()) {
+            if (player.isInGame()) {
                 newPlayerList.add(player.getId());
             }
         }
@@ -741,25 +743,29 @@ public class GameState implements Serializable, Copyable<GameState> {
         return newPlayerList;
     }
 
+    // TODO: check usage of getPlayersInRange in cards and replace with correct call of excludeLeavedPlayers
+    public PlayerList getPlayersInRange(UUID playerId, Game game) {
+        return getPlayersInRange(playerId, game, false);
+    }
+
     /**
      * Returns a list of all active players of the game in range of playerId,
      * also setting the playerId to the first/current player of the list. Also
      * returning the other players in turn order.
      * <p>
-     * Not safe for continuous effects, see rule 800.4k (effects must work until
-     * end of turn even after player leaves) Use Player.InRange() to find active
-     * players list at the start of the turn
+     * Continuous effects, triggers and other must include leaved players, see rule 800.4k (effects must work until
+     * end of turn even after player leaves). But one short effects and dialogs must use actual players list.
      *
-     * @param playerId
-     * @param game
-     * @return playerList
+     * @param excludeLeavedPlayers - true for dialogs and one short effects, false for triggers and continuous effects
      */
-    public PlayerList getPlayersInRange(UUID playerId, Game game) {
+    public PlayerList getPlayersInRange(UUID playerId, Game game, boolean excludeLeavedPlayers) {
         PlayerList newPlayerList = new PlayerList();
         Player currentPlayer = game.getPlayer(playerId);
         if (currentPlayer != null) {
+            // must fill PlayerList by table added order (same as main game)
             for (Player player : players.values()) {
-                if (player.isInGame() && currentPlayer.getInRange().contains(player.getId())) {
+                if ((!excludeLeavedPlayers || player.isInGame())
+                        && currentPlayer.hasPlayerInRange(player.getId())) {
                     newPlayerList.add(player.getId());
                 }
             }
@@ -812,21 +818,190 @@ public class GameState implements Serializable, Copyable<GameState> {
         return !simultaneousEvents.isEmpty();
     }
 
-    public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
-        // combine damages per type (player or permanent)
-        boolean flag = false;
+    // There might be no damage dealt, but we want to fire that damage (in a batch) could have been dealt.
+    // Of note, DamagedBatchCouldHaveFiredEvent is not a batch event in the sense it doesn't contain sub events.
+    public void addBatchDamageCouldHaveBeenFired(boolean combat, Game game) {
         for (GameEvent event : simultaneousEvents) {
-            if ((event instanceof DamagedBatchEvent)
-                    && ((DamagedBatchEvent) event).getDamageClazz().isInstance(damagedEvent)) {
-                // old batch
-                ((DamagedBatchEvent) event).addEvent(damagedEvent);
-                flag = true;
+            if (event instanceof DamagedBatchCouldHaveFiredEvent
+                    && ((DamagedBatchCouldHaveFiredEvent) event).isCombat() == combat) {
+                return;
+            }
+        }
+        addSimultaneousEvent(new DamagedBatchCouldHaveFiredEvent(combat), game);
+    }
+
+    public void addSimultaneousDamage(DamagedEvent damagedEvent, Game game) {
+        // Combine multiple damage events in the single event (batch)
+        // Note: one event can be stored in multiple batches
+        if (damagedEvent instanceof DamagedPlayerEvent) {
+            // DAMAGED_BATCH_FOR_PLAYERS + DAMAGED_BATCH_FOR_ONE_PLAYER
+            addSimultaneousDamageToPlayerBatches((DamagedPlayerEvent) damagedEvent, game);
+        } else if (damagedEvent instanceof DamagedPermanentEvent) {
+            // DAMAGED_BATCH_FOR_PERMANENTS + DAMAGED_BATCH_FOR_ONE_PERMANENT
+            addSimultaneousDamageToPermanentBatches((DamagedPermanentEvent) damagedEvent, game);
+        }
+        // DAMAGED_BATCH_FOR_ALL
+        addSimultaneousDamageToBatchForAll(damagedEvent, game);
+    }
+
+    public void addSimultaneousDamageToPlayerBatches(DamagedPlayerEvent damagedPlayerEvent, Game game) {
+        // find existing batches first
+        boolean isTotalBatchUsed = false;
+        boolean isPlayerBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof DamagedBatchForPlayersEvent) {
+                ((DamagedBatchForPlayersEvent) event).addEvent(damagedPlayerEvent);
+                isTotalBatchUsed = true;
+            } else if (event instanceof DamagedBatchForOnePlayerEvent
+                    && damagedPlayerEvent.getTargetId().equals(event.getTargetId())) {
+                ((DamagedBatchForOnePlayerEvent) event).addEvent(damagedPlayerEvent);
+                isPlayerBatchUsed = true;
+            }
+        }
+        // new batches if necessary
+        if (!isTotalBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchForPlayersEvent(damagedPlayerEvent), game);
+        }
+        if (!isPlayerBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchForOnePlayerEvent(damagedPlayerEvent), game);
+        }
+    }
+
+    public void addSimultaneousDamageToPermanentBatches(DamagedPermanentEvent damagedPermanentEvent, Game game) {
+        // find existing batches first
+        boolean isTotalBatchUsed = false;
+        boolean isSingleBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof DamagedBatchForPermanentsEvent) {
+                ((DamagedBatchForPermanentsEvent) event).addEvent(damagedPermanentEvent);
+                isTotalBatchUsed = true;
+            } else if (event instanceof DamagedBatchForOnePermanentEvent
+                    && damagedPermanentEvent.getTargetId().equals(event.getTargetId())) {
+                ((DamagedBatchForOnePermanentEvent) event).addEvent(damagedPermanentEvent);
+                isSingleBatchUsed = true;
+            }
+        }
+        // new batches if necessary
+        if (!isTotalBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchForPermanentsEvent(damagedPermanentEvent), game);
+        }
+        if (!isSingleBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchForOnePermanentEvent(damagedPermanentEvent), game);
+        }
+    }
+
+    public void addSimultaneousDamageToBatchForAll(DamagedEvent damagedEvent, Game game) {
+        boolean isBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof DamagedBatchAllEvent) {
+                ((DamagedBatchAllEvent) event).addEvent(damagedEvent);
+                isBatchUsed = true;
+            }
+        }
+        if (!isBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchAllEvent(damagedEvent), game);
+        }
+    }
+
+    public void addSimultaneousMilledCardToBatch(MilledCardEvent milledEvent, Game game) {
+        // Combine multiple mill cards events in the single event (batch)
+        // see GameEvent.MILLED_CARDS_BATCH_FOR_ONE_PLAYER and GameEvent.MILLED_CARDS_BATCH_FOR_ALL
+
+        // existing batch
+        boolean isBatchUsed = false;
+        boolean isBatchForPlayerUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof MilledBatchAllEvent) {
+                ((MilledBatchAllEvent) event).addEvent(milledEvent);
+                isBatchUsed = true;
+            } else if (event instanceof MilledBatchForOnePlayerEvent
+                    && event.getPlayerId().equals(milledEvent.getPlayerId())) {
+                ((MilledBatchForOnePlayerEvent) event).addEvent(milledEvent);
+                isBatchForPlayerUsed = true;
+            }
+        }
+
+        // new batch
+        if (!isBatchUsed) {
+            addSimultaneousEvent(new MilledBatchAllEvent(milledEvent), game);
+        }
+        if (!isBatchForPlayerUsed) {
+            addSimultaneousEvent(new MilledBatchForOnePlayerEvent(milledEvent), game);
+        }
+    }
+
+    public void addSimultaneousSacrificedPermanentToBatch(SacrificedPermanentEvent sacrificedPermanentEvent, Game game) {
+        // Combine multiple sacrificed permanent events in the single event (batch)
+
+        // existing batch
+        boolean isBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof SacrificedPermanentBatchEvent) {
+                ((SacrificedPermanentBatchEvent) event).addEvent(sacrificedPermanentEvent);
+                isBatchUsed = true;
+            }
+        }
+
+        // new batch
+        if (!isBatchUsed) {
+            addSimultaneousEvent(new SacrificedPermanentBatchEvent(sacrificedPermanentEvent), game);
+        }
+    }
+
+    public void addSimultaneousLifeLossToBatch(LifeLostEvent lifeLossEvent, Game game) {
+        // Combine multiple life loss events in the single event (batch)
+        // see GameEvent.LOST_LIFE_BATCH
+
+        // existing batch
+        boolean isLifeLostBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof LifeLostBatchEvent) {
+                ((LifeLostBatchEvent) event).addEvent(lifeLossEvent);
+                isLifeLostBatchUsed = true;
+            }
+        }
+
+        // new batch
+        if (!isLifeLostBatchUsed) {
+            addSimultaneousEvent(new LifeLostBatchEvent(lifeLossEvent), game);
+        }
+    }
+
+    public void addSimultaneousTappedToBatch(TappedEvent tappedEvent, Game game) {
+        // Combine multiple tapped events in the single event (batch)
+
+        boolean isTappedBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof TappedBatchEvent) {
+                // Adding to the existing batch
+                ((TappedBatchEvent) event).addEvent(tappedEvent);
+                isTappedBatchUsed = true;
                 break;
             }
         }
-        if (!flag) {
-            // new batch
-            addSimultaneousEvent(DamagedBatchEvent.makeEvent(damagedEvent), game);
+
+        // new batch
+        if (!isTappedBatchUsed) {
+            addSimultaneousEvent(new TappedBatchEvent(tappedEvent), game);
+        }
+    }
+
+    public void addSimultaneousUntappedToBatch(UntappedEvent untappedEvent, Game game) {
+        // Combine multiple untapped events in the single event (batch)
+
+        boolean isUntappedBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof UntappedBatchEvent) {
+                // Adding to the existing batch
+                ((UntappedBatchEvent) event).addEvent(untappedEvent);
+                isUntappedBatchUsed = true;
+                break;
+            }
+        }
+
+        // new batch
+        if (!isUntappedBatchUsed) {
+            addSimultaneousEvent(new UntappedBatchEvent(untappedEvent), game);
         }
     }
 
@@ -888,9 +1063,11 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         Map<ZoneChangeData, List<GameEvent>> eventsByKey = new HashMap<>();
         List<GameEvent> groupEvents = new LinkedList<>();
+        ZoneChangeBatchEvent batchEvent = new ZoneChangeBatchEvent();
         for (GameEvent event : events) {
             if (event instanceof ZoneChangeEvent) {
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
+                batchEvent.addEvent(castEvent);
                 ZoneChangeData key = new ZoneChangeData(
                         castEvent.getSource(),
                         castEvent.getSourceId(),
@@ -934,6 +1111,9 @@ public class GameState implements Serializable, Copyable<GameState> {
                         eventData.toZone);
                 groupEvents.add(event);
             }
+        }
+        if (!batchEvent.getEvents().isEmpty()) {
+            groupEvents.add(batchEvent);
         }
         return groupEvents;
     }
@@ -1001,8 +1181,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             addTrigger((TriggeredAbility) ability, sourceId, attachedTo);
         }
 
-        List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent ConcurrentModificationException, not clear to me why this is happening now
-        for (Watcher watcher : watcherList) {
+        for (Watcher watcher : ability.getWatchers()) {
             // TODO: Check that watcher for commanderAbility (where attachedTo = null) also work correctly
             UUID controllerId = ability.getControllerId();
             if (attachedTo instanceof Card) {
@@ -1010,13 +1189,31 @@ public class GameState implements Serializable, Copyable<GameState> {
             } else if (attachedTo instanceof Controllable) {
                 controllerId = ((Controllable) attachedTo).getControllerId();
             }
-            watcher.setControllerId(controllerId);
-            watcher.setSourceId(attachedTo == null ? ability.getSourceId() : attachedTo.getId());
-            watchers.add(watcher);
+
+            Watcher newWatcher = watcher.copy();
+            newWatcher.setControllerId(controllerId);
+            newWatcher.setSourceId(attachedTo == null ? ability.getSourceId() : attachedTo.getId());
+            watchers.add(newWatcher);
         }
 
         for (Ability sub : ability.getSubAbilities()) {
             addAbility(sub, sourceId, attachedTo);
+        }
+    }
+
+    /**
+     * Add fake/helper emblems for hidden source of inherent triggers like Rad counters,
+     * additional card hints like storm counter, etc. See GameImpl.initGameDefaultHelperEmblems
+     * <p>
+     * It allows game and GUI find and show full card object in stack's triggers, logs and hints popup.
+     */
+    public void addHelperEmblem(Emblem emblem, UUID controllerId) {
+        helperEmblems.add(emblem);
+        emblem.setControllerId(controllerId);
+        for (Ability ability : emblem.getInitAbilities()) {
+            ability.setControllerId(controllerId);
+            ability.setSourceId(emblem.getId());
+            addAbility(ability, null, emblem);
         }
     }
 
@@ -1042,6 +1239,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.isPlaneChase = isPlaneChase;
     }
 
+    /**
+     * Add object to command zone.
+     * <p>
+     * Warning, all object data must be initialized before adding, including image info
+     */
     public void addCommandObject(CommandObject commandObject) {
         getCommand().add(commandObject);
         setZone(commandObject.getId(), Zone.COMMAND);
@@ -1072,9 +1274,10 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent ConcurrentModificationException, not clear to me why this is happening now
         for (Watcher watcher : watcherList) {
-            watcher.setControllerId(ability.getControllerId());
-            watcher.setSourceId(ability.getSourceId());
-            this.watchers.add(watcher);
+            Watcher newWatcher = watcher.copy();
+            newWatcher.setControllerId(ability.getControllerId());
+            newWatcher.setSourceId(ability.getSourceId());
+            this.watchers.add(newWatcher);
         }
     }
 
@@ -1183,8 +1386,6 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param ability
      */
     public void addOtherAbility(Card attachedTo, Ability ability) {
-        checkWrongDynamicAbilityUsage(attachedTo, ability);
-
         addOtherAbility(attachedTo, ability, true);
     }
 
@@ -1202,6 +1403,12 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         Ability newAbility;
         if (ability instanceof MageSingleton || !copyAbility) {
+            // Avoid adding another instance of an ability where multiple copies are redundant
+            if (attachedTo.getAbilities().contains(ability)
+                    || (getAllOtherAbilities(attachedTo.getId()) != null
+                    && getAllOtherAbilities(attachedTo.getId()).contains(ability))) {
+                return;
+            }
             newAbility = ability;
         } else {
             // must use new id, so you can add multiple instances of the same ability
@@ -1287,8 +1494,34 @@ public class GameState implements Serializable, Copyable<GameState> {
         return mageObjectAtt;
     }
 
-    public void addWatcher(Watcher watcher) {
-        this.watchers.add(watcher);
+    public Map<MageObjectReference, Map<String, Object>> getPermanentCostsTags() {
+        return permanentCostsTags;
+    }
+
+    /**
+     * Store the tags of source ability using the MOR as a reference
+     */
+    void storePermanentCostsTags(MageObjectReference permanentMOR, Ability source) {
+        if (source.getCostsTagMap() != null) {
+            permanentCostsTags.put(permanentMOR, CardUtil.deepCopyObject(source.getCostsTagMap()));
+        }
+    }
+
+    /**
+     * Removes the cost tags if the corresponding permanent is no longer on the battlefield.
+     * Only use if the stack is empty and nothing can refer to them anymore (such as at EOT, the current behavior)
+     */
+    public void cleanupPermanentCostsTags(Game game) {
+        getPermanentCostsTags().entrySet().removeIf(entry ->
+                !(entry.getKey().getZoneChangeCounter() == game.getState().getZoneChangeCounter(entry.getKey().getSourceId()) - 1)
+        ); // The stored MOR is the stack-moment MOR so need to subtract one from the permanent's ZCC for the check
+    }
+
+    /**
+     * Must add copy of the original watcher, e.g. from an ability
+     */
+    public void addWatcher(Watcher newWatcher) {
+        this.watchers.add(newWatcher);
     }
 
     public void resetWatchers() {
@@ -1428,7 +1661,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public List<FilterCreaturePermanent> getActivePowerInsteadOfToughnessForDamageLethalityFilters() {
-        return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? emptyList() : getBattlefield().getAllActivePermanents().stream()
+        return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? Collections.emptyList() : getBattlefield().getAllActivePermanents().stream()
                 .map(Card::getId)
                 .filter(usePowerInsteadOfToughnessForDamageLethalityFilters::containsKey)
                 .map(usePowerInsteadOfToughnessForDamageLethalityFilters::get)

@@ -30,7 +30,7 @@ public class SithWayfinder extends CardImpl {
         this.addAbility(simpleActivatedAbility);
     }
 
-    public SithWayfinder(final SithWayfinder card) {
+    private SithWayfinder(final SithWayfinder card) {
         super(card);
     }
 

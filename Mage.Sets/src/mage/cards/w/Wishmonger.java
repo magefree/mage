@@ -64,12 +64,12 @@ public final class Wishmonger extends CardImpl {
 
 class WishmongerEffect extends OneShotEffect {
 
-    public WishmongerEffect() {
+    WishmongerEffect() {
         super(Outcome.BoostCreature);
         staticText = "Target creature gains protection from the color of its controller's choice until end of turn";
     }
 
-    public WishmongerEffect(final WishmongerEffect effect) {
+    private WishmongerEffect(final WishmongerEffect effect) {
         super(effect);
     }
 
@@ -112,7 +112,7 @@ class ProtectionChosenColorTargetEffect extends ContinuousEffectImpl {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
     }
 
-    public ProtectionChosenColorTargetEffect(final ProtectionChosenColorTargetEffect effect) {
+    private ProtectionChosenColorTargetEffect(final ProtectionChosenColorTargetEffect effect) {
         super(effect);
         if (effect.chosenColor != null) {
             this.chosenColor = effect.chosenColor.copy();

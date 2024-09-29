@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -12,7 +11,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
 /**
@@ -32,7 +31,7 @@ public final class SaltRoadAmbushers extends CardImpl {
         this.addAbility(new SaltRoadAmbushersTriggeredAbility());
         
         // Megamorph {3}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}{G}"), true));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{G}{G}"), true));
     }
 
     private SaltRoadAmbushers(final SaltRoadAmbushers card) {
@@ -48,17 +47,17 @@ public final class SaltRoadAmbushers extends CardImpl {
 class SaltRoadAmbushersTriggeredAbility extends TurnedFaceUpAllTriggeredAbility {
     
     
-private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another permanent you control");
+private static final FilterControlledPermanent filter = new FilterControlledPermanent("another permanent you control");
 
     static {
         filter.add(AnotherPredicate.instance);
     }
     
-    public SaltRoadAmbushersTriggeredAbility() {
+    SaltRoadAmbushersTriggeredAbility() {
         super(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), filter, true);
     }
 
-    public SaltRoadAmbushersTriggeredAbility(final SaltRoadAmbushersTriggeredAbility ability) {
+    private SaltRoadAmbushersTriggeredAbility(final SaltRoadAmbushersTriggeredAbility ability) {
         super(ability);
     }
 

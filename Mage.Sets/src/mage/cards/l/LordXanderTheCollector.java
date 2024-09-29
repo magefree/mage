@@ -129,7 +129,7 @@ class LordXanderTheCollectorEffect extends OneShotEffect {
                 TargetPermanent target = new TargetPermanent(
                         count / 2, StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND
                 );
-                target.setNotTarget(true);
+                target.withNotTarget(true);
                 target.withChooseHint("sacrifice");
                 target.setRequired(true);
                 player.choose(outcome, target, source, game);

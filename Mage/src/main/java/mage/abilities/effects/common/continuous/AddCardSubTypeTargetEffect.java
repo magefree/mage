@@ -7,9 +7,12 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- * @author nantuko
+ * @author nantuko, Susucr
  */
 public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
 
@@ -20,22 +23,27 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
         this.addedSubType = addedSubType;
     }
 
-    public AddCardSubTypeTargetEffect(final AddCardSubTypeTargetEffect effect) {
+    protected AddCardSubTypeTargetEffect(final AddCardSubTypeTargetEffect effect) {
         super(effect);
         this.addedSubType = effect.addedSubType;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
-        if (target != null) {
-            target.addSubType(game, addedSubType);
-        } else {
-            if (duration == Duration.Custom) {
-                discard();
+        boolean result = false;
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
+            Permanent target = game.getPermanent(targetId);
+            if (target != null) {
+                target.addSubType(game, addedSubType);
+                result = true;
             }
         }
-        return false;
+        if (!result) {
+            if (this.getDuration() == Duration.Custom) {
+                this.discard();
+            }
+        }
+        return result;
     }
 
     @Override
@@ -48,18 +56,10 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        StringBuilder sb = new StringBuilder();
-        if (!mode.getTargets().isEmpty()) {
-            sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
-        } else {
-            sb.append("It ");
-        }
-        if (addedSubType.toString().matches("(?i)^[AEIOUYaeiouy].*$")) {
-            sb.append(" becomes an ");
-        } else {
-            sb.append(" becomes a ");
-        }
-        sb.append(addedSubType).append(" in addition to its other types ").append(duration.toString());
-        return sb.toString();
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
+                (getTargetPointer().isPlural(mode.getTargets()) ? " become " : " becomes ") +
+                CardUtil.addArticle(addedSubType.toString()) +
+                " in addition to its other types" +
+                (duration.toString().isEmpty() ? "" : ' ' + duration.toString());
     }
 }

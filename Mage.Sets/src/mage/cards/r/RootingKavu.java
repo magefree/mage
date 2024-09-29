@@ -47,12 +47,12 @@ public final class RootingKavu extends CardImpl {
 
 class RootingKavuEffect extends OneShotEffect {
 
-    public RootingKavuEffect() {
+    RootingKavuEffect() {
         super(Outcome.Benefit);
         this.staticText = "shuffle all creature cards from your graveyard into your library.";
     }
 
-    public RootingKavuEffect(final RootingKavuEffect effect) {
+    private RootingKavuEffect(final RootingKavuEffect effect) {
         super(effect);
     }
 

@@ -12,6 +12,7 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.game.permanent.Permanent;
+import mage.util.MultiAmountMessage;
 
 /**
  *
@@ -28,7 +29,12 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
     }
 
     @Override
-    public void removeAllListener() {
+    public void removeListener(Listener<PlayerQueryEvent> listener) {
+        dispatcher.removeListener(listener);
+    }
+
+    @Override
+    public void removeAllListeners() {
         dispatcher.removeAllListener();
     }
 
@@ -84,7 +90,8 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
         dispatcher.fireEvent(PlayerQueryEvent.amountEvent(playerId, message, min, max));
     }
 
-    public void multiAmount(UUID playerId, List<String> messages, int min, int max, Map<String, Serializable> options) {
+    public void multiAmount(UUID playerId, List<MultiAmountMessage> messages, int min, int max,
+            Map<String, Serializable> options) {
         dispatcher.fireEvent(PlayerQueryEvent.multiAmountEvent(playerId, messages, min, max, options));
     }
 

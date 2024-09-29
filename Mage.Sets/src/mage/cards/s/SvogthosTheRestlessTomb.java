@@ -55,9 +55,9 @@ class SvogthosToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
         CardsInControllerGraveyardCount count = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards"));
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(count, count, Duration.WhileOnBattlefield, SubLayer.SetPT_7b)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(count, Duration.WhileOnBattlefield)));
     }
-    public SvogthosToken(final SvogthosToken token) {
+    private SvogthosToken(final SvogthosToken token) {
         super(token);
     }
 

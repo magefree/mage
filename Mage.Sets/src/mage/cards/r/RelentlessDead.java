@@ -55,12 +55,12 @@ public final class RelentlessDead extends CardImpl {
 
 class RelentlessDeadEffect extends OneShotEffect {
 
-    public RelentlessDeadEffect() {
+    RelentlessDeadEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "you may pay {X}. If you do, return another target Zombie creature card with mana value X from your graveyard to the battlefield";
     }
 
-    public RelentlessDeadEffect(final RelentlessDeadEffect effect) {
+    private RelentlessDeadEffect(final RelentlessDeadEffect effect) {
         super(effect);
     }
 

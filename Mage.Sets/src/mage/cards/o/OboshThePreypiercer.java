@@ -58,7 +58,7 @@ enum OboshThePreypiercerCompanionCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingHandSize) {
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
         return deck
                 .stream()
                 .filter(card -> !card.hasCardTypeForDeckbuilding(CardType.LAND))

@@ -2,6 +2,7 @@
 package mage.abilities.effects.common.search;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
@@ -15,7 +16,6 @@ import mage.target.common.TargetCardInLibrary;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LokiX, BetaSteward_at_googlemail.com (spjspj)
  */
 public class SearchLibraryPutInHandOrOnBattlefieldEffect extends SearchEffect {
@@ -30,7 +30,7 @@ public class SearchLibraryPutInHandOrOnBattlefieldEffect extends SearchEffect {
         setText();
     }
 
-    public SearchLibraryPutInHandOrOnBattlefieldEffect(final SearchLibraryPutInHandOrOnBattlefieldEffect effect) {
+    protected SearchLibraryPutInHandOrOnBattlefieldEffect(final SearchLibraryPutInHandOrOnBattlefieldEffect effect) {
         super(effect);
         this.revealCards = effect.revealCards;
         this.nameToPutOnBattlefield = effect.nameToPutOnBattlefield;

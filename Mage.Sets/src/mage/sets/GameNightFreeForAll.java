@@ -37,13 +37,13 @@ public class GameNightFreeForAll extends ExpansionSet {
         cards.add(new SetCardInfo("Bushmeat Poacher", 44, Rarity.COMMON, mage.cards.b.BushmeatPoacher.class));
         cards.add(new SetCardInfo("Captain of the Watch", 8, Rarity.RARE, mage.cards.c.CaptainOfTheWatch.class));
         cards.add(new SetCardInfo("Colossus Hammer", 115, Rarity.UNCOMMON, mage.cards.c.ColossusHammer.class));
-        cards.add(new SetCardInfo("Counterspell", 25, Rarity.COMMON, mage.cards.c.Counterspell.class));
+        cards.add(new SetCardInfo("Counterspell", 25, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Crucible of Fire", 70, Rarity.RARE, mage.cards.c.CrucibleOfFire.class));
         cards.add(new SetCardInfo("Danitha Capashen, Paragon", 9, Rarity.UNCOMMON, mage.cards.d.DanithaCapashenParagon.class));
         cards.add(new SetCardInfo("Demon of Loathing", 45, Rarity.RARE, mage.cards.d.DemonOfLoathing.class));
         cards.add(new SetCardInfo("Demonic Embrace", 46, Rarity.RARE, mage.cards.d.DemonicEmbrace.class));
         cards.add(new SetCardInfo("Diluvian Primordial", 26, Rarity.RARE, mage.cards.d.DiluvianPrimordial.class));
-        cards.add(new SetCardInfo("Doom Blade", 47, Rarity.UNCOMMON, mage.cards.d.DoomBlade.class));
+        cards.add(new SetCardInfo("Doom Blade", 47, Rarity.COMMON, mage.cards.d.DoomBlade.class));
         cards.add(new SetCardInfo("Doomed Dissenter", 48, Rarity.COMMON, mage.cards.d.DoomedDissenter.class));
         cards.add(new SetCardInfo("Dragon Egg", 71, Rarity.COMMON, mage.cards.d.DragonEgg.class));
         cards.add(new SetCardInfo("Dragon Hatchling", 72, Rarity.COMMON, mage.cards.d.DragonHatchling.class));
@@ -62,7 +62,7 @@ public class GameNightFreeForAll extends ExpansionSet {
         cards.add(new SetCardInfo("Fact or Fiction", 27, Rarity.UNCOMMON, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Flameblast Dragon", 77, Rarity.RARE, mage.cards.f.FlameblastDragon.class));
         cards.add(new SetCardInfo("Flametongue Kavu", 78, Rarity.UNCOMMON, mage.cards.f.FlametongueKavu.class));
-        cards.add(new SetCardInfo("Fleshbag Marauder", 50, Rarity.UNCOMMON, mage.cards.f.FleshbagMarauder.class));
+        cards.add(new SetCardInfo("Fleshbag Marauder", 50, Rarity.COMMON, mage.cards.f.FleshbagMarauder.class));
         cards.add(new SetCardInfo("Fog Bank", 28, Rarity.UNCOMMON, mage.cards.f.FogBank.class));
         cards.add(new SetCardInfo("Forbidding Spirit", 10, Rarity.UNCOMMON, mage.cards.f.ForbiddingSpirit.class));
         cards.add(new SetCardInfo("Forest", 134, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
@@ -99,7 +99,7 @@ public class GameNightFreeForAll extends ExpansionSet {
         cards.add(new SetCardInfo("Maalfeld Twins", 56, Rarity.COMMON, mage.cards.m.MaalfeldTwins.class));
         cards.add(new SetCardInfo("Maeve, Insidious Singer", 2, Rarity.MYTHIC, mage.cards.m.MaeveInsidiousSinger.class));
         cards.add(new SetCardInfo("Mana Geyser", 84, Rarity.COMMON, mage.cards.m.ManaGeyser.class));
-        cards.add(new SetCardInfo("Moan of the Unhallowed", 57, Rarity.COMMON, mage.cards.m.MoanOfTheUnhallowed.class));
+        cards.add(new SetCardInfo("Moan of the Unhallowed", 57, Rarity.UNCOMMON, mage.cards.m.MoanOfTheUnhallowed.class));
         cards.add(new SetCardInfo("Moonsilver Spear", 118, Rarity.RARE, mage.cards.m.MoonsilverSpear.class));
         cards.add(new SetCardInfo("Mountain", 131, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 132, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));

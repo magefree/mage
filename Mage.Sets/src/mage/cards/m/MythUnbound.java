@@ -67,7 +67,7 @@ class MythUnboundCostReductionEffect extends CostModificationEffectImpl {
                 + "it's been cast from the command zone this game";
     }
 
-    MythUnboundCostReductionEffect(MythUnboundCostReductionEffect effect) {
+    private MythUnboundCostReductionEffect(final MythUnboundCostReductionEffect effect) {
         super(effect);
     }
 

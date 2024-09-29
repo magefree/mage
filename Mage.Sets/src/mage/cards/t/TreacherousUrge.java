@@ -51,12 +51,12 @@ public final class TreacherousUrge extends CardImpl {
 
 class TreacherousUrgeEffect extends OneShotEffect {
 
-    public TreacherousUrgeEffect() {
+    TreacherousUrgeEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent reveals their hand. You may put a creature card from it onto the battlefield under your control. That creature gains haste. Sacrifice it at the beginning of the next end step";
     }
 
-    public TreacherousUrgeEffect(final TreacherousUrgeEffect effect) {
+    private TreacherousUrgeEffect(final TreacherousUrgeEffect effect) {
         super(effect);
     }
 
@@ -67,7 +67,7 @@ class TreacherousUrgeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = game.getObject(source);
         if (opponent != null && sourceObject != null) {
             opponent.revealCards(sourceObject.getName(), opponent.getHand(), game);

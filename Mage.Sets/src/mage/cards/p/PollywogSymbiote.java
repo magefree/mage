@@ -14,7 +14,6 @@ import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreatureSpell;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
 import java.util.UUID;
@@ -25,8 +24,8 @@ import java.util.UUID;
 public final class PollywogSymbiote extends CardImpl {
 
     private static final FilterCard filter = new FilterCreatureCard();
-    private static final FilterSpell filter2 = new FilterCreatureSpell();
-    private static final Predicate predicate = new AbilityPredicate(MutateAbility.class);
+    private static final FilterSpell filter2 = new FilterCreatureSpell("a creature spell, if it has mutate");
+    private static final AbilityPredicate predicate = new AbilityPredicate(MutateAbility.class);
 
     static {
         filter.add(predicate);
@@ -46,8 +45,7 @@ public final class PollywogSymbiote extends CardImpl {
 
         // Whenever you cast a creature spell, if it has mutate, draw a card, then discard a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new DrawDiscardControllerEffect(1, 1), filter2, false,
-                "Whenever you cast a creature spell, if it has mutate, draw a card, then discard a card."
+                new DrawDiscardControllerEffect(1, 1), filter2, false
         ));
     }
 

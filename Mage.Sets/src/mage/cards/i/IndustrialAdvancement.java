@@ -16,9 +16,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -70,9 +69,8 @@ class IndustrialAdvancementEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        TargetPermanent target = new TargetControlledCreaturePermanent(0, 1);
-        target.setNotTarget(true);
-        player.choose(outcome, target, source, game);
+        TargetSacrifice target = new TargetSacrifice(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE);
+        player.choose(Outcome.Sacrifice, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null || !permanent.sacrifice(source, game)) {
             return false;
@@ -84,7 +82,7 @@ class IndustrialAdvancementEffect extends OneShotEffect {
         TargetCard targetCard = new TargetCardInLibrary(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE
         );
-        player.choose(outcome, cards, targetCard, source, game);
+        player.choose(Outcome.PutCreatureInPlay, cards, targetCard, source, game);
         player.moveCards(game.getCard(targetCard.getFirstTarget()), Zone.BATTLEFIELD, source, game);
         cards.retainZone(Zone.LIBRARY, game);
         player.putCardsOnBottomOfLibrary(cards, game, source, false);

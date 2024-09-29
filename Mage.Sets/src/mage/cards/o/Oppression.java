@@ -41,7 +41,7 @@ class OppressionTriggeredAbility extends SpellCastAllTriggeredAbility {
         super(new DiscardTargetEffect(1), false);
     }
 
-    public OppressionTriggeredAbility(OppressionTriggeredAbility ability) {
+    private OppressionTriggeredAbility(final OppressionTriggeredAbility ability) {
         super(ability);
     }
 

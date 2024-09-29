@@ -52,12 +52,12 @@ public final class RiptideChronologist extends CardImpl {
 
 class RiptideChronologistEffect extends OneShotEffect {
 
-    public RiptideChronologistEffect() {
+    RiptideChronologistEffect() {
         super(Outcome.UnboostCreature);
         staticText = "Untap all creatures of the creature type of your choice";
     }
 
-    public RiptideChronologistEffect(final RiptideChronologistEffect effect) {
+    private RiptideChronologistEffect(final RiptideChronologistEffect effect) {
         super(effect);
     }
 
@@ -66,11 +66,11 @@ class RiptideChronologistEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
         if (player != null && sourceObject != null) {
-            Choice typeChoice = new ChoiceCreatureType(sourceObject);
+            Choice typeChoice = new ChoiceCreatureType(game, source);
             if (player.choose(outcome, typeChoice, game)) {
-                game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoice());
+                game.informPlayers(sourceObject.getLogName() + " chosen type: " + typeChoice.getChoiceKey());
                 FilterCreaturePermanent filterCreaturePermanent = new FilterCreaturePermanent();
-                filterCreaturePermanent.add(SubType.byDescription(typeChoice.getChoice()).getPredicate());
+                filterCreaturePermanent.add(SubType.byDescription(typeChoice.getChoiceKey()).getPredicate());
                 for (Permanent creature : game.getBattlefield().getActivePermanents(filterCreaturePermanent, source.getSourceId(), game)) {
                     creature.untap(game);
                 }

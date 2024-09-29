@@ -5,7 +5,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ public final class Shriekhorn extends CardImpl {
                 ), "with three charge counters on it"
         ));
 
-        Ability ability = new SimpleActivatedAbility(new PutLibraryIntoGraveTargetEffect(2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(2), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

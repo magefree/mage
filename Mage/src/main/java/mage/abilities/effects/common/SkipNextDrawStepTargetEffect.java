@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author jeffwadsworth
  */
 
@@ -19,18 +18,13 @@ public class SkipNextDrawStepTargetEffect extends ReplacementEffectImpl {
         staticText = "Target player skips their next draw step";
     }
 
-    public SkipNextDrawStepTargetEffect(final SkipNextDrawStepTargetEffect effect) {
+    protected SkipNextDrawStepTargetEffect(final SkipNextDrawStepTargetEffect effect) {
         super(effect);
     }
 
     @Override
     public SkipNextDrawStepTargetEffect copy() {
         return new SkipNextDrawStepTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

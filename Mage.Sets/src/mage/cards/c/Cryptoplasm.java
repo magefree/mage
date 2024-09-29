@@ -60,7 +60,7 @@ class CryptoplasmEffect extends OneShotEffect {
 
     CryptoplasmEffect() {
         super(Outcome.Copy);
-        this.staticText = "you may have {this} become a copy of another target creature, except it gains this ability";
+        this.staticText = "you may have {this} become a copy of another target creature, except it has this ability";
     }
 
     private CryptoplasmEffect(final CryptoplasmEffect effect) {

@@ -34,7 +34,6 @@ public final class GazeOfTheGorgon extends CardImpl {
         this.getSpellAbility().addEffect(new RegenerateTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect());
-        this.getSpellAbility().addWatcher(new BlockedAttackerWatcher());
     }
 
     private GazeOfTheGorgon(final GazeOfTheGorgon card) {
@@ -49,12 +48,12 @@ public final class GazeOfTheGorgon extends CardImpl {
 
 class GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect extends OneShotEffect {
 
-    public GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect() {
+    GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect() {
         super(Outcome.Benefit);
         this.staticText = "At this turn's next end of combat, destroy all creatures that blocked or were blocked by it this turn";
     }
 
-    public GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect(final GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect effect) {
+    private GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect(final GazeOfTheGorgonCreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
     }
 
@@ -84,7 +83,7 @@ class GazeOfTheGorgonEffect extends OneShotEffect {
         this.targetCreature = targetCreature;
     }
 
-    public GazeOfTheGorgonEffect(final GazeOfTheGorgonEffect effect) {
+    private GazeOfTheGorgonEffect(final GazeOfTheGorgonEffect effect) {
         super(effect);
         targetCreature = effect.targetCreature;
     }

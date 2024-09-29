@@ -68,12 +68,12 @@ public final class LowlandOaf extends CardImpl {
 
 class LowlandOafEffect extends OneShotEffect {
 
-    public LowlandOafEffect() {
+    LowlandOafEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Sacrifice that creature at the beginning of the next end step";
     }
 
-    public LowlandOafEffect(final LowlandOafEffect effect) {
+    private LowlandOafEffect(final LowlandOafEffect effect) {
         super(effect);
     }
 

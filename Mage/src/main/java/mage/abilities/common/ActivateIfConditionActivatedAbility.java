@@ -1,4 +1,3 @@
-
 package mage.abilities.common;
 
 import mage.abilities.ActivatedAbilityImpl;
@@ -6,31 +5,39 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
+import mage.constants.TimingRule;
 import mage.constants.Zone;
-import mage.game.Game;
 
 /**
  * @author LevelX2
  */
 public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
 
+    public ActivateIfConditionActivatedAbility(Effect effect, Cost cost, Condition condition) {
+        this(Zone.BATTLEFIELD, effect, cost, condition, TimingRule.INSTANT);
+    }
+
     public ActivateIfConditionActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition) {
+        this(zone, effect, cost, condition, TimingRule.INSTANT);
+    }
+
+    public ActivateIfConditionActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, TimingRule timing) {
         super(zone, effect, cost);
         this.condition = condition;
+        this.timing = timing;
     }
 
-    public ActivateIfConditionActivatedAbility(ActivateIfConditionActivatedAbility ability) {
+    protected ActivateIfConditionActivatedAbility(final ActivateIfConditionActivatedAbility ability) {
         super(ability);
-    }
-
-    @Override
-    public boolean resolve(Game game) {
-        return super.resolve(game);
     }
 
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder(super.getRule());
+        if (condition.toString().startsWith("You may also")) {
+            sb.append(' ').append(condition.toString()).append('.');
+            return sb.toString();
+        }
         if (condition instanceof InvertCondition) {
             sb.append(" You can't activate this ability ");
         } else {
@@ -41,7 +48,11 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl {
                 && !condition.toString().startsWith("if")) {
             sb.append("if ");
         }
-        sb.append(condition.toString()).append('.');
+        sb.append(condition.toString());
+        if (timing == TimingRule.SORCERY) {
+            sb.append(" and only as a sorcery");
+        }
+        sb.append('.');
 
         return sb.toString();
     }

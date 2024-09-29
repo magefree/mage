@@ -41,12 +41,12 @@ public final class DestructiveRevelry extends CardImpl {
 
 class DestructiveRevelryEffect extends OneShotEffect {
 
-    public DestructiveRevelryEffect() {
+    DestructiveRevelryEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target artifact or enchantment. {this} deals 2 damage to that permanent's controller";
     }
 
-    public DestructiveRevelryEffect(final DestructiveRevelryEffect effect) {
+    private DestructiveRevelryEffect(final DestructiveRevelryEffect effect) {
         super(effect);
     }
 

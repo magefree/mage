@@ -44,7 +44,7 @@ public final class GoblinPiledriver extends CardImpl {
         // Protection from blue
         this.addAbility(ProtectionAbility.from(ObjectColor.BLUE));
         // Whenever Goblin Piledriver attacks, it gets +2/+0 until end of turn for each other attacking Goblin.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, true, "it"), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(xValue, StaticValue.get(0), Duration.EndOfTurn, "it"), false));
     }
 
     private GoblinPiledriver(final GoblinPiledriver card) {

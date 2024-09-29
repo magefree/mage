@@ -1,6 +1,7 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -59,14 +60,14 @@ class ExclusionRitualImprintEffect extends OneShotEffect {
         staticText = "exile target nonland permanent";
     }
 
-    ExclusionRitualImprintEffect(final ExclusionRitualImprintEffect effect) {
+    private ExclusionRitualImprintEffect(final ExclusionRitualImprintEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null && sourcePermanent != null && targetPermanent != null) {
             controller.moveCardToExileWithInfo(targetPermanent, getId(), sourcePermanent.getIdName(), source, game, Zone.BATTLEFIELD, true);
@@ -88,7 +89,7 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
         staticText = "Players can't cast spells with the same name as the exiled card";
     }
 
-    ExclusionRitualReplacementEffect(final ExclusionRitualReplacementEffect effect) {
+    private ExclusionRitualReplacementEffect(final ExclusionRitualReplacementEffect effect) {
         super(effect);
     }
 
@@ -100,20 +101,20 @@ class ExclusionRitualReplacementEffect extends ContinuousRuleModifyingEffectImpl
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        Card card = game.getCard(event.getSourceId());
-        if (sourcePermanent != null && card != null) {
-            if (!sourcePermanent.getImprinted().isEmpty()) {
-                Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
-                if (imprintedCard != null) {
-                    return CardUtil.haveSameNames(card, imprintedCard);
-                }
+        SpellAbility spellAbility = SpellAbility.getSpellAbilityFromEvent(event, game);
+        if (spellAbility == null) {
+            return false;
+        }
+        Card card = spellAbility.getCharacteristics(game);
+        if (card == null) {
+            return false;
+        }
+        if (sourcePermanent != null && !sourcePermanent.getImprinted().isEmpty()) {
+            Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
+            if (imprintedCard != null) {
+                return CardUtil.haveSameNames(spellAbility.getCharacteristics(game), imprintedCard);
             }
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

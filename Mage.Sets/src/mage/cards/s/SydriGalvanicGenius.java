@@ -70,12 +70,12 @@ public final class SydriGalvanicGenius extends CardImpl {
 
 class SydriGalvanicGeniusEffect extends ContinuousEffectImpl {
 
-    public SydriGalvanicGeniusEffect() {
+    SydriGalvanicGeniusEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn";
     }
 
-    public SydriGalvanicGeniusEffect(final SydriGalvanicGeniusEffect effect) {
+    private SydriGalvanicGeniusEffect(final SydriGalvanicGeniusEffect effect) {
         super(effect);
     }
 

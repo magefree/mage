@@ -44,7 +44,7 @@ public final class TheOneRing extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new GainAbilityControllerEffect(
                         new ProtectionFromEverythingAbility(), Duration.UntilYourNextTurn
-                )), CastFromEverywhereSourceCondition.instance, "When {this} enters the battlefield, " +
+                )), CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
                 "if you cast it, you gain protection from everything until your next turn."
         ));
 
@@ -57,7 +57,7 @@ public final class TheOneRing extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.BURDEN.createInstance()), new TapSourceCost()
         );
-        ability.addEffect(new DrawCardSourceControllerEffect(xValue));
+        ability.addEffect(new DrawCardSourceControllerEffect(xValue).concatBy(", then"));
         this.addAbility(ability);
     }
 

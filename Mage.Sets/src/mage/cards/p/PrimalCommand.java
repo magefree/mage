@@ -71,12 +71,12 @@ public final class PrimalCommand extends CardImpl {
 
 class PrimalCommandShuffleGraveyardEffect extends OneShotEffect {
 
-    public PrimalCommandShuffleGraveyardEffect() {
+    PrimalCommandShuffleGraveyardEffect() {
         super(Outcome.Neutral);
         this.staticText = "target player shuffles their graveyard into their library";
     }
 
-    public PrimalCommandShuffleGraveyardEffect(final PrimalCommandShuffleGraveyardEffect effect) {
+    private PrimalCommandShuffleGraveyardEffect(final PrimalCommandShuffleGraveyardEffect effect) {
         super(effect);
     }
 

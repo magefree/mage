@@ -44,7 +44,7 @@ public final class DeathpactAngelToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public DeathpactAngelToken(final DeathpactAngelToken token) {
+    private DeathpactAngelToken(final DeathpactAngelToken token) {
         super(token);
     }
 

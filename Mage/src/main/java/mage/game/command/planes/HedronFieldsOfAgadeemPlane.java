@@ -75,7 +75,7 @@ class HedronFieldsOfAgadeemRestrictionEffect extends RestrictionEffect {
         staticText = "Creatures with power 7 or greater can't attack or block";
     }
 
-    public HedronFieldsOfAgadeemRestrictionEffect(final HedronFieldsOfAgadeemRestrictionEffect effect) {
+    protected HedronFieldsOfAgadeemRestrictionEffect(final HedronFieldsOfAgadeemRestrictionEffect effect) {
         super(effect);
     }
 

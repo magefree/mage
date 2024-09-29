@@ -76,7 +76,7 @@ class ThoughtDistortionEffect extends OneShotEffect {
         }
         player.revealCards(source, player.getHand(), game);
         Cards cards = new CardsImpl(player.getHand().getCards(filter, game));
-        cards.addAll(player.getGraveyard().getCards(filter, game));
+        cards.addAllCards(player.getGraveyard().getCards(filter, game));
         return player.moveCards(cards, Zone.EXILED, source, game);
     }
 }

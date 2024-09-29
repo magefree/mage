@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
@@ -19,7 +20,10 @@ public final class JaceTelepathUnboundEmblem extends Emblem {
         super("Emblem Jace");
         Effect effect = new MillCardsTargetEffect(5);
         effect.setText("target opponent mills five cards");
-        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, StaticFilters.FILTER_SPELL_A, false, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(
+                Zone.COMMAND, effect, StaticFilters.FILTER_SPELL_A,
+                false, SetTargetPointer.NONE
+        );
         ability.addTarget(new TargetOpponent());
         getAbilities().add(ability);
     }

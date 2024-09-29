@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -11,18 +10,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterSpell;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author fireshoes
  */
 public final class BlessedSpirits extends CardImpl {
-    
-    private static final FilterSpell filter = new FilterSpell("an enchantment spell");
-    static {
-        filter.add(CardType.ENCHANTMENT.getPredicate());
-    }
 
     public BlessedSpirits(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{W}");
@@ -34,7 +28,7 @@ public final class BlessedSpirits extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever you cast an enchantment spell, put a +1/+1 counter on Blessed Spirits.
-        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false));
     }
 
     private BlessedSpirits(final BlessedSpirits card) {

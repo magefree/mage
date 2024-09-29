@@ -34,6 +34,8 @@ import static mage.client.dialog.PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_4
 
 /**
  * App GUI: waiting other players before join to a table
+ * <p>
+ * Do not use modal/callback, send direct commands to server
  *
  * @author BetaSteward_at_googlemail.com
  */
@@ -79,7 +81,7 @@ public class TableWaitingDialog extends MageDialog {
     private void setGUISize() {
         jTableSeats.getTableHeader().setFont(GUISizeHelper.tableFont);
         jTableSeats.setFont(GUISizeHelper.tableFont);
-        jTableSeats.setRowHeight(GUISizeHelper.getTableRowHeight());
+        jTableSeats.setRowHeight(GUISizeHelper.tableRowHeight);
 
         jSplitPane1.setDividerSize(GUISizeHelper.dividerBarSize);
         jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(GUISizeHelper.scrollBarSize, 0));
@@ -101,7 +103,7 @@ public class TableWaitingDialog extends MageDialog {
                         this.btnMoveUp.setEnabled(false);
                         break;
                     default:
-                        closeDialog();
+                        doClose();
                         return;
                 }
                 int row = this.jTableSeats.getSelectedRow();
@@ -113,10 +115,10 @@ public class TableWaitingDialog extends MageDialog {
                 this.jTableSeats.repaint();
                 this.jTableSeats.getSelectionModel().setSelectionInterval(row, row);
             } else {
-                closeDialog();
+                doClose();
             }
         } catch (Exception ex) {
-            closeDialog();
+            doClose();
         }
     }
 
@@ -149,16 +151,16 @@ public class TableWaitingDialog extends MageDialog {
 
             GuiDisplayUtil.restoreDividerLocations(currentBounds, tournamentChatDivider, jSplitPane1);
         } else {
-            closeDialog();
+            doClose();
         }
     }
 
-    public void closeDialog() {
+    public void doClose() {
         if (updateTask != null) {
             updateTask.cancel(true);
         }
 
-        this.chatPanel.disconnect();
+        this.chatPanel.cleanUp();
         MageFrame.getUI().removeButton(MageComponents.TABLE_WAITING_START_BUTTON);
         this.removeDialog();
         TableUtil.saveColumnWidthAndOrderToPrefs(jTableSeats, KEY_TABLE_WAITING_COLUMNS_WIDTH, KEY_TABLE_WAITING_COLUMNS_ORDER);
@@ -249,10 +251,10 @@ public class TableWaitingDialog extends MageDialog {
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         if (!isTournament) {
             if (SessionHandler.startMatch(roomId, tableId)) {
-                closeDialog();
+                doClose();
             }
         } else if (SessionHandler.startTournament(roomId, tableId)) {
-            closeDialog();
+            doClose();
         }
     }//GEN-LAST:event_btnStartActionPerformed
 
@@ -265,7 +267,7 @@ public class TableWaitingDialog extends MageDialog {
             //swallow exception
             LOGGER.error(e);
         }
-        closeDialog();
+        doClose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnMoveDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoveDownActionPerformed
@@ -401,7 +403,7 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
             if (tableView.isPresent()) {
                 tableView.ifPresent(this::publish);
             } else {
-                dialog.closeDialog();
+                dialog.doClose();
             }
             TimeUnit.SECONDS.sleep(1);
         }

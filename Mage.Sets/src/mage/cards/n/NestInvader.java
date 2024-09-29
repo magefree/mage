@@ -26,7 +26,8 @@ public final class NestInvader extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new EldraziSpawnToken()), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new CreateTokenEffect(new EldraziSpawnToken()).withTextOptions(true), false));
     }
 
     private NestInvader(final NestInvader card) {

@@ -32,7 +32,7 @@ import java.util.UUID;
  */
 public final class TheWatcherInTheWater extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.TENTACLE);
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.TENTACLE, "a Tentacle you control");
     private static final FilterPermanent filter2 = new FilterPermanent(SubType.KRAKEN, "Kraken");
 
     public TheWatcherInTheWater(UUID ownerId, CardSetInfo setInfo) {
@@ -46,7 +46,7 @@ public final class TheWatcherInTheWater extends CardImpl {
         // The Watcher in the Water enters the battlefield tapped with nine stun counters on it.
         Ability ability = new EntersBattlefieldAbility(
                 new TapSourceEffect(true), false, null,
-                "{this} enters the battlefield tapped with nine stun counters on it.", null
+                "{this} enters tapped with nine stun counters on it.", null
         );
         ability.addEffect(new AddCountersSourceEffect(CounterType.STUN.createInstance(9)));
         this.addAbility(ability);

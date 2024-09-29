@@ -60,7 +60,7 @@ class MoonmistEffect extends OneShotEffect {
         staticText = "Transform all Humans";
     }
 
-    public MoonmistEffect(final MoonmistEffect effect) {
+    private MoonmistEffect(final MoonmistEffect effect) {
         super(effect);
     }
 

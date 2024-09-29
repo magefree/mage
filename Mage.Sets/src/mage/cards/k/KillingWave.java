@@ -2,7 +2,7 @@
 package mage.cards.k;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,12 +40,12 @@ public final class KillingWave extends CardImpl {
 
 class KillingWaveEffect extends OneShotEffect {
 
-    public KillingWaveEffect() {
+    KillingWaveEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "For each creature, its controller sacrifices it unless they pay X life";
     }
 
-    public KillingWaveEffect(final KillingWaveEffect effect) {
+    private KillingWaveEffect(final KillingWaveEffect effect) {
         super(effect);
     }
 
@@ -61,7 +61,7 @@ class KillingWaveEffect extends OneShotEffect {
             return false;
         }
 
-        int amount = (ManacostVariableValue.REGULAR).calculate(game, source, this);
+        int amount = (GetXValue.instance).calculate(game, source, this);
         if (amount > 0) {
             List<Permanent> sacrifices = new LinkedList<>();
             Map<UUID, Integer> lifePaidAmounts = new HashMap<>();

@@ -43,12 +43,12 @@ public final class NantukoShrine extends CardImpl {
 
 class NantukoShrineEffect extends OneShotEffect {
 
-    public NantukoShrineEffect() {
+    NantukoShrineEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "that player creates X 1/1 green Squirrel creature tokens, where X is the number of cards in all graveyards with the same name as that spell";
     }
 
-    public NantukoShrineEffect(final NantukoShrineEffect effect) {
+    private NantukoShrineEffect(final NantukoShrineEffect effect) {
         super(effect);
     }
 

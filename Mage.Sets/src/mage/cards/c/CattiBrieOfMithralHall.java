@@ -1,7 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -18,18 +16,15 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterAttackingOrBlockingCreature;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author zeffirojoe
  */
 public final class CattiBrieOfMithralHall extends CardImpl {
@@ -42,7 +37,7 @@ public final class CattiBrieOfMithralHall extends CardImpl {
     }
 
     public CattiBrieOfMithralHall(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{G}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
@@ -56,15 +51,12 @@ public final class CattiBrieOfMithralHall extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // Whenever Catti-brie of Mithral Hall attacks, put a +1/+1 counter on it for
-        // each Equipment attached to it.
+        // Whenever Catti-brie of Mithral Hall attacks, put a +1/+1 counter on it for each Equipment attached to it.
         EquipmentAttachedCount amount = new EquipmentAttachedCount();
         this.addAbility(new AttacksTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(), amount, false).setText("put a +1/+1 counter on it for each Equipment attached to it")));
 
-        // {1}, Remove all +1/+1 counters from Catti-brie: It deals X damage to target
-        // attacking or blocking creature an opponent controls, where X is the number of
-        // counters removed this way.
+        // {1}, Remove all +1/+1 counters from Catti-brie: It deals X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way.
         Ability damageAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(CattiBrieRemovedCounterValue.instance).setText("it deals X damage to target attacking or blocking creature an opponent controls, where X is the number of counters removed this way"), new ManaCostsImpl<>("{1}"));
         damageAbility.addTarget(new TargetCreaturePermanent(filter));

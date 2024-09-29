@@ -73,7 +73,7 @@ class StabwhiskerTheOdious extends TokenImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD, new StabwhiskerLoseLifeEffect(), TargetController.OPPONENT, false, true));
     }
-    public StabwhiskerTheOdious(final StabwhiskerTheOdious token) {
+    private StabwhiskerTheOdious(final StabwhiskerTheOdious token) {
         super(token);
     }
 
@@ -84,12 +84,12 @@ class StabwhiskerTheOdious extends TokenImpl {
 
 class StabwhiskerLoseLifeEffect extends OneShotEffect {
 
-    public StabwhiskerLoseLifeEffect() {
+    StabwhiskerLoseLifeEffect() {
         super(Outcome.LoseLife);
         this.staticText = "that player loses 1 life for each card fewer than three in their hand";
     }
 
-    public StabwhiskerLoseLifeEffect(final StabwhiskerLoseLifeEffect effect) {
+    private StabwhiskerLoseLifeEffect(final StabwhiskerLoseLifeEffect effect) {
         super(effect);
     }
 

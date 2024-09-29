@@ -58,7 +58,6 @@ class CurseOfShakenFaithTriggeredAbility extends TriggeredAbilityImpl {
 
     public CurseOfShakenFaithTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CurseOfShakenFaithEffect());
-        this.addWatcher(new SpellsCastWatcher());
         setTriggerPhrase("Whenever enchanted player casts a spell other than the first spell they cast each turn or copies a spell, ");
     }
 
@@ -99,7 +98,7 @@ class CurseOfShakenFaithTriggeredAbility extends TriggeredAbilityImpl {
 
 class CurseOfShakenFaithEffect extends OneShotEffect {
 
-    public CurseOfShakenFaithEffect() {
+    CurseOfShakenFaithEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to them";
     }

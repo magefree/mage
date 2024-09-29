@@ -42,7 +42,7 @@ public final class BattleAngelsOfTyr extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Myriad
-        this.addAbility(new MyriadAbility());
+        this.addAbility(new MyriadAbility(false));
 
         // Whenever Battle Angels of Tyr deals combat damage to a player, draw a card if that player has more cards in hand than each other player. Then you create a Treasure token if that player controls more lands than each other player. Then you gain 3 life if that player has more life than each other player.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(

@@ -52,13 +52,13 @@ public final class FreneticEfreet extends CardImpl {
 
 class FreneticEfreetEffect extends OneShotEffect {
 
-    public FreneticEfreetEffect() {
+    FreneticEfreetEffect() {
         super(Outcome.Neutral);
         staticText = "Flip a coin. If you win the flip, "
                 + "{this} phases out. If you lose the flip, sacrifice {this}";
     }
 
-    public FreneticEfreetEffect(FreneticEfreetEffect effect) {
+    private FreneticEfreetEffect(final FreneticEfreetEffect effect) {
         super(effect);
     }
 

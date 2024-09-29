@@ -23,7 +23,7 @@ public final class BrokersConfluence extends CardImpl {
         // Choose three. You may choose the same mode more than once.
         this.getSpellAbility().getModes().setMinModes(3);
         this.getSpellAbility().getModes().setMaxModes(3);
-        this.getSpellAbility().getModes().setEachModeMoreThanOnce(true);
+        this.getSpellAbility().getModes().setMayChooseSameModeMoreThanOnce(true);
 
         // • Proliferate.
         this.getSpellAbility().addEffect(new ProliferateEffect());

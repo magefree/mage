@@ -1,6 +1,6 @@
 package mage.cards.l;
 
-import java.util.UUID;
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -23,8 +23,10 @@ import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class LaquatussChampion extends CardImpl {
@@ -63,13 +65,13 @@ class LaquatussChampionEntersBattlefieldTriggeredAbility extends EntersBattlefie
         super(effect, false);
     }
 
-    public LaquatussChampionEntersBattlefieldTriggeredAbility(final LaquatussChampionEntersBattlefieldTriggeredAbility ability) {
+    private LaquatussChampionEntersBattlefieldTriggeredAbility(final LaquatussChampionEntersBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (super.activate(game, noMana)) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (super.activate(game, allowedIdentifiers, noMana)) {
             Player player = game.getPlayer(getFirstTarget());
             if (player != null) {
                 String key = CardUtil.getCardZoneString("targetPlayer", getSourceId(), game);
@@ -92,7 +94,7 @@ class LaquatussChampionLeavesBattlefieldTriggeredAbility extends LeavesBattlefie
         super(new GainLifeTargetEffect(6), false);
     }
 
-    public LaquatussChampionLeavesBattlefieldTriggeredAbility(LaquatussChampionLeavesBattlefieldTriggeredAbility ability) {
+    private LaquatussChampionLeavesBattlefieldTriggeredAbility(final LaquatussChampionLeavesBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 

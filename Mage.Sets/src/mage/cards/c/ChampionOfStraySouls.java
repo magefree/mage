@@ -6,7 +6,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeXTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PutOnLibrarySourceEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -18,9 +17,8 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
 
@@ -54,8 +52,8 @@ public final class ChampionOfStraySouls extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{3}{B}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeXTargetCost(filter));
-        ability.addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
-        ability.setTargetAdjuster(ChampionOfStraySoulsAdjuster.instance);
+        ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
+        ability.setTargetAdjuster(new XTargetsCountAdjuster());
         this.addAbility(ability);
 
         // {5}{B}{B}: Put Champion of Stray Souls on top of your library from your graveyard.
@@ -71,20 +69,5 @@ public final class ChampionOfStraySouls extends CardImpl {
     @Override
     public ChampionOfStraySouls copy() {
         return new ChampionOfStraySouls(this);
-    }
-}
-
-enum ChampionOfStraySoulsAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        for (Effect effect : ability.getEffects()) {
-            if (effect instanceof ReturnFromGraveyardToBattlefieldTargetEffect) {
-                int xValue = GetXValue.instance.calculate(game, ability, null);
-                ability.getTargets().clear();
-                ability.addTarget(new TargetCardInYourGraveyard(xValue, xValue, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
-            }
-        }
     }
 }

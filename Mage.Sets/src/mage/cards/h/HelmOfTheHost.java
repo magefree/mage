@@ -55,12 +55,12 @@ public final class HelmOfTheHost extends CardImpl {
 
 class HelmOfTheHostEffect extends OneShotEffect {
 
-    public HelmOfTheHostEffect() {
+    HelmOfTheHostEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "create a token that's a copy of equipped creature, except the token isn't legendary if equipped creature is legendary. That token gains haste.";
     }
 
-    public HelmOfTheHostEffect(final HelmOfTheHostEffect effect) {
+    private HelmOfTheHostEffect(final HelmOfTheHostEffect effect) {
         super(effect);
     }
 

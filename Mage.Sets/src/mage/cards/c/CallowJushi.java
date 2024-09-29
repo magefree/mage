@@ -81,7 +81,7 @@ class JarakuTheInterloper extends TokenImpl {
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }
-    public JarakuTheInterloper(final JarakuTheInterloper token) {
+    private JarakuTheInterloper(final JarakuTheInterloper token) {
         super(token);
     }
 

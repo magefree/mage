@@ -31,7 +31,7 @@ public class ForgehammerCenturion extends CardImpl {
         //counter on Forgehammer Centurion.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.OIL.createInstance()),
-                false, StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE, false
+                false, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT, false
         ));
 
         //Whenever Forgehammer Centurion attacks, you may remove two oil counters from it. When you do, target creature

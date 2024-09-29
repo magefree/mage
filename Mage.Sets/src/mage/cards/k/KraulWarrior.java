@@ -35,7 +35,7 @@ public final class KraulWarrior extends CardImpl {
 
     }
 
-    public KraulWarrior (final KraulWarrior card) {
+    private KraulWarrior(final KraulWarrior card) {
         super(card);
     }
 

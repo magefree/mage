@@ -36,7 +36,7 @@ public final class GlimmerBairn extends CardImpl {
         // Sacrifice a token: Glimmer Bairn gets +2/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter))
+                new SacrificeTargetCost(filter)
         ));
     }
 

@@ -23,7 +23,7 @@ public class CantBeBlockedByAllSourceEffect extends RestrictionEffect {
                 + filterBlockedBy.getMessage();
     }
 
-    public CantBeBlockedByAllSourceEffect(final CantBeBlockedByAllSourceEffect effect) {
+    protected CantBeBlockedByAllSourceEffect(final CantBeBlockedByAllSourceEffect effect) {
         super(effect);
         this.filterBlockedBy = effect.filterBlockedBy;
     }

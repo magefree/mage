@@ -20,7 +20,7 @@ public class PersistAbility extends DiesSourceTriggeredAbility {
         this.addEffect(new ReturnSourceFromGraveyardToBattlefieldEffect(false, true));
     }
 
-    public PersistAbility(final PersistAbility ability) {
+    protected PersistAbility(final PersistAbility ability) {
         super(ability);
     }
 
@@ -58,7 +58,7 @@ class PersistEffect extends OneShotEffect {
         this.staticText = "";
     }
 
-    public PersistEffect(final PersistEffect effect) {
+    protected PersistEffect(final PersistEffect effect) {
         super(effect);
     }
 

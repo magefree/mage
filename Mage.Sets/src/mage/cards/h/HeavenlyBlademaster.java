@@ -91,7 +91,7 @@ class HeavenlyBlademasterEffect extends OneShotEffect {
         staticText = "you may attach any number of Auras and Equipment you control to it";
     }
 
-    public HeavenlyBlademasterEffect(final HeavenlyBlademasterEffect effect) {
+    private HeavenlyBlademasterEffect(final HeavenlyBlademasterEffect effect) {
         super(effect);
     }
 

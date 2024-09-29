@@ -47,7 +47,7 @@ class MindcrankTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new MindcrankEffect(), false);
     }
 
-    public MindcrankTriggeredAbility(final MindcrankTriggeredAbility ability) {
+    private MindcrankTriggeredAbility(final MindcrankTriggeredAbility ability) {
         super(ability);
     }
 
@@ -82,11 +82,11 @@ class MindcrankTriggeredAbility extends TriggeredAbilityImpl {
 
 class MindcrankEffect extends OneShotEffect {
 
-    public MindcrankEffect() {
+    MindcrankEffect() {
         super(Outcome.Detriment);
     }
 
-    public MindcrankEffect(final MindcrankEffect effect) {
+    private MindcrankEffect(final MindcrankEffect effect) {
         super(effect);
     }
 

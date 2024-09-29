@@ -3,12 +3,13 @@ package mage.designations;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
-import mage.game.events.DamagedPlayerBatchEvent;
+import mage.game.events.DamagedBatchForPlayersEvent;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -57,12 +58,12 @@ class InitiativeDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER_BATCH;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerBatchEvent dEvent = (DamagedPlayerBatchEvent) event;
+        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
         UUID playerId = dEvent
                 .getEvents()
                 .stream()
@@ -113,6 +114,7 @@ class InitiativeVentureTriggeredAbility extends TriggeredAbilityImpl {
 
     InitiativeVentureTriggeredAbility() {
         super(Zone.ALL, new InitiativeUndercityEffect());
+        addHint(CurrentDungeonHint.instance);
     }
 
     private InitiativeVentureTriggeredAbility(final InitiativeVentureTriggeredAbility ability) {

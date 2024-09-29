@@ -48,12 +48,12 @@ public class UrzasHotTub extends CardImpl {
 
 class UrzasHotTubEffect extends OneShotEffect {
 
-    public UrzasHotTubEffect() {
+    UrzasHotTubEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Search your library for a card that shares a complete word in its name with the discarded card, reveal it, put it into your hand, then shuffle";
     }
 
-    public UrzasHotTubEffect(final UrzasHotTubEffect effect) {
+    private UrzasHotTubEffect(final UrzasHotTubEffect effect) {
         super(effect);
     }
 

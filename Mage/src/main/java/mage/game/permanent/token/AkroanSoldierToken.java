@@ -20,7 +20,7 @@ public final class AkroanSoldierToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public AkroanSoldierToken(final AkroanSoldierToken token) {
+    private AkroanSoldierToken(final AkroanSoldierToken token) {
         super(token);
     }
 

@@ -18,7 +18,7 @@ public final class EwokToken extends TokenImpl {
         color.setGreen(true);
     }
 
-    public EwokToken(final EwokToken token) {
+    private EwokToken(final EwokToken token) {
         super(token);
     }
 

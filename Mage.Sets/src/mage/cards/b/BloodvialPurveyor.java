@@ -53,7 +53,7 @@ public final class BloodvialPurveyor extends CardImpl {
 
         // Whenever Bloodvial Purveyor attacks, it gets +1/+0 until end of turn for each Blood token defending player controls.
         this.addAbility(new AttacksTriggeredAbility(
-                new BoostSourceEffect(new PermanentsTargetOpponentControlsCount(filter), StaticValue.get(0), Duration.EndOfTurn, true)
+                new BoostSourceEffect(new PermanentsTargetOpponentControlsCount(filter), StaticValue.get(0), Duration.EndOfTurn)
                         .setText("it gets +1/+0 until end of turn for each Blood token defending player controls"),
                 false, null, SetTargetPointer.PLAYER
         ));

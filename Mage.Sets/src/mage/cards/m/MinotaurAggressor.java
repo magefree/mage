@@ -30,7 +30,7 @@ public final class MinotaurAggressor extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public MinotaurAggressor (final MinotaurAggressor card) {
+    private MinotaurAggressor(final MinotaurAggressor card) {
         super(card);
     }
 

@@ -1,14 +1,12 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -16,14 +14,10 @@ import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.ObjectSourcePlayer;
-import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.card.ManaValueLessThanOrEqualToSourcePowerPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
-import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -37,7 +31,7 @@ public final class GurglingAnointer extends CardImpl {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(GurglingAnointerPredicate.instance);
+        filter.add(ManaValueLessThanOrEqualToSourcePowerPredicate.instance);
     }
 
     public GurglingAnointer(UUID ownerId, CardSetInfo setInfo) {
@@ -67,20 +61,5 @@ public final class GurglingAnointer extends CardImpl {
     @Override
     public GurglingAnointer copy() {
         return new GurglingAnointer(this);
-    }
-}
-
-enum GurglingAnointerPredicate implements ObjectSourcePlayerPredicate<Card> {
-    instance;
-
-    @Override
-    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
-        return Optional
-                .ofNullable(input.getSource().getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
-                .map(MageObject::getPower)
-                .map(MageInt::getValue)
-                .map(p -> input.getObject().getManaValue() <= p)
-                .orElse(false);
     }
 }

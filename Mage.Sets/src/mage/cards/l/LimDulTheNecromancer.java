@@ -66,12 +66,12 @@ public final class LimDulTheNecromancer extends CardImpl {
 
 class LimDulTheNecromancerEffect extends OneShotEffect {
 
-    public LimDulTheNecromancerEffect() {
+    LimDulTheNecromancerEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "return that card to the battlefield under your control. If it's a creature, it's a Zombie in addition to its other creature types";
     }
 
-    public LimDulTheNecromancerEffect(final LimDulTheNecromancerEffect effect) {
+    private LimDulTheNecromancerEffect(final LimDulTheNecromancerEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class LimDulTheNecromancerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Card card = game.getCard(targetPointer.getFirst(game, source));
+            Card card = game.getCard(getTargetPointer().getFirst(game, source));
             if (card != null) {
                 if (controller.moveCards(card, Zone.BATTLEFIELD, source, game)
                         && card.isCreature(game)) {

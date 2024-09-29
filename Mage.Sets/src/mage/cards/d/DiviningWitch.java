@@ -59,7 +59,7 @@ public final class DiviningWitch extends CardImpl {
                     "Put that card into your hand and exile all other cards revealed this way";
         }
 
-        DiviningWitchEffect(final DiviningWitchEffect effect) {
+        private DiviningWitchEffect(final DiviningWitchEffect effect) {
             super(effect);
         }
 

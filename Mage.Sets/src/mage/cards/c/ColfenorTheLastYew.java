@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.MageObjectReference;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -10,8 +10,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
@@ -57,16 +57,10 @@ public final class ColfenorTheLastYew extends CardImpl {
     }
 }
 
-class ColfenorTheLastYewTriggeredAbility extends DiesThisOrAnotherCreatureTriggeredAbility {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
+class ColfenorTheLastYewTriggeredAbility extends DiesThisOrAnotherTriggeredAbility {
 
     ColfenorTheLastYewTriggeredAbility() {
-        super(new ReturnFromGraveyardToHandTargetEffect(), false, filter);
+        super(new ReturnFromGraveyardToHandTargetEffect(), false, StaticFilters.FILTER_CONTROLLED_CREATURE);
     }
 
     private ColfenorTheLastYewTriggeredAbility(final ColfenorTheLastYewTriggeredAbility ability) {
@@ -74,7 +68,7 @@ class ColfenorTheLastYewTriggeredAbility extends DiesThisOrAnotherCreatureTrigge
     }
 
     @Override
-    public DiesThisOrAnotherCreatureTriggeredAbility copy() {
+    public DiesThisOrAnotherTriggeredAbility copy() {
         return new ColfenorTheLastYewTriggeredAbility(this);
     }
 

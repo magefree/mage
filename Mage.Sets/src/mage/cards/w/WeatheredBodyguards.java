@@ -38,7 +38,7 @@ public final class WeatheredBodyguards extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WeatheredBodyguardsEffect()));
 
         // Morph {3}{W}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{W}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{W}")));
 
     }
 
@@ -59,7 +59,7 @@ class WeatheredBodyguardsEffect extends ReplacementEffectImpl {
         staticText = "As long as {this} is untapped, all combat damage that would be dealt to you by unblocked creatures is dealt to {this} instead";
     }
 
-    WeatheredBodyguardsEffect(final WeatheredBodyguardsEffect effect) {
+    private WeatheredBodyguardsEffect(final WeatheredBodyguardsEffect effect) {
         super(effect);
     }
 
@@ -72,7 +72,7 @@ class WeatheredBodyguardsEffect extends ReplacementEffectImpl {
             permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
             return true;
         }
-        return true;
+        return false;
     }
 
     @Override

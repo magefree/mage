@@ -75,7 +75,7 @@ class StoryweaveReplacementEffect extends ReplacementEffectImpl {
                 "under your control this turn, each enters with two additional +1/+1 counters on it";
     }
 
-    StoryweaveReplacementEffect(StoryweaveReplacementEffect effect) {
+    private StoryweaveReplacementEffect(final StoryweaveReplacementEffect effect) {
         super(effect);
         this.counter = effect.counter;
     }
@@ -103,11 +103,6 @@ class StoryweaveReplacementEffect extends ReplacementEffectImpl {
                 && permanent.isControlledBy(source.getControllerId())
                 && permanent.isEnchantment(game)
                 && permanent.isCreature(game);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 
     @Override

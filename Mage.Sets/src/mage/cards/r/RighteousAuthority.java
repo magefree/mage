@@ -44,7 +44,8 @@ public final class RighteousAuthority extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(boost, boost, Duration.WhileOnBattlefield)));
 
         // At the beginning of the draw step of enchanted creature's controller, that player draws an additional card.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardTargetEffect(1), TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardTargetEffect(1)
+                .setText("that player draws an additional card"), TargetController.CONTROLLER_ATTACHED_TO, false));
     }
 
     private RighteousAuthority(final RighteousAuthority card) {

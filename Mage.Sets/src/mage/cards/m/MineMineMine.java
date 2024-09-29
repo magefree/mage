@@ -66,7 +66,7 @@ class MineMineMineDrawEffect extends OneShotEffect {
         this.staticText = "each player puts their library into their hand";
     }
 
-    MineMineMineDrawEffect(final MineMineMineDrawEffect effect) {
+    private MineMineMineDrawEffect(final MineMineMineDrawEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class MineMineMineDrawEffect extends OneShotEffect {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 CardsImpl libraryCards = new CardsImpl();
-                libraryCards.addAll(player.getLibrary().getCards(game));
+                libraryCards.addAllCards(player.getLibrary().getCards(game));
                 player.moveCards(libraryCards, Zone.HAND, source, game);
             }
         }
@@ -95,7 +95,7 @@ class MineMineMineDontLoseEffect extends ReplacementEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
     }
 
-    MineMineMineDontLoseEffect(final MineMineMineDontLoseEffect effect) {
+    private MineMineMineDontLoseEffect(final MineMineMineDontLoseEffect effect) {
         super(effect);
     }
 

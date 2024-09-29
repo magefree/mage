@@ -7,7 +7,6 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
- *
  * @author Styxo
  */
 public class BountyAbility extends DiesCreatureTriggeredAbility {
@@ -32,7 +31,7 @@ public class BountyAbility extends DiesCreatureTriggeredAbility {
         setTriggerPhrase("<i>Bounty</i> &mdash; Whenever a creature an opponent controls with a bounty counter on it dies, ");
     }
 
-    public BountyAbility(final BountyAbility ability) {
+    protected BountyAbility(final BountyAbility ability) {
         super(ability);
     }
 

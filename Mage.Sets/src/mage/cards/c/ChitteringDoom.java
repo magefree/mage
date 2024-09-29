@@ -42,7 +42,7 @@ class ChitteringDoomTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken()), false);
     }
 
-    public ChitteringDoomTriggeredAbility(final ChitteringDoomTriggeredAbility ability) {
+    private ChitteringDoomTriggeredAbility(final ChitteringDoomTriggeredAbility ability) {
         super(ability);
     }
 
@@ -60,11 +60,11 @@ class ChitteringDoomTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         DieRolledEvent drEvent = (DieRolledEvent) event;
         // silver border card must look for "result" instead "natural result"
-        return this.isControlledBy(event.getPlayerId()) && drEvent.getResult() >= 4;
+        return this.isControlledBy(event.getTargetId()) && drEvent.getResult() >= 4;
     }
 
     @Override
     public String getRule() {
-        return "Whenever you roll a 4 or higher on a die, create a 1/1 green Squirrel creature token";
+        return "Whenever you roll a 4 or higher on a die, create a 1/1 green Squirrel creature token.";
     }
 }

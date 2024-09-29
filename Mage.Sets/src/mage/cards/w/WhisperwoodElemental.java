@@ -29,7 +29,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public final class WhisperwoodElemental extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-up, nontoken creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("face-up nontoken creatures you control");
 
     static {
         filter.add(Predicates.not(FaceDownPredicate.instance));
@@ -48,7 +48,7 @@ public final class WhisperwoodElemental extends CardImpl {
         // Sacrifice Whisperwood Elemental: Until end of turn, face-up, nontoken creatures you control gain "When this creature dies, manifest the top card of your library."
         Ability abilityToGain = new DiesSourceTriggeredAbility(new ManifestEffect(1));
         Effect effect = new GainAbilityControlledEffect(abilityToGain, Duration.EndOfTurn, filter);
-        effect.setText("Until end of turn, face-up, nontoken creatures you control gain \"When this creature dies, manifest the top card of your library.\"");
+        effect.setText("Until end of turn, face-up nontoken creatures you control gain \"When this creature dies, manifest the top card of your library.\"");
         this.addAbility(new SimpleActivatedAbility(
                 Zone.ALL, effect, new SacrificeSourceCost()));
     }

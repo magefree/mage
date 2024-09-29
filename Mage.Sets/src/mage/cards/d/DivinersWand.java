@@ -30,7 +30,7 @@ public final class DivinersWand extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.WIZARD, "a Wizard creature");
 
     public DivinersWand(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ARTIFACT}, "{3}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ARTIFACT}, "{3}");
         this.subtype.add(SubType.WIZARD);
         this.subtype.add(SubType.EQUIPMENT);
 
@@ -52,7 +52,7 @@ public final class DivinersWand extends CardImpl {
         // Whenever a Wizard creature enters the battlefield, you may attach Diviner's Wand to it.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
-                filter, true, SetTargetPointer.PERMANENT, null));
+                filter, true, SetTargetPointer.PERMANENT));
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3), false));

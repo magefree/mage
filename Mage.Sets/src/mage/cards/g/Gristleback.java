@@ -31,7 +31,9 @@ public final class Gristleback extends CardImpl {
         this.addAbility(new BloodthirstAbility(1));
         
         // Sacrifice Gristleback: You gain life equal to Gristleback's power.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new SourcePermanentPowerCount()), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainLifeEffect(new SourcePermanentPowerCount()).setText("You gain life equal to {this}'s power"),
+                new SacrificeSourceCost()));
     }
 
     private Gristleback(final Gristleback card) {

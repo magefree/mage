@@ -55,7 +55,7 @@ class LandslideEffect extends OneShotEffect {
         staticText = "Sacrifice any number of Mountains. {this} deals that much damage to target player or planeswalker";
     }
 
-    public LandslideEffect(final LandslideEffect effect) {
+    private LandslideEffect(final LandslideEffect effect) {
         super(effect);
     }
 

@@ -73,7 +73,7 @@ class ThelonOfHavenwoodBoostEffect extends ContinuousEffectImpl {
         staticText = "Each Fungus creature gets +1/+1 for each spore counter on it";
     }
 
-    ThelonOfHavenwoodBoostEffect(final ThelonOfHavenwoodBoostEffect effect) {
+    private ThelonOfHavenwoodBoostEffect(final ThelonOfHavenwoodBoostEffect effect) {
         super(effect);
     }
 

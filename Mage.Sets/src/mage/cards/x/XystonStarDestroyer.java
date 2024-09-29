@@ -32,7 +32,7 @@ public class XystonStarDestroyer extends CardImpl {
         this.addAbility(ability);
     }
 
-    public XystonStarDestroyer(final XystonStarDestroyer card) {
+    private XystonStarDestroyer(final XystonStarDestroyer card) {
         super(card);
     }
 

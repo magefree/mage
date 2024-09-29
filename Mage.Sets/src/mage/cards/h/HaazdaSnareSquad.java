@@ -43,7 +43,7 @@ public final class HaazdaSnareSquad extends CardImpl {
 
     }
 
-    public HaazdaSnareSquad (final HaazdaSnareSquad card) {
+    private HaazdaSnareSquad(final HaazdaSnareSquad card) {
         super(card);
     }
 

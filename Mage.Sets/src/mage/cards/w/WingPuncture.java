@@ -50,12 +50,12 @@ public final class WingPuncture extends CardImpl {
 
 class WingPunctureEffect extends OneShotEffect {
 
-    public WingPunctureEffect() {
+    WingPunctureEffect() {
         super(Outcome.Damage);
         staticText = "Target creature you control deals damage equal to its power to target creature with flying";
      }
 
-    public WingPunctureEffect(final WingPunctureEffect effect) {
+    private WingPunctureEffect(final WingPunctureEffect effect) {
         super(effect);
     }
 

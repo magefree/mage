@@ -49,12 +49,12 @@ public final class ElsewhereFlask extends CardImpl {
 
 class ElsewhereFlaskEffect extends OneShotEffect {
 
-    public ElsewhereFlaskEffect() {
+    ElsewhereFlaskEffect() {
         super(Outcome.Neutral);
         this.staticText = "Choose a basic land type. Each land you control becomes that type until end of turn";
     }
 
-    public ElsewhereFlaskEffect(final ElsewhereFlaskEffect effect) {
+    private ElsewhereFlaskEffect(final ElsewhereFlaskEffect effect) {
         super(effect);
     }
 
@@ -95,6 +95,11 @@ class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl {
     public void init(Ability source, Game game) {
         super.init(source, game);
         SubType choice = SubType.byDescription((String) game.getState().getValue(source.getSourceId().toString() + "_ElsewhereFlask"));
+        if (choice == null) {
+            discard();
+            return;
+        }
+
         switch (choice) {
             case FOREST:
                 dependencyTypes.add(DependencyType.BecomeForest);
@@ -112,7 +117,7 @@ class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl {
                 dependencyTypes.add(DependencyType.BecomeSwamp);
                 break;
         }
-        if (this.affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             game.getBattlefield()
                     .getActivePermanents(
                             StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,

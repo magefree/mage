@@ -27,7 +27,7 @@ public class PermanentsEnterBattlefieldTappedEffect extends ReplacementEffectImp
         this.filter = filter;
     }
 
-    public PermanentsEnterBattlefieldTappedEffect(final PermanentsEnterBattlefieldTappedEffect effect) {
+    protected PermanentsEnterBattlefieldTappedEffect(final PermanentsEnterBattlefieldTappedEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -63,7 +63,7 @@ public class PermanentsEnterBattlefieldTappedEffect extends ReplacementEffectImp
             return staticText;
         }
         return filter.getMessage()
-                + " enter the battlefield tapped"
+                + " enter tapped"
                 + (duration == Duration.EndOfTurn ? " this turn" : "");
     }
 }

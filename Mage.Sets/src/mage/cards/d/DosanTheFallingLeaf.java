@@ -48,18 +48,18 @@ class DosanTheFallingLeafEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can cast spells only during their own turns";
     }
 
-    DosanTheFallingLeafEffect(final DosanTheFallingLeafEffect effect) {
+    private DosanTheFallingLeafEffect(final DosanTheFallingLeafEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == GameEvent.EventType.CAST_SPELL && !game.isActivePlayer(event.getPlayerId());
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return !game.isActivePlayer(event.getPlayerId());
     }
 
     @Override

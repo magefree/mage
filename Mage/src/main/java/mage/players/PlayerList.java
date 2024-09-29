@@ -15,7 +15,7 @@ public class PlayerList extends CircularList<UUID> {
     public PlayerList() {
     }
 
-    public PlayerList(final PlayerList list) {
+    protected PlayerList(final PlayerList list) {
         super(list);
     }
 
@@ -27,7 +27,7 @@ public class PlayerList extends CircularList<UUID> {
         UUID currentPlayerBefore = this.get();
         UUID nextPlayerId = game.isTurnOrderReversed() ? super.getPrevious() : super.getNext();
         do {
-            if (basePlayer.getInRange().contains(nextPlayerId)) {
+            if (basePlayer.hasPlayerInRange(nextPlayerId)) {
                 return game.getPlayer(nextPlayerId);
             }
             nextPlayerId = game.isTurnOrderReversed() ? super.getPrevious() : super.getNext();

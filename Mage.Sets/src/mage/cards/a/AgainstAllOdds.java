@@ -1,9 +1,8 @@
 package mage.cards.a;
 
 import mage.abilities.Mode;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -46,9 +45,7 @@ public final class AgainstAllOdds extends CardImpl {
 
         // * Exile target artifact or creature you control, then return it to the battlefield under its owner's control.
         this.getSpellAbility().addTarget(new TargetControlledPermanent(filter));
-        this.getSpellAbility().addEffect(new ExileTargetForSourceEffect());
-        this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false,
-                false, "it").concatBy(", then"));
+        this.getSpellAbility().addEffect(new ExileThenReturnTargetEffect(false, false));
 
         // * Return target artifact or creature card with mana value 3 or less from your graveyard to the battlefield.
         Mode mode2 = new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect());

@@ -18,7 +18,7 @@ public class CompoundAbility extends AbilitiesImpl<Ability> {
         addAll(Arrays.asList(abilities));
     }
 
-    public CompoundAbility(final CompoundAbility compoundAbility) {
+    protected CompoundAbility(final CompoundAbility compoundAbility) {
         for (Ability ability : compoundAbility) {
             add(ability);
         }
@@ -31,7 +31,7 @@ public class CompoundAbility extends AbilitiesImpl<Ability> {
         }
 
         StringBuilder sb = new StringBuilder();
-        List<String> rules = super.getRules(null, false);
+        List<String> rules = super.getRules(false);
         for (int index = 0; index < rules.size(); index++) {
             if (index > 0) {
                 if (index < rules.size() - 1) {

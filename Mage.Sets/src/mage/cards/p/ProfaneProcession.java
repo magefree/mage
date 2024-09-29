@@ -54,12 +54,12 @@ public final class ProfaneProcession extends CardImpl {
 
 class ProfaneProcessionEffect extends OneShotEffect {
 
-    public ProfaneProcessionEffect() {
+    ProfaneProcessionEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile target creature. Then if there are three or more cards exiled with {this}, transform it.";
     }
 
-    public ProfaneProcessionEffect(final ProfaneProcessionEffect effect) {
+    private ProfaneProcessionEffect(final ProfaneProcessionEffect effect) {
         super(effect);
     }
 
@@ -74,8 +74,8 @@ class ProfaneProcessionEffect extends OneShotEffect {
         UUID exileId = CardUtil.getCardExileZoneId(game, source);
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && exileId != null && sourceObject != null) {
-            new ExileTargetEffect(exileId, sourceObject.getIdName()).setTargetPointer(targetPointer).apply(game, source);
-            game.getState().processAction(game);
+            new ExileTargetEffect(exileId, sourceObject.getIdName()).setTargetPointer(this.getTargetPointer().copy()).apply(game, source);
+            game.processAction();
             ExileZone exileZone = game.getExile().getExileZone(exileId);
             if (exileZone != null && exileZone.size() > 2) {
                 new TransformSourceEffect().apply(game, source);

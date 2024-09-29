@@ -54,7 +54,7 @@ public class CapriciousHellraiser extends CardImpl {
 
 class CapriciousHellraiserEffect extends OneShotEffect {
 
-    public CapriciousHellraiserEffect() {
+    CapriciousHellraiserEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile three cards at random from your graveyard. Choose a noncreature, nonland card from " +
                 "among them and copy it. You may cast the copy without paying its mana cost";
@@ -76,13 +76,13 @@ class CapriciousHellraiserEffect extends OneShotEffect {
                 if (card != null) {
                     toExile.add(card);
                     cardsInGraveyard.remove(card);
-                    if (!card.isCreature() && !card.isLand()) {
+                    if (!card.isCreature(game) && !card.isLand(game)) {
                         cardsToChooseFrom.add(card);
                     }
                 }
             }
             controller.moveCards(toExile, Zone.EXILED, source, game);
-            if (cardsToChooseFrom.size() > 0) {
+            if (!cardsToChooseFrom.isEmpty()) {
                 TargetCard targetCard = new TargetCard(1, Zone.EXILED, StaticFilters.FILTER_CARD);
                 controller.choose(Outcome.Copy, cardsToChooseFrom, targetCard, source, game);
                 Card cardToCopy = game.getCard(targetCard.getTargets().get(0));

@@ -1,20 +1,16 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.LifeCompareCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.replacement.GainPlusOneLifeReplacementEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.*;
 
 import java.util.UUID;
 
@@ -22,6 +18,8 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class AngelOfVitality extends CardImpl {
+
+    private static final Condition condition = new LifeCompareCondition(TargetController.YOU, ComparisonType.OR_GREATER, 25);
 
     public AngelOfVitality(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -39,7 +37,7 @@ public final class AngelOfVitality extends CardImpl {
         // Angel of Vitality gets +2/+2 as long as you have 25 or more life.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
-                AngelOfVitalityCondition.instance, "{this} gets +2/+2 as long as you have 25 or more life"
+                condition, "{this} gets +2/+2 as long as you have 25 or more life"
         )));
     }
 
@@ -50,15 +48,5 @@ public final class AngelOfVitality extends CardImpl {
     @Override
     public AngelOfVitality copy() {
         return new AngelOfVitality(this);
-    }
-}
-
-enum AngelOfVitalityCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.getLife() >= 25;
     }
 }

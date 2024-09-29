@@ -47,7 +47,7 @@ public final class GuardianOfTheGateless extends CardImpl {
 
         // Whenever Guardian of the Gateless blocks, it gets +1/+1 until end of turn for each creature it's blocking.
         this.addAbility(new BlocksSourceTriggeredAbility(
-                new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true, "it")));
+                new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, "it")));
     }
 
     private GuardianOfTheGateless(final GuardianOfTheGateless card) {

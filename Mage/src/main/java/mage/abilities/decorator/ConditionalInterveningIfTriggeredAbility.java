@@ -45,7 +45,7 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
         this.abilityText = text;
     }
 
-    public ConditionalInterveningIfTriggeredAbility(final ConditionalInterveningIfTriggeredAbility triggered) {
+    protected ConditionalInterveningIfTriggeredAbility(final ConditionalInterveningIfTriggeredAbility triggered) {
         super(triggered);
         this.ability = triggered.ability.copy();
         this.condition = triggered.condition;

@@ -47,13 +47,13 @@ public final class GaeasHerald extends CardImpl {
 
 class CantCounterEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public CantCounterEffect() {
+    CantCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creature spells can't be countered";
     }
 
 
-    public CantCounterEffect(final CantCounterEffect effect) {
+    private CantCounterEffect(final CantCounterEffect effect) {
         super(effect);
     }
 
@@ -62,11 +62,6 @@ class CantCounterEffect extends ContinuousRuleModifyingEffectImpl {
         return new CantCounterEffect(this);
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-    
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.COUNTER;

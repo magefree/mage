@@ -21,7 +21,7 @@ public final class KlothyssDesign extends CardImpl {
         // Creatures you control get +X/+X until end of turn, where X is your devotion to green.
         this.getSpellAbility().addEffect(new BoostControlledEffect(
                 DevotionCount.G, DevotionCount.G, Duration.EndOfTurn,
-                StaticFilters.FILTER_PERMANENT_CREATURES, false, true
+                StaticFilters.FILTER_PERMANENT_CREATURES, false
         ));
         this.getSpellAbility().addHint(DevotionCount.G.getHint());
     }

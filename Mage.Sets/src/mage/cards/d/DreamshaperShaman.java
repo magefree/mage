@@ -47,9 +47,7 @@ public final class DreamshaperShaman extends CardImpl {
                 ),
                 new CompositeCost(
                         new ManaCostsImpl<>("{2}{R}"),
-                        new SacrificeTargetCost(new TargetControlledPermanent(
-                                StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND
-                        )), "pay {2}{R} and sacrifice a nonland permanent"
+                        new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND), "pay {2}{R} and sacrifice a nonland permanent"
                 )
         ), TargetController.YOU, false));
     }

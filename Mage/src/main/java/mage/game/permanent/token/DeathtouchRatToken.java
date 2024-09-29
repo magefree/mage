@@ -30,7 +30,7 @@ public final class DeathtouchRatToken extends TokenImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public DeathtouchRatToken(final DeathtouchRatToken token) {
+    private DeathtouchRatToken(final DeathtouchRatToken token) {
         super(token);
     }
 

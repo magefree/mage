@@ -49,12 +49,12 @@ public final class Skeletonize extends CardImpl {
 
 class SkeletonizeEffect extends OneShotEffect {
 
-    public SkeletonizeEffect() {
+    SkeletonizeEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "When a creature dealt damage this way dies this turn, create a 1/1 black Skeleton creature token with \"{B}: Regenerate this creature.\"";
     }
 
-    public SkeletonizeEffect(final SkeletonizeEffect effect) {
+    private SkeletonizeEffect(final SkeletonizeEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class SkeletonizeDelayedTriggeredAbility extends DelayedTriggeredAbility {
         setTriggerPhrase("When a creature dealt damage this way dies this turn, ");
     }
 
-    public SkeletonizeDelayedTriggeredAbility(final SkeletonizeDelayedTriggeredAbility ability) {
+    private SkeletonizeDelayedTriggeredAbility(final SkeletonizeDelayedTriggeredAbility ability) {
         super(ability);
     }
 

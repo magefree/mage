@@ -16,7 +16,7 @@ public class PutIntoGraveFromAnywhereSourceTriggeredAbility extends ZoneChangeTr
         this(effect, false);
     }
 
-    public PutIntoGraveFromAnywhereSourceTriggeredAbility(final PutIntoGraveFromAnywhereSourceTriggeredAbility ability) {
+    protected PutIntoGraveFromAnywhereSourceTriggeredAbility(final PutIntoGraveFromAnywhereSourceTriggeredAbility ability) {
         super(ability);
     }
 //

@@ -48,7 +48,7 @@ class ImagesOfThePastEffect extends OneShotEffect {
         this.staticText = "Return up to two target creature cards from your graveyard to the battlefield, then exile those creatures";
     }
 
-    ImagesOfThePastEffect(final ImagesOfThePastEffect effect) {
+    private ImagesOfThePastEffect(final ImagesOfThePastEffect effect) {
         super(effect);
     }
 

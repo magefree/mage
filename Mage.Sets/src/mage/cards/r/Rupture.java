@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageEverythingEffect;
@@ -10,23 +9,24 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
+
+import java.util.UUID;
 
 /**
- *
  * @author L_J
  */
 public final class Rupture extends CardImpl {
 
     public Rupture(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // Sacrifice a creature. Rupture deals damage equal to that creature's power to each creature without flying and each player.
         this.getSpellAbility().addEffect(new RuptureEffect());
@@ -55,7 +55,7 @@ class RuptureEffect extends OneShotEffect {
         staticText = "Sacrifice a creature. Rupture deals damage equal to that creature's power to each creature without flying and each player";
     }
 
-    public RuptureEffect(final RuptureEffect effect) {
+    private RuptureEffect(final RuptureEffect effect) {
         super(effect);
     }
 
@@ -64,10 +64,10 @@ class RuptureEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             int power = 0;
-            TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(1, 1, new FilterControlledCreaturePermanent("creature to sacrifice"), true);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
             if (target.canChoose(player.getId(), source, game)) {
-                while (!target.isChosen() && target.canChoose(player.getId(), source, game) && player.canRespond()) {
-                    player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                while (!target.isChosen(game) && target.canChoose(player.getId(), source, game) && player.canRespond()) {
+                    player.choose(Outcome.Sacrifice, target, source, game);
                 }
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {

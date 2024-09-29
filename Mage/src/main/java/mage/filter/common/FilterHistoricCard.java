@@ -4,7 +4,6 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.HistoricPredicate;
 
 /**
- *
  * @author LevelX2
  */
 public class FilterHistoricCard extends FilterCard {
@@ -18,7 +17,7 @@ public class FilterHistoricCard extends FilterCard {
         this.add(HistoricPredicate.instance);
     }
 
-    public FilterHistoricCard(final FilterHistoricCard filter) {
+    protected FilterHistoricCard(final FilterHistoricCard filter) {
         super(filter);
     }
 

@@ -59,7 +59,7 @@ class RetetherEffect extends OneShotEffect {
         this.staticText = "Return each Aura card from your graveyard to the battlefield. Only creatures can be enchanted this way";
     }
 
-    public RetetherEffect(final RetetherEffect effect) {
+    private RetetherEffect(final RetetherEffect effect) {
         super(effect);
     }
 
@@ -99,9 +99,9 @@ class RetetherEffect extends OneShotEffect {
                     }
                     if (target != null) {
                         target.getFilter().add(CardType.CREATURE.getPredicate());
-                        target.setNotTarget(true);
+                        target.withNotTarget(true);
                         if (target.canChoose(controller.getId(), source, game)) {
-                            target.setTargetName("creature to enchant (" + aura.getLogName() + ')');
+                            target.withTargetName("creature to enchant (" + aura.getLogName() + ')');
                             if (controller.choose(Outcome.PutCardInPlay, target, source, game)) {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                                 if (permanent != null && !permanent.cantBeAttachedBy(aura, source, game, true)) {

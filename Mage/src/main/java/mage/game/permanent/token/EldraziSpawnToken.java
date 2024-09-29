@@ -14,16 +14,16 @@ import mage.constants.Zone;
 public final class EldraziSpawnToken extends TokenImpl {
 
     public EldraziSpawnToken() {
-        super("Eldrazi Spawn Token", "0/1 colorless Eldrazi Spawn creature token. It has \"Sacrifice this creature: Add {C}.\"");
+        super("Eldrazi Spawn Token", "0/1 colorless Eldrazi Spawn creature token with \"Sacrifice this creature: Add {C}.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ELDRAZI);
         subtype.add(SubType.SPAWN);
         power = new MageInt(0);
         toughness = new MageInt(1);
-        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost()));
+        addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(1), new SacrificeSourceCost().setText("Sacrifice this creature")));
     }
 
-    public EldraziSpawnToken(final EldraziSpawnToken token) {
+    private EldraziSpawnToken(final EldraziSpawnToken token) {
         super(token);
     }
 

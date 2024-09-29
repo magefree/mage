@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -22,18 +20,15 @@ import mage.abilities.hint.ValueHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreatureCard;
+import mage.constants.*;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +36,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class TheScarabGod extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.ZOMBIE, "Zombies you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.ZOMBIE, "Zombies you control");
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter, null);
     private static final Hint hint = new ValueHint(
             "Number of Zombies you control", xValue
@@ -60,7 +55,7 @@ public final class TheScarabGod extends CardImpl {
 
         // {2}{U}{B}: Exile target creature card from a graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TheScarabGodEffect2(), new ManaCostsImpl<>("{2}{U}{B}"));
-        ability.addTarget(new TargetCardInGraveyard(1, 1, new FilterCreatureCard("creature card from a graveyard")));
+        ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
 
         // When The Scarab God dies, return it to its owner's hand at the beginning of the next end step.
@@ -87,7 +82,7 @@ class TheScarabGodEffect extends OneShotEffect {
         staticText = "each opponent loses X life and you scry X, where X is the number of Zombies you control";
     }
 
-    public TheScarabGodEffect(final TheScarabGodEffect effect) {
+    private TheScarabGodEffect(final TheScarabGodEffect effect) {
         super(effect);
         this.numOfZombies = effect.numOfZombies;
     }
@@ -125,7 +120,7 @@ class TheScarabGodEffect2 extends OneShotEffect {
         this.staticText = "Exile target creature card from a graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie.";
     }
 
-    public TheScarabGodEffect2(final TheScarabGodEffect2 effect) {
+    private TheScarabGodEffect2(final TheScarabGodEffect2 effect) {
         super(effect);
     }
 
@@ -161,7 +156,7 @@ class TheScarabGodEffect3 extends OneShotEffect {
         staticText = effectText;
     }
 
-    TheScarabGodEffect3(TheScarabGodEffect3 effect) {
+    private TheScarabGodEffect3(final TheScarabGodEffect3 effect) {
         super(effect);
     }
 

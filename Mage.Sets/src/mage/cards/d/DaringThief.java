@@ -1,11 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -13,17 +8,18 @@ import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
+
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -62,10 +58,10 @@ class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetCo
         super();
         this.filter = this.filter.copy();
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        setTargetName("nonland permanent you control");
+        withTargetName("nonland permanent you control");
     }
 
-    public TargetControlledPermanentSharingOpponentPermanentCardType(final TargetControlledPermanentSharingOpponentPermanentCardType target) {
+    private TargetControlledPermanentSharingOpponentPermanentCardType(final TargetControlledPermanentSharingOpponentPermanentCardType target) {
         super(target);
     }
 
@@ -91,7 +87,7 @@ class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetCo
         MageObject targetSource = game.getObject(source);
         if (targetSource != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                     for (CardType type : permanent.getCardType(game)) {
                         if (cardTypes.contains(type)) {
                             possibleTargets.add(permanent.getId());
@@ -132,10 +128,10 @@ class DaringThiefSecondTarget extends TargetPermanent {
         super();
         this.filter = this.filter.copy();
         filter.add(TargetController.OPPONENT.getControllerPredicate());
-        setTargetName("permanent an opponent controls that shares a card type with it");
+        withTargetName("permanent an opponent controls that shares a card type with it");
     }
 
-    public DaringThiefSecondTarget(final DaringThiefSecondTarget target) {
+    private DaringThiefSecondTarget(final DaringThiefSecondTarget target) {
         super(target);
         this.firstTarget = target.firstTarget;
     }
@@ -160,7 +156,7 @@ class DaringThiefSecondTarget extends TargetPermanent {
             MageObject targetSource = game.getObject(source);
             if (targetSource != null) {
                 for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, sourceControllerId, source, game)) {
-                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                    if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, source, game)) {
                         if (permanent.shareTypes(firstTarget, game)) {
                             possibleTargets.add(permanent.getId());
                         }

@@ -8,7 +8,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SacrificeCostConvertedMana;
+import mage.abilities.dynamicvalue.common.SacrificeCostManaValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class AyaraWidowOfTheRealm extends CardImpl {
 
-    private static final DynamicValue xValue = new SacrificeCostConvertedMana("permanent");
+    private static final DynamicValue xValue = SacrificeCostManaValue.PERMANENT;
     private static final FilterPermanentOrPlayer filter = new FilterPermanentOrPlayer(
             "opponent or battle", StaticFilters.FILTER_PERMANENT_BATTLE, new FilterOpponent()
     );
@@ -48,7 +48,7 @@ public final class AyaraWidowOfTheRealm extends CardImpl {
         // {T}, Sacrifice another creature or artifact: Ayara, Widow of the Realm deals X damage to target opponent or battle and you gain X life, where X is the sacrificed permanent's mana value.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(xValue)
                 .setText("{this} deals X damage to target opponent or battle"), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_ARTIFACT_OR_CREATURE_SHORT_TEXT));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT));
         ability.addEffect(new GainLifeEffect(xValue).setText("and you gain X life, where X is the sacrificed permanent's mana value"));
         ability.addTarget(new TargetPermanentOrPlayer(filter));
         this.addAbility(ability);

@@ -18,7 +18,7 @@ public class BlocksIfAbleAttachedEffect extends RequirementEffect {
         this.staticText = attachmentType.verb() + " creature blocks each combat if able";
     }
 
-    public BlocksIfAbleAttachedEffect(final BlocksIfAbleAttachedEffect effect) {
+    protected BlocksIfAbleAttachedEffect(final BlocksIfAbleAttachedEffect effect) {
         super(effect);
     }
 

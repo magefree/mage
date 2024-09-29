@@ -5,7 +5,6 @@ import mage.constants.CardType;
 import mage.filter.FilterCard;
 
 /**
- *
  * @author LoneFox
  */
 public class FilterEnchantmentCard extends FilterCard {
@@ -19,7 +18,7 @@ public class FilterEnchantmentCard extends FilterCard {
         this.add(CardType.ENCHANTMENT.getPredicate());
     }
 
-    public FilterEnchantmentCard(final FilterEnchantmentCard filter) {
+    protected FilterEnchantmentCard(final FilterEnchantmentCard filter) {
         super(filter);
     }
 

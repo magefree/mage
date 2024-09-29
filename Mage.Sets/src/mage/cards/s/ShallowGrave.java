@@ -48,12 +48,12 @@ public final class ShallowGrave extends CardImpl {
 
 class ShallowGraveEffect extends OneShotEffect {
 
-    public ShallowGraveEffect() {
+    ShallowGraveEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return the top creature card of your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step";
     }
 
-    public ShallowGraveEffect(final ShallowGraveEffect effect) {
+    private ShallowGraveEffect(final ShallowGraveEffect effect) {
         super(effect);
     }
 
@@ -76,14 +76,14 @@ class ShallowGraveEffect extends OneShotEffect {
                 if (controller.moveCards(lastCreatureCard, Zone.BATTLEFIELD, source, game)) {
                     Permanent returnedCreature = game.getPermanent(lastCreatureCard.getId());
                     if (returnedCreature != null) {
-                        FixedTarget fixedTarget = new FixedTarget(returnedCreature, game);
+                        FixedTarget blueprintTarget = new FixedTarget(returnedCreature, game);
                         // Gains Haste
                         ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
-                        hasteEffect.setTargetPointer(fixedTarget);
+                        hasteEffect.setTargetPointer(blueprintTarget.copy());
                         game.addEffect(hasteEffect, source);
                         // Exile it at end of turn
                         ExileTargetEffect exileEffect = new ExileTargetEffect(null, "", Zone.BATTLEFIELD);
-                        exileEffect.setTargetPointer(fixedTarget);
+                        exileEffect.setTargetPointer(blueprintTarget.copy());
                         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect);
                         game.addDelayedTriggeredAbility(delayedAbility, source);
                     }

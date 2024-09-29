@@ -33,7 +33,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         options = new ManaOptions();
     }
 
-    public ManaCostImpl(final ManaCostImpl manaCost) {
+    protected ManaCostImpl(final ManaCostImpl manaCost) {
         super(manaCost);
         this.payment = manaCost.payment.copy();
         this.usedManaToPay = manaCost.usedManaToPay.copy();
@@ -44,6 +44,9 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         }
         this.phyrexian = manaCost.phyrexian;
     }
+
+    @Override
+    abstract public ManaCostImpl copy();
 
     @Override
     public Mana getPayment() {
@@ -85,9 +88,9 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
 
     @Override
     public void clearPaid() {
+        super.clearPaid();
         payment.clear();
         usedManaToPay.clear();
-        super.clearPaid();
     }
 
     @Override
@@ -148,14 +151,15 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         return false;
     }
 
-    protected void assignColorless(Ability ability, Game game, ManaPool pool, int mana, Cost costToPay) {
+    protected boolean assignColorless(Ability ability, Game game, ManaPool pool, int mana, Cost costToPay) {
         int conditionalCount = pool.getConditionalCount(ability, game, null, costToPay);
-        while (mana > payment.count() && (pool.count() > 0 || conditionalCount > 0)) {
-            if (pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay)) {
-                this.payment.increaseColorless();
-            }
-            break;
+        if (mana > payment.count() && (pool.count() > 0 || conditionalCount > 0)
+                && pool.pay(ManaType.COLORLESS, ability, sourceFilter, game, costToPay, usedManaToPay)) {
+            this.payment.increaseColorless();
+            return true;
         }
+
+        return false;
     }
 
     protected boolean assignGeneric(Ability ability, Game game, ManaPool pool, int mana, FilterMana filterMana, Cost costToPay) {
@@ -281,19 +285,21 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
         switch (symbol) {
             case B:
                 this.options.add(Mana.BlackMana(1));
-                break;
+                return;
             case U:
                 this.options.add(Mana.BlueMana(1));
-                break;
+                return;
             case W:
                 this.options.add(Mana.WhiteMana(1));
-                break;
+                return;
             case R:
                 this.options.add(Mana.RedMana(1));
-                break;
+                return;
             case G:
                 this.options.add(Mana.GreenMana(1));
-                break;
+                return;
+            default:
+                this.options.add(Mana.ColorlessMana(1));
         }
     }
 

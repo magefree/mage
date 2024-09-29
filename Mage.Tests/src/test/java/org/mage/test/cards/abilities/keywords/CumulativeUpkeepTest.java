@@ -58,7 +58,7 @@ public class CumulativeUpkeepTest extends CardTestPlayerBase {
     public void controlChangeTest() {
         setStrictChooseMode(true);
         
-        // Whenever Kor Celebrant or another creature enters the battlefield under your control, you gain 1 life.
+        // Whenever Kor Celebrant or another creature you control enters, you gain 1 life.
         addCard(Zone.HAND, playerB, "Kor Celebrant", 1); // Creature {2}{W}
         addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
         

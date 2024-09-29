@@ -1,15 +1,23 @@
 package mage.verify.mtgjson;
 
+import mage.constants.Rarity;
+
 import java.util.List;
 
+/**
+ * MTGJSON v5: card class
+ * <p>
+ * Contains card related data nd only used fields, if you need more for tests then just add it here
+ * <p>
+ * API docs <a href="https://mtgjson.com/data-models/card/card-set/">here</a>
+ *
+ * @author JayDi85
+ */
 public final class MtgJsonCard {
-    // v5 support
-    // https://mtgjson.com/data-models/card-atomic/
-    // contains only used fields, if you need more for tests then just add it here
-
     public String name;
     public String asciiName; // mtgjson uses it for some cards like El-Hajjaj
-    public String number; // from sets source only, see https://mtgjson.com/data-models/card/
+    public String number; // from sets source only, see https://mtgjson.com/data-models/card-set/
+    public String rarity; // from sets source only, see https://mtgjson.com/data-models/card-set/
 
     public String faceName;
     public String side;
@@ -22,7 +30,7 @@ public final class MtgJsonCard {
     public List<String> types;
     public List<String> subtypes;
 
-    public String text; // rules splits by \n
+    public String text; // rules splits by \n, can be null on empty abilities list
 
     public String loyalty;
     public String defense;
@@ -41,7 +49,6 @@ public final class MtgJsonCard {
     }
 
     /**
-     *
      * @return single side name like Ice from Fire // Ice
      */
     public String getNameAsFace() {
@@ -50,7 +57,6 @@ public final class MtgJsonCard {
     }
 
     /**
-     *
      * @return full card name like Fire // Ice
      */
     public String getNameAsFull() {
@@ -78,5 +84,33 @@ public final class MtgJsonCard {
 
     public boolean isUseUnicodeName() {
         return this.asciiName != null && this.name != null && !this.asciiName.equals(this.name);
+    }
+
+    /**
+     * @return the Rarity of the card if present in the mtgjson file
+     * null if not present.
+     */
+    public Rarity getRarity() {
+        if (rarity.isEmpty()) {
+            return null;
+        }
+
+        switch (rarity) {
+            case "common":
+                return Rarity.COMMON;
+            case "uncommon":
+                return Rarity.UNCOMMON;
+            case "rare":
+                return Rarity.RARE;
+            case "mythic":
+                return Rarity.MYTHIC;
+            case "special":
+                return Rarity.SPECIAL;
+            case "bonus":
+                return Rarity.BONUS;
+
+            default: // Maybe a new rarity has been introduced?
+                throw new EnumConstantNotPresentException(Rarity.class, rarity);
+        }
     }
 }

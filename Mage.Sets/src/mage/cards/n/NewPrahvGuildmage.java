@@ -26,7 +26,7 @@ import mage.target.common.TargetNonlandPermanent;
  */
 public final class NewPrahvGuildmage extends CardImpl {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent an opponent control");
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent an opponent controls");
  
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());

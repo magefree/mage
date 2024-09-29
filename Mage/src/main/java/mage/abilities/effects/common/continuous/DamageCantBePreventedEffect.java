@@ -9,23 +9,18 @@ import mage.game.events.GameEvent;
 
 public class DamageCantBePreventedEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public DamageCantBePreventedEffect(Duration duration, String staticText, boolean messageToUser, boolean messageToLog) {
-        super(duration, Outcome.Benefit, messageToUser, messageToLog);
-        this.staticText = staticText;
+    public DamageCantBePreventedEffect(Duration duration) {
+        super(duration, Outcome.Benefit);
+        this.staticText = "damage can't be prevented" + (duration == Duration.EndOfTurn ? " this turn" : "");
     }
 
-    public DamageCantBePreventedEffect(final DamageCantBePreventedEffect effect) {
+    protected DamageCantBePreventedEffect(final DamageCantBePreventedEffect effect) {
         super(effect);
     }
 
     @Override
     public DamageCantBePreventedEffect copy() {
         return new DamageCantBePreventedEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

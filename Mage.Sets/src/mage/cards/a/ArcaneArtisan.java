@@ -70,13 +70,13 @@ public final class ArcaneArtisan extends CardImpl {
 
 class ArcaneArtisanCreateTokenEffect extends OneShotEffect {
 
-    public ArcaneArtisanCreateTokenEffect() {
+    ArcaneArtisanCreateTokenEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target player draws a card, then exiles a card from their hand. "
                 + "If a creature card is exiled this way, that player creates a token that's a copy of that card.";
     }
 
-    public ArcaneArtisanCreateTokenEffect(final ArcaneArtisanCreateTokenEffect effect) {
+    private ArcaneArtisanCreateTokenEffect(final ArcaneArtisanCreateTokenEffect effect) {
         super(effect);
     }
 
@@ -133,7 +133,7 @@ class ArcaneArtisanLeavesBattlefieldTriggeredAbility extends ZoneChangeTriggered
         );
     }
 
-    public ArcaneArtisanLeavesBattlefieldTriggeredAbility(ArcaneArtisanLeavesBattlefieldTriggeredAbility ability) {
+    private ArcaneArtisanLeavesBattlefieldTriggeredAbility(final ArcaneArtisanLeavesBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 
@@ -150,12 +150,12 @@ class ArcaneArtisanLeavesBattlefieldTriggeredAbility extends ZoneChangeTriggered
 
 class ArcaneArtisanExileEffect extends OneShotEffect {
 
-    public ArcaneArtisanExileEffect() {
+    ArcaneArtisanExileEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile all tokens created with {this}.";
     }
 
-    public ArcaneArtisanExileEffect(final ArcaneArtisanExileEffect effect) {
+    private ArcaneArtisanExileEffect(final ArcaneArtisanExileEffect effect) {
         super(effect);
     }
 

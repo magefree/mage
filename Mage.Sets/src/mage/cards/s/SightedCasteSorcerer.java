@@ -33,7 +33,7 @@ public final class SightedCasteSorcerer extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
     }
 
-    public SightedCasteSorcerer (final SightedCasteSorcerer card) {
+    private SightedCasteSorcerer(final SightedCasteSorcerer card) {
         super(card);
     }
 

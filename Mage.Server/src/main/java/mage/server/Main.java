@@ -1,16 +1,15 @@
 package mage.server;
 
 import mage.cards.ExpansionSet;
+import mage.cards.RateCard;
 import mage.cards.Sets;
 import mage.cards.decks.DeckValidatorFactory;
-import mage.cards.repository.CardScanner;
-import mage.cards.repository.PluginClassloaderRegistery;
-import mage.cards.repository.RepositoryUtil;
-import mage.game.draft.RateCard;
+import mage.cards.repository.*;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
 import mage.remote.Connection;
+import mage.remote.SessionImpl;
 import mage.server.draft.CubeFactory;
 import mage.server.game.GameFactory;
 import mage.server.game.PlayerFactory;
@@ -18,10 +17,14 @@ import mage.server.managers.ConfigSettings;
 import mage.server.managers.ManagerFactory;
 import mage.server.record.UserStatsRepository;
 import mage.server.tournament.TournamentFactory;
-import mage.server.util.*;
+import mage.server.util.ConfigFactory;
+import mage.server.util.ConfigWrapper;
+import mage.server.util.PluginClassLoader;
+import mage.server.util.ServerMessagesUtil;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.utils.MageVersion;
+import mage.utils.SystemUtil;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.*;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
@@ -43,21 +46,32 @@ import java.nio.file.Paths;
 import java.util.*;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public final class Main {
 
     private static final Logger logger = Logger.getLogger(Main.class);
     private static final MageVersion version = new MageVersion(Main.class);
 
+    // Server threads:
+    // - worker threads: creates for each connection, controls by maxPoolSize;
+    // - acceptor threads: processing requests to start a new connection, controls by numAcceptThreads;
+    // - backlog threads: processing waiting queue if maxPoolSize reached, controls by backlogSize;
+    // Usage hints:
+    // - if maxPoolSize reached then new clients will freeze in connection dialog until backlog queue overflow;
+    // - so for active server must increase maxPoolSize to big value like "max online * 10" or enable worker idle timeout
+    // - worker idle time will free unused worker thread, so new client can connect;
+    private static final int SERVER_WORKER_THREAD_IDLE_TIMEOUT_SECS = 5 * 60; // no needs to config, must be enabled for all
+
+    // arg settings can be setup by run script or IDE's program arguments like -xxx=yyy
+    // prop settings can be setup by -Dxxx=yyy in the launcher
+    // priority: default setting -> prop setting -> arg setting
     private static final String testModeArg = "-testMode=";
-    private static final String fastDBModeArg = "-fastDbMode=";
+    private static final String testModeProp = "xmage.testMode";
+    private static final String detailsModeArg = "-detailsMode=";
+    private static final String detailsModeProp = "xmage.detailsMode";
     private static final String adminPasswordArg = "-adminPassword=";
-    /**
-     * The property that holds the path to the configuration file. Defaults to "config/config.xml".
-     * <p>
-     * To set up a different one, start the application with the java option "-Dxmage.config.path=&lt;path&gt;"
-     */
+    private static final String adminPasswordProp = "xmage.adminPassword";
     private static final String configPathProp = "xmage.config.path";
 
     private static final File pluginFolder = new File("plugins");
@@ -75,35 +89,49 @@ public final class Main {
     // - simplified registration and login (no password check);
     // - debug main menu for GUI and rendering testing (must use -debug arg for client app);
     private static boolean testMode;
+    private static boolean detailsMode;
 
-    private static boolean fastDbMode;
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-        logger.info("Starting MAGE server version " + version);
+        logger.info("Starting MAGE SERVER version: " + version);
+        logger.info("Java version: " + System.getProperty("java.version"));
         logger.info("Logging level: " + logger.getEffectiveLevel());
         logger.info("Default charset: " + Charset.defaultCharset());
         String adminPassword = "";
 
         // enable test mode by default for developer build (if you run it from source code)
         testMode |= version.isDeveloperBuild();
+        detailsMode = false;
 
+        // settings by properties (-Dxxx=yyy from a launcher)
+        if (System.getProperty(testModeProp) != null) {
+            testMode = Boolean.parseBoolean(System.getProperty(testModeProp));
+        }
+        if (System.getProperty(adminPasswordProp) != null) {
+            adminPassword = SystemUtil.sanitize(System.getProperty(adminPasswordProp));
+        }
+        if (System.getProperty(detailsModeProp) != null) {
+            detailsMode = Boolean.parseBoolean(System.getProperty(detailsModeProp));
+        }
+        final String configPath;
+        if (System.getProperty(configPathProp) != null) {
+            configPath = System.getProperty(configPathProp);
+        } else {
+            configPath = defaultConfigPath;
+        }
+
+        // settings by program arguments (-xxx=yyy from a command line)
         for (String arg : args) {
             if (arg.startsWith(testModeArg)) {
                 testMode = Boolean.parseBoolean(arg.replace(testModeArg, ""));
             } else if (arg.startsWith(adminPasswordArg)) {
                 adminPassword = arg.replace(adminPasswordArg, "");
                 adminPassword = SystemUtil.sanitize(adminPassword);
-            } else if (arg.startsWith(fastDBModeArg)) {
-                fastDbMode = Boolean.parseBoolean(arg.replace(fastDBModeArg, ""));
+            }
+            if (arg.startsWith(detailsModeArg)) {
+                detailsMode = Boolean.parseBoolean(arg.replace(detailsModeArg, ""));
             }
         }
-
-        final String configPath = Optional.ofNullable(System.getProperty(configPathProp))
-                .orElse(defaultConfigPath);
 
         logger.info(String.format("Reading configuration from path=%s", configPath));
         final ConfigWrapper config = new ConfigWrapper(ConfigFactory.loadFromFile(configPath));
@@ -157,11 +185,7 @@ public final class Main {
         }
 
         logger.info("Loading cards...");
-        if (fastDbMode) {
-            CardScanner.scanned = true;
-        } else {
-            CardScanner.scan();
-        }
+        CardScanner.scan();
         logger.info("Done.");
 
         // cards preload with ratings
@@ -218,8 +242,10 @@ public final class Main {
             }
         }
 
-        logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
+        logger.info("Config - server address:   " + config.getServerAddress());
+        logger.info("Config - server port:      " + config.getPort());
         logger.info("Config - max game threads: " + config.getMaxGameThreads());
+        logger.info("Config - max seconds idle: " + config.getMaxSecondsIdle());
         logger.info("Config - max AI opponents: " + config.getMaxAiOpponents());
         logger.info("Config - min usr name le.: " + config.getMinUserNameLength());
         logger.info("Config - max usr name le.: " + config.getMaxUserNameLength());
@@ -233,7 +259,8 @@ public final class Main {
         logger.info("Config - max pool size   : " + config.getMaxPoolSize());
         logger.info("Config - num accp.threads: " + config.getNumAcceptThreads());
         logger.info("Config - second.bind port: " + config.getSecondaryBindPort());
-        logger.info("Config - auth. activated : " + (config.isAuthenticationActivated() ? "true" : "false"));
+        logger.info("Config - users registr.:   " + (config.isAuthenticationActivated() ? "true" : "false"));
+        logger.info("Config - users anon:       " + (!config.isAuthenticationActivated() ? "true" : "false"));
         logger.info("Config - mailgun api key : " + config.getMailgunApiKey());
         logger.info("Config - mailgun domain  : " + config.getMailgunDomain());
         logger.info("Config - mail smtp Host  : " + config.getMailSmtpHost());
@@ -260,7 +287,13 @@ public final class Main {
             // Parameter: serializationtype => jboss
             InvokerLocator serverLocator = new InvokerLocator(connection.getURI());
             if (!isAlreadyRunning(config, serverLocator)) {
-                server = new MageTransporterServer(managerFactory, serverLocator, new MageServerImpl(managerFactory, adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler(managerFactory));
+                server = new MageTransporterServer(
+                        managerFactory,
+                        serverLocator,
+                        new MageServerImpl(managerFactory, adminPassword, testMode, detailsMode),
+                        MageServer.class.getName(),
+                        new MageServerInvocationHandler(managerFactory)
+                );
                 server.start();
                 logger.info("Started MAGE server - listening on " + connection.toString());
 
@@ -287,76 +320,84 @@ public final class Main {
         try {
             MageServer testServer = (MageServer) TransporterClient.createTransporterClient(serverLocator.getLocatorURI(), MageServer.class, metadata);
             if (testServer != null) {
-                testServer.getServerState();
+                testServer.getServerState(); // check connection
                 return true;
             }
-        } catch (Throwable t) {
+        } catch (Throwable ignore) {
             // assume server is not running
         }
         return false;
     }
 
-    static class ClientConnectionListener implements ConnectionListener {
+    /**
+     * Network, server side: connection monitoring and error processing
+     */
+    static class MageServerConnectionListener implements ConnectionListener {
 
         private final ManagerFactory managerFactory;
 
-        public ClientConnectionListener(ManagerFactory managerFactory) {
+        public MageServerConnectionListener(ManagerFactory managerFactory) {
             this.managerFactory = managerFactory;
         }
 
         @Override
         public void handleConnectionException(Throwable throwable, Client client) {
             String sessionId = client.getSessionId();
-            Optional<Session> session = managerFactory.sessionManager().getSession(sessionId);
-            if (!session.isPresent()) {
-                logger.trace("Session not found : " + sessionId);
-            } else {
-                UUID userId = session.get().getUserId();
-                StringBuilder sessionInfo = new StringBuilder();
-                Optional<User> user = managerFactory.userManager().getUser(userId);
-                if (user.isPresent()) {
-                    sessionInfo.append(user.get().getName()).append(" [").append(user.get().getGameInfo()).append(']');
-                } else {
-                    sessionInfo.append("[user missing] ");
-                }
-                sessionInfo.append(" at ").append(session.get().getHost()).append(" sessionId: ").append(session.get().getId());
-                if (throwable instanceof ClientDisconnectedException) {
-                    // Seems like the random diconnects from public server land here and should not be handled as explicit disconnects
-                    // So it should be possible to reconnect to server and continue games if DisconnectReason is set to LostConnection
-                    //managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.Disconnected);
-                    managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
-                    logger.info("CLIENT DISCONNECTED - " + sessionInfo);
-                    logger.debug("Stack Trace", throwable);
-                } else {
-                    managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.LostConnection);
-                    logger.info("LOST CONNECTION - " + sessionInfo);
-                    if (logger.isDebugEnabled()) {
-                        if (throwable == null) {
-                            logger.debug("- cause: Lease expired");
-                        } else {
-                            logger.debug(" - cause: " + Session.getBasicCause(throwable).toString());
-                        }
-                    }
-                }
-
+            Session session = managerFactory.sessionManager().getSession(sessionId).orElse(null);
+            if (session == null) {
+                logger.debug("Connection error, session not found : " + sessionId + " - " + throwable);
+                return;
             }
 
+            // fill by user's info
+            StringBuilder sessionInfo = new StringBuilder();
+            User user = managerFactory.userManager().getUser(session.getUserId()).orElse(null);
+            if (user != null) {
+                sessionInfo.append(user.getName()).append(" [").append(user.getGameInfo()).append(']');
+            } else {
+                sessionInfo.append("[no user]");
+            }
+            sessionInfo.append(" at ").append(session.getHost()).append(", sessionId: ").append(session.getId());
+
+            // check disconnection reason
+            // lease ping is inner jboss feature to check connection status
+            // xmage ping is app's feature to check connection and send additional data like ping statistics
+            if (throwable instanceof ClientDisconnectedException) {
+                // client called a disconnect command (full disconnect without tables keep)
+                // no need to keep session
+                logger.info("CLIENT DISCONNECTED - " + sessionInfo);
+                logger.debug("- cause: client called disconnect command");
+                managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.DisconnectedByUser, true);
+            } else if (throwable == null) {
+                // lease timeout (ping), so server lost connection with a client
+                // must keep tables
+                logger.info("LOST CONNECTION - " + sessionInfo);
+                logger.debug("- cause: lease expired");
+                managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.LostConnection, true);
+            } else {
+                // unknown error
+                // must keep tables
+                logger.info("LOST CONNECTION - " + sessionInfo);
+                logger.debug("- cause: unknown error - " + throwable);
+                managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.LostConnection, true);
+            }
         }
     }
 
+    /**
+     * Network, server side: data transport layer
+     */
     static class MageTransporterServer extends TransporterServer {
 
         protected Connector connector;
 
         public MageTransporterServer(ManagerFactory managerFactory, InvokerLocator locator, Object target, String subsystem, MageServerInvocationHandler serverInvocationHandler) throws Exception {
             super(locator, target, subsystem);
-            connector.addInvocationHandler("callback", serverInvocationHandler);
-            connector.setLeasePeriod(managerFactory.configSettings().getLeasePeriod());
-            connector.addConnectionListener(new ClientConnectionListener(managerFactory));
-        }
+            connector.addInvocationHandler("callback", serverInvocationHandler); // commands processing
 
-        public Connector getConnector() throws Exception {
-            return connector;
+            // connection monitoring and errors processing
+            connector.setLeasePeriod(managerFactory.configSettings().getLeasePeriod());
+            connector.addConnectionListener(new MageServerConnectionListener(managerFactory));
         }
 
         @Override
@@ -367,6 +408,9 @@ public final class Main {
         }
     }
 
+    /**
+     * Network, server side: commands layer for execute (creates one thread per each client connection)
+     */
     static class MageServerInvocationHandler implements ServerInvocationHandler {
 
         private final ManagerFactory managerFactory;
@@ -395,14 +439,19 @@ public final class Main {
 
         @Override
         public void setInvoker(ServerInvoker invoker) {
+            // connection settings
             ((BisocketServerInvoker) invoker).setSecondaryBindPort(managerFactory.configSettings().getSecondaryBindPort());
             ((BisocketServerInvoker) invoker).setBacklog(managerFactory.configSettings().getBacklogSize());
             ((BisocketServerInvoker) invoker).setNumAcceptThreads(managerFactory.configSettings().getNumAcceptThreads());
+            ((BisocketServerInvoker) invoker).setIdleTimeout(SERVER_WORKER_THREAD_IDLE_TIMEOUT_SECS);
         }
 
         @Override
         public void addListener(InvokerCallbackHandler callbackHandler) {
-            // Called for every client connecting to the server
+            // on client connect: remember client session
+            // TODO: add ban by IP here?
+            // need creates on first call, required by ping
+            // but can be removed and re-creates on reconnection (if server contains another user instance)
             ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
             try {
                 String sessionId = handler.getClientSessionId();
@@ -414,8 +463,9 @@ public final class Main {
 
         @Override
         public Object invoke(final InvocationRequest invocation) throws Throwable {
+            // on command:
             // called for every client connecting to the server (after add Listener)
-
+            // TODO: add ban by IP here?
             // save client ip-address
             String sessionId = invocation.getSessionId();
             Map map = invocation.getRequestPayload();
@@ -437,11 +487,17 @@ public final class Main {
 
         @Override
         public void removeListener(InvokerCallbackHandler callbackHandler) {
+            // on client disconnect: remember client session
+            // if user want to keep session then sessionId will be faked here
             ServerInvokerCallbackHandler handler = (ServerInvokerCallbackHandler) callbackHandler;
             String sessionId = handler.getClientSessionId();
-            managerFactory.sessionManager().disconnect(sessionId, DisconnectReason.Disconnected);
+            DisconnectReason reason = DisconnectReason.DisconnectedByUser;
+            if (SessionImpl.KEEP_MY_OLD_SESSION.equals(sessionId)) {
+                // no need in additional code, server will keep original session until inactive timeout
+                reason = DisconnectReason.DisconnectedByUserButKeepTables;
+            }
+            managerFactory.sessionManager().disconnect(sessionId, reason, true);
         }
-
     }
 
     private static Class<?> loadPlugin(Plugin plugin) {

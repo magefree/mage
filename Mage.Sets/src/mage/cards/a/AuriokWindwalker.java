@@ -60,12 +60,12 @@ public final class AuriokWindwalker extends CardImpl {
 
 class AttachTargetEquipmentEffect extends OneShotEffect {
 
-    public AttachTargetEquipmentEffect() {
+    AttachTargetEquipmentEffect() {
         super(Outcome.BoostCreature);
         staticText = "Attach target Equipment you control to target creature you control";
     }
 
-    public AttachTargetEquipmentEffect(final AttachTargetEquipmentEffect effect) {
+    private AttachTargetEquipmentEffect(final AttachTargetEquipmentEffect effect) {
         super(effect);
     }
 

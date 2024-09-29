@@ -50,12 +50,12 @@ public final class WitchbaneOrb extends CardImpl {
 
 class WitchbaneOrbEffect extends OneShotEffect {
 
-    public WitchbaneOrbEffect() {
+    WitchbaneOrbEffect() {
         super(Outcome.Protect);
         staticText = "destroy all Curses attached to you";
     }
 
-    public WitchbaneOrbEffect(final WitchbaneOrbEffect effect) {
+    private WitchbaneOrbEffect(final WitchbaneOrbEffect effect) {
         super(effect);
     }
 

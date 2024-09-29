@@ -25,7 +25,7 @@ import java.util.UUID;
 public final class MyrelShieldOfArgive extends CardImpl {
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(
-            new FilterControlledPermanent(SubType.SOLDIER), null
+            new FilterControlledPermanent(SubType.SOLDIER, "Soldiers you control"), null
     );
     private static final Hint hint = new ValueHint("Soldiers you control", xValue);
 

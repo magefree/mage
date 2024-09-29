@@ -39,7 +39,7 @@ public final class ExtinguishTheLight extends CardImpl {
 
 class ExtinguishTheLightEffect extends OneShotEffect {
 
-    public ExtinguishTheLightEffect() {
+    ExtinguishTheLightEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target creature or planeswalker. If its mana value was 3 or less, you gain 3 life.";
     }

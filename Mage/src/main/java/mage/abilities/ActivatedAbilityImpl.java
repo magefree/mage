@@ -1,22 +1,22 @@
 package mage.abilities;
 
 import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.MageObject;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.command.CommandObject;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -48,7 +48,7 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         super(abilityType, zone);
     }
 
-    public ActivatedAbilityImpl(final ActivatedAbilityImpl ability) {
+    protected ActivatedAbilityImpl(final ActivatedAbilityImpl ability) {
         super(ability);
         timing = ability.timing;
         mayActivate = ability.mayActivate;
@@ -58,69 +58,10 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         condition = ability.condition;
     }
 
-    public ActivatedAbilityImpl(Zone zone) {
-        this(zone, null);
-    }
-
-    public ActivatedAbilityImpl(Zone zone, Effect effect) {
-        super(AbilityType.ACTIVATED, zone);
-        this.addEffect(effect);
-    }
-
-    public ActivatedAbilityImpl(Zone zone, Effect effect, ManaCosts cost) {
-        super(AbilityType.ACTIVATED, zone);
-        this.addEffect(effect);
-        this.addManaCost(cost);
-    }
-
-    public ActivatedAbilityImpl(Zone zone, Effects effects, ManaCosts cost) {
-        super(AbilityType.ACTIVATED, zone);
-        if (effects != null) {
-            for (Effect effect : effects) {
-                this.addEffect(effect);
-            }
-        }
-        this.addManaCost(cost);
-    }
-
-    public ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
-        super(AbilityType.ACTIVATED, zone);
+    protected ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
+        super(AbilityType.ACTIVATED_NONMANA, zone);
         this.addEffect(effect);
         this.addCost(cost);
-    }
-
-    public ActivatedAbilityImpl(Zone zone, Effect effect, Costs<Cost> costs) {
-        super(AbilityType.ACTIVATED, zone);
-        this.addEffect(effect);
-        if (costs != null) {
-            for (Cost cost : costs) {
-                this.addCost(cost);
-            }
-        }
-    }
-
-    public ActivatedAbilityImpl(Zone zone, Effects effects, Cost cost) {
-        super(AbilityType.ACTIVATED, zone);
-        if (effects != null) {
-            for (Effect effect : effects) {
-                this.addEffect(effect);
-            }
-        }
-        this.addCost(cost);
-    }
-
-    public ActivatedAbilityImpl(Zone zone, Effects effects, Costs<Cost> costs) {
-        super(AbilityType.ACTIVATED, zone);
-        if (effects != null) {
-            for (Effect effect : effects) {
-                this.addEffect(effect);
-            }
-        }
-        if (costs != null) {
-            for (Cost cost : costs) {
-                this.addCost(cost);
-            }
-        }
     }
 
     @Override
@@ -179,23 +120,31 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
         // timing check
         //20091005 - 602.5d/602.5e
-        boolean asInstant;
-        ApprovingObject approvingObject = game.getContinuousEffects()
+        Set<ApprovingObject> approvingObjects = game
+                .getContinuousEffects()
                 .asThough(sourceId,
                         AsThoughEffectType.ACTIVATE_AS_INSTANT,
                         this,
                         controllerId,
-                        game);
-        asInstant = approvingObject != null;
-        asInstant |= (timing == TimingRule.INSTANT);
+                        game
+                );
+        boolean asInstant = !approvingObjects.isEmpty()
+                || (timing == TimingRule.INSTANT);
         if (!asInstant && !game.canPlaySorcery(playerId)) {
             return ActivationStatus.getFalse();
         }
 
         // targets and costs check
-        if (!costs.canPay(this, this, playerId, game)
+        if (!getCosts().canPay(this, this, playerId, game)
                 || !canChooseTarget(game, playerId)) {
             return ActivationStatus.getFalse();
+        }
+
+        // activate restrictions by replacement effects (example: Sharkey, Tyrant of the Shire)
+        if (this.isActivatedAbility()) {
+            if (game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATE_ABILITY, this.getId(), this, playerId))) {
+                return ActivationStatus.getFalse();
+            }
         }
 
         // all fine, can be activated
@@ -204,7 +153,12 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
         //  game.inCheckPlayableState() can't be a help here cause some cards checking activating status,
         //  activatorId must be removed
         this.activatorId = playerId;
-        return new ActivationStatus(true, approvingObject);
+
+        if (approvingObjects.isEmpty()) {
+            return ActivationStatus.withoutApprovingObject(true);
+        } else {
+            return new ActivationStatus(approvingObjects);
+        }
     }
 
     @Override
@@ -262,8 +216,8 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (!hasMoreActivationsThisTurn(game) || !super.activate(game, noMana)) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (!hasMoreActivationsThisTurn(game) || !super.activate(game, allowedIdentifiers, noMana)) {
             return false;
         }
         ActivationInfo activationInfo = getActivationInfo(game);
@@ -292,11 +246,11 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     protected ActivationInfo getActivationInfo(Game game) {
         Integer turnNum = (Integer) game.getState()
-                .getValue(CardUtil.getCardZoneString("activationsTurn" + originalId, sourceId, game));
+                .getValue(CardUtil.getCardZoneString("activationsTurn" + getOriginalId(), sourceId, game));
         Integer activationCount = (Integer) game.getState()
-                .getValue(CardUtil.getCardZoneString("activationsCount" + originalId, sourceId, game));
+                .getValue(CardUtil.getCardZoneString("activationsCount" + getOriginalId(), sourceId, game));
         Integer totalActivations = (Integer) game.getState()
-                .getValue(CardUtil.getCardZoneString("totalActivations" + originalId, sourceId, game));
+                .getValue(CardUtil.getCardZoneString("totalActivations" + getOriginalId(), sourceId, game));
         if (turnNum == null || activationCount == null || totalActivations == null) {
             return null;
         }
@@ -305,11 +259,11 @@ public abstract class ActivatedAbilityImpl extends AbilityImpl implements Activa
 
     protected void setActivationInfo(ActivationInfo activationInfo, Game game) {
         game.getState().setValue(CardUtil
-                .getCardZoneString("activationsTurn" + originalId, sourceId, game), activationInfo.turnNum);
+                .getCardZoneString("activationsTurn" + getOriginalId(), sourceId, game), activationInfo.turnNum);
         game.getState().setValue(CardUtil
-                .getCardZoneString("activationsCount" + originalId, sourceId, game), activationInfo.activationCounter);
+                .getCardZoneString("activationsCount" + getOriginalId(), sourceId, game), activationInfo.activationCounter);
         game.getState().setValue(CardUtil
-                .getCardZoneString("totalActivations" + originalId, sourceId, game), activationInfo.totalActivations);
+                .getCardZoneString("totalActivations" + getOriginalId(), sourceId, game), activationInfo.totalActivations);
     }
 
     @Override

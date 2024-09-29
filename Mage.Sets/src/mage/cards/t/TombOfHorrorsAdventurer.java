@@ -7,6 +7,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CompletedDungeonCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -32,7 +33,7 @@ public final class TombOfHorrorsAdventurer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Tomb of Horrors Adventurer enters the battlefield, you take the initiative.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TakeTheInitiativeEffect()).addHint(InitiativeHint.instance));
 
         // Whenever you cast your second spell each turn, copy it. If you've completed a dungeon, copy that spell twice instead. You may choose new targets for the copies.
         this.addAbility(new CastSecondSpellTriggeredAbility(new TombOfHorrorsAdventurerEffect())

@@ -25,7 +25,7 @@ public final class EnterTheUnknown extends CardImpl {
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
 
         // You may play an additional land this turn.
-        this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(1, Duration.EndOfTurn).concatBy("<br>"));
 
     }
 

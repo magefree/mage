@@ -80,7 +80,7 @@ class OdricLunarchMarshalEffect extends OneShotEffect {
         this.staticText = "creatures you control gain first strike until end of turn if a creature you control has first strike. The same is true for flying, deathtouch, double strike, haste, hexproof, indestructible, lifelink, menace, reach, skulk, trample, and vigilance.";
     }
 
-    OdricLunarchMarshalEffect(final OdricLunarchMarshalEffect effect) {
+    private OdricLunarchMarshalEffect(final OdricLunarchMarshalEffect effect) {
         super(effect);
     }
 

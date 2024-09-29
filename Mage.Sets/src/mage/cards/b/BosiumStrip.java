@@ -1,7 +1,6 @@
 
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -12,11 +11,7 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -24,8 +19,9 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.watchers.common.CastFromGraveyardWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author spjspj & L_J
  */
 public final class BosiumStrip extends CardImpl {
@@ -53,11 +49,11 @@ public final class BosiumStrip extends CardImpl {
 class BosiumStripCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     BosiumStripCastFromGraveyardEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Until end of turn, if the top card of your graveyard is an instant or sorcery card, you may cast that card";
     }
 
-    BosiumStripCastFromGraveyardEffect(final BosiumStripCastFromGraveyardEffect effect) {
+    private BosiumStripCastFromGraveyardEffect(final BosiumStripCastFromGraveyardEffect effect) {
         super(effect);
     }
 
@@ -97,7 +93,7 @@ class BosiumStripReplacementEffect extends ReplacementEffectImpl {
         staticText = "If a card cast this way would be put into a graveyard this turn, exile it instead";
     }
 
-    BosiumStripReplacementEffect(final BosiumStripReplacementEffect effect) {
+    private BosiumStripReplacementEffect(final BosiumStripReplacementEffect effect) {
         super(effect);
     }
 
@@ -109,13 +105,17 @@ class BosiumStripReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) { return false; }
+        if (controller == null) {
+            return false;
+        }
 
         Card card = (Card) game.getState().getValue("BosiumStrip");
-        if (card == null) { return false; }
+        if (card == null) {
+            return false;
+        }
 
         ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return true;
+        return false;
     }
 
     @Override
@@ -126,12 +126,18 @@ class BosiumStripReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getToZone() != Zone.GRAVEYARD) { return false; }
+        if (zEvent.getToZone() != Zone.GRAVEYARD) {
+            return false;
+        }
 
         Card card = game.getCard(event.getSourceId());
-        if (card == null) { return false; }
+        if (card == null) {
+            return false;
+        }
 
-        if (!StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(card, game)) { return false; }
+        if (!StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY.match(card, game)) {
+            return false;
+        }
 
         CastFromGraveyardWatcher watcher = game.getState().getWatcher(CastFromGraveyardWatcher.class);
         return watcher != null

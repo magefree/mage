@@ -26,7 +26,7 @@ import mage.target.TargetPermanent;
  */
 public final class KraulHarpooner extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("creature with flying you don't control");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("creature you don’t control with flying");
 
     static {
         filter.add(TargetController.NOT_YOU.getControllerPredicate());
@@ -65,15 +65,15 @@ public final class KraulHarpooner extends CardImpl {
 
 class KraulHarpoonerEffect extends OneShotEffect {
 
-    public KraulHarpoonerEffect() {
+    KraulHarpoonerEffect() {
         super(Outcome.Benefit);
-        this.staticText = "choose up to one target creature with flying "
-                + "you don't control. {this} gets +X/+0 until end of turn, "
+        this.staticText = "choose up to one target creature you don't control with flying." +
+                " {this} gets +X/+0 until end of turn, "
                 + "where X is the number of creature cards in your graveyard, "
                 + "then you may have {this} fight that creature.";
     }
 
-    public KraulHarpoonerEffect(final KraulHarpoonerEffect effect) {
+    private KraulHarpoonerEffect(final KraulHarpoonerEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class KraulHarpoonerEffect extends OneShotEffect {
         }
         int xValue = player.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
         game.addEffect(new BoostSourceEffect(xValue, 0, Duration.EndOfTurn), source);
-        game.getState().processAction(game);
+        game.processAction();
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (creature == null || !player.chooseUse(outcome, "Have " + sourcePerm.getLogName() + " fight " + creature.getLogName() + "?", source, game)) {
             return true;

@@ -49,12 +49,12 @@ public final class DisciplesOfGix extends CardImpl {
 
 class DisciplesOfGixEffect extends OneShotEffect {
 
-    public DisciplesOfGixEffect() {
+    DisciplesOfGixEffect() {
         super(Outcome.Benefit);
         staticText = "search your library for up to three artifact cards, put them into your graveyard, then shuffle";
     }
 
-    public DisciplesOfGixEffect(final DisciplesOfGixEffect effect) {
+    private DisciplesOfGixEffect(final DisciplesOfGixEffect effect) {
         super(effect);
     }
 

@@ -22,6 +22,7 @@ public interface Token extends MageObject {
     List<UUID> getLastAddedTokenIds();
 
     void addAbility(Ability ability);
+    void addAbility(Ability ability, boolean fromExistingObject);
 
     void removeAbility(Ability abilityToRemove);
 
@@ -35,7 +36,11 @@ public interface Token extends MageObject {
 
     boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer);
 
-    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, boolean created);
+    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo);
+
+    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created);
+
+    boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created, List<Token> additionalTokens);
 
     void setPower(int power);
 

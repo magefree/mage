@@ -46,12 +46,12 @@ public final class Phthisis extends CardImpl {
 
 class PhthisisEffect extends OneShotEffect {
 
-    public PhthisisEffect() {
+    PhthisisEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target creature. Its controller loses life equal to its power plus its toughness";
     }
 
-    public PhthisisEffect(final PhthisisEffect effect) {
+    private PhthisisEffect(final PhthisisEffect effect) {
         super(effect);
     }
 

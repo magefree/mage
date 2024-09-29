@@ -7,10 +7,12 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.mana.ManaAbility;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -58,7 +60,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         this.generateGainAbilityDependencies(ability, null);
     }
 
-    public GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
+    protected GainAbilityAttachedEffect(final GainAbilityAttachedEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
         ability.newId(); // This is needed if the effect is copied e.g. by a clone so the ability can be added multiple times to permanents
@@ -75,20 +77,20 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        super.init(source, game);
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSetAtInit(source)) {
             Permanent equipment = game.getPermanentOrLKIBattlefield(source.getSourceId());
             if (equipment != null && equipment.getAttachedTo() != null) {
                 this.setTargetPointer(new FixedTarget(equipment.getAttachedTo(), game.getState().getZoneChangeCounter(equipment.getAttachedTo())));
             }
         }
+        super.init(source, game); // must call at the end due target pointer setup
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent;
-        if (affectedObjectsSet) {
-            permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (getAffectedObjectsSet()) {
+            permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent == null) {
                 discard();
                 return true;
@@ -143,11 +145,13 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl {
         }
         boolean quotes = ability instanceof SimpleActivatedAbility
                 || ability instanceof TriggeredAbility
-                || ability instanceof LoyaltyAbility;
+                || ability instanceof LoyaltyAbility
+                || ability instanceof ManaAbility
+                || ability.getRule().startsWith("If ");
         if (quotes) {
             sb.append('"');
         }
-        sb.append(ability.getRule("This " + targetObjectName));
+        sb.append(CardUtil.stripReminderText(ability.getRule("This " + targetObjectName)));
         if (quotes) {
             sb.append('"');
         }

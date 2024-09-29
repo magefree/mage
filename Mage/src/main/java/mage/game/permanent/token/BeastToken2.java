@@ -18,7 +18,7 @@ public final class BeastToken2 extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public BeastToken2(final BeastToken2 token) {
+    protected BeastToken2(final BeastToken2 token) {
         super(token);
     }
 

@@ -1,8 +1,7 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AttachEffect;
@@ -34,10 +33,10 @@ public final class HerosBlade extends CardImpl {
         // Equipped creature gets +3/+2.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 2)));
 
-        // Whenever a legendary creature enters the battlefield under your control, you may attach Hero's Blade to it.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+        // Whenever a legendary creature you control enters, you may attach Hero's Blade to it.
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {this} to it"),
-                filter, true, SetTargetPointer.PERMANENT, null, true));
+                filter, true, SetTargetPointer.PERMANENT));
 
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));

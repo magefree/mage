@@ -33,7 +33,7 @@ public final class KrarkTheThumbless extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new KrarkTheThumblessEffect(),
                 StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY,
-                false, true
+                false, SetTargetPointer.SPELL
         ));
 
         // Partner

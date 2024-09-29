@@ -1,12 +1,13 @@
 package mage.abilities.keyword;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.Cost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -14,8 +15,9 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -32,14 +34,14 @@ import mage.game.events.ZoneChangeEvent;
  */
 public class UnearthAbility extends ActivatedAbilityImpl {
 
-    public UnearthAbility(ManaCosts costs) {
+    public UnearthAbility(Cost costs) {
         super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(false, true, true), costs);
         this.timing = TimingRule.SORCERY;
         this.addEffect(new CreateDelayedTriggeredAbilityEffect(new UnearthDelayedTriggeredAbility()));
         this.addEffect(new UnearthLeavesBattlefieldEffect());
     }
 
-    public UnearthAbility(final UnearthAbility ability) {
+    protected UnearthAbility(final UnearthAbility ability) {
         super(ability);
     }
 
@@ -61,10 +63,10 @@ public class UnearthAbility extends ActivatedAbilityImpl {
 class UnearthDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     public UnearthDelayedTriggeredAbility() {
-        super(new ExileSourceEffect());
+        super(new ExileTargetEffect());
     }
 
-    public UnearthDelayedTriggeredAbility(final UnearthDelayedTriggeredAbility ability) {
+    protected UnearthDelayedTriggeredAbility(final UnearthDelayedTriggeredAbility ability) {
         super(ability);
     }
 
@@ -80,7 +82,19 @@ class UnearthDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.controllerId);
+        if (!event.getPlayerId().equals(this.controllerId)) {
+            return false;
+        }
+        // The delayed trigger source is the card in the graveyard.
+        // So we need to exile the zcc + 1 permanent
+        MageObjectReference object = new MageObjectReference(getSourceId(), getSourceObjectZoneChangeCounter() + 1, game);
+        Permanent permanent = object.getPermanent(game);
+        if (permanent == null || !permanent.isPhasedIn()) {
+            // Triggers, but do nothing.
+            return true;
+        }
+        getEffects().setTargetPointer(new FixedTarget(permanent, game));
+        return true;
     }
 
     @Override
@@ -97,7 +111,7 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl {
         staticText = "When {this} leaves the battlefield, exile it";
     }
 
-    public UnearthLeavesBattlefieldEffect(final UnearthLeavesBattlefieldEffect effect) {
+    protected UnearthLeavesBattlefieldEffect(final UnearthLeavesBattlefieldEffect effect) {
         super(effect);
     }
 

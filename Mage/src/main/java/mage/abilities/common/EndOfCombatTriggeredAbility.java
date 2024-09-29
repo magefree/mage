@@ -23,7 +23,7 @@ public class EndOfCombatTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("At end of combat, ");
     }
 
-    public EndOfCombatTriggeredAbility(final EndOfCombatTriggeredAbility ability) {
+    protected EndOfCombatTriggeredAbility(final EndOfCombatTriggeredAbility ability) {
         super(ability);
         this.rule = ability.rule;
     }

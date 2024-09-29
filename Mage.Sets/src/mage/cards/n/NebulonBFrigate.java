@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import java.util.UUID;
@@ -12,21 +11,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author Styxo
  */
 public final class NebulonBFrigate extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public NebulonBFrigate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{W}");
@@ -38,7 +29,7 @@ public final class NebulonBFrigate extends CardImpl {
         this.addAbility(SpaceflightAbility.getInstance());
 
         // Whenever Nebulon-B Frigate enters the battlefield, creatures you control gain vigilance until end of turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("creatures you control")), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED), false));
     }
 
     private NebulonBFrigate(final NebulonBFrigate card) {

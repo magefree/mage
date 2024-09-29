@@ -44,12 +44,12 @@ public final class HeartlessHidetsugu extends CardImpl {
 
 class HeartlessHidetsuguDamageEffect extends OneShotEffect {
 
-    public HeartlessHidetsuguDamageEffect() {
+    HeartlessHidetsuguDamageEffect() {
         super(Outcome.Detriment);
         this.staticText = "{this} deals damage to each player equal to half that player's life total, rounded down";
     }
 
-    public HeartlessHidetsuguDamageEffect(final HeartlessHidetsuguDamageEffect effect) {
+    private HeartlessHidetsuguDamageEffect(final HeartlessHidetsuguDamageEffect effect) {
         super(effect);
     }
 

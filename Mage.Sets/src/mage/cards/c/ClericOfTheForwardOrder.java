@@ -20,7 +20,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  */
 public final class ClericOfTheForwardOrder extends CardImpl {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each creature you control named Cleric of the Forward Order");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control named Cleric of the Forward Order");
 
     static {
         filter.add(new NamePredicate("Cleric of the Forward Order"));

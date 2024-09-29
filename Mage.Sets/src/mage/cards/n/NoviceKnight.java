@@ -59,10 +59,10 @@ enum EnchantedOrEquippedSourceCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             for (UUID uuid : permanent.getAttachments()) {
-                Permanent attached = game.getBattlefield().getPermanent(uuid);
+                Permanent attached = game.getPermanent(uuid);
                 if (attached != null
                         && (attached.isEnchantment(game)
                         || attached.hasSubtype(SubType.EQUIPMENT, game))) {

@@ -47,7 +47,7 @@ public final class SamwiseTheStouthearted extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()
                 .setText("choose up to one target permanent card in your graveyard that was put there from the battlefield this turn. Return it to your hand"));
         ability.addEffect(new TheRingTemptsYouEffect().concatBy("Then"));
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
         this.addAbility(ability, new CardsPutIntoGraveyardWatcher());
     }
 

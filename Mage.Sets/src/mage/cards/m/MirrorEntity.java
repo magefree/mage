@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessAllEffect;
 import mage.abilities.keyword.ChangelingAbility;
@@ -37,8 +37,8 @@ public final class MirrorEntity extends CardImpl {
 
         // {X}: Until end of turn, creatures you control have base power and toughness X/X and gain all creature types.
         Ability ability = new SimpleActivatedAbility(new SetBasePowerToughnessAllEffect(
-                ManacostVariableValue.REGULAR, ManacostVariableValue.REGULAR,
-                Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, true
+                GetXValue.instance, GetXValue.instance,
+                Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES
         ).setText("Until end of turn, creatures you control have base power and toughness X/X"), new VariableManaCost(VariableCostType.NORMAL));
         ability.addEffect(new MirrorEntityEffect());
         this.addAbility(ability);

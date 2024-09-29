@@ -49,7 +49,7 @@ public final class SuqAtaFirewalker extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SuqAtaFirewalker(SuqAtaFirewalker other) {
+    private SuqAtaFirewalker(final SuqAtaFirewalker other) {
         super(other);
     }
 

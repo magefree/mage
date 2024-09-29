@@ -39,12 +39,12 @@ public final class StonySilence extends CardImpl {
 
 class StonySilenceCantActivateEffect extends RestrictionEffect {
 
-    public StonySilenceCantActivateEffect() {
+    StonySilenceCantActivateEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "Activated abilities of artifacts can't be activated";
     }
 
-    public StonySilenceCantActivateEffect(final StonySilenceCantActivateEffect effect) {
+    private StonySilenceCantActivateEffect(final StonySilenceCantActivateEffect effect) {
         super(effect);
     }
 

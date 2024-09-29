@@ -64,12 +64,12 @@ public final class FruitcakeElemental extends CardImpl {
 
 class FruitcakeElementalEffect extends OneShotEffect {
 
-    public FruitcakeElementalEffect() {
+    FruitcakeElementalEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player gains control of {this}.";
     }
 
-    public FruitcakeElementalEffect(final FruitcakeElementalEffect effect) {
+    private FruitcakeElementalEffect(final FruitcakeElementalEffect effect) {
         super(effect);
     }
 
@@ -94,11 +94,11 @@ class FruitcakeElementalEffect extends OneShotEffect {
 
 class FruitcakeElementalControlSourceEffect extends ContinuousEffectImpl {
 
-    public FruitcakeElementalControlSourceEffect() {
+    FruitcakeElementalControlSourceEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 
-    public FruitcakeElementalControlSourceEffect(final FruitcakeElementalControlSourceEffect effect) {
+    private FruitcakeElementalControlSourceEffect(final FruitcakeElementalControlSourceEffect effect) {
         super(effect);
     }
 

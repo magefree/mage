@@ -29,7 +29,7 @@ public final class ShockTroops extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice Shock Troops: Shock Troops deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, "it"), new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
                 

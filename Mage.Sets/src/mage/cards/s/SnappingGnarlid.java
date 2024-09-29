@@ -23,7 +23,7 @@ public final class SnappingGnarlid extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // <i>Landfall</i>- Whenever a land enters the battlefield under your control, Snapping Gnarlid gets +1/+1 until end of turn.
+        // <i>Landfall</i>- Whenever a land you control enters, Snapping Gnarlid gets +1/+1 until end of turn.
         this.addAbility(new LandfallAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 

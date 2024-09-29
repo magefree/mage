@@ -13,7 +13,6 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
@@ -37,7 +36,7 @@ public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
         staticText = sb.toString();
     }
 
-    public CantBeBlockedByOneAllEffect(final CantBeBlockedByOneAllEffect effect) {
+    protected CantBeBlockedByOneAllEffect(final CantBeBlockedByOneAllEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.filter = effect.filter;
@@ -52,11 +51,11 @@ public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl {
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         switch (layer) {
             case RulesEffects:
-                for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+                for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                     perm.setMinBlockedBy(amount);
                 }
                 break;
-            }
+        }
         return true;
     }
 

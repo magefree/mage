@@ -39,7 +39,7 @@ public final class ForTheFamily extends CardImpl {
 
 class ForTheFamilyEffect extends OneShotEffect {
 
-    public ForTheFamilyEffect() {
+    ForTheFamilyEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "Target creature gets +2/+2 until end of turn. If you control four or more creatures, that creature gets +4/+4 until end of turn instead";
     }

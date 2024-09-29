@@ -22,7 +22,7 @@ public final class ZeppelinToken extends TokenImpl {
         this.addAbility(new CrewAbility(3));
     }
 
-    public ZeppelinToken(final ZeppelinToken token) {
+    private ZeppelinToken(final ZeppelinToken token) {
         super(token);
     }
 

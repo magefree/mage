@@ -26,7 +26,9 @@ public final class SaprazzanOutrigger extends CardImpl {
         this.toughness = new MageInt(5);
         
         // When Saprazzan Outrigger attacks or blocks, put it on top of its owner's library at end of combat.
-        DelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(new PutOnLibrarySourceEffect(true, "put it on top of its owner's library at end of combat"));
+        DelayedTriggeredAbility ability = new AtTheEndOfCombatDelayedTriggeredAbility(
+                new PutOnLibrarySourceEffect(true, "put it on top of its owner's library at end of combat"))
+                .setTriggerPhrase("");
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(ability, true), false));
     }
 

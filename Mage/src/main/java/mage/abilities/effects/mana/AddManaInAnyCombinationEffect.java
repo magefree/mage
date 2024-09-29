@@ -13,14 +13,13 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
  */
 public class AddManaInAnyCombinationEffect extends ManaEffect {
 
-    private ArrayList<ColoredManaSymbol> manaSymbols = new ArrayList<>();
+    private List<ColoredManaSymbol> manaSymbols = new ArrayList<>();
     private final DynamicValue amount;
     private final DynamicValue netAmount;
 
@@ -46,22 +45,7 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
         this.netAmount = netAmount;
     }
 
-    public AddManaInAnyCombinationEffect(int amount, String text) {
-        this(amount);
-        this.staticText = text;
-    }
-
-    public AddManaInAnyCombinationEffect(int amount, String text, ColoredManaSymbol... coloredManaSymbols) {
-        this(amount, coloredManaSymbols);
-        this.staticText = text;
-    }
-
-    public AddManaInAnyCombinationEffect(DynamicValue amount, DynamicValue netAmount, String text, ColoredManaSymbol... coloredManaSymbols) {
-        this(amount, netAmount, coloredManaSymbols);
-        this.staticText = text;
-    }
-
-    public AddManaInAnyCombinationEffect(final AddManaInAnyCombinationEffect effect) {
+    protected AddManaInAnyCombinationEffect(final AddManaInAnyCombinationEffect effect) {
         super(effect);
         this.manaSymbols = effect.manaSymbols;
         this.amount = effect.amount;
@@ -133,14 +117,11 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
 
         // Ask player for color distribution
         int manaAmount = amount.calculate(game, source, this);
-        List<Integer> manaList = player.getMultiAmount(this.outcome, manaStrings, manaAmount, manaAmount, MultiAmountType.MANA, game);
+        List<Integer> manaList = player.getMultiAmount(this.outcome, manaStrings, 0, manaAmount, MultiAmountType.MANA, game);
 
-        // Covert choices to mana
+        // Convert choices to mana
         for (int i = 0; i < size; i++) {
-            ColoredManaSymbol coloredManaSymbol = manaSymbols.get(i);
-            int amount = manaList.get(i);
-
-            mana.add(new Mana(coloredManaSymbol, amount));
+            mana.add(new Mana(manaSymbols.get(i), manaList.get(i)));
         }
         return mana;
     }
@@ -180,7 +161,15 @@ public class AddManaInAnyCombinationEffect extends ManaEffect {
             for (ColoredManaSymbol coloredManaSymbol : manaSymbols) {
                 i++;
                 if (i > 1) {
-                    sb.append(" and/or ");
+                    if (manaSymbols.size() > 2) {
+                        sb.append(",");
+                    }
+                    if (i == manaSymbols.size()) {
+                        sb.append(" and/or ");
+                    } else {
+                        sb.append(" ");
+                    }
+
                 }
                 sb.append('{').append(coloredManaSymbol.toString()).append('}');
             }

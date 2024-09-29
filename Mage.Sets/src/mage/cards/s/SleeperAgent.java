@@ -54,12 +54,12 @@ public final class SleeperAgent extends CardImpl {
 
 class SleeperAgentChangeControlEffect extends ContinuousEffectImpl {
 
-    public SleeperAgentChangeControlEffect() {
+    SleeperAgentChangeControlEffect() {
         super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
-        staticText = "target opponent gains control of {this}";
+        staticText = "target opponent gains control of it";
     }
 
-    public SleeperAgentChangeControlEffect(final SleeperAgentChangeControlEffect effect) {
+    private SleeperAgentChangeControlEffect(final SleeperAgentChangeControlEffect effect) {
         super(effect);
     }
 
@@ -79,5 +79,3 @@ class SleeperAgentChangeControlEffect extends ContinuousEffectImpl {
         return false;
     }
 }
-
-

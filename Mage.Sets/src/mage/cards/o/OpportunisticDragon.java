@@ -140,6 +140,6 @@ class OpportunisticDragonAttackBlockEffect extends CantAttackBlockTargetEffect {
             discard();
             return false;
         }
-        return super.applies(permanent, source, game); //To change body of generated methods, choose Tools | Templates.
+        return super.applies(permanent, source, game);
     }
 }

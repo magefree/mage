@@ -49,12 +49,12 @@ public final class Recoup extends CardImpl {
 
 class RecoupEffect extends ContinuousEffectImpl {
 
-    public RecoupEffect() {
+    RecoupEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "Target sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost";
     }
 
-    public RecoupEffect(final RecoupEffect effect) {
+    private RecoupEffect(final RecoupEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class RecoupEffect extends ContinuousEffectImpl {
         if (player == null) {
             return false;
         }
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             FlashbackAbility ability = new FlashbackAbility(card, card.getManaCost());
             ability.setSourceId(card.getId());

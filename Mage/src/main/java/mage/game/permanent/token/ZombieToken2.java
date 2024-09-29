@@ -22,7 +22,7 @@ public final class ZombieToken2 extends TokenImpl {
         toughness = new MageInt(zToughness);
     }
 
-    public ZombieToken2(final ZombieToken2 token) {
+    protected ZombieToken2(final ZombieToken2 token) {
         super(token);
     }
 

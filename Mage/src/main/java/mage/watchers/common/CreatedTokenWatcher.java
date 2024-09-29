@@ -33,7 +33,11 @@ public class CreatedTokenWatcher extends Watcher {
             playerMap.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
 
             tokenCreatedMap.putIfAbsent(event.getPlayerId(), new HashMap<>());
-            Permanent token = game.getPermanent(event.getTargetId());
+            Permanent token = game.getPermanentOrLKIBattlefield(event.getTargetId());
+            if (token == null) {
+                // if you catch this then must research
+                throw new IllegalStateException("Wrong code usage: found created token event, but can't find a real token in battlefield or lki");
+            }
             Map<SubType, Integer> playersTokens = tokenCreatedMap.getOrDefault(event.getPlayerId(), new EnumMap<>(SubType.class));
             // TODO: this doesn't handle tokens that are all creature types
             for (SubType subType : token.getSubtype(game)) {

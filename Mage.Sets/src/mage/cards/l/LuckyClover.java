@@ -1,10 +1,11 @@
 package mage.cards.l;
 
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterInstantOrSorcerySpell;
@@ -28,8 +29,8 @@ public final class LuckyClover extends CardImpl {
 
         // Whenever you cast an Adventure instant or sorcery spell, copy it. You may choose new targets for the copy.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetSpellEffect(true).withSpellName("it"),
-                filter, false, true
+                new CopyTargetStackObjectEffect(true).withText("it"),
+                filter, false, SetTargetPointer.SPELL
         ));
     }
 

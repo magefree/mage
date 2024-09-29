@@ -1,15 +1,14 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
@@ -27,7 +26,9 @@ public final class HavocJester extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Whenever you sacrifice a permanent, Havoc Jester deals 1 damage to any target.
-        this.addAbility(new HavocJesterTriggeredAbility());
+        Ability ability = new SacrificePermanentTriggeredAbility(new DamageTargetEffect(1), StaticFilters.FILTER_PERMANENT);
+        ability.addTarget(new TargetAnyTarget());
+        this.addAbility(ability);
     }
 
     private HavocJester(final HavocJester card) {
@@ -37,37 +38,5 @@ public final class HavocJester extends CardImpl {
     @Override
     public HavocJester copy() {
         return new HavocJester(this);
-    }
-}
-
-class HavocJesterTriggeredAbility extends TriggeredAbilityImpl {
-
-    HavocJesterTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
-        this.addTarget(new TargetAnyTarget());
-    }
-
-    private HavocJesterTriggeredAbility(final HavocJesterTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(getControllerId());
-    }
-
-    @Override
-    public HavocJesterTriggeredAbility copy() {
-        return new HavocJesterTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you sacrifice a permanent, {this} deals 1 damage to any target.";
     }
 }

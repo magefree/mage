@@ -5,7 +5,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.common.LandsYouControlCount;
 import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.effects.common.PutCardFromOneOfTwoZonesOntoBattlefieldEffect;
+import mage.abilities.effects.common.PutCardFromHandOrGraveyardOntoBattlefieldEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.abilities.hint.common.LandsYouControlHint;
@@ -46,7 +46,7 @@ public final class DakkonShadowSlayer extends CardImpl {
         this.addAbility(ability);
 
         // −6: You may put an artifact card from your hand or graveyard onto the battlefield.
-        this.addAbility(new LoyaltyAbility(new PutCardFromOneOfTwoZonesOntoBattlefieldEffect(StaticFilters.FILTER_CARD_ARTIFACT), -6));
+        this.addAbility(new LoyaltyAbility(new PutCardFromHandOrGraveyardOntoBattlefieldEffect(StaticFilters.FILTER_CARD_ARTIFACT, false), -6));
     }
 
     private DakkonShadowSlayer(final DakkonShadowSlayer card) {

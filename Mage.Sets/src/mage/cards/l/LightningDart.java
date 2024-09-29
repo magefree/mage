@@ -43,7 +43,7 @@ public final class LightningDart extends CardImpl {
             this.staticText = "Lightning Dart deals 1 damage to target creature. If that creature is white or blue, Lightning Dart deals 4 damage to it instead";
         }
 
-        public LightningDartEffect(final LightningDartEffect effect) {
+        private LightningDartEffect(final LightningDartEffect effect) {
             super(effect);
         }
 
@@ -54,7 +54,7 @@ public final class LightningDart extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
                 int damage = 1;
                 ObjectColor color = permanent.getColor(game);

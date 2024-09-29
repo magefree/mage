@@ -31,7 +31,7 @@ public final class MirrodinsCore extends CardImpl {
         this.addAbility(ability);
     }
 
-    public MirrodinsCore (final MirrodinsCore card) {
+    private MirrodinsCore(final MirrodinsCore card) {
         super(card);
     }
 

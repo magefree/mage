@@ -52,7 +52,7 @@ class VigeanIntuitionEffect extends OneShotEffect {
         choice.add(CardType.LAND.toString());
         choice.add(CardType.PLANESWALKER.toString());
         choice.add(CardType.SORCERY.toString());
-        choice.add(CardType.TRIBAL.toString());
+        choice.add(CardType.KINDRED.toString());
     }
 
     public VigeanIntuitionEffect() {
@@ -60,7 +60,7 @@ class VigeanIntuitionEffect extends OneShotEffect {
         staticText = "Choose a card type, then reveal the top four cards of your library. Put all cards of the chosen type revealed this way into your hand and the rest into your graveyard";
     }
 
-    public VigeanIntuitionEffect(final VigeanIntuitionEffect effect) {
+    private VigeanIntuitionEffect(final VigeanIntuitionEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class VigeanIntuitionEffect extends OneShotEffect {
             return false;
         }
 
-        Choice choiceImpl = new ChoiceImpl();
+        Choice choiceImpl = new ChoiceImpl(true);
         choiceImpl.setChoices(choice);
         if (player.choose(Outcome.Neutral, choiceImpl, game)) {
             String chosenType = choiceImpl.getChoice();
@@ -103,8 +103,8 @@ class VigeanIntuitionEffect extends OneShotEffect {
                 type = CardType.SORCERY;
             } else if (chosenType.equals(CardType.PLANESWALKER.toString())) {
                 type = CardType.PLANESWALKER;
-            } else if (chosenType.equals(CardType.TRIBAL.toString())) {
-                type = CardType.TRIBAL;
+            } else if (chosenType.equals(CardType.KINDRED.toString())) {
+                type = CardType.KINDRED;
             }
 
             if (type != null) {

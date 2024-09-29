@@ -56,23 +56,18 @@ public final class TheImmortalSun extends CardImpl {
 
 class TheImmortalSunCantActivateEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public TheImmortalSunCantActivateEffect() {
+    TheImmortalSunCantActivateEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Players can't activate planeswalkers' loyalty abilities";
     }
 
-    public TheImmortalSunCantActivateEffect(final TheImmortalSunCantActivateEffect effect) {
+    private TheImmortalSunCantActivateEffect(final TheImmortalSunCantActivateEffect effect) {
         super(effect);
     }
 
     @Override
     public TheImmortalSunCantActivateEffect copy() {
         return new TheImmortalSunCantActivateEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -85,16 +80,19 @@ class TheImmortalSunCantActivateEffect extends ContinuousRuleModifyingEffectImpl
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-            if (permanent == null) {
-                return false;
-            }
-            if (permanent.isPlaneswalker(game)) {
-                Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-                return ability.isPresent() && (ability.get() instanceof LoyaltyAbility);
-            }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
+        if (permanent.isPlaneswalker(game)) {
+            Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
+            return ability.isPresent() && (ability.get() instanceof LoyaltyAbility);
         }
         return false;
     }

@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.RollDieWithResultTableEffect;
@@ -47,10 +47,10 @@ public final class SimonWildMagicSorcerer extends CardImpl {
         effect.addTableEntry(1, 9, new DrawCardAllEffect(1));
 
         // 10-19 | You draw a card.
-        effect.addTableEntry(10, 19, new DrawCardSourceControllerEffect(1, "you"));
+        effect.addTableEntry(10, 19, new DrawCardSourceControllerEffect(1, true));
 
         // 20 | Copy that spell. You may choose new targets for the copy.
-        effect.addTableEntry(20, 20, new CopyTargetSpellEffect());
+        effect.addTableEntry(20, 20, new CopyTargetStackObjectEffect());
     }
 
     private SimonWildMagicSorcerer(final SimonWildMagicSorcerer card) {

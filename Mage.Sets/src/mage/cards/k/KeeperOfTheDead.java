@@ -99,7 +99,7 @@ class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
         super(1, 1, new FilterCreaturePermanent("nonblack creature that player controls"), false);
     }
 
-    public KeeperOfTheDeadCreatureTarget(final KeeperOfTheDeadCreatureTarget target) {
+    private KeeperOfTheDeadCreatureTarget(final KeeperOfTheDeadCreatureTarget target) {
         super(target);
     }
 
@@ -148,12 +148,12 @@ class KeeperOfTheDeadCreatureTarget extends TargetPermanent {
 
 class KeeperOfTheDeadEffect extends OneShotEffect {
 
-    public KeeperOfTheDeadEffect() {
+    KeeperOfTheDeadEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target nonblack creature contolled by target opponent who had at least two fewer creature cards in their graveyard than you did as you activated this ability";
     }
 
-    public KeeperOfTheDeadEffect(final KeeperOfTheDeadEffect effect) {
+    private KeeperOfTheDeadEffect(final KeeperOfTheDeadEffect effect) {
         super(effect);
     }
 

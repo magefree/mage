@@ -1,8 +1,9 @@
 #!/usr/bin/perl -w
 
-#author: spjspj
+#author: spjspj, JayDi85
 
 use strict;
+use Data::Dumper;
 
 my $addedCards;
 my $GIT_CMD = "git.exe";
@@ -17,9 +18,14 @@ foreach $tag (@lines)
 {
     my $orig_num = $tag;
     my $num = $tag;
-    if ($num =~ m/(\d+)\.(\d+).(\d+)v(\d+)/img)
-    {
-        $num = $1 * 2000 + $2 * 100 + $3 * 20 + $4;
+
+    if ($num =~ m/(\d+)\.(\d+).(\d+)-v(\d+)-beta(\d+)/img) {
+        # 1.4.52-V7-beta9
+        $num = $1 * 20000 + $2 * 1000 + $3 * 200 + $4 * 10 + $5;
+        $order_of_tags {$num} = $tag;
+    } elsif ($num =~ m/(\d+)\.(\d+).(\d+)v(\d+)/img) {
+        # 1.4.53V1
+        $num = $1 * 20000 + $2 * 1000 + $3 * 200 + $4 * 10;
         $order_of_tags {$num} = $tag;
     }
 }
@@ -140,6 +146,7 @@ if (exists ($new_order{$cmd}))
     }
 
     print ("Found these new card names!\n");
+	my %cards_by_sets;
     foreach $line (sort keys (%new_cards))
     {
         if ($new_cards {$line} > 0)
@@ -160,15 +167,38 @@ if (exists ($new_order{$cmd}))
                }
             }
 
-
+			#group cards by set
+			my $set = "";
+			my $card = $line;
             if (!(length $setname)){
-                print ("*** Set not found - probably card name is not exactly correct\n");
-                print ($line, "\n");
+                #print ("*** Set not found - probably card name is not exactly correct\n");
+				$set = "ZZZ - set not found";
+                #print ($line, "\n");
             } else {
-                print ($line, " in ", $setname, "\n");
+				$set = $setname;
+                #print ($line, " in ", $setname, "\n");
             }
-
-
+			
+			my $cards = $cards_by_sets{$set};
+			if(!$cards){$cards=();$cards_by_sets{$set} = \@{$cards};}
+			push @{$cards}, $card;
         }
     }
+	
+	# print in markdown format for release notes
+	print ("\n\n\n");
+	my $set;
+	#print Dumper(\%cards_by_sets);
+	my $total = 0;
+	foreach $set (sort keys (%cards_by_sets))
+    {
+		my $cards = $cards_by_sets{$set};
+		print ("* ", $set, " - added ", scalar @{$cards}, " new cards:", "\n");
+		foreach my $card (@{$cards})
+		{
+		    $total++;
+			print ("  * ", $card, "\n");
+		}
+	}
+	print ("* Total cards: ", $total);
 }

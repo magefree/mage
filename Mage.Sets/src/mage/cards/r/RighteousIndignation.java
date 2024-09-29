@@ -44,7 +44,7 @@ class RighteousIndignationTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn));
     }
 
-    public RighteousIndignationTriggeredAbility(final RighteousIndignationTriggeredAbility ability) {
+    private RighteousIndignationTriggeredAbility(final RighteousIndignationTriggeredAbility ability) {
         super(ability);
     }
 

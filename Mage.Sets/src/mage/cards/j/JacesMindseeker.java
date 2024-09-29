@@ -63,7 +63,7 @@ class JaceMindseekerEffect extends OneShotEffect {
                 "from among them without paying its mana cost.";
     }
 
-    public JaceMindseekerEffect(final JaceMindseekerEffect effect) {
+    private JaceMindseekerEffect(final JaceMindseekerEffect effect) {
         super(effect);
     }
 

@@ -6,6 +6,7 @@ import mage.client.dialog.PreferencesDialog;
 import mage.client.util.gui.ColorsChooser;
 import mage.client.util.gui.FastSearchUtil;
 import mage.client.util.sets.ConstructedFormats;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -24,6 +25,8 @@ import static mage.cards.decks.DeckFormats.XMAGE;
  * @author Simown
  */
 public class DeckGeneratorDialog {
+
+    private static final Logger logger = Logger.getLogger(DeckGeneratorDialog.class);
 
     private static JDialog dlg;
     private static String selectedColors;
@@ -92,7 +95,7 @@ public class DeckGeneratorDialog {
         c.weightx = 0.80;
         mainPanel.add(setPanel, c);
 
-        cbSets = new JComboBox<>(ConstructedFormats.getTypes());
+        cbSets = new JComboBox<>(ConstructedFormats.getTypes(false).toArray());
         cbSets.setSelectedIndex(0);
         cbSets.setAlignmentX(0.0F);
         setPanel.add(cbSets);
@@ -221,7 +224,12 @@ public class DeckGeneratorDialog {
         dlg = optionPane.createDialog("Generating Deck");
         dlg.setResizable(false);
         dlg.setVisible(true);
-        dlg.dispose();
+        if (dlg.isModal()) {
+            // on modal - it's done here
+            dlg.dispose();
+        } else {
+            // on non-modal - it's do nothing yet
+        }
     }
 
     private void enableAdvancedPanel(boolean enable) {
@@ -328,11 +336,12 @@ public class DeckGeneratorDialog {
             tmp.getParentFile().mkdirs();
             tmp.createNewFile();
             deck.setName(deckName);
-            XMAGE.getExporter().writeDeck(tmp.getAbsolutePath(), deck.getDeckCardLists());
+            XMAGE.getExporter().writeDeck(tmp.getAbsolutePath(), deck.prepareCardsOnlyDeck());
             cleanUp();
             return tmp.getAbsolutePath();
         } catch (Exception e) {
-            MageFrame.getInstance().showError("Couldn't generate deck. Try again.");
+            logger.error("Can't generate deck due " + e, e);
+            MageFrame.getInstance().showErrorDialog("CLIENT - error on random deck save", e);
         }
         return null;
     }

@@ -47,7 +47,7 @@ public final class Warbringer extends CardImpl {
 
 class WarbringerSpellsCostReductionEffect extends CostModificationEffectImpl {
 
-    public WarbringerSpellsCostReductionEffect() {
+    WarbringerSpellsCostReductionEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.staticText = "Dash costs you pay cost {2} less <i>(as long as this creature is on the battlefield)</i>";
     }

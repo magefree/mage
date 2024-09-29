@@ -13,7 +13,7 @@ public abstract class BasicManaAbility extends ActivatedManaAbilityImpl {
         super(Zone.BATTLEFIELD, effect, new TapSourceCost());
     }
 
-    public BasicManaAbility(BasicManaAbility ability) {
+    protected BasicManaAbility(final BasicManaAbility ability) {
         super(ability);
     }
 }

@@ -61,7 +61,7 @@ class HedronBladeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect, false);
     }
 
-    HedronBladeTriggeredAbility(final HedronBladeTriggeredAbility ability) {
+    private HedronBladeTriggeredAbility(final HedronBladeTriggeredAbility ability) {
         super(ability);
     }
 

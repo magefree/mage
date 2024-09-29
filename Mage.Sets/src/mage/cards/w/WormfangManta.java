@@ -32,7 +32,8 @@ public final class WormfangManta extends CardImpl {
         // When Wormfang Manta enters the battlefield, you skip your next turn.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SkipNextTurnSourceEffect()));
         // When Wormfang Manta leaves the battlefield, you take an extra turn after this one.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new AddExtraTurnControllerEffect(), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new AddExtraTurnControllerEffect()
+                .setText("you take an extra turn after this one"), false));
     }
 
     private WormfangManta(final WormfangManta card) {

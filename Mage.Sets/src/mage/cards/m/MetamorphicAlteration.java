@@ -64,7 +64,7 @@ class ChooseACreature extends OneShotEffect {
         staticText = "choose a creature";
     }
 
-    public ChooseACreature(final ChooseACreature effect) {
+    private ChooseACreature(final ChooseACreature effect) {
         super(effect);
     }
 
@@ -80,7 +80,7 @@ class ChooseACreature extends OneShotEffect {
             return false;
         }
         Target target = new TargetCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(controller.getId(), source, game)) {
             return true;
         }
@@ -100,12 +100,12 @@ class ChooseACreature extends OneShotEffect {
 
 class MetamorphicAlterationEffect extends ContinuousEffectImpl {
 
-    public MetamorphicAlterationEffect() {
+    MetamorphicAlterationEffect() {
         super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.CopyEffects_1a, Outcome.Copy);
         this.staticText = "Enchanted creature is a copy of the chosen creature.";
     }
 
-    public MetamorphicAlterationEffect(MetamorphicAlterationEffect effect) {
+    private MetamorphicAlterationEffect(final MetamorphicAlterationEffect effect) {
         super(effect);
     }
 
@@ -140,7 +140,7 @@ class MetamorphicAlterationEffect extends ContinuousEffectImpl {
         permanent.getColor(game).setColor(copied.getColor(game));
         permanent.removeAllAbilities(source.getSourceId(), game);
         for (Ability ability : copied.getAbilities()) {
-            permanent.addAbility(ability, source.getSourceId(), game);
+            permanent.addAbility(ability, source.getSourceId(), game, true);
         }
         permanent.getPower().setModifiedBaseValue(copied.getPower().getBaseValue());
         permanent.getToughness().setModifiedBaseValue(copied.getToughness().getBaseValue());

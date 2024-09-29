@@ -46,7 +46,7 @@ class SkipUpkeepStepEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players skip their upkeep steps";
     }
     
-    public SkipUpkeepStepEffect(final SkipUpkeepStepEffect effect) {
+    private SkipUpkeepStepEffect(final SkipUpkeepStepEffect effect) {
         super(effect);
     }
     

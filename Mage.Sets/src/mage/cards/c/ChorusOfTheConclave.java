@@ -55,12 +55,12 @@ public final class ChorusOfTheConclave extends CardImpl {
 
 class ChorusOfTheConclaveReplacementEffect extends ReplacementEffectImpl {
 
-    public ChorusOfTheConclaveReplacementEffect() {
+    ChorusOfTheConclaveReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "As an additional cost to cast creature spells, you may pay any amount of mana";
     }
 
-    public ChorusOfTheConclaveReplacementEffect(final ChorusOfTheConclaveReplacementEffect effect) {
+    private ChorusOfTheConclaveReplacementEffect(final ChorusOfTheConclaveReplacementEffect effect) {
         super(effect);
     }
 
@@ -115,18 +115,13 @@ class ChorusOfTheConclaveReplacementEffect2 extends ReplacementEffectImpl {
         staticText = "If you do, that creature enters the battlefield with that many additional +1/+1 counters on it";
     }
 
-    public ChorusOfTheConclaveReplacementEffect2(final ChorusOfTheConclaveReplacementEffect2 effect) {
+    private ChorusOfTheConclaveReplacementEffect2(final ChorusOfTheConclaveReplacementEffect2 effect) {
         super(effect);
     }
 
     @Override
     public ChorusOfTheConclaveReplacementEffect2 copy() {
         return new ChorusOfTheConclaveReplacementEffect2(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

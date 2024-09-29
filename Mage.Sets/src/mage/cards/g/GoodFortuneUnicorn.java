@@ -26,12 +26,10 @@ public final class GoodFortuneUnicorn extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another creature enters the battlefield under your control, put a +1/+1 counter on that creature.
+        // Whenever another creature you control enters, put a +1/+1 counter on that creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT,
-                "Whenever another creature enters the battlefield under your control, " +
-                        "put a +1/+1 counter on that creature."
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, false, SetTargetPointer.PERMANENT
         ));
     }
 

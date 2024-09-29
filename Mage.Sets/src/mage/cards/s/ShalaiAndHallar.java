@@ -81,7 +81,10 @@ class ShalaiAndHallarTriggeredAbility extends TriggeredAbilityImpl {
                 || event.getAmount() < 1) {
             return false;
         }
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(event.getTargetId());
+        }
         if (permanent == null
                 || !permanent.isControlledBy(this.getControllerId())
                 || !permanent.isCreature(game)) {

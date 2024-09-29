@@ -46,7 +46,7 @@ class CityOfSolitudeEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "Players can cast spells and activate abilities only during their own turns";
     }
 
-    CityOfSolitudeEffect(final CityOfSolitudeEffect effect) {
+    private CityOfSolitudeEffect(final CityOfSolitudeEffect effect) {
         super(effect);
     }
 

@@ -37,7 +37,7 @@ public final class Excavator extends CardImpl {
 
         // {tap}, Sacrifice a basic land: Target creature gains landwalk of each of the land types of the sacrificed land until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExcavatorEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -61,7 +61,7 @@ class ExcavatorEffect extends ContinuousEffectImpl {
         setText("Target creature gains landwalk of each of the land types of the sacrificed land until end of turn");
     }
 
-    public ExcavatorEffect(final ExcavatorEffect effect) {
+    private ExcavatorEffect(final ExcavatorEffect effect) {
         super(effect);
         this.abilities = abilities.copy();
     }
@@ -106,7 +106,7 @@ class ExcavatorEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanentOrLKIBattlefield(permanentId);
             if (permanent != null) {
                 for(Ability ability : abilities)

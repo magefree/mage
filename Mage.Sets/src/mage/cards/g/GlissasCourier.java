@@ -26,7 +26,7 @@ public final class GlissasCourier extends CardImpl {
         this.addAbility(new MountainwalkAbility());
     }
 
-    public GlissasCourier (final GlissasCourier card) {
+    private GlissasCourier(final GlissasCourier card) {
         super(card);
     }
 

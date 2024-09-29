@@ -12,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -29,7 +30,7 @@ public final class StirThePride extends CardImpl {
         // Creatures you control get +2/+2 until end of turn;
         this.getSpellAbility().addEffect(new BoostControlledEffect(2,2, Duration.EndOfTurn));
         // or until end of turn, creatures you control gain "Whenever this creature deals damage, you gain that much life."
-        Effect effect = new GainAbilityControlledEffect(new DealsDamageGainLifeSourceTriggeredAbility(), Duration.EndOfTurn);
+        Effect effect = new GainAbilityControlledEffect(new DealsDamageGainLifeSourceTriggeredAbility(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("until end of turn, creatures you control gain \"Whenever this creature deals damage, you gain that much life.\"");
         Mode mode = new Mode(effect);
         this.getSpellAbility().getModes().addMode(mode);

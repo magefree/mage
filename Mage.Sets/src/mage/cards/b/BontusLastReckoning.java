@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -10,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
 
 /**
  *
@@ -24,8 +22,7 @@ public final class BontusLastReckoning extends CardImpl {
         // Destroy all creatures. Lands you control don't untap during your next untap step.
         this.getSpellAbility().addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES));
         this.getSpellAbility().addEffect(new DontUntapInControllersUntapStepAllEffect(
-                Duration.UntilYourNextTurn, TargetController.YOU, new FilterControlledLandPermanent("Lands you control"))
-                .setText("Lands you control don't untap during your next untap step"));
+                Duration.UntilYourNextTurn, TargetController.YOU, StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS));
     }
 
     private BontusLastReckoning(final BontusLastReckoning card) {

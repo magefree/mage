@@ -52,12 +52,12 @@ public final class SoulgorgerOrgg extends CardImpl {
 
 class SoulgorgerOrggLoseLifeEffect extends OneShotEffect {
 
-    public SoulgorgerOrggLoseLifeEffect() {
+    SoulgorgerOrggLoseLifeEffect() {
         super(Outcome.LoseLife);
         staticText = "you lose all but 1 life";
     }
 
-    public SoulgorgerOrggLoseLifeEffect(final SoulgorgerOrggLoseLifeEffect effect) {
+    private SoulgorgerOrggLoseLifeEffect(final SoulgorgerOrggLoseLifeEffect effect) {
         super(effect);
     }
 
@@ -86,12 +86,12 @@ class SoulgorgerOrggLoseLifeEffect extends OneShotEffect {
 
 class SoulgorgerOrggGainLifeEffect extends OneShotEffect {
 
-    public SoulgorgerOrggGainLifeEffect() {
+    SoulgorgerOrggGainLifeEffect() {
         super(Outcome.GainLife);
         staticText = "you gain life equal to the life you lost when it entered the battlefield";
     }
 
-    public SoulgorgerOrggGainLifeEffect(final SoulgorgerOrggGainLifeEffect effect) {
+    private SoulgorgerOrggGainLifeEffect(final SoulgorgerOrggGainLifeEffect effect) {
         super(effect);
     }
 

@@ -2,8 +2,9 @@ package mage.game.command.emblems;
 
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
@@ -17,8 +18,8 @@ public final class RowanScholarOfSparksEmblem extends Emblem {
     public RowanScholarOfSparksEmblem() {
         super("Emblem Rowan");
         this.getAbilities().add(new SpellCastControllerTriggeredAbility(
-                Zone.COMMAND, new DoIfCostPaid(new CopyTargetSpellEffect(true), new GenericManaCost(2)),
-                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false, true
+                Zone.COMMAND, new DoIfCostPaid(new CopyTargetStackObjectEffect(true), new GenericManaCost(2)),
+                StaticFilters.FILTER_SPELL_AN_INSTANT_OR_SORCERY, false, SetTargetPointer.SPELL
         ));
     }
 

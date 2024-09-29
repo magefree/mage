@@ -53,12 +53,12 @@ public final class Malfegor extends CardImpl {
 
 class MalfegorEffect extends OneShotEffect {
 
-    public MalfegorEffect() {
+    MalfegorEffect() {
         super(Outcome.Neutral);
         staticText = "discard your hand. Each opponent sacrifices a creature for each card discarded this way";
     }
 
-    public MalfegorEffect(final MalfegorEffect effect) {
+    private MalfegorEffect(final MalfegorEffect effect) {
         super(effect);
     }
 

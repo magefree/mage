@@ -8,10 +8,7 @@ import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -34,9 +31,9 @@ public final class ProwlingGeistcatcher extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you sacrifice another creature, exile it. If that creature was a token, put a +1/+1 counter on Prowling Geistcatcher.
-        this.addAbility(new SacrificePermanentTriggeredAbility(
+        this.addAbility(new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,
                 new ProwlingGeistcatcherExileEffect(),
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, true
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE, TargetController.YOU, SetTargetPointer.PERMANENT, false
         ));
 
         // When Prowling Geistcatcher leaves the battlefield, return each card exiled with it to the battlefield under your control.

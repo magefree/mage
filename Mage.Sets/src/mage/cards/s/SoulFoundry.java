@@ -69,8 +69,8 @@ enum SoulFoundryAdjuster implements CostAdjuster {
             if (!sourcePermanent.getImprinted().isEmpty()) {
                 Card imprinted = game.getCard(sourcePermanent.getImprinted().get(0));
                 if (imprinted != null) {
-                    ability.getManaCostsToPay().clear();
-                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaValue()));
+                    ability.clearManaCostsToPay();
+                    ability.addManaCostsToPay(new GenericManaCost(imprinted.getManaValue()));
                 }
             }
         }

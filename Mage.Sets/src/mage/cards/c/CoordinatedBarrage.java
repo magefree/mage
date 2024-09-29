@@ -47,7 +47,7 @@ class CoordinatedBarrageEffect extends OneShotEffect {
         this.staticText = "Choose a creature type. {this} deals damage to target attacking or blocking creature equal to the number of permanents you control of the chosen type";
     }
 
-    CoordinatedBarrageEffect(final CoordinatedBarrageEffect effect) {
+    private CoordinatedBarrageEffect(final CoordinatedBarrageEffect effect) {
         super(effect);
     }
 
@@ -60,9 +60,9 @@ class CoordinatedBarrageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Choice choice = new ChoiceCreatureType(game.getObject(source));
+            Choice choice = new ChoiceCreatureType(game, source);
             if (controller.choose(Outcome.Damage, choice, game)) {
-                String chosenType = choice.getChoice();
+                String chosenType = choice.getChoiceKey();
                 FilterControlledPermanent filter = new FilterControlledPermanent();
                 filter.add(SubType.byDescription(chosenType).getPredicate());
                 int damageDealt = game.getBattlefield().count(filter, source.getControllerId(), source, game);

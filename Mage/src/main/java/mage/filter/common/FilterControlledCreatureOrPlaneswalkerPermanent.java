@@ -34,7 +34,7 @@ public class FilterControlledCreatureOrPlaneswalkerPermanent extends FilterContr
         ));
     }
 
-    public FilterControlledCreatureOrPlaneswalkerPermanent(final FilterControlledCreatureOrPlaneswalkerPermanent filter) {
+    protected FilterControlledCreatureOrPlaneswalkerPermanent(final FilterControlledCreatureOrPlaneswalkerPermanent filter) {
         super(filter);
     }
 

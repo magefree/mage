@@ -77,7 +77,7 @@ enum PalladiaMorsTheRuinerCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         PalladiaMorsTheRuinerWatcher watcher = game.getState().getWatcher(PalladiaMorsTheRuinerWatcher.class);
         return permanent != null && !watcher.getDamagers().contains(new MageObjectReference(permanent, game));
     }

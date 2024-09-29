@@ -63,7 +63,7 @@ public final class PhyrexianTotem extends CardImpl {
             toughness = new MageInt(5);
             this.addAbility(TrampleAbility.getInstance());
         }
-        public PhyrexianTotemToken(final PhyrexianTotemToken token) {
+        private PhyrexianTotemToken(final PhyrexianTotemToken token) {
             super(token);
         }
 
@@ -79,7 +79,7 @@ class PhyrexianTotemTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterControlledPermanent(), 0,""));
     }
     
-    public PhyrexianTotemTriggeredAbility(final PhyrexianTotemTriggeredAbility ability) {
+    private PhyrexianTotemTriggeredAbility(final PhyrexianTotemTriggeredAbility ability) {
         super(ability);
     }
     
@@ -99,7 +99,7 @@ class PhyrexianTotemTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
 
     @Override

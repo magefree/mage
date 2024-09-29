@@ -47,19 +47,19 @@ public final class StoryCircle extends CardImpl {
 
 class StoryCircleEffect extends PreventNextDamageFromChosenSourceToYouEffect {
 
-    public StoryCircleEffect() {
+    StoryCircleEffect() {
         super(Duration.EndOfTurn);
         staticText = "The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.";
     }
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         FilterObject filter = targetSource.getFilter();
         filter.add(new ColorPredicate((ObjectColor) game.getState().getValue(source.getSourceId() + "_color")));
-        super.init(source, game);
     }
 
-    public StoryCircleEffect(StoryCircleEffect effect) {
+    private StoryCircleEffect(final StoryCircleEffect effect) {
         super(effect);
     }
 

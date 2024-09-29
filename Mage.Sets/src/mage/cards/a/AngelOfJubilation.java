@@ -2,7 +2,6 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -57,12 +56,12 @@ public final class AngelOfJubilation extends CardImpl {
 
 class AngelOfJubilationEffect extends ContinuousEffectImpl {
 
-    public AngelOfJubilationEffect() {
+    AngelOfJubilationEffect() {
         super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
         staticText = "Players can't pay life or sacrifice creatures to cast spells";
     }
 
-    public AngelOfJubilationEffect(final AngelOfJubilationEffect effect) {
+    private AngelOfJubilationEffect(final AngelOfJubilationEffect effect) {
         super(effect);
     }
 
@@ -84,7 +83,7 @@ class AngelOfJubilationEffect extends ContinuousEffectImpl {
 
 class AngelOfJubilationSacrificeFilterEffect extends CostModificationEffectImpl {
 
-    public AngelOfJubilationSacrificeFilterEffect() {
+    AngelOfJubilationSacrificeFilterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.SET_COST);
         staticText = "or activate abilities";
     }
@@ -107,9 +106,7 @@ class AngelOfJubilationSacrificeFilterEffect extends CostModificationEffectImpl 
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-
-        return (abilityToModify.getAbilityType() == AbilityType.ACTIVATED
-                || abilityToModify instanceof SpellAbility)
+        return (abilityToModify.isActivatedAbility() || abilityToModify.getAbilityType() == AbilityType.SPELL)
                 && game.getState().getPlayersInRange(source.getControllerId(), game).contains(abilityToModify.getControllerId());
     }
 

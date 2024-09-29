@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class EgoErasure extends CardImpl {
 
     public EgoErasure(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.INSTANT}, "{2}{U}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling
@@ -44,12 +44,12 @@ public final class EgoErasure extends CardImpl {
 
 class EgoErasureEffect extends ContinuousEffectImpl {
 
-    public EgoErasureEffect() {
+    EgoErasureEffect() {
         super(Duration.EndOfTurn, Outcome.Neutral);
         staticText = "creatures target player controls get -2/-0 and lose all creature types until end of turn";
     }
 
-    public EgoErasureEffect(final EgoErasureEffect effect) {
+    private EgoErasureEffect(final EgoErasureEffect effect) {
         super(effect);
     }
 

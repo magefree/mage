@@ -39,12 +39,12 @@ public final class SummaryDismissal extends CardImpl {
 
 class SummaryDismissalEffect extends OneShotEffect {
 
-    public SummaryDismissalEffect() {
+    SummaryDismissalEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile all other spells and counter all abilities";
     }
 
-    public SummaryDismissalEffect(final SummaryDismissalEffect effect) {
+    private SummaryDismissalEffect(final SummaryDismissalEffect effect) {
         super(effect);
     }
 

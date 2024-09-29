@@ -44,7 +44,7 @@ class ReparationsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), true);
     }
 
-    public ReparationsTriggeredAbility(final ReparationsTriggeredAbility ability) {
+    private ReparationsTriggeredAbility(final ReparationsTriggeredAbility ability) {
         super(ability);
     }
 

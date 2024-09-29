@@ -2,7 +2,7 @@
 package mage.cards.m;
 
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.dynamicvalue.common.SacrificeCostConvertedMana;
+import mage.abilities.dynamicvalue.common.SacrificeCostManaValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,11 +20,11 @@ public final class MorbidCuriosity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}{B}");
 
         // As an additional cost to cast Morbid Curiosity, sacrifice an artifact or creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ARTIFACT_OR_CREATURE_SHORT_TEXT));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
 
         // Draw cards equal to the converted mana cost of the sacrificed permanent.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(
-                new SacrificeCostConvertedMana("permanent")
+                SacrificeCostManaValue.PERMANENT
         ).setText("draw cards equal to the mana value of the sacrificed permanent"));
     }
 

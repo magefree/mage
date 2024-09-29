@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ public final class SpikeDrone extends CardImpl {
         this.toughness = new MageInt(0);
 
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-            "{this} enters the battlefield with a +1/+1 counter on it"));
+            "with a +1/+1 counter on it"));
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(2));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));

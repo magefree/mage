@@ -17,7 +17,7 @@ public final class HASCONPromo2017 extends ExpansionSet {
     }
 
     private HASCONPromo2017() {
-        super("HASCON Promo 2017", "H17", ExpansionSet.buildDate(2017, 9, 8), SetType.JOKESET);
+        super("HASCON Promo 2017", "H17", ExpansionSet.buildDate(2017, 9, 8), SetType.JOKE_SET);
         this.hasBasicLands = false;
 
         cards.add(new ExpansionSet.SetCardInfo("Grimlock, Dinobot Leader", 1, Rarity.MYTHIC, mage.cards.g.GrimlockDinobotLeader.class));

@@ -13,6 +13,8 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.HintUtils;
 import mage.cards.FrameStyle;
+import mage.cards.repository.TokenInfo;
+import mage.cards.repository.TokenRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceHintType;
 import mage.choices.ChoiceImpl;
@@ -59,7 +61,7 @@ public class Dungeon extends CommandObjectImpl {
         super(name);
     }
 
-    public Dungeon(final Dungeon dungeon) {
+    protected Dungeon(final Dungeon dungeon) {
         super(dungeon);
         this.frameStyle = dungeon.frameStyle;
         this.controllerId = dungeon.controllerId;
@@ -87,6 +89,11 @@ public class Dungeon extends CommandObjectImpl {
     }
 
     public void moveToNextRoom(UUID playerId, Game game) {
+        Dungeon dungeon = game.getPlayerDungeon(playerId);
+        if (dungeon == null) {
+            return;
+        }
+
         if (currentRoom == null) {
             currentRoom = dungeonRooms.get(0);
         } else {
@@ -94,7 +101,7 @@ public class Dungeon extends CommandObjectImpl {
         }
         Player player = game.getPlayer(getControllerId());
         if (player != null) {
-            game.informPlayers(player.getLogName() + " has entered " + currentRoom.getName());
+            game.informPlayers(player.getLogName() + " has entered " + currentRoom.getName() + " (dungeon: " + dungeon.getLogName() + ")");
         }
         game.fireEvent(GameEvent.getEvent(
                 GameEvent.EventType.ROOM_ENTERED, currentRoom.getId(), null, playerId
@@ -139,23 +146,53 @@ public class Dungeon extends CommandObjectImpl {
         choice.setChoices(dungeonNames);
         player.choose(Outcome.Neutral, choice, game);
         if (choice.getChoice() != null) {
-            return createDungeon(choice.getChoice());
+            return createDungeon(choice.getChoice(), true);
         } else {
             // on disconnect
-            return createDungeon("Tomb of Annihilation");
+            return createDungeon("Tomb of Annihilation", true);
         }
     }
 
-    public static Dungeon createDungeon(String name) {
+    public static Dungeon createDungeon(String name, boolean isNameMustExists) {
+        Dungeon res;
         switch (name) {
             case "Tomb of Annihilation":
-                return new TombOfAnnihilationDungeon();
+                res = new TombOfAnnihilationDungeon();
+                break;
             case "Lost Mine of Phandelver":
-                return new LostMineOfPhandelverDungeon();
+                res = new LostMineOfPhandelverDungeon();
+                break;
             case "Dungeon of the Mad Mage":
-                return new DungeonOfTheMadMageDungeon();
+                res = new DungeonOfTheMadMageDungeon();
+                break;
             default:
-                throw new UnsupportedOperationException("A dungeon should have been chosen");
+                if (isNameMustExists) {
+                    throw new UnsupportedOperationException("A dungeon should have been chosen");
+                } else {
+                    res = null;
+                }
+        }
+
+        // dungeon don't have source, so image data can be initialized immediately
+        if (res != null) {
+            res.setSourceObjectAndInitImage();
+        }
+
+        return res;
+    }
+
+    public void setSourceObjectAndInitImage() {
+        // image
+        TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForClass(this.getClass().getName(), null);
+        if (foundInfo != null) {
+            this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setUsesVariousArt(false);
+            this.setCardNumber("");
+            this.setImageFileName(""); // use default
+            this.setImageNumber(foundInfo.getImageNumber());
+        } else {
+            // how-to fix: add dungeon to the tokens-database
+            throw new IllegalArgumentException("Wrong code usage: can't find token info for the dungeon: " + this.getClass().getName());
         }
     }
 
@@ -182,6 +219,11 @@ public class Dungeon extends CommandObjectImpl {
     public void setControllerId(UUID controllerId) {
         this.controllerId = controllerId;
         this.abilites.setControllerId(controllerId);
+    }
+
+    @Override
+    public UUID getControllerOrOwnerId() {
+        return getControllerId();
     }
 
     @Override
@@ -256,6 +298,11 @@ public class Dungeon extends CommandObjectImpl {
     }
 
     @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
     public int getManaValue() {
         return 0;
     }
@@ -319,6 +366,19 @@ public class Dungeon extends CommandObjectImpl {
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
+    }
+
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return false;
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
     }
 
     public void discardEffects() {

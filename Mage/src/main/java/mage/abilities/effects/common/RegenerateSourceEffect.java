@@ -27,21 +27,8 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl {
         staticText = "regenerate " + targetName;
     }
 
-    public RegenerateSourceEffect(final RegenerateSourceEffect effect) {
+    protected RegenerateSourceEffect(final RegenerateSourceEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        //20110204 - 701.11
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null
-                && permanent.regenerate(source, game)) {
-            this.used = true;
-            discard();
-            return true;
-        }
-        return false;
     }
 
     @Override
@@ -58,7 +45,14 @@ public class RegenerateSourceEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
+        //20110204 - 701.11
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null && permanent.regenerate(source, game)) {
+            this.used = true;
+            discard();
+            return true;
+        }
+        return false;
     }
 
     @Override

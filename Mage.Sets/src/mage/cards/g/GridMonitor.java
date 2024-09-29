@@ -50,7 +50,7 @@ class GridMonitorEffect extends ContinuousRuleModifyingEffectImpl {
         staticText = "You can't cast creature spells";
     }
 
-    public GridMonitorEffect(final GridMonitorEffect effect) {
+    private GridMonitorEffect(final GridMonitorEffect effect) {
         super(effect);
     }
 
@@ -60,13 +60,13 @@ class GridMonitorEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL && event.getPlayerId().equals(source.getControllerId())) {
+        if (event.getPlayerId().equals(source.getControllerId())) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null && object.isCreature(game)) {
                 return true;

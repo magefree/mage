@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
@@ -38,9 +38,8 @@ public final class TheReaverCleaver extends CardImpl {
                 "and has trample"
         ));
         ability.addEffect(new GainAbilityAttachedEffect(
-                new DealsCombatDamageToAPlayerTriggeredAbility(
-                        new CreateTokenEffect(new TreasureToken(), SavedDamageValue.MANY), false
-                ).setOrPlaneswalker(true),
+                new DealsCombatDamageToAPlayerOrPlaneswalkerTriggeredAbility(
+                        new CreateTokenEffect(new TreasureToken(), SavedDamageValue.MANY), false),
                 AttachmentType.EQUIPMENT,
                 Duration.WhileOnBattlefield,
                 " and \"Whenever this creature deals combat damage to a player or planeswalker, create that many Treasure tokens.\""

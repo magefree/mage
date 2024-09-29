@@ -52,7 +52,7 @@ class VenserTheSojournerSpellCastTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.COMMAND, effect, optional);
     }
 
-    public VenserTheSojournerSpellCastTriggeredAbility(final VenserTheSojournerSpellCastTriggeredAbility ability) {
+    protected VenserTheSojournerSpellCastTriggeredAbility(final VenserTheSojournerSpellCastTriggeredAbility ability) {
         super(ability);
     }
 

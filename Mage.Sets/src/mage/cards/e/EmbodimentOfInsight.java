@@ -74,7 +74,7 @@ class EmbodimentOfInsightToken extends TokenImpl {
         this.toughness = new MageInt(3);
         this.addAbility(HasteAbility.getInstance());
     }
-    public EmbodimentOfInsightToken(final EmbodimentOfInsightToken token) {
+    private EmbodimentOfInsightToken(final EmbodimentOfInsightToken token) {
         super(token);
     }
 

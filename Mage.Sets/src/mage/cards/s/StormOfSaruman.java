@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.common.CastSecondSpellTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +24,7 @@ public final class StormOfSaruman extends CardImpl {
 
         // Whenever you cast your second spell each turn, copy it, except the copy isn't legendary. You may choose new targets for the copy.
         this.addAbility(new CastSecondSpellTriggeredAbility(Zone.BATTLEFIELD,
-                new CopyTargetSpellEffect(false, true, true, 1, new RemoveTypeCopyApplier(SuperType.LEGENDARY))
+                new CopyTargetStackObjectEffect(false, true, true, 1, new RemoveTypeCopyApplier(SuperType.LEGENDARY))
                         .setText("copy it, except the copy isn't legendary. You may choose new targets for the copy."),
                 TargetController.YOU, false,
                 SetTargetPointer.SPELL));

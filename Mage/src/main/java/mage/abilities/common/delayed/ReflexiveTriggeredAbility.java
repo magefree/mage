@@ -6,6 +6,7 @@ import mage.abilities.effects.Effect;
 import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.util.CardUtil;
 
 import java.util.Locale;
 
@@ -53,12 +54,18 @@ public class ReflexiveTriggeredAbility extends DelayedTriggeredAbility {
         if (text == null) {
             return super.getRule();
         }
-        return text.substring(0, 1).toUpperCase(Locale.ENGLISH) + text.substring(1) + '.';
+        return CardUtil.getTextWithFirstCharUpperCase(text) + '.';
     }
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
         return condition == null || condition.apply(game, this);
+    }
+
+    @Override
+    public ReflexiveTriggeredAbility setTriggerPhrase(String triggerPhrase) {
+        super.setTriggerPhrase(triggerPhrase);
+        return this;
     }
 
     @Override

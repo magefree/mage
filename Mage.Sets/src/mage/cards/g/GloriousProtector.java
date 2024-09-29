@@ -3,9 +3,8 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ForetellAbility;
@@ -47,7 +46,6 @@ public final class GloriousProtector extends CardImpl {
 
         // When Glorious Protector enters the battlefield, you may exile any number of non-Angel creatures you control until Glorious Protector leaves the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GloriousProtectorEffect(),true);
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
         this.addAbility(ability);
 
         // Foretell {2}{W}
@@ -105,6 +103,7 @@ class GloriousProtectorEffect extends OneShotEffect {
                         game, source.getSourceId(), source.getSourceObjectZoneChangeCounter()
                 ), sourceObject.getIdName()
         );
+        game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
         return true;
     }
 }

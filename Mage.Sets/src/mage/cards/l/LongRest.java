@@ -1,9 +1,5 @@
 package mage.cards.l;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -18,6 +14,11 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -89,13 +90,13 @@ enum LongRestAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new LongRestTarget(ability.getManaCostsToPay().getX()));
+        ability.addTarget(new LongRestTarget(CardUtil.getSourceCostsTag(game, ability, "X", 0)));
     }
 }
 
 class LongRestEffect extends OneShotEffect {
 
-    public LongRestEffect() {
+    LongRestEffect() {
         super(Outcome.Benefit);
         this.staticText = "Return X target cards with different mana values from your graveyard to your hand. "
                 + "If eight or more cards were returned to your hand this way, your life total becomes equal to your starting life total";
@@ -115,7 +116,7 @@ class LongRestEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Set<Card> cardsToHand = new HashSet<>();
-            for (UUID targetId : targetPointer.getTargets(game, source)) {
+            for (UUID targetId : getTargetPointer().getTargets(game, source)) {
                 Card card = game.getCard(targetId);
                 if (card != null && game.getState().getZone(targetId) == Zone.GRAVEYARD) {
                     cardsToHand.add(card);

@@ -14,7 +14,7 @@ public class AddChosenSubtypeEffect extends ContinuousEffectImpl {
         staticText = "{this} is the chosen type in addition to its other types";
     }
 
-    public AddChosenSubtypeEffect(final AddChosenSubtypeEffect effect) {
+    protected AddChosenSubtypeEffect(final AddChosenSubtypeEffect effect) {
         super(effect);
     }
 

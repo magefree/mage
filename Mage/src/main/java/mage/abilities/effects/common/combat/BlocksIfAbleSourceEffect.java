@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class BlocksIfAbleSourceEffect extends RequirementEffect {
@@ -18,7 +17,7 @@ public class BlocksIfAbleSourceEffect extends RequirementEffect {
         staticText = "{this} blocks each combat if able.";
     }
 
-    public BlocksIfAbleSourceEffect(final BlocksIfAbleSourceEffect effect) {
+    protected BlocksIfAbleSourceEffect(final BlocksIfAbleSourceEffect effect) {
         super(effect);
     }
 

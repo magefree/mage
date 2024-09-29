@@ -19,12 +19,12 @@ public final class WolfToken extends TokenImpl {
         toughness = new MageInt(2);
     }
 
-    public WolfToken(final WolfToken token) {
+    private WolfToken(final WolfToken token) {
         super(token);
     }
 
     @Override
-    public Token copy() {
+    public WolfToken copy() {
         return new WolfToken(this);
     }
 }

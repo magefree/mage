@@ -68,10 +68,10 @@ class DiregrafColossusEffect extends OneShotEffect {
 
     public DiregrafColossusEffect() {
         super(Outcome.BoostCreature);
-        staticText = "{this} enters the battlefield with a +1/+1 counter on it for each Zombie card in your graveyard";
+        staticText = "{this} enters with a +1/+1 counter on it for each Zombie card in your graveyard";
     }
 
-    public DiregrafColossusEffect(final DiregrafColossusEffect effect) {
+    private DiregrafColossusEffect(final DiregrafColossusEffect effect) {
         super(effect);
     }
 

@@ -11,7 +11,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author noxx
  */
 public class ImprintTargetEffect extends OneShotEffect {
@@ -20,7 +19,7 @@ public class ImprintTargetEffect extends OneShotEffect {
         super(Outcome.Neutral);
     }
 
-    public ImprintTargetEffect(final ImprintTargetEffect effect) {
+    protected ImprintTargetEffect(final ImprintTargetEffect effect) {
         super(effect);
     }
 
@@ -33,11 +32,11 @@ public class ImprintTargetEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null) {
-            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+            Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
                 sourcePermanent.imprint(permanent.getId(), game);
             } else {
-                Card card = game.getCard(targetPointer.getFirst(game, source));
+                Card card = game.getCard(getTargetPointer().getFirst(game, source));
                 if (card != null) {
                     sourcePermanent.imprint(card.getId(), game);
                 }

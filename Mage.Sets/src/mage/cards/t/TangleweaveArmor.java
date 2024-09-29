@@ -1,18 +1,17 @@
 package mage.cards.t;
 
-import mage.MageObject;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.CommanderGreatestManaValue;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.LivingWeaponAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -30,7 +29,7 @@ public final class TangleweaveArmor extends CardImpl {
 
         // Equipped creature gets +X/+X, where X is the greatest mana value among your commanders
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new BoostEquippedEffect(TangleweaveArmorDynamicValue.instance, TangleweaveArmorDynamicValue.instance)
+                Zone.BATTLEFIELD, new BoostEquippedEffect(CommanderGreatestManaValue.instance, CommanderGreatestManaValue.instance)
         ));
 
         // Equip {4}
@@ -44,34 +43,5 @@ public final class TangleweaveArmor extends CardImpl {
     @Override
     public TangleweaveArmor copy() {
         return new TangleweaveArmor(this);
-    }
-}
-
-enum TangleweaveArmorDynamicValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game.getCommanderCardsFromAnyZones(
-                game.getPlayer(sourceAbility.getControllerId()), CommanderCardType.ANY, Zone.ALL)
-                .stream()
-                .mapToInt(MageObject::getManaValue)
-                .max()
-                .orElse(0);
-    }
-
-    @Override
-    public TangleweaveArmorDynamicValue copy() {
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "the greatest mana value among your commanders";
     }
 }

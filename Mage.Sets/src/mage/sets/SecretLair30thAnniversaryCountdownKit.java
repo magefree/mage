@@ -19,13 +19,13 @@ public class SecretLair30thAnniversaryCountdownKit extends ExpansionSet {
         super("Secret Lair 30th Anniversary Countdown Kit", "SLC", ExpansionSet.buildDate(2022, 11, 1), SetType.PROMOTIONAL);
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Arclight Phoenix", 2018, Rarity.RARE, mage.cards.a.ArclightPhoenix.class));
+        cards.add(new SetCardInfo("Arclight Phoenix", 2018, Rarity.MYTHIC, mage.cards.a.ArclightPhoenix.class));
         cards.add(new SetCardInfo("Birthing Pod", 2011, Rarity.RARE, mage.cards.b.BirthingPod.class));
         cards.add(new SetCardInfo("Bloodbraid Elf", 2009, Rarity.RARE, mage.cards.b.BloodbraidElf.class));
-        cards.add(new SetCardInfo("Bogardan Hellkite", 2006, Rarity.RARE, mage.cards.b.BogardanHellkite.class));
+        cards.add(new SetCardInfo("Bogardan Hellkite", 2006, Rarity.MYTHIC, mage.cards.b.BogardanHellkite.class));
         cards.add(new SetCardInfo("Chrome Mox", 2003, Rarity.MYTHIC, mage.cards.c.ChromeMox.class));
         cards.add(new SetCardInfo("Deathrite Shaman", 2012, Rarity.RARE, mage.cards.d.DeathriteShaman.class));
-        cards.add(new SetCardInfo("Dragonlord Ojutai", 2015, Rarity.RARE, mage.cards.d.DragonlordOjutai.class));
+        cards.add(new SetCardInfo("Dragonlord Ojutai", 2015, Rarity.MYTHIC, mage.cards.d.DragonlordOjutai.class));
         cards.add(new SetCardInfo("Elite Spellbinder", 2021, Rarity.RARE, mage.cards.e.EliteSpellbinder.class));
         cards.add(new SetCardInfo("Elspeth, Sun's Champion", 2013, Rarity.MYTHIC, mage.cards.e.ElspethSunsChampion.class));
         cards.add(new SetCardInfo("Emry, Lurker of the Loch", 2019, Rarity.RARE, mage.cards.e.EmryLurkerOfTheLoch.class));

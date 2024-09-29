@@ -30,7 +30,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class ONaginata extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature you control with 3 or more power ");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature with power 3 or greater");
 
     static {
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 2));

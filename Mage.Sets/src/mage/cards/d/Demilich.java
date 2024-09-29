@@ -1,7 +1,6 @@
 package mage.cards.d;
 
-import java.util.UUID;
-
+import mage.MageIdentifier;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -17,9 +16,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTargetCardCopyAndCastEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
 import mage.abilities.hint.ValueHint;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -27,8 +26,9 @@ import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.watchers.common.SpellsCastWatcher;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class Demilich extends CardImpl {
@@ -44,7 +44,7 @@ public final class Demilich extends CardImpl {
         // This spell costs {U} less to cast for each instant and sorcery you've cast this turn.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionForEachSourceEffect(
                 new ManaCostsImpl<>("{U}"), DemilichValue.instance
-        )).addHint(new ValueHint("Instants and sorceries you've cast this turn", DemilichValue.instance)), new SpellsCastWatcher());
+        )).addHint(new ValueHint("Instants and sorceries you've cast this turn", DemilichValue.instance)));
 
         // Whenever Demilich attacks, exile up to one target instant or sorcery card from your graveyard. Copy it. You may cast the copy.
         Ability ability = new AttacksTriggeredAbility(new ExileTargetCardCopyAndCastEffect(false).setText(
@@ -53,7 +53,7 @@ public final class Demilich extends CardImpl {
         this.addAbility(ability);
 
         // You may cast Demilich from your graveyard by exiling four instants and/or sorcery cards from your graveyard in addition to paying its other costs.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new DemilichPlayEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new DemilichPlayEffect()).setIdentifier(MageIdentifier.DemilichAlternateCast));
     }
 
     private Demilich(final Demilich card) {
@@ -96,8 +96,8 @@ enum DemilichValue implements DynamicValue {
 
 class DemilichPlayEffect extends AsThoughEffectImpl {
 
-    public DemilichPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+    DemilichPlayEffect() {
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         this.staticText = "You may cast {this} from your graveyard by exiling four instant and/or sorcery cards from your graveyard in addition to paying its other costs";
     }
 
@@ -123,7 +123,7 @@ class DemilichPlayEffect extends AsThoughEffectImpl {
             if (controller != null) {
                 Costs<Cost> costs = new CostsImpl<>();
                 costs.add(new ExileFromGraveCost(new TargetCardInYourGraveyard(4, StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY_FROM_YOUR_GRAVEYARD)));
-                controller.setCastSourceIdWithAlternateMana(objectId, new ManaCostsImpl<>("{U}{U}{U}{U}"), costs);
+                controller.setCastSourceIdWithAlternateMana(objectId, new ManaCostsImpl<>("{U}{U}{U}{U}"), costs, MageIdentifier.DemilichAlternateCast);
                 return true;
             }
         }

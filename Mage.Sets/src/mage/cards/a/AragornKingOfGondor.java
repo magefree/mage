@@ -10,6 +10,7 @@ import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.BecomesMonarchSourceEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.abilities.effects.common.combat.CantBlockTargetEffect;
+import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
@@ -19,6 +20,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -43,10 +45,11 @@ public final class AragornKingOfGondor extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // When Aragorn, King of Gondor enters the battlefield, you become the monarch.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // Whenever Aragorn attacks, up to one target creature can't block this turn. If you're the monarch, creatures can't block this turn.
         Ability ability = new AttacksTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
+        ability.addTarget(new TargetCreaturePermanent(0, 1));
         ability.addEffect(new ConditionalOneShotEffect(new AddContinuousEffectToGame(
                 new CantBlockAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES, Duration.EndOfTurn)
         ), MonarchIsSourceControllerCondition.instance, "If you're the monarch, creatures can't block this turn"));

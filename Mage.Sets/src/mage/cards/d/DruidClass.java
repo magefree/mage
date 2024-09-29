@@ -36,7 +36,7 @@ public final class DruidClass extends CardImpl {
         // (Gain the next level as a sorcery to add its ability.)
         this.addAbility(new ClassReminderAbility());
 
-        // Whenever a land enters the battlefield under your control, you gain 1 life.
+        // Whenever a land you control enters, you gain 1 life.
         this.addAbility(new LandfallAbility(new GainLifeEffect(1)));
 
         // {2}{G}: Level 2
@@ -78,7 +78,7 @@ class DruidClassToken extends TokenImpl {
 
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessSourceEffect(
-                LandsYouControlCount.instance, LandsYouControlCount.instance, Duration.EndOfGame, SubLayer.SetPT_7b
+                LandsYouControlCount.instance, Duration.EndOfGame
         ).setText("this creature's power and toughness are each equal to the number of lands you control")));
     }
 

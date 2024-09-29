@@ -1,11 +1,9 @@
 package mage.cards.q;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -14,15 +12,15 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.ComparisonType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -46,7 +44,7 @@ public final class QuillmaneBaku extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.KI));
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.setTargetAdjuster(QuillmaneBakuAdjuster.instance);
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
         this.addAbility(ability);
     }
 
@@ -57,23 +55,5 @@ public final class QuillmaneBaku extends CardImpl {
     @Override
     public QuillmaneBaku copy() {
         return new QuillmaneBaku(this);
-    }
-}
-
-enum QuillmaneBakuAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = 0;
-        for (Cost cost : ability.getCosts()) {
-            if (cost instanceof RemoveVariableCountersSourceCost) {
-                xValue = ((RemoveVariableCountersSourceCost) cost).getAmount();
-            }
-        }
-        ability.getTargets().clear();
-        FilterCreaturePermanent newFilter = new FilterCreaturePermanent("creature with mana value " + xValue + " or less");
-        newFilter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        ability.addTarget(new TargetCreaturePermanent(newFilter));
     }
 }

@@ -54,7 +54,8 @@ public final class KeldonBattlewagon extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // When Keldon Battlewagon attacks, sacrifice it at end of combat.
-        this.addAbility(new AttacksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())), false));
+        this.addAbility(new AttacksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect()))
+                .setText("sacrifice it at end of combat"), false).setTriggerPhrase("When {this} attacks, "));
 
         // Tap an untapped creature you control: Keldon Battlewagon gets +X/+0 until end of turn, where X is the power of the creature tapped this way.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new KeldonBattlewagonBoostEffect(), new KeldonBattlewagonCost(new TargetControlledPermanent(filter))));
@@ -80,7 +81,7 @@ class KeldonBattlewagonCost extends CostImpl {
         this.text = "Tap an untapped creature you control";
     }
 
-    public KeldonBattlewagonCost(final KeldonBattlewagonCost cost) {
+    private KeldonBattlewagonCost(final KeldonBattlewagonCost cost) {
         super(cost);
         this.target = cost.target.copy();
     }
@@ -115,20 +116,20 @@ class KeldonBattlewagonCost extends CostImpl {
 
 class KeldonBattlewagonBoostEffect extends OneShotEffect {
 
-    public KeldonBattlewagonBoostEffect() {
+    KeldonBattlewagonBoostEffect() {
         super(Outcome.BoostCreature);
         staticText = "{this} gets +X/+0 until end of turn, where X is the power of the creature tapped this way";
     }
 
-    public KeldonBattlewagonBoostEffect(KeldonBattlewagonBoostEffect effect) {
+    private KeldonBattlewagonBoostEffect(final KeldonBattlewagonBoostEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent KeldonBattlewagon = game.getPermanent(source.getSourceId());
+        Permanent keldonBattlewagon = game.getPermanent(source.getSourceId());
         Permanent tappedCreature = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if (tappedCreature != null && KeldonBattlewagon != null) {
+        if (tappedCreature != null && keldonBattlewagon != null) {
             int amount = tappedCreature.getPower().getValue();
             game.addEffect(new BoostSourceEffect(amount, 0, Duration.EndOfTurn), source);
         }

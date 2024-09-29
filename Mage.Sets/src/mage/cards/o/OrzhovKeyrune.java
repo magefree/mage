@@ -55,7 +55,7 @@ public final class OrzhovKeyrune extends CardImpl {
             this.addAbility(LifelinkAbility.getInstance());
         }
 
-        public OrzhovKeyruneToken(final OrzhovKeyruneToken token) {
+        private OrzhovKeyruneToken(final OrzhovKeyruneToken token) {
             super(token);
         }
 

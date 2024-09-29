@@ -45,7 +45,7 @@ public final class EmberethSkyblazer extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
                 new BoostControlledEffect(
                         OpponentsCount.instance, StaticValue.get(0), Duration.EndOfTurn,
-                        StaticFilters.FILTER_PERMANENT_CREATURE, false, true
+                        StaticFilters.FILTER_PERMANENT_CREATURE, false
                 ).setText("creatures you control get +X/+0 until end of turn, where X is the number of opponents you have"),
                 new ManaCostsImpl<>("{2}{R}")
         ), false));

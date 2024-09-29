@@ -16,7 +16,7 @@ public class CanBlockAsThoughtItHadShadowEffect extends AsThoughEffectImpl {
         staticText = "{this} can block creatures with shadow as though {this} had shadow";
     }
 
-    public CanBlockAsThoughtItHadShadowEffect(final CanBlockAsThoughtItHadShadowEffect effect) {
+    protected CanBlockAsThoughtItHadShadowEffect(final CanBlockAsThoughtItHadShadowEffect effect) {
         super(effect);
     }
 

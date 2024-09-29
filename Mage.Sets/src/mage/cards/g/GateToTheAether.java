@@ -46,7 +46,7 @@ class GateToTheAetherEffect extends OneShotEffect {
         this.staticText = "that player reveals the top card of their library. If it's an artifact, creature, enchantment, or land card, the player may put it onto the battlefield";
     }
 
-    GateToTheAetherEffect(final GateToTheAetherEffect effect) {
+    private GateToTheAetherEffect(final GateToTheAetherEffect effect) {
         super(effect);
     }
 

@@ -9,7 +9,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class HighestCMCOfPermanentValue implements DynamicValue {
@@ -23,7 +22,7 @@ public class HighestCMCOfPermanentValue implements DynamicValue {
         this.onlyIfCanBeSacrificed = onlyIfCanBeSacrificed;
     }
 
-    public HighestCMCOfPermanentValue(final HighestCMCOfPermanentValue dynamicValue) {
+    protected HighestCMCOfPermanentValue(final HighestCMCOfPermanentValue dynamicValue) {
         this.filter = dynamicValue.filter;
         this.onlyIfCanBeSacrificed = dynamicValue.onlyIfCanBeSacrificed;
     }

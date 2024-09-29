@@ -40,12 +40,12 @@ public final class RiseOfTheDarkRealms extends CardImpl {
 
 class RiseOfTheDarkRealmsEffect extends OneShotEffect {
 
-    public RiseOfTheDarkRealmsEffect() {
+    RiseOfTheDarkRealmsEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Put all creature cards from all graveyards onto the battlefield under your control";
     }
 
-    public RiseOfTheDarkRealmsEffect(final RiseOfTheDarkRealmsEffect effect) {
+    private RiseOfTheDarkRealmsEffect(final RiseOfTheDarkRealmsEffect effect) {
         super(effect);
     }
 

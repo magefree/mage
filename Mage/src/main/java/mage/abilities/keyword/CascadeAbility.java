@@ -50,12 +50,11 @@ public class CascadeAbility extends TriggeredAbilityImpl {
 
     // can't use singletone due rules:
     // 702.84c If a spell has multiple instances of cascade, each triggers separately.
-    private static final String REMINDERTEXT = " <i>(When you cast this spell, "
-            + "exile cards from the top of your library until you exile a "
-            + "nonland card whose mana value is less than this spell's mana value. "
-            + "You may cast that spell without paying its mana cost "
-            + "if its mana value is less than this spell's mana value. "
-            + "Then put all cards exiled this way that weren't cast on the bottom of your library in a random order.)</i>";
+
+    private static final String rule = "cascade";
+    private static final String ruleReminder = "cascade <i>(When you cast this spell, exile cards from the top of your library " +
+            "until you exile a nonland card that costs less. You may cast it without paying its mana cost. " +
+            "Put the exiled cards on the bottom of your library in a random order.)</i>";
     private final boolean withReminder;
 
     public CascadeAbility() {
@@ -86,11 +85,7 @@ public class CascadeAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("cascade");
-        if (withReminder) {
-            sb.append(REMINDERTEXT);
-        }
-        return sb.toString();
+        return withReminder ? ruleReminder : rule;
     }
 
     @Override
@@ -129,7 +124,7 @@ class CascadeEffect extends OneShotEffect {
             cardsToExile.add(card);
             // the card move is sequential, not all at once.
             controller.moveCards(card, Zone.EXILED, source, game);
-            game.getState().processAction(game);  // Laelia, the Blade Reforged
+            game.processAction();  // Laelia, the Blade Reforged
             if (!card.isLand(game)
                     && card.getManaValue() < sourceCost) {
                 cardToCast = card;
@@ -142,7 +137,7 @@ class CascadeEffect extends OneShotEffect {
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.CASCADE_LAND, source.getSourceId(), source, source.getControllerId(), 0);
         game.replaceEvent(event);
         if (event.getAmount() > 0) {
-            TargetCardInExile target = new TargetCardInExile(0, event.getAmount(), StaticFilters.FILTER_CARD_LAND, null, true);
+            TargetCardInExile target = new TargetCardInExile(0, event.getAmount(), StaticFilters.FILTER_CARD_LAND);
             target.withChooseHint("land to put onto battlefield tapped");
             controller.choose(Outcome.PutCardInPlay, cardsToExile, target, source, game);
             controller.moveCards(

@@ -40,12 +40,12 @@ public final class InfiniteObliteration extends CardImpl {
 
 class InfiniteObliterationEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
-    public InfiniteObliterationEffect() {
+    InfiniteObliterationEffect() {
         super(true, "target opponent's", "any number of cards with that name");
         this.staticText = "Choose a creature card name. " + CardUtil.getTextWithFirstCharUpperCase(this.staticText);
     }
 
-    public InfiniteObliterationEffect(final InfiniteObliterationEffect effect) {
+    private InfiniteObliterationEffect(final InfiniteObliterationEffect effect) {
         super(effect);
     }
 

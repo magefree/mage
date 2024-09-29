@@ -4,7 +4,7 @@ import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -46,7 +46,7 @@ public final class KasminaEnigmaSage extends CardImpl {
 
         // −X: Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it.
         this.addAbility(new LoyaltyAbility(FractalToken.getEffect(
-                GetXLoyaltyValue.instance, "Put X +1/+1 counters on it"
+                GetXValue.instance, "Put X +1/+1 counters on it"
         )));
 
         // −8: Search your library for an instant or sorcery card that shares a color with this planeswalker, exile that card, then shuffle. You may cast that card without paying its mana cost.
@@ -85,7 +85,7 @@ class KasminaEnigmaSageGainAbilitiesEffect extends ContinuousEffectImpl {
                 .stream()
                 .filter(LoyaltyAbility.class::isInstance)
                 .collect(Collectors.toList());
-        for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_PLANESWALKER,
                 source.getControllerId(), source, game
         )) {
@@ -93,7 +93,7 @@ class KasminaEnigmaSageGainAbilitiesEffect extends ContinuousEffectImpl {
                 continue;
             }
             for (Ability ability : loyaltyAbilities) {
-                permanent.addAbility(ability, source.getSourceId(), game);
+                permanent.addAbility(ability, source.getSourceId(), game, true);
             }
         }
         return true;

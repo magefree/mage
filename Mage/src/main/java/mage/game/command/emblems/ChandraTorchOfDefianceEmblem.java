@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.command.Emblem;
@@ -19,7 +20,7 @@ public final class ChandraTorchOfDefianceEmblem extends Emblem {
         super("Emblem Chandra");
         Effect effect = new DamageTargetEffect(5);
         effect.setText("this emblem deals 5 damage to any target");
-        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, StaticFilters.FILTER_SPELL_A, false, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.NONE);
         ability.addTarget(new TargetAnyTarget());
         getAbilities().add(ability);
     }

@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author North
  */
-public class MockCard extends CardImpl {
+public class MockCard extends CardImpl implements MockableCard {
 
     static public String ADVENTURE_NAME_SEPARATOR = " // ";
     static public String MODAL_DOUBLE_FACES_NAME_SEPARATOR = " // ";
@@ -41,15 +41,16 @@ public class MockCard extends CardImpl {
     public MockCard(CardInfo card) {
         super(null, card.getName());
         this.setExpansionSetCode(card.getSetCode());
+        this.setUsesVariousArt(card.usesVariousArt());
         this.setCardNumber(card.getCardNumber());
+        this.setImageFileName(""); // use default
+        this.setImageNumber(0);
         this.power = mageIntFromString(card.getPower());
         this.toughness = mageIntFromString(card.getToughness());
         this.rarity = card.getRarity();
         this.cardType = card.getTypes();
         this.subtype = card.getSubTypes();
         this.supertype = card.getSupertypes();
-
-        this.usesVariousArt = card.usesVariousArt();
 
         //this.manaCost = new ManaCostsImpl<>(join(card.getManaCosts(CardInfo.ManaCostSide.ALL)));
         this.manaCostLeftStr = card.getManaCosts(CardInfo.ManaCostSide.LEFT);
@@ -75,7 +76,7 @@ public class MockCard extends CardImpl {
         }
 
         if (card.isModalDoubleFacedCard()) {
-            ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card.getCard();
+            ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card.createCard();
             CardInfo mdfSecondSide = new CardInfo(mdfCard.getRightHalfCard());
             this.secondSideCard = new MockCard(mdfSecondSide);
             this.isModalDoubleFacedCard = true;
@@ -88,9 +89,11 @@ public class MockCard extends CardImpl {
         for (String ruleText : card.getRules()) {
             this.addAbility(textAbilityFromString(ruleText));
         }
+
+        this.extraDeckCard = card.isExtraDeckCard();
     }
 
-    public MockCard(final MockCard card) {
+    protected MockCard(final MockCard card) {
         super(card);
 
         this.startingLoyalty = card.startingLoyalty;
@@ -155,7 +158,7 @@ public class MockCard extends CardImpl {
         if (adventureSpellName != null) {
             return getName() + ADVENTURE_NAME_SEPARATOR + adventureSpellName;
         } else if (isModalDoubleFacedCard) {
-            return getName() + MODAL_DOUBLE_FACES_NAME_SEPARATOR + this.secondSideCard.getName();
+            return getName() + MODAL_DOUBLE_FACES_NAME_SEPARATOR + this.getSecondCardFace().getName();
         } else {
             return getName();
         }

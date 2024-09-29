@@ -20,7 +20,7 @@ public final class RoyalGuardToken extends TokenImpl {
         subtype.add(SubType.SOLDIER);
     }
 
-    public RoyalGuardToken(final RoyalGuardToken token) {
+    private RoyalGuardToken(final RoyalGuardToken token) {
         super(token);
     }
 

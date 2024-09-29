@@ -36,7 +36,7 @@ public final class FloweringOfTheWhiteTree extends CardImpl {
         // Legendary creatures you control get +2/+1 and have ward {1}.
         Ability ability = new SimpleStaticAbility(new BoostControlledEffect(
                 2, 1, Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_CREATURE_LEGENDARY
+                StaticFilters.FILTER_CREATURES_LEGENDARY
         ));
         ability.addEffect(new GainAbilityControlledEffect(
                 new WardAbility(new GenericManaCost(1)), Duration.WhileOnBattlefield,

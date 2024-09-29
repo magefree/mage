@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -53,13 +52,8 @@ class NevermoreEffect2 extends ContinuousRuleModifyingEffectImpl {
         staticText = "Spells with the chosen name can't be cast";
     }
 
-    public NevermoreEffect2(final NevermoreEffect2 effect) {
+    private NevermoreEffect2(final NevermoreEffect2 effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -68,13 +62,15 @@ class NevermoreEffect2 extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
-            MageObject object = game.getObject(event.getSourceId());
-            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-            return CardUtil.haveSameNames(object, cardName, game);
-        }
-        return false;
+        MageObject object = game.getObject(event.getSourceId());
+        String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+        return CardUtil.haveSameNames(object, cardName, game);
     }
 
 }

@@ -31,8 +31,13 @@ public final class HulkingMetamorph extends CardImpl {
             blueprint.addCardType(CardType.CREATURE);
             Permanent permanent = game.getPermanentEntering(copyToObjectId);
             if (permanent != null) {
-                blueprint.getPower().setModifiedBaseValue(permanent.getPower().getValue());
-                blueprint.getToughness().setModifiedBaseValue(permanent.getToughness().getValue());
+                int pt = permanent.isPrototyped()? 3 : 7;
+                blueprint.getPower().setModifiedBaseValue(pt);
+                blueprint.getToughness().setModifiedBaseValue(pt);
+                //Would prefer the following code, but it doesn't seem to work correctly with Prototype as-is
+                //Either need to change Prototype or fix the Blood Moon problem
+                //blueprint.getPower().setModifiedBaseValue(permanent.getPower().getValue());
+                //blueprint.getToughness().setModifiedBaseValue(permanent.getToughness().getValue());
             }
             return true;
         }

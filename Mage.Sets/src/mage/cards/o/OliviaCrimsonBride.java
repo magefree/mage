@@ -114,7 +114,7 @@ class OliviaCrimsonBrideAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new ExileSourceEffect());
     }
 
-    public OliviaCrimsonBrideAbility(final OliviaCrimsonBrideAbility ability) {
+    private OliviaCrimsonBrideAbility(final OliviaCrimsonBrideAbility ability) {
         super(ability);
     }
 

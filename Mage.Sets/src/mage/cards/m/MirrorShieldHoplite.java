@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
@@ -52,7 +53,7 @@ class MirrorShieldHopliteTriggeredAbility extends TriggeredAbilityImpl {
     MirrorShieldHopliteTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CopyStackObjectEffect());
         this.setTriggerPhrase("Whenever a creature you control becomes the target of a backup ability, ");
-        this.setTriggersOnce(true);
+        this.setTriggersLimitEachTurn(1);
     }
 
     private MirrorShieldHopliteTriggeredAbility(final MirrorShieldHopliteTriggeredAbility ability) {
@@ -79,7 +80,7 @@ class MirrorShieldHopliteTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null || !permanent.isCreature(game) || !permanent.isControlledBy(this.getControllerId())) {
             return false;
         }
-        this.getEffects().setValue("stackObject", sourceObject);
+        getEffects().setTargetPointer(new FixedTarget(event.getSourceId(), game));
         return true;
     }
 }

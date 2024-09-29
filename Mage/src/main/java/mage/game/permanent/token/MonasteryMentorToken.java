@@ -20,7 +20,7 @@ public final class MonasteryMentorToken extends TokenImpl {
         this.addAbility(new ProwessAbility());
     }
 
-    public MonasteryMentorToken(final MonasteryMentorToken token) {
+    private MonasteryMentorToken(final MonasteryMentorToken token) {
         super(token);
     }
 

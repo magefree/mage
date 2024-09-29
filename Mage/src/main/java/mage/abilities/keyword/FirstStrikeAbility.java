@@ -2,7 +2,7 @@ package mage.abilities.keyword;
 
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
-import mage.abilities.icon.abilities.FirstStrikeAbilityIcon;
+import mage.abilities.icon.CardIconImpl;
 import mage.constants.Zone;
 
 import java.io.ObjectStreamException;
@@ -16,7 +16,7 @@ public class FirstStrikeAbility extends StaticAbility implements MageSingleton {
 
     static {
         instance = new FirstStrikeAbility();
-        instance.addIcon(FirstStrikeAbilityIcon.instance);
+        instance.addIcon(CardIconImpl.ABILITY_FIRST_STRIKE);
     }
 
     private Object readResolve() throws ObjectStreamException {

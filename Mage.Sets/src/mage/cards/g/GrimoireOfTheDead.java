@@ -65,13 +65,13 @@ public final class GrimoireOfTheDead extends CardImpl {
 
 class GrimoireOfTheDeadEffect extends OneShotEffect {
 
-    public GrimoireOfTheDeadEffect() {
+    GrimoireOfTheDeadEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put all creature cards in all graveyards onto the battlefield under your control. " +
+        staticText = "Put all creature cards from all graveyards onto the battlefield under your control. " +
                 "They're black Zombies in addition to their other colors and types";
     }
 
-    public GrimoireOfTheDeadEffect(final GrimoireOfTheDeadEffect effect) {
+    private GrimoireOfTheDeadEffect(final GrimoireOfTheDeadEffect effect) {
         super(effect);
     }
 
@@ -107,7 +107,7 @@ class GrimoireOfTheDeadEffect2 extends ContinuousEffectImpl {
         super(Duration.Custom, Outcome.Neutral);
     }
 
-    public GrimoireOfTheDeadEffect2(final GrimoireOfTheDeadEffect2 effect) {
+    private GrimoireOfTheDeadEffect2(final GrimoireOfTheDeadEffect2 effect) {
         super(effect);
     }
 

@@ -3,8 +3,7 @@ package mage.cards.i;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
+import mage.abilities.effects.common.ExileThenReturnTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -37,8 +36,7 @@ public final class IcewindStalwart extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Protection Fighting Style — When Icewind Stalwart enters the battlefield, exile up to one target non-Warrior creature you control, then return it to the battlefield under its owner's control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect());
-        ability.addEffect(new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false, "it").concatBy(", then"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileThenReturnTargetEffect(false, false));
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability.withFlavorWord("Protection Fighting Style"));
     }

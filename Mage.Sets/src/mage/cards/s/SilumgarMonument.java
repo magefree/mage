@@ -56,7 +56,7 @@ public final class SilumgarMonument extends CardImpl {
             toughness = new MageInt(4);
             this.addAbility(FlyingAbility.getInstance());
         }
-        public OjutaiMonumentToken(final OjutaiMonumentToken token) {
+        private OjutaiMonumentToken(final OjutaiMonumentToken token) {
             super(token);
         }
     

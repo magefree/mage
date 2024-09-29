@@ -36,7 +36,7 @@ public class FilterPermanentOrPlayer extends FilterImpl<MageItem> implements Fil
         this.playerFilter = playerFilter;
     }
 
-    public FilterPermanentOrPlayer(final FilterPermanentOrPlayer filter) {
+    protected FilterPermanentOrPlayer(final FilterPermanentOrPlayer filter) {
         super(filter);
         this.permanentFilter = filter.permanentFilter.copy();
         this.playerFilter = filter.playerFilter.copy();

@@ -85,11 +85,6 @@ class WyllBladeOfFrontiersEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public WyllBladeOfFrontiersEffect copy() {
         return new WyllBladeOfFrontiersEffect(this);
     }

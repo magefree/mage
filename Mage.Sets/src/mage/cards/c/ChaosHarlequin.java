@@ -42,13 +42,13 @@ public final class ChaosHarlequin extends CardImpl {
 
 class ChaosHarlequinEffect extends OneShotEffect {
 
-    public ChaosHarlequinEffect() {
+    ChaosHarlequinEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exile the top card of your library. If that card is a land card, " +
                 "{this} gets -4/-0 until end of turn. Otherwise, {this} gets +2/+0 until end of turn";
     }
 
-    public ChaosHarlequinEffect(final ChaosHarlequinEffect effect) {
+    private ChaosHarlequinEffect(final ChaosHarlequinEffect effect) {
         super(effect);
     }
 

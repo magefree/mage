@@ -57,7 +57,7 @@ class MindspliceApparatusEffect extends CostModificationEffectImpl {
         staticText = "instant and sorcery spells you cast cost {1} less to cast for each oil counter on {this}";
     }
 
-    MindspliceApparatusEffect(MindspliceApparatusEffect effect) {
+    private MindspliceApparatusEffect(final MindspliceApparatusEffect effect) {
         super(effect);
     }
 

@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
@@ -23,7 +23,7 @@ public final class SpitefulBanditry extends CardImpl {
 
         // When Spiteful Banditry enters the battlefield, it deals X damage to each creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAllEffect(
-                ManacostVariableValue.ETB, StaticFilters.FILTER_PERMANENT_CREATURE
+                GetXValue.instance, StaticFilters.FILTER_PERMANENT_CREATURE
         )));
 
         // Whenever one or more creatures your opponents control die, you create a Treasure token. This ability triggers only once each turn.
@@ -31,7 +31,7 @@ public final class SpitefulBanditry extends CardImpl {
                 new CreateTokenEffect(new TreasureToken())
                         .setText("you create a Treasure token"),
                 false, StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE
-        ).setTriggerPhrase("Whenever one or more creatures your opponents control die, ").setTriggersOnce(true));
+        ).setTriggerPhrase("Whenever one or more creatures your opponents control die, ").setTriggersLimitEachTurn(1));
     }
 
     private SpitefulBanditry(final SpitefulBanditry card) {

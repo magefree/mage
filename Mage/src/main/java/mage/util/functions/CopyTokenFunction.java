@@ -1,8 +1,10 @@
 package mage.util.functions;
 
 import mage.MageObject;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.keyword.MorphAbility;
+import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
+import mage.abilities.keyword.PrototypeAbility;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.SuperType;
@@ -41,57 +43,77 @@ public class CopyTokenFunction {
         if (target == null) {
             throw new IllegalArgumentException("Target can't be null");
         }
-        // A copy contains only the attributes of the basic card or basic Token that's the base of the permanent
-        // else gained abililies would be copied too.
-        target.setEntersTransformed(source instanceof Permanent && ((Permanent) source).isTransformed());
-        MageObject sourceObj;
 
-        // from another token
+        // apply transformed status on ETB
+        target.setEntersTransformed(source instanceof Permanent && ((Permanent) source).isTransformed());
+
+        // 707.8a
+        // If an effect creates a token that is a copy of a transforming permanent or a transforming double-faced
+        // card not on the battlefield, the resulting token is a transforming token that has both a front face
+        // and a back face. The characteristics of each face are determined by the copiable values of the same
+        // face of the permanent it is a copy of, as modified by any other copy effects that apply to that permanent.
+        // If the token is a copy of a transforming permanent with its back face up, the token enters the battlefield
+        // with its back face up. This rule does not apply to tokens that are created with their own set of
+        // characteristics and enter the battlefield as a copy of a transforming permanent due to a replacement effect.
+
+        // from token permanent
         if (source instanceof PermanentToken) {
             // create token from another token
-            Token sourceToken = ((PermanentToken) source).getToken();
-            sourceObj = sourceToken;
-            target.setCopySourceCard(((PermanentToken) source).getToken().getCopySourceCard());
-
+            Token sourceObj = ((PermanentToken) source).getToken();
+            target.setCopySourceCard(sourceObj.getCopySourceCard()); // must link with original card
+            // main side
             copyToToken(target, sourceObj, game);
             CardUtil.copySetAndCardNumber(target, source);
-            if (sourceToken.getBackFace() != null) {
-                copyToToken(target.getBackFace(), sourceToken.getBackFace(), game);
-                CardUtil.copySetAndCardNumber(target.getBackFace(), sourceToken.getBackFace());
+            // second side
+            if (sourceObj.getBackFace() != null) {
+                copyToToken(target.getBackFace(), sourceObj.getBackFace(), game);
+                CardUtil.copySetAndCardNumber(target.getBackFace(), sourceObj.getBackFace());
             }
             return;
         }
 
-        // from a permanent
+        // from non-token permanent
         if (source instanceof PermanentCard) {
             // create token from non-token permanent
 
-            // morph/manifest must hide all info
-            if (((PermanentCard) source).isMorphed()
-                    || ((PermanentCard) source).isManifested()
-                    || source.isFaceDown(game)) {
-                MorphAbility.setPermanentToFaceDownCreature(target, (PermanentCard) source, game);
+            // apply face down status
+            PermanentCard sourcePermanent = (PermanentCard) source;
+            BecomesFaceDownCreatureEffect.FaceDownType faceDownType = BecomesFaceDownCreatureEffect.findFaceDownType(game, sourcePermanent);
+            if (faceDownType != null) {
+                BecomesFaceDownCreatureEffect.makeFaceDownObject(game, null, target, faceDownType, null);
                 return;
             }
 
-            sourceObj = source.getMainCard();
-            target.setCopySourceCard((Card) sourceObj);
-
+            Card sourceObj = source.getMainCard();
+            target.setCopySourceCard(sourceObj);
+            // main side
             copyToToken(target, sourceObj, game);
             CardUtil.copySetAndCardNumber(target, sourceObj);
-            if (((Card) sourceObj).isTransformable()) {
-                copyToToken(target.getBackFace(), ((Card) sourceObj).getSecondCardFace(), game);
-                CardUtil.copySetAndCardNumber(target.getBackFace(), ((Card) sourceObj).getSecondCardFace());
+            // second side
+            if (sourceObj.isTransformable()) {
+                copyToToken(target.getBackFace(), sourceObj.getSecondCardFace(), game);
+                CardUtil.copySetAndCardNumber(target.getBackFace(), sourceObj.getSecondCardFace());
+            }
+
+            // apply prototyped status
+            if (((PermanentCard) source).isPrototyped()){
+                Abilities<Ability> abilities = source.getAbilities();
+                for (Ability ability : abilities){
+                    if (ability instanceof PrototypeAbility) {
+                        ((PrototypeAbility) ability).prototypePermanent(target, game);
+                    }
+                }
             }
             return;
         }
 
-        // from another object like card (example: Embalm ability)
-        sourceObj = source;
-        target.setCopySourceCard(source);
-
+        // from another card (example: Embalm ability)
+        Card sourceObj = CardUtil.getDefaultCardSideForBattlefield(game, source.getMainCard());
+        target.setCopySourceCard(sourceObj);
+        // main side
         copyToToken(target, sourceObj, game);
         CardUtil.copySetAndCardNumber(target, sourceObj);
+        // second side
         if (source.isTransformable()) {
             if (target.getBackFace() == null) {
                 // if you catch this then a weird use case here: card with single face copy another token with double face??
@@ -130,8 +152,8 @@ public class CopyTokenFunction {
             // otherwise there are problems to check for created continuous effects to check if
             // the source (the Token) has still this ability
             ability.newOriginalId();
-
-            target.addAbility(ability);
+            //Don't re-add subabilities since they've already in sourceObj's abilities list
+            target.addAbility(ability, true);
         }
 
         target.setPower(sourceObj.getPower().getBaseValue());
@@ -142,7 +164,6 @@ public class CopyTokenFunction {
 
     private Token from(Card source, Game game, Spell spell) {
         apply(source, game);
-
         // token's ZCC must be synced with original card to keep abilities settings
         // Example: kicker ability and kicked status
         if (spell != null) {

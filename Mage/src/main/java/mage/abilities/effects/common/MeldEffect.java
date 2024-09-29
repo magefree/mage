@@ -43,7 +43,7 @@ public class MeldEffect extends OneShotEffect {
         this.attacking = attacking;
     }
 
-    public MeldEffect(final MeldEffect effect) {
+    protected MeldEffect(final MeldEffect effect) {
         super(effect);
         this.meldWithName = effect.meldWithName;
         this.meldIntoName = effect.meldIntoName;
@@ -77,13 +77,20 @@ public class MeldEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(outcome, target, source, game);
 
         Permanent meldWithPermanent = game.getPermanent(target.getFirstTarget());
         if (sourcePermanent == null || meldWithPermanent == null) {
             return false;
         }
+
+        // melding in exile zone, rules:
+        // When two cards are exiled and melded, they each leave the battlefield, then return together as one
+        // new untapped object with no relation to either of the objects that left the battlefield.
+        // Counters, Auras, Equipment, and other effects that affected those two cards don't affect
+        // the melded permanent.
+
         Cards cards = new CardsImpl(sourcePermanent);
         cards.add(meldWithPermanent);
         controller.moveCards(cards, Zone.EXILED, source, game);
@@ -105,7 +112,7 @@ public class MeldEffect extends OneShotEffect {
         if (cardInfoList.isEmpty()) {
             return false;
         }
-        MeldCard meldCard = (MeldCard) cardInfoList.get(0).getCard().copy();
+        MeldCard meldCard = (MeldCard) cardInfoList.get(0).createCard().copy();
         meldCard.setOwnerId(controller.getId());
         meldCard.setTopHalfCard(meldWithCard, game);
         meldCard.setBottomHalfCard(sourceCard, game);

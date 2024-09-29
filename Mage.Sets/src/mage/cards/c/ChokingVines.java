@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import mage.abilities.Ability;
 import mage.abilities.common.CastOnlyDuringPhaseStepSourceAbility;
 import mage.abilities.effects.common.BecomeBlockedTargetEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -8,13 +7,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PhaseStep;
-import mage.game.Game;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.XTargetsCountAdjuster;
 
 import java.util.UUID;
-
-import static mage.filter.StaticFilters.FILTER_ATTACKING_CREATURES;
 
 /**
  * @author arcox
@@ -33,7 +30,8 @@ public final class ChokingVines extends CardImpl {
                 .setText("X target attacking creatures become blocked."));
         this.getSpellAbility().addEffect(new DamageTargetEffect(1)
                 .setText("{this} deals 1 damage to each of those creatures"));
-        this.getSpellAbility().setTargetAdjuster(ChokingVinesAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ATTACKING_CREATURES));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private ChokingVines(final ChokingVines card) {
@@ -43,16 +41,5 @@ public final class ChokingVines extends CardImpl {
     @Override
     public ChokingVines copy() {
         return new ChokingVines(this);
-    }
-}
-
-enum ChokingVinesAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        int x = ability.getManaCostsToPay().getX();
-        ability.addTarget(new TargetCreaturePermanent(x, x, FILTER_ATTACKING_CREATURES, false));
     }
 }

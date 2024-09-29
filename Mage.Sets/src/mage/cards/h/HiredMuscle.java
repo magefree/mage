@@ -82,7 +82,7 @@ class Scarmaker extends TokenImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    public Scarmaker(final Scarmaker token) {
+    private Scarmaker(final Scarmaker token) {
         super(token);
     }
 

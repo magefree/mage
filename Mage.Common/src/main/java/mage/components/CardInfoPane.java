@@ -5,7 +5,7 @@ import mage.view.CardView;
 import java.awt.*;
 
 /**
- * Card info pane for displaying card rules.
+ * GUI: card info pane for displaying card rules.
  * Supports drawing mana symbols.
  *
  * @author nantuko
@@ -13,5 +13,5 @@ import java.awt.*;
 public interface CardInfoPane {
 
     void setCard(CardView card, Component container);
-    boolean isCurrentCard (CardView card);
+
 }

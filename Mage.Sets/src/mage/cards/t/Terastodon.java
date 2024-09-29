@@ -60,12 +60,12 @@ public final class Terastodon extends CardImpl {
 
 class TerastodonEffect extends OneShotEffect {
 
-    public TerastodonEffect() {
+    TerastodonEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller creates a 3/3 green Elephant creature token";
     }
 
-    public TerastodonEffect(final TerastodonEffect effect) {
+    private TerastodonEffect(final TerastodonEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,7 @@ class TerastodonEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Map<UUID, Integer> destroyedPermanents = new HashMap<>();
-        for (UUID targetID : this.targetPointer.getTargets(game, source)) {
+        for (UUID targetID : this.getTargetPointer().getTargets(game, source)) {
             Permanent permanent = game.getPermanent(targetID);
             if (permanent != null) {
                 if (permanent.destroy(source, game, false)) {
@@ -88,7 +88,7 @@ class TerastodonEffect extends OneShotEffect {
                 }
             }
         }
-        game.getState().processAction(game);
+        game.processAction();
         ElephantToken elephantToken = new ElephantToken();
         for (Entry<UUID, Integer> entry : destroyedPermanents.entrySet()) {
             elephantToken.putOntoBattlefield(entry.getValue(), game, source, entry.getKey());

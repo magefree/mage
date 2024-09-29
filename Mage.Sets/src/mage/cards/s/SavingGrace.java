@@ -70,7 +70,7 @@ class SavingGraceReplacementEffect extends ReplacementEffectImpl {
         staticText = "all damage that would be dealt this turn to you and permanents you control is dealt to enchanted creature instead.";
     }
 
-    SavingGraceReplacementEffect(final SavingGraceReplacementEffect effect) {
+    private SavingGraceReplacementEffect(final SavingGraceReplacementEffect effect) {
         super(effect);
     }
 
@@ -134,11 +134,6 @@ class SavingGraceReplacementEffect extends ReplacementEffectImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

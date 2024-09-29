@@ -26,7 +26,7 @@ public final class GatherSpecimens extends CardImpl {
     public GatherSpecimens(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}{U}{U}");
 
-        // If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
+        // If a creature would enter the battlefield under an opponent's control this turn, it enters under your control instead.
         this.getSpellAbility().addEffect(new GatherSpecimensReplacementEffect());
     }
 
@@ -42,23 +42,18 @@ public final class GatherSpecimens extends CardImpl {
 
 class GatherSpecimensReplacementEffect extends ReplacementEffectImpl {
 
-    public GatherSpecimensReplacementEffect() {
+    GatherSpecimensReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.GainControl);
-        staticText = "If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead";
+        staticText = "If a creature would enter the battlefield under an opponent's control this turn, it enters under your control instead";
     }
 
-    public GatherSpecimensReplacementEffect(final GatherSpecimensReplacementEffect effect) {
+    private GatherSpecimensReplacementEffect(final GatherSpecimensReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public GatherSpecimensReplacementEffect copy() {
         return new GatherSpecimensReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -68,7 +68,7 @@ class GishathSunsAvatarEffect extends OneShotEffect {
         this.staticText = "reveal that many cards from the top of your library. Put any number of Dinosaur creature cards from among them onto the battlefield and the rest on the bottom of your library in a random order";
     }
 
-    GishathSunsAvatarEffect(final GishathSunsAvatarEffect effect) {
+    private GishathSunsAvatarEffect(final GishathSunsAvatarEffect effect) {
         super(effect);
     }
 
@@ -90,7 +90,7 @@ class GishathSunsAvatarEffect extends OneShotEffect {
             FilterCreatureCard filter = new FilterCreatureCard("Dinosaur creature cards");
             filter.add(SubType.DINOSAUR.getPredicate());
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.LIBRARY, filter);
-            target1.setNotTarget(true);
+            target1.withNotTarget(true);
             controller.choose(Outcome.PutCardInPlay, cards, target1, source, game);
             Cards toBattlefield = new CardsImpl(target1.getTargets());
             cards.removeAll(toBattlefield);

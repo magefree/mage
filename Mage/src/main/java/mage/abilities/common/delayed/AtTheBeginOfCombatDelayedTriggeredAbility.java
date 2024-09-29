@@ -11,7 +11,7 @@ public class AtTheBeginOfCombatDelayedTriggeredAbility extends DelayedTriggeredA
         setTriggerPhrase(" At the beginning of the next combat, ");
     }
 
-    public AtTheBeginOfCombatDelayedTriggeredAbility(final AtTheBeginOfCombatDelayedTriggeredAbility ability) {
+    protected AtTheBeginOfCombatDelayedTriggeredAbility(final AtTheBeginOfCombatDelayedTriggeredAbility ability) {
         super(ability);
     }
 

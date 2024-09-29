@@ -7,7 +7,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.dynamicvalue.common.SubTypeAssignment;
+import mage.abilities.assignment.common.SubTypeAssignment;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.*;
 import mage.constants.*;
@@ -114,23 +114,18 @@ class YasharnImplacableEarthTarget extends TargetCardInLibrary {
 
 class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public YasharnImplacableEarthEffect() {
+    YasharnImplacableEarthEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "Players can't pay life or sacrifice nonland permanents to cast spells or activate abilities";
     }
 
-    public YasharnImplacableEarthEffect(final YasharnImplacableEarthEffect effect) {
+    private YasharnImplacableEarthEffect(final YasharnImplacableEarthEffect effect) {
         super(effect);
     }
 
     @Override
     public YasharnImplacableEarthEffect copy() {
         return new YasharnImplacableEarthEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -143,13 +138,14 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY
+                || event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
-        if (event.getType() != GameEvent.EventType.ACTIVATE_ABILITY
-                && event.getType() != GameEvent.EventType.CAST_SPELL) {
-            return false;
-        }
-
         if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY && permanent == null) {
             return false;
         }
@@ -166,7 +162,7 @@ class YasharnImplacableEarthEffect extends ContinuousRuleModifyingEffectImpl {
                 return true;  // can't pay with life
             }
             if (cost instanceof SacrificeSourceCost
-                    && !permanent.isLand()) {
+                    && !permanent.isLand(game)) {
                 return true;
             }
             if (cost instanceof SacrificeTargetCost) {

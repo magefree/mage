@@ -43,7 +43,7 @@ public final class ArmedAndArmored extends CardImpl {
 
 class ArmedAndArmoredEffect extends ContinuousEffectImpl {
 
-    public ArmedAndArmoredEffect() {
+    ArmedAndArmoredEffect() {
         super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
         staticText = "Vehicles you control become artifact creatures until end of turn";
     }
@@ -78,7 +78,7 @@ class ArmedAndArmoredEffect extends ContinuousEffectImpl {
 
 class ArmedAndArmoredEquipEffect extends OneShotEffect {
 
-    public ArmedAndArmoredEquipEffect() {
+    ArmedAndArmoredEquipEffect() {
         super(Outcome.Benefit);
         staticText = "Choose a Dwarf you control. Attach any number of Equipment you control to it.";
     }

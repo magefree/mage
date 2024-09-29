@@ -22,7 +22,7 @@ public final class BirdSoldierToken extends TokenImpl {
         addAbility(FlyingAbility.getInstance());
     }
 
-    public BirdSoldierToken(final BirdSoldierToken token) {
+    private BirdSoldierToken(final BirdSoldierToken token) {
         super(token);
     }
 

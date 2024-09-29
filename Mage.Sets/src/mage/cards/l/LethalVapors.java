@@ -31,7 +31,7 @@ public final class LethalVapors extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DestroyTargetEffect().setText("destroy it"),
                 StaticFilters.FILTER_PERMANENT_A_CREATURE,
-                false, SetTargetPointer.PERMANENT, null));
+                false, SetTargetPointer.PERMANENT));
 
         // {0}: Destroy Lethal Vapors. You skip your next turn. Any player may activate this ability.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroySourceEffect(), new ManaCostsImpl<>("{0}"));

@@ -30,7 +30,7 @@ public final class ProtectTheNegotiators extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new CreateTokenEffect(new SoldierToken()),
                 KickedCondition.ONCE,
-                "If this was spell was kicked, create a 1/1 white Soldier creature token."
+                "If this spell was kicked, create a 1/1 white Soldier creature token."
         ));
 
         // Counter target spell unless its controller pays {1} for each creature you control.

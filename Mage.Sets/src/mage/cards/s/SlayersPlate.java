@@ -58,7 +58,7 @@ class SlayersPlateTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()));
     }
 
-    public SlayersPlateTriggeredAbility(final SlayersPlateTriggeredAbility ability) {
+    private SlayersPlateTriggeredAbility(final SlayersPlateTriggeredAbility ability) {
         super(ability);
     }
 

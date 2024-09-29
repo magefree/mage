@@ -19,7 +19,6 @@ import mage.abilities.keyword.ForMirrodinAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import org.checkerframework.checker.units.qual.A;
 
 /**
  * @author TheElk801

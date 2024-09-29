@@ -43,7 +43,7 @@ class NoblePurposeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
     
-    public NoblePurposeTriggeredAbility(final NoblePurposeTriggeredAbility ability) {
+    private NoblePurposeTriggeredAbility(final NoblePurposeTriggeredAbility ability) {
         super(ability);
     }
 

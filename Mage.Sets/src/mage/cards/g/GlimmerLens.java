@@ -71,6 +71,9 @@ class GlimmerLensTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent attachment = getSourcePermanentOrLKI(game);
+        if (attachment == null) {
+            return false;
+        }
         UUID equippedCreature = attachment.getAttachedTo();
         return game.getCombat().getAttackers().contains(equippedCreature)
                 && game

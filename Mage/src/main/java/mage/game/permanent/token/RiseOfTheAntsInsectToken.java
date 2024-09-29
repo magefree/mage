@@ -18,7 +18,7 @@ public final class RiseOfTheAntsInsectToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    public RiseOfTheAntsInsectToken(final RiseOfTheAntsInsectToken token) {
+    private RiseOfTheAntsInsectToken(final RiseOfTheAntsInsectToken token) {
         super(token);
     }
 

@@ -35,8 +35,8 @@ public final class OrchardWarden extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 
-        // Whenever another Treefolk creature enters the battlefield under your control, you may gain life equal to that creature's toughness.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new OrchardWardenffect(), filter, true, SetTargetPointer.PERMANENT, ""));
+        // Whenever another Treefolk creature you control enters, you may gain life equal to that creature's toughness.
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new OrchardWardenffect(), filter, true, SetTargetPointer.PERMANENT));
     }
 
     private OrchardWarden(final OrchardWarden card) {
@@ -56,7 +56,7 @@ class OrchardWardenffect extends OneShotEffect {
         this.staticText = "you may gain life equal to that creature's toughness";
     }
     
-    public OrchardWardenffect(final OrchardWardenffect effect) {
+    private OrchardWardenffect(final OrchardWardenffect effect) {
         super(effect);
     }
     

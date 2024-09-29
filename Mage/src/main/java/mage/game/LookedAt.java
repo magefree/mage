@@ -13,20 +13,20 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- *
  * @author nantuko
  */
 public class LookedAt extends HashMap<String, Cards> implements Serializable, Copyable<LookedAt> {
 
-    public LookedAt() {    }
+    public LookedAt() {
+    }
 
-    public LookedAt(final LookedAt lookedAt) {
-        for (Map.Entry<String, Cards> entry: lookedAt.entrySet()) {
+    protected LookedAt(final LookedAt lookedAt) {
+        for (Map.Entry<String, Cards> entry : lookedAt.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
     }
 
-    public void add(String name, Card card) {        
+    public void add(String name, Card card) {
         this.createLookedAt(name).add(card);
     }
 
@@ -47,7 +47,7 @@ public class LookedAt extends HashMap<String, Cards> implements Serializable, Co
     }
 
     public Card getCard(UUID cardId, Game game) {
-        for (Cards cards: this.values()) {
+        for (Cards cards : this.values()) {
             if (cards.contains(cardId))
                 return game.getCard(cardId);
         }

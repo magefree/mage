@@ -44,12 +44,12 @@ public final class WashOut extends CardImpl {
 
 class WashOutEffect extends OneShotEffect {
 
-    public WashOutEffect() {
+    WashOutEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Return all permanents of the color of your choice to their owners' hands";
     }
 
-    public WashOutEffect(final WashOutEffect effect) {
+    private WashOutEffect(final WashOutEffect effect) {
         super(effect);
     }
 

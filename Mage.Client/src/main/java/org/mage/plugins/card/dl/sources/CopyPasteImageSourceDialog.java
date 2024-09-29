@@ -54,7 +54,7 @@ public class CopyPasteImageSourceDialog extends JDialog {
             StreamUtils.closeQuietly(bw);
         }
 
-        dispose();
+        onCancel();
     }
 
     private void onCancel() {

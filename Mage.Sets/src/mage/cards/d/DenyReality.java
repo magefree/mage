@@ -25,7 +25,7 @@ public final class DenyReality extends CardImpl {
         this.addAbility(new CascadeAbility());
     }
 
-    public DenyReality (final DenyReality card) {
+    private DenyReality(final DenyReality card) {
         super(card);
     }
 

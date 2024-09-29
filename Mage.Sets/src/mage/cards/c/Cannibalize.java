@@ -43,13 +43,13 @@ public final class Cannibalize extends CardImpl {
 
 class CannibalizeEffect extends OneShotEffect {
 
-    public CannibalizeEffect() {
+    CannibalizeEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose two target creatures controlled by the same player. " +
                 "Exile one of the creatures and put two +1/+1 counters on the other";
     }
 
-    public CannibalizeEffect(final CannibalizeEffect effect) {
+    private CannibalizeEffect(final CannibalizeEffect effect) {
         super(effect);
     }
 

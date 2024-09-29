@@ -20,7 +20,7 @@ public final class ViashinoCutthroat extends CardImpl {
 
     public ViashinoCutthroat(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{R}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
 
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
@@ -28,7 +28,7 @@ public final class ViashinoCutthroat extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // At the beginning of the end step, return Viashino Cutthroat to its owner's hand.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.NEXT, false));
     }
 
     private ViashinoCutthroat(final ViashinoCutthroat card) {

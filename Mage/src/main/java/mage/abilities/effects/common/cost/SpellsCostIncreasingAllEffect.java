@@ -47,13 +47,16 @@ public class SpellsCostIncreasingAllEffect extends CostModificationEffectImpl {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append(filter.getMessage());
+        String filterMessage = filter.getMessage();
+        sb.append(filterMessage);
         switch (this.targetController) {
             case YOU:
                 sb.append(" you cast");
                 break;
             case OPPONENT:
-                sb.append(" your opponents cast");
+                if (!filterMessage.contains("your opponents cast")) {
+                    sb.append(" your opponents cast");
+                }
                 break;
             case ACTIVE:
                 sb.append(" the active player casts");

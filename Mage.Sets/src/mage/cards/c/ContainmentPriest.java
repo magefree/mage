@@ -50,23 +50,18 @@ public final class ContainmentPriest extends CardImpl {
 
 class ContainmentPriestReplacementEffect extends ReplacementEffectImpl {
 
-    public ContainmentPriestReplacementEffect() {
+    ContainmentPriestReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If a nontoken creature would enter the battlefield and it wasn't cast, exile it instead";
     }
 
-    public ContainmentPriestReplacementEffect(final ContainmentPriestReplacementEffect effect) {
+    private ContainmentPriestReplacementEffect(final ContainmentPriestReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public ContainmentPriestReplacementEffect copy() {
         return new ContainmentPriestReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

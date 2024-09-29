@@ -24,7 +24,7 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.functions.StackObjectCopyApplier;
 
 import java.util.List;
@@ -93,8 +93,8 @@ class ObNixilisTheAdversaryCasualtyAbility extends StaticAbility {
 
 class ObNixilisTheAdversaryCost extends SacrificeTargetCost {
 
-    public ObNixilisTheAdversaryCost() {
-        super(new TargetControlledPermanent(0, 1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, true));
+    ObNixilisTheAdversaryCost() {
+        super(new TargetSacrifice(0, 1, StaticFilters.FILTER_CONTROLLED_CREATURE));
         this.text = "";
     }
 
@@ -132,7 +132,7 @@ class ObNixilisTheAdversaryCopyEffect extends OneShotEffect {
 
     private final StackObjectCopyApplier applier;
 
-    public ObNixilisTheAdversaryCopyEffect(StackObjectCopyApplier applier) {
+    ObNixilisTheAdversaryCopyEffect(StackObjectCopyApplier applier) {
         super(Outcome.Copy);
         this.applier = applier;
         this.staticText = "copy {this}";
@@ -163,7 +163,7 @@ class ObNixilisTheAdversaryApplier implements StackObjectCopyApplier {
 
     private final int loyalty;
 
-    public ObNixilisTheAdversaryApplier(int loyalty) {
+    ObNixilisTheAdversaryApplier(int loyalty) {
         this.loyalty = loyalty;
     }
 
@@ -181,7 +181,7 @@ class ObNixilisTheAdversaryApplier implements StackObjectCopyApplier {
 
 class ObNixilisTheAdversaryDiscardEffect extends OneShotEffect {
 
-    public ObNixilisTheAdversaryDiscardEffect() {
+    ObNixilisTheAdversaryDiscardEffect() {
         super(Outcome.LoseLife);
         this.staticText = "Each opponent loses 2 life unless they discard a card. If you control a Demon or Devil, you gain 2 life";
     }

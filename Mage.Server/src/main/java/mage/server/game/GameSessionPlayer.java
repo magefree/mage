@@ -13,6 +13,7 @@ import mage.players.Player;
 import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.server.managers.UserManager;
+import mage.util.MultiAmountMessage;
 import mage.view.*;
 import org.apache.log4j.Logger;
 
@@ -36,7 +37,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
     public GameSessionPlayer(ManagerFactory managerFactory, Game game, UUID userId, UUID playerId) {
         super(managerFactory.userManager(), userId, game, true);
         this.userManager = managerFactory.userManager();
-        callExecutor = managerFactory.threadExecutor().getCallExecutor();
+        this.callExecutor = managerFactory.threadExecutor().getCallExecutor();
         this.playerId = playerId;
     }
 
@@ -114,7 +115,8 @@ public class GameSessionPlayer extends GameSessionWatcher {
         }
     }
 
-    public void getMultiAmount(final List<String> messages, final int min, final int max, final Map<String, Serializable> options) {
+    public void getMultiAmount(final List<MultiAmountMessage> messages, final int min, final int max,
+            final Map<String, Serializable> options) {
         if (!killed) {
             userManager.getUser(userId).ifPresent(user
                     -> user.fireCallback(new ClientCallback(ClientCallbackMethod.GAME_GET_MULTI_AMOUNT, game.getId(), new GameClientMessage(getGameView(), options, messages, min, max))));
@@ -207,34 +209,36 @@ public class GameSessionPlayer extends GameSessionWatcher {
      * @return
      */
     public static GameView prepareGameView(Game game, UUID playerId, UUID userId) {
-        Player player = game.getPlayer(playerId);
-        GameView gameView = new GameView(game.getState(), game, playerId, null);
-        gameView.setHand(new CardsView(game, player.getHand().getCards(game)));
-        if (gameView.getPriorityPlayerName().equals(player.getName())) {
-            gameView.setCanPlayObjects(player.getPlayableObjects(game, Zone.ALL));
+        // game view calculation can take some time and can be called from non-game thread,
+        // so use copy for thread save (protection from ConcurrentModificationException)
+        Game sourceGame = game.copy();
+
+        Player player = sourceGame.getPlayer(playerId); // null for watcher
+        GameView gameView = new GameView(sourceGame.getState(), sourceGame, playerId, null);
+        if (player != null) {
+            if (gameView.getPriorityPlayerName().equals(player.getName())) {
+                gameView.setCanPlayObjects(player.getPlayableObjects(sourceGame, Zone.ALL));
+            }
         }
 
-        processControlledPlayers(game, player, gameView);
-        processWatchedHands(game, userId, gameView);
+        processControlledPlayers(sourceGame, player, gameView);
+        processWatchedHands(sourceGame, userId, gameView);
         //TODO: should player who controls another player's turn be able to look at all these cards?
-
-        List<LookedAtView> list = new ArrayList<>();
-        for (Entry<String, Cards> entry : game.getState().getLookedAt(playerId).entrySet()) {
-            list.add(new LookedAtView(entry.getKey(), entry.getValue(), game));
-        }
-        gameView.setLookedAt(list);
 
         return gameView;
     }
 
     private static void processControlledPlayers(Game game, Player player, GameView gameView) {
+        if (player == null) {
+            // ignore watcher
+            return;
+        }
+        gameView.getOpponentHands().clear();
         if (!player.getPlayersUnderYourControl().isEmpty()) {
-            Map<String, SimpleCardsView> handCards = new HashMap<>();
             for (UUID controlledPlayerId : player.getPlayersUnderYourControl()) {
                 Player opponent = game.getPlayer(controlledPlayerId);
-                handCards.put(opponent.getName(), new SimpleCardsView(opponent.getHand().getCards(game), true));
+                gameView.getOpponentHands().put(opponent.getName(), new SimpleCardsView(opponent.getHand().getCards(game), true));
             }
-            gameView.setOpponentHands(handCards);
         }
     }
 

@@ -65,7 +65,7 @@ class AnheloThePainterGainCausalityEffect extends ContinuousEffectImpl {
                 "When you do, copy the spell and you may choose new targets for the copy.)</i>";
     }
 
-    AnheloThePainterGainCausalityEffect(final AnheloThePainterGainCausalityEffect effect) {
+    private AnheloThePainterGainCausalityEffect(final AnheloThePainterGainCausalityEffect effect) {
         super(effect);
     }
 

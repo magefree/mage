@@ -48,7 +48,7 @@ class ImiStatueEffect extends RestrictionUntapNotMoreThanEffect {
         staticText = "Players can't untap more than one artifact during their untap steps";
     }
 
-    public ImiStatueEffect(final ImiStatueEffect effect) {
+    private ImiStatueEffect(final ImiStatueEffect effect) {
         super(effect);
     }
 

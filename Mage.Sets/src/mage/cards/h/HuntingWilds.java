@@ -39,7 +39,7 @@ public final class HuntingWilds extends CardImpl {
         // Kicker {3}{G}
         this.addAbility(new KickerAbility("{3}{G}"));
 
-        FilterLandCard filter = new FilterLandCard("Forest card");
+        FilterLandCard filter = new FilterLandCard("Forest cards");
         filter.add(SubType.FOREST.getPredicate());
 
         // Search your library for up to two Forest cards and put them onto the battlefield tapped. Then shuffle your library.
@@ -62,12 +62,12 @@ public final class HuntingWilds extends CardImpl {
 
 class HuntingWildsEffect extends OneShotEffect {
 
-    public HuntingWildsEffect() {
+    HuntingWildsEffect() {
         super(Outcome.BecomeCreature);
         this.staticText = "Untap all Forests put onto the battlefield this way. They become 3/3 green creatures with haste that are still lands";
     }
 
-    public HuntingWildsEffect(final HuntingWildsEffect effect) {
+    private HuntingWildsEffect(final HuntingWildsEffect effect) {
         super(effect);
     }
 
@@ -82,13 +82,13 @@ class HuntingWildsEffect extends OneShotEffect {
             if (sourceEffect instanceof SearchLibraryPutInPlayEffect) {
                 Cards foundCards = new CardsImpl(((SearchLibraryPutInPlayEffect) sourceEffect).getTargets());
                 if (!foundCards.isEmpty()) {
-                    FixedTargets fixedTargets = new FixedTargets(foundCards, game);
+                    FixedTargets blueprintTarget = new FixedTargets(foundCards, game);
                     UntapTargetEffect untapEffect = new UntapTargetEffect();
-                    untapEffect.setTargetPointer(fixedTargets);
+                    untapEffect.setTargetPointer(blueprintTarget.copy());
                     untapEffect.apply(game, source);
 
                     BecomesCreatureTargetEffect becomesCreatureEffect = new BecomesCreatureTargetEffect(new HuntingWildsToken(), false, true, Duration.Custom);
-                    becomesCreatureEffect.setTargetPointer(fixedTargets);
+                    becomesCreatureEffect.setTargetPointer(blueprintTarget.copy());
                     game.addEffect(becomesCreatureEffect, source);
                 }
                 return true;
@@ -110,7 +110,7 @@ class HuntingWildsToken extends TokenImpl {
 
         this.addAbility(HasteAbility.getInstance());
     }
-    public HuntingWildsToken(final HuntingWildsToken token) {
+    private HuntingWildsToken(final HuntingWildsToken token) {
         super(token);
     }
 

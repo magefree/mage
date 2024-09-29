@@ -96,7 +96,7 @@ class ChaosDragonRestrictionEffect extends RestrictionEffect {
         this.playerSet.addAll(playerSet);
     }
 
-    ChaosDragonRestrictionEffect(final ChaosDragonRestrictionEffect effect) {
+    private ChaosDragonRestrictionEffect(final ChaosDragonRestrictionEffect effect) {
         super(effect);
         this.playerSet.addAll(effect.playerSet);
     }

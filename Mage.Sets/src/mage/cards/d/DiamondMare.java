@@ -53,7 +53,7 @@ class DiamondMareTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainLifeEffect(1), false);
     }
 
-    public DiamondMareTriggeredAbility(final DiamondMareTriggeredAbility ability) {
+    private DiamondMareTriggeredAbility(final DiamondMareTriggeredAbility ability) {
         super(ability);
     }
 

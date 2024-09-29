@@ -1,7 +1,5 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,11 +17,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,8 +43,7 @@ public final class GleamOfAuthority extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 for each +1/+1 counter on other creatures you control
-        DynamicValue amount = new CountersOnControlledCount();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amount, amount, Duration.WhileOnBattlefield)
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(CountersOnControlledCount.instance, CountersOnControlledCount.instance)
                 .setText("Enchanted creature gets +1/+1 for each +1/+1 counter on other creatures you control.")
         ));
 
@@ -52,7 +51,7 @@ public final class GleamOfAuthority extends CardImpl {
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA));
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BolsterEffect(1), new ManaCostsImpl<>("{W}"));
         gainedAbility.addCost(new TapSourceCost());
-        ability.addEffect(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA).setText("and \"{W}, {T}: Bloster 1.\""));
+        ability.addEffect(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA).setText("and \"{W}, {T}: Bolster 1.\""));
         this.addAbility(ability);
     }
 
@@ -66,22 +65,14 @@ public final class GleamOfAuthority extends CardImpl {
     }
 }
 
-class CountersOnControlledCount implements DynamicValue {
-
-    static FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    public CountersOnControlledCount() {
-    }
-
-    public CountersOnControlledCount(final CountersOnControlledCount dynamicValue) {
-        super();
-    }
+enum CountersOnControlledCount implements DynamicValue {
+    instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
         Permanent enchantment = game.getPermanent(sourceAbility.getSourceId());
-        for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, sourceAbility.getControllerId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceAbility.getControllerId(), game)) {
             if (!permanent.getId().equals(enchantment.getAttachedTo())) {
                 count += permanent.getCounters(game).getCount(CounterType.P1P1);
             }
@@ -90,8 +81,8 @@ class CountersOnControlledCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
-        return new CountersOnControlledCount(this);
+    public CountersOnControlledCount copy() {
+        return instance;
     }
 
     @Override

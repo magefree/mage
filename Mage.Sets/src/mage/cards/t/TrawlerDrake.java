@@ -44,7 +44,8 @@ public final class TrawlerDrake extends CardImpl {
         ));
 
         // Trawler Drake gets +1/+1 for each oil counter on it.
-        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)
+                .setText("{this} gets +1/+1 for each oil counter on it")));
 
         // Whenever you cast a noncreature spell, put an oil counter on Trawler Drake.
         this.addAbility(new SpellCastControllerTriggeredAbility(

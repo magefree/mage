@@ -14,7 +14,7 @@ public class CreatureExploresTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature you control explores, ");
     }
 
-    public CreatureExploresTriggeredAbility(final CreatureExploresTriggeredAbility effect) {
+    protected CreatureExploresTriggeredAbility(final CreatureExploresTriggeredAbility effect) {
         super(effect);
     }
 

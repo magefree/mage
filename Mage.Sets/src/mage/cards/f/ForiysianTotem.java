@@ -57,15 +57,15 @@ class ForiysianTotemToken extends TokenImpl {
 
     public ForiysianTotemToken() {
         super("", "4/4 red Giant artifact creature with trample");
-        cardType.add(CardType.CREATURE);
         cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         subtype.add(SubType.GIANT);
         color.setRed(true);
         power = new MageInt(4);
         toughness = new MageInt(4);
         this.addAbility(TrampleAbility.getInstance());
     }
-    public ForiysianTotemToken(final ForiysianTotemToken token) {
+    private ForiysianTotemToken(final ForiysianTotemToken token) {
         super(token);
     }
 

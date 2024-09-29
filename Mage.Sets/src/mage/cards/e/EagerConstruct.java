@@ -42,12 +42,12 @@ public final class EagerConstruct extends CardImpl {
 
 class EagerConstructEffect extends OneShotEffect {
 
-    public EagerConstructEffect() {
+    EagerConstructEffect() {
         super(Outcome.Benefit);
         this.staticText = "each player may scry 1";
     }
 
-    public EagerConstructEffect(final EagerConstructEffect effect) {
+    private EagerConstructEffect(final EagerConstructEffect effect) {
         super(effect);
     }
 

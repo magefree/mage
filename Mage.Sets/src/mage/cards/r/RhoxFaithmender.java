@@ -52,23 +52,18 @@ public final class RhoxFaithmender extends CardImpl {
 
 class RhoxFaithmenderEffect extends ReplacementEffectImpl {
 
-    public RhoxFaithmenderEffect() {
+    RhoxFaithmenderEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would gain life, you gain twice that much life instead";
     }
 
-    public RhoxFaithmenderEffect(final RhoxFaithmenderEffect effect) {
+    private RhoxFaithmenderEffect(final RhoxFaithmenderEffect effect) {
         super(effect);
     }
 
     @Override
     public RhoxFaithmenderEffect copy() {
         return new RhoxFaithmenderEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -87,4 +82,3 @@ class RhoxFaithmenderEffect extends ReplacementEffectImpl {
         return event.getPlayerId().equals(source.getControllerId()) && (source.getControllerId() != null);
     }
 }
-

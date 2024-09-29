@@ -35,7 +35,7 @@ public final class SerraDisciple extends CardImpl {
         ));
     }
 
-    public SerraDisciple(final SerraDisciple serraDisciple) {
+    private SerraDisciple(final SerraDisciple serraDisciple) {
         super(serraDisciple);
     }
 

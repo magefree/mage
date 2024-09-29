@@ -69,7 +69,7 @@ class MagmasaurEffect extends OneShotEffect {
         this.staticText = "you may remove a +1/+1 counter from {this}. If you don't, sacrifice {this} and it deals damage equal to the number of +1/+1 counters on it to each creature without flying and each player";
     }
 
-    public MagmasaurEffect(final MagmasaurEffect effect) {
+    private MagmasaurEffect(final MagmasaurEffect effect) {
         super(effect);
     }
 

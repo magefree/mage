@@ -46,14 +46,14 @@ public final class VengefulRebirth extends CardImpl {
 
 class VengefulRebirthEffect extends OneShotEffect {
 
-    public VengefulRebirthEffect() {
+    VengefulRebirthEffect() {
         super(Outcome.DrawCard);
         staticText = "Return target card from your graveyard to your hand. " +
                 "If you return a nonland card to your hand this way, " +
                 "{this} deals damage equal to that card's mana value to any target";
     }
 
-    public VengefulRebirthEffect(final VengefulRebirthEffect effect) {
+    private VengefulRebirthEffect(final VengefulRebirthEffect effect) {
         super(effect);
     }
 

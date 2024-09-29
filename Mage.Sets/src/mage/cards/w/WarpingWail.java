@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -51,8 +50,7 @@ public final class WarpingWail extends CardImpl {
         this.getSpellAbility().addMode(mode);
 
         // Create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
-        effect = new CreateTokenEffect(new EldraziScionToken());
-        effect.setText("Create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\"");
+        effect = new CreateTokenEffect(new EldraziScionToken()).withTextOptions(true);
         this.getSpellAbility().addMode(new Mode(effect));
     }
 

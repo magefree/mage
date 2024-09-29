@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -52,7 +53,7 @@ public final class LightUpTheNight extends CardImpl {
 
 class LightUpTheNightEffect extends OneShotEffect {
 
-    public LightUpTheNightEffect() {
+    LightUpTheNightEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals X damage to any target. It deals X plus 1 damage instead if that target is a creature or planeswalker";
     }
@@ -69,7 +70,7 @@ class LightUpTheNightEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         // Normal cast + Flashback cast
-        int damage = source.getManaCostsToPay().getX() + GetXValue.instance.calculate(game, source, this);
+        int damage = CardUtil.getSourceCostsTag(game, source, "X", 0) + GetXValue.instance.calculate(game, source, this);
         UUID targetId = getTargetPointer().getFirst(game, source);
         Player player = game.getPlayer(targetId);
         if (player != null) {

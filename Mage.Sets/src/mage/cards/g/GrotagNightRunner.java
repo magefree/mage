@@ -2,10 +2,11 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 
 import java.util.UUID;
@@ -24,7 +25,7 @@ public final class GrotagNightRunner extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever Grotag Night-Runner deals combat damage to a player, exile the top card of your library. You may play that card this turn.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileTopXMayPlayUntilEndOfTurnEffect(1), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), false));
     }
 
     private GrotagNightRunner(final GrotagNightRunner card) {

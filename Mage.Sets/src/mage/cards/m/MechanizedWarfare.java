@@ -87,7 +87,7 @@ class MechanizedWarfareEffect extends ReplacementEffectImpl {
 
         return sourceObject != null
                 && event.getAmount() > 0
-                && (sourceObject.getColor(game).isRed() || sourceObject.isArtifact());
+                && (sourceObject.getColor(game).isRed() || sourceObject.isArtifact(game));
     }
 
     private static UUID getControllerOrSelf(UUID id, Game game) {

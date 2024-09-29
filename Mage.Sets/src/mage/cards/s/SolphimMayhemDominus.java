@@ -64,7 +64,7 @@ class SolphimMayhemDominusEffect extends ReplacementEffectImpl {
                 "it deals double that damage to that player or permanent instead";
     }
 
-    SolphimMayhemDominusEffect(final SolphimMayhemDominusEffect effect) {
+    private SolphimMayhemDominusEffect(final SolphimMayhemDominusEffect effect) {
         super(effect);
     }
 
@@ -84,11 +84,6 @@ class SolphimMayhemDominusEffect extends ReplacementEffectImpl {
                 && !((DamageEvent) event).isCombatDamage()
                 && (player.hasOpponent(event.getTargetId(), game)
                     || player.hasOpponent(game.getControllerId(event.getTargetId()), game));
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

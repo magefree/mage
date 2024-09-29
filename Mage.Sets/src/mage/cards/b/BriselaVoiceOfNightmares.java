@@ -57,23 +57,18 @@ public final class BriselaVoiceOfNightmares extends MeldCard {
 
 class BriselaVoiceOfNightmaresCantCastEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public BriselaVoiceOfNightmaresCantCastEffect() {
+    BriselaVoiceOfNightmaresCantCastEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Your opponents can't cast spells with mana value 3 or less";
     }
 
-    public BriselaVoiceOfNightmaresCantCastEffect(final BriselaVoiceOfNightmaresCantCastEffect effect) {
+    private BriselaVoiceOfNightmaresCantCastEffect(final BriselaVoiceOfNightmaresCantCastEffect effect) {
         super(effect);
     }
 
     @Override
     public BriselaVoiceOfNightmaresCantCastEffect copy() {
         return new BriselaVoiceOfNightmaresCantCastEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

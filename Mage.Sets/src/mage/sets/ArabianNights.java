@@ -18,7 +18,7 @@ public final class ArabianNights extends ExpansionSet {
     private ArabianNights() {
         super("Arabian Nights", "ARN", ExpansionSet.buildDate(1993, 11, 1), SetType.EXPANSION);
         this.hasBasicLands = true;
-        this.hasBoosters = true;
+        this.hasBoosters = true; // note: paper boosters had only 8 cards
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
@@ -48,7 +48,7 @@ public final class ArabianNights extends ExpansionSet {
         cards.add(new SetCardInfo("Desert Nomads", 38, Rarity.COMMON, mage.cards.d.DesertNomads.class));
         cards.add(new SetCardInfo("Desert Twister", 46, Rarity.UNCOMMON, mage.cards.d.DesertTwister.class));
         cards.add(new SetCardInfo("Desert", 72, Rarity.COMMON, mage.cards.d.Desert.class));
-        cards.add(new SetCardInfo("Diamond Valley", 73, Rarity.UNCOMMON, mage.cards.d.DiamondValley.class));
+        cards.add(new SetCardInfo("Diamond Valley", 73, Rarity.RARE, mage.cards.d.DiamondValley.class));
         cards.add(new SetCardInfo("Drop of Honey", 47, Rarity.RARE, mage.cards.d.DropOfHoney.class));
         cards.add(new SetCardInfo("Ebony Horse", 62, Rarity.RARE, mage.cards.e.EbonyHorse.class));
         cards.add(new SetCardInfo("El-Hajjaj", 24, Rarity.RARE, mage.cards.e.ElHajjaj.class));

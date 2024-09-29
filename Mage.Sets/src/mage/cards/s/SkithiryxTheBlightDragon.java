@@ -40,7 +40,7 @@ public final class SkithiryxTheBlightDragon extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}{B}")));
     }
 
-    public SkithiryxTheBlightDragon (final SkithiryxTheBlightDragon card) {
+    private SkithiryxTheBlightDragon(final SkithiryxTheBlightDragon card) {
         super(card);
     }
 

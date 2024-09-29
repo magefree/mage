@@ -70,7 +70,7 @@ class TorWaukiTheYoungerEffect extends ReplacementEffectImpl {
                 "it deals that much damage plus 1 to that permanent or player instead";
     }
 
-    TorWaukiTheYoungerEffect(final TorWaukiTheYoungerEffect effect) {
+    private TorWaukiTheYoungerEffect(final TorWaukiTheYoungerEffect effect) {
         super(effect);
     }
 
@@ -85,11 +85,6 @@ class TorWaukiTheYoungerEffect extends ReplacementEffectImpl {
         return source.isControlledBy(game.getControllerId(event.getSourceId()))
                 && !source.getSourceId().equals(event.getSourceId())
                 && !((DamageEvent) event).isCombatDamage();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

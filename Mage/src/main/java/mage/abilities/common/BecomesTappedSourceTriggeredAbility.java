@@ -19,9 +19,10 @@ public class BecomesTappedSourceTriggeredAbility extends TriggeredAbilityImpl {
     public BecomesTappedSourceTriggeredAbility(Effect effect, boolean isOptional) {
         super(Zone.BATTLEFIELD, effect, isOptional);
         setTriggerPhrase("Whenever {this} becomes tapped, ");
+        this.withRuleTextReplacement(true); // default true to replace "{this}" with "it"
     }
 
-    public BecomesTappedSourceTriggeredAbility(final BecomesTappedSourceTriggeredAbility ability) {
+    protected BecomesTappedSourceTriggeredAbility(final BecomesTappedSourceTriggeredAbility ability) {
         super(ability);
     }
 

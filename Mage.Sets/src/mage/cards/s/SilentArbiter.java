@@ -50,7 +50,7 @@ class SilentArbiterAttackRestrictionEffect extends RestrictionEffect {
         staticText = "No more than one creature can attack each combat";
     }
 
-    SilentArbiterAttackRestrictionEffect(final SilentArbiterAttackRestrictionEffect effect) {
+    private SilentArbiterAttackRestrictionEffect(final SilentArbiterAttackRestrictionEffect effect) {
         super(effect);
     }
 
@@ -77,7 +77,7 @@ class SilentArbiterBlockRestrictionEffect extends RestrictionEffect {
         staticText = "No more than one creature can block each combat";
     }
 
-    SilentArbiterBlockRestrictionEffect(final SilentArbiterBlockRestrictionEffect effect) {
+    private SilentArbiterBlockRestrictionEffect(final SilentArbiterBlockRestrictionEffect effect) {
         super(effect);
     }
 

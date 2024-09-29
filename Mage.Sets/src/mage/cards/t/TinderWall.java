@@ -47,7 +47,7 @@ public final class TinderWall extends CardImpl {
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new SacrificeSourceCost()));
 
         // {R}, Sacrifice Tinder Wall: Tinder Wall deals 2 damage to target creature it's blocking.
-        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new ManaCostsImpl<>("{R}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2, "it"), new ManaCostsImpl<>("{R}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

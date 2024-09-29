@@ -34,7 +34,7 @@ public final class NestingDovehawk extends CardImpl {
         // At the beginning of combat on your turn, populate.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new PopulateEffect(), TargetController.YOU, false));
 
-        // Whenever a creature token enters the battlefield under your control, put a +1/+1 counter on Nesting Dovehawk.
+        // Whenever a creature token you control enters, put a +1/+1 counter on Nesting Dovehawk.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_CREATURE_TOKEN
         ));

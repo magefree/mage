@@ -71,7 +71,7 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature you control deals combat damage to a player, ");
     }
 
-    public GrenzoHavocRaiserTriggeredAbility(final GrenzoHavocRaiserTriggeredAbility ability) {
+    private GrenzoHavocRaiserTriggeredAbility(final GrenzoHavocRaiserTriggeredAbility ability) {
         super(ability);
         this.damagedPlayerName = ability.damagedPlayerName;
     }
@@ -122,12 +122,12 @@ class GrenzoHavocRaiserTriggeredAbility extends TriggeredAbilityImpl {
 
 class GrenzoHavocRaiserEffect extends OneShotEffect {
 
-    public GrenzoHavocRaiserEffect() {
+    GrenzoHavocRaiserEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "exile the top card of that player's library. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it";
     }
 
-    public GrenzoHavocRaiserEffect(final GrenzoHavocRaiserEffect effect) {
+    private GrenzoHavocRaiserEffect(final GrenzoHavocRaiserEffect effect) {
         super(effect);
     }
 
@@ -152,7 +152,7 @@ class GrenzoHavocRaiserEffect extends OneShotEffect {
                     if (card.getSpellAbility() != null) {
                         // allow to cast the card
                         // and you may spend mana as though it were mana of any color to cast it
-                        CardUtil.makeCardPlayable(game, source, card, Duration.EndOfTurn, true);
+                        CardUtil.makeCardPlayable(game, source, card, true, Duration.EndOfTurn, true);
                     }
                 }
                 return true;

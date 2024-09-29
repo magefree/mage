@@ -48,7 +48,7 @@ class PunishingFireTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever an opponent gains life, ");
     }
 
-    public PunishingFireTriggeredAbility(final PunishingFireTriggeredAbility ability) {
+    private PunishingFireTriggeredAbility(final PunishingFireTriggeredAbility ability) {
         super(ability);
     }
 

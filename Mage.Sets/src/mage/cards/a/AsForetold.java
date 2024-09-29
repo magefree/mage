@@ -1,8 +1,8 @@
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -18,11 +18,12 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author stravant
- *
  */
 public final class AsForetold extends CardImpl {
 
@@ -71,14 +72,14 @@ class SpellWithManaCostLessThanOrEqualToCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         MageObject object = game.getObject(source);
         return object != null
-                && !object.isLand(game)
-                && object.getManaValue() <= counters;
+                && object.getManaValue() <= counters
+                && source instanceof SpellAbility;
     }
 }
 
 /**
  * Special AlternativeCostSourceAbility implementation. We wrap the call to
- * askToActivateAlternativeCosts in order to tell when the alternative cost is
+ * activateAlternativeCosts in order to tell when the alternative cost is
  * used, and mark it as having been used this turn in the watcher
  */
 class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
@@ -100,24 +101,18 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
     }
 
     @Override
-    public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
-        Player controller = game.getPlayer(ability.getControllerId());
-        Permanent asForetold = game.getPermanent(getSourceId());
-        if (controller != null
-                && asForetold != null) {
-            if (controller.chooseUse(Outcome.Neutral, "Use "
-                    + asForetold.getLogName() + " to pay the alternative cost ?", ability, game)) {
-                wasActivated = super.askToActivateAlternativeCosts(ability, game);
-                if (wasActivated) {
-                    game.getState().setValue(asForetold.getId().toString()
-                            + asForetold.getZoneChangeCounter(game)
-                            + asForetold.getTurnsOnBattlefield(), true);
-                }
-            }
+    public boolean activateAlternativeCosts(Ability ability, Game game) {
+        if (!super.activateAlternativeCosts(ability, game)) {
+            return false;
         }
-        return wasActivated;
+        Permanent asForetold = game.getPermanent(getSourceId());
+        if (asForetold != null) {
+            game.getState().setValue(asForetold.getId().toString()
+                    + asForetold.getZoneChangeCounter(game)
+                    + asForetold.getTurnsOnBattlefield(), true);
+        }
+        return true;
     }
-
 }
 
 /**
@@ -126,12 +121,12 @@ class AsForetoldAlternativeCost extends AlternativeCostSourceAbility {
  */
 class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
 
-    public AsForetoldAddAltCostEffect() {
+    AsForetoldAddAltCostEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with mana value X or less, where X is the number of time counters on {this}.";
     }
 
-    public AsForetoldAddAltCostEffect(final AsForetoldAddAltCostEffect effect) {
+    private AsForetoldAddAltCostEffect(final AsForetoldAddAltCostEffect effect) {
         super(effect);
     }
 
@@ -148,8 +143,8 @@ class AsForetoldAddAltCostEffect extends ContinuousEffectImpl {
             if (sourcePermanent != null) {
                 Boolean wasItUsed = (Boolean) game.getState().getValue(
                         sourcePermanent.getId().toString()
-                        + sourcePermanent.getZoneChangeCounter(game)
-                        + sourcePermanent.getTurnsOnBattlefield());
+                                + sourcePermanent.getZoneChangeCounter(game)
+                                + sourcePermanent.getTurnsOnBattlefield());
                 // If we haven't used it yet this turn, give the option of using the zero alternative cost
                 if (wasItUsed == null) {
                     int timeCounters = sourcePermanent.getCounters(game).getCount(CounterType.TIME);

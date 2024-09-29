@@ -54,7 +54,7 @@ class GravebaneZombieEffect extends ReplacementEffectImpl {
         staticText = "If {this} would die, put {this} on top of its owner's library instead";
     }
 
-    GravebaneZombieEffect(final GravebaneZombieEffect effect) {
+    private GravebaneZombieEffect(final GravebaneZombieEffect effect) {
         super(effect);
     }
 

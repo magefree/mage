@@ -33,7 +33,7 @@ public class EmbalmAbility extends ActivatedAbilityImpl {
         this.timing = TimingRule.SORCERY;
     }
 
-    public EmbalmAbility(final EmbalmAbility ability) {
+    protected EmbalmAbility(final EmbalmAbility ability) {
         super(ability);
         this.rule = ability.rule;
     }
@@ -66,7 +66,7 @@ class EmbalmEffect extends OneShotEffect {
         super(Outcome.PutCreatureInPlay);
     }
 
-    public EmbalmEffect(final EmbalmEffect effect) {
+    protected EmbalmEffect(final EmbalmEffect effect) {
         super(effect);
     }
 

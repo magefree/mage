@@ -28,7 +28,7 @@ public final class DaxosSpiritToken extends TokenImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DaxosSpiritSetPTEffect()));
     }
 
-    public DaxosSpiritToken(final DaxosSpiritToken token) {
+    private DaxosSpiritToken(final DaxosSpiritToken token) {
         super(token);
     }
 
@@ -44,7 +44,7 @@ class DaxosSpiritSetPTEffect extends ContinuousEffectImpl {
         staticText = "This creature's power and toughness are each equal to the number of experience counters you have";
     }
 
-    public DaxosSpiritSetPTEffect(final DaxosSpiritSetPTEffect effect) {
+    protected DaxosSpiritSetPTEffect(final DaxosSpiritSetPTEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class DaxosSpiritSetPTEffect extends ContinuousEffectImpl {
             return false;
         }
 
-        int amount = controller.getCounters().getCount(CounterType.EXPERIENCE);
+        int amount = controller.getCountersCount(CounterType.EXPERIENCE);
         permanent.getPower().setModifiedBaseValue(amount);
         permanent.getToughness().setModifiedBaseValue(amount);
         return true;

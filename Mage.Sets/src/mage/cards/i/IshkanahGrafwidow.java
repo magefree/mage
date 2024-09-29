@@ -19,7 +19,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.SpiderToken;
 import mage.target.common.TargetOpponent;
 
@@ -30,11 +30,7 @@ import java.util.UUID;
  */
 public final class IshkanahGrafwidow extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Spider you control");
-
-    static {
-        filter.add(SubType.SPIDER.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.SPIDER, "Spider you control");
 
     public IshkanahGrafwidow(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{G}");
@@ -51,7 +47,7 @@ public final class IshkanahGrafwidow extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiderToken(), 3), false),
                 DeliriumCondition.instance,
-                "<i>Delirium</i> &mdash; When {this} enters the battlefield, if there are four or more card types among cards in your graveyard, "
+                "<i>Delirium</i> &mdash; When {this} enters, if there are four or more card types among cards in your graveyard, "
                         + "create three 1/2 green Spider creature tokens with reach.");
         ability.addHint(CardTypesInGraveyardHint.YOU);
         this.addAbility(ability);

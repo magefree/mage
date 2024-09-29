@@ -73,12 +73,12 @@ public final class KozilekTheGreatDistortion extends CardImpl {
 
 class KozilekDrawEffect extends OneShotEffect {
 
-    public KozilekDrawEffect() {
+    KozilekDrawEffect() {
         super(Outcome.DrawCard);
         this.staticText = "if you have fewer than seven cards in hand, draw cards equal to the difference";
     }
 
-    public KozilekDrawEffect(final KozilekDrawEffect effect) {
+    private KozilekDrawEffect(final KozilekDrawEffect effect) {
         super(effect);
     }
 
@@ -104,7 +104,7 @@ class KozilekDiscardCost extends CostImpl {
         this.text = "discard a card with mana value X";
     }
 
-    public KozilekDiscardCost(final KozilekDiscardCost cost) {
+    private KozilekDiscardCost(final KozilekDiscardCost cost) {
         super(cost);
     }
 
@@ -123,8 +123,8 @@ class KozilekDiscardCost extends CostImpl {
         TargetCardInHand target = new TargetCardInHand(filter);
         this.getTargets().clear();
         this.getTargets().add(target);
-        if (targets.choose(Outcome.Discard, controllerId, source.getSourceId(), source, game)) {
-            for (UUID targetId : targets.get(0).getTargets()) {
+        if (this.getTargets().choose(Outcome.Discard, controllerId, source.getSourceId(), source, game)) {
+            for (UUID targetId : this.getTargets().get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);
                 if (card == null) {
                     return false;
@@ -134,12 +134,6 @@ class KozilekDiscardCost extends CostImpl {
             }
         }
         return paid;
-    }
-
-    @Override
-    public void clearPaid() {
-        super.clearPaid();
-        this.targets.clearChosen();
     }
 
     @Override

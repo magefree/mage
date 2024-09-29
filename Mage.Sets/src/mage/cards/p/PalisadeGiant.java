@@ -65,10 +65,10 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl {
 
     PalisadeGiantReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
-        staticText = "All damage that would be dealt to you or another permanent you control is dealt to {this} instead";
+        staticText = "All damage that would be dealt to you and other permanents you control is dealt to {this} instead";
     }
 
-    PalisadeGiantReplacementEffect(final PalisadeGiantReplacementEffect effect) {
+    private PalisadeGiantReplacementEffect(final PalisadeGiantReplacementEffect effect) {
         super(effect);
     }
 
@@ -127,11 +127,6 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

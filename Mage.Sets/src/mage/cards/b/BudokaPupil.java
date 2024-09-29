@@ -81,7 +81,7 @@ class IchigaWhoTopplesOaks extends TokenImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
-    public IchigaWhoTopplesOaks(final IchigaWhoTopplesOaks token) {
+    private IchigaWhoTopplesOaks(final IchigaWhoTopplesOaks token) {
         super(token);
     }
 

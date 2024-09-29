@@ -7,7 +7,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author awjackson
  */
 public class PreventAllDamageToSourceByPermanentsEffect extends PreventAllDamageByAllPermanentsEffect {
@@ -25,7 +24,7 @@ public class PreventAllDamageToSourceByPermanentsEffect extends PreventAllDamage
         setText();
     }
 
-    public PreventAllDamageToSourceByPermanentsEffect(final PreventAllDamageToSourceByPermanentsEffect effect) {
+    protected PreventAllDamageToSourceByPermanentsEffect(final PreventAllDamageToSourceByPermanentsEffect effect) {
         super(effect);
     }
 

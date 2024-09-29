@@ -56,7 +56,7 @@ class PestilenceDemonEffect extends OneShotEffect {
         staticText = "{this} deals 1 damage to each creature and each player";
     }
 
-    PestilenceDemonEffect(final PestilenceDemonEffect effect) {
+    private PestilenceDemonEffect(final PestilenceDemonEffect effect) {
         super(effect);
     }
 

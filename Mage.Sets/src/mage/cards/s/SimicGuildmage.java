@@ -85,12 +85,12 @@ public final class SimicGuildmage extends CardImpl {
 
 class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
 
-    public MoveCounterFromTargetToTargetEffect() {
+    MoveCounterFromTargetToTargetEffect() {
         super(Outcome.Detriment);
         this.staticText = "Move a +1/+1 counter from target creature onto another target creature with the same controller";
     }
 
-    public MoveCounterFromTargetToTargetEffect(final MoveCounterFromTargetToTargetEffect effect) {
+    private MoveCounterFromTargetToTargetEffect(final MoveCounterFromTargetToTargetEffect effect) {
         super(effect);
     }
 
@@ -149,12 +149,12 @@ class SameControllerPredicate implements ObjectSourcePlayerPredicate<MageItem> {
 
 class MoveAuraEffect extends OneShotEffect {
 
-    public MoveAuraEffect() {
+    MoveAuraEffect() {
         super(Outcome.AIDontUseIt);
         staticText = "Attach target Aura attached to a permanent to another permanent with the same controller.";
     }
 
-    public MoveAuraEffect(final MoveAuraEffect effect) {
+    private MoveAuraEffect(final MoveAuraEffect effect) {
         super(effect);
     }
 
@@ -186,11 +186,11 @@ class MoveAuraEffect extends OneShotEffect {
             }
             boolean passed = true;
             Target chosenPermanentToAttachAuras = aura.getSpellAbility().getTargets().get(0).copy();
-            chosenPermanentToAttachAuras.setNotTarget(true);
+            chosenPermanentToAttachAuras.withNotTarget(true);
             Filter filterChoice = chosenPermanentToAttachAuras.getFilter();
             filterChoice.add(new ControllerIdPredicate(fromPermanent.getControllerId()));
             filterChoice.add(Predicates.not(new PermanentIdPredicate(fromPermanent.getId())));
-            chosenPermanentToAttachAuras.setTargetName("a different " + filterChoice.getMessage() + " with the same controller as the " + filterChoice.getMessage() + " the target aura is attached to");
+            chosenPermanentToAttachAuras.withTargetName("a different " + filterChoice.getMessage() + " with the same controller as the " + filterChoice.getMessage() + " the target aura is attached to");
             if (chosenPermanentToAttachAuras.canChoose(source.getControllerId(), source, game)
                     && controller.choose(Outcome.Neutral, chosenPermanentToAttachAuras, source, game)) {
                 Permanent permanentToAttachAura = game.getPermanent(chosenPermanentToAttachAuras.getFirstTarget());

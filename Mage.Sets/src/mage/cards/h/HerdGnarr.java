@@ -1,4 +1,3 @@
-
 package mage.cards.h;
 
 import java.util.UUID;
@@ -32,7 +31,7 @@ public final class HerdGnarr extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another creature enters the battlefield under your control, Herd Gnarr gets +2/+2 until end of turn.
+        // Whenever another creature you control enters, Herd Gnarr gets +2/+2 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), filter));
     }
 

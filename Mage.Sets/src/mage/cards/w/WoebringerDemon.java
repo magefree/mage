@@ -14,10 +14,12 @@ import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -53,12 +55,12 @@ public final class WoebringerDemon extends CardImpl {
 
 class WoebringerDemonEffect extends OneShotEffect {
 
-    public WoebringerDemonEffect() {
+    WoebringerDemonEffect() {
         super(Outcome.Detriment);
         this.staticText = "that player sacrifices a creature. If the player can't, sacrifice {this}";
     }
 
-    public WoebringerDemonEffect(final WoebringerDemonEffect effect) {
+    private WoebringerDemonEffect(final WoebringerDemonEffect effect) {
         super(effect);
     }
 
@@ -73,10 +75,9 @@ class WoebringerDemonEffect extends OneShotEffect {
         if (controller != null) {
             Player currentPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (currentPlayer != null) {
-                TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                target.setNotTarget(true);
+                TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
                 if (target.canChoose(currentPlayer.getId(), source, game)) {
-                    currentPlayer.chooseTarget(Outcome.Sacrifice, target, source, game);
+                    currentPlayer.choose(Outcome.Sacrifice, target, source, game);
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {
                         permanent.sacrifice(source, game);

@@ -25,6 +25,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -91,7 +92,9 @@ class LyndeCheerfulTormentorCurseDiesTriggeredAbility extends TriggeredAbilityIm
         if (zEvent.isDiesEvent()) {
             Permanent permanent = zEvent.getTarget();
             if (permanent != null && permanent.hasSubtype(SubType.CURSE, game) && permanent.isOwnedBy(controllerId)) {
-                getEffects().setValue("curse", new MageObjectReference(game.getCard(zEvent.getTargetId()), game));
+                MageObjectReference curse = new MageObjectReference(game.getCard(zEvent.getTargetId()), game);
+                getEffects().setValue("curse", curse);
+                getEffects().setTargetPointer(new FixedTarget(curse));
                 return true;
             }
         }
@@ -111,7 +114,7 @@ class LyndeCheerfulTormentorCurseDiesTriggeredAbility extends TriggeredAbilityIm
 
 class LyndeCheerfulTormentorReturnCurseEffect extends OneShotEffect {
 
-    public LyndeCheerfulTormentorReturnCurseEffect() {
+    LyndeCheerfulTormentorReturnCurseEffect() {
         super(Outcome.Benefit);
         staticText = "return it to the battlefield attached to you at the beginning of the next end step";
     }
@@ -166,7 +169,7 @@ class LyndeCheerfulTormentorAttachCurseEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             TargetPermanent targetPermanent = new TargetPermanent(filter);
-            targetPermanent.setNotTarget(true);
+            targetPermanent.withNotTarget(true);
             if (controller.chooseTarget(outcome, targetPermanent, source, game)) {
                 Permanent curse = game.getPermanent(targetPermanent.getFirstTarget());
                 if (curse != null) {

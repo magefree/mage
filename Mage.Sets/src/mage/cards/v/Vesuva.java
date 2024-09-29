@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -32,7 +31,7 @@ public final class Vesuva extends CardImpl {
         effect.setText("tapped");
         Ability ability = new EntersBattlefieldAbility(effect, true);
         effect = new CopyPermanentEffect(filter);
-        effect.setText("as a copy of any land on the battlefield");
+        effect.setText(" as a copy of any land on the battlefield");
         ability.addEffect(effect);
         this.addAbility(ability);
     }

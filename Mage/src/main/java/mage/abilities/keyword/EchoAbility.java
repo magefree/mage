@@ -37,7 +37,7 @@ public class EchoAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new EchoEffect(amount), false);
         this.amount = amount;
         this.echoPaid = false;
-        this.echoCosts.add(costs);
+        this.echoCosts.add(getCosts());
         this.lastController = null;
         this.manaEcho = true;
         this.rule = rule;
@@ -52,7 +52,7 @@ public class EchoAbility extends TriggeredAbilityImpl {
         this.rule = null;
     }
 
-    public EchoAbility(final EchoAbility ability) {
+    protected EchoAbility(final EchoAbility ability) {
         super(ability);
         this.echoPaid = ability.echoPaid;
         this.echoCosts = ability.echoCosts.copy();

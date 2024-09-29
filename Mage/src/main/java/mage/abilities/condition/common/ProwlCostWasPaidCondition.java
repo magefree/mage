@@ -3,8 +3,8 @@ package mage.abilities.condition.common;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.keyword.ProwlAbility;
-import mage.cards.Card;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 /**
  * Checks if a the spell was cast with the alternate prowl costs
@@ -17,17 +17,7 @@ public enum ProwlCostWasPaidCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            for (Ability ability : card.getAbilities(game)) {
-                if (ability instanceof ProwlAbility) {
-                    if (((ProwlAbility) ability).isActivated(source, game)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        return CardUtil.checkSourceCostsTagExists(game, source, ProwlAbility.getActivationKey());
     }
 
     @Override

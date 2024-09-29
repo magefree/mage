@@ -46,7 +46,7 @@ class ZursWeirdingReplacementEffect extends ReplacementEffectImpl {
 
     ZursWeirdingReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Neutral);
-        this.staticText = "If a player would draw a card, they reveal it instead." +
+        this.staticText = "If a player would draw a card, they reveal it instead. " +
                 "Then any other player may pay 2 life. If a player does, " +
                 "put that card into its owner's graveyard. Otherwise, that player draws a card.";
     }

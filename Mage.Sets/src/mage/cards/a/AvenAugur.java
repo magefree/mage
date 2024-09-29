@@ -37,8 +37,7 @@ public final class AvenAugur extends CardImpl {
         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
                 new ReturnToHandTargetEffect(),
                 new SacrificeSourceCost(),
-                new IsStepCondition(PhaseStep.UPKEEP),
-                null);
+                new IsStepCondition(PhaseStep.UPKEEP));
         ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);
     }

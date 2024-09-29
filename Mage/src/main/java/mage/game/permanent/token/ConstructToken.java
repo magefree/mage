@@ -18,7 +18,7 @@ public final class ConstructToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public ConstructToken(final ConstructToken token) {
+    private ConstructToken(final ConstructToken token) {
         super(token);
     }
 

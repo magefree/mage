@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -16,7 +15,9 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.XCMCPermanentAdjuster;
+import mage.target.targetadjustment.XManaValueTargetAdjuster;
+
+import java.util.UUID;
 
 /**
  *
@@ -40,7 +41,7 @@ public final class Plaguebearer extends CardImpl {
         // {X}{X}{B}: Destroy target nonblack creature with converted mana cost X.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{X}{X}{B}"));
         ability.addTarget(new TargetPermanent(filter));
-        ability.setTargetAdjuster(XCMCPermanentAdjuster.instance);
+        ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);
     }
 

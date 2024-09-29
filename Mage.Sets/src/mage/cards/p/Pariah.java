@@ -49,49 +49,45 @@ public final class Pariah extends CardImpl {
     public Pariah copy() {
         return new Pariah(this);
     }
+    
+}
 
-    static class PariahEffect extends ReplacementEffectImpl {
-        PariahEffect() {
-            super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
-            staticText = "All damage that would be dealt to you is dealt to enchanted creature instead";
-        }
+class PariahEffect extends ReplacementEffectImpl { // TODO: extend redirection effect instead?
+    PariahEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
+        staticText = "All damage that would be dealt to you is dealt to enchanted creature instead";
+    }
 
-        PariahEffect(final PariahEffect effect) {
-            super(effect);
-        }
+    private PariahEffect(final PariahEffect effect) {
+        super(effect);
+    }
 
-        @Override
-        public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-            DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
-            Permanent equipment = game.getPermanent(source.getSourceId());
-            if (equipment != null) {
-                Permanent permanent = game.getPermanent(equipment.getAttachedTo());
-                if (permanent != null) {
-                    permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
-                    return true;
-                }
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        DamagePlayerEvent damageEvent = (DamagePlayerEvent) event;
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null) {
+            Permanent permanent = game.getPermanent(equipment.getAttachedTo());
+            if (permanent != null) {
+                permanent.damage(damageEvent.getAmount(), event.getSourceId(), source, game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+                return true;
             }
-            return true;
         }
+        return true;
+    }
 
-        @Override
-        public boolean checksEventType(GameEvent event, Game game) {
-            return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
-        }
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+    }
 
-        @Override
-        public boolean applies(GameEvent event, Ability source, Game game) {
-            return event.getPlayerId().equals(source.getControllerId());
-        }
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        return event.getPlayerId().equals(source.getControllerId());
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return true;
-        }
-
-        @Override
-        public PariahEffect copy() {
-            return new PariahEffect(this);
-        }
+    @Override
+    public PariahEffect copy() {
+        return new PariahEffect(this);
     }
 }

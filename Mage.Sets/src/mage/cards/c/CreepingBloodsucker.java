@@ -49,7 +49,7 @@ class CreepingBloodsuckerEffect extends OneShotEffect {
         staticText = "{this} deals 1 damage to each opponent. You gain life equal to the damage dealt this way";
     }
 
-    public CreepingBloodsuckerEffect(final CreepingBloodsuckerEffect effect) {
+    private CreepingBloodsuckerEffect(final CreepingBloodsuckerEffect effect) {
         super(effect);
     }
 

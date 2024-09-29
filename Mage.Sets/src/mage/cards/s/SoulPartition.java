@@ -45,7 +45,7 @@ public final class SoulPartition extends CardImpl {
 
 class SoulPartitionEffect extends OneShotEffect {
 
-    public SoulPartitionEffect() {
+    SoulPartitionEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile target nonland permanent. For as long as that card remains exiled, its owner may play it. A spell cast by an opponent this way costs {2} more to cast.";
     }

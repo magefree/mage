@@ -25,12 +25,12 @@ public final class AkromaAngelOfWrath extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
+        // Flying, first strike, vigilance, trample, haste, protection from black and from red
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(FirstStrikeAbility.getInstance());
         this.addAbility(VigilanceAbility.getInstance());
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
-        // protection from black and from red
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK, ObjectColor.RED));
     }
 

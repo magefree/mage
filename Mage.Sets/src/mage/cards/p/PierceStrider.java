@@ -30,7 +30,7 @@ public final class PierceStrider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public PierceStrider (final PierceStrider card) {
+    private PierceStrider(final PierceStrider card) {
         super(card);
     }
 

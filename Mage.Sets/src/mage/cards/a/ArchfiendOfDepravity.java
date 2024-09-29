@@ -52,12 +52,12 @@ public final class ArchfiendOfDepravity extends CardImpl {
 
 class ArchfiendOfDepravityEffect extends OneShotEffect {
 
-    public ArchfiendOfDepravityEffect() {
+    ArchfiendOfDepravityEffect() {
         super(Outcome.Benefit); // AI should select two creatures if possible so it has to be a benefit
         this.staticText = "that player chooses up to two creatures they control, then sacrifices the rest";
     }
 
-    public ArchfiendOfDepravityEffect(final ArchfiendOfDepravityEffect effect) {
+    private ArchfiendOfDepravityEffect(final ArchfiendOfDepravityEffect effect) {
         super(effect);
     }
 

@@ -21,7 +21,7 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class Oliphaunt extends CardImpl {
-
+    
     public Oliphaunt(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{R}");
 
@@ -37,7 +37,7 @@ public final class Oliphaunt extends CardImpl {
                 .setText("another target creature you control gets +2/+0"));
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance())
                 .setText("and gains trample until end of turn"));
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
 
         // Mountaincycling {1}

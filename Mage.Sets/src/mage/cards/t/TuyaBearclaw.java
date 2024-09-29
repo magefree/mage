@@ -37,7 +37,7 @@ public final class TuyaBearclaw extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
                 TuyaBearclawValue.instance,
                 TuyaBearclawValue.instance,
-                Duration.EndOfTurn, true
+                Duration.EndOfTurn
         ), false));
     }
 

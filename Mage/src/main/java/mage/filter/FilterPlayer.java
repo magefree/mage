@@ -3,6 +3,8 @@ package mage.filter;
 import mage.abilities.Ability;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -26,7 +28,7 @@ public class FilterPlayer extends FilterImpl<Player> {
         super(name);
     }
 
-    public FilterPlayer(final FilterPlayer filter) {
+    protected FilterPlayer(final FilterPlayer filter) {
         super(filter);
         this.extraPredicates.addAll(filter.extraPredicates);
     }
@@ -35,6 +37,10 @@ public class FilterPlayer extends FilterImpl<Player> {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
+
+        // verify check
+        Predicates.makeSurePredicateCompatibleWithFilter(predicate, Player.class);
+
         extraPredicates.add(predicate);
         return this;
     }
@@ -55,5 +61,10 @@ public class FilterPlayer extends FilterImpl<Player> {
     @Override
     public FilterPlayer copy() {
         return new FilterPlayer(this);
+    }
+
+    @Override
+    public List<Predicate> getExtraPredicates() {
+        return new ArrayList<>(extraPredicates);
     }
 }

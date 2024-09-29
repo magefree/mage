@@ -22,7 +22,7 @@ public final class KelpToken extends TokenImpl {
         this.addAbility(DefenderAbility.getInstance());
     }
 
-    public KelpToken(final KelpToken token) {
+    private KelpToken(final KelpToken token) {
         super(token);
     }
 

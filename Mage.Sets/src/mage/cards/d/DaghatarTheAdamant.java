@@ -66,12 +66,12 @@ public final class DaghatarTheAdamant extends CardImpl {
 
 class MoveCounterFromTargetToTargetEffect extends OneShotEffect {
 
-    public MoveCounterFromTargetToTargetEffect() {
+    MoveCounterFromTargetToTargetEffect() {
         super(Outcome.Detriment);
         this.staticText = "Move a +1/+1 counter from target creature onto a second target creature";
     }
 
-    public MoveCounterFromTargetToTargetEffect(final MoveCounterFromTargetToTargetEffect effect) {
+    private MoveCounterFromTargetToTargetEffect(final MoveCounterFromTargetToTargetEffect effect) {
         super(effect);
     }
 

@@ -1,7 +1,6 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -21,6 +20,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,12 +72,12 @@ public final class LinSivviDefiantHero extends CardImpl {
 
 class LinSivviDefiantHeroEffect extends OneShotEffect {
 
-    public LinSivviDefiantHeroEffect() {
+    LinSivviDefiantHeroEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Search your library for a Rebel permanent card with mana value X or less, put it onto the battlefield, then shuffle";
     }
 
-    public LinSivviDefiantHeroEffect(final LinSivviDefiantHeroEffect effect) {
+    private LinSivviDefiantHeroEffect(final LinSivviDefiantHeroEffect effect) {
         super(effect);
     }
 
@@ -91,7 +93,7 @@ class LinSivviDefiantHeroEffect extends OneShotEffect {
             return false;
         }
 
-        int xCost = source.getManaCostsToPay().getX();
+        int xCost = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with mana value " + xCost + " or less");
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xCost + 1));

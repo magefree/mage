@@ -66,12 +66,12 @@ public final class TezzeretCruelMachinist extends CardImpl {
 
 class TezzeretCruelMachinistEffect extends OneShotEffect {
 
-    public TezzeretCruelMachinistEffect() {
+    TezzeretCruelMachinistEffect() {
         super(Outcome.Benefit);
         this.staticText = "put any number of cards from your hand onto the battlefield face down. They're 5/5 artifact creatures";
     }
 
-    public TezzeretCruelMachinistEffect(final TezzeretCruelMachinistEffect effect) {
+    private TezzeretCruelMachinistEffect(final TezzeretCruelMachinistEffect effect) {
         super(effect);
     }
 
@@ -97,7 +97,7 @@ class TezzeretCruelMachinistEffect extends OneShotEffect {
                         .getCards(game)
                         .stream()
                         .map(card -> new MageObjectReference(card, game, 1))
-                        .collect(Collectors.toSet()), game
+                        .collect(Collectors.toList())
         )), source);
         player.moveCards(
                 cardsToMove.getCards(game), Zone.BATTLEFIELD, source, game,
@@ -109,11 +109,11 @@ class TezzeretCruelMachinistEffect extends OneShotEffect {
 
 class TezzeretCruelMachinistCardTypeEffect extends ContinuousEffectImpl {
 
-    public TezzeretCruelMachinistCardTypeEffect() {
+    TezzeretCruelMachinistCardTypeEffect() {
         super(Duration.Custom, Layer.CopyEffects_1, SubLayer.FaceDownEffects_1b, Outcome.Neutral);
     }
 
-    public TezzeretCruelMachinistCardTypeEffect(final TezzeretCruelMachinistCardTypeEffect effect) {
+    private TezzeretCruelMachinistCardTypeEffect(final TezzeretCruelMachinistCardTypeEffect effect) {
         super(effect);
     }
 
@@ -125,7 +125,7 @@ class TezzeretCruelMachinistCardTypeEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean flag = false;
-        for (UUID targetId : targetPointer.getTargets(game, source)) {
+        for (UUID targetId : getTargetPointer().getTargets(game, source)) {
             Permanent target = game.getPermanent(targetId);
             if (target == null || !target.isFaceDown(game)) {
                 continue;

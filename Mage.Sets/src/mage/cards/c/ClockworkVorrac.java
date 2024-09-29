@@ -58,7 +58,7 @@ class ClockworkVorracEffect extends OneShotEffect {
         staticText = "remove a +1/+1 counter from {this} at end of combat";
     }
 
-    ClockworkVorracEffect(final ClockworkVorracEffect effect) {
+    private ClockworkVorracEffect(final ClockworkVorracEffect effect) {
         super(effect);
     }
 

@@ -79,14 +79,14 @@ public final class Tetravus extends CardImpl {
 
 class TetravusCreateTokensEffect extends OneShotEffect {
 
-    public TetravusCreateTokensEffect() {
+    TetravusCreateTokensEffect() {
         super(Outcome.Benefit);
         this.staticText = "remove any number of +1/+1 counters from {this}. "
                 + "If you do, create that many 1/1 colorless Tetravite artifact creature tokens. "
                 + "They each have flying and \"This creature can't be enchanted.\"";
     }
 
-    public TetravusCreateTokensEffect(final TetravusCreateTokensEffect effect) {
+    private TetravusCreateTokensEffect(final TetravusCreateTokensEffect effect) {
         super(effect);
     }
 
@@ -131,13 +131,13 @@ class TetravusCreateTokensEffect extends OneShotEffect {
 
 class TetravusAddCountersEffect extends OneShotEffect {
 
-    public TetravusAddCountersEffect() {
+    TetravusAddCountersEffect() {
         super(Outcome.Benefit);
         this.staticText = "exile any number of tokens created with {this}. "
                 + "If you do, put that many +1/+1 counters on {this}";
     }
 
-    public TetravusAddCountersEffect(final TetravusAddCountersEffect effect) {
+    private TetravusAddCountersEffect(final TetravusAddCountersEffect effect) {
         super(effect);
     }
 

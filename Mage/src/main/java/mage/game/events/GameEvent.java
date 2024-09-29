@@ -32,7 +32,6 @@ public class GameEvent implements Serializable {
     protected Zone zone;
     protected List<UUID> appliedEffects = new ArrayList<>();
     protected ApprovingObject approvingObject; // e.g. the approving object for casting a spell from non hand zone
-    protected UUID customEventType = null;
 
     public enum EventType {
 
@@ -43,7 +42,8 @@ public class GameEvent implements Serializable {
         PLAY_TURN, EXTRA_TURN,
         CHANGE_PHASE, PHASE_CHANGED,
         CHANGE_STEP, STEP_CHANGED,
-        BEGINNING_PHASE, BEGINNING_PHASE_PRE, BEGINNING_PHASE_POST,
+        BEGINNING_PHASE, BEGINNING_PHASE_PRE, BEGINNING_PHASE_POST, // The normal beginning phase -- at the beginning of turn
+        BEGINNING_PHASE_EXTRA, BEGINNING_PHASE_PRE_EXTRA, BEGINNING_PHASE_POST_EXTRA, // Extra beginning phase, 'as turn begun' watchers don't want to react on thoses.
         UNTAP_STEP_PRE, UNTAP_STEP, UNTAP_STEP_POST,
         UPKEEP_STEP_PRE, UPKEEP_STEP, UPKEEP_STEP_POST,
         DRAW_STEP_PRE, DRAW_STEP, DRAW_STEP_POST,
@@ -72,10 +72,11 @@ public class GameEvent implements Serializable {
          flag        not used for this event
          */
         ZONE_CHANGE,
-        ZONE_CHANGE_GROUP,
-        DRAW_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
+        ZONE_CHANGE_GROUP, // between two specific zones only; TODO: rework all usages to ZONE_CHANGE_BATCH instead, see #11895
+        ZONE_CHANGE_BATCH, // all zone changes that occurred from a single effect
+        DRAW_TWO_OR_MORE_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
         DRAW_CARD, DREW_CARD,
-        EXPLORED,
+        EXPLORE, EXPLORED, // targetId is exploring permanent, playerId is its controller
         ECHO_PAID,
         MIRACLE_CARD_REVEALED,
         /* MADNESS_CARD_EXILED,
@@ -84,14 +85,8 @@ public class GameEvent implements Serializable {
          playerId    controller of the card
          */
         MADNESS_CARD_EXILED,
-        INVESTIGATED,
+        INVESTIGATED, // playerId is the player who investigated
         KICKED,
-        /* CONVOKED
-         targetId    id of the creature that was taped to convoke the sourceId
-         sourceId    sourceId of the convoked spell
-         playerId    controller of the convoked spell
-         */
-        CONVOKED,
         /* DISCARD_CARD
          flag        event is result of effect (1) or result of cost (0)
          */
@@ -99,29 +94,69 @@ public class GameEvent implements Serializable {
         DISCARDED_CARD,
         DISCARDED_CARDS,
         CYCLE_CARD, CYCLED_CARD, CYCLE_DRAW,
+        /* CLASHED (one event fired for each player involved)
+         playerId    the id of the clashing player
+         flag        true = playerId won the clash
+         targetId    the id of the other player in the clash
+         */
         CLASH, CLASHED,
         DAMAGE_PLAYER,
+
+        /* MILL_CARDS
+         playerId    the id of the player milling the card (not the source's controller)
+         targetId    the id of the card milled
+         */
         MILL_CARDS,
+        /* MILLED_CARDS
+         playerId    the id of the player milling the card (not the source's controller)
+         targetId    the id of the card milled
+         */
         MILLED_CARD,
-        MILLED_CARDS,
+        /* MILLED_CARDS_BATCH_FOR_ONE_PLAYER,
+         combines all MILLED_CARD events for a player milling card at the same time in a single batch
+         playerId    the id of the player whose batch it is
+         */
+        MILLED_CARDS_BATCH_FOR_ONE_PLAYER,
+        /* MILLED_CARDS_BATCH_FOR_ALL,
+         combines all MILLED_CARD events for any player in a single batch
+         */
+        MILLED_CARDS_BATCH_FOR_ALL,
+
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage
-         playerId    the id of the damged player
+         playerId    the id of the damaged player
          amount      amount of damage
-         flag        true = comabat damage - other damage = false
+         flag        true = combat damage - other damage = false
          */
         DAMAGED_PLAYER,
 
-        /* DAMAGED_PLAYER_BATCH
-         combines all player damaged events in one single event
+        /* DAMAGED_BATCH_FOR_PLAYERS,
+         combines all player damage events to a single batch (event)
          */
-        DAMAGED_PLAYER_BATCH,
+        DAMAGED_BATCH_FOR_PLAYERS,
+
+        /* DAMAGED_BATCH_FOR_ONE_PLAYER
+         combines all player damage events to a single batch (event) and split it per damaged player
+         targetId    the id of the damaged player (playerId won't work for batch)
+         */
+        DAMAGED_BATCH_FOR_ONE_PLAYER,
+
+        /* DAMAGED_BATCH_FOR_ALL
+        includes all damage events, both permanent damage and player damage, in single batch event
+         */
+        DAMAGED_BATCH_FOR_ALL,
+        /* DAMAGED_BATCH_FIRED
+         * Does not contain any info on damage events, and can fire even when all damage is prevented.
+         * Fire any time a DAMAGED_BATCH_FOR_ALL could have fired (combat & noncombat).
+         * It is not a batch event (doesn't contain sub events), the name is a little ambiguous.
+         */
+        DAMAGED_BATCH_COULD_HAVE_FIRED,
 
         /* DAMAGE_CAUSES_LIFE_LOSS,
          targetId    the id of the damaged player
          sourceId    sourceId of the ability which caused the damage, can be null for default events like combat
-         playerId    the id of the damged player
+         playerId    the id of the damaged player
          amount      amount of damage
          flag        is it combat damage
          */
@@ -134,8 +169,12 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the ability which caused the lose
          playerId    the id of the player loosing life
          amount      amount of life loss
-         flag        true = from comabat damage - other from non combat damage
+         flag        true = from combat damage - other from non combat damage
          */
+        LOST_LIFE_BATCH,
+        /* LOST_LIFE_BATCH
+         combines all player life lost events to a single batch (event)
+        */
         PLAY_LAND, LAND_PLAYED,
         CREATURE_CHAMPIONED,
         /* CREATURE_CHAMPIONED
@@ -145,7 +184,7 @@ public class GameEvent implements Serializable {
          */
         CREW_VEHICLE,
         /* CREW_VEHICLE
-         targetId    the id of the creature that crewed a vehicle
+         targetId    the id of the creature that will crew a vehicle
          sourceId    sourceId of the vehicle
          playerId    the id of the controlling player
          */
@@ -161,12 +200,23 @@ public class GameEvent implements Serializable {
          sourceId    sourceId of the vehicle
          playerId    the id of the controlling player
          */
-        X_MANA_ANNOUNCE,
-        /* X_MANA_ANNOUNCE
-         mana x-costs announced by players (X value can be changed by replace events like Unbound Flourishing)
-         targetId    id of the spell that's cast
-         playerId    player that casts the spell or ability
-         amount      X multiplier to change X value, default 1
+        SADDLE_MOUNT,
+        /* SADDLE_MOUNT
+         targetId    the id of the creature that will saddle a mount
+         sourceId    sourceId of the mount
+         playerId    the id of the controlling player
+         */
+        SADDLED_MOUNT,
+        /* SADDLED_MOUNT
+         targetId    the id of the creature that saddled a mount
+         sourceId    sourceId of the mount
+         playerId    the id of the controlling player
+         */
+        MOUNT_SADDLED,
+        /* MOUNT_SADDLED
+         targetId    the id of the mount
+         sourceId    sourceId of the mount
+         playerId    the id of the controlling player
          */
         CAST_SPELL,
         CAST_SPELL_LATE,
@@ -189,6 +239,7 @@ public class GameEvent implements Serializable {
          */
         ACTIVATE_ABILITY, ACTIVATED_ABILITY,
         /* ACTIVATE_ABILITY, ACTIVATED_ABILITY,
+         WARNING, do not use choose dialogs inside, can be calls multiple types, e.g. on playable checking
          targetId    id of the ability to activate / use
          sourceId    sourceId of the object with that ability
          playerId    player that tries to use this ability
@@ -296,13 +347,40 @@ public class GameEvent implements Serializable {
         DECLARING_BLOCKERS,
         DECLARED_BLOCKERS,
         DECLARE_BLOCKER,
+
         /* BLOCKER_DECLARED
+         raise one time for each declared blocker (e.g. multiple events per attacker allows)
+
+         warning, must use for rules: becomes blocked by a creature
+
+         rules ref:
+         Acolyte of the Inferno’s last ability will trigger once for each creature that blocks it.
+         Each of those creatures will be dealt 2 damage.
+         (2015-06-22)
+
          targetId    attacker id
          sourceId    blocker id
          playerId    blocker controller id
          */
         BLOCKER_DECLARED,
+
+        /* CREATURE_BLOCKED
+         raise one time per attacker (e.g. only one event per attacker allows)
+
+         warning, must use for rules: xxx becomes blocked,
+
+         rules ref:
+         Rakdos Roustabout
+         An ability that triggers when a creature becomes blocked triggers only once
+         if two or more creatures block it.
+         (2019-01-25)
+
+         targetId    attacker id
+         sourceId    not used for this event
+         playerId    not used for this event
+         */
         CREATURE_BLOCKED,
+
         CREATURE_BLOCKS,
         BATCH_BLOCK_NONCOMBAT,
         UNBLOCKED_ATTACKER,
@@ -321,7 +399,7 @@ public class GameEvent implements Serializable {
         PLANESWALK, PLANESWALKED,
         PAID_CUMULATIVE_UPKEEP,
         DIDNT_PAY_CUMULATIVE_UPKEEP,
-        LIFE_PAID,
+        PAY_LIFE, LIFE_PAID,
         CASCADE_LAND,
         LEARN,
         //permanent events
@@ -333,19 +411,35 @@ public class GameEvent implements Serializable {
         TAP,
         /* TAPPED,
          targetId    tapped permanent
-         sourceId    id of the abilitity's source (can be null for standard tap actions like combat)
-         playerId    controller of the tapped permanent
+         sourceId    id of the ability's source (can be null for standard tap actions like combat)
+         playerId    source's controller, null if no source
          amount      not used for this event
          flag        is it tapped for combat
          */
         TAPPED,
-        TAPPED_FOR_MANA,
         /* TAPPED_FOR_MANA
          During calculation of the available mana for a player the "TappedForMana" event is fired to simulate triggered mana production.
          By checking the inCheckPlayableState these events are handled to give back only the available mana of instead really producing mana.
          IMPORTANT: Triggered non mana abilities have to ignore the event if game.inCheckPlayableState is true.
          */
-        UNTAP, UNTAPPED,
+        TAPPED_FOR_MANA,
+        /*  TAPPED_BATCH
+         combine all TAPPED events occuring at the same time in a single event
+         */
+        TAPPED_BATCH,
+        UNTAP,
+        /* UNTAPPED,
+         targetId    untapped permanent
+         sourceId    not used for this event // TODO: add source for untap?
+         playerId    controller of permanent // TODO: replace by source controller of untap? need to check every usage if so.
+         amount      not used for this event
+         flag        true if untapped during untap step (event is checked at upkeep so can't trust the current Phase)
+         */
+        UNTAPPED,
+        /*  UNTAPPED_BATCH
+         combine all UNTAPPED events occuring at the same time in a single event
+         */
+        UNTAPPED_BATCH,
         FLIP, FLIPPED,
         TRANSFORMING, TRANSFORMED,
         ADAPT,
@@ -382,8 +476,9 @@ public class GameEvent implements Serializable {
         MEDITATED,
         PHASE_OUT, PHASED_OUT,
         PHASE_IN, PHASED_IN,
-        TURNFACEUP, TURNEDFACEUP,
-        TURNFACEDOWN, TURNEDFACEDOWN,
+        TURN_FACE_UP, TURNED_FACE_UP,
+        TURN_FACE_DOWN, TURNED_FACE_DOWN,
+        MANIFESTED_DREAD,
         /* OPTION_USED
          targetId    originalId of the ability that triggered the event
          sourceId    sourceId of the ability that triggered the event
@@ -396,10 +491,15 @@ public class GameEvent implements Serializable {
         DAMAGE_PERMANENT,
         DAMAGED_PERMANENT,
 
-        /*  DAMAGED_PERMANENT_BATCH
-         combine all permanent damage events to single event
+        /*  DAMAGED_BATCH_FOR_PERMANENTS
+         combine all permanent damage events to a single batch (event)
          */
-        DAMAGED_PERMANENT_BATCH,
+        DAMAGED_BATCH_FOR_PERMANENTS,
+
+        /* DAMAGED_BATCH_FOR_ONE_PERMANENT
+         combines all permanent damage events to a single batch (event) and split it per damaged permanent
+         */
+        DAMAGED_BATCH_FOR_ONE_PERMANENT,
 
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
@@ -415,14 +515,13 @@ public class GameEvent implements Serializable {
          flag        true if no regeneration is allowed
          */
         DESTROYED_PERMANENT,
-        SACRIFICE_PERMANENT, SACRIFICED_PERMANENT,
+        SACRIFICE_PERMANENT, SACRIFICED_PERMANENT, SACRIFICED_PERMANENT_BATCH,
         FIGHTED_PERMANENT,
         BATCH_FIGHT,
         EXPLOITED_CREATURE,
         EVOLVED_CREATURE,
         EMBALMED_CREATURE,
         ETERNALIZED_CREATURE,
-        TRAINED_CREATURE,
         ATTACH, ATTACHED,
         UNATTACH, UNATTACHED,
         /* ATTACH, ATTACHED,
@@ -436,12 +535,20 @@ public class GameEvent implements Serializable {
         STAY_ATTACHED,
         ADD_COUNTER, COUNTER_ADDED,
         ADD_COUNTERS, COUNTERS_ADDED,
-        COUNTER_REMOVED, COUNTERS_REMOVED,
+        /* REMOVE_COUNTER, REMOVE_COUNTERS, COUNTER_REMOVED, COUNTERS_REMOVED
+         targetId    id of the permanent or player losing counter(s)
+         sourceId    id of the ability removing them
+         playerId    player who controls the ability removing the counters
+         amount      number of counters being removed
+         data        name of the counter(s) being removed
+         */
+        REMOVE_COUNTER, COUNTER_REMOVED,
+        REMOVE_COUNTERS, COUNTERS_REMOVED,
         LOSE_CONTROL,
         /* LOST_CONTROL
          targetId    id of the creature that lost control
          sourceId    null
-         playerId    player that controlles the creature before
+         playerId    player that controls the creature before
          amount      not used for this event
          flag        not used for this event
          */
@@ -497,28 +604,84 @@ public class GameEvent implements Serializable {
         REMOVED_FROM_COMBAT, // targetId    id of permanent removed from combat
         FORETOLD, // targetId   id of card foretold
         FORETELL, // targetId   id of card foretell  playerId   id of the controller
-        //custom events
+        /* villainous choice
+         targetId    player making the choice
+         sourceId    sourceId of the ability forcing the choice
+         playerId    controller of the ability forcing the choice
+         amount      number of times choice is repeated
+         flag        not used for this event
+         */
+        FACE_VILLAINOUS_CHOICE,
+        /* DISCOVER
+         targetId    not used for this event
+         sourceId    sourceId of the ability discovering
+         playerId    controller of the ability
+         amount      discover value
+         flag        not used for this event
+         */
+        DISCOVERED,
+        /* Exiled while crafting (see Market Gnome)
+         targetId   the permanent exiled
+         sourceId   of the craft ability
+         playerId   the player crafting
+         */
+        EXILED_WHILE_CRAFTING,
+        /* Solving a Case
+         targetId   the permanent being solved
+         sourceId   of the ability solving
+         playerId   the player solving
+         */
+        SOLVE_CASE, CASE_SOLVED,
+        /* Become suspected
+         targetId   the permanent being suspected
+         sourceId   of the ability suspecting
+         playerId   the player suspecting
+         */
+        BECOME_SUSPECTED,
+        /* Evidence collected
+         targetId   same as sourceId
+         sourceId   of the ability for the cost
+         playerId   the player paying the cost
+         */
+        EVIDENCE_COLLECTED,
+        /* Mentored Creature
+         targetId   creature that was mentored
+         sourceId   of the mentor ability
+         playerId   controller of the creature mentoring
+         */
+        MENTORED_CREATURE,
+        /* the card becomes plotted
+         targetId   card that was plotted
+         sourceId   of the plotting ability (may be the card itself or another one)
+         playerId   owner of the plotted card (the one able to cast the card)
+         */
+        BECOME_PLOTTED,
+        /* the player foraged
+         targetId   same as sourceId
+         sourceId   of the ability
+         playerId   player who foraged
+         */
+        FORAGED,
+        /* gave a gift
+         targetId   the player who received the gift
+         sourceId   of the ability
+         playerId   player who gave the gift
+         */
+        GAVE_GIFT,
+        // custom events - must store some unique data to track
         CUSTOM_EVENT
     }
 
     public GameEvent(EventType type, UUID targetId, Ability source, UUID playerId) {
-        this(type, null, targetId, source, playerId, 0, false);
+        this(type, targetId, source, playerId, 0, false, null);
     }
 
     public GameEvent(EventType type, UUID targetId, Ability source, UUID playerId, ApprovingObject approvingObject) {
-        this(type, null, targetId, source, playerId, 0, false, approvingObject);
+        this(type, targetId, source, playerId, 0, false, approvingObject);
     }
 
     public GameEvent(EventType type, UUID targetId, Ability source, UUID playerId, int amount, boolean flag) {
-        this(type, null, targetId, source, playerId, amount, flag);
-    }
-
-    public GameEvent(UUID customEventType, UUID targetId, Ability source, UUID playerId) {
-        this(EventType.CUSTOM_EVENT, customEventType, targetId, source, playerId, 0, false);
-    }
-
-    public GameEvent(UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount, boolean flag) {
-        this(EventType.CUSTOM_EVENT, customEventType, targetId, source, playerId, amount, flag);
+        this(type, targetId, source, playerId, amount, flag, null);
     }
 
     public static GameEvent getEvent(EventType type, UUID targetId, Ability source, UUID playerId, int amount) {
@@ -545,24 +708,12 @@ public class GameEvent implements Serializable {
         return event;
     }
 
-    public static GameEvent getEvent(UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount) {
-        return new GameEvent(customEventType, targetId, source, playerId, amount, false);
-    }
-
-    public static GameEvent getEvent(UUID customEventType, UUID targetId, Ability source, UUID playerId) {
-        return new GameEvent(customEventType, targetId, source, playerId);
-    }
-
-    private GameEvent(EventType type, UUID customEventType, UUID targetId, Ability source, UUID playerId, int amount, boolean flag) {
-        this(type, customEventType, targetId, source, playerId, amount, flag, null);
-    }
-
-    private GameEvent(EventType type, UUID customEventType,
-                      UUID targetId, Ability source, UUID playerId, int amount, boolean flag, ApprovingObject approvingObject) {
+    private GameEvent(EventType type, UUID targetId, Ability source, UUID playerId,
+                      int amount, boolean flag, ApprovingObject approvingObject
+    ) {
         this.type = type;
-        this.customEventType = customEventType;
         this.targetId = targetId;
-        this.sourceId = source == null ? null : source.getSourceId();
+        this.sourceId = source == null ? null : source.getSourceId(); // We only keep the sourceId from the whole source.
         this.amount = amount;
         this.playerId = playerId;
         this.flag = flag;
@@ -574,14 +725,13 @@ public class GameEvent implements Serializable {
         return type;
     }
 
-    public UUID getCustomEventType() {
-        return customEventType;
-    }
-
     public UUID getId() {
         return id;
     }
 
+    /**
+     * Some batch events can contain multiple events list, see BatchGameEvent for usage
+     */
     public UUID getTargetId() {
         return targetId;
     }
@@ -647,8 +797,6 @@ public class GameEvent implements Serializable {
 
     /**
      * Returns possibly approving object that allowed the creation of the event.
-     *
-     * @return
      */
     public ApprovingObject getAdditionalReference() {
         return approvingObject;
@@ -669,15 +817,9 @@ public class GameEvent implements Serializable {
      * creature or player, it deals double that damage to that creature or
      * player instead." A creature that normally deals 2 damage will deal 8
      * damage--not just 4, and not an infinite amount.
-     *
-     * @return
      */
     public List<UUID> getAppliedEffects() {
         return appliedEffects;
-    }
-
-    public boolean isCustomEvent(UUID customEventType) {
-        return type == EventType.CUSTOM_EVENT && this.customEventType.equals(customEventType);
     }
 
     public void addAppliedEffects(List<UUID> appliedEffects) {
@@ -689,7 +831,7 @@ public class GameEvent implements Serializable {
     public void setAppliedEffects(List<UUID> appliedEffects) {
         if (appliedEffects != null) {
             if (this.appliedEffects.isEmpty()) {
-                this.appliedEffects = appliedEffects; // Use object refecence to handle that an replacement effect can only be once applied to an event
+                this.appliedEffects = appliedEffects; // Use object reference to handle that an replacement effect can only be once applied to an event
             } else {
                 this.appliedEffects.addAll(appliedEffects);
             }
@@ -700,18 +842,24 @@ public class GameEvent implements Serializable {
         if (approvingObject == null) {
             return false;
         }
-        if (identifier == null) {
+        if (identifier.equals(MageIdentifier.Default)) {
             return false;
         }
         return identifier.equals(approvingObject.getApprovingAbility().getIdentifier());
     }
 
     /**
-     * Custom sourceId setup for some events (use it in constructor). TODO: replace all custom sourceId to normal event classes
-     *
-     * @param sourceId
+     * Custom sourceId setup for some events (use it in constructor).
+     * TODO: replace all custom sourceId to normal event classes
+     *       for now, having the setter helps find all that do not provide an Ability source,
+     *       so keeping it is worthwhile until a thoughtful cleanup.
      */
     protected void setSourceId(UUID sourceId) {
         this.sourceId = sourceId;
+    }
+
+    @Override
+    public String toString() {
+        return this.type.toString();
     }
 }

@@ -70,7 +70,7 @@ class PilgrimOfJusticeEffect extends PreventionEffectImpl {
         staticText = "The next time a red source of your choice would deal damage to you this turn, prevent that damage";
     }
 
-    public PilgrimOfJusticeEffect(final PilgrimOfJusticeEffect effect) {
+    private PilgrimOfJusticeEffect(final PilgrimOfJusticeEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }
@@ -81,12 +81,8 @@ class PilgrimOfJusticeEffect extends PreventionEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 

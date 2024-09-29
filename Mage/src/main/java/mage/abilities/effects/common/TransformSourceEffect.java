@@ -16,7 +16,7 @@ public class TransformSourceEffect extends OneShotEffect {
         staticText = "transform {this}";
     }
 
-    public TransformSourceEffect(final TransformSourceEffect effect) {
+    protected TransformSourceEffect(final TransformSourceEffect effect) {
         super(effect);
     }
 

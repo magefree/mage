@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -8,21 +7,14 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.cards.*;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class TemporalAperture extends CardImpl {
@@ -49,7 +41,7 @@ public final class TemporalAperture extends CardImpl {
 
 class TemporalApertureEffect extends OneShotEffect {
 
-    public TemporalApertureEffect() {
+    TemporalApertureEffect() {
         super(Outcome.Neutral);
         staticText = "Shuffle your library, then reveal the top card. "
                 + "Until end of turn, for as long as that card remains on "
@@ -58,7 +50,7 @@ class TemporalApertureEffect extends OneShotEffect {
                 + "paying its mana cost";
     }
 
-    public TemporalApertureEffect(final TemporalApertureEffect effect) {
+    private TemporalApertureEffect(final TemporalApertureEffect effect) {
         super(effect);
     }
 
@@ -90,13 +82,13 @@ class TemporalApertureTopCardCastEffect extends AsThoughEffectImpl {
     private final Card card;
 
     public TemporalApertureTopCardCastEffect(Card card) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         this.card = card;
         staticText = "Until end of turn, for as long as that card is on top "
                 + "of your library, you may cast it without paying its mana costs";
     }
 
-    public TemporalApertureTopCardCastEffect(final TemporalApertureTopCardCastEffect effect) {
+    private TemporalApertureTopCardCastEffect(final TemporalApertureTopCardCastEffect effect) {
         super(effect);
         this.card = effect.card;
     }

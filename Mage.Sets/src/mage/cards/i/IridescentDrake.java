@@ -62,12 +62,12 @@ public final class IridescentDrake extends CardImpl {
 
 class IridescentDrakeEffect extends OneShotEffect {
 
-    public IridescentDrakeEffect() {
+    IridescentDrakeEffect() {
         super(Outcome.Benefit);
         this.staticText = "put target Aura card from a graveyard onto the battlefield under your control attached to {this}";
     }
 
-    public IridescentDrakeEffect(final IridescentDrakeEffect effect) {
+    private IridescentDrakeEffect(final IridescentDrakeEffect effect) {
         super(effect);
     }
 

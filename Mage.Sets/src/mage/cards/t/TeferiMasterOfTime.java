@@ -107,8 +107,8 @@ class TeferiMasterOfTimeTurnEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
-        game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), false));
+        game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
+        game.getState().getTurnMods().add(new TurnMod(source.getControllerId()).withExtraTurn());
         return true;
     }
 }

@@ -58,7 +58,7 @@ class EnsouledScimitarToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public EnsouledScimitarToken(final EnsouledScimitarToken token) {
+    private EnsouledScimitarToken(final EnsouledScimitarToken token) {
         super(token);
     }
 

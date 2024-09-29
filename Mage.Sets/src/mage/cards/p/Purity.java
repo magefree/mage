@@ -62,7 +62,7 @@ class PurityEffect extends PreventionEffectImpl {
         staticText = "If noncombat damage would be dealt to you, prevent that damage. You gain life equal to the damage prevented this way";
     }
 
-    PurityEffect(final PurityEffect effect) {
+    private PurityEffect(final PurityEffect effect) {
         super(effect);
     }
 

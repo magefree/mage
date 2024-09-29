@@ -3,11 +3,12 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.common.AttacksCreatureYouControlTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -40,7 +41,7 @@ public final class KamiOfCelebration extends CardImpl {
 
         // Whenever a modified creature you control attacks, exile the top card of your library. You may play that card this turn.
         this.addAbility(new AttacksCreatureYouControlTriggeredAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1), false, filter
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), false, filter
         ));
 
         // Whenever you cast a spell from exile, put a +1/+1 counter on target creature you control.

@@ -41,9 +41,7 @@ public final class PrimeSpeakerVannifar extends CardImpl {
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 Zone.BATTLEFIELD, new PrimeSpeakerVannifarEffect(), new TapSourceCost()
         );
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-        )));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability);
     }
 

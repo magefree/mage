@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -19,10 +18,9 @@ public final class PeaceAndQuiet extends CardImpl {
     public PeaceAndQuiet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
-
         // Destroy two target enchantments.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(2, StaticFilters.FILTER_PERMANENT_ENCHANTMENT));
+        this.getSpellAbility().addTarget(new TargetPermanent(2, StaticFilters.FILTER_PERMANENT_ENCHANTMENTS));
     }
 
     private PeaceAndQuiet(final PeaceAndQuiet card) {

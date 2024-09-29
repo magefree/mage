@@ -63,23 +63,18 @@ public final class ShannaSisaysLegacy extends CardImpl {
 
 class ShannaSisaysLegacyEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public ShannaSisaysLegacyEffect() {
+    ShannaSisaysLegacyEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "{this} can't be the target of abilities your opponents control";
     }
 
-    public ShannaSisaysLegacyEffect(final ShannaSisaysLegacyEffect effect) {
+    private ShannaSisaysLegacyEffect(final ShannaSisaysLegacyEffect effect) {
         super(effect);
     }
 
     @Override
     public ShannaSisaysLegacyEffect copy() {
         return new ShannaSisaysLegacyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

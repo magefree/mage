@@ -57,7 +57,7 @@ class OathOfKayaTriggeredAbility extends TriggeredAbilityImpl {
         this.addEffect(new GainLifeEffect(2));
     }
 
-    public OathOfKayaTriggeredAbility(final OathOfKayaTriggeredAbility ability) {
+    private OathOfKayaTriggeredAbility(final OathOfKayaTriggeredAbility ability) {
         super(ability);
     }
 

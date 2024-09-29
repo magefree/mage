@@ -104,11 +104,6 @@ class HarmoniousEmergenceEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public HarmoniousEmergenceEffect copy() {
         return new HarmoniousEmergenceEffect(this);
     }

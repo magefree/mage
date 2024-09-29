@@ -28,7 +28,7 @@ public final class EdgarMarkovToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public EdgarMarkovToken(final EdgarMarkovToken token) {
+    private EdgarMarkovToken(final EdgarMarkovToken token) {
         super(token);
     }
 

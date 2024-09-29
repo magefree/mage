@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author ayratn
  */
 public class GainProtectionFromTypeTargetEffect extends GainAbilityTargetEffect {
@@ -19,12 +18,12 @@ public class GainProtectionFromTypeTargetEffect extends GainAbilityTargetEffect 
 
     public GainProtectionFromTypeTargetEffect(Duration duration, FilterCard protectionFrom) {
         super(new ProtectionAbility(new FilterCard()), duration);
-        ((ProtectionAbility)ability).setFilter(protectionFrom);
+        ((ProtectionAbility) ability).setFilter(protectionFrom);
         typeName = protectionFrom.getMessage();
         staticText = "Target creature gains protection from " + typeName + ' ' + duration.toString();
     }
 
-    public GainProtectionFromTypeTargetEffect(final GainProtectionFromTypeTargetEffect effect) {
+    protected GainProtectionFromTypeTargetEffect(final GainProtectionFromTypeTargetEffect effect) {
         super(effect);
         this.typeName = effect.typeName;
     }

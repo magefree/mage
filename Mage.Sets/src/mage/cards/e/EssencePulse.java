@@ -1,7 +1,7 @@
 package mage.cards.e;
 
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class EssencePulse extends CardImpl {
 
-    private static final DynamicValue xValue = new SignInversionDynamicValue(ControllerGotLifeCount.instance);
+    private static final DynamicValue xValue = new SignInversionDynamicValue(ControllerGainedLifeCount.instance);
 
     public EssencePulse(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}");
@@ -29,7 +29,7 @@ public final class EssencePulse extends CardImpl {
                 xValue, xValue, Duration.EndOfTurn
         ).setText("Each creature gets -X/-X until end of turn, where X is the amount of life you gained this turn"));
         this.getSpellAbility().addWatcher(new PlayerGainedLifeWatcher());
-        this.getSpellAbility().addHint(ControllerGotLifeCount.getHint());
+        this.getSpellAbility().addHint(ControllerGainedLifeCount.getHint());
     }
 
     private EssencePulse(final EssencePulse card) {

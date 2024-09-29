@@ -9,7 +9,6 @@ import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author awjackson
  */
 
@@ -24,18 +23,13 @@ public class AssignNoCombatDamageTargetEffect extends ReplacementEffectImpl {
         staticText = text;
     }
 
-    public AssignNoCombatDamageTargetEffect(final AssignNoCombatDamageTargetEffect effect) {
+    protected AssignNoCombatDamageTargetEffect(final AssignNoCombatDamageTargetEffect effect) {
         super(effect);
     }
 
     @Override
     public AssignNoCombatDamageTargetEffect copy() {
         return new AssignNoCombatDamageTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -56,6 +50,6 @@ public class AssignNoCombatDamageTargetEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return ((DamageEvent) event).isCombatDamage() && event.getSourceId().equals(targetPointer.getFirst(game, source));
+        return ((DamageEvent) event).isCombatDamage() && event.getSourceId().equals(getTargetPointer().getFirst(game, source));
     }
 }

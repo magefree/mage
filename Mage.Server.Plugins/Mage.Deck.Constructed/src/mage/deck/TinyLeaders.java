@@ -105,8 +105,8 @@ public class TinyLeaders extends Constructed {
         boolean valid = true;
         errorsList.clear();
 
-        if (deck.getCards().size() != getDeckMinSize()) {
-            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + getDeckMinSize() + " cards: has " + deck.getCards().size() + " cards");
+        if (deck.getMaindeckCards().size() != getDeckMinSize()) {
+            addError(DeckValidatorErrorType.DECK_SIZE, "Deck", "Must contain " + getDeckMinSize() + " cards: has " + deck.getMaindeckCards().size() + " cards");
             valid = false;
         }
 

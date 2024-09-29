@@ -6,6 +6,8 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,6 +20,7 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  *
  * @author fireshoes
+ * modified tiera3 - added Hint
  */
 public final class GalvanicBombardment extends CardImpl {
 
@@ -26,6 +29,9 @@ public final class GalvanicBombardment extends CardImpl {
     static {
         filter.add(new NamePredicate("Galvanic Bombardment"));
     }
+    private static final Hint hint = new ValueHint(
+            "Cards named Galvanic Bombardment in your graveyard", new GalvanicBombardmentCardsInControllerGraveyardCount(filter)
+    );
 
     public GalvanicBombardment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{R}");
@@ -35,6 +41,7 @@ public final class GalvanicBombardment extends CardImpl {
         effect.setText("{this} deals X damage to target creature, where X is 2 plus the number of cards named {this} in your graveyard");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addHint(hint);
     }
 
     private GalvanicBombardment(final GalvanicBombardment card) {

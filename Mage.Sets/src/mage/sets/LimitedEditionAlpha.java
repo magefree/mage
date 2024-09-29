@@ -57,6 +57,7 @@ public final class LimitedEditionAlpha extends ExpansionSet {
         cards.add(new SetCardInfo("Castle", 9, Rarity.UNCOMMON, mage.cards.c.Castle.class));
         cards.add(new SetCardInfo("Celestial Prism", 234, Rarity.UNCOMMON, mage.cards.c.CelestialPrism.class));
         cards.add(new SetCardInfo("Channel", 188, Rarity.UNCOMMON, mage.cards.c.Channel.class));
+        cards.add(new SetCardInfo("Chaos Orb", 235, Rarity.RARE, mage.cards.c.ChaosOrb.class));
         cards.add(new SetCardInfo("Chaoslace", 139, Rarity.RARE, mage.cards.c.Chaoslace.class));
         cards.add(new SetCardInfo("Circle of Protection: Blue", 10, Rarity.COMMON, mage.cards.c.CircleOfProtectionBlue.class));
         cards.add(new SetCardInfo("Circle of Protection: Green", 11, Rarity.COMMON, mage.cards.c.CircleOfProtectionGreen.class));

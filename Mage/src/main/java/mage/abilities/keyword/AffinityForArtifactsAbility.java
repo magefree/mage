@@ -18,12 +18,12 @@ public class AffinityForArtifactsAbility extends SimpleStaticAbility {
         this.addHint(ArtifactYouControlHint.instance);
     }
 
-    public AffinityForArtifactsAbility(final AffinityForArtifactsAbility ability) {
+    protected AffinityForArtifactsAbility(final AffinityForArtifactsAbility ability) {
         super(ability);
     }
 
     @Override
-    public SimpleStaticAbility copy() {
+    public AffinityForArtifactsAbility copy() {
         return new AffinityForArtifactsAbility(this);
     }
 

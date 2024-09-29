@@ -85,12 +85,12 @@ enum PolukranosWorldEaterAdjuster implements TargetAdjuster {
 
 class PolukranosWorldEaterEffect extends OneShotEffect {
 
-    public PolukranosWorldEaterEffect() {
+    PolukranosWorldEaterEffect() {
         super(Outcome.Benefit);
         this.staticText = "it deals X damage divided as you choose among any number of target creatures your opponents control. Each of those creatures deals damage equal to its power to Polukranos";
     }
 
-    public PolukranosWorldEaterEffect(final PolukranosWorldEaterEffect effect) {
+    private PolukranosWorldEaterEffect(final PolukranosWorldEaterEffect effect) {
         super(effect);
     }
 

@@ -50,7 +50,7 @@ class EyeOfTheStormAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new EyeOfTheStormEffect1(), false);
     }
 
-    public EyeOfTheStormAbility(final EyeOfTheStormAbility ability) {
+    private EyeOfTheStormAbility(final EyeOfTheStormAbility ability) {
         super(ability);
     }
 
@@ -91,16 +91,16 @@ class EyeOfTheStormEffect1 extends OneShotEffect {
                 + "For each copy, the player may cast the copy without paying its mana cost";
     }
 
-    public EyeOfTheStormEffect1(final EyeOfTheStormEffect1 effect) {
+    private EyeOfTheStormEffect1(final EyeOfTheStormEffect1 effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
         boolean noLongerOnStack = false;// spell was exiled already by another effect, for example NivMagus Elemental
         if (spell == null) {
-            spell = ((Spell) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK));
+            spell = ((Spell) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.STACK));
             noLongerOnStack = true;
         }
         Permanent eyeOfTheStorm = game.getPermanentOrLKIBattlefield(source.getSourceId());

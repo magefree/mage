@@ -36,7 +36,7 @@ public final class CacophonyScamp extends CardImpl {
 
         // Whenever Cacophony Scamp deals combat damage to a player, you may sacrifice it. If you do, proliferate.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(
-                new ProliferateEffect(), new SacrificeSourceCost().setText("sacrifice it")
+                new ProliferateEffect(), new SacrificeSourceCost()
         ), false));
 
         // When Cacophony Scamp dies, it deals damage equal to its power to any target.

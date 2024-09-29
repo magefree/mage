@@ -6,7 +6,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CastFromHandSourcePermanentCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -52,12 +52,12 @@ public class MyojinOfCrypticDreams extends CardImpl {
         // Remove an indestructible counter from Myojin of Cryptic Dreams:
         // Copy target permanent spell you control three times. (The copies become tokens.)
         Ability ability = new SimpleActivatedAbility(
-                new CopyTargetSpellEffect(false, false, false)
+                new CopyTargetStackObjectEffect(false, false, false)
                         .setText("Copy target permanent spell you control three times. <i>(The copies become tokens.)</i>"),
                 new RemoveCountersSourceCost(CounterType.INDESTRUCTIBLE.createInstance())
         );
-        ability.addEffect(new CopyTargetSpellEffect(false, false, false).setText(" "));
-        ability.addEffect(new CopyTargetSpellEffect(false, false, false).setText(" "));
+        ability.addEffect(new CopyTargetStackObjectEffect(false, false, false).setText(" "));
+        ability.addEffect(new CopyTargetStackObjectEffect(false, false, false).setText(" "));
         ability.addTarget(new TargetSpell(permanentSpellFilter));
         this.addAbility(ability);
     }

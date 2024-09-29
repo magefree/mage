@@ -39,7 +39,7 @@ public final class Arrest extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
     }
 
-    public Arrest (final Arrest card) {
+    private Arrest(final Arrest card) {
         super(card);
     }
 

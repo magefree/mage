@@ -47,12 +47,12 @@ public final class Painiac extends CardImpl {
 
 class PainiacEffect extends OneShotEffect {
 
-    public PainiacEffect() {
+    PainiacEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Roll a six-sided die. {this} gets +X/+0 until end of turn, where X is the result";
+        this.staticText = "roll a six-sided die. {this} gets +X/+0 until end of turn, where X is the result";
     }
 
-    public PainiacEffect(final PainiacEffect effect) {
+    private PainiacEffect(final PainiacEffect effect) {
         super(effect);
     }
 

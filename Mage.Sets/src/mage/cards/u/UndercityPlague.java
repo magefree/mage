@@ -25,8 +25,9 @@ public final class UndercityPlague extends CardImpl {
         // Target player loses 1 life, discards a card, then sacrifices a permanent.
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(1));
-        this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
-        this.getSpellAbility().addEffect(new SacrificeEffect(new FilterPermanent(),1,"then that player"));
+        this.getSpellAbility().addEffect(new DiscardTargetEffect(1).setText(", discards a card"));
+        this.getSpellAbility().addEffect(new SacrificeEffect(new FilterPermanent(),1,"then that player")
+                .setText(", then sacrifices a permanent"));
 
         // Cipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
         this.getSpellAbility().addEffect(new CipherEffect());

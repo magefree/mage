@@ -2,7 +2,6 @@ package mage.cards.t;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -11,6 +10,7 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.hint.ConditionHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
@@ -24,7 +24,7 @@ import mage.game.permanent.token.Token;
 import mage.game.permanent.token.VecnaToken;
 import mage.game.permanent.token.ZombieToken;
 import mage.players.Player;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetSacrifice;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
 import java.util.Arrays;
@@ -46,7 +46,7 @@ public final class TheBookOfVileDarkness extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()), TargetController.YOU,
                 TheBookOfVileDarknessCondition.instance, false
-        ));
+        ).addHint(new ConditionHint(TheBookOfVileDarknessCondition.instance, "You lost 2 or more life this turn")));
 
         // {T}, Exile The Book of Vile Darkness and artifacts you control named Eye of Vecna and Hand of Vecna: Create Vecna, a legendary 8/8 black Zombie God creature token with indestructible and all triggered abilities of the exiled cards.
         Ability ability = new SimpleActivatedAbility(new TheBookOfVileDarknessEffect(), new TapSourceCost());
@@ -95,7 +95,7 @@ class TheBookOfVileDarknessCost extends CostImpl {
         this.text = "exile {this} and artifacts you control named Eye of Vecna and Hand of Vecna";
     }
 
-    public TheBookOfVileDarknessCost(final TheBookOfVileDarknessCost cost) {
+    private TheBookOfVileDarknessCost(final TheBookOfVileDarknessCost cost) {
         super(cost);
     }
 
@@ -143,8 +143,7 @@ class TheBookOfVileDarknessCost extends CostImpl {
             default:
                 break;
         }
-        TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        TargetSacrifice target = new TargetSacrifice(filter);
         controller.choose(Outcome.Sacrifice, target, source, game);
         return game.getPermanent(target.getFirstTarget());
     }
@@ -186,11 +185,11 @@ class TheBookOfVileDarknessEffect extends OneShotEffect {
                 continue;
             }
             for (Ability ability : card.getAbilities(game)) {
-                if (ability instanceof TriggeredAbility) {
+                if (ability.isTriggeredAbility()) {
                     Ability copyAbility = ability.copy();
                     copyAbility.newId();
                     copyAbility.setControllerId(source.getControllerId());
-                    token.addAbility(copyAbility);
+                    token.addAbility(copyAbility, true);
                 }
             }
         }

@@ -28,13 +28,13 @@ public final class AcademyDrake extends CardImpl {
         // Flying
         addAbility(FlyingAbility.getInstance());
 
-        // If Academy Drake was kicked, it enters the battlefield with two +1/+1 counters on it.
+        // If Academy Drake was kicked, it enters with two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-                KickedCondition.ONCE, "If {this} was kicked, it enters the battlefield with two +1/+1 counters on it.", ""));
+                KickedCondition.ONCE, "If {this} was kicked, it enters with two +1/+1 counters on it.", ""));
 
     }
 
-    public AcademyDrake(final AcademyDrake academyDrake) {
+    private AcademyDrake(final AcademyDrake academyDrake) {
         super(academyDrake);
     }
 

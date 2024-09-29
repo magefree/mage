@@ -4,9 +4,8 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
+import mage.abilities.effects.common.continuous.SetBaseToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -57,12 +56,12 @@ public final class Sentinel extends CardImpl {
 
 class SentinelEffect extends OneShotEffect {
 
-    public SentinelEffect() {
+    SentinelEffect() {
         super(Outcome.Detriment);
         this.staticText = "Change {this}'s base toughness to 1 plus the power of target creature blocking or blocked by {this}. <i>(This effect lasts indefinitely.)</i>";
     }
 
-    public SentinelEffect(final SentinelEffect effect) {
+    private SentinelEffect(final SentinelEffect effect) {
         super(effect);
     }
 
@@ -77,7 +76,7 @@ class SentinelEffect extends OneShotEffect {
         Permanent targetPermanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
         if (controller != null && targetPermanent != null) {
             int newToughness = CardUtil.overflowInc(targetPermanent.getPower().getValue(), 1);
-            game.addEffect(new SetBasePowerToughnessSourceEffect(null, StaticValue.get(newToughness), Duration.WhileOnBattlefield, SubLayer.SetPT_7b), source);
+            game.addEffect(new SetBaseToughnessSourceEffect(newToughness, Duration.Custom), source);
             return true;
         }
         return false;

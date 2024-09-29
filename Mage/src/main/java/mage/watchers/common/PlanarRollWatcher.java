@@ -29,7 +29,7 @@ public class PlanarRollWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DIE_ROLLED) {
             DieRolledEvent drEvent = (DieRolledEvent) event;
-            UUID playerId = drEvent.getPlayerId();
+            UUID playerId = drEvent.getTargetId();
             if (playerId != null && drEvent.getRollDieType() == RollDieType.PLANAR) {
                 Integer amount = numberTimesPlanarDieRolled.get(playerId);
                 if (amount == null) {

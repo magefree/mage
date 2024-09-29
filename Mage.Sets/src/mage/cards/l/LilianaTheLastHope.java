@@ -67,12 +67,12 @@ public final class LilianaTheLastHope extends CardImpl {
 
 class LilianaTheLastHopeEffect extends OneShotEffect {
 
-    public LilianaTheLastHopeEffect() {
+    LilianaTheLastHopeEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = ", then you may return a creature card from your graveyard to your hand";
     }
 
-    public LilianaTheLastHopeEffect(final LilianaTheLastHopeEffect effect) {
+    private LilianaTheLastHopeEffect(final LilianaTheLastHopeEffect effect) {
         super(effect);
     }
 
@@ -88,7 +88,7 @@ class LilianaTheLastHopeEffect extends OneShotEffect {
             return false;
         }
         TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (target.canChoose(source.getControllerId(), source, game)
                 && controller.chooseUse(outcome, "Return a creature card from your graveyard to hand?", source, game)
                 && controller.choose(Outcome.ReturnToHand, target, source, game)) {

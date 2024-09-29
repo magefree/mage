@@ -18,7 +18,7 @@ public class DealsDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever enchanted creature deals damage, ");
     }
 
-    public DealsDamageAttachedTriggeredAbility(final DealsDamageAttachedTriggeredAbility ability) {
+    protected DealsDamageAttachedTriggeredAbility(final DealsDamageAttachedTriggeredAbility ability) {
         super(ability);
     }
 

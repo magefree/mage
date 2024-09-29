@@ -85,7 +85,7 @@ public final class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Goblin Commando", 100, Rarity.UNCOMMON, mage.cards.g.GoblinCommando.class));
         cards.add(new SetCardInfo("Goblin General", 101, Rarity.UNCOMMON, mage.cards.g.GoblinGeneral.class));
         cards.add(new SetCardInfo("Goblin Glider", 102, Rarity.UNCOMMON, mage.cards.g.GoblinGlider.class));
-        cards.add(new SetCardInfo("Goblin Hero", 103, Rarity.RARE, mage.cards.g.GoblinHero.class));
+        cards.add(new SetCardInfo("Goblin Hero", 103, Rarity.COMMON, mage.cards.g.GoblinHero.class));
         cards.add(new SetCardInfo("Goblin Lore", 104, Rarity.UNCOMMON, mage.cards.g.GoblinLore.class));
         cards.add(new SetCardInfo("Goblin Mountaineer", 105, Rarity.COMMON, mage.cards.g.GoblinMountaineer.class));
         cards.add(new SetCardInfo("Goblin Settler", 106, Rarity.UNCOMMON, mage.cards.g.GoblinSettler.class));
@@ -113,7 +113,7 @@ public final class Starter1999 extends ExpansionSet {
         cards.add(new SetCardInfo("Man-o'-War", 41, Rarity.UNCOMMON, mage.cards.m.ManOWar.class));
         cards.add(new SetCardInfo("Merfolk of the Pearl Trident", 42, Rarity.COMMON, mage.cards.m.MerfolkOfThePearlTrident.class));
         cards.add(new SetCardInfo("Mind Rot", 83, Rarity.COMMON, mage.cards.m.MindRot.class));
-        cards.add(new SetCardInfo("Mons's Goblin Raiders", 112, Rarity.COMMON, mage.cards.m.MonssGoblinRaiders.class));
+        cards.add(new SetCardInfo("Mons's Goblin Raiders", 112, Rarity.RARE, mage.cards.m.MonssGoblinRaiders.class));
         cards.add(new SetCardInfo("Monstrous Growth", 132, Rarity.COMMON, mage.cards.m.MonstrousGrowth.class));
         cards.add(new SetCardInfo("Moon Sprite", 133, Rarity.UNCOMMON, mage.cards.m.MoonSprite.class));
         cards.add(new SetCardInfo("Mountain", 166, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));

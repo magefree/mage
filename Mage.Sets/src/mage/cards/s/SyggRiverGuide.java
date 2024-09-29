@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -11,9 +10,8 @@ import mage.abilities.keyword.IslandwalkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -21,11 +19,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public final class SyggRiverGuide extends CardImpl {
     
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Merfolk you control");
-
-    static {
-        filter.add(SubType.MERFOLK.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.MERFOLK, "Merfolk you control");
 
     public SyggRiverGuide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{W}{U}");
@@ -40,8 +34,7 @@ public final class SyggRiverGuide extends CardImpl {
         this.addAbility(new IslandwalkAbility());
         // {1}{W}: Target Merfolk you control gains protection from the color of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}{W}"));
-        Target target = new TargetControlledCreaturePermanent(1,1,filter, false);
-        ability.addTarget(target);
+        ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
 
     }

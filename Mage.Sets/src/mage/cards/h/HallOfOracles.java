@@ -46,7 +46,7 @@ public final class HallOfOracles extends CardImpl {
         );
         ability.addTarget(new TargetCreaturePermanent());
         ability.setTiming(TimingRule.SORCERY);
-        this.addAbility(ability, new SpellsCastWatcher());
+        this.addAbility(ability);
     }
 
     private HallOfOracles(final HallOfOracles card) {

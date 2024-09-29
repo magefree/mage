@@ -56,7 +56,7 @@ class SearchLibraryPutInGraveyard extends SearchEffect {
         staticText = "search your library for a creature card, put that card into your graveyard, then shuffle";
     }
 
-    public SearchLibraryPutInGraveyard(final SearchLibraryPutInGraveyard effect) {
+    private SearchLibraryPutInGraveyard(final SearchLibraryPutInGraveyard effect) {
         super(effect);
     }
 

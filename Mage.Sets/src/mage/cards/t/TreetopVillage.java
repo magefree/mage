@@ -56,7 +56,7 @@ class ApeToken extends TokenImpl {
         this.addAbility(TrampleAbility.getInstance());
     }
 
-    public ApeToken(final ApeToken token) {
+    private ApeToken(final ApeToken token) {
         super(token);
     }
 

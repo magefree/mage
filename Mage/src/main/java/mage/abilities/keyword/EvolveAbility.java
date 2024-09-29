@@ -17,7 +17,7 @@ import mage.game.permanent.Permanent;
  * 702.98. Evolve
  * <p>
  * 702.98a Evolve is a triggered ability. "Evolve" means "Whenever a creature
- * enters the battlefield under your control, if that creature's power is
+ * you control enters, if that creature's power is
  * greater than this creature's power and/or that creature's toughness is
  * greater than this creature's toughness, put a +1/+1 counter on this
  * creature."
@@ -91,7 +91,7 @@ public class EvolveAbility extends EntersBattlefieldAllTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Evolve <i>(Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)</i>";
+        return "Evolve <i>(Whenever a creature you control enters, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)</i>";
     }
 
     @Override
@@ -106,7 +106,7 @@ class EvolveEffect extends OneShotEffect {
         super(Outcome.BoostCreature);
     }
 
-    public EvolveEffect(final EvolveEffect effect) {
+    protected EvolveEffect(final EvolveEffect effect) {
         super(effect);
     }
 

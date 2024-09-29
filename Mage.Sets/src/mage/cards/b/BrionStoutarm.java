@@ -41,7 +41,7 @@ public final class BrionStoutarm extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(SacrificeCostCreaturesPower.instance)
                 .setText("{this} deals damage equal to the sacrificed creature's power to target player or planeswalker"), new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }

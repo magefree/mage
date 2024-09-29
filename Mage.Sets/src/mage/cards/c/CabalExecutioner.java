@@ -29,7 +29,7 @@ public final class CabalExecutioner extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_A_CREATURE, 1, "that player"), false, true));
 
         // Morph {3}{B}{B}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{B}{B}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{B}{B}")));
     }
 
     private CabalExecutioner(final CabalExecutioner card) {

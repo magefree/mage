@@ -63,7 +63,7 @@ public final class EmryLurkerOfTheLoch extends CardImpl {
 class EmryLurkerOfTheLochPlayEffect extends AsThoughEffectImpl {
 
     EmryLurkerOfTheLochPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Choose target artifact card in your graveyard. You may cast that card this turn.";
     }
 

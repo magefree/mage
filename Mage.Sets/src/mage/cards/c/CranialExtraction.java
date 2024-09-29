@@ -1,7 +1,6 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.CardImpl;
@@ -47,17 +46,18 @@ class CranialExtractionEffect extends SearchTargetGraveyardHandLibraryForCardNam
         this.staticText = "Choose a nonland card name. " + CardUtil.getTextWithFirstCharUpperCase(this.staticText);
     }
 
-    CranialExtractionEffect(final CranialExtractionEffect effect) {
+    private CranialExtractionEffect(final CranialExtractionEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (player == null) {
+        if (controller == null || player == null) {
             return true;
         }
-        String cardName = ChooseACardNameEffect.TypeOfName.NON_LAND_NAME.getChoice(player, game, source, false);
+        String cardName = ChooseACardNameEffect.TypeOfName.NON_LAND_NAME.getChoice(controller, game, source, false);
         if (cardName == null) {
             return false;
         }

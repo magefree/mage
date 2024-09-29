@@ -68,7 +68,7 @@ class ElderSpawnEffect extends OneShotEffect {
         staticText = "unless you sacrifice an Island, sacrifice {this} and it deals 6 damage to you";
     }
 
-    public ElderSpawnEffect(final ElderSpawnEffect effect) {
+    private ElderSpawnEffect(final ElderSpawnEffect effect) {
         super(effect);
     }
 
@@ -82,8 +82,7 @@ class ElderSpawnEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourcePermanent != null) {
-            TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
-            SacrificeTargetCost cost = new SacrificeTargetCost(target);
+            SacrificeTargetCost cost = new SacrificeTargetCost(filter);
             if (!controller.chooseUse(Outcome.AIDontUseIt, "Sacrifice an Island?", source, game)
                     || !cost.canPay(source, source, source.getControllerId(), game)
                     || !cost.pay(source, game, source, source.getControllerId(), true)) {

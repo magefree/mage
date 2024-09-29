@@ -71,7 +71,7 @@ class SkyshipWeatherlightEffect extends SearchEffect {
 
     }
 
-    public SkyshipWeatherlightEffect(final SkyshipWeatherlightEffect effect) {
+    private SkyshipWeatherlightEffect(final SkyshipWeatherlightEffect effect) {
         super(effect);
     }
 
@@ -111,7 +111,7 @@ class SkyshipWeatherlightEffect2 extends OneShotEffect {
         this.staticText = "Choose a card at random that was exiled with {this}. Put that card into its owner's hand";
     }
 
-    public SkyshipWeatherlightEffect2(final SkyshipWeatherlightEffect2 effect) {
+    private SkyshipWeatherlightEffect2(final SkyshipWeatherlightEffect2 effect) {
         super(effect);
     }
 

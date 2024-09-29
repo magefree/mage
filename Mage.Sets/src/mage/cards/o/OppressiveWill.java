@@ -42,12 +42,12 @@ public final class OppressiveWill extends CardImpl {
 
 class SpellSyphonEffect extends OneShotEffect {
 
-    public SpellSyphonEffect() {
+    SpellSyphonEffect() {
         super(Outcome.Benefit);
         this.staticText = "Counter target spell unless its controller pays {1} for each card in your hand";
     }
 
-    public SpellSyphonEffect(final SpellSyphonEffect effect) {
+    private SpellSyphonEffect(final SpellSyphonEffect effect) {
         super(effect);
     }
 
@@ -58,7 +58,7 @@ class SpellSyphonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackObject spell = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = game.getObject(source);
         if (sourceObject != null && spell != null) {
             Player player = game.getPlayer(spell.getControllerId());

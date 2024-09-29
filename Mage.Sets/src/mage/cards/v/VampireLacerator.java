@@ -1,24 +1,27 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.XorLessLifeCondition;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.LifeCompareCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
+
+import java.util.UUID;
 
 /**
  *
  * @author maurer.it_at_gmail.com
  */
 public final class VampireLacerator extends CardImpl {
+
+    private static final Condition condition = new LifeCompareCondition(TargetController.OPPONENT, ComparisonType.MORE_THAN, 10);
 
     public VampireLacerator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{B}");
@@ -28,11 +31,10 @@ public final class VampireLacerator extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-            new ConditionalOneShotEffect(
-                    new LoseLifeSourceControllerEffect(1),
-                    new InvertCondition( new XorLessLifeCondition(XorLessLifeCondition.CheckType.AN_OPPONENT, 10) ),
-                    "you lose 1 life unless an opponent has 10 or less life"), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConditionalOneShotEffect(
+                    new LoseLifeSourceControllerEffect(1), condition,
+                    "you lose 1 life unless an opponent has 10 or less life"
+        ), TargetController.YOU, false));
     }
 
     private VampireLacerator(final VampireLacerator card) {

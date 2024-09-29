@@ -2,7 +2,7 @@
 package mage.cards.t;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -19,7 +19,7 @@ public final class TectonicBreak extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{R}{R}");
 
         // Each player sacrifices X lands.
-        this.getSpellAbility().addEffect(new SacrificeAllEffect(ManacostVariableValue.REGULAR, new FilterControlledLandPermanent("lands")));
+        this.getSpellAbility().addEffect(new SacrificeAllEffect(GetXValue.instance, new FilterControlledLandPermanent("lands")));
     }
 
     private TectonicBreak(final TectonicBreak card) {

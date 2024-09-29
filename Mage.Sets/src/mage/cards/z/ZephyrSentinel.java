@@ -66,7 +66,7 @@ public final class ZephyrSentinel extends CardImpl {
 
 class ZephyrSentinelEffect extends OneShotEffect {
 
-    public ZephyrSentinelEffect() {
+    ZephyrSentinelEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "return up to one other target creature you control to its owner's hand. If it was a Soldier, put a +1/+1 counter on {this}";
     }

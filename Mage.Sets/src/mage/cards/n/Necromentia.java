@@ -50,6 +50,7 @@ public final class Necromentia extends CardImpl {
     }
 }
 
+//Based on SearchTargetGraveyardHandLibraryForCardNameAndExileEffect
 class NecromentiaEffect extends OneShotEffect {
 
     NecromentiaEffect() {
@@ -101,7 +102,7 @@ class NecromentiaEffect extends OneShotEffect {
 
             // cards in Library
             Cards cardsInLibrary = new CardsImpl();
-            cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
+            cardsInLibrary.addAllCards(targetPlayer.getLibrary().getCards(game));
             cardsCount = (cardName.isEmpty() ? 0 : cardsInLibrary.count(filter, game));
             if (cardsCount > 0) {
                 filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
@@ -116,7 +117,7 @@ class NecromentiaEffect extends OneShotEffect {
             targetPlayer.shuffleLibrary(source, game);
 
             if (numberOfCardsExiledFromHand > 0) {
-                game.getState().applyEffects(game);
+                game.processAction();
                 Token zombieToken = new ZombieToken();
                 zombieToken.putOntoBattlefield(numberOfCardsExiledFromHand, game, source, targetPlayer.getId());
             }

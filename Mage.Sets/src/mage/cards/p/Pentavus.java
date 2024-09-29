@@ -50,7 +50,7 @@ public final class Pentavus extends CardImpl {
 
         // {1}, Sacrifice a Pentavite: Put a +1/+1 counter on Pentavus.
         Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(1));
-        secondAbility.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        secondAbility.addCost(new SacrificeTargetCost(filter));
         this.addAbility(secondAbility);
     }
 

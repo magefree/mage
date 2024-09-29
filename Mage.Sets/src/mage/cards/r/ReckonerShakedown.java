@@ -92,7 +92,7 @@ class ReckonerShakedownEffect extends OneShotEffect {
             return true;
         }
         TargetPermanent targetPermanent = new TargetPermanent(filter);
-        targetPermanent.setNotTarget(true);
+        targetPermanent.withNotTarget(true);
         controller.choose(Outcome.BoostCreature, targetPermanent, source, game);
         Permanent permanent = game.getPermanent(targetPermanent.getFirstTarget());
         if (permanent != null) {

@@ -20,11 +20,12 @@ public class CantBeBlockedByCreaturesAllEffect extends RestrictionEffect {
         this.filterCreatures = filterCreatures;
         this.filterBlockedBy = filterBlockedBy;
         staticText = filterCreatures.getMessage() + " can't be blocked "
+                + (duration == Duration.EndOfTurn ? "this turn " : "")
                 + (filterBlockedBy.getMessage().startsWith("except by") ? "" : "by ")
                 + filterBlockedBy.getMessage();
     }
 
-    public CantBeBlockedByCreaturesAllEffect(final CantBeBlockedByCreaturesAllEffect effect) {
+    protected CantBeBlockedByCreaturesAllEffect(final CantBeBlockedByCreaturesAllEffect effect) {
         super(effect);
         this.filterCreatures = effect.filterCreatures;
         this.filterBlockedBy = effect.filterBlockedBy;

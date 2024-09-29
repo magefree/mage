@@ -19,7 +19,7 @@ public final class BlackGreenWormToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public BlackGreenWormToken(final BlackGreenWormToken token) {
+    private BlackGreenWormToken(final BlackGreenWormToken token) {
         super(token);
     }
 

@@ -46,12 +46,12 @@ public final class SpittingImage extends CardImpl {
 
 class SpittingImageEffect extends OneShotEffect {
 
-    public SpittingImageEffect() {
+    SpittingImageEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "Create a token that's a copy of target creature";
     }
 
-    public SpittingImageEffect(final SpittingImageEffect effect) {
+    private SpittingImageEffect(final SpittingImageEffect effect) {
         super(effect);
     }
 

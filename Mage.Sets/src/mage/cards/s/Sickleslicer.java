@@ -35,7 +35,7 @@ public final class Sickleslicer extends CardImpl {
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4), false));
     }
 
-    public Sickleslicer (final Sickleslicer card) {
+    private Sickleslicer(final Sickleslicer card) {
         super(card);
     }
 

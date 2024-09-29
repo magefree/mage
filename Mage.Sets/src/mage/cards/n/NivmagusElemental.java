@@ -58,7 +58,7 @@ class NivmagusElementalCost extends CostImpl {
     NivmagusElementalCost() {
         super();
         TargetSpell target = new TargetSpell(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         this.addTarget(target);
         this.text = "Exile an instant or sorcery spell you control";
     }
@@ -73,8 +73,8 @@ class NivmagusElementalCost extends CostImpl {
         if (player == null) {
             return false;
         }
-        player.chooseTarget(Outcome.Exile, targets.get(0), source, game);
-        Spell spell = game.getSpell(targets.getFirstTarget());
+        player.chooseTarget(Outcome.Exile, this.getTargets().get(0), source, game);
+        Spell spell = game.getSpell(this.getTargets().getFirstTarget());
         if (spell == null) {
             return false;
         }
@@ -91,7 +91,7 @@ class NivmagusElementalCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return targets.canChoose(controllerId, source, game);
+        return this.getTargets().canChoose(controllerId, source, game);
     }
 
     @Override

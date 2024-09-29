@@ -35,34 +35,37 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
      * existing creature types.
      */
 
-    protected Token token;
-    protected CardType retainType; // if null, loses previous types
-    protected boolean loseAbilities = false;
-    protected boolean loseEquipmentType = false;
-    protected DynamicValue power = null;
-    protected DynamicValue toughness = null;
-    protected boolean durationRuleAtStart; // put duration rule at the start of the rules text rather than the end
+    private final Token token;
+    private final CardType retainType; // if null, loses previous types
+    private boolean loseAbilities = false;
+    private boolean loseEquipmentType = false;
+    private boolean keepCreatureSubtypes;
+    private DynamicValue power = null;
+    private DynamicValue toughness = null;
+    private boolean durationRuleAtStart; // put duration rule at the start of the rules text rather than the end
 
     /**
-     * @param token       Token as blueprint for creature to become
-     * @param retainType  If null, permanent loses its previous types, otherwise retains types with appropriate text
-     * @param duration    Duration for the effect
+     * @param token      Token as blueprint for creature to become
+     * @param retainType If null, permanent loses its previous types, otherwise retains types with appropriate text
+     * @param duration   Duration for the effect
      */
     public BecomesCreatureSourceEffect(Token token, CardType retainType, Duration duration) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
         this.retainType = retainType;
+        this.keepCreatureSubtypes = (retainType == CardType.ENCHANTMENT); // default usage, override if needed
         this.durationRuleAtStart = (retainType == CardType.PLANESWALKER || retainType == CardType.CREATURE);
         setText();
         this.addDependencyType(DependencyType.BecomeCreature);
     }
 
-    public BecomesCreatureSourceEffect(final BecomesCreatureSourceEffect effect) {
+    protected BecomesCreatureSourceEffect(final BecomesCreatureSourceEffect effect) {
         super(effect);
         this.token = effect.token.copy();
         this.retainType = effect.retainType;
         this.loseAbilities = effect.loseAbilities;
         this.loseEquipmentType = effect.loseEquipmentType;
+        this.keepCreatureSubtypes = effect.keepCreatureSubtypes;
         if (effect.power != null) {
             this.power = effect.power.copy();
         }
@@ -80,7 +83,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             affectedObjectList.add(new MageObjectReference(source.getSourceId(), game));
         }
     }
@@ -88,7 +91,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent;
-        if (affectedObjectsSet) {
+        if (getAffectedObjectsSet()) {
             permanent = affectedObjectList.get(0).getPermanent(game);
         } else {
             permanent = game.getPermanent(source.getSourceId());
@@ -105,13 +108,16 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
                     permanent.removeAllCardTypes(game);
                     permanent.removeAllSubTypes(game);
                 }
+                for (SuperType superType : token.getSuperType(game)) {
+                    permanent.addSuperType(game, superType);
+                }
                 for (CardType cardType : token.getCardType(game)) {
                     permanent.addCardType(game, cardType);
                 }
                 if (loseEquipmentType) {
                     permanent.removeSubType(game, SubType.EQUIPMENT);
                 }
-                if (retainType == CardType.CREATURE || retainType == CardType.ARTIFACT) {
+                if (!keepCreatureSubtypes) {
                     permanent.removeAllCreatureTypes(game);
                 }
                 permanent.copySubTypesFrom(game, token);
@@ -128,7 +134,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
                     permanent.removeAllAbilities(source.getSourceId(), game);
                 }
                 for (Ability ability : token.getAbilities()) {
-                    permanent.addAbility(ability, source.getSourceId(), game);
+                    permanent.addAbility(ability, source.getSourceId(), game, true);
                 }
                 break;
 
@@ -178,6 +184,16 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
         return this;
     }
 
+    /**
+     * Source becomes a creature "in addition to its other types".
+     * Not needed when retainType is ENCHANTMENT, which sets this true by default.
+     */
+    public BecomesCreatureSourceEffect withKeepCreatureSubtypes(boolean keepCreatureSubtypes) {
+        this.keepCreatureSubtypes = keepCreatureSubtypes;
+        setText();
+        return this;
+    }
+
     public BecomesCreatureSourceEffect withDurationRuleAtStart(boolean durationRuleAtStart) {
         this.durationRuleAtStart = durationRuleAtStart;
         setText();
@@ -192,7 +208,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl {
         }
         sb.append("{this} becomes a ");
         sb.append(token.getDescription());
-        if (retainType == CardType.ENCHANTMENT) {
+        if (keepCreatureSubtypes) {
             sb.append(" in addition to its other types");
         }
         if (!duration.toString().isEmpty() && !durationRuleAtStart) {

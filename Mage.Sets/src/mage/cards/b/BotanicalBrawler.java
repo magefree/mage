@@ -76,12 +76,17 @@ class BotanicalBrawlerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        int offset = 0;
+        if (permanent == null) {
+            permanent = game.getPermanentEntering(event.getTargetId());
+            offset++;
+        }
         return permanent != null
                 && !getSourceId().equals(event.getTargetId())
                 && isControlledBy(permanent.getControllerId())
                 && event.getData().equals(CounterType.P1P1.getName())
-                && BoostCountersAddedFirstTimeWatcher.checkEvent(event, permanent, game);
+                && BoostCountersAddedFirstTimeWatcher.checkEvent(event, permanent, game, offset);
     }
 
     @Override

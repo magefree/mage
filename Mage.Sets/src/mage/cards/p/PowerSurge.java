@@ -1,7 +1,6 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -41,18 +40,18 @@ public final class PowerSurge extends CardImpl {
 
 class PowerSurgeDamageEffect extends OneShotEffect {
 
-    public PowerSurgeDamageEffect() {
+    PowerSurgeDamageEffect() {
         super(Outcome.Damage);
-        this.staticText = "{this} deals X damage to that player where X is the number of untapped lands they controlled at the beginning of this turn";
+        this.staticText = "{this} deals X damage to that player, where X is the number of untapped lands they controlled at the beginning of this turn";
     }
 
-    public PowerSurgeDamageEffect(PowerSurgeDamageEffect copy) {
+    private PowerSurgeDamageEffect(final PowerSurgeDamageEffect copy) {
         super(copy);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             PowerSurgeWatcher watcher = game.getState().getWatcher(PowerSurgeWatcher.class);
             if (watcher != null) {

@@ -46,7 +46,7 @@ class PyrostaticPillarTriggeredAbility extends TriggeredAbilityImpl {
     }
 
 
-    public PyrostaticPillarTriggeredAbility(final PyrostaticPillarTriggeredAbility abiltity) {
+    private PyrostaticPillarTriggeredAbility(final PyrostaticPillarTriggeredAbility abiltity) {
         super(abiltity);
     }
 

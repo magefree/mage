@@ -10,10 +10,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -21,8 +18,6 @@ import mage.game.permanent.token.VojaFriendToElvesToken;
 import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.UUID;
-
-import static mage.constants.Outcome.Benefit;
 
 /**
  * @author TheElk801
@@ -41,7 +36,7 @@ public final class TolsimirFriendToWolves extends CardImpl {
         // When Tolsimir, Friend to Wolves enters the battlefield, create Voja, Friend to Elves, a legendary 3/3 green and white Wolf creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new VojaFriendToElvesToken())));
 
-        // Whenever a Wolf enters the battlefield under your control, you gain 3 life and that creature fights up to one target creature an opponent controls.
+        // Whenever a Wolf you control enters, you gain 3 life and that creature fights up to one target creature an opponent controls.
         this.addAbility(new TolsimirFriendToWolvesTriggeredAbility());
     }
 
@@ -91,7 +86,7 @@ class TolsimirFriendToWolvesTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a Wolf enters the battlefield under your control, " +
+        return "Whenever a Wolf you control enters, " +
                 "you gain 3 life and that creature fights up to one target creature an opponent controls.";
     }
 
@@ -102,7 +97,7 @@ class TolsimirFriendToWolvesEffect extends OneShotEffect {
     private final MageObjectReference wolfMor;
 
     TolsimirFriendToWolvesEffect(MageObjectReference wolfMor) {
-        super(Benefit);
+        super(Outcome.Benefit);
         this.wolfMor = wolfMor;
     }
 

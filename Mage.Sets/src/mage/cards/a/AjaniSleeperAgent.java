@@ -66,7 +66,7 @@ public final class AjaniSleeperAgent extends CardImpl {
 
 class AjaniSleeperAgentEffect extends OneShotEffect {
 
-    public AjaniSleeperAgentEffect() {
+    AjaniSleeperAgentEffect() {
         super(Outcome.Benefit);
         this.staticText = "Reveal the top card of your library. If it's a creature or planeswalker card, put it into your hand. Otherwise, you may put it on the bottom of your library.";
     }

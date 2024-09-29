@@ -60,7 +60,7 @@ public final class HaukensInsight extends CardImpl {
 
 class HaukensInsightExileEffect extends OneShotEffect {
 
-    public HaukensInsightExileEffect() {
+    HaukensInsightExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile the top card of your library face down. You may look at that card for as long as it remains exiled";
     }
@@ -135,8 +135,8 @@ class HaukensInsightLookEffect extends AsThoughEffectImpl {
 
 class HaukensInsightPlayEffect extends AsThoughEffectImpl {
 
-    public HaukensInsightPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree, true);
+    HaukensInsightPlayEffect() {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.PlayForFree);
         staticText = "Once during each of your turns, you may play a land or cast a spell from among the cards exiled with this permanent without paying its mana cost";
     }
 
@@ -164,7 +164,7 @@ class HaukensInsightPlayEffect extends AsThoughEffectImpl {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), game.getState().getZoneChangeCounter(source.getSourceId()));
                 ExileZone exileZone = game.getExile().getExileZone(exileId);
                 if (exileZone != null && exileZone.contains(CardUtil.getMainCardId(game, objectId))) {
-                    allowCardToPlayWithoutMana(objectId, source, affectedControllerId, game);
+                    allowCardToPlayWithoutMana(objectId, source, affectedControllerId, MageIdentifier.HaukensInsightWatcher, game);
                     return true;
                 }
             }

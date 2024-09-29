@@ -38,7 +38,7 @@ public class SearchLibraryGraveyardPutInHandEffect extends OneShotEffect {
                 + ", reveal it, and put it into your hand. " + (forceToSearchBoth ? "Then shuffle" : "If you search your library this way, shuffle");
     }
 
-    public SearchLibraryGraveyardPutInHandEffect(final SearchLibraryGraveyardPutInHandEffect effect) {
+    protected SearchLibraryGraveyardPutInHandEffect(final SearchLibraryGraveyardPutInHandEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.forceToSearchBoth = effect.forceToSearchBoth;

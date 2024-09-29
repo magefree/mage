@@ -20,7 +20,7 @@ public class EnterAttributeAddChosenSubtypeEffect extends OneShotEffect {
         super(Outcome.Benefit);
     }
 
-    public EnterAttributeAddChosenSubtypeEffect(final EnterAttributeAddChosenSubtypeEffect effect) {
+    protected EnterAttributeAddChosenSubtypeEffect(final EnterAttributeAddChosenSubtypeEffect effect) {
         super(effect);
     }
 

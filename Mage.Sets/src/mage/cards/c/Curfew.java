@@ -40,7 +40,7 @@ public final class Curfew extends CardImpl {
 
 class CurfewEffect extends OneShotEffect {
 
-    public CurfewEffect() {
+    CurfewEffect() {
         super(Outcome.ReturnToHand);
         staticText = "Each player returns a creature they control to its owner's hand";
     }

@@ -19,7 +19,7 @@ import java.util.UUID;
 public final class KjeldoranFrostbeast extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creatures blocking or blocked by it");
+            = new FilterCreaturePermanent("creatures blocking or blocked by {this}");
 
     static {
         filter.add(BlockingOrBlockedBySourcePredicate.EITHER);

@@ -104,7 +104,7 @@ class TheSpaceFamilyGoblinsonWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DIE_ROLLED) {
-            map.compute(event.getPlayerId(), CardUtil::setOrIncrementValue);
+            map.compute(event.getTargetId(), CardUtil::setOrIncrementValue);
         }
     }
 
@@ -127,6 +127,7 @@ class TheSpaceFamilyGoblinsonTriggeredAbility extends TriggeredAbilityImpl {
 
     TheSpaceFamilyGoblinsonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        setTriggerPhrase("Whenever you roll a die, ");
     }
 
     private TheSpaceFamilyGoblinsonTriggeredAbility(final TheSpaceFamilyGoblinsonTriggeredAbility ability) {
@@ -145,11 +146,7 @@ class TheSpaceFamilyGoblinsonTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return isControlledBy(event.getPlayerId());
+        return isControlledBy(event.getTargetId());
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever you roll a die, put a +1/+1 counter on {this}";
-    }
 }

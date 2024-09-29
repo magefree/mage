@@ -39,9 +39,7 @@ public final class UndercityNecrolisk extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 new GenericManaCost(1)
         );
-        ability.addCost(new SacrificeTargetCost(
-                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
-        ));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         // It gains menace until end of turn. Activate this ability only any time you could cast a sorcery.
         ability.addEffect(new GainAbilitySourceEffect(
                 new MenaceAbility(),

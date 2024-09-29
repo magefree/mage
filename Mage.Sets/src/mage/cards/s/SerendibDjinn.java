@@ -11,12 +11,13 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
 
@@ -24,6 +25,8 @@ import java.util.UUID;
  * @author MarcoMarin
  */
 public final class SerendibDjinn extends CardImpl {
+
+    private static final FilterLandPermanent filter = new FilterLandPermanent("no lands");
 
     public SerendibDjinn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
@@ -37,7 +40,7 @@ public final class SerendibDjinn extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SerendibDjinnEffect(), TargetController.YOU, false));
         // When you control no lands, sacrifice Serendib Djinn.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
-                StaticFilters.FILTER_LANDS, ComparisonType.EQUAL_TO, 0,
+                filter, ComparisonType.EQUAL_TO, 0,
                 new SacrificeSourceEffect()));
     }
 
@@ -53,12 +56,12 @@ public final class SerendibDjinn extends CardImpl {
 
 class SerendibDjinnEffect extends OneShotEffect {
 
-    public SerendibDjinnEffect() {
+    SerendibDjinnEffect() {
         super(Outcome.Damage);
-        this.staticText = "sacrifice a Land. If it is an Island {this} deals 3 damage to you";
+        this.staticText = "sacrifice a land. If you sacrifice an Island this way, {this} deals 3 damage to you";
     }
 
-    public SerendibDjinnEffect(final SerendibDjinnEffect effect) {
+    private SerendibDjinnEffect(final SerendibDjinnEffect effect) {
         super(effect);
     }
 
@@ -71,7 +74,7 @@ class SerendibDjinnEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetControlledPermanent(1, 1, new FilterControlledLandPermanent(), true);
+            TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND);
             if (target.canChoose(controller.getId(), source, game)) {
                 controller.choose(Outcome.Sacrifice, target, source, game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());

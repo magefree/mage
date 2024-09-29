@@ -1,5 +1,3 @@
-
-
 package mage.abilities.abilityword;
 
 import mage.abilities.ActivatedAbilityImpl;
@@ -18,11 +16,8 @@ import mage.target.common.TargetCardInHand;
 
 public class GrandeurAbility extends ActivatedAbilityImpl {
 
-    protected final String cardName;
-
     public GrandeurAbility(Effect effect, String cardName) {
-        super(Zone.BATTLEFIELD, effect);
-        this.cardName = cardName;
+        super(Zone.BATTLEFIELD, effect, null);
 
         FilterCard filter = new FilterCard("another card named " + cardName);
         filter.add(new NamePredicate(cardName));
@@ -31,9 +26,8 @@ public class GrandeurAbility extends ActivatedAbilityImpl {
         setAbilityWord(AbilityWord.GRANDEUR);
     }
 
-    public GrandeurAbility(final GrandeurAbility ability) {
+    protected GrandeurAbility(final GrandeurAbility ability) {
         super(ability);
-        this.cardName = ability.cardName;
     }
 
     @Override

@@ -61,12 +61,12 @@ public final class MistformSliver extends CardImpl {
 
 class MistformSliverEffect extends OneShotEffect {
 
-    public MistformSliverEffect() {
+    MistformSliverEffect() {
         super(Outcome.Benefit);
         staticText = "This permanent becomes the creature type of your choice in addition to its other types until end of turn";
     }
 
-    public MistformSliverEffect(final MistformSliverEffect effect) {
+    private MistformSliverEffect(final MistformSliverEffect effect) {
         super(effect);
     }
 
@@ -75,12 +75,12 @@ class MistformSliverEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            Choice typeChoice = new ChoiceCreatureType(permanent);
+            Choice typeChoice = new ChoiceCreatureType(game, source);
             if (!player.choose(Outcome.Detriment, typeChoice, game)) {
                 return false;
             }
-            game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
-            ContinuousEffect effect = new AddCardSubTypeTargetEffect(SubType.byDescription(typeChoice.getChoice()), Duration.EndOfTurn);
+            game.informPlayers(permanent.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoiceKey());
+            ContinuousEffect effect = new AddCardSubTypeTargetEffect(SubType.byDescription(typeChoice.getChoiceKey()), Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);
         }

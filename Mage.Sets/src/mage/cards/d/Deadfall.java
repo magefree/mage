@@ -39,12 +39,12 @@ public final class Deadfall extends CardImpl {
 
 class DeadfallEffect extends AsThoughEffectImpl {
 
-    public DeadfallEffect() {
+    DeadfallEffect() {
         super(AsThoughEffectType.BLOCK_FORESTWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with forestwalk can be blocked as though they didn't have forestwalk";
     }
 
-    public DeadfallEffect(final DeadfallEffect effect) {
+    private DeadfallEffect(final DeadfallEffect effect) {
         super(effect);
     }
 

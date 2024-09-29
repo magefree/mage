@@ -57,7 +57,7 @@ class MyrPrototypeCantAttackUnlessYouPayEffect extends CantAttackBlockUnlessPays
         staticText = "{this} can't attack or block unless you pay {1} for each +1/+1 counter on it";
     }
 
-    MyrPrototypeCantAttackUnlessYouPayEffect(MyrPrototypeCantAttackUnlessYouPayEffect effect) {
+    private MyrPrototypeCantAttackUnlessYouPayEffect(final MyrPrototypeCantAttackUnlessYouPayEffect effect) {
         super(effect);
     }
 

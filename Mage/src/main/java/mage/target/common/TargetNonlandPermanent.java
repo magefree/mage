@@ -26,14 +26,14 @@ public class TargetNonlandPermanent extends TargetPermanent {
     }
 
     public TargetNonlandPermanent(int minNumTargets, int maxNumTargets, boolean notTarget) {
-        this(minNumTargets, maxNumTargets, StaticFilters.FILTER_PERMANENT_NON_LAND, notTarget);
+        this(minNumTargets, maxNumTargets, (maxNumTargets > 1 ? StaticFilters.FILTER_PERMANENTS_NON_LAND : StaticFilters.FILTER_PERMANENT_NON_LAND), notTarget);
     }
 
     public TargetNonlandPermanent(int minNumTargets, int maxNumTargets, FilterNonlandPermanent filter, boolean notTarget) {
         super(minNumTargets, maxNumTargets, filter, notTarget);
     }
 
-    public TargetNonlandPermanent(final TargetNonlandPermanent target) {
+    protected TargetNonlandPermanent(final TargetNonlandPermanent target) {
         super(target);
     }
 

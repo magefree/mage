@@ -7,7 +7,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class TapSourceEffect extends OneShotEffect {
@@ -24,7 +23,7 @@ public class TapSourceEffect extends OneShotEffect {
         staticText = "tap {this}";
     }
 
-    public TapSourceEffect(final TapSourceEffect effect) {
+    protected TapSourceEffect(final TapSourceEffect effect) {
         super(effect);
         this.withoutTrigger = effect.withoutTrigger;
     }

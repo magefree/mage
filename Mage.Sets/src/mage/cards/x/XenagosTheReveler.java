@@ -57,12 +57,12 @@ public final class XenagosTheReveler extends CardImpl {
 
 class XenagosManaEffect extends OneShotEffect {
 
-    public XenagosManaEffect() {
+    XenagosManaEffect() {
         super(Outcome.PutManaInPool);
         this.staticText = "Add X mana in any combination of {R} and/or {G}, where X is the number of creatures you control";
     }
 
-    public XenagosManaEffect(final XenagosManaEffect effect) {
+    private XenagosManaEffect(final XenagosManaEffect effect) {
         super(effect);
     }
 
@@ -96,12 +96,12 @@ class XenagosManaEffect extends OneShotEffect {
 
 class XenagosExileEffect extends OneShotEffect {
 
-    public XenagosExileEffect() {
+    XenagosExileEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "Exile the top seven cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield";
     }
 
-    public XenagosExileEffect(final XenagosExileEffect effect) {
+    private XenagosExileEffect(final XenagosExileEffect effect) {
         super(effect);
     }
 
@@ -115,13 +115,13 @@ class XenagosExileEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Cards exiledCards = new CardsImpl();
-            exiledCards.addAll(controller.getLibrary().getTopCards(game, 7));
+            exiledCards.addAllCards(controller.getLibrary().getTopCards(game, 7));
             controller.moveCards(exiledCards, Zone.EXILED, source, game);
             FilterCard filter = new FilterCard("creature and/or land cards to put onto the battlefield");
             filter.add(Predicates.or(CardType.CREATURE.getPredicate(),
                     CardType.LAND.getPredicate()));
             TargetCard target1 = new TargetCard(0, Integer.MAX_VALUE, Zone.EXILED, filter);
-            target1.setNotTarget(true);
+            target1.withNotTarget(true);
             if (!exiledCards.isEmpty()
                     && target1.canChoose(source.getControllerId(), source, game)
                     && controller.choose(Outcome.PutCardInPlay, exiledCards, target1, source, game)) {

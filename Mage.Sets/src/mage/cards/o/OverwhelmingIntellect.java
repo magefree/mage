@@ -41,12 +41,12 @@ public final class OverwhelmingIntellect extends CardImpl {
 
 class OverwhelmingIntellectEffect extends OneShotEffect {
 
-    public OverwhelmingIntellectEffect() {
+    OverwhelmingIntellectEffect() {
         super(Outcome.Detriment);
         staticText = "Counter target creature spell. Draw cards equal to that spell's mana value";
     }
 
-    public OverwhelmingIntellectEffect(final OverwhelmingIntellectEffect effect) {
+    private OverwhelmingIntellectEffect(final OverwhelmingIntellectEffect effect) {
         super(effect);
     }
 

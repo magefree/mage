@@ -22,7 +22,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class AtzocanSeer extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Dinosaur from your graveyard");
+    private static final FilterCard filter = new FilterCard("Dinosaur card from your graveyard");
     
     static {
         filter.add(SubType.DINOSAUR.getPredicate());

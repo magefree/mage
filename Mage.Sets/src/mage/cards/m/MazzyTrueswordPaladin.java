@@ -78,7 +78,7 @@ class MazzyAttackTriggeredAbility extends AttacksAllTriggeredAbility {
         this.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    MazzyAttackTriggeredAbility(final MazzyAttackTriggeredAbility effect) {
+    private MazzyAttackTriggeredAbility(final MazzyAttackTriggeredAbility effect) {
         super(effect);
     }
 
@@ -112,7 +112,7 @@ class MazzyAttackTriggeredAbility extends AttacksAllTriggeredAbility {
 
 class MazzyExileEffect extends OneShotEffect {
 
-    public MazzyExileEffect() {
+    MazzyExileEffect() {
         super(Outcome.Benefit);
         staticText = "exile it. Until the end of your next turn, you may cast that card.";
     }

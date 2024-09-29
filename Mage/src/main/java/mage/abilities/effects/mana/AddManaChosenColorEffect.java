@@ -19,7 +19,7 @@ public class AddManaChosenColorEffect extends ManaEffect {
         staticText = "Add one mana of the chosen color";
     }
 
-    public AddManaChosenColorEffect(final AddManaChosenColorEffect effect) {
+    protected AddManaChosenColorEffect(final AddManaChosenColorEffect effect) {
         super(effect);
         chosenColorInfo = effect.chosenColorInfo;
     }

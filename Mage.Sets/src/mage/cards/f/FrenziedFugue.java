@@ -57,7 +57,7 @@ class FrenziedFugueTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    public FrenziedFugueTriggeredAbility(final FrenziedFugueTriggeredAbility ability) {
+    private FrenziedFugueTriggeredAbility(final FrenziedFugueTriggeredAbility ability) {
         super(ability);
     }
 
@@ -101,6 +101,6 @@ class FrenziedFugueTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield or at the beginning of your upkeep, gain control of enchanted permanent until end of turn. Untap that permanent. It gains haste until end of turn.";
+        return "When {this} enters or at the beginning of your upkeep, gain control of enchanted permanent until end of turn. Untap that permanent. It gains haste until end of turn.";
     }
 }

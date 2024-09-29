@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class Mindsparker extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("white or blue instant or sorcery spell");
+    private static final FilterSpell filter = new FilterSpell("a white or blue instant or sorcery spell");
 
     static {
         filter.add(Predicates.or(
@@ -60,12 +60,12 @@ public final class Mindsparker extends CardImpl {
 
 class MindsparkerEffect extends OneShotEffect {
 
-    public MindsparkerEffect() {
+    MindsparkerEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to that player";
     }
 
-    public MindsparkerEffect(final MindsparkerEffect effect) {
+    private MindsparkerEffect(final MindsparkerEffect effect) {
         super(effect);
     }
 
@@ -76,7 +76,7 @@ class MindsparkerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             targetPlayer.damage(2, source.getSourceId(), source, game);
             return true;

@@ -45,7 +45,7 @@ class OblationEffect extends OneShotEffect {
         this.staticText = "The owner of target nonland permanent shuffles it into their library, then draws two cards";
     }
 
-    OblationEffect(final OblationEffect effect) {
+    private OblationEffect(final OblationEffect effect) {
         super(effect);
     }
 
@@ -56,14 +56,14 @@ class OblationEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getOwnerId());
             if (player != null) {
                 player.moveCardToLibraryWithInfo(permanent, source, game, Zone.BATTLEFIELD, true, true);
                 player.shuffleLibrary(source, game);
 
-                game.getState().processAction(game); // so effects from creatures that were on the battlefield won't trigger from draw 
+                game.processAction(); // so effects from creatures that were on the battlefield won't trigger from draw 
 
                 player.drawCards(2, source, game);
                 return true;

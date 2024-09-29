@@ -44,12 +44,11 @@ public final class HoodedHydra extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new SnakeToken(), new CountersSourceCount(CounterType.P1P1)), false));
 
         // Morph {3}{G}{G}
-        this.addAbility(new MorphAbility(new ManaCostsImpl<>("{3}{G}{G}")));
+        this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{G}{G}")));
 
         // As Hooded Hydra is turned face up, put five +1/+1 counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(5));
         effect.setText("put five +1/+1 counters on it");
-        // TODO: Does not work because the ability is still removed from permanent while the effect checks if the ability still exists.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AsTurnedFaceUpEffect(effect, false));
         ability.setWorksFaceDown(true);
         this.addAbility(ability);

@@ -1,9 +1,7 @@
 package mage.abilities.effects.common.continuous;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ReplicateAbility;
 import mage.constants.Duration;
@@ -30,22 +28,23 @@ public class EachSpellYouCastHasReplicateEffect extends ContinuousEffectImpl {
     private final Cost fixedNewCost;
     private final Map<UUID, ReplicateAbility> replicateAbilities = new HashMap<>();
 
-    public EachSpellYouCastHasReplicateEffect(FilterSpell filter) {
-        this(filter, null);
+    public EachSpellYouCastHasReplicateEffect(FilterSpell filter, String reminderText) {
+        this(filter, reminderText, null);
     }
 
     /**
-     *
      * @param filter        Filter used for filtering spells
+     * @param reminderText  Reminder text that will be italicized and added (capitalize and include punctuation)
      * @param fixedNewCost  Fixed new cost to pay as the replication cost
      */
-    public EachSpellYouCastHasReplicateEffect(FilterSpell filter, Cost fixedNewCost) {
+    public EachSpellYouCastHasReplicateEffect(FilterSpell filter, String reminderText, Cost fixedNewCost) {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.filter = filter;
         this.fixedNewCost = fixedNewCost;
-        this.staticText = "Each " + this.filter.getMessage() + " you cast has replicate" +
+        this.staticText = "Each " + this.filter.getMessage() + (this.filter.getMessage().contains("cast") ? "" : " you cast") +
+                " has replicate" +
                 (this.fixedNewCost == null ? ". The replicate cost is equal to its mana cost" : ' ' + this.fixedNewCost.getText())
-                + ". <i>(When you cast it, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)</i>";
+                + ((reminderText != null && !reminderText.isEmpty()) ? (". <i>(" + reminderText + ")</i>") : "");
     }
 
     private EachSpellYouCastHasReplicateEffect(final EachSpellYouCastHasReplicateEffect effect) {

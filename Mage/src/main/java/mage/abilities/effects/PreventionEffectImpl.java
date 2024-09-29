@@ -11,7 +11,6 @@ import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class PreventionEffectImpl extends ReplacementEffectImpl implements PreventionEffect {
@@ -21,28 +20,27 @@ public abstract class PreventionEffectImpl extends ReplacementEffectImpl impleme
     protected final boolean onlyCombat;
     protected boolean consumable;
 
-    public PreventionEffectImpl(Duration duration) {
+    protected PreventionEffectImpl(Duration duration) {
         this(duration, Integer.MAX_VALUE, false);
     }
 
-    public PreventionEffectImpl(Duration duration, int amountToPrevent, boolean onlyCombat) {
+    protected PreventionEffectImpl(Duration duration, int amountToPrevent, boolean onlyCombat) {
         this(duration, amountToPrevent, onlyCombat, true);
     }
 
-    public PreventionEffectImpl(Duration duration, int amountToPrevent, boolean onlyCombat, boolean consumable) {
+    protected PreventionEffectImpl(Duration duration, int amountToPrevent, boolean onlyCombat, boolean consumable) {
         this(duration, amountToPrevent, onlyCombat, consumable, null);
     }
 
     /**
-     *
      * @param duration
      * @param amountToPrevent
      * @param onlyCombat
      * @param consumable
      * @param amountToPreventDynamic if set, on init amountToPrevent is set to
-     * calculated value of amountToPreventDynamic
+     *                               calculated value of amountToPreventDynamic
      */
-    public PreventionEffectImpl(Duration duration, int amountToPrevent, boolean onlyCombat, boolean consumable, DynamicValue amountToPreventDynamic) {
+    protected PreventionEffectImpl(Duration duration, int amountToPrevent, boolean onlyCombat, boolean consumable, DynamicValue amountToPreventDynamic) {
         super(duration, Outcome.PreventDamage);
         this.effectType = EffectType.PREVENTION;
         this.amountToPrevent = amountToPrevent;
@@ -51,7 +49,7 @@ public abstract class PreventionEffectImpl extends ReplacementEffectImpl impleme
         this.consumable = consumable;
     }
 
-    public PreventionEffectImpl(final PreventionEffectImpl effect) {
+    protected PreventionEffectImpl(final PreventionEffectImpl effect) {
         super(effect);
         this.amountToPrevent = effect.amountToPrevent;
         this.amountToPreventDynamic = effect.amountToPreventDynamic;
@@ -65,12 +63,6 @@ public abstract class PreventionEffectImpl extends ReplacementEffectImpl impleme
         if (amountToPreventDynamic != null) {
             amountToPrevent = amountToPreventDynamic.calculate(game, source, this);
         }
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        // not used for prevention effect
-        return true;
     }
 
     protected PreventionEffectData preventDamageAction(GameEvent event, Ability source, Game game) {

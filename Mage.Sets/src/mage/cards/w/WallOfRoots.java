@@ -1,19 +1,20 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.PutCountersSourceCost;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.mana.ActivateOncePerTurnManaAbility;
+import mage.abilities.mana.LimitedTimesPerTurnActivatedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -22,7 +23,7 @@ import mage.counters.CounterType;
 public final class WallOfRoots extends CardImpl {
 
     public WallOfRoots(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.subtype.add(SubType.PLANT);
         this.subtype.add(SubType.WALL);
 
@@ -32,7 +33,10 @@ public final class WallOfRoots extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Put a -0/-1 counter on Wall of Roots: Add {G}. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(1)), new PutCountersSourceCost(CounterType.M0M1.createInstance())));
+        this.addAbility(new LimitedTimesPerTurnActivatedManaAbility(
+                Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana(1)),
+                new PutCountersSourceCost(CounterType.M0M1.createInstance())
+        ));
     }
 
     private WallOfRoots(final WallOfRoots card) {

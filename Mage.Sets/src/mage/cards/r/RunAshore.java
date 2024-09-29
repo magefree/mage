@@ -23,7 +23,7 @@ public final class RunAshore extends CardImpl {
         this.getSpellAbility().getModes().setMaxModes(2);
 
         // • The owner of target nonland permanent puts it on the top or bottom of their library.
-        this.getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect());
+        this.getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
 
         // • Return target nonland permanent to its owner's hand.

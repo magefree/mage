@@ -57,7 +57,7 @@ public class PopulateEffect extends OneShotEffect {
                 "<i>(To populate, create a token that's a copy of a creature token you control.)</i>";
     }
 
-    public PopulateEffect(final PopulateEffect effect) {
+    protected PopulateEffect(final PopulateEffect effect) {
         super(effect);
         this.tappedAndAttacking = effect.tappedAndAttacking;
         this.addedTokenPermanents.addAll(effect.addedTokenPermanents);
@@ -70,7 +70,7 @@ public class PopulateEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return true;
         }

@@ -13,7 +13,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 /**
- *
  * @author LoneFox
  */
 public class RecruiterEffect extends OneShotEffect {
@@ -25,7 +24,7 @@ public class RecruiterEffect extends OneShotEffect {
         this.filter = filter;
     }
 
-    public RecruiterEffect(final RecruiterEffect effect) {
+    protected RecruiterEffect(final RecruiterEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -30,7 +29,7 @@ public final class MistOfStagnation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         // Permanents don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, StaticFilters.FILTER_PERMANENT)));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, StaticFilters.FILTER_PERMANENTS)));
 
         // At the beginning of each player's upkeep, that player chooses a permanent for each card in their graveyard, then untaps those permanents.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MistOfStagnationEffect(), TargetController.ANY, false));
@@ -53,7 +52,7 @@ class MistOfStagnationEffect extends OneShotEffect {
         this.staticText = "that player chooses a permanent for each card in their graveyard, then untaps those permanents";
     }
 
-    MistOfStagnationEffect(final MistOfStagnationEffect effect) {
+    private MistOfStagnationEffect(final MistOfStagnationEffect effect) {
         super(effect);
     }
 

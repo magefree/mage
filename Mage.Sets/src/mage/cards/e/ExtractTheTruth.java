@@ -30,9 +30,7 @@ public final class ExtractTheTruth extends CardImpl {
 
         // Choose one—
         // • Target opponent reveals their hand. You may choose a creature, enchantment, or planeswalker card from it. That player discards that card.
-        DiscardCardYouChooseTargetEffect effect = new DiscardCardYouChooseTargetEffect(filter);
-        effect.setOptional(true);
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter).setOptional(true));
         this.getSpellAbility().addTarget(new TargetOpponent());
 
         // • Target opponent sacrifices an enchantment.

@@ -28,41 +28,30 @@ public class PickCheckBoxDialog extends MageDialog {
 
     CheckBoxList tList;
     int[] startingCheckboxes; // restore to it on cancel
+    PickCheckBoxCallback callback = null;
 
     final private static String HTML_TEMPLATE = "<html><div style='text-align: center;'>%s</div></html>";
 
-    private void setFocus(CheckBoxList obj) {
-
-        if (!(obj instanceof java.awt.Component)) {
-            throw new IllegalArgumentException("Must be a java.awt.Component!");
-        }
-        this.scrollList.setViewportView(obj);
+    public interface PickCheckBoxCallback {
+        void onChoiceDone();
     }
 
-    private javax.swing.JList get_a_Jlist_from_ScrollListView() {
-        return ((javax.swing.JList) this.scrollList.getViewport().getView());
+    public void showDialog(Choice choice, PickCheckBoxCallback callback) {
+        showDialog(choice, null, null, null, callback);
     }
 
-    private void restoreData(Object dataFrom) {
-        this.allItems.forEach((item) -> {
-            ((CheckBoxList.CheckBoxListModel) dataFrom).addElement(item.getObjectValue());
-        });
+    public void showDialog(Choice choice, String startSelectionValue, PickCheckBoxCallback callback) {
+        showDialog(choice, null, null, startSelectionValue, callback);
     }
 
-    public void showDialog(Choice choice) {
-        showDialog(choice, null, null, null);
+    public void showDialog(Choice choice, UUID objectId, MageDialogState mageDialogState, PickCheckBoxCallback callback) {
+        showDialog(choice, objectId, mageDialogState, null, callback);
     }
 
-    public void showDialog(Choice choice, String startSelectionValue) {
-        showDialog(choice, null, null, startSelectionValue);
-    }
-
-    public void showDialog(Choice choice, UUID objectId, MageDialogState mageDialogState) {
-        showDialog(choice, objectId, mageDialogState, null);
-    }
-
-    public void showDialog(Choice choice, UUID objectId, MageDialogState mageDialogState, String startSelectionValue) {
+    public void showDialog(Choice choice, UUID objectId, MageDialogState mageDialogState, String startSelectionValue, PickCheckBoxCallback callback) {
         this.choice = choice;
+        this.callback = callback;
+
         KeyValueItem tempKeyValue;
         int indexInTList;
 
@@ -162,6 +151,9 @@ public class PickCheckBoxDialog extends MageDialog {
         listChoices.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                if (!SwingUtilities.isLeftMouseButton(e)) {
+                    return;
+                }
                 if (e.getClickCount() == 2) {
                     doChoose();
                 }
@@ -183,11 +175,7 @@ public class PickCheckBoxDialog extends MageDialog {
 
         // window settings
         MageFrame.getDesktop().remove(this);
-        if (this.isModal()) {
-            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-        } else {
-            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-        }
+        MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         if (mageDialogState != null) mageDialogState.setStateToDialog(this);
         else this.makeWindowCentered();
 
@@ -218,6 +206,23 @@ public class PickCheckBoxDialog extends MageDialog {
         }
 
         this.setVisible(true);
+    }
+
+    private void setFocus(CheckBoxList obj) {
+        if (!(obj instanceof java.awt.Component)) {
+            throw new IllegalArgumentException("Must be a java.awt.Component!");
+        }
+        this.scrollList.setViewportView(obj);
+    }
+
+    private javax.swing.JList get_a_Jlist_from_ScrollListView() {
+        return ((javax.swing.JList) this.scrollList.getViewport().getView());
+    }
+
+    private void restoreData(Object dataFrom) {
+        this.allItems.forEach((item) -> {
+            ((CheckBoxList.CheckBoxListModel) dataFrom).addElement(item.getObjectValue());
+        });
     }
 
     public void setWindowSize(int width, int heigth) {
@@ -273,7 +278,7 @@ public class PickCheckBoxDialog extends MageDialog {
         if ((tList != null) || (setChoice())) {
             this.m_dataModel.clear();
             restoreData(this.m_dataModel);
-            this.hideDialog();
+            doClose();
         }
     }
 
@@ -286,14 +291,16 @@ public class PickCheckBoxDialog extends MageDialog {
 
         this.listChoices.clearSelection();
         this.choice.clearChoice();
-        hideDialog();
+        doClose();
     }
 
-    /**
-     * Creates new form PickChoiceDialog
-     *
-     * @param list
-     */
+    private void doClose() {
+        this.hideDialog();
+        if (this.callback != null) {
+            this.callback.onChoiceDone();
+        }
+    }
+
     public PickCheckBoxDialog(CheckBoxList list) {
         initComponents();
         tList = list;

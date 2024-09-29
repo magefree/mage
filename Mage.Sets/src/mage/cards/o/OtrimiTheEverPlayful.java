@@ -29,9 +29,6 @@ public final class OtrimiTheEverPlayful extends CardImpl {
         filter.add(new AbilityPredicate(MutateAbility.class));
     }
 
-    private static final String rule = "Whenever this creature deals combat damage to a player, " +
-            "return target creature card with mutate from your graveyard to your hand.";
-
     public OtrimiTheEverPlayful(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}{G}{U}");
 
@@ -49,9 +46,8 @@ public final class OtrimiTheEverPlayful extends CardImpl {
 
         // Whenever this creature deals combat damage to a player, return target creature card with mutate from your graveyard to your hand.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-                new ReturnFromGraveyardToHandTargetEffect(),
-                false, rule, false
-        );
+                new ReturnFromGraveyardToHandTargetEffect(), false
+        ).setTriggerPhrase("Whenever this creature deals combat damage to a player, ");
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

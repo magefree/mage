@@ -26,7 +26,7 @@ public final class TowerOfEons extends CardImpl {
         this.addAbility(ability);
     }
 
-    public TowerOfEons (final TowerOfEons card) {
+    private TowerOfEons(final TowerOfEons card) {
         super(card);
     }
 

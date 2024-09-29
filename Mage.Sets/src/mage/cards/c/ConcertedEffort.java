@@ -68,7 +68,7 @@ class ConcertedEffortEffect extends OneShotEffect {
         this.staticText = "creatures you control gain flying until end of turn if a creature you control has flying. The same is true for fear, first strike, double strike, landwalk, protection, trample, and vigilance";
     }
 
-    ConcertedEffortEffect(final ConcertedEffortEffect effect) {
+    private ConcertedEffortEffect(final ConcertedEffortEffect effect) {
         super(effect);
     }
 

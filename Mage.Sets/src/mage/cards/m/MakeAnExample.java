@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -71,8 +72,8 @@ class MakeAnExampleEffect extends OneShotEffect {
             if (opponent == null) {
                 continue;
             }
-            TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
-            opponent.chooseTarget(Outcome.Sacrifice, target, source, game);
+            TargetSacrifice target = new TargetSacrifice(0, Integer.MAX_VALUE, filter);
+            opponent.choose(Outcome.Sacrifice, target, source, game);
             List<UUID> chosenTargets = target.getTargets();
             List<Permanent> pile1 = new ArrayList<>();
             List<Permanent> pile2 = new ArrayList<>();

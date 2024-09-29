@@ -45,14 +45,14 @@ public final class ShelteringPrayers extends CardImpl {
 
 class ShelteringPrayersEffect extends ContinuousEffectImpl {
 
-    public ShelteringPrayersEffect() {
+    ShelteringPrayersEffect() {
         super(Duration.WhileOnBattlefield, Outcome.AddAbility);
         staticText = "Basic lands each player controls have shroud as long as that player controls three or fewer lands.";
         dependencyTypes.add(DependencyType.AddingAbility);
 
     }
 
-    public ShelteringPrayersEffect(final ShelteringPrayersEffect effect) {
+    private ShelteringPrayersEffect(final ShelteringPrayersEffect effect) {
         super(effect);
     }
 

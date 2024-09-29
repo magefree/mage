@@ -8,7 +8,7 @@ import mage.abilities.condition.common.CovenCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.hint.common.CovenHint;
 import mage.constants.AbilityWord;
 import mage.constants.SubType;
@@ -41,11 +41,11 @@ public final class AugurOfAutumn extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may play lands from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(TargetController.YOU, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter)));
 
         // Coven — As long as you control three or more creatures with different powers, you may cast creature spells from the top of your library.
         Effect effect = new ConditionalAsThoughEffect(
-                new PlayTheTopCardEffect(TargetController.YOU, filter2, false),
+                new PlayFromTopOfLibraryEffect(filter2),
                 CovenCondition.instance
         );
         effect.setText("As long as you control three or more creatures with different powers, you may cast creature spells from the top of your library");

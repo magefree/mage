@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -11,6 +10,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -39,21 +41,21 @@ public final class DamnablePact extends CardImpl {
 
 class DamnablePactEffect extends OneShotEffect {
 
-    public DamnablePactEffect() {
+    DamnablePactEffect() {
         super(Outcome.Neutral);
         staticText = "Target player draws X cards and loses X life";
     }
 
-    public DamnablePactEffect(DamnablePactEffect effect) {
+    private DamnablePactEffect(final DamnablePactEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
-            targetPlayer.drawCards(source.getManaCostsToPay().getX(), source, game);
-            targetPlayer.loseLife(source.getManaCostsToPay().getX(), game, source, false);
+            targetPlayer.drawCards(CardUtil.getSourceCostsTag(game, source, "X", 0), source, game);
+            targetPlayer.loseLife(CardUtil.getSourceCostsTag(game, source, "X", 0), game, source, false);
             return true;
         }
         return false;

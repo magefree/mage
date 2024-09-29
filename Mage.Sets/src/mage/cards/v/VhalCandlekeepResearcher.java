@@ -9,10 +9,10 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.keyword.VigilanceAbility;
-import mage.abilities.mana.ConditionalColorlessManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,6 +20,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
 import java.util.UUID;
@@ -29,7 +30,6 @@ public final class VhalCandlekeepResearcher extends CardImpl {
     public VhalCandlekeepResearcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{U}");
         this.supertype.add(SuperType.LEGENDARY);
-
         this.subtype.add(SubType.HUMAN);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(2);
@@ -38,9 +38,9 @@ public final class VhalCandlekeepResearcher extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // {T}: Add an amount of {C} equal to Vhal, Candlekeep Researcher’s toughness. This mana can’t be spent to cast spells from your hand.
-        Ability ability = new ConditionalColorlessManaAbility(this.toughness.getValue(), new VhalCandlekeepResearcherManaBuilder());
-        this.addAbility(ability);
+        // {T}: Add an amount of {C} equal to Vhal, Candlekeep Researcher's toughness. This mana can't be spent to cast spells from your hand.
+        this.addAbility(
+                new SimpleManaAbility(Zone.BATTLEFIELD, new VhalCandlekeepResearcherManaEffect(), new TapSourceCost()));
 
         // Choose a Background
         this.addAbility(ChooseABackgroundAbility.getInstance());
@@ -51,8 +51,37 @@ public final class VhalCandlekeepResearcher extends CardImpl {
     }
 
     @Override
-    public Card copy() {
+    public VhalCandlekeepResearcher copy() {
         return new VhalCandlekeepResearcher(this);
+    }
+}
+
+class VhalCandlekeepResearcherManaEffect extends ManaEffect {
+
+    private final ConditionalManaBuilder manaBuilder = new VhalCandlekeepResearcherManaBuilder();
+
+    VhalCandlekeepResearcherManaEffect() {
+        super();
+        this.staticText = "Add an amount of {C} equal to {this}'s toughness. This mana can't be spent to cast spells from your hand.";
+    }
+
+    private VhalCandlekeepResearcherManaEffect(final VhalCandlekeepResearcherManaEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public VhalCandlekeepResearcherManaEffect copy() {
+        return new VhalCandlekeepResearcherManaEffect(this);
+    }
+
+    @Override
+    public Mana produceMana(Game game, Ability source) {
+        if (game == null) {
+            return new Mana();
+        }
+        Permanent sourcePermanent = source.getSourcePermanentOrLKI(game);
+        int calculatedToughness = (sourcePermanent == null ? 0 : sourcePermanent.getToughness().getValue());
+        return manaBuilder.setMana(Mana.ColorlessMana(calculatedToughness), source, game).build();
     }
 }
 

@@ -45,11 +45,11 @@ public final class NeurokTransmuter extends CardImpl {
         this.addAbility(becomeArtifactAbility);
         // {U}: Until end of turn, target artifact creature becomes blue and isn't an artifact.
         Effect blueEffect = new BecomesColorTargetEffect(ObjectColor.BLUE, Duration.EndOfTurn);
-        blueEffect.setText("Until end of turn, target artifact creature becomes blue and ");
+        blueEffect.setText("Until end of turn, target artifact creature becomes blue");
         Ability becomeBlueAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, blueEffect, new ManaCostsImpl<>("{U}"));
         becomeBlueAbility.addTarget(new TargetCreaturePermanent(filter));
         Effect loseArtifactEffect = new LoseArtifactTypeTargetEffect(Duration.EndOfTurn);
-        loseArtifactEffect.setText("isn't an artifact");
+        loseArtifactEffect.setText("and isn't an artifact");
         becomeBlueAbility.addEffect(loseArtifactEffect);
         this.addAbility(becomeBlueAbility);
     }

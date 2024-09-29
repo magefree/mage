@@ -46,7 +46,7 @@ class ChainLightningEffect extends OneShotEffect {
         this.staticText = "{this} deals 3 damage to any target. Then that player or that permanent's controller may pay {R}{R}. If the player does, they may copy this spell and may choose a new target for that copy";
     }
 
-    ChainLightningEffect(final ChainLightningEffect effect) {
+    private ChainLightningEffect(final ChainLightningEffect effect) {
         super(effect);
     }
 

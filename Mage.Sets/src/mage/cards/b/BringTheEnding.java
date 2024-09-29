@@ -1,7 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -18,15 +16,16 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetSpell;
 
+import java.util.UUID;
+
 /**
- *
  * @author @stwalsh4118
  */
 public final class BringTheEnding extends CardImpl {
 
     public BringTheEnding(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        
+
 
         // Counter target spell unless its controller pays {2}.
         // Corrupted -- Counter that spell instead if its controller has three or more poison counters.
@@ -46,12 +45,12 @@ public final class BringTheEnding extends CardImpl {
 
 class BringTheEndingCounterEffect extends OneShotEffect {
 
-    public BringTheEndingCounterEffect() {
+    BringTheEndingCounterEffect() {
         super(Outcome.Benefit);
         staticText = "Counter target spell unless its controller pays {2}.<br>" + AbilityWord.CORRUPTED.formatWord() + "Counter that spell instead if its controller has three or more poison counters.";
     }
 
-    public BringTheEndingCounterEffect(final BringTheEndingCounterEffect effect) {
+    private BringTheEndingCounterEffect(final BringTheEndingCounterEffect effect) {
         super(effect);
     }
 
@@ -70,11 +69,11 @@ class BringTheEndingCounterEffect extends OneShotEffect {
         UUID controllerId = game.getControllerId(targetId);
         Player player = game.getPlayer(controllerId);
 
-        if (player != null && player.getCounters().getCount(CounterType.POISON) >= 3) {
-            hardCounterEffect.setTargetPointer(this.getTargetPointer());
+        if (player != null && player.getCountersCount(CounterType.POISON) >= 3) {
+            hardCounterEffect.setTargetPointer(this.getTargetPointer().copy());
             return hardCounterEffect.apply(game, source);
         } else {
-            softCounterEffect.setTargetPointer(this.getTargetPointer());
+            softCounterEffect.setTargetPointer(this.getTargetPointer().copy());
             return softCounterEffect.apply(game, source);
         }
 

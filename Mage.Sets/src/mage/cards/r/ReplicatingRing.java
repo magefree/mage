@@ -74,9 +74,7 @@ class ReplicatingRingEffect extends OneShotEffect {
         if (permanent == null || permanent.getCounters(game).getCount(CounterType.NIGHT) < 8) {
             return true;
         }
-        permanent.removeCounters(CounterType.NIGHT.createInstance(
-                permanent.getCounters(game).getCount(CounterType.NIGHT)
-        ),source,game);
+        permanent.removeAllCounters(CounterType.NIGHT.getName(), source, game);
         new ReplicatedRingToken().putOntoBattlefield(8, game, source, source.getControllerId());
         return true;
     }

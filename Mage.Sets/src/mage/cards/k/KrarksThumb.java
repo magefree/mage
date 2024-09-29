@@ -58,7 +58,11 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         FlipCoinEvent flipCoinEvent = (FlipCoinEvent) event;
-        flipCoinEvent.setFlipCount(2 * flipCoinEvent.getFlipCount());
+        // If an effect tells you to flip more than one coin at once, this replaces each individual coin flip.
+        // For example, if an effect tells you to flip two coins, you’ll first flip two coins and ignore one, then
+        // flip two more coins and ignore one of those. You don’t flip four coins and ignore two.
+        // (2013-04-15)
+        flipCoinEvent.setFlipCount(1 + flipCoinEvent.getFlipCount());
         return false;
     }
 
@@ -70,10 +74,5 @@ class KrarksThumbEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(event.getPlayerId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
     }
 }

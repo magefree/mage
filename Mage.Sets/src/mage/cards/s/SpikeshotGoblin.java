@@ -52,7 +52,7 @@ class SpikeshotGoblinEffect extends OneShotEffect {
         staticText = "{this} deals damage equal to its power to any target";
     }
 
-    public SpikeshotGoblinEffect(final SpikeshotGoblinEffect effect) {
+    private SpikeshotGoblinEffect(final SpikeshotGoblinEffect effect) {
         super(effect);
     }
 

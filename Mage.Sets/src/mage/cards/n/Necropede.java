@@ -33,7 +33,7 @@ public final class Necropede extends CardImpl {
         this.addAbility(ability);
     }
 
-    public Necropede (final Necropede card) {
+    private Necropede(final Necropede card) {
         super(card);
     }
 

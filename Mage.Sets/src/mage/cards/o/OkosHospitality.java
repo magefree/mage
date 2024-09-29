@@ -28,7 +28,7 @@ public final class OkosHospitality extends CardImpl {
 
         // Creatures you control have base power and toughness 3/3 until end of turn. You may search your library and/or graveyard for a card named Oko, the Trickster, reveal it, and put it into your hand. If you search your library this way, shuffle it.
         this.getSpellAbility().addEffect(new SetBasePowerToughnessAllEffect(
-                3, 3, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES, true
+                3, 3, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES
         ));
         this.getSpellAbility().addEffect(
                 new SearchLibraryGraveyardPutInHandEffect(filter, false, true)

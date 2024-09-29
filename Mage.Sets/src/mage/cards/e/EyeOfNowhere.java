@@ -27,7 +27,7 @@ public final class EyeOfNowhere extends CardImpl {
 
     }
 
-    public EyeOfNowhere (final EyeOfNowhere card) {
+    private EyeOfNowhere(final EyeOfNowhere card) {
         super(card);
     }
 

@@ -64,12 +64,12 @@ public final class HordeOfNotions extends CardImpl {
 
 class HordeOfNotionsEffect extends OneShotEffect {
 
-    public HordeOfNotionsEffect() {
+    HordeOfNotionsEffect() {
         super(Outcome.PlayForFree);
         this.staticText = "You may play target Elemental card from your graveyard without paying its mana cost";
     }
 
-    public HordeOfNotionsEffect(final HordeOfNotionsEffect effect) {
+    private HordeOfNotionsEffect(final HordeOfNotionsEffect effect) {
         super(effect);
     }
 

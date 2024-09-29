@@ -173,7 +173,7 @@ class VivienChampionOfTheWildsCastFromExileEffect extends AsThoughEffectImpl {
     private final UUID authorizedPlayerId;
 
     VivienChampionOfTheWildsCastFromExileEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.Custom, Outcome.Benefit);
         this.authorizedPlayerId = authorizedPlayerId;
     }
 

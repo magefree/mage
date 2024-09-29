@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.abilities.common;
 
 import mage.abilities.TriggeredAbilityImpl;
@@ -32,7 +28,7 @@ public class BeginningOfPreCombatMainTriggeredAbility extends TriggeredAbilityIm
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public BeginningOfPreCombatMainTriggeredAbility(final BeginningOfPreCombatMainTriggeredAbility ability) {
+    protected BeginningOfPreCombatMainTriggeredAbility(final BeginningOfPreCombatMainTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.setTargetPointer = ability.setTargetPointer;

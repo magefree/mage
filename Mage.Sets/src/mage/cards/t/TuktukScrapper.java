@@ -33,7 +33,7 @@ public final class TuktukScrapper extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever Tuktuk Scrapper or another Ally enters the battlefield under your control, you may destroy target artifact. If that artifact is put into a graveyard this way, Tuktuk Scrapper deals damage to that artifact's controller equal to the number of Allies you control.
+        // Whenever Tuktuk Scrapper or another Ally you control enters, you may destroy target artifact. If that artifact is put into a graveyard this way, Tuktuk Scrapper deals damage to that artifact's controller equal to the number of Allies you control.
         this.addAbility(new TuktukScrapperTriggeredAbility());
     }
 
@@ -54,7 +54,7 @@ class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetArtifactPermanent());
     }
 
-    public TuktukScrapperTriggeredAbility(final TuktukScrapperTriggeredAbility ability) {
+    private TuktukScrapperTriggeredAbility(final TuktukScrapperTriggeredAbility ability) {
         super(ability);
     }
 
@@ -85,8 +85,8 @@ class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
 
         // originally returned fullText, user reported that because the trigger text is so lengthy, they cannot click Yes/No buttons
-        //String fullText = "Whenever {this} or another Ally enters the battlefield under your control, you may destroy target artifact. If that artifact is put into a graveyard this way, {this} deals damage to that artifact's controller equal to the number of Allies you control.";
-        String condensedText = "Whenever {this} or another Ally you enters the battlefield under your control, you may destroy target artifact. If you do, {this} deals damage to that controller equal to the number of Allies you control.";
+        //String fullText = "Whenever {this} or another Ally you control enters, you may destroy target artifact. If that artifact is put into a graveyard this way, {this} deals damage to that artifact's controller equal to the number of Allies you control.";
+        String condensedText = "Whenever {this} or another Ally you you control enters, you may destroy target artifact. If you do, {this} deals damage to that controller equal to the number of Allies you control.";
 
         return condensedText;
     }
@@ -104,7 +104,7 @@ class TuktukScrapperEffect extends OneShotEffect {
         super(Outcome.DestroyPermanent);
     }
 
-    public TuktukScrapperEffect(final TuktukScrapperEffect effect) {
+    private TuktukScrapperEffect(final TuktukScrapperEffect effect) {
         super(effect);
     }
 

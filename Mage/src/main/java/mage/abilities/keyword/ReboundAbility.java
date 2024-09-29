@@ -48,7 +48,7 @@ public class ReboundAbility extends SimpleStaticAbility {
         super(Zone.STACK, new ReboundCastFromHandReplacementEffect());
     }
 
-    public ReboundAbility(final ReboundAbility ability) {
+    protected ReboundAbility(final ReboundAbility ability) {
         super(ability);
     }
 
@@ -127,7 +127,7 @@ class ReboundCastFromHandReplacementEffect extends ReplacementEffectImpl {
 class ReboundEffectCastFromExileDelayedTrigger extends DelayedTriggeredAbility {
 
     ReboundEffectCastFromExileDelayedTrigger(Card card, Game game) {
-        super(new ReboundCastSpellFromExileEffect().setTargetPointer(new FixedTarget(card, game)), Duration.Custom, true, true);
+        super(new ReboundCastSpellFromExileEffect().setTargetPointer(new FixedTarget(card, game)), Duration.Custom, true, false);
     }
 
     private ReboundEffectCastFromExileDelayedTrigger(final ReboundEffectCastFromExileDelayedTrigger ability) {

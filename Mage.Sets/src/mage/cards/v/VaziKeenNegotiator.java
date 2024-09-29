@@ -2,7 +2,6 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.TreasureSpentToCastCondition;
@@ -23,13 +22,11 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.TreasureToken;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.CreatedTokenWatcher;
 
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -106,7 +103,7 @@ class VaziKeenNegotiatorOpponentCastsOrActivatesTriggeredAbility extends Trigger
     }
 
     @Override
-    public TriggeredAbility copy() {
+    public VaziKeenNegotiatorOpponentCastsOrActivatesTriggeredAbility copy() {
         return new VaziKeenNegotiatorOpponentCastsOrActivatesTriggeredAbility(this);
     }
 }

@@ -22,14 +22,14 @@ public class TapTargetCost extends CostImpl {
 
     public TapTargetCost(TargetControlledPermanent target) {
         this.target = target;
-        this.target.setNotTarget(true); // costs are never targeted
+        this.target.withNotTarget(true); // costs are never targeted
         this.target.setRequired(false); // can be cancel by user
         this.text = "tap " + (target.getNumberOfTargets() > 1
                 ? CardUtil.numberToText(target.getMaxNumberOfTargets()) + ' ' + target.getTargetName()
                 : CardUtil.addArticle(target.getTargetName()));
     }
 
-    public TapTargetCost(final TapTargetCost cost) {
+    protected TapTargetCost(final TapTargetCost cost) {
         super(cost);
         this.target = cost.target.copy();
     }

@@ -50,12 +50,12 @@ public final class AnaBattlemage extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(3));
         ability.addTarget(new TargetPlayer());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new KickedCostCondition("{2}{U}"),
-                "When {this} enters the battlefield, if it was kicked with its {2}{U} kicker, target player discards three cards."));
+                "When {this} enters, if it was kicked with its {2}{U} kicker, target player discards three cards."));
         // When Ana Battlemage enters the battlefield, if it was kicked with its {1}{B} kicker, tap target untapped creature and that creature deals damage equal to its power to its controller.
         ability = new EntersBattlefieldTriggeredAbility(new AnaBattlemageKickerEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new KickedCostCondition("{1}{B}"),
-                "When {this} enters the battlefield, if it was kicked with its {1}{B} kicker, tap target untapped creature and that creature deals damage equal to its power to its controller."));
+                "When {this} enters, if it was kicked with its {1}{B} kicker, tap target untapped creature and that creature deals damage equal to its power to its controller."));
     }
 
     private AnaBattlemage(final AnaBattlemage card) {
@@ -70,12 +70,12 @@ public final class AnaBattlemage extends CardImpl {
 
 class AnaBattlemageKickerEffect extends OneShotEffect {
 
-    public AnaBattlemageKickerEffect() {
+    AnaBattlemageKickerEffect() {
         super(Outcome.Detriment);
         this.staticText = "tap target untapped creature and it deals damage equal to its power to its controller";
     }
 
-    public AnaBattlemageKickerEffect(final AnaBattlemageKickerEffect effect) {
+    private AnaBattlemageKickerEffect(final AnaBattlemageKickerEffect effect) {
         super(effect);
     }
 
@@ -87,7 +87,7 @@ class AnaBattlemageKickerEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean applied = false;
-        Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature != null) {
             applied = targetCreature.tap(source, game);
             Player controller = game.getPlayer(targetCreature.getControllerId());

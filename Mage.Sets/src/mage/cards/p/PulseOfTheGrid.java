@@ -45,7 +45,7 @@ class PulseOfTheGridReturnToHandEffect extends OneShotEffect {
         this.staticText = "Then if an opponent has more cards in hand than you, return {this} to its owner's hand";
     }
 
-    PulseOfTheGridReturnToHandEffect(final PulseOfTheGridReturnToHandEffect effect) {
+    private PulseOfTheGridReturnToHandEffect(final PulseOfTheGridReturnToHandEffect effect) {
         super(effect);
     }
 

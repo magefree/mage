@@ -16,7 +16,6 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.token.SoldierToken;
 import mage.players.Player;
 
@@ -55,7 +54,7 @@ class DarienKingOfKjeldorTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DarienKingOfKjeldorEffect(), true);
     }
 
-    public DarienKingOfKjeldorTriggeredAbility(final DarienKingOfKjeldorTriggeredAbility ability) {
+    private DarienKingOfKjeldorTriggeredAbility(final DarienKingOfKjeldorTriggeredAbility ability) {
         super(ability);
     }
 
@@ -66,7 +65,7 @@ class DarienKingOfKjeldorTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
@@ -86,11 +85,11 @@ class DarienKingOfKjeldorTriggeredAbility extends TriggeredAbilityImpl {
 
 class DarienKingOfKjeldorEffect extends OneShotEffect {
 
-    public DarienKingOfKjeldorEffect() {
+    DarienKingOfKjeldorEffect() {
         super(Outcome.Benefit);
     }
 
-    public DarienKingOfKjeldorEffect(final DarienKingOfKjeldorEffect effect) {
+    private DarienKingOfKjeldorEffect(final DarienKingOfKjeldorEffect effect) {
         super(effect);
     }
 

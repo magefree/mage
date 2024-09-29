@@ -38,7 +38,7 @@ public class BecomesTappedTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever " + CardUtil.addArticle(filter.getMessage()) + " becomes tapped, ");
     }
 
-    public BecomesTappedTriggeredAbility(final BecomesTappedTriggeredAbility ability) {
+    protected BecomesTappedTriggeredAbility(final BecomesTappedTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
         this.setTargetPointer = ability.setTargetPointer;

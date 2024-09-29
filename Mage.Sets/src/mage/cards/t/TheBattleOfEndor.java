@@ -1,9 +1,7 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -16,11 +14,15 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EwokToken;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,16 +34,16 @@ public final class TheBattleOfEndor extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{G}{G}{G}");
 
         // Create X 1/1 green Ewok creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new EwokToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new EwokToken(), GetXValue.instance));
 
         // Put X +1/+1 counters on each creature you control.
         this.getSpellAbility().addEffect(new TheBattleOfEndorEffect());
 
         // Creatures you control gain trample and haste until end of turn.
-        Effect effect = new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent());
+        Effect effect = new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES);
         effect.setText("Creatures you control gain trample");
         this.getSpellAbility().addEffect(effect);
-        effect = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent());
+        effect = new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURES);
         effect.setText("and haste until end of turn");
         this.getSpellAbility().addEffect(effect);
 
@@ -64,7 +66,7 @@ class TheBattleOfEndorEffect extends OneShotEffect {
         staticText = "Put X +1/+1 counters on each creature you control";
     }
 
-    TheBattleOfEndorEffect(TheBattleOfEndorEffect effect) {
+    private TheBattleOfEndorEffect(final TheBattleOfEndorEffect effect) {
         super(effect);
     }
 
@@ -78,7 +80,7 @@ class TheBattleOfEndorEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game)) {
-                permanent.addCounters(CounterType.P1P1.createInstance(source.getManaCostsToPay().getX()), source.getControllerId(), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(CardUtil.getSourceCostsTag(game, source, "X", 0)), source.getControllerId(), source, game);
             }
             return true;
         }

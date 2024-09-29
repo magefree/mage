@@ -71,7 +71,7 @@ class InfiltratorsMagemarkCantBeBlockedAllEffect extends RestrictionEffect {
         this.staticText = "and can't be blocked except by creatures with defender";
     }
 
-    public InfiltratorsMagemarkCantBeBlockedAllEffect(InfiltratorsMagemarkCantBeBlockedAllEffect effect) {
+    private InfiltratorsMagemarkCantBeBlockedAllEffect(final InfiltratorsMagemarkCantBeBlockedAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }

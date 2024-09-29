@@ -1,4 +1,3 @@
-
 package mage.cards.w;
 
 import java.util.UUID;
@@ -19,6 +18,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class WoodlandGuidance extends CardImpl {
 
+    private static final FilterLandPermanent filter = new FilterLandPermanent(SubType.FOREST, "Forests");
+
     public WoodlandGuidance(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{G}");
 
@@ -27,7 +28,7 @@ public final class WoodlandGuidance extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard());
 
         // Clash with an opponent. If you win, untap all Forest you control
-        this.getSpellAbility().addEffect(new DoIfClashWonEffect(new UntapAllLandsControllerEffect(new FilterLandPermanent(SubType.FOREST, "Forests"))));
+        this.getSpellAbility().addEffect(new DoIfClashWonEffect(new UntapAllLandsControllerEffect(filter)));
 
         // Remove WoodlandGuidance from the game 
         this.getSpellAbility().addEffect(new ExileSpellEffect().concatBy("<br>"));

@@ -1,7 +1,6 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -11,11 +10,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RedirectionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -23,6 +18,9 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -70,13 +68,14 @@ class HazduhrTheAbbotRedirectDamageEffect extends RedirectionEffect {
         this.staticText = "The next X damage that would be dealt this turn to target white creature you control is dealt to {this} instead";
     }
 
-    public HazduhrTheAbbotRedirectDamageEffect(final HazduhrTheAbbotRedirectDamageEffect effect) {
+    private HazduhrTheAbbotRedirectDamageEffect(final HazduhrTheAbbotRedirectDamageEffect effect) {
         super(effect);
     }
 
     @Override
     public void init(Ability source, Game game) {
-        amountToRedirect = source.getManaCostsToPay().getX();
+        super.init(source, game);
+        amountToRedirect = CardUtil.getSourceCostsTag(game, source, "X", 0);
     }
 
     @Override
@@ -86,7 +85,7 @@ class HazduhrTheAbbotRedirectDamageEffect extends RedirectionEffect {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             if (filter.match(permanent, permanent.getControllerId(), source, game)) {
                 if (event.getTargetId().equals(getTargetPointer().getFirst(game, source))) {

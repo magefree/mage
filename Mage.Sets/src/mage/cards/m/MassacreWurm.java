@@ -54,7 +54,7 @@ class MassacreWurmTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature an opponent controls dies, ");
     }
 
-    MassacreWurmTriggeredAbility(final MassacreWurmTriggeredAbility ability) {
+    private MassacreWurmTriggeredAbility(final MassacreWurmTriggeredAbility ability) {
         super(ability);
     }
 

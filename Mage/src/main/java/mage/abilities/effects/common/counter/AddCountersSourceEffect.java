@@ -35,6 +35,10 @@ public class AddCountersSourceEffect extends OneShotEffect {
         this(counter, StaticValue.get(0), informPlayers);
     }
 
+    public AddCountersSourceEffect(Counter counter, DynamicValue amount) {
+        this(counter, amount, true);
+    }
+
     public AddCountersSourceEffect(Counter counter, DynamicValue amount, boolean informPlayers) {
         this(counter, amount, informPlayers, false);
     }
@@ -55,7 +59,7 @@ public class AddCountersSourceEffect extends OneShotEffect {
         staticText = CardUtil.getAddRemoveCountersText(amount, counter, "{this}", true);
     }
 
-    public AddCountersSourceEffect(final AddCountersSourceEffect effect) {
+    protected AddCountersSourceEffect(final AddCountersSourceEffect effect) {
         super(effect);
         if (effect.counter != null) {
             this.counter = effect.counter.copy();

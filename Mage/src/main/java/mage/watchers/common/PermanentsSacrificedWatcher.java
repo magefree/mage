@@ -46,4 +46,8 @@ public class PermanentsSacrificedWatcher extends Watcher {
     public List<Permanent> getThisTurnSacrificedPermanents(UUID playerId) {
         return sacrificedPermanents.get(playerId);
     }
+
+    public int getThisTurnSacrificedPermanents() {
+        return sacrificedPermanents.values().stream().mapToInt(permanents -> permanents.size()).sum();
+    }
 }

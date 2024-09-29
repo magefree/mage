@@ -29,7 +29,7 @@ public final class SkyknightLegionnaire extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public SkyknightLegionnaire (final SkyknightLegionnaire card) {
+    private SkyknightLegionnaire(final SkyknightLegionnaire card) {
         super(card);
     }
 

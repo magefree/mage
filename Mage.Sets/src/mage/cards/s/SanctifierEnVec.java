@@ -63,7 +63,7 @@ public final class SanctifierEnVec extends CardImpl {
 
 class SanctifierEnVecEffect extends ReplacementEffectImpl {
 
-    public SanctifierEnVecEffect() {
+    SanctifierEnVecEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
         this.staticText = "If a black or red permanent, spell, or card not on the battlefield would be put into a graveyard, exile it instead";
     }

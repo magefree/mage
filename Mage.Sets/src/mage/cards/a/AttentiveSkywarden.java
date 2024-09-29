@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrBattleTriggeredAbility;
 import mage.abilities.effects.common.TransformTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -39,9 +39,7 @@ public final class AttentiveSkywarden extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever Attentive Skywarden deals combat damage to a player or battle, transform up to one target Incubator token you control.
-        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(
-                new TransformTargetEffect(), false
-        ).setOrBattle(true);
+        Ability ability = new DealsCombatDamageToAPlayerOrBattleTriggeredAbility(new TransformTargetEffect(), false);
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
     }

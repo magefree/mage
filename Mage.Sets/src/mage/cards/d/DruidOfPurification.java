@@ -80,7 +80,7 @@ class DruidOfPurificationEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(0, 1, filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         Set<Permanent> permanents = new HashSet<>();
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);

@@ -60,7 +60,7 @@ class HiddenGibbonsApe extends TokenImpl {
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
-    public HiddenGibbonsApe(final HiddenGibbonsApe token) {
+    private HiddenGibbonsApe(final HiddenGibbonsApe token) {
         super(token);
     }
 

@@ -38,7 +38,7 @@ public final class ChameleonColossus extends CardImpl {
 
         // {2}{G}{G}: Chameleon Colossus gets +X/+X until end of turn, where X is its power.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn, true)
+                new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn)
                         .setText("{this} gets +X/+X until end of turn, where X is its power"),
                 new ManaCostsImpl<>("{2}{G}{G}")
         ));

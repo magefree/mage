@@ -59,12 +59,12 @@ public final class DreamCoat extends CardImpl {
 
 class BecomesColorOrColorsEnchantedEffect extends OneShotEffect {
 
-    public BecomesColorOrColorsEnchantedEffect() {
+    BecomesColorOrColorsEnchantedEffect() {
         super(Outcome.Neutral);
         this.staticText = "Enchanted creature becomes the color or colors of your choice";
     }
 
-    public BecomesColorOrColorsEnchantedEffect(final BecomesColorOrColorsEnchantedEffect effect) {
+    private BecomesColorOrColorsEnchantedEffect(final BecomesColorOrColorsEnchantedEffect effect) {
         super(effect);
     }
 

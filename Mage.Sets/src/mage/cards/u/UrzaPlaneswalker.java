@@ -28,7 +28,7 @@ import java.util.UUID;
  */
 public final class UrzaPlaneswalker extends MeldCard {
 
-    private static final FilterCard filter = new FilterCard("artifact, instant, and sorcery spells");
+    private static final FilterCard filter = new FilterCard("Artifact, instant, and sorcery spells you cast this turn");
     private static final FilterPermanent filter2 = new FilterPermanent("artifacts and planeswalkers");
 
     static {
@@ -58,9 +58,8 @@ public final class UrzaPlaneswalker extends MeldCard {
         this.addAbility(new SimpleStaticAbility(new UrzaPlaneswalkerEffect()));
 
         // +2: Artifact, instant, and sorcery spells you cast this turn cost {2} less to cast. You gain 2 life.
-        Ability ability = new LoyaltyAbility(new SpellsCostReductionControllerEffect(filter, 2)
-                .setDuration(Duration.EndOfTurn)
-                .setText("artifact, instant, and sorcery spells you cast this turn cost {2} less to cast"), 2);
+        Ability ability = new LoyaltyAbility(
+                new SpellsCostReductionControllerEffect(filter, 2).setDuration(Duration.EndOfTurn), 2);
         ability.addEffect(new GainLifeEffect(2));
         this.addAbility(ability);
 
@@ -95,12 +94,12 @@ public final class UrzaPlaneswalker extends MeldCard {
 
 class UrzaPlaneswalkerEffect extends ContinuousEffectImpl {
 
-    public UrzaPlaneswalkerEffect() {
+    UrzaPlaneswalkerEffect() {
         super(Duration.WhileOnBattlefield, Layer.RulesEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "once during each of your turns, you may activate an additional loyalty ability of {this}";
     }
 
-    public UrzaPlaneswalkerEffect(final UrzaPlaneswalkerEffect effect) {
+    private UrzaPlaneswalkerEffect(final UrzaPlaneswalkerEffect effect) {
         super(effect);
     }
 

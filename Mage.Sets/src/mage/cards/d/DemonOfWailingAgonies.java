@@ -33,7 +33,7 @@ public final class DemonOfWailingAgonies extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Lieutenant - As long as you control your commander, Demon of Wailing Agonies gets +2/+2 and has "Whenever Demon of Wailing Agonies deals combat damage to a player, that player sacrifices a creature."
-        Ability gainedAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, 1, "that player"), false, true);
+        Ability gainedAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"), false, true);
         ContinuousEffect effect = new GainAbilitySourceEffect(gainedAbility);
         effect.setText("and has \"Whenever {this} deals combat damage to a player, that player sacrifices a creature.\"");
         this.addAbility(new LieutenantAbility(effect));

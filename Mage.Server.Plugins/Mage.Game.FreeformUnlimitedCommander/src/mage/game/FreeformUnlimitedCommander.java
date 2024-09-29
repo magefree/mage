@@ -1,18 +1,20 @@
 
 package mage.game;
 
-import java.util.UUID;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchType;
 import mage.game.mulligan.Mulligan;
 
+import java.util.UUID;
+
 public class FreeformUnlimitedCommander extends GameCommanderImpl {
 
     private int numPlayers;
 
-    public FreeformUnlimitedCommander(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 60);
+    public FreeformUnlimitedCommander(MultiplayerAttackOption attackOption, RangeOfInfluence range,
+                                      Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 60, startLife, startHandSize);
     }
 
     public FreeformUnlimitedCommander(final FreeformUnlimitedCommander game) {
@@ -25,7 +27,7 @@ public class FreeformUnlimitedCommander extends GameCommanderImpl {
         if (state.getPlayerList().size() > 2) {
             startingPlayerSkipsDraw = false;
         }
-        super.init(choosingPlayerId); 
+        super.init(choosingPlayerId);
     }
 
     @Override

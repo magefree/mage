@@ -39,7 +39,7 @@ class LukeSkywalkerEmblemEffect extends PreventionEffectImpl {
         staticText = "Prevent all damage that would be dealt to you during combat";
     }
 
-    public LukeSkywalkerEmblemEffect(final LukeSkywalkerEmblemEffect effect) {
+    protected LukeSkywalkerEmblemEffect(final LukeSkywalkerEmblemEffect effect) {
         super(effect);
     }
 

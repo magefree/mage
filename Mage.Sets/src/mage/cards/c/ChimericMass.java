@@ -34,7 +34,7 @@ public final class ChimericMass extends CardImpl {
                 new CreatureToken(0, 0, "Construct artifact creature with \"This creature's power and toughness are each equal to the number of charge counters on it.\"")
                         .withType(CardType.ARTIFACT)
                         .withSubType(SubType.CONSTRUCT)
-                        .withAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(count, count, Duration.WhileOnBattlefield, SubLayer.SetPT_7b))),
+                        .withAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessSourceEffect(count, Duration.WhileOnBattlefield))),
                 CardType.ARTIFACT, Duration.EndOfTurn).withDurationRuleAtStart(true), new GenericManaCost(1)));
     }
 

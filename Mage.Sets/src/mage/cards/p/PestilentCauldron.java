@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.ControllerGotLifeCount;
+import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.*;
 import mage.cards.CardSetInfo;
@@ -62,11 +62,11 @@ public final class PestilentCauldron extends ModalDoubleFacedCard {
 
         // {1}, {T}: Each opponent mills cards equal to the amount of life you gained this turn.
         ability = new SimpleActivatedAbility(new MillCardsEachPlayerEffect(
-                ControllerGotLifeCount.instance, TargetController.OPPONENT
+                ControllerGainedLifeCount.instance, TargetController.OPPONENT
         ).setText("each opponent mills cards equal to the amount of life you gained this turn"), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addWatcher(new PlayerGainedLifeWatcher());
-        this.getLeftHalfCard().addAbility(ability.addHint(ControllerGotLifeCount.getHint()));
+        this.getLeftHalfCard().addAbility(ability.addHint(ControllerGainedLifeCount.getHint()));
 
         // {4}, {T}: Exile four target cards from a single graveyard. Draw a card.
         ability = new SimpleActivatedAbility(new ExileTargetEffect(), new GenericManaCost(4));

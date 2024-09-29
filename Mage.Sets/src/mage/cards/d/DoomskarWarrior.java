@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.common.DealsCombatDamageToAPlayerOrBattleTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.BackupAbility;
@@ -36,13 +36,13 @@ public final class DoomskarWarrior extends CardImpl {
         backupAbility.addAbility(TrampleAbility.getInstance());
 
         // Whenever this creature deals combat damage to a player or battle, look at that many cards from the top of your library. You may reveal a creature or land card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-        backupAbility.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
+        backupAbility.addAbility(new DealsCombatDamageToAPlayerOrBattleTriggeredAbility(
                 new LookLibraryAndPickControllerEffect(
                         SavedDamageValue.MANY, 1,
                         StaticFilters.FILTER_CARD_CREATURE_OR_LAND,
                         PutCards.HAND, PutCards.BOTTOM_RANDOM
                 ), false
-        ).setOrBattle(true).setTriggerPhrase("Whenever this creature deals combat damage to a player or battle, "));
+        ).setTriggerPhrase("Whenever this creature deals combat damage to a player or battle, "));
     }
 
     private DoomskarWarrior(final DoomskarWarrior card) {

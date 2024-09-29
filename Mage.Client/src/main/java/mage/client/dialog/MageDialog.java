@@ -1,31 +1,77 @@
 package mage.client.dialog;
 
 import mage.client.MageFrame;
+import mage.client.components.MageDesktopIconifySupport;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.GuiDisplayUtil;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import java.awt.*;
 import java.awt.event.InvocationEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.lang.reflect.InvocationTargetException;
 
 /**
+ * GUI: basic class for all dialogs
+ * <p>
+ * WARNING, make sure you don't wait results after showXXX call -- use callback function instead
+ * <p>
+ * TODO: research and make sure all dialogs can be called one time and clean on main form close
+ *   bad example: deck editor can call multiple PickCheckBoxDialog instances (not critical)
+ * TODO: migrate all JInternalFrame and other dialogs to MageDialog and support non modal
+ * TODO: must add clean code on doClose for all dialogs? See PickPileDialog for example (cleanUp, removeDialog)
+ *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class MageDialog extends javax.swing.JInternalFrame {
 
     private static final Logger LOGGER = Logger.getLogger(MageDialog.class);
 
-    protected boolean modal = false;
+    private boolean modal = false; // warning, app can work in non-modal mode, so make sure result processing on callback
 
-    /**
-     * Creates new form MageDialog
-     */
+    // GUI performance and bugs issues:
+    // TODO: swing components should override paintComponent() instead paint()
+    // TODO: swing components should use this.revalidate() instead parent.validate()
+    // TODO: swing components in paintComponent() must call super or paint full rect on opaque = true
+
     public MageDialog() {
         initComponents();
+
+        // paint calls optimization - no needs in transparent
+        setOpaque(true);
+
+        // enable a minimizing window on double clicks
+        if (this instanceof MageDesktopIconifySupport) {
+            BasicInternalFrameUI ui = (BasicInternalFrameUI) this.getUI();
+            ui.getNorthPane().addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    // double clicks and repeated double clicks
+                    // minimize window to title bar
+                    if (!SwingUtilities.isLeftMouseButton(e)) {
+                        return;
+                    }
+                    if ((e.getClickCount() & 1) == 0 && (e.getClickCount() > 0) && !e.isConsumed()) {
+                        e.consume();
+                        try {
+                            MageDialog.this.setIcon(!MageDialog.this.isIcon());
+                        } catch (PropertyVetoException exp) {
+                            // ignore read only
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    @Override
+    public boolean isValidateRoot() {
+        // paint calls optimization - no frame auto-size on child changes
+        return true;
     }
 
     public void changeGUISize() {
@@ -195,7 +241,7 @@ public class MageDialog extends javax.swing.JInternalFrame {
     }
 
     public void setModal(boolean modal) {
-        this.modal = modal;
+        this.modal = MageFrame.isGuiModalModeEnabled() && modal;
     }
 
     public boolean isModal() {

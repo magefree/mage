@@ -2,7 +2,6 @@ package mage.abilities.effects.common;
 
 import mage.ApprovingObject;
 import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -24,6 +23,7 @@ public class ExileTargetCardCopyAndCastEffect extends OneShotEffect {
 
     /**
      * NOTE: You must supply your own effect text
+     *
      * @param noMana   Whether the copy can be cast without paying its mana cost
      * @param optional Whether the casting of the copy is optional (otherwise it must be cast if possible)
      */
@@ -34,7 +34,7 @@ public class ExileTargetCardCopyAndCastEffect extends OneShotEffect {
         this.noMana = noMana;
     }
 
-    public ExileTargetCardCopyAndCastEffect(final ExileTargetCardCopyAndCastEffect effect) {
+    protected ExileTargetCardCopyAndCastEffect(final ExileTargetCardCopyAndCastEffect effect) {
         super(effect);
 
         this.optional = effect.optional;
@@ -51,7 +51,7 @@ public class ExileTargetCardCopyAndCastEffect extends OneShotEffect {
         player.moveCards(card, Zone.EXILED, source, game);
         Card cardCopy = game.copyCard(card, source, source.getControllerId());
         if (optional && !player.chooseUse(outcome, "Cast copy of " +
-                card.getName() + " without paying its mana cost?", source, game)) {
+                card.getName() + (this.noMana ? " without paying its mana cost?" : "?" ), source, game)) {
             return true;
         }
         game.getState().setValue("PlayFromNotOwnHandZone" + cardCopy.getId(), Boolean.TRUE);

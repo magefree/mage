@@ -63,7 +63,7 @@ class LazotepConvertCopyEffect extends OneShotEffect {
             blueprint.getPower().setModifiedBaseValue(4);
             blueprint.getToughness().setModifiedBaseValue(4);
             blueprint.addSubType(SubType.ZOMBIE);
-            blueprint.getColor().setColor(ObjectColor.BLACK);
+            blueprint.getColor().addColor(ObjectColor.BLACK);
             return true;
         }
     };
@@ -76,7 +76,7 @@ class LazotepConvertCopyEffect extends OneShotEffect {
                 "except it's a 4/4 black Zombie in addition to its other types";
     }
 
-    public LazotepConvertCopyEffect(final LazotepConvertCopyEffect effect) {
+    private LazotepConvertCopyEffect(final LazotepConvertCopyEffect effect) {
         super(effect);
     }
 
@@ -87,14 +87,18 @@ class LazotepConvertCopyEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetCardInGraveyard(0, 1, filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Card copyFromCard = game.getCard(target.getFirstTarget());
         if (copyFromCard == null) {
             return true;
         }
+        Card modifiedCopy = copyFromCard.copy();
+        //Appliers must be applied before CopyEffect, its applier setting is just for copies of copies
+        // TODO: research applier usage, why it here
+        applier.apply(game, modifiedCopy, source, source.getSourceId());
         game.addEffect(new CopyEffect(
-                Duration.Custom, copyFromCard, source.getSourceId()
+                Duration.Custom, modifiedCopy, source.getSourceId()
         ).setApplier(applier), source);
         return true;
     }

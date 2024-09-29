@@ -56,7 +56,7 @@ class GhostwayEffect extends OneShotEffect {
         staticText = "Exile each creature you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step";
     }
 
-    public GhostwayEffect(final GhostwayEffect effect) {
+    private GhostwayEffect(final GhostwayEffect effect) {
         super(effect);
     }
 

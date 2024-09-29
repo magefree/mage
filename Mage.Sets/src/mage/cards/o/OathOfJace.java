@@ -47,12 +47,12 @@ public final class OathOfJace extends CardImpl {
 
 class OathOfJaceEffect extends OneShotEffect {
 
-    public OathOfJaceEffect() {
+    OathOfJaceEffect() {
         super(Outcome.DrawCard);
         this.staticText = "scry X, where X is the number of planeswalkers you control";
     }
 
-    public OathOfJaceEffect(final OathOfJaceEffect effect) {
+    private OathOfJaceEffect(final OathOfJaceEffect effect) {
         super(effect);
     }
 

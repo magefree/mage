@@ -10,7 +10,6 @@ import mage.game.events.GameEvent;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
 /**
- *
  * @author LoneFox
  */
 public class CastOnlyIfYouHaveCastAnotherSpellEffect extends ContinuousRuleModifyingEffectImpl {
@@ -20,7 +19,7 @@ public class CastOnlyIfYouHaveCastAnotherSpellEffect extends ContinuousRuleModif
         staticText = "Cast this spell only if you've cast another spell this turn";
     }
 
-    public CastOnlyIfYouHaveCastAnotherSpellEffect(final CastOnlyIfYouHaveCastAnotherSpellEffect effect) {
+    protected CastOnlyIfYouHaveCastAnotherSpellEffect(final CastOnlyIfYouHaveCastAnotherSpellEffect effect) {
         super(effect);
     }
 
@@ -38,11 +37,6 @@ public class CastOnlyIfYouHaveCastAnotherSpellEffect extends ContinuousRuleModif
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

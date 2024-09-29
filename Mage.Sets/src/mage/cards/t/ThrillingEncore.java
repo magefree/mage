@@ -68,7 +68,9 @@ class ThrillingEncoreEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         CardsPutIntoGraveyardWatcher watcher = game.getState().getWatcher(CardsPutIntoGraveyardWatcher.class);
-        if (controller == null || watcher == null) { return false; }
+        if (controller == null || watcher == null) {
+            return false;
+        }
 
         Cards cards = new CardsImpl(watcher.getCardsPutIntoGraveyardFromBattlefield(game));
         cards.removeIf(uuid -> !game.getCard(uuid).isCreature(game));

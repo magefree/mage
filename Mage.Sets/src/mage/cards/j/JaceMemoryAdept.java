@@ -4,10 +4,9 @@ package mage.cards.j;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.Mode;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
+import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,12 +30,12 @@ public final class JaceMemoryAdept extends CardImpl {
 
         // +1: Draw a card. Target player puts the top card of their library into their graveyard.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DrawCardSourceControllerEffect(1), 1);
-        ability1.addEffect(new PutLibraryIntoGraveTargetEffect(1));
+        ability1.addEffect(new MillCardsTargetEffect(1));
         ability1.addTarget(new TargetPlayer());
         this.addAbility(ability1);
 
         // 0: Target player puts the top ten cards of their library into their graveyard.
-        LoyaltyAbility ability2 = new LoyaltyAbility(new PutLibraryIntoGraveTargetEffect(10), 0);
+        LoyaltyAbility ability2 = new LoyaltyAbility(new MillCardsTargetEffect(10), 0);
         ability2.addTarget(new TargetPlayer());
         this.addAbility(ability2);
 
@@ -58,7 +57,7 @@ public final class JaceMemoryAdept extends CardImpl {
 
 class JaceMemoryAdeptEffect extends DrawCardTargetEffect {
 
-    public JaceMemoryAdeptEffect(int amount) {
+    JaceMemoryAdeptEffect(int amount) {
         super(amount);
         staticText = "Any number of target players each draw twenty cards";
     }
@@ -69,7 +68,7 @@ class JaceMemoryAdeptEffect extends DrawCardTargetEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID target : targetPointer.getTargets(game, source)) {
+        for (UUID target : getTargetPointer().getTargets(game, source)) {
             Player player = game.getPlayer(target);
             if (player != null) {
                 player.drawCards(amount.calculate(game, source, this), source, game);

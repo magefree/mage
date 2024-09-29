@@ -57,7 +57,7 @@ class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AngelheartVialEffect(), true);
     }
 
-    public AngelheartVialTriggeredAbility(final AngelheartVialTriggeredAbility ability) {
+    private AngelheartVialTriggeredAbility(final AngelheartVialTriggeredAbility ability) {
         super(ability);
     }
 
@@ -68,7 +68,7 @@ class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
@@ -88,11 +88,11 @@ class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl {
 
 class AngelheartVialEffect extends OneShotEffect {
 
-    public AngelheartVialEffect() {
+    AngelheartVialEffect() {
         super(Outcome.Benefit);
     }
 
-    public AngelheartVialEffect(final AngelheartVialEffect effect) {
+    private AngelheartVialEffect(final AngelheartVialEffect effect) {
         super(effect);
     }
 
@@ -110,4 +110,3 @@ class AngelheartVialEffect extends OneShotEffect {
         return true;
     }
 }
-

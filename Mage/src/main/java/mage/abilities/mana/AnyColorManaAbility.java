@@ -43,7 +43,7 @@ public class AnyColorManaAbility extends ActivatedManaAbilityImpl {
         this.netMana.add(new Mana(0, 0, 0, 0, 0, 0, 1, 0));
     }
 
-    public AnyColorManaAbility(final AnyColorManaAbility ability) {
+    protected AnyColorManaAbility(final AnyColorManaAbility ability) {
         super(ability);
     }
 

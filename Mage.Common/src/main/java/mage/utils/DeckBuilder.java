@@ -77,8 +77,8 @@ public final class DeckBuilder {
             addCardsToDeck(remainingCards, min, max, deckCount[index]);
             min = max + 1;
         }
-        addCardsToDeck(remainingCards, 0, 4, deckSpells - deck.getCards().size());
-        addCardsToDeck(remainingCards, 5, 10, deckSpells - deck.getCards().size());
+        addCardsToDeck(remainingCards, 0, 4, deckSpells - deck.getMaindeckCards().size());
+        addCardsToDeck(remainingCards, 5, 10, deckSpells - deck.getMaindeckCards().size());
         addLandsToDeck(allowedColors, setsToUse, landCardPool, callback);
 
         Deck returnedDeck = deck;
@@ -174,7 +174,7 @@ public final class DeckBuilder {
         }
 
         // Add optimal basic lands to deck.
-        while (deck.getCards().size() < deckSize) {
+        while (deck.getMaindeckCards().size() < deckSize) {
             ColoredManaSymbol bestColor = null;
             //Default to a color in the allowed colors
             if (allowedColors != null && !allowedColors.isEmpty()) {

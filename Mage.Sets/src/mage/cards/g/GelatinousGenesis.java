@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -10,6 +9,9 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.OozeToken;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -37,18 +39,18 @@ public final class GelatinousGenesis extends CardImpl {
 
 class GelatinousGenesisEffect extends OneShotEffect {
 
-    public GelatinousGenesisEffect() {
+    GelatinousGenesisEffect() {
         super(Outcome.PutCreatureInPlay);
         staticText = "create X X/X green Ooze creature tokens";
     }
 
-    public GelatinousGenesisEffect(GelatinousGenesisEffect ability) {
+    private GelatinousGenesisEffect(final GelatinousGenesisEffect ability) {
         super(ability);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int count = source.getManaCostsToPay().getX();
+        int count = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         OozeToken oozeToken = new OozeToken();
         oozeToken.setPower(count);
@@ -62,4 +64,3 @@ class GelatinousGenesisEffect extends OneShotEffect {
         return new GelatinousGenesisEffect(this);
     }
 }
-

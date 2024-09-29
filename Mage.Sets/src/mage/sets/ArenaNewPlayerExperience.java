@@ -18,7 +18,7 @@ public final class ArenaNewPlayerExperience extends ExpansionSet {
     }
 
     private ArenaNewPlayerExperience() {
-        super("Arena New Player Experience", "ANA", ExpansionSet.buildDate(2018, 7, 14), SetType.MAGIC_ONLINE);
+        super("Arena New Player Experience", "ANA", ExpansionSet.buildDate(2018, 7, 14), SetType.MAGIC_ARENA);
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

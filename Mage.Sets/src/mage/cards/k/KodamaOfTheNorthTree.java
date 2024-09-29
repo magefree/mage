@@ -29,7 +29,7 @@ public final class KodamaOfTheNorthTree extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
     }
 
-    public KodamaOfTheNorthTree (final KodamaOfTheNorthTree card) {
+    private KodamaOfTheNorthTree(final KodamaOfTheNorthTree card) {
         super(card);
     }
 

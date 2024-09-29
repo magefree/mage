@@ -1,8 +1,6 @@
-
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -11,7 +9,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
- *
  * @author LevelX2
  */
 public class SacrificeSourceUnlessConditionEffect extends OneShotEffect {
@@ -21,9 +18,10 @@ public class SacrificeSourceUnlessConditionEffect extends OneShotEffect {
     public SacrificeSourceUnlessConditionEffect(Condition condition) {
         super(Outcome.Sacrifice);
         this.condition = condition;
+        this.staticText = "sacrifice {this} unless " + condition.toString();
     }
 
-    public SacrificeSourceUnlessConditionEffect(final SacrificeSourceUnlessConditionEffect effect) {
+    protected SacrificeSourceUnlessConditionEffect(final SacrificeSourceUnlessConditionEffect effect) {
         super(effect);
         this.condition = effect.condition;
     }
@@ -47,13 +45,4 @@ public class SacrificeSourceUnlessConditionEffect extends OneShotEffect {
         return new SacrificeSourceUnlessConditionEffect(this);
     }
 
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        StringBuilder sb = new StringBuilder("sacrifice {this} unless ");
-        sb.append(condition.toString());
-        return sb.toString();
-    }
 }

@@ -60,11 +60,6 @@ class HallOfGemstoneEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));

@@ -26,9 +26,8 @@ public final class TormentedThoughts extends CardImpl {
     public TormentedThoughts(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{B}");
 
-
         // As an additional cost to cast Tormented Thoughts, sacrifice a creature.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT, false)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
 
         // Target player discards a number of cards equal to the sacrificed creature's power.
         this.getSpellAbility().addEffect(new TormentedThoughtsDiscardEffect());
@@ -47,12 +46,12 @@ public final class TormentedThoughts extends CardImpl {
 
 class TormentedThoughtsDiscardEffect extends OneShotEffect {
 
-    public TormentedThoughtsDiscardEffect() {
+    TormentedThoughtsDiscardEffect() {
         super(Outcome.Discard);
         this.staticText = "Target player discards a number of cards equal to the sacrificed creature's power";
     }
 
-    public TormentedThoughtsDiscardEffect(final TormentedThoughtsDiscardEffect effect) {
+    private TormentedThoughtsDiscardEffect(final TormentedThoughtsDiscardEffect effect) {
         super(effect);
     }
 

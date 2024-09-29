@@ -71,7 +71,7 @@ class DralnuLichLordReplacementEffect extends ReplacementEffectImpl {
         staticText = "If damage would be dealt to {this}, sacrifice that many permanents instead";
     }
 
-    DralnuLichLordReplacementEffect(final DralnuLichLordReplacementEffect effect) {
+    private DralnuLichLordReplacementEffect(final DralnuLichLordReplacementEffect effect) {
         super(effect);
     }
 
@@ -105,7 +105,7 @@ class DralnuLichLordFlashbackEffect extends ContinuousEffectImpl {
         this.staticText = "target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost";
     }
 
-    DralnuLichLordFlashbackEffect(final DralnuLichLordFlashbackEffect effect) {
+    private DralnuLichLordFlashbackEffect(final DralnuLichLordFlashbackEffect effect) {
         super(effect);
     }
 
@@ -116,7 +116,7 @@ class DralnuLichLordFlashbackEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             FlashbackAbility ability = new FlashbackAbility(card, card.getManaCost());
             ability.setSourceId(card.getId());

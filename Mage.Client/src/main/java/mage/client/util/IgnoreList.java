@@ -53,15 +53,15 @@ public final class IgnoreList {
         }
 
         MagePreferences.addIgnoredUser(serverAddress, user);
-        updateTablesTable();
+        updateServerLobbyTables();
 
         return "Added " + user + " to your ignore list on " + serverAddress + " (total: " + getIgnoredUsers(serverAddress).size() + ")";
     }
 
-    private static void updateTablesTable() {
+    private static void updateServerLobbyTables() {
         MageFrame mageFrame = MageFrame.getInstance();
         if (mageFrame != null) {
-            mageFrame.setTableFilter();
+            mageFrame.setServerLobbyTablesFilter();
         }
     }
 
@@ -70,7 +70,7 @@ public final class IgnoreList {
             return usage(serverAddress);
         }
         if (MagePreferences.removeIgnoredUser(serverAddress, user)) {
-            updateTablesTable();
+            updateServerLobbyTables();
             return "Removed " + user + " from your ignore list on " + serverAddress + " (total: " + getIgnoredUsers(serverAddress).size() + ")";
         } else {
             return "No such user \"" + user + "\" on your ignore list on " + serverAddress + " (total: " + getIgnoredUsers(serverAddress).size() + ")";

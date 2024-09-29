@@ -42,7 +42,7 @@ public final class TrenchBehemoth extends CardImpl {
         ).setText("It gains hexproof until end of turn"));
         this.addAbility(ability);
 
-        // Whenever a land enters the battlefield under your control, target creature an opponent controls attacks during its controller's next combat phase if able.
+        // Whenever a land you control enters, target creature an opponent controls attacks during its controller's next combat phase if able.
         ability = new LandfallAbility(new TrenchBehemothEffect());
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
@@ -60,12 +60,12 @@ public final class TrenchBehemoth extends CardImpl {
 
 class TrenchBehemothEffect extends RequirementEffect {
 
-    public TrenchBehemothEffect() {
+    TrenchBehemothEffect() {
         super(Duration.Custom);
         staticText = "target creature an opponent controls attacks during its controller's next combat phase if able";
     }
 
-    public TrenchBehemothEffect(final TrenchBehemothEffect effect) {
+    private TrenchBehemothEffect(final TrenchBehemothEffect effect) {
         super(effect);
     }
 

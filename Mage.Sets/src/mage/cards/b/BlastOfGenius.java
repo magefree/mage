@@ -40,12 +40,12 @@ public final class BlastOfGenius extends CardImpl {
 
 class BlastOfGeniusEffect extends OneShotEffect {
 
-    public BlastOfGeniusEffect() {
+    BlastOfGeniusEffect() {
         super(Outcome.Benefit);
         this.staticText = "Choose any target. Draw three cards, then discard a card. {this} deals damage equal to the discard card's mana value to that permanent or player";
     }
 
-    public BlastOfGeniusEffect(final BlastOfGeniusEffect effect) {
+    private BlastOfGeniusEffect(final BlastOfGeniusEffect effect) {
         super(effect);
     }
 

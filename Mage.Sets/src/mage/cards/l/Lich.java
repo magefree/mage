@@ -28,6 +28,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetSacrifice;
 
 /**
  *
@@ -71,7 +72,7 @@ class LichLifeGainReplacementEffect extends ReplacementEffectImpl {
         staticText = "If you would gain life, draw that many cards instead";
     }
 
-    LichLifeGainReplacementEffect(final LichLifeGainReplacementEffect effect) {
+    private LichLifeGainReplacementEffect(final LichLifeGainReplacementEffect effect) {
         super(effect);
     }
 
@@ -106,7 +107,7 @@ class LichDamageTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LichDamageEffect(), false);
     }
 
-    LichDamageTriggeredAbility(final LichDamageTriggeredAbility ability) {
+    private LichDamageTriggeredAbility(final LichDamageTriggeredAbility ability) {
         super(ability);
     }
 
@@ -117,7 +118,7 @@ class LichDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
@@ -153,7 +154,7 @@ class LichDamageEffect extends OneShotEffect {
         this.staticText = "sacrifice that many nontoken permanents. If you can't, you lose the game";
     }
     
-    LichDamageEffect(final LichDamageEffect effect) {
+    private LichDamageEffect(final LichDamageEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -167,7 +168,7 @@ class LichDamageEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Target target = new TargetControlledPermanent(amount, amount, filter, true);
+            TargetSacrifice target = new TargetSacrifice(amount, filter);
             if (target.canChoose(controller.getId(), source, game)) {
                 if (controller.choose(Outcome.Sacrifice, target, source, game)) {
                     for (UUID targetId : target.getTargets()) {

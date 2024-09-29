@@ -44,7 +44,7 @@ class ForceMasteryEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library and put that card into your hand. You gain life equal to its mana value";
     }
 
-    ForceMasteryEffect(final ForceMasteryEffect effect) {
+    private ForceMasteryEffect(final ForceMasteryEffect effect) {
         super(effect);
     }
 

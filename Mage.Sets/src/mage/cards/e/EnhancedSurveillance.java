@@ -50,13 +50,13 @@ public final class EnhancedSurveillance extends CardImpl {
 
 class EnhancedSurveillanceReplacementEffect extends ReplacementEffectImpl {
 
-    public EnhancedSurveillanceReplacementEffect() {
+    EnhancedSurveillanceReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may look at an additional "
                 + "two cards each time you surveil.";
     }
 
-    public EnhancedSurveillanceReplacementEffect(final EnhancedSurveillanceReplacementEffect effect) {
+    private EnhancedSurveillanceReplacementEffect(final EnhancedSurveillanceReplacementEffect effect) {
         super(effect);
     }
 
@@ -84,12 +84,12 @@ class EnhancedSurveillanceReplacementEffect extends ReplacementEffectImpl {
 
 class EnhancedSurveillanceShuffleEffect extends OneShotEffect {
 
-    public EnhancedSurveillanceShuffleEffect() {
+    EnhancedSurveillanceShuffleEffect() {
         super(Outcome.Neutral);
         this.staticText = "Shuffle your graveyard into your library";
     }
 
-    public EnhancedSurveillanceShuffleEffect(final EnhancedSurveillanceShuffleEffect effect) {
+    private EnhancedSurveillanceShuffleEffect(final EnhancedSurveillanceShuffleEffect effect) {
         super(effect);
     }
 

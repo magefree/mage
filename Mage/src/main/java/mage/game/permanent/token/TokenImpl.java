@@ -1,9 +1,6 @@
 package mage.game.permanent.token;
 
-import mage.MageInt;
-import mage.MageObject;
-import mage.MageObjectImpl;
-import mage.ObjectColor;
+import mage.*;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
@@ -24,6 +21,7 @@ import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
 import mage.target.Target;
+import org.apache.log4j.Logger;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -32,6 +30,8 @@ import java.util.*;
  * Each token must have default constructor without params (GUI require for card viewer)
  */
 public abstract class TokenImpl extends MageObjectImpl implements Token {
+
+    private static final Logger logger = Logger.getLogger(MageObjectImpl.class);
 
     protected String description;
     private final ArrayList<UUID> lastAddedTokenIds = new ArrayList<>();
@@ -77,24 +77,33 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return new ArrayList<>(lastAddedTokenIds);
     }
 
+    /**
+     * Add an ability to the token. When copying from an existing source
+     * you should use the fromExistingObject variant of this function to prevent double-copying subabilities
+     * @param ability The ability to be added
+     */
     @Override
     public void addAbility(Ability ability) {
+        addAbility(ability, false);
+    }
+
+    /**
+     * @param ability The ability to be added
+     * @param fromExistingObject if copying abilities from an existing source then must ignore sub-abilities because they're already on the source object
+     *                         Otherwise sub-abilities will be added twice to the resulting object
+     */
+    @Override
+    public void addAbility(Ability ability, boolean fromExistingObject) {
         ability.setSourceId(this.getId());
         abilities.add(ability);
-        abilities.addAll(ability.getSubAbilities());
-
-        // TODO: remove all override and backFace changes (bug example: active transform ability in back face)
-        if (backFace != null) {
-            backFace.addAbility(ability);
+        if (!fromExistingObject) {
+            abilities.addAll(ability.getSubAbilities());
         }
     }
 
     // Directly from PermanentImpl
     @Override
     public void removeAbility(Ability abilityToRemove) {
-        if (backFace != null) {
-            backFace.removeAbility(abilityToRemove);
-        }
         if (abilityToRemove == null) {
             return;
         }
@@ -119,9 +128,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
 
         abilitiesToRemove.forEach(a -> removeAbility(a));
-        if (backFace != null) {
-            backFace.removeAbilities(abilitiesToRemove);
-        }
     }
 
     @Override
@@ -139,6 +145,14 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, null);
     }
 
+    /**
+     * Find random token image from a database
+     *
+     * @param token
+     * @param game
+     * @param sourceId
+     * @return
+     */
     public static TokenInfo generateTokenInfo(TokenImpl token, Game game, UUID sourceId) {
         // Choose a token image by priority:
         // - use source's set code
@@ -146,7 +160,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         // - use random set code
         // - use default set code
 
-        // token from a card - must use card image instead (example: Embalm ability)
+        // token from a card - must use card image instead, no need to choose new image (example: Embalm ability, copy of card, etc)
         if (!token.getCardNumber().isEmpty()) {
             return new TokenInfo(TokenType.TOKEN, token.getName(), token.getExpansionSetCode(), 0);
         }
@@ -187,21 +201,29 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             // TODO: return default creature token image
         }
 
-        // TODO: implement Copy image
-        // TODO: implement Manifest image
-        // TODO: implement Morph image
-
-        // unknown tokens
+        // unknown tokens:
+        // - without official token sets;
+        // - un-implemented token set (must add missing images to tokens database);
+        // - another use cases with unknown tokens
         return new TokenInfo(TokenType.TOKEN, "Unknown", TokenRepository.XMAGE_TOKENS_SET_CODE, 0);
     }
 
     @Override
     public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer) {
-        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, true);
+        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, null);
     }
 
     @Override
-    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, boolean created) {
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo) {
+        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, attachedTo, true);
+    }
+
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created) {
+        return putOntoBattlefield(amount, game, source, controllerId, tapped, attacking, attackedPlayer, attachedTo, created, Collections.singletonList(this));
+    }
+
+    @Override
+    public boolean putOntoBattlefield(int amount, Game game, Ability source, UUID controllerId, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created, List<Token> tokens) {
         Player controller = game.getPlayer(controllerId);
         if (controller == null) {
             return false;
@@ -211,7 +233,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
         lastAddedTokenIds.clear();
 
-        CreateTokenEvent event = new CreateTokenEvent(source, controllerId, amount, this);
+        if (tokens == null || tokens.get(0) != this) {
+            throw new IllegalArgumentException("Wrong code usage. token.putOntoBattlefield parameter tokens must be initialized to a list of all tokens to be made, with the first element being the token you are calling putOntoBattlefield() on.");
+        }
+
+        CreateTokenEvent event = new CreateTokenEvent(source, controllerId, amount, tokens);
         if (!created || !game.replaceEvent(event)) {
             int currentTokens = game.getBattlefield().countTokens(event.getPlayerId());
             int tokenSlots = Math.max(MAX_TOKENS_PER_GAME - currentTokens, 0);
@@ -233,7 +259,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                     it.remove();
                 }
             }
-            putOntoBattlefieldHelper(event, game, source, tapped, attacking, attackedPlayer, created);
+            putOntoBattlefieldHelper(event, game, source, tapped, attacking, attackedPlayer, attachedTo, created);
             event.getTokens()
                     .keySet()
                     .stream()
@@ -247,7 +273,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return false;
     }
 
-    private static void putOntoBattlefieldHelper(CreateTokenEvent event, Game game, Ability source, boolean tapped, boolean attacking, UUID attackedPlayer, boolean created) {
+    private static void putOntoBattlefieldHelper(CreateTokenEvent event, Game game, Ability source, boolean tapped, boolean attacking, UUID attackedPlayer, UUID attachedTo, boolean created) {
         Player controller = game.getPlayer(event.getPlayerId());
         if (controller == null) {
             return;
@@ -258,11 +284,34 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
             Token token = entry.getKey();
             int amount = entry.getValue();
 
+            // check if token needs to be attached to a specific object (e.g. Estrid the Masked, Role Token)
+            Permanent permanentAttachedTo;
+            if (attachedTo != null) {
+                permanentAttachedTo = game.getPermanent(attachedTo);
+                if (permanentAttachedTo == null || permanentAttachedTo.cantBeAttachedBy(token, source, game, true)) {
+                    game.informPlayers(token.getName() + " will not be created as it cannot be attached to the chosen permanent");
+                    continue;
+                }
+            } else {
+                permanentAttachedTo = null;
+            }
+
             // choose token's set code due source
+            // front side
             TokenInfo tokenInfo = TokenImpl.generateTokenInfo((TokenImpl) token, game, source == null ? null : source.getSourceId());
             token.setExpansionSetCode(tokenInfo.getSetCode());
-            //token.setCardNumber(""); // if token from a card then don't change a card number
             token.setImageNumber(tokenInfo.getImageNumber());
+            // if token from a card then keep card number and var art info
+            //token.setCardNumber("");
+            //token.setUsesVariousArt(false);
+            if (token.getBackFace() != null) {
+                // back side
+                tokenInfo = TokenImpl.generateTokenInfo((TokenImpl) token.getBackFace(), game, source == null ? null : source.getSourceId());
+                token.getBackFace().setExpansionSetCode(tokenInfo.getSetCode());
+                token.getBackFace().setImageNumber(tokenInfo.getImageNumber());
+                //token.setCardNumber("");
+                //token.setUsesVariousArt(false);
+            }
 
             List<Permanent> needTokens = new ArrayList<>();
             List<Permanent> allowedTokens = new ArrayList<>();
@@ -281,6 +330,11 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                 // tokens zcc must simulate card's zcc to keep copied card/spell settings
                 // (example: etb's kicker ability of copied creature spell, see tests with Deathforge Shaman)
                 newPermanent.updateZoneChangeCounter(game, emptyEvent);
+
+                if (source != null) {
+                    MageObjectReference mor = new MageObjectReference(newPermanent.getId(),newPermanent.getZoneChangeCounter(game)-1,game);
+                    game.storePermanentCostsTags(mor, source);
+                }
             }
 
             // check ETB effects
@@ -314,10 +368,17 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                     allAddedTokens.add((PermanentToken) permanent);
                 }
 
+                // prototyped spell tokens make prototyped permanent tokens on resolution.
+                if (source instanceof SpellAbility && ((SpellAbility) source).getSpellAbilityCastMode() == SpellAbilityCastMode.PROTOTYPE) {
+                    permanent.setPrototyped(true);
+                }
+
                 // if token was created (not a spell copy) handle auras coming into the battlefield
+                // that must determine what to enchant
+                // see #9583 for the root cause issue of why this convoluted searching is necessary
                 // code blindly copied from CopyPermanentEffect
                 // TODO: clean this up -- half the comments make no sense in the context of creating a token
-                if (created && permanent.getSubtype().contains(SubType.AURA)) {
+                if (created && permanent.getSubtype().contains(SubType.AURA) && attachedTo == null) {
                     Outcome auraOutcome = Outcome.BoostCreature;
                     Target auraTarget = null;
 
@@ -326,6 +387,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                         if (!(ability instanceof SpellAbility)) {
                             continue;
                         }
+
                         auraOutcome = ability.getEffects().getOutcome(ability);
                         for (Effect effect : ability.getEffects()) {
                             if (!(effect instanceof AttachEffect)) {
@@ -360,7 +422,7 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                     }
 
                     // select new target
-                    auraTarget.setNotTarget(true);
+                    auraTarget.withNotTarget(true);
                     if (!controller.choose(auraOutcome, auraTarget, source, game)) {
                         break;
                     }
@@ -373,7 +435,17 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
                         targetPlayer.addAttachment(permanent.getId(), source, game);
                     }
                 }
-                // end of aura code : just remove this line if everything works out well
+                // end of messy target-groping code to handle auras
+
+                // this section is for tokens created attached to a specific known object
+                if (permanentAttachedTo != null) {
+                    if (permanent.hasSubtype(SubType.AURA, game)) {
+                        permanent.getAbilities().get(0).getTargets().get(0).add(permanentAttachedTo.getId(), game);
+                        permanent.getAbilities().get(0).getEffects().get(0).apply(game, permanent.getAbilities().get(0));
+                    } else {
+                        permanentAttachedTo.addAttachment(permanent.getId(), source, game);
+                    }
+                }
 
                 // must attack
                 if (attacking && game.getCombat() != null && game.getActivePlayerId().equals(permanent.getControllerId())) {
@@ -390,39 +462,17 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         }
         CreatedTokensEvent.addEvents(allAddedTokens, source, game);
 
-        game.getState().applyEffects(game); // Needed to do it here without LKIReset i.e. do get SwordOfTheMeekTest running correctly.
+        game.applyEffects(); // without LKI reset
     }
 
     @Override
     public void setPower(int power) {
-        if (this.backFace != null) {
-            this.backFace.setPower(power);
-        }
         this.power = new MageInt(power);
     }
 
     @Override
     public void setToughness(int toughness) {
-        if (this.backFace != null) {
-            this.backFace.setToughness(toughness);
-        }
         this.toughness = new MageInt(toughness);
-    }
-
-    @Override
-    public void setStartingLoyalty(int startingLoyalty) {
-        if (backFace != null) {
-            backFace.setStartingLoyalty(startingLoyalty);
-        }
-        super.setStartingLoyalty(startingLoyalty);
-    }
-
-    @Override
-    public void setStartingDefense(int intArg) {
-        if (backFace != null) {
-            backFace.setStartingDefense(intArg);
-        }
-        super.setStartingDefense(intArg);
     }
 
     @Override
@@ -442,165 +492,6 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
         return backFace;
     }
 
-    @Override
-    public void retainAllArtifactSubTypes(Game game) {
-        if (backFace != null) {
-            backFace.retainAllArtifactSubTypes(game);
-        }
-        super.retainAllArtifactSubTypes(game);
-    }
-
-    @Override
-    public void retainAllEnchantmentSubTypes(Game game) {
-        if (backFace != null) {
-            backFace.retainAllEnchantmentSubTypes(game);
-        }
-        super.retainAllEnchantmentSubTypes(game);
-    }
-
-    @Override
-    public void addSuperType(SuperType superType) {
-        if (backFace != null) {
-            backFace.addSuperType(superType);
-        }
-        super.addSuperType(superType);
-    }
-
-    @Override
-    public void removeSuperType(SuperType superType) {
-        if (backFace != null) {
-            backFace.removeSuperType(superType);
-        }
-        super.removeSuperType(superType);
-    }
-
-    @Override
-    public void addCardType(CardType... cardTypes) {
-        if (backFace != null) {
-            backFace.addCardType(cardTypes);
-        }
-        super.addCardType(cardTypes);
-    }
-
-    @Override
-    public void removeCardType(CardType... cardTypes) {
-        if (backFace != null) {
-            backFace.removeCardType(cardTypes);
-        }
-        super.removeCardType(cardTypes);
-    }
-
-    @Override
-    public void removeAllCardTypes() {
-        if (backFace != null) {
-            backFace.removeAllCardTypes();
-        }
-        super.removeAllCardTypes();
-    }
-
-    @Override
-    public void removeAllCardTypes(Game game) {
-        if (backFace != null) {
-            backFace.removeAllCardTypes(game);
-        }
-        super.removeAllCardTypes(game);
-    }
-
-    @Override
-    public void addSubType(SubType... subTypes) {
-        if (backFace != null) {
-            backFace.addSubType(subTypes);
-        }
-        super.addSubType(subTypes);
-    }
-
-    @Override
-    public void removeAllSubTypes(Game game, SubTypeSet subTypeSet) {
-        if (backFace != null) {
-            backFace.removeAllSubTypes(game, subTypeSet);
-        }
-        super.removeAllSubTypes(game, subTypeSet);
-    }
-
-    @Override
-    public void removeAllSubTypes(Game game) {
-        if (backFace != null) {
-            backFace.removeAllSubTypes(game);
-        }
-        super.removeAllSubTypes(game);
-    }
-
-    @Override
-    public void retainAllLandSubTypes(Game game) {
-        if (backFace != null) {
-            backFace.retainAllLandSubTypes(game);
-        }
-        super.retainAllLandSubTypes(game);
-    }
-
-    @Override
-    public void removeAllCreatureTypes(Game game) {
-        if (backFace != null) {
-            backFace.removeAllCreatureTypes(game);
-        }
-        super.removeAllCreatureTypes(game);
-    }
-
-    @Override
-    public void removeAllCreatureTypes() {
-        if (backFace != null) {
-            backFace.removeAllCreatureTypes();
-        }
-        super.removeAllCreatureTypes();
-    }
-
-    @Override
-    public void removeSubType(Game game, SubType subType) {
-        if (backFace != null) {
-            backFace.removeSubType(game, subType);
-        }
-        super.removeSubType(game, subType);
-    }
-
-    @Override
-    public void setIsAllCreatureTypes(boolean value) {
-        if (backFace != null) {
-            backFace.setIsAllCreatureTypes(value);
-        }
-        super.setIsAllCreatureTypes(value);
-    }
-
-    @Override
-    public void removePTCDA() {
-        if (backFace != null) {
-            backFace.removePTCDA();
-        }
-        super.removePTCDA();
-    }
-
-    @Override
-    public void setName(String name) {
-        if (backFace != null) {
-            backFace.setName(name);
-        }
-        super.setName(name);
-    }
-
-    @Override
-    public void setColor(ObjectColor color) {
-        if (backFace != null) {
-            backFace.setColor(color);
-        }
-        this.getColor().setColor(color);
-    }
-
-    @Override
-    public void clearManaCost() {
-        if (backFace != null) {
-            backFace.clearManaCost();
-        }
-        this.getManaCost().clear();
-    }
 
     @Override
     public void setEntersTransformed(boolean entersTransformed) {
@@ -608,8 +499,34 @@ public abstract class TokenImpl extends MageObjectImpl implements Token {
     }
 
     @Override
+    public void setColor(ObjectColor color) {
+        this.getColor().setColor(color);
+    }
+
+    @Override
+    public void clearManaCost() {
+        this.getManaCost().clear();
+    }
+
+    @Override
     public boolean isEntersTransformed() {
         return this.entersTransformed && this.backFace != null;
+    }
+
+    @Override
+    public void setExpansionSetCode(String expansionSetCode) {
+        super.setExpansionSetCode(expansionSetCode);
+
+        // backface can have diff images (example: Incubator/Phyrexian in MOM set)
+        // so it must be setup/copied manually
+    }
+
+    @Override
+    public void setImageNumber(Integer imageNumber) {
+        super.setImageNumber(imageNumber);
+
+        // backface can have diff images (example: Incubator/Phyrexian in MOM set)
+        // so it must be setup/copied manually
     }
 
     public static TokenImpl createTokenByClassName(String fullClassName) {

@@ -29,7 +29,7 @@ public class PayVariableLoyaltyCost extends VariableCostImpl {
         this.text = "-X";
     }
 
-    public PayVariableLoyaltyCost(final PayVariableLoyaltyCost cost) {
+    protected PayVariableLoyaltyCost(final PayVariableLoyaltyCost cost) {
         super(cost);
         this.costModification = cost.costModification;
     }

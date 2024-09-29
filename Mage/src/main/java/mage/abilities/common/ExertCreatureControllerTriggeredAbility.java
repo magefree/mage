@@ -6,19 +6,26 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  * @author stravant
  */
 public class ExertCreatureControllerTriggeredAbility extends TriggeredAbilityImpl {
 
+    protected final boolean setTargetPointer;
     public ExertCreatureControllerTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
+    public ExertCreatureControllerTriggeredAbility(Effect effect, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect);
+        this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever you exert a creature, ");
     }
 
-    public ExertCreatureControllerTriggeredAbility(final ExertCreatureControllerTriggeredAbility ability) {
+    protected ExertCreatureControllerTriggeredAbility(final ExertCreatureControllerTriggeredAbility ability) {
         super(ability);
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -31,7 +38,13 @@ public class ExertCreatureControllerTriggeredAbility extends TriggeredAbilityImp
         boolean weAreExerting = isControlledBy(event.getPlayerId());
         Permanent exerted = game.getPermanent(event.getTargetId());
         boolean exertedIsCreature = (exerted != null) && exerted.isCreature(game);
-        return weAreExerting && exertedIsCreature;
+        if (weAreExerting && exertedIsCreature) {
+            if (setTargetPointer) {
+                getAllEffects().setTargetPointer(new FixedTarget(event.getTargetId()));
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override

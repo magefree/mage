@@ -54,7 +54,7 @@ class LaezelVlaakithsChampionEffect extends ReplacementEffectImpl {
                 "put that many plus one of each of those kinds of counters on that permanent or player instead";
     }
 
-    LaezelVlaakithsChampionEffect(final LaezelVlaakithsChampionEffect effect) {
+    private LaezelVlaakithsChampionEffect(final LaezelVlaakithsChampionEffect effect) {
         super(effect);
     }
 
@@ -84,11 +84,6 @@ class LaezelVlaakithsChampionEffect extends ReplacementEffectImpl {
         return permanent != null
                 && (permanent.isCreature(game) || permanent.isPlaneswalker(game))
                 && permanent.isControlledBy(source.getControllerId());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

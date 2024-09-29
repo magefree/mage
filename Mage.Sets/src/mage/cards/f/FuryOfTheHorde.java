@@ -36,7 +36,6 @@ public final class FuryOfTheHorde extends CardImpl {
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
         this.getSpellAbility().addEffect(new UntapAllThatAttackedEffect());
         this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect());
-        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
 
     }
 

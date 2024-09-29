@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class TuskenRaiderToken extends TokenImpl {
 
     public TuskenRaiderToken() {
-        super("Tusken Raider Token", "white Tusken Raider creature token");
+        super("Tusken Raider Token", "1/1 white Tusken Raider creature token");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         cardType.add(CardType.CREATURE);
@@ -19,7 +19,7 @@ public final class TuskenRaiderToken extends TokenImpl {
         subtype.add(SubType.RAIDER);
     }
 
-    public TuskenRaiderToken(final TuskenRaiderToken token) {
+    private TuskenRaiderToken(final TuskenRaiderToken token) {
         super(token);
     }
 

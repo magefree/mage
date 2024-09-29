@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,7 +39,7 @@ public final class KalamaxTheStormsire extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever you cast your first instant spell each turn, if Kalamax, the Stormsire is tapped, copy that spell. You may choose new targets for the copy.
-        this.addAbility(new KalamaxTheStormsireSpellCastAbility(), new SpellsCastWatcher());
+        this.addAbility(new KalamaxTheStormsireSpellCastAbility());
         // Whenever you copy an instant spell, put a +1/+1 counter on Kalamax.
         this.addAbility(new KalamaxTheStormsireCopyTriggeredAbility());
     }
@@ -56,10 +56,10 @@ public final class KalamaxTheStormsire extends CardImpl {
 
 class KalamaxTheStormsireSpellCastAbility extends SpellCastControllerTriggeredAbility {
     KalamaxTheStormsireSpellCastAbility() {
-        super(new CopyTargetSpellEffect(true), new FilterInstantSpell(), false);
+        super(new CopyTargetStackObjectEffect(true), new FilterInstantSpell(), false);
     }
 
-    KalamaxTheStormsireSpellCastAbility(KalamaxTheStormsireSpellCastAbility ability) {
+    private KalamaxTheStormsireSpellCastAbility(final KalamaxTheStormsireSpellCastAbility ability) {
         super(ability);
     }
 

@@ -51,7 +51,7 @@ class KreshTheBloodbraidedEffect extends OneShotEffect {
         staticText = "you may put X +1/+1 counters on {this}, where X is that creature's power";
     }
 
-    KreshTheBloodbraidedEffect(final KreshTheBloodbraidedEffect effect) {
+    private KreshTheBloodbraidedEffect(final KreshTheBloodbraidedEffect effect) {
         super(effect);
     }
 

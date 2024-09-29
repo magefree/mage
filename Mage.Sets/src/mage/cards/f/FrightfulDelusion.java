@@ -41,12 +41,12 @@ public final class FrightfulDelusion extends CardImpl {
 
 class FrightfulDelusionEffect extends OneShotEffect {
 
-    public FrightfulDelusionEffect() {
+    FrightfulDelusionEffect() {
         super(Outcome.Detriment);
         this.staticText = "Counter target spell unless its controller pays {1}. That player discards a card.";
     }
 
-    public FrightfulDelusionEffect(final FrightfulDelusionEffect effect) {
+    private FrightfulDelusionEffect(final FrightfulDelusionEffect effect) {
         super(effect);
     }
 
@@ -58,7 +58,7 @@ class FrightfulDelusionEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         StackObject spell = game.getStack().getStackObject(
-                targetPointer.getFirst(game, source));
+                getTargetPointer().getFirst(game, source));
         Cost cost = ManaUtil.createManaCost(1, false);
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());

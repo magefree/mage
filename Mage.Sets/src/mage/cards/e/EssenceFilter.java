@@ -52,7 +52,7 @@ class EssenceFilterEffect extends OneShotEffect {
         this.staticText = "Destroy all enchantments or all nonwhite enchantments";
     }
 
-    public EssenceFilterEffect(final EssenceFilterEffect effect) {
+    private EssenceFilterEffect(final EssenceFilterEffect effect) {
         super(effect);
     }
 

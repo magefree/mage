@@ -5,13 +5,10 @@ import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.WatcherScope;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.PowerstoneToken;
@@ -32,7 +29,7 @@ public final class VisionsOfPhyrexia extends CardImpl {
 
         // At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1), TargetController.YOU, false
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), TargetController.YOU, false
         ));
 
         // At the beginning of your end step, if you didn't play a card from exile this turn, create a tapped Powerstone token.

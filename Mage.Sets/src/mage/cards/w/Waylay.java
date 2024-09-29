@@ -44,12 +44,12 @@ public final class Waylay extends CardImpl {
 
 class WaylayEffect extends OneShotEffect {
 
-    public WaylayEffect() {
+    WaylayEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create three 2/2 white Knight creature tokens. Exile them at the beginning of the next cleanup step.";
     }
 
-    public WaylayEffect(final WaylayEffect effect) {
+    private WaylayEffect(final WaylayEffect effect) {
         super(effect);
     }
 

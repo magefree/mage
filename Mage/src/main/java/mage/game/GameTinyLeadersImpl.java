@@ -17,7 +17,6 @@ import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.util.CardUtil;
 import mage.watchers.common.CommanderInfoWatcher;
-import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,13 +29,16 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
 
     protected boolean alsoHand; // replace also commander going to library
     protected boolean alsoLibrary; // replace also commander going to library
+
+    // 103.7a  In a two-player game, the player who plays first skips the draw step
+    // (see rule 504, "Draw Step") of his or her first turn.
     protected boolean startingPlayerSkipsDraw = true;
 
-    public GameTinyLeadersImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife) {
-        super(attackOption, range, mulligan, startLife, 50);
+    public GameTinyLeadersImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, Mulligan mulligan, int startLife, int startHandSize) {
+        super(attackOption, range, mulligan, 50, startLife, startHandSize);
     }
 
-    public GameTinyLeadersImpl(final GameTinyLeadersImpl game) {
+    protected GameTinyLeadersImpl(final GameTinyLeadersImpl game) {
         super(game);
         this.alsoHand = game.alsoHand;
         this.startingPlayerSkipsDraw = game.startingPlayerSkipsDraw;
@@ -75,7 +77,6 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                         watcher.addCardInfoToCommander(this);
                         this.getState().addAbility(ability, null);
                     } else {
-                        // GameWorker.call processing errors and write it in magediag.log by defalt
                         // Test use case: create tiny game with random generated deck - game freezes with empty battlefield
                         throw new IllegalStateException("Commander card could not be created. Name: [" + player.getMatchPlayer().getDeck().getName() + ']');
                     }
@@ -84,7 +85,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
         }
         super.init(choosingPlayerId);
         if (startingPlayerSkipsDraw) {
-            state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+            state.getTurnMods().add(new TurnMod(startingPlayerId).withSkipStep(PhaseStep.DRAW));
         }
     }
 
@@ -120,7 +121,7 @@ public abstract class GameTinyLeadersImpl extends GameImpl {
                 default:
                     CardInfo cardInfo = CardRepository.instance.findCard(commanderName);
                     if (cardInfo != null) {
-                        commander = cardInfo.getCard();
+                        commander = cardInfo.createCard();
                     }
             }
         }
@@ -162,7 +163,7 @@ class DefaultCommander extends CardImpl {
 
     }
 
-    public DefaultCommander(final DefaultCommander card) {
+    protected DefaultCommander(final DefaultCommander card) {
         super(card);
     }
 

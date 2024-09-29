@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import java.util.UUID;
@@ -11,8 +10,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -20,11 +18,6 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author LevelX2
  */
 public final class BreachingHippocamp extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public BreachingHippocamp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{U}");
@@ -37,7 +30,7 @@ public final class BreachingHippocamp extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
         // When Breaching Hippocamp enters the battlefield, untap another target creature you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new UntapTargetEffect(), false);
-        ability.addTarget(new TargetControlledCreaturePermanent(1,1,filter, false));
+        ability.addTarget(new TargetControlledCreaturePermanent(1,1, StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL, false));
         this.addAbility(ability);
     }
 

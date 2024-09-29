@@ -51,7 +51,7 @@ class SwordOfKaldraTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever equipped creature deals damage to a creature, ");
     }
 
-    public SwordOfKaldraTriggeredAbility(final SwordOfKaldraTriggeredAbility ability) {
+    private SwordOfKaldraTriggeredAbility(final SwordOfKaldraTriggeredAbility ability) {
         super(ability);
     }
 

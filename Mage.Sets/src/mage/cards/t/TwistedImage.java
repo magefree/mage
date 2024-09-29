@@ -25,7 +25,7 @@ public final class TwistedImage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public TwistedImage (final TwistedImage card) {
+    private TwistedImage(final TwistedImage card) {
         super(card);
     }
 

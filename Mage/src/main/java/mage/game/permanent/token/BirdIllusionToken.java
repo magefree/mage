@@ -21,7 +21,7 @@ public final class BirdIllusionToken extends TokenImpl {
         this.addAbility(FlyingAbility.getInstance());
     }
 
-    public BirdIllusionToken(final BirdIllusionToken token) {
+    private BirdIllusionToken(final BirdIllusionToken token) {
         super(token);
     }
 

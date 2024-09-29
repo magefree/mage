@@ -1,7 +1,5 @@
-
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -12,9 +10,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,17 +29,13 @@ public final class TeferiTimebender extends CardImpl {
         this.setStartingLoyalty(5);
 
         // +2: Untap up to one target artifact or creature.
-        FilterPermanent filter = new FilterPermanent("artifact or creature");
-        filter.add(Predicates.or(
-                CardType.ARTIFACT.getPredicate(),
-                CardType.CREATURE.getPredicate()));
         LoyaltyAbility ability = new LoyaltyAbility(new UntapTargetEffect(), +2);
-        ability.addTarget(new TargetPermanent(0, 1, filter, false));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE, false));
         this.addAbility(ability);
 
         // -3: You gain 2 life and draw two cards.
         ability = new LoyaltyAbility(new GainLifeEffect(2), -3);
-        ability.addEffect(new DrawCardSourceControllerEffect(2).setText("and draw two cards"));
+        ability.addEffect(new DrawCardSourceControllerEffect(2).concatBy("and"));
         this.addAbility(ability);
 
         // -9: Take an extra turn after this one.

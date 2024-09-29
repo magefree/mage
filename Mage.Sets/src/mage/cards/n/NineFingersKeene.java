@@ -4,7 +4,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.*;
@@ -40,7 +42,8 @@ public final class NineFingersKeene extends CardImpl {
         this.addAbility(new WardAbility(new PayLifeCost(9), false));
 
         // Whenever Nine-Fingers Keene deals combat damage to a player, look at the top nine cards of your library. You may put a Gate card from among them onto the battlefield. Then if you control nine or more Gates, put the rest into your hand. Otherwise, put the rest on the bottom of your library in a random order.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new NineFingersKeeneEffect(), false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new NineFingersKeeneEffect(), false)
+                .addHint(new ValueHint("Gates you control", new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.GATE)))));
     }
 
     private NineFingersKeene(final NineFingersKeene card) {

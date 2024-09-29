@@ -24,7 +24,7 @@ public final class CylianElf extends CardImpl {
         this.toughness = new MageInt(2);
     }
 
-    public CylianElf (final CylianElf card) {
+    private CylianElf(final CylianElf card) {
         super(card);
     }
 

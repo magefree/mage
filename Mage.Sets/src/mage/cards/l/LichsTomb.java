@@ -50,7 +50,7 @@ class LichsTombTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new SacrificeControllerEffect(new FilterPermanent(), 0, ""), false);
     }
 
-    LichsTombTriggeredAbility(final LichsTombTriggeredAbility ability) {
+    private LichsTombTriggeredAbility(final LichsTombTriggeredAbility ability) {
         super(ability);
     }
 

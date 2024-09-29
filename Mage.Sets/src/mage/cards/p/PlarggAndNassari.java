@@ -102,7 +102,7 @@ class PlarggAndNassariEffect extends OneShotEffect {
         Player opponent = getOpponent(controller, source, game);
         if (opponent != null) {
             TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD_NON_LAND);
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             opponent.choose(outcome, cards, target, source, game);
             cards.remove(game.getCard(target.getFirstTarget()));
         }

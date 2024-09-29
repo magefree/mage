@@ -51,12 +51,12 @@ public final class KazuulsTollCollector extends CardImpl {
 
 class KazuulsTollCollectorEffect extends OneShotEffect {
 
-    public KazuulsTollCollectorEffect() {
+    KazuulsTollCollectorEffect() {
         super(Outcome.BoostCreature);
         staticText = "attach target Equipment you control to {this}";
     }
 
-    public KazuulsTollCollectorEffect(final KazuulsTollCollectorEffect effect) {
+    private KazuulsTollCollectorEffect(final KazuulsTollCollectorEffect effect) {
         super(effect);
     }
 

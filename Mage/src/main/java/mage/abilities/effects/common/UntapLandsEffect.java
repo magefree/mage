@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -26,6 +27,7 @@ public class UntapLandsEffect extends OneShotEffect {
         filterControlled.add(TappedPredicate.TAPPED);
         filterControlled.add(TargetController.YOU.getControllerPredicate());
     }
+
     private final FilterLandPermanent filter;
     private final int amount;
     private final boolean upTo;
@@ -46,7 +48,7 @@ public class UntapLandsEffect extends OneShotEffect {
         staticText = "untap " + (upTo ? "up to " : "") + CardUtil.numberToText(amount, staticText) + " lands" + (onlyControlled ? " you control" : "");
     }
 
-    public UntapLandsEffect(final UntapLandsEffect effect) {
+    protected UntapLandsEffect(final UntapLandsEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.upTo = effect.upTo;
@@ -61,7 +63,7 @@ public class UntapLandsEffect extends OneShotEffect {
             if (upTo) {
                 tappedLands = game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game).size();
             } else {
-                tappedLands = game.getBattlefield().getAllActivePermanents(filter, game).size();
+                tappedLands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game).size();
             }
             TargetLandPermanent target = new TargetLandPermanent(upTo ? 0 : Math.min(tappedLands, amount), amount, filter, true);
             if (target.canChoose(source.getControllerId(), source, game)) {

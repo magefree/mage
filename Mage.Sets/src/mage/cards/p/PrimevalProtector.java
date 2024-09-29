@@ -77,7 +77,7 @@ class PrimevalProtectorCostReductionEffect extends CostModificationEffectImpl {
         staticText = "this spell costs {1} less to cast for each creature your opponents control";
     }
 
-    PrimevalProtectorCostReductionEffect(PrimevalProtectorCostReductionEffect effect) {
+    private PrimevalProtectorCostReductionEffect(final PrimevalProtectorCostReductionEffect effect) {
         super(effect);
     }
 

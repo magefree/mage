@@ -83,14 +83,14 @@ class LeylineOfCombustionTriggeredAbility extends TriggeredAbilityImpl {
         // If a spell targets you and/or a permanent you control multiple times,
         // or if a spell targets you and one or more permanents you control,
         // Leyline of Combustion’s triggered ability triggers once.
-        Set<UUID> sourceObjects = (Set<UUID>) game.getState().getValue("sourceObjects" + this.id);
+        Set<UUID> sourceObjects = (Set<UUID>) game.getState().getValue("sourceObjects" + this.getId());
         if (sourceObjects == null) {
             sourceObjects = new HashSet<>();
         }
         if (!sourceObjects.add(sourceObject.getId())) {
             return false;
         }
-        game.getState().setValue("sourceObjects" + this.id, sourceObjects);
+        game.getState().setValue("sourceObjects" + this.getId(), sourceObjects);
         this.getEffects().clear();
         Effect effect = new DamageTargetEffect(2);
         effect.setTargetPointer(new FixedTarget(event.getPlayerId(), game));

@@ -38,7 +38,7 @@ public class MyrkulsEdictTest extends CardTestPlayerBase {
         setDieRollResult(playerA, 1);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, myrkulsEdict);
         addTarget(playerA, playerB);
-        addTarget(playerB, "Silvercoat Lion");
+        setChoice(playerB, "Silvercoat Lion");
 
         execute();
 
@@ -56,7 +56,7 @@ public class MyrkulsEdictTest extends CardTestPlayerBase {
 
         setDieRollResult(playerA, 11);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, myrkulsEdict);
-        addTarget(playerB, "Silvercoat Lion");
+        setChoice(playerB, "Silvercoat Lion");
 
         execute();
 
@@ -76,7 +76,7 @@ public class MyrkulsEdictTest extends CardTestPlayerBase {
 
         setDieRollResult(playerA, 20);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, myrkulsEdict);
-        addTarget(playerB, "Aesi, Tyrant of Gyre Strait");
+        setChoice(playerB, "Aesi, Tyrant of Gyre Strait");
 
         execute();
 

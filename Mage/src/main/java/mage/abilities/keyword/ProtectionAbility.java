@@ -10,8 +10,9 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -29,6 +30,7 @@ public class ProtectionAbility extends StaticAbility {
     protected boolean doesntRemoveControlled;
     protected ObjectColor fromColor;
     protected UUID auraIdNotToBeRemoved; // defines an Aura objectId that will not be removed from this protection ability
+    private String staticText;
 
     public ProtectionAbility(Filter filter) {
         super(Zone.BATTLEFIELD, null);
@@ -38,9 +40,10 @@ public class ProtectionAbility extends StaticAbility {
         this.doesntRemoveControlled = false;
         this.fromColor = new ObjectColor();
         this.auraIdNotToBeRemoved = null;
+        this.staticText = null;
     }
 
-    public ProtectionAbility(final ProtectionAbility ability) {
+    protected ProtectionAbility(final ProtectionAbility ability) {
         super(ability);
         this.filter = ability.filter.copy();
         this.removeAuras = ability.removeAuras;
@@ -48,6 +51,7 @@ public class ProtectionAbility extends StaticAbility {
         this.doesntRemoveControlled = ability.doesntRemoveControlled;
         this.fromColor = ability.fromColor;
         this.auraIdNotToBeRemoved = ability.auraIdNotToBeRemoved;
+        this.staticText = ability.staticText;
     }
 
     public static ProtectionAbility from(ObjectColor color) {
@@ -74,27 +78,47 @@ public class ProtectionAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "protection from " + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove auras.");
+        if (this.staticText != null && !this.staticText.isEmpty()) {
+            return this.staticText;
+        }
+        return (flavorWord == null ? "protection from " : CardUtil.italicizeWithEmDash(flavorWord) + "Protection from ")
+                + filter.getMessage() + (removeAuras ? "" : ". This effect doesn't remove Auras.");
+    }
+
+    public ProtectionAbility setText(String text) {
+        this.staticText = text;
+        return this;
     }
 
     public boolean canTarget(MageObject source, Game game) {
+        // TODO: need research, protection ability can be bugged with aura and aura permanents, spells (see below)
+
+        // permanent restriction
         if (filter instanceof FilterPermanent) {
             if (source instanceof Permanent) {
-                return !filter.match(source, game);
+                return !((FilterPermanent) filter).match((Permanent) source, game);
             }
+            // TODO: possible bugged, need token too?
             return true;
         }
 
+        // card restriction
         if (filter instanceof FilterCard) {
-            if (source instanceof Permanent) {
-                return !((FilterCard) filter).match((Card) source, ((Permanent) source).getControllerId(), this, game);
-            } else if (source instanceof Card) {
-                return !((FilterCard) filter).match((Card) source, ((Card) source).getOwnerId(), this, game);
+            if (source instanceof Card) {
+                return !((FilterCard) filter).match((Card) source, ((Card) source).getControllerOrOwnerId(), this, game);
+            } else if (source instanceof Token) {
+                // make fake permanent cause it checked before real permanent create
+                // warning, Token don't have controllerId info, so it can be a problem here
+                // TODO: wtf, possible bugged for filters that checking controller/player (if so then use with controllerId param)
+                PermanentToken fakePermanent = new PermanentToken((Token) source, UUID.randomUUID(), game);
+                return !((FilterCard) filter).match(fakePermanent, game);
             }
             return true;
         }
 
+        // spell restriction
         if (filter instanceof FilterSpell) {
+            // TODO: need research, possible bugged
             // Problem here is that for the check if a player can play a Spell, the source
             // object is still a card and not a spell yet.
             if (source instanceof Spell || game.inCheckPlayableState() && source.isInstantOrSorcery(game)) {
@@ -103,16 +127,20 @@ public class ProtectionAbility extends StaticAbility {
             return true;
         }
 
+        // unknown restriction
         if (filter instanceof FilterObject) {
-            return !filter.match(source, game);
+            return !((FilterObject) filter).match(source, game);
         }
 
+        // player restriction
         if (filter instanceof FilterPlayer) {
             Player player = null;
-            if (source instanceof Permanent) {
-                player = game.getPlayer(((Permanent) source).getControllerId());
-            } else if (source instanceof Card) {
-                player = game.getPlayer(((Card) source).getOwnerId());
+            if (source instanceof Card) {
+                player = game.getPlayer(((Card) source).getControllerOrOwnerId());
+            } else if (source instanceof Token) {
+                // TODO: fakePermanent will not work here like above, so try to rework whole logic
+                throw new IllegalArgumentException("Wrong code usage: token can't be checked in player restriction filter");
+
             }
             return !((FilterPlayer) filter).match(player, this.getControllerId(), this, game);
         }
@@ -120,7 +148,7 @@ public class ProtectionAbility extends StaticAbility {
         return true;
     }
 
-    private static final String getFilterText(ObjectColor color) {
+    private static String getFilterText(ObjectColor color) {
         return CardUtil.concatWithAnd(
                 color.getColors()
                         .stream()

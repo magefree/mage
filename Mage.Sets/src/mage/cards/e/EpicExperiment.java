@@ -46,7 +46,7 @@ public final class EpicExperiment extends CardImpl {
 
 class EpicExperimentEffect extends OneShotEffect {
 
-    public EpicExperimentEffect() {
+    EpicExperimentEffect() {
         super(Outcome.PlayForFree);
         staticText = "Exile the top X cards of your library. For each instant and "
                 + "sorcery card with mana value X or less among them, "
@@ -54,7 +54,7 @@ class EpicExperimentEffect extends OneShotEffect {
                 + "cards exiled this way that weren't cast into your graveyard";
     }
 
-    public EpicExperimentEffect(final EpicExperimentEffect effect) {
+    private EpicExperimentEffect(final EpicExperimentEffect effect) {
         super(effect);
     }
 
@@ -65,10 +65,10 @@ class EpicExperimentEffect extends OneShotEffect {
         if (controller == null || sourceObject == null) {
             return false;
         }
-        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, CardUtil.getSourceCostsTag(game, source, "X", 0)));
         controller.moveCards(cards, Zone.EXILED, source, game);
         FilterCard filter = new FilterInstantOrSorceryCard();
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, CardUtil.getSourceCostsTag(game, source, "X", 0) + 1));
         CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, filter);
         controller.moveCards(cards, Zone.GRAVEYARD, source, game);
         return true;

@@ -52,7 +52,7 @@ class SpiritualizeTriggeredAbility extends DelayedTriggeredAbility {
         setTriggerPhrase("Whenever target creature deals damage, ");
     }
 
-    public SpiritualizeTriggeredAbility(final SpiritualizeTriggeredAbility ability) {
+    private SpiritualizeTriggeredAbility(final SpiritualizeTriggeredAbility ability) {
         super(ability);
     }
 

@@ -26,7 +26,8 @@ public final class AncestorsChosen extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FirstStrikeAbility.getInstance());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(new CardsInControllerGraveyardCount()), false));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(new CardsInControllerGraveyardCount())
+                .setText("you gain 1 life for each card in your graveyard"), false));
     }
 
     private AncestorsChosen(final AncestorsChosen card) {

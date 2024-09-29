@@ -42,7 +42,7 @@ class ProperBurialTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, null);
     }
 
-    public ProperBurialTriggeredAbility(final ProperBurialTriggeredAbility ability) {
+    private ProperBurialTriggeredAbility(final ProperBurialTriggeredAbility ability) {
         super(ability);
     }
 

@@ -29,13 +29,13 @@ public final class DreadFugue extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
 
         // Cleave {2}{B}
-        Ability ability = new CleaveAbility(this, new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_NON_LAND, TargetController.ANY), "{2}{B}");
+        Ability ability = new CleaveAbility(this, new DiscardCardYouChooseTargetEffect(StaticFilters.FILTER_CARD_NON_LAND), "{2}{B}");
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
         // Target player reveals their hand. Choose a nonland card from it [with mana value 2 or less]. That player discards that card.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter, TargetController.ANY));
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetEffect(filter));
     }
 
     private DreadFugue(final DreadFugue card) {

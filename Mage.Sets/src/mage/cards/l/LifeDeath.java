@@ -1,4 +1,3 @@
-
 package mage.cards.l;
 
 import java.util.UUID;
@@ -14,7 +13,6 @@ import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.players.Player;
@@ -34,7 +32,8 @@ public final class LifeDeath extends SplitCard {
         // All lands you control become 1/1 creatures until end of turn. They're still lands.
         getLeftHalfCard().getSpellAbility().addEffect(new BecomesCreatureAllEffect(
                 new CreatureToken(1, 1),
-                "lands", new FilterControlledLandPermanent("lands you control"), Duration.EndOfTurn, false));
+                "lands", StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS, Duration.EndOfTurn, false)
+                .setText("all lands you control become 1/1 creatures until end of turn. They're still lands"));
 
         // Death
         // Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.
@@ -56,12 +55,12 @@ public final class LifeDeath extends SplitCard {
 
 class DeathEffect extends OneShotEffect {
 
-    public DeathEffect() {
+    DeathEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "return target creature card from your graveyard to the battlefield. You lose life equal to its mana value";
     }
 
-    public DeathEffect(final DeathEffect effect) {
+    private DeathEffect(final DeathEffect effect) {
         super(effect);
     }
 

@@ -55,7 +55,7 @@ class DevastatingDreamsAdditionalCost extends VariableCostImpl {
         this.text = "as an additional cost to cast this spell, discard X cards at random";
     }
 
-    DevastatingDreamsAdditionalCost(final DevastatingDreamsAdditionalCost cost) {
+    private DevastatingDreamsAdditionalCost(final DevastatingDreamsAdditionalCost cost) {
         super(cost);
     }
 

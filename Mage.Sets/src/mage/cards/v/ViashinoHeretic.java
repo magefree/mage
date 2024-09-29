@@ -2,7 +2,6 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -27,7 +26,7 @@ public final class ViashinoHeretic extends CardImpl {
 
     public ViashinoHeretic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
@@ -57,7 +56,7 @@ class ViashinoHereticEffect extends OneShotEffect {
         this.staticText = "Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's mana value";
     }
 
-    public ViashinoHereticEffect(final ViashinoHereticEffect effect) {
+    private ViashinoHereticEffect(final ViashinoHereticEffect effect) {
         super(effect);
     }
 

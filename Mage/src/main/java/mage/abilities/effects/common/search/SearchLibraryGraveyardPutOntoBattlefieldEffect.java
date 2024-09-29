@@ -37,7 +37,7 @@ public class SearchLibraryGraveyardPutOntoBattlefieldEffect extends OneShotEffec
                 + " and put it onto the battlefield. " + (forceToSearchBoth ? "Then shuffle" : "If you search your library this way, shuffle");
     }
 
-    public SearchLibraryGraveyardPutOntoBattlefieldEffect(final SearchLibraryGraveyardPutOntoBattlefieldEffect effect) {
+    protected SearchLibraryGraveyardPutOntoBattlefieldEffect(final SearchLibraryGraveyardPutOntoBattlefieldEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.forceToSearchBoth = effect.forceToSearchBoth;

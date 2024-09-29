@@ -7,6 +7,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,6 +36,7 @@ public final class StonespeakerCrystal extends CardImpl {
 
         // {2}, {T}, Sacrifice Stonespeaker Crystal: Exile any number of target players' graveyards. Draw a card.
         Ability ability = new SimpleActivatedAbility(new StonespeakerCrystalEffect(), new GenericManaCost(2));
+        ability.addEffect(new DrawCardSourceControllerEffect(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
@@ -55,7 +57,7 @@ class StonespeakerCrystalEffect extends OneShotEffect {
 
     StonespeakerCrystalEffect() {
         super(Outcome.Benefit);
-        staticText = "exile any number of target players' graveyards. Draw a card";
+        staticText = "exile any number of target players' graveyards";
     }
 
     private StonespeakerCrystalEffect(final StonespeakerCrystalEffect effect) {
@@ -82,7 +84,6 @@ class StonespeakerCrystalEffect extends OneShotEffect {
                 .map(Player::getGraveyard)
                 .forEach(cards::addAll);
         controller.moveCards(cards, Zone.EXILED, source, game);
-        controller.drawCards(1, source, game);
         return true;
     }
 }

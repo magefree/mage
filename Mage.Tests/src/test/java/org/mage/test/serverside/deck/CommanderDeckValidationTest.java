@@ -2,12 +2,12 @@ package org.mage.test.serverside.deck;
 
 import mage.deck.Commander;
 import org.junit.Test;
-import org.mage.test.serverside.base.MageTestBase;
+import org.mage.test.serverside.base.MageTestPlayerBase;
 
 /**
  * @author TheElk801
  */
-public class CommanderDeckValidationTest extends MageTestBase {
+public class CommanderDeckValidationTest extends MageTestPlayerBase {
 
     private static final String piper = "The Prismatic Piper";
 

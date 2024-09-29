@@ -96,7 +96,7 @@ class AniktheaHandOfErebosEffect extends OneShotEffect {
         }
         player.moveCards(card, Zone.EXILED, source, game);
         new CreateTokenCopyTargetEffect()
-                .setPermanentModifier((token, g) -> {
+                .setPermanentModifier((token) -> {
                     token.addCardType(CardType.CREATURE);
                     token.addSubType(SubType.ZOMBIE);
                     token.setColor(ObjectColor.BLACK);

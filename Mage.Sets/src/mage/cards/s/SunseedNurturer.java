@@ -61,7 +61,7 @@ class SunseedNurturerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainLifeEffect(2), true);
     }
 
-    public SunseedNurturerTriggeredAbility(final SunseedNurturerTriggeredAbility ability) {
+    private SunseedNurturerTriggeredAbility(final SunseedNurturerTriggeredAbility ability) {
         super(ability);
     }
 

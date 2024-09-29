@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -14,13 +13,19 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ElementalCatToken;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,7 +47,7 @@ public final class FirecatBlitz extends CardImpl {
 
         // Flashback-{R}{R}, Sacrifice X Mountains.
         Ability ability = new FlashbackAbility(this, new SacrificeXTargetCost(filter));
-        ability.addManaCost(new ManaCostsImpl<>("{R}{R}"));
+        ability.addCost(new ManaCostsImpl<>("{R}{R}"));
         this.addAbility(ability);
     }
 
@@ -58,12 +63,12 @@ public final class FirecatBlitz extends CardImpl {
 
 class FirecatBlitzEffect extends OneShotEffect {
 
-    public FirecatBlitzEffect() {
+    FirecatBlitzEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Create X 1/1 red Elemental Cat creature tokens with haste. Exile them at the beginning of the next end step";
     }
 
-    public FirecatBlitzEffect(final FirecatBlitzEffect effect) {
+    private FirecatBlitzEffect(final FirecatBlitzEffect effect) {
         super(effect);
     }
 
@@ -76,7 +81,7 @@ class FirecatBlitzEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int xValue = source.getManaCostsToPay().getX();
+            int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
             for (Cost cost : source.getCosts()) {
                 if (cost instanceof SacrificeTargetCost) {
                     xValue = ((SacrificeTargetCost) cost).getPermanents().size();

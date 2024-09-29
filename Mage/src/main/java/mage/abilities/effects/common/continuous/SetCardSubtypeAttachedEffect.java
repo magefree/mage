@@ -25,7 +25,7 @@ public class SetCardSubtypeAttachedEffect extends ContinuousEffectImpl {
         this.setText();
     }
 
-    public SetCardSubtypeAttachedEffect(final SetCardSubtypeAttachedEffect effect) {
+    protected SetCardSubtypeAttachedEffect(final SetCardSubtypeAttachedEffect effect) {
         super(effect);
         this.setSubtypes = effect.setSubtypes;
         this.attachmentType = effect.attachmentType;

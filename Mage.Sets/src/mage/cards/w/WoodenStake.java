@@ -16,7 +16,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -29,14 +28,14 @@ public final class WoodenStake extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.subtype.add(SubType.EQUIPMENT);
 
-        // Equip {1}
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
-
         // Equipped creature gets +1/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
 
         // Whenever equipped creature blocks or becomes blocked by a Vampire, destroy that creature. It can't be regenerated.
         this.addAbility(new WoodenStakeBlocksOrBecomesBlockedTriggeredAbility());
+
+        // Equip {1}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
     private WoodenStake(final WoodenStake card) {
@@ -51,11 +50,11 @@ public final class WoodenStake extends CardImpl {
 
 class WoodenStakeBlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl {
 
-    public WoodenStakeBlocksOrBecomesBlockedTriggeredAbility() {
+    WoodenStakeBlocksOrBecomesBlockedTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(true), false);
     }
 
-    public WoodenStakeBlocksOrBecomesBlockedTriggeredAbility(final WoodenStakeBlocksOrBecomesBlockedTriggeredAbility ability) {
+    private WoodenStakeBlocksOrBecomesBlockedTriggeredAbility(final WoodenStakeBlocksOrBecomesBlockedTriggeredAbility ability) {
         super(ability);
     }
 

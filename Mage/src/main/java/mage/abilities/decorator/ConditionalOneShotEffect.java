@@ -3,9 +3,12 @@ package mage.abilities.decorator;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
+import mage.target.targetpointer.TargetPointer;
 import mage.util.CardUtil;
 
 /**
@@ -27,8 +30,18 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         this(effect, null, condition, text);
     }
 
+    private static Outcome generateOutcome(OneShotEffect effect, OneShotEffect otherwiseEffect) {
+        if (effect != null) {
+            return effect.getOutcome();
+        }
+        if (otherwiseEffect != null) {
+            return Outcome.inverse(otherwiseEffect.getOutcome());
+        }
+        throw new IllegalArgumentException("Wrong code usage: ConditionalOneShot should start with an effect to generate Outcome.");
+    }
+
     public ConditionalOneShotEffect(OneShotEffect effect, OneShotEffect otherwiseEffect, Condition condition, String text) {
-        super(effect.getOutcome());
+        super(generateOutcome(effect, otherwiseEffect));
         if (effect != null) {
             this.effects.add(effect);
         }
@@ -39,7 +52,7 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         this.staticText = text;
     }
 
-    public ConditionalOneShotEffect(ConditionalOneShotEffect effect) {
+    protected ConditionalOneShotEffect(final ConditionalOneShotEffect effect) {
         super(effect);
         this.effects.addAll(effect.effects.copy());
         this.otherwiseEffects.addAll(effect.otherwiseEffects.copy());
@@ -53,7 +66,7 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         if (toApply.isEmpty()) {
             return true;
         }
-        toApply.setTargetPointer(this.targetPointer);
+        toApply.setTargetPointer(this.getTargetPointer().copy());
         toApply.stream().forEach(effect -> effect.apply(game, source));
         return true;
     }
@@ -85,10 +98,25 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        if (otherwiseEffects.isEmpty()) {
-            return "if " + condition.toString() + ", " + CardUtil.getTextWithFirstCharLowerCase(effects.getText(mode));
+
+        String conditionText = condition.toString();
+        if (conditionText.startsWith("if ") || conditionText.startsWith("If ")) {
+            conditionText = conditionText.substring(3);
         }
-        return effects.getText(mode) + ". If " + condition.toString() + ", " + CardUtil.getTextWithFirstCharLowerCase(otherwiseEffects.getText(mode));
+
+        if (otherwiseEffects.isEmpty()) {
+            return "if " + conditionText + ", "
+                    + CardUtil.getTextWithFirstCharLowerCase(effects.getText(mode));
+        }
+        return effects.getText(mode) + ". If " + conditionText + ", "
+                + CardUtil.getTextWithFirstCharLowerCase(otherwiseEffects.getText(mode));
+    }
+
+    @Override
+    public Effect setTargetPointer(TargetPointer targetPointer) {
+        effects.setTargetPointer(targetPointer);
+        otherwiseEffects.setTargetPointer(targetPointer);
+        return super.setTargetPointer(targetPointer);
     }
 
     @Override

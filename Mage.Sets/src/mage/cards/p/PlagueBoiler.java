@@ -55,12 +55,12 @@ public final class PlagueBoiler extends CardImpl {
 
 class PlagueBoilerEffect extends OneShotEffect {
 
-    public PlagueBoilerEffect() {
+    PlagueBoilerEffect() {
         super(Outcome.Detriment);
         this.staticText = "Put a plague counter on {this} or remove a plague counter from it";
     }
 
-    public PlagueBoilerEffect(final PlagueBoilerEffect effect) {
+    private PlagueBoilerEffect(final PlagueBoilerEffect effect) {
         super(effect);
     }
 
@@ -91,7 +91,7 @@ class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When {this} has three or more plague counters on it, ");
     }
 
-    public PlagueBoilerTriggeredAbility(final PlagueBoilerTriggeredAbility ability) {
+    private PlagueBoilerTriggeredAbility(final PlagueBoilerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -119,12 +119,12 @@ class PlagueBoilerTriggeredAbility extends TriggeredAbilityImpl {
 
 class PlagueBoilerSacrificeDestroyEffect extends OneShotEffect {
 
-    public PlagueBoilerSacrificeDestroyEffect() {
+    PlagueBoilerSacrificeDestroyEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "sacrifice it. If you do, destroy all nonland permanents";
     }
 
-    public PlagueBoilerSacrificeDestroyEffect(final PlagueBoilerSacrificeDestroyEffect effect) {
+    private PlagueBoilerSacrificeDestroyEffect(final PlagueBoilerSacrificeDestroyEffect effect) {
         super(effect);
     }
 

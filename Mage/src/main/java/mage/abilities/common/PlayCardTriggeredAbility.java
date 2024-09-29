@@ -14,7 +14,6 @@ public class PlayCardTriggeredAbility extends TriggeredAbilityImpl {
     private final TargetController targetController;
 
     /**
-     * 
      * @param targetController Which player(s) playing cards can trigger this ability. Only [ANY, NOT_YOU, OPPONENT, YOU] are supported.
      * @param zone
      * @param effect
@@ -24,7 +23,6 @@ public class PlayCardTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     /**
-     * 
      * @param targetController Which player(s) playing cards can trigger this ability. Only [ANY, NOT_YOU, OPPONENT, YOU] are supported.
      * @param zone
      * @param effect
@@ -56,7 +54,7 @@ public class PlayCardTriggeredAbility extends TriggeredAbilityImpl {
         }
     }
 
-    public PlayCardTriggeredAbility(final PlayCardTriggeredAbility ability) {
+    protected PlayCardTriggeredAbility(final PlayCardTriggeredAbility ability) {
         super(ability);
 
         this.targetController = ability.targetController;

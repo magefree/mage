@@ -8,8 +8,6 @@ import mage.abilities.StaticAbility;
 import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.common.continuous.CommanderReplacementEffect;
 import mage.cards.*;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
@@ -54,19 +52,19 @@ public class ContinuousEffects implements Serializable {
 
     private final Map<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> asThoughEffectsMap = new EnumMap<>(AsThoughEffectType.class);
     public final List<ContinuousEffectsList<?>> allEffectsLists = new ArrayList<>(); // contains refs to real effect's list
-    private final ApplyCountersEffect applyCounters;
+    private final ApplyStatusEffect applyStatus;
     private final AuraReplacementEffect auraReplacementEffect;
 
     private final Map<String, ContinuousEffectsList<ContinuousEffect>> lastEffectsListOnLayer = new HashMap<>(); // helps to find out new effect timestamps on layers
 
     public ContinuousEffects() {
-        applyCounters = new ApplyCountersEffect();
+        applyStatus = new ApplyStatusEffect();
         auraReplacementEffect = new AuraReplacementEffect();
         collectAllEffects();
     }
 
-    public ContinuousEffects(final ContinuousEffects effect) {
-        applyCounters = effect.applyCounters.copy();
+    protected ContinuousEffects(final ContinuousEffects effect) {
+        applyStatus = effect.applyStatus.copy();
         auraReplacementEffect = effect.auraReplacementEffect.copy();
         layeredEffects = effect.layeredEffects.copy();
         continuousRuleModifyingEffects = effect.continuousRuleModifyingEffects.copy();
@@ -246,10 +244,10 @@ public class ContinuousEffects implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    public Map<RequirementEffect, Set<Ability>> getApplicableRequirementEffects(Permanent permanent, boolean playerRealted, Game game) {
+    public Map<RequirementEffect, Set<Ability>> getApplicableRequirementEffects(Permanent permanent, boolean playerRelated, Game game) {
         Map<RequirementEffect, Set<Ability>> effects = new HashMap<>();
         for (RequirementEffect effect : requirementEffects) {
-            if (playerRealted == effect.isPlayerRelated()) {
+            if (playerRelated == effect.isPlayerRelated()) {
                 Set<Ability> abilities = requirementEffects.getAbility(effect.getId());
                 Set<Ability> applicableAbilities = new HashSet<>();
                 for (Ability ability : abilities) {
@@ -506,20 +504,21 @@ public class ContinuousEffects implements Serializable {
      * @param affectedAbility null if check full object or ability if check only one ability from that object
      * @param controllerId
      * @param game
-     * @return sourceId of the permitting effect if any exists otherwise returns null
+     * @return Set of all the ApprovingObject related to that asThough.
      */
-    public ApprovingObject asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+    public Set<ApprovingObject> asThough(UUID objectId, AsThoughEffectType type, Ability affectedAbility, UUID controllerId, Game game) {
+        Set<ApprovingObject> possibleApprovingObjects = new HashSet<>();
 
         // usage check: effect must apply for specific ability only, not to full object (example: PLAY_FROM_NOT_OWN_HAND_ZONE)
         if (type.needAffectedAbility() && affectedAbility == null) {
-            throw new IllegalArgumentException("ERROR, you can't call asThough check to whole object, call it with affected ability instead: " + type);
+            throw new IllegalArgumentException("Wrong code usage: you can't call asThough check to whole object, call it with affected ability instead: " + type);
         }
 
         // usage check: effect must apply to full object, not specific ability (example: ATTACK_AS_HASTE)
         // P.S. In theory a same AsThough effect can be applied to object or to ability, so if you really, really
         // need it then disable that check or add extra param to AsThoughEffectType like needAffectedAbilityOrFullObject
         if (!type.needAffectedAbility() && affectedAbility != null) {
-            throw new IllegalArgumentException("ERROR, you can't call AsThough check to affected ability, call it with empty affected ability instead: " + type);
+            throw new IllegalArgumentException("Wrong code usage: you can't call AsThough check to affected ability, call it with empty affected ability instead: " + type);
         }
 
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
@@ -553,18 +552,13 @@ public class ContinuousEffects implements Serializable {
                 idToCheck = objectId;
             }
 
-            Set<ApprovingObject> possibleApprovingObjects = new HashSet<>();
             for (AsThoughEffect effect : asThoughEffectsList) {
                 Set<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
                 for (Ability ability : abilities) {
                     if (affectedAbility == null) {
                         // applies to full object (one effect can be used in multiple abilities)
                         if (effect.applies(idToCheck, ability, controllerId, game)) {
-                            if (effect.isConsumable() && !game.inCheckPlayableState()) {
-                                possibleApprovingObjects.add(new ApprovingObject(ability, game));
-                            } else {
-                                return new ApprovingObject(ability, game);
-                            }
+                            possibleApprovingObjects.add(new ApprovingObject(ability, game));
                         }
                     } else {
                         // applies to one affected ability
@@ -575,46 +569,13 @@ public class ContinuousEffects implements Serializable {
                         }
 
                         if (effect.applies(idToCheck, affectedAbility, ability, game, controllerId)) {
-                            if (effect.isConsumable() && !game.inCheckPlayableState()) {
-                                possibleApprovingObjects.add(new ApprovingObject(ability, game));
-                            } else {
-                                return new ApprovingObject(ability, game);
-                            }
+                            possibleApprovingObjects.add(new ApprovingObject(ability, game));
                         }
                     }
                 }
             }
-
-            if (possibleApprovingObjects.size() == 1) {
-                return possibleApprovingObjects.iterator().next();
-            } else if (possibleApprovingObjects.size() > 1) {
-                // Select the ability that you use to permit the action                
-                Map<String, String> keyChoices = new HashMap<>();
-                for (ApprovingObject approvingObject : possibleApprovingObjects) {
-                    MageObject mageObject = game.getObject(approvingObject.getApprovingAbility().getSourceId());
-                    String choiceKey = approvingObject.getApprovingAbility().getId().toString();
-                    String choiceValue;
-                    if (mageObject == null) {
-                        choiceValue = approvingObject.getApprovingAbility().getRule();
-                    } else {
-                        choiceValue = mageObject.getIdName() + ": " + approvingObject.getApprovingAbility().getRule(mageObject.getName());
-                    }
-                    keyChoices.put(choiceKey, choiceValue);
-                }
-                Choice choicePermitting = new ChoiceImpl(true);
-                choicePermitting.setMessage("Choose the permitting object");
-                choicePermitting.setKeyChoices(keyChoices);
-                Player player = game.getPlayer(controllerId);
-                player.choose(Outcome.Detriment, choicePermitting, game);
-                for (ApprovingObject approvingObject : possibleApprovingObjects) {
-                    if (approvingObject.getApprovingAbility().getId().toString().equals(choicePermitting.getChoiceKey())) {
-                        return approvingObject;
-                    }
-                }
-            }
-
         }
-        return null;
+        return possibleApprovingObjects;
     }
 
     /**
@@ -813,7 +774,7 @@ public class ContinuousEffects implements Serializable {
     }
 
     /**
-     * Checks if an event won't happen because of an rule modifying effect
+     * Checks if an event won't happen because of a rule modifying effect
      *
      * @param event
      * @param targetAbility ability the event is attached to. can be null.
@@ -907,7 +868,10 @@ public class ContinuousEffects implements Serializable {
             } else {
                 //20100716 - 616.1c
                 Player player = game.getPlayer(event.getPlayerId());
-                index = player.chooseReplacementEffect(getReplacementEffectsTexts(rEffects, game), game);
+                Map<String, String> effectsMap = new LinkedHashMap<>();
+                Map<String, MageObject> objectsMap = new LinkedHashMap<>();
+                prepareReplacementEffectMaps(rEffects, game, effectsMap, objectsMap);
+                index = player.chooseReplacementEffect(effectsMap, objectsMap, game);
             }
             // get the selected effect
             int checked = 0;
@@ -1031,7 +995,7 @@ public class ContinuousEffects implements Serializable {
         boolean done = false;
         Map<ContinuousEffect, Set<UUID>> waitingEffects = new LinkedHashMap<>();
         Set<UUID> appliedEffects = new HashSet<>();
-        applyCounters.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, null, game);
+        applyStatus.apply(Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, null, game);
         activeLayerEffects = getLayeredEffects(game, "layer_6");
 
         while (!done) { // loop needed if a added effect adds again an effect (e.g. Level 5- of Joraga Treespeaker)
@@ -1144,7 +1108,7 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
-        applyCounters.apply(Layer.PTChangingEffects_7, SubLayer.Counters_7d, null, game);
+        applyStatus.apply(Layer.PTChangingEffects_7, SubLayer.Counters_7d, null, game);
 
         for (ContinuousEffect effect : layer) {
             Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
@@ -1356,18 +1320,26 @@ public class ContinuousEffects implements Serializable {
         }
     }
 
-    public Map<String, String> getReplacementEffectsTexts(Map<ReplacementEffect, Set<Ability>> rEffects, Game game) {
+    public void prepareReplacementEffectMaps(Map<ReplacementEffect, Set<Ability>> rEffects, Game game,
+                                             Map<String, String> effectsMap, Map<String, MageObject> objectsMap) {
         // warning, autoSelectReplacementEffects uses [object id] in texts as different settings,
         // so if you change keys or texts logic then don't forget to change auto-choose too
-        Map<String, String> texts = new LinkedHashMap<>();
+        if (!(effectsMap instanceof LinkedHashMap) || !(objectsMap instanceof LinkedHashMap)) {
+            throw new IllegalArgumentException("Wrong code usage: must use LinkedHashMap only");
+        }
+        effectsMap.clear();
+        objectsMap.clear();
         for (Map.Entry<ReplacementEffect, Set<Ability>> entry : rEffects.entrySet()) {
             if (entry.getValue() != null) {
                 for (Ability ability : entry.getValue()) {
                     MageObject object = game.getObject(ability.getSourceId());
+                    String key = ability.getId().toString() + '_' + entry.getKey().getId().toString();
                     if (object != null) {
-                        texts.put(ability.getId().toString() + '_' + entry.getKey().getId().toString(), object.getIdName() + ": " + ability.getRule(object.getName()));
+                        effectsMap.put(key, object.getIdName() + ": " + ability.getRule(object.getName()));
+                        objectsMap.put(key, object);
                     } else {
-                        texts.put(ability.getId().toString() + '_' + entry.getKey().getId().toString(), entry.getKey().getText(null));
+                        effectsMap.put(key, entry.getKey().getText(ability.getModes().getMode()));
+                        objectsMap.put(key, null);
                     }
                 }
             } else {
@@ -1376,7 +1348,6 @@ public class ContinuousEffects implements Serializable {
                 }
             }
         }
-        return texts;
     }
 
     public boolean existRequirementEffects() {
@@ -1446,7 +1417,7 @@ public class ContinuousEffects implements Serializable {
         for (Map.Entry<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> entry : asThoughEffectsMap.entrySet()) {
             logger.info("... " + entry.getKey().toString() + ": " + entry.getValue().size());
         }
-        logger.info("applyCounters ....................: " + (applyCounters != null ? "exists" : "null"));
+        logger.info("applyStatus ....................: " + (applyStatus != null ? "exists" : "null"));
         logger.info("auraReplacementEffect ............: " + (continuousRuleModifyingEffects != null ? "exists" : "null"));
         Map<String, TraceInfo> orderedEffects = new TreeMap<>();
         traceAddContinuousEffects(orderedEffects, layeredEffects, game, "layeredEffects................");

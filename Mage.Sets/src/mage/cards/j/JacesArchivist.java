@@ -55,7 +55,7 @@ class JacesArchivistEffect extends OneShotEffect {
         staticText = "Each player discards their hand, then draws cards equal to the greatest number of cards a player discarded this way";
     }
 
-    JacesArchivistEffect(final JacesArchivistEffect effect) {
+    private JacesArchivistEffect(final JacesArchivistEffect effect) {
         super(effect);
     }
 

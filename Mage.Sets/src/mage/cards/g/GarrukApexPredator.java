@@ -84,7 +84,7 @@ class GarrukApexPredatorEffect3 extends OneShotEffect {
         this.staticText = "You gain life equal to its toughness";
     }
 
-    public GarrukApexPredatorEffect3(final GarrukApexPredatorEffect3 effect) {
+    private GarrukApexPredatorEffect3(final GarrukApexPredatorEffect3 effect) {
         super(effect);
     }
 

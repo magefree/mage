@@ -53,12 +53,12 @@ public final class MarchOfProgress extends CardImpl {
 
 class MarchOfProgressOverloadEffect extends OneShotEffect {
 
-    public MarchOfProgressOverloadEffect() {
+    MarchOfProgressOverloadEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Choose each artifact creature you control. For each creature chosen this way, create a token that's a copy of it";
     }
 
-    public MarchOfProgressOverloadEffect(final MarchOfProgressOverloadEffect effect) {
+    private MarchOfProgressOverloadEffect(final MarchOfProgressOverloadEffect effect) {
         super(effect);
     }
 

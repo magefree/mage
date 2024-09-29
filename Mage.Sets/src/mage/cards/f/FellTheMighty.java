@@ -41,12 +41,12 @@ public final class FellTheMighty extends CardImpl {
 
 class FellTheMightyEffect extends OneShotEffect {
 
-    public FellTheMightyEffect() {
+    FellTheMightyEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creatures with power greater than target creature's power";
     }
 
-    public FellTheMightyEffect(final FellTheMightyEffect effect) {
+    private FellTheMightyEffect(final FellTheMightyEffect effect) {
         super(effect);
     }
 

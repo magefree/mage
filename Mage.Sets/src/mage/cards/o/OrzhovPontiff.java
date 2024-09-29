@@ -12,22 +12,13 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author LevelX2
  */
 public final class OrzhovPontiff extends CardImpl {
-
-    private static final FilterCreaturePermanent filterControlled = new FilterCreaturePermanent("Creatures you control");
-    private static final FilterCreaturePermanent filterNotControlled = new FilterCreaturePermanent("creatures you don't control");
-    static {
-        filterControlled.add(TargetController.YOU.getControllerPredicate());
-        filterNotControlled.add((TargetController.NOT_YOU.getControllerPredicate()));
-    }
-
     public OrzhovPontiff(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");
         this.subtype.add(SubType.HUMAN);
@@ -38,8 +29,8 @@ public final class OrzhovPontiff extends CardImpl {
 
         // Haunt
         // When Orzhov Pontiff enters the battlefield or the creature it haunts dies, choose one - Creatures you control get +1/+1 until end of turn; or creatures you don't control get -1/-1 until end of turn.
-        Ability ability = new HauntAbility(this, new BoostAllEffect(1,1, Duration.EndOfTurn, filterControlled, false));
-        Mode mode = new Mode(new BoostAllEffect(-1,-1, Duration.EndOfTurn, filterNotControlled, false));
+        Ability ability = new HauntAbility(this, new BoostAllEffect(1,1, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED, false));
+        Mode mode = new Mode(new BoostAllEffect(-1,-1, Duration.EndOfTurn, StaticFilters.FILTER_CREATURES_YOU_DONT_CONTROL, false));
         ability.addMode(mode);
         this.addAbility(ability);
 

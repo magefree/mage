@@ -37,7 +37,7 @@ public final class ConquerorsGalleon extends CardImpl {
                         new ExileAndReturnSourceEffect(
                                 PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.IT, true
                         )
-                )), false, "When {this} attacks, exile it at the end of combat, " +
+                )), false, "When {this} attacks, exile it at end of combat, " +
                 "then return it to the battlefield transformed under your control."
         ));
 

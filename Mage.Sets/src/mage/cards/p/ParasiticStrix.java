@@ -57,7 +57,7 @@ class ParasiticStrixTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetPlayer());
     }
 
-    public ParasiticStrixTriggeredAbility(final ParasiticStrixTriggeredAbility ability) {
+    private ParasiticStrixTriggeredAbility(final ParasiticStrixTriggeredAbility ability) {
         super(ability);
     }
 

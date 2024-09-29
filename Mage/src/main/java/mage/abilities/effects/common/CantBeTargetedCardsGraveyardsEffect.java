@@ -12,7 +12,6 @@ import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
 
 /**
- *
  * @author LevelX2
  */
 public class CantBeTargetedCardsGraveyardsEffect extends ContinuousRuleModifyingEffectImpl {
@@ -22,18 +21,13 @@ public class CantBeTargetedCardsGraveyardsEffect extends ContinuousRuleModifying
         staticText = "Cards in graveyards can't be the targets of spells or abilities";
     }
 
-    public CantBeTargetedCardsGraveyardsEffect(final CantBeTargetedCardsGraveyardsEffect effect) {
+    protected CantBeTargetedCardsGraveyardsEffect(final CantBeTargetedCardsGraveyardsEffect effect) {
         super(effect);
     }
 
     @Override
     public CantBeTargetedCardsGraveyardsEffect copy() {
         return new CantBeTargetedCardsGraveyardsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -47,7 +41,7 @@ public class CantBeTargetedCardsGraveyardsEffect extends ContinuousRuleModifying
         StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
         if (targetCard != null && stackObject != null) {
             Zone zone = game.getState().getZone(targetCard.getId());
-            if (zone != null && zone == Zone.GRAVEYARD) {
+            if (zone == Zone.GRAVEYARD) {
                 return true;
             }
         }

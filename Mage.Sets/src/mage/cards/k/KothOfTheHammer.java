@@ -78,7 +78,7 @@ class KothOfTheHammerToken extends TokenImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
     }
-    public KothOfTheHammerToken(final KothOfTheHammerToken token) {
+    private KothOfTheHammerToken(final KothOfTheHammerToken token) {
         super(token);
     }
 

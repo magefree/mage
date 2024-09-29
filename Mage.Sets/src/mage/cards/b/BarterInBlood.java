@@ -4,8 +4,7 @@ import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -14,13 +13,11 @@ import java.util.UUID;
  */
 public final class BarterInBlood extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("creatures");
-
     public BarterInBlood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}{B}");
 
         // Each player sacrifices two creatures.
-        this.getSpellAbility().addEffect(new SacrificeAllEffect(2, filter));
+        this.getSpellAbility().addEffect(new SacrificeAllEffect(2, StaticFilters.FILTER_PERMANENT_CREATURES));
     }
 
     private BarterInBlood(final BarterInBlood card) {

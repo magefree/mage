@@ -25,7 +25,7 @@ public final class Acridian extends CardImpl {
         this.addAbility(new EchoAbility("{1}{G}"));
     }
 
-    public Acridian (final Acridian card) {
+    private Acridian(final Acridian card) {
         super(card);
     }
 

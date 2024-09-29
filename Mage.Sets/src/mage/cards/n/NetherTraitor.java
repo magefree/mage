@@ -57,7 +57,7 @@ class NetherTraitorTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
     }
     
-    NetherTraitorTriggeredAbility(final NetherTraitorTriggeredAbility ability) {
+    private NetherTraitorTriggeredAbility(final NetherTraitorTriggeredAbility ability) {
         super(ability);
     }
     
@@ -75,7 +75,7 @@ class NetherTraitorTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
         for (Zone z : Zone.values()) {
-            if (game.getShortLivingLKI(sourceId, z) && z != Zone.GRAVEYARD) {
+            if (game.checkShortLivingLKI(sourceId, z) && z != Zone.GRAVEYARD) {
                 return false;
             }
         }

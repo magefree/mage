@@ -56,7 +56,7 @@ class NullChamberChooseEffect extends OneShotEffect {
         staticText = "you and an opponent each choose a card name other than a basic land card name";
     }
 
-    public NullChamberChooseEffect(final NullChamberChooseEffect effect) {
+    private NullChamberChooseEffect(final NullChamberChooseEffect effect) {
         super(effect);
     }
 
@@ -102,18 +102,13 @@ class NullChamberChooseEffect extends OneShotEffect {
 
 class NullChamberReplacementEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public NullChamberReplacementEffect() {
+    NullChamberReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.AIDontUseIt);
         staticText = "The named cards can't be played";
     }
 
-    public NullChamberReplacementEffect(final NullChamberReplacementEffect effect) {
+    private NullChamberReplacementEffect(final NullChamberReplacementEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

@@ -29,7 +29,7 @@ public final class WindriderEel extends CardImpl {
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
-    public WindriderEel (final WindriderEel card) {
+    private WindriderEel(final WindriderEel card) {
         super(card);
     }
 

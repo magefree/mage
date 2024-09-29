@@ -58,12 +58,12 @@ public final class ElementalMastery extends CardImpl {
 
 class ElementalMasteryEffect extends OneShotEffect {
 
-    public ElementalMasteryEffect() {
+    ElementalMasteryEffect() {
         super(Outcome.Benefit);
         staticText = "create X 1/1 red Elemental creature tokens with haste, where X is this creature's power. Exile them at the beginning of the next end step";
     }
 
-    public ElementalMasteryEffect(final ElementalMasteryEffect effect) {
+    private ElementalMasteryEffect(final ElementalMasteryEffect effect) {
         super(effect);
     }
 

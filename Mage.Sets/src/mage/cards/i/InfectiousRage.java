@@ -11,8 +11,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.permanent.PermanentCanBeAttachedToPredicate;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.CanBeEnchantedByPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -61,12 +61,12 @@ public final class InfectiousRage extends CardImpl {
 
 class InfectiousRageReattachEffect extends OneShotEffect {
 
-    public InfectiousRageReattachEffect() {
+    InfectiousRageReattachEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "choose a creature at random {this} can enchant. Return {this} to the battlefield attached to that creature.";
     }
 
-    public InfectiousRageReattachEffect(final InfectiousRageReattachEffect effect) {
+    private InfectiousRageReattachEffect(final InfectiousRageReattachEffect effect) {
         super(effect);
     }
 
@@ -80,32 +80,28 @@ class InfectiousRageReattachEffect extends OneShotEffect {
 
         Player controller = game.getPlayer(source.getControllerId());
         Card auraCard = game.getCard(source.getSourceId());
-        Permanent auraPermanent = source.getSourcePermanentOrLKI(game);
-        if (controller == null || auraCard == null || auraPermanent == null) {
+        if (controller == null || auraCard == null) {
             return false;
         }
         if (source.getSourceObjectZoneChangeCounter() != auraCard.getZoneChangeCounter(game)) {
             return false;
         }
 
-        FilterPermanent filter = new FilterPermanent();
-        filter.add(CardType.CREATURE.getPredicate());
-        filter.add(new PermanentCanBeAttachedToPredicate(auraPermanent)); // Doesn't yet exclude creatures with protection abilities
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        filter.add(new CanBeEnchantedByPredicate(auraCard));
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game);
 
-        if (!permanents.isEmpty()) {
-            Permanent creature = RandomUtil.randomFromCollection(permanents);
-            if (creature != null) {
-                game.getState().setValue("attachTo:" + auraCard.getId(), creature);
-                controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
-                return creature.addAttachment(auraCard.getId(), source, game);
-            }
+        if (permanents.isEmpty()) {
+            game.informPlayers("No valid creatures for " + auraCard.getLogName() + "to enchant.");
+            return false;
         }
-        else {
-            game.informPlayers("No valid creatures for " + auraPermanent.getLogName() + "to enchant.");
+        Permanent creature = RandomUtil.randomFromCollection(permanents);
+        if (creature == null) {
+            return false;
         }
-
-        return false;
+        game.getState().setValue("attachTo:" + auraCard.getId(), creature);
+        controller.moveCards(auraCard, Zone.BATTLEFIELD, source, game);
+        return creature.addAttachment(auraCard.getId(), source, game);
 
     }
 

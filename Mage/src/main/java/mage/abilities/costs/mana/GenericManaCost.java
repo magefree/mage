@@ -20,7 +20,7 @@ public class GenericManaCost extends ManaCostImpl {
         this.options.addMana(Mana.GenericMana(mana));
     }
 
-    public GenericManaCost(GenericManaCost manaCost) {
+    protected GenericManaCost(GenericManaCost manaCost) {
         super(manaCost);
         this.mana = manaCost.mana;
     }

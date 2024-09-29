@@ -33,7 +33,7 @@ public final class DispellersCapsule extends CardImpl {
         this.addAbility(ability);
     }
 
-    public DispellersCapsule (final DispellersCapsule card) {
+    private DispellersCapsule(final DispellersCapsule card) {
         super(card);
     }
 

@@ -46,12 +46,12 @@ public final class DistortingLens extends CardImpl {
 
 class ChangeColorEffect extends OneShotEffect {
 
-    public ChangeColorEffect() {
+    ChangeColorEffect() {
         super(Outcome.Neutral);
         staticText = "Target permanent becomes the color of your choice until end of turn";
     }
 
-    public ChangeColorEffect(final ChangeColorEffect effect) {
+    private ChangeColorEffect(final ChangeColorEffect effect) {
         super(effect);
     }
 
@@ -59,7 +59,7 @@ class ChangeColorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        Permanent chosen = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent chosen = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (player != null && permanent != null) {
             ContinuousEffect effect = new BecomesColorTargetEffect(null, Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(chosen.getId(), game));

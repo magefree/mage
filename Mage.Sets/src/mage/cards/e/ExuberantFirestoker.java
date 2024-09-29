@@ -62,7 +62,7 @@ class ExuberantFirestokerTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetPlayerOrPlaneswalker());
     }
 
-    public ExuberantFirestokerTriggeredAbility(final ExuberantFirestokerTriggeredAbility ability) {
+    private ExuberantFirestokerTriggeredAbility(final ExuberantFirestokerTriggeredAbility ability) {
         super(ability);
     }
 

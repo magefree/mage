@@ -20,10 +20,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.watchers.common.AbilityResolvedWatcher;
@@ -35,12 +32,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GimliMournfulAvenger extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     private static final Hint hint = new ValueHint(
             "Creatures that died under your control this turn", GimliMournfulAvengerValue.instance
@@ -64,7 +55,7 @@ public final class GimliMournfulAvenger extends CardImpl {
 
         // Whenever another creature you control dies, put a +1/+1 counter on Gimli. When this ability resolves for the third time this turn, Gimli fights up to one target creature you don't control.
         Ability ability = new DiesCreatureTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL
         );
         ability.addEffect(new GimliMournfulAvengerEffect());
         this.addAbility(ability, new AbilityResolvedWatcher());

@@ -23,6 +23,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -57,12 +58,12 @@ public final class MerchantsDockhand extends CardImpl {
 
 class MerchantsDockhandEffect extends OneShotEffect {
 
-    public MerchantsDockhandEffect() {
+    MerchantsDockhandEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order";
     }
 
-    public MerchantsDockhandEffect(final MerchantsDockhandEffect effect) {
+    private MerchantsDockhandEffect(final MerchantsDockhandEffect effect) {
         super(effect);
     }
 
@@ -79,20 +80,13 @@ class MerchantsDockhandEffect extends OneShotEffect {
             return false;
         }
 
-        int xValue = source.getManaCostsToPay().getX();
-
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof TapXTargetCost) {
-                xValue = ((TapXTargetCost) cost).getAmount();
-                break;
-            }
-        }
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, xValue));
         controller.lookAtCards(sourceObject.getIdName(), cards, game);
 
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to put into your hand"));
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (controller.chooseTarget(Outcome.DrawCard, cards, target, source, game)) {
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
@@ -118,7 +112,7 @@ class TapXTargetCost extends VariableCostImpl {
         this.text = "Tap X untapped artifacts you control";
     }
 
-    public TapXTargetCost(final TapXTargetCost cost) {
+    private TapXTargetCost(final TapXTargetCost cost) {
         super(cost);
     }
 

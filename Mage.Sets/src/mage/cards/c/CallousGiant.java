@@ -44,23 +44,18 @@ public final class CallousGiant extends CardImpl {
 
 class CallousGiantEffect extends PreventionEffectImpl {
 
-    public CallousGiantEffect() {
+    CallousGiantEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "If a source would deal 3 or less damage to {this}, prevent that damage.";
     }
 
-    public CallousGiantEffect(final CallousGiantEffect effect) {
+    private CallousGiantEffect(final CallousGiantEffect effect) {
         super(effect);
     }
 
     @Override
     public CallousGiantEffect copy() {
         return new CallousGiantEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

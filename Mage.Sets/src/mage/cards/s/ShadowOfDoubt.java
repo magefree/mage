@@ -42,12 +42,12 @@ public final class ShadowOfDoubt extends CardImpl {
 
 class LibrariesCantBeSearchedEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public LibrariesCantBeSearchedEffect() {
+    LibrariesCantBeSearchedEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit, true, false);
         staticText = "Players can't search libraries this turn";
     }
 
-    public LibrariesCantBeSearchedEffect(final LibrariesCantBeSearchedEffect effect) {
+    private LibrariesCantBeSearchedEffect(final LibrariesCantBeSearchedEffect effect) {
         super(effect);
     }
 
@@ -57,12 +57,12 @@ class LibrariesCantBeSearchedEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.SEARCH_LIBRARY;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType() == GameEvent.EventType.SEARCH_LIBRARY;
+        return true;
     }
 }

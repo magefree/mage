@@ -22,7 +22,7 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 public final class RescueRetriever extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.SOLDIER, "other Soldier you control");
-    private static final FilterAttackingCreature filterAttacking = new FilterAttackingCreature("attacking Soldiers you control");
+    private static final FilterAttackingCreature filterAttacking = new FilterAttackingCreature("other attacking Soldiers you control");
 
     static {
         filter.add(AnotherPredicate.instance);

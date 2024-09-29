@@ -76,7 +76,7 @@ class WindswiftSliceEffect extends OneShotEffect {
         int lethal = anotherPermanent.getLethalDamage(myPermanent.getId(), game);
         lethal = Math.min(lethal, power);
 
-        anotherPermanent.damage(lethal, myPermanent.getId(), source, game);
+        anotherPermanent.damage(power, myPermanent.getId(), source, game);
 
         if (lethal < power) {
             new ElfWarriorToken().putOntoBattlefield(power - lethal, game, source, source.getControllerId());

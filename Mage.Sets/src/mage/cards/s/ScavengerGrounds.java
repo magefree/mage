@@ -43,7 +43,7 @@ public final class ScavengerGrounds extends CardImpl {
                 new ExileGraveyardAllPlayersEffect(),
                 new ManaCostsImpl<>("{2}"));
         ability2.addCost(new TapSourceCost());
-        ability2.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
+        ability2.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability2);
     }
 

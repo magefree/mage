@@ -25,7 +25,7 @@ public final class ShrapnelBlast extends CardImpl {
     public ShrapnelBlast(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
+        this.getSpellAbility().addCost(new SacrificeTargetCost(filter));
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }

@@ -10,6 +10,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -39,7 +40,7 @@ class DiabolicRevelationEffect extends OneShotEffect {
 
     DiabolicRevelationEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Search your library for up to X cards and put those cards into your hand. Then shuffle";
+        this.staticText = "Search your library for up to X cards, put those cards into your hand, then shuffle";
     }
 
     private DiabolicRevelationEffect(final DiabolicRevelationEffect effect) {
@@ -57,7 +58,7 @@ class DiabolicRevelationEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (xValue < 1) {
             player.shuffleLibrary(source, game);
             return true;

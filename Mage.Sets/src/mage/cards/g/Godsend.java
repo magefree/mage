@@ -67,7 +67,7 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GodsendExileEffect(), true);
     }
 
-    GodsendTriggeredAbility(final GodsendTriggeredAbility ability) {
+    private GodsendTriggeredAbility(final GodsendTriggeredAbility ability) {
         super(ability);
     }
 
@@ -134,12 +134,12 @@ class GodsendTriggeredAbility extends TriggeredAbilityImpl {
 
 class GodsendExileEffect extends OneShotEffect {
 
-    public GodsendExileEffect() {
+    GodsendExileEffect() {
         super(Outcome.Exile);
         this.staticText = "you may exile one of those creatures";
     }
 
-    public GodsendExileEffect(final GodsendExileEffect effect) {
+    private GodsendExileEffect(final GodsendExileEffect effect) {
         super(effect);
     }
 
@@ -165,12 +165,12 @@ class GodsendExileEffect extends OneShotEffect {
 
 class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public GodsendRuleModifyingEffect() {
+    GodsendRuleModifyingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Your opponents can't cast cards with the same name as cards exiled with {this}";
     }
 
-    public GodsendRuleModifyingEffect(final GodsendRuleModifyingEffect effect) {
+    private GodsendRuleModifyingEffect(final GodsendRuleModifyingEffect effect) {
         super(effect);
     }
 
@@ -189,8 +189,13 @@ class GodsendRuleModifyingEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.CAST_SPELL && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+        if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null) {
                 ExileZone exileZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));

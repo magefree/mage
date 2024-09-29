@@ -43,18 +43,13 @@ class NarsetTranscendentCantCastEffect extends ContinuousRuleModifyingEffectImpl
         staticText = "Your opponents can't cast noncreature spells";
     }
 
-    public NarsetTranscendentCantCastEffect(final NarsetTranscendentCantCastEffect effect) {
+    protected NarsetTranscendentCantCastEffect(final NarsetTranscendentCantCastEffect effect) {
         super(effect);
     }
 
     @Override
     public NarsetTranscendentCantCastEffect copy() {
         return new NarsetTranscendentCantCastEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

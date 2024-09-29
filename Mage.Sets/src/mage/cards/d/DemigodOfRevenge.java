@@ -66,7 +66,7 @@ class DemigodOfRevengeReturnEffect extends OneShotEffect {
         staticText = "return all cards named Demigod of Revenge from your graveyard to the battlefield";
     }
 
-    public DemigodOfRevengeReturnEffect(final DemigodOfRevengeReturnEffect effect) {
+    private DemigodOfRevengeReturnEffect(final DemigodOfRevengeReturnEffect effect) {
         super(effect);
     }
 

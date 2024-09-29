@@ -122,7 +122,9 @@ class RadiateEffect extends CopySpellForEachItCouldTargetEffect {
     @Override
     protected List<MageObjectReferencePredicate> prepareCopiesWithTargets(StackObject stackObject, Player player, Ability source, Game game) {
         List<MageObjectReferencePredicate> predicates = new ArrayList<>();
-        UUID targeted = ((Spell) stackObject)
+
+        // spell must be with single target already (see filter for choose)
+        UUID ignoreTargeted = ((Spell) stackObject)
                 .getSpellAbilities()
                 .stream()
                 .map(AbilityImpl::getTargets)
@@ -132,24 +134,29 @@ class RadiateEffect extends CopySpellForEachItCouldTargetEffect {
                 .filter(Objects::nonNull)
                 .findAny()
                 .orElse(null);
+
+        // possible permanents
         game.getBattlefield()
                 .getActivePermanents(
                         StaticFilters.FILTER_PERMANENT, player.getId(), source, game
                 ).stream()
                 .filter(Objects::nonNull)
-                .filter(p -> !p.equals(game.getPermanent(targeted)))
+                .filter(p -> !p.equals(game.getPermanent(ignoreTargeted)))
                 .filter(p -> stackObject.canTarget(game, p.getId()))
                 .map(p -> new MageObjectReference(p, game))
                 .map(MageObjectReferencePredicate::new)
                 .forEach(predicates::add);
+
+        // possible players
         game.getState()
                 .getPlayersInRange(source.getControllerId(), game)
                 .stream()
-                .filter(uuid -> !uuid.equals(targeted))
+                .filter(uuid -> !uuid.equals(ignoreTargeted))
                 .filter(uuid -> stackObject.canTarget(game, uuid))
                 .map(MageObjectReference::new)
                 .map(MageObjectReferencePredicate::new)
                 .forEach(predicates::add);
+
         return predicates;
     }
 

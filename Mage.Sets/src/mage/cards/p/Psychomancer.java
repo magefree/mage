@@ -80,6 +80,7 @@ class PsychomancerTriggeredAbility extends TriggeredAbilityImpl {
                 && (zEvent.getToZone() == Zone.GRAVEYARD || zEvent.getToZone() == Zone.EXILED)
                 && zEvent.getTarget() != null
                 && (zEvent.getTargetId().equals(getSourceId())
-                || zEvent.getTarget().isArtifact(game) && !(zEvent.getTarget() instanceof PermanentToken));
+                || zEvent.getTarget().isArtifact(game) && !(zEvent.getTarget() instanceof PermanentToken)
+                && zEvent.getTarget().getControllerId().equals(getControllerId()));
     }
 }

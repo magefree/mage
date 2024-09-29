@@ -21,7 +21,7 @@ public final class WurmWithDeathtouchToken extends TokenImpl {
         this.addAbility(DeathtouchAbility.getInstance());
     }
 
-    public WurmWithDeathtouchToken(final WurmWithDeathtouchToken token) {
+    private WurmWithDeathtouchToken(final WurmWithDeathtouchToken token) {
         super(token);
     }
 

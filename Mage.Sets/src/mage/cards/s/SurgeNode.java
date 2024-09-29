@@ -2,7 +2,6 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -18,15 +17,16 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetArtifactPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class SurgeNode extends CardImpl {
 
-    public SurgeNode (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(6))), "{this} gets six charge counters"));
+    public SurgeNode(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(6)), "with six charge counters on it"));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
@@ -34,7 +34,7 @@ public final class SurgeNode extends CardImpl {
         this.addAbility(ability);
     }
 
-    public SurgeNode (final SurgeNode card) {
+    private SurgeNode(final SurgeNode card) {
         super(card);
     }
 

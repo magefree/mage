@@ -22,7 +22,7 @@ public class FilterCreaturePlayerOrPlaneswalker extends FilterPermanentOrPlayer 
         ));
     }
 
-    public FilterCreaturePlayerOrPlaneswalker(final FilterCreaturePlayerOrPlaneswalker filter) {
+    protected FilterCreaturePlayerOrPlaneswalker(final FilterCreaturePlayerOrPlaneswalker filter) {
         super(filter);
     }
 

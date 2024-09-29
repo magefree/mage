@@ -17,7 +17,7 @@ public class DaemogothTitanTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears", 1);
 
         attack(1, playerA, "Daemogoth Titan");
-        addTarget(playerA, "Grizzly Bears");
+        setChoice(playerA, "Grizzly Bears");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

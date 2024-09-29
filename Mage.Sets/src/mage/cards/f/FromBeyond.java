@@ -39,7 +39,8 @@ public final class FromBeyond extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // At the beginning of your upkeep, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new EldraziScionToken()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(
+                new EldraziScionToken()).withTextOptions(true), TargetController.YOU, false));
 
         // {1}{G}, Sacrifice From Beyond: Search your library for an Eldrazi card, reveal it, put it into your hand, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

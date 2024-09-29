@@ -61,7 +61,7 @@ class GrenzoDungeonWardenEffect extends OneShotEffect {
         this.staticText = "Put the bottom card of your library into your graveyard. If it's a creature card with power less than or equal to {this}'s power, put it onto the battlefield";
     }
 
-    GrenzoDungeonWardenEffect(final GrenzoDungeonWardenEffect effect) {
+    private GrenzoDungeonWardenEffect(final GrenzoDungeonWardenEffect effect) {
         super(effect);
     }
 

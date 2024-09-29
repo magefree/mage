@@ -3,7 +3,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -27,7 +27,7 @@ public final class RakdossReturn extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{B}{R}");
 
         // Rakdos's Return deals X damage to target opponent or planeswalker. That player or that planeswalker’s controller discards X cards.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
         this.getSpellAbility().addEffect(new RakdossReturnEffect());
         this.getSpellAbility().addTarget(new TargetOpponentOrPlaneswalker());
     }
@@ -49,7 +49,7 @@ class RakdossReturnEffect extends OneShotEffect {
         this.staticText = "That player or that planeswalker's controller discards X cards.";
     }
 
-    RakdossReturnEffect(final RakdossReturnEffect effect) {
+    private RakdossReturnEffect(final RakdossReturnEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class RakdossReturnEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        Effect effect = new DiscardTargetEffect(ManacostVariableValue.REGULAR);
+        Effect effect = new DiscardTargetEffect(GetXValue.instance);
         effect.setTargetPointer(new FixedTarget(player.getId(), game));
         return effect.apply(game, source);
     }

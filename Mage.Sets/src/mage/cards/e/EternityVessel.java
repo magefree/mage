@@ -28,7 +28,7 @@ public final class EternityVessel extends CardImpl {
         // Eternity Vessel enters the battlefield with X charge counters on it, where X is your life total.
         this.addAbility(new EntersBattlefieldAbility(new EternityVesselEffect()));
 
-        // Landfall - Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.
+        // Landfall - Whenever a land you control enters, you may have your life total become the number of charge counters on Eternity Vessel.
         this.addAbility(new LandfallAbility(Zone.BATTLEFIELD, new EternityVesselEffect2(), true));
     }
 
@@ -44,12 +44,12 @@ public final class EternityVessel extends CardImpl {
 
 class EternityVesselEffect extends OneShotEffect {
 
-    public EternityVesselEffect() {
+    EternityVesselEffect() {
         super(Outcome.Benefit);
         staticText = "with X charge counters on it, where X is your life total";
     }
 
-    public EternityVesselEffect(final EternityVesselEffect effect) {
+    private EternityVesselEffect(final EternityVesselEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class EternityVesselEffect2 extends OneShotEffect {
         staticText = "you may have your life total become the number of charge counters on {this}";
     }
 
-    public EternityVesselEffect2(final EternityVesselEffect2 effect) {
+    private EternityVesselEffect2(final EternityVesselEffect2 effect) {
         super(effect);
     }
 

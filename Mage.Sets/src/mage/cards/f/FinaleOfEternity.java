@@ -9,14 +9,12 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ToughnessTargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -31,7 +29,8 @@ public final class FinaleOfEternity extends CardImpl {
         // Destroy up to three target creatures with toughness X or less. If X is 10 or more, return all creature cards from your graveyard to the battlefield.
         this.getSpellAbility().addEffect(new DestroyTargetEffect().setText("destroy up to three target creatures with toughness X or less"));
         this.getSpellAbility().addEffect(new FinaleOfEternityEffect());
-        this.getSpellAbility().setTargetAdjuster(FinaleOfEternityAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 3, StaticFilters.FILTER_PERMANENT_CREATURES));
+        this.getSpellAbility().setTargetAdjuster(new ToughnessTargetAdjuster(ComparisonType.OR_LESS));
     }
 
     private FinaleOfEternity(final FinaleOfEternity card) {
@@ -41,19 +40,6 @@ public final class FinaleOfEternity extends CardImpl {
     @Override
     public FinaleOfEternity copy() {
         return new FinaleOfEternity(this);
-    }
-}
-
-enum FinaleOfEternityAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
-        FilterPermanent filter = new FilterCreaturePermanent("creatures with toughness " + xValue + " or less");
-        filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, xValue + 1));
-        ability.getTargets().clear();
-        ability.addTarget(new TargetPermanent(0, 3, filter, false));
     }
 }
 
@@ -75,7 +61,7 @@ class FinaleOfEternityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source.getManaCostsToPay().getX() < 10) {
+        if (CardUtil.getSourceCostsTag(game, source, "X", 0) < 10) {
             return true;
         }
         Player player = game.getPlayer(source.getControllerId());

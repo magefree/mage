@@ -23,7 +23,7 @@ public final class HumanKnightToken extends TokenImpl {
         addAbility(HasteAbility.getInstance());
     }
 
-    public HumanKnightToken(final HumanKnightToken token) {
+    private HumanKnightToken(final HumanKnightToken token) {
         super(token);
     }
 

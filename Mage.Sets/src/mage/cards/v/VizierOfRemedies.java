@@ -44,12 +44,12 @@ public final class VizierOfRemedies extends CardImpl {
 
 class VizierOfRemediesReplacementEffect extends ReplacementEffectImpl {
 
-    public VizierOfRemediesReplacementEffect() {
+    VizierOfRemediesReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If one or more -1/-1 counters would be put on a creature you control, that many -1/-1 counters minus one are put on it instead";
     }
 
-    public VizierOfRemediesReplacementEffect(final VizierOfRemediesReplacementEffect effect) {
+    private VizierOfRemediesReplacementEffect(final VizierOfRemediesReplacementEffect effect) {
         super(effect);
     }
 

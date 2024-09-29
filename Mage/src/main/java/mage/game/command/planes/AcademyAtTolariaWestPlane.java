@@ -81,7 +81,7 @@ class DrawCardsActivePlayerEffect extends OneShotEffect {
         setText();
     }
 
-    public DrawCardsActivePlayerEffect(final DrawCardsActivePlayerEffect effect) {
+    protected DrawCardsActivePlayerEffect(final DrawCardsActivePlayerEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
     }

@@ -59,7 +59,7 @@ public final class SaprazzanBailiff extends CardImpl {
 
 class SaprazzanBailiffEffect extends OneShotEffect {
 
-    public SaprazzanBailiffEffect() {
+    SaprazzanBailiffEffect() {
         super(Outcome.Detriment);
         staticText = "exile all artifact and enchantment cards from all graveyards";
     }

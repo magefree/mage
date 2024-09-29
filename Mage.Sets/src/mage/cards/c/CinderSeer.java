@@ -66,7 +66,7 @@ class CinderSeerEffect extends OneShotEffect {
                 + "{this} deals X damage to any target, where X is the number of cards revealed this way";
     }
 
-    public CinderSeerEffect(final CinderSeerEffect effect) {
+    private CinderSeerEffect(final CinderSeerEffect effect) {
         super(effect);
     }
 

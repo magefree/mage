@@ -87,7 +87,7 @@ class ShadowfaxLordOfHorsesEffect extends OneShotEffect {
         FilterCreatureCard filter = new FilterCreatureCard("a creature card with lesser power");
         filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, shadowfax.getPower().getValue()));
         TargetCardInHand target = new TargetCardInHand(0,1,filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
 
         if (!player.choose(outcome, player.getHand(), target, source, game)) {
             return false;

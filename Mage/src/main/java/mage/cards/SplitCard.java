@@ -12,7 +12,6 @@ import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.util.CardUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,23 +20,23 @@ import java.util.UUID;
  */
 public abstract class SplitCard extends CardImpl implements CardWithHalves {
 
-    static public String FUSE_RULE = "Fuse (You may cast both halves from your hand.)";
+    public static final String FUSE_RULE = "Fuse <i>(You may cast one or both halves of this card from your hand.)</i>";
 
     protected Card leftHalfCard;
     protected Card rightHalfCard;
 
-    public SplitCard(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costsLeft, String costsRight, SpellAbilityType spellAbilityType) {
+    protected SplitCard(UUID ownerId, CardSetInfo setInfo, CardType[] cardTypes, String costsLeft, String costsRight, SpellAbilityType spellAbilityType) {
         this(ownerId, setInfo, cardTypes, cardTypes, costsLeft, costsRight, spellAbilityType);
     }
 
-    public SplitCard(UUID ownerId, CardSetInfo setInfo, CardType[] typesLeft, CardType[] typesRight, String costsLeft, String costsRight, SpellAbilityType spellAbilityType) {
+    protected SplitCard(UUID ownerId, CardSetInfo setInfo, CardType[] typesLeft, CardType[] typesRight, String costsLeft, String costsRight, SpellAbilityType spellAbilityType) {
         super(ownerId, setInfo, CardType.mergeTypes(typesLeft, typesRight), costsLeft + costsRight, spellAbilityType);
         String[] names = setInfo.getName().split(" // ");
         leftHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[0], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), typesLeft, costsLeft, this, SpellAbilityType.SPLIT_LEFT);
         rightHalfCard = new SplitCardHalfImpl(this.getOwnerId(), new CardSetInfo(names[1], setInfo.getExpansionSetCode(), setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()), typesRight, costsRight, this, SpellAbilityType.SPLIT_RIGHT);
     }
 
-    public SplitCard(SplitCard card) {
+    protected SplitCard(SplitCard card) {
         super(card);
         this.leftHalfCard = card.getLeftHalfCard().copy();
         ((SplitCardHalf) leftHalfCard).setParentCard(this);
@@ -78,8 +77,9 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
     @Override
     public boolean moveToZone(Zone toZone, Ability source, Game game, boolean flag, List<UUID> appliedEffects) {
         if (super.moveToZone(toZone, source, game, flag, appliedEffects)) {
-            game.getState().setZone(getLeftHalfCard().getId(), toZone);
-            game.getState().setZone(getRightHalfCard().getId(), toZone);
+            Zone currentZone = game.getState().getZone(getId());
+            game.getState().setZone(getLeftHalfCard().getId(), currentZone);
+            game.getState().setZone(getRightHalfCard().getId(), currentZone);
             return true;
         }
         return false;
@@ -162,8 +162,6 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
      * Currently only gets the fuse SpellAbility if there is one, but generally
      * gets any abilities on a split card as a whole, and not on either half
      * individually.
-     *
-     * @return
      */
     public Abilities<Ability> getSharedAbilities(Game game) {
         return super.getAbilities(game);
@@ -191,8 +189,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
     public List<String> getRules() {
         Abilities<Ability> sourceAbilities = this.getAbilities();
         List<String> res = CardUtil.getCardRulesWithAdditionalInfo(
-                this.getId(),
-                this.getName(),
+                this,
                 sourceAbilities,
                 sourceAbilities
         );
@@ -207,8 +204,7 @@ public abstract class SplitCard extends CardImpl implements CardWithHalves {
         Abilities<Ability> sourceAbilities = this.getAbilities(game);
         List<String> res = CardUtil.getCardRulesWithAdditionalInfo(
                 game,
-                this.getId(),
-                this.getName(),
+                this,
                 sourceAbilities,
                 sourceAbilities
         );

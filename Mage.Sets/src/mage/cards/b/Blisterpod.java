@@ -27,8 +27,8 @@ public final class Blisterpod extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // When Blisterpod dies, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
-        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new EldraziScionToken())
-                .setText("create a 1/1 colorless Eldrazi Scion creature token. It has \"Sacrifice this creature: Add {C}.\""), false));
+        this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(
+                new EldraziScionToken()).withTextOptions(true), false));
     }
 
     private Blisterpod(final Blisterpod card) {

@@ -28,7 +28,7 @@ public final class RoninHoundmaster extends CardImpl {
         this.addAbility(new BushidoAbility(1));
     }
 
-    public RoninHoundmaster (final RoninHoundmaster card) {
+    private RoninHoundmaster(final RoninHoundmaster card) {
         super(card);
     }
 

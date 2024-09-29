@@ -17,7 +17,7 @@ public class UnattachCost extends UseAttachedCost {
         super();
     }
 
-    public UnattachCost(final UnattachCost cost) {
+    protected UnattachCost(final UnattachCost cost) {
         super(cost);
     }
 

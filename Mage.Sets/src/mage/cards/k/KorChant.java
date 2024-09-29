@@ -58,7 +58,7 @@ class KorChantEffect extends RedirectionEffect {
         staticText = "All damage that would be dealt this turn to target creature you control by a source of your choice is dealt to another target creature instead";
     }
 
-    KorChantEffect(final KorChantEffect effect) {
+    private KorChantEffect(final KorChantEffect effect) {
         super(effect);
         this.target = effect.target;
     }

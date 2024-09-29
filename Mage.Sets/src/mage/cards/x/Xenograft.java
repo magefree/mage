@@ -42,12 +42,12 @@ public final class Xenograft extends CardImpl {
 
 class XenograftAddSubtypeEffect extends ContinuousEffectImpl {
 
-    public XenograftAddSubtypeEffect() {
+    XenograftAddSubtypeEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "Each creature you control is the chosen type in addition to its other types";
     }
 
-    public XenograftAddSubtypeEffect(final XenograftAddSubtypeEffect effect) {
+    private XenograftAddSubtypeEffect(final XenograftAddSubtypeEffect effect) {
         super(effect);
     }
 

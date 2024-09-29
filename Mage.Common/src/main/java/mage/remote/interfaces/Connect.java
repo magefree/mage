@@ -2,46 +2,48 @@ package mage.remote.interfaces;
 
 import mage.remote.Connection;
 
-import java.util.Optional;
-
 /**
- * @author noxx
+ * Network: client side commands for a server
+ *
+ * @author noxx, JayDi85
  */
 public interface Connect {
 
-    boolean register(Connection connection);
+    String getSessionId();
 
-    boolean emailAuthToken(Connection connection);
+    void setRestoreSessionId(String restoreSessionId);
 
-    boolean resetPassword(Connection connection);
+    String getLastError();
 
-    boolean connect(Connection connection);
+    String getServerHost();
 
-    boolean stopConnecting();
+    boolean sendAuthRegister(Connection connection);
 
-    void disconnect(boolean showMessage);
+    boolean sendAuthSendTokenToEmail(Connection connection);
 
-    void reconnect(Throwable throwable);
+    boolean sendAuthResetPassword(Connection connection);
 
-    boolean ping();
+    boolean connectStart(Connection connection);
+
+    boolean connectAbort();
+
+    void connectStop(boolean askForReconnect, boolean keepMySessionActive);
+
+    void connectReconnect(Throwable throwable);
+
+    void ping();
 
     boolean isConnected();
 
-    Optional<String> getServerHostname();
+    boolean sendAdminDisconnectUser(String userSessionId);
 
-    boolean disconnectUser(String userSessionId);
+    boolean sendAdminEndUserSession(String userSessionId);
 
-    boolean endUserSession(String userSessionId);
+    boolean sendAdminMuteUserChat(String userName, long durationMinute);
 
-    boolean muteUserChat(String userName, long durationMinute);
+    boolean sendAdminActivateUser(String userName, boolean active);
 
-    boolean setActivation(String userName, boolean active);
+    boolean sendAdminToggleActivateUser(String userName);
 
-    boolean toggleActivation(String userName);
-
-    boolean lockUser(String userName, long durationMinute);
-
-    String getSessionId();
-
-    String getLastError();
+    boolean sendAdminLockUser(String userName, long durationMinute);
 }

@@ -65,7 +65,6 @@ class BaralAndKariZevTriggeredAbility extends TriggeredAbilityImpl {
 
     BaralAndKariZevTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BaralAndKariZevEffect());
-        this.addWatcher(new SpellsCastWatcher());
     }
 
     private BaralAndKariZevTriggeredAbility(final BaralAndKariZevTriggeredAbility ability) {

@@ -27,7 +27,7 @@ public abstract class StaticAbility extends AbilityImpl {
 
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        if (game.getShortLivingLKI(getSourceId(), zone)) {
+        if (game.checkShortLivingLKI(getSourceId(), zone)) {
             return true; // maybe this can be a problem if effects removed the ability from the object
         }
         if (game.getPermanentEntering(getSourceId()) != null && zone == Zone.BATTLEFIELD) {
@@ -36,7 +36,7 @@ public abstract class StaticAbility extends AbilityImpl {
         return super.isInUseableZone(game, source, event);
     }
 
-    public StaticAbility(StaticAbility ability) {
+    protected StaticAbility(final StaticAbility ability) {
         super(ability);
     }
 }

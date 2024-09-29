@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -10,7 +9,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -26,8 +24,7 @@ public final class KefnetsLastWord extends CardImpl {
         this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_CREATURE_OR_ENCHANTMENT));
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.Custom));
         this.getSpellAbility().addEffect(new DontUntapInControllersUntapStepAllEffect(
-                Duration.UntilYourNextTurn, TargetController.YOU, new FilterControlledLandPermanent("Lands you control"))
-                .setText("Lands you control don't untap during your next untap phase"));
+                Duration.UntilYourNextTurn, TargetController.YOU, StaticFilters.FILTER_CONTROLLED_PERMANENT_LANDS));
     }
 
     private KefnetsLastWord(final KefnetsLastWord card) {

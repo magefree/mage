@@ -110,7 +110,7 @@ class OldGrowthTrollReturnEffect extends OneShotEffect {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (controller.choose(outcome, target, source, game)
                 && game.getPermanent(target.getFirstTarget()) != null) {
             game.getState().setValue("attachTo:" + source.getSourceId(), target.getFirstTarget());

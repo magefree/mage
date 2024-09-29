@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -19,8 +19,6 @@ import java.util.UUID;
  */
 public final class TirelessTracker extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.CLUE, "a Clue");
-
     public TirelessTracker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.HUMAN);
@@ -28,12 +26,12 @@ public final class TirelessTracker extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Whenever a land enters the battlefield under your control, investigate. <i>(Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")</i>
+        // Whenever a land you control enters, investigate. <i>(Create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")</i>
         this.addAbility(new LandfallAbility(new InvestigateEffect()));
 
         // Whenever you sacrifice a Clue, put a +1/+1 counter on Tireless Tracker.
         this.addAbility(new SacrificePermanentTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_CONTROLLED_CLUE
         ));
     }
 

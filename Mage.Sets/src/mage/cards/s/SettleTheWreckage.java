@@ -49,7 +49,7 @@ class SettleTheWreckageEffect extends OneShotEffect {
         this.staticText = "Exile all attacking creatures target player controls. That player may search their library for that many basic land cards, put those cards onto the battlefield tapped, then shuffle";
     }
 
-    SettleTheWreckageEffect(final SettleTheWreckageEffect effect) {
+    private SettleTheWreckageEffect(final SettleTheWreckageEffect effect) {
         super(effect);
     }
 
@@ -71,7 +71,7 @@ class SettleTheWreckageEffect extends OneShotEffect {
             return true;
         }
         controller.moveCards(toExile, Zone.EXILED, source, game);
-        game.getState().processAction(game);
+        game.processAction();
 
         TargetCardInLibrary target = new TargetCardInLibrary(0, attackers,
                 attackers > 1 ? StaticFilters.FILTER_CARD_BASIC_LANDS : StaticFilters.FILTER_CARD_BASIC_LAND

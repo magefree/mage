@@ -10,7 +10,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author Styxo
  */
 public class MoveCountersTargetsEffect extends OneShotEffect {
@@ -25,7 +24,7 @@ public class MoveCountersTargetsEffect extends OneShotEffect {
 
     }
 
-    public MoveCountersTargetsEffect(final MoveCountersTargetsEffect effect) {
+    protected MoveCountersTargetsEffect(final MoveCountersTargetsEffect effect) {
         super(effect);
         this.counterType = effect.counterType;
         this.amount = effect.amount;
@@ -38,8 +37,8 @@ public class MoveCountersTargetsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent removeTargetCreature = game.getPermanent(targetPointer.getTargets(game, source).get(0));
-        Permanent addTargetCreature = game.getPermanent(targetPointer.getTargets(game, source).get(1));
+        Permanent removeTargetCreature = game.getPermanent(getTargetPointer().getTargets(game, source).get(0));
+        Permanent addTargetCreature = game.getPermanent(getTargetPointer().getTargets(game, source).get(1));
         if (removeTargetCreature != null && addTargetCreature != null && removeTargetCreature.getCounters(game).getCount(counterType) >= amount) {
             removeTargetCreature.removeCounters(counterType.createInstance(amount), source, game);
             addTargetCreature.addCounters(counterType.createInstance(amount), source.getControllerId(), source, game);

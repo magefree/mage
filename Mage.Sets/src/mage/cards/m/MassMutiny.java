@@ -1,6 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -12,15 +11,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +31,8 @@ public final class MassMutiny extends CardImpl {
 
         // For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn.
         this.getSpellAbility().addEffect(new MassMutinyEffect());
-        this.getSpellAbility().setTargetAdjuster(MassMutinyAdjuster.instance);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,1));
+        this.getSpellAbility().setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
     }
 
     private MassMutiny(final MassMutiny card) {
@@ -46,32 +45,14 @@ public final class MassMutiny extends CardImpl {
     }
 }
 
-enum MassMutinyAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        for (UUID opponentId : game.getOpponents(ability.getControllerId())) {
-            Player opponent = game.getPlayer(opponentId);
-            if (opponent != null) {
-                FilterCreaturePermanent filter = new FilterCreaturePermanent("creature from opponent " + opponent.getName());
-                filter.add(new ControllerIdPredicate(opponentId));
-                TargetCreaturePermanent target = new TargetCreaturePermanent(0, 1, filter, false);
-                ability.addTarget(target);
-            }
-        }
-    }
-}
-
 class MassMutinyEffect extends OneShotEffect {
 
-    public MassMutinyEffect() {
+    MassMutinyEffect() {
         super(Outcome.GainControl);
         this.staticText = "For each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn";
     }
 
-    public MassMutinyEffect(final MassMutinyEffect effect) {
+    private MassMutinyEffect(final MassMutinyEffect effect) {
         super(effect);
     }
 

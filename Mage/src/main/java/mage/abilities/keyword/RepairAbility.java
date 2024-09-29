@@ -23,7 +23,6 @@ import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
- *
  * @author Styxo, Merlingilb
  */
 public class RepairAbility extends DiesSourceTriggeredAbility {
@@ -42,7 +41,7 @@ public class RepairAbility extends DiesSourceTriggeredAbility {
 
     }
 
-    public RepairAbility(final RepairAbility ability) {
+    protected RepairAbility(final RepairAbility ability) {
         super(ability);
         this.ruleText = ability.ruleText;
     }
@@ -130,13 +129,13 @@ class RepairBeginningOfUpkeepInterveningIfTriggeredAbility extends ConditionalIn
 
     public RepairBeginningOfUpkeepInterveningIfTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                new RemoveCounterSourceEffect(CounterType.REPAIR.createInstance()),TargetController.YOU, false),
+                        new RemoveCounterSourceEffect(CounterType.REPAIR.createInstance()), TargetController.YOU, false),
                 new SourceHasCounterCondition(CounterType.REPAIR),
                 "At the beginning of your upkeep, remove a repair counter from {this}");
         this.setRuleVisible(false);
     }
 
-    public RepairBeginningOfUpkeepInterveningIfTriggeredAbility(final RepairBeginningOfUpkeepInterveningIfTriggeredAbility effect) {
+    protected RepairBeginningOfUpkeepInterveningIfTriggeredAbility(final RepairBeginningOfUpkeepInterveningIfTriggeredAbility effect) {
         super(effect);
     }
 

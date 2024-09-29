@@ -1,7 +1,5 @@
 package mage.cards.f;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.condition.common.ControlledModifiedCreatureAsSpellCastCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -12,7 +10,10 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
+import mage.util.CardUtil;
 import mage.watchers.common.ControlledModifiedCreatureAsSpellCastWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -41,7 +42,7 @@ public final class FlameDischarge extends CardImpl {
 
 class FlameDischargeEffect extends OneShotEffect {
 
-    public FlameDischargeEffect() {
+    FlameDischargeEffect() {
         super(Outcome.Damage);
         this.staticText = "{this} deals X damage to target creature or planeswalker. If you controlled a modified creature as you cast this spell, it deals X plus 2 damage instead";
     }
@@ -61,7 +62,7 @@ class FlameDischargeEffect extends OneShotEffect {
         if (permanent == null) {
             return false;
         }
-        int damageAmount = source.getManaCostsToPay().getX();
+        int damageAmount = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (ControlledModifiedCreatureAsSpellCastCondition.instance.apply(game, source)) {
             damageAmount += 2;
         }

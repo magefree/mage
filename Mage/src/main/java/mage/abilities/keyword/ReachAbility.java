@@ -4,6 +4,8 @@ package mage.abilities.keyword;
 import mage.constants.Zone;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
+import mage.abilities.icon.CardIconImpl;
+import mage.abilities.icon.CardIconType;
 
 import java.io.ObjectStreamException;
 
@@ -13,7 +15,13 @@ import java.io.ObjectStreamException;
  */
 public class ReachAbility extends StaticAbility implements MageSingleton {
 
-    private static final ReachAbility instance = new ReachAbility();
+    private static final ReachAbility instance;
+
+    static {
+        instance = new ReachAbility();
+        instance.addIcon(
+                new CardIconImpl(CardIconType.ABILITY_REACH, "Reach"));
+    }
 
     private Object readResolve() throws ObjectStreamException {
         return instance;

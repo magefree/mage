@@ -46,12 +46,12 @@ public final class Corpseweft extends CardImpl {
 
 class CorpseweftEffect extends OneShotEffect {
 
-    public CorpseweftEffect() {
+    CorpseweftEffect() {
         super(Outcome.Benefit);
         this.staticText = "create a tapped X/X black Zombie Horror creature token, where X is twice the number of cards exiled this way";
     }
 
-    public CorpseweftEffect(final CorpseweftEffect effect) {
+    private CorpseweftEffect(final CorpseweftEffect effect) {
         super(effect);
     }
 

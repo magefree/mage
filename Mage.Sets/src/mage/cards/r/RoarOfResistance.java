@@ -72,17 +72,19 @@ enum RoarOfResistancePredicate implements ObjectSourcePlayerPredicate<Permanent>
                 && attackedPlaneswalker.isPlaneswalker(game)
                 && opponents.contains(attackedPlaneswalker.getControllerId())) {
             return true;
-        } else return opponents.contains(defenderId);
+        } else {
+            return opponents.contains(defenderId);
+        }
     }
 }
 
 class RoarOfResistanceTriggeredAbility extends TriggeredAbilityImpl {
 
-    public RoarOfResistanceTriggeredAbility(Zone zone, Effect effect) {
+    RoarOfResistanceTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect, false);
     }
 
-    public RoarOfResistanceTriggeredAbility(final RoarOfResistanceTriggeredAbility ability) {
+    private RoarOfResistanceTriggeredAbility(final RoarOfResistanceTriggeredAbility ability) {
         super(ability);
     }
 

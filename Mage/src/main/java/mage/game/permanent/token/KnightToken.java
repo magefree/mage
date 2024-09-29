@@ -21,7 +21,7 @@ public final class KnightToken extends TokenImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public KnightToken(final KnightToken token) {
+    private KnightToken(final KnightToken token) {
         super(token);
     }
 

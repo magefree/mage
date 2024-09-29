@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.continuous.GainClassAbilitySourceEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.keyword.ClassLevelAbility;
@@ -61,8 +61,8 @@ public final class BardClass extends CardImpl {
         // Whenever you cast a legendary spell, exile the top two cards of your library. You may play them this turn.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
                 new SpellCastControllerTriggeredAbility(
-                        new ExileTopXMayPlayUntilEndOfTurnEffect(2)
-                                .setText("exile the top two cards of your library. You may play them this turn"),
+                        new ExileTopXMayPlayUntilEffect(2, Duration.EndOfTurn)
+                                .withTextOptions("them", true),
                         filter2, false
                 ), 3
         )));

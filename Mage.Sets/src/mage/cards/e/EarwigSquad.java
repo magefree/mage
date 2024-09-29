@@ -30,13 +30,13 @@ public final class EarwigSquad extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Prowl {2}{B}
-        this.addAbility(new ProwlAbility(this, "{2}{B}"));
+        this.addAbility(new ProwlAbility("{2}{B}"));
 
         // When Earwig Squad enters the battlefield, if its prowl cost was paid, search target opponent's library for three cards and exile them. Then that player shuffles their library.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(
                         new SearchLibraryAndExileTargetEffect(3, true), false
-                ), ProwlCostWasPaidCondition.instance, "When {this} enters the battlefield, " +
+                ), ProwlCostWasPaidCondition.instance, "When {this} enters, " +
                 "if its prowl cost was paid, search target opponent's library for three cards " +
                 "and exile them. Then that player shuffles."
         );

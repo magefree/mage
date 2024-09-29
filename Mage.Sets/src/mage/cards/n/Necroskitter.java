@@ -57,7 +57,7 @@ class NecroskitterTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ReturnToBattlefieldUnderYourControlTargetEffect(), true);
     }
 
-    public NecroskitterTriggeredAbility(NecroskitterTriggeredAbility ability) {
+    private NecroskitterTriggeredAbility(final NecroskitterTriggeredAbility ability) {
         super(ability);
     }
 

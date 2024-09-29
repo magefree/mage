@@ -40,12 +40,12 @@ public final class Mise extends CardImpl {
 
 class MiseEffect extends OneShotEffect {
 
-    public MiseEffect() {
+    MiseEffect() {
         super(Outcome.Detriment);
-        staticText = "then reveal the top card of your library. If that card has the chosen name, you draw three cards";
+        staticText = ", then reveal the top card of your library. If that card has the chosen name, you draw three cards";
     }
 
-    public MiseEffect(final MiseEffect effect) {
+    private MiseEffect(final MiseEffect effect) {
         super(effect);
     }
 

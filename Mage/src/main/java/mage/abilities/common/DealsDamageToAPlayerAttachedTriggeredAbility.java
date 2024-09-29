@@ -41,7 +41,7 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    public DealsDamageToAPlayerAttachedTriggeredAbility(final DealsDamageToAPlayerAttachedTriggeredAbility ability) {
+    protected DealsDamageToAPlayerAttachedTriggeredAbility(final DealsDamageToAPlayerAttachedTriggeredAbility ability) {
         super(ability);
         this.setFixedTargetPointer = ability.setFixedTargetPointer;
         this.attachedDescription = ability.attachedDescription;
@@ -107,7 +107,7 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
                 sb.append("a player, ");
                 break;
             default:
-                throw new UnsupportedOperationException();
+                throw new UnsupportedOperationException("Unsupported TargetController in DealsDamageToAPlayerAttachedTriggeredAbility");
         }
         return sb.toString();
     }

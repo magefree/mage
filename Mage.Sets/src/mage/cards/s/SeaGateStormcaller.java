@@ -6,7 +6,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -62,14 +62,14 @@ class SeaGateStormcallerDelayedTriggeredAbility extends DelayedTriggeredAbility 
     private final boolean twice;
 
     public SeaGateStormcallerDelayedTriggeredAbility(boolean twice) {
-        super(new CopyTargetSpellEffect(true), Duration.EndOfTurn, true, false);
+        super(new CopyTargetStackObjectEffect(true), Duration.EndOfTurn, true, false);
         if (twice) {
-            this.addEffect(new CopyTargetSpellEffect(true));
+            this.addEffect(new CopyTargetStackObjectEffect(true));
         }
         this.twice = twice;
     }
 
-    public SeaGateStormcallerDelayedTriggeredAbility(final SeaGateStormcallerDelayedTriggeredAbility ability) {
+    private SeaGateStormcallerDelayedTriggeredAbility(final SeaGateStormcallerDelayedTriggeredAbility ability) {
         super(ability);
         this.twice = ability.twice;
     }

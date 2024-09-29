@@ -33,7 +33,7 @@ public final class DarksteelMutation extends CardImpl {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
@@ -67,7 +67,7 @@ class DarksteelMutationInsectToken extends TokenImpl {
 
         this.addAbility(IndestructibleAbility.getInstance());
     }
-    public DarksteelMutationInsectToken(final DarksteelMutationInsectToken token) {
+    private DarksteelMutationInsectToken(final DarksteelMutationInsectToken token) {
         super(token);
     }
 

@@ -59,7 +59,7 @@ class SoulflayerEffect extends ContinuousEffectImpl {
         abilitiesToAdd = null;
     }
 
-    public SoulflayerEffect(final SoulflayerEffect effect) {
+    private SoulflayerEffect(final SoulflayerEffect effect) {
         super(effect);
         if (effect.abilitiesToAdd != null) {
             this.abilitiesToAdd = new HashSet<>();

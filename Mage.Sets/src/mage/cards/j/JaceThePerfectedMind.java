@@ -3,7 +3,7 @@ package mage.cards.j;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.GetXLoyaltyValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsTargetEffect;
@@ -47,7 +47,7 @@ public final class JaceThePerfectedMind extends CardImpl {
         this.addAbility(ability2);
         // -X: Target player mills three times X cards.
         Ability ability3 = new LoyaltyAbility(new MillCardsTargetEffect(new MultipliedValue
-                (GetXLoyaltyValue.instance, 3)).setText("Target player mills three times X cards."));
+                (GetXValue.instance, 3)).setText("Target player mills three times X cards."));
         ability3.addTarget(new TargetPlayer());
         this.addAbility(ability3);
     }
@@ -69,7 +69,7 @@ class JaceThePerfectedMindEffect extends OneShotEffect{
                 "three cards. Otherwise, you draw a card.";
     }
 
-    public JaceThePerfectedMindEffect(JaceThePerfectedMindEffect effect){
+    private JaceThePerfectedMindEffect(final JaceThePerfectedMindEffect effect){
         super(effect);
     }
 

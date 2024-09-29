@@ -24,7 +24,6 @@ import mage.target.common.TargetCreaturePermanent;
 /**
  *
  * @author noxx
-
  */
 public final class SpiritAway extends CardImpl {
 
@@ -41,11 +40,11 @@ public final class SpiritAway extends CardImpl {
         this.addAbility(ability);
 
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
 
         // Enchanted creature gets +2/+2 and has flying.
-        SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
-        ability2.addEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA));
+        SimpleStaticAbility ability2 = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        ability2.addEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA).setText("and has flying"));
         this.addAbility(ability2);
     }
 

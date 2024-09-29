@@ -11,7 +11,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author noxx
  */
 public class BoostPairedEffect extends ContinuousEffectImpl {
@@ -26,7 +25,7 @@ public class BoostPairedEffect extends ContinuousEffectImpl {
         staticText = rule;
     }
 
-    public BoostPairedEffect(final BoostPairedEffect effect) {
+    protected BoostPairedEffect(final BoostPairedEffect effect) {
         super(effect);
         power = effect.power;
         toughness = effect.toughness;

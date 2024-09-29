@@ -5,8 +5,9 @@ import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetOpponentsCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -26,7 +27,7 @@ public final class SmellFear extends CardImpl {
                 "<br>Target creature you control fights up to one target creature you don't control"
         ));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1, StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL, false));
     }
 
     private SmellFear(final SmellFear card) {

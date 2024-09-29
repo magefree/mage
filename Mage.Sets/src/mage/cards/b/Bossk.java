@@ -64,7 +64,7 @@ class BosskTriggeredAbility extends TriggeredAbilityImpl {
         this.addTarget(new TargetOpponentsCreaturePermanent());
     }
 
-    BosskTriggeredAbility(BosskTriggeredAbility ability) {
+    private BosskTriggeredAbility(final BosskTriggeredAbility ability) {
         super(ability);
     }
 

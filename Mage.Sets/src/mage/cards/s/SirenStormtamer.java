@@ -71,7 +71,7 @@ class SirenStormtamerTargetObject extends TargetObject {
         this.targetName = "spell or ability that targets you or a creature you control";
     }
 
-    public SirenStormtamerTargetObject(final SirenStormtamerTargetObject target) {
+    private SirenStormtamerTargetObject(final SirenStormtamerTargetObject target) {
         super(target);
     }
 
@@ -153,6 +153,6 @@ class SirenStormtamerTargetObject extends TargetObject {
 
     @Override
     public Filter getFilter() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

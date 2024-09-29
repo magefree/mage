@@ -33,7 +33,7 @@ public final class RuneScarredDemon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public RuneScarredDemon (final RuneScarredDemon card) {
+    private RuneScarredDemon(final RuneScarredDemon card) {
         super(card);
     }
 

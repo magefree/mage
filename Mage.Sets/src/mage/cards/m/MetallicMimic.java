@@ -63,7 +63,7 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
         setCharacterDefining(true);
     }
 
-    MetallicMimicReplacementEffect(MetallicMimicReplacementEffect effect) {
+    private MetallicMimicReplacementEffect(final MetallicMimicReplacementEffect effect) {
         super(effect);
     }
 
@@ -83,11 +83,6 @@ class MetallicMimicReplacementEffect extends ReplacementEffectImpl {
             SubType subType = ChooseCreatureTypeEffect.getChosenCreatureType(source.getSourceId(), game);
             return subType != null && enteringCreature.hasSubtype(subType, game);
         }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
         return false;
     }
 

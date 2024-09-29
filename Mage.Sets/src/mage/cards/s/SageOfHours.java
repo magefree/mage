@@ -52,12 +52,12 @@ public final class SageOfHours extends CardImpl {
 
 class SageOfHoursEffect extends OneShotEffect {
 
-    public SageOfHoursEffect() {
+    SageOfHoursEffect() {
         super(Outcome.AIDontUseIt); // AI uses it endless therefore deactivated
         this.staticText = "For each five counters removed this way, take an extra turn after this one";
     }
 
-    public SageOfHoursEffect(final SageOfHoursEffect effect) {
+    private SageOfHoursEffect(final SageOfHoursEffect effect) {
         super(effect);
     }
 
@@ -78,7 +78,7 @@ class SageOfHoursEffect extends OneShotEffect {
             }
             int turns = countersRemoved / 5;
             for (int i = 0; i < turns; i++) {
-                game.getState().getTurnMods().add(new TurnMod(player.getId(), false));
+                game.getState().getTurnMods().add(new TurnMod(player.getId()).withExtraTurn());
             }
             game.informPlayers("Removed " + countersRemoved +
                     " +1/+1 counters: " + player.getLogName() + " takes " +

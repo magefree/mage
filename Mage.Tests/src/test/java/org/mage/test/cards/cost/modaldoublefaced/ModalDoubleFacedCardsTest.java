@@ -1,19 +1,26 @@
 package org.mage.test.cards.cost.modaldoublefaced;
 
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.Card;
 import mage.cards.ModalDoubleFacedCard;
+import mage.constants.CardType;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentToken;
 import mage.util.CardUtil;
 import mage.util.ManaUtil;
+import mage.view.GameView;
+import mage.view.PermanentView;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author JayDi85
@@ -340,7 +347,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        Card card = currentGame.getState().getBattlefield().getAllPermanents()
+        Card card = currentGame.getBattlefield().getAllPermanents()
                 .stream()
                 .filter(p -> CardUtil.haveSameNames(p, "Akoum Warrior", currentGame))
                 .findFirst()
@@ -373,7 +380,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         execute();
 
         assertHandCount(playerA, 0);
-        Card card = currentGame.getState().getBattlefield().getAllPermanents()
+        Card card = currentGame.getBattlefield().getAllPermanents()
                 .stream()
                 .filter(p -> CardUtil.haveSameNames(p, "Ondu Skyruins", currentGame))
                 .findFirst()
@@ -762,7 +769,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
 
         // Kazandu Mammoth
         // creature 3/3
-        // Landfall — Whenever a land enters the battlefield under your control, Kazandu Mammoth gets +2/+2 until end of turn.
+        // Landfall — Whenever a land you control enters, Kazandu Mammoth gets +2/+2 until end of turn.
         //
         // Kazandu Valley
         // land
@@ -800,7 +807,6 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodbraid Elf");
         setChoice(playerA, true); // use free cast
         //setChoice(playerA, "Cast Valki, God of Lies"); possible bug: you can see two spell abilities to choose, but only one allows here
-        setChoice(playerA, TestPlayer.CHOICE_SKIP); // no choices for valki's etb exile
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -848,7 +854,6 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sram's Expertise");
         setChoice(playerA, true); // use free cast
-        setChoice(playerA, TestPlayer.CHOICE_SKIP); // no choices for valki's etb exile
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -978,6 +983,129 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_Copy_TokenFromCard_MustIgnoreSecondSide() {
+        // bug: copied tokens of MDF cards has abilities from both sides
+        // https://github.com/magefree/mage/issues/8476
+
+        // 707.8a
+        // If an effect creates a token that is a copy of a transforming permanent or a transforming double-faced
+        // card not on the battlefield, the resulting token is a transforming token that has both a front face
+        // and a back face. The characteristics of each face are determined by the copiable values of the same
+        // face of the permanent it is a copy of, as modified by any other copy effects that apply to that permanent.
+        // If the token is a copy of a transforming permanent with its back face up, the token enters the battlefield
+        // with its back face up. This rule does not apply to tokens that are created with their own set of
+        // characteristics and enter the battlefield as a copy of a transforming permanent due to a replacement effect.
+
+        // MDFC is not transforming doubled-faced card, so token must have only single non-transformable side
+
+        // {2}{R}, {T}: Create a token that's a copy of target creature card in your graveyard, except it's an artifact
+        // in addition to its other types. It gains haste. Sacrifice it at the beginning of the next end step.
+        addCard(Zone.BATTLEFIELD, playerA, "Feldon of the Third Path");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        //
+        // 1
+        // Tergrid, God of Fright
+        // Legendary Creature - God
+        // Menace
+        // Whenever an opponent sacrifices a nontoken permanent or discards a permanent card, you may put that card onto
+        // the battlefield under your control from their graveyard.
+        // 2
+        // Tergrid's Lantern
+        // Legendary Artifact
+        // 4/5
+        // {T}: Target player loses 3 life unless they sacrifice a nonland permanent or discard a card.
+        // {3}{B}: Untap Tergrid’s Lantern.
+        addCard(Zone.GRAVEYARD, playerA, "Tergrid, God of Fright", 1); // {2}{R}
+
+        // find and keep image data
+        Map<String, String> imageData = new HashMap<>();
+        imageData.put("set code", "");
+        imageData.put("card number", "");
+        imageData.put("image number", "");
+        imageData.put("use var art", "");
+        runCode("collect", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            Assert.assertEquals(1, playerA.getGraveyard().size());
+            Card card = playerA.getGraveyard().getCards(game).stream().findFirst().orElse(null);
+            Assert.assertNotNull(card);
+            imageData.put("set code", card.getExpansionSetCode());
+            imageData.put("card number", card.getCardNumber());
+            imageData.put("image number", String.valueOf(card.getImageNumber()));
+            imageData.put("use var art", String.valueOf(card.getUsesVariousArt()));
+        });
+
+        // prepare token from MDFC
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}, {T}: Create a token");
+        addTarget(playerA, "Tergrid, God of Fright");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // SERVER SIDE
+        // from side 1
+        checkType("server must use side 1 - type", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tergrid, God of Fright", CardType.CREATURE, true);
+        checkSubType("server must use side 1 - subtype", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tergrid, God of Fright", SubType.GOD, true);
+        checkPT("server must use side 1 - PT", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tergrid, God of Fright", 4, 5);
+        checkAbility("server must use side 1 - menace ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tergrid, God of Fright", MenaceAbility.class, true);
+        // from copy effect
+        checkType("server must use effect - artifact", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tergrid, God of Fright", CardType.ARTIFACT, true);
+        checkAbility("server must use effect - haste ability", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Tergrid, God of Fright", HasteAbility.class, true);
+        // from side 2
+        runCode("check side 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            PermanentToken permanent = (PermanentToken) game.getBattlefield().getAllPermanents()
+                    .stream()
+                    .filter(p -> p.getName().equals("Tergrid, God of Fright"))
+                    .findFirst()
+                    .orElse(null);
+            Assert.assertNotNull(permanent);
+
+            // MDFC on battlefield has only one side (not transformable)
+            Assert.assertFalse("server must not be transformable", permanent.isTransformable());
+            Assert.assertNull("server must have not other side", permanent.getOtherFace());
+
+            List<String> rules = permanent.getRules(game);
+            Assert.assertTrue("server must ignore side 2 - untap ability", rules.stream().noneMatch(r -> r.contains("Untap")));
+            Assert.assertTrue("server must ignore side 2 - target player ability", rules.stream().noneMatch(r -> r.contains("Target player loses")));
+
+            Assert.assertEquals("server image data - set code", imageData.get("set code"), permanent.getExpansionSetCode());
+            Assert.assertEquals("server image data - card number", imageData.get("card number"), permanent.getCardNumber());
+            Assert.assertEquals("server image data - image number", imageData.get("image number"), String.valueOf(permanent.getImageNumber()));
+            Assert.assertEquals("server image data - use var art", imageData.get("use var art"), String.valueOf(permanent.getUsesVariousArt()));
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertPowerToughness(playerA, "Tergrid, God of Fright", 4, 5);
+
+        // CLIENT SIDE
+        GameView gameView = getGameView(playerA);
+        PermanentView permanentView = gameView.getMyPlayer().getBattlefield().values()
+                .stream()
+                .filter(p -> p.getName().equals("Tergrid, God of Fright"))
+                .findFirst()
+                .orElse(null);
+        Assert.assertNotNull(permanentView);
+        List<String> rules = permanentView.getRules();
+        // from side 1
+        Assert.assertTrue("client must use side 1 - type", permanentView.getTypeText().contains("Creature"));
+        Assert.assertTrue("client must use side 1 - subtype", permanentView.getSubTypes().contains(SubType.GOD));
+        Assert.assertEquals("client must use side 1 - P", "4", permanentView.getPower());
+        Assert.assertEquals("client must use side 1 - T", "5", permanentView.getToughness());
+        Assert.assertTrue("client must use side 1 - menace ability", rules.stream().anyMatch(r -> r.contains("Menace")));
+        // from copy effect
+        Assert.assertTrue("client must use effect - artifact", permanentView.getTypeText().contains("Artifact"));
+        Assert.assertTrue("client must use effect - haste ability", rules.stream().anyMatch(r -> r.contains("Haste")));
+        // from side 2
+        Assert.assertTrue("client must ignore side 2 - untap ability", rules.stream().noneMatch(r -> r.contains("Untap")));
+        Assert.assertTrue("client must ignore side 2 - target player ability", rules.stream().noneMatch(r -> r.contains("Target player loses")));
+        // image data
+        Assert.assertEquals("client image data - set code", imageData.get("set code"), permanentView.getExpansionSetCode());
+        Assert.assertEquals("client image data - card number", imageData.get("card number"), permanentView.getCardNumber());
+        Assert.assertEquals("client image data - image number", imageData.get("image number"), String.valueOf(permanentView.getImageNumber()));
+        Assert.assertEquals("client image data - use var art", imageData.get("use var art"), String.valueOf(permanentView.getUsesVariousArt()));
+    }
+
+
+    @Test
     public void test_FindMovedPermanentByCard() {
         // original problem: you must be able to find a card after move it to battlefield
         // https://github.com/magefree/mage/issues/8474
@@ -1002,5 +1130,34 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
+    }
+
+    @Test
+    public void test_Battlefield_MustHaveAbilitiesFromOneSideOnly() {
+        // possible bug: test framework adds second side abilities
+
+        // left side - Reidane, God of the Worthy:
+        // Snow lands your opponents control enter the battlefield tapped.
+        // right side - Valkmira, Protector's Shield:
+        // If a source an opponent controls would deal damage to you or a permanent you control, prevent 1 of that damage.
+        // Whenever you or another permanent you control becomes the target of a spell or ability an opponent controls,
+        // counter that spell or ability unless its controller pays {1}.
+        addCard(Zone.BATTLEFIELD, playerB, "Reidane, God of the Worthy", 1);
+        //
+        addCard(Zone.HAND, playerA, "Snow-Covered Forest", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+
+        // cast, second side effects must be ignored (e.g. counter trigger)
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Snow-Covered Forest");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt");
+        addTarget(playerA, playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTappedCount("Snow-Covered Forest", true, 1);
+        assertLife(playerB, 20 - 3);
     }
 }

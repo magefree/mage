@@ -64,7 +64,7 @@ public final class AureliaExemplarOfJustice extends CardImpl {
 
 class AureliaExemplarOfJusticeEffect extends OneShotEffect {
 
-    public AureliaExemplarOfJusticeEffect() {
+    AureliaExemplarOfJusticeEffect() {
         super(Outcome.Benefit);
         this.staticText = "choose up to one target creature you control. "
                 + "Until end of turn, that creature gets +2/+0, "
@@ -72,7 +72,7 @@ class AureliaExemplarOfJusticeEffect extends OneShotEffect {
                 + "and gains vigilance if it's white.";
     }
 
-    public AureliaExemplarOfJusticeEffect(final AureliaExemplarOfJusticeEffect effect) {
+    private AureliaExemplarOfJusticeEffect(final AureliaExemplarOfJusticeEffect effect) {
         super(effect);
     }
 

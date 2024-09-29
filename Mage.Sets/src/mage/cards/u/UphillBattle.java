@@ -90,7 +90,7 @@ class UphillBattleTapEffect extends ReplacementEffectImpl {
         staticText = "Creatures played by your opponents enter the battlefield tapped";
     }
 
-    UphillBattleTapEffect(final UphillBattleTapEffect effect) {
+    private UphillBattleTapEffect(final UphillBattleTapEffect effect) {
         super(effect);
     }
 

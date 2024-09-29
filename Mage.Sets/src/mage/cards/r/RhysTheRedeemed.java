@@ -76,7 +76,7 @@ class RhysTheRedeemedEffect extends OneShotEffect {
         this.staticText = "For each creature token you control, create a token that's a copy of that creature";
     }
 
-    public RhysTheRedeemedEffect(final RhysTheRedeemedEffect effect) {
+    private RhysTheRedeemedEffect(final RhysTheRedeemedEffect effect) {
         super(effect);
     }
 
@@ -89,7 +89,7 @@ class RhysTheRedeemedEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
                 if (permanent.isControlledBy(source.getControllerId())) {
                     CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect();
                     effect.setTargetPointer(new FixedTarget(permanent, game));

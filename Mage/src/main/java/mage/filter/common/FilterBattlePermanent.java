@@ -24,7 +24,7 @@ public class FilterBattlePermanent extends FilterPermanent {
         this.add(subtype.getPredicate());
     }
 
-    public FilterBattlePermanent(final FilterBattlePermanent filter) {
+    protected FilterBattlePermanent(final FilterBattlePermanent filter) {
         super(filter);
     }
 

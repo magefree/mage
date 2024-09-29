@@ -18,7 +18,7 @@ public final class MinionToken2 extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public MinionToken2(final MinionToken2 token) {
+    protected MinionToken2(final MinionToken2 token) {
         super(token);
     }
 

@@ -56,12 +56,12 @@ public final class TobiasBeckett extends CardImpl {
 // Based on GrenzoHavocRaiserEffect
 class TobiasBeckettEffect extends OneShotEffect {
 
-    public TobiasBeckettEffect() {
+    TobiasBeckettEffect() {
         super(Outcome.Exile);
         staticText = "exile the top card of that player's library. You may cast cards exiled this way and spend mana as though it were mana of any type to cast that spell";
     }
 
-    public TobiasBeckettEffect(final TobiasBeckettEffect effect) {
+    private TobiasBeckettEffect(final TobiasBeckettEffect effect) {
         super(effect);
     }
 
@@ -83,7 +83,7 @@ class TobiasBeckettEffect extends OneShotEffect {
                         if (card.getSpellAbility() != null) {
                             // allow to cast the card
                             // and you may spend mana as though it were mana of any color to cast it
-                            CardUtil.makeCardPlayable(game, source, card, Duration.Custom, true);
+                            CardUtil.makeCardPlayable(game, source, card, true, Duration.Custom, true);
                         }
                     }
                     return true;

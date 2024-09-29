@@ -20,7 +20,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -72,7 +72,7 @@ class PatronOfTheVeinCreatureDiesTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new PatronOfTheVeinExileCreatureEffect(), false);
     }
 
-    public PatronOfTheVeinCreatureDiesTriggeredAbility(final PatronOfTheVeinCreatureDiesTriggeredAbility ability) {
+    private PatronOfTheVeinCreatureDiesTriggeredAbility(final PatronOfTheVeinCreatureDiesTriggeredAbility ability) {
         super(ability);
     }
 
@@ -111,7 +111,7 @@ class PatronOfTheVeinCreatureDiesTriggeredAbility extends TriggeredAbilityImpl {
 
 class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
         filter.add(SubType.VAMPIRE.getPredicate());
@@ -122,7 +122,7 @@ class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
         this.staticText = "exile it and put a +1/+1 counter on each Vampire you control";
     }
 
-    public PatronOfTheVeinExileCreatureEffect(final PatronOfTheVeinExileCreatureEffect effect) {
+    private PatronOfTheVeinExileCreatureEffect(final PatronOfTheVeinExileCreatureEffect effect) {
         super(effect);
     }
 
@@ -146,7 +146,7 @@ class PatronOfTheVeinExileCreatureEffect extends OneShotEffect {
             effect.apply(game, source);
         }
 
-        for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
             permanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
             game.informPlayers(sourceObject.getName() + ": Put a +1/+1 counter on " + permanent.getLogName());
         }

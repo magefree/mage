@@ -8,6 +8,7 @@ import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
+import mage.target.targetpointer.FirstTargetPointer;
 
 /**
  * @author noxx
@@ -23,7 +24,7 @@ public class AddContinuousEffectToGame extends OneShotEffect {
         }
     }
 
-    public AddContinuousEffectToGame(final AddContinuousEffectToGame effect) {
+    protected AddContinuousEffectToGame(final AddContinuousEffectToGame effect) {
         super(effect);
         this.effects.addAll(effect.effects);
     }
@@ -36,6 +37,15 @@ public class AddContinuousEffectToGame extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Effect effect : this.effects) {
+            // runtime check
+            if (!effect.getTargetPointer().getClass().equals(FirstTargetPointer.class)
+                    && !effect.getTargetPointer().getClass().equals(this.getTargetPointer().getClass())) {
+                throw new IllegalArgumentException("Wrong code usage: found diff target pointers, must set target pointers to AddContinuousEffectToGame, not to inner effects"
+                        + " - " + source.getClass().getSimpleName()
+                        + " - " + source
+                );
+            }
+            effect.setTargetPointer(this.getTargetPointer().copy());
             game.addEffect((ContinuousEffect) effect, source);
         }
         return true;
@@ -43,6 +53,9 @@ public class AddContinuousEffectToGame extends OneShotEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         return effects.getText(mode);
     }
 }

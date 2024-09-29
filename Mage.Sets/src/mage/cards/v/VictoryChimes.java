@@ -50,12 +50,12 @@ public final class VictoryChimes extends CardImpl {
 
 class VictoryChimesManaEffect extends ManaEffect {
 
-    public VictoryChimesManaEffect(String textManaPoolOwner) {
+    VictoryChimesManaEffect(String textManaPoolOwner) {
         super();
         this.staticText = "a player of your choice adds {C}";
     }
 
-    public VictoryChimesManaEffect(final VictoryChimesManaEffect effect) {
+    private VictoryChimesManaEffect(final VictoryChimesManaEffect effect) {
         super(effect);
     }
 

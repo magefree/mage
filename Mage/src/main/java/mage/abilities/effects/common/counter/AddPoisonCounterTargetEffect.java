@@ -26,7 +26,7 @@ public class AddPoisonCounterTargetEffect extends OneShotEffect {
         return amount;
     }
 
-    public AddPoisonCounterTargetEffect(final AddPoisonCounterTargetEffect effect) {
+    protected AddPoisonCounterTargetEffect(final AddPoisonCounterTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
     }
@@ -38,7 +38,7 @@ public class AddPoisonCounterTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             player.addCounters(CounterType.POISON.createInstance(amount), source.getControllerId(), source, game);
             return true;
@@ -51,7 +51,8 @@ public class AddPoisonCounterTargetEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        return "target " + mode.getTargets().get(0).getTargetName() + " gets "
-                + CardUtil.numberToText(amount, "a") + " poison counter" + (amount > 1 ? "s" : "") + '.';
+        return getTargetPointer().describeTargets(mode.getTargets(), "it") +
+                (getTargetPointer().isPlural(mode.getTargets()) ? " get " : " gets ") +
+                CardUtil.getSimpleCountersText(amount, "a",  "poison");
     }
 }

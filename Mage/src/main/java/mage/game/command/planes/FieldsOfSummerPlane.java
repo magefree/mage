@@ -70,7 +70,7 @@ class FieldsOfSummerEffect extends OneShotEffect {
         this.staticText = "that player may gain 2 life";
     }
 
-    public FieldsOfSummerEffect(final FieldsOfSummerEffect effect) {
+    protected FieldsOfSummerEffect(final FieldsOfSummerEffect effect) {
         super(effect);
     }
 

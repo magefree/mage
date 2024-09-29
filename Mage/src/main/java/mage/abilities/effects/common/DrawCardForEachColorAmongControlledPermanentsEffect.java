@@ -18,7 +18,7 @@ public class DrawCardForEachColorAmongControlledPermanentsEffect extends OneShot
         this.staticText = "Draw a card for each color among permanents you control";
     }
 
-    public DrawCardForEachColorAmongControlledPermanentsEffect(final DrawCardForEachColorAmongControlledPermanentsEffect effect) {
+    protected DrawCardForEachColorAmongControlledPermanentsEffect(final DrawCardForEachColorAmongControlledPermanentsEffect effect) {
         super(effect);
     }
 

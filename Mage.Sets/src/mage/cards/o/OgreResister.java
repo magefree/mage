@@ -23,7 +23,7 @@ public final class OgreResister extends CardImpl {
         this.toughness = new MageInt(3);
     }
 
-    public OgreResister (final OgreResister card) {
+    private OgreResister(final OgreResister card) {
         super(card);
     }
 

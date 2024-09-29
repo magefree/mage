@@ -69,7 +69,8 @@ enum PrototypePortalAdjuster implements CostAdjuster {
             if (!card.getImprinted().isEmpty()) {
                 Card imprinted = game.getCard(card.getImprinted().get(0));
                 if (imprinted != null) {
-                    ability.getManaCostsToPay().add(0, new GenericManaCost(imprinted.getManaValue()));
+                    ability.clearManaCostsToPay();
+                    ability.addManaCostsToPay(new GenericManaCost(imprinted.getManaValue()));
                 }
             }
         }

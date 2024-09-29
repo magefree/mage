@@ -45,7 +45,7 @@ class MultanisPresenceTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a spell you've cast is countered, ");
     }
 
-    public MultanisPresenceTriggeredAbility(final MultanisPresenceTriggeredAbility ability) {
+    private MultanisPresenceTriggeredAbility(final MultanisPresenceTriggeredAbility ability) {
         super(ability);
     }
 

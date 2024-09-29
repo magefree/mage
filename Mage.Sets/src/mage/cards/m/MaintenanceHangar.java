@@ -59,12 +59,12 @@ public final class MaintenanceHangar extends CardImpl {
 
 class RemoveCounterMaintenanceHangarEffect extends OneShotEffect {
 
-    public RemoveCounterMaintenanceHangarEffect() {
+    RemoveCounterMaintenanceHangarEffect() {
         super(Outcome.Detriment);
         staticText = "remove an additional repair counter from each card in your graveyard";
     }
 
-    public RemoveCounterMaintenanceHangarEffect(final RemoveCounterMaintenanceHangarEffect effect) {
+    private RemoveCounterMaintenanceHangarEffect(final RemoveCounterMaintenanceHangarEffect effect) {
         super(effect);
     }
 
@@ -101,7 +101,7 @@ class MaintenanceHangarEffect extends ContinuousEffectImpl {
         this.staticText = "and starship creatures in your graveyard have Repair 6";
     }
 
-    public MaintenanceHangarEffect(final MaintenanceHangarEffect effect) {
+    private MaintenanceHangarEffect(final MaintenanceHangarEffect effect) {
         super(effect);
     }
 

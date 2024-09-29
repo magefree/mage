@@ -32,7 +32,7 @@ public final class AetherCharge extends CardImpl {
     public AetherCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
 
-        // Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent.
+        // Whenever a Beast you control enters, you may have it deal 4 damage to target opponent.
         Ability ability = new AetherChargeTriggeredAbility();
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
@@ -54,7 +54,7 @@ class AetherChargeTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AetherChargeEffect(), true); // is optional
     }
 
-    public AetherChargeTriggeredAbility(AetherChargeTriggeredAbility ability) {
+    private AetherChargeTriggeredAbility(final AetherChargeTriggeredAbility ability) {
         super(ability);
     }
 
@@ -77,7 +77,7 @@ class AetherChargeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent or planeswalker.";
+        return "Whenever a Beast you control enters, you may have it deal 4 damage to target opponent or planeswalker.";
     }
 
     @Override
@@ -88,12 +88,12 @@ class AetherChargeTriggeredAbility extends TriggeredAbilityImpl {
 
 class AetherChargeEffect extends OneShotEffect {
 
-    public AetherChargeEffect() {
+    AetherChargeEffect() {
         super(Outcome.Damage);
         staticText = "you may have it deal 4 damage to target opponent or planeswalker";
     }
 
-    public AetherChargeEffect(final AetherChargeEffect effect) {
+    private AetherChargeEffect(final AetherChargeEffect effect) {
         super(effect);
     }
 
@@ -110,7 +110,7 @@ class AetherChargeEffect extends OneShotEffect {
             creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD);
         }
         if (creature != null) {
-            return game.damagePlayerOrPlaneswalker(source.getFirstTarget(), 4, creature.getId(), source, game, false, true) > 0;
+            return game.damagePlayerOrPermanent(source.getFirstTarget(), 4, creature.getId(), source, game, false, true) > 0;
         }
         return false;
     }

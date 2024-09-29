@@ -44,7 +44,7 @@ public final class ForcedWorship extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{2}{W}")));
     }
 
-    public ForcedWorship (final ForcedWorship card) {
+    private ForcedWorship(final ForcedWorship card) {
         super(card);
     }
 

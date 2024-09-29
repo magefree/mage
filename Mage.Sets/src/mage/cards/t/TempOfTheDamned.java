@@ -50,12 +50,12 @@ public final class TempOfTheDamned extends CardImpl {
 
 class TempOfTheDamnedEffect extends OneShotEffect {
 
-    public TempOfTheDamnedEffect() {
+    TempOfTheDamnedEffect() {
         super(Outcome.Neutral);
-        staticText = "roll a six-sided die. {this} enters the battlefield with a number of funk counters on it equal to the result";
+        staticText = "roll a six-sided die. {this} enters with a number of funk counters on it equal to the result";
     }
 
-    public TempOfTheDamnedEffect(final TempOfTheDamnedEffect effect) {
+    private TempOfTheDamnedEffect(final TempOfTheDamnedEffect effect) {
         super(effect);
     }
 
@@ -81,7 +81,7 @@ class TempOfTheDamnedUpkeepEffect extends OneShotEffect {
         staticText = "remove a funk counter from {this}. If you can't, sacrifice it";
     }
 
-    TempOfTheDamnedUpkeepEffect(final TempOfTheDamnedUpkeepEffect effect) {
+    private TempOfTheDamnedUpkeepEffect(final TempOfTheDamnedUpkeepEffect effect) {
         super(effect);
     }
 

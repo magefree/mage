@@ -8,6 +8,9 @@ import mage.interfaces.Action;
 import org.apache.log4j.Logger;
 
 /**
+ * Priority timer for both server and client sides
+ * Client side version used for GUI-avatars redraw
+ *
  * @author noxx
  */
 public class PriorityTimer extends TimerTask {
@@ -18,6 +21,7 @@ public class PriorityTimer extends TimerTask {
     private final Action taskOnTimeout;
 
     private int count;
+    private int bufferCount = 0;
     private Action taskOnTick;
     private States state = States.NONE;
 
@@ -76,6 +80,14 @@ public class PriorityTimer extends TimerTask {
         this.count = count;
     }
 
+    public int getBufferCount() {
+        return bufferCount;
+    }
+
+    public void setBufferCount(int count) {
+        this.bufferCount = count;
+    }
+
     public void setTaskOnTick(Action taskOnTick) {
         this.taskOnTick = taskOnTick;
     }
@@ -83,7 +95,13 @@ public class PriorityTimer extends TimerTask {
     @Override
     public void run() {
         if (state == States.RUNNING) {
-            count--;
+            // Count down buffer time first
+            if (bufferCount > 0) {
+                bufferCount--;
+            } else {
+                count--;
+            }
+
             if (taskOnTick != null) {
                 try {
                     taskOnTick.execute();

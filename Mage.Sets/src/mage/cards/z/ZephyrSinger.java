@@ -25,7 +25,7 @@ public final class ZephyrSinger extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent("creature that convoked it");
 
     static {
-        filter.add(ConvokedSourcePredicate.PERMANENT);
+        filter.add(ConvokedSourcePredicate.instance);
     }
 
     public ZephyrSinger(UUID ownerId, CardSetInfo setInfo) {

@@ -68,7 +68,7 @@ class ToothCollectorAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
     }
 
-    public ToothCollectorAbility(final ToothCollectorAbility ability) {
+    private ToothCollectorAbility(final ToothCollectorAbility ability) {
         super(ability);
     }
 

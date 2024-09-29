@@ -69,7 +69,7 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a creature you control with a +1/+1 counter on it dies, ");
     }
 
-    public MarchesaTheBlackRoseTriggeredAbility(final MarchesaTheBlackRoseTriggeredAbility ability) {
+    private MarchesaTheBlackRoseTriggeredAbility(final MarchesaTheBlackRoseTriggeredAbility ability) {
         super(ability);
     }
 
@@ -109,7 +109,7 @@ class MarchesaTheBlackRoseEffect extends OneShotEffect {
         this.staticText = "return that card to the battlefield under your control at the beginning of the next end step.";
     }
 
-    MarchesaTheBlackRoseEffect(final MarchesaTheBlackRoseEffect effect) {
+    private MarchesaTheBlackRoseEffect(final MarchesaTheBlackRoseEffect effect) {
         super(effect);
     }
 
@@ -125,7 +125,7 @@ class MarchesaTheBlackRoseEffect extends OneShotEffect {
             Effect effect = new ReturnToBattlefieldUnderYourControlTargetEffect();
             effect.setText("return that card to the battlefield under your control at the beginning of the next end step");
             DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(effect);
-            delayedAbility.getEffects().get(0).setTargetPointer(getTargetPointer());
+            delayedAbility.getEffects().get(0).setTargetPointer(this.getTargetPointer().copy());
             game.addDelayedTriggeredAbility(delayedAbility, source);
             return true;
         }

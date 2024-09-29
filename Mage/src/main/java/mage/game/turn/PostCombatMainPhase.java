@@ -6,7 +6,6 @@ import mage.constants.TurnPhase;
 import mage.game.events.GameEvent.EventType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class PostCombatMainPhase extends Phase {
@@ -19,7 +18,7 @@ public class PostCombatMainPhase extends Phase {
         this.steps.add(new PostCombatMainStep());
     }
 
-    public PostCombatMainPhase(final PostCombatMainPhase phase) {
+    protected PostCombatMainPhase(final PostCombatMainPhase phase) {
         super(phase);
     }
 

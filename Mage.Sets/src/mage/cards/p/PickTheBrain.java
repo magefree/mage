@@ -46,7 +46,7 @@ public final class PickTheBrain extends CardImpl {
 
 class PickTheBrainEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
-    public PickTheBrainEffect() {
+    PickTheBrainEffect() {
         super(true, "that card's controller", "all cards with the same name as that card");
         this.staticText = "Target opponent reveals their hand. You choose a nonland card from it and exile that card.<br><br>"
                 + "<i>Delirium</i> &mdash; If there are four or more card types among cards in your graveyard, "
@@ -54,7 +54,7 @@ class PickTheBrainEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
                 + "with the same name as the exiled card, exile those cards, then that player shuffles";
     }
 
-    public PickTheBrainEffect(final PickTheBrainEffect effect) {
+    private PickTheBrainEffect(final PickTheBrainEffect effect) {
         super(effect);
     }
 

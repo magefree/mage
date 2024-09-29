@@ -46,7 +46,7 @@ public final class SplitTheParty extends CardImpl {
 
 class SplitThePartyEffect extends OneShotEffect {
 
-    public SplitThePartyEffect() {
+    SplitThePartyEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Choose target player. Return half the creatures they control to their owner's hand, rounded up";
     }
@@ -63,7 +63,7 @@ class SplitThePartyEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller == null || targetPlayer == null) {
             return false;
         }

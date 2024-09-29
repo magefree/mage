@@ -46,7 +46,7 @@ public final class RayOfFrost extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()),
                 RayOfFrostCondition.instance,
-                "When {this} enters the battlefield, if enchanted creature is red, tap it."
+                "When {this} enters, if enchanted creature is red, tap it."
         ));
 
         // As long as enchanted creature is red, it loses all abilities.
@@ -87,7 +87,7 @@ enum RayOfFrostCondition implements Condition {
 
 class RayOfFrostLoseAbilitiesEffect extends ContinuousEffectImpl {
 
-    public RayOfFrostLoseAbilitiesEffect() {
+    RayOfFrostLoseAbilitiesEffect() {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
         this.staticText = "As long as enchanted creature is red, it loses all abilities";
     }

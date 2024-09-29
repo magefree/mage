@@ -28,7 +28,7 @@ public final class Hovermyr extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
     }
 
-    public Hovermyr (final Hovermyr card) {
+    private Hovermyr(final Hovermyr card) {
         super(card);
     }
 

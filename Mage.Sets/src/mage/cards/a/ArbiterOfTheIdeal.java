@@ -65,7 +65,7 @@ class ArbiterOfTheIdealEffect extends OneShotEffect {
         this.staticText = "reveal the top card of your library. If it's an artifact, creature, or land card, you may put it onto the battlefield with a manifestation counter on it. It's an enchantment in addition to its other types";
     }
 
-    public ArbiterOfTheIdealEffect(final ArbiterOfTheIdealEffect effect) {
+    private ArbiterOfTheIdealEffect(final ArbiterOfTheIdealEffect effect) {
         super(effect);
     }
 

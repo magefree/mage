@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import java.util.UUID;
@@ -16,8 +15,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -25,12 +23,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public final class ShuYunTheSilentTempest extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
-
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public ShuYunTheSilentTempest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{U}");
@@ -48,7 +40,7 @@ public final class ShuYunTheSilentTempest extends CardImpl {
                         new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), 
                         new ManaCostsImpl<>("{R/W}{R/W}"),
                         "Pay to let target creature gain double strike?"),
-                filter, false);
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

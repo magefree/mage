@@ -21,7 +21,7 @@ public final class WolfTokenWithDeathtouch extends TokenImpl {
         addAbility(DeathtouchAbility.getInstance());
     }
 
-    public WolfTokenWithDeathtouch(final WolfTokenWithDeathtouch token) {
+    protected WolfTokenWithDeathtouch(final WolfTokenWithDeathtouch token) {
         super(token);
     }
 

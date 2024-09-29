@@ -1,4 +1,3 @@
-
 package mage.cards.n;
 
 import mage.MageInt;
@@ -32,7 +31,7 @@ import java.util.UUID;
  */
 public final class NissaWorldwaker extends CardImpl {
 
-    private static final FilterPermanent filterForest = new FilterPermanent(SubType.FOREST, "Forest");
+    private static final FilterPermanent filterForest = new FilterPermanent(SubType.FOREST, "Forests");
 
     public NissaWorldwaker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.PLANESWALKER},"{3}{G}{G}");
@@ -67,12 +66,12 @@ public final class NissaWorldwaker extends CardImpl {
 
 class NissaWorldwakerSearchEffect extends OneShotEffect {
 
-    public NissaWorldwakerSearchEffect() {
+    NissaWorldwakerSearchEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Search your library for any number of basic land cards, put them onto the battlefield, then shuffle. Those lands become 4/4 Elemental creatures with trample. They're still lands";
     }
 
-    public NissaWorldwakerSearchEffect(final NissaWorldwakerSearchEffect effect) {
+    private NissaWorldwakerSearchEffect(final NissaWorldwakerSearchEffect effect) {
         super(effect);
     }
 
@@ -122,7 +121,7 @@ class NissaWorldwakerToken extends TokenImpl {
         this.toughness = new MageInt(4);
         this.addAbility(TrampleAbility.getInstance());
     }
-    public NissaWorldwakerToken(final NissaWorldwakerToken token) {
+    private NissaWorldwakerToken(final NissaWorldwakerToken token) {
         super(token);
     }
 

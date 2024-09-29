@@ -60,7 +60,7 @@ class HonorTheFallenEffect extends OneShotEffect {
             if (player == null) {
                 continue;
             }
-            cards.addAll(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
+            cards.addAllCards(player.getGraveyard().getCards(StaticFilters.FILTER_CARD_CREATURE, game));
         }
         controller.moveCards(cards, Zone.EXILED, source, game);
         int count = cards

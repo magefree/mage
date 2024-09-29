@@ -46,7 +46,7 @@ class WorldfireEffect extends OneShotEffect {
         staticText = "Exile all permanents. Exile all cards from all hands and graveyards. Each player's life total becomes 1";
     }
 
-    public WorldfireEffect(final WorldfireEffect effect) {
+    private WorldfireEffect(final WorldfireEffect effect) {
         super(effect);
     }
 

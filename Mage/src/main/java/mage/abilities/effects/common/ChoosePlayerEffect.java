@@ -11,7 +11,6 @@ import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 
 /**
- *
  * @author LevelX2
  */
 public class ChoosePlayerEffect extends OneShotEffect {
@@ -21,7 +20,7 @@ public class ChoosePlayerEffect extends OneShotEffect {
         this.staticText = "choose a player";
     }
 
-    public ChoosePlayerEffect(final ChoosePlayerEffect effect) {
+    protected ChoosePlayerEffect(final ChoosePlayerEffect effect) {
         super(effect);
     }
 

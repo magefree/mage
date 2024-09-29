@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 public final class PlanarVoid extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard("another card");
     static {
         filter.add(AnotherPredicate.instance);
     }
@@ -26,7 +26,8 @@ public final class PlanarVoid extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");
 
         // Whenever another card is put into a graveyard from anywhere, exile that card.
-        this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(new ExileTargetEffect(), false, filter, TargetController.ANY, SetTargetPointer.CARD));
+        this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(new ExileTargetEffect()
+                .setText("exile that card"), false, filter, TargetController.ANY, SetTargetPointer.CARD));
     }
 
     private PlanarVoid(final PlanarVoid card) {

@@ -69,7 +69,7 @@ class KinzuOfTheBleakCovenEffect extends OneShotEffect {
 
     KinzuOfTheBleakCovenEffect() {
         super(Outcome.Benefit);
-        staticText = "you may pay 2 Life and exile it. If you do, " +
+        staticText = "you may pay 2 life and exile it. If you do, " +
                 "create a token that's a copy of that creature" +
                 ", except it's 1/1 and has toxic 1.";
     }
@@ -99,7 +99,7 @@ class KinzuOfTheBleakCovenEffect extends OneShotEffect {
         player.moveCards(card, Zone.EXILED, source, game);
         return new CreateTokenCopyTargetEffect().setSavedPermanent(
                 new PermanentCard(card, source.getControllerId(), game)
-        ).setPermanentModifier((token, g) -> {
+        ).setPermanentModifier((token) -> {
             token.setPower(1);                             // 1/1
             token.setToughness(1);
             token.addAbility(new ToxicAbility(1)); // Add Toxic (is additive)

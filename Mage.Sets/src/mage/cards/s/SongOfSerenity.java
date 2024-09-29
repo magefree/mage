@@ -51,7 +51,7 @@ class SongOfSerenityRestrictionEffect extends RestrictionEffect {
         staticText = "Creatures that are enchanted can't attack or block";
     }
 
-    public SongOfSerenityRestrictionEffect(final SongOfSerenityRestrictionEffect effect) {
+    private SongOfSerenityRestrictionEffect(final SongOfSerenityRestrictionEffect effect) {
         super(effect);
     }
 

@@ -73,7 +73,7 @@ class DwarvenArmorerEffect extends OneShotEffect {
         staticText = "Put a +0/+1 counter or a +1/+0 counter on target creature.";
     }
 
-    public DwarvenArmorerEffect(final DwarvenArmorerEffect effect) {
+    private DwarvenArmorerEffect(final DwarvenArmorerEffect effect) {
         super(effect);
     }
 

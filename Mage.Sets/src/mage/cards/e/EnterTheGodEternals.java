@@ -45,7 +45,7 @@ class EnterTheGodEternalsEffect extends OneShotEffect {
     EnterTheGodEternalsEffect() {
         super(Outcome.Benefit);
         staticText = "{this} deals 4 damage to target creature and you gain life equal to the damage dealt this way. "
-                + "Target player mills four cards. Amass 4.";
+                + "Target player mills four cards. Amass Zombies 4.";
     }
 
     private EnterTheGodEternalsEffect(final EnterTheGodEternalsEffect effect) {

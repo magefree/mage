@@ -73,7 +73,7 @@ class GrimReminderEffect extends OneShotEffect {
                 + "Then shuffle.";
     }
 
-    GrimReminderEffect(final GrimReminderEffect effect) {
+    private GrimReminderEffect(final GrimReminderEffect effect) {
         super(effect);
     }
 

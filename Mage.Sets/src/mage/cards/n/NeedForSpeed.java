@@ -12,6 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -31,7 +32,7 @@ public final class NeedForSpeed extends CardImpl {
         // Sacrifice a land: Target creature gains haste until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                                                    new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), 
-                                                   new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledPermanent("land"))));
+                                                   new SacrificeTargetCost(StaticFilters.FILTER_LAND));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

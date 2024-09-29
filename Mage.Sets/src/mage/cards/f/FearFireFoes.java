@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -32,10 +32,9 @@ public final class FearFireFoes extends CardImpl {
 
         // Damage can't be prevented this turn. Fear, Fire, Foes! deals X damage to target creature and 1 damage to each other creature with the same controller.
         this.getSpellAbility().addEffect(new DamageCantBePreventedEffect(
-                Duration.EndOfTurn, "Damage can't be prevented this turn",
-                true, false
+                Duration.EndOfTurn
         ));
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
         this.getSpellAbility().addEffect(new FearFireFoesEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

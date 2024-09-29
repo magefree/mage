@@ -29,9 +29,7 @@ public final class DiverSkaab extends CardImpl {
         this.addAbility(new ExploitAbility());
 
         // When Diver Skaab exploits a creature, target creature's owner puts it on the top or bottom of their library.
-        Ability ability = new ExploitCreatureTriggeredAbility(new PutOnTopOrBottomLibraryTargetEffect(
-                "target creature's owner puts it on the top or bottom of their library"
-        ));
+        Ability ability = new ExploitCreatureTriggeredAbility(new PutOnTopOrBottomLibraryTargetEffect(false));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

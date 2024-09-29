@@ -63,7 +63,7 @@ class DrawCardIfCreatureTypeAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
     }
 
-    public DrawCardIfCreatureTypeAbility(final DrawCardIfCreatureTypeAbility ability) {
+    private DrawCardIfCreatureTypeAbility(final DrawCardIfCreatureTypeAbility ability) {
         super(ability);
     }
 

@@ -53,7 +53,7 @@ public final class CentaurOmenreader extends CardImpl {
 
 class CentaurOmenreaderSpellsCostReductionEffect extends SpellsCostReductionControllerEffect {
 
-    public CentaurOmenreaderSpellsCostReductionEffect(FilterCard filter) {
+    CentaurOmenreaderSpellsCostReductionEffect(FilterCard filter) {
         super(filter, 2);
         staticText = "As long as {this} is tapped, creature spells you cast cost {2} less to cast";
     }

@@ -49,7 +49,7 @@ class AvenShrineTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AvenShrineEffect(), false);
     }
 
-    public AvenShrineTriggeredAbility(final AvenShrineTriggeredAbility ability) {
+    private AvenShrineTriggeredAbility(final AvenShrineTriggeredAbility ability) {
         super(ability);
     }
 
@@ -78,12 +78,12 @@ class AvenShrineTriggeredAbility extends TriggeredAbilityImpl {
 
 class AvenShrineEffect extends OneShotEffect {
 
-    public AvenShrineEffect() {
+    AvenShrineEffect() {
         super(Outcome.GainLife);
         staticText = "Whenever a player casts a spell, that player gains X life, where X is the number of cards in all graveyards with the same name as that spell";
     }
 
-    public AvenShrineEffect(final AvenShrineEffect effect) {
+    private AvenShrineEffect(final AvenShrineEffect effect) {
         super(effect);
     }
 

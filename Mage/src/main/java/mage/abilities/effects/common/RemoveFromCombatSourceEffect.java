@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class RemoveFromCombatSourceEffect extends OneShotEffect {
@@ -18,7 +17,7 @@ public class RemoveFromCombatSourceEffect extends OneShotEffect {
         staticText = setText();
     }
 
-    public RemoveFromCombatSourceEffect(final RemoveFromCombatSourceEffect effect) {
+    protected RemoveFromCombatSourceEffect(final RemoveFromCombatSourceEffect effect) {
         super(effect);
     }
 

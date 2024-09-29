@@ -52,7 +52,7 @@ class TamanoaDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a noncreature source you control deals damage, ");
     }
 
-    public TamanoaDealsDamageTriggeredAbility(final TamanoaDealsDamageTriggeredAbility ability) {
+    private TamanoaDealsDamageTriggeredAbility(final TamanoaDealsDamageTriggeredAbility ability) {
         super(ability);
     }
 

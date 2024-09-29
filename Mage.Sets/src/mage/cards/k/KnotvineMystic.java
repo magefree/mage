@@ -32,7 +32,7 @@ public final class KnotvineMystic extends CardImpl {
         
         // {1}, {T}: Add {R}{G}{W}.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 1, 1, 0, 0, 0), new TapSourceCost());
-        ability.addManaCost(new GenericManaCost(1));
+        ability.addCost(new GenericManaCost(1));
         this.addAbility(ability);
     }
 

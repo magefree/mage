@@ -23,10 +23,11 @@ public class OathkeeperTakenosDaishoTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, samurai, 1);
         addCard(Zone.HAND, playerA, removeEquipped, 1);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", samurai);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, removeEquipped);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, removeEquipped, samurai);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -43,10 +44,11 @@ public class OathkeeperTakenosDaishoTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard", 1);
         addCard(Zone.HAND, playerA, removeEquipped, 1);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Elite Vanguard");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, removeEquipped);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, removeEquipped, "Elite Vanguard");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -63,10 +65,11 @@ public class OathkeeperTakenosDaishoTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, samurai, 1);
         addCard(Zone.HAND, playerA, removeEquipment, 1);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", samurai);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, removeEquipment);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, removeEquipment, equipment);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

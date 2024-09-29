@@ -51,7 +51,7 @@ public final class TrapDigger extends CardImpl {
         ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);
         // Sacrifice a land with a trap counter on it: Trap Digger deals 3 damage to target attacking creature without flying.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new SacrificeTargetCost(new TargetControlledPermanent(filter1)));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new SacrificeTargetCost(filter1));
         ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
     }

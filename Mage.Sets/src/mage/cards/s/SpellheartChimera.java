@@ -34,7 +34,7 @@ public final class SpellheartChimera extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // Spellheart Chimera's power is equal to the number of instant and sorcery cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerSourceEffect(
-                new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard("instant and sorcery cards in your graveyard")))));
+                new CardsInControllerGraveyardCount(new FilterInstantOrSorceryCard("instant and sorcery cards")))));
     }
 
     private SpellheartChimera(final SpellheartChimera card) {

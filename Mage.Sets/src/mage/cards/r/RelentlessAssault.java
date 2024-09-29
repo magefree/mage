@@ -19,7 +19,6 @@ public final class RelentlessAssault extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}{R}");
 
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
-        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
         this.getSpellAbility().addEffect(new UntapAllThatAttackedEffect());
         this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect());
     }

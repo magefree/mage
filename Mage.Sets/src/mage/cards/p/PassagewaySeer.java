@@ -6,6 +6,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.HaveInitiativeCondition;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -40,7 +41,7 @@ public final class PassagewaySeer extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 TargetController.YOU, HaveInitiativeCondition.instance, false
-        ));
+        ).addHint(InitiativeHint.instance));
     }
 
     private PassagewaySeer(final PassagewaySeer card) {

@@ -1,4 +1,3 @@
-
 package mage.cards.k;
 
 import java.util.UUID;
@@ -15,19 +14,13 @@ import mage.constants.SubType;
 import mage.constants.SetTargetPointer;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 
 /**
  *
  * @author emerald000
  */
 public final class KambalConsulOfAllocation extends CardImpl {
-
-    private static final FilterSpell filter = new FilterSpell("a noncreature spell");
-    static {
-        filter.add(Predicates.not(CardType.CREATURE.getPredicate()));
-    }
 
     public KambalConsulOfAllocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{W}{B}");
@@ -38,7 +31,8 @@ public final class KambalConsulOfAllocation extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever an opponent casts a noncreature spell, that player loses 2 life and you gain 2 life.
-        Ability ability = new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), filter, false, SetTargetPointer.PLAYER);
+        Ability ability = new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2),
+                StaticFilters.FILTER_SPELL_A_NON_CREATURE, false, SetTargetPointer.PLAYER);
         Effect effect = new GainLifeEffect(2);
         effect.setText("and you gain 2 life");
         ability.addEffect(effect);

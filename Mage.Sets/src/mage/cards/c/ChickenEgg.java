@@ -52,7 +52,7 @@ class ChickenEggEffect extends OneShotEffect {
         this.staticText = "roll a six-sided die. If you roll a 6, sacrifice {this} and create a 4/4 red Giant Bird creature token";
     }
 
-    ChickenEggEffect(final ChickenEggEffect effect) {
+    private ChickenEggEffect(final ChickenEggEffect effect) {
         super(effect);
     }
 

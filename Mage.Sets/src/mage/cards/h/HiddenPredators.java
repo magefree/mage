@@ -47,10 +47,11 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
 
     public HiddenPredatorsStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new HiddenPredatorsToken(), null, Duration.Custom));
+        this.withRuleTextReplacement(false);
         setTriggerPhrase("When an opponent controls a creature with power 4 or greater, if {this} is an enchantment, ");
     }
 
-    public HiddenPredatorsStateTriggeredAbility(final HiddenPredatorsStateTriggeredAbility ability) {
+    private HiddenPredatorsStateTriggeredAbility(final HiddenPredatorsStateTriggeredAbility ability) {
         super(ability);
     }
 
@@ -72,31 +73,6 @@ class HiddenPredatorsStateTriggeredAbility extends StateTriggeredAbility {
         return false;
     }
 
-    @Override
-    public boolean canTrigger(Game game) {
-        //20100716 - 603.8
-        return !Boolean.TRUE.equals(game.getState().getValue(getSourceId().toString() + "triggered"));
-    }
-
-    @Override
-    public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
-        //20100716 - 603.8
-        game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.TRUE);
-        super.trigger(game, controllerId, triggeringEvent);
-    }
-
-    @Override
-    public boolean resolve(Game game) {
-        //20100716 - 603.8
-        boolean result = super.resolve(game);
-        game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.FALSE);
-        return result;
-    }
-
-    @Override
-    public void counter(Game game) {
-        game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.FALSE);
-    }
 }
 
 class HiddenPredatorsToken extends TokenImpl {
@@ -109,7 +85,7 @@ class HiddenPredatorsToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    public HiddenPredatorsToken(final HiddenPredatorsToken token) {
+    private HiddenPredatorsToken(final HiddenPredatorsToken token) {
         super(token);
     }
 

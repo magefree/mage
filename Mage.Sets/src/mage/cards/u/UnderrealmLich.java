@@ -62,25 +62,20 @@ public final class UnderrealmLich extends CardImpl {
 
 class UnderrealmLichReplacementEffect extends ReplacementEffectImpl {
 
-    public UnderrealmLichReplacementEffect() {
+    UnderrealmLichReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would draw a card, instead look at the top "
                 + "three cards of your library, then put one into your hand "
                 + "and the rest into your graveyard.";
     }
 
-    public UnderrealmLichReplacementEffect(final UnderrealmLichReplacementEffect effect) {
+    private UnderrealmLichReplacementEffect(final UnderrealmLichReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public UnderrealmLichReplacementEffect copy() {
         return new UnderrealmLichReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

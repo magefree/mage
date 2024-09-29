@@ -1,4 +1,3 @@
-
 package mage.cards.a;
 
 import mage.MageInt;
@@ -35,7 +34,7 @@ public final class AbolisherOfBloodlines extends CardImpl {
 
         // When this creature transforms into Abolisher of Bloodlines, target opponent sacrifices three creatures.
         Ability ability = new TransformIntoSourceTriggeredAbility(new SacrificeEffect(
-                StaticFilters.FILTER_PERMANENT_CREATURE, 3, "target opponent"
+                StaticFilters.FILTER_PERMANENT_CREATURES, 3, "target opponent"
         ));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

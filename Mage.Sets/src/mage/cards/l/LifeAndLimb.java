@@ -54,7 +54,7 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
         this.dependendToTypes.add(DependencyType.BecomeCreature);
     }
 
-    LifeAndLimbEffect(final LifeAndLimbEffect effect) {
+    private LifeAndLimbEffect(final LifeAndLimbEffect effect) {
         super(effect);
     }
 
@@ -69,7 +69,7 @@ class LifeAndLimbEffect extends ContinuousEffectImpl {
         if (player == null) {
             return false;
         }
-        for (Permanent permanent : game.getState().getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
             switch (layer) {
                 case TypeChangingEffects_4:
                     permanent.addCardType(game, CardType.CREATURE);

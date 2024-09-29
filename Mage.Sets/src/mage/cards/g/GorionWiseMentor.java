@@ -2,11 +2,12 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.CopyTargetSpellEffect;
+import mage.abilities.effects.common.CopyTargetStackObjectEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.FilterSpell;
@@ -39,8 +40,8 @@ public final class GorionWiseMentor extends CardImpl {
 
         // Whenever you cast an Adventure spell, you may copy it. You may choose new targets for the copy.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetSpellEffect(true).withSpellName("it"),
-                filter, true, true
+                new CopyTargetStackObjectEffect(true).withText("it"),
+                filter, true, SetTargetPointer.SPELL
         ));
     }
 

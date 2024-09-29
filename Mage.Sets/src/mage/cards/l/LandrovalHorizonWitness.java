@@ -61,6 +61,7 @@ class LandrovalHorizonWitnessTriggeredAbility extends TriggeredAbilityImpl {
     LandrovalHorizonWitnessTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         this.addTarget(new TargetPermanent(filter));
+        setTriggerPhrase("Whenever two or more creatures you control attack a player, ");
     }
 
     private LandrovalHorizonWitnessTriggeredAbility(final LandrovalHorizonWitnessTriggeredAbility ability) {

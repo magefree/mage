@@ -48,7 +48,7 @@ class IntimidateEffect extends RestrictionEffect implements MageSingleton {
         super(Duration.EndOfGame);
     }
 
-    public IntimidateEffect(final IntimidateEffect effect) {
+    protected IntimidateEffect(final IntimidateEffect effect) {
         super(effect);
     }
 

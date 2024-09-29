@@ -100,6 +100,8 @@ public class CardInfo {
     @DatabaseField(indexName = "nightCard_index")
     protected boolean nightCard;
     @DatabaseField
+    protected boolean meldCard;
+    @DatabaseField
     protected String flipCardName;
     @DatabaseField
     protected String secondSideName;
@@ -113,6 +115,8 @@ public class CardInfo {
     protected String modalDoubleFacedSecondSideName;
     @DatabaseField
     protected String meldsToCardName;
+    @DatabaseField
+    protected boolean isExtraDeckCard;
 
     // if you add new field with card side name then update CardRepository.addNewNames too
 
@@ -147,6 +151,7 @@ public class CardInfo {
 
         this.doubleFaced = card.isTransformable() && card.getSecondCardFace() != null;
         this.nightCard = card.isNightCard();
+        this.meldCard = card instanceof MeldCard;
         Card secondSide = card.getSecondCardFace();
         if (secondSide != null) {
             this.secondSideName = secondSide.getName();
@@ -232,13 +237,21 @@ public class CardInfo {
         // Starting loyalty
         this.startingLoyalty = CardUtil.convertLoyaltyOrDefense(card.getStartingLoyalty());
         this.startingDefense = CardUtil.convertLoyaltyOrDefense(card.getStartingDefense());
+
+        this.isExtraDeckCard = card.isExtraDeckCard();
     }
 
-    public Card getCard() {
+    /**
+     * Create normal card (with full abilities)
+     */
+    public Card createCard() {
         return CardImpl.createCard(className, new CardSetInfo(name, setCode, cardNumber, rarity, new CardGraphicInfo(FrameStyle.valueOf(frameStyle), variousArt)));
     }
 
-    public Card getMockCard() {
+    /**
+     * Create deck editor's mock card (with text only instead real abilities)
+     */
+    public Card createMockCard() {
         if (this.splitCard) {
             return new MockSplitCard(this);
         } else {
@@ -448,6 +461,10 @@ public class CardInfo {
         return nightCard;
     }
 
+    public boolean isMeldCard() {
+        return meldCard;
+    }
+
     public String getSecondSideName() {
         return secondSideName;
     }
@@ -481,5 +498,9 @@ public class CardInfo {
     @Override
     public String toString() {
         return String.format("%s (%s, %s)", getName(), getSetCode(), getCardNumber());
+    }
+
+    public boolean isExtraDeckCard() {
+        return isExtraDeckCard;
     }
 }

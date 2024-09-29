@@ -91,7 +91,7 @@ class NetheresePuzzleWardTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         DieRolledEvent drEvent = (DieRolledEvent) event;
-        return isControlledBy(drEvent.getPlayerId())
+        return isControlledBy(drEvent.getTargetId())
                 && drEvent.getNaturalResult() == drEvent.getSides();
     }
 

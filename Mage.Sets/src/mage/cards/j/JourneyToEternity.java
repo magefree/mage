@@ -63,12 +63,12 @@ public final class JourneyToEternity extends CardImpl {
 
 class JourneyToEternityReturnTransformedSourceEffect extends OneShotEffect {
 
-    public JourneyToEternityReturnTransformedSourceEffect() {
+    JourneyToEternityReturnTransformedSourceEffect() {
         super(Outcome.Benefit);
         this.staticText = ", then return {this} to the battlefield transformed under your control.";
     }
 
-    public JourneyToEternityReturnTransformedSourceEffect(final JourneyToEternityReturnTransformedSourceEffect effect) {
+    private JourneyToEternityReturnTransformedSourceEffect(final JourneyToEternityReturnTransformedSourceEffect effect) {
         super(effect);
     }
 

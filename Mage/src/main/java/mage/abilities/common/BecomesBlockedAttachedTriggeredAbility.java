@@ -28,7 +28,7 @@ public class BecomesBlockedAttachedTriggeredAbility extends TriggeredAbilityImpl
         setTriggerPhrase("Whenever enchanted creature becomes blocked, ");
     }
 
-    public BecomesBlockedAttachedTriggeredAbility(final BecomesBlockedAttachedTriggeredAbility ability) {
+    protected BecomesBlockedAttachedTriggeredAbility(final BecomesBlockedAttachedTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
     }

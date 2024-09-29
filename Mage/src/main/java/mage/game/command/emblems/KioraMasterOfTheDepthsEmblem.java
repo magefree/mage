@@ -6,7 +6,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
@@ -17,14 +17,11 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class KioraMasterOfTheDepthsEmblem extends Emblem {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures");
-
     public KioraMasterOfTheDepthsEmblem() {
         super("Emblem Kiora");
 
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.COMMAND,
-                new KioraFightEffect(), filter, true, SetTargetPointer.PERMANENT,
-                "Whenever a creature enters the battlefield under your control, you may have it fight target creature.");
+                new KioraFightEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE, true, SetTargetPointer.PERMANENT);
         ability.addTarget(new TargetCreaturePermanent());
         this.getAbilities().add(ability);
     }
@@ -43,6 +40,7 @@ class KioraFightEffect extends OneShotEffect {
 
     KioraFightEffect() {
         super(Outcome.Damage);
+        staticText = "you may have it fight target creature";
     }
 
     KioraFightEffect(final KioraFightEffect effect) {

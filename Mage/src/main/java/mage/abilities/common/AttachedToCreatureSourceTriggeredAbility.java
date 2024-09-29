@@ -17,7 +17,7 @@ public class AttachedToCreatureSourceTriggeredAbility extends TriggeredAbilityIm
         setTriggerPhrase("Whenever {this} becomes attached to a creature, ");
     }
 
-    public AttachedToCreatureSourceTriggeredAbility(final AttachedToCreatureSourceTriggeredAbility ability) {
+    protected AttachedToCreatureSourceTriggeredAbility(final AttachedToCreatureSourceTriggeredAbility ability) {
         super(ability);
     }
 

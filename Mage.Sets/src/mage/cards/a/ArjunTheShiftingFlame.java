@@ -49,12 +49,12 @@ public final class ArjunTheShiftingFlame extends CardImpl {
 
 class ArjunTheShiftingFlameEffect extends OneShotEffect {
 
-    public ArjunTheShiftingFlameEffect() {
+    ArjunTheShiftingFlameEffect() {
         super(Outcome.Neutral);
         staticText = "put the cards in your hand on the bottom of your library in any order, then draw that many cards";
     }
 
-    public ArjunTheShiftingFlameEffect(final ArjunTheShiftingFlameEffect effect) {
+    private ArjunTheShiftingFlameEffect(final ArjunTheShiftingFlameEffect effect) {
         super(effect);
     }
 

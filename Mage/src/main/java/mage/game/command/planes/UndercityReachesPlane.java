@@ -78,7 +78,7 @@ class UndercityReachesTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.COMMAND, null, false); // effect must be optional
     }
 
-    public UndercityReachesTriggeredAbility(final UndercityReachesTriggeredAbility ability) {
+    protected UndercityReachesTriggeredAbility(final UndercityReachesTriggeredAbility ability) {
         super(ability);
     }
 

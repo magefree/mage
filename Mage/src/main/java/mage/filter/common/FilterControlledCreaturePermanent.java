@@ -5,7 +5,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class FilterControlledCreaturePermanent extends FilterControlledPermanent {
@@ -26,12 +25,12 @@ public class FilterControlledCreaturePermanent extends FilterControlledPermanent
         super(name);
 
         this.add(CardType.CREATURE.getPredicate());
-        if(subtype != null) {
+        if (subtype != null) {
             this.add(subtype.getPredicate());
         }
     }
 
-    public FilterControlledCreaturePermanent(final FilterControlledCreaturePermanent filter) {
+    protected FilterControlledCreaturePermanent(final FilterControlledCreaturePermanent filter) {
         super(filter);
     }
 

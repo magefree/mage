@@ -65,7 +65,7 @@ class WardOfPietyPreventDamageTargetEffect extends RedirectionEffect {
         staticText = "The next 1 damage that would be dealt to enchanted creature this turn is dealt to any target instead";
     }
 
-    public WardOfPietyPreventDamageTargetEffect(final WardOfPietyPreventDamageTargetEffect effect) {
+    private WardOfPietyPreventDamageTargetEffect(final WardOfPietyPreventDamageTargetEffect effect) {
         super(effect);
         this.redirectToObject = effect.redirectToObject;
     }
@@ -73,11 +73,6 @@ class WardOfPietyPreventDamageTargetEffect extends RedirectionEffect {
     @Override
     public WardOfPietyPreventDamageTargetEffect copy() {
         return new WardOfPietyPreventDamageTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

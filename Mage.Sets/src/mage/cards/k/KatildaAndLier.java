@@ -59,12 +59,12 @@ public final class KatildaAndLier extends CardImpl {
 
 class KatildaAndLierEffect extends ContinuousEffectImpl {
 
-    public KatildaAndLierEffect() {
+    KatildaAndLierEffect() {
         super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "target instant or sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost";
     }
 
-    public KatildaAndLierEffect(final KatildaAndLierEffect effect) {
+    private KatildaAndLierEffect(final KatildaAndLierEffect effect) {
         super(effect);
     }
 
@@ -75,7 +75,7 @@ class KatildaAndLierEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             FlashbackAbility ability = new FlashbackAbility(card, card.getManaCost());
             ability.setSourceId(card.getId());

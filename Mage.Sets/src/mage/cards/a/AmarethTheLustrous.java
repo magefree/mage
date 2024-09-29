@@ -40,7 +40,7 @@ public final class AmarethTheLustrous extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another permanent enters the battlefield under your control, look at the top card of your library. If it shares a card type with that permanent, you may reveal that card and put it into your hand.
+        // Whenever another permanent you control enters, look at the top card of your library. If it shares a card type with that permanent, you may reveal that card and put it into your hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AmarethTheLustrousEffect(), filter));
     }
 

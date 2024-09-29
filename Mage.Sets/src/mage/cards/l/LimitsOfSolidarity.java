@@ -28,7 +28,7 @@ public final class LimitsOfSolidarity extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new GainControlTargetEffect(Duration.EndOfTurn));
         Effect effect = new UntapTargetEffect();
-        effect.setText("Untap it");
+        effect.setText("Untap that creature");
         this.getSpellAbility().addEffect(effect);
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("It gains haste until end of turn");

@@ -17,7 +17,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.MyrToken;
 
 import java.util.UUID;
@@ -28,7 +28,7 @@ import java.util.UUID;
 public final class UrtetRemnantOfMemnarch extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("a Myr spell");
-    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent(SubType.MYR);
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.MYR);
 
     static {
         filter.add(SubType.MYR.getPredicate());

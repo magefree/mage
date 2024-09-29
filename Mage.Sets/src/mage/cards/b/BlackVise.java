@@ -48,7 +48,7 @@ class BlackViseTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("At the beginning of the chosen player's upkeep, ");
     }
 
-    public BlackViseTriggeredAbility(final BlackViseTriggeredAbility ability) {
+    private BlackViseTriggeredAbility(final BlackViseTriggeredAbility ability) {
         super(ability);
     }
 
@@ -70,12 +70,12 @@ class BlackViseTriggeredAbility extends TriggeredAbilityImpl {
 
 class BlackViseEffect extends OneShotEffect {
 
-    public BlackViseEffect() {
+    BlackViseEffect() {
         super(Outcome.Detriment);
         this.staticText = "{this} deals X damage to that player, where X is the number of cards in their hand minus 4";
     }
 
-    public BlackViseEffect(final BlackViseEffect effect) {
+    private BlackViseEffect(final BlackViseEffect effect) {
         super(effect);
     }
 

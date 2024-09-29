@@ -27,6 +27,7 @@ public abstract class ExpansionSet implements Serializable {
     public static final CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true);
     public static final CardGraphicInfo FULL_ART_BFZ_VARIOUS = new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true);
     public static final CardGraphicInfo FULL_ART_ZEN_VARIOUS = new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true);
+    public static final CardGraphicInfo FULL_ART_UST_VARIOUS = new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true);
 
     public static class SetCardInfo implements Serializable {
 
@@ -87,7 +88,7 @@ public abstract class ExpansionSet implements Serializable {
         }
     }
 
-    private static enum ExpansionSetComparator implements Comparator<ExpansionSet> {
+    private enum ExpansionSetComparator implements Comparator<ExpansionSet> {
         instance;
 
         @Override
@@ -112,6 +113,7 @@ public abstract class ExpansionSet implements Serializable {
     protected boolean hasBasicLands = true;
 
     protected String blockName; // used to group sets in some GUI dialogs like choose set dialog
+    protected boolean rotationSet = false; // used to determine if a set is a standard rotation
     protected boolean hasBoosters = false;
     protected int numBoosterSpecial;
 
@@ -149,7 +151,7 @@ public abstract class ExpansionSet implements Serializable {
     protected Map<String, List<CardInfo>> savedReprints = null;
     protected final Map<String, CardInfo> inBoosterMap = new HashMap<>();
 
-    public ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
+    protected ExpansionSet(String name, String code, Date releaseDate, SetType setType) {
         this.name = name;
         this.code = code;
         this.releaseDate = releaseDate;
@@ -231,7 +233,7 @@ public abstract class ExpansionSet implements Serializable {
         }
 
         CardInfo cardInfo = cards.remove(RandomUtil.nextInt(cards.size()));
-        Card card = cardInfo.getCard();
+        Card card = cardInfo.createCard();
         if (card == null) {
             // card with error
             return;
@@ -272,7 +274,7 @@ public abstract class ExpansionSet implements Serializable {
                 .makeBooster()
                 .stream()
                 .map(inBoosterMap::get)
-                .map(CardInfo::getCard)
+                .map(CardInfo::createCard)
                 .collect(Collectors.toList());
     }
 
@@ -504,6 +506,10 @@ public abstract class ExpansionSet implements Serializable {
         return hasBasicLands;
     }
 
+    public boolean isRotationSet() {
+        return rotationSet;
+    }
+
     /**
      * Keep only unique cards for booster generation and card ratio calculation
      *
@@ -568,7 +574,7 @@ public abstract class ExpansionSet implements Serializable {
         booster.forEach(card -> {
             List<CardInfo> reprints = this.savedReprints.getOrDefault(card.getName(), null);
             if (reprints != null && reprints.size() > 1) {
-                Card newCard = reprints.get(RandomUtil.nextInt(reprints.size())).getCard();
+                Card newCard = reprints.get(RandomUtil.nextInt(reprints.size())).createCard();
                 if (newCard != null) {
                     finalBooster.add(newCard);
                     return;
@@ -672,6 +678,15 @@ public abstract class ExpansionSet implements Serializable {
 
     public int getNumBoosterDoubleFaced() {
         return numBoosterDoubleFaced;
+    }
+
+    protected static void addCardInfoToList(List<CardInfo> boosterList, String name, String expansion, String cardNumber) {
+        CardInfo cardInfo = CardRepository.instance.findCardWithPreferredSetAndNumber(name, expansion, cardNumber);
+        if (cardInfo != null && cardInfo.getSetCode().equals(expansion) && cardInfo.getCardNumber().equals(cardNumber)) {
+            boosterList.add(cardInfo);
+        } else {
+            throw new IllegalStateException("CardInfo not found: " + name + " (" + expansion + ":" + cardNumber + ")");
+        }
     }
 
 }

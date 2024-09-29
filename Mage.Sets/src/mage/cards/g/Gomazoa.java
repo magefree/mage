@@ -60,12 +60,12 @@ public final class Gomazoa extends CardImpl {
 
 class GomazoaEffect extends OneShotEffect {
 
-    public GomazoaEffect() {
+    GomazoaEffect() {
         super(Outcome.Neutral);
         this.staticText = "Put {this} and each creature it's blocking on top of their owners' libraries, then those players shuffle";
     }
 
-    public GomazoaEffect(final GomazoaEffect effect) {
+    private GomazoaEffect(final GomazoaEffect effect) {
         super(effect);
     }
 

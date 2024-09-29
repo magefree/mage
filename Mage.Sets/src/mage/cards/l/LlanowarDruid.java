@@ -64,7 +64,7 @@ class LlanowarDruidEffect extends OneShotEffect {
         staticText = "Untap all Forests";
     }
 
-    public LlanowarDruidEffect(final LlanowarDruidEffect effect) {
+    private LlanowarDruidEffect(final LlanowarDruidEffect effect) {
         super(effect);
     }
 

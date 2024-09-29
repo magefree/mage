@@ -51,7 +51,7 @@ class TakenumaBleederEffect extends OneShotEffect {
         this.staticText = "you lose 1 life if you don't control a Demon";
     }
     
-    public TakenumaBleederEffect(final TakenumaBleederEffect effect) {
+    private TakenumaBleederEffect(final TakenumaBleederEffect effect) {
         super(effect);
     }
     

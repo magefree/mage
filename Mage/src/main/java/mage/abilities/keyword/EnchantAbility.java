@@ -6,7 +6,6 @@ import mage.abilities.StaticAbility;
 import mage.target.Target;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  * @author North
  */
@@ -19,7 +18,7 @@ public class EnchantAbility extends StaticAbility {
         this.targetName = target.getTargetName();
     }
 
-    public EnchantAbility(final EnchantAbility ability) {
+    protected EnchantAbility(final EnchantAbility ability) {
         super(ability);
         this.targetName = ability.targetName;
     }

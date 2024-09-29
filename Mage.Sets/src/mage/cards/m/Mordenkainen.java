@@ -52,7 +52,7 @@ public final class Mordenkainen extends CardImpl {
 
 class MordenkainenDrawEffect extends OneShotEffect {
 
-    public MordenkainenDrawEffect() {
+    MordenkainenDrawEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Draw two cards, then put a card from your hand on the bottom of your library";
     }
@@ -86,7 +86,7 @@ class MordenkainenDrawEffect extends OneShotEffect {
 
 class MordenkainenExchangeEffect extends OneShotEffect {
 
-    public MordenkainenExchangeEffect() {
+    MordenkainenExchangeEffect() {
         super(Outcome.Benefit);
         this.staticText = "Exchange your hand and library, then shuffle";
     }

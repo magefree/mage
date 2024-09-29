@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPlayer;
 import mage.filter.predicate.other.AnotherTargetPredicate;
-import mage.game.permanent.token.RobotToken;
+import mage.game.permanent.token.RobotCantBlockToken;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.SecondTargetPointer;
 
@@ -48,7 +48,7 @@ public final class CyberneticaDatasmith extends CardImpl {
         // Field Reprogramming -- {U}, {T}: Target player draws a card. Another target player creates a 4/4 colorless Robot artifact creature token with "This creature can't block."
         Ability ability = new SimpleActivatedAbility(new DrawCardTargetEffect(1), new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new CreateTokenTargetEffect(new RobotToken())
+        ability.addEffect(new CreateTokenTargetEffect(new RobotCantBlockToken())
                 .setTargetPointer(new SecondTargetPointer())
                 .concatBy("another"));
         ability.addTarget(new TargetPlayer()

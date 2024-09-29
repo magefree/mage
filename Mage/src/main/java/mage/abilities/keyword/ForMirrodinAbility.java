@@ -14,13 +14,13 @@ public class ForMirrodinAbility extends EntersBattlefieldTriggeredAbility {
         super(new CreateTokenAttachSourceEffect(new RebelRedToken()));
     }
 
-    public ForMirrodinAbility(final ForMirrodinAbility ability) {
+    protected ForMirrodinAbility(final ForMirrodinAbility ability) {
         super(ability);
     }
 
     @Override
     public String getRule() {
-        return "For Mirrodin! <i>(When this Equipment enters the battlefield, " +
+        return "For Mirrodin! <i>(When this Equipment enters, " +
                 "create a 2/2 red Rebel creature token, then attach this to it.)</i>";
     }
 

@@ -64,7 +64,7 @@ enum UmoriCondition implements CompanionCondition {
     }
 
     @Override
-    public boolean isLegal(Set<Card> deck, int startingHandSize) {
+    public boolean isLegal(Set<Card> deck, int minimumDeckSize) {
         Set<CardType> cardTypes = new HashSet<>();
         for (Card card : deck) {
             // Lands are fine.

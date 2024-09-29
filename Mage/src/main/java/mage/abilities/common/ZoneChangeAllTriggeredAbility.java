@@ -28,14 +28,14 @@ public class ZoneChangeAllTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         if (fromZone == Zone.BATTLEFIELD) {
             setLeavesTheBattlefieldTrigger(true);
-        }        
+        }
         this.fromZone = fromZone;
         this.toZone = toZone;
         this.filter = filter;
         setTriggerPhrase(triggerPhrase);
     }
 
-    public ZoneChangeAllTriggeredAbility(final ZoneChangeAllTriggeredAbility ability) {
+    protected ZoneChangeAllTriggeredAbility(final ZoneChangeAllTriggeredAbility ability) {
         super(ability);
         this.fromZone = ability.fromZone;
         this.toZone = ability.toZone;

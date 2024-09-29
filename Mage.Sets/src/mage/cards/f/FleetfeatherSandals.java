@@ -1,4 +1,3 @@
-
 package mage.cards.f;
 
 import java.util.UUID;
@@ -24,9 +23,8 @@ public final class FleetfeatherSandals extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has flying and haste.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileInGraveyard));
-        ability.addEffect(new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA, Duration.WhileInGraveyard));
+        Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.EQUIPMENT));
+        ability.addEffect(new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT).setText("and haste"));
         this.addAbility(ability);
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));

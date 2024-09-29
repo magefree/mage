@@ -48,12 +48,12 @@ public final class SeverTheBloodline extends CardImpl {
 
 class SeverTheBloodlineEffect extends OneShotEffect {
 
-    public SeverTheBloodlineEffect() {
+    SeverTheBloodlineEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile target creature and all other creatures with the same name as that creature";
     }
 
-    public SeverTheBloodlineEffect(final SeverTheBloodlineEffect effect) {
+    private SeverTheBloodlineEffect(final SeverTheBloodlineEffect effect) {
         super(effect);
     }
 
@@ -65,7 +65,7 @@ class SeverTheBloodlineEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller != null && targetPermanent != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             if (CardUtil.haveEmptyName(targetPermanent)) {

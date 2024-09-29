@@ -72,7 +72,7 @@ class TapAllEffect extends OneShotEffect {
         staticText = "Tap those creatures";
     }
 
-    public TapAllEffect(final TapAllEffect effect) {
+    private TapAllEffect(final TapAllEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }

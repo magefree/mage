@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continuous.LookAtTopCardOfLibraryAnyTimeEffect;
-import mage.abilities.effects.common.continuous.PlayTheTopCardEffect;
+import mage.abilities.effects.common.continuous.PlayFromTopOfLibraryEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,6 @@ import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -48,7 +47,7 @@ public final class VivienMonstersAdvocate extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may cast creature spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(new PlayTheTopCardEffect(TargetController.YOU, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter)));
 
         // +1: Create a 3/3 green Beast creature token. Put your choice of a vigilance 
         // counter, a reach counter, or a trample counter on it.
@@ -150,13 +149,13 @@ class VivienMonstersAdvocateTriggeredAbility extends DelayedTriggeredAbility {
     }
 
     @Override
-    public DelayedTriggeredAbility copy() {
+    public VivienMonstersAdvocateTriggeredAbility copy() {
         return new VivienMonstersAdvocateTriggeredAbility(this);
     }
 
     @Override
     public String getRule() {
-        return "When you cast your next creature spell this turn, "
+        return "When you next cast a creature spell this turn, "
                 + "search your library for a creature card with lesser mana value, "
                 + "put it onto the battlefield, then shuffle.";
     }

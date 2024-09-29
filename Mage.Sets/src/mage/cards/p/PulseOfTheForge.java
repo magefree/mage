@@ -47,7 +47,7 @@ class PulseOfTheForgeReturnToHandEffect extends OneShotEffect {
         this.staticText = "Then if that player or that planeswalker's controller has more life than you, return {this} to its owner's hand";
     }
 
-    PulseOfTheForgeReturnToHandEffect(final PulseOfTheForgeReturnToHandEffect effect) {
+    private PulseOfTheForgeReturnToHandEffect(final PulseOfTheForgeReturnToHandEffect effect) {
         super(effect);
     }
 

@@ -75,7 +75,7 @@ class CocoonEffect extends OneShotEffect {
         staticText = "remove a pupa counter from {this}. If you can't, sacrifice it, put a +1/+1 counter on enchanted creature, and that creature gains flying";
     }
 
-    CocoonEffect(final CocoonEffect effect) {
+    private CocoonEffect(final CocoonEffect effect) {
         super(effect);
     }
 

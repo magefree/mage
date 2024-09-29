@@ -11,10 +11,13 @@ import mage.client.dialog.PreferencesDialog;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
 import mage.interfaces.plugin.ThemePlugin;
+import mage.util.RandomUtil;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
 import net.xeoh.plugins.base.annotations.events.PluginLoaded;
 import net.xeoh.plugins.base.annotations.meta.Author;
 import org.apache.log4j.Logger;
+
+// TODO: delete as un-used and moved background images in main code
 
 @PluginImplementation
 @Author(name = "nantuko")
@@ -81,7 +84,11 @@ public class ThemePluginImpl implements ThemePlugin {
             if (ui.containsKey("gamePanel") && ui.containsKey("jLayeredPane")) {
                 ImagePanel bgPanel = new ImagePanel(backgroundImage, ImagePanelStyle.TILED);
 
-                unsetOpaque(ui.get("jSplitPane1"));
+                // TODO: research - is all components used? And why it make transparent?
+                unsetOpaque(ui.get("splitChatAndLogs"));
+                unsetOpaque(ui.get("splitHandAndStack"));
+                unsetOpaque(ui.get("splitBattlefieldAndChats"));
+                unsetOpaque(ui.get("splitGameAndBigCard"));
                 unsetOpaque(ui.get("pnlBattlefield"));
                 unsetOpaque(ui.get("pnlHelperHandButtonsStackArea"));
                 unsetOpaque(ui.get("hand"));
@@ -111,7 +118,7 @@ public class ThemePluginImpl implements ThemePlugin {
     private BufferedImage loadbuffer_random() throws IOException {
         BufferedImage res;
         if (loadimages()) {
-            int it = (int) Math.abs(Math.random() * (flist.getItemCount()));
+            int it = (int) Math.abs(RandomUtil.nextDouble() * (flist.getItemCount()));
             String filename = BackgroundDir + flist.getItem(it);
             res = ImageIO.read(new File(filename));
             return res;

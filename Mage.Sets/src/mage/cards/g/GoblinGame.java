@@ -37,7 +37,7 @@ public final class GoblinGame extends CardImpl {
 
 class GoblinGameEffect extends OneShotEffect {
 
-    public GoblinGameEffect() {
+    GoblinGameEffect() {
         super(Outcome.Detriment);
         this.staticText = "Each player hides at least one item, then all players reveal them simultaneously. " +
                 "Each player loses life equal to the number of items they revealed. " +
@@ -45,7 +45,7 @@ class GoblinGameEffect extends OneShotEffect {
                 "If two or more players are tied for fewest, each loses half their life, rounded up.";
     }
 
-    public GoblinGameEffect(final GoblinGameEffect effect) {
+    private GoblinGameEffect(final GoblinGameEffect effect) {
         super(effect);
     }
 

@@ -67,12 +67,12 @@ public final class WritOfPassage extends CardImpl {
 
 class WritOfPassageAttachedEffect extends RestrictionEffect {
 
-    public WritOfPassageAttachedEffect(AttachmentType attachmentType) {
+    WritOfPassageAttachedEffect(AttachmentType attachmentType) {
         super(Duration.EndOfTurn);
         this.staticText = attachmentType.verb() + " creature can't be blocked";
     }
 
-    public WritOfPassageAttachedEffect(WritOfPassageAttachedEffect effect) {
+    private WritOfPassageAttachedEffect(final WritOfPassageAttachedEffect effect) {
         super(effect);
     }
 

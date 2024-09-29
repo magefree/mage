@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import java.util.UUID;
@@ -6,7 +5,6 @@ import mage.MageInt;
 import mage.abilities.costs.common.ExertSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
-import mage.abilities.effects.mana.ManaEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -24,7 +22,7 @@ public final class OasisRitualist extends CardImpl {
     public OasisRitualist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}");
 
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.DRUID);
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
@@ -33,7 +31,7 @@ public final class OasisRitualist extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
         // {T}, Exert Oasis Ritualist: Add two mana of any one color to your manna pool.
         SimpleManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD,
-                (ManaEffect) new AddManaOfAnyColorEffect(2).setText("Add two mana of any one color to your manna pool. <i> (An exerted creature won't untap during your next untap step.)</i>"),
+                new AddManaOfAnyColorEffect(2).setText("Add two mana of any one color. <i>(An exerted creature won't untap during your next untap step.)</i>"),
                  new TapSourceCost());
         ability.addCost(new ExertSourceCost());
         this.addAbility(ability);

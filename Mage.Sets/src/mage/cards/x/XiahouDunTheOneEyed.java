@@ -26,7 +26,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public final class XiahouDunTheOneEyed extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("a black card");
+    private static final FilterCard filter = new FilterCard("black card");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));

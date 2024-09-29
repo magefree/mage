@@ -32,7 +32,7 @@ public final class TheBattleOfBywater extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyAllEffect(filter));
         this.getSpellAbility().addEffect(new CreateTokenEffect(
                 new FoodToken(), CreaturesYouControlCount.instance
-        ).concatBy("Then"));
+        ).setText("Then create a Food token for each creature you control"));
     }
 
     private TheBattleOfBywater(final TheBattleOfBywater card) {

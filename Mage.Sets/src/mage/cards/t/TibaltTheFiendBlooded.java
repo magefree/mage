@@ -5,16 +5,12 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.common.CardsInTargetHandCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
-import mage.abilities.effects.common.continuous.GainControlAllEffect;
+import mage.abilities.effects.common.continuous.GainControlAllUntapGainHasteEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
-import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
@@ -47,14 +43,7 @@ public final class TibaltTheFiendBlooded extends CardImpl {
         this.addAbility(ability);
 
         // -6: Gain control of all creatures until end of turn. Untap them. They gain haste until end of turn.
-        ability = new LoyaltyAbility(new GainControlAllEffect(Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES), -6);
-        ability.addEffect(new UntapAllEffect(StaticFilters.FILTER_PERMANENT_CREATURES).setText("untap them"));
-        ability.addEffect(new GainAbilityAllEffect(
-                HasteAbility.getInstance(),
-                Duration.EndOfTurn,
-                StaticFilters.FILTER_PERMANENT_CREATURES,
-                "they gain haste until end of turn"
-        ));
+        ability = new LoyaltyAbility(new GainControlAllUntapGainHasteEffect(StaticFilters.FILTER_PERMANENT_CREATURES), -6);
         this.addAbility(ability);
     }
 

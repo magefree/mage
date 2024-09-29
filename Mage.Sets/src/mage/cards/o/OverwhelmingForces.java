@@ -41,12 +41,12 @@ public final class OverwhelmingForces extends CardImpl {
 
 class OverwhelmingForcesEffect extends OneShotEffect {
 
-    public OverwhelmingForcesEffect() {
+    OverwhelmingForcesEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "Destroy all creatures target opponent controls. Draw a card for each creature destroyed this way";
     }
 
-    public OverwhelmingForcesEffect(final OverwhelmingForcesEffect effect) {
+    private OverwhelmingForcesEffect(final OverwhelmingForcesEffect effect) {
         super(effect);
     }
 
@@ -66,6 +66,7 @@ class OverwhelmingForcesEffect extends OneShotEffect {
                 }
             }
             if (destroyedCreature > 0) {
+                game.processAction();
                 new DrawCardSourceControllerEffect(destroyedCreature).apply(game, source);
             }
             return true;

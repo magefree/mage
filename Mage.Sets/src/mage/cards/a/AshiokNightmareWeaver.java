@@ -2,8 +2,6 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.costs.VariableCostImpl;
-import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
 import mage.cards.*;
@@ -59,12 +57,12 @@ public final class AshiokNightmareWeaver extends CardImpl {
 
 class AshiokNightmareWeaverExileEffect extends OneShotEffect {
 
-    public AshiokNightmareWeaverExileEffect() {
+    AshiokNightmareWeaverExileEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile the top three cards of target opponent's library";
     }
 
-    public AshiokNightmareWeaverExileEffect(final AshiokNightmareWeaverExileEffect effect) {
+    private AshiokNightmareWeaverExileEffect(final AshiokNightmareWeaverExileEffect effect) {
         super(effect);
     }
 
@@ -90,12 +88,12 @@ class AshiokNightmareWeaverExileEffect extends OneShotEffect {
 
 class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
 
-    public AshiokNightmareWeaverPutIntoPlayEffect() {
+    AshiokNightmareWeaverPutIntoPlayEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Put a creature card with mana value X exiled with {this} onto the battlefield under your control. That creature is a Nightmare in addition to its other types";
     }
 
-    public AshiokNightmareWeaverPutIntoPlayEffect(final AshiokNightmareWeaverPutIntoPlayEffect effect) {
+    private AshiokNightmareWeaverPutIntoPlayEffect(final AshiokNightmareWeaverPutIntoPlayEffect effect) {
         super(effect);
     }
 
@@ -111,9 +109,7 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
             return false;
         }
 
-        int cmc = CardUtil.castStream(
-                source.getCosts().stream(), PayVariableLoyaltyCost.class
-        ).mapToInt(VariableCostImpl::getAmount).sum();
+        int cmc = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         FilterCard filter = new FilterCreatureCard("creature card with mana value " + cmc);
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, cmc));
@@ -141,12 +137,12 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect {
 
 class AshiokNightmareWeaverExileAllEffect extends OneShotEffect {
 
-    public AshiokNightmareWeaverExileAllEffect() {
+    AshiokNightmareWeaverExileAllEffect() {
         super(Outcome.Exile);
         this.staticText = "Exile all cards from all opponents' hands and graveyards";
     }
 
-    public AshiokNightmareWeaverExileAllEffect(final AshiokNightmareWeaverExileAllEffect effect) {
+    private AshiokNightmareWeaverExileAllEffect(final AshiokNightmareWeaverExileAllEffect effect) {
         super(effect);
     }
 

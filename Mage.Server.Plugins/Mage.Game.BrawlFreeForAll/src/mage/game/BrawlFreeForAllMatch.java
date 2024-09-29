@@ -17,7 +17,12 @@ public class BrawlFreeForAllMatch extends MatchImpl {
     public void startGame() throws GameException {
         int startLife = 30;
         Mulligan mulligan = options.getMulliganType().getMulligan(options.getFreeMulligans());
-        BrawlFreeForAll game = new BrawlFreeForAll(options.getAttackOption(), options.getRange(), mulligan, startLife);
+        startLife = options.isCustomStartLifeEnabled() ? options.getCustomStartLife() : startLife;
+        int startHandSize = options.isCustomStartHandSizeEnabled() ? options.getCustomStartHandSize() : 7;
+        BrawlFreeForAll game = new BrawlFreeForAll(
+                options.getAttackOption(), options.getRange(),
+                mulligan, startLife, startHandSize
+        );
         game.setStartMessage(this.createGameStartMessage());
         game.setCheckCommanderDamage(false);
         initGame(game);

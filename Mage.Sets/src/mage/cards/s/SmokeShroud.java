@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class SmokeShroud extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.NINJA, "");
+    private static final FilterPermanent filter = new FilterPermanent(SubType.NINJA, "a Ninja");
 
     public SmokeShroud(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
@@ -48,12 +48,11 @@ public final class SmokeShroud extends CardImpl {
         ).setText("and has flying"));
         this.addAbility(ability);
 
-        // When a Ninja enters the battlefield under your control, you may return Smoke Shroud from your graveyard to the battlefield attached to that creature.
+        // When a Ninja you control enters, you may return Smoke Shroud from your graveyard to the battlefield attached to that creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.GRAVEYARD, new SmokeShroudEffect(), filter, true,
-                SetTargetPointer.PERMANENT, "When a Ninja enters the battlefield under your control, " +
-                "you may return {this} from your graveyard to the battlefield attached to that creature."
-        ));
+                SetTargetPointer.PERMANENT
+        ).setTriggerPhrase("When a Ninja you control enters, "));
     }
 
     private SmokeShroud(final SmokeShroud card) {
@@ -70,6 +69,7 @@ class SmokeShroudEffect extends OneShotEffect {
 
     SmokeShroudEffect() {
         super(Outcome.Benefit);
+        staticText = "return {this} from your graveyard to the battlefield attached to that creature";
     }
 
     private SmokeShroudEffect(final SmokeShroudEffect effect) {
@@ -83,7 +83,7 @@ class SmokeShroudEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card sourceCard = (Card) source.getSourceObjectIfItStillExists(game);
+        Card sourceCard = source.getSourceCardIfItStillExists(game);
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         if (sourceCard != null && permanent != null && controller != null) {
@@ -96,4 +96,3 @@ class SmokeShroudEffect extends OneShotEffect {
         return false;
     }
 }
-

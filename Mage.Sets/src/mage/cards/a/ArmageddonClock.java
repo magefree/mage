@@ -35,7 +35,7 @@ public final class ArmageddonClock extends CardImpl {
         // {4}: Remove a doom counter from Armageddon Clock. Any player may activate this ability but only during any upkeep step.
         ActivatedAbilityImpl ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
                 new RemoveCounterSourceEffect(CounterType.DOOM.createInstance()), new ManaCostsImpl<>("{4}"), new IsStepCondition(PhaseStep.UPKEEP, false),
-                "Remove a doom counter from {this}. Any player may activate this ability but only during any upkeep step");
+                "{4}: Remove a doom counter from {this}. Any player may activate this ability but only during any upkeep step.");
 
         ability.setMayActivate(TargetController.ANY);
         this.addAbility(ability);

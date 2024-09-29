@@ -19,7 +19,7 @@ public final class IzoniInsectToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public IzoniInsectToken(final IzoniInsectToken token) {
+    private IzoniInsectToken(final IzoniInsectToken token) {
         super(token);
     }
 

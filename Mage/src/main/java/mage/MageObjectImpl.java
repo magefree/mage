@@ -36,6 +36,8 @@ public abstract class MageObjectImpl implements MageObject {
 
     private String expansionSetCode = "";
     private String cardNumber = "";
+    private boolean usesVariousArt = false;
+    private String imageFileName = "";
     private int imageNumber = 0;
 
     protected List<SuperType> supertype = new ArrayList<>();
@@ -67,7 +69,7 @@ public abstract class MageObjectImpl implements MageObject {
         abilities = new AbilitiesImpl<>();
     }
 
-    public MageObjectImpl(final MageObjectImpl object) {
+    protected MageObjectImpl(final MageObjectImpl object) {
         objectId = object.objectId;
         name = object.name;
         manaCost = object.manaCost.copy();
@@ -76,7 +78,9 @@ public abstract class MageObjectImpl implements MageObject {
         frameColor = object.frameColor.copy();
         frameStyle = object.frameStyle;
         expansionSetCode = object.expansionSetCode;
+        usesVariousArt = object.usesVariousArt;
         cardNumber = object.cardNumber;
+        imageFileName = object.imageFileName;
         imageNumber = object.imageNumber;
         power = object.power.copy();
         toughness = object.toughness.copy();
@@ -257,6 +261,16 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
+    public boolean getUsesVariousArt() {
+        return usesVariousArt;
+    }
+
+    @Override
+    public void setUsesVariousArt(boolean usesVariousArt) {
+        this.usesVariousArt = usesVariousArt;
+    }
+
+    @Override
     public String getCardNumber() {
         return cardNumber;
     }
@@ -264,6 +278,16 @@ public abstract class MageObjectImpl implements MageObject {
     @Override
     public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
+    }
+
+    @Override
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    @Override
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
     }
 
     @Override
@@ -282,6 +306,11 @@ public abstract class MageObjectImpl implements MageObject {
     }
 
     @Override
+    public void setManaCost(ManaCosts<ManaCost> costs) {
+        this.manaCost = costs.copy();
+    }
+
+    @Override
     public int getManaValue() {
         if (manaCost != null) {
             return manaCost.manaValue();
@@ -294,10 +323,9 @@ public abstract class MageObjectImpl implements MageObject {
         if (value == null) {
             return false;
         }
-        if (value.getSubTypeSet() == SubTypeSet.CreatureType && isAllCreatureTypes(game)) {
-            return true;
-        }
-        return getSubtype(game).contains(value);
+        return value.getSubTypeSet() == SubTypeSet.CreatureType && isAllCreatureTypes(game)
+                || value.getSubTypeSet() == SubTypeSet.NonBasicLandType && isAllNonbasicLandTypes(game)
+                || getSubtype(game).contains(value);
     }
 
     @Override
@@ -338,12 +366,27 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
-        this.getSubtype().setIsAllCreatureTypes(value && (this.isTribal() || this.isCreature()));
+        this.getSubtype().setIsAllCreatureTypes(value && (this.isKindred() || this.isCreature()));
     }
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
-        this.getSubtype(game).setIsAllCreatureTypes(value && (this.isTribal(game) || this.isCreature(game)));
+        this.getSubtype(game).setIsAllCreatureTypes(value && (this.isKindred(game) || this.isCreature(game)));
+    }
+
+    @Override
+    public boolean isAllNonbasicLandTypes(Game game) {
+        return this.getSubtype(game).isAllNonbasicLandTypes();
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(boolean value) {
+        this.getSubtype().setIsAllNonbasicLandTypes(value && this.isLand());
+    }
+
+    @Override
+    public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+        this.getSubtype(game).setIsAllNonbasicLandTypes(value && this.isLand(game));
     }
 
     /**

@@ -1,17 +1,14 @@
 package mage.cards.b;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.discard.DiscardHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
@@ -26,10 +23,10 @@ public final class BrinkOfMadness extends CardImpl {
 
         // At the beginning of your upkeep, if you have no cards in hand, sacrifice Brink of Madness and target opponent discards their hand.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
-        ability.addEffect(new BrinkOfMadnessEffect());
+        ability.addEffect(new DiscardHandTargetEffect());
         ability.addTarget(new TargetOpponent());
-        CardsInHandCondition contition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, contition, "At the beginning of your upkeep, if you have no cards in hand, sacrifice {this} and target opponent discards their hand."));
+        CardsInHandCondition condition = new CardsInHandCondition(ComparisonType.EQUAL_TO, 0);
+        this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition, "At the beginning of your upkeep, if you have no cards in hand, sacrifice {this} and target opponent discards their hand."));
 
     }
 
@@ -42,26 +39,4 @@ public final class BrinkOfMadness extends CardImpl {
         return new BrinkOfMadness(this);
     }
 
-    static class BrinkOfMadnessEffect extends OneShotEffect {
-
-        private BrinkOfMadnessEffect() {
-            super(Outcome.Benefit);
-            this.staticText = "Target player discards their hand";
-        }
-
-        private BrinkOfMadnessEffect(final BrinkOfMadnessEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public BrinkOfMadnessEffect copy() {
-            return new BrinkOfMadnessEffect(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player player = game.getPlayer(source.getFirstTarget());
-            return player != null && !player.discard(player.getHand(), false, source, game).isEmpty();
-        }
-    }
 }

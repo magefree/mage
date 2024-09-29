@@ -13,7 +13,7 @@ public class DeckCardLayout implements Copyable<DeckCardLayout> {
     private final List<List<List<DeckCardInfo>>> cards;
     private final String settings;
 
-    public DeckCardLayout(final DeckCardLayout layout) {
+    protected DeckCardLayout(final DeckCardLayout layout) {
         this.cards = new ArrayList<>();
         for (int i1 = 0; i1 < layout.cards.size(); i1++) {
             List<List<DeckCardInfo>> list1 = new ArrayList<>();

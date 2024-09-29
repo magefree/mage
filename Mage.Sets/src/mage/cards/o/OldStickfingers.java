@@ -13,6 +13,7 @@ import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -49,12 +50,12 @@ public final class OldStickfingers extends CardImpl {
 
 class OldStickfingersEffect extends OneShotEffect {
 
-    public OldStickfingersEffect() {
+    OldStickfingersEffect() {
         super(Outcome.Discard);
         this.staticText = "reveal cards from the top of your library until you reveal X creature cards. Put all creature cards revealed this way into your graveyard, then put the rest on the bottom of your library in a random order";
     }
 
-    public OldStickfingersEffect(final OldStickfingersEffect effect) {
+    private OldStickfingersEffect(final OldStickfingersEffect effect) {
         super(effect);
     }
 
@@ -69,7 +70,7 @@ class OldStickfingersEffect extends OneShotEffect {
         if (!(obj instanceof SpellAbility)) {
             return false;
         }
-        int xValue = ((SpellAbility) obj).getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ((SpellAbility) obj), "X", 0);
         if (xValue < 1) {
             return false;
         }

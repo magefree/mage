@@ -1,26 +1,31 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetAnyTargetAmount;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class RalCallerOfStorms extends CardImpl {
 
     public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature your opponents control");
+
+    static {
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
+    }
 
     public RalCallerOfStorms(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{4}{U}{R}");

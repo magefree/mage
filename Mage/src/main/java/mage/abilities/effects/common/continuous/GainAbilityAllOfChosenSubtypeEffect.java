@@ -8,7 +8,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class GainAbilityAllOfChosenSubtypeEffect extends GainAbilityAllEffect {
@@ -19,7 +18,7 @@ public class GainAbilityAllOfChosenSubtypeEffect extends GainAbilityAllEffect {
         super(ability, duration, filter);
     }
 
-    public GainAbilityAllOfChosenSubtypeEffect(final GainAbilityAllOfChosenSubtypeEffect effect) {
+    protected GainAbilityAllOfChosenSubtypeEffect(final GainAbilityAllOfChosenSubtypeEffect effect) {
         super(effect);
         this.subtype = effect.subtype;
     }
@@ -39,7 +38,7 @@ public class GainAbilityAllOfChosenSubtypeEffect extends GainAbilityAllEffect {
 
     @Override
     protected void setRuntimeData(Ability source, Game game) {
-      subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
+        subtype = (SubType) game.getState().getValue(source.getSourceId() + "_type");
 
     }
 

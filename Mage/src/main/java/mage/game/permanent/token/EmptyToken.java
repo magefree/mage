@@ -18,7 +18,7 @@ public final class EmptyToken extends TokenImpl {
         }
     }
 
-    public EmptyToken(final EmptyToken token) {
+    private EmptyToken(final EmptyToken token) {
         super(token);
     }
 

@@ -110,11 +110,6 @@ class AvacynGuardianAngelPreventToCreaturePreventionEffect extends PreventionEff
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (!super.applies(event, source, game)
                 || event.getType() != GameEvent.EventType.DAMAGE_PERMANENT
@@ -173,11 +168,6 @@ class AvacynGuardianAngelPreventToPlayerPreventionEffect extends PreventionEffec
     private AvacynGuardianAngelPreventToPlayerPreventionEffect(AvacynGuardianAngelPreventToPlayerPreventionEffect effect) {
         super(effect);
         this.color = effect.color;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

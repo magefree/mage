@@ -27,7 +27,8 @@ public final class SlagFiend extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(new CardsInAllGraveyardsCount(new FilterArtifactCard("artifacts")))));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(
+                new CardsInAllGraveyardsCount(new FilterArtifactCard("artifact cards")))));
     }
 
     private SlagFiend(final SlagFiend card) {

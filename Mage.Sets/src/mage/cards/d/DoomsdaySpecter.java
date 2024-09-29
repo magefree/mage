@@ -1,4 +1,3 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
@@ -7,7 +6,7 @@ import mage.ObjectColor;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
-import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetEffect;
+import mage.abilities.effects.common.discard.LookTargetHandChooseDiscardEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -20,11 +19,10 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 /**
  *
  * @author LoneFox
-
  */
 public final class DoomsdaySpecter extends CardImpl {
 
-    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue or black creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue or black creature you control");
 
     static {
         filter.add(Predicates.or(new ColorPredicate(ObjectColor.BLUE), new ColorPredicate(ObjectColor.BLACK)));
@@ -41,7 +39,7 @@ public final class DoomsdaySpecter extends CardImpl {
         // When Doomsday Specter enters the battlefield, return a blue or black creature you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
         // Whenever Doomsday Specter deals combat damage to a player, look at that player's hand and choose a card from it. The player discards that card.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardCardYouChooseTargetEffect(), false, true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LookTargetHandChooseDiscardEffect(), false, true));
     }
 
     private DoomsdaySpecter(final DoomsdaySpecter card) {

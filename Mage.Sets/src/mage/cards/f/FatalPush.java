@@ -29,6 +29,7 @@ public final class FatalPush extends CardImpl {
         this.getSpellAbility().addEffect(new FatalPushEffect());
         this.getSpellAbility().addWatcher(new RevoltWatcher());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addHint(RevoltCondition.getHint());
     }
 
     private FatalPush(final FatalPush card) {
@@ -48,7 +49,7 @@ class FatalPushEffect extends OneShotEffect {
         this.staticText = "Destroy target creature if it has mana value 2 or less.<br><i>Revolt</i> &mdash; Destroy that creature if it has mana value 4 or less instead if a permanent you controlled left the battlefield this turn";
     }
 
-    FatalPushEffect(final FatalPushEffect effect) {
+    private FatalPushEffect(final FatalPushEffect effect) {
         super(effect);
     }
 

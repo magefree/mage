@@ -49,7 +49,7 @@ public final class AngelOfSuffering extends CardImpl {
 
 class AngelOfSufferingEffect extends ReplacementEffectImpl {
 
-    public AngelOfSufferingEffect() {
+    AngelOfSufferingEffect() {
         super(Duration.WhileOnBattlefield, Outcome.PreventDamage);
         this.staticText = "If damage would be dealt to you, prevent that damage and mill twice that many cards";
     }

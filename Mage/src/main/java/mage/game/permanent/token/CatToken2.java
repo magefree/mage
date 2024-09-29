@@ -20,7 +20,7 @@ public final class CatToken2 extends TokenImpl {
         addAbility(LifelinkAbility.getInstance());
     }
 
-    public CatToken2(final CatToken2 token) {
+    protected CatToken2(final CatToken2 token) {
         super(token);
     }
 

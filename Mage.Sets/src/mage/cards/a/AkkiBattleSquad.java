@@ -37,8 +37,8 @@ public final class AkkiBattleSquad extends CardImpl {
         // Whenever one or more modified creatures you control attack, untap all modified creatures you control. After this combat phase, there is an additional combat phase. This ability triggers only once each turn.
         Ability ability = new AttacksCreatureYouControlTriggeredAbility(
                 new UntapAllEffect(filter), false, filter
-        ).setTriggerPhrase("Whenever one or more modified creatures you control attack, ").setTriggersOnce(true);
-        ability.addEffect(new AdditionalCombatPhaseEffect());
+        ).setTriggerPhrase("Whenever one or more modified creatures you control attack, ").setTriggersLimitEachTurn(1);
+        ability.addEffect(new AdditionalCombatPhaseEffect().setText("After this combat phase, there is an additional combat phase"));
         this.addAbility(ability);
     }
 

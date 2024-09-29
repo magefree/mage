@@ -30,7 +30,7 @@ public final class VectorAsp extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(InfectAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{B}")));
     }
 
-    public VectorAsp (final VectorAsp card) {
+    private VectorAsp(final VectorAsp card) {
         super(card);
     }
 

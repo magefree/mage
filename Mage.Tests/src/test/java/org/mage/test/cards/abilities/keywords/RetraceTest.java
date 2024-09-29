@@ -30,7 +30,7 @@ public class RetraceTest extends CardTestPlayerBase {
 
         addCard(Zone.HAND, playerB, "Silvercoat Lion", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raven's Crime", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raven's Crime with retrace", playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -82,7 +82,7 @@ public class RetraceTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Thalia, Guardian of Thraben", 1);
         addCard(Zone.HAND, playerB, "Silvercoat Lion", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raven's Crime", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Raven's Crime with retrace", playerB);
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -110,7 +110,7 @@ public class RetraceTest extends CardTestPlayerBase {
 
         // Create a 1/1 black and green Worm creature token for each land card in your graveyard.
         // Retrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Worm Harvest");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Worm Harvest with retrace");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

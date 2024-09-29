@@ -17,14 +17,13 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
- * @author rscoates
+ * @author rscoates, LevelX2, xenohedron
  */
 public final class CorrosiveOoze extends CardImpl {
 
@@ -43,7 +42,8 @@ public final class CorrosiveOoze extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Corrosive Ooze blocks or becomes blocked by an equipped creature, destroy all Equipment attached to that creature at end of combat.
-        Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new CorrosiveOozeEffect()), true);
+        Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new CorrosiveOozeEffect())
+                .setTriggerPhrase(""), true);
         this.addAbility(new BlocksOrBlockedByCreatureSourceTriggeredAbility(effect, filter), new CorrosiveOozeCombatWatcher());
     }
 
@@ -59,12 +59,12 @@ public final class CorrosiveOoze extends CardImpl {
 
 class CorrosiveOozeEffect extends OneShotEffect {
 
-    public CorrosiveOozeEffect() {
+    CorrosiveOozeEffect() {
         super(Outcome.DestroyPermanent);
         this.staticText = "destroy all Equipment attached to that creature at end of combat";
     }
 
-    public CorrosiveOozeEffect(final CorrosiveOozeEffect effect) {
+    private CorrosiveOozeEffect(final CorrosiveOozeEffect effect) {
         super(effect);
     }
 
@@ -75,43 +75,27 @@ class CorrosiveOozeEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
         CorrosiveOozeCombatWatcher watcher = game.getState().getWatcher(CorrosiveOozeCombatWatcher.class);
-        if (controller != null && watcher != null) {
-            MageObjectReference sourceMor = new MageObjectReference(source.getSourceObject(game), game);
-            // get equipmentsToDestroy of creatres already left the battlefield
-            List<Permanent> toDestroy = new ArrayList<>();
-            Set<MageObjectReference> toDestroyMor = watcher.getEquipmentsToDestroy(sourceMor);
-            if (toDestroyMor != null) {
-                for (MageObjectReference mor : toDestroyMor) {
-                    Permanent attachment = mor.getPermanent(game);
-                    if (attachment != null) {
-                        toDestroy.add(attachment);
-                    }
-                }
-            }
-            // get the related creatures
-            Set<MageObjectReference> relatedCreatures = watcher.getRelatedBlockedCreatures(sourceMor);
-            if (relatedCreatures != null) {
-                for (MageObjectReference relatedCreature : relatedCreatures) {
-                    Permanent permanent = relatedCreature.getPermanent(game);
-                    if (permanent != null) {
-                        for (UUID attachmentId : permanent.getAttachments()) {
-                            Permanent attachment = game.getPermanent(attachmentId);
-                            if (attachment != null && attachment.hasSubtype(SubType.EQUIPMENT, game)) {
-                                toDestroy.add(attachment);
-                            }
-                        }
-                    }
-                }
-            }
-            for (Permanent permanent : toDestroy) {
-                permanent.destroy(source, game, false);
-            }
-
-            return true;
+        if (watcher == null) {
+            return false;
         }
-        return false;
+        MageObjectReference sourceMor = new MageObjectReference(source.getSourceId(), source.getSourceObjectZoneChangeCounter(), game);
+        List<Permanent> equipments = watcher.getEquipmentsToDestroy(sourceMor)
+                .stream()
+                .map(mor -> mor.getPermanent(game))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        watcher.getRelatedBlockedCreatures(sourceMor)
+                .stream()
+                .map(mor -> mor.getPermanent(game))
+                .filter(Objects::nonNull)
+                .flatMap(p -> p.getAttachments().stream())
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .filter(a -> a.hasSubtype(SubType.EQUIPMENT, game))
+                .forEach(equipments::add);
+        equipments.forEach(p -> p.destroy(source, game));
+        return true;
 
     }
 }
@@ -121,7 +105,7 @@ class CorrosiveOozeCombatWatcher extends Watcher {
     private final Map<MageObjectReference, Set<MageObjectReference>> oozeBlocksOrBlocked = new HashMap<>();
     private final Map<MageObjectReference, Set<MageObjectReference>> oozeEquipmentsToDestroy = new HashMap<>();
 
-    public CorrosiveOozeCombatWatcher() {
+    CorrosiveOozeCombatWatcher() {
         super(WatcherScope.GAME);
     }
 
@@ -129,45 +113,35 @@ class CorrosiveOozeCombatWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BEGIN_COMBAT_STEP_PRE) {
             this.oozeBlocksOrBlocked.clear();
+            return;
         }
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
             Permanent attacker = game.getPermanent(event.getTargetId());
             Permanent blocker = game.getPermanent(event.getSourceId());
-            if (attacker != null && CardUtil.haveSameNames(attacker, "Corrosive Ooze", game)) { // To check for name is not working if Ooze is copied but name changed
-                if (blocker != null && hasAttachedEquipment(game, blocker)) {
-                    MageObjectReference oozeMor = new MageObjectReference(attacker, game);
-                    Set<MageObjectReference> relatedCreatures = oozeBlocksOrBlocked.getOrDefault(oozeMor, new HashSet<>());
-                    relatedCreatures.add(new MageObjectReference(event.getSourceId(), game));
-                    oozeBlocksOrBlocked.put(oozeMor, relatedCreatures);
-                }
+            if (attacker == null || blocker == null) {
+                return;
             }
-            if (blocker != null && CardUtil.haveSameNames(blocker, "Corrosive Ooze", game)) {
-                if (attacker != null && hasAttachedEquipment(game, attacker)) {
-                    MageObjectReference oozeMor = new MageObjectReference(blocker, game);
-                    Set<MageObjectReference> relatedCreatures = oozeBlocksOrBlocked.getOrDefault(oozeMor, new HashSet<>());
-                    relatedCreatures.add(new MageObjectReference(event.getTargetId(), game));
-                    oozeBlocksOrBlocked.put(oozeMor, relatedCreatures);
-                }
-            }
+            oozeBlocksOrBlocked.computeIfAbsent(new MageObjectReference(attacker, game), k -> new HashSet<>())
+                    .add(new MageObjectReference(blocker, game));
+            oozeBlocksOrBlocked.computeIfAbsent(new MageObjectReference(blocker, game), k -> new HashSet<>())
+                    .add(new MageObjectReference(attacker, game));
+            return;
         }
 
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            if (((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
-                if (game.getTurn() != null && TurnPhase.COMBAT == game.getTurnPhaseType()) {
-                    // Check if a previous blocked or blocked by creatures is leaving the battlefield
-                    for (Map.Entry<MageObjectReference, Set<MageObjectReference>> entry : oozeBlocksOrBlocked.entrySet()) {
-                        for (MageObjectReference mor : entry.getValue()) {
-                            if (mor.refersTo(((ZoneChangeEvent) event).getTarget(), game)) {
-                                // check for equipments and remember
-                                for (UUID attachmentId : ((ZoneChangeEvent) event).getTarget().getAttachments()) {
-                                    Permanent attachment = game.getPermanent(attachmentId);
-                                    if (attachment != null && attachment.hasSubtype(SubType.EQUIPMENT, game)) {
-                                        Set<MageObjectReference> toDestroy = oozeEquipmentsToDestroy.getOrDefault(entry.getKey(), new HashSet<>());
-                                        toDestroy.add(new MageObjectReference(attachment, game));
-                                        oozeEquipmentsToDestroy.put(entry.getKey(), toDestroy);
-                                    }
-                                }
-                            }
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
+                // Check if a previous blocked or blocked by creatures is leaving the battlefield
+                for (Map.Entry<MageObjectReference, Set<MageObjectReference>> entry : oozeBlocksOrBlocked.entrySet()) {
+                    for (MageObjectReference mor : entry.getValue()) {
+                        if (mor.refersTo(zEvent.getTarget(), game)) {
+                            // check for equipments and remember
+                            zEvent.getTarget().getAttachments().stream()
+                                    .map(game::getPermanent)
+                                    .filter(Objects::nonNull)
+                                    .filter(a -> a.hasSubtype(SubType.EQUIPMENT, game))
+                                    .map(a -> new MageObjectReference(a, game))
+                                    .forEach(oozeEquipmentsToDestroy.computeIfAbsent(entry.getKey(), k -> new HashSet<>())::add);
                         }
                     }
                 }
@@ -175,25 +149,18 @@ class CorrosiveOozeCombatWatcher extends Watcher {
         }
     }
 
-    private boolean hasAttachedEquipment(Game game, Permanent permanent) {
-        for (UUID attachmentId : permanent.getAttachments()) {
-            Permanent attachment = game.getPermanent(attachmentId);
-            if (attachment != null && attachment.hasSubtype(SubType.EQUIPMENT, game)) {
-                return true;
-            }
-        }
-        return false;
+    @Override
+    public void reset() {
+        super.reset();
+        oozeBlocksOrBlocked.clear();
+        oozeEquipmentsToDestroy.clear();
     }
 
-    public Set<MageObjectReference> getRelatedBlockedCreatures(MageObjectReference ooze) {
-        Set<MageObjectReference> relatedCreatures = this.oozeBlocksOrBlocked.get(ooze);
-        oozeBlocksOrBlocked.remove(ooze); // remove here to get no overlap with creatures leaving meanwhile
-        return relatedCreatures;
+    Set<MageObjectReference> getRelatedBlockedCreatures(MageObjectReference ooze) {
+        return oozeBlocksOrBlocked.getOrDefault(ooze, Collections.emptySet());
     }
 
-    public Set<MageObjectReference> getEquipmentsToDestroy(MageObjectReference ooze) {
-        Set<MageObjectReference> equipmentsToDestroy = this.oozeEquipmentsToDestroy.get(ooze);
-        oozeEquipmentsToDestroy.remove(ooze); // remove here to get no overlap with creatures leaving meanwhile
-        return equipmentsToDestroy;
+    Set<MageObjectReference> getEquipmentsToDestroy(MageObjectReference ooze) {
+        return oozeEquipmentsToDestroy.getOrDefault(ooze, Collections.emptySet());
     }
 }

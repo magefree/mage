@@ -1,9 +1,12 @@
 package mage.cards.g;
 
-import java.util.HashSet;
-import java.util.Set;
+import mage.MageIdentifier;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalAsThoughEffect;
+import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.Card;
@@ -15,16 +18,13 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
-import java.util.UUID;
-import mage.MageIdentifier;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalAsThoughEffect;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public class GlimpseTheCosmos extends CardImpl {
@@ -36,11 +36,16 @@ public class GlimpseTheCosmos extends CardImpl {
         this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.BOTTOM_ANY));
 
         //As long as you control a Giant, you may cast Glimpse the Cosmos from your graveyard by paying {U} rather than paying its mana cost. If you cast Glimpse the Cosmos this way and it would be put into your graveyard, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD,
-                new ConditionalAsThoughEffect(
-                        new GlimpseTheCosmosPlayEffect(),
-                        new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.GIANT)))).setIdentifier(MageIdentifier.GlimpseTheCosmosWatcher),
-                new GlimpseTheCosmosWatcher());
+        this.addAbility(
+                new SimpleStaticAbility(
+                        Zone.GRAVEYARD,
+                        new ConditionalAsThoughEffect(
+                                new GlimpseTheCosmosPlayEffect(),
+                                new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.GIANT))
+                        )
+                ).setIdentifier(MageIdentifier.GlimpseTheCosmosWatcher),
+                new GlimpseTheCosmosWatcher()
+        );
 
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new GlimpseTheCosmosReplacementEffect()));
 
@@ -59,12 +64,12 @@ public class GlimpseTheCosmos extends CardImpl {
 
 class GlimpseTheCosmosPlayEffect extends AsThoughEffectImpl {
 
-    public GlimpseTheCosmosPlayEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
+    GlimpseTheCosmosPlayEffect() {
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "As long as you control a Giant, you may cast {this} from your graveyard by paying {U} rather than paying its mana cost";
     }
 
-    public GlimpseTheCosmosPlayEffect(final GlimpseTheCosmosPlayEffect effect) {
+    private GlimpseTheCosmosPlayEffect(final GlimpseTheCosmosPlayEffect effect) {
         super(effect);
     }
 
@@ -85,7 +90,10 @@ class GlimpseTheCosmosPlayEffect extends AsThoughEffectImpl {
             if (game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
                 Player controller = game.getPlayer(affectedControllerId);
                 if (controller != null) {
-                    controller.setCastSourceIdWithAlternateMana(sourceId, new ManaCostsImpl<>("{U}"), null);
+                    controller.setCastSourceIdWithAlternateMana(
+                            sourceId, new ManaCostsImpl<>("{U}"), null,
+                            MageIdentifier.GlimpseTheCosmosWatcher
+                    );
                     return true;
                 }
             }
@@ -96,23 +104,18 @@ class GlimpseTheCosmosPlayEffect extends AsThoughEffectImpl {
 
 class GlimpseTheCosmosReplacementEffect extends ReplacementEffectImpl {
 
-    public GlimpseTheCosmosReplacementEffect() {
+    GlimpseTheCosmosReplacementEffect() {
         super(Duration.EndOfGame, Outcome.Benefit);
         staticText = "As long as you control a Giant, you may cast {this} from your graveyard by paying {U} rather than paying its mana cost. If you cast {this} this way and it would be put into your graveyard, exile it instead";
     }
 
-    public GlimpseTheCosmosReplacementEffect(final GlimpseTheCosmosReplacementEffect effect) {
+    private GlimpseTheCosmosReplacementEffect(final GlimpseTheCosmosReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public GlimpseTheCosmosReplacementEffect copy() {
         return new GlimpseTheCosmosReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

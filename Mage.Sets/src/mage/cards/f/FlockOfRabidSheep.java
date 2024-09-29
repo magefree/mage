@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -12,6 +11,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.RabidSheepToken;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -38,12 +40,12 @@ public class FlockOfRabidSheep extends CardImpl {
 
 class FlockOfRabidSheepEffect extends OneShotEffect {
 
-    public FlockOfRabidSheepEffect() {
+    FlockOfRabidSheepEffect() {
         super(Outcome.LoseLife);
         this.staticText = "Flip X coins. For each flip you win, create a 2/2 green Sheep creature token named Rabid Sheep";
     }
 
-    public FlockOfRabidSheepEffect(final FlockOfRabidSheepEffect effect) {
+    private FlockOfRabidSheepEffect(final FlockOfRabidSheepEffect effect) {
         super(effect);
     }
 
@@ -56,7 +58,7 @@ class FlockOfRabidSheepEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int repeat = source.getManaCostsToPay().getX();
+            int repeat = CardUtil.getSourceCostsTag(game, source, "X", 0);
             int wonCount = 0;
             for (int i = 1; i <= repeat; i++) {
                 if (controller.flipCoin(source, game, true)) {

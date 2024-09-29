@@ -56,7 +56,7 @@ class MysticRemoraTriggeredAbility extends TriggeredAbilityImpl {
 
     }
 
-    public MysticRemoraTriggeredAbility(final MysticRemoraTriggeredAbility ability) {
+    private MysticRemoraTriggeredAbility(final MysticRemoraTriggeredAbility ability) {
         super(ability);
     }
 
@@ -96,12 +96,12 @@ class MysticRemoraTriggeredAbility extends TriggeredAbilityImpl {
 
 class MysticRemoraEffect extends OneShotEffect {
 
-    public MysticRemoraEffect() {
+    MysticRemoraEffect() {
         super(Outcome.DrawCard);
         this.staticText = "you may draw a card unless that player pays {4}";
     }
 
-    public MysticRemoraEffect(final MysticRemoraEffect effect) {
+    private MysticRemoraEffect(final MysticRemoraEffect effect) {
         super(effect);
     }
 
@@ -113,7 +113,7 @@ class MysticRemoraEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         MageObject sourceObject = source.getSourceObject(game);
         if (controller != null && opponent != null && sourceObject != null) {
             if (controller.chooseUse(Outcome.DrawCard, "Draw a card (" + sourceObject.getLogName() + ')', source, game)) {
@@ -130,7 +130,3 @@ class MysticRemoraEffect extends OneShotEffect {
     }
 
 }
-
-    
-
-    

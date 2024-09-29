@@ -1,7 +1,7 @@
 package org.mage.card.arcane;
 
 import mage.abilities.icon.CardIconColor;
-import mage.abilities.icon.abilities.FlyingAbilityIcon;
+import mage.abilities.icon.CardIconImpl;
 import mage.utils.StreamUtils;
 import org.apache.batik.anim.dom.SVGDOMImplementation;
 import org.apache.batik.transcoder.TranscoderInput;
@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.util.Base64;
 
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
@@ -111,7 +113,8 @@ public class SvgUtils {
         // css settings for svg
         SvgUtils.prepareCss(cssFileName, cssAdditionalSettings, false);
         File cssFile = new File(SvgUtils.getSvgTempFile(cssFileName));
-
+        byte[] cssFileContent = Files.readAllBytes(cssFile.toPath());
+        String cssDataURI = "data:text/css;base64," + Base64.getEncoder().encodeToString(cssFileContent);
         TranscodingHints transcoderHints = new TranscodingHints();
 
         // resize
@@ -138,7 +141,7 @@ public class SvgUtils {
         transcoderHints.put(ImageTranscoder.KEY_DOCUMENT_ELEMENT_NAMESPACE_URI,
                 SVGConstants.SVG_NAMESPACE_URI);
         transcoderHints.put(ImageTranscoder.KEY_DOCUMENT_ELEMENT, "svg");
-        transcoderHints.put(ImageTranscoder.KEY_USER_STYLESHEET_URI, cssFile.toURI().toString());
+        transcoderHints.put(ImageTranscoder.KEY_USER_STYLESHEET_URI, cssDataURI);
 
         try {
             TranscoderInput input = new TranscoderInput(svgFile);
@@ -182,11 +185,15 @@ public class SvgUtils {
             Image shadow = Toolkit.getDefaultToolkit().createImage(prod);
             // result
             BufferedImage result = new BufferedImage(originImage.getWidth() + shadowX, originImage.getHeight() + shadowY, originImage.getType());
-            Graphics2D g = (Graphics2D) result.getGraphics();
-            // draw shadow with offset (left bottom)
-            g.drawImage(shadow, -1 * shadowX, shadowY, null);
-            // draw original image
-            g.drawImage(originImage, 0, 0, null);
+            Graphics2D g2 = result.createGraphics();
+            try {
+                // draw shadow with offset (left bottom)
+                g2.drawImage(shadow, -1 * shadowX, shadowY, null);
+                // draw original image
+                g2.drawImage(originImage, 0, 0, null);
+            } finally {
+                g2.dispose();
+            }
             return result;
         } else {
             // return origin image without shadow
@@ -217,7 +224,8 @@ public class SvgUtils {
     public static boolean checkSvgSupport() {
         // usa sample icon for svg support testing
         // direct call, no needs in cache
-        BufferedImage sampleImage = ImageManagerImpl.instance.getCardIcon(FlyingAbilityIcon.instance.getIconType().getResourceName(), 32, CardIconColor.DEFAULT);
+        BufferedImage sampleImage = ImageManagerImpl.instance
+                .getCardIcon(CardIconImpl.ABILITY_FLYING.getIconType().getResourceName(), 32, CardIconColor.DEFAULT);
         haveSvgSupport = (sampleImage != null && sampleImage.getWidth() > 0);
         if (!haveSvgSupport) {
             logger.warn("WARNING, your system doesn't support svg images, so card icons will be disabled. Please, make a bug report in the github.");

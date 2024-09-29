@@ -45,12 +45,12 @@ public final class TroveOfTemptation extends CardImpl {
 
 class TroveOfTemptationForceAttackEffect extends RequirementEffect {
 
-    public TroveOfTemptationForceAttackEffect(Duration duration) {
+    TroveOfTemptationForceAttackEffect(Duration duration) {
         super(duration, true);
         staticText = "Each opponent must attack you or a planeswalker you control with at least one creature each combat if able";
     }
 
-    public TroveOfTemptationForceAttackEffect(final TroveOfTemptationForceAttackEffect effect) {
+    private TroveOfTemptationForceAttackEffect(final TroveOfTemptationForceAttackEffect effect) {
         super(effect);
     }
 

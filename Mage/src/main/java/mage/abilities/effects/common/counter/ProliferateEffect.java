@@ -76,7 +76,8 @@ public class ProliferateEffect extends OneShotEffect {
                 if (player == null) {
                     continue;
                 }
-                for (Counter counter : player.getCounters().values()) {
+                for (Counter counter : player.getCountersAsCopy().values()) {
+                    // TODO: this does not work with ability counters that are not explicitly in CounterType. Like the Hexproof from XXX counters from Indominus Rex, Alpha
                     Counter newCounter = CounterType.findByName(counter.getName()).createInstance();
                     if (player.addCounters(newCounter, source.getControllerId(), source, game)) {
                         game.informPlayers(player.getLogName() + " had " + newCounter.getDescription() + " added to them.");

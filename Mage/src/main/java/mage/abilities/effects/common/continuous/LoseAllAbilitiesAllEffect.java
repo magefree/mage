@@ -13,7 +13,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
- *
  * @author LevelX2
  */
 public class LoseAllAbilitiesAllEffect extends ContinuousEffectImpl {
@@ -25,7 +24,7 @@ public class LoseAllAbilitiesAllEffect extends ContinuousEffectImpl {
         this.filter = filter;
     }
 
-    public LoseAllAbilitiesAllEffect(final LoseAllAbilitiesAllEffect effect) {
+    protected LoseAllAbilitiesAllEffect(final LoseAllAbilitiesAllEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
     }
@@ -47,6 +46,9 @@ public class LoseAllAbilitiesAllEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         if (duration == Duration.EndOfTurn) {
             sb.append(duration.toString()).append(", ");

@@ -21,7 +21,7 @@ public final class SatyrNyxSmithElementalToken extends TokenImpl {
         this.addAbility(HasteAbility.getInstance());
     }
 
-    public SatyrNyxSmithElementalToken(final SatyrNyxSmithElementalToken token) {
+    private SatyrNyxSmithElementalToken(final SatyrNyxSmithElementalToken token) {
         super(token);
     }
 

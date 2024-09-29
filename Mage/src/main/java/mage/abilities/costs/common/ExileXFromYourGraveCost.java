@@ -27,7 +27,7 @@ public class ExileXFromYourGraveCost extends VariableCostImpl {
         this.text = (useAsAdditionalCost ? "as an additional cost to cast this spell, exile " : "Exile ") + xText + ' ' + filter.getMessage();
     }
 
-    public ExileXFromYourGraveCost(final ExileXFromYourGraveCost cost) {
+    protected ExileXFromYourGraveCost(final ExileXFromYourGraveCost cost) {
         super(cost);
         this.filter = cost.filter;
     }

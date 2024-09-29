@@ -51,7 +51,7 @@ class HellriderTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
     }
 
-    public HellriderTriggeredAbility(final HellriderTriggeredAbility ability) {
+    private HellriderTriggeredAbility(final HellriderTriggeredAbility ability) {
         super(ability);
     }
 

@@ -1,5 +1,6 @@
 package mage.cards.w;
 
+import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.common.IsStepCondition;
@@ -44,7 +45,7 @@ class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
         condition = new IsStepCondition(PhaseStep.DRAW, false);
     }
 
-    public WellOfKnowledgeConditionalActivatedAbility(final WellOfKnowledgeConditionalActivatedAbility ability) {
+    private WellOfKnowledgeConditionalActivatedAbility(final WellOfKnowledgeConditionalActivatedAbility ability) {
         super(ability);
         this.condition = ability.condition;
     }
@@ -60,10 +61,10 @@ class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
         if (condition.apply(game, this)
-                && costs.canPay(this, this, playerId, game)
+                && getCosts().canPay(this, this, playerId, game)
                 && game.isActivePlayer(playerId)) {
             this.activatorId = playerId;
-            return ActivationStatus.getTrue(this, game);
+            return new ActivationStatus(new ApprovingObject(this, game));
         }
         return ActivationStatus.getFalse();
 
@@ -82,11 +83,11 @@ class WellOfKnowledgeConditionalActivatedAbility extends ActivatedAbilityImpl {
 
 class WellOfKnowledgeEffect extends OneShotEffect {
 
-    public WellOfKnowledgeEffect() {
+    WellOfKnowledgeEffect() {
         super(Outcome.DrawCard);
     }
 
-    public WellOfKnowledgeEffect(final WellOfKnowledgeEffect effect) {
+    private WellOfKnowledgeEffect(final WellOfKnowledgeEffect effect) {
         super(effect);
     }
 

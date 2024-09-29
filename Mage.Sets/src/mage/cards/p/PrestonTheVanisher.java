@@ -1,4 +1,3 @@
-
 package mage.cards.p;
 
 import java.util.UUID;
@@ -22,7 +21,6 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetNonlandPermanent;
 
 /**
@@ -33,7 +31,7 @@ public final class PrestonTheVanisher extends CardImpl {
 
     private static final FilterControlledCreaturePermanent triggerFilter = new FilterControlledCreaturePermanent(
             "another nontoken creature");
-    private static final FilterControlledPermanent activeCostFilter = new FilterControlledCreaturePermanent(
+    private static final FilterControlledPermanent activeCostFilter = new FilterControlledPermanent(
             SubType.ILLUSION, "Illusions");
 
     static {
@@ -49,7 +47,7 @@ public final class PrestonTheVanisher extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
-        // Whenever another nontoken creature enters the battlefield under your control,
+        // Whenever another nontoken creature you control enters,
         // if it wasn’t cast, create a token that’s a copy of that creature, except it’s
         // a 0/1 white Illusion.
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(
@@ -58,15 +56,12 @@ public final class PrestonTheVanisher extends CardImpl {
         effect.setOnlyColor(ObjectColor.WHITE);
         effect.setOnlySubType(SubType.ILLUSION);
         effect.setText("create a token that's a copy of that creature, except it's a 0/1 white Illusion");
-        this.addAbility(
-                new EntersBattlefieldCastTriggeredAbility(Zone.BATTLEFIELD, effect, triggerFilter, false, false,
-                        SetTargetPointer.PERMANENT, null,
-                        true));
-
+        this.addAbility(new EntersBattlefieldCastTriggeredAbility(Zone.BATTLEFIELD, effect, triggerFilter,
+                false, SetTargetPointer.PERMANENT, false));
         // {1}{W}, Sacrifice five Illusions: Exile target nonland permanent.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(),
                 new ManaCostsImpl<>("{1}{W}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(5, activeCostFilter)));
+        ability.addCost(new SacrificeTargetCost(5, activeCostFilter));
         ability.addTarget(new TargetNonlandPermanent());
         this.addAbility(ability);
     }

@@ -47,7 +47,7 @@ class WordsOfWorshipEffect extends ReplacementEffectImpl {
         staticText = "The next time you would draw a card this turn, you gain 5 life instead.";
     }
     
-    WordsOfWorshipEffect(final WordsOfWorshipEffect effect) {
+    private WordsOfWorshipEffect(final WordsOfWorshipEffect effect) {
         super(effect);
     }
     
@@ -55,12 +55,7 @@ class WordsOfWorshipEffect extends ReplacementEffectImpl {
     public WordsOfWorshipEffect copy() {
         return new WordsOfWorshipEffect(this);
     }
-    
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-    
+        
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Player controller = game.getPlayer(source.getControllerId());

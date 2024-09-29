@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.StaticFilters;
 
 /**
  *
@@ -37,7 +37,7 @@ public final class ThunderfootBaloth extends CardImpl {
         Effect effect = new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, true);
         effect.setText("and other creatures you control get +2/+2");
         effects.add(effect);
-        effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent(), true);
+        effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES, true);
         effect.setText("and have trample");
         effects.add(effect);
         this.addAbility(new LieutenantAbility(effects));

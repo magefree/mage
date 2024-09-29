@@ -30,7 +30,7 @@ public final class PowerstoneToken extends TokenImpl {
         this.addAbility(new ConditionalColorlessManaAbility(1, makeBuilder()));
     }
 
-    public PowerstoneToken(final PowerstoneToken token) {
+    private PowerstoneToken(final PowerstoneToken token) {
         super(token);
     }
 
@@ -73,14 +73,11 @@ class PowerstoneTokenManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (!(source instanceof SpellAbility)) {
+        if (!(source instanceof SpellAbility) || source.isActivated()) {
             return true;
         }
         MageObject object = game.getObject(source);
-        if (object != null && object.isArtifact(game)) {
-            return true;
-        }
-        return false;
+        return object != null && object.isArtifact(game);
     }
 
     @Override

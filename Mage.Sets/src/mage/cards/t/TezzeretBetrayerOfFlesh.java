@@ -1,7 +1,6 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -97,7 +96,7 @@ class TezzeretBetrayerOfFleshReductionEffect extends CostModificationEffectImpl 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         return abilityToModify.isControlledBy(source.getControllerId())
-                && abilityToModify instanceof ActivatedAbility
+                && abilityToModify.isActivatedAbility()
                 && TezzeretBetrayerOfFleshWatcher.checkPlayer(game, abilityToModify);
     }
 }

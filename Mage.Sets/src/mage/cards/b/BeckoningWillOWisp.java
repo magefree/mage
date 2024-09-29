@@ -98,7 +98,7 @@ class BeckoningWillOWispEffect extends OneShotEffect {
             return false;
         }
         TargetOpponent target = new TargetOpponent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         player.choose(outcome, target, source, game);
         Player chosenPlayer = game.getPlayer(target.getFirstTarget());
         if (chosenPlayer == null) {

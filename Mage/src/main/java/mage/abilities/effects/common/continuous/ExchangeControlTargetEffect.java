@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -50,7 +51,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
         this.rule = rule;
     }
 
-    public ExchangeControlTargetEffect(final ExchangeControlTargetEffect effect) {
+    protected ExchangeControlTargetEffect(final ExchangeControlTargetEffect effect) {
         super(effect);
         this.rule = effect.rule;
         this.withSource = effect.withSource;
@@ -72,14 +73,16 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
+
         Permanent permanent1 = null;
         Permanent permanent2 = null;
 
         if (withSource) {
-            permanent1 = game.getPermanent(targetPointer.getFirst(game, source));
+            permanent1 = game.getPermanent(getTargetPointer().getFirst(game, source));
             permanent2 = game.getPermanent(source.getSourceId());
         } else {
-            for (UUID permanentId : targetPointer.getTargets(game, source)) {
+            for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
                 if (permanent1 == null) {
                     permanent1 = game.getPermanent(permanentId);
                 } else if (permanent2 == null) {
@@ -89,8 +92,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl {
             if (withSecondTarget) {
                 UUID uuid = source.getTargets().get(1).getFirstTarget();
                 permanent2 = game.getPermanent(uuid);
-            }
-            else if (permanent2 == null) {
+            } else if (permanent2 == null) {
                 UUID uuid = source.getTargets().get(0).getFirstTarget();
                 permanent2 = game.getPermanent(uuid);
             }

@@ -54,12 +54,12 @@ public final class GraveBirthing extends CardImpl {
 
 class GraveBirthingEffect extends OneShotEffect {
 
-    public GraveBirthingEffect() {
+    GraveBirthingEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target opponent exiles a card from their graveyard";
     }
 
-    public GraveBirthingEffect(final GraveBirthingEffect effect) {
+    private GraveBirthingEffect(final GraveBirthingEffect effect) {
         super(effect);
     }
 
@@ -73,7 +73,7 @@ class GraveBirthingEffect extends OneShotEffect {
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (opponent != null) {
             Target target = new TargetCardInYourGraveyard();
-            target.setNotTarget(true);
+            target.withNotTarget(true);
             opponent.chooseTarget(outcome, target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             opponent.moveCards(card, Zone.EXILED, source, game);

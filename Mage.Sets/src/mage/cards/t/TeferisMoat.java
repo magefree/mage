@@ -50,7 +50,7 @@ class TeferisMoatRestrictionEffect extends RestrictionEffect {
         staticText = "Creatures of the chosen color without flying can't attack you";
     }
 
-    TeferisMoatRestrictionEffect(final TeferisMoatRestrictionEffect effect) {
+    private TeferisMoatRestrictionEffect(final TeferisMoatRestrictionEffect effect) {
         super(effect);
     }
 

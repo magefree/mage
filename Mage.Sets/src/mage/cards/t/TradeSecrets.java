@@ -41,12 +41,12 @@ public final class TradeSecrets extends CardImpl {
 
 class TradeSecretsEffect extends OneShotEffect {
 
-    public TradeSecretsEffect() {
+    TradeSecretsEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Target opponent draws two cards, then you draw up to four cards. That opponent may repeat this process as many times as they choose";
     }
 
-    public TradeSecretsEffect(final TradeSecretsEffect effect) {
+    private TradeSecretsEffect(final TradeSecretsEffect effect) {
         super(effect);
     }
 

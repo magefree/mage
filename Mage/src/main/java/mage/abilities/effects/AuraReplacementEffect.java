@@ -2,6 +2,7 @@ package mage.abilities.effects;
 
 import java.util.Locale;
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -38,18 +39,13 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
         super(Duration.EndOfGame, Outcome.Neutral);
     }
 
-    public AuraReplacementEffect(final AuraReplacementEffect effect) {
+    protected AuraReplacementEffect(final AuraReplacementEffect effect) {
         super(effect);
     }
 
     @Override
     public AuraReplacementEffect copy() {
         return new AuraReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -111,7 +107,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl {
             enchantCardInGraveyard = target instanceof TargetCardInGraveyard;
             if (target != null) {
                 target.withChooseHint("to attach " + card.getName() + " to");
-                target.setNotTarget(true); // always not target because this way it's not handled targeted
+                target.withNotTarget(true); // always not target because this way it's not handled targeted
                 target.clearChosen(); // necessary if e.g. aura is blinked multiple times
             }
 

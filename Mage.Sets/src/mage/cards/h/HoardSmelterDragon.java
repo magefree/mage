@@ -43,7 +43,7 @@ public final class HoardSmelterDragon extends CardImpl {
         this.addAbility(ability);
     }
 
-    public HoardSmelterDragon (final HoardSmelterDragon card) {
+    private HoardSmelterDragon(final HoardSmelterDragon card) {
         super(card);
     }
 
@@ -61,7 +61,7 @@ class HoardSmelterEffect extends ContinuousEffectImpl {
         staticText = "{this} gets +X/+0 until end of turn, where X is that artifact's mana value";
     }
 
-    HoardSmelterEffect(final HoardSmelterEffect effect) {
+    private HoardSmelterEffect(final HoardSmelterEffect effect) {
         super(effect);
         this.costValue = effect.costValue;
     }
@@ -78,6 +78,7 @@ class HoardSmelterEffect extends ContinuousEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
+        super.init(source, game);
         Card targeted = game.getCard(source.getFirstTarget());
         if (targeted != null) {
             costValue = targeted.getManaValue();

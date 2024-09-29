@@ -18,7 +18,7 @@ public final class StarfishToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    public StarfishToken(final StarfishToken token) {
+    private StarfishToken(final StarfishToken token) {
         super(token);
     }
 

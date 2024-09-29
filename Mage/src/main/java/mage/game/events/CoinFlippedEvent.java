@@ -12,17 +12,23 @@ public class CoinFlippedEvent extends GameEvent {
     private final boolean result;
     private final boolean chosen;
     private final boolean winnable;
+    private final int flipCount; // Number of flips that lead to this event. see [[Krark's Thumb]]
 
-    CoinFlippedEvent(UUID playerId, UUID sourceId, boolean result, boolean chosen, boolean winnable) {
+    CoinFlippedEvent(UUID playerId, UUID sourceId, int flipCount, boolean result, boolean chosen, boolean winnable) {
         super(GameEvent.EventType.COIN_FLIPPED, playerId, null, playerId);
         this.result = result;
         this.chosen = chosen;
         this.winnable = winnable;
+        this.flipCount = flipCount;
         this.setSourceId(sourceId);
     }
 
     public boolean getResult() {
         return result;
+    }
+
+    public int getFlipCount() {
+        return flipCount;
     }
 
     public String getResultName() {

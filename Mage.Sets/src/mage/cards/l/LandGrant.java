@@ -74,7 +74,7 @@ class LandGrantReavealCost extends CostImpl {
         this.text = "reveal your hand";
     }
 
-    public LandGrantReavealCost(LandGrantReavealCost cost) {
+    private LandGrantReavealCost(final LandGrantReavealCost cost) {
         super(cost);
     }
 

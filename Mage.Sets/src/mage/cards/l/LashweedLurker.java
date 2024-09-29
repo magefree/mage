@@ -1,10 +1,8 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.EmergeAbility;
@@ -14,6 +12,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,7 +29,7 @@ public final class LashweedLurker extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Emerge {5}{G}{U}
-        this.addAbility(new EmergeAbility(this, new ManaCostsImpl<>("{5}{G}{U}")));
+        this.addAbility(new EmergeAbility(this, "{5}{G}{U}"));
 
         // When you cast Lashweed Lurker, you may put target nonland permanent on top of its owner's library.
         Ability ability = new CastSourceTriggeredAbility(new PutOnLibraryTargetEffect(true), true);

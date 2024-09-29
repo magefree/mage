@@ -1,21 +1,16 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.SupportAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
  *
@@ -34,7 +29,10 @@ public final class GladehartCavalry extends CardImpl {
         this.addAbility(new SupportAbility(this, 6));
         
         // Whenever a creature you control with a +1/+1 counter on it dies, you gain 2 life.
-        this.addAbility(new GladehartCavalryTriggeredAbility());
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                new GainLifeEffect(2),
+                false,
+                StaticFilters.FILTER_A_CONTROLLED_CREATURE_P1P1));
     }
 
     private GladehartCavalry(final GladehartCavalry card) {
@@ -44,42 +42,5 @@ public final class GladehartCavalry extends CardImpl {
     @Override
     public GladehartCavalry copy() {
         return new GladehartCavalry(this);
-    }
-}
-
-class GladehartCavalryTriggeredAbility extends TriggeredAbilityImpl {
-
-    public GladehartCavalryTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(2));
-        setTriggerPhrase("Whenever a creature you control with a +1/+1 counter on it dies, ");
-    }
-
-    public GladehartCavalryTriggeredAbility(final GladehartCavalryTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GladehartCavalryTriggeredAbility copy() {
-        return new GladehartCavalryTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeEvent zoneChangeEvent = (ZoneChangeEvent) event;
-        if (zoneChangeEvent.isDiesEvent()) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (permanent != null
-                    && permanent.isControlledBy(this.getControllerId())
-                    && permanent.isCreature(game)
-                    && permanent.getCounters(game).getCount(CounterType.P1P1) > 0) {
-                return true;
-            }
-        }
-        return false;
     }
 }

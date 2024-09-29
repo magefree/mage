@@ -48,7 +48,7 @@ public final class OkoTheTrickster extends CardImpl {
 
         // −7: Until end of turn, each creature you control has base power and toughness 10/10 and gains trample.
         ability = new LoyaltyAbility(new SetBasePowerToughnessAllEffect(
-                10, 10, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURE, true
+                10, 10, Duration.EndOfTurn, StaticFilters.FILTER_CONTROLLED_CREATURE
         ).setText("Until end of turn, each creature you control has base power and toughness 10/10"), -7);
         ability.addEffect(new GainAbilityAllEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn,

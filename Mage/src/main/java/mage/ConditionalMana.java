@@ -53,7 +53,7 @@ public class ConditionalMana extends Mana implements Serializable, Emptiable {
         super(mana);
     }
 
-    public ConditionalMana(final ConditionalMana conditionalMana) {
+    protected ConditionalMana(final ConditionalMana conditionalMana) {
         super(conditionalMana);
         conditions.addAll(conditionalMana.conditions);
         scope = conditionalMana.scope;

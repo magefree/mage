@@ -97,7 +97,7 @@ class KatildaDawnhartPrimeManaAbility extends ActivatedManaAbilityImpl {
 
 class KatildaDawnhartPrimeManaEffect extends ManaEffect {
 
-    public KatildaDawnhartPrimeManaEffect() {
+    KatildaDawnhartPrimeManaEffect() {
         super();
         staticText = "Add one mana of any of this creature's colors";
     }
@@ -150,7 +150,7 @@ class KatildaDawnhartPrimeManaEffect extends ManaEffect {
         if (controller == null || permanent == null) {
             return new Mana();
         }
-        Choice choice = new ChoiceImpl();
+        Choice choice = new ChoiceImpl(false).setManaColorChoice(true);
         choice.setMessage("Pick a mana color");
         ObjectColor color = permanent.getColor(game);
         if (color.isWhite()) {
@@ -174,7 +174,7 @@ class KatildaDawnhartPrimeManaEffect extends ManaEffect {
         if (choice.getChoices().size() == 1) {
             choice.setChoice(choice.getChoices().iterator().next());
         } else {
-            controller.choose(outcome, choice, game);
+            controller.choose(Outcome.PutManaInPool, choice, game);
         }
         if (choice.getChoice() == null) {
             return new Mana();

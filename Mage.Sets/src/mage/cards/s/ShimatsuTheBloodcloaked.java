@@ -50,12 +50,12 @@ public final class ShimatsuTheBloodcloaked extends CardImpl {
 
 class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl {
 
-    public ShimatsuTheBloodcloakedEffect() {
+    ShimatsuTheBloodcloakedEffect() {
         super(Duration.EndOfGame, Outcome.BoostCreature);
-        this.staticText = "As {this} enters the battlefield, sacrifice any number of permanents. {this} enters the battlefield with that many +1/+1 counters on it";
+        this.staticText = "As {this} enters, sacrifice any number of permanents. {this} enters with that many +1/+1 counters on it";
     }
 
-    public ShimatsuTheBloodcloakedEffect(final ShimatsuTheBloodcloakedEffect effect) {
+    private ShimatsuTheBloodcloakedEffect(final ShimatsuTheBloodcloakedEffect effect) {
         super(effect);
     }
 

@@ -87,23 +87,18 @@ enum ConquerorsFlailColorCount implements DynamicValue {
 
 class ConquerorsFlailEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public ConquerorsFlailEffect() {
+    ConquerorsFlailEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "as long as {this} is attached to a creature, your opponents can't cast spells during your turn";
     }
 
-    public ConquerorsFlailEffect(final ConquerorsFlailEffect effect) {
+    private ConquerorsFlailEffect(final ConquerorsFlailEffect effect) {
         super(effect);
     }
 
     @Override
     public ConquerorsFlailEffect copy() {
         return new ConquerorsFlailEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

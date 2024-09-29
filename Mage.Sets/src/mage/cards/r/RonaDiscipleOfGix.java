@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -11,27 +10,21 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileCardsFromTopOfLibraryControllerEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterHistoricCard;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class RonaDiscipleOfGix extends CardImpl {
@@ -59,7 +52,10 @@ public final class RonaDiscipleOfGix extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RonaDiscipleOfGixPlayNonLandEffect()));
 
         // {4}, {T}: Exile the top card of your library.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RonaDiscipleOfGixExileEffect(), new GenericManaCost(4));
+        ability = new SimpleActivatedAbility(
+                Zone.BATTLEFIELD,
+                new ExileCardsFromTopOfLibraryControllerEffect(1, true),
+                new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -76,12 +72,12 @@ public final class RonaDiscipleOfGix extends CardImpl {
 
 class RonaDiscipleOfGixPlayNonLandEffect extends AsThoughEffectImpl {
 
-    public RonaDiscipleOfGixPlayNonLandEffect() {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+    RonaDiscipleOfGixPlayNonLandEffect() {
+        super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may cast nonland cards exiled with {this}";
     }
 
-    public RonaDiscipleOfGixPlayNonLandEffect(final RonaDiscipleOfGixPlayNonLandEffect effect) {
+    private RonaDiscipleOfGixPlayNonLandEffect(final RonaDiscipleOfGixPlayNonLandEffect effect) {
         super(effect);
     }
 
@@ -107,38 +103,6 @@ class RonaDiscipleOfGixPlayNonLandEffect extends AsThoughEffectImpl {
                     return exileZone != null && exileZone.contains(objectId);
                 }
             }
-        }
-        return false;
-    }
-}
-
-class RonaDiscipleOfGixExileEffect extends OneShotEffect {
-
-    public RonaDiscipleOfGixExileEffect() {
-        super(Outcome.Exile);
-        this.staticText = "Exile the top card of your library";
-    }
-
-    public RonaDiscipleOfGixExileEffect(final RonaDiscipleOfGixExileEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RonaDiscipleOfGixExileEffect copy() {
-        return new RonaDiscipleOfGixExileEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        MageObject sourceObject = source.getSourceObject(game);
-        if (controller != null && sourceObject != null) {
-            Card card = controller.getLibrary().getFromTop(game);
-            if (card != null) {
-                UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-                controller.moveCardsToExile(card, source, game, true, exileId, sourceObject.getIdName());
-            }
-            return true;
         }
         return false;
     }

@@ -76,7 +76,7 @@ class KiyomaroFirstToStandDealsDamageTriggeredAbility extends TriggeredAbilityIm
         super(Zone.BATTLEFIELD, new GainLifeEffect(7), false);
     }
 
-    public KiyomaroFirstToStandDealsDamageTriggeredAbility(final KiyomaroFirstToStandDealsDamageTriggeredAbility ability) {
+    private KiyomaroFirstToStandDealsDamageTriggeredAbility(final KiyomaroFirstToStandDealsDamageTriggeredAbility ability) {
         super(ability);
     }
 

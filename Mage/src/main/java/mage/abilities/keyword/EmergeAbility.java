@@ -1,22 +1,27 @@
 package mage.abilities.keyword;
 
+import mage.ApprovingObject;
+import mage.MageIdentifier;
+import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -25,25 +30,39 @@ import java.util.UUID;
 public class EmergeAbility extends SpellAbility {
 
     private final ManaCosts<ManaCost> emergeCost;
+    public static final String EMERGE_ACTIVATION_CREATURE_REFERENCE = "emergeActivationMOR";
 
-    public EmergeAbility(Card card, ManaCosts<ManaCost> emergeCost) {
-        super(card.getSpellAbility());
-        this.emergeCost = emergeCost.copy();
-        this.newId(); // Set newId because cards spell ability is copied and needs own id
-        this.setCardName(card.getName() + " with emerge");
-        zone = Zone.HAND;
-        spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+    private final String emergeFromText;
+    private final FilterPermanent filter;
 
-        this.getManaCosts().clear();
-        this.getManaCostsToPay().clear();
-        this.addManaCost(emergeCost.copy());
-
-        this.setRuleAtTheTop(true);        
+    public EmergeAbility(Card card, String emergeManaString) {
+        this(card, emergeManaString, StaticFilters.FILTER_PERMANENT_CREATURE, "");
     }
 
-    public EmergeAbility(final EmergeAbility ability) {
+    public EmergeAbility(Card card, String emergeManaString, FilterPermanent filter, String emergeFromText) {
+        super(card.getSpellAbility());
+
+        this.filter = TargetSacrifice.makeFilter(filter);
+        this.emergeFromText = emergeFromText;
+
+        this.emergeCost = new ManaCostsImpl<>(emergeManaString);
+        this.newId(); // Set newId because cards spell ability is copied and needs own id
+        this.setCardName(card.getName() + " with emerge");
+        this.zone = Zone.HAND;
+        this.spellAbilityType = SpellAbilityType.BASE_ALTERNATE;
+
+        this.clearManaCosts();
+        this.clearManaCostsToPay();
+        this.addCost(emergeCost.copy());
+
+        this.setRuleAtTheTop(true);
+    }
+
+    private EmergeAbility(final EmergeAbility ability) {
         super(ability);
         this.emergeCost = ability.emergeCost.copy();
+        this.filter = ability.filter;
+        this.emergeFromText = ability.emergeFromText;
     }
 
     @Override
@@ -52,10 +71,10 @@ public class EmergeAbility extends SpellAbility {
             Player controller = game.getPlayer(this.getControllerId());
             if (controller != null) {
                 for (Permanent creature : game.getBattlefield().getActivePermanents(
-                        new FilterControlledCreaturePermanent(), this.getControllerId(), this, game)) {
+                        filter, this.getControllerId(), this, game)) {
                     ManaCost costToPay = CardUtil.reduceCost(emergeCost.copy(), creature.getManaValue());
                     if (costToPay.canPay(this, this, this.getControllerId(), game)) {
-                        return ActivationStatus.getTrue(this, game);
+                        return new ActivationStatus(new ApprovingObject(this, game));
                     }
                 }
             }
@@ -66,8 +85,8 @@ public class EmergeAbility extends SpellAbility {
     @Override
     public ManaOptions getMinimumCostToActivate(UUID playerId, Game game) {
         int maxCMC = 0;
-        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), playerId, this, game)) {
-            int cmc = creature.getManaValue();
+        for (Permanent permanentToSacrifice : game.getBattlefield().getActivePermanents(filter, playerId, this, game)) {
+            int cmc = permanentToSacrifice.getManaValue();
             if (cmc > maxCMC) {
                 maxCMC = cmc;
             }
@@ -84,19 +103,23 @@ public class EmergeAbility extends SpellAbility {
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
         Player controller = game.getPlayer(this.getControllerId());
         if (controller != null) {
-            TargetPermanent target = new TargetControlledCreaturePermanent(new FilterControlledCreaturePermanent("creature to sacrifice for emerge"));
+            TargetSacrifice target = new TargetSacrifice(filter);
+            target.withChooseHint("to sacrifice for emerge");
             if (controller.choose(Outcome.Sacrifice, target, this, game)) {
                 Permanent creature = game.getPermanent(target.getFirstTarget());
                 if (creature != null) {
                     CardUtil.reduceCost(this, creature.getManaValue());
-                    if (super.activate(game, false)) {
+                    boolean reducedToZero = this.getManaCostsToPay().isEmpty();
+                    if (super.activate(game, allowedIdentifiers, reducedToZero)) {
+                        MageObjectReference mor = new MageObjectReference(creature, game);
                         if (creature.sacrifice(this, game)) {
+                            this.setCostsTag(EMERGE_ACTIVATION_CREATURE_REFERENCE, mor); //Can access with LKI afterwards
                             return true;
                         } else {
-                            activated = false;
+                            activated = false; // TODO: research, why
                         }
                     }
                 }
@@ -117,6 +140,14 @@ public class EmergeAbility extends SpellAbility {
 
     @Override
     public String getRule() {
-        return "Emerge " + emergeCost.getText() + " <i>(You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)</i>";
+        String text = "Emerge ";
+        if (!emergeFromText.isEmpty()) {
+            text += emergeFromText + " ";
+        }
+        text += emergeCost.getText();
+        if (emergeFromText.isEmpty()) {
+            text += " <i>(You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value.)</i>";
+        }
+        return text;
     }
 }

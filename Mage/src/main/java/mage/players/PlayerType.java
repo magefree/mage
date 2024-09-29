@@ -1,16 +1,19 @@
 package mage.players;
 
 /**
- * Created by IGOUDT on 2-4-2017.
+ * Server: all possible player types
+ * <p>
+ * Warning, do not change description - it must be same with config.xml file
+ *
+ * @author IGOUDT
  */
 public enum PlayerType {
     HUMAN("Human"),
     COMPUTER_DRAFT_BOT("Computer - draftbot"),
-    COMPUTER_MINIMAX_HYBRID("Computer - minimax hybrid"),
     COMPUTER_MONTE_CARLO("Computer - monte carlo"),
     COMPUTER_MAD("Computer - mad");
 
-    String description;
+    final String description;
 
     PlayerType(String description) {
         this.description = description;
@@ -27,6 +30,6 @@ public enum PlayerType {
                 return type;
             }
         }
-        throw new IllegalArgumentException(String.format("PlayerType (%s) is not configured", description));
+        throw new IllegalArgumentException(String.format("PlayerType (%s) is not configured in server's config.xml", description));
     }
 }

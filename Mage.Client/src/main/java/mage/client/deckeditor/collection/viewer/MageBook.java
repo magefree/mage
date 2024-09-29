@@ -1,5 +1,6 @@
 package mage.client.deckeditor.collection.viewer;
 
+import static java.lang.Math.min;
 import mage.abilities.icon.CardIconRenderSettings;
 import mage.cards.CardDimensions;
 import mage.cards.ExpansionSet;
@@ -18,13 +19,15 @@ import mage.client.util.audio.AudioManager;
 import mage.client.util.sets.ConstructedFormats;
 import mage.components.ImagePanel;
 import mage.components.ImagePanelStyle;
+import mage.constants.MageObjectType;
 import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
-import mage.game.draft.RateCard;
+import mage.cards.RateCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.TokenImpl;
+import mage.game.permanent.token.custom.XmageToken;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
@@ -36,13 +39,10 @@ import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import static java.lang.Math.min;
 
 /**
  * Card viewer (mage book) with cards and page flipping
@@ -231,13 +231,22 @@ public class MageBook extends JComponent {
     public List<Object> loadTokens() {
         List<Object> res = new ArrayList<>();
 
-        // tokens
-        List<TokenInfo> allTokens = TokenRepository.instance.getByType(TokenType.TOKEN)
-                .stream()
-                .filter(token -> token.getSetCode().equals(currentSet))
-                .collect(Collectors.toList());
+        // tokens (official and xmage's inner)
+        List<TokenInfo> allTokens = new ArrayList<>(TokenRepository.instance.getByType(TokenType.TOKEN));
+        allTokens.addAll(TokenRepository.instance.getByType(TokenType.XMAGE));
+        allTokens.removeIf(token -> !token.getSetCode().equals(currentSet));
         allTokens.forEach(token -> {
-            TokenImpl newToken = TokenImpl.createTokenByClassName(token.getFullClassFileName());
+            TokenImpl newToken;
+            switch (token.getTokenType()) {
+                case XMAGE:
+                    newToken = new XmageToken(token.getName());
+                    break;
+
+                case TOKEN:
+                default:
+                    newToken = TokenImpl.createTokenByClassName(token.getFullClassFileName());
+                    break;
+            }
             if (newToken != null) {
                 newToken.setExpansionSetCode(currentSet);
                 newToken.setImageNumber(token.getImageNumber());
@@ -338,9 +347,8 @@ public class MageBook extends JComponent {
                 addItem(needItems.get(i), rectangle);
                 rectangle = CardPosition.translatePosition(i - conf.CARDS_PER_PAGE / 2, rectangle, conf);
             }
-
-            jLayeredPane.repaint();
         }
+        jLayeredPane.repaint();
     }
 
     private void addItem(Object item, Rectangle position) {
@@ -388,9 +396,9 @@ public class MageBook extends JComponent {
             draftRating.setBounds(rectangle.x, rectangle.y + cardImg.getCardLocation().getCardHeight() + dy, cardDimensions.getFrameWidth(), 20);
             draftRating.setHorizontalAlignment(SwingConstants.CENTER);
             draftRating.setFont(jLayeredPane.getFont().deriveFont(jLayeredPane.getFont().getStyle() | Font.BOLD));
-            if (card.getOriginalCard() != null) {
+            if (card.getMageObjectType().equals(MageObjectType.CARD)) {
                 // card
-                draftRating.setText("draft rating: " + RateCard.rateCard(card.getOriginalCard(), null));
+                draftRating.setText("draft rating: " + RateCard.rateCard(card, Collections.emptyList()));
             } else {
                 // token
                 draftRating.setText("");
@@ -403,19 +411,19 @@ public class MageBook extends JComponent {
         if (cardDimension == null) {
             cardDimension = new Dimension(ClientDefaultSettings.dimensions.getFrameWidth(), ClientDefaultSettings.dimensions.getFrameHeight());
         }
-        PermanentToken newToken = new PermanentToken(token, null, null);
-        newToken.removeSummoningSickness();
-        PermanentView theToken = new PermanentView(newToken, null, null, null);
-        theToken.setInViewerOnly(true);
-        final MageCard cardImg = Plugins.instance.getMagePermanent(theToken, bigCard, new CardIconRenderSettings(), cardDimension, gameId, true, PreferencesDialog.getRenderMode(), true);
+        PermanentToken fakePermanent = new PermanentToken(token, UUID.randomUUID(), null);
+        fakePermanent.removeSummoningSickness();
+        PermanentView permanentView = new PermanentView(fakePermanent, null, null, null);
+        permanentView.setInViewerOnly(true);
+        final MageCard cardImg = Plugins.instance.getMagePermanent(permanentView, bigCard, new CardIconRenderSettings(), cardDimension, gameId, true, PreferencesDialog.getRenderMode(), true);
         cardImg.setCardContainerRef(jLayeredPane);
         jLayeredPane.add(cardImg, JLayeredPane.DEFAULT_LAYER, 10);
-        cardImg.update(theToken);
+        cardImg.update(permanentView);
         cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.getFrameWidth(), cardDimensions.getFrameHeight());
     }
 
     private void addEmblem(Emblem emblem, BigCard bigCard, UUID gameId, Rectangle rectangle) {
-        CardView cardView = new CardView(new EmblemView(emblem));
+        CardView cardView = new CardView(new EmblemView(emblem, null));
         addCard(cardView, bigCard, gameId, rectangle, false);
     }
 
@@ -425,7 +433,7 @@ public class MageBook extends JComponent {
     }
 
     private void addPlane(Plane plane, BigCard bigCard, UUID gameId, Rectangle rectangle) {
-        CardView cardView = new CardView(new PlaneView(plane));
+        CardView cardView = new CardView(new PlaneView(plane, null));
         addCard(cardView, bigCard, gameId, rectangle, false);
     }
 
@@ -435,7 +443,7 @@ public class MageBook extends JComponent {
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
         cards.sort(new NaturalOrderCardNumberComparator());
         List<Object> res = new ArrayList<>();
-        cards.forEach(card -> res.add(new CardView(card.getMockCard())));
+        cards.forEach(card -> res.add(new CardView(card.createMockCard())));
         return res;
     }
 
@@ -458,15 +466,22 @@ public class MageBook extends JComponent {
     private void updateCardStats(String setCode, boolean isCardsShow) {
         // sets do not have total cards number, it's a workaround
 
+        // inner set
+        if (setCode.equals(TokenRepository.XMAGE_TOKENS_SET_CODE)) {
+            setCaption.setText("Inner Xmage images");
+            setInfo.setText("");
+            return;
+        };
+
+        // normal set
         ExpansionSet set = Sets.findSet(setCode);
-        if (set != null) {
-            setCaption.setText(set.getCode() + " - " + set.getName());
-        } else {
+        if (set == null) {
             setCaption.setText("ERROR");
             setInfo.setText("ERROR");
             return;
         }
 
+        setCaption.setText(set.getCode() + " - " + set.getName());
         if (!isCardsShow) {
             // tokens or emblems, stats not need
             setInfo.setText("");

@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -17,14 +16,16 @@ import mage.filter.StaticFilters;
  */
 public final class TriumphOfTheHordes extends CardImpl {
 
-
     public TriumphOfTheHordes(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}{G}");
 
 
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(InfectAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn)
+                .setText("Until end of turn, creatures you control get +1/+1"));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(),
+                Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES).setText("and gain trample"));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(InfectAbility.getInstance(),
+                Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES).setText("and infect"));
     }
 
     private TriumphOfTheHordes(final TriumphOfTheHordes card) {

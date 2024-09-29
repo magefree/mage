@@ -59,12 +59,12 @@ public final class OketraTheTrue extends CardImpl {
 
 class OketraTheTrueRestrictionEffect extends RestrictionEffect {
 
-    public OketraTheTrueRestrictionEffect() {
+    OketraTheTrueRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless you control at least three other creatures";
     }
 
-    public OketraTheTrueRestrictionEffect(final OketraTheTrueRestrictionEffect effect) {
+    private OketraTheTrueRestrictionEffect(final OketraTheTrueRestrictionEffect effect) {
         super(effect);
     }
 

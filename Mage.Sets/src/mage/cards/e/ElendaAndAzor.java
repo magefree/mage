@@ -70,7 +70,7 @@ class ElendaAndAzorEffect extends OneShotEffect {
         staticText = "you may pay {X}{W}{U}{B}. If you do, draw X cards";
     }
 
-    ElendaAndAzorEffect(final ElendaAndAzorEffect effect) {
+    private ElendaAndAzorEffect(final ElendaAndAzorEffect effect) {
         super(effect);
     }
 

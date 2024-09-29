@@ -31,7 +31,7 @@ public class RecoverAbility extends TriggeredAbilityImpl {
         super(Zone.GRAVEYARD, new RecoverEffect(cost, card.isCreature()), false);
     }
 
-    public RecoverAbility(final RecoverAbility ability) {
+    protected RecoverAbility(final RecoverAbility ability) {
         super(ability);
     }
 
@@ -74,7 +74,7 @@ class RecoverEffect extends OneShotEffect {
         this.staticText = setText(cost, creature);
     }
 
-    public RecoverEffect(final RecoverEffect effect) {
+    protected RecoverEffect(final RecoverEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }

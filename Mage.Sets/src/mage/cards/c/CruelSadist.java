@@ -8,7 +8,7 @@ import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.RemovedCountersForCostValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -45,7 +45,7 @@ public final class CruelSadist extends CardImpl {
 
         // {2}{B}, {T}, Remove X +1/+1 counters from Cruel Sadist: Cruel Sadist deals X damage to target creature.
         ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(RemovedCountersForCostValue.instance, "it"), new ManaCostsImpl<>("{2}{B}")
+                new DamageTargetEffect(GetXValue.instance, "it"), new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1));

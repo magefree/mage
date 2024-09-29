@@ -56,7 +56,7 @@ class IncomingEffect extends OneShotEffect {
         this.staticText = "Each player searches their library for any number of artifact, creature, enchantment, and/or land cards, puts them onto the battlefield, then shuffles";
     }
 
-    public IncomingEffect(final IncomingEffect effect) {
+    private IncomingEffect(final IncomingEffect effect) {
         super(effect);
     }
 

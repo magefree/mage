@@ -53,12 +53,12 @@ public final class AnthemOfRakdos extends CardImpl {
 
 class AnthemOfRakdosHellbentEffect extends ReplacementEffectImpl {
 
-    public AnthemOfRakdosHellbentEffect() {
+    AnthemOfRakdosHellbentEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "<i>Hellbent</i> &mdash; As long as you have no cards in hand, if a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.";
     }
 
-    public AnthemOfRakdosHellbentEffect(final AnthemOfRakdosHellbentEffect effect) {
+    private AnthemOfRakdosHellbentEffect(final AnthemOfRakdosHellbentEffect effect) {
         super(effect);
     }
 
@@ -76,11 +76,6 @@ class AnthemOfRakdosHellbentEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return game.getControllerId(event.getSourceId()).equals(source.getControllerId()) && HellbentCondition.instance.apply(game, source);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

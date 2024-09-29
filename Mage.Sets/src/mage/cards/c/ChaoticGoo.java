@@ -35,7 +35,7 @@ public final class ChaoticGoo extends CardImpl {
 
         // Chaotic Goo enters the battlefield with three +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)),
-            "{this} enters the battlefield with three +1/+1 counters on it"));
+            "{this} enters with three +1/+1 counters on it"));
         
         // At the beginning of your upkeep, you may flip a coin. If you win the flip, put a +1/+1 counter on Chaotic Goo. If you lose the flip, remove a +1/+1 counter from Chaotic Goo.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ChaoticGooEffect(), TargetController.YOU, true));
@@ -53,12 +53,12 @@ public final class ChaoticGoo extends CardImpl {
 
 class ChaoticGooEffect extends OneShotEffect {
 
-    public ChaoticGooEffect() {
+    ChaoticGooEffect() {
         super(Outcome.Damage);
         staticText = "flip a coin. If you win the flip, put a +1/+1 counter on {this}. If you lose the flip, remove a +1/+1 counter from {this}";
     }
 
-    public ChaoticGooEffect(ChaoticGooEffect effect) {
+    private ChaoticGooEffect(final ChaoticGooEffect effect) {
         super(effect);
     }
 

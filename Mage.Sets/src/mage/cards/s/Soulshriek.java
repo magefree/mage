@@ -52,12 +52,12 @@ public class Soulshriek extends CardImpl {
 
 class SoulshriekEffect extends OneShotEffect {
 
-    public SoulshriekEffect() {
+    SoulshriekEffect() {
         super(Outcome.Detriment);
         this.staticText = "Sacrifice that creature at the beginning of the next end step";
     }
 
-    public SoulshriekEffect(final SoulshriekEffect effect) {
+    private SoulshriekEffect(final SoulshriekEffect effect) {
         super(effect);
     }
 

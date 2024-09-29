@@ -20,7 +20,7 @@ public class ScryTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public ScryTriggeredAbility(Zone zone, Effect effect, boolean optional) {
-        super(zone, effect, false);
+        super(zone, effect, optional);
         setTriggerPhrase("Whenever you scry, ");
     }
 

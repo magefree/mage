@@ -65,7 +65,7 @@ class SunflareShamanEffect extends OneShotEffect {
         this.staticText = "{this} deals X damage to any target and X damage to itself, where X is the number of Elemental cards in your graveyard";
     }
 
-    public SunflareShamanEffect(final SunflareShamanEffect effect) {
+    private SunflareShamanEffect(final SunflareShamanEffect effect) {
         super(effect);
     }
 

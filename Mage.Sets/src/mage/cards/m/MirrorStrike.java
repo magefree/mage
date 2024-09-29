@@ -51,12 +51,12 @@ public final class MirrorStrike extends CardImpl {
 
 class MirrorStrikeEffect extends ReplacementEffectImpl {
 
-    public MirrorStrikeEffect() {
+    MirrorStrikeEffect() {
         super(Duration.EndOfTurn, Outcome.RedirectDamage);
         staticText = "All combat damage that would be dealt to you this turn by target unblocked creature is dealt to its controller instead";
     }
 
-    public MirrorStrikeEffect(final MirrorStrikeEffect effect) {
+    private MirrorStrikeEffect(final MirrorStrikeEffect effect) {
         super(effect);
     }
 
@@ -68,11 +68,6 @@ class MirrorStrikeEffect extends ReplacementEffectImpl {
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

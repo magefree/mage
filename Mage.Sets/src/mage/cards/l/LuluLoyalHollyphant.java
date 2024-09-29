@@ -52,7 +52,7 @@ public final class LuluLoyalHollyphant extends CardImpl {
                 TargetController.YOU, RevoltCondition.instance, false
         );
         ability.addEffect(new UntapAllEffect(filter).setText(", then untap them"));
-        this.addAbility(ability, new RevoltWatcher());
+        this.addAbility(ability.addHint(RevoltCondition.getHint()), new RevoltWatcher());
 
         // Choose a Background
         this.addAbility(ChooseABackgroundAbility.getInstance());

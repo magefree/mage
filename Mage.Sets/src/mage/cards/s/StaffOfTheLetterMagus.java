@@ -48,12 +48,12 @@ public final class StaffOfTheLetterMagus extends CardImpl {
 
 class StaffOfTheLetterMagusChooseLetterEffect extends OneShotEffect {
 
-    public StaffOfTheLetterMagusChooseLetterEffect() {
+    StaffOfTheLetterMagusChooseLetterEffect() {
         super(Outcome.Benefit);
         staticText = "choose a consonant other than N, R, S, or T";
     }
 
-    public StaffOfTheLetterMagusChooseLetterEffect(final StaffOfTheLetterMagusChooseLetterEffect effect) {
+    private StaffOfTheLetterMagusChooseLetterEffect(final StaffOfTheLetterMagusChooseLetterEffect effect) {
         super(effect);
     }
 
@@ -100,12 +100,12 @@ class StaffOfTheLetterMagusChooseLetterEffect extends OneShotEffect {
 
 class StaffOfTheLetterMagusEffect extends OneShotEffect {
 
-    public StaffOfTheLetterMagusEffect() {
+    StaffOfTheLetterMagusEffect() {
         super(Outcome.GainLife);
         staticText = "you gain 1 life for each time the chosen letter appears in that spell's name";
     }
 
-    public StaffOfTheLetterMagusEffect(final StaffOfTheLetterMagusEffect effect) {
+    private StaffOfTheLetterMagusEffect(final StaffOfTheLetterMagusEffect effect) {
         super(effect);
     }
 

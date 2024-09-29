@@ -53,7 +53,7 @@ public final class CairnWanderer extends CardImpl {
             staticText = "As long as a creature card with flying is in a graveyard, {this} has flying. The same is true for fear, first strike, double strike, deathtouch, haste, landwalk, lifelink, protection, reach, trample, shroud, and vigilance.";
         }
 
-        public CairnWandererEffect(final CairnWandererEffect effect) {
+        private CairnWandererEffect(final CairnWandererEffect effect) {
             super(effect);
         }
 

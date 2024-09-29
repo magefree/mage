@@ -66,12 +66,12 @@ public final class MyojinOfLifesWeb extends CardImpl {
 
 class MyojinOfLifesWebPutCreatureOnBattlefieldEffect extends OneShotEffect {
 
-    public MyojinOfLifesWebPutCreatureOnBattlefieldEffect() {
+    MyojinOfLifesWebPutCreatureOnBattlefieldEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Put any number of creature cards from your hand onto the battlefield";
     }
 
-    public MyojinOfLifesWebPutCreatureOnBattlefieldEffect(final MyojinOfLifesWebPutCreatureOnBattlefieldEffect effect) {
+    private MyojinOfLifesWebPutCreatureOnBattlefieldEffect(final MyojinOfLifesWebPutCreatureOnBattlefieldEffect effect) {
         super(effect);
     }
 

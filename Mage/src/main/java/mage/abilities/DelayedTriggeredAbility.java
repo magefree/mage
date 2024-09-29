@@ -10,28 +10,28 @@ import mage.game.Game;
  */
 public abstract class DelayedTriggeredAbility extends TriggeredAbilityImpl {
 
-    private Duration duration;
+    private final Duration duration;
     protected boolean triggerOnlyOnce;
 
-    public DelayedTriggeredAbility(Effect effect) {
+    protected DelayedTriggeredAbility(Effect effect) {
         this(effect, Duration.EndOfGame);
     }
 
-    public DelayedTriggeredAbility(Effect effect, Duration duration) {
+    protected DelayedTriggeredAbility(Effect effect, Duration duration) {
         this(effect, duration, true);
     }
 
-    public DelayedTriggeredAbility(Effect effect, Duration duration, boolean triggerOnlyOnce) {
+    protected DelayedTriggeredAbility(Effect effect, Duration duration, boolean triggerOnlyOnce) {
         this(effect, duration, triggerOnlyOnce, false);
     }
 
-    public DelayedTriggeredAbility(Effect effect, Duration duration, boolean triggerOnlyOnce, boolean optional) {
+    protected DelayedTriggeredAbility(Effect effect, Duration duration, boolean triggerOnlyOnce, boolean optional) {
         super(Zone.ALL, effect, optional);
         this.duration = duration;
         this.triggerOnlyOnce = triggerOnlyOnce;
     }
 
-    public DelayedTriggeredAbility(final DelayedTriggeredAbility ability) {
+    protected DelayedTriggeredAbility(final DelayedTriggeredAbility ability) {
         super(ability);
         this.duration = ability.duration;
         this.triggerOnlyOnce = ability.triggerOnlyOnce;

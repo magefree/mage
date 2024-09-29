@@ -11,7 +11,6 @@ import mage.counters.CounterType;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-
 import static org.mage.test.utils.ManaOptionsTestUtils.assertManaOptions;
 
 /**
@@ -371,6 +370,12 @@ public class ConditionalManaTest extends CardTestPlayerBase {
 
         addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears", 2);
 
+        // Init library to mill a third bear
+        skipInitShuffling();
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears");
+
+        addTarget(playerA, "Grizzly Bears"); // upkeep surveil: put the Bears in the graveyard.
+
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -382,6 +387,45 @@ public class ConditionalManaTest extends CardTestPlayerBase {
         assertManaOptions("{C}{C}{C}{R}[{TitansNestManaCondition}]", manaOptions);
         assertManaOptions("{C}{C}{C}{C}{R}[{XCostManaCondition}]", manaOptions);
         assertManaOptions("{C}{C}{C}{C}{C}{C}{C}{R}[{XCostManaCondition}{TitansNestManaCondition}]", manaOptions);
+    }
+
+    @Test
+    public void testConditionalManaSoftCounter() {
+        addCard(Zone.HAND, playerA, "Fallaji Excavation", 1);
+        addCard(Zone.HAND, playerA, "Gigantosaurus", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.HAND, playerB, "Mana Leak");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fallaji Excavation");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Gigantosaurus");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Mana Leak", "Gigantosaurus");
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertPermanentCount(playerA, "Gigantosaurus", 1);
+        assertTappedCount("Powerstone Token", true, 3);
+    }
+    @Test
+    public void testConditionalManaCantSoftCounter() {
+        addCard(Zone.BATTLEFIELD, playerA, "Jaya Ballard");
+        addCard(Zone.HAND, playerA, "Gigantosaurus", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.HAND, playerB, "Mana Leak");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Add");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gigantosaurus");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Mana Leak", "Gigantosaurus");
+        setChoice(playerA, true);
+
+        setStrictChooseMode(true);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+        assertPermanentCount(playerA, "Gigantosaurus", 0);
     }
 
     @Test

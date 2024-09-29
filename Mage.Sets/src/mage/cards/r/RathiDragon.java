@@ -37,7 +37,7 @@ public final class RathiDragon extends CardImpl {
         
         // When Rathi Dragon enters the battlefield, sacrifice it unless you sacrifice two Mountains.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true)))));
+                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(2, filter))));
     }
 
     private RathiDragon(final RathiDragon card) {

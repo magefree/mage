@@ -54,7 +54,7 @@ public final class NettlingImp extends CardImpl {
                 + "Activate only during an opponent's turn, before attackers are declared.");
         ability.addEffect(new NettlingImpDelayedDestroyEffect());
         ability.addTarget(new TargetCreaturePermanent(filter));
-        this.addAbility(ability, new AttackedThisTurnWatcher());
+        this.addAbility(ability);
 
     }
 
@@ -84,12 +84,12 @@ class NettlingImpTurnCondition implements Condition {
 
 class NettlingImpDelayedDestroyEffect extends OneShotEffect {
 
-    public NettlingImpDelayedDestroyEffect() {
+    NettlingImpDelayedDestroyEffect() {
         super(Outcome.Detriment);
         this.staticText = "If it doesn't, destroy it at the beginning of the next end step";
     }
 
-    public NettlingImpDelayedDestroyEffect(final NettlingImpDelayedDestroyEffect effect) {
+    private NettlingImpDelayedDestroyEffect(final NettlingImpDelayedDestroyEffect effect) {
         super(effect);
     }
 

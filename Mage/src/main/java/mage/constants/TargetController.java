@@ -27,7 +27,8 @@ public enum TargetController {
     EACH_PLAYER,
     ENCHANTED,
     SOURCE_TARGETS,
-    MONARCH;
+    MONARCH,
+    SOURCE_CONTROLLER;
 
     private final OwnerPredicate ownerPredicate;
     private final PlayerPredicate playerPredicate;
@@ -78,8 +79,12 @@ public enum TargetController {
                 case ENCHANTED:
                     Permanent permanent = input.getSource().getSourcePermanentIfItStillExists(game);
                     return permanent != null && input.getObject().isOwnedBy(permanent.getAttachedTo());
+                case SOURCE_CONTROLLER:
+                    return card.isOwnedBy(input.getSource().getControllerId());
                 case SOURCE_TARGETS:
                     return card.isOwnedBy(input.getSource().getFirstTarget());
+                case ACTIVE:
+                    return card.isOwnedBy(game.getActivePlayerId());
                 case MONARCH:
                     return card.isOwnedBy(game.getMonarchId());
                 case ANY:
@@ -119,8 +124,12 @@ public enum TargetController {
                             game.getPlayer(playerId).hasOpponent(player.getId(), game);
                 case NOT_YOU:
                     return !player.getId().equals(playerId);
+                case SOURCE_CONTROLLER:
+                    return player.getId().equals(input.getSource().getControllerId());
                 case SOURCE_TARGETS:
-                    return player.equals(input.getSource().getFirstTarget());
+                    return player.getId().equals(input.getSource().getFirstTarget());
+                case ACTIVE:
+                    return game.isActivePlayer(player.getId());
                 case MONARCH:
                     return player.getId().equals(game.getMonarchId());
                 default:
@@ -162,6 +171,8 @@ public enum TargetController {
                 case ENCHANTED:
                     Permanent permanent = input.getSource().getSourcePermanentIfItStillExists(game);
                     return permanent != null && input.getObject().isControlledBy(permanent.getAttachedTo());
+                case SOURCE_CONTROLLER:
+                    return object.isControlledBy(input.getSource().getControllerId());
                 case SOURCE_TARGETS:
                     return object.isControlledBy(input.getSource().getFirstTarget());
                 case MONARCH:
@@ -175,7 +186,14 @@ public enum TargetController {
 
         @Override
         public String toString() {
-            return "TargetController(" + controller.toString() + ')';
+            return "TargetController (" + controller.toString() + ')';
+        }
+
+        /**
+         * For tests
+         */
+        public TargetController getController() {
+            return this.controller;
         }
     }
 }

@@ -44,12 +44,12 @@ public final class EchoingDecay extends CardImpl {
 
 class EchoingDecayEffect extends OneShotEffect {
 
-    public EchoingDecayEffect() {
+    EchoingDecayEffect() {
         super(Outcome.Benefit);
         this.staticText = "Target creature and all other creatures with the same name as that creature get -2/-2 until end of turn";
     }
 
-    public EchoingDecayEffect(final EchoingDecayEffect effect) {
+    private EchoingDecayEffect(final EchoingDecayEffect effect) {
         super(effect);
     }
 
@@ -60,7 +60,7 @@ class EchoingDecayEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetPermanent != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             if (CardUtil.haveEmptyName(targetPermanent)) {

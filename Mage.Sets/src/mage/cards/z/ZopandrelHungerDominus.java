@@ -15,11 +15,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
@@ -54,7 +54,7 @@ public final class ZopandrelHungerDominus extends CardImpl {
 
         // {G/P}{G/P}, Sacrifice two other creatures: Put an indestructible counter on Zopandrel, Hunger Dominus.
         Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.INDESTRUCTIBLE.createInstance()), new ManaCostsImpl<>("{G/P}{G/P}"));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(2, filter)));
+        ability.addCost(new SacrificeTargetCost(2, filter));
         this.addAbility(ability);
     }
 
@@ -70,9 +70,7 @@ public final class ZopandrelHungerDominus extends CardImpl {
 
 class ZopandrelHungerDominusEffect extends OneShotEffect {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-
-    public ZopandrelHungerDominusEffect() {
+    ZopandrelHungerDominusEffect() {
         super(Outcome.BoostCreature);
         staticText = "double the power and toughness of each creature you control until end of turn";
     }
@@ -88,7 +86,7 @@ class ZopandrelHungerDominusEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, source.getControllerId(), game)) {
             ContinuousEffect effect = new BoostTargetEffect(permanent.getPower().getValue(), permanent.getToughness().getValue());
             effect.setTargetPointer(new FixedTarget(permanent, game));
             game.addEffect(effect, source);

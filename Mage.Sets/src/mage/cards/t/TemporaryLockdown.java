@@ -2,9 +2,8 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.delayed.OnLeaveReturnExiledToBattlefieldAbility;
+import mage.abilities.common.delayed.OnLeaveReturnExiledAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -30,9 +29,7 @@ public final class TemporaryLockdown extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}{W}");
 
         // When Temporary Lockdown enters the battlefield, exile each nonland permanent with mana value 2 or less until Temporary Lockdown leaves the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new TemporaryLockdownEffect());
-        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new OnLeaveReturnExiledToBattlefieldAbility()));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TemporaryLockdownEffect()));
     }
 
     private TemporaryLockdown(final TemporaryLockdown card) {
@@ -74,10 +71,15 @@ class TemporaryLockdownEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game));
-        return !cards.isEmpty() && player.moveCardsToExile(
+        if (cards.isEmpty()) {
+            return false;
+        }
+        player.moveCardsToExile(
                 cards.getCards(game), source, game, true,
                 CardUtil.getExileZoneId(game, source),
                 CardUtil.getSourceName(game, source)
         );
+        game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
+        return true;
     }
 }

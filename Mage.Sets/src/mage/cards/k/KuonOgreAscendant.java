@@ -43,7 +43,7 @@ public final class KuonOgreAscendant extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new FlipSourceEffect(new KuonsEssenceToken()),
-                TargetController.ANY,
+                TargetController.NEXT,
                 KuonOgreAscendantCondition.instance, false));
     }
 
@@ -72,7 +72,7 @@ class KuonsEssenceToken extends TokenImpl {
                 new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"),
                 TargetController.ANY, false, true));
     }
-    public KuonsEssenceToken(final KuonsEssenceToken token) {
+    private KuonsEssenceToken(final KuonsEssenceToken token) {
         super(token);
     }
 

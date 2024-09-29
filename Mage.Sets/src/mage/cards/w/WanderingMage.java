@@ -67,7 +67,7 @@ public final class WanderingMage extends CardImpl {
         ability.addCost(new WanderingMageCost());
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         Target target = new TargetControlledCreaturePermanent();
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         ability.addTarget(target);
         this.addAbility(ability);
     }
@@ -88,7 +88,7 @@ class WanderingMageCost extends CostImpl {
         this.text = "Put a -1/-1 counter on a creature you control";
     }
 
-    public WanderingMageCost(WanderingMageCost cost) {
+    private WanderingMageCost(final WanderingMageCost cost) {
         super(cost);
     }
 

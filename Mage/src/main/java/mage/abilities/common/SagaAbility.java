@@ -52,7 +52,7 @@ public class SagaAbility extends SimpleStaticAbility {
         card.addAbility(ability);
     }
 
-    public SagaAbility(final SagaAbility ability) {
+    protected SagaAbility(final SagaAbility ability) {
         super(ability);
         this.maxChapter = ability.maxChapter;
         this.showSacText = ability.showSacText;
@@ -61,6 +61,10 @@ public class SagaAbility extends SimpleStaticAbility {
 
     public void addChapterEffect(Card card, SagaChapter chapter, Effect... effects) {
         addChapterEffect(card, chapter, chapter, new Effects(effects));
+    }
+
+    public void addChapterEffect(Card card, SagaChapter chapter, Effect effect, Target target) {
+        addChapterEffect(card, chapter, chapter, new Effects(effect), target);
     }
 
     public void addChapterEffect(Card card, SagaChapter chapter, Effects effects, Target target) {

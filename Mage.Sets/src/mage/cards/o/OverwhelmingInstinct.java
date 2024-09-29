@@ -43,7 +43,7 @@ class OverwhelmingInstinctTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever you attack with three or more creatures, ");
     }
 
-    public OverwhelmingInstinctTriggeredAbility(final OverwhelmingInstinctTriggeredAbility ability) {
+    private OverwhelmingInstinctTriggeredAbility(final OverwhelmingInstinctTriggeredAbility ability) {
         super(ability);
     }
 

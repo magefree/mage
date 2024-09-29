@@ -47,8 +47,10 @@ public final class BestialFury extends CardImpl {
                 .setText("draw a card at the beginning of the next turn's upkeep"), false));
         
         // Whenever enchanted creature becomes blocked, it gets +4/+0 and gains trample until end of turn.
-        Ability pumpAbility = new BecomesBlockedAttachedTriggeredAbility(new BoostEnchantedEffect(4, 0, Duration.EndOfTurn), false);
-        pumpAbility.addEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn));
+        Ability pumpAbility = new BecomesBlockedAttachedTriggeredAbility(new BoostEnchantedEffect(4, 0, Duration.EndOfTurn)
+                .setText("it gets +4/+0"), false);
+        pumpAbility.addEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA, Duration.EndOfTurn)
+                .setText("and gains trample until end of turn"));
         
         
         this.addAbility(pumpAbility);

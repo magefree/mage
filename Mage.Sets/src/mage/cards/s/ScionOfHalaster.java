@@ -31,7 +31,7 @@ public final class ScionOfHalaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new SimpleStaticAbility(new ScionOfHalasterReplacementEffect()),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
-        )));
+        ).withForceQuotes()));
     }
 
     private ScionOfHalaster(final ScionOfHalaster card) {
@@ -58,11 +58,6 @@ class ScionOfHalasterReplacementEffect extends ReplacementEffectImpl {
     @Override
     public mage.cards.s.ScionOfHalasterReplacementEffect copy() {
         return new mage.cards.s.ScionOfHalasterReplacementEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

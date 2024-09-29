@@ -1,8 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.Optional;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -19,6 +17,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
+
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -59,23 +60,18 @@ public final class FaithsFetters extends CardImpl {
 
 class FaithsFettersEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public FaithsFettersEffect() {
+    FaithsFettersEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "and its activated abilities can't be activated unless they're mana abilities";
     }
 
-    public FaithsFettersEffect(final FaithsFettersEffect effect) {
+    private FaithsFettersEffect(final FaithsFettersEffect effect) {
         super(effect);
     }
 
     @Override
     public FaithsFettersEffect copy() {
         return new FaithsFettersEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -88,9 +84,7 @@ class FaithsFettersEffect extends ContinuousRuleModifyingEffectImpl {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null && enchantment.isAttachedTo(event.getSourceId())) {
             Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
-            if (ability.isPresent() && ability.get().getAbilityType() != AbilityType.MANA) {
-                return true;
-            }
+            return ability.isPresent() && ability.get().isNonManaActivatedAbility();
 
         }
         return false;

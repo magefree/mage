@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.Optional;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -15,6 +14,8 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.util.CardUtil;
+
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -53,13 +54,8 @@ class PhyrexianRevokerEffect2 extends ContinuousRuleModifyingEffectImpl {
         staticText = "Activated abilities of sources with the chosen name can't be activated";
     }
 
-    public PhyrexianRevokerEffect2(final PhyrexianRevokerEffect2 effect) {
+    private PhyrexianRevokerEffect2(final PhyrexianRevokerEffect2 effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -77,17 +73,20 @@ class PhyrexianRevokerEffect2 extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == EventType.ACTIVATE_ABILITY;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            MageObject object = game.getObject(event.getSourceId()); // Can happen for special ability????
-            if (object != null) {
-                Optional<Ability> optAbility = object.getAbilities().get(event.getTargetId());
-                if (optAbility.isPresent() && AbilityType.SPECIAL_ACTION == optAbility.get().getAbilityType()) {
-                    return false;
-                }
-                String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
-                return CardUtil.haveSameNames(object, cardName, game);
+        MageObject object = game.getObject(event.getSourceId()); // Can happen for special ability????
+        if (object != null) {
+            Optional<Ability> optAbility = object.getAbilities().get(event.getTargetId());
+            if (optAbility.isPresent() && AbilityType.SPECIAL_ACTION == optAbility.get().getAbilityType()) {
+                return false;
             }
+            String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
+            return CardUtil.haveSameNames(object, cardName, game);
         }
         return false;
     }

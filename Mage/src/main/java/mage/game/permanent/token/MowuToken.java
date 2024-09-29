@@ -20,7 +20,7 @@ public final class MowuToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    public MowuToken(final MowuToken token) {
+    private MowuToken(final MowuToken token) {
         super(token);
     }
 

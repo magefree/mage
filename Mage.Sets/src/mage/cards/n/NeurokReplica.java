@@ -33,7 +33,7 @@ public final class NeurokReplica extends CardImpl {
         this.addAbility(ability);
     }
 
-    public NeurokReplica (final NeurokReplica card) {
+    private NeurokReplica(final NeurokReplica card) {
         super(card);
     }
 

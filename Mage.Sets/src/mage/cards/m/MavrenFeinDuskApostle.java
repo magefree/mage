@@ -63,7 +63,7 @@ class MavrenFeinDuskApostleTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever one or more nontoken Vampires you control attack, ");
     }
 
-    public MavrenFeinDuskApostleTriggeredAbility(final MavrenFeinDuskApostleTriggeredAbility ability) {
+    private MavrenFeinDuskApostleTriggeredAbility(final MavrenFeinDuskApostleTriggeredAbility ability) {
         super(ability);
     }
 

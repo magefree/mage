@@ -11,7 +11,6 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.game.Game;
@@ -26,7 +25,7 @@ public final class OmenHawker extends CardImpl {
     public OmenHawker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{U}");
 
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.subtype.add(SubType.ADVISOR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -73,9 +72,8 @@ class OmenHawkerManaCondition extends ManaCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (source != null) {
-            return source.getAbilityType() == AbilityType.MANA
-                    || source.getAbilityType() == AbilityType.ACTIVATED;
+        if (source != null && !source.isActivated()) {
+            return source.isActivatedAbility();
         }
         return false;
     }

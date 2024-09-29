@@ -146,20 +146,11 @@ public class GameManagerImpl implements GameManager {
     }
 
     @Override
-    public void cheat(UUID gameId, UUID userId, UUID playerId, DeckCardLists deckList) {
+    public void cheatShow(UUID gameId, UUID userId, UUID playerId) {
         GameController gameController = getGameControllerSafe(gameId);
         if (gameController != null) {
-            gameController.cheat(userId, playerId, deckList);
+            gameController.cheatShow(playerId);
         }
-    }
-
-    @Override
-    public boolean cheat(UUID gameId, UUID userId, UUID playerId, String cardName) {
-        GameController gameController = getGameControllerSafe(gameId);
-        if (gameController != null) {
-            return gameController.cheat(userId, playerId, cardName);
-        }
-        return false;
     }
 
     @Override

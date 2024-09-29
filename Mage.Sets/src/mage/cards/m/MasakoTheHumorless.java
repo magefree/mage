@@ -46,12 +46,12 @@ public final class MasakoTheHumorless extends CardImpl {
 
 class BlockTappedEffect extends AsThoughEffectImpl {
 
-    public BlockTappedEffect() {
+    BlockTappedEffect() {
         super(AsThoughEffectType.BLOCK_TAPPED, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText ="Tapped creatures you control can block as though they were untapped";
     }
 
-    public BlockTappedEffect(final BlockTappedEffect effect) {
+    private BlockTappedEffect(final BlockTappedEffect effect) {
         super(effect);
     }
 

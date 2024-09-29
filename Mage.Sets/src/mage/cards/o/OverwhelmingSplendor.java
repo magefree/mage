@@ -1,4 +1,3 @@
-
 package mage.cards.o;
 
 import mage.MageObject;
@@ -9,7 +8,6 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -24,7 +22,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class OverwhelmingSplendor extends CardImpl {
@@ -60,12 +57,12 @@ public final class OverwhelmingSplendor extends CardImpl {
 
 class OverwhelmingSplendorLoseAbilitiesEffect extends ContinuousEffectImpl {
 
-    public OverwhelmingSplendorLoseAbilitiesEffect() {
+    OverwhelmingSplendorLoseAbilitiesEffect() {
         super(Duration.WhileOnBattlefield, Outcome.LoseAbility);
         staticText = "Creatures enchanted player controls lose all abilities and have base power and toughness 1/1";
     }
 
-    public OverwhelmingSplendorLoseAbilitiesEffect(final OverwhelmingSplendorLoseAbilitiesEffect effect) {
+    private OverwhelmingSplendorLoseAbilitiesEffect(final OverwhelmingSplendorLoseAbilitiesEffect effect) {
         super(effect);
     }
 
@@ -76,22 +73,15 @@ class OverwhelmingSplendorLoseAbilitiesEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        // In the case that the enchantment is blinked
-        Permanent enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        Permanent enchantment = source.getSourcePermanentOrLKI(game);
         if (enchantment == null) {
-            // It was not blinked, use the standard method
-            enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            if (enchantment == null) {
-                return false;
-            }
+            return false;
         }
-
         Player player = game.getPlayer(enchantment.getAttachedTo());
         if (player == null) {
             return false;
         }
-
-        for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)) {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
                     permanent.removeAllAbilities(source.getSourceId(), game);
@@ -120,23 +110,18 @@ class OverwhelmingSplendorLoseAbilitiesEffect extends ContinuousEffectImpl {
 
 class OverwhelmingSplendorCantActivateEffect extends ContinuousRuleModifyingEffectImpl {
 
-    public OverwhelmingSplendorCantActivateEffect() {
+    OverwhelmingSplendorCantActivateEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Enchanted player can't activate abilities that aren't mana abilities or loyalty abilities";
     }
 
-    public OverwhelmingSplendorCantActivateEffect(final OverwhelmingSplendorCantActivateEffect effect) {
+    private OverwhelmingSplendorCantActivateEffect(final OverwhelmingSplendorCantActivateEffect effect) {
         super(effect);
     }
 
     @Override
     public OverwhelmingSplendorCantActivateEffect copy() {
         return new OverwhelmingSplendorCantActivateEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override
@@ -149,11 +134,12 @@ class OverwhelmingSplendorCantActivateEffect extends ContinuousRuleModifyingEffe
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() != GameEvent.EventType.ACTIVATE_ABILITY) {
-            return false;
-        }
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.ACTIVATE_ABILITY;
+    }
 
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent enchantment = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (enchantment == null || !event.getPlayerId().equals(enchantment.getAttachedTo())) {
             return false;
@@ -161,7 +147,7 @@ class OverwhelmingSplendorCantActivateEffect extends ContinuousRuleModifyingEffe
 
         Optional<Ability> ability = game.getAbility(event.getTargetId(), event.getSourceId());
         return ability.isPresent()
-                && !(ability.get() instanceof ActivatedManaAbilityImpl)
+                && !(ability.get().isManaActivatedAbility())
                 && !(ability.get() instanceof LoyaltyAbility);
     }
 }

@@ -43,7 +43,7 @@ public final class VikyaScorchingStalwart extends CardImpl {
         ability.addCost(new UntapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetAnyTarget());
-        this.addAbility(ability.withFlavorWord("Hadoken"));
+        this.addAbility(ability);
     }
 
     private VikyaScorchingStalwart(final VikyaScorchingStalwart card) {

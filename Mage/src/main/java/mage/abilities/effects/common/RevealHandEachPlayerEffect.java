@@ -26,7 +26,7 @@ public class RevealHandEachPlayerEffect extends OneShotEffect {
         this.targetController = targetController;
     }
 
-    public RevealHandEachPlayerEffect(final RevealHandEachPlayerEffect effect) {
+    protected RevealHandEachPlayerEffect(final RevealHandEachPlayerEffect effect) {
         super(effect);
         this.targetController = effect.targetController;
     }

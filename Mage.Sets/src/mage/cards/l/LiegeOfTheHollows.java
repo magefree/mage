@@ -48,13 +48,13 @@ public final class LiegeOfTheHollows extends CardImpl {
 
 class LiegeOfTheHollowsEffect extends OneShotEffect {
 
-    public LiegeOfTheHollowsEffect() {
+    LiegeOfTheHollowsEffect() {
         super(Outcome.Detriment);
         this.staticText = "each player may pay any amount of mana. Then each player creates a number "
                 + "of 1/1 green Squirrel creature tokens equal to the amount of mana they paid this way";
     }
 
-    public LiegeOfTheHollowsEffect(final LiegeOfTheHollowsEffect effect) {
+    private LiegeOfTheHollowsEffect(final LiegeOfTheHollowsEffect effect) {
         super(effect);
     }
 
@@ -84,7 +84,7 @@ class LiegeOfTheHollowsEffect extends OneShotEffect {
                     token.putOntoBattlefield(entry.getValue(), game, source, player.getId());
                 }
             }
-            game.getState().processAction(game);
+            game.processAction();
             
             // prevent undo
             controller.resetStoredBookmark(game);

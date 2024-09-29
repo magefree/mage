@@ -54,7 +54,7 @@ public final class TadeasJuniperAscendant extends CardImpl {
         // Tadeas has hexproof unless it's attacking.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HexproofAbility.getInstance()),
-                condition, "{this} has hexproof unless he's attacking"
+                condition, "{this} has hexproof unless it's attacking"
         )));
 
         // Whenever a creature you control with reach attacks, untap it and it can't be blocked by creatures with greater power this combat.
@@ -110,7 +110,7 @@ class TadeasJuniperAscendantEvasionEffect extends RestrictionEffect {
 
     TadeasJuniperAscendantEvasionEffect(TargetPointer targetPointer) {
         super(Duration.EndOfCombat);
-        this.targetPointer = targetPointer;
+        this.setTargetPointer(targetPointer);
         staticText = "and can't be blocked by creatures with greater power";
     }
 
@@ -120,9 +120,10 @@ class TadeasJuniperAscendantEvasionEffect extends RestrictionEffect {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
+        return this.getTargetPointer().getTargets(game, source).contains(permanent.getId());
     }
 
+    @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game, boolean canUseChooseDialogs) {
         return blocker.getPower().getValue() <= attacker.getPower().getValue();
     }

@@ -40,7 +40,7 @@ public class LearnEffect extends OneShotEffect {
         ))) {
             return false;
         }
-        return new WishEffect(filter, true).apply(game, source)
+        return new WishEffect(filter).apply(game, source)
                 || new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1), new DiscardCardCost()
         ).apply(game, source);

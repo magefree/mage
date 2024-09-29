@@ -74,7 +74,7 @@ public final class EsikaGodOfTheTree extends ModalDoubleFacedCard {
 
 class PrismaticBridgeEffect extends OneShotEffect {
 
-    public PrismaticBridgeEffect() {
+    PrismaticBridgeEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "reveal cards from the top of your library until you reveal "
                 + "a creature or planeswalker card. Put that card onto the battlefield and the rest "

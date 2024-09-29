@@ -39,6 +39,11 @@ public interface ContinuousEffect extends Effect {
 
     boolean isInactive(Ability source, Game game);
 
+    /**
+     * Init ability data like ZCC or targets on first check in game cycle (ApplyEffects)
+     * <p>
+     * Warning, if you setup target pointer in init then must call super.init at the end (after all choices)
+     */
     void init(Ability source, Game game);
 
     void init(Ability source, Game game, UUID activePlayerId);
@@ -69,8 +74,7 @@ public interface ContinuousEffect extends Effect {
 
     boolean isYourNextEndStep(Game game);
 
-    @Override
-    void newId();
+    boolean isYourNextUpkeepStep(Game game);
 
     @Override
     ContinuousEffect copy();

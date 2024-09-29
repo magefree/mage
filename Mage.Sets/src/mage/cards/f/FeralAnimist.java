@@ -31,7 +31,7 @@ public final class FeralAnimist extends CardImpl {
 
         // {3}: Feral Animist gets +X/+0 until end of turn, where X is its power.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(new SourcePermanentPowerCount(), StaticValue.get(0), Duration.EndOfTurn, true),
+                new BoostSourceEffect(new SourcePermanentPowerCount(), StaticValue.get(0), Duration.EndOfTurn),
                 new GenericManaCost(3)));
     }
 

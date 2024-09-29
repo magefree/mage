@@ -22,7 +22,7 @@ public final class KnightWhiteBlueToken extends TokenImpl {
         addAbility(VigilanceAbility.getInstance());
     }
 
-    public KnightWhiteBlueToken(final KnightWhiteBlueToken token) {
+    private KnightWhiteBlueToken(final KnightWhiteBlueToken token) {
         super(token);
     }
 

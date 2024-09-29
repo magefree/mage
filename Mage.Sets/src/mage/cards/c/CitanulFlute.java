@@ -19,6 +19,7 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -52,7 +53,7 @@ class CitanulFluteSearchEffect extends OneShotEffect {
     CitanulFluteSearchEffect() {
         super(Outcome.DrawCard);
         staticText = "Search your library for a creature card with mana value X or less, " +
-                "reveal it, and put it into your hand. Then shuffle";
+                "reveal it, put it into your hand, then shuffle";
     }
 
     private CitanulFluteSearchEffect(final CitanulFluteSearchEffect effect) {
@@ -73,7 +74,7 @@ class CitanulFluteSearchEffect extends OneShotEffect {
 
         FilterCard filter = new FilterCreatureCard("creature card with mana value X or less");
         //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, CardUtil.getSourceCostsTag(game, source, "X", 0) + 1));
 
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         player.searchLibrary(target, source, game);

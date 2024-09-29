@@ -9,10 +9,14 @@ import mage.cards.repository.TokenRepository;
 import mage.client.MageFrame;
 import mage.client.dialog.DownloadImagesDialog;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.remote.XmageURLConnection;
 import mage.client.util.CardLanguage;
+import mage.client.util.GUISizeHelper;
 import mage.client.util.sets.ConstructedFormats;
-import mage.remote.Connection;
+import mage.util.ThreadUtils;
+import mage.util.XmageThreadFactory;
 import net.java.truevfs.access.TFile;
+import net.java.truevfs.access.TFileInputStream;
 import net.java.truevfs.access.TFileOutputStream;
 import net.java.truevfs.access.TVFS;
 import net.java.truevfs.kernel.spec.FsSyncException;
@@ -21,36 +25,51 @@ import org.mage.plugins.card.dl.DownloadServiceInfo;
 import org.mage.plugins.card.dl.sources.*;
 import org.mage.plugins.card.utils.CardImageUtils;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
+import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.*;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 /**
+ * App GUI: card images downloader service (for GUI control see DownloadImagesDialog)
+ *
  * @author JayDi85
  */
 public class DownloadPicturesService extends DefaultBoundedRangeModel implements DownloadServiceInfo, Runnable {
 
-    // don't forget to remove new sets from ignore.urls to download (properties file in resources)
-    private static DownloadPicturesService instance;
+    private static DownloadPicturesService instance = null;
+    private static Thread loadMissingDataThread = null;
+
     private static final Logger logger = Logger.getLogger(DownloadPicturesService.class);
 
     private static final String ALL_IMAGES = "- ALL images from selected source (can be slow)";
     private static final String ALL_MODERN_IMAGES = "- MODERN images (can be slow)";
     private static final String ALL_STANDARD_IMAGES = "- STANDARD images";
     private static final String ALL_TOKENS = "- TOKEN images";
+    private static final String ALL_BASICS = "- BASIC LAND images";
+
+    private static final List<String> basicList = Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest");
 
     private static final int MAX_ERRORS_COUNT_BEFORE_CANCEL = 50;
+
+    // protect from wrong data save
+    // there are possible land images with small sizes, so must research content in check
+    private static final int MIN_FILE_SIZE_OF_GOOD_IMAGE = 1024 * 6; // smaller files will be mark as broken
+    private static final int MIN_FILE_SIZE_OF_POSSIBLE_BAD_IMAGE = 1024 * 8; // smaller files will be checked for possible broken mark (slow)
 
     private final DownloadImagesDialog uiDialog;
     private boolean needCancel;
@@ -60,25 +79,19 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     private List<CardInfo> cardsAll;
     private List<CardDownloadData> cardsMissing;
     private final List<CardDownloadData> cardsDownloadQueue;
-    private int missingCardsCount = 0;
-    private int missingTokensCount = 0;
 
     private final List<String> selectedSets = new ArrayList<>();
-    private static CardImageSource selectedSource;
+    private CardImageSource selectedSource;
 
     private final Object sync = new Object();
-    private Proxy proxy = Proxy.NO_PROXY;
 
     enum DownloadSources {
-        WIZARDS("1. wizards.com - low quality CARDS, multi-language, slow download", WizardCardsImageSource.instance),
-        TOKENS("2. tokens.mtg.onl - high quality TOKENS", TokensMtgImageSource.instance),
-        SCRYFALL("3. scryfall.com - high quality CARDS and TOKENS, multi-language", ScryfallImageSource.instance),
-        MAGIDEX("4. magidex.com - high quality CARDS", MagidexImageSource.instance),
-        GRAB_BAG("5. GrabBag - STAR WARS cards and tokens", GrabbagImageSource.instance),
-        MYTHICSPOILER("6. mythicspoiler.com", MythicspoilerComSource.instance),
-        ALTERNATIVE("7. alternative.mtg.onl", AltMtgOnlTokensImageSource.instance),
-        COPYPASTE("8. Copy and Paste Image URLs", CopyPasteImageSource.instance);
-        // MTG_ONL("mtg.onl", MtgOnlTokensImageSource.instance), Not working correctly yet
+        WIZARDS("1. wizards.com - low quality, cards only", WizardCardsImageSource.instance),
+        SCRYFALL_BIG("2a. scryfall.com - BIG: high quality (~15 GB)", ScryfallImageSource.getInstance()),
+        SCRYFALL_NORM("2b. scryfall.com - normal: good quality (~10 GB)", ScryfallImageSourceNormal.getInstance()),
+        SCRYFALL_SMALL("2c. scryfall.com - small: low quality, unreadable text (~1.5 GB)", ScryfallImageSourceSmall.getInstance()),
+        GRAB_BAG("3. GrabBag - unofficial STAR WARS + Arena Tutorial cards", GrabbagImageSource.instance),
+        COPYPASTE("4. Experimental - copy and paste image URLs", CopyPasteImageSource.instance); // TODO: need rework for user friendly GUI
 
         private final String text;
         private final CardImageSource source;
@@ -103,31 +116,47 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         return instance;
     }
 
-    public static void main(String[] args) {
-        startDownload();
-    }
-
     public static void startDownload() {
-        // load images info in background task
-        instance = new DownloadPicturesService(MageFrame.getInstance());
-        new Thread(new LoadMissingCardDataNew(instance)).start();
+        // workaround to keep first db connection in main thread (not images thread) - so it will keep connection after close
+        // TODO: no needs?
+        CardRepository.instance.getNonLandAndNonCreatureNames();
 
-        // show dialog
+        // load images info in background task
+        if (instance == null) {
+            instance = new DownloadPicturesService();
+        }
+
+        if (loadMissingDataThread != null) {
+            // stop old thread
+            //loadMissingDataThread.interrupt();
+        }
+
+        // refresh ui
+        instance.uiDialog.setGlobalInfo("Initializing image download...");
+        instance.uiDialog.getProgressBar().setValue(0);
+
+        // start new thread
+        loadMissingDataThread = new Thread(new LoadMissingCardDataNew(instance));
+        loadMissingDataThread.setDaemon(true);
+        loadMissingDataThread.start();
+
+        // show control dialog
         instance.setNeedCancel(false);
         instance.resetErrorCount();
-        instance.uiDialog.showDialog();
-        instance.uiDialog.dispose();
-        instance.setNeedCancel(true);
+        instance.uiDialog.showDialog(() -> {
+            // on finish/close/cancel
+            doStopAndClose();
+        });
+    }
 
-        // IMAGES CHECK (download process can broke some files, so fix it here too)
-        // code executes on cancel/close download dialog (but not executes on app's close -- it's ok)
-        logger.info("Images: search broken files...");
-        CardImageUtils.checkAndFixImageFiles();
+    static private void doStopAndClose() {
+        instance.setNeedCancel(true);
+        instance.uiDialog.hideDialog();
     }
 
     @Override
     public boolean isNeedCancel() {
-        return this.needCancel || (this.errorCount > MAX_ERRORS_COUNT_BEFORE_CANCEL);
+        return this.needCancel || (this.errorCount > MAX_ERRORS_COUNT_BEFORE_CANCEL) || Thread.interrupted();
     }
 
     private void setNeedCancel(boolean needCancel) {
@@ -147,20 +176,17 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         this.errorCount = 0;
     }
 
-    public DownloadPicturesService(JFrame frame) {
+    public DownloadPicturesService() {
         // init service and dialog
         cardsAll = Collections.synchronizedList(new ArrayList<>());
         cardsMissing = Collections.synchronizedList(new ArrayList<>());
         cardsDownloadQueue = Collections.synchronizedList(new ArrayList<>());
         uiDialog = new DownloadImagesDialog();
 
-        // MESSAGE
-        uiDialog.setGlobalInfo("Initializing image download...");
-
         // SOURCES - scryfall is default source
         uiDialog.getSourcesCombo().setModel(new DefaultComboBoxModel(DownloadSources.values()));
-        uiDialog.getSourcesCombo().setSelectedItem(DownloadSources.SCRYFALL);
-        selectedSource = ScryfallImageSource.instance;
+        uiDialog.getSourcesCombo().setSelectedItem(DownloadSources.SCRYFALL_NORM);
+        selectedSource = ScryfallImageSource.getInstance();
         uiDialog.getSourcesCombo().addItemListener((ItemEvent event) -> {
             if (event.getStateChange() == ItemEvent.SELECTED) {
                 comboboxSourceSelected(event);
@@ -204,11 +230,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         });
 
         // BUTTON CANCEL (dialog and loading)
-        uiDialog.getCancelButton().addActionListener(e -> uiDialog.setVisible(false));
-        uiDialog.getStopButton().addActionListener(e -> uiDialog.setVisible(false));
-
-        // PROGRESS BAR
-        uiDialog.getProgressBar().setValue(0);
+        uiDialog.getCancelButton().addActionListener(e -> doStopAndClose());
+        uiDialog.getStopButton().addActionListener(e -> doStopAndClose());
     }
 
     public void findMissingCards() {
@@ -217,19 +240,30 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         this.cardsMissing.clear();
         this.cardsDownloadQueue.clear();
 
-        updateGlobalMessage("Loading cards list...");
-        this.cardsAll = Collections.synchronizedList(CardRepository.instance.findCards(new CardCriteria()));
+        try {
+            updateGlobalMessage("Loading cards list...");
+            this.cardsAll.addAll(CardRepository.instance.findCards(
+                    new CardCriteria().nightCard(null) // meld cards need to be in the target cards, so we allow for night cards
+            ));
+            if (isNeedCancel()) {
+                // fast stop on cancel
+                return;
+            }
 
-        updateGlobalMessage("Finding missing images...");
-        this.cardsMissing = prepareMissingCards(this.cardsAll, uiDialog.getRedownloadCheckbox().isSelected());
+            updateGlobalMessage("Finding missing images...");
+            this.cardsMissing.addAll(prepareMissingCards(this.cardsAll, uiDialog.getRedownloadCheckbox().isSelected()));
+            if (isNeedCancel()) {
+                // fast stop on cancel
+                return;
+            }
 
-        updateGlobalMessage("Finding available sets from selected source...");
-        this.uiDialog.getSetsCombo().setModel(new DefaultComboBoxModel<>(getSetsForCurrentImageSource()));
-        reloadCardsToDownload(this.uiDialog.getSetsCombo().getSelectedItem().toString());
-
-        this.uiDialog.showDownloadControls(true);
-        updateGlobalMessage("");
-        showDownloadControls(true);
+            updateGlobalMessage("Finding available sets from selected source...");
+            this.uiDialog.getSetsCombo().setModel(new DefaultComboBoxModel<>(getSetsForCurrentImageSource()));
+            reloadCardsToDownload(this.uiDialog.getSetsCombo().getSelectedItem().toString());
+        } finally {
+            updateGlobalMessage("");
+            this.uiDialog.showDownloadControls(true);
+        }
     }
 
     private void reloadLanguagesForSelectedSource() {
@@ -273,12 +307,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         this.uiDialog.getProgressBar().setValue(progressCurrent);
     }
 
-    @Override
-    public void showDownloadControls(boolean needToShow) {
-        // auto-size form on show
-        this.uiDialog.showDownloadControls(needToShow);
-    }
-
     private String getSetNameWithYear(ExpansionSet exp) {
         return exp.getName() + " (" + exp.getCode() + ", " + exp.getReleaseYear() + ")";
     }
@@ -300,6 +328,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             setNames.add(ALL_IMAGES);
             setNames.add(ALL_MODERN_IMAGES);
             setNames.add(ALL_STANDARD_IMAGES);
+            setNames.add(ALL_BASICS);
         }
         if (selectedSource.isTokenSource()) {
             setNames.add(ALL_TOKENS);
@@ -325,6 +354,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         // find selected sets
         selectedSets.clear();
         boolean onlyTokens = false;
+        boolean onlyBasics = false;
         List<String> formatSets;
         List<String> sourceSets = selectedSource.getSupportedSets();
         switch (selectedItem) {
@@ -347,6 +377,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         .forEachOrdered(selectedSets::add);
                 break;
 
+            case ALL_BASICS:
+                selectedSets.addAll(selectedSource.getSupportedSets());
+                onlyBasics = true;
+                break;
+
             case ALL_TOKENS:
                 selectedSets.addAll(selectedSource.getSupportedSets());
                 onlyTokens = true;
@@ -367,8 +402,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         int numberCardImagesAvailable = 0;
         for (CardDownloadData data : cardsMissing) {
             if (data.isToken()) {
-                if (selectedSource.isTokenSource()
-                        && selectedSource.isTokenImageProvided(data.getSet(), data.getName(), data.getType())
+                if (!onlyBasics
+                        && selectedSource.isTokenSource()
+                        && selectedSource.isTokenImageProvided(data.getSet(), data.getName(), data.getImageNumber())
                         && selectedSets.contains(data.getSet())) {
                     numberTokenImagesAvailable++;
                     cardsDownloadQueue.add(data);
@@ -378,8 +414,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         && selectedSource.isCardSource()
                         && selectedSource.isCardImageProvided(data.getSet(), data.getName())
                         && selectedSets.contains(data.getSet())) {
-                    numberCardImagesAvailable++;
-                    cardsDownloadQueue.add(data);
+                    if (!onlyBasics
+                            || basicList.contains(data.getName())) {
+                        numberCardImagesAvailable++;
+                        cardsDownloadQueue.add(data);
+                    }
                 }
             }
         }
@@ -395,7 +434,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         MageFrame.getDesktop().setCursor(new Cursor(Cursor.WAIT_CURSOR));
         try {
             this.cardsMissing.clear();
-            this.cardsMissing = prepareMissingCards(this.cardsAll, uiDialog.getRedownloadCheckbox().isSelected());
+            this.cardsMissing.addAll(prepareMissingCards(this.cardsAll, uiDialog.getRedownloadCheckbox().isSelected()));
             reloadCardsToDownload(uiDialog.getSetsCombo().getSelectedItem().toString());
         } finally {
             MageFrame.getDesktop().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
@@ -403,22 +442,27 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     }
 
     private void updateProgressText(int cardCount, int tokenCount) {
-        missingTokensCount = 0;
+        int missingTokensCount = 0;
         for (CardDownloadData card : cardsMissing) {
             if (card.isToken()) {
                 missingTokensCount++;
             }
         }
-        missingCardsCount = cardsMissing.size() - missingTokensCount;
+        int missingCardsCount = cardsMissing.size() - missingTokensCount;
 
         uiDialog.setCurrentInfo("Missing: " + missingCardsCount + " card images / " + missingTokensCount + " token images");
         int imageSum = cardCount + tokenCount;
-        float mb = (imageSum * selectedSource.getAverageSize()) / 1024;
-        updateProgressMessage(String.format(
-                cardIndex == imageSum
-                        ? "%d of %d (%d cards/%d tokens) image downloads finished! Please close!"
-                        : "%d of %d (%d cards/%d tokens) image downloads finished! Please wait! [%.1f Mb]",
-                0, imageSum, cardCount, tokenCount, mb
+        float mb = (imageSum * selectedSource.getAverageSizeKb()) / 1024;
+        String statusEnd;
+        if (imageSum == 0) {
+            statusEnd = "you have all images. Please close.";
+        } else if (cardIndex == 0) {
+            statusEnd = "image download NOT STARTED. Please start.";
+        } else {
+            statusEnd = String.format("image downloading... Please wait [%.1f MB left].", mb);
+        }
+        updateProgressMessage(String.format("%d of %d (%d cards and %d tokens) %s",
+                0, imageSum, cardCount, tokenCount, statusEnd
         ), 0, imageSum);
     }
 
@@ -428,37 +472,33 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
     }
 
     private static List<CardDownloadData> prepareMissingCards(List<CardInfo> allCards, boolean redownloadMode) {
-
-        // get filter for Standard Type 2 cards
-        Set<String> type2SetsFilter = new HashSet<>();
-        List<String> constructedFormats = ConstructedFormats.getSetsByFormat(ConstructedFormats.STANDARD);
-        if (constructedFormats != null && !constructedFormats.isEmpty()) {
-            type2SetsFilter.addAll(constructedFormats);
-        } else {
-            logger.warn("No formats defined. Try connecting to a server first!");
-        }
-
         // prepare checking list
         List<CardDownloadData> allCardsUrls = Collections.synchronizedList(new ArrayList<>());
         try {
             allCards.parallelStream().forEach(card -> {
-                if (!card.getCardNumber().isEmpty() && !"0".equals(card.getCardNumber()) && !card.getSetCode().isEmpty()) {
-                    String cardName = card.getName();
-                    boolean isType2 = type2SetsFilter.contains(card.getSetCode());
-                    CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), card.isNightCard());
+                if (!card.getCardNumber().isEmpty()
+                        && !"0".equals(card.getCardNumber())
+                        && !card.getSetCode().isEmpty()) {
 
-                    // variations must have diff file names with additional postfix
-                    if (url.getUsesVariousArt()) {
-                        url.setDownloadName(createDownloadName(card));
+                    // main side for non-night cards.
+                    // At the exception of Meld Card, as they are not the back of an image for download
+                    if (!card.isNightCard() || card.isMeldCard()) {
+                        String cardName = card.getName();
+                        CardDownloadData url = new CardDownloadData(
+                                cardName,
+                                card.getSetCode(),
+                                card.getCardNumber(),
+                                card.usesVariousArt(),
+                                0);
+
+                        // variations must have diff file names with additional postfix
+                        if (url.getUsesVariousArt()) {
+                            url.setDownloadName(createDownloadName(card));
+                        }
+
+                        url.setSplitCard(card.isSplitCard());
+                        allCardsUrls.add(url);
                     }
-
-                    url.setFlipCard(card.isFlipCard());
-                    url.setSplitCard(card.isSplitCard());
-                    url.setType2(isType2);
-
-                    // main side
-                    allCardsUrls.add(url);
-
                     // second side
                     // xmage doesn't search night cards by default, so add it and other types manually
                     if (card.isDoubleFaced()) {
@@ -468,16 +508,17 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
                         CardInfo secondSideCard = CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber());
                         if (secondSideCard == null) {
-                            throw new IllegalStateException("Can''t find second side card in database: " + card.getSecondSideName());
+                            throw new IllegalStateException("Can't find second side card in database: " + card.getSecondSideName());
                         }
 
-                        url = new CardDownloadData(
+                        CardDownloadData url = new CardDownloadData(
                                 card.getSecondSideName(),
                                 card.getSetCode(),
                                 secondSideCard.getCardNumber(),
                                 card.usesVariousArt(),
-                                0, false, card.isDoubleFaced(), true);
-                        url.setType2(isType2);
+                                0
+                        );
+                        url.setSecondSide(true);
                         allCardsUrls.add(url);
                     }
                     if (card.isFlipCard()) {
@@ -489,10 +530,11 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 card.getSetCode(),
                                 card.getCardNumber(),
                                 card.usesVariousArt(),
-                                0, false, card.isDoubleFaced(), card.isNightCard());
-                        cardDownloadData.setFlipCard(true);
+                                0
+                        );
                         cardDownloadData.setFlippedSide(true);
-                        cardDownloadData.setType2(isType2);
+                        // meld cards urls are on their own
+                        cardDownloadData.setSecondSide(card.isNightCard() && !card.isMeldCard());
                         allCardsUrls.add(cardDownloadData);
                     }
                     if (card.getMeldsToCardName() != null) {
@@ -502,17 +544,17 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
                         CardInfo meldsToCard = CardRepository.instance.findCardWithPreferredSetAndNumber(card.getMeldsToCardName(), card.getSetCode(), card.getCardNumber());
                         if (meldsToCard == null) {
-                            throw new IllegalStateException("Can''t find meldsToCard in database: " + card.getMeldsToCardName());
+                            throw new IllegalStateException("Can't find meldsToCard in database: " + card.getMeldsToCardName());
                         }
 
                         // meld cards are normal cards from the set, so no needs to set two faces/sides here
-                        url = new CardDownloadData(
+                        CardDownloadData url = new CardDownloadData(
                                 card.getMeldsToCardName(),
                                 card.getSetCode(),
                                 meldsToCard.getCardNumber(),
                                 card.usesVariousArt(),
-                                0, false, false, false);
-                        url.setType2(isType2);
+                                0
+                        );
                         allCardsUrls.add(url);
                     }
                     if (card.isModalDoubleFacedCard()) {
@@ -524,8 +566,9 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 card.getSetCode(),
                                 card.getCardNumber(),
                                 card.usesVariousArt(),
-                                0, false, true, true);
-                        cardDownloadData.setType2(isType2);
+                                0
+                        );
+                        cardDownloadData.setSecondSide(true);
                         allCardsUrls.add(cardDownloadData);
                     }
                 } else if (card.getCardNumber().isEmpty() || "0".equals(card.getCardNumber())) {
@@ -544,30 +587,54 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         token.getSetCode(),
                         "0",
                         false,
-                        token.getImageNumber(),
-                        true,
-                        token.getImageFileName()
-                );
+                        token.getImageNumber());
+                card.setToken(true);
                 allCardsUrls.add(card);
             });
         } catch (Exception e) {
-            logger.error(e);
+            logger.error("Error on prepare images list: " + e, e);
         }
 
         // find missing files
         List<CardDownloadData> cardsToDownload = Collections.synchronizedList(new ArrayList<>());
+        AtomicInteger badContentChecks = new AtomicInteger();
         allCardsUrls.parallelStream().forEach(card -> {
             if (redownloadMode) {
                 // need all cards
                 cardsToDownload.add(card);
             } else {
                 // need missing cards
-                File file = new TFile(CardImageUtils.buildImagePathToCardOrToken(card));
+                String imagePath = CardImageUtils.buildImagePathToCardOrToken(card);
+                File file = new TFile(imagePath);
                 if (!file.exists()) {
                     cardsToDownload.add(card);
+                } else if (file.length() < MIN_FILE_SIZE_OF_GOOD_IMAGE) {
+                    // too small, e.g. contains http error page instead image data
+                    // how-to fix: if it really downloads image data then set lower file size
+                    logger.error("Found broken file (small size): " + imagePath);
+                    cardsToDownload.add(card);
+                } else if (file.length() < MIN_FILE_SIZE_OF_POSSIBLE_BAD_IMAGE) {
+                    // bad image format, e.g. contains redirected site page
+                    badContentChecks.incrementAndGet();
+                    try {
+                        try (TFileInputStream inputStream = new TFileInputStream(file)) {
+                            BufferedImage image = ImageIO.read(inputStream);
+                            if (image.getWidth() <= 0) {
+                                throw new IOException("bad format");
+                            }
+                        }
+                    } catch (Exception e) {
+                        logger.error("Found broken file (bad format): " + imagePath);
+                        cardsToDownload.add(card);
+                    }
                 }
             }
         });
+
+        if (badContentChecks.get() > 1000) {
+            // how-to fix: download full small images and run checks -- make sure it finds fewer files to check
+            logger.warn("Wrong code usage: too many file content checks (" + badContentChecks.get() + ") - try to decrease min file size");
+        }
 
         return Collections.synchronizedList(new ArrayList<>(cardsToDownload));
     }
@@ -577,39 +644,14 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         this.cardIndex = 0;
         this.resetErrorCount();
 
-        File base = new File(getImagesDir());
-        if (!base.exists()) {
-            base.mkdir();
-        }
-
-        Connection.ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
-        Proxy.Type type = Proxy.Type.DIRECT;
-        switch (configProxyType) {
-            case HTTP:
-                type = Proxy.Type.HTTP;
-                break;
-            case SOCKS:
-                type = Proxy.Type.SOCKS;
-                break;
-            case NONE:
-            default:
-                proxy = Proxy.NO_PROXY;
-                break;
-        }
-
-        if (type != Proxy.Type.DIRECT) {
-            try {
-                String address = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
-                Integer port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));
-                proxy = new Proxy(type, new InetSocketAddress(address, port));
-            } catch (Exception ex) {
-                throw new RuntimeException("Gui_DownloadPicturesService : error 1 - " + ex);
+        try {
+            File base = new File(getImagesDir());
+            if (!base.exists()) {
+                base.mkdir();
             }
-        }
 
-        int downloadThreadsAmount = Integer.parseInt((String) uiDialog.getDownloadThreadsCombo().getSelectedItem());
+            int downloadThreadsAmount = Math.max(1, Integer.parseInt((String) uiDialog.getDownloadThreadsCombo().getSelectedItem()));
 
-        if (proxy != null) {
             logger.info("Started download of " + cardsDownloadQueue.size() + " images"
                     + " from source: " + selectedSource.getSourceName()
                     + ", language: " + selectedSource.getCurrentLanguage().getCode()
@@ -617,7 +659,10 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             updateProgressMessage("Preparing download list...");
             if (selectedSource.prepareDownloadList(this, cardsDownloadQueue)) {
                 update(0, cardsDownloadQueue.size());
-                ExecutorService executor = Executors.newFixedThreadPool(downloadThreadsAmount);
+                ExecutorService executor = Executors.newFixedThreadPool(
+                        downloadThreadsAmount,
+                        new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_CLIENT_IMAGES_DOWNLOADER, false)
+                );
                 for (int i = 0; i < cardsDownloadQueue.size() && !this.isNeedCancel(); i++) {
                     try {
                         CardDownloadData card = cardsDownloadQueue.get(i);
@@ -661,35 +706,40 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                 }
 
                 executor.shutdown();
-                while (!executor.isTerminated()) {
-                    try {
-                        TimeUnit.SECONDS.sleep(1);
-                    } catch (InterruptedException ie) {
-                    }
+                try {
+                    executor.awaitTermination(30, TimeUnit.SECONDS);
+                } catch (InterruptedException ignore) {
                 }
+
+                // IMAGES CHECK (download process can break some files, so fix it here too)
+                // code executes on finish/cancel download (but not executes on app's close -- it's ok)
+                logger.info("Images: search broken files...");
+                CardImageUtils.checkAndFixImageFiles();
+            }
+        } catch (Throwable e) {
+            logger.error("Catch unknown error while downloading: " + e, e);
+            MageFrame.getInstance().showErrorDialog("Catch unknown error while downloading " + e, e);
+        } finally {
+            // must close all active archives anyway
+            try {
+                TVFS.umount();
+            } catch (FsSyncException e) {
+                logger.fatal("Couldn't unmount zip files " + e, e);
+                MageFrame.getInstance().showErrorDialog("Couldn't unmount zip files " + e, e);
             }
         }
 
-        try {
-            TVFS.umount();
-        } catch (FsSyncException e) {
-            logger.fatal("Couldn't unmount zip files", e);
-            JOptionPane.showMessageDialog(null, "Couldn't unmount zip files", "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            //
-        }
+        // cleanup resources
+        Arrays.stream(DownloadSources.values()).forEach(resource -> {
+            resource.source.onFinished();
+        });
 
         // stop
         reloadCardsToDownload(uiDialog.getSetsCombo().getSelectedItem().toString());
         enableDialogButtons();
 
-        // reset images cache
-        ImageCache.clearCache();
-    }
-
-    static String convertStreamToString(InputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
+        // reset GUI and cards to use new images
+        GUISizeHelper.refreshGUIAndCards(false);
     }
 
     private final class DownloadTask implements Runnable {
@@ -705,15 +755,15 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             this.urls = urls;
             this.count = count;
             this.actualFilename = "";
-            useSpecifiedPaths = false;
+            this.useSpecifiedPaths = false;
         }
 
         DownloadTask(CardDownloadData card, String baseUrl, String actualFilename, int count) {
             this.card = card;
-            this.urls = new CardImageUrls(baseUrl, null);
+            this.urls = new CardImageUrls(baseUrl);
             this.count = count;
             this.actualFilename = actualFilename;
-            useSpecifiedPaths = true;
+            this.useSpecifiedPaths = true;
         }
 
         @Override
@@ -761,17 +811,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     destFile = new TFile(CardImageUtils.buildImagePathToCardOrToken(card));
                 }
 
-                // FILE already exists (in zip or in dir)
-                // don't use, images can be re-downloaded
-                /*
-                if (destFile.exists()) {
-                    synchronized (sync) {
-                        update(cardIndex + 1, count);
-                    }
-                    return;
-                }
-                */
-
                 // check zip access
                 TFile testArchive = destFile.getTopLevelArchive();
                 if (testArchive != null && testArchive.exists()) {
@@ -789,42 +828,45 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
                 // can download images from many alternative urls
                 List<String> downloadUrls;
+                XmageURLConnection connection = null;
                 if (this.urls != null) {
                     downloadUrls = this.urls.getDownloadList();
                 } else {
                     downloadUrls = new ArrayList<>();
                 }
 
+                // try to find first workable link
                 boolean isDownloadOK = false;
-                URLConnection httpConn = null;
                 List<String> errorsList = new ArrayList<>();
                 for (String currentUrl : downloadUrls) {
-                    URL url = new URL(currentUrl);
 
-                    // on download cancel need to stop
+                    // fast stop on cancel
                     if (DownloadPicturesService.getInstance().isNeedCancel()) {
                         return;
                     }
 
-                    // download
-                    selectedSource.doPause(url.getPath());
+                    // timeout before each request
+                    selectedSource.doPause(currentUrl);
 
-                    httpConn = url.openConnection(proxy);
-                    if (httpConn != null) {
+                    connection = new XmageURLConnection(currentUrl);
+                    connection.startConnection();
+                    if (connection.isConnected()) {
 
-                        httpConn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+                        // custom headers (ues
+                        connection.setRequestHeaders(selectedSource.getHttpRequestHeaders(currentUrl));
+
                         try {
-                            httpConn.connect();
+                            connection.connect();
                         } catch (SocketException e) {
                             incErrorCount();
-                            errorsList.add("Wrong image URL or java app is not allowed to use network. Check your firewall or proxy settings. Error: " + e.getMessage() + ". Image URL: " + url.toString());
+                            errorsList.add("Wrong image URL or java app is not allowed to use network. Check your firewall or proxy settings. Error: " + e.getMessage() + ". Image URL: " + currentUrl);
                             break;
                         } catch (UnknownHostException e) {
                             incErrorCount();
-                            errorsList.add("Unknown site. Check your DNS settings. Error: " + e.getMessage() + ". Image URL: " + url.toString());
+                            errorsList.add("Unknown site. Check your DNS settings. Error: " + e.getMessage() + ". Image URL: " + currentUrl);
                             break;
                         }
-                        int responseCode = ((HttpURLConnection) httpConn).getResponseCode();
+                        int responseCode = connection.getResponseCode();
 
                         // check result
                         if (responseCode != 200) {
@@ -833,13 +875,13 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                     card.getSet(),
                                     card.getName(),
                                     responseCode,
-                                    url
+                                    currentUrl
                             );
                             errorsList.add(info);
 
                             if (logger.isDebugEnabled()) {
                                 // Shows the returned html from the request to the web server
-                                logger.debug("Returned HTML ERROR:\n" + convertStreamToString(((HttpURLConnection) httpConn).getErrorStream()));
+                                logger.debug("Returned HTML ERROR:\n" + connection.getErrorResponseAsString());
                             }
 
                             // go to next try
@@ -852,28 +894,19 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                     }
                 }
 
-                // can save result
-                if (isDownloadOK && httpConn != null) {
+                // if workable link found then save result
+                if (isDownloadOK && connection.isConnected()) {
                     // save data to temp
-                    try (InputStream in = new BufferedInputStream(httpConn.getInputStream());
-                         OutputStream tfileout = new TFileOutputStream(fileTempImage);
-                         OutputStream out = new BufferedOutputStream(tfileout)) {
+                    try (InputStream in = new BufferedInputStream(connection.getGoodResponseAsStream());
+                         OutputStream tempFileStream = new TFileOutputStream(fileTempImage);
+                         OutputStream out = new BufferedOutputStream(tempFileStream)) {
                         byte[] buf = new byte[1024];
                         int len;
                         while ((len = in.read(buf)) != -1) {
                             // user cancelled
                             if (DownloadPicturesService.getInstance().isNeedCancel()) {
                                 // stop download, save current state and exit
-                                TFile archive = destFile.getTopLevelArchive();
-                                ///* not need to unmout/close - it's auto action
-                                if (archive != null && archive.exists()) {
-                                    logger.info("User canceled download. Closing archive file: " + destFile.toString());
-                                    try {
-                                        TVFS.umount(archive);
-                                    } catch (Exception e) {
-                                        logger.error("Can't close archive file: " + e.getMessage(), e);
-                                    }
-                                }
+                                // real archives save will be done on download service finish
                                 try {
                                     TFile.rm(fileTempImage);
                                 } catch (Exception e) {
@@ -881,11 +914,14 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                                 }
                                 return;
                             }
+
+                            // all fine, can save data part
                             out.write(buf, 0, len);
                         }
                     }
-                    // TODO: add two faces card correction? (WTF)
+
                     // SAVE final data
+                    // TODO: add image data check here instead use it on download dialog?
                     if (fileTempImage.exists()) {
                         if (!destFile.getParentFile().exists()) {
                             destFile.getParentFile().mkdirs();
@@ -896,7 +932,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
                         } catch (Exception e) {
                             logger.error("Can't delete temp file: " + e.getMessage(), e);
                         }
-
                     }
                 } else {
                     // download errors
@@ -925,26 +960,28 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
         if (cardIndex < needDownloadCount) {
             // downloading
-            float mb = ((needDownloadCount - lastCardIndex) * selectedSource.getAverageSize()) / 1024;
-            updateProgressMessage(String.format("%d of %d image downloads finished! Please wait! [%.1f Mb]",
+            float mb = ((needDownloadCount - lastCardIndex) * selectedSource.getAverageSizeKb()) / 1024;
+            updateProgressMessage(String.format("%d of %d image downloading... Please wait [%.1f MB left].",
                     lastCardIndex, needDownloadCount, mb), lastCardIndex, needDownloadCount);
         } else {
             // finished
+            updateProgressMessage("Image download DONE, saving last files and refreshing stats... Please wait.");
             List<CardDownloadData> downloadedCards = Collections.synchronizedList(new ArrayList<>());
             DownloadPicturesService.this.cardsMissing.parallelStream().forEach(cardDownloadData -> {
                 TFile file = new TFile(CardImageUtils.buildImagePathToCardOrToken(cardDownloadData));
-                if (file.exists()) {
+                if (file.exists() && file.length() > MIN_FILE_SIZE_OF_GOOD_IMAGE) {
                     downloadedCards.add(cardDownloadData);
                 }
             });
 
             // remove all downloaded cards, missing must be remains
+            // TODO: too slow on finished, must be reworked (e.g. run full check instead remove)
             this.cardsDownloadQueue.removeAll(downloadedCards);
             this.cardsMissing.removeAll(downloadedCards);
 
             if (this.cardsDownloadQueue.isEmpty()) {
                 // stop download
-                updateProgressMessage("0 images remaining. Please close.");
+                updateProgressMessage("Nothing to download. Please close.");
             } else {
                 // try download again
             }
@@ -959,11 +996,6 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
         uiDialog.getRedownloadCheckbox().setSelected(false); // reset re-download button after finished
         uiDialog.enableActionControls(true);
         uiDialog.getStartButton().setEnabled(true);
-    }
-
-    @Override
-    public Proxy getProxy() {
-        return proxy;
     }
 
     @Override
@@ -983,9 +1015,5 @@ class LoadMissingCardDataNew implements Runnable {
     @Override
     public void run() {
         downloadPicturesService.findMissingCards();
-    }
-
-    public static void main() {
-        (new Thread(new LoadMissingCardDataNew(downloadPicturesService))).start();
     }
 }

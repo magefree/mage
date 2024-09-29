@@ -55,12 +55,12 @@ public final class Exile extends CardImpl {
 
 class ExileEffect extends OneShotEffect {
 
-    public ExileEffect() {
+    ExileEffect() {
         super(Outcome.GainLife);
         staticText = "You gain life equal to its toughness";
     }
 
-    public ExileEffect(final ExileEffect effect) {
+    private ExileEffect(final ExileEffect effect) {
         super(effect);
     }
 

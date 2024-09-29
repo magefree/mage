@@ -73,7 +73,7 @@ class FlowstoneSculptureEffect extends OneShotEffect {
         staticText = "Put a +1/+1 counter on {this} or {this} gains flying, first strike, or trample.";
     }
 
-    public FlowstoneSculptureEffect(final FlowstoneSculptureEffect effect) {
+    private FlowstoneSculptureEffect(final FlowstoneSculptureEffect effect) {
         super(effect);
     }
 

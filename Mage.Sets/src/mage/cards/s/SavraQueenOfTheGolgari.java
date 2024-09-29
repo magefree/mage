@@ -1,34 +1,40 @@
-
 package mage.cards.s;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.Zone;
+import mage.constants.*;
+import mage.filter.StaticFilters;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetSacrifice;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
  * @author fireshoes
  */
 public final class SavraQueenOfTheGolgari extends CardImpl {
+
+    private static final FilterCreaturePermanent filterBlack = new FilterCreaturePermanent("a black creature");
+    private static final FilterCreaturePermanent filterGreen = new FilterCreaturePermanent("a green creature");
+    static {
+        filterBlack.add(new ColorPredicate(ObjectColor.BLACK));
+        filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
+    }
 
     public SavraQueenOfTheGolgari(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}{G}");
@@ -39,10 +45,15 @@ public final class SavraQueenOfTheGolgari extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever you sacrifice a black creature, you may pay 2 life. If you do, each other player sacrifices a creature.
-        this.addAbility(new SavraSacrificeBlackCreatureAbility());
+        this.addAbility(new SacrificePermanentTriggeredAbility(
+                new DoIfCostPaid(new SavraSacrificeEffect(), new PayLifeCost(2)),
+                filterBlack
+        ));
 
         // Whenever you sacrifice a green creature, you may gain 2 life.
-        this.addAbility(new SavraSacrificeGreenCreatureAbility());
+        this.addAbility(new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(2),
+                filterGreen, TargetController.YOU, SetTargetPointer.NONE, true
+        ));
     }
 
     private SavraQueenOfTheGolgari(final SavraQueenOfTheGolgari card) {
@@ -55,44 +66,14 @@ public final class SavraQueenOfTheGolgari extends CardImpl {
     }
 }
 
-class SavraSacrificeBlackCreatureAbility extends TriggeredAbilityImpl {
-
-    public SavraSacrificeBlackCreatureAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new SavraSacrificeEffect(), new PayLifeCost(2)));
-        this.setLeavesTheBattlefieldTrigger(true);
-        setTriggerPhrase("Whenever you sacrifice a black creature, ");
-    }
-
-    public SavraSacrificeBlackCreatureAbility(final SavraSacrificeBlackCreatureAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SavraSacrificeBlackCreatureAbility copy() {
-        return new SavraSacrificeBlackCreatureAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game)
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getColor(game).isBlack();
-    }
-}
-
 class SavraSacrificeEffect extends OneShotEffect {
 
-    public SavraSacrificeEffect() {
+    SavraSacrificeEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "each other player sacrifices a creature";
     }
 
-    public SavraSacrificeEffect(final SavraSacrificeEffect effect) {
+    private SavraSacrificeEffect(final SavraSacrificeEffect effect) {
         super(effect);
     }
 
@@ -109,10 +90,9 @@ class SavraSacrificeEffect extends OneShotEffect {
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null && !playerId.equals(source.getControllerId())) {
-                    TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-                    target.setNotTarget(true);
+                    TargetSacrifice target = new TargetSacrifice(StaticFilters.FILTER_PERMANENT_CREATURE);
                     if (target.canChoose(player.getId(), source, game)) {
-                        player.chooseTarget(Outcome.Sacrifice, target, source, game);
+                        player.choose(Outcome.Sacrifice, target, source, game);
                         perms.addAll(target.getTargets());
                     }
                 }
@@ -126,34 +106,5 @@ class SavraSacrificeEffect extends OneShotEffect {
             return true;
         }
         return false;
-    }
-}
-
-class SavraSacrificeGreenCreatureAbility extends TriggeredAbilityImpl {
-
-    public SavraSacrificeGreenCreatureAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(2), true);
-        setTriggerPhrase("Whenever you sacrifice a green creature, ");
-    }
-
-    public SavraSacrificeGreenCreatureAbility(final SavraSacrificeGreenCreatureAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SavraSacrificeGreenCreatureAbility copy() {
-        return new SavraSacrificeGreenCreatureAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).isCreature(game)
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).getColor(game).isGreen();
     }
 }

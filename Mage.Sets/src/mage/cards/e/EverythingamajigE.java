@@ -41,11 +41,11 @@ public final class EverythingamajigE extends CardImpl {
 
         // Zuran Orb
         // Sacrifice a land: You gain 2 life.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new SacrificeTargetCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_LAND_SHORT_TEXT))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
 
         // Ashnod's Altar
         // Sacrifice a creature: Add {C}{C} to your mana pool.
-        SacrificeTargetCost cost = new SacrificeTargetCost(new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT));
+        SacrificeTargetCost cost = new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE);
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.ColorlessMana(2), CreaturesYouControlCount.instance),
                 cost));
@@ -69,12 +69,12 @@ public final class EverythingamajigE extends CardImpl {
 
 class UrzasHotTubEffect extends OneShotEffect {
 
-    public UrzasHotTubEffect() {
+    UrzasHotTubEffect() {
         super(Outcome.ReturnToHand);
         this.staticText = "Search your library for a card that shares a complete word in its name with the discarded card, reveal it, put it into your hand, then shuffle";
     }
 
-    public UrzasHotTubEffect(final UrzasHotTubEffect effect) {
+    private UrzasHotTubEffect(final UrzasHotTubEffect effect) {
         super(effect);
     }
 

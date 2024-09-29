@@ -72,7 +72,7 @@ class GuardianZendikonWallToken extends TokenImpl {
         toughness = new MageInt(6);
         this.addAbility(DefenderAbility.getInstance());
     }
-    public GuardianZendikonWallToken(final GuardianZendikonWallToken token) {
+    private GuardianZendikonWallToken(final GuardianZendikonWallToken token) {
         super(token);
     }
 

@@ -57,14 +57,14 @@ class ThadaAdelAcquisitorEffect extends OneShotEffect {
         staticText = "search that player's library for an artifact card and exile it. Then that player shuffles. Until end of turn, you may play that card";
     }
 
-    ThadaAdelAcquisitorEffect(final ThadaAdelAcquisitorEffect effect) {
+    private ThadaAdelAcquisitorEffect(final ThadaAdelAcquisitorEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player damagedPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player damagedPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (controller == null || damagedPlayer == null) {
             return false;
         }

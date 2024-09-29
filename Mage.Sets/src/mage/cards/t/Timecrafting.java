@@ -1,7 +1,6 @@
 
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -16,6 +15,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetPermanentOrSuspendedCard;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -58,7 +60,7 @@ class TimecraftingRemoveEffect extends OneShotEffect {
         this.staticText = "Remove X time counters from target permanent or suspended card";
     }
 
-    TimecraftingRemoveEffect(final TimecraftingRemoveEffect effect) {
+    private TimecraftingRemoveEffect(final TimecraftingRemoveEffect effect) {
         super(effect);
     }
 
@@ -71,7 +73,7 @@ class TimecraftingRemoveEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int xValue = source.getManaCostsToPay().getX();
+            int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
                 permanent.removeCounters(CounterType.TIME.createInstance(xValue), source, game);
@@ -95,7 +97,7 @@ class TimecraftingAddEffect extends OneShotEffect {
         this.staticText = "Put X time counters on target permanent with a time counter on it or suspended card";
     }
 
-    TimecraftingAddEffect(final TimecraftingAddEffect effect) {
+    private TimecraftingAddEffect(final TimecraftingAddEffect effect) {
         super(effect);
     }
 
@@ -108,7 +110,7 @@ class TimecraftingAddEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int xValue = source.getManaCostsToPay().getX();
+            int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
             Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
             if (permanent != null) {
                 permanent.addCounters(CounterType.TIME.createInstance(xValue), source.getControllerId(), source, game);

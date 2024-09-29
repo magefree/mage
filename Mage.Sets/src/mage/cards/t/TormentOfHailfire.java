@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -13,6 +12,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,7 +47,7 @@ class TormentOfHailfireEffect extends OneShotEffect {
         this.staticText = "Repeat the following process X times. Each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card";
     }
     
-    public TormentOfHailfireEffect(final TormentOfHailfireEffect effect) {
+    private TormentOfHailfireEffect(final TormentOfHailfireEffect effect) {
         super(effect);
     }
     
@@ -58,7 +60,7 @@ class TormentOfHailfireEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int repeat = source.getManaCostsToPay().getX();
+            int repeat = CardUtil.getSourceCostsTag(game, source, "X", 0);
             for (int i = 1; i <= repeat; i++) {
                 
                 for (UUID opponentId : game.getOpponents(source.getControllerId())) {
@@ -68,7 +70,7 @@ class TormentOfHailfireEffect extends OneShotEffect {
                         if (permanents > 0 && opponent.chooseUse(outcome, "Sacrifices a nonland permanent? (Iteration " + i + " of " + repeat + ")",
                                 "Otherwise you have to discard a card or lose 3 life.", "Sacrifice", "Discard or life loss", source, game)) {
                             Target target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND);
-                            target.setNotTarget(true);
+                            target.withNotTarget(true);
                             if (opponent.choose(outcome, target, source, game)) {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                                 if (permanent != null) {

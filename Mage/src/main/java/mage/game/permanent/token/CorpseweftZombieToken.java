@@ -23,7 +23,7 @@ public final class CorpseweftZombieToken extends TokenImpl {
         this.toughness = new MageInt(toughness);
     }
 
-    public CorpseweftZombieToken(final CorpseweftZombieToken token) {
+    private CorpseweftZombieToken(final CorpseweftZombieToken token) {
         super(token);
     }
 

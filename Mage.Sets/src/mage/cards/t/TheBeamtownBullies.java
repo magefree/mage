@@ -18,7 +18,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterOpponent;
 import mage.filter.FilterPlayer;
@@ -82,10 +81,12 @@ public final class TheBeamtownBullies extends CardImpl {
 }
 
 class TheBeamtownBulliesEffect extends OneShotEffect {
-    public TheBeamtownBulliesEffect() {
+
+    TheBeamtownBulliesEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Target opponent whose turn it is puts target nonlegendary creature card from your graveyard onto the battlefield under their control. It gains haste. Goad it. At the beginning of the next end step, exile it.";
     }
+
     private TheBeamtownBulliesEffect(final TheBeamtownBulliesEffect effect) {
         super(effect);
     }
@@ -128,7 +129,7 @@ class TheBeamtownBulliesEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public TheBeamtownBulliesEffect copy() {
         return new TheBeamtownBulliesEffect(this);
     }
 }

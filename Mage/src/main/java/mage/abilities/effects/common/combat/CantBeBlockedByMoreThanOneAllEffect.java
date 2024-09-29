@@ -15,7 +15,6 @@ import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 /**
- *
  * @author Quercitron
  */
 public class CantBeBlockedByMoreThanOneAllEffect extends ContinuousEffectImpl {
@@ -39,7 +38,7 @@ public class CantBeBlockedByMoreThanOneAllEffect extends ContinuousEffectImpl {
                 .append(CardUtil.numberToText(amount)).append(" creature").append(amount > 1 ? "s" : "").toString();
     }
 
-    public CantBeBlockedByMoreThanOneAllEffect(final CantBeBlockedByMoreThanOneAllEffect effect) {
+    protected CantBeBlockedByMoreThanOneAllEffect(final CantBeBlockedByMoreThanOneAllEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.filter = effect.filter;

@@ -67,7 +67,7 @@ class FathomFeederEffect extends OneShotEffect {
         this.staticText = "Each opponent exiles the top card of their library";
     }
 
-    public FathomFeederEffect(final FathomFeederEffect effect) {
+    private FathomFeederEffect(final FathomFeederEffect effect) {
         super(effect);
     }
 

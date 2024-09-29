@@ -26,7 +26,7 @@ public final class ChaosMaw extends CardImpl {
         addAbility(new EntersBattlefieldTriggeredAbility(new DamageAllEffect(3, "it", filter)));
     }
 
-    public ChaosMaw(final ChaosMaw chaosMaw){
+    private ChaosMaw(final ChaosMaw chaosMaw){
         super(chaosMaw);
     }
 

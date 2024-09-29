@@ -70,7 +70,7 @@ public class DraftFromSpellbookEffect extends OneShotEffect {
             return false;
         }
         Set<Card> cards = new HashSet<>();
-        cards.add(cardInfo.getCard());
+        cards.add(cardInfo.createCard());
         game.loadCards(cards, player.getId());
         player.moveCards(cards, Zone.HAND, source, game);
         return true;

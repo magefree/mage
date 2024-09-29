@@ -52,12 +52,12 @@ public final class EnfysNest extends CardImpl {
 
 class EnfysNestEffect extends ExileTargetEffect {
 
-    public EnfysNestEffect() {
+    EnfysNestEffect() {
         super();
         staticText = "you may exile target creature an opponent controls. If you do, that player gains life equal to that creature's power";
     }
 
-    public EnfysNestEffect(final EnfysNestEffect effect) {
+    private EnfysNestEffect(final EnfysNestEffect effect) {
         super(effect);
     }
 

@@ -24,7 +24,7 @@ public final class BrainPry extends CardImpl {
     public BrainPry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{B}");
 
-        //Name a nonland card. Target player reveals their hand. That player discards a card with that name. If they can't, you draw a card.
+        // Name a nonland card. Target player reveals their hand. That player discards a card with that name. If they can't, you draw a card.
         this.getSpellAbility().addEffect((new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME)));
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new BrainPryEffect());
@@ -42,18 +42,18 @@ public final class BrainPry extends CardImpl {
 
 class BrainPryEffect extends OneShotEffect {
 
-    public BrainPryEffect() {
+    BrainPryEffect() {
         super(Outcome.Discard);
         staticText = "Target player reveals their hand. That player discards a card with that name. If they can't, you draw a card";
     }
 
-    public BrainPryEffect(final BrainPryEffect effect) {
+    private BrainPryEffect(final BrainPryEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);

@@ -1,17 +1,14 @@
-
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -31,7 +28,8 @@ public final class DaringSleuth extends CardImpl {
 
         // When you sacrifice a Clue, transform Daring Sleuth.
         this.addAbility(new TransformAbility());
-        this.addAbility(new DaringSleuthTriggeredAbility());
+        this.addAbility(new SacrificePermanentTriggeredAbility(new TransformSourceEffect(), StaticFilters.FILTER_CONTROLLED_CLUE)
+                .setTriggerPhrase("When you sacrifice a Clue, "));
     }
 
     private DaringSleuth(final DaringSleuth card) {
@@ -41,33 +39,5 @@ public final class DaringSleuth extends CardImpl {
     @Override
     public DaringSleuth copy() {
         return new DaringSleuth(this);
-    }
-}
-
-class DaringSleuthTriggeredAbility extends TriggeredAbilityImpl {
-
-    public DaringSleuthTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new TransformSourceEffect());
-        setTriggerPhrase("When you sacrifice a Clue, ");
-    }
-
-    public DaringSleuthTriggeredAbility(final DaringSleuthTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DaringSleuthTriggeredAbility copy() {
-        return new DaringSleuthTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getPlayerId().equals(this.getControllerId())
-                && game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD).hasSubtype(SubType.CLUE, game);
     }
 }

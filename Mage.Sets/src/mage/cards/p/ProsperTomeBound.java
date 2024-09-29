@@ -1,20 +1,17 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.PlayCardTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.DeathtouchAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.TreasureToken;
-import mage.game.stack.Spell;
 
 import java.util.UUID;
 
@@ -37,8 +34,8 @@ public final class ProsperTomeBound extends CardImpl {
 
         // Mystic Arcanum — At the beginning of your end step, exile the top card of your library. Until the end of your next turn, you may play that card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(
-                        1, false, Duration.UntilEndOfYourNextTurn
+                new ExileTopXMayPlayUntilEffect(
+                        1, Duration.UntilEndOfYourNextTurn
                 ), TargetController.YOU, false
         ).withFlavorWord("Mystic Arcanum"));
 

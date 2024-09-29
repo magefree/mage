@@ -45,7 +45,7 @@ public final class UnconventionalTactics extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        // Whenever a Zombie enters the battlefield under your control, you may pay {W}. If you do, return Unconventional Tactics from your graveyard to your hand.
+        // Whenever a Zombie you control enters, you may pay {W}. If you do, return Unconventional Tactics from your graveyard to your hand.
         this.addAbility(new UnconventionalTacticsTriggeredAbility());
     }
 
@@ -71,7 +71,7 @@ class UnconventionalTacticsTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnToHandSourceEffect(), new ManaCostsImpl<>("{W}")), false);
     }
 
-    public UnconventionalTacticsTriggeredAbility(final UnconventionalTacticsTriggeredAbility ability) {
+    private UnconventionalTacticsTriggeredAbility(final UnconventionalTacticsTriggeredAbility ability) {
         super(ability);
     }
 
@@ -96,6 +96,6 @@ class UnconventionalTacticsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a Zombie enters the battlefield under your control, you may pay {W}. If you do, return {this} from your graveyard to your hand.";
+        return "Whenever a Zombie you control enters, you may pay {W}. If you do, return {this} from your graveyard to your hand.";
     }
 }

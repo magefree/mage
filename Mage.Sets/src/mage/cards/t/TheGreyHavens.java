@@ -1,22 +1,17 @@
 package mage.cards.t;
 
-import java.util.UUID;
-
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.mana.AnyColorCardInYourGraveyardManaAbility;
-import mage.abilities.mana.AnyColorPermanentTypesManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
-import mage.abilities.mana.ConditionalAnyColorManaAbility;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -24,7 +19,7 @@ import mage.filter.common.FilterCreaturePermanent;
  */
 public final class TheGreyHavens extends CardImpl {
 
-    private static final FilterCard filter = new FilterCreatureCard("legendary creature card");
+    private static final FilterCard filter = new FilterCreatureCard("legendary creature cards");
 
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());

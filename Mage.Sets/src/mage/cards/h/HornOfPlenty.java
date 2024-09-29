@@ -46,12 +46,12 @@ public final class HornOfPlenty extends CardImpl {
 
 class HornOfPlentyEffect extends OneShotEffect {
 
-    public HornOfPlentyEffect() {
+    HornOfPlentyEffect() {
         super(Outcome.Detriment);
-        this.staticText = "they may pay {1}. If that player does, they draw a card at the beginning of the next end step";
+        this.staticText = "they may pay {1}. If the player does, they draw a card at the beginning of the next end step";
     }
 
-    public HornOfPlentyEffect(final HornOfPlentyEffect effect) {
+    private HornOfPlentyEffect(final HornOfPlentyEffect effect) {
         super(effect);
     }
 
@@ -62,7 +62,7 @@ class HornOfPlentyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player caster = game.getPlayer(targetPointer.getFirst(game, source));
+        Player caster = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (caster != null) {
             if (caster.chooseUse(Outcome.DrawCard, "Pay {1} to draw a card at the beginning of the next end step?", source, game)) {
                 Cost cost = new ManaCostsImpl<>("{1}");

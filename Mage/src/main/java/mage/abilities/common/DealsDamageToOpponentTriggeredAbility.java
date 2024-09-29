@@ -14,7 +14,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl {
 
-    private final boolean onlyCombat, setTargetPointer;
+    private final boolean onlyCombat;
+    private final boolean setTargetPointer;
 
     public DealsDamageToOpponentTriggeredAbility(Effect effect) {
         this(effect, false, false, false);
@@ -33,9 +34,10 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
         this.onlyCombat = onlyCombat;
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase("Whenever {this} deals " + (onlyCombat ? "combat " : "") + "damage to an opponent, ");
+        this.withRuleTextReplacement(true);
     }
 
-    public DealsDamageToOpponentTriggeredAbility(final DealsDamageToOpponentTriggeredAbility ability) {
+    protected DealsDamageToOpponentTriggeredAbility(final DealsDamageToOpponentTriggeredAbility ability) {
         super(ability);
         this.onlyCombat = ability.onlyCombat;
         this.setTargetPointer = ability.setTargetPointer;
@@ -61,7 +63,7 @@ public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl 
                     return false;
                 }
             }
-            if(setTargetPointer) {
+            if (setTargetPointer) {
                 for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId(), game));
                     effect.setValue("damage", event.getAmount());

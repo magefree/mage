@@ -91,7 +91,6 @@ class VolrathTheShapestealerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent volrathTheShapestealer = game.getPermanent(source.getSourceId());
-        Permanent newBluePrint = null;
         if (controller == null
                 || volrathTheShapestealer == null) {
             return false;
@@ -100,12 +99,12 @@ class VolrathTheShapestealerEffect extends OneShotEffect {
         if (copyFromCard == null) {
             return true;
         }
-        newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+        //newBluePrint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+        Card newBluePrint = copyFromCard.copy();
         newBluePrint.assignNewId();
         CopyApplier applier = new VolrathTheShapestealerCopyApplier();
         applier.apply(game, newBluePrint, source, volrathTheShapestealer.getId());
         CopyEffect copyEffect = new CopyEffect(Duration.UntilYourNextTurn, newBluePrint, volrathTheShapestealer.getId());
-        copyEffect.newId();
         copyEffect.setApplier(applier);
         Ability newAbility = source.copy();
         copyEffect.init(newAbility, game);

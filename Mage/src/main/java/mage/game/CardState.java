@@ -1,10 +1,7 @@
 package mage.game;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import mage.abilities.Abilities;
@@ -15,13 +12,12 @@ import mage.counters.Counters;
 import mage.util.Copyable;
 
 /**
- *
  * @author BetaSteward
  */
 public class CardState implements Serializable, Copyable<CardState> {
 
     protected boolean faceDown;
-    protected Map<String, String> info;
+    protected Map<String, String> info = new LinkedHashMap<>(); // additional info for card's rules
     protected Counters counters;
     protected Abilities<Ability> abilities;
     protected boolean lostAllAbilities;
@@ -34,12 +30,9 @@ public class CardState implements Serializable, Copyable<CardState> {
         counters = new Counters();
     }
 
-    public CardState(final CardState state) {
+    protected CardState(final CardState state) {
         this.faceDown = state.faceDown;
-        if (state.info != null) {
-            info = new HashMap<>();
-            info.putAll(state.info);
-        }
+        this.info.putAll(state.info);
         counters = state.counters.copy();
         if (state.abilities != null) {
             abilities = new AbilitiesImpl<>();
@@ -113,7 +106,7 @@ public class CardState implements Serializable, Copyable<CardState> {
 
     public void clear() {
         counters.clear();
-        info = null;
+        info.clear();
         clearAbilities();
         lostAllAbilities = false;
     }

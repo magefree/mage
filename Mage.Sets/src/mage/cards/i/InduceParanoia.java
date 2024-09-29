@@ -53,7 +53,7 @@ class InduceParanoiaEffect extends OneShotEffect {
         this.staticText = "Counter target spell. If {B} was spent to cast this spell, that spell's controller mills X cards, where X is the spell's mana value.";
     }
 
-    InduceParanoiaEffect(final InduceParanoiaEffect effect) {
+    private InduceParanoiaEffect(final InduceParanoiaEffect effect) {
         super(effect);
     }
 
@@ -64,7 +64,7 @@ class InduceParanoiaEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        StackObject spell = game.getStack().getStackObject(targetPointer.getFirst(game, source));
+        StackObject spell = game.getStack().getStackObject(getTargetPointer().getFirst(game, source));
         if (spell != null) { 
             game.getStack().counter(spell.getId(), source, game);
             int spellCMC = spell.getManaValue();

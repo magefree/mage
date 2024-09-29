@@ -25,7 +25,7 @@ public class SearchLibraryPutOnLibraryEffect extends SearchEffect {
         setText();
     }
 
-    public SearchLibraryPutOnLibraryEffect(final SearchLibraryPutOnLibraryEffect effect) {
+    protected SearchLibraryPutOnLibraryEffect(final SearchLibraryPutOnLibraryEffect effect) {
         super(effect);
         this.reveal = effect.reveal;
     }

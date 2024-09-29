@@ -47,7 +47,7 @@ class EyeForAnEyeEffect extends ReplacementEffectImpl {
         this.damageSource = new TargetSource();
     }
 
-    public EyeForAnEyeEffect(final EyeForAnEyeEffect effect) {
+    private EyeForAnEyeEffect(final EyeForAnEyeEffect effect) {
         super(effect);
         this.damageSource = effect.damageSource.copy();
     }
@@ -59,18 +59,13 @@ class EyeForAnEyeEffect extends ReplacementEffectImpl {
 
     @Override
     public void init(Ability source, Game game) {
-        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
         super.init(source, game);
+        this.damageSource.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), source, game);
     }
 
     @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
     }
 
     @Override

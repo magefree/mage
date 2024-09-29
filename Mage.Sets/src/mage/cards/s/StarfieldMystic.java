@@ -11,8 +11,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledEnchantmentPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterEnchantmentCard;
 
 import java.util.UUID;
@@ -24,8 +23,6 @@ public final class StarfieldMystic extends CardImpl {
 
     private static final FilterCard filter
             = new FilterEnchantmentCard("Enchantment spells");
-    private static final FilterPermanent filter2
-            = new FilterControlledEnchantmentPermanent("an enchantment you control");
 
     public StarfieldMystic(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}");
@@ -41,7 +38,7 @@ public final class StarfieldMystic extends CardImpl {
         // Whenever an enchantment you control is put into a graveyard from the battlefield, put a +1/+1 counter on Starfield Mystic.
         this.addAbility(new PutIntoGraveFromBattlefieldAllTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                false, filter2, false
+                false, StaticFilters.FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT, false
         ));
     }
 

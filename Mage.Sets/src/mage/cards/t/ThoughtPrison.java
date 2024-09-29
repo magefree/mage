@@ -68,7 +68,7 @@ class ThoughtPrisonImprintEffect extends OneShotEffect {
         staticText = "have target player reveal their hand. If you do, choose a nonland card from it and exile that card";
     }
 
-    public ThoughtPrisonImprintEffect(ThoughtPrisonImprintEffect effect) {
+    private ThoughtPrisonImprintEffect(final ThoughtPrisonImprintEffect effect) {
         super(effect);
     }
 
@@ -115,7 +115,7 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever a player casts a spell that shares a color or mana value with the exiled card, ");
     }
 
-    public ThoughtPrisonTriggeredAbility(final ThoughtPrisonTriggeredAbility ability) {
+    private ThoughtPrisonTriggeredAbility(final ThoughtPrisonTriggeredAbility ability) {
         super(ability);
     }
 
@@ -174,12 +174,12 @@ class ThoughtPrisonTriggeredAbility extends TriggeredAbilityImpl {
 
 class ThoughtPrisonDamageEffect extends OneShotEffect {
 
-    public ThoughtPrisonDamageEffect() {
+    ThoughtPrisonDamageEffect() {
         super(Outcome.Damage);
         staticText = "{this} deals 2 damage to that player";
     }
 
-    public ThoughtPrisonDamageEffect(final ThoughtPrisonDamageEffect effect) {
+    private ThoughtPrisonDamageEffect(final ThoughtPrisonDamageEffect effect) {
         super(effect);
     }
 
@@ -190,7 +190,7 @@ class ThoughtPrisonDamageEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null) {
             targetPlayer.damage(2, source.getSourceId(), source, game);
             return true;

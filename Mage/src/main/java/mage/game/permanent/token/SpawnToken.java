@@ -18,7 +18,7 @@ public final class SpawnToken extends TokenImpl {
         toughness = new MageInt(3);
     }
 
-    public SpawnToken(final SpawnToken token) {
+    private SpawnToken(final SpawnToken token) {
         super(token);
     }
 

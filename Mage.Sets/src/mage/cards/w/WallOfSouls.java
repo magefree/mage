@@ -1,6 +1,5 @@
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -13,9 +12,11 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedBatchForOnePermanentEvent;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetOpponentOrPlaneswalker;
+
+import java.util.UUID;
 
 /**
  *
@@ -55,7 +56,7 @@ class WallOfSoulsTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} is dealt combat damage, ");
     }
 
-    public WallOfSoulsTriggeredAbility(final WallOfSoulsTriggeredAbility effect) {
+    private WallOfSoulsTriggeredAbility(final WallOfSoulsTriggeredAbility effect) {
         super(effect);
     }
 
@@ -66,13 +67,17 @@ class WallOfSoulsTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.sourceId) && ((DamagedEvent) event).isCombatDamage()) {
-            this.getEffects().setValue("damage", event.getAmount());
+
+        DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
+        int damage = dEvent.getAmount();
+
+        if (event.getTargetId().equals(this.sourceId) && dEvent.isCombatDamage() && damage > 0) {
+            this.getEffects().setValue("damage", damage);
             return true;
         }
         return false;

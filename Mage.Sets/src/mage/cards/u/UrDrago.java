@@ -44,12 +44,12 @@ public final class UrDrago extends CardImpl {
 
 class UrDragoEffect extends AsThoughEffectImpl {
 
-    public UrDragoEffect() {
+    UrDragoEffect() {
         super(AsThoughEffectType.BLOCK_SWAMPWALK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures with swampwalk can be blocked as though they didn't have swampwalk";
     }
 
-    public UrDragoEffect(final UrDragoEffect effect) {
+    private UrDragoEffect(final UrDragoEffect effect) {
         super(effect);
     }
 

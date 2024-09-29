@@ -8,7 +8,6 @@ import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.constants.Zone;
 
 /**
- *
  * @author LevelX2
  */
 public class ConditionalColoredManaAbility extends ActivatedManaAbilityImpl {
@@ -22,7 +21,7 @@ public class ConditionalColoredManaAbility extends ActivatedManaAbilityImpl {
         this.netMana.add(mana);
     }
 
-    public ConditionalColoredManaAbility(final ConditionalColoredManaAbility ability) {
+    protected ConditionalColoredManaAbility(final ConditionalColoredManaAbility ability) {
         super(ability);
     }
 

@@ -56,7 +56,7 @@ class LairwatchGiantTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()));
     }
 
-    LairwatchGiantTriggeredAbility(final LairwatchGiantTriggeredAbility ability) {
+    private LairwatchGiantTriggeredAbility(final LairwatchGiantTriggeredAbility ability) {
         super(ability);
     }
 

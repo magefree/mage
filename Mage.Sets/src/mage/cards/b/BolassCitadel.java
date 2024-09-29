@@ -1,5 +1,6 @@
 package mage.cards.b;
 
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,13 +45,11 @@ public final class BolassCitadel extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LookAtTopCardOfLibraryAnyTimeEffect()));
 
         // You may play the top card of your library. If you cast a spell this way, pay life equal to its converted mana cost rather than pay its mana cost.
-        this.addAbility(new SimpleStaticAbility(new BolassCitadelPlayTheTopCardEffect()));
+        this.addAbility(new SimpleStaticAbility(new BolassCitadelPlayTheTopCardEffect()).setIdentifier(MageIdentifier.BolassCitadelAlternateCast));
 
         // {T}, Sacrifice ten nonland permanents: Each opponent loses 10 life.
         Ability ability = new SimpleActivatedAbility(new LoseLifeOpponentsEffect(10), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(
-                10, 10, filter, true
-        )));
+        ability.addCost(new SacrificeTargetCost(10, filter));
         this.addAbility(ability);
     }
 
@@ -118,7 +117,7 @@ class BolassCitadelPlayTheTopCardEffect extends AsThoughEffectImpl {
             Costs newCosts = new CostsImpl();
             newCosts.add(lifeCost);
             newCosts.addAll(cardToCheck.getSpellAbility().getCosts());
-            player.setCastSourceIdWithAlternateMana(cardToCheck.getId(), null, newCosts);
+            player.setCastSourceIdWithAlternateMana(cardToCheck.getId(), null, newCosts, MageIdentifier.BolassCitadelAlternateCast);
         }
         return true;
     }

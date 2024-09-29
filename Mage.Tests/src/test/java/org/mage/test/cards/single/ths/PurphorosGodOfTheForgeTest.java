@@ -25,7 +25,7 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
 
         // Indestructible
         // As long as your devotion to red is less than five, Purphoros isn't a creature.
-        // Whenever another creature enters the battlefield under your control, Purphoros deals 2 damage to each opponent.
+        // Whenever another creature you control enters, Purphoros deals 2 damage to each opponent.
         // {2}{R}: Creatures you control get +1/+0 until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Purphoros, God of the Forge");
 
@@ -59,7 +59,7 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
         // Indestructible
         // As long as your devotion to red is less than five, Purphoros isn't a creature.
-        // Whenever another creature enters the battlefield under your control, Purphoros deals 2 damage to each opponent.
+        // Whenever another creature you control enters, Purphoros deals 2 damage to each opponent.
         // {2}{R}: Creatures you control get +1/+0 until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Purphoros, God of the Forge");
 
@@ -73,8 +73,7 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Ashcloud Phoenix");
 
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix");
-        setChoice(playerA, true); // cast it face down as 2/2 creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix using Morph");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -94,7 +93,7 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
 
         // Indestructible
         // As long as your devotion to red is less than five, Purphoros isn't a creature.
-        // Whenever another creature enters the battlefield under your control, Purphoros deals 2 damage to each opponent.
+        // Whenever another creature you control enters, Purphoros deals 2 damage to each opponent.
         // {2}{R}: Creatures you control get +1/+0 until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Purphoros, God of the Forge"); // {3}{R}
         addCard(Zone.BATTLEFIELD, playerA, "Goblin Guide", 1); // {R}        

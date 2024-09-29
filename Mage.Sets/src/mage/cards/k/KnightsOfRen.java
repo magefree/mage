@@ -37,19 +37,19 @@ public class KnightsOfRen extends CardImpl {
         //than combat damage this turn, you may have each player sacrifice a creature.
         Ability abilityEnterBattlefield = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(
-                        new SacrificeAllEffect(1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), true),
+                        new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE), true),
                 HateCondition.instance,
-                "<i>Hate</i> &mdash; When {this} enters the battlefield, if an opponent lost life from a source other than combat damage this turn, you may have each player sacrifice a creature");
+                "<i>Hate</i> &mdash; When {this} enters, if an opponent lost life from a source other than combat damage this turn, you may have each player sacrifice a creature");
         Ability abilityAttacks = new ConditionalInterveningIfTriggeredAbility(
                 new AttacksTriggeredAbility(
-                        new SacrificeAllEffect(1, StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT), true),
+                        new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE), true),
                 HateCondition.instance,
                 "<i>Hate</i> &mdash; When {this} attacks, if an opponent lost life from a source other than combat damage this turn, you may have each player sacrifice a creature");
         this.addAbility(abilityEnterBattlefield, new LifeLossOtherFromCombatWatcher());
         this.addAbility(abilityAttacks, new LifeLossOtherFromCombatWatcher());
     }
 
-    public KnightsOfRen(final KnightsOfRen card) {
+    private KnightsOfRen(final KnightsOfRen card) {
         super(card);
     }
 

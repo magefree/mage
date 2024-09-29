@@ -1,13 +1,15 @@
 
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
+
+import java.util.UUID;
 
 /**
  *
@@ -15,10 +17,9 @@ import mage.filter.predicate.Predicates;
  */
 public final class ExtinguishAllHope extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("nonenchantment creatures");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("nonenchantment creatures");
     
     static {
-        filter.add(CardType.CREATURE.getPredicate());
         filter.add(Predicates.not(CardType.ENCHANTMENT.getPredicate()));
     }
     

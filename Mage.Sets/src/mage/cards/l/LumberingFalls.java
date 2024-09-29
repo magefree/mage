@@ -60,7 +60,7 @@ class LumberingFallsToken extends TokenImpl {
         toughness = new MageInt(3);
         addAbility(HexproofAbility.getInstance());
     }
-    public LumberingFallsToken(final LumberingFallsToken token) {
+    private LumberingFallsToken(final LumberingFallsToken token) {
         super(token);
     }
 

@@ -78,11 +78,6 @@ class EnlistEffect extends ReplacementEffectImpl {
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent creature = game.getPermanent(event.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
@@ -92,7 +87,7 @@ class EnlistEffect extends ReplacementEffectImpl {
             return false;
         }
         TargetPermanent target = new TargetPermanent(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         controller.choose(outcome, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
         if (permanent == null || !permanent.tap(source, game)) {

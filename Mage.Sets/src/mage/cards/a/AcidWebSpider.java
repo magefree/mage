@@ -38,7 +38,7 @@ public final class AcidWebSpider extends CardImpl {
         this.addAbility(ability);
     }
 
-    public AcidWebSpider (final AcidWebSpider card) {
+    private AcidWebSpider(final AcidWebSpider card) {
         super(card);
     }
 

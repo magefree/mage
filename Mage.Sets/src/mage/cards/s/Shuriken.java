@@ -80,7 +80,7 @@ class ShurikenEffect extends OneShotEffect {
         Permanent equipment = (Permanent) object;
         targetedPermanent.damage(2, equipment.getId(), source, game);
         Permanent attached = source.getSourcePermanentOrLKI(game);
-        if (attached != null && attached.hasSubtype(SubType.NINJA, game)) {
+        if (attached == null || attached.hasSubtype(SubType.NINJA, game)) {
             return true;
         }
         game.addEffect(new GainControlTargetEffect(
@@ -96,7 +96,7 @@ class ShurikenEffect extends OneShotEffect {
         if (object instanceof Permanent) {
             name = ((Permanent) object).getName();
         }
-        return name + "deals 2 damage to target creature. That creature's controller gains control of "
+        return name + " deals 2 damage to target creature. That creature's controller gains control of "
                 + name + " unless it was unattached from a Ninja.";
     }
 }

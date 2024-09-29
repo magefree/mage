@@ -58,12 +58,12 @@ public final class NineLives extends CardImpl {
 
 class NineLivesPreventionEffect extends PreventionEffectImpl {
 
-    public NineLivesPreventionEffect() {
+    NineLivesPreventionEffect() {
         super(Duration.WhileOnBattlefield);
         staticText = "If a source would deal damage to you, prevent that damage and put an incarnation counter on {this}";
     }
 
-    public NineLivesPreventionEffect(final NineLivesPreventionEffect effect) {
+    private NineLivesPreventionEffect(final NineLivesPreventionEffect effect) {
         super(effect);
     }
 
@@ -106,7 +106,7 @@ class NineLivesStateTriggeredAbility extends StateTriggeredAbility {
         super(Zone.BATTLEFIELD, new ExileSourceEffect());
     }
 
-    public NineLivesStateTriggeredAbility(final NineLivesStateTriggeredAbility ability) {
+    private NineLivesStateTriggeredAbility(final NineLivesStateTriggeredAbility ability) {
         super(ability);
     }
 

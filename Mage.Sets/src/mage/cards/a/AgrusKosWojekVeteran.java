@@ -39,7 +39,8 @@ public final class AgrusKosWojekVeteran extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         // Whenever Agrus Kos, Wojek Veteran attacks, attacking red creatures get +2/+0 and attacking white creatures get +0/+2 until end of turn.
-        Ability ability = new AttacksTriggeredAbility(new BoostAllEffect(2, 0, Duration.EndOfTurn, filterRed, false), false);
+        Ability ability = new AttacksTriggeredAbility(new BoostAllEffect(2, 0, Duration.EndOfTurn, filterRed, false)
+                .setText("attacking red creatures get +2/+0"), false);
         ability.addEffect(new BoostAllEffect(0, 2, Duration.EndOfTurn, filterWhite, false).concatBy("and"));
         this.addAbility(ability);
     }

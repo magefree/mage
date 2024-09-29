@@ -60,7 +60,7 @@ class SpitefulReturnedTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("Whenever {this} or enchanted creature attacks, ");
     }
 
-    public SpitefulReturnedTriggeredAbility(final SpitefulReturnedTriggeredAbility ability) {
+    private SpitefulReturnedTriggeredAbility(final SpitefulReturnedTriggeredAbility ability) {
         super(ability);
     }
 

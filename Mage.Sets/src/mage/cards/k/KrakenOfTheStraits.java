@@ -59,7 +59,7 @@ class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffect {
         staticText = "Creatures with power less than the number of Islands you control can't block {this}";
     }
 
-    public CantBeBlockedByCreaturesWithLessPowerEffect(final CantBeBlockedByCreaturesWithLessPowerEffect effect) {
+    private CantBeBlockedByCreaturesWithLessPowerEffect(final CantBeBlockedByCreaturesWithLessPowerEffect effect) {
         super(effect);
     }
 

@@ -52,7 +52,7 @@ public final class PainwrackerOni extends CardImpl {
         ));
     }
 
-    public PainwrackerOni (final PainwrackerOni card) {
+    private PainwrackerOni(final PainwrackerOni card) {
         super(card);
     }
 

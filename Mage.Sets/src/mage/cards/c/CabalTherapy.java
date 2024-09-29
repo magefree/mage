@@ -35,9 +35,7 @@ public final class CabalTherapy extends CardImpl {
         this.getSpellAbility().addEffect(new CabalTherapyEffect());
 
         // Flashback-Sacrifice a creature.
-        this.addAbility(new FlashbackAbility(this, new SacrificeTargetCost(
-                new TargetControlledCreaturePermanent(StaticFilters.FILTER_CONTROLLED_CREATURE_SHORT_TEXT)
-        )));
+        this.addAbility(new FlashbackAbility(this, new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 
     private CabalTherapy(final CabalTherapy card) {
@@ -52,18 +50,18 @@ public final class CabalTherapy extends CardImpl {
 
 class CabalTherapyEffect extends OneShotEffect {
 
-    public CabalTherapyEffect() {
+    CabalTherapyEffect() {
         super(Outcome.Discard);
         staticText = "Target player reveals their hand and discards all cards with that name";
     }
 
-    public CabalTherapyEffect(final CabalTherapyEffect effect) {
+    private CabalTherapyEffect(final CabalTherapyEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(source);
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);

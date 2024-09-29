@@ -1,4 +1,3 @@
-
 package mage.cards.m;
 
 import java.util.UUID;
@@ -8,7 +7,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesChosenCreatureTypeSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTypeTargetEffect;
@@ -64,12 +62,12 @@ public final class MistformWakecaster extends CardImpl {
 
 class BecomesChosenCreatureTypeControlledEffect extends OneShotEffect {
 
-    public BecomesChosenCreatureTypeControlledEffect() {
+    BecomesChosenCreatureTypeControlledEffect() {
         super(Outcome.BoostCreature);
         staticText = "Choose a creature type. Each creature you control becomes that type until end of turn";
     }
 
-    public BecomesChosenCreatureTypeControlledEffect(final BecomesChosenCreatureTypeControlledEffect effect) {
+    private BecomesChosenCreatureTypeControlledEffect(final BecomesChosenCreatureTypeControlledEffect effect) {
         super(effect);
     }
 
@@ -79,16 +77,14 @@ class BecomesChosenCreatureTypeControlledEffect extends OneShotEffect {
         Card card = game.getCard(source.getSourceId());
         String chosenType = "";
         if (player != null && card != null) {
-            Choice typeChoice = new ChoiceCreatureType();
-            String msg = "Choose a creature type";
-            typeChoice.setMessage(msg);
+            Choice typeChoice = new ChoiceCreatureType(game, source);
             while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
                 if (!player.canRespond()) {
                     return false;
                 }
             }
-            game.informPlayers(card.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
-            chosenType = typeChoice.getChoice();
+            game.informPlayers(card.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoiceKey());
+            chosenType = typeChoice.getChoiceKey();
             if (chosenType != null && !chosenType.isEmpty()) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
                     ContinuousEffect effect = new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, SubType.byDescription(chosenType));
@@ -103,7 +99,7 @@ class BecomesChosenCreatureTypeControlledEffect extends OneShotEffect {
     }
 
     @Override
-    public Effect copy() {
+    public BecomesChosenCreatureTypeControlledEffect copy() {
         return new BecomesChosenCreatureTypeControlledEffect(this);
     }
 

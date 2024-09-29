@@ -28,7 +28,7 @@ public final class ColossalMight extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
-    public ColossalMight(final ColossalMight card) {
+    private ColossalMight(final ColossalMight card) {
         super(card);
     }
 

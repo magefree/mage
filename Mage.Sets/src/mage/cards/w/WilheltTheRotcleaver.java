@@ -18,6 +18,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.ZombieDecayedToken;
 import mage.target.common.TargetControlledPermanent;
 
@@ -35,6 +36,7 @@ public final class WilheltTheRotcleaver extends CardImpl {
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(DecayedAbility.class)));
+        filter.add(AnotherPredicate.instance);
     }
 
     public WilheltTheRotcleaver(UUID ownerId, CardSetInfo setInfo) {
@@ -56,7 +58,7 @@ public final class WilheltTheRotcleaver extends CardImpl {
         // At the beginning of your end step, you may sacrifice a Zombie. If you do, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1),
-                new SacrificeTargetCost(new TargetControlledPermanent(filter2))
+                new SacrificeTargetCost(filter2)
         ), TargetController.YOU, false));
     }
 

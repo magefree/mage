@@ -43,7 +43,7 @@ public final class SengirNosferatuBatToken extends TokenImpl {
         this.addAbility(ability);
     }
 
-    public SengirNosferatuBatToken(final SengirNosferatuBatToken token) {
+    private SengirNosferatuBatToken(final SengirNosferatuBatToken token) {
         super(token);
     }
 
@@ -80,7 +80,7 @@ class ReturnSengirNosferatuEffect extends OneShotEffect {
             return false;
         }
         Target target = new TargetCardInExile(filter);
-        target.setNotTarget(true);
+        target.withNotTarget(true);
         if (!target.canChoose(source.getControllerId(), source, game)) {
             return false;
         }

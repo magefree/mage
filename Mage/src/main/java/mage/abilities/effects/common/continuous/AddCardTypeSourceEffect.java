@@ -31,7 +31,7 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
         }
     }
 
-    public AddCardTypeSourceEffect(final AddCardTypeSourceEffect effect) {
+    protected AddCardTypeSourceEffect(final AddCardTypeSourceEffect effect) {
         super(effect);
         this.addedCardTypes.addAll(effect.addedCardTypes);
     }

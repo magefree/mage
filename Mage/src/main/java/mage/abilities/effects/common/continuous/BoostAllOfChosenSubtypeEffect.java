@@ -27,8 +27,8 @@ public class BoostAllOfChosenSubtypeEffect extends BoostAllEffect {
     public BoostAllOfChosenSubtypeEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
         super(power, toughness, duration, filter, excludeSource);
     }
-    
-    public BoostAllOfChosenSubtypeEffect(final BoostAllOfChosenSubtypeEffect effect) {
+
+    protected BoostAllOfChosenSubtypeEffect(final BoostAllOfChosenSubtypeEffect effect) {
         super(effect);
         this.subtype = effect.subtype;
     }

@@ -49,12 +49,12 @@ public final class PhyrexianPortal extends CardImpl {
 
 class PhyrexianPortalEffect extends OneShotEffect {
 
-    public PhyrexianPortalEffect() {
+    PhyrexianPortalEffect() {
         super(Outcome.Benefit);
         this.staticText = "If your library has ten or more cards in it, target opponent looks at the top ten cards of your library and separates them into two face-down piles. Exile one of those piles. Search the other pile for a card, put it into your hand, then shuffle the rest of that pile into your library";
     }
 
-    public PhyrexianPortalEffect(final PhyrexianPortalEffect effect) {
+    private PhyrexianPortalEffect(final PhyrexianPortalEffect effect) {
         super(effect);
     }
 
@@ -94,10 +94,10 @@ class PhyrexianPortalEffect extends OneShotEffect {
 
                 game.informPlayers(controller.getLogName() + " chooses to search the " + (choice ? "first" : "second") + " pile");
                 Cards pileToExile = new CardsImpl();
-                pileToExile.addAll(choice ? pile2 : pile1);
+                pileToExile.addAllCards(choice ? pile2 : pile1);
                 controller.moveCardsToExile(pileToExile.getCards(game), source, game, true, null, "");
                 Cards chosenPile = new CardsImpl();
-                chosenPile.addAll(choice ? pile1 : pile2);
+                chosenPile.addAllCards(choice ? pile1 : pile2);
                 
                 TargetCard target2 = new TargetCard(Zone.HAND, new FilterCard("card to put into your hand"));
                 if (controller.choose(outcome, chosenPile, target2, source, game)) {

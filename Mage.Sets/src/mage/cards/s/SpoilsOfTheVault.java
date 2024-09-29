@@ -39,13 +39,13 @@ public final class SpoilsOfTheVault extends CardImpl {
 
 class SpoilsOfTheVaultEffect extends OneShotEffect {
 
-    public SpoilsOfTheVaultEffect() {
+    SpoilsOfTheVaultEffect() {
         super(Outcome.Damage);
         this.staticText = "Reveal cards from the top of your library until you reveal a card with that name, "
                 + "then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards";
     }
 
-    public SpoilsOfTheVaultEffect(final SpoilsOfTheVaultEffect effect) {
+    private SpoilsOfTheVaultEffect(final SpoilsOfTheVaultEffect effect) {
         super(effect);
     }
 

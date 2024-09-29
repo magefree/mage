@@ -16,6 +16,10 @@ public class Legacy extends Constructed {
                 setCodes.add(set.getCode());
             }
         }
+        // All attractions & sticker cards are banned. (to add if/when implemented)
+        // this also includes the mtgo replacement "Name Sticker" Goblin.
+        banned.add("\"Name Sticker\" Goblin");
+
         banned.add("Ancestral Recall");
         banned.add("Arcum's Astrolabe");
         banned.add("Balance");
@@ -33,6 +37,7 @@ public class Legacy extends Constructed {
         banned.add("Frantic Search");
         banned.add("Gitaxian Probe");
         banned.add("Goblin Recruiter");
+        banned.add("Grief");
         banned.add("Gush");
         banned.add("Hermit Druid");
         banned.add("Imperial Seal");
@@ -43,7 +48,6 @@ public class Legacy extends Constructed {
         banned.add("Mana Vault");
         banned.add("Memory Jar");
         banned.add("Mental Misstep");
-        banned.add("Mind's Desire");
         banned.add("Mind Twist");
         banned.add("Mishra's Workshop");
         banned.add("Mox Emerald");
@@ -61,9 +65,9 @@ public class Legacy extends Constructed {
         banned.add("Sol Ring");
         banned.add("Strip Mine");
         banned.add("Survival of the Fittest");
-        banned.add("Timetwister");
         banned.add("Time Vault");
         banned.add("Time Walk");
+        banned.add("Timetwister");
         banned.add("Tinker");
         banned.add("Tolarian Academy");
         banned.add("Treasure Cruise");

@@ -19,7 +19,7 @@ public abstract class LevelerCard extends CardImpl {
         super(ownerId, setInfo, cardTypes, costs);
     }
 
-    public LevelerCard(LevelerCard card) {
+    protected LevelerCard(final LevelerCard card) {
         super(card);
         this.maxLevelCounters = card.maxLevelCounters;
     }

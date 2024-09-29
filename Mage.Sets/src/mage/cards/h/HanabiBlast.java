@@ -26,7 +26,7 @@ public final class HanabiBlast extends CardImpl {
         this.getSpellAbility().addEffect(new DiscardControllerEffect(1, true).concatBy(", then"));
     }
 
-    public HanabiBlast (final HanabiBlast card) {
+    private HanabiBlast(final HanabiBlast card) {
         super(card);
     }
 

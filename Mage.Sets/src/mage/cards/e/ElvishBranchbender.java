@@ -66,7 +66,7 @@ class ElvishBranchbenderEffect extends OneShotEffect {
         this.staticText = "Until end of turn, target Forest becomes an X/X Treefolk creature in addition to its other types, where X is the number of Elves you control";
     }
     
-    ElvishBranchbenderEffect(final ElvishBranchbenderEffect effect) {
+    private ElvishBranchbenderEffect(final ElvishBranchbenderEffect effect) {
         super(effect);
     }
     
@@ -82,7 +82,7 @@ class ElvishBranchbenderEffect extends OneShotEffect {
                 new ElvishBranchbenderToken(xValue),
                 false, false, Duration.EndOfTurn)
                 .withDurationRuleAtStart(true);
-        effect.setTargetPointer(targetPointer);
+        effect.setTargetPointer(this.getTargetPointer().copy());
         game.addEffect(effect, source);
         return false;
     }
@@ -97,7 +97,7 @@ class ElvishBranchbenderToken extends TokenImpl {
         power = new MageInt(xValue);
         toughness = new MageInt(xValue);
     }
-    public ElvishBranchbenderToken(final ElvishBranchbenderToken token) {
+    private ElvishBranchbenderToken(final ElvishBranchbenderToken token) {
         super(token);
     }
 

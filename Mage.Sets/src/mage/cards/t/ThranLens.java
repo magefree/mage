@@ -37,7 +37,7 @@ public final class ThranLens extends CardImpl {
 }
  class ThranLensEffect extends ContinuousEffectImpl {
 
-    public ThranLensEffect()
+    ThranLensEffect()
     {
         super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         staticText = "All permanents are colorless";

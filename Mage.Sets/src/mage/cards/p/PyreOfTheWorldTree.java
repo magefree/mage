@@ -5,10 +5,11 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DiscardCardControllerTriggeredAbility;
-import mage.abilities.effects.common.ExileTopXMayPlayUntilEndOfTurnEffect;
+import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCardInHand;
@@ -36,7 +37,7 @@ public final class PyreOfTheWorldTree extends CardImpl {
 
         // Whenever you discard a land card, exile the top card of your library. You may play that card this turn.
         this.addAbility(new DiscardCardControllerTriggeredAbility(
-                new ExileTopXMayPlayUntilEndOfTurnEffect(1),
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn),
                 false, StaticFilters.FILTER_CARD_LAND_A
         ));
     }

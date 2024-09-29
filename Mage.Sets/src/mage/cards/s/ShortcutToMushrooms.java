@@ -31,7 +31,7 @@ public final class ShortcutToMushrooms extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 TargetController.YOU, RevoltCondition.instance, false
-        );
+        ).addHint(RevoltCondition.getHint());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability, new RevoltWatcher());
     }

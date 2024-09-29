@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import mage.MageInt;
@@ -9,7 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
 
@@ -18,11 +17,7 @@ import java.util.UUID;
  */
 public final class GoblinsOfTheFlarg extends CardImpl {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Dwarf");
-
-    static {
-        filter.add(SubType.DWARF.getPredicate());
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.DWARF, "a Dwarf");
 
     public GoblinsOfTheFlarg(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{R}");

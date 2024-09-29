@@ -30,7 +30,7 @@ public final class GuulDrazOverseer extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // <i>Landfall</i>- Whenever a land enters the battlefield under your control, other creatures you control get +1/+0 until end of turn. If that land is a Swamp, those creatures get +2/+0 until end of turn instead.
+        // <i>Landfall</i>- Whenever a land you control enters, other creatures you control get +1/+0 until end of turn. If that land is a Swamp, those creatures get +2/+0 until end of turn instead.
         this.addAbility(new LandfallAbility(Zone.BATTLEFIELD, new GuulDrazOverseerEffect(), false, SetTargetPointer.PERMANENT));
     }
 
@@ -46,12 +46,12 @@ public final class GuulDrazOverseer extends CardImpl {
 
 class GuulDrazOverseerEffect extends OneShotEffect {
 
-    public GuulDrazOverseerEffect() {
+    GuulDrazOverseerEffect() {
         super(Outcome.BoostCreature);
         this.staticText = "other creatures you control get +1/+0 until end of turn. If that land is a Swamp, those creatures get +2/+0 until end of turn instead";
     }
 
-    public GuulDrazOverseerEffect(final GuulDrazOverseerEffect effect) {
+    private GuulDrazOverseerEffect(final GuulDrazOverseerEffect effect) {
         super(effect);
     }
 

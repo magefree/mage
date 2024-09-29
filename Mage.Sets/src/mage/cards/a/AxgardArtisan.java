@@ -72,6 +72,6 @@ class AxgardArtisanTriggeredAbility extends TriggeredAbilityImpl {
         return permanent != null
                 && this.getSourceId().equals(event.getTargetId())
                 && event.getData().equals(CounterType.P1P1.getName())
-                && BoostCountersAddedFirstTimeWatcher.checkEvent(event, permanent, game);
+                && BoostCountersAddedFirstTimeWatcher.checkEvent(event, permanent, game, 0);
     }
 }

@@ -20,7 +20,7 @@ public class CantBlockAttackActivateAttachedEffect extends RestrictionEffect {
         staticText = "Enchanted " + enchantedName + " can't attack or block, and its activated abilities can't be activated";
     }
 
-    public CantBlockAttackActivateAttachedEffect(final CantBlockAttackActivateAttachedEffect effect) {
+    protected CantBlockAttackActivateAttachedEffect(final CantBlockAttackActivateAttachedEffect effect) {
         super(effect);
     }
 

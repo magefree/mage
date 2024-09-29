@@ -25,7 +25,8 @@ public final class ArborArmament extends CardImpl {
         // Put a +1/+1 counter on target creature. That creature gains reach until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ReachAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ReachAbility.getInstance(), Duration.EndOfTurn)
+                .setText("That creature gains reach until end of turn"));
     }
 
     private ArborArmament(final ArborArmament card) {

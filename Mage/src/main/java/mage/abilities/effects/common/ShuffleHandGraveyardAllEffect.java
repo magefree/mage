@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
+
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
@@ -9,7 +10,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author BetaSteward_at_googlemail.com
  */
 public class ShuffleHandGraveyardAllEffect extends OneShotEffect {
@@ -19,7 +19,7 @@ public class ShuffleHandGraveyardAllEffect extends OneShotEffect {
         staticText = "each player shuffles their hand and graveyard into their library";
     }
 
-    public ShuffleHandGraveyardAllEffect(final ShuffleHandGraveyardAllEffect effect) {
+    protected ShuffleHandGraveyardAllEffect(final ShuffleHandGraveyardAllEffect effect) {
         super(effect);
     }
 

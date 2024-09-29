@@ -52,7 +52,7 @@ public class EntersBattlefieldAbility extends StaticAbility {
         this.optional = optional;
     }
 
-    public EntersBattlefieldAbility(final EntersBattlefieldAbility ability) {
+    protected EntersBattlefieldAbility(final EntersBattlefieldAbility ability) {
         super(ability);
         this.abilityRule = ability.abilityRule;
         this.optional = ability.optional;
@@ -89,8 +89,8 @@ public class EntersBattlefieldAbility extends StaticAbility {
         } else {
             prefix = null;
         }
-        String rule = (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s") +
-                " the battlefield" + (!superRule.isEmpty() && superRule.charAt(0) == ' ' ? "" : " ") + superRule;
+        String rule = (optional ? "you may have " : "") + "{this} enter" + (optional ? "" : "s")
+                + (!superRule.isEmpty() && superRule.charAt(0) == ' ' ? "" : " ") + superRule;
         if (prefix != null) {
             return prefix + CardUtil.getTextWithFirstCharUpperCase(rule);
         }

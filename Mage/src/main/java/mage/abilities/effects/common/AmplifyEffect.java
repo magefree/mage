@@ -88,7 +88,7 @@ public class AmplifyEffect extends ReplacementEffectImpl {
                 + " you reveal that shares a type with it in your hand.)</i>";
     }
 
-    public AmplifyEffect(final AmplifyEffect effect) {
+    protected AmplifyEffect(final AmplifyEffect effect) {
         super(effect);
         this.amplifyFactor = effect.amplifyFactor;
     }

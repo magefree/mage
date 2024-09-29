@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mage.cards.p;
 
 import java.util.UUID;
@@ -70,12 +65,14 @@ class PlanarIncisionEffect extends OneShotEffect {
                 && controller != null) {
             UUID exileId = CardUtil.getExileZoneId("planarIncisionExile" + source.toString(), game);
             if (controller.moveCardsToExile(permanent, source, game, true, exileId, "")) {
-                Card exiledCard = game.getExile().getExileZone(exileId).get(permanent.getId(), game);
-                if (exiledCard != null) {
-                    Counters countersToAdd = new Counters();
-                    countersToAdd.addCounter(CounterType.P1P1.createInstance());
-                    game.setEnterWithCounters(exiledCard.getId(), countersToAdd);
-                    return controller.moveCards(exiledCard, Zone.BATTLEFIELD, source, game, false, false, true, null);
+                if (game.getExile().getExileZone(exileId) != null) {
+                    Card exiledCard = game.getExile().getExileZone(exileId).get(permanent.getId(), game);
+                    if (exiledCard != null) {
+                        Counters countersToAdd = new Counters();
+                        countersToAdd.addCounter(CounterType.P1P1.createInstance());
+                        game.setEnterWithCounters(exiledCard.getId(), countersToAdd);
+                        return controller.moveCards(exiledCard, Zone.BATTLEFIELD, source, game, false, false, true, null);
+                    }
                 }
             }
         }

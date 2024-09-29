@@ -36,7 +36,7 @@ public final class MirrorOfGaladriel extends CardImpl {
                 new ScryEffect(1, false), new GenericManaCost(5)
         );
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new DrawCardSourceControllerEffect(1));
+        ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy(", then"));
         ability.addEffect(new InfoEffect(
                 "This ability costs {1} less to activate for each legendary creature you control."
         ));

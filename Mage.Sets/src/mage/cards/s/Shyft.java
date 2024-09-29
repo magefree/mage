@@ -52,7 +52,7 @@ class ShyftEffect extends OneShotEffect {
         this.staticText = "have {this} become the color or colors of your choice.";
     }
 
-    ShyftEffect(final ShyftEffect effect) {
+    private ShyftEffect(final ShyftEffect effect) {
         super(effect);
     }
 

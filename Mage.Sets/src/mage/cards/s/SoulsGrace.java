@@ -40,12 +40,12 @@ public final class SoulsGrace extends CardImpl {
 
 class SoulsGraceEffect extends OneShotEffect {
 
-    public SoulsGraceEffect() {
+    SoulsGraceEffect() {
         super(Outcome.GainLife);
         this.staticText = "You gain life equal to target creature's power";
     }
 
-    public SoulsGraceEffect(final SoulsGraceEffect effect) {
+    private SoulsGraceEffect(final SoulsGraceEffect effect) {
         super(effect);
     }
 

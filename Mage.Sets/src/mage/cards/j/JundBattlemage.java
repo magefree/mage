@@ -40,7 +40,7 @@ public final class JundBattlemage extends CardImpl {
         this.addAbility(ability);
     }
 
-    public JundBattlemage (final JundBattlemage card) {
+    private JundBattlemage(final JundBattlemage card) {
         super(card);
     }
 

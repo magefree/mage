@@ -6,12 +6,11 @@ import org.mage.plugins.card.dl.DownloadJob;
 import java.io.File;
 import java.util.*;
 
-import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
 import static org.mage.plugins.card.utils.CardImageUtils.getImagesDir;
 
 /**
- * Used when we need to point to direct links to download resources from.
+ * Download: additional images from a third party sources, used for symbols
  *
  * @author noxx
  */
@@ -19,12 +18,13 @@ public class DirectLinksForDownload implements Iterable<DownloadJob> {
 
     private static final Map<String, String> directLinks = new LinkedHashMap<>();
 
+    // face down cards uses tokens source for a cardback image
+    // that's cardback used for miss images
+    // TODO: replace miss image cardback to some generic card (must be diff from face down image)
     public static final String cardbackFilename = "cardback.jpg";
-    public static final String foretellFilename = "foretell.jpg";
 
     static {
         directLinks.put(cardbackFilename, "https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg");
-        directLinks.put(foretellFilename, "https://api.scryfall.com/cards/tkhm/23/en?format=image");
     }
 
     private final File outDir;
@@ -42,7 +42,8 @@ public class DirectLinksForDownload implements Iterable<DownloadJob> {
 
         for (Map.Entry<String, String> url : directLinks.entrySet()) {
             File dst = new File(outDir, url.getKey());
-            jobs.add(new DownloadJob(url.getKey(), fromURL(url.getValue()), toFile(dst)));
+            // download images every time (need to update low quality image)
+            jobs.add(new DownloadJob(url.getKey(), url.getValue(), toFile(dst), true));
         }
         return jobs.iterator();
     }

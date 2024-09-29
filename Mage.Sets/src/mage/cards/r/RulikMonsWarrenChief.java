@@ -49,7 +49,7 @@ public final class RulikMonsWarrenChief extends CardImpl {
 
 class RulikMonsWarrenChiefEffect extends OneShotEffect {
 
-    public RulikMonsWarrenChiefEffect() {
+    RulikMonsWarrenChiefEffect() {
         super(Outcome.PutCardInPlay);
         this.staticText = "look at the top card of your library. " +
                 "If it's a land card, you may put it onto the battlefield tapped. " +

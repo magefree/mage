@@ -123,7 +123,7 @@ public final class Conspiracy extends CardImpl {
                 }
             }
             // creatures you control
-            List<Permanent> permanents = game.getState().getBattlefield().getAllActivePermanents(controller.getId());
+            List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(controller.getId());
             for (Permanent permanent : permanents) {
                 if (permanent.isCreature(game)) {
                     permanent.removeAllCreatureTypes(game);

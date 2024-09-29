@@ -40,7 +40,7 @@ public final class PiratedCopy extends CardImpl {
             blueprint.addSubType(SubType.PIRATE);
             blueprint.getAbilities().add(new DealsDamageToAPlayerAllTriggeredAbility(
                     new DrawCardSourceControllerEffect(1), filter,
-                    true, SetTargetPointer.NONE, true
+                    false, SetTargetPointer.NONE, true
             ));
             return true;
         }
@@ -48,7 +48,7 @@ public final class PiratedCopy extends CardImpl {
         @Override
         public String getText() {
             return ", except it's a Pirate in addition to its other types and it has \"Whenever this creature " +
-                    "or another creature with the same name deals combat damage to a player, you may draw a card.\"";
+                    "or another creature with the same name deals combat damage to a player, you draw a card.\"";
         }
     };
 

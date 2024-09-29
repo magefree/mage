@@ -32,7 +32,7 @@ public final class RenegadeDoppelganger extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
-        // Whenever another creature enters the battlefield under your control, you may have Renegade Doppelganger become a copy of that creature until end of turn.
+        // Whenever another creature you control enters, you may have Renegade Doppelganger become a copy of that creature until end of turn.
         this.addAbility(new RenegadeDoppelgangerTriggeredAbility());
     }
 
@@ -52,7 +52,7 @@ class RenegadeDoppelgangerTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new RenegadeDoppelgangerEffect(), true);
     }
 
-    RenegadeDoppelgangerTriggeredAbility(final RenegadeDoppelgangerTriggeredAbility ability) {
+    private RenegadeDoppelgangerTriggeredAbility(final RenegadeDoppelgangerTriggeredAbility ability) {
         super(ability);
     }
 
@@ -82,18 +82,18 @@ class RenegadeDoppelgangerTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever another creature enters the battlefield under your control, you may have {this} become a copy of that creature until end of turn.";
+        return "Whenever another creature you control enters, you may have {this} become a copy of that creature until end of turn.";
     }
 }
 
 class RenegadeDoppelgangerEffect extends OneShotEffect {
 
-    public RenegadeDoppelgangerEffect() {
+    RenegadeDoppelgangerEffect() {
         super(Outcome.Benefit);
         this.staticText = "have {this} become a copy of that creature until end of turn";
     }
 
-    public RenegadeDoppelgangerEffect(final RenegadeDoppelgangerEffect effect) {
+    private RenegadeDoppelgangerEffect(final RenegadeDoppelgangerEffect effect) {
         super(effect);
     }
 

@@ -31,9 +31,9 @@ public final class TrialOfStrength extends CardImpl {
         // When Trial of Strength enters the battlefield, create a 4/2 green Beast creature token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new BeastToken3())));
 
-        // When a Cartouche enters the battlefield under your control, return Trial of Strength to its owner's hand.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ReturnToHandSourceEffect(), filter,
-                "When a Cartouche enters the battlefield under your control, return {this} to its owner's hand"));
+        // When a Cartouche you control enters, return Trial of Strength to its owner's hand.
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ReturnToHandSourceEffect(), filter
+        ));
     }
 
     private TrialOfStrength(final TrialOfStrength card) {

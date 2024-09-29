@@ -1,7 +1,5 @@
 package mage.cards.g;
 
-import java.util.UUID;
-
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -11,8 +9,9 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.ZombieDecayedToken;
 
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class GhoulishProcession extends CardImpl {
@@ -28,7 +27,7 @@ public final class GhoulishProcession extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // Whenever one or more nontoken creatures die, create a 2/2 black Zombie creature token with decayed. This ability triggers only once each turn.
-        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new ZombieDecayedToken()), false, filter).setTriggersOnce(true));
+        this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new ZombieDecayedToken()), false, filter).setTriggersLimitEachTurn(1));
     }
 
     private GhoulishProcession(final GhoulishProcession card) {

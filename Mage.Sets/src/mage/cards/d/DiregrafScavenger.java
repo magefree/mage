@@ -52,7 +52,7 @@ public final class DiregrafScavenger extends CardImpl {
 
 class DiregrafScavengerEffect extends OneShotEffect {
 
-    public DiregrafScavengerEffect() {
+    DiregrafScavengerEffect() {
         super(Outcome.Exile);
         staticText = "exile up to one target card from a graveyard. If a creature card was exiled this way, each opponent loses 2 life and you gain 2 life";
     }
