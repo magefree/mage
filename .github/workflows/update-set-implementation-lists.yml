@@ -100,6 +100,7 @@ jobs:
                   implementedCards: implemented,
                   unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`
                 });
+                foundIssue.state = unimplemented.length > 0 ? "open" : "closed"
                 issuesToUpdate.push(foundIssue);
               } else {
                 issuesToCreate.push({
@@ -110,13 +111,24 @@ jobs:
                     unimplementedCards: unimplemented,
                     implementedCards: implemented,
                     unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`
-                  })
+                  }),
+                  state: unimplemented.length > 0 ? "open" : "closed"
                 });
               }
             });
             
             console.log("Issues to update: ", issuesToUpdate);
             console.log("Issues to create: ", issuesToCreate);
+
+            issuesToUpdate.forEach(issue => {
+              github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: issue.body,
+                state: issue.state
+              });
+            });
       - uses: actions/github-script@v6.4.1
         id: updatewiki
         with:
