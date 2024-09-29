@@ -148,7 +148,7 @@ jobs:
                 state: issue.state
               });
             }
-            for (const issue of issuesToCreate) {
+            for (const issue of issuesToCreate.slice(0,1)) {
               const result = await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -156,6 +156,7 @@ jobs:
                 body: issue.body,
                 labels: ["tracking set"]
               });
+              console.log(`DEBUG: ${result}`);
               if (issue.state === "closed") {
                 github.rest.issues.update({
                   owner: context.repo.owner,
