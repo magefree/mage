@@ -247,6 +247,10 @@ public abstract class GameCommanderImpl extends GameImpl {
     @Override
     protected boolean checkStateBasedActions() {
         for (Player player : getPlayers().values()) {
+            if (!player.isInGame()) {
+                continue;
+            }
+
             for (UUID commanderId : this.getCommandersIds(player, CommanderCardType.COMMANDER_OR_OATHBREAKER, false)) {
                 CommanderInfoWatcher damageWatcher = getState().getWatcher(CommanderInfoWatcher.class, commanderId);
                 if (damageWatcher == null) {
@@ -255,7 +259,7 @@ public abstract class GameCommanderImpl extends GameImpl {
                 for (Map.Entry<UUID, Integer> entrySet : damageWatcher.getDamageToPlayer().entrySet()) {
                     if (entrySet.getValue() > 20) {
                         Player opponent = getPlayer(entrySet.getKey());
-                        if (opponent != null && !opponent.hasLost() && player.isInGame()) {
+                        if (opponent != null && !opponent.hasLost()) {
                             opponent.lost(this);
                         }
                     }

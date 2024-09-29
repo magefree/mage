@@ -3,7 +3,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -40,7 +40,7 @@ public final class KalastriaHighborn extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Kalastria Highborn or another Vampire you control dies, you may pay {B}. If you do, target player loses 2 life and you gain 2 life.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new DoIfCostPaid(new LoseGainEffect(), new ManaCostsImpl<>("{B}")), false, filter);
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(new DoIfCostPaid(new LoseGainEffect(), new ManaCostsImpl<>("{B}")), false, filter);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

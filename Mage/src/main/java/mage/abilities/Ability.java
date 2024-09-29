@@ -25,10 +25,7 @@ import mage.target.targetadjustment.TargetAdjuster;
 import mage.watchers.Watcher;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Practically everything in the game is started from an Ability. This interface
@@ -280,12 +277,17 @@ public interface Ability extends Controllable, Serializable {
     /**
      * Activates this ability prompting the controller to pay any mandatory
      *
-     * @param game   A reference the {@link Game} for which this ability should be
-     *               activated within.
-     * @param noMana Whether or not {@link ManaCosts} have to be paid.
+     * @param game               A reference the {@link Game} for which this ability should be
+     *                           activated within.
+     * @param allowedIdentifiers Restrict alternative/regular cost depending (if contain MageIdentifier.Default, there is no restriction)
+     * @param noMana             Whether or not {@link ManaCosts} have to be paid.
      * @return True if this ability was successfully activated.
      */
-    boolean activate(Game game, boolean noMana);
+    boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana);
+
+    default boolean activate(Game game, boolean noMana) {
+        return activate(game, new HashSet<>(Arrays.asList(MageIdentifier.Default)), noMana);
+    }
 
     boolean isActivated();
 
@@ -472,7 +474,7 @@ public interface Ability extends Controllable, Serializable {
      */
     String getGameLogMessage(Game game);
 
-    boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, boolean noMana, Player controller, Game game);
+    boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, Set<MageIdentifier> allowedIdentifiers, boolean noMana, Player controller, Game game);
 
     /**
      * Finds the source object regardless of its zcc. Can be LKI from battlefield in some cases.
@@ -515,6 +517,10 @@ public interface Ability extends Controllable, Serializable {
 
     boolean canFizzle();
 
+    /**
+     * Adds a target adjuster to this ability.
+     * If using a generic adjuster, only use after adding the blueprint target!
+     */
     Ability setTargetAdjuster(TargetAdjuster targetAdjuster);
 
     TargetAdjuster getTargetAdjuster();

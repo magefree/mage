@@ -50,7 +50,7 @@ public class GainAbilityWithAttachmentEffect extends ContinuousEffectImpl {
         this.effects.addAll(effect.effects);
         this.targets.addAll(effect.targets);
         this.costs.addAll(effect.costs);
-        this.useAttachedCost = effect.useAttachedCost.copy();
+        this.useAttachedCost = effect.useAttachedCost == null ? null : effect.useAttachedCost.copy();
     }
 
     @Override

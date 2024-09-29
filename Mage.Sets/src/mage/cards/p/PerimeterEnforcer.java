@@ -43,12 +43,12 @@ public final class PerimeterEnforcer extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
-        // Whenever another Detective enters the battlefield under your control and whenever a Detective you control is turned face up, Perimeter Enforcer gets +1/+1 until end of turn.
+        // Whenever another Detective you control enters and whenever a Detective you control is turned face up, Perimeter Enforcer gets +1/+1 until end of turn.
         this.addAbility(new OrTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn),
                 false,
-                "Whenever another Detective enters the battlefield under your control and "
+                "Whenever another Detective you control enters and "
                         + "whenever a Detective you control is turned face up, ",
                 new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, null, filter1, false),
                 new TurnedFaceUpAllTriggeredAbility(null, filter2)

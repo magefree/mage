@@ -204,14 +204,14 @@ public class EvolveTest extends CardTestPlayerBase {
     @Test
     public void testRenegadeKrasis() {
 
-        // Evolve (Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness
+        // Evolve (Whenever a creature you control enters, if that creature has greater power or toughness
         // than this creature, put a +1/+1 counter on this creature.)
         // Whenever Renegade Krasis evolves, put a +1/+1 counter on each other creature you control with a +1/+1 counter on it.
         addCard(Zone.HAND, playerA, "Renegade Krasis", 1); // {1}{G}{G} - 3/2
-        // Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on target creature.
+        // Whenever another green creature you control enters, put a +1/+1 counter on target creature.
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 16);
 
-        // Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on target creature.
+        // Whenever another green creature you control enters, put a +1/+1 counter on target creature.
         addCard(Zone.HAND, playerA, "Ivy Lane Denizen", 2); // {3}{G} - Creature 2/3
         // Evolve
         addCard(Zone.HAND, playerA, "Adaptive Snapjaw", 1); // {4}{G} - Creature 6/2

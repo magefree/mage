@@ -36,7 +36,7 @@ public final class WorldheartPhoenix extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // You may cast Worldheart Phoenix from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost.
-        // If you do, it enters the battlefield with two +1/+1 counters on it.
+        // If you do, it enters with two +1/+1 counters on it.
         Ability ability = new SimpleStaticAbility(Zone.ALL, new WorldheartPhoenixPlayEffect())
                 .setIdentifier(MageIdentifier.WorldheartPhoenixAlternateCast);
         ability.addWatcher(new WorldheartPhoenixWatcher());
@@ -59,7 +59,7 @@ class WorldheartPhoenixPlayEffect extends AsThoughEffectImpl {
     WorldheartPhoenixPlayEffect() {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast {this} from your graveyard by paying {W}{U}{B}{R}{G} rather than paying its mana cost. " +
-                "If you do, it enters the battlefield with two +1/+1 counters on it";
+                "If you do, it enters with two +1/+1 counters on it";
     }
 
     private WorldheartPhoenixPlayEffect(final WorldheartPhoenixPlayEffect effect) {

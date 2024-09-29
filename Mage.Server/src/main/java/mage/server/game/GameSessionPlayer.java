@@ -209,16 +209,20 @@ public class GameSessionPlayer extends GameSessionWatcher {
      * @return
      */
     public static GameView prepareGameView(Game game, UUID playerId, UUID userId) {
-        Player player = game.getPlayer(playerId); // null for watcher
-        GameView gameView = new GameView(game.getState(), game, playerId, null);
+        // game view calculation can take some time and can be called from non-game thread,
+        // so use copy for thread save (protection from ConcurrentModificationException)
+        Game sourceGame = game.copy();
+
+        Player player = sourceGame.getPlayer(playerId); // null for watcher
+        GameView gameView = new GameView(sourceGame.getState(), sourceGame, playerId, null);
         if (player != null) {
             if (gameView.getPriorityPlayerName().equals(player.getName())) {
-                gameView.setCanPlayObjects(player.getPlayableObjects(game, Zone.ALL));
+                gameView.setCanPlayObjects(player.getPlayableObjects(sourceGame, Zone.ALL));
             }
         }
 
-        processControlledPlayers(game, player, gameView);
-        processWatchedHands(game, userId, gameView);
+        processControlledPlayers(sourceGame, player, gameView);
+        processWatchedHands(sourceGame, userId, gameView);
         //TODO: should player who controls another player's turn be able to look at all these cards?
 
         return gameView;

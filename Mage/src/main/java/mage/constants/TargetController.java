@@ -83,6 +83,8 @@ public enum TargetController {
                     return card.isOwnedBy(input.getSource().getControllerId());
                 case SOURCE_TARGETS:
                     return card.isOwnedBy(input.getSource().getFirstTarget());
+                case ACTIVE:
+                    return card.isOwnedBy(game.getActivePlayerId());
                 case MONARCH:
                     return card.isOwnedBy(game.getMonarchId());
                 case ANY:
@@ -126,6 +128,8 @@ public enum TargetController {
                     return player.getId().equals(input.getSource().getControllerId());
                 case SOURCE_TARGETS:
                     return player.getId().equals(input.getSource().getFirstTarget());
+                case ACTIVE:
+                    return game.isActivePlayer(player.getId());
                 case MONARCH:
                     return player.getId().equals(game.getMonarchId());
                 default:

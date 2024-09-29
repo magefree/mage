@@ -47,7 +47,7 @@ public final class PrestonTheVanisher extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
-        // Whenever another nontoken creature enters the battlefield under your control,
+        // Whenever another nontoken creature you control enters,
         // if it wasn’t cast, create a token that’s a copy of that creature, except it’s
         // a 0/1 white Illusion.
         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(

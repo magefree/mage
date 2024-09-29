@@ -27,7 +27,7 @@ public final class BalefulForce extends CardImpl {
         this.toughness = new MageInt(7);
 
         // At the beginning of each upkeep, you draw a card and you lose 1 life.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), TargetController.ANY, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1, true), TargetController.ANY, false);
         Effect effect = new LoseLifeSourceControllerEffect(1);
         ability.addEffect(effect.concatBy("and"));
         this.addAbility(ability);

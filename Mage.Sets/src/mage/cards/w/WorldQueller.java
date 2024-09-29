@@ -61,10 +61,10 @@ class WorldQuellerEffect extends OneShotEffect {
         choice.add(CardType.LAND.toString());
         choice.add(CardType.PLANESWALKER.toString());
         choice.add(CardType.SORCERY.toString());
-        choice.add(CardType.TRIBAL.toString());
+        choice.add(CardType.KINDRED.toString());
     }
 
-    public WorldQuellerEffect() {
+    WorldQuellerEffect() {
         super(Outcome.Benefit);
         staticText = "you may choose a card type. If you do, each player sacrifices a permanent of that type";
     }
@@ -84,7 +84,7 @@ class WorldQuellerEffect extends OneShotEffect {
         Player player = game.getPlayer(source.getControllerId());
         Permanent sourceCreature = game.getPermanent(source.getSourceId());
         if (player != null && sourceCreature != null) {
-            Choice choiceImpl = new ChoiceImpl();
+            Choice choiceImpl = new ChoiceImpl(false);
             choiceImpl.setChoices(choice);
             if (!player.choose(Outcome.Neutral, choiceImpl, game)) {
                 return false;
@@ -105,8 +105,8 @@ class WorldQuellerEffect extends OneShotEffect {
                 type = CardType.SORCERY;
             } else if (chosenType.equals(CardType.PLANESWALKER.toString())) {
                 type = CardType.PLANESWALKER;
-            } else if (chosenType.equals(CardType.TRIBAL.toString())) {
-                type = CardType.TRIBAL;
+            } else if (chosenType.equals(CardType.KINDRED.toString())) {
+                type = CardType.KINDRED;
             }
             if (type != null) {
                 FilterControlledPermanent filter = new FilterControlledPermanent("permanent you control of type " + type.toString());

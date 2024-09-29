@@ -10,7 +10,7 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.PreventDamageToTargetEffect;
 import mage.cards.CardImpl;
@@ -41,7 +41,7 @@ public final class AtalyaSamiteMaster extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {X}, {tap}: Choose one - Prevent the next X damage that would be dealt to target creature this turn; or you gain X life. Spend only white mana on X. 
-        PreventDamageToTargetEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, ManacostVariableValue.REGULAR);
+        PreventDamageToTargetEffect effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, false, true, GetXValue.instance);
         effect.setText("Prevent the next X damage that would be dealt to target creature this turn. Spend only white mana on X.");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
@@ -54,7 +54,7 @@ public final class AtalyaSamiteMaster extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
 
         // or you gain X life
-        Mode mode = new Mode(new GainLifeEffect(ManacostVariableValue.REGULAR).setText("You gain X life. Spend only white mana on X."));
+        Mode mode = new Mode(new GainLifeEffect(GetXValue.instance).setText("You gain X life. Spend only white mana on X."));
         ability.addMode(mode);
 
         this.addAbility(ability);

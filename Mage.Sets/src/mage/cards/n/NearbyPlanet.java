@@ -8,10 +8,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
+import mage.abilities.mana.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
@@ -52,10 +54,23 @@ public final class NearbyPlanet extends CardImpl {
 
 class NearbyPlanetEffect extends ContinuousEffectImpl {
 
+    private static final Ability[] basicManaAbilities = {
+            new WhiteManaAbility(),
+            new BlueManaAbility(),
+            new BlackManaAbility(),
+            new RedManaAbility(),
+            new GreenManaAbility()
+    };
+
     NearbyPlanetEffect() {
         super(Duration.Custom, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
+        dependendToTypes.add(DependencyType.BecomeMountain);
+        dependendToTypes.add(DependencyType.BecomeForest);
+        dependendToTypes.add(DependencyType.BecomeSwamp);
+        dependendToTypes.add(DependencyType.BecomeIsland);
+        dependendToTypes.add(DependencyType.BecomePlains);
         staticText = "Rangeling <i>(This card is every land type, including Plains, Island, Swamp, " +
-                "Mountain, Forest, Desert, Gate, Lair, Locus, and all those Urza's ones.)</i>.";
+                "Mountain, Forest, Desert, Gate, Lair, Locus, and all those Urza's ones.)</i>";
     }
 
     private NearbyPlanetEffect(final NearbyPlanetEffect effect) {
@@ -75,6 +90,25 @@ class NearbyPlanetEffect extends ContinuousEffectImpl {
         }
         sourceObject.addSubType(game, SubType.PLAINS, SubType.ISLAND, SubType.SWAMP, SubType.MOUNTAIN, SubType.FOREST);
         sourceObject.setIsAllNonbasicLandTypes(game, true);
+        // subtypes apply in all zones ^
+        // mana abilities apply to permanent
+        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
+        if (permanent == null) {
+            return true;
+        }
+        // Optimization: Remove basic mana abilities since they are redundant with AnyColorManaAbility
+        //               and keeping them will only produce too many combinations inside ManaOptions
+        for (Ability basicManaAbility : basicManaAbilities) {
+            if (permanent.getAbilities(game).containsRule(basicManaAbility)) {
+                permanent.removeAbility(basicManaAbility, source.getSourceId(), game);
+            }
+        }
+        // Add the {T}: Add one mana of any color ability
+        // This is functionally equivalent to having five "{T}: Add {COLOR}" for each COLOR in {W}{U}{B}{R}{G}
+        AnyColorManaAbility ability = new AnyColorManaAbility();
+        if (!permanent.getAbilities(game).containsRule(ability)) {
+            permanent.addAbility(ability, source.getSourceId(), game);
+        }
         return true;
     }
 }

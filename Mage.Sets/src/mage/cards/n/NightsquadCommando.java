@@ -31,7 +31,7 @@ public final class NightsquadCommando extends CardImpl {
         // When Nightsquad Commando enters the battlefield, if you attacked this turn, create a 1/1 white Human Soldier creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HumanSoldierToken())),
-                RaidCondition.instance, "When {this} enters the battlefield, " +
+                RaidCondition.instance, "When {this} enters, " +
                 "if you attacked this turn, create a 1/1 white Human Soldier creature token."
         ).addHint(RaidHint.instance), new PlayerAttackedWatcher());
     }

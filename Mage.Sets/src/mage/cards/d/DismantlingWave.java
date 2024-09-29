@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
-import mage.target.targetadjustment.EachOpponentPermanentTargetsAdjuster;
+import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
@@ -27,8 +27,8 @@ public final class DismantlingWave extends CardImpl {
         this.getSpellAbility().addEffect(new DestroyTargetEffect()
                 .setTargetPointer(new EachTargetPointer())
                 .setText("For each opponent, destroy up to one target artifact or enchantment that player controls."));
-        this.getSpellAbility().setTargetAdjuster(new EachOpponentPermanentTargetsAdjuster());
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+        this.getSpellAbility().setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
 
         // Cycling {6}{W}{W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{6}{W}{W}")));

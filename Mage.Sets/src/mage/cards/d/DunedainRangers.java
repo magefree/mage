@@ -41,10 +41,10 @@ public final class DunedainRangers extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        // Landfall -- Whenever a land enters the battlefield under your control, if you don't control a Ring-bearer, the Ring tempts you.
+        // Landfall -- Whenever a land you control enters, if you don't control a Ring-bearer, the Ring tempts you.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new LandfallAbility(new TheRingTemptsYouEffect()),
-                condition, "Whenever a land enters the battlefield under your control, " +
+                condition, "Whenever a land you control enters, " +
                 "if you don't control a Ring-bearer, the Ring tempts you."
         ).setAbilityWord(AbilityWord.LANDFALL));
     }

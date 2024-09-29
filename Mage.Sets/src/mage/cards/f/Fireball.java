@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
 
 import java.util.*;
 
@@ -67,7 +68,7 @@ class FireballEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int numTargets = getTargetPointer().getTargets(game, source).size();
-        int damage = source.getManaCostsToPay().getX();
+        int damage = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (numTargets > 0) {
             int damagePer = damage / numTargets;
             if (damagePer > 0) {
@@ -116,7 +117,7 @@ class FireballTargetCreatureOrPlayer extends TargetAnyTarget {
     public List<TargetAnyTarget> getTargetOptions(Ability source, Game game) {
 
         List<TargetAnyTarget> options = new ArrayList<>();
-        int xVal = source.getManaCostsToPay().getX();
+        int xVal = CardUtil.getSourceCostsTag(game, source, "X", 0);
 
         if (xVal < 1) {
             return options;

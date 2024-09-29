@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.SourceControllerCountersCount;
@@ -46,7 +46,7 @@ public final class AzlaskTheSwellingScourge extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Azlask, the Swelling Scourge or another colorless creature you control dies, you get an experience counter.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new AddCountersPlayersEffect(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(new AddCountersPlayersEffect(
                 CounterType.EXPERIENCE.createInstance(), TargetController.YOU
         ), false, filter));
 

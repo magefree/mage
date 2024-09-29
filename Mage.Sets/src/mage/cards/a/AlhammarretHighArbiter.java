@@ -57,7 +57,7 @@ class AlhammarretHighArbiterEffect extends OneShotEffect {
 
     AlhammarretHighArbiterEffect() {
         super(Outcome.Benefit);
-        this.staticText = "As {this} enters the battlefield, each opponent reveals their hand. You choose the name of a nonland card revealed this way."
+        this.staticText = "As {this} enters, each opponent reveals their hand. You choose the name of a nonland card revealed this way."
                 + "<br>Your opponents can't cast spells with the chosen name";
     }
 

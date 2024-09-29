@@ -61,7 +61,7 @@ class AbdelAdrianGorionsWardEffect extends OneShotEffect {
 
     static {
         filter.add(AnotherPredicate.instance);
-        filter.add(TargetController.YOU.getOwnerPredicate());
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     AbdelAdrianGorionsWardEffect() {

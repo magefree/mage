@@ -3,7 +3,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -31,7 +31,7 @@ public final class DarkSalvation extends CardImpl {
 
         // Target player creates X 2/2 black Zombie creature tokens, then up to one target creature gets -1/-1 until end of turn for each Zombie that player controls.
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new CreateTokenTargetEffect(new ZombieToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenTargetEffect(new ZombieToken(), GetXValue.instance));
 
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
         Effect effect = new BoostTargetEffect(

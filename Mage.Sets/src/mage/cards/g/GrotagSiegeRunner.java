@@ -1,13 +1,11 @@
 
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -19,6 +17,8 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,9 +43,7 @@ public final class GrotagSiegeRunner extends CardImpl {
         // {R}, Sacrifice Grotag Siege-Runner: Destroy target creature with defender. Grotag Siege-Runner deals 2 damage to that creature's controller.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{R}"));
         ability.addCost(new SacrificeSourceCost());
-        Effect effect = new DamageTargetControllerEffect(2);
-        effect.setText("{this} deals 2 damage to that creature's controller");
-        ability.addEffect(effect);
+        ability.addEffect(new DamageTargetControllerEffect(2));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

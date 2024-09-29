@@ -26,7 +26,7 @@ public final class ObsidianBattleAxe extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.WARRIOR, "a Warrior creature");
 
     public ObsidianBattleAxe(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{3}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.ARTIFACT},"{3}");
         this.subtype.add(SubType.WARRIOR);
         this.subtype.add(SubType.EQUIPMENT);
 

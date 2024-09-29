@@ -1,7 +1,6 @@
 
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -16,6 +15,9 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -64,7 +66,7 @@ class WildcallEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 new ManifestEffect(1).apply(game, source);
-                int xValue = source.getManaCostsToPay().getX();
+                int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
                 if (xValue > 0) {
                     Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(xValue));
                     effect.setTargetPointer(new FixedTarget(card.getId()));

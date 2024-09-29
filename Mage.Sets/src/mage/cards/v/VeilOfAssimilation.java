@@ -21,7 +21,7 @@ public final class VeilOfAssimilation extends CardImpl {
     public VeilOfAssimilation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{W}");
 
-        // Whenever Veil of Assimilation or another artifact enters the battlefield under your control, target creature you control gets +1/+1 and gains vigilance until end of turn.
+        // Whenever Veil of Assimilation or another artifact you control enters, target creature you control gets +1/+1 and gains vigilance until end of turn.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new BoostTargetEffect(1, 1).setText("target creature you control gets +1/+1"),
                 StaticFilters.FILTER_PERMANENT_ARTIFACT, false, true

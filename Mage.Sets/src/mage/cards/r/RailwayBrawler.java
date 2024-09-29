@@ -37,7 +37,7 @@ public final class RailwayBrawler extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever another creature enters the battlefield under your control, put X +1/+1 counters on it, where X is its power.
+        // Whenever another creature you control enters, put X +1/+1 counters on it, where X is its power.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new RailwayBrawlerEffect(),

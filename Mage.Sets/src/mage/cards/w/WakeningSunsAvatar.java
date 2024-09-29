@@ -39,7 +39,7 @@ public final class WakeningSunsAvatar extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(filter), false),
                 CastFromHandSourcePermanentCondition.instance,
-                "When {this} enters the battlefield, if you cast it from your hand, destroy all non-Dinosaur creatures."),
+                "When {this} enters, if you cast it from your hand, destroy all non-Dinosaur creatures."),
                 new CastFromHandWatcher());
     }
 

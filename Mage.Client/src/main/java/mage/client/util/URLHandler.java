@@ -1,12 +1,8 @@
 package mage.client.util;
 
-import java.awt.Desktop;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import javax.swing.*;
 
@@ -48,15 +44,7 @@ public class URLHandler {
                     return;
                 }
                 if (e.getClickCount() > 0) {
-                    if (Desktop.isDesktopSupported()) {
-                        Desktop desktop = Desktop.getDesktop();
-                        try {
-                            URI uri = new URI(url);
-                            desktop.browse(uri);
-                        } catch (IOException | URISyntaxException ex) {
-                            // do nothing
-                        }
-                    }
+                    AppUtil.openUrlInSystemBrowser(url);
                 }
             }
         };

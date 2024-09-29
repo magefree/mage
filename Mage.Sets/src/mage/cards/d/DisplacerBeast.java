@@ -6,6 +6,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,7 +28,8 @@ public final class DisplacerBeast extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Displacer Beast enters the battlefield, venture into the dungeon.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new VentureIntoTheDungeonEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new VentureIntoTheDungeonEffect())
+                .addHint(CurrentDungeonHint.instance));
 
         // Displacement — {3}{U}: Return Displacer Beast to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(

@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -19,7 +18,7 @@ public class OnceUponATimeTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerA, "Silvercoat Lion");
         addCard(Zone.LIBRARY, playerA, "Plains", 4);
         skipInitShuffling();
-        
+
         // If this spell is the first spell you've cast this game, you may cast it without paying its mana cost.
         // Look at the top five cards of your library. 
         // You may reveal a creature or land card from among them and put it into your hand. 
@@ -27,16 +26,16 @@ public class OnceUponATimeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Once Upon a Time"); // Instant {1}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
         addCard(Zone.HAND, playerA, "Forest", 1);
-        
+
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Once Upon a Time");
-        
-        setChoice(playerA, false); // Cast without paying its mana cost?
-        
+
+        setChoice(playerA, "Cast with no alternative cost: {1}{G}");
+
         setChoice(playerA, true); // Do you wish to reveal a creature or land card and put into your hand?
         addTarget(playerA, "Silvercoat Lion");
-        
+
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -44,7 +43,7 @@ public class OnceUponATimeTest extends CardTestPlayerBase {
         assertTappedCount("Forest", true, 2);
         assertHandCount(playerA, "Silvercoat Lion", 1);
     }
-    
+
     @Test
     public void test_castForFree() {
         setStrictChooseMode(true);
@@ -55,7 +54,7 @@ public class OnceUponATimeTest extends CardTestPlayerBase {
         addCard(Zone.LIBRARY, playerB, "Silvercoat Lion", 5);
 
         skipInitShuffling();
-        
+
         // If this spell is the first spell you've cast this game, you may cast it without paying its mana cost.
         // Look at the top five cards of your library. 
         // You may reveal a creature or land card from among them and put it into your hand. 
@@ -64,15 +63,15 @@ public class OnceUponATimeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerB, "Once Upon a Time"); // Instant {1}{G}
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Once Upon a Time");
-        setChoice(playerA, true); // Cast without paying its mana cost?
+        setChoice(playerA, "Cast without paying its mana cost (source: Once Upon a Time");
         setChoice(playerA, true); // Do you wish to reveal a creature or land card and put into your hand?
         addTarget(playerA, "Silvercoat Lion");
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Once Upon a Time");
-        setChoice(playerB, true); // Cast without paying its mana cost?
+        setChoice(playerB, "Cast without paying its mana cost (source: Once Upon a Time");
         setChoice(playerB, true); // Do you wish to reveal a creature or land card and put into your hand?
         addTarget(playerB, "Silvercoat Lion");
-        
+
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 

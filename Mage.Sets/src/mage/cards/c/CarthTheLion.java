@@ -57,7 +57,7 @@ class CarthTheLionTriggeredAbility extends TriggeredAbilityImpl {
     public CarthTheLionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(
                 7, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM));
-        setTriggerPhrase("Whenever {this} enters the battlefield or a planeswalker you control dies, ");
+        setTriggerPhrase("Whenever {this} enters or a planeswalker you control dies, ");
     }
 
     private CarthTheLionTriggeredAbility(final CarthTheLionTriggeredAbility ability) {

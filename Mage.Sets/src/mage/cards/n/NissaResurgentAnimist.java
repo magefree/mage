@@ -38,7 +38,7 @@ public final class NissaResurgentAnimist extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Landfall--Whenever a land enters the battlefield under your control, add one mana of any color. Then if this is the second time this ability has resolved this turn, reveal cards from the top of your library until you reveal an Elf or Elemental card. Put that card into your hand and the rest on the bottom of your library in a random order.
+        // Landfall--Whenever a land you control enters, add one mana of any color. Then if this is the second time this ability has resolved this turn, reveal cards from the top of your library until you reveal an Elf or Elemental card. Put that card into your hand and the rest on the bottom of your library in a random order.
         Ability ability = new LandfallAbility(new AddManaOfAnyColorEffect());
         ability.addEffect(new IfAbilityHasResolvedXTimesEffect(
                 Outcome.DrawCard, 2,

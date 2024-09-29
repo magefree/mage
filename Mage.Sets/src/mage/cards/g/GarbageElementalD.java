@@ -34,7 +34,7 @@ public final class GarbageElementalD extends CardImpl {
         // When Garbage Elemental enters the battlefield, roll a six-sided die. Garbage Elemental deals damage equal to the result to target opponent.
         Ability ability = new EntersBattlefieldAbility(new GarbageElementalDEffect(),
             null,
-            "When {this} enters the battlefield, roll a six-sided die. {this} deals damage equal to the result to target opponent",
+            "When {this} enters, roll a six-sided die. {this} deals damage equal to the result to target opponent",
             null);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

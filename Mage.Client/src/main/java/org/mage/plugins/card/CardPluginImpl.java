@@ -4,7 +4,6 @@ import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
 import mage.client.util.GUISizeHelper;
-import mage.client.util.ImageCaches;
 import mage.interfaces.plugin.CardPlugin;
 import mage.view.CardView;
 import mage.view.CounterView;
@@ -103,7 +102,7 @@ public class CardPluginImpl implements CardPlugin {
      * yet, so use old component based rendering for the split cards.
      */
     private CardPanel makeCardPanel(CardView view, UUID gameId, boolean loadImage, ActionCallback callback,
-            boolean isFoil, Dimension dimension, int renderMode, boolean needFullPermanentRender) {
+                                    boolean isFoil, Dimension dimension, int renderMode, boolean needFullPermanentRender) {
         switch (renderMode) {
             case 0:
                 return new CardPanelRenderModeMTGO(view, gameId, loadImage, callback, isFoil, dimension,
@@ -118,7 +117,7 @@ public class CardPluginImpl implements CardPlugin {
 
     @Override
     public MageCard getMagePermanent(PermanentView permanent, Dimension dimension, UUID gameId, ActionCallback callback,
-            boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
+                                     boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
         CardPanel cardPanel = makeCardPanel(permanent, gameId, loadImage, callback, false, dimension, renderMode,
                 needFullPermanentRender);
         cardPanel.setShowCastingCost(true);
@@ -127,7 +126,7 @@ public class CardPluginImpl implements CardPlugin {
 
     @Override
     public MageCard getMageCard(CardView cardView, Dimension dimension, UUID gameId, ActionCallback callback,
-            boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
+                                boolean canBeFoil, boolean loadImage, int renderMode, boolean needFullPermanentRender) {
         CardPanel cardPanel = makeCardPanel(cardView, gameId, loadImage, callback, false, dimension, renderMode,
                 needFullPermanentRender);
         cardPanel.setShowCastingCost(true);
@@ -191,7 +190,7 @@ public class CardPluginImpl implements CardPlugin {
                         && stackPower == cardPower && stackToughness == cardToughness
                         && stackAbilities.equals(cardAbilities) && stackCounters.equals(cardCounters)
                         && (!perm.isCreature() || firstPanelPerm.getOriginalPermanent().hasSummoningSickness() == perm
-                                .getOriginalPermanent().hasSummoningSickness())) {
+                        .getOriginalPermanent().hasSummoningSickness())) {
 
                     if (!empty(firstPanelPerm.getOriginalPermanent().getAttachments())) {
                         // Put this land to the left of lands with the same name and attachments.
@@ -235,7 +234,7 @@ public class CardPluginImpl implements CardPlugin {
 
     @Override
     public int sortPermanents(Map<String, JComponent> ui, Map<UUID, MageCard> cards, boolean nonPermanentsOwnRow,
-            boolean topPanel) {
+                              boolean topPanel) {
         // requires to find out is position have been changed that includes:
         // adding/removing permanents, type change
 
@@ -279,7 +278,7 @@ public class CardPluginImpl implements CardPlugin {
             cardHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);
             extraCardSpacingX = Math.round(cardWidth * EXTRA_CARD_SPACING_X);
             cardSpacingX = cardHeight - cardWidth + extraCardSpacingX; // need space for tap animation (horizontal
-                                                                       // position)
+            // position)
             cardSpacingY = Math.round(cardHeight * CARD_SPACING_Y);
             stackSpacingX = stackVertical ? 0 : Math.round(cardWidth * STACK_SPACING_X);
             stackSpacingY = Math.round(cardHeight * STACK_SPACING_Y);
@@ -363,7 +362,7 @@ public class CardPluginImpl implements CardPlugin {
                 }
                 for (int panelIndex = 0, panelCount = stack.size(); panelIndex < panelCount; panelIndex++) {
                     MagePermanent panelPerm = stack.get(panelIndex); // it's original card panel, but you must change
-                                                                     // top layer
+                    // top layer
                     int stackPosition = panelCount - panelIndex - 1;
                     if (cardsPanel != null) {
                         cardsPanel.setComponentZOrder(panelPerm.getTopPanelRef(), panelIndex);
@@ -470,7 +469,7 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     private AttachmentLayoutInfos calculateNeededNumberOfVerticalColumns(int currentCol, Map<UUID, MageCard> cards,
-            MageCard cardWithAttachments) {
+                                                                         MageCard cardWithAttachments) {
         int maxCol = ++currentCol;
         int attachments = 0;
         MagePermanent permWithAttachments = (MagePermanent) cardWithAttachments.getMainPanel();
@@ -653,38 +652,34 @@ public class CardPluginImpl implements CardPlugin {
         final Downloader downloader = new Downloader();
         final DownloadGui downloadGui = new DownloadGui(downloader);
 
-        LOGGER.info("Symbols download prepare...");
+        LOGGER.info("Download: prepare symbols to download...");
         Iterable<DownloadJob> jobs;
 
+        // mana symbols (low quality)
         jobs = new GathererSymbols();
         for (DownloadJob job : jobs) {
             downloader.add(job);
         }
 
+        // set code symbols (low quality)
         jobs = new GathererSets();
         for (DownloadJob job : jobs) {
             downloader.add(job);
         }
 
+        // mana symbols (high quality)
         jobs = new ScryfallSymbolsSource();
         for (DownloadJob job : jobs) {
             downloader.add(job);
         }
 
-        /*
-         * it = new CardFrames(imagesDir); // TODO: delete frames download (not need
-         * now)
-         * for (DownloadJob job : it) {
-         * g.getDownloader().add(job);
-         * }
-         */
-
+        // additional resources
         jobs = new DirectLinksForDownload();
         for (DownloadJob job : jobs) {
             downloader.add(job);
         }
 
-        LOGGER.info("Symbols download needs " + downloader.getJobs().size() + " files");
+        LOGGER.info("Download: app used " + downloader.getJobs().size() + " symbol files");
 
         // download GUI dialog
         JDialog dialog = new JDialog((Frame) null, "Download symbols", false);
@@ -711,6 +706,7 @@ public class CardPluginImpl implements CardPlugin {
                 return null;
             }
         };
+
         // downloader finisher
         worker.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
@@ -718,10 +714,10 @@ public class CardPluginImpl implements CardPlugin {
                 if (evt.getPropertyName().equals("state")) {
                     if (evt.getNewValue() == SwingWorker.StateValue.DONE) {
                         // all done, can close dialog and refresh symbols for UI
-                        LOGGER.info("Symbols download finished");
+                        LOGGER.info("Download: symbols download finished");
                         dialog.dispose();
                         ManaSymbols.loadImages();
-                        GUISizeHelper.refreshGUIAndCards();
+                        GUISizeHelper.refreshGUIAndCards(false);
                     }
                 }
             }

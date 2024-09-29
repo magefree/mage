@@ -62,6 +62,11 @@
      }
 
      private void setGUISize() {
+         Font countLabelFont = DragCardGrid.getCountLabelFont();
+         countLabels.stream().forEach(label -> {
+             label.setFont(countLabelFont);
+         });
+
          cardDimension = GUISizeHelper.editorCardDimension;
      }
 
@@ -188,7 +193,7 @@
                      String description = comparator.getCategoryName(currentCard.getOriginal());
                      DragCardGrid.updateCountLabel(lastCountLabel, curRow + 1, description);
 
-                     rectangle.setLocation(curColumn * cardDimension.width, curRow * vertOffsetPerCardInStack + DragCardGrid.COUNT_LABEL_HEIGHT);
+                     rectangle.setLocation(curColumn * cardDimension.width, curRow * vertOffsetPerCardInStack + DragCardGrid.getCountLabelHeight());
                      currentCard.setCardBounds(rectangle.x, rectangle.y, cardDimension.width, cardDimension.height);
                      moveToFront(currentCard);
                      curRow++;
@@ -215,7 +220,7 @@
          this.countLabels.add(label);
          this.add(label, (Integer) 0); // draw on background
          label.setLocation(columnNumber * cardDimension.width, 5);
-         label.setSize(cardDimension.width, DragCardGrid.COUNT_LABEL_HEIGHT);
+         label.setSize(cardDimension.width, DragCardGrid.getCountLabelHeight());
          label.setVisible(true);
          return label;
      }

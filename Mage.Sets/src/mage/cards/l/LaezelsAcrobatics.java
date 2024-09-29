@@ -74,7 +74,7 @@ class LaezelsAcrobaticsEffect extends RollDieWithResultTableEffect {
         }
         Cards toFlicker = new CardsImpl(game.getBattlefield().getActivePermanents(creatureFilter, controller.getId(), game));
         controller.moveCards(toFlicker, Zone.EXILED, source, game);
-        game.getState().processAction(game);
+        game.processAction();
         int result = controller.rollDice(outcome, source, game, 20);
         if (result >= 1 && result <= 9) {
             Effect effect = new ReturnToBattlefieldUnderOwnerControlTargetEffect(false, false);
@@ -87,7 +87,7 @@ class LaezelsAcrobaticsEffect extends RollDieWithResultTableEffect {
                     PutCards.BATTLEFIELD.moveCard(game.getPlayer(card.getOwnerId()), card.getMainCard(), source, game, "card");
                 }
             }
-            game.getState().processAction(game);
+            game.processAction();
             Effect effect = new ExileReturnBattlefieldNextEndStepTargetEffect();
             effect.setTargetPointer(new FixedTargets(toFlicker, game));
             effect.apply(game, source);

@@ -1,7 +1,7 @@
 package mage.game.command.dungeons;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.CardTypeAssignment;
+import mage.abilities.assignment.common.CardTypeAssignment;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LoseLifeAllPlayersEffect;
@@ -20,7 +20,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TheAtropalToken;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetDiscard;
 import mage.target.common.TargetSacrifice;
 

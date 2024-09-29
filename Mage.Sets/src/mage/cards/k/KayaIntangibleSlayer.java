@@ -1,7 +1,5 @@
 package mage.cards.k;
 
-import java.util.UUID;
-
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -10,30 +8,22 @@ import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
-import mage.constants.*;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
  * @author TheElk801
  */
 public final class KayaIntangibleSlayer extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("creature or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.ENCHANTMENT.getPredicate()
-        ));
-    }
 
     public KayaIntangibleSlayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{3}{W}{W}{B}{B}");
@@ -51,13 +41,13 @@ public final class KayaIntangibleSlayer extends CardImpl {
         this.addAbility(ability);
 
         // 0: You draw two cards. Then each opponent may scry 1.
-        ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(2, "you"), 0);
+        ability = new LoyaltyAbility(new DrawCardSourceControllerEffect(2, true), 0);
         ability.addEffect(new KayaIntangibleSlayerScryEffect());
         this.addAbility(ability);
 
         // -3: Exile target creature or enchantment. If it wasn't an Aura, create a token that's a copy of it, except it's a 1/1 white Spirit creature with flying in addition to its other types.
         ability = new LoyaltyAbility(new KayaIntangibleSlayerExileEffect(), -3);
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT));
         this.addAbility(ability);
     }
 

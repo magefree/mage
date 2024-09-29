@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.PopulateEffect;
@@ -66,7 +66,7 @@ class ArborealAllianceEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         return new CreateTokenEffect(
-                new SylvanOfferingTreefolkToken(ManacostVariableValue.ETB.calculate(game, source, this))
+                new SylvanOfferingTreefolkToken(GetXValue.instance.calculate(game, source, this))
         ).apply(game, source);
     }
 }

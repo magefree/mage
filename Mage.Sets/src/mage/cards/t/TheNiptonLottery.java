@@ -74,7 +74,7 @@ class TheNiptonLotteryEffect extends OneShotEffect {
         ContinuousEffect controlEffect = new GainControlTargetEffect(Duration.EndOfTurn);
         controlEffect.setTargetPointer(new FixedTarget(permanentToSteal, game));
         game.addEffect(controlEffect, source);
-        game.getState().processAction(game);
+        game.processAction();
         permanentToSteal.untap(game);
         ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         hasteEffect.setTargetPointer(new FixedTarget(permanentToSteal, game));

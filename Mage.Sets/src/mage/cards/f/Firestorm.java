@@ -30,8 +30,8 @@ public final class Firestorm extends CardImpl {
 
         // Firestorm deals X damage to each of X target creatures and/or players.
         this.getSpellAbility().addEffect(new FirestormEffect());
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private Firestorm(final Firestorm card) {

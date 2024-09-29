@@ -69,7 +69,7 @@ public final class MilaCraftyCompanion extends ModalDoubleFacedCard {
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.getRightHalfCard().addAbility(ability);
 
-        // −7: You get an emblem with "Whenever a creature enters the battlefield under your control, it deals damage equal to its power to any target."
+        // −7: You get an emblem with "Whenever a creature you control enters, it deals damage equal to its power to any target."
         this.getRightHalfCard().addAbility(new LoyaltyAbility(
                 new GetEmblemEffect(new LukkaWaywardBonderEmblem()), -7
         ));

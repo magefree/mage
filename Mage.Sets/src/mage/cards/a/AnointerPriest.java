@@ -35,7 +35,7 @@ public final class AnointerPriest extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Whenever a creature token enters the battlefield under your control, you gain 1 life.
+        // Whenever a creature token you control enters, you gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));
 
         // Embalm {3}{W}

@@ -31,12 +31,12 @@ public final class FieldOfTheDead extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
 
-        // Whenever Field of the Dead or another land enters the battlefield under your control, if you control seven or more lands with different names, create a 2/2 black Zombie creature token.
+        // Whenever Field of the Dead or another land you control enters, if you control seven or more lands with different names, create a 2/2 black Zombie creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldThisOrAnotherTriggeredAbility(
                         new CreateTokenEffect(new ZombieToken()), StaticFilters.FILTER_LAND, false, true
                 ), FieldOfTheDeadCondition.instance, "Whenever {this} or another land " +
-                "enters the battlefield under your control, if you control seven or more lands with different names, " +
+                "you control enters, if you control seven or more lands with different names, " +
                 "create a 2/2 black Zombie creature token."
         ));
     }

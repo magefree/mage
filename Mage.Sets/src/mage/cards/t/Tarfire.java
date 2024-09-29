@@ -16,7 +16,7 @@ import mage.target.common.TargetAnyTarget;
 public final class Tarfire extends CardImpl {
 
     public Tarfire(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{R}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.INSTANT},"{R}");
         this.subtype.add(SubType.GOBLIN);
 
         // Tarfire deals 2 damage to any target.

@@ -3,6 +3,7 @@ package mage.cards.v;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +25,8 @@ public final class VeteranDungeoneer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Veteran Dungeoneer enters the battlefield, venture into the dungeon.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new VentureIntoTheDungeonEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new VentureIntoTheDungeonEffect())
+                .addHint(CurrentDungeonHint.instance));
     }
 
     private VeteranDungeoneer(final VeteranDungeoneer card) {

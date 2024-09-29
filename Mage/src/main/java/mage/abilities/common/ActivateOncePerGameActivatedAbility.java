@@ -7,10 +7,13 @@ import mage.constants.TimingRule;
 import mage.constants.Zone;
 
 /**
- *
  * @author weirddan455
  */
 public class ActivateOncePerGameActivatedAbility extends ActivatedAbilityImpl {
+
+    public ActivateOncePerGameActivatedAbility(Effect effect, Cost cost) {
+        this(Zone.BATTLEFIELD, effect, cost, TimingRule.INSTANT);
+    }
 
     public ActivateOncePerGameActivatedAbility(Zone zone, Effect effect, Cost cost, TimingRule timingRule) {
         super(zone, effect, cost);

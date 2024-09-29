@@ -242,7 +242,7 @@ public class PrimalClayTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, clay);
         addCard(Zone.HAND, playerA, cloudshift);
         addCard(Zone.BATTLEFIELD, playerA, "Waterkin Shaman");
-        // 2/1; Whenever a creature with flying enters the battlefield under your control, Waterkin Shaman gets +1/+1 until end of turn.
+        // 2/1; Whenever a creature with flying you control enters, Waterkin Shaman gets +1/+1 until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, clay);

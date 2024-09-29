@@ -58,7 +58,7 @@ class TargetControlledPermanentSharingOpponentPermanentCardType extends TargetCo
         super();
         this.filter = this.filter.copy();
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        setTargetName("nonland permanent you control");
+        withTargetName("nonland permanent you control");
     }
 
     private TargetControlledPermanentSharingOpponentPermanentCardType(final TargetControlledPermanentSharingOpponentPermanentCardType target) {
@@ -128,7 +128,7 @@ class DaringThiefSecondTarget extends TargetPermanent {
         super();
         this.filter = this.filter.copy();
         filter.add(TargetController.OPPONENT.getControllerPredicate());
-        setTargetName("permanent an opponent controls that shares a card type with it");
+        withTargetName("permanent an opponent controls that shares a card type with it");
     }
 
     private DaringThiefSecondTarget(final DaringThiefSecondTarget target) {

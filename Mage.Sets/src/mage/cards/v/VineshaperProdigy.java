@@ -34,7 +34,7 @@ public final class VineshaperProdigy extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(
                         new LookLibraryAndPickControllerEffect(
                                 3, 1, PutCards.HAND, PutCards.BOTTOM_ANY
-                        )), KickedCondition.ONCE, "When {this} enters the battlefield, " +
+                        )), KickedCondition.ONCE, "When {this} enters, " +
                 "if it was kicked, look at the top three cards of your library. " +
                 "Put one of them into your hand and the rest on the bottom of your library in any order."
         ));

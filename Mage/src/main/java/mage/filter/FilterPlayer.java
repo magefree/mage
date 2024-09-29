@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -36,6 +37,10 @@ public class FilterPlayer extends FilterImpl<Player> {
         if (isLockedFilter()) {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
+
+        // verify check
+        Predicates.makeSurePredicateCompatibleWithFilter(predicate, Player.class);
+
         extraPredicates.add(predicate);
         return this;
     }
