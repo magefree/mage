@@ -147,7 +147,11 @@ jobs:
 
               if (body.length > 65536) {
                 console.log(`Issue body for ${set[0]} (${set[1]}) too long! Length: ${body.length}`);
-                console.log(splitStringByMaxLength(body, 65536, "//n"));
+                const splitBody = splitStringByMaxLength(body, 65536, "//n");
+                console.log(`Body was split into ${splitBody.length} chunks`);
+                splitBody.forEach(b => {
+                  console.log(b.length);
+                });
                 //continue;
               }
               
