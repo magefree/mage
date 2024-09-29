@@ -36,6 +36,33 @@ jobs:
                 return index === 0 ? word.toLowerCase() : word.toUpperCase();
               }).replace(/\s+/g, '')
             }
+
+            function splitStringByMaxLength(str, maxLength, delimiter) {
+              const result = [];
+              let current = "";
+            
+              for (let i = 0; i < str.length; i++) {
+                const char = str[i];
+            
+                if ((current + char).length > maxLength && current.length > 0) {
+                  result.push(current);
+                  current = "";
+                }
+            
+                if (char === delimiter) {
+                  result.push(current + char);
+                  current = "";
+                } else {
+                  current += char;
+                }
+              }
+            
+              if (current.length > 0) {
+                result.push(current);
+              }
+            
+              return result;
+            }
             
             const setsData = fs.readFileSync(path.join('Utils', 'mtg-sets-data.txt'), 'utf8')
               .split('\n')
@@ -110,27 +137,28 @@ jobs:
                   });
                 }
               }
-              
-              if (foundIssue !== undefined) {
-                foundIssue.body = mustache.render(cardIssueTemplate, {
+              const body = mustache.render(cardIssueTemplate, {
                   hasUnimplementedCards: unimplemented.length > 0,
                   hasImplementedCards: implemented.length > 0,
                   unimplementedCards: unimplemented,
                   implementedCards: implemented,
                   unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`
                 });
-                foundIssue.state = unimplemented.length > 0 ? "open" : "closed"
+
+              if (body.length > 65536) {
+                console.log(`Issue body for ${set[0]} (${set[1]}) too long!`);
+                splitStringByMaxLength(body, 65536, "//n");
+                //continue;
+              }
+              
+              if (foundIssue !== undefined) {
+                foundIssue.body = body;
+                foundIssue.state = unimplemented.length > 0 ? "open" : "closed";
                 issuesToUpdate.push(foundIssue);
               } else {
                 issuesToCreate.push({
                   title: `${set[1]}: ${set[0]} Set Card Implementation Tracking`,
-                  body: mustache.render(cardIssueTemplate, {
-                    hasUnimplementedCards: unimplemented.length > 0,
-                    hasImplementedCards: implemented.length > 0,
-                    unimplementedCards: unimplemented,
-                    implementedCards: implemented,
-                    unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`
-                  }),
+                  body: body,
                   state: unimplemented.length > 0 ? "open" : "closed"
                 });
               }
