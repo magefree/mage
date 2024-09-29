@@ -49,7 +49,8 @@ jobs:
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: 'tracking set'
+              labels: 'tracking set',
+              state: 'all'
             });
             console.log("Found list of existing tracking set issues:", issues);
             
@@ -162,7 +163,8 @@ jobs:
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: 'tracking set'
+              labels: 'tracking set',
+              state: 'all'
             });
             console.log("Found list of existing tracking set issues:", issues);
             
