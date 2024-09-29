@@ -23,14 +23,14 @@ All cards are implemented
 
 # Implemented Cards
 <details>
-  <summary>Click to expand</summary>
-  </br>
+<summary>Click to expand</summary>
+</br>
 
-  {{#hasImplementedCards}}
-  {{#implementedCards}}
-  - [{{#pr}}x{{/pr}}{{^pr}} {{/pr}}]  Done -- [{{name}}]({{scryfall}})
-  {{/implementedCards}}
-  {{/hasImplementedCards}}
+{{#hasImplementedCards}}
+{{#implementedCards}}
+- [{{#pr}}x{{/pr}}{{^pr}} {{/pr}}]  Done -- [{{name}}]({{scryfall}})
+{{/implementedCards}}
+{{/hasImplementedCards}}
 
 </details>
 
