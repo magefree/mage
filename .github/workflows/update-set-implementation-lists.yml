@@ -131,7 +131,7 @@ jobs:
               });
             });
             issuesToCreate.slice(0, 1).forEach(issue => {
-              async () =>  {
+              const act = async () =>  {
                 const result = await github.rest.issues.create({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
@@ -148,6 +148,7 @@ jobs:
                   });
                 }
               };
+              act();
             });
       - uses: actions/github-script@v6.4.1
         id: updatesetimplementations
