@@ -175,12 +175,12 @@ jobs:
                 body: issue.body,
                 labels: ["tracking set"]
               });
-              console.log(`DEBUG: ${result} issue.state: ${issue.state}`);
+              console.log(`DEBUG: ${result.data} issue.state: ${issue.state}`);
               if (issue.state === "closed") {
                 github.rest.issues.update({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  issue_number: result.number,
+                  issue_number: result.data.number,
                   state: issue.state
                 });
               }
