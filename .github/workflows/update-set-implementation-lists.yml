@@ -139,7 +139,7 @@ jobs:
                   hasImplementedCards: implemented.length > 0,
                   unimplementedCards: unimplemented,
                   implementedCards: implemented,
-                  unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName)`
+                  unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName)}`
                 }).length);
                 //continue;
               }
