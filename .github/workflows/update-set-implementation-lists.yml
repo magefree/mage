@@ -51,7 +51,7 @@ jobs:
               repo: context.repo.repo,
               labels: 'tracking set'
             });
-            console.log("Found list of existing issues:", issues);
+            console.log("Found list of existing tracking set issues:", issues);
             
             const issuesToUpdate = [];
             const issuesToCreate = [];
