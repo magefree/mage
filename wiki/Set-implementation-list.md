@@ -158,7 +158,7 @@ Set Name  |  # Cards | # Missing |
 [Magic: The Gathering-Commander](https://www.github.com/mage/magefree) | 302 | 5
 [Magic: The Gathering-Conspiracy](https://www.github.com/mage/magefree) | 210 | 24
 [Media Inserts](https://www.github.com/mage/magefree) | 195 | 2
-[March of the Machine](https://github.com/ExpensiveKoala/mage/issues/2) | 352 | 0
+[March of the Machine](https://www.github.com/mage/magefree) | 352 | 0
 [March of the Machine Commander](https://www.github.com/mage/magefree) | 342 | 5
 [March of the Machine: The Aftermath](https://www.github.com/mage/magefree) | 50 | 3
 [Mirrodin Besieged](https://www.github.com/mage/magefree) | 145 | 0
