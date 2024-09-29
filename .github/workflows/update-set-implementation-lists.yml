@@ -49,9 +49,10 @@ jobs:
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: 'tracking set'
+              labels: 'tracking set',
+              state: 'all'
             });
-            console.log("Found list of existing issues:", issues);
+            console.log("Found list of existing tracking set issues:", issues);
             
             const issuesToUpdate = [];
             const issuesToCreate = [];
@@ -100,6 +101,7 @@ jobs:
                   implementedCards: implemented,
                   unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`
                 });
+                foundIssue.state = unimplemented.length > 0 ? "open" : "closed"
                 issuesToUpdate.push(foundIssue);
               } else {
                 issuesToCreate.push({
@@ -110,15 +112,26 @@ jobs:
                     unimplementedCards: unimplemented,
                     implementedCards: implemented,
                     unimplementedScryfallLink: `https://scryfall.com/search?q=!"${unimplemented.map(e => e.cleanName).join('"OR!"')}"+e:${set[1]}`
-                  })
+                  }),
+                  state: unimplemented.length > 0 ? "open" : "closed"
                 });
               }
             });
             
             console.log("Issues to update: ", issuesToUpdate);
             console.log("Issues to create: ", issuesToCreate);
+
+            issuesToUpdate.forEach(issue => {
+              github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: issue.body,
+                state: issue.state
+              });
+            });
       - uses: actions/github-script@v6.4.1
-        id: updatewiki
+        id: updatesetimplementations
         with:
           script: |
             const mustache = require('mustache')
@@ -150,8 +163,10 @@ jobs:
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: 'tracking set'
+              labels: 'tracking set',
+              state: 'all'
             });
+            console.log("Found list of existing tracking set issues:", issues);
             
             const sets = [];
             setsData.forEach(set => {
@@ -190,7 +205,7 @@ jobs:
             console.log(content);
             
             try {
-              fs.writeFileSync(path.join('wiki', 'Set-implementation-list.md'), content);
+              fs.writeFileSync(path.join('Set-implementation-list.md'), content);
             } catch (err) {
               console.error(err);
             }
@@ -200,6 +215,6 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           # Stage the Set-implementation-list.md file, commit, then push
-          git add ./wiki/*
-          git commit -m "Update Set-implementation-list.md"
+          git add Set-implementation-list.md
+          git commit -m "Update Set-implementation-list.md" || exit 0
           git push
