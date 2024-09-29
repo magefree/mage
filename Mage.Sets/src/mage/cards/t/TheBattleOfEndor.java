@@ -1,8 +1,7 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -21,6 +20,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EwokToken;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +34,7 @@ public final class TheBattleOfEndor extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{X}{X}{G}{G}{G}");
 
         // Create X 1/1 green Ewok creature tokens.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new EwokToken(), ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new EwokToken(), GetXValue.instance));
 
         // Put X +1/+1 counters on each creature you control.
         this.getSpellAbility().addEffect(new TheBattleOfEndorEffect());
@@ -78,7 +80,7 @@ class TheBattleOfEndorEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source, game)) {
-                permanent.addCounters(CounterType.P1P1.createInstance(source.getManaCostsToPay().getX()), source.getControllerId(), source, game);
+                permanent.addCounters(CounterType.P1P1.createInstance(CardUtil.getSourceCostsTag(game, source, "X", 0)), source.getControllerId(), source, game);
             }
             return true;
         }

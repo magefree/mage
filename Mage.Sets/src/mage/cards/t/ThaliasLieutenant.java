@@ -37,7 +37,7 @@ public final class ThaliasLieutenant extends CardImpl {
         // When Thalia's Lieutenant enters the battlefield, put a +1/+1 counter on each other Human you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter).setText("put a +1/+1 counter on each other Human you control"), false));
 
-        // Whenever another Human enters the battlefield under your control, put a +1/+1 counter on Thalia's Lieutenant.
+        // Whenever another Human you control enters, put a +1/+1 counter on Thalia's Lieutenant.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
     }
 

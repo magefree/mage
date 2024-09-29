@@ -82,6 +82,10 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
+        if (this.zone == Zone.BATTLEFIELD) {
+            return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
+        } else {
+            return super.isInUseableZone(game, source, event);
+        }
     }
 }

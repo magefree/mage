@@ -51,7 +51,7 @@ public final class WispdrinkerVampire extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another creature with power 2 or less enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.
+        // Whenever another creature with power 2 or less you control enters, each opponent loses 1 life and you gain 1 life.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new LoseLifeOpponentsEffect(1), filter);
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);

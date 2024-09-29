@@ -1,6 +1,5 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -24,6 +23,9 @@ import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author L_J
@@ -71,7 +73,7 @@ class VenarianGoldValue implements DynamicValue {
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         MageObject mageObject = game.getLastKnownInformation(sourceAbility.getSourceId(), Zone.STACK);
         if (mageObject instanceof StackObject) {
-            return ((StackObject) mageObject).getStackAbility().getManaCostsToPay().getX();
+            return CardUtil.getSourceCostsTag(game, ((StackObject) mageObject).getStackAbility(), "X", 0);
         }
         return 0;
     }

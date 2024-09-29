@@ -12,7 +12,7 @@ import mage.game.Game;
 public enum OpponentsLostLifeHint implements Hint {
 
     instance;
-    private static final ConditionHint hint = new ConditionHint(OpponentsLostLifeCondition.instance, "Opponents lost life this turn");
+    private static final ConditionHint hint = new ConditionHint(OpponentsLostLifeCondition.instance, "An opponent lost life this turn");
 
     @Override
     public String getText(Game game, Ability ability) {

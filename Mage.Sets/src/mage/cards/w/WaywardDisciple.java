@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
@@ -38,7 +38,7 @@ public final class WaywardDisciple extends CardImpl {
         this.nightCard = true;
 
         // Whenever Wayward Disciple or another creature you control dies, target opponent loses 1 life and you gain 1 life.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new LoseLifeTargetEffect(1), false, filter);
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(new LoseLifeTargetEffect(1), false, filter);
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

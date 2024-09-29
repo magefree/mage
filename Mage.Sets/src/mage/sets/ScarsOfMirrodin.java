@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author nantuko84
  */
 public final class ScarsOfMirrodin extends ExpansionSet {
@@ -27,11 +26,13 @@ public final class ScarsOfMirrodin extends ExpansionSet {
         super("Scars of Mirrodin", "SOM", ExpansionSet.buildDate(2010, 10, 1), SetType.EXPANSION);
         this.blockName = "Scars of Mirrodin";
         this.hasBoosters = true;
+        this.rotationSet = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Abuna Acolyte", 1, Rarity.UNCOMMON, mage.cards.a.AbunaAcolyte.class));
         cards.add(new SetCardInfo("Accorder's Shield", 136, Rarity.COMMON, mage.cards.a.AccordersShield.class));
         cards.add(new SetCardInfo("Acid Web Spider", 108, Rarity.UNCOMMON, mage.cards.a.AcidWebSpider.class));

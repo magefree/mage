@@ -8,7 +8,6 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.GameEvent.EventType;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 
@@ -18,7 +17,7 @@ import mage.game.stack.Spell;
 public class SacrificeIfCastAtInstantTimeTriggeredAbility extends TriggeredAbilityImpl {
 
     public SacrificeIfCastAtInstantTimeTriggeredAbility() {
-        super(Zone.STACK, new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(new SacrificeSourceEffect())));
+        super(Zone.STACK, new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(new SacrificeSourceEffect(true))));
     }
 
     protected SacrificeIfCastAtInstantTimeTriggeredAbility(final SacrificeIfCastAtInstantTimeTriggeredAbility ability) {

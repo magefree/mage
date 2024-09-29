@@ -48,7 +48,7 @@ public final class DustAnimus extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
                 condition,
                 "If you control five or more untapped lands, "
-                        + "{this} enters the battlefield with two +1/+1 counters "
+                        + "{this} enters with two +1/+1 counters "
                         + "and a lifelink counter on it.",
                 ""
         );

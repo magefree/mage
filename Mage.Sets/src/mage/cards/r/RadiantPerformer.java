@@ -54,7 +54,7 @@ public final class RadiantPerformer extends CardImpl {
         // When Radiant Performer enters the battlefield, if you cast it from your hand, choose target spell or ability that targets only a single permanent or player. Copy that spell or ability for each other permanent or player the spell or ability could target. Each copy targets a different one of those permanents and players.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new RadiantPerformerEffect()),
-                CastFromHandSourcePermanentCondition.instance, "When {this} enters the battlefield, " +
+                CastFromHandSourcePermanentCondition.instance, "When {this} enters, " +
                 "if you cast it from your hand, choose target spell or ability that targets only " +
                 "a single permanent or player. Copy that spell or ability for each other permanent or player " +
                 "the spell or ability could target. Each copy targets a different one of those permanents and players."

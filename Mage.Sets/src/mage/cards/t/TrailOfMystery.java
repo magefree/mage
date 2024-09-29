@@ -31,7 +31,7 @@ public final class TrailOfMystery extends CardImpl {
     public TrailOfMystery(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
-        // Whenever a face-down creature enters the battlefield under your control, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
+        // Whenever a face-down creature you control enters, you may search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
         Effect effect = new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true);
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, effect, filter, true));
 

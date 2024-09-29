@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.util.UUID;
 
 /**
- * App GUI: join to the new game window
+ * App GUI: join to table (client side dialog to choose deck and enter pass)
  *
  * @author BetaSteward_at_googlemail.com
  */
@@ -120,6 +120,7 @@ public class JoinTableDialog extends MageDialog {
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         Session session = SessionHandler.getSession();
         try {
+            // remember pass for next joins
             PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_PASSWORD_JOIN, txtPassword.getText());
             if (isTournament) {
                 joined = session.joinTournamentTable(roomId, tableId, this.newPlayerPanel.getPlayerName(), PlayerType.HUMAN, 1, DeckImporter.importDeckFromFile(this.newPlayerPanel.getDeckFile(), true), this.txtPassword.getText());

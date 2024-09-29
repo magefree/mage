@@ -46,8 +46,8 @@ public final class RestlessSpire extends CardImpl {
                                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
                                 MyTurnCondition.instance, "As long as it's your turn, this creature has first strike."
                         )).addHint(MyTurnHint.instance)),
-                CardType.LAND, Duration.EndOfTurn, true
-        ), new ManaCostsImpl<>("{U}{R}")));
+                CardType.LAND, Duration.EndOfTurn
+        ).withDurationRuleAtStart(true), new ManaCostsImpl<>("{U}{R}")));
 
         // Whenever Restless Spire attacks, scry 1.
         this.addAbility(new AttacksTriggeredAbility(new ScryEffect(1, false), false));

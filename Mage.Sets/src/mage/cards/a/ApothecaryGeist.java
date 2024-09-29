@@ -44,7 +44,7 @@ public final class ApothecaryGeist extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,
                 new PermanentsOnTheBattlefieldCondition(filter),
-                "When {this} enters the battlefield, if you control another Spirit, you gain 3 life."));
+                "When {this} enters, if you control another Spirit, you gain 3 life."));
     }
 
     private ApothecaryGeist(final ApothecaryGeist card) {

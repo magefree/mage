@@ -13,6 +13,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -62,7 +63,7 @@ class FaultLineEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = source.getManaCostsToPay().getX();
+        int amount = CardUtil.getSourceCostsTag(game, source, "X", 0);
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
             permanent.damage(amount, source.getSourceId(), source, game, false, true);
         }

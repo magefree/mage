@@ -3,7 +3,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
@@ -38,7 +38,7 @@ public final class LifecraftAwakening extends CardImpl {
 
         // Put X +1/+1 counters on target artifact you control. If it isn't a creature or Vehicle, it becomes a 0/0 Construct artifact creature.
         getSpellAbility().addEffect(new AddCountersTargetEffect(
-                CounterType.P1P1.createInstance(), ManacostVariableValue.REGULAR
+                CounterType.P1P1.createInstance(), GetXValue.instance
         ).setText("put X +1/+1 counters on target artifact you control"));
         getSpellAbility().addTarget(new TargetArtifactPermanent(filter));
         getSpellAbility().addEffect(new LifecraftAwakeningEffect());

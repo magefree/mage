@@ -29,6 +29,7 @@ public final class Zendikar extends ExpansionSet {
         super("Zendikar", "ZEN", ExpansionSet.buildDate(2009, 10, 2), SetType.EXPANSION); // October 2nd, 2009
         this.blockName = "Zendikar";
         this.hasBoosters = true;
+        this.rotationSet = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

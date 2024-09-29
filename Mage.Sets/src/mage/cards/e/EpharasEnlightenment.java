@@ -45,7 +45,7 @@ public final class EpharasEnlightenment extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAttachedEffect(CounterType.P1P1.createInstance(), "enchanted creature"), false));
         // Enchanted creature has flying.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
-        // Whenever a creature enters the battlefield under your control, you may return Ephara's Enlightenment to its owner's hand.
+        // Whenever a creature you control enters, you may return Ephara's Enlightenment to its owner's hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, 
                 new ReturnToHandSourceEffect(true),
                 StaticFilters.FILTER_PERMANENT_A_CREATURE,

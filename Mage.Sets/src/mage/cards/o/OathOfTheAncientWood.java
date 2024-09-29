@@ -20,7 +20,7 @@ public final class OathOfTheAncientWood extends CardImpl {
     public OathOfTheAncientWood(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
-        // Whenever Oath of the Ancient Wood or another enchantment enters the battlefield under your control, you may put a +1/+1 counter on target creature.
+        // Whenever Oath of the Ancient Wood or another enchantment you control enters, you may put a +1/+1 counter on target creature.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 StaticFilters.FILTER_PERMANENT_ENCHANTMENT, true, true

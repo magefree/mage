@@ -2,6 +2,8 @@ package mage.filter.predicate;
 
 import mage.game.Game;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
  *
  * <p>All methods returns serializable predicates as long as they're given serializable parameters.</p>
  *
- * @author North
+ * @author North, JayDi85
  */
 public final class Predicates {
 
@@ -245,5 +247,49 @@ public final class Predicates {
         if (extraPredicates != null) {
             extraPredicates.forEach(p -> collectAllComponents(p, res));
         }
+    }
+
+    /**
+     * Verify check: try to find filters usage
+     * Example use case: Player predicate was used for Permanent filter
+     * Example error: java.lang.ClassCastException: mage.game.permanent.PermanentToken cannot be cast to mage.players.Player
+     */
+    public static void makeSurePredicateCompatibleWithFilter(Predicate predicate, Class... compatibleClasses) {
+        List<Predicate> list = new ArrayList<>();
+        Predicates.collectAllComponents(predicate, list);
+        list.forEach(p -> {
+            Class predicateGenericParamClass = findGenericParam(predicate);
+            if (predicateGenericParamClass == null) {
+                throw new IllegalArgumentException("Somthing wrong. Can't find predicate's generic param for " + predicate.getClass());
+            }
+            if (Arrays.stream(compatibleClasses).anyMatch(f -> predicateGenericParamClass.isAssignableFrom(f))) {
+                // predicate is fine
+            } else {
+                // How-to fix: use correct predicates (same type, e.g. getControllerPredicate() instead getPlayerPredicate())
+                throw new IllegalArgumentException(String.format(
+                        "Wrong code usage: predicate [%s] with generic param [%s] can't be added to filter, allow only %s",
+                        predicate.getClass(),
+                        predicateGenericParamClass,
+                        Arrays.toString(compatibleClasses)
+                ));
+            }
+        });
+    }
+
+    private static Class findGenericParam(Predicate predicate) {
+        Type[] interfaces = predicate.getClass().getGenericInterfaces();
+        for (Type type : interfaces) {
+            if (type instanceof ParameterizedType) {
+                ParameterizedType parameterizedType = (ParameterizedType) type;
+                Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
+                if (actualTypeArguments.length > 0) {
+                    Type actualType = actualTypeArguments[0];
+                    if (actualType instanceof Class) {
+                        return (Class) actualType;
+                    }
+                }
+            }
+        }
+        return null;
     }
 }

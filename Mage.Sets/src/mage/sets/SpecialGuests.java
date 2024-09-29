@@ -25,6 +25,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Breeches, Brazen Plunderer", 6, Rarity.UNCOMMON, mage.cards.b.BreechesBrazenPlunderer.class));
         cards.add(new SetCardInfo("Bridge from Below", 3, Rarity.RARE, mage.cards.b.BridgeFromBelow.class));
         cards.add(new SetCardInfo("Carnage Tyrant", 10, Rarity.MYTHIC, mage.cards.c.CarnageTyrant.class));
+        cards.add(new SetCardInfo("Collected Company", 72, Rarity.MYTHIC, mage.cards.c.CollectedCompany.class));
         cards.add(new SetCardInfo("Crashing Footfalls", 25, Rarity.MYTHIC, mage.cards.c.CrashingFootfalls.class));
         cards.add(new SetCardInfo("Dargo, the Shipwrecker", 7, Rarity.UNCOMMON, mage.cards.d.DargoTheShipwrecker.class));
         cards.add(new SetCardInfo("Desert", 37, Rarity.MYTHIC, mage.cards.d.Desert.class));
@@ -36,6 +37,7 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Expressive Iteration", 43, Rarity.MYTHIC, mage.cards.e.ExpressiveIteration.class));
         cards.add(new SetCardInfo("Fabricate", 20, Rarity.MYTHIC, mage.cards.f.Fabricate.class));
         cards.add(new SetCardInfo("Field of the Dead", 28, Rarity.MYTHIC, mage.cards.f.FieldOfTheDead.class));
+        cards.add(new SetCardInfo("Frogmite", 61, Rarity.MYTHIC, mage.cards.f.Frogmite.class));
         cards.add(new SetCardInfo("Fury", 47, Rarity.MYTHIC, mage.cards.f.Fury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fury", 52, Rarity.MYTHIC, mage.cards.f.Fury.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gamble", 24, Rarity.MYTHIC, mage.cards.g.Gamble.class));
@@ -44,6 +46,8 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Grief", 46, Rarity.MYTHIC, mage.cards.g.Grief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grief", 51, Rarity.MYTHIC, mage.cards.g.Grief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kalamax, the Stormsire", 13, Rarity.MYTHIC, mage.cards.k.KalamaxTheStormsire.class));
+        cards.add(new SetCardInfo("Kindred Charge", 58, Rarity.MYTHIC, mage.cards.k.KindredCharge.class));
+        cards.add(new SetCardInfo("Ledger Shredder", 55, Rarity.MYTHIC, mage.cards.l.LedgerShredder.class));
         cards.add(new SetCardInfo("Lord Windgrace", 14, Rarity.MYTHIC, mage.cards.l.LordWindgrace.class));
         cards.add(new SetCardInfo("Lord of Atlantis", 1, Rarity.RARE, mage.cards.l.LordOfAtlantis.class));
         cards.add(new SetCardInfo("Malcolm, Keen-Eyed Navigator", 2, Rarity.UNCOMMON, mage.cards.m.MalcolmKeenEyedNavigator.class));
@@ -66,7 +70,10 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Prismatic Ending", 40, Rarity.MYTHIC, mage.cards.p.PrismaticEnding.class));
         cards.add(new SetCardInfo("Prismatic Vista", 38, Rarity.MYTHIC, mage.cards.p.PrismaticVista.class));
         cards.add(new SetCardInfo("Rampaging Ferocidon", 8, Rarity.RARE, mage.cards.r.RampagingFerocidon.class));
+        cards.add(new SetCardInfo("Rat Colony", 56, Rarity.MYTHIC, mage.cards.r.RatColony.class));
+        cards.add(new SetCardInfo("Relentless Rats", 57, Rarity.MYTHIC, mage.cards.r.RelentlessRats.class));
         cards.add(new SetCardInfo("Scapeshift", 34, Rarity.MYTHIC, mage.cards.s.Scapeshift.class));
+        cards.add(new SetCardInfo("Secluded Courtyard", 63, Rarity.MYTHIC, mage.cards.s.SecludedCourtyard.class));
         cards.add(new SetCardInfo("Show and Tell", 21, Rarity.MYTHIC, mage.cards.s.ShowAndTell.class));
         cards.add(new SetCardInfo("Solitude", 44, Rarity.MYTHIC, mage.cards.s.Solitude.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Solitude", 49, Rarity.MYTHIC, mage.cards.s.Solitude.class, NON_FULL_USE_VARIOUS));
@@ -74,9 +81,13 @@ public final class SpecialGuests extends ExpansionSet {
         cards.add(new SetCardInfo("Stoneforge Mystic", 29, Rarity.MYTHIC, mage.cards.s.StoneforgeMystic.class));
         cards.add(new SetCardInfo("Subtlety", 45, Rarity.MYTHIC, mage.cards.s.Subtlety.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Subtlety", 50, Rarity.MYTHIC, mage.cards.s.Subtlety.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sword of Fire and Ice", 62, Rarity.MYTHIC, mage.cards.s.SwordOfFireAndIce.class));
+        cards.add(new SetCardInfo("Swords to Plowshares", 54, Rarity.MYTHIC, mage.cards.s.SwordsToPlowshares.class));
+        cards.add(new SetCardInfo("Sylvan Tutor", 59, Rarity.MYTHIC, mage.cards.s.SylvanTutor.class));
         cards.add(new SetCardInfo("Thought-Knot Seer", 39, Rarity.MYTHIC, mage.cards.t.ThoughtKnotSeer.class));
         cards.add(new SetCardInfo("Thrasios, Triton Hero", 16, Rarity.RARE, mage.cards.t.ThrasiosTritonHero.class));
         cards.add(new SetCardInfo("Tireless Tracker", 26, Rarity.MYTHIC, mage.cards.t.TirelessTracker.class));
+        cards.add(new SetCardInfo("Toski, Bearer of Secrets", 60, Rarity.MYTHIC, mage.cards.t.ToskiBearerOfSecrets.class));
         cards.add(new SetCardInfo("Tragic Slip", 22, Rarity.MYTHIC, mage.cards.t.TragicSlip.class));
         cards.add(new SetCardInfo("Underworld Breach", 9, Rarity.RARE, mage.cards.u.UnderworldBreach.class));
         cards.add(new SetCardInfo("Victimize", 23, Rarity.MYTHIC, mage.cards.v.Victimize.class));

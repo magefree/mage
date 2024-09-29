@@ -36,7 +36,7 @@ public final class RoseRoomTreasurer extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        // Alliance — Whenever another creature enters the battlefield under your control, create a Treasure token if this is the first or second time this ability has resolved this turn. Otherwise, you may pay {X}. When you do, Rose Room Treasurer deals X damage to any target.
+        // Alliance — Whenever another creature you control enters, create a Treasure token if this is the first or second time this ability has resolved this turn. Otherwise, you may pay {X}. When you do, Rose Room Treasurer deals X damage to any target.
         this.addAbility(new AllianceAbility(new RoseRoomTreasurerEffect()), new AbilityResolvedWatcher());
     }
 

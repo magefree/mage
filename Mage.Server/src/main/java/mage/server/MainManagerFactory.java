@@ -74,8 +74,6 @@ public class MainManagerFactory implements ManagerFactory {
 
         threadExecutor().getServerHealthExecutor().scheduleAtFixedRate(() -> {
             try {
-                //logger.info("---");
-                //logger.info("Server health check started");
                 this.tableManager().checkHealth();
                 this.chatManager().checkHealth();
                 this.userManager().checkHealth();
@@ -83,8 +81,6 @@ public class MainManagerFactory implements ManagerFactory {
             } catch (Exception ex) {
                 logger.fatal("Server health check: catch unknown error - " + ex, ex);
             }
-            //logger.info("Server health check end");
-            //logger.info("---");
         }, SERVER_HEALTH_CHECK_TIMEOUT_MINS, SERVER_HEALTH_CHECK_TIMEOUT_MINS, TimeUnit.MINUTES);
     }
 

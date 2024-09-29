@@ -31,7 +31,7 @@ public final class GenesisChamber extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new GenesisChamberEffect(), StaticFilters.FILTER_CREATURE_NON_TOKEN, false, SetTargetPointer.PERMANENT);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability,
                 SourceTappedCondition.UNTAPPED,
-                "Whenever a nontoken creature enters the battlefield, "
+                "Whenever a nontoken creature enters, "
                         + "if {this} is untapped, "
                         + "that creature's controller creates a 1/1 colorless Myr artifact creature token"));
     }

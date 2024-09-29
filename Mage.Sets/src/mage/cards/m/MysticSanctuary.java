@@ -1,13 +1,10 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
 import mage.abilities.common.EntersBattlefieldUntappedTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +26,7 @@ import java.util.UUID;
 public final class MysticSanctuary extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterControlledPermanent(SubType.ISLAND);
+            = new FilterControlledPermanent(SubType.ISLAND, "other Islands");
     private static final FilterCard filter2
             = new FilterInstantOrSorceryCard("instant or sorcery card from your graveyard");
 
@@ -37,8 +34,8 @@ public final class MysticSanctuary extends CardImpl {
         filter.add(AnotherPredicate.instance);
     }
 
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 3);
+    private static final YouControlPermanentCondition condition
+            = new YouControlPermanentCondition(filter, ComparisonType.OR_GREATER, 3);
 
     public MysticSanctuary(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -49,10 +46,7 @@ public final class MysticSanctuary extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // Mystic Sanctuary enters the battlefield tapped unless you control three or more other Islands.
-        this.addAbility(new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(new TapSourceEffect(), condition),
-                "tapped unless you control three or more other Islands"
-        ));
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
 
         // When Mystic Sanctuary enters the battlefield untapped, you may put target instant or sorcery card from your graveyard on top of your library.
         Ability ability = new EntersBattlefieldUntappedTriggeredAbility(

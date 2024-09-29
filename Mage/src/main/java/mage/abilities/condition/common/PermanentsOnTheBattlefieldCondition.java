@@ -17,9 +17,9 @@ import mage.game.Game;
  */
 public class PermanentsOnTheBattlefieldCondition implements Condition {
 
-    private final FilterPermanent filter;
-    private final ComparisonType type;
-    private final int count;
+    protected final FilterPermanent filter;
+    protected final ComparisonType type;
+    protected final int count;
     private final boolean onlyControlled;
 
     /**

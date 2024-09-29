@@ -1,11 +1,11 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardInfo;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
 import mage.collation.RarityConfiguration;
-import mage.cards.repository.CardInfo;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -24,6 +24,7 @@ public final class GuildsOfRavnica extends ExpansionSet {
         super("Guilds of Ravnica", "GRN", ExpansionSet.buildDate(2018, 10, 5), SetType.EXPANSION);
         this.blockName = "Guilds of Ravnica";
         this.hasBoosters = true;
+        this.rotationSet = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

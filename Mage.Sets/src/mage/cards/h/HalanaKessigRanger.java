@@ -38,7 +38,7 @@ public final class HalanaKessigRanger extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // Whenever another creature enters the battlefield under your control, you may pay {2}. When you do, that creature deals damage equal to its power to target creature.
+        // Whenever another creature you control enters, you may pay {2}. When you do, that creature deals damage equal to its power to target creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,
                 new DoIfCostPaid(new HalanaKessigRangerTriggerEffect(), new GenericManaCost(2))
                         .setText("you may pay {2}. When you do, that creature deals damage equal to its power to target creature."),

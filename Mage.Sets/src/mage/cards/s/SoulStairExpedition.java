@@ -25,7 +25,7 @@ public final class SoulStairExpedition extends CardImpl {
     public SoulStairExpedition(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");
 
-        // Landfall - Whenever a land enters the battlefield under your control, you may put a quest counter on Soul Stair Expedition.
+        // Landfall - Whenever a land you control enters, you may put a quest counter on Soul Stair Expedition.
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
 
         // Remove three quest counters from Soul Stair Expedition and sacrifice it: Return up to two target creature cards from your graveyard to your hand.

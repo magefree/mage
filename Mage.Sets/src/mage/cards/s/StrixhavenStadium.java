@@ -9,7 +9,10 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -37,7 +40,7 @@ public final class StrixhavenStadium extends CardImpl {
 
         // Whenever a creature you control deals combat damage to an opponent, put a point counter on Strixhaven Stadium. Then if it has ten or more point counters on it, remove them all and that player loses the game.
         ability = new DealsDamageToAPlayerAllTriggeredAbility(
-                Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.POINT.createInstance()),
+                new AddCountersSourceEffect(CounterType.POINT.createInstance()),
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE, false, SetTargetPointer.PLAYER,
                 true, true, TargetController.OPPONENT
         );

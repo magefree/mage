@@ -29,7 +29,7 @@ import mage.target.TargetPermanent;
 /**
  * Gemcutter Buccaneer {3}{R}
  * Creature - Orc Pirate Artificer 1/3
- * Whenever Gemcutter Buccaneer or another Pirate enters the battlefield under your control, create a tapped Treasure token.
+ * Whenever Gemcutter Buccaneer or another Pirate you control enters, create a tapped Treasure token.
  * Treasures you control are Equipment in addition to their other types and have “Equipped creature gets +2/+0,” equip Pirate {1}, and equip {3}.
  *
  * @author DominionSpy
@@ -47,7 +47,7 @@ public final class GemcutterBuccaneer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Whenever Gemcutter Buccaneer or another Pirate enters the battlefield under your control, create a tapped Treasure token.
+        // Whenever Gemcutter Buccaneer or another Pirate you control enters, create a tapped Treasure token.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new TreasureToken(), 1, true),
                 filter, false, true));

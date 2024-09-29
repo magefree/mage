@@ -366,12 +366,12 @@ public abstract class MageObjectImpl implements MageObject {
 
     @Override
     public void setIsAllCreatureTypes(boolean value) {
-        this.getSubtype().setIsAllCreatureTypes(value && (this.isTribal() || this.isCreature()));
+        this.getSubtype().setIsAllCreatureTypes(value && (this.isKindred() || this.isCreature()));
     }
 
     @Override
     public void setIsAllCreatureTypes(Game game, boolean value) {
-        this.getSubtype(game).setIsAllCreatureTypes(value && (this.isTribal(game) || this.isCreature(game)));
+        this.getSubtype(game).setIsAllCreatureTypes(value && (this.isKindred(game) || this.isCreature(game)));
     }
 
     @Override

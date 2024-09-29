@@ -52,18 +52,20 @@ public class BushidoTest extends CardTestPlayerBase {
     @Test
     public void testMultipleBlocker() {
         addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves", 1);
-        addCard(Zone.BATTLEFIELD, playerA, "Quirion Elves", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Elvish Mystic", 1);
 
         addCard(Zone.BATTLEFIELD, playerB, "Isao, Enlightened Bushi"); // 2/1  Bushido 2
         attack(2, playerB, "Isao, Enlightened Bushi");
         block(2, playerA, "Llanowar Elves", "Isao, Enlightened Bushi");
-        block(2, playerA, "Quirion Elves", "Isao, Enlightened Bushi");
+        block(2, playerA, "Elvish Mystic", "Isao, Enlightened Bushi");
+        setChoice(playerB, "X=1"); // assign damage
+        setChoice(playerB, "X=1"); // assign damage
 
         setStopAt(2, PhaseStep.END_COMBAT);
         execute();
 
         assertPowerToughness(playerB, "Isao, Enlightened Bushi", 4, 3);
         assertPermanentCount(playerA, "Llanowar Elves", 0);
-        assertPermanentCount(playerA, "Quirion Elves", 0);
+        assertPermanentCount(playerA, "Elvish Mystic", 0);
     }
 }

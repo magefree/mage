@@ -8,7 +8,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class ProsperousInnkeeperTest extends CardTestPlayerBase {
 
     // When Prosperous Innkeeper enters the battlefield, create a Treasure token.
-    // Whenever another creature enters the battlefield under your control, you gain 1 life.
+    // Whenever another creature you control enters, you gain 1 life.
     private final String innkeeper = "Prosperous Innkeeper";
 
     @Test

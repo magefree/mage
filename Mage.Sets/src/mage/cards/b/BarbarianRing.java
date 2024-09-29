@@ -1,9 +1,7 @@
-
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
+import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -15,17 +13,17 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class BarbarianRing extends CardImpl {
 
     public BarbarianRing(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
+        super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {T}: Add {R}. Barbarian Ring deals 1 damage to you.
         Ability redManaAbility = new RedManaAbility();
@@ -33,10 +31,10 @@ public final class BarbarianRing extends CardImpl {
         this.addAbility(redManaAbility);
 
         // Threshold - {R}, {T}, Sacrifice Barbarian Ring: Barbarian Ring deals 2 damage to any target. Activate this ability only if seven or more cards are in your graveyard.
-        Ability thresholdAbility = new ConditionalActivatedAbility(Zone.BATTLEFIELD,
-            new DamageTargetEffect(2, "it"),
-            new ManaCostsImpl<>("{R}"),
-            new CardsInControllerGraveyardCondition(7));
+        Ability thresholdAbility = new ConditionalActivatedAbility(
+                new DamageTargetEffect(2, "it"),
+                new ManaCostsImpl<>("{R}"), ThresholdCondition.instance
+        );
         thresholdAbility.addCost(new TapSourceCost());
         thresholdAbility.addCost(new SacrificeSourceCost());
         thresholdAbility.addTarget(new TargetAnyTarget());

@@ -21,7 +21,7 @@ import mage.players.Player;
 public final class FeudkillersVerdict extends CardImpl {
 
     public FeudkillersVerdict(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{4}{W}{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.SORCERY}, "{4}{W}{W}");
         this.subtype.add(SubType.GIANT);
 
         // You gain 10 life. Then if you have more life than an opponent, create a 5/5 white Giant Warrior creature token.

@@ -73,7 +73,9 @@ public class FilterCard extends FilterObject<Card> {
             throw new UnsupportedOperationException("You may not modify a locked filter");
         }
 
+        // verify check
         checkPredicateIsSuitableForCardFilter(predicate);
+        Predicates.makeSurePredicateCompatibleWithFilter(predicate, Card.class);
 
         extraPredicates.add(predicate);
     }

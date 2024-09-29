@@ -14,7 +14,11 @@ import mage.players.Player;
 public class ExileTargetAndSearchGraveyardHandLibraryEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
     public ExileTargetAndSearchGraveyardHandLibraryEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText) {
-        super(graveyardExileOptional, searchWhatText, searchForText);
+        this(graveyardExileOptional, searchWhatText, searchForText, false);
+    }
+
+    public ExileTargetAndSearchGraveyardHandLibraryEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText, boolean drawForEachHandCard) {
+        super(graveyardExileOptional, searchWhatText, searchForText, drawForEachHandCard);
         this.staticText = ""; // since parent class overrides static text but we need to use a target
     }
 
@@ -45,6 +49,7 @@ public class ExileTargetAndSearchGraveyardHandLibraryEffect extends SearchTarget
             return staticText;
         }
         return "exile " + getTargetPointer().describeTargets(mode.getTargets(), "that permanent")
-                + ". Search " + searchWhatText + " graveyard, hand, and library for " + searchForText + " and exile them. Then that player shuffles";
+                + ". Search " + searchWhatText + " graveyard, hand, and library for " + searchForText + " and exile them. "
+                + (drawForEachHandCard ? "That player shuffles, then draws a card for each card exiled from their hand this way" : "Then that player shuffles");
     }
 }

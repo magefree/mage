@@ -1,19 +1,17 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -43,8 +41,7 @@ public final class LostLegacy extends CardImpl {
 class LostLegacyEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
     LostLegacyEffect() {
-        super(true, "target player's", "any number of cards with that name");
-        this.staticText = "Search target player's graveyard, hand, and library for any number of cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way";
+        super(true, "target player's", "any number of cards with that name", true);
     }
 
     private LostLegacyEffect(final LostLegacyEffect effect) {
@@ -56,15 +53,7 @@ class LostLegacyEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExi
         String cardName = (String) game.getState().getValue(source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY);
         Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (targetPlayer != null && cardName != null && !cardName.isEmpty()) {
-            FilterCard filter = new FilterCard();
-            filter.add(new NamePredicate(cardName));
-            int cardsInHandBefore = targetPlayer.getHand().count(filter, game);
-            boolean result = super.applySearchAndExile(game, source, cardName, getTargetPointer().getFirst(game, source));
-            int cardsExiled = cardsInHandBefore - targetPlayer.getHand().count(filter, game);
-            if (cardsExiled > 0) {
-                targetPlayer.drawCards(cardsExiled, source, game);
-            }
-            return result;
+            return applySearchAndExile(game, source, cardName, getTargetPointer().getFirst(game, source));
         }
         return false;
     }

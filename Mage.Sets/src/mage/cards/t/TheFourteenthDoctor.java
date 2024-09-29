@@ -43,7 +43,8 @@ public final class TheFourteenthDoctor extends CardImpl {
         this.addAbility(new CastSourceTriggeredAbility(new TheFourteenthDoctorRevealEffect()));
 
         // You may have The Fourteenth Doctor enter the battlefield as a copy of a Doctor card in your graveyard that was put there from your library this turn. If you do, it gains haste until end of turn.
-        this.addAbility(new EntersBattlefieldAbility(new TheFourteenthDoctorCopyEffect(), true));
+        this.addAbility(new EntersBattlefieldAbility(new TheFourteenthDoctorCopyEffect(), true),
+                new TheFourteenthDoctorWatcher());
     }
 
     private TheFourteenthDoctor(final TheFourteenthDoctor card) {

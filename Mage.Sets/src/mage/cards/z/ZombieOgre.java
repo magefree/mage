@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.hint.common.MorbidHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,7 +32,7 @@ public final class ZombieOgre extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 Zone.BATTLEFIELD, new VentureIntoTheDungeonEffect(),
                 TargetController.YOU, MorbidCondition.instance, false
-        ).addHint(MorbidHint.instance));
+        ).addHint(MorbidHint.instance).addHint(CurrentDungeonHint.instance));
     }
 
     private ZombieOgre(final ZombieOgre card) {

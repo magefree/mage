@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -9,7 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 
@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class SerraRedeemer extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("another creature with power 2 or less");
+            = new FilterControlledCreaturePermanent("another creature you control with power 2 or less");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -39,8 +39,8 @@ public final class SerraRedeemer extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another creature with power 2 or less enters the battlefield under your control, put two +1/+1 counters on that creature.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+        // Whenever another creature with power 2 or less you control enters, put two +1/+1 counters on that creature.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)),
                 filter, false, SetTargetPointer.PERMANENT
         ));

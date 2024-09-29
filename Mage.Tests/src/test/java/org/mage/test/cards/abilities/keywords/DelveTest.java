@@ -56,7 +56,7 @@ public class DelveTest extends CardTestPlayerBaseWithAIHelps {
         // AI must use special actions to pay as delve
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ethereal Forager");
 
-        //setStrictChooseMode(true); AI must choose targets
+        setStrictChooseMode(false); // AI must choose targets
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

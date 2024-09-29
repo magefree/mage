@@ -1,27 +1,27 @@
 package mage.cards.a;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
-
-import java.util.UUID;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
+
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -91,7 +91,9 @@ class AncientBrassDragonTarget extends TargetCardInGraveyard {
     private final int xValue;
 
     AncientBrassDragonTarget(int xValue) {
-        super(0, Integer.MAX_VALUE, makeFilter(xValue), false);
+        super(0, Integer.MAX_VALUE, new FilterCreatureCard(
+                "creature cards with total mana value " + xValue + " or less from graveyards"
+        ), false);
         this.xValue = xValue;
     }
 
@@ -107,24 +109,27 @@ class AncientBrassDragonTarget extends TargetCardInGraveyard {
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(controllerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        return card != null
-                && this.getTargets()
-                        .stream()
-                        .map(game::getCard)
-                        .mapToInt(Card::getManaValue)
-                        .sum() + card.getManaValue() <= xValue;
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, MageObject::getManaValue, xValue, game);
     }
 
-    private static final FilterCard makeFilter(int xValue) {
-        FilterCard filter = new FilterCreatureCard(
-                "creature cards with total mana value "
-                + xValue + " or less from graveyards"
-        );
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue+1));
-        return filter;
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this.getTargets(),
+                super.possibleTargets(sourceControllerId, source, game),
+                MageObject::getManaValue, xValue, game);
     }
+
+    @Override
+    public String getMessage(Game game) {
+        // shows selected total
+        int selectedValue = this.getTargets().stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .mapToInt(MageObject::getManaValue)
+                .sum();
+        return super.getMessage(game) + " (selected total mana value " + selectedValue + ")";
+    }
+
 }

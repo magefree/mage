@@ -27,7 +27,7 @@ import java.util.UUID;
 public final class NotoriousThrong extends CardImpl {
 
     public NotoriousThrong(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{3}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.SORCERY}, "{3}{U}");
         this.subtype.add(SubType.ROGUE);
 
         // Prowl {5}{U}

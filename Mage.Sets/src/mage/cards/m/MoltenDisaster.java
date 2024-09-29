@@ -3,7 +3,7 @@ package mage.cards.m;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
@@ -45,7 +45,7 @@ public final class MoltenDisaster extends CardImpl {
         this.addAbility(new KickerAbility("{R}"));
 
         // Molten Disaster deals X damage to each creature without flying and each player.
-        this.getSpellAbility().addEffect(new DamageEverythingEffect(ManacostVariableValue.REGULAR, filter));
+        this.getSpellAbility().addEffect(new DamageEverythingEffect(GetXValue.instance, filter));
     }
 
     private MoltenDisaster(final MoltenDisaster card) {

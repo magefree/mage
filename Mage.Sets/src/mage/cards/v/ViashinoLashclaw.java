@@ -24,7 +24,7 @@ public final class ViashinoLashclaw extends CardImpl {
     public ViashinoLashclaw(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);

@@ -28,7 +28,7 @@ public final class CephalidIllusionist extends CardImpl {
 
     public CephalidIllusionist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{1}{U}");
-        this.subtype.add(SubType.CEPHALID);
+        this.subtype.add(SubType.OCTOPUS);
         this.subtype.add(SubType.WIZARD);
 
         this.power = new MageInt(1);

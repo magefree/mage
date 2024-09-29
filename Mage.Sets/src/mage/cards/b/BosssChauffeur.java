@@ -52,7 +52,7 @@ public final class BosssChauffeur extends CardImpl {
         ), "with a number of +1/+1 counters on it equal to " +
                 "one plus the number of other creatures you control").addHint(hint));
 
-        // Alliance — Whenever another creature enters the battlefield under your control, put a +1/+1 counter on Boss's Chauffeur.
+        // Alliance — Whenever another creature you control enters, put a +1/+1 counter on Boss's Chauffeur.
         this.addAbility(new AllianceAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 
         // When Boss's Chauffeur dies, create a 1/1 green and white Citizen creature token for each +1/+1 counter on it.

@@ -69,7 +69,7 @@ class LichsMirrorEffect extends ReplacementEffectImpl {
                 toLib.add(permanent);
             }            
             player.shuffleCardsToLibrary(toLib, game, source);
-            game.getState().processAction(game);
+            game.processAction();
             player.drawCards(7, source, game); // original event is not a draw event, so skip it in params
             player.setLife(20, game, source);            
         }

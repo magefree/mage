@@ -13,6 +13,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
@@ -74,7 +75,7 @@ class TurnFaceUpEffect extends OneShotEffect {
                     if (megamorph) {
                         sourcePermanent.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
                     }
-                    game.getState().setValue(source.getSourceId().toString() + "TurnFaceUpX", source.getManaCostsToPay().getX());
+                    game.getState().setValue(source.getSourceId().toString() + "TurnFaceUpX", CardUtil.getSourceCostsTag(game, source, "X", 0));
                     return true;
                 }
             }

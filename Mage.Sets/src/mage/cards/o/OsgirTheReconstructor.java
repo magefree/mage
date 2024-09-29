@@ -7,13 +7,10 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostAdjuster;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -25,17 +22,13 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactCard;
-import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -89,7 +82,7 @@ enum OsgirTheReconstructorCostAdjuster implements CostAdjuster {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller == null) {
             return;

@@ -40,7 +40,7 @@ public final class FaerieDreamthief extends CardImpl {
         // {2}{B}, Exile Faerie Dreamthief from your graveyard: You draw a card and you lose 1 life.
         Ability ability = new SimpleActivatedAbility(
                 Zone.GRAVEYARD,
-                new DrawCardSourceControllerEffect(1, "you"),
+                new DrawCardSourceControllerEffect(1, true),
                 new ManaCostsImpl<>("{2}{B}")
         );
         ability.addCost(new ExileSourceFromGraveCost());
