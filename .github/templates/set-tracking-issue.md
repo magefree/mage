@@ -11,7 +11,7 @@ Don't worry about moving things from in progress to completed either, this issue
 # Unimplemented Cards
 
 {{#unimplementedCards}}
-* [{{#pr}}*{{/pr}}{{^pr}} {{/pr}}]  In progress -- [{{name}}]({{scryfall}})
+[{{#pr}}*{{/pr}}{{^pr}} {{/pr}}]  In progress -- [{{name}}]({{scryfall}})
 {{/unimplementedCards}}
 
 [Scryfall gallery of everything currently unimplemented]({{unimplementedScryfallLink}})
@@ -28,7 +28,7 @@ All cards are implemented
   </summary>
   {{#hasImplementedCards}}
   {{#implementedCards}}
-  * [{{#pr}}*{{/pr}}{{^pr}} {{/pr}}]  Done -- [{{name}}]({{scryfall}})
+  [{{#pr}}*{{/pr}}{{^pr}} {{/pr}}]  Done -- [{{name}}]({{scryfall}})
 
   {{/implementedCards}}
   {{/hasImplementedCards}}
