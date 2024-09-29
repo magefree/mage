@@ -118,8 +118,8 @@ jobs:
               }
             });
             
-            console.log("Issues to update: ", issuesToUpdate);
-            console.log("Issues to create: ", issuesToCreate);
+            //console.log("Issues to update: ", issuesToUpdate);
+            //console.log("Issues to create: ", issuesToCreate);
 
             issuesToUpdate.forEach(issue => {
               github.rest.issues.update({
