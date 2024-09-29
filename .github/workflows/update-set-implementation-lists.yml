@@ -86,7 +86,7 @@ jobs:
                 const className = toCamelCase(cardData[0].replace(/[+]/g, ' Plus ').replace(/[_]+/g, ' Blank ').replace(/[']/g, '').replace(/[-+,.!?`@#$%^&*()_=<>:";~\\|/]/g, ' '));
                 const cleanCardName = cardData[0].replace(/[-,'.!?`@#$%^&*()_=<>:";~\\|/\s]/g, '').toLowerCase();
                 const cardPath = path.join('Mage.Sets', 'src', 'mage', 'cards', className.substring(0, 1), `${className.charAt(0).toUpperCase()+className.slice(1)}.java`);
-                const claimed = false;
+                let claimed = false;
                 issueComments && issueComments.forEach(comment => {
                   if (comment.body && comment.body.search(new RegExp(cleanCardName, "i")) != -1) {
                     console.log(`Found a comment by ${comment.user.login} claiming card ${cardData[0]}`);
