@@ -50,7 +50,7 @@ Set Name  |  # Cards | # Missing |
 [Commander Legends: Battle for Baldur's Gate](https://github.com/ExpensiveKoala/mage/issues/49) | 676 | 37
 [Champions of Kamigawa](https://github.com/ExpensiveKoala/mage/issues/51) | 296 | 11
 [Chronicles](https://github.com/ExpensiveKoala/mage/issues/52) | 116 | 1
-[Clash Pack](https://www.github.com/mage/magefree) | 12 | 0
+[Clash Pack](https://github.com/ExpensiveKoala/mage/issues/53) | 12 | 0
 [Commander Anthology](https://www.github.com/mage/magefree) | 285 | 0
 [Commander Anthology 2018](https://www.github.com/mage/magefree) | 0 | 0
 [Commander's Arsenal](https://www.github.com/mage/magefree) | 27 | 0
