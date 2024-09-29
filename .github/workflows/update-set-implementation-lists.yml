@@ -178,7 +178,6 @@ jobs:
               });
             }
             console.log(`Creating ${issuesToCreate.length} issues`);
-            if (false) {
             for (const issue of issuesToCreate.slice(0,1)) {
               const result = await github.rest.issues.create({
                 owner: context.repo.owner,
@@ -196,7 +195,6 @@ jobs:
                   state: issue.state
                 });
               }
-            }
             }
       - uses: actions/github-script@v6.4.1
         id: updatesetimplementations
