@@ -75,7 +75,7 @@ jobs:
                   repo: context.repo.repo,
                   issue_number: foundIssue.number
                 });
-                console.log(`Found ${issueComments.length} comments on issue`);
+                //console.log(`Found ${issueComments.length} comments on issue`);
               }
               
               const cards = cardsData.filter(card => card[1] === set[0]);
@@ -89,7 +89,7 @@ jobs:
                 const claimed = false;
                 issueComments && issueComments.forEach(comment => {
                   if (comment.body && comment.body.search(new RegExp(cleanCardName, "i") != -1) {
-                    console.log(`Found a comment by ${comment.user.login} claiming card ${cardData[0]}`);
+                    //console.log(`Found a comment by ${comment.user.login} claiming card ${cardData[0]}`);
                     claimed = true;
                   }
                 });
