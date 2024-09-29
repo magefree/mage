@@ -37,31 +37,18 @@ jobs:
               }).replace(/\s+/g, '')
             }
 
-            function splitStringByMaxLength(str, maxLength, delimiter) {
-              const result = [];
-              let current = "";
-            
-              for (let i = 0; i < str.length; i++) {
-                const char = str[i];
-            
-                if ((current + char).length > maxLength && current.length > 0) {
-                  result.push(current);
-                  current = "";
-                }
-            
-                if (char === delimiter) {
-                  result.push(current + char);
-                  current = "";
+            function splitter(input, maxChars) {
+              var output = [];
+              output.push( input.split("\n").reduce(function(a, b) {
+                if (a.length + b.length < maxChars) {
+                  a += "\n" + b; //if comnined length is still not execeeding add it a
                 } else {
-                  current += char;
+                  output.push(a); //if combined less is exceeding the maxchars then push the last sentence to output
+                  a = b;
                 }
-              }
-            
-              if (current.length > 0) {
-                result.push(current);
-              }
-            
-              return result;
+                return a;
+              })); //push the residue to output
+              return output;
             }
             
             const setsData = fs.readFileSync(path.join('Utils', 'mtg-sets-data.txt'), 'utf8')
@@ -147,7 +134,7 @@ jobs:
 
               if (body.length > 65536) {
                 console.log(`Issue body for ${set[0]} (${set[1]}) too long! Length: ${body.length}`);
-                const splitBody = splitStringByMaxLength(body, 65536, "/n");
+                const splitBody = splitter(body, 65536);
                 console.log(`Body was split into ${splitBody.length} chunks`);
                 splitBody.forEach(b => {
                   console.log(b.length);
@@ -170,7 +157,7 @@ jobs:
             
             //console.log("Issues to update: ", issuesToUpdate);
             //console.log("Issues to create: ", issuesToCreate);
-
+            console.log(`Updating ${issuesToUpdate.length} issues`);
             for (const issue of issuesToUpdate) {
               github.rest.issues.update({
                 owner: context.repo.owner,
@@ -180,6 +167,7 @@ jobs:
                 state: issue.state
               });
             }
+            console.log(`Creating ${issuesToCreate.length} issues`);
             for (const issue of issuesToCreate.slice(0,1)) {
               const result = await github.rest.issues.create({
                 owner: context.repo.owner,
