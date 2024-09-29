@@ -57,7 +57,7 @@ jobs:
             const issuesToUpdate = [];
             const issuesToCreate = [];
             
-            setsData.forEach(set => {
+            for (const set of setsData) {
               let foundIssue = undefined;
               issues.every(issue => {
                 if(issue && issue.title && issue.title.startsWith(set[1])) {
@@ -70,11 +70,11 @@ jobs:
 
               let issueComments = undefined;
               if (foundIssue) {
-                issueComments = github.paginate(github.rest.issues.listComments, {
+                issueComments = await github.paginate(github.rest.issues.listComments, {
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   issue_number: foundIssue.number
-                }).result();
+                });
                 console.log(`Found ${issueComments.length} comments on issue`);
               }
               
@@ -134,7 +134,7 @@ jobs:
                   state: unimplemented.length > 0 ? "open" : "closed"
                 });
               }
-            });
+            }
             
             //console.log("Issues to update: ", issuesToUpdate);
             //console.log("Issues to create: ", issuesToCreate);
