@@ -3,6 +3,13 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author TheElk801
