@@ -2,7 +2,7 @@ Set Name  |  # Cards | # Missing |
 --- | --- | --- |
 [Tenth Edition](https://github.com/ExpensiveKoala/mage/issues/3) | 363 | 1
 [Unlimited Edition](https://github.com/ExpensiveKoala/mage/issues/4) | 287 | 7
-[Revised Edition](https://www.github.com/mage/magefree) | 291 | 5
+[Revised Edition](https://github.com/ExpensiveKoala/mage/issues/5) | 291 | 5
 [Fourth Edition](https://www.github.com/mage/magefree) | 363 | 6
 [Fifth Dawn](https://www.github.com/mage/magefree) | 165 | 1
 [Fifth Edition](https://www.github.com/mage/magefree) | 429 | 6
