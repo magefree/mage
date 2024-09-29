@@ -52,7 +52,7 @@ Set Name  |  # Cards | # Missing |
 [Chronicles](https://github.com/ExpensiveKoala/mage/issues/52) | 116 | 1
 [Clash Pack](https://github.com/ExpensiveKoala/mage/issues/53) | 12 | 0
 [Commander Anthology](https://github.com/ExpensiveKoala/mage/issues/54) | 285 | 0
-[Commander Anthology 2018](https://www.github.com/mage/magefree) | 0 | 0
+[Commander Anthology 2018](https://github.com/ExpensiveKoala/mage/issues/55) | 0 | 0
 [Commander's Arsenal](https://www.github.com/mage/magefree) | 27 | 0
 [Commander Masters](https://www.github.com/mage/magefree) | 732 | 1
 [Commander](https://www.github.com/mage/magefree) | 0 | 0
