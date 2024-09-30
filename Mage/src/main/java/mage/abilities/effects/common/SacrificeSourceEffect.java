@@ -13,13 +13,21 @@ import mage.game.permanent.Permanent;
  */
 public class SacrificeSourceEffect extends OneShotEffect {
 
+    private final boolean controllerSacrifices;
+
     public SacrificeSourceEffect() {
+        this(false);
+    }
+
+    public SacrificeSourceEffect(boolean controllerSacrifices) {
         super(Outcome.Sacrifice);
-        staticText = "sacrifice {this}";
+        this.controllerSacrifices = controllerSacrifices;
+        staticText = (controllerSacrifices ? "{this}'s controller sacrifices it" : "sacrifice {this}");
     }
 
     protected SacrificeSourceEffect(final SacrificeSourceEffect effect) {
         super(effect);
+        controllerSacrifices = effect.controllerSacrifices;
     }
 
     @Override
@@ -40,7 +48,7 @@ public class SacrificeSourceEffect extends OneShotEffect {
         if (sourceObject instanceof Permanent) {
             Permanent permanent = (Permanent) sourceObject;
             // you can only sacrifice a permanent you control
-            if (source.isControlledBy(permanent.getControllerId())) {
+            if (controllerSacrifices || source.isControlledBy(permanent.getControllerId())) {
                 return permanent.sacrifice(source, game);
             }
             return true;

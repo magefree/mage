@@ -32,7 +32,7 @@ public final class VerdantSunsAvatar extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // Whenever Verdant Sun's Avatar or another creature enters the battlefield under your control, you gain life equal to that creature's toughness.
+        // Whenever Verdant Sun's Avatar or another creature you control enters, you gain life equal to that creature's toughness.
         this.addAbility(new VerdantSunsAvatarTriggeredAbility());
     }
 
@@ -50,7 +50,7 @@ class VerdantSunsAvatarTriggeredAbility extends TriggeredAbilityImpl {
 
     public VerdantSunsAvatarTriggeredAbility() {
         super(Zone.BATTLEFIELD, new VerdantSunsAvatarEffect(), false);
-        setTriggerPhrase("Whenever {this} or another creature enters the battlefield under your control, ");
+        setTriggerPhrase("Whenever {this} or another creature you control enters, ");
     }
 
     private VerdantSunsAvatarTriggeredAbility(final VerdantSunsAvatarTriggeredAbility ability) {

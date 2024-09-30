@@ -14,6 +14,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetSacrifice;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -62,14 +63,14 @@ class NahirisLithoformingSacrificeEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || source.getManaCostsToPay().getX() == 0) {
+        if (player == null || CardUtil.getSourceCostsTag(game, source, "X", 0) == 0) {
             return false;
         }
         int landCount = game.getBattlefield().count(
                 TargetSacrifice.makeFilter(StaticFilters.FILTER_LAND),
                 source.getControllerId(), source, game
         );
-        landCount = Math.min(source.getManaCostsToPay().getX(), landCount);
+        landCount = Math.min(CardUtil.getSourceCostsTag(game, source, "X", 0), landCount);
         TargetSacrifice target = new TargetSacrifice(
                 landCount, landCount, StaticFilters.FILTER_LAND
         );
@@ -83,7 +84,7 @@ class NahirisLithoformingSacrificeEffect extends OneShotEffect {
         }
         player.drawCards(counter, source, game);
         game.addEffect(new PlayAdditionalLandsControllerEffect(
-                source.getManaCostsToPay().getX(), Duration.EndOfTurn
+                CardUtil.getSourceCostsTag(game, source, "X", 0), Duration.EndOfTurn
         ), source);
         return true;
     }

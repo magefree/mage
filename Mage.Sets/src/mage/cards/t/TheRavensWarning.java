@@ -64,7 +64,7 @@ public final class TheRavensWarning extends CardImpl {
 
 class TheRavensWarningTriggeredAbility extends DelayedTriggeredAbility {
 
-    public TheRavensWarningTriggeredAbility() {
+    TheRavensWarningTriggeredAbility() {
         super(new LookAtTargetPlayerHandEffect(), Duration.EndOfTurn, false);
         this.addEffect(new DrawCardSourceControllerEffect(1));
     }
@@ -78,7 +78,6 @@ class TheRavensWarningTriggeredAbility extends DelayedTriggeredAbility {
         return new TheRavensWarningTriggeredAbility(this);
     }
 
-    // Code based on ControlledCreaturesDealCombatDamagePlayerTriggeredAbility
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
@@ -86,22 +85,18 @@ class TheRavensWarningTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-
         DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
-
-        int flyingDamage = dEvent.getEvents()
-                .stream()
-                .filter(ev -> {
-                    if (!ev.getSourceId().equals(controllerId)) {
-                        return false;
-                    }
-                    Permanent permanent = game.getPermanentOrLKIBattlefield(ev.getSourceId());
-                    return permanent != null && permanent.isCreature() && permanent.hasAbility(FlyingAbility.getInstance(), game);
-                })
-                .mapToInt(GameEvent::getAmount)
-                .sum();
-
-        return flyingDamage > 0 && dEvent.isCombatDamage();
+        if (!dEvent.isCombatDamage()) {
+            return false;
+        }
+        return dEvent.getEvents().stream()
+                .anyMatch(e -> {
+                    Permanent permanent = game.getPermanentOrLKIBattlefield(e.getSourceId());
+                    return permanent != null
+                            && permanent.isCreature(game)
+                            && permanent.isControlledBy(this.getControllerId())
+                            && permanent.hasAbility(FlyingAbility.getInstance(), game);
+                });
     }
 
     @Override

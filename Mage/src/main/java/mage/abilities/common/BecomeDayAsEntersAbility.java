@@ -27,7 +27,7 @@ public class BecomeDayAsEntersAbility extends EntersBattlefieldAbility {
 
     @Override
     public String getRule() {
-        return "If it's neither day nor night, it becomes day as {this} enters the battlefield.";
+        return "If it's neither day nor night, it becomes day as {this} enters.";
     }
 }
 

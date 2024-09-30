@@ -28,7 +28,7 @@ public final class TrooperArmor extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardSubtypeAttachedEffect(SubType.TROOPER, AttachmentType.EQUIPMENT)));
 
-        // Whenever a Trooper enters the battlefield under your control, you may attach {this} to it.
+        // Whenever a Trooper you control enters, you may attach {this} to it.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new AttachEffect(Outcome.BoostCreature, "attach {this} to it"),

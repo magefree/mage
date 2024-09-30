@@ -13,6 +13,7 @@ import mage.constants.Duration;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.XManaValueTargetAdjuster;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -31,8 +32,8 @@ public final class BlueSunsTwilight extends CardImpl {
                 new CreateTokenCopyTargetEffect(), BlueSunsTwilightCondition.instance,
                 "If X is 5 or more, create a token that's a copy of that creature"
         ));
-        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
     }
 
     private BlueSunsTwilight(final BlueSunsTwilight card) {
@@ -50,6 +51,6 @@ enum BlueSunsTwilightCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source.getManaCostsToPay().getX() >= 5;
+        return CardUtil.getSourceCostsTag(game, source, "X", 0) >= 5;
     }
 }

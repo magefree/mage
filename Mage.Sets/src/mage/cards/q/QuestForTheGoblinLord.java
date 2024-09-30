@@ -27,7 +27,7 @@ public final class QuestForTheGoblinLord extends CardImpl {
     public QuestForTheGoblinLord(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
 
-        // Whenever a Goblin enters the battlefield under your control, you may put a quest counter on Quest for the Goblin Lord.
+        // Whenever a Goblin you control enters, you may put a quest counter on Quest for the Goblin Lord.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), goblinFilter, true));
 
         // As long as Quest for the Goblin Lord has five or more quest counters on it, creatures you control get +2/+0.

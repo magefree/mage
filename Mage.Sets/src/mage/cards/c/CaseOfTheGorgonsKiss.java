@@ -54,7 +54,7 @@ public final class CaseOfTheGorgonsKiss extends CardImpl {
 
         // When this Case enters the battlefield, destroy up to one target creature that was dealt damage this turn.
         Ability initialAbility = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect())
-                .setTriggerPhrase("When this Case enters the battlefield, ");
+                .setTriggerPhrase("When this Case enters, ");
         initialAbility.addTarget(new TargetPermanent(0, 1, filter));
         // To solve -- Three or more creature cards were put into graveyards from anywhere this turn.
         Condition toSolveCondition = new CaseOfTheGorgonsKissCondition();

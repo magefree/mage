@@ -1,7 +1,5 @@
 package mage.cards.d;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -11,7 +9,10 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPlaneswalkerPermanent;
@@ -21,8 +22,9 @@ import mage.game.events.GameEvent;
 import mage.game.events.RemoveCountersEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author jimga150
  */
 public final class Deification extends CardImpl {
@@ -36,14 +38,14 @@ public final class Deification extends CardImpl {
 
     public Deification(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
-        
+
 
         // As Deification enters the battlefield, choose a planeswalker type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChoosePlaneswalkerTypeEffect(Outcome.AddAbility)));
 
         // Planeswalkers you control of the chosen type have hexproof.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
-        
+
         // As long as you control a creature, if damage dealt to a planeswalker you control of the chosen type would result in all loyalty counters on it being removed, instead all but one of those counters are removed.
         addAbility(new SimpleStaticAbility(new DeificationReplacementEffect()));
     }
@@ -87,24 +89,26 @@ class DeificationReplacementEffect extends ReplacementEffectImpl {
 
         RemoveCountersEvent rEvent = (RemoveCountersEvent) event;
 
-        if (!source.isControlledBy(rEvent.getPlayerId())) {
-            return false;
-        }
-        Permanent planeswalker = game.getPermanentOrLKIBattlefield(rEvent.getTargetId());
+        Permanent planeswalker = game.getPermanent(rEvent.getTargetId());
         if (planeswalker == null) {
             return false;
         }
-        if (!rEvent.counterRemovedDueToDamage()){
+        if (!source.isControlledBy(planeswalker.getControllerId())
+                || 0 == game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURE, planeswalker.getControllerId(), source, game)) {
+            // only protects your planeswalkers, and only if you control a creature.
+            return false;
+        }
+        if (!planeswalker.hasSubtype(ChoosePlaneswalkerTypeEffect.getChosenPlaneswalkerType(source.getSourceId(), game), game)) {
+            // only protects the planeswalkers of the chosen type.
+            return false;
+        }
+        if (!rEvent.counterRemovedDueToDamage()) {
             // not due to damage, prevention does not occur
             return false;
         }
 
         int loyaltyCounters = planeswalker.getCounters(game).getCount(CounterType.LOYALTY);
-        return planeswalker.hasSubtype(ChoosePlaneswalkerTypeEffect.getChosenPlaneswalkerType(source.getSourceId(), game), game)
-                && (loyaltyCounters - event.getAmount()) < 1
-                && game.getBattlefield().count(
-                StaticFilters.FILTER_CONTROLLED_CREATURE,
-                event.getPlayerId(), source, game) > 0;
+        return (loyaltyCounters - event.getAmount()) < 1;
     }
 
     @Override

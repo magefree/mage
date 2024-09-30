@@ -23,7 +23,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.EachTargetPointer;
 import mage.util.RandomUtil;
 
 import java.util.HashSet;
@@ -70,7 +69,6 @@ class BenthicAnomalyEffect extends OneShotEffect {
                 "except its power is equal to the total power of those creatures, " +
                 "its toughness is equal to the total toughness of those creatures, " +
                 "and it's a colorless Eldrazi creature";
-        this.setTargetPointer(new EachTargetPointer());
     }
 
     private BenthicAnomalyEffect(final BenthicAnomalyEffect effect) {

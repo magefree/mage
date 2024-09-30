@@ -49,7 +49,7 @@ public final class TroublemakerOuphe extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 trigger,
                 BargainedCondition.instance,
-                "When {this} enters the battlefield, if it was bargained, exile target artifact or enchantment an opponent controls."
+                "When {this} enters, if it was bargained, exile target artifact or enchantment an opponent controls."
         ));
     }
 

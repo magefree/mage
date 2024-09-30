@@ -77,6 +77,11 @@ public class DungeonRoom {
     }
 
     public DungeonRoom chooseNextRoom(UUID playerId, Game game) {
+        Dungeon dungeon = game.getPlayerDungeon(playerId);
+        if (dungeon == null) {
+            return null;
+        }
+
         switch (nextRooms.size()) {
             case 0:
                 return null;
@@ -90,8 +95,8 @@ public class DungeonRoom {
                     return null;
                 }
                 return player.chooseUse(
-                        Outcome.Neutral, "Choose which room to go to",
-                        null, room1.name, room2.name, null, game
+                        Outcome.Neutral, "Choose which room to go to in",
+                        "dungeon: " + dungeon.getLogName(), room1.name, room2.name, null, game
                 ) ? room1 : room2;
             default:
                 throw new UnsupportedOperationException("there shouldn't be more than two rooms to go to");

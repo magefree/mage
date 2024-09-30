@@ -5,6 +5,11 @@ import mage.abilities.icon.CardIconColor;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * GUI: images source for GUI components like buttons. With theme supports.
+ *
+ * @author JayDi85
+ */
 public interface ImageManager {
 
     Image getAppImage();
@@ -57,29 +62,29 @@ public interface ImageManager {
 
     Image getDlgActiveNextButtonImage();
 
-    Image getSwitchHandsButtonImage();
+    Image getSwitchHandsButtonImage(int height);
 
-    Image getStopWatchButtonImage();
+    Image getStopWatchButtonImage(int height);
 
-    Image getConcedeButtonImage();
+    Image getConcedeButtonImage(int height);
 
-    Image getCancelSkipButtonImage();
+    Image getCancelSkipButtonImage(int height);
 
-    Image getSkipNextTurnButtonImage();
+    Image getSkipNextTurnButtonImage(int height);
 
-    Image getSkipEndTurnButtonImage();
+    Image getSkipEndTurnButtonImage(int height);
 
-    Image getSkipMainButtonImage();
+    Image getSkipMainButtonImage(int height);
 
-    Image getSkipStackButtonImage();
+    Image getSkipStackButtonImage(int height);
 
-    Image getSkipEndStepBeforeYourTurnButtonImage();
+    Image getSkipEndStepBeforeYourTurnButtonImage(int height);
 
-    Image getSkipYourNextTurnButtonImage();
+    Image getSkipYourNextTurnButtonImage(int height);
 
-    Image getToggleRecordMacroButtonImage();
+    Image getToggleRecordMacroButtonImage(int height);
 
     BufferedImage getCardIcon(String resourceName, int size, CardIconColor cardIconColor);
 
-    Image getPhaseImage(String phase);
+    Image getPhaseImage(String phase, int size);
 }

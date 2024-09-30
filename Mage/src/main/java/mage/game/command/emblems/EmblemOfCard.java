@@ -94,7 +94,7 @@ public final class EmblemOfCard extends Emblem {
     }
 
     @Override
-    public void setSourceObject(MageObject sourceObject) {
+    public void setSourceObjectAndInitImage(MageObject sourceObject) {
         this.sourceObject = sourceObject;
         // super method would try and fail to find the emblem image here
         // (not sure why that would be setSoureObject's job; we get our image during construction)

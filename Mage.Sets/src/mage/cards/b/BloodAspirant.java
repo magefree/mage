@@ -17,8 +17,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -27,15 +25,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class BloodAspirant extends CardImpl {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a creature or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.ENCHANTMENT.getPredicate()
-        ));
-    }
 
     public BloodAspirant(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -56,7 +45,7 @@ public final class BloodAspirant extends CardImpl {
                 new DamageTargetEffect(1), new ManaCostsImpl<>("{1}{R}")
         );
         ability.addCost(new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(filter));
+        ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT));
         ability.addEffect(new CantBlockTargetEffect(Duration.EndOfTurn)
                 .setText("That creature can't block this turn."));
         ability.addTarget(new TargetCreaturePermanent());

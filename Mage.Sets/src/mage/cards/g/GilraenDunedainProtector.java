@@ -9,7 +9,7 @@ import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbil
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReturnMORToBattlefieldUnderOwnerControlWithCounterEffect;
+import mage.abilities.effects.common.ReturnMORToBattlefieldUnderOwnerControlWithCounterEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -96,7 +96,7 @@ class GilraenDunedainProtectorEffect extends OneShotEffect {
 
         // Exile another target creature you control.
         permanent.moveToExile(source.getSourceId(), sourcePermanent.getName(), source, game);
-        game.getState().processAction(game);
+        game.processAction();
 
         Card card = game.getExile().getCard(permanent.getId(), game);
         boolean choice = controller.chooseUse(Outcome.Neutral, "Return that card to the battlefield now?", source, game);

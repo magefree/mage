@@ -31,6 +31,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Amulet of Vigor", 103, Rarity.RARE, mage.cards.a.AmuletOfVigor.class));
         cards.add(new SetCardInfo("Angrath's Marauders", 215, Rarity.RARE, mage.cards.a.AngrathsMarauders.class));
         cards.add(new SetCardInfo("Apex Altisaur", 232, Rarity.RARE, mage.cards.a.ApexAltisaur.class));
+        cards.add(new SetCardInfo("Apex Observatory", 15, Rarity.MYTHIC, mage.cards.a.ApexObservatory.class));
         cards.add(new SetCardInfo("Arcane Signet", 104, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Arch of Orazca", 319, Rarity.RARE, mage.cards.a.ArchOfOrazca.class));
         cards.add(new SetCardInfo("Archaeomancer's Map", 101, Rarity.RARE, mage.cards.a.ArchaeomancersMap.class));
@@ -119,6 +120,7 @@ public final class LostCavernsOfIxalanCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Everflowing Chalice", 111, Rarity.UNCOMMON, mage.cards.e.EverflowingChalice.class));
         cards.add(new SetCardInfo("Evolution Sage", 240, Rarity.UNCOMMON, mage.cards.e.EvolutionSage.class));
         cards.add(new SetCardInfo("Evolving Wilds", 328, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
+        cards.add(new SetCardInfo("Eye of Ojer Taq", 15, Rarity.MYTHIC, mage.cards.e.EyeOfOjerTaq.class));
         cards.add(new SetCardInfo("Exotic Orchard", 329, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Expedition Map", 112, Rarity.UNCOMMON, mage.cards.e.ExpeditionMap.class));
         cards.add(new SetCardInfo("Explore", 241, Rarity.COMMON, mage.cards.e.Explore.class));

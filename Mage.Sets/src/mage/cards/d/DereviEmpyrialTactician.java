@@ -99,7 +99,7 @@ class DereviEmpyrialTacticianTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever {this} enters the battlefield or a creature you control deals combat damage to a player, you may tap or untap target permanent.";
+        return "Whenever {this} enters or a creature you control deals combat damage to a player, you may tap or untap target permanent.";
     }
 
     @Override

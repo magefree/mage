@@ -35,7 +35,7 @@ public final class ZeganaUtopianSpeaker extends CardImpl {
                 new EntersBattlefieldTriggeredAbility(
                         new DrawCardSourceControllerEffect(1), false
                 ), new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE_P1P1),
-                "When {this} enters the battlefield, " +
+                "When {this} enters, " +
                         "if you control another creature " +
                         "with a +1/+1 counter on it, draw a card."
                 )

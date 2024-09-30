@@ -20,7 +20,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class NamelessInversion extends CardImpl {
 
     public NamelessInversion(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{1}{B}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.INSTANT},"{1}{B}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
 

@@ -36,10 +36,10 @@ public final class RazorgrassAmbush extends ModalDoubleFacedCard {
         // Razorgrass Field
         // Land
 
-        // As Razorgrass Field enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        // As Razorgrass Field enters the battlefield, you may pay 3 life. If you don't, it enters tapped.
         this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(
                 new TapSourceUnlessPaysEffect(new PayLifeCost(3)),
-                "you may pay 3 life. If you don't, it enters the battlefield tapped"
+                "you may pay 3 life. If you don't, it enters tapped"
         ));
 
         // {T}: Add {W}.

@@ -39,7 +39,7 @@ public final class JadeOrbOfDragonkind extends CardImpl {
     public JadeOrbOfDragonkind(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[] { CardType.ARTIFACT }, "{2}{G}");
 
-        // {T}: Add {G}. When you spend this mana to cast a Dragon creature spell, it enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn.
+        // {T}: Add {G}. When you spend this mana to cast a Dragon creature spell, it enters with an additional +1/+1 counter on it and gains hexproof until your next turn.
         BasicManaAbility ability = new GreenManaAbility();
         ManaSpentDelayedTriggeredAbility manaSpentAbility = new ManaSpentDelayedTriggeredAbility(
                 new JadeOrbAdditionalCounterEffect(), filter);

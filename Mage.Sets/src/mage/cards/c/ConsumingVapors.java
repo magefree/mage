@@ -1,6 +1,5 @@
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReboundAbility;
@@ -8,15 +7,14 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
+
+import java.util.UUID;
 
 /**
  *
@@ -68,8 +66,10 @@ class ConsumingVaporsEffect extends OneShotEffect {
 
             Permanent permanent = game.getPermanent(target.getFirstTarget());
             if (permanent != null) {
+                int toughness = permanent.getToughness().getValue();
                 permanent.sacrifice(source, game);
-                controller.gainLife(permanent.getToughness().getValue(), game, source);
+                game.processAction();
+                controller.gainLife(toughness, game, source);
             }
             return true;
         }

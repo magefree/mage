@@ -31,7 +31,7 @@ public final class EchoesOfEternity extends CardImpl {
     }
 
     public EchoesOfEternity(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.ENCHANTMENT}, "{3}{C}{C}{C}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.ENCHANTMENT}, "{3}{C}{C}{C}");
 
         this.subtype.add(SubType.ELDRAZI);
 

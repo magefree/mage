@@ -32,7 +32,7 @@ public final class SithMarauder extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3)),
                 HateCondition.instance,
-                "<i>Hate</i> &mdash; When {this} enters the battlefield, if an opponent lost life from a source other than combat damage this turn, {this} deals 3 damage to any target");
+                "<i>Hate</i> &mdash; When {this} enters, if an opponent lost life from a source other than combat damage this turn, {this} deals 3 damage to any target");
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability, new LifeLossOtherFromCombatWatcher());
     }

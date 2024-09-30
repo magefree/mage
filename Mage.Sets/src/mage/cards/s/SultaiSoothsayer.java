@@ -18,7 +18,7 @@ public final class SultaiSoothsayer extends CardImpl {
 
     public SultaiSoothsayer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}{G}{U}");
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.SHAMAN);
 
         this.power = new MageInt(2);

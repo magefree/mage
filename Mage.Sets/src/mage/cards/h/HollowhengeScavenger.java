@@ -20,7 +20,7 @@ import mage.constants.SubType;
  */
 public final class HollowhengeScavenger extends CardImpl {
 
-    private static final String staticText = "<i>Morbid</i> &mdash; When {this} enters the battlefield, if a creature died this turn, you gain 5 life.";
+    private static final String staticText = "<i>Morbid</i> &mdash; When {this} enters, if a creature died this turn, you gain 5 life.";
 
     public HollowhengeScavenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{G}{G}");

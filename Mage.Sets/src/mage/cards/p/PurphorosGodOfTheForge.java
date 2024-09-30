@@ -46,7 +46,7 @@ public final class PurphorosGodOfTheForge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LoseCreatureTypeSourceEffect(DevotionCount.R, 5))
                 .addHint(DevotionCount.R.getHint()));
 
-        // Whenever another creature enters the battlefield under your control, Purphoros deals 2 damage to each opponent.
+        // Whenever another creature you control enters, Purphoros deals 2 damage to each opponent.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DamagePlayersEffect(2, TargetController.OPPONENT), filter
         ));

@@ -1,6 +1,6 @@
 package mage.cards.d;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
@@ -22,9 +22,9 @@ public final class DregsOfSorrow extends CardImpl {
 
         // Destroy X target nonblack creatures. Draw X cards.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy X target nonblack creatures"));
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private DregsOfSorrow(final DregsOfSorrow card) {

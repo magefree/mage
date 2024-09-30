@@ -33,7 +33,7 @@ public final class CountlessGearsRenegade extends CardImpl {
         // left the battlefield this turn, create a 1/1 colorless Servo artifact creature token.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ServoToken()), false),
-                RevoltCondition.instance, "When {this} enters the battlefield, if a permanent you controlled " +
+                RevoltCondition.instance, "When {this} enters, if a permanent you controlled " +
                 "left the battlefield this turn, create a 1/1 colorless Servo artifact creature token."
         );
         ability.setAbilityWord(AbilityWord.REVOLT);

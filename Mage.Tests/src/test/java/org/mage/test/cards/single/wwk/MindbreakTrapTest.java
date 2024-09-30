@@ -27,6 +27,8 @@ public class MindbreakTrapTest extends CardTestPlayerBase {
      */
     @Test
     public void mindBreakTrap_Exile_All_Spells() {
+        setStrictChooseMode(true);
+
         addCard(Zone.BATTLEFIELD, playerB, "Mountain", 4);
 
         addCard(Zone.HAND, playerA, mindBreakTrap);
@@ -37,9 +39,11 @@ public class MindbreakTrapTest extends CardTestPlayerBase {
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, shock, playerA);
 
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, grapeShot, playerA);
+        setChoice(playerB, false, 2); // do not change targets for copies
 
         waitStackResolved(2, PhaseStep.POSTCOMBAT_MAIN, 1); // Let the storm ability resolve to put the copies on the stack
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, mindBreakTrap, "Grapeshot^Grapeshot^Grapeshot");
+        setChoice(playerA, "Cast with alternative cost: {0} (source: Mindbreak Trap");
 
         setStopAt(2, PhaseStep.END_TURN);
         execute();

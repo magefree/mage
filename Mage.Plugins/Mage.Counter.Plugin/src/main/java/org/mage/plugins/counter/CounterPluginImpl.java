@@ -9,13 +9,14 @@ import net.xeoh.plugins.base.annotations.meta.Author;
 import org.apache.log4j.Logger;
 
 import java.io.*;
+import java.nio.file.Files;
 
 /**
  * Implementation of {@link CounterPlugin}.<br/>
- * Stores data in data folder. 
- * 
- * @version 0.1 14.11.2010 Initial Version
+ * Stores data in data folder.
+ *
  * @author nantuko
+ * @version 0.1 14.11.2010 Initial Version
  */
 @PluginImplementation
 @Author(name = "nantuko")
@@ -69,11 +70,11 @@ public class CounterPluginImpl implements CounterPlugin {
         if (data.exists()) {
             int prev = 0;
 
-            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(data))) {
+            try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(data.toPath()))) {
                 Object o = ois.readObject();
                 CounterBean c;
                 if (o instanceof CounterBean) {
-                    c = (CounterBean)o;
+                    c = (CounterBean) o;
                     prev = c.getGamesPlayed();
                 }
             } catch (EOFException e) {
@@ -84,10 +85,10 @@ public class CounterPluginImpl implements CounterPlugin {
                 throw new PluginException(e);
             }
 
-            try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(data))) {
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(data))) {
                 synchronized (this) {
                     CounterBean c = new CounterBean();
-                    c.setGamesPlayed(prev+1);
+                    c.setGamesPlayed(prev + 1);
                     oos.writeObject(c);
                     oos.close();
                 }
@@ -107,12 +108,12 @@ public class CounterPluginImpl implements CounterPlugin {
             return 0;
         }
         if (data.exists()) {
-            try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(data))) {
+            try (ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(data.toPath()))) {
                 synchronized (this) {
                     Object o = ois.readObject();
                     CounterBean c = null;
                     if (o instanceof CounterBean) {
-                        c = (CounterBean)o;
+                        c = (CounterBean) o;
                     }
                     ois.close();
                     return c == null ? 0 : c.getGamesPlayed();

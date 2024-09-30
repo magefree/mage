@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author fireshoes
  */
 public final class DragonsOfTarkir extends ExpansionSet {
@@ -28,11 +27,13 @@ public final class DragonsOfTarkir extends ExpansionSet {
         this.blockName = "Khans of Tarkir";
         this.hasBoosters = true;
         this.hasBasicLands = true;
+        this.rotationSet = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Acid-Spewer Dragon", 86, Rarity.UNCOMMON, mage.cards.a.AcidSpewerDragon.class));
         cards.add(new SetCardInfo("Aerie Bowmasters", 170, Rarity.COMMON, mage.cards.a.AerieBowmasters.class));
         cards.add(new SetCardInfo("Ainok Artillerist", 171, Rarity.COMMON, mage.cards.a.AinokArtillerist.class));

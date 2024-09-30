@@ -20,13 +20,12 @@ import mage.game.stack.Spell;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class FoulEmissary extends CardImpl {
 
     public FoulEmissary(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.subtype.add(SubType.HUMAN, SubType.HORROR);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
@@ -52,7 +51,7 @@ public final class FoulEmissary extends CardImpl {
 class FoulEmissaryTriggeredAbility extends SacrificeSourceTriggeredAbility {
 
     public FoulEmissaryTriggeredAbility() {
-        super(new CreateTokenEffect(new EldraziHorrorToken()), false);
+        super(new CreateTokenEffect(new EldraziHorrorToken()));
         setTriggerPhrase("When you sacrifice {this} while casting a spell with emerge, ");
     }
 

@@ -10,6 +10,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.util.CardUtil;
 import mage.watchers.common.CommanderPlaysCountWatcher;
 
 import java.util.UUID;
@@ -94,7 +95,7 @@ class CommandersInsightEffect extends OneShotEffect {
         if (player == null || watcher == null) {
             return false;
         }
-        int toDraw = watcher.getPlayerCount(player.getId()) + source.getManaCostsToPay().getX();
+        int toDraw = watcher.getPlayerCount(player.getId()) + CardUtil.getSourceCostsTag(game, source, "X", 0);
         return player.drawCards(toDraw, source, game) > 0;
     }
 }

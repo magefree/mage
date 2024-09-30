@@ -135,7 +135,7 @@ class ShilgengarSireOfFamineEffect extends OneShotEffect {
         );
         effect.setTargetPointer(new FixedTargets(cards, game));
         effect.apply(game, source);
-        game.getState().processAction(game);
+        game.processAction();
         List<Permanent> permanents = cards
                 .stream()
                 .map(game::getPermanent)

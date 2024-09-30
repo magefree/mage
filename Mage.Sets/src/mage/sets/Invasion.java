@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -6,7 +5,6 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- *
  * @author North
  */
 public final class Invasion extends ExpansionSet {
@@ -21,6 +19,7 @@ public final class Invasion extends ExpansionSet {
         super("Invasion", "INV", ExpansionSet.buildDate(2000, 9, 2), SetType.EXPANSION);
         this.blockName = "Invasion";
         this.hasBoosters = true;
+        this.rotationSet = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;

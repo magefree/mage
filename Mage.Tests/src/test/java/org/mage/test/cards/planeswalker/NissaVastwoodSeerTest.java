@@ -39,7 +39,7 @@ Later I used her -2 to kill her, which (after putting another spell on the stack
         
         // When Nissa, Vastwood Seer enters the battlefield, you may search your library for a basic Forest card, 
         // reveal it, put it into your hand, then shuffle your library.
-        // Whenever a land enters the battlefield under your control, if you control seven or more lands, 
+        // Whenever a land you control enters, if you control seven or more lands, 
         // exile Nissa, then return her to the battlefield transformed under her owner's control.
         // Nissa, Sage Animist
         // +1: Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.

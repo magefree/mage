@@ -10,7 +10,6 @@ import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.ExileSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GetXValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.hint.common.CreaturesYouControlHint;
 import mage.abilities.hint.common.MyTurnHint;
@@ -42,14 +41,14 @@ public final class DefendersOfHumanity extends CardImpl {
 
         // When Defenders of Humanity enters the battlefield, create X 2/2 white Astartes Warrior creature tokens with vigilance.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new CreateTokenEffect(new WhiteAstartesWarriorToken(), ManacostVariableValue.ETB)
+                new CreateTokenEffect(new WhiteAstartesWarriorToken(), GetXValue.instance)
         ));
 
         // {X}{2}{W}, Exile Defenders of Humanity: Create X 2/2 white Astartes Warrior creature tokens with vigilance. Activate only if you control no creatures and only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(
                 Zone.BATTLEFIELD,
                 new CreateTokenEffect(
-                        new WhiteAstartesWarriorToken(), GetXValue.instance
+                        new WhiteAstartesWarriorToken(), mage.abilities.dynamicvalue.common.GetXValue.instance
                 ), new ManaCostsImpl<>("{X}{2}{W}"), condition
         ).addHint(CreaturesYouControlHint.instance).addHint(MyTurnHint.instance);
         ability.addCost(new ExileSourceCost());

@@ -55,9 +55,12 @@ public final class CardRendererUtils {
         BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
 
         // Draw the image on to the buffered image
-        Graphics2D bGr = bimage.createGraphics();
-        bGr.drawImage(img, 0, 0, null);
-        bGr.dispose();
+        Graphics2D g2 = bimage.createGraphics();
+        try {
+            g2.drawImage(img, 0, 0, null);
+        } finally {
+            g2.dispose();
+        }
 
         // Return the buffered image
         return bimage;

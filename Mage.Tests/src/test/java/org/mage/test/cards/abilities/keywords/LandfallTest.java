@@ -70,7 +70,7 @@ public class LandfallTest extends CardTestPlayerBase {
 
     @Test
     public void testSurrakarMarauder() {
-        // Landfall - Whenever a land enters the battlefield under your control, Surrakar Marauder gains intimidate until end of turn.
+        // Landfall - Whenever a land you control enters, Surrakar Marauder gains intimidate until end of turn.
         addCard(Zone.BATTLEFIELD, playerA, "Surrakar Marauder", 1);
         addCard(Zone.HAND, playerA, "Plains");
 

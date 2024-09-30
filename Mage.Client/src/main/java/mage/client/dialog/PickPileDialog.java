@@ -5,14 +5,13 @@ import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardArea;
 import mage.view.CardsView;
-import org.mage.card.arcane.CardPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.UUID;
 
 /**
- * Game GUI: pile choosing (select a 1 pile from a 2 piles)
+ * Game GUI: pile choose dialog (one from two)
  *
  * @author BetaSteward_at_googlemail.com, JayDi85
  */
@@ -23,10 +22,8 @@ public class PickPileDialog extends MageDialog {
 
     private boolean pickedPile1 = false;
     private boolean pickedOK = false;
+    private PickPileCallback callback = null;
 
-    /**
-     * Create the frame.
-     */
     public PickPileDialog() {
         getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -53,6 +50,29 @@ public class PickPileDialog extends MageDialog {
         panel_1.add(btnChoosePile2, BorderLayout.NORTH);
     }
 
+    public interface PickPileCallback {
+        void onChoiceDone();
+    }
+
+    public void showDialog(String name, CardsView pile1, CardsView pile2, BigCard bigCard, UUID gameId, PickPileCallback callback) {
+        this.pickedOK = false;
+        this.pickedPile1 = false;
+        this.title = name;
+        this.pile1.loadCardsNarrow(pile1, bigCard, gameId);
+        this.pile2.loadCardsNarrow(pile2, bigCard, gameId);
+        this.callback = callback;
+
+        this.setModal(true);
+        pack();
+
+        // windows settings
+        MageFrame.getDesktop().remove(this);
+        MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
+        this.makeWindowCentered();
+
+        this.setVisible(true);
+    }
+
     public void cleanUp() {
         for (Component comp : pile1.getComponents()) {
             if (comp instanceof MageCard) {
@@ -68,38 +88,25 @@ public class PickPileDialog extends MageDialog {
         }
     }
 
-    public void loadCards(String name, CardsView pile1, CardsView pile2, BigCard bigCard, UUID gameId) {
-        this.pickedOK = false;
-        this.pickedPile1 = false;
-        this.title = name;
-        this.pile1.loadCardsNarrow(pile1, bigCard, gameId);
-        this.pile2.loadCardsNarrow(pile2, bigCard, gameId);
-
-        this.setModal(true);
-        pack();
-
-        // windows settings
-        MageFrame.getDesktop().remove(this);
-        if (this.isModal()) {
-            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-        } else {
-            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
+    private void doClose() {
+        this.hideDialog();
+        if (this.callback != null) {
+            this.callback.onChoiceDone();
         }
-        this.makeWindowCentered();
-
-        this.setVisible(true);
+        this.cleanUp();
+        this.removeDialog();
     }
 
     private void btnPile1ActionPerformed(java.awt.event.ActionEvent evt) {
         pickedPile1 = true;
         pickedOK = true;
-        this.hideDialog();
+        doClose();
     }
 
     private void btnPile2ActionPerformed(java.awt.event.ActionEvent evt) {
         pickedPile1 = false;
         pickedOK = true;
-        this.hideDialog();
+        doClose();
     }
 
     public boolean isPickedPile1() {

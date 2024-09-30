@@ -37,7 +37,7 @@ public final class TerritoryCuller extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
 
-        // Landfall -- Whenever a land enters the battlefield under your control, look at the top card of your library. If it's a creature card, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard.
+        // Landfall -- Whenever a land you control enters, look at the top card of your library. If it's a creature card, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard.
         this.addAbility(new LandfallAbility(new TerritoryCullerEffect()));
     }
 

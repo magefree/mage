@@ -5,15 +5,18 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -44,11 +47,11 @@ public final class ProteanHulk extends CardImpl {
 
 class ProteanHulkTarget extends TargetCardInLibrary {
 
-    private static final FilterCard filter
+    private static final FilterCard filterStatic
             = new FilterCreatureCard("creature cards with total mana value 6 or less");
 
     ProteanHulkTarget() {
-        super(0, Integer.MAX_VALUE, filter);
+        super(0, Integer.MAX_VALUE, filterStatic);
     }
 
     private ProteanHulkTarget(final ProteanHulkTarget target) {
@@ -61,16 +64,27 @@ class ProteanHulkTarget extends TargetCardInLibrary {
     }
 
     @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(playerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        if (card == null) {
-            return false;
-        }
-        Cards cards = new CardsImpl(this.getTargets());
-        cards.add(id);
-        return cards.getCards(game).stream().filter(Objects::nonNull).mapToInt(MageObject::getManaValue).sum() <= 6;
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, MageObject::getManaValue, 6, game);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this.getTargets(),
+                super.possibleTargets(sourceControllerId, source, game),
+                MageObject::getManaValue, 6, game);
+    }
+
+    @Override
+    public String getMessage(Game game) {
+        // shows selected total
+        int selectedValue = this.getTargets().stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .mapToInt(MageObject::getManaValue)
+                .sum();
+        return super.getMessage(game) + " (selected total mana value " + selectedValue + ")";
     }
 }

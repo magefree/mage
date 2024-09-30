@@ -47,7 +47,7 @@ public final class SimonWildMagicSorcerer extends CardImpl {
         effect.addTableEntry(1, 9, new DrawCardAllEffect(1));
 
         // 10-19 | You draw a card.
-        effect.addTableEntry(10, 19, new DrawCardSourceControllerEffect(1, "you"));
+        effect.addTableEntry(10, 19, new DrawCardSourceControllerEffect(1, true));
 
         // 20 | Copy that spell. You may choose new targets for the copy.
         effect.addTableEntry(20, 20, new CopyTargetStackObjectEffect());

@@ -12,23 +12,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * App GUI: download card images window
+ * App GUI: control dialog for card images downloader service
  *
  * @author JayDi85
  */
 public class DownloadImagesDialog extends MageDialog {
 
-    public static final int RET_CANCEL = 0;
-    public static final int RET_OK = 1;
-
     private final Dimension sizeModeMessageOnly;
     private final Dimension sizeModeMessageAndControls;
     private final Map<Component, Boolean> actionsControlStates = new HashMap<>();
+    private DownloadImagesCallback callback = null;
 
-
-    /**
-     * Creates new form DownloadImagesDialog
-     */
     public DownloadImagesDialog() {
         initComponents();
         this.setModal(true);
@@ -51,7 +45,7 @@ public class DownloadImagesDialog extends MageDialog {
         ActionMap actionMap = getRootPane().getActionMap();
         actionMap.put(cancelName, new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                doClose(RET_CANCEL);
+                onCancel();
             }
         });
     }
@@ -60,28 +54,27 @@ public class DownloadImagesDialog extends MageDialog {
         this.setSize(new Dimension(width, heigth));
     }
 
-    public void showDialog() {
-        showDialog(null);
+    public interface DownloadImagesCallback {
+        void onDownloadDone();
     }
 
-    public void showDialog(MageDialogState mageDialogState) {
-
+    public void showDialog(DownloadImagesCallback callback) {
         // window settings
+        this.callback = callback;
         MageFrame.getDesktop().remove(this);
-        if (this.isModal()) {
-            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-        } else {
-            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-        }
-        if (mageDialogState != null) mageDialogState.setStateToDialog(this);
-        else this.makeWindowCentered();
-
-        showDownloadControls(false); // call to change window size
+        MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
+        showDownloadControls(false); // call to change window size and view mode
 
         this.setVisible(true);
     }
 
     public void setGlobalInfo(String info) {
+        // workaround to keep auto-sizeable and centered text
+        Dimension newSize = new Dimension(Integer.MAX_VALUE, this.labelGlobal.getPreferredSize().height);
+        this.labelGlobal.setPreferredSize(newSize);
+        this.labelGlobal.setMaximumSize(newSize);
+        this.labelGlobal.setHorizontalAlignment(SwingConstants.CENTER);
+
         this.labelGlobal.setText(info);
     }
 
@@ -188,13 +181,8 @@ public class DownloadImagesDialog extends MageDialog {
         // TODO: add manual mode as tab
         this.tabsList.getTabComponentAt(1).setEnabled(false);
         this.tabsList.setEnabledAt(1, false);
-    }
 
-    /**
-     * @return the return status of this dialog - one of RET_OK or RET_CANCEL
-     */
-    public int getReturnStatus() {
-        return returnStatus;
+        this.invalidate();
     }
 
     /**
@@ -358,7 +346,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelModeSelect.add(fillerMode1);
 
         buttonSearchSet.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/search_24.png"))); // NOI18N
-        buttonSearchSet.setToolTipText("Fast search your flag");
+        buttonSearchSet.setToolTipText("Search set to download");
         buttonSearchSet.setAlignmentX(1.0F);
         buttonSearchSet.setPreferredSize(new java.awt.Dimension(25, 25));
         buttonSearchSet.addActionListener(new java.awt.event.ActionListener() {
@@ -378,7 +366,7 @@ public class DownloadImagesDialog extends MageDialog {
         panelRedownload.setPreferredSize(new java.awt.Dimension(280, 100));
         panelRedownload.setLayout(new java.awt.BorderLayout());
 
-        checkboxRedownload.setText("<html>Re-download all images");
+        checkboxRedownload.setText("<html>Re-download all selected images");
         checkboxRedownload.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         panelRedownload.add(checkboxRedownload, java.awt.BorderLayout.CENTER);
         panelRedownload.add(filler1, java.awt.BorderLayout.PAGE_END);
@@ -432,7 +420,7 @@ public class DownloadImagesDialog extends MageDialog {
      * Closes the dialog
      */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
-        doClose(RET_CANCEL);
+        onCancel();
     }//GEN-LAST:event_closeDialog
 
     private void buttonSearchSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSearchSetActionPerformed
@@ -440,13 +428,15 @@ public class DownloadImagesDialog extends MageDialog {
     }//GEN-LAST:event_buttonSearchSetActionPerformed
 
     private void buttonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonStopActionPerformed
-        // TODO add your handling code here:
+        // TODO implement stop feature for cancel button
     }//GEN-LAST:event_buttonStopActionPerformed
 
-    private void doClose(int retStatus) {
-        returnStatus = retStatus;
-        setVisible(false);
-        dispose();
+    private void onCancel() {
+        // it's only control GUI, all works in download service
+        hideDialog();
+        if (this.callback != null) {
+            this.callback.onDownloadDone();
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -492,6 +482,4 @@ public class DownloadImagesDialog extends MageDialog {
     private javax.swing.JPanel tabMain;
     private javax.swing.JTabbedPane tabsList;
     // End of variables declaration//GEN-END:variables
-
-    private int returnStatus = RET_CANCEL;
 }

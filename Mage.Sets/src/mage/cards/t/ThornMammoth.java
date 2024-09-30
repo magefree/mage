@@ -29,7 +29,7 @@ public final class ThornMammoth extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever Thorn Mammoth or another creature enters the battlefield under your control, Thorn Mammoth fights up to one target creature you don't control.
+        // Whenever Thorn Mammoth or another creature you control enters, Thorn Mammoth fights up to one target creature you don't control.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new FightTargetSourceEffect().setText("{this} fights up to one target creature you don't control"),
                 StaticFilters.FILTER_PERMANENT_CREATURE, false, true

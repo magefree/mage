@@ -70,7 +70,7 @@ class MindblazeEffect extends OneShotEffect {
         if (player == null || playerControls == null || sourceObject == null) {
             return false;
         }
-        Choice numberChoice = new ChoiceImpl();
+        Choice numberChoice = new ChoiceImpl(false);
         numberChoice.setMessage("Choose a number greater than 0");
         Set<String> numbers = new HashSet<>();
         for (int i = 1; i <= 4; i++) {

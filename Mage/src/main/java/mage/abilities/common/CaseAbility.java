@@ -74,7 +74,7 @@ public class CaseAbility extends SimpleStaticAbility {
         super(Zone.ALL, null);
 
         if (initialAbility instanceof EntersBattlefieldTriggeredAbility) {
-            ((EntersBattlefieldTriggeredAbility) initialAbility).setTriggerPhrase("When this Case enters the battlefield, ");
+            ((EntersBattlefieldTriggeredAbility) initialAbility).setTriggerPhrase("When this Case enters, ");
         }
         addSubAbility(initialAbility);
 

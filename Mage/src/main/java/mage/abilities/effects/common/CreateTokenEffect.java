@@ -16,6 +16,7 @@ import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ import java.util.UUID;
  */
 public class CreateTokenEffect extends OneShotEffect {
 
-    private final Token token;
+    private final List<Token> tokens = new ArrayList<>();
     private final DynamicValue amount;
     private final boolean tapped;
     private final boolean attacking;
@@ -56,7 +57,10 @@ public class CreateTokenEffect extends OneShotEffect {
 
     public CreateTokenEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking) {
         super(Outcome.PutCreatureInPlay);
-        this.token = token;
+        if (token == null) {
+            throw new IllegalArgumentException("Wrong code usage. Token provided to CreateTokenEffect must not be null.");
+        }
+        this.tokens.add(token);
         this.amount = amount.copy();
         this.tapped = tapped;
         this.attacking = attacking;
@@ -66,7 +70,9 @@ public class CreateTokenEffect extends OneShotEffect {
     protected CreateTokenEffect(final CreateTokenEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
-        this.token = effect.token.copy();
+        for (Token token : effect.tokens) {
+            this.tokens.add(token.copy());
+        }
         this.tapped = effect.tapped;
         this.attacking = effect.attacking;
         this.lastAddedTokenIds.addAll(effect.lastAddedTokenIds);
@@ -82,6 +88,12 @@ public class CreateTokenEffect extends OneShotEffect {
         return this;
     }
 
+    public CreateTokenEffect withAdditionalTokens(Token... tokens) {
+        this.tokens.addAll(Arrays.asList(tokens));
+        setText();
+        return this;
+    }
+
     @Override
     public CreateTokenEffect copy() {
         return new CreateTokenEffect(this);
@@ -90,8 +102,8 @@ public class CreateTokenEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int value = amount.calculate(game, source, this);
-        token.putOntoBattlefield(value, game, source, source.getControllerId(), tapped, attacking);
-        this.lastAddedTokenIds = token.getLastAddedTokenIds();
+        tokens.get(0).putOntoBattlefield(value, game, source, source.getControllerId(), tapped, attacking, null, null, true, tokens);
+        this.lastAddedTokenIds = tokens.get(0).getLastAddedTokenIds();
         // TODO: Workaround to add counters to all created tokens, necessary for correct interactions with cards like Chatterfang, Squirrel General and Ochre Jelly / Printlifter Ooze. See #10786
         if (counterType != null) {
             for (UUID tokenId : lastAddedTokenIds) {
@@ -150,41 +162,53 @@ public class CreateTokenEffect extends OneShotEffect {
     }
 
     private void setText() {
-        String tokenDescription = token.getDescription();
         boolean singular = amount.toString().equals("1");
-        if (tokenDescription.contains(", a legendary")) {
-            staticText = "create " + tokenDescription;
-            return;
-        }
-        if (oldPhrasing) {
-            tokenDescription = tokenDescription.replace("token with \"",
-                    singular ? "token. It has \"" : "tokens. They have \"");
-        }
         StringBuilder sb = new StringBuilder("create ");
-        if (singular) {
-            if (tapped && !attacking) {
-                sb.append("a tapped ");
+        for (int i = 0; i < tokens.size(); i++) {
+            if (i > 0) {
+                if (tokens.size() > 2) {
+                    sb.append(", ");
+                } else {
+                    sb.append(" ");
+                }
+                if (i+1 == tokens.size()) {
+                    sb.append("and ");
+                }
+            }
+            String tokenDescription = tokens.get(i).getDescription();
+            if (tokenDescription.contains(", a legendary")) {
                 sb.append(tokenDescription);
+                continue;
+            }
+            if (oldPhrasing) {
+                tokenDescription = tokenDescription.replace("token with \"",
+                        singular ? "token. It has \"" : "tokens. They have \"");
+            }
+            if (singular) {
+                if (tapped && !attacking) {
+                    sb.append("a tapped ");
+                    sb.append(tokenDescription);
+                } else {
+                    sb.append(CardUtil.addArticle(tokenDescription));
+                }
             } else {
-                sb.append(CardUtil.addArticle(tokenDescription));
-            }
-        } else {
-            sb.append(CardUtil.numberToText(amount.toString())).append(' ');
-            if (tapped && !attacking) {
-                sb.append("tapped ");
-            }
-            sb.append(tokenDescription);
-            if (tokenDescription.endsWith("token")) {
-                sb.append("s");
-            }
-            int tokenLocation = sb.indexOf("token ");
-            if (tokenLocation != -1) {
-                sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
+                sb.append(CardUtil.numberToText(amount.toString())).append(' ');
+                if (tapped && !attacking) {
+                    sb.append("tapped ");
+                }
+                sb.append(tokenDescription);
+                if (tokenDescription.endsWith("token")) {
+                    sb.append("s");
+                }
+                int tokenLocation = sb.indexOf("token ");
+                if (tokenLocation != -1) {
+                    sb.replace(tokenLocation, tokenLocation + 6, "tokens ");
+                }
             }
         }
 
         if (attacking) {
-            if (singular) {
+            if (singular && tokens.size() == 1) {
                 sb.append(" that's");
             } else {
                 sb.append(" that are");

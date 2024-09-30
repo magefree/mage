@@ -38,7 +38,7 @@ public final class TolarianEmissary extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetEnchantmentPermanent());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, KickedCondition.ONCE,
-            "When {this} enters the battlefield, if it was kicked, destroy target enchantment."));
+            "When {this} enters, if it was kicked, destroy target enchantment."));
     }
 
     private TolarianEmissary(final TolarianEmissary card) {

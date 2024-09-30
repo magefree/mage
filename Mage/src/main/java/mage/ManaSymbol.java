@@ -44,7 +44,7 @@ package mage;
  * by paying 2 life. Example: {W/P}{W/P} can be paid by spending {W}{W}, by
  * spending {W} and paying 2 life, or by paying 4 life.
  * <p>
- * 107.4g. In rules text, the Phyrexian symbol {P} with no colored background
+ * 107.4g. In rules text, the Phyrexian symbol {H} with no colored background
  * means any of the five Phyrexian mana symbols.
  * <p>
  * 107.4h. The snow mana symbol {S} represents one generic mana in a cost. This

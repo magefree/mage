@@ -53,7 +53,7 @@ public class ThranPortalTest extends CardTestPlayerBase {
      */
     @Test
     public void seenAsChoice() {
-        // Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains,
+        // Whenever a Mountain you control enters, if you control at least five other Mountains,
         // you may have Valakut, the Molten Pinnacle deal 3 damage to any target.
         String valakut = "Valakut, the Molten Pinnacle";
 

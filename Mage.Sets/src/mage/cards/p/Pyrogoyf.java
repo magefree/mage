@@ -39,7 +39,7 @@ public final class Pyrogoyf extends CardImpl {
         // Pyrogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessPlusOneSourceEffect(powerValue)));
 
-        // Whenever Pyrogoyf or another Lhurgoyf creature enters the battlefield under your control, that creature deals damage equal to its power to any target.
+        // Whenever Pyrogoyf or another Lhurgoyf creature you control enters, that creature deals damage equal to its power to any target.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new PyrogoyfEffect(), filter, false, true
         );

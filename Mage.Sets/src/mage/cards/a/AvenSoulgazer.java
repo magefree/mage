@@ -1,7 +1,6 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -11,8 +10,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -23,6 +20,8 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -87,10 +86,7 @@ class AvenSoulgazerLookFaceDownEffect extends OneShotEffect {
         }
         Permanent faceDownCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (faceDownCreature != null) {
-            Permanent copyFaceDown = faceDownCreature.copy();
-            copyFaceDown.setFaceDown(false, game);
-            Cards cards = new CardsImpl(copyFaceDown);
-            player.lookAtCards("face down card - " + mageObject.getName(), cards, game);
+            player.lookAtCards("face down cards " + mageObject.getName(), faceDownCreature, game);
         } else {
             return false;
         }

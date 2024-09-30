@@ -194,7 +194,6 @@ public class FeedbackDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        dialog.setVisible(false);
         dialog.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 

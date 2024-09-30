@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 public final class RageExtractor extends CardImpl {
 
-    private static final FilterSpell filter = new FilterSpell("a spell with {P} in its mana cost");
+    private static final FilterSpell filter = new FilterSpell("a spell with {H} in its mana cost");
 
     static {
         filter.add(RageExtractorPredicate.instance);

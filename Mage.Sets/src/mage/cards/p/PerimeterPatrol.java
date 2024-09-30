@@ -25,7 +25,7 @@ public final class PerimeterPatrol extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever an artifact enters the battlefield under your control, Perimeter Patrol gets +1/+0 until end of turn.
+        // Whenever an artifact you control enters, Perimeter Patrol gets +1/+0 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN

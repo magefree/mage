@@ -38,14 +38,18 @@ public final class Transparency {
         BufferedImage target = new BufferedImage(source.getWidth(), source
                 .getHeight(), java.awt.Transparency.TRANSLUCENT);
         // Get the images graphics
-        Graphics2D g = target.createGraphics();
-        // Set the Graphics composite to Alpha
-        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
-                (float) alpha));
-        // Draw the image into the prepared reciver image
-        g.drawImage(source, null, 0, 0);
-        // let go of all system resources in this Graphics
-        g.dispose();
+        Graphics2D g2 = target.createGraphics();
+        try {
+            // Set the Graphics composite to Alpha
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
+                    (float) alpha));
+            // Draw the image into the prepared reciver image
+            g2.drawImage(source, null, 0, 0);
+        } finally {
+            // let go of all system resources in this Graphics
+            g2.dispose();
+        }
+
         // Return the image
         return target;
     }
