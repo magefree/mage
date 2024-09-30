@@ -557,9 +557,12 @@ class TheLostCavernsOfIxalanCollator implements BoosterCollator {
     private final BoosterStructure L1 = new BoosterStructure(land);
 
     // In order for equal numbers of each common to exist, the average booster must contain:
-    // 2.06250 A commons (66 / 32)
+    // 2.06250 A commons (66 / 32)  whilst paper 3A packs not observed, 6¼% 3A packs required where foils are ignored
     // 3.46875 B commons (111 / 32)
     // 3.46875 C commons (111 / 32)
+    // Because xmage doesn't consider foils displacing commons, this requires the possibility of packs with 3 A commons
+    // Taking into account foils changes the numbers to 1.986 A, 3.340 B, 3.340 C
+    // which would mean 3x FABBBBCCC,3x FABBBCCCC,138x FAABBBCCC,144x AABBBBCCC,144x AABBBCCCC 
     private final RarityConfiguration commonRuns = new RarityConfiguration(
             AABBBCCCC, AABBBCCCC, AABBBCCCC, AABBBCCCC, AABBBCCCC,
             AABBBCCCC, AABBBCCCC, AABBBCCCC, AABBBCCCC, AABBBCCCC,
