@@ -66,7 +66,7 @@ public abstract class Plane extends CommandObjectImpl {
         return frameStyle;
     }
 
-    public void setSourceObject() {
+    public void setSourceObjectAndInitImage() {
         this.sourceObject = null;
 
         // choose set code due source

@@ -1291,7 +1291,7 @@ public class TestPlayer implements Player {
     private void printStack(Game game) {
         System.out.println("Stack objects: " + game.getStack().size());
         game.getStack().forEach(stack -> {
-            System.out.println(stack.getStackAbility().toString());
+            System.out.println(stack.getStackAbility().toString() + (stack.isCopy() ? " [copy]" : ""));
         });
     }
 

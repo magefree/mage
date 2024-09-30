@@ -58,7 +58,7 @@ public abstract class Emblem extends CommandObjectImpl {
         return frameStyle;
     }
 
-    public void setSourceObject(MageObject sourceObject) {
+    public void setSourceObjectAndInitImage(MageObject sourceObject) {
         this.sourceObject = sourceObject;
 
         // choose set code due source

@@ -66,11 +66,12 @@ class TheMindskinnerEffect extends PreventionEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        int amount = event.getAmount();
         preventDamageAction(event, source, game);
         for (UUID playerId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                player.millCards(event.getAmount(), source, game);
+                player.millCards(amount, source, game);
             }
         }
         return true;

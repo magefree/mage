@@ -39,7 +39,7 @@ public final class SawbladeSkinripper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // {2}, Sacrifice another creature or enchantment: Put a +1/+1 counter on Sawblade Skinripper.
         Ability ability = new SimpleActivatedAbility(

@@ -154,24 +154,35 @@ public class Dungeon extends CommandObjectImpl {
     }
 
     public static Dungeon createDungeon(String name, boolean isNameMustExists) {
+        Dungeon res;
         switch (name) {
             case "Tomb of Annihilation":
-                return new TombOfAnnihilationDungeon();
+                res = new TombOfAnnihilationDungeon();
+                break;
             case "Lost Mine of Phandelver":
-                return new LostMineOfPhandelverDungeon();
+                res = new LostMineOfPhandelverDungeon();
+                break;
             case "Dungeon of the Mad Mage":
-                return new DungeonOfTheMadMageDungeon();
+                res = new DungeonOfTheMadMageDungeon();
+                break;
             default:
                 if (isNameMustExists) {
                     throw new UnsupportedOperationException("A dungeon should have been chosen");
                 } else {
-                    return null;
+                    res = null;
                 }
         }
+
+        // dungeon don't have source, so image data can be initialized immediately
+        if (res != null) {
+            res.setSourceObjectAndInitImage();
+        }
+
+        return res;
     }
 
-    public void setSourceObject() {
-        // choose set code due source
+    public void setSourceObjectAndInitImage() {
+        // image
         TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForClass(this.getClass().getName(), null);
         if (foundInfo != null) {
             this.setExpansionSetCode(foundInfo.getSetCode());

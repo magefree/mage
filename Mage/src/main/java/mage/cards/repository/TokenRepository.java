@@ -33,6 +33,7 @@ public enum TokenRepository {
     public static final String XMAGE_IMAGE_NAME_NIGHT = "Night";
     public static final String XMAGE_IMAGE_NAME_THE_MONARCH = "The Monarch";
     public static final String XMAGE_IMAGE_NAME_RADIATION = "Radiation";
+    public static final String XMAGE_IMAGE_NAME_THE_RING = "The Ring";
     public static final String XMAGE_IMAGE_NAME_HELPER_EMBLEM = "Helper Emblem";
 
     private static final Logger logger = Logger.getLogger(TokenRepository.class);
@@ -305,6 +306,9 @@ public enum TokenRepository {
 
         // Radiation (for trigger)
         res.add(createXmageToken(XMAGE_IMAGE_NAME_RADIATION, 1, "https://api.scryfall.com/cards/tpip/22/en?format=image"));
+
+        // The Ring
+        res.add(createXmageToken(XMAGE_IMAGE_NAME_THE_RING, 1, "https://api.scryfall.com/cards/tltr/H13/en?format=image"));
 
         // Helper emblem (for global card hints)
         // use backface for it

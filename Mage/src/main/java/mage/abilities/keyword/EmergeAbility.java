@@ -112,7 +112,8 @@ public class EmergeAbility extends SpellAbility {
                 Permanent creature = game.getPermanent(target.getFirstTarget());
                 if (creature != null) {
                     CardUtil.reduceCost(this, creature.getManaValue());
-                    if (super.activate(game, allowedIdentifiers, false)) {
+                    boolean reducedToZero = this.getManaCostsToPay().isEmpty();
+                    if (super.activate(game, allowedIdentifiers, reducedToZero)) {
                         MageObjectReference mor = new MageObjectReference(creature, game);
                         if (creature.sacrifice(this, game)) {
                             this.setCostsTag(EMERGE_ACTIVATION_CREATURE_REFERENCE, mor); //Can access with LKI afterwards

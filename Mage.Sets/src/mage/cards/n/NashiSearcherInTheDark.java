@@ -36,7 +36,7 @@ public final class NashiSearcherInTheDark extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility());
+        this.addAbility(new MenaceAbility(false));
 
         // Whenever Nashi, Searcher in the Dark deals combat damage to a player, you mill that many cards. You may put any number of legendary and/or enchantment cards from among them into your hand. If you put no cards into your hand this way, put a +1/+1 counter on Nashi.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new NashiSearcherInTheDarkEffect()));

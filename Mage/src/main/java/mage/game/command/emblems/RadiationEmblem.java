@@ -45,7 +45,7 @@ public class RadiationEmblem extends Emblem {
             this.setImageFileName(""); // use default
             this.setImageNumber(foundInfo.getImageNumber());
         } else {
-            // how-to fix: add emblem to the tokens-database TokenRepository->loadXmageTokens
+            // how-to fix: add image to the tokens-database TokenRepository->loadXmageTokens
             throw new IllegalArgumentException("Wrong code usage: can't find xmage token info for: " + TokenRepository.XMAGE_IMAGE_NAME_RADIATION);
         }
     }

@@ -56,9 +56,11 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     // until your next turn or until end of your next turn
     private UUID startingControllerId; // player to check for turn duration (can't different with real controller ability)
+    private UUID activePlayerId; // Player whose turn the effect started on
     private boolean startingTurnWasActive; // effect started during related players turn and related players turn was already active
     private int effectStartingOnTurn = 0; // turn the effect started
-    private int effectStartingEndStep = 0;
+    private int effectControllerStartingEndStep = 0;
+    private int effectActivePlayerStartingEndStep = 0;
     private int nextTurnNumber = Integer.MAX_VALUE; // effect is waiting for a step during your next turn, we store it if found.
     // set to the turn number on your next turn.
     private int effectStartingStepNum = 0; // Some continuous are waiting for the next step of a kind.
@@ -93,7 +95,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         this.startingControllerId = effect.startingControllerId;
         this.startingTurnWasActive = effect.startingTurnWasActive;
         this.effectStartingOnTurn = effect.effectStartingOnTurn;
-        this.effectStartingEndStep = effect.effectStartingEndStep;
+        this.effectControllerStartingEndStep = effect.effectControllerStartingEndStep;
         this.dependencyTypes = effect.dependencyTypes;
         this.dependendToTypes = effect.dependendToTypes;
         this.characterDefining = effect.characterDefining;
@@ -251,10 +253,12 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
     @Override
     public void setStartingControllerAndTurnNum(Game game, UUID startingController, UUID activePlayerId) {
         this.startingControllerId = startingController;
+        this.activePlayerId = activePlayerId;
         this.startingTurnWasActive = activePlayerId != null
                 && activePlayerId.equals(startingController); // you can't use "game" for active player cause it's called from tests/cheat too
         this.effectStartingOnTurn = game.getTurnNum();
-        this.effectStartingEndStep = EndStepCountWatcher.getCount(startingController, game);
+        this.effectControllerStartingEndStep = EndStepCountWatcher.getCount(startingController, game);
+        this.effectActivePlayerStartingEndStep = EndStepCountWatcher.getCount(activePlayerId, game);
         this.effectStartingStepNum = game.getState().getStepNum();
     }
 
@@ -266,7 +270,12 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     @Override
     public boolean isYourNextEndStep(Game game) {
-        return EndStepCountWatcher.getCount(startingControllerId, game) > effectStartingEndStep;
+        return EndStepCountWatcher.getCount(startingControllerId, game) > effectControllerStartingEndStep;
+    }
+
+    @Override
+    public boolean isTheNextEndStep(Game game) {
+        return EndStepCountWatcher.getCount(activePlayerId, game) > effectActivePlayerStartingEndStep;
     }
 
     public boolean isEndCombatOfYourNextTurn(Game game) {
@@ -298,6 +307,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
             case UntilYourNextTurn:
             case UntilEndOfYourNextTurn:
             case UntilYourNextEndStep:
+            case UntilTheNextEndStep:
             case UntilEndCombatOfYourNextTurn:
             case UntilYourNextUpkeepStep:
                 break;
@@ -342,6 +352,10 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
                     return this.isYourNextEndStep(game);
                 }
                 break;
+            case UntilTheNextEndStep:
+                if (player != null && player.isInGame()) {
+                    return this.isTheNextEndStep(game);
+                }
             case UntilEndCombatOfYourNextTurn:
                 if (player != null && player.isInGame()) {
                     return this.isEndCombatOfYourNextTurn(game);

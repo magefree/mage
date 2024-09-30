@@ -72,7 +72,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Command Tower", 96, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 244, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
         cards.add(new SetCardInfo("Convert to Slime", 37, Rarity.RARE, mage.cards.c.ConvertToSlime.class));
-        cards.add(new SetCardInfo("Counterspell", 114, Rarity.COMMON, mage.cards.c.Counterspell.class));
+        cards.add(new SetCardInfo("Counterspell", 114, Rarity.UNCOMMON, mage.cards.c.Counterspell.class));
         cards.add(new SetCardInfo("Crawling Sensation", 173, Rarity.UNCOMMON, mage.cards.c.CrawlingSensation.class));
         cards.add(new SetCardInfo("Crypt Ghast", 368, Rarity.MYTHIC, mage.cards.c.CryptGhast.class));
         cards.add(new SetCardInfo("Culling Ritual", 85, Rarity.RARE, mage.cards.c.CullingRitual.class));
@@ -134,7 +134,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Harsh Mentor", 165, Rarity.RARE, mage.cards.h.HarshMentor.class));
         cards.add(new SetCardInfo("Haywire Mite", 247, Rarity.UNCOMMON, mage.cards.h.HaywireMite.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 284, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
-        cards.add(new SetCardInfo("Hornet Queen", 184, Rarity.MYTHIC, mage.cards.h.HornetQueen.class));
+        cards.add(new SetCardInfo("Hornet Queen", 184, Rarity.RARE, mage.cards.h.HornetQueen.class));
         cards.add(new SetCardInfo("Hydra Omnivore", 185, Rarity.MYTHIC, mage.cards.h.HydraOmnivore.class));
         cards.add(new SetCardInfo("Infernal Grasp", 143, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
         cards.add(new SetCardInfo("Inkshield", 221, Rarity.RARE, mage.cards.i.Inkshield.class));
@@ -257,6 +257,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temur War Shaman", 200, Rarity.RARE, mage.cards.t.TemurWarShaman.class));
         cards.add(new SetCardInfo("Terminus", 70, Rarity.RARE, mage.cards.t.Terminus.class));
         cards.add(new SetCardInfo("The Eldest Reborn", 139, Rarity.UNCOMMON, mage.cards.t.TheEldestReborn.class));
+        cards.add(new SetCardInfo("The Lord of Pain", 3, Rarity.MYTHIC, mage.cards.t.TheLordOfPain.class));
         cards.add(new SetCardInfo("Theater of Horrors", 236, Rarity.RARE, mage.cards.t.TheaterOfHorrors.class));
         cards.add(new SetCardInfo("They Came from the Pipes", 14, Rarity.RARE, mage.cards.t.TheyCameFromThePipes.class));
         cards.add(new SetCardInfo("Thirst for Meaning", 129, Rarity.COMMON, mage.cards.t.ThirstForMeaning.class));
@@ -292,5 +293,6 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Yavimaya Coast", 327, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Yavimaya Elder", 208, Rarity.COMMON, mage.cards.y.YavimayaElder.class));
         cards.add(new SetCardInfo("Yedora, Grave Gardener", 209, Rarity.UNCOMMON, mage.cards.y.YedoraGraveGardener.class));
+        cards.add(new SetCardInfo("Zimone, Mystery Unraveler", 8, Rarity.MYTHIC, mage.cards.z.ZimoneMysteryUnraveler.class));
     }
 }

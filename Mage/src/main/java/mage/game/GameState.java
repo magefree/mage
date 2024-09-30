@@ -1239,6 +1239,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.isPlaneChase = isPlaneChase;
     }
 
+    /**
+     * Add object to command zone.
+     * <p>
+     * Warning, all object data must be initialized before adding, including image info
+     */
     public void addCommandObject(CommandObject commandObject) {
         getCommand().add(commandObject);
         setZone(commandObject.getId(), Zone.COMMAND);

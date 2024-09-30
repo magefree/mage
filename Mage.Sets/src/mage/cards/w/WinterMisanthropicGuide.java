@@ -33,7 +33,7 @@ public final class WinterMisanthropicGuide extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // At the beginning of your upkeep, each player draws two cards.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
