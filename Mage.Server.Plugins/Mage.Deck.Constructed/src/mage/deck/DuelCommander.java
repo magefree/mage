@@ -109,6 +109,7 @@ public class DuelCommander extends Commander {
         bannedCommander.add("Raffine, Scheming Seer");
         bannedCommander.add("Rofellos, Llanowar Emissary");
         bannedCommander.add("Shorikai, Genesis Engine");
+        bannedCommander.add("Tamiyo, Inquisitive Student");
         bannedCommander.add("Tasigur, the Golden Fang");
         bannedCommander.add("Urza, Lord High Artificer");
         bannedCommander.add("Vial Smasher the Fierce");
