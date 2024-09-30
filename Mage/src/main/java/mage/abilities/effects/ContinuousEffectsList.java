@@ -156,6 +156,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                     case UntilEndOfYourNextTurn:
                     case UntilEndCombatOfYourNextTurn:
                     case UntilYourNextEndStep:
+                    case UntilTheNextEndStep:
                     case UntilYourNextUpkeepStep:
                         // until your turn effects continue until real turn reached, their used it's own inactive method
                         // 514.2 Second, the following actions happen simultaneously: all damage marked on permanents
