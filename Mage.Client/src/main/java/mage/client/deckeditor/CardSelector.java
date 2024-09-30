@@ -10,6 +10,7 @@ import mage.cards.repository.*;
 import mage.client.MageFrame;
 import mage.client.cards.*;
 import mage.client.constants.Constants.SortBy;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.deckeditor.table.TableModel;
 import mage.client.dialog.CheckBoxList;
 import mage.client.util.GUISizeHelper;
@@ -97,11 +98,11 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         jTextFieldSearch.addActionListener(searchAction);
 
         // make the components more readable
-        tbColor.setBackground(new Color(250, 250, 250, 150));
+        tbColor.setBackground(PreferencesDialog.getCurrentTheme().getDeckEditorToolbarBackgroundColor());
         tbColor.setOpaque(true); // false = transparent
-        tbTypes.setBackground(new Color(250, 250, 250, 150));
+        tbTypes.setBackground(PreferencesDialog.getCurrentTheme().getDeckEditorToolbarBackgroundColor());
         tbTypes.setOpaque(true); // false = transparent
-        cardSelectorBottomPanel.setBackground(new Color(250, 250, 250, 150));
+        cardSelectorBottomPanel.setBackground(PreferencesDialog.getCurrentTheme().getDeckEditorToolbarBackgroundColor());
         cardSelectorBottomPanel.setOpaque(true); // false = transparent
     }
 

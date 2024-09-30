@@ -13,29 +13,29 @@ import java.awt.*;
  */
 public enum ThemeType {
     // https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/_nimbusDefaults.html
-    DEFAULT("Default",
-            "",
-            true,
-            false,
-            true,
-            true,
-            true,
-            true,
-            true,
-            new Color(169, 176, 190), // nimbusBlueGrey
-            new Color(214, 217, 223), // control
-            new Color(255, 255, 255), // nimbusLightBackground
-            new Color(242, 242, 189), // info
-            new Color(51, 98, 140), // nimbusBase
-            null, // mageToolbar
+    DEFAULT("Default",                     // name
+            "",                            // path
+            true,                          // hasBackground
+            false,                         // hasLoginBackground
+            true,                          // hasBattleBackground
+            true,                          // hasSkipButtons
+            true,                          // hasPhaseIcons
+            true,                          // hasWinLossImages
+            true,                          // shortcutsVisibleForSkipButtons
+            new Color(169, 176, 190),      // nimbusBlueGrey
+            new Color(214, 217, 223),      // control
+            new Color(255, 255, 255),      // nimbusLightBackground
+            new Color(242, 242, 189),      // info
+            new Color(51, 98, 140),        // nimbusBase
+            null,                          // mageToolbar
             new Color(200, 200, 180, 200), // playerPanel_inactiveBackgroundColor
             new Color(200, 255, 200, 200), // playerPanel_activeBackgroundColor
-            new Color(131, 94, 83, 200), // playerPanel_deadBackgroundColor
-            // card icons
-            new Color(169, 176, 190),
-            Color.black,
-            new Color(51, 98, 140),
-            Color.black
+            new Color(131, 94, 83, 200),   // playerPanel_deadBackgroundColor
+			new Color(250, 250, 250, 150), // deckEditorToolbarBackgroundColor
+            new Color(169, 176, 190),      // cardIconsFillColor
+            Color.black,                   // cardIconsStrokeColor
+            new Color(51, 98, 140),        // cardIconsTextColor
+            Color.black                    // textColor
     ),
     GREY("Grey",
             "grey-theme/",
@@ -55,6 +55,7 @@ public enum ThemeType {
             new Color(172, 172, 172, 200), // playerPanel_inactiveBackgroundColor
             new Color(180, 234, 180, 200), // playerPanel_activeBackgroundColor
             new Color(99, 99, 99, 200), // playerPanel_deadBackgroundColor
+			new Color(250, 250, 250, 150), // deckEditorToolbarBackgroundColor
             // card icons
             new Color(158, 158, 158),
             Color.black,
@@ -79,6 +80,7 @@ public enum ThemeType {
             new Color(243, 233, 164), // playerPanel_inactiveBackgroundColor
             new Color(204, 236, 201), // playerPanel_activeBackgroundColor
             new Color(106, 0, 255), // playerPanel_deadBackgroundColor
+			new Color(250, 250, 250, 150), // deckEditorToolbarBackgroundColor
             // card icons
             new Color(246, 136, 158),
             Color.black,
@@ -103,6 +105,7 @@ public enum ThemeType {
             new Color(219, 193, 172), // playerPanel_inactiveBackgroundColor
             new Color(204, 236, 201), // playerPanel_activeBackgroundColor
             new Color(99, 72, 50, 255), // playerPanel_deadBackgroundColor
+			new Color(250, 250, 250, 150), // deckEditorToolbarBackgroundColor
             // card icons
             new Color(219, 193, 172),
             Color.black,
@@ -127,6 +130,7 @@ public enum ThemeType {
             new Color(172, 195, 219), // playerPanel_inactiveBackgroundColor
             new Color(204, 236, 201), // playerPanel_activeBackgroundColor
             new Color(50, 68, 99, 255), // playerPanel_deadBackgroundColor
+			new Color(250, 250, 250, 150), // deckEditorToolbarBackgroundColor
             // card icons
             new Color(172, 197, 219),
             Color.black,
@@ -142,19 +146,20 @@ public enum ThemeType {
             true,
             true,
             true,
-            new Color(43, 45, 49), // buttons, scrollar background, disabled inputs
-            new Color(49, 51, 56), // window background
-            new Color(58, 56, 64), // inputs, table rows
-            new Color(58, 56, 64), // tooltips
-            new Color(25, 25, 25), // title bars, scrollbar foreground
-            new Color(43, 45, 49), // mageToolbar
-            new Color(43, 45, 49), // playerPanel_inactiveBackgroundColor
-            new Color(64, 61, 56), // playerPanel_activeBackgroundColor
+            new Color(43, 45, 49),      // buttons, scrollar background, disabled inputs
+            new Color(49, 51, 56),      // window background
+            new Color(58, 56, 64),      // inputs, table rows
+            new Color(58, 56, 64),      // tooltips
+            new Color(25, 25, 25),      // title bars, scrollbar foreground
+            new Color(43, 45, 49),      // mageToolbar
+            new Color(43, 45, 49),      // playerPanel_inactiveBackgroundColor
+            new Color(64, 61, 56),      // playerPanel_activeBackgroundColor
             new Color(50, 68, 99, 255), // playerPanel_deadBackgroundColor
-            new Color(172, 197, 219),
-            Color.BLACK,
-            new Color(0, 78, 97),
-            new Color(220, 220, 220)
+			new Color(50, 50, 50, 250), // deckEditorToolbarBackgroundColor
+            new Color(172, 197, 219),   // cardIconsFillColor
+            Color.BLACK,                // cardIconsStrokeColor
+            new Color(0, 78, 97),       // cardIconsTextColor
+            new Color(220, 220, 220)    // textColor
     );
 
     private final String name;
@@ -175,6 +180,7 @@ public enum ThemeType {
     private final Color playerPanel_inactiveBackgroundColor;
     private final Color playerPanel_activeBackgroundColor;
     private final Color playerPanel_deadBackgroundColor;
+	private final Color deckEditorToolbarBackgroundColor;
     // card icons settings (example: flying icon)
     private final Color cardIconsFillColor;
     private final Color cardIconsStrokeColor;
@@ -201,6 +207,7 @@ public enum ThemeType {
               Color playerPanel_inactiveBackgroundColor,
               Color playerPanel_activeBackgroundColor,
               Color playerPanel_deadBackgroundColor,
+			  Color deckEditorToolbarBackgroundColor,
               Color cardIconsFillColor,
               Color cardIconsStrokeColor,
               Color cardIconsTextColor,
@@ -224,6 +231,7 @@ public enum ThemeType {
         this.playerPanel_activeBackgroundColor = playerPanel_activeBackgroundColor;
         this.playerPanel_deadBackgroundColor = playerPanel_deadBackgroundColor;
         this.playerPanel_inactiveBackgroundColor = playerPanel_inactiveBackgroundColor;
+		this.deckEditorToolbarBackgroundColor = deckEditorToolbarBackgroundColor;
         this.cardIconsFillColor = cardIconsFillColor;
         this.cardIconsStrokeColor = cardIconsStrokeColor;
         this.cardIconsTextColor = cardIconsTextColor;
@@ -291,6 +299,10 @@ public enum ThemeType {
     public Color getPlayerPanel_deadBackgroundColor() {
         return playerPanel_deadBackgroundColor;
     }
+
+	public Color getDeckEditorToolbarBackgroundColor() {
+		return deckEditorToolbarBackgroundColor;
+	}
 
     private String getImagePath(String imageType, String name) {
         return "/" + imageType + "/" + path + name;

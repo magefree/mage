@@ -114,7 +114,7 @@
          panelCardArea.setOpaque(false);
          cardArea.setOpaque(false);
          panelCardArea.getViewport().setOpaque(false);
-         panelControl.setBackground(new Color(250, 250, 250, 150));
+         panelControl.setBackground(PreferencesDialog.getCurrentTheme().getDeckEditorToolbarBackgroundColor());
          panelControl.setOpaque(true);
          cbSortBy.setModel(new DefaultComboBoxModel<>(SortBy.values()));
      }
