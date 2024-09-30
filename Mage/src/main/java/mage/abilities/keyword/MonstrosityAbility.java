@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.hint.common.MonstrousHint;
 import mage.constants.Outcome;
@@ -108,7 +107,7 @@ class BecomeMonstrousSourceEffect extends OneShotEffect {
         int monstrosityValue = ((MonstrosityAbility) source).getMonstrosityValue();
         // handle monstrosity = X
         if (monstrosityValue == Integer.MAX_VALUE) {
-            monstrosityValue = source.getManaCostsToPay().getX();
+            monstrosityValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         }
         permanent.addCounters(
                 CounterType.P1P1.createInstance(monstrosityValue),

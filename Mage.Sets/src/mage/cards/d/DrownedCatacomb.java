@@ -1,15 +1,12 @@
 package mage.cards.d;
 
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
-import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -21,27 +18,25 @@ import java.util.UUID;
  */
 public final class DrownedCatacomb extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent("an Island or a Swamp");
 
     static {
-        filter.add(Predicates.or(
-                SubType.SWAMP.getPredicate(),
-                SubType.ISLAND.getPredicate()
-        ));
+        filter.add(Predicates.or(SubType.ISLAND.getPredicate(), SubType.SWAMP.getPredicate()));
     }
 
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0);
+    private static final YouControlPermanentCondition condition = new YouControlPermanentCondition(filter);
 
     public DrownedCatacomb(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, null);
 
-        this.addAbility(new EntersBattlefieldAbility(
-                new TapSourceEffect(), condition, null,
-                "tapped unless you control an Island or a Swamp"
-        ));
-        this.addAbility(new BlackManaAbility());
+        // Drowned Catacomb enters the battlefield tapped unless you control an Island or a Swamp.
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
+
+        // {T}: Add {U}.
         this.addAbility(new BlueManaAbility());
+
+        // {T}: Add {B}.
+        this.addAbility(new BlackManaAbility());
     }
 
     private DrownedCatacomb(final DrownedCatacomb card) {

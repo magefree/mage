@@ -27,7 +27,7 @@ public final class SkyclaveSquid extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
 
-        // Landfall — Whenever a land enters the battlefield under your control, Skyclave Squid can attack this turn as though it didn't have defender.
+        // Landfall — Whenever a land you control enters, Skyclave Squid can attack this turn as though it didn't have defender.
         this.addAbility(new LandfallAbility(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn)));
     }
 

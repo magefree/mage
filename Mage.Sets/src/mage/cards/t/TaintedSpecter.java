@@ -92,8 +92,7 @@ class TaintedSpecterEffect extends OneShotEffect {
             }
         } else {
             // Put a card from your hand on top of your library
-            TargetCardInHand target = new TargetCardInHand();
-            target.setTargetName("a card from your hand to put on top of your library");
+            TargetCardInHand target = new TargetCardInHand().withChooseHint("to put on top of your library");
             targetPlayer.choose(Outcome.Detriment, target, source, game);
             Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
             if (card != null) {

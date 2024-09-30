@@ -19,7 +19,7 @@ public final class SaguArcher extends CardImpl {
 
     public SaguArcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}");
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.ARCHER);
 
         this.power = new MageInt(2);

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author LevelX2
  */
 public final class KhansOfTarkir extends ExpansionSet {
@@ -28,11 +27,13 @@ public final class KhansOfTarkir extends ExpansionSet {
         this.blockName = "Khans of Tarkir";
         this.hasBoosters = true;
         this.hasBasicLands = true;
+        this.rotationSet = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Abomination of Gudul", 159, Rarity.COMMON, mage.cards.a.AbominationOfGudul.class));
         cards.add(new SetCardInfo("Abzan Ascendancy", 160, Rarity.RARE, mage.cards.a.AbzanAscendancy.class));
         cards.add(new SetCardInfo("Abzan Banner", 215, Rarity.COMMON, mage.cards.a.AbzanBanner.class));

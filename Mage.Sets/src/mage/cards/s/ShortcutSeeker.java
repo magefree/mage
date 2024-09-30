@@ -3,6 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -26,7 +27,7 @@ public final class ShortcutSeeker extends CardImpl {
         // Whenever Shortcut Seeker deals combat damage to a player, venture into the dungeon.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new VentureIntoTheDungeonEffect(), false
-        ));
+        ).addHint(CurrentDungeonHint.instance));
     }
 
     private ShortcutSeeker(final ShortcutSeeker card) {

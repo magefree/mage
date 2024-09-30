@@ -40,7 +40,7 @@ public final class VoldarenAmbusher extends CardImpl {
         // When Voldaren Ambusher enters the battlefield, if an opponent lost life this turn, it deals X damage to up to one target creature or planeswalker, where X is the number of Vampires you control.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(xValue)),
-                OpponentsLostLifeCondition.instance, "When {this} enters the battlefield, " +
+                OpponentsLostLifeCondition.instance, "When {this} enters, " +
                 "if an opponent lost life this turn, it deals X damage to up to one target " +
                 "creature or planeswalker, where X is the number of Vampires you control."
         );

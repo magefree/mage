@@ -14,6 +14,7 @@ import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -73,7 +74,7 @@ class AscendFromAvernusEffect extends OneShotEffect {
             return false;
         }
         Cards cards = new CardsImpl(player.getGraveyard().getCards(filter, game));
-        cards.removeIf(uuid -> game.getCard(uuid).getManaValue() > source.getManaCostsToPay().getX());
+        cards.removeIf(uuid -> game.getCard(uuid).getManaValue() > CardUtil.getSourceCostsTag(game, source, "X", 0));
         return player.moveCards(cards, Zone.BATTLEFIELD, source, game);
     }
 }

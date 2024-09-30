@@ -1,17 +1,18 @@
 
 package mage.game.stack;
 
-import java.util.ArrayDeque;
-import java.util.Date;
-import java.util.UUID;
-
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.constants.PutCards;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayDeque;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -80,8 +81,11 @@ public class SpellStack extends ArrayDeque<StackObject> {
                 counteredObjectName = "Ability (" + stackObject.getStackAbility().getRule(targetSourceName) + ") of " + targetSourceName;
             }
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, objectId, source, stackObject.getControllerId()))) {
-                if (!(stackObject instanceof Spell)) { // spells are removed from stack by the card movement
+                // spells are removed from stack by the card movement
+                if (!(stackObject instanceof Spell) 
+                        || stackObject.isCopy()) { // !ensure that copies of stackobjects have their history recorded ie: Swan Song
                     this.remove(stackObject, game);
+                    game.rememberLKI(Zone.STACK, stackObject);
                 }
                 stackObject.counter(source, game, putCard);
                 if (!game.isSimulation()) {

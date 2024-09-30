@@ -35,10 +35,10 @@ public final class MossPitSkeleton extends CardImpl {
         // Kicker {3}
         this.addAbility(new KickerAbility("{3}"));
 
-        // If Moss-Pit Skeleton was kicked, it enters the battlefield with three +1/+1 counters on it.
+        // If Moss-Pit Skeleton was kicked, it enters with three +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), KickedCondition.ONCE,
-                "If {this} was kicked, it enters the battlefield with three +1/+1 counters on it.", ""
+                "If {this} was kicked, it enters with three +1/+1 counters on it.", ""
         ));
 
         // Whenever one or more +1/+1 counters are put on a creature you control, if Moss-Pit Skeleton is in your graveyard, you may put Moss-Pit Skeleton on top of your library.

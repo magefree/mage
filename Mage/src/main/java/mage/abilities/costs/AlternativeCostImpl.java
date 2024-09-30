@@ -51,7 +51,10 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
         if (onlyCost) {
             return getText();
         } else {
-            return (name != null ? name : "") + (isMana ? " " : "&mdash;") + getText() + (isMana ? "" : '.');
+            String costName = (name != null ? name : "");
+            String delimiter = (!isMana || (!costName.isEmpty() && costName.substring(costName.length() - 1).matches("\\d")))
+                    ? "&mdash;" : " ";
+            return costName + delimiter + getText() + (isMana ? "" : '.');
         }
     }
 

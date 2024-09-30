@@ -24,7 +24,7 @@ public final class WarleadersCall extends CardImpl {
         // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield)));
 
-        // Whenever a creature enters the battlefield under your control, Warleader's Call deals 1 damage to each opponent.
+        // Whenever a creature you control enters, Warleader's Call deals 1 damage to each opponent.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DamagePlayersEffect(1, TargetController.OPPONENT),
                 StaticFilters.FILTER_PERMANENT_A_CREATURE

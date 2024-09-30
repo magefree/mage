@@ -79,7 +79,7 @@ class MoggInfestationEffect extends OneShotEffect {
             if (creaturesDied.isEmpty()) {
                 return true;
             }
-            game.getState().processAction(game);  // Bug #8548
+            game.processAction();  // Bug #8548
             for (UUID uuid : creaturesDied) {
                 if (game.getState().getZone(uuid) == Zone.GRAVEYARD
                         || (game.getLastKnownInformation(uuid, Zone.BATTLEFIELD) instanceof PermanentToken

@@ -107,7 +107,7 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
                 sb.append("a player, ");
                 break;
             default:
-                throw new UnsupportedOperationException();
+                throw new UnsupportedOperationException("Unsupported TargetController in DealsDamageToAPlayerAttachedTriggeredAbility");
         }
         return sb.toString();
     }

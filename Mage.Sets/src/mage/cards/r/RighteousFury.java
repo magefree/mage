@@ -67,7 +67,7 @@ class RighteousFuryEffect extends OneShotEffect {
                 }
             }
             if (destroyedCreature > 0) {
-                game.getState().processAction(game);
+                game.processAction();
                 new GainLifeEffect(destroyedCreature * 2).apply(game, source);
             }
             return true;

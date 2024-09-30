@@ -27,7 +27,7 @@ public final class KalastriaHealer extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // <i>Rally</i> &mdash; Whenever Kalastria Healer or another Ally enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.
+        // <i>Rally</i> &mdash; Whenever Kalastria Healer or another Ally you control enters, each opponent loses 1 life and you gain 1 life.
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(new LoseLifeOpponentsEffect(1), false);
         Effect effect = new GainLifeEffect(1);
         effect.setText("and you gain 1 life");

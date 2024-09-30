@@ -204,6 +204,10 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean canPlotFromTopOfLibrary();
 
+    void setDrawsFromBottom(boolean drawsFromBottom);
+
+    boolean isDrawsFromBottom();
+
     void setDrawsOnOpponentsTurn(boolean drawsOnOpponentsTurn);
 
     boolean isDrawsOnOpponentsTurn();
@@ -277,6 +281,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void idleTimeout(Game game);
 
+    // TODO: research usage of !hasLeft() && !hasLost() replace it by isInGame() if possible
     boolean hasLeft();
 
     /**
@@ -296,7 +301,11 @@ public interface Player extends MageItem, Copyable<Player> {
 
     ManaPool getManaPool();
 
-    Set<UUID> getInRange();
+    /**
+     * Is checking player in range of current player.
+     * Warning, range list updates on start of the turn due rules.
+     */
+    boolean hasPlayerInRange(UUID checkingPlayerId);
 
     boolean isTopCardRevealed();
 
@@ -402,25 +411,21 @@ public interface Player extends MageItem, Copyable<Player> {
     void shuffleLibrary(Ability source, Game game);
 
     /**
-     * Draw cards. If you call it in replace events then use method with event.appliedEffects param instead.
-     * Returns 0 if replacement effect triggers on card draw.
+     * Draw cards. If you call it in replace events then use method with event param instead (for appliedEffects)
      *
-     * @param num
+     * @param num cards to draw
      * @param source can be null for game default draws (non effects, example: start of the turn)
-     * @param game
-     * @return
+     * @return number of cards drawn, including as a result of replacement effects
      */
     int drawCards(int num, Ability source, Game game);
 
     /**
      * Draw cards with applied effects, for replaceEvent
-     * Returns 0 if replacement effect triggers on card draw.
      *
-     * @param num
+     * @param num cards to draw
      * @param source can be null for game default draws (non effects, example: start of the turn)
-     * @param game
      * @param event  original draw event in replacement code
-     * @return
+     * @return number of cards drawn, including as a result of replacement effects
      */
     int drawCards(int num, Ability source, Game game, GameEvent event);
 
@@ -726,17 +731,13 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean shuffleCardsToLibrary(Card card, Game game, Ability source);
 
     // set the value for X mana spells and abilities
-    default int announceXMana(int min, int max, String message, Game game, Ability ability) {
-        return announceXMana(min, max, 1, message, game, ability);
-    }
-
-    int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability);
+    int announceXMana(int min, int max, String message, Game game, Ability ability);
 
     // set the value for non mana X costs
     int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost);
 
-    // TODO: rework choose replacement effects to use array, not map (it'a random order now)
-    int chooseReplacementEffect(Map<String, String> abilityMap, Game game);
+    // TODO: rework to use pair's list of effect + ability instead string's map
+    int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game);
 
     TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game);
 
@@ -1250,4 +1251,10 @@ public interface Player extends MageItem, Copyable<Player> {
     }
 
     public UserData getControllingPlayersUserData(Game game);
+
+    /**
+     * Some player implementations (TestPlayer, Simulated) uses facade structure with hidden player object,
+     * so that's method helps to find real player that used by a game (in most use cases it's a PlayerImpl)
+     */
+    Player getRealPlayer();
 }

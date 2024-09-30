@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -91,7 +91,7 @@ class StumpsquallHydraEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        int xValue = ManacostVariableValue.ETB.calculate(game, source, this);
+        int xValue = GetXValue.instance.calculate(game, source, this);
         if (player == null || xValue < 1 || game.getBattlefield().count(filter, player.getId(), source, game) < 1) {
             return false;
         }

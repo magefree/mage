@@ -135,7 +135,7 @@ public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
         // Undergrowth Champion {1}{G}{G}
         // Creature — Elemental
         // If damage would be dealt to Undergrowth Champion while it has a +1/+1 counter on it, prevent that damage and remove a +1/+1 counter from Undergrowth Champion.
-        // Landfall — Whenever a land enters the battlefield under your control, put a +1/+1 counter on Undergrowth Champion.
+        // Landfall — Whenever a land you control enters, put a +1/+1 counter on Undergrowth Champion.
         // 2/2
         addCard(Zone.BATTLEFIELD, playerA, "Undergrowth Champion");
         addCard(Zone.HAND, playerA, "Plains");

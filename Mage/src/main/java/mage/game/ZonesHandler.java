@@ -58,14 +58,19 @@ public final class ZonesHandler {
     }
 
     public static List<ZoneChangeInfo> moveCards(List<ZoneChangeInfo> zoneChangeInfos, Ability source, Game game) {
-        // Handle Unmelded Meld Cards
+        // handle unmelded meld cards (if something moved a melded card to non-battlefield then parts must be moved too)
         for (ListIterator<ZoneChangeInfo> itr = zoneChangeInfos.listIterator(); itr.hasNext(); ) {
             ZoneChangeInfo info = itr.next();
+            if (info.event.getToZone().equals(Zone.BATTLEFIELD)) {
+                continue;
+            }
             MeldCard card = game.getMeldCard(info.event.getTargetId());
             // Copies should be handled as normal cards.
             if (card != null && !card.isMelded(game) && !card.isCopy()) {
+                // TODO: WTF, never worked code here. Need research possible typo: !card.isMelded(game) -> card.isMelded(game)
                 ZoneChangeInfo.Unmelded unmelded = new ZoneChangeInfo.Unmelded(info, game);
-                if (unmelded.subInfo.isEmpty()) {
+                if (unmelded.additionalMoves.isEmpty()) {
+                    // already moved halves somehow
                     itr.remove();
                 } else {
                     itr.set(unmelded);
@@ -123,9 +128,9 @@ public final class ZonesHandler {
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
             Zone toZone = null;
-            for (ZoneChangeInfo subInfo : unmelded.subInfo) {
-                toZone = subInfo.event.getToZone();
-                placeInDestinationZone(subInfo, createOrder, source, game);
+            for (ZoneChangeInfo additionalMove : unmelded.additionalMoves) {
+                toZone = additionalMove.event.getToZone();
+                placeInDestinationZone(additionalMove, createOrder, source, game);
             }
             // We arbitrarily prefer the bottom half card. This should never be relevant.
             if (toZone != null) {
@@ -303,21 +308,21 @@ public final class ZonesHandler {
         if (info instanceof ZoneChangeInfo.Unmelded) {
             ZoneChangeInfo.Unmelded unmelded = (ZoneChangeInfo.Unmelded) info;
             MeldCard meld = game.getMeldCard(event.getTargetId());
-            for (Iterator<ZoneChangeInfo> itr = unmelded.subInfo.iterator(); itr.hasNext(); ) {
-                ZoneChangeInfo subInfo = itr.next();
-                if (!maybeRemoveFromSourceZone(subInfo, game, source)) {
+            for (Iterator<ZoneChangeInfo> itr = unmelded.additionalMoves.iterator(); itr.hasNext(); ) {
+                ZoneChangeInfo additionalMove = itr.next();
+                if (!maybeRemoveFromSourceZone(additionalMove, game, source)) {
                     itr.remove();
-                } else if (Objects.equals(subInfo.event.getTargetId(), meld.getTopHalfCard().getId())) {
+                } else if (Objects.equals(additionalMove.event.getTargetId(), meld.getTopHalfCard().getId())) {
                     meld.setTopLastZoneChangeCounter(meld.getTopHalfCard().getZoneChangeCounter(game));
-                } else if (Objects.equals(subInfo.event.getTargetId(), meld.getBottomHalfCard().getId())) {
+                } else if (Objects.equals(additionalMove.event.getTargetId(), meld.getBottomHalfCard().getId())) {
                     meld.setBottomLastZoneChangeCounter(meld.getBottomHalfCard().getZoneChangeCounter(game));
                 }
             }
-            if (unmelded.subInfo.isEmpty()) {
+            if (unmelded.additionalMoves.isEmpty()) {
                 return false;
             }
             // We arbitrarily prefer the bottom half card. This should never be relevant.
-            meld.updateZoneChangeCounter(game, unmelded.subInfo.get(unmelded.subInfo.size() - 1).event);
+            meld.updateZoneChangeCounter(game, unmelded.additionalMoves.get(unmelded.additionalMoves.size() - 1).event);
             return true;
         }
 

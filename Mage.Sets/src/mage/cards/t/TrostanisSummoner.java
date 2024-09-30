@@ -3,7 +3,6 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -29,10 +28,7 @@ public final class TrostanisSummoner extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Trostani's Summoner enters the battlefield, create a 2/2 white Knight creature token with vigilance, a 3/3 green Centaur creature token, and a 4/4 green Rhino creature token with trample.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightToken()));
-        ability.addEffect(new CreateTokenEffect(new CentaurToken()).setText(", a 3/3 green Centaur creature token"));
-        ability.addEffect(new CreateTokenEffect(new RhinoToken()).setText(", and a 4/4 green Rhino creature token with trample"));
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new KnightToken()).withAdditionalTokens(new CentaurToken(), new RhinoToken())));
 
     }
 

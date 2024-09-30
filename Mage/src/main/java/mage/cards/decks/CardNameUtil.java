@@ -20,6 +20,7 @@ public class CardNameUtil {
                 .replace("û", "u")
                 .replace("í", "i")
                 .replace("ï", "i")
+                .replace("î", "i")
                 .replace("â", "a")
                 .replace("á", "a")
                 .replace("à", "a")
@@ -32,6 +33,7 @@ public class CardNameUtil {
                 .replace("ü", "u")
                 .replace("É", "E")
                 .replace("ñ", "n")
+                .replace("꞉", "")
                 .replace("®", "")
                 .replace("—", "");
     }

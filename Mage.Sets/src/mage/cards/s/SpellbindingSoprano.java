@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class SpellbindingSoprano extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("instant and sorcery spells");
+    private static final FilterCard filter = new FilterCard("instant and sorcery spells you cast this turn");
 
     static {
         filter.add(Predicates.or(
@@ -38,8 +38,7 @@ public final class SpellbindingSoprano extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Spellbinding Soprano attacks, instant and sorcery spells you cast this turn cost {1} less to cast.
-        this.addAbility(new AttacksTriggeredAbility(new SpellsCostReductionControllerEffect(filter, 1).setDuration(Duration.EndOfTurn)
-                .setText("instant and sorcery spells you cast this turn cost {1} less to cast")));
+        this.addAbility(new AttacksTriggeredAbility(new SpellsCostReductionControllerEffect(filter, 1).setDuration(Duration.EndOfTurn)));
 
         // Encore {3}{R}
         this.addAbility(new EncoreAbility(new ManaCostsImpl<>("{3}{R}")));

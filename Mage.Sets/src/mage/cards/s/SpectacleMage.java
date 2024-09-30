@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class SpectacleMage extends CardImpl {
 
-    private static final FilterCard filter = new FilterInstantOrSorceryCard();
+    private static final FilterCard filter = new FilterInstantOrSorceryCard("instant and sorcery spells you cast with mana value 5 or greater");
 
     static {
         filter.add(new ManaValuePredicate(ComparisonType.MORE_THAN, 4));
@@ -38,8 +38,7 @@ public final class SpectacleMage extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Instant and sorcery spells you cast with mana value 5 or greater cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)
-                .setText("instant and sorcery spells you cast with mana value 5 or greater cost {1} less to cast")));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     private SpectacleMage(final SpectacleMage card) {

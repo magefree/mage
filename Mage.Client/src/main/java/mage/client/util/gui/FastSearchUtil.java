@@ -36,10 +36,9 @@ public class FastSearchUtil {
         DefaultComboBoxModel comboModel = (DefaultComboBoxModel) combo.getModel();
         Map<String, String> choiceItems = new HashMap<>(comboModel.getSize());
         Map<String, Integer> choiceSorting = new HashMap<>(comboModel.getSize());
-        String item;
 
         for (int i = 0; i < comboModel.getSize(); i++) {
-            item = comboModel.getElementAt(i).toString();
+            String item = comboModel.getElementAt(i).toString();
             choiceItems.put(item, item);
             choiceSorting.put(item, i); // need so sorting
         }
@@ -55,17 +54,18 @@ public class FastSearchUtil {
         // ask for new value
         PickChoiceDialog dlg = new PickChoiceDialog();
         dlg.setWindowSize(windowWidth, windowHeight);
-        dlg.showDialog(choice, needSelectValue);
-        if (choice.isChosen()) {
-            item = choice.getChoiceKey();
+        dlg.showDialog(choice, needSelectValue, () -> {
+            if (choice.isChosen()) {
+                String item = choice.getChoiceKey();
 
-            // compatible select for object's models (use setSelectedIndex instead setSelectedObject)
-            for (int i = 0; i < comboModel.getSize(); i++) {
-                if (comboModel.getElementAt(i).toString().equals(item)) {
-                    combo.setSelectedIndex(i);
+                // compatible select for object's models (use setSelectedIndex instead setSelectedObject)
+                for (int i = 0; i < comboModel.getSize(); i++) {
+                    if (comboModel.getElementAt(i).toString().equals(item)) {
+                        combo.setSelectedIndex(i);
+                    }
                 }
             }
-        }
+        });
     }
 
     /**
@@ -73,8 +73,9 @@ public class FastSearchUtil {
      *
      * @param combo         CheckBoxList control with default data model
      * @param chooseMessage caption message for dialog
+     * @param additionalCallbackOnDone will be called after choice done
      */
-    public static void showFastSearchForStringComboBox(CheckBoxList combo, String chooseMessage) {
+    public static void showFastSearchForStringComboBox(CheckBoxList combo, String chooseMessage, PickCheckBoxDialog.PickCheckBoxCallback additionalCallbackOnDone) {
         // fast search/choice dialog for string combobox
 
         mage.choices.Choice choice = new ChoiceImpl(false);
@@ -83,10 +84,9 @@ public class FastSearchUtil {
         DefaultListModel comboModel = (DefaultListModel) combo.getModel();
         Map<String, String> choiceItems = new HashMap<>(comboModel.getSize());
         Map<String, Integer> choiceSorting = new HashMap<>(comboModel.getSize());
-        String item;
 
         for (int i = 0; i < comboModel.size(); i++) {
-            item = comboModel.getElementAt(i).toString();
+            String item = comboModel.getElementAt(i).toString();
             choiceItems.put(item, item);
             choiceSorting.put(item, i); // need so sorting
         }
@@ -105,16 +105,18 @@ public class FastSearchUtil {
         PickCheckBoxDialog dlg = new PickCheckBoxDialog(combo);
 
         dlg.setWindowSize(300, 500);
-        dlg.showDialog(choice, needSelectValue);
-        if (choice.isChosen()) {
-            item = choice.getChoiceKey();
+        dlg.showDialog(choice, needSelectValue, () -> {
+            if (choice.isChosen()) {
+                String item = choice.getChoiceKey();
 
-            // compatible select for object's models (use setSelectedIndex instead setSelectedObject)
-            for (int i = 0; i < comboModel.getSize(); i++) {
-                if (comboModel.getElementAt(i).toString().equals(item)) {
-                    combo.setSelectedIndex(i);
+                // compatible select for object's models (use setSelectedIndex instead setSelectedObject)
+                for (int i = 0; i < comboModel.getSize(); i++) {
+                    if (comboModel.getElementAt(i).toString().equals(item)) {
+                        combo.setSelectedIndex(i);
+                    }
                 }
             }
-        }
+            additionalCallbackOnDone.onChoiceDone();
+        });
     }
 }

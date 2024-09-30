@@ -1,7 +1,7 @@
 package mage.cards.h;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.AftermathAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -32,13 +32,13 @@ public final class HeavenEarth extends SplitCard {
 
         // Falling
         // Falling deals X damage to each creature with flying.
-        getLeftHalfCard().getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, filterFlying));
+        getLeftHalfCard().getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, filterFlying));
 
         // to
         // Earth
         // Earth deals X damage to each creature without flying.
         getRightHalfCard().addAbility(new AftermathAbility().setRuleAtTheTop(true));
-        getRightHalfCard().getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, filterWithouFlying));
+        getRightHalfCard().getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, filterWithouFlying));
     }
 
     private HeavenEarth(final HeavenEarth card) {

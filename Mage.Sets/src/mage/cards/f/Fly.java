@@ -6,6 +6,7 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.constants.AttachmentType;
 import mage.constants.SubType;
@@ -43,6 +44,7 @@ public final class Fly extends CardImpl {
                 new DealsCombatDamageToAPlayerTriggeredAbility(new VentureIntoTheDungeonEffect(), false),
                 AttachmentType.AURA).setText("and \"Whenever this creature deals combat damage to a player, venture into the dungeon.\"")
         );
+        ability.addHint(CurrentDungeonHint.instance);
         this.addAbility(ability);
     }
 

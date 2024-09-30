@@ -61,6 +61,7 @@ public enum MageIdentifier {
     HelbruteAlternateCast,
     MaestrosAscendencyAlternateCast,
     NashiMoonSagesScionAlternateCast,
+    OsteomancerAdeptAlternateCast,
     RafinnesGuidanceAlternateCast,
     RonaSheoldredsFaithfulAlternateCast,
     ScourgeOfNelTothAlternateCast,
@@ -69,7 +70,12 @@ public enum MageIdentifier {
     XandersPactAlternateCast,
     TheTombOfAclazotzWatcher,
     MeTheImmortalAlternateCast,
-    WithoutPayingManaCostAlternateCast;
+    WithoutPayingManaCostAlternateCast,
+    AlurenAlternateCast,
+    OfferingAlternateCast,
+    TheRuinousPowersAlternateCast,
+    FiresOfMountDoomAlternateCast,
+    PrimalPrayersAlternateCast;
 
     /**
      * Additional text if there is need to differentiate two very similar effects

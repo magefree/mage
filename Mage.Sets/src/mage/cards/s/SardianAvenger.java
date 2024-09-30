@@ -9,6 +9,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -54,7 +55,7 @@ public final class SardianAvenger extends CardImpl {
         // Whenever Sardian Avenger attacks, it gets +X/+0 until end of turn, where X is the number of artifacts your opponents control.
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
                 xValue, StaticValue.get(0), Duration.EndOfTurn, "it"
-        )));
+        )).addHint(new ValueHint("Artifacts your opponents control", xValue)));
 
         // Whenever an artifact an opponent controls is put into a graveyard from the battlefield, Sardian Avenger deals 1 damage to that player.
         this.addAbility(new DiesCreatureTriggeredAbility(

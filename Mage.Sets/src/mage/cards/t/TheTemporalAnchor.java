@@ -34,7 +34,7 @@ public final class TheTemporalAnchor extends CardImpl {
 
         // At the beginning of your upkeep, scry 2.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ScryEffect(2), TargetController.YOU, false
+                new ScryEffect(2, false), TargetController.YOU, false
         ));
 
         // Whenever you choose to put one or more cards on the bottom of your library while scrying, exile that many cards from the bottom of your library.

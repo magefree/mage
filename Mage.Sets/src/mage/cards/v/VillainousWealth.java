@@ -65,14 +65,14 @@ class VillainousWealthEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (controller == null || opponent == null || xValue < 1) {
             return false;
         }
         Cards cards = new CardsImpl(opponent.getLibrary().getTopCards(game, xValue));
         opponent.moveCards(cards, Zone.EXILED, source, game);
         FilterCard filter = new FilterCard();
-        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, source.getManaCostsToPay().getX() + 1));
+        filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, CardUtil.getSourceCostsTag(game, source, "X", 0) + 1));
         CardUtil.castMultipleWithAttributeForFree(controller, source, game, cards, filter);
         return true;
     }

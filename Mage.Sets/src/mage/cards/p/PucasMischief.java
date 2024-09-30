@@ -55,7 +55,7 @@ class TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent extends
         super();
         this.filter = this.filter.copy();
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        setTargetName("nonland permanent you control");
+        withTargetName("nonland permanent you control");
     }
 
     private TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent(final TargetControlledPermanentWithCMCGreaterOrLessThanOpponentPermanent target) {
@@ -91,7 +91,7 @@ class PucasMischiefSecondTarget extends TargetPermanent {
         this.filter = this.filter.copy();
         filter.add(TargetController.OPPONENT.getControllerPredicate());
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
-        setTargetName("permanent an opponent controls with an equal or lesser mana value");
+        withTargetName("permanent an opponent controls with an equal or lesser mana value");
     }
 
     private PucasMischiefSecondTarget(final PucasMischiefSecondTarget target) {

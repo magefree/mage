@@ -15,6 +15,7 @@ import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -68,7 +69,7 @@ class MultipleChoiceEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (xValue == 1 || xValue >= 4) {
             controller.scry(1, source, game);
             controller.drawCards(1, source, game);

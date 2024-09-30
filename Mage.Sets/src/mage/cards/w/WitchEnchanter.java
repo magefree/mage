@@ -51,10 +51,10 @@ public final class WitchEnchanter extends ModalDoubleFacedCard {
         // Witch-Blessed Meadow
         // Land
 
-        // As Witch-Blessed Meadow enters the battlefield, you may pay 3 life. If you don't, it enters the battlefield tapped.
+        // As Witch-Blessed Meadow enters the battlefield, you may pay 3 life. If you don't, it enters tapped.
         this.getRightHalfCard().addAbility(new AsEntersBattlefieldAbility(
                 new TapSourceUnlessPaysEffect(new PayLifeCost(3)),
-                "you may pay 3 life. If you don't, it enters the battlefield tapped"
+                "you may pay 3 life. If you don't, it enters tapped"
         ));
 
         // {T}: Add {W}.

@@ -45,7 +45,7 @@ public final class LagrellaTheMagpie extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // When Lagrella, the Magpie enters the battlefield, exile any number of other target creatures controlled by different players until Lagrella leaves the battlefield. When an exiled card enters the battlefield under your control this way, put two +1/+1 counters on it.
+        // When Lagrella, the Magpie enters the battlefield, exile any number of other target creatures controlled by different players until Lagrella leaves the battlefield. When an exiled card you control enters this way, put two +1/+1 counters on it.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LagrellaTheMagpieEffect(), false);
         ability.addTarget(new LagrellaTheMagpieTarget());
         this.addAbility(ability);
@@ -188,6 +188,6 @@ class LagrellaTheMagpieTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When an exiled card enters the battlefield under your control this way, put two +1/+1 counters on it.";
+        return "When an exiled card you control enters this way, put two +1/+1 counters on it.";
     }
 }

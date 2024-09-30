@@ -27,7 +27,7 @@ public final class WailOfTheForgotten extends CardImpl {
         this.getSpellAbility().getModes().setChooseText(
                 "choose one. If there are eight or more permanent cards in your graveyard as you cast this spell, choose one or more instead."
         );
-        this.getSpellAbility().getModes().setMoreCondition(DescendCondition.EIGHT);
+        this.getSpellAbility().getModes().setMoreCondition(3, DescendCondition.EIGHT);
         this.getSpellAbility().setAbilityWord(AbilityWord.DESCEND_8);
 
         // * Return target nonland permanent to its owner's hand.

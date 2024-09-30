@@ -26,7 +26,7 @@ public class MirrorworksTest extends CardTestPlayerBase {
         // {T}: Add one mana of any color.
         addCard(Zone.HAND, playerA, "Mox Diamond", 1); // Artifact {0}
 
-        // Whenever another nontoken artifact enters the battlefield under your control, you may pay {2}.
+        // Whenever another nontoken artifact you control enters, you may pay {2}.
         // If you do, create a token that's a copy of that artifact.
         addCard(Zone.BATTLEFIELD, playerA, "Mirrorworks", 1); // Artifact {5}
 
@@ -51,7 +51,7 @@ public class MirrorworksTest extends CardTestPlayerBase {
         // {T}: Add one mana of any color.
         addCard(Zone.HAND, playerA, "Mox Diamond", 1); // Artifact {0}
 
-        // Whenever another nontoken artifact enters the battlefield under your control, you may pay {2}.
+        // Whenever another nontoken artifact you control enters, you may pay {2}.
         // If you do, create a token that's a copy of that artifact.
         addCard(Zone.BATTLEFIELD, playerA, "Mirrorworks", 1); // Artifact {5}
 

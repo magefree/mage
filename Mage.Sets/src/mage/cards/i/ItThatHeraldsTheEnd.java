@@ -3,7 +3,7 @@ package mage.cards.i;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -40,7 +40,7 @@ public final class ItThatHeraldsTheEnd extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Colorless spells you cast with mana value 7 or greater cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionAllEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Other colorless creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(

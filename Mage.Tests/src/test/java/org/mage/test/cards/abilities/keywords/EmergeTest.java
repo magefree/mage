@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.abilities.keywords;
 
 import mage.constants.PhaseStep;
@@ -35,6 +34,29 @@ public class EmergeTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
         assertPermanentCount(playerA, "Wretched Gryff", 1);
+    }
+
+    @Test
+    public void testGainEmerge() {
+        String herigast = "Herigast, Erupting Nullkite"; // {9} 6/6 Flying
+        // Each creature spell you cast has emerge. The emerge cost is equal to its mana cost.
+        String gorger = "Vastwood Gorger"; // 5G 5/6
+        String elemental = "Air Elemental"; // 3UU 4/4 Flying
+
+        addCard(Zone.BATTLEFIELD, playerA, herigast);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.BATTLEFIELD, playerA, elemental);
+        addCard(Zone.HAND, playerA, gorger);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Vastwood Gorger with emerge");
+        setChoice(playerA, elemental);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertGraveyardCount(playerA, elemental, 1);
+        assertPermanentCount(playerA, gorger, 1);
     }
 
 }

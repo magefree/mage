@@ -29,14 +29,18 @@ public class DeckImportClipboardDialog extends MageDialog {
                     "// Your current clipboard:\n" +
                     "\n";
 
-    private String tmpPath;
+    private DeckImportClipboardCallback callback = null;
 
     public DeckImportClipboardDialog() {
         initComponents();
     }
 
-    public void showDialog() {
-        this.tmpPath = "";
+    public interface DeckImportClipboardCallback {
+        void onImportDone(String tempDeckPath);
+    }
+
+    public void showDialog(DeckImportClipboardCallback callback) {
+        this.callback = callback;
         onRefreshClipboard();
 
         this.setModal(true);
@@ -45,11 +49,7 @@ public class DeckImportClipboardDialog extends MageDialog {
 
         // windows settings
         MageFrame.getDesktop().remove(this);
-        if (this.isModal()) {
-            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-        } else {
-            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-        }
+        MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         this.makeWindowCentered();
 
         // Close on "ESC"
@@ -70,26 +70,29 @@ public class DeckImportClipboardDialog extends MageDialog {
     private void onOK() {
         String decklist = editData.getText();
         decklist = decklist.replace(FORMAT_TEXT, "");
+
+        String tempDeckPath;
         // This dialog also accepts a paste in .mtga format
         if (decklist.startsWith("Deck\n")) {  // An .mtga list always starts with the first line being "Deck". This kind of paste is processed as .mtga
-            tmpPath = DeckUtil.writeTextToTempFile("cbimportdeck", ".mtga", decklist);
-        } else {  // If the paste is not .mtga format, it's processed as plaintext
-            tmpPath = DeckUtil.writeTextToTempFile(decklist);
+            tempDeckPath = DeckUtil.writeTextToTempFile("cbimportdeck", ".mtga", decklist);
+        } else {
+            // If the paste is not .mtga format, it's processed as plaintext
+            tempDeckPath = DeckUtil.writeTextToTempFile(decklist);
         }
-        this.removeDialog();
+        if (this.callback != null) {
+            callback.onImportDone(tempDeckPath);
+        }
+
+        onCancel();
     }
 
     private void onCancel() {
-        this.removeDialog();
+        this.removeDialog(); // TODO: combine hideDialog and removeDialog logic for all usages in all dialogs
     }
 
     private void onRefreshClipboard() {
         editData.setText(FORMAT_TEXT + getClipboardStringData().orElse(""));
         editData.setCaretPosition(FORMAT_TEXT.length());
-    }
-
-    public String getTmpPath() {
-        return tmpPath;
     }
 
     /**

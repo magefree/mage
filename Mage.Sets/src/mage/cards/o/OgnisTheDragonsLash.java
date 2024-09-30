@@ -31,7 +31,7 @@ public final class OgnisTheDragonsLash extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B/R}{R}{R/G}");
 
         this.supertype.add(SuperType.LEGENDARY);
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);

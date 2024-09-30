@@ -24,6 +24,7 @@ public class ColorPane extends MageEditorPane {
      * @param color
      */
     public void setExtBackgroundColor(Color color) {
+        // TODO: research, maybe no needs in good opaque + background settings
         setBackground(new Color(0, 0, 0, 0));
         JPanel jPanel = new JPanel();
         jPanel.setBackground(color);
@@ -32,6 +33,7 @@ public class ColorPane extends MageEditorPane {
     }
 
     public void setExtBackgroundColor(BackgroundPainter backgroundPainter) {
+        // TODO: research, maybe no needs in good opaque + background settings
         setBackground(new Color(0, 0, 0, 0));
         JXPanel jPanel = new JXPanel();
         jPanel.setBackgroundPainter(backgroundPainter);
@@ -46,6 +48,7 @@ public class ColorPane extends MageEditorPane {
      */
     @Override
     public void paintChildren(Graphics g) {
+        // TODO: research, maybe no needs in good opaque + background settings
         super.paintComponent(g);
     }
 
@@ -56,6 +59,7 @@ public class ColorPane extends MageEditorPane {
      */
     @Override
     public void paintComponent(Graphics g) {
+        // TODO: research, maybe no needs in good opaque + background settings
         super.paintChildren(g);
     }
 }

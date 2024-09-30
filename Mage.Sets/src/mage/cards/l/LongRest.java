@@ -1,9 +1,5 @@
 package mage.cards.l;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -18,6 +14,11 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.util.CardUtil;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -89,7 +90,7 @@ enum LongRestAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        ability.addTarget(new LongRestTarget(ability.getManaCostsToPay().getX()));
+        ability.addTarget(new LongRestTarget(CardUtil.getSourceCostsTag(game, ability, "X", 0)));
     }
 }
 

@@ -23,7 +23,7 @@ public class OpalPalaceTest extends CardTestCommanderDuelBase {
 
         // {T}: Add {C}.
         // {1}, {T}: Add one mana of any color in your commander's color identity.
-        // If you spend this mana to cast your commander, it enters the battlefield with a number of +1/+1 counters on it
+        // If you spend this mana to cast your commander, it enters with a number of +1/+1 counters on it
         // equal to the number of times it's been cast from the command zone this game.
         addCard(Zone.BATTLEFIELD, playerA, "Opal Palace", 1);
 

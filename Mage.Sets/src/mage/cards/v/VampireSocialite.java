@@ -53,7 +53,7 @@ public final class VampireSocialite extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)),
                 OpponentsLostLifeCondition.instance,
-                "When {this} enters the battlefield, if an opponent lost life this turn, put a +1/+1 counter on each other Vampire you control."
+                "When {this} enters, if an opponent lost life this turn, put a +1/+1 counter on each other Vampire you control."
         ));
 
         // As long as an opponent lost life this turn, each other Vampire you control enters the battlefield with an additional +1/+1 counter on it.

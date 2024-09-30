@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.PreventDamageToSourceEffect;
@@ -41,7 +41,7 @@ public final class TorrentOfLava extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{R}");
 
         // Torrent of Lava deals X damage to each creature without flying.
-        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, filter));
+        this.getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, filter));
 
         // As long as Torrent of Lava is on the stack, each creature has
         // "{tap}: Prevent the next 1 damage that would be dealt to this creature by Torrent of Lava this turn."

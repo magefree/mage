@@ -1,6 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.ApprovingObject;
+import mage.MageIdentifier;
 import mage.MageObjectReference;
 import mage.Mana;
 import mage.abilities.SpellAbility;
@@ -20,6 +21,7 @@ import mage.players.Player;
 import mage.target.common.TargetSacrifice;
 import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -101,7 +103,7 @@ public class EmergeAbility extends SpellAbility {
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
         Player controller = game.getPlayer(this.getControllerId());
         if (controller != null) {
             TargetSacrifice target = new TargetSacrifice(filter);
@@ -110,7 +112,8 @@ public class EmergeAbility extends SpellAbility {
                 Permanent creature = game.getPermanent(target.getFirstTarget());
                 if (creature != null) {
                     CardUtil.reduceCost(this, creature.getManaValue());
-                    if (super.activate(game, false)) {
+                    boolean reducedToZero = this.getManaCostsToPay().isEmpty();
+                    if (super.activate(game, allowedIdentifiers, reducedToZero)) {
                         MageObjectReference mor = new MageObjectReference(creature, game);
                         if (creature.sacrifice(this, game)) {
                             this.setCostsTag(EMERGE_ACTIVATION_CREATURE_REFERENCE, mor); //Can access with LKI afterwards

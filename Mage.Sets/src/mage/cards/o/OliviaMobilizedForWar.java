@@ -34,7 +34,7 @@ public final class OliviaMobilizedForWar extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another creature enters the battlefield under your control, you may discard a card. If you do, put a +1/+1 counter on that creature,
+        // Whenever another creature you control enters, you may discard a card. If you do, put a +1/+1 counter on that creature,
         // it gains haste until end of turn, and it becomes a Vampire in addition to its other types.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
         effect.setText("put a +1/+1 counter on that creature");

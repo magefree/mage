@@ -2,7 +2,7 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -28,7 +28,7 @@ public final class OdricsOutrider extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever Odric's Outrider or another creature you control dies, put a +1/+1 counter on target creature you control.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 false, StaticFilters.FILTER_CONTROLLED_CREATURE
         );

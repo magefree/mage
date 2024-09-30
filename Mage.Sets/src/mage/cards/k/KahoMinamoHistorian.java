@@ -132,7 +132,7 @@ class KahoMinamoHistorianCastEffect extends OneShotEffect {
         }
 
         FilterCard filter = new FilterCard();
-        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, source.getManaCostsToPay().getX()));
+        filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, CardUtil.getSourceCostsTag(game, source, "X", 0)));
         return CardUtil.castSpellWithAttributesForFree(controller, source, game, cards, filter);
     }
 }

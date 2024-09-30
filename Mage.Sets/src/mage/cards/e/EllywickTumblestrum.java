@@ -5,6 +5,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.StaticFilters;
@@ -29,7 +30,8 @@ public final class EllywickTumblestrum extends CardImpl {
         this.setStartingLoyalty(4);
 
         // +1: Venture into the dungeon.
-        this.addAbility(new LoyaltyAbility(new VentureIntoTheDungeonEffect(), 1));
+        this.addAbility(new LoyaltyAbility(new VentureIntoTheDungeonEffect(), 1)
+                .addHint(CurrentDungeonHint.instance));
 
         // −2: Look at the top six cards of your library. You may reveal a creature card from among them and put it into your hand. If it's legendary, you gain 3 life. Put the rest on the bottom of your library in a random order.
         this.addAbility(new LoyaltyAbility(new EllywickTumblestrumEffect(), -2));

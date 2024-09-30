@@ -40,7 +40,7 @@ public final class ObyraDreamingDuelist extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another Faerie enters the battlefield under your control, each opponent loses 1 life.
+        // Whenever another Faerie you control enters, each opponent loses 1 life.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1),
                 filter, false);

@@ -1,7 +1,7 @@
 package mage.target.common;
 
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.PredicateCardAssignment;
+import mage.abilities.assignment.common.PredicateCardAssignment;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -45,7 +45,7 @@ public class TargetCardAndOrCard extends TargetCard {
     /**
      * a [firstType] card and/or a [secondType] card
      */
-    protected TargetCardAndOrCard(Predicate<? super Card> firstPredicate, Predicate<? super Card> secondPredicate, String filterText) {
+    public TargetCardAndOrCard(Predicate<? super Card> firstPredicate, Predicate<? super Card> secondPredicate, String filterText) {
         super(0, 2, Zone.ALL, makeFilter(firstPredicate, secondPredicate, filterText));
         this.assignment = new PredicateCardAssignment(firstPredicate, secondPredicate);
     }

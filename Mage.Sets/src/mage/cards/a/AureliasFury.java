@@ -4,7 +4,7 @@ package mage.cards.a;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -61,7 +61,7 @@ public final class AureliasFury extends CardImpl {
 
         // Aurelia's Fury deals X damage divided as you choose among any number of target creatures and/or players.
         // Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn.
-        DynamicValue xValue = ManacostVariableValue.REGULAR;
+        DynamicValue xValue = GetXValue.instance;
         this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
         this.getSpellAbility().addEffect(new AureliasFuryEffect());
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));

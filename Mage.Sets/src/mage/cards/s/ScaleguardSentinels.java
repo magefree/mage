@@ -32,7 +32,7 @@ public final class ScaleguardSentinels extends CardImpl {
         // Scaleguard Sentinels enters the battlefield with a +1/+1 counter on it if you revealed a Dragon card or controlled a Dragon as you cast Scaleguard Sentinels.
         this.addAbility(new EntersBattlefieldAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        RevealedOrControlledDragonCondition.instance, "{this} enters the battlefield " +
+                        RevealedOrControlledDragonCondition.instance, "{this} enters " +
                         "with a +1/+1 counter on it if you revealed a Dragon card " +
                         "or controlled a Dragon as you cast this spell.", ""
                 ), new DragonOnTheBattlefieldWhileSpellWasCastWatcher()
