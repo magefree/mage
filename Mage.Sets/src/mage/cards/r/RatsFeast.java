@@ -20,8 +20,8 @@ public final class RatsFeast extends CardImpl {
 
         // Exile X target cards from a single graveyard.
         this.getSpellAbility().addEffect(new ExileTargetEffect("Exile X target cards from a single graveyard"));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(1, 1, StaticFilters.FILTER_CARD_CARDS));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private RatsFeast(final RatsFeast card) {

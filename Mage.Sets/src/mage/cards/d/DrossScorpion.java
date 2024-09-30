@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -32,7 +32,7 @@ public final class DrossScorpion extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Dross Scorpion or another artifact creature dies, you may untap target artifact.
-        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(new UntapTargetEffect(), true, filter);
+        Ability ability = new DiesThisOrAnotherTriggeredAbility(new UntapTargetEffect(), true, filter);
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }

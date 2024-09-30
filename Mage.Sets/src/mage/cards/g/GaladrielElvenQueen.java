@@ -167,7 +167,7 @@ class GaladrielElvenQueenEffect extends OneShotEffect {
             game.temptWithTheRing(controller.getId());
 
             // make sure the new ringbearer has been chosen.
-            game.getState().processAction(game);
+            game.processAction();
             controller = game.getPlayer(source.getControllerId());
             if (controller == null) {
                 return false;

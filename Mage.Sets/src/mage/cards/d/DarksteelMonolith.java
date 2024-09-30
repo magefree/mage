@@ -96,22 +96,17 @@ class DarksteelMonolithAlternativeCost extends AlternativeCostSourceAbility {
     }
 
     @Override
-    public boolean askToActivateAlternativeCosts(Ability ability, Game game) {
-        Player controller = game.getPlayer(ability.getControllerId());
-        Permanent monolith = game.getPermanent(getSourceId());
-        if (controller != null
-                && monolith != null) {
-            if (controller.chooseUse(Outcome.Neutral, "Use "
-                    + monolith.getLogName() + " to pay the alternative cost?", ability, game)) {
-                wasActivated = super.askToActivateAlternativeCosts(ability, game);
-                if (wasActivated) {
-                    game.getState().setValue(monolith.getId().toString()
-                            + monolith.getZoneChangeCounter(game)
-                            + monolith.getTurnsOnBattlefield(), true);
-                }
-            }
+    public boolean activateAlternativeCosts(Ability ability, Game game) {
+        if (!super.activateAlternativeCosts(ability, game)) {
+            return false;
         }
-        return wasActivated;
+        Permanent monolith = game.getPermanent(getSourceId());
+        if (monolith != null) {
+            game.getState().setValue(monolith.getId().toString()
+                    + monolith.getZoneChangeCounter(game)
+                    + monolith.getTurnsOnBattlefield(), true);
+        }
+        return true;
     }
 }
 

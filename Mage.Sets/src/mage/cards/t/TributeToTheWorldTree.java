@@ -23,7 +23,7 @@ public final class TributeToTheWorldTree extends CardImpl {
     public TributeToTheWorldTree(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}{G}");
 
-        // Whenever a creature enters the battlefield under your control, draw a card if its power is 3 or greater. Otherwise, put two +1/+1 counters on it.
+        // Whenever a creature you control enters, draw a card if its power is 3 or greater. Otherwise, put two +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new TributeToTheWorldTreeEffect(), StaticFilters.FILTER_PERMANENT_A_CREATURE
         ));

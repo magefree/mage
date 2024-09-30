@@ -273,10 +273,13 @@ public class StretchIcon extends ImageIcon {
          * BEGIN CHANGES
          */
         BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_4BYTE_ABGR);
-        Graphics2D g2d = bi.createGraphics();
-        g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
-        g2d.drawImage(image, 0, 0, w, h, io == null ? c : io);
-        g2d.dispose();
+        Graphics2D g2 = bi.createGraphics();
+        try {
+            g2.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
+            g2.drawImage(image, 0, 0, w, h, io == null ? c : io);
+        } finally {
+            g2.dispose();
+        }
         /*
          * END CHANGES
          */

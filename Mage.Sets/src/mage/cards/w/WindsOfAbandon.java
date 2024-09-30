@@ -80,7 +80,7 @@ class WindsOfAbandonEffect extends OneShotEffect {
         if (!controller.moveCards(permanent, Zone.EXILED, source, game)) {
             return true;
         }
-        game.getState().processAction(game);
+        game.processAction();
         TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND);
         if (player.searchLibrary(target, source, game)) {
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
@@ -126,7 +126,7 @@ class WindsOfAbandonOverloadEffect extends OneShotEffect {
         if (!controller.moveCards(cards, Zone.EXILED, source, game)) {
             return true;
         }
-        game.getState().processAction(game);
+        game.processAction();
         for (Map.Entry<UUID, Integer> entry : playerAmount.entrySet()) {
             Player player = game.getPlayer(entry.getKey());
             if (player == null) {

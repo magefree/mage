@@ -1,9 +1,7 @@
 package mage.cards.s;
 
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.common.OneOpponentCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.TapSourceEffect;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
+import mage.abilities.condition.common.TwoOrMoreOpponentsCondition;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
@@ -21,16 +19,12 @@ public final class SpectatorSeating extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Spectator Seating enters the battlefield tapped unless you have two or more opponents.
-        this.addAbility(new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(
-                        new TapSourceEffect(),
-                        OneOpponentCondition.instance,
-                        "tapped unless you have two or more opponents"
-                ), "tapped unless you have two or more opponents"
-        ));
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(TwoOrMoreOpponentsCondition.instance));
 
-        // {T}: Add {R} or {W}.
+        // {T}: Add {R}.
         this.addAbility(new RedManaAbility());
+
+        // {T}: Add {W}.
         this.addAbility(new WhiteManaAbility());
     }
 

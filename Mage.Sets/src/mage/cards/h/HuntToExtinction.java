@@ -1,7 +1,7 @@
 
 package mage.cards.h;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -33,10 +33,10 @@ public final class HuntToExtinction extends CardImpl {
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent(0, 1));
 
         // Hunt to Extinction deals X damage to each creature. 
-        this.getSpellAbility().addEffect(new DamageAllEffect(ManacostVariableValue.REGULAR, new FilterCreaturePermanent()));
+        this.getSpellAbility().addEffect(new DamageAllEffect(GetXValue.instance, new FilterCreaturePermanent()));
 
         // Hunt to Exctinction deals an additional X damage to each creature with a bounty counter on it.
-        Effect effect = new DamageAllEffect(ManacostVariableValue.REGULAR, filter);
+        Effect effect = new DamageAllEffect(GetXValue.instance, filter);
         effect.setText("Hunt to Exctinction deals an additional X damage to each creature with a bounty counter on it");
         this.getSpellAbility().addEffect(effect);
 

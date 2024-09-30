@@ -2,7 +2,6 @@ package mage.server.game;
 
 import mage.MageException;
 import mage.abilities.Ability;
-import mage.abilities.common.PassAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
@@ -25,6 +24,8 @@ import mage.server.Main;
 import mage.server.User;
 import mage.server.managers.ManagerFactory;
 import mage.util.MultiAmountMessage;
+import mage.util.ThreadUtils;
+import mage.util.XmageThreadFactory;
 import mage.utils.StreamUtils;
 import mage.utils.timer.PriorityTimer;
 import mage.view.*;
@@ -53,11 +54,12 @@ public class GameController implements GameCallback {
     private final ExecutorService gameExecutor;
     private static final Logger logger = Logger.getLogger(GameController.class);
 
-    protected final ScheduledExecutorService joinWaitingExecutor = Executors.newSingleThreadScheduledExecutor();
+    private ScheduledExecutorService JOIN_WAITING_EXECUTOR = null;
 
-    private ScheduledFuture<?> futureTimeout;
+    private ScheduledFuture<?> responseIdleTimeoutFuture;
+    private UUID responseIdleTimeoutPlayerId;
     private final ManagerFactory managerFactory;
-    protected final ScheduledExecutorService timeoutIdleExecutor;
+    protected final ScheduledExecutorService responseIdleTimeoutExecutor;
 
     private final ConcurrentMap<UUID, GameSessionPlayer> gameSessions = new ConcurrentHashMap<>();
     private final ReadWriteLock gameSessionsLock = new ReentrantReadWriteLock();
@@ -74,7 +76,7 @@ public class GameController implements GameCallback {
     private final UUID tableId;
     private final UUID choosingPlayerId;
     private Future<?> gameFuture;
-    private boolean useTimeout = true;
+    private boolean useResponseIdleTimeout = true; // control currently active player (if no response for 600 seconds then concede him)
     private final GameOptions gameOptions;
 
     private UUID userRequestingRollback;
@@ -84,7 +86,7 @@ public class GameController implements GameCallback {
     public GameController(ManagerFactory managerFactory, Game game, ConcurrentMap<UUID, UUID> userPlayerMap, UUID tableId, UUID choosingPlayerId, GameOptions gameOptions) {
         this.managerFactory = managerFactory;
         gameExecutor = managerFactory.threadExecutor().getGameExecutor();
-        timeoutIdleExecutor = managerFactory.threadExecutor().getTimeoutIdleExecutor();
+        responseIdleTimeoutExecutor = managerFactory.threadExecutor().getTimeoutIdleExecutor();
         gameSessionId = UUID.randomUUID();
         this.userPlayerMap = userPlayerMap;
         chatId = managerFactory.chatManager().createChatSession("Game " + game.getId());
@@ -94,13 +96,12 @@ public class GameController implements GameCallback {
         this.tableId = tableId;
         this.choosingPlayerId = choosingPlayerId;
         this.gameOptions = gameOptions;
-        useTimeout = game.getPlayers().values().stream().allMatch(Player::isHuman);
+        this.useResponseIdleTimeout = game.getPlayers().values().stream().filter(Player::isHuman).count() > 1;
         init();
-
     }
 
     public void cleanUp() {
-        cancelTimeout();
+        stopResponseIdleTimeout();
         for (PriorityTimer priorityTimer : timers.values()) {
             priorityTimer.cancel();
         }
@@ -238,13 +239,21 @@ public class GameController implements GameCallback {
                     }
                 }
         );
-        joinWaitingExecutor.scheduleAtFixedRate(() -> {
+
+        // wait all players
+        if (JOIN_WAITING_EXECUTOR == null) {
+            JOIN_WAITING_EXECUTOR = Executors.newSingleThreadScheduledExecutor(
+                    new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_GAME_JOIN_WAITING + " " + game.getId())
+            );
+        }
+        JOIN_WAITING_EXECUTOR.scheduleAtFixedRate(() -> {
             try {
                 sendInfoAboutPlayersNotJoinedYetAndTryToFixIt();
             } catch (Exception ex) {
                 logger.fatal("Send info about player not joined yet:", ex);
             }
         }, GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS, GAME_TIMEOUTS_CHECK_JOINING_STATUS_EVERY_SECS, TimeUnit.SECONDS);
+
         checkJoinAndStart();
     }
 
@@ -341,13 +350,15 @@ public class GameController implements GameCallback {
 
             if (game.getState().getChoosingPlayerId() != null) {
                 // start timer to force player to choose starting player otherwise loosing by being idle
-                setupTimeout(game.getState().getChoosingPlayerId());
+                startResponseIdleTimeout(game.getState().getChoosingPlayerId());
             }
         }
     }
 
     private void sendInfoAboutPlayersNotJoinedYetAndTryToFixIt() {
-        // runs every 10 secs untill all players join
+        // TODO: need code and feature review - is it useful? 2024-06-23
+        // runs every 10 secs until all players join
+        // runs BEFORE game start, so it's safe to call player.leave here
         for (Player player : game.getPlayers().values()) {
             if (player.canRespond() && player.isHuman()) {
                 Optional<User> requestedUser = getUserByPlayerId(player.getId());
@@ -366,9 +377,14 @@ public class GameController implements GameCallback {
                             if (session != null) {
                                 problemPlayerFixes = "re-send start game event";
                                 logger.warn("Send forced game start event for player " + player.getName() + " in gameId: " + game.getId());
-                                user.ccGameStarted(session.getGameId(), player.getId());
-                                session.init();
-                                managerFactory.gameManager().sendPlayerString(session.getGameId(), user.getId(), "");
+                                Table table = managerFactory.tableManager().getTable(this.tableId);
+                                if (table != null) {
+                                    user.ccGameStarted(table.getId(), table.getParentTableId(), session.getGameId(), player.getId());
+                                    session.init();
+                                    managerFactory.gameManager().sendPlayerString(session.getGameId(), user.getId(), "");
+                                } else {
+                                    logger.error("Can't find table on fix and re-send start game event: " + this.tableId);
+                                }
                             } else {
                                 throw new IllegalStateException("Wrong code usage: session can't be null cause it created in forced joinGame already");
                                 //player.leave();
@@ -412,7 +428,7 @@ public class GameController implements GameCallback {
 
     private void checkJoinAndStart() {
         if (isAllJoined()) {
-            joinWaitingExecutor.shutdownNow();
+            JOIN_WAITING_EXECUTOR.shutdownNow();
             managerFactory.threadExecutor().getCallExecutor().execute(this::startGame);
         }
     }
@@ -723,9 +739,9 @@ public class GameController implements GameCallback {
 
         if (isSideboardOnly) {
             // sideboard data already sent in PlayerView, so no need to re-sent it TODO: re-sent deck instead?
-            user.ccViewSideboard(tableId, game.getId(), targetPlayerId);
+            user.ccViewSideboard(table.getId(), game.getId(), targetPlayerId);
         } else {
-            user.ccViewLimitedDeck(deckSource.getDeckForViewer(), tableId, requestsOpen, true);
+            user.ccViewLimitedDeck(deckSource.getDeckForViewer(), table.getId(), table.getParentTableId(), requestsOpen, true);
         }
     }
 
@@ -736,12 +752,12 @@ public class GameController implements GameCallback {
         }
     }
 
-    public void idleTimeout(UUID playerId) {
+    public void onResponseIdleTimeout(UUID playerId) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
             String sb = player.getLogName()
                     + " has timed out (player had priority and was not active for "
-                    + managerFactory.configSettings().getMaxSecondsIdle() + " seconds ) - Auto concede.";
+                    + getResponseIdleTimeoutSecs() + " seconds ) - Auto concede.";
             managerFactory.chatManager().broadcast(chatId, "", sb, MessageColor.BLACK, true, game, MessageType.STATUS, null);
             game.idleTimeout(playerId);
         }
@@ -1008,7 +1024,7 @@ public class GameController implements GameCallback {
         }
 
         if (gameSessions.containsKey(realPlayerController.getId())) {
-            setupTimeout(realPlayerController.getId());
+            startResponseIdleTimeout(realPlayerController.getId());
             command.execute(realPlayerController.getId());
         }
         // TODO: if watcher disconnects then game freezes with active timer, must be fix for such use case
@@ -1033,14 +1049,14 @@ public class GameController implements GameCallback {
             // then execute only your action
             if (game.getPriorityPlayerId() == null || game.getPriorityPlayerId().equals(playerId)) {
                 if (gameSessions.containsKey(playerId)) {
-                    cancelTimeout();
+                    stopResponseIdleTimeout();
                     command.execute(playerId);
                 }
             } else {
                 // otherwise execute the action under other player's control
                 for (UUID controlled : player.getPlayersUnderYourControl()) {
                     if (gameSessions.containsKey(controlled) && game.getPriorityPlayerId().equals(controlled)) {
-                        cancelTimeout();
+                        stopResponseIdleTimeout();
                         command.execute(controlled);
                     }
                 }
@@ -1053,23 +1069,29 @@ public class GameController implements GameCallback {
         }
     }
 
-    private void setupTimeout(final UUID playerId) {
-        if (!useTimeout) {
+    private void startResponseIdleTimeout(final UUID playerId) {
+        if (!useResponseIdleTimeout) {
             return;
         }
-        cancelTimeout();
-        futureTimeout = timeoutIdleExecutor.schedule(
-                () -> idleTimeout(playerId),
-                Main.isTestMode() ? 3600 : managerFactory.configSettings().getMaxSecondsIdle(),
+        stopResponseIdleTimeout();
+        responseIdleTimeoutPlayerId = playerId;
+        responseIdleTimeoutFuture = responseIdleTimeoutExecutor.schedule(
+                () -> onResponseIdleTimeout(playerId),
+                getResponseIdleTimeoutSecs(),
                 TimeUnit.SECONDS
         );
     }
 
-    private void cancelTimeout() {
+    private long getResponseIdleTimeoutSecs() {
+        return Main.isTestMode() ? 3600 : managerFactory.configSettings().getMaxSecondsIdle();
+    }
+
+    private void stopResponseIdleTimeout() {
         logger.debug("cancelTimeout");
-        if (futureTimeout != null) {
-            synchronized (futureTimeout) {
-                futureTimeout.cancel(false);
+        if (responseIdleTimeoutFuture != null) {
+            synchronized (responseIdleTimeoutFuture) {
+                responseIdleTimeoutFuture.cancel(false);
+                responseIdleTimeoutPlayerId = null;
             }
         }
     }
@@ -1124,6 +1146,7 @@ public class GameController implements GameCallback {
         // find actual timers before send data
         updatePriorityTimers();
 
+        // TODO: add data consistence check here: is game view is same for all game cycles?
         return gameSessions.get(playerId);
     }
 
@@ -1234,13 +1257,13 @@ public class GameController implements GameCallback {
         }
 
         sb.append("<br>Future Timeout:");
-        if (futureTimeout != null) {
+        if (responseIdleTimeoutFuture != null) {
             sb.append("Cancelled?=");
-            sb.append(futureTimeout.isCancelled());
+            sb.append(responseIdleTimeoutFuture.isCancelled());
             sb.append(",,,Done?=");
-            sb.append(futureTimeout.isDone());
+            sb.append(responseIdleTimeoutFuture.isDone());
             sb.append(",,,GetDelay?=");
-            sb.append((int) futureTimeout.getDelay(TimeUnit.SECONDS));
+            sb.append((int) responseIdleTimeoutFuture.getDelay(TimeUnit.SECONDS));
         } else {
             sb.append("Not using future Timeout!");
         }
@@ -1322,31 +1345,23 @@ public class GameController implements GameCallback {
         List<String> fixActions = new ArrayList<>(); // for logs info
 
         // fix active
-        fixedAlready = fixPlayer(game.getPlayer(state.getActivePlayerId()), state, "active", sb, fixActions, fixedAlready);
+        fixedAlready = fixPlayer(game.getPlayer(state.getActivePlayerId()), state, "active", sb, fixActions, fixedAlready, false);
 
         // fix lost choosing dialog
-        fixedAlready = fixPlayer(game.getPlayer(state.getChoosingPlayerId()), state, "choosing", sb, fixActions, fixedAlready);
+        fixedAlready = fixPlayer(game.getPlayer(state.getChoosingPlayerId()), state, "choosing", sb, fixActions, fixedAlready, false);
 
         // fix lost priority
-        fixedAlready = fixPlayer(game.getPlayer(state.getPriorityPlayerId()), state, "priority", sb, fixActions, fixedAlready);
+        fixedAlready = fixPlayer(game.getPlayer(state.getPriorityPlayerId()), state, "priority", sb, fixActions, fixedAlready, false);
 
-        // fix timeout
-        sb.append("<br>Fixing future timeout: ");
-        if (futureTimeout != null) {
-            sb.append("cancelled?=").append(futureTimeout.isCancelled());
-            sb.append("...done?=").append(futureTimeout.isDone());
-            int delay = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-            sb.append("...getDelay?=").append(delay);
+        // fix response idle timeout (if player has good connection, but can't response)
+        sb.append("<br>Fixing response idle timeout: ");
+        if (responseIdleTimeoutFuture != null) {
+            int delay = (int) responseIdleTimeoutFuture.getDelay(TimeUnit.SECONDS);
             if (delay < 25) {
-                fixActions.add("future timeout fix");
-
-                sb.append("<br><font color='red'>WARNING, future timeout delay < 25</font>");
-                sb.append("<br>Try to pass...");
-                PassAbility pass = new PassAbility();
-                game.endTurn(pass);
-                sb.append(" (").append(asWarning("OK")).append(", pass done)");
+                fixedAlready = fixPlayer(game.getPlayer(responseIdleTimeoutPlayerId), state, "response idle", sb, fixActions, fixedAlready, true);
             } else {
-                sb.append(" (").append(asGood("OK")).append(", delay > 25)");
+                sb.append(" (").append(asGood("OK")).append(String.format(", allow to idle %d of %d secs",
+                        delay, getResponseIdleTimeoutSecs()));
             }
         } else {
             sb.append(" (").append(asGood("OK")).append(", timeout is not using)");
@@ -1368,9 +1383,9 @@ public class GameController implements GameCallback {
         return sb.toString();
     }
 
-    private boolean fixPlayer(Player player, GameState state, String fixType, StringBuilder sb, List<String> fixActions, boolean fixedAlready) {
+    private boolean fixPlayer(Player player, GameState state, String fixType, StringBuilder sb, List<String> fixActions, boolean fixedAlready, boolean forceToConcede) {
         sb.append("<br>Fixing ").append(fixType).append(" player: ").append(getName(player));
-        if (player != null && !player.canRespond()) {
+        if (player != null && (forceToConcede || !player.canRespond())) {
             fixActions.add(fixType + " fix");
 
             sb.append("<br><font color='red'>WARNING, ").append(fixType).append(" player can't respond.</font>");
@@ -1397,5 +1412,9 @@ public class GameController implements GameCallback {
         }
 
         return fixedAlready;
+    }
+
+    public UUID getTableId() {
+        return tableId;
     }
 }

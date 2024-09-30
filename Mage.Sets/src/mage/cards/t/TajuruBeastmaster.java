@@ -25,7 +25,7 @@ public final class TajuruBeastmaster extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        // <i>Rally</i> &mdash; Whenever Tajuru Beastmaster or another Ally creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
+        // <i>Rally</i> &mdash; Whenever Tajuru Beastmaster or another Ally creature you control enters, creatures you control get +1/+1 until end of turn.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn), false));
     }
 

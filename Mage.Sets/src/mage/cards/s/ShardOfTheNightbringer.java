@@ -36,7 +36,7 @@ public final class ShardOfTheNightbringer extends CardImpl {
         // Drain Life -- When Shard of the Nightbringer enters the battlefield, if you cast it, target opponent loses half their life, rounded up. You gain life equal to the life lost this way.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ShardOfTheNightbringerEffect()),
-                CastFromEverywhereSourceCondition.instance, "When {this} enters the battlefield, " +
+                CastFromEverywhereSourceCondition.instance, "When {this} enters, " +
                 "if you cast it, target opponent loses half their life, rounded up. " +
                 "You gain life equal to the life lost this way."
         );

@@ -32,7 +32,7 @@ public final class CorpseKnight extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another creature enters the battlefield under your control, each opponent loses 1 life.
+        // Whenever another creature you control enters, each opponent loses 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new LoseLifeOpponentsEffect(1), filter));
     }
 

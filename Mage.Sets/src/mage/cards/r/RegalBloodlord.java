@@ -40,7 +40,7 @@ public final class RegalBloodlord extends CardImpl {
                         new CreateTokenEffect(new BatToken()),
                         TargetController.ANY, false
                 ),
-                new YouGainedLifeCondition(ComparisonType.MORE_THAN, 0),
+                new YouGainedLifeCondition(),
                 "At the beginning of each end step, "
                         + "if you gained life this turn, "
                         + "create a 1/1 black Bat creature token with flying."

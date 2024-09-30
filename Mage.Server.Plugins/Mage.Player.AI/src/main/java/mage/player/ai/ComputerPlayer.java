@@ -1921,20 +1921,18 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     @Override
-    public int announceXMana(int min, int max, int multiplier, String message, Game game, Ability ability) {
+    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         log.debug("announceXMana");
         //TODO: improve this
-        int xMin = min * multiplier;
-        int xMax = (max == Integer.MAX_VALUE ? max : max * multiplier);
         int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
         if (numAvailable < 0) {
             numAvailable = 0;
         } else {
-            if (numAvailable < xMin) {
-                numAvailable = xMin;
+            if (numAvailable < min) {
+                numAvailable = min;
             }
-            if (numAvailable > xMax) {
-                numAvailable = xMax;
+            if (numAvailable > max) {
+                numAvailable = max;
             }
         }
         return numAvailable;
@@ -2192,7 +2190,7 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     @Override
-    public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
+    public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
         log.debug("chooseReplacementEffect");
         //TODO: implement this
         return 0;

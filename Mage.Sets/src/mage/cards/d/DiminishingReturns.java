@@ -53,7 +53,7 @@ class DiminishingReturnsEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             controller.moveCards(controller.getLibrary().getTopCards(game, 10), Zone.EXILED, source, game);
-            game.getState().processAction(game);
+            game.processAction();
             for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {

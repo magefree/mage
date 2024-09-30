@@ -52,7 +52,7 @@ public final class RikuOfTwoReflections extends CardImpl {
                 filter, false, SetTargetPointer.SPELL
         ));
 
-        // Whenever another nontoken creature enters the battlefield under your control, you may pay {G}{U}. If you do, create a token that's a copy of that creature.
+        // Whenever another nontoken creature you control enters, you may pay {G}{U}. If you do, create a token that's a copy of that creature.
         effect = new DoIfCostPaid(new CreateTokenCopyTargetEffect(true),
                 new ManaCostsImpl<>("{G}{U}"), "Create a token that's a copy of that creature?");
         effect.setText("you may pay {G}{U}. If you do, create a token that's a copy of that creature");

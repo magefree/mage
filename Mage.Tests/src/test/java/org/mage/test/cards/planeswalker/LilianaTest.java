@@ -19,7 +19,7 @@ public class LilianaTest extends CardTestPlayerBase {
         /*
         Binding Mummy {1}{W}
         Creature - Zombie 2/2
-        Whenever another Zombie enters the battlefield under your control, you may tap target artifact or creature.
+        Whenever another Zombie you control enters, you may tap target artifact or creature.
          */
         String bMummy = "Binding Mummy";
 

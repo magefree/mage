@@ -31,7 +31,7 @@ public final class UpTheBeanstalk extends CardImpl {
         // When Up the Beanstalk enters the battlefield and whenever you cast a spell with mana value 5 or greater, draw a card.
         this.addAbility(new OrTriggeredAbility(
                 Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false,
-                "When {this} enters the battlefield and whenever you cast a spell with mana value 5 or greater, ",
+                "When {this} enters and whenever you cast a spell with mana value 5 or greater, ",
                 new EntersBattlefieldTriggeredAbility(null),
                 new SpellCastControllerTriggeredAbility(null, filter, false)
         ));

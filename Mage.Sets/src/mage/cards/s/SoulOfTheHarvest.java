@@ -37,7 +37,7 @@ public final class SoulOfTheHarvest extends CardImpl {
 
         this.addAbility(TrampleAbility.getInstance());
 
-        // Whenever another nontoken creature enters the battlefield under your control, you may draw a card.
+        // Whenever another nontoken creature you control enters, you may draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), filter, true));
     }
 

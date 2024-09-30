@@ -7,7 +7,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.CardsDrawnThisTurnDynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -54,7 +54,7 @@ public final class NikoAris extends CardImpl {
 
         // When Niko Aris enters the battlefield, create X Shard tokens.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new CreateTokenEffect(new ShardToken(), ManacostVariableValue.ETB)
+                new CreateTokenEffect(new ShardToken(), GetXValue.instance)
         ));
 
         // +1: Up to one target creature you control can't be blocked this turn. Whenever that creature deals damage this turn, return it to its owner's hand.

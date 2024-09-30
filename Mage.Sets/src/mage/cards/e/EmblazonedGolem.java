@@ -7,7 +7,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.GetKickerXValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.SunburstCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.InfoEffect;
@@ -44,10 +44,10 @@ public final class EmblazonedGolem extends CardImpl {
                 Zone.ALL, new InfoEffect("Spend only colored mana on X. No more than one mana of each color may be spent this way."))
         );
         
-        // If Emblazoned Golem was kicked, it enters the battlefield with X +1/+1 counters on it.                
+        // If Emblazoned Golem was kicked, it enters with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(),
                 EmblazonedGolemKickerValue.instance, false),
-                KickedCondition.ONCE, "If {this} was kicked, it enters the battlefield with X +1/+1 counters on it.", ""));
+                KickedCondition.ONCE, "If {this} was kicked, it enters with X +1/+1 counters on it.", ""));
     }
 
     private EmblazonedGolem(final EmblazonedGolem card) {
@@ -66,7 +66,7 @@ enum EmblazonedGolemKickerValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int sunburst = SunburstCount.instance.calculate(game, sourceAbility, effect); // the amount of different colors spent on casting this
-        int kickerX = GetKickerXValue.instance.calculate(game, sourceAbility, effect);
+        int kickerX = GetXValue.instance.calculate(game, sourceAbility, effect);
         
         Spell spell = game.getSpellOrLKIStack(sourceAbility.getSourceId());
         if (spell == null || spell.getSpellAbility() == null) {

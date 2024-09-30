@@ -23,7 +23,7 @@ public final class ViashinoSkeleton extends CardImpl {
 
     public ViashinoSkeleton(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{R}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.SKELETON);
 
         this.power = new MageInt(2);

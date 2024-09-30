@@ -38,25 +38,25 @@ public final class WookieeMystic extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {T}: Add {R}, {G} or {W}. If that mana is spent on a creature spell, it enters the battlefield with a +1/+1 counter on it.
+        // {T}: Add {R}, {G} or {W}. If that mana is spent on a creature spell, it enters with a +1/+1 counter on it.
         Mana mana = Mana.RedMana(1);
         mana.setFlag(true);
         ManaEffect effect = new BasicManaEffect(mana);
-        effect.setText("Add {R}. If that mana is spent on a creature spell, it enters the battlefield with a +1/+1 counter on it");
+        effect.setText("Add {R}. If that mana is spent on a creature spell, it enters with a +1/+1 counter on it");
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         this.addAbility(ability, new WookieeMysticWatcher().withParams(ability));
 
         mana = Mana.GreenMana(1);
         mana.setFlag(true);
         effect = new BasicManaEffect(mana);
-        effect.setText("Add {G}. If that mana is spent on a creature spell, it enters the battlefield with a +1/+1 counter on it");
+        effect.setText("Add {G}. If that mana is spent on a creature spell, it enters with a +1/+1 counter on it");
         ability = new SimpleManaAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         this.addAbility(ability, new WookieeMysticWatcher().withParams(ability));
 
         mana = Mana.WhiteMana(1);
         mana.setFlag(true);
         effect = new BasicManaEffect(mana);
-        effect.setText("Add {W}. If that mana is spent on a creature spell, it enters the battlefield with a +1/+1 counter on it");
+        effect.setText("Add {W}. If that mana is spent on a creature spell, it enters with a +1/+1 counter on it");
         ability = new SimpleManaAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         this.addAbility(ability, new WookieeMysticWatcher().withParams(ability));
     }

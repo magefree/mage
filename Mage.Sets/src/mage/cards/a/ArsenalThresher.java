@@ -39,7 +39,7 @@ public final class ArsenalThresher extends CardImpl {
 
         // As Arsenal Thresher enters the battlefield, you may reveal any number of other artifact cards from your hand. Arsenal Thresher enters the battlefield with a +1/+1 counter on it for each card revealed this way.
         this.addAbility(new AsEntersBattlefieldAbility(new ArsenalThresherEffect(),
-                "you may reveal any number of other artifact cards from your hand. {this} enters the battlefield with a +1/+1 counter on it for each card revealed this way"));
+                "you may reveal any number of other artifact cards from your hand. {this} enters with a +1/+1 counter on it for each card revealed this way"));
     }
 
     private ArsenalThresher(final ArsenalThresher card) {

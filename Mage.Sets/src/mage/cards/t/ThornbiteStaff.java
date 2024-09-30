@@ -31,7 +31,7 @@ public final class ThornbiteStaff extends CardImpl {
     private static final FilterPermanent filter = new FilterCreaturePermanent(SubType.SHAMAN, "a Shaman creature");
 
     public ThornbiteStaff(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.ARTIFACT},"{2}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.ARTIFACT},"{2}");
         this.subtype.add(SubType.SHAMAN);
         this.subtype.add(SubType.EQUIPMENT);
 

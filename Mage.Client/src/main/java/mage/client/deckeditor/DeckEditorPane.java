@@ -14,11 +14,12 @@ import java.util.UUID;
 /**
  * GUI: deck editor, used all around the app
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class DeckEditorPane extends MagePane {
 
-    private UUID tableId = null;
+    private UUID currentTableId = null;
+    private UUID parentTableId = null;
 
     public DeckEditorPane() {
         boolean initialized = false;
@@ -45,20 +46,26 @@ public class DeckEditorPane extends MagePane {
         deckEditorPanel1.changeGUISize();
     }
 
-    public void show(DeckEditorMode mode, Deck deck, String name, UUID tableId, int visibleTimer) {
-        this.tableId = tableId;
+    public void show(DeckEditorMode mode, Deck deck, String name, UUID currentTableId, UUID parentTableId, int visibleTimer) {
+        this.currentTableId = currentTableId;
+        this.parentTableId = parentTableId;
         this.setTitle(name);
-        this.deckEditorPanel1.showDeckEditor(mode, deck, tableId, visibleTimer);
+        this.deckEditorPanel1.showDeckEditor(mode, deck, currentTableId, parentTableId, visibleTimer);
         this.repaint();
     }
 
     @Override
     public boolean isActiveTable() {
-        return this.tableId != null;
+        return this.currentTableId != null;
     }
 
     public DeckEditorMode getDeckEditorMode() {
         return this.deckEditorPanel1.getDeckEditorMode();
+    }
+
+    @Override
+    public UUID getSortTableId() {
+        return parentTableId != null ? parentTableId : currentTableId;
     }
 
     /**

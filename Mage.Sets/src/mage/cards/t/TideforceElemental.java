@@ -40,7 +40,7 @@ public final class TideforceElemental extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);
-        // Landfall - Whenever a land enters the battlefield under your control, you may untap Tideforce Elemental.
+        // Landfall - Whenever a land you control enters, you may untap Tideforce Elemental.
         this.addAbility(new LandfallAbility(new UntapSourceEffect(), true));
     }
 

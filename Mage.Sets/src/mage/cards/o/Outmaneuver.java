@@ -31,8 +31,8 @@ public final class Outmaneuver extends CardImpl {
 
         // X target blocked creatures assign their combat damage this turn as though they weren't blocked.
         this.getSpellAbility().addEffect(new OutmaneuverEffect());
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private Outmaneuver(final Outmaneuver card) {

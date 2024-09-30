@@ -1,7 +1,6 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -12,6 +11,9 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.RabidSheepToken;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +58,7 @@ class FlockOfRabidSheepEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            int repeat = source.getManaCostsToPay().getX();
+            int repeat = CardUtil.getSourceCostsTag(game, source, "X", 0);
             int wonCount = 0;
             for (int i = 1; i <= repeat; i++) {
                 if (controller.flipCoin(source, game, true)) {

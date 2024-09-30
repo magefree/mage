@@ -38,7 +38,7 @@ public final class RootsOfLife extends CardImpl {
 
         // As Roots of Life enters the battlefield, choose Island or Swamp.
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Island or Swamp?", "Island", "Swamp"), null,
-                "As {this} enters the battlefield, choose Island or Swamp.", ""));
+                "As {this} enters, choose Island or Swamp.", ""));
 
         // Whenever a land of the chosen type an opponent controls becomes tapped, you gain 1 life.
         // * Island chosen

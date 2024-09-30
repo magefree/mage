@@ -45,7 +45,7 @@ public class ChooseTargetTest extends CardTestPlayerBase {
         //setChoice(playerB, "Silvercoat Lion");
         //setChoice(playerA, true);
 
-        //setStrictChooseMode(true);
+        setStrictChooseMode(false);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 

@@ -25,7 +25,7 @@ public final class DecoctionModule extends CardImpl {
     public DecoctionModule(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        // Whenever a creature enters the battlefield under your control, you get {E}.
+        // Whenever a creature you control enters, you get {E}.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new GetEnergyCountersControllerEffect(1),

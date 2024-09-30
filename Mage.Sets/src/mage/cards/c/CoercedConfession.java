@@ -75,7 +75,7 @@ class CoercedConfessionMillEffect extends OneShotEffect {
         if (controller == null) {
             return true;
         }
-        game.getState().processAction(game);
+        game.processAction();
         controller.drawCards(creaturesMilled, source, game);
         return true;
     }

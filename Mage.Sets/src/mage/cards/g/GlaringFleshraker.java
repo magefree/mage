@@ -46,7 +46,7 @@ public final class GlaringFleshraker extends CardImpl {
                 new CreateTokenEffect(new EldraziSpawnToken()), filter, false
         ));
 
-        // Whenever another colorless creature enters the battlefield under your control, Glaring Fleshraker deals 1 damage to each opponent.
+        // Whenever another colorless creature you control enters, Glaring Fleshraker deals 1 damage to each opponent.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DamagePlayersEffect(1, TargetController.OPPONENT), filter2
         ));

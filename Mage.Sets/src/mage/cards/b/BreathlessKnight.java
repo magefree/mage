@@ -38,7 +38,7 @@ public final class BreathlessKnight extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
 
-        // Whenever Breathless Knight or another creature enters the battlefield under your control, if that creature entered from a graveyard or you cast it from a graveyard, put a +1/+1 counter on Breathless Knight.
+        // Whenever Breathless Knight or another creature you control enters, if that creature entered from a graveyard or you cast it from a graveyard, put a +1/+1 counter on Breathless Knight.
         this.addAbility(new BreathlessKnightTriggeredAbility(), new CastFromGraveyardWatcher());
     }
 
@@ -56,7 +56,7 @@ class BreathlessKnightTriggeredAbility extends TriggeredAbilityImpl {
 
     public BreathlessKnightTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        setTriggerPhrase("Whenever {this} or another creature enters the battlefield under your control, if that creature entered from a graveyard or you cast it from a graveyard, ");
+        setTriggerPhrase("Whenever {this} or another creature you control enters, if that creature entered from a graveyard or you cast it from a graveyard, ");
     }
 
     private BreathlessKnightTriggeredAbility(final BreathlessKnightTriggeredAbility ability) {

@@ -39,7 +39,7 @@ public final class GuildSummit extends CardImpl {
                 new GuildSummitEffect(), true
         ));
 
-        // Whenever a Gate enters the battlefield under your control, draw a card.
+        // Whenever a Gate you control enters, draw a card.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), filter
         ));

@@ -74,7 +74,7 @@ class EcologicalAppreciationEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         FilterCard filter = new FilterCreatureCard();
         filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, xValue + 1));
         TargetCardInLibrary targetCardsInLibrary = new TargetCardWithDifferentNameInLibrary(0, 4, filter);

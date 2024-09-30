@@ -27,7 +27,7 @@ public final class MalakirSoothsayer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // <i>Cohort</i> &mdash; {T}, Tap an untapped Ally you control: You draw a card and you lose a life.
-        Ability ability = new CohortAbility(new DrawCardSourceControllerEffect(1, "you"));
+        Ability ability = new CohortAbility(new DrawCardSourceControllerEffect(1, true));
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);
 

@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetControllerEffect;
 import mage.cards.CardImpl;
@@ -35,10 +35,10 @@ public final class NinThePainArtist extends CardImpl {
 
         // {X}{U}{R}, {tap}: Nin, the Pain Artist deals X damage to target creature. That creature's controller draws X cards.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new DamageTargetEffect(ManacostVariableValue.REGULAR), new ManaCostsImpl<>("{X}{U}{R}"));
+                new DamageTargetEffect(GetXValue.instance), new ManaCostsImpl<>("{X}{U}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addEffect(new DrawCardTargetControllerEffect(ManacostVariableValue.REGULAR)
+        ability.addEffect(new DrawCardTargetControllerEffect(GetXValue.instance)
                 .setText("that creature's controller draws X cards"));
         this.addAbility(ability);
     }

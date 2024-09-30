@@ -29,7 +29,7 @@ public final class DragonsparkReactor extends CardImpl {
     public DragonsparkReactor(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{R}");
 
-        // Whenever Dragonspark Reactor or another artifact enters the battlefield under your control, put a charge counter on Dragonspark Reactor.
+        // Whenever Dragonspark Reactor or another artifact you control enters, put a charge counter on Dragonspark Reactor.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
                 StaticFilters.FILTER_PERMANENT_ARTIFACT, false, true

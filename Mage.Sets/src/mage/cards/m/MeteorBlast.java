@@ -21,8 +21,8 @@ public final class MeteorBlast extends CardImpl {
         this.getSpellAbility().addEffect(
                 new DamageTargetEffect(4).setText("{this} deals 4 damage to each of X targets")
         );
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private MeteorBlast(final MeteorBlast card) {

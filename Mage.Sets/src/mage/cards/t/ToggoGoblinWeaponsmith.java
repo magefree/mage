@@ -27,7 +27,7 @@ public final class ToggoGoblinWeaponsmith extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever a land enters the battlefield under your control, create an artifact equipment token named Rock wih "Equipped creature has '{1}, {T}, Sacrifice Rock: This creature deals 2 damage to any target'" and equip {1}.
+        // Whenever a land you control enters, create an artifact equipment token named Rock wih "Equipped creature has '{1}, {T}, Sacrifice Rock: This creature deals 2 damage to any target'" and equip {1}.
         this.addAbility(new LandfallAbility(new CreateTokenEffect(new RockToken())));
 
         // Partner

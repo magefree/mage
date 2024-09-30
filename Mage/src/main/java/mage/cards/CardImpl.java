@@ -230,13 +230,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public List<String> getRules() {
         Abilities<Ability> sourceAbilities = this.getAbilities();
-        return CardUtil.getCardRulesWithAdditionalInfo(this.getId(), this.getName(), sourceAbilities, sourceAbilities);
+        return CardUtil.getCardRulesWithAdditionalInfo(this, sourceAbilities, sourceAbilities);
     }
 
     @Override
     public List<String> getRules(Game game) {
         Abilities<Ability> sourceAbilities = this.getAbilities(game);
-        return CardUtil.getCardRulesWithAdditionalInfo(game, this.getId(), this.getName(), sourceAbilities, sourceAbilities);
+        return CardUtil.getCardRulesWithAdditionalInfo(game, this, sourceAbilities, sourceAbilities);
     }
 
     /**
@@ -562,7 +562,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         }
         if (removed) {
             if (fromZone != Zone.OUTSIDE) {
-                game.rememberLKI(lkiObject != null ? lkiObject.getId() : objectId, fromZone, lkiObject != null ? lkiObject : this);
+                game.rememberLKI(fromZone, lkiObject != null ? lkiObject : this);
             }
         } else {
             logger.warn("Couldn't find card in fromZone, card=" + getIdName() + ", fromZone=" + fromZone);
@@ -610,7 +610,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             // This is somewhat a band-aid on the special action nature of turning a permanent face up.
             // 708.8. As a face-down permanent is turned face up, its copiable values revert to its normal copiable values.
             // Any effects that have been applied to the face-down permanent still apply to the face-up permanent.
-            game.getState().processAction(game);
+            game.processAction();
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.TURNED_FACE_UP, getId(), source, playerId));
             return true;
         }

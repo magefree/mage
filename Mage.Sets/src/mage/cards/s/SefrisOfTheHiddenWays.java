@@ -6,6 +6,7 @@ import mage.abilities.common.CompletedDungeonTriggeredAbility;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -38,7 +39,7 @@ public final class SefrisOfTheHiddenWays extends CardImpl {
         // Whenever one or more creature cards are put into your graveyard from anywhere, venture into the dungeon. This ability triggers only once each turn.
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new VentureIntoTheDungeonEffect(), false, filter, TargetController.YOU
-        ).setTriggersLimitEachTurn(1));
+        ).setTriggersLimitEachTurn(1).addHint(CurrentDungeonHint.instance));
 
         // Create Undead — Whenever you complete a dungeon, return target creature card from your graveyard to the battlefield.
         Ability ability = new CompletedDungeonTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());

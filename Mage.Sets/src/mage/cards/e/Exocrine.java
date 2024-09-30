@@ -3,7 +3,7 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.keyword.RavenousAbility;
@@ -42,9 +42,9 @@ public final class Exocrine extends CardImpl {
 
         // Bio-plasmic Barrage -- When Exocrine enters the battlefield, it deals X damage to each player and each other creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamagePlayersEffect(
-                Outcome.Damage, ManacostVariableValue.ETB, TargetController.ANY, "it"
+                Outcome.Damage, GetXValue.instance, TargetController.ANY, "it"
         ));
-        ability.addEffect(new DamageAllEffect(ManacostVariableValue.ETB, filter).setText("and each other creature"));
+        ability.addEffect(new DamageAllEffect(GetXValue.instance, filter).setText("and each other creature"));
         this.addAbility(ability.withFlavorWord("Bio-plasmic Barrage"));
     }
 

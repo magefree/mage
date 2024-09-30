@@ -21,7 +21,7 @@ public class ModalDoubleFacedCardsInCommanderTest extends CardTestCommanderDuelB
 
         // Esika, God of the Tree
         // creature, 1/4
-        // Landfall — Whenever a land enters the battlefield under your control, Kazandu Mammoth gets +2/+2 until end of turn.
+        // Landfall — Whenever a land you control enters, Kazandu Mammoth gets +2/+2 until end of turn.
         //
         // The Prismatic Bridge
         // Enchantment

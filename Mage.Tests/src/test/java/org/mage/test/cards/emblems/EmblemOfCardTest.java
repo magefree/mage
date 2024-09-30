@@ -64,6 +64,8 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
 
     @Test
     public void testEmblemOfOmniscience() {
+        setStrictChooseMode(true);
+
         // You may cast spells from your hand without paying their mana costs.
         addEmblem(playerA, new EmblemOfCard(
                 CardRepository.instance.findCard("Omniscience", true).createMockCard()
@@ -74,9 +76,11 @@ public class EmblemOfCardTest extends CardTestPlayerBase {
         // Trample
         addCard(Zone.HAND, playerA, "Colossal Dreadmaw");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Colossal Dreadmaw");
-        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        setChoice(playerA, "Cast without paying its mana cost (source: Omniscience");
+
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
+
         assertPermanentCount(playerA, "Colossal Dreadmaw", 1);
         assertEmblemCount(playerA, 1);
     }

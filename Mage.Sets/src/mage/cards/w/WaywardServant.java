@@ -33,7 +33,7 @@ public final class WaywardServant extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another Zombie enters the battlefield under your control, each opponent loses 1 life and you gain 1 life.
+        // Whenever another Zombie you control enters, each opponent loses 1 life and you gain 1 life.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new LoseLifeOpponentsEffect(1), filter);
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);

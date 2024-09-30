@@ -32,7 +32,7 @@ public final class PalaceSiege extends CardImpl {
 
         // As Palace Siege enters the battlefield, choose Khans or Dragons.
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,
-                "As {this} enters the battlefield, choose Khans or Dragons.", ""));
+                "As {this} enters, choose Khans or Dragons.", ""));
 
         // * Khans - At the beginning of your upkeep, return target creature card from your graveyard to your hand.
         Ability ability1 = new ConditionalTriggeredAbility(

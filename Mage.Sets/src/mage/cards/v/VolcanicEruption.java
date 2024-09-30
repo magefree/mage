@@ -31,8 +31,8 @@ public final class VolcanicEruption extends CardImpl {
 
         // Destroy X target Mountains. Volcanic Eruption deals damage to each creature and each player equal to the number of Mountains put into a graveyard this way.
         this.getSpellAbility().addEffect(new VolcanicEruptionEffect());
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetLandPermanent(filter));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private VolcanicEruption(final VolcanicEruption card) {
