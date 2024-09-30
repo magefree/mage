@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -12,16 +11,14 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  * @author jeffwadsworth
  */
 public class LoseAbilityTargetEffect extends ContinuousEffectImpl {
 
-    protected Ability ability;
-
-    public LoseAbilityTargetEffect(Ability ability) {
-        this(ability, Duration.WhileOnBattlefield);
-    }
+    private final Ability ability;
 
     public LoseAbilityTargetEffect(Ability ability, Duration duration) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.LoseAbility);
@@ -40,11 +37,15 @@ public class LoseAbilityTargetEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (permanent != null) {
-            permanent.removeAbility(ability, source.getSourceId(), game);
+        boolean result = false;
+        for (UUID uuid : getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(uuid);
+            if (permanent != null) {
+                permanent.removeAbility(ability, source.getSourceId(), game);
+                result = true;
+            }
         }
-        return true;
+        return result;
     }
 
     @Override

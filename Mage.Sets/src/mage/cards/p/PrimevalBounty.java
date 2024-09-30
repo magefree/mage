@@ -37,7 +37,7 @@ public final class PrimevalBounty extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
-        // Whenever a land enters the battlefield under your control, you gain 3 life.
+        // Whenever a land you control enters, you gain 3 life.
         this.addAbility(new LandfallAbility(new GainLifeEffect(3)));
     }
 

@@ -19,6 +19,7 @@ import mage.target.common.TargetCardInYourGraveyard;
 /**
  *
  * @author L_J
+ * note - draftmatters ability not implemented
  */
 public final class CanalDredger extends CardImpl {
 
@@ -30,10 +31,10 @@ public final class CanalDredger extends CardImpl {
 
         // TODO: Draft specific abilities not implemented
         // Draft Canal Dredger face up.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft Canal Dredger face up.")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Draft Canal Dredger face up - not implemented.")));
 
         // Each player passes the last card from each booster pack to a player who drafted a card named Canal Dredger.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Each player passes the last card from each booster pack to a player who drafted a card named Canal Dredger.")));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Each player passes the last card from each booster pack to a player who drafted a card named Canal Dredger - not implemented.")));
 
         // {T}: Put target card from your graveyard on the bottom of your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false), new TapSourceCost());

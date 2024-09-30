@@ -32,7 +32,7 @@ public final class DesiccatedNaga extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
 
         this.subtype.add(SubType.ZOMBIE);
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 

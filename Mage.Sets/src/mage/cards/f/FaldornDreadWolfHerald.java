@@ -35,7 +35,7 @@ public final class FaldornDreadWolfHerald extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever you cast a spell from exile or a land enters the battlefield under your control from exile, create a 2/2 green Wolf creature token.
+        // Whenever you cast a spell from exile or a land you control enters from exile, create a 2/2 green Wolf creature token.
         this.addAbility(new FaldornDreadWolfHeraldTriggeredAbility());
 
         // {1}, {T}, Discard a card: Exile the top card of your library. You may play it this turn.
@@ -61,7 +61,7 @@ class FaldornDreadWolfHeraldTriggeredAbility extends TriggeredAbilityImpl {
 
     FaldornDreadWolfHeraldTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken()));
-        setTriggerPhrase("Whenever you cast a spell from exile or a land enters the battlefield under your control from exile, ");
+        setTriggerPhrase("Whenever you cast a spell from exile or a land you control enters from exile, ");
     }
 
     private FaldornDreadWolfHeraldTriggeredAbility(final FaldornDreadWolfHeraldTriggeredAbility ability) {

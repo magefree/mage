@@ -74,7 +74,7 @@ class SludgeTitanEffect extends OneShotEffect {
             return false;
         }
         Cards cards = controller.millCards(5, source, game);
-        game.getState().processAction(game);
+        game.processAction();
         cards.removeIf(card -> !game.getState().getZone(card).isPublicZone());
         if (!cards.isEmpty()) {
             TargetCard target = new TargetCardAndOrCard(CardType.CREATURE, CardType.LAND);

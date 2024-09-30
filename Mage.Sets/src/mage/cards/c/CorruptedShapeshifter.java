@@ -61,7 +61,7 @@ class CorruptedShapeshifterReplacementEffect extends ReplacementEffectImpl {
 
     public CorruptedShapeshifterReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "As {this} enters the battlefield, it becomes your choice of a 3/3 creature with flying, "
+        staticText = "As {this} enters, it becomes your choice of a 3/3 creature with flying, "
                 + "a 2/5 creature with vigilance, or a 0/12 creature with defender";
     }
 

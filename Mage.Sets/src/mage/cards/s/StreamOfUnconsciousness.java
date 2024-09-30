@@ -27,7 +27,7 @@ public final class StreamOfUnconsciousness extends CardImpl {
     }
 
     public StreamOfUnconsciousness(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.INSTANT},"{U}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.INSTANT},"{U}");
         this.subtype.add(SubType.WIZARD);
 
         // Target creature gets -4/-0 until end of turn. 

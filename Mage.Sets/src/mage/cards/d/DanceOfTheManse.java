@@ -19,6 +19,7 @@ import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.TargetAdjuster;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -53,7 +54,7 @@ enum DanceOfTheManseAdjuster implements TargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        int xValue = ability.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         FilterCard filter = new FilterCard("artifact and/or non-Aura enchantment cards " +
                 "each with mana value " + xValue + " or less from your graveyard");
         filter.add(Predicates.or(
@@ -102,7 +103,7 @@ class DanceOfTheManseEffect extends OneShotEffect {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet()));
         player.moveCards(cards, Zone.BATTLEFIELD, source, game);
-        if (source.getManaCostsToPay().getX() < 6) {
+        if (CardUtil.getSourceCostsTag(game, source, "X", 0) < 6) {
             return true;
         }
         cards.stream()

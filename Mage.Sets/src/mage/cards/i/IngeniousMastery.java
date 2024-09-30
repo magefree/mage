@@ -12,6 +12,7 @@ import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -71,7 +72,7 @@ class IngeniousMasteryEffect extends OneShotEffect {
         if (!AlternativeCostSourceAbility.getActivatedStatus(
                 game, source, this.alternativeCostOriginalID, false
         )) {
-            return player.drawCards(source.getManaCostsToPay().getX(), source, game) > 0;
+            return player.drawCards(CardUtil.getSourceCostsTag(game, source, "X", 0), source, game) > 0;
         }
 
         player.drawCards(3, source, game);

@@ -1,8 +1,5 @@
 package mage.abilities.effects.common.cost;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -16,11 +13,18 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
+ * Reduce cost of spells from any controller.
+ *
  * @author LevelX2
  */
 public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
 
+    private static final FilterCard defaultFilter = new FilterCard("Spells");
     private final FilterCard filter;
     private final int amount;
     private final boolean upTo;
@@ -28,7 +32,7 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
     private UUID controllerId;
 
     public SpellsCostReductionAllEffect(int amount) {
-        this(new FilterCard("Spells"), amount);
+        this(defaultFilter, amount);
     }
 
     public SpellsCostReductionAllEffect(FilterCard filter, int amount) {
@@ -39,7 +43,10 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl {
         this(filter, amount, upTo, false);
     }
 
-    public SpellsCostReductionAllEffect(FilterCard filter, int amount, boolean upTo, boolean onlyControlled) {
+    /**
+     * Note to devs: If you need onlyControlled at true, use SpellsCostReductionControllerEffect instead.
+     */
+    protected SpellsCostReductionAllEffect(FilterCard filter, int amount, boolean upTo, boolean onlyControlled) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = filter;
         this.amount = amount;

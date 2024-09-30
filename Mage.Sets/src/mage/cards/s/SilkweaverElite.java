@@ -34,7 +34,7 @@ public final class SilkweaverElite extends CardImpl {
         // <i>Revolt</i> &mdash; When Silkweaver Elite enters the battlefield, if a permanent you controlled left the battlefield this turn, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false),
-                RevoltCondition.instance, "When {this} enters the battlefield, " +
+                RevoltCondition.instance, "When {this} enters, " +
                 "if a permanent you controlled left the battlefield this turn, draw a card."
         ).setAbilityWord(AbilityWord.REVOLT).addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }

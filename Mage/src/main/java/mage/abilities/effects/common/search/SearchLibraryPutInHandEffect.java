@@ -19,8 +19,8 @@ import java.util.UUID;
  */
 public class SearchLibraryPutInHandEffect extends SearchEffect {
 
-    private boolean reveal;
-    private boolean textThatCard;
+    private final boolean reveal;
+    private final boolean textThatCard;
 
     public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean reveal) {
         this(target, reveal, false);

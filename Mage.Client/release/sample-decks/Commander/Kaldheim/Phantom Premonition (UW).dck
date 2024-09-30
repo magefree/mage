@@ -1,0 +1,79 @@
+1 [MOC:169] Angel of Finality
+1 [RTR:1] Angel of Serenity
+1 [KHC:36] Arcane Artisan
+1 [ELD:331] Arcane Signet
+1 [CLU:229] Azorius Chancery
+1 [CLU:230] Azorius Guildgate
+1 [CLU:219] Azorius Signet
+1 [THB:4] Banishing Light
+1 [KHM:46] Behold the Multiverse
+1 [KHC:82] Brago, King Eternal
+1 [THS:213] Burnished Hart
+1 [M19:9] Cleansing Nova
+1 [KLD:176] Cloudblazer
+1 [LRW:10] Cloudgoat Ranger
+1 [ELD:333] Command Tower
+1 [LCC:301] Commander's Sphere
+1 [KHC:3] Cosmic Intervention
+1 [M20:244] Cryptic Caves
+1 [THS:46] Curse of the Swine
+1 [SCG:31] Day of the Dragons
+1 [SOI:16] Eerie Interlude
+1 [M20:208] Empyrean Eagle
+1 [KHC:16] Ethereal Valkyrie
+1 [THS:11] Evangel of Heliod
+1 [EVE:6] Flickerwisp
+1 [KHM:256] Gates of Istfell
+1 [ISD:17] Geist-Honored Monk
+1 [AVR:57] Ghostly Flicker
+1 [CHK:10] Ghostly Prison
+1 [KHM:257] Glacial Floodplain
+1 [AVR:22] Goldnight Commander
+1 [KHC:4] Hero of Bretagard
+1 [SCD:55] Inspired Sphinx
+1 [KHM:17] Iron Verdict
+12 [OTJ:273] Island
+1 [ZEN:18] Kor Cartographer
+1 [7ED:306] Marble Diamond
+1 [WWK:15] Marshal's Anthem
+1 [M19:253] Meandering River
+1 [M20:232] Meteor Golem
+1 [MOC:336] Migratory Route
+1 [10E:335] Mind Stone
+1 [AVR:67] Mist Raven
+1 [SHM:144] Mistmeadow Witch
+1 [TSP:29] Momentary Blink
+1 [LRW:76] Mulldrifter
+1 [M3C:358] Myriad Landscape
+1 [KHM:226] Niko Defies Destiny
+1 [M3C:361] Opal Palace
+13 [OTJ:272] Plains
+1 [KHM:72] Ravenform
+1 [KHM:244] Replicating Ring
+1 [AVR:32] Restoration Angel
+1 [TSP:39] Return to Dust
+1 [OTC:111] Sage of the Beyond
+1 [KHM:76] Saw It Coming
+1 [ROE:85] Sea Gate Oracle
+1 [ZEN:224] Sejiri Refuge
+1 [7ED:316] Sky Diamond
+1 [SUM:274] Sol Ring
+1 [J21:718] Soulherder
+1 [KHC:7] Spectral Deluge
+1 [KHC:5] Stoic Farmer
+1 [GPT:19] Storm Herd
+1 [M12:39] Sun Titan
+1 [KHM:375] Surtland Elementalist
+1 [M12:219] Swiftfoot Boots
+1 [KHC:44] Synthetic Destiny
+1 [KHC:8] Tales of the Ancestors
+1 [ORI:218] Thunderclap Wyvern
+1 [MOM:275] Tranquil Cove
+1 [KHM:233] Vega, the Watcher
+1 [ROE:53] Wall of Omens
+1 [KHM:38] Warhorn Blast
+1 [ORI:83] Whirler Rogue
+1 [USG:111] Windfall
+SB: 1 [KHC:2] Ranar the Ever-Watchful
+LAYOUT MAIN:(1,7)(CARD_TYPE,false,55)|([THS:213],[M20:232])([ELD:331],[CLU:219],[LCC:301],[7ED:306],[10E:335],[KHM:244],[7ED:316],[SUM:274],[M12:219])([MOC:169],[RTR:1],[KHC:36],[KHC:82],[KLD:176],[LRW:10],[M20:208],[KHC:16],[THS:11],[EVE:6],[ISD:17],[AVR:22],[KHC:4],[SCD:55],[ZEN:18],[AVR:67],[SHM:144],[LRW:76],[AVR:32],[OTC:111],[ROE:85],[J21:718],[KHC:5],[M12:39],[KHM:375],[ORI:218],[KHM:233],[ROE:53],[ORI:83])([THB:4],[SCG:31],[CHK:10],[WWK:15],[KHM:226])([KHM:46],[KHC:3],[SOI:16],[AVR:57],[KHM:17],[TSP:29],[TSP:39],[KHM:76],[KHC:44],[KHM:38])([CLU:229],[CLU:230],[ELD:333],[M20:244],[KHM:256],[KHM:257],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[M19:253],[M3C:358],[M3C:361],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[OTJ:272],[ZEN:224],[MOM:275])([M19:9],[THS:46],[MOC:336],[KHM:72],[KHC:7],[GPT:19],[KHC:8],[USG:111])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([KHC:2])

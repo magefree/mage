@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -10,6 +11,7 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.stack.Spell;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -48,6 +50,7 @@ public class SpellTransformedAbility extends SpellAbility {
         this.setSpellAbilityCastMode(SpellAbilityCastMode.TRANSFORMED);
         //when casting this way, the card must have the TransformAbility from elsewhere
     }
+
     protected SpellTransformedAbility(final SpellTransformedAbility ability) {
         super(ability);
         this.manaCost = ability.manaCost;
@@ -59,8 +62,8 @@ public class SpellTransformedAbility extends SpellAbility {
     }
 
     @Override
-    public boolean activate(Game game, boolean noMana) {
-        if (super.activate(game, noMana)) {
+    public boolean activate(Game game, Set<MageIdentifier> allowedIdentifiers, boolean noMana) {
+        if (super.activate(game, allowedIdentifiers, noMana)) {
             game.getState().setValue(TransformAbility.VALUE_KEY_ENTER_TRANSFORMED + getSourceId(), Boolean.TRUE);
             // TODO: must be removed after transform cards (one side) migrated to MDF engine (multiple sides)
             TransformedEffect effect = new TransformedEffect();

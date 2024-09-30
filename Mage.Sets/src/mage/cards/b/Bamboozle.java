@@ -75,7 +75,7 @@ class BamboozleEffect extends OneShotEffect {
                     putOnTopLibrary.remove(game.getCard(cardId));
                 }
                 targetPlayer.moveCards(putInGraveyard, Zone.GRAVEYARD, source, game);
-                targetPlayer.putCardsOnTopOfLibrary(putOnTopLibrary, game, source, false);
+                targetPlayer.putCardsOnTopOfLibrary(putOnTopLibrary, game, source, true);
                 return true;
             }
 

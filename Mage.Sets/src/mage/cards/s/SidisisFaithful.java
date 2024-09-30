@@ -21,7 +21,7 @@ public final class SidisisFaithful extends CardImpl {
 
     public SidisisFaithful(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{U}");
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.subtype.add(SubType.WIZARD);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);

@@ -50,7 +50,7 @@ public final class SwoopingPteranodon extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
 
-        // Whenever Swooping Pteranodon or another Dinosaur with flying enters the battlefield under your control,
+        // Whenever Swooping Pteranodon or another Dinosaur with flying you control enters,
         // gain control of target creature an opponent controls until end of turn. Untap that creature.
         // It gains flying and haste until end of turn.
         // At the beginning of the next end step, target land deals 3 damage to that creature.

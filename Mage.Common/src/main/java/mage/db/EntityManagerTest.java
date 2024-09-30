@@ -12,26 +12,7 @@ import java.util.List;
  */
 public final class EntityManagerTest {
 
-    private static DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.FULL);
-
     public static void main(String[] args) throws Exception {
-        List<Log> logs = EntityManager.instance.getAllLogs();
-        System.out.println("logs found: " + logs.size());
-        for (Log log : logs) {
-            System.out.println("   key=" + log.getKey());
-            System.out.println("   date=" + timeFormatter.format(log.getCreatedDate()));
-            System.out.print("   arguments=[ ");
-            if (log.getArguments() != null) {
-                for (String argument : log.getArguments()) {
-                    System.out.print("arg=" + argument + ' ');
-                }
-            }
-            System.out.println("]");
-            System.out.println("   --------------");
-        }
-
-        System.out.println("********************************");
-
         List<Feedback> feedbackList = EntityManager.instance.getAllFeedbacks();
         System.out.println("feedbacks found: " + feedbackList.size());
         int count = 1;

@@ -32,7 +32,7 @@ public final class MarkovEnforcer extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // Whenever Markov Enforcer or another Vampire enters the battlefield under your control, Markov Enforcer fights up to one target creature an opponent controls.
+        // Whenever Markov Enforcer or another Vampire you control enters, Markov Enforcer fights up to one target creature an opponent controls.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new FightTargetSourceEffect(), filter, false, true
         );

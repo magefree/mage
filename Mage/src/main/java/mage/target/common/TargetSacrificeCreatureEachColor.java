@@ -2,7 +2,7 @@ package mage.target.common;
 
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ColorAssignment;
+import mage.abilities.assignment.common.ColorAssignment;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;

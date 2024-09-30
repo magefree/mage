@@ -391,7 +391,7 @@ public class FirstStrikeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 5);
         addCard(Zone.HAND, playerA, ambusher);
         addCard(Zone.BATTLEFIELD, playerA, "Celebrity Fencer");
-        //  Whenever another creature enters the battlefield under your control, put a +1/+1 counter on Celebrity Fencer.
+        //  Whenever another creature you control enters, put a +1/+1 counter on Celebrity Fencer.
         addCard(Zone.BATTLEFIELD, playerA, "Knighthood"); // Creatures you control have first strike
 
         attack(1, playerA, moonblade, playerB);

@@ -21,7 +21,7 @@ public final class PhyrexianArena extends CardImpl {
 
         // At the beginning of your upkeep, you draw a card and you lose 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1, "you"), TargetController.YOU, false
+                new DrawCardSourceControllerEffect(1, true), TargetController.YOU, false
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);

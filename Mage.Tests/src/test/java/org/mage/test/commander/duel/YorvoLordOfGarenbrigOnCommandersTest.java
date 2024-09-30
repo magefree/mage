@@ -14,7 +14,7 @@ public class YorvoLordOfGarenbrigOnCommandersTest extends CardTestCommanderDuelB
     @Test
     public void test_TriggerOnSimpleCommander() {
         // Yorvo, Lord of Garenbrig enters the battlefield with four +1/+1 counters on it.
-        // Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on Yorvo. Then if that creature’s power is greater than Yorvo’s power, put another +1/+1 counter on Yorvo.
+        // Whenever another green creature you control enters, put a +1/+1 counter on Yorvo. Then if that creature’s power is greater than Yorvo’s power, put another +1/+1 counter on Yorvo.
         addCard(Zone.HAND, playerA, "Yorvo, Lord of Garenbrig", 5); // {G}{G}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         //
@@ -39,7 +39,7 @@ public class YorvoLordOfGarenbrigOnCommandersTest extends CardTestCommanderDuelB
     @Test
     public void test_TriggerOnUroTitanOfNaturesWrath() {
         // Yorvo, Lord of Garenbrig enters the battlefield with four +1/+1 counters on it.
-        // Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on Yorvo. Then if that creature’s power is greater than Yorvo’s power, put another +1/+1 counter on Yorvo.
+        // Whenever another green creature you control enters, put a +1/+1 counter on Yorvo. Then if that creature’s power is greater than Yorvo’s power, put another +1/+1 counter on Yorvo.
         addCard(Zone.HAND, playerA, "Yorvo, Lord of Garenbrig", 5); // {G}{G}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
         //
@@ -62,9 +62,9 @@ public class YorvoLordOfGarenbrigOnCommandersTest extends CardTestCommanderDuelB
         // (2019-10-04)
 
         // order triggers to remove commander first
-        setChoice(playerA, "Whenever {this} enters the battlefield or attacks"); // draw trigger
-        setChoice(playerA, "Whenever another green creature enters the battlefield"); // get counters trigger
-        //setChoice(playerA, "When {this} enters the battlefield, sacrifice it"); // sacrifice trigger must be on top
+        setChoice(playerA, "Whenever {this} enters or attacks"); // draw trigger
+        setChoice(playerA, "Whenever another green creature you control enters"); // get counters trigger
+        //setChoice(playerA, "When {this} enters, sacrifice it"); // sacrifice trigger must be on top
 
         setChoice(playerA, true); // return commander to command zone
         setChoice(playerA, false); // do not put land to battlefield

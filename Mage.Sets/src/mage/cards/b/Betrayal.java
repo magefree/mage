@@ -33,7 +33,7 @@ public final class Betrayal extends CardImpl {
         this.addAbility(ability);
 
         // Whenever enchanted creature becomes tapped, you draw a card.
-        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1, "you"), "enchanted creature"));
+        this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1, true), "enchanted creature"));
     }
 
     private Betrayal(final Betrayal card) {

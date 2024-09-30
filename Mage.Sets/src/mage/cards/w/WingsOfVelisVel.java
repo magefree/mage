@@ -20,7 +20,7 @@ import java.util.UUID;
 public final class WingsOfVelisVel extends CardImpl {
 
     public WingsOfVelisVel(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{1}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.INSTANT}, "{1}{U}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling

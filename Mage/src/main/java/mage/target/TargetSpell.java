@@ -1,4 +1,3 @@
-
 package mage.target;
 
 import mage.abilities.Ability;
@@ -110,7 +109,7 @@ public class TargetSpell extends TargetObject {
     private boolean canBeChosen(StackObject stackObject, UUID sourceControllerId, Ability source, Game game) {
         return stackObject instanceof Spell
                 && game.getState().getPlayersInRange(sourceControllerId, game).contains(stackObject.getControllerId())
-                && filter.match(stackObject, sourceControllerId, source, game);
+                && canTarget(sourceControllerId, stackObject.getId(), source, game);
     }
 
     @Override

@@ -77,7 +77,7 @@ class GhastlyConscriptionEffect extends OneShotEffect {
         }
         Collections.shuffle(cardsToManifest);
         game.informPlayers(controller.getLogName() + " shuffles the face-down pile");
-        game.getState().processAction(game);
+        game.processAction();
         ManifestEffect.doManifestCards(game, source, controller, new LinkedHashSet<>(cardsToManifest));
         return true;
     }

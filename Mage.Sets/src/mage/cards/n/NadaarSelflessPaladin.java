@@ -7,6 +7,7 @@ import mage.abilities.condition.common.CompletedDungeonCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,7 +37,8 @@ public final class NadaarSelflessPaladin extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Whenever Nadaar, Selfless Paladin enters the battlefield or attacks, venture into the dungeon.
-        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new VentureIntoTheDungeonEffect()));
+        this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new VentureIntoTheDungeonEffect())
+                .addHint(CurrentDungeonHint.instance));
 
         // Other creatures you control get +1/+1 as long as you've completed a dungeon.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(

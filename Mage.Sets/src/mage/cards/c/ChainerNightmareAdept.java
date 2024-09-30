@@ -46,7 +46,7 @@ public final class ChainerNightmareAdept extends CardImpl {
                 Zone.BATTLEFIELD, new ChainerNightmareAdeptContinuousEffect(), new DiscardCardCost()
         ), new ChainerNightmareAdeptWatcher());
 
-        // Whenever a nontoken creature enters the battlefield under your control, 
+        // Whenever a nontoken creature you control enters,
         // if you didn't cast it from your hand, it gains haste until your next turn.
         this.addAbility(new ChainerNightmareAdeptTriggeredAbility());
     }
@@ -164,7 +164,7 @@ class ChainerNightmareAdeptTriggeredAbility extends EntersBattlefieldControlledT
         super(Zone.BATTLEFIELD, gainHasteUntilNextTurnEffect, StaticFilters.FILTER_CREATURE_NON_TOKEN, false,
                 SetTargetPointer.PERMANENT);
         this.addWatcher(new CastFromHandWatcher());
-        setTriggerPhrase("Whenever a nontoken creature enters the battlefield under your control, "
+        setTriggerPhrase("Whenever a nontoken creature you control enters, "
                 + "if you didn't cast it from your hand, ");
     }
 

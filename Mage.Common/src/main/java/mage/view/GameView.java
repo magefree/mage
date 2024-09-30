@@ -44,6 +44,7 @@ public class GameView implements Serializable {
     private final List<PlayerView> players = new ArrayList<>();
     private UUID myPlayerId = null; // null for watcher
     private final CardsView myHand = new CardsView();
+    private final CardsView myHelperEmblems = new CardsView();
     private PlayableObjectsList canPlayObjects;
     private final Map<String, SimpleCardsView> opponentHands = new HashMap<>();
     private final Map<String, SimpleCardsView> watchedHands = new HashMap<>();
@@ -75,6 +76,11 @@ public class GameView implements Serializable {
                 createdForPlayer = player;
                 this.myPlayerId = player.getId();
                 this.myHand.putAll(new CardsView(game, player.getHand().getCards(game), createdForPlayerId));
+                state.getHelperEmblems().stream()
+                        .filter(emblem -> emblem.isControlledBy(player.getId()))
+                        .forEach(emblem -> {
+                            this.myHelperEmblems.put(emblem.getId(), new CardView(new EmblemView(emblem, game)));
+                        });
             }
         }
         for (StackObject stackObject : state.getStack()) {
@@ -112,7 +118,7 @@ public class GameView implements Serializable {
                         stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility) stackObject, token.getName(), token, new CardView(token, game)));
                         checkPaid(stackObject.getId(), (StackAbility) stackObject);
                     } else if (object instanceof Emblem) {
-                        CardView cardView = new CardView(new EmblemView((Emblem) object));
+                        CardView cardView = new CardView(new EmblemView((Emblem) object, game));
                         // Card sourceCard = (Card) ((Emblem) object).getSourceObject();
                         stackObject.setName(object.getName());
                         // ((StackAbility) stackObject).setExpansionSetCode(sourceCard.getExpansionSetCode());
@@ -126,7 +132,7 @@ public class GameView implements Serializable {
                                 new StackAbilityView(game, (StackAbility) stackObject, object.getName(), object, cardView));
                         checkPaid(stackObject.getId(), ((StackAbility) stackObject));
                     } else if (object instanceof Plane) {
-                        CardView cardView = new CardView(new PlaneView((Plane) object));
+                        CardView cardView = new CardView(new PlaneView((Plane) object, game));
                         stackObject.setName(object.getName());
                         stack.put(stackObject.getId(),
                                 new StackAbilityView(game, (StackAbility) stackObject, object.getName(), object, cardView));
@@ -237,6 +243,10 @@ public class GameView implements Serializable {
 
     public CardsView getMyHand() {
         return myHand;
+    }
+
+    public CardsView getMyHelperEmblems() {
+        return myHelperEmblems;
     }
 
     public PlayerView getMyPlayer() {

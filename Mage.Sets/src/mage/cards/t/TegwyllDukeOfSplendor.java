@@ -55,7 +55,7 @@ public final class TegwyllDukeOfSplendor extends CardImpl {
 
         // Whenever another Faerie you control dies, you draw a card and you lose 1 life.
         Ability ability = new DiesCreatureTriggeredAbility(
-                new DrawCardSourceControllerEffect(1, "you"),
+                new DrawCardSourceControllerEffect(1, true),
                 false, filter2
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));

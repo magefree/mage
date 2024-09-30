@@ -122,7 +122,7 @@ class GixYawgmothPraetorExileEffect extends OneShotEffect {
 
     GixYawgmothPraetorExileEffect() {
         super(Outcome.PlayForFree);
-        this.staticText = "Exile the top X cards of target opponent's library. You may play land cards and cast spells from among cards exiled this way without paying their mana costs.";
+        this.staticText = "Exile the top X cards of target opponent's library. You may play lands and cast spells from among cards exiled this way without paying their mana costs.";
     }
 
     private GixYawgmothPraetorExileEffect(final GixYawgmothPraetorExileEffect effect) {

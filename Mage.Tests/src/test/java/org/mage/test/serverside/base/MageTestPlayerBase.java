@@ -11,7 +11,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.*;
 import mage.abilities.effects.common.cost.SpellsCostIncreasingAllEffect;
-import mage.abilities.effects.common.cost.SpellsCostReductionAllEffect;
+import mage.abilities.effects.common.cost.SpellsCostReductionControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -31,7 +31,6 @@ import mage.server.managers.ConfigSettings;
 import mage.server.util.ConfigFactory;
 import mage.server.util.ConfigWrapper;
 import mage.server.util.PluginClassLoader;
-import mage.utils.SystemUtil;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.target.TargetPermanent;
@@ -40,6 +39,7 @@ import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copier;
+import mage.utils.SystemUtil;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -241,10 +241,18 @@ public abstract class MageTestPlayerBase {
      * @param enable
      */
     protected void setStrictChooseMode(boolean enable) {
-        if (playerA != null) playerA.setChooseStrictMode(enable);
-        if (playerB != null) playerB.setChooseStrictMode(enable);
-        if (playerC != null) playerC.setChooseStrictMode(enable);
-        if (playerD != null) playerD.setChooseStrictMode(enable);
+        if (playerA != null) {
+            playerA.setChooseStrictMode(enable);
+        }
+        if (playerB != null) {
+            playerB.setChooseStrictMode(enable);
+        }
+        if (playerC != null) {
+            playerC.setChooseStrictMode(enable);
+        }
+        if (playerD != null) {
+            playerD.setChooseStrictMode(enable);
+        }
     }
 
     protected void addCustomCardWithSpell(TestPlayer controllerPlayer, SpellAbility spellAbility, Ability extraAbility, CardType cardType) {
@@ -319,7 +327,7 @@ public abstract class MageTestPlayerBase {
         if (modificationAmount >= 0) {
             effect = new SpellsCostIncreasingAllEffect(modificationAmount, StaticFilters.FILTER_CARD, TargetController.YOU);
         } else {
-            effect = new SpellsCostReductionAllEffect(StaticFilters.FILTER_CARD, -1 * modificationAmount, false, true);
+            effect = new SpellsCostReductionControllerEffect(StaticFilters.FILTER_CARD, -1 * modificationAmount, false);
         }
 
         addCustomCardWithAbility(
@@ -439,7 +447,9 @@ class CustomTestCard extends CardImpl {
             abilitiesList.put(cardName, new AbilitiesImpl<>());
         }
         Abilities<Ability> oldAbilities = abilitiesList.get(cardName);
-        if (ability != null) oldAbilities.add(ability);
+        if (ability != null) {
+            oldAbilities.add(ability);
+        }
 
         spellAbilitiesList.put(cardName, spellAbility);
     }

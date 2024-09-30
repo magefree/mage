@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.abilities.condition.common.BargainedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.BargainAbility;
 import mage.cards.CardImpl;
@@ -26,8 +26,8 @@ public final class StonesplitterBolt extends CardImpl {
 
         // Stonesplitter Bolt deals X damage to target creature or planeswalker. If this spell was bargained, it deals twice X damage to that permanent instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetEffect(new MultipliedValue(ManacostVariableValue.REGULAR, 2)),
-                new DamageTargetEffect(ManacostVariableValue.REGULAR),
+                new DamageTargetEffect(new MultipliedValue(GetXValue.instance, 2)),
+                new DamageTargetEffect(GetXValue.instance),
                 BargainedCondition.instance,
                 "{this} deals X damage to target creature or planeswalker. If this spell "
                         + "was bargained, it deals twice X damage to that permanent instead."

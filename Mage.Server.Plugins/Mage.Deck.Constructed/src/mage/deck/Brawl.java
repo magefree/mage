@@ -112,7 +112,7 @@ public class Brawl extends Constructed {
         Set<String> basicsInDeck = new HashSet<>();
         if (colorIdentity.isColorless()) {
             for (Card card : deck.getCards()) {
-                if (basicLandNames.contains(card.getName())) {
+                if (ALL_BASIC_LAND_NAMES.contains(card.getName())) {
                     basicsInDeck.add(card.getName());
                 }
             }

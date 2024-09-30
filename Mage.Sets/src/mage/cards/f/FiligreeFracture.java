@@ -61,7 +61,7 @@ class FiligreeFractureEffect extends OneShotEffect {
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (player != null && permanent != null) {
             permanent.destroy(source, game, true);
-            game.getState().processAction(game);
+            game.processAction();
             if (permanent.getColor(game).isBlack() || permanent.getColor(game).isBlue()) {
                 player.drawCards(1, source, game);
             }

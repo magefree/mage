@@ -1,7 +1,6 @@
 
 package mage.cards.g;
 
-import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -12,11 +11,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -46,7 +43,8 @@ public final class GoblinBarrage extends CardImpl {
                         + "it also deals 4 damage to target player or planeswalker")
         );
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().setTargetAdjuster(GoblinBarrageAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE, true,
+                new TargetPlayerOrPlaneswalker()));
     }
 
     private GoblinBarrage(final GoblinBarrage card) {
@@ -56,16 +54,5 @@ public final class GoblinBarrage extends CardImpl {
     @Override
     public GoblinBarrage copy() {
         return new GoblinBarrage(this);
-    }
-}
-
-enum GoblinBarrageAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        if (KickedCondition.ONCE.apply(game, ability)) {
-            ability.addTarget(new TargetPlayerOrPlaneswalker());
-        }
     }
 }

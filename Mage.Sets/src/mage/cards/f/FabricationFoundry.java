@@ -49,7 +49,7 @@ public final class FabricationFoundry extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileTargetsTotalManaValueCost());
         Target target = new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_ARTIFACT_FROM_YOUR_GRAVEYARD);
-        target.setTargetName("artifact card with mana value X or less from your graveyard");
+        target.withTargetName("artifact card with mana value X or less from your graveyard");
         ability.addTarget(target);
         this.addAbility(ability);
     }

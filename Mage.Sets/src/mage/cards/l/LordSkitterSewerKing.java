@@ -42,7 +42,7 @@ public final class LordSkitterSewerKing extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        // Whenever another Rat enters the battlefield under your control, exile up to one target card from an opponent's graveyard.
+        // Whenever another Rat you control enters, exile up to one target card from an opponent's graveyard.
         Ability trigger = new EntersBattlefieldControlledTriggeredAbility(
                 new ExileTargetEffect(), filter
         );

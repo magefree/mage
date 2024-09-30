@@ -20,7 +20,7 @@ public final class ValorInAkros extends CardImpl {
     public ValorInAkros(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
-        // Whenever a creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
+        // Whenever a creature you control enters, creatures you control get +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new BoostControlledEffect(1, 1, Duration.EndOfTurn),

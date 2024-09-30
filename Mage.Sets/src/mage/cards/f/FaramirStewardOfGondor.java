@@ -39,7 +39,7 @@ public final class FaramirStewardOfGondor extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever a legendary creature with mana value 4 or greater enters the battlefield under your control, you become the monarch.
+        // Whenever a legendary creature with mana value 4 or greater you control enters, you become the monarch.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BecomesMonarchSourceEffect(), filter).addHint(MonarchHint.instance));
 
         // At the beginning of your end step, if you're the monarch, create two 1/1 white Human Soldier creature tokens.

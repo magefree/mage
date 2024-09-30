@@ -1,9 +1,8 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -31,15 +30,8 @@ public final class FarmerCotton extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When Farmer Cotton enters the battlefield, create X 1/1 white Halfling creature tokens and X Food tokens.
-        TriggeredAbility trigger = new EntersBattlefieldTriggeredAbility(
-            new CreateTokenEffect(new HalflingToken(), ManacostVariableValue.ETB)
-        );
-        trigger.addEffect(
-            new CreateTokenEffect(new FoodToken(), ManacostVariableValue.ETB)
-                .setText("and X Food tokens")
-        );
-
-        this.addAbility(trigger);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new HalflingToken(),
+                GetXValue.instance).withAdditionalTokens(new FoodToken())));
     }
 
     private FarmerCotton(final FarmerCotton card) {

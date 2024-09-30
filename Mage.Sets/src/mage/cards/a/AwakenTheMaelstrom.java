@@ -91,7 +91,7 @@ class AwakenTheMaelstromEffect extends OneShotEffect {
             return false;
         }
         makeToken(player, game, source);
-        game.getState().processAction(game);
+        game.processAction();
         distributeCounters(player, game, source);
         return true;
     }

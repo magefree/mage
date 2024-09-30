@@ -1,0 +1,77 @@
+1 [M15:44] Aetherspouts
+1 [ELD:331] Arcane Signet
+1 [ISD:87] Army of the Damned
+1 [WWK:132] Bojuka Bog
+1 [WWK:53] Butcher of Malakir
+1 [M12:86] Cemetery Reaper
+1 [7ED:289] Charcoal Diamond
+1 [SOI:270] Choked Estuary
+1 [MIC:11] Cleaver Skaab
+1 [ELD:333] Command Tower
+1 [LCC:301] Commander's Sphere
+1 [CMM:145] Corpse Augur
+1 [MIC:17] Crowded Crypt
+1 [MIC:12] Curse of Unbinding
+1 [MIC:18] Curse of the Restless Dead
+1 [EMN:87] Dark Salvation
+1 [ODY:319] Darkwater Catacombs
+1 [M19:90] Death Baron
+1 [CLU:233] Dimir Aqueduct
+1 [DKA:135] Diregraf Captain
+1 [SOI:107] Diregraf Colossus
+1 [MOR:32] Distant Melody
+1 [NCC:249] Dread Summons
+1 [WAR:86] Dreadhorde Invasion
+1 [M3C:181] Drown in Dreams
+1 [BNG:66] Eater of Hope
+1 [MIC:3] Eloise, Nephalia Sleuth
+1 [MIC:14] Empty the Laboratory
+1 [ISD:99] Endless Ranks of the Dead
+1 [WAR:49] Eternal Skylord
+1 [CON:142] Exotic Orchard
+1 [ZNR:102] Feed the Swarm
+1 [CLU:111] Fleshbag Marauder
+1 [SOI:63] Forgotten Creation
+1 [MIC:19] Ghouls' Night Out
+1 [EMN:183] Gisa and Geralf
+1 [WAR:198] Gleaming Overseer
+1 [BRO:102] Go for the Throat
+1 [CMM:164] Gorex, the Tombshell
+1 [ONS:152] Gravespawn Sovereign
+1 [DKA:39] Havengul Runebinder
+1 [MIC:15] Hordewing Skaab
+1 [HOU:36] Hour of Eternity
+12 [OTJ:273] Island
+1 [M21:109] Liliana's Devotee
+1 [AKH:98] Liliana's Mastery
+1 [AKH:97] Liliana, Death's Majesty
+1 [AKH:99] Lord of the Accursed
+1 [GRN:77] Midnight Reaper
+1 [BFZ:240] Mortuary Mire
+1 [M3C:358] Myriad Landscape
+1 [M19:112] Open the Graves
+1 [MKC:132] Overseer of the Damned
+1 [M3C:363] Path of Ancestry
+1 [MIC:21] Prowling Geistcatcher
+1 [MIC:22] Ravenous Rotbelly
+1 [ISD:71] Rooftop Storm
+1 [DTK:229] Ruthless Deathfang
+1 [MIC:16] Shadow Kin
+1 [7ED:316] Sky Diamond
+1 [SUM:274] Sol Ring
+1 [WAR:106] Spark Reaper
+1 [CMM:121] Stitcher Geralf
+1 [BFZ:249] Sunken Hollow
+15 [OTJ:274] Swamp
+1 [SCD:110] Syphon Flesh
+1 [TOR:141] Tainted Isle
+1 [MRD:253] Talisman of Dominance
+1 [THB:245] Temple of Deceit
+1 [MIC:23] Tomb Tyrant
+1 [XLN:258] Unclaimed Territory
+1 [ISD:84] Undead Alchemist
+1 [SCD:114] Undead Augur
+1 [DKA:80] Zombie Apocalypse
+SB: 1 [MIC:2] Wilhelt, the Rotcleaver
+LAYOUT MAIN:(1,7)(CARD_TYPE,false,61)|([ELD:331],[7ED:289],[LCC:301],[MIC:17],[7ED:316],[SUM:274],[MRD:253])([WWK:53],[M12:86],[MIC:11],[CMM:145],[M19:90],[DKA:135],[SOI:107],[BNG:66],[MIC:3],[WAR:49],[CLU:111],[SOI:63],[EMN:183],[WAR:198],[CMM:164],[ONS:152],[DKA:39],[MIC:15],[M21:109],[AKH:99],[GRN:77],[MKC:132],[MIC:21],[MIC:22],[DTK:229],[MIC:16],[WAR:106],[CMM:121],[MIC:23],[ISD:84],[SCD:114])([MIC:12],[MIC:18],[WAR:86],[ISD:99],[AKH:98],[M19:112],[ISD:71])([M15:44],[M3C:181],[BRO:102])([WWK:132],[SOI:270],[ELD:333],[ODY:319],[CLU:233],[CON:142],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[OTJ:273],[BFZ:240],[M3C:358],[M3C:363],[BFZ:249],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[OTJ:274],[TOR:141],[THB:245],[XLN:258])([AKH:97])([ISD:87],[EMN:87],[MOR:32],[NCC:249],[MIC:14],[ZNR:102],[MIC:19],[HOU:36],[SCD:110],[DKA:80])
+LAYOUT SIDEBOARD:(1,1)(NONE,false,50)|([MIC:2])

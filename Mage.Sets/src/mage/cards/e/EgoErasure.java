@@ -21,7 +21,7 @@ import java.util.UUID;
 public final class EgoErasure extends CardImpl {
 
     public EgoErasure(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.INSTANT}, "{2}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.INSTANT}, "{2}{U}");
         this.subtype.add(SubType.SHAPESHIFTER);
 
         // Changeling

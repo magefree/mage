@@ -17,7 +17,7 @@ import mage.game.permanent.token.EldraziSpawnToken;
 public final class SkitteringInvasion extends CardImpl {
 
     public SkitteringInvasion (UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.TRIBAL,CardType.SORCERY},"{7}");
+        super(ownerId,setInfo,new CardType[]{CardType.KINDRED,CardType.SORCERY},"{7}");
         this.subtype.add(SubType.ELDRAZI);
         this.getSpellAbility().addEffect(new CreateTokenEffect(new EldraziSpawnToken(), 5).withTextOptions(true));
     }

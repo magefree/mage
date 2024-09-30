@@ -63,7 +63,7 @@ class UnshakableTailSurveilTriggeredAbility extends TriggeredAbilityImpl {
 
     UnshakableTailSurveilTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SurveilEffect(1, false));
-        setTriggerPhrase("When {this} enters the battlefield and at the beginning of your upkeep, ");
+        setTriggerPhrase("When {this} enters and at the beginning of your upkeep, ");
     }
 
     private UnshakableTailSurveilTriggeredAbility(final UnshakableTailSurveilTriggeredAbility ability) {

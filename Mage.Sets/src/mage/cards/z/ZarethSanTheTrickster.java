@@ -2,7 +2,7 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -16,23 +16,23 @@ import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.card.OwnerIdPredicate;
 import mage.filter.predicate.permanent.UnblockedPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetControlledPermanent;
+import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
 
 import java.util.UUID;
 
 /**
- * @author TheElk801
+ * @author TheElk801, notgreat
  */
 public final class ZarethSanTheTrickster extends CardImpl {
 
+    private static final FilterCard filterCardGraveyard
+            = new FilterPermanentCard("permanent card from that player's graveyard");
     private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.ROGUE, "an unblocked attacking Rogue you control");
 
     static {
@@ -59,7 +59,10 @@ public final class ZarethSanTheTrickster extends CardImpl {
         this.addAbility(ability);
 
         // Whenever Zareth San deals combat damage to a player, you may put target permanent card from that player's graveyard onto the battlefield under your control.
-        this.addAbility(new ZarethSanTheTricksterTriggeredAbility());
+        Ability ability2 = new DealsCombatDamageToAPlayerTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true, true);
+        ability2.addTarget(new TargetCardInGraveyard(filterCardGraveyard));
+        ability2.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster(true));
+        this.addAbility(ability2);
     }
 
     private ZarethSanTheTrickster(final ZarethSanTheTrickster card) {
@@ -107,49 +110,5 @@ class ZarethSanTheTricksterEffect extends OneShotEffect {
             game.getCombat().addAttackingCreature(permanent.getId(), game);
         }
         return true;
-    }
-}
-
-class ZarethSanTheTricksterTriggeredAbility extends TriggeredAbilityImpl {
-
-    ZarethSanTheTricksterTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
-    }
-
-    private ZarethSanTheTricksterTriggeredAbility(final ZarethSanTheTricksterTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ZarethSanTheTricksterTriggeredAbility copy() {
-        return new ZarethSanTheTricksterTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Player opponent = game.getPlayer(event.getPlayerId());
-        if (opponent == null
-                || !event.getSourceId().equals(this.sourceId)
-                || !((DamagedEvent) event).isCombatDamage()) {
-            return false;
-        }
-        FilterCard filter = new FilterPermanentCard(
-                "permanent card in " + opponent.getLogName() + "'s graveyard"
-        );
-        filter.add(new OwnerIdPredicate(opponent.getId()));
-        this.getTargets().clear();
-        this.addTarget(new TargetCardInGraveyard(filter));
-        return true;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals combat damage to a player, you may put target permanent card " +
-                "from that player's graveyard onto the battlefield under your control.";
     }
 }

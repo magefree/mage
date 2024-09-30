@@ -32,8 +32,8 @@ public final class MarchOfSwirlingMist extends CardImpl {
 
         // Up to X target creatures phase out.
         this.getSpellAbility().addEffect(new PhaseOutTargetEffect().setText("up to X target creatures phase out"));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private MarchOfSwirlingMist(final MarchOfSwirlingMist card) {

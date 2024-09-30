@@ -30,7 +30,7 @@ public final class ProsperousInnkeeper extends CardImpl {
         // When Prosperous Innkeeper enters the battlefield, create a Treasure token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
 
-        // Whenever another creature enters the battlefield under your control, you gain 1 life.
+        // Whenever another creature you control enters, you gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new GainLifeEffect(1), StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
         ));

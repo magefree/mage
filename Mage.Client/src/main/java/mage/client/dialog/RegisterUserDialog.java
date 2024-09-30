@@ -19,22 +19,17 @@ import java.util.concurrent.TimeoutException;
  */
 public class RegisterUserDialog extends MageDialog {
 
-    private static final Logger logger = Logger.getLogger(ConnectDialog.class);
-    private final ConnectDialog connectDialog;
+    private static final Logger logger = Logger.getLogger(RegisterUserDialog.class);
     private Connection connection;
     private ConnectTask task;
 
-    /**
-     * Creates new form RegisterUserDialog
-     */
-    public RegisterUserDialog(ConnectDialog connectDialog) {
+    public RegisterUserDialog() {
         initComponents();
-        this.connectDialog = connectDialog;
     }
 
-    public void showDialog() {
-        this.txtServer.setText(this.connectDialog.getServer());
-        this.txtPort.setText(this.connectDialog.getPort());
+    public void showDialog(String server, String port) {
+        this.txtServer.setText(server);
+        this.txtPort.setText(port);
         this.lblStatus.setText("");
 
         this.setModal(true);

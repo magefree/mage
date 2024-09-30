@@ -52,7 +52,7 @@ class TempOfTheDamnedEffect extends OneShotEffect {
 
     TempOfTheDamnedEffect() {
         super(Outcome.Neutral);
-        staticText = "roll a six-sided die. {this} enters the battlefield with a number of funk counters on it equal to the result";
+        staticText = "roll a six-sided die. {this} enters with a number of funk counters on it equal to the result";
     }
 
     private TempOfTheDamnedEffect(final TempOfTheDamnedEffect effect) {

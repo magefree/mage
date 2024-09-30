@@ -1,5 +1,6 @@
 package mage.player.ai;
 
+import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -341,11 +342,11 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public int chooseReplacementEffect(Map<String, String> rEffects, Game game) {
+    public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
         if (this.isHuman()) {
-            return RandomUtil.nextInt(rEffects.size());
+            return RandomUtil.nextInt(effectsMap.size());
         }
-        return super.chooseReplacementEffect(rEffects, game);
+        return super.chooseReplacementEffect(effectsMap, objectsMap, game);
     }
 
     @Override

@@ -20,7 +20,7 @@ public final class GloryscaleViashino extends CardImpl {
 
     public GloryscaleViashino(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}{G}{W}");
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.SOLDIER);
 
         this.power = new MageInt(3);

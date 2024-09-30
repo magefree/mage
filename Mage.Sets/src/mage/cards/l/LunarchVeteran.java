@@ -27,7 +27,7 @@ public final class LunarchVeteran extends CardImpl {
         this.toughness = new MageInt(1);
         this.secondSideCardClazz = mage.cards.l.LuminousPhantom.class;
 
-        // Whenever another creature enters the battlefield under your control, you gain 1 life.
+        // Whenever another creature you control enters, you gain 1 life.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new GainLifeEffect(1), StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
         ));
