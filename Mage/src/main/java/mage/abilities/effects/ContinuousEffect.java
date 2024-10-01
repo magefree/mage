@@ -74,8 +74,6 @@ public interface ContinuousEffect extends Effect {
 
     boolean isYourNextEndStep(Game game);
 
-    boolean isTheNextEndStep(Game game);
-
     boolean isYourNextUpkeepStep(Game game);
 
     @Override
