@@ -33,7 +33,7 @@ public final class TowashiSongshaper extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another artifact enters the battlefield under your control, Towashi Songshaper gets +1/+0 until end of turn.
+        // Whenever another artifact you control enters, Towashi Songshaper gets +1/+0 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn), filter
         ));

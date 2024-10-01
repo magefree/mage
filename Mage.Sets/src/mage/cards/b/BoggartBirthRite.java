@@ -22,7 +22,7 @@ public final class BoggartBirthRite extends CardImpl {
     }
 
     public BoggartBirthRite(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.TRIBAL, CardType.SORCERY}, "{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.KINDRED, CardType.SORCERY}, "{B}");
         this.subtype.add(SubType.GOBLIN);
 
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());

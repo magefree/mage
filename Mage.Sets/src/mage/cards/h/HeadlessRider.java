@@ -1,7 +1,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class HeadlessRider extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Wheenver Headless Rider or another nontoken Zombie you control dies, create a 2/2 black Zombie creature token.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(
                 new CreateTokenEffect(new ZombieToken()), false, filter
         ));
     }

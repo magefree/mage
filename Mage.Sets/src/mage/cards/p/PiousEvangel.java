@@ -42,7 +42,7 @@ public final class PiousEvangel extends CardImpl {
 
         this.secondSideCardClazz = mage.cards.w.WaywardDisciple.class;
 
-        // Whenever Pious Evangel or another creature enters the battlefield under your control, you gain 1 life.
+        // Whenever Pious Evangel or another creature you control enters, you gain 1 life.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(new GainLifeEffect(1),
                 StaticFilters.FILTER_PERMANENT_CREATURE, false, true));
 

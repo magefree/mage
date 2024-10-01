@@ -12,6 +12,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 
@@ -66,10 +67,13 @@ class RumblingAftershocksTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        int kickedCount = KickerAbility.getSpellKickedCount(game, event.getTargetId());
-        if (kickedCount > 0) {
-            this.getEffects().get(0).setValue("damageAmount", kickedCount);
-            return true;
+        Spell spell = game.getSpell(event.getTargetId());
+        if (spell != null) {
+            int kickedCount = KickerAbility.getKickedCounter(game, spell.getSpellAbility());
+            if (kickedCount > 0) {
+                this.getEffects().get(0).setValue("damageAmount", kickedCount);
+                return true;
+            }
         }
         return false;
     }

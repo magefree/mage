@@ -29,7 +29,7 @@ public final class LifeFindsAWay extends CardImpl {
     public LifeFindsAWay(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
-        // Whenever a nontoken creature with power 4 or greater enters the battlefield under your control, populate.
+        // Whenever a nontoken creature with power 4 or greater you control enters, populate.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new PopulateEffect(), filter));
     }
 

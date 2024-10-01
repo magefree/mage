@@ -27,7 +27,7 @@ public final class DurableHandicraft extends CardImpl {
     public DurableHandicraft(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
-        // Whenever a creature enters the battlefield under your control, you may pay {1}. If you do, put a +1/+1 counter on that creature.
+        // Whenever a creature you control enters, you may pay {1}. If you do, put a +1/+1 counter on that creature.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD,
                 new DoIfCostPaid(

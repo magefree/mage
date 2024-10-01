@@ -45,7 +45,7 @@ public final class SzatsWill extends CardImpl {
         this.getSpellAbility().getModes().setChooseText(
                 "Choose one. If you control a commander as you cast this spell, you may choose both."
         );
-        this.getSpellAbility().getModes().setMoreCondition(ControlACommanderCondition.instance);
+        this.getSpellAbility().getModes().setMoreCondition(2, ControlACommanderCondition.instance);
 
         // • Each opponent sacrifices a creature they control with the greatest power.
         this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(filter));

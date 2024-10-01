@@ -41,7 +41,7 @@ public final class Hypnox extends CardImpl {
         // When Hypnox enters the battlefield, if you cast it from your hand, exile all cards from target opponent's hand.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new HypnoxExileEffect()),
-                CastFromHandSourcePermanentCondition.instance, "When {this} enters the battlefield, " +
+                CastFromHandSourcePermanentCondition.instance, "When {this} enters, " +
                 "if you cast it from your hand, exile all cards from target opponent's hand."
         );
         ability.addTarget(new TargetOpponent());

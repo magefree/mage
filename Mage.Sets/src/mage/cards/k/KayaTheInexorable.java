@@ -113,7 +113,7 @@ class KayaTheInexorableTriggeredAbility extends TriggeredAbilityImpl {
         if (game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD) {
             sourcePermanent = game.getPermanent(getSourceId());
         } else {
-            if (game.getShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
+            if (game.checkShortLivingLKI(getSourceId(), Zone.BATTLEFIELD)) {
                 sourcePermanent = (Permanent) game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
             }
         }

@@ -3,7 +3,10 @@
 package mage.game.turn;
 
 import mage.constants.PhaseStep;
+import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
+
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -26,4 +29,10 @@ public class EndStep extends Step {
         return new EndStep(this);
     }
 
+    @Override
+    public void beginStep(Game game, UUID activePlayerId) {
+        super.beginStep(game, activePlayerId);
+
+        game.getState().removeBoESEffects(game);
+    }
 }

@@ -51,7 +51,7 @@ public class OnlyOnceModeTest extends CardTestPlayerBase {
     public void test_OncePerTurn() {
         int triggerCalls = 5;
 
-        // Whenever another creature enters the battlefield under your control, choose one that hasn't been chosen this turn
+        // Whenever another creature you control enters, choose one that hasn't been chosen this turn
         // Add {G}{G}{G}.
         // Put a +1/+1 counter on each creature you control.
         // Scry 2, then draw a card.

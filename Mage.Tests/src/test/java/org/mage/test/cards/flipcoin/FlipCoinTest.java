@@ -19,7 +19,7 @@ public class FlipCoinTest extends CardTestPlayerBase {
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{3}");
 
-        //setStrictChooseMode(true); // normal play without errors
+        setStrictChooseMode(false); // normal play without errors
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
     }

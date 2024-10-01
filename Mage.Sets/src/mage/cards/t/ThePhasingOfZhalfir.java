@@ -122,7 +122,7 @@ class ThePhasingOfZhalfirDestroyEffect extends OneShotEffect {
                 playerMap.compute(permanent.getControllerId(), CardUtil::setOrIncrementValue);
             }
         }
-        game.getState().processAction(game);
+        game.processAction();
         Token token = new PhyrexianToken();
         for (Map.Entry<UUID, Integer> entry : playerMap.entrySet()) {
             token.putOntoBattlefield(entry.getValue(), game, source, entry.getKey());

@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.cards.CardImpl;
@@ -34,7 +34,7 @@ public final class EvenTheScore extends CardImpl {
         ).setRuleAtTheTop(true));
 
         // Draw X cards.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GetXValue.instance));
     }
 
     private EvenTheScore(final EvenTheScore card) {

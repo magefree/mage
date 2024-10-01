@@ -33,7 +33,7 @@ public final class Bequeathal extends CardImpl {
         this.addAbility(ability);
 
         // When enchanted creature dies, you draw two cards.
-        this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(2).setText("you draw two cards"), "enchanted creature"));
+        this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(2, true), "enchanted creature"));
     }
 
     private Bequeathal(final Bequeathal card) {

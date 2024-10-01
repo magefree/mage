@@ -52,7 +52,7 @@ public final class InameAsOne extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 1, filter)), true),
                 CastFromHandSourcePermanentCondition.instance,
-                "When {this} enters the battlefield, if you cast it from your hand, you may search your library for a Spirit permanent card, put it onto the battlefield, then shuffle."),
+                "When {this} enters, if you cast it from your hand, you may search your library for a Spirit permanent card, put it onto the battlefield, then shuffle."),
                 new CastFromHandWatcher());
 
         // When Iname as One dies, you may exile it. If you do, return target Spirit permanent card from your graveyard to the battlefield.

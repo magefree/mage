@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -26,8 +26,8 @@ public final class TerisiaresDevastation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{2}{B}{B}");
 
         // You lose X life and create X tapped Powerstone tokens. Then all creatures get -1/-1 until end of turn for each artifact you control.
-        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(ManacostVariableValue.REGULAR));
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new PowerstoneToken(), ManacostVariableValue.REGULAR, true, false).concatBy("and"));
+        this.getSpellAbility().addEffect(new LoseLifeSourceControllerEffect(GetXValue.instance));
+        this.getSpellAbility().addEffect(new CreateTokenEffect(new PowerstoneToken(), GetXValue.instance, true, false).concatBy("and"));
         this.getSpellAbility().addEffect(new BoostAllEffect(
                 xValue, xValue, Duration.EndOfTurn)
                 .concatBy("Then"));

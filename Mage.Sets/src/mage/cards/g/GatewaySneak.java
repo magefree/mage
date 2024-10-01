@@ -29,7 +29,7 @@ public final class GatewaySneak extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
-        // Whenever a Gate enters the battlefield under your control, Gateway Sneak can't be blocked this turn.
+        // Whenever a Gate you control enters, Gateway Sneak can't be blocked this turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn), filter
         ));

@@ -40,7 +40,7 @@ public final class SoulhunterRakshasa extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new SoulhunterRakshasaEffect()),
                 CastFromEverywhereSourceCondition.instance,
-                "When {this} enters the battlefield, if you cast it from your hand, it deals 1 damage to target opponent for each Swamp you control.");
+                "When {this} enters, if you cast it from your hand, it deals 1 damage to target opponent for each Swamp you control.");
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability, new CastFromHandWatcher());
     }

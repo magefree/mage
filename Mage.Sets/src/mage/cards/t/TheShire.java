@@ -1,24 +1,17 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.InvertCondition;
-import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.TapSourceEffect;
-import mage.abilities.hint.ConditionHint;
-import mage.abilities.hint.Hint;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SuperType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -33,15 +26,13 @@ import java.util.UUID;
  */
 public final class TheShire extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("a legendary creature");
 
     static {
         filter.add(SuperType.LEGENDARY.getPredicate());
     }
 
-    private static final Condition condition
-            = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0);
-    private static final Hint hint = new ConditionHint( new InvertCondition(condition), "You control a legendary creature");
+    private static final YouControlPermanentCondition condition = new YouControlPermanentCondition(filter);
 
     public TheShire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
@@ -49,10 +40,7 @@ public final class TheShire extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // The Shire enters the battlefield tapped unless you control a legendary creature.
-        this.addAbility(new EntersBattlefieldAbility(
-                new ConditionalOneShotEffect(new TapSourceEffect(), condition, ""),
-                "tapped unless you control a legendary creature"
-        ).addHint(hint));
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(condition).addHint(condition.getHint()));
 
         // {T}: Add {G}.
         this.addAbility(new GreenManaAbility());

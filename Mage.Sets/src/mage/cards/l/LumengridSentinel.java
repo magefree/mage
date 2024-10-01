@@ -30,7 +30,7 @@ public final class LumengridSentinel extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever an artifact enters the battlefield under your control, you may tap target permanent.
+        // Whenever an artifact you control enters, you may tap target permanent.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new TapTargetEffect(), StaticFilters.FILTER_PERMANENT_ARTIFACT_AN, true
         );

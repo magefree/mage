@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author LevelX2
  */
 public final class Theros extends ExpansionSet {
@@ -27,11 +26,13 @@ public final class Theros extends ExpansionSet {
         super("Theros", "THS", ExpansionSet.buildDate(2013, 9, 27), SetType.EXPANSION);
         this.blockName = "Theros";
         this.hasBoosters = true;
+        this.rotationSet = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+
         cards.add(new SetCardInfo("Abhorrent Overlord", 75, Rarity.RARE, mage.cards.a.AbhorrentOverlord.class));
         cards.add(new SetCardInfo("Agent of Horizons", 148, Rarity.COMMON, mage.cards.a.AgentOfHorizons.class));
         cards.add(new SetCardInfo("Agent of the Fates", 76, Rarity.RARE, mage.cards.a.AgentOfTheFates.class));

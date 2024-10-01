@@ -10,6 +10,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.util.CardUtil;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -59,7 +60,7 @@ class LilianasIndignationEffect extends OneShotEffect {
         if (controller == null) {
             return false;
         }
-        int xValue = source.getManaCostsToPay().getX();
+        int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (xValue < 1) {
             return true;
         }
@@ -75,7 +76,7 @@ class LilianasIndignationEffect extends OneShotEffect {
         if (creatures > 0) {
             Player targetPlayer = game.getPlayer(source.getFirstTarget());
             if (targetPlayer != null) {
-                game.getState().processAction(game);
+                game.processAction();
                 targetPlayer.loseLife(creatures, game, source, false);
             }
         }

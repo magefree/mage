@@ -27,6 +27,7 @@ public final class Ixalan extends ExpansionSet {
         this.blockName = "Ixalan";
         this.hasBoosters = true;
         this.hasBasicLands = true;
+        this.rotationSet = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;

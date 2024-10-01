@@ -60,8 +60,8 @@ public final class ShigekiJukaiVisionary extends CardImpl {
                 "{X}{X}{G}{G}", new ReturnFromGraveyardToHandTargetEffect()
                 .setText("return X target nonlegendary cards from your graveyard to your hand")
         );
-        ability2.setTargetAdjuster(new XTargetsCountAdjuster());
         ability2.addTarget(new TargetCardInYourGraveyard(filter));
+        ability2.setTargetAdjuster(new XTargetsCountAdjuster());
         this.addAbility(ability2);
     }
 

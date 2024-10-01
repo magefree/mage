@@ -1,12 +1,10 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.common.NotMyTurnCondition;
+import mage.abilities.common.EntersBattlefieldTappedUnlessAbility;
+import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.PutOnTopOrBottomLibraryTargetEffect;
-import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.WardAbility;
 import mage.cards.AdventureCard;
@@ -45,10 +43,7 @@ public final class HornedLochWhale extends AdventureCard {
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // Horned Loch-Whale enters the battlefield tapped unless it's your turn.
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(
-                new TapSourceEffect(true), NotMyTurnCondition.instance,
-                "tapped unless it's your turn"
-        )));
+        this.addAbility(new EntersBattlefieldTappedUnlessAbility(MyTurnCondition.instance, "it's your turn"));
 
         // Lagoon Breach
         // The owner of target attacking creature you don't control puts it on the top or bottom of their library.

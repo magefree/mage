@@ -1,14 +1,16 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.*;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
@@ -18,6 +20,9 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -73,14 +78,14 @@ class AladdinsLampEffect extends ReplacementEffectImpl {
             return false;
         }
 
-        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, source.getManaCostsToPay().getX()));
+        Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, CardUtil.getSourceCostsTag(game, source, "X", 0)));
         controller.lookAtCards(source, null, cards, game);
         TargetCard target = new TargetCard(Zone.LIBRARY, new FilterCard("card to stay at the top of library"));
         if (controller.choose(outcome, cards, target, source, game)) {
             cards.remove(target.getFirstTarget());
         }
         controller.putCardsOnBottomOfLibrary(cards, game, source, false);
-        game.getState().processAction(game);
+        game.processAction();
         controller.drawCards(1, source, game, event);
         discard();
         return true;

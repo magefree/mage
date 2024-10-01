@@ -150,4 +150,49 @@ public class SurveilTest extends CardTestPlayerBase {
         assertHandCount(playerA, cardB, 1);
         assertLibrary(playerA, cardA, cardC, cardD);
     }
+
+    private static final String desmondMiles = "Desmond Miles";
+
+    @Test
+    public void SurveilX_one_Yard() {
+        setStrictChooseMode(true);
+        initLibrary();
+
+        addCard(Zone.BATTLEFIELD, playerA, desmondMiles);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+
+        attack(1, playerA, desmondMiles, playerB);
+        addTarget(playerA, cardA); // surveil one in graveyard
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, cardA, 1);
+        assertLibrary(playerA, cardB, cardC, cardD);
+    }
+
+    @Test
+    public void SurveilX_two_Yard() {
+        setStrictChooseMode(true);
+        initLibrary();
+
+        addCard(Zone.BATTLEFIELD, playerA, desmondMiles);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.HAND, playerA, "Battlegrowth");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Battlegrowth");
+        addTarget(playerA, desmondMiles);
+
+        attack(1, playerA, desmondMiles, playerB);
+        addTarget(playerA, cardA + "^" + cardB); // surveil both in graveyard
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertGraveyardCount(playerA, cardA, 1);
+        assertGraveyardCount(playerA, cardB, 1);
+        assertGraveyardCount(playerA, "Battlegrowth", 1);
+        assertGraveyardCount(playerA, 3);
+        assertLibrary(playerA, cardC, cardD);
+    }
 }

@@ -37,7 +37,7 @@ public final class YouthfulValkyrie extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // Whenever another Angel enters the battlefield under your control, put a +1/+1 counter on Youthful Valyrie.
+        // Whenever another Angel you control enters, put a +1/+1 counter on Youthful Valyrie.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         ));

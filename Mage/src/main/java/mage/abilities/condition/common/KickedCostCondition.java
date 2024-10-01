@@ -20,7 +20,6 @@ public class KickedCostCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return KickerAbility.getKickedCounterStrict(game, source, kickerCostText) > 0
-                || KickerAbility.getSpellKickedCountStrict(game, source.getSourceId(), kickerCostText) > 0;
+        return KickerAbility.getKickedCounterStrict(game, source, kickerCostText) > 0;
     }
 }

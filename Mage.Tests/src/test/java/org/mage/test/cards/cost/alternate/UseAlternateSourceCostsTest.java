@@ -14,7 +14,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
     @Test
     public void DreamHallsCastColoredSpell() {
         setStrictChooseMode(true);
-        
+
         // Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
         addCard(Zone.BATTLEFIELD, playerA, "Dream Halls", 1);
 
@@ -22,7 +22,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre"); // Cast Orgre by discarding the Lightning Bolt
-        setChoice(playerA, true); // Pay alternative costs? (Discard a card that shares a color with that spell)
+        setChoice(playerA, "Cast with alternative cost: Discard a card that shares a color with that spell (source: Dream Halls");
         setChoice(playerA, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -35,6 +35,8 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
 
     @Test
     public void DreamHallsCantCastColorlessSpell() {
+        setStrictChooseMode(true);
+
         // Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
         addCard(Zone.BATTLEFIELD, playerA, "Dream Halls", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4); // Add the mountains so the spell is included in teh available spells
@@ -42,7 +44,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Juggernaut", 1); // Creature 5/3 - {4}
         addCard(Zone.HAND, playerA, "Haunted Plate Mail", 1);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Juggernaut"); // Cast Juggernaut by discarding Haunted Plate Mail may not work
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Juggernaut"); // Cast Juggernaut by discarding Haunted Plate Mail does not work
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -55,6 +57,8 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
 
     @Test
     public void DreamHallsCastWithFutureSight() {
+        setStrictChooseMode(true);
+
         // Rather than pay the mana cost for a spell, its controller may discard a card that shares a color with that spell.
         addCard(Zone.BATTLEFIELD, playerA, "Dream Halls", 1);
         // Play with the top card of your library revealed.
@@ -67,6 +71,8 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         skipInitShuffling();
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gray Ogre"); // Cast Orgre by discarding the Lightning Bolt
+        setChoice(playerA, "Cast with alternative cost: Discard a card that shares a color with that spell (source: Dream Halls");
+        setChoice(playerA, "Lightning Bolt");
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -91,7 +97,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
 
         checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", "Alpha Myr");
-        setChoice(playerA, true); // use alternative cost
+        setChoice(playerA, "Cast with alternative cost: Discard a Plains card (source: Abolish"); // use alternative cost
         setChoice(playerA, "Plains");
 
         setStrictChooseMode(true);
@@ -115,7 +121,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
 
         checkPlayableAbility("can", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", true);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Abolish", "Alpha Myr");
-        setChoice(playerA, true); // use alternative cost
+        setChoice(playerA, "Cast with alternative cost: Discard a Plains card (source: Abolish"); // use alternative cost
         setChoice(playerA, "Plains");
 
         setStrictChooseMode(true);
@@ -151,11 +157,11 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Invigorate"); // Instant {2}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
-        
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Invigorate", "Silvercoat Lion");
-        setChoice(playerA, true); // use alternative cost
+        setChoice(playerA, "Cast with alternative cost: An opponent gains 3 life (source: Invigorate"); // use alternative cost
         addTarget(playerA, playerB); // Opponent to gain live
-        
+
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -164,7 +170,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Silvercoat Lion", 6, 6);
         assertLife(playerB, 23);
     }
-    
+
     @Test
     public void test_Not_Playable_WithOpponentGainingLive() {
         // If you control a Forest, rather than pay Invigorate's mana cost, you may have an opponent gain 3 life.
@@ -173,12 +179,12 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Forest");
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
         addCard(Zone.BATTLEFIELD, playerB, "Forest");
-        
-         // can't see as playable because in graveyard
+
+        // can't see as playable because in graveyard
         checkPlayableAbility("can't", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Invigorate", false);
-        
+
         checkPlayableAbility("can't", 1, PhaseStep.PRECOMBAT_MAIN, playerB, "Cast Invigorate", false);
-        
+
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -187,7 +193,7 @@ public class UseAlternateSourceCostsTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Silvercoat Lion", 2, 2);
         assertLife(playerB, 20);
     }
-    
+
     @Test
     @Ignore // TODO: make test to check combo of alternative cost and cost reduction effects
     public void test_Playable_WithCostReduction() {

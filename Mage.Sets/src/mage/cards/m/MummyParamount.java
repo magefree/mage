@@ -31,7 +31,7 @@ public final class MummyParamount extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever another Zombie enters the battlefield under your control, Mummy Paramount gets +1/+1 until end of turn.
+        // Whenever another Zombie you control enters, Mummy Paramount gets +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter));
     }
 

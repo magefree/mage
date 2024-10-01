@@ -30,7 +30,7 @@ public final class TrialOfKnowledge extends CardImpl {
         // When Trial of Knowledge enters the battlefield, draw three cards, then discard a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(3, 1), false));
 
-        // When a Cartouche enters the battlefield under your control, return Trial of Knowledge to its owner's hand.
+        // When a Cartouche you control enters, return Trial of Knowledge to its owner's hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new ReturnToHandSourceEffect(), filter
         ));
     }

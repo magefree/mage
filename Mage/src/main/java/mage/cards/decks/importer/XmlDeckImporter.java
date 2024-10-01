@@ -9,14 +9,13 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static javax.xml.xpath.XPathConstants.NODESET;
 
 /**
  * Deck import: helper class for all xml base formats
@@ -27,7 +26,7 @@ public abstract class XmlDeckImporter extends DeckImporter {
     private final DocumentBuilder builder = getDocumentBuilder();
 
     protected List<Node> getNodes(Document doc, String xpathExpression) throws XPathExpressionException {
-        NodeList nodes = (NodeList) xpathFactory.newXPath().evaluate(xpathExpression, doc, NODESET);
+        NodeList nodes = (NodeList) xpathFactory.newXPath().evaluate(xpathExpression, doc, XPathConstants.NODESET);
         List<Node> list = new ArrayList<>();
         for (int i = 0; i < nodes.getLength(); i++) {
             list.add(nodes.item(i));

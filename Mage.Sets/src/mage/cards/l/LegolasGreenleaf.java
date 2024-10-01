@@ -46,7 +46,7 @@ public final class LegolasGreenleaf extends CardImpl {
         // Legolas Greenleaf can't be blocked by creatures with power 2 or less.
         this.addAbility(new DauntAbility());
 
-        // Whenever another legendary creature enters the battlefield under your control, put a +1/+1 counter on Legolas Greenleaf.
+        // Whenever another legendary creature you control enters, put a +1/+1 counter on Legolas Greenleaf.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         ));

@@ -37,7 +37,7 @@ public final class TerritorialBoar extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever a creature with power 4 or greater enters the battlefield under your control, Territorial Boar gets +1/+1 and gains vigilance until end of turn.
+        // Whenever a creature with power 4 or greater you control enters, Territorial Boar gets +1/+1 and gains vigilance until end of turn.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(
                 1, 1, Duration.EndOfTurn
         ).setText("{this} gets +1/+1"), filter);

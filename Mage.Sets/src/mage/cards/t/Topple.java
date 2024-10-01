@@ -42,7 +42,7 @@ class ToppleTargetCreature extends TargetCreaturePermanent {
 
     public ToppleTargetCreature() {
         super();
-        setTargetName("creature with the greatest power among creatures on the battlefield");
+        withTargetName("creature with the greatest power among creatures on the battlefield");
     }
 
     private ToppleTargetCreature(final ToppleTargetCreature target) {

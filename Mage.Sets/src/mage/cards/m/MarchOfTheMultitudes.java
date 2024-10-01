@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import java.util.UUID;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
@@ -24,7 +24,7 @@ public final class MarchOfTheMultitudes extends CardImpl {
         // Create X 1/1 white Soldier creature tokens with lifelink.
         this.getSpellAbility().addEffect(new CreateTokenEffect(
                 new SoldierLifelinkToken(),
-                ManacostVariableValue.REGULAR
+                GetXValue.instance
         ));
     }
 

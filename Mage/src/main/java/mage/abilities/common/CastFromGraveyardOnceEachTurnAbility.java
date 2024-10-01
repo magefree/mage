@@ -1,7 +1,6 @@
 package mage.abilities.common;
 
 import mage.MageIdentifier;
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -96,8 +95,10 @@ class CastFromGraveyardOnceEffect extends AsThoughEffectImpl {
             if (spellAbility.getManaCosts().isEmpty()) {
                 return false;
             }
-            return spellAbility.spellCanBeActivatedRegularlyNow(playerId, game)
-                    && filter.match(cardToCheck, playerId, source, game);
+            Set<MageIdentifier> allowedToBeCastNow = spellAbility.spellCanBeActivatedNow(playerId, game);
+            if (allowedToBeCastNow.contains(MageIdentifier.Default)) {
+                return filter.match(cardToCheck, playerId, source, game);
+            }
         }
         return false;
     }

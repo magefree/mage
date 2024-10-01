@@ -3,7 +3,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class ButcherOfMalakir extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever Butcher of Malakir or another creature you control dies, each opponent sacrifices a creature.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE), false, filter));
+        this.addAbility(new DiesThisOrAnotherTriggeredAbility(new SacrificeOpponentsEffect(StaticFilters.FILTER_PERMANENT_CREATURE), false, filter));
     }
 
     private ButcherOfMalakir(final ButcherOfMalakir card) {

@@ -37,6 +37,7 @@ public class Legacy extends Constructed {
         banned.add("Frantic Search");
         banned.add("Gitaxian Probe");
         banned.add("Goblin Recruiter");
+        banned.add("Grief");
         banned.add("Gush");
         banned.add("Hermit Druid");
         banned.add("Imperial Seal");
@@ -64,9 +65,9 @@ public class Legacy extends Constructed {
         banned.add("Sol Ring");
         banned.add("Strip Mine");
         banned.add("Survival of the Fittest");
-        banned.add("Timetwister");
         banned.add("Time Vault");
         banned.add("Time Walk");
+        banned.add("Timetwister");
         banned.add("Tinker");
         banned.add("Tolarian Academy");
         banned.add("Treasure Cruise");

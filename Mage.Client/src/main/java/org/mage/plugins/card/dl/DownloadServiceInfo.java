@@ -7,8 +7,6 @@ import java.net.Proxy;
  */
 public interface DownloadServiceInfo {
 
-    Proxy getProxy();
-
     boolean isNeedCancel();
 
     void incErrorCount();
@@ -18,8 +16,6 @@ public interface DownloadServiceInfo {
     void updateProgressMessage(String text);
     
     void updateProgressMessage(String text, int progressCurrent, int progressNeed);
-
-    void showDownloadControls(boolean needToShow);
 
     Object getSync();
 }

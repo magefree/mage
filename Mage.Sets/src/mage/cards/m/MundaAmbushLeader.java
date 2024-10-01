@@ -36,7 +36,7 @@ public final class MundaAmbushLeader extends CardImpl {
 
         // Haste
         this.addAbility(HasteAbility.getInstance());
-        // <i>Rally</i>-Whenever Munda, Ambush Leader or another Ally enters the battlefield under your control,
+        // <i>Rally</i>-Whenever Munda, Ambush Leader or another Ally you control enters,
         // you may look at the top four cards of your library. If you do, reveal any number of Ally cards from among them,
         // then put those cards on top of your library in any order and the rest on the bottom in any order.
         Effect effect = new LookLibraryAndPickControllerEffect(4, Integer.MAX_VALUE, filter, PutCards.TOP_ANY, PutCards.BOTTOM_ANY, false);

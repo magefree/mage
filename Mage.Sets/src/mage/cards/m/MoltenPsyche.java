@@ -72,7 +72,7 @@ class MoltenPsycheEffect extends OneShotEffect {
                 }
             }
 
-            game.getState().processAction(game); // so effects from creatures that were on the battlefield won't trigger from draw action
+            game.processAction(); // so effects from creatures that were on the battlefield won't trigger from draw action
 
             for (UUID playerId : cardsToDraw.keySet()) {
                 Player player = game.getPlayer(playerId);

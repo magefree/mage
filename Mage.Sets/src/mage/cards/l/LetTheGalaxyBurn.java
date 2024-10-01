@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.abilities.dynamicvalue.AdditiveDynamicValue;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.CascadeAbility;
@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class LetTheGalaxyBurn extends CardImpl {
 
     private static final DynamicValue xValue = new AdditiveDynamicValue(
-            ManacostVariableValue.REGULAR, StaticValue.get(2)
+            GetXValue.instance, StaticValue.get(2)
     );
     private static final FilterPermanent filter = new FilterCreaturePermanent();
 

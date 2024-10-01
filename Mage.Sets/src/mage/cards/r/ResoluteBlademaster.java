@@ -28,7 +28,7 @@ public final class ResoluteBlademaster extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // <i>Rally</i>-Whenever Resolute Blademaster or another Ally enters the battlefield under your control, 
+        // <i>Rally</i>-Whenever Resolute Blademaster or another Ally you control enters, 
         // you control gain double strike until end of turn.
         Ability ability = new AllyEntersBattlefieldTriggeredAbility(
                 new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn,

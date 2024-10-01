@@ -16,6 +16,7 @@ import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.hint.common.CitysBlessingHint;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.hint.common.InitiativeHint;
 import mage.abilities.hint.common.MonarchHint;
 import mage.abilities.keyword.*;
@@ -142,11 +143,6 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-        skipListAddName(SKIP_LIST_TYPE, "MH3", "Echoes of Eternity"); // temporary, waiting for tribal -> kindred change
-        skipListAddName(SKIP_LIST_TYPE, "MH3", "Idol of False Gods"); // temporary, waiting for tribal -> kindred change
-        skipListAddName(SKIP_LIST_TYPE, "M3C", "Tarmogoyf Nest"); // temporary, waiting for tribal -> kindred change
-        skipListAddName(SKIP_LIST_TYPE, "MH3", "Kozilek's Command"); // temporary, waiting for tribal -> kindred change
-        skipListAddName(SKIP_LIST_TYPE, "M3C", "Eldritch Immunity"); // temporary, waiting for tribal -> kindred change
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
@@ -160,7 +156,8 @@ public class VerifyCardDataTest {
         // rarity
         // skipListAddName(SKIP_LIST_RARITY, set, cardName);
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
-        
+        skipListAddName(SKIP_LIST_RARITY, "DSC", "Suspicious Bookcase"); // temporary
+
         // missing abilities
         // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);
 
@@ -2074,6 +2071,7 @@ public class VerifyCardDataTest {
         cardHints.put(CitysBlessingHint.class, "city's blessing");
         cardHints.put(MonarchHint.class, "the monarch");
         cardHints.put(InitiativeHint.class, "the initiative");
+        cardHints.put(CurrentDungeonHint.class, "venture into");
         for (Class hintClass : cardHints.keySet()) {
             String lookupText = cardHints.get(hintClass);
             boolean needHint = ref.text.contains(lookupText);
@@ -2261,7 +2259,7 @@ public class VerifyCardDataTest {
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
             if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
-                card.getAbilities().getRules(card.getName()).forEach(this::printAbilityText);
+                card.getAbilities().getRules().forEach(this::printAbilityText);
             } else {
                 card.getRules().forEach(this::printAbilityText);
             }
@@ -2773,6 +2771,9 @@ public class VerifyCardDataTest {
     public void test_checkCardConstructors() {
         // create all cards, can catch additional verify and runtime checks from abilities and effects
         // example: wrong code usage errors
+        //
+        // warning, look at stack trace logs, not card names -- some error code can be hidden in static methods and can be called from un-related cards
+        // use test_showCardInfo for detailed errors
         Collection<String> errorsList = new ArrayList<>();
         Collection<ExpansionSet> sets = Sets.getInstance().values();
         for (ExpansionSet set : sets) {
@@ -2781,7 +2782,7 @@ public class VerifyCardDataTest {
                     Card card = CardImpl.createCard(setInfo.getCardClass(), new CardSetInfo(setInfo.getName(), set.getCode(),
                             setInfo.getCardNumber(), setInfo.getRarity(), setInfo.getGraphicInfo()));
                     if (card == null) {
-                        errorsList.add("Error: broken constructor " + setInfo.getCardClass());
+                        errorsList.add("Error: can't create card - " + setInfo.getCardClass() + " - see logs for errors");
                         continue;
                     }
                     if (!card.getExpansionSetCode().equals(set.getCode())) {
@@ -2789,7 +2790,7 @@ public class VerifyCardDataTest {
                     }
                 } catch (Throwable e) {
                     // CardImpl.createCard don't throw exceptions (only error logs), so that logs are useless here
-                    logger.error("Error: can't create card " + setInfo.getName() + ": " + e.getMessage(), e);
+                    errorsList.add("Error: can't create card - " + setInfo.getCardClass() + " - see logs for errors");
                 }
             }
         }

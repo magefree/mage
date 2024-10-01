@@ -28,7 +28,7 @@ public final class SalivatingGremlins extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever an artifact enters the battlefield under your control, Salivating Gremlins gets +2/+0 and gains trample until end of turn.
+        // Whenever an artifact you control enters, Salivating Gremlins gets +2/+0 and gains trample until end of turn.
         Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
         effect.setText("{this} gets +2/+0");
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD,

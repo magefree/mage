@@ -101,7 +101,7 @@ class RetetherEffect extends OneShotEffect {
                         target.getFilter().add(CardType.CREATURE.getPredicate());
                         target.withNotTarget(true);
                         if (target.canChoose(controller.getId(), source, game)) {
-                            target.setTargetName("creature to enchant (" + aura.getLogName() + ')');
+                            target.withTargetName("creature to enchant (" + aura.getLogName() + ')');
                             if (controller.choose(Outcome.PutCardInPlay, target, source, game)) {
                                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                                 if (permanent != null && !permanent.cantBeAttachedBy(aura, source, game, true)) {

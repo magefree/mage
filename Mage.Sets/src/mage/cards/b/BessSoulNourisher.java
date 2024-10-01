@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.BasePowerPredicate;
@@ -24,7 +23,7 @@ import java.util.UUID;
  */
 public class BessSoulNourisher extends CardImpl {
 
-    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures with base power and toughness 1/1");
+    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("other creatures you control with base power and toughness 1/1");
 
     static {
         filter.add(AnotherPredicate.instance);

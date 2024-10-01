@@ -61,7 +61,7 @@ class CommandeerEffect extends OneShotEffect {
         this.staticText = "Gain control of target noncreature spell. " +
                 "You may choose new targets for it. " +
                 "<i> (If that spell is an artifact, enchantment, or planeswalker, " +
-                "the permanent enters the battlefield under your control.)</i>";
+                "the permanent you control enters.)</i>";
     }
 
     private CommandeerEffect(final CommandeerEffect effect) {

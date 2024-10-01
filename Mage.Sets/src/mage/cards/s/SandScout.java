@@ -15,7 +15,7 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.game.permanent.token.HazezonTamarSandWarriorToken;
+import mage.game.permanent.token.SandWarriorToken;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -44,13 +44,13 @@ public final class SandScout extends CardImpl {
         // When Sand Scout enters the battlefield, if an opponent controls more lands than you, search your library for a Desert card, put it onto the battlefield tapped, then shuffle.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new EntersBattlefieldTriggeredAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true)),
-                condition, "When {this} enters the battlefield, if an opponent controls more lands than you, " +
+                condition, "When {this} enters, if an opponent controls more lands than you, " +
                 "search your library for a Desert card, put it onto the battlefield tapped, then shuffle."
         ));
 
         // Whenever one or more land cards are put into your graveyard from anywhere, create a 1/1 red, green, and white Sand Warrior creature token. This ability triggers only once each turn.
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
-                new CreateTokenEffect(new HazezonTamarSandWarriorToken()), false, StaticFilters.FILTER_CARD_LAND, TargetController.YOU
+                new CreateTokenEffect(new SandWarriorToken()), false, StaticFilters.FILTER_CARD_LAND, TargetController.YOU
         ).setTriggerPhrase("Whenever one or more land cards are put into your graveyard from anywhere, ").setTriggersLimitEachTurn(1));
     }
 

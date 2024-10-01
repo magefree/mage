@@ -1,7 +1,6 @@
 
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -16,6 +15,9 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -63,7 +65,7 @@ class RecallEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             // Discard X cards
-            Cards cardsDiscarded = controller.discard(source.getManaCostsToPay().getX(), false, false, source, game);
+            Cards cardsDiscarded = controller.discard(CardUtil.getSourceCostsTag(game, source, "X", 0), false, false, source, game);
             if (!cardsDiscarded.isEmpty()) {
                 // then return a card from your graveyard to your hand for each card discarded this way
                 TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(cardsDiscarded.size(), new FilterCard());

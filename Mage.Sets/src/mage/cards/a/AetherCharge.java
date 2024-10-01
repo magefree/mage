@@ -32,7 +32,7 @@ public final class AetherCharge extends CardImpl {
     public AetherCharge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
 
-        // Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent.
+        // Whenever a Beast you control enters, you may have it deal 4 damage to target opponent.
         Ability ability = new AetherChargeTriggeredAbility();
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(ability);
@@ -77,7 +77,7 @@ class AetherChargeTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "Whenever a Beast enters the battlefield under your control, you may have it deal 4 damage to target opponent or planeswalker.";
+        return "Whenever a Beast you control enters, you may have it deal 4 damage to target opponent or planeswalker.";
     }
 
     @Override

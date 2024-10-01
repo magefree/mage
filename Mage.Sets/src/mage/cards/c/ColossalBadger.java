@@ -78,7 +78,7 @@ class ColossalBadgerEffect extends OneShotEffect {
         int amount = player.millCards(4, source, game).count(StaticFilters.FILTER_CARD_CREATURE, game);
         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (amount > 0 && permanent != null) {
-            game.getState().processAction(game);
+            game.processAction();
             permanent.addCounters(CounterType.P1P1.createInstance(amount), source, game);
         }
         return true;

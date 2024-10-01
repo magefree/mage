@@ -27,22 +27,22 @@ public class RandomPacksSelectorDialog extends javax.swing.JDialog {
         boxesCreated = false;
     }
 
-    private void setType(boolean isRandomDraft, boolean isRichManDraft, boolean isRemixedDraft) {
+    private void setType(boolean isRandomDraft, boolean isRichManDraft, boolean isReshuffledDraft) {
         String title;
         if (isRandomDraft) {
             title = "Random Booster Draft Packs Selector";
         } else if (isRichManDraft) {
             title = "Rich Man Booster Draft Packs Selector";
-        } else if (isRemixedDraft) {
-            title = "Chaos Remixed Draft Set Selector";
+        } else if (isReshuffledDraft) {
+            title = "Chaos Reshuffled Draft Set Selector";
         } else {
             title = "Booster Draft Packs Selector";
         }
         setTitle(title);
     }
 
-    public void showDialog(boolean isRandomDraft, boolean isRichManDraft, boolean isRemixedDraft) {
-        setType(isRandomDraft, isRichManDraft, isRemixedDraft);
+    public void showDialog(boolean isRandomDraft, boolean isRichManDraft, boolean isReshuffledDraft) {
+        setType(isRandomDraft, isRichManDraft, isReshuffledDraft);
         createCheckboxes();
         pnlPacks.setVisible(true);
         pnlPacks.revalidate();

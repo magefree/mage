@@ -1,13 +1,13 @@
 package mage.cards.n;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.MutatesSourceTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.MutateAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,7 +17,10 @@ import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -63,11 +66,11 @@ public final class NethroiApexOfDeath extends CardImpl {
 
 class NethroiApexOfDeathTarget extends TargetCardInYourGraveyard {
 
-    private static final FilterCard filter
+    private static final FilterCard filterStatic
             = new FilterCreatureCard("creature cards with total power 10 or less from your graveyard");
 
     NethroiApexOfDeathTarget() {
-        super(0, Integer.MAX_VALUE, filter);
+        super(0, Integer.MAX_VALUE, filterStatic);
     }
 
     private NethroiApexOfDeathTarget(final NethroiApexOfDeathTarget target) {
@@ -81,20 +84,28 @@ class NethroiApexOfDeathTarget extends TargetCardInYourGraveyard {
 
     @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
-        if (!super.canTarget(controllerId, id, source, game)) {
-            return false;
-        }
-        Card card = game.getCard(id);
-        if (card == null) {
-            return false;
-        }
-        int powerSum = this
-                .getTargets()
-                .stream()
-                .map(game::getCard)
-                .map(Card::getPower)
+        return super.canTarget(controllerId, id, source, game)
+                && CardUtil.checkCanTargetTotalValueLimit(
+                this.getTargets(), id, m -> m.getPower().getValue(), 10, game);
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        return CardUtil.checkPossibleTargetsTotalValueLimit(this.getTargets(),
+                super.possibleTargets(sourceControllerId, source, game),
+                m -> m.getPower().getValue(), 10, game);
+    }
+
+    @Override
+    public String getMessage(Game game) {
+        // shows selected total
+        int selectedValue = this.getTargets().stream()
+                .map(game::getObject)
+                .filter(Objects::nonNull)
+                .map(MageObject::getPower)
                 .mapToInt(MageInt::getValue)
                 .sum();
-        return card.getPower().getValue() + powerSum <= 10;
+        return super.getMessage(game) + " (selected total power " + selectedValue + ")";
     }
+
 }

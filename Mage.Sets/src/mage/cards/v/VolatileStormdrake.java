@@ -136,7 +136,7 @@ class VolatileStormdrakeEffect extends OneShotEffect {
         ContinuousEffect effect = new ExchangeControlTargetEffect(Duration.EndOfGame, "", true);
         effect.setTargetPointer(this.getTargetPointer().copy());
         game.addEffect(effect, source);
-        game.getState().processAction(game);
+        game.processAction();
         controller.addCounters(CounterType.ENERGY.createInstance(4), controller.getId(), source, game);
         new DoIfCostPaid(
                 null, new SacrificeTargetEffect("", controller.getId()),

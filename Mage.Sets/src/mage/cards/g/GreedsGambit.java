@@ -24,7 +24,7 @@ public final class GreedsGambit extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
 
         // When Greed's Gambit enters the battlefield, you draw three cards, gain 6 life, and create three 2/1 black Bat creature tokens with flying.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(3, "you"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(3, true));
         ability.addEffect(new GainLifeEffect(6).setText(", gain 6 life"));
         ability.addEffect(new CreateTokenEffect(new Bat21Token(), 3).concatBy(", and"));
         this.addAbility(ability);

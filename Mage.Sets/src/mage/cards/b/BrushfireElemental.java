@@ -31,7 +31,7 @@ public final class BrushfireElemental extends CardImpl {
         // Brushfire Elemental can't be blocked by creatures with power 2 or less.
         this.addAbility(new DauntAbility());
 
-        // Landfall — Whenever a land enters the battlefield under your control, Brushfire Elemental gets +2/+2 until end of turn.
+        // Landfall — Whenever a land you control enters, Brushfire Elemental gets +2/+2 until end of turn.
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn)));
     }
 

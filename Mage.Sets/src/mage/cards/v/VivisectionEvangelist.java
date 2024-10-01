@@ -45,7 +45,7 @@ public final class VivisectionEvangelist extends CardImpl {
         // Corrupted -- When Vivisection Evangelist enters the battlefield, if an opponent has three or more poison counters, destroy target creature or planeswalker an opponent controls.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false),
-                CorruptedCondition.instance, "When {this} enters the battlefield, " +
+                CorruptedCondition.instance, "When {this} enters, " +
                 "if an opponent has three or more poison counters, " +
                 "destroy target creature or planeswalker an opponent controls."
         );

@@ -1,19 +1,10 @@
 package mage.cards.w;
 
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
-
 import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -23,6 +14,12 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetAnyTarget;
+import mage.util.CardUtil;
+
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -34,7 +31,7 @@ public final class WorldsoulsRage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}{G}");
 
         // Worldsoul's Rage deals X damage to any target. Put up to X land cards from your hand and/or graveyard onto the battlefield tapped.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
         this.getSpellAbility().addEffect(new WorldsoulsRageEffect());
         this.getSpellAbility().addTarget(new TargetAnyTarget());
     }
@@ -81,7 +78,7 @@ class WorldsoulsRageEffect extends OneShotEffect {
             return false;
         }
 
-        int maxTargets = source.getManaCostsToPay().getX();
+        int maxTargets = CardUtil.getSourceCostsTag(game, source, "X", 0);
         if (maxTargets == 0) {
             return false;
         }

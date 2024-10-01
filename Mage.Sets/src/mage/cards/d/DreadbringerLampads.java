@@ -27,7 +27,7 @@ public final class DreadbringerLampads extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
 
-        // Constellation - Whenever Dreadbringer Lampads or another enchantment enters the battlefield under your control, target creature gains intimidate until end of turn.
+        // Constellation - Whenever Dreadbringer Lampads or another enchantment you control enters, target creature gains intimidate until end of turn.
         Effect effect = new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("target creature gains intimidate until end of turn. <i>(It can't be blocked except by artifact creatures and/or creatures that share a color with it.)</i>");
         Ability ability = new ConstellationAbility(effect);

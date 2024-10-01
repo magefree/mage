@@ -57,7 +57,7 @@ public final class SlimefootThallidTransplant extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // Whenever a Swamp or Forest enters the battlefield under your control, draft a card from Slimefoot, Thallid Transplant’s spellbook.
+        // Whenever a Swamp or Forest you control enters, draft a card from Slimefoot, Thallid Transplant’s spellbook.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new DraftFromSpellbookEffect(spellbook), filter
         ));

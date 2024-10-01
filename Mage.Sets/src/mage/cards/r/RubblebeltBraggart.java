@@ -23,7 +23,7 @@ public final class RubblebeltBraggart extends CardImpl {
     public RubblebeltBraggart(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
 
-        this.subtype.add(SubType.VIASHINO);
+        this.subtype.add(SubType.LIZARD);
         this.subtype.add(SubType.WARRIOR);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
