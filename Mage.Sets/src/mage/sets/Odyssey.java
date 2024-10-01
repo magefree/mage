@@ -7,6 +7,7 @@ import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
 import mage.collation.RarityConfiguration;
+import mage.util.RandomUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -404,6 +405,7 @@ class OdysseyCollator implements BoosterCollator {
     private final CardRun uncommon = new CardRun(false, "4", "62", "6", "64", "66", "67", "68", "313", "176", "177", "230", "11", "12", "118", "315", "122", "316", "71", "317", "76", "123", "78", "235", "299", "128", "236", "80", "183", "129", "239", "186", "188", "191", "133", "134", "135", "86", "195", "23", "241", "244", "144", "88", "200", "301", "201", "289", "31", "203", "147", "250", "302", "206", "304", "34", "254", "258", "37", "322", "260", "155", "306", "291", "261", "94", "214", "292", "96", "97", "216", "43", "266", "158", "159", "307", "293", "160", "308", "221", "161", "162", "309", "270", "47", "222", "48", "49", "50", "51", "52", "53", "274", "102", "310", "223", "275", "311", "277", "54", "55", "295", "104", "106", "111", "279", "281", "226", "228", "170", "171");
     private final CardRun rare = new CardRun(false, "58", "1", "61", "2", "174", "286", "9", "10", "69", "229", "116", "179", "117", "180", "120", "121", "231", "13", "297", "73", "75", "182", "298", "234", "77", "318", "79", "126", "319", "127", "287", "17", "320", "18", "82", "19", "20", "187", "21", "132", "192", "85", "24", "141", "242", "142", "143", "243", "197", "288", "245", "300", "198", "26", "28", "248", "29", "204", "32", "149", "205", "303", "207", "152", "321", "208", "33", "290", "255", "256", "209", "153", "257", "259", "210", "305", "212", "89", "90", "92", "323", "39", "157", "218", "220", "267", "326", "294", "101", "327", "271", "273", "163", "276", "328", "164", "329", "278", "105", "108", "165", "110", "166", "112", "113", "296", "280", "227", "57", "285");
 
+    // either A then B, or B then A
     private final BoosterStructure AAABB = new BoosterStructure(
             commonA, commonA, commonA,
             commonB, commonB
@@ -420,6 +422,24 @@ class OdysseyCollator implements BoosterCollator {
             commonA,
             commonB, commonB, commonB, commonB
     );
+    private final BoosterStructure BBBAA = new BoosterStructure(
+            commonB, commonB, commonB,
+            commonA, commonA
+    );
+    private final BoosterStructure BBAAA = new BoosterStructure(
+            commonB, commonB,
+            commonA, commonA, commonA
+    );
+    private final BoosterStructure BBBBA = new BoosterStructure(
+            commonB, commonB, commonB, commonB,
+            commonA
+    );
+    private final BoosterStructure BAAAA = new BoosterStructure(
+            commonB,
+            commonA, commonA, commonA, commonA
+    );
+
+    // either C then D, or D then C
     private final BoosterStructure CCCDDD = new BoosterStructure(
             commonC, commonC, commonC,
             commonD, commonD, commonD
@@ -432,31 +452,60 @@ class OdysseyCollator implements BoosterCollator {
             commonC, commonC,
             commonD, commonD, commonD, commonD
     );
+    private final BoosterStructure DDDCCC = new BoosterStructure(
+            commonD, commonD, commonD,
+            commonC, commonC, commonC
+    );
+    private final BoosterStructure DDDDCC = new BoosterStructure(
+            commonD, commonD, commonD, commonD,
+            commonC, commonC
+    );
+    private final BoosterStructure DDCCCC = new BoosterStructure(
+            commonD, commonD,
+            commonC, commonC, commonC, commonC
+    );
+
     private final BoosterStructure U3 = new BoosterStructure(uncommon, uncommon, uncommon);
     private final BoosterStructure R1 = new BoosterStructure(rare);
 
-    // no numbers, just "most" packs 3-2
+    // no definitive ratio here, just "most" packs 3-2
     private final RarityConfiguration commonRunsAB = new RarityConfiguration(
         AAAAB,
         AAABB, AAABB, AAABB, AAABB, AAABB, AAABB, AAABB, AAABB, AAABB,
         AABBB, AABBB, AABBB, AABBB, AABBB, AABBB, AABBB, AABBB, AABBB,
-        ABBBB
+        ABBBB,
+        BBBBA,
+        BBBAA, BBBAA, BBBAA, BBBAA, BBBAA, BBBAA, BBBAA, BBBAA, BBBAA,
+        BBAAA, BBAAA, BBAAA, BBAAA, BBAAA, BBAAA, BBAAA, BBAAA, BBAAA,
+        BAAAA
     );
-    // inv.html (same collation) suggests some evidence for 1/6 packs 4-2
+
+    // similar collation structure for INV suggests some evidence for 1/6 packs 4-2
     private final RarityConfiguration commonRunsCD = new RarityConfiguration(
         CCCCDD,
         CCCDDD, CCCDDD, CCCDDD, CCCDDD, CCCDDD,
         CCCDDD, CCCDDD, CCCDDD, CCCDDD, CCCDDD,
-        CCDDDD
+        CCDDDD,
+        DDDDCC,
+        DDDCCC, DDDCCC, DDDCCC, DDDCCC, DDDCCC,
+        DDDCCC, DDDCCC, DDDCCC, DDDCCC, DDDCCC,
+        DDCCCC
     );
+
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(U3);
     private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
 
     @Override
     public List<String> makeBooster() {
         List<String> booster = new ArrayList<>();
-        booster.addAll(commonRunsAB.getNext().makeRun());
-        booster.addAll(commonRunsCD.getNext().makeRun());
+        // either A/B or C/D can be first in the pack
+        if (RandomUtil.nextBoolean()) {
+            booster.addAll(commonRunsAB.getNext().makeRun());
+            booster.addAll(commonRunsCD.getNext().makeRun());
+        } else {
+            booster.addAll(commonRunsCD.getNext().makeRun());
+            booster.addAll(commonRunsAB.getNext().makeRun());
+        }
         booster.addAll(uncommonRuns.getNext().makeRun());
         booster.addAll(rareRuns.getNext().makeRun());
         return booster;
