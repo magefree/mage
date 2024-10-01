@@ -90,7 +90,11 @@ class SeanceBoardManaEffect extends ManaEffect {
         Permanent permanent = source.getSourcePermanentOrLKI(game);
         if (permanent != null) {
             int soulCounters = permanent.getCounters(game).getCount(CounterType.SOUL);
-            netMana.add(manaBuilder.setMana(Mana.AnyMana(soulCounters), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.BlackMana(soulCounters), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.BlueMana(soulCounters), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.RedMana(soulCounters), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.GreenMana(soulCounters), source, game).build());
+            netMana.add(manaBuilder.setMana(Mana.WhiteMana(soulCounters), source, game).build());
         }
         return netMana;
     }
