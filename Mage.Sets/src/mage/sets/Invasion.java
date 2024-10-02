@@ -3,6 +3,14 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
+import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author North
@@ -374,5 +382,128 @@ public final class Invasion extends ExpansionSet {
         cards.add(new SetCardInfo("Yawgmoth's Agenda", 135, Rarity.RARE, mage.cards.y.YawgmothsAgenda.class));
         cards.add(new SetCardInfo("Zanam Djinn", 90, Rarity.UNCOMMON, mage.cards.z.ZanamDjinn.class));
         cards.add(new SetCardInfo("Zap", 180, Rarity.COMMON, mage.cards.z.Zap.class));
+    }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new InvasionCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/ody.html
+// Using US collation - commons only
+class InvasionCollator implements BoosterCollator {
+
+    private final CardRun commonA = new CardRun(true, "124", "37", "174", "56", "203", "118", "8", "176", "82", "215", "98", "28", "164", "75", "211", "124", "29", "158", "66", "189", "105", "28", "174", "73", "203", "92", "29", "180", "66", "211", "104", "40", "136", "56", "192", "118", "17", "164", "82", "201", "92", "40", "180", "58", "192", "104", "17", "176", "73", "201", "105", "37", "136", "58", "189", "98", "8", "158", "75", "215");
+    private final CardRun commonB = new CardRun(true, "134", "26", "323", "64", "195", "114", "14", "179", "86", "319", "122", "41", "151", "83", "204", "328", "25", "160", "53", "181", "134", "10", "177", "89", "200", "123", "324", "179", "64", "204", "106", "26", "170", "329", "195", "123", "41", "323", "86", "196", "328", "14", "151", "89", "181", "106", "10", "160", "329", "200", "122", "324", "177", "83", "196", "114", "25", "170", "53", "319");
+    private final CardRun commonC = new CardRun(true, "109", "20", "157", "72", "225", "132", "30", "172", "85", "197", "126", "31", "142", "63", "225", "109", "3", "162", "65", "224", "111", "23", "163", "46", "222", "132", "3", "172", "72", "217", "126", "23", "142", "46", "197", "95", "20", "162", "63", "222", "111", "31", "157", "65", "217", "95", "30", "163", "85", "224");
+    private final CardRun commonD = new CardRun(true, "112", "248", "147", "247", "205", "286", "7", "155", "290", "187", "264", "22", "271", "67", "254", "120", "260", "148", "80", "289", "117", "11", "229", "70", "286", "120", "248", "148", "289", "187", "112", "11", "260", "80", "188", "290", "22", "247", "70", "205", "264", "7", "147", "254", "188", "117", "271", "155", "67", "229");
+    private final CardRun uncommon = new CardRun(false, "91", "297", "228", "2", "94", "320", "295", "233", "234", "5", "6", "9", "298", "138", "184", "238", "140", "239", "299", "240", "321", "96", "300", "301", "99", "51", "302", "103", "303", "322", "185", "55", "57", "143", "246", "145", "107", "146", "108", "250", "251", "252", "191", "150", "21", "152", "255", "60", "62", "198", "258", "294", "119", "24", "309", "202", "159", "69", "121", "265", "32", "266", "310", "207", "35", "326", "269", "36", "210", "165", "311", "270", "166", "167", "327", "272", "168", "74", "273", "274", "275", "312", "39", "293", "292", "278", "212", "77", "213", "43", "314", "81", "218", "127", "315", "316", "283", "131", "133", "330", "221", "284", "84", "288", "223", "87", "296", "44", "291", "90");
+    private final CardRun rare = new CardRun(false, "226", "227", "1", "93", "230", "231", "4", "232", "235", "137", "182", "236", "47", "183", "48", "139", "237", "241", "141", "49", "242", "12", "97", "50", "243", "13", "100", "101", "52", "15", "102", "244", "245", "186", "54", "16", "144", "18", "249", "19", "190", "304", "253", "193", "149", "194", "325", "153", "305", "154", "59", "110", "61", "256", "199", "113", "257", "156", "259", "306", "115", "116", "307", "308", "68", "27", "261", "262", "263", "206", "33", "267", "34", "161", "268", "71", "208", "209", "169", "276", "38", "125", "277", "171", "76", "42", "173", "279", "78", "313", "79", "214", "216", "175", "280", "128", "129", "317", "281", "130", "282", "318", "178", "219", "220", "285", "287", "88", "45", "135");
+
+    // either A then B, or B then A
+    private final BoosterStructure AAABB = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB
+    );
+    private final BoosterStructure AABBB = new BoosterStructure(
+            commonA, commonA,
+            commonB, commonB, commonB
+    );
+    private final BoosterStructure AAAAB = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB
+    );
+    private final BoosterStructure ABBBB = new BoosterStructure(
+            commonA,
+            commonB, commonB, commonB, commonB
+    );
+    private final BoosterStructure BBBAA = new BoosterStructure(
+            commonB, commonB, commonB,
+            commonA, commonA
+    );
+    private final BoosterStructure BBAAA = new BoosterStructure(
+            commonB, commonB,
+            commonA, commonA, commonA
+    );
+    private final BoosterStructure BBBBA = new BoosterStructure(
+            commonB, commonB, commonB, commonB,
+            commonA
+    );
+    private final BoosterStructure BAAAA = new BoosterStructure(
+            commonB,
+            commonA, commonA, commonA, commonA
+    );
+
+    // either C then D, or D then C
+    private final BoosterStructure CCCDDD = new BoosterStructure(
+            commonC, commonC, commonC,
+            commonD, commonD, commonD
+    );
+    private final BoosterStructure CCCCDD = new BoosterStructure(
+            commonC, commonC, commonC, commonC,
+            commonD, commonD
+    );
+    private final BoosterStructure CCDDDD = new BoosterStructure(
+            commonC, commonC,
+            commonD, commonD, commonD, commonD
+    );
+    private final BoosterStructure DDDCCC = new BoosterStructure(
+            commonD, commonD, commonD,
+            commonC, commonC, commonC
+    );
+    private final BoosterStructure DDDDCC = new BoosterStructure(
+            commonD, commonD, commonD, commonD,
+            commonC, commonC
+    );
+    private final BoosterStructure DDCCCC = new BoosterStructure(
+            commonD, commonD,
+            commonC, commonC, commonC, commonC
+    );
+
+    private final BoosterStructure U3 = new BoosterStructure(uncommon, uncommon, uncommon);
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+
+    // no definitive ratio here, just "most" packs 3-2
+    private final RarityConfiguration commonRunsAB = new RarityConfiguration(
+        AAAAB,
+        AAABB, AAABB, AAABB, AAABB, AAABB, AAABB, AAABB, AAABB, AAABB,
+        AABBB, AABBB, AABBB, AABBB, AABBB, AABBB, AABBB, AABBB, AABBB,
+        ABBBB,
+        BBBBA,
+        BBBAA, BBBAA, BBBAA, BBBAA, BBBAA, BBBAA, BBBAA, BBBAA, BBBAA,
+        BBAAA, BBAAA, BBAAA, BBAAA, BBAAA, BBAAA, BBAAA, BBAAA, BBAAA,
+        BAAAA
+    );
+
+    // some evidence for 1/6 packs 4-2
+    private final RarityConfiguration commonRunsCD = new RarityConfiguration(
+        CCCCDD,
+        CCCDDD, CCCDDD, CCCDDD, CCCDDD, CCCDDD,
+        CCCDDD, CCCDDD, CCCDDD, CCCDDD, CCCDDD,
+        CCDDDD,
+        DDDDCC,
+        DDDCCC, DDDCCC, DDDCCC, DDDCCC, DDDCCC,
+        DDDCCC, DDDCCC, DDDCCC, DDDCCC, DDDCCC,
+        DDCCCC
+    );
+
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(U3);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        // either A/B or C/D can be first in the pack
+        if (RandomUtil.nextBoolean()) {
+            booster.addAll(commonRunsAB.getNext().makeRun());
+            booster.addAll(commonRunsCD.getNext().makeRun());
+        } else {
+            booster.addAll(commonRunsCD.getNext().makeRun());
+            booster.addAll(commonRunsAB.getNext().makeRun());
+        }
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        return booster;
     }
 }
