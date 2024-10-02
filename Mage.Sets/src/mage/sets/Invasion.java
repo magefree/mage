@@ -390,7 +390,7 @@ public final class Invasion extends ExpansionSet {
     }
 }
 
-// Booster collation info from https://www.lethe.xyz/mtg/collation/ody.html
+// Booster collation info from https://www.lethe.xyz/mtg/collation/inv.html
 // Using US collation - commons only
 class InvasionCollator implements BoosterCollator {
 
