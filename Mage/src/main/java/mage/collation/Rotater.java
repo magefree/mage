@@ -37,19 +37,22 @@ public class Rotater<T> {
         }
     }
 
-    public int numItems() {
-        return items.size();
+    public boolean isEdge(int rowLen) {
+        return (position % rowLen)==0;
     }
-
-    public String getItem(int i) {
-        return items.get(i);
+    
+    public int iterate(int offset) {
+        int i = position;
+        position += offset;
+        while (position <0) {
+            position += items.size();
+        }
+        position %= items.size();
+        return i;
     }
     
     public int iterate() {
-        int i = position;
-        position++;
-        position %= items.size();
-        return i;
+        return iterate(1)'
     }
 
     public T getNext() {
