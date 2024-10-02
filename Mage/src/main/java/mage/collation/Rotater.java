@@ -15,7 +15,7 @@ import java.util.List;
 public class Rotater<T> {
 
     private final List<T> items;
-    private int position;
+    private int position, stripeLen = 0, stripeWidth, stripeDepth;
 
     public Rotater(T item) {
         this(true, item);
@@ -37,10 +37,49 @@ public class Rotater<T> {
         }
     }
 
+//  for striped collation
+    public Main(int sLen, String... items) {
+//          should there be an error check?
+//          assert ( items.size() % sLen ) == 0;
+            this.stripeLen = sLen;
+            this.items = Arrays.asList(items);
+            this.position = RandomUtil.nextInt(this.items.size());
+            this.stripeWidth= this.nextWidth();
+            this.stripeDepth= 1+ RandomUtil.nextInt(this.stripeWidth);
+    }
+
+// choose a stripe width between 2 & 5 inclusive
+// ToDo when data available: enable different widths to have different likelihoods
+    public int nextWidth() {
+        return 2+ RandomUtil.nextInt(4);
+    }
+    
     public int iterate() {
         int i = position;
-        position++;
-        position %= items.size();
+        if( stripeLen >0 ){
+          if( stripeDepth < stripeWidth ){
+            ++stripeDepth;
+            position -= 10;
+            if (position <0 ){
+              position += items.size();
+            }
+          }else{
+            stripeDepth= 1;
+            if( (position % stripeLen) >0 ){
+              position += stripeLen * (stripeWidth-1);
+              position %= items.size();
+            }else{
+              this.stripeWidth= this.nextWidth();
+            }
+            position -= 1;
+            if (position <0 ){
+              position += items.size();
+            }
+          }
+        }else{
+          position++;
+          position %= items.size();
+        }
         return i;
     }
 
