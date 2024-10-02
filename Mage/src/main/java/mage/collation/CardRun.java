@@ -22,6 +22,8 @@ public class CardRun extends Rotater<String> {
         // assert this.numItems() % sLen == 0;
     }
 
+    // randomly choose a stripe width between 2 & 5 (inclusive)
+    // ToDo: when data available, use different weightings for different widths
     private int nextWidth() {
         return 2+ RandomUtil.nextInt(4);
     }

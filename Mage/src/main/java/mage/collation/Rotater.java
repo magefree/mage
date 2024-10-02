@@ -15,7 +15,7 @@ import java.util.List;
 public class Rotater<T> {
 
     private final List<T> items;
-    private int position, stripeLen = 0, stripeWidth, stripeDepth;
+    private int position;
 
     public Rotater(T item) {
         this(true, item);
