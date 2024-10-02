@@ -233,9 +233,9 @@ class PlaneshiftCollator implements BoosterCollator {
     @Override
     public List<String> makeBooster() {
         List<String> booster = new ArrayList<>();
-        booster.addAll(commonRuns.getNext().makeRun());
         booster.addAll(uncommonRuns.getNext().makeRun());
         booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(commonRuns.getNext().makeRun());
         return booster;
     }
 }
