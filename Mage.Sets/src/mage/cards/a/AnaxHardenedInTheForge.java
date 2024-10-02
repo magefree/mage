@@ -14,7 +14,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.SatyrCantBlockToken;
 
 import java.util.UUID;
-import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.common.DiesThisOrAnotherTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -61,7 +61,7 @@ public final class AnaxHardenedInTheForge extends CardImpl {
     }
 }
 
-class AnaxHardenedInTheForgeTriggeredAbility extends DiesThisOrAnotherCreatureTriggeredAbility {
+class AnaxHardenedInTheForgeTriggeredAbility extends DiesThisOrAnotherTriggeredAbility {
 
     AnaxHardenedInTheForgeTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
         super(effect, optional, filter);

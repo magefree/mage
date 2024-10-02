@@ -1,8 +1,5 @@
-
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -16,26 +13,19 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public final class EtherswornAdjudicator extends CardImpl {
-    private static final FilterPermanent filter = new FilterPermanent("creature or enchantment");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                CardType.ENCHANTMENT.getPredicate()));
-    }
 
     public EtherswornAdjudicator(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT,CardType.CREATURE},"{4}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}{U}");
         this.subtype.add(SubType.VEDALKEN);
         this.subtype.add(SubType.KNIGHT);
 
@@ -47,7 +37,7 @@ public final class EtherswornAdjudicator extends CardImpl {
         // {1}{W}{B}, {T}: Destroy target creature or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{1}{W}{B}"));
         ability.addCost(new TapSourceCost());
-        Target target = new TargetPermanent(filter);
+        Target target = new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT);
         ability.addTarget(target);
         this.addAbility(ability);
         // {2}{U}: Untap Ethersworn Adjudicator.
@@ -62,5 +52,4 @@ public final class EtherswornAdjudicator extends CardImpl {
     public EtherswornAdjudicator copy() {
         return new EtherswornAdjudicator(this);
     }
-
 }

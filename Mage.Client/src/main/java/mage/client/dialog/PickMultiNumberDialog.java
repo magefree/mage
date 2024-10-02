@@ -14,12 +14,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
+ * Game GUI: dialog to distribute values between multiple items
+ * (used for some cards and add lands in cheat menu, search by MultiAmountMessage)
  *
  * @author weirddan455
  */
 public class PickMultiNumberDialog extends MageDialog {
 
     private boolean cancel;
+    private PickMultiNumberCallback callback = null;
     
     private List<JLabel> labelList = null;
     private List<JSpinner> spinnerList = null;
@@ -29,7 +32,14 @@ public class PickMultiNumberDialog extends MageDialog {
         this.setModal(true);
     }
 
-    public void showDialog(List<MultiAmountMessage> messages, int min, int max, Map<String, Serializable> options) {
+    public interface PickMultiNumberCallback {
+        void onChoiceDone();
+    }
+
+    public void showDialog(List<MultiAmountMessage> messages, int min, int max, Map<String, Serializable> options, PickMultiNumberCallback callback) {
+        this.cancel = false;
+        this.callback = callback;
+
         this.header.setText("<html>" + ManaSymbols.replaceSymbolsWithHTML((String) options.get("header"), ManaSymbols.Type.DIALOG));
         this.setTitle((String) options.get("title"));
 
@@ -142,6 +152,13 @@ public class PickMultiNumberDialog extends MageDialog {
         return cancel;
     }
 
+    private void doClose() {
+        this.hideDialog();
+        if (this.callback != null) {
+            this.callback.onChoiceDone();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -231,12 +248,12 @@ public class PickMultiNumberDialog extends MageDialog {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         this.cancel = false;
-        this.hideDialog();
+        doClose();
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.cancel = true;
-        this.hideDialog();
+        doClose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
 

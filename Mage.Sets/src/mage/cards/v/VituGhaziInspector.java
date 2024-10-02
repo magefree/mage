@@ -40,7 +40,7 @@ public final class VituGhaziInspector extends CardImpl {
         // When Vitu-Ghazi Inspector enters the battlefield, if evidence was collected, put a +1/+1 counter on target creature and you gain 2 life.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance())),
-                CollectedEvidenceCondition.instance, "When {this} enters the battlefield, if evidence was " +
+                CollectedEvidenceCondition.instance, "When {this} enters, if evidence was " +
                 "collected, put a +1/+1 counter on target creature and you gain 2 life."
         );
         ability.addEffect(new GainLifeEffect(2));

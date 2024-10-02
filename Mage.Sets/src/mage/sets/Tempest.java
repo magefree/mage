@@ -232,6 +232,7 @@ public final class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Perish", 147, Rarity.UNCOMMON, mage.cards.p.Perish.class));
         cards.add(new SetCardInfo("Phyrexian Grimoire", 301, Rarity.RARE, mage.cards.p.PhyrexianGrimoire.class));
         cards.add(new SetCardInfo("Phyrexian Hulk", 302, Rarity.UNCOMMON, mage.cards.p.PhyrexianHulk.class));
+        cards.add(new SetCardInfo("Phyrexian Splicer", 303, Rarity.UNCOMMON, mage.cards.p.PhyrexianSplicer.class));
         cards.add(new SetCardInfo("Pincher Beetles", 244, Rarity.COMMON, mage.cards.p.PincherBeetles.class));
         cards.add(new SetCardInfo("Pine Barrens", 321, Rarity.RARE, mage.cards.p.PineBarrens.class));
         cards.add(new SetCardInfo("Pit Imp", 148, Rarity.COMMON, mage.cards.p.PitImp.class));

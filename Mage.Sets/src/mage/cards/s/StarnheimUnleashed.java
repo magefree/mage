@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import mage.abilities.condition.common.ForetoldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ForetellAbility;
 import mage.cards.CardImpl;
@@ -23,7 +23,7 @@ public final class StarnheimUnleashed extends CardImpl {
 
         // Create a 4/4 white Angel Warrior creature token with flying and vigilance. If this spell was foretold, create X of those tokens instead.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new CreateTokenEffect(new AngelWarriorVigilanceToken(), ManacostVariableValue.REGULAR),
+                new CreateTokenEffect(new AngelWarriorVigilanceToken(), GetXValue.instance),
                 new CreateTokenEffect(new AngelWarriorVigilanceToken()),
                 ForetoldCondition.instance,
                 "Create a 4/4 white Angel Warrior creature token with flying and vigilance. If this spell was foretold, create X of those tokens instead"

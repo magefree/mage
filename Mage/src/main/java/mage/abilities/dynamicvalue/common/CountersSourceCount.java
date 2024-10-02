@@ -15,9 +15,7 @@ public class CountersSourceCount implements DynamicValue {
     /**
      * Number of counters of any type on the source permanent
      */
-    public CountersSourceCount() {
-        this((CounterType) null);
-    }
+    public static final CountersSourceCount ANY = new CountersSourceCount((CounterType) null);
 
     /**
      * Number of counters of the specified type on the source permanent

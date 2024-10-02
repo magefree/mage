@@ -37,7 +37,7 @@ public final class TyrantOfValakut extends CardImpl {
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(3), false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, SurgedCondition.instance,
-                "When {this} enters the battlefield, if its surge cost was paid, it deals 3 damage to any target."));
+                "When {this} enters, if its surge cost was paid, it deals 3 damage to any target."));
     }
 
     private TyrantOfValakut(final TyrantOfValakut card) {

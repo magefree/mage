@@ -32,7 +32,7 @@ public final class GruulRagebeast extends CardImpl {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
 
-        // Whenever Gruul Ragebeast or another creature enters the battlefield under your control, that creature fights target creature an opponent controls.
+        // Whenever Gruul Ragebeast or another creature you control enters, that creature fights target creature an opponent controls.
         this.addAbility(new GruulRagebeastTriggeredAbility());
     }
 
@@ -97,7 +97,7 @@ class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl {
         if (!triggeredMana.isEmpty()) {
             triggeredInfo = " Your fighting creature: " + triggeredMana + ".";
         }
-        return "Whenever {this} or another creature enters the battlefield under your control, "
+        return "Whenever {this} or another creature you control enters, "
                 + "that creature fights target creature an opponent controls." + triggeredInfo;
     }
 }

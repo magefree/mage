@@ -9,7 +9,6 @@ import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
@@ -47,7 +46,7 @@ public final class ChickenALaKing extends CardImpl {
         this.addAbility(new ChickenALaKingTriggeredAbility());
 
         // Tap an untapped Bird you control: Roll a six-sided die.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RollDiceEffect(null, Outcome.Benefit, 6), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RollDiceEffect(6), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
     }
 
     private ChickenALaKing(final ChickenALaKing card) {

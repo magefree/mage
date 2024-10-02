@@ -2,6 +2,7 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.PackTacticsAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
@@ -28,7 +29,8 @@ public final class IntrepidOutlander extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // Pack tactics — Whenever Intrepid Outlander attacks, if you attacked with creatures with total power 6 or greater this combat, venture into the dungeon.
-        this.addAbility(new PackTacticsAbility(new VentureIntoTheDungeonEffect()));
+        this.addAbility(new PackTacticsAbility(new VentureIntoTheDungeonEffect())
+                .addHint(CurrentDungeonHint.instance));
     }
 
     private IntrepidOutlander(final IntrepidOutlander card) {

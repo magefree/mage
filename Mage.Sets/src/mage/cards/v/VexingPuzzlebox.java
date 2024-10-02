@@ -36,7 +36,7 @@ public final class VexingPuzzlebox extends CardImpl {
 
         // {T}: Add one mana of any color. Roll a d20.
         AnyColorManaAbility manaAbility = new AnyColorManaAbility();
-        manaAbility.addEffect(new RollDiceEffect(null, 20).setText("Roll a d20"));
+        manaAbility.addEffect(new RollDiceEffect(20).setText("Roll a d20"));
         manaAbility.setUndoPossible(false);
         this.addAbility(manaAbility);
 

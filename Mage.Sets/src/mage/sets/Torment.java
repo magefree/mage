@@ -1,9 +1,15 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -29,6 +35,7 @@ public final class Torment extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         this.hasUnbalancedColors = true;
+
         cards.add(new SetCardInfo("Accelerate", 90, Rarity.COMMON, mage.cards.a.Accelerate.class));
         cards.add(new SetCardInfo("Acorn Harvest", 118, Rarity.COMMON, mage.cards.a.AcornHarvest.class));
         cards.add(new SetCardInfo("Ambassador Laquatus", 23, Rarity.RARE, mage.cards.a.AmbassadorLaquatus.class));
@@ -171,5 +178,40 @@ public final class Torment extends ExpansionSet {
         cards.add(new SetCardInfo("Violent Eruption", 117, Rarity.UNCOMMON, mage.cards.v.ViolentEruption.class));
         cards.add(new SetCardInfo("Waste Away", 88, Rarity.COMMON, mage.cards.w.WasteAway.class));
         cards.add(new SetCardInfo("Zombie Trailblazer", 89, Rarity.UNCOMMON, mage.cards.z.ZombieTrailblazer.class));
+    }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new TormentCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/tor.html
+// Using US collation - commons only
+class TormentCollator implements BoosterCollator {
+    private final CardRun commonA = new CardRun(true, "102", "9", "58", "123", "39", "81", "103", "15", "75", "123", "47", "88", "103", "5", "53", "36", "121", "69", "93", "5", "85", "129", "32", "77", "97", "2", "60", "132", "24", "88", "102", "11", "60", "129", "36", "62", "93", "9", "75", "132", "32", "69", "107", "15", "53", "125", "39", "62", "97", "11", "85", "125", "47", "81", "107", "2", "58", "121", "24", "77");
+    private final CardRun commonB = new CardRun(true, "99", "30", "6", "87", "96", "43", "130", "78", "90", "27", "12", "79", "43", "109", "51", "118", "35", "54", "115", "6", "79", "27", "109", "76", "128", "38", "54", "92", "12", "78", "30", "130", "115", "87", "41", "99", "18", "51", "92", "41", "128", "52", "90", "35", "18", "76", "96", "38", "118", "52");
+    private final CardRun uncommon = new CardRun(false, "119", "120", "25", "50", "26", "139", "55", "122", "28", "29", "57", "33", "3", "34", "94", "124", "4", "98", "61", "63", "40", "7", "70", "72", "134", "105", "106", "110", "112", "138", "83", "84", "16", "17", "86", "48", "140", "141", "142", "143", "116", "19", "117", "89");
+    // Alter Reality (rare, #22) not implemented, so has been omitted
+    private final CardRun rare = new CardRun(false, "23", "1", "91", "31", "56", "59", "95", "37", "100", "126", "101", "64", "65", "66", "127", "67", "68", "42", "8", "10", "71", "73", "131", "133", "74", "135", "104", "136", "108", "44", "45", "111", "137", "13", "113", "14", "46", "80", "82", "114", "20", "49", "21");
+
+    private final BoosterStructure AAAAAABBBBB = new BoosterStructure(
+            commonA, commonA, commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB, commonB
+    );
+    private final BoosterStructure U3 = new BoosterStructure(uncommon, uncommon, uncommon);
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+
+    private final RarityConfiguration commonRuns = new RarityConfiguration(AAAAAABBBBB);
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(U3);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(commonRuns.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        return booster;
     }
 }

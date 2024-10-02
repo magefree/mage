@@ -1,6 +1,6 @@
 package mage.cards.t;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
@@ -21,7 +21,7 @@ public final class TranscendentMessage extends CardImpl {
         this.addAbility(new ConvokeAbility());
 
         // Draw X cards.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(GetXValue.instance));
     }
 
     private TranscendentMessage(final TranscendentMessage card) {

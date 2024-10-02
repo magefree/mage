@@ -1,8 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetControllerEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -12,6 +10,8 @@ import mage.constants.SubType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,9 +30,7 @@ public final class Cryoclasm extends CardImpl {
 
         // Destroy target Plains or Island. Cryoclasm deals 3 damage to that land's controller.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        Effect effect = new DamageTargetControllerEffect(3);
-        effect.setText("{this} deals 3 damage to that land's controller");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DamageTargetControllerEffect(3, "land"));
         this.getSpellAbility().addTarget(new TargetLandPermanent(filter));
 
     }

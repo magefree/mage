@@ -106,7 +106,7 @@ class LichKnightsConquestEffect extends OneShotEffect {
             new SacrificeTargetEffect()
                     .setTargetPointer(new FixedTargets(toSacrifice, game))
                     .apply(game, source);
-            game.getState().processAction(game);
+            game.processAction();
 
             int cardsToMove = Math.min(
                     sacrificeCount,

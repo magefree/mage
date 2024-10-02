@@ -24,7 +24,7 @@ public final class CelebrityFencer extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        // Alliance — Whenever another creature enters the battlefield under your control, put a +1/+1 counter on Celebrity Fencer.
+        // Alliance — Whenever another creature you control enters, put a +1/+1 counter on Celebrity Fencer.
         this.addAbility(new AllianceAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
     }
 

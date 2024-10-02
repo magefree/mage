@@ -1,7 +1,7 @@
 
 package mage.cards.a;
 
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,8 +29,8 @@ public final class Avalanche extends CardImpl {
 
         // Destroy X target snow lands.
         this.getSpellAbility().addEffect(new DestroyTargetEffect("Destroy X target snow lands"));
-        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(ManacostVariableValue.REGULAR));
         this.getSpellAbility().addTarget(new TargetPermanent(1, 1, filter, false));
+        this.getSpellAbility().setTargetAdjuster(new TargetsCountAdjuster(GetXValue.instance));
 
     }
 

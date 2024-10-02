@@ -29,7 +29,7 @@ public final class QuestForTheNecropolis extends CardImpl {
     public QuestForTheNecropolis(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");
 
-        // Landfall -- Whenever a land enters the battlefield under your control, put a quest counter on Quest for the Necropolis.
+        // Landfall -- Whenever a land you control enters, put a quest counter on Quest for the Necropolis.
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance())));
 
         // {5}{B}, Sacrifice Quest for the Necropolis: Put target creature card from a graveyard onto the battlefield under your control. This ability costs {1} less to activate for each quest counter on Quest for the Necropolis. Activate only as a sorcery.

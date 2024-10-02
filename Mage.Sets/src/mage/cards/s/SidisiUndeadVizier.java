@@ -24,7 +24,7 @@ public final class SidisiUndeadVizier extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{3}{B}{B}");
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.ZOMBIE);
-        this.subtype.add(SubType.NAGA);
+        this.subtype.add(SubType.SNAKE);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
 

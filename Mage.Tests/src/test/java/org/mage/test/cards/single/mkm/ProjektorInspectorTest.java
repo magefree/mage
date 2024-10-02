@@ -13,7 +13,7 @@ public class ProjektorInspectorTest extends CardTestPlayerBase {
     /**
      * {@link mage.cards.p.ProjektorInspector} {U}
      * Creature — Human Detective
-     * Whenever Projektor Inspector or another Detective enters the battlefield under your control and
+     * Whenever Projektor Inspector or another Detective you control enters and
      * whenever a Detective you control is turned face up, you may draw a card. If you do, discard a card.
      * 3/2
      */

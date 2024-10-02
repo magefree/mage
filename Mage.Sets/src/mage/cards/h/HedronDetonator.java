@@ -35,7 +35,7 @@ public final class HedronDetonator extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever an artifact enters the battlefield under your control, Hedron Detonator deals 1 damage to target opponent.
+        // Whenever an artifact you control enters, Hedron Detonator deals 1 damage to target opponent.
         Ability ability = new EntersBattlefieldControlledTriggeredAbility(
                 new DamageTargetEffect(1), StaticFilters.FILTER_PERMANENT_ARTIFACT_AN
         );

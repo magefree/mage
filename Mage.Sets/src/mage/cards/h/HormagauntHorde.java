@@ -30,7 +30,7 @@ public final class HormagauntHorde extends CardImpl {
         // Ravenous
         this.addAbility(new RavenousAbility());
 
-        // Endless Swarm -- Whenever a land enters the battlefield under your control, you may pay {2}{G}. If you do, return Hormagaunt Horde from your graveyard to your hand.
+        // Endless Swarm -- Whenever a land you control enters, you may pay {2}{G}. If you do, return Hormagaunt Horde from your graveyard to your hand.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.GRAVEYARD,
                 new DoIfCostPaid(

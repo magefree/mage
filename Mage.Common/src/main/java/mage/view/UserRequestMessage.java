@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 /**
- * GUI: settings for message window that allows to choose additional action (can be used in game or outside)
+ * App GUI: settings for message window that allows to choose additional action (can be used in game or outside)
  *
  * @author LevelX2
  */

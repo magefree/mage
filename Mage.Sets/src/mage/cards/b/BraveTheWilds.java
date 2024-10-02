@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import mage.abilities.Ability;
 import mage.abilities.condition.common.BargainedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
@@ -14,11 +13,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
 import java.util.UUID;
 
@@ -44,7 +42,8 @@ public final class BraveTheWilds extends CardImpl {
                 "If this spell was bargained, target land you control becomes "
                         + "a 3/3 Elemental creature with haste that's still a land."
         ));
-        this.getSpellAbility().setTargetAdjuster(BraveTheWildsTargetAdjuster.instance);
+        this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(BargainedCondition.instance,
+                new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND)));
 
         // Search your library for a basic land card, reveal it, put it into your hand, then shuffle.
         this.getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(
@@ -59,17 +58,5 @@ public final class BraveTheWilds extends CardImpl {
     @Override
     public BraveTheWilds copy() {
         return new BraveTheWilds(this);
-    }
-}
-
-enum BraveTheWildsTargetAdjuster implements TargetAdjuster {
-    instance;
-
-    @Override
-    public void adjustTargets(Ability ability, Game game) {
-        ability.getTargets().clear();
-        if (BargainedCondition.instance.apply(game, ability)) {
-            ability.addTarget(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND));
-        }
     }
 }

@@ -1,5 +1,6 @@
 package mage.view;
 
+import mage.game.Game;
 import mage.game.command.Plane;
 import mage.players.PlayableObjectStats;
 
@@ -20,13 +21,13 @@ public class PlaneView implements CommandObjectView, Serializable {
     protected List<String> rules;
     protected PlayableObjectStats playableStats = new PlayableObjectStats();
 
-    public PlaneView(Plane plane) {
+    public PlaneView(Plane plane, Game game) {
         this.id = plane.getId();
         this.name = plane.getName();
         this.imageFileName = plane.getImageFileName();
         this.imageNumber = plane.getImageNumber();
         this.expansionSetCode = plane.getExpansionSetCode();
-        this.rules = plane.getAbilities().getRules(plane.getName());
+        this.rules = plane.getAbilities().getRules(game, plane);
     }
 
     @Override

@@ -120,8 +120,8 @@ public class ContinuousEffects implements Serializable {
         preventionEffects.removeEndOfCombatEffects();
         requirementEffects.removeEndOfCombatEffects();
         restrictionEffects.removeEndOfCombatEffects();
-        for (ContinuousEffectsList asThoughtlist : asThoughEffectsMap.values()) {
-            asThoughtlist.removeEndOfCombatEffects();
+        for (ContinuousEffectsList asThoughlist : asThoughEffectsMap.values()) {
+            asThoughlist.removeEndOfCombatEffects();
         }
         costModificationEffects.removeEndOfCombatEffects();
         spliceCardEffects.removeEndOfCombatEffects();
@@ -134,11 +134,25 @@ public class ContinuousEffects implements Serializable {
         preventionEffects.removeEndOfTurnEffects(game);
         requirementEffects.removeEndOfTurnEffects(game);
         restrictionEffects.removeEndOfTurnEffects(game);
-        for (ContinuousEffectsList asThoughtlist : asThoughEffectsMap.values()) {
-            asThoughtlist.removeEndOfTurnEffects(game);
+        for (ContinuousEffectsList asThoughlist : asThoughEffectsMap.values()) {
+            asThoughlist.removeEndOfTurnEffects(game);
         }
         costModificationEffects.removeEndOfTurnEffects(game);
         spliceCardEffects.removeEndOfTurnEffects(game);
+    }
+
+    public synchronized void removeBeginningOfEndStepEffects(Game game) {
+        layeredEffects.removeBeginningOfEndStepEffects(game);
+        continuousRuleModifyingEffects.removeBeginningOfEndStepEffects(game);
+        replacementEffects.removeBeginningOfEndStepEffects(game);
+        preventionEffects.removeBeginningOfEndStepEffects(game);
+        requirementEffects.removeBeginningOfEndStepEffects(game);
+        restrictionEffects.removeBeginningOfEndStepEffects(game);
+        for (ContinuousEffectsList asThoughlist : asThoughEffectsMap.values()) {
+            asThoughlist.removeBeginningOfEndStepEffects(game);
+        }
+        costModificationEffects.removeBeginningOfEndStepEffects(game);
+        spliceCardEffects.removeBeginningOfEndStepEffects(game);
     }
 
     public synchronized void removeInactiveEffects(Game game) {
@@ -774,7 +788,7 @@ public class ContinuousEffects implements Serializable {
     }
 
     /**
-     * Checks if an event won't happen because of an rule modifying effect
+     * Checks if an event won't happen because of a rule modifying effect
      *
      * @param event
      * @param targetAbility ability the event is attached to. can be null.
@@ -868,7 +882,10 @@ public class ContinuousEffects implements Serializable {
             } else {
                 //20100716 - 616.1c
                 Player player = game.getPlayer(event.getPlayerId());
-                index = player.chooseReplacementEffect(getReplacementEffectsTexts(rEffects, game), game);
+                Map<String, String> effectsMap = new LinkedHashMap<>();
+                Map<String, MageObject> objectsMap = new LinkedHashMap<>();
+                prepareReplacementEffectMaps(rEffects, game, effectsMap, objectsMap);
+                index = player.chooseReplacementEffect(effectsMap, objectsMap, game);
             }
             // get the selected effect
             int checked = 0;
@@ -1317,18 +1334,26 @@ public class ContinuousEffects implements Serializable {
         }
     }
 
-    public Map<String, String> getReplacementEffectsTexts(Map<ReplacementEffect, Set<Ability>> rEffects, Game game) {
+    public void prepareReplacementEffectMaps(Map<ReplacementEffect, Set<Ability>> rEffects, Game game,
+                                             Map<String, String> effectsMap, Map<String, MageObject> objectsMap) {
         // warning, autoSelectReplacementEffects uses [object id] in texts as different settings,
         // so if you change keys or texts logic then don't forget to change auto-choose too
-        Map<String, String> texts = new LinkedHashMap<>();
+        if (!(effectsMap instanceof LinkedHashMap) || !(objectsMap instanceof LinkedHashMap)) {
+            throw new IllegalArgumentException("Wrong code usage: must use LinkedHashMap only");
+        }
+        effectsMap.clear();
+        objectsMap.clear();
         for (Map.Entry<ReplacementEffect, Set<Ability>> entry : rEffects.entrySet()) {
             if (entry.getValue() != null) {
                 for (Ability ability : entry.getValue()) {
                     MageObject object = game.getObject(ability.getSourceId());
+                    String key = ability.getId().toString() + '_' + entry.getKey().getId().toString();
                     if (object != null) {
-                        texts.put(ability.getId().toString() + '_' + entry.getKey().getId().toString(), object.getIdName() + ": " + ability.getRule(object.getName()));
+                        effectsMap.put(key, object.getIdName() + ": " + ability.getRule(object.getName()));
+                        objectsMap.put(key, object);
                     } else {
-                        texts.put(ability.getId().toString() + '_' + entry.getKey().getId().toString(), entry.getKey().getText(null));
+                        effectsMap.put(key, entry.getKey().getText(ability.getModes().getMode()));
+                        objectsMap.put(key, null);
                     }
                 }
             } else {
@@ -1337,7 +1362,6 @@ public class ContinuousEffects implements Serializable {
                 }
             }
         }
-        return texts;
     }
 
     public boolean existRequirementEffects() {

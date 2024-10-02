@@ -27,7 +27,7 @@ public final class SkyclaveGeopede extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
 
-        // Landfall — Whenever a land enters the battlefield under your control, Skyclave Geopede gets +2/+2 until end of turn.
+        // Landfall — Whenever a land you control enters, Skyclave Geopede gets +2/+2 until end of turn.
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn)));
     }
 

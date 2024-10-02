@@ -44,6 +44,8 @@ public class ConspireTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burn Trail", playerB);
         setChoice(playerA, true);
+        setChoice(playerA, "Goblin Roughrider^Raging Goblin"); // tap for conspire
+        setChoice(playerA, false); // don't change target
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -153,6 +155,9 @@ public class ConspireTest extends CardTestPlayerBase {
         setChoice(playerA, true); // use Conspire from Burn Trail itself
         setChoice(playerA, false); // don't use Conspire gained from Wort, the Raidmother
 
+        setChoice(playerA, "Goblin Warrior Token", 2); // tap for conspire
+        setChoice(playerA, false); // keep targets
+
         setStopAt(1, PhaseStep.END_TURN);
         execute();
         assertPermanentCount(playerA, "Wort, the Raidmother", 1);
@@ -176,6 +181,14 @@ public class ConspireTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Burn Trail", playerB);
         setChoice(playerA, true); // use Conspire from Burn Trail itself
         setChoice(playerA, true); // use Conspire gained from Wort, the Raidmother
+        setChoice(playerA, "When you pay the conspire"); // order triggers
+
+        setChoice(playerA, "Goblin Warrior Token", 2); // tap for conspire
+        setChoice(playerA, false); // keep targets
+
+        setChoice(playerA, "Raging Goblin", 2); // tap for conspire
+        setChoice(playerA, false); // keep targets
+
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -198,11 +211,15 @@ public class ConspireTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother", true); // {4}{R/G}{R/G}
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sakashima the Impostor"); // {2}{U}{U}
+        setChoice(playerA, true); // Use Sakashima's ability
         setChoice(playerA, "Wort, the Raidmother");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         setChoice(playerA, true); // use Conspire gained from Wort, the Raidmother
         setChoice(playerA, false); // don't use Conspire gained from Sakashima the Imposter
+
+        setChoice(playerA, "Goblin Warrior Token", 2); // tap for conspire
+        setChoice(playerA, false); // keep targets
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -225,11 +242,18 @@ public class ConspireTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wort, the Raidmother", true); // {4}{R/G}{R/G}
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sakashima the Impostor"); // {2}{U}{U}
+        setChoice(playerA, true); // Use Sakashima's ability
         setChoice(playerA, "Wort, the Raidmother");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         setChoice(playerA, true); // use Conspire gained from Wort, the Raidmother
         setChoice(playerA, true); // use Conspire gained from Sakashima the Imposter
+        setChoice(playerA, "When you pay the conspire"); // order triggers
+
+        setChoice(playerA, "Goblin Warrior Token", 2); // tap for conspire
+        setChoice(playerA, false); // keep targets
+        setChoice(playerA, "Goblin Warrior Token", 2); // tap for conspire
+        setChoice(playerA, false); // keep targets
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -279,7 +303,7 @@ public class ConspireTest extends CardTestPlayerBase {
         //setChoice(playerA, "Goblin Assailant^Goblin Assailant"); - AI must choose
         //setChoice(playerA, false); // don't change target 1 - AI must choose
 
-        //setStrictChooseMode(true); - AI must choose
+        setStrictChooseMode(false); // - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -303,7 +327,7 @@ public class ConspireTest extends CardTestPlayerBase {
         //setChoice(playerA, "Goblin Assailant^Goblin Assailant"); - AI must choose
         //setChoice(playerA, false); // don't change target 1 - AI must choose
 
-        //setStrictChooseMode(true); - AI must choose
+        setStrictChooseMode(false); // - AI must choose
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

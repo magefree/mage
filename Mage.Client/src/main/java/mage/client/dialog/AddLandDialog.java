@@ -23,15 +23,15 @@ import java.util.TreeSet;
 /**
  * App GUI: adding new lands to the deck, uses in deck editor and drafting
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class AddLandDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(MageDialog.class);
 
     private Deck deck;
-    
     private DeckEditorMode mode;
+    private AddLandCallback callback = null;
 
     private static final int DEFAULT_SEALED_DECK_CARD_NUMBER = 40;
 
@@ -40,9 +40,14 @@ public class AddLandDialog extends MageDialog {
         this.setModal(true);
     }
 
-    public void showDialog(Deck deck, DeckEditorMode mode) {
+    public interface AddLandCallback {
+        void onLandsAdded();
+    }
+
+    public void showDialog(Deck deck, DeckEditorMode mode, AddLandCallback callback) {
         this.deck = deck;
         this.mode = mode;
+        this.callback = callback;
         SortedSet<String> landSetNames = new TreeSet<>();
         String defaultSetName = null;
         if (mode != DeckEditorMode.FREE_BUILDING) {
@@ -126,11 +131,7 @@ public class AddLandDialog extends MageDialog {
 
         // windows settings
         MageFrame.getDesktop().remove(this);
-        if (this.isModal()) {
-            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
-        } else {
-            MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
-        }
+        MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
         this.makeWindowCentered();
 
         // Close on "ESC"
@@ -214,7 +215,11 @@ public class AddLandDialog extends MageDialog {
         addLands("Plains", nPlains, useFullArt);
         addLands("Swamp", nSwamp, useFullArt);
 
-        this.removeDialog();
+        if (this.callback != null) {
+            callback.onLandsAdded();
+        }
+
+        onCancel();
     }
 
     /**

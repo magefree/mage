@@ -31,17 +31,12 @@ public class PlayFromTopOfLibraryEffect extends AsThoughEffectImpl {
     }
 
     /**
-     * You may [play lands and/or cast spells, according to filter] from the top of your library
+     * You may [play lands/cast spells/play cards, according to filter] from the top of your library
      */
     public PlayFromTopOfLibraryEffect(FilterCard filter) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
         this.staticText = "you may " + filter.getMessage() + " from the top of your library";
-
-        // verify check: this ability is to allow playing lands or casting spells, not playing a "card"
-        if (filter.getMessage().toLowerCase(Locale.ENGLISH).contains("card")) {
-            throw new IllegalArgumentException("Wrong code usage or wrong filter text: PlayTheTopCardEffect");
-        }
     }
 
     protected PlayFromTopOfLibraryEffect(final PlayFromTopOfLibraryEffect effect) {

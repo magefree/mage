@@ -45,7 +45,7 @@ public final class BloodlinePretender extends CardImpl {
         // As Bloodline Pretender enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
 
-        // Whenever another creature of the chosen type enters the battlefield under your control, put a +1/+1 counter on Bloodline Pretender.
+        // Whenever another creature of the chosen type you control enters, put a +1/+1 counter on Bloodline Pretender.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         ));

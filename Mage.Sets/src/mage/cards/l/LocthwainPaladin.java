@@ -34,7 +34,7 @@ public final class LocthwainPaladin extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 AdamantCondition.BLACK, "<br><i>Adamant</i> &mdash; " +
                 "If at least three black mana was spent to cast this spell, " +
-                "{this} enters the battlefield with a +1/+1 counter on it.", ""
+                "{this} enters with a +1/+1 counter on it.", ""
         ));
     }
 

@@ -1,9 +1,15 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -29,6 +35,7 @@ public final class Judgment extends ExpansionSet {
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 0;
         this.hasUnbalancedColors = true;
+
         cards.add(new SetCardInfo("Ancestor's Chosen", 1, Rarity.UNCOMMON, mage.cards.a.AncestorsChosen.class));
         cards.add(new SetCardInfo("Anger", 77, Rarity.UNCOMMON, mage.cards.a.Anger.class));
         cards.add(new SetCardInfo("Anurid Barkripper", 104, Rarity.COMMON, mage.cards.a.AnuridBarkripper.class));
@@ -171,5 +178,40 @@ public final class Judgment extends ExpansionSet {
         cards.add(new SetCardInfo("Wormfang Manta", 58, Rarity.RARE, mage.cards.w.WormfangManta.class));
         cards.add(new SetCardInfo("Wormfang Newt", 59, Rarity.COMMON, mage.cards.w.WormfangNewt.class));
         cards.add(new SetCardInfo("Wormfang Turtle", 60, Rarity.UNCOMMON, mage.cards.w.WormfangTurtle.class));
+    }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new JudgmentCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/jud.html
+// Using US collation - commons only
+class JudgmentCollator implements BoosterCollator {
+    private final CardRun commonA = new CardRun(true, "22", "59", "118", "100", "4", "76", "126", "59", "95", "17", "57", "120", "28", "63", "106", "4", "91", "129", "42", "22", "89", "125", "47", "63", "57", "123", "86", "43", "5", "106", "33", "89", "30", "104", "43", "17", "34", "6", "123", "79", "76", "125", "42", "95", "126", "33", "100", "129", "28", "79", "120", "30", "86", "47", "118", "6", "91", "5", "104", "34");
+    private final CardRun commonB = new CardRun(true, "121", "102", "108", "45", "71", "132", "14", "87", "41", "109", "13", "115", "39", "78", "18", "74", "20", "65", "46", "10", "121", "38", "20", "80", "132", "10", "87", "71", "41", "102", "136", "74", "7", "80", "109", "39", "13", "136", "46", "108", "7", "94", "18", "45", "115", "78", "65", "38", "94", "14");
+    private final CardRun uncommon = new CardRun(false, "1", "77", "105", "2", "3", "107", "82", "62", "36", "8", "85", "111", "114", "66", "88", "40", "116", "67", "119", "92", "122", "141", "44", "142", "127", "16", "97", "49", "143", "131", "25", "99", "26", "27", "72", "101", "75", "135", "31", "32", "53", "54", "56", "60");
+    // Shaman's Trance (rare, #98) not implemented, so has been omitted
+    private final CardRun rare = new CardRun(false, "137", "61", "81", "83", "35", "9", "110", "37", "64", "84", "112", "113", "90", "117", "11", "12", "68", "138", "93", "96", "124", "69", "139", "48", "70", "15", "128", "140", "19", "50", "130", "21", "23", "24", "51", "73", "133", "52", "29", "134", "103", "55", "58");
+
+    private final BoosterStructure AAAAAABBBBB = new BoosterStructure(
+            commonA, commonA, commonA, commonA, commonA, commonA,
+            commonB, commonB, commonB, commonB, commonB
+    );
+    private final BoosterStructure U3 = new BoosterStructure(uncommon, uncommon, uncommon);
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+
+    private final RarityConfiguration commonRuns = new RarityConfiguration(AAAAAABBBBB);
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(U3);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(commonRuns.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        return booster;
     }
 }

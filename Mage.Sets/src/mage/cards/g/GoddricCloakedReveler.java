@@ -16,7 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.permanent.token.custom.CreatureToken;
-import mage.watchers.common.CelebrationWatcher;
+import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
 import java.util.UUID;
 
@@ -65,7 +65,7 @@ public final class GoddricCloakedReveler extends CardImpl {
         ));
         ability.setAbilityWord(AbilityWord.CELEBRATION);
         ability.addHint(CelebrationCondition.getHint());
-        this.addAbility(ability, new CelebrationWatcher());
+        this.addAbility(ability, new PermanentsEnteredBattlefieldWatcher());
     }
 
     private GoddricCloakedReveler(final GoddricCloakedReveler card) {

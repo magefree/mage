@@ -32,8 +32,8 @@ public final class GwyllionHedgeMage extends CardImpl {
         filter2.add(SubType.SWAMP.getPredicate());
     }
 
-    private static final String rule1 = "When {this} enters the battlefield, if you control two or more Plains, you may create a 1/1 white Kithkin Soldier creature token.";
-    private static final String rule2 = "When {this} enters the battlefield, if you control two or more Swamps, you may put a -1/-1 counter on target creature.";
+    private static final String rule1 = "When {this} enters, if you control two or more Plains, you may create a 1/1 white Kithkin Soldier creature token.";
+    private static final String rule2 = "When {this} enters, if you control two or more Swamps, you may put a -1/-1 counter on target creature.";
 
     public GwyllionHedgeMage(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W/B}");

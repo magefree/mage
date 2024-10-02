@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 
@@ -30,6 +29,8 @@ public class EvokeTest extends CardTestPlayerBase {
 
     @Test
     public void testCreatureComesIntoPlay() {
+        setStrictChooseMode(true);
+
         // Check that Lion goes to graveyard from evoke ability
         // Check that evoke does not trigger again to sacrifice Shriekmaw if it's exhumed
 
@@ -40,9 +41,16 @@ public class EvokeTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shriekmaw");
-        setChoice(playerA, true);
-        // addTarget(playerA, "Silvercoat Lion"); Autochosen, only target
+        setChoice(playerA, "Cast with Evoke alternative cost: {1}{B} (source: Shriekmaw");
+        setChoice(playerA, "When this permanent enters the battlefield, if its evoke cost was paid, its controller sacrifices it."); // stack triggers
+        addTarget(playerA, "Silvercoat Lion"); // choice for Shriekmaw Destroy trigger
+
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Exhume");
+        addTarget(playerB, "Silvercoat Lion"); // Exhume choice
+        addTarget(playerA, "Shriekmaw"); // Exhume choice
+        addTarget(playerA, "Silvercoat Lion"); // choice for Shriekmaw Destroy trigger
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -55,5 +63,31 @@ public class EvokeTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Shriekmaw", 1);
     }
 
+    @Test
+    public void testControllerSacrifices() {
 
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+        addCard(Zone.HAND, playerA, "Wrong Turn");
+        addCard(Zone.HAND, playerA, "Mulldrifter");
+        addCard(Zone.BATTLEFIELD, playerB, "Proper Burial");
+
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mulldrifter");
+        setChoice(playerA, "Cast with Evoke alternative cost: {2}{U} (source: Mulldrifter");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, 1);
+        setChoice(playerA, "When {this} enters, draw"); //Stack triggers
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wrong Turn");
+        addTarget(playerA, playerB);
+        addTarget(playerA, "Mulldrifter");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertGraveyardCount(playerA, "Mulldrifter", 1);
+        assertGraveyardCount(playerA, "Wrong Turn", 1);
+        assertLife(playerB, 22);
+        assertHandCount(playerA, 2);
+    }
 }

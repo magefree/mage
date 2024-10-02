@@ -56,7 +56,7 @@ class ThiefOfBloodEffect extends OneShotEffect {
 
     ThiefOfBloodEffect() {
         super(Outcome.BoostCreature);
-        this.staticText = "remove all counters from all permanents. {this} enters the battlefield with a +1/+1 counter on it for each counter removed this way";
+        this.staticText = "remove all counters from all permanents. {this} enters with a +1/+1 counter on it for each counter removed this way";
     }
 
     private ThiefOfBloodEffect(final ThiefOfBloodEffect effect) {

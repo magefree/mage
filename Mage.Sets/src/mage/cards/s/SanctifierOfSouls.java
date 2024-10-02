@@ -41,7 +41,7 @@ public final class SanctifierOfSouls extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever another creature enters the battlefield under your control, Sanctifier of Souls gets +1/+1 until end of turn.
+        // Whenever another creature you control enters, Sanctifier of Souls gets +1/+1 until end of turn.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter));
 
         // {2}{W}, Exile a creature card from your graveyard: Create a 1/1 white Spirit creature token with flying.

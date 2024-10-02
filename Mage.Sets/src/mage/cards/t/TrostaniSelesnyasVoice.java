@@ -39,7 +39,7 @@ public final class TrostaniSelesnyasVoice extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
 
-        // Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.
+        // Whenever another creature you control enters, you gain life equal to that creature's toughness.
         this.addAbility(new TrostaniSelesnyasVoiceTriggeredAbility());
 
         // {1}{G}{W}, {T}: Populate. (Create a token that's a copy of a creature token you control.)
@@ -62,7 +62,7 @@ class TrostaniSelesnyasVoiceTriggeredAbility extends TriggeredAbilityImpl {
 
     public TrostaniSelesnyasVoiceTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TrostaniSelesnyasVoiceEffect(), false);
-        setTriggerPhrase("Whenever another creature enters the battlefield under your control, ");
+        setTriggerPhrase("Whenever another creature you control enters, ");
     }
 
     private TrostaniSelesnyasVoiceTriggeredAbility(final TrostaniSelesnyasVoiceTriggeredAbility ability) {

@@ -5,6 +5,7 @@ import mage.choices.ChoiceImpl;
 import mage.client.MageFrame;
 import mage.client.SessionHandler;
 import mage.client.preference.MagePreferences;
+import mage.client.util.AppUtil;
 import mage.client.util.ClientDefaultSettings;
 import mage.client.util.gui.countryBox.CountryItemEditor;
 import mage.remote.Connection;
@@ -12,8 +13,8 @@ import mage.utils.StreamUtils;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.net.*;
 import java.util.List;
@@ -28,21 +29,20 @@ import static mage.client.dialog.PreferencesDialog.*;
 /**
  * App GUI: connection windows
  *
- * @author BetaSteward_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class ConnectDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(ConnectDialog.class);
+
     private Connection connection;
     private ConnectTask task;
     private final RegisterUserDialog registerUserDialog;
     private final ResetPasswordDialog resetPasswordDialog;
+    ConnectCallback callback = null;
 
     private final ActionListener connectAction = evt -> btnConnectActionPerformed(evt);
 
-    /**
-     * Creates new form ConnectDialog
-     */
     public ConnectDialog() {
         initComponents();
 
@@ -51,14 +51,18 @@ public class ConnectDialog extends MageDialog {
         this.txtUserName.addActionListener(connectAction);
         this.txtPassword.addActionListener(connectAction);
 
-        registerUserDialog = new RegisterUserDialog(this);
-        MageFrame.getDesktop().add(registerUserDialog, JLayeredPane.MODAL_LAYER);
+        registerUserDialog = new RegisterUserDialog();
+        MageFrame.getDesktop().add(registerUserDialog, registerUserDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
 
-        resetPasswordDialog = new ResetPasswordDialog(this);
-        MageFrame.getDesktop().add(resetPasswordDialog, JLayeredPane.MODAL_LAYER);
+        resetPasswordDialog = new ResetPasswordDialog();
+        MageFrame.getDesktop().add(resetPasswordDialog, resetPasswordDialog.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
     }
 
-    public void showDialog() {
+    public interface ConnectCallback {
+        void onConnectClosed();
+    }
+
+    public void showDialog(ConnectCallback callback) {
         this.lblStatus.setText("");
         String serverAddress = MagePreferences.getServerAddressWithDefault(ClientDefaultSettings.serverName);
         this.txtServer.setText(serverAddress);
@@ -77,8 +81,30 @@ public class ConnectDialog extends MageDialog {
             }
         }
         this.setModal(true);
-        this.setLocation(50, 50);
+
+        // windows settings
+        MageFrame.getDesktop().remove(this);
+        MageFrame.getDesktop().add(this, this.isModal() ? JLayeredPane.MODAL_LAYER : JLayeredPane.PALETTE_LAYER);
+        //this.makeWindowCentered();
+        this.setLocation(50, 50); // make sure it will be visible in any sizes
+
+        // Close on "ESC"
+        registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
         this.setVisible(true);
+    }
+
+    private void onCancel() {
+        MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
+        MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor) cbFlag.getEditor()).getImageItem());
+        if (task != null && !task.isDone()) {
+            task.cancel(true);
+        } else {
+            this.hideDialog();
+            if (callback != null) {
+                callback.onConnectClosed();
+            }
+        }
     }
 
     private void saveSettings() {
@@ -108,78 +134,9 @@ public class ConnectDialog extends MageDialog {
         BufferedReader in = null;
         Writer output = null;
         try {
-            String serverUrl = PreferencesDialog.getCachedValue(KEY_CONNECTION_URL_SERVER_LIST, "http://xmage.de/files/server-list.txt");
-            if (serverUrl.contains("xmage.info/files/")) {
-                serverUrl = serverUrl.replace("xmage.info/files/", "xmage.de/files/"); // replace old URL if still saved
-                PreferencesDialog.saveValue(KEY_CONNECTION_URL_SERVER_LIST, serverUrl);
-            }
-            URL serverListURL = new URL(serverUrl);
-
-            Connection.ProxyType configProxyType = Connection.ProxyType.valueByText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_TYPE, "None"));
-            Proxy p = null;
-            Proxy.Type type = Proxy.Type.DIRECT;
-            switch (configProxyType) {
-                case HTTP:
-                    type = Proxy.Type.HTTP;
-                    break;
-                case SOCKS:
-                    type = Proxy.Type.SOCKS;
-                    break;
-                case NONE:
-                default:
-                    p = Proxy.NO_PROXY;
-                    break;
-            }
-
-            if (p == null || !p.equals(Proxy.NO_PROXY)) {
-                try {
-                    String address = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_ADDRESS, "");
-                    Integer port = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_PROXY_PORT, "80"));
-                    p = new Proxy(type, new InetSocketAddress(address, port));
-                } catch (Exception ex) {
-                    throw new RuntimeException("Gui_DownloadPictures : error 1 - " + ex);
-                }
-            }
-
-            if (p == null) {
-                JOptionPane.showMessageDialog(null, "Couldn't configure Proxy object!", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            boolean URLNotFound = false;
-            try {
-                in = new BufferedReader(new InputStreamReader(serverListURL.openConnection(p).getInputStream()));
-            } catch (SocketTimeoutException | FileNotFoundException | UnknownHostException ex) {
-                logger.warn("Could not read serverlist from: " + serverListURL.toString());
-                File f = new File("serverlist.txt");
-                if (f.exists() && !f.isDirectory()) {
-                    logger.info("Using buffered serverlist: serverlist.txt");
-                    URLNotFound = true;
-                    in = new BufferedReader(new FileReader("serverlist.txt"));
-                }
-            }
             List<String> servers = new ArrayList<>();
-            if (in != null) {
-
-                if (!URLNotFound) {
-                    // write serverlist to be able to read if URL is not available
-                    File file = new File("serverlist.txt");
-                    if (file.exists() && !file.isDirectory()) {
-                        file.delete();
-                    }
-                    output = new BufferedWriter(new FileWriter(file));
-                }
-
-                String inputLine;
-                while ((inputLine = in.readLine()) != null) {
-                    logger.debug("Found server: " + inputLine);
-                    servers.add(inputLine);
-                    if (output != null) {
-                        output.append(inputLine).append('\n');
-
-                    }
-                }
-            }
+            // TODO: add recent servers list here
+            
             if (servers.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Couldn't find any server.");
                 return;
@@ -604,13 +561,7 @@ public class ConnectDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        MageFrame.getPreferences().put("autoConnect", Boolean.toString(chkAutoConnect.isSelected()));
-        MageFrame.getPreferences().put(KEY_CONNECT_FLAG, ((CountryItemEditor) cbFlag.getEditor()).getImageItem());
-        if (task != null && !task.isDone()) {
-            task.cancel(true);
-        } else {
-            this.hideDialog();
-        }
+        onCancel();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnectActionPerformed
@@ -727,6 +678,9 @@ public class ConnectDialog extends MageDialog {
     private void doAfterConnected() {
         this.saveSettings();
         this.hideDialog();
+        if (this.callback != null) {
+            this.callback.onConnectClosed();
+        }
     }
 
     private void keyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_keyTyped
@@ -758,11 +712,11 @@ public class ConnectDialog extends MageDialog {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        registerUserDialog.showDialog();
+        registerUserDialog.showDialog(this.getServer(), this.getPort());
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnForgotPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgotPasswordActionPerformed
-        resetPasswordDialog.showDialog();
+        resetPasswordDialog.showDialog(this.getServer(), this.getPort());
     }//GEN-LAST:event_btnForgotPasswordActionPerformed
 
     private void connectXmageDe(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFind1findPublicServerActionPerformed
@@ -807,17 +761,11 @@ public class ConnectDialog extends MageDialog {
     }//GEN-LAST:event_btnFlagSearchActionPerformed
 
     private void btnCheckStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckStatusActionPerformed
-        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-            try {
-                Desktop.getDesktop().browse(new URI("http://xmage.today/servers/"));
-            } catch (Exception e) {
-                //
-            }
-        }
+        AppUtil.openUrlInSystemBrowser("http://xmage.today/servers/");
     }//GEN-LAST:event_btnCheckStatusActionPerformed
 
     private void btnWhatsNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWhatsNewActionPerformed
-        MageFrame.showWhatsNewDialog();
+        MageFrame.getInstance().showWhatsNewDialog(true);
     }//GEN-LAST:event_btnWhatsNewActionPerformed
 
     private void btnFindMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindMainActionPerformed
@@ -870,13 +818,14 @@ public class ConnectDialog extends MageDialog {
         // ask for new value
         PickChoiceDialog dlg = new PickChoiceDialog();
         dlg.setWindowSize(300, 500);
-        dlg.showDialog(choice, needSelectValue);
-        if (choice.isChosen()) {
-            flagItem = new String[2];
-            flagItem[0] = choice.getChoiceValue();
-            flagItem[1] = choice.getChoiceKey();
-            flagModel.setSelectedItem(flagItem);
-        }
+        dlg.showDialog(choice, needSelectValue, () -> {
+            if (choice.isChosen()) {
+                String[] flag = new String[2];
+                flag[0] = choice.getChoiceValue();
+                flag[1] = choice.getChoiceKey();
+                flagModel.setSelectedItem(flag);
+            }
+        });
     }
 
     public String getServer() {

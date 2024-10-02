@@ -16,7 +16,7 @@ public class AetherFigmentTest extends CardTestPlayerBase {
         1/1
         Kicker {3} (You may pay an additional as you cast this spell.)
         Aether Figment can't be blocked.
-        If Aether Figment was kicked, it enters the battlefield with two +1/+1 counters on it.
+        If Aether Figment was kicked, it enters with two +1/+1 counters on it.
     */
     @Test
     public void testEnteringWithCounters() {

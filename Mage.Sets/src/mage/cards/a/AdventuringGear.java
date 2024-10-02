@@ -24,7 +24,7 @@ public final class AdventuringGear extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.subtype.add(SubType.EQUIPMENT);
         
-        // Landfall — Whenever a land enters the battlefield under your control, equipped creature gets +2/+2 until end of turn.
+        // Landfall — Whenever a land you control enters, equipped creature gets +2/+2 until end of turn.
         this.addAbility(new LandfallAbility(new BoostEquippedEffect(2, 2, Duration.EndOfTurn), false));
         
         // Equip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

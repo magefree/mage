@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
@@ -69,7 +69,7 @@ class FlamingGambitEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        int damage = ManacostVariableValue.REGULAR.calculate(game, source, this);
+        int damage = GetXValue.instance.calculate(game, source, this);
         if (game.getBattlefield().count(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), source, game) > 0) {
             String message = "Choose a creature you control to deal " + damage + " damage to instead?";
             if (player.chooseUse(outcome, message, source, game)) {

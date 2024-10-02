@@ -71,6 +71,29 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         }
     }
 
+    public void removeBeginningOfEndStepEffects(Game game) {
+        // calls every turn on beginning of end step
+        // rules 514.2
+        for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
+            T entry = i.next();
+            boolean canRemove;
+            switch (entry.getDuration()) {
+                case UntilTheNextEndStep:
+                    canRemove = true;
+                    break;
+                case UntilYourNextEndStep:
+                    canRemove = entry.isYourNextEndStep(game);
+                    break;
+                default:
+                    canRemove = false;
+            }
+            if (canRemove) {
+                i.remove();
+                effectAbilityMap.remove(entry.getId());
+            }
+        }
+    }
+
     public void removeEndOfCombatEffects() {
         for (Iterator<T> i = this.iterator(); i.hasNext(); ) {
             T entry = i.next();
@@ -169,6 +192,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                         }
                         break;
                     case EndOfTurn:
+                    case UntilTheNextEndStep:
                         // end of turn discards on cleanup steps
                         // 514.2
                         break;

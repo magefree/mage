@@ -43,7 +43,7 @@ public final class GimliOfTheGlitteringCaves extends CardImpl {
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());
 
-        // Whenever another legendary creature enters the battlefield under your control, put a +1/+1 counter on Gimli of the Glittering Caves.
+        // Whenever another legendary creature you control enters, put a +1/+1 counter on Gimli of the Glittering Caves.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter
         ));

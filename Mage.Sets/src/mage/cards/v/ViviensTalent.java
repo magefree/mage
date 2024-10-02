@@ -44,7 +44,7 @@ public final class ViviensTalent extends CardImpl {
                 Duration.WhileOnBattlefield, null, "planeswalker"
         )));
 
-        // Whenever a nontoken creature enters the battlefield under your control, put a loyalty counter on enchanted planeswalker.
+        // Whenever a nontoken creature you control enters, put a loyalty counter on enchanted planeswalker.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 new AddCountersAttachedEffect(
                         CounterType.LOYALTY.createInstance(), "enchanted planeswalker"

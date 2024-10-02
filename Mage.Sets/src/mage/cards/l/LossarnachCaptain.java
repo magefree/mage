@@ -37,7 +37,7 @@ public final class LossarnachCaptain extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
 
-        // Whenever Lossarnach Captain or another Human enters the battlefield under your control, tap target creature an opponent controls.
+        // Whenever Lossarnach Captain or another Human you control enters, tap target creature an opponent controls.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new TapTargetEffect(), filter, false, true
         );

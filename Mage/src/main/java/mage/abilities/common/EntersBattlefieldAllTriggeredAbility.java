@@ -34,7 +34,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase(getTriggerPhraseFromFilter() + ", ");
+        makeTriggerPhrase();
     }
 
     protected EntersBattlefieldAllTriggeredAbility(final EntersBattlefieldAllTriggeredAbility ability) {
@@ -68,12 +68,12 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         return true;
     }
 
-    protected final String getTriggerPhraseFromFilter() {
+    private void makeTriggerPhrase() {
         String filterMessage = filter.getMessage();
         if (filterMessage.startsWith("one or more")) {
-            return getWhen() + filterMessage + " enter the battlefield";
+            setTriggerPhrase(getWhen() + filterMessage + " enter, ");
         }
-        return getWhen() + CardUtil.addArticle(filterMessage) + " enters the battlefield";
+        setTriggerPhrase(getWhen() + CardUtil.addArticle(filterMessage) + " enters, ");
     }
 
     @Override

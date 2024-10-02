@@ -31,7 +31,7 @@ public final class DreadCacodemon extends CardImpl {
         TriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyAllEffect(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURES));
         ability.addEffect(new TapAllEffect(StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, CastFromHandSourcePermanentCondition.instance,
-                "When {this} enters the battlefield, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control."), new CastFromHandWatcher());
+                "When {this} enters, if you cast it from your hand, destroy all creatures your opponents control, then tap all other creatures you control."), new CastFromHandWatcher());
     }
 
     private DreadCacodemon(final DreadCacodemon card) {

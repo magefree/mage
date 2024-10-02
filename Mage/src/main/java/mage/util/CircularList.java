@@ -1,20 +1,13 @@
-
 package mage.util;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * a thread-safe circular list
+ * Component: a thread-safe circular list, used for players list
  *
- * @author BetaSteward_at_googlemail.com
- * @param <E>
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
     //TODO: might have to make E extend Copyable
@@ -42,17 +35,17 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
     }
 
     /**
-     * Inserts an element into the current position
-     *
-     * @param e
-     * @return
+     * Insert new element at the current position (make new element as current)
      */
     @Override
-    public boolean add(E e) {
-        list.add(this.index, e);
+    public boolean add(E element) {
+        add(this.index, element);
         return true;
     }
 
+    /**
+     * Insert new element at selected position (keep old element as current)
+     */
     @Override
     public void add(int index, E element) {
         lock.lock();
@@ -65,33 +58,34 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
     }
 
     /**
+     * Set current position to an element
      *
-     * @param e the element to set as current
-     * @return true if element e exists and index was set
+     * @return false on unknown element
      */
-    public boolean setCurrent(E e) {
-        if (list.contains(e)) {
-            this.index = list.indexOf(e);
+    public boolean setCurrent(E element) {
+        if (list.contains(element)) {
+            this.index = list.indexOf(element);
             return true;
         }
         return false;
     }
 
     /**
-     * Retrieves the element at the current position
-     *
-     * @return
+     * Find current element
      */
     public E get() {
+        return get(this.index);
+    }
+
+    /**
+     * Find element at searching position
+     */
+    @Override
+    public E get(int index) {
         if (list.size() > this.index) {
             return list.get(this.index);
         }
         return null;
-    }
-
-    @Override
-    public E get(int index) {
-        return list.get(index);
     }
 
     /**
@@ -117,18 +111,23 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
     /**
      * Removes the current element from the list
      *
-     * @return <tt>true</tt> is the item was successfully removed
+     * @return true on successfully removed
      */
     public boolean remove() {
         return this.remove(get());
     }
 
+    /**
+     * Removes element from searching position
+     *
+     * @return true on successfully removed
+     */
     @Override
     public E remove(int index) {
         lock.lock();
         try {
             E ret = list.remove(index);
-            checkPointer();
+            fixInvalidPointer();
             modCount++;
             return ret;
         } finally {
@@ -141,7 +140,7 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
         lock.lock();
         try {
             boolean ret = list.remove(o);
-            checkPointer();
+            fixInvalidPointer();
             modCount++;
             return ret;
         } finally {
@@ -152,50 +151,49 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
     private int incrementPointer() {
         lock.lock();
         try {
-            index = incrementListPointer(index);
+            index = findNextListPointer(index);
             return index;
         } finally {
             lock.unlock();
         }
     }
 
-    private int incrementListPointer(int index) {
-        index++;
-        if (index >= list.size()) {
-            index = 0;
+    private int findNextListPointer(int currentIndex) {
+        currentIndex++;
+        if (currentIndex >= list.size()) {
+            currentIndex = 0;
         }
-        return index;
+        return currentIndex;
     }
 
     private int decrementPointer() {
         lock.lock();
         try {
-            index = decrementListPointer(index);
+            index = findPrevListPointer(index);
             return index;
         } finally {
             lock.unlock();
         }
     }
 
-    private int decrementListPointer(int index) {
-        index--;
-        if (index < 0) {
-            index = list.size() - 1;
+    private int findPrevListPointer(int currentIndex) {
+        currentIndex--;
+        if (currentIndex < 0) {
+            currentIndex = list.size() - 1;
         }
-        return index;
+        return currentIndex;
     }
 
     /**
      * This method should only be called from a locked method thus it is not
      * necessary to lock from this method
      */
-    private int checkPointer() {
+    private void fixInvalidPointer() {
         if (index > list.size()) {
             index = list.size() - 1;
         } else if (index < 0) {
             index = 0;
         }
-        return index;
     }
 
     @Override
@@ -215,16 +213,22 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
 
     @Override
     public Object[] toArray() {
-        return list.toArray();
+        return toArray(new UUID[0]);
     }
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return list.toArray(a);
-    }
+        T[] res = list.toArray(a);
 
-    public List<E> toList() {
-        return list;
+        // sort due default order
+        Iterator<E> iter = this.iterator();
+        int insertIndex = 0;
+        while (iter.hasNext()) {
+            res[insertIndex] = (T) iter.next();
+            insertIndex++;
+        }
+
+        return res;
     }
 
     @Override
@@ -254,7 +258,7 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
         try {
             boolean ret = list.removeAll(c);
             modCount++;
-            checkPointer();
+            fixInvalidPointer();
             return ret;
         } finally {
             lock.unlock();
@@ -267,7 +271,7 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
         try {
             boolean ret = list.retainAll(c);
             modCount++;
-            checkPointer();
+            fixInvalidPointer();
             return ret;
         } finally {
             lock.unlock();
@@ -286,6 +290,10 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
         }
     }
 
+    public E set(E element) {
+        return this.set(this.index, element);
+    }
+
     @Override
     public E set(int index, E element) {
         lock.lock();
@@ -295,10 +303,6 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
         } finally {
             lock.unlock();
         }
-    }
-
-    public E set(E element) {
-        return this.set(this.index, element);
     }
 
     @Override
@@ -361,7 +365,7 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
                 throw new ConcurrentModificationException();
             }
             E data = (E) list.get(cursor);
-            cursor = incrementListPointer(cursor);
+            cursor = findNextListPointer(cursor);
             hasMoved = true;
             return data;
         }
@@ -409,7 +413,7 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
                 throw new ConcurrentModificationException();
             }
             E data = (E) list.get(cursor);
-            cursor = incrementListPointer(cursor);
+            cursor = findNextListPointer(cursor);
             hasMoved = true;
             return data;
         }
@@ -430,7 +434,7 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
             if (curModCount != modCount) {
                 throw new ConcurrentModificationException();
             }
-            cursor = decrementListPointer(cursor);
+            cursor = findPrevListPointer(cursor);
             hasMoved = true;
             return (E) list.get(cursor);
         }
@@ -438,7 +442,7 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
         @Override
         public int nextIndex() {
             if (this.hasNext()) {
-                return incrementListPointer(cursor);
+                return findNextListPointer(cursor);
             }
             return list.size();
         }
@@ -446,7 +450,7 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
         @Override
         public int previousIndex() {
             if (this.hasPrevious()) {
-                return decrementListPointer(cursor);
+                return findPrevListPointer(cursor);
             }
             return -1;
         }

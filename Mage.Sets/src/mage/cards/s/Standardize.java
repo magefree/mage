@@ -59,14 +59,14 @@ class StandardizeEffect extends OneShotEffect {
         MageObject sourceObject = game.getObject(source);
         String chosenType = "";
         if (player != null && sourceObject != null) {
-            Choice typeChoice = new ChoiceCreatureType(sourceObject);
+            Choice typeChoice = new ChoiceCreatureType(game, source);
             typeChoice.setMessage("Choose a creature type other than Wall");
-            typeChoice.getChoices().remove("Wall");
+            typeChoice.getKeyChoices().keySet().removeIf(c -> c.equals("Wall"));
             if (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
                 return false;
             }
-            game.informPlayers(sourceObject.getLogName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoice());
-            chosenType = typeChoice.getChoice();
+            game.informPlayers(sourceObject.getLogName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoiceKey());
+            chosenType = typeChoice.getChoiceKey();
             if (chosenType != null && !chosenType.isEmpty()) {
                 // ADD TYPE TO TARGET
                 game.addEffect(new BecomesSubtypeAllEffect(

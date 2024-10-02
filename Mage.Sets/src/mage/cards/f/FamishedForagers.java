@@ -34,7 +34,7 @@ public final class FamishedForagers extends CardImpl {
         // When Famished Foragers enters the battlefield, if an opponent lost life this turn, add {R}{R}{R}.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new BasicManaEffect(Mana.RedMana(3))),
-                OpponentsLostLifeCondition.instance, "When {this} enters the battlefield, " +
+                OpponentsLostLifeCondition.instance, "When {this} enters, " +
                 "if an opponent lost life this turn, add {R}{R}{R}."
         ).addHint(OpponentsLostLifeHint.instance));
 

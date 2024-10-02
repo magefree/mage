@@ -263,6 +263,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Reality Ripple", "87+", Rarity.COMMON, mage.cards.r.RealityRipple.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reality Ripple", 87, Rarity.COMMON, mage.cards.r.RealityRipple.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reckless Embermage", 189, Rarity.RARE, mage.cards.r.RecklessEmbermage.class));
+        cards.add(new SetCardInfo("Reflect Damage", 277, Rarity.RARE, mage.cards.r.ReflectDamage.class));
         cards.add(new SetCardInfo("Regeneration", 236, Rarity.COMMON, mage.cards.r.Regeneration.class));
         cards.add(new SetCardInfo("Reign of Chaos", 190, Rarity.UNCOMMON, mage.cards.r.ReignOfChaos.class));
         cards.add(new SetCardInfo("Reign of Terror", 137, Rarity.UNCOMMON, mage.cards.r.ReignOfTerror.class));
@@ -362,6 +363,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Windreaper Falcon", 289, Rarity.UNCOMMON, mage.cards.w.WindreaperFalcon.class));
         cards.add(new SetCardInfo("Withering Boon", 152, Rarity.UNCOMMON, mage.cards.w.WitheringBoon.class));
         cards.add(new SetCardInfo("Worldly Tutor", 255, Rarity.UNCOMMON, mage.cards.w.WorldlyTutor.class));
+        cards.add(new SetCardInfo("Yare", 48, Rarity.RARE, mage.cards.y.Yare.class));
         cards.add(new SetCardInfo("Zebra Unicorn", 290, Rarity.UNCOMMON, mage.cards.z.ZebraUnicorn.class));
         cards.add(new SetCardInfo("Zhalfirin Commander", 49, Rarity.UNCOMMON, mage.cards.z.ZhalfirinCommander.class));
         cards.add(new SetCardInfo("Zhalfirin Knight", 50, Rarity.COMMON, mage.cards.z.ZhalfirinKnight.class));

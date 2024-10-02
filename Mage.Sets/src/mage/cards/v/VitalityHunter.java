@@ -40,8 +40,8 @@ public final class VitalityHunter extends CardImpl {
                 new AddCountersTargetEffect(CounterType.LIFELINK.createInstance())
                         .setText("put a lifelink counter on each of up to X target creatures")
         );
-        ability.setTargetAdjuster(new TargetsCountAdjuster(GetMonstrosityXValue.instance));
         ability.addTarget(new TargetCreaturePermanent(0, 1));
+        ability.setTargetAdjuster(new TargetsCountAdjuster(GetMonstrosityXValue.instance));
         this.addAbility(ability);
     }
 

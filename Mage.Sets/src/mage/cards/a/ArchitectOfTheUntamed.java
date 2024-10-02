@@ -27,7 +27,7 @@ public final class ArchitectOfTheUntamed extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Whenever a land enters the battlefield under your control, you get {E}.
+        // Whenever a land you control enters, you get {E}.
         this.addAbility(new LandfallAbility(new GetEnergyCountersControllerEffect(1)));
 
         // Pay {E}{E}{E}{E}{E}{E}{E}{E}: Create a 6/6 colorless Beast artifact creature token.

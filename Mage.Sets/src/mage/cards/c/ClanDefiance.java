@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Mode;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -35,14 +35,14 @@ public final class ClanDefiance extends CardImpl {
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(3);
         // Clan Defiance deals X damage to target creature with flying;
-        this.getSpellAbility().addEffect(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        this.getSpellAbility().addEffect(new DamageTargetEffect(GetXValue.instance));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterFlying).withChooseHint("deals X damage, with flying"));
         // Clan Defiance deals X damage to target creature without flying;
-        Mode mode1 = new Mode(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        Mode mode1 = new Mode(new DamageTargetEffect(GetXValue.instance));
         mode1.addTarget(new TargetCreaturePermanent(filterWithoutFlying).withChooseHint("deals X damage, without flying"));
         this.getSpellAbility().addMode(mode1);
         // and/or Clan Defiance deals X damage to target player.
-        Mode mode2 = new Mode(new DamageTargetEffect(ManacostVariableValue.REGULAR));
+        Mode mode2 = new Mode(new DamageTargetEffect(GetXValue.instance));
         mode2.addTarget(new TargetPlayerOrPlaneswalker().withChooseHint("deals X damage"));
         this.getSpellAbility().addMode(mode2);
 

@@ -32,7 +32,7 @@ public final class VildinPackAlpha extends CardImpl {
 
         this.nightCard = true;
 
-        // Whenever a Werewolf enters the battlefield under your control, you may transform it.
+        // Whenever a Werewolf you control enters, you may transform it.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
                 Zone.BATTLEFIELD, new VildinPackAlphaEffect(), filter,
                 true, SetTargetPointer.PERMANENT

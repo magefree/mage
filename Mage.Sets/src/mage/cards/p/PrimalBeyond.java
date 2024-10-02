@@ -38,7 +38,7 @@ public final class PrimalBeyond extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // As Primal Beyond enters the battlefield, you may reveal an Elemental card from your hand. If you don't, Primal Beyond enters the battlefield tapped.
-        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal an Elemental card from your hand. If you don't, {this} enters the battlefield tapped"));
+        this.addAbility(new AsEntersBattlefieldAbility(new TapSourceUnlessPaysEffect(new RevealTargetFromHandCost(new TargetCardInHand(filter))), "you may reveal an Elemental card from your hand. If you don't, {this} enters tapped"));
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Add one mana of any color. Spend this mana only to cast an Elemental spell or activate an ability of an Elemental.

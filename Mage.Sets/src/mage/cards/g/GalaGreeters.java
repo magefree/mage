@@ -30,7 +30,7 @@ public final class GalaGreeters extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Alliance — Whenever another creature enters the battlefield under your control, choose one that hasn't been chosen this turn—
+        // Alliance — Whenever another creature you control enters, choose one that hasn't been chosen this turn—
         // • Put a +1/+1 counter on Gala Greeters.
         Ability ability = new AllianceAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         ability.setModeTag("put +1/+1 counter");

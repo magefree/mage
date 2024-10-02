@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class PestInfestation extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(ManacostVariableValue.REGULAR, 2);
+    private static final DynamicValue xValue = new MultipliedValue(GetXValue.instance, 2);
 
     public PestInfestation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{X}{G}");
@@ -30,8 +30,8 @@ public final class PestInfestation extends CardImpl {
                 .setText("destroy up to X target artifacts and/or enchantments."));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new Pest11GainLifeToken(), xValue)
                 .setText("Create twice X 1/1 black and green Pest creature tokens with \"When this creature dies, you gain 1 life.\""));
-        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
         this.getSpellAbility().addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
+        this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 
     private PestInfestation(final PestInfestation card) {
