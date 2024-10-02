@@ -38,7 +38,7 @@ public class Rotater<T> {
     }
 
 //  for striped collation
-    public Rotater(int sLen, String... items) {
+    public Rotater(int sLen, T... items) {
 //          should there be an error check?
 //          assert ( items.size() % sLen ) == 0;
             this.stripeLen = sLen;
