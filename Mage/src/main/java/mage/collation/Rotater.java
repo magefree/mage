@@ -25,6 +25,18 @@ public class Rotater<T> {
         this(true, item1, item2);
     }
 
+    public Rotater(boolean keepOrder, T... items) {
+        if (keepOrder) {
+            this.items = Arrays.asList(items);
+            this.position = RandomUtil.nextInt(this.items.size());
+        } else {
+            this.items = new ArrayList<T>();
+            Collections.addAll(this.items, items);
+            Collections.shuffle(this.items, RandomUtil.getRandom());
+            this.position = 0;
+        }
+    }
+
     public int numItems() {
         return items.size();
     }
