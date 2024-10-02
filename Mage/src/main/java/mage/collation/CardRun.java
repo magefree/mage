@@ -26,14 +26,15 @@ public class CardRun extends Rotater<String> {
     }
     
     public int iterate() {
-        if( stripeLen ==0 ){
+        if ( stripeLen ==0 ){
           return super.iterate();
-        if( stripeDepth < stripeWidth ){
+        }
+        if ( stripeDepth < stripeWidth ){
           ++stripeDepth;
           return super.iterate(-stripeLen);
         }
         stripeDepth= 1;
-        if this.isEdge(stripeLen){
+        if ( this.isEdge(stripeLen)){
           this.stripeWidth= this.nextWidth();
           return super.iterate(-1);
         }

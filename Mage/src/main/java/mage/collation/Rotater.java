@@ -52,7 +52,7 @@ public class Rotater<T> {
     }
     
     public int iterate() {
-        return iterate(1)'
+        return this.iterate(1);
     }
 
     public T getNext() {
