@@ -38,7 +38,7 @@ public class Rotater<T> {
     }
 
 //  for striped collation
-    public Main(int sLen, String... items) {
+    public Rotater(int sLen, String... items) {
 //          should there be an error check?
 //          assert ( items.size() % sLen ) == 0;
             this.stripeLen = sLen;
@@ -50,7 +50,7 @@ public class Rotater<T> {
 
 // choose a stripe width between 2 & 5 inclusive
 // ToDo when data available: enable different widths to have different likelihoods
-    public int nextWidth() {
+    private int nextWidth() {
         return 2+ RandomUtil.nextInt(4);
     }
     
