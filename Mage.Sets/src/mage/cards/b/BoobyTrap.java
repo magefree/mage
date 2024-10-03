@@ -74,7 +74,7 @@ class BoobyTrapTriggeredAbility extends TriggeredAbilityImpl {
             Card drawn = game.getCard(event.getTargetId());
             if (drawn != null) {
                 controller.revealCards(this, new CardsImpl(drawn), game);
-                if (drawn.getName().equals(game.getState().getValue(getSourceId().toString() + ChooseACardNameEffect.INFO_KEY))) {
+                if (drawn.hasName((String) game.getState().getValue(getSourceId().toString() + ChooseACardNameEffect.INFO_KEY), game)) {
                     //Set target
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
                     return true;

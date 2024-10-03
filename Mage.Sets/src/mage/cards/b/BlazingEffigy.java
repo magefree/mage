@@ -1,9 +1,5 @@
-
 package mage.cards.b;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
@@ -11,10 +7,10 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -22,8 +18,11 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801 & L_J
  */
 public final class BlazingEffigy extends CardImpl {
@@ -89,14 +88,15 @@ class BlazingEffigyWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.DAMAGED_PERMANENT) { return; }
-
-        if (event.getSourceId().equals(event.getTargetId())) { return; }
+        if (event.getType() != GameEvent.EventType.DAMAGED_PERMANENT
+                || event.getSourceId().equals(event.getTargetId())) {
+            return;
+        }
 
         // TODO: Should damageSourceRef be used for anything?
         MageObjectReference damageSourceRef = new MageObjectReference(event.getSourceId(), game);
         MageObjectReference damageTargetRef = new MageObjectReference(event.getTargetId(), game);
-        if (game.getPermanentOrLKIBattlefield(event.getSourceId()) != null && game.getPermanentOrLKIBattlefield(event.getSourceId()).getName().equals("Blazing Effigy")) {
+        if (game.getPermanentOrLKIBattlefield(event.getSourceId()) != null && game.getPermanentOrLKIBattlefield(event.getSourceId()).hasName("Blazing Effigy", game)) {
             damagedObjects.putIfAbsent(damageTargetRef, 0);
             damagedObjects.compute(damageTargetRef, (k, damage) -> damage + event.getAmount());
         }

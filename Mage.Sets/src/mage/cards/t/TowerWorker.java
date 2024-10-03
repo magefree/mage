@@ -1,23 +1,24 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
-import mage.abilities.mana.DynamicManaAbility;
-import mage.constants.SubType;
 import mage.abilities.keyword.ReachAbility;
+import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.StaticFilters;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author weirddan455
  */
 public final class TowerWorker extends CardImpl {
@@ -51,25 +52,19 @@ public final class TowerWorker extends CardImpl {
 
 enum TowerWorkerValue implements DynamicValue {
     instance;
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filter2 = new FilterControlledCreaturePermanent();
+
+    static {
+        filter.add(new NamePredicate("Mine Worker"));
+        filter2.add(new NamePredicate("Power Plant Worker"));
+    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        String mineName = "Mine Worker";
-        String powerPlantName = "Power Plant Worker";
-        boolean mine = false;
-        boolean powerPlant = false;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, sourceAbility.getControllerId(), game)) {
-            String name = permanent.getName();
-            if (!mine && mineName.equals(name)) {
-                mine = true;
-            } else if (!powerPlant && powerPlantName.equals(name)) {
-                powerPlant = true;
-            }
-            if (mine && powerPlant) {
-                return 3;
-            }
-        }
-        return 1;
+        return game.getBattlefield().contains(filter, sourceAbility, game, 1)
+                && game.getBattlefield().contains(filter2, sourceAbility, game, 1)
+                ? 3 : 1;
     }
 
     @Override

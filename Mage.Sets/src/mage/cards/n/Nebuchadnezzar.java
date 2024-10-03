@@ -86,7 +86,7 @@ class NebuchadnezzarEffect extends OneShotEffect {
             }
         }
         opponent.revealCards(sourceObject.getIdName(), cards, game);
-        cards.removeIf(uuid -> !cardName.equals(game.getCard(uuid).getName()));
+        cards.removeIf(uuid -> !game.getCard(uuid).hasName(cardName, game));
         opponent.discard(cards, false, source, game);
         return true;
     }

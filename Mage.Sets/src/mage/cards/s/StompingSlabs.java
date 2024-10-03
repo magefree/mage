@@ -1,16 +1,11 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -18,14 +13,15 @@ import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author emerald000
  */
 public final class StompingSlabs extends CardImpl {
 
     public StompingSlabs(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{2}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{R}");
 
         // Reveal the top seven cards of your library, then put those cards on the bottom of your library in any order. If a card named Stomping Slabs was revealed this way, Stomping Slabs deals 7 damage to any target.
         this.getSpellAbility().addEffect(new StompingSlabsEffect());
@@ -43,21 +39,21 @@ public final class StompingSlabs extends CardImpl {
 }
 
 class StompingSlabsEffect extends OneShotEffect {
-    
+
     StompingSlabsEffect() {
         super(Outcome.Damage);
         this.staticText = "Reveal the top seven cards of your library, then put those cards on the bottom of your library in any order. If a card named Stomping Slabs was revealed this way, {this} deals 7 damage to any target";
     }
-    
+
     private StompingSlabsEffect(final StompingSlabsEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public StompingSlabsEffect copy() {
         return new StompingSlabsEffect(this);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
@@ -68,7 +64,7 @@ class StompingSlabsEffect extends OneShotEffect {
                 boolean stompingSlabsFound = false;
                 for (UUID cardId : cards) {
                     Card card = game.getCard(cardId);
-                    if (card != null && card.getName().equals("Stomping Slabs")) {
+                    if (card != null && card.hasName("Stomping Slabs", game)) {
                         stompingSlabsFound = true;
                         break;
                     }
