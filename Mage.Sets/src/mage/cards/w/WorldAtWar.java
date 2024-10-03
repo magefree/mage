@@ -49,7 +49,7 @@ class WorldAtWarEffect extends OneShotEffect {
 
     WorldAtWarEffect() {
         super(Outcome.Benefit);
-        staticText = "After the first postcombat main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn";
+        staticText = "After the second main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn";
     }
 
     private WorldAtWarEffect(final WorldAtWarEffect effect) {
