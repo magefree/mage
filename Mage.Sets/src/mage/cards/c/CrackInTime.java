@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.VanishingAbility;
@@ -31,7 +31,7 @@ public final class CrackInTime extends CardImpl {
         Ability ability = new OrTriggeredAbility(Zone.BATTLEFIELD, new ExileUntilSourceLeavesEffect(), false,
                 "When {this} enters and at the beginning of your precombat main phase, ",
                 new EntersBattlefieldTriggeredAbility(null),
-                new BeginningOfPreCombatMainTriggeredAbility(null, TargetController.YOU, false)
+                new BeginningOfFirstMainTriggeredAbility(null, TargetController.YOU, false)
         );
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);
