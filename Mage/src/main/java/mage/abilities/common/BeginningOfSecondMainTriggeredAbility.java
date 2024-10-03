@@ -3,14 +3,16 @@ package mage.abilities.common;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.TargetController;
+import mage.constants.WatcherScope;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.watchers.Watcher;
 
 /**
- * @author LevelX2
+ * @author TheElk801
  */
 public class BeginningOfSecondMainTriggeredAbility extends TriggeredAbilityImpl {
 
@@ -26,6 +28,7 @@ public class BeginningOfSecondMainTriggeredAbility extends TriggeredAbilityImpl 
         this.targetController = targetController;
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase(generateTriggerPhrase());
+        this.addWatcher(new MainPhaseWatcher());
     }
 
     protected BeginningOfSecondMainTriggeredAbility(final BeginningOfSecondMainTriggeredAbility ability) {
@@ -41,32 +44,40 @@ public class BeginningOfSecondMainTriggeredAbility extends TriggeredAbilityImpl 
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.POSTCOMBAT_MAIN_PHASE_PRE;
+        switch (event.getType()) {
+            case PRECOMBAT_MAIN_PHASE_PRE:
+            case POSTCOMBAT_MAIN_PHASE_PRE:
+                return true;
+        }
+        return false;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (!MainPhaseWatcher.checkCount(game)) {
+            return false;
+        }
         switch (targetController) {
             case YOU:
-                boolean yours = event.getPlayerId().equals(this.controllerId);
-                if (yours && setTargetPointer) {
-                    if (getTargets().isEmpty()) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
+                if (!isControlledBy(event.getPlayerId())) {
+                    return false;
+                }
+                if (setTargetPointer && getTargets().isEmpty()) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
                 }
-                return yours;
+                return true;
             case OPPONENT:
-                if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
-                    if (setTargetPointer) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
-                    }
-                    return true;
+                if (!game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+                    return false;
                 }
-                break;
+                if (setTargetPointer) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    }
+                }
+                return true;
             case ANY:
                 if (setTargetPointer) {
                     for (Effect effect : this.getEffects()) {
@@ -77,7 +88,7 @@ public class BeginningOfSecondMainTriggeredAbility extends TriggeredAbilityImpl 
             case ENCHANTED:
                 Permanent permanent = getSourcePermanentIfItStillExists(game);
                 if (permanent == null || !game.isActivePlayer(permanent.getAttachedTo())) {
-                    break;
+                    return false;
                 }
                 if (getTargets().isEmpty()) {
                     this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
@@ -107,5 +118,36 @@ public class BeginningOfSecondMainTriggeredAbility extends TriggeredAbilityImpl 
                 return "if {this} is in your graveyard, ";
         }
         return "";
+    }
+}
+
+class MainPhaseWatcher extends Watcher {
+
+    private int mainPhaseCount = 0;
+
+    MainPhaseWatcher() {
+        super(WatcherScope.GAME);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        switch (event.getType()) {
+            case PRECOMBAT_MAIN_PHASE_PRE:
+            case POSTCOMBAT_MAIN_PHASE_PRE:
+                mainPhaseCount++;
+        }
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        this.mainPhaseCount = 0;
+    }
+
+    static boolean checkCount(Game game) {
+        return game
+                .getState()
+                .getWatcher(MainPhaseWatcher.class)
+                .mainPhaseCount == 2;
     }
 }
