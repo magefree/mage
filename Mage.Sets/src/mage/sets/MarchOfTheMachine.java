@@ -618,8 +618,8 @@ class MarchOfTheMachineCollator implements BoosterCollator {
     // 5 rare dfc and 5 mythic dfc for a weight of 15
     // 44 rare non-dfc and 10 mythic non-dfc for a weight of 98
     // note: each uncommon battle will be only 88% as likely as each uncommon non-dfc
-    // and each uncommon dfc will be only 97% as likely as each uncommon non-dfc
-    // and each common dfc will 113% as likely as each common non-dfc
+    // and each uncommon dfc will be 106% as likely as each uncommon non-dfc
+    // and each common dfc will 102% as likely as each common non-dfc
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(
             RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU,
             RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU,
