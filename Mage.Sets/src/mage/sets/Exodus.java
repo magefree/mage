@@ -4,6 +4,13 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -75,7 +82,7 @@ public final class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Keeper of the Beasts", 112, Rarity.UNCOMMON, mage.cards.k.KeeperOfTheBeasts.class));
         cards.add(new SetCardInfo("Keeper of the Dead", 65, Rarity.UNCOMMON, mage.cards.k.KeeperOfTheDead.class));
         cards.add(new SetCardInfo("Keeper of the Flame", 85, Rarity.UNCOMMON, mage.cards.k.KeeperOfTheFlame.class));
-	cards.add(new SetCardInfo("Keeper of the Light", 8, Rarity.UNCOMMON, mage.cards.k.KeeperOfTheLight.class));
+        cards.add(new SetCardInfo("Keeper of the Light", 8, Rarity.UNCOMMON, mage.cards.k.KeeperOfTheLight.class));
         cards.add(new SetCardInfo("Keeper of the Mind", 36, Rarity.UNCOMMON, mage.cards.k.KeeperOfTheMind.class));
         cards.add(new SetCardInfo("Killer Whale", 37, Rarity.UNCOMMON, mage.cards.k.KillerWhale.class));
         cards.add(new SetCardInfo("Kor Chant", 9, Rarity.COMMON, mage.cards.k.KorChant.class));
@@ -172,4 +179,43 @@ public final class Exodus extends ExpansionSet {
         cards.add(new SetCardInfo("Workhorse", 142, Rarity.RARE, mage.cards.w.Workhorse.class));
         cards.add(new SetCardInfo("Zealots en-Dal", 26, Rarity.UNCOMMON, mage.cards.z.ZealotsEnDal.class));
     }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new ExodusCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/exo.html
+// Using US collation - commons only
+class ExodusCollator implements BoosterCollator {
+    private final CardRun commonA = new CardRun(true, );
+    private final CardRun commonB = new CardRun(true, );
+    private final CardRun uncommon = new CardRun(false, );
+    private final CardRun rare = new CardRun(false, );
+
+    private final BoosterStructure A6 = new BoosterStructure(
+            commonA, commonA, commonA, commonA, commonA, commonA
+    );
+    private final BoosterStructure B5 = new BoosterStructure(
+            commonB, commonB, commonB, commonB, commonB
+    );
+    private final BoosterStructure U3 = new BoosterStructure(uncommon, uncommon, uncommon);
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+
+    private final RarityConfiguration commonRunsA = new RarityConfiguration(A6);
+    private final RarityConfiguration commonRunsB = new RarityConfiguration(B5);
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(U3);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(commonRunsA.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(commonRunsB.getNext().makeRun());
+        return booster;
+    }
+}
 }
