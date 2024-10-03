@@ -61,7 +61,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Burnished Hart", 243, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
         cards.add(new SetCardInfo("Cackling Counterpart", 72, Rarity.RARE, mage.cards.c.CacklingCounterpart.class));
         cards.add(new SetCardInfo("Canyon Slough", 266, Rarity.RARE, mage.cards.c.CanyonSlough.class));
-        cards.add(new SetCardInfo("Carrion Grub", 134, Rarity.COMMON, mage.cards.c.CarrionGrub.class));
+        cards.add(new SetCardInfo("Carrion Grub", 134, Rarity.UNCOMMON, mage.cards.c.CarrionGrub.class));
         cards.add(new SetCardInfo("Cast Out", 98, Rarity.UNCOMMON, mage.cards.c.CastOut.class));
         cards.add(new SetCardInfo("Castle Vantress", 267, Rarity.RARE, mage.cards.c.CastleVantress.class));
         cards.add(new SetCardInfo("Caves of Koilos", 268, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
