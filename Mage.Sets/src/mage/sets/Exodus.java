@@ -218,4 +218,3 @@ class ExodusCollator implements BoosterCollator {
         return booster;
     }
 }
-}
