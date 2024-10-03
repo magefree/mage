@@ -189,10 +189,10 @@ public final class Exodus extends ExpansionSet {
 // Booster collation info from https://www.lethe.xyz/mtg/collation/exo.html
 // Using US collation - commons only
 class ExodusCollator implements BoosterCollator {
-    private final CardRun commonA = new CardRun(true, );
-    private final CardRun commonB = new CardRun(true, );
-    private final CardRun uncommon = new CardRun(false, );
-    private final CardRun rare = new CardRun(false, );
+    private final CardRun commonA = new CardRun(true, "67", "130", "52", "86", "9", "58", "105", "34", "98", "19", "77", "122", "39", "87", "20", "76", "119", "34", "79", "18", "54", "118", "48", "92", "22", "58", "116", "52", "103", "19", "67", "122", "51", "79", "9", "63", "119", "28", "98", "21", "77", "130", "39", "92", "20", "54", "116", "28", "86", "18", "76", "105", "48", "87", "22", "63", "118", "51", "103", "21");
+    private final CardRun commonB = new CardRun(true, "56", "106", "44", "102", "4", "53", "120", "43", "81", "25", "60", "106", "45", "96", "2", "56", "117", "27", "84", "4", "60", "111", "43", "80", "1", "55", "110", "49", "96", "25", "73", "120", "44", "81", "16", "55", "111", "45", "102", "2", "73", "110", "27", "80", "16", "53", "117", "49", "84", "1");
+    private final CardRun uncommon = new CardRun(false, "107", "108", "29", "57", "59", "109", "83", "35", "62", "7", "112", "65", "85", "8", "36", "37", "38", "133", "66", "41", "88", "68", "94", "13", "14", "15", "95", "17", "121", "99", "100", "46", "137", "123", "74", "125", "138", "104", "75", "127", "141", "23", "50", "26");
+    private final CardRun rare = new CardRun(false, "3", "143", "131", "5", "30", "61", "31", "32", "132", "33", "6", "82", "64", "10", "113", "134", "135", "40", "114", "89", "136", "115", "69", "11", "90", "42", "91", "12", "93", "70", "71", "97", "72", "101", "124", "139", "126", "128", "129", "47", "140", "78", "24", "142");
 
     private final BoosterStructure A6 = new BoosterStructure(
             commonA, commonA, commonA, commonA, commonA, commonA
