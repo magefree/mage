@@ -613,36 +613,27 @@ class MarchOfTheMachineCollator implements BoosterCollator {
             AAABBBCC, AAABBBCC, AAABBBCC, AAABBBCC, AAABBBCC
     );
 
+    // 11 rare battle and 5 mythic battle for a weight of 27
+    // 5 rare dfc and 5 mythic dfc for a weight of 15
+    // 44 rare non-dfc and 10 mythic non-dfc for a weight of 98
+    // note: each uncommon battle will be only 88% as likely as each uncommon non-dfc
+    // and each uncommon dfc will be 194% as likely as each uncommon non-dfc
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(
-            RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU,
-            RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU,
-            RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU,
+            RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU,
+            RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU,
+            RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, 
+            UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU,
             UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU,
-            UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU,
-            UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU,
-            UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU,
-            UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU,
-            UR_UUU, UR_UUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU
+            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
+            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
+            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
+            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
+            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
+            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
+            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
+            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
+            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
+            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU
     );
 
     // private final RarityConfiguration archiveRuns = new RarityConfiguration(A1, A1, A2);
