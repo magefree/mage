@@ -544,9 +544,10 @@ class MarchOfTheMachineCollator implements BoosterCollator {
     private final CardRun commonA = new CardRun(true, "76", "33", "68", "24", "82", "42", "59", "5", "80", "19", "54", "25", "55", "8", "60", "37", "67", "27", "47", "2", "87", "33", "56", "14", "74", "34", "54", "18", "55", "19", "76", "24", "60", "33", "74", "25", "67", "42", "82", "2", "59", "37", "68", "8", "47", "39", "56", "5", "87", "25", "80", "34", "79", "27", "59", "14", "60", "19", "55", "2", "56", "34", "80", "24", "74", "39", "76", "18", "68", "27", "82", "5", "54", "37", "87", "42", "79", "33", "67", "14", "47", "8", "68", "18", "82", "24", "76", "42", "67", "39", "47", "27", "80", "8", "54", "34", "55", "5", "79", "19", "56", "2", "74", "37", "59", "25", "60", "39", "79", "14", "87", "18");
     private final CardRun commonB = new CardRun(true, "214", "260", "197", "266", "210", "259", "201", "199", "57", "177", "3", "204", "81", "186", "15", "195", "73", "175", "7", "183", "66", "215", "4", "205", "69", "176", "10", "212", "261", "182", "133", "180", "264", "179", "118", "201", "260", "182", "261", "197", "133", "180", "175", "10", "204", "57", "215", "15", "212", "81", "183", "3", "205", "66", "199", "4", "176", "73", "177", "7", "186", "69", "195", "266", "216", "118", "214", "259", "210", "262", "179", "264", "180", "260", "201", "266", "216", "259", "214", "262", "210", "215", "15", "204", "81", "175", "10", "199", "66", "195", "3", "183", "57", "177", "4", "212", "73", "205", "7", "176", "69", "186", "118", "197", "261", "182", "133", "179", "264", "216", "262");
     private final CardRun commonC = new CardRun(true, "142", "112", "170", "102", "131", "98", "163", "100", "167", "103", "172", "105", "173", "129", "161", "91", "158", "112", "168", "104", "142", "111", "156", "108", "130", "128", "150", "120", "153", "126", "154", "101", "164", "127", "140", "97", "136", "99", "173", "120", "172", "128", "168", "111", "163", "127", "161", "129", "167", "105", "158", "102", "154", "108", "150", "100", "170", "126", "130", "101", "156", "112", "140", "91", "142", "104", "164", "98", "153", "103", "131", "99", "136", "97", "168", "129", "173", "128", "172", "100", "161", "105", "170", "97", "164", "103", "163", "102", "156", "99", "154", "127", "158", "126", "136", "104", "130", "111", "140", "98", "131", "101", "150", "91", "153", "120", "167", "108");
-    // uncommonT (battle) uncommonD (non-battle dfc) uncommon (non-battle, non-dfc)
+    // uncommonT (battle) uncommonD (c/u non-battle dfc) uncommon (non-battle, non-dfc)
     private final CardRun uncommon = new CardRun(false, "46", "48", "220", "50", "95", "96", "181", "53", "13", "223", "138", "139", "141", "106", "107", "227", "243", "196", "152", "246", "117", "247", "248", "29", "70", "71", "30", "31", "121", "159", "251", "202", "123", "203", "124", "162", "253", "35", "165", "166", "254", "206", "207", "41", "208", "209", "44", "84", "85", "45");
-    private final CardRun uncommonD = new CardRun(false, "88", "88", "92", "178", "178", "49", "188", "143", "189", "151", "119", "72", "72", "157", "157", "36", "78", "38", "43", "43");
+    // used 3:5 uncommon:common ratio (uncD 106% as likely as unc, comD 102% as likely as com).
+    private final CardRun uncommonD = new CardRun(false, "88", "88", "88", "88", "88", "92", "92", "92", "178", "178", "178", "178", "178", "49", "49", "49", "188", "188", "188", "143", "143", "143", "189", "189", "189", "151", "151", "151", "119", "119", "119", "72", "72", "72", "72", "72", "157", "157", "157", "157", "157", "36", "36", "36", "78", "78", "78", "38", "38", "38", "43", "43", "43", "43", "43");
     private final CardRun uncommonT = new CardRun(false, "231", "232", "20", "21", "113", "233", "234", "62", "235", "236", "147", "237", "192", "238", "240", "148", "116", "64", "242", "194");
     // rareT (battle) rareD (non-battle dfc) rare (non-battle, non-dfc)
     private final CardRun rare = new CardRun(false, "174", "174", "6", "89", "89", "218", "218", "93", "93", "132", "132", "9", "9", "219", "94", "94", "134", "51", "51", "135", "135", "52", "52", "184", "184", "221", "221", "185", "185", "222", "222", "11", "11", "224", "224", "58", "58", "225", "225", "226", "226", "187", "187", "109", "109", "16", "16", "228", "228", "110", "110", "229", "229", "144", "144", "26", "26", "244", "244", "245", "28", "155", "155", "249", "249", "198", "198", "122", "122", "32", "32", "250", "250", "160", "160", "252", "252", "263", "263", "77", "77", "40", "40", "265", "255", "83", "83", "211", "211", "171", "171", "217", "256", "256", "86", "86", "257", "258");
@@ -573,13 +574,13 @@ class MarchOfTheMachineCollator implements BoosterCollator {
             commonC, commonC
     );
 
-    private final BoosterStructure UU_RUU = new BoosterStructure(
+    private final BoosterStructure UuRUU = new BoosterStructure(
             uncommonT, uncommonD, rare, uncommon, uncommon
     );
-    private final BoosterStructure UR_UUU = new BoosterStructure(
+    private final BoosterStructure URUUU = new BoosterStructure(
             uncommonT, rareD, uncommon, uncommon, uncommon
     );
-    private final BoosterStructure RU_UUU = new BoosterStructure(
+    private final BoosterStructure RuUUU = new BoosterStructure(
             rareT, uncommonD, uncommon, uncommon, uncommon
     );
 
@@ -617,23 +618,24 @@ class MarchOfTheMachineCollator implements BoosterCollator {
     // 5 rare dfc and 5 mythic dfc for a weight of 15
     // 44 rare non-dfc and 10 mythic non-dfc for a weight of 98
     // note: each uncommon battle will be only 88% as likely as each uncommon non-dfc
-    // and each uncommon dfc will be 194% as likely as each uncommon non-dfc
+    // and each uncommon dfc will be only 97% as likely as each uncommon non-dfc
+    // and each common dfc will 113% as likely as each common non-dfc
     private final RarityConfiguration uncommonRuns = new RarityConfiguration(
-            RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU,
-            RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU,
-            RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, RU_UUU, 
-            UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU,
-            UR_UUU, UR_UUU, UR_UUU, UR_UUU, UR_UUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU,
-            UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU, UU_RUU
+            RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU,
+            RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU,
+            RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, RuUUU, 
+            URUUU, URUUU, URUUU, URUUU, URUUU, URUUU, URUUU, URUUU, URUUU, URUUU,
+            URUUU, URUUU, URUUU, URUUU, URUUU,
+            UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU,
+            UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU,
+            UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU,
+            UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU,
+            UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU,
+            UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU,
+            UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU,
+            UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU,
+            UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU,
+            UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU, UuRUU
     );
 
     // private final RarityConfiguration archiveRuns = new RarityConfiguration(A1, A1, A2);
