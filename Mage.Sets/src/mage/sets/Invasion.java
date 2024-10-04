@@ -419,43 +419,31 @@ class InvasionCollator implements BoosterCollator {
             commonB, commonB, commonB, commonB,
             commonA, commonA
     );
-    private final BoosterStructure BBAAA = new BoosterStructure(
-            commonB, commonB,
-            commonA, commonA, commonA
-    );
-    private final BoosterStructure BBBBA = new BoosterStructure(
-            commonB, commonB, commonB, commonB,
-            commonA
-    );
-    private final BoosterStructure BAAAA = new BoosterStructure(
-            commonB,
-            commonA, commonA, commonA, commonA
-    );
 
     // either C then D, or D then C
-    private final BoosterStructure CCCDDD = new BoosterStructure(
+    private final BoosterStructure CCCDD = new BoosterStructure(
             commonC, commonC, commonC,
-            commonD, commonD, commonD
-    );
-    private final BoosterStructure CCCCDD = new BoosterStructure(
-            commonC, commonC, commonC, commonC,
             commonD, commonD
     );
-    private final BoosterStructure CCDDDD = new BoosterStructure(
-            commonC, commonC,
-            commonD, commonD, commonD, commonD
-    );
-    private final BoosterStructure DDDCCC = new BoosterStructure(
+    private final BoosterStructure DDDCC = new BoosterStructure(
             commonD, commonD, commonD,
-            commonC, commonC, commonC
-    );
-    private final BoosterStructure DDDDCC = new BoosterStructure(
-            commonD, commonD, commonD, commonD,
             commonC, commonC
     );
-    private final BoosterStructure DDCCCC = new BoosterStructure(
+    private final BoosterStructure CCDDD = new BoosterStructure(
+            commonC, commonC,
+            commonD, commonD, commonD
+    );
+    private final BoosterStructure DDCCC = new BoosterStructure(
             commonD, commonD,
-            commonC, commonC, commonC, commonC
+            commonC, commonC, commonC
+    );
+    private final BoosterStructure CCCCD = new BoosterStructure(
+            commonC, commonC, commonC, commonC,
+            commonD
+    );
+    private final BoosterStructure DDDDC = new BoosterStructure(
+            commonD, commonD, commonD, commonD,
+            commonC
     );
 
     private final BoosterStructure U3 = new BoosterStructure(uncommon, uncommon, uncommon);
