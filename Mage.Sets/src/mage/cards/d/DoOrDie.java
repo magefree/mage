@@ -70,7 +70,6 @@ class DoOrDieEffect extends OneShotEffect {
         filter.add(new ControllerIdPredicate(targetPlayer.getId()));
         TargetCreaturePermanent creatures = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
         List<Permanent> pile1 = new ArrayList<>();
-        creatures.setRequired(false);
         if (player.choose(Outcome.Neutral, creatures, source, game)) {
             List<UUID> targets = creatures.getTargets();
             for (UUID targetId : targets) {
