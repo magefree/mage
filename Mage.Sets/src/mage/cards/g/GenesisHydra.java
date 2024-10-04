@@ -1,4 +1,3 @@
-
 package mage.cards.g;
 
 import mage.MageInt;
@@ -76,8 +75,7 @@ class GenesisHydraPutOntoBattlefieldEffect extends OneShotEffect {
                 FilterCard filter = new FilterPermanentCard("a nonland permanent card with mana value " + count + " or less to put onto the battlefield");
                 filter.add(Predicates.not(CardType.LAND.getPredicate()));
                 filter.add(new ManaValuePredicate(ComparisonType.FEWER_THAN, count + 1));
-                TargetCard target1 = new TargetCard(Zone.LIBRARY, filter);
-                target1.setRequired(false);
+                TargetCard target1 = new TargetCard(0, 1, Zone.LIBRARY, filter);
                 if (cards.count(filter, source.getSourceId(), source, game) > 0) {
                     if (controller.choose(Outcome.PutCardInPlay, cards, target1, source, game)) {
                         Card card = cards.get(target1.getFirstTarget(), game);

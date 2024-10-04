@@ -1,4 +1,3 @@
-
 package mage.cards.v;
 
 import java.util.UUID;
@@ -76,8 +75,7 @@ class VendilionCliqueEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         MageObject sourceObject = source.getSourceObject(game);
         if (player != null && controller != null && sourceObject != null) {
-            TargetCard targetCard = new TargetCard(Zone.ALL, new FilterNonlandCard());
-            targetCard.setRequired(false);
+            TargetCard targetCard = new TargetCard(0, 1, Zone.ALL, new FilterNonlandCard());
             if (controller.choose(Outcome.Discard, player.getHand(), targetCard, source, game)) {
                 Card card = game.getCard(targetCard.getFirstTarget());
                 if (card != null) {
