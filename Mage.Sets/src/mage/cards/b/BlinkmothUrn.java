@@ -30,7 +30,7 @@ public final class BlinkmothUrn extends CardImpl {
         // At the beginning of each player's precombat main phase, if Blinkmoth Urn is untapped, that player adds {C} for each artifact they control.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfFirstMainTriggeredAbility(new BlinkmothUrnEffect(), TargetController.ANY, false), SourceTappedCondition.UNTAPPED,
-                "At the beginning of each player's precombat main phase, if {this} is untapped, that player adds {C} for each artifact they control."
+                "At the beginning of each player's first main phase, if {this} is untapped, that player adds {C} for each artifact they control."
         ));
     }
 
