@@ -3,6 +3,17 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
+import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -19,7 +30,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         super("Murders at Karlov Manor", "MKM", ExpansionSet.buildDate(2024, 2, 9), SetType.EXPANSION);
         this.blockName = "Murders at Karlov Manor"; // for sorting in GUI
         this.hasBasicLands = true;
-        this.hasBoosters = false; // temporary
+        this.hasBoosters = true;
 
         cards.add(new SetCardInfo("A Killer Among Us", 167, Rarity.UNCOMMON, mage.cards.a.AKillerAmongUs.class));
         cards.add(new SetCardInfo("Absolving Lammasu", 2, Rarity.UNCOMMON, mage.cards.a.AbsolvingLammasu.class));
@@ -71,19 +82,22 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Blood Spatter Analysis", 413, Rarity.RARE, mage.cards.b.BloodSpatterAnalysis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bolrac-Clan Basher", 112, Rarity.UNCOMMON, mage.cards.b.BolracClanBasher.class));
         cards.add(new SetCardInfo("Branch of Vitu-Ghazi", 258, Rarity.UNCOMMON, mage.cards.b.BranchOfVituGhazi.class));
-        cards.add(new SetCardInfo("Break Out", 190, Rarity.UNCOMMON, mage.cards.b.BreakOut.class));
+        cards.add(new SetCardInfo("Break Out", 190, Rarity.UNCOMMON, mage.cards.b.BreakOut.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Break Out", "190+", Rarity.UNCOMMON, mage.cards.b.BreakOut.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bubble Smuggler", 41, Rarity.COMMON, mage.cards.b.BubbleSmuggler.class));
         cards.add(new SetCardInfo("Burden of Proof", 42, Rarity.UNCOMMON, mage.cards.b.BurdenOfProof.class));
         cards.add(new SetCardInfo("Buried in the Garden", 191, Rarity.UNCOMMON, mage.cards.b.BuriedInTheGarden.class));
         cards.add(new SetCardInfo("Call a Surprise Witness", 289, Rarity.UNCOMMON, mage.cards.c.CallASurpriseWitness.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Call a Surprise Witness", 6, Rarity.UNCOMMON, mage.cards.c.CallASurpriseWitness.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Candlestick", 43, Rarity.UNCOMMON, mage.cards.c.Candlestick.class));
-        cards.add(new SetCardInfo("Case File Auditor", 7, Rarity.UNCOMMON, mage.cards.c.CaseFileAuditor.class));
+        cards.add(new SetCardInfo("Case File Auditor", 7, Rarity.UNCOMMON, mage.cards.c.CaseFileAuditor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Case File Auditor", "7+", Rarity.UNCOMMON, mage.cards.c.CaseFileAuditor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Case of the Burning Masks", 113, Rarity.UNCOMMON, mage.cards.c.CaseOfTheBurningMasks.class));
         cards.add(new SetCardInfo("Case of the Crimson Pulse", 114, Rarity.RARE, mage.cards.c.CaseOfTheCrimsonPulse.class));
         cards.add(new SetCardInfo("Case of the Filched Falcon", 44, Rarity.UNCOMMON, mage.cards.c.CaseOfTheFilchedFalcon.class));
         cards.add(new SetCardInfo("Case of the Gateway Express", 8, Rarity.UNCOMMON, mage.cards.c.CaseOfTheGatewayExpress.class));
-        cards.add(new SetCardInfo("Case of the Gorgon's Kiss", 79, Rarity.UNCOMMON, mage.cards.c.CaseOfTheGorgonsKiss.class));
+        cards.add(new SetCardInfo("Case of the Gorgon's Kiss", 79, Rarity.UNCOMMON, mage.cards.c.CaseOfTheGorgonsKiss.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Case of the Gorgon's Kiss", "79+", Rarity.UNCOMMON, mage.cards.c.CaseOfTheGorgonsKiss.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Case of the Locked Hothouse", 155, Rarity.RARE, mage.cards.c.CaseOfTheLockedHothouse.class));
         cards.add(new SetCardInfo("Case of the Pilfered Proof", 9, Rarity.UNCOMMON, mage.cards.c.CaseOfThePilferedProof.class));
         cards.add(new SetCardInfo("Case of the Ransacked Lab", 45, Rarity.RARE, mage.cards.c.CaseOfTheRansackedLab.class));
@@ -95,7 +109,8 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Cease // Desist", 246, Rarity.UNCOMMON, mage.cards.c.CeaseDesist.class));
         cards.add(new SetCardInfo("Cerebral Confiscation", 81, Rarity.COMMON, mage.cards.c.CerebralConfiscation.class));
         cards.add(new SetCardInfo("Chalk Outline", 157, Rarity.UNCOMMON, mage.cards.c.ChalkOutline.class));
-        cards.add(new SetCardInfo("Clandestine Meddler", 82, Rarity.UNCOMMON, mage.cards.c.ClandestineMeddler.class));
+        cards.add(new SetCardInfo("Clandestine Meddler", 82, Rarity.UNCOMMON, mage.cards.c.ClandestineMeddler.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Clandestine Meddler", "82+", Rarity.UNCOMMON, mage.cards.c.ClandestineMeddler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Coerced to Kill", 192, Rarity.UNCOMMON, mage.cards.c.CoercedToKill.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Coerced to Kill", 311, Rarity.UNCOMMON, mage.cards.c.CoercedToKill.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cold Case Cracker", 46, Rarity.COMMON, mage.cards.c.ColdCaseCracker.class));
@@ -243,6 +258,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Kellan, Inquisitive Prodigy", 334, Rarity.RARE, mage.cards.k.KellanInquisitiveProdigy.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Knife", 134, Rarity.UNCOMMON, mage.cards.k.Knife.class));
         cards.add(new SetCardInfo("Kraul Whipcracker", 213, Rarity.UNCOMMON, mage.cards.k.KraulWhipcracker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kraul Whipcracker", "213+", Rarity.UNCOMMON, mage.cards.k.KraulWhipcracker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kraul Whipcracker", 364, Rarity.UNCOMMON, mage.cards.k.KraulWhipcracker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kraul Whipcracker", 425, Rarity.UNCOMMON, mage.cards.k.KraulWhipcracker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Krenko's Buzzcrusher", 136, Rarity.RARE, mage.cards.k.KrenkosBuzzcrusher.class, NON_FULL_USE_VARIOUS));
@@ -385,9 +401,11 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Soul Search", 232, Rarity.UNCOMMON, mage.cards.s.SoulSearch.class));
         cards.add(new SetCardInfo("Steamcore Scholar", 397, Rarity.RARE, mage.cards.s.SteamcoreScholar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Steamcore Scholar", 71, Rarity.RARE, mage.cards.s.SteamcoreScholar.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sudden Setback", 72, Rarity.UNCOMMON, mage.cards.s.SuddenSetback.class));
+        cards.add(new SetCardInfo("Sudden Setback", 72, Rarity.UNCOMMON, mage.cards.s.SuddenSetback.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sudden Setback", "72+", Rarity.UNCOMMON, mage.cards.s.SuddenSetback.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sumala Sentry", 233, Rarity.UNCOMMON, mage.cards.s.SumalaSentry.class));
-        cards.add(new SetCardInfo("Surveillance Monitor", 73, Rarity.UNCOMMON, mage.cards.s.SurveillanceMonitor.class));
+        cards.add(new SetCardInfo("Surveillance Monitor", 73, Rarity.UNCOMMON, mage.cards.s.SurveillanceMonitor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Surveillance Monitor", "73+", Rarity.UNCOMMON, mage.cards.s.SurveillanceMonitor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Suspicious Detonation", 145, Rarity.COMMON, mage.cards.s.SuspiciousDetonation.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 281, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
@@ -412,7 +430,8 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Tolsimir, Midnight's Light", 371, Rarity.RARE, mage.cards.t.TolsimirMidnightsLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tomik, Wielder of Law", 431, Rarity.MYTHIC, mage.cards.t.TomikWielderOfLaw.class));
         cards.add(new SetCardInfo("Topiary Panther", 179, Rarity.COMMON, mage.cards.t.TopiaryPanther.class));
-        cards.add(new SetCardInfo("Torch the Witness", 146, Rarity.UNCOMMON, mage.cards.t.TorchTheWitness.class));
+        cards.add(new SetCardInfo("Torch the Witness", 146, Rarity.UNCOMMON, mage.cards.t.TorchTheWitness.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Torch the Witness", "146+", Rarity.UNCOMMON, mage.cards.t.TorchTheWitness.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Toxin Analysis", 107, Rarity.COMMON, mage.cards.t.ToxinAnalysis.class));
         cards.add(new SetCardInfo("Treacherous Greed", 237, Rarity.RARE, mage.cards.t.TreacherousGreed.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Treacherous Greed", 420, Rarity.RARE, mage.cards.t.TreacherousGreed.class, NON_FULL_USE_VARIOUS));
@@ -427,7 +446,8 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Undercity Eliminator", 108, Rarity.UNCOMMON, mage.cards.u.UndercityEliminator.class));
         cards.add(new SetCardInfo("Undercity Sewers", 270, Rarity.RARE, mage.cards.u.UndercitySewers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Undercity Sewers", 332, Rarity.RARE, mage.cards.u.UndercitySewers.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Undercover Crocodelf", 239, Rarity.COMMON, mage.cards.u.UndercoverCrocodelf.class));
+        cards.add(new SetCardInfo("Undercover Crocodelf", 239, Rarity.COMMON, mage.cards.u.UndercoverCrocodelf.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Undercover Crocodelf", "239+", Rarity.COMMON, mage.cards.u.UndercoverCrocodelf.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Underground Mortuary", 271, Rarity.RARE, mage.cards.u.UndergroundMortuary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Underground Mortuary", 333, Rarity.RARE, mage.cards.u.UndergroundMortuary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Undergrowth Recon", 181, Rarity.MYTHIC, mage.cards.u.UndergrowthRecon.class, NON_FULL_USE_VARIOUS));
@@ -455,11 +475,279 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Wispdrinker Vampire", 374, Rarity.UNCOMMON, mage.cards.w.WispdrinkerVampire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wojek Investigator", 340, Rarity.RARE, mage.cards.w.WojekInvestigator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wojek Investigator", 36, Rarity.RARE, mage.cards.w.WojekInvestigator.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wojek Investigator", "36+", Rarity.RARE, mage.cards.w.WojekInvestigator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wojek Investigator", 429, Rarity.RARE, mage.cards.w.WojekInvestigator.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Worldsoul's Rage", 244, Rarity.RARE, mage.cards.w.WorldsoulsRage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Worldsoul's Rage", 316, Rarity.RARE, mage.cards.w.WorldsoulsRage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wrench", 37, Rarity.UNCOMMON, mage.cards.w.Wrench.class));
         cards.add(new SetCardInfo("Yarus, Roar of the Old Gods", 245, Rarity.RARE, mage.cards.y.YarusRoarOfTheOldGods.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yarus, Roar of the Old Gods", 375, Rarity.RARE, mage.cards.y.YarusRoarOfTheOldGods.class, NON_FULL_USE_VARIOUS));
+    }
+
+    // @Override
+    // protected void addSpecialCards(List<Card> booster, int number) {
+        // number is here always 1
+        // Boosters have one card from BRR, odds are 2/3 for uncommon, 4/15 for rare, 1/15 for mythic
+        // Rarity rarity;
+        // int rarityKey = RandomUtil.nextInt(15);
+        // if (rarityKey == 14) {
+            // rarity = Rarity.MYTHIC;
+        // } else if (rarityKey >= 10) {
+            // rarity = Rarity.RARE;
+        // } else {
+            // rarity = Rarity.UNCOMMON;
+        // }
+        // addToBooster(booster, TheBrothersWarRetroArtifacts.getInstance().getCardsByRarity(rarity));
+    // }
+
+    // @Override
+    // protected void generateBoosterMap() {
+        // super.generateBoosterMap();
+        // CardRepository
+                // .instance
+                // .findCards(new CardCriteria().setCodes("SPG"))
+                // .stream()
+                // .forEach(cardInfo -> inBoosterMap.put("SPG_" + cardInfo.getCardNumber(), cardInfo));
+    // }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new MurdersAtKarlovManorCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/mkm.html
+// Using Japanese collation plus other info inferred from various sources
+class MurdersAtKarlovManorCollator implements BoosterCollator {
+
+    private final CardRun commonA = new CardRun(false, "40", "40", "41", "41", "256", "256", "145", "145", "257", "257", "239", "239+", "183", "183");
+    private final CardRun commonB = new CardRun(true, "154", "68", "125", "66", "169", "138", "74", "178", "130", "294", "174", "143", "149", "60", "128", "179", "138", "49", "168", "133", "69", "182", "129", "60", "169", "265", "130", "68", "154", "125", "66", "170", "128", "74", "255", "159", "139", "53", "178", "304", "52", "180", "122", "177", "62", "144", "149", "39", "142", "46", "174", "129", "178", "122", "68", "180", "130", "60", "177", "138", "46", "159", "133", "255", "49", "149", "144", "293", "174", "142", "168", "69", "139", "39", "128", "179", "298", "143", "154", "265", "66", "116", "169", "62", "182", "125", "53", "170", "129", "179", "306", "69", "180", "116", "62", "177", "143", "49", "168", "142", "255", "52", "170", "144", "39", "182", "139", "46", "265", "310", "133");
+    private final CardRun commonC = new CardRun(true, "76", "230", "14", "75", "206", "19", "93", "197", "292", "102", "204", "11", "105", "261", "18", "107", "203", "5", "103", "193", "33", "300", "231", "17", "84", "22", "78", "24", "228", "81", "29", "252", "101", "23", "93", "193", "30", "102", "197", "17", "107", "261", "18", "78", "203", "33", "105", "206", "22", "109", "225", "19", "101", "204", "11", "103", "230", "25", "84", "228", "14", "95", "5", "75", "290", "252", "76", "24", "231", "81", "29", "101", "206", "33", "75", "225", "11", "105", "230", "14", "81", "193", "25", "301", "203", "18", "107", "204", "17", "109", "197", "22", "102", "261", "30", "95", "252", "288", "84", "19", "76", "29", "231", "78", "23", "228", "93", "24", "109", "225", "25");
+    private final CardRun uncommonA = new CardRun(false, "2", "16", "20", "21", "32", "147", "37");
+    private final CardRun uncommonB = new CardRun(true, "148", "72", "167", "223", "160", "104", "235", "96", "165", "43", "113", "59", "233", "42", "161", "44", "258", "191", "15", "250", "38", "229", "65", "196", "31", "73", "112", "163", "85", "120", "162", "227", "171", "108", "117", "92", "190", "164", "82", "141", "7†", "55", "121", "156", "100", "146", "175", "91", "134", "218", "173", "8", "201", "79", "131", "58", "167", "72†", "148", "223", "104", "160", "235", "165", "96", "59", "113", "43", "233", "44", "161", "191", "42", "15", "258", "250", "65", "229", "38", "196", "112", "73†", "120", "31", "85", "163", "117", "108", "162", "92", "171", "227", "82†", "141", "190†", "164", "7", "156", "121", "55", "175", "146†", "100", "218", "134", "8", "173", "91", "58", "201", "79†", "131");
+    private final CardRun uncommonC = new CardRun(true, "253", "90", "194", "126", "232", "305", "208", "124", "213†", "56", "221", "9", "158", "115", "247", "51", "195", "1", "367", "63", "249", "26", "374", "54", "302", "6", "246", "89", "254", "291", "248", "157", "98", "192", "90", "205", "267", "99", "358", "253", "119", "364", "295", "232", "126", "221", "115", "313", "124", "247", "9", "351", "63", "312", "51", "249", "54", "219", "1", "26", "106", "246", "299", "243", "254", "289", "248", "28", "345", "157", "192", "99", "267", "361", "90", "253", "194", "119", "213", "56", "232", "347", "221", "307", "247", "115", "158", "51", "208", "9", "195", "63", "219", "54", "249", "106", "339", "243", "1", "246", "89", "248", "6", "376", "28", "98", "157", "205", "99", "311", "267");
+    // ToDo: Implement showcase/variant printings for rares
+    private final CardRun rare = new CardRun(false, "184", "185", "150", "150", "111", "111", "186", "151", "151", "187", "187", "3", "3", "152", "152", "4", "188", "188", "153", "153", "77", "77", "189", "189", "114", "114", "155", "155", "45", "45", "80", "80", "10", "10", "118", "118", "47", "48", "48", "251", "251", "50", "50", "83", "83", "12", "13", "13", "198", "198", "199", "199", "200", "123", "202", "202", "57", "57", "127", "127", "166", "166", "86", "86", "87", "87", "88", "88", "207", "207", "132", "61", "209", "209", "210", "210", "211", "212", "212", "135", "135", "136", "136", "215", "214", "214", "137", "137", "216", "216", "217", "217", "64", "64", "94", "220", "220", "27", "27", "222", "222", "97", "97", "67", "67", "140", "140", "224", "70", "70", "226", "226", "176", "176", "71", "71", "34", "34", "234", "234", "172", "236", "236", "237", "237", "238", "181", "35", "35", "240", "241", "110", "242", "242", "36", "36", "244", "244", "245", "245");
+    // 7:1 regular:borderless - regular rare dual lands 14.58% of the time or borderless 2.08% of the time
+    private final CardRun rareLand = new CardRun(false, "259", "259", "259", "259", "259", "259", "259", "324", "260", "260", "260", "260", "260", "260", "260", "325", "262", "262", "262", "262", "262", "262", "262", "326", "263", "263", "263", "263", "263", "263", "263", "327", "264", "264", "264", "264", "264", "264", "264", "328", "266", "266", "266", "266", "266", "266", "266", "329", "268", "268", "268", "268", "268", "268", "268", "330", "269", "269", "269", "269", "269", "269", "269", "331", "270", "270", "270", "270", "270", "270", "270", "332", "271", "271", "271", "271", "271", "271", "271", "333");
+    private final CardRun land = new CardRun(false, "272", "273", "274", "275", "276", "277", "278", "279", "280", "281", "282", "283", "284", "285", "286");
+    // I used 1:1 common:uncommon ratio. No idea what ratio is.
+    private final CardRun list = new CardRun(false, "XLN_91", "DKA_4", "MH2_191", "HOU_149", "RAV_277", "ARB_68", "DIS_173", "ISD_183", "DOM_130", "MH2_46", "RNA_182", "ONS_272", "SOM_96", "VOW_207", "MBS_10", "UMA_138", "DDU_50", "2X2_17", "KLD_221", "M14_213", "UMA_247", "CLB_85", "JOU_153", "APC_117", "STX_220", "SOI_262", "DIS_33", "DKA_143", "ELD_107", "C16_47");
+    // I used 1:1 rare:mythic ratio. No idea what ratio is.
+    private final CardRun listRare = new CardRun(false, "STX_64", "M20_167", "DST_40", "ONS_89", "WAR_54", "MRD_99", "SOM_98", "C21_19", "MH1_21", "RTR_140");
+    private final CardRun listGuest = new CardRun(false, "SPG_25", "SPG_27", "SPG_20", "SPG_28", "SPG_24", "SPG_19", "SPG_21", "SPG_26", "SPG_22", "SPG_23" );
+
+    // because a foil card is independant from sorted runs, repeated as unsorted runs
+    private final CardRun commonFoilBC = new CardRun(false, "154", "68", "125", "66", "169", "138", "74", "178", "130", "294", "174", "143", "149", "60", "128", "179", "138", "49", "168", "133", "69", "182", "129", "60", "169", "265", "130", "68", "154", "125", "66", "170", "128", "74", "255", "159", "139", "53", "178", "304", "52", "180", "122", "177", "62", "144", "149", "39", "142", "46", "174", "129", "178", "122", "68", "180", "130", "60", "177", "138", "46", "159", "133", "255", "49", "149", "144", "293", "174", "142", "168", "69", "139", "39", "128", "179", "298", "143", "154", "265", "66", "116", "169", "62", "182", "125", "53", "170", "129", "179", "306", "69", "180", "116", "62", "177", "143", "49", "168", "142", "255", "52", "170", "144", "39", "182", "139", "46", "265", "310", "133", "76", "230", "14", "75", "206", "19", "93", "197", "292", "102", "204", "11", "105", "261", "18", "107", "203", "5", "103", "193", "33", "300", "231", "17", "84", "22", "78", "24", "228", "81", "29", "252", "101", "23", "93", "193", "30", "102", "197", "17", "107", "261", "18", "78", "203", "33", "105", "206", "22", "109", "225", "19", "101", "204", "11", "103", "230", "25", "84", "228", "14", "95", "5", "75", "290", "252", "76", "24", "231", "81", "29", "101", "206", "33", "75", "225", "11", "105", "230", "14", "81", "193", "25", "301", "203", "18", "107", "204", "17", "109", "197", "22", "102", "261", "30", "95", "252", "288", "84", "19", "76", "29", "231", "78", "23", "228", "93", "24", "109", "225", "25");
+    private final CardRun uncommonFoilB = new CardRun(false, "148", "72", "167", "223", "160", "104", "235", "96", "165", "43", "113", "59", "233", "42", "161", "44", "258", "191", "15", "250", "38", "229", "65", "196", "31", "73", "112", "163", "85", "120", "162", "227", "171", "108", "117", "92", "190", "164", "82", "141", "7†", "55", "121", "156", "100", "146", "175", "91", "134", "218", "173", "8", "201", "79", "131", "58", "167", "72†", "148", "223", "104", "160", "235", "165", "96", "59", "113", "43", "233", "44", "161", "191", "42", "15", "258", "250", "65", "229", "38", "196", "112", "73†", "120", "31", "85", "163", "117", "108", "162", "92", "171", "227", "82†", "141", "190†", "164", "7", "156", "121", "55", "175", "146†", "100", "218", "134", "8", "173", "91", "58", "201", "79†", "131");
+    private final CardRun uncommonFoilC = new CardRun(false, "253", "90", "194", "126", "232", "305", "208", "124", "213†", "56", "221", "9", "158", "115", "247", "51", "195", "1", "367", "63", "249", "26", "374", "54", "302", "6", "246", "89", "254", "291", "248", "157", "98", "192", "90", "205", "267", "99", "358", "253", "119", "364", "295", "232", "126", "221", "115", "313", "124", "247", "9", "351", "63", "312", "51", "249", "54", "219", "1", "26", "106", "246", "299", "243", "254", "289", "248", "28", "345", "157", "192", "99", "267", "361", "90", "253", "194", "119", "213", "56", "232", "347", "221", "307", "247", "115", "158", "51", "208", "9", "195", "63", "219", "54", "249", "106", "339", "243", "1", "246", "89", "248", "6", "376", "28", "98", "157", "205", "99", "311", "267");
+
+    private final BoosterStructure BBBBCCCC = new BoosterStructure(
+            commonB, commonB, commonB, commonB,
+            commonC, commonC, commonC, commonC
+    );
+    private final BoosterStructure ABBBCCCC = new BoosterStructure(
+            commonA,
+            commonB, commonB, commonB,
+            commonC, commonC, commonC, commonC
+    );
+    private final BoosterStructure ABBBBCCC = new BoosterStructure(
+            commonA,
+            commonB, commonB, commonB, commonB,
+            commonC, commonC, commonC
+    );
+    private final BoosterStructure BBBCCCC = new BoosterStructure(
+            commonB, commonB, commonB,
+            commonC, commonC, commonC, commonC
+    );
+    private final BoosterStructure BBBBCCC = new BoosterStructure(
+            commonB, commonB, commonB, commonB,
+            commonC, commonC, commonC
+    );
+    private final BoosterStructure ABBBCCC = new BoosterStructure(
+            commonA,
+            commonB, commonB, commonB,
+            commonC, commonC, commonC
+    );
+    private final BoosterStructure BBBCCC = new BoosterStructure(
+            commonB, commonB, commonB,
+            commonC, commonC, commonC
+    );
+
+    private final BoosterStructure BBCC = new BoosterStructure(
+            uncommonB, uncommonB,
+            uncommonC, uncommonC
+    );
+    private final BoosterStructure ABBC = new BoosterStructure(
+            uncommonA,
+            uncommonB, uncommonB,
+            uncommonC
+    );
+    private final BoosterStructure BCC = new BoosterStructure(
+            uncommonB,
+            uncommonC, uncommonC
+    );
+    private final BoosterStructure BBC = new BoosterStructure(
+            uncommonB, uncommonB,
+            uncommonC
+    );
+    private final BoosterStructure ABB = new BoosterStructure(
+            uncommonA,
+            uncommonB, uncommonB,
+    );
+
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+    private final BoosterStructure R2 = new BoosterStructure(rare,rare);
+    private final BoosterStructure R3 = new BoosterStructure(rareLand,rare);
+    private final BoosterStructure L1 = new BoosterStructure(land);
+    private final BoosterStructure S1 = new BoosterStructure(list);
+    private final BoosterStructure S2 = new BoosterStructure(listRare);
+    private final BoosterStructure S3 = new BoosterStructure(listGuest);
+    private final BoosterStructure fcA = new BoosterStructure(commonA);
+    private final BoosterStructure fcBC = new BoosterStructure(commonFoilBC);
+    private final BoosterStructure fuA = new BoosterStructure(uncommonA);
+    private final BoosterStructure fuB = new BoosterStructure(uncommonFoilB);
+    private final BoosterStructure fuC = new BoosterStructure(uncommonFoilC);
+    private final BoosterStructure fuR = R1;
+    private final BoosterStructure fuL = new BoosterStructure(rareLand);
+
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 0.62 A commons ( 581 / 945)       6 Commons (  3 / 35 ) or ( 81 / 945)
+    // 3.25 B commons (3071 / 945)       7 Commons ( 25 / 35 ) or (675 / 945) 135*5=675
+    // 3.25 C commons (3071 / 945)       8 Commons (  7 / 35 ) or (189 / 945)
+    private final RarityConfiguration commonRuns6 = new RarityConfiguration(BBBCCC);
+    private final RarityConfiguration commonRuns7 = new RarityConfiguration(
+        BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC,
+        BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC,
+        BBBCCCC, BBBCCCC,
+        BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC,
+        BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC,
+        BBBBCCC, BBBBCCC,
+        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
+        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
+        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
+        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
+        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
+        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
+        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
+        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
+        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
+        ABBBCCC
+    );
+    private final RarityConfiguration commonRuns8 = new RarityConfiguration(
+        ABBBCCCC,
+        ABBBBCCC,
+        BBBBCCCC
+    );
+    // In order for equal numbers of each uncommon to exist, the average booster must contain:
+    // 0.25 A uncommons ( 49 / 200)       3 Uncommons (1 / 2) or (100 / 200)
+    // 1.96 B uncommons (392 / 200)       4 Uncommons (1 / 2) or (100 / 200) 25*4=100
+    // 1.30 C uncommons (259 / 200)       
+    private final RarityConfiguration uncommonRuns7 = new RarityConfiguration(
+        BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, 
+        BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC,
+        BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC,
+        BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC,
+        BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC,
+        BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC,
+        BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC,
+        BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC,
+        ABB, ABB, ABB, ABB, ABB, ABB, ABB, ABB, ABB, ABB,
+        ABB, ABB, ABB, ABB, ABB, ABB, ABB, ABB, ABB, ABB, ABB
+    );
+    private final RarityConfiguration uncommonRuns8 = new RarityConfiguration(
+        BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC,
+        BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC,
+        ABBC, ABBC, ABBC, ABBC, ABBC, ABBC, ABBC
+    );
+    // 1/6 packs have rare land as second rare, estimate 1/4 packs have two rares
+    private final RarityConfiguration rareRuns1 = new RarityConfiguration(R1);
+    private final RarityConfiguration rareRuns2 = new RarityConfiguration(R2,R3,R3);
+
+    private final RarityConfiguration landRuns = new RarityConfiguration(L1);
+    // 1 in 8 Play Boosters (12.5%) features a card from Special Guests or The List
+    // Special Guests cards in 1.56% of Play Boosters.
+    // The List has rare and mythic rare reprints replacing a common card 1.56% of the time.
+    // Which means 1/8 List packs have Special Guest, 1/8 have rare/mythic
+    private final RarityConfiguration listRuns = new RarityConfiguration(
+        S1, S1, S1, S1, S1, S1,
+        S2,
+        S3
+    );
+    private final RarityConfiguration foilCommonRuns = new RarityConfiguration(
+        fcA,  fcA,  fcA,  fcA,  fcA,  fcA,  fcA,
+        fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC,
+        fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC,
+        fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC,
+        fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC,
+        fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC,
+        fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC,
+        fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC,
+        fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC,
+    );
+    private final RarityConfiguration foilUncommonRuns = new RarityConfiguration(
+        fuA, fuA, fuA, fuA, fuA, fuA, fuA,
+        fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB,
+        fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB,
+        fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB,
+        fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB,
+        fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB,
+        fuB, fuB, fuB, fuB, fuB, fuB,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC
+    );
+    // guessing the rareland to rare ratio same as wildcard slot 2:1
+    private final RarityConfiguration foilRareRuns = new RarityConfiguration(fuR,fuL,fuL);
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        // 1-2 rares, 3-4 uncommons, and 6-8 commons
+        private int numCommon = 7;
+        private boolean wildRare = false;
+        private boolean wildUncommon = false;
+        if (RandomUtil.nextBoolean()) {
+            wildUncommon = true;
+        } else {
+            if (RandomUtil.nextBoolean()) {
+                ++numCommon;
+            } else {
+                wildRare = true;
+        }   }
+        booster.addAll(landRuns.getNext().makeRun());
+        // 1 in 8 Murders at Karlov Manor Play Boosters (12.5%) features a card from Special Guests or The List instead of the seventh common card.
+        if (RandomUtil.nextInt(8) ==1) {
+            booster.addAll(listRuns.getNext().makeRun());
+            --numCommon;
+        }
+        if (RandomUtil.nextBoolean()) {
+            booster.addAll(foilUncommonRuns.getNext().makeRun());
+        } else {
+            if (RandomUtil.nextBoolean()) {
+                booster.addAll(foilCommonRuns.getNext().makeRun());
+            } else {
+                booster.addAll(foilRareRuns.getNext().makeRun());
+        }   }
+        if (wildRare) {
+            booster.addAll(rareRuns1.getNext().makeRun());
+        } else {
+            booster.addAll(rareRuns2.getNext().makeRun());
+        }
+        if (wildUncommon) {
+            booster.addAll(uncommonRuns4.getNext().makeRun());
+        } else {
+            booster.addAll(uncommonRuns3.getNext().makeRun());
+        }
+        if (numCommon < 7) {
+            booster.addAll(commonRuns6.getNext().makeRun());
+        } else {
+            if (numCommon > 7) {
+                booster.addAll(commonRuns8.getNext().makeRun());
+            } else {
+                booster.addAll(commonRuns7.getNext().makeRun());
+        }   }
+        return booster;
     }
 }
