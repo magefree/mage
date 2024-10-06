@@ -667,7 +667,7 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
         fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC,
         fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC,
         fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC,
-        fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC,
+        fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC
     );
     private final RarityConfiguration foilUncommonRuns = new RarityConfiguration(
         fuA, fuA, fuA, fuA, fuA, fuA, fuA,
