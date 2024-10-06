@@ -689,35 +689,33 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
     public List<String> makeBooster() {
         List<String> booster = new ArrayList<>();
         // 1-2 rares, 3-4 uncommons, and 6-8 commons
-        private int numCommon = 7;
-        private boolean wildRare = false;
-        private boolean wildUncommon = false;
+        int numCommon = 7;
+        boolean wildRare = false;
+        boolean wildUncommon = false;
         if (RandomUtil.nextBoolean()) {
             wildUncommon = true;
+        } else if (RandomUtil.nextBoolean()) {
+            ++numCommon;
         } else {
-            if (RandomUtil.nextBoolean()) {
-                ++numCommon;
-            } else {
-                wildRare = true;
-        }   }
+            wildRare = true;
+        }
         booster.addAll(landRuns.getNext().makeRun());
-        // 1 in 8 Murders at Karlov Manor Play Boosters (12.5%) features a card from Special Guests or The List instead of the seventh common card.
+        // 1 in 8 Play Boosters (12.5%) features a card from Special Guests or The List instead of the seventh common card.
         if (RandomUtil.nextInt(8) ==1) {
             booster.addAll(listRuns.getNext().makeRun());
             --numCommon;
         }
         if (RandomUtil.nextBoolean()) {
             booster.addAll(foilUncommonRuns.getNext().makeRun());
-        } else {
-            if (RandomUtil.nextBoolean()) {
+        } else if (RandomUtil.nextBoolean()) {
                 booster.addAll(foilCommonRuns.getNext().makeRun());
-            } else {
-                booster.addAll(foilRareRuns.getNext().makeRun());
-        }   }
-        if (wildRare) {
-            booster.addAll(rareRuns1.getNext().makeRun());
         } else {
+            booster.addAll(foilRareRuns.getNext().makeRun());
+        }
+        if (wildRare) {
             booster.addAll(rareRuns2.getNext().makeRun());
+        } else {
+            booster.addAll(rareRuns1.getNext().makeRun());
         }
         if (wildUncommon) {
             booster.addAll(uncommonRuns4.getNext().makeRun());
@@ -726,12 +724,11 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
         }
         if (numCommon < 7) {
             booster.addAll(commonRuns6.getNext().makeRun());
+        } else if (numCommon > 7) {
+            booster.addAll(commonRuns8.getNext().makeRun());
         } else {
-            if (numCommon > 7) {
-                booster.addAll(commonRuns8.getNext().makeRun());
-            } else {
-                booster.addAll(commonRuns7.getNext().makeRun());
-        }   }
+            booster.addAll(commonRuns7.getNext().makeRun());
+        }
         return booster;
     }
 }
