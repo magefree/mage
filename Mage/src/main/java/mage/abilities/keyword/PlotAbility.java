@@ -264,21 +264,25 @@ class PlotSpellAbility extends SpellAbility {
                 // TODO: As with Foretell, this does not look very clean. Is the face card sometimes incorrect on calling canActivate?
                 if (mainCard instanceof CardWithHalves) {
                     if (((CardWithHalves) mainCard).getLeftHalfCard().getName().equals(faceCardName)) {
-                        return ((CardWithHalves) mainCard).getLeftHalfCard().getSpellAbility().canActivate(playerId, game);
+                        return canActivateUsingPlot(((CardWithHalves) mainCard).getLeftHalfCard().getSpellAbility(), playerId, game);
                     } else if (((CardWithHalves) mainCard).getRightHalfCard().getName().equals(faceCardName)) {
-                        return ((CardWithHalves) mainCard).getRightHalfCard().getSpellAbility().canActivate(playerId, game);
+                        return canActivateUsingPlot(((CardWithHalves) mainCard).getRightHalfCard().getSpellAbility(), playerId, game);
                     }
                 } else if (card instanceof AdventureCard) {
                     if (card.getMainCard().getName().equals(faceCardName)) {
-                        return card.getMainCard().getSpellAbility().canActivate(playerId, game);
+                        return canActivateUsingPlot(card.getMainCard().getSpellAbility(), playerId, game);
                     } else if (((AdventureCard) card).getSpellCard().getName().equals(faceCardName)) {
-                        return ((AdventureCard) card).getSpellCard().getSpellAbility().canActivate(playerId, game);
+                        return canActivateUsingPlot(((AdventureCard) card).getSpellCard().getSpellAbility(), playerId, game);
                     }
                 }
-                return card.getSpellAbility().canActivate(playerId, game);
+                return canActivateUsingPlot(card.getSpellAbility(), playerId, game);
             }
         }
         return ActivationStatus.getFalse();
+    }
+
+    private ActivationStatus canActivateUsingPlot(SpellAbility spellAbility, UUID playerId, Game game) {
+        return spellAbility.canActivate(SpellAbilityCastMode.PLOT, playerId, game);
     }
 
     @Override
