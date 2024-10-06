@@ -592,8 +592,8 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
     private final BoosterStructure fuA = new BoosterStructure(uncommonA);
     private final BoosterStructure fuB = new BoosterStructure(uncommonFoilB);
     private final BoosterStructure fuC = new BoosterStructure(uncommonFoilC);
-    private final BoosterStructure fuR = R1;
-    private final BoosterStructure fuL = new BoosterStructure(rareLand);
+    private final BoosterStructure frR = R1;
+    private final BoosterStructure frL = new BoosterStructure(rareLand);
 
     // In order for equal numbers of each common to exist, the average booster must contain:
     // 0.62 A commons ( 581 / 945)       6 Commons (  3 / 35 ) or ( 81 / 945)
@@ -683,15 +683,18 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
         fcC, fcC, fcC, fcC, fcC, fcC, fcC
     );
     // guessing the rareland to rare ratio same as wildcard slot 2:1
-    private final RarityConfiguration foilRareRuns = new RarityConfiguration(fuR,fuL,fuL);
+    private final RarityConfiguration foilRareRuns = new RarityConfiguration(frR,frL,frL);
 
     @Override
     public List<String> makeBooster() {
         List<String> booster = new ArrayList<>();
         // 1-2 rares, 3-4 uncommons, and 6-8 commons
+        // There is not a wildcard slot; the wildcard simply appears as part of one of the normal runs
         int numCommon = 7;
         boolean wildRare = false;
         boolean wildUncommon = false;
+        // observed the rate [of uncommon wildcard] at about 52% over 7 boxes
+        // that is close to 50% - using 50% uncommon, 25% common, 25% rare
         if (RandomUtil.nextBoolean()) {
             wildUncommon = true;
         } else if (RandomUtil.nextBoolean()) {
@@ -705,10 +708,11 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
             booster.addAll(listRuns.getNext().makeRun());
             --numCommon;
         }
+        // foil wildcard separate, but no data on distribution - using same distribution as regular wildcard
         if (RandomUtil.nextBoolean()) {
             booster.addAll(foilUncommonRuns.getNext().makeRun());
         } else if (RandomUtil.nextBoolean()) {
-                booster.addAll(foilCommonRuns.getNext().makeRun());
+            booster.addAll(foilCommonRuns.getNext().makeRun());
         } else {
             booster.addAll(foilRareRuns.getNext().makeRun());
         }
