@@ -677,10 +677,10 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
         fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB,
         fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB,
         fuB, fuB, fuB, fuB, fuB, fuB,
-        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
-        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
-        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
-        fcC, fcC, fcC, fcC, fcC, fcC, fcC
+        fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC,
+        fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC,
+        fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC,
+        fuC, fuC, fuC, fuC, fuC, fuC, fuC
     );
     // guessing the rareland to rare ratio same as wildcard slot 2:1
     private final RarityConfiguration foilRareRuns = new RarityConfiguration(frR,frL,frL);
