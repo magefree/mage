@@ -78,7 +78,7 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
 
     private List<CardInfo> cardsAll;
     private List<CardDownloadData> cardsMissing;
-    private final List<CardDownloadData> cardsDownloadQueue;
+    private List<CardDownloadData> cardsDownloadQueue;
 
     private final List<String> selectedSets = new ArrayList<>();
     private CardImageSource selectedSource;
@@ -975,9 +975,16 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             });
 
             // remove all downloaded cards, missing must be remains
-            // TODO: too slow on finished, must be reworked (e.g. run full check instead remove)
-            this.cardsDownloadQueue.removeAll(downloadedCards);
-            this.cardsMissing.removeAll(downloadedCards);
+            // workaround for fast remove
+            Set<CardDownloadData> finished = new HashSet<>(downloadedCards);
+            this.cardsDownloadQueue = Collections.synchronizedList(this.cardsDownloadQueue.stream()
+                    .filter(c -> !finished.contains(c))
+                    .collect(Collectors.toList())
+            );
+            this.cardsMissing = Collections.synchronizedList(this.cardsMissing.stream()
+                    .filter(c -> !finished.contains(c))
+                    .collect(Collectors.toList())
+            );
 
             if (this.cardsDownloadQueue.isEmpty()) {
                 // stop download
