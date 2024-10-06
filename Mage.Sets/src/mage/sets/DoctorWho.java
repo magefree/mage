@@ -250,6 +250,7 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Fifth Doctor", 127, Rarity.RARE, mage.cards.t.TheFifthDoctor.class));
         cards.add(new SetCardInfo("The Flood of Mars", 45, Rarity.RARE, mage.cards.t.TheFloodOfMars.class));
         cards.add(new SetCardInfo("The Flux", 86, Rarity.RARE, mage.cards.t.TheFlux.class));
+        cards.add(new SetCardInfo("The Foretold Soldier", 102, Rarity.RARE, mage.cards.t.TheForetoldSoldier.class));
         cards.add(new SetCardInfo("The Fugitive Doctor", 130, Rarity.RARE, mage.cards.t.TheFugitiveDoctor.class));
         cards.add(new SetCardInfo("The Master, Multiplied", 146, Rarity.RARE, mage.cards.t.TheMasterMultiplied.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Master, Multiplied", 429, Rarity.RARE, mage.cards.t.TheMasterMultiplied.class, NON_FULL_USE_VARIOUS));
