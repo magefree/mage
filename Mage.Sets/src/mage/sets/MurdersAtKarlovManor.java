@@ -577,7 +577,7 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
     );
     private final BoosterStructure ABB = new BoosterStructure(
             uncommonA,
-            uncommonB, uncommonB,
+            uncommonB, uncommonB
     );
 
     private final BoosterStructure R1 = new BoosterStructure(rare);
