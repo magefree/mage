@@ -121,7 +121,7 @@ class FiendlashTriggeredAbility extends TriggeredAbilityImpl {
 class FiendlashEffect extends OneShotEffect {
 
     FiendlashEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Damage);
     }
 
     private FiendlashEffect(final FiendlashEffect effect) {
