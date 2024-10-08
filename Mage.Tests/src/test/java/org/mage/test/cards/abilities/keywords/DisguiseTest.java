@@ -76,7 +76,7 @@ public class DisguiseTest extends CardTestPlayerBase {
                     .findFirst()
                     .orElse(null);
             Assert.assertNotNull("server side: can't find disguised permanent", permanent);
-            Assert.assertEquals("server side: wrong name", EmptyNames.FACE_DOWN_CREATURE.toString(), permanent.getName());
+            Assert.assertTrue("server side: wrong name", permanent.hasNoName(currentGame));
             Assert.assertEquals("server side: wrong color", "", permanent.getColor(currentGame).toString());
             Assert.assertEquals("server side: wrong power", "2", permanent.getPower().toString());
             Assert.assertEquals("server side: wrong toughness", "2", permanent.getToughness().toString());
@@ -150,11 +150,11 @@ public class DisguiseTest extends CardTestPlayerBase {
         runCode("after face up", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
             Permanent permanent = currentGame.getBattlefield().getAllPermanents()
                     .stream()
-                    .filter(p -> p.getName().equals("Dog Walker"))
+                    .filter(p -> p.hasName("Dog Walker", game))
                     .findFirst()
                     .orElse(null);
             Assert.assertNotNull("server side: can't find normal permanent", permanent);
-            Assert.assertEquals("server side: wrong name", "Dog Walker", permanent.getName());
+            Assert.assertTrue("server side: wrong name", permanent.hasName("Dog Walker", currentGame));
             Assert.assertEquals("server side: wrong color", "WR", permanent.getColor(currentGame).toString());
             Assert.assertEquals("server side: wrong power", "3", permanent.getPower().toString());
             Assert.assertEquals("server side: wrong toughness", "1", permanent.getToughness().toString());

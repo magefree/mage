@@ -624,6 +624,10 @@ public interface MageObject extends MageItem, Serializable, Copyable<MageObject>
 
     boolean hasName(String name, Game game);
 
+    default boolean hasNoName(Game game) {
+        return false;
+    }
+
     default boolean sharesName(MageObject mageObject, Game game) {
         return !mageObject.getName().isEmpty() && hasName(mageObject.getName(), game);
     }

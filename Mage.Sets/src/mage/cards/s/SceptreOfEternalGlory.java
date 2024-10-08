@@ -1,7 +1,5 @@
 package mage.cards.s;
 
-import com.google.common.base.Functions;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -15,9 +13,12 @@ import mage.constants.SuperType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.util.RandomUtil;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -54,22 +55,25 @@ enum SceptreOfEternalGloryCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game
-                .getBattlefield()
-                .getActivePermanents(
-                        StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                        source.getControllerId(), source, game
-                )
-                .stream()
-                .map(MageObject::getName)
-                .filter(s -> !s.isEmpty())
-                .collect(Collectors.toMap(
-                        Functions.identity(),
-                        x -> 1, Integer::sum
-                ))
-                .values()
-                .stream()
-                .anyMatch(x -> x >= 3);
+        Set<Permanent> lands = new HashSet<>(game.getBattlefield().getActivePermanents(
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
+                source.getControllerId(), source, game
+        ));
+        while (lands.size() >= 3) {
+            Permanent land = RandomUtil.randomFromCollection(lands);
+            lands.remove(land);
+            int amount = 0;
+            for (Permanent permanent : lands) {
+                if (!permanent.sharesName(land, game)) {
+                    continue;
+                }
+                amount++;
+                if (amount >= 3) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

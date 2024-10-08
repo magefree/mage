@@ -1,6 +1,5 @@
 package org.mage.test.cards.abilities.keywords;
 
-import mage.MageObject;
 import mage.cards.Card;
 import mage.cards.repository.TokenRepository;
 import mage.constants.EmptyNames;
@@ -149,14 +148,14 @@ public class ManifestTest extends CardTestPlayerBase {
                 Assert.assertEquals("after blink card must keep in exile",
                         1, currentGame.getExile().getAllCardsByRange(currentGame, playerA.getId()).size());
             } else {
-                String realPermanentName = currentGame.getBattlefield().getAllPermanents()
+                Permanent realPermanent = currentGame
+                        .getBattlefield()
+                        .getAllPermanents()
                         .stream()
-                        .map(MageObject::getName)
-                        .filter(name -> name.equals(cardAfterBlink))
+                        .filter(permanent -> permanent.hasName(cardAfterBlink, currentGame))
                         .findFirst()
                         .orElse(null);
-                Assert.assertEquals("after blink card must go to battlefield",
-                        cardAfterBlink, realPermanentName);
+                Assert.assertNotNull("after blink card must go to battlefield", realPermanent);
             }
         });
 
@@ -428,8 +427,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
 
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
-            if (card.getName().equals("Gore Swine")) {
-                Assert.assertTrue("Gore Swine may not be face down in exile", !card.isFaceDown(currentGame));
+            if (card.hasName("Gore Swine", currentGame)) {
+                Assert.assertFalse("Gore Swine may not be face down in exile", card.isFaceDown(currentGame));
             }
         }
 
@@ -731,7 +730,7 @@ public class ManifestTest extends CardTestPlayerBase {
                 .stream()
                 .filter(permanent -> permanent.isFaceDown(game))
                 .filter(permanent -> {
-                    Assert.assertEquals("face down permanent must have not name", "", permanent.getName());
+                    Assert.assertTrue("face down permanent must have not name", permanent.hasNoName(currentGame));
                     // TODO: buggy, manifested card must have some rules
                     //Assert.assertTrue("face down permanent must have abilities", permanent.getAbilities().size() > 0);
                     return true;
@@ -739,7 +738,7 @@ public class ManifestTest extends CardTestPlayerBase {
                 .findFirst()
                 .orElse(null);
         Assert.assertNotNull(perm);
-        Assert.assertEquals("server side face down permanent must have empty name", EmptyNames.FACE_DOWN_CREATURE.toString(), perm.getName());
+        Assert.assertTrue("server side face down permanent must have empty name", perm.hasNoName(currentGame));
         GameView gameView = new GameView(game.getState(), game, viewFromPlayer.getId(), null);
         PlayerView playerView = gameView.getPlayers()
                 .stream()
@@ -836,8 +835,8 @@ public class ManifestTest extends CardTestPlayerBase {
 
         attack(1, playerA, infiltrator, playerB);
 
-        checkPlayableAbility("missionary manifest",1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{1}{W}: Turn ", true);
-        checkPlayableAbility("infiltrator manifest",1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}{U}: Turn ", true);
+        checkPlayableAbility("missionary manifest", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{1}{W}: Turn ", true);
+        checkPlayableAbility("infiltrator manifest", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{2}{U}: Turn ", true);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

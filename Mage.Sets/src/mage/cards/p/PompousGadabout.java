@@ -65,6 +65,6 @@ enum PompousGadaboutPredicate implements Predicate<Permanent> {
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        return input.getName() == null || input.getName().isEmpty();
+        return input.hasNoName(game);
     }
 }

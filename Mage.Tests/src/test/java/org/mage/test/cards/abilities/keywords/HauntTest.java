@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author BetaSteward
  */
 public class HauntTest extends CardTestPlayerBase {
@@ -21,13 +20,12 @@ public class HauntTest extends CardTestPlayerBase {
      * Flying
      * Haunt (When this creature dies, exile it haunting target creature.)
      * When Blind Hunter enters the battlefield or the creature it haunts dies, target player loses 2 life and you gain 2 life.
-     *
      */
-    
+
     // test that Haunting and Haunted by rules are added to cards
     @Test
     public void testAddHaunt() {
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Blind Hunter", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Goblin Roughrider");
         addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
@@ -40,12 +38,12 @@ public class HauntTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertExileCount("Blind Hunter", 1);
-        
+
         boolean found = false;
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
-            if (card.getName().equals("Blind Hunter")) {
+            if (card.hasName("Blind Hunter", currentGame)) {
                 for (String rule : card.getRules(currentGame)) {
-                    if (rule.startsWith("Haunting") &&  rule.contains("Goblin Roughrider")) {
+                    if (rule.startsWith("Haunting") && rule.contains("Goblin Roughrider")) {
                         found = true;
                         break;
                     }
@@ -56,7 +54,7 @@ public class HauntTest extends CardTestPlayerBase {
 
         found = false;
         for (Card card : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (card.getName().equals("Goblin Roughrider")) {
+            if (card.hasName("Goblin Roughrider", currentGame)) {
                 for (String rule : card.getRules(currentGame)) {
                     if (rule.startsWith("Haunted by") && rule.contains("Blind Hunter")) {
                         found = true;
@@ -66,13 +64,13 @@ public class HauntTest extends CardTestPlayerBase {
             }
         }
         Assert.assertTrue("Couldn't find Haunted by rule text displayed for the card", found);
-        
+
     }
 
     // test that Haunted by rule is removed from cards (it is only added to permanent)
     @Test
     public void testRemoveHaunt() {
-        
+
         addCard(Zone.BATTLEFIELD, playerA, "Blind Hunter", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Goblin Roughrider");
         addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
@@ -91,7 +89,7 @@ public class HauntTest extends CardTestPlayerBase {
 
         boolean found = false;
         for (Card card : currentGame.getPlayer(playerA.getId()).getGraveyard().getCards(currentGame)) {
-            if (card.getName().equals("Goblin Roughrider")) {
+            if (card.hasName("Goblin Roughrider", currentGame)) {
                 for (String rule : card.getRules(currentGame)) {
                     if (rule.startsWith("Haunted by") && rule.contains("Blind Hunter")) {
                         found = true;
@@ -101,7 +99,7 @@ public class HauntTest extends CardTestPlayerBase {
             }
         }
         Assert.assertFalse("Found Haunted by rule text displayed for the card", found);
-        
+
     }
 
     @Test
@@ -122,5 +120,5 @@ public class HauntTest extends CardTestPlayerBase {
         assertExileCount("Blind Hunter", 1);
         assertLife(playerA, 22);
     }
-    
+
 }

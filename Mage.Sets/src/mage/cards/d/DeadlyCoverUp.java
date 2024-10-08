@@ -27,7 +27,6 @@ public final class DeadlyCoverUp extends CardImpl {
     public DeadlyCoverUp(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
 
-
         // As an additional cost to cast this spell, you may collect evidence 6.
         this.addAbility(new CollectEvidenceAbility(6));
 
@@ -70,16 +69,18 @@ class DeadlyCoverUpEffect extends SearchTargetGraveyardHandLibraryForCardNameAnd
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
+        if (player == null) {
+            return true;
+        }
         TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(StaticFilters.FILTER_CARD);
         target.withNotTarget(true);
-        if (player != null && player.chooseTarget(Outcome.Exile, target, source, game)) {
-            Card cardToExile = game.getCard(target.getFirstTarget());
-            if (cardToExile == null) {
-                return false;
-            }
-            player.moveCards(cardToExile, Zone.EXILED, source, game);
-            this.applySearchAndExile(game, source, cardToExile.getName(), cardToExile.getOwnerId());
+        player.chooseTarget(Outcome.Exile, target, source, game);
+        Card cardToExile = game.getCard(target.getFirstTarget());
+        if (cardToExile == null) {
+            return false;
         }
+        player.moveCards(cardToExile, Zone.EXILED, source, game);
+        this.applySearchAndExile(game, source, cardToExile, cardToExile.getOwnerId());
         return true;
     }
 }

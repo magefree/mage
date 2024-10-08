@@ -75,7 +75,7 @@ class MinamosMeddlingCounterTargetEffect extends OneShotEffect {
             for (SpellAbility spellAbility : spell.getSpellAbilities()) {
                 if (spellAbility.getSpellAbilityType() == SpellAbilityType.SPLICE) {
                     for (Card card : spellController.getHand().getCards(game)) {
-                        if (card.getName().equals(spellAbility.getCardName())) {
+                        if (card.hasName(spellAbility.getCardName(), game)) {
                             cardsToDiscard.add(card);
                         }
                     }

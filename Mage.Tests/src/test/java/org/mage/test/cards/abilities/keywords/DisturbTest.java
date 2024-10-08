@@ -17,10 +17,10 @@ public class DisturbTest extends CardTestPlayerBase {
 
     /**
      * Relevant ruling:
-     *      - When you cast a spell using a card's disturb ability, the card is put onto the stack with its
-     *        back face up. The resulting spell has all the characteristics of that face.
-     *      - The mana value of a spell cast using disturb is determined by the mana cost on the
-     *        front face of the card, no matter what the total cost to cast the spell was.
+     * - When you cast a spell using a card's disturb ability, the card is put onto the stack with its
+     * back face up. The resulting spell has all the characteristics of that face.
+     * - The mana value of a spell cast using disturb is determined by the mana cost on the
+     * front face of the card, no matter what the total cost to cast the spell was.
      */
     @Test
     public void test_SpellAttributesOnStack() {
@@ -41,7 +41,7 @@ public class DisturbTest extends CardTestPlayerBase {
         runCode("check stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             // Stack must contain another card side, so spell/card characteristics must be diff from main side (only mana value is same)
             Spell spell = (Spell) game.getStack().getFirst();
-            Assert.assertEquals("Hook-Haunt Drifter", spell.getName());
+            Assert.assertTrue(spell.hasName("Hook-Haunt Drifter", currentGame));
             Assert.assertEquals(1, spell.getCardType(game).size());
             Assert.assertEquals(CardType.CREATURE, spell.getCardType(game).get(0));
             Assert.assertEquals(1, spell.getSubtype(game).size());
@@ -92,7 +92,7 @@ public class DisturbTest extends CardTestPlayerBase {
         runCode("check stack", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             // Stack must contain another card side, so spell/card characteristics must be diff from main side (only mana value is same)
             Spell spell = (Spell) game.getStack().getFirst();
-            Assert.assertEquals("Waildrifter", spell.getName());
+            Assert.assertTrue(spell.hasName("Waildrifter", currentGame));
             Assert.assertEquals(1, spell.getCardType(game).size());
             Assert.assertEquals(CardType.CREATURE, spell.getCardType(game).get(0));
             Assert.assertEquals(2, spell.getSubtype(game).size());
@@ -122,7 +122,7 @@ public class DisturbTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
-        assertTappedCount("Volcanic Island",true,6); //5+1
+        assertTappedCount("Volcanic Island", true, 6); //5+1
     }
 
     @Test
@@ -133,7 +133,7 @@ public class DisturbTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 7);
         addCard(Zone.BATTLEFIELD, playerA, "Firebrand Archer", 1);
         //
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Sinner's Judgment using Disturb",playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Sinner's Judgment using Disturb", playerB);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -163,12 +163,12 @@ public class DisturbTest extends CardTestPlayerBase {
 
     /**
      * Relevant ruling:
-     *      To determine the total cost of a spell, start with the mana cost or alternative cost
-     *      (such as a disturb cost) you're paying, add any cost increases, then apply any cost
-     *      reductions. The mana value of a spell cast using disturb is determined by the mana cost on
-     *      the front face of the card, no matter what the total cost to cast the spell was. (This is
-     *      a special rule that applies only to transforming double faced-cards, including ones with
-     *      disturb.)
+     * To determine the total cost of a spell, start with the mana cost or alternative cost
+     * (such as a disturb cost) you're paying, add any cost increases, then apply any cost
+     * reductions. The mana value of a spell cast using disturb is determined by the mana cost on
+     * the front face of the card, no matter what the total cost to cast the spell was. (This is
+     * a special rule that applies only to transforming double faced-cards, including ones with
+     * disturb.)
      */
     @Test
     public void test_CostModification_CanPlay() {
@@ -230,7 +230,7 @@ public class DisturbTest extends CardTestPlayerBase {
         //net -2
 
         //
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Sinner's Judgment using Disturb",playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Sinner's Judgment using Disturb", playerB);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -262,8 +262,8 @@ public class DisturbTest extends CardTestPlayerBase {
 
     /**
      * Relevant rule:
-     *      If you copy a permanent spell cast this way (perhaps with a card like Double Major), the copy becomes
-     *      a token that's a copy of the card's back face, even though it isn't itself a double-faced card.
+     * If you copy a permanent spell cast this way (perhaps with a card like Double Major), the copy becomes
+     * a token that's a copy of the card's back face, even though it isn't itself a double-faced card.
      */
     @Test
     public void test_CopySpell() {
@@ -297,10 +297,10 @@ public class DisturbTest extends CardTestPlayerBase {
 
     /**
      * Relevant ruling:
-     *      The back face of each card with disturb has an ability that instructs its controller to exile
-     *      if it would be put into a graveyard from anywhere. This includes going to the graveyard from the
-     *      stack, so if the spell is countered after you cast it using the disturb ability, it will
-     *      be put into exile.
+     * The back face of each card with disturb has an ability that instructs its controller to exile
+     * if it would be put into a graveyard from anywhere. This includes going to the graveyard from the
+     * stack, so if the spell is countered after you cast it using the disturb ability, it will
+     * be put into exile.
      */
     @Test
     public void test_Counter() {

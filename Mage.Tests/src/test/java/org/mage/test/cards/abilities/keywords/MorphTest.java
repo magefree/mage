@@ -422,7 +422,7 @@ public class MorphTest extends CardTestPlayerBase {
         assertExileCount("Birchlore Rangers", 1);
 
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
-            if (card.getName().equals("Birchlore Rangers")) {
+            if (card.hasName("Birchlore Rangers", currentGame)) {
                 Assert.assertFalse("Birchlore Rangers has to be face up in exile", card.isFaceDown(currentGame));
                 break;
             }
@@ -461,7 +461,7 @@ public class MorphTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Ashcloud Phoenix", 1);
 
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
-            if (card.getName().equals("Ashcloud Phoenix")) {
+            if (card.hasName("Ashcloud Phoenix", currentGame)) {
                 Assert.assertFalse("Ashcloud Phoenix has to be face up in graveyard", card.isFaceDown(currentGame));
                 break;
             }
@@ -497,7 +497,7 @@ public class MorphTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Ashcloud Phoenix", 1);
 
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
-            if (card.getName().equals("Ashcloud Phoenix")) {
+            if (card.hasName("Ashcloud Phoenix", currentGame)) {
                 Assert.assertFalse("Ashcloud Phoenix has to be face up in graveyard", card.isFaceDown(currentGame));
                 break;
             }
@@ -1236,7 +1236,7 @@ public class MorphTest extends CardTestPlayerBase {
                 .findFirst()
                 .orElse(null);
         Assert.assertNotNull(info + ", server side: can't find morphed permanent", permanent);
-        Assert.assertEquals(info + ", server side: wrong name", EmptyNames.FACE_DOWN_CREATURE.toString(), permanent.getName());
+        Assert.assertTrue(info + ", server side: wrong name", permanent.hasNoName(currentGame));
         Assert.assertEquals(info + ", server side: wrong color", needColor, permanent.getColor(currentGame).toString());
 
         // client side - controller
@@ -1299,7 +1299,7 @@ public class MorphTest extends CardTestPlayerBase {
     public void test_Morph_HoodedHydra() {
         // Morph {2}
         addCard(Zone.HAND, playerA, "Hooded Hydra");
-        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3+5);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3 + 5);
 
         // prepare face down
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Hooded Hydra using Morph");

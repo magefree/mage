@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author noxx
  */
 public class ProteanHydraTest extends CardTestPlayerBase {
@@ -31,7 +30,7 @@ public class ProteanHydraTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
-            if (permanent.getName().equals("Forest")) {
+            if (permanent.hasName("Forest", currentGame)) {
                 // check all mana was spent
                 Assert.assertTrue(permanent.isTapped());
             }

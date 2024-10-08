@@ -1,9 +1,6 @@
 package mage.cards.p;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.abilities.hint.common.CardTypesInGraveyardHint;
@@ -18,6 +15,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
+
+import java.util.UUID;
 
 /**
  * @author escplan9 (Derek Monturo - dmontur1 at gmail dot com)
@@ -65,26 +64,21 @@ class PickTheBrainEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (opponent != null && controller != null) {
-            if (!opponent.getHand().isEmpty()) {
-                opponent.revealCards("Exile " + StaticFilters.FILTER_CARD_A_NON_LAND.getMessage(), opponent.getHand(), game);
-                TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
-                if (controller.choose(Outcome.Exile, opponent.getHand(), target, source, game)) {
-                    Card card = opponent.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        controller.moveCardToExileWithInfo(card, null, "", source, game, Zone.HAND, true);
-
-                        // Check the Delirium condition
-                        if (!DeliriumCondition.instance.apply(game, source)) {
-                            return true;
-                        }
-                        return this.applySearchAndExile(game, source, card.getName(), opponent.getId());
-                    }
-                }
-            }
+        Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+        if (controller == null || opponent == null || opponent.getHand().isEmpty()) {
+            return false;
         }
-        return false;
+        opponent.revealCards("Exile " + StaticFilters.FILTER_CARD_A_NON_LAND.getMessage(), opponent.getHand(), game);
+        TargetCard target = new TargetCard(Zone.HAND, StaticFilters.FILTER_CARD_A_NON_LAND);
+        controller.choose(Outcome.Exile, opponent.getHand(), target, source, game);
+        Card card = opponent.getHand().get(target.getFirstTarget(), game);
+        if (card == null) {
+            return false;
+        }
+        controller.moveCards(card, Zone.EXILED, source, game);
+        // Check the Delirium condition
+        return !DeliriumCondition.instance.apply(game, source)
+                || this.applySearchAndExile(game, source, card, opponent.getId());
     }
 }
