@@ -234,6 +234,7 @@ public class UserManagerImpl implements UserManager {
                             }
                             if (isBadSession) {
                                 // full disconnect
+                                logger.info(user.getName() + " disconnected due connection problems");
                                 disconnect(user.getId(), DisconnectReason.SessionExpired);
                             }
                             break;
