@@ -12,6 +12,7 @@ import java.io.Serializable;
 public interface TargetAdjuster extends Serializable {
 
     // Warning: This is not Copyable, do not use changeable data inside (only use static objects like Filter)
+    // Note: in playability check for cards, targets are not adjusted.
     void adjustTargets(Ability ability, Game game);
 
     /**
