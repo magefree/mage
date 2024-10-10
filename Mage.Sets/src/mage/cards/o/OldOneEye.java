@@ -1,7 +1,7 @@
 package mage.cards.o;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
@@ -45,7 +45,7 @@ public final class OldOneEye extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new Tyranid55Token())));
 
         // Fast Healing -- At the beginning of your precombat main phase, you may discard two cards. If you do, return Old One Eye from your graveyard to your hand.
-        this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(
                 Zone.GRAVEYARD,
                 new DoIfCostPaid(
                         new ReturnSourceFromGraveyardToHandEffect(),

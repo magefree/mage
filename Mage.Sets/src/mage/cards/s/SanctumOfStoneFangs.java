@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
@@ -37,7 +37,7 @@ public final class SanctumOfStoneFangs extends CardImpl {
         this.subtype.add(SubType.SHRINE);
 
         // At the beginning of your precombat main phase, each opponent loses X life and you gain X life, where X is the number of Shrines you control.
-        Ability ability = new BeginningOfPreCombatMainTriggeredAbility(
+        Ability ability = new BeginningOfFirstMainTriggeredAbility(
                 new LoseLifeOpponentsEffect(xValue).setText("each opponent loses X life"),
                 TargetController.YOU, false)
                 .addHint(new ValueHint("Shrines you control", xValue));

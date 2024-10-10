@@ -12,31 +12,31 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 
-public class BeginningOfPreCombatMainTriggeredAbility extends TriggeredAbilityImpl {
+public class BeginningOfFirstMainTriggeredAbility extends TriggeredAbilityImpl {
 
     private TargetController targetController;
     private boolean setTargetPointer;
 
-    public BeginningOfPreCombatMainTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
+    public BeginningOfFirstMainTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
         this(Zone.BATTLEFIELD, effect, targetController, isOptional, false);
     }
 
-    public BeginningOfPreCombatMainTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional, boolean setTargetPointer) {
+    public BeginningOfFirstMainTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional, boolean setTargetPointer) {
         super(zone, effect, isOptional);
         this.targetController = targetController;
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    protected BeginningOfPreCombatMainTriggeredAbility(final BeginningOfPreCombatMainTriggeredAbility ability) {
+    protected BeginningOfFirstMainTriggeredAbility(final BeginningOfFirstMainTriggeredAbility ability) {
         super(ability);
         this.targetController = ability.targetController;
         this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
-    public BeginningOfPreCombatMainTriggeredAbility copy() {
-        return new BeginningOfPreCombatMainTriggeredAbility(this);
+    public BeginningOfFirstMainTriggeredAbility copy() {
+        return new BeginningOfFirstMainTriggeredAbility(this);
     }
 
     @Override
@@ -81,11 +81,11 @@ public class BeginningOfPreCombatMainTriggeredAbility extends TriggeredAbilityIm
     private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
-                return "At the beginning of your precombat main phase, " + generateZoneString();
+                return "At the beginning of your first main phase, " + generateZoneString();
             case OPPONENT:
-                return "At the beginning of each opponent's precombat main phase, " + generateZoneString();
+                return "At the beginning of each opponent's first main phase, " + generateZoneString();
             case ANY:
-                return "At the beginning of each player's precombat main phase, " + generateZoneString();
+                return "At the beginning of each player's first main phase, " + generateZoneString();
         }
         return "";
     }

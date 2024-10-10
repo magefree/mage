@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
@@ -31,7 +31,7 @@ public final class StaticPrison extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your precombat main phase, sacrifice Static Prison unless you pay {E}.
-        this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(new PayEnergyCost(1)), TargetController.YOU, false
         ));
     }

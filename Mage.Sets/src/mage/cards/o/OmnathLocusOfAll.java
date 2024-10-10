@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -36,7 +36,7 @@ public class OmnathLocusOfAll extends CardImpl {
         // At the beginning of your precombat main phase, look at the top card of your library. You may reveal that card
         // if it has three or more colored mana symbols in its mana cost. If you do, add three mana in any combination of
         // colors and put it into your hand. If you don’t reveal it, put it into your hand.
-        this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(
                 new OmnathLocusOfAllCardEffect(), TargetController.YOU, false
         ));
     }
