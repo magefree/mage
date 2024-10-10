@@ -3,13 +3,18 @@ package mage.cards.q;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -21,6 +26,9 @@ import java.util.UUID;
  * @author LevelX2
  */
 public final class QuarryColossus extends CardImpl {
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.PLAINS));
+    private static final Hint hint = new ValueHint("Plains you control", xValue);
 
     public QuarryColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
@@ -34,6 +42,7 @@ public final class QuarryColossus extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new QuarryColossusReturnLibraryEffect(), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
+        this.getSpellAbility().addHint(hint);
     }
 
     private QuarryColossus(final QuarryColossus card) {

@@ -1,11 +1,12 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.LoseAbilityTargetEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -17,11 +18,15 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class CrashLanding extends CardImpl {
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.FOREST));
+    private static final Hint hint = new ValueHint("Forests you control", xValue);
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forests you control");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature with flying");
@@ -40,6 +45,7 @@ public final class CrashLanding extends CardImpl {
                 FlyingAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DamageTargetEffect(amount).setText("{this} deals damage to that creature equal to the number of Forests you control"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter2));
+        this.getSpellAbility().addHint(hint);
     }
 
     private CrashLanding(final CrashLanding card) {

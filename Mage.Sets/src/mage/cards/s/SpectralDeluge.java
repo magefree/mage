@@ -1,7 +1,11 @@
 package mage.cards.s;
 
 import mage.MageObject;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.ForetellAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,6 +25,9 @@ import java.util.UUID;
  */
 public final class SpectralDeluge extends CardImpl {
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.ISLAND));
+    private static final Hint hint = new ValueHint("Islands you control", xValue);
+
     private static final FilterPermanent filter = new FilterOpponentsCreaturePermanent();
 
     static {
@@ -34,10 +41,12 @@ public final class SpectralDeluge extends CardImpl {
         this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(filter).setText(
                 "return each creature your opponents control with toughness X or less to its owner's hand, " +
                         "where X is the number of Islands you control"
-        ));
+        ))
+        ;
 
         // Foretell {1}{U}{U}
         this.addAbility(new ForetellAbility(this, "{1}{U}{U}"));
+        this.getSpellAbility().addHint(hint);
     }
 
     private SpectralDeluge(final SpectralDeluge card) {

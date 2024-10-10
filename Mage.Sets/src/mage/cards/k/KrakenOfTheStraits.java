@@ -6,6 +6,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -23,6 +25,9 @@ import java.util.UUID;
  */
 public final class KrakenOfTheStraits extends CardImpl {
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.ISLAND));
+    private static final Hint hint = new ValueHint("Islands you control", xValue);
+
     public KrakenOfTheStraits(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.subtype.add(SubType.KRAKEN);
@@ -32,6 +37,7 @@ public final class KrakenOfTheStraits extends CardImpl {
 
         // Creatures with power less than the number of Islands you control can't block Kraken of the Straits.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
+        this.getSpellAbility().addHint(hint);
     }
 
     private KrakenOfTheStraits(final KrakenOfTheStraits card) {
