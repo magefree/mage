@@ -32,7 +32,7 @@ public class ExileTopXMayPlayUntilEffect extends OneShotEffect {
         makeText(amount.toString().equals("1") ? "that card" : "those cards", duration == Duration.EndOfTurn);
     }
 
-    private ExileTopXMayPlayUntilEffect(final ExileTopXMayPlayUntilEffect effect) {
+    protected ExileTopXMayPlayUntilEffect(final ExileTopXMayPlayUntilEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.duration = effect.duration;
@@ -60,8 +60,13 @@ public class ExileTopXMayPlayUntilEffect extends OneShotEffect {
         if (!cards.isEmpty()) {
             game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, duration)
                     .setTargetPointer(new FixedTargets(cards, game)), source);
+            effectCards(game, source, cards);
         }
         return true;
+    }
+
+    protected void effectCards(Game game, Ability source, Set<Card> cards) {
+        //Do nothing, used for derived classes
     }
 
     /**
@@ -76,7 +81,11 @@ public class ExileTopXMayPlayUntilEffect extends OneShotEffect {
         String text = "exile the top ";
         boolean singular = amount.toString().equals("1");
         text += singular ? "card" : CardUtil.numberToText(amount.toString()) + " cards";
-        text += " of your library. ";
+        if (amount.toString().equals("X")) {
+            text += " of your library, where X is " + amount.getMessage() + ". ";
+        } else {
+            text += " of your library. ";
+        }
         if (durationRuleAtEnd) {
             text += "You may play " + refCardText + ' ' + (duration == Duration.EndOfTurn ? "this turn" : duration.toString());
         } else {
