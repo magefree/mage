@@ -4,6 +4,14 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
+import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -171,5 +179,60 @@ public final class Prophecy extends ExpansionSet {
         cards.add(new SetCardInfo("Wintermoon Mesa", 143, Rarity.RARE, mage.cards.w.WintermoonMesa.class));
         cards.add(new SetCardInfo("Withdraw", 54, Rarity.COMMON, mage.cards.w.Withdraw.class));
         cards.add(new SetCardInfo("Zerapa Minotaur", 108, Rarity.COMMON, mage.cards.z.ZerapaMinotaur.class));
+    }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new ProphecyCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/pls.html
+// Using Striped collation
+class ProphecyCollator implements BoosterCollator {
+    private final CardRun common = new CardRun(10,
+         "65","118", "99", "54", "16", "78","128", "91", "36", "24",
+        "100", "35", "26", "58","120", "96", "49", "14", "55","126",
+         "27", "79","116", "93", "31",  "8", "65","121", "87", "50",
+        "129", "88", "29", "20", "61","118", "99", "46",  "2", "79",
+         "43", "16", "64","134", "84", "45", "11", "81","123", "91",
+          "6", "73", "98", "42","128", "19", "62", "88", "35","121",
+         "67", "36","131", "24", "96", "58", "50","129",  "8", "84",
+        "120", "14","108", "81", "31","134", "27", "98", "55", "49",
+        "104", "78", "43","123", "20","100", "67", "29","131", "19",
+         "54","110",  "6", "87", "64", "46","116", "26","104", "62",
+         "11", "93", "73", "45", "126", "2","108", "61", "42","110");
+    private final CardRun uncommon = new CardRun(12,
+         "53","138",  "7", "85","130", "25", "70", "34", "10","107","141", "53",
+        "124", "51", "97",  "9", "53","132","101", "69", "83","111", "92","117",
+         "76", "90", "48","125", "80", "85","124",  "9","122", "63", "44", "85",
+         "23", "41","122",  "7", "34","136", "38","138", "23", "90", "59", "10",
+        "135", "71", "83", "70","142",  "1", "72", "41", "71", "25","142","111",
+         "72", "44", "18", "41", "59","107", "18", "76", "51","132",  "1", "76",
+         "38","138","135","141", "44","122", "86","136","101", "38", "80", "86",
+        "101", "17", "72", "25", "92", "48","130", "33", "70", "83", "33", "18",
+        "132", "80",  "9","117", "34", "10", "69","125",  "7", "69", "23", "71",
+         "63", "97","130", "86","136", "51","107","141", "97","124","142","125",
+         "90", "33", "59","111", "63","117", "17", "92","135",  "1", "48", "17");
+    private final CardRun rare = new CardRun(false, "28", "82", "3", "109", "30", "56", "4", "57", "5", "60", "137", "32", "112", "113", "89", "114", "66", "37", "68", "12", "115", "139", "94", "95", "13", "15", "119", "39", "74", "40", "75", "77", "21", "102", "103", "22", "47", "127", "105", "52", "106", "133", "140", "143");
+
+    private final BoosterStructure C11 = new BoosterStructure(
+            common, common, common, common, common, common,
+            common, common, common, common, common
+    );
+    private final BoosterStructure U3 = new BoosterStructure(uncommon, uncommon, uncommon);
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+
+    private final RarityConfiguration commonRuns = new RarityConfiguration(C11);
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(U3);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(commonRuns.getNext().makeRun());
+        return booster;
     }
 }
