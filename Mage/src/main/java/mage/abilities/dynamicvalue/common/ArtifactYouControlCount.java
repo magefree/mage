@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.constants.ValuePhrasing;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 
@@ -31,5 +32,17 @@ public enum ArtifactYouControlCount implements DynamicValue {
     @Override
     public String getMessage() {
         return "artifact you control";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
+            case FOR_EACH:
+                return "artifact you control";
+            case X_HIDDEN:
+                return "";
+            default:
+                return "the number of artifacts you control";
+        }
     }
 }

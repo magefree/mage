@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.constants.ValuePhrasing;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -28,6 +29,18 @@ public enum CardsInControllerHandCount implements DynamicValue {
     @Override
     public String getMessage() {
         return "cards in your hand";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
+            case FOR_EACH:
+                return "card in your hand";
+            case X_HIDDEN:
+                return "";
+            default:
+                return "the number of cards in your hand";
+        }
     }
 
     @Override

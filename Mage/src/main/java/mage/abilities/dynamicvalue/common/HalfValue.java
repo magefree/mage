@@ -4,6 +4,8 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.ValueHint;
+import mage.constants.ValuePhrasing;
 import mage.game.Game;
 
 /**
@@ -44,6 +46,31 @@ public class HalfValue implements DynamicValue {
             sb.append(", rounded down");
         }
         return sb.toString();
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
+            case FOR_EACH:
+                throw new IllegalArgumentException("FOR_EACH phrasing generation not supported for HalfValue");
+            case X_HIDDEN:
+                return "";
+            default:
+                StringBuilder sb = new StringBuilder();
+                sb.append("half ").append(value.getMessage(textPhrasing));
+                if (roundedUp) {
+                    sb.append(", rounded up");
+                } else {
+                    sb.append(", rounded down");
+                }
+                return sb.toString();
+        }
+
+    }
+
+    @Override
+    public ValueHint getValueHint() {
+        return value.getValueHint();
     }
 
     @Override

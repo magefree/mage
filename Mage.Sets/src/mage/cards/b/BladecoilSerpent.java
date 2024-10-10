@@ -16,10 +16,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -38,8 +35,7 @@ public final class BladecoilSerpent extends CardImpl {
 
         // When Bladecoil Serpent enters the battlefield, for each {U}{U} spent to cast it, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new DrawCardSourceControllerEffect(EachTwoManaSpentToCastValue.BLUE)
-                        .setText("for each {U}{U} spent to cast it, draw a card")
+                new DrawCardSourceControllerEffect(EachTwoManaSpentToCastValue.BLUE, ValuePhrasing.FOR_EACH).withAmountFirst()
         ));
 
         // When Bladecoil Serpent enters the battlefield, for each {B}{B} spent to cast it, each opponent discards a card.

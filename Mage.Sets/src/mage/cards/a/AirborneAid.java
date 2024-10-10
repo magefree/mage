@@ -8,6 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.ValuePhrasing;
 import mage.filter.FilterPermanent;
 
 /**
@@ -26,7 +27,7 @@ public final class AirborneAid extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{U}");
 
         // Draw a card for each Bird on the battlefield.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter), ValuePhrasing.FOR_EACH));
     }
 
     private AirborneAid(final AirborneAid card) {

@@ -88,7 +88,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append(filter.getMessage());
-        sb.append(" your opponents control get ").append(CardUtil.getBoostCountAsStr(power, toughness));
+        sb.append(" your opponents control get ").append(CardUtil.getBoostCountAsStrLegacy(power, toughness));
         sb.append((duration == Duration.EndOfTurn ? " until end of turn" : ""));
         staticText = sb.toString();
     }

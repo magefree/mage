@@ -12,10 +12,7 @@ import mage.abilities.effects.common.ChooseOpponentEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -80,6 +77,11 @@ class PallimudCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "tapped lands the chosen player controls";
+        return "";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        return "the number of tapped lands the chosen player controls";
     }
 }
