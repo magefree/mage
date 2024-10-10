@@ -1257,4 +1257,9 @@ public class Spell extends StackObjectImpl implements Card {
     public boolean hasSubTypeForDeckbuilding(SubType subType) {
         return false;
     }
+
+    @Override
+    public boolean hasName(String name, Game game) {
+        return Objects.equals(name, getName());
+    }
 }

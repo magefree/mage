@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -12,13 +11,14 @@ import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureSpell;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author JRHerlehy
  */
 public final class BloodbondMarch extends CardImpl {
@@ -66,7 +66,7 @@ class BloodbondMarchEffect extends OneShotEffect {
         }
 
         FilterCard filter = new FilterCard();
-        filter.add(new NamePredicate(spell.getName()));
+        filter.add(new SharesNamePredicate(spell));
 
         for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
             Player player = game.getPlayer(playerId);

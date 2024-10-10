@@ -1,7 +1,6 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -92,7 +91,6 @@ enum FrostpyreArcanistPredicate implements ObjectSourcePlayerPredicate<Card> {
                 .getGraveyard()
                 .getCards(game)
                 .stream()
-                .map(MageObject::getName)
-                .anyMatch(input.getObject().getName()::equals);
+                .anyMatch(card -> card.sharesName(input.getObject(), game));
     }
 }

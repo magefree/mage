@@ -432,4 +432,9 @@ public abstract class ModalDoubleFacedCard extends CardImpl implements CardWithH
     public MageInt getToughness() {
         return leftHalfCard.getToughness();
     }
+
+    @Override
+    public boolean hasName(String name, Game game) {
+        return leftHalfCard.hasName(name, game);
+    }
 }

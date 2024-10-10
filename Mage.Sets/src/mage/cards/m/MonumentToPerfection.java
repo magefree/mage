@@ -1,8 +1,5 @@
 package mage.cards.m;
 
-import java.util.UUID;
-
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -28,6 +25,9 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.token.custom.CreatureToken;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -96,15 +96,11 @@ enum MonumentToPerfectionValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return game
-                .getBattlefield()
-                .getActivePermanents(filter, sourceAbility.getControllerId(), game)
-                .stream()
-                .map(MageObject::getName)
-                .filter(s -> s.length() > 0)
-                .distinct()
-                .mapToInt(x -> 1)
-                .sum();
+        return CardUtil.differentlyNamedAmongCollection(
+                game.getBattlefield().getActivePermanents(
+                        filter, sourceAbility.getControllerId(), sourceAbility, game
+                ), game
+        );
     }
 
     @Override

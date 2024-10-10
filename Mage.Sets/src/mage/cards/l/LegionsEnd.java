@@ -71,7 +71,7 @@ class LegionsEndEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent == null) {
             return false;
         }
@@ -79,30 +79,26 @@ class LegionsEndEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        String name = permanent.getName();
-        if (name == null || name.equals("")) {
-            player.revealCards(source, player.getHand(), game);
-            return player.moveCards(permanent, Zone.EXILED, source, game);
-        }
         Cards cards = new CardsImpl();
         game.getBattlefield()
-                .getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, player.getId(), game)
+                .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, player.getId(), source, game)
                 .stream()
-                .filter(perm -> name.equals(perm.getName()))
+                .filter(perm -> perm.sharesName(permanent, game))
                 .forEach(cards::add);
+        player.moveCards(cards, Zone.EXILED, source, game);
+        cards.clear();
 
         player.revealCards(source, player.getHand(), game);
-
         player.getHand()
                 .getCards(game)
                 .stream()
-                .filter(card -> name.equals(card.getName()))
+                .filter(card -> card.sharesName(permanent, game))
                 .forEach(cards::add);
 
         player.getGraveyard()
                 .getCards(game)
                 .stream()
-                .filter(card -> name.equals(card.getName()))
+                .filter(card -> card.sharesName(permanent, game))
                 .forEach(cards::add);
 
         return player.moveCards(cards, Zone.EXILED, source, game);

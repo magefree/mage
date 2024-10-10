@@ -13,7 +13,7 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -26,7 +26,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author freaisdead
  */
 public final class Banishment extends CardImpl {
@@ -39,7 +38,7 @@ public final class Banishment extends CardImpl {
 
     public Banishment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
-        
+
 
         // Flash
         this.addAbility(FlashAbility.getInstance());
@@ -85,10 +84,10 @@ class BanishmentEffect extends OneShotEffect {
         }
 
         FilterPermanent filter = new FilterNonlandPermanent();
-        filter.add(new NamePredicate(targeted.getName()));
+        filter.add(new SharesNamePredicate(targeted));
 
         Set<Card> toExile = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)
-                .stream().filter(p -> controller.hasOpponent(p.getControllerId(),game))
+                .stream().filter(p -> controller.hasOpponent(p.getControllerId(), game))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
 
         if (!toExile.isEmpty()) {

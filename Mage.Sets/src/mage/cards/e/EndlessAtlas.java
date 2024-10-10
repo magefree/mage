@@ -1,8 +1,5 @@
 package mage.cards.e;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -16,9 +13,11 @@ import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.RandomUtil;
+
+import java.util.*;
 
 /**
- *
  * @author TheElk801
  */
 public final class EndlessAtlas extends CardImpl {
@@ -31,7 +30,7 @@ public final class EndlessAtlas extends CardImpl {
                 Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 new GenericManaCost(2),
-                new EndlessAtlasCondition()
+                EndlessAtlasCondition.instance
         );
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -47,21 +46,27 @@ public final class EndlessAtlas extends CardImpl {
     }
 }
 
-class EndlessAtlasCondition implements Condition {
+enum EndlessAtlasCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Map<String, Integer> landMap = new HashMap<>();
-        for (Permanent land : game.getBattlefield().getActivePermanents(
+        Set<Permanent> lands = new HashSet<>(game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
-                source.getControllerId(), game
-        )) {
-            if (land != null) {
-                int landCount = landMap.getOrDefault(land.getName(), 0);
-                if (landCount > 1) {
+                source.getControllerId(), source, game
+        ));
+        while (lands.size() >= 3) {
+            Permanent land = RandomUtil.randomFromCollection(lands);
+            lands.remove(land);
+            int amount = 0;
+            for (Permanent permanent : lands) {
+                if (!permanent.sharesName(land, game)) {
+                    continue;
+                }
+                amount++;
+                if (amount >= 3) {
                     return true;
                 }
-                landMap.put(land.getName(), landCount + 1);
             }
         }
         return false;

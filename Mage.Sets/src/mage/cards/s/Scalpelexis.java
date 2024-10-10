@@ -1,28 +1,25 @@
-
 package mage.cards.s;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Outcome;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class Scalpelexis extends CardImpl {
@@ -69,26 +66,17 @@ class ScalpelexisEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (targetPlayer == null) {
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (player == null) {
             return false;
         }
-        Set<String> cardNames = new HashSet<>();
-        boolean doubleName;
-        do {
-            doubleName = false;
-            Cards toExile = new CardsImpl(targetPlayer.getLibrary().getTopCards(game, 4));
-            cardNames.clear();
-            for (Card card : toExile.getCards(game)) {
-                if (cardNames.contains(card.getName())) {
-                    doubleName = true;
-                    break;
-                } else {
-                    cardNames.add(card.getName());
-                }
+        while (player.getLibrary().hasCards()) {
+            Cards cards = new CardsImpl(player.getLibrary().getTopCards(game, 4));
+            player.moveCards(cards, Zone.EXILED, source, game);
+            if (!CardUtil.checkAnyPairs(cards.getCards(game), (c1, c2) -> c1.sharesName(c2, game))) {
+                break;
             }
-            targetPlayer.moveCards(toExile, Zone.EXILED, source, game);
-        } while (doubleName);
+        }
         return true;
     }
 }

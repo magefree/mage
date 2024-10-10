@@ -8,15 +8,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.card.OwnerIdPredicate;
-import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -87,22 +79,18 @@ class GuardianProjectTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
     // This is needed as checkInterveningIfClause can't access trigger event information
     static boolean checkCondition(Permanent permanent, UUID controllerId, Game game) {
         Player player = game.getPlayer(controllerId);
-        if (player == null) {
-            return false;
-        }
-        if (!permanent.getName().isEmpty()) {
-            FilterCard filterCard = new FilterCard();
-            filterCard.add(new NamePredicate(permanent.getName()));
-            filterCard.add(new OwnerIdPredicate(controllerId));
-            if (player.getGraveyard().count(filterCard, game) > 0) {
-                return false;
-            }
-        }
-        FilterPermanent filterPermanent = new FilterCreaturePermanent();
-        filterPermanent.add(new NamePredicate(permanent.getName()));
-        filterPermanent.add(Predicates.not(new CardIdPredicate(permanent.getId())));
-        filterPermanent.add(new ControllerIdPredicate(controllerId));
-        return game.getBattlefield().getActivePermanents(filterPermanent, controllerId, game).isEmpty();
+        return player != null
+                && player
+                .getGraveyard()
+                .getCards(game)
+                .stream()
+                .noneMatch(card -> card.sharesName(permanent, game))
+                && game
+                .getBattlefield()
+                .getActivePermanents(StaticFilters.FILTER_CONTROLLED_CREATURE, controllerId, game)
+                .stream()
+                .filter(p -> !p.getId().equals(permanent.getId()))
+                .noneMatch(p -> p.sharesName(permanent, game));
     }
 }
 

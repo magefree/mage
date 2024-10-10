@@ -15,13 +15,12 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -74,19 +73,16 @@ class AssemblyHallEffect extends OneShotEffect {
         if (controller == null || controller.getHand().isEmpty() || sourceObject == null) {
             return false;
         }
-        Card cardToReveal = null;
         Target target = new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE);
         target.withNotTarget(true);
-        if (controller.chooseTarget(outcome, target, source, game)) {
-            cardToReveal = game.getCard(target.getFirstTarget());
-        }
+        controller.chooseTarget(outcome, target, source, game);
+        Card cardToReveal = game.getCard(target.getFirstTarget());
         if (cardToReveal == null) {
             return false;
         }
         controller.revealCards("from hand :" + sourceObject.getName(), new CardsImpl(cardToReveal), game);
-        String nameToSearch = CardUtil.getCardNameForSameNameSearch(cardToReveal);
-        FilterCard filterCard = new FilterCard("card named " + nameToSearch);
-        filterCard.add(new NamePredicate(nameToSearch));
+        FilterCard filterCard = new FilterCard("card with the same name as " + cardToReveal.getName());
+        filterCard.add(new SharesNamePredicate(cardToReveal));
         return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true).apply(game, source);
     }
 }

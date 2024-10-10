@@ -17,12 +17,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class CorneredMarket extends CardImpl {
@@ -77,34 +75,30 @@ class CorneredMarketReplacementEffect extends ContinuousRuleModifyingEffectImpl 
             return false;
         }
         Card card = spellAbility.getCharacteristics(game);
-        if (card != null) {
-            Spell spell = game.getState().getStack().getSpell(event.getSourceId());
-            // Face Down cast spell (Morph creature) has no name
-            if (spell != null
-                    && spell.isFaceDown(game)) {
-                return false;
-            }
-            // play land check
-            if (card.isLand(game)
-                    && !card.isBasic(game)) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                    if (permanent != null) {
-                        if (CardUtil.haveSameNames(card, permanent.getName(), game)) {
-                            return true;
-                        }
-                    }
+        if (card == null) {
+            return false;
+        }
+        Spell spell = game.getState().getStack().getSpell(event.getSourceId());
+        // Face Down cast spell (Morph creature) has no name
+        if (spell != null && spell.isFaceDown(game)) {
+            return false;
+        }
+        // play land check
+        if (card.isLand(game) && !card.isBasic(game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+                if (card.sharesName(permanent, game)) {
+                    return true;
                 }
-                return false;
             }
-            // cast spell check
-            if (spell != null) {
-                for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                    if (permanent != null) {
-                        if (CardUtil.haveSameNames(card, permanent.getName(), game)) {
-                            return true;
-                        }
-                    }
-                }
+            return false;
+        }
+        // cast spell check
+        if (spell == null) {
+            return false;
+        }
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
+            if (card.sharesName(permanent, game)) {
+                return true;
             }
         }
         return false;

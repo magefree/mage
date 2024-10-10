@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SagaAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -131,33 +130,34 @@ class BattleForBretagardTarget extends TargetPermanent {
         if (!super.canTarget(playerId, id, ability, game)) {
             return false;
         }
-        Set<String> names = this.getTargets()
+        Set<Permanent> permanents = this
+                .getTargets()
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .map(MageObject::getName)
                 .collect(Collectors.toSet());
-        names.removeIf(Objects::isNull);
-        names.removeIf(String::isEmpty);
         Permanent permanent = game.getPermanent(id);
-        return permanent != null && !names.contains(permanent.getName());
+        return permanent != null
+                && permanents
+                .stream()
+                .noneMatch(p -> p.sharesName(permanent, game));
     }
 
 
     @Override
     public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
         Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
-        Set<String> names = this.getTargets()
+        Set<Permanent> permanents = this.getTargets()
                 .stream()
                 .map(game::getPermanent)
                 .filter(Objects::nonNull)
-                .map(MageObject::getName)
                 .collect(Collectors.toSet());
-        names.removeIf(Objects::isNull);
-        names.removeIf(String::isEmpty);
         possibleTargets.removeIf(uuid -> {
             Permanent permanent = game.getPermanent(uuid);
-            return permanent == null || names.contains(permanent.getName());
+            return permanent == null
+                    || permanents
+                    .stream()
+                    .anyMatch(p -> p.sharesName(permanent, game));
         });
         return possibleTargets;
     }

@@ -1,11 +1,10 @@
 package mage.cards.h;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -14,9 +13,7 @@ import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -62,26 +59,14 @@ class HintOfInsanityEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player == null) {
             return false;
         }
-        Map<String, Integer> nameCounts = new HashMap<>();
-        player.getHand()
-                .getCards(game)
-                .stream()
-                .map(MageObject::getName)
-                .forEach(s -> nameCounts.compute(s, CardUtil::setOrIncrementValue));
-        Cards cards = new CardsImpl(
-                player.getHand()
-                        .getCards(game)
-                        .stream()
-                        .filter(Objects::nonNull)
-                        .filter(card -> !card.isLand(game))
-                        .filter(card -> nameCounts.getOrDefault(card.getName(), 0) > 1)
-                        .collect(Collectors.toSet())
-        );
-        player.discard(cards, false, source, game);
-        return true;
+        Set<Card> cards = CardUtil.streamAllPairwiseMatches(
+                player.getHand().getCards(game),
+                (p1, p2) -> p1.sharesName(p2, game)
+        ).collect(Collectors.toSet());
+        return !cards.isEmpty() && !player.discard(new CardsImpl(cards), false, source, game).isEmpty();
     }
 }

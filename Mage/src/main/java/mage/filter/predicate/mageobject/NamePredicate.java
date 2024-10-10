@@ -42,6 +42,7 @@ public class NamePredicate implements Predicate<MageObject> {
         if (name == null) {
             return false;
         }
+        return input.hasName(name, game);
         // If a player names a card, the player may name either half of a split card, but not both. 
         // A split card has the chosen name if one of its two names matches the chosen name.
         // This is NOT the same for double faced cards, where only the front side matches
@@ -51,28 +52,28 @@ public class NamePredicate implements Predicate<MageObject> {
         // including the one that you countered, because those cards have only their front-face characteristics
         // (including name) in the graveyard, hand, and library. (2021-04-16)
 
-        if (input instanceof SplitCard) {
-            return CardUtil.haveSameNames(name, ((CardWithHalves) input).getLeftHalfCard().getName(), this.ignoreMtgRuleForEmptyNames) ||
-                    CardUtil.haveSameNames(name, ((CardWithHalves) input).getRightHalfCard().getName(), this.ignoreMtgRuleForEmptyNames) ||
-                    CardUtil.haveSameNames(name, input.getName(), this.ignoreMtgRuleForEmptyNames);
-        } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
-            SplitCard card = (SplitCard) ((Spell) input).getCard();
-            return CardUtil.haveSameNames(name, card.getLeftHalfCard().getName(), this.ignoreMtgRuleForEmptyNames) ||
-                    CardUtil.haveSameNames(name, card.getRightHalfCard().getName(), this.ignoreMtgRuleForEmptyNames) ||
-                    CardUtil.haveSameNames(name, card.getName(), this.ignoreMtgRuleForEmptyNames);
-        } else if (input instanceof Spell && ((Spell) input).isFaceDown(game)) {
-            // face down spells don't have names, so it's not equal, see https://github.com/magefree/mage/issues/6569
-            return false;
-        } else {
-            if (name.contains(" // ")) {
-                String leftName = name.substring(0, name.indexOf(" // "));
-                String rightName = name.substring(name.indexOf(" // ") + 4);
-                return CardUtil.haveSameNames(leftName, input.getName(), this.ignoreMtgRuleForEmptyNames) ||
-                        CardUtil.haveSameNames(rightName, input.getName(), this.ignoreMtgRuleForEmptyNames);
-            } else {
-                return CardUtil.haveSameNames(name, input.getName(), this.ignoreMtgRuleForEmptyNames);
-            }
-        }
+//        if (input instanceof SplitCard) {
+//            return CardUtil.haveSameNames(name, ((CardWithHalves) input).getLeftHalfCard().getName(), this.ignoreMtgRuleForEmptyNames) ||
+//                    CardUtil.haveSameNames(name, ((CardWithHalves) input).getRightHalfCard().getName(), this.ignoreMtgRuleForEmptyNames) ||
+//                    CardUtil.haveSameNames(name, input.getName(), this.ignoreMtgRuleForEmptyNames);
+//        } else if (input instanceof Spell && ((Spell) input).getSpellAbility().getSpellAbilityType() == SpellAbilityType.SPLIT_FUSED) {
+//            SplitCard card = (SplitCard) ((Spell) input).getCard();
+//            return CardUtil.haveSameNames(name, card.getLeftHalfCard().getName(), this.ignoreMtgRuleForEmptyNames) ||
+//                    CardUtil.haveSameNames(name, card.getRightHalfCard().getName(), this.ignoreMtgRuleForEmptyNames) ||
+//                    CardUtil.haveSameNames(name, card.getName(), this.ignoreMtgRuleForEmptyNames);
+//        } else if (input instanceof Spell && ((Spell) input).isFaceDown(game)) {
+//            // face down spells don't have names, so it's not equal, see https://github.com/magefree/mage/issues/6569
+//            return false;
+//        } else {
+//            if (name.contains(" // ")) {
+//                String leftName = name.substring(0, name.indexOf(" // "));
+//                String rightName = name.substring(name.indexOf(" // ") + 4);
+//                return CardUtil.haveSameNames(leftName, input.getName(), this.ignoreMtgRuleForEmptyNames) ||
+//                        CardUtil.haveSameNames(rightName, input.getName(), this.ignoreMtgRuleForEmptyNames);
+//            } else {
+//                return CardUtil.haveSameNames(name, input.getName(), this.ignoreMtgRuleForEmptyNames);
+//            }
+//        }
     }
 
     @Override

@@ -1,7 +1,5 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -10,17 +8,18 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.SquirrelToken;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
+import java.util.Collection;
+import java.util.Objects;
+import java.util.UUID;
+
 /**
- *
- * @author LevelX2
+ * @author TheElk801
  */
 public final class NantukoShrine extends CardImpl {
 
@@ -28,7 +27,9 @@ public final class NantukoShrine extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
 
         // Whenever a player casts a spell, that player puts X 1/1 green Squirrel creature tokens onto the battlefield, where X is the number of cards in all graveyards with the same name as that spell.
-        this.addAbility(new SpellCastAllTriggeredAbility(new NantukoShrineEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastAllTriggeredAbility(
+                new NantukoShrineEffect(), StaticFilters.FILTER_SPELL, false, SetTargetPointer.PLAYER
+        ));
     }
 
     private NantukoShrine(final NantukoShrine card) {
@@ -59,26 +60,23 @@ class NantukoShrineEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-        if (spell != null) {
-            Player controller = game.getPlayer(spell.getControllerId());
-            if (controller != null) {
-                int count = 0;
-                String name = spell.getName();
-                FilterCard filterCardName = new FilterCard();
-                filterCardName.add(new NamePredicate(name));
-                for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                    Player player = game.getPlayer(playerId);
-                    if (player != null) {
-                        count += player.getGraveyard().count(filterCardName, game);
-                    }
-                }
-                if (count > 0) {
-                    new SquirrelToken().putOntoBattlefield(count, game, source, spell.getControllerId());
-                }
-                return true;
-            }
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
+        Spell spell = (Spell) getValue("spellCast");
+        if (player == null || spell == null) {
+            return false;
         }
-        return false;
+        int count = game
+                .getState()
+                .getPlayersInRange(source.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .map(Player::getGraveyard)
+                .map(g -> g.getCards(game))
+                .flatMap(Collection::stream)
+                .filter(c -> c.sharesName(spell, game))
+                .mapToInt(x -> 1)
+                .sum();
+        return count > 0 && new SquirrelToken().putOntoBattlefield(count, game, source, player.getId());
     }
 }

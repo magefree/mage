@@ -1,11 +1,8 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -14,17 +11,21 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandCard;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.constants.AbilityWord;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.filter.StaticFilters;
+import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
+
+import java.util.Set;
+import java.util.UUID;
 
 /**
- *
  * @author Loki
  */
 public final class StrataScythe extends CardImpl {
@@ -37,10 +38,12 @@ public final class StrataScythe extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new StrataScytheImprintEffect()).setAbilityWord(AbilityWord.IMPRINT));
 
         // Equipped creature gets +1/+1 for each land on the battlefield with the same name as the exiled card.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(SameNameAsExiledCountValue.getInstance(), SameNameAsExiledCountValue.getInstance())));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(
+                StrataScytheValue.instance, StrataScytheValue.instance
+        )));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
+        this.addAbility(new EquipAbility(3, false));
     }
 
     private StrataScythe(final StrataScythe card) {
@@ -71,19 +74,15 @@ class StrataScytheImprintEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
-        if (player.searchLibrary(target, source, game)) {
-            if (!target.getTargets().isEmpty()) {
-                UUID cardId = target.getTargets().get(0);
-                Card card = player.getLibrary().remove(cardId, game);
-                if (card != null) {
-                    card.moveToExile(source.getSourceId(), "Strata Scythe", source, game);
-                    Permanent permanent = game.getPermanent(source.getSourceId());
-                    if (permanent != null) {
-                        permanent.imprint(card.getId(), game);
-                    }
-                }
-            }
+        TargetCardInLibrary target = new TargetCardInLibrary(StaticFilters.FILTER_CARD_LAND_A);
+        player.searchLibrary(target, source, game);
+        Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
+        if (card != null) {
+            player.moveCardsToExile(
+                    card, source, game, true,
+                    CardUtil.getExileZoneId(game, source),
+                    CardUtil.getSourceName(game, source)
+            );
         }
         player.shuffleLibrary(source, game);
         return true;
@@ -96,31 +95,32 @@ class StrataScytheImprintEffect extends OneShotEffect {
 
 }
 
-class SameNameAsExiledCountValue implements DynamicValue {
-
-    private static final SameNameAsExiledCountValue instance = new SameNameAsExiledCountValue();
-
-    public static SameNameAsExiledCountValue getInstance() {
-        return instance;
-    }
-
-    private SameNameAsExiledCountValue() {
-    }
+enum StrataScytheValue implements DynamicValue {
+    instance;
 
     @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        int value = 0;
-        Permanent permanent = game.getPermanent(sourceAbility.getSourceId());
-        if (permanent != null && !permanent.getImprinted().isEmpty()) {
-            FilterPermanent filterPermanent = new FilterPermanent();
-            filterPermanent.add(new NamePredicate(game.getCard(permanent.getImprinted().get(0)).getName()));
-            value = game.getBattlefield().count(filterPermanent, sourceAbility.getControllerId(), sourceAbility, game);
+    public int calculate(Game game, Ability source, Effect effect) {
+        ExileZone exileZone = game
+                .getExile()
+                .getExileZone(CardUtil.getExileZoneId(
+                        game, source.getSourceId(),
+                        game.getState().getZoneChangeCounter(source.getSourceId())
+                ));
+        if (exileZone == null || exileZone.isEmpty()) {
+            return 0;
         }
-        return value;
+        Set<Card> cards = exileZone.getCards(game);
+        return game
+                .getBattlefield()
+                .getActivePermanents(StaticFilters.FILTER_LAND, source.getControllerId(), source, game)
+                .stream()
+                .filter(permanent -> cards.stream().anyMatch(card -> card.sharesName(permanent, game)))
+                .mapToInt(x -> 1)
+                .sum();
     }
 
     @Override
-    public DynamicValue copy() {
+    public StrataScytheValue copy() {
         return instance;
     }
 

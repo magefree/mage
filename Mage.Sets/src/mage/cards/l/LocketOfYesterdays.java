@@ -1,21 +1,23 @@
-
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.CostModificationType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
+import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class LocketOfYesterdays extends CardImpl {
@@ -24,7 +26,7 @@ public final class LocketOfYesterdays extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // Spells you cast cost {1} less to cast for each card with the same name as that spell in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LocketOfYesterdaysCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new LocketOfYesterdaysCostReductionEffect()));
     }
 
     private LocketOfYesterdays(final LocketOfYesterdays card) {
@@ -50,36 +52,32 @@ class LocketOfYesterdaysCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        Player player = game.getPlayer(source.getControllerId());
         MageObject sourceObject = game.getObject(abilityToModify.getSourceId());
-        if (sourceObject != null) {
-            int amount = 0;
-            for (UUID cardId : game.getPlayer(source.getControllerId()).getGraveyard()) {
-                Card card = game.getCard(cardId);
-                if (card != null && card.getName().equals(sourceObject.getName())) {
-                    amount++;
-                }
-            }
-            if (amount > 0) {
-                SpellAbility spellAbility = (SpellAbility) abilityToModify;
-                CardUtil.adjustCost(spellAbility, amount);
-            }
-            return true;
+        if (player == null || sourceObject == null) {
+            return false;
         }
-        return false;
+        int amount = player
+                .getGraveyard()
+                .getCards(game)
+                .stream()
+                .filter(card -> card.sharesName(sourceObject, game))
+                .mapToInt(x -> 1)
+                .sum();
+        if (amount > 0) {
+            CardUtil.adjustCost((SpellAbility) abilityToModify, amount);
+        }
+        return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify.isControlledBy(source.getControllerId())
-                && (abilityToModify instanceof SpellAbility)) {
-            return true;
-        }
-        return false;
+        return abilityToModify.isControlledBy(source.getControllerId())
+                && abilityToModify instanceof SpellAbility;
     }
 
     @Override
     public LocketOfYesterdaysCostReductionEffect copy() {
         return new LocketOfYesterdaysCostReductionEffect(this);
     }
-
 }

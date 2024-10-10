@@ -1,26 +1,22 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetNonlandPermanent;
-import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -31,9 +27,8 @@ public final class EchoingTruth extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}");
 
         // Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands.
-        Target target = new TargetNonlandPermanent();
-        this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new ReturnToHandAllNamedPermanentsEffect());
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
     private EchoingTruth(final EchoingTruth card) {
@@ -50,7 +45,8 @@ class ReturnToHandAllNamedPermanentsEffect extends OneShotEffect {
 
     ReturnToHandAllNamedPermanentsEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "Return target nonland permanent and all other permanents with the same name as that permanent to their owners' hands";
+        this.staticText = "return target nonland permanent and all other permanents " +
+                "with the same name as that permanent to their owners' hands";
     }
 
     private ReturnToHandAllNamedPermanentsEffect(final ReturnToHandAllNamedPermanentsEffect effect) {
@@ -64,22 +60,21 @@ class ReturnToHandAllNamedPermanentsEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (controller != null && permanent != null) {
-            FilterPermanent filter = new FilterPermanent();
-            if (CardUtil.haveEmptyName(permanent)) {
-                filter.add(new PermanentIdPredicate(permanent.getId()));  // if no name (face down creature) only the creature itself is selected
-            } else {
-                filter.add(new NamePredicate(permanent.getName()));
-            }
-            Cards cardsToHand = new CardsImpl();
-            for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-                cardsToHand.add(perm);
-            }
-            controller.moveCards(cardsToHand, Zone.HAND, source, game);
-            return true;
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (player == null || targetPermanent == null) {
+            return false;
         }
-        return true;
+        Set<Card> set = game
+                .getBattlefield()
+                .getActivePermanents(
+                        StaticFilters.FILTER_PERMANENT,
+                        source.getControllerId(), source, game
+                )
+                .stream()
+                .filter(permanent -> permanent.sharesName(targetPermanent, game))
+                .collect(Collectors.toSet());
+        set.add(targetPermanent);
+        return player.moveCards(set, Zone.HAND, source, game);
     }
 }
