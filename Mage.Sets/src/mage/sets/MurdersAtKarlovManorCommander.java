@@ -125,6 +125,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Graf Mole", 170, Rarity.UNCOMMON, mage.cards.g.GrafMole.class));
         cards.add(new SetCardInfo("Grave Titan", 129, Rarity.MYTHIC, mage.cards.g.GraveTitan.class));
         cards.add(new SetCardInfo("Gruul Turf", 265, Rarity.UNCOMMON, mage.cards.g.GruulTurf.class));
+        cards.add(new SetCardInfo("Havoc Eater", 31, Rarity.RARE, mage.cards.h.HavocEater.class));
         cards.add(new SetCardInfo("Hidden Dragonslayer", 69, Rarity.RARE, mage.cards.h.HiddenDragonslayer.class));
         cards.add(new SetCardInfo("Hooded Hydra", 171, Rarity.MYTHIC, mage.cards.h.HoodedHydra.class));
         cards.add(new SetCardInfo("Hornet Queen", 172, Rarity.RARE, mage.cards.h.HornetQueen.class));
