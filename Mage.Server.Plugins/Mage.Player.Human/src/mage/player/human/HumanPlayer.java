@@ -33,6 +33,7 @@ import mage.game.events.DeclareAttackerEvent;
 import mage.game.match.Match;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
+import mage.game.stack.StackObject;
 import mage.game.tournament.Tournament;
 import mage.players.Player;
 import mage.players.PlayerImpl;
@@ -1733,10 +1734,10 @@ public class HumanPlayer extends PlayerImpl {
         // Reason: when you use special mana ability then normal mana abilities will be restricted to pay. Users
         // can't see lands as playable and must know the reason (if they click on land then they get that message)
         if (abilityToCast.getAbilityType() == AbilityType.SPELL) {
-            Spell spell = game.getStack().getSpell(abilityToCast.getSourceId());
+            StackObject spellOrAbility = game.getStack().getStackObject(abilityToCast.getSourceId());
             boolean haveManaAbilities = object.getAbilities().stream().anyMatch(ManaAbility.class::isInstance);
-            if (spell != null && !spell.isResolving() && haveManaAbilities) {
-                switch (spell.getCurrentActivatingManaAbilitiesStep()) {
+            if (spellOrAbility != null && haveManaAbilities && (!(spellOrAbility instanceof Spell) || ((Spell) spellOrAbility).isResolving())) {
+                switch (spellOrAbility.getCurrentActivatingManaAbilitiesStep()) {
                     // if you used special mana ability like convoke then normal mana abilities will be restricted to use, see Convoke for details
                     case BEFORE:
                     case NORMAL:
