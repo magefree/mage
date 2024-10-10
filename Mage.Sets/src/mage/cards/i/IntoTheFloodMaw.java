@@ -31,7 +31,7 @@ public final class IntoTheFloodMaw extends CardImpl {
                         "instead return target nonland permanent an opponent controls to its owner's hand"));
         this.getSpellAbility().addTarget(new TargetOpponentsCreaturePermanent());
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(GiftWasPromisedCondition.TRUE,
-                new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND)));
+                new TargetPermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_NON_LAND)).withCheckTargets());
     }
 
     private IntoTheFloodMaw(final IntoTheFloodMaw card) {
