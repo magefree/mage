@@ -75,7 +75,7 @@ class HarmonicProdigyEffect extends ReplacementEffectImpl {
         if (!(event instanceof NumberOfTriggersEvent)) {
             return false;
         }
-        Permanent permanent = game.getPermanent(((NumberOfTriggersEvent) event).getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(((NumberOfTriggersEvent) event).getSourceId());
         return permanent != null
                 && permanent.isControlledBy(source.getControllerId())
                 && (permanent.hasSubtype(SubType.SHAMAN, game)
