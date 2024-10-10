@@ -7,6 +7,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.command.Commander;
+import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.events.ZoneChangeGroupEvent;
 import mage.game.permanent.Permanent;
@@ -27,6 +28,7 @@ public final class ZonesHandler {
     public static boolean cast(ZoneChangeInfo info, Ability source, Game game) {
         if (maybeRemoveFromSourceZone(info, game, source)) {
             placeInDestinationZone(info, 0, source, game);
+
             // create a group zone change event if a card is moved to stack for casting (it's always only one card, but some effects check for group events (one or more xxx))
             Set<Card> cards = new HashSet<>();
             Set<PermanentToken> tokens = new HashSet<>();
@@ -44,6 +46,12 @@ public final class ZonesHandler {
                     info.event.getPlayerId(),
                     info.event.getFromZone(),
                     info.event.getToZone()));
+
+            // Fire batch event for cards moving to stack as well
+            ZoneChangeBatchEvent batchEvent = new ZoneChangeBatchEvent();
+            batchEvent.addEvent(info.event);
+            game.fireEvent(batchEvent);
+
             // normal movement
             game.fireEvent(info.event);
             return true;
