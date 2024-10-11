@@ -35,7 +35,7 @@ public class EDTExceptionHandler implements Thread.UncaughtExceptionHandler {
                 mainApp.showErrorDialog("CLIENT - unhandled error in GUI", throwable);
                 foundCount++;
             }
-            foundErrors.put(errorKey, foundCount++);
+            foundErrors.put(errorKey, foundCount);
         } catch (Throwable ignore) {
         }
     }
