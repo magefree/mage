@@ -77,7 +77,11 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         this.txtPlayerDeck.setText(deckFile);
     }
 
-    public int getLevel() {
+    public void setSkillLevel(int level) {
+        this.spnLevel.setValue(level);
+    }
+
+    public int getSkillLevel() {
         return (Integer) spnLevel.getValue();
     }
 

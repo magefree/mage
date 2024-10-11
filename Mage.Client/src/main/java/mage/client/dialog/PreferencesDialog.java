@@ -217,6 +217,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TABLE_SKILL_LEVEL = "newTableSkillLevel";
     public static final String KEY_NEW_TABLE_NUMBER_PLAYERS = "newTableNumberPlayers";
     public static final String KEY_NEW_TABLE_PLAYER_TYPES = "newTablePlayerTypes";
+    public static final String KEY_NEW_TABLE_PLAYER_SKILLS = "newTablePlayerSkills";
+    public static final String KEY_NEW_TABLE_PLAYER_DECKS = "newTablePlayerDecks";
     public static final String KEY_NEW_TABLE_QUIT_RATIO = "newTableQuitRatio";
     public static final String KEY_NEW_TABLE_MINIMUM_RATING = "newTableMinimumRating";
     public static final String KEY_NEW_TABLE_RATED = "newTableRated";
