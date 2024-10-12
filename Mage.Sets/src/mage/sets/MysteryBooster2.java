@@ -232,6 +232,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Static Orb", 234, Rarity.RARE, mage.cards.s.StaticOrb.class));
         cards.add(new SetCardInfo("Stifle", 173, Rarity.RARE, mage.cards.s.Stifle.class));
         cards.add(new SetCardInfo("Stitcher's Supplier", 48, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
+        cards.add(new SetCardInfo("Stone Drake", 363, Rarity.RARE, mage.cards.s.StoneDrake.class));
         cards.add(new SetCardInfo("Stony Silence", 21, Rarity.RARE, mage.cards.s.StonySilence.class));
         cards.add(new SetCardInfo("Street Wraith", 49, Rarity.COMMON, mage.cards.s.StreetWraith.class));
         cards.add(new SetCardInfo("Summoner's Pact", 74, Rarity.RARE, mage.cards.s.SummonersPact.class));
