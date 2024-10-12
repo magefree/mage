@@ -39,7 +39,6 @@ public class TablePlayerPanel extends javax.swing.JPanel {
         }
         this.newPlayerPanel.setDeckFile(playerDeck);
         this.newPlayerPanel.setSkillLevel(playerSkill);
-
     }
 
     public boolean joinTable(UUID roomId, UUID tableId) throws IOException, ClassNotFoundException {

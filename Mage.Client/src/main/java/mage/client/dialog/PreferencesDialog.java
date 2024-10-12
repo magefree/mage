@@ -233,6 +233,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_TIME_LIMIT = "newTournamentTimeLimit";
     public static final String KEY_NEW_TOURNAMENT_BUFFER_TIME = "newTournamentBufferTime";
     public static final String KEY_NEW_TOURNAMENT_CONSTR_TIME = "newTournamentConstructionTime";
+    public static final String KEY_NEW_TOURNAMENT_SKILL_LEVEL = "newTournamentSkillLevel";
     public static final String KEY_NEW_TOURNAMENT_TYPE = "newTournamentType";
     public static final String KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS = "newTournamentNumberOfFreeMulligans";
     public static final String KEY_NEW_TOURNAMENT_MULLIGUN_TYPE = "newTournamentMulliganType";
@@ -244,8 +245,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_PACKS_SEALED = "newTournamentPacksSealed";
     public static final String KEY_NEW_TOURNAMENT_PACKS_DRAFT = "newTournamentPacksDraft";
     public static final String KEY_NEW_TOURNAMENT_PACKS_RANDOM_DRAFT = "newTournamentPacksRandomDraft";
-    public static final String KEY_NEW_TOURNAMENT_PLAYERS_SEALED = "newTournamentPlayersSealed";
-    public static final String KEY_NEW_TOURNAMENT_PLAYERS_DRAFT = "newTournamentPlayersDraft";
+    public static final String KEY_NEW_TOURNAMENT_NUMBER_PLAYERS = "newTournamentNumberPlayers";
+    public static final String KEY_NEW_TOURNAMENT_NUMBER_SEATS = "newTournamentNumberSeats";
+    public static final String KEY_NEW_TOURNAMENT_PLAYER_TYPES = "newTournamentPlayerTypes";
+    public static final String KEY_NEW_TOURNAMENT_PLAYER_SKILLS = "newTournamentPlayerSkills";
     public static final String KEY_NEW_TOURNAMENT_DRAFT_TIMING = "newTournamentDraftTiming";
     public static final String KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS = "newTournamentAllowSpectators";
     public static final String KEY_NEW_TOURNAMENT_PLANE_CHASE = "newTournamentPlaneChase";

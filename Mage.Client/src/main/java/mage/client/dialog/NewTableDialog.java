@@ -37,9 +37,9 @@ public class NewTableDialog extends MageDialog {
 
     private static final Logger logger = Logger.getLogger(NewTableDialog.class);
 
-    private static final int DEFAULT_COMPUTER_PLAYER_SKILL_LEVEL = 2;
-    private static final String PLAYER_DATA_DELIMETER_OLD = ","; // need for compatibility with old version
-    private static final String PLAYER_DATA_DELIMETER_NEW = "@@@";
+    public static final int DEFAULT_COMPUTER_PLAYER_SKILL_LEVEL = 2;
+    public static final String PLAYER_DATA_DELIMETER_OLD = ","; // need for compatibility with old version
+    public static final String PLAYER_DATA_DELIMETER_NEW = "@@@";
 
     private final CustomOptionsDialog customOptions;
     private TableView table;
@@ -776,8 +776,8 @@ public class NewTableDialog extends MageDialog {
                         (Listener<Event>) event -> drawPlayers()
                 );
             }
-
         }
+
         // remove un-used panels
         if (numPlayers < players.size()) {
             while (players.size() != numPlayers) {
@@ -814,7 +814,7 @@ public class NewTableDialog extends MageDialog {
                 }
             }
 
-            playerPanel.init(i + 1, playerType, playerSkill, playerDeck);
+            playerPanel.init(i + 2, playerType, playerSkill, playerDeck);
         }
 
         drawPlayers();
