@@ -1070,19 +1070,35 @@ public abstract class AbilityImpl implements Ability {
 
     @Override
     public boolean canChooseTarget(Game game, UUID playerId) {
-        return canChooseTargetAbility(this, getModes(), game, playerId);
+        return canChooseTargetAbility(this, this, game, playerId);
     }
 
-    protected static boolean canChooseTargetAbility(Ability ability, Modes modes, Game game, UUID controllerId) {
+    protected static boolean canChooseTargetAbility(Ability ability, Game game, UUID controllerId) {
+        return canChooseTargetAbility(ability, ability, game, controllerId);
+
+    }
+    protected static boolean canChooseTargetAbility(Ability targetSourceAbility, Ability modesSourceAbility, Game game, UUID controllerId) {
+        Ability abilityCopy;
+        Modes modes;
+        if (modesSourceAbility.getTargetAdjuster() != null){
+            abilityCopy = modesSourceAbility.copy();
+        } else {
+            abilityCopy = modesSourceAbility; //if not modifying the ability with the target adjuster, skip copying
+        }
+        modes = abilityCopy.getModes();
         int found = 0;
         for (Mode mode : modes.values()) {
             boolean validTargets = true;
+            if (abilityCopy.getTargetAdjuster() != null){
+                abilityCopy.getModes().setActiveMode(mode);
+                abilityCopy.getTargetAdjuster().adjustTargetsCheck(abilityCopy, game);
+            }
             for (Target target : mode.getTargets()) {
                 UUID abilityControllerId = controllerId;
                 if (target.getTargetController() != null) {
                     abilityControllerId = target.getTargetController();
                 }
-                if (!target.canChoose(abilityControllerId, ability, game)) {
+                if (!target.canChoose(abilityControllerId, targetSourceAbility, game)) {
                     validTargets = false;
                     break;
                 }

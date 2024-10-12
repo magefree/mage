@@ -45,7 +45,7 @@ public final class ExpelTheUnworthy extends CardImpl {
         this.getSpellAbility().addEffect(new ExpelTheUnworthyEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
-                new TargetCreaturePermanent()));
+                new TargetCreaturePermanent()).withCheckTargets());
     }
 
     private ExpelTheUnworthy(final ExpelTheUnworthy card) {

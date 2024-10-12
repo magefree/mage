@@ -37,7 +37,7 @@ public final class FightWithFire extends CardImpl {
         ));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
-                new TargetAnyTargetAmount(10)));
+                new TargetAnyTargetAmount(10)).withCheckTargets());
     }
 
     private FightWithFire(final FightWithFire card) {
