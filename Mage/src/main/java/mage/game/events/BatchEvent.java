@@ -18,7 +18,7 @@ public abstract class BatchEvent<T extends GameEvent> extends GameEvent {
     private final boolean singleTargetId;
     private final boolean singleSourceId;
     private final boolean singlePlayerId;
-
+    
     /**
      * @param eventType      specific type of event
      * @param singleSourceId if true, all included events must have same source id
@@ -63,6 +63,16 @@ public abstract class BatchEvent<T extends GameEvent> extends GameEvent {
             throw new IllegalStateException("Wrong code usage. Batch event initiated with single player id, but trying to add event with different player id");
         }
         this.events.add(event);
+    }
+
+    /**
+     * Call before addEvent to make sure the event
+     * matches the batch requisites.
+     */
+    public boolean matchEvent(T event) {
+        return (!singleSourceId || getSourceId().equals(event.getSourceId()))
+                && (!singleTargetId || getTargetId().equals(event.getTargetId()))
+                && (!singlePlayerId || getPlayerId().equals(event.getPlayerId()));
     }
 
     public Set<T> getEvents() {
