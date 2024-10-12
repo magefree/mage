@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
@@ -75,10 +74,7 @@ class ClaraOswaldEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!(event instanceof NumberOfTriggersEvent)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(((NumberOfTriggersEvent) event).getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         return permanent != null
                 && permanent.isControlledBy(source.getControllerId())
                 && permanent.hasSubtype(SubType.DOCTOR, game);

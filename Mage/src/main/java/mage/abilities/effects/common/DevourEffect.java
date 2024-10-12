@@ -125,6 +125,10 @@ public class DevourEffect extends ReplacementEffectImpl {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+
         String text = "Devour ";
 
         String filterMessage = filterDevoured.getMessage();

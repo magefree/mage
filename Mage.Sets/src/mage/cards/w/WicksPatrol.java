@@ -17,6 +17,7 @@ import mage.constants.SubType;
 import mage.game.Controllable;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetOpponentsCreaturePermanent;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -75,9 +76,11 @@ class WicksPatrolEffect extends OneShotEffect {
         if (player == null || player.millCards(3, source, game).size() < 3) {
             return false;
         }
-        game.fireReflexiveTriggeredAbility(new ReflexiveTriggeredAbility(
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
                 new BoostTargetEffect(WicksPatrolValue.instance, WicksPatrolValue.instance), false
-        ), source);
+        ).setTriggerPhrase("When you do, ");
+        ability.addTarget(new TargetOpponentsCreaturePermanent());
+        game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }
 }
@@ -87,7 +90,7 @@ enum WicksPatrolValue implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return Optional
+        return -1 * Optional
                 .ofNullable(sourceAbility)
                 .map(Controllable::getControllerId)
                 .map(game::getPlayer)
@@ -112,6 +115,11 @@ enum WicksPatrolValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return "X";
+        return "-X";
+    }
+
+    @Override
+    public int getSign() {
+        return -1;
     }
 }

@@ -54,13 +54,13 @@ public final class Main {
     private static final MageVersion version = new MageVersion(Main.class);
 
     // Server threads:
-    // - worker threads: creates for each connection, controls by maxPoolSize;
-    // - acceptor threads: processing requests to start a new connection, controls by numAcceptThreads;
-    // - backlog threads: processing waiting queue if maxPoolSize reached, controls by backlogSize;
+    // - acceptor threads: processing new connection from a client, controlled by numAcceptThreads;
+    // - worker threads (server threads): processing income requests from a client, controlled by maxPoolSize;
+    // - backlog: max size of income queue if maxPoolSize reached, controlled by backlogSize;
     // Usage hints:
     // - if maxPoolSize reached then new clients will freeze in connection dialog until backlog queue overflow;
-    // - so for active server must increase maxPoolSize to big value like "max online * 10" or enable worker idle timeout
-    // - worker idle time will free unused worker thread, so new client can connect;
+    // - so for active server must increase maxPoolSize to bigger value like "max online * 20"
+    // - worker idle timeout will free unused worker thread, so new client can connect again;
     private static final int SERVER_WORKER_THREAD_IDLE_TIMEOUT_SECS = 5 * 60; // no needs to config, must be enabled for all
 
     // arg settings can be setup by run script or IDE's program arguments like -xxx=yyy
@@ -85,6 +85,7 @@ public final class Main {
     // - fast game buttons;
     // - cheat commands;
     // - no deck validation;
+    // - no connection validation by pings (no disconnects on IDE's debugger usage)
     // - load any deck in sideboarding;
     // - simplified registration and login (no password check);
     // - debug main menu for GUI and rendering testing (must use -debug arg for client app);
@@ -342,6 +343,8 @@ public final class Main {
 
         @Override
         public void handleConnectionException(Throwable throwable, Client client) {
+            // called on client disconnect or on failed network (depends on server config's leasePeriod)
+
             String sessionId = client.getSessionId();
             Session session = managerFactory.sessionManager().getSession(sessionId).orElse(null);
             if (session == null) {
@@ -357,7 +360,7 @@ public final class Main {
             } else {
                 sessionInfo.append("[no user]");
             }
-            sessionInfo.append(" at ").append(session.getHost()).append(", sessionId: ").append(session.getId());
+            sessionInfo.append(" at ").append(session.getHost());
 
             // check disconnection reason
             // lease ping is inner jboss feature to check connection status
@@ -371,13 +374,13 @@ public final class Main {
             } else if (throwable == null) {
                 // lease timeout (ping), so server lost connection with a client
                 // must keep tables
-                logger.info("LOST CONNECTION - " + sessionInfo);
+                logger.info("LOST CONNECTION (bad network) - " + sessionInfo);
                 logger.debug("- cause: lease expired");
                 managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.LostConnection, true);
             } else {
                 // unknown error
                 // must keep tables
-                logger.info("LOST CONNECTION - " + sessionInfo);
+                logger.info("LOST CONNECTION (unknown) - " + sessionInfo);
                 logger.debug("- cause: unknown error - " + throwable);
                 managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.LostConnection, true);
             }
@@ -396,7 +399,8 @@ public final class Main {
             connector.addInvocationHandler("callback", serverInvocationHandler); // commands processing
 
             // connection monitoring and errors processing
-            connector.setLeasePeriod(managerFactory.configSettings().getLeasePeriod());
+            boolean isTestMode = ((MageServerImpl) target).getServerState().isTestMode();
+            connector.setLeasePeriod(isTestMode ? 3600 * 1000 : managerFactory.configSettings().getLeasePeriod());
             connector.addConnectionListener(new MageServerConnectionListener(managerFactory));
         }
 

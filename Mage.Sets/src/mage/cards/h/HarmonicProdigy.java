@@ -13,8 +13,8 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -72,10 +72,7 @@ class HarmonicProdigyEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!(event instanceof NumberOfTriggersEvent)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(((NumberOfTriggersEvent) event).getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         return permanent != null
                 && permanent.isControlledBy(source.getControllerId())
                 && (permanent.hasSubtype(SubType.SHAMAN, game)
@@ -85,7 +82,7 @@ class HarmonicProdigyEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
+        event.setAmount(CardUtil.overflowInc(event.getAmount(), 1));
         return false;
     }
 }

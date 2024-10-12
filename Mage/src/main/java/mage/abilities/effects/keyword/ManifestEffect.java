@@ -18,7 +18,10 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Manifest
@@ -115,6 +118,10 @@ public class ManifestEffect extends OneShotEffect {
     }
 
     public static List<Permanent> doManifestCards(Game game, Ability source, Player manifestPlayer, Set<Card> cardsToManifest, boolean cloakNotManifest) {
+        return doManifestCards(game, source, manifestPlayer, cardsToManifest, cloakNotManifest, false);
+    }
+
+    public static List<Permanent> doManifestCards(Game game, Ability source, Player manifestPlayer, Set<Card> cardsToManifest, boolean cloakNotManifest, boolean tapped) {
         if (cardsToManifest.isEmpty()) {
             return Collections.emptyList();
         }
@@ -149,7 +156,7 @@ public class ManifestEffect extends OneShotEffect {
         List<Permanent> manifested = new ArrayList<>();
         // move cards to battlefield as face down
         // TODO: possible buggy for multiple cards, see rule 701.34e - it require manifest one by one (card to check: Omarthis, Ghostfire Initiate)
-        manifestPlayer.moveCards(cardsToManifest, Zone.BATTLEFIELD, source, game, false, true, false, null);
+        manifestPlayer.moveCards(cardsToManifest, Zone.BATTLEFIELD, source, game, tapped, true, false, null);
         for (Card card : cardsToManifest) {
             Card battlefieldCard = BecomesFaceDownCreatureEffect.findDefaultCardSideForFaceDown(game, card);
 

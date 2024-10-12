@@ -65,6 +65,11 @@ class TheMindskinnerEffect extends PreventionEffectImpl {
     }
 
     @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.DAMAGE_PLAYER;
+    }
+
+    @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         int amount = event.getAmount();
         preventDamageAction(event, source, game);
@@ -79,6 +84,6 @@ class TheMindskinnerEffect extends PreventionEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return super.applies(event, source, game) && source.isControlledBy(game.getControllerId(event.getSourceId()));
+        return super.applies(event, source, game) && source.isControlledBy(game.getControllerId(event.getSourceId())) && game.getOpponents(game.getControllerId(event.getSourceId())).contains(event.getTargetId());
     }
 }

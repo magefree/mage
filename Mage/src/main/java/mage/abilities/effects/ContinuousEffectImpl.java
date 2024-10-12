@@ -291,7 +291,7 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        // YOUR turn checks
+        // YOUR turn checks, players who left the game
         // until end of turn - must be checked on cleanup step, see rules 514.2
         // other must checked here (active and leave players), see rules 800.4
         switch (duration) {

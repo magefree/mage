@@ -17,19 +17,12 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 
     private final JFileChooser fcSelectDeck;
 
-    /**
-     * Creates new form NewPlayerPanel
-     */
     public NewPlayerPanel() {
         initComponents();
         fcSelectDeck = new JFileChooser();
         fcSelectDeck.setAcceptAllFileFilterUsed(false);
         fcSelectDeck.addChoosableFileFilter(new DeckFileFilter("dck", "XMage's deck files (*.dck)"));
-        String deckPath = MageFrame.getPreferences().get("defaultDeckPath", "");
-        if (deckPath.isEmpty()) {
-            deckPath = ClientDefaultSettings.deckPath;
-        }
-        this.txtPlayerDeck.setText(deckPath);
+        this.txtPlayerDeck.setText("");
         this.txtPlayerName.setText(ClientDefaultSettings.computerName);
     }
 
@@ -62,7 +55,6 @@ public class NewPlayerPanel extends javax.swing.JPanel {
             return;
         }
         this.txtPlayerDeck.setText(path);
-        MageFrame.getPreferences().put("defaultDeckPath", path);
     }
 
     public String getPlayerName() {
@@ -77,7 +69,11 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         this.txtPlayerDeck.setText(deckFile);
     }
 
-    public int getLevel() {
+    public void setSkillLevel(int level) {
+        this.spnLevel.setValue(level);
+    }
+
+    public int getSkillLevel() {
         return (Integer) spnLevel.getValue();
     }
 

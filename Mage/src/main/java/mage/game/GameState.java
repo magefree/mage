@@ -692,6 +692,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         game.applyEffects();
     }
 
+    // remove beginning of end step effects
+    public void removeBoESEffects(Game game) {
+        effects.removeBeginningOfEndStepEffects(game);
+    }
+
     public void removeTurnStartEffect(Game game) {
         delayed.removeStartOfNewTurn(game);
     }
