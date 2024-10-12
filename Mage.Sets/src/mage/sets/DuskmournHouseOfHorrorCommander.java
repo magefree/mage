@@ -205,6 +205,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Read the Bones", 154, Rarity.COMMON, mage.cards.r.ReadTheBones.class));
         cards.add(new SetCardInfo("Reality Shift", 125, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Reanimate", 155, Rarity.RARE, mage.cards.r.Reanimate.class));
+        cards.add(new SetCardInfo("Redress Fate", 9, Rarity.RARE, mage.cards.r.RedressFate.class));
         cards.add(new SetCardInfo("Reliquary Tower", 295, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
         cards.add(new SetCardInfo("Retreat to Coralhelm", 126, Rarity.UNCOMMON, mage.cards.r.RetreatToCoralhelm.class));
         cards.add(new SetCardInfo("Return to Dust", 102, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
