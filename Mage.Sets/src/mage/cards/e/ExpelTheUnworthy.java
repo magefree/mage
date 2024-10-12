@@ -43,9 +43,9 @@ public final class ExpelTheUnworthy extends CardImpl {
         this.getSpellAbility().addEffect(new InfoEffect("Choose target creature with mana value 3 or less. If this spell was kicked, instead choose target creature."));
         this.getSpellAbility().addEffect(new ExileTargetEffect().setText("Exile the chosen creature"));
         this.getSpellAbility().addEffect(new ExpelTheUnworthyEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
-                new TargetCreaturePermanent()));
+                new TargetCreaturePermanent(filter), new TargetCreaturePermanent()));
     }
 
     private ExpelTheUnworthy(final ExpelTheUnworthy card) {

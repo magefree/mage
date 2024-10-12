@@ -27,9 +27,9 @@ public final class LongRiversPull extends CardImpl {
         // Counter target creature spell. If the gift was promised, instead counter target spell.
         this.getSpellAbility().addEffect(new CounterTargetEffect()
                 .setText("counter target creature spell. If the gift was promised, instead counter target spell"));
-        this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE));
+        this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(GiftWasPromisedCondition.TRUE,
-                new TargetSpell()));
+                new TargetSpell(StaticFilters.FILTER_SPELL_CREATURE), new TargetSpell()));
     }
 
     private LongRiversPull(final LongRiversPull card) {
