@@ -100,7 +100,7 @@ class MarchesaResoluteMonarchWatcher extends Watcher {
     }
 
     static boolean checkPlayer(Game game, Ability source) {
-        return game
+        return !game
                 .getState()
                 .getWatcher(MarchesaResoluteMonarchWatcher.class)
                 .players
