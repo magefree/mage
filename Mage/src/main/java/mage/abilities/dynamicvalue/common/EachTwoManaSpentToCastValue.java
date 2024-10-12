@@ -6,6 +6,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.constants.AbilityType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.ValuePhrasing;
 import mage.game.Game;
 import mage.util.CardUtil;
 import mage.watchers.common.ManaSpentToCastWatcher;
@@ -48,5 +49,17 @@ public enum EachTwoManaSpentToCastValue implements DynamicValue {
     @Override
     public String getMessage() {
         return "for each {" + this.coloredManaSymbol + "}{" + this.coloredManaSymbol + "} spent to cast it";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing phrasing) {
+        switch (phrasing) {
+            case FOR_EACH:
+                return "{" + this.coloredManaSymbol + "}{" + this.coloredManaSymbol + "} spent to cast it";
+            case X_HIDDEN:
+                return "";
+            default:
+                return "the number of {" + this.coloredManaSymbol + "}{" + this.coloredManaSymbol + "} spent to cast it";
+        }
     }
 }

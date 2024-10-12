@@ -11,10 +11,7 @@ import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
@@ -39,7 +36,7 @@ public final class MoggSquad extends CardImpl {
 
         // Mogg Squad gets -1/-1 for each other creature on the battlefield.
         DynamicValue amount = new SignInversionDynamicValue(new PermanentsOnBattlefieldCount(filter));
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield).withTextPhrasing(ValuePhrasing.FOR_EACH));
         this.addAbility(ability);
     }
 

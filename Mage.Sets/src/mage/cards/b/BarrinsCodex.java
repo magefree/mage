@@ -15,6 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
+import mage.constants.ValuePhrasing;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -31,7 +32,7 @@ public final class BarrinsCodex extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.PAGE.createInstance()), TargetController.YOU, true));
 
         //{4}, {T}, Sacrifice Barrin's Codex: Draw X cards, where X is the number of page counters on Barrin's Codex.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.PAGE)), new ManaCostsImpl<>("{4}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.PAGE), ValuePhrasing.X_IS), new ManaCostsImpl<>("{4}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

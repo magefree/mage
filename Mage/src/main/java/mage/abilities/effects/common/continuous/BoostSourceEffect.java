@@ -5,10 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -19,35 +16,43 @@ import mage.util.CardUtil;
 public class BoostSourceEffect extends ContinuousEffectImpl {
     private DynamicValue power;
     private DynamicValue toughness;
+    private final String sourceDescription;
 
     public BoostSourceEffect(int power, int toughness, Duration duration) {
         this(power, toughness, duration, "{this}");
     }
 
-    public BoostSourceEffect(int power, int toughness, Duration duration, String description) {
-        this(StaticValue.get(power), StaticValue.get(toughness), duration, description);
+    public BoostSourceEffect(int power, int toughness, Duration duration, String sourceDescription) {
+        this(StaticValue.get(power), StaticValue.get(toughness), duration, sourceDescription);
     }
 
     public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration) {
         this(power, toughness, duration, "{this}");
     }
 
-    public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, String description) {
+    public BoostSourceEffect(DynamicValue power, DynamicValue toughness, Duration duration, String sourceDescription) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
-        this.staticText = description + " gets " + CardUtil.getBoostText(power, toughness, duration);
+        this.sourceDescription = sourceDescription;
+        this.staticText = sourceDescription + " gets " + CardUtil.getBoostText(power, toughness, duration, ValuePhrasing.LEGACY);
     }
 
     protected BoostSourceEffect(final BoostSourceEffect effect) {
         super(effect);
         this.power = effect.power.copy();
         this.toughness = effect.toughness.copy();
+        this.sourceDescription = effect.sourceDescription;
     }
 
     @Override
     public BoostSourceEffect copy() {
         return new BoostSourceEffect(this);
+    }
+
+    public BoostSourceEffect withTextPhrasing(ValuePhrasing textPhrasing){
+        this.staticText = sourceDescription + " gets " + CardUtil.getBoostText(power, toughness, duration, textPhrasing);
+        return this;
     }
 
     @Override

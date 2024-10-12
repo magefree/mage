@@ -22,7 +22,7 @@ import mage.filter.common.FilterArtifactPermanent;
  */
 public final class GaeasAvenger extends CardImpl {
     
-    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts opponent control");
+    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts your opponents control");
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());

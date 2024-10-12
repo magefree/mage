@@ -29,7 +29,7 @@ public final class AvariciousDragon extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your draw step, draw an additional card.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1)
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1).withAdditionalPhrasing()
                 .setText("draw an additional card"), TargetController.YOU, false));
         // At the beginning of your end step, discard your hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DiscardHandControllerEffect(), TargetController.YOU, false));

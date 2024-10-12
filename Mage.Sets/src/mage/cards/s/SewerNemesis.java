@@ -14,10 +14,7 @@ import mage.abilities.effects.common.MillCardsTargetEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -76,7 +73,12 @@ class CardsInTargetOpponentsGraveyardCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "cards in the chosen player's graveyard";
+        return "";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        return "the number of cards in the chosen player's graveyard";
     }
 
     @Override
