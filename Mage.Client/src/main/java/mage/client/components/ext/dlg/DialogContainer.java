@@ -2,11 +2,13 @@ package mage.client.components.ext.dlg;
 
 import mage.client.components.ext.MessageDialogType;
 import mage.client.components.ext.dlg.impl.ChoiceDialog;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Game GUI: part of the old dialog system
@@ -15,6 +17,7 @@ import java.awt.image.BufferedImage;
  */
 public class DialogContainer extends JPanel {
 
+    //private static final Logger logger = Logger.getLogger(DialogContainer.class);
     private static final int X_OFFSET = 30;
     private static final int Y_OFFSET = 30;
     private final BufferedImage shadow = null;
@@ -29,6 +32,10 @@ public class DialogContainer extends JPanel {
     private boolean drawContainer = true;
     private final DialogManager.MTGDialogs dialogType;
 
+    public void setAlpha(int alpha) {
+        this.alpha = alpha;
+    }
+
     public DialogContainer(DialogManager.MTGDialogs dialogType, DlgParams params) {
         setOpaque(false);
         this.dialogType = dialogType;
@@ -36,56 +43,12 @@ public class DialogContainer extends JPanel {
         setLayout(null);
         drawContainer = true;
 
-        switch (dialogType) {
-
-            case MESSAGE: {
-                if (params.type == MessageDialogType.WARNING) {
-                    backgroundColor = new Color(255, 0, 0, 90);
-                } else {
-                    backgroundColor = new Color(0, 0, 0, 90);
-                }
-                alpha = 0;
-                break;
-            }
-
-            case CHOICE: {
-                backgroundColor = new Color(0, 0, 0, 110);
-                alpha = 0;
-                ChoiceDialog dlg = new ChoiceDialog(params, "Choose");
-                add(dlg);
-                dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-                dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-                break;
-            }
-
-            case GRAVEYARD: {
-                backgroundColor = new Color(0, 0, 0, 110);
-                alpha = 0;
-                ChoiceDialog dlg = new ChoiceDialog(params, "Graveyard");
-                add(dlg);
-                dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-                dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-                break;
-            }
-
-            case EXILE: {
-                backgroundColor = new Color(250, 250, 250, 50);
-                alpha = 0;
-                ChoiceDialog dlg = new ChoiceDialog(params, "Exile");
-                add(dlg);
-                dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-                dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-                break;
-            }
-
-            case EMBLEMS: {
-                backgroundColor = new Color(0, 0, 50, 110);
-                alpha = 0;
-                ChoiceDialog dlg = new ChoiceDialog(params, "Command Zone (Commander, Emblems and Planes)");
-                add(dlg);
-                dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
-                dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
-                break;
+        if(dialogType.getDialogClass() != null) {
+            try {
+                MTGDialog dialog = dialogType.getDialogClass().getDeclaredConstructor().newInstance();
+                backgroundColor = dialog.initialize(this, params, X_OFFSET, Y_OFFSET);
+            } catch(NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+//                logger.error("Error while creating DialogClass instance.");
             }
         }
     }
