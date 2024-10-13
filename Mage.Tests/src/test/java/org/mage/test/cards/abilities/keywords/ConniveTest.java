@@ -339,4 +339,35 @@ public class ConniveTest extends CardTestPlayerBase {
         // no connive due invalid target (ability fizzled)
         assertGraveyardCount(playerA, "Silvercoat Lion", 1);
     }
+
+    @Test
+    public void test_LKI_ChangeOfPlans_MultipleTargets() {
+        // Each of X target creatures you control connive. You may have any number of them phase out.
+        addCard(Zone.HAND, playerA, "Change of Plans"); // {X}{1}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.HAND, playerA, "Grizzly Bears", 1);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Razorclaw Bear", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
+        //
+        addCustomEffect_DestroyTarget(playerA);
+
+        // connive lion
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Change of Plans");
+        setChoice(playerA, "X=2");
+        addTarget(playerA, "Silvercoat Lion^Razorclaw Bear");
+        // destroy lion before connive resolve
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target destroy", "Silvercoat Lion");
+        setChoice(playerA, "Grizzly Bears"); // to discard first conni
+        setChoice(playerA, TestPlayer.CHOICE_SKIP); // no phase out
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        // spell is valid for 1 target
+        assertGraveyardCount(playerA, "Silvercoat Lion", 1);
+        assertPowerToughness(playerA, "Razorclaw Bear", 3 + 1, 3 + 1);
+        assertGraveyardCount(playerA, "Grizzly Bears", 1);
+    }
 }
