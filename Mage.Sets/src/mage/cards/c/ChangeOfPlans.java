@@ -69,7 +69,7 @@ class ChangeOfPlansEffect extends OneShotEffect {
                 .getTargetPointer()
                 .getTargets(game, source)
                 .stream()
-                .map(game::getPermanent)
+                .map(game::getPermanentOrLKIBattlefield)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
         if (permanents.isEmpty()) {
