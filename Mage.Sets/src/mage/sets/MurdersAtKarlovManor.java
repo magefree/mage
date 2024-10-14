@@ -484,15 +484,18 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         cards.add(new SetCardInfo("Yarus, Roar of the Old Gods", 375, Rarity.RARE, mage.cards.y.YarusRoarOfTheOldGods.class, NON_FULL_USE_VARIOUS));
     }
 
-    // @Override
-    // protected void generateBoosterMap() {
-        // super.generateBoosterMap();
-        // CardRepository
-                // .instance
-                // .findCards(new CardCriteria().setCodes("SPG"))
-                // .stream()
-                // .forEach(cardInfo -> inBoosterMap.put("SPG_" + cardInfo.getCardNumber(), cardInfo));
-    // }
+    @Override
+    protected void generateBoosterMap() {
+        super.generateBoosterMap();
+        for( let cn = 19 ; cn < 29 ; cn++ ){
+            inBoosterMap.put("SPG_" + cn, CardRepository.instance.findCard("SPG", "" + cn));
+        }
+        String[] lstCards = {"XLN_91", "DKA_4", "MH2_191", "HOU_149", "RAV_277", "ARB_68", "DIS_173", "ISD_183", "DOM_130", "MH2_46", "RNA_182", "ONS_272", "SOM_96", "VOW_207", "MBS_10", "UMA_138", "DDU_50", "2X2_17", "KLD_221", "M14_213", "UMA_247", "CLB_85", "JOU_153", "APC_117", "STX_220", "SOI_262", "DIS_33", "DKA_143", "ELD_107", "C16_47", "STX_64", "M20_167", "DST_40", "ONS_89", "WAR_54", "MRD_99", "SOM_98", "C21_19", "MH1_21", "RTR_140"};
+        for( String itm : lstCards ){
+            int i = itm.indexOf("_");
+            inBoosterMap.put(itm, CardRepository.instance.findCard(itm.substring(0,i), itm.substring(i+1)));
+        }
+    }
 
     @Override
     public BoosterCollator createCollator() {
