@@ -5,6 +5,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.counters.CounterType;
 
 public class InvasionOfFioraTest extends CardTestPlayerBase {
 
@@ -61,7 +62,7 @@ public class InvasionOfFioraTest extends CardTestPlayerBase {
         waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
 
         // Researcher got +1/+1 counter from Caress's life gain
-        checkPT("Researcher PT", 2, PhaseStep.BEGIN_COMBAT, playerB, researcher, 3, 3);
+        checkPermanentCounters("Researcher gained one counter", 2, PhaseStep.BEGIN_COMBAT, playerB, researcher, CounterType.P1P1, 1);
         attack(2, playerB, researcher);
 
         checkLife("PlayerA life after turn 2", 2, PhaseStep.END_TURN, playerA, 17);
@@ -74,7 +75,7 @@ public class InvasionOfFioraTest extends CardTestPlayerBase {
         // Marchesa attacks, remove counters from Researcher
         attack(3, playerA, marchesa);
         addTarget(playerA, researcher);
-        checkPT("Researcher PT", 3, PhaseStep.END_COMBAT, playerB, researcher, 2, 2);
+        checkPermanentCounters("Researcher lost its counter", 3, PhaseStep.END_COMBAT, playerB, researcher, CounterType.P1P1, 0);
 
         // Turn 4: B skips attack
         attackSkip(4, playerB);
