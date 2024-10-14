@@ -3,17 +3,16 @@ package mage.cards.p;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
+import mage.abilities.effects.common.PutOntoBattlefieldTargetEffect;
 import mage.abilities.effects.common.SacrificeOpponentsEffect;
-import mage.abilities.effects.common.continuous.AddCreatureTypeAdditionEffect;
+import mage.abilities.effects.common.continuous.AddCardSubTypeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;
@@ -33,9 +32,11 @@ public final class PortalToPhyrexia extends CardImpl {
 
         // At the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control. It's a Phyrexian in addition to its other types.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldTargetEffect(), TargetController.YOU, false
+                new PutOntoBattlefieldTargetEffect(false).withContinuousEffects(
+                        "It's a Phyrexian in addition to its other types",
+                        new AddCardSubTypeTargetEffect(SubType.PHYREXIAN, Duration.Custom)
+                ), TargetController.YOU, false
         );
-        ability.addEffect(new AddCreatureTypeAdditionEffect(SubType.PHYREXIAN, false));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
     }
