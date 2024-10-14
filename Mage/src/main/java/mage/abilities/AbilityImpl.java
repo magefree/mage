@@ -155,6 +155,18 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
+    public void newId(UUID newID) {
+        if (!(this instanceof MageSingleton)) {
+            this.id = newID;
+        }
+        getEffects().newId(newID);
+
+        for (Ability sub : getSubAbilities()) {
+            sub.newId();
+        }
+    }
+
+    @Override
     public void newOriginalId() {
         this.id = UUID.randomUUID();
         this.originalId = id;
