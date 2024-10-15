@@ -46,6 +46,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Black Sun's Zenith", 126, Rarity.RARE, mage.cards.b.BlackSunsZenith.class));
         cards.add(new SetCardInfo("Bloodthirsty Blade", 225, Rarity.UNCOMMON, mage.cards.b.BloodthirstyBlade.class));
         cards.add(new SetCardInfo("Bojuka Bog", 250, Rarity.COMMON, mage.cards.b.BojukaBog.class));
+        cards.add(new SetCardInfo("Boltbender", 30, Rarity.RARE, mage.cards.b.Boltbender.class));
         cards.add(new SetCardInfo("Boros Garrison", 251, Rarity.UNCOMMON, mage.cards.b.BorosGarrison.class));
         cards.add(new SetCardInfo("Boros Reckoner", 201, Rarity.RARE, mage.cards.b.BorosReckoner.class));
         cards.add(new SetCardInfo("Brainstorm", 96, Rarity.COMMON, mage.cards.b.Brainstorm.class));
