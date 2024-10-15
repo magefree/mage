@@ -9,6 +9,8 @@ import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.cost.SpellsCostModificationThatTargetSourceEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -22,6 +24,10 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class CharixTheRagingIsle extends CardImpl {
+
+    private static final DynamicValue xValue3 = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.ISLAND));
+    private static final Hint hint = new ValueHint("Islands you control", xValue3);
+
 
     private static final FilterCard filter = new FilterCard("Spells");
     private static final FilterPermanent filter2 = new FilterControlledPermanent(SubType.ISLAND);
@@ -46,6 +52,7 @@ public final class CharixTheRagingIsle extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(
                 xValue, xValue2, Duration.EndOfTurn
         ).setText("{this} gets +X/-X until end of turn, where X is the number of Islands you control"), new GenericManaCost(3)));
+        this.getSpellAbility().addHint(hint);
     }
 
     private CharixTheRagingIsle(final CharixTheRagingIsle card) {

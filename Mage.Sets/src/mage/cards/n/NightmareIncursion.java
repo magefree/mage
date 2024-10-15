@@ -1,7 +1,11 @@
 package mage.cards.n;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -25,12 +29,16 @@ import java.util.UUID;
  */
 public final class NightmareIncursion extends CardImpl {
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.SWAMP));
+    private static final Hint hint = new ValueHint("Swamps you control", xValue);
+
     public NightmareIncursion(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{B}");
 
         // Search target player's library for up to X cards, where X is the number of Swamps you control, and exile them. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new NightmareIncursionEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addHint(hint);
     }
 
     private NightmareIncursion(final NightmareIncursion card) {

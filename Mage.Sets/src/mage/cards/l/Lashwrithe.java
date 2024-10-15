@@ -1,23 +1,30 @@
 
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostEquippedEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.LivingWeaponAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author North
  */
 public final class Lashwrithe extends CardImpl {
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.SWAMP));
+    private static final Hint hint = new ValueHint("Swamps you control", xValue);
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Swamp you control");
 
@@ -27,7 +34,7 @@ public final class Lashwrithe extends CardImpl {
     }
 
     public Lashwrithe(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
+        super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.subtype.add(SubType.EQUIPMENT);
 
         // Living weapon (When this Equipment enters the battlefield, create a 0/0 black Phyrexian Germ creature token, then attach this to it.)
@@ -39,6 +46,7 @@ public final class Lashwrithe extends CardImpl {
 
         // Equip {B/P}{B/P} (Phyrexian Black can be paid with either Black or 2 life.)
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{B/P}{B/P}"), false));
+        this.getSpellAbility().addHint(hint);
     }
 
     private Lashwrithe(final Lashwrithe card) {

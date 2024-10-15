@@ -1,11 +1,12 @@
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,11 +15,16 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author awjackson
  */
 public final class NessianGameWarden extends CardImpl {
+
+    private static final DynamicValue xValue2 = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.FOREST));
+    private static final Hint hint = new ValueHint("Forests you control", xValue2);
+
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forests you control");
 
@@ -39,6 +45,7 @@ public final class NessianGameWarden extends CardImpl {
         // You may reveal a creature card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new LookLibraryAndPickControllerEffect(
                 xValue, 1, StaticFilters.FILTER_CARD_CREATURE_A, PutCards.HAND, PutCards.BOTTOM_ANY)));
+        this.getSpellAbility().addHint(hint);
     }
 
     private NessianGameWarden(final NessianGameWarden card) {

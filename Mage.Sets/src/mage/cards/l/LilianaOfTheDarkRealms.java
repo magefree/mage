@@ -2,10 +2,14 @@ package mage.cards.l;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -24,6 +28,9 @@ import java.util.UUID;
  * @author North
  */
 public final class LilianaOfTheDarkRealms extends CardImpl {
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.SWAMP));
+    private static final Hint hint = new ValueHint("Swamps you control", xValue);
 
     private static final FilterLandCard filter = new FilterLandCard("Swamp card");
 
@@ -48,6 +55,7 @@ public final class LilianaOfTheDarkRealms extends CardImpl {
 
         // -6: You get an emblem with "Swamps you control have '{tap}: Add {B}{B}{B}{B}.'"
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new LilianaOfTheDarkRealmsEmblem()), -6));
+        this.getSpellAbility().addHint(hint);
     }
 
     private LilianaOfTheDarkRealms(final LilianaOfTheDarkRealms card) {

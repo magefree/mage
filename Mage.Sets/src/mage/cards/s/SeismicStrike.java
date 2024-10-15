@@ -2,8 +2,12 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -17,6 +21,9 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class SeismicStrike extends CardImpl {
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.MOUNTAIN));
+    private static final Hint hint = new ValueHint("Mountains you control", xValue);
+
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains you control");
 
     static {
@@ -29,6 +36,7 @@ public final class SeismicStrike extends CardImpl {
         this.getSpellAbility().addEffect(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter))
                 .setText("{this} deals damage to target creature equal to the number of Mountains you control."));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addHint(hint);
     }
 
     private SeismicStrike(final SeismicStrike card) {
