@@ -90,13 +90,13 @@ public class BeginningOfPostCombatMainTriggeredAbility extends TriggeredAbilityI
     private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
-                return "At the beginning of your postcombat main phase, " + generateZoneString();
+                return "At the beginning of each of your postcombat main phases, " + generateZoneString();
             case OPPONENT:
-                return "At the beginning of each opponent's postcombat main phase, " + generateZoneString();
+                return "At the beginning of each of your opponent's postcombat main phases, " + generateZoneString();
             case ANY:
-                return "At the beginning of each player's postcombat main phase, " + generateZoneString();
+                return "At the beginning of each postcombat main phase, " + generateZoneString();
             case ENCHANTED:
-                return "At the beginning of enchanted player's postcombat main phase, " + generateZoneString();
+                return "At the beginning of each of enchanted player's postcombat main phases, " + generateZoneString();
         }
         return "";
     }
