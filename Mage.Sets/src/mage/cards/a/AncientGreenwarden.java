@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -75,26 +76,25 @@ class AncientGreenwardenEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!(event instanceof NumberOfTriggersEvent)) {
-            return false;
-        }
-        NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
+        // Only triggers for the source controller
         if (!source.isControlledBy(event.getPlayerId())) {
             return false;
         }
-        GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+        GameEvent sourceEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
+        // Only EtB triggers of lands
         if (sourceEvent == null
                 || sourceEvent.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD
                 || !(sourceEvent instanceof EntersTheBattlefieldEvent)
                 || !((EntersTheBattlefieldEvent) sourceEvent).getTarget().isLand(game)) {
             return false;
         }
-        return game.getPermanent(numberOfTriggersEvent.getSourceId()) != null;
+        // Only for triggers of permanents
+        return game.getPermanent(event.getSourceId()) != null;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
+        event.setAmount(CardUtil.overflowInc(event.getAmount(), 1));
         return false;
     }
 }

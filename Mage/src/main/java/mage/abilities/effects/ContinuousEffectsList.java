@@ -78,7 +78,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
             T entry = i.next();
             boolean canRemove;
             switch (entry.getDuration()) {
-                case UntilTheNextEndStep:
+                case UntilNextEndStep:
                     canRemove = true;
                     break;
                 case UntilYourNextEndStep:
@@ -192,7 +192,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                         }
                         break;
                     case EndOfTurn:
-                    case UntilTheNextEndStep:
+                    case UntilNextEndStep:
                         // end of turn discards on cleanup steps
                         // 514.2
                         break;

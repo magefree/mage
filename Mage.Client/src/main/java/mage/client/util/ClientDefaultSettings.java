@@ -15,7 +15,6 @@ public final class ClientDefaultSettings {
     public static final CardDimensions dimensions;
     public static final CardDimensions dimensionsEnlarged;
 
-    public static final String deckPath;
     public static final String otherPlayerIndex;
     public static final String computerName;
 
@@ -26,7 +25,6 @@ public final class ClientDefaultSettings {
         cardScalingFactor = 0.4;
         cardScalingFactorEnlarged = 0.5;
         handScalingFactor = 1.3;
-        deckPath = "";
         otherPlayerIndex = "1";  // combobox default, example: 0: Human, 1: Computer - mad, 2: Computer - Draft Bot
         computerName = "Computer";
         dimensions = new CardDimensions(cardScalingFactor);

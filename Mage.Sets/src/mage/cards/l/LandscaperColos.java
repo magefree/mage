@@ -39,7 +39,7 @@ public final class LandscaperColos extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new PutOnLibraryTargetEffect(
                 false, "put target card from an opponent's graveyard on the bottom of their library"
         ));
-        ability.addTarget(new TargetCardInGraveyard());
+        ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
 
         // Basic landcycling {1}{W}
