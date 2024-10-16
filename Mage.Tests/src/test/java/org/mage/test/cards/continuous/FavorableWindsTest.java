@@ -33,12 +33,12 @@ public class FavorableWindsTest extends CardTestPlayerBase {
         int countSkySpirit = 0;
         int countMerfolkLooter = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(playerA.getId())) {
-            if (permanent.getName().equals("Sky Spirit")) {
+            if (permanent.hasName("Sky Spirit", currentGame)) {
                 countSkySpirit++;
                 // should get +1/+1, original is 2/2
                 Assert.assertEquals("Power is not the same", 3, permanent.getPower().getValue());
                 Assert.assertEquals("Toughness is not the same", 3, permanent.getToughness().getValue());
-            } else if (permanent.getName().equals("Merfolk Looter")) {
+            } else if (permanent.hasName("Merfolk Looter", currentGame)) {
                 countMerfolkLooter++;
                 // should NOT get +1/+1, original is 1/1
                 Assert.assertEquals("Power is not the same", 1, permanent.getPower().getValue());
@@ -51,12 +51,12 @@ public class FavorableWindsTest extends CardTestPlayerBase {
         countSkySpirit = 0;
         countMerfolkLooter = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(playerB.getId())) {
-            if (permanent.getName().equals("Sky Spirit")) {
+            if (permanent.hasName("Sky Spirit", currentGame)) {
                 countSkySpirit++;
                 // should NOT +1/+1, original is 2/2
                 Assert.assertEquals("Power is not the same", 2, permanent.getPower().getValue());
                 Assert.assertEquals("Toughness is not the same", 2, permanent.getToughness().getValue());
-            } else if (permanent.getName().equals("Merfolk Looter")) {
+            } else if (permanent.hasName("Merfolk Looter", currentGame)) {
                 countMerfolkLooter++;
                 // should NOT get +1/+1, original is 1/1
                 Assert.assertEquals("Power is not the same", 1, permanent.getPower().getValue());
@@ -88,12 +88,12 @@ public class FavorableWindsTest extends CardTestPlayerBase {
         int countSkySpirit = 0;
         int countMerfolkLooter = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(playerA.getId())) {
-            if (permanent.getName().equals("Sky Spirit")) {
+            if (permanent.hasName("Sky Spirit", currentGame)) {
                 countSkySpirit++;
                 // should get +1/+1, original is 2/2
                 Assert.assertEquals("Power is not the same", 5, permanent.getPower().getValue());
                 Assert.assertEquals("Toughness is not the same", 5, permanent.getToughness().getValue());
-            } else if (permanent.getName().equals("Merfolk Looter")) {
+            } else if (permanent.hasName("Merfolk Looter", currentGame)) {
                 countMerfolkLooter++;
                 // should NOT get +1/+1, original is 1/1
                 Assert.assertEquals("Power is not the same", 1, permanent.getPower().getValue());
@@ -106,12 +106,12 @@ public class FavorableWindsTest extends CardTestPlayerBase {
         countSkySpirit = 0;
         countMerfolkLooter = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(playerB.getId())) {
-            if (permanent.getName().equals("Sky Spirit")) {
+            if (permanent.hasName("Sky Spirit", currentGame)) {
                 countSkySpirit++;
                 // should NOT +1/+1, original is 2/2
                 Assert.assertEquals("Power is not the same", 2, permanent.getPower().getValue());
                 Assert.assertEquals("Toughness is not the same", 2, permanent.getToughness().getValue());
-            } else if (permanent.getName().equals("Merfolk Looter")) {
+            } else if (permanent.hasName("Merfolk Looter", currentGame)) {
                 countMerfolkLooter++;
                 // should NOT get +1/+1, original is 1/1
                 Assert.assertEquals("Power is not the same", 1, permanent.getPower().getValue());

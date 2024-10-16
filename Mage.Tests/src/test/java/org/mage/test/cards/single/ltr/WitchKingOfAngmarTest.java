@@ -35,7 +35,7 @@ public class WitchKingOfAngmarTest extends CardTestPlayerBase {
 
         runCode("check ring bear", 2, PhaseStep.POSTCOMBAT_MAIN, playerA, (info, player, game) -> {
             Assert.assertNotNull(playerA.getRingBearer(game));
-            Assert.assertEquals(witchKing, playerA.getRingBearer(game).getName());
+            Assert.assertTrue(playerA.getRingBearer(game).hasName(witchKing, currentGame));
             Assert.assertNull(playerB.getRingBearer(game));
         });
 

@@ -334,7 +334,7 @@ public class CollectEvidenceTest extends CardTestPlayerBase {
 
         // before
         runCode("before", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            Card card = playerA.getHand().getCards(game).stream().filter(c -> c.getName().equals(bite)).findFirst().orElse(null);
+            Card card = playerA.getHand().getCards(game).stream().filter(c -> c.hasName(bite, currentGame)).findFirst().orElse(null);
             Assert.assertNotNull(card);
             Ability ability = card.getAbilities(game).stream().filter(a -> a instanceof CollectEvidenceAbility).findFirst().orElse(null);
             Assert.assertNotNull(ability);

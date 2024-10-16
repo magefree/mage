@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
@@ -50,7 +49,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
         if (spellweaver != null) {
             attachedToCard = playerB.getGraveyard().get(spellweaver.getAttachedTo(), currentGame);
         }
-        Assert.assertTrue(SPELLWEAVER_VOLUTE + " has to be attached to Lightning Bolt in graveyard", attachedToCard != null && attachedToCard.getName().equals(LIGHTNING_BOLT));
+        Assert.assertTrue(SPELLWEAVER_VOLUTE + " has to be attached to Lightning Bolt in graveyard", attachedToCard != null && attachedToCard.hasName(LIGHTNING_BOLT, currentGame));
     }
 
     /**
@@ -94,7 +93,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
         if (spellweaver != null) {
             attachedToCard = playerA.getGraveyard().get(spellweaver.getAttachedTo(), currentGame);
         }
-        Assert.assertTrue(SPELLWEAVER_VOLUTE + " has to be attached to Aerial Volley in graveyard", attachedToCard != null && attachedToCard.getName().equals("Aerial Volley"));
+        Assert.assertTrue(SPELLWEAVER_VOLUTE + " has to be attached to Aerial Volley in graveyard", attachedToCard != null && attachedToCard.hasName("Aerial Volley", currentGame));
 
         assertHandCount(playerA, 1);
 
@@ -139,7 +138,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, SPELLWEAVER_VOLUTE, 1);
 
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
-            if (card.getName().equals(LIGHTNING_BOLT)) {
+            if (card.hasName(LIGHTNING_BOLT, currentGame)) {
                 Assert.assertTrue(LIGHTNING_BOLT + " may not have any attachments", card.getAttachments().isEmpty());
 
             }
@@ -183,7 +182,7 @@ public class EnchantingGraveyardCardsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, SPELLWEAVER_VOLUTE, 0);
 
         for (Card card : playerB.getGraveyard().getCards(currentGame)) {
-            if (card.getName().equals(LIGHTNING_BOLT)) {
+            if (card.hasName(LIGHTNING_BOLT, currentGame)) {
                 Assert.assertTrue(LIGHTNING_BOLT + " may not have any attachments", card.getAttachments().isEmpty());
 
             }

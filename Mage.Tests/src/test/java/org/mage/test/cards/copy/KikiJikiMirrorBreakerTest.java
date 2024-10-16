@@ -148,7 +148,7 @@ public class KikiJikiMirrorBreakerTest extends CardTestPlayerBase {
 
         Permanent kikiCopy = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, currentGame)) {
-            if (permanent.getName().equals("Silvercoat Lion") && (permanent instanceof PermanentToken)) {
+            if (permanent.hasName("Silvercoat Lion", currentGame) && (permanent instanceof PermanentToken)) {
                 kikiCopy = permanent;
                 break;
             }

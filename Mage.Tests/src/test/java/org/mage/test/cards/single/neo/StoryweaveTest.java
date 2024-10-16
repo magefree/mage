@@ -67,7 +67,7 @@ public class StoryweaveTest extends CardTestPlayerBase {
                 .getBattlefield()
                 .getAllActivePermanents()
                 .stream()
-                .filter(permanent -> "Centaur Token".equals(permanent.getName()))
+                .filter(permanent -> permanent.hasName("Centaur Token", currentGame))
                 .noneMatch(permanent -> permanent.getCounters(currentGame).getCount(CounterType.P1P1) != 2));
     }
 
@@ -97,7 +97,7 @@ public class StoryweaveTest extends CardTestPlayerBase {
                 .getBattlefield()
                 .getAllActivePermanents()
                 .stream()
-                .filter(permanent -> "Centaur Token".equals(permanent.getName()))
+                .filter(permanent -> permanent.hasName("Centaur Token", currentGame))
                 .noneMatch(permanent -> permanent.getCounters(currentGame).getCount(CounterType.P1P1) != 0));
     }
 }

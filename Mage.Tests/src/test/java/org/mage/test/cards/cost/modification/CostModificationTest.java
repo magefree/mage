@@ -427,7 +427,7 @@ public class CostModificationTest extends CardTestPlayerBase {
 
         // Huatli: check x cost changes
         runCode("check x cost", 3, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            Permanent huatli = game.getBattlefield().getAllActivePermanents().stream().filter(p -> p.getName().equals("Huatli, Warrior Poet")).findFirst().orElse(null);
+            Permanent huatli = game.getBattlefield().getAllActivePermanents().stream().filter(p -> p.hasName("Huatli, Warrior Poet", currentGame)).findFirst().orElse(null);
             Assert.assertNotNull("must have huatli on battlefield", huatli);
             LoyaltyAbility ability = (LoyaltyAbility) huatli.getAbilities(game).stream().filter(a -> a.getRule().startsWith("-X: ")).findFirst().orElse(null);
             Assert.assertNotNull("must have loyalty ability", ability);

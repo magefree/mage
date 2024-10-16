@@ -91,13 +91,13 @@ public class AddCardApiTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Memorial to Glory", 2);
         getBattlefieldCards(playerA)
                 .stream()
-                .filter(info -> info.getCard().getName().equals("Memorial to Glory"))
+                .filter(info -> info.getCard().hasName("Memorial to Glory", currentGame))
                 .forEach(info -> Assert.assertEquals("40K", info.getCard().getExpansionSetCode()));
 
         assertPermanentCount(playerA, "Plains", 2);
         getBattlefieldCards(playerA)
                 .stream()
-                .filter(info -> info.getCard().getName().equals("Plains"))
+                .filter(info -> info.getCard().hasName("Plains", currentGame))
                 .forEach(info -> Assert.assertEquals("PANA", info.getCard().getExpansionSetCode()));
     }
 

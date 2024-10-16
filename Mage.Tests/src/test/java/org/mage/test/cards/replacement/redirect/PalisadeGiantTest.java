@@ -43,7 +43,7 @@ public class PalisadeGiantTest extends CardTestPlayerBase {
         
         int damage = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(playerA.getId())) {
-            if (permanent.getName().equals("Palisade Giant")) {
+            if (permanent.hasName("Palisade Giant", currentGame)) {
                 damage += permanent.getDamage();
             }
         }

@@ -30,7 +30,7 @@ public class GristTheHungerTideTest extends CardTestPlayerBase {
         execute();
 
         for (Card card : currentGame.getCards()) {
-            if (!card.getName().equals(grist)) {
+            if (!card.hasName(grist, currentGame)) {
                 continue;
             }
             Zone zone = currentGame.getState().getZone(card.getId());
@@ -56,7 +56,7 @@ public class GristTheHungerTideTest extends CardTestPlayerBase {
         execute();
 
         for (Card card : currentGame.getCards()) {
-            if (!card.getName().equals(grist)) {
+            if (!card.hasName(grist, currentGame)) {
                 continue;
             }
             Assert.assertEquals("", Zone.EXILED, currentGame.getState().getZone(card.getId()));

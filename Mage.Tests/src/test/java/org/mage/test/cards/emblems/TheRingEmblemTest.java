@@ -1,6 +1,5 @@
 package org.mage.test.cards.emblems;
 
-import mage.MageObject;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.command.emblems.TheRingEmblem;
@@ -33,15 +32,15 @@ public class TheRingEmblemTest extends CardTestPlayerBase {
         boolean hasEmblem = ringEmblems.stream().anyMatch(e -> e.isControlledBy(player.getId()));
         Assert.assertEquals(info + " - ring emblem for " + player.getName(), needEmblem, hasEmblem);
 
-        String hasBearer = Optional.ofNullable(player.getRingBearer(currentGame)).map(MageObject::getName).orElse(null);
-        Assert.assertEquals(info + " - ring bearer for " + player.getName(), needBearer, hasBearer);
+        boolean hasBearer = Optional.ofNullable(player.getRingBearer(currentGame)).map(permanent -> permanent.hasName(needBearer, currentGame)).orElse(false);
+        Assert.assertTrue(info + " - ring bearer for " + player.getName(), hasBearer);
     }
 
     private void assertPermanent(String info, Player player, String needName, boolean needLegendary) {
         Permanent permanent = currentGame.getBattlefield().getAllActivePermanents(player.getId())
                 .stream()
                 .filter(p -> p.isControlledBy(player.getId()))
-                .filter(p -> p.getName().equals(needName))
+                .filter(p -> p.hasName(needName, currentGame))
                 .findFirst()
                 .orElse(null);
         Assert.assertNotNull(info + " - permanent " + needName + " for player " + player.getName() + " must exist", permanent);

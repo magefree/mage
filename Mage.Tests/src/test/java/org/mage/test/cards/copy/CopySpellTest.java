@@ -634,12 +634,12 @@ public class CopySpellTest extends CardTestPlayerBase {
 
         // counters checks, have to check if it's a card or a token since token copies have isCopy()=false
         int originalCounters = currentGame.getBattlefield().getAllActivePermanents().stream()
-                .filter(p -> p.getName().equals("Grenzo, Dungeon Warden"))
+                .filter(p -> p.hasName("Grenzo, Dungeon Warden", currentGame))
                 .filter(p -> p instanceof PermanentCard)
                 .mapToInt(p -> p.getCounters(currentGame).getCount(CounterType.P1P1))
                 .sum();
         int copyCounters = currentGame.getBattlefield().getAllActivePermanents().stream()
-                .filter(p -> p.getName().equals("Grenzo, Dungeon Warden"))
+                .filter(p -> p.hasName("Grenzo, Dungeon Warden", currentGame))
                 .filter(p -> p instanceof PermanentToken)
                 .mapToInt(p -> p.getCounters(currentGame).getCount(CounterType.P1P1))
                 .sum();

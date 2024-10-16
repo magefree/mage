@@ -91,7 +91,7 @@ public class ShiftingWoodlandTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.END_COMBAT, playerA, "Shoot the Sheriff", "Grizzly Bears", true);
 
         runCode("check that the copy effect ended", 1, PhaseStep.END_COMBAT, playerA, (info, player, game) -> {
-            Card card = player.getGraveyard().getCards(game).stream().filter(c -> c.getName().equals(woodland)).findFirst().orElse(null);
+            Card card = player.getGraveyard().getCards(game).stream().filter(c -> c.hasName(woodland, currentGame)).findFirst().orElse(null);
             if (card == null) {
                 Assert.fail("Shifting Woodland is not in the graveyard");
             }
