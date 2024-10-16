@@ -1080,7 +1080,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         GameView gameView = getGameView(playerA);
         PermanentView permanentView = gameView.getMyPlayer().getBattlefield().values()
                 .stream()
-                .filter(p -> p.hasName("Tergrid, God of Fright", currentGame))
+                .filter(p -> p.getName().equals("Tergrid, God of Fright"))
                 .findFirst()
                 .orElse(null);
         Assert.assertNotNull(permanentView);
