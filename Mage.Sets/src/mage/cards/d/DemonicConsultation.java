@@ -10,7 +10,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -73,7 +72,7 @@ class DemonicConsultationEffect extends OneShotEffect {
         for (Card card : controller.getLibrary().getCards(game)) {
             cardsToReveal.add(card);
             // Put that card into your hand
-            if (CardUtil.haveSameNames(card.getName(), cardName)) {
+            if (card.hasName(cardName, game)) {
                 cardToHand = card;
                 break;
             }

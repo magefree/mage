@@ -1,33 +1,33 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
  */
 public final class PatternMatcher extends CardImpl {
+
+    private static final FilterCard filter = new FilterCreatureCard("a creature card with the same name as another creature you control");
+
+    static {
+        filter.add(RegularExpression.instance);
+    }
 
     public PatternMatcher(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
@@ -37,7 +37,9 @@ public final class PatternMatcher extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Pattern Matcher enters the battlefield, you may search your library for a creature card with the same name as another creature you control, reveal it, put it into your hand, then shuffle your library.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new RegularExpression(), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true
+        ));
     }
 
     private PatternMatcher(final PatternMatcher card) {
@@ -50,45 +52,19 @@ public final class PatternMatcher extends CardImpl {
     }
 }
 
-class RegularExpression extends OneShotEffect {
-
-    RegularExpression() {
-        super(Outcome.Benefit);
-        staticText = "search your library for a card with the same name as another creature you control, " +
-                "reveal it, put it into your hand, then shuffle.";
-    }
-
-    private RegularExpression(final RegularExpression effect) {
-        super(effect);
-    }
+enum RegularExpression implements ObjectSourcePlayerPredicate<Card> {
+    instance;
 
     @Override
-    public RegularExpression copy() {
-        return new RegularExpression(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        List<NamePredicate> predicates = game
+    public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
+        return game
+                .getState()
                 .getBattlefield()
                 .getActivePermanents(
-                        StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE,
-                        source.getControllerId(), source, game
-                ).stream()
-                .map(Permanent::getName)
-                .filter(Objects::nonNull)
-                .filter(s -> !s.isEmpty())
-                .map(NamePredicate::new)
-                .collect(Collectors.toList());
-        FilterCard filter
-                = new FilterCard("a creature card with the same name as another creature you control");
-        filter.add(Predicates.or(predicates));
-        return new SearchLibraryPutInHandEffect(
-                new TargetCardInLibrary(filter), true
-        ).apply(game, source);
+                        StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES,
+                        input.getPlayerId(), input.getSource(), game
+                )
+                .stream()
+                .anyMatch(permanent -> permanent.sharesName(input.getObject(), game));
     }
 }

@@ -11,12 +11,11 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -72,9 +71,8 @@ class SecretSalvageEffect extends OneShotEffect {
             return false;
         }
         controller.moveCards(targetCard, Zone.EXILED, source, game);
-        String nameToSearch = CardUtil.getCardNameForSameNameSearch(targetCard);
-        FilterCard nameFilter = new FilterCard("card named " + nameToSearch);
-        nameFilter.add(new NamePredicate(nameToSearch));
+        FilterCard nameFilter = new FilterCard("card with the same name");
+        nameFilter.add(new SharesNamePredicate(targetCard));
         return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(
                 0, Integer.MAX_VALUE, nameFilter
         ), true).apply(game, source);

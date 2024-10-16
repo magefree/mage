@@ -116,7 +116,7 @@ public class EmblemsTest extends CardTestPlayerBase {
 
         boolean found = false;
         for (Card card : playerA.getHand().getCards(currentGame)) {
-            if (card.getName().equals("Elite Vanguard")) {
+            if (card.hasName("Elite Vanguard", currentGame)) {
                 found = true;
             }
         }

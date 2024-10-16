@@ -98,6 +98,6 @@ class AnointedPeacekeeperEffect extends CostModificationEffectImpl {
         String chosenName = (String) game.getState().getValue(
                 source.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY
         );
-        return CardUtil.haveSameNames(activatedSource, chosenName, game);
+        return activatedSource.hasName(chosenName, game);
     }
 }

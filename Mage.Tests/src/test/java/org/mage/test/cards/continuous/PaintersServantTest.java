@@ -127,13 +127,13 @@ public class PaintersServantTest extends CardTestPlayerBase {
             Assert.assertEquals(false, card.getColor(currentGame).isBlue());
         }
         for (Card card : playerA.getGraveyard().getCards(currentGame)) {
-            if (card.getName().equals("Silvercoat Lion")) {
+            if (card.hasName("Silvercoat Lion", currentGame)) {
                 Assert.assertEquals(true, card.getColor(currentGame).isWhite());
                 Assert.assertEquals(false, card.getColor(currentGame).isBlue());
             }
         }
         for (Card card : playerB.getGraveyard().getCards(currentGame)) {
-            if (card.getName().equals("Silvercoat Lion")) {
+            if (card.hasName("Silvercoat Lion", currentGame)) {
                 Assert.assertEquals(true, card.getColor(currentGame).isWhite());
                 Assert.assertEquals(false, card.getColor(currentGame).isBlue());
             }

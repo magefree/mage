@@ -17,7 +17,7 @@ public class OffspringTest extends CardTestPlayerBase {
 
     private Permanent getCreature(String name, boolean isToken) {
         for (Permanent permanent : currentGame.getBattlefield().getActivePermanents(playerA.getId(), currentGame)) {
-            if (name.equals(permanent.getName()) && (permanent instanceof PermanentToken) == isToken) {
+            if (permanent.hasName(name, currentGame) && (permanent instanceof PermanentToken) == isToken) {
                 return permanent;
             }
         }

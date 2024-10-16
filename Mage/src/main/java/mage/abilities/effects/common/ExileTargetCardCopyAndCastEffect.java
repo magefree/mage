@@ -48,10 +48,12 @@ public class ExileTargetCardCopyAndCastEffect extends OneShotEffect {
         if (player == null || card == null) {
             return false;
         }
-        player.moveCards(card, Zone.EXILED, source, game);
+        if (!Zone.EXILED.match(game.getState().getZone(card.getId()))) {
+            player.moveCards(card, Zone.EXILED, source, game);
+        }
         Card cardCopy = game.copyCard(card, source, source.getControllerId());
         if (optional && !player.chooseUse(outcome, "Cast copy of " +
-                card.getName() + (this.noMana ? " without paying its mana cost?" : "?" ), source, game)) {
+                card.getName() + (this.noMana ? " without paying its mana cost?" : "?"), source, game)) {
             return true;
         }
         game.getState().setValue("PlayFromNotOwnHandZone" + cardCopy.getId(), Boolean.TRUE);

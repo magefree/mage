@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -11,6 +10,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -45,6 +47,12 @@ public final class BondersOrnament extends CardImpl {
 
 class BondersOrnamentEffect extends OneShotEffect {
 
+    private static final FilterPermanent filter = new FilterControlledPermanent();
+
+    static {
+        filter.add(new NamePredicate("Bonder's Ornament"));
+    }
+
     BondersOrnamentEffect() {
         super(Outcome.Benefit);
         staticText = "Each player who controls a permanent named Bonder's Ornament draws a card.";
@@ -63,17 +71,9 @@ class BondersOrnamentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
+            if (player != null && game.getBattlefield().contains(filter, playerId, source, game, 1)) {
+                player.drawCards(1, source, game);
             }
-            if (game.getBattlefield()
-                    .getAllActivePermanents(playerId)
-                    .stream()
-                    .map(MageObject::getName)
-                    .noneMatch("Bonder's Ornament"::equals)) {
-                continue;
-            }
-            player.drawCards(1, source, game);
         }
         return true;
     }

@@ -13,15 +13,14 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author LevelX2
@@ -77,18 +76,22 @@ class IzzetStaticasterDamageEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (targetPermanent != null) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            if (CardUtil.haveEmptyName(targetPermanent)) {
-                filter.add(new PermanentIdPredicate(targetPermanent.getId()));  // if no name (face down creature) only the creature itself is selected
-            } else {
-                filter.add(new NamePredicate(targetPermanent.getName()));
-            }
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-                permanent.damage(1, source.getSourceId(), source, game, false, true);
-            }
-            return true;
+        if (targetPermanent == null) {
+            return false;
         }
-        return false;
+        Set<Permanent> set = game
+                .getBattlefield()
+                .getActivePermanents(
+                        StaticFilters.FILTER_PERMANENT_CREATURE,
+                        source.getControllerId(), source, game
+                )
+                .stream()
+                .filter(permanent -> permanent.sharesName(targetPermanent, game))
+                .collect(Collectors.toSet());
+        set.add(targetPermanent);
+        for (Permanent creature : set) {
+            creature.damage(1, source, game);
+        }
+        return true;
     }
 }

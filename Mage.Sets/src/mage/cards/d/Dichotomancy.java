@@ -1,25 +1,29 @@
 package mage.cards.d;
 
+import mage.MageItem;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardWithSameNameAsPermanents;
 import mage.target.common.TargetOpponent;
 
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author noahg
@@ -28,7 +32,6 @@ public final class Dichotomancy extends CardImpl {
 
     public Dichotomancy(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{7}{U}{U}");
-
 
         // For each tapped nonland permanent target opponent controls, search that player’s library for a card with the same name as that permanent and put it onto the battlefield under your control. Then that player shuffles their library.
         this.getSpellAbility().addEffect(new DichotomancyEffect());
@@ -53,6 +56,7 @@ class DichotomancyEffect extends OneShotEffect {
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
 
     static {
+        filter.add(TargetController.YOU.getControllerPredicate());
         filter.add(TappedPredicate.TAPPED);
     }
 
@@ -69,22 +73,26 @@ class DichotomancyEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && opponent != null) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, opponent.getId(), game)) {
-                String name = permanent.getName();
-                FilterCard filterCard = new FilterCard("card named \"" + name + '"');
-                filterCard.add(new NamePredicate(name));
-                TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filterCard);
-                if (controller.searchLibrary(target, source, game, opponent.getId())) {
-                    controller.moveCards(opponent.getLibrary().getCard(target.getFirstTarget(), game), Zone.BATTLEFIELD, source, game);
-                }
-            }
-            opponent.shuffleLibrary(source, game);
-            return true;
+        Player opponent = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (controller == null || opponent == null) {
+            return false;
         }
-        return false;
+        Set<UUID> set = game
+                .getBattlefield()
+                .getActivePermanents(filter, opponent.getId(), source, game)
+                .stream()
+                .map(MageItem::getId)
+                .collect(Collectors.toSet());
+        TargetCardInLibrary target = new TargetCardWithSameNameAsPermanents(set);
+        controller.searchLibrary(target, source, game, opponent.getId());
+        Cards cards = new CardsImpl();
+        for (UUID targetId : target.getTargets()) {
+            cards.add(opponent.getLibrary().getCard(targetId, game));
+        }
+        controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
+        opponent.shuffleLibrary(source, game);
+        return true;
     }
 
     @Override

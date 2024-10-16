@@ -54,7 +54,7 @@ public class PlayableEmblemsTest extends CardTestCommander4Players {
             // playable commander
             UUID needObjectId = game.getCommandersIds(playerA, CommanderCardType.COMMANDER_OR_OATHBREAKER, false)
                     .stream()
-                    .filter(id -> game.getObject(id).getName().equals("Balduvian Bears"))
+                    .filter(id -> game.getObject(id).hasName("Balduvian Bears", currentGame))
                     .findFirst()
                     .orElse(null);
             Assert.assertNotNull(needObjectId);
@@ -63,7 +63,7 @@ public class PlayableEmblemsTest extends CardTestCommander4Players {
             // non playable commander
             needObjectId = game.getCommandersIds(playerA, CommanderCardType.COMMANDER_OR_OATHBREAKER, false)
                     .stream()
-                    .filter(id -> game.getObject(id).getName().equals("Goblin Arsonist"))
+                    .filter(id -> game.getObject(id).hasName("Goblin Arsonist", currentGame))
                     .findFirst()
                     .orElse(null);
             Assert.assertNotNull(needObjectId);
@@ -74,7 +74,7 @@ public class PlayableEmblemsTest extends CardTestCommander4Players {
                     .stream()
                     .filter(obj -> obj instanceof Emblem)
                     .filter(obj -> obj.isControlledBy(playerA.getId()))
-                    .filter(obj -> obj.getName().equals("Emblem Momir"))
+                    .filter(obj -> obj.hasName("Emblem Momir", currentGame))
                     .map(MageItem::getId)
                     .findFirst()
                     .orElse(null);

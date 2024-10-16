@@ -1,6 +1,5 @@
 package org.mage.test.cards.abilities.oneshot.library;
 
-import java.util.ArrayList;
 import mage.cards.Card;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -8,8 +7,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import java.util.ArrayList;
+
 /**
- *
  * @author LevelX2
  */
 public class PutToLibraryTest extends CardTestPlayerBase {
@@ -37,7 +37,7 @@ public class PutToLibraryTest extends CardTestPlayerBase {
         Assert.assertTrue("Library has no cards but should have", cardArray.size() > 1);
         Card secondCard = cardArray.get(1);
         Assert.assertTrue("Second card from top should be Dread Wanderer, but it isn't",
-                secondCard != null && secondCard.getName().equals("Dread Wanderer"));
+                secondCard != null && secondCard.hasName("Dread Wanderer", currentGame));
 
     }
 
@@ -66,7 +66,7 @@ public class PutToLibraryTest extends CardTestPlayerBase {
         Assert.assertTrue("Library has no cards but should have", cardArray.size() > 3);
         Card fourthCard = cardArray.get(3);// get the 4th element
         Assert.assertTrue("Fourth card from top should be Skyrider Patrol, but it isn't",
-                fourthCard != null && fourthCard.getName().equals("Skyrider Patrol"));
+                fourthCard != null && fourthCard.hasName("Skyrider Patrol", currentGame));
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);

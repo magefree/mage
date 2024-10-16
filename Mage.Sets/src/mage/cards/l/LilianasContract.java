@@ -1,8 +1,5 @@
 package mage.cards.l;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -16,11 +13,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class LilianasContract extends CardImpl {
@@ -46,8 +46,8 @@ public final class LilianasContract extends CardImpl {
                         TargetController.YOU, false
                 ), LilianasContractCondition.instance,
                 "At the beginning of your upkeep, "
-                + "if you control four or more Demons with different names, "
-                + "you win the game."
+                        + "if you control four or more Demons with different names, "
+                        + "you win the game."
         ));
     }
 
@@ -62,24 +62,16 @@ public final class LilianasContract extends CardImpl {
 }
 
 enum LilianasContractCondition implements Condition {
-
     instance;
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DEMON);
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Set<String> demonNames = new HashSet<>();
-        for (Permanent permanent : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (permanent == null
-                    || !permanent.isControlledBy(source.getControllerId())
-                    || !permanent.hasSubtype(SubType.DEMON, game)) {
-                continue;
-            }
-            demonNames.add(permanent.getName());
-            if (demonNames.size() > 3) {
-                return true;
-            }
-        }
-        return false;
+        return CardUtil.differentlyNamedAmongCollection(
+                game.getBattlefield().getActivePermanents(
+                        filter, source.getControllerId(), source, game
+                ), game
+        ) >= 4;
     }
 
     @Override

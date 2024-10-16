@@ -61,8 +61,8 @@ public class ChronozoaTest extends CardTestPlayerBase {
 
     for (final Permanent creature : creatures) {
       // Make sure the creatures are Chronozoa tokens
-      Assert.assertEquals("Chronozoa", creature.getName());
-      Assert.assertEquals("Chronozoa has to be a token", true, creature instanceof PermanentToken);
+      Assert.assertTrue(creature.hasName("Chronozoa", currentGame));
+      Assert.assertTrue("Chronozoa has to be a token", creature instanceof PermanentToken);
 
       // Make sure each token has 2 time counters
       final Counters counters = creature.getCounters(currentGame);

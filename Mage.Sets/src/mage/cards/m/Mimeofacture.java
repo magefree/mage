@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReplicateAbility;
@@ -13,15 +11,16 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class Mimeofacture extends CardImpl {
@@ -68,7 +67,7 @@ class MimeofactureEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (controller == null || permanent == null) {
             return false;
         }
@@ -76,8 +75,8 @@ class MimeofactureEffect extends OneShotEffect {
         if (opponent == null) {
             return false;
         }
-        FilterCard filter = new FilterCard("card named " + permanent.getName());
-        filter.add(new NamePredicate(permanent.getName()));
+        FilterCard filter = new FilterCard("card with the same name");
+        filter.add(new SharesNamePredicate(permanent));
         TargetCardInLibrary target = new TargetCardInLibrary(0, 1, filter);
         if (controller.searchLibrary(target, source, game, opponent.getId())) {
             Card card = opponent.getLibrary().getCard(target.getFirstTarget(), game);

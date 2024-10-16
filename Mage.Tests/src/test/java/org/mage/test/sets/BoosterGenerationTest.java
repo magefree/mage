@@ -14,7 +14,6 @@ import mage.game.draft.ReshuffledSet;
 import mage.sets.*;
 import mage.util.CardUtil;
 import org.junit.Assert;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -22,6 +21,12 @@ import org.mage.test.serverside.base.MageTestPlayerBase;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 /**
  * @author nigelzor, JayDi85
@@ -50,7 +55,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
 
     private static boolean contains(List<Card> cards, String name, String code) {
         return cards.stream().anyMatch((card)
-                -> (card.getName().equals(name)
+                -> (card.hasName(name, currentGame)
                 && (code == null || card.getExpansionSetCode().equals(code)))
         );
     }
@@ -331,22 +336,22 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
                 case 2:
                     assertEquals(
                             "Booster can't have two snow lands unless one is Shimmerdrift Vale or Faceless Haven", 1,
-                            snowLands.stream().filter(card -> card.getName().equals("Shimmerdrift Vale") || card.getName().equals("Faceless Haven")).count()
+                            snowLands.stream().filter(card -> card.hasName("Shimmerdrift Vale", currentGame) || card.hasName("Faceless Haven", currentGame)).count()
                     );
                     assertEquals(
                             "Booster can't have two snow lands unless one is not Shimmerdrift Vale or Faceless Haven", 1,
-                            snowLands.stream().filter(card -> !card.getName().equals("Shimmerdrift Vale") && !card.getName().equals("Faceless Haven")).count()
+                            snowLands.stream().filter(card -> !card.hasName("Shimmerdrift Vale", currentGame) && !card.hasName("Faceless Haven", currentGame)).count()
                     );
                     break;
                 case 3:
                     assertEquals("Booster can't have three snow lands unless one is Shimmerdrift Vale", 1,
-                            snowLands.stream().filter(card -> card.getName().equals("Shimmerdrift Vale")).count()
+                            snowLands.stream().filter(card -> card.hasName("Shimmerdrift Vale", currentGame)).count()
                     );
                     assertEquals("Booster can't have three snow lands unless one is Faceless Haven", 1,
-                            snowLands.stream().filter(card -> card.getName().equals("Faceless Haven")).count()
+                            snowLands.stream().filter(card -> card.hasName("Faceless Haven", currentGame)).count()
                     );
                     assertEquals("Booster can't have three snow lands unless one is not Shimmerdrift Vale or Faceless Haven", 1,
-                            snowLands.stream().filter(card -> !card.getName().equals("Shimmerdrift Vale") && !card.getName().equals("Faceless Haven")).count()
+                            snowLands.stream().filter(card -> !card.hasName("Shimmerdrift Vale", currentGame) && !card.hasName("Faceless Haven", currentGame)).count()
                     );
                     break;
                 default:

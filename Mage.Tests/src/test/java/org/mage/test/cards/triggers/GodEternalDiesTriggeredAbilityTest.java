@@ -33,7 +33,7 @@ public class GodEternalDiesTriggeredAbilityTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, godEternalBontu, 0);
         assertGraveyardCount(playerA, godEternalBontu, 0);
         Card card = currentGame.getCard(playerA.getLibrary().getCardList().get(2));
-        Assert.assertEquals(card.getName(), godEternalBontu);
+        Assert.assertTrue(card.hasName(godEternalBontu, currentGame));
     }
 
     /**
@@ -54,7 +54,7 @@ public class GodEternalDiesTriggeredAbilityTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, godEternalBontu, 0);
         assertExileCount(playerA, godEternalBontu, 0);
         Card card = currentGame.getCard(playerA.getLibrary().getCardList().get(2));
-        Assert.assertEquals(card.getName(), godEternalBontu);
+        Assert.assertTrue(card.hasName(godEternalBontu, currentGame));
     }
 
     /**

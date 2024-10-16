@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.search;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Cards;
@@ -8,6 +9,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -40,6 +42,7 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
     protected SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText, boolean drawForEachHandCard) {
         this(graveyardExileOptional, searchWhatText, searchForText, drawForEachHandCard, Integer.MAX_VALUE);
     }
+
     protected SearchTargetGraveyardHandLibraryForCardNameAndExileEffect(boolean graveyardExileOptional, String searchWhatText, String searchForText, boolean drawForEachHandCard, int maxAmount) {
         super(Outcome.Exile);
         this.searchWhatText = searchWhatText;
@@ -69,59 +72,67 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
      * @return
      */
     protected boolean applySearchAndExile(Game game, Ability source, String cardName, UUID targetPlayerId) {
+        FilterCard filter = new FilterCard("card named \"" + cardName + "\"");
+        filter.add(new NamePredicate(cardName));
+        return applySearchAndExile(game, source, filter, targetPlayerId);
+    }
+
+    protected boolean applySearchAndExile(Game game, Ability source, MageObject mageObject, UUID targetPlayerId) {
+        FilterCard filter = new FilterCard("card that shares a name with " + mageObject.getName());
+        filter.add(new SharesNamePredicate(mageObject));
+        return applySearchAndExile(game, source, filter, targetPlayerId);
+    }
+
+    private boolean applySearchAndExile(Game game, Ability source, FilterCard filter, UUID targetPlayerId) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (cardName != null && controller != null) {
-            Player targetPlayer = game.getPlayer(targetPlayerId);
-            if (targetPlayer != null) {
-                int handCards = 0;
-                int maxRemaining = maxAmount;
-                FilterCard filter = new FilterCard("card named \"" + cardName + "\"");
-                filter.add(new NamePredicate(cardName));
-
-                // cards in Graveyard
-                int cardsCount = Math.min(targetPlayer.getGraveyard().count(filter, game), maxRemaining);
-                if (cardsCount > 0) {
-                    filter.setMessage("card named " + cardName + " in the graveyard of " + targetPlayer.getName());
-                    TargetCard target = new TargetCard((graveyardExileOptional ? 0 : cardsCount), cardsCount, Zone.GRAVEYARD, filter);
-                    target.withNotTarget(true);
-                    if (controller.choose(Outcome.Exile, targetPlayer.getGraveyard(), target, source, game)) {
-                        maxRemaining -= target.getTargets().size();
-                        controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
-                    }
-                }
-
-                // cards in Hand
-                cardsCount = Math.min(targetPlayer.getHand().count(filter, game), maxRemaining);
-                filter.setMessage("card named " + cardName + " in the hand of " + targetPlayer.getName());
-                TargetCard target = new TargetCard(0, cardsCount, Zone.HAND, filter);
-                target.withNotTarget(true);
-                if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, source, game)) {
-                    maxRemaining -= target.getTargets().size();
-                    if (drawForEachHandCard) {
-                        handCards = target.getTargets().size();
-                    }
-                    controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
-                }
-
-                // cards in Library
-                Cards cardsInLibrary = new CardsImpl();
-                cardsInLibrary.addAllCards(targetPlayer.getLibrary().getCards(game));
-                cardsCount = Math.min(cardsInLibrary.count(filter, game), maxRemaining);
-                filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getLogName());
-                TargetCardInLibrary targetLib = new TargetCardInLibrary(0, cardsCount, filter);
-                if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, source, game)) {
-                    controller.moveCards(new CardsImpl(targetLib.getTargets()), Zone.EXILED, source, game);
-                }
-                targetPlayer.shuffleLibrary(source, game);
-
-                if (handCards > 0) {
-                    targetPlayer.drawCards(handCards, source, game);
-                }
+        Player targetPlayer = game.getPlayer(targetPlayerId);
+        if (controller == null || targetPlayer == null) {
+            return false;
+        }
+        String message = filter.getMessage();
+        int handCards = 0;
+        int maxRemaining = maxAmount;
+        // cards in Graveyard
+        int cardsCount = Math.min(targetPlayer.getGraveyard().count(filter, game), maxRemaining);
+        if (cardsCount > 0) {
+            filter.setMessage(message + " in the graveyard of " + targetPlayer.getName());
+            TargetCard target = new TargetCard((graveyardExileOptional ? 0 : cardsCount), cardsCount, Zone.GRAVEYARD, filter);
+            target.withNotTarget(true);
+            if (controller.choose(Outcome.Exile, targetPlayer.getGraveyard(), target, source, game)) {
+                maxRemaining -= target.getTargets().size();
+                controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
             }
-
-            return true;
         }
 
-        return false;
+        // cards in Hand
+        cardsCount = Math.min(targetPlayer.getHand().count(filter, game), maxRemaining);
+        filter.setMessage(message + " in the hand of " + targetPlayer.getName());
+        TargetCard target = new TargetCard(0, cardsCount, Zone.HAND, filter);
+        target.withNotTarget(true);
+        if (controller.choose(Outcome.Exile, targetPlayer.getHand(), target, source, game)) {
+            maxRemaining -= target.getTargets().size();
+            if (drawForEachHandCard) {
+                handCards = target.getTargets().size();
+            }
+            controller.moveCards(new CardsImpl(target.getTargets()), Zone.EXILED, source, game);
+        }
+
+        // cards in Library
+        Cards cardsInLibrary = new CardsImpl();
+        cardsInLibrary.addAllCards(targetPlayer.getLibrary().getCards(game));
+        cardsCount = Math.min(cardsInLibrary.count(filter, game), maxRemaining);
+        filter.setMessage(message + " in the library of " + targetPlayer.getLogName());
+        TargetCardInLibrary targetLib = new TargetCardInLibrary(0, cardsCount, filter);
+        if (controller.choose(Outcome.Exile, cardsInLibrary, targetLib, source, game)) {
+            controller.moveCards(new CardsImpl(targetLib.getTargets()), Zone.EXILED, source, game);
+        }
+        targetPlayer.shuffleLibrary(source, game);
+
+        if (handCards > 0) {
+            targetPlayer.drawCards(handCards, source, game);
+        }
+
+        return true;
+
     }
 }

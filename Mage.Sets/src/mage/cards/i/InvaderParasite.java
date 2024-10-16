@@ -1,28 +1,39 @@
-
 package mage.cards.i;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
+
+import java.util.Collection;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
- * @author Loki
+ * @author TheElk801
  */
 public final class InvaderParasite extends CardImpl {
+
+    private static final FilterPermanent filter
+            = new FilterLandPermanent("a land an opponent controls with the same name as the exiled card");
+
+    static {
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
+        filter.add(InvaderParasitePredicate.instance);
+    }
 
     public InvaderParasite(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");
@@ -33,12 +44,15 @@ public final class InvaderParasite extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Imprint - When Invader Parasite enters the battlefield, exile target land.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new InvaderParasiteImprintEffect(), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect());
         ability.addTarget(new TargetLandPermanent());
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(AbilityWord.IMPRINT));
 
         // Whenever a land with the same name as the exiled card enters the battlefield under an opponent's control, Invader Parasite deals 2 damage to that player.
-        this.addAbility(new InvaderParasiteTriggeredAbility().setAbilityWord(AbilityWord.IMPRINT));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD, new DamageTargetEffect(2, true, "that player"),
+                filter, false, SetTargetPointer.PLAYER
+        ));
     }
 
     private InvaderParasite(final InvaderParasite card) {
@@ -51,76 +65,19 @@ public final class InvaderParasite extends CardImpl {
     }
 }
 
-class InvaderParasiteImprintEffect extends OneShotEffect {
-
-    InvaderParasiteImprintEffect() {
-        super(Outcome.Exile);
-        staticText = "exile target land";
-    }
-
-    private InvaderParasiteImprintEffect(final InvaderParasiteImprintEffect effect) {
-        super(effect);
-    }
+enum InvaderParasitePredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-        Permanent targetPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (sourcePermanent != null && targetPermanent != null) {
-            targetPermanent.moveToExile(getId(), "Invader Parasite (Imprint)", source, game);
-            sourcePermanent.imprint(targetPermanent.getId(), game);
-        }
-        return true;
-    }
-
-    @Override
-    public InvaderParasiteImprintEffect copy() {
-        return new InvaderParasiteImprintEffect(this);
-    }
-}
-
-class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl {
-
-    InvaderParasiteTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
-    }
-
-    private InvaderParasiteTriggeredAbility(final InvaderParasiteTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public InvaderParasiteTriggeredAbility copy() {
-        return new InvaderParasiteTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-            Permanent targetPermanent = game.getPermanent(event.getTargetId());
-            Permanent sourcePermanent = game.getPermanent(getSourceId());
-            if (targetPermanent != null && sourcePermanent != null) {
-                if (!sourcePermanent.getImprinted().isEmpty()) {
-                    Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
-                    if (imprintedCard != null && targetPermanent.getName().equals(imprintedCard.getName())) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a land with the same name as the exiled card enters the battlefield under an opponent's control, {this} deals 2 damage to that player.";
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return Optional
+                .ofNullable(game)
+                .map(Game::getExile)
+                .map(e -> e.getExileZone(CardUtil.getExileZoneId(game, input.getSource())))
+                .filter(e -> !e.isEmpty())
+                .map(e -> e.getCards(game))
+                .map(Collection::stream)
+                .map(s -> s.anyMatch(card -> card.sharesName(input.getObject(), game)))
+                .orElse(false);
     }
 }

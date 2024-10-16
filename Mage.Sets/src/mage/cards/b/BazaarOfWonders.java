@@ -1,28 +1,26 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileGraveyardAllPlayersEffect;
-import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.SetTargetPointer;
+import mage.constants.SuperType;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
-import mage.filter.StaticFilters;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class BazaarOfWonders extends CardImpl {
@@ -37,8 +35,7 @@ public final class BazaarOfWonders extends CardImpl {
 
         // Whenever a player casts a spell, counter it if a card with the same name is in 
         // a graveyard or a nontoken permanent with the same name is on the battlefield.
-        this.addAbility(new SpellCastAllTriggeredAbility(new BazaarOfWondersEffect(),
-                StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));
+        this.addAbility(new SpellCastAllTriggeredAbility(new BazaarOfWondersEffect(), false));
     }
 
     private BazaarOfWonders(final BazaarOfWonders card) {
@@ -70,27 +67,21 @@ class BazaarOfWondersEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getSpell(getTargetPointer().getFirst(game, source));
+        Spell spell = (Spell) getValue("spellCast");
         if (spell == null) {
             return false;
         }
-        String spellName = spell.getName();
         FilterPermanent filter1 = new FilterPermanent();
-        filter1.add(new NamePredicate(spellName));
+        filter1.add(new SharesNamePredicate(spell));
         filter1.add(TokenPredicate.FALSE);
-        if (!game.getBattlefield().getActivePermanents(filter1, 
-                source.getControllerId(), game).isEmpty()) {
-            game.getStack().counter(spell.getId(), source, game);
-            return true;
+        if (!game.getBattlefield().contains(filter1, source, game, 1)) {
+            return game.getStack().counter(spell.getId(), source, game);
         }
         FilterCard filter2 = new FilterCard();
-        filter2.add(new NamePredicate(spellName));
+        filter2.add(new SharesNamePredicate(spell));
         for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
             Player player = game.getPlayer(playerId);
-            if (player == null) {
-                continue;
-            }
-            if (player.getGraveyard().count(filter2, game) > 0) {
+            if (player != null && player.getGraveyard().count(filter2, game) > 0) {
                 return game.getStack().counter(spell.getId(), source, game);
             }
         }

@@ -29,7 +29,7 @@ public class DustOfMomentsTest extends CardTestPlayerBase {
     Assert.assertEquals(2, activeCreatures.size());
 
     for (final Permanent creature : activeCreatures) {
-      Assert.assertEquals("Chronozoa", creature.getName());
+      Assert.assertTrue(creature.hasName("Chronozoa", currentGame));
       Assert.assertEquals(3, creature.getCounters(currentGame).getCount(CounterType.TIME));
     }
     // Check time counters on kraken

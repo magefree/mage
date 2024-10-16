@@ -134,8 +134,8 @@ class NullChamberReplacementEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         MageObject object = game.getObject(event.getSourceId());
         if (object != null) {
-            return object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NullChamberChooseEffect.INFO_KEY_CONTROLLER))
-                    || object.getName().equals(game.getState().getValue(source.getSourceId().toString() + NullChamberChooseEffect.INFO_KEY_OPPONENT));
+            return object.hasName((String) game.getState().getValue(source.getSourceId().toString() + NullChamberChooseEffect.INFO_KEY_CONTROLLER), game)
+                    || object.hasName((String) game.getState().getValue(source.getSourceId().toString() + NullChamberChooseEffect.INFO_KEY_OPPONENT), game);
         }
         return false;
     }

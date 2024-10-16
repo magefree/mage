@@ -1,7 +1,6 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -19,9 +18,6 @@ import mage.game.Game;
 import mage.game.permanent.token.Construct4Token;
 import mage.util.CardUtil;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -66,16 +62,11 @@ enum ChromeReplicatorCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Map<String, Integer> nameMap = new HashMap<>();
-        return game
-                .getBattlefield()
-                .getActivePermanents(
-                        filter, source.getControllerId(), source, game
-                ).stream()
-                .filter(Objects::nonNull)
-                .map(MageObject::getName)
-                .filter(Objects::nonNull)
-                .filter(s -> !s.isEmpty())
-                .anyMatch(s -> nameMap.compute(s, CardUtil::setOrIncrementValue) >= 2);
+        return CardUtil
+                .checkAnyPairs(
+                        game.getBattlefield().getActivePermanents(
+                                filter, source.getControllerId(), source, game
+                        ), (p1, p2) -> p1.sharesName(p2, game)
+                );
     }
 }

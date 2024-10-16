@@ -46,7 +46,7 @@ public class ArtisanOfFormsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 2);
 
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(playerA.getId())) {
-            if (permanent.getName().equals("Silvercoat Lion")) {
+            if (permanent.hasName("Silvercoat Lion", currentGame)) {
                 Assert.assertEquals("Creature has to have Cast + Heroic ability", 2, permanent.getAbilities().size());
             }
         }
@@ -90,7 +90,7 @@ public class ArtisanOfFormsTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 3);
 
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(playerA.getId())) {
-            if (permanent.getName().equals("Silvercoat Lion")) {
+            if (permanent.hasName("Silvercoat Lion", currentGame)) {
                 Assert.assertEquals("Creature has to have Cast + Heroic ability", 2, permanent.getAbilities().size());
             }
         }

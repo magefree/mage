@@ -1051,7 +1051,7 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
         runCode("check side 2", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             PermanentToken permanent = (PermanentToken) game.getBattlefield().getAllPermanents()
                     .stream()
-                    .filter(p -> p.getName().equals("Tergrid, God of Fright"))
+                    .filter(p -> p.hasName("Tergrid, God of Fright", currentGame))
                     .findFirst()
                     .orElse(null);
             Assert.assertNotNull(permanent);

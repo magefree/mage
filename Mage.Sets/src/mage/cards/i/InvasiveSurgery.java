@@ -1,22 +1,19 @@
 package mage.cards.i;
 
-import java.util.UUID;
-
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.abilities.hint.common.CardTypesInGraveyardHint;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.FilterSpell;
 import mage.game.Game;
-import mage.game.stack.StackObject;
+import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetSpell;
+
+import java.util.UUID;
 
 /**
  * @author LevelX2
@@ -71,28 +68,12 @@ class InvasiveSurgeryEffect extends SearchTargetGraveyardHandLibraryForCardNameA
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
+        Spell spell = game.getSpell(getTargetPointer().getFirst(game, source));
+        if (controller == null || spell == null) {
             return false;
         }
-        String cardName = "";
-        UUID spellController = null;
-        if (source.getTargets().get(0) instanceof TargetSpell) {
-            UUID objectId = source.getFirstTarget();
-            StackObject stackObject = game.getStack().getStackObject(objectId);
-            if (stackObject != null) {
-                MageObject targetObject = game.getObject(stackObject.getSourceId());
-                if (targetObject instanceof Card) {
-                    cardName = targetObject.getName();
-                }
-                spellController = stackObject.getControllerId();
-                game.getStack().counter(objectId, source, game);
-            }
-        }
-
-        // Check the Delirium condition
-        if (!DeliriumCondition.instance.apply(game, source)) {
-            return true;
-        }
-        return this.applySearchAndExile(game, source, cardName, spellController);
+        game.getStack().counter(spell.getId(), source, game);
+        return !DeliriumCondition.instance.apply(game, source)
+                || this.applySearchAndExile(game, source, spell, spell.getControllerId());
     }
 }

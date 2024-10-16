@@ -22,8 +22,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetControlledPermanent;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -92,7 +90,7 @@ class CabalTherapistDiscardEffect extends OneShotEffect {
             if (card == null) {
                 return true;
             }
-            return !CardUtil.haveSameNames(card, cardName, game);
+            return !card.hasName(cardName, game);
         });
         targetPlayer.discard(hand, false, source, game);
         return true;

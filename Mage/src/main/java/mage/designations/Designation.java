@@ -201,4 +201,9 @@ public abstract class Designation extends MageObjectImpl {
     public boolean isUnique() {
         return unique;
     }
+
+    @Override
+    public boolean hasName(String name, Game game) {
+        return false;
+    }
 }

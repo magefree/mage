@@ -11,7 +11,7 @@ import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -94,9 +94,8 @@ class RippleEffect extends OneShotEffect {
             player.revealCards(sourceObject.getIdName(), cards, game);
 
             // determine which card should be rippled
-            String cardNameToRipple = sourceObject.getName();
-            FilterCard sameNameFilter = new FilterCard("card(s) with the name: \"" + cardNameToRipple + "\" to cast without paying their mana cost");
-            sameNameFilter.add(new NamePredicate(cardNameToRipple));
+            FilterCard sameNameFilter = new FilterCard("card(s) to cast without paying their mana cost");
+            sameNameFilter.add(new SharesNamePredicate(sourceObject));
             TargetCard target1 = new TargetCard(Zone.LIBRARY, sameNameFilter);
             target1.setRequired(false);
 

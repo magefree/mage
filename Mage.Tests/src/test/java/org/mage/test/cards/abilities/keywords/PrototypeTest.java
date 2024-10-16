@@ -26,7 +26,7 @@ public class PrototypeTest extends CardTestPlayerBase {
     // Prototype {2}{R} - 3/2
     private static final String automaton = "Blitz Automaton";
     private static final String withPrototype = " using Prototype";
-    private static final String automatonWithPrototype = automaton+withPrototype;
+    private static final String automatonWithPrototype = automaton + withPrototype;
 
     private static final String bolt = "Lightning Bolt";
     private static final String cloudshift = "Cloudshift";
@@ -44,7 +44,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         for (Permanent permanent : currentGame.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_PERMANENT, playerA.getId(), currentGame
         )) {
-            if (!permanent.getName().equals(automaton)) {
+            if (!permanent.hasName(automaton, currentGame)) {
                 continue;
             }
             Assert.assertTrue("Needs haste", permanent.getAbilities(currentGame).contains(HasteAbility.getInstance()));
@@ -120,7 +120,7 @@ public class PrototypeTest extends CardTestPlayerBase {
                 .getGraveyard()
                 .getCards(currentGame)
                 .stream()
-                .filter(c -> c.getName().equals(automaton))
+                .filter(c -> c.hasName(automaton, currentGame))
                 .findFirst()
                 .orElse(null);
         Assert.assertTrue("Card should be colorless", card.getColor(currentGame).isColorless());
@@ -452,9 +452,9 @@ public class PrototypeTest extends CardTestPlayerBase {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Taiga");
 
         //checkPlayableAbility("cast even proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Boulderbranch Golem"+withPrototype, false);
-        checkPlayableAbility("cast odd proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Fallaji Dragon Engine"+withPrototype, true);
+        checkPlayableAbility("cast odd proto", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast Fallaji Dragon Engine" + withPrototype, true);
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, evenRegOddProto+withPrototype);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, evenRegOddProto + withPrototype);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -462,9 +462,10 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, evenRegOddProto, 1, 3);
     }
+
     @Test
     public void testCopyOnStack() {
-        addCard(Zone.BATTLEFIELD, playerA, "Frontier Bivouac", 3+2);
+        addCard(Zone.BATTLEFIELD, playerA, "Frontier Bivouac", 3 + 2);
         addCard(Zone.HAND, playerA, automaton);
         addCard(Zone.HAND, playerA, "Double Major");
 
@@ -477,9 +478,10 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         checkAutomaton(true, 2);
     }
+
     @Test
     public void testHumility() {
-        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 4+3+2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plateau", 4 + 3 + 2);
         addCard(Zone.HAND, playerA, automaton);
         addCard(Zone.HAND, playerA, "Humility");
         addCard(Zone.HAND, playerA, "Disenchant");
@@ -498,6 +500,7 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         checkAutomaton(true);
     }
+
     @Test
     public void testColorCostReduction() {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
@@ -513,6 +516,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         checkAutomaton(true);
         assertTappedCount("Mountain", true, 2);
     }
+
     @Test
     public void testAbilityRemovalPre() {
         addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 5);
@@ -528,6 +532,7 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, automaton, 3, 2);
     }
+
     @Test
     public void testAbilityRemovalPost() {
         addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 5);
@@ -543,6 +548,7 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, automaton, 3, 2);
     }
+
     @Test
     public void testEssenceOfWild() {
         addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 5);
@@ -559,6 +565,7 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Essence of the Wild", 2);
     }
+
     @Test
     public void testChainer() {
         addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3);
@@ -577,9 +584,10 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         checkAutomaton(true);
     }
+
     @Test
     public void testMetamorphCopyA() {
-        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3+9);
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3 + 9);
         addCard(Zone.HAND, playerA, automaton);
         addCard(Zone.HAND, playerA, "Hulking Metamorph");
 
@@ -596,15 +604,16 @@ public class PrototypeTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, automaton, 3, 2);
         assertPowerToughness(playerA, automaton, 7, 7);
     }
+
     @Test
     public void testMetamorphCopyB() {
-        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 7+4);
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 7 + 4);
         addCard(Zone.HAND, playerA, automaton);
         addCard(Zone.HAND, playerA, "Hulking Metamorph");
 
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automaton);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Hulking Metamorph"+withPrototype);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Hulking Metamorph" + withPrototype);
         setChoice(playerA, true);
         setChoice(playerA, automaton);
 
@@ -615,9 +624,10 @@ public class PrototypeTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, automaton, 6, 4);
         assertPowerToughness(playerA, automaton, 3, 3);
     }
+
     @Test
     public void testReflectionA() {
-        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3+6+6);
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3 + 6 + 6);
         addCard(Zone.HAND, playerA, automaton);
         addCard(Zone.HAND, playerA, "Goring Warplow");
         addCard(Zone.HAND, playerA, "Infinite Reflection");
@@ -634,9 +644,10 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         checkAutomaton(true, 2);
     }
+
     @Test
     public void testReflectionB() {
-        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 7+6+2);
+        addCard(Zone.BATTLEFIELD, playerA, "Underground Sea", 7 + 6 + 2);
         addCard(Zone.HAND, playerA, automaton);
         addCard(Zone.HAND, playerA, "Goring Warplow");
         addCard(Zone.HAND, playerA, "Infinite Reflection");
@@ -645,7 +656,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, automaton);
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Infinite Reflection", automaton);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Goring Warplow"+withPrototype);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Goring Warplow" + withPrototype);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -653,9 +664,10 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         checkAutomaton(false, 2);
     }
+
     @Test
     public void testProgenitor() {
-        addCard(Zone.BATTLEFIELD, playerA, "Frontier Bivouac", 3+6);
+        addCard(Zone.BATTLEFIELD, playerA, "Frontier Bivouac", 3 + 6);
         addCard(Zone.HAND, playerA, automaton);
         addCard(Zone.HAND, playerA, "Progenitor Mimic");
 
@@ -671,9 +683,10 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         checkAutomaton(true, 3);
     }
+
     @Test
     public void testInstantaneousLKI() {
-        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3+2);
+        addCard(Zone.BATTLEFIELD, playerA, "Volcanic Island", 3 + 2);
         addCard(Zone.BATTLEFIELD, playerA, "Flowstone Surge", 2);
         addCard(Zone.BATTLEFIELD, playerA, "Drizzt Do'Urden", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Warstorm Surge", 1);
@@ -681,7 +694,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Slimebind");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Slimebind", "Drizzt Do'Urden");
-        checkPT("Drizzt is shrunk",1, PhaseStep.BEGIN_COMBAT, playerA, "Drizzt Do'Urden",1, 1);
+        checkPT("Drizzt is shrunk", 1, PhaseStep.BEGIN_COMBAT, playerA, "Drizzt Do'Urden", 1, 1);
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, automatonWithPrototype); // 5/0
         setChoice(playerA, "Whenever a creature you control enters"); //Stack the trigger
         addTarget(playerA, playerB);
@@ -692,11 +705,12 @@ public class PrototypeTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerA, "Drizzt Do'Urden", 5, 5);
         assertGraveyardCount(playerA, automaton, 1);
-        assertLife(playerB, 20-5);
+        assertLife(playerB, 20 - 5);
     }
+
     @Test
     public void testReanimate() {
-        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 3+1+1);
+        addCard(Zone.BATTLEFIELD, playerA, "Badlands", 3 + 1 + 1);
         addCard(Zone.HAND, playerA, automaton);
         addCard(Zone.HAND, playerA, "Cut Down");
         addCard(Zone.HAND, playerA, "Reanimate");
@@ -710,7 +724,7 @@ public class PrototypeTest extends CardTestPlayerBase {
         execute();
 
         checkAutomaton(false);
-        assertLife(playerA, 20-7);
+        assertLife(playerA, 20 - 7);
     }
 
 

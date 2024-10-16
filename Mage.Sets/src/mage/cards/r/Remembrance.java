@@ -1,21 +1,19 @@
-
 package mage.cards.r;
 
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.NamePredicate;
-import mage.filter.predicate.permanent.TokenPredicate;
+import mage.filter.StaticFilters;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
@@ -29,7 +27,9 @@ public final class Remembrance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // Whenever a nontoken creature you control dies, you may search your library for a card with the same name as that creature, reveal it, and put it into your hand. If you do, shuffle your library.
-        this.addAbility(new RemembranceTriggeredAbility());
+        this.addAbility(new DiesCreatureTriggeredAbility(
+                new RemembranceEffect(), true, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN
+        ));
     }
 
     private Remembrance(final Remembrance card) {
@@ -42,54 +42,32 @@ public final class Remembrance extends CardImpl {
     }
 }
 
-class RemembranceTriggeredAbility extends TriggeredAbilityImpl {
+class RemembranceEffect extends OneShotEffect {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
-
-    static {
-        filter.add(TokenPredicate.FALSE);
+    RemembranceEffect() {
+        super(Outcome.Benefit);
+        staticText = "search your library for a card with the same name as that creature, " +
+                "reveal it, and put it into your hand. If you do, shuffle your library";
     }
 
-    RemembranceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, true);
-    }
-
-    private RemembranceTriggeredAbility(final RemembranceTriggeredAbility ability) {
-        super(ability);
+    private RemembranceEffect(final RemembranceEffect effect) {
+        super(effect);
     }
 
     @Override
-    public RemembranceTriggeredAbility copy() {
-        return new RemembranceTriggeredAbility(this);
+    public RemembranceEffect copy() {
+        return new RemembranceEffect(this);
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (!((ZoneChangeEvent) event).isDiesEvent()) {
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        Permanent permanent = (Permanent) getValue("creatureDied");
+        if (player == null || permanent == null) {
             return false;
         }
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        if (permanent != null && filter.match(permanent, game)) {
-            FilterCard filterCard = new FilterCard("card named " + permanent.getName());
-            filterCard.add(new NamePredicate(permanent.getName()));
-            this.getEffects().clear();
-            this.addEffect(new SearchLibraryPutInHandEffect(
-                    new TargetCardInLibrary(filterCard), true
-            ));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a nontoken creature you control dies, " +
-                "you may search your library for a card with the same name as that creature, " +
-                "reveal it, put it into your hand, then shuffle.";
+        FilterCard filter = new FilterCard("card with the same name");
+        filter.add(new SharesNamePredicate(permanent));
+        return new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true).apply(game, source);
     }
 }

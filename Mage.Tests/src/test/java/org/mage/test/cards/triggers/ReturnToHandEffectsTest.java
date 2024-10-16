@@ -97,7 +97,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
                 .getAllActivePermanents()
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(p -> p.getName().equals(cardName))
+                .filter(p -> p.hasName(cardName, currentGame))
                 .findFirst();
         if (!optPermanent.isPresent()) {
             Assert.fail(info + " — no permanent named \"" + cardName + "\" found on battlefield");
@@ -133,7 +133,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(p -> p.getName().equals(cardName))
+                .filter(p -> p.hasName(cardName, currentGame))
                 .findFirst();
         if (!optCard.isPresent()) {
             Assert.fail(info + " — no card named \"" + cardName + "\" found in graveyard");
@@ -152,7 +152,7 @@ public class ReturnToHandEffectsTest extends CardTestPlayerBase {
                 .getCards(game)
                 .stream()
                 .filter(Objects::nonNull)
-                .filter(p -> p.getName().equals(cardName))
+                .filter(p -> p.hasName(cardName, currentGame))
                 .findFirst();
         if (!optCard.isPresent()) {
             Assert.fail(info + " — no card named \"" + cardName + "\" found in hand");

@@ -1,6 +1,7 @@
 package mage.cards.n;
 
 import mage.abilities.Ability;
+import mage.abilities.assignment.common.NameAssignment;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -13,9 +14,9 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetCardInYourGraveyard;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -28,7 +29,6 @@ public final class NissasEncouragement extends CardImpl {
 
         // Search your library and graveyard for a card named Forest, a card named Brambleweft Behemoth, and a card named Nissa, Genesis Mage. Reveal those cards, put them into your hand, then shuffle your library.
         this.getSpellAbility().addEffect(new NissasEncouragementEffect());
-
     }
 
     private NissasEncouragement(final NissasEncouragement card) {
@@ -43,16 +43,11 @@ public final class NissasEncouragement extends CardImpl {
 
 class NissasEncouragementEffect extends OneShotEffect {
 
-    private static final FilterCard filter = new FilterCard("card named Forest, a card named Brambleweft Behemoth, and a card named Nissa, Genesis Mage");
-    private static final FilterCard filterGY = new FilterCard();
-
-    static {
-        filter.add(Predicates.or(new NamePredicate("Forest"), new NamePredicate("Brambleweft Behemoth"), new NamePredicate("Nissa, Genesis Mage")));
-    }
-
     public NissasEncouragementEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Search your library and graveyard for a card named Forest, a card named Brambleweft Behemoth, and a card named Nissa, Genesis Mage. Reveal those cards, put them into your hand, then shuffle.";
+        this.staticText = "Search your library and graveyard for a card named Forest, " +
+                "a card named Brambleweft Behemoth, and a card named Nissa, Genesis Mage. " +
+                "Reveal those cards, put them into your hand, then shuffle.";
     }
 
     private NissasEncouragementEffect(final NissasEncouragementEffect effect) {
@@ -67,95 +62,140 @@ class NissasEncouragementEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (player == null || sourceCard == null) {
+        if (player == null) {
             return false;
         }
-
-        NissasEncouragementTarget target = new NissasEncouragementTarget(filter);
-        if (player.searchLibrary(target, source, game)) {
-            boolean searchGY = false;
-
-            if (target.getTargets().size() < 3) {
-                searchGY = true;
-            }
-
-            Map<String, Integer> foundCards = new HashMap<>();
-            foundCards.put("Forest", 0);
-            foundCards.put("Brambleweft Behemoth", 0);
-            foundCards.put("Nissa, Genesis Mage", 0);
-            Cards cards = new CardsImpl();
-
-            if (!target.getTargets().isEmpty()) {
-                for (UUID cardId : target.getTargets()) {
-                    Card card = player.getLibrary().remove(cardId, game);
-
-                    if (card != null) {
-                        cards.add(card);
-                        foundCards.put(card.getName(), 1);
-                    }
-                }
-            }
-
-            if (searchGY) {
-                for (String name : foundCards.keySet()) {
-                    if (foundCards.get(name) == 1) {
-                        continue;
-                    }
-                    // Look in graveyard for any with this name
-                    FilterCard namedFilterGY = filterGY.copy(); // never change static objects so copy the object here before
-                    namedFilterGY.add(new NamePredicate(name));
-                    if (player.getGraveyard().count(namedFilterGY, game) > 0) {
-                        TargetCard targetGY = new TargetCard(0, 1, Zone.GRAVEYARD, namedFilterGY);
-                        if (player.choose(Outcome.ReturnToHand, player.getGraveyard(), targetGY, source, game)) {
-                            for (UUID cardIdGY : targetGY.getTargets()) {
-                                Card cardGY = player.getGraveyard().get(cardIdGY, game);
-                                cards.add(cardGY);
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (!cards.isEmpty()) {
-                player.revealCards(sourceCard.getIdName(), cards, game);
-                player.moveCards(cards, Zone.HAND, source, game);
-                player.shuffleLibrary(source, game);
-                return true;
-            }
+        TargetCardInLibrary target = new NissasEncouragementLibraryTarget();
+        player.searchLibrary(target, source, game);
+        Cards cards = new CardsImpl();
+        for (UUID targetId : target.getTargets()) {
+            cards.add(player.getLibrary().getCard(targetId, game));
+        }
+        if (cards.size() < 3) {
+            TargetCard graveyardTarget = new NissasEncouragementGraveyardTarget(cards);
+            player.choose(outcome, target, source, game);
+            cards.addAll(graveyardTarget.getTargets());
+        }
+        if (!cards.isEmpty()) {
+            player.revealCards(source, cards, game);
+            player.moveCards(cards, Zone.HAND, source, game);
         }
         player.shuffleLibrary(source, game);
-        return false;
+        return true;
     }
 }
 
-class NissasEncouragementTarget extends TargetCardInLibrary {
+class NissasEncouragementLibraryTarget extends TargetCardInLibrary {
 
-    public NissasEncouragementTarget(FilterCard filter) {
+    private static final FilterCard filter
+            = new FilterCard("card named Forest, a card named Brambleweft Behemoth, and a card named Nissa, Genesis Mage");
+
+    static {
+        filter.add(Predicates.or(
+                new NamePredicate("Forest"),
+                new NamePredicate("Brambleweft Behemoth"),
+                new NamePredicate("Nissa, Genesis Mage")
+        ));
+    }
+
+    private static final NameAssignment nameAssigner = new NameAssignment(
+            "Forest", "Brambleweft Behemoth", "Nissa, Genesis Mage"
+    );
+
+    public NissasEncouragementLibraryTarget() {
         super(0, 3, filter);
     }
 
-    private NissasEncouragementTarget(final NissasEncouragementTarget target) {
+    private NissasEncouragementLibraryTarget(final NissasEncouragementLibraryTarget target) {
         super(target);
     }
 
     @Override
-    public NissasEncouragementTarget copy() {
-        return new NissasEncouragementTarget(this);
+    public NissasEncouragementLibraryTarget copy() {
+        return new NissasEncouragementLibraryTarget(this);
     }
 
     @Override
-    public boolean canTarget(UUID playerId, UUID id, Ability source, Cards cards, Game game) {
-        Card card = cards.get(id, game);
-        if (card != null) {
-            for (UUID targetId : this.getTargets()) {
-                Card iCard = game.getCard(targetId);
-                if (iCard != null && iCard.getName().equals(card.getName())) {
-                    return false;
-                }
-            }
-            return filter.match(card, playerId, game);
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
+            return false;
         }
-        return false;
+        Card card = game.getCard(id);
+        if (card == null) {
+            return false;
+        }
+        if (this.getTargets().isEmpty()) {
+            return true;
+        }
+        Cards cards = new CardsImpl(this.getTargets());
+        cards.add(card);
+        return nameAssigner.getRoleCount(cards, game) >= cards.size();
+    }
+}
+
+class NissasEncouragementGraveyardTarget extends TargetCardInYourGraveyard {
+
+    private static final FilterCard filter
+            = new FilterCard("card named Forest, a card named Brambleweft Behemoth, and a card named Nissa, Genesis Mage");
+
+    static {
+        filter.add(Predicates.or(
+                new NamePredicate("Forest"),
+                new NamePredicate("Brambleweft Behemoth"),
+                new NamePredicate("Nissa, Genesis Mage")
+        ));
+    }
+
+    private final Cards cardsAlreadyFound = new CardsImpl();
+    private static final NameAssignment nameAssigner = new NameAssignment(
+            "Forest", "Brambleweft Behemoth", "Nissa, Genesis Mage"
+    );
+
+    public NissasEncouragementGraveyardTarget(Cards cardsAlreadyFound) {
+        super(0, 3, filter, true);
+        this.cardsAlreadyFound.addAll(cardsAlreadyFound);
+    }
+
+    private NissasEncouragementGraveyardTarget(final NissasEncouragementGraveyardTarget target) {
+        super(target);
+        this.cardsAlreadyFound.addAll(target.cardsAlreadyFound);
+    }
+
+    @Override
+    public NissasEncouragementGraveyardTarget copy() {
+        return new NissasEncouragementGraveyardTarget(this);
+    }
+
+    @Override
+    public boolean canTarget(UUID playerId, UUID id, Ability source, Game game) {
+        if (!super.canTarget(playerId, id, source, game)) {
+            return false;
+        }
+        Card card = game.getCard(id);
+        if (card == null) {
+            return false;
+        }
+        if (this.getTargets().isEmpty()) {
+            return true;
+        }
+        Cards cards = new CardsImpl(this.getTargets());
+        cards.addAll(this.cardsAlreadyFound);
+        cards.add(card);
+        return nameAssigner.getRoleCount(cards, game) >= cards.size();
+    }
+
+    @Override
+    public Set<UUID> possibleTargets(UUID sourceControllerId, Ability source, Game game) {
+        Set<UUID> possibleTargets = super.possibleTargets(sourceControllerId, source, game);
+        if (this.getTargets().isEmpty()) {
+            return possibleTargets;
+        }
+        possibleTargets.removeIf(uuid -> {
+            Cards cards = new CardsImpl(this.getTargets());
+            cards.addAll(this.cardsAlreadyFound);
+            cards.add(game.getCard(uuid));
+            return nameAssigner.getRoleCount(cards, game) < cards.size();
+        });
+        return possibleTargets;
     }
 }
