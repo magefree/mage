@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -74,7 +73,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
             for (Ability ability : card.getAbilities()) {
                 if (ability instanceof PartnerWithAbility) {
                     if (foundPartner) {
-                        Assert.assertEquals(Partner, card.getName());
+                        assertTrue(card.hasName(Partner, currentGame));
                     } else {
                         foundPartner = true;
                         Partner = ((PartnerWithAbility) ability).getPartnerName();
@@ -324,13 +323,13 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
                             "Only one snow land, must be basic or common",
                             snowLand.isBasic() || snowLand.getRarity() == Rarity.COMMON
                     );
-                    assertNotEquals(
+                    assertFalse(
                             "Only one snow land, can't be Shimmerdrift Vale",
-                            "Shimmerdrift Vale", snowLand.getName()
+                            snowLand.hasName("Shimmerdrift Vale", currentGame)
                     );
-                    assertNotEquals(
+                    assertFalse(
                             "Only one snow land, can't be Faceless Haven",
-                            "Faceless Haven", snowLand.getName()
+                            snowLand.hasName("Faceless Haven", currentGame)
                     );
                     break;
                 case 2:
@@ -363,7 +362,7 @@ public class BoosterGenerationTest extends MageTestPlayerBase {
 
             foundMDFC |= mdfcCount > 0;
             foundNoMDFC |= mdfcCount == 0;
-            foundVale |= booster.stream().map(MageObject::getName).anyMatch("Shimmerdrift Vale"::equals);
+            foundVale |= booster.stream().anyMatch(card -> card.hasName("Shimmerdrift Vale", currentGame));
             if (foundVale && foundMDFC && foundNoMDFC && i > 20) {
                 break;
             }
