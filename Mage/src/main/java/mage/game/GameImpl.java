@@ -19,6 +19,7 @@ import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.keyword.FinalityCounterEffect;
 import mage.abilities.effects.keyword.ShieldCounterEffect;
 import mage.abilities.effects.keyword.StunCounterEffect;
+import mage.abilities.hint.common.DayNightHint;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
@@ -1443,6 +1444,9 @@ public abstract class GameImpl implements Game {
         getState().addWatcher(bloodthirstWatcher);
     }
 
+    /**
+     * Add source of some global effects (as hidden emblems), so users will see good image in stack and logs
+     */
     public void initGameDefaultHelperEmblems() {
 
         // Rad Counter's trigger source
@@ -1456,6 +1460,7 @@ public abstract class GameImpl implements Game {
         // global card hints for better UX
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             state.addHelperEmblem(new XmageHelperEmblem().withCardHint("storm counter", StormAbility.getHint()), playerId);
+            state.addHelperEmblem(new XmageHelperEmblem().withCardHint("day or night", DayNightHint.instance), playerId);
         }
     }
 

@@ -58,8 +58,8 @@ public class MorphTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
 
     }
 
@@ -73,7 +73,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker using Morph");
 
-        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
+        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");
         setStopAt(3, PhaseStep.END_TURN);
@@ -81,7 +81,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertLife(playerB, 18);
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         assertPermanentCount(playerA, "Pine Walker", 1);
         assertPowerToughness(playerA, "Pine Walker", 5, 5);
         assertTapped("Pine Walker", false);
@@ -104,8 +104,8 @@ public class MorphTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker using Morph");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Icefeather Aven using Morph", TestPlayer.NO_TARGET, "Pine Walker", StackClause.WHILE_NOT_ON_STACK);
 
-        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
-        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
+        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
+        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
         activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{1}{G}{U}: Turn this face-down permanent face up.");
         setChoice(playerA, false); // Don't use return permanent to hand effect
 
@@ -117,7 +117,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, "Pine Walker", 0);
         assertHandCount(playerA, "Icefeather Aven", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
         assertPermanentCount(playerA, "Icefeather Aven", 1);
         assertTapped("Icefeather Aven", true);
 
@@ -148,7 +148,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertLife(playerB, 20); // and not 21
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
         assertPermanentCount(playerB, "Soldier of the Pantheon", 1);
 
     }
@@ -175,10 +175,10 @@ public class MorphTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertPowerToughness(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
     }
 
     /**
@@ -212,7 +212,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, "Pine Walker", 0);
         assertHandCount(playerB, "Doomwake Giant", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         assertPermanentCount(playerB, "Doomwake Giant", 1);
         assertPermanentCount(playerA, "Pine Walker", 1);
         assertPowerToughness(playerA, "Pine Walker", 4, 4);
@@ -252,7 +252,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, "Ponyback Brigade", 0);
         assertHandCount(playerB, "Doomwake Giant", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         assertPermanentCount(playerA, "Goblin Token", 3);
         assertPowerToughness(playerA, "Goblin Token", 1, 1, Filter.ComparisonScope.Any);
         assertPermanentCount(playerB, "Doomwake Giant", 1);
@@ -323,7 +323,7 @@ public class MorphTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Sagu Mauler", 0);
         assertHandCount(playerB, "Disdainful Stroke", 1); // can't be cast
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
 
     }
 
@@ -351,7 +351,7 @@ public class MorphTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sagu Mauler using Morph", TestPlayer.NO_TARGET, "Sagu Mauler", StackClause.WHILE_NOT_ON_STACK);
 
         // showBattlefield("A battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Echoing Decay", EmptyNames.FACE_DOWN_CREATURE.toString());
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Echoing Decay", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         // showBattlefield("A battle after", 1, PhaseStep.END_TURN, playerA);
         setStopAt(1, PhaseStep.END_TURN);
@@ -364,7 +364,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertHandCount(playerA, "Sagu Mauler", 0);
         assertHandCount(playerB, "Echoing Decay", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
         assertGraveyardCount(playerA, "Sagu Mauler", 1);
     }
 
@@ -410,7 +410,7 @@ public class MorphTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Birchlore Rangers using Morph");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Swords to Plowshares", "");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Swords to Plowshares", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -449,7 +449,7 @@ public class MorphTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix using Morph");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.toString());
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -489,7 +489,7 @@ public class MorphTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ashcloud Phoenix using Morph");
 
         attack(2, playerB, "Mirri, Cat Warrior");
-        block(2, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), "Mirri, Cat Warrior");
+        block(2, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), "Mirri, Cat Warrior");
 
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
@@ -528,7 +528,7 @@ public class MorphTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akroma, Angel of Fury using Morph");
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Supplant Form");
-        addTarget(playerB, EmptyNames.FACE_DOWN_CREATURE.toString());
+        addTarget(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -536,13 +536,13 @@ public class MorphTest extends CardTestPlayerBase {
         assertLife(playerB, 20);
 
         assertHandCount(playerA, "Akroma, Angel of Fury", 1);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         assertPermanentCount(playerA, "Akroma, Angel of Fury", 0);
         assertGraveyardCount(playerB, "Supplant Form", 1);
 
         assertPermanentCount(playerB, "Akroma, Angel of Fury", 0);
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_TOKEN.toString(), 1);
-        assertPowerToughness(playerB, EmptyNames.FACE_DOWN_TOKEN.toString(), 2, 2);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_TOKEN.getTestCommand(), 1);
+        assertPowerToughness(playerB, EmptyNames.FACE_DOWN_TOKEN.getTestCommand(), 2, 2);
     }
 
     /**
@@ -567,7 +567,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertLife(playerA, 20);
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
 
     }
 
@@ -591,7 +591,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pine Walker using Morph");
 
-        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
+        attack(3, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{4}{G}: Turn this face-down permanent face up.");
         setStopAt(3, PhaseStep.END_TURN);
@@ -599,7 +599,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertLife(playerB, 18);
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         assertPermanentCount(playerA, "Pine Walker", 1);
         assertPowerToughness(playerA, "Pine Walker", 5, 5);
         assertTapped("Pine Walker", false);
@@ -652,7 +652,7 @@ public class MorphTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Reflector Mage", 1);
         assertPermanentCount(playerB, "Rattleclaw Mystic", 0);
         assertHandCount(playerB, "Rattleclaw Mystic", 1); // can't play
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0); // don't try as morph
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0); // don't try as morph
     }
 
     @Test
@@ -685,7 +685,7 @@ public class MorphTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Reflector Mage", 1);
         assertPermanentCount(playerB, "Rattleclaw Mystic", 0);
         assertHandCount(playerB, "Rattleclaw Mystic", 0); // able cast as morph
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     /**
@@ -809,7 +809,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Fatal Push", 1);
         assertGraveyardCount(playerA, "Pine Walker", 1);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
 
     }
 
@@ -842,7 +842,7 @@ public class MorphTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
         assertHandCount(playerA, 0);
 
         assertTappedCount("Island", true, 3);
@@ -877,7 +877,7 @@ public class MorphTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Quicksilver Dragon using Morph");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.toString());
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         setStopAt(2, PhaseStep.UPKEEP);
         execute();
@@ -959,7 +959,7 @@ public class MorphTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Zoetic Cavern", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
@@ -984,7 +984,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Island", 1);
         assertPermanentCount(playerA, "Zoetic Cavern", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
@@ -1007,7 +1007,7 @@ public class MorphTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Zoetic Cavern", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
@@ -1048,7 +1048,7 @@ public class MorphTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
@@ -1069,7 +1069,7 @@ public class MorphTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
@@ -1099,7 +1099,7 @@ public class MorphTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
@@ -1122,7 +1122,7 @@ public class MorphTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2);
     }
 
     @Test
@@ -1134,10 +1134,10 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Monastery Flock using Morph");
 
-        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 3);
         checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{U}: Turn this", true);
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Tamiyo's Compleation", EmptyNames.FACE_DOWN_CREATURE.toString());
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Tamiyo's Compleation", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         checkPlayableAbility("unmorph", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{U}: Turn this", false);
 
@@ -1145,9 +1145,9 @@ public class MorphTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertTapped(EmptyNames.FACE_DOWN_CREATURE.toString(), true);
-        assertAttachedTo(playerA, "Tamiyo's Compleation", EmptyNames.FACE_DOWN_CREATURE.toString(), true);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+        assertTapped(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), true);
+        assertAttachedTo(playerA, "Tamiyo's Compleation", EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), true);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 3);
     }
 
     @Test
@@ -1162,10 +1162,10 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sage-Eye Harrier using Morph");
 
-        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
         checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{3}{W}: Turn this", true);
 
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Minimus Containment", EmptyNames.FACE_DOWN_CREATURE.toString());
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Minimus Containment", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         checkPlayableAbility("unmorph", 1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{3}{W}: Turn this", false);
 
@@ -1175,10 +1175,10 @@ public class MorphTest extends CardTestPlayerBase {
         setStopAt(2, PhaseStep.UPKEEP);
         execute();
 
-        assertSubtype(EmptyNames.FACE_DOWN_CREATURE.toString(), SubType.TREASURE);
-        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.ARTIFACT, true);
-        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.CREATURE, false);
-        assertAttachedTo(playerA, "Minimus Containment", EmptyNames.FACE_DOWN_CREATURE.toString(), true);
+        assertSubtype(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), SubType.TREASURE);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), CardType.ARTIFACT, true);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), CardType.CREATURE, false);
+        assertAttachedTo(playerA, "Minimus Containment", EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), true);
     }
 
     @Test
@@ -1190,7 +1190,7 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Monastery Flock using Morph");
 
-        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 3);
         checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{U}: Turn this", true);
 
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mycosynth Lattice");
@@ -1201,10 +1201,10 @@ public class MorphTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.ARTIFACT, true);
-        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.CREATURE, true);
-        assertNotSubtype(EmptyNames.FACE_DOWN_CREATURE.toString(), SubType.BIRD);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), CardType.ARTIFACT, true);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), CardType.CREATURE, true);
+        assertNotSubtype(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), SubType.BIRD);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 3);
     }
 
     @Test
@@ -1216,17 +1216,17 @@ public class MorphTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Monastery Flock using Morph");
 
-        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+        checkPT("face down", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 3);
         checkPlayableAbility("unmorph", 1, PhaseStep.BEGIN_COMBAT, playerA, "{U}: Turn this", true);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.ARTIFACT, true);
-        assertType(EmptyNames.FACE_DOWN_CREATURE.toString(), CardType.CREATURE, true);
-        assertNotSubtype(EmptyNames.FACE_DOWN_CREATURE.toString(), SubType.BIRD);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 3);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), CardType.ARTIFACT, true);
+        assertType(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), CardType.CREATURE, true);
+        assertNotSubtype(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), SubType.BIRD);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 3);
     }
 
     private void assertMorphedFaceDownColor(String info, String needColor) {

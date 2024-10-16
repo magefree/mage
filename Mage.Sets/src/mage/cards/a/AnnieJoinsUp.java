@@ -12,7 +12,6 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
@@ -79,10 +78,7 @@ class AnnieJoinsUpEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!(event instanceof NumberOfTriggersEvent)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(((NumberOfTriggersEvent) event).getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         return permanent != null
                 && permanent.isControlledBy(source.getControllerId())
                 && permanent.isLegendary(game)

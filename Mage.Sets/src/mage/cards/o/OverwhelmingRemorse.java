@@ -30,7 +30,7 @@ public final class OverwhelmingRemorse extends CardImpl {
         // This spell costs {1} less to cast for each creature card in your graveyard.
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionForEachSourceEffect(1, xValue)
-        ).addHint(hint));
+        ).addHint(hint).setRuleAtTheTop(true));
 
         // Exile target creature or planeswalker.
         this.getSpellAbility().addEffect(new ExileTargetEffect());

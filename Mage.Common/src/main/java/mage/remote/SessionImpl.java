@@ -42,6 +42,11 @@ public class SessionImpl implements Session {
 
     private static final Logger logger = Logger.getLogger(SessionImpl.class);
 
+    // connection validation on client side (jboss's ping implementation, depends on server config's leasePeriod)
+    // client's validation ping must be less than server's leasePeriod
+    private static final int SESSION_VALIDATOR_PING_PERIOD_SECS = 4;
+    private static final int SESSION_VALIDATOR_PING_TIMEOUT_SECS = 3;
+
     public static final String ADMIN_NAME = "Admin"; // if you change here then change in User too
     public static final String KEEP_MY_OLD_SESSION = "keep_my_old_session"; // for disconnects without active session lose (keep tables/games)
 
@@ -65,15 +70,10 @@ public class SessionImpl implements Session {
     private static final int PING_CYCLES = 10;
     private final LinkedList<Long> pingTime = new LinkedList<>();
     private String lastPingInfo = "";
-    private static boolean debugMode = false;
 
     private boolean canceled = false;
     private boolean jsonLogActive = false;
     private String lastError = "";
-
-    static {
-        debugMode = System.getProperty("debug.mage") != null;
-    }
 
     public SessionImpl(MageClient client) {
         this.client = client;
@@ -381,7 +381,7 @@ public class SessionImpl implements Session {
                 clientMetadata.put("generalizeSocketException", "true");
 
                 /* A remoting server also has the capability to detect when a client is no longer available.
-                 * This is done by estabilishing a lease with the remoting clients that connect to a server.
+                 * This is done by establishing a lease with the remoting clients that connect to a server.
                  * On the client side, an org.jboss.remoting.LeasePinger periodically sends PING messages to
                  * the server, and on the server side an org.jboss.remoting.Lease informs registered listeners
                  * if the PING doesn't arrive withing the specified timeout period. */
@@ -437,15 +437,10 @@ public class SessionImpl implements Session {
                 clientMetadata.put(Remoting.USE_CLIENT_CONNECTION_IDENTITY, "true");
                 callbackClient = new Client(clientLocator, "callback", clientMetadata);
 
+                // client side connection validator (jboss's implementation of ping)
                 Map<String, String> listenerMetadata = new HashMap<>();
-                if (debugMode) {
-                    // prevent client from disconnecting while debugging
-                    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "1000000");
-                    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "900000");
-                } else {
-                    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, "15000");
-                    listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, "13000");
-                }
+                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_PERIOD, String.valueOf(SESSION_VALIDATOR_PING_PERIOD_SECS * 1000));
+                listenerMetadata.put(ConnectionValidator.VALIDATOR_PING_TIMEOUT, String.valueOf(SESSION_VALIDATOR_PING_TIMEOUT_SECS * 1000));
                 callbackClient.connect(new MageClientConnectionListener(), listenerMetadata);
 
                 Map<String, String> callbackMetadata = new HashMap<>();
@@ -589,13 +584,13 @@ public class SessionImpl implements Session {
 
     @Override
     public synchronized boolean sendFeedback(String title, String type, String message, String email) {
-        if (isConnected()) {
-            try {
+        try {
+            if (isConnected()) {
                 server.serverAddFeedbackMessage(sessionId, connection.getUsername(), title, type, message, email);
                 return true;
-            } catch (MageException e) {
-                logger.error(e);
             }
+        } catch (MageException ex) {
+            handleMageException(ex);
         }
         return false;
     }
@@ -1706,10 +1701,12 @@ public class SessionImpl implements Session {
     @Override
     public void ping() {
         try {
+            // client side connection validator (xmage's implementation)
+            //
             // jboss uses lease mechanic for connection check but xmage needs additional data like pings stats
             // ping must work after login only, all other actions are single call (example: register new user)
-            // sessionId fills on connection
-            // serverState fills on good login
+            // - sessionId fills on connection
+            // - serverState fills on good login
             if (!isConnected() || sessionId == null || serverState == null) {
                 return;
             }

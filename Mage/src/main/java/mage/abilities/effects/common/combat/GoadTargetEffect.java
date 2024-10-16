@@ -26,7 +26,11 @@ public class GoadTargetEffect extends ContinuousEffectImpl {
      * each combat if able and attacks a player other than that player if able.
      */
     public GoadTargetEffect() {
-        super(Duration.UntilYourNextTurn, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
+        this(Duration.UntilYourNextTurn);
+    }
+
+    public GoadTargetEffect(Duration duration) {
+        super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Detriment);
     }
 
     private GoadTargetEffect(final GoadTargetEffect effect) {

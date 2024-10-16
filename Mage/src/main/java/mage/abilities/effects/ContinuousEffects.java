@@ -120,8 +120,8 @@ public class ContinuousEffects implements Serializable {
         preventionEffects.removeEndOfCombatEffects();
         requirementEffects.removeEndOfCombatEffects();
         restrictionEffects.removeEndOfCombatEffects();
-        for (ContinuousEffectsList asThoughtlist : asThoughEffectsMap.values()) {
-            asThoughtlist.removeEndOfCombatEffects();
+        for (ContinuousEffectsList asThoughlist : asThoughEffectsMap.values()) {
+            asThoughlist.removeEndOfCombatEffects();
         }
         costModificationEffects.removeEndOfCombatEffects();
         spliceCardEffects.removeEndOfCombatEffects();
@@ -134,11 +134,25 @@ public class ContinuousEffects implements Serializable {
         preventionEffects.removeEndOfTurnEffects(game);
         requirementEffects.removeEndOfTurnEffects(game);
         restrictionEffects.removeEndOfTurnEffects(game);
-        for (ContinuousEffectsList asThoughtlist : asThoughEffectsMap.values()) {
-            asThoughtlist.removeEndOfTurnEffects(game);
+        for (ContinuousEffectsList asThoughlist : asThoughEffectsMap.values()) {
+            asThoughlist.removeEndOfTurnEffects(game);
         }
         costModificationEffects.removeEndOfTurnEffects(game);
         spliceCardEffects.removeEndOfTurnEffects(game);
+    }
+
+    public synchronized void removeBeginningOfEndStepEffects(Game game) {
+        layeredEffects.removeBeginningOfEndStepEffects(game);
+        continuousRuleModifyingEffects.removeBeginningOfEndStepEffects(game);
+        replacementEffects.removeBeginningOfEndStepEffects(game);
+        preventionEffects.removeBeginningOfEndStepEffects(game);
+        requirementEffects.removeBeginningOfEndStepEffects(game);
+        restrictionEffects.removeBeginningOfEndStepEffects(game);
+        for (ContinuousEffectsList asThoughlist : asThoughEffectsMap.values()) {
+            asThoughlist.removeBeginningOfEndStepEffects(game);
+        }
+        costModificationEffects.removeBeginningOfEndStepEffects(game);
+        spliceCardEffects.removeBeginningOfEndStepEffects(game);
     }
 
     public synchronized void removeInactiveEffects(Game game) {

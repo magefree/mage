@@ -95,7 +95,7 @@ class NikoLightOfHopeEffect extends OneShotEffect {
                 FilterPermanent filter = new FilterPermanent("shards");
                 filter.add(SubType.SHARD.getPredicate());
                 for (Permanent copyTo : game.getBattlefield().getAllActivePermanents(filter, controller.getId(), game)) {
-                    game.copyPermanent(Duration.UntilTheNextEndStep, permanent, copyTo.getId(), source, new EmptyCopyApplier());
+                    game.copyPermanent(Duration.UntilNextEndStep, permanent, copyTo.getId(), source, new EmptyCopyApplier());
                 }
                 ExileZone exile = game.getExile().getExileZone(source.getSourceId());
                 if (exile != null && !exile.isEmpty()) {

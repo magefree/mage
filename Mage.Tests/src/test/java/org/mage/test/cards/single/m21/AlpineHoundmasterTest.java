@@ -66,7 +66,6 @@ public class AlpineHoundmasterTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alpine Houndmaster");
         setChoice(playerA, true);
         addTarget(playerA, "Igneous Cur^Alpine Watchdog");
-        //addTarget(playerA, "");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

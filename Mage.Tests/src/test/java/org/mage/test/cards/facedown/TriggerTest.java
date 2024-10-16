@@ -41,7 +41,7 @@ public class TriggerTest extends CardTestPlayerBase {
         
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.toString());
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
         
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();

@@ -12,7 +12,6 @@ import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.NumberOfTriggersEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.util.CardUtil;
@@ -78,11 +77,10 @@ class EchoesOfEternityEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!(event instanceof NumberOfTriggersEvent)
-                || !source.isControlledBy(game.getControllerId(event.getSourceId()))) {
+        if (!source.isControlledBy(event.getPlayerId())) {
             return false;
         }
-        Permanent permanent = game.getPermanent(event.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (permanent != null && permanent.getColor(game).isColorless()
                 && !permanent.getId().equals(source.getSourceId())) {
             return true;

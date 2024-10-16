@@ -61,7 +61,7 @@ class MageHuntersOnslaughtDelayedTriggeredAbility extends DelayedTriggeredAbilit
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
         if (permanent == null) {
             return false;
         }

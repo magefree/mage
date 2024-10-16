@@ -46,6 +46,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Black Sun's Zenith", 126, Rarity.RARE, mage.cards.b.BlackSunsZenith.class));
         cards.add(new SetCardInfo("Bloodthirsty Blade", 225, Rarity.UNCOMMON, mage.cards.b.BloodthirstyBlade.class));
         cards.add(new SetCardInfo("Bojuka Bog", 250, Rarity.COMMON, mage.cards.b.BojukaBog.class));
+        cards.add(new SetCardInfo("Boltbender", 30, Rarity.RARE, mage.cards.b.Boltbender.class));
         cards.add(new SetCardInfo("Boros Garrison", 251, Rarity.UNCOMMON, mage.cards.b.BorosGarrison.class));
         cards.add(new SetCardInfo("Boros Reckoner", 201, Rarity.RARE, mage.cards.b.BorosReckoner.class));
         cards.add(new SetCardInfo("Brainstorm", 96, Rarity.COMMON, mage.cards.b.Brainstorm.class));
@@ -125,10 +126,12 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Graf Mole", 170, Rarity.UNCOMMON, mage.cards.g.GrafMole.class));
         cards.add(new SetCardInfo("Grave Titan", 129, Rarity.MYTHIC, mage.cards.g.GraveTitan.class));
         cards.add(new SetCardInfo("Gruul Turf", 265, Rarity.UNCOMMON, mage.cards.g.GruulTurf.class));
+        cards.add(new SetCardInfo("Havoc Eater", 31, Rarity.RARE, mage.cards.h.HavocEater.class));
         cards.add(new SetCardInfo("Hidden Dragonslayer", 69, Rarity.RARE, mage.cards.h.HiddenDragonslayer.class));
         cards.add(new SetCardInfo("Hooded Hydra", 171, Rarity.MYTHIC, mage.cards.h.HoodedHydra.class));
         cards.add(new SetCardInfo("Hornet Queen", 172, Rarity.RARE, mage.cards.h.HornetQueen.class));
         cards.add(new SetCardInfo("Hostile Desert", 266, Rarity.RARE, mage.cards.h.HostileDesert.class));
+        cards.add(new SetCardInfo("Hot Pursuit", 32, Rarity.RARE, mage.cards.h.HotPursuit.class));
         cards.add(new SetCardInfo("Hydroid Krasis", 212, Rarity.RARE, mage.cards.h.HydroidKrasis.class));
         cards.add(new SetCardInfo("Idol of Oblivion", 229, Rarity.RARE, mage.cards.i.IdolOfOblivion.class));
         cards.add(new SetCardInfo("Imperial Hellkite", 155, Rarity.RARE, mage.cards.i.ImperialHellkite.class));
@@ -212,6 +215,7 @@ public final class MurdersAtKarlovManorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Prisoner's Dilemma", 34, Rarity.RARE, mage.cards.p.PrisonersDilemma.class));
         cards.add(new SetCardInfo("Promise of Loyalty", 79, Rarity.RARE, mage.cards.p.PromiseOfLoyalty.class));
         cards.add(new SetCardInfo("Psychosis Crawler", 234, Rarity.RARE, mage.cards.p.PsychosisCrawler.class));
+        cards.add(new SetCardInfo("Ransom Note", 45, Rarity.RARE, mage.cards.r.RansomNote.class));
         cards.add(new SetCardInfo("Ravenous Chupacabra", 136, Rarity.UNCOMMON, mage.cards.r.RavenousChupacabra.class));
         cards.add(new SetCardInfo("Reanimate", 137, Rarity.RARE, mage.cards.r.Reanimate.class));
         cards.add(new SetCardInfo("Redemption Arc", 13, Rarity.RARE, mage.cards.r.RedemptionArc.class));

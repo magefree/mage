@@ -27,7 +27,7 @@ public final class DevouringHellion extends CardImpl {
         // As Devouring Hellion enters the battlefield, you may sacrifice any number of creatures and/or planeswalkers. If you do, it enters with twice that many +1/+1 counters on it.
         this.addAbility(new SimpleStaticAbility(Zone.ALL,
                 new DevourEffect(2, StaticFilters.FILTER_CONTROLLED_PERMANENT_CREATURE_OR_PLANESWALKER)
-                        .setText("As {this} enters the battlefield, you may sacrifice any number of creatures and/or planeswalkers."
+                        .setText("As {this} enters, you may sacrifice any number of creatures and/or planeswalkers."
                                 + " If you do, it enters with twice that many +1/+1 counters on it")
         ));
     }
