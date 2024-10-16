@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.common.BeginningOfSecondMainTriggeredAbility;
 import mage.abilities.condition.common.OpponentsLostLifeCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -32,7 +32,7 @@ public final class FireglassMentor extends CardImpl {
 
         // At the beginning of your second main phase, if an opponent lost life this turn, exile the top two cards of your library. Choose one of them. Until end of turn, you may play that card.
         //TODO: Currently using postcombat main phase, change it (and most others) to second main phase
-        this.addAbility(new BeginningOfPostCombatMainTriggeredAbility(
+        this.addAbility(new BeginningOfSecondMainTriggeredAbility(
                 new ConditionalOneShotEffect(new FireglassMentorEffect(), OpponentsLostLifeCondition.instance),
                 TargetController.YOU, false));
     }

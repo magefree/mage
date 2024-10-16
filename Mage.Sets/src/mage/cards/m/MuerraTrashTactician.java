@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.ExpendTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -38,7 +38,7 @@ public final class MuerraTrashTactician extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your first main phase, add {R} or {G} for each Raccoon you control.
-        this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(
                 new AddManaInAnyCombinationEffect(xValue, xValue, ColoredManaSymbol.R, ColoredManaSymbol.G)
                         .setText("add {R} or {G} for each Raccoon you control"),
                 TargetController.YOU, false

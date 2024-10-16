@@ -23,7 +23,7 @@ import mage.game.events.GameEvent.EventType;
  */
 public final class ChancellorOfTheTangle extends CardImpl {
 
-    private static String abilityText = "at the beginning of your first main phase, add {G}";
+    private static String abilityText = "at the beginning of your first main phase of the game, add {G}";
 
     public ChancellorOfTheTangle(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{4}{G}{G}{G}");
