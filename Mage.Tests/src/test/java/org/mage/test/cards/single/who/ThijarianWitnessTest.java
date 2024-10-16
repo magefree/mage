@@ -119,7 +119,7 @@ public class ThijarianWitnessTest extends CardTestPlayerBase {
 
         attack(1, playerA, tiny);
         block(1, playerB, tiny, tiny);
-        setChoice(playerA, ""); //stack triggers
+        setChoice(playerA, "<i>Bear Witness</i>"); // x2 triggers from Thijarian Witness
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -158,8 +158,8 @@ public class ThijarianWitnessTest extends CardTestPlayerBase {
 
         attack(1, playerA, tiny);
         block(1, playerB, tiny, tiny);
-        setChoice(playerA, ""); //stack triggers
-        setChoice(playerB, "");
+        setChoice(playerA, "<i>Bear Witness</i>"); // x2 triggers from Thijarian Witness
+        setChoice(playerB, "<i>Bear Witness</i>"); // x2 triggers from Thijarian Witness
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

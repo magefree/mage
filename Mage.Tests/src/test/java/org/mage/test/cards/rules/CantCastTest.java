@@ -136,7 +136,7 @@ public class CantCastTest extends CardTestPlayerBase {
             }
         }
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         assertHandCount(playerA, "Pine Walker", 1);
     }
 

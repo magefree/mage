@@ -225,6 +225,6 @@ public class GontiLordOfLuxuryEffectTest extends CardTestPlayerBase {
         setStopAt(4, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 }

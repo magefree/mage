@@ -50,7 +50,7 @@ public class UnboundFlourishingTest extends CardTestPlayerBase {
         // cast with X=3, but double it twice
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Endless One");
         setChoice(playerA, "X=3");
-        setChoice(playerA, ""); //stack triggers
+        setChoice(playerA, "Whenever you cast a permanent spell"); // x2 triggers from Unbound Flourishing
         checkPermanentCounters("after", 1, PhaseStep.BEGIN_COMBAT, playerA, "Endless One", CounterType.P1P1, 3 * 2 * 2);
 
         setStrictChooseMode(true);

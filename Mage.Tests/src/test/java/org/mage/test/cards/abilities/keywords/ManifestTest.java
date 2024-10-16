@@ -37,7 +37,7 @@ public class ManifestTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
@@ -55,7 +55,7 @@ public class ManifestTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
@@ -75,8 +75,8 @@ public class ManifestTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
@@ -90,32 +90,32 @@ public class ManifestTest extends CardTestPlayerBase {
         });
 
         // turn 1
-        checkPermanentCount("turn 1.A - no face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
-        checkPermanentCount("turn 1.B - no face down", 1, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        checkPermanentCount("turn 1.A - no face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
+        checkPermanentCount("turn 1.B - no face down", 1, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
 
         // turn 2
-        checkPermanentCount("turn 2.A - +1 face down", 2, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        checkPermanentCount("turn 2.B - no face down", 2, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        checkPermanentCount("turn 2.A - +1 face down", 2, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        checkPermanentCount("turn 2.B - no face down", 2, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
 
         // turn 3
-        checkPermanentCount("turn 3.A - +1 face down", 3, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        checkPermanentCount("turn 3.B - no face down", 3, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        checkPermanentCount("turn 3.A - +1 face down", 3, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        checkPermanentCount("turn 3.B - no face down", 3, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
 
         // turn 4
-        checkPermanentCount("turn 4.A - +2 face down", 4, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
-        checkPermanentCount("turn 4.B - no face down", 4, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        checkPermanentCount("turn 4.A - +2 face down", 4, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2);
+        checkPermanentCount("turn 4.B - no face down", 4, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
 
         // turn 5
-        checkPermanentCount("turn 5.A - +2 face down", 5, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
-        checkPermanentCount("turn 5.B - no face down", 5, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        checkPermanentCount("turn 5.A - +2 face down", 5, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2);
+        checkPermanentCount("turn 5.B - no face down", 5, PhaseStep.PRECOMBAT_MAIN, playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
 
 
         setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         Assert.assertEquals("manifested cards must be taken from opponent's library", 2, playerA.getLibrary().size() - playerB.getLibrary().size());
     }
 
@@ -137,12 +137,12 @@ public class ManifestTest extends CardTestPlayerBase {
         // manifest
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Soul Summons");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("need face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        checkPermanentCount("need face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
 
         // blink
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", EmptyNames.FACE_DOWN_CREATURE.toString());
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("need no face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        checkPermanentCount("need no face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
 
         runCode("after blink", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             if (cardAfterBlink == null) {
@@ -239,10 +239,10 @@ public class ManifestTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
         // not tapped
-        assertTapped(EmptyNames.FACE_DOWN_CREATURE.toString(), false);
+        assertTapped(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), false);
     }
 
     /**
@@ -271,8 +271,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
         assertLife(playerB, 20);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
         // PlayerB's Silvercoat Lion should not have get -1/-1/
         assertPermanentCount(playerB, "Silvercoat Lion", 1);
         assertPowerToughness(playerB, "Silvercoat Lion", 2, 2);
@@ -308,8 +308,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Reality Shift", 1);
         assertExileCount("Silvercoat Lion", 1);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
         // PlayerA's Pillarfield Ox should not have get -1/-1/
         assertPermanentCount(playerB, "Pillarfield Ox", 1);
         assertPowerToughness(playerB, "Pillarfield Ox", 2, 4);
@@ -346,8 +346,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Reality Shift", 1);
         assertExileCount("Silvercoat Lion", 1);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
 
     }
 
@@ -382,8 +382,8 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Reality Shift", 1);
         assertExileCount("Silvercoat Lion", 1);
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
         assertPowerToughness(playerA, "Foundry Street Denizen", 1, 1);
 
     }
@@ -413,7 +413,7 @@ public class ManifestTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Reality Shift", "Silvercoat Lion");
         // showBattlefield("A battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerA);
         // showBattlefield("B battle", 1, PhaseStep.POSTCOMBAT_MAIN, playerB);
-        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Silence the Believers", EmptyNames.FACE_DOWN_CREATURE.toString());
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Silence the Believers", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -425,7 +425,7 @@ public class ManifestTest extends CardTestPlayerBase {
         assertExileCount("Silvercoat Lion", 1);
         assertExileCount("Gore Swine", 1);
         // no facedown creature is on the battlefield
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
 
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
             if (card.getName().equals("Gore Swine")) {
@@ -464,7 +464,7 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
         // a facedown creature is on the battlefield
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
 
     }
 
@@ -504,7 +504,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         assertPermanentCount(playerB, "Aerie Bowmasters", 1);
         assertPowerToughness(playerB, "Aerie Bowmasters", 4, 5); // 3/4  and the +1/+1 counter from Megamorph
         Permanent aerie = getPermanent("Aerie Bowmasters", playerB);
@@ -542,7 +542,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
         assertPermanentCount(playerB, "Aerie Bowmasters", 1);
         assertPowerToughness(playerB, "Aerie Bowmasters", 3, 4); // 3/4 without counter (megamorph not used)
         Permanent aerie = getPermanent("Aerie Bowmasters", playerB);
@@ -582,7 +582,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Silvercoat Lion", 1);
 
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
 
     }
 
@@ -619,7 +619,7 @@ public class ManifestTest extends CardTestPlayerBase {
         assertGraveyardCount(playerB, "Whisperwood Elemental", 1);
         assertGraveyardCount(playerB, "Silvercoat Lion", 2);
 
-        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
+        assertPermanentCount(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2);
 
     }
 
@@ -653,7 +653,7 @@ public class ManifestTest extends CardTestPlayerBase {
         setChoice(playerB, "Silvercoat Lion");
 
         activateAbility(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Sacrifice a creature");
-        setChoice(playerB, EmptyNames.FACE_DOWN_CREATURE.toString());
+        setChoice(playerB, EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
@@ -704,7 +704,7 @@ public class ManifestTest extends CardTestPlayerBase {
 
         waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN, playerB);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cloudshift", EmptyNames.FACE_DOWN_CREATURE.toString());
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Cloudshift", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
@@ -739,7 +739,7 @@ public class ManifestTest extends CardTestPlayerBase {
                 .findFirst()
                 .orElse(null);
         Assert.assertNotNull(perm);
-        Assert.assertEquals("server side face down permanent must have empty name", EmptyNames.FACE_DOWN_CREATURE.toString(), perm.getName());
+        Assert.assertEquals("server side face down permanent must have empty name", EmptyNames.FACE_DOWN_CREATURE.getObjectName(), perm.getName());
         GameView gameView = new GameView(game.getState(), game, viewFromPlayer.getId(), null);
         PlayerView playerView = gameView.getPlayers()
                 .stream()
@@ -844,8 +844,8 @@ public class ManifestTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, excommunicate, 1);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
         assertLife(playerA, 20);
         assertLife(playerB, 18);
     }

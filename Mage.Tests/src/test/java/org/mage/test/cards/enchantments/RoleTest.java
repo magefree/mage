@@ -163,7 +163,7 @@ public class RoleTest extends CardTestPlayerBase {
 
         addTarget(playerA, bear + "^" + wardens);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, become);
-        setChoice(playerA, ""); // order triggers
+        setChoice(playerA, "<i>Constellation</i>"); // x2 triggers from Nexus Wardens
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

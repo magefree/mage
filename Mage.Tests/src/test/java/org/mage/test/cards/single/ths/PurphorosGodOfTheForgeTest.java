@@ -1,6 +1,5 @@
 package org.mage.test.cards.single.ths;
 
-import mage.constants.CardType;
 import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -48,7 +47,7 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
 
         assertGraveyardCount(playerB, "Reach of Shadows", 1);
         assertPermanentCount(playerA, "Ashcloud Phoenix", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
 
         Permanent purphorosGodOfTheForge = getPermanent("Purphoros, God of the Forge", playerA);
         Assert.assertFalse("Purphoros may not be a creature but it is", purphorosGodOfTheForge.isCreature(currentGame));
@@ -79,7 +78,7 @@ public class PurphorosGodOfTheForgeTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, "Ashcloud Phoenix", 0);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
 
         assertLife(playerA, 18); // 2 damage from Eidolon of the Great Revel
         assertLife(playerB, 18); // 2 damage from Purphoros for the morphed Phoenix

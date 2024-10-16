@@ -77,7 +77,7 @@ public class BlitzTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, decoy + withBlitz);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Double Major",decoy);
 
-        setChoice(playerA, ""); //stack triggers
+        setChoice(playerA, "At the beginning of the next end step"); // x2 triggers
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

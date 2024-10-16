@@ -72,7 +72,7 @@ public class AlteredEgoTest extends CardTestPlayerBase {
         setChoice(playerB, "X=3");
         setChoice(playerB, true); // use copy
         setChoice(playerB, "Endless One"); // copy target
-        setChoice(playerB, ""); // Order place counters effects
+        setChoice(playerB, "Endless One"); // x2 replacement effects from Endless One
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);

@@ -5199,7 +5199,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                         visibleName = card.getLogName() + (card.isCopy() ? " (Copy)" : "");
                     } else {
-                        visibleName = "a " + GameLog.getNeutralObjectIdName(EmptyNames.FACE_DOWN_CARD.toString(), card.getId());
+                        visibleName = "a " + GameLog.getNeutralObjectIdName(EmptyNames.FACE_DOWN_CARD.getObjectName(), card.getId());
                     }
                     game.informPlayers(this.getLogName() + " moves " + visibleName
                             + (fromZone != null ? " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) : "")

@@ -33,7 +33,7 @@ public class JackdawSaviorTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Damnation");
-        setChoice(playerA, ""); //Order triggers
+        setChoice(playerA, "Whenever {this} or another creature you control"); // x2 triggers from Jackdaw Savior
         addTarget(playerA, "Jackdaw Savior");
         addTarget(playerA, "Memnite");
 

@@ -154,6 +154,13 @@ public class TestPlayer implements Player {
     }
 
     public void addChoice(String choice) {
+        // prepare face down
+        // how-to fix:
+        // * for face down choices: use EmptyNames.XXX.getTestCommand instead toString
+        // * for replacement/triggers choices: comment choice command, look at logs for triggers list and use starting text in the choice instead empty
+        Assert.assertNotEquals("Choice can't be empty", "", choice);
+        choice = EmptyNames.replaceTestCommandByObjectName(choice);
+
         choices.add(choice);
     }
 
@@ -182,6 +189,12 @@ public class TestPlayer implements Player {
     }
 
     public void addTarget(String target) {
+        // prepare face down
+        // how-to fix: if it's a face down object then use getTestCommand instead toString
+        Assert.assertNotEquals("Target can't be empty", "", target);
+
+        target = EmptyNames.replaceTestCommandByObjectName(target);
+
         targets.add(target);
     }
 

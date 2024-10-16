@@ -15,6 +15,9 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class NamePredicateTest extends CardTestPlayerBase {
 
     private void assertNamePredicate(String checkName, int needAmount, String needName, boolean ignoreMtgRules) {
+        //Assert.assertNotEquals("", needName); empty strings also testing here, so no need to assert it
+        needName = EmptyNames.replaceTestCommandByObjectName(needName);
+
         FilterPermanent filter = new FilterPermanent();
         filter.add(new NamePredicate(needName, ignoreMtgRules));
         Assert.assertEquals(checkName, needAmount, currentGame.getBattlefield().countAll(filter, playerA.getId(), currentGame));
@@ -33,20 +36,20 @@ public class NamePredicateTest extends CardTestPlayerBase {
         execute();
 
         assertPermanentCount(playerA, 3 + 1);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
 
         // use mtg rules for name searching
         assertNamePredicate("by rules - empty choice must return zero", 0, "", false);
-        assertNamePredicate("by rules - face down choice must return zero", 0, EmptyNames.FACE_DOWN_CREATURE.toString(), false);
+        assertNamePredicate("by rules - face down choice must return zero", 0, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), false);
         assertNamePredicate("by rules - non existing name must return zero", 0, "Island", false);
         assertNamePredicate("by rules - existing name must work", 3, "Forest", false);
 
         // use inner engine for name searching (e.g. must find face down permanents with empty names)
-        if (!EmptyNames.FACE_DOWN_CREATURE.toString().isEmpty()) {
+        if (!EmptyNames.FACE_DOWN_CREATURE.getObjectName().isEmpty()) {
             // if face down permanents gets inner name someday then empty choice must ignore it
             assertNamePredicate("by inner - empty choice must return zero", 0, "", true);
         }
-        assertNamePredicate("by inner - face down choice must work", 1, EmptyNames.FACE_DOWN_CREATURE.toString(), true);
+        assertNamePredicate("by inner - face down choice must work", 1, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), true);
         assertNamePredicate("by inner - non existing name must return zero", 0, "Island", true);
         assertNamePredicate("by inner - existing name must work", 3, "Forest", true);
     }

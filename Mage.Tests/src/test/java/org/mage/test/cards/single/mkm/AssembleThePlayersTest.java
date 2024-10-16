@@ -48,7 +48,7 @@ public class AssembleThePlayersTest extends CardTestPlayerBase {
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
         assertPowerToughness(playerA, merfolk, 2, 1);
 
     }

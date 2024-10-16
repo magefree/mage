@@ -88,8 +88,7 @@ public class EchoTest extends CardTestPlayerBase {
         setChoice(playerA, true);
         setChoice(playerA, "Deranged Hermit");
 
-        setChoice(playerA, ""); //stack triggers
-        setChoice(playerA, "");
+        setChoice(playerA, "Echo {3}{G}{G}", 2); // x3 triggers from Deranged Hermit
 
         setChoice(playerA, true); //Pay echo costs
         setChoice(playerA, true);
