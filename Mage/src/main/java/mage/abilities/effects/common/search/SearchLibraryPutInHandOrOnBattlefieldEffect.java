@@ -56,7 +56,7 @@ public class SearchLibraryPutInHandOrOnBattlefieldEffect extends SearchEffect {
                 for (UUID cardId : target.getTargets()) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        if (card.hasName(nameToPutOnBattlefield, currentGame)) {
+                        if (card.hasName(nameToPutOnBattlefield, game)) {
                             askToPutOntoBf = true;
                             cardToPutOnBf = card;
                         }
