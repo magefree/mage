@@ -173,4 +173,12 @@ public class SetBasePowerToughnessTargetPerpetuallyEffect extends ContinuousEffe
         MageObjectReference cardReference = new MageObjectReference(card, game);
         this.affectedObjectList.add(cardReference);
     }
+
+    public boolean affectsPower() {
+        return power != null;
+    }
+
+    public boolean affectsToughness() {
+        return toughness != null;
+    }
 }

@@ -1043,13 +1043,13 @@ public class ModernCardRenderer extends CardRenderer {
             int ptPosStart2 = ptPosStart1 + ptTextWidth1 + ptDeviderSpace;
             int ptPosStart3 = ptPosStart2 + ptTextWidth2 + ptDeviderSpace;
             // p
-            g.setColor(CardRendererUtils.getCardTextColor(currentPower, false, defaultTextColor, defaultTextLight));
+            g.setColor(CardRendererUtils.getCardTextColor(currentPower, false, defaultTextColor, defaultTextLight, attribs.isPowerPerpetuallyAffected));
             g.drawString(ptText1, ptPosStart1, curY - ptTextOffset - 1); // left
             // /
             g.setColor(defaultTextColor);
             g.drawString(ptText2, ptPosStart2, curY - ptTextOffset - 1); // center
             // t
-            g.setColor(CardRendererUtils.getCardTextColor(currentToughness, CardRendererUtils.isCardWithDamage(cardView), defaultTextColor, defaultTextLight));
+            g.setColor(CardRendererUtils.getCardTextColor(currentToughness, CardRendererUtils.isCardWithDamage(cardView), defaultTextColor, defaultTextLight, attribs.isToughnessPerpetuallyAffected));
             g.drawString(ptText3, ptPosStart3, curY - ptTextOffset - 1); // right
             //
             g.setColor(defaultTextColor);

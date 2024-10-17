@@ -231,4 +231,15 @@ public class BoostTargetPerpetuallyEffect extends ContinuousEffectImpl implement
 
     }
 
+    public boolean affectsPower(Game game) {
+        if(power == null)
+            return false;
+        return power.calculate(game, null, this) != 0;
+    }
+
+    public boolean affectsToughness(Game game) {
+        if(toughness == null)
+            return false;
+        return toughness.calculate(game, null, this) != 0;
+    }
 }
