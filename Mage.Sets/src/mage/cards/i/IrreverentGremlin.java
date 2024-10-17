@@ -36,6 +36,7 @@ public final class IrreverentGremlin extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Menace (This creature can't be blocked except by two or more creatures.)
         this.addAbility(new MenaceAbility());
 
         // Whenever another creature you control with power 2 or less enters, you may discard a card. If you do, draw a card. Do this only once each turn.
