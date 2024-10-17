@@ -262,8 +262,13 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         if (game == null) {
             return abilities; // deck editor with empty game
         }
-
-        CardState cardState = game.getState().getCardState(this.getId());
+        CardState cardState;
+        if(this instanceof AdventureCardSpell || this instanceof SplitCardHalf) {
+            MageObjectImpl thisObj = this;
+            cardState = game.getState().getCardState(thisObj.getId());
+        } else {
+            cardState = game.getState().getCardState(this.getId());
+        }
         if (cardState == null) {
             return abilities;
         }
@@ -429,7 +434,12 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
         ZoneChangeEvent event = new ZoneChangeEvent(mainCard.getId(), ability, controllerId, fromZone, Zone.STACK);
         Spell spell = new Spell(this, ability.getSpellAbilityToResolve(game), controllerId, event.getFromZone(), game);
         ZoneChangeInfo.Stack info = new ZoneChangeInfo.Stack(event, spell);
-        return ZonesHandler.cast(info, ability, game);
+
+        boolean result = ZonesHandler.cast(info, ability, game);
+        if((this instanceof AdventureCardSpell || this instanceof SplitCardHalf) && result) {
+            this.setZone(Zone.STACK, game);
+        }
+        return result;
     }
 
     @Override

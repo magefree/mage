@@ -2397,6 +2397,15 @@ public abstract class GameImpl implements Game {
                 if (player.chooseUse(Outcome.Benefit, "Move " + card.getLogName()
                                 + " to the command zone or leave it in current zone " + currentZoneInfo + "?", "You can only make this choice once per object",
                         "Move to command", "Leave in current zone " + currentZoneInfo, null, this)) {
+                    ContinuousEffects effects = getContinuousEffects();
+                    if (effects.hasPerpetuallyEffectOn(card, this)) {
+                        if (!player.chooseUse(Outcome.Benefit, "Keep all perpetual effects on " + card.getLogName()
+                                        + " or remove all of them?", "You cannot pick and choose effects to keep",
+                                "Keep all effects", "Remove all effects", null, this)) {
+
+                            effects.removePerpetuallyEffectsByCard(card, this);
+                        }
+                    }
                     toMove.add(card);
                 } else {
                     state.setCommanderShouldStay(card, this);

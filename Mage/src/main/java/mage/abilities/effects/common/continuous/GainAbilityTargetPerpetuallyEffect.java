@@ -1,5 +1,6 @@
 package mage.abilities.effects.common.continuous;
 
+import mage.MageObjectImpl;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -7,11 +8,8 @@ import mage.abilities.Mode;
 import mage.abilities.common.LinkedEffectIdStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.PerpetuallyEffect;
-import mage.cards.Card;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.cards.*;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -55,30 +53,17 @@ public class GainAbilityTargetPerpetuallyEffect extends ContinuousEffectImpl imp
                 .map(game::getCard)
                 .filter(Objects::nonNull)
                 .forEach(card -> {
-                    MageObjectReference cardReference = new MageObjectReference(card, game);
-                    this.affectedObjectList.add(cardReference);
+                    if (!card.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+                        MageObjectReference cardReference = new MageObjectReference(card, game);
+                        this.affectedObjectList.add(cardReference);
 
-                    if(card.isPermanent(game) && game.getPermanent(card.getId()) != null) {
-                        morphedMap.put(card.getId(), true);
-                    }
-                    else {
-                        morphedMap.put(card.getId(), false);
-                    }
-
-                    if(!(ability instanceof MageSingleton && card.getAbilities().contains(ability))) {
-
-                        Map<MageObjectReference, Set<String>> cardRulesMap = game.getState().getContinuousEffects().getPerpetuallyAffectedObjectsRules();
-                        String rule = ability.getRule();
-                        String upperCaseRule = rule.substring(0, 1).toUpperCase() + rule.substring(1);
-
-                        if (cardRulesMap.containsKey(cardReference)) {
-                            Set<String> ruleSet = cardRulesMap.get(cardReference);
-                            ruleSet.add(upperCaseRule);
-                        } else {
-                            Set<String> set = new HashSet<>();
-                            set.add(upperCaseRule);
-                            cardRulesMap.put(cardReference, set);
+                        if(card.isPermanent(game) && game.getPermanent(card.getId()) != null) {
+                            morphedMap.put(card.getId(), true);
                         }
+                        else {
+                            morphedMap.put(card.getId(), false);
+                        }
+                        addTarget(card, game);
                     }
                 });
 
@@ -112,7 +97,37 @@ public class GainAbilityTargetPerpetuallyEffect extends ContinuousEffectImpl imp
                         continue;
                     }
                 }
-                game.getState().addOtherAbility(card, ability);
+                if(card instanceof SplitCard) {
+                    SplitCardHalf left = ((SplitCard) card).getLeftHalfCard();
+                    Ability leftAbility = copyAbility(ability);
+                    leftAbility.setControllerId(source.getControllerId());
+                    leftAbility.setSourceId(left.getId());
+                    addTarget(left, game);
+                    game.getState().addOtherAbility(left, leftAbility);
+
+                    SplitCardHalf right = ((SplitCard) card).getRightHalfCard();
+                    Ability rightAbility = copyAbility(ability);
+                    rightAbility.setControllerId(source.getControllerId());
+                    rightAbility.setSourceId(right.getId());
+                    addTarget(right, game);
+                    game.getState().addOtherAbility(right, rightAbility);
+                }
+                else {
+                    game.getState().addOtherAbility(card, ability);
+                }
+                if(card instanceof AdventureCard) {
+                    MageObjectImpl spellCardObj = (MageObjectImpl) ((AdventureCard) card).getSpellCard();
+                    UUID adventureId = spellCardObj.getId();
+                    if (adventureId != null) {
+                        Card spellCard = (Card) spellCardObj;
+                        Ability newAbility = copyAbility(ability);
+                        newAbility.setSourceId(adventureId);
+                        newAbility.setControllerId(source.getControllerId());
+
+                        addTarget(spellCard, game);
+                        game.getState().addOtherAbility(spellCard, newAbility);
+                    }
+                }
                 affectedTargets++;
 
             }
@@ -145,15 +160,18 @@ public class GainAbilityTargetPerpetuallyEffect extends ContinuousEffectImpl imp
 
     @Override
     public void addTarget(Card card, Game game) {
-        if(card.isPermanent(game) && game.getPermanent(card.getId()) != null) {
-            morphedMap.put(card.getId(), true);
-        }
-        else {
-            morphedMap.put(card.getId(), false);
+        if (card.getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+            return;
         }
         MageObjectReference cardReference = new MageObjectReference(card, game);
-        this.affectedObjectList.add(cardReference);
-
+        if(!(card instanceof AdventureCardSpell || card instanceof SplitCardHalf)) {
+            if (card.isPermanent(game) && game.getPermanent(card.getId()) != null) {
+                morphedMap.put(card.getId(), true);
+            } else {
+                morphedMap.put(card.getId(), false);
+            }
+            this.affectedObjectList.add(cardReference);
+        }
         if(!(ability instanceof MageSingleton && card.getAbilities().contains(ability))) {
 
             Map<MageObjectReference, Set<String>> cardRulesMap = game.getState().getContinuousEffects().getPerpetuallyAffectedObjectsRules();

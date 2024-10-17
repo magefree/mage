@@ -1307,7 +1307,7 @@ public final class CardUtil {
 
             Map<MageObjectReference, Set<String>> cardRulesMap = game.getState().getContinuousEffects().getPerpetuallyAffectedObjectsRules();
             if(!cardRulesMap.isEmpty()) {
-                handlePerpetualEffectsRules(object, cardRulesMap, rules);
+                handlePerpetualEffectsRules(object, cardRulesMap, rules, game);
             }
 
             if(game.getPhase() == null) {
@@ -1348,25 +1348,27 @@ public final class CardUtil {
         }
         return RULES_ERROR_INFO;
     }
-    private static void handlePerpetualEffectsRules(MageObject object, Map<MageObjectReference, Set<String>> cardRulesMap, List<String> rules) {
+    private static void handlePerpetualEffectsRules(MageObject object, Map<MageObjectReference, Set<String>> cardRulesMap, List<String> rules, Game game) {
         for (Map.Entry<MageObjectReference, Set<String>> entry : cardRulesMap.entrySet()) {
             MageObjectReference entryKey = entry.getKey();
             if (entryKey.getSourceId() == object.getId()) {
                 for (int i = 0; i < rules.size(); i++) {
                     String rule = rules.get(i);
-                    if (cardRulesMap.get(entryKey).contains(rule)) {
+                    if (cardRulesMap.get(entryKey).stream().anyMatch(s -> s.contains(rule))) {
                         long ruleCounts =
                                 rules.stream()
                                         .filter(r -> r.equals(rule))
                                         .count();
-                        if (ruleCounts != 1) {
-                            String duplicatedRule = String.format("<font color=#9A4FFE>%s</font>", rule + " (x" + ruleCounts + ")");
+                        // coloring perpetual text
+                        long j = ruleCounts;
+                        if (j != 1) {
+                            String duplicatedRule = String.format("<font color=#9A4FFE>%s</font>", rule + " (x" + j + ")");
                             rules.set(i, duplicatedRule);
-                            ruleCounts--;
+                            j--;
 
-                            while (ruleCounts > 0) {
+                            while (j > 0) {
                                 rules.remove(rule);
-                                ruleCounts--;
+                                j--;
                             }
 
                             cardRulesMap.get(entryKey).remove(rule);
@@ -1374,6 +1376,20 @@ public final class CardUtil {
                         } else {
                             String coloredRule = String.format("<font color=#9A4FFE>%s</font>", rule);
                             rules.set(i, coloredRule);
+                        }
+
+                        // clearing main adventure card perpetual text
+                        if(object instanceof AdventureCard) {
+                            long sharedRulesCounts = ((AdventureCard) object).getSharedAbilities(game).stream()
+                                    .filter(a -> a.getRule().equals(rule))
+                                    .count();
+                            if(ruleCounts > sharedRulesCounts) {
+                                rules.removeIf(r -> r.contains(rule));
+                            }
+                        }
+                        // clearing main split card perpetual text
+                        if(object instanceof SplitCard) {
+                            rules.removeIf(r -> r.contains(rule));
                         }
                     }
                 }
