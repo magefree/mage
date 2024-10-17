@@ -20,8 +20,9 @@ import mage.filter.predicate.mageobject.PowerPredicate;
 /**
  * @author paasar
  */
-public final class IrreverentGremlin  extends CardImpl {
+public final class IrreverentGremlin extends CardImpl {
     private static final FilterCreaturePermanent creatureWithPower2OrLessFilter = new FilterCreaturePermanent("creature with power 2 or less");
+
     static {
         creatureWithPower2OrLessFilter.add(AnotherPredicate.instance);
         creatureWithPower2OrLessFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
@@ -47,8 +48,12 @@ public final class IrreverentGremlin  extends CardImpl {
                         .setTriggersLimitEachTurn(1));
     }
 
-    private IrreverentGremlin(final IrreverentGremlin card) { super(card); }
+    private IrreverentGremlin(final IrreverentGremlin card) {
+        super(card);
+    }
 
     @Override
-    public IrreverentGremlin copy() { return new IrreverentGremlin(this); }
+    public IrreverentGremlin copy() {
+        return new IrreverentGremlin(this);
+    }
 }
