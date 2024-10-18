@@ -124,6 +124,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Innocuous Rat", 103, Rarity.COMMON, mage.cards.i.InnocuousRat.class));
         cards.add(new SetCardInfo("Insidious Fungus", 186, Rarity.UNCOMMON, mage.cards.i.InsidiousFungus.class));
         cards.add(new SetCardInfo("Intruding Soulrager", 218, Rarity.UNCOMMON, mage.cards.i.IntrudingSoulrager.class));
+        cards.add(new SetCardInfo("Irreverent Gremlin", 142, Rarity.UNCOMMON, mage.cards.i.IrreverentGremlin.class));
         cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jump Scare", 17, Rarity.COMMON, mage.cards.j.JumpScare.class));
         cards.add(new SetCardInfo("Killer's Mask", 104, Rarity.UNCOMMON, mage.cards.k.KillersMask.class));
