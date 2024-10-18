@@ -3,7 +3,7 @@ package mage.cards.i;
 import java.util.UUID;
 
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -13,7 +13,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 
@@ -21,12 +22,12 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  * @author paasar
  */
 public final class IrreverentGremlin extends CardImpl {
-    private static final FilterCreaturePermanent creatureWithPower2OrLessFilter = new FilterCreaturePermanent("creature with power 2 or less");
+    private static final FilterPermanent filter
+            = new FilterControlledCreaturePermanent("another creature you control with power 2 or less");
 
     static {
-        creatureWithPower2OrLessFilter.add(AnotherPredicate.instance);
-        creatureWithPower2OrLessFilter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
-
+        filter.add(AnotherPredicate.instance);
+        filter.add(new PowerPredicate(ComparisonType.FEWER_THAN, 3));
     }
 
     public IrreverentGremlin(UUID ownerId, CardSetInfo setInfo) {
@@ -41,12 +42,12 @@ public final class IrreverentGremlin extends CardImpl {
 
         // Whenever another creature you control with power 2 or less enters, you may discard a card. If you do, draw a card. Do this only once each turn.
         this.addAbility(
-                new EntersBattlefieldControlledTriggeredAbility(
+                new EntersBattlefieldAllTriggeredAbility(
                         new DoIfCostPaid(
                                 new DrawCardSourceControllerEffect(1),
                                 new DiscardCardCost()),
-                        creatureWithPower2OrLessFilter)
-                        .setTriggersLimitEachTurn(1));
+                        filter)
+                        .setDoOnlyOnceEachTurn(true));
     }
 
     private IrreverentGremlin(final IrreverentGremlin card) {
