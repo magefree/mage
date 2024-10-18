@@ -22,13 +22,27 @@ import java.util.UUID;
  */
 public class HideawayPlayEffect extends OneShotEffect {
 
+    private final boolean playOne;
+
     public HideawayPlayEffect() {
         super(Outcome.Benefit);
+        this.playOne = false;
         staticText = "you may play the exiled card without paying its mana cost";
+    }
+
+    public HideawayPlayEffect(boolean playOne) {
+        super(Outcome.Benefit);
+        this.playOne = playOne;
+        if (playOne) {
+            staticText = "if there are cards exiled with it, you may play one of them without paying its mana cost";
+        } else {
+            staticText = "you may play the exiled card without paying its mana cost";
+        }
     }
 
     protected HideawayPlayEffect(final HideawayPlayEffect effect) {
         super(effect);
+        this.playOne = effect.playOne;
     }
 
     @Override
@@ -46,7 +60,8 @@ public class HideawayPlayEffect extends OneShotEffect {
         CardsImpl cards = new CardsImpl(zone.getCards(game));
 
         boolean cardPlayed = false;
-        TargetCard target = new TargetCard(0, cards.size(), Zone.EXILED, new FilterCard("cards to play"));
+        int maxChoices = (this.playOne) ? 1 : cards.size();
+        TargetCard target = new TargetCard(0, maxChoices, Zone.EXILED, new FilterCard("cards to play (in order they're chosen)"));
         controller.choose(Outcome.PlayForFree, cards, target, source, game);
         List<UUID> targets = target.getTargets();
 
@@ -64,9 +79,6 @@ public class HideawayPlayEffect extends OneShotEffect {
                 }
             }
 
-            if (!controller.chooseUse(Outcome.PlayForFree, "Play " + card.getIdName() + " for free?", source, game)) {
-                continue;
-            }
             card.setFaceDown(false, game);
             int zcc = card.getZoneChangeCounter(game);
 
