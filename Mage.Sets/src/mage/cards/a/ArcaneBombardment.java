@@ -116,18 +116,16 @@ class ArcaneBombardmentEffect extends OneShotEffect {
 
         // Allow player to choose the order and cast the copies
         if (!copies.isEmpty()) {
-            TargetCard target = new TargetCard(0, copies.size(), Zone.EXILED, new FilterCard("copies to cast"));
+            TargetCard target = new TargetCard(0, copies.size(), Zone.EXILED, new FilterCard("copies to cast (in order they're chosen)"));
             player.choose(Outcome.PlayForFree, copies, target, source, game);
             List<UUID> targets = target.getTargets();
 
             for (UUID targetId : targets) {
                 Card copiedCard = game.getCard(targetId);
                 if (copiedCard != null && copiedCard.getSpellAbility() != null) {
-                    if (player.chooseUse(Outcome.PlayForFree, "Cast the copy of " + copiedCard.getLogName() + "?", source, game)) {
-                        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
-                        player.cast(player.chooseAbilityForCast(copiedCard, game, true), game, true, new ApprovingObject(source, game));
-                        game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
-                    }
+                    game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), Boolean.TRUE);
+                    player.cast(player.chooseAbilityForCast(copiedCard, game, true), game, true, new ApprovingObject(source, game));
+                    game.getState().setValue("PlayFromNotOwnHandZone" + copiedCard.getId(), null);
                 }
             }
         }
