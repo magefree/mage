@@ -25,9 +25,7 @@ public class HideawayPlayEffect extends OneShotEffect {
     private final boolean playOne;
 
     public HideawayPlayEffect() {
-        super(Outcome.Benefit);
-        this.playOne = false;
-        staticText = "you may play the exiled card without paying its mana cost";
+        this(false);
     }
 
     public HideawayPlayEffect(boolean playOne) {
