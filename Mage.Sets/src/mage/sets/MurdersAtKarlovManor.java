@@ -695,7 +695,7 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
     // 0.25 A uncommons ( 49 / 200)       3 Uncommons (1 / 2) or (100 / 200)
     // 1.96 B uncommons (392 / 200)       4 Uncommons (1 / 2) or (100 / 200) 25*4=100
     // 1.30 C uncommons (259 / 200)       
-    private final RarityConfiguration uncommonRuns7 = new RarityConfiguration(
+    private final RarityConfiguration uncommonRuns3 = new RarityConfiguration(
         BCC, BCC, BCC, BCC, BCC, BCC, BCC, BCC, 
         BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC,
         BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC, BBC,
@@ -707,7 +707,7 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
         ABB, ABB, ABB, ABB, ABB, ABB, ABB, ABB, ABB, ABB,
         ABB, ABB, ABB, ABB, ABB, ABB, ABB, ABB, ABB, ABB, ABB
     );
-    private final RarityConfiguration uncommonRuns8 = new RarityConfiguration(
+    private final RarityConfiguration uncommonRuns4 = new RarityConfiguration(
         BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC,
         BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC,
         ABBC, ABBC, ABBC, ABBC, ABBC, ABBC, ABBC
