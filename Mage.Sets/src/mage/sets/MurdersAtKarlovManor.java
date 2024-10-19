@@ -489,7 +489,7 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         super.generateBoosterMap();
         
         CardInfo cardInfo;
-        for( let cn = 19 ; cn < 29 ; cn++ ){
+        for( int cn = 19 ; cn < 29 ; cn++ ){
             cardInfo = CardRepository.instance.findCard("SPG", "" + cn);
             if( cardInfo != null ){
                 inBoosterMap.put("SPG_" + cn, cardInfo);
