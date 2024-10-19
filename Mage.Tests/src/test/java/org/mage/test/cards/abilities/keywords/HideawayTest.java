@@ -78,7 +78,7 @@ public class HideawayTest extends CardTestPlayerBase {
         setChoice(playerA, "Ulamog, the Ceaseless Hunger");
 
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{G},");
-        setChoice(playerA, true); // play Ghost Quarter
+        setChoice(playerA, "Ulamog, the Ceaseless Hunger"); // play Ulamog
 
         addTarget(playerA, "Dross Crocodile^Dross Crocodile");
 
@@ -124,7 +124,7 @@ public class HideawayTest extends CardTestPlayerBase {
         attack(3, playerA, "Auriok Champion");
 
         activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
-        setChoice(playerA, true); // play Ghost Quarter
+        setChoice(playerA, "Ghost Quarter"); // play Ghost Quarter
 
         setStopAt(3, PhaseStep.END_COMBAT);
 
@@ -155,7 +155,7 @@ public class HideawayTest extends CardTestPlayerBase {
         setChoice(playerA, "Ghost Quarter");
 
         activateAbility(4, PhaseStep.PRECOMBAT_MAIN, playerA, "{G},");
-        setChoice(playerA, true);
+        setChoice(playerA, "Ghost Quarter");
 
         setStopAt(4, PhaseStep.BEGIN_COMBAT);
 
@@ -182,7 +182,7 @@ public class HideawayTest extends CardTestPlayerBase {
         attack(3, playerA, "Auriok Champion");
 
         activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
-        setChoice(playerA, true); // play Ghost Quarter
+        setChoice(playerA, "Ghost Quarter"); // play Ghost Quarter
 
         setStopAt(3, PhaseStep.END_COMBAT);
 
@@ -215,7 +215,7 @@ public class HideawayTest extends CardTestPlayerBase {
         attack(3, playerA, "Auriok Champion");
 
         activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
-        setChoice(playerA, true); // play Ghost Quarter
+        setChoice(playerA, "Ghost Quarter"); // play Ghost Quarter
 
         setStopAt(3, PhaseStep.END_COMBAT);
 
@@ -254,7 +254,7 @@ public class HideawayTest extends CardTestPlayerBase {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, sIsle);
         setChoice(playerA, ulamog);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}");
-        setChoice(playerA, true); // play Ulamog's Crusher
+        setChoice(playerA, ulamog); // play Ulamog's Crusher
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
 
@@ -298,7 +298,7 @@ public class HideawayTest extends CardTestPlayerBase {
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, sIsle);
         setChoice(playerA, ulamog);
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{U}");
-        setChoice(playerA, true); // play Ulamog's Crusher        
+        setChoice(playerA, ulamog); // play Ulamog's Crusher
 
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
@@ -307,6 +307,115 @@ public class HideawayTest extends CardTestPlayerBase {
         assertLibraryCount(playerB, 3); // opponents library less than 20 so should be able to activate shelldock
         assertTappedCount("Island", true, 1);
         assertPermanentCount(playerA, ulamog, 1);
+    }
+
+    /**
+     * Rule 607.3 - if Hideaway trigger is copied, "the exiled card" refers to each card exiled by Hideaway abilities.
+     */
+    @Test
+    public void testMultipleHideawayTriggers() {
+        addCard(Zone.HAND, playerA, "Windbrisk Heights");
+        addCard(Zone.LIBRARY, playerA, "Llanowar Elves", 4);
+        addCard(Zone.LIBRARY, playerA, "Auriok Champion", 4);
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Auriok Glaivemaster", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Elesh Norn, Mother of Machines");
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Windbrisk Heights");
+        setChoice(playerA, "Hideaway 4"); // Order Hideaway triggers
+        setChoice(playerA, "Auriok Champion");
+        setChoice(playerA, "Llanowar Elves");
+
+        attack(3, playerA, "Auriok Glaivemaster");
+        attack(3, playerA, "Auriok Glaivemaster");
+        attack(3, playerA, "Elesh Norn, Mother of Machines");
+
+        activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
+        setChoice(playerA, "Llanowar Elves^Auriok Champion"); // play Llanowar Elves, then Auriok Champion (goes on stack second, resolves first)
+        setChoice(playerA, "Whenever"); // Order Auriok Champion's two gain life triggers thanks to Elesh Norn
+        setChoice(playerA, true); // Gain life
+        setChoice(playerA, true); // Gain life
+
+        setStopAt(3, PhaseStep.END_COMBAT);
+
+        setStrictChooseMode(true);
+        execute();
+
+        assertPermanentCount(playerA, "Llanowar Elves", 1);
+        assertPermanentCount(playerA, "Auriok Champion", 1);
+        assertLife(playerA, 22); // Gained a life from Auriok Champion resolving first.
+        assertTapped("Windbrisk Heights", true);
+    }
+
+    /**
+     * Hideaway two lands, attempt to play both exiled lands, only the first one succeeds.
+     */
+    @Test
+    public void testMultipleHideawayTriggersPlayOneLand() {
+        addCard(Zone.HAND, playerA, "Windbrisk Heights");
+        addCard(Zone.LIBRARY, playerA, "Field of the Dead", 4);
+        addCard(Zone.LIBRARY, playerA, "Ghost Quarter", 4);
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Auriok Champion", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Elesh Norn, Mother of Machines");
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Windbrisk Heights");
+        setChoice(playerA, "Hideaway 4"); // Order Hideaway triggers
+        setChoice(playerA, "Ghost Quarter");
+        setChoice(playerA, "Field of the Dead");
+
+        attack(3, playerA, "Auriok Champion");
+        attack(3, playerA, "Auriok Champion");
+        attack(3, playerA, "Auriok Champion");
+
+        activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
+        setChoice(playerA, "Ghost Quarter^Field of the Dead"); // play Ghost Quarter, attempt to play Field of the Dead
+
+        setStopAt(3, PhaseStep.END_COMBAT);
+
+        setStrictChooseMode(true);
+        execute();
+
+        assertPermanentCount(playerA, "Ghost Quarter", 1);
+        assertTapped("Windbrisk Heights", true);
+        assertExileCount(playerA, 1);
+        Assert.assertEquals(1, playerA.getLandsPlayed());
+    }
+
+    @Test
+    public void testMultipleHideawayTriggersPlayMultipleLands() {
+        addCard(Zone.HAND, playerA, "Windbrisk Heights");
+        addCard(Zone.LIBRARY, playerA, "Ghost Quarter", 5);
+        skipInitShuffling();
+
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Auriok Champion", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Elesh Norn, Mother of Machines");
+        addCard(Zone.BATTLEFIELD, playerA, "Fastbond", 1);
+
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Windbrisk Heights");
+        setChoice(playerA, "Hideaway 4"); // Order Hideaway triggers
+        setChoice(playerA, "Ghost Quarter", 2);
+
+        attack(3, playerA, "Auriok Champion");
+        attack(3, playerA, "Auriok Champion");
+        attack(3, playerA, "Auriok Champion");
+
+        activateAbility(3, PhaseStep.DECLARE_BLOCKERS, playerA, "{W},");
+        setChoice(playerA, "Ghost Quarter^Ghost Quarter"); // play Ghost Quarter
+
+        setStopAt(3, PhaseStep.END_COMBAT);
+
+        setStrictChooseMode(true);
+        execute();
+
+        assertPermanentCount(playerA, "Ghost Quarter", 2);
+        assertTapped("Windbrisk Heights", true);
+        Assert.assertEquals(2, playerA.getLandsPlayed());
     }
 
     /**
