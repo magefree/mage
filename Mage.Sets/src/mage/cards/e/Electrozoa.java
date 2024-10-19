@@ -1,7 +1,7 @@
 package mage.cards.e;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
@@ -38,7 +38,7 @@ public final class Electrozoa extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(2)));
 
         // At the beginning of your precombat main phase, tap Electrozoa unless you pay {E}.
-        this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(
                 new TapSourceUnlessPaysEffect(new PayEnergyCost(1)), TargetController.YOU, false
         ));
     }

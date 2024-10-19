@@ -17,7 +17,7 @@ public class AtTheBeginOfMainPhaseDelayedTriggeredAbility extends DelayedTrigger
 
     public enum PhaseSelection {
 
-        NEXT_PRECOMBAT_MAIN("next precombat main phase"),
+        NEXT_PRECOMBAT_MAIN("next first main phase"),
         NEXT_POSTCOMBAT_MAIN("next postcombat main phase"),
         NEXT_MAIN("next main phase"),
         NEXT_MAIN_THIS_TURN("next main phase this turn", Duration.EndOfTurn);
