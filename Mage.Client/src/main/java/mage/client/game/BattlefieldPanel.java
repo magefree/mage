@@ -227,6 +227,11 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                             changed = true;
                         }
                     }
+
+                    // Check for power or toughness being perpetually affected
+                    if(permanent.isPowerPerpetuallyAffected() || permanent.isToughnessPerpetuallyAffected()) {
+                        changed = true;
+                    }
                 }
                 oldMagePermanent.update(permanent);
             }
