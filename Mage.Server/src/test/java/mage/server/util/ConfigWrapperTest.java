@@ -94,7 +94,8 @@ public class ConfigWrapperTest {
             server.setMaxPasswordLength(bi(maxPasswordLength));
             server.setMaxAiOpponents(maxAiOpponents);
             server.setSaveGameActivated(saveGameActivated);
-            server.setAuthenticationActivated(authenticationActivated);
+            //server.setRegistrationEnabled(registrationEnabled);
+            //server.setCheckUsers(checkUsers);
             server.setGoogleAccount(googleAccount);
             server.setMailgunApiKey(mailgunApiKey);
             server.setMailgunDomain(mailgunDomain);
@@ -171,7 +172,7 @@ public class ConfigWrapperTest {
                 testInt("max password length", c -> c.maxPasswordLength = expectedPositiveInt, ConfigWrapper::getMaxPasswordLength),
                 testString("max AI opponents", c -> c.maxAiOpponents = expectedString, ConfigWrapper::getMaxAiOpponents),
                 testTrue("save game activated", c -> c.saveGameActivated = true, ConfigWrapper::isSaveGameActivated),
-                testTrue("authentication activated", c -> c.authenticationActivated = true, ConfigWrapper::isAuthenticationActivated),
+                //testTrue("registration enabled", c -> c.registrationEnabled = true, ConfigWrapper::isRegistrationEnabled),
                 testString("google account", c -> c.googleAccount = expectedString, ConfigWrapper::getGoogleAccount),
                 testString("mailgun api key", c -> c.mailgunApiKey = expectedString, ConfigWrapper::getMailgunApiKey),
                 testString("mailgun domain", c -> c.mailgunDomain = expectedString, ConfigWrapper::getMailgunDomain),

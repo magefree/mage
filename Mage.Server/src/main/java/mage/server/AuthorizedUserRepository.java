@@ -32,7 +32,7 @@ public class AuthorizedUserRepository {
 
     private static final AuthorizedUserRepository instance;
     static {
-        instance = new AuthorizedUserRepository(DatabaseUtils.prepareH2Connection(DatabaseUtils.DB_NAME_USERS, false));
+        instance = new AuthorizedUserRepository(DatabaseUtils.prepareSqliteConnection(DatabaseUtils.DB_NAME_USERS));
     }
 
     private Dao<AuthorizedUser, Object> usersDao;
@@ -42,6 +42,9 @@ public class AuthorizedUserRepository {
         if (!file.exists()) {
             file.mkdirs();
         }
+
+        Logger.getLogger(AuthorizedUserRepository.class).info("Authorized users DB connection string: " + connectionString);
+
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(connectionString);
             TableUtils.createTableIfNotExists(connectionSource, AuthorizedUser.class);
