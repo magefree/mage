@@ -45,7 +45,9 @@ public final class IrreverentGremlin extends CardImpl {
                 new EntersBattlefieldAllTriggeredAbility(
                         new DoIfCostPaid(
                                 new DrawCardSourceControllerEffect(1),
-                                new DiscardCardCost()),
+                                new DiscardCardCost(),
+                                null,
+                                false), // since triggered ability is optional (do only once), DoIfCostPaid must not be
                         filter)
                         .setDoOnlyOnceEachTurn(true));
     }
