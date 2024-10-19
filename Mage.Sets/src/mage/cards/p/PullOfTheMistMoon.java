@@ -44,7 +44,6 @@ public final class PullOfTheMistMoon extends CardImpl {
         FilterPermanentCard filter = new FilterPermanentCard();
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
 
-        //TODO: text autogeneration?
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new EntersBattlefieldTriggeredAbility(new ChooseACardInYourHandItPerpetuallyGainsEffect(exileAbility, filter)), KickedCondition.ONCE,
                 "When {this} enters, if it was kicked, choose a nonland permanent card in your hand. " +

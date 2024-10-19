@@ -13,7 +13,10 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterBySubtypeCard;
+import mage.filter.common.FilterNonlandCard;
+import mage.filter.predicate.mageobject.ManaValuePredicate;
 
 /**
  *
@@ -33,9 +36,10 @@ public final class FearsomeWhelp extends CardImpl {
 
         // At the beginning of your end step, each Dragon card in your hand perpetually gains “This spell costs {1} less to cast.”
         Ability reduceCostAbility = new SimpleStaticAbility(new SpellCostReductionSourceEffect(1));
+        FilterBySubtypeCard filter = new FilterBySubtypeCard(SubType.DRAGON);
+        filter.setMessage("each Dragon card in your hand");
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(
-                new CardsInYourHandPerpetuallyGainEffect(reduceCostAbility, new FilterBySubtypeCard(SubType.DRAGON))
-                        .setText(" each Dragon card in your hand perpetually gains \"This spell costs {1} less to cast.\""),
+                new CardsInYourHandPerpetuallyGainEffect(reduceCostAbility, filter),
                 false));
     }
 

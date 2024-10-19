@@ -149,7 +149,7 @@ public class GainAbilityTargetPerpetuallyEffect extends ContinuousEffectImpl imp
     public void removeTarget(Card card, Game game) {
         UUID cardId = card.getId();
         morphedMap.remove(cardId);
-        //TODO: not correct removing?
+
         Map<MageObjectReference, Set<String>> cardRulesMap = game.getState().getContinuousEffects().getPerpetuallyAffectedObjectsRules();
         Set<MageObjectReference> cardRefs = cardRulesMap.keySet();
         cardRefs.removeIf(ref -> ref.refersTo(cardId, game));
@@ -176,7 +176,7 @@ public class GainAbilityTargetPerpetuallyEffect extends ContinuousEffectImpl imp
 
             Map<MageObjectReference, Set<String>> cardRulesMap = game.getState().getContinuousEffects().getPerpetuallyAffectedObjectsRules();
             String rule = ability.getRule();
-            String upperCaseRule = rule.substring(0, 1).toUpperCase() + rule.substring(1);
+            String upperCaseRule = CardUtil.getTextWithFirstCharUpperCase(rule);
 
             if (cardRulesMap.containsKey(cardReference)) {
                 Set<String> ruleSet = cardRulesMap.get(cardReference);

@@ -1403,15 +1403,15 @@ public class ContinuousEffects implements Serializable {
     }
     public List<ContinuousEffect> getPerpetuallyEffectsByCard(Card card, Game game) {
         List<ContinuousEffect> perpetuallyEffectList = new ArrayList<>();
-        for(ContinuousEffect effect : layeredEffects) {
-            if(effect instanceof PerpetuallyEffect) {
-                if(((PerpetuallyEffect) effect).affectsCard(card, game)) {
-                    perpetuallyEffectList.add(effect);
-                }
-            }
-        }
+        layeredEffects.stream()
+                .filter(e -> e instanceof PerpetuallyEffect)
+                .map(e -> (PerpetuallyEffect) e)
+                .filter(e -> e.affectsCard(card, game))
+                .forEach(perpetuallyEffectList::add);
+
         return perpetuallyEffectList;
     }
+
     public void removePerpetuallyEffectsByCard(Card card, Game game) {
         List<ContinuousEffect> perpetuallyEffectList = getPerpetuallyEffectsByCard(card, game);
         for(ContinuousEffect effect : perpetuallyEffectList) {
@@ -1420,16 +1420,15 @@ public class ContinuousEffects implements Serializable {
     }
 
     public boolean hasPerpetuallyEffectOn(Card card, Game game) {
-        for(ContinuousEffect effect : layeredEffects) {
-            if(effect instanceof PerpetuallyEffect) {
-                PerpetuallyEffect perpetuallyEffect = (PerpetuallyEffect) effect;
-                if(perpetuallyEffect.affectsCard(card, game)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        long effectCount = layeredEffects.stream()
+                .filter(e -> e instanceof PerpetuallyEffect)
+                .map(e -> (PerpetuallyEffect) e)
+                .filter(e -> e.affectsCard(card, game))
+                .count();
+
+        return effectCount > 0;
     }
+
     /**
      * Debug only: prints out a status of the currently existing continuous effects
      *

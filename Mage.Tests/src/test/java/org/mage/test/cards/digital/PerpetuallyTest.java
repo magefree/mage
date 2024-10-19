@@ -447,7 +447,7 @@ public class PerpetuallyTest extends CardTestCommander3PlayersFFA {
 
         skipInitShuffling();
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Pay 1 life: Choose a nonland card in your hand. It perpetually gains this spell costs {1} less to cast.");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Pay 1 life: Choose a nonland card in your hand. It perpetually gains \"This spell costs {1} less to cast.\"");
         setChoice(playerA, "Driven // Despair");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
 
@@ -567,6 +567,7 @@ public class PerpetuallyTest extends CardTestCommander3PlayersFFA {
     // 1. Melded card becomes the target of all perpetual effects that affected its meld pair.
     // 2. When melded card goes into any zone except of battlefield, it becomes two cards. These cards have no perpetual effects.
 
+    // 1. Melded card becomes the target of all perpetual effects that affected its meld pair.
     @Test
     public void testMeldedCardCombinesPerpetualEffects() {
 
@@ -611,6 +612,60 @@ public class PerpetuallyTest extends CardTestCommander3PlayersFFA {
 
         assertAbilityCount(playerA, "Mishra, Lost to Phyrexia", SimpleActivatedAbility.class, 1);
         assertPowerToughness(playerA, "Mishra, Lost to Phyrexia", 11, 11);
+    }
+
+    // 2. When melded card goes into any zone except of battlefield, it becomes two cards. These cards have no perpetual effects.
+    @Test
+    public void testMeldedCardRemoveEffect() {
+
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 15);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+
+
+        addCard(Zone.HAND, playerA, charger);
+        addCard(Zone.HAND, playerA, "Unsummon");
+        addCard(Zone.HAND, playerA, "Ethereal Grasp");
+        addCard(Zone.HAND, playerA, "Mishra, Claimed by Gix");
+        addCard(Zone.HAND, playerA, "Phyrexian Dragon Engine");
+        addCard(Zone.HAND, playerA, "Burst of Speed");
+
+        skipInitShuffling();
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, charger, true);
+        setChoice(playerA, "Mishra, Claimed by Gix");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mishra, Claimed by Gix", true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phyrexian Dragon Engine", true);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ethereal Grasp", "Phyrexian Dragon Engine", true);
+
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{8}: Untap {this}.");
+
+
+        // meld cards into Mishra, Lost to Phyrexia
+        attack(4, playerA, "Phyrexian Dragon Engine", playerB);
+        attack(4,  playerA, "Mishra, Claimed by Gix", playerB);
+        setChoice(playerA, "Phyrexian Dragon Engine");
+        setModeChoice(playerA, "4");
+        setModeChoice(playerA, "5");
+        setModeChoice(playerA, "6");
+        waitStackResolved(4, PhaseStep.DECLARE_ATTACKERS);
+
+        castSpell(4, PhaseStep.POSTCOMBAT_MAIN, playerA, "Unsummon", "Mishra, Lost to Phyrexia", true);
+
+        castSpell(4, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mishra, Claimed by Gix", true);
+
+        castSpell(4, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phyrexian Dragon Engine", true);
+
+        setStopAt(4, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertAbilityCount(playerA, "Phyrexian Dragon Engine", SimpleActivatedAbility.class, 0);
+        assertPowerToughness(playerA, "Mishra, Claimed by Gix", 3, 5);
     }
 
     // Disturb cards test.

@@ -1,8 +1,10 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetPerpetuallyEffect;
+import mage.abilities.keyword.MenaceAbility;
 import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.filter.FilterCard;
@@ -21,7 +23,14 @@ public class ChooseACardInYourHandItPerpetuallyGainsEffect extends OneShotEffect
 
     public ChooseACardInYourHandItPerpetuallyGainsEffect(Ability ability, FilterCard filter) {
         super(Outcome.AddAbility);
-        this.staticText = "choose " + CardUtil.addArticle(filter.getMessage()) + " in your hand. It perpetually gains " + ability.getRule();
+        if(ability instanceof MageSingleton || ability instanceof MenaceAbility) {
+            this.staticText = "choose " + CardUtil.addArticle(filter.getMessage()) + " in your hand. " +
+                    "It perpetually gains " + ability.getRule();
+        }
+        else {
+            this.staticText = "choose " + CardUtil.addArticle(filter.getMessage()) + " in your hand. " +
+                    "It perpetually gains \"" + CardUtil.getTextWithFirstCharUpperCase(ability.getRule()) + "\"";
+        }
         this.ability = ability;
         this.filter = filter;
     }
