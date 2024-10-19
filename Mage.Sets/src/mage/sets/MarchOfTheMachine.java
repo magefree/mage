@@ -30,13 +30,13 @@ public final class MarchOfTheMachine extends ExpansionSet {
         super("March of the Machine", "MOM", ExpansionSet.buildDate(2023, 4, 21), SetType.EXPANSION);
         this.blockName = "March of the Machine";
         this.hasBoosters = true;
-        this.numBoosterLands = 0; // TODO: 50% chance basic, 50% chance dual land (currently just adding extra commons)
-        this.numBoosterCommon = 10; // TODO: Should be 8 commons, 1 battle, 1 DFC, 3 uncommon+
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.numBoosterSpecial = 1; // Multiverse Legends
         this.ratioBoosterMythic = 7;
-        this.numBoosterDoubleFaced = -1; // include normally for now, TODO: Collation
+        this.numBoosterDoubleFaced = -1;
         this.maxCardNumberInBooster = 291;
 
         cards.add(new SetCardInfo("Aerial Boost", 2, Rarity.COMMON, mage.cards.a.AerialBoost.class));
@@ -557,7 +557,6 @@ class MarchOfTheMachineCollator implements BoosterCollator {
     // two archive runs, U (uncommon) RM (raremythic with 2:1 individual card ratio)
     private final CardRun archiveU = new CardRun(false, "31", "2", "37", "40", "26", "43", "10", "46", "5", "55", "56", "28", "57", "58", "59", "12", "18", "24", "19", "25");
     private final CardRun archiveRM = new CardRun(false, "1", "1", "32", "32", "33", "34", "34", "35", "13", "13", "8", "8", "36", "36", "20", "20", "3", "9", "9", "38", "39", "39", "27", "27", "41", "42", "42", "14", "14", "44", "44", "11", "45", "45", "47", "47", "4", "48", "48", "49", "50", "50", "51", "51", "52", "52", "53", "54", "54", "21", "15", "15", "16", "17", "22", "22", "6", "6", "60", "60", "61", "61", "7", "7", "62", "62", "23", "29", "63", "30", "30", "64", "64", "65", "65");
-    // could instead implement with archiveU run and an archiveR run (with 1:2 M:R).
 
     private final BoosterStructure AABBBCCC = new BoosterStructure(
             commonA, commonA,
