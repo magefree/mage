@@ -48,8 +48,7 @@ public final class DragonhawkFatesTempest extends CardImpl {
         // Whenever Dragonhawk enters or attacks, exile the top X cards of your library, where X is the number of creatures you control with power 4 or greater. You may play those cards until your next end step.
         // At the beginning of your next end step, Dragonhawk deals 2 damage to each opponent for each of those cards that are still exiled.
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DragonhawkExileEffect(
-                new PermanentsOnBattlefieldCount(filter, null), Duration.UntilYourNextEndStep)
-                .withTextOptions("those cards", true)));
+                new PermanentsOnBattlefieldCount(filter, null), Duration.UntilYourNextEndStep)));
     }
 
     private DragonhawkFatesTempest(final DragonhawkFatesTempest card) {
@@ -62,11 +61,11 @@ public final class DragonhawkFatesTempest extends CardImpl {
     }
 }
 
-// Copied from ExileTopXMayPlayUntilEffect but with addDelayedTriggeredAbility
 class DragonhawkExileEffect extends ExileTopXMayPlayUntilEffect {
 
-    public DragonhawkExileEffect(DynamicValue amount, Duration duration) {
+    DragonhawkExileEffect(DynamicValue amount, Duration duration) {
         super(amount, duration);
+        this.withTextOptions("those cards", true);
         staticText += ". At the beginning of your next end step, " + DragonhawkFatesTempestDamageEffect.STATIC_TEXT;
     }
 
@@ -79,6 +78,7 @@ class DragonhawkExileEffect extends ExileTopXMayPlayUntilEffect {
         return new DragonhawkExileEffect(this);
     }
 
+    @Override
     protected void effectCards(Game game, Ability source, Set<Card> cards) {
         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
                 new DragonhawkFatesTempestDamageEffect(new FixedTargets(cards, game)), TargetController.YOU), source);
@@ -86,8 +86,9 @@ class DragonhawkExileEffect extends ExileTopXMayPlayUntilEffect {
 }
 
 class DragonhawkFatesTempestDamageEffect extends OneShotEffect {
+
     FixedTargets cards;
-    public static String STATIC_TEXT = "{this} deals 2 damage to each opponent for each of those cards that are still exiled";
+    public static final String STATIC_TEXT = "{this} deals 2 damage to each opponent for each of those cards that are still exiled";
 
     DragonhawkFatesTempestDamageEffect(FixedTargets cards) {
         super(Outcome.Benefit);

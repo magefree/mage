@@ -54,7 +54,7 @@ class BecomeAnonymousEffect extends OneShotEffect {
     BecomeAnonymousEffect() {
         super(Outcome.Benefit);
         staticText = "exile target nontoken creature you own and the top two cards of your library in " +
-                "a face-down pile, shuffle that pile, then cloak those cards. They enter the battlefield tapped";
+                "a face-down pile, shuffle that pile, then cloak those cards. They enter tapped";
     }
 
     private BecomeAnonymousEffect(final BecomeAnonymousEffect effect) {
