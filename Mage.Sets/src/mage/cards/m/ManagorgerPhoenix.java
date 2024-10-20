@@ -34,7 +34,6 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author karapuzz14
  */
-//TODO: learn how to improve targeting inside effect?
 public final class ManagorgerPhoenix extends CardImpl {
 
     public ManagorgerPhoenix(UUID ownerId, CardSetInfo setInfo) {
