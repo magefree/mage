@@ -180,7 +180,7 @@ public class BoostTargetPerpetuallyEffect extends ContinuousEffectImpl implement
             return staticText;
         }
         return getTargetPointer().describeTargets(mode.getTargets(), "it") +
-                (getTargetPointer().isPlural(mode.getTargets()) ? " each get " : " gets ") +
+                (getTargetPointer().isPlural(mode.getTargets()) ? " perpetually get " : " gets ") +
                 CardUtil.getBoostText(power, toughness, duration);
     }
 
