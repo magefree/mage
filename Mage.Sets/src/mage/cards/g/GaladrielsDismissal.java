@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
+import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.ConditionalTargetAdjuster;
 
@@ -42,9 +43,9 @@ public final class GaladrielsDismissal extends CardImpl {
                 KickedCondition.ONCE, "Target creature phases out. If this spell was kicked, each creature target player controls phases out instead. " +
                 "<i>(Treat phased-out creatures and anything attached to them as though they don't exist until their controller's next turn.)</i>"
         ));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
-                new TargetPlayer()));
+                new TargetCreaturePermanent(), new TargetPlayer()));
     }
 
     private GaladrielsDismissal(final GaladrielsDismissal card) {
