@@ -276,8 +276,8 @@ public class Session {
         if (newUser == null) {
             User anotherUser = managerFactory.userManager().getUserByName(userName).orElse(null);
             if (anotherUser != null) {
-                boolean canDisconnectAuthDueAnotherInstance = managerFactory.configSettings().isRegistrationEnabled();
-                boolean canDisconnectAnonDueSameHost = !managerFactory.configSettings().isRegistrationEnabled()
+                boolean canDisconnectAuthDueAnotherInstance = managerFactory.configSettings().shouldCheckUsers();
+                boolean canDisconnectAnonDueSameHost = !managerFactory.configSettings().shouldCheckUsers()
                         && ANON_IDENTIFY_BY_HOST
                         && Objects.equals(anotherUser.getHost(), host);
                 boolean canDisconnectAnyDueSessionRestore = Objects.equals(restoreSessionId, anotherUser.getRestoreSessionId());
