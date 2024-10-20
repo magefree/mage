@@ -7,6 +7,7 @@ import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.Card;
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -730,13 +731,13 @@ public class PerpetuallyTest extends CardTestCommander3PlayersFFA {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unyielding Gatekeeper using Disguise", true);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ethereal Grasp", "", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ethereal Grasp", EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), true);
 
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertAbilityCount(playerA, "", SimpleActivatedAbility.class, 1);
-        assertAbilityCount(playerA, "", DeathtouchAbility.class, 0);
+        assertAbilityCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), SimpleActivatedAbility.class, 1);
+        assertAbilityCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), DeathtouchAbility.class, 0);
     }
 
     // Test hidden ability and disguise permanent ability to show after turning face up
@@ -759,7 +760,7 @@ public class PerpetuallyTest extends CardTestCommander3PlayersFFA {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unyielding Gatekeeper using Disguise", true);
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ethereal Grasp", "", true);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ethereal Grasp", EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), true);
 
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{W}: Turn this face-down permanent face up.");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
@@ -794,7 +795,7 @@ public class PerpetuallyTest extends CardTestCommander3PlayersFFA {
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
-        assertPowerToughness(playerA, "", 2, 2);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
     }
 
     // Test hidden boost to show
