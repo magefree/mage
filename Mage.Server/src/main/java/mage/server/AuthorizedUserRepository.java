@@ -43,8 +43,6 @@ public class AuthorizedUserRepository {
             file.mkdirs();
         }
 
-        Logger.getLogger(AuthorizedUserRepository.class).info("Authorized users DB connection string: " + connectionString);
-
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(connectionString);
             TableUtils.createTableIfNotExists(connectionSource, AuthorizedUser.class);
