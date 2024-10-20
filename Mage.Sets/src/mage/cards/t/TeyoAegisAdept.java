@@ -25,7 +25,6 @@ import java.util.UUID;
  *
  * @author karapuzz14
  */
-// TODO: исправить GainAbility при выборе нескольких целей последовательно
 public final class TeyoAegisAdept extends CardImpl {
 
     public TeyoAegisAdept(UUID ownerId, CardSetInfo setInfo) {
@@ -39,7 +38,7 @@ public final class TeyoAegisAdept extends CardImpl {
         Ability firstLoyaltyAbility = new LoyaltyAbility(new TeyoAegisAdeptFirstEffect(), 1);
         Ability canAttackAbility = new SimpleStaticAbility(Zone.ALL, new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield));
         firstLoyaltyAbility.addEffect(new GainAbilityTargetPerpetuallyEffect(canAttackAbility)
-                .setText("It perpetually gains \"This creature can attack as though it didn’t have defender.\""));
+                .setText("It perpetually gains \"This creature can attack as though it didn't have defender.\""));
         firstLoyaltyAbility.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(firstLoyaltyAbility);
 
@@ -64,7 +63,7 @@ class TeyoAegisAdeptFirstEffect extends OneShotEffect {
 
     TeyoAegisAdeptFirstEffect() {
         super(Outcome.BoostCreature);
-        staticText = "Up to one target creature’s base power perpetually becomes equal to its toughness";
+        staticText = "Up to one target creature's base power perpetually becomes equal to its toughness";
     }
 
     private TeyoAegisAdeptFirstEffect(final TeyoAegisAdeptFirstEffect effect) {

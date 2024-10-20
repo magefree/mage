@@ -58,7 +58,7 @@ class LumberingLightshieldEffect extends OneShotEffect {
 
     LumberingLightshieldEffect() {
         super(Outcome.AddAbility);
-        this.staticText = "target opponent reveals a nonland card at random from their hand. It perpetually gains “This spell costs {1} more to cast.”";
+        this.staticText = "target opponent reveals a nonland card at random from their hand. It perpetually gains \"This spell costs {1} more to cast.\"";
     }
 
     private LumberingLightshieldEffect(final LumberingLightshieldEffect effect) {

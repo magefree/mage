@@ -25,7 +25,7 @@ public final class BafflingDefenses extends CardImpl {
 
         // Target creature's base power perpetually becomes 0.
         Effect effect = new SetBasePowerToughnessTargetPerpetuallyEffect(StaticValue.get(0), null);
-        effect.setText("Target creature’s base power perpetually becomes 0");
+        effect.setText("Target creature's base power perpetually becomes 0");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 

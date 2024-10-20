@@ -49,7 +49,7 @@ class EtherealGraspEffect extends OneShotEffect {
 
     EtherealGraspEffect() {
         super(Outcome.AddAbility);
-        this.staticText = "That creature perpetually gains “This creature doesn’t untap during your untap step” and “{8}: Untap this creature.”";
+        this.staticText = "That creature perpetually gains \"This creature doesn't untap during your untap step\" and \"{8}: Untap this creature.\"";
     }
 
     private EtherealGraspEffect(final EtherealGraspEffect effect) {
@@ -66,7 +66,7 @@ class EtherealGraspEffect extends OneShotEffect {
 
         game.addEffect(new GainAbilityTargetPerpetuallyEffect(
                 new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()),
-                "creature perpetually gains “This creature doesn’t untap during your untap step”"
+                "creature perpetually gains \"This creature doesn't untap during your untap step\""
         ).setTargetPointer(new FixedTarget(source.getFirstTarget(), game)), source);
 
         game.addEffect(new GainAbilityTargetPerpetuallyEffect(
