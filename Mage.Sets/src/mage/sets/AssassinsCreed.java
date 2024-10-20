@@ -37,6 +37,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Basim Ibn Ishaq", 49, Rarity.RARE, mage.cards.b.BasimIbnIshaq.class));
         cards.add(new SetCardInfo("Battlefield Improvisation", 276, Rarity.COMMON, mage.cards.b.BattlefieldImprovisation.class));
         cards.add(new SetCardInfo("Bayek of Siwa", 50, Rarity.RARE, mage.cards.b.BayekOfSiwa.class));
+        cards.add(new SetCardInfo("Become Anonymous", 14, Rarity.UNCOMMON, mage.cards.b.BecomeAnonymous.class));
         cards.add(new SetCardInfo("Black Market Connections", 87, Rarity.RARE, mage.cards.b.BlackMarketConnections.class));
         cards.add(new SetCardInfo("Bleeding Effect", 51, Rarity.UNCOMMON, mage.cards.b.BleedingEffect.class));
         cards.add(new SetCardInfo("Brotherhood Ambushers", 285, Rarity.UNCOMMON, mage.cards.b.BrotherhoodAmbushers.class));
@@ -118,6 +119,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Silent Clearing", 115, Rarity.RARE, mage.cards.s.SilentClearing.class));
         cards.add(new SetCardInfo("Smoke Bomb", 75, Rarity.UNCOMMON, mage.cards.s.SmokeBomb.class));
         cards.add(new SetCardInfo("Spartan Veteran", 292, Rarity.COMMON, mage.cards.s.SpartanVeteran.class));
+        cards.add(new SetCardInfo("Staff of Eden, Vault's Key", 76, Rarity.MYTHIC, mage.cards.s.StaffOfEdenVaultsKey.class));
         cards.add(new SetCardInfo("Stone Quarry", 300, Rarity.UNCOMMON, mage.cards.s.StoneQuarry.class));
         cards.add(new SetCardInfo("Submerged Boneyard", 301, Rarity.UNCOMMON, mage.cards.s.SubmergedBoneyard.class));
         cards.add(new SetCardInfo("Sunbaked Canyon", 111, Rarity.RARE, mage.cards.s.SunbakedCanyon.class));

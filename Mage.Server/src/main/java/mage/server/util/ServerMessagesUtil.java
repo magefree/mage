@@ -127,7 +127,7 @@ public enum ServerMessagesUtil {
 
     private String getServerStatsMessage() {
         long current = System.currentTimeMillis();
-        long hours = ((current - startDate) / (1000 * 60 * 60));
+        long hours = startDate <= 0 ? 0 : ((current - startDate) / (1000 * 60 * 60));
         String updated = new Date().toInstant().atOffset(ZoneOffset.UTC).toLocalDateTime().format(DateTimeFormatter.ofPattern("HH:mm:ss"));
         return String.format("Server uptime: %d hours; max online: %d; active games: %d of %d, tourneys: %d of %d; stats from %s",
                 hours,

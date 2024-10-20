@@ -95,18 +95,19 @@ class LegionsInitiativeExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
             return false;
         }
         Cards cards = new CardsImpl();
+        UUID exileZone = CardUtil.getExileZoneId(game, source);
         game.getBattlefield().getActivePermanents(
                 StaticFilters.FILTER_CONTROLLED_CREATURE,
                 source.getControllerId(), source, game
         ).stream().filter(Objects::nonNull).forEach(cards::add);
-        return player.moveCardsToExile(
+        return controller.moveCardsToExile(
                 cards.getCards(game), source, game, true,
-                CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
+                exileZone, CardUtil.getSourceName(game, source)
         );
     }
 
@@ -120,8 +121,8 @@ class LegionsInitiativeReturnFromExileEffect extends OneShotEffect {
 
     LegionsInitiativeReturnFromExileEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "return those cards to the battlefield under their owner's control " +
-                "and those creatures gain haste until end of turn";
+        staticText = "return those cards to the battlefield under their owner's control "
+                + "and those creatures gain haste until end of turn";
     }
 
     private LegionsInitiativeReturnFromExileEffect(final LegionsInitiativeReturnFromExileEffect effect) {
@@ -135,13 +136,15 @@ class LegionsInitiativeReturnFromExileEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, -1));
-        if (player == null || exileZone == null || exileZone.isEmpty()) {
+        Player controller = game.getPlayer(source.getControllerId());
+        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        if (controller == null
+                || exileZone == null
+                || exileZone.isEmpty()) {
             return false;
         }
         Cards cards = new CardsImpl(exileZone);
-        player.moveCards(cards, Zone.BATTLEFIELD, source, game);
+        controller.moveCards(cards, Zone.BATTLEFIELD, source, game);
         List<Permanent> permanents = cards.stream().map(game::getPermanent).filter(Objects::nonNull).collect(Collectors.toList());
         if (permanents.isEmpty()) {
             return false;

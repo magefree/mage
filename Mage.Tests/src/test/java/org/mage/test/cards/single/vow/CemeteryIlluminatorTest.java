@@ -98,7 +98,7 @@ public class CemeteryIlluminatorTest extends CardTestPlayerBase {
 
         assertExileCount(playerA, creature, 1);
         assertPermanentCount(playerA, ci, 1);
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
         assertPermanentCount(playerA, whetwheel, 0);
     }
 

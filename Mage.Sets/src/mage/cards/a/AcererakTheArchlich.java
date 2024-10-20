@@ -10,6 +10,7 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -50,7 +51,9 @@ public final class AcererakTheArchlich extends CardImpl {
                 "to its owner's hand and venture into the dungeon."
         );
         ability.addEffect(new VentureIntoTheDungeonEffect());
-        this.addAbility(ability.addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
+        ability.addHint(CurrentDungeonHint.instance);
+        ability.addHint(CompletedDungeonCondition.getHint());
+        this.addAbility(ability, new CompletedDungeonWatcher());
 
         // Whenever Acererak the Archlich attacks, for each opponent, you create a 2/2 black Zombie creature token unless that player sacrifices a creature.
         this.addAbility(new AttacksTriggeredAbility(new AcererakTheArchlichEffect()));

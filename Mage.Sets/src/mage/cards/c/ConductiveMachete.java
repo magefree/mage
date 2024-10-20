@@ -29,7 +29,7 @@ public final class ConductiveMachete extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 1)));
 
         // Equip {4}
-        this.addAbility(new EquipAbility(4));
+        this.addAbility(new EquipAbility(4, false));
     }
 
     private ConductiveMachete(final ConductiveMachete card) {

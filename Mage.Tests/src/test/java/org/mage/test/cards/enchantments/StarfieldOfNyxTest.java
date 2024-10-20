@@ -51,7 +51,7 @@ public class StarfieldOfNyxTest extends CardTestPlayerBase {
         execute();
 
         assertGraveyardCount(playerA, "Thopter Spy Network", 0);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(),
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(),
                 2, 2, Filter.ComparisonScope.All); // the manifested cards
         assertPermanentCount(playerA, "Starfield of Nyx", 1);
         assertPowerToughness(playerA, "Thopter Spy Network", 4, 4, Filter.ComparisonScope.All);

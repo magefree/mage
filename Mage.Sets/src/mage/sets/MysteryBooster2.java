@@ -100,6 +100,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Flusterstorm", 163, Rarity.RARE, mage.cards.f.Flusterstorm.class));
         cards.add(new SetCardInfo("Foil", 243, Rarity.COMMON, mage.cards.f.Foil.class));
         cards.add(new SetCardInfo("Forest Bear", 206, Rarity.COMMON, mage.cards.f.ForestBear.class));
+        cards.add(new SetCardInfo("Forsaken Crossroads", 264, Rarity.UNCOMMON, mage.cards.f.ForsakenCrossroads.class));
         cards.add(new SetCardInfo("Future Sight", 122, Rarity.RARE, mage.cards.f.FutureSight.class));
         cards.add(new SetCardInfo("Gerrard, Weatherlight Hero", 251, Rarity.RARE, mage.cards.g.GerrardWeatherlightHero.class));
         cards.add(new SetCardInfo("Ghost Quarter", 109, Rarity.UNCOMMON, mage.cards.g.GhostQuarter.class));
@@ -231,6 +232,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Static Orb", 234, Rarity.RARE, mage.cards.s.StaticOrb.class));
         cards.add(new SetCardInfo("Stifle", 173, Rarity.RARE, mage.cards.s.Stifle.class));
         cards.add(new SetCardInfo("Stitcher's Supplier", 48, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
+        cards.add(new SetCardInfo("Stone Drake", 363, Rarity.RARE, mage.cards.s.StoneDrake.class));
         cards.add(new SetCardInfo("Stony Silence", 21, Rarity.RARE, mage.cards.s.StonySilence.class));
         cards.add(new SetCardInfo("Street Wraith", 49, Rarity.COMMON, mage.cards.s.StreetWraith.class));
         cards.add(new SetCardInfo("Summoner's Pact", 74, Rarity.RARE, mage.cards.s.SummonersPact.class));
@@ -278,6 +280,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Wish", 64, Rarity.RARE, mage.cards.w.Wish.class));
         cards.add(new SetCardInfo("Wishclaw Talisman", 51, Rarity.RARE, mage.cards.w.WishclawTalisman.class));
         cards.add(new SetCardInfo("Worst Fears", 52, Rarity.MYTHIC, mage.cards.w.WorstFears.class));
+        cards.add(new SetCardInfo("Wowzer, the Aspirational", 365, Rarity.RARE, mage.cards.w.WowzerTheAspirational.class));
         cards.add(new SetCardInfo("Xantcha, Sleeper Agent", 253, Rarity.RARE, mage.cards.x.XantchaSleeperAgent.class));
         cards.add(new SetCardInfo("Yorion, Sky Nomad", 94, Rarity.RARE, mage.cards.y.YorionSkyNomad.class));
         cards.add(new SetCardInfo("Zombie Master", 188, Rarity.RARE, mage.cards.z.ZombieMaster.class));

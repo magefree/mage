@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.OneShotEffect;
@@ -21,7 +21,7 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
-import mage.target.targetpointer.FixedTargets;
+import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -53,7 +53,7 @@ public final class PartyThrasher extends CardImpl {
         ));
 
         // At the beginning of your precombat main phase, you may discard a card. If you do, exile the top two cards of your library, then choose one of them. You may play that card this turn.
-        this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(
                 new DoIfCostPaid(
                         new PartyThrasherEffect(),
                         new DiscardCardCost()
@@ -118,7 +118,7 @@ class PartyThrasherEffect extends OneShotEffect {
         exileZone.setCleanupOnEndTurn(true);
         game.getExile().moveToAnotherZone(card, game, exileZone);
         game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(Zone.EXILED, Duration.EndOfTurn)
-                .setTargetPointer(new FixedTargets(cards, game)), source);
+                .setTargetPointer(new FixedTarget(card, game)), source);
         return true;
     }
 

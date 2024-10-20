@@ -5,19 +5,14 @@ import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.Choice;
 import mage.choices.ChoiceCardType;
 import mage.constants.*;
-import mage.filter.common.FilterOwnedCard;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -26,6 +21,8 @@ import mage.util.CardUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import mage.abilities.SpellAbility;
+import mage.abilities.effects.common.cost.CostModificationEffectImpl;
 
 /**
  * @author jeffwadsworth
@@ -40,11 +37,11 @@ public class ApexObservatory extends CardImpl {
         // Apex Observatory enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
-        // Apex Observatory enters the battlefield tapped. As it enters, choose a card type shared among two exiled cards used to craft it.
+        // As it enters, choose a card type shared among two exiled cards used to craft it.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCardTypeEffect()));
 
         // The next spell you cast this turn of the chosen type can be cast without paying its mana cost.
-        this.addAbility(new SimpleActivatedAbility(new AddContinuousEffectToGame(new ApexObservatoryEffect()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new ApexObservatoryEffect(), new TapSourceCost()));
     }
 
     private ApexObservatory(final ApexObservatory card) {
@@ -141,10 +138,10 @@ class ChooseCardTypeEffect extends OneShotEffect {
     }
 }
 
-class ApexObservatoryEffect extends ContinuousEffectImpl {
+class ApexObservatoryEffect extends OneShotEffect {
 
     ApexObservatoryEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "The next spell you cast this turn of the chosen type can be cast without paying its mana cost.";
     }
 
@@ -158,86 +155,85 @@ class ApexObservatoryEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Player controller = game.getPlayer(source.getControllerId());
+    public boolean apply(Game game, Ability source) {
         String chosenCardType = (String) game.getState().getValue("ApexObservatoryType_" + source.getSourceId().toString());
-        if (controller != null
-                && chosenCardType != null) {
-            Card apexObservatory = game.getCard(source.getSourceId());
-            if (apexObservatory != null) {
-                Boolean wasItUsed = (Boolean) game.getState().getValue(
-                        apexObservatory.getId().toString());
-                if (wasItUsed == null) {
-                    ApexObservatoryAlternativeCostAbility alternateCostAbility = new ApexObservatoryAlternativeCostAbility(chosenCardType);
-                    alternateCostAbility.setSourceId(source.getSourceId());
-                    controller.getAlternativeSourceCosts().add(alternateCostAbility);
+        if (chosenCardType == null) {
+            return false;
+        }
+        game.addEffect(new ApexObservatoryCastWithoutManaEffect(chosenCardType, source.getControllerId()), source);
+        return true;
+    }
+}
+
+class ApexObservatoryCastWithoutManaEffect extends CostModificationEffectImpl {
+
+    private final String chosenCardType;
+    private final UUID playerId;
+    private boolean used = false;
+
+    ApexObservatoryCastWithoutManaEffect(String chosenCardType, UUID playerId) {
+        super(Duration.EndOfTurn, Outcome.Benefit, CostModificationType.SET_COST);
+        this.chosenCardType = chosenCardType;
+        this.playerId = playerId;
+        staticText = "The next spell you cast this turn of the chosen type can be cast without paying its mana cost";
+    }
+
+    private ApexObservatoryCastWithoutManaEffect(final ApexObservatoryCastWithoutManaEffect effect) {
+        super(effect);
+        this.chosenCardType = effect.chosenCardType;
+        this.playerId = effect.playerId;
+        this.used = effect.used;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        // Ask the player if they want to use the effect
+        Player controller = game.getPlayer(playerId);
+        if (controller != null) {
+            MageObject spell = abilityToModify.getSourceObject(game);
+            if (spell != null && !game.isSimulation()) {
+                String message = "Cast " + spell.getIdName() + " without paying its mana cost?";
+                if (controller.chooseUse(Outcome.Benefit, message, source, game)) {
+                    // Set the cost to zero
+                    abilityToModify.getManaCostsToPay().clear();
+                    // Mark as used
+                    used = true;
+                    game.informPlayers(controller.getLogName() + " casts " + spell.getIdName() + " without paying its mana cost.");
+                    return true;
+                } else {
+                    // Player chose not to use the effect
+                    return false;
                 }
-                return true;
             }
         }
         return false;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
+    public ApexObservatoryCastWithoutManaEffect copy() {
+        return new ApexObservatoryCastWithoutManaEffect(this);
     }
 
     @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
-    }
-}
-
-class ApexObservatoryAlternativeCostAbility extends AlternativeCostSourceAbility {
-
-    private boolean wasActivated;
-
-    ApexObservatoryAlternativeCostAbility(String chosenCardType) {
-        super(new SpellMatchesChosenTypeCondition(chosenCardType), null, new FilterOwnedCard(), true, null);
-    }
-
-    private ApexObservatoryAlternativeCostAbility(final ApexObservatoryAlternativeCostAbility ability) {
-        super(ability);
-        this.wasActivated = ability.wasActivated;
+    public boolean isInactive(Ability source, Game game) {
+        return used || super.isInactive(source, game);
     }
 
     @Override
-    public ApexObservatoryAlternativeCostAbility copy() {
-        return new ApexObservatoryAlternativeCostAbility(this);
-    }
-
-    @Override
-    public boolean activateAlternativeCosts(Ability ability, Game game) {
-        if (!super.activateAlternativeCosts(ability, game)) {
+    public boolean applies(Ability ability, Ability source, Game game) {
+        if (used) {
             return false;
         }
-        Card apexObservatory = game.getCard(this.getSourceId());
-        if (apexObservatory != null) {
-            game.getState().setValue(apexObservatory.getId().toString(), true);
+        if (!ability.isControlledBy(playerId)) {
+            return false;
         }
-        return true;
-    }
-}
-
-class SpellMatchesChosenTypeCondition implements Condition {
-
-    final private String chosenCardType;
-
-    public SpellMatchesChosenTypeCondition(String chosenCardType) {
-        this.chosenCardType = chosenCardType;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return checkSpell(game.getObject(source), game, chosenCardType);
-    }
-
-    public static boolean checkSpell(MageObject spell, Game game, String chosenCardType) {
-        if (spell instanceof Card) {
-            Card card = (Card) spell;
-            return chosenCardType != null
-                    && card.getCardType(game).toString().contains(chosenCardType);
+        if (!(ability instanceof SpellAbility)) {
+            return false;
+        }
+        MageObject object = game.getObject(ability.getSourceId());
+        if (object != null && object.getCardType(game).stream()
+                .anyMatch(cardType -> cardType.toString().equals(chosenCardType))) {
+            return true;
         }
         return false;
     }

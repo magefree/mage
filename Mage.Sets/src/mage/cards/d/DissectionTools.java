@@ -45,7 +45,7 @@ public final class DissectionTools extends CardImpl {
 
         // Equip--Sacrifice a creature.
         this.addAbility(new EquipAbility(
-                Outcome.BoostCreature, new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_A_CREATURE)
+                Outcome.BoostCreature, new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_A_CREATURE), false
         ));
     }
 

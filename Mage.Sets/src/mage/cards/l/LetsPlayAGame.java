@@ -30,7 +30,7 @@ public final class LetsPlayAGame extends CardImpl {
         this.getSpellAbility().getModes().setChooseText(
                 "choose one. If there are four or more card types among cards in your graveyard, choose one or more instead."
         );
-        this.getSpellAbility().getModes().setMoreCondition(DeliriumCondition.instance);
+        this.getSpellAbility().getModes().setMoreCondition(3, DeliriumCondition.instance);
         this.getSpellAbility().setAbilityWord(AbilityWord.DELIRIUM);
         this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
 

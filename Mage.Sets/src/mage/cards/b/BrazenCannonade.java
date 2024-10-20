@@ -47,8 +47,8 @@ public final class BrazenCannonade extends CardImpl {
                         new ExileTopXMayPlayUntilEffect(
                                 1, Duration.UntilEndCombatOfYourNextTurn
                         ), TargetController.YOU, false
-                ), RaidCondition.instance, "At the beginning of your postcombat main phase, " +
-                "if you attacked with a creature this turn, exile the top card of your library. " +
+                ), RaidCondition.instance, "At the beginning of each of your postcombat main phases, " +
+                "if you attacked this turn, exile the top card of your library. " +
                 "Until end of combat on your next turn, you may play that card."
         );
         this.addAbility(ability.setAbilityWord(AbilityWord.RAID).addHint(RaidHint.instance), new PlayerAttackedWatcher());

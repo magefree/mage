@@ -1,7 +1,7 @@
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -31,7 +31,7 @@ public class RadiationEmblem extends Emblem {
         this.frameStyle = FrameStyle.M15_NORMAL;
 
         this.getAbilities().add(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfPreCombatMainTriggeredAbility(Zone.ALL, new RadiationEffect(), TargetController.YOU, false, false),
+                new BeginningOfFirstMainTriggeredAbility(Zone.ALL, new RadiationEffect(), TargetController.YOU, false, false),
                 RadiationCondition.instance,
                 "At the beginning of your precombat main phase, if you have any rad counters, "
                         + "mill that many cards. For each nonland card milled this way, you lose 1 life and a rad counter."
@@ -45,7 +45,7 @@ public class RadiationEmblem extends Emblem {
             this.setImageFileName(""); // use default
             this.setImageNumber(foundInfo.getImageNumber());
         } else {
-            // how-to fix: add emblem to the tokens-database TokenRepository->loadXmageTokens
+            // how-to fix: add image to the tokens-database TokenRepository->loadXmageTokens
             throw new IllegalArgumentException("Wrong code usage: can't find xmage token info for: " + TokenRepository.XMAGE_IMAGE_NAME_RADIATION);
         }
     }

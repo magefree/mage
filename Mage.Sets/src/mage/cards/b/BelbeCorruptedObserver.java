@@ -56,7 +56,7 @@ class BelbeCorruptedObserverEffect extends OneShotEffect {
 
     BelbeCorruptedObserverEffect() {
         super(Outcome.Benefit);
-        staticText = "that player adds {C}{C} for each of your opponents who lost life this turn";
+        staticText = "the active player adds {C}{C} for each of your opponents who lost life this turn";
     }
 
     private BelbeCorruptedObserverEffect(final BelbeCorruptedObserverEffect effect) {

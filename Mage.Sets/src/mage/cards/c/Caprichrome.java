@@ -8,8 +8,8 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
-import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
 
@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class Caprichrome extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledArtifactPermanent("artifact");
+    private static final FilterPermanent filter = new FilterControlledArtifactPermanent("artifact");
 
     public Caprichrome(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}");

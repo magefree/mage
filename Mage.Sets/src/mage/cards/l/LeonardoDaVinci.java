@@ -1,8 +1,6 @@
 package mage.cards.l;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -14,13 +12,15 @@ import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
+
+import java.util.UUID;
 
 /**
  * @author grimreap124
@@ -31,7 +31,7 @@ public final class LeonardoDaVinci extends CardImpl {
 
     static {
         filter.add(SubType.THOPTER.getPredicate());
-        filter.add(TargetController.YOU.getPlayerPredicate());
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public LeonardoDaVinci(UUID ownerId, CardSetInfo setInfo) {

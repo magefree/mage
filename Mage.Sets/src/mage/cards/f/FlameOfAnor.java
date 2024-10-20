@@ -32,8 +32,7 @@ public final class FlameOfAnor extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{R}");
 
         // Choose one. If you control a Wizard as you cast this spell, you may choose two instead.
-        this.getSpellAbility().getModes().setMoreCondition(condition);
-        this.getSpellAbility().getModes().setMoreLimit(2);
+        this.getSpellAbility().getModes().setMoreCondition(2, condition);
         this.getSpellAbility().getModes().setChooseText(
                 "Choose one. If you control a Wizard as you cast this spell, you may choose two instead."
         );

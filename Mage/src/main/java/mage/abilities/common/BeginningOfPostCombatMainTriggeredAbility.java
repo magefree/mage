@@ -48,25 +48,25 @@ public class BeginningOfPostCombatMainTriggeredAbility extends TriggeredAbilityI
     public boolean checkTrigger(GameEvent event, Game game) {
         switch (targetController) {
             case YOU:
-                boolean yours = event.getPlayerId().equals(this.controllerId);
-                if (yours && setTargetPointer) {
-                    if (getTargets().isEmpty()) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
+                if (!isControlledBy(event.getPlayerId())) {
+                    return false;
+                }
+                if (setTargetPointer && getTargets().isEmpty()) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                     }
                 }
-                return yours;
+                return true;
             case OPPONENT:
-                if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
-                    if (setTargetPointer) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        }
-                    }
-                    return true;
+                if (!game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+                    return false;
                 }
-                break;
+                if (setTargetPointer) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    }
+                }
+                return true;
             case ANY:
                 if (setTargetPointer) {
                     for (Effect effect : this.getEffects()) {
@@ -77,7 +77,7 @@ public class BeginningOfPostCombatMainTriggeredAbility extends TriggeredAbilityI
             case ENCHANTED:
                 Permanent permanent = getSourcePermanentIfItStillExists(game);
                 if (permanent == null || !game.isActivePlayer(permanent.getAttachedTo())) {
-                    break;
+                    return false;
                 }
                 if (getTargets().isEmpty()) {
                     this.getEffects().setTargetPointer(new FixedTarget(event.getPlayerId()));
@@ -90,13 +90,13 @@ public class BeginningOfPostCombatMainTriggeredAbility extends TriggeredAbilityI
     private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
-                return "At the beginning of your postcombat main phase, " + generateZoneString();
+                return "At the beginning of each of your postcombat main phases, " + generateZoneString();
             case OPPONENT:
-                return "At the beginning of each opponent's postcombat main phase, " + generateZoneString();
+                return "At the beginning of each of your opponent's postcombat main phases, " + generateZoneString();
             case ANY:
-                return "At the beginning of each player's postcombat main phase, " + generateZoneString();
+                return "At the beginning of each postcombat main phase, " + generateZoneString();
             case ENCHANTED:
-                return "At the beginning of enchanted player's postcombat main phase, " + generateZoneString();
+                return "At the beginning of each of enchanted player's postcombat main phases, " + generateZoneString();
         }
         return "";
     }

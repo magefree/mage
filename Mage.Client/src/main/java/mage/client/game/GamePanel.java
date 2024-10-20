@@ -196,11 +196,20 @@ public final class GamePanel extends javax.swing.JPanel {
                 player.getGraveyard().values().forEach(c -> this.allCardsIndex.put(c.getId(), c));
                 Optional.ofNullable(player.getTopCard()).ifPresent(c -> this.allCardsIndex.put(c.getId(), c));
                 // TODO: add support of dungeon, emblem all another non-card objects
+                // commanders and custom emblems
                 player.getCommandObjectList()
-                        .stream()
-                        .filter(c -> c instanceof CardView)
-                        .map(c -> (CardView) c)
-                        .forEach(c -> this.allCardsIndex.put(c.getId(), c));
+                        .forEach(object -> {
+                            if (object instanceof CardView) {
+                                // commanders and custom emblems
+                                this.allCardsIndex.put(object.getId(), (CardView) object);
+                            } else if (object instanceof DungeonView) {
+                                // dungeons
+                                this.allCardsIndex.put(object.getId(), new CardView((DungeonView) object));
+                            } else {
+                                // TODO: enable after all view types added here?
+                                //throw new IllegalArgumentException("Unsupported object type: " + object.getName() + " - " + object.getClass().getSimpleName());
+                            }
+                        });
             });
         }
 
@@ -808,7 +817,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gamePane = gamePane;
         this.playerId = playerId;
         MageFrame.addGame(gameId, this);
-        this.feedbackPanel.init(gameId);
+        this.feedbackPanel.init(gameId, bigCard);
         this.feedbackPanel.clear();
         this.abilityPicker.init(gameId, bigCard);
         this.btnConcede.setVisible(true);
@@ -851,7 +860,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gamePane = gamePane;
         this.playerId = null;
         MageFrame.addGame(gameId, this);
-        this.feedbackPanel.init(gameId);
+        this.feedbackPanel.init(gameId, bigCard);
         this.feedbackPanel.clear();
 
         this.btnConcede.setVisible(false);
@@ -886,7 +895,7 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gameId = gameId;
         this.playerId = null;
         MageFrame.addGame(gameId, this);
-        this.feedbackPanel.init(gameId);
+        this.feedbackPanel.init(gameId, bigCard);
         this.feedbackPanel.clear();
         this.btnConcede.setVisible(false);
         this.btnSkipToNextTurn.setVisible(false);

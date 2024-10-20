@@ -1,6 +1,6 @@
 package mage.cards.f;
 
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.VanishingAbility;
 import mage.cards.CardImpl;
@@ -22,7 +22,7 @@ public final class FourKnocks extends CardImpl {
         this.addAbility(new VanishingAbility(4));
 
         // At the beginning of your precombat main phase, draw a card.
-        this.addAbility(new BeginningOfPreCombatMainTriggeredAbility(
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(
                 new DrawCardSourceControllerEffect(1), TargetController.YOU, false
         ));
     }

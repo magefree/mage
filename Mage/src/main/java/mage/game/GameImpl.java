@@ -19,6 +19,7 @@ import mage.abilities.effects.common.continuous.BecomesFaceDownCreatureEffect;
 import mage.abilities.effects.keyword.FinalityCounterEffect;
 import mage.abilities.effects.keyword.ShieldCounterEffect;
 import mage.abilities.effects.keyword.StunCounterEffect;
+import mage.abilities.hint.common.DayNightHint;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
@@ -560,14 +561,14 @@ public abstract class GameImpl implements Game {
     }
 
     @Override
-    public void ventureIntoDungeon(UUID playerId, boolean undercity) {
+    public void ventureIntoDungeon(UUID playerId, boolean isEnterToUndercity) {
         if (playerId == null) {
             return;
         }
         if (replaceEvent(GameEvent.getEvent(GameEvent.EventType.VENTURE, playerId, null, playerId))) {
             return;
         }
-        this.getOrCreateDungeon(playerId, undercity).moveToNextRoom(playerId, this);
+        this.getOrCreateDungeon(playerId, isEnterToUndercity).moveToNextRoom(playerId, this);
         fireEvent(GameEvent.getEvent(GameEvent.EventType.VENTURED, playerId, null, playerId));
     }
 
@@ -583,8 +584,10 @@ public abstract class GameImpl implements Game {
         if (emblem != null) {
             return emblem;
         }
+
         TheRingEmblem newEmblem = new TheRingEmblem(playerId);
         state.addCommandObject(newEmblem);
+
         return newEmblem;
     }
 
@@ -1441,6 +1444,9 @@ public abstract class GameImpl implements Game {
         getState().addWatcher(bloodthirstWatcher);
     }
 
+    /**
+     * Add source of some global effects (as hidden emblems), so users will see good image in stack and logs
+     */
     public void initGameDefaultHelperEmblems() {
 
         // Rad Counter's trigger source
@@ -1454,6 +1460,7 @@ public abstract class GameImpl implements Game {
         // global card hints for better UX
         for (UUID playerId : state.getPlayerList(startingPlayerId)) {
             state.addHelperEmblem(new XmageHelperEmblem().withCardHint("storm counter", StormAbility.getHint()), playerId);
+            state.addHelperEmblem(new XmageHelperEmblem().withCardHint("day or night", DayNightHint.instance), playerId);
         }
     }
 
@@ -1963,15 +1970,14 @@ public abstract class GameImpl implements Game {
     @Override
     public void addEmblem(Emblem emblem, MageObject sourceObject, UUID toPlayerId) {
         Emblem newEmblem = emblem.copy();
-        newEmblem.setSourceObject(sourceObject);
+        newEmblem.setSourceObjectAndInitImage(sourceObject);
         newEmblem.setControllerId(toPlayerId);
         newEmblem.assignNewId();
         newEmblem.getAbilities().newId();
         for (Ability ability : newEmblem.getAbilities()) {
             ability.setSourceId(newEmblem.getId());
         }
-
-        state.addCommandObject(newEmblem); // TODO: generate image for emblem here?
+        state.addCommandObject(newEmblem);
     }
 
     /**
@@ -1992,7 +1998,7 @@ public abstract class GameImpl implements Game {
             }
         }
         Plane newPlane = plane.copy();
-        newPlane.setSourceObject();
+        newPlane.setSourceObjectAndInitImage();
         newPlane.setControllerId(toPlayerId);
         newPlane.assignNewId();
         newPlane.getAbilities().newId();
@@ -2000,6 +2006,7 @@ public abstract class GameImpl implements Game {
             ability.setSourceId(newPlane.getId());
         }
         state.addCommandObject(newPlane);
+
         informPlayers("You have planeswalked to " + newPlane.getLogName());
 
         // Fire off the planeswalked event

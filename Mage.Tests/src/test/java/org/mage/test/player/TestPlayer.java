@@ -154,6 +154,13 @@ public class TestPlayer implements Player {
     }
 
     public void addChoice(String choice) {
+        // prepare face down
+        // how-to fix:
+        // * for face down choices: use EmptyNames.XXX.getTestCommand instead toString
+        // * for replacement/triggers choices: comment choice command, look at logs for triggers list and use starting text in the choice instead empty
+        Assert.assertNotEquals("Choice can't be empty", "", choice);
+        choice = EmptyNames.replaceTestCommandByObjectName(choice);
+
         choices.add(choice);
     }
 
@@ -182,6 +189,12 @@ public class TestPlayer implements Player {
     }
 
     public void addTarget(String target) {
+        // prepare face down
+        // how-to fix: if it's a face down object then use getTestCommand instead toString
+        Assert.assertNotEquals("Target can't be empty", "", target);
+
+        target = EmptyNames.replaceTestCommandByObjectName(target);
+
         targets.add(target);
     }
 
@@ -1125,20 +1138,16 @@ public class TestPlayer implements Player {
     }
 
     private Permanent findPermanentWithAssert(PlayerAction action, Game game, Player player, String cardName) {
-        for (Permanent perm : game.getBattlefield().getAllPermanents()) {
-            // need by controller
-            if (!perm.getControllerId().equals(player.getId())) {
-                continue;
-            }
-
+        for (Permanent perm : game.getBattlefield().getAllActivePermanents(player.getId())) {
             // need by alias or by name
             if (!hasObjectTargetNameOrAlias(perm, cardName)) {
                 continue;
             }
-
-            // all fine
             return perm;
         }
+        printStart(game, "Permanents of " + player.getName());
+        printPermanents(game, game.getBattlefield().getAllActivePermanents(player.getId()), this);
+        printEnd();
         Assert.fail(action.getActionName() + " - can't find permanent to check: " + cardName);
         return null;
     }
@@ -1295,7 +1304,7 @@ public class TestPlayer implements Player {
     private void printStack(Game game) {
         System.out.println("Stack objects: " + game.getStack().size());
         game.getStack().forEach(stack -> {
-            System.out.println(stack.getStackAbility().toString());
+            System.out.println(stack.getStackAbility().toString() + (stack.isCopy() ? " [copy]" : ""));
         });
     }
 

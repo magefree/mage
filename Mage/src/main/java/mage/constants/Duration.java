@@ -14,6 +14,7 @@ public enum Duration {
     EndOfTurn("until end of turn", true, true),
     UntilYourNextTurn("until your next turn", true, true),
     UntilYourNextEndStep("until your next end step", true, true),
+    UntilNextEndStep("until the beginning of the next end step", true, true),
     UntilEndCombatOfYourNextTurn("until end of combat on your next turn", true, true),
     UntilYourNextUpkeepStep("until your next upkeep", true, true),
     UntilEndOfYourNextTurn("until the end of your next turn", true, true),

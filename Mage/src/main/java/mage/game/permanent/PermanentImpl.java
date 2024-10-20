@@ -248,7 +248,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public String getName() {
         if (name.isEmpty()) {
             if (faceDown) {
-                return EmptyNames.FACE_DOWN_CREATURE.toString();
+                return EmptyNames.FACE_DOWN_CREATURE.getObjectName();
             } else {
                 return "";
             }

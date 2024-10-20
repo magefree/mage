@@ -39,6 +39,7 @@ public final class SpymastersVault extends CardImpl {
 
         // {T}: Add {B}.
         this.addAbility(new BlackManaAbility());
+
         // {B}, {T}: Target creature you control connives X, where X is the number of creatures that died this turn.
         Ability ability = new SimpleActivatedAbility(new SpymastersVaultEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
@@ -80,7 +81,7 @@ class SpymastersVaultEffect extends OneShotEffect {
         if (deaths < 1) {
             return false;
         }
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
         if (permanent == null) {
             return false;
         }

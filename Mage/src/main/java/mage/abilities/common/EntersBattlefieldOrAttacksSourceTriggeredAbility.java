@@ -19,6 +19,7 @@ public class EntersBattlefieldOrAttacksSourceTriggeredAbility extends TriggeredA
     public EntersBattlefieldOrAttacksSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         setTriggerPhrase("Whenever {this} enters or attacks, ");
+        this.withRuleTextReplacement(true);
     }
 
     protected EntersBattlefieldOrAttacksSourceTriggeredAbility(final EntersBattlefieldOrAttacksSourceTriggeredAbility ability) {

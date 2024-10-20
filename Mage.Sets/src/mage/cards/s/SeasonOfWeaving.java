@@ -44,14 +44,15 @@ public final class SeasonOfWeaving extends CardImpl {
 
         // {P} -- Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.spellAbility.getModes().getMode().withPawPrintValue(1);
+        this.getSpellAbility().getModes().getMode().withPawPrintValue(1);
 
         // {P}{P} -- Choose an artifact or creature you control. Create a token that's a copy of it.
         Mode mode2 = new Mode(new SeasonOfWeavingEffect());
         this.getSpellAbility().addMode(mode2.withPawPrintValue(2));
 
         // {P}{P}{P} -- Return each nonland, nontoken permanent to its owner's hand.
-        Mode mode3 = new Mode(new ReturnToHandFromBattlefieldAllEffect(filter));
+        Mode mode3 = new Mode(new ReturnToHandFromBattlefieldAllEffect(filter)
+                .setText("return each nonland, nontoken permanent to its owner's hand"));
         this.getSpellAbility().addMode(mode3.withPawPrintValue(3));
     }
 

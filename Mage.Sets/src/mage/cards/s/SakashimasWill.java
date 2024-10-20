@@ -34,7 +34,7 @@ public final class SakashimasWill extends CardImpl {
         this.getSpellAbility().getModes().setChooseText(
                 "Choose one. If you control a commander as you cast this spell, you may choose both."
         );
-        this.getSpellAbility().getModes().setMoreCondition(ControlACommanderCondition.instance);
+        this.getSpellAbility().getModes().setMoreCondition(2, ControlACommanderCondition.instance);
 
         // • Target opponent chooses a creature they control. You gain control of it.
         this.getSpellAbility().addEffect(new SakashimasWillStealEffect());

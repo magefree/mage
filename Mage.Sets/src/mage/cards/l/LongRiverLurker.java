@@ -46,7 +46,7 @@ public final class LongRiverLurker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Ward {1}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}"), false));
 
         // Other Frogs you control have ward {1}.
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(

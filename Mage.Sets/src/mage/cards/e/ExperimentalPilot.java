@@ -52,7 +52,7 @@ public final class ExperimentalPilot extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ward {2}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{2}"), false));
 
         // {U}, Discard two cards: Draft a card from Experimental Pilot's spellbook.
         Ability ability = new SimpleActivatedAbility(

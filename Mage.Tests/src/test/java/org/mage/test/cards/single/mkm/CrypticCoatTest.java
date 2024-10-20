@@ -33,9 +33,9 @@ public class CrypticCoatTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, coat);
 
-        checkPT("Cloaked is 3/2", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 3, 2);
+        checkPT("Cloaked is 3/2", 1, PhaseStep.BEGIN_COMBAT, playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 3, 2);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.toString());
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
         setChoice(playerB, true); // pay for ward
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U}{U}: Turn this face-down permanent face up.");
 

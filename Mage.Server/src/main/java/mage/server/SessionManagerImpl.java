@@ -4,6 +4,7 @@ import mage.MageException;
 import mage.players.net.UserData;
 import mage.server.managers.ManagerFactory;
 import mage.server.managers.SessionManager;
+import mage.util.ThreadUtils;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 
@@ -63,8 +64,7 @@ public class SessionManagerImpl implements SessionManager {
         if (session != null) {
             String errorMessage = session.connectUser(userName, password, restoreSessionId);
             if (errorMessage == null) {
-                logger.info(userName + " connected to server by sessionId " + sessionId
-                        + (restoreSessionId.isEmpty() ? "" : ", restoreSessionId " + restoreSessionId));
+                logger.info(userName + " connected to server" + (restoreSessionId.isEmpty() ? "" : " with restored session"));
                 if (detailsMode) {
                     logger.info("- details: " + userInfo);
                 }
@@ -153,6 +153,8 @@ public class SessionManagerImpl implements SessionManager {
         }
 
         user.showUserMessage("Admin action", "Your session was disconnected by admin");
+        ThreadUtils.sleep(1000);
+        logger.warn(user.getName() + " disconnected by admin");
         disconnect(userSessionId, DisconnectReason.DisconnectedByAdmin, true);
         admin.showUserMessage("Admin result", "User " + user.getName() + " was disconnected");
     }

@@ -10,7 +10,9 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -29,9 +31,9 @@ public final class EnduringCourage extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever another creature you control enters, it gets +2/+0 and gains haste until end of turn.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD,
                 new BoostTargetEffect(2, 0).setText("it gets +2/+0"),
-                StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL
+                StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL, false, SetTargetPointer.PERMANENT
         );
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance())
                 .setText("and gains haste until end of turn"));

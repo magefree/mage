@@ -8,6 +8,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
+import mage.abilities.hint.common.CurrentDungeonHint;
 import mage.abilities.keyword.InspiredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -38,7 +39,8 @@ public final class ImmovableRod extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // Whenever Immovable Rod becomes untapped, venture into the dungeon.
-        this.addAbility(new InspiredAbility(new VentureIntoTheDungeonEffect(), false, false));
+        this.addAbility(new InspiredAbility(new VentureIntoTheDungeonEffect(), false, false)
+                .addHint(CurrentDungeonHint.instance));
 
         // {3}{W}, {T}: For as long as Immovable Rod remains tapped, another target permanent loses all abilities and can't attack or block.
         Ability ability = new SimpleActivatedAbility(new ImmovableRodAbilityEffect(), new ManaCostsImpl<>("{3}{W}"));

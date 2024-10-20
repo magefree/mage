@@ -42,7 +42,7 @@ public final class OracleOfTheAlpha extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new OracleOfTheAlphaEffect()));
 
         // Whenever Oracle of the Alpha attacks, scry 1.
-        this.addAbility(new AttacksTriggeredAbility(new ScryEffect(1)));
+        this.addAbility(new AttacksTriggeredAbility(new ScryEffect(1, false)));
     }
 
     private OracleOfTheAlpha(final OracleOfTheAlpha card) {

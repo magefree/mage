@@ -14,7 +14,7 @@ public class TransformsOrEntersTriggeredAbility extends TriggeredAbilityImpl {
 
     public TransformsOrEntersTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
-        setTriggerPhrase("Whenever this creature enters the battlefield or transforms into {this}, ");
+        setTriggerPhrase("Whenever this creature enters or transforms into {this}, ");
     }
 
     private TransformsOrEntersTriggeredAbility(final TransformsOrEntersTriggeredAbility ability) {
