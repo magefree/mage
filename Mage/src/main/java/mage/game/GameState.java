@@ -1421,9 +1421,9 @@ public class GameState implements Serializable, Copyable<GameState> {
             newAbility = ability.copy();
             newAbility.newId();
         }
-        if(!(attachedTo instanceof AdventureCardSpell || attachedTo instanceof SplitCardHalf)) {
-            newAbility.setSourceId(attachedTo.getId());
-        }
+
+        newAbility.setSourceId(attachedTo.getId());
+
         if(ability.getControllerId() != null) {
             newAbility.setControllerId(ability.getControllerId());
         }
