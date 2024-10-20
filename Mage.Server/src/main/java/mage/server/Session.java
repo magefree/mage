@@ -99,12 +99,14 @@ public class Session {
             }
 
             // auto-generated password
-            RandomString randomString = new RandomString(10);
-            password = randomString.nextString();
-            returnMessage = validatePassword(password, userName);
-            if (returnMessage != null) {
-                sendErrorMessageToClient("Auto-generated password fail, try again: " + returnMessage);
-                return returnMessage;
+            if (password.isEmpty()) {
+                RandomString randomString = new RandomString(10);
+                password = randomString.nextString();
+                returnMessage = validatePassword(password, userName);
+                if (returnMessage != null) {
+                    sendErrorMessageToClient("Auto-generated password fail, try again: " + returnMessage);
+                    return returnMessage;
+                }
             }
 
             // email
