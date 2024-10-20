@@ -83,7 +83,7 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public boolean authSendTokenToEmail(String sessionId, String email) throws MageException {
-        if (!managerFactory.configSettings().isAuthenticationActivated()) {
+        if (!managerFactory.configSettings().isRegistrationEnabled()) {
             sendErrorMessageToClient(sessionId, Session.REGISTRATION_DISABLED_MESSAGE);
             return false;
         }
@@ -115,7 +115,7 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public boolean authResetPassword(String sessionId, String email, String authToken, String password) throws MageException {
-        if (!managerFactory.configSettings().isAuthenticationActivated()) {
+        if (!managerFactory.configSettings().isRegistrationEnabled()) {
             sendErrorMessageToClient(sessionId, Session.REGISTRATION_DISABLED_MESSAGE);
             return false;
         }

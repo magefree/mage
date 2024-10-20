@@ -85,7 +85,7 @@ public class Session {
     }
 
     public String registerUser(String userName, String password, String email) {
-        if (!managerFactory.configSettings().isAuthenticationActivated()) {
+        if (!managerFactory.configSettings().isRegistrationEnabled()) {
             String returnMessage = REGISTRATION_DISABLED_MESSAGE;
             sendErrorMessageToClient(returnMessage);
             return returnMessage;
@@ -242,7 +242,7 @@ public class Session {
 
         // find auth user
         AuthorizedUser authorizedUser = null;
-        if (managerFactory.configSettings().isAuthenticationActivated()) {
+        if (managerFactory.configSettings().shouldCheckUsers()) {
             authorizedUser = AuthorizedUserRepository.getInstance().getByName(userName);
             String errorMsg = "Wrong username or password. You must register your account first.";
             if (authorizedUser == null) {
@@ -276,8 +276,8 @@ public class Session {
         if (newUser == null) {
             User anotherUser = managerFactory.userManager().getUserByName(userName).orElse(null);
             if (anotherUser != null) {
-                boolean canDisconnectAuthDueAnotherInstance = managerFactory.configSettings().isAuthenticationActivated();
-                boolean canDisconnectAnonDueSameHost = !managerFactory.configSettings().isAuthenticationActivated()
+                boolean canDisconnectAuthDueAnotherInstance = managerFactory.configSettings().isRegistrationEnabled();
+                boolean canDisconnectAnonDueSameHost = !managerFactory.configSettings().isRegistrationEnabled()
                         && ANON_IDENTIFY_BY_HOST
                         && Objects.equals(anotherUser.getHost(), host);
                 boolean canDisconnectAnyDueSessionRestore = Objects.equals(restoreSessionId, anotherUser.getRestoreSessionId());

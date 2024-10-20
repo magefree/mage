@@ -43,7 +43,8 @@ public class ConfigWrapperTest {
         public int maxPasswordLength;
         public String maxAiOpponents;
         public boolean saveGameActivated;
-        public boolean authenticationActivated;
+        public boolean shouldCheckUsers;
+        public boolean registrationEnabled;
         public String googleAccount;
         public String mailgunApiKey;
         public String mailgunDomain;
@@ -94,8 +95,8 @@ public class ConfigWrapperTest {
             server.setMaxPasswordLength(bi(maxPasswordLength));
             server.setMaxAiOpponents(maxAiOpponents);
             server.setSaveGameActivated(saveGameActivated);
-            //server.setRegistrationEnabled(registrationEnabled);
-            //server.setCheckUsers(checkUsers);
+            server.setRegistrationEnabled(registrationEnabled);
+            server.setCheckUsers(shouldCheckUsers);
             server.setGoogleAccount(googleAccount);
             server.setMailgunApiKey(mailgunApiKey);
             server.setMailgunDomain(mailgunDomain);
@@ -172,7 +173,8 @@ public class ConfigWrapperTest {
                 testInt("max password length", c -> c.maxPasswordLength = expectedPositiveInt, ConfigWrapper::getMaxPasswordLength),
                 testString("max AI opponents", c -> c.maxAiOpponents = expectedString, ConfigWrapper::getMaxAiOpponents),
                 testTrue("save game activated", c -> c.saveGameActivated = true, ConfigWrapper::isSaveGameActivated),
-                //testTrue("registration enabled", c -> c.registrationEnabled = true, ConfigWrapper::isRegistrationEnabled),
+                testTrue("registration enabled", c -> c.registrationEnabled = true, ConfigWrapper::isRegistrationEnabled),
+                testTrue("should check users", c -> c.shouldCheckUsers = true, ConfigWrapper::shouldCheckUsers),
                 testString("google account", c -> c.googleAccount = expectedString, ConfigWrapper::getGoogleAccount),
                 testString("mailgun api key", c -> c.mailgunApiKey = expectedString, ConfigWrapper::getMailgunApiKey),
                 testString("mailgun domain", c -> c.mailgunDomain = expectedString, ConfigWrapper::getMailgunDomain),

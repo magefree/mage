@@ -138,7 +138,7 @@ public final class Main {
         final ConfigWrapper config = new ConfigWrapper(ConfigFactory.loadFromFile(configPath));
 
 
-        if (config.isAuthenticationActivated()) {
+        if (config.isRegistrationEnabled() || config.shouldCheckUsers()) {
             logger.info("Check authorized user DB version ...");
             if (!AuthorizedUserRepository.getInstance().checkAlterAndMigrateAuthorizedUser()) {
                 logger.fatal("Failed to start server.");
@@ -260,8 +260,8 @@ public final class Main {
         logger.info("Config - max pool size   : " + config.getMaxPoolSize());
         logger.info("Config - num accp.threads: " + config.getNumAcceptThreads());
         logger.info("Config - second.bind port: " + config.getSecondaryBindPort());
-        logger.info("Config - users registr.:   " + (config.isAuthenticationActivated() ? "true" : "false"));
-        logger.info("Config - users anon:       " + (!config.isAuthenticationActivated() ? "true" : "false"));
+        logger.info("Config - reg. enabled    : " + (config.isRegistrationEnabled() ? "true" : "false"));
+        logger.info("Config - check users     : " + (config.shouldCheckUsers() ? "true" : "false"));
         logger.info("Config - mailgun api key : " + config.getMailgunApiKey());
         logger.info("Config - mailgun domain  : " + config.getMailgunDomain());
         logger.info("Config - mail smtp Host  : " + config.getMailSmtpHost());
