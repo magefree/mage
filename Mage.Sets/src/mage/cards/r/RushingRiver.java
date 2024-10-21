@@ -10,7 +10,6 @@ import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetNonlandPermanent;
 import mage.target.targetadjustment.ConditionalTargetAdjuster;
-import mage.target.targetpointer.EachTargetPointer;
 
 import java.util.UUID;
 
@@ -27,7 +26,6 @@ public final class RushingRiver extends CardImpl {
 
         // Return target nonland permanent to its owner's hand. If Rushing River was kicked, return another target nonland permanent to its owner's hand.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect()
-                .setTargetPointer(new EachTargetPointer())
                 .setText("Return target nonland permanent to its owner's hand. " +
                         "If this spell was kicked, return another target nonland permanent to its owner's hand"));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());

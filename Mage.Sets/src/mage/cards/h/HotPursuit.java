@@ -94,7 +94,9 @@ class HotPursuitWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         switch (event.getType()) {
             case BEGINNING_PHASE_PRE:
-                players.clear();
+                if (game.getTurnNum() == 1) {
+                    players.clear();
+                }
                 return;
             case LOST:
                 players.add(event.getPlayerId());

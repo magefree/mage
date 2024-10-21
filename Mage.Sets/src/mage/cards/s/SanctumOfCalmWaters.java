@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardControllerEffect;
@@ -37,7 +37,7 @@ public final class SanctumOfCalmWaters extends CardImpl {
         this.subtype.add(SubType.SHRINE);
 
         // At the beginning of your precombat main phase, you may draw X cards, where X is the number of Shrines you control. If you do, discard a card.
-        Ability ability = new BeginningOfPreCombatMainTriggeredAbility(new DrawCardSourceControllerEffect(xValue)
+        Ability ability = new BeginningOfFirstMainTriggeredAbility(new DrawCardSourceControllerEffect(xValue)
                 .setText("you may draw X cards, where X is the number of Shrines you control"),
                 TargetController.YOU, true)
                 .addHint(new ValueHint("Shrines you control", xValue));

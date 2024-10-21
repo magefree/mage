@@ -5,7 +5,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.BeginningOfPreCombatMainTriggeredAbility;
+import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,10 +41,10 @@ public final class VentifactBottle extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // At the beginning of your precombat main phase, if Ventifact Bottle has a charge counter on it, tap it and remove all charge counters from it. Add {C} for each charge counter removed this way.
-        TriggeredAbility ability2 = new BeginningOfPreCombatMainTriggeredAbility(new VentifactBottleEffect(), TargetController.YOU, false);
+        TriggeredAbility ability2 = new BeginningOfFirstMainTriggeredAbility(new VentifactBottleEffect(), TargetController.YOU, false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability2,
                 new SourceHasCounterCondition(CounterType.CHARGE, 1, Integer.MAX_VALUE),
-                "At the beginning of your precombat main phase, "
+                "At the beginning of your first main phase, "
                         + "if {this} has a charge counter on it, tap it and remove all charge counters from it. "
                         + "Add {C} for each charge counter removed this way."));
     }

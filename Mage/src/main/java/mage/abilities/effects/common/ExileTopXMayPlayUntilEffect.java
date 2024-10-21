@@ -81,7 +81,7 @@ public class ExileTopXMayPlayUntilEffect extends OneShotEffect {
         String text = "exile the top ";
         boolean singular = amount.toString().equals("1");
         text += singular ? "card" : CardUtil.numberToText(amount.toString()) + " cards";
-        if (amount.toString().equals("X")) {
+        if (amount.toString().equals("X") && !amount.getMessage().isEmpty()) {
             text += " of your library, where X is " + amount.getMessage() + ". ";
         } else {
             text += " of your library. ";

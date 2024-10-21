@@ -215,4 +215,26 @@ public class GiftTest extends CardTestPlayerBase {
         assertHandCount(playerA, 1);
         assertHandCount(playerB, 1);
     }
+
+    //Test Conditional Target Adjuster allowing more generic casts
+    @Test
+    public void testLongRiversPull() {
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.HAND, playerA, "Ponder");
+        addCard(Zone.HAND, playerA, "Long River's Pull"); // UU, counter noncreature only if gift
+
+        setChoice(playerA, true);
+        setChoice(playerA, playerB.getName());
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ponder");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Long River's Pull");
+        addTarget(playerA, "Ponder");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertHandCount(playerA, 0);
+        assertGraveyardCount(playerA, 2);
+        assertHandCount(playerB, 1);
+    }
 }
