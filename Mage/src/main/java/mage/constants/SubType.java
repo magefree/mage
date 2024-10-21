@@ -209,6 +209,7 @@ public enum SubType {
     HAMSTER("Hamster", SubTypeSet.CreatureType),
     HARPY("Harpy", SubTypeSet.CreatureType),
     HELLION("Hellion", SubTypeSet.CreatureType),
+    HERO("Hero", SubTypeSet.CreatureType),
     HIPPO("Hippo", SubTypeSet.CreatureType),
     HIPPOGRIFF("Hippogriff", SubTypeSet.CreatureType),
     HOMARID("Homarid", SubTypeSet.CreatureType),
