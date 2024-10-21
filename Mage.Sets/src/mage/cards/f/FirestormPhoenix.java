@@ -1,37 +1,25 @@
 package mage.cards.f;
 
-import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObject;
+import mage.MageObjectReference;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreatureSpell;
 import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
-import mage.target.targetpointer.FixedTargets;
-import mage.util.CardUtil;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.ChooseACardNameEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continuous.PlayWithHandRevealedEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.ForetellAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.PlotAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -39,6 +27,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Layer;
 
 /**
  *
@@ -57,10 +46,9 @@ public final class FirestormPhoenix extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
-        // If FirestormPhoenix would die, return FirestormPhoenix to its owner's hand instead. Until that player's next turn, that player plays with that card revealed in their hand and can't play it.
-        Ability combAbility = new SimpleStaticAbility(new FirestormPhoenixEffect());
-        //combAbility.addEffect(new FirestormPhoenixEffect2());
-        this.addAbility(combAbility);
+        // If FirestormPhoenix would die, return FirestormPhoenix to its owner's hand instead. 
+        // Until that player's next turn, that player plays with that card revealed in their hand and can't play it.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new FirestormPhoenixEffect()));
     }
 
     private FirestormPhoenix(final FirestormPhoenix card) {
@@ -76,8 +64,8 @@ public final class FirestormPhoenix extends CardImpl {
 class FirestormPhoenixEffect extends ReplacementEffectImpl {
 	
 	FirestormPhoenixEffect() {
-		super(Duration.WhileOnBattlefield, Outcome.ReturnToHand);
-		staticText = "If Firestorm Phoenix would die, return Firestorm Phoenix to its owner's hand instead. Until that player's next turn, that player plays with that card revealed in their hand and can't play it.";
+		super(Duration.Custom, Outcome.ReturnToHand);
+		staticText = "If {this} would die, return {this} to its owner's hand instead. Until that player’s next turn, that player plays with that card revealed in their hand and can’t play it.";
 	}
 	
 	private FirestormPhoenixEffect(final FirestormPhoenixEffect effect) {
@@ -89,39 +77,127 @@ class FirestormPhoenixEffect extends ReplacementEffectImpl {
 		return new FirestormPhoenixEffect(this);
 	}
 	
-	//First attempt to write return to hand effect
+	// First attempt to write FirestormPhoenix effect
 	@Override
 	public boolean replaceEvent(GameEvent event, Ability source, Game game) {
 	    Player controller = game.getPlayer(source.getControllerId());
 	    if (controller != null) {
 	        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
 	        Cards revealedCards = new CardsImpl();
+	        game.getCard(permanent.getId());
 	        revealedCards.add(game.getCard(((ZoneChangeEvent) event).getTargetId()));
 	        if (permanent != null) {
-	            controller.moveCards(permanent, Zone.HAND, source, game);
-	            game.addEffect(new PlayWithHandRevealedEffect(TargetController.YOU), source);
-	            //Reveals specific hand, and only once; need to modify for continuous effect, once I figure that out.
-	            //controller.revealCards(source, revealedCards, game);
+	        	
+	        	// Create ContinuousRuleModifyingEffect that restricts the casting of this card, until your next turn.
+	        	ContinuousEffect effectRestrict = new FirestormPhoenixRestrictEffect(permanent, game);
+	            game.addEffect(effectRestrict, source);
+	            
+	            // Create ContinuousEffectImpl that reveals FirestormPhoenix from hand continually, 
+	            // until it moves zone (is not in your hand) or until your next turn, whichever comes first. Need to add custom inActive.
+	            // Use game.informPlayers to inform players when the card changes zones.
+	            ContinuousEffect effectReveal = new FirestormPhoenixRevealEffect(controller, revealedCards, permanent.getIdName());
+	            game.addEffect(effectReveal, source);
+	        	
+	            // Move this card (FirestormPhoenix) to hand.
+	        	controller.moveCards(permanent, Zone.HAND, source, game);
+	        
 	            return true;
 	        }
 	    }
 	    return false;
 	}
 	
-	@Override
+    @Override
     public boolean checksEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.ZONE_CHANGE;
     }
 	
-	@Override
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent() && event.getTargetId() == source.getSourceId()) {
-        	Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-        	if (permanent != null && permanent.isControlledBy(source.getControllerId())) {
-        		return true;
+    	return source.getSourceId().equals(event.getTargetId()) 
+        && ((ZoneChangeEvent) event).isDiesEvent();
+    }
+}
+
+class FirestormPhoenixRevealEffect extends ContinuousEffectImpl {
+	
+	private Player controller;
+	private Cards revealedCards;
+	private String cardName;
+
+	FirestormPhoenixRevealEffect(Player tmp_controller, Cards tmp_revealedCards, String tmp_cardName) {
+        super(Duration.UntilYourNextTurn, Outcome.Detriment);
+        controller = tmp_controller;
+        revealedCards = tmp_revealedCards;
+        cardName = tmp_cardName;
+        staticText = "Until that player’s next turn, that player plays with that card revealed in their hand and can’t play it";
+    }
+
+    private FirestormPhoenixRevealEffect(final FirestormPhoenixRevealEffect effect) {
+        super(effect);
+        this.controller = effect.controller;
+        this.revealedCards = effect.revealedCards;
+        this.cardName = effect.cardName;
+    }
+
+    @Override
+    public FirestormPhoenixRevealEffect copy() {
+        return new FirestormPhoenixRevealEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+    	return false;
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+    	for(UUID permID : revealedCards) {
+    		if(game.getState().getZone(permID) == Zone.HAND) {
+        		controller.revealCards(cardName, revealedCards, game, false);
+        	} else {
+        		discard();
         	}
-        }
-        return false;
+    	}
+		return true;
+    }
+
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return true;
+    }
+}
+
+class FirestormPhoenixRestrictEffect extends ContinuousRuleModifyingEffectImpl {
+	
+	String cardName;
+	private MageObjectReference mor;
+	
+	public FirestormPhoenixRestrictEffect(Permanent permanent, Game game) {
+        super(Duration.UntilYourNextTurn, Outcome.Detriment);
+        mor = new MageObjectReference(permanent, game);
+        staticText = "Until that player’s next turn, that player plays with that card revealed in their hand and can’t play it";
+    }
+
+    private FirestormPhoenixRestrictEffect(final FirestormPhoenixRestrictEffect effect) {
+        super(effect);
+        this.mor = effect.mor;
+    }
+
+    @Override
+    public FirestormPhoenixRestrictEffect copy() {
+        return new FirestormPhoenixRestrictEffect(this);
+    }
+    
+    @Override
+    public boolean checksEventType(GameEvent event, Game game) {
+        return event.getType() == GameEvent.EventType.CAST_SPELL_LATE;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        Card card = SpellAbility.getSpellAbilityFromEvent(event, game).getCharacteristics(game);
+        return card != null 
+        && mor.getSourceId().equals(card.getId());
     }
 }
