@@ -43,7 +43,7 @@ public final class MoreOfThatStrangeOil extends CardImpl {
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy(". "));
 
         // * Counter target creature or enchantment spell.
-        mode = new Mode(new CounterTargetEffect());
+        Mode mode = new Mode(new CounterTargetEffect());
         mode.addTarget(new TargetSpell(filter));
         this.getSpellAbility().addMode(mode);
     }
