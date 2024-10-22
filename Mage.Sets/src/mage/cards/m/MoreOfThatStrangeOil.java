@@ -5,6 +5,7 @@ import mage.abilities.Mode;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.keyword.ScryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,14 +25,12 @@ import java.util.UUID;
 public final class MoreOfThatStrangeOil extends CardImpl {
 
     private static final FilterSpell filter = new FilterSpell("creature, artifact, or planeswalker spell");
-    private static final Predicate<MageObject> predicate = Predicates.or(
+    static {
+        filter.add(Predicates.or(
             CardType.CREATURE.getPredicate(),
             CardType.ARTIFACT.getPredicate(),
             CardType.PLANESWALKER.getPredicate()
-    );
-
-    static {
-        filter.add(predicate);
+        ));
     }
 
     public MoreOfThatStrangeOil(UUID ownerId, CardSetInfo setInfo) {
@@ -39,13 +38,15 @@ public final class MoreOfThatStrangeOil extends CardImpl {
 
         // Choose one --
         // • Proliferate. Draw a card.
-        this.getSpellAbility().addEffect(new ProliferateEffect());
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy(". "));
+        this.getSpellAbility().addEffect(new ProliferateEffect(false));
+        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
+        this.getSpellAbility().withFirstModeFlavorWord("It’s Probably Nothing");
 
-        // * Counter target creature or enchantment spell.
+        // * Counter target creature, artifact, or planeswalker spell. Scry 1.
         Mode mode = new Mode(new CounterTargetEffect());
         mode.addTarget(new TargetSpell(filter));
-        this.getSpellAbility().addMode(mode);
+        mode.addEffect(new ScryEffect(1, false));
+        this.getSpellAbility().addMode(mode.withFlavorWord("That Could Actually Be Dangerous"));
     }
 
     private MoreOfThatStrangeOil(final MoreOfThatStrangeOil card) {
