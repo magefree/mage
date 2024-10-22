@@ -1380,6 +1380,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Mayhem Devil", 1715, Rarity.RARE, mage.cards.m.MayhemDevil.class));
         cards.add(new SetCardInfo("Moldervine Reclamation", 1716, Rarity.RARE, mage.cards.m.MoldervineReclamation.class));
         cards.add(new SetCardInfo("Prossh, Skyraider of Kher", 1717, Rarity.MYTHIC, mage.cards.p.ProsshSkyraiderOfKher.class));
+        cards.add(new SetCardInfo("Captain America, First Avenger", 1726, Rarity.MYTHIC, mage.cards.c.CaptainAmericaFirstAvenger.class));
         cards.add(new SetCardInfo("Jace, the Mind Sculptor", 8001, Rarity.MYTHIC, mage.cards.j.JaceTheMindSculptor.class));
         cards.add(new SetCardInfo("Doom Blade", 9990, Rarity.RARE, mage.cards.d.DoomBlade.class));
         cards.add(new SetCardInfo("Massacre", 9991, Rarity.RARE, mage.cards.m.Massacre.class));
