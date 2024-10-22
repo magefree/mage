@@ -37,10 +37,10 @@ public final class MoreOfThatStrangeOil extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}");
 
         // Choose one --
-        // • Proliferate. Draw a card.
+        // * Proliferate. Draw a card.
         this.getSpellAbility().addEffect(new ProliferateEffect(false));
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().withFirstModeFlavorWord("It’s Probably Nothing");
+        this.getSpellAbility().withFirstModeFlavorWord("It's Probably Nothing");
 
         // * Counter target creature, artifact, or planeswalker spell. Scry 1.
         Mode mode = new Mode(new CounterTargetEffect());
