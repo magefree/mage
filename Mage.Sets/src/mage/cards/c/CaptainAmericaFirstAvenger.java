@@ -7,8 +7,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.EarlyTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.UseAttachedCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -25,6 +25,7 @@ import mage.filter.predicate.permanent.AttachedToPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTargetAmount;
 
@@ -34,13 +35,9 @@ import mage.target.common.TargetAnyTargetAmount;
  */
 public final class CaptainAmericaFirstAvenger extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterEquipmentPermanent("equipment attached to this creature");
-    private static final FilterPermanent subfilter = new FilterControlledPermanent("{this}");
     private static final FilterPermanent filter2 = new FilterEquipmentPermanent("equipment you control");
 
     static {
-        subfilter.add(CaptainAmericaPredicate.instance);
-        filter.add(new AttachedToPredicate(subfilter));
         filter2.add(TargetController.YOU.getControllerPredicate());
     }
 
@@ -55,11 +52,11 @@ public final class CaptainAmericaFirstAvenger extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Throw ... — {3}, Unattach an Equipment from Captain America: He deals damage equal to that Equipment’s mana value divided as you choose among one, two, or three targets.
-        Ability ability = new SimpleActivatedAbility(new CaptainAmericaFirstAvengerThrowEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(
+                new DamageMultiEffect(CaptainAmericaFirstAvengerValue.instance).setText(
+                        "he deals damage equal to that Equipment's mana value divided as you choose among one, two, or three targets."),
+                new GenericManaCost(3));
         ability.addCost(new CaptainAmericaFirstAvengerUnattachCost());
-        // 2024-10-22: It isn't in rule 601.2b yet, but you will have to choose the equipment before the actual targets to comply with rules 601.2c/601.2d
-        // This is technically happening in step 601.2c, but it's still in time for the following TargetAnyTargetAmount to work properly.
-        ability.addTarget(new TargetPermanent(1, 1, filter, true));
         ability.addTarget(new TargetAnyTargetAmount(CaptainAmericaFirstAvengerValue.instance, 3));
         this.addAbility(ability.withFlavorWord("Throw ..."));
 
@@ -84,6 +81,7 @@ public final class CaptainAmericaFirstAvenger extends CardImpl {
 enum CaptainAmericaPredicate implements ObjectSourcePlayerPredicate<MageObject> {
     instance;
 
+    // Functional negation of AnotherPredicate.
     @Override
     public boolean apply(ObjectSourcePlayer<MageObject> input, Game game) {
         if (!input.getObject().getId().equals(input.getSourceId())) {
@@ -95,7 +93,7 @@ enum CaptainAmericaPredicate implements ObjectSourcePlayerPredicate<MageObject> 
 
     @Override
     public String toString() {
-        return "Another";
+        return "{this}";
     }
 }
 
@@ -105,11 +103,12 @@ enum CaptainAmericaFirstAvengerValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int amount = 0;
-        UUID chosenEquipment = sourceAbility.getFirstTarget();
-        if (chosenEquipment != null) {
-            Permanent equipment = game.getPermanentOrLKIBattlefield(chosenEquipment);
-            if (equipment != null) {
-                amount = equipment.getManaValue();
+        for (Cost cost : sourceAbility.getCosts()) {
+            if (cost instanceof CaptainAmericaFirstAvengerUnattachCost && !cost.getTargets().isEmpty()) {
+                Permanent equipment = game.getPermanentOrLKIBattlefield(cost.getTargets().getFirstTarget());
+                if (equipment != null) {
+                    amount = equipment.getManaValue();
+                }
             }
         }
         return amount;
@@ -131,7 +130,15 @@ enum CaptainAmericaFirstAvengerValue implements DynamicValue {
     }
 }
 
-class CaptainAmericaFirstAvengerUnattachCost extends UseAttachedCost {
+class CaptainAmericaFirstAvengerUnattachCost extends EarlyTargetCost {
+
+    private static final FilterPermanent filter = new FilterEquipmentPermanent("equipment attached to this creature");
+    private static final FilterPermanent subfilter = new FilterControlledPermanent("{this}");
+
+    static {
+        subfilter.add(CaptainAmericaPredicate.instance);
+        filter.add(new AttachedToPredicate(subfilter));
+    }
 
     public CaptainAmericaFirstAvengerUnattachCost() {
         super();
@@ -155,12 +162,12 @@ class CaptainAmericaFirstAvengerUnattachCost extends UseAttachedCost {
         if (permanent == null) {
             return paid;
         }
-        Permanent equipment = game.getPermanentOrLKIBattlefield(source.getFirstTarget());
-        if (!permanent.getAttachments().contains(source.getFirstTarget()) ||
+        Permanent equipment = game.getPermanentOrLKIBattlefield(getTargets().getFirstTarget());
+        if (equipment == null || !permanent.getAttachments().contains(getTargets().getFirstTarget()) ||
                 !player.chooseUse(Outcome.Benefit, "Unattach " + equipment.getName() + "?", source, game)) {
             return false;
         }
-        paid = permanent.removeAttachment(source.getFirstTarget(), source, game);
+        paid = permanent.removeAttachment(getTargets().getFirstTarget(), source, game);
 
         return paid;
     }
@@ -171,32 +178,15 @@ class CaptainAmericaFirstAvengerUnattachCost extends UseAttachedCost {
     }
 
     @Override
+    public void chooseTarget(Game game, Ability source, Player controller) {
+        Target chosenEquipment = new TargetPermanent(1, 1, filter, true);
+        controller.choose(Outcome.Benefit, chosenEquipment, source, game);
+        addTarget(chosenEquipment);
+    }
+
+    @Override
     public String getText() {
-        return "Unattach an Equipment from " + this.name;
-    }
-}
-
-class CaptainAmericaFirstAvengerThrowEffect extends DamageMultiEffect {
-    CaptainAmericaFirstAvengerThrowEffect() {
-        super(CaptainAmericaFirstAvengerValue.instance, "he");
-        staticText = "he deals damage equal to that Equipment's mana value divided as you choose among one, two, or three targets.";
-    }
-
-    private CaptainAmericaFirstAvengerThrowEffect(final CaptainAmericaFirstAvengerThrowEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CaptainAmericaFirstAvengerThrowEffect copy() {
-        return new CaptainAmericaFirstAvengerThrowEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        // The first target is the no-longer-needed choice of equipment attached to Captain America.
-        // The second target is the TargetAnyTargetAmount which DamageMultEffect uses to assign the proper damage.
-        source.getTargets().remove(0);
-        return super.apply(game, source);
+        return "Unattach an Equipment from {this}";
     }
 }
 
