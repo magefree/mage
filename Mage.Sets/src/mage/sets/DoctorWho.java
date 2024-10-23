@@ -311,5 +311,9 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Wreck and Rebuild", 169, Rarity.UNCOMMON, mage.cards.w.WreckAndRebuild.class));
         cards.add(new SetCardInfo("Yasmin Khan", 7, Rarity.RARE, mage.cards.y.YasminKhan.class));
         cards.add(new SetCardInfo("Zygon Infiltrator", 63, Rarity.UNCOMMON, mage.cards.z.ZygonInfiltrator.class));
+        cards.add(new SetCardInfo("Danny Pink", 39, Rarity.RARE, mage.cards.d.DannyPink.class));
+        cards.add(new SetCardInfo("Danny Pink", 356, Rarity.RARE, mage.cards.d.DannyPink.class));
+        cards.add(new SetCardInfo("Danny Pink", 644, Rarity.RARE, mage.cards.d.DannyPink.class));
+        cards.add(new SetCardInfo("Danny Pink", 947, Rarity.RARE, mage.cards.d.DannyPink.class));
     }
 }
