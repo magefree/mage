@@ -35,10 +35,10 @@ import mage.target.common.TargetAnyTargetAmount;
  */
 public final class CaptainAmericaFirstAvenger extends CardImpl {
 
-    private static final FilterPermanent filter2 = new FilterEquipmentPermanent("equipment you control");
+    private static final FilterPermanent filter = new FilterEquipmentPermanent("Equipment you control");
 
     static {
-        filter2.add(TargetController.YOU.getControllerPredicate());
+        filter.add(TargetController.YOU.getControllerPredicate());
     }
 
     public CaptainAmericaFirstAvenger(UUID ownerId, CardSetInfo setInfo) {
@@ -64,7 +64,7 @@ public final class CaptainAmericaFirstAvenger extends CardImpl {
         ability = new BeginningOfCombatTriggeredAbility(
                 new CaptainAmericaFirstAvengerCatchEffect(), TargetController.YOU, false
         );
-        ability.addTarget(new TargetPermanent(0, 1, filter2));
+        ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability.withFlavorWord("... Catch"));
     }
 
@@ -140,7 +140,7 @@ class CaptainAmericaFirstAvengerUnattachCost extends EarlyTargetCost {
         filter.add(new AttachedToPredicate(subfilter));
     }
 
-    public CaptainAmericaFirstAvengerUnattachCost() {
+    CaptainAmericaFirstAvengerUnattachCost() {
         super();
     }
 
@@ -159,15 +159,15 @@ class CaptainAmericaFirstAvengerUnattachCost extends EarlyTargetCost {
     public boolean pay(Ability ability, Game game, Ability source, UUID controllerId, boolean noMana, Cost costToPay) {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) {
+        if (permanent == null || player == null) {
             return paid;
         }
         Permanent equipment = game.getPermanentOrLKIBattlefield(getTargets().getFirstTarget());
-        if (equipment == null || !permanent.getAttachments().contains(getTargets().getFirstTarget()) ||
-                !player.chooseUse(Outcome.Benefit, "Unattach " + equipment.getName() + "?", source, game)) {
+        if (equipment == null || !permanent.getAttachments().contains(equipment.getId()) ||
+                !player.chooseUse(Outcome.Benefit, "Unattach " + equipment.getIdName() + "?", source, game)) {
             return false;
         }
-        paid = permanent.removeAttachment(getTargets().getFirstTarget(), source, game);
+        paid = permanent.removeAttachment(equipment.getId(), source, game);
 
         return paid;
     }
