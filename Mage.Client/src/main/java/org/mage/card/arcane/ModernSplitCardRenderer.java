@@ -323,7 +323,7 @@ public class ModernSplitCardRenderer extends ModernCardRenderer {
 
             CardPanelAttributes adventureAttribs = new CardPanelAttributes(
                     attribs.cardWidth, attribs.cardHeight, attribs.isChoosable,
-                    attribs.isSelected, true);
+                    attribs.isSelected, true, attribs.isPowerPerpetuallyAffected, attribs.isToughnessPerpetuallyAffected);
 
             // Draw the adventure name line box
             g.setPaint(getBoxColor(rightHalf.color, cardView.getCardTypes(), true));

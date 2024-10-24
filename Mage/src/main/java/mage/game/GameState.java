@@ -1421,13 +1421,21 @@ public class GameState implements Serializable, Copyable<GameState> {
             newAbility = ability.copy();
             newAbility.newId();
         }
+
         newAbility.setSourceId(attachedTo.getId());
-        newAbility.setControllerId(attachedTo.getOwnerId());
-        if (!cardState.containsKey(attachedTo.getId())) {
-            cardState.put(attachedTo.getId(), new CardState());
+
+        if(ability.getControllerId() != null) {
+            newAbility.setControllerId(ability.getControllerId());
         }
-        cardState.get(attachedTo.getId()).addAbility(newAbility);
-        addAbility(newAbility, attachedTo.getId(), attachedTo);
+        else {
+            newAbility.setControllerId(attachedTo.getOwnerId());
+        }
+        UUID attachedToCardId = attachedTo.getId();
+        if (!cardState.containsKey(attachedToCardId)) {
+            cardState.put(attachedToCardId, new CardState());
+        }
+        cardState.get(attachedToCardId).addAbility(newAbility);
+        addAbility(newAbility, attachedToCardId, attachedTo);
     }
 
     private void checkWrongDynamicAbilityUsage(Card attachedTo, Ability ability) {

@@ -681,6 +681,10 @@ public class ScryfallImageSupportTokens {
             put("AFC/Servo", "https://api.scryfall.com/cards/tafc/11/en?format=image");
             put("AFC/Thopter", "https://api.scryfall.com/cards/tafc/12/en?format=image");
 
+            // J21
+            put("J21/Emblem Davriel", "https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg");
+            put("J21/Emblem Teyo", "https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg");
+
             // MIC
             put("MIC/Beast", "https://api.scryfall.com/cards/tmic/7/en?format=image");
             put("MIC/Centaur", "https://api.scryfall.com/cards/tmic/8/en?format=image");

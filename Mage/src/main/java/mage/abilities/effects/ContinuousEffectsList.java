@@ -169,6 +169,8 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
                             it.remove();
                         }
                         break;
+                    case Perpetually:
+                        // TODO: needs discussion
                     case OneUse:
                         if (hasOwnerLeftGame || effect.isUsed()) {
                             it.remove();

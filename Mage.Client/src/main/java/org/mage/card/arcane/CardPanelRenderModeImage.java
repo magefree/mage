@@ -456,9 +456,9 @@ public class CardPanelRenderModeImage extends CardPanel {
                 MageInt currentPower = cardView.getOriginalPower();
                 MageInt currentToughness = cardView.getOriginalToughness();
 
-                prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, mainFontSize), currentPower, false);
-                prepareGlowFont(ptText2, Math.max(CARD_PT_FONT_MIN_SIZE, mainFontSize), null, false);
-                prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, mainFontSize), currentToughness, CardRendererUtils.isCardWithDamage(cardView));
+                prepareGlowFont(ptText1, Math.max(CARD_PT_FONT_MIN_SIZE, mainFontSize), currentPower, false, getCard().isPowerPerpetuallyAffected());
+                prepareGlowFont(ptText2, Math.max(CARD_PT_FONT_MIN_SIZE, mainFontSize), null, false, false);
+                prepareGlowFont(ptText3, Math.max(CARD_PT_FONT_MIN_SIZE, mainFontSize), currentToughness, CardRendererUtils.isCardWithDamage(cardView), getCard().isToughnessPerpetuallyAffected());
 
                 // right bottom corner with margin (sizes from any sample card)
                 int ptMarginRight = Math.round(64f / 672f * cardWidth);
@@ -677,9 +677,9 @@ public class CardPanelRenderModeImage extends CardPanel {
         return width;
     }
 
-    private void prepareGlowFont(GlowText label, int fontSize, MageInt value, boolean drawAsDamaged) {
+    private void prepareGlowFont(GlowText label, int fontSize, MageInt value, boolean drawAsDamaged, boolean isPerpetuallyAffected) {
         label.setFont(getFont().deriveFont(Font.BOLD, fontSize));
-        label.setForeground(CardRendererUtils.getCardTextColor(value, drawAsDamaged, titleText.getForeground(), true));
+        label.setForeground(CardRendererUtils.getCardTextColor(value, drawAsDamaged, titleText.getForeground(), true, isPerpetuallyAffected));
         Dimension ptSize = label.getPreferredSize();
         label.setSize(ptSize.width, ptSize.height);
     }

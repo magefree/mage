@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.UUID;
 
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.constants.Duration;
@@ -139,7 +140,19 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl {
             Permanent permanent = zEvent.getTarget();
             if (permanent != null) {
                 Player player = game.getPlayer(permanent.getOwnerId());
+
                 if (player != null && (forceToMove || player.chooseUse(Outcome.Benefit, "Move " + permanent.getLogName() + " to command zone instead of your " + originToZone + "?", source, game))) {
+                    ContinuousEffects effects = game.getContinuousEffects();
+                    Card mainCard = permanent.getMainCard();
+
+                    if (effects.hasPerpetuallyEffectOn(mainCard, game)) {
+                        if (!player.chooseUse(Outcome.Benefit, "Keep all perpetual effects on " + mainCard.getLogName()
+                                        + " or remove all of them?", "You cannot pick and choose effects to keep",
+                                "Keep all effects", "Remove all effects", null, game)) {
+
+                            effects.removePerpetuallyEffectsByCard(mainCard, game);
+                        }
+                    }
                     zEvent.setToZone(Zone.COMMAND);
                     if (!game.isSimulation()) {
                         game.informPlayers(player.getLogName() + " has moved " + permanent.getLogName() + " to the command zone instead of their " + originToZone);

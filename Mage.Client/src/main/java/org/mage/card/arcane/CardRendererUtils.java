@@ -31,6 +31,7 @@ public final class CardRendererUtils {
     private static final Color CARD_TEXT_COLOR_GOOD_DARK = new Color(52, 135, 88);
     private static final Color CARD_TEXT_COLOR_BAD_LIGHT = new Color(234, 153, 153);
     private static final Color CARD_TEXT_COLOR_BAD_DARK = new Color(200, 33, 33);
+    private static final Color CARD_TEXT_COLOR_PERPETUAL = new Color(204, 79, 254);
 
     /**
      * Convert an abstract image, whose underlying implementation may or may not
@@ -239,15 +240,18 @@ public final class CardRendererUtils {
         return haveDamage;
     }
 
-    public static Color getCardTextColor(MageInt value, boolean drawAsDamaged, Color defaultColor, boolean textLight) {
+    public static Color getCardTextColor(MageInt value, boolean drawAsDamaged, Color defaultColor, boolean textLight, boolean isPerpetuallyAffected) {
         if (drawAsDamaged) {
             return textLight ? CARD_TEXT_COLOR_BAD_LIGHT : CARD_TEXT_COLOR_BAD_DARK;
         }
-
-        // boost colorizing
         if (value != null) {
             int currentValue = value.getValue();
             int baseValue = value.getModifiedBaseValue();
+            // perpetual boost colorizing
+            if(isPerpetuallyAffected) {
+                return CARD_TEXT_COLOR_PERPETUAL;
+            }
+            // boost colorizing
             if (currentValue < baseValue) {
                 return textLight ? CARD_TEXT_COLOR_BAD_LIGHT : CARD_TEXT_COLOR_BAD_DARK;
             } else if (currentValue > baseValue) {

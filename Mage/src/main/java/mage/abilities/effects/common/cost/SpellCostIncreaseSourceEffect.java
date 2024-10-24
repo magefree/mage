@@ -27,7 +27,7 @@ public class SpellCostIncreaseSourceEffect extends CostModificationEffectImpl {
     }
 
     public SpellCostIncreaseSourceEffect(ManaCosts<ManaCost> manaCostsToIncrease, Condition condition) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment, CostModificationType.INCREASE_COST);
         this.amount = StaticValue.get(0);
         this.manaCostsToIncrease = manaCostsToIncrease;
         this.condition = condition;

@@ -136,6 +136,17 @@
 |Generate|EMBLEM:M3C|Emblem Vivien|||VivienReidEmblem|
 |Generate|EMBLEM:ACR|Emblem Capitoline Triad|||TheCapitolineTriadEmblem|
 |Generate|EMBLEM:BLB|Emblem Ral|||RalCracklingWitEmblem|
+|Generate|EMBLEM:J21|Emblem Davriel|||DavrielSoulBrokerBoostCreaturesEmblem|
+|Generate|EMBLEM:J21|Emblem Davriel|||DavrielSoulBrokerCostReductionEmblem|
+|Generate|EMBLEM:J21|Emblem Davriel|||DavrielSoulBrokerPlaneswalkersBuffEmblem|
+|Generate|EMBLEM:J21|Emblem Davriel|||DavrielSoulBrokerGainLifeEmblem|
+|Generate|EMBLEM:J21|Emblem Davriel|||DavrielSoulBrokerBoostOpponentCreaturesEmblem|
+|Generate|EMBLEM:J21|Emblem Davriel|||DavrielSoulBrokerCostIncreaseEmblem|
+|Generate|EMBLEM:J21|Emblem Davriel|||DavrielSoulBrokerTriggeredExileEmblem|
+|Generate|EMBLEM:J21|Emblem Davriel|||DavrielSoulBrokerTriggeredLoseLifeEmblem|
+|Generate|EMBLEM:J21|Emblem Teyo|||TeyoAegisAdeptEmblem|
+
+
 
 # ALL PLANES
 # Usage hints:

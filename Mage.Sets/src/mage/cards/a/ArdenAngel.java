@@ -33,7 +33,7 @@ public final class ArdenAngel extends CardImpl {
 
         // At the beginning of your upkeep, if Arden Angel is in your graveyard, roll a four-sided die. If the result is 1, return Arden Angel from your graveyard to the battlefield.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new ArdenAngelEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD, new ArdenAngelEffect(), TargetController.YOU, false),
                 SourceInGraveyardCondition.instance, "At the beginning of your upkeep, if {this} is in your graveyard, " +
                 "roll a four-sided die. If the result is 1, return {this} from your graveyard to the battlefield."
         ));

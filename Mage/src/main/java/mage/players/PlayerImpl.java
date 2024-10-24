@@ -13,6 +13,7 @@ import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
 import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
@@ -4934,6 +4935,14 @@ public abstract class PlayerImpl implements Player, Serializable {
                 break;
             case COMMAND:
                 for (Card card : cards) {
+                    ContinuousEffects effects = game.getContinuousEffects();
+                    if(effects.hasPerpetuallyEffectOn(card, game)) {
+                        if (!this.chooseUse(Outcome.Benefit, "Keep all perpetual effects on " + card.getLogName()
+                                        + " or remove all of them?", "You cannot pick and choose effects to keep",
+                                "Keep all effects", "Remove all effects", null, game)) {
+                            effects.removePerpetuallyEffectsByCard(card, game);
+                        }
+                    }
                     fromZone = game.getState().getZone(card.getId());
                     if (moveCardToCommandWithInfo(card, source, game, fromZone)) {
                         successfulMovedCards.add(card);
