@@ -1,12 +1,14 @@
 package mage.cards.k;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.hint.Hint;
@@ -26,9 +28,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.constants.Outcome;
 
 /**
  * @author TheElk801
@@ -46,8 +45,8 @@ public final class KeenEyedCurator extends CardImpl {
         // As long as there are four or more card types among cards exiled with Keen-Eyed Curator, it gets +4/+4 and has trample.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield),
-                KeenEyedCuratorCondition.instance, "as long as there are four or "
-                + "more card types among cards exiled with {this}, it gets +4/+4"
+                KeenEyedCuratorCondition.instance, "as long as there are four or " +
+                "more card types among cards exiled with {this}, it gets +4/+4"
         ));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance()),
@@ -56,7 +55,7 @@ public final class KeenEyedCurator extends CardImpl {
         this.addAbility(ability.addHint(KeenEyedCuratorHint.instance));
 
         // {1}: Exile target card from a graveyard.
-        ability = new SimpleActivatedAbility(new KeenEyedCuratorEffect(), new GenericManaCost(1));
+        ability = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new GenericManaCost(1));
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);
     }
@@ -71,40 +70,17 @@ public final class KeenEyedCurator extends CardImpl {
     }
 }
 
-class KeenEyedCuratorEffect extends OneShotEffect {
-
-    KeenEyedCuratorEffect() {
-        super(Outcome.Benefit);
-        staticText = "Exile target card from a graveyard";
-    }
-
-    private KeenEyedCuratorEffect(final KeenEyedCuratorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KeenEyedCuratorEffect copy() {
-        return new KeenEyedCuratorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        // condition does not work well with passing source.getSourceObjectZoneChangeCounter(), so we store the exileId to the gamestate
-        ExileTargetForSourceEffect exileTarget = new ExileTargetForSourceEffect();
-        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-        String keenEyedKey = source.getSourceObject(game).toString() + source.getSourceCardIfItStillExists(game).getZoneChangeCounter(game);
-        game.getState().setValue(keenEyedKey, exileId);
-        return exileTarget.apply(game, source);
-    }
-}
-
 enum KeenEyedCuratorCondition implements Condition {
     instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String keenEyedKey = source.getSourceObject(game).toString() + source.getSourceCardIfItStillExists(game).getZoneChangeCounter(game);
-        UUID exileId = (UUID) game.getState().getValue(keenEyedKey);
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject == null) {
+            return false;
+        }
+        // must use object's zcc cause static and activated abilities init in diff time with diff zcc (see #13022)
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
         ExileZone exileZone = game.getExile().getExileZone(exileId);
         return exileZone != null && exileZone.getCards(game)
                 .stream()
@@ -120,27 +96,27 @@ enum KeenEyedCuratorHint implements Hint {
 
     @Override
     public String getText(Game game, Ability ability) {
-        List<String> types = new ArrayList<>();
-        String keenEyedKey = ability.getSourceObject(game).toString() + ability.getSourceCardIfItStillExists(game).getZoneChangeCounter(game);
-        if (keenEyedKey == null) {
+        MageObject sourceObject = ability.getSourceObject(game);
+        if (sourceObject == null) {
             return "Card types exiled: 0";
         }
-        UUID exileId = (UUID) game.getState().getValue(keenEyedKey);
-        if (exileId == null) {
-            return "Card types exiled: 0";
-        }
+
+        // must use object's zcc cause static and activated abilities init in diff time with diff zcc (see #13022)
+        UUID exileId = CardUtil.getExileZoneId(game, ability.getSourceId(), sourceObject.getZoneChangeCounter(game));
         ExileZone exileZone = game.getExile().getExileZone(exileId);
-        if (exileZone != null) {
-            types = exileZone.getCards(game).stream()
+        if (exileZone == null) {
+            return "Card types exiled: 0";
+        }
+
+        List<String> types = exileZone.getCards(game).stream()
                     .map(card -> card.getCardType(game))
                     .flatMap(Collection::stream)
                     .distinct()
                     .map(CardType::toString)
                     .sorted()
                     .collect(Collectors.toList());
-        }
-        return "Card types exiled: " + types.size()
-                + (!types.isEmpty() ? " (" + String.join(", ", types) + ')' : "");
+        String details = types.isEmpty() ? "" : " (" + String.join(", ", types) + ")";
+        return "Card types exiled: " + types.size() + details;
     }
 
     @Override

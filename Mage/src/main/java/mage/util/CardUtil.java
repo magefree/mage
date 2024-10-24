@@ -599,6 +599,14 @@ public final class CardUtil {
         return getExileZoneId(getCardZoneString(SOURCE_EXILE_ZONE_TEXT, sourceId, game, previous), game);
     }
 
+    /**
+     * Find exiled zone due source object's zcc
+     * <p>
+     * Warning, carefully use it from static abilities, cause:
+     * - static abilities init from start of the game, e.g. zcc = 0
+     * - activated abilities init on usage, e.g. zcc = 123
+     * - if you need to share some data between diff type of effects then find actual object's zcc manually
+     */
     public static UUID getExileZoneId(Game game, Ability source) {
         return getExileZoneId(game, source, 0);
     }
