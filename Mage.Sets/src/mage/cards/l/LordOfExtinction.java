@@ -12,6 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.ValuePhrasing;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -64,7 +65,12 @@ class LordOfExtinctionDynamicCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "cards in all graveyards";
+        return "";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        return "the number of cards in all graveyards";
     }
 
     @Override

@@ -14,10 +14,7 @@ import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -55,7 +52,7 @@ public final class BelakorTheDarkMaster extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Prince of Chaos -- When Be'lakor, the Dark Master enters the battlefield, you draw X cards and you lose X life, where X is the number of Demons you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(xValue).setText("you draw X cards"));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(xValue, true, ValuePhrasing.X_HIDDEN));
         ability.addEffect(new LoseLifeSourceControllerEffect(xValue).concatBy("and"));
         this.addAbility(ability.withFlavorWord("Prince of Chaos").addHint(hint));
 

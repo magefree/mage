@@ -11,10 +11,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.cards.*;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -118,5 +115,17 @@ class CardsInOpponentsGraveyardsCount implements DynamicValue {
     @Override
     public String getMessage() {
         return "cards in your opponents' graveyards";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
+            case FOR_EACH:
+                return "card in your opponents' graveyards";
+            case X_HIDDEN:
+                return "";
+            default:
+                return "the number of cards in your opponents' graveyards";
+        }
     }
 }

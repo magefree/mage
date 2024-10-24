@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.constants.ValuePhrasing;
 import mage.game.Game;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.stream.IntStream;
 
 public class StaticValue implements DynamicValue {
 
-    private static final List<StaticValue> staticValues = new ArrayList();
+    private static final List<StaticValue> staticValues = new ArrayList<>();
 
     static {
         IntStream.rangeClosed(-10, 10)
@@ -42,6 +43,11 @@ public class StaticValue implements DynamicValue {
 
     @Override
     public String getMessage() {
+        return "";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
         return "";
     }
 

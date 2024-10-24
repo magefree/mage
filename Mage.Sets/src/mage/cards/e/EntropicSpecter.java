@@ -79,7 +79,12 @@ enum CardsInTargetPlayerHandCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "cards in the chosen player's hand";
+        return "";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        return "the number of cards in the chosen player's hand";
     }
 
     @Override

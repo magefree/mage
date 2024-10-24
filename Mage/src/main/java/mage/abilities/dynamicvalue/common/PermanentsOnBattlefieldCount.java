@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.constants.ValuePhrasing;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 
@@ -27,6 +28,7 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
      * @param multiplier
      */
     public PermanentsOnBattlefieldCount(FilterPermanent filter, Integer multiplier) {
+        // TODO: this doesn't need a multiplier. use Multipliedvalue
         this.filter = filter;
         this.multiplier = multiplier;
     }
@@ -58,6 +60,18 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
     @Override
     public String getMessage() {
         return multiplier == null ? "the number of " + filter.getMessage() : filter.getMessage();
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
+            case FOR_EACH:
+                return filter.getMessage();
+            case X_HIDDEN:
+                return "";
+            default:
+                return "the number of " + filter.getMessage();
+        }
     }
 
     @Override

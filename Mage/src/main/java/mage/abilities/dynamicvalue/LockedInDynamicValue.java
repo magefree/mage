@@ -3,6 +3,8 @@ package mage.abilities.dynamicvalue;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.ValueHint;
+import mage.constants.ValuePhrasing;
 import mage.game.Game;
 
 /**
@@ -46,6 +48,17 @@ public class LockedInDynamicValue implements DynamicValue {
     @Override
     public String getMessage() {
         return basicDynamicValue.getMessage();
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        return basicDynamicValue.getMessage(textPhrasing);
+    }
+
+    @Override
+    public ValueHint getValueHint() {
+        //TODO: should this conditionally provide what value it has been locked into?
+        return basicDynamicValue.getValueHint();
     }
 
 }

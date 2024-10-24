@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.constants.ValuePhrasing;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -56,5 +57,17 @@ public class CardsInAllGraveyardsCount implements DynamicValue {
     @Override
     public String getMessage() {
         return filter.getMessage() + " in all graveyards";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
+            case FOR_EACH:
+                return filter.getMessage() + " in all graveyards";
+            case X_HIDDEN:
+                return "";
+            default:
+                return "the number of " + filter.getMessage() + " in all graveyards";
+        }
     }
 }

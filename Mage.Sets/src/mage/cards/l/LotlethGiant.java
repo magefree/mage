@@ -11,6 +11,7 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ValuePhrasing;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
 
@@ -32,7 +33,7 @@ public final class LotlethGiant extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new DamageTargetEffect(new CardsInControllerGraveyardCount(
                         StaticFilters.FILTER_CARD_CREATURE
-                ), "it"), false);
+                ), "it").withTextPhrasing(ValuePhrasing.FOR_EACH), false);
         ability.addTarget(new TargetOpponent());
         ability.setAbilityWord(AbilityWord.UNDERGROWTH);
         this.addAbility(ability);

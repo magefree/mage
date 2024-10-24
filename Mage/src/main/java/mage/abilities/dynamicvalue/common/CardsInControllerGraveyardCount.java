@@ -3,6 +3,7 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.constants.ValuePhrasing;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -27,6 +28,7 @@ public class CardsInControllerGraveyardCount implements DynamicValue {
     }
 
     public CardsInControllerGraveyardCount(FilterCard filter, Integer multiplier) {
+        // TODO: this class doesnt need a multiplier. use MultipliedValue instead
         this.filter = filter;
         this.multiplier = multiplier;
     }
@@ -63,6 +65,18 @@ public class CardsInControllerGraveyardCount implements DynamicValue {
     @Override
     public String getMessage() {
         return (multiplier == null ? "the number of " : "") + filter.getMessage() + " in your graveyard";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch (textPhrasing) {
+            case FOR_EACH:
+                return filter.getMessage() + " in your graveyard";
+            case X_HIDDEN:
+                return "";
+            default:
+                return "the number of " + filter.getMessage() + " in your graveyard";
+        }
     }
 
     @Override

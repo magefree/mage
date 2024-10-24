@@ -2,7 +2,10 @@ package mage.abilities.dynamicvalue;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.ValueHint;
+import mage.constants.ValuePhrasing;
 import mage.game.Game;
+import mage.util.CardUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,5 +48,22 @@ public class AdditiveDynamicValue implements DynamicValue {
     @Override
     public String getMessage() {
         return this.dynamicValues.stream().map(DynamicValue::getMessage).collect(Collectors.joining(" "));
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        switch(textPhrasing){
+            case X_HIDDEN:
+                return "";
+            case FOR_EACH:
+                throw new IllegalArgumentException("FOR_EACH phrasing generation is not supported in AdditiveDynamicValue");
+            default:
+                return this.dynamicValues.stream().map(dv -> dv.getMessage(textPhrasing)).collect(Collectors.joining(" plus "));
+        }
+    }
+
+    @Override
+    public ValueHint getValueHint() {
+        return new ValueHint(CardUtil.getTextWithFirstCharUpperCase(getMessage(ValuePhrasing.EQUAL_TO)), this);
     }
 }

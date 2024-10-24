@@ -26,7 +26,7 @@ public final class AbominationOfLlanowar extends CardImpl {
     private static final FilterPermanent filter
             = new FilterControlledPermanent(SubType.ELF, "Elves you control");
     private static final FilterCard filter2
-            = new FilterCard("plus the number of Elf cards");
+            = new FilterCard("Elf cards");
 
     static {
         filter2.add(SubType.ELF.getPredicate());

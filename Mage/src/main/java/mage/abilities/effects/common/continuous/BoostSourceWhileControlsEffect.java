@@ -27,7 +27,7 @@ public class BoostSourceWhileControlsEffect extends WhileConditionContinuousEffe
         this.toughness = toughness;
         this.filterDescription = filter.getMessage();
         staticText = "{this} gets "
-                + CardUtil.getBoostCountAsStr(power, toughness)
+                + CardUtil.getBoostCountAsStrLegacy(power, toughness)
                 + " as long as you control "
                 + (filterDescription.startsWith("an ") ? "" : "a ")
                 + filterDescription;

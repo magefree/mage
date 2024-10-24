@@ -19,6 +19,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.ValuePhrasing;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -90,7 +91,12 @@ enum SunbirdEffigyValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "colors among the exiled cards used to craft it";
+        return "";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        return "the number of colors among the exiled cards used to craft it";
     }
 
     @Override

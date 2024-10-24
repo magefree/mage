@@ -1,10 +1,7 @@
 
 package mage.abilities.effects.common.continuous;
 
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -42,7 +39,7 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
         if (duration == Duration.EndOfTurn) {
             fixedTarget = true;
         }
-        this.staticText = "equipped creature gets " + CardUtil.getBoostText(power, toughness, duration);
+        this.staticText = "equipped creature gets " + CardUtil.getBoostText(power, toughness, duration, ValuePhrasing.LEGACY);
     }
 
     protected BoostEquippedEffect(final BoostEquippedEffect effect) {
@@ -55,6 +52,11 @@ public class BoostEquippedEffect extends ContinuousEffectImpl {
     @Override
     public BoostEquippedEffect copy() {
         return new BoostEquippedEffect(this);
+    }
+
+    public BoostEquippedEffect withTextPhrasing(ValuePhrasing textPhrasing){
+        this.staticText = "equipped creature gets " + CardUtil.getBoostText(power, toughness, duration, textPhrasing);
+        return this;
     }
 
     @Override

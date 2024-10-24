@@ -15,7 +15,7 @@ public class BoostCounter extends Counter {
     }
 
     public BoostCounter(int power, int toughness, int count) {
-        super(CardUtil.getBoostCountAsStr(power, toughness), count);
+        super(CardUtil.getBoostCountAsStrLegacy(power, toughness), count);
         this.power = power;
         this.toughness = toughness;
     }

@@ -15,7 +15,6 @@ public class SetBasePowerSourceEffect extends SetBasePowerToughnessSourceEffect 
      */
     public SetBasePowerSourceEffect(DynamicValue amount) {
         super(amount, null, Duration.EndOfGame, SubLayer.CharacteristicDefining_7a);
-        staticText = "{this}'s power is equal to the number of " + amount.getMessage();
     }
 
     /**
@@ -24,7 +23,6 @@ public class SetBasePowerSourceEffect extends SetBasePowerToughnessSourceEffect 
      */
     public SetBasePowerSourceEffect(int amount, Duration duration) {
         super(StaticValue.get(amount), null, duration, SubLayer.SetPT_7b);
-        staticText = "{this} has base power " + amount + ' ' + duration.toString();
     }
 
     protected SetBasePowerSourceEffect(final SetBasePowerSourceEffect effect) {

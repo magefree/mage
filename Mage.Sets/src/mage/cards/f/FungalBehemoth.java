@@ -15,6 +15,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.ValuePhrasing;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -85,6 +86,11 @@ class P1P1CountersOnControlledCreaturesCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "+1/+1 counters on creatures you control";
+        return "";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        return "the number of +1/+1 counters on creatures you control";
     }
 }

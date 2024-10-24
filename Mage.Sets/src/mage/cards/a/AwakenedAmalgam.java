@@ -14,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.ValuePhrasing;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -74,6 +75,11 @@ class AwakenedAmalgamLandNamesCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "differently named lands you control";
+        return "";
+    }
+
+    @Override
+    public String getMessage(ValuePhrasing textPhrasing) {
+        return "the number of differently named lands you control";
     }
 }

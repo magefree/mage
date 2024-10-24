@@ -2,12 +2,14 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ValuePhrasing;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 
@@ -17,7 +19,7 @@ import mage.filter.predicate.mageobject.NamePredicate;
  */
 public final class AccumulatedKnowledge extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("card named Accumulated Knowledge");
+    private static final FilterCard filter = new FilterCard("cards named Accumulated Knowledge");
 
     static {
         filter.add(new NamePredicate("Accumulated Knowledge"));
@@ -29,9 +31,9 @@ public final class AccumulatedKnowledge extends CardImpl {
 
         // Draw a card, then draw cards equal to the number of cards named Accumulated Knowledge in all graveyards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        Effect effect = new DrawCardSourceControllerEffect(new CardsInAllGraveyardsCount(filter));
-        effect.setText(", then draw cards equal to the number of cards named {this} in all graveyards");
-        this.getSpellAbility().addEffect(effect);
+        Effect effect = new DrawCardSourceControllerEffect(
+                new CardsInAllGraveyardsCount(filter), ValuePhrasing.EQUAL_TO);
+        this.getSpellAbility().addEffect(effect.concatBy(", then"));
     }
 
     private AccumulatedKnowledge(final AccumulatedKnowledge card) {

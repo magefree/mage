@@ -14,6 +14,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.constants.ValuePhrasing;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -68,7 +69,7 @@ class MwonvuliOozePTValue extends CountersSourceCount {
     }
 
     @Override
-    public String getMessage() {
+    public String getMessage(ValuePhrasing textPhrasing) {
         return "1 plus twice the number of age counters on it";
     }
 }
