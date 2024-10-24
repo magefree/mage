@@ -6,8 +6,6 @@ import mage.abilities.mana.ManaOptions;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 
 import java.util.UUID;
 
@@ -54,10 +52,7 @@ public abstract class SpecialAction extends ActivatedAbilityImpl {
             // limit play mana abilities by steps
             int currentStepOrder = 0;
             if (!game.getStack().isEmpty()) {
-                StackObject stackObject = game.getStack().getFirst();
-                if (stackObject instanceof Spell) {
-                    currentStepOrder = ((Spell) stackObject).getCurrentActivatingManaAbilitiesStep().getStepOrder();
-                }
+                currentStepOrder = game.getStack().getFirst().getCurrentActivatingManaAbilitiesStep().getStepOrder();
             }
             if (currentStepOrder > manaAbility.useOnActivationManaAbilityStep().getStepOrder()) {
                 return ActivationStatus.getFalse();

@@ -3980,14 +3980,13 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         // special mana to pay spell cost
         ManaOptions manaFull = availableMana.copy();
-        if (ability instanceof SpellAbility) {
-            for (AlternateManaPaymentAbility altAbility : CardUtil.getAbilities(object, game).stream()
-                    .filter(AlternateManaPaymentAbility.class::isInstance)
-                    .map(a -> (AlternateManaPaymentAbility) a)
-                    .collect(Collectors.toList())) {
-                ManaOptions manaSpecial = altAbility.getManaOptions(ability, game, ability.getManaCostsToPay());
-                manaFull.addMana(manaSpecial);
-            }
+        for (AlternateManaPaymentAbility altAbility : CardUtil.getAbilities(object, game).stream()
+                .filter(AlternateManaPaymentAbility.class::isInstance)
+                .map(a -> (AlternateManaPaymentAbility) a)
+                .filter(a -> a.appliesToAbility(ability))
+                .collect(Collectors.toList())) {
+            ManaOptions manaSpecial = altAbility.getManaOptions(ability, game, ability.getManaCostsToPay());
+            manaFull.addMana(manaSpecial);
         }
 
         // replace alternative abilities by real play abilities (e.g. morph/facedown static ability by play land)
