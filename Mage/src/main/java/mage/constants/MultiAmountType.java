@@ -140,7 +140,7 @@ public enum MultiAmountType {
         return res;
     }
 
-    public static boolean isGoodValues(List<Integer> values, List<MultiAmountMessage> constraints, int min, int max) {
+    public static boolean isGoodValues(List<Integer> values, List<MultiAmountMessage> constraints, int totalMin, int totalMax) {
         if (values.size() != constraints.size()) {
             return false;
         }
@@ -156,7 +156,7 @@ public enum MultiAmountType {
             currentSum += value;
         }
 
-        return currentSum >= min && currentSum <= max;
+        return currentSum >= totalMin && currentSum <= totalMax;
     }
 
     public static List<Integer> parseAnswer(String answerToParse, List<MultiAmountMessage> constraints, int min,

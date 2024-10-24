@@ -201,18 +201,13 @@ public class StubPlayer extends PlayerImpl {
     }
 
     @Override
-    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game) {
-
-    }
-
-    @Override
     public int getAmount(int min, int max, String message, Game game) {
         return 0;
     }
 
     @Override
     public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
-                                                                 int min, int max, MultiAmountType type, Game game) {
+                                                                 int totalMin, int totalMax, MultiAmountType type, Game game) {
         return null;
     }
 

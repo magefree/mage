@@ -2875,11 +2875,11 @@ public class TestPlayer implements Player {
 
     @Override
     public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
-                                                                 int min, int max, MultiAmountType type, Game game) {
+                                                                 int totalMin, int totalMax, MultiAmountType type, Game game) {
         assertAliasSupportInChoices(false);
 
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, totalMin, totalMax);
         if (needCount == 0) {
             return defaultList;
         }
@@ -2905,7 +2905,7 @@ public class TestPlayer implements Player {
             }
 
             // extra check
-            if (!MultiAmountType.isGoodValues(answer, messages, min, max)) {
+            if (!MultiAmountType.isGoodValues(answer, messages, totalMin, totalMax)) {
                 Assert.fail("Wrong choices in multi amount: " + answer
                         .stream()
                         .map(String::valueOf)
@@ -2916,7 +2916,7 @@ public class TestPlayer implements Player {
         }
 
         this.chooseStrictModeFailed("choice", game, "Multi amount: " + type.getHeader());
-        return computerPlayer.getMultiAmountWithIndividualConstraints(outcome, messages, min, max, type, game);
+        return computerPlayer.getMultiAmountWithIndividualConstraints(outcome, messages, totalMin, totalMax, type, game);
     }
 
     @Override
@@ -4382,14 +4382,6 @@ public class TestPlayer implements Player {
                                    List<UUID> blockerOrder, Game game
     ) {
         return computerPlayer.chooseBlockerOrder(blockers, combatGroup, blockerOrder, game);
-    }
-
-    @Override
-    public void assignDamage(int damage, List<UUID> targets,
-                             String singleTargetName, UUID attackerId, Ability source,
-                             Game game
-    ) {
-        computerPlayer.assignDamage(damage, targets, singleTargetName, attackerId, source, game);
     }
 
     @Override

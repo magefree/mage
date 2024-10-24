@@ -413,7 +413,7 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Draw cards. If you call it in replace events then use method with event param instead (for appliedEffects)
      *
-     * @param num cards to draw
+     * @param num    cards to draw
      * @param source can be null for game default draws (non effects, example: start of the turn)
      * @return number of cards drawn, including as a result of replacement effects
      */
@@ -422,7 +422,7 @@ public interface Player extends MageItem, Copyable<Player> {
     /**
      * Draw cards with applied effects, for replaceEvent
      *
-     * @param num cards to draw
+     * @param num    cards to draw
      * @param source can be null for game default draws (non effects, example: start of the turn)
      * @param event  original draw event in replacement code
      * @return number of cards drawn, including as a result of replacement effects
@@ -760,26 +760,28 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game);
 
-    void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game);
-
     int getAmount(int min, int max, String message, Game game);
 
     /**
      * Player distributes amount among multiple options
      *
-     * @param outcome  AI hint
-     * @param messages List of options to distribute amount among
-     * @param min      Minimum value per option
-     * @param max      Total amount to be distributed
-     * @param type     MultiAmountType enum to set dialog options such as title and header
-     * @param game     Game
+     * @param outcome   AI hint
+     * @param messages  List of options to distribute amount among
+     * @param optionMin Minimum value per option
+     * @param totalMin  Minimum total amount to be distributed
+     * @param totalMax  Total amount to be distributed
+     * @param type      MultiAmountType enum to set dialog options such as title and header
+     * @param game      Game
      * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
      */
-    default List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int min, int max, MultiAmountType type, Game game) {
+    default List<Integer> getMultiAmount(Outcome outcome, List<String> messages, int optionMin, int totalMin, int totalMax, MultiAmountType type, Game game) {
+        if (optionMin > totalMax || optionMin * messages.size() > totalMin) {
+            throw new IllegalArgumentException(String.format("Wrong code usage: getMultiAmount found bad option min/max values: %d/%d", optionMin, totalMax));
+        }
         List<MultiAmountMessage> constraints = messages.stream()
-                .map(s -> new MultiAmountMessage(s, min, max))
+                .map(s -> new MultiAmountMessage(s, optionMin, totalMax))
                 .collect(Collectors.toList());
-        return getMultiAmountWithIndividualConstraints(outcome, constraints, min, max, type, game);
+        return getMultiAmountWithIndividualConstraints(outcome, constraints, totalMin, totalMax, type, game);
     }
 
     /**
@@ -787,13 +789,13 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      * @param outcome  AI hint
      * @param messages List of options to distribute amount among. Each option has a constraint on the min, max chosen for it
-     * @param min      Total minimum amount to be distributed
-     * @param max      Total amount to be distributed
+     * @param totalMin Total minimum amount to be distributed
+     * @param totalMax Total amount to be distributed
      * @param type     MultiAmountType enum to set dialog options such as title and header
      * @param game     Game
      * @return List of integers with size equal to messages.size().  The sum of the integers is equal to max.
      */
-    List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages, int min, int max, MultiAmountType type, Game game);
+    List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages, int totalMin, int totalMax, MultiAmountType type, Game game);
 
     void sideboard(Match match, Deck deck);
 
