@@ -4,6 +4,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -18,6 +20,9 @@ import java.util.UUID;
  * @author Loki
  */
 public final class TendrilsOfCorruption extends CardImpl {
+
+    private static final DynamicValue xValue2 = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.SWAMP));
+    private static final Hint hint = new ValueHint("Swamps you control", xValue2);
 
     private static final FilterPermanent filter = new FilterControlledPermanent();
 
@@ -35,6 +40,7 @@ public final class TendrilsOfCorruption extends CardImpl {
         this.getSpellAbility().addEffect(new GainLifeEffect(xValue)
                 .setText("and you gain X life, where X is the number of Swamps you control"));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addHint(hint);
     }
 
     private TendrilsOfCorruption(final TendrilsOfCorruption card) {

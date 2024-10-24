@@ -5,7 +5,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,11 +28,15 @@ import mage.players.Player;
  */
 public final class EngulfTheShore extends CardImpl {
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.ISLAND));
+    private static final Hint hint = new ValueHint("Islands you control", xValue);
+
     public EngulfTheShore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{U}");
 
         // Return to their owners' hands all creatures with toughness less than or equal to the number of Islands you control.
         getSpellAbility().addEffect(new EngulfTheShoreEffect());
+        this.getSpellAbility().addHint(hint);
     }
 
     private EngulfTheShore(final EngulfTheShore card) {
