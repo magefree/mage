@@ -8,9 +8,11 @@ import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeGroupEvent;
+import mage.game.events.ZoneChangeBatchEvent;
 
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801
@@ -36,22 +38,32 @@ public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE_GROUP;
+        return event.getType() == GameEvent.EventType.ZONE_CHANGE_BATCH;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
-        return zEvent != null
-                && Zone.GRAVEYARD == zEvent.getFromZone()
-                && Zone.GRAVEYARD != zEvent.getToZone()
-                && zEvent.getCards() != null
-                && zEvent.getCards()
+        ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
+        if (zEvent == null){
+            return false;
+        }
+        Set<Card> cards = zEvent.getEvents()
                 .stream()
                 .filter(Objects::nonNull)
+                .filter(ev -> ev.getFromZone() == Zone.GRAVEYARD)
+                .filter(ev -> ev.getToZone() != Zone.GRAVEYARD)
+                .map(GameEvent::getTargetId)
+                .map(game::getCard)
+                .filter(Objects::nonNull)
                 .filter(card -> filter.match(card, getControllerId(), this, game))
-                .map(Card::getOwnerId)
-                .anyMatch(this::isControlledBy);
+                .filter(card -> this.isControlledBy(card.getOwnerId()))
+                .collect(Collectors.toSet());
+
+        if (cards.isEmpty()){
+            return false;
+        }
+        this.getAllEffects().setValue("cardsLeavingGraveyard", cards);
+        return true;
     }
 
     @Override
