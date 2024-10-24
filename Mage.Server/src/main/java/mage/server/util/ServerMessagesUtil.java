@@ -149,45 +149,27 @@ public enum ServerMessagesUtil {
     }
 
     public void incGamesStarted() {
-        int value;
-        do {
-            value = gamesStarted.get();
-        } while (!gamesStarted.compareAndSet(value, value + 1));
+        gamesStarted.incrementAndGet();
     }
 
     public void incGamesEnded() {
-        int value;
-        do {
-            value = gamesEnded.get();
-        } while (!gamesEnded.compareAndSet(value, value + 1));
+        gamesEnded.incrementAndGet();
     }
 
     public void incTournamentsStarted() {
-        int value;
-        do {
-            value = tournamentsStarted.get();
-        } while (!tournamentsStarted.compareAndSet(value, value + 1));
+        tournamentsStarted.incrementAndGet();
     }
 
     public void incTournamentsEnded() {
-        int value;
-        do {
-            value = tournamentsEnded.get();
-        } while (!tournamentsEnded.compareAndSet(value, value + 1));
+        tournamentsEnded.incrementAndGet();
     }
 
     public void incReconnects() {
-        int value;
-        do {
-            value = reconnects.get();
-        } while (!reconnects.compareAndSet(value, value + 1));
+        reconnects.incrementAndGet();
     }
 
     public void incLostConnection() {
-        int value;
-        do {
-            value = lostConnection.get();
-        } while (!lostConnection.compareAndSet(value, value + 1));
+        lostConnection.incrementAndGet();
     }
 
 }

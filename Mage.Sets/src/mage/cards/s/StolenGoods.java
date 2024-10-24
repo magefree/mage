@@ -66,15 +66,17 @@ class StolenGoodsEffect extends OneShotEffect {
         do {
             card = opponent.getLibrary().getFromTop(game);
             if (card == null) {
-                continue;
+                break;
             }
             if (card.isLand(game)) {
-                opponent.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null));
+                if (!opponent.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null))) {
+                    break;
+                }
             } else {
                 PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, card, TargetController.YOU, Duration.EndOfTurn, true, false, true);
                 break;
             }
-        } while (card != null && card.isLand(game));
+        } while (card.isLand(game));
 
         return true;
     }

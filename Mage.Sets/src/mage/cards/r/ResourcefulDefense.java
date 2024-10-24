@@ -109,7 +109,7 @@ class ResourcefulDefenseMoveCounterEffect extends OneShotEffect {
                     max, MultiAmountType.COUNTERS, game);
 
             total = choices.stream().reduce(0, Integer::sum);
-        } while (total < 0);
+        } while (total < 0 && controller.canRespond());
 
         // Move the counters. Make sure some counters were actually moved.
         for (int i = 0; i < choices.size(); i++) {

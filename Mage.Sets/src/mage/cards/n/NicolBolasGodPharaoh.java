@@ -162,9 +162,11 @@ class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
         do {
             card = library.getFromTop(game);
             if (card == null) {
-                continue;
+                break;
             }
-            opponent.moveCards(card, Zone.EXILED, source, game);
+            if (!opponent.moveCards(card, Zone.EXILED, source, game)) {
+                break;
+            }
             if (card.isLand(game)) {
                 continue;
             }
@@ -172,8 +174,7 @@ class NicolBolasGodPharaohPlusTwoEffect extends OneShotEffect {
             effect.setTargetPointer(new FixedTarget(card, game));
             game.addEffect(effect, source);
             break;
-        } while (library.hasCards()
-                && card != null);
+        } while (library.hasCards());
         return true;
     }
 }

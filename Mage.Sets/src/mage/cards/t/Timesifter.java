@@ -63,7 +63,7 @@ class TimesifterEffect extends OneShotEffect {
         List<UUID> playersExiling = game.getState().getPlayersInRange(source.getControllerId(), game);
         do {
             int highestCMC = Integer.MIN_VALUE;
-            List<UUID> playersWithHighestCMC = new ArrayList<>(1);
+            List<UUID> playersWithHighestCMC = new ArrayList<>();
             for (UUID playerId : playersExiling) {
                 Player player = game.getPlayer(playerId);
                 if (player != null) {
@@ -84,6 +84,7 @@ class TimesifterEffect extends OneShotEffect {
             }
             playersExiling = new ArrayList<>(playersWithHighestCMC);
         } while (playersExiling.size() > 1);
+
         for (UUID playerId : playersExiling) {
             Effect effect = new AddExtraTurnTargetEffect();
             effect.setTargetPointer(new FixedTarget(playerId));

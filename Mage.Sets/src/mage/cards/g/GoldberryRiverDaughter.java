@@ -151,7 +151,7 @@ class GoldberryRiverDaughterToEffect extends OneShotEffect {
                     max, MultiAmountType.COUNTERS, game);
 
             total = choices.stream().reduce(0, Integer::sum);
-        } while (total < 1);
+        } while (total < 1 && controller.canRespond());
 
         // Move the counters. Make sure some counters were actually moved.
         boolean movedCounters = false;
