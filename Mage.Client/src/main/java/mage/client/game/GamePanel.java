@@ -650,6 +650,11 @@ public final class GamePanel extends javax.swing.JPanel {
             this.abilityPicker.fullRefresh(GUISizeHelper.dialogGuiScale);
             this.abilityPicker.init(gameId, bigCard);
         }
+        if (this.pickMultiNumber != null && !this.pickMultiNumber.isVisible()) {
+            // TODO: add pick number dialogs support here
+            //this.pickMultiNumber.fullRefresh(GUISizeHelper.dialogGuiScale);
+            this.pickMultiNumber.init(gameId, bigCard);
+        }
     }
 
     private void setSkipButtonImage(JButton button, Image image) {
@@ -819,6 +824,7 @@ public final class GamePanel extends javax.swing.JPanel {
         MageFrame.addGame(gameId, this);
         this.feedbackPanel.init(gameId, bigCard);
         this.feedbackPanel.clear();
+        this.pickMultiNumber.init(gameId, bigCard);
         this.abilityPicker.init(gameId, bigCard);
         this.btnConcede.setVisible(true);
         this.btnStopWatching.setVisible(false);
@@ -2177,6 +2183,7 @@ public final class GamePanel extends javax.swing.JPanel {
         hideAll();
         DialogManager.getManager(gameId).fadeOut();
 
+        pickMultiNumber.init(gameId, bigCard);
         pickMultiNumber.showDialog(messages, min, max, lastGameData.options, () -> {
             if (pickMultiNumber.isCancel()) {
                 SessionHandler.sendPlayerBoolean(gameId, false);

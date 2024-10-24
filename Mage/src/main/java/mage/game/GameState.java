@@ -75,7 +75,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Watchers watchers;
     private Turn turn;
     private TurnMods turnMods; // one time turn modifications (turn, phase or step)
-    private UUID activePlayerId; // playerId which turn it is
+    private UUID activePlayerId; // player which turn it is
     private UUID priorityPlayerId; // player that has currently priority (setup before any choose)
     private UUID playerByOrderId; // player that has currently priority
     private UUID monarchId; // player that is the monarch

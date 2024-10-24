@@ -1124,7 +1124,7 @@ public class HumanPlayer extends PlayerImpl {
             MageObject targetObject = game.getObject(targetId);
             if (targetObject != null) {
                 targetNames.add(String.format("%s, P/T: %d/%d",
-                        targetObject.getIdName(),
+                        targetObject.getLogName(),
                         targetObject.getPower().getValue(),
                         targetObject.getToughness().getValue()
                 ));

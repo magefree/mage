@@ -112,7 +112,7 @@ class MasterOfTheWildHuntEffect extends OneShotEffect {
         int totalDamage = target.getPower().getValue();
         List<String> messages = new ArrayList<>();
         wolves.forEach(permanent -> {
-            String info = String.format("%s (%s/%s)",
+            String info = String.format("%s, P/T: %d/%d",
                     permanent.getLogName(),
                     permanent.getPower().getValue(),
                     permanent.getToughness().getValue()
