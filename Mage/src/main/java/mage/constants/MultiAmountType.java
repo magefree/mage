@@ -50,7 +50,7 @@ public enum MultiAmountType {
             return res;
         }
 
-        int total = res.stream().reduce(0, Integer::sum);
+        int total = res.stream().mapToInt(x -> x).sum();;
 
         // Fill values until we reach the overall minimum. Do this by filling values up until either their max or however much is leftover, starting with the first option.
         if (min > 0 && total < min) {
@@ -85,7 +85,7 @@ public enum MultiAmountType {
 
         // Total should fall between the sum of all of the minimum values and max (in the case that everything was filled with default_value).
         // So, we'll never start with too much.
-        int total = res.stream().reduce(0, Integer::sum);
+        int total = res.stream().mapToInt(x -> x).sum();
 
         // So add some values evenly until we hit max
         while (total < max) {

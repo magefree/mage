@@ -91,7 +91,8 @@ class CaseOfTheTrampledGardenHint extends CaseSolvedHint {
                 .stream()
                 .map(Permanent::getPower)
                 .map(MageInt::getValue)
-                .reduce(0, Integer::sum);
+                .mapToInt(x -> x)
+                .sum();
         return "Total power: " + power + " (need 8).";
     }
 }
