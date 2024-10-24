@@ -1,21 +1,19 @@
 package mage.abilities.common;
 
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
- * @author LevelX2
+ * @author Skiwkr
  */
 
-public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityImpl {
+public class DealsDamageGainLifeSourceTriggeredAbility extends DealsDamageTriggeredAbility {
 
     public DealsDamageGainLifeSourceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(SavedDamageValue.MUCH), false);
+        super(new GainLifeEffect(SavedDamageValue.MUCH));
         setTriggerPhrase("Whenever {this} deals damage, ");
     }
 
@@ -27,13 +25,6 @@ public class DealsDamageGainLifeSourceTriggeredAbility extends TriggeredAbilityI
     public DealsDamageGainLifeSourceTriggeredAbility copy() {
         return new DealsDamageGainLifeSourceTriggeredAbility(this);
     }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT
-                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(this.getSourceId())) {

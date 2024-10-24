@@ -90,13 +90,13 @@ public class ForetellAbility extends SpecialAction {
         return " foretells a card from hand";
     }
 
-    static class ForetellExileEffect extends OneShotEffect {
+    public static class ForetellExileEffect extends OneShotEffect {
 
         private final Card card;
         String foretellCost;
         String foretellSplitCost;
 
-        ForetellExileEffect(Card card, String foretellCost, String foretellSplitCost) {
+        public ForetellExileEffect(Card card, String foretellCost, String foretellSplitCost) {
             super(Outcome.Neutral);
             this.card = card;
             this.foretellCost = foretellCost;
@@ -150,9 +150,9 @@ public class ForetellAbility extends SpecialAction {
         }
     }
 
-    static class ForetellLookAtCardEffect extends AsThoughEffectImpl {
+    public static class ForetellLookAtCardEffect extends AsThoughEffectImpl {
 
-        ForetellLookAtCardEffect() {
+        public ForetellLookAtCardEffect() {
             super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.AIDontUseIt);
         }
 
