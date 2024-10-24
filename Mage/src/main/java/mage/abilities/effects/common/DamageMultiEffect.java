@@ -28,7 +28,11 @@ public class DamageMultiEffect extends OneShotEffect {
     }
 
     public DamageMultiEffect(int amount, String whoDealDamageName) {
-        this(StaticValue.get(amount));
+        this(StaticValue.get(amount), whoDealDamageName);
+    }
+
+    public DamageMultiEffect(DynamicValue amount, String whoDealDamageName) {
+        this(amount);
         this.sourceName = whoDealDamageName;
     }
 

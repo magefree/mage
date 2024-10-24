@@ -6,6 +6,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -330,6 +331,10 @@ public abstract class AbilityImpl implements Ability {
 
         handlePhyrexianManaCosts(game, controller);
 
+        // 20241022 - 601.2b
+        // Not yet included in 601.2b but this is where it will be
+        handleChooseCostTargets(game, controller);
+
         /* 20130201 - 601.2b
          * If the spell is modal the player announces the mode choice (see rule 700.2).
          */
@@ -645,6 +650,17 @@ public abstract class AbilityImpl implements Ability {
                 costIterator.remove();
                 addCost(payLifeCost);
                 getManaCostsToPay().incrPhyrexianPaid();
+            }
+        }
+    }
+
+    /**
+     * 601.2b Choose targets for costs that have to be chosen early.
+     */
+    private void handleChooseCostTargets(Game game, Player controller) {
+        for (Cost cost : getCosts()) {
+            if (cost instanceof EarlyTargetCost && cost.getTargets().isEmpty()) {
+                ((EarlyTargetCost) cost).chooseTarget(game, this, controller);
             }
         }
     }
