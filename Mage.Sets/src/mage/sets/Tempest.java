@@ -3,6 +3,13 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class Tempest extends ExpansionSet {
 
@@ -367,5 +374,79 @@ public final class Tempest extends ExpansionSet {
         cards.add(new SetCardInfo("Winter's Grasp", 265, Rarity.UNCOMMON, mage.cards.w.WintersGrasp.class));
         cards.add(new SetCardInfo("Wood Sage", 275, Rarity.RARE, mage.cards.w.WoodSage.class));
         cards.add(new SetCardInfo("Worthy Cause", 53, Rarity.UNCOMMON, mage.cards.w.WorthyCause.class));
+    }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new UrzasSagaCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/usg.html
+// Using common collation
+class UrzasSagaCollator implements BoosterCollator {
+    private final CardRun commonA = new CardRun(true, "129", "226", "185", "105", "23", "137", "252", "173", "57", "34", "129", "244", "190", "78", "23", "132", "252", "198", "105", "16", "113", "257", "186", "78", "29", "128", "216", "173", "67", "3", "117", "251", "190", "57", "29", "113", "216", "184", "82", "15", "132", "257", "198", "85", "34", "128", "251", "185", "67", "15", "117", "226", "186", "82", "3", "137", "244", "184", "85", "16");
+    private final CardRun commonB = new CardRun(true, "296", "258", "189", "11", "86", "309", "256", "191", "30", "106", "159", "294", "199", "10", "93", "112", "297", "207", "30", "55", "122", "261", "296", "5", "106", "119", "228", "309", "10", "74", "122", "249", "191", "279", "55", "119", "261", "164", "297", "86", "126", "256", "199", "11", "294", "112", "249", "189", "43", "74", "159", "258", "207", "5", "93", "126", "228", "164", "43", "279");
+    private final CardRun commonC = new CardRun(true, "133", "238", "167", "99", "14", "134", "255", "211", "66", "17", "144", "245", "174", "89", "1", "133", "260", "160", "66", "44", "144", "217", "167", "59", "47", "148", "245", "187", "89", "14", "123", "260", "211", "96", "17", "134", "238", "174", "59", "1", "148", "217", "160", "99", "44", "123", "255", "187", "96", "47");
+    private final CardRun commonD = new CardRun(true, "109", "215", "182", "101", "13", "150", "239", "206", "94", "12", "118", "254", "169", "95", "9", "153", "231", "203", "87", "8", "150", "246", "182", "65", "12", "156", "239", "178", "95", "50", "153", "215", "203", "101", "8", "109", "254", "206", "87", "13", "118", "231", "178", "94", "50", "156", "246", "169", "65", "9");
+    private final CardRun uncommon = new CardRun(false, "107", "161", "315", "2", "214", "4", "163", "165", "278", "218", "56", "219", "317", "120", "121", "124", "125", "58", "130", "171", "286", "287", "63", "172", "227", "19", "175", "64", "20", "318", "179", "230", "181", "233", "234", "138", "68", "69", "25", "183", "26", "140", "235", "141", "71", "72", "27", "267", "319", "145", "77", "298", "320", "192", "241", "242", "194", "32", "243", "299", "147", "302", "303", "80", "304", "36", "149", "268", "151", "247", "152", "197", "37", "323", "81", "253", "155", "201", "269", "40", "202", "88", "157", "271", "41", "45", "46", "158", "273", "327", "49", "90", "91", "259", "208", "209", "311", "92", "328", "262", "329", "264", "51", "330", "314", "103", "212", "104", "265", "53");
+    private final CardRun rare = new CardRun(false, "276", "213", "162", "6", "7", "108", "54", "277", "110", "316", "166", "111", "168", "114", "280", "115", "116", "220", "281", "170", "127", "221", "266", "131", "60", "222", "282", "224", "223", "225", "283", "284", "285",       "62", "135", "136", "18", "288", "176", "289", "229", "177", "21", "290", "180", "22", "232", "291", "24", "70", "292", "293", "139", "142", "143", "188",        "73", "28", "75", "76", "146", "236", "237", "240",        "31", "33", "195", "300", "35", "301", "321", "79", "196", "248", "322", "250", "83", "84", "305", "38", "39", "324", "306", "154", "325", "307", "200", "308", "270", "204", "326", "42", "272", "48", "205", "310", "312", "97", "210", "313", "98", "100", "263", "274",        "52", "275");
+
+    private final BoosterStructure AAABBB = new BoosterStructure(
+            commonA, commonA, commonA,
+            commonB, commonB, commonB
+    );
+    private final BoosterStructure BBBAAA = new BoosterStructure(
+            commonB, commonB, commonB,
+            commonA, commonA, commonA
+    );
+    private final BoosterStructure AAAABB = new BoosterStructure(
+            commonA, commonA, commonA, commonA,
+            commonB, commonB
+    );
+    private final BoosterStructure BBBBAA = new BoosterStructure(
+            commonB, commonB, commonB, commonB,
+            commonA, commonA
+    );
+    private final BoosterStructure CCCDD = new BoosterStructure(
+            commonC, commonC, commonC,
+            commonD, commonD
+    );
+    private final BoosterStructure DDDCC = new BoosterStructure(
+            commonD, commonD, commonD,
+            commonC, commonC
+    );
+    private final BoosterStructure CCDDD = new BoosterStructure(
+            commonC, commonC,
+            commonD, commonD, commonD
+    );
+    private final BoosterStructure DDCCC = new BoosterStructure(
+            commonD, commonD,
+            commonC, commonC, commonC
+    );
+    private final BoosterStructure U3 = new BoosterStructure(uncommon, uncommon, uncommon);
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+
+    // https://www.lethe.xyz/mtg/collation/mir.html states a very rough estimate of the 4-2 rate is 1/3
+    private final RarityConfiguration commonRunsAB = new RarityConfiguration(
+        AAAABB,
+        AAABBB, AAABBB,
+        BBBAAA, BBBAAA,
+        BBBBAA
+    );
+    private final RarityConfiguration commonRunsCD = new RarityConfiguration(
+        CCCDD, DDDCC, CCDDD, DDCCC
+    );
+    private final RarityConfiguration uncommonRuns = new RarityConfiguration(U3);
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        booster.addAll(commonRunsAB.getNext().makeRun());
+        booster.addAll(commonRunsCD.getNext().makeRun());
+        booster.addAll(uncommonRuns.getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        return booster;
     }
 }
