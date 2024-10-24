@@ -49,7 +49,7 @@ public class SerializationTest extends CardTestPlayerBase {
         Object compressed = CompressUtil.compress(permanent);
         Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
         PermanentImpl uncompressed = (PermanentImpl) CompressUtil.decompress(compressed);
-        Assert.assertEquals("Must be same", permanent.getName(), uncompressed.getName());
+        Assert.assertTrue("Must be same", permanent.sharesName(uncompressed, currentGame));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class SerializationTest extends CardTestPlayerBase {
         Object compressed = CompressUtil.compress(permanent);
         Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
         PermanentImpl uncompressed = (PermanentImpl) CompressUtil.decompress(compressed);
-        Assert.assertEquals("Must be same", permanent.getName(), uncompressed.getName());
+        Assert.assertTrue("Must be same", permanent.sharesName(uncompressed, currentGame));
 
         // ensure that it was marked damage
         permanent.applyDamage(currentGame);
@@ -92,7 +92,7 @@ public class SerializationTest extends CardTestPlayerBase {
                         Object compressed = CompressUtil.compress(card);
                         Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
                         Card uncompressed = (Card) CompressUtil.decompress(compressed);
-                        Assert.assertEquals("Must be same", card.getName(), uncompressed.getName());
+                        Assert.assertTrue("Must be same", card.sharesName(uncompressed, currentGame));
                     }
 
                     // permanent
@@ -100,7 +100,7 @@ public class SerializationTest extends CardTestPlayerBase {
                         Object compressed = CompressUtil.compress(testPermanent);
                         Assert.assertTrue("Must be zip", compressed instanceof ZippedObjectImpl);
                         Card uncompressed = (Card) CompressUtil.decompress(compressed);
-                        Assert.assertEquals("Must be same", testPermanent.getName(), uncompressed.getName());
+                        Assert.assertTrue("Must be same", testPermanent.sharesName(uncompressed, currentGame));
                     }
                 });
     }

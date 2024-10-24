@@ -108,7 +108,7 @@ class MedomaisProphecyDelayedTriggeredAbility extends DelayedTriggeredAbility {
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        return spell != null && spellName.equals(spell.getName());
+        return spell != null && spell.hasName(spellName, game);
     }
 
     @Override

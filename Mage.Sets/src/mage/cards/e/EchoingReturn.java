@@ -65,7 +65,7 @@ class EchoingReturnEffect extends OneShotEffect {
         player.getGraveyard()
                 .getCards(game)
                 .stream()
-                .filter(c -> CardUtil.haveSameNames(c.getName(), card.getName()))
+                .filter(c -> CardUtil.haveSameNames(c, card))
                 .forEach(cards::add);
         return player.moveCards(cards, Zone.HAND, source, game);
     }

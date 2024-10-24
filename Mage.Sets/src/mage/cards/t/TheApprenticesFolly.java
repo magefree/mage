@@ -9,14 +9,14 @@ import mage.constants.CardType;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -77,15 +77,14 @@ enum TheApprenticesFollyPredicate implements ObjectSourcePlayerPredicate<Permane
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        String name = input.getObject().getName();
-        if (name == null || name.isEmpty()) {
-            return true;
-        }
-
-        FilterControlledPermanent filter = new FilterControlledPermanent();
-        filter.add(new NamePredicate(name));
-        filter.add(TokenPredicate.TRUE);
-        // This works due to the non-token clause on the target. There should be no controlled token with that name.
-        return game.getBattlefield().count(filter, input.getPlayerId(), input.getSource(), game) == 0;
+        return game
+                .getBattlefield()
+                .getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_PERMANENT,
+                        input.getPlayerId(), input.getSource(), game
+                )
+                .stream()
+                .filter(PermanentToken.class::isInstance)
+                .noneMatch(permanent -> permanent.sharesName(input.getObject(), game));
     }
 }

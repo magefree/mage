@@ -17,7 +17,6 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardAndOrCard;
 import mage.target.common.TargetCardAndOrCardInLibrary;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -83,9 +82,9 @@ class AgencyOutfitterEffect extends OneShotEffect {
                 for (UUID id : libraryTarget.getTargets()) {
                     Card card = game.getCard(id);
                     if (card != null) {
-                        if (CardUtil.haveSameNames(card, glassName, game)) {
+                        if (card.hasName(glassName, game)) {
                             glassCard = card;
-                        } else if (CardUtil.haveSameNames(card, capName, game)) {
+                        } else if (card.hasName(capName, game)) {
                             capCard = card;
                         }
                     }
@@ -115,9 +114,9 @@ class AgencyOutfitterEffect extends OneShotEffect {
                 for (UUID id : target.getTargets()) {
                     Card card = game.getCard(id);
                     if (card != null) {
-                        if (CardUtil.haveSameNames(card, glassName, game)) {
+                        if (card.hasName(glassName, game)) {
                             glassCard = card;
-                        } else if (CardUtil.haveSameNames(card, capName, game)) {
+                        } else if (card.hasName(capName, game)) {
                             capCard = card;
                         }
                     }

@@ -90,7 +90,7 @@ public class RootpathPurifierTest extends CardTestPlayerBase {
                 playerA.getHand()
                         .getCards(currentGame)
                         .stream()
-                        .filter(card -> tree.equals(card.getName()))
+                        .filter(card -> card.hasName(tree, currentGame))
                         .noneMatch(card -> card.isBasic(currentGame))
         );
     }
@@ -116,7 +116,7 @@ public class RootpathPurifierTest extends CardTestPlayerBase {
                 playerA.getLibrary()
                         .getCards(currentGame)
                         .stream()
-                        .filter(card -> tree.equals(card.getName()))
+                        .filter(card -> card.hasName(tree, currentGame))
                         .noneMatch(card -> card.isBasic(currentGame))
         );
     }

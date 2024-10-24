@@ -10,7 +10,7 @@ import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -100,7 +100,7 @@ class KotoseTheSilentSpiderEffect extends OneShotEffect {
         controller.moveCardsToExile(card, source, game, true, exileId, exileName);
         Cards cards = new CardsImpl();
         FilterCard filter = new FilterCard("cards named " + card.getName() + " from " + opponent.getName() + "'s graveyard");
-        filter.add(new NamePredicate(card.getName()));
+        filter.add(new SharesNamePredicate(card));
 
         TargetCardInGraveyard targetCardInGraveyard = new TargetCardInGraveyard(0, Integer.MAX_VALUE, filter);
         controller.choose(outcome, opponent.getGraveyard(), targetCardInGraveyard, source, game);

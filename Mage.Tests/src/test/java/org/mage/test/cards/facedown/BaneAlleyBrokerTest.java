@@ -41,7 +41,7 @@ public class BaneAlleyBrokerTest extends CardTestPlayerBase {
         assertExileCount("Goblin Roughrider", 1);
 
         for (Card card : currentGame.getExile().getAllCards(currentGame)) {
-            if (card.getName().equals("Goblin Roughrider")) {
+            if (card.hasName("Goblin Roughrider", currentGame)) {
                 Assert.assertTrue("Exiled card is not face down", card.isFaceDown(currentGame));
             }
         }

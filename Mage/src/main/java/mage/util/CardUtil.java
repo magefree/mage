@@ -29,7 +29,6 @@ import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.card.OwnerIdPredicate;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.CardState;
 import mage.game.Game;
@@ -57,6 +56,9 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -773,20 +775,16 @@ public final class CardUtil {
         }
     }
 
-    public static boolean haveSameNames(String name1, String name2) {
-        return haveSameNames(name1, name2, false);
-    }
-
     public static boolean haveSameNames(MageObject object1, MageObject object2) {
-        return object1 != null && object2 != null && haveSameNames(object1.getName(), object2.getName());
+        return object1 != null && object2 != null && haveSameNames(object1.getName(), object2.getName(), false);
     }
 
+    /**
+     * Replaced by hasName method, kept to reduce refactoring of old cards
+     */
+    @Deprecated
     public static boolean haveSameNames(MageObject object, String needName, Game game) {
-        return containsName(object, needName, game);
-    }
-
-    public static boolean containsName(MageObject object, String name, Game game) {
-        return new NamePredicate(name).apply(object, game);
+        return object.hasName(needName, game);
     }
 
     public static boolean haveEmptyName(String name) {
@@ -797,6 +795,11 @@ public final class CardUtil {
 
     public static boolean haveEmptyName(MageObject object) {
         return object == null || haveEmptyName(object.getName());
+    }
+
+    public static int differentlyNamedAmongCollection(Collection<? extends MageObject> collection, Game game) {
+        // TODO: Implement this
+        return 0;
     }
 
     public static UUID getMainCardId(Game game, UUID objectId) {
@@ -1168,7 +1171,7 @@ public final class CardUtil {
                 .sum();
         int remainingValue = maxValue - selectedValue;
         Set<UUID> validTargets = new HashSet<>();
-        for (UUID id: possibleTargets) {
+        for (UUID id : possibleTargets) {
             MageObject mageObject = game.getObject(id);
             if (mageObject != null && valueMapper.applyAsInt(mageObject) <= remainingValue) {
                 validTargets.add(id);
@@ -2166,6 +2169,71 @@ public final class CardUtil {
 
     public static <T> Stream<T> castStream(Stream<?> stream, Class<T> clazz) {
         return stream.filter(clazz::isInstance).map(clazz::cast).filter(Objects::nonNull);
+    }
+
+    public static <T> boolean checkAnyPairs(Collection<T> collection, BiPredicate<T, T> predicate) {
+        return streamPairsWithMap(collection, (t1, t2) -> predicate.test(t1, t2)).anyMatch(x -> x);
+    }
+
+    public static <T> Stream<T> streamAllPairwiseMatches(Collection<T> collection, BiPredicate<T, T> predicate) {
+        return streamPairsWithMap(
+                collection,
+                (t1, t2) -> predicate.test(t1, t2)
+                        ? Stream.of(t1, t2)
+                        : Stream.<T>empty()
+        ).flatMap(Function.identity()).distinct();
+    }
+
+    private static class IntPairIterator implements Iterator<AbstractMap.SimpleImmutableEntry<Integer, Integer>> {
+        private final int amount;
+        private int firstCounter = 0;
+        private int secondCounter = 1;
+
+        IntPairIterator(int amount) {
+            this.amount = amount;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return firstCounter + 1 < amount;
+        }
+
+        @Override
+        public AbstractMap.SimpleImmutableEntry<Integer, Integer> next() {
+            AbstractMap.SimpleImmutableEntry<Integer, Integer> value
+                    = new AbstractMap.SimpleImmutableEntry(firstCounter, secondCounter);
+            secondCounter++;
+            if (secondCounter == amount) {
+                firstCounter++;
+                secondCounter = firstCounter + 1;
+            }
+            return value;
+        }
+
+        public int getMax() {
+            // amount choose 2
+            return (amount * amount - amount) / 2;
+        }
+    }
+
+    public static <T, U> Stream<U> streamPairsWithMap(Collection<T> collection, BiFunction<T, T, U> function) {
+        if (collection.size() < 2) {
+            return Stream.empty();
+        }
+        List<T> list;
+        if (collection instanceof List) {
+            list = (List<T>) collection;
+        } else {
+            list = new ArrayList<>(collection);
+        }
+        IntPairIterator it = new IntPairIterator(list.size());
+        return Stream
+                .generate(it::next)
+                .limit(it.getMax())
+                .map(pair -> function.apply(
+                        list.get(pair.getKey()),
+                        list.get(pair.getValue())
+                ));
     }
 
     public static void AssertNoControllerOwnerPredicates(Target target) {

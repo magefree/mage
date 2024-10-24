@@ -22,7 +22,6 @@ public final class BileBlight extends CardImpl {
     public BileBlight(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}{B}");
 
-
         // Target creature and all creatures with the same name as that creature get -3/-3 until end of turn.
         this.getSpellAbility().addEffect(new BileBlightEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -64,9 +63,8 @@ class BileBlightEffect extends BoostAllEffect {
             affectedObjectList.add(new MageObjectReference(target, game));
             return;
         }
-        String name = target.getName();
         for (Permanent perm : game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (CardUtil.haveSameNames(perm, name, game)) {
+            if (CardUtil.haveSameNames(perm, target)) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
             }
         }

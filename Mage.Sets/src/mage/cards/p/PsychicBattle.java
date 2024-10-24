@@ -69,7 +69,7 @@ class PsychicBattleTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         StackObject stackObject = game.getStack().getStackObject(event.getSourceId());
         if (stackObject != null) {
-            if (!stackObject.isTargetChanged() && !stackObject.getName().equals("Psychic Battle")) {
+            if (!stackObject.isTargetChanged() && !stackObject.hasName("Psychic Battle", game)) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getSourceId()));
                 stackObject.setTargetChanged(false); // resets the targetChanged flag
                 return true;

@@ -409,4 +409,9 @@ public abstract class MageObjectImpl implements MageObject {
     public String toString() {
         return getIdName() + " (" + super.getClass().getSuperclass().getSimpleName() + " -> " + this.getClass().getSimpleName() + ")";
     }
+
+    @Override
+    public boolean hasName(String name, Game game) {
+        return Objects.equals(name, this.name);
+    }
 }

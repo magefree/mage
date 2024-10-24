@@ -1,12 +1,9 @@
-
 package mage.cards.s;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.discard.DiscardControllerEffect;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,15 +18,15 @@ import mage.game.stack.Spell;
 import mage.target.common.TargetCardInLibrary;
 import mage.watchers.Watcher;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class SiftThroughSands extends CardImpl {
 
-    private static final String rule = "<br>If you've cast a spell named Peer Through Depths and a spell named Reach Through Mists this turn, you may search your library for a card named The Unspeakable, put it onto the battlefield, then shuffle";
     private static final FilterCreatureCard filter = new FilterCreatureCard("a card named The Unspeakable");
 
     static {
@@ -37,17 +34,19 @@ public final class SiftThroughSands extends CardImpl {
     }
 
     public SiftThroughSands(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
         this.subtype.add(SubType.ARCANE);
 
         // Draw two cards, then discard a card.
-        this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
-        Effect effect = new DiscardControllerEffect(1);
-        effect.setText(", then discard a card");
-        this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2, 1));
 
         // If you've cast a spell named Peer Through Depths and a spell named Reach Through Mists this turn, you may search your library for a card named The Unspeakable, put it onto the battlefield, then shuffle your library.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false), new SiftThroughSandsCondition(), rule));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false),
+                SiftThroughSandsCondition.instance, "<br>If you've cast a spell named " +
+                "Peer Through Depths and a spell named Reach Through Mists this turn, you may search your library " +
+                "for a card named The Unspeakable, put it onto the battlefield, then shuffle"
+        ));
         this.getSpellAbility().addWatcher(new SiftThroughSandsWatcher());
     }
 
@@ -61,48 +60,51 @@ public final class SiftThroughSands extends CardImpl {
     }
 }
 
-class SiftThroughSandsCondition implements Condition {
+enum SiftThroughSandsCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {
-        SiftThroughSandsWatcher watcher = game.getState().getWatcher(SiftThroughSandsWatcher.class, source.getControllerId());
-        if (watcher != null) {
-            return watcher.conditionMet();
-        }
-        return false;
+        return SiftThroughSandsWatcher.checkPlayer(source.getControllerId(), game);
     }
 }
 
 class SiftThroughSandsWatcher extends Watcher {
 
-    boolean castPeerThroughDepths = false;
-    boolean castReachThroughMists = false;
+    Set<UUID> castPeerThroughDepths = new HashSet<>();
+    Set<UUID> castReachThroughMists = new HashSet<>();
 
     public SiftThroughSandsWatcher() {
-        super(WatcherScope.PLAYER);
+        super(WatcherScope.GAME);
     }
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition) { //no need to check - condition has already occured
+        if (event.getType() != GameEvent.EventType.SPELL_CAST) {
             return;
         }
-        if (event.getType() == GameEvent.EventType.SPELL_CAST
-                && controllerId.equals(event.getPlayerId())) {
-            Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell.getCard().getName().equals("Peer Through Depths")) {
-                castPeerThroughDepths = true;
-            } else if (spell.getCard().getName().equals("Reach Through Mists")) {
-                castReachThroughMists = true;
-            }
-            condition = castPeerThroughDepths && castReachThroughMists;
+        Spell spell = game.getStack().getSpell(event.getTargetId());
+        if (spell.hasName("Peer Through Depths", game)) {
+            castPeerThroughDepths.add(spell.getControllerId());
+        }
+        if (spell.hasName("Reach Through Mists", game)) {
+            castReachThroughMists.add(spell.getControllerId());
         }
     }
 
     @Override
     public void reset() {
         super.reset();
-        this.castPeerThroughDepths = false;
-        this.castReachThroughMists = false;
+        this.castPeerThroughDepths.clear();
+        this.castReachThroughMists.clear();
+    }
+
+    static boolean checkPlayer(UUID playerId, Game game) {
+        return game.getState().getWatcher(SiftThroughSandsWatcher.class).check(playerId);
+    }
+
+    private boolean check(UUID playerId) {
+        return castPeerThroughDepths.contains(playerId)
+                && castReachThroughMists.contains(playerId);
     }
 }

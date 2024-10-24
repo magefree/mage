@@ -1,9 +1,5 @@
 package mage.cards.t;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.ApprovingObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -12,9 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -23,8 +16,11 @@ import mage.target.TargetSpell;
 import mage.util.CardUtil;
 import mage.util.RandomUtil;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
 /**
- *
  * @author weirddan455
  */
 public final class TibaltsTrickery extends CardImpl {
@@ -72,43 +68,40 @@ class TibaltsTrickeryEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
-        if (spell != null) {
-            String spellName = spell.getName();
-            Player controller = game.getPlayer(spell.getControllerId());
-            game.getStack().counter(spell.getId(), source, game);
-            if (controller != null) {
-                int random = RandomUtil.nextInt(3) + 1;
-                game.informPlayers(random + " was chosen at random");
-                controller.millCards(random, source, game);
-                Card cardToCast = null;
-                Set<Card> cardsToExile = new HashSet<>();
-                FilterCard filter = new FilterCard();
-                filter.add(Predicates.not(CardType.LAND.getPredicate()));
-                filter.add(Predicates.not(new NamePredicate(spellName)));
-                for (Card card : controller.getLibrary().getCards(game)) {
-                    cardsToExile.add(card);
-                    if (filter.match(card, game)) {
-                        cardToCast = card;
-                        break;
-                    }
-                }
-                controller.moveCardsToExile(cardsToExile, source, game, true, source.getSourceId(),
-                        CardUtil.createObjectRealtedWindowTitle(source, game, null));
-                if (cardToCast != null) {
-                    if (controller.chooseUse(Outcome.PlayForFree, "Cast " + cardToCast.getLogName() + " for free?", source, game)) {
-                        game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), Boolean.TRUE);
-                        controller.cast(controller.chooseAbilityForCast(cardToCast, game, true),
-                                game, true, new ApprovingObject(source, game));
-                        game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), null);
-                    }
-                }
-                ExileZone exile = game.getExile().getExileZone(source.getSourceId());
-                if (exile != null) {
-                    controller.putCardsOnBottomOfLibrary(exile, game, source, false);
-                }
-            }
+        if (spell == null) {
+            return false;
+        }
+        Player controller = game.getPlayer(spell.getControllerId());
+        game.getStack().counter(spell.getId(), source, game);
+        if (controller == null) {
             return true;
         }
-        return false;
+        int random = RandomUtil.nextInt(3) + 1;
+        game.informPlayers(random + " was chosen at random");
+        controller.millCards(random, source, game);
+        Card cardToCast = null;
+        Set<Card> cardsToExile = new HashSet<>();
+        for (Card card : controller.getLibrary().getCards(game)) {
+            cardsToExile.add(card);
+            if (card != null && !card.isLand(game) && !card.sharesName(spell, game)) {
+                cardToCast = card;
+                break;
+            }
+        }
+        controller.moveCardsToExile(cardsToExile, source, game, true, source.getSourceId(),
+                CardUtil.createObjectRealtedWindowTitle(source, game, null));
+        if (cardToCast != null) {
+            if (controller.chooseUse(Outcome.PlayForFree, "Cast " + cardToCast.getLogName() + " for free?", source, game)) {
+                game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), Boolean.TRUE);
+                controller.cast(controller.chooseAbilityForCast(cardToCast, game, true),
+                        game, true, new ApprovingObject(source, game));
+                game.getState().setValue("PlayFromNotOwnHandZone" + cardToCast.getId(), null);
+            }
+        }
+        ExileZone exile = game.getExile().getExileZone(source.getSourceId());
+        if (exile != null) {
+            controller.putCardsOnBottomOfLibrary(exile, game, source, false);
+        }
+        return true;
     }
 }

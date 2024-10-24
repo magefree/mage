@@ -29,7 +29,7 @@ public class MulliganCardSorterTest extends CardTestPlayerBase {
                 .stream()
                 .map(name -> currentGame.getCards()
                         .stream()
-                        .filter(c -> c.getName().equals(name))
+                        .filter(c -> c.hasName(name, currentGame))
                         .findFirst()
                         .orElseThrow(() -> new IllegalStateException("Can't find testing card " + name))
                 )

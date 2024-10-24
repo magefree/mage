@@ -1,7 +1,6 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -53,12 +52,8 @@ class DeicideExileEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (controller == null || sourceCard == null) {
-            return false;
-        }
         Permanent targetEnchantment = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (targetEnchantment == null) {
+        if (controller == null || targetEnchantment == null) {
             return false;
         }
         controller.moveCards(targetEnchantment, Zone.EXILED, source, game);
@@ -69,11 +64,11 @@ class DeicideExileEffect extends SearchTargetGraveyardHandLibraryForCardNameAndE
         // if it is a God. For each of the Gods in the Theros block, it won't matter what your
         // devotion to its color(s) was. The card is a God card when not on the battlefield.
         Card cardInExile = game.getExile().getCard(targetEnchantment.getId(), game);
-        if (cardInExile != null && cardInExile.hasSubtype(SubType.GOD, game)) {
-            Player enchantmentController = game.getPlayer(targetEnchantment.getControllerId());
-            return enchantmentController != null && super.applySearchAndExile(game, source, cardInExile.getName(), enchantmentController.getId());
+        if (cardInExile == null || !cardInExile.hasSubtype(SubType.GOD, game)) {
+            return false;
         }
-        return false;
+        Player enchantmentController = game.getPlayer(targetEnchantment.getControllerId());
+        return enchantmentController != null && super.applySearchAndExile(game, source, cardInExile, enchantmentController.getId());
     }
 
     @Override

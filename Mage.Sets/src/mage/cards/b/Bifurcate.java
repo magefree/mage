@@ -1,4 +1,3 @@
-
 package mage.cards.b;
 
 import mage.abilities.Ability;
@@ -11,7 +10,7 @@ import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterPermanentCard;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.predicate.mageobject.SharesNamePredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -21,10 +20,10 @@ import mage.target.common.TargetCreaturePermanent;
 import java.util.UUID;
 
 /**
- *
  * @author ciaccona007
  */
 public final class Bifurcate extends CardImpl {
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nontoken creatures");
 
     static {
@@ -67,9 +66,12 @@ class BifurcateEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent == null) {
+            return false;
+        }
         FilterCard filter = new FilterPermanentCard();
-        filter.add(new NamePredicate(permanent.getName()));
+        filter.add(new SharesNamePredicate(permanent));
         return new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)).apply(game, source);
     }
 }

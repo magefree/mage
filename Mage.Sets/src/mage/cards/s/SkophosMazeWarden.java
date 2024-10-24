@@ -82,7 +82,7 @@ class SkophosMazeWardenTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null
                 || !permanent.isControlledBy(getControllerId())
                 || !permanent.isLand(game)
-                || !permanent.getName().equals("Labyrinth of Skophos")) {
+                || !permanent.hasName("Labyrinth of Skophos", game)) {
             return false;
         }
         Permanent creature = game.getPermanent(event.getTargetId());

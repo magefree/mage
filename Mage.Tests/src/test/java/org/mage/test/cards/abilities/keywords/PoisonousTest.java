@@ -23,7 +23,7 @@ public class PoisonousTest extends CardTestPlayerBase {
         int permanentCount = 0;
         Permanent found = null;
         for (Permanent permanent : currentGame.getBattlefield().getAllActivePermanents(player.getId())) {
-            if (permanent.getName().equals(cardName)) {
+            if (permanent.hasName(cardName, currentGame)) {
                 found = permanent;
                 permanentCount++;
             }
@@ -44,8 +44,6 @@ public class PoisonousTest extends CardTestPlayerBase {
 
         Assert.assertEquals("Ability count mismatch (" + ability.getRule() + "). Expected " + count + ", got " + abilityCount, count, abilityCount);
     }
-
-
 
 
     @Test

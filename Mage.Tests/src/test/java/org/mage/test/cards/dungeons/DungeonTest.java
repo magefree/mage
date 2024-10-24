@@ -69,7 +69,7 @@ public class DungeonTest extends CardTestPlayerBase {
             return;
         }
         Assert.assertNotNull("Dungeon should not be null", dungeon);
-        Assert.assertEquals("Dungeon should be " + dungeonName, dungeonName, dungeon.getName());
+        Assert.assertTrue("Dungeon should be " + dungeonName, dungeon.hasName(dungeonName, currentGame));
         Assert.assertEquals(
                 "Current room is " + roomName,
                 roomName, dungeon.getCurrentRoom().getName()

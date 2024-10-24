@@ -1,7 +1,5 @@
-
 package mage.cards.m;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -9,23 +7,27 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileAllEffect;
-import mage.abilities.effects.common.ExileGraveyardAllPlayersEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
+import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
 
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 /**
- *
  * @author TheElk801
  */
 public final class MoratoriumStone extends CardImpl {
@@ -81,15 +83,31 @@ class MoratoriumStoneEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
-        if (card == null) {
+        Player player = game.getPlayer(source.getControllerId());
+        Card card = game.getCard(getTargetPointer().getFirst(game, source));
+        if (player == null || card == null) {
             return false;
         }
-        String cardName = card.getName();
-        FilterCard filter1 = new FilterCard();
-        filter1.add(new NamePredicate(cardName));
-        FilterPermanent filter2 = new FilterPermanent();
-        filter2.add(new NamePredicate(cardName));
-        return new ExileGraveyardAllPlayersEffect(filter1).apply(game, source) && new ExileAllEffect(filter2).apply(game, source);
+        Set<Card> cards = game
+                .getState()
+                .getPlayersInRange(source.getControllerId(), game)
+                .stream()
+                .map(game::getPlayer)
+                .filter(Objects::nonNull)
+                .map(Player::getGraveyard)
+                .map(g -> g.getCards(game))
+                .flatMap(Collection::stream)
+                .filter(c -> c.sharesName(card, game))
+                .collect(Collectors.toSet());
+        cards.add(card);
+        game.getBattlefield()
+                .getActivePermanents(
+                        StaticFilters.FILTER_PERMANENT,
+                        source.getControllerId(), source, game
+                )
+                .stream()
+                .filter(permanent -> permanent.sharesName(card, game))
+                .forEach(cards::add);
+        return player.moveCards(card, Zone.EXILED, source, game);
     }
 }

@@ -26,6 +26,7 @@ import mage.util.SubTypes;
 import java.lang.reflect.Constructor;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -279,6 +280,11 @@ public abstract class Plane extends CommandObjectImpl {
 
     @Override
     public void setIsAllNonbasicLandTypes(Game game, boolean value) {
+    }
+
+    @Override
+    public boolean hasName(String name, Game game) {
+        return Objects.equals(name, getName());
     }
 
     public void discardEffects() {

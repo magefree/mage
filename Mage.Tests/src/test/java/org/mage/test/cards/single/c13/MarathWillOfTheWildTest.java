@@ -39,7 +39,7 @@ public class MarathWillOfTheWildTest extends CardTestCommanderDuelBase {
             ManaPaidSourceWatcher watcher = game.getState().getWatcher(ManaPaidSourceWatcher.class);
             Permanent perm = game.getBattlefield().getAllPermanents()
                     .stream()
-                    .filter(p -> p.getName().equals("Marath, Will of the Wild"))
+                    .filter(p -> p.hasName("Marath, Will of the Wild", currentGame))
                     .findFirst()
                     .orElse(null);
             Assert.assertNotNull(perm);

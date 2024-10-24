@@ -33,7 +33,7 @@ public class EssenceOfTheWildTest extends CardTestPlayerBase {
 
     private Permanent findOriginPermanent(Game game, String permName) {
         for (Permanent perm : game.getBattlefield().getAllActivePermanents()) {
-            if (!perm.isCopy() && perm.getName().equals(permName)) {
+            if (!perm.isCopy() && perm.hasName(permName, currentGame)) {
                 return perm;
             }
         }

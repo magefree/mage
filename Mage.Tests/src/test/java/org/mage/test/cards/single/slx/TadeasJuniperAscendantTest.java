@@ -29,7 +29,7 @@ public class TadeasJuniperAscendantTest extends CardTestPlayerBase {
     private Permanent getBlocker(String blocker, mage.game.Game game) {
         return game.getBattlefield().getAllActivePermanents()
                 .stream()
-                .filter(p -> p.getName().equals(blocker))
+                .filter(p -> p.hasName(blocker, currentGame))
                 .findFirst()
                 .get();
     }

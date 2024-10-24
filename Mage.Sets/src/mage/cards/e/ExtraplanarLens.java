@@ -1,7 +1,5 @@
-
 package mage.cards.e;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -11,11 +9,7 @@ import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -27,8 +21,9 @@ import mage.target.common.TargetLandPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class ExtraplanarLens extends CardImpl {
@@ -123,8 +118,8 @@ class ExtraplanarLensTriggeredAbility extends TriggeredManaAbility {
             Card imprinted = game.getCard(extraplanarLens.getImprinted().get(0));
             if (imprinted != null
                     && game.getState().getZone(imprinted.getId()) == Zone.EXILED) {
-                if (landTappedForMana.getName().equals(imprinted.getName())
-                        && landTappedForMana.isLand(game)) {
+                if (landTappedForMana.isLand(game)
+                        && landTappedForMana.sharesName(imprinted, game)) {
                     ManaEvent mEvent = (ManaEvent) event;
                     for (Effect effect : getEffects()) {
                         effect.setValue("mana", mEvent.getMana());

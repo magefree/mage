@@ -259,6 +259,11 @@ public abstract class Emblem extends CommandObjectImpl {
     public void setIsAllNonbasicLandTypes(Game game, boolean value) {
     }
 
+    @Override
+    public boolean hasName(String name, Game game) {
+        return false;
+    }
+
     public void discardEffects() {
         for (Ability ability : abilities) {
             for (Effect effect : ability.getEffects()) {

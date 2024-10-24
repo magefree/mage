@@ -1,25 +1,25 @@
-
 package mage.cards.a;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
- *
  * @author LevelX2
  */
 public final class AwakenedAmalgam extends CardImpl {
@@ -32,8 +32,9 @@ public final class AwakenedAmalgam extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Awakened Amalgam's power and toughness are each equal to the number of differently named lands you control.
-        DynamicValue value = (new AwakenedAmalgamLandNamesCount());
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(value)));
+        this.addAbility(new SimpleStaticAbility(
+                Zone.ALL, new SetBasePowerToughnessSourceEffect(AwakenedAmalgamValue.instance)
+        ).addHint(AwakenedAmalgamValue.getHint()));
     }
 
     private AwakenedAmalgam(final AwakenedAmalgam card) {
@@ -46,24 +47,26 @@ public final class AwakenedAmalgam extends CardImpl {
     }
 }
 
-class AwakenedAmalgamLandNamesCount implements DynamicValue {
+enum AwakenedAmalgamValue implements DynamicValue {
+    instance;
+    private static final Hint hint = new ValueHint("Differently named lands you control", instance);
 
-    public AwakenedAmalgamLandNamesCount() {
+    public static Hint getHint() {
+        return hint;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Set<String> landNames = new HashSet<>();
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(sourceAbility.getControllerId())) {
-            if (permanent.isLand(game)) {
-                landNames.add(permanent.getName());
-            }
-        }
-        return landNames.size();
+        return CardUtil.differentlyNamedAmongCollection(
+                game.getBattlefield().getActivePermanents(
+                        StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND,
+                        sourceAbility.getControllerId(), sourceAbility, game
+                ), game
+        );
     }
 
     @Override
-    public AwakenedAmalgamLandNamesCount copy() {
+    public AwakenedAmalgamValue copy() {
         return this;
     }
 

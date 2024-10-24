@@ -39,7 +39,7 @@ public class TravelersCloakTest extends CardTestPlayerBase {
         runCode("check blocking", 1, PhaseStep.DECLARE_BLOCKERS, playerB, (info, player, game) -> {
             Permanent blocker = game.getBattlefield().getAllActivePermanents()
                     .stream()
-                    .filter(p -> p.getName().equals("Kitesail Corsair"))
+                    .filter(p -> p.hasName("Kitesail Corsair", currentGame))
                     .findFirst()
                     .get();
             Assert.assertFalse("Grizzly Bears must be protected from blocking by Kitesail Corsair",

@@ -150,7 +150,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
         Map<String, List<Card>> realServerStats = new LinkedHashMap<>();
         currentGame.getBattlefield().getAllPermanents()
                 .stream()
-                .filter(card -> card.getName().equals(tokenName))
+                .filter(card -> card.hasName(tokenName, currentGame))
                 .filter(card -> card instanceof PermanentToken)
                 .sorted(Comparator.comparing(Card::getExpansionSetCode))
                 .forEach(card -> {
@@ -267,7 +267,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
     private void assert_TokenOrCardImageNumber(String tokenOrCardName, List<Integer> needUniqueImages) {
         Set<Integer> serverStats = currentGame.getBattlefield().getAllPermanents()
                 .stream()
-                .filter(card -> card.getName().equals(tokenOrCardName))
+                .filter(card -> card.hasName(tokenOrCardName, currentGame))
                 .filter(card -> card instanceof MageObjectImpl)
                 .sorted(Comparator.comparing(Card::getExpansionSetCode))
                 .map(card -> (MageObjectImpl) card)

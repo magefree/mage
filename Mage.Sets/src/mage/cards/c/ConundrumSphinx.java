@@ -14,7 +14,6 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -81,7 +80,7 @@ class ConundrumSphinxEffect extends OneShotEffect {
             }
             Cards cards = new CardsImpl(card);
             player.revealCards(source, cards, game);
-            if (CardUtil.haveSameNames(card, cardName, game)) {
+            if (card.hasName(cardName, game)) {
                 player.moveCards(cards, Zone.HAND, source, game);
             } else {
                 player.putCardsOnBottomOfLibrary(cards, game, source, false);

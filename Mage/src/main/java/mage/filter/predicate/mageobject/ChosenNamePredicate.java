@@ -5,7 +5,6 @@ import mage.abilities.effects.common.ChooseACardNameEffect;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.util.CardUtil;
 
 /**
  * To be used with ChooseACardNameEffect
@@ -20,7 +19,7 @@ public enum ChosenNamePredicate implements ObjectSourcePlayerPredicate<MageObjec
         String cardName = (String) game.getState().getValue(
                 input.getSourceId().toString() + ChooseACardNameEffect.INFO_KEY
         );
-        return CardUtil.haveSameNames(input.getObject().getName(), cardName);
+        return input.getObject().hasName(cardName, game);
     }
 
     @Override
