@@ -142,7 +142,7 @@ public class TransformAbility extends SimpleStaticAbility {
 class TransformEffect extends ContinuousEffectImpl {
 
     TransformEffect() {
-        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.CopyEffects_1a, Outcome.BecomeCreature);
+        super(Duration.WhileOnBattlefield, Layer.TransformCharacteristics_0, SubLayer.NA, Outcome.BecomeCreature);
         staticText = "";
     }
 
