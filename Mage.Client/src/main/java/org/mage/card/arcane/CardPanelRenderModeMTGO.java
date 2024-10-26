@@ -316,7 +316,7 @@ public class CardPanelRenderModeMTGO extends CardPanel {
     }
 
     private CardPanelAttributes getAttributes() {
-        return new CardPanelAttributes(getCardWidth(), getCardHeight(), isChoosable(), isSelected(), isTransformed());
+        return new CardPanelAttributes(getCardWidth(), getCardHeight(), isChoosable(), isSelected(), isTransformed(), getCard().isPowerPerpetuallyAffected(), getCard().isToughnessPerpetuallyAffected());
     }
 
     /**

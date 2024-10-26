@@ -9,8 +9,11 @@ import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.effects.common.continuous.BoostTargetPerpetuallyEffect;
+import mage.abilities.effects.common.continuous.SetBasePowerToughnessTargetPerpetuallyEffect;
 import mage.abilities.hint.HintUtils;
 import mage.abilities.icon.CardIcon;
 import mage.abilities.icon.CardIconImpl;
@@ -71,6 +74,8 @@ public class CardView extends SimpleCardView {
     protected String loyalty = "";
     @Expose
     protected String defense = "";
+    protected boolean isPowerPerpetuallyAffected = false;
+    protected boolean isToughnessPerpetuallyAffected = false;
     protected String startingLoyalty;
     protected String startingDefense;
     protected List<CardType> cardTypes;
@@ -346,6 +351,37 @@ public class CardView extends SimpleCardView {
                 // TODO: research, why it used here?
                 this.zone = cardZone;
             }
+            List<ContinuousEffect> perpetualEffects = game.getContinuousEffects().getPerpetuallyEffectsByCard(card, game);
+            if(perpetualEffects.stream()
+                    .anyMatch(eff -> eff instanceof BoostTargetPerpetuallyEffect
+                            || eff instanceof SetBasePowerToughnessTargetPerpetuallyEffect)) {
+
+                if (perpetualEffects.stream()
+                        .anyMatch(eff -> eff instanceof BoostTargetPerpetuallyEffect
+                                && ((BoostTargetPerpetuallyEffect) eff).affectsPower(game))) {
+                    this.isPowerPerpetuallyAffected = true;
+                }
+
+
+                if (perpetualEffects.stream()
+                        .anyMatch(eff -> eff instanceof BoostTargetPerpetuallyEffect
+                                && ((BoostTargetPerpetuallyEffect) eff).affectsToughness(game))) {
+                    this.isToughnessPerpetuallyAffected = true;
+                }
+
+                if (perpetualEffects.stream()
+                        .anyMatch(eff -> eff instanceof SetBasePowerToughnessTargetPerpetuallyEffect
+                                && ((SetBasePowerToughnessTargetPerpetuallyEffect) eff).affectsPower())) {
+                    this.isPowerPerpetuallyAffected = true;
+                }
+
+
+                if (perpetualEffects.stream()
+                        .anyMatch(eff -> eff instanceof SetBasePowerToughnessTargetPerpetuallyEffect
+                                && ((SetBasePowerToughnessTargetPerpetuallyEffect) eff).affectsToughness())) {
+                    this.isToughnessPerpetuallyAffected = true;
+                }
+            }
         }
 
         // FACE DOWN
@@ -372,7 +408,7 @@ public class CardView extends SimpleCardView {
                 this.color = card.getColor(null).copy();
                 this.superTypes = new ArrayList<>(card.getSuperType());
                 this.subTypes = card.getSubtype().copy();
-                this.rules = new ArrayList<>(card.getRules());
+                this.rules = new ArrayList<>(card.getRules(game));
             }
 
             // GUI: enable day/night button to view original face up card
@@ -1219,10 +1255,16 @@ public class CardView extends SimpleCardView {
         return power;
     }
 
+    public boolean isPowerPerpetuallyAffected() {
+        return isPowerPerpetuallyAffected;
+    }
     public String getToughness() {
         return toughness;
     }
 
+    public boolean isToughnessPerpetuallyAffected() {
+        return isToughnessPerpetuallyAffected;
+    }
     public String getLoyalty() {
         return loyalty;
     }

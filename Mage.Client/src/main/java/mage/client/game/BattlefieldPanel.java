@@ -153,6 +153,9 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
             MagePermanent oldMagePermanent = oldFound == null ? null : (MagePermanent) oldFound.getMainPanel();
 
             // Check if there was a change in the power or toughness of the permanent
+            if(permanent.isPowerPerpetuallyAffected() || permanent.isToughnessPerpetuallyAffected()) {
+                changed = true;
+            }
             int permanentPower = 0;
             int permanentToughness = 0;
             int oldMagePermanentPower = 0;
@@ -223,6 +226,11 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                         } else if (counters1 != null && counters2 != null && counters1.size() != counters2.size()) {
                             changed = true;
                         }
+                    }
+
+                    // Check for power or toughness being perpetually affected
+                    if(permanent.isPowerPerpetuallyAffected() || permanent.isToughnessPerpetuallyAffected()) {
+                        changed = true;
                     }
                 }
                 oldMagePermanent.update(permanent);
