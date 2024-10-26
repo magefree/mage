@@ -196,10 +196,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean canLoseByZeroOrLessLife();
 
-    void setPlayCardsFromGraveyard(boolean playCardsFromGraveyard);
-
-    boolean canPlayCardsFromGraveyard();
-
     void setPlotFromTopOfLibrary(boolean canPlotFromTopOfLibrary);
 
     boolean canPlotFromTopOfLibrary();

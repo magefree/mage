@@ -20,6 +20,7 @@ import java.util.UUID;
 public class PlayFromGraveyardControllerEffect extends AsThoughEffectImpl {
 
     private static final FilterCard filterPlayLands = new FilterLandCard("lands");
+    private static final FilterCard filterPlayCast = new FilterCard("play lands and cast spells");
 
     private final FilterCard filter;
 
@@ -28,6 +29,13 @@ public class PlayFromGraveyardControllerEffect extends AsThoughEffectImpl {
      */
     public static PlayFromGraveyardControllerEffect playLands() {
         return new PlayFromGraveyardControllerEffect(filterPlayLands);
+    }
+
+    /**
+     * You may play lands and cast spells from your graveyard.
+     */
+    public static PlayFromGraveyardControllerEffect playLandsAndCastSpells(Duration duration) {
+        return new PlayFromGraveyardControllerEffect(filterPlayCast, duration);
     }
 
     /**
