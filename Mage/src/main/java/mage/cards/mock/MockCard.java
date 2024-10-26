@@ -20,8 +20,8 @@ import java.util.List;
  */
 public class MockCard extends CardImpl implements MockableCard {
 
-    static public String ADVENTURE_NAME_SEPARATOR = " // ";
-    static public String MODAL_DOUBLE_FACES_NAME_SEPARATOR = " // ";
+    public static String ADVENTURE_NAME_SEPARATOR = " // ";
+    public static String MODAL_DOUBLE_FACES_NAME_SEPARATOR = " // ";
 
     // Needs to be here, as it is normally calculated from the
     // PlaneswalkerEntersWithLoyaltyAbility of the card... but the MockCard

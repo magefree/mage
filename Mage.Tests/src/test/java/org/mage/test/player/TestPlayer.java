@@ -54,13 +54,14 @@ import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 import java.io.Serializable;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl.*;
 
 /**
  * Basic implementation of testable player
@@ -90,15 +91,16 @@ public class TestPlayer implements Player {
 
     // warning, test player do not restore own data by game rollback
 
-    // full playable AI, TODO: can be deleted?
-    private boolean AIPlayer;
+    // full playable AI
+    private boolean AIPlayer; // TODO: better rename
     // AI simulates a real game, e.g. ignores strict mode and play command/priority, see aiXXX commands
     // true - unit tests uses real AI logic (e.g. AI hints and AI workarounds in cards)
-    // false - unit tests uses Human logic and dialogs
+    // false - unit tests uses Human logic and dialogs (in non-strict mode AI replace miss target/choice commands)
     private boolean AIRealGameSimulation = false;
+    private PhaseStep AIRealGameControlUntil = null; // enable temporary AI control until some point in time
 
     private final List<PlayerAction> actions = new ArrayList<>();
-    private final Map<PlayerAction, PhaseStep> actionsToRemoveLater = new HashMap<>(); // remove actions later, on next step (e.g. for AI commands)
+    //private final Map<PlayerAction, PhaseStep> actionsToRemoveLater = new HashMap<>(); // remove actions after some step (used for AI commands)
     private final Map<Integer, HashMap<UUID, ArrayList<PlayerAction>>> rollbackActions = new HashMap<>(); // actions to add after a executed rollback
     private final List<String> choices = new ArrayList<>(); // choices stack for choice
     private final List<String> targets = new ArrayList<>(); // targets stack for choose (it's uses on empty direct target by cast command)
@@ -140,6 +142,7 @@ public class TestPlayer implements Player {
     public TestPlayer(final TestPlayer testPlayer) {
         this.AIPlayer = testPlayer.AIPlayer;
         this.AIRealGameSimulation = testPlayer.AIRealGameSimulation;
+        this.AIRealGameControlUntil = testPlayer.AIRealGameControlUntil;
         this.foundNoAction = testPlayer.foundNoAction;
         this.actions.addAll(testPlayer.actions);
         this.choices.addAll(testPlayer.choices);
@@ -573,17 +576,23 @@ public class TestPlayer implements Player {
 
     @Override
     public boolean priority(Game game) {
-        // later remove actions (ai commands related)
-        if (actionsToRemoveLater.size() > 0) {
-            List<PlayerAction> removed = new ArrayList<>();
-            actionsToRemoveLater.forEach((action, step) -> {
-                if (game.getTurnStepType() != step) {
-                    action.onActionRemovedLater(game, this);
-                    actions.remove(action);
-                    removed.add(action);
-                }
-            });
-            removed.forEach(actionsToRemoveLater::remove);
+        boolean oldControl = AIRealGameSimulation;
+        if (AIPlayer) {
+            // full AI control
+            changeAIControl(game, true);
+        } else {
+            // temporary AI control
+            // after enabled on priority it must work until end of the priority
+            // e.g. AI can be called multiple times in complex choices
+            if (game.getTurnStepType().equals(PhaseStep.UPKEEP)) {
+                // reset
+                AIRealGameControlUntil = null;
+                changeAIControl(game, false);
+            } else {
+                // setup
+                boolean enable = AIRealGameControlUntil != null && game.getTurnStepType().getIndex() <= AIRealGameControlUntil.getIndex();
+                changeAIControl(game, enable);
+            }
         }
 
         // fake test ability for triggers and events
@@ -746,19 +755,31 @@ public class TestPlayer implements Player {
                     String command = action.getAction();
                     command = command.substring(command.indexOf(AI_PREFIX) + AI_PREFIX.length());
 
-                    // play priority
-                    if (command.equals(AI_COMMAND_PLAY_PRIORITY)) {
-                        AIRealGameSimulation = true; // disable on action's remove
+                    // play single priority, two modes support:
+                    // - really single priority
+                    // - multiple priorities until empty stack
+                    if (command.startsWith(AI_COMMAND_PLAY_PRIORITY)) {
+                        boolean needEmptyStack = Boolean.parseBoolean(command.split(AI_PARAM_DELIMETER)[1]);
+                        changeAIControl(game, true);
                         computerPlayer.priority(game);
-                        actions.remove(action);
+                        if (!needEmptyStack || game.getStack().isEmpty()) {
+                            changeAIControl(game, false);
+                            actions.remove(action);
+                            computerPlayer.resetPassed(); // remove AI's pass, so runtime/check commands can be executed in same priority
+                        }
+                        // control will be disabled on next priority, not here
+                        // (require to process triggers and other non-direct actions and choices)
                         return true;
                     }
 
-                    // play step
-                    if (command.equals(AI_COMMAND_PLAY_STEP)) {
-                        AIRealGameSimulation = true; // disable on action's remove
-                        actionsToRemoveLater.put(action, game.getTurnStepType());
+                    // play multiple priorities on one or multiple steps
+                    if (command.startsWith(AI_COMMAND_PLAY_STEP)) {
+                        PhaseStep endStep = PhaseStep.fromString(command.split(AI_PARAM_DELIMETER)[1]);
+                        changeAIControl(game, true); // enable AI
+                        AIRealGameControlUntil = endStep; // disable on end step
                         computerPlayer.priority(game);
+                        actions.remove(action);
+                        computerPlayer.resetPassed(); // remove AI's pass, so runtime/check commands can be executed in same priority
                         return true;
                     }
 
@@ -1087,6 +1108,7 @@ public class TestPlayer implements Player {
             } // turn/step
         }
 
+        // normal priority (by AI or pass)
         tryToPlayPriority(game);
 
         // check to prevent endless loops
@@ -1101,6 +1123,16 @@ public class TestPlayer implements Player {
             foundNoAction = 0;
         }
         return false;
+    }
+
+    private void changeAIControl(Game game, boolean enable) {
+        if (AIRealGameSimulation != enable) {
+            LOGGER.info("AI control for " + getName()
+                    + " " + (enable ? "ENABLED" : "DISABLED")
+                    //+ " on T" + game.getTurnNum() + "." + game.getTurnStepType().getStepShortText());
+                    + " on " + game);
+        }
+        AIRealGameSimulation = enable;
     }
 
     /**
@@ -1130,7 +1162,7 @@ public class TestPlayer implements Player {
     }
 
     private void tryToPlayPriority(Game game) {
-        if (AIPlayer) {
+        if (AIPlayer || AIRealGameSimulation) {
             computerPlayer.priority(game);
         } else {
             computerPlayer.pass(game);
@@ -1788,16 +1820,6 @@ public class TestPlayer implements Player {
         boolean madeAttackByAction = false;
         for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext(); ) {
             PlayerAction action = it.next();
-
-            // aiXXX commands
-            if (action.getTurnNum() == game.getTurnNum() && action.getAction().equals(AI_PREFIX + AI_COMMAND_PLAY_STEP)) {
-                mustAttackByAction = true;
-                madeAttackByAction = true;
-                this.computerPlayer.selectAttackers(game, attackingPlayerId);
-                // play step action will be removed on step end
-                continue;
-            }
-
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
                 mustAttackByAction = true;
                 String command = action.getAction();
@@ -1861,7 +1883,7 @@ public class TestPlayer implements Player {
         }
 
         // AI FULL play if no actions available
-        if (!mustAttackByAction && this.AIPlayer) {
+        if (!mustAttackByAction && (this.AIPlayer || this.AIRealGameSimulation)) {
             this.computerPlayer.selectAttackers(game, attackingPlayerId);
         }
     }
@@ -1879,15 +1901,6 @@ public class TestPlayer implements Player {
 
         boolean mustBlockByAction = false;
         for (PlayerAction action : tempActions) {
-
-            // aiXXX commands
-            if (action.getTurnNum() == game.getTurnNum() && action.getAction().equals(AI_PREFIX + AI_COMMAND_PLAY_STEP)) {
-                mustBlockByAction = true;
-                this.computerPlayer.selectBlockers(source, game, defendingPlayerId);
-                // play step action will be removed on step end
-                continue;
-            }
-
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("block:")) {
                 mustBlockByAction = true;
                 String command = action.getAction();
@@ -1916,7 +1929,7 @@ public class TestPlayer implements Player {
         checkMultipleBlockers(game, blockedCreaturesList);
 
         // AI FULL play if no actions available
-        if (!mustBlockByAction && this.AIPlayer) {
+        if (!mustBlockByAction && (this.AIPlayer || this.AIRealGameSimulation)) {
             this.computerPlayer.selectBlockers(source, game, defendingPlayerId);
         }
     }
@@ -4604,10 +4617,6 @@ public class TestPlayer implements Player {
 
     public ComputerPlayer getComputerPlayer() {
         return computerPlayer;
-    }
-
-    public void setAIRealGameSimulation(boolean AIRealGameSimulation) {
-        this.AIRealGameSimulation = AIRealGameSimulation;
     }
 
     public Map<Integer, HashMap<UUID, ArrayList<org.mage.test.player.PlayerAction>>> getRollbackActions() {

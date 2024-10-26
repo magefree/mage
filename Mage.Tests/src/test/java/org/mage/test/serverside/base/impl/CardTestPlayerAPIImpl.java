@@ -27,14 +27,11 @@ import mage.player.ai.ComputerPlayerMCTS;
 import mage.players.ManaPool;
 import mage.players.Player;
 import mage.server.game.GameSessionPlayer;
+import mage.util.CardUtil;
 import mage.util.ThreadUtils;
 import mage.utils.SystemUtil;
-import mage.util.CardUtil;
 import mage.view.GameView;
 import org.junit.Assert;
-
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Before;
 import org.mage.test.player.PlayerAction;
 import org.mage.test.player.TestPlayer;
@@ -47,6 +44,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static org.junit.Assert.assertTrue;
 
 /**
  * API for test initialization and asserting the test results.
@@ -61,10 +60,11 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     private static final boolean SHOW_EXECUTE_TIME_PER_TEST = false;
 
     public static final String ALIAS_PREFIX = "@"; // don't change -- it uses in user's tests
-    public static final String CHECK_PARAM_DELIMETER = "#";
     public static final String CHECK_PREFIX = "check:"; // prefix for all check commands
+    public static final String CHECK_PARAM_DELIMETER = "#";
     public static final String SHOW_PREFIX = "show:"; // prefix for all show commands
     public static final String AI_PREFIX = "ai:"; // prefix for all ai commands
+    public static final String AI_PARAM_DELIMETER = "#";
     public static final String RUN_PREFIX = "run:"; // prefix for all run commands
 
     // prefix for activate commands
@@ -1769,36 +1769,59 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
      * AI play one PRIORITY with multi game simulations like real game
      * (calcs and play ONE best action, can be called with stack)
      * All choices must be made by AI (e.g.strict mode possible)
-     *
-     * @param turnNum
-     * @param step
-     * @param player
+     * <p>
+     * Warning, by default it will take control until stack resolved
      */
     public void aiPlayPriority(int turnNum, PhaseStep step, TestPlayer player) {
+        aiPlayPriority(turnNum, step, player, true);
+    }
+
+    /**
+     * AI play one PRIORITY
+     *
+     * @param untilStackResolved use false to stop AI after first cast
+     */
+    public void aiPlayPriority(int turnNum, PhaseStep step, TestPlayer player, boolean untilStackResolved) {
         assertAiPlayAndGameCompatible(player);
-        addPlayerAction(player, createAIPlayerAction(turnNum, step, AI_COMMAND_PLAY_PRIORITY));
+        addPlayerAction(player, createAIPlayerAction(turnNum, step, AI_COMMAND_PLAY_PRIORITY + AI_PARAM_DELIMETER + untilStackResolved));
     }
 
     /**
      * AI play STEP to the end with multi game simulations (calcs and play best
-     * actions until step ends, can be called in the middle of the step) All
-     * choices must be made by AI (e.g. strict mode possible)
+     * actions until step ends, can be called in the middle of the step)
+     * All choices must be made by AI (e.g. strict mode possible)
      * <p>
      * Can be used for AI's declare of attackers/blockers
      */
     public void aiPlayStep(int turnNum, PhaseStep step, TestPlayer player) {
+        aiPlayStep(turnNum, step, step, player);
+    }
+
+    public void aiPlayStep(int turnNum, PhaseStep startStep, PhaseStep endStep, TestPlayer player) {
         assertAiPlayAndGameCompatible(player);
-        addPlayerAction(player, createAIPlayerAction(turnNum, step, AI_COMMAND_PLAY_STEP));
+
+        // direct steps support removed to simplify AI enabling code
+        // (no needs in code duplicating in selectAttackers and selectBlockers methods anymore)
+        if (startStep == PhaseStep.DECLARE_ATTACKERS
+                || startStep == PhaseStep.DECLARE_BLOCKERS) {
+            PhaseStep newStartStep = PhaseStep.BEGIN_COMBAT;
+            PhaseStep newEndStep = endStep == startStep ? PhaseStep.END_COMBAT : endStep;
+            aiPlayStep(turnNum, newStartStep, newEndStep, player);
+            return;
+        }
+
+        if (startStep == PhaseStep.UPKEEP
+                || startStep == PhaseStep.CLEANUP
+                || startStep == PhaseStep.FIRST_COMBAT_DAMAGE
+                || startStep == PhaseStep.COMBAT_DAMAGE) {
+            Assert.fail("AI can't be started from step without priority");
+        }
+
+        addPlayerAction(player, createAIPlayerAction(turnNum, startStep, AI_COMMAND_PLAY_STEP + AI_PARAM_DELIMETER + endStep.toString()));
     }
 
     public PlayerAction createAIPlayerAction(int turnNum, PhaseStep step, String aiCommand) {
-        // AI commands must disable and enable real game simulation and strict mode
-        return new PlayerAction("", turnNum, step, AI_PREFIX + aiCommand) {
-            @Override
-            public void onActionRemovedLater(Game game, TestPlayer player) {
-                player.setAIRealGameSimulation(false);
-            }
-        };
+        return new PlayerAction("", turnNum, step, AI_PREFIX + aiCommand);
     }
 
     private void assertAiPlayAndGameCompatible(TestPlayer player) {
