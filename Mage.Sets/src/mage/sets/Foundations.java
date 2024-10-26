@@ -30,6 +30,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodtithe Collector", 516, Rarity.UNCOMMON, mage.cards.b.BloodtitheCollector.class));
         cards.add(new SetCardInfo("Cloudblazer", 653, Rarity.UNCOMMON, mage.cards.c.Cloudblazer.class));
         cards.add(new SetCardInfo("Crossway Troublemakers", 518, Rarity.RARE, mage.cards.c.CrosswayTroublemakers.class));
+        cards.add(new SetCardInfo("Crypt Feaster", 59, Rarity.COMMON, mage.cards.c.CryptFeaster.class));
         cards.add(new SetCardInfo("Darksteel Colossus", 671, Rarity.MYTHIC, mage.cards.d.DarksteelColossus.class));
         cards.add(new SetCardInfo("Day of Judgment", 140, Rarity.RARE, mage.cards.d.DayOfJudgment.class));
         cards.add(new SetCardInfo("Deathmark", 601, Rarity.UNCOMMON, mage.cards.d.Deathmark.class));
