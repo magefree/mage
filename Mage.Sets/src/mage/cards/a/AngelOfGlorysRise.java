@@ -1,31 +1,30 @@
-
 package mage.cards.a;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileAllEffect;
+import mage.abilities.effects.common.ReturnFromYourGraveyardToBattlefieldAllEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
- *
- * @author jeffwadsworth
+ * @author xenohedron
  */
 public final class AngelOfGlorysRise extends CardImpl {
+
+    private static final FilterPermanent filterZombie = new FilterPermanent(SubType.ZOMBIE , "Zombies");
+    private static final FilterCreatureCard filterHuman = new FilterCreatureCard("Human creature cards");
+    static {
+        filterHuman.add(SubType.HUMAN.getPredicate());
+    }
 
     public AngelOfGlorysRise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{W}{W}");
@@ -37,7 +36,8 @@ public final class AngelOfGlorysRise extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // When Angel of Glory's Rise enters the battlefield, exile all Zombies, then return all Human creature cards from your graveyard to the battlefield.
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new AngelOfGlorysRiseEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileAllEffect(filterZombie));
+        ability.addEffect(new ReturnFromYourGraveyardToBattlefieldAllEffect(filterHuman).concatBy(", then"));
         this.addAbility(ability);
     }
 
@@ -48,36 +48,5 @@ public final class AngelOfGlorysRise extends CardImpl {
     @Override
     public AngelOfGlorysRise copy() {
         return new AngelOfGlorysRise(this);
-    }
-}
-
-class AngelOfGlorysRiseEffect extends OneShotEffect {
-
-    AngelOfGlorysRiseEffect() {
-        super(Outcome.PutCreatureInPlay);
-        staticText = "exile all Zombies, then return all Human creature cards from your graveyard to the battlefield";
-    }
-
-    private AngelOfGlorysRiseEffect(final AngelOfGlorysRiseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AngelOfGlorysRiseEffect copy() {
-        return new AngelOfGlorysRiseEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            Set<Card> toExile = new HashSet<>(game.getBattlefield()
-                    .getActivePermanents(new FilterCreaturePermanent(SubType.ZOMBIE, "Zombie"), source.getControllerId(), source, game));
-            controller.moveCards(toExile, Zone.EXILED, source, game);
-            FilterCreatureCard filterHuman = new FilterCreatureCard();
-            filterHuman.add(SubType.HUMAN.getPredicate());
-            controller.moveCards(controller.getGraveyard().getCards(filterHuman, game), Zone.BATTLEFIELD, source, game);
-        }
-        return true;
     }
 }
