@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -19,5 +20,7 @@ public final class Aetherdrift extends ExpansionSet {
         this.blockName = "Aetherdrift"; // for sorting in GUI
         this.hasBasicLands = false; // temporary
         this.hasBoosters = false; // temporary
+
+        cards.add(new SetCardInfo("Earthrumbler", 160, Rarity.UNCOMMON, mage.cards.e.Earthrumbler.class));
     }
 }
