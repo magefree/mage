@@ -12,6 +12,7 @@ Alchemy: Dominaria|YDMU|
 Alchemy: Innistrad|Y22|
 Adventures in the Forgotten Realms|AFR|
 Forgotten Realms Commander|AFC|
+Aetherdrift|DFT|
 Aether Revolt|AER|
 Amonkhet|AKH|
 Shards of Alara|ALA|

@@ -564,6 +564,7 @@ public class ScryfallImageSupportCards {
             add("DSK"); // Duskmourn: House of Horror
             add("DSC"); // Duskmourn: House of Horror Commander
             add("FDN"); // Foundations
+            add("DFT"); // Aetherdrift
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
