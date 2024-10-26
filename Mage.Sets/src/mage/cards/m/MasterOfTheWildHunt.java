@@ -122,7 +122,7 @@ class MasterOfTheWildHuntEffect extends OneShotEffect {
         List<Integer> damagesList = player.getMultiAmount(Outcome.Damage, messages, 0, totalDamage, totalDamage, MultiAmountType.DAMAGE, game);
         if (damagesList.size() == wolves.size()) {
             for (int i = 0; i < wolves.size(); i++) {
-                wolves.get(0).damage(damagesList.get(0), target.getId(), source, game, false, true);
+                wolves.get(i).damage(damagesList.get(i), target.getId(), source, game, false, true);
             }
         } else {
             throw new IllegalArgumentException("Wrong code usage: getMultiAmount must return same size");
