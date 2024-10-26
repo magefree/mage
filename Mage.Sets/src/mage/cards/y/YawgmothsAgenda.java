@@ -25,7 +25,7 @@ public final class YawgmothsAgenda extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantCastMoreThanOneSpellEffect(TargetController.YOU)));
 
         // You may play lands and cast spells from your graveyard.
-        this.getSpellAbility().addEffect(PlayFromGraveyardControllerEffect.playLandsAndCastSpells(Duration.WhileOnBattlefield));
+        this.addAbility(new SimpleStaticAbility(PlayFromGraveyardControllerEffect.playLandsAndCastSpells(Duration.WhileOnBattlefield)));
 
         // If a card would be put into your graveyard from anywhere, exile it instead.
         this.addAbility(new SimpleStaticAbility(new GraveyardFromAnywhereExileReplacementEffect(true, false)));
