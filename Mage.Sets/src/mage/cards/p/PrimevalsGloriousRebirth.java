@@ -1,21 +1,25 @@
 package mage.cards.p;
 
-import java.util.UUID;
-
-import mage.abilities.Ability;
 import mage.abilities.common.LegendarySpellAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnFromYourGraveyardToBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SuperType;
 import mage.filter.common.FilterPermanentCard;
-import mage.game.Game;
-import mage.players.Player;
+
+import java.util.UUID;
 
 /**
  * @author JRHerlehy Created on 4/8/18.
  */
 public final class PrimevalsGloriousRebirth extends CardImpl {
+
+    private static final FilterPermanentCard filter = new FilterPermanentCard("legendary permanent cards");
+
+    static {
+        filter.add(SuperType.LEGENDARY.getPredicate());
+    }
 
     public PrimevalsGloriousRebirth(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{5}{W}{B}");
@@ -25,7 +29,7 @@ public final class PrimevalsGloriousRebirth extends CardImpl {
         this.addAbility(new LegendarySpellAbility());
 
         // Return all legendary permanent cards from your graveyard to the battlefield.
-        this.getSpellAbility().addEffect(new PrimevalsGloriousRebirthEffect());
+        this.getSpellAbility().addEffect(new ReturnFromYourGraveyardToBattlefieldAllEffect(filter));
     }
 
     private PrimevalsGloriousRebirth(final PrimevalsGloriousRebirth card) {
@@ -37,37 +41,4 @@ public final class PrimevalsGloriousRebirth extends CardImpl {
         return new PrimevalsGloriousRebirth(this);
     }
 
-}
-
-class PrimevalsGloriousRebirthEffect extends OneShotEffect {
-
-    private static final FilterPermanentCard filter = new FilterPermanentCard();
-
-    static {
-        filter.add(SuperType.LEGENDARY.getPredicate());
-    }
-
-    public PrimevalsGloriousRebirthEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Return all legendary permanent cards from your graveyard to the battlefield";
-    }
-
-    private PrimevalsGloriousRebirthEffect(final PrimevalsGloriousRebirthEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.moveCards(controller.getGraveyard().getCards(filter, game), Zone.BATTLEFIELD, source, game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public PrimevalsGloriousRebirthEffect copy() {
-        return new PrimevalsGloriousRebirthEffect(this);
-    }
 }
