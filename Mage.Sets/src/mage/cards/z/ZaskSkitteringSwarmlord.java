@@ -9,7 +9,7 @@ import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.ruleModifying.PlayLandsFromGraveyardControllerEffect;
+import mage.abilities.effects.common.ruleModifying.PlayFromGraveyardControllerEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ import java.util.UUID;
  */
 public final class ZaskSkitteringSwarmlord extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("lands and cast Insect spells");
+    private static final FilterCard filter = new FilterCard("play lands and cast Insect spells");
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent(SubType.INSECT, "another Insect you control");
     private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent(SubType.INSECT, "Insect");
 
@@ -46,7 +46,7 @@ public final class ZaskSkitteringSwarmlord extends CardImpl {
 
         // You may play lands and cast Insect spells from your graveyard.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new PlayLandsFromGraveyardControllerEffect(filter)
+                new PlayFromGraveyardControllerEffect(filter)
         ));
 
         // Whenever another Insect you control dies, put it on the bottom of its owner's library, then mill two cards.

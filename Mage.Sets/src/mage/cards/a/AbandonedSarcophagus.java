@@ -7,7 +7,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneAllEffect;
+import mage.abilities.effects.common.ruleModifying.PlayFromGraveyardControllerEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.*;
 import mage.constants.*;
@@ -26,7 +26,7 @@ import mage.watchers.Watcher;
  */
 public final class AbandonedSarcophagus extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("nonland cards with cycling");
+    private static final FilterCard filter = new FilterCard("spells that have a cycling ability");
 
     static {
         filter.add(Predicates.not(CardType.LAND.getPredicate()));
@@ -37,11 +37,7 @@ public final class AbandonedSarcophagus extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // You may cast nonland cards with cycling from your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new PlayFromNotOwnHandZoneAllEffect(filter,
-                        Zone.GRAVEYARD, true, TargetController.YOU, Duration.WhileOnBattlefield)
-                        .setText("You may cast nonland cards with cycling from your graveyard"))
-        );
+        this.addAbility(new SimpleStaticAbility(new PlayFromGraveyardControllerEffect(filter)));
 
         // If a card with cycling would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbandonedSarcophagusReplacementEffect()), new AbandonedSarcophagusWatcher());
@@ -101,7 +97,7 @@ class AbandonedSarcophagusReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!(((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD)) {
+        if (((ZoneChangeEvent) event).getToZone() != Zone.GRAVEYARD) {
             return false;
         }
 

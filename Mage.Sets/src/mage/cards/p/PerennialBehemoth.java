@@ -3,7 +3,7 @@ package mage.cards.p;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ruleModifying.PlayLandsFromGraveyardControllerEffect;
+import mage.abilities.effects.common.ruleModifying.PlayFromGraveyardControllerEffect;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -25,7 +25,7 @@ public final class PerennialBehemoth extends CardImpl {
         this.toughness = new MageInt(7);
 
         // You may play land cards from your graveyard.
-        this.addAbility(new SimpleStaticAbility(new PlayLandsFromGraveyardControllerEffect()));
+        this.addAbility(new SimpleStaticAbility(PlayFromGraveyardControllerEffect.playLands()));
 
         // Unearth {G}{G}
         this.addAbility(new UnearthAbility(new ManaCostsImpl<>("{G}{G}")));

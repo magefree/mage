@@ -15,23 +15,58 @@ import mage.players.Player;
 import java.util.UUID;
 
 /**
- * @author JayDi85
+ * @author JayDi85, xenohedron
  */
-public class PlayLandsFromGraveyardControllerEffect extends AsThoughEffectImpl {
+public class PlayFromGraveyardControllerEffect extends AsThoughEffectImpl {
+
+    private static final FilterCard filterPlayLands = new FilterLandCard("lands");
+    private static final FilterCard filterPlayCast = new FilterCard("play lands and cast spells");
 
     private final FilterCard filter;
 
-    public PlayLandsFromGraveyardControllerEffect() {
-        this(new FilterLandCard("lands"));
+    /**
+     * You may play lands from your graveyard.
+     */
+    public static PlayFromGraveyardControllerEffect playLands() {
+        return new PlayFromGraveyardControllerEffect(filterPlayLands);
     }
 
-    public PlayLandsFromGraveyardControllerEffect(FilterCard filter) {
-        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
+    /**
+     * You may play lands and cast spells from your graveyard.
+     */
+    public static PlayFromGraveyardControllerEffect playLandsAndCastSpells(Duration duration) {
+        return new PlayFromGraveyardControllerEffect(filterPlayCast, duration);
+    }
+
+    /**
+     * You may [play/cast xxx] from your graveyard.
+     */
+    public PlayFromGraveyardControllerEffect(FilterCard filter) {
+        this(filter, Duration.WhileOnBattlefield);
+    }
+
+    /**
+     * [Until duration,] you may [play/cast xxx] from your graveyard.
+     */
+    public PlayFromGraveyardControllerEffect(FilterCard filter, Duration duration) {
+        super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
         this.filter = filter;
-        this.staticText = "You may play " + filter.getMessage() + " from your graveyard";
+        String filterMessage = filter.getMessage();
+        if (!filterMessage.startsWith("play ") && !filterMessage.startsWith("cast")) {
+            if (filterMessage.contains("lands")) {
+                filterMessage = "play " + filterMessage;
+            } else {
+                filterMessage = "cast " + filterMessage;
+            }
+        }
+        String durationString = duration.toString();
+        if (!durationString.isEmpty()) {
+            durationString += ", ";
+        }
+        this.staticText = durationString + "you may " + filterMessage + " from your graveyard";
     }
 
-    protected PlayLandsFromGraveyardControllerEffect(final PlayLandsFromGraveyardControllerEffect effect) {
+    protected PlayFromGraveyardControllerEffect(final PlayFromGraveyardControllerEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -41,16 +76,16 @@ public class PlayLandsFromGraveyardControllerEffect extends AsThoughEffectImpl {
         return true;
     }
 
-
     @Override
-    public PlayLandsFromGraveyardControllerEffect copy() {
-        return new PlayLandsFromGraveyardControllerEffect(this);
+    public PlayFromGraveyardControllerEffect copy() {
+        return new PlayFromGraveyardControllerEffect(this);
     }
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
         throw new IllegalArgumentException("Wrong code usage: can't call applies method on empty affectedAbility");
     }
+
     @Override
     public boolean applies(UUID objectId, Ability affectedAbility, Ability source, Game game, UUID playerId) {
         // current card's part
@@ -80,7 +115,7 @@ public class PlayLandsFromGraveyardControllerEffect extends AsThoughEffectImpl {
         if (!cardToCheck.isLand(game) && cardToCheck.getManaCost().isEmpty()) {
             return false;
         }
-        if (affectedAbility instanceof SpellAbility){
+        if (affectedAbility instanceof SpellAbility) {
             cardToCheck = ((SpellAbility) affectedAbility).getCharacteristics(game);
         }
         // must be correct card

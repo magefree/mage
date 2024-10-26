@@ -20,6 +20,7 @@ public class PlayFromNotOwnHandZoneAllEffect extends AsThoughEffectImpl {
     private final boolean onlyOwnedCards;
     private final TargetController allowedCaster;
 
+    @Deprecated // Only used in some tests - should be refactored and removed
     public PlayFromNotOwnHandZoneAllEffect(FilterCard filter, Zone fromZone, boolean onlyOwnedCards, TargetController allowedCaster, Duration duration) {
         super(AsThoughEffectType.PLAY_FROM_NOT_OWN_HAND_ZONE, duration, Outcome.Benefit);
         this.filter = filter;

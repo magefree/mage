@@ -3865,11 +3865,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean canPlayCardsFromGraveyard() {
-        return computerPlayer.canPlayCardsFromGraveyard();
-    }
-
-    @Override
     public boolean canPlotFromTopOfLibrary() {
         return computerPlayer.canPlotFromTopOfLibrary();
     }
@@ -3902,11 +3897,6 @@ public class TestPlayer implements Player {
     @Override
     public void setPayManaMode(boolean payManaMode) {
         computerPlayer.setPayManaMode(payManaMode);
-    }
-
-    @Override
-    public void setPlayCardsFromGraveyard(boolean playCardsFromGraveyard) {
-        computerPlayer.setPlayCardsFromGraveyard(playCardsFromGraveyard);
     }
 
     @Override

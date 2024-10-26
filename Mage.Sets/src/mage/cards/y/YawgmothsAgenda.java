@@ -1,16 +1,14 @@
-
 package mage.cards.y;
 
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continuous.CantCastMoreThanOneSpellEffect;
 import mage.abilities.effects.common.replacement.GraveyardFromAnywhereExileReplacementEffect;
+import mage.abilities.effects.common.ruleModifying.PlayFromGraveyardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -25,8 +23,10 @@ public final class YawgmothsAgenda extends CardImpl {
 
         // You can't cast more than one spell each turn.
         this.addAbility(new SimpleStaticAbility(new CantCastMoreThanOneSpellEffect(TargetController.YOU)));
-        // You may play cards from your graveyard.
-        this.addAbility(new SimpleStaticAbility(new YawgmothsAgendaCanPlayCardsFromGraveyardEffect()));
+
+        // You may play lands and cast spells from your graveyard.
+        this.addAbility(new SimpleStaticAbility(PlayFromGraveyardControllerEffect.playLandsAndCastSpells(Duration.WhileOnBattlefield)));
+
         // If a card would be put into your graveyard from anywhere, exile it instead.
         this.addAbility(new SimpleStaticAbility(new GraveyardFromAnywhereExileReplacementEffect(true, false)));
     }
@@ -38,36 +38,5 @@ public final class YawgmothsAgenda extends CardImpl {
     @Override
     public YawgmothsAgenda copy() {
         return new YawgmothsAgenda(this);
-    }
-}
-
-class YawgmothsAgendaCanPlayCardsFromGraveyardEffect extends ContinuousEffectImpl {
-
-    YawgmothsAgendaCanPlayCardsFromGraveyardEffect() {
-        this(Duration.WhileOnBattlefield);
-    }
-
-    public YawgmothsAgendaCanPlayCardsFromGraveyardEffect(Duration duration) {
-        super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "You may play cards from your graveyard";
-    }
-
-    private YawgmothsAgendaCanPlayCardsFromGraveyardEffect(final YawgmothsAgendaCanPlayCardsFromGraveyardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public YawgmothsAgendaCanPlayCardsFromGraveyardEffect copy() {
-        return new YawgmothsAgendaCanPlayCardsFromGraveyardEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            controller.setPlayCardsFromGraveyard(true);
-            return true;
-        }
-        return false;
     }
 }
