@@ -61,6 +61,8 @@ public class TestFrameworkCanPlayAITest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerA, "Aven Trooper", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
         addCard(Zone.HAND, playerA, "Mountain", 3);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Aggressive Mining", 1); // disable land play
 
         // AI must play one time and make all choices on cast
         aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
@@ -70,6 +72,7 @@ public class TestFrameworkCanPlayAITest extends CardTestPlayerBaseWithAIHelps {
         execute();
 
         assertPowerToughness(playerA, "Aven Trooper", 1 + 1, 1 + 2);
+        assertGraveyardCount(playerA, "Mountain", 1); // discarded for cost
     }
 
     @Test
