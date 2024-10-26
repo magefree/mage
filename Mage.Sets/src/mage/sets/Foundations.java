@@ -77,6 +77,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Progenitus", 244, Rarity.MYTHIC, mage.cards.p.Progenitus.class));
         cards.add(new SetCardInfo("Pyromancer's Goggles", 677, Rarity.MYTHIC, mage.cards.p.PyromancersGoggles.class));
         cards.add(new SetCardInfo("Savannah Lions", 146, Rarity.UNCOMMON, mage.cards.s.SavannahLions.class));
+        cards.add(new SetCardInfo("Searslicer Goblin", 93, Rarity.RARE, mage.cards.s.SearslicerGoblin.class));
         cards.add(new SetCardInfo("Serra Angel", 147, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Shivan Dragon", 206, Rarity.UNCOMMON, mage.cards.s.ShivanDragon.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 257, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
