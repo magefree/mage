@@ -98,6 +98,7 @@ Fate Reforged|FateReforged|
 Fifth Dawn|FifthDawn|
 Fifth Edition|FifthEdition|
 Foundations|Foundations|
+Foundations Jumpstart|FoundationsJumpstart|
 Fourth Edition|FourthEdition|
 Friday Night Magic|FridayNightMagic|
 From the Vault: Angels|FromTheVaultAngels|
