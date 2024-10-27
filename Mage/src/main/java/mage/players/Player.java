@@ -1229,8 +1229,6 @@ public interface Player extends MageItem, Copyable<Player> {
 
     /**
      * Mana colors the player can pay instead with 2 life
-     *
-     * @return
      */
     FilterMana getPhyrexianColors();
 
