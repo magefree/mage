@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.EnlistAbility;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class BalduvianBerserker extends CardImpl {
 
         // When Balduvian Berserker dies, it deals damage equal to its power to any target.
         Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(
-                new SourcePermanentPowerCount()
+                SourcePermanentPowerValue.NOT_NEGATIVE
         ).setText("it deals damage equal to its power to any target"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

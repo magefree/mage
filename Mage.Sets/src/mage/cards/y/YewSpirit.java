@@ -1,18 +1,18 @@
-
 package mage.cards.y;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -29,9 +29,8 @@ public final class YewSpirit extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{G}{G}: Yew Spirit gets +X/+X until end of turn, where X is its power.
-        SourcePermanentPowerCount x = new SourcePermanentPowerCount();
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(x, x, Duration.EndOfTurn),
+                new BoostSourceEffect(SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{2}{G}{G}")));
     }
 

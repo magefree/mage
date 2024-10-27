@@ -5,7 +5,7 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.PayEnergyCost;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
@@ -39,7 +39,7 @@ public final class CyclopsSuperconductor extends CardImpl {
 
         // When Cyclops Superconductor dies, you may pay {E}{E}{E}. When you do, Cyclops Superconductor deals damage equal to its power to any target.
         ReflexiveTriggeredAbility reflexive = new ReflexiveTriggeredAbility(
-                new DamageTargetEffect(new SourcePermanentPowerCount())
+                new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                         .setText("{this} deals damage equal to its power to any target"),
                 false
         );

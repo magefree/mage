@@ -6,8 +6,7 @@ import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.hint.ConditionHint;
@@ -42,7 +41,6 @@ public final class PacksongPup extends CardImpl {
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
     private static final Hint hint = new ConditionHint(condition, "You control another Wolf or Werewolf");
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
 
     public PacksongPup(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -61,7 +59,7 @@ public final class PacksongPup extends CardImpl {
         ).addHint(hint));
 
         // When Packsong Pup dies, you gain life equal to its power.
-        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(xValue).setText("you gain life equal to its power")));
+        this.addAbility(new DiesSourceTriggeredAbility(new GainLifeEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("you gain life equal to its power")));
     }
 
     private PacksongPup(final PacksongPup card) {

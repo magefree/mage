@@ -1,10 +1,9 @@
-
 package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldAllTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.FabricateAbility;
 import mage.cards.CardImpl;
@@ -36,7 +35,7 @@ public final class MarionetteMaster extends CardImpl {
 
         // Whenever an artifact you control is put into a graveyard from the battlefield, target opponent loses life equal to Marionette Master's power.
         Ability ability = new PutIntoGraveFromBattlefieldAllTriggeredAbility(
-                new LoseLifeTargetEffect(new SourcePermanentPowerCount(false))
+                new LoseLifeTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                         .setText("target opponent loses life equal to {this}'s power"),
                 false, filter, false
         );

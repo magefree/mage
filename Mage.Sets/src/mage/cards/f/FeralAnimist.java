@@ -1,19 +1,19 @@
-
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -31,7 +31,7 @@ public final class FeralAnimist extends CardImpl {
 
         // {3}: Feral Animist gets +X/+0 until end of turn, where X is its power.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new BoostSourceEffect(new SourcePermanentPowerCount(), StaticValue.get(0), Duration.EndOfTurn),
+                new BoostSourceEffect(SourcePermanentPowerValue.NOT_NEGATIVE, StaticValue.get(0), Duration.EndOfTurn),
                 new GenericManaCost(3)));
     }
 

@@ -1,12 +1,11 @@
 
 package mage.cards.h;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -15,6 +14,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +34,7 @@ public final class HeroesBane extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4), true), 
                 "with four +1/+1 counters on it"));
         // {2}{G}{G}: Put X +1/+1 counters on Heroe's Bane, where X is its power.
-        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new SourcePermanentPowerCount(), true);
+        Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), SourcePermanentPowerValue.NOT_NEGATIVE, true);
         effect.setText("Put X +1/+1 counters on {this}, where X is its power");
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{2}{G}{G}")));
     }

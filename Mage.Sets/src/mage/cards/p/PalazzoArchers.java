@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksAllTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
@@ -39,7 +39,7 @@ public final class PalazzoArchers extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // Whenever a creature with flying attacks you or a planeswalker you control, Palazzo Archers deals damage equal to its power to that creature.
-        this.addAbility(new AttacksAllTriggeredAbility(new DamageTargetEffect(new SourcePermanentPowerCount()),
+        this.addAbility(new AttacksAllTriggeredAbility(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE),
                 false, filter, SetTargetPointer.PERMANENT, true));
     }
 

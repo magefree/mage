@@ -33,7 +33,7 @@ public final class ArmoredArmadillo extends CardImpl {
         // {3}{W}: Armored Armadillo gets +X/+0 until end of turn, where X is its toughness.
         this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(
-                        SourcePermanentToughnessValue.getInstance(), StaticValue.get(0), Duration.EndOfTurn
+                        SourcePermanentToughnessValue.instance, StaticValue.get(0), Duration.EndOfTurn
                 ).setText("{this} gets +X/+0 until end of turn, where X is its toughness."),
                 new ManaCostsImpl<>("{3}{W}")));
     }

@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.abilities.keyword.ProtectionAbility;
@@ -21,8 +21,6 @@ import java.util.UUID;
  */
 public final class ChameleonColossus extends CardImpl {
 
-    private static final SourcePermanentPowerCount xValue = new SourcePermanentPowerCount();
-
     public ChameleonColossus(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.subtype.add(SubType.SHAPESHIFTER);
@@ -38,7 +36,7 @@ public final class ChameleonColossus extends CardImpl {
 
         // {2}{G}{G}: Chameleon Colossus gets +X/+X until end of turn, where X is its power.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn)
+                new BoostSourceEffect(SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn)
                         .setText("{this} gets +X/+X until end of turn, where X is its power"),
                 new ManaCostsImpl<>("{2}{G}{G}")
         ));

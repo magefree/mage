@@ -9,7 +9,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.effects.keyword.InvestigateEffect;
@@ -44,7 +44,7 @@ public final class DugganPrivateDetective extends CardImpl {
         // The Most Important Punch in History -- {1}{G}, {T}: Duggan deals damage equal to twice its power to another target creature. Activate only once.
         Ability ability = new ActivateOncePerGameActivatedAbility(
                 Zone.BATTLEFIELD,
-                new DamageTargetEffect(new MultipliedValue(new SourcePermanentPowerCount(), 2))
+                new DamageTargetEffect(new MultipliedValue(SourcePermanentPowerValue.NOT_NEGATIVE, 2))
                         .setText("{this} deals damage equal to twice its power to another target creature"),
                 new ManaCostsImpl<>("{1}{G}"),
                 TimingRule.INSTANT);

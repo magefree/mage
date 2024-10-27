@@ -1,9 +1,8 @@
-
 package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.keyword.FabricateAbility;
 import mage.cards.CardImpl;
@@ -32,7 +31,7 @@ public final class CultivatorOfBlades extends CardImpl {
         this.addAbility(new FabricateAbility(2));
 
         // Whenever Cultivator of Blades attacks, you may have other attacking creatures get +X/+X until end of turn, where X is Cultivator of Blades's power.
-        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(new SourcePermanentPowerCount(), new SourcePermanentPowerCount(), Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, true),
+        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, true),
                 true, "Whenever Cultivator of Blades attacks, you may have other attacking creatures get +X/+X until end of turn, where X is Cultivator of Blades's power."));
     }
 

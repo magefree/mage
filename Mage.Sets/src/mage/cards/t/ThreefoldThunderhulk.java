@@ -7,8 +7,7 @@ import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -26,8 +25,6 @@ import java.util.UUID;
  */
 public final class ThreefoldThunderhulk extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public ThreefoldThunderhulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
 
@@ -43,7 +40,7 @@ public final class ThreefoldThunderhulk extends CardImpl {
 
         // Whenever Threefold Thunderhulk enters the battlefield or attacks, create a number of 1/1 colorless Gnome artifact creature tokens equal to its power.
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(
-                new CreateTokenEffect(new GnomeToken(), xValue)
+                new CreateTokenEffect(new GnomeToken(), SourcePermanentPowerValue.NOT_NEGATIVE)
                         .setText("create a number of 1/1 colorless Gnome artifact creature tokens equal to its power")
         ));
 

@@ -4,8 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.abilityword.EerieAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.cards.CardImpl;
@@ -22,8 +21,6 @@ import java.util.UUID;
  */
 public final class InfernalPhantom extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public InfernalPhantom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
 
@@ -35,7 +32,7 @@ public final class InfernalPhantom extends CardImpl {
         this.addAbility(new EerieAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn)));
 
         // When Infernal Phantom dies, it deals damage equal to its power to any target.
-        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(xValue, "it")
+        Ability ability = new DiesSourceTriggeredAbility(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE, "it")
                 .setText("it deals damage equal to its power to any target"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

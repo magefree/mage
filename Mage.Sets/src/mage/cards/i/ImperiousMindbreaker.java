@@ -34,7 +34,7 @@ public final class ImperiousMindbreaker extends CardImpl {
         // As long as Imperious Mindbreaker is paired with another creature, each of those creatures has "Whenever this creature attacks, each opponent mills cards equal to its toughness."
         this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(
                 new AttacksTriggeredAbility(new MillCardsEachPlayerEffect(
-                        SourcePermanentToughnessValue.getInstance(), TargetController.OPPONENT
+                        SourcePermanentToughnessValue.instance, TargetController.OPPONENT
                 ), false, "Whenever this creature attacks, each opponent mills cards equal to its toughness."),
                 "As long as {this} is paired with another creature, each of those creatures has " +
                         "\"Whenever this creature attacks, each opponent mills cards equal to its toughness.\""

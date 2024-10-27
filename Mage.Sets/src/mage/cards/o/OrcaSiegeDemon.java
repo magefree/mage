@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -38,9 +38,9 @@ public final class OrcaSiegeDemon extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true));
 
         // When Orca dies, it deals damage equal to its power divided as you choose among any number of targets.
-        Ability ability = new DiesSourceTriggeredAbility(new DamageMultiEffect(new SourcePermanentPowerCount())
+        Ability ability = new DiesSourceTriggeredAbility(new DamageMultiEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("it deals damage equal to its power divided as you choose among any number of targets."));
-        ability.addTarget(new TargetAnyTargetAmount(new SourcePermanentPowerCount()));
+        ability.addTarget(new TargetAnyTargetAmount(SourcePermanentPowerValue.NOT_NEGATIVE));
         this.addAbility(ability);
     }
 

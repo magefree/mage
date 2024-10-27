@@ -5,8 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SacrificePermanentTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -26,8 +25,6 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class RapaciousGuest extends CardImpl {
-
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
 
     public RapaciousGuest(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -53,7 +50,7 @@ public final class RapaciousGuest extends CardImpl {
 
         // When Rapacious Guest leaves the battlefield, target opponent loses life equal to its power.
         Ability ability = new LeavesBattlefieldTriggeredAbility(
-                new LoseLifeTargetEffect(xValue).setText("target opponent loses life equal to its power."),
+                new LoseLifeTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("target opponent loses life equal to its power."),
                 false
         );
         ability.addTarget(new TargetOpponent());

@@ -3,8 +3,7 @@ package mage.cards.f;
 import mage.MageInt;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
@@ -22,8 +21,6 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class FeralGhoul extends CardImpl {
-
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
 
     public FeralGhoul(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -44,7 +41,7 @@ public final class FeralGhoul extends CardImpl {
 
         // When Feral Ghoul dies, each opponent gets a number of rad counters equal to its power.
         this.addAbility(new DiesSourceTriggeredAbility(
-                new AddCountersPlayersEffect(CounterType.RAD.createInstance(), xValue, TargetController.OPPONENT)
+                new AddCountersPlayersEffect(CounterType.RAD.createInstance(), SourcePermanentPowerValue.NOT_NEGATIVE, TargetController.OPPONENT)
                         .setText("each opponent gets a number of rad counters equal to its power")
         ));
     }

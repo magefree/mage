@@ -1,11 +1,10 @@
-
 package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAndIsNotBlockedTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.AssignNoCombatDamageSourceEffect;
@@ -29,7 +28,7 @@ public final class DwarvenVigilantes extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Whenever Dwarven Vigilantes attacks and isn't blocked, you may have it deal damage equal to its power to target creature. If you do, Dwarven Vigilantes assigns no combat damage this turn.
-        Effect effect = new DamageTargetEffect(new SourcePermanentPowerCount());
+        Effect effect = new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE);
         effect.setText("it deal damage equal to its power to target creature");
         Ability ability = new AttacksAndIsNotBlockedTriggeredAbility(effect, true);
         ability.addEffect(new AssignNoCombatDamageSourceEffect(Duration.EndOfTurn, true));

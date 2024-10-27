@@ -2,8 +2,7 @@ package mage.cards.j;
 
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.RavenousAbility;
 import mage.cards.CardImpl;
@@ -19,8 +18,6 @@ import java.util.UUID;
  */
 public final class JackedRabbit extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public JackedRabbit(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{1}{W}");
 
@@ -33,7 +30,7 @@ public final class JackedRabbit extends CardImpl {
         this.addAbility(new RavenousAbility());
 
         // Whenever Jacked Rabbit attacks, create a number of 1/1 white Rabbit creature tokens equal to Jacked Rabbit's power.
-        this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new RabbitToken(), xValue)));
+        this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new RabbitToken(), SourcePermanentPowerValue.NOT_NEGATIVE)));
     }
 
     private JackedRabbit(final JackedRabbit card) {

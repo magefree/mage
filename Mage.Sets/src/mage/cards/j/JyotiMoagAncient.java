@@ -1,22 +1,19 @@
 package mage.cards.j;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CommanderCastFromCommandZoneValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TargetController;
-import mage.game.permanent.token.ForestDryadToken;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.game.permanent.token.ForestDryadToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -25,8 +22,6 @@ import mage.filter.common.FilterCreaturePermanent;
 public final class JyotiMoagAncient extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("land creatures");
-
-    private static final SourcePermanentPowerCount xValue = new SourcePermanentPowerCount();
 
     static {
         filter.add(CardType.LAND.getPredicate());
@@ -50,7 +45,7 @@ public final class JyotiMoagAncient extends CardImpl {
 
         // At the beginning of each combat, land creatures you control get +X/+X until end of turn, where X is Jyoti's power.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, filter, false),
+                new BoostControlledEffect(SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn, filter, false),
                 TargetController.ANY, false));
     }
 

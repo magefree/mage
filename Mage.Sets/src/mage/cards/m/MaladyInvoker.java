@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.TransformIntoSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -22,8 +22,7 @@ import java.util.UUID;
  */
 public final class MaladyInvoker extends CardImpl {
 
-    private static final DynamicValue xValue
-            = new SignInversionDynamicValue(new SourcePermanentPowerCount(false));
+    private static final DynamicValue xValue = new SignInversionDynamicValue(SourcePermanentPowerValue.NOT_NEGATIVE);
 
     public MaladyInvoker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "");

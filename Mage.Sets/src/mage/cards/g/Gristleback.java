@@ -1,11 +1,9 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.BloodthirstAbility;
 import mage.cards.CardImpl;
@@ -13,6 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
+
+import java.util.UUID;
 
 /**
  *
@@ -32,7 +32,7 @@ public final class Gristleback extends CardImpl {
         
         // Sacrifice Gristleback: You gain life equal to Gristleback's power.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainLifeEffect(new SourcePermanentPowerCount()).setText("You gain life equal to {this}'s power"),
+                new GainLifeEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("You gain life equal to {this}'s power"),
                 new SacrificeSourceCost()));
     }
 
