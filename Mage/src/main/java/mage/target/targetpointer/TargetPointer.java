@@ -3,6 +3,7 @@ package mage.target.targetpointer;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.Targets;
 import mage.util.Copyable;
 
@@ -45,6 +46,13 @@ public interface TargetPointer extends Serializable, Copyable<TargetPointer> {
      * information about a related permanent (often from triggered abilities).
      */
     Permanent getFirstTargetPermanentOrLKI(Game game, Ability source);
+
+    /**
+     * Finds the controller of the first target object or LKI,
+     * whether it is a permanent or spell.
+     * Returns null if not found.
+     */
+    Player getControllerOfFirstTargetOrLKI(Game game, Ability source);
 
     /**
      * Describes the appropriate subset of targets for ability text.

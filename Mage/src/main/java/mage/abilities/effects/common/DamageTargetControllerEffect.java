@@ -7,7 +7,6 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -64,12 +63,9 @@ public class DamageTargetControllerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = getTargetPointer().getFirstTargetPermanentOrLKI(game, source);
-        if (permanent != null) {
-            Player targetController = game.getPlayer(permanent.getControllerId());
-            if (targetController != null) {
-                targetController.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, preventable);
-            }
+        Player targetController = getTargetPointer().getControllerOfFirstTargetOrLKI(game, source);
+        if (targetController != null) {
+            targetController.damage(amount.calculate(game, source, this), source.getSourceId(), source, game, false, preventable);
             return true;
         }
         return false;
