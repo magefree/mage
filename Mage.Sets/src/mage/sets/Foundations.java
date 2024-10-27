@@ -71,6 +71,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 278, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mystical Teachings", 594, Rarity.UNCOMMON, mage.cards.m.MysticalTeachings.class));
         cards.add(new SetCardInfo("Negate", 710, Rarity.COMMON, mage.cards.n.Negate.class));
+        cards.add(new SetCardInfo("Niv-Mizzet, Visionary", 123, Rarity.MYTHIC, mage.cards.n.NivMizzetVisionary.class));
         cards.add(new SetCardInfo("Offer Immortality", 525, Rarity.COMMON, mage.cards.o.OfferImmortality.class));
         cards.add(new SetCardInfo("Omniscience", 161, Rarity.MYTHIC, mage.cards.o.Omniscience.class));
         cards.add(new SetCardInfo("Pacifism", 501, Rarity.COMMON, mage.cards.p.Pacifism.class));
