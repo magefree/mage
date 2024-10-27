@@ -16,10 +16,6 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
     /**
      * The Ability sets if no target is defined the target pointer to the active
      * player of the current draw phase
-     *
-     * @param effect
-     * @param targetController
-     * @param isOptional
      */
     public BeginningOfDrawTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
         this(Zone.BATTLEFIELD, effect, targetController, isOptional);
@@ -106,26 +102,19 @@ public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl {
         switch (targetController) {
             case ACTIVE:
             case YOU:
-                return "At the beginning of your draw step, " + generateZoneString();
+                return "At the beginning of your draw step, ";
             case OPPONENT:
-                return "At the beginning of each opponent's draw step, " + generateZoneString();
+                return "At the beginning of each opponent's draw step, ";
             case NOT_YOU:
-                return "At the beginning of each other player's draw step, " + generateZoneString();
+                return "At the beginning of each other player's draw step, ";
             case ANY:
-                return "At the beginning of each player's draw step, " + generateZoneString();
+                return "At the beginning of each player's draw step, ";
             case CONTROLLER_ATTACHED_TO:
-                return "At the beginning of the draw step of enchanted creature's controller, " + generateZoneString();
+                return "At the beginning of the draw step of enchanted creature's controller, ";
             case ENCHANTED:
-                return "At the beginning of enchanted player's draw step, " + generateZoneString();
+                return "At the beginning of enchanted player's draw step, ";
         }
         return "";
     }
 
-    private String generateZoneString() {
-        switch (getZone()) {
-            case GRAVEYARD:
-                return "if {this} is in your graveyard, ";
-        }
-        return "";
-    }
 }

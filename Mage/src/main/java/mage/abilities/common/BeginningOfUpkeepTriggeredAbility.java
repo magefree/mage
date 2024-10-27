@@ -16,7 +16,6 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
 
     private final TargetController targetController;
     private final boolean setTargetPointer;
-    protected String ruleTrigger;
 
     public BeginningOfUpkeepTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
         this(Zone.BATTLEFIELD, effect, targetController, isOptional);
@@ -27,14 +26,9 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public BeginningOfUpkeepTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional, boolean setTargetPointer) {
-        this(zone, effect, targetController, isOptional, setTargetPointer, null);
-    }
-
-    public BeginningOfUpkeepTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional, boolean setTargetPointer, String ruleTrigger) {
         super(zone, effect, isOptional);
         this.targetController = targetController;
         this.setTargetPointer = setTargetPointer;
-        this.ruleTrigger = ruleTrigger;
         setTriggerPhrase(generateTriggerPhrase());
     }
 
@@ -42,7 +36,6 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
         super(ability);
         this.targetController = ability.targetController;
         this.setTargetPointer = ability.setTargetPointer;
-        this.ruleTrigger = ability.ruleTrigger;
     }
 
     @Override
@@ -113,32 +106,22 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     private String generateTriggerPhrase() {
-        if (ruleTrigger != null && !ruleTrigger.isEmpty()) {
-            return ruleTrigger;
-        }
         switch (targetController) {
             case YOU:
-                return "At the beginning of your upkeep, " + generateZoneString();
+                return "At the beginning of your upkeep, ";
             case OPPONENT:
-                return "At the beginning of each opponent's upkeep, " + generateZoneString();
+                return "At the beginning of each opponent's upkeep, ";
             case ANY:
             case ACTIVE:
-                return "At the beginning of each player's upkeep, " + generateZoneString();
+                return "At the beginning of each player's upkeep, ";
             case EACH_PLAYER:
-                return "At the beginning of each upkeep, " + generateZoneString();
+                return "At the beginning of each upkeep, ";
             case CONTROLLER_ATTACHED_TO:
-                return "At the beginning of the upkeep of enchanted creature's controller, " + generateZoneString();
+                return "At the beginning of the upkeep of enchanted creature's controller, ";
             case ENCHANTED:
-                return "At the beginning of enchanted player's upkeep, " + generateZoneString();
+                return "At the beginning of enchanted player's upkeep, ";
         }
         return "";
     }
 
-    private String generateZoneString() {
-        switch (getZone()) {
-            case GRAVEYARD:
-                return "if {this} is in your graveyard, ";
-        }
-        return "";
-    }
 }

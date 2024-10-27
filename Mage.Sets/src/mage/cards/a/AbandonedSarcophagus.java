@@ -58,7 +58,7 @@ class AbandonedSarcophagusReplacementEffect extends ReplacementEffectImpl {
 
     AbandonedSarcophagusReplacementEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Exile);
-        staticText = "If a card with cycling would be put into your graveyard from anywhere and it wasn't cycled, exile it instead";
+        staticText = "If a card that has a cycling ability would be put into your graveyard from anywhere and it wasn't cycled, exile it instead";
     }
 
     private AbandonedSarcophagusReplacementEffect(final AbandonedSarcophagusReplacementEffect effect) {

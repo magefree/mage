@@ -7,10 +7,7 @@ import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.choices.TwoChoiceVote;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -29,11 +26,8 @@ public final class CoercivePortal extends CardImpl {
         // Will of the council - At the beginning of your upkeep, starting with you, each player votes for carnage or homage. If carnage gets more votes, sacrifice Coercive Portal and destroy all nonland permanents. If homage gets more votes or the vote is tied, draw a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.BATTLEFIELD, new CoercivePortalEffect(), TargetController.YOU,
-                false, false, "<i>Will of the council</i> &mdash; " +
-                "At the beginning of your upkeep, starting with you, each player votes for carnage or homage. " +
-                "If carnage gets more votes, sacrifice {this} and destroy all nonland permanents. " +
-                "If homage gets more votes or the vote is tied, draw a card."
-        ));
+                false, false
+        ).setAbilityWord(AbilityWord.WILL_OF_THE_COUNCIL));
     }
 
     private CoercivePortal(final CoercivePortal card) {
@@ -50,6 +44,9 @@ class CoercivePortalEffect extends OneShotEffect {
 
     CoercivePortalEffect() {
         super(Outcome.Benefit);
+        this.staticText = "starting with you, each player votes for carnage or homage. " +
+                "If carnage gets more votes, sacrifice {this} and destroy all nonland permanents. " +
+                "If homage gets more votes or the vote is tied, draw a card";
     }
 
     private CoercivePortalEffect(final CoercivePortalEffect effect) {

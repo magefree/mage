@@ -1,30 +1,32 @@
-
 package mage.cards.a;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.CantBlockAbility;
-import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
+import mage.abilities.condition.common.SourceInGraveyardCondition;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.keyword.ProwlAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
 public final class AuntiesSnitch extends CardImpl {
+
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goblin or Rogue you control");
+    static {
+        filter.add(Predicates.or(SubType.GOBLIN.getPredicate(), SubType.ROGUE.getPredicate()));
+    }
 
     public AuntiesSnitch(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
@@ -36,10 +38,15 @@ public final class AuntiesSnitch extends CardImpl {
 
         // Auntie's Snitch can't block.
         this.addAbility(new CantBlockAbility());
+
         // Prowl {1}{B}
         this.addAbility(new ProwlAbility("{1}{B}"));
+
         // Whenever a Goblin or Rogue you control deals combat damage to a player, if Auntie's Snitch is in your graveyard, you may return Auntie's Snitch to your hand.
-        this.addAbility(new AuntiesSnitchTriggeredAbility());
+        this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(Zone.GRAVEYARD,
+                new ReturnSourceFromGraveyardToHandEffect().setText("return {this} to your hand"),
+                filter, true, SetTargetPointer.NONE, true, false
+                ).withInterveningIf(SourceInGraveyardCondition.instance));
     }
 
     private AuntiesSnitch(final AuntiesSnitch card) {
@@ -49,44 +56,5 @@ public final class AuntiesSnitch extends CardImpl {
     @Override
     public AuntiesSnitch copy() {
         return new AuntiesSnitch(this);
-    }
-}
-
-class AuntiesSnitchTriggeredAbility extends TriggeredAbilityImpl {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin or Rogue you control");
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-        filter.add(Predicates.or(SubType.GOBLIN.getPredicate(), SubType.ROGUE.getPredicate()));
-    }
-
-    public AuntiesSnitchTriggeredAbility() {
-        super(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), true);
-    }
-
-    private AuntiesSnitchTriggeredAbility(final AuntiesSnitchTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public AuntiesSnitchTriggeredAbility copy() {
-        return new AuntiesSnitchTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedPlayerEvent damageEvent = (DamagedPlayerEvent)event;
-        Permanent p = game.getPermanent(event.getSourceId());
-        return damageEvent.isCombatDamage() && filter.match(p, getControllerId(), this, game);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a Goblin or Rogue you control deals combat damage to a player, if {this} is in your graveyard, you may return {this} to your hand.";
     }
 }

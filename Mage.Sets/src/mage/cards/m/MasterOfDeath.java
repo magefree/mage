@@ -3,6 +3,7 @@ package mage.cards.m;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.SourceInGraveyardCondition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
@@ -36,11 +37,10 @@ public final class MasterOfDeath extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.GRAVEYARD,
                 new DoIfCostPaid(
-                        new ReturnSourceFromGraveyardToHandEffect()
-                                .setText("return it to your hand"),
+                        new ReturnSourceFromGraveyardToHandEffect().setText("return it to your hand"),
                         new PayLifeCost(1)
                 ), TargetController.YOU, false
-        ));
+        ).withInterveningIf(SourceInGraveyardCondition.instance));
     }
 
     private MasterOfDeath(final MasterOfDeath card) {
