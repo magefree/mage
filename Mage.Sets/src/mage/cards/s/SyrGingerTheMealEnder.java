@@ -11,7 +11,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -84,7 +84,7 @@ public final class SyrGingerTheMealEnder extends CardImpl {
 
         // {2}, {T}, Sacrifice Syr Ginger: You gain life equal to its power.
         ability = new SimpleActivatedAbility(
-                new GainLifeEffect(new SourcePermanentPowerCount())
+                new GainLifeEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                         .setText("you gain life equal to its power"),
                 new GenericManaCost(2)
         );

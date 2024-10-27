@@ -3,8 +3,7 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.keyword.BackupAbility;
 import mage.cards.Card;
@@ -34,8 +33,6 @@ public final class EmergentWoodwurm extends CardImpl {
         filter.add(EmergentWoodwurmPredicate.instance);
     }
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public EmergentWoodwurm(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{6}{G}");
 
@@ -49,7 +46,7 @@ public final class EmergentWoodwurm extends CardImpl {
 
         // Whenever this creature attacks, look at the top X cards of your library, where X is its power. You may put a permanent card with mana value X or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
         backupAbility.addAbility(new AttacksTriggeredAbility(new LookLibraryAndPickControllerEffect(
-                xValue, 1, filter, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM
+                SourcePermanentPowerValue.NOT_NEGATIVE, 1, filter, PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM
         )).setTriggerPhrase("Whenever this creature attacks, "));
     }
 

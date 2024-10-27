@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -55,7 +55,7 @@ public final class FlamingTyrannosaurus extends CardImpl {
 
         // When Flaming Tyrannosaurus dies, it deals damage equal to its power to each opponent.
         this.addAbility(new DiesSourceTriggeredAbility(
-                new DamagePlayersEffect(new SourcePermanentPowerCount(), TargetController.OPPONENT)
+                new DamagePlayersEffect(SourcePermanentPowerValue.NOT_NEGATIVE, TargetController.OPPONENT)
                         .setText("it deals damage equal to its power to each opponent")
         ));
     }

@@ -2,8 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.PrototypeAbility;
@@ -19,8 +18,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class PhyrexianFleshgorger extends CardImpl {
-
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
 
     public PhyrexianFleshgorger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{7}");
@@ -40,7 +37,7 @@ public final class PhyrexianFleshgorger extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Ward--Pay life equal to Phyrexian Fleshgorger's power.
-        this.addAbility(new WardAbility(new PayLifeCost(xValue, "life equal to {this}'s power"), false));
+        this.addAbility(new WardAbility(new PayLifeCost(SourcePermanentPowerValue.NOT_NEGATIVE, "life equal to {this}'s power"), false));
     }
 
     private PhyrexianFleshgorger(final PhyrexianFleshgorger card) {

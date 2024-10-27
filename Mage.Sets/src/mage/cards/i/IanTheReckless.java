@@ -6,7 +6,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
@@ -44,8 +44,8 @@ public final class IanTheReckless extends CardImpl {
 
         // Whenever Ian the Reckless attacks, if it's modified, you may have it deal damage equal to its power to you and any target.
         TriggeredAbility ability = new AttacksTriggeredAbility(new DamageControllerEffect(
-                new SourcePermanentPowerCount()).setText("have it deal damage equal to its power to you"), true);
-        ability.addEffect(new DamageTargetEffect(new SourcePermanentPowerCount()).setText("and any target"));
+                SourcePermanentPowerValue.NOT_NEGATIVE).setText("have it deal damage equal to its power to you"), true);
+        ability.addEffect(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("and any target"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition,
                 "Whenever {this} attacks, if it's modified, you may have it deal damage equal to its power to you and any target."));

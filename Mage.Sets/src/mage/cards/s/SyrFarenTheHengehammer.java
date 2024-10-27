@@ -3,8 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -24,7 +23,6 @@ import java.util.UUID;
  */
 public final class SyrFarenTheHengehammer extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
     private static final FilterPermanent filter
             = new FilterAttackingCreature("another target attacking creature");
 
@@ -43,7 +41,7 @@ public final class SyrFarenTheHengehammer extends CardImpl {
 
         // Whenever Syr Faren, the Hengehammer attacks, another target attacking creature gets +X/+X until end of turn, where X is Syr Faren's power.
         Ability ability = new AttacksTriggeredAbility(
-                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn), false
+                new BoostTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn), false
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

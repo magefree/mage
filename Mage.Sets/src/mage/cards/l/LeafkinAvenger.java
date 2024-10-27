@@ -7,7 +7,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.mana.DynamicManaAbility;
@@ -37,7 +37,6 @@ public final class LeafkinAvenger extends CardImpl {
     }
 
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
-    private static final DynamicValue xValue2 = new SourcePermanentPowerCount(false);
 
     public LeafkinAvenger(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{G}");
@@ -54,7 +53,7 @@ public final class LeafkinAvenger extends CardImpl {
 
         // {7}{R}: Leafkin Avenger deals damage equal to its power to target player or planeswalker.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(xValue2)
+                new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                         .setText("{this} deals damage equal to its power to target player or planeswalker"),
                 new ManaCostsImpl<>("{7}{R}")
         );

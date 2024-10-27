@@ -4,8 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -27,8 +26,6 @@ import java.util.UUID;
  * @author Susucr
  */
 public final class WildwoodMentor extends CardImpl {
-
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target attacking creature");
 
@@ -58,7 +55,7 @@ public final class WildwoodMentor extends CardImpl {
 
         // Whenever Wildwood Mentor attacks, another target attacking creature gets +X/+X until end of turn, where X is Wildwood Mentor's power.
         Ability ability = new AttacksTriggeredAbility(
-                new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn)
+                new BoostTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn)
                         .setText("another target attacking creature gets +X/+X until end of turn, where X is {this}'s power"),
                 false
         );

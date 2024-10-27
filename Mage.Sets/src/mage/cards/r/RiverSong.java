@@ -5,7 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -43,7 +43,7 @@ public final class RiverSong extends CardImpl {
         // Spoilers -- Whenever an opponent scries, surveils, or searches their library, put a +1/+1 counter on River Song.
         // Then River Song deals damage to that player equal to its power.
         TriggeredAbility trigger = new RiverSongTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-        trigger.addEffect(new DamageTargetEffect(new SourcePermanentPowerCount(false))
+        trigger.addEffect(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("Then {this} deals damage to that player equal to its power"));
         this.addAbility(trigger.withFlavorWord("Spoilers"));
     }

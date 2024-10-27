@@ -9,7 +9,7 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -61,7 +61,7 @@ public class HelgaSkittishSeer extends CardImpl {
         this.addAbility(
                 new SimpleManaAbility(
                         Zone.BATTLEFIELD,
-                        new HelgaSkittishSeerManaEffect(new SourcePermanentPowerCount()),
+                        new HelgaSkittishSeerManaEffect(SourcePermanentPowerValue.NOT_NEGATIVE),
                         new TapSourceCost()
                 )
         );

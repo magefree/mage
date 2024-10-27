@@ -5,8 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
@@ -22,8 +21,6 @@ import java.util.UUID;
  */
 public final class HeartfireImmolator extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public HeartfireImmolator(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
@@ -37,7 +34,7 @@ public final class HeartfireImmolator extends CardImpl {
 
         // {R}, Sacrifice Heartfire Immolator: It deals damage equal to its power to target creature or planeswalker.
         Ability ability = new SimpleActivatedAbility(
-                new DamageTargetEffect(xValue)
+                new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                         .setText("it deals damage equal to its power to target creature or planeswalker"),
                 new ManaCostsImpl<>("{R}")
         );

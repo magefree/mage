@@ -5,8 +5,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.condition.InvertCondition;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -18,14 +18,11 @@ import mage.game.Game;
 import mage.watchers.common.RevoltWatcher;
 
 import java.util.UUID;
-import mage.abilities.condition.InvertCondition;
 
 /**
  * @author TheElk801
  */
 public final class SarevokDeathbringer extends CardImpl {
-
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
 
     public SarevokDeathbringer(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{B}");
@@ -38,7 +35,7 @@ public final class SarevokDeathbringer extends CardImpl {
 
         // At the beginning of each player's end step, if no permanents left the battlefield this turn, that player loses X life, where X is Sarevok's power.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new LoseLifeTargetEffect(xValue), TargetController.EACH_PLAYER,
+                new LoseLifeTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE), TargetController.EACH_PLAYER,
                 new InvertCondition(SarevokDeathbringerCondition.instance), false
         ), new RevoltWatcher());
 

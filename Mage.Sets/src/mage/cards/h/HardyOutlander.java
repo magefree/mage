@@ -3,8 +3,7 @@ package mage.cards.h;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOpponentWithMostLifeTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
@@ -23,8 +22,6 @@ import java.util.UUID;
  */
 public final class HardyOutlander extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public HardyOutlander(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
@@ -33,7 +30,7 @@ public final class HardyOutlander extends CardImpl {
 
         // Commander creatures you own have "Whenever this creature attacks a player, if no opponent has more life than that player, another target creature you control gets +X/+X until end of turn, where X is this creature's power."
         Ability ability = new AttacksOpponentWithMostLifeTriggeredAbility(new BoostTargetEffect(
-                xValue, xValue, Duration.EndOfTurn
+                SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn
         ).setText("another target creature you control gets +X/+X until end of turn, where X is this creature's power"), false);
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
