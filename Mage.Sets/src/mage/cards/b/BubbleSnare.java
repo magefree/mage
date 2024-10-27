@@ -4,7 +4,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.effects.common.TapEnchantedEffect;
@@ -41,10 +40,7 @@ public final class BubbleSnare extends CardImpl {
         this.addAbility(ability);
 
         // When Bubble Snare enters the battlefield, if it was kicked, tap enchanted creature.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()), KickedCondition.ONCE,
-                "When {this} enters, if it was kicked, tap enchanted creature."
-        ));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()).withInterveningIf(KickedCondition.ONCE));
 
         // Enchanted creature doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect()));

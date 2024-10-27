@@ -2,7 +2,6 @@ package mage.cards.n;
 
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.LifeCompareCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -21,10 +20,8 @@ public final class NearDeathExperience extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}{W}");
 
         // At the beginning of your upkeep, if you have exactly 1 life, you win the game.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false),
-                new LifeCompareCondition(TargetController.YOU, ComparisonType.EQUAL_TO, 1),
-                "At the beginning of your upkeep, if you have exactly 1 life, you win the game."));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false)
+                        .withInterveningIf(new LifeCompareCondition(TargetController.YOU, ComparisonType.EQUAL_TO, 1)));
     }
 
     private NearDeathExperience(final NearDeathExperience card) {
