@@ -14,8 +14,8 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BeginningOfPostCombatMainTriggeredAbility extends TriggeredAbilityImpl {
 
-    private TargetController targetController;
-    private boolean setTargetPointer;
+    private final TargetController targetController;
+    private final boolean setTargetPointer;
 
     public BeginningOfPostCombatMainTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
         this(Zone.BATTLEFIELD, effect, targetController, isOptional, false);
@@ -90,22 +90,15 @@ public class BeginningOfPostCombatMainTriggeredAbility extends TriggeredAbilityI
     private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
-                return "At the beginning of each of your postcombat main phases, " + generateZoneString();
+                return "At the beginning of each of your postcombat main phases, ";
             case OPPONENT:
-                return "At the beginning of each of your opponent's postcombat main phases, " + generateZoneString();
+                return "At the beginning of each of your opponent's postcombat main phases, ";
             case ANY:
-                return "At the beginning of each postcombat main phase, " + generateZoneString();
+                return "At the beginning of each postcombat main phase, ";
             case ENCHANTED:
-                return "At the beginning of each of enchanted player's postcombat main phases, " + generateZoneString();
+                return "At the beginning of each of enchanted player's postcombat main phases, ";
         }
         return "";
     }
 
-    private String generateZoneString() {
-        switch (getZone()) {
-            case GRAVEYARD:
-                return "if {this} is in your graveyard, ";
-        }
-        return "";
-    }
 }

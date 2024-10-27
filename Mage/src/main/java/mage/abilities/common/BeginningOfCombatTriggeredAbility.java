@@ -78,21 +78,15 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
     private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
-                return "At the beginning of combat on your turn, " + generateZoneString();
+                return "At the beginning of combat on your turn, ";
             case OPPONENT:
-                return "At the beginning of combat on each opponent's turn, " + generateZoneString();
+                return "At the beginning of combat on each opponent's turn, ";
             case EACH_PLAYER:
-                return "At the beginning of combat on each player's turn, " + generateZoneString();
+                return "At the beginning of combat on each player's turn, ";
             case ANY:
-                return "At the beginning of each combat, " + generateZoneString();
+                return "At the beginning of each combat, ";
         }
         return "";
     }
 
-    private String generateZoneString() {
-        if (getZone() == Zone.GRAVEYARD) {
-            return "if {this} is in your graveyard, ";
-        }
-        return "";
-    }
 }

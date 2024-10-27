@@ -14,8 +14,8 @@ import mage.target.targetpointer.FixedTarget;
 
 public class BeginningOfFirstMainTriggeredAbility extends TriggeredAbilityImpl {
 
-    private TargetController targetController;
-    private boolean setTargetPointer;
+    private final TargetController targetController;
+    private final boolean setTargetPointer;
 
     public BeginningOfFirstMainTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
         this(Zone.BATTLEFIELD, effect, targetController, isOptional, false);
@@ -81,20 +81,13 @@ public class BeginningOfFirstMainTriggeredAbility extends TriggeredAbilityImpl {
     private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
-                return "At the beginning of your first main phase, " + generateZoneString();
+                return "At the beginning of your first main phase, ";
             case OPPONENT:
-                return "At the beginning of each opponent's first main phase, " + generateZoneString();
+                return "At the beginning of each opponent's first main phase, ";
             case ANY:
-                return "At the beginning of each player's first main phase, " + generateZoneString();
+                return "At the beginning of each player's first main phase, ";
         }
         return "";
     }
 
-    private String generateZoneString() {
-        switch (getZone()) {
-            case GRAVEYARD:
-                return "if {this} is in your graveyard, ";
-        }
-        return "";
-    }
 }

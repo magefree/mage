@@ -16,8 +16,8 @@ import mage.watchers.Watcher;
  */
 public class BeginningOfSecondMainTriggeredAbility extends TriggeredAbilityImpl {
 
-    private TargetController targetController;
-    private boolean setTargetPointer;
+    private final TargetController targetController;
+    private final boolean setTargetPointer;
 
     public BeginningOfSecondMainTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
         this(Zone.BATTLEFIELD, effect, targetController, isOptional, false);
@@ -101,24 +101,17 @@ public class BeginningOfSecondMainTriggeredAbility extends TriggeredAbilityImpl 
     private String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
-                return "At the beginning of your second main phase, " + generateZoneString();
+                return "At the beginning of your second main phase, ";
             case OPPONENT:
-                return "At the beginning of each opponent's second main phase, " + generateZoneString();
+                return "At the beginning of each opponent's second main phase, ";
             case ANY:
-                return "At the beginning of each player's second main phase, " + generateZoneString();
+                return "At the beginning of each player's second main phase, ";
             case ENCHANTED:
-                return "At the beginning of enchanted player's second main phase, " + generateZoneString();
+                return "At the beginning of enchanted player's second main phase, ";
         }
         return "";
     }
 
-    private String generateZoneString() {
-        switch (getZone()) {
-            case GRAVEYARD:
-                return "if {this} is in your graveyard, ";
-        }
-        return "";
-    }
 }
 
 class MainPhaseWatcher extends Watcher {
