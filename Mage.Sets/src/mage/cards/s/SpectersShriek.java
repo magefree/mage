@@ -76,9 +76,8 @@ class SpectersShriekEffect extends OneShotEffect {
                         + player.getName() + "'s hand?", source, game)) {
             return false;
         }
-        TargetCard target = new TargetCard(Zone.HAND, new FilterNonlandCard());
+        TargetCard target = new TargetCard(0, 1, Zone.HAND, new FilterNonlandCard());
         target.withNotTarget(true);
-        target.setRequired(false);
         if (!controller.chooseTarget(Outcome.Benefit, player.getHand(), target, source, game)) {
             return false;
         }

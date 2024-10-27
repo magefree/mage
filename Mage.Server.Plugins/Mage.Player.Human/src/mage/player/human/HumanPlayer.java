@@ -681,7 +681,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
@@ -780,7 +780,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
@@ -877,8 +877,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets)
-                    : null;
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
 
             if (responseId == null) {
                 Map<String, Serializable> options = getOptions(target, null);
@@ -958,8 +957,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets)
-                    : null;
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
 
             if (responseId == null) {
                 List<UUID> chosenTargets = target.getTargets();
@@ -1041,7 +1039,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {

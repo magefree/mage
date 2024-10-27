@@ -79,7 +79,6 @@ class StandOrFallEffect extends OneShotEffect {
             FilterCreaturePermanent opponentFilter = new FilterCreaturePermanent();
             opponentFilter.add(new ControllerIdPredicate(oppId));
             TargetCreaturePermanent creatures = new TargetCreaturePermanent(0, Integer.MAX_VALUE, opponentFilter, true);
-            creatures.setRequired(false);
             List<Permanent> pile1 = new ArrayList<>();
             if (player.choose(Outcome.Neutral, creatures, source, game)) {
                 List<UUID> targets = creatures.getTargets();
