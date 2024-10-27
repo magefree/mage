@@ -5,7 +5,6 @@ import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.MillTriggeredAbility;
 import mage.abilities.condition.common.SourceInGraveyardCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -50,11 +49,10 @@ public final class InfestingRadroach extends CardImpl {
         ));
 
         // Whenever an opponent mills a nonland card, if Infesting Radroach is in your graveyard, you may return it to your hand.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new MillTriggeredAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), TargetController.OPPONENT, filter, true),
-                SourceInGraveyardCondition.instance, "Whenever an opponent mills a nonland card, "
-                + "if {this} is in your graveyard, you may return it to your hand"
-        ));
+        this.addAbility(new MillTriggeredAbility(Zone.GRAVEYARD,
+                new ReturnToHandSourceEffect().setText("return it to your hand"),
+                TargetController.OPPONENT, filter, true
+        ).withInterveningIf(SourceInGraveyardCondition.instance));
     }
 
     private InfestingRadroach(final InfestingRadroach card) {
