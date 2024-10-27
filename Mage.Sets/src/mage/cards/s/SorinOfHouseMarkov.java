@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.Pronoun;
+import mage.constants.Pronoun;
 import mage.abilities.triggers.BeginningOfPostCombatMainTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;

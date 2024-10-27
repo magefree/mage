@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.Pronoun;
+import mage.constants.Pronoun;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.effects.common.ExileAndReturnSourceEffect;
