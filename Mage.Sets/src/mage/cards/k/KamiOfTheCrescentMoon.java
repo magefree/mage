@@ -1,7 +1,7 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

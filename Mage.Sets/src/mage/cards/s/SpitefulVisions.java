@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
