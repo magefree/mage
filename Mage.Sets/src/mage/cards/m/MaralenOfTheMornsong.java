@@ -35,7 +35,7 @@ public final class MaralenOfTheMornsong extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaralenOfTheMornsongEffect()));
 
         // At the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles their library.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new MaralenOfTheMornsongEffect2(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new MaralenOfTheMornsongEffect2(), TargetController.EACH_PLAYER, false));
 
     }
 

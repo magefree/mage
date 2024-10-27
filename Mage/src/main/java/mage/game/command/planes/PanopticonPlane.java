@@ -41,7 +41,7 @@ public class PanopticonPlane extends Plane {
         this.getAbilities().add(pwability);
 
         // At the beginning of your draw step, draw an additional card.
-        Ability ability = new BeginningOfDrawTriggeredAbility(Zone.COMMAND, new DrawCardTargetEffect(1), TargetController.ACTIVE, false);
+        Ability ability = new BeginningOfDrawTriggeredAbility(Zone.COMMAND, new DrawCardTargetEffect(1), TargetController.YOU, false);
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, draw a card
