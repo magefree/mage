@@ -20,7 +20,7 @@ public class SurvivalAbility extends BeginningOfSecondMainTriggeredAbility {
     }
 
     public SurvivalAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, TargetController.YOU, optional, false);
+        super(Zone.BATTLEFIELD, effect, TargetController.YOU, optional);
         setTriggerPhrase("At the beginning of your second main phase, if {this} is tapped, ");
         setAbilityWord(AbilityWord.SURVIVAL);
     }
