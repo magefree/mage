@@ -21,9 +21,7 @@ public final class AnOfferYouCantRefuse extends CardImpl {
 
         // Counter target noncreature spell. Its controller creates two Treasure tokens.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(
-                new TreasureToken(), 2, false, CreateTokenControllerTargetEffect.TargetKind.SPELL
-        ));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new TreasureToken(), 2, false));
         this.getSpellAbility().addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_NON_CREATURE));
     }
 

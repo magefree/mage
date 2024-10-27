@@ -32,9 +32,7 @@ public final class StrixSerenade extends CardImpl {
 
         // Counter target artifact, creature, or planeswalker spell. Its controller creates a 2/2 blue Bird creature token with flying.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(
-                new SwanSongBirdToken(), CreateTokenControllerTargetEffect.TargetKind.SPELL
-        ));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new SwanSongBirdToken()));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 
