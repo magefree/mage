@@ -68,7 +68,7 @@ class LilianaUntouchedByDeathEffect extends OneShotEffect {
 
     LilianaUntouchedByDeathEffect() {
         super(Outcome.Benefit);
-        this.staticText = "mill three cards. If at least one of them is a Zombie card, each opponent loses 2 life and you gain 2 life";
+        this.staticText = "mill three cards. If at least one Zombie card is milled this way, each opponent loses 2 life and you gain 2 life";
     }
 
     private LilianaUntouchedByDeathEffect(final LilianaUntouchedByDeathEffect effect) {

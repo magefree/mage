@@ -51,7 +51,7 @@ public final class Ichorid extends CardImpl {
 
         // At the beginning of your upkeep, if Ichorid is in your graveyard, you may exile a black creature card other than Ichorid from your graveyard. If you do, return Ichorid to the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD, new DoIfCostPaid(
-                new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                new ReturnSourceFromGraveyardToBattlefieldEffect().setText("return {this} to the battlefield"),
                 new ExileFromGraveCost(new TargetCardInYourGraveyard(filter))
         ), TargetController.YOU, false).withInterveningIf(SourceInGraveyardCondition.instance));
     }
