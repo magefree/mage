@@ -1,7 +1,5 @@
-
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -11,11 +9,7 @@ import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -24,8 +18,9 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.util.functions.CopyApplier;
 
+import java.util.UUID;
+
 /**
- *
  * @author jeffwadsworth
  */
 public final class VesuvanDoppelganger extends CardImpl {
@@ -56,10 +51,9 @@ public final class VesuvanDoppelganger extends CardImpl {
 
 class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
 
-    private static final String rule2 = "At the beginning of your upkeep, you may have this creature become a copy of target creature, except it doesn't copy that creature's color and it has this ability.";
-
-    public VesuvanDoppelgangerCopyEffect() {
+    VesuvanDoppelgangerCopyEffect() {
         super(Outcome.Copy);
+        this.staticText = "have this creature become a copy of target creature, except it doesn't copy that creature's color and it has this ability";
     }
 
     private VesuvanDoppelgangerCopyEffect(final VesuvanDoppelgangerCopyEffect effect) {
@@ -91,7 +85,7 @@ class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
                         public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
                             blueprint.getColor().setColor(sourcePermanent.getColor(game));
                             blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                                    new VesuvanDoppelgangerCopyEffect(), TargetController.YOU, true, false, rule2));
+                                    new VesuvanDoppelgangerCopyEffect(), TargetController.YOU, true, false));
                             return true;
                         }
                     });
