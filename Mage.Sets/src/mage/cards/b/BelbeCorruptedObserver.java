@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostCombatMainTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;

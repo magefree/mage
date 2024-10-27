@@ -1,6 +1,6 @@
 package mage.abilities.abilityword;
 
-import mage.abilities.common.BeginningOfSecondMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfSecondMainTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.constants.AbilityWord;
 import mage.constants.TargetController;

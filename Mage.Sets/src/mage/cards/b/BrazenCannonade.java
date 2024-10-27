@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostCombatMainTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;

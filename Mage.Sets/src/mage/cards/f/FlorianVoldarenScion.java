@@ -3,7 +3,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostCombatMainTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.*;

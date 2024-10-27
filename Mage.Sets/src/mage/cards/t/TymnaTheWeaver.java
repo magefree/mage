@@ -3,7 +3,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostCombatMainTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
@@ -15,7 +15,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.watchers.Watcher;
 

@@ -5,7 +5,7 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostCombatMainTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;

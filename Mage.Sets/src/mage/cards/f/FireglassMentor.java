@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfSecondMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfSecondMainTriggeredAbility;
 import mage.abilities.condition.common.OpponentsLostLifeCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
