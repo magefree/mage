@@ -32,7 +32,7 @@ public final class RecklessAmplimancer extends CardImpl {
 
         // {4}{G}: Double Reckless Amplimancer's power and toughness until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(
-                sourcePower, SourcePermanentToughnessValue.getInstance(), Duration.EndOfTurn
+                sourcePower, SourcePermanentToughnessValue.instance, Duration.EndOfTurn
         ).setText("double {this}'s power and toughness until end of turn"), new ManaCostsImpl<>("{4}{G}")));
     }
 

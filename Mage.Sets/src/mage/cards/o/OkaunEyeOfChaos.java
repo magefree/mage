@@ -42,7 +42,7 @@ public final class OkaunEyeOfChaos extends CardImpl {
         this.addAbility(new WinsCoinFlipTriggeredAbility(
                 new BoostSourceEffect(
                         sourcePower,
-                        SourcePermanentToughnessValue.getInstance(),
+                        SourcePermanentToughnessValue.instance,
                         Duration.EndOfTurn
                 ).setText("double {this}'s power and toughness until end of turn")
         ));

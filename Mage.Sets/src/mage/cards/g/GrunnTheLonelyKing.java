@@ -40,7 +40,7 @@ public final class GrunnTheLonelyKing extends CardImpl {
 
         //Whenever Grunn attacks alone, double its power and toughness until end of turn.
         SourcePermanentPowerCount power = new SourcePermanentPowerCount();
-        Effect effect = new BoostSourceEffect(power, SourcePermanentToughnessValue.getInstance(), Duration.EndOfTurn);
+        Effect effect = new BoostSourceEffect(power, SourcePermanentToughnessValue.instance, Duration.EndOfTurn);
         effect.setText("double its power and toughness until end of turn");
         this.addAbility(new AttacksAloneSourceTriggeredAbility(effect));
     }
