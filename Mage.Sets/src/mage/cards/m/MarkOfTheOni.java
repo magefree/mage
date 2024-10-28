@@ -41,12 +41,11 @@ public final class MarkOfTheOni extends CardImpl {
 
         // At the beginning of the end step, if you control no Demons, sacrifice Mark of the Oni.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new SacrificeSourceEffect(),
-                TargetController.NEXT,
-                new PermanentsOnTheBattlefieldCondition(
+                TargetController.NEXT, new SacrificeSourceEffect(),
+                false, new PermanentsOnTheBattlefieldCondition(
                         new FilterControlledPermanent(SubType.DEMON, "if you control no Demons"),
-                        ComparisonType.FEWER_THAN, 1),
-                false));
+                        ComparisonType.FEWER_THAN, 1)
+        ));
     }
 
     private MarkOfTheOni(final MarkOfTheOni card) {

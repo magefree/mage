@@ -16,8 +16,8 @@ public final class AjaniAdversaryOfTyrantsEmblem extends Emblem {
     public AjaniAdversaryOfTyrantsEmblem() {
         super("Emblem Ajani");
         this.getAbilities().add(new BeginningOfEndStepTriggeredAbility(
-                Zone.COMMAND, new CreateTokenEffect(new CatToken2(), 3),
-                TargetController.YOU, null, false
+                Zone.COMMAND, TargetController.YOU, new CreateTokenEffect(new CatToken2(), 3),
+                false, null
         ));
     }
 

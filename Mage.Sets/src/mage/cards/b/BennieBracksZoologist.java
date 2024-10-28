@@ -31,8 +31,8 @@ public final class BennieBracksZoologist extends CardImpl {
 
         // At the beginning of each end step, if you created a token this turn, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1),
-                TargetController.ANY, CreatedTokenThisTurnCondition.instance, false
+                TargetController.ANY, new DrawCardSourceControllerEffect(1),
+                false, CreatedTokenThisTurnCondition.instance
         ).addHint(CreatedTokenThisTurnCondition.getHint()), new CreatedTokenWatcher());
     }
 

@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
@@ -30,8 +29,8 @@ public final class ThroneWarden extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your end step, if you're the monarch, put a +1/+1 counter on Throne Warden.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility( new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, MonarchIsSourceControllerCondition.instance, false)
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                false, MonarchIsSourceControllerCondition.instance)
                 .addHint(MonarchHint.instance));
     }
 

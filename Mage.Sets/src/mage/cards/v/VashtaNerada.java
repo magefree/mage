@@ -38,8 +38,8 @@ public final class VashtaNerada extends CardImpl {
 
         // Morbid — At the beginning of each end step, if a creature died this turn, put a +1/+1 counter on Vashta Nerada.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                TargetController.ANY, MorbidCondition.instance, false
+                TargetController.ANY, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                false, MorbidCondition.instance
         ).addHint(MorbidHint.instance).setAbilityWord(AbilityWord.MORBID));
     }
 

@@ -32,8 +32,8 @@ public final class MarkovPurifier extends CardImpl {
 
         // At the beginning of your end step, if you gained life this turn, you may pay {2}. If you do, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(2)),
-                TargetController.YOU, new YouGainedLifeCondition(), false
+                TargetController.YOU, new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(2)),
+                false, new YouGainedLifeCondition()
         ), new PlayerGainedLifeWatcher());
     }
 

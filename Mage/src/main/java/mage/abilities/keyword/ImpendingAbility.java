@@ -47,8 +47,8 @@ public class ImpendingAbility extends AlternativeSourceCostsImpl {
         ), "").setRuleVisible(false));
         this.addSubAbility(new SimpleStaticAbility(new ImpendingAbilityTypeEffect()).setRuleVisible(false));
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new RemoveCounterSourceEffect(CounterType.TIME.createInstance()),
-                TargetController.YOU, ImpendingCondition.instance, false
+                TargetController.YOU, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()),
+                false, ImpendingCondition.instance
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new AddContinuousEffectToGame(new ImpendingAbilityRemoveEffect()),

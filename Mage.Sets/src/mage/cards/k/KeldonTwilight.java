@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControlledFromStartOfControllerTurnPredicate;
 import mage.game.Game;
@@ -36,7 +35,7 @@ public final class KeldonTwilight extends CardImpl {
         Effect effect = new SacrificeEffect(filter, 1, "that player ");
         effect.setText("that player sacrifices a creature they controlled since the beginning of the turn");
         BeginningOfEndStepTriggeredAbility ability
-                = new BeginningOfEndStepTriggeredAbility( effect, TargetController.ANY, new KeldonTwilightCondition(), false);
+                = new BeginningOfEndStepTriggeredAbility(TargetController.ANY, effect, false, new KeldonTwilightCondition());
         this.addAbility(ability);
     }
 

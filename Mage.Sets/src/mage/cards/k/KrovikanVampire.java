@@ -37,10 +37,9 @@ public final class KrovikanVampire extends CardImpl {
 
         // At the beginning of each end step, if a creature dealt damage by Krovikan Vampire this turn died, put that card onto the battlefield under your control. Sacrifice it when you lose control of Krovikan Vampire.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new KrovikanVampireEffect(),
-                TargetController.ANY,
-                new KrovikanVampireInterveningIfCondition(),
-                false);
+                TargetController.ANY, new KrovikanVampireEffect(),
+                false, new KrovikanVampireInterveningIfCondition()
+        );
         ability.addWatcher(new KrovikanVampireCreaturesDamagedWatcher());
         ability.addWatcher(new KrovikanVampireCreaturesDiedWatcher());
         this.addAbility(ability);

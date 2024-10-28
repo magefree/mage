@@ -58,10 +58,10 @@ public final class CorpsesOfTheLost extends CardImpl {
 
         // At the beginning of your end step, if you descended this turn, you may pay 1 life. If you do, return Corpses of the Lost to its owner's hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DoIfCostPaid(
+                TargetController.YOU, new DoIfCostPaid(
                         new ReturnToHandSourceEffect(),
                         new PayLifeCost(1)
-                ), TargetController.YOU, DescendedThisTurnCondition.instance, false
+                ), false, DescendedThisTurnCondition.instance
         ).addHint(DescendedThisTurnCount.getHint()), new DescendedWatcher());
     }
 

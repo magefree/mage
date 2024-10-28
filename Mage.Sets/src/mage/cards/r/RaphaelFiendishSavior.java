@@ -66,8 +66,8 @@ public final class RaphaelFiendishSavior extends CardImpl {
 
         // At the beginning of each end step, if a creature card was put into your graveyard from anywhere this turn, create a 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new DevilToken()), TargetController.ANY,
-                CreaturePutInYourGraveyardCondition.instance, false
+                TargetController.ANY, new CreateTokenEffect(new DevilToken()),
+                false, CreaturePutInYourGraveyardCondition.instance
         ).addHint(CreaturePutInYourGraveyardCondition.getHint()), new CreaturePutIntoGraveyardWatcher());
     }
 

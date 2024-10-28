@@ -38,8 +38,8 @@ public final class BloodsoakedReveler extends CardImpl {
 
         // At the beginning of your end step, if you gained life this turn, create a Blood token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new BloodToken()),
-                TargetController.YOU, condition, false
+                TargetController.YOU, new CreateTokenEffect(new BloodToken()),
+                false, condition
         ).addHint(hint));
 
         // {4}{B}: Each opponent loses 2 life and you gain 2 life.

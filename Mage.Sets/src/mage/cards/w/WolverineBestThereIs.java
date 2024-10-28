@@ -45,9 +45,9 @@ public final class WolverineBestThereIs extends CardImpl {
 
         // At the beginning of each end step, if Wolverine dealt damage to another creature this turn, put a +1/+1 counter on him.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance())
+                TargetController.ANY, new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                         .setText("put a +1/+1 counter on him"),
-                TargetController.ANY, WolverineBestThereIsCondition.instance, false
+                false, WolverineBestThereIsCondition.instance
         ), new WolverineBestThereIsWatcher());
 
         // {1}{G}: Regenerate Wolverine.

@@ -34,8 +34,8 @@ public final class VisionsOfPhyrexia extends CardImpl {
 
         // At the beginning of your end step, if you didn't play a card from exile this turn, create a tapped Powerstone token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new PowerstoneToken(), 1, true),
-                TargetController.YOU, VisionsOfPhyrexiaCondition.instance, false
+                TargetController.YOU, new CreateTokenEffect(new PowerstoneToken(), 1, true),
+                false, VisionsOfPhyrexiaCondition.instance
         ), new VisionsOfPhyrexiaWatcher());
     }
 

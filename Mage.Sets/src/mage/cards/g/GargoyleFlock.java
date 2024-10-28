@@ -33,8 +33,8 @@ public final class GargoyleFlock extends CardImpl {
 
         // Skyswarm -- At the beginning of your end step, if a creature entered the battlefield under your control this turn, create a 1/1 blue Tyranid Gargoyle creature token with flying.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new TyranidGargoyleToken()), TargetController.YOU,
-                CreatureEnteredUnderYourControlCondition.instance, false
+                TargetController.YOU, new CreateTokenEffect(new TyranidGargoyleToken()),
+                false, CreatureEnteredUnderYourControlCondition.instance
         ).withFlavorWord("Skyswarm"), new CreatureEnteredControllerWatcher());
     }
 

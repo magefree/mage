@@ -34,8 +34,8 @@ public final class TheChainVeil extends CardImpl {
 
         // At the beginning of your end step, if you didn't activate a loyalty ability of a planeswalker this turn, you lose 2 life.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new LoseLifeSourceControllerEffect(2), TargetController.YOU,
-                TheChainVeilCondition.instance, false
+                TargetController.YOU, new LoseLifeSourceControllerEffect(2),
+                false, TheChainVeilCondition.instance
         ), new ActivatedLoyaltyAbilityWatcher());
 
         // {4}, {T}: For each planeswalker you control, you may activate one of its loyalty abilities once this turn as though none of its loyalty abilities had been activated this turn.

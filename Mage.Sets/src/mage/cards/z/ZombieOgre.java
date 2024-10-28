@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -30,8 +29,8 @@ public final class ZombieOgre extends CardImpl {
 
         // At the beginning of your end step, if a creature died this turn, venture into the dungeon.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new VentureIntoTheDungeonEffect(),
-                TargetController.YOU, MorbidCondition.instance, false
+                TargetController.YOU, new VentureIntoTheDungeonEffect(),
+                false, MorbidCondition.instance
         ).addHint(MorbidHint.instance).addHint(CurrentDungeonHint.instance));
     }
 

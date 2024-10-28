@@ -47,8 +47,8 @@ public final class PlatoonDispenser extends CardImpl {
 
         // At the beginning of your end step, if you control two or more other creatures, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1),
-                TargetController.YOU, condition, false
+                TargetController.YOU, new DrawCardSourceControllerEffect(1),
+                false, condition
         ));
 
         // {3}{W}: Create a 1/1 colorless Soldier Artifact creature token.

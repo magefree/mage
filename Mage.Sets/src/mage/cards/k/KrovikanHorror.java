@@ -39,8 +39,8 @@ public final class KrovikanHorror extends CardImpl {
 
         // At the beginning of the end step, if Krovikan Horror is in your graveyard with a creature card directly above it, you may return Krovikan Horror to your hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
-                TargetController.NEXT, KrovikanHorrorCondition.instance, true
+                Zone.GRAVEYARD, TargetController.NEXT, new ReturnSourceFromGraveyardToHandEffect(),
+                true, KrovikanHorrorCondition.instance
         ));
 
         // {1}, Sacrifice a creature: Krovikan Horror deals 1 damage to any target.

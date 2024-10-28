@@ -29,8 +29,8 @@ public final class BroodrageMycoid extends CardImpl {
 
         // At the beginning of your end step, if you descended this turn, create a 1/1 black Fungus creature token with "This creature can't block."
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new FungusCantBlockToken()),
-                TargetController.YOU, DescendedThisTurnCondition.instance, false
+                TargetController.YOU, new CreateTokenEffect(new FungusCantBlockToken()),
+                false, DescendedThisTurnCondition.instance
         ).addHint(DescendedThisTurnCount.getHint()), new DescendedWatcher());
     }
 

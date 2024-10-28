@@ -56,8 +56,8 @@ public final class SpellpyrePhoenix extends CardImpl {
 
         // At the beginning of each end step, if you cycled two or more cards this turn, return Spellpyre Phoenix from your graveyard to your hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
-                TargetController.ANY, SpellpyrePhoenixCondition.instance, false
+                Zone.GRAVEYARD, TargetController.ANY, new ReturnSourceFromGraveyardToHandEffect(),
+                false, SpellpyrePhoenixCondition.instance
         ).addHint(SpellpyrePhoenixHint.instance), new SpellpyrePhoenixWatcher());
     }
 

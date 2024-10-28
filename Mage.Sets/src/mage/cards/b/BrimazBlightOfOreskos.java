@@ -55,8 +55,8 @@ public final class BrimazBlightOfOreskos extends CardImpl {
 
         // At the beginning of each end step, if a Phyrexian died under your control this turn, proliferate.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ProliferateEffect(false), TargetController.ANY,
-                BrimazBlightOfOreskosCondition.instance, false
+                TargetController.ANY, new ProliferateEffect(false),
+                false, BrimazBlightOfOreskosCondition.instance
         ), new BrimazBlightOfOreskosWatcher());
     }
 

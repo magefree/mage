@@ -36,8 +36,8 @@ public final class RuinLurkerBat extends CardImpl {
 
         // At the beginning of your end step, if you descended this turn, scry 1.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ScryEffect(1, false), TargetController.YOU,
-                DescendedThisTurnCondition.instance, false
+                TargetController.YOU, new ScryEffect(1, false),
+                false, DescendedThisTurnCondition.instance
         ).addHint(DescendedThisTurnCount.getHint()), new DescendedWatcher());
     }
 

@@ -36,8 +36,8 @@ public final class HurkylMasterWizard extends CardImpl {
 
         // At the beginning of your end step, if you've cast a noncreature spell this turn, reveal the top five cards of your library. For each card type among noncreature spells you've cast this turn, you may put a card of that type from among the revealed cards into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new HurkylMasterWizardEffect(), TargetController.YOU,
-                HurkylMasterWizardCondition.instance, false
+                TargetController.YOU, new HurkylMasterWizardEffect(),
+                false, HurkylMasterWizardCondition.instance
         ), new HurkylMasterWizardWatcher());
     }
 

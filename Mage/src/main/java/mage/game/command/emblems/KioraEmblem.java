@@ -20,7 +20,7 @@ public final class KioraEmblem extends Emblem {
 
     public KioraEmblem() {
         super("Emblem Kiora");
-        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new CreateTokenEffect(new Kraken99Token()), TargetController.YOU, null, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, TargetController.YOU, new CreateTokenEffect(new Kraken99Token()), false, null);
         this.getAbilities().add(ability);
     }
 

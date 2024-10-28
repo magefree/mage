@@ -37,10 +37,8 @@ public final class TrynnChampionOfFreedom extends CardImpl {
 
         // At the beginning of your end step, if you attacked this turn, create a 1/1 white Human Soldier creature token.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new HumanSoldierToken()),
-                TargetController.YOU,
-                RaidCondition.instance,
-                false
+                TargetController.YOU, new CreateTokenEffect(new HumanSoldierToken()),
+                false, RaidCondition.instance
         );
         ability.addHint(RaidHint.instance);
         this.addAbility(ability, new PlayerAttackedWatcher());

@@ -30,14 +30,14 @@ public final class LunarConvocation extends CardImpl {
 
         // At the beginning of your end step, if you gained life this turn, each opponent loses 1 life.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new LoseLifeOpponentsEffect(1), TargetController.YOU,
-                LunarConvocationCondition.GAINED, false
+                TargetController.YOU, new LoseLifeOpponentsEffect(1),
+                false, LunarConvocationCondition.GAINED
         ));
 
         // At the beginning of your end step, if you gained and lost life this turn, create a 1/1 black Bat creature token with flying.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new BatToken()), TargetController.YOU,
-                LunarConvocationCondition.GAINED_AND_LOST, false
+                TargetController.YOU, new CreateTokenEffect(new BatToken()),
+                false, LunarConvocationCondition.GAINED_AND_LOST
         ));
 
         // {1}{B}, Pay 2 life: Draw a card.

@@ -43,9 +43,9 @@ public final class ElanorGardner extends CardImpl {
 
         // At the beginning of your end step, if you sacrificed a Food this turn, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new SearchLibraryPutInPlayEffect(
+                TargetController.YOU, new SearchLibraryPutInPlayEffect(
                         new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true
-                ), TargetController.YOU, ElanorGardnerCondition.instance, true
+                ), true, ElanorGardnerCondition.instance
         ).addHint(ElanorGardnerCondition.getHint()), new ElanorGardnerWatcher());
     }
 

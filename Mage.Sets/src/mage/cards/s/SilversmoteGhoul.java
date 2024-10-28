@@ -39,8 +39,8 @@ public final class SilversmoteGhoul extends CardImpl {
         // At the beginning of your end step, if you gained 3 or more life this turn, return Silversmote Ghoul from your graveyard to the battlefield tapped.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true),
-                        TargetController.YOU, null, false
+                        Zone.GRAVEYARD, TargetController.YOU, new ReturnSourceFromGraveyardToBattlefieldEffect(true),
+                        false, null
                 ), condition, "At the beginning of your end step, " +
                 "if you gained 3 or more life this turn, return {this} from your graveyard to the battlefield tapped."
         ).addHint(hint), new PlayerGainedLifeWatcher());

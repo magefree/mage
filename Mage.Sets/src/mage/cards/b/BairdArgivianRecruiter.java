@@ -45,7 +45,7 @@ public final class BairdArgivianRecruiter extends CardImpl {
         // At the beginning of your end step, if you control a creature with power greater than its base power,
         // create a 1/1 white Soldier creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new SoldierToken()), TargetController.YOU, condition, false
+                TargetController.YOU, new CreateTokenEffect(new SoldierToken()), false, condition
         ).addHint(hint));
     }
 

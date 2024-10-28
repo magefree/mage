@@ -39,8 +39,8 @@ public final class OwlbearShepherd extends CardImpl {
 
         // At the beginning of your end step, if creatures you control have total power and toughness 8 or greater, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1),
-                TargetController.YOU, FormidableCondition.instance, false
+                TargetController.YOU, new DrawCardSourceControllerEffect(1),
+                false, FormidableCondition.instance
         ).addHint(hint));
     }
 

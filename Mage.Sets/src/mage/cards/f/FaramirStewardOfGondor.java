@@ -44,8 +44,8 @@ public final class FaramirStewardOfGondor extends CardImpl {
 
         // At the beginning of your end step, if you're the monarch, create two 1/1 white Human Soldier creature tokens.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new HumanSoldierToken(), 2), TargetController.YOU,
-                MonarchIsSourceControllerCondition.instance, false
+                TargetController.YOU, new CreateTokenEffect(new HumanSoldierToken(), 2),
+                false, MonarchIsSourceControllerCondition.instance
         ));
     }
 

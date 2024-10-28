@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -27,8 +26,8 @@ public final class NimAbomination extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your end step, if Nim Abomination is untapped, you lose 3 life.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility( new LoseLifeSourceControllerEffect(3),
-                TargetController.YOU, SourceTappedCondition.UNTAPPED, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new LoseLifeSourceControllerEffect(3),
+                false, SourceTappedCondition.UNTAPPED));
     }
 
     private NimAbomination(final NimAbomination card) {

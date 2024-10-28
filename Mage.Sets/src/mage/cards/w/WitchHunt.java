@@ -37,7 +37,7 @@ public final class WitchHunt extends CardImpl {
         // At the beginning of your upkeep, Witch Hunt deals 4 damage to you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(4)));
         // At the beginning of your end step, target opponent chosen at random gains control of Witch Hunt.
-        Ability ability = new BeginningOfEndStepTriggeredAbility( new WitchHuntEffect(), TargetController.YOU, null, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new WitchHuntEffect(), false, null);
         Target target = new TargetOpponent();
         target.setRandom(true);
         ability.addTarget(target);

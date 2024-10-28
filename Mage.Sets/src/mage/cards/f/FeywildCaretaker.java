@@ -34,8 +34,8 @@ public final class FeywildCaretaker extends CardImpl {
 
         // At the beginning of your end step, if you have the initiative, create a 1/1 blue Faerie Dragon creature token with flying.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new FaerieDragonToken()), TargetController.YOU,
-                HaveInitiativeCondition.instance, false
+                TargetController.YOU, new CreateTokenEffect(new FaerieDragonToken()),
+                false, HaveInitiativeCondition.instance
         ).addHint(InitiativeHint.instance));
     }
 

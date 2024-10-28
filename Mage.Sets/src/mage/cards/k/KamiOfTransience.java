@@ -46,8 +46,8 @@ public final class KamiOfTransience extends CardImpl {
 
         // At the beginning of each end step, if an enchantment was put into your graveyard from the battlefield this turn, you may return Kami of Transience from your graveyard to your hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
-                TargetController.ANY, KamiOfTransienceCondition.instance, true
+                Zone.GRAVEYARD, TargetController.ANY, new ReturnSourceFromGraveyardToHandEffect(),
+                true, KamiOfTransienceCondition.instance
         ).addHint(KamiOfTransienceCondition.getHint()), new KamiOfTransienceWatcher());
     }
 

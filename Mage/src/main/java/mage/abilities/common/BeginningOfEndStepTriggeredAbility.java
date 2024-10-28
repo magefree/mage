@@ -17,19 +17,22 @@ public class BeginningOfEndStepTriggeredAbility extends AtStepTriggeredAbility {
         this(effect, false);
     }
 
+    /**
+     * At the beginning of your end step
+     */
     public BeginningOfEndStepTriggeredAbility(Effect effect, boolean optional) {
         this(TargetController.YOU, effect, optional);
     }
 
     public BeginningOfEndStepTriggeredAbility(TargetController targetController, Effect effect, boolean optional) {
-        this(effect, targetController, null, optional);
+        this(targetController, effect, optional, null);
     }
 
-    public BeginningOfEndStepTriggeredAbility(Effect effect, TargetController targetController, Condition interveningIfClauseCondition, boolean optional) {
-        this(Zone.BATTLEFIELD, effect, targetController, interveningIfClauseCondition, optional);
+    public BeginningOfEndStepTriggeredAbility(TargetController targetController, Effect effect, boolean optional, Condition interveningIfClauseCondition) {
+        this(Zone.BATTLEFIELD, targetController, effect, optional, interveningIfClauseCondition);
     }
 
-    public BeginningOfEndStepTriggeredAbility(Zone zone, Effect effect, TargetController targetController, Condition interveningIfClauseCondition, boolean optional) {
+    public BeginningOfEndStepTriggeredAbility(Zone zone, TargetController targetController, Effect effect, boolean optional, Condition interveningIfClauseCondition) {
         super(zone, targetController, effect, optional);
         this.withInterveningIf(interveningIfClauseCondition);
     }

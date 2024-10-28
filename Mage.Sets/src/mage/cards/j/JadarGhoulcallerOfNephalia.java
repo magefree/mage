@@ -48,8 +48,8 @@ public final class JadarGhoulcallerOfNephalia extends CardImpl {
 
         // At the beginning of your end step, if you control no creatures with decayed, create a 2/2 black Zombie creature token with decayed.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new ZombieDecayedToken()),
-                TargetController.YOU, condition, false
+                TargetController.YOU, new CreateTokenEffect(new ZombieDecayedToken()),
+                false, condition
         ).addHint(hint));
     }
 

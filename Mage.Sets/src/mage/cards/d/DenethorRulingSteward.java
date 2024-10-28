@@ -37,8 +37,8 @@ public final class DenethorRulingSteward extends CardImpl {
 
         // At the beginning of your end step, if a creature died under your control this turn, create a 1/1 white Human Soldier creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new HumanSoldierToken()), TargetController.YOU,
-                CreatureDiedControlledCondition.instance, false
+                TargetController.YOU, new CreateTokenEffect(new HumanSoldierToken()),
+                false, CreatureDiedControlledCondition.instance
         ).addHint(CreatureDiedControlledCondition.getHint()));
 
         // {2}, Sacrifice another creature: Each opponent loses 1 life and you gain 1 life.

@@ -39,9 +39,9 @@ public final class StarCharter extends CardImpl {
 
         // At the beginning of your end step, if you gained or lost life this turn, look at the top four cards of your library. You may reveal a creature card with power 3 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(
+                TargetController.YOU, new LookLibraryAndPickControllerEffect(
                         4, 1, filter, PutCards.HAND, PutCards.BOTTOM_RANDOM
-                ), TargetController.YOU, YouGainedOrLostLifeCondition.instance, false
+                ), false, YouGainedOrLostLifeCondition.instance
         ).addHint(YouGainedOrLostLifeCondition.getHint()), new PlayerGainedLifeWatcher());
     }
 

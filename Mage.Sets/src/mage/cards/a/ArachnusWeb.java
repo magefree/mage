@@ -41,8 +41,8 @@ public final class ArachnusWeb extends CardImpl {
         FilterPermanent filter = new FilterPermanent("if enchanted creature's power is 4 or greater");
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DestroySourceEffect(), TargetController.NEXT,
-                new AttachedToMatchesFilterCondition(filter), false));
+                TargetController.NEXT, new DestroySourceEffect(),
+                false, new AttachedToMatchesFilterCondition(filter)));
     }
 
     private ArachnusWeb(final ArachnusWeb card) {

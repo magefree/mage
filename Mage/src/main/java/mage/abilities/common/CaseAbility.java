@@ -114,8 +114,8 @@ public class CaseAbility extends SimpleStaticAbility {
 class CaseSolveAbility extends BeginningOfEndStepTriggeredAbility {
 
     CaseSolveAbility(Condition condition) {
-        super(new SolveEffect(), TargetController.YOU,
-                new CompoundCondition(condition, SolvedSourceCondition.UNSOLVED), false);
+        super(TargetController.YOU, new SolveEffect(),
+                false, new CompoundCondition(condition, SolvedSourceCondition.UNSOLVED));
         withFlavorWord("To solve"); // TODO: technically this shouldn't be italicized
         setTriggerPhrase(CardUtil.getTextWithFirstCharUpperCase(trimIf(condition.toString())));
     }

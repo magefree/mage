@@ -37,7 +37,7 @@ public class AcademyAtTolariaWestPlane extends Plane {
         this.setPlaneType(Planes.PLANE_ACADEMY_AT_TOLARIA_WEST);
 
         // At the beginning of your end step, if you have 0 cards in hand, draw seven cards
-        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new DrawCardsActivePlayerEffect(7), TargetController.ANY, HellbentAPCondition.instance, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, TargetController.ANY, new DrawCardsActivePlayerEffect(7), false, HellbentAPCondition.instance);
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, discard your hand

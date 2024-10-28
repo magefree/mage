@@ -44,8 +44,8 @@ public final class KaitoShizuki extends CardImpl {
 
         // At the beginning of your end step, if Kaito Shizuki entered the battlefield this turn, he phases out.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new PhaseOutSourceEffect().setText("he phases out"),
-                TargetController.YOU, SourceEnteredThisTurnCondition.instance, false
+                TargetController.YOU, new PhaseOutSourceEffect().setText("he phases out"),
+                false, SourceEnteredThisTurnCondition.instance
         ).addHint(hint));
 
         // +1: Draw a card. Then discard a card unless you attacked this turn.

@@ -43,8 +43,8 @@ public final class ZoyowaLavaTongue extends CardImpl {
 
         // At the beginning of your end step, if you descended this turn, each opponent may discard a card or sacrifice a permanent. Zoyowa Lava-Tongue deals 3 damage to each opponent who didn't.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ZoyowaLavaTongueEffect(), TargetController.YOU,
-                DescendedThisTurnCondition.instance, false
+                TargetController.YOU, new ZoyowaLavaTongueEffect(),
+                false, DescendedThisTurnCondition.instance
         ).addHint(DescendedThisTurnCount.getHint()), new DescendedWatcher());
     }
 

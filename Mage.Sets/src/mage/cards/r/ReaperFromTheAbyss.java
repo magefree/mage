@@ -37,8 +37,8 @@ public final class ReaperFromTheAbyss extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new DestroyTargetEffect(),
-                TargetController.ANY, MorbidCondition.instance, false
+                TargetController.ANY, new DestroyTargetEffect(),
+                false, MorbidCondition.instance
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability.setAbilityWord(AbilityWord.MORBID).addHint(MorbidHint.instance));

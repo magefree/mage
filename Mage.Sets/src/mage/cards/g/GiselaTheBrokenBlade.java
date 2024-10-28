@@ -45,9 +45,9 @@ public final class GiselaTheBrokenBlade extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // At the beginning of your end step, if you both own and control Gisela, the Broken Blade and a creature named Bruna, the Fading Light, exile them, then meld them into Brisela, Voice of Nightmares.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new MeldEffect(
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new MeldEffect(
                 "Bruna, the Fading Light", "Brisela, Voice of Nightmares"
-        ).setText("exile them, then meld them into Brisela, Voice of Nightmares"), TargetController.YOU, condition, false));
+        ).setText("exile them, then meld them into Brisela, Voice of Nightmares"), false, condition));
     }
 
     private GiselaTheBrokenBlade(final GiselaTheBrokenBlade card) {

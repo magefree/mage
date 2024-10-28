@@ -30,8 +30,8 @@ public final class EnterprisingScallywag extends CardImpl {
 
         // At the beginning of your end step, if you descended this turn, create a Treasure token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new TreasureToken()), TargetController.YOU,
-                DescendedThisTurnCondition.instance, false
+                TargetController.YOU, new CreateTokenEffect(new TreasureToken()),
+                false, DescendedThisTurnCondition.instance
         ).addHint(DescendedThisTurnCount.getHint()), new DescendedWatcher());
     }
 

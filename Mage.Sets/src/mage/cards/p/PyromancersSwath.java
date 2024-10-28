@@ -28,7 +28,7 @@ public final class PyromancersSwath extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PyromancersSwathReplacementEffect()));
 
         // At the beginning of each end step, discard your hand.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility( new DiscardHandControllerEffect(), TargetController.ANY, null, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new DiscardHandControllerEffect(), false, null));
 
     }
 

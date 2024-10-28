@@ -57,8 +57,8 @@ public final class OcelotPride extends CardImpl {
 
         // At the beginning of your end step, if you gained life this turn, create a 1/1 white Cat creature token. Then if you have the city's blessing, for each token you control that entered the battlefield this turn, create a token that's a copy of it.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new CatToken3()),
-                TargetController.YOU, condition, false
+                TargetController.YOU, new CreateTokenEffect(new CatToken3()),
+                false, condition
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new OcelotPrideEffect(),

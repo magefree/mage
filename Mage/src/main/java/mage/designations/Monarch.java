@@ -38,7 +38,7 @@ public class Monarch extends Designation {
 class MonarchDrawTriggeredAbility extends BeginningOfEndStepTriggeredAbility {
 
     public MonarchDrawTriggeredAbility() {
-        super(Zone.ALL, new DrawCardTargetEffect(1), TargetController.ANY, null, false);
+        super(Zone.ALL, TargetController.ANY, new DrawCardTargetEffect(1), false, null);
     }
 
     protected MonarchDrawTriggeredAbility(final MonarchDrawTriggeredAbility ability) {

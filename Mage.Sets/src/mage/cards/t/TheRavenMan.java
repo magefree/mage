@@ -36,10 +36,8 @@ public final class TheRavenMan extends CardImpl {
 
         // At the beginning of each end step, if a player discarded a card this turn, create a 1/1 black Bird creature token with flying and "This creature can't block."
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new BlackBirdToken()),
-                TargetController.ANY,
-                PlayerDiscardedThisTurnCondition.instance,
-                false
+                TargetController.ANY, new CreateTokenEffect(new BlackBirdToken()),
+                false, PlayerDiscardedThisTurnCondition.instance
         ), new DiscardedCardWatcher());
 
         // {3}{B}, {T}: Each opponent discards a card. Activate only as a sorcery.

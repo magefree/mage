@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 
@@ -32,10 +31,9 @@ public final class BloodchiefAscension extends CardImpl {
 
         // At the beginning of each end step, if an opponent lost 2 or more life this turn, you may put a quest counter on Bloodchief Ascension. (Damage causes loss of life.)
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.QUEST.createInstance(1), false),
-                TargetController.ANY,
-                new OpponentLostLifeCondition(ComparisonType.MORE_THAN, 1),
-                true));
+                TargetController.ANY, new AddCountersSourceEffect(CounterType.QUEST.createInstance(1), false),
+                true, new OpponentLostLifeCondition(ComparisonType.MORE_THAN, 1)
+        ));
 
         // Whenever a card is put into an opponent's graveyard from anywhere, if Bloodchief Ascension has three or more quest counters on it, you may have that player lose 2 life. If you do, you gain 2 life.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(

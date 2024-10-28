@@ -27,8 +27,8 @@ public final class MusterTheDeparted extends CardImpl {
 
         // Morbid -- At the beginning of your end step, if a creature died this turn, populate.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new PopulateEffect(), TargetController.YOU,
-                MorbidCondition.instance, false
+                TargetController.YOU, new PopulateEffect(),
+                false, MorbidCondition.instance
         ).setAbilityWord(AbilityWord.MORBID));
     }
 

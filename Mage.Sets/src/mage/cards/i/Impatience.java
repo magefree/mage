@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.watchers.common.CastSpellLastTurnWatcher;
 
@@ -28,8 +27,8 @@ public final class Impatience extends CardImpl {
         // At the beginning of each player's end step, if that player didn't cast a spell this turn, Impatience deals 2 damage to that player.
         Effect effect = new DamageTargetEffect(2);
         effect.setText("{this} deals 2 damage to that player.");
-        this.addAbility(new BeginningOfEndStepTriggeredAbility( effect, TargetController.ANY,
-            new ImpatienceCondition(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, effect,
+                false, new ImpatienceCondition()));
     }
 
     private Impatience(final Impatience card) {

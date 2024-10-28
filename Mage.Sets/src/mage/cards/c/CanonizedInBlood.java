@@ -30,8 +30,8 @@ public final class CanonizedInBlood extends CardImpl {
 
         // At the beginning of your end step, if you descended this turn, put a +1/+1 counter on target creature you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), TargetController.YOU,
-                DescendedThisTurnCondition.instance, false
+                TargetController.YOU, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                false, DescendedThisTurnCondition.instance
         ).addHint(DescendedThisTurnCount.getHint());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability, new DescendedWatcher());

@@ -27,10 +27,8 @@ public final class SyggRiverCutthroat extends CardImpl {
 
         // At the beginning of each end step, if an opponent lost 3 or more life this turn, you may draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1),
-                TargetController.ANY,
-                new OpponentLostLifeCondition(ComparisonType.OR_GREATER, 3),
-                true
+                TargetController.ANY, new DrawCardSourceControllerEffect(1),
+                true, new OpponentLostLifeCondition(ComparisonType.OR_GREATER, 3)
         ).addHint(new ConditionHint(
                 new OpponentLostLifeCondition(ComparisonType.OR_GREATER, 3),
                 "An opponent lost 3 or more life this turn"

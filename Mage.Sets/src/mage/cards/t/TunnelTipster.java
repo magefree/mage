@@ -39,8 +39,8 @@ public final class TunnelTipster extends CardImpl {
 
         // At the beginning of your end step, if a face-down creature entered the battlefield under your control this turn, put a +1/+1 counter on Tunnel Tipster.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU,
-                TunnelTipsterCondition.instance, false);
+                TargetController.YOU, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                false, TunnelTipsterCondition.instance);
         ability.addHint(new ConditionHint(TunnelTipsterCondition.instance,
                 "a face-down creature entered the battlefield under your control"));
         this.addAbility(ability, new TunnelTipsterWatcher());

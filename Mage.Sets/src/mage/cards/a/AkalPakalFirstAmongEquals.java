@@ -29,10 +29,8 @@ public final class AkalPakalFirstAmongEquals extends CardImpl {
 
         // At the beginning of each player's end step, if an artifact entered the battlefield under your control this turn, look at the top two cards of your library. Put one of them into your hand and the other into your graveyard.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(2, 1, PutCards.HAND, PutCards.GRAVEYARD),
-                TargetController.EACH_PLAYER,
-                ArtifactEnteredUnderYourControlCondition.instance,
-                false
+                TargetController.EACH_PLAYER, new LookLibraryAndPickControllerEffect(2, 1, PutCards.HAND, PutCards.GRAVEYARD),
+                false, ArtifactEnteredUnderYourControlCondition.instance
         );
         ability.addHint(new ConditionHint(ArtifactEnteredUnderYourControlCondition.instance));
         this.addAbility(ability, new ArtifactEnteredControllerWatcher());

@@ -34,8 +34,8 @@ public final class PegasusGuardian extends AdventureCard {
 
         // At the beginning of your end step, if a permanent you controlled left the battlefield this turn, create a 1/1 white Pegasus creature token with flying.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new PegasusToken()), TargetController.YOU,
-                RevoltCondition.instance, false
+                TargetController.YOU, new CreateTokenEffect(new PegasusToken()),
+                false, RevoltCondition.instance
         ).addHint(RevoltCondition.getHint()), new RevoltWatcher());
 
         // Rescue the Foal

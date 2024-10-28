@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.permanent.token.AngelToken;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -25,8 +24,8 @@ public final class AngelicAccord extends CardImpl {
 
         // At the beginning of each end step, if you gained 4 or more life this turn, create a 4/4 white Angel creature token with flying.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new AngelToken()), TargetController.ANY,
-                new YouGainedLifeCondition(ComparisonType.MORE_THAN, 3), false
+                TargetController.ANY, new CreateTokenEffect(new AngelToken()),
+                false, new YouGainedLifeCondition(ComparisonType.MORE_THAN, 3)
         ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 

@@ -48,8 +48,8 @@ public final class LuluLoyalHollyphant extends CardImpl {
 
         // At the beginning of your end step, if a permanent you controlled left the battlefield this turn, put a +1/+1 counter on each tapped creature you control, then untap them.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter),
-                TargetController.YOU, RevoltCondition.instance, false
+                TargetController.YOU, new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter),
+                false, RevoltCondition.instance
         );
         ability.addEffect(new UntapAllEffect(filter).setText(", then untap them"));
         this.addAbility(ability.addHint(RevoltCondition.getHint()), new RevoltWatcher());

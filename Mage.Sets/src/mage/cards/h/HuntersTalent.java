@@ -63,8 +63,8 @@ public final class HuntersTalent extends CardImpl {
         // At the beginning of your end step, if you control a creature with power 4 or greater, draw a card.
         this.addAbility(new SimpleStaticAbility(
                 new GainClassAbilitySourceEffect(new BeginningOfEndStepTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1), TargetController.YOU,
-                        FerociousCondition.instance, false
+                        TargetController.YOU, new DrawCardSourceControllerEffect(1),
+                        false, FerociousCondition.instance
                 ), 3)
         ).addHint(FerociousHint.instance));
     }

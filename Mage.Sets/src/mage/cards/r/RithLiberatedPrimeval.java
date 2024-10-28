@@ -53,8 +53,8 @@ public final class RithLiberatedPrimeval extends CardImpl {
 
         // At the beginning of your end step, if a creature or planeswalker an opponent controlled was dealt excess damage this turn, create a 4/4 red Dragon creature token with flying.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new DragonToken()), TargetController.YOU,
-                RithLiberatedPrimevalCondition.instance, false
+                TargetController.YOU, new CreateTokenEffect(new DragonToken()),
+                false, RithLiberatedPrimevalCondition.instance
         ), new RithLiberatedPrimevalWatcher());
     }
 

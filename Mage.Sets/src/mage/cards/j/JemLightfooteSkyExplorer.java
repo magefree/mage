@@ -34,8 +34,8 @@ public final class JemLightfooteSkyExplorer extends CardImpl {
 
         // At the beginning of your end step, if you haven't cast a spell from your hand this turn, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1),
-                TargetController.YOU, HaventCastSpellFromHandThisTurnCondition.instance, false
+                TargetController.YOU, new DrawCardSourceControllerEffect(1),
+                false, HaventCastSpellFromHandThisTurnCondition.instance
         ).addHint(HaventCastSpellFromHandThisTurnCondition.hint));
     }
 

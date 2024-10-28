@@ -32,8 +32,8 @@ public final class Vrock extends CardImpl {
 
         // Toxic Spores — At the beginning of your end step, if a permanent you controlled left the battlefield this turn, each opponent loses 3 life.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new LoseLifeOpponentsEffect(3), TargetController.YOU,
-                RevoltCondition.instance, false
+                TargetController.YOU, new LoseLifeOpponentsEffect(3),
+                false, RevoltCondition.instance
         ).withFlavorWord("Toxic Spores").addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
 

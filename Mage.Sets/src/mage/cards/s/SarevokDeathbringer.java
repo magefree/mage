@@ -35,8 +35,8 @@ public final class SarevokDeathbringer extends CardImpl {
 
         // At the beginning of each player's end step, if no permanents left the battlefield this turn, that player loses X life, where X is Sarevok's power.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new LoseLifeTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE), TargetController.EACH_PLAYER,
-                new InvertCondition(SarevokDeathbringerCondition.instance), false
+                TargetController.EACH_PLAYER, new LoseLifeTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE),
+                false, new InvertCondition(SarevokDeathbringerCondition.instance)
         ), new RevoltWatcher());
 
         // Choose a Background

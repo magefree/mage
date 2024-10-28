@@ -50,8 +50,8 @@ public final class SawbladeSkinripper extends CardImpl {
 
         // At the beginning of your end step, if you sacrificed one or more permanents this turn, Sawblade Skinripper deals that much damage to any target.
         ability = new BeginningOfEndStepTriggeredAbility(
-                new DamageTargetEffect(SawbladeSkinripperValue.instance), TargetController.YOU,
-                SawbladeSkinripperCondition.instance, false
+                TargetController.YOU, new DamageTargetEffect(SawbladeSkinripperValue.instance),
+                false, SawbladeSkinripperCondition.instance
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability, new PermanentsSacrificedWatcher());

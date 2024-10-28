@@ -30,8 +30,8 @@ public final class SearslicerGoblin extends CardImpl {
 
         // Raid -- At the beginning of your end step, if you attacked this turn, create a 1/1 red Goblin creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new GoblinToken()), TargetController.YOU,
-                RaidCondition.instance, false
+                TargetController.YOU, new CreateTokenEffect(new GoblinToken()),
+                false, RaidCondition.instance
         ).setAbilityWord(AbilityWord.RAID), new PlayerAttackedWatcher());
     }
 

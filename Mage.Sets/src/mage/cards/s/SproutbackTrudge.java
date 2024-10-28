@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import mage.ApprovingObject;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -47,7 +46,7 @@ public final class SproutbackTrudge extends CardImpl {
 
         // At the beginning of your end step, if you gained life this turn, you may cast Sproutback Trudge from your graveyard.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.GRAVEYARD, new SproutbackTrudgeEffect(), TargetController.YOU, condition, true
+                Zone.GRAVEYARD, TargetController.YOU, new SproutbackTrudgeEffect(), true, condition
         ));
     }
 

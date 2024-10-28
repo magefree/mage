@@ -32,8 +32,8 @@ public final class StarlitSoothsayer extends CardImpl {
 
         // At the beginning of your end step, if you gained or lost life this turn, surveil 1.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new SurveilEffect(1), TargetController.YOU,
-                YouGainedOrLostLifeCondition.instance, false
+                TargetController.YOU, new SurveilEffect(1),
+                false, YouGainedOrLostLifeCondition.instance
         ).addHint(YouGainedOrLostLifeCondition.getHint()), new PlayerGainedLifeWatcher());
     }
 

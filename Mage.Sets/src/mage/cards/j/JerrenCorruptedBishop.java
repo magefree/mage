@@ -59,9 +59,9 @@ public final class JerrenCorruptedBishop extends CardImpl {
 
         // At the beginning of your end step, if you have exactly 13 life, you may pay {4}{B}{B}. If you do, transform Jerren.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfEndStepTriggeredAbility( new DoIfCostPaid(
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new DoIfCostPaid(
                 new TransformSourceEffect(), new ManaCostsImpl<>("{4}{B}{B}")
-        ), TargetController.YOU, JerrenCorruptedBishopCondition.instance, false));
+        ), false, JerrenCorruptedBishopCondition.instance));
     }
 
     private JerrenCorruptedBishop(final JerrenCorruptedBishop card) {

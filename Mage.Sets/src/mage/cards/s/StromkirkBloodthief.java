@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -36,8 +35,8 @@ public final class StromkirkBloodthief extends CardImpl {
 
         // At the beginning of your end step, if an opponent lost life this turn, put a +1/+1 counter on target Vampire you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, OpponentsLostLifeCondition.instance, false
+                TargetController.YOU, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                false, OpponentsLostLifeCondition.instance
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability.addHint(OpponentsLostLifeHint.instance));

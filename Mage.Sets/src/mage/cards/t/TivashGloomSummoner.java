@@ -41,8 +41,8 @@ public final class TivashGloomSummoner extends CardImpl {
 
         // At the beginning of your end step, if you gained life this turn, you may pay X life, where X is the amount of life you gained this turn. If you do, create an X/X black Demon creature token with flying.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new TivashGloomSummonerEffect(),
-                TargetController.YOU, condition, false
+                TargetController.YOU, new TivashGloomSummonerEffect(),
+                false, condition
         ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
