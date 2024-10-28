@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,7 +29,7 @@ public final class BlackMarket extends CardImpl {
         // Whenever a creature dies, put a charge counter on Black Market.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), false));
         // At the beginning of your precombat main phase, add {B} for each charge counter on Black Market.
-        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new BlackMarketEffect(), false));
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new BlackMarketEffect()));
 
     }
 

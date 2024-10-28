@@ -18,7 +18,6 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -43,7 +42,7 @@ public final class ElementalResonance extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your precombat main phase, add mana equal to enchanted permanent's mana cost.
-        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new ElementalResonanceEffect(), false));
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new ElementalResonanceEffect()));
     }
 
     private ElementalResonance(final ElementalResonance card) {

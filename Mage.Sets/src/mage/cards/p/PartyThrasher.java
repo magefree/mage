@@ -57,7 +57,7 @@ public final class PartyThrasher extends CardImpl {
                 new DoIfCostPaid(
                         new PartyThrasherEffect(),
                         new DiscardCardCost()
-                ), false
+                )
         ));
     }
 

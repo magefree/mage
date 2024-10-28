@@ -17,7 +17,6 @@ import mage.cards.Cards;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -51,7 +50,7 @@ public final class CabalTherapist extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(
                 new DoWhenCostPaid(ability, new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE
-                ), "Sacrifice a creature?"), false
+                ), "Sacrifice a creature?")
         ));
     }
 

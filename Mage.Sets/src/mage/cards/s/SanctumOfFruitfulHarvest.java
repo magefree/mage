@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 
@@ -41,8 +40,8 @@ public final class SanctumOfFruitfulHarvest extends CardImpl {
                         Mana.AnyMana(1),
                         xValue,
                         "add X mana of any one color, where X is the number of Shrines you control",
-                        true),
-                false)
+                        true)
+        )
                 .addHint(new ValueHint("Shrines you control", xValue)));
     }
 
