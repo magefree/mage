@@ -3,7 +3,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.TheRingTemptsYouTriggeredAbility;
 import mage.abilities.condition.common.CreatureDiedControlledCondition;
 import mage.abilities.effects.OneShotEffect;

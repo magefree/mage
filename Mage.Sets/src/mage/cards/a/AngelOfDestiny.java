@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.condition.common.MoreThanStartingLifeTotalCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;

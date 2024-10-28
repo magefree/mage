@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileThenReturnTargetEffect;

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DealsDamageToOneOrMoreCreaturesTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;

@@ -1,7 +1,7 @@
 package mage.cards.v;
 
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;

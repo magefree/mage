@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.ControllerDiscardedThisTurnCondition;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.hint.common.ControllerDiscardedHint;

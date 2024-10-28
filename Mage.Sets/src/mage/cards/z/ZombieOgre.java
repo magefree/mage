@@ -1,7 +1,7 @@
 package mage.cards.z;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
 import mage.abilities.hint.common.CurrentDungeonHint;

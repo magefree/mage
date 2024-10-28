@@ -3,7 +3,7 @@ package mage.cards.o;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.FormidableCondition;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;

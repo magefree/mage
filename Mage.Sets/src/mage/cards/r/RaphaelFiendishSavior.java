@@ -3,7 +3,7 @@ package mage.cards.r;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CreaturePutInYourGraveyardCondition;
 import mage.abilities.effects.common.CreateTokenEffect;

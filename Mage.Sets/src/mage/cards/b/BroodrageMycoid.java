@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.DescendedThisTurnCondition;
 import mage.abilities.dynamicvalue.common.DescendedThisTurnCount;
 import mage.abilities.effects.common.CreateTokenEffect;

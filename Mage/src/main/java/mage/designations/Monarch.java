@@ -2,7 +2,7 @@ package mage.designations;
 
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.BecomesMonarchTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.constants.TargetController;

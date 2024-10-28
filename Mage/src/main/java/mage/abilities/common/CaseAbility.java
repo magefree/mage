@@ -11,6 +11,7 @@ import mage.abilities.decorator.ConditionalReplacementEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;

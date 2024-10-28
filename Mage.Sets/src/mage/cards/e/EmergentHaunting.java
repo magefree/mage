@@ -1,6 +1,6 @@
 package mage.cards.e;
 
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
