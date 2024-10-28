@@ -49,7 +49,7 @@ public final class KomaCosmosSerpent extends CardImpl {
 
         // At the beginning of each upkeep, create a 3/3 blue Serpent creature token named Koma's Coil.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.EACH_PLAYER, new CreateTokenEffect(new KomasCoilToken()), false
+                TargetController.ANY, new CreateTokenEffect(new KomasCoilToken()), false
         ));
 
         // Sacrifice another Serpent: Choose one —

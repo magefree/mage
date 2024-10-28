@@ -31,7 +31,7 @@ public final class SunDroplet extends CardImpl {
 
         // At the beginning of each upkeep, you may remove a charge counter from Sun Droplet. If you do, you gain 1 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.EACH_PLAYER, new DoIfCostPaid(
+                TargetController.ANY, new DoIfCostPaid(
                         new GainLifeEffect(1), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance())
                 ), false
         ));

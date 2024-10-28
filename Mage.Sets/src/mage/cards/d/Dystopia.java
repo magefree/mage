@@ -33,7 +33,7 @@ public final class Dystopia extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new PayLifeCost(1)));
         
         // At the beginning of each player's upkeep, that player sacrifices a green or white permanent.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new SacrificeEffect(filter, 1, "that player"), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new SacrificeEffect(filter, 1, "that player"), false));
     }
 
     private Dystopia(final Dystopia card) {

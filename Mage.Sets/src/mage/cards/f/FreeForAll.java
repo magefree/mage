@@ -34,7 +34,7 @@ public final class FreeForAll extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new FreeForAllExileAllEffect()));
 
         // At the beginning of each player's upkeep, that player chooses a card exiled with Free-for-All at random and puts it onto the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new FreeForAllReturnFromExileEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new FreeForAllReturnFromExileEffect(), false));
 
         // When Free-for-All leaves the battlefield, put all cards exiled with it into their owners' graveyards.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.GRAVEYARD)

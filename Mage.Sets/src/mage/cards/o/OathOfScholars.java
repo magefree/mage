@@ -29,7 +29,7 @@ public final class OathOfScholars extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // At the beginning of each player's upkeep, that player chooses target player who has more cards in hand than they do and is their opponent. The first player may discard their hand and draw three cards.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new OathOfScholarsEffect(), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new OathOfScholarsEffect(), false).withTargetPointerSet(false);
         ability.setTargetAdjuster(OathOfScholarsAdjuster.instance);
         this.addAbility(ability);
     }

@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 public final class DefilerOfSouls extends CardImpl {
 
-    private static FilterCreaturePermanent filter = new FilterCreaturePermanent("monocolored creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("monocolored creature");
     static {
         filter.add(MonocoloredPredicate.instance);
     }
@@ -37,7 +37,7 @@ public final class DefilerOfSouls extends CardImpl {
         
         // At the beginning of each player's upkeep, that player sacrifices a monocolored creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.ANY, new SacrificeEffect(filter, 1, "that player"), false));
+                TargetController.EACH_PLAYER, new SacrificeEffect(filter, 1, "that player"), false));
     }
 
     private DefilerOfSouls(final DefilerOfSouls card) {

@@ -52,7 +52,7 @@ class SeanceEffect extends OneShotEffect {
 
     SeanceEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "you may exile target creature card from your graveyard. If you do, create a token that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step";
+        this.staticText = "you may exile target creature card from your graveyard. If you do, create a token that's a copy of that card, except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step";
     }
 
     private SeanceEffect(final SeanceEffect effect) {

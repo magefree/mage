@@ -27,7 +27,7 @@ public final class InfernalGenesis extends CardImpl {
 
         // At the beginning of each player's upkeep, that player puts the top card of their library into their graveyard.
         // Then they create X 1/1 black Minion creature tokens, where X is that card's converted mana cost.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new InfernalGenesisEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new InfernalGenesisEffect(), false));
     }
 
     private InfernalGenesis(final InfernalGenesis card) {

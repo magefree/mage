@@ -60,7 +60,7 @@ class ChaosMoonEffect extends OneShotEffect {
         super(Outcome.Neutral);
         this.staticText = "count the number of permanents. If the number is odd, " +
                 "until end of turn, red creatures get +1/+1 and whenever a player taps a Mountain for mana, " +
-                "that player adds {R} (in addition to the mana the land produces). If the number is even, " +
+                "that player adds an additional {R}. If the number is even, " +
                 "until end of turn, red creatures get -1/-1 and if a player taps a Mountain for mana, " +
                 "that Mountain produces colorless mana instead of any other type";
     }

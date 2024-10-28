@@ -26,7 +26,7 @@ public final class GreenerPastures extends CardImpl {
 
         // At the beginning of each player's upkeep, if that player controls more lands than each other player, the player creates a 1/1 green Saproling creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.ANY, new CreateTokenTargetEffect(new SaprolingToken()),
+                TargetController.EACH_PLAYER, new CreateTokenTargetEffect(new SaprolingToken()),
                 false
         ).withInterveningIf(ActivePlayerMostLandsCondition.instance));
     }

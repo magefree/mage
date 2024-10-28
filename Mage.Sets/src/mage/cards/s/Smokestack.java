@@ -31,7 +31,7 @@ public final class Smokestack extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SOOT.createInstance()), true));
 
         // At the beginning of each player's upkeep, that player sacrifices a permanent for each soot counter on Smokestack.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new SmokestackEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new SmokestackEffect(), false));
     }
 
     private Smokestack(final Smokestack card) {

@@ -26,7 +26,7 @@ public final class DreambornMuse extends CardImpl {
         // At the beginning of each player's upkeep, that player puts the top X cards of their library into their graveyard, where X is the number of cards in their hand.
         MillCardsTargetEffect effect = new MillCardsTargetEffect(CardsInTargetPlayerHandCount.instance);
         effect.setText("that player mills X cards, where X is the number of cards in their hand");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, effect, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, effect, false));
     }
 
     private DreambornMuse(final DreambornMuse card) {

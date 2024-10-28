@@ -32,7 +32,7 @@ public final class OathOfLieges extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // At the beginning of each player's upkeep, that player chooses target player who controls more lands than they do and is their opponent. The first player may search their library for a basic land card, put that card onto the battlefield, then shuffle their library.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new OathOfLiegesEffect(), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new OathOfLiegesEffect(), false).withTargetPointerSet(false);
         ability.setTargetAdjuster(OathOfLiegesAdjuster.instance);
         this.addAbility(ability);
     }

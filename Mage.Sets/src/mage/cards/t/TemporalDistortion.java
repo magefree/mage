@@ -44,10 +44,11 @@ public final class TemporalDistortion extends CardImpl {
         this.addAbility(new BecomesTappedTriggeredAbility(effect, false, filter, true));
 
         // Permanents with hourglass counters on them don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter2)));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filter2)
+                .setText("each permanent with an hourglass counter on it doesn't untap during its controller's untap step")));
 
         // At the beginning of each player's upkeep, remove all hourglass counters from permanents that player controls.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new TemporalDistortionRemovalEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new TemporalDistortionRemovalEffect(), false));
     }
 
     private TemporalDistortion(final TemporalDistortion card) {

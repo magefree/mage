@@ -36,7 +36,7 @@ public final class RiteOfTheRagingStorm extends CardImpl {
 
         // At the beginning of each player's upkeep, that player creates a 5/1 red Elemental creature token named Lightning Rager.
         // It has trample, haste, and "At the beginning of the end step, sacrifice this creature."
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new RiteOfTheRagingStormEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new RiteOfTheRagingStormEffect(), false));
     }
 
     private RiteOfTheRagingStorm(final RiteOfTheRagingStorm card) {

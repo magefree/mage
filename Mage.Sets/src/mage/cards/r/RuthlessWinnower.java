@@ -34,7 +34,7 @@ public final class RuthlessWinnower extends CardImpl {
 
         // At the beginning of each player's upkeep, that player sacrifices a non-Elf creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.ANY, new SacrificeEffect(filter, 1, "that player"), false
+                TargetController.EACH_PLAYER, new SacrificeEffect(filter, 1, "that player"), false
         ));
     }
 

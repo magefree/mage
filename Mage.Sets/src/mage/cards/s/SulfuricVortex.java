@@ -28,7 +28,7 @@ public final class SulfuricVortex extends CardImpl {
 
 
         // At the beginning of each player's upkeep, Sulfuric Vortex deals 2 damage to that player.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new DamageTargetEffect(2, true, "that player"), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new DamageTargetEffect(2, true, "that player"), false));
         
         // If a player would gain life, that player gains no life instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SulfuricVortexReplacementEffect()));

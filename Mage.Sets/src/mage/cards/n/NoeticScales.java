@@ -31,7 +31,7 @@ public final class NoeticScales extends CardImpl {
 
         // At the beginning of each player's upkeep, return to its owner's hand each creature that player controls with power greater than the number of cards in their hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.ANY, new NoeticScalesEffect(), false
+                TargetController.EACH_PLAYER, new NoeticScalesEffect(), false
         ));
     }
 

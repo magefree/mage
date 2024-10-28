@@ -19,7 +19,7 @@ public final class WorryBeads extends CardImpl {
 
         // At the beginning of each player's upkeep, that player puts the top card of their library into their graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.ANY, new MillCardsTargetEffect(1).setText("that player mills a card"),
+                TargetController.EACH_PLAYER, new MillCardsTargetEffect(1).setText("that player mills a card"),
                 false
         ));
     }
