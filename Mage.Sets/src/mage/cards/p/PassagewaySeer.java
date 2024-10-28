@@ -39,7 +39,7 @@ public final class PassagewaySeer extends CardImpl {
 
         // At the beginning of your end step, if you have the initiative, put a +1/+1 counter on Passageway Seer.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 TargetController.YOU, HaveInitiativeCondition.instance, false
         ).addHint(InitiativeHint.instance));
     }

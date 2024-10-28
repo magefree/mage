@@ -35,7 +35,7 @@ public final class BriarbridgePatrol extends CardImpl {
         // Whenever Briarbridge Patrol deals damage to one or more creatures, investigate (Create a colorless Clue artifact token with "2, Sacrifice this artifact: Draw a card.").
         this.addAbility(new DealsDamageToOneOrMoreCreaturesTriggeredAbility(new InvestigateEffect(), false, false, false));
         // At the beginning of each end step, if you sacrificed three or more Clues this turn, you may put a creature card from your hand onto the battlefield.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_CREATURE_A), TargetController.ANY,
+        this.addAbility(new BeginningOfEndStepTriggeredAbility( new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_CREATURE_A), TargetController.ANY,
                 BriarbridgePatrolCondition.instance, true), new PermanentsSacrificedWatcher());
 
     }

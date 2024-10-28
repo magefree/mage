@@ -43,7 +43,7 @@ public final class QuicksilverFountain extends CardImpl {
 
         // At the beginning of each end step, if all lands on the battlefield are Islands, remove all flood counters from them.
         // Note: This applies only if Quicksilver Fountain is on the battlefield
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new QuicksilverFountainEffect2(), TargetController.ANY, condition, false));
     }
 

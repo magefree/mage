@@ -25,7 +25,6 @@ public final class MercadianAtlas extends CardImpl {
 
         // At the beginning of your end step, if you didn't play a land this turn, you may draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 TargetController.YOU,
                 MercadianAtlasCondition.instance,

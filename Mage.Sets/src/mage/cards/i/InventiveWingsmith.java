@@ -38,7 +38,7 @@ public final class InventiveWingsmith extends CardImpl {
 
         // At the beginning of your end step, if you haven't cast a spell from your hand this turn and Inventive Wingsmith doesn't have a flying counter on it, put a flying counter on it.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.FLYING.createInstance()),
+                new AddCountersSourceEffect(CounterType.FLYING.createInstance()),
                 TargetController.YOU, condition, false
         ).withRuleTextReplacement(true).addHint(HaventCastSpellFromHandThisTurnCondition.hint));
     }

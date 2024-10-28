@@ -49,7 +49,6 @@ public final class DeathPriestOfMyrkul extends CardImpl {
 
         // At the beginning of your end step, if a creature died this turn, you may pay {1}. If you do, create a 1/1 black Skeleton creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new DoIfCostPaid(new CreateTokenEffect(new SkeletonToken()), new GenericManaCost(1)),
                 TargetController.YOU, MorbidCondition.instance, false
         ).addHint(MorbidHint.instance));

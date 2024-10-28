@@ -37,7 +37,7 @@ public final class PrairieDog extends CardImpl {
 
         // At the beginning of your end step, if you haven't cast a spell from your hand this turn, put a +1/+1 counter on Prairie Dog.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 TargetController.YOU, HaventCastSpellFromHandThisTurnCondition.instance, false
         ).addHint(HaventCastSpellFromHandThisTurnCondition.hint));
 

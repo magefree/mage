@@ -44,7 +44,7 @@ public final class TheBookOfVileDarkness extends CardImpl {
 
         // At the beginning of your end step, if you lost 2 or more life this turn, create a 2/2 black Zombie creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()), TargetController.YOU,
+                new CreateTokenEffect(new ZombieToken()), TargetController.YOU,
                 TheBookOfVileDarknessCondition.instance, false
         ).addHint(new ConditionHint(TheBookOfVileDarknessCondition.instance, "You lost 2 or more life this turn")));
 

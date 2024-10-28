@@ -30,7 +30,7 @@ public final class AvacynianMissionaries extends CardImpl {
 
         // At the beginning of your end step, if Avacynian Missionaries is equipped, transform it.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new TransformSourceEffect().setText("transform it"),
+        this.addAbility(new BeginningOfEndStepTriggeredAbility( new TransformSourceEffect().setText("transform it"),
                 TargetController.YOU, EquippedSourceCondition.instance, false));
 
     }

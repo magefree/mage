@@ -28,7 +28,7 @@ public final class Impatience extends CardImpl {
         // At the beginning of each player's end step, if that player didn't cast a spell this turn, Impatience deals 2 damage to that player.
         Effect effect = new DamageTargetEffect(2);
         effect.setText("{this} deals 2 damage to that player.");
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.ANY,
+        this.addAbility(new BeginningOfEndStepTriggeredAbility( effect, TargetController.ANY,
             new ImpatienceCondition(), false));
     }
 

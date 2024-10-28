@@ -46,7 +46,7 @@ public final class JumboImp extends CardImpl {
         this.addAbility(ability2);
 
         // At the beginning of your end step, roll a six-sided die and remove a number of +1/+1 counters from Jumbo Imp equal to the result.
-        Ability ability3 = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new JumboImpRemoveCountersEffect(), TargetController.YOU, null, false);
+        Ability ability3 = new BeginningOfEndStepTriggeredAbility( new JumboImpRemoveCountersEffect(), TargetController.YOU, null, false);
         this.addAbility(ability3);
     }
 

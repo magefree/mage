@@ -35,7 +35,7 @@ public final class Stenchskipper extends CardImpl {
 
         // At the beginning of the end step, if you control no Goblins, sacrifice Stenchskipper.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new SacrificeSourceEffect(),
+                new SacrificeSourceEffect(),
                 TargetController.NEXT, condition, false
         ));
     }

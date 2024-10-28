@@ -32,7 +32,7 @@ public final class GarrulousSycophant extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your end step, if you're the monarch, each opponent loses 1 life and you gain 1 life.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1),
+        Ability ability = new BeginningOfEndStepTriggeredAbility( new LoseLifeOpponentsEffect(1),
                 TargetController.YOU, MonarchIsSourceControllerCondition.instance, false);
         Effect effect = new GainLifeEffect(1);
         effect.setText("and you gain 1 life");

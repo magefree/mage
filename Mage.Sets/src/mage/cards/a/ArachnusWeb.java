@@ -40,7 +40,7 @@ public final class ArachnusWeb extends CardImpl {
         // At the beginning of the end step, if enchanted creature's power is 4 or greater, destroy Arachnus Web.
         FilterPermanent filter = new FilterPermanent("if enchanted creature's power is 4 or greater");
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new DestroySourceEffect(), TargetController.NEXT,
                 new AttachedToMatchesFilterCondition(filter), false));
     }

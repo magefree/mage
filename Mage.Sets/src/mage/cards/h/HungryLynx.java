@@ -49,7 +49,7 @@ public final class HungryLynx extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         
         // At the beginning of your end step, target opponent creates a 1/1 black Rat creature token with deathtouch. 
-        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenTargetEffect(new DeathtouchRatToken()), TargetController.YOU, null, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility( new CreateTokenTargetEffect(new DeathtouchRatToken()), TargetController.YOU, null, false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
         

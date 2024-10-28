@@ -33,7 +33,7 @@ public final class WranglerOfTheDamned extends CardImpl {
 
         // At the beginning of your end step, if you haven't cast a spell from your hand this turn, create a 2/2 white Spirit creature token with flying.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new Spirit22Token()),
+                new CreateTokenEffect(new Spirit22Token()),
                 TargetController.YOU, HaventCastSpellFromHandThisTurnCondition.instance, false
         ).addHint(HaventCastSpellFromHandThisTurnCondition.hint));
     }

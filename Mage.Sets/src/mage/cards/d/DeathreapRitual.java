@@ -23,7 +23,7 @@ public final class DeathreapRitual extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{G}");
 
         // <i>Morbid</i> &mdash; At the beginning of each end step, if a creature died this turn, you may draw a card.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
+        this.addAbility(new BeginningOfEndStepTriggeredAbility( new DrawCardSourceControllerEffect(1),
                 TargetController.ANY, MorbidCondition.instance, true).addHint(MorbidHint.instance).setAbilityWord(AbilityWord.MORBID));
     }
 

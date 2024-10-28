@@ -33,7 +33,7 @@ public final class RaggedRecluse extends CardImpl {
         // At the beginning of your end step, if you discarded a card this turn, transform Ragged Recluse.
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new TransformSourceEffect(), TargetController.YOU,
+                new TransformSourceEffect(), TargetController.YOU,
                 ControllerDiscardedThisTurnCondition.instance, false
         ).addHint(ControllerDiscardedHint.instance), new DiscardedCardWatcher());
     }

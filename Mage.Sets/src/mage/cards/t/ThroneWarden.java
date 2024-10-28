@@ -30,7 +30,7 @@ public final class ThroneWarden extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your end step, if you're the monarch, put a +1/+1 counter on Throne Warden.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+        this.addAbility(new BeginningOfEndStepTriggeredAbility( new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 TargetController.YOU, MonarchIsSourceControllerCondition.instance, false)
                 .addHint(MonarchHint.instance));
     }

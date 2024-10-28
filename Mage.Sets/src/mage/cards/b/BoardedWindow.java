@@ -36,7 +36,7 @@ public final class BoardedWindow extends CardImpl {
 
         // At the beginning of each end step, if you were dealt 4 or more damage this turn, exile Boarded Window.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new ExileSourceEffect(), TargetController.ANY, BoardedWindowCondition.instance, false
+                new ExileSourceEffect(), TargetController.ANY, BoardedWindowCondition.instance, false
         ), new DamageDoneWatcher());
     }
 

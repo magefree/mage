@@ -43,7 +43,7 @@ public final class DustStalker extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // At the beginning of each end step, if you control no other colorless creatures, return Dust Stalker to its owner's hand.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), TargetController.ANY,
+        this.addAbility(new BeginningOfEndStepTriggeredAbility( new ReturnToHandSourceEffect(), TargetController.ANY,
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0), false));
     }
 

@@ -41,7 +41,6 @@ public final class KuonOgreAscendant extends CardImpl {
 
         // At the beginning of the end step, if three or more creatures died this turn, flip Kuon, Ogre Ascendant.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new FlipSourceEffect(new KuonsEssenceToken()),
                 TargetController.NEXT,
                 KuonOgreAscendantCondition.instance, false));

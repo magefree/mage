@@ -31,7 +31,7 @@ public final class SyndicateHeavy extends CardImpl {
 
         // At the beginning of each end step, if you gained 4 or more life this turn, investigate.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new InvestigateEffect(), TargetController.ANY,
+                new InvestigateEffect(), TargetController.ANY,
                 new YouGainedLifeCondition(ComparisonType.MORE_THAN, 3), false
         ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }

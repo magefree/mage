@@ -35,7 +35,7 @@ public final class MeasureOfWickedness extends CardImpl {
 
 
         // At the beginning of your end step, sacrifice Measure of Wickedness and you lose 8 life.        
-        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, null, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility( new SacrificeSourceEffect(), TargetController.YOU, null, false);
         Effect effect = new LoseLifeSourceControllerEffect(8);
         effect.setText("and you lose 8 life");
         ability.addEffect(effect);

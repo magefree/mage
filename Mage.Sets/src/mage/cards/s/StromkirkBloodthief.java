@@ -36,7 +36,7 @@ public final class StromkirkBloodthief extends CardImpl {
 
         // At the beginning of your end step, if an opponent lost life this turn, put a +1/+1 counter on target Vampire you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 TargetController.YOU, OpponentsLostLifeCondition.instance, false
         );
         ability.addTarget(new TargetPermanent(filter));

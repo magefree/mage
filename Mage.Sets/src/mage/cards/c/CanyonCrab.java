@@ -33,7 +33,7 @@ public final class CanyonCrab extends CardImpl {
 
         // At the beginning of your end step, if you haven't cast a spell from your hand this turn, draw a card, then discard a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1),
+                new DrawDiscardControllerEffect(1, 1),
                 TargetController.YOU, HaventCastSpellFromHandThisTurnCondition.instance, false
         ).addHint(HaventCastSpellFromHandThisTurnCondition.hint));
     }

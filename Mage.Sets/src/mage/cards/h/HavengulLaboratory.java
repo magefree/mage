@@ -45,7 +45,7 @@ public final class HavengulLaboratory extends CardImpl {
         // At the beginning of your end step, if you sacrificed three or more Clues this turn, transform Hawkins National Laboratory.
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new TransformSourceEffect(),
+                new TransformSourceEffect(),
                 TargetController.YOU, HavengulLaboratoryCondition.instance, false
         ), new HavengulLaboratoryWatcher());
     }

@@ -33,7 +33,7 @@ public final class GoblinSpymaster extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of each opponent's end step, that player creates a 1/1 red Goblin creature token with "Creatures you control attack each combat if able."
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new SpyMasterGoblinCreateTokenEffect(), TargetController.OPPONENT, null, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility( new SpyMasterGoblinCreateTokenEffect(), TargetController.OPPONENT, null, false));
     }
 
     private GoblinSpymaster(final GoblinSpymaster card) {

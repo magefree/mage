@@ -51,7 +51,7 @@ public final class QuestForUlasTemple extends CardImpl {
 
         // At the beginning of each end step, if there are three or more quest counters on Quest for Ula's Temple, you may put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(filter),
+                new PutCardFromHandOntoBattlefieldEffect(filter),
                 TargetController.ANY, condition, false
         ));
     }

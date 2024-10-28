@@ -42,7 +42,7 @@ public final class WallOfMourning extends CardImpl {
 
         // Coven — At the beginning of your end step, if you control three or more creatures with different powers, put a card exiled with Wall of Mourning into its owner's hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new WallOfMourningReturnEffect(),
+                new WallOfMourningReturnEffect(),
                 TargetController.YOU, CovenCondition.instance, false
         ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
     }

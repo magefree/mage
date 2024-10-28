@@ -40,7 +40,7 @@ public final class MarkOfTheOni extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
 
         // At the beginning of the end step, if you control no Demons, sacrifice Mark of the Oni.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new SacrificeSourceEffect(),
                 TargetController.NEXT,
                 new PermanentsOnTheBattlefieldCondition(

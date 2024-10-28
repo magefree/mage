@@ -25,7 +25,7 @@ public final class AngelicAccord extends CardImpl {
 
         // At the beginning of each end step, if you gained 4 or more life this turn, create a 4/4 white Angel creature token with flying.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new AngelToken()), TargetController.ANY,
+                new CreateTokenEffect(new AngelToken()), TargetController.ANY,
                 new YouGainedLifeCondition(ComparisonType.MORE_THAN, 3), false
         ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }

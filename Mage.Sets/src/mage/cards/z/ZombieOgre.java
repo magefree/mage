@@ -30,7 +30,7 @@ public final class ZombieOgre extends CardImpl {
 
         // At the beginning of your end step, if a creature died this turn, venture into the dungeon.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new VentureIntoTheDungeonEffect(),
+                new VentureIntoTheDungeonEffect(),
                 TargetController.YOU, MorbidCondition.instance, false
         ).addHint(MorbidHint.instance).addHint(CurrentDungeonHint.instance));
     }

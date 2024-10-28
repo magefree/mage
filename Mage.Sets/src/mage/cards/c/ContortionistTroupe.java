@@ -33,7 +33,7 @@ public final class ContortionistTroupe extends CardImpl {
 
         // Coven — At the beginning of your end step, if you control three or more creatures with different powers, put a +1/+1 counter on target creature you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 TargetController.YOU, CovenCondition.instance, false
         );
         ability.addTarget(new TargetControlledCreaturePermanent());

@@ -38,7 +38,7 @@ public final class ImoenMysticTrickster extends CardImpl {
 
         // At the beginning of your end step, if you have the initiative, draw a card. Draw another card if you've completed a dungeon.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
+                new DrawCardSourceControllerEffect(1),
                 TargetController.YOU, HaveInitiativeCondition.instance, false
         );
         ability.addEffect(new ConditionalOneShotEffect(

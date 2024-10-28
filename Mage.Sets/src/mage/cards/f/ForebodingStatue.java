@@ -40,7 +40,7 @@ public final class ForebodingStatue extends CardImpl {
         // At the beginning of your end step, if there are three or more omen counters on Foreboding Statue, uptap it, then transform it.
         this.addAbility(new TransformAbility());
         ability = new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new UntapSourceEffect().setText("untap it,"), TargetController.YOU,
+                new UntapSourceEffect().setText("untap it,"), TargetController.YOU,
                 new SourceHasCounterCondition(CounterType.OMEN, 3), false
         ).setTriggerPhrase("At the beginning of your end step, if there are three or more omen counters on {this}, ");
         ability.addEffect(new TransformSourceEffect().setText("then transform it"));

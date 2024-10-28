@@ -47,7 +47,7 @@ public final class RestlessBloodseeker extends CardImpl {
 
         // At the beginning of your end step, if you gained life this turn, create a Blood token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new BloodToken()),
+                new CreateTokenEffect(new BloodToken()),
                 TargetController.YOU, condition, false
         ).addHint(hint), new PlayerGainedLifeWatcher());
 
