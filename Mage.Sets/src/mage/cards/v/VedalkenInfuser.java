@@ -30,7 +30,7 @@ public final class VedalkenInfuser extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, you may put a charge counter on target artifact.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersTargetEffect(CounterType.CHARGE.createInstance()), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersTargetEffect(CounterType.CHARGE.createInstance()), true);
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
     }

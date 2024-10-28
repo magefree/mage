@@ -29,7 +29,7 @@ public final class SpitefulBully extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, Spiteful Bully deals 3 damage to target creature you control.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(3), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(3), false);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

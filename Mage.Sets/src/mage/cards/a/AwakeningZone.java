@@ -22,7 +22,7 @@ public final class AwakeningZone extends CardImpl {
 
         // At the beginning of your upkeep, you may create a 0/1 colorless Eldrazi Spawn creature token. It has “Sacrifice this creature: Add {C}.”
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(
-                new EldraziSpawnToken()).withTextOptions(true), TargetController.YOU, true));
+                new EldraziSpawnToken()).withTextOptions(true), true));
     }
 
     private AwakeningZone(final AwakeningZone card) {

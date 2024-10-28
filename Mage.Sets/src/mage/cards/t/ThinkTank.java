@@ -19,7 +19,7 @@ public final class ThinkTank extends CardImpl {
 
         // At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SurveilEffect(1), TargetController.YOU, false
+                new SurveilEffect(1), false
         ));
     }
 

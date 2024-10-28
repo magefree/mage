@@ -40,7 +40,7 @@ public final class TendershootDryad extends CardImpl {
         this.addAbility(new AscendAbility());
 
         // At the beginning of each upkeep, create a 1/1 green Saproling creature token.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new CreateTokenEffect(new SaprolingToken()), false));
 
         // Saprolings you control get +2/+2 as long as you have the city's blessing.
         this.addAbility(new SimpleStaticAbility(

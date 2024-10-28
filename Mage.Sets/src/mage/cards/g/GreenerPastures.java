@@ -30,8 +30,8 @@ public final class GreenerPastures extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         Zone.BATTLEFIELD,
-                        new CreateTokenTargetEffect(new SaprolingToken()),
-                        TargetController.ANY, false, true
+                        TargetController.ANY, new CreateTokenTargetEffect(new SaprolingToken()),
+                        false, true
                 ),
                 ActivePlayerMostLandsCondition.instance,
                 "At the beginning of each player's upkeep, "

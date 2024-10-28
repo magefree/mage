@@ -37,7 +37,7 @@ public final class SokenzanRenegade extends CardImpl {
         // At the beginning of your upkeep, if a player has more cards in hand than each other player,
         // the player who has the most cards in hand gains control of Sokenzan Renegade.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new SokenzanRenegadeEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new SokenzanRenegadeEffect(), false),
                 OnePlayerHasTheMostCards.instance,
                 "At the beginning of your upkeep, if a player has more cards in hand than each other player, the player who has the most cards in hand gains control of {this}"
         ));

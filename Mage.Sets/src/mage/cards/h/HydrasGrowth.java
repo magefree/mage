@@ -44,7 +44,7 @@ public final class HydrasGrowth extends CardImpl {
         // At the beginning of your upkeep, double the number of +1/+1 counters on enchanted creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new HydrasGrowthDoubleEffect(),
-                TargetController.YOU, false));
+                false));
     }
 
     private HydrasGrowth(final HydrasGrowth card) {

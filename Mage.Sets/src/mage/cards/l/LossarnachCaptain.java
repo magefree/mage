@@ -46,7 +46,7 @@ public final class LossarnachCaptain extends CardImpl {
 
         // At the beginning of your upkeep, create a 1/1 white Human Soldier creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new HumanSoldierToken()), TargetController.YOU, false
+                new CreateTokenEffect(new HumanSoldierToken()), false
         ));
     }
 

@@ -31,7 +31,7 @@ public class VanishingAbility extends EntersBattlefieldAbility {
         this.addSubAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new RemoveCounterSourceEffect(CounterType.TIME.createInstance()),
-                        TargetController.YOU, false
+                        false
                 ), condition, "At the beginning of your upkeep, if this permanent " +
                 "has a time counter on it, remove a time counter from it."
         ).setRuleVisible(false));

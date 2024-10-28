@@ -33,7 +33,7 @@ public final class KrazyKow extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, roll a six-sided die. If you a roll a 1, sacrifice Krazy Kow and it deals 3 damage to each creature and each player.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KrazyKowEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KrazyKowEffect(), false));
     }
 
     private KrazyKow(final KrazyKow card) {

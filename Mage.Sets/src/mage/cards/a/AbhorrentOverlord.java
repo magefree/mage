@@ -39,7 +39,7 @@ public final class AbhorrentOverlord extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect).addHint(DevotionCount.B.getHint()));
 
         // At the beginning of your upkeep, sacrifice a creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, null), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, null), false));
     }
 
     private AbhorrentOverlord(final AbhorrentOverlord card) {

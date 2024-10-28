@@ -38,7 +38,7 @@ public final class ObsessiveSkinner extends CardImpl {
         // <i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard,
         // put a +1/+1 counter on target creature.
         ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), TargetController.OPPONENT, false),
+                new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, "
                         + "put a +1/+1 counter on target creature.");

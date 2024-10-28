@@ -32,7 +32,7 @@ public final class Shyft extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, you may have Shyft become the color or colors of your choice.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ShyftEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ShyftEffect(), true));
     }
 
     private Shyft(final Shyft card) {

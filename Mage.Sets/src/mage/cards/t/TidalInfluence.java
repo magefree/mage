@@ -57,7 +57,7 @@ public final class TidalInfluence extends CardImpl {
 
         // At the beginning of your upkeep, put a tide counter on Tidal Influence.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIDE.createInstance()),
-                TargetController.YOU, false));
+                false));
 
         // As long as there is exactly one tide counter on Tidal Influence, all blue creatures get -2/-0.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(

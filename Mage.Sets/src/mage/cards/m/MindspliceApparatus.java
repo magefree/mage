@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
 
 /**
@@ -33,7 +32,7 @@ public final class MindspliceApparatus extends CardImpl {
 
         // At the beginning of your upkeep, put an oil counter on Mindsplice Apparatus.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.OIL.createInstance()), TargetController.YOU, false
+                new AddCountersSourceEffect(CounterType.OIL.createInstance()), false
         ));
 
         // Instant and sorcery spells you cast cost {1} less to cast for each oil counter on Mindsplice Apparatus.

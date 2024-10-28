@@ -32,7 +32,7 @@ public final class InfiniteHourglass extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // At the beginning of your upkeep, put a time counter on Infinite Hourglass.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance()), false));
 
         // All creatures get +1/+0 for each time counter on Infinite Hourglass.
         this.addAbility(new SimpleStaticAbility(

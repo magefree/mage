@@ -47,7 +47,7 @@ public final class SanctumOfAll extends CardImpl {
         this.subtype.add(SubType.SHRINE);
 
         // At the beginning of your upkeep, you may search your library and/or graveyard for a Shrine card and put it onto the battlefield. If you search your library this way, shuffle it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SearchLibraryGraveyardPutOntoBattlefieldEffect(filterCard), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SearchLibraryGraveyardPutOntoBattlefieldEffect(filterCard), true));
 
         // If an ability of another Shrine you control triggers while you control six or more Shrines, that ability triggers an additional time.
         this.addAbility(new SimpleStaticAbility(new SanctumOfAllTriggerEffect()).addHint(new ValueHint("Shrines you control", count)));

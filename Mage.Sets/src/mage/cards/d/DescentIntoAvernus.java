@@ -30,7 +30,7 @@ public final class DescentIntoAvernus extends CardImpl {
         // At the beginning of your upkeep, put two descent counters on Descent into Avernus. Then each player creates X Treasure tokens and Descent into Avernus deals X damage to each player, where X is the number of descent counters on Descent into Avernus.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.DESCENT.createInstance(2)),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new CreateTokenAllEffect(
                 new TreasureToken(), xValue, TargetController.EACH_PLAYER

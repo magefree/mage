@@ -35,7 +35,7 @@ public final class GoblinSecretAgent extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of your upkeep, reveal a card from your hand at random.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GoblinSecretAgentEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GoblinSecretAgentEffect(), false));
     }
 
     private GoblinSecretAgent(final GoblinSecretAgent card) {

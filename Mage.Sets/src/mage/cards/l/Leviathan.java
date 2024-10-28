@@ -24,7 +24,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetControlledPermanent;
 
 
 //import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -58,9 +57,8 @@ public final class Leviathan extends CardImpl {
 
         // At the beginning of your upkeep, you may sacrifice two Islands. If you do, untap Leviathan.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoIfCostPaid(new UntapSourceEffect(), 
+                new DoIfCostPaid(new UntapSourceEffect(),
                 new SacrificeTargetCost(2, filter)),
-                TargetController.YOU,
                 false));
 
         // Leviathan can't attack unless you sacrifice two Islands. (This cost is paid as attackers are declared.)

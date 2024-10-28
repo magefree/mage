@@ -22,7 +22,6 @@ import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -43,8 +42,8 @@ public final class UnnaturalHunger extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of the upkeep of enchanted creature's controller, Unnatural Hunger deals damage to that player equal to that creature's power unless they sacrifice another creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new UnnaturalHungerEffect(),
-                TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new UnnaturalHungerEffect(),
+                false));
     }
 
     private UnnaturalHunger(final UnnaturalHunger card) {

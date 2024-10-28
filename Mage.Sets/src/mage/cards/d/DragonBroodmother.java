@@ -30,8 +30,8 @@ public final class DragonBroodmother extends CardImpl {
 
         // At the beginning of each upkeep, create a 1/1 red and green Dragon creature token with flying and devour 2. (As the token enters the battlefield, you may sacrifice any number of creatures. It enters the battlefield with twice that many +1/+1 counters on it.)
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new DragonBroodmotherDragonToken()),
-                TargetController.EACH_PLAYER, false
+                TargetController.EACH_PLAYER, new CreateTokenEffect(new DragonBroodmotherDragonToken()),
+                false
         ));
     }
 

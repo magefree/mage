@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -44,7 +43,7 @@ public final class SphinxOfForesight extends CardImpl {
         // At the beginning of your upkeep, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new ScryEffect(1, false),
-                TargetController.YOU, false
+                false
         ));
     }
 

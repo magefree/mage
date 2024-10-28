@@ -43,7 +43,7 @@ public final class PilloryOfTheSleepless extends CardImpl {
 	
         // Enchanted creature has "At the beginning of your upkeep, you lose 1 life."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(
-                new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), TargetController.YOU, false), AttachmentType.AURA)));
+                new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), false), AttachmentType.AURA)));
     }
 
     private PilloryOfTheSleepless(final PilloryOfTheSleepless card) {

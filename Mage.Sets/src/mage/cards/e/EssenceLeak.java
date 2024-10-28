@@ -43,7 +43,7 @@ public final class EssenceLeak extends CardImpl {
         this.addAbility(ability);
 
         // As long as enchanted permanent is red or green, it has "At the beginning of your upkeep, sacrifice this permanent unless you pay its mana cost."
-        Ability sacAbility =new BeginningOfUpkeepTriggeredAbility(new EssenceLeakEffect(), TargetController.YOU, false);
+        Ability sacAbility =new BeginningOfUpkeepTriggeredAbility(new EssenceLeakEffect(), false);
         ContinuousEffect isRedOrGreenAbility = new GainAbilityAttachedEffect(sacAbility, AttachmentType.AURA);
         SimpleStaticAbility ifRedOrGreenAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(isRedOrGreenAbility,
                 new OrCondition(new EnchantedCreatureColorCondition(ObjectColor.RED), new EnchantedCreatureColorCondition(ObjectColor.GREEN)),

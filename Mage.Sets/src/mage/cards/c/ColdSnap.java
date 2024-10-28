@@ -1,7 +1,6 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -27,7 +26,7 @@ public final class ColdSnap extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")));
 
         // At the beginning of each player's upkeep, Cold Snap deals damage to that player equal to the number of snow lands they control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ColdSnapDamageTargetEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new ColdSnapDamageTargetEffect(), false, true));
     }
 
     private ColdSnap(final ColdSnap card) {

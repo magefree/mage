@@ -39,7 +39,7 @@ public final class LavabrinkFloodgates extends CardImpl {
 
         // At the beginning of each player's upkeep, that player may put a doom counter on Lavabrink Floodgates or remove a doom counter from it. Then if it has three or more doom counters on it, sacrifice it. When you do, it deals 6 damage to each creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new LavabrinkFloodgatesEffect(), TargetController.ACTIVE, false
+                TargetController.ACTIVE, new LavabrinkFloodgatesEffect(), false
         ));
     }
 

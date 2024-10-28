@@ -18,7 +18,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -37,7 +36,6 @@ public final class AsForetold extends CardImpl {
                                 CounterType.TIME.createInstance(),
                                 StaticValue.get(1),
                                 true),
-                        TargetController.YOU,
                         false));
 
         // Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with converted mana cost X or less, where X is the number of time counters on As Foretold.

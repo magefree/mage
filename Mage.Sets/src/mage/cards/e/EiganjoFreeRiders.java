@@ -35,7 +35,7 @@ public final class EiganjoFreeRiders extends CardImpl {
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your upkeep, return a white creature you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
     }
 
     private EiganjoFreeRiders(final EiganjoFreeRiders card) {

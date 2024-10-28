@@ -32,7 +32,7 @@ public final class ProtectionRacket extends CardImpl {
         //          If they do, exile that card.
         //          Otherwise, put it into your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ProtectionRacketEffect(), TargetController.YOU, false
+                new ProtectionRacketEffect(), false
         ));
     }
 

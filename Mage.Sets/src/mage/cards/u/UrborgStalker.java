@@ -40,7 +40,7 @@ public final class UrborgStalker extends CardImpl {
 
         // At the beginning of each player's upkeep, if that player controls a nonblack, nonland permanent, Urborg Stalker deals 1 damage to that player.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(1), TargetController.ANY, false),
+                new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new DamageTargetEffect(1), false),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "At the beginning of each player's upkeep, "
                 + "if that player controls a nonblack, nonland permanent, "

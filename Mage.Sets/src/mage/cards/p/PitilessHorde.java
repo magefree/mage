@@ -26,7 +26,7 @@ public final class PitilessHorde extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, lose 2 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), false));
         
         // Dash {2}{B}{B}
         this.addAbility(new DashAbility("{2}{B}{B}"));

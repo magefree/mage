@@ -56,13 +56,13 @@ public final class Tetravus extends CardImpl {
         // At the beginning of your upkeep, you may remove any number of +1/+1 counters from Tetravus. If you do, create that many 1/1 colorless Tetravite artifact creature tokens. They each have flying and "This creature can't be enchanted."
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new TetravusCreateTokensEffect(),
-                TargetController.YOU, true
+                true
         ));
 
         // At the beginning of your upkeep, you may exile any number of tokens created with Tetravus. If you do, put that many +1/+1 counters on Tetravus.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new TetravusAddCountersEffect(),
-                TargetController.YOU, true
+                true
         ));
 
     }

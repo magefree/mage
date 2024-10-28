@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -27,7 +26,7 @@ public final class GreaterHarvester extends CardImpl {
         this.toughness = new MageInt(6);
 
         // At the beginning of your upkeep, sacrifice a permanent.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_A, 1, ""), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENT_A, 1, ""), false));
 
         //Whenever Greater Harvester deals combat damage to a player, that player sacrifices two permanents.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_PERMANENTS, 2, "that player"), false, true));

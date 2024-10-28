@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -32,7 +31,7 @@ public final class SkittishValesk extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, flip a coin. If you lose the flip, turn Skittish Valesk face down.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SkittishValeskEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SkittishValeskEffect(), false));
 
         // Morph {5}{R}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{5}{R}")));

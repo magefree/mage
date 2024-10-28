@@ -43,7 +43,7 @@ public final class Taniwha extends CardImpl {
         this.addAbility(PhasingAbility.getInstance());
 
         // At the beginning of your upkeep, all lands you control phase out.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TaniwhaEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TaniwhaEffect(), false));
     }
 
     private Taniwha(final Taniwha card) {

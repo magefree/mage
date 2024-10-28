@@ -51,7 +51,6 @@ public final class Wiitigo extends CardImpl {
                         new BlockedOrBeenBlockedSinceYourLastUpkeepCondition(),
                         "put a +1/+1 counter on {this} if it has blocked or been blocked since your last "
                         + "upkeep. Otherwise, remove a +1/+1 counter from it"),
-                TargetController.YOU,
                 false);
         triggeredAbility.addWatcher(new BlockedOrBeenBlockedSinceYourLastUpkeepWatcher());
         this.addAbility(triggeredAbility);

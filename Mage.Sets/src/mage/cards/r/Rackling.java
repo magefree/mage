@@ -26,7 +26,7 @@ public final class Rackling extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of each opponent's upkeep, Rackling deals X damage to that player, where X is 3 minus the number of cards in their hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RacklingEffect(), TargetController.OPPONENT, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new RacklingEffect(), false, true));
     }
 
     private Rackling(final Rackling card) {

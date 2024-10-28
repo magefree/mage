@@ -34,8 +34,8 @@ public final class PyreZombie extends CardImpl {
 
         // At the beginning of your upkeep, if Pyre Zombie is in your graveyard, you may pay {1}{B}{B}. If you do, return Pyre Zombie to your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                new DoIfCostPaid(new ReturnToHandSourceEffect().setText("return {this} to your hand"), new ManaCostsImpl<>("{1}{B}{B}")),
-                TargetController.YOU, false).withInterveningIf(SourceInGraveyardCondition.instance));
+                TargetController.YOU, new DoIfCostPaid(new ReturnToHandSourceEffect().setText("return {this} to your hand"), new ManaCostsImpl<>("{1}{B}{B}")),
+                false).withInterveningIf(SourceInGraveyardCondition.instance));
 
         // {1}{R}{R}, Sacrifice Pyre Zombie: Pyre Zombie deals 2 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, "it"), new ManaCostsImpl<>("{1}{R}{R}"));

@@ -46,7 +46,7 @@ public final class HeadlinerScarlett extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, exile the top card of your library face down. You may look at and play that card this turn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HeadlinerScarlettExileEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HeadlinerScarlettExileEffect(), false));
     }
 
     private HeadlinerScarlett(final HeadlinerScarlett card) {

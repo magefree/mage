@@ -38,7 +38,7 @@ public final class BlessingOfLeeches extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you lose 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), false));
 
         // {0}: Regenerate enchanted creature.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA),new GenericManaCost(0)));
@@ -53,4 +53,3 @@ public final class BlessingOfLeeches extends CardImpl {
         return new BlessingOfLeeches(this);
     }
 }
-

@@ -35,7 +35,7 @@ public final class AnowonTheRuinSage extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeAllEffect(filter), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeAllEffect(filter), false));
     }
 
     private AnowonTheRuinSage(final AnowonTheRuinSage card) {

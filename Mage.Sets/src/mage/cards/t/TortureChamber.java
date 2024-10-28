@@ -33,7 +33,7 @@ public final class TortureChamber extends CardImpl {
 
         // At the beginning of your upkeep, put a pain counter on Torture Chamber.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.PAIN.createInstance()), TargetController.YOU, false
+                new AddCountersSourceEffect(CounterType.PAIN.createInstance()), false
         ));
 
         // At the beginning of your end step, Torture Chamber deals damage to you equal to the number of pain counters on it.

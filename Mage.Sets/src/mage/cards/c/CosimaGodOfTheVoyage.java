@@ -47,7 +47,7 @@ public final class CosimaGodOfTheVoyage extends ModalDoubleFacedCard {
 
         // At the beginning of your upkeep, you may exile Cosima. If you do, it gains "Whenever a land you control enters, if Cosima is exiled, you may put a voyage counter on it. If you don't, return Cosima to the battlefield with X +1/+1 counters on it and draw X cards, where X is the number of voyage counters on it.
         this.getLeftHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CosimaGodOfTheVoyageEffect(), TargetController.YOU, true
+                new CosimaGodOfTheVoyageEffect(), true
         ));
 
         // 2.

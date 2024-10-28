@@ -34,7 +34,7 @@ public final class SparkFiend extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SparkFiendEffect(), false));
 
         // At the beginning of your upkeep, roll two six-sided dice. If you rolled 7, sacrifice Spark Fiend. If you roll the noted total, don't roll dice for Spark Fiend during any of your following upkeeps. Otherwise, do nothing.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SparkFiendUpkeepEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SparkFiendUpkeepEffect(), false));
     }
 
     private SparkFiend(final SparkFiend card) {

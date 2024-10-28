@@ -38,7 +38,7 @@ public final class MistbreathElder extends CardImpl {
                 new ReturnToHandChosenControlledPermanentCost(
                         new TargetControlledPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL)
                 ), false
-        ), TargetController.YOU, false));
+        ), false));
     }
 
     private MistbreathElder(final MistbreathElder card) {

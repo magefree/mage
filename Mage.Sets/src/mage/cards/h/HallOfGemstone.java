@@ -30,7 +30,7 @@ public final class HallOfGemstone extends CardImpl {
         this.supertype.add(SuperType.WORLD);
 
         // At the beginning of each player's upkeep, that player chooses a color. Until end of turn, lands tapped for mana produce mana of the chosen color instead of any other color.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HallOfGemstoneEffect(), TargetController.ACTIVE, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ACTIVE, new HallOfGemstoneEffect(), false));
     }
 
     private HallOfGemstone(final HallOfGemstone card) {

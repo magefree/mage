@@ -32,7 +32,7 @@ public final class CourtOfGrace extends CardImpl {
                 new CreateTokenEffect(new AngelToken()), new CreateTokenEffect(new SpiritWhiteToken()),
                 MonarchIsSourceControllerCondition.instance, "create a 1/1 white Spirit creature token with flying. " +
                 "If you're the monarch, create a 4/4 white Angel creature token with flying instead"
-        ), TargetController.YOU, false));
+        ), false));
     }
 
     private CourtOfGrace(final CourtOfGrace card) {

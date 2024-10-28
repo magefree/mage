@@ -36,7 +36,7 @@ public final class HanweirMilitiaCaptain extends CardImpl {
         // At the beginning of your upkeep, if you control four or more creatures, transform Hanweir Militia Captain.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), false),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 3),
                 "At the beginning of your upkeep, if you control four or more creatures, transform {this}"));
     }

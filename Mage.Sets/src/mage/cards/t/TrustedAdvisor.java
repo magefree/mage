@@ -44,7 +44,7 @@ public final class TrustedAdvisor extends CardImpl {
                 new MaximumHandSizeControllerEffect(2, Duration.WhileOnBattlefield, HandSizeModification.INCREASE)));
 
         // At the beginning of your upkeep, return a blue creature you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
 
     }
 

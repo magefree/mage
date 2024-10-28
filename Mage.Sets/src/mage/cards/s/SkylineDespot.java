@@ -38,7 +38,7 @@ public final class SkylineDespot extends CardImpl {
         // At the beginning of your upkeep, if you're the monarch, put a 5/5 red Dragon creature token with flying onto the battlefield.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new CreateTokenEffect(new DragonToken2()), TargetController.YOU, false
+                        new CreateTokenEffect(new DragonToken2()), false
                 ), MonarchIsSourceControllerCondition.instance, "At the beginning of your upkeep, " +
                 "if you're the monarch, create a 5/5 red Dragon creature token with flying."
         ));

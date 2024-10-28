@@ -33,7 +33,7 @@ public final class CourtOfBounty extends CardImpl {
                 MonarchIsSourceControllerCondition.instance, "you may put a land card " +
                 "from your hand onto the battlefield. If you're the monarch, " +
                 "instead you may put a creature or land card from your hand onto the battlefield"
-        ), TargetController.YOU, false)
+        ), false)
                 .addHint(MonarchHint.instance));
     }
 

@@ -28,7 +28,7 @@ public final class SerendibEfreet extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your upkeep, Serendib Efreet deals 1 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), false));
     }
 
     private SerendibEfreet(final SerendibEfreet card) {

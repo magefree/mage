@@ -58,7 +58,7 @@ public final class CourtOfVantress extends CardImpl {
 
     static Ability makeAbility() {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new CourtOfVantressEffect(), TargetController.YOU, false
+                new CourtOfVantressEffect(), false
         );
         ability.addTarget(new TargetPermanent(0, 1, filter));
         return ability;

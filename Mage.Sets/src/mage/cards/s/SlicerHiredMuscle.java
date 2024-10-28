@@ -13,7 +13,6 @@ import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continuous.GainControlTargetEffect;
 import mage.abilities.effects.common.continuous.CantBeSacrificedSourceEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ContinuousEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.game.Game;
@@ -49,8 +48,8 @@ public final class SlicerHiredMuscle extends CardImpl {
         // At the beginning of each opponent's upkeep, you may have that player gain
         // control of Slicer until end of turn. If you do, untap Slicer, goad it, and it
         // can't be sacrificed this turn. If you don't, convert it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SlicerHiredMuscleUpkeepEffect(),
-                TargetController.OPPONENT, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new SlicerHiredMuscleUpkeepEffect(),
+                false, true));
 
     }
 

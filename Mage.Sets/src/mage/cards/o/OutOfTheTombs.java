@@ -29,7 +29,7 @@ public final class OutOfTheTombs extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // At the beginning of your upkeep, put two eon counters on Out of the Tombs, then mill cards equal to the number of eon counters on it.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.EON.createInstance(2)), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.EON.createInstance(2)), false);
         ability.addEffect(new MillCardsControllerEffect(new CountersSourceCount(CounterType.EON)).concatBy(", then").setText("mill cards equal to the number of eon counters on it"));
         this.addAbility(ability);
 

@@ -27,7 +27,6 @@ public final class PatientRebuilding extends CardImpl {
         // At the beginning of your upkeep, target opponent puts the top three cards of their library into their graveyard, then you draw a card for each land card put into that graveyard this way.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new PatientRebuildingEffect(),
-                TargetController.YOU,
                 false
         );
         ability.addTarget(new TargetOpponent());

@@ -34,7 +34,7 @@ public final class EdgarMarkovsCoffin extends CardImpl {
         // At the beginning of your upkeep, create a 1/1 white and black Vampire creature token with lifelink and put a bloodline counter on Edgar Markov's Coffin. Then if there are three or more bloodline counters on it, remove those counters and transform it.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new CreateTokenEffect(new EdgarMarkovsCoffinVampireToken()),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new AddCountersSourceEffect(
                 CounterType.BLOODLINE.createInstance()

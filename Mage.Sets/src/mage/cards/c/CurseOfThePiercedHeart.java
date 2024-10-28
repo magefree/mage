@@ -41,7 +41,7 @@ public final class CurseOfThePiercedHeart extends CardImpl {
 
         // At the beginning of enchanted player's upkeep, Curse of the Pierced Heart deals 1 damage to that player.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CurseOfThePiercedHeartEffect(), TargetController.ENCHANTED, false
+                TargetController.ENCHANTED, new CurseOfThePiercedHeartEffect(), false
         ));
     }
 

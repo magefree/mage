@@ -37,7 +37,7 @@ public final class KillerInstinct extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{G}");
 
         // At the beginning of your upkeep, reveal the top card of your library. If it's a creature card, put it onto the battlefield. That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KillerInstinctEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KillerInstinctEffect(), false));
     }
 
     private KillerInstinct(final KillerInstinct card) {

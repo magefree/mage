@@ -37,7 +37,7 @@ public final class Shapeshifter extends CardImpl {
         // As Shapeshifter enters the battlefield, choose a number between 0 and 7.
         this.addAbility(new AsEntersBattlefieldAbility(new ShapeshifterEffect()));
         // At the beginning of your upkeep, you may choose a number between 0 and 7.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ShapeshifterEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ShapeshifterEffect(), true));
         // Shapeshifter's power is equal to the last chosen number and its toughness is equal to 7 minus that number.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ShapeshifterContinuousEffect()));
     }

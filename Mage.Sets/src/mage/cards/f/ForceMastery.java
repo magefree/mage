@@ -23,7 +23,7 @@ public final class ForceMastery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{U}{W}");
 
         // At the beggining of your upkeep, reveal the top card of your library and put that card into your hand. You gain life equal to its converted mana cost.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForceMasteryEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForceMasteryEffect(), false));
 
     }
 

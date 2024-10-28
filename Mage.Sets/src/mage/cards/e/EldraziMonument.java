@@ -46,7 +46,7 @@ public final class EldraziMonument extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EldraziMonumentEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EldraziMonumentEffect(), false));
     }
 
     private EldraziMonument(final EldraziMonument card) {

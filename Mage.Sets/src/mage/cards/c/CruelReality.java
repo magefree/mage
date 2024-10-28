@@ -17,7 +17,6 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetSacrifice;
 
@@ -40,7 +39,7 @@ public final class CruelReality extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         //At the beginning of enchanted player's upkeep, that player sacrifices a creature or planeswalker. If the player can't, they lose 5 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CruelRealityEffect(), TargetController.ENCHANTED, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ENCHANTED, new CruelRealityEffect(), false));
     }
 
     private CruelReality(final CruelReality card) {

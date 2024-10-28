@@ -46,7 +46,7 @@ public final class CallOfTheFullMoon extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, sacrifice Call of the Full Moon.
-        TriggeredAbility ability2 = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false);
+        TriggeredAbility ability2 = new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new SacrificeSourceEffect(), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability2, TwoOrMoreSpellsWereCastLastTurnCondition.instance,
             "At the beginning of each upkeep, if a player cast two or more spells last turn, sacrifice {this}."));
     }

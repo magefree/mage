@@ -29,7 +29,7 @@ public final class Mindwhisker extends CardImpl {
 
         // At the beginning of your upkeep, surveil 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SurveilEffect(1), TargetController.YOU, false
+                new SurveilEffect(1), false
         ));
 
         // Threshold -- As long as seven or more cards are in your graveyard, creatures your opponents control get -1/-0.

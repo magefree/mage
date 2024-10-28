@@ -37,7 +37,7 @@ public final class InstrumentOfTheBards extends CardImpl {
         // At the beginning of your upkeep, you may put a harmony counter on Instrument of Bards.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.HARMONY.createInstance()),
-                TargetController.YOU, true
+                true
         ));
 
         // {3}{G}, {T}: Search your library for a creature card with mana value equal to the number of harmony

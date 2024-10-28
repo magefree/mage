@@ -39,7 +39,7 @@ public final class SkrelvsHive extends CardImpl {
 
         // At the beginning of your upkeep, you lose 1 life and create a 1/1 colorless Phyrexian Mite artifact creature token with toxic 1 and "This creature can't block."
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new LoseLifeSourceControllerEffect(1), TargetController.YOU, false
+                new LoseLifeSourceControllerEffect(1), false
         );
         ability.addEffect(new CreateTokenEffect(new PhyrexianMiteToken()).concatBy("and"));
         this.addAbility(ability);

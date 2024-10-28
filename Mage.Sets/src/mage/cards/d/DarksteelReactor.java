@@ -29,7 +29,7 @@ public final class DarksteelReactor extends CardImpl {
         // Darksteel Reactor is indestructible.
         this.addAbility(IndestructibleAbility.getInstance());
         // At the beginning of your upkeep, you may put a charge counter on Darksteel Reactor.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), true));
         // When Darksteel Reactor has twenty or more charge counters on it, you win the game.
         this.addAbility(new DarksteelReactorStateTriggeredAbility());
 

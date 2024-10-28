@@ -27,7 +27,7 @@ public final class Moroii extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your upkeep, you lose 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), false));
     }
 
     private Moroii(final Moroii card) {

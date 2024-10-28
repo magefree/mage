@@ -16,9 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -35,7 +33,7 @@ public final class ThranTurbine extends CardImpl {
         // At the beginning of your upkeep, you may add {C} or {C}{C}. 
         // You can't spend this mana to cast spells.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ThranTurbineEffect(), TargetController.YOU, true));
+                new ThranTurbineEffect(), true));
     }
 
     private ThranTurbine(final ThranTurbine card) {

@@ -33,9 +33,9 @@ public final class CurseOfTheBloodyTome extends CardImpl {
 
         // At the beginning of enchanted player's upkeep, that player puts the top two cards of their library into their graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new MillCardsTargetEffect(2)
+                TargetController.ENCHANTED, new MillCardsTargetEffect(2)
                         .setText("that player mills two cards"),
-                TargetController.ENCHANTED, false
+                false
         ));
     }
 

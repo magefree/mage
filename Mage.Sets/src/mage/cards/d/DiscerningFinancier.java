@@ -56,7 +56,7 @@ public final class DiscerningFinancier extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new CreateTokenEffect(new TreasureToken()),
-                        TargetController.YOU, false
+                        false
                 ),
                 condition,
                 "At the beginning of your upkeep, if an opponent controls more lands than you, create a Treasure token."

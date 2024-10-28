@@ -36,7 +36,7 @@ public final class CirclingVultures extends CardImpl {
         this.addAbility(new CirclingVulturesSpecialAction());
 
         // At the beginning of your upkeep, sacrifice Circling Vultures unless you exile the top creature card of your graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileTopCreatureCardOfGraveyardCost(1)), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileTopCreatureCardOfGraveyardCost(1)), false));
     }
 
     private CirclingVultures(final CirclingVultures card) {

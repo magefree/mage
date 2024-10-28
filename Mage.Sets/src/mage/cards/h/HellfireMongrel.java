@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 
 /**
  *
@@ -32,7 +31,7 @@ public final class HellfireMongrel extends CardImpl {
 
         // At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Hellfire Mongrel deals 2 damage to that player.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(2), TargetController.OPPONENT, false, true),
+                new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new DamageTargetEffect(2), false, true),
                 (Condition)new CardsInHandCondition(ComparisonType.FEWER_THAN, 3, TargetController.ACTIVE),
                 "At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, {this} deals 2 damage to that player."
         ));

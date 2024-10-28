@@ -38,8 +38,7 @@ public final class DeathSpark extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         Zone.GRAVEYARD,
-                        new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new GenericManaCost(1)),
-                        TargetController.YOU,
+                        TargetController.YOU, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect(), new GenericManaCost(1)),
                         false),
                 DeathSparkCondition.instance,
                 "At the beginning of your upkeep, if {this} is in your graveyard with a creature card directly above it, you may pay {1}. If you do, return {this} to your hand."));

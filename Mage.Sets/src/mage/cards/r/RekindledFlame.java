@@ -35,8 +35,8 @@ public final class RekindledFlame extends CardImpl {
         // At the beginning of your upkeep, if an opponent has no cards in hand, you may return Rekindled Flame from your graveyard to your hand.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
-                        TargetController.YOU, true
+                        Zone.GRAVEYARD, TargetController.YOU, new ReturnSourceFromGraveyardToHandEffect(),
+                        true
                 ), OpponentHasNoCardsInHandCondition.instance, "At the beginning of your upkeep, " +
                 "if an opponent has no cards in hand, you may return {this} from your graveyard to your hand."
         ).addHint(hint));

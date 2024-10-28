@@ -42,7 +42,7 @@ public final class Homarid extends CardImpl {
             "with a tide counter on it."));
         // At the beginning of your upkeep, put a tide counter on Homarid.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIDE.createInstance()),
-            TargetController.YOU, false));
+                false));
         // As long as there is exactly one tide counter on Homarid, it gets -1/-1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostSourceEffect(-1, -1, Duration.WhileOnBattlefield), new SourceHasCounterCondition(CounterType.TIDE, 1, 1),

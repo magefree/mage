@@ -36,7 +36,7 @@ public final class SmotheringAbomination extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice a creature
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(
-                StaticFilters.FILTER_PERMANENT_CREATURE, 1, null), TargetController.YOU, false));
+                StaticFilters.FILTER_PERMANENT_CREATURE, 1, null), false));
 
         // Whenever you sacrifice a creature, draw a card.
         this.addAbility(new SacrificePermanentTriggeredAbility(

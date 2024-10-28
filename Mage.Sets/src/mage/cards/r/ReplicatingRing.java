@@ -32,7 +32,7 @@ public final class ReplicatingRing extends CardImpl {
 
         // At the beginning of your upkeep, put a night counter on Replicating Ring. Then if it has eight or more night counters on it, remove all of them and create eight colorless snow artifact tokens named Replicated Ring with "{T}: Add one mana of any color."
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ReplicatingRingEffect(), TargetController.YOU, false
+                new ReplicatingRingEffect(), false
         ));
     }
 

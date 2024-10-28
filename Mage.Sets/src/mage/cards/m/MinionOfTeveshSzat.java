@@ -39,7 +39,7 @@ public final class MinionOfTeveshSzat extends CardImpl {
                         new DamageControllerEffect(2),
                         new ManaCostsImpl<>("{B}{B}")
                 ),
-                TargetController.YOU, false
+                false
         ));
 
         // {tap}: Target creature gets +3/-2 until end of turn.

@@ -32,7 +32,7 @@ public final class BelzenlokDemonToken extends TokenImpl {
         toughness = new MageInt(6);
         addAbility(FlyingAbility.getInstance());
         addAbility(TrampleAbility.getInstance());
-        addAbility(new BeginningOfUpkeepTriggeredAbility(new BelzenlokDemonTokenEffect(), TargetController.YOU, false));
+        addAbility(new BeginningOfUpkeepTriggeredAbility(new BelzenlokDemonTokenEffect(), false));
     }
 
     private BelzenlokDemonToken(final BelzenlokDemonToken token) {

@@ -20,7 +20,7 @@ public final class SultaiAscendancy extends CardImpl {
         // At the beginning of your upkeep, look at the top two cards of your library.
         // Put any number of them into your graveyard and the rest back on top of your library in any order.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SurveilEffect(2), TargetController.YOU, false
+                new SurveilEffect(2), false
         ));
     }
 

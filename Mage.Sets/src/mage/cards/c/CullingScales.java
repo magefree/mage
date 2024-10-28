@@ -36,7 +36,7 @@ public final class CullingScales extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of your upkeep, destroy target nonland permanent with the lowest converted mana cost.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DestroyTargetEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetPermanent(filterNonlandPermanentWithLowestCmc));
         this.addAbility(ability);
     }

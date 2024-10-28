@@ -37,7 +37,7 @@ public final class DelverOfSecrets extends CardImpl {
 
         // At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If an instant or sorcery card is revealed this way, transform Delver of Secrets.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DelverOfSecretsEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DelverOfSecretsEffect(), false));
     }
 
     private DelverOfSecrets(final DelverOfSecrets card) {

@@ -17,7 +17,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
@@ -42,7 +41,7 @@ public final class PrivateResearch extends CardImpl {
 
         // At the beginning of your upkeep, you may put a page counter on Private Research.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.PAGE.createInstance(), true), TargetController.YOU, true));
+                new AddCountersSourceEffect(CounterType.PAGE.createInstance(), true), true));
 
         // When enchanted creature dies, draw a card for each page counter on Private Research.
         this.addAbility(new DiesAttachedTriggeredAbility(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.PAGE)).setText(rule), "enchanted creature"));

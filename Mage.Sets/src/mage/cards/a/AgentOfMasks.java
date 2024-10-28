@@ -24,7 +24,7 @@ public final class AgentOfMasks extends CardImpl {
         // At the beginning of your upkeep, each opponent loses 1 life. You gain life equal to the life lost this way.
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeOpponentsYouGainLifeLostEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeOpponentsYouGainLifeLostEffect(1), false));
     }
 
     private AgentOfMasks(final AgentOfMasks card) {

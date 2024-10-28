@@ -96,12 +96,12 @@ class MusicianEffect extends OneShotEffect {
 class MusicianTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
     MusicianTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoUnlessControllerPaysEffect(
+        super(Zone.BATTLEFIELD, TargetController.YOU, new DoUnlessControllerPaysEffect(
                         new DestroySourceEffect(),
                         new DynamicValueGenericManaCost(new CountersSourceCount(CounterType.MUSIC),
                                 "{1} for each music counter on {this}")
                 ).setText("destroy this creature unless you pay {1} for each music counter on it"),
-                TargetController.YOU, false, false);
+                false, false);
     }
 
     private MusicianTriggeredAbility(final MusicianTriggeredAbility ability) {

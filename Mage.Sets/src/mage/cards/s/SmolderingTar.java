@@ -27,7 +27,7 @@ public final class SmolderingTar extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}{R}");
 
         // At the beginning of your upkeep, target player loses 1 life.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new LoseLifeTargetEffect(1), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new LoseLifeTargetEffect(1), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // Sacrifice Smoldering Tar: Smoldering Tar deals 4 damage to target creature. Activate this ability only any time you could cast a sorcery.

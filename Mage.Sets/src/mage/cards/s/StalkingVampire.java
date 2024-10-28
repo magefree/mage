@@ -32,7 +32,7 @@ public final class StalkingVampire extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
                 new TransformSourceEffect(),
                 new ManaCostsImpl<>("{2}{B}{B}")
-        ), TargetController.YOU, false));
+        ), false));
     }
 
     private StalkingVampire(final StalkingVampire card) {

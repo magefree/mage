@@ -28,7 +28,7 @@ public final class MasterOfTheFeast extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your upkeep, each opponent draws a card.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardAllEffect(1, TargetController.OPPONENT), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardAllEffect(1, TargetController.OPPONENT), false));
     }
 
     private MasterOfTheFeast(final MasterOfTheFeast card) {

@@ -23,7 +23,7 @@ public final class TouchOfTheEternal extends CardImpl {
 
 
         // At the beginning of your upkeep, count the number of permanents you control. Your life total becomes that number.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TouchOfTheEternalEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TouchOfTheEternalEffect(), false));
     }
 
     private TouchOfTheEternal(final TouchOfTheEternal card) {

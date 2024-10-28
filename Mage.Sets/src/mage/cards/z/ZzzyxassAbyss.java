@@ -31,7 +31,7 @@ public final class ZzzyxassAbyss extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{B}{B}");
 
         // At the beginning of your upkeep, destroy all nonland permanents with the first name alphabetically among nonland permanents.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ZzzyxassAbyssEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ZzzyxassAbyssEffect(), false));
     }
 
     private ZzzyxassAbyss(final ZzzyxassAbyss card) {

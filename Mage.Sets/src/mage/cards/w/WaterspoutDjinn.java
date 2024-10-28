@@ -40,7 +40,7 @@ public final class WaterspoutDjinn extends CardImpl {
         // At the beginning of your upkeep, sacrifice Waterspout Djinn unless you return an untapped Island you control to its owner's hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter))),
-                TargetController.YOU, false));
+                false));
     }
 
     private WaterspoutDjinn(final WaterspoutDjinn card) {

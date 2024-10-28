@@ -27,7 +27,7 @@ public final class EyesEverywhere extends CardImpl {
         // At the beginning of your upkeep, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new ScryEffect(1, false),
-                TargetController.YOU, false
+                false
         ));
 
         // {5}{U}: Exchange control of Eyes Everywhere and target nonland permanent. Activate this ability only any time you could cast a sorcery.

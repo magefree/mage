@@ -46,7 +46,7 @@ public final class HanskSlayerZealot extends CardImpl {
         // At the beginning of your upkeep, target opponent creates three Walker tokens.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new CreateTokenTargetEffect(new WalkerToken(), 3),
-                TargetController.YOU, false
+                false
         );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

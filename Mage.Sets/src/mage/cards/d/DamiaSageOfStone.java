@@ -59,7 +59,7 @@ public final class DamiaSageOfStone extends CardImpl {
 class DamiaSageOfStoneTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
     DamiaSageOfStoneTriggeredAbility() {
-        super(new DrawCardSourceControllerEffect(new IntPlusDynamicValue(7, new MultipliedValue(CardsInControllerHandCount.instance, -1))), TargetController.YOU, false);
+        super(TargetController.YOU, new DrawCardSourceControllerEffect(new IntPlusDynamicValue(7, new MultipliedValue(CardsInControllerHandCount.instance, -1))), false);
     }
 
     private DamiaSageOfStoneTriggeredAbility(final DamiaSageOfStoneTriggeredAbility ability) {

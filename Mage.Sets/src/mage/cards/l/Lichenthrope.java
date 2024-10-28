@@ -40,7 +40,7 @@ public final class Lichenthrope extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LichenthropeEffect()));
 
         // At the beginning of your upkeep, remove a -1/-1 counter from Lichenthrope.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance()), false));
     }
 
     private Lichenthrope(final Lichenthrope card) {

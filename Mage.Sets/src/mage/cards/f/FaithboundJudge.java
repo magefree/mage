@@ -5,7 +5,6 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
@@ -54,7 +53,7 @@ public final class FaithboundJudge extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.JUDGMENT.createInstance()),
-                        TargetController.YOU, false
+                        false
                 ), condition1, "At the beginning of your upkeep, if {this} has " +
                 "two or fewer judgment counters on it, put a judgment counter on it."
         ));

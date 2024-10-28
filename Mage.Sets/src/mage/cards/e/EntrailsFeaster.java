@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -31,7 +30,7 @@ public final class EntrailsFeaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, you may exile a creature card from a graveyard. If you do, put a +1/+1 counter on Entrails Feaster. If you don't, tap Entrails Feaster.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new EntrailsFeasterEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new EntrailsFeasterEffect(), false);
         this.addAbility(ability);
 
     }

@@ -23,7 +23,7 @@ public final class FirstResponse extends CardImpl {
 
         // At the beginning of each upkeep, if you lost life last turn, create a 1/1 white Soldier creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SoldierToken()), TargetController.ANY, false),
+                new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new CreateTokenEffect(new SoldierToken()), false),
                 LiveLostLastTurnCondition.instance,
                 "At the beginning of each upkeep, if you lost life last turn, create a 1/1 white Soldier creature token."));
     }

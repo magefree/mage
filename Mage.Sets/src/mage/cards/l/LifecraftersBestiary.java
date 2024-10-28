@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 /**
@@ -25,7 +24,7 @@ public final class LifecraftersBestiary extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of your upkeep, scry 1.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ScryEffect(1, false), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ScryEffect(1, false), false));
 
         // Whenever you cast a creature spell, you may pay {G}. If you do, draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{G}")), StaticFilters.FILTER_SPELL_A_CREATURE, false));

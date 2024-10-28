@@ -34,7 +34,7 @@ public final class VancesBlastingCannons extends CardImpl {
         this.secondSideCardClazz = mage.cards.s.SpitfireBastion.class;
 
         // At the beginning of your upkeep, exile the top card of your library.  If it's a nonland card, you may cast that card this turn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new VancesBlastingCannonsExileEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new VancesBlastingCannonsExileEffect(), false));
 
         // Whenever you cast your third spell in a turn, transform Vance's Blasting Cannons.
         this.addAbility(new TransformAbility());

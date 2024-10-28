@@ -26,7 +26,7 @@ public final class CallOfTheRing extends CardImpl {
 
         // At the beginning of your upkeep, the Ring tempts you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TheRingTemptsYouEffect(), TargetController.YOU, false
+                new TheRingTemptsYouEffect(), false
         ));
 
         // Whenever you choose a creature as your Ring-bearer, you may pay 2 life. If you do, draw a card.

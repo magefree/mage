@@ -1,7 +1,6 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -112,7 +111,7 @@ class DarigaazReincarnatedDiesEffect extends ReplacementEffectImpl {
 class DarigaazReincarnatedInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
 
     public DarigaazReincarnatedInterveningIfTriggeredAbility() {
-        super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new DarigaazReincarnatedReturnEffect(), TargetController.YOU, false),
+        super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, TargetController.YOU, new DarigaazReincarnatedReturnEffect(), false),
                 DarigaazReincarnatedCondition.instance,
                 "At the beginning of your upkeep, if {this} is exiled with an egg counter on it, "
                         + "remove an egg counter from it. Then if {this} has no egg counters on it, return it to the battlefield");

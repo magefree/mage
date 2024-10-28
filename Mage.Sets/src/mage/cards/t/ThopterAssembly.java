@@ -48,7 +48,7 @@ public final class ThopterAssembly extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new ReturnToHandSourceEffect(true),
-                        TargetController.YOU, false
+                        false
                 ), condition, "At the beginning of your upkeep, " +
                 "if you control no Thopters other than {this}, " +
                 "return {this} to its owner's hand and create five 1/1 colorless " +

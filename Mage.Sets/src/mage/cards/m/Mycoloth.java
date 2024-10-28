@@ -35,7 +35,6 @@ public final class Mycoloth extends CardImpl {
         // At the beginning of your upkeep, create a 1/1 green Saproling creature token for each +1/+1 counter on Mycoloth.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new CreateTokenEffect(new SaprolingToken(),new CountersSourceCount(CounterType.P1P1)),
-                TargetController.YOU,
                 false
             ));
     }

@@ -43,8 +43,8 @@ public final class SimicAscendancy extends CardImpl {
         // At the beginning of your upkeep, if Simic Ascendancy has twenty or more growth counters on it, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        Zone.BATTLEFIELD, new WinGameSourceControllerEffect(),
-                        TargetController.YOU, false
+                        Zone.BATTLEFIELD, TargetController.YOU, new WinGameSourceControllerEffect(),
+                        false
                 ), new SourceHasCounterCondition(CounterType.GROWTH, 20, Integer.MAX_VALUE),
                 "At the beginning of your upkeep, if {this} has twenty " +
                         "or more growth counters on it, you win the game"

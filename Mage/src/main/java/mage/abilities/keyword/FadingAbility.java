@@ -30,7 +30,7 @@ public class FadingAbility extends EntersBattlefieldAbility {
 
     public FadingAbility(int fadeCounter, Card card, boolean shortRuleText) {
         super(new AddCountersSourceEffect(CounterType.FADE.createInstance(fadeCounter)), "with");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new FadingEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new FadingEffect(), false);
         ability.setRuleVisible(false);
         addSubAbility(ability);
         String cardTypeName;

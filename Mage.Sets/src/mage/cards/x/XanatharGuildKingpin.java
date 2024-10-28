@@ -38,7 +38,7 @@ public final class XanatharGuildKingpin extends CardImpl {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new XanatharGuildKingpinRuleModifyingEffect()
                 .setText("choose target opponent. Until end of turn, that player can't cast spells,"),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new XanatharLookAtTopCardOfLibraryEffect()
                 .setText(" you may look at the top card of their library any time,"));

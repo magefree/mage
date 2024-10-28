@@ -26,7 +26,7 @@ public final class KyrenSniper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, you may have Kyren Sniper deal 1 damage to target player.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(1), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(1), true);
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }

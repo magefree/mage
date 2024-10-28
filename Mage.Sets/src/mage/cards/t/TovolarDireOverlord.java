@@ -62,7 +62,7 @@ public final class TovolarDireOverlord extends CardImpl {
         // At the beginning of your upkeep, if you control three or more Wolves and/or Werewolves, it becomes night. Then transform any number of Human Werewolves you control.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new TovolarDireOverlordEffect(), TargetController.YOU, false
+                        new TovolarDireOverlordEffect(), false
                 ), condition, "At the beginning of your upkeep, if you control three or more Wolves " +
                 "and/or Werewolves, it becomes night. Then transform any number of Human Werewolves you control."
         ));

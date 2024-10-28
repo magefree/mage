@@ -36,7 +36,7 @@ public final class CourtOfAmbition extends CardImpl {
 
         // At the beginning of your upkeep, each opponent loses 3 life unless they discard a card. If you're the monarch, instead each opponent loses 6 life unless they discard two cards.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CourtOfAmbitionEffect(), TargetController.YOU, false
+                new CourtOfAmbitionEffect(), false
         ));
     }
 

@@ -28,7 +28,7 @@ public final class KamiOfTheTendedGarden extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, sacrifice Kami of the Tended Garden unless you pay {G}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ColoredManaCost(ColoredManaSymbol.G)), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ColoredManaCost(ColoredManaSymbol.G)), false));
         this.addAbility(new SoulshiftAbility(3));
     }
 

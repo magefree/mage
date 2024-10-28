@@ -27,7 +27,7 @@ public final class GamePreserve extends CardImpl {
 
         // At the beginning of your upkeep, each player reveals the top card of their library. If all cards revealed this way are creature cards, put those cards onto the battlefield under their owners' control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new GamePreserveEffect(), TargetController.YOU, false
+                new GamePreserveEffect(), false
         ));
     }
 

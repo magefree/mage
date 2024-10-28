@@ -24,7 +24,7 @@ public final class ColossalMajesty extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new DrawCardSourceControllerEffect(1),
-                        TargetController.YOU, false
+                        false
                 ),
                 FerociousCondition.instance,
                 "At the beginning of your upkeep, "

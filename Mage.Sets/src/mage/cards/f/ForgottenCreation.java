@@ -32,7 +32,7 @@ public final class ForgottenCreation extends CardImpl {
         // Skulk
         this.addAbility(new SkulkAbility());
         // At the beginning of your upkeep, you may discard all the cards in your hand. If you do, draw that many cards.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForgottenCreationEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForgottenCreationEffect(), true));
     }
 
     private ForgottenCreation(final ForgottenCreation card) {

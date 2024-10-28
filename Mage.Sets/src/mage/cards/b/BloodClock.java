@@ -28,7 +28,7 @@ public final class BloodClock extends CardImpl {
 
         // At the beginning of each player's upkeep, that player returns a permanent they control to its owner's hand unless they pay 2 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new BloodClockEffect(), TargetController.ANY, false, true
+                TargetController.ANY, new BloodClockEffect(), false, true
         ));
     }
 

@@ -36,7 +36,7 @@ public final class OniOfWildPlaces extends CardImpl {
         this.toughness = new MageInt(5);
         this.addAbility(HasteAbility.getInstance());
         // At the beginning of your upkeep, return a red creature you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
     }
 
     private OniOfWildPlaces(final OniOfWildPlaces card) {

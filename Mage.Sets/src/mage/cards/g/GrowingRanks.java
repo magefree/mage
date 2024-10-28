@@ -19,7 +19,7 @@ public final class GrowingRanks extends CardImpl {
 
 
         // At the beginning of your upkeep, populate. (Create a token that's a copy of a creature token you control.)
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PopulateEffect(""), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PopulateEffect(""), false));
     }
 
     private GrowingRanks(final GrowingRanks card) {

@@ -37,7 +37,7 @@ public final class SenTriplets extends CardImpl {
         // You may play cards from that player's hand this turn.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new SenTripletsRuleModifyingEffect(),
-                TargetController.YOU, false, false
+                false, false
         );
         ability.addEffect(new SenTripletsOpponentRevealsHandEffect());
         ability.addEffect(new SenTripletsPlayFromOpponentsHandEffect());

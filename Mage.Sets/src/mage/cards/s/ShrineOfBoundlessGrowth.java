@@ -40,7 +40,7 @@ public final class ShrineOfBoundlessGrowth extends CardImpl {
 
         // At the beginning of your upkeep or whenever you cast a green spell, put a charge counter on Shrine of Boundless Growth.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
-                new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(null, false),
                 new SpellCastControllerTriggeredAbility(null, filter, false)));
 
         // {T}, Sacrifice Shrine of Boundless Growth: Add {C} for each charge counter on Shrine of Boundless Growth.

@@ -36,10 +36,10 @@ public final class MasterOfDeath extends CardImpl {
         // At the beginning of your upkeep, if Master of Death is in your graveyard, you may pay 1 life. If you do, return it to your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 Zone.GRAVEYARD,
-                new DoIfCostPaid(
+                TargetController.YOU, new DoIfCostPaid(
                         new ReturnSourceFromGraveyardToHandEffect().setText("return it to your hand"),
                         new PayLifeCost(1)
-                ), TargetController.YOU, false
+                ), false
         ).withInterveningIf(SourceInGraveyardCondition.instance));
     }
 

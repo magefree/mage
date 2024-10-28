@@ -37,7 +37,7 @@ public final class Veldt extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         this.addAbility(ability);
         // At the beginning of your upkeep, remove a depletion counter from Veldt.
-        Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.DEPLETION.createInstance()), TargetController.YOU, false);
+        Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.DEPLETION.createInstance()), false);
         this.addAbility(ability2);
         // {tap}: Add {G} or {W}. Put a depletion counter on Veldt.
         Ability ability3 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(1), new TapSourceCost());

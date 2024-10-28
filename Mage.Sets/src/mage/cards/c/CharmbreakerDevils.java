@@ -27,7 +27,7 @@ public final class CharmbreakerDevils extends CardImpl {
         // At the beginning of your upkeep, return an instant or sorcery card at random from your graveyard to your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new ReturnFromGraveyardAtRandomEffect(StaticFilters.FILTER_CARD_INSTANT_OR_SORCERY, Zone.HAND),
-                TargetController.YOU, false
+                false
         ));
 
         // Whenever you cast an instant or sorcery spell, Charmbreaker Devils gets +4/+0 until end of turn.

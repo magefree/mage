@@ -46,7 +46,7 @@ public final class IcatianMoneychanger extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
         
         // At the beginning of your upkeep, put a credit counter on Icatian Moneychanger.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CREDIT.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CREDIT.createInstance()), false));
         
         // Sacrifice Icatian Moneychanger: You gain 1 life for each credit counter on Icatian Moneychanger. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, 

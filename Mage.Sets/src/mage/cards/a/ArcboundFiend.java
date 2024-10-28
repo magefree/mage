@@ -32,7 +32,7 @@ public final class ArcboundFiend extends CardImpl {
         this.addAbility(FearAbility.getInstance());
 
         // At the beginning of your upkeep, you may move a +1/+1 counter from target creature onto Arcbound Fiend.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new MoveCountersFromTargetToSourceEffect(), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new MoveCountersFromTargetToSourceEffect(), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

@@ -43,7 +43,7 @@ public final class Sporogenesis extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // At the beginning of your upkeep, you may put a fungus counter on target nontoken creature.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersTargetEffect(CounterType.FUNGUS.createInstance()), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersTargetEffect(CounterType.FUNGUS.createInstance()), true);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 

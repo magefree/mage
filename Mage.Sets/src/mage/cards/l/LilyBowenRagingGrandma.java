@@ -60,7 +60,6 @@ public final class LilyBowenRagingGrandma extends CardImpl {
                         "double the number of +1/+1 counters on {this} if its power is 16 or less. " +
                                 "Otherwise, remove all but one +1/+1 counter from it, " +
                                 "then you gain 1 life for each +1/+1 counter removed this way"),
-                TargetController.YOU,
                 false));
     }
 

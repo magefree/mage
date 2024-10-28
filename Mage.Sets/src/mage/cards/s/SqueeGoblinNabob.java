@@ -25,7 +25,7 @@ public final class SqueeGoblinNabob extends CardImpl {
 
         // At the beginning of your upkeep, you may return Squee, Goblin Nabob from your graveyard to your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToHandEffect(), TargetController.YOU, true));
+                TargetController.YOU, new ReturnSourceFromGraveyardToHandEffect(), true));
     }
 
     private SqueeGoblinNabob(final SqueeGoblinNabob card) {

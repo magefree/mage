@@ -28,7 +28,7 @@ public final class FledglingDjinn extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // At the beginning of your upkeep, Fledgling Djinn deals 1 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), false));
     }
 
     private FledglingDjinn(final FledglingDjinn card) {

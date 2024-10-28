@@ -30,7 +30,7 @@ public final class CropSigil extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
         // At the beginning of your upkeep, you may mill a card.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MillCardsControllerEffect(1), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MillCardsControllerEffect(1), true));
 
         // <i>Delirium</i> &mdash; {2}{G}, Sacrifice Crop Sigil: Return up to one target creature card and up to one target land card from your graveyard to your hand.
         // Activate this ability only if there are four or more card types among cards in your graveyard.

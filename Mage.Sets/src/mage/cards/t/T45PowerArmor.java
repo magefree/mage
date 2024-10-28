@@ -50,7 +50,6 @@ public final class T45PowerArmor extends CardImpl {
                         new T45PowerArmorEffect(),
                         new PayEnergyCost(1)
                 ),
-                TargetController.YOU,
                 false
         ));
 

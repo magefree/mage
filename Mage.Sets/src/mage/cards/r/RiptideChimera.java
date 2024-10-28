@@ -31,7 +31,7 @@ public final class RiptideChimera extends CardImpl {
         // At the beginning of your upkeep, return an enchantment you control to its owner's hand.
         Effect effect = new ReturnToHandChosenControlledPermanentEffect(StaticFilters.FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT, 1);
         effect.setText("return an enchantment you control to its owner's hand");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, false));
     }
 
     private RiptideChimera(final RiptideChimera card) {

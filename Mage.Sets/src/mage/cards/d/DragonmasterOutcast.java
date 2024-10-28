@@ -41,7 +41,7 @@ public final class DragonmasterOutcast extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, if you control six or more lands, create a 5/5 red Dragon creature token with flying.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new DragonToken2(), 1), TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new DragonToken2(), 1), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability, new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 5),
                         "At the beginning of your upkeep, if you control six or more lands, create a 5/5 red Dragon creature token with flying."

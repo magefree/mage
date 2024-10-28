@@ -1,7 +1,6 @@
 package mage.cards.u;
 
 import mage.ApprovingObject;
-import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -60,7 +59,7 @@ public final class UvildaDeanOfPerfection extends ModalDoubleFacedCard {
 
         // At the beginning of your upkeep, exile the top card of each opponent's library. Until end of turn, you may cast spells from among those exiled cards, and you many spend mana as though it were mana of any color to cast those spells.
         this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new NassariDeanOfExpressionEffect(), TargetController.YOU, false
+                new NassariDeanOfExpressionEffect(), false
         ));
 
         // Whenever you cast a spell from exile, put a +1/+1 counter on Nassari, Dean of Expression.
@@ -153,8 +152,8 @@ class UvildaDeanOfPerfectionGainAbilityEffect extends ContinuousEffectImpl {
         }
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        Zone.EXILED, new RemoveCounterSourceEffect(CounterType.HONE.createInstance()),
-                        TargetController.YOU, false
+                        Zone.EXILED, TargetController.YOU, new RemoveCounterSourceEffect(CounterType.HONE.createInstance()),
+                        false
                 ), UvildaDeanOfPerfectionCondition.instance, "At the beginning of your upkeep, " +
                 "if this card is exiled, remove a hone counter from it."
         );

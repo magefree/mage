@@ -30,9 +30,9 @@ public final class CurseOfOblivion extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of enchanted player's upkeep, that player exiles two cards from their graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ExileFromZoneTargetEffect(
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ENCHANTED, new ExileFromZoneTargetEffect(
                 Zone.GRAVEYARD, StaticFilters.FILTER_CARD_CARDS, 2, false
-        ), TargetController.ENCHANTED, false));
+        ), false));
     }
 
     private CurseOfOblivion(final CurseOfOblivion card) {

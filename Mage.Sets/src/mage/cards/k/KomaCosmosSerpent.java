@@ -22,7 +22,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.KomasCoilToken;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -50,7 +49,7 @@ public final class KomaCosmosSerpent extends CardImpl {
 
         // At the beginning of each upkeep, create a 3/3 blue Serpent creature token named Koma's Coil.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new KomasCoilToken()), TargetController.EACH_PLAYER, false, false
+                TargetController.EACH_PLAYER, new CreateTokenEffect(new KomasCoilToken()), false, false
         ));
 
         // Sacrifice another Serpent: Choose one —

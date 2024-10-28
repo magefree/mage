@@ -25,7 +25,7 @@ public final class Bulwark extends CardImpl {
 
         // At the beginning of your upkeep, Bulwark deals X damage to target opponent, where X is
         // the number of cards in your hand minus the number of cards in that player's hand.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BulwarkDamageEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BulwarkDamageEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

@@ -32,7 +32,7 @@ public final class Recantation extends CardImpl {
 
         // At the beginning of your upkeep, you may put a verse counter on Recantation.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), true));
 
         // {U}, Sacrifice Recantation: Return up to X target permanents to their owners' hands, where X is the number of verse counters on Recantation.
         Effect effect = new ReturnToHandTargetEffect();

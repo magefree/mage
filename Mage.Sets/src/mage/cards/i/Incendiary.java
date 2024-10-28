@@ -18,7 +18,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -44,7 +43,7 @@ public final class Incendiary extends CardImpl {
 
         // At the beginning of your upkeep, you may put a fuse counter on Incendiary.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.FUSE.createInstance(), true), TargetController.YOU, true));
+                new AddCountersSourceEffect(CounterType.FUSE.createInstance(), true), true));
 
         // When enchanted creature dies, Incendiary deals X damage to any target, where X is the number of fuse counters on Incendiary.
         Effect effect = new DamageTargetEffect(new CountersSourceCount(CounterType.FUSE)).setText(rule);

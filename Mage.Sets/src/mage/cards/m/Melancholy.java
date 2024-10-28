@@ -41,7 +41,7 @@ public final class Melancholy extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
         // At the beginning of your upkeep, sacrifice Melancholy unless you pay {B}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{B}")),
-            TargetController.YOU, false));
+                false));
     }
 
     private Melancholy(final Melancholy card) {

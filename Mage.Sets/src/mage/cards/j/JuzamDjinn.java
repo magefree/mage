@@ -25,7 +25,7 @@ public final class JuzamDjinn extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, Juzam Djinn deals 1 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), false));
     }
 
     private JuzamDjinn(final JuzamDjinn card) {

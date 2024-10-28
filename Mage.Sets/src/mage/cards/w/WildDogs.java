@@ -35,7 +35,7 @@ public final class WildDogs extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of Wild Dogs.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WildDogsEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WildDogsEffect(), false));
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));

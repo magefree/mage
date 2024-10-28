@@ -31,7 +31,7 @@ public final class PriestOfTheBloodRite extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new DemonToken())));
 
         // At the beginning of your upkeep, you lose 2 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), false));
     }
 
     private PriestOfTheBloodRite(final PriestOfTheBloodRite card) {

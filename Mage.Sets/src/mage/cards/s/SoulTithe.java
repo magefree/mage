@@ -37,7 +37,7 @@ public final class SoulTithe extends CardImpl {
         // At the beginning of the upkeep of enchanted permanent's controller,
         // that player sacrifices it unless they pay {X},
         // where X is its converted mana cost.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SoulTitheEffect(), TargetController.CONTROLLER_ATTACHED_TO, false)
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new SoulTitheEffect(), false)
                 .setTriggerPhrase("At the beginning of the upkeep of enchanted permanent's controller, "));
     }
 

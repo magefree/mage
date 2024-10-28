@@ -40,8 +40,8 @@ public final class UnstableMutation extends CardImpl {
         // Enchanted creature gets +3/+3.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3)));
         // At the beginning of the upkeep of enchanted creature's controller, put a -1/-1 counter on that creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAttachedEffect(CounterType.M1M1.createInstance(), "that creature"),
-            TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new AddCountersAttachedEffect(CounterType.M1M1.createInstance(), "that creature"),
+                false));
     }
 
     private UnstableMutation(final UnstableMutation card) {

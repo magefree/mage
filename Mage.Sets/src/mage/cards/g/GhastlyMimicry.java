@@ -43,7 +43,7 @@ public final class GhastlyMimicry extends CardImpl {
 
         // At the beginning of your upkeep, create a token that's a copy of enchanted creature, except it's a Spirit in addition to its other types.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new GhastlyMimicryEffect(), TargetController.YOU, false
+                new GhastlyMimicryEffect(), false
         ));
 
         // If Ghastly Mimicry would be put into a graveyard from anywhere, exile it instead.

@@ -43,7 +43,7 @@ public final class AdmiralAckbar extends CardImpl {
         this.addAbility(new CastSourceTriggeredAbility(new CreateTokenEffect(new RebelStarshipToken(), 2), false));
 
         // At the beginning of each upkeep, untap all starships you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new UntapAllControllerEffect(filter), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new UntapAllControllerEffect(filter), false));
 
         // Whenever two or more Starship creatures you control attack, draw a card.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(new DrawCardSourceControllerEffect(1), 2, filter));

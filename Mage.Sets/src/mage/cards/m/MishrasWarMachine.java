@@ -34,7 +34,7 @@ public final class MishrasWarMachine extends CardImpl {
         this.addAbility(BandingAbility.getInstance());
 
         // At the beginning of your upkeep, Mishra's War Machine deals 3 damage to you unless you discard a card. If Mishra's War Machine deals damage to you this way, tap it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MishrasWarMachineEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MishrasWarMachineEffect(), false));
 
     }
 

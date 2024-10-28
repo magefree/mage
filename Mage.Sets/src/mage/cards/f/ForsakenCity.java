@@ -31,7 +31,7 @@ public final class ForsakenCity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
 
         // At the beginning of your upkeep, you may exile a card from your hand. If you do, untap Forsaken City.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new UntapSourceEffect(), new ExileFromHandCost(new TargetCardInHand(filter))), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new UntapSourceEffect(), new ExileFromHandCost(new TargetCardInHand(filter))), false));
 
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());

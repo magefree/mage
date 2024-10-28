@@ -54,7 +54,7 @@ public final class HollowhengeOverlord extends CardImpl {
                 new CreateTokenEffect(new WolfToken(), xValue)
                         .setText("for each creature you control that's a Wolf or a Werewolf, " +
                                 "create a 2/2 green Wolf creature token"),
-                TargetController.YOU, false
+                false
         ).addHint(hint));
     }
 

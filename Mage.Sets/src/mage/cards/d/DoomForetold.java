@@ -32,7 +32,7 @@ public final class DoomForetold extends CardImpl {
 
         // At the beginning of each player's upkeep, that player sacrifices a nonland, nontoken permanent. If that player can't, they discard a card, they lose 2 life, you draw a card, you gain 2 life, you create a 2/2 white Knight creature token with vigilance, then you sacrifice Doom Foretold.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoomForetoldEffect(), TargetController.ACTIVE, false
+                TargetController.ACTIVE, new DoomForetoldEffect(), false
         ));
     }
 

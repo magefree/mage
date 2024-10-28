@@ -39,7 +39,7 @@ public class TheEverflowingWell extends CardImpl {
         // Descend 8 -- At the beginning of your upkeep, if there are eight or more permanent cards in your graveyard, transform The Everflowing Well.
         this.addAbility(new TransformAbility());
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TransformSourceEffect(), TargetController.YOU, false),
+                new TransformSourceEffect(), false),
                 DescendCondition.EIGHT, "At the beginning of your upkeep, if there are eight or more permanent cards in your graveyard, transform {this}.");
         ability.setAbilityWord(AbilityWord.DESCEND_8).addHint(DescendCondition.getHint());
         this.addAbility(ability);

@@ -26,7 +26,7 @@ public final class WildWasteland extends CardImpl {
 
         // At the beginning of your upkeep, exile the top two cards of your library. You may play those cards this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ExileTopXMayPlayUntilEffect(2, Duration.EndOfTurn), TargetController.YOU, false));
+                new ExileTopXMayPlayUntilEffect(2, Duration.EndOfTurn), false));
     }
 
     private WildWasteland(final WildWasteland card) {

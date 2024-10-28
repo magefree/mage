@@ -41,7 +41,7 @@ public final class PrimordialHydra extends CardImpl {
 
         // At the beginning of your upkeep, double the number of +1/+1 counters on Primordial Hydra.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoubleCountersSourceEffect(CounterType.P1P1), TargetController.YOU, false
+                new DoubleCountersSourceEffect(CounterType.P1P1), false
         ));
 
         // Primordial Hydra has trample as long as it has ten or more +1/+1 counters on it.

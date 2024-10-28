@@ -34,7 +34,7 @@ public final class GhazbanOgre extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of Ghazbán Ogre.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GhazbanOgreEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GhazbanOgreEffect(), false));
 
     }
 

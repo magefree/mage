@@ -37,7 +37,7 @@ public final class Fettergeist extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, sacrifice Fettergeist unless you pay {1} for each other creature you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FettergeistUnlessPaysEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FettergeistUnlessPaysEffect(), false));
 
     }
 
@@ -93,4 +93,3 @@ class FettergeistUnlessPaysEffect extends OneShotEffect {
     }
 
 }
-

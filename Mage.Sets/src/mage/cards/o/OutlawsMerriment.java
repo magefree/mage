@@ -27,7 +27,7 @@ public final class OutlawsMerriment extends CardImpl {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new CreateTokenEffect(new OutlawsMerrimentWarriorToken())
                         .setText("3/1 Human Warrior with trample and haste"),
-                TargetController.YOU, false
+                false
         );
 
         // • 2/1 Human Cleric with lifelink and haste.

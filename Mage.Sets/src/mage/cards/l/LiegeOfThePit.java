@@ -17,7 +17,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
@@ -38,7 +37,7 @@ public final class LiegeOfThePit extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a creature other than Liege of the Pit. If you can't, Liege of the Pit deals 7 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LiegeOfThePitEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LiegeOfThePitEffect(), false));
         // Morph {B}{B}{B}{B}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{B}{B}{B}{B}")));
     }

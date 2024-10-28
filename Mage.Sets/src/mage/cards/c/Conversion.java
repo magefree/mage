@@ -33,7 +33,6 @@ public final class Conversion extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(
                         new ManaCostsImpl<>("{W}{W}")),
-                TargetController.YOU,
                 false));
 
         // All Mountains are Plains.

@@ -37,7 +37,7 @@ public final class DemonicTaskmaster extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, sacrifice a creature other than Demonic Taskmaster.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, ""), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, ""), false);
         this.addAbility(ability);
     }
 

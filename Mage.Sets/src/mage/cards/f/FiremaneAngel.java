@@ -42,7 +42,7 @@ public final class FiremaneAngel extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
         // At the beginning of your upkeep, if Firemane Angel is in your graveyard or on the battlefield, you may gain 1 life.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.ALL, new GainLifeEffect(1), TargetController.YOU, true),
+                new BeginningOfUpkeepTriggeredAbility(Zone.ALL, TargetController.YOU, new GainLifeEffect(1), true),
                 SourceOnBattlefieldOrGraveyardCondition.instance,
                 "At the beginning of your upkeep, if {this} is in your graveyard or on the battlefield, you may gain 1 life.");
         this.addAbility(ability);

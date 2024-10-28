@@ -32,7 +32,7 @@ public final class DominusOfFealty extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), true);
         ability.addEffect(new UntapTargetEffect().setText("If you do, untap it"));
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("and it gains haste until end of turn"));
         ability.addTarget(new TargetPermanent());

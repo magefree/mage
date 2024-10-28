@@ -52,7 +52,7 @@ public final class DescentIntoMadness extends CardImpl {
 
 
         // At the beginning of your upkeep, put a despair counter on Descent into Madness, then each player exiles X permanents they control and/or cards from their hand, where X is the number of despair counters on Descent into Madness.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DescentIntoMadnessEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DescentIntoMadnessEffect(), false));
     }
 
     private DescentIntoMadness(final DescentIntoMadness card) {

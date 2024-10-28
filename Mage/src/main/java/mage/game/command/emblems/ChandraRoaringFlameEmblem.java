@@ -21,7 +21,7 @@ public final class ChandraRoaringFlameEmblem extends Emblem {
         super("Emblem Chandra");
         Effect effect = new DamageTargetEffect(3);
         effect.setText("this emblem deals 3 damage to you");
-        this.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, effect, TargetController.YOU, false, true));
+        this.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, TargetController.YOU, effect, false, true));
     }
 
     private ChandraRoaringFlameEmblem(final ChandraRoaringFlameEmblem card) {

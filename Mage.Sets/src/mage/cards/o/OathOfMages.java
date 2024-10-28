@@ -29,7 +29,7 @@ public final class OathOfMages extends CardImpl {
 
         // At the beginning of each player's upkeep, that player chooses target player who has more life than they do and is their opponent. The first player may have Oath of Mages deal 1 damage to the second player.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new OathOfMagesEffect(), TargetController.ANY, false
+                TargetController.ANY, new OathOfMagesEffect(), false
         );
         ability.setTargetAdjuster(OathOfMagesAdjuster.instance);
         this.addAbility(ability);

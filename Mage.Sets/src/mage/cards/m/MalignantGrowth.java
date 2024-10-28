@@ -33,7 +33,7 @@ public final class MalignantGrowth extends CardImpl {
         // At the beginning of your upkeep, put a growth counter on Malignant Growth.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.GROWTH.createInstance()),
-                TargetController.YOU, false
+                false
         ));
 
         // At the beginning of each opponent's draw step, that player draws an additional card for each growth counter on Malignant Growth, then Malignant Growth deals damage to the player equal to the number of cards they drew this way.

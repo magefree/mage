@@ -26,7 +26,7 @@ public final class Sangrophage extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, tap Sangrophage unless you pay 2 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(2)), false));
 
     }
 

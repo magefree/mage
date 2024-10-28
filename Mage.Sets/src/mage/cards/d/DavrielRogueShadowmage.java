@@ -31,8 +31,8 @@ public final class DavrielRogueShadowmage extends CardImpl {
         // At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, Davriel, Rogue Shadowmage deals 2 damage to them.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        Zone.BATTLEFIELD, new DamageTargetEffect(2),
-                        TargetController.OPPONENT, false, true
+                        Zone.BATTLEFIELD, TargetController.OPPONENT, new DamageTargetEffect(2),
+                        false, true
                 ), DavrielRogueShadowmageCondition.instance, "At the beginning of each opponent's upkeep, " +
                 "if that player has one or fewer cards in hand, {this} deals 2 damage to them."
         ));

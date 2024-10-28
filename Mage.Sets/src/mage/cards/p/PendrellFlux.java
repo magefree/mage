@@ -39,7 +39,7 @@ public final class PendrellFlux extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you pay its mana cost."
-        ability = new BeginningOfUpkeepTriggeredAbility(new PendrellFluxEffect(), TargetController.YOU, false);
+        ability = new BeginningOfUpkeepTriggeredAbility(new PendrellFluxEffect(), false);
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted creature has \"At the beginning of your upkeep, sacrifice this creature unless you pay its mana cost.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

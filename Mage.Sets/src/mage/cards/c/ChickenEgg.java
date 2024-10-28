@@ -32,7 +32,7 @@ public final class ChickenEgg extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, roll a six-sided die. If you roll a 6, sacrifice Chicken Egg and create a 4/4 red Giant Bird creature token.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ChickenEggEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ChickenEggEffect(), false));
     }
 
     private ChickenEgg(final ChickenEgg card) {

@@ -39,7 +39,7 @@ public final class Halfdane extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, change Halfdane's base power and toughness to the power and toughness of target creature other than Halfdane until the end of your next upkeep.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new HalfdaneUpkeepEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new HalfdaneUpkeepEffect(), false);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

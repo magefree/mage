@@ -44,7 +44,7 @@ public final class MechanizedProduction extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MechanizedProductionEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MechanizedProductionEffect(), false));
     }
 
     private MechanizedProduction(final MechanizedProduction card) {

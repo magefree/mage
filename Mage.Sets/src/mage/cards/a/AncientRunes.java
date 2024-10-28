@@ -1,7 +1,6 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -9,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -25,7 +23,7 @@ public final class AncientRunes extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // At the beginning of each player's upkeep, Ancient Runes deals damage to that player equal to the number of artifacts they control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AncientRunesDamageTargetEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new AncientRunesDamageTargetEffect(), false, true));
     }
 
     private AncientRunes(final AncientRunes card) {

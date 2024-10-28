@@ -46,7 +46,7 @@ public final class VilespawnSpider extends CardImpl {
 
         // At the beginning of your upkeep, mill a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new MillCardsControllerEffect(1), TargetController.YOU, false
+                new MillCardsControllerEffect(1), false
         ));
 
         // {2}{G}{U}, {T}, Sacrifice Vilespawn Spider: Create a 1/1 green Insect creature token for each creature card in your graveyard. Activate only as a sorcery.

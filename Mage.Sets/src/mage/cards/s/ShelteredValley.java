@@ -45,7 +45,7 @@ public final class ShelteredValley extends CardImpl {
 
         // At the beginning of your upkeep, if you control three or fewer lands, you gain 1 life.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), false),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_LANDS, ComparisonType.FEWER_THAN, 4),
                 "At the beginning of your upkeep, if you control three or fewer lands, you gain 1 life."
         ));

@@ -49,7 +49,6 @@ public final class RedcapGutterDweller extends CardImpl {
                                 + "and exile the top card of your library. You may play that card this turn."
                 ).addEffect(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
                         .setText("and exile the top card of your library. You may play that card this turn")),
-                TargetController.YOU,
                 false
         ));
     }

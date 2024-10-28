@@ -42,7 +42,7 @@ public final class BlackMarketTycoon extends CardImpl {
 
         // At the beginning of your upkeep, Black Market Tycoon deals 2 damage to you for each Treasure you control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DamageControllerEffect(xValue), TargetController.YOU, false
+                new DamageControllerEffect(xValue), false
         ).addHint(hint));
 
         // {T}: Create a Treasure token.

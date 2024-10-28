@@ -46,7 +46,7 @@ public final class IllustriousWanderglyph extends CardImpl {
 
         // At the beginning of each upkeep, create a 1/1 colorless Gnome artifact creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new GnomeToken()), TargetController.EACH_PLAYER, false
+                TargetController.EACH_PLAYER, new CreateTokenEffect(new GnomeToken()), false
         ));
     }
 

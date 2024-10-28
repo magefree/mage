@@ -40,7 +40,7 @@ public final class ForgottenAncient extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may move any number of +1/+1 counters from Forgotten Ancient onto other creatures.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForgottenAncientEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForgottenAncientEffect(), true));
     }
 
     private ForgottenAncient(final ForgottenAncient card) {

@@ -59,7 +59,7 @@ class EstridsInvocationCopyApplier extends CopyApplier {
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         // At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control.
         blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
-                new EstridsInvocationEffect(), TargetController.YOU, true
+                new EstridsInvocationEffect(), true
         ));
         return true;
     }

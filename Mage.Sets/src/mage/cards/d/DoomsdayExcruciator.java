@@ -43,7 +43,7 @@ public final class DoomsdayExcruciator extends CardImpl {
 
         // At the beginning of your upkeep, draw a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), TargetController.YOU, false
+                new DrawCardSourceControllerEffect(1), false
         ));
     }
 

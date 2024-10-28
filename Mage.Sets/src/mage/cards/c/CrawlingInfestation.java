@@ -26,7 +26,7 @@ public final class CrawlingInfestation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // At the beginning of your upkeep, you may mill two cards.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MillCardsControllerEffect(2), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MillCardsControllerEffect(2), true));
 
         // Whenever one or more creature cards are put into your graveyard from anywhere during your turn, create a 1/1 green Insect creature token. This ability triggers only once each turn.
         this.addAbility(new CrawlingInfestationTriggeredAbility());

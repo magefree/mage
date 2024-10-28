@@ -37,7 +37,7 @@ public final class MorskaUnderseaSleuth extends CardImpl {
 
         // At the beginning of your upkeep, investigate.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new InvestigateEffect(), TargetController.YOU, false
+                new InvestigateEffect(), false
         ));
 
         // Whenever you draw your second card each turn, put two +1/+1 counters on Morska, Undersea Sleuth.

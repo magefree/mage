@@ -56,7 +56,7 @@ public final class ArchfiendOfTheDross extends CardImpl {
         // At the beginning of your upkeep, remove an oil counter from Archfiend of the Dross. Then if it has no oil counters on it, you lose the game.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new RemoveCounterSourceEffect(CounterType.OIL.createInstance()),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new LoseGameSourceControllerEffect(), condition,

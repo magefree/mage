@@ -28,7 +28,7 @@ public final class CemeteryTampering extends CardImpl {
 
         // At the beginning of your upkeep, you may mill three cards. Then if there are twenty or more cards in your graveyard, you may play the exiled card without paying its mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CemeteryTamperingEffect(), TargetController.YOU, false
+                new CemeteryTamperingEffect(), false
         ));
     }
 

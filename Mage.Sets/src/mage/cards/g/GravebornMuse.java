@@ -36,7 +36,7 @@ public final class GravebornMuse extends CardImpl {
 
         // At the beginning of your upkeep, you draw X cards and you lose X life, where X is the number of Zombies you control.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter))
-                .setText("you draw X cards"), TargetController.YOU, false);
+                .setText("you draw X cards"), false);
         ability.addEffect(new LoseLifeSourceControllerEffect(new PermanentsOnBattlefieldCount(filter))
                 .setText("and you lose X life, where X is the number of Zombies you control"));
         this.addAbility(ability);

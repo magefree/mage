@@ -35,7 +35,7 @@ public final class PanopticMirror extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability.setAbilityWord(AbilityWord.IMPRINT));
         // At the beginning of your upkeep, you may copy a card exiled with Panoptic Mirror. If you do, you may cast the copy without paying its mana cost.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PanopticMirrorCastEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PanopticMirrorCastEffect(), true));
     }
 
     private PanopticMirror(final PanopticMirror card) {

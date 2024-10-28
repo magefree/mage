@@ -38,7 +38,7 @@ public final class VictorysEnvoy extends CardImpl {
         // At the beginning of your upkeep, put a +1/1 counter on each other creature you control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter),
-                TargetController.YOU, false
+                false
         ));
     }
 

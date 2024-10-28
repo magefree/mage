@@ -40,7 +40,7 @@ public final class WortBoggartAuntie extends CardImpl {
 
         // At the beginning of your upkeep, you may return target Goblin card from your graveyard to your hand.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new ReturnFromGraveyardToHandTargetEffect(), TargetController.YOU, true
+                new ReturnFromGraveyardToHandTargetEffect(), true
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

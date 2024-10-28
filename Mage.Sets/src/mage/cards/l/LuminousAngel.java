@@ -26,7 +26,7 @@ public final class LuminousAngel extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 1), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SpiritWhiteToken(), 1), true));
     }
 
     private LuminousAngel(final LuminousAngel card) {

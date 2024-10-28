@@ -31,7 +31,7 @@ public final class TavernBrawler extends CardImpl {
         // Commander creatures you own have "At the beginning of your upkeep, exile the top card of your library. This creature gets +X/+0 until end of turn, where X is that card's mana value. You may play that card this turn."
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new TavernBrawlerEffect(), TargetController.YOU, false
+                        new TavernBrawlerEffect(), false
                 ), Duration.WhileOnBattlefield, StaticFilters.FILTER_CREATURES_OWNED_COMMANDER
         )));
     }

@@ -50,8 +50,8 @@ public final class Takklemaggot extends CardImpl {
 
         // At the beginning of the upkeep of enchanted creature's controller, put a -0/-1 counter on that creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersAttachedEffect(CounterType.M0M1.createInstance(), "that creature"),
-                TargetController.CONTROLLER_ATTACHED_TO, false, false));
+                TargetController.CONTROLLER_ATTACHED_TO, new AddCountersAttachedEffect(CounterType.M0M1.createInstance(), "that creature"),
+                false, false));
 
         // When enchanted creature dies, that creature's controller chooses a creature that Takklemaggot could enchant.
         // If they do, return Takklemaggot to the battlefield under your control attached to that creature.

@@ -11,7 +11,7 @@ import mage.game.Game;
 public class WerewolfBackTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
     public WerewolfBackTriggeredAbility() {
-        super(new TransformSourceEffect(), TargetController.ANY, false);
+        super(TargetController.ANY, new TransformSourceEffect(), false);
     }
 
     private WerewolfBackTriggeredAbility(final WerewolfBackTriggeredAbility ability) {

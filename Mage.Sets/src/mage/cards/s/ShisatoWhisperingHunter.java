@@ -38,7 +38,7 @@ public final class ShisatoWhisperingHunter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, sacrifice a Snake.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(filter, 1,""), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(filter, 1,""), false));
         // Whenever Shisato, Whispering Hunter deals combat damage to a player, that player skips their next untap step.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SkipNextPlayerUntapStepEffect("that player"), false, true));
     }

@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class IvoryCraneNetsuke extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life.
-        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(4), TargetController.YOU, false);
+        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(4), false);
         CardsInHandCondition condition = new CardsInHandCondition(ComparisonType.MORE_THAN, 6);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition, "At the beginning of your upkeep, if you have seven or more cards in hand, you gain 4 life."));
         

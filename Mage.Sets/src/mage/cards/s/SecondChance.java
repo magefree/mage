@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -24,7 +23,7 @@ public final class SecondChance extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // At the beginning of your upkeep, if you have 5 or less life, sacrifice Second Chance and take an extra turn after this one.
-        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), TargetController.YOU, false);
+        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), false);
         ability.addEffect(new AddExtraTurnControllerEffect());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, FatefulHourCondition.instance,
                 "At the beginning of your upkeep, if you have 5 or less life, sacrifice {this} and take an extra turn after this one"));

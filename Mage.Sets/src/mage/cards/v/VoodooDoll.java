@@ -36,7 +36,7 @@ public final class VoodooDoll extends CardImpl {
 
         // At the beginning of your upkeep, put a pin counter on Voodoo Doll.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.PIN.createInstance()), TargetController.YOU, false
+                new AddCountersSourceEffect(CounterType.PIN.createInstance()), false
         ));
 
         // At the beginning of your end step, if Voodoo Doll is untapped, destroy Voodoo Doll and it deals damage to you equal to the number of pin counters on it.

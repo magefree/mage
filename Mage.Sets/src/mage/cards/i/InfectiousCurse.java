@@ -45,8 +45,8 @@ public final class InfectiousCurse extends CardImpl {
 
         // At the beginning of enchanted player's upkeep, that player loses 1 life and you gain 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new LoseLifeTargetEffect(1).setText("that player loses 1 life"),
-                TargetController.ENCHANTED, false
+                TargetController.ENCHANTED, new LoseLifeTargetEffect(1).setText("that player loses 1 life"),
+                false
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);

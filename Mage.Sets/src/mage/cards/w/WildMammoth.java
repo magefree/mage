@@ -34,7 +34,7 @@ public final class WildMammoth extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, if a player controls more creatures than each other player, the player who controls the most creatures gains control of Wild Mammoth.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WildMammothEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WildMammothEffect(), false));
     }
 
     private WildMammoth(final WildMammoth card) {

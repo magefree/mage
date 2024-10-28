@@ -32,7 +32,7 @@ public final class Esperzoa extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         //At the beginning of your upkeep, return an artifact you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledArtifactPermanent()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledArtifactPermanent()), false));
     }
 
     private Esperzoa(final Esperzoa card) {

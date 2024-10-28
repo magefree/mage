@@ -34,7 +34,7 @@ public final class CourtOfCunning extends CardImpl {
 
         // At the beginning of your upkeep, any number of target players each mill two cards. If you're the monarch, each of those players mills ten cards instead.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new CourtOfCunningEffect(), TargetController.YOU, false
+                new CourtOfCunningEffect(), false
         );
         ability.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));
         this.addAbility(ability);

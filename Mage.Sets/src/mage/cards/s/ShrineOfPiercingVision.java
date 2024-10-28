@@ -47,7 +47,7 @@ public final class ShrineOfPiercingVision extends CardImpl {
 
         // At the beginning of your upkeep or whenever you cast a blue spell, put a charge counter on Shrine of Piercing Vision.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
-                new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(null, false),
                 new SpellCastControllerTriggeredAbility(null, filter, false)));
 
         // {tap}, Sacrifice Shrine of Piercing Vision: Look at the top X cards of your library, where X is the number of charge counters on Shrine of Piercing Vision.

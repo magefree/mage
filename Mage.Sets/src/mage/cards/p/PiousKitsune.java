@@ -40,7 +40,7 @@ public final class PiousKitsune extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, put a devotion counter on Pious Kitsune. Then if a creature named Eight-and-a-Half-Tails is on the battlefield, you gain 1 life for each devotion counter on Pious Kitsune.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PiousKitsuneEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PiousKitsuneEffect(), false));
         // {tap}, Remove a devotion counter from Pious Kitsune: You gain 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.DEVOTION.createInstance()));

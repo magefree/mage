@@ -42,7 +42,7 @@ public final class PersistentConstrictor extends CardImpl {
 
         // At the beginning of each opponent's upkeep, they lose 1 life and you put a -1/-1 counter on up to one target creature they control.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new PersistentConstrictorEffect(), TargetController.OPPONENT, false
+                TargetController.OPPONENT, new PersistentConstrictorEffect(), false
         );
         ability.addEffect(new AddCountersTargetEffect(CounterType.M1M1.createInstance()).concatBy("and you"));
         ability.addTarget(new TargetPermanent(0, 1, filter));

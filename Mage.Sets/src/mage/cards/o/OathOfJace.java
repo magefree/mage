@@ -31,7 +31,7 @@ public final class OathOfJace extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawDiscardControllerEffect(3, 2), false));
 
         // At the beginning of your upkeep, scry X, where X is the number of planeswalkers you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new OathOfJaceEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new OathOfJaceEffect(), false));
 
     }
 

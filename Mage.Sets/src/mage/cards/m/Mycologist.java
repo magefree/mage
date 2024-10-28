@@ -18,7 +18,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -40,7 +39,7 @@ public final class Mycologist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, put a spore counter on Mycologist.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), false));
 
         // Remove three spore counters from Mycologist: Create a 1/1 green Saproling creature token.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));

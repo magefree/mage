@@ -32,7 +32,7 @@ public final class AzorsElocutors extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, put a filibuster counter on Azor's Elocutors. Then if Azor's Elocutors has five or more filibuster counters on it, you win the game.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AzorsElocutorsEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AzorsElocutorsEffect(), false));
 
         // Whenever a source deals damage to you, remove a filibuster counter from Azor's Elocutors.
         this.addAbility(new AzorsElocutorsTriggeredAbility());

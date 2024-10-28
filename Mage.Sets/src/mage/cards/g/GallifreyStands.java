@@ -43,7 +43,7 @@ public final class GallifreyStands extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GallifreyStandsReturnEffect()));
 
         // At the beginning of your upkeep, you may put a Doctor creature card from your hand onto the battlefield. Then if you control thirteen or more Doctors, you win the game.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(filter), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new PutCardFromHandOntoBattlefieldEffect(filter), false);
         ability.addEffect(new ConditionalOneShotEffect(new WinGameSourceControllerEffect(), new PermanentsOnTheBattlefieldCondition(filter2, ComparisonType.MORE_THAN, 12))
                 .setText("Then if you control thirteen or more Doctors, you win the game"));
         this.addAbility(ability.addHint(new ValueHint("Doctors you control", new PermanentsOnBattlefieldCount(filter2))));

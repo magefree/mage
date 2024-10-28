@@ -21,7 +21,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
@@ -40,7 +39,7 @@ public final class DwarvenHold extends CardImpl {
         // At the beginning of your upkeep, if Dwarven Hold is tapped, put a storage counter on it.
         OneShotEffect addStorageCounter = new AddCountersSourceEffect(CounterType.STORAGE.createInstance());
         Effect effect = new ConditionalOneShotEffect(addStorageCounter, SourceTappedCondition.TAPPED, "if {this} is tapped, put a storage counter on it");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, false));
         // {tap}, Remove any number of storage counters from Dwarven Hold: Add {R} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.RedMana(1),

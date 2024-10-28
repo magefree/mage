@@ -28,7 +28,7 @@ public final class KrosanCloudscraper extends CardImpl {
         this.toughness = new MageInt(13);
 
         // At the beginning of your upkeep, sacrifice Krosan Cloudscraper unless you pay {G}{G}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{G}{G}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{G}{G}")), false));
 
         // Morph {7}{G}{G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{7}{G}{G}")));

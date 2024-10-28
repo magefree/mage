@@ -28,7 +28,7 @@ public final class MidnightBanshee extends CardImpl {
 
         this.addAbility(WitherAbility.getInstance());
         // At the beginning of your upkeep, put a -1/-1 counter on each nonblack creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAllEffect(CounterType.M1M1.createInstance(), StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAllEffect(CounterType.M1M1.createInstance(), StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK), false));
     }
 
     private MidnightBanshee(final MidnightBanshee card) {

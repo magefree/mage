@@ -28,7 +28,7 @@ public final class PrimalEmpathy extends CardImpl {
 
         // At the beginning of your upkeep, draw a card if you control a creature with the greatest power among creatures on the battlefield. Otherwise, put a +1/+1 counter on a creature you control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new PrimalEmpathyEffect(), TargetController.YOU, false
+                new PrimalEmpathyEffect(), false
         ));
     }
 

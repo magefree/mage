@@ -30,7 +30,7 @@ public final class EvolutionaryEscalation extends CardImpl {
 
         // At the beginning of your upkeep, put three +1/+1 counters on target creature you control and three +1/+1 counters on target creature an opponent controls.
         EvolutionaryEscalationEffect effect = new EvolutionaryEscalationEffect();
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, false);
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);

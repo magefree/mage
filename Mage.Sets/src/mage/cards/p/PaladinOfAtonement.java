@@ -33,7 +33,7 @@ public final class PaladinOfAtonement extends CardImpl {
 
         // At the beginning of each upkeep, if you lost life last turn, put a +1/+1 counter on Paladin of Atonement.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.ANY, false),
+                new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false),
                 LiveLostLastTurnCondition.instance,
                 "At the beginning of each upkeep, if you lost life last turn, put a +1/+1 counter on {this}"));
 

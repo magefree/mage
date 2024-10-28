@@ -48,7 +48,7 @@ public final class PainwrackerOni extends CardImpl {
                         condition,
                         "sacrifice a creature if you don't control an Ogre"
                 ),
-                TargetController.YOU, false
+                false
         ));
     }
 

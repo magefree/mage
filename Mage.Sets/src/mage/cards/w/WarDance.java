@@ -29,7 +29,7 @@ public final class WarDance extends CardImpl {
 
         // At the beginning of your upkeep, you may put a verse counter on War Dance.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), true));
 
         // Sacrifice War Dance: Target creature gets +X/+X until end of turn, where X is the number of verse counters on War Dance.
         Ability ability = new SimpleActivatedAbility(

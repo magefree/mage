@@ -41,7 +41,7 @@ public final class ZealotsEnDal extends CardImpl {
 
         // At the beginning of your upkeep, if all nonland permanents you control are white, you gain 1 life.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), false),
                 new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter)),
                 "At the beginning of your upkeep, if all nonland permanents you control are white, you gain 1 life."
         ));

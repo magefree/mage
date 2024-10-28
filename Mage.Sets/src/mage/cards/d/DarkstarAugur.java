@@ -33,7 +33,7 @@ public final class DarkstarAugur extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its mana value.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RevealPutInHandLoseLifeEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RevealPutInHandLoseLifeEffect(), false));
     }
 
     private DarkstarAugur(final DarkstarAugur card) {

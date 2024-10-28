@@ -26,7 +26,7 @@ public final class GrinningDemon extends CardImpl {
         this.toughness = new MageInt(6);
 
         // At the beginning of your upkeep, you lose 2 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), false));
         // Morph {2}{B}{B}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{2}{B}{B}")));
     }

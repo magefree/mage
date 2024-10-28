@@ -17,20 +17,28 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
     private final TargetController targetController;
     private final boolean setTargetPointer;
 
-    public BeginningOfUpkeepTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
-        this(Zone.BATTLEFIELD, effect, targetController, isOptional);
+    public BeginningOfUpkeepTriggeredAbility(Effect effect, boolean isOptional) {
+        this(TargetController.YOU, effect, isOptional, true);
     }
 
-    public BeginningOfUpkeepTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional) {
-        this(zone, effect, targetController, isOptional, true);
+    public BeginningOfUpkeepTriggeredAbility(TargetController targetController, Effect effect, boolean isOptional) {
+        this(targetController, effect, isOptional, true);
     }
 
-    public BeginningOfUpkeepTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional, boolean setTargetPointer) {
-        this(Zone.BATTLEFIELD, effect, targetController, isOptional, setTargetPointer);
+    public BeginningOfUpkeepTriggeredAbility(Zone zone, TargetController targetController, Effect effect, boolean isOptional) {
+        this(zone, targetController, effect, isOptional, true);
+    }
+
+    public BeginningOfUpkeepTriggeredAbility(Effect effect, boolean isOptional, boolean setTargetPointer) {
+        this(TargetController.YOU, effect, isOptional, setTargetPointer);
+    }
+
+    public BeginningOfUpkeepTriggeredAbility(TargetController targetController, Effect effect, boolean isOptional, boolean setTargetPointer) {
+        this(Zone.BATTLEFIELD, targetController, effect, isOptional, setTargetPointer);
     }
 
 
-    public BeginningOfUpkeepTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional, boolean setTargetPointer) {
+    public BeginningOfUpkeepTriggeredAbility(Zone zone, TargetController targetController, Effect effect, boolean isOptional, boolean setTargetPointer) {
         super(zone, effect, isOptional);
         this.targetController = targetController;
         this.setTargetPointer = setTargetPointer;

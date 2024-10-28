@@ -37,8 +37,8 @@ public final class ExileIntoDarkness extends CardImpl {
 
         // At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return Exile into Darkness from your graveyard to your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToHandEffect(),
-                TargetController.YOU, true).withInterveningIf(MoreCardsInHandThanOpponentsCondition.instance));
+                TargetController.YOU, new ReturnSourceFromGraveyardToHandEffect(),
+                true).withInterveningIf(MoreCardsInHandThanOpponentsCondition.instance));
     }
 
     private ExileIntoDarkness(final ExileIntoDarkness card) {

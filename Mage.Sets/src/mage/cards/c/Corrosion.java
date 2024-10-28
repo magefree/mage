@@ -33,7 +33,7 @@ public final class Corrosion extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new GenericManaCost(1)));
 
         // At the beginning of your upkeep, put a rust counter on each artifact target opponent controls. Then destroy each artifact with converted mana cost less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CorrosionUpkeepEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CorrosionUpkeepEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 

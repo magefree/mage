@@ -25,7 +25,7 @@ public final class NyxFleeceRam extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, you gain 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), false));
     }
 
     private NyxFleeceRam(final NyxFleeceRam card) {

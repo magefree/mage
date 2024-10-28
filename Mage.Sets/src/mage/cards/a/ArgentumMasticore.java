@@ -51,7 +51,7 @@ public final class ArgentumMasticore extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Argentum Masticore unless you discard a card. When you discard a card this way, destroy target nonland permanent an opponent controls with mana value less than or equal to the mana value of the discarded card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ArgentumMasticoreEffect(), TargetController.YOU, false
+                new ArgentumMasticoreEffect(), false
         ));
     }
 

@@ -29,7 +29,7 @@ public final class CloisteredYouth extends CardImpl {
 
         // At the beginning of your upkeep, you may transform Cloistered Youth.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), true));
     }
 
     private CloisteredYouth(final CloisteredYouth card) {

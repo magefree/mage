@@ -30,7 +30,7 @@ public final class KembaKhaRegent extends CardImpl {
         this.toughness = new MageInt(4);
 
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new CatToken(), new EquipmentAttachedCount()),
-                TargetController.YOU, false));
+                false));
     }
 
     private KembaKhaRegent(final KembaKhaRegent card) {

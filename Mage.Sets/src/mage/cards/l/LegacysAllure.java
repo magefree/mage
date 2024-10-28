@@ -29,7 +29,7 @@ public final class LegacysAllure extends CardImpl {
 
         // At the beginning of your upkeep, you may put a treasure counter on Legacy's Allure.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.TREASURE.createInstance(), true), TargetController.YOU, true));
+                new AddCountersSourceEffect(CounterType.TREASURE.createInstance(), true), true));
 
         // Sacrifice Legacy's Allure: Gain control of target creature with power less than or equal to the number of treasure counters on Legacy's Allure.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainControlTargetEffect(Duration.EndOfGame, true), new SacrificeSourceCost());

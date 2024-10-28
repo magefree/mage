@@ -36,7 +36,7 @@ public final class OloroAgelessAscetic extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, you gain 2 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(2), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(2), false));
 
         // Whenever you gain life, you may pay {1}. If you do, draw a card and each opponent loses 1 life.
         DoIfCostPaid effect = new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
@@ -47,7 +47,7 @@ public final class OloroAgelessAscetic extends CardImpl {
 
         // At the beginning of your upkeep, if Oloro, Ageless Ascetic is in the command zone, you gain 2 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND,
-                new GainLifeEffect(StaticValue.get(2), "if {this} is in the command zone, you gain 2 life"), TargetController.YOU, false));
+                TargetController.YOU, new GainLifeEffect(StaticValue.get(2), "if {this} is in the command zone, you gain 2 life"), false));
     }
 
     private OloroAgelessAscetic(final OloroAgelessAscetic card) {

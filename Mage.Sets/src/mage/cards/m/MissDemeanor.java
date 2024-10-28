@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -39,7 +38,7 @@ public final class MissDemeanor extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of each other player's upkeep, you may compliment that player on their game play. If you don't, sacrifice Miss Demeanour.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MissDemeanorEffect(), TargetController.NOT_YOU, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.NOT_YOU, new MissDemeanorEffect(), false, true));
     }
 
     private MissDemeanor(final MissDemeanor card) {

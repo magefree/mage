@@ -25,7 +25,7 @@ public final class CelestialForce extends CardImpl {
         this.toughness = new MageInt(7);
 
         // At the beginning of each upkeep, you gain 3 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(3), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new GainLifeEffect(3), false));
     }
 
     private CelestialForce(final CelestialForce card) {

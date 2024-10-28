@@ -27,7 +27,7 @@ public final class PlagueSpitter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, Plague Spitter deals 1 damage to each creature and each player.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageEverythingEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageEverythingEffect(1), false));
         // When Plague Spitter dies, Plague Spitter deals 1 damage to each creature and each player.
         this.addAbility(new DiesSourceTriggeredAbility(new DamageEverythingEffect(1), false));
     }

@@ -56,7 +56,7 @@ public final class PoppetStitcher extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new TransformSourceEffect(),
-                        TargetController.YOU, true
+                        true
                 ), condition, "At the beginning of your upkeep, " +
                 "if you control three or more creature tokens, you may transform {this}."
         ).addHint(hint));

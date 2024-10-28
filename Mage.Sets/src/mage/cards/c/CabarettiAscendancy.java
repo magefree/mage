@@ -27,7 +27,7 @@ public final class CabarettiAscendancy extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{G}{W}");
 
         // At the beginning of your upkeep, look at the top card of your library. If it's a creature or planeswalker card, you may reveal it and put it in your hand. If you don't, you may put it on the bottom of your library.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CabarettiAscendencyEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CabarettiAscendencyEffect(), false));
     }
 
     private CabarettiAscendancy(final CabarettiAscendancy card) {

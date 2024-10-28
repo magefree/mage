@@ -28,7 +28,7 @@ public final class GrimFeast extends CardImpl {
         // At the beginning of your upkeep, Grim Feast deals 1 damage to you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DamageControllerEffect(1),
-                TargetController.YOU, false
+                false
         ));
 
         // Whenever a creature is put into an opponent's graveyard from the battlefield, you gain life equal to its toughness.

@@ -30,7 +30,7 @@ public final class Inhumaniac extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, roll a six-sided die. On a 3 or 4, put a +1/+1 counter on Inhumaniac. On a 5 or higher, put two +1/+1 counters on it. On a 1, remove all +1/+1 counters from Inhumaniac.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InhumaniacEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InhumaniacEffect(), false));
     }
 
     private Inhumaniac(final Inhumaniac card) {

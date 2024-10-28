@@ -41,7 +41,7 @@ public final class Duplicity extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DuplicityEffect(), false));
 
         // At the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with Duplicity into your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DuplicityExileHandEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DuplicityExileHandEffect(), true));
 
         // At the beginning of your end step, discard a card.
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new DiscardControllerEffect(1), false));

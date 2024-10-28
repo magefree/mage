@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -35,8 +34,8 @@ public final class Wanderlust extends CardImpl {
         // At the beginning of the upkeep of enchanted creature's controller, Wanderlust deals 1 damage to that player.
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to that player");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect,
-            TargetController.CONTROLLER_ATTACHED_TO, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, effect,
+                false, true));
     }
 
     private Wanderlust(final Wanderlust card) {

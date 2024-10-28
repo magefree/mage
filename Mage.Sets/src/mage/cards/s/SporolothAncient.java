@@ -36,7 +36,7 @@ public final class SporolothAncient extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, put a spore counter on Sporoloth Ancient.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), false));
         // Creatures you control have "Remove two spore counters from this creature: Create a 1/1 green Saproling creature token."
         Effect effect = new GainAbilityControlledEffect(
                 new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(2))),

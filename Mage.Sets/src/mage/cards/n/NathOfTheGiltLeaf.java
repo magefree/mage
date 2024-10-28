@@ -35,7 +35,7 @@ public final class NathOfTheGiltLeaf extends CardImpl {
         // At the beginning of your upkeep, you may have target opponent discard a card at random.
         Effect effect = new DiscardTargetEffect(1, true);
         effect.setText("you may have target opponent discard a card at random");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, true);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 

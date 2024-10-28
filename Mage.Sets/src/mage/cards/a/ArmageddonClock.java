@@ -27,7 +27,7 @@ public final class ArmageddonClock extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // At the beginning of your upkeep, put a doom counter on Armageddon Clock.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.DOOM.createInstance(), StaticValue.get(1), true), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.DOOM.createInstance(), StaticValue.get(1), true), false));
 
         // At the beginning of your draw step, Armageddon Clock deals damage equal to the number of doom counters on it to each player.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new DamagePlayersEffect(Outcome.Damage, new CountersSourceCount(CounterType.DOOM))

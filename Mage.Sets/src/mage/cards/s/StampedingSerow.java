@@ -35,7 +35,7 @@ public final class StampedingSerow extends CardImpl {
         this.toughness = new MageInt(4);
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, return a green creature you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
     }
 
     private StampedingSerow(final StampedingSerow card) {

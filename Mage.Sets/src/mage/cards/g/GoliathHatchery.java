@@ -41,7 +41,7 @@ public final class GoliathHatchery extends CardImpl {
         // Corrupted -- At the beginning of your upkeep, if an opponent has three or more poison counters, choose a creature you control, then draw cards equal to its total toxic value.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new GoliathHatcheryEffect(), TargetController.YOU, false
+                        new GoliathHatcheryEffect(), false
                 ).setAbilityWord(AbilityWord.CORRUPTED), CorruptedCondition.instance, null
         ).addHint(CorruptedCondition.getHint()));
     }

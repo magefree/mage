@@ -29,7 +29,7 @@ public final class Gravestorm extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{B}{B}");
 
         // At the beginning of your upkeep, target opponent may exile a card from their graveyard. If that player doesn't, you may draw a card.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GravestormEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GravestormEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

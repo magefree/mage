@@ -41,7 +41,7 @@ public class SanctuaryInterveningIfTriggeredAbility extends ConditionalInterveni
 
     private static TriggeredAbility makeTrigger(OneShotEffect effect1, OneShotEffect effect2, ObjectColor color1, ObjectColor color2) {
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(
-                new ConditionalOneShotEffect(effect1, new InvertCondition(makeAndCondition(color1, color2))), TargetController.YOU, false
+                new ConditionalOneShotEffect(effect1, new InvertCondition(makeAndCondition(color1, color2))), false
         );
         ability.addEffect(new ConditionalOneShotEffect(effect2, makeAndCondition(color1, color2)));
         return ability;

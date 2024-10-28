@@ -62,8 +62,7 @@ class ChaosLordTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
     ChaosLordTriggeredAbility() {
         super(Zone.BATTLEFIELD,
-                new TargetPlayerGainControlSourceEffect(),
-                TargetController.YOU,
+                TargetController.YOU, new TargetPlayerGainControlSourceEffect(),
                 false);
     }
 

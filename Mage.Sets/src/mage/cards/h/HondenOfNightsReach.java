@@ -33,7 +33,7 @@ public final class HondenOfNightsReach extends CardImpl {
         this.subtype.add(SubType.SHRINE);
 
         // At the beginning of your upkeep, target opponent discards a card for each Shrine you control.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(xValue), TargetController.YOU, false).addHint(hint);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(xValue), false).addHint(hint);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

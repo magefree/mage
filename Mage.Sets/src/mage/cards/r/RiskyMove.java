@@ -31,7 +31,7 @@ public final class RiskyMove extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}{R}");
 
         // At the beginning of each player's upkeep, that player gains control of Risky Move.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RiskyMoveGetControlEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new RiskyMoveGetControlEffect(), false, true));
 
         // When you gain control of Risky Move from another player, choose a creature you control and an opponent. Flip a coin. If you lose the flip, that opponent gains control of that creature.
         this.addAbility(new RiskyMoveTriggeredAbility());

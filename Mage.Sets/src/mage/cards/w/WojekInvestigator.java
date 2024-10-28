@@ -44,7 +44,7 @@ public final class WojekInvestigator extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new InvestigateEffect(WojekInvestigatorValue.instance)
                         .setText("investigate once for each opponent who has more cards in hand than you"),
-                TargetController.YOU, false
+                false
         ).addHint(WojekInvestigatorValue.getHint()));
     }
 

@@ -26,7 +26,7 @@ public final class IntoTheWilds extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // At the beginning of your upkeep, look at the top card of your library. If it's a land card, you may put it onto the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IntoTheWildsEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IntoTheWildsEffect(), false));
 
     }
 

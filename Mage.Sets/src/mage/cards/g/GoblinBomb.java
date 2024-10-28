@@ -33,7 +33,7 @@ public final class GoblinBomb extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
         // At the beginning of your upkeep, you may flip a coin. If you win the flip, put a fuse counter on Goblin Bomb. If you lose the flip, remove a fuse counter from Goblin Bomb.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GoblinBombEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GoblinBombEffect(), true));
 
         // Remove five fuse counters from Goblin Bomb, Sacrifice Goblin Bomb: Goblin Bomb deals 20 damage to target player.
         Ability ability = new SimpleActivatedAbility(

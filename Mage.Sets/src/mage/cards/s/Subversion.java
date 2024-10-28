@@ -18,7 +18,7 @@ public final class Subversion extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
 
         // At the beginning of your upkeep, each opponent loses 1 life. You gain life equal to the life lost this way.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeOpponentsYouGainLifeLostEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeOpponentsYouGainLifeLostEffect(1), false));
     }
 
     private Subversion(final Subversion card) {

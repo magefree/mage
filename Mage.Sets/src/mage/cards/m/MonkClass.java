@@ -61,7 +61,7 @@ public final class MonkClass extends CardImpl {
         // At the beginning of your upkeep, exile the top card of your library. For as long as it remains exiled, it has "You may cast this card from exile as long as you've cast another spell this turn."
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new MonkClassEffect(), TargetController.YOU, false
+                        new MonkClassEffect(), false
                 ), 3
         )));
     }

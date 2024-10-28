@@ -31,7 +31,7 @@ public final class VensersJournal extends CardImpl {
 
         // At the beginning of your upkeep, you gain 1 life for each card in your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(CardsInControllerHandCount.instance)
-                .setText("you gain 1 life for each card in your hand"), TargetController.YOU, false));
+                .setText("you gain 1 life for each card in your hand"), false));
     }
 
     private VensersJournal(final VensersJournal card) {

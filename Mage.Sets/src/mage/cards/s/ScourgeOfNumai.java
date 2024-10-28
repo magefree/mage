@@ -43,7 +43,7 @@ public final class ScourgeOfNumai extends CardImpl {
                         condition,
                         "you lose 2 life if you don't control an Ogre"
                 ),
-                TargetController.YOU, false
+                false
         ));
     }
 

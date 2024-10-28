@@ -42,7 +42,7 @@ public final class MarkOfEviction extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, return enchanted creature and all Auras attached to that creature to their owners' hands.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MarkOfEvictionEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MarkOfEvictionEffect(), false));
     }
 
     private MarkOfEviction(final MarkOfEviction card) {

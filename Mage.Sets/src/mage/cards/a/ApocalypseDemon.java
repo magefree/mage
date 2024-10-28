@@ -32,7 +32,7 @@ public final class ApocalypseDemon extends CardImpl {
         // At the beginning of your upkeep, tap Apocalypse Demon unless you sacrifice another creature.
         TapSourceUnlessPaysEffect tapEffect = new TapSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         tapEffect.setText("tap {this} unless you sacrifice another creature.");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(tapEffect, TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(tapEffect, false));
     }
 
     private ApocalypseDemon(final ApocalypseDemon card) {

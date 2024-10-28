@@ -32,7 +32,7 @@ public final class ChanceEncounter extends CardImpl {
         this.addAbility(new ChanceEncounterTriggeredAbility());
 
         // At the beginning of your upkeep, if Chance Encounter has ten or more luck counters on it, you win the game.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceHasCounterCondition(CounterType.LUCK, 10, Integer.MAX_VALUE),
                 "At the beginning of your upkeep, if {this} has ten or more luck counters on it, you win the game."));
     }

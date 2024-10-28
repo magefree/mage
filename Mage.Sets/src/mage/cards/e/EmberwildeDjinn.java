@@ -42,7 +42,7 @@ public final class EmberwildeDjinn extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each player's upkeep, that player may pay {R}{R} or 2 life. If they do, the player gains control of Emberwilde Djinn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EmberwildeDjinnEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new EmberwildeDjinnEffect(), false));
     }
 
     private EmberwildeDjinn(final EmberwildeDjinn card) {

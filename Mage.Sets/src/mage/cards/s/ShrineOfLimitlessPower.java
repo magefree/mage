@@ -41,7 +41,7 @@ public final class ShrineOfLimitlessPower extends CardImpl {
 
         //At the beginning of your upkeep or whenever you cast a black spell, put a charge counter on Shrine of Limitless Power.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
-                new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(null, false),
                 new SpellCastControllerTriggeredAbility(null, filter, false)));
 
         //{4}, {T}, Sacrifice Shrine of Limitless Power: Target player discards a card for each charge counter on Shrine of Limitless Power.

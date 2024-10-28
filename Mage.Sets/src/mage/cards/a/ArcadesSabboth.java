@@ -45,7 +45,7 @@ public final class ArcadesSabboth extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Arcades Sabboth unless you pay {G}{W}{U}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{G}{W}{U}")), TargetController.YOU, false));
+                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{G}{W}{U}")), false));
 
         // Each untapped creature you control gets +0/+2 as long as it's not attacking.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(0, 2, Duration.WhileOnBattlefield, filter, false)));

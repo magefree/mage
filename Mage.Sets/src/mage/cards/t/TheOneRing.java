@@ -50,7 +50,7 @@ public final class TheOneRing extends CardImpl {
 
         // At the beginning of your upkeep, you lose 1 life for each burden counter on The One Ring.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new LoseLifeSourceControllerEffect(xValue), TargetController.YOU, false
+                new LoseLifeSourceControllerEffect(xValue), false
         ));
 
         // {T}: Put a burden counter on The One Ring, then draw a card for each burden counter on The One Ring.

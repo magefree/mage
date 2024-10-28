@@ -36,7 +36,7 @@ public final class ScreechingBat extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
                 new TransformSourceEffect(),
                 new ManaCostsImpl<>("{2}{B}{B}")
-        ), TargetController.YOU, false));
+        ), false));
     }
 
     private ScreechingBat(final ScreechingBat card) {

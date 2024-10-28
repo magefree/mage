@@ -39,7 +39,7 @@ public final class ReclusiveWight extends CardImpl {
 
         // At the beginning of your upkeep, if you control another nonland permanent, sacrifice Reclusive Wight.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), false),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "At the beginning of your upkeep, if you control another nonland permanent, sacrifice {this}."
         ));

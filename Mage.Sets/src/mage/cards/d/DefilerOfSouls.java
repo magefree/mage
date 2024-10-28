@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.MonocoloredPredicate;
 
@@ -38,7 +37,7 @@ public final class DefilerOfSouls extends CardImpl {
         
         // At the beginning of each player's upkeep, that player sacrifices a monocolored creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeEffect(filter, 1, "that player"), TargetController.ANY, false));
+                TargetController.ANY, new SacrificeEffect(filter, 1, "that player"), false));
     }
 
     private DefilerOfSouls(final DefilerOfSouls card) {

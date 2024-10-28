@@ -50,7 +50,7 @@ public final class GenerousPlunderer extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // At the beginning of your upkeep, you may create a Treasure token. When you do, target opponent creates a tapped Treasure token.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GenerousPlundererEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GenerousPlundererEffect(), true));
 
         // Whenever Generous Plunderer attacks, it deals damage to defending player equal to the number of artifacts they control.
         this.addAbility(new AttacksTriggeredAbility(

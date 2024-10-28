@@ -43,7 +43,7 @@ public final class OrzhovAdvokist extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. If a player does, creatures that player controls can't attack you or a planeswalker you control until your next turn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new OrzhovAdvokistEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new OrzhovAdvokistEffect(), false));
     }
 
     private OrzhovAdvokist(final OrzhovAdvokist card) {

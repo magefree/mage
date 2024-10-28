@@ -54,7 +54,7 @@ public final class Narcolepsy extends CardImpl {
 class NarcolepsyTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
     
     NarcolepsyTriggeredAbility() {
-        super(new NarcolepsyEffect(), TargetController.ANY, false);
+        super(TargetController.ANY, new NarcolepsyEffect(), false);
     }
     
     private NarcolepsyTriggeredAbility(final NarcolepsyTriggeredAbility ability) {

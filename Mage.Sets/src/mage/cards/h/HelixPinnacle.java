@@ -39,7 +39,7 @@ public final class HelixPinnacle extends CardImpl {
 
         // At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), false),
                 new SourceHasCounterCondition(CounterType.TOWER, 100, Integer.MAX_VALUE),
                 rule));
 

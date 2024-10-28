@@ -41,7 +41,7 @@ public final class LootTheKeyToEverything extends CardImpl {
                 new ExileTopXMayPlayUntilEffect(LootTheKeyToEverythingValue.instance, Duration.EndOfTurn)
                         .setText("exile the top X cards of your library, where X is the number of card types " +
                                 "among other nonland permanents you control. You may play those cards this turn"),
-                TargetController.YOU, false
+                false
         ));
     }
 

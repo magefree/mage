@@ -5,7 +5,6 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DoUnlessControllerPaysEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -42,7 +41,7 @@ public final class MorgulKnifeWound extends CardImpl {
                         new ExileSourceEffect(),
                         new PayLifeCost(2),
                         "Pay 2 life to prevent {this} from being exiled?"
-                ).setText("exile {this} unless you pay 2 life"), TargetController.YOU, false
+                ).setText("exile {this} unless you pay 2 life"), false
         ), AttachmentType.AURA).setText("and has \"At the beginning of your upkeep, exile this creature unless you pay 2 life.\""));
         this.addAbility(ability);
     }

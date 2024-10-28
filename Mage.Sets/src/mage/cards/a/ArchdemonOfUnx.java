@@ -42,7 +42,7 @@ public final class ArchdemonOfUnx extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a non-Zombie creature, then create a 2/2 black Zombie creature token.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(filter, 1, ""), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(filter, 1, ""), false);
         ability.addEffect(new CreateTokenEffect(new ZombieToken()).concatBy(", then"));
         this.addAbility(ability);
     }

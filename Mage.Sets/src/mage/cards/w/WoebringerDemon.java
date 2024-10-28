@@ -13,12 +13,10 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetSacrifice;
 
 /**
@@ -40,7 +38,7 @@ public final class WoebringerDemon extends CardImpl {
         // At the beginning of each player's upkeep, that player sacrifices a creature. 
         // If the player can't, sacrifice Woebringer Demon.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new WoebringerDemonEffect(), TargetController.ANY, false, true));
+                TargetController.ANY, new WoebringerDemonEffect(), false, true));
     }
 
     private WoebringerDemon(final WoebringerDemon card) {

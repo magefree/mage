@@ -15,7 +15,6 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -47,7 +46,7 @@ public final class RavenousVampire extends CardImpl {
                         new TapSourceEffect(),
                         new SacrificeTargetCost(filter)
                 ),
-                TargetController.YOU, false
+                false
         ));
     }
 

@@ -19,7 +19,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.SaprolingToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -49,7 +48,7 @@ public final class PallidMycoderm extends CardImpl {
 
         // At the beginning of your upkeep, put a spore counter on Pallid Mycoderm.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.SPORE.createInstance()), TargetController.YOU, false
+                new AddCountersSourceEffect(CounterType.SPORE.createInstance()), false
         ));
 
         // Remove three spore counters from Pallid Mycoderm: Create a 1/1 green Saproling creature token.

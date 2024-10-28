@@ -31,7 +31,7 @@ public final class ForgottenHarvest extends CardImpl {
                         new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                         new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterLandCard("land card from your graveyard")))
                 ),
-                TargetController.YOU, false
+                false
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

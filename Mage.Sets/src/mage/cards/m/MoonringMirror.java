@@ -34,7 +34,7 @@ public final class MoonringMirror extends CardImpl {
         this.addAbility(new DrawCardControllerTriggeredAbility(new MoonringMirrorExileEffect(), false));
 
         // At the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with Moonring Mirror into your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MoonringMirrorEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MoonringMirrorEffect(), true));
     }
 
     private MoonringMirror(final MoonringMirror card) {

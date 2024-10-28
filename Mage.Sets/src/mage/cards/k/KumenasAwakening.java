@@ -29,7 +29,7 @@ public final class KumenasAwakening extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), new DrawCardAllEffect(1), CitysBlessingCondition.instance,
                         "each player draws a card. If you have the city's blessing, instead only you draw a card"),
-                TargetController.YOU, false)
+                false)
                 .addHint(CitysBlessingHint.instance));
     }
 

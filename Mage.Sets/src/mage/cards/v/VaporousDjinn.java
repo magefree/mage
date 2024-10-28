@@ -35,7 +35,7 @@ public final class VaporousDjinn extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // At the beginning of your upkeep, Vaporous Djinn phases out unless you pay {U}{U}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new VaporousDjinnEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new VaporousDjinnEffect(), false));
     }
 
     private VaporousDjinn(final VaporousDjinn card) {

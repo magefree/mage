@@ -25,7 +25,7 @@ public final class AuraFlux extends CardImpl {
 
         // Other enchantments have "At the beginning of your upkeep, sacrifice this enchantment unless you pay {2}."
         Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(2))
-                .setText("sacrifice this enchantment unless you pay {2}"), TargetController.YOU, false);
+                .setText("sacrifice this enchantment unless you pay {2}"), false);
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, new FilterEnchantmentPermanent("enchantments"), true)));
     }
 

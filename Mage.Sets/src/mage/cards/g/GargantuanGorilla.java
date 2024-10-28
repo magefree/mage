@@ -20,7 +20,6 @@ import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -37,7 +36,7 @@ public final class GargantuanGorilla extends CardImpl {
         this.toughness = new MageInt(7);
 
         // At the beginning of your upkeep, you may sacrifice a Forest. If you sacrifice a snow Forest this way, Gargantuan Gorilla gains trample until end of turn. If you don’t sacrifice a Forest, sacrifice Gargantuan Gorilla and it deals 7 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GargantuanGorillaSacrificeEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GargantuanGorillaSacrificeEffect(), false));
 
         // {T}: Gargantuan Gorilla deals damage equal to its power to another target creature. That creature deals damage equal to its power to Gargantuan Gorilla.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GargantuanGorillaFightEffect(), new TapSourceCost());

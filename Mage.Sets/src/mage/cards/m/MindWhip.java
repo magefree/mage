@@ -47,8 +47,8 @@ public final class MindWhip extends CardImpl {
                 "");
         effect.setText("that player may pay {3}. If they don't, {this} deals 2 damage to that player and you tap that creature.");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                effect,
-                TargetController.CONTROLLER_ATTACHED_TO, false));
+                TargetController.CONTROLLER_ATTACHED_TO, effect,
+                false));
 
     }
 

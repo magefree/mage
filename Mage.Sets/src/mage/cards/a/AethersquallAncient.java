@@ -40,7 +40,7 @@ public final class AethersquallAncient extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, you get {E}{E}{E}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GetEnergyCountersControllerEffect(3), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GetEnergyCountersControllerEffect(3), false));
 
         // Pay {E}{E}{E}{E}{E}{E}{E}{E}: Return all other creatures to their owners' hands. Activate this ability only any time you could cast a sorcery.
         this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandFromBattlefieldAllEffect(filter), new PayEnergyCost(8)));

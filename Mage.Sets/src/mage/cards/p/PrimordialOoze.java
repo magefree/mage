@@ -32,7 +32,7 @@ public final class PrimordialOoze extends CardImpl {
         // Primordial Ooze attacks each combat if able.
         this.addAbility(new AttacksEachCombatStaticAbility());
         // At the beginning of your upkeep, put a +1/+1 counter on Primordial Ooze. Then you may pay {X}, where X is the number of +1/+1 counters on it. If you don't, tap Primordial Ooze and it deals X damage to you.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
         ability.addEffect(new PrimordialOozeEffect());
         this.addAbility(ability);
     }

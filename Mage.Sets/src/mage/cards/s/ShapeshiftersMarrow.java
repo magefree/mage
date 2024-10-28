@@ -25,7 +25,7 @@ public final class ShapeshiftersMarrow extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
 
         // At the beginning of each opponent's upkeep, that player reveals the top card of their library. If it's a creature card, the player puts the card into their graveyard and Shapeshifter's Marrow becomes a copy of that card. (If it does, it loses this ability.)
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ShapeshiftersMarrowEffect(), TargetController.OPPONENT, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new ShapeshiftersMarrowEffect(), false));
     }
 
     private ShapeshiftersMarrow(final ShapeshiftersMarrow card) {

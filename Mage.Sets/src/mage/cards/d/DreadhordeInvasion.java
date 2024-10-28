@@ -35,7 +35,7 @@ public final class DreadhordeInvasion extends CardImpl {
 
         // At the beginning of your upkeep, you lose 1 life and amass 1.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new LoseLifeSourceControllerEffect(1), TargetController.YOU, false
+                new LoseLifeSourceControllerEffect(1), false
         );
         ability.addEffect(new AmassEffect(1, SubType.ZOMBIE).concatBy("and"));
         this.addAbility(ability);

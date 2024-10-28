@@ -46,7 +46,6 @@ public final class BloodSpeaker extends CardImpl {
                         new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true),
                         new SacrificeSourceCost()
                 ),
-                TargetController.YOU,
                 false);
         this.addAbility(ability);
 

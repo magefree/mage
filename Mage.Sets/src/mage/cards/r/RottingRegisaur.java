@@ -27,7 +27,7 @@ public final class RottingRegisaur extends CardImpl {
         // At the beginning of your upkeep, discard a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DiscardControllerEffect(1),
-                TargetController.YOU, false
+                false
         ));
     }
 

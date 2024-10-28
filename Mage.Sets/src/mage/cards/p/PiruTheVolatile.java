@@ -49,7 +49,7 @@ public final class PiruTheVolatile extends CardImpl {
         // At the beginning of your upkeep, sacrifice Piru, the Volatile unless you pay {R}{W}{B}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{R}{W}{B}")),
-                TargetController.YOU, false
+                false
         ));
 
         // When Piru dies, it deals 7 damage to each nonlegendary creature.

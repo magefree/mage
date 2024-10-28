@@ -24,7 +24,7 @@ public final class TemptingContract extends CardImpl {
 
         // At the beginning of your upkeep, each opponent may create a Treasure token. For each opponent who does, you create a Treasure token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TemptingContractEffect(), TargetController.YOU, false
+                new TemptingContractEffect(), false
         ));
     }
 

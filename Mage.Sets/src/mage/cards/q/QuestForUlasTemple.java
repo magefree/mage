@@ -46,7 +46,7 @@ public final class QuestForUlasTemple extends CardImpl {
 
         // At the beginning of your upkeep, you may look at the top card of your library. If it's a creature card, you may reveal it and put a quest counter on Quest for Ula's Temple.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new QuestForUlasTempleEffect(), TargetController.YOU, true
+                new QuestForUlasTempleEffect(), true
         ));
 
         // At the beginning of each end step, if there are three or more quest counters on Quest for Ula's Temple, you may put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield.

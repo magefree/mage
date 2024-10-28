@@ -29,7 +29,7 @@ public final class Viseling extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of each opponent's upkeep, Viseling deals X damage to that player, where X is the number of cards in their hand minus 4.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ViselingEffect(), TargetController.OPPONENT, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new ViselingEffect(), false));
 
     }
 

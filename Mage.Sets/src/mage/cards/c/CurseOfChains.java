@@ -35,7 +35,7 @@ public final class CurseOfChains extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of each upkeep, tap enchanted creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TapEnchantedEffect(), TargetController.EACH_PLAYER, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new TapEnchantedEffect(), false));
     }
 
     private CurseOfChains(final CurseOfChains card) {

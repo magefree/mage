@@ -28,7 +28,7 @@ public final class HarbingerOfNight extends CardImpl {
 
         // At the beginning of your upkeep, put a -1/-1 counter on each creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAllEffect(CounterType.M1M1.createInstance(), new FilterCreaturePermanent()),
-            TargetController.YOU, false));
+                false));
     }
 
     private HarbingerOfNight(final HarbingerOfNight card) {

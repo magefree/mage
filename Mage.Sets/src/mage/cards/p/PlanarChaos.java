@@ -14,7 +14,6 @@ import mage.constants.Outcome;
 import mage.constants.SetTargetPointer;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -31,7 +30,7 @@ public final class PlanarChaos extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // At the beginning of your upkeep, flip a coin. If you lose the flip, sacrifice Planar Chaos.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PlanarChaosUpkeepEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PlanarChaosUpkeepEffect(), false));
 
         // Whenever a player casts a spell, that player flips a coin. If they lose the flip, counter that spell.
         this.addAbility(new SpellCastAllTriggeredAbility(new PlanarChaosCastAllEffect(), StaticFilters.FILTER_SPELL_A, false, SetTargetPointer.SPELL));

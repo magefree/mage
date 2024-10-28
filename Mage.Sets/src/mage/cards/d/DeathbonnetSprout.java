@@ -44,7 +44,7 @@ public final class DeathbonnetSprout extends CardImpl {
         // At the beginning of your upkeep, mill a card. Then if there are three or more creature cards in your graveyard, transform Deathbonnet Sprout.
         this.addAbility(new TransformAbility());
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new MillCardsControllerEffect(1), TargetController.YOU, false
+                new MillCardsControllerEffect(1), false
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new TransformSourceEffect(), condition,

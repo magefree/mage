@@ -27,7 +27,7 @@ public final class SakuraTribeSpringcaller extends CardImpl {
 
         // At the beginning of your upkeep, add {G}. Until end of turn, you don't lose this mana as steps and phases end.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new UntilEndOfTurnManaEffect(Mana.GreenMana(1)),
-                TargetController.YOU, false));
+                false));
     }
 
     private SakuraTribeSpringcaller(final SakuraTribeSpringcaller card) {

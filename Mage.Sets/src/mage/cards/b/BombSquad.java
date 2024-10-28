@@ -49,7 +49,7 @@ public final class BombSquad extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // At the beginning of your upkeep, put a fuse counter on each creature with a fuse counter on it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new BombSquadBeginningEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new BombSquadBeginningEffect(), false));
         // Whenever a creature has four or more fuse counters on it, remove all fuse counters from it and destroy it. That creature deals 4 damage to its controller.
         this.addAbility(new BombSquadTriggeredAbility());
     }

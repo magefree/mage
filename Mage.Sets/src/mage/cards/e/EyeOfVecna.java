@@ -39,7 +39,7 @@ public final class EyeOfVecna extends CardImpl {
                                 .setText("you draw a card"),
                         new GenericManaCost(2)
                 ).addEffect(new LoseLifeSourceControllerEffect(2).concatBy("and")),
-                TargetController.YOU, false
+                false
         ));
     }
 

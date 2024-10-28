@@ -41,7 +41,7 @@ public final class ShrineOfBurningRage extends CardImpl {
 
         //At the beginning of your upkeep or whenever you cast a red spell, put a charge counter on Shrine of Burning Rage.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
-                new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(null, false),
                 new SpellCastControllerTriggeredAbility(null, filter, false)));
 
         //{3}, {T}, Sacrifice Shrine of Burning Rage: It deals damage equal to the number of charge counters on it to any target.

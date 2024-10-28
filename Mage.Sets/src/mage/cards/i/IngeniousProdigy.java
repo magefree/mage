@@ -47,7 +47,7 @@ public final class IngeniousProdigy extends CardImpl {
                         new DoIfCostPaid(
                                 new DrawCardSourceControllerEffect(1),
                                 new RemoveCountersSourceCost(CounterType.P1P1.createInstance())
-                        ), TargetController.YOU, false
+                        ), false
                 ), condition, "At the beginning of your upkeep, if {this} has one or more " +
                 "+1/+1 counters on it, you may remove a +1/+1 counter from it. If you do, draw a card."
         ));

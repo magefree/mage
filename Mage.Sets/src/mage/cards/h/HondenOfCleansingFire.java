@@ -36,7 +36,7 @@ public final class HondenOfCleansingFire extends CardImpl {
 
 
         // At the beginning of your upkeep, you gain 2 life for each Shrine you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new MultipliedValue(xValue, 2)), TargetController.YOU, false).addHint(hint));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new MultipliedValue(xValue, 2)), false).addHint(hint));
     }
 
     private HondenOfCleansingFire(final HondenOfCleansingFire card) {

@@ -36,7 +36,7 @@ public final class PalaceSiege extends CardImpl {
 
         // * Khans - At the beginning of your upkeep, return target creature card from your graveyard to your hand.
         Ability ability1 = new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false),
                 new ModeChoiceSourceCondition("Khans"),
                 ruleTrigger1);
         ability1.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
@@ -44,7 +44,7 @@ public final class PalaceSiege extends CardImpl {
 
         // * Dragons - At the beginning of your upkeep, each opponent loses 2 life and you gain 2 life.
         Ability ability2 = new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new LoseLifeOpponentsEffect(2), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new LoseLifeOpponentsEffect(2), false),
                 new ModeChoiceSourceCondition("Dragons"),
                 ruleTrigger2);
         Effect effect = new GainLifeEffect(2);

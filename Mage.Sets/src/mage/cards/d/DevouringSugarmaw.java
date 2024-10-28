@@ -58,7 +58,6 @@ public final class DevouringSugarmaw extends AdventureCard {
                         new SacrificeTargetCost(filter),
                         true
                 ),
-                TargetController.YOU,
                 false
         ));
 

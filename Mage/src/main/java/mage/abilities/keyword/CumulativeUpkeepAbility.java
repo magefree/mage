@@ -28,7 +28,7 @@ public class CumulativeUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
     private final Cost cumulativeCost;
 
     public CumulativeUpkeepAbility(Cost cumulativeCost) {
-        super(new AddCountersSourceEffect(CounterType.AGE.createInstance()), TargetController.YOU, false);
+        super(TargetController.YOU, new AddCountersSourceEffect(CounterType.AGE.createInstance()), false);
         this.addEffect(new CumulativeUpkeepEffect(cumulativeCost));
         this.cumulativeCost = cumulativeCost;
     }

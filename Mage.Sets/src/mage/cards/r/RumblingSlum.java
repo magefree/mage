@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class RumblingSlum extends CardImpl {
         // At the beginning of your upkeep, Rumbling Slum deals 1 damage to each player.
         Effect effect = new DamagePlayersEffect(1, TargetController.ANY);
         effect.setText("{this} deals 1 damage to each player");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, false));
     }
 
     private RumblingSlum(final RumblingSlum card) {

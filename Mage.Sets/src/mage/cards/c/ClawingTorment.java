@@ -52,7 +52,7 @@ public final class ClawingTorment extends CardImpl {
         // Enchanted permanent has "At the beginning of your upkeep, you lose 1 life."
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new LoseLifeSourceControllerEffect(1), TargetController.YOU, false
+                        new LoseLifeSourceControllerEffect(1), false
                 ), AttachmentType.AURA, Duration.WhileOnBattlefield,
                 "enchanted permanent has \"At the beginning of your upkeep, you lose 1 life.\""
         )));

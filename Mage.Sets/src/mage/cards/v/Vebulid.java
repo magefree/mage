@@ -36,7 +36,7 @@ public final class Vebulid extends CardImpl {
                 "with a +1/+1 counter on it"));
 
         // At the beginning of your upkeep, you may put a +1/+1 counter on Vebulid.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
 
         // When Vebulid attacks or blocks, destroy it at end of combat.
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(

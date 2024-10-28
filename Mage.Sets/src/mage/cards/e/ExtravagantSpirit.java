@@ -34,7 +34,7 @@ public final class ExtravagantSpirit extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, sacrifice Extravagant Spirit unless you pay {1} for each card in your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ExtravagantSpiritEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ExtravagantSpiritEffect(), false));
     }
 
     private ExtravagantSpirit(final ExtravagantSpirit card) {

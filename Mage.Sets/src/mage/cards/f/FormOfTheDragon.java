@@ -37,7 +37,7 @@ public final class FormOfTheDragon extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}{R}{R}");
 
         // At the beginning of your upkeep, Form of the Dragon deals 5 damage to any target.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(5), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(5), false);
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 

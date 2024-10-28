@@ -44,7 +44,7 @@ public final class AkroanHorse extends CardImpl {
         // At the beginning of your upkeep, each opponent create a 1/1 white Soldier creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new CreateTokenAllEffect(new SoldierToken(), TargetController.OPPONENT),
-                TargetController.YOU, false
+                false
         ));
     }
 

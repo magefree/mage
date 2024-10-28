@@ -31,7 +31,7 @@ public final class Heartmender extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, remove a -1/-1 counter from each creature you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HeartmenderEffect(CounterType.M1M1.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HeartmenderEffect(CounterType.M1M1.createInstance()), false));
 
         // Persist
         this.addAbility(new PersistAbility());

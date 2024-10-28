@@ -44,7 +44,7 @@ public final class GisaGloriousResurrector extends CardImpl {
 
         // At the beginning of your upkeep, put all creature cards exiled with Gisa, Glorious Resurrector onto the battlefield under your control. They gain decayed.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new GisaGloriousResurrectorReturnEffect(), TargetController.YOU, false
+                new GisaGloriousResurrectorReturnEffect(), false
         ));
     }
 

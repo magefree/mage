@@ -31,7 +31,7 @@ public final class CinderGiant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, Cinder Giant deals 2 damage to each other creature you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageAllEffect(2, filter), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageAllEffect(2, filter), false));
     }
 
     private CinderGiant(final CinderGiant card) {

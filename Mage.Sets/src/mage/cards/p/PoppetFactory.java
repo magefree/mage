@@ -32,7 +32,7 @@ public final class PoppetFactory extends CardImpl {
 
         // At the beginning of your upkeep, you may transform Poppet Factory.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TransformSourceEffect(), TargetController.YOU, true
+                new TransformSourceEffect(), true
         ));
     }
 

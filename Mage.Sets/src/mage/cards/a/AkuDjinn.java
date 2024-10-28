@@ -37,7 +37,7 @@ public final class AkuDjinn extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of your upkeep, put a +1/+1 counter on each creature each opponent controls.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false));
     }
 
     private AkuDjinn(final AkuDjinn card) {

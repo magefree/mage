@@ -35,7 +35,7 @@ public final class TempOfTheDamned extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new TempOfTheDamnedEffect()));
         
         // At the beginning of your upkeep, remove a funk counter from Temp of the Damned. If you can't, sacrifice it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TempOfTheDamnedUpkeepEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TempOfTheDamnedUpkeepEffect(), false));
     }
 
     private TempOfTheDamned(final TempOfTheDamned card) {

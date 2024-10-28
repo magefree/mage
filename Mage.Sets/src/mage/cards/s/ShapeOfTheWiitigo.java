@@ -50,7 +50,7 @@ public final class ShapeOfTheWiitigo extends CardImpl {
                         new RemoveCountersAttachedEffect(CounterType.P1P1.createInstance(1), "it"),
                         new AttachedAttackedOrBlockedSinceYourLastUpkeepCondition(),
                         "put a +1/+1 counter on enchanted creature if it attacked or blocked since your last " +
-                                "upkeep. Otherwise, remove a +1/+1 counter from it"), TargetController.YOU, false);
+                                "upkeep. Otherwise, remove a +1/+1 counter from it"), false);
         triggeredAbility.addWatcher(new AttackedOrBlockedSinceYourLastUpkeepWatcher());
         this.addAbility(triggeredAbility);
     }

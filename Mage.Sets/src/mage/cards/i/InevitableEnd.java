@@ -38,9 +38,9 @@ public final class InevitableEnd extends CardImpl {
         // creature."
         BeginningOfUpkeepTriggeredAbility triggeredAbility
                 = new BeginningOfUpkeepTriggeredAbility(
-                        new SacrificeControllerEffect(
+                new SacrificeControllerEffect(
                                 StaticFilters.FILTER_PERMANENT_CREATURE, 1, null),
-                        TargetController.YOU, false);
+                false);
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
                 triggeredAbility, AttachmentType.AURA, Duration.WhileOnBattlefield,
                 "Enchanted creature has \"" + triggeredAbility.getRule() + "\"")));

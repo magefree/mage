@@ -25,7 +25,7 @@ public final class MysticBarrier extends CardImpl {
         // When Mystic Barrier enters the battlefield or at the beginning of your upkeep, choose left or right.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, PlayerCanOnlyAttackInDirectionRestrictionEffect.choiceEffect(),
                 new EntersBattlefieldTriggeredAbility(null, false),
-                new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false)));
+                new BeginningOfUpkeepTriggeredAbility(null, false)));
 
         // Each player may attack only the nearest opponent in the last chosen direction and planeswalkers controlled by that player.
         this.addAbility(new SimpleStaticAbility(

@@ -99,8 +99,7 @@ class ObsidianFireheartOneShotEffect extends OneShotEffect {
                 && source.getTargets().get(0) != null) {
             ContinuousEffect effect = new ObsidianFireheartGainAbilityEffect(
                     new BeginningOfUpkeepTriggeredAbility(
-                            new DamageControllerEffect(1),
-                            TargetController.YOU,
+                            TargetController.YOU, new DamageControllerEffect(1),
                             false),
                     Duration.Custom, "");
 

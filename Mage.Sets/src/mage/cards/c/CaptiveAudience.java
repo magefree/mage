@@ -31,7 +31,7 @@ public final class CaptiveAudience extends CardImpl {
         // At the beginning of your upkeep, choose one that hasn't been chosen —
         // • Your life total becomes 4.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new SetPlayerLifeSourceEffect(4), TargetController.YOU, false
+                new SetPlayerLifeSourceEffect(4), false
         );
         ability.setModeTag("life total becomes 4");
         ability.getModes().setLimitUsageByOnce(false);

@@ -41,7 +41,7 @@ public final class SmokeBomb extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoWhenCostPaid(
                 ability, new SacrificeSourceCost(), "", false
-        ), TargetController.YOU, false));
+        ), false));
     }
 
     private SmokeBomb(final SmokeBomb card) {

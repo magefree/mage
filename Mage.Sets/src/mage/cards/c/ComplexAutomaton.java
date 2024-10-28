@@ -40,7 +40,7 @@ public final class ComplexAutomaton extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new ReturnToHandSourceEffect(true),
-                        TargetController.YOU, false
+                        false
                 ), condition, "At the beginning of your upkeep, " +
                 "if you control seven or more permanents, return {this} to its owner's hand."
         ).addHint(new ValueHint("Permanents you control", new PermanentsOnBattlefieldCount(new FilterControlledPermanent()))));

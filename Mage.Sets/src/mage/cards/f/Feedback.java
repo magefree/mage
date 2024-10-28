@@ -29,8 +29,8 @@ public final class Feedback extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of the upkeep of enchanted enchantment's controller, Feedback deals 1 damage to that player.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(1).withTargetDescription("that player"),
-                TargetController.CONTROLLER_ATTACHED_TO, false, true
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new DamageTargetEffect(1).withTargetDescription("that player"),
+                false, true
         ).setTriggerPhrase("At the beginning of the upkeep of enchanted enchantment's controller, "));
     }
 

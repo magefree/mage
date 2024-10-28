@@ -34,7 +34,7 @@ public final class CephalidVandal extends CardImpl {
 
         // At the beginning of your upkeep, put a shred counter on Cephalid Vandal. Then put the top card of your library into your graveyard for each shred counter on Cephalid Vandal.
         Effect effect = new CephalidVandalEffect();
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SHRED.createInstance(), false), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SHRED.createInstance(), false), false);
         ability.addEffect(effect);
         this.addAbility(ability);
     }

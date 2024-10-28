@@ -51,7 +51,7 @@ public final class ConsumingFerocity extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.WhileOnBattlefield)));
 
         // At the beginning of your upkeep, put a +1/+0 counter on enchanted creature. If that creature has three or more +1/+0 counters on it, it deals damage equal to its power to its controller, then destroy that creature and it can't be regenerated.
-        Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new AddCountersAttachedEffect(CounterType.P1P0.createInstance(), "enchanted creature"), TargetController.YOU, false);
+        Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new AddCountersAttachedEffect(CounterType.P1P0.createInstance(), "enchanted creature"), false);
         upkeepAbility.addEffect(new ConsumingFerocityEffect());
         this.addAbility(upkeepAbility);
     }

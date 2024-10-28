@@ -40,7 +40,7 @@ public final class MangarasEquity extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Mangara's Equity unless you pay {1}{W}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}{W}")), TargetController.YOU, false));
+                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}{W}")), false));
 
         // Whenever a creature of the chosen color deals damage to you or a white creature you control, Mangara's Equity deals that much damage to that creature.
         this.addAbility(new MangarasEquityTriggeredAbility());

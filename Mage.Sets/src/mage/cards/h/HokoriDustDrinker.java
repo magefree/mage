@@ -37,7 +37,7 @@ public final class HokoriDustDrinker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, StaticFilters.FILTER_LANDS)));
 
         // At the beginning of each player's upkeep, that player untaps a land they control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HokoriDustDrinkerUntapEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new HokoriDustDrinkerUntapEffect(), false));
 
 
     }

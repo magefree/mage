@@ -39,7 +39,7 @@ public final class SleeperAgent extends CardImpl {
                 ability.addTarget(new TargetOpponent());
                 this.addAbility(ability);
         // At the beginning of your upkeep, Sleeper Agent deals 2 damage to you.
-                this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(2), TargetController.YOU, false));
+                this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(2), false));
     }
 
     private SleeperAgent(final SleeperAgent card) {

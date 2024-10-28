@@ -21,7 +21,7 @@ public final class AxisOfMortality extends CardImpl {
 
         // At the beginning of your upkeep, you may have two target players exchange life totals.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new ExchangeLifeTwoTargetEffect(), TargetController.YOU, true
+                new ExchangeLifeTwoTargetEffect(), true
         );
         ability.addTarget(new TargetPlayer(2));
         this.addAbility(ability);

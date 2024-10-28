@@ -37,7 +37,7 @@ public final class ArguelsBloodFast extends CardImpl {
         // At the beginning of your upkeep, if you have 5 or less life, you may transform Arguel's Blood Fast.
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(),
-                TargetController.YOU, true).withInterveningIf(FatefulHourCondition.instance));
+                true).withInterveningIf(FatefulHourCondition.instance));
     }
 
     private ArguelsBloodFast(final ArguelsBloodFast card) {

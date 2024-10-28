@@ -32,7 +32,7 @@ public final class PreferredSelection extends CardImpl {
 
         // At the beginning of your upkeep, look at the top two cards of your library. You may sacrifice Preferred Selection and pay {2}{G}{G}. If you do, put one of those cards into your hand. If you don't, put one of those cards on the bottom of your library.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new PreferredSelectionEffect(), TargetController.YOU, false
+                new PreferredSelectionEffect(), false
         ));
     }
 

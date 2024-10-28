@@ -23,7 +23,7 @@ public final class IvoryTower extends CardImpl {
     public IvoryTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IvoryTowerEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IvoryTowerEffect(), false));
     }
 
     private IvoryTower(final IvoryTower card) {

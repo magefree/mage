@@ -25,7 +25,7 @@ public final class UndergrowthRecon extends CardImpl {
 
         // At the beginning of your upkeep, return target land card from your graveyard to the battlefield tapped.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldTargetEffect(true), TargetController.YOU, false
+                new ReturnFromGraveyardToBattlefieldTargetEffect(true), false
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

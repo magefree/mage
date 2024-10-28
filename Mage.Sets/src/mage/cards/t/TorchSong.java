@@ -29,7 +29,7 @@ public final class TorchSong extends CardImpl {
 
         // At the beginning of your upkeep, you may put a verse counter on Torch Song.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), true));
 
         // {2}{R}, Sacrifice Torch Song: Torch Song deals X damage to any target, where X is the number of verse counters on Torch Song.
         Ability ability = new SimpleActivatedAbility(

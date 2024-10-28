@@ -1,7 +1,6 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -9,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -25,7 +23,7 @@ public final class PrimalOrder extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // At the beginning of each player's upkeep, Primal Order deals damage to that player equal to the number of nonbasic lands they control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PrimalOrderDamageTargetEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new PrimalOrderDamageTargetEffect(), false, true));
     }
 
     private PrimalOrder(final PrimalOrder card) {

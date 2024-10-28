@@ -26,7 +26,7 @@ public final class JinxedIdol extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // At the beginning of your upkeep, Jinxed Idol deals 2 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(2), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(2), false));
 
         // Sacrifice a creature: Target opponent gains control of Jinxed Idol.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TargetPlayerGainControlSourceEffect(),

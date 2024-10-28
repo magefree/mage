@@ -42,7 +42,7 @@ public final class MindwrackDemon extends CardImpl {
 
         // At the beginning of your upkeep, if you don't have 4 or more card types in your graveyard, you lose 4 life.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(4), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(4), false),
                 new InvertCondition(DeliriumCondition.instance),
                 "<i>Delirium</i> &mdash; At the beginning of your upkeep, you lose 4 life unless there are four or more card types among cards in your graveyard.");
         ability.addHint(CardTypesInGraveyardHint.YOU);

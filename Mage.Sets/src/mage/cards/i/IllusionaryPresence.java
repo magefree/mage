@@ -22,7 +22,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 
 /**
@@ -42,7 +41,7 @@ public final class IllusionaryPresence extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{U}")));
 
         // At the beginning of your upkeep, choose a land type. Illusionary Presence gains landwalk of the chosen type until end of turn.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ChooseBasicLandTypeEffect(Outcome.Neutral), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ChooseBasicLandTypeEffect(Outcome.Neutral), false);
         ability.addEffect(new IllusionaryPresenceEffect());
         this.addAbility(ability);
 

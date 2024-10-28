@@ -27,7 +27,7 @@ public final class CacheRaiders extends CardImpl {
         this.toughness = new MageInt(4);
         
         //At the beginning of your upkeep, return a permanent you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledPermanent()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledPermanent()), false));
     }
 
     private CacheRaiders(final CacheRaiders card) {

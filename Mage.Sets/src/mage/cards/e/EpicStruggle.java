@@ -26,7 +26,7 @@ public final class EpicStruggle extends CardImpl {
 
         // At the beginning of your upkeep, if you control twenty or more creatures, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), false),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_CREATURE, ComparisonType.MORE_THAN, 19),
                 "At the beginning of your upkeep, if you control twenty or more creatures, you win the game."
         ).addHint(new ValueHint("Creatures you control", new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE))));

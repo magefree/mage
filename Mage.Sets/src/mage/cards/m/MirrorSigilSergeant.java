@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -48,7 +47,7 @@ public final class MirrorSigilSergeant extends CardImpl {
         // At the beginning of your upkeep, if you control a blue permanent, you may create a token that's a copy of Mirror-Sigil Sergeant.
         Effect effect = new CreateTokenCopySourceEffect();
         effect.setText("you may create a token that's a copy of {this}");
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, true);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(effect, true);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new PermanentsOnTheBattlefieldCondition(filter), rule));
 
     }

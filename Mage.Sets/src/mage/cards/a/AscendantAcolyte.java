@@ -41,7 +41,7 @@ public final class AscendantAcolyte extends CardImpl {
 
         // At the beginning of your upkeep, double the number of +1/+1 counters on Ascendant Acolyte.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoubleCountersSourceEffect(CounterType.P1P1), TargetController.YOU, false
+                new DoubleCountersSourceEffect(CounterType.P1P1), false
         ));
     }
 

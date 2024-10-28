@@ -54,7 +54,7 @@ public final class MarchesaResoluteMonarch extends CardImpl {
         // At the beginning of your upkeep, if you haven't been dealt combat damage since your last turn, you draw a card and you lose 1 life.
         ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1), TargetController.YOU, false
+                        new DrawCardSourceControllerEffect(1), false
                 ), MarchesaResoluteMonarchWatcher::checkPlayer, "At the beginning of your upkeep, " +
                 "if you haven't been dealt combat damage since your last turn, you draw a card and you lose 1 life."
         );

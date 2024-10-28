@@ -53,7 +53,7 @@ public final class BellBorcaSpectralSergeant extends CardImpl {
         // At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn),
-                TargetController.YOU, false
+                false
         ), new BellBorcaSpectralSergeantWatcher());
     }
 

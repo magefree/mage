@@ -36,7 +36,7 @@ public final class InSearchOfGreatness extends CardImpl {
         // equal to 1 plus the highest converted mana cost among other permanents you control
         // without paying its mana cost. If you don't, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new InSearchOfGreatnessEffect(), TargetController.YOU, false
+                new InSearchOfGreatnessEffect(), false
         ));
     }
 

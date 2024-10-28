@@ -41,7 +41,7 @@ public final class Gurzigost extends CardImpl {
         this.toughness = new MageInt(8);
 
         // At the beginning of your upkeep, sacrifice Gurzigost unless you put two cards from your graveyard on the bottom of your library.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GurzigostCost()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GurzigostCost()), false));
         
         // {G}{G}, Discard a card: You may have Gurzigost assign its combat damage this turn as though it weren't blocked.
         Effect effect = new GainAbilitySourceEffect(DamageAsThoughNotBlockedAbility.getInstance(), Duration.EndOfTurn);

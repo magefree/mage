@@ -76,7 +76,7 @@ class VesuvanShapeShifterFaceUpCopyApplier extends CopyApplier {
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
-                new VesuvanShapeshifterFaceDownEffect(), TargetController.YOU, true
+                new VesuvanShapeshifterFaceDownEffect(), true
         ));
         return true;
     }

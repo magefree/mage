@@ -35,7 +35,7 @@ public final class HondenOfSeeingWinds extends CardImpl {
 
 
         // At the beginning of your upkeep, draw a card for each Shrine you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(xValue), TargetController.YOU, false).addHint(hint));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(xValue), false).addHint(hint));
     }
 
     private HondenOfSeeingWinds(final HondenOfSeeingWinds card) {

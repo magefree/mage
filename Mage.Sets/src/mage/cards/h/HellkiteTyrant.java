@@ -47,7 +47,7 @@ public final class HellkiteTyrant extends CardImpl {
                 false, true));
 
         // At the beginning of your upkeep, if you control twenty or more artifacts, you win the game.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,
                 new PermanentsOnTheBattlefieldCondition(new FilterArtifactPermanent(), ComparisonType.MORE_THAN, 19),

@@ -20,7 +20,7 @@ public final class MirrisGuile extends CardImpl {
 
 
         // At the beginning of your upkeep, you may look at the top three cards of your library, then put them back in any order.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LookLibraryControllerEffect(3), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LookLibraryControllerEffect(3), true));
     }
 
     private MirrisGuile(final MirrisGuile card) {

@@ -28,7 +28,7 @@ public final class BenthicDjinn extends CardImpl {
         this.addAbility(new IslandwalkAbility());
 
         // At the beginning of your upkeep, you lose 2 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), false));
     }
 
     private BenthicDjinn(final BenthicDjinn card) {

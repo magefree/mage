@@ -23,7 +23,7 @@ public final class EtherwroughtPage extends CardImpl {
 
         // At the beginning of your upkeep, choose one - You gain 2 life; or look at the top card of your library, then you may put that card into your graveyard; or each opponent loses 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new GainLifeEffect(2), TargetController.YOU, false
+                new GainLifeEffect(2), false
         );
 
         // or look at the top card of your library, then you may put that card into your graveyard;

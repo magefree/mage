@@ -26,7 +26,7 @@ public final class RavenousGiant extends CardImpl {
         // At the beginning of your upkeep, Ravenous Giant deals 1 damage to you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DamageControllerEffect(1),
-                TargetController.YOU, false
+                false
         ));
     }
 

@@ -41,7 +41,7 @@ public final class ShimmerwingChimera extends CardImpl {
 
         // At the beginning of your upkeep, return up to one other target enchantment you control to its owner's hand.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new ReturnToHandTargetEffect(), TargetController.YOU, false
+                new ReturnToHandTargetEffect(), false
         );
         ability.addTarget(new TargetPermanent(0, 1, filter, false));
         this.addAbility(ability);

@@ -23,7 +23,7 @@ public final class FesteringEvil extends CardImpl {
 
         // At the beginning of your upkeep, Festering Evil deals 1 damage to each creature and each player.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DamageEverythingEffect(1), TargetController.YOU, false
+                new DamageEverythingEffect(1), false
         ));
 
         // {B}{B}, Sacrifice Festering Evil: Festering Evil deals 3 damage to each creature and each player.

@@ -10,9 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.TargetController;
-import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -28,7 +26,7 @@ public final class VirtueOfPersistence extends AdventureCard {
 
         // At the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldTargetEffect(), TargetController.YOU, false
+                new ReturnFromGraveyardToBattlefieldTargetEffect(), false
         );
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);

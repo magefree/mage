@@ -23,7 +23,7 @@ public final class ConvalescentCare extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
 
         // At the beginning of your upkeep, if you have 5 or less life, you gain 3 life and draw a card.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(3), TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(3), false);
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, FatefulHourCondition.instance,
                 "At the beginning of your upkeep, if you have 5 or less life, you gain 3 life and draw a card."));

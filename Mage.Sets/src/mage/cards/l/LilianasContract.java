@@ -43,7 +43,7 @@ public final class LilianasContract extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new WinGameSourceControllerEffect(),
-                        TargetController.YOU, false
+                        false
                 ), LilianasContractCondition.instance,
                 "At the beginning of your upkeep, "
                 + "if you control four or more Demons with different names, "

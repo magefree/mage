@@ -20,7 +20,7 @@ public final class BottomlessPit extends CardImpl {
 
 
         // At the beginning of each player's upkeep, that player discards a card at random.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(1, true), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new DiscardTargetEffect(1, true), false));
     }
 
     private BottomlessPit(final BottomlessPit card) {

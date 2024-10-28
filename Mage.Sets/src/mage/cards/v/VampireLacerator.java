@@ -34,7 +34,7 @@ public final class VampireLacerator extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConditionalOneShotEffect(
                     new LoseLifeSourceControllerEffect(1), condition,
                     "you lose 1 life unless an opponent has 10 or less life"
-        ), TargetController.YOU, false));
+        ), false));
     }
 
     private VampireLacerator(final VampireLacerator card) {

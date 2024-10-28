@@ -39,7 +39,7 @@ public final class GrafReaver extends CardImpl {
 
         // At the beginning of your upkeep, Graf Reaver deals 1 damage to you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DamageControllerEffect(1), TargetController.YOU, false
+                new DamageControllerEffect(1), false
         ));
     }
 

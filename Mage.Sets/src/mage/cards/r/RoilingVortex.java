@@ -32,8 +32,8 @@ public final class RoilingVortex extends CardImpl {
 
         // At the beginning of each player's upkeep, Roiling Vortex deals 1 damage to them.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DamageTargetEffect(1, true, "them"),
-                TargetController.ANY, false, true
+                TargetController.ANY, new DamageTargetEffect(1, true, "them"),
+                false, true
         ));
 
         // Whenever a player casts a spell, if no mana was spent to cast that spell, Roiling Vortex deals 5 damage to that player.

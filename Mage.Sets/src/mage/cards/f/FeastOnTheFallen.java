@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -30,8 +29,8 @@ public final class FeastOnTheFallen extends CardImpl {
         // At the beginning of each upkeep, if an opponent lost life last turn, put a +1/+1 counter on target creature you control. 
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                        TargetController.ANY, false),
+                        TargetController.ANY, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                        false),
                 FeastOnTheFallenCondition.instance,
                 "At the beginning of each upkeep, if an opponent lost life last turn, put a +1/+1 counter on target creature you control.");
         ability.addTarget(new TargetControlledCreaturePermanent());

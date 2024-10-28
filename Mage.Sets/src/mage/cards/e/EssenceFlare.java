@@ -39,8 +39,8 @@ public final class EssenceFlare extends CardImpl {
         // Enchanted creature gets +2/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0)));
         // At the beginning of the upkeep of enchanted creature's controller, put a -0/-1 counter on that creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAttachedEffect(CounterType.M0M1.createInstance(), "that creature"),
-            TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new AddCountersAttachedEffect(CounterType.M0M1.createInstance(), "that creature"),
+                false));
     }
 
     private EssenceFlare(final EssenceFlare card) {

@@ -1,10 +1,7 @@
 package mage.cards.a;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
@@ -41,8 +38,7 @@ public final class AllHallowsEve extends CardImpl {
         // If there are no more scream counters on it, put it into your graveyard and each player returns all creature cards from their graveyard to the battlefield.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 Zone.EXILED,
-                new RemoveCounterSourceEffect(CounterType.SCREAM.createInstance(1)),
-                TargetController.YOU,
+                TargetController.YOU, new RemoveCounterSourceEffect(CounterType.SCREAM.createInstance(1)),
                 false
         );
         ability.addEffect(new AllHallowsEveEffect());

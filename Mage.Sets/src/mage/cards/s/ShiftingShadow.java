@@ -2,7 +2,6 @@ package mage.cards.s;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -81,7 +80,7 @@ class ShiftingShadowGainEffect extends ContinuousEffectImpl {
         }
         permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
         permanent.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ShiftingShadowEffect(aura, game), TargetController.YOU, false
+                new ShiftingShadowEffect(aura, game), false
         ), source.getSourceId(), game);
         return true;
     }

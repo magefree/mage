@@ -39,7 +39,7 @@ public final class WarpingWurm extends CardImpl {
                         new PhaseOutSourceEffect(),
                         new ManaCostsImpl<>("{2}{G}{U}")
                 ).setText("{this} phases out unless you pay {2}{G}{U}"),
-                TargetController.YOU, false
+                false
         ));
 
         // When Warping Wurm phases in, put a +1/+1 counter on it.

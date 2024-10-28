@@ -27,7 +27,7 @@ public final class TidalForce extends CardImpl {
         this.toughness = new MageInt(7);
 
         // At the beginning of each upkeep, you may tap or untap target permanent.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new MayTapOrUntapTargetEffect(), TargetController.ANY, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new MayTapOrUntapTargetEffect(), false);
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

@@ -43,7 +43,7 @@ public final class EnemyOfEnlightenment extends CardImpl {
 
         // At the beginning of your upkeep, each player discards a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DiscardEachPlayerEffect(), TargetController.YOU, false
+                new DiscardEachPlayerEffect(), false
         ));
     }
 

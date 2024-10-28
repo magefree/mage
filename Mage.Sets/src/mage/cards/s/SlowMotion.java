@@ -41,7 +41,7 @@ public final class SlowMotion extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of the upkeep of enchanted creature's controller, that player sacrifices that creature unless they pay {2}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEquipedUnlessPaysEffect(new GenericManaCost(2)), TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new SacrificeEquipedUnlessPaysEffect(new GenericManaCost(2)), false));
 
         // When Slow Motion is put into a graveyard from the battlefield, return Slow Motion to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));

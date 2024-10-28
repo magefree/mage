@@ -34,7 +34,7 @@ public final class GixianSkullflayer extends CardImpl {
 
         // At the beginning of your upkeep, if there are three or more creature cards in your graveyard, put a +1/+1 counter on Gixian Skullflayer.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false),
                 condition,
                 "At the beginning of your upkeep, if there are three or more creature cards in your graveyard, put a +1/+1 counter on {this}."
         ));

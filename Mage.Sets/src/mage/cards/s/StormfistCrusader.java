@@ -33,7 +33,7 @@ public final class StormfistCrusader extends CardImpl {
 
         // At the beginning of your upkeep, each player draws a card and loses 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new DrawCardAllEffect(1), TargetController.YOU, false
+                new DrawCardAllEffect(1), false
         );
         ability.addEffect(new LoseLifeAllPlayersEffect(StaticValue.get(1), "and loses 1 life"));
         this.addAbility(ability);

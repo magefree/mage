@@ -49,7 +49,7 @@ public final class LyndeCheerfulTormentor extends CardImpl {
         this.addAbility(new LyndeCheerfulTormentorCurseDiesTriggeredAbility());
 
         // At the beginning of your upkeep, you may attach a Curse attached to you to one of your opponents. If you do, draw two cards.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LyndeCheerfulTormentorAttachCurseEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LyndeCheerfulTormentorAttachCurseEffect(), true));
     }
 
     private LyndeCheerfulTormentor(final LyndeCheerfulTormentor card) {

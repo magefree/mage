@@ -31,7 +31,7 @@ public final class DemonicPact extends CardImpl {
 
         // At the beginning of your upkeep, choose one that hasn't been chosen
         // - Demonic Pact deals 4 damage to any target and you gain 4 life;
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(4), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(4), false);
         ability.setModeTag("deals damage and gain life");
         ability.getModes().setLimitUsageByOnce(false);
         ability.addTarget(new TargetAnyTarget());

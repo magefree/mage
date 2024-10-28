@@ -44,7 +44,7 @@ public final class WhitePlumeAdventurer extends CardImpl {
 
         // At the beginning of each opponent's upkeep, untap a creature you control. If you've completed a dungeon, untap all creatures you control instead.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new WhitePlumeAdventurerEffect(), TargetController.OPPONENT, false
+                TargetController.OPPONENT, new WhitePlumeAdventurerEffect(), false
         ).addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
     }
 

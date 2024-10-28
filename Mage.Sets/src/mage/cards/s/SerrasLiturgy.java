@@ -42,7 +42,7 @@ public final class SerrasLiturgy extends CardImpl {
 
         // At the beginning of your upkeep, you may put a verse counter on Serra's Liturgy.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), true));
 
         // {W}, Sacrifice Serra's Liturgy: Destroy up to X target artifacts and/or enchantments, where X is the number of verse counters on Serra's Liturgy.
         Effect effect = new DestroyTargetEffect(true);

@@ -57,7 +57,7 @@ public final class EvolvedSpinoderm extends CardImpl {
         // At the beginning of your upkeep, remove an oil counter from Evolved Spinoderm. Then if it has no oil counters on it, sacrifice it.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new RemoveCounterSourceEffect(CounterType.OIL.createInstance()),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new SacrificeSourceEffect(), condition2,

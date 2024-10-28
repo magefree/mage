@@ -42,7 +42,7 @@ public final class VerdantEmbrace extends CardImpl {
         this.addAbility(ability);
         // Enchanted creature gets +3/+3 and has "At the beginning of each upkeep, create a 1/1 green Saproling creature token."
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield));
-        Ability grantedAbility = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), TargetController.ANY, false);
+        Ability grantedAbility = new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new CreateTokenEffect(new SaprolingToken()), false);
         Effect effect = new GainAbilityAttachedEffect(grantedAbility, AttachmentType.AURA);
         effect.setText("and has \"At the beginning of each upkeep, create a 1/1 green Saproling creature token.\"");
         ability.addEffect(effect);

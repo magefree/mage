@@ -30,7 +30,7 @@ public final class Awakening extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}");
 
         // At the beginning of each upkeep, untap all creatures and lands.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new UntapAllEffect(filter), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new UntapAllEffect(filter), false));
     }
 
     private Awakening(final Awakening card) {

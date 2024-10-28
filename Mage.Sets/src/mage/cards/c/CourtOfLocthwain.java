@@ -47,7 +47,7 @@ public final class CourtOfLocthwain extends CardImpl {
         // At the beginning of your upkeep, exile the top card of target opponent's library. You may play that card for as long as it remains exiled, and mana of any type can be spent to cast it. If you're the monarch, until end of turn, you may cast a spell from among cards exiled with Court of Locthwain without paying its mana cost.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new CourtOfLocthwainFirstEffect(),
-                TargetController.YOU, false
+                false
         );
         ability.addTarget(new TargetOpponent());
         ability.addEffect(new ConditionalOneShotEffect(

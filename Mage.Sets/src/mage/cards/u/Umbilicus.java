@@ -26,7 +26,7 @@ public final class Umbilicus extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // At the beginning of each player's upkeep, that player returns a permanent they control to its owner's hand unless they pay 2 life.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BloodClockEffect(), TargetController.ANY, false, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new BloodClockEffect(), false, true);
         this.addAbility(ability);
     }
 

@@ -18,7 +18,7 @@ public final class DarkTutelage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new RevealPutInHandLoseLifeEffect(), TargetController.YOU, false
+                new RevealPutInHandLoseLifeEffect(), false
         ));
     }
 

@@ -30,7 +30,7 @@ public final class AetherRift extends CardImpl {
 
 
         // At the beginning of your upkeep, discard a card at random. If you discard a creature card this way, return it from your graveyard to the battlefield unless any player pays 5 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AetherRiftEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AetherRiftEffect(), false));
 
     }
 

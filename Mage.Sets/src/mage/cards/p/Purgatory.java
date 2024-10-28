@@ -44,10 +44,9 @@ public final class Purgatory extends CardImpl {
 
         // At the beginning of your upkeep, you may pay {4} and 2 life. If you do, return a card exiled with Purgatory to the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-            new DoIfCostPaid(new PurgatoryReturnEffect(), 
+                new DoIfCostPaid(new PurgatoryReturnEffect(),
             new CompositeCost(new GenericManaCost(4), new PayLifeCost(2), "{4} and 2 life")),
-            TargetController.YOU, 
-            false));
+                false));
     }
 
     private Purgatory(final Purgatory card) {

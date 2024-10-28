@@ -37,7 +37,7 @@ public final class SphereOfAnnihilation extends CardImpl {
 
         // At the beginning of your upkeep, exile Sphere of Annihilation, all creatures and planeswalkers with mana value less than or equal to the number of void counters on it, and all creature and planeswalker cards in all graveyards with mana value less than or equal to the number of void counters on it.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SphereOfAnnihilationEffect(), TargetController.YOU, false
+                new SphereOfAnnihilationEffect(), false
         ));
     }
 

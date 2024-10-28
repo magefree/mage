@@ -25,7 +25,7 @@ public final class DarkConfidant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RevealPutInHandLoseLifeEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RevealPutInHandLoseLifeEffect(), false));
     }
 
     private DarkConfidant(final DarkConfidant card) {

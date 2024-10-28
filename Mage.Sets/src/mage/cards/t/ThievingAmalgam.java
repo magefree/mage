@@ -43,7 +43,7 @@ public final class ThievingAmalgam extends CardImpl {
 
         // At the beginning of each opponent's upkeep, you manifest the top card of that player's library.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ThievingAmalgamManifestEffect(), TargetController.OPPONENT, false
+                TargetController.OPPONENT, new ThievingAmalgamManifestEffect(), false
         ));
 
         // Whenever a creature you control but don't own dies, its owner loses 2 life and you gain 2 life.

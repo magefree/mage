@@ -34,7 +34,7 @@ public final class DescendantOfMasumaro extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, put a +1/+1 counter on Descendant of Masumaro for each card in your hand, then remove a +1/+1 counter from Descendant of Masumaro for each card in target opponent's hand.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DescendantOfMasumaroEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DescendantOfMasumaroEffect(), false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

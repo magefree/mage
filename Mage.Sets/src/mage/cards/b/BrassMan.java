@@ -34,7 +34,6 @@ public final class BrassMan extends CardImpl {
         // At the beginning of your upkeep, you may pay {1}. If you do, untap Brass Man.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DoIfCostPaid(new UntapSourceEffect(), new GenericManaCost(1)),
-                TargetController.YOU,
                 false));
     }
 

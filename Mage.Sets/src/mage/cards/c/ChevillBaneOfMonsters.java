@@ -62,7 +62,7 @@ public final class ChevillBaneOfMonsters extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()),
-                        TargetController.YOU, false
+                        false
                 ), condition, "At the beginning of your upkeep, " +
                 "if your opponents control no permanents with bounty counters on them, " +
                 "put a bounty counter on target creature or planeswalker an opponent controls."

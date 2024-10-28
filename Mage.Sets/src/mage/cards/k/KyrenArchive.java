@@ -28,7 +28,6 @@ public final class KyrenArchive extends CardImpl {
         // At the beginning of your upkeep, you may exile the top card of your library face down.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new ExileCardsFromTopOfLibraryControllerEffect(1, true, true),
-                TargetController.YOU,
                 true)
         );
 

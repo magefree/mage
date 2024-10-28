@@ -41,7 +41,7 @@ public final class Triskaidekaphile extends CardImpl {
         // At the beginning of your upkeep, if you have exactly thirteen cards in your hand, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new WinGameSourceControllerEffect(), TargetController.YOU, false
+                        new WinGameSourceControllerEffect(), false
                 ), condition, "At the beginning of your upkeep, " +
                 "if you have exactly thirteen cards in your hand, you win the game."
         ));

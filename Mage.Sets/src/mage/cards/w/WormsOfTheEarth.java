@@ -12,13 +12,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -37,7 +35,7 @@ public final class WormsOfTheEarth extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WormsOfTheEarthEnterEffect()));
 
         // At the beginning of each upkeep, any player may sacrifice two lands or have Worms of the Earth deal 5 damage to that player. If a player does either, destroy Worms of the Earth.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WormsOfTheEarthDestroyEffect(), TargetController.EACH_PLAYER, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new WormsOfTheEarthDestroyEffect(), false));
     }
 
     private WormsOfTheEarth(final WormsOfTheEarth card) {

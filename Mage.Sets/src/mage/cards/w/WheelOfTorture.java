@@ -22,7 +22,7 @@ public final class WheelOfTorture extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of each opponent's upkeep, Wheel of Torture deals X damage to that player, where X is 3 minus the number of cards in their hand.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new WheelOfTortureEffect(), TargetController.OPPONENT, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new WheelOfTortureEffect(), false);
         this.addAbility(ability);
     }
 

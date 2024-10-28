@@ -23,7 +23,7 @@ public final class MartialLaw extends CardImpl {
 
         // At the beginning of your upkeep, detain target creature an opponent controls. 
         // (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DetainTargetEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DetainTargetEffect(), false);
         TargetCreaturePermanent target = new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE);
         ability.addTarget(target);
         this.addAbility(ability);

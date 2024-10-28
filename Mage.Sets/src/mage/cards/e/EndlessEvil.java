@@ -44,7 +44,6 @@ public final class EndlessEvil extends CardImpl {
         // At the beginning of your upkeep, create a token that’s a copy of enchanted creature, except the token is 1/1.
         TriggeredAbility cloneAbility = new BeginningOfUpkeepTriggeredAbility(
                 new EndlessEvilCloneEffect(),
-                TargetController.YOU,
                 false
         );
         this.addAbility(cloneAbility);

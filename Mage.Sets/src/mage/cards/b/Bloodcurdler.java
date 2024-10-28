@@ -35,7 +35,7 @@ public final class Bloodcurdler extends CardImpl {
 
         // At the beginning of your upkeep, put the top card of your library into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new MillCardsControllerEffect(1), TargetController.YOU, false
+                new MillCardsControllerEffect(1), false
         ));
 
         // Threshold - As long as seven or more cards are in your graveyard, Bloodcurdler gets +1/+1 and has "At the beginning of your end step, exile two cards from your graveyard."

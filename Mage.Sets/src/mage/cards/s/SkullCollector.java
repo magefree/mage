@@ -38,7 +38,7 @@ public final class SkullCollector extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         // At the beginning of your upkeep, return a black creature you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
         // {1}{B}: Regenerate Skull Collector.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
     }

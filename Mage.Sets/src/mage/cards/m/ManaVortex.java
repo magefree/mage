@@ -3,7 +3,6 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -18,13 +17,11 @@ import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -39,8 +36,8 @@ public final class ManaVortex extends CardImpl {
         this.addAbility(new CastSourceTriggeredAbility(new CounterSourceEffect()));
         
         // At the beginning of each player's upkeep, that player sacrifices a land.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(StaticFilters.FILTER_LAND, 1, "that player"),
-            TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new SacrificeEffect(StaticFilters.FILTER_LAND, 1, "that player"),
+                false));
         
         // When there are no lands on the battlefield, sacrifice Mana Vortex.
         this.addAbility(new ManaVortexStateTriggeredAbility());

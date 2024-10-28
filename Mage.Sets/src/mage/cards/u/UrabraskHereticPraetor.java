@@ -37,12 +37,12 @@ public final class UrabraskHereticPraetor extends CardImpl {
         // At the beginning of your upkeep, exile the top card of your library. You may play it this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn).withTextOptions("it", true),
-                TargetController.YOU, false
+                false
         ));
 
         // At the beginning of each opponent's upkeep, the next time they would draw a card this turn, instead they exile the top card of their library. They may play it this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new UrabraskHereticPraetorEffect(), TargetController.OPPONENT, false
+                TargetController.OPPONENT, new UrabraskHereticPraetorEffect(), false
         ));
     }
 

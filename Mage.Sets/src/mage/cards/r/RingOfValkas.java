@@ -2,7 +2,6 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.ObjectColor;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
@@ -44,7 +43,7 @@ public final class RingOfValkas extends CardImpl {
                 new AttachedToMatchesFilterCondition(filter),
                 "put a +1/+1 counter on equipped creature if it's red"
         );
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, false));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));

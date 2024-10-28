@@ -39,7 +39,7 @@ public final class BiowasteBlob extends CardImpl {
         // At the beginning of your upkeep, if you control a commander, create a token that's a copy of Biowaste Blob.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new CreateTokenCopySourceEffect(), TargetController.YOU, false
+                        new CreateTokenCopySourceEffect(), false
                 ), ControlACommanderCondition.instance, "At the beginning of your upkeep, " +
                 "if you control a commander, create a token that's a copy of {this}."
         ));

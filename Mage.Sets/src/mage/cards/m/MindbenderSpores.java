@@ -51,7 +51,7 @@ public final class MindbenderSpores extends CardImpl {
                 .setText("The creature gains \"This creature doesn't untap during your untap step if it has a fungus counter on it\""));
 
         BeginningOfUpkeepTriggeredAbility removeCounterAbility = new BeginningOfUpkeepTriggeredAbility(
-                new RemoveCounterSourceEffect(CounterType.FUNGUS.createInstance()), TargetController.YOU, false);
+                new RemoveCounterSourceEffect(CounterType.FUNGUS.createInstance()), false);
         ability.addEffect(new GainAbilityTargetEffect(removeCounterAbility, Duration.Custom)
                 .concatBy("and")
                 .setText("\"At the beginning of your upkeep, remove a fungus counter from this creature.\""));

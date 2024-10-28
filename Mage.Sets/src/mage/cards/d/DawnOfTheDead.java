@@ -33,11 +33,11 @@ public final class DawnOfTheDead extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}{B}");
 
         // At the beginning of your upkeep, you lose 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), false));
 
         // At the beginning of your upkeep, you may return target creature card from your graveyard to the battlefield.
         // That creature gains haste until end of turn. Exile it at the beginning of the next end step.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DawnOfTheDeadEffect(), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DawnOfTheDeadEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

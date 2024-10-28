@@ -37,7 +37,7 @@ public final class AbhorrentOculus extends CardImpl {
 
         // At the beginning of each opponent's upkeep, manifest dread.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ManifestDreadEffect(), TargetController.OPPONENT, false
+                TargetController.OPPONENT, new ManifestDreadEffect(), false
         ));
     }
 

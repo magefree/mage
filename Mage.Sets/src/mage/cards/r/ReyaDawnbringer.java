@@ -30,7 +30,7 @@ public final class ReyaDawnbringer extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

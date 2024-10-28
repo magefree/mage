@@ -43,7 +43,7 @@ public final class SinnersJudgment extends CardImpl {
 
         // At the beginning of your upkeep, put a judgment counter on Sinner's Judgment. Then if there are three or more judgment counters on it, enchanted player loses the game.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SinnersJudgmentEffect(), TargetController.YOU, false
+                new SinnersJudgmentEffect(), false
         ));
 
         // If Sinner's Judgment would be put into a graveyard from anywhere, exile it instead.

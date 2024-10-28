@@ -24,7 +24,7 @@ public final class TriumphOfFerocity extends CardImpl {
 
 
         // At the beginning of your upkeep, draw a card if you control the creature with the greatest power or tied for the greatest power.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, ControlsCreatureGreatestPowerCondition.instance, ruleText));
     }
 

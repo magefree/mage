@@ -23,7 +23,7 @@ public final class DarkSuspicions extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}");
 
         // At the beginning of each opponent's upkeep, that player loses X life, where X is the number of cards in that player's hand minus the number of cards in your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DarkSuspicionsEffect(), TargetController.OPPONENT, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new DarkSuspicionsEffect(), false));
     }
 
     private DarkSuspicions(final DarkSuspicions card) {

@@ -47,7 +47,7 @@ public final class GutwrencherOni extends CardImpl {
                         condition,
                         "discard a card if you don't control an Ogre"
                 ),
-                TargetController.YOU, false
+                false
         ));
     }
 

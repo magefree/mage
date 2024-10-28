@@ -37,7 +37,7 @@ public final class SafeHaven extends CardImpl {
                 new DoIfCostPaid(new ReturnFromExileEffect(
                         Zone.BATTLEFIELD, "return each card exiled with " +
                         "{this} to the battlefield under its owner's control"
-                ), new SacrificeSourceCost()), TargetController.YOU, false
+                ), new SacrificeSourceCost()), false
         ));
     }
 

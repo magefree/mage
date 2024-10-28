@@ -36,7 +36,7 @@ public final class InnocentTraveler extends CardImpl {
         // At the beginning of your upkeep, any opponent may sacrifice a creature. If no one does, transform Innocent Traveler.
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new InnocentTravelerEffect(), TargetController.YOU, false
+                new InnocentTravelerEffect(), false
         ));
     }
 

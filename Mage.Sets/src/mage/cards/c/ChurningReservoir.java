@@ -54,7 +54,7 @@ public final class ChurningReservoir extends CardImpl {
         // At the beginning of your upkeep, put an oil counter on another target nontoken artifact or creature you control.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.OIL.createInstance()),
-                TargetController.YOU, false
+                false
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

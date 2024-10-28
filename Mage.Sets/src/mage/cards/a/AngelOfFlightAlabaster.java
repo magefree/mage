@@ -11,7 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterCard;
-import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ public final class AngelOfFlightAlabaster extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new ReturnFromGraveyardToHandTargetEffect(), TargetController.YOU, false
+                new ReturnFromGraveyardToHandTargetEffect(), false
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

@@ -32,7 +32,7 @@ public final class BarrenGlory extends CardImpl {
 
         // At the beginning of your upkeep, if you control no permanents other than Barren Glory and have no cards in hand, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), false),
                 new CompoundCondition(
                         new CardsInHandCondition(ComparisonType.EQUAL_TO, 0),
                         new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0)

@@ -40,13 +40,13 @@ public final class EnergyVortex extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new RemoveAllCountersSourceEffect(CounterType.VORTEX)
                         .setText("remove all vortex counters from {this}"),
-                TargetController.YOU, false
+                false
         ));
 
         // At the beginning of the chosen player's upkeep, Energy Vortex deals 3 damage to that player unless they pay {1} for each vortex counter on Energy Vortex.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new EnergyVortexEffect(), TargetController.ANY, false
+                        TargetController.ANY, new EnergyVortexEffect(), false
                 ), EnergyVortexCondition.instance, "At the beginning of the chosen player's upkeep, " +
                 "{this} deals 3 damage to that player unless they pay {1} for each vortex counter on {this}."
         ));

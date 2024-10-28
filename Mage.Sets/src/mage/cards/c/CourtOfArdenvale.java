@@ -45,7 +45,7 @@ public final class CourtOfArdenvale extends CardImpl {
                 new ReturnFromGraveyardToHandTargetEffect(),
                 MonarchIsSourceControllerCondition.instance,
                 "return target permanent card with mana value 3 or less from your graveyard to your hand. If you're the monarch, return that permanent card to the battlefield instead."
-            ), TargetController.YOU, false
+            ), false
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.addHint(MonarchHint.instance);

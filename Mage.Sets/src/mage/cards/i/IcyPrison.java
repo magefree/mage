@@ -35,7 +35,7 @@ public final class IcyPrison extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Icy Prison unless any player pays {3}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoUnlessAnyPlayerPaysEffect(new SacrificeSourceEffect(), new GenericManaCost(3)), TargetController.YOU, false));
+                new DoUnlessAnyPlayerPaysEffect(new SacrificeSourceEffect(), new GenericManaCost(3)), false));
 
         // When Icy Prison leaves the battlefield, return the exiled card to the battlefield under its owner's control.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));

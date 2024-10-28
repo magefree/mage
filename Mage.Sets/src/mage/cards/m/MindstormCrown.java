@@ -26,7 +26,7 @@ public final class MindstormCrown extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of your upkeep, draw a card if you had no cards in hand at the beginning of this turn. If you had a card in hand, Mindstorm Crown deals 1 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MindstormCrownEffect(), TargetController.YOU, false), new MindstormCrownWatcher());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MindstormCrownEffect(), false), new MindstormCrownWatcher());
     }
 
     private MindstormCrown(final MindstormCrown card) {

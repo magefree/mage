@@ -30,7 +30,7 @@ public final class CreepingBloodsucker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, Creeping Bloodsucker deals 1 damage to each opponent. You gain life equal to the damage dealt this way.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreepingBloodsuckerEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreepingBloodsuckerEffect(), false));
     }
 
     private CreepingBloodsucker(final CreepingBloodsucker card) {

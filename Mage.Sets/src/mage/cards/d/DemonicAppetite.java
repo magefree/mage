@@ -38,7 +38,7 @@ public final class DemonicAppetite extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice a creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_A_CREATURE, 1, ""),
-                TargetController.YOU, false));
+                false));
     }
 
     private DemonicAppetite(final DemonicAppetite card) {

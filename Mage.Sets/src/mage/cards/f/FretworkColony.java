@@ -31,7 +31,7 @@ public final class FretworkColony extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // At the beginning of your upkeep, put a +1/+1 counter on Fretwork Colony and you lose 1 life.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
         Effect effect = new LoseLifeSourceControllerEffect(1);
         ability.addEffect(effect.concatBy("and"));
         this.addAbility(ability);

@@ -43,7 +43,7 @@ public final class Apathy extends CardImpl {
 
         // At the beginning of the upkeep of enchanted creature’s controller, that player may discard a card at random. If the player does, untap that creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ApathyEffect(), TargetController.CONTROLLER_ATTACHED_TO, false
+                TargetController.CONTROLLER_ATTACHED_TO, new ApathyEffect(), false
         ));
     }
 

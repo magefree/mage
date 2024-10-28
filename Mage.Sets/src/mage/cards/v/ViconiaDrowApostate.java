@@ -42,7 +42,7 @@ public final class ViconiaDrowApostate extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         new ReturnFromGraveyardAtRandomEffect(StaticFilters.FILTER_CARD_CREATURE, Zone.HAND),
-                        TargetController.YOU, false
+                        false
                 ), condition, "At the beginning of your upkeep, if there are four or more creature cards " +
                 "in your graveyard, return a creature card at random from your graveyard to your hand."
         ).addHint(hint));

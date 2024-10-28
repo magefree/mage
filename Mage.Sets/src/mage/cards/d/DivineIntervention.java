@@ -35,7 +35,7 @@ public final class DivineIntervention extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect, "with two intervention counters on it"));
 
         // At the beginning of your upkeep, remove an intervention counter from Divine Intervention.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.INTERVENTION.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.INTERVENTION.createInstance()), false));
 
         // When you remove the last intervention counter from Divine Intervention, the game is a draw.
         this.addAbility(new DivineInterventionAbility());

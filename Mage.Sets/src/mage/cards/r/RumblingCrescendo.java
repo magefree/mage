@@ -38,7 +38,7 @@ public final class RumblingCrescendo extends CardImpl {
 
         // At the beginning of your upkeep, you may put a verse counter on Rumbling Crescendo.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), true));
 
         // {R}, Sacrifice Rumbling Crescendo: Destroy up to X target lands, where X is the number of verse counters on Rumbling Crescendo.        
         Effect effect = new DestroyTargetEffect(true);

@@ -22,7 +22,7 @@ public final class GoblinBoomKeg extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // At the beginning of your upkeep, sacrifice Goblin Boom Keg.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), false));
 
         // When Goblin Boom Keg is put into a graveyard from the battlefield, it deals 3 damage to any target.
         Ability ability = new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new DamageTargetEffect(3, "it"));

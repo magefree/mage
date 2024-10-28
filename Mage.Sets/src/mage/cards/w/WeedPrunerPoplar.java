@@ -36,7 +36,7 @@ public final class WeedPrunerPoplar extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, target creature other than Weed-Pruner Poplar gets -1/-1 until end of turn.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

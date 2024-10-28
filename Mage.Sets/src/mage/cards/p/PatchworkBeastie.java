@@ -35,7 +35,7 @@ public final class PatchworkBeastie extends CardImpl {
 
         // At the beginning of your upkeep, you may mill a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new MillCardsControllerEffect(1), TargetController.YOU, true
+                new MillCardsControllerEffect(1), true
         ));
     }
 

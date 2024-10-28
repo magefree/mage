@@ -33,7 +33,7 @@ public final class HeavyweightDemolisher extends CardImpl {
         // At the beginning of your upkeep, tap Heavyweight Demolisher unless you pay {3}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new TapSourceUnlessPaysEffect(new GenericManaCost(3)),
-                TargetController.YOU, false
+                false
         ));
 
         // Unearth {6}{R}{R}

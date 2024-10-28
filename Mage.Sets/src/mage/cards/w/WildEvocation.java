@@ -32,7 +32,7 @@ public final class WildEvocation extends CardImpl {
         // random from their hand. If it's a land card, the player puts it onto 
         // the battlefield. Otherwise, the player casts it without paying its mana cost if able.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new WildEvocationEffect(), TargetController.ANY, false));
+                TargetController.ANY, new WildEvocationEffect(), false));
     }
 
     private WildEvocation(final WildEvocation card) {

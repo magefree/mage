@@ -32,7 +32,7 @@ public final class Painiac extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, roll a six-sided die. Painiac gets +X/+0 until end of turn, where X is the result.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PainiacEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PainiacEffect(), false));
     }
 
     private Painiac(final Painiac card) {

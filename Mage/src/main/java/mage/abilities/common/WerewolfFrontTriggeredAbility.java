@@ -11,7 +11,7 @@ import mage.game.Game;
 public class WerewolfFrontTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
     public WerewolfFrontTriggeredAbility() {
-        super(new TransformSourceEffect(), TargetController.ANY, false);
+        super(TargetController.ANY, new TransformSourceEffect(), false);
     }
 
     private WerewolfFrontTriggeredAbility(final WerewolfFrontTriggeredAbility ability) {

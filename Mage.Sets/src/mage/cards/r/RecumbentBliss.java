@@ -30,7 +30,7 @@ public final class RecumbentBliss extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), true));
     }
 
     private RecumbentBliss(final RecumbentBliss card) {

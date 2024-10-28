@@ -37,7 +37,7 @@ public final class OutpostSiege extends CardImpl {
 
         // * Khans - At the beginning of your upkeep, exile the top card of your library. Until end of turn, you may play that card.
         this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), false),
                 new ModeChoiceSourceCondition("Khans"),
                 ruleTrigger1));
 

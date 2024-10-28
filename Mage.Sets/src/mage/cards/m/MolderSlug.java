@@ -31,7 +31,7 @@ public final class MolderSlug extends CardImpl {
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, "that player"), TargetController.ANY, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new SacrificeEffect(filter, 1, "that player"), false);
         this.addAbility(ability);
     }
 

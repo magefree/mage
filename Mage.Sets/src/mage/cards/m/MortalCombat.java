@@ -25,7 +25,7 @@ public final class MortalCombat extends CardImpl {
 
         // At the beginning of your upkeep, if twenty or more creature cards are in your graveyard, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), false),
                 new TwentyGraveyardCreatureCondition(),
                 "At the beginning of your upkeep, if twenty or more creature cards are in your graveyard, you win the game."));
     }

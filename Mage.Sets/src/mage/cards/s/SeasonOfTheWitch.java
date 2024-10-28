@@ -39,7 +39,7 @@ public final class SeasonOfTheWitch extends CardImpl {
         // At the beginning of your upkeep, sacrifice Season of the Witch unless you pay 2 life.
         Cost cost = new PayLifeCost(2);
         cost.setText("2 life");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(cost), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(cost), false));
 
         // At the beginning of the end step, destroy all untapped creatures that didn't attack this turn, except for creatures that couldn't attack.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new SeasonOfTheWitchEffect(), TargetController.ANY, false);

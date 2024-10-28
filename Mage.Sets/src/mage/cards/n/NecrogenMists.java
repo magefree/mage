@@ -20,7 +20,7 @@ public final class NecrogenMists extends CardImpl {
 
 
         // At the beginning of each player's upkeep, that player discards a card.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(1), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new DiscardTargetEffect(1), false));
     }
 
     private NecrogenMists(final NecrogenMists card) {

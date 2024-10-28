@@ -39,7 +39,7 @@ public final class GlintSleeveSiphoner extends CardImpl {
         // At the beginning of your upkeep, you may pay {E}{E}. If you do, draw a card and you lose 1 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1).setText("you draw a card"), new PayEnergyCost(2)
-        ).addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and")), TargetController.YOU, false));
+        ).addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and")), false));
     }
 
     private GlintSleeveSiphoner(final GlintSleeveSiphoner card) {

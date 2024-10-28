@@ -37,7 +37,7 @@ public final class NutCollector extends CardImpl {
 
         // At the beginning of your upkeep, you may create a 1/1 green Squirrel creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new SquirrelToken()), TargetController.YOU, true
+                new CreateTokenEffect(new SquirrelToken()), true
         ));
 
         // Threshold - Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard.

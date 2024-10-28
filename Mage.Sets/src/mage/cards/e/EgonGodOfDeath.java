@@ -48,7 +48,7 @@ public final class EgonGodOfDeath extends ModalDoubleFacedCard {
         effect.addOtherwiseEffect(new DrawCardSourceControllerEffect(1));
         effect.setText("exile two cards from your graveyard. If you can't, sacrifice {this} and draw a card.");
         this.getLeftHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
-                effect, TargetController.YOU, false, false
+                effect, false, false
         ));
 
         // 2.
@@ -56,7 +56,7 @@ public final class EgonGodOfDeath extends ModalDoubleFacedCard {
         // Legendary Artifact
         // At the beginning of your upkeep, mill a card.
         this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new MillCardsControllerEffect(1), TargetController.YOU, false, false
+                new MillCardsControllerEffect(1), false, false
         ));
 
         // {2}{B}, {T}, Exile a creature card from your graveyard: Draw a card

@@ -26,7 +26,7 @@ public final class RelicRobberToken extends TokenImpl {
         ));
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(
                 1, "this creature"
-        ), TargetController.YOU, false));
+        ), false));
     }
 
     private RelicRobberToken(final RelicRobberToken token) {

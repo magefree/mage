@@ -25,7 +25,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.SquirrelToken;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -49,7 +48,6 @@ public final class Chitterspitter extends CardImpl {
                         new AddCountersSourceEffect(CounterType.ACORN.createInstance()),
                         new SacrificeTargetCost(filter)
                 ),
-                TargetController.YOU,
                 false
         ));
 

@@ -41,7 +41,6 @@ public class MasterOfCeremonies extends CardImpl {
         // For each player who chose secrets, you and that player each draw a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new MasterOfCeremoniesChoiceEffect(),
-                TargetController.YOU,
                 false)
         );
     }
