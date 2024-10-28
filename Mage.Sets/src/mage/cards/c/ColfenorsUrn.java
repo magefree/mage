@@ -61,7 +61,7 @@ class ColfenorsUrnEffect extends OneShotEffect {
 
     ColfenorsUrnEffect() {
         super(Outcome.PutCreatureInPlay);
-        this.staticText = "If you do, return those cards to the battlefield under their owner's control";
+        this.staticText = "sacrifice it. If you do, return those cards to the battlefield under their owner's control";
     }
 
     private ColfenorsUrnEffect(final ColfenorsUrnEffect effect) {
@@ -108,6 +108,6 @@ class ColfenorsUrnCondition implements Condition {
 
     @Override
     public String toString() {
-        return "if three or more cards have been exiled with Colfenor's Urn, sacrifice it.";
+        return "if three or more cards have been exiled with {this}";
     }
 }

@@ -36,12 +36,12 @@ public final class ForebodingStatue extends CardImpl {
         ability.addEffect(new AddCountersSourceEffect(CounterType.OMEN.createInstance()));
         this.addAbility(ability);
 
-        // At the beginning of your end step, if there are three or more omen counters on Foreboding Statue, uptap it, then transform it.
+        // At the beginning of your end step, if there are three or more omen counters on Foreboding Statue, untap it, then transform it.
         this.addAbility(new TransformAbility());
         ability = new BeginningOfEndStepTriggeredAbility(
                 TargetController.YOU, new UntapSourceEffect().setText("untap it,"),
                 false, new SourceHasCounterCondition(CounterType.OMEN, 3)
-        ).setTriggerPhrase("At the beginning of your end step, if there are three or more omen counters on {this}, ");
+        );
         ability.addEffect(new TransformSourceEffect().setText("then transform it"));
         this.addAbility(ability);
     }
