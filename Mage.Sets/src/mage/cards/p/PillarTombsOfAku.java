@@ -30,7 +30,7 @@ public final class PillarTombsOfAku extends CardImpl {
 
         // At the beginning of each player's upkeep, that player may sacrifice a creature. If that player doesn't, they lose 5 life and you sacrifice Pillar Tombs of Aku.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.ANY, new PillarTombsOfAkuEffect(),
+                TargetController.EACH_PLAYER, new PillarTombsOfAkuEffect(),
                 false
         ));
     }

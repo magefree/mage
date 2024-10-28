@@ -20,7 +20,7 @@ public final class CopperTablet extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new DamageTargetEffect(1, true, "that player"), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new DamageTargetEffect(1, true, "that player"), false));
     }
 
     private CopperTablet(final CopperTablet card) {

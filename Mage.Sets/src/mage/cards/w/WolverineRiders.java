@@ -42,7 +42,7 @@ public final class WolverineRiders extends CardImpl {
 
         // At the beginning of each upkeep, create a 1/1 green Elf Warrior creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.EACH_PLAYER, new CreateTokenEffect(new ElfWarriorToken()), false
+                TargetController.ANY, new CreateTokenEffect(new ElfWarriorToken()), false
         ));
 
         // Whenever another Elf you control enters, you gain life equal to its toughness.

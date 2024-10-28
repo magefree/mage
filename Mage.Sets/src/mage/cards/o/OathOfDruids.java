@@ -31,7 +31,7 @@ public final class OathOfDruids extends CardImpl {
         // At the beginning of each player's upkeep, that player chooses target player who controls more creatures than they do and is their opponent.
         // The first player may reveal cards from the top of their library until they reveal a creature card.
         // If they do, that player puts that card onto the battlefield and all other cards revealed this way into their graveyard.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new OathOfDruidsEffect(), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new OathOfDruidsEffect(), false).withTargetPointerSet(false);
         ability.setTargetAdjuster(OathOfDruidsAdjuster.instance);
         this.addAbility(ability);
     }

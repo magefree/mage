@@ -54,6 +54,8 @@ public class BeginningOfUpkeepTriggeredAbility extends AtStepTriggeredAbility {
         switch (targetController) {
             case YOU:
                 return "At the beginning of your upkeep, ";
+            case NOT_YOU:
+                return "At the beginning of each other player's upkeep, ";
             case OPPONENT:
                 return "At the beginning of each opponent's upkeep, ";
             case ANY:

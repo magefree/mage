@@ -44,7 +44,7 @@ public final class MidnightClock extends CardImpl {
 
         // At the beginning of each upkeep, put an hour counter on Midnight Clock.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.EACH_PLAYER, new AddCountersSourceEffect(CounterType.HOUR.createInstance()), false
+                TargetController.ANY, new AddCountersSourceEffect(CounterType.HOUR.createInstance()), false
         ));
 
         // When the twelfth hour counter is put on Midnight Clock, shuffle your hand and graveyard into your library, then draw seven cards. Exile Midnight Clock.

@@ -36,7 +36,7 @@ public final class DreamTides extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, StaticFilters.FILTER_PERMANENT_CREATURES)));
 
         // At the beginning of each player's upkeep, that player may choose any number of tapped nongreen creatures they control and pay {2} for each creature chosen this way. If the player does, untap those creatures.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new DreamTidesEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new DreamTidesEffect(), false));
     }
 
     private DreamTides(final DreamTides card) {

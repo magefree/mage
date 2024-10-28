@@ -25,7 +25,7 @@ public final class PowerSurge extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}");
 
         // At the beginning of each player's upkeep, Power Surge deals X damage to that player, where X is the number of untapped lands they controlled at the beginning of this turn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new PowerSurgeDamageEffect(), false), new PowerSurgeWatcher());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new PowerSurgeDamageEffect(), false), new PowerSurgeWatcher());
     }
 
     private PowerSurge(final PowerSurge card) {

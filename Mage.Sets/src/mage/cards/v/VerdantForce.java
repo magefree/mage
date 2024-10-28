@@ -26,7 +26,7 @@ public final class VerdantForce extends CardImpl {
         this.toughness = new MageInt(7);
 
         // At the beginning of each upkeep, create a 1/1 green Saproling creature token.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new CreateTokenEffect(new SaprolingToken()), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new CreateTokenEffect(new SaprolingToken()), false));
     }
 
     private VerdantForce(final VerdantForce card) {

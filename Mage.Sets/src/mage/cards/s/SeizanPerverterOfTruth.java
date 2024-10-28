@@ -34,7 +34,7 @@ public final class SeizanPerverterOfTruth extends CardImpl {
         // At the beginning of each player's upkeep, that player loses 2 life and draws two cards.
         Effect effect = new LoseLifeTargetEffect(2);
         effect.setText("that player loses 2 life");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, effect, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, effect, false);
         effect = new DrawCardTargetEffect(2);
         effect.setText("and draws two cards");
         ability.addEffect(effect);

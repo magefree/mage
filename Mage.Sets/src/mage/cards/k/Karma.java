@@ -27,7 +27,7 @@ public final class Karma extends CardImpl {
 
 
         // At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps they control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new KarmaDamageTargetEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new KarmaDamageTargetEffect(), false));
     }
 
     private Karma(final Karma card) {
