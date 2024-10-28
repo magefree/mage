@@ -10,11 +10,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -44,7 +42,7 @@ public final class DreadfeastDemon extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoIfCostPaid(
                 new CreateTokenCopySourceEffect(),
                 new SacrificeTargetCost(filter), null, false
-        ), TargetController.YOU, false));
+        )));
     }
 
     private DreadfeastDemon(final DreadfeastDemon card) {

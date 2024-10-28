@@ -30,7 +30,7 @@ public final class PossessedPortal extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PossessedPortalReplacementEffect()));
         
         // At the beginning of each end step, each player sacrifices a permanent unless they discard a card.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new PossessedPortalEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new PossessedPortalEffect(), false));
     }
 
     private PossessedPortal(final PossessedPortal card) {

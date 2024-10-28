@@ -33,7 +33,7 @@ public final class StoneshakerShaman extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of each player's end step, that player sacrifices an untapped land.
-         this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeEffect(filter, 1, "that player"), TargetController.EACH_PLAYER, false));
+         this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.EACH_PLAYER, new SacrificeEffect(filter, 1, "that player"), false));
     }
 
     private StoneshakerShaman(final StoneshakerShaman card) {

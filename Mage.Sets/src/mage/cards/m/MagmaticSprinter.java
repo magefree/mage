@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
@@ -48,8 +47,7 @@ public final class MagmaticSprinter extends CardImpl {
                 new DoUnlessControllerPaysEffect(
                         new ReturnToHandSourceEffect(true),
                         new RemoveCountersSourceCost(CounterType.OIL.createInstance(2))
-                ).setText("return {this} to its owner's hand unless you remove two oil counters from it"),
-                TargetController.YOU, false
+                ).setText("return {this} to its owner's hand unless you remove two oil counters from it")
         ));
     }
 

@@ -56,7 +56,7 @@ public final class CleopatraExiledPharaoh extends CardImpl {
         // Allies -- At the beginning of your end step, put a +1/+1 counter on each of up to two other target legendary creatures.
         // Based on Angelic Quartermaster
         Ability ability = new BeginningOfEndStepTriggeredAbility(new AddCountersTargetEffect(
-                CounterType.P1P1.createInstance()), TargetController.YOU, false).withFlavorWord("Allies");
+                CounterType.P1P1.createInstance())).withFlavorWord("Allies");
         ability.addTarget(new TargetPermanent(0, 2, filter));
         this.addAbility(ability);
 

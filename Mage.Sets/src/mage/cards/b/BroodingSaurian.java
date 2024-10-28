@@ -33,7 +33,7 @@ public final class BroodingSaurian extends CardImpl {
 
         // At the beginning of each end step, each player gains control of all nontoken permanents they own.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new GainControlAllOwnedEffect(filter), TargetController.ANY, false
+                TargetController.ANY, new GainControlAllOwnedEffect(filter), false
         ));
     }
 

@@ -55,7 +55,7 @@ public final class Uchuulon extends CardImpl {
 
         // Horrific Symbiosis — At the beginning of your end step, exile up to one target creature card from an opponent's graveyard. If you, create a token that's a copy of Uchuulon.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new UchuulonEffect(), TargetController.YOU, false
+                new UchuulonEffect()
         );
         ability.addTarget(new TargetCardInOpponentsGraveyard(
                 0, 1, StaticFilters.FILTER_CARD_CREATURE

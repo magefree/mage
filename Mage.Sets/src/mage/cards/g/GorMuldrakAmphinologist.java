@@ -51,7 +51,7 @@ public final class GorMuldrakAmphinologist extends CardImpl {
 
         // At the beginning of your end step, each player who controls the fewest creatures creates a 4/3 blue Salamander Warrior creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new GorMuldrakAmphinologistEffect(), TargetController.YOU, false
+                new GorMuldrakAmphinologistEffect()
         ));
     }
 

@@ -12,7 +12,6 @@ import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -34,8 +33,7 @@ public final class MagmaticCore extends CardImpl {
                 new DamageMultiEffect(value)
                         .setText("{this} deals X damage divided as you choose "
                                 + "among any number of target creatures,"
-                                + " where X is the number of age counters on it."),
-                TargetController.YOU, false
+                                + " where X is the number of age counters on it.")
         );
         ability.addTarget(new TargetCreaturePermanentAmount(value));
         this.addAbility(ability);

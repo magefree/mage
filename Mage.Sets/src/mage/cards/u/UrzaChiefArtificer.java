@@ -54,7 +54,7 @@ public final class UrzaChiefArtificer extends CardImpl {
 
         // At the beginning of your end step, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new KarnConstructToken()), TargetController.YOU, false
+                new CreateTokenEffect(new KarnConstructToken())
         ));
     }
 

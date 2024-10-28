@@ -28,7 +28,7 @@ public final class ViashinoCutthroat extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // At the beginning of the end step, return Viashino Cutthroat to its owner's hand.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true), TargetController.NEXT, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.NEXT, new ReturnToHandSourceEffect(true), false));
     }
 
     private ViashinoCutthroat(final ViashinoCutthroat card) {

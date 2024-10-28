@@ -45,7 +45,7 @@ public final class Octomancer extends CardImpl {
 
         // At the beginning of each end step, create a token that's a copy of target creature token that entered the battlefield this turn.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenCopyTargetEffect(), TargetController.ANY, false
+                TargetController.ANY, new CreateTokenCopyTargetEffect(), false
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

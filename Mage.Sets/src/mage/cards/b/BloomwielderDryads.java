@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -36,7 +35,7 @@ public final class BloomwielderDryads extends CardImpl {
 
         // At the beginning of your end step, put a +1/+1 counter on target creature you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -39,7 +38,7 @@ public final class PromiseOfTomorrow extends CardImpl {
         ));
 
         // At the beginning of each end step, if you control no creatures, sacrifice Promise of Tomorrow and return all cards exiled with it to the battlefield under your control.
-        BeginningOfEndStepTriggeredAbility returnAbility = new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false);
+        BeginningOfEndStepTriggeredAbility returnAbility = new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new SacrificeSourceEffect(), false);
         returnAbility.addEffect(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 returnAbility, condition, "At the beginning of each end step, if you control no creatures, " +

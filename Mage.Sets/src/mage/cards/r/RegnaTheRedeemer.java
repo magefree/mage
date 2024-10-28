@@ -45,8 +45,7 @@ public final class RegnaTheRedeemer extends CardImpl {
         // At the beginning of each end step, if your team gained life this turn, create two 1/1 white Warrior creature tokens.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new WarriorToken(), 2),
-                        TargetController.ANY,
+                        TargetController.ANY, new CreateTokenEffect(new WarriorToken(), 2),
                         false
                 ),
                 new RegnaTheRedeemerCondition(),

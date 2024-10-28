@@ -29,7 +29,7 @@ public final class SireOfInsanity extends CardImpl {
 
         // At the beginning of each end step, each player discards their hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new SireOfInsanityEffect(), TargetController.ANY, false
+                TargetController.ANY, new SireOfInsanityEffect(), false
         ));
     }
 

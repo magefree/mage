@@ -48,8 +48,7 @@ public final class LitaMechanicalEngineer extends CardImpl {
         // At the beginning of your end step, untap each other artifact creature you control.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new UntapAllEffect(filter)
-                        .setText("untap each other artifact creature you control"),
-                TargetController.YOU, false
+                        .setText("untap each other artifact creature you control")
         ));
 
         // {3}{W}, {T}: Create a 5/5 colorless Vehicle artifact token named Zeppelin with flying and crew 3.

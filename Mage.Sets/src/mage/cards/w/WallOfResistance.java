@@ -40,8 +40,8 @@ public final class WallOfResistance extends CardImpl {
         // At the beginning of each end step, if Wall of Resistance was dealt damage this turn, put a +0/+1 counter on it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P0P1.createInstance()),
-                        TargetController.ANY, false
+                        TargetController.ANY, new AddCountersSourceEffect(CounterType.P0P1.createInstance()),
+                        false
                 ), WallOfResistanceCondition.instance, "At the beginning of each end step, " +
                 "if {this} was dealt damage this turn, put a +0/+1 counter on it."
         ));

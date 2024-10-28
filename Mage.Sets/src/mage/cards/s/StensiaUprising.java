@@ -17,7 +17,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.RedHumanToken;
 import mage.target.common.TargetAnyTarget;
@@ -48,7 +47,7 @@ public final class StensiaUprising extends CardImpl {
         );
         reflexiveTrigger.addTarget(new TargetAnyTarget());
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new RedHumanToken()), TargetController.YOU, false
+                new CreateTokenEffect(new RedHumanToken())
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new DoWhenCostPaid(reflexiveTrigger, new SacrificeSourceCost(), "Sacrifice {this}?"),

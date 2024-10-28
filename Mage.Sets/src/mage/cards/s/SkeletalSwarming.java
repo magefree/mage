@@ -20,7 +20,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -59,7 +58,7 @@ public final class SkeletalSwarming extends CardImpl {
                         new CreateTokenEffect(new SkeletonToken(), 1, true, false),
                         MorbidCondition.instance, "create a tapped 1/1 black Skeleton creature token. " +
                         "If a creature died this turn, create two of those tokens instead"
-                ), TargetController.YOU, false
+                )
         ).addHint(MorbidHint.instance));
     }
 

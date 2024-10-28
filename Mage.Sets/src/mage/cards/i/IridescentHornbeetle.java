@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -38,7 +37,7 @@ public final class IridescentHornbeetle extends CardImpl {
         // At the beginning of your end step, create a 1/1 green Insect creature token for each +1/+1 counter you've put on creatures under your control this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(
                 new InsectToken(), IridescentHornbeetleValue.instance
-        ), TargetController.YOU, false), new IridescentHornbeetleWatcher());
+        )), new IridescentHornbeetleWatcher());
     }
 
     private IridescentHornbeetle(final IridescentHornbeetle card) {

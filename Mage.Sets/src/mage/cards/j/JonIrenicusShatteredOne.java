@@ -50,7 +50,7 @@ public final class JonIrenicusShatteredOne extends CardImpl {
 
         // At the beginning of your end step, target opponent gains control of up to one target creature you control. Put two +1/+1 counters on it and tap it.
         // It's goaded for the rest of the game and it gains “This creature can't be sacrificed.”
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new JonIrenicusShatteredOneEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new JonIrenicusShatteredOneEffect());
         ability.addTarget(new TargetOpponent());
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1));
         this.addAbility(ability);

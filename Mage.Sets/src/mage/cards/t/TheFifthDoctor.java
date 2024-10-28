@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -48,8 +47,7 @@ public final class TheFifthDoctor extends CardImpl {
 
         // Peaceful Coexistence -- At the beginning of your end step, put a +1/+1 counter on each creature you control that didn't attack or enter the battlefield this turn. Untap those creatures.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter),
-                TargetController.YOU, false
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)
         );
         ability.addEffect(new UntapAllEffect(filter).setText("Untap those creatures"));
         this.addAbility(ability.withFlavorWord("Peaceful Coexistence"));

@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -55,7 +54,7 @@ public final class CelestineTheLivingSaint extends CardImpl {
         // Healing Tears -- At the beginning of your end step, return target creature card with mana value X or less from your graveyard to the battlefield, where X is the amount of life you gained this turn.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect()
                 .setText("return target creature card with mana value X or less from your graveyard to the battlefield, " +
-                        "where X is the amount of life you gained this turn"), TargetController.YOU, false);
+                        "where X is the amount of life you gained this turn"));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(
                 ability.withFlavorWord("Healing Tears")

@@ -10,7 +10,6 @@ import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -31,7 +30,7 @@ public final class PsychicVortex extends CardImpl {
         // At the beginning of your end step, sacrifice a land and discard your hand.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new SacrificeControllerEffect(
                 StaticFilters.FILTER_LAND, 1, null
-        ), TargetController.YOU, false);
+        ));
         ability.addEffect(new DiscardHandControllerEffect().concatBy("and"));
         this.addAbility(ability);
     }

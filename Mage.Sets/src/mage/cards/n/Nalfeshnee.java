@@ -105,7 +105,7 @@ enum NalfeshneeApplier implements StackObjectCopyApplier {
     public void modifySpell(StackObject copiedSpell, Game game) {
         Spell spell = (Spell) copiedSpell;
         spell.addAbilityForCopy(HasteAbility.getInstance());
-        spell.addAbilityForCopy(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false));
+        spell.addAbilityForCopy(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new SacrificeSourceEffect(), false));
     }
 
     @Override

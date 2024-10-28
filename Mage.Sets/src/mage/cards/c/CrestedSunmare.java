@@ -44,8 +44,8 @@ public final class CrestedSunmare extends CardImpl {
         // At the beginning of each end step, if you gained life this turn, create a 5/5 white Horse creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new CrestedSunmareToken()),
-                        TargetController.ANY, false
+                        TargetController.ANY, new CreateTokenEffect(new CrestedSunmareToken()),
+                        false
                 ), new YouGainedLifeCondition(),
                 "At the beginning of each end step, if you gained life this turn, " +
                         "create a 5/5 white Horse creature token."

@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -32,7 +31,7 @@ public final class ReinforcedRonin extends CardImpl {
 
         // At the beginning of your end step, return Reinforced Ronin to its owner's hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ReturnToHandSourceEffect(), TargetController.YOU, false
+                new ReturnToHandSourceEffect()
         ));
 
         // Channel — {1}{R}, Discard Reinforced Ronin: Draw a card.

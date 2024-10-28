@@ -35,7 +35,7 @@ public final class FarTraveler extends CardImpl {
 
         // Commander creatures you own have "At the beginning of your end step, exile up to one target tapped creature you control, then return it to the battlefield under its owner's control."
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new ExileThenReturnTargetEffect(false, false), TargetController.YOU, false
+                new ExileThenReturnTargetEffect(false, false)
         );
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(

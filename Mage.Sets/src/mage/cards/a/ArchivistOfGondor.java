@@ -49,7 +49,7 @@ public final class ArchivistOfGondor extends CardImpl {
 
         // At the beginning of the monarch's end step, that player draws a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DrawCardTargetEffect(1), TargetController.MONARCH, false
+                TargetController.MONARCH, new DrawCardTargetEffect(1), false
         ));
     }
 

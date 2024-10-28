@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -46,7 +45,7 @@ public final class AshenReaper extends CardImpl {
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                         AshenReaperCondition.instance, "put a +1/+1 counter on {this} " +
                         "if a permanent was put into a graveyard from the battlefield this turn"
-                ), TargetController.YOU, false
+                )
         ));
     }
 

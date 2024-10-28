@@ -12,12 +12,10 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.PutCards;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -49,7 +47,7 @@ public final class DreamshaperShaman extends CardImpl {
                         new ManaCostsImpl<>("{2}{R}"),
                         new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_NON_LAND), "pay {2}{R} and sacrifice a nonland permanent"
                 )
-        ), TargetController.YOU, false));
+        )));
     }
 
     private DreamshaperShaman(final DreamshaperShaman card) {

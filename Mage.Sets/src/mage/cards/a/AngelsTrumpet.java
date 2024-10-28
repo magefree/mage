@@ -30,7 +30,7 @@ public final class AngelsTrumpet extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_CREATURES)));
 
         // At the beginning of each player's end step, tap all untapped creatures that player controls that didn't attack this turn. Angel's Trumpet deals damage to the player equal to the number of creatures tapped this way.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new AngelsTrumpetTapEffect(), TargetController.EACH_PLAYER, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.EACH_PLAYER, new AngelsTrumpetTapEffect(), false));
     }
 
     private AngelsTrumpet(final AngelsTrumpet card) {

@@ -1,12 +1,10 @@
 package mage.cards.t;
 
-import java.util.List;
 import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -20,11 +18,8 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.Targets;
 import mage.target.common.*;
-import mage.target.targetpointer.FixedTarget;
-import mage.util.functions.EmptyCopyApplier;
 
 /**
  *
@@ -46,7 +41,7 @@ public final class TheAnimus extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // At the beginning of your end step, exile up to one target legendary creature card from a graveyard with a memory counter on it.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new TheAnimusEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new TheAnimusEffect());
         ability.addTarget(new TargetCardInGraveyard(0, 1, filter));
         this.addAbility(ability);
 

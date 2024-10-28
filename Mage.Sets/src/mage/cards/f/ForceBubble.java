@@ -21,7 +21,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 
 /**
@@ -40,7 +39,7 @@ public final class ForceBubble extends CardImpl {
         this.addAbility(new ForceBubbleStateTriggeredAbility());
 
         // At the beginning of each end step, remove all depletion counters from Force Bubble.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new RemoveAllCountersSourceEffect(CounterType.DEPLETION), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new RemoveAllCountersSourceEffect(CounterType.DEPLETION), false));
     }
 
     private ForceBubble(final ForceBubble card) {

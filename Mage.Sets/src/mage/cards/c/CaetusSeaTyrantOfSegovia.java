@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -47,7 +46,7 @@ public final class CaetusSeaTyrantOfSegovia extends CardImpl {
 
         // At the beginning of your end step, untap up to four target creatures.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new UntapTargetEffect(), TargetController.YOU, false
+                new UntapTargetEffect()
         );
         ability.addTarget(new TargetCreaturePermanent(0, 4));
         this.addAbility(ability);

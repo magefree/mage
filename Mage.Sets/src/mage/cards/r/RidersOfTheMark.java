@@ -24,7 +24,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.HumanSoldierToken;
 import mage.players.Player;
-import mage.watchers.common.AttackedThisTurnWatcher;
 
 import java.util.UUID;
 
@@ -61,9 +60,7 @@ public final class RidersOfTheMark extends CardImpl {
         // At the beginning of your end step, if Riders of the Mark attacked this turn, return it to its owner's hand. If you do, create a number of 1/1 white Human Soldier creature tokens equal to its toughness.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new RidersOfTheMarkEffect(),
-                        TargetController.YOU,
-                        false
+                        new RidersOfTheMarkEffect()
                 ),
                 AttackedThisTurnSourceCondition.instance,
                 "At the beginning of your end step, if {this} attacked this turn, "

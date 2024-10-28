@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ public final class SabertoothMauler extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()
-                        ), TargetController.YOU, false
+                        )
                 ), MorbidCondition.instance, "At the beginning of your end step, " +
                 "if a creature died this turn, put a +1/+1 counter on {this} and untap it."
         );

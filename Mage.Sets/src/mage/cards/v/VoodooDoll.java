@@ -18,7 +18,6 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -42,7 +41,7 @@ public final class VoodooDoll extends CardImpl {
         // At the beginning of your end step, if Voodoo Doll is untapped, destroy Voodoo Doll and it deals damage to you equal to the number of pin counters on it.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new DestroySourceEffect(), TargetController.YOU, false
+                        new DestroySourceEffect()
                 ), SourceTappedCondition.UNTAPPED, "At the beginning of your end step, " +
                 "if {this} is untapped, destroy {this} and it deals damage to you equal to the number of pin counters on it."
         );

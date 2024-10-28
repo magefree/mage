@@ -43,7 +43,7 @@ public final class NettlevineBlight extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted permanent has "At the beginning of your end step, sacrifice this permanent and attach Nettlevine Blight to a creature or land you control."
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new NettlevineBlightEffect(), TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new NettlevineBlightEffect(), false));
 
     }
 

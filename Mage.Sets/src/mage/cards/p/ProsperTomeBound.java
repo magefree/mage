@@ -36,7 +36,7 @@ public final class ProsperTomeBound extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new ExileTopXMayPlayUntilEffect(
                         1, Duration.UntilEndOfYourNextTurn
-                ), TargetController.YOU, false
+                )
         ).withFlavorWord("Mystic Arcanum"));
 
         // Pact Boon — Whenever you play a card from exile, create a Treasure token.

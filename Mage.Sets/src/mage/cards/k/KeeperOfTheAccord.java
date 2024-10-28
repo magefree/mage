@@ -45,16 +45,16 @@ public final class KeeperOfTheAccord extends CardImpl {
         // At the beginning of each opponent's end step, if that player controls more creatures than you, create a 1/1 white Soldier creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new SoldierToken()), TargetController.OPPONENT, false
+                        TargetController.OPPONENT, new CreateTokenEffect(new SoldierToken()), false
                 ), KeeperOfTheAccordCondition.CREATURES, "At the beginning of each opponent's end step, " +
                 "if that player controls more creatures than you, create a 1/1 white Soldier creature token."
         ));
 
         // At the beginning of each opponent's end step, if that player controls more lands than you, you may search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle your library.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new SearchLibraryPutInPlayEffect(
+                new BeginningOfEndStepTriggeredAbility(TargetController.OPPONENT, new SearchLibraryPutInPlayEffect(
                         new TargetCardInLibrary(filter), true
-                ), TargetController.OPPONENT, true),
+                ), true),
                 KeeperOfTheAccordCondition.LANDS, "At the beginning of each opponent's end step, " +
                 "if that player controls more lands than you, you may search your library for a basic Plains card, " +
                 "put it onto the battlefield tapped, then shuffle."

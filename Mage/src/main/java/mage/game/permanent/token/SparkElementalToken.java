@@ -24,7 +24,7 @@ public final class SparkElementalToken extends TokenImpl {
 
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new SacrificeSourceEffect(), false));
     }
 
     private SparkElementalToken(final SparkElementalToken token) {

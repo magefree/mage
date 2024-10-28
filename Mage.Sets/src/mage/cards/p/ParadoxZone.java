@@ -11,7 +11,6 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.permanent.token.FractalToken;
 
@@ -35,7 +34,7 @@ public final class ParadoxZone extends CardImpl {
 
         // At the beginning of your end step, double the number of growth counters on Paradox Zone. Then create a 0/0 blue and green Fractal creature token. Put X +1/+1 counters on it, where X is the number of growth counters on Paradox Zone.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new DoubleCountersSourceEffect(CounterType.GROWTH), TargetController.YOU, false
+                new DoubleCountersSourceEffect(CounterType.GROWTH)
         );
         Effect effect = FractalToken.getEffect(
                 xValue, "Put X +1/+1 counters on it, where X is the number of growth counters on {this}"

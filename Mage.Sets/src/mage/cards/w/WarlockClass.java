@@ -38,7 +38,7 @@ public final class WarlockClass extends CardImpl {
         // At the beginning of your end step, if a creature died this turn, each opponent loses 1 life.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new LoseLifeOpponentsEffect(1), TargetController.YOU, false
+                        new LoseLifeOpponentsEffect(1)
                 ), MorbidCondition.instance, "At the beginning of your end step, " +
                 "if a creature died this turn, each opponent loses 1 life."
         ).addHint(MorbidHint.instance));
@@ -56,7 +56,7 @@ public final class WarlockClass extends CardImpl {
         // At the beginning of your end step, each opponent loses life equal to the life they lost this turn.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(
                 new BeginningOfEndStepTriggeredAbility(
-                        new WarlockClassEffect(), TargetController.YOU, false
+                        new WarlockClassEffect()
                 ), 3
         )));
     }

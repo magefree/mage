@@ -54,8 +54,8 @@ public final class AshcoatOfTheShadowSwarm extends CardImpl {
 
         // At the beginning of your end step, you may mill four cards. If you do,
         // return up to two Rat creature cards from your graveyard to your hand.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new MillCardsControllerEffect(4), TargetController.YOU, true
+        Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.YOU,
+                new MillCardsControllerEffect(4), true
         );
         ability.addEffect(new AshcoatEffect());
         this.addAbility(ability);

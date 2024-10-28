@@ -32,8 +32,7 @@ public final class LudevicNecroAlchemist extends CardImpl {
 
         // At the beginning of each player's end step, that player may draw a card if a player other than you lost life this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new LudevicNecroAlchemistEffect(),
-                TargetController.EACH_PLAYER,
+                TargetController.EACH_PLAYER, new LudevicNecroAlchemistEffect(),
                 false)
                 .addHint(new ConditionHint(LudevicNecroAlchemistCondition.instance, "Player other than you lost life this turn")));
 

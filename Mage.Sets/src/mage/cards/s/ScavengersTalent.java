@@ -19,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
@@ -80,7 +79,7 @@ public final class ScavengersTalent extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(
                         new DoIfCostPaid(
                                 new ScavengersTalentEffect(), new SacrificeTargetCost(3, filter)
-                        ), TargetController.YOU, false
+                        )
                 ), 3
         )));
     }

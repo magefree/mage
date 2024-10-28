@@ -50,8 +50,7 @@ public final class XolatoyacTheSmilingFlood extends CardImpl {
         // At the beginning of your end step, untap each permanent you control with a counter on it.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new UntapAllEffect(filter)
-                        .setText("untap each permanent you control with a counter on it"),
-                TargetController.YOU, false
+                        .setText("untap each permanent you control with a counter on it")
         ));
     }
 

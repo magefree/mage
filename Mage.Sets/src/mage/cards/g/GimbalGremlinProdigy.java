@@ -44,7 +44,7 @@ public final class GimbalGremlinProdigy extends CardImpl {
 
         // At the beginning of your end step, create a 0/0 red Gremlin artifact creature token. Put X +1/+1 counters on it, where X is the number of differently named artifact tokens you control.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new GimbalGremlinProdigyEffect(), TargetController.YOU, false
+                new GimbalGremlinProdigyEffect()
         ));
     }
 

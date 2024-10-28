@@ -7,7 +7,6 @@ import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -21,7 +20,7 @@ public final class DoggedPursuit extends CardImpl {
 
         // At the beginning of your end step, each opponent loses 1 life and you gain 1 life.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new LoseLifeOpponentsEffect(1), TargetController.YOU, false
+                new LoseLifeOpponentsEffect(1)
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);

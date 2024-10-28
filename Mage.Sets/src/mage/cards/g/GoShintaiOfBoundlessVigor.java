@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -55,7 +54,7 @@ public final class GoShintaiOfBoundlessVigor extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoWhenCostPaid(
                 ability, new GenericManaCost(1), "Pay {1}?"
-        ), TargetController.YOU, false).addHint(hint));
+        )).addHint(hint));
     }
 
     private GoShintaiOfBoundlessVigor(final GoShintaiOfBoundlessVigor card) {

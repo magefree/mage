@@ -25,8 +25,8 @@ public final class Antagonism extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // At the beginning of each player's end step, Antagonism deals 2 damage to that player unless one of their opponents was dealt damage this turn.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ConditionalOneShotEffect(new DamageTargetEffect(2),
-                AntagonismCondition.instance, rule), TargetController.EACH_PLAYER, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.EACH_PLAYER, new ConditionalOneShotEffect(new DamageTargetEffect(2),
+                AntagonismCondition.instance, rule), false));
 
     }
 

@@ -25,7 +25,7 @@ public final class WoundReflection extends CardImpl {
 
 
         // At the beginning of each end step, each opponent loses life equal to the life they lost this turn.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new WoundReflectionEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new WoundReflectionEffect(), false));
     }
 
     private WoundReflection(final WoundReflection card) {

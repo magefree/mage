@@ -32,7 +32,7 @@ public final class FuriousRise extends CardImpl {
         // At the beginning of your end step, if you control a creature with power 4 or greater, exile the top card of your library.
         // You may play that card until you exile another card with Furious Rise.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                new FuriousRiseEffect(), TargetController.YOU, false), FerociousCondition.instance,
+                new FuriousRiseEffect()), FerociousCondition.instance,
                 "At the beginning of your end step, if you control a creature with power 4 or greater, exile the top card of your library. You may play that card until you exile another card with {this}."));
     }
 

@@ -37,7 +37,7 @@ public final class RoccoStreetChef extends CardImpl {
 
         // At the beginning of your end step, each player exiles the top card of their library. Until your next end step, each player may play the card they exiled this way.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new RoccoStreetChefEffect(), TargetController.YOU, false
+                new RoccoStreetChefEffect()
         ));
 
         // Whenever a player plays a land from exile or casts a spell from exile, you put a +1/+1 counter on target creature and create a Food token.

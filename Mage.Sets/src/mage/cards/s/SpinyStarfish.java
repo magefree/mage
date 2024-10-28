@@ -41,10 +41,9 @@ public final class SpinyStarfish extends CardImpl {
         this.addAbility(
                 new ConditionalInterveningIfTriggeredAbility(
                         new BeginningOfEndStepTriggeredAbility(
-                                new CreateTokenEffect(
+                                TargetController.ANY, new CreateTokenEffect(
                                         new StarfishToken(),
                                         new SpinyStarfishDynamicValue()),
-                                TargetController.ANY,
                                 false),
                         SpinyStarfishCondition.instance,
                         "At the beginning of each end step, if {this} regenerated this turn, create a 0/1 blue Starfish creature token for each time it regenerated this turn."),

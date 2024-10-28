@@ -32,9 +32,9 @@ public final class BlitzHellion extends CardImpl {
 
         // At the beginning of the end step, Blitz Hellion's owner shuffles it into their library.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ShuffleIntoLibrarySourceEffect()
+                TargetController.NEXT, new ShuffleIntoLibrarySourceEffect()
                         .setText("{this}'s owner shuffles it into their library."),
-                TargetController.NEXT, false
+                false
         ));
     }
 

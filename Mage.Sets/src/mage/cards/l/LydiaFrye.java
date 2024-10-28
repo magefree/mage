@@ -47,7 +47,7 @@ public final class LydiaFrye extends CardImpl {
 
         // At the beginning of your end step, surveil X, where X is the number of tapped Assassins you control.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new LydiaFryeEffect(), TargetController.YOU, false
+                new LydiaFryeEffect()
         ).addHint(LydiaFryeEffect.getHint()));
     }
 

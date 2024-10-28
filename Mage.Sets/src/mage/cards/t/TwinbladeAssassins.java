@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -30,7 +29,7 @@ public final class TwinbladeAssassins extends CardImpl {
         // At the beginning of your end step, if a creature died this turn, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1), TargetController.YOU, false
+                        new DrawCardSourceControllerEffect(1)
                 ), MorbidCondition.instance, "At the beginning of your end step, " +
                 "if a creature died this turn, draw a card."
         ).addHint(MorbidHint.instance));

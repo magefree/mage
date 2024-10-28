@@ -23,7 +23,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SlugToken;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -52,9 +51,9 @@ public final class ToxrillTheCorrosive extends CardImpl {
         this.toughness = new MageInt(7);
 
         // At the beginning of each end step, put a slime counter on each creature you don't control.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new AddCountersAllEffect(
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new AddCountersAllEffect(
                 CounterType.SLIME.createInstance(), StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL
-        ), TargetController.ANY, false));
+        ), false));
 
         // Creatures you don't control get -1/-1 for each slime counter on them.
         this.addAbility(new SimpleStaticAbility(new ToxrillTheCorrosiveEffect()));

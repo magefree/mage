@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -34,7 +33,7 @@ public final class SavageGorger extends CardImpl {
         // At the beginning of your upkeep, if an opponent lost life this turn, put a +1/+1 counter on Savage Gorger.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(
-                        CounterType.P1P1.createInstance()), TargetController.YOU, false
+                        CounterType.P1P1.createInstance())
                 ), OpponentsLostLifeCondition.instance, "At the beginning of your end step, " +
                 "if an opponent lost life this turn, put a +1/+1 counter on {this}."
         ).addHint(OpponentsLostLifeHint.instance));

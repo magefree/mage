@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class CrystalGolem extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your end step, Crystal Golem phases out.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new PhaseOutSourceEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new PhaseOutSourceEffect()));
     }
 
     private CrystalGolem(final CrystalGolem card) {

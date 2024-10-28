@@ -5,7 +5,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageAttachedControllerEffect;
@@ -15,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.permanent.token.GremlinToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
@@ -39,7 +37,7 @@ public final class GremlinInfestation extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your end step, Gremlin Infestation deals 2 damage to enchanted artifact's controller.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamageAttachedControllerEffect(2).setText("{this} deals 2 damage to enchanted artifact's controller"), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamageAttachedControllerEffect(2).setText("{this} deals 2 damage to enchanted artifact's controller")));
 
         // When enchanted artifact is put into a graveyard, create a 2/2 red Gremlin creature token.
         this.addAbility(new DiesAttachedTriggeredAbility(new CreateTokenEffect(new GremlinToken()), "enchanted artifact", false, false));

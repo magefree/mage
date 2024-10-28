@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.permanent.token.PowerstoneToken;
 
@@ -35,7 +34,7 @@ public final class GeologyEnthusiast extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new CreateTokenEffect(
                         new PowerstoneToken(), 1, true
-                ), TargetController.YOU, false
+                )
         ));
 
         // {6}: Draw a card and put a +1/+1 counter on Geology Enthusiast.

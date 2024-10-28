@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.PlayerAttackedWatcher;
 
@@ -26,7 +25,7 @@ public final class NavigatorsRuin extends CardImpl {
 
         // Raid - At the beginning of your end step, if you attacked with a creature this turm, target opponent puts the top four cards of their library into their graveyard.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                new MillCardsTargetEffect(4), TargetController.YOU, false),
+                new MillCardsTargetEffect(4)),
                 RaidCondition.instance,
                 "At the beginning of your end step, " +
                         "if you attacked this turn, target opponent mills four cards."

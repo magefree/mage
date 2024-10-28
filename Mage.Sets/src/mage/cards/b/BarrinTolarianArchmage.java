@@ -52,7 +52,7 @@ public final class BarrinTolarianArchmage extends CardImpl {
         // At the beginning of your end step, if a permanent was put into your hand from the battlefield this turn, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1), TargetController.YOU, false
+                        new DrawCardSourceControllerEffect(1)
                 ), BarrinTolarianArchmageCondition.instance, "At the beginning of your end step, " +
                 "if a permanent was put into your hand from the battlefield this turn, draw a card."
         ), new BarrinTolarianArchmageWatcher());

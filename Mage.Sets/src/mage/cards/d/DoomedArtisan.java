@@ -41,7 +41,7 @@ public final class DoomedArtisan extends CardImpl {
 
         // At the beginning of your end step, create a colorless Sculpture artifact creature token with "This creature's power and toughness are equal to the number of Sculptures you control"
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new DoomedArtisanToken()), TargetController.YOU, false)
+                new CreateTokenEffect(new DoomedArtisanToken()))
         );
     }
 

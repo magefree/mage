@@ -7,7 +7,6 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -23,7 +22,7 @@ public final class FlameBlitz extends CardImpl {
         // At the beginning of your end step, Flame Blitz deals 5 damage to each planeswalker.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamageAllEffect(
                 5, StaticFilters.FILTER_PERMANENT_PLANESWALKER
-        ), TargetController.YOU, false));
+        )));
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));

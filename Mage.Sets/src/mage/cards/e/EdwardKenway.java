@@ -47,7 +47,7 @@ public final class EdwardKenway extends CardImpl {
 
         // At the beginning of your end step, create a Treasure token for each tapped Assassin, Pirate, and/or Vehicle you control.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(
-                new TreasureToken(), new PermanentsOnBattlefieldCount(filter)), TargetController.YOU, false));
+                new TreasureToken(), new PermanentsOnBattlefieldCount(filter))));
 
         // Whenever a Vehicle you control deals combat damage to a player, look at the top card of that player's library, then exile it face down. You may play that card for as long as it remains exiled.
         this.addAbility(new DealsDamageToAPlayerAllTriggeredAbility(

@@ -45,7 +45,7 @@ public final class Bloodcurdler extends CardImpl {
         ));
         thresholdAbility.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new BeginningOfEndStepTriggeredAbility(
-                        new ExileCardFromOwnGraveyardControllerEffect(2), TargetController.YOU, false
+                        new ExileCardFromOwnGraveyardControllerEffect(2)
                 )), ThresholdCondition.instance,
                 "and has \"At the beginning of your end step, exile two cards from your graveyard.\""
         ));

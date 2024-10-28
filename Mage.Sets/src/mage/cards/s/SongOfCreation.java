@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -34,7 +33,7 @@ public final class SongOfCreation extends CardImpl {
 
         // At the beginning of your end step, discard your hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DiscardHandControllerEffect(), TargetController.YOU, false
+                new DiscardHandControllerEffect()
         ));
     }
 

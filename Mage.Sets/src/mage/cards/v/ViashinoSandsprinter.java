@@ -36,7 +36,7 @@ public final class ViashinoSandsprinter extends CardImpl {
 
         // At the beginning of the end step, return Viashino Sandsprinter to its owner's hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ReturnToHandSourceEffect(true), TargetController.NEXT, false
+                TargetController.NEXT, new ReturnToHandSourceEffect(true), false
         ));
 
         // Cycling {R}

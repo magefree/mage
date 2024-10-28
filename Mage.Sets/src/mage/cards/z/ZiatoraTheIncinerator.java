@@ -16,9 +16,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetAnyTarget;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
@@ -42,7 +40,7 @@ public final class ZiatoraTheIncinerator extends CardImpl {
 
         // At the beginning of your end step, you may sacrifice another creature. When you do, Ziatora, the Incinerator deals damage equal to that creature's power to any target and you create three Treasure tokens.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ZiatoraTheIncineratorEffect(), TargetController.YOU, false
+                new ZiatoraTheIncineratorEffect()
         ));
     }
 

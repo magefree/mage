@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
@@ -33,8 +32,7 @@ public final class PalantirOfOrthanc extends CardImpl {
 
         // At the beginning of your end step, put an influence counter on Palantir of Orthanc and scry 2. Then target opponent may have you draw a card. If that player doesn't, you mill X cards, where X is the number of influence counters on Palantir of Orthanc, and that player loses life equal to the total mana value of those cards.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.INFLUENCE.createInstance()),
-                TargetController.YOU, false
+                new AddCountersSourceEffect(CounterType.INFLUENCE.createInstance())
         );
         ability.addEffect(new ScryEffect(2, false).concatBy("and"));
         ability.addEffect(new PalantirOfOrthancEffect());

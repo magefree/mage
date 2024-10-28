@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.TargetController;
 import mage.game.permanent.token.GriffinToken;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -31,7 +30,7 @@ public final class GriffinAerie extends CardImpl {
         // At the beginning of your end step, if you gained 3 or more life this turn, create a 2/2 white Griffin creature token with flying.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new GriffinToken()), TargetController.YOU, false
+                        new CreateTokenEffect(new GriffinToken())
                 ), condition, "At the beginning of your end step, " +
                 "if you gained 3 or more life this turn, create a 2/2 white Griffin creature token with flying."
         ).addHint(hint), new PlayerGainedLifeWatcher());

@@ -15,8 +15,6 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
 
 import java.util.UUID;
@@ -40,7 +38,7 @@ public final class KethekCrucibleGoliath extends CardImpl {
         // until you reveal a nonlegendary creature card with lesser mana value, put it onto the battlefield,
         // then put the rest on the bottom of your library in a random order.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new KethekCrucibleGoliathEffect(), TargetController.YOU, false
+                new KethekCrucibleGoliathEffect()
         ));
     }
 

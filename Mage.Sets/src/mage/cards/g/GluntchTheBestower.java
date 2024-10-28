@@ -40,9 +40,7 @@ public final class GluntchTheBestower extends CardImpl {
 
         // At the beginning of your end step, choose a player. They put two +1/+1 counters on a creature they control. Choose a second player to draw a card. Then choose a third player to create two Treasure tokens.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-            new GluntchTheBestowerEffect(),
-            TargetController.YOU,
-            false
+                new GluntchTheBestowerEffect()
         ));
     }
 

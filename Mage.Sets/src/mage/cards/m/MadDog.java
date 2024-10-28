@@ -15,10 +15,8 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  * @author xenohedron
@@ -36,7 +34,7 @@ public final class MadDog extends CardImpl {
         // At the beginning of your end step, if Mad Dog didn't attack or come under your control this turn, sacrifice it.
         Condition condition = new InvertCondition(new OrCondition(AttackedThisTurnSourceCondition.instance, MadDogCondition.instance));
         Ability ability = new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                new SacrificeSourceEffect(), TargetController.YOU, false), condition,
+                new SacrificeSourceEffect()), condition,
                 "At the beginning of your end step, if {this} didn't attack or come under your control this turn, sacrifice it");
         this.addAbility(ability);
 

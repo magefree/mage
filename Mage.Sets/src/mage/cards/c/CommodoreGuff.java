@@ -49,7 +49,7 @@ public final class CommodoreGuff extends CardImpl {
 
         // At the beginning of your end step, put a loyalty counter on another target planeswalker you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.LOYALTY.createInstance()), TargetController.YOU, false
+                new AddCountersTargetEffect(CounterType.LOYALTY.createInstance())
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

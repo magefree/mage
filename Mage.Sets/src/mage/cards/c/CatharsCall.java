@@ -38,8 +38,7 @@ public final class CatharsCall extends CardImpl {
         ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new HumanToken()),
-                        TargetController.YOU, false
+                        new CreateTokenEffect(new HumanToken())
                 ), AttachmentType.AURA
         ).setText("and \"At the beginning of your end step, create a 1/1 white Human creature token.\""));
         this.addAbility(ability);

@@ -47,7 +47,7 @@ public final class ArchfiendOfDespair extends CardImpl {
         ));
 
         // At the beginning of each end step, each opponent loses life equal to the life that player lost this turn. (Damage causes loss of life.)
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ArchfiendOfDespairEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new ArchfiendOfDespairEffect(), false));
     }
 
     private ArchfiendOfDespair(final ArchfiendOfDespair card) {

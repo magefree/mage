@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
-import mage.constants.TargetController;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.PlayerAttackedWatcher;
 
@@ -32,7 +31,7 @@ public final class RaidersWake extends CardImpl {
 
         // Raid — At the beginning of your end step, if you attacked this turn, target opponent discards a card.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new DiscardTargetEffect(1), TargetController.YOU, false), RaidCondition.instance,
+                new BeginningOfEndStepTriggeredAbility(new DiscardTargetEffect(1)), RaidCondition.instance,
                 "At the beginning of your end step, if you attacked this turn, target opponent discards a card.");
         ability.addTarget(new TargetOpponent());
         ability.setAbilityWord(AbilityWord.RAID);

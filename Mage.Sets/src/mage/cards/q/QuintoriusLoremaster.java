@@ -68,7 +68,7 @@ public final class QuintoriusLoremaster extends CardImpl {
 
         // At the beginning of your end step, exile target noncreature, nonland card from your graveyard. Create a 3/2 red and white Spirit creature token.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new ExileTargetForSourceEffect(), TargetController.YOU, false
+                new ExileTargetForSourceEffect()
         );
         ability.addEffect(new CreateTokenEffect(new Spirit32Token()));
         ability.addTarget(new TargetCardInYourGraveyard(filter));

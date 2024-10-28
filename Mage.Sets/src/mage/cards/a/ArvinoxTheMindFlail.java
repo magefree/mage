@@ -53,7 +53,7 @@ public final class ArvinoxTheMindFlail extends CardImpl {
 
         // At the beginning of your end step, exile the bottom card of each opponent's library face down. For as long as those cards remain exiled, you may look at them, you may cast permanent spells from among them, and you may spend mana as though it were mana of any color to cast those spells.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ArvinoxTheMindFlailExileEffect(), TargetController.YOU, false
+                new ArvinoxTheMindFlailExileEffect()
         ));
     }
 

@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.SpiritToken;
 
@@ -47,7 +46,7 @@ public final class GoShintaiOfSharedPurpose extends CardImpl {
                 new DoIfCostPaid(
                         new CreateTokenEffect(new SpiritToken(), xValue),
                         new GenericManaCost(1)
-                ), TargetController.YOU, false
+                )
         ).addHint(hint));
     }
 

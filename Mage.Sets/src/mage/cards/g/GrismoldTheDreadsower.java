@@ -45,8 +45,7 @@ public final class GrismoldTheDreadsower extends CardImpl {
 
         // At the beginning of your end step, each player creates a 1/1 green Plant creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenAllEffect(new GrismoldPlantToken(), TargetController.EACH_PLAYER),
-                TargetController.YOU, false
+                new CreateTokenAllEffect(new GrismoldPlantToken(), TargetController.EACH_PLAYER)
         ));
 
         // Whenever a creature token dies, put a +1/+1 counter on Grismold, the Dreadsower.

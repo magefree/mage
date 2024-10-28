@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 
 import java.util.UUID;
@@ -33,7 +32,7 @@ public final class ChimilTheInnerSun extends CardImpl {
 
         // At the beginning of your end step, discover 5.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DiscoverEffect(5), TargetController.YOU, false
+                new DiscoverEffect(5)
         ));
     }
 

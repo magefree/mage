@@ -35,8 +35,8 @@ public final class OathOfLiliana extends CardImpl {
 
         // At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, create a 2/2 black Zombie creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new ZombieToken()),
-                TargetController.ANY, false), OathOfLilianaCondition.instance,
+                TargetController.ANY, new CreateTokenEffect(new ZombieToken()),
+                false), OathOfLilianaCondition.instance,
                 "At the beginning of each end step, if a planeswalker entered the battlefield under your control this turn, "
                         + "create a 2/2 black Zombie creature token."), new OathOfLilianaWatcher());
     }

@@ -40,7 +40,7 @@ public final class PlagueReaver extends CardImpl {
 
         // At the beginning of your end step, sacrifice each other creature you control.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new PlagueReaverSacrificeEffect(), TargetController.YOU, false
+                new PlagueReaverSacrificeEffect()
         ));
 
         // Discard two cards, Sacrifice Plague Reaver: Choose target opponent. Return Plague Reaver to the battlefield under that player's control at the beginning of their next upkeep.

@@ -35,7 +35,7 @@ public final class WestvaleCultLeader extends CardImpl {
                 .addHint(CreaturesYouControlHint.instance));
 
         // At the beginning of your end step, create a 1/1 white and black Human Cleric creature token.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new HumanClericToken()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new HumanClericToken())));
     }
 
     private WestvaleCultLeader(final WestvaleCultLeader card) {

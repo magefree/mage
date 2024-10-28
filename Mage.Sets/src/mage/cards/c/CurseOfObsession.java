@@ -44,8 +44,8 @@ public final class CurseOfObsession extends CardImpl {
 
         // At the beginning of enchanted player's end step, that player discards their hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DiscardHandTargetEffect(),
-                TargetController.ENCHANTED, false
+                TargetController.ENCHANTED, new DiscardHandTargetEffect(),
+                false
         ));
     }
 

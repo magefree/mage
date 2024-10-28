@@ -71,7 +71,7 @@ public final class RodolfDuskbringer extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoWhenCostPaid(
                 ability, new ManaCostsImpl<>("{1}{W/B}"), "Pay {1}{W/B}?"
-        ), TargetController.YOU, false).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        )).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private RodolfDuskbringer(final RodolfDuskbringer card) {

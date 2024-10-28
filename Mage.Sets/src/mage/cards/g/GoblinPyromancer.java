@@ -40,7 +40,7 @@ public final class GoblinPyromancer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(3, 0, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, false)));
 
         // At the beginning of the end step, destroy all Goblins.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DestroyAllEffect(filterPermanent, false), TargetController.NEXT, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.NEXT, new DestroyAllEffect(filterPermanent, false), false));
     }
 
     private GoblinPyromancer(final GoblinPyromancer card) {

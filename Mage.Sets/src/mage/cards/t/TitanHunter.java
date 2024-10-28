@@ -21,7 +21,6 @@ import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -43,7 +42,7 @@ public final class TitanHunter extends CardImpl {
         // At the beginning of each player's end step, if no creatures died this turn, Titan Hunter deals 4 damage to that player.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new TitanHunterEffect(), TargetController.EACH_PLAYER, false
+                        TargetController.EACH_PLAYER, new TitanHunterEffect(), false
                 ), condition, "At the beginning of each player's end step, " +
                 "if no creatures died this turn, {this} deals 4 damage to that player."
         ).addHint(MorbidHint.instance));

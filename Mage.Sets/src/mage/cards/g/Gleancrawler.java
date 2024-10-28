@@ -43,8 +43,7 @@ public final class Gleancrawler extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new ReturnToHandFromGraveyardAllEffect(filter, TargetController.YOU)
                         .setText("return to your hand all creature cards in your graveyard " +
-                                "that were put there from the battlefield this turn"),
-                TargetController.YOU, false
+                                "that were put there from the battlefield this turn")
         ), new CardsPutIntoGraveyardWatcher());
     }
 

@@ -40,7 +40,7 @@ public final class NilsDisciplineEnforcer extends CardImpl {
 
         // At the beginning of your end step, for each player, put a +1/+1 counter on up to one target creature that player controls.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new NilsDisciplineEnforcerCountersEffect(), TargetController.YOU, false
+                new NilsDisciplineEnforcerCountersEffect()
         );
         ability.setTargetAdjuster(NilsDisciplineEnforcerAdjuster.instance);
         this.addAbility(ability);

@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -42,7 +41,7 @@ public final class AtraxaPraetorsVoice extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // At the beginning of your end step, proliferate.  (You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ProliferateEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ProliferateEffect()));
     }
 
     private AtraxaPraetorsVoice(final AtraxaPraetorsVoice card) {

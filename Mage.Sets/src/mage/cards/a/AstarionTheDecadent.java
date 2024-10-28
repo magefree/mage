@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.PlayerGainedLifeWatcher;
@@ -52,8 +51,7 @@ public final class AstarionTheDecadent extends CardImpl {
         // • Feed — Target opponent loses life equal to the amount of life they lost this turn.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new LoseLifeTargetEffect(AstarionTheDecadentValue.instance)
-                        .setText("target opponent loses life equal to the amount of life they lost this turn"),
-                TargetController.YOU, false
+                        .setText("target opponent loses life equal to the amount of life they lost this turn")
         );
         ability.addTarget(new TargetOpponent());
         ability.withFirstModeFlavorWord("Feed");

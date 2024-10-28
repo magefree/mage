@@ -37,8 +37,8 @@ public final class InfernoHellion extends CardImpl {
         // At the beginning of each end step, if Inferno Hellion attacked or blocked this turn, its owner shuffles it into their library.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new ShuffleIntoLibrarySourceEffect(),
-                        TargetController.ANY, false
+                        TargetController.ANY, new ShuffleIntoLibrarySourceEffect(),
+                        false
                 ),
                 InfernoHellionCondition.instance,
                 "At the beginning of each end step, "

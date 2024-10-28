@@ -38,8 +38,8 @@ public final class Soulherder extends CardImpl {
         this.addAbility(new SoulherderTriggeredAbility());
 
         // At the beginning of your end step, you may exile another target creature you control, then return that card to the battlefield under its owner's control.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new ExileThenReturnTargetEffect(false, true), TargetController.YOU, true
+        Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.YOU,
+                new ExileThenReturnTargetEffect(false, true), true
         );
         ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);

@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
@@ -45,9 +44,8 @@ public final class BattleOfHooverDam extends CardImpl {
         // from your graveyard to the battlefield with a finality counter on it.
         Ability ncrAbility = new ConditionalTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.FINALITY.createInstance()),
-                        TargetController.YOU,
-                        false),
+                        new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.FINALITY.createInstance())
+                ),
                 new ModeChoiceSourceCondition("NCR"),
                 "&bull  NCR &mdash; At the beginning of your end step, return target creature card with " +
                         "mana value 3 or less from your graveyard to the battlefield with a finality counter on it.");

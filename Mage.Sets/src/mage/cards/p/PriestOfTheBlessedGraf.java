@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Controllable;
 import mage.game.Game;
@@ -41,7 +40,7 @@ public final class PriestOfTheBlessedGraf extends CardImpl {
         // At the beginning of your end step, create X 1/1 white Spirit creature tokens with flying, where X is the number of opponents who control more lands than you.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(
                 new SpiritWhiteToken(), PriestOfTheBlessedGrafValue.instance
-        ), TargetController.YOU, false).addHint(PriestOfTheBlessedGrafHint.instance));
+        )).addHint(PriestOfTheBlessedGrafHint.instance));
     }
 
     private PriestOfTheBlessedGraf(final PriestOfTheBlessedGraf card) {

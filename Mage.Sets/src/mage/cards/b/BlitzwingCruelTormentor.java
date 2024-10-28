@@ -35,7 +35,7 @@ public final class BlitzwingCruelTormentor extends CardImpl {
 
         // At the beginning of your end step, target opponent loses life equal to the life that player lost this turn. If no life is lost this way, convert Blitzwing.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new BlitzwingCruelTormentorEffect(), TargetController.YOU, false
+                new BlitzwingCruelTormentorEffect()
         );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

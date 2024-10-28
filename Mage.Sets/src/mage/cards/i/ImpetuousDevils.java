@@ -42,7 +42,7 @@ public final class ImpetuousDevils extends CardImpl {
         this.addAbility(new ImpetuousDevilsAbility());
 
         // At the beginning of the end step, sacrifice Impetuous Devils.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.NEXT, new SacrificeSourceEffect(), false));
     }
 
     private ImpetuousDevils(final ImpetuousDevils card) {

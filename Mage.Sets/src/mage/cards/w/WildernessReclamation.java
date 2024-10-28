@@ -5,7 +5,6 @@ import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -20,8 +19,7 @@ public final class WildernessReclamation extends CardImpl {
 
         // At the beginning of your end step, untap all lands you control.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new UntapAllControllerEffect(StaticFilters.FILTER_LANDS),
-                TargetController.YOU, false
+                new UntapAllControllerEffect(StaticFilters.FILTER_LANDS)
         ));
     }
 

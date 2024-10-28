@@ -28,7 +28,7 @@ public final class UnderworldBreach extends CardImpl {
 
         // At the beginning of the end step, sacrifice Underworld Breach.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new SacrificeSourceEffect(), TargetController.NEXT, false
+                TargetController.NEXT, new SacrificeSourceEffect(), false
         ));
     }
 

@@ -35,7 +35,7 @@ public final class MortarionDaemonPrimarch extends CardImpl {
 
         // Primarch of the Death Guard -- At the beginning of your end step, you may pay {X}. If you do, create X 2/2 black Astartes Warrior creature tokens with menace. X can't be greater than the amount of life you lost this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new MortarionDaemonPrimarchEffect(), TargetController.YOU, false
+                new MortarionDaemonPrimarchEffect()
         ).withFlavorWord("Primarch of the Death Guard"));
     }
 

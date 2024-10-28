@@ -42,7 +42,7 @@ public final class FormOfTheDragon extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of each end step, your life total becomes 5.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SetPlayerLifeSourceEffect(5), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new SetPlayerLifeSourceEffect(5), false));
 
         // Creatures without flying can't attack you.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter)));

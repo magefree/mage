@@ -35,7 +35,7 @@ public final class LightningShrieker extends CardImpl {
         // At the beginning of the end step, Lightning Shrieker's owner shuffles it into their library.
         Effect effect = new ShuffleIntoLibrarySourceEffect();
         effect.setText("{this}'s owner shuffles it into their library.");
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(effect, TargetController.NEXT, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.NEXT, effect, false));
     }
 
     private LightningShrieker(final LightningShrieker card) {

@@ -26,7 +26,7 @@ public final class VinesoulSpider extends CardImpl {
 
         // At the beginning of your end step, put a random land card from your library into your graveyard.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new PutRandomCardFromLibraryIntoGraveyardEffect(StaticFilters.FILTER_CARD_LAND), TargetController.YOU, false
+                new PutRandomCardFromLibraryIntoGraveyardEffect(StaticFilters.FILTER_CARD_LAND)
         ));
 
     }
@@ -40,7 +40,3 @@ public final class VinesoulSpider extends CardImpl {
         return new VinesoulSpider(this);
     }
 }
-
-
-
-

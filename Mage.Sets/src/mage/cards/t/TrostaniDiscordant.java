@@ -40,8 +40,7 @@ public final class TrostaniDiscordant extends CardImpl {
 
         // At the beginning of your end step, each player gains control of all creatures they own.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new GainControlAllOwnedEffect(StaticFilters.FILTER_PERMANENT_CREATURES),
-                TargetController.YOU, false
+                new GainControlAllOwnedEffect(StaticFilters.FILTER_PERMANENT_CREATURES)
         ));
     }
 

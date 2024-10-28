@@ -38,7 +38,7 @@ public final class LilianasScrounger extends CardImpl {
 
         // At the beginning of each end step, if a creature died this turn, you may put a loyalty counter on a Liliana planeswalker you control.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                new LilianasScroungerEffect(), TargetController.ANY, false
+                TargetController.ANY, new LilianasScroungerEffect(), false
         ), MorbidCondition.instance, "At the beginning of each end step, " +
                 "if a creature died this turn, you may put a loyalty counter on a Liliana planeswalker you control."
         ).addHint(MorbidHint.instance));

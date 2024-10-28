@@ -32,7 +32,7 @@ public final class LoreholdExcavation extends CardImpl {
 
         // At the beginning of your end step, mill a card. If a land card was milled this way, you gain 1 life. Otherwise, Lorehold Excavation deals 1 damage to each opponent.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new LoreholdExcavationEffect(), TargetController.YOU, false
+                new LoreholdExcavationEffect()
         ));
 
         // {5}, Exile a creature card from your graveyard: Create a tapped 3/2 red and white Spirit creature token.

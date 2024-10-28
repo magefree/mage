@@ -12,7 +12,6 @@ import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.VampireDemonToken;
@@ -34,7 +33,7 @@ public class PromiseOfAclazotz extends AdventureCard {
         Ability ability = new BeginningOfEndStepTriggeredAbility(new DoIfCostPaid(
                 new PopulateEffect(),
                 new SacrificeTargetCost(filter)
-        ), TargetController.YOU, false);
+        ));
         this.addAbility(ability);
 
         // Foul Rebirth

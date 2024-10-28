@@ -43,7 +43,7 @@ public final class LightningReaver extends CardImpl {
         // At the beginning of your end step, Lightning Reaver deals damage equal to the number of charge counters on it to each opponent.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamagePlayersEffect(
                 Outcome.Damage, xValue, TargetController.OPPONENT
-        ).setText("{this} deals damage equal to the number of charge counters on it to each opponent"), TargetController.YOU, false));
+        ).setText("{this} deals damage equal to the number of charge counters on it to each opponent")));
     }
 
     private LightningReaver(final LightningReaver card) {

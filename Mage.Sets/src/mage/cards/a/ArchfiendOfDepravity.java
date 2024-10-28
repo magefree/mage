@@ -37,7 +37,7 @@ public final class ArchfiendOfDepravity extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each opponent's end step, that player chooses up to two creatures they control, then sacrifices the rest.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ArchfiendOfDepravityEffect(), TargetController.OPPONENT, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.OPPONENT, new ArchfiendOfDepravityEffect(), false));
     }
 
     private ArchfiendOfDepravity(final ArchfiendOfDepravity card) {

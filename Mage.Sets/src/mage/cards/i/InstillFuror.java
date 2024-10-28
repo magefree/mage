@@ -20,11 +20,9 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
@@ -47,7 +45,7 @@ public final class InstillFuror extends CardImpl {
         // Enchanted creature has "At the beginning of your end step, sacrifice this creature unless it attacked this turn."
         Ability gainedAbility = new BeginningOfEndStepTriggeredAbility(
                 new ConditionalOneShotEffect(new SacrificeSourceEffect(), new InvertCondition(AttackedThisTurnSourceCondition.instance),
-                        "sacrifice this creature unless it attacked this turn"), TargetController.YOU, false);
+                        "sacrifice this creature unless it attacked this turn"));
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature has \"At the beginning of your end step, sacrifice this creature unless it attacked this turn.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -45,8 +44,7 @@ public final class AlertHeedbonder extends CardImpl {
         // At the beginning of your end step, you gain 1 life for each creature you control with vigilance.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new GainLifeEffect(xValue)
-                        .setText("you gain 1 life for each creature you control with vigilance"),
-                TargetController.YOU, false
+                        .setText("you gain 1 life for each creature you control with vigilance")
         ));
     }
 

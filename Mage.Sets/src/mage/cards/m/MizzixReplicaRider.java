@@ -106,7 +106,7 @@ enum MizzixReplicaRiderApplier implements StackObjectCopyApplier {
         Spell spell = (Spell) stackObject;
         spell.addAbilityForCopy(HasteAbility.getInstance());
         spell.addAbilityForCopy(new BeginningOfEndStepTriggeredAbility(
-                new SacrificeSourceEffect().setText("sacrifice this permanent"), TargetController.YOU, false
+                new SacrificeSourceEffect().setText("sacrifice this permanent")
         ));
     }
 

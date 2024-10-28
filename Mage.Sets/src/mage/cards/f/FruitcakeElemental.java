@@ -20,7 +20,6 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -44,7 +43,7 @@ public final class FruitcakeElemental extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // At the end of your turn, Fruitcake Elemental deals 7 damage to you.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamageControllerEffect(7), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamageControllerEffect(7)));
 
         // {3}: Target player gains control of Fruitcake Elemental.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FruitcakeElementalEffect(), new ManaCostsImpl<>("{3}"));

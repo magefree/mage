@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPlayer;
 
@@ -51,7 +50,7 @@ public final class GoShintaiOfLostWisdom extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoWhenCostPaid(
                 ability, new GenericManaCost(1), "Pay {1}?"
-        ), TargetController.YOU, false).addHint(hint));
+        )).addHint(hint));
     }
 
     private GoShintaiOfLostWisdom(final GoShintaiOfLostWisdom card) {

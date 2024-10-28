@@ -29,7 +29,6 @@ import mage.game.permanent.token.BloodToken;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
@@ -66,9 +65,8 @@ public class StrefanMaurerProgenitor extends CardImpl {
                 new BeginningOfEndStepTriggeredAbility(
                         new CreateTokenEffect(
                                 new BloodToken(),
-                                StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance),
-                        TargetController.YOU,
-                        false)
+                                StrefanMaurerProgenitorNumberPlayersLostLifeDynamicValue.instance)
+                )
                         .addHint(hint)
         );
 

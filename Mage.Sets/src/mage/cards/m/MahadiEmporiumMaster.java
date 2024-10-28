@@ -10,9 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.game.permanent.token.TreasureToken;
-import mage.watchers.common.CreaturesDiedWatcher;
 
 import java.util.UUID;
 
@@ -33,7 +31,7 @@ public final class MahadiEmporiumMaster extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new CreateTokenEffect(
                         new TreasureToken(), CreaturesDiedThisTurnCount.instance
-                ).setText("create a Treasure token for each creature that died this turn"), TargetController.YOU, false
+                ).setText("create a Treasure token for each creature that died this turn")
         ).addHint(CreaturesDiedThisTurnHint.instance));
     }
 

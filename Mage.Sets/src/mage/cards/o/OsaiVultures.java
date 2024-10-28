@@ -37,7 +37,7 @@ public final class OsaiVultures extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of each end step, if a creature died this turn, put a carrion counter on Osai Vultures.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-            new AddCountersSourceEffect(CounterType.CARRION.createInstance()), TargetController.ANY, false), MorbidCondition.instance,
+                TargetController.ANY, new AddCountersSourceEffect(CounterType.CARRION.createInstance()), false), MorbidCondition.instance,
             "At the beginning of each end step, if a creature died this turn, put a carrion counter on {this}.").addHint(MorbidHint.instance));
         // Remove two carrion counters from Osai Vultures: Osai Vultures gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),

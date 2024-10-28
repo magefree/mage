@@ -25,7 +25,7 @@ public final class LightningRagerToken extends TokenImpl {
 
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.NEXT, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.NEXT, new SacrificeSourceEffect(), false));
     }
 
     private LightningRagerToken(final LightningRagerToken token) {
