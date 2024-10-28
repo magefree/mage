@@ -37,7 +37,7 @@ public final class Necrogoyf extends CardImpl {
 
         // At the beginning of each player's upkeep, that player discards a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.ACTIVE, new DiscardTargetEffect(1),
+                TargetController.EACH_PLAYER, new DiscardTargetEffect(1),
                 false
         ));
 

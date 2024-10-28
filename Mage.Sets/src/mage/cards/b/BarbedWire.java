@@ -26,7 +26,7 @@ public final class BarbedWire extends CardImpl {
 
         // At the beginning of each player's upkeep, Barbed Wire deals 1 damage to that player.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.ACTIVE, new DamageTargetEffect(1).withTargetDescription("that player"),
+                TargetController.EACH_PLAYER, new DamageTargetEffect(1).withTargetDescription("that player"),
                 false));
 
         // {2}: Prevent the next 1 damage that would be dealt by Barbed Wire this turn.

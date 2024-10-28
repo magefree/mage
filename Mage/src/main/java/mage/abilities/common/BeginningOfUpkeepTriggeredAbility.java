@@ -12,21 +12,27 @@ import mage.game.events.GameEvent;
  */
 public class BeginningOfUpkeepTriggeredAbility extends AtStepTriggeredAbility {
 
+    /**
+     * At the beginning of your upkeep (optional = false)
+     */
     public BeginningOfUpkeepTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
-    public BeginningOfUpkeepTriggeredAbility(Effect effect, boolean isOptional) {
-        this(TargetController.YOU, effect, isOptional);
+    /**
+     * At the beginning of your upkeep
+     */
+    public BeginningOfUpkeepTriggeredAbility(Effect effect, boolean optional) {
+        this(TargetController.YOU, effect, optional);
     }
 
-    public BeginningOfUpkeepTriggeredAbility(TargetController targetController, Effect effect, boolean isOptional) {
-        this(Zone.BATTLEFIELD, targetController, effect, isOptional);
+    public BeginningOfUpkeepTriggeredAbility(TargetController targetController, Effect effect, boolean optional) {
+        this(Zone.BATTLEFIELD, targetController, effect, optional);
     }
 
 
-    public BeginningOfUpkeepTriggeredAbility(Zone zone, TargetController targetController, Effect effect, boolean isOptional) {
-        super(zone, targetController, effect, isOptional);
+    public BeginningOfUpkeepTriggeredAbility(Zone zone, TargetController targetController, Effect effect, boolean optional) {
+        super(zone, targetController, effect, optional);
     }
 
     protected BeginningOfUpkeepTriggeredAbility(final BeginningOfUpkeepTriggeredAbility ability) {
