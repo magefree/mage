@@ -13,12 +13,15 @@ import mage.watchers.Watcher;
  */
 public class BeginningOfSecondMainTriggeredAbility extends AtStepTriggeredAbility {
 
-    public BeginningOfSecondMainTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
-        this(Zone.BATTLEFIELD, effect, targetController, isOptional);
+    /**
+     * At the beginning of your second main phase
+     */
+    public BeginningOfSecondMainTriggeredAbility(Effect effect, boolean optional) {
+        this(Zone.BATTLEFIELD, TargetController.YOU, effect, optional);
     }
 
-    public BeginningOfSecondMainTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional) {
-        super(zone, targetController, effect, isOptional);
+    public BeginningOfSecondMainTriggeredAbility(Zone zone, TargetController targetController, Effect effect, boolean optional) {
+        super(zone, targetController, effect, optional);
         setTriggerPhrase(generateTriggerPhrase());
         this.addWatcher(new MainPhaseWatcher());
     }

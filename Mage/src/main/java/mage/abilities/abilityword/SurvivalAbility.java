@@ -1,10 +1,8 @@
 package mage.abilities.abilityword;
 
-import mage.abilities.triggers.BeginningOfSecondMainTriggeredAbility;
 import mage.abilities.effects.Effect;
+import mage.abilities.triggers.BeginningOfSecondMainTriggeredAbility;
 import mage.constants.AbilityWord;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -20,7 +18,7 @@ public class SurvivalAbility extends BeginningOfSecondMainTriggeredAbility {
     }
 
     public SurvivalAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, TargetController.YOU, optional);
+        super(effect, optional);
         setTriggerPhrase("At the beginning of your second main phase, if {this} is tapped, ");
         setAbilityWord(AbilityWord.SURVIVAL);
     }
