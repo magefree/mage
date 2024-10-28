@@ -50,7 +50,7 @@ public final class OldOneEye extends CardImpl {
                 new DoIfCostPaid(
                         new ReturnSourceFromGraveyardToHandEffect(),
                         new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS))
-                ), TargetController.YOU, false, false
+                ), TargetController.YOU, false
         ).withFlavorWord("Fast Healing"));
     }
 
