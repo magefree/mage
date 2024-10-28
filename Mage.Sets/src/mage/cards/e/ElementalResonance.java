@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;

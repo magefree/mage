@@ -3,7 +3,7 @@ package mage.cards.b;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;

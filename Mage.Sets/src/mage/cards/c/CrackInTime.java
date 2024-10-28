@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.keyword.VanishingAbility;

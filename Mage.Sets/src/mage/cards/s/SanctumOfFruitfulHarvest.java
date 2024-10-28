@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.Mana;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.hint.ValueHint;

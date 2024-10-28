@@ -1,6 +1,6 @@
 package mage.cards.f;
 
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.VanishingAbility;
 import mage.cards.CardImpl;

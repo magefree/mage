@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

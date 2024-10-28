@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;

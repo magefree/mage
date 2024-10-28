@@ -1,6 +1,6 @@
 package mage.cards.t;
 
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;

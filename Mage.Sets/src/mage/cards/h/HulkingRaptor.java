@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.keyword.WardAbility;

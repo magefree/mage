@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.effects.mana.AddManaToManaPoolTargetControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

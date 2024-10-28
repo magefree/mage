@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
