@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -38,7 +37,7 @@ public final class HeraldOfAnguish extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your end step, each opponent discards a card.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DiscardEachPlayerEffect(TargetController.OPPONENT)));
 
         // {1}{B}, Sacrifice an artifact: Target creature gets -2/-2 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{B}"));

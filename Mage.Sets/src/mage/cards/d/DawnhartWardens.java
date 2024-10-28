@@ -32,8 +32,7 @@ public final class DawnhartWardens extends CardImpl {
         // Coven — At the beginning of combat on your turn, if you control three or more creatures with different powers, creatures you control get +1/+0 until end of turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new BoostControlledEffect(1, 0, Duration.EndOfTurn),
-                        false
+                        new BoostControlledEffect(1, 0, Duration.EndOfTurn)
                 ), CovenCondition.instance, "At the beginning of combat on your turn, " +
                 "if you control three or more creatures with different powers, " +
                 "creatures you control get +1/+0 until end of turn."

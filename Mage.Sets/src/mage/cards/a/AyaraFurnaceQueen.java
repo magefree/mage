@@ -50,7 +50,7 @@ public final class AyaraFurnaceQueen extends CardImpl {
 
         // At the beginning of combat on your turn, return up to one target artifact or creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AyaraFurnaceQueenEffect(), false
+                new AyaraFurnaceQueenEffect()
         );
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
         this.addAbility(ability);

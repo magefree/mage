@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -40,7 +39,7 @@ public final class SandsteppeWarRiders extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of combat on your turn, bolster X, where X is the number of differently named artifact tokens you control.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new BolsterEffect(SandsteppeWarRidersValue.instance), false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new BolsterEffect(SandsteppeWarRidersValue.instance)));
     }
 
     private SandsteppeWarRiders(final SandsteppeWarRiders card) {

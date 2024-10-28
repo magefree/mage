@@ -1,7 +1,7 @@
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -20,7 +20,7 @@ public final class KioraEmblem extends Emblem {
 
     public KioraEmblem() {
         super("Emblem Kiora");
-        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, new CreateTokenEffect(new Kraken99Token()), TargetController.YOU, null, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.COMMAND, TargetController.YOU, new CreateTokenEffect(new Kraken99Token()), false, null);
         this.getAbilities().add(ability);
     }
 

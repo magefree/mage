@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -35,8 +35,8 @@ public final class IchorShade extends CardImpl {
 
         // At the beginning of your end step, if an artifact or creature was put into a graveyard from the battlefield this turn, put a +1/+1 counter on Ichor Shade.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, IchorShadeCondition.instance, false
+                TargetController.YOU, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                false, IchorShadeCondition.instance
         ), new IchorShadeWatcher());
     }
 

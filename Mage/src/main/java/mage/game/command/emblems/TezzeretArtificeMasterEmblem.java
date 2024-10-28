@@ -1,6 +1,6 @@
 package mage.game.command.emblems;
 
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -18,9 +18,9 @@ public final class TezzeretArtificeMasterEmblem extends Emblem {
         super("Emblem Tezzeret");
         this.getAbilities().add(new BeginningOfEndStepTriggeredAbility(
                 Zone.COMMAND,
-                new SearchLibraryPutInPlayEffect(
+                TargetController.YOU, new SearchLibraryPutInPlayEffect(
                         new TargetCardInLibrary(new FilterPermanentCard())
-                ), TargetController.YOU, null, false
+                ), false, null
         ));
     }
 

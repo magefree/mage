@@ -17,7 +17,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -47,8 +46,7 @@ public final class EldraziLinebreaker extends CardImpl {
         // At the beginning of combat on your turn, target creature you control gains haste and gets +X/+0 until end of turn, where X is the number of Eldrazi you control.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new GainAbilityTargetEffect(HasteAbility.getInstance())
-                        .setText("target creature you control gains haste"),
-                false
+                        .setText("target creature you control gains haste")
         );
         ability.addEffect(new BoostTargetEffect(xValue, StaticValue.get(0))
                 .setText("and gets +X/+0 until end of turn, where X is the number of Eldrazi you control"));

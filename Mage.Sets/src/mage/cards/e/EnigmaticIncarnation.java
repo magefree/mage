@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
@@ -33,7 +32,7 @@ public final class EnigmaticIncarnation extends CardImpl {
 
         // At the beginning of your end step, you may sacrifice another enchantment. If you do, search your library for a creature card with converted mana cost equal to 1 plus the sacrificed enchantment's converted mana cost, put that card onto the battlefield, then shuffle your library.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new EnigmaticIncarnationEffect(), TargetController.YOU, false
+                new EnigmaticIncarnationEffect()
         ));
     }
 

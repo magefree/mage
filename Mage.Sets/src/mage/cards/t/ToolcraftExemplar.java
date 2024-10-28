@@ -19,7 +19,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledArtifactPermanent;
 
 /**
@@ -41,7 +40,7 @@ public final class ToolcraftExemplar extends CardImpl {
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn),
                 new LockedInCondition(new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent(), ComparisonType.MORE_THAN, 2)), null);
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(new BoostSourceEffect(2, 1, Duration.EndOfTurn), false),
+                new BeginningOfCombatTriggeredAbility(new BoostSourceEffect(2, 1, Duration.EndOfTurn)),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()),
                 "At the beginning of combat on your turn, if you control an artifact, {this} gets +2/+1 until end of turn."
                         + " If you control at least 3 artifacts, it also gains first strike until end of turn.");

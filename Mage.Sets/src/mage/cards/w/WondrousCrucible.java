@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.ApprovingObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -34,7 +34,7 @@ public final class WondrousCrucible extends CardImpl {
 
         // At the beginning of your end step, mill two cards, then exile a nonland card at random from your graveyard. Copy it. You may cast the copy without paying its mana cost.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new WondrousCrucibleEffect(), TargetController.YOU, false
+                new WondrousCrucibleEffect()
         ));
     }
 

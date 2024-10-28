@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
@@ -47,7 +47,7 @@ public final class LydiaFrye extends CardImpl {
 
         // At the beginning of your end step, surveil X, where X is the number of tapped Assassins you control.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new LydiaFryeEffect(), TargetController.YOU, false
+                new LydiaFryeEffect()
         ).addHint(LydiaFryeEffect.getHint()));
     }
 

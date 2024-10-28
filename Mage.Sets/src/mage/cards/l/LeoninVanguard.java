@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 
 /**
@@ -34,8 +33,7 @@ public final class LeoninVanguard extends CardImpl {
         // At the beginning of combat on your turn, if you control three or more creatures, Leonin Vanguard gets +1/+1 until end of turn and you gain 1 life.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new BoostSourceEffect(1, 1, Duration.EndOfTurn),
-                        false
+                        new BoostSourceEffect(1, 1, Duration.EndOfTurn)
                 ),
                 new PermanentsOnTheBattlefieldCondition(
                         StaticFilters.FILTER_CONTROLLED_CREATURES,

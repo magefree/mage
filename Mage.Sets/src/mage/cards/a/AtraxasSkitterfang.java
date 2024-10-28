@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -50,7 +49,7 @@ public final class AtraxasSkitterfang extends CardImpl {
                 ability,
                 new RemoveCountersSourceCost(CounterType.OIL.createInstance()),
                 "Remove an oil counter?"
-        ), false));
+        )));
     }
 
     private AtraxasSkitterfang(final AtraxasSkitterfang card) {

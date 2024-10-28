@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -32,7 +31,7 @@ public final class HadanasClimb extends CardImpl {
 
         // At the beginning of combat on your turn, put a +1/+1 counter on target creature you control. Then if that creature has three or more +1/+1 counters on it, transform Hadana's Climb.
         this.addAbility(new TransformAbility());
-        Ability ability = new BeginningOfCombatTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
         ability.addEffect(new ConditionalOneShotEffect(new TransformSourceEffect(), new TargetHasCounterCondition(CounterType.P1P1, 3, Integer.MAX_VALUE),
                 "Then if that creature has three or more +1/+1 counters on it, transform {this}"));
         ability.addTarget(new TargetControlledCreaturePermanent());

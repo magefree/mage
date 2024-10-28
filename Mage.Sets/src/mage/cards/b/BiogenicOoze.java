@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -44,8 +43,7 @@ public final class BiogenicOoze extends CardImpl {
 
         // At the beginning if your end step, put a +1/+1 counter on each Ooze you control.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter),
-                TargetController.YOU, false
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)
         ));
 
         // {1}{G}{G}{G}: Create a 2/2 green Ooze creature token.

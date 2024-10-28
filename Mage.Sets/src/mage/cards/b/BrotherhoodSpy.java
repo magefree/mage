@@ -43,7 +43,7 @@ public final class BrotherhoodSpy extends CardImpl {
         // At the beginning of combat on your turn, if you control a legendary Assassin, Brotherhood Spy gets +1/+0 until end of turn and can't be blocked this turn.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new BoostTargetEffect(1, 0), false
+                        new BoostTargetEffect(1, 0)
                 ), condition, "At the beginning of combat on your turn, if you control a legendary Assassin, " +
                 "{this} gets +1/+0 until end of turn and can't be blocked this turn."
         );

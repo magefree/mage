@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -30,7 +30,7 @@ public final class PossessedPortal extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PossessedPortalReplacementEffect()));
         
         // At the beginning of each end step, each player sacrifices a permanent unless they discard a card.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new PossessedPortalEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new PossessedPortalEffect(), false));
     }
 
     private PossessedPortal(final PossessedPortal card) {

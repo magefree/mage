@@ -4,7 +4,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetPlayerOrPlaneswalker;
 
 /**
@@ -44,7 +43,7 @@ public final class GoblinRazerunners extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your end step, you may have Goblin Razerunners deal damage equal to the number of +1/+1 counters on it to target player.
-        ability = new BeginningOfYourEndStepTriggeredAbility(new DamageTargetEffect(new CountersSourceCount(CounterType.P1P1)).setText("you may have {this} deal damage equal to the number of +1/+1 counters on it to target player or planeswalker"), true);
+        ability = new BeginningOfEndStepTriggeredAbility(new DamageTargetEffect(new CountersSourceCount(CounterType.P1P1)).setText("you may have {this} deal damage equal to the number of +1/+1 counters on it to target player or planeswalker"), true);
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }

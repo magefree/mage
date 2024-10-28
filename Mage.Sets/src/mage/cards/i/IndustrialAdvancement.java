@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -9,7 +9,6 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -31,7 +30,7 @@ public final class IndustrialAdvancement extends CardImpl {
 
         // At the beginning of your end step, you may sacrifice a creature. If you do, look at the top X cards of your library, when X is that creature's mana value. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new IndustrialAdvancementEffect(), TargetController.YOU, false
+                new IndustrialAdvancementEffect()
         ));
     }
 

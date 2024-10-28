@@ -35,7 +35,7 @@ public final class GodPharaohsGift extends CardImpl {
 
         // At the beginning of combat on your turn, you may exile a creature card from your graveyard. If you do, create a token that's a copy of that card, except it's a 4/4 black Zombie. It gains haste until end of turn.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new GodPharaohsGiftEffect(), false
+                new GodPharaohsGiftEffect()
         ));
     }
 

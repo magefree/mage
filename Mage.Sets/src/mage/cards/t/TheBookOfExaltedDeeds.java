@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
@@ -46,7 +46,7 @@ public final class TheBookOfExaltedDeeds extends CardImpl {
         // At the beginning of your end step, if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new Angel33Token()), TargetController.YOU, false
+                        new CreateTokenEffect(new Angel33Token())
                 ), condition, "At the beginning of your end step, "
                 + "if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying."
         ).addHint(hint), new PlayerGainedLifeWatcher());

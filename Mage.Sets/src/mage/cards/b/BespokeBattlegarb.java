@@ -36,8 +36,7 @@ public final class BespokeBattlegarb extends CardImpl {
                         new AttachEffect(
                                 Outcome.BoostCreature,
                                 "attach {this} to up to one target creature you control"
-                        ),
-                        false
+                        )
                 ), CelebrationCondition.instance, "At the beginning of combat on your turn, if two "
                 + "or more nonland permanents entered the battlefield under your control this turn, "
                 + "attach {this} to up to one target creature you control"

@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.target.common.TargetOpponent;
@@ -35,7 +34,7 @@ public final class MeasureOfWickedness extends CardImpl {
 
 
         // At the beginning of your end step, sacrifice Measure of Wickedness and you lose 8 life.        
-        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, null, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new SacrificeSourceEffect(), false, null);
         Effect effect = new LoseLifeSourceControllerEffect(8);
         effect.setText("and you lose 8 life");
         ability.addEffect(effect);

@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -40,7 +39,7 @@ public final class HenrikaDomnathi extends CardImpl {
 
         // At the beginning of combat on your turn, choose one that hasn't been chosen —
         // • Each player sacrifices a creature.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE), false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new SacrificeAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.setModeTag("each player sacrifice");
         ability.getModes().setLimitUsageByOnce(false);
 

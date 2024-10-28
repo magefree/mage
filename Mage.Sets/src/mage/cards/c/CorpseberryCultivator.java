@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -30,8 +29,7 @@ public final class CorpseberryCultivator extends CardImpl {
 
         // At the beginning of combat on your turn, you may forage.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new DoIfCostPaid(null, new ForageCost()),
-                false
+                new DoIfCostPaid(null, new ForageCost())
         ));
 
         // Whenever you forage, put a +1/+1 counter on Corpseberry Cultivator.

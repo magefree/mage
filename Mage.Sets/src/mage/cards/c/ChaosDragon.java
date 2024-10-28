@@ -40,7 +40,7 @@ public final class ChaosDragon extends CardImpl {
 
         // At the beginning of combat on your turn, each player rolls a d20. If one or more opponents had the highest result, Chaos Dragon can't attack those players or planeswalkers they control this combat.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new ChaosDragonEffect(), false
+                new ChaosDragonEffect()
         ));
     }
 

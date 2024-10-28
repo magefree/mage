@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -39,7 +38,7 @@ public final class Electrozoa extends CardImpl {
 
         // At the beginning of your precombat main phase, tap Electrozoa unless you pay {E}.
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(
-                new TapSourceUnlessPaysEffect(new PayEnergyCost(1)), false
+                new TapSourceUnlessPaysEffect(new PayEnergyCost(1))
         ));
     }
 

@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.DevoidAbility;
@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -43,8 +42,8 @@ public final class DustStalker extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // At the beginning of each end step, if you control no other colorless creatures, return Dust Stalker to its owner's hand.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), TargetController.ANY,
-                new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new ReturnToHandSourceEffect(),
+                false, new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0)));
     }
 
     private DustStalker(final DustStalker card) {

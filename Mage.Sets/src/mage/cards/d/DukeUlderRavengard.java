@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
@@ -35,8 +34,7 @@ public final class DukeUlderRavengard extends CardImpl {
         // At the beginning of combat on your turn, another target creature gains haste and myriad until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new GainAbilityTargetEffect(HasteAbility.getInstance())
-                        .setText("another target creature you control gains haste"),
-                false
+                        .setText("another target creature you control gains haste")
         );
         ability.addEffect(new GainAbilityTargetEffect(new MyriadAbility()).setText("and myriad until end of turn"));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));

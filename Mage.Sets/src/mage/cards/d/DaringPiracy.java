@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.token.PirateRedToken;
 
@@ -24,7 +23,7 @@ public final class DaringPiracy extends CardImpl {
 
         // At the beginning of your combat on your turn, create a 1/1 red Pirate creature token with menace and haste. Exile it at the beginning of the next end step.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new DaringPiracyEffect(), false
+                new DaringPiracyEffect()
         ));
     }
 

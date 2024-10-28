@@ -1,6 +1,6 @@
 package mage.cards.k;
 
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -11,7 +11,6 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.FoodToken;
@@ -46,7 +45,7 @@ public final class KillerService extends CardImpl {
                                 new GenericManaCost(2), new SacrificeTargetCost(filter),
                                 "pay {2} and sacrifice a token"
                         )
-                ), TargetController.YOU, false
+                )
         ));
     }
 

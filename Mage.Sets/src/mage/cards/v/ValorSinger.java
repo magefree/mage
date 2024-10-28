@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -29,7 +28,7 @@ public final class ValorSinger extends CardImpl {
 
         // Combat Inspiration — At the beginning of combat on your turn, target creature you control gets +1/+0 until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new BoostTargetEffect(1, 0, Duration.EndOfTurn), false
+                new BoostTargetEffect(1, 0, Duration.EndOfTurn)
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability.withFlavorWord("Combat Inspiration"));

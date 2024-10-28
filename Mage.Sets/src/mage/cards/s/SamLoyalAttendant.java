@@ -36,7 +36,7 @@ public final class SamLoyalAttendant extends CardImpl {
 
         // At the beginning of combat on your turn, create a Food token.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new CreateTokenEffect(new FoodToken()), false
+                new CreateTokenEffect(new FoodToken())
         ));
 
         // Activated abilities of Foods you control cost {1} less to activate.

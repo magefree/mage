@@ -37,7 +37,7 @@ public final class NumaJoragaChieftain extends CardImpl {
 
         // At the beginning of combat on your turn, you may pay {X}{X}. When you do, distribute X +1/+1 counters among any number of target Elves.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new NumaJoragaChieftainEffect(), false
+                new NumaJoragaChieftainEffect()
         ));
 
         // Partner

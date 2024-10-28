@@ -3,7 +3,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -42,7 +42,7 @@ public final class FormOfTheDragon extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of each end step, your life total becomes 5.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SetPlayerLifeSourceEffect(5), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new SetPlayerLifeSourceEffect(5), false));
 
         // Creatures without flying can't attack you.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter)));

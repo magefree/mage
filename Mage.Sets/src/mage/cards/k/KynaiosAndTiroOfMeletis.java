@@ -3,7 +3,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -36,7 +36,7 @@ public final class KynaiosAndTiroOfMeletis extends CardImpl {
         this.toughness = new MageInt(8);
 
         // At the beginning of your end step, draw a card. Each player may put a land card from their hand onto the battlefield, then each opponent who didn't draws a card.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new KynaiosAndTirosEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new KynaiosAndTirosEffect()));
     }
 
     private KynaiosAndTiroOfMeletis(final KynaiosAndTiroOfMeletis card) {

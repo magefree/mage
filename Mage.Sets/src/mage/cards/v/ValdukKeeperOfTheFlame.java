@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Elemental31TrampleHasteToken;
@@ -36,7 +35,7 @@ public final class ValdukKeeperOfTheFlame extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of combat on your turn, for each Aura and Equipment attached to Valduk, Keeper of the Flame, create a 3/1 red Elemental creature token with trample and haste. Exile those tokens at the beginning of the next end step.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new ValdukKeeperOfTheFlameEffect(), false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new ValdukKeeperOfTheFlameEffect()));
     }
 
     private ValdukKeeperOfTheFlame(final ValdukKeeperOfTheFlame card) {

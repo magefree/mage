@@ -1,7 +1,7 @@
 package mage.cards.q;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -43,8 +43,8 @@ public final class QuicksilverFountain extends CardImpl {
 
         // At the beginning of each end step, if all lands on the battlefield are Islands, remove all flood counters from them.
         // Note: This applies only if Quicksilver Fountain is on the battlefield
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
-                new QuicksilverFountainEffect2(), TargetController.ANY, condition, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.ANY, new QuicksilverFountainEffect2(), false, condition));
     }
 
     private QuicksilverFountain(final QuicksilverFountain card) {

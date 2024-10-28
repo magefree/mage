@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.DifferentManaValuesInGraveCondition;
 import mage.abilities.costs.common.PayLifeCost;
@@ -49,9 +49,8 @@ public final class SanguineSpy extends CardImpl {
 
         // At the beginning of your end step, if there are five or more mana values among cards in your graveyard, you may pay 2 life. If you do, draw a card.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfYourEndStepTriggeredAbility(
-                        new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new PayLifeCost(2)),
-                        false
+                new BeginningOfEndStepTriggeredAbility(
+                        new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new PayLifeCost(2))
                 ), DifferentManaValuesInGraveCondition.FIVE, "At the beginning of your end step, if there are " +
                 "five or more mana values among cards in your graveyard, you may pay 2 life. If you do, draw a card."
         ).addHint(DifferentManaValuesInGraveHint.instance));

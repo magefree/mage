@@ -9,7 +9,6 @@ import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 /**
@@ -32,8 +31,7 @@ public final class AshiokWickedManipulatorNightmareToken extends TokenImpl {
 
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        false
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                 ),
                 WasCardExiledThisTurnCondition.instance,
                 "At the beginning of combat on your turn, if a card was put into exile "

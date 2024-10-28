@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -35,8 +34,8 @@ public final class DireFleetWarmonger extends CardImpl {
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn).setText("{this} gets +2/+2"),
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)
         ).addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
-                .concatBy("and").setText("gains trample until end of turn")),
-                false));
+                .concatBy("and").setText("gains trample until end of turn"))
+        ));
     }
 
     private DireFleetWarmonger(final DireFleetWarmonger card) {

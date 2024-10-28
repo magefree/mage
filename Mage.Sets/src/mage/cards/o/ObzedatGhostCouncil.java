@@ -3,7 +3,7 @@ package mage.cards.o;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -45,7 +44,7 @@ public final class ObzedatGhostCouncil extends CardImpl {
 
         //At the beginning of your end step you may exile Obzedat. If you do, return it to the battlefield under its owner's 
         //control at the beginning of your next upkeep. It gains haste.
-        Ability ability2 = new BeginningOfYourEndStepTriggeredAbility(new ObzedatGhostCouncilExileSourceEffect(), true);
+        Ability ability2 = new BeginningOfEndStepTriggeredAbility(new ObzedatGhostCouncilExileSourceEffect(), true);
         this.addAbility(ability2);
     }
 

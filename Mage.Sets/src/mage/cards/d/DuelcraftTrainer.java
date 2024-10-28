@@ -36,7 +36,7 @@ public final class DuelcraftTrainer extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(
                         DoubleStrikeAbility.getInstance(), Duration.EndOfTurn
-                ), false), CovenCondition.instance, "At the beginning " +
+                )), CovenCondition.instance, "At the beginning " +
                 "of combat on your turn, if you control three or more creatures with different powers, " +
                 "target creature you control gains double strike until end of turn."
         );

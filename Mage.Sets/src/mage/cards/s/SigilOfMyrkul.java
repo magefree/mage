@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -40,7 +39,7 @@ public final class SigilOfMyrkul extends CardImpl {
 
         // At the beginning of combat on your turn, mill a card. When you do, if there are four or more creature cards in your graveyard, put a +1/+1 counter on target creature you control and it gains deathtouch until end of turn.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new SigilOfMyrkulEffect(), false
+                new SigilOfMyrkulEffect()
         ).addHint(hint));
     }
 

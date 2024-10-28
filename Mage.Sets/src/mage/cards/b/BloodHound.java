@@ -2,14 +2,13 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -35,8 +34,7 @@ public final class BloodHound extends CardImpl {
         // At the beginning of your end step, remove all +1/+1 counters from Blood Hound.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new RemoveAllCountersSourceEffect(CounterType.P1P1)
-                        .setText("remove all +1/+1 counters from {this}"),
-                TargetController.YOU, false
+                        .setText("remove all +1/+1 counters from {this}")
         ));
     }
 

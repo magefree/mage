@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -32,7 +31,7 @@ public final class BrambleguardCaptain extends CardImpl {
         // At the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is Brambleguard Captain's power.
         Ability ability = new BeginningOfCombatTriggeredAbility(new BoostTargetEffect(
                 SourcePermanentPowerValue.NOT_NEGATIVE, StaticValue.get(0), Duration.EndOfTurn
-        ), false);
+        ));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

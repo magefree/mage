@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.costs.common.PayLifeCost;
@@ -39,8 +39,8 @@ public final class ShessraDeathsWhisper extends CardImpl {
 
         // Whispers of the Grave — At the beginning of your end step, if a creature died this turn, you may pay 2 life. If you do, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardSourceControllerEffect(1),
-                new PayLifeCost(2)), TargetController.YOU, MorbidCondition.instance, false
+                TargetController.YOU, new DoIfCostPaid(new DrawCardSourceControllerEffect(1),
+                new PayLifeCost(2)), false, MorbidCondition.instance
         ).addHint(MorbidHint.instance).withFlavorWord("Whispers of the Grave"));
     }
 

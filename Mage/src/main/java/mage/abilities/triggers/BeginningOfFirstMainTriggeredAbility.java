@@ -12,6 +12,13 @@ import mage.game.events.GameEvent;
 public class BeginningOfFirstMainTriggeredAbility extends AtStepTriggeredAbility {
 
     /**
+     * At the beginning of your first main phase (optional = false)
+     */
+    public BeginningOfFirstMainTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
+
+    /**
      * At the beginning of your first main phase
      */
     public BeginningOfFirstMainTriggeredAbility(Effect effect, boolean optional) {

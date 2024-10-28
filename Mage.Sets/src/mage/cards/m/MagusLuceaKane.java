@@ -40,8 +40,7 @@ public final class MagusLuceaKane extends CardImpl {
 
         // Spiritual Leader -- At the beginning of combat on your turn, put a +1/+1 counter on target creature.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                false
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability.withFlavorWord("Spiritual Leader"));

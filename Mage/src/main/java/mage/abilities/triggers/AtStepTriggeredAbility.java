@@ -32,9 +32,6 @@ public abstract class AtStepTriggeredAbility extends TriggeredAbilityImpl {
         this.setTargetPointer = ability.setTargetPointer;
     }
 
-    // implementing classes must add copy constructor
-    // implementing classes must override checksEventType
-
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (checkTargetController(event, game)) {
@@ -51,7 +48,6 @@ public abstract class AtStepTriggeredAbility extends TriggeredAbilityImpl {
             case NOT_YOU:
                 return !isControlledBy(event.getPlayerId());
             case ANY:
-            case ACTIVE:
             case NEXT:
             case EACH_PLAYER:
                 return true;

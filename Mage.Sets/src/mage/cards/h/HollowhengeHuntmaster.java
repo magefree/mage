@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 
@@ -46,7 +45,7 @@ public final class HollowhengeHuntmaster extends CardImpl {
                 new AddCountersAllEffect(
                         CounterType.P1P1.createInstance(2),
                         StaticFilters.FILTER_CONTROLLED_CREATURE
-                ), false
+                )
         ));
 
         // Nightbound

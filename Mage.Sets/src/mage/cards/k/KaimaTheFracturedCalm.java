@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class KaimaTheFracturedCalm extends CardImpl {
 
         // At the beginning of your end step, goad each creature your opponents control that's enchanted by an Aura you control. Put a +1/+1 counter on Kaima, the Fractured Calm for each creature goaded this way.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new KaimaTheFracturedCalmEffect(), TargetController.YOU, false
+                new KaimaTheFracturedCalmEffect()
         ));
     }
 

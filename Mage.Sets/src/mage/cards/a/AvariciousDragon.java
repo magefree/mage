@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -33,7 +32,7 @@ public final class AvariciousDragon extends CardImpl {
                 .setText("draw an additional card"), false));
 
         // At the beginning of your end step, discard your hand.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DiscardHandControllerEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DiscardHandControllerEffect()));
     }
 
     private AvariciousDragon(final AvariciousDragon card) {

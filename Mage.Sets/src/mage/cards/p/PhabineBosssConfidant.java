@@ -53,8 +53,7 @@ public class PhabineBosssConfidant extends CardImpl {
         //          Then creatures you control get +1/+1 until end of turn for each nonland card revealed this way.
         //          Then each player draws a card.
         Ability parleyAbility = new BeginningOfCombatTriggeredAbility(
-                new PhabineBosssConfidantParleyEffect(),
-                false
+                new PhabineBosssConfidantParleyEffect()
         );
         Effect drawCardAllEffect = new DrawCardAllEffect(1);
         drawCardAllEffect.concatBy("Then");

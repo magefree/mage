@@ -9,7 +9,6 @@ import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
@@ -31,7 +30,7 @@ public final class CrackInTime extends CardImpl {
         Ability ability = new OrTriggeredAbility(Zone.BATTLEFIELD, new ExileUntilSourceLeavesEffect(), false,
                 "When {this} enters and at the beginning of your first main phase, ",
                 new EntersBattlefieldTriggeredAbility(null),
-                new BeginningOfFirstMainTriggeredAbility(null, false)
+                new BeginningOfFirstMainTriggeredAbility(null)
         );
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));
         this.addAbility(ability);

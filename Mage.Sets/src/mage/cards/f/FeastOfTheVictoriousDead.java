@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.dynamicvalue.common.CreaturesDiedThisTurnCount;
 import mage.abilities.effects.OneShotEffect;
@@ -32,9 +32,9 @@ public final class FeastOfTheVictoriousDead extends CardImpl {
 
         // At the beginning of your end step, if one or more creatures died this turn, you gain that much life and distribute that many +1/+1 counters among creatures you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new GainLifeEffect(CreaturesDiedThisTurnCount.instance)
+                TargetController.YOU, new GainLifeEffect(CreaturesDiedThisTurnCount.instance)
                         .setText("you gain that much life"),
-                TargetController.YOU, FeastOfTheVictoriousDeadCondition.instance, false
+                false, FeastOfTheVictoriousDeadCondition.instance
         );
         ability.addEffect(new FeastOfTheVictoriousDeadEffect());
         this.addAbility(ability.addHint(CreaturesDiedThisTurnHint.instance));

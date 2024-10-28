@@ -1,7 +1,7 @@
 package mage.cards.v;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.CyclingAbility;
@@ -36,7 +36,7 @@ public final class ViashinoSandsprinter extends CardImpl {
 
         // At the beginning of the end step, return Viashino Sandsprinter to its owner's hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new ReturnToHandSourceEffect(true), TargetController.NEXT, false
+                TargetController.NEXT, new ReturnToHandSourceEffect(true), false
         ));
 
         // Cycling {R}

@@ -46,7 +46,7 @@ public final class NeyithOfTheDireHunt extends CardImpl {
         // At the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature's power until end of turn. That creature must be blocked this combat if able.
         Ability ability = new BeginningOfCombatTriggeredAbility(new DoIfCostPaid(
                 new NeyithOfTheDireHuntEffect(), new ManaCostsImpl<>("{2}{R/G}")
-        ), false);
+        ));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

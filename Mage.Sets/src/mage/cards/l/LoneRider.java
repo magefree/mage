@@ -1,7 +1,7 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -49,7 +49,7 @@ public final class LoneRider extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new TransformSourceEffect(), TargetController.NEXT, false
+                        TargetController.NEXT, new TransformSourceEffect(), false
                 ), condition, ruleText
         ).addHint(hint), new PlayerGainedLifeWatcher());
     }

@@ -43,8 +43,7 @@ public final class ArchpriestOfIona extends CardImpl {
         // At the beginning of combat on your turn, if you have a full party, target creature gets +1/+1 and gains flying until end of turn.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new BoostTargetEffect(1, 1, Duration.EndOfTurn),
-                        false
+                        new BoostTargetEffect(1, 1, Duration.EndOfTurn)
                 ), FullPartyCondition.instance, "At the beginning of combat on your turn, " +
                 "if you have a full party, target creature gets +1/+1 and gains flying until end of turn."
         );

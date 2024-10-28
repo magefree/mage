@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPermanent;
@@ -38,7 +37,7 @@ public final class ManifoldMouse extends CardImpl {
 
         // At the beginning of combat on your turn, target Mouse you control gains your choice of double strike or trample until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new GainsChoiceOfAbilitiesEffect(
-                DoubleStrikeAbility.getInstance(), TrampleAbility.getInstance()), false);
+                DoubleStrikeAbility.getInstance(), TrampleAbility.getInstance()));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

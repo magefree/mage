@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
@@ -42,7 +42,7 @@ public final class SeasonOfTheWitch extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(cost)));
 
         // At the beginning of the end step, destroy all untapped creatures that didn't attack this turn, except for creatures that couldn't attack.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new SeasonOfTheWitchEffect(), TargetController.ANY, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new SeasonOfTheWitchEffect(), false);
         ability.addWatcher(new CouldAttackThisTurnWatcher());
         this.addAbility(ability);
     }

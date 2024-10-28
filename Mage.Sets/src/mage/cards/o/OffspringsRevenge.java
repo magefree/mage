@@ -44,7 +44,7 @@ public final class OffspringsRevenge extends CardImpl {
 
         // At the beginning of combat on your turn, exile target red, white, or black creature card from your graveyard. Create a token that's a copy of that card, except it's 1/1. It gains haste until your next turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new OffspringsRevengeEffect(), false
+                new OffspringsRevengeEffect()
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.HaventCastSpellFromHandThisTurnCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.permanent.token.Spirit22Token;
 
 import java.util.UUID;
@@ -33,8 +32,8 @@ public final class WranglerOfTheDamned extends CardImpl {
 
         // At the beginning of your end step, if you haven't cast a spell from your hand this turn, create a 2/2 white Spirit creature token with flying.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new Spirit22Token()),
-                TargetController.YOU, HaventCastSpellFromHandThisTurnCondition.instance, false
+                TargetController.YOU, new CreateTokenEffect(new Spirit22Token()),
+                false, HaventCastSpellFromHandThisTurnCondition.instance
         ).addHint(HaventCastSpellFromHandThisTurnCondition.hint));
     }
 

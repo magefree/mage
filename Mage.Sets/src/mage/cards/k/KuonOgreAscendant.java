@@ -4,7 +4,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.FlipSourceEffect;
@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
@@ -41,10 +40,8 @@ public final class KuonOgreAscendant extends CardImpl {
 
         // At the beginning of the end step, if three or more creatures died this turn, flip Kuon, Ogre Ascendant.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new FlipSourceEffect(new KuonsEssenceToken()),
-                TargetController.NEXT,
-                KuonOgreAscendantCondition.instance, false));
+                TargetController.NEXT, new FlipSourceEffect(new KuonsEssenceToken()),
+                false, KuonOgreAscendantCondition.instance));
     }
 
     private KuonOgreAscendant(final KuonOgreAscendant card) {

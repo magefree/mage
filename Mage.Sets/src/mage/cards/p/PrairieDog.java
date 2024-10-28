@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.HaventCastSpellFromHandThisTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -37,8 +37,8 @@ public final class PrairieDog extends CardImpl {
 
         // At the beginning of your end step, if you haven't cast a spell from your hand this turn, put a +1/+1 counter on Prairie Dog.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, HaventCastSpellFromHandThisTurnCondition.instance, false
+                TargetController.YOU, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                false, HaventCastSpellFromHandThisTurnCondition.instance
         ).addHint(HaventCastSpellFromHandThisTurnCondition.hint));
 
         // {4}{W}: Until end of turn, if you would put one or more +1/+1 counters on a creature you control, put that many plus one +1/+1 counters on it instead.

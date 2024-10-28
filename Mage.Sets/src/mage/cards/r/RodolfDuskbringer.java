@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -71,7 +71,7 @@ public final class RodolfDuskbringer extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoWhenCostPaid(
                 ability, new ManaCostsImpl<>("{1}{W/B}"), "Pay {1}{W/B}?"
-        ), TargetController.YOU, false).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
+        )).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 
     private RodolfDuskbringer(final RodolfDuskbringer card) {

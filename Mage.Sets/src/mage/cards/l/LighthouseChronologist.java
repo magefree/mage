@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.NotMyTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
@@ -16,7 +16,6 @@ import mage.cards.LevelerCard;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -44,7 +43,7 @@ public final class LighthouseChronologist extends LevelerCard {
         // At the beginning of each end step, if it's not your turn, take an extra turn after this one.
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
         abilities2.add(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(false), TargetController.ANY, NotMyTurnCondition.instance, false)
+                TargetController.ANY, new AddExtraTurnControllerEffect(false), false, NotMyTurnCondition.instance)
                 .addHint(NotMyTurnHint.instance));
 
         this.addAbilities(LevelerCardBuilder.construct(

@@ -12,7 +12,6 @@ import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -34,8 +33,7 @@ public final class DormantGrove extends CardImpl {
         this.addAbility(new TransformAbility());
 
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                false
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new TransformSourceEffect(),

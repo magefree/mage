@@ -11,7 +11,6 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -43,7 +42,7 @@ public final class SiegeVeteran extends CardImpl {
 
         // At the beginning of combat on your turn, put a +1/+1 counter on target creature you control.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance())
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

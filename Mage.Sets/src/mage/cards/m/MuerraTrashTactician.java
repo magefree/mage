@@ -40,8 +40,7 @@ public final class MuerraTrashTactician extends CardImpl {
         // At the beginning of your first main phase, add {R} or {G} for each Raccoon you control.
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(
                 new AddManaInAnyCombinationEffect(xValue, xValue, ColoredManaSymbol.R, ColoredManaSymbol.G)
-                        .setText("add {R} or {G} for each Raccoon you control"),
-                false
+                        .setText("add {R} or {G} for each Raccoon you control")
         ).setTriggerPhrase("At the beginning of your first main phase, ").addHint(hint));
 
         // Whenever you expend 4, you gain 3 life.

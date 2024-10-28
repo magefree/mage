@@ -44,8 +44,7 @@ public final class EmperorOfBones extends CardImpl {
 
         // At the beginning of combat on your turn, exile up to one target card from a graveyard.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new ExileTargetEffect().setToSourceExileZone(true),
-                false
+                new ExileTargetEffect().setToSourceExileZone(true)
         );
         ability.addTarget(new TargetCardInGraveyard(0, 1));
         this.addAbility(ability);

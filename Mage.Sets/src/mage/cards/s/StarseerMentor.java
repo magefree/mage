@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.YouGainedOrLostLifeCondition;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponent;
 import mage.watchers.common.PlayerGainedLifeWatcher;
@@ -53,7 +52,7 @@ public final class StarseerMentor extends CardImpl {
                                         new DiscardCardCost()
                                 ),
                                 "Sacrifice a nonland permanent or discard a card to prevent losing 3 life?"
-                        ), TargetController.YOU, false
+                        )
                 ), YouGainedOrLostLifeCondition.instance, "At the beginning of your end step, if you gained or lost life this turn, "
                 + "target opponent loses 3 life unless they sacrifice a nonland permanent or discard a card."
         );

@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.ModeChoiceSourceCondition;
@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterArtifactSpell;
@@ -53,7 +52,7 @@ public final class MirrodinBesieged extends CardImpl {
 
         // • Phyrexian — At the beginning of your end step, draw a card, then discard a card. Then if there are fifteen or more artifact cards in your graveyard, target opponent loses the game.
         Ability ability = new ConditionalTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                new MirrodinBesiegedEffect(), TargetController.YOU, false
+                new MirrodinBesiegedEffect()
         ), new ModeChoiceSourceCondition("Phyrexian"), ruleTrigger2);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

@@ -35,7 +35,7 @@ public final class KamahlHeartOfKrosa extends CardImpl {
         // At the beginning of combat on your turn, creatures you control get +3/+3 and gain trample until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new BoostControlledEffect(
                 3, 3, Duration.EndOfTurn
-        ).setText("creatures you control get +3/+3"), false);
+        ).setText("creatures you control get +3/+3"));
         ability.addEffect(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURES

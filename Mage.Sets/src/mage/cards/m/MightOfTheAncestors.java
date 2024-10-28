@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -25,8 +24,7 @@ public final class MightOfTheAncestors extends CardImpl {
         // At the beginning of combat on your turn, target creature you control gets +2/+0 and gains vigilance until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(2, 0, Duration.EndOfTurn)
-                        .setText("target creature you control gets +2/+0"),
-                false
+                        .setText("target creature you control gets +2/+0")
         );
         ability.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn)
                 .setText("and gains vigilance until end of turn"));

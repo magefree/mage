@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
@@ -10,7 +10,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ComparisonType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.game.permanent.token.BatToken;
@@ -37,8 +36,8 @@ public final class RegalBloodlord extends CardImpl {
         // At the beginning of each end step, if you gained life this turn, create a 1/1 black Bat creature token with flying.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new BatToken()),
-                        TargetController.ANY, false
+                        TargetController.ANY, new CreateTokenEffect(new BatToken()),
+                        false
                 ),
                 new YouGainedLifeCondition(),
                 "At the beginning of each end step, "

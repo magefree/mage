@@ -3,7 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.TreasureToken;
 
@@ -39,7 +38,7 @@ public final class StormTheVault extends CardImpl {
         // At the beginning of your end step, if you control five or more artifacts, transform Storm the Vault.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false),
+                new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect()),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, ComparisonType.MORE_THAN, 4),
                 "At the beginning of your end step, if you control five or more artifacts, transform {this}"
         ).addHint(new ValueHint("Artifacts you control", new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT))));

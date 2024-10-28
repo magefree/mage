@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -43,7 +43,7 @@ public final class BrainstealerDragon extends CardImpl {
 
         // At the beginning of your end step, exile the top card of each opponent's library. You may play those cards for as long as they remain exiled. If you cast a spell this way, you may spend mana as though it were mana of any color to cast it.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new BrainstealerDragonExileEffect(), TargetController.YOU, false
+                new BrainstealerDragonExileEffect()
         ));
 
         // Whenever a nonland permanent an opponent owns you control enters, they lose life equal to its mana value.

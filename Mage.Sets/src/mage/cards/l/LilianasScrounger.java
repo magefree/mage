@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -38,7 +38,7 @@ public final class LilianasScrounger extends CardImpl {
 
         // At the beginning of each end step, if a creature died this turn, you may put a loyalty counter on a Liliana planeswalker you control.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfEndStepTriggeredAbility(
-                new LilianasScroungerEffect(), TargetController.ANY, false
+                TargetController.ANY, new LilianasScroungerEffect(), false
         ), MorbidCondition.instance, "At the beginning of each end step, " +
                 "if a creature died this turn, you may put a loyalty counter on a Liliana planeswalker you control."
         ).addHint(MorbidHint.instance));

@@ -4,7 +4,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
@@ -28,7 +28,7 @@ public final class PyromancersSwath extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PyromancersSwathReplacementEffect()));
 
         // At the beginning of each end step, discard your hand.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new DiscardHandControllerEffect(), TargetController.ANY, null, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new DiscardHandControllerEffect(), false, null));
 
     }
 

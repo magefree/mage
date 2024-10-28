@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.CanBeYourCommanderAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -49,7 +49,7 @@ public final class CommodoreGuff extends CardImpl {
 
         // At the beginning of your end step, put a loyalty counter on another target planeswalker you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.LOYALTY.createInstance()), TargetController.YOU, false
+                new AddCountersTargetEffect(CounterType.LOYALTY.createInstance())
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

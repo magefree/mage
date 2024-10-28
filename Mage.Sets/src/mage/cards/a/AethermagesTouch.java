@@ -4,7 +4,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
@@ -75,7 +75,7 @@ class AethermagesTouchEffect extends OneShotEffect {
                             // It gains \"At the beginning of your end step, return this creature to its owner's hand.\"
                             Permanent permanent = game.getPermanent(card.getId());
                             if (permanent != null) {
-                                Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), TargetController.YOU, null, false);
+                                Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new ReturnToHandSourceEffect(true), false, null);
                                 ContinuousEffect effect = new GainAbilityTargetEffect(ability, Duration.Custom);
                                 effect.setTargetPointer(new FixedTarget(permanent, game));
                                 game.addEffect(effect, source);

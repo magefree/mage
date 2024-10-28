@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -47,9 +47,9 @@ public final class LightningPhoenix extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
                         Zone.GRAVEYARD,
-                        new DoIfCostPaid(
+                        TargetController.YOU, new DoIfCostPaid(
                                 new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl<>("{R}")
-                        ), TargetController.YOU, null, false
+                        ), false, null
                 ), LightningPhoenixCondition.instance, "At the beginning of your end step, " +
                 "if an opponent was dealt 3 or more damage this turn, you may pay {R}. " +
                 "If you do, return {this} from your graveyard to the battlefield."

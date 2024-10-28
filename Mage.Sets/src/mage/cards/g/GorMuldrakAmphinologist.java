@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -51,7 +51,7 @@ public final class GorMuldrakAmphinologist extends CardImpl {
 
         // At the beginning of your end step, each player who controls the fewest creatures creates a 4/3 blue Salamander Warrior creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new GorMuldrakAmphinologistEffect(), TargetController.YOU, false
+                new GorMuldrakAmphinologistEffect()
         ));
     }
 

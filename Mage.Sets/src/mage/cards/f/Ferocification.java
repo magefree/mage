@@ -10,7 +10,6 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -26,7 +25,7 @@ public final class Ferocification extends CardImpl {
         // At the beginning of combat on your turn, choose one--
         // * Target creature you control gets +2/+0 until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new BoostTargetEffect(2, 0), false
+                new BoostTargetEffect(2, 0)
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
 

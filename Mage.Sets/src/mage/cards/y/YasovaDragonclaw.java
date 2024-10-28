@@ -56,7 +56,7 @@ public final class YasovaDragonclaw extends CardImpl {
         effect2.setText(", untap that creature");
         effect.addEffect(effect2);
         effect.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, ", and it gains haste until end of turn"));
-        Ability ability = new BeginningOfCombatTriggeredAbility(effect, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(effect);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

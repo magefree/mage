@@ -250,13 +250,15 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
         if (interveningIfCondition != null) {
             String conditionText = interveningIfCondition.toString();
-            if (replaceRuleText && triggerPhrase != null && triggerPhrase.contains("{this}")) {
-                conditionText = conditionText.replace("{this}", "it");
+            if (!conditionText.isEmpty()) { // e.g. CaseSolveAbility
+                if (replaceRuleText && triggerPhrase != null && triggerPhrase.contains("{this}")) {
+                    conditionText = conditionText.replace("{this}", "it");
+                }
+                if (!conditionText.startsWith("if ")) {
+                    sb.append("if ");
+                }
+                sb.append(conditionText).append(", ");
             }
-            if (!conditionText.startsWith("if ")) {
-                sb.append("if ");
-            }
-            sb.append(conditionText).append(", ");
         }
 
         String superRule = super.getRule(true);

@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -33,7 +33,7 @@ public final class CallForUnity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{W}");
 
         // <i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, put a unity counter on Call for Unity.
-        TriggeredAbility ability = new BeginningOfYourEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.UNITY.createInstance(), true), false);
+        TriggeredAbility ability = new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.UNITY.createInstance(), true));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, RevoltCondition.instance, ruleText).addHint(RevoltCondition.getHint()), new RevoltWatcher());
 
         // Creatures you control get +1/+1 for each unity counter on Call for Unity.

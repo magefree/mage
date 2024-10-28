@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
@@ -33,7 +32,7 @@ public final class KnightRampager extends CardImpl {
 
         // Frenzied Rampage — At the beginning of combat on your turn, choose an opponent at random. Knight Rampager attacks that player this combat if able.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new AttackIfAbleTargetRandomOpponentSourceEffect(), false
+                new AttackIfAbleTargetRandomOpponentSourceEffect()
         ).withFlavorWord("Frenzied Rampage"));
 
         // When Knight Rampager dies, it deals 4 damage to target opponent chosen at random.

@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterBlockingCreature;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -29,7 +28,7 @@ public final class NahirisMachinations extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // At the beginning of combat on your turn, target creature you control gains indestructible until end of turn.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 

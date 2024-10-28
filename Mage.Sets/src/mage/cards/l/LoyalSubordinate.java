@@ -11,7 +11,6 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -32,8 +31,7 @@ public final class LoyalSubordinate extends CardImpl {
         // Lieutenant — At the beginning of combat on your turn, if you control your commander, each opponent loses 3 life.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new LoseLifeOpponentsEffect(3),
-                        false
+                        new LoseLifeOpponentsEffect(3)
                 ), CommanderInPlayCondition.instance,
                 "<i>Lieutenant</i> &mdash; At the beginning of combat "
                 + "on your turn, if you control your commander, "

@@ -11,7 +11,6 @@ import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -33,7 +32,7 @@ public final class RipplesOfUndeath extends CardImpl {
 
         // At the beginning of your precombat main phase, mill three cards. Then you may pay {1} and 3 life. If you do, put a card from among those cards into your hand.
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(
-                new RipplesOfUndeathEffect(), false
+                new RipplesOfUndeathEffect()
         ));
     }
 

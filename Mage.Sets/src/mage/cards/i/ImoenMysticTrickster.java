@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.condition.common.CompletedDungeonCondition;
 import mage.abilities.condition.common.HaveInitiativeCondition;
@@ -38,8 +38,8 @@ public final class ImoenMysticTrickster extends CardImpl {
 
         // At the beginning of your end step, if you have the initiative, draw a card. Draw another card if you've completed a dungeon.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
-                TargetController.YOU, HaveInitiativeCondition.instance, false
+                TargetController.YOU, new DrawCardSourceControllerEffect(1),
+                false, HaveInitiativeCondition.instance
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1), CompletedDungeonCondition.instance,

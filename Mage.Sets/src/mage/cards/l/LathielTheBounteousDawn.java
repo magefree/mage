@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -44,9 +44,9 @@ public final class LathielTheBounteousDawn extends CardImpl {
 
         // At the beginning of each end step, if you gained life this turn, distribute up to that many +1/+1 counters among any number of other target creatures.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new DistributeCountersEffect(
+                new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new DistributeCountersEffect(
                         CounterType.P1P1, 1, false, ""
-                ), TargetController.ANY, false),
+                ), false),
                 condition, "At the beginning of each end step, if you gained life this turn, " +
                 "distribute up to that many +1/+1 counters among any number of other target creatures."
         );

@@ -6,7 +6,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ParleyCount;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.DrawCardAllEffect;
@@ -41,8 +41,8 @@ public final class InnocuousResearcher extends CardImpl {
 
         // At the beginning of your end step, you may untap all lands you control.
         // If you do, you can't cast spells until your next turn.
-        Ability untapAbility = new BeginningOfEndStepTriggeredAbility(
-                new UntapAllLandsControllerEffect(), TargetController.YOU, true);
+        Ability untapAbility = new BeginningOfEndStepTriggeredAbility(TargetController.YOU,
+                new UntapAllLandsControllerEffect(), true);
         untapAbility.addEffect(new InnocuousResearcherEffect().concatBy("If you do,"));
         this.addAbility(untapAbility);
     }

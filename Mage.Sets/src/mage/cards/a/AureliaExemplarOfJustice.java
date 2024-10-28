@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -45,8 +44,7 @@ public final class AureliaExemplarOfJustice extends CardImpl {
 
         // At the beginning of combat on your turn, choose up to one target creature you control. Until end of turn, that creature gets +2/+0, gains trample if it's red, and gains vigilance if it's white.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AureliaExemplarOfJusticeEffect(),
-                false
+                new AureliaExemplarOfJusticeEffect()
         );
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1));
         this.addAbility(ability);

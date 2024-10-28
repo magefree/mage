@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.dynamicvalue.common.ControllerGainedLifeCount;
 import mage.abilities.effects.keyword.InvestigateEffect;
@@ -31,8 +31,8 @@ public final class SyndicateHeavy extends CardImpl {
 
         // At the beginning of each end step, if you gained 4 or more life this turn, investigate.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new InvestigateEffect(), TargetController.ANY,
-                new YouGainedLifeCondition(ComparisonType.MORE_THAN, 3), false
+                TargetController.ANY, new InvestigateEffect(),
+                false, new YouGainedLifeCondition(ComparisonType.MORE_THAN, 3)
         ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
     }
 

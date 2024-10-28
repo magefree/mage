@@ -9,6 +9,13 @@ import mage.game.events.GameEvent;
 public class BeginningOfCombatTriggeredAbility extends AtStepTriggeredAbility {
 
     /**
+     * At the beginning of combat on your turn (optional = false)
+     */
+    public BeginningOfCombatTriggeredAbility(Effect effect) {
+        this(effect, false);
+    }
+
+    /**
      * At the beginning of combat on your turn
      */
     public BeginningOfCombatTriggeredAbility(Effect effect, boolean optional) {

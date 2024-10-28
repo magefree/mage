@@ -3,7 +3,7 @@ package mage.cards.f;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -43,7 +43,7 @@ public final class FaramirPrinceOfIthilien extends CardImpl {
         // At the beginning of your end step, choose an opponent.
         // At the beginning of that player's next end step, you draw a card if they didn't attack you that turn.
         // Otherwise, create three 1/1 white Human Soldier creature tokens.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new FaramirPrinceOfIthilienEffect(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new FaramirPrinceOfIthilienEffect()));
     }
 
     private FaramirPrinceOfIthilien(final FaramirPrinceOfIthilien card) {
