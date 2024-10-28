@@ -31,7 +31,7 @@ public class RadiationEmblem extends Emblem {
         this.frameStyle = FrameStyle.M15_NORMAL;
 
         this.getAbilities().add(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfFirstMainTriggeredAbility(Zone.ALL, new RadiationEffect(), TargetController.YOU, false),
+                new BeginningOfFirstMainTriggeredAbility(Zone.ALL, TargetController.YOU, new RadiationEffect(), false),
                 RadiationCondition.instance,
                 "At the beginning of your precombat main phase, if you have any rad counters, "
                         + "mill that many cards. For each nonland card milled this way, you lose 1 life and a rad counter."

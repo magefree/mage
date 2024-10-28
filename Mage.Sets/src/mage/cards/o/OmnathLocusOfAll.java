@@ -37,7 +37,7 @@ public class OmnathLocusOfAll extends CardImpl {
         // if it has three or more colored mana symbols in its mana cost. If you do, add three mana in any combination of
         // colors and put it into your hand. If you don’t reveal it, put it into your hand.
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(
-                new OmnathLocusOfAllCardEffect(), TargetController.YOU, false
+                new OmnathLocusOfAllCardEffect(), false
         ));
     }
 

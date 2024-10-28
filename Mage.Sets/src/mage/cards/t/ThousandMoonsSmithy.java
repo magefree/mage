@@ -52,7 +52,6 @@ public final class ThousandMoonsSmithy extends CardImpl {
                         new TransformSourceEffect(),
                         new TapTargetCost(new TargetControlledPermanent(5, filter))
                 ),
-                TargetController.YOU,
                 false
         ));
     }

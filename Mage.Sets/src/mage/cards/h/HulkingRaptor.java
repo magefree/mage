@@ -31,7 +31,7 @@ public final class HulkingRaptor extends CardImpl {
 
         // At the beginning of your precombat main phase, add {G}{G}.
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(
-                new BasicManaEffect(Mana.GreenMana(2)), TargetController.YOU, false
+                new BasicManaEffect(Mana.GreenMana(2)), false
         ));
     }
 

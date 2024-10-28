@@ -39,7 +39,7 @@ public final class Electrozoa extends CardImpl {
 
         // At the beginning of your precombat main phase, tap Electrozoa unless you pay {E}.
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(
-                new TapSourceUnlessPaysEffect(new PayEnergyCost(1)), TargetController.YOU, false
+                new TapSourceUnlessPaysEffect(new PayEnergyCost(1)), false
         ));
     }
 

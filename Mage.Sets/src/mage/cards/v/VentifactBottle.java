@@ -41,7 +41,7 @@ public final class VentifactBottle extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // At the beginning of your precombat main phase, if Ventifact Bottle has a charge counter on it, tap it and remove all charge counters from it. Add {C} for each charge counter removed this way.
-        TriggeredAbility ability2 = new BeginningOfFirstMainTriggeredAbility(new VentifactBottleEffect(), TargetController.YOU, false);
+        TriggeredAbility ability2 = new BeginningOfFirstMainTriggeredAbility(new VentifactBottleEffect(), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability2,
                 new SourceHasCounterCondition(CounterType.CHARGE, 1, Integer.MAX_VALUE),
                 "At the beginning of your first main phase, "

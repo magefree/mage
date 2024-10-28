@@ -42,7 +42,7 @@ public final class SanctumOfFruitfulHarvest extends CardImpl {
                         xValue,
                         "add X mana of any one color, where X is the number of Shrines you control",
                         true),
-                TargetController.YOU, false)
+                false)
                 .addHint(new ValueHint("Shrines you control", xValue)));
     }
 

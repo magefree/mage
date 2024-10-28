@@ -24,7 +24,7 @@ public class ForsakenThresher extends CardImpl {
         this.nightCard = true;
 
         // At the beginning of your precombat main phase, add one mana of any color.
-        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new AddManaOfAnyColorEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new AddManaOfAnyColorEffect(), false));
     }
 
     private ForsakenThresher(final ForsakenThresher card) {

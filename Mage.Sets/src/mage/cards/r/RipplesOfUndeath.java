@@ -33,7 +33,7 @@ public final class RipplesOfUndeath extends CardImpl {
 
         // At the beginning of your precombat main phase, mill three cards. Then you may pay {1} and 3 life. If you do, put a card from among those cards into your hand.
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(
-                new RipplesOfUndeathEffect(), TargetController.YOU, false
+                new RipplesOfUndeathEffect(), false
         ));
     }
 

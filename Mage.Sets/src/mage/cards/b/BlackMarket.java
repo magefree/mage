@@ -30,7 +30,7 @@ public final class BlackMarket extends CardImpl {
         // Whenever a creature dies, put a charge counter on Black Market.
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), false));
         // At the beginning of your precombat main phase, add {B} for each charge counter on Black Market.
-        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new BlackMarketEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new BlackMarketEffect(), false));
 
     }
 

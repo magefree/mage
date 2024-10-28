@@ -43,7 +43,7 @@ public final class ElementalResonance extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your precombat main phase, add mana equal to enchanted permanent's mana cost.
-        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new ElementalResonanceEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new ElementalResonanceEffect(), false));
     }
 
     private ElementalResonance(final ElementalResonance card) {

@@ -51,7 +51,7 @@ public final class CabalTherapist extends CardImpl {
         ability.addTarget(new TargetPlayer());
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(
                 new DoWhenCostPaid(ability, new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE
-                ), "Sacrifice a creature?"), TargetController.YOU, false
+                ), "Sacrifice a creature?"), false
         ));
     }
 

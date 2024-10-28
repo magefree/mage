@@ -28,7 +28,7 @@ public final class BlinkmothUrn extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // At the beginning of each player's precombat main phase, if Blinkmoth Urn is untapped, that player adds {C} for each artifact they control.
-        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new BlinkmothUrnEffect(), TargetController.EACH_PLAYER, false)
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(TargetController.EACH_PLAYER, new BlinkmothUrnEffect(), false)
                         .withInterveningIf(SourceTappedCondition.UNTAPPED));
     }
 

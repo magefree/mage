@@ -23,7 +23,7 @@ public final class FourKnocks extends CardImpl {
 
         // At the beginning of your precombat main phase, draw a card.
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), TargetController.YOU, false
+                new DrawCardSourceControllerEffect(1), false
         ));
     }
 

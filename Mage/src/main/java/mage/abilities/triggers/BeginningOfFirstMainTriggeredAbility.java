@@ -11,11 +11,18 @@ import mage.game.events.GameEvent;
  */
 public class BeginningOfFirstMainTriggeredAbility extends AtStepTriggeredAbility {
 
-    public BeginningOfFirstMainTriggeredAbility(Effect effect, TargetController targetController, boolean optional) {
-        this(Zone.BATTLEFIELD, effect, targetController, optional);
+    /**
+     * At the beginning of your first main phase
+     */
+    public BeginningOfFirstMainTriggeredAbility(Effect effect, boolean optional) {
+        this(TargetController.YOU, effect, optional);
     }
 
-    public BeginningOfFirstMainTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean optional) {
+    public BeginningOfFirstMainTriggeredAbility(TargetController targetController, Effect effect, boolean optional) {
+        this(Zone.BATTLEFIELD, targetController, effect, optional);
+    }
+
+    public BeginningOfFirstMainTriggeredAbility(Zone zone, TargetController targetController, Effect effect, boolean optional) {
         super(zone, targetController, effect, optional);
     }
 

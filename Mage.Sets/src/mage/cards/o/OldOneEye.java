@@ -47,10 +47,10 @@ public final class OldOneEye extends CardImpl {
         // Fast Healing -- At the beginning of your precombat main phase, you may discard two cards. If you do, return Old One Eye from your graveyard to your hand.
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(
                 Zone.GRAVEYARD,
-                new DoIfCostPaid(
+                TargetController.YOU, new DoIfCostPaid(
                         new ReturnSourceFromGraveyardToHandEffect(),
                         new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS))
-                ), TargetController.YOU, false
+                ), false
         ).withFlavorWord("Fast Healing"));
     }
 

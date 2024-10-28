@@ -32,7 +32,7 @@ public final class StaticPrison extends CardImpl {
 
         // At the beginning of your precombat main phase, sacrifice Static Prison unless you pay {E}.
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new PayEnergyCost(1)), TargetController.YOU, false
+                new SacrificeSourceUnlessPaysEffect(new PayEnergyCost(1)), false
         ));
     }
 
