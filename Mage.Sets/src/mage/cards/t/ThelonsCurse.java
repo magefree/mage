@@ -45,7 +45,7 @@ public final class ThelonsCurse extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, filterCreature)));
 
         // At the beginning of each player's upkeep, that player may choose any number of tapped blue creatures they control and pay {U} for each creature chosen this way. If the player does, untap those creatures.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ThelonsCurseEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ThelonsCurseEffect(), TargetController.ANY, false));
     }
 
     private ThelonsCurse(final ThelonsCurse card) {

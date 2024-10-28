@@ -31,7 +31,7 @@ public final class RisingWaters extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepAllEffect(Duration.WhileOnBattlefield, TargetController.ANY, StaticFilters.FILTER_LANDS)));
         
         // At the beginning of each player's upkeep, that player untaps a land they control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new RisingWatersUntapEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RisingWatersUntapEffect(), TargetController.ANY, false));
     }
 
     private RisingWaters(final RisingWaters card) {

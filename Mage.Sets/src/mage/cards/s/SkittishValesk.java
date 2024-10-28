@@ -32,7 +32,7 @@ public final class SkittishValesk extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, flip a coin. If you lose the flip, turn Skittish Valesk face down.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SkittishValeskEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SkittishValeskEffect(), TargetController.YOU, false));
 
         // Morph {5}{R}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{5}{R}")));

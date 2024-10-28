@@ -37,7 +37,7 @@ public final class Paroxysm extends CardImpl {
 
         // At the beginning of the upkeep of enchanted creature's controller, that player reveals the top card of their library.
         // If that card is a land card, destroy that creature. Otherwise, it gets +3/+3 until end of turn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ParoxysmEffect(),
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ParoxysmEffect(),
                 TargetController.CONTROLLER_ATTACHED_TO, false, false));
     }
 

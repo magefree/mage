@@ -28,7 +28,7 @@ public final class GeistOfTheArchives extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // At the beginning of your upkeep, scry 1.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ScryEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ScryEffect(1), TargetController.YOU, false));
     }
 
     private GeistOfTheArchives(final GeistOfTheArchives card) {

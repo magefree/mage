@@ -38,7 +38,7 @@ public final class EnergyChamber extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // At the beginning of your upkeep, choose one - Put a +1/+1 counter on target artifact creature;
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance(), Outcome.BoostCreature), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(), Outcome.BoostCreature), TargetController.YOU, false);
         ability.addTarget(new TargetPermanent(filter));
 
         // or put a charge counter on target noncreature artifact.

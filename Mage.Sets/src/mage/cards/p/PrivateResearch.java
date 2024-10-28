@@ -41,7 +41,7 @@ public final class PrivateResearch extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may put a page counter on Private Research.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.PAGE.createInstance(), true), TargetController.YOU, true));
 
         // When enchanted creature dies, draw a card for each page counter on Private Research.

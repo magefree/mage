@@ -39,7 +39,7 @@ public final class ElaborateFirecannon extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may discard a card. If you do, untap Elaborate Firecannon.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
                 new UntapSourceEffect(), new DiscardCardCost()), TargetController.YOU, false));
 
     }

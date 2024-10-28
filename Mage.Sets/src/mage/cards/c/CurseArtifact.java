@@ -37,7 +37,7 @@ public final class CurseArtifact extends CardImpl {
         cost.setText("sacrifice attached artifact");
         Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new DamageTargetEffect(2), cost, "Sacrifice enchanted artifact? (otherwise {this} deals 2 damage to you)");
         effect.setText("{this} deals 2 damage to that player unless they sacrifice that artifact");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.CONTROLLER_ATTACHED_TO, false, true)
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.CONTROLLER_ATTACHED_TO, false, true)
                 .setTriggerPhrase("At the beginning of the upkeep of enchanted artifact's controller, "));
     }
 

@@ -27,7 +27,6 @@ public final class BarbedWire extends CardImpl {
 
         // At the beginning of each player's upkeep, Barbed Wire deals 1 damage to that player.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new DamageTargetEffect(1).withTargetDescription("that player"),
                 TargetController.ACTIVE,
                 false, true));

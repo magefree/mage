@@ -58,7 +58,6 @@ public final class Leviathan extends CardImpl {
 
         // At the beginning of your upkeep, you may sacrifice two Islands. If you do, untap Leviathan.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new DoIfCostPaid(new UntapSourceEffect(), 
                 new SacrificeTargetCost(2, filter)),
                 TargetController.YOU,

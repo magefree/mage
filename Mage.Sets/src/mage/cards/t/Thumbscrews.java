@@ -25,7 +25,7 @@ public final class Thumbscrews extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // At the beginning of your upkeep, if you have five or more cards in hand, Thumbscrews deals 1 damage to target opponent.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(
                 new DamageTargetEffect(1), TargetController.YOU, false);
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         CardsInHandCondition condition = new CardsInHandCondition(ComparisonType.MORE_THAN, 4);

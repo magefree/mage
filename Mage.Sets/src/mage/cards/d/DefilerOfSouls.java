@@ -37,7 +37,7 @@ public final class DefilerOfSouls extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // At the beginning of each player's upkeep, that player sacrifices a monocolored creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new SacrificeEffect(filter, 1, "that player"), TargetController.ANY, false));
     }
 

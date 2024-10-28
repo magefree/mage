@@ -37,7 +37,7 @@ public final class FesteringWound extends CardImpl {
         // At the beginning of your upkeep, you may put an infection counter on Festering Wound.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.INFECTION.createInstance(), true), TargetController.YOU, true));
         // At the beginning of the upkeep of enchanted creature's controller, Festering Wound deals X damage to that player, where X is the number of infection counters on Festering Wound.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new FesteringWoundEffect(), TargetController.CONTROLLER_ATTACHED_TO, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FesteringWoundEffect(), TargetController.CONTROLLER_ATTACHED_TO, false, true));
     }
 
     private FesteringWound(final FesteringWound card) {

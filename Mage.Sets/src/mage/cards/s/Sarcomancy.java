@@ -28,7 +28,7 @@ public final class Sarcomancy extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken(), 1), false));
         // At the beginning of your upkeep, if there are no Zombies on the battlefield, Sarcomancy deals 1 damage to you.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageControllerEffect(1), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), TargetController.YOU, false),
                 new PermanentsOnTheBattlefieldCondition(new FilterPermanent(SubType.ZOMBIE, "Zombies"), ComparisonType.EQUAL_TO, 0, false),
                 "At the beginning of your upkeep, if there are no Zombies on the battlefield, {this} deals 1 damage to you."));        
     }

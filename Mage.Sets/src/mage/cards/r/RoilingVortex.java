@@ -32,7 +32,7 @@ public final class RoilingVortex extends CardImpl {
 
         // At the beginning of each player's upkeep, Roiling Vortex deals 1 damage to them.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new DamageTargetEffect(1, true, "them"),
+                new DamageTargetEffect(1, true, "them"),
                 TargetController.ANY, false, true
         ));
 

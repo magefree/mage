@@ -49,7 +49,6 @@ public final class DiseasedVermin extends CardImpl {
 
         // At the beginning of your upkeep, Diseased Vermin deals X damage to target opponent previously dealt damage by it, where X is the number of infection counters on it.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new DiseasedVerminEffect(),
                 TargetController.YOU,
                 false);

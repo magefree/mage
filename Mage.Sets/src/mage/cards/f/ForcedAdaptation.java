@@ -36,7 +36,7 @@ public final class ForcedAdaptation extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, put a +1/+1 counter on enchanted creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddPlusOneCountersAttachedEffect(1), TargetController.YOU, false));
     }
 
     private ForcedAdaptation(final ForcedAdaptation card) {

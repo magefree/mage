@@ -36,7 +36,7 @@ public final class KoskunFalls extends CardImpl {
         // At the beginning of your upkeep, sacrifice Koskun Falls unless you tap an untapped creature you control.
         Effect effect = new SacrificeSourceUnlessPaysEffect(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filterCreature, true)));
         effect.setText("sacrifice Koskun Falls unless you tap an untapped creature you control");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
 
         // Creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.
         this.addAbility(new SimpleStaticAbility(

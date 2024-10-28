@@ -38,7 +38,7 @@ public final class ChaoticGoo extends CardImpl {
             "{this} enters with three +1/+1 counters on it"));
         
         // At the beginning of your upkeep, you may flip a coin. If you win the flip, put a +1/+1 counter on Chaotic Goo. If you lose the flip, remove a +1/+1 counter from Chaotic Goo.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ChaoticGooEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ChaoticGooEffect(), TargetController.YOU, true));
     }
 
     private ChaoticGoo(final ChaoticGoo card) {

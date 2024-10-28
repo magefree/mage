@@ -45,7 +45,7 @@ public final class StabWound extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-2,-2, Duration.WhileOnBattlefield)));
 
         // At the beginning of the upkeep of enchanted creature's controller, that player loses 2 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), TargetController.CONTROLLER_ATTACHED_TO, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeTargetEffect(2), TargetController.CONTROLLER_ATTACHED_TO, false, true));
     }
 
     private StabWound(final StabWound card) {

@@ -39,7 +39,7 @@ public final class WoebringerDemon extends CardImpl {
 
         // At the beginning of each player's upkeep, that player sacrifices a creature. 
         // If the player can't, sacrifice Woebringer Demon.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new WoebringerDemonEffect(), TargetController.ANY, false, true));
     }
 

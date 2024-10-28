@@ -24,7 +24,7 @@ public final class PaupersCage extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Paupers' Cage deals 2 damage to that player.
-        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 
+        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(
                 new DamageTargetEffect(2), TargetController.OPPONENT, false, true);
         CardsInHandCondition condition = new CardsInHandCondition(ComparisonType.FEWER_THAN, 3, TargetController.ACTIVE);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition,

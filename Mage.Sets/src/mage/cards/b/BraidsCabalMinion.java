@@ -35,7 +35,7 @@ public final class BraidsCabalMinion extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of each player's upkeep, that player sacrifices an artifact, creature, or land.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeEffect(filter, 1, "that player"), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, "that player"), TargetController.ANY, false));
 
     }
 

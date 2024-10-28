@@ -35,7 +35,6 @@ public final class BrassGnat extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
         // At the beginning of your upkeep, you may pay {1}. If you do, untap Brass Gnat.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new DoIfCostPaid(new UntapSourceEffect(), new GenericManaCost(1)),
                 TargetController.YOU,
                 false));

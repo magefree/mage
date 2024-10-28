@@ -38,7 +38,7 @@ public final class PowerLeak extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of the upkeep of enchanted enchantment's controller, that player may pay any amount of mana. Power Leak deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PowerLeakEffect(),
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PowerLeakEffect(),
                 TargetController.CONTROLLER_ATTACHED_TO, false, true
         ).setTriggerPhrase("At the beginning of the upkeep of enchanted enchantment's controller, "));
     }

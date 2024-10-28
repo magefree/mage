@@ -23,7 +23,7 @@ public final class Precognition extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
 
         // At the beginning of your upkeep, you may look at the top card of target opponent's library. If you do, you may put that card on the bottom of that player's library.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PrecognitionEffect(), TargetController.YOU, true, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new PrecognitionEffect(), TargetController.YOU, true, false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

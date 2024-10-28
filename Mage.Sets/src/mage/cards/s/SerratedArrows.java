@@ -38,7 +38,7 @@ public final class SerratedArrows extends CardImpl {
 
         // At the beginning of your upkeep, if there are no arrowhead counters on Serrated Arrows, sacrifice it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), TargetController.YOU, false),
                 new SourceHasCounterCondition(CounterType.ARROWHEAD, 0, 0),
                 "At the beginning of your upkeep, if there are no arrowhead counters on {this}, sacrifice it"
         ));

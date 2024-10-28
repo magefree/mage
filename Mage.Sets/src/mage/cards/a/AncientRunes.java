@@ -25,7 +25,7 @@ public final class AncientRunes extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // At the beginning of each player's upkeep, Ancient Runes deals damage to that player equal to the number of artifacts they control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AncientRunesDamageTargetEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AncientRunesDamageTargetEffect(), TargetController.ANY, false, true));
     }
 
     private AncientRunes(final AncientRunes card) {

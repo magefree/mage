@@ -27,7 +27,7 @@ public final class WolfcallersHowl extends CardImpl {
 
 
         // At the beginning of your upkeep, create X 2/2 green Wolf creature tokens, where X is the number of your opponents with four or more cards in hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WolfcallersHowlEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WolfcallersHowlEffect(), TargetController.YOU, false));
     }
 
     private WolfcallersHowl(final WolfcallersHowl card) {

@@ -34,7 +34,7 @@ public final class DropOfHoney extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // At the beginning of your upkeep, destroy the creature with the least power. It can't be regenerated. If two or more creatures are tied for least power, you choose one of them.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DropOfHoneyEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DropOfHoneyEffect(), TargetController.YOU, false));
         // When there are no creatures on the battlefield, sacrifice Drop of Honey.
         this.addAbility(new DropOfHoneyStateTriggeredAbility());
     }

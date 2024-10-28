@@ -33,7 +33,6 @@ public final class ManaVault extends CardImpl {
 
         // At the beginning of your upkeep, you may pay {4}. If you do, untap Mana Vault.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new DoIfCostPaid(new UntapSourceEffect(), new GenericManaCost(4), "Pay {4} to untap {this}?"),
                 TargetController.YOU,
                 false));

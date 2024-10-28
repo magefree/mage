@@ -29,7 +29,7 @@ public final class FeastOnTheFallen extends CardImpl {
 
         // At the beginning of each upkeep, if an opponent lost life last turn, put a +1/+1 counter on target creature you control. 
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+                new BeginningOfUpkeepTriggeredAbility(
                         new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                         TargetController.ANY, false),
                 FeastOnTheFallenCondition.instance,

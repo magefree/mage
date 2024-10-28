@@ -35,7 +35,7 @@ public final class AberrantResearcher extends CardImpl {
 
         // At the beginning of your upkeep, put the top card of your library into your graveyard. If it's an instant or sorcery card, transform Aberrant Researcher.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AberrantResearcherEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AberrantResearcherEffect(), TargetController.YOU, false));
     }
 
     private AberrantResearcher(final AberrantResearcher card) {

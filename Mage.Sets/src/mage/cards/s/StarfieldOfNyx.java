@@ -48,7 +48,7 @@ public final class StarfieldOfNyx extends CardImpl {
 
         // At the beginning of your upkeep, you may return target enchantment card
         // from your graveyard to the battlefield.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(), TargetController.YOU, true);
         ability.addTarget(new TargetCardInYourGraveyard(filterGraveyardEnchantment));
         this.addAbility(ability);

@@ -28,7 +28,7 @@ public final class MagmaticForce extends CardImpl {
         this.toughness = new MageInt(7);
 
         // At the beginning of each upkeep, Magmatic Force deals 3 damage to any target.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), TargetController.ANY, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(3), TargetController.ANY, false);
         ability.addTarget(new TargetAnyTarget());        
         this.addAbility(ability);
     }

@@ -68,7 +68,6 @@ class KuonsEssenceToken extends TokenImpl {
 
         // At the beginning of each player's upkeep, that player sacrifices a creature..
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD,
                 new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"),
                 TargetController.ANY, false, true));
     }

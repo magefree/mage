@@ -26,7 +26,7 @@ public final class DebtorsKnell extends CardImpl {
 
         // <i>({WB} can be paid with either {W} or {B}.)</i>
         // At the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), TargetController.YOU, false);
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
         

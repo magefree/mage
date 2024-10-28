@@ -34,7 +34,7 @@ public final class BringerOfTheBlueDawn extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, you may draw two cards.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(2), TargetController.YOU, true);
         this.addAbility(ability);
     }
 

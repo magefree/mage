@@ -34,7 +34,7 @@ public final class ThranTurbine extends CardImpl {
 
         // At the beginning of your upkeep, you may add {C} or {C}{C}. 
         // You can't spend this mana to cast spells.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new ThranTurbineEffect(), TargetController.YOU, true));
     }
 

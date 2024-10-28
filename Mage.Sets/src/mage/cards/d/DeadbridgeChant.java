@@ -29,7 +29,7 @@ public final class DeadbridgeChant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(10)));
 
         // At the beginning of your upkeep, choose a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, put it into your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DeadbridgeChantEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DeadbridgeChantEffect(), TargetController.YOU, false));
     }
 
     private DeadbridgeChant(final DeadbridgeChant card) {

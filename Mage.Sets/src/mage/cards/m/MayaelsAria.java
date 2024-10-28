@@ -32,7 +32,7 @@ public final class MayaelsAria extends CardImpl {
         // At the beginning of your upkeep, put a +1/+1 counter on each creature you control if you control a creature with power 5 or greater.
         // Then you gain 10 life if you control a creature with power 10 or greater.
         // Then you win the game if you control a creature with power 20 or greater.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new MayaelsAriaEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MayaelsAriaEffect(), TargetController.YOU, false));
     }
 
     private MayaelsAria(final MayaelsAria card) {

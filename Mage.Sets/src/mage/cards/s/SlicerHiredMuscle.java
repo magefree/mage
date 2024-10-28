@@ -49,7 +49,7 @@ public final class SlicerHiredMuscle extends CardImpl {
         // At the beginning of each opponent's upkeep, you may have that player gain
         // control of Slicer until end of turn. If you do, untap Slicer, goad it, and it
         // can't be sacrificed this turn. If you don't, convert it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SlicerHiredMuscleUpkeepEffect(),
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SlicerHiredMuscleUpkeepEffect(),
                 TargetController.OPPONENT, false, true));
 
     }

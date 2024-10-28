@@ -37,7 +37,7 @@ public final class RumblingCrescendo extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
 
         // At the beginning of your upkeep, you may put a verse counter on Rumbling Crescendo.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
 
         // {R}, Sacrifice Rumbling Crescendo: Destroy up to X target lands, where X is the number of verse counters on Rumbling Crescendo.        

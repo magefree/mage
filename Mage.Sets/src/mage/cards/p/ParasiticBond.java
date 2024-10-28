@@ -35,7 +35,7 @@ public final class ParasiticBond extends CardImpl {
         // At the beginning of the upkeep of enchanted creature's controller, Parasitic Bond deals 2 damage to that player.
         Effect effect = new DamageTargetEffect(2);
         effect.setText("{this} deals 2 damage to that player");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect,
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect,
             TargetController.CONTROLLER_ATTACHED_TO, false, true));
     }
 

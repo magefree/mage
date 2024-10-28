@@ -37,7 +37,7 @@ public final class HeraldsHorn extends CardImpl {
                 new SpellsCostReductionAllOfChosenSubtypeEffect(new FilterCreatureCard("Creature spells you cast of the chosen type"), 1, true)));
 
         // At the beginning of your upkeep, look at the top card of your library. If it's a creature card of the chosen type, you may reveal it and put it into your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new HeraldsHornEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HeraldsHornEffect(), TargetController.YOU, false));
     }
 
     private HeraldsHorn(final HeraldsHorn card) {

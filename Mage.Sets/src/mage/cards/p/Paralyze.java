@@ -40,7 +40,7 @@ public final class Paralyze extends CardImpl {
         // Enchanted creature doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
         // At the beginning of the upkeep of enchanted creature's controller, that player may pay {4}. If they do, untap the creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ParalyzeEffect(), TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ParalyzeEffect(), TargetController.CONTROLLER_ATTACHED_TO, false));
     }
 
     private Paralyze(final Paralyze card) {

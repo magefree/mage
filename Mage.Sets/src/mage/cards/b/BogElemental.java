@@ -33,7 +33,7 @@ public final class BogElemental extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE));
         
         // At the beginning of your upkeep, sacrifice Bog Elemental unless you sacrifice a land.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_LAND)),
                 TargetController.YOU, 
                 false));

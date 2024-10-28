@@ -25,7 +25,7 @@ public final class HavocFestival extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantGainLifeAllEffect()));
 
         // At the beginning of each player's upkeep, that player loses half their life, rounded up.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LoseHalfLifeTargetEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseHalfLifeTargetEffect(), TargetController.ANY, false));
 
     }
 

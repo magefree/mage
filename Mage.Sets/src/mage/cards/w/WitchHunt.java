@@ -35,7 +35,7 @@ public final class WitchHunt extends CardImpl {
         // Players can't gain life.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantGainLifeAllEffect()));
         // At the beginning of your upkeep, Witch Hunt deals 4 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageControllerEffect(4), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(4), TargetController.YOU, false));
         // At the beginning of your end step, target opponent chosen at random gains control of Witch Hunt.
         Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new WitchHuntEffect(), TargetController.YOU, null, false);
         Target target = new TargetOpponent();

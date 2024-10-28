@@ -40,7 +40,7 @@ public final class Doomgape extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of your upkeep, sacrifice a creature. You gain life equal to that creature's toughness.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DoomgapeEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoomgapeEffect(), TargetController.YOU, false));
 
     }
 

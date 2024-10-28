@@ -39,7 +39,7 @@ public final class CrovaxTheCursed extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)), "with four +1/+1 counters on it"));
 
         // At the beginning of your upkeep, you may sacrifice a creature. If you do, put a +1/+1 counter on Crovax. If you don't, remove a +1/+1 counter from Crovax.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CrovaxTheCursedEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CrovaxTheCursedEffect(), TargetController.YOU, false);
         this.addAbility(ability);
 
         // {B}: Crovax gains flying until end of turn.

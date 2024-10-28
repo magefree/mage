@@ -34,7 +34,7 @@ public final class GoblinDirigible extends CardImpl {
         // Goblin Dirigible doesn't untap during your untap step.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
         // At the beginning of your upkeep, you may pay {4}. If you do, untap Goblin Dirigible.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
             new UntapSourceEffect(), new ManaCostsImpl<>("{4}")), TargetController.YOU, false));
     }
 

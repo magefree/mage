@@ -32,7 +32,7 @@ public final class GhirapurOrrery extends CardImpl {
 
         // At the beginning of each player's upkeep, if that player has no cards in hand, that player draws three cards.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(3), TargetController.ANY, false, true),
+                new BeginningOfUpkeepTriggeredAbility(new DrawCardTargetEffect(3), TargetController.ANY, false, true),
                 new GhirapurOrreryCondition(),
                 "At the beginning of each player's upkeep, if that player has no cards in hand, that player draws three cards."));
     }

@@ -49,7 +49,7 @@ public final class Takklemaggot extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of the upkeep of enchanted creature's controller, put a -0/-1 counter on that creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new AddCountersAttachedEffect(CounterType.M0M1.createInstance(), "that creature"),
                 TargetController.CONTROLLER_ATTACHED_TO, false, false));
 

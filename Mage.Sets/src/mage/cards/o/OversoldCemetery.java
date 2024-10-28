@@ -24,7 +24,7 @@ public final class OversoldCemetery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // At the beginning of your upkeep, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), TargetController.YOU, true);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), TargetController.YOU, true);
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         CardsInControllerGraveyardCondition condition = new CardsInControllerGraveyardCondition(4, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, condition, "At the beginning of your upkeep, if you have four or more creature cards in your graveyard, you may return target creature card from your graveyard to your hand."));

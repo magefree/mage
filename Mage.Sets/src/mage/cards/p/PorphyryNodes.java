@@ -36,7 +36,7 @@ public final class PorphyryNodes extends CardImpl {
 
 
         // At the beginning of your upkeep, destroy the creature with the least power. It can't be regenerated. If two or more creatures are tied for least power, you choose one of them.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PorphyryNodesEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PorphyryNodesEffect(), TargetController.YOU, false));
 
         // When there are no creatures on the battlefield, sacrifice Porphyry Nodes.
         this.addAbility(new PorphyryNodesStateTriggeredAbility());

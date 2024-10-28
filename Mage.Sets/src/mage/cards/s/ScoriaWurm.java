@@ -31,7 +31,7 @@ public final class ScoriaWurm extends CardImpl {
         this.toughness = new MageInt(7);
 
         // At the beginning of your upkeep, flip a coin. If you lose the flip, return Scoria Wurm to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ScoriaWurmEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ScoriaWurmEffect(), TargetController.YOU, false));
     }
 
     private ScoriaWurm(final ScoriaWurm card) {

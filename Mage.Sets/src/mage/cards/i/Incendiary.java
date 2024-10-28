@@ -43,7 +43,7 @@ public final class Incendiary extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may put a fuse counter on Incendiary.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.FUSE.createInstance(), true), TargetController.YOU, true));
 
         // When enchanted creature dies, Incendiary deals X damage to any target, where X is the number of fuse counters on Incendiary.

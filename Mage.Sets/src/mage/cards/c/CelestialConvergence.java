@@ -34,7 +34,7 @@ public final class CelestialConvergence extends CardImpl {
 
         // At the beginning of your upkeep, remove an omen counter from Celestial Convergence. If there are no omen counters on Celestial Convergence, the player with the highest life total wins the game. If two or more players are tied for highest life total, the game is a draw.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.OMEN.createInstance(1)), TargetController.YOU, false);
+                new RemoveCounterSourceEffect(CounterType.OMEN.createInstance(1)), TargetController.YOU, false);
         ability.addEffect(new CelestialConvergenceEffect());
         this.addAbility(ability);
     }
