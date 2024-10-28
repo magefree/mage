@@ -36,7 +36,7 @@ public final class MonasterySiege extends CardImpl {
 
         // * Khans - At the beginning of your draw step, draw an additional card, then discard a card.
         this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfDrawTriggeredAbility(new DrawDiscardControllerEffect(1, 1), TargetController.YOU, false),
+                new BeginningOfDrawTriggeredAbility(new DrawDiscardControllerEffect(1, 1), false),
                 new ModeChoiceSourceCondition("Khans"),
                 "&bull; Khans &mdash; At the beginning of your draw step, draw an additional card, then discard a card."));
 

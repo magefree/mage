@@ -36,7 +36,7 @@ public final class OverbeingOfMyth extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(number)));
 
         // At the beginning of your draw step, draw an additional card.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1).setText("draw an additional card"), TargetController.YOU, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1).setText("draw an additional card"), false));
 
     }
 

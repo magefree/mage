@@ -8,11 +8,18 @@ import mage.game.events.GameEvent;
 
 public class BeginningOfDrawTriggeredAbility extends AtStepTriggeredAbility {
 
-    public BeginningOfDrawTriggeredAbility(Effect effect, TargetController targetController, boolean optional) {
-        this(Zone.BATTLEFIELD, effect, targetController, optional);
+    /**
+     * At the beginning of your draw step
+     */
+    public BeginningOfDrawTriggeredAbility(Effect effect, boolean optional) {
+        this(TargetController.YOU, effect, optional);
     }
 
-    public BeginningOfDrawTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean optional) {
+    public BeginningOfDrawTriggeredAbility(TargetController targetController, Effect effect, boolean optional) {
+        this(Zone.BATTLEFIELD, targetController, effect, optional);
+    }
+
+    public BeginningOfDrawTriggeredAbility(Zone zone, TargetController targetController, Effect effect, boolean optional) {
         super(zone, targetController, effect, optional);
     }
 

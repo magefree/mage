@@ -40,7 +40,7 @@ public final class ManaVault extends CardImpl {
 
         // At the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new DamageControllerEffect(1, "it"),
-                TargetController.YOU, false).withInterveningIf(SourceTappedCondition.TAPPED));
+                false).withInterveningIf(SourceTappedCondition.TAPPED));
 
         // {tap}: Add {C}{C}{C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new TapSourceCost()));

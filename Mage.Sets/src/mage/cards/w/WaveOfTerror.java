@@ -33,7 +33,7 @@ public final class WaveOfTerror extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // At the beginning of your draw step, destroy each creature with converted mana cost equal to the number of age counters on Wave of Terror. They can't be regenerated.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new WaveOfTerrorEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new WaveOfTerrorEffect(), false));
     }
 
     private WaveOfTerror(final WaveOfTerror card) {

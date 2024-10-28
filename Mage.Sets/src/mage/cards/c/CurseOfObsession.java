@@ -37,9 +37,9 @@ public final class CurseOfObsession extends CardImpl {
 
         // At the beginning of enchanted player's draw step, that player draws two additional cards.
         this.addAbility(new BeginningOfDrawTriggeredAbility(
-                new DrawCardTargetEffect(2)
+                TargetController.ENCHANTED, new DrawCardTargetEffect(2)
                         .setText("that player draws two additional cards"),
-                TargetController.ENCHANTED, false
+                false
         ));
 
         // At the beginning of enchanted player's end step, that player discards their hand.

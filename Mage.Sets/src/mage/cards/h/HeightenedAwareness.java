@@ -25,7 +25,7 @@ public final class HeightenedAwareness extends CardImpl {
         // At the beginning of your draw step, draw an additional card.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1)
                 .setText("draw an additional card"),
-                TargetController.YOU, false));
+                false));
     }
 
     private HeightenedAwareness(final HeightenedAwareness card) {

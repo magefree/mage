@@ -61,7 +61,7 @@ public final class BanditsTalent extends CardImpl {
         this.addAbility(new ClassLevelAbility(3, "{3}{B}"));
         // At the beginning of your draw step, draw an additional card for each opponent who has one or fewer cards in hand.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(new BeginningOfDrawTriggeredAbility(
-                new DrawCardSourceControllerEffect(BanditsTalentValue.instance), TargetController.YOU, false), 3))
+                TargetController.YOU, new DrawCardSourceControllerEffect(BanditsTalentValue.instance), false), 3))
                 .addHint(BanditsTalentValue.getHint()));
     }
 

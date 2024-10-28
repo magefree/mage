@@ -33,7 +33,7 @@ public final class OmenMachine extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmenMachineEffect()));
 
         // At the beginning of each player's draw step, that player exiles the top card of their library. If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new OmenMachineEffect2(), TargetController.EACH_PLAYER, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(TargetController.EACH_PLAYER, new OmenMachineEffect2(), false));
     }
 
     private OmenMachine(final OmenMachine card) {

@@ -38,7 +38,7 @@ public final class MalignantGrowth extends CardImpl {
 
         // At the beginning of each opponent's draw step, that player draws an additional card for each growth counter on Malignant Growth, then Malignant Growth deals damage to the player equal to the number of cards they drew this way.
         this.addAbility(new BeginningOfDrawTriggeredAbility(
-                new MalignantGrowthEffect(), TargetController.OPPONENT, false
+                TargetController.OPPONENT, new MalignantGrowthEffect(), false
         ));
     }
 

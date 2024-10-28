@@ -29,7 +29,7 @@ public final class AcademyLoremaster extends CardImpl {
 
         // At the beginning of each player's draw step, that player may draw an additional card. If they do, spells they cast this turn cost {2} more to cast.
         this.addAbility(new BeginningOfDrawTriggeredAbility(
-                new AcademyLoremasterEffect(), TargetController.EACH_PLAYER, false
+                TargetController.EACH_PLAYER, new AcademyLoremasterEffect(), false
         ));
     }
 

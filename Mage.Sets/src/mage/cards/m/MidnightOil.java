@@ -38,9 +38,9 @@ public final class MidnightOil extends CardImpl {
 
         // At the beginning of your draw step, draw an additional card and remove two hour counters from Midnight Oil.
         Ability ability = new BeginningOfDrawTriggeredAbility(
-                new DrawCardSourceControllerEffect(1)
+                TargetController.YOU, new DrawCardSourceControllerEffect(1)
                         .setText("draw an additional card"),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new RemoveCounterSourceEffect(
                 CounterType.HOUR.createInstance(2)

@@ -29,7 +29,7 @@ public final class AnvilOfBogardan extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // At the beginning of each player's draw step, that player draws an additional card, then discards a card.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new AnvilOfBogardanEffect(), TargetController.EACH_PLAYER, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(TargetController.EACH_PLAYER, new AnvilOfBogardanEffect(), false));
     }
     
     private AnvilOfBogardan(final AnvilOfBogardan card) {
