@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -51,7 +51,7 @@ public final class KirriTalentedSprout extends CardImpl {
         )));
 
         // At the beginning of your postcombat main phase, return target Plant, Treefolk, or land card from your graveyard to your hand.
-        Ability ability = new BeginningOfPostCombatMainTriggeredAbility(
+        Ability ability = new BeginningOfPostcombatMainTriggeredAbility(
                 new ReturnFromGraveyardToHandTargetEffect(), TargetController.YOU, false
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter2));

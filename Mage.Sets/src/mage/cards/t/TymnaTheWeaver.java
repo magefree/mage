@@ -3,7 +3,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
@@ -39,7 +39,7 @@ public final class TymnaTheWeaver extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // At the beginning of your postcombat main phase, you may pay X life, where X is the number of opponents that were dealt combat damage this turn. If you do, draw X cards.
-        this.addAbility(new BeginningOfPostCombatMainTriggeredAbility(new TymnaTheWeaverEffect(), TargetController.YOU, true), new TymnaTheWeaverWatcher());
+        this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(new TymnaTheWeaverEffect(), TargetController.YOU, true), new TymnaTheWeaverWatcher());
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());

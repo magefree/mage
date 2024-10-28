@@ -5,7 +5,7 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.triggers.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
@@ -41,7 +41,7 @@ public final class MegatronTyrant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MegatronTyrantCantCastSpellsEffect()));
 
         // At the beginning of your postcombat main phase, you may convert Megatron. If you do, add {C} for each 1 life your opponents have lost this turn.
-        TriggeredAbility trigger = new BeginningOfPostCombatMainTriggeredAbility(
+        TriggeredAbility trigger = new BeginningOfPostcombatMainTriggeredAbility(
             new TransformSourceEffect().setText("convert {this}"),
             TargetController.YOU,
             true

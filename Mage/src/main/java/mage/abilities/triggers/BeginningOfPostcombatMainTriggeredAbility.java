@@ -9,20 +9,20 @@ import mage.game.events.GameEvent;
 /**
  * @author LevelX2
  */
-public class BeginningOfPostCombatMainTriggeredAbility extends AtStepTriggeredAbility {
+public class BeginningOfPostcombatMainTriggeredAbility extends AtStepTriggeredAbility {
 
     // Note: new card implementations probably use BeginningOfSecondMainTriggeredAbility instead
-    public BeginningOfPostCombatMainTriggeredAbility(Effect effect, TargetController targetController, boolean optional) {
+    public BeginningOfPostcombatMainTriggeredAbility(Effect effect, TargetController targetController, boolean optional) {
         super(Zone.BATTLEFIELD, targetController, effect, optional);
     }
 
-    protected BeginningOfPostCombatMainTriggeredAbility(final BeginningOfPostCombatMainTriggeredAbility ability) {
+    protected BeginningOfPostcombatMainTriggeredAbility(final BeginningOfPostcombatMainTriggeredAbility ability) {
         super(ability);
     }
 
     @Override
-    public BeginningOfPostCombatMainTriggeredAbility copy() {
-        return new BeginningOfPostCombatMainTriggeredAbility(this);
+    public BeginningOfPostcombatMainTriggeredAbility copy() {
+        return new BeginningOfPostcombatMainTriggeredAbility(this);
     }
 
     @Override

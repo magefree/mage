@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -31,7 +31,7 @@ public final class SphinxOfTheSecondSun extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your postcombat main phase, you get an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)
-        this.addAbility(new BeginningOfPostCombatMainTriggeredAbility(
+        this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(
                 new SphinxOfTheSecondSunEffect(), TargetController.YOU, false
         ), new SphinxOfTheSecondSunWatcher());
     }
