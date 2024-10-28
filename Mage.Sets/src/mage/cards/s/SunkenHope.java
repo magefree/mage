@@ -26,7 +26,7 @@ public final class SunkenHope extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}{U}");
 
         // At the beginning of each player's upkeep, that player returns a creature they control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new SunkenHopeReturnToHandEffect(), false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new SunkenHopeReturnToHandEffect(), false));
     }
 
     private SunkenHope(final SunkenHope card) {

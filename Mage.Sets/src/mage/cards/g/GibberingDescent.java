@@ -28,7 +28,7 @@ public final class GibberingDescent extends CardImpl {
         // At the beginning of each player's upkeep, that player loses 1 life and discards a card.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 TargetController.ANY, new LoseLifeTargetEffect(1).setText("that player loses 1 life"),
-                false, true
+                false
         );
         ability.addEffect(new DiscardTargetEffect(1).setText("and discards a card"));
         this.addAbility(ability);

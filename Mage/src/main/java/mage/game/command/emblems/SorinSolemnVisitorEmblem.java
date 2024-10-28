@@ -19,7 +19,7 @@ public final class SorinSolemnVisitorEmblem extends Emblem {
      */
     public SorinSolemnVisitorEmblem() {
         super("Emblem Sorin");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, TargetController.OPPONENT, new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"), false, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.COMMAND, TargetController.OPPONENT, new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"), false);
         this.getAbilities().add(ability);
     }
 

@@ -35,7 +35,7 @@ public final class CursedLand extends CardImpl {
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to that player");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, effect,
-                false, true)
+                false)
                 .setTriggerPhrase("At the beginning of the upkeep of enchanted land's controller, "));
     }
 

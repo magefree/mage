@@ -22,7 +22,7 @@ public final class Skullcage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // At the beginning of each opponent's upkeep, Skullcage deals 2 damage to that player unless they have exactly three or exactly four cards in hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new SkullcageEffect(), false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new SkullcageEffect(), false));
     }
 
     private Skullcage(final Skullcage card) {

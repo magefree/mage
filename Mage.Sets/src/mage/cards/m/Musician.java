@@ -101,7 +101,7 @@ class MusicianTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
                         new DynamicValueGenericManaCost(new CountersSourceCount(CounterType.MUSIC),
                                 "{1} for each music counter on {this}")
                 ).setText("destroy this creature unless you pay {1} for each music counter on it"),
-                false, false);
+                false);
     }
 
     private MusicianTriggeredAbility(final MusicianTriggeredAbility ability) {

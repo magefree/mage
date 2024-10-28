@@ -32,7 +32,7 @@ public final class SoulBleed extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget));
         // At the beginning of the upkeep of enchanted creature's controller, that player loses 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new LoseLifeTargetEffect(1), false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new LoseLifeTargetEffect(1), false));
     }
 
     private SoulBleed(final SoulBleed card) {

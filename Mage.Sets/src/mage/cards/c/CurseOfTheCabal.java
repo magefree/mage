@@ -105,7 +105,7 @@ class CurseOfTheCabalInterveningIfTriggeredAbility extends ConditionalIntervenin
     public CurseOfTheCabalInterveningIfTriggeredAbility() {
         super(new BeginningOfUpkeepTriggeredAbility(
                         Zone.EXILED, TargetController.ANY, new CurseOfTheCabalTriggeredAbilityConditionalDelay(),
-                        false, true
+                        false
                 ),
                 SuspendedCondition.instance,
                 "At the beginning of each player's upkeep, if {this} is suspended, "

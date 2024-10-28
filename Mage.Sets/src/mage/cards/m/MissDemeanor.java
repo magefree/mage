@@ -38,7 +38,7 @@ public final class MissDemeanor extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of each other player's upkeep, you may compliment that player on their game play. If you don't, sacrifice Miss Demeanour.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.NOT_YOU, new MissDemeanorEffect(), false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.NOT_YOU, new MissDemeanorEffect(), false));
     }
 
     private MissDemeanor(final MissDemeanor card) {

@@ -32,7 +32,7 @@ public class KayaTheInexorableEmblem extends Emblem {
         super("Emblem Kaya");
         this.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
                 Zone.COMMAND, TargetController.YOU, new KayaTheInexorableEmblemEffect(),
-                true, false
+                true
         ));
     }
 

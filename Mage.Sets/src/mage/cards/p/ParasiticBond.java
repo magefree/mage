@@ -35,7 +35,7 @@ public final class ParasiticBond extends CardImpl {
         Effect effect = new DamageTargetEffect(2);
         effect.setText("{this} deals 2 damage to that player");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, effect,
-                false, true));
+                false));
     }
 
     private ParasiticBond(final ParasiticBond card) {

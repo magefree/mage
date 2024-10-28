@@ -42,7 +42,7 @@ public final class PrickleFaeries extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         Zone.BATTLEFIELD, TargetController.OPPONENT, new DamageTargetEffect(2),
-                        false, true
+                        false
                 ), PrickleFaeriesCondition.instance, "At the beginning of each opponent's upkeep, " +
                 "if that player has two or fewer cards in hand, {this} deals 2 damage to them."
         ));

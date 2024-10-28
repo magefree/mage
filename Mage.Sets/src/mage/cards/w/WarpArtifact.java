@@ -30,7 +30,7 @@ public final class WarpArtifact extends CardImpl {
         // At the beginning of the upkeep of enchanted artifact's controller, Warp Artifact deals 1 damage to that player.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 TargetController.CONTROLLER_ATTACHED_TO, new DamageTargetEffect(1).withTargetDescription("that player"),
-                false, true
+                false
         ).setTriggerPhrase("At the beginning of the upkeep of enchanted artifact's controller, "));
     }
 

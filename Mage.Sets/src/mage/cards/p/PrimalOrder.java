@@ -23,7 +23,7 @@ public final class PrimalOrder extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
 
         // At the beginning of each player's upkeep, Primal Order deals damage to that player equal to the number of nonbasic lands they control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new PrimalOrderDamageTargetEffect(), false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new PrimalOrderDamageTargetEffect(), false));
     }
 
     private PrimalOrder(final PrimalOrder card) {

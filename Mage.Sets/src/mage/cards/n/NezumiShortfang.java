@@ -71,7 +71,7 @@ class StabwhiskerTheOdious extends TokenImpl {
 
         // At the beginning of each opponent's upkeep, that player loses 1 life for each card fewer than three in their hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                TargetController.OPPONENT, new StabwhiskerLoseLifeEffect(), false, true));
+                TargetController.OPPONENT, new StabwhiskerLoseLifeEffect(), false));
     }
     private StabwhiskerTheOdious(final StabwhiskerTheOdious token) {
         super(token);

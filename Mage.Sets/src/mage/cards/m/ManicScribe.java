@@ -39,7 +39,7 @@ public final class ManicScribe extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
                         Zone.BATTLEFIELD, TargetController.OPPONENT, new MillCardsTargetEffect(3),
-                        false, true
+                        false
                 ), DeliriumCondition.instance, "<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, " +
                 "if there are four or more card types among cards in your graveyard, that player mills three cards."
         ).addHint(CardTypesInGraveyardHint.YOU));

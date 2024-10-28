@@ -42,7 +42,7 @@ public final class MogisGodOfSlaughter extends CardImpl {
         // At the beginning of each opponent's upkeep, Mogis deals 2 damage to that player unless they sacrifice a creature.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 TargetController.OPPONENT, new MogisGodOfSlaughterEffect(),
-                false, true
+                false
         );
         this.addAbility(ability);
     }

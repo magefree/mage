@@ -35,7 +35,7 @@ public final class Wanderlust extends CardImpl {
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to that player");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, effect,
-                false, true));
+                false));
     }
 
     private Wanderlust(final Wanderlust card) {

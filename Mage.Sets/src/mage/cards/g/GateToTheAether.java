@@ -26,7 +26,7 @@ public final class GateToTheAether extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // At the beginning of each player's upkeep, that player reveals the top card of their library. If it's an artifact, creature, enchantment, or land card, the player may put it onto the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new GateToTheAetherEffect(), false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new GateToTheAetherEffect(), false));
     }
 
     private GateToTheAether(final GateToTheAether card) {

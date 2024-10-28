@@ -36,7 +36,7 @@ public final class QuicksilverFountain extends CardImpl {
 
         // At the beginning of each player's upkeep, that player puts a flood counter on target non-Island land they control of their choice. That land is an Island for as long as it has a flood counter on it.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                TargetController.ANY, new QuicksilverFountainEffect(), false, true);
+                TargetController.ANY, new QuicksilverFountainEffect(), false);
         ability.addTarget(new TargetLandPermanent());
         ability.setTargetAdjuster(QuicksilverFountainAdjuster.instance);
         this.addAbility(ability);

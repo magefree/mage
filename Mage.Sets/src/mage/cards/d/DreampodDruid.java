@@ -30,7 +30,7 @@ public final class DreampodDruid extends CardImpl {
 
         // At the beginning of each upkeep, if Dreampod Druid is enchanted, create a 1/1 green Saproling creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new CreateTokenEffect(new SaprolingToken(), 1), false, false),
+                new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new CreateTokenEffect(new SaprolingToken(), 1), false),
                 new EnchantedSourceCondition(),
                 "At the beginning of each upkeep, if Dreampod Druid is enchanted, create a 1/1 green Saproling creature token."));
     }

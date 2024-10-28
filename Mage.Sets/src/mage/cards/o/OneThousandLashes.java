@@ -41,7 +41,7 @@ public final class OneThousandLashes extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
        
         // At the beginning of the upkeep of enchanted creature's controller, that player loses 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new LoseLifeTargetEffect(1), false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new LoseLifeTargetEffect(1), false));
     }
 
     private OneThousandLashes(final OneThousandLashes card) {

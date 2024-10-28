@@ -49,7 +49,7 @@ public final class SlicerHiredMuscle extends CardImpl {
         // control of Slicer until end of turn. If you do, untap Slicer, goad it, and it
         // can't be sacrificed this turn. If you don't, convert it.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new SlicerHiredMuscleUpkeepEffect(),
-                false, true));
+                false));
 
     }
 

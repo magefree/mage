@@ -40,7 +40,7 @@ public final class KaronaFalseGod extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // At the beginning of each player's upkeep, that player untaps Karona, False God and gains control of it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new KaronaFalseGodUntapGetControlEffect(), false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new KaronaFalseGodUntapGetControlEffect(), false));
 
         // Whenever Karona attacks, creatures of the creature type of your choice get +3/+3 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new KaronaFalseGodEffect(), false));

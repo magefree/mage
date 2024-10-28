@@ -33,7 +33,7 @@ public final class Fatespinner extends CardImpl {
 
         // At the beginning of each opponent's upkeep, that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new FatespinnerChooseEffect(),
-                false, true));
+                false));
     }
 
     private Fatespinner(final Fatespinner card) {

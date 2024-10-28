@@ -29,7 +29,7 @@ public final class LavabornMuse extends CardImpl {
 
         // At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, Lavaborn Muse deals 3 damage to that player.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new DamageTargetEffect(3), false, true),
+                new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new DamageTargetEffect(3), false),
                 (Condition)new CardsInHandCondition(ComparisonType.FEWER_THAN, 3, TargetController.ACTIVE),
                 "At the beginning of each opponent's upkeep, if that player has two or fewer cards in hand, {this} deals 3 damage to that player."));
     }

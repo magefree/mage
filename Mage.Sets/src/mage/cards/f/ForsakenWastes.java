@@ -26,7 +26,7 @@ public final class ForsakenWastes extends CardImpl {
         
         // At the beginning of each player's upkeep, that player loses 1 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new LoseLifeTargetEffect(1),
-                false, true));
+                false));
         
         // Whenever Forsaken Wastes becomes the target of a spell, that spell's controller loses 5 life.
         this.addAbility(new BecomesTargetSourceTriggeredAbility(new LoseLifeTargetEffect(5).setText("that spell's controller loses 5 life"),

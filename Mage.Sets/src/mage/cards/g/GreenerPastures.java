@@ -31,7 +31,7 @@ public final class GreenerPastures extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(
                         Zone.BATTLEFIELD,
                         TargetController.ANY, new CreateTokenTargetEffect(new SaprolingToken()),
-                        false, true
+                        false
                 ),
                 ActivePlayerMostLandsCondition.instance,
                 "At the beginning of each player's upkeep, "

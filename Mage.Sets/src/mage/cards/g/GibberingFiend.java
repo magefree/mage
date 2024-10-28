@@ -33,7 +33,7 @@ public final class GibberingFiend extends CardImpl {
         // <i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard,
         // Gibbering Fiend deals 1 damage to that player.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new DamageTargetEffect(1), false, true),
+                new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new DamageTargetEffect(1), false),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; At the beginning of each opponent's upkeep, if there are four or more card types among cards in your graveyard, "
                         + "{this} deals 1 damage to that player.")

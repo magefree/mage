@@ -38,7 +38,7 @@ public final class PowerTaint extends CardImpl {
         Effect effect = new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(new LoseLifeTargetEffect(2),
                 new ManaCostsImpl<>("{2}")).setText("that player loses 2 life unless they pay {2}");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, effect,
-                false, true)
+                false)
                 .setTriggerPhrase("At the beginning of the upkeep of enchanted enchantment's controller, "));
 
         // Cycling {2}
