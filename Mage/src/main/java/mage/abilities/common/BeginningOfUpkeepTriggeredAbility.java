@@ -51,10 +51,9 @@ public class BeginningOfUpkeepTriggeredAbility extends AtStepTriggeredAbility {
             case OPPONENT:
                 return "At the beginning of each opponent's upkeep, ";
             case ANY:
-            case ACTIVE:
-                return "At the beginning of each player's upkeep, ";
-            case EACH_PLAYER:
                 return "At the beginning of each upkeep, ";
+            case EACH_PLAYER:
+                return "At the beginning of each player's upkeep, ";
             case CONTROLLER_ATTACHED_TO:
                 return "At the beginning of the upkeep of enchanted creature's controller, ";
             case ENCHANTED:
