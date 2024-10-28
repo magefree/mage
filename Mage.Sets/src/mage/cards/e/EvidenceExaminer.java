@@ -1,7 +1,7 @@
 package mage.cards.e;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.CollectEvidenceTriggeredAbility;
 import mage.abilities.costs.common.CollectEvidenceCost;
 import mage.abilities.effects.common.DoIfCostPaid;

@@ -1,7 +1,7 @@
 package mage.cards.j;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CommanderCastFromCommandZoneValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;

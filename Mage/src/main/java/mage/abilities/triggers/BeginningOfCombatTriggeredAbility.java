@@ -1,7 +1,6 @@
-package mage.abilities.common;
+package mage.abilities.triggers;
 
 import mage.abilities.effects.Effect;
-import mage.abilities.triggers.AtStepTriggeredAbility;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;

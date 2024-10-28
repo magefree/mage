@@ -3,7 +3,7 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.combat.AttackIfAbleTargetRandomOpponentSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

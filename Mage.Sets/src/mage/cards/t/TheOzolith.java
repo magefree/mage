@@ -1,9 +1,8 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCountersCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
