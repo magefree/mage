@@ -2,7 +2,6 @@ package mage.cards.w;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileFromGraveCost;
@@ -10,7 +9,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -27,7 +29,7 @@ public final class WebOfInertia extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // At the beginning of combat on each opponent's turn, that player may exile a card from their graveyard. If the player doesn't, creatures they control can't attack you this turn.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(Zone.BATTLEFIELD, new WebOfInertiaEffect(), TargetController.OPPONENT, false, true));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new WebOfInertiaEffect(), TargetController.OPPONENT, false));
     }
 
     private WebOfInertia(final WebOfInertia card) {
@@ -60,9 +62,7 @@ class WebOfInertiaEffect extends OneShotEffect {
             if (cost.canPay(source, source, player.getId(), game) && player.chooseUse(Outcome.Detriment, "Exile a card from your graveyard?", source, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source, player.getId(), false, null)) {
-                    if (!game.isSimulation()) {
-                        game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
-                    }
+                    game.informPlayers(player.getLogName() + " pays the cost to prevent the effect");
                 }
             } else {
                 game.addEffect(new WebOfInertiaRestrictionEffect(player.getId()), source);
@@ -82,7 +82,7 @@ class WebOfInertiaRestrictionEffect extends RestrictionEffect {
 
     private final UUID attackerID;
 
-    public WebOfInertiaRestrictionEffect(UUID attackerID) {
+    WebOfInertiaRestrictionEffect(UUID attackerID) {
         super(Duration.EndOfTurn);
         this.attackerID = attackerID;
     }
