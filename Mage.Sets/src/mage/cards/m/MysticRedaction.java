@@ -1,6 +1,6 @@
 package mage.cards.m;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DiscardCardControllerTriggeredAbility;
 import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.effects.keyword.ScryEffect;

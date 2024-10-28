@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.counter.MoveCountersFromTargetToSourceEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.abilities.keyword.ModularAbility;

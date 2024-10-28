@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.condition.common.CreatureCountCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;

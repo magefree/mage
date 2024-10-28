@@ -1,6 +1,6 @@
 package mage.cards.c;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeAttachedCost;
 import mage.abilities.effects.Effect;

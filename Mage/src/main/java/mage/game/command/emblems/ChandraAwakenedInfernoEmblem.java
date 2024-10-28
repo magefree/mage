@@ -1,6 +1,6 @@
 package mage.game.command.emblems;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.constants.TargetController;
 import mage.constants.Zone;

@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.mana.UntilEndOfTurnManaEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;

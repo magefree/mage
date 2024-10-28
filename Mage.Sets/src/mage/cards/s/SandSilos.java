@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.condition.common.SourceTappedCondition;

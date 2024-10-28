@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.keyword.MoreThanMeetsTheEyeAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.effects.common.TransformSourceEffect;

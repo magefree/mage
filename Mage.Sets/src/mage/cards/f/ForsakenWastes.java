@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.common.BecomesTargetSourceTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;

@@ -2,6 +2,7 @@ package mage.abilities.common;
 
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
 import mage.abilities.effects.common.TransformSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.constants.TargetController;
 import mage.game.Game;
 

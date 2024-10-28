@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
