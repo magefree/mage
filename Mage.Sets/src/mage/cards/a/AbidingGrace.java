@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
@@ -33,7 +33,7 @@ public final class AbidingGrace extends CardImpl {
 
         // At the beginning of your end step, choose one —
         // • You gain 1 life.
-        Ability ability = new BeginningOfYourEndStepTriggeredAbility(new GainLifeEffect(1), false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new GainLifeEffect(1), false);
 
         // • Return target creature card with mana value 1 from your graveyard to the battlefield.
         Mode mode = new Mode(new ReturnFromGraveyardToBattlefieldTargetEffect());

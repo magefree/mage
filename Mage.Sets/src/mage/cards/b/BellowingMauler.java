@@ -3,7 +3,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.constants.SubType;
@@ -34,7 +34,7 @@ public final class BellowingMauler extends CardImpl {
         this.toughness = new MageInt(6);
 
         // At the beginning of your end step, each player loses 4 life unless they sacrifice a nontoken creature.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new BellowingMaulerEffect(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new BellowingMaulerEffect(), false));
     }
 
     private BellowingMauler(final BellowingMauler card) {

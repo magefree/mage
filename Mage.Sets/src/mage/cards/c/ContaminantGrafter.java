@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.CorruptedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -49,7 +49,7 @@ public final class ContaminantGrafter extends CardImpl {
         // Corrupted — At the beginning of your end step, if an opponent has three or more poison
         // counters, draw a card, then you may put a land card from your hand onto the battlefield.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfYourEndStepTriggeredAbility(new DrawCardSourceControllerEffect(1), false),
+                new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(1), false),
                 CorruptedCondition.instance, "At the beginning of your end step, if an opponent has three or more poison " +
                 "counters, draw a card, then you may put a land card from your hand onto the battlefield"
         );

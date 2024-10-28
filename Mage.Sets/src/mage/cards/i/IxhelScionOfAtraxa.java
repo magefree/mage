@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.ExileFaceDownYouMayPlayAsLongAsExiledTargetEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -41,7 +41,7 @@ public final class IxhelScionOfAtraxa extends CardImpl {
         // Corrupted — At the beginning of your end step, each opponent who has three or more poison counters
         // exiles the top card of their library face down. You may look at and play those cards for as long as
         // they remain exiled, and you may spend mana as though it were mana of any color to cast those spells.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new IxhelScionOfAtraxaEffect(), false).setAbilityWord(AbilityWord.CORRUPTED)
         );
     }

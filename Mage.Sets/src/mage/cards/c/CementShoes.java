@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepEnchantedEffect;
 import mage.abilities.effects.common.TapSourceEffect;
@@ -29,7 +29,7 @@ public final class CementShoes extends CardImpl {
         // Equipped creature gets +3/+3 and has "At the beginning of your end step, tap this creature."
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(3, 3));
         ability.addEffect(new GainAbilityAttachedEffect(
-                new BeginningOfYourEndStepTriggeredAbility(new TapSourceEffect(), false),
+                new BeginningOfEndStepTriggeredAbility(new TapSourceEffect(), false),
                 AttachmentType.EQUIPMENT
         ).setText("and has \"At the beginning of your end step, tap this creature.\""));
         this.addAbility(ability);

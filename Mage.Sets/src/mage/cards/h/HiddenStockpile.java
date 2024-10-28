@@ -1,7 +1,7 @@
 package mage.cards.h;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -31,7 +31,7 @@ public final class HiddenStockpile extends CardImpl {
 
         // <i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, create a 1/1 colorless Servo artifact creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new ServoToken()), false),
+                new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new ServoToken()), false),
                 RevoltCondition.instance, "At the beginning of your end step, if a permanent you controlled " +
                 "left the battlefield this turn, create a 1/1 colorless Servo artifact creature token."
         ).setAbilityWord(AbilityWord.REVOLT).addHint(RevoltCondition.getHint()), new RevoltWatcher());

@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -28,7 +28,7 @@ public final class Bulette extends CardImpl {
 
         // At the beginning of your end step, if a creature died this turn, put a +1/+1 counter on Bulette.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfYourEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false),
+                new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false),
                 MorbidCondition.instance,
                 "At the beginning of your end step, if a creature died this turn, put a +1/+1 counter on {this}."
         ).addHint(MorbidHint.instance));

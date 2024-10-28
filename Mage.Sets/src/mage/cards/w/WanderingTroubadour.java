@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.LandfallCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
@@ -29,7 +29,7 @@ public final class WanderingTroubadour extends CardImpl {
 
         // At the beginning of your end step, if you had a land enter the battlefield under your control this turn, venture into the dungeon.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfYourEndStepTriggeredAbility(new VentureIntoTheDungeonEffect(), false),
+                new BeginningOfEndStepTriggeredAbility(new VentureIntoTheDungeonEffect(), false),
                 LandfallCondition.instance,
                 "At the beginning of your end step, if you had a land enter the battlefield under your control this turn, venture into the dungeon."
         ).addHint(CurrentDungeonHint.instance), new LandfallWatcher());

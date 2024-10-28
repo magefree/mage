@@ -3,7 +3,7 @@ package mage.cards.s;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ContinuousEffect;
@@ -41,7 +41,7 @@ public final class SpiritSistersCall extends CardImpl {
         // At the beginning of your end step, choose target permanent card in your graveyard.
         // You may sacrifice a permanent that shares a card type with the chosen card.
         // If you do, return the chosen card from your graveyard to the battlefield and it gains "If this permanent would leave the battlefield, exile it instead of putting it anywhere else."
-        Ability ability = new BeginningOfYourEndStepTriggeredAbility(new SpiritSistersCallDoIfEffect(), false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new SpiritSistersCallDoIfEffect(), false);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

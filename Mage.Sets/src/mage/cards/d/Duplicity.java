@@ -8,7 +8,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
@@ -43,7 +43,7 @@ public final class Duplicity extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DuplicityExileHandEffect(), true));
 
         // At the beginning of your end step, discard a card.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new DiscardControllerEffect(1), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DiscardControllerEffect(1), false));
 
         // When you lose control of Duplicity, put all cards exiled with Duplicity into their owner's graveyard.
         this.addAbility(new DuplicityEntersBattlefieldAbility(new CreateDelayedTriggeredAbilityEffect(new LoseControlDuplicity())));

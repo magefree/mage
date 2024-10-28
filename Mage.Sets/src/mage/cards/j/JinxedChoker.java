@@ -1,7 +1,7 @@
 package mage.cards.j;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -34,7 +34,7 @@ public final class JinxedChoker extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of your end step, target opponent gains control of Jinxed Choker and puts a charge counter on it.
-        Ability endStepAbility = new BeginningOfYourEndStepTriggeredAbility(new TargetPlayerGainControlSourceEffect(), false);
+        Ability endStepAbility = new BeginningOfEndStepTriggeredAbility(new TargetPlayerGainControlSourceEffect(), false);
         endStepAbility.addEffect(new JinxedChokerAddCounterEffect());
         endStepAbility.addTarget(new TargetOpponent());
         this.addAbility(endStepAbility);

@@ -14,7 +14,11 @@ public class BeginningOfEndStepTriggeredAbility extends AtStepTriggeredAbility {
      * At the beginning of your end step (optional = false)
      */
     public BeginningOfEndStepTriggeredAbility(Effect effect) {
-        this(TargetController.YOU, effect, false);
+        this(effect, false);
+    }
+
+    public BeginningOfEndStepTriggeredAbility(Effect effect, boolean optional) {
+        this(TargetController.YOU, effect, optional);
     }
 
     public BeginningOfEndStepTriggeredAbility(TargetController targetController, Effect effect, boolean optional) {

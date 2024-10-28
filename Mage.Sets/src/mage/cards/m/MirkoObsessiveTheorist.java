@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SurveilTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldWithCounterTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -50,7 +50,7 @@ public final class MirkoObsessiveTheorist extends CardImpl {
         this.addAbility(new SurveilTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 
         // At the beginning of your end step, you may return target creature card with power less than Mirko's from your graveyard to the battlefield with a finality counter on it.
-        Ability ability = new BeginningOfYourEndStepTriggeredAbility(
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.FINALITY.createInstance())
                         .setText("you may return target creature card with power less than {this}'s from your graveyard to the " +
                                 "battlefield with a finality counter on it. <i>(If it would die, exile it instead.)</i>"),true

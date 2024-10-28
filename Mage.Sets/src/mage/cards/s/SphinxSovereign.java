@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class SphinxSovereign extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your end step, you gain 3 life if Sphinx Sovereign is untapped. Otherwise, each opponent loses 3 life.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new SphinxSovereignEffect(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SphinxSovereignEffect(), false));
     }
 
     private SphinxSovereign(final SphinxSovereign card) {

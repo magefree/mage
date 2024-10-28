@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveAllCountersSourceCost;
@@ -36,7 +36,7 @@ public final class TortureChamber extends CardImpl {
         ));
 
         // At the beginning of your end step, Torture Chamber deals damage to you equal to the number of pain counters on it.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new TortureChamberEffect1(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new TortureChamberEffect1(), false));
 
         // {1}, {tap}, Remove all pain counters from Torture Chamber: Torture Chamber deals damage to target creature equal to the number of pain counters removed this way.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(

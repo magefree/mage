@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -45,7 +45,7 @@ public final class Domestication extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
         
         // At the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice Domestication.
-        TriggeredAbility ability2 = new BeginningOfYourEndStepTriggeredAbility(new SacrificeSourceEffect(), false);
+        TriggeredAbility ability2 = new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability2, new DomesticationCondition(), "At the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice {this}"));
     }
 

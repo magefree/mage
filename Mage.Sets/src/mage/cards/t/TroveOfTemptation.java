@@ -3,7 +3,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -30,7 +30,7 @@ public final class TroveOfTemptation extends CardImpl {
         addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TroveOfTemptationForceAttackEffect(Duration.WhileOnBattlefield)));
 
         // At the beginning of your end step, create a colorless Treasure artifact token with "{t}, Sacrifice this artifact: Add one mana of any color.”
-        addAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new TreasureToken()), false));
+        addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new TreasureToken()), false));
     }
 
     private TroveOfTemptation(final TroveOfTemptation card) {
