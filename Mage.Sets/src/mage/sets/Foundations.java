@@ -38,6 +38,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Demonic Pact", 602, Rarity.MYTHIC, mage.cards.d.DemonicPact.class));
         cards.add(new SetCardInfo("Devout Decree", 571, Rarity.UNCOMMON, mage.cards.d.DevoutDecree.class));
         cards.add(new SetCardInfo("Disenchant", 572, Rarity.COMMON, mage.cards.d.Disenchant.class));
+        cards.add(new SetCardInfo("Doubling Season", 216, Rarity.MYTHIC, mage.cards.d.DoublingSeason.class));
         cards.add(new SetCardInfo("Duress", 606, Rarity.COMMON, mage.cards.d.Duress.class));
         cards.add(new SetCardInfo("Elspeth's Smite", 493, Rarity.UNCOMMON, mage.cards.e.ElspethsSmite.class));
         cards.add(new SetCardInfo("Elvish Archdruid", 219, Rarity.RARE, mage.cards.e.ElvishArchdruid.class));
@@ -87,6 +88,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Refute", 48, Rarity.COMMON, mage.cards.r.Refute.class));
         cards.add(new SetCardInfo("Savannah Lions", 146, Rarity.UNCOMMON, mage.cards.s.SavannahLions.class));
         cards.add(new SetCardInfo("Searslicer Goblin", 93, Rarity.RARE, mage.cards.s.SearslicerGoblin.class));
+        cards.add(new SetCardInfo("Seismic Rupture", 205, Rarity.UNCOMMON, mage.cards.s.SeismicRupture.class));
         cards.add(new SetCardInfo("Serra Angel", 147, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Shivan Dragon", 206, Rarity.UNCOMMON, mage.cards.s.ShivanDragon.class));
         cards.add(new SetCardInfo("Slagstorm", 207, Rarity.RARE, mage.cards.s.Slagstorm.class));
