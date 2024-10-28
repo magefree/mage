@@ -60,7 +60,7 @@ public final class BlacksmithsTalent extends CardImpl {
 
         // At the beginning of combat on your turn, attach target Equipment you control to up to one target creature you control.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new BlacksmithsTalentEffect(), false
+                new BlacksmithsTalentEffect()
         );
         ability.addTarget(new TargetPermanent(filter));
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1));

@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -28,7 +27,7 @@ public final class StarlightSpectacular extends CardImpl {
 
         // Parade! -- At the beginning of combat on your turn, choose creatures you control one at a time until each creature you control has been chosen. Each of those creatures gets +1/+1 until end of turn for each creature chosen before it.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new StarlightSpectacularEffect(), false
+                new StarlightSpectacularEffect()
         ).withFlavorWord("Parade!"));
     }
 

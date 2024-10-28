@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -44,7 +43,7 @@ public final class AzraOddsmaker extends CardImpl {
                 new DoIfCostPaid(
                         new AzraOddsmakerEffect(),
                         new DiscardCardCost()
-                ), false
+                )
         ));
     }
 

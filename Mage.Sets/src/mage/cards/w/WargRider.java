@@ -55,8 +55,7 @@ public final class WargRider extends CardImpl {
 
         // At the beginning of combat on your turn, amass Orcs 2.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new AmassEffect(2, SubType.ORC),
-                false
+                new AmassEffect(2, SubType.ORC)
         ));
     }
 

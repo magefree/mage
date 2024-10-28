@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -55,8 +54,7 @@ public final class HotPursuit extends CardImpl {
         // At the beginning of combat on your turn, if two or more players have lost the game, gain control of all goaded and/or suspected creatures until end of turn. Untap them. They gain haste until end of turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new GainControlAllUntapGainHasteEffect(filter),
-                        false
+                        new GainControlAllUntapGainHasteEffect(filter)
                 ), HotPursuitCondition.instance, "At the beginning of combat on your turn, " +
                 "if two or more players have lost the game, gain control of all goaded and/or " +
                 "suspected creatures until end of turn. Untap them. They gain haste until end of turn."

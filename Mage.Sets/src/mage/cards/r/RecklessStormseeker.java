@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -34,8 +33,7 @@ public final class RecklessStormseeker extends CardImpl {
         // At the beginning of combat on your turn, target creature you control gets +1/+0 and gains haste until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(1, 0)
-                        .setText("target creature you control gets +1/+0"),
-                false
+                        .setText("target creature you control gets +1/+0")
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn

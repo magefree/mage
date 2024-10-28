@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -40,8 +39,7 @@ public final class AethershieldArtificer extends CardImpl {
         // At the beginning of combat on your turn, target artifact creature you control gets +2/+2 and gains indestructible until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(2, 2, Duration.EndOfTurn)
-                        .setText("target artifact creature you control gets +2/+2"),
-                false
+                        .setText("target artifact creature you control gets +2/+2")
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 IndestructibleAbility.getInstance(),

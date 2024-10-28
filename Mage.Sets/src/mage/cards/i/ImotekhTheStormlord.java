@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -53,8 +52,7 @@ public final class ImotekhTheStormlord extends CardImpl {
         // Grand Strategist -- At the beginning of combat on your turn, another target artifact creature you control gets +2/+2 and gains menace until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(2, 2)
-                        .setText("another target artifact creature you control gets +2/+2"),
-                false
+                        .setText("another target artifact creature you control gets +2/+2")
         );
         ability.addEffect(new GainAbilityTargetEffect(new MenaceAbility(false))
                 .setText("and gains menace until end of turn"));

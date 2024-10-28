@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -43,7 +42,7 @@ public final class JubilantMascot extends CardImpl {
                         new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                                 .setText("support 2"),
                         new ManaCostsImpl<>("{3}{W}")
-                ), false);
+                ));
         ability.addTarget(new TargetCreaturePermanent(0, 2, filter, false));
         this.addAbility(ability);
     }

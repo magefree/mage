@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.RoleType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -40,7 +39,7 @@ public final class SpellbookVendor extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(new BeginningOfCombatTriggeredAbility(new DoWhenCostPaid(
                 ability, new GenericManaCost(1), "Pay {1}?"
-        ), false));
+        )));
     }
 
     private SpellbookVendor(final SpellbookVendor card) {

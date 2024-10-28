@@ -13,7 +13,6 @@ import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -33,7 +32,7 @@ public final class ZndrspltEyeOfWisdom extends CardImpl {
         this.addAbility(new PartnerWithAbility("Okaun, Eye of Chaos", true));
 
         // At the beginning of combat on your turn, flip a coin until you lose a flip.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new FlipUntilLoseEffect(), false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new FlipUntilLoseEffect()));
 
         // Whenever a player wins a coin flip, draw a card.
         this.addAbility(new WinsCoinFlipTriggeredAbility(new DrawCardSourceControllerEffect(1)));

@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -37,8 +36,7 @@ public final class SteelSeraph extends CardImpl {
 
         // At the beginning of combat on your turn, target creature you control gains your choice of flying, vigilance, or lifelink until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new GainsChoiceOfAbilitiesEffect(
-                        FlyingAbility.getInstance(), VigilanceAbility.getInstance(), LifelinkAbility.getInstance()),
-                false
+                        FlyingAbility.getInstance(), VigilanceAbility.getInstance(), LifelinkAbility.getInstance())
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

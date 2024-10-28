@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
@@ -35,8 +34,8 @@ public final class BelligerentOfTheBall extends CardImpl {
         // Celebration -- At the beginning of combat on your turn, if two or more nonland permanents entered the battlefield under your control this turn, target creature you control gets +1/+0 and gains menace until end of turn.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new BoostTargetEffect(1, 0),
-                        false),
+                        new BoostTargetEffect(1, 0)
+                ),
                 CelebrationCondition.instance, "At the beginning of combat on your turn, if two or more nonland "
                 + "permanents entered the battlefield under your control this turn, target creature you control "
                 + "gets +1/+0 and gains menace until end of turn."

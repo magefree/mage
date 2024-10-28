@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -29,8 +28,7 @@ public final class EvidenceExaminer extends CardImpl {
 
         // At the beginning of combat on your turn, you may collect evidence 4.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new DoIfCostPaid(null, new CollectEvidenceCost(4)),
-                false
+                new DoIfCostPaid(null, new CollectEvidenceCost(4))
         ));
 
         // Whenever you collect evidence, investigate.

@@ -15,7 +15,6 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -33,8 +32,7 @@ public final class HelmOfTheHost extends CardImpl {
 
         // At the beginning of combat on your turn, create a token that's a copy of equipped creature, except the token isn't legendary if equipped creature is legendary. That token gains haste.
         TriggeredAbility ability = new BeginningOfCombatTriggeredAbility(
-                new HelmOfTheHostEffect(),
-                false
+                new HelmOfTheHostEffect()
         );
         this.addAbility(ability);
 

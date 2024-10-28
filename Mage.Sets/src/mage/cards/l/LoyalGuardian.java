@@ -11,7 +11,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 
@@ -37,7 +36,7 @@ public final class LoyalGuardian extends CardImpl {
                         new AddCountersAllEffect(
                                 CounterType.P1P1.createInstance(),
                                 StaticFilters.FILTER_CONTROLLED_CREATURE
-                        ), false
+                        )
                 ), CommanderInPlayCondition.instance,
                 "<i>Lieutenant</i> &mdash; At the beginning of combat "
                 + "on your turn, if you control your commander, "

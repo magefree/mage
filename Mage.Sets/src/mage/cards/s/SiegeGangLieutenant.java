@@ -42,7 +42,7 @@ public final class SiegeGangLieutenant extends CardImpl {
         // Lieutenant -- At the beginning of combat on your turn, if you control your commander, create two 1/1 red Goblin creature tokens. Those tokens gain haste until end of turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new SiegeGangLieutenantEffect(), false
+                        new SiegeGangLieutenantEffect()
                 ), CommanderInPlayCondition.instance, "At the beginning of combat on your turn, " +
                 "if you control your commander, create two 1/1 red Goblin creature tokens. " +
                 "Those tokens gain haste until end of turn."

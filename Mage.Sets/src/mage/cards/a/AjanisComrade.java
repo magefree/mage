@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 
@@ -42,7 +41,7 @@ public final class AjanisComrade extends CardImpl {
 
         // At the beginning of combat on your turn, if you control an Ajani planeswalker, put a +1/+1 counter on Ajani's Comrade.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false),
+                new BeginningOfCombatTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "At the beginning of combat on your turn, if you control an Ajani planeswalker, put a +1/+1 counter on {this}."));
     }

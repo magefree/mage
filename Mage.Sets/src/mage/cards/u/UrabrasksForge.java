@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.token.PhyrexianHorrorRedToken;
@@ -31,7 +30,7 @@ public final class UrabrasksForge extends CardImpl {
 
         // At the beginning of combat on your turn, put an oil counter on Urabrask's Forge, then create an X/1 red Phyrexian Horror creature token with trample and haste, where X is the number of oil counters on Urabrask's Forge. Sacrifice that token at the beginning of the next end step.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.OIL.createInstance()), false
+                new AddCountersSourceEffect(CounterType.OIL.createInstance())
         );
         ability.addEffect(new UrabrasksForgeEffect());
         this.addAbility(ability);

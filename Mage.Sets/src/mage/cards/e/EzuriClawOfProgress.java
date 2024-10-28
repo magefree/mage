@@ -49,7 +49,7 @@ public final class EzuriClawOfProgress extends CardImpl {
         ), filter));
 
         // At the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is the number of experience counters you have.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new EzuriClawOfProgressEffect(), false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new EzuriClawOfProgressEffect());
         ability.addTarget(new TargetControlledCreaturePermanent(filter2));
         this.addAbility(ability);
     }

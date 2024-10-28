@@ -36,7 +36,7 @@ public final class SigardianZealot extends CardImpl {
 
         // At the beginning of combat on your turn, choose any number of creatures with different powers. Each of them gets +X/+X and gains vigilance until end of turn, where X is Sigardian Zealot's power.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new SigardianZealotEffect(), false
+                new SigardianZealotEffect()
         ));
     }
 

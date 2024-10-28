@@ -32,7 +32,7 @@ public final class DeepfathomEcho extends CardImpl {
 
         // At the beginning of combat on your turn, Deepfathom Echo explores. Then you may have it become a copy of another creature you control until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new ExploreSourceEffect(false, "{this}"), false
+                new ExploreSourceEffect(false, "{this}")
         );
         ability.addEffect(new DeepfathomEchoEffect());
         this.addAbility(ability);

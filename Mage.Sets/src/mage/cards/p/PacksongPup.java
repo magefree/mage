@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -52,8 +51,7 @@ public final class PacksongPup extends CardImpl {
         // At the beginning of combat on your turn, if you control another Wolf or Werewolf, put a +1/+1 counter on Packsong Pup.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        false
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                 ), condition, "At the beginning of combat on your turn," +
                 " if you control another Wolf or Werewolf, put a +1/+1 counter on {this}"
         ).addHint(hint));

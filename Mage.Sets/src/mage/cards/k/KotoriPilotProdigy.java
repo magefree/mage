@@ -47,8 +47,7 @@ public final class KotoriPilotProdigy extends CardImpl {
         // At the beginning of combat on your turn, target artifact creature you control gains lifelink and vigilance until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new GainAbilityTargetEffect(LifelinkAbility.getInstance())
-                        .setText("target artifact creature you control gains lifelink"),
-                false
+                        .setText("target artifact creature you control gains lifelink")
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 VigilanceAbility.getInstance()

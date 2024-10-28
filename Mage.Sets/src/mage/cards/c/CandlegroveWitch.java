@@ -31,7 +31,7 @@ public final class CandlegroveWitch extends CardImpl {
                 new BeginningOfCombatTriggeredAbility(
                         new GainAbilitySourceEffect(
                                 FlyingAbility.getInstance(), Duration.EndOfTurn
-                        ), false
+                        )
                 ), CovenCondition.instance, "At the beginning of combat on your turn, if you control three " +
                 "or more creatures with different powers, {this} gains flying until end of turn."
         ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));

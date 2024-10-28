@@ -34,8 +34,7 @@ public final class HowlingMoon extends CardImpl {
 
         // At the beginning of combat on your turn, target Wolf or Werewolf you control gets +2/+2 until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new BoostTargetEffect(2, 2, Duration.EndOfTurn),
-                false
+                new BoostTargetEffect(2, 2, Duration.EndOfTurn)
         );
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);

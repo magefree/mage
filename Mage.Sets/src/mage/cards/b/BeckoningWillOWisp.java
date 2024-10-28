@@ -45,7 +45,7 @@ public final class BeckoningWillOWisp extends CardImpl {
 
         // Lure the Unwary — At the beginning of combat on your turn, choose an opponent.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new BeckoningWillOWispEffect(), false
+                new BeckoningWillOWispEffect()
         ).withFlavorWord("Lure the Unwary"));
 
         // Creatures attacking the last chosen player get +1/+0.

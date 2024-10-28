@@ -64,8 +64,8 @@ public final class OverseerOfVault76 extends CardImpl {
                 3)
                 .setText("remove three quest counters from among permanents you control");
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new DoWhenCostPaid(boostAbility, cost, "Remove three quest counters from among permanents you control?"),
-                false));
+                new DoWhenCostPaid(boostAbility, cost, "Remove three quest counters from among permanents you control?")
+        ));
     }
 
     private OverseerOfVault76(final OverseerOfVault76 card) {

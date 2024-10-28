@@ -57,8 +57,7 @@ public final class VihaanGoldwaker extends CardImpl {
                                 .withSubType(SubType.CONSTRUCT).withSubType(SubType.ASSASSIN),
                         "", filterTreasures, Duration.EndOfTurn, false
                 ).setText("have Treasures you control become 3/3 Construct Assassin artifact creatures "
-                        + "in addition to their other types until end of turn"),
-                true
+                        + "in addition to their other types until end of turn"), true
         ));
     }
 

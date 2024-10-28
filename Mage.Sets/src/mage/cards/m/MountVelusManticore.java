@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
@@ -33,7 +32,7 @@ public final class MountVelusManticore extends CardImpl {
 
         // At the beginning of combat on your turn, you may discard a card. When you do, Mount Velus Manticore deals X damage to any target, where X is the number of card types the discarded card has.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new MountVelusManticoreEffect(), false
+                new MountVelusManticoreEffect()
         ));
     }
 

@@ -21,7 +21,6 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.common.TargetCardInLibrary;
@@ -44,8 +43,8 @@ public final class CaseOfTheShatteredPact extends CardImpl {
         // To solve -- There are five colors among permanents you control.
         // Solved -- At the beginning of combat on your turn, target creature you control gains flying, double strike, and vigilance until end of turn.
         TriggeredAbility triggeredAbility = new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance())
-                .setText("target creature you control gains flying"),
-                false);
+                .setText("target creature you control gains flying")
+        );
         triggeredAbility.addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance())
                 .setText(", double strike,"));
         triggeredAbility.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance())

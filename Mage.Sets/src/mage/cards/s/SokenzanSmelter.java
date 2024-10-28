@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.ConstructRedToken;
 
@@ -37,7 +36,7 @@ public final class SokenzanSmelter extends CardImpl {
                         new GenericManaCost(1),
                         new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN), "pay {1} and sacrifice an artifact"
                 )
-        ), false));
+        )));
     }
 
     private SokenzanSmelter(final SokenzanSmelter card) {

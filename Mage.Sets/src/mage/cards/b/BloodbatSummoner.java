@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -53,7 +52,7 @@ public final class BloodbatSummoner extends CardImpl {
                         .withColor("B"),
                 false, false, Duration.Custom
         ).setText("up to one target Blood token you control becomes a " +
-                "2/2 black Bat creature with flying and haste in addition to its other types"), false);
+                "2/2 black Bat creature with flying and haste in addition to its other types"));
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
     }

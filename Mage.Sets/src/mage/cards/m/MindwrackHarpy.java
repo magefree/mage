@@ -29,8 +29,7 @@ public final class MindwrackHarpy extends CardImpl {
 
         // At the beginning of combat on your turn, each player puts the top three cards of their library into their graveyard.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new MillCardsEachPlayerEffect(3, TargetController.ANY),
-                false
+                new MillCardsEachPlayerEffect(3, TargetController.ANY)
         ));
     }
 

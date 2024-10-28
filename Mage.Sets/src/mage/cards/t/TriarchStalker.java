@@ -41,7 +41,7 @@ public final class TriarchStalker extends CardImpl {
 
         // Targeting Relay — At the beginning of combat on your turn, choose an opponent.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new TriarchStalkerEffect(), false
+                new TriarchStalkerEffect()
         ).withFlavorWord("Targeting Relay"));
 
         // Creatures attacking the last chosen player have menace.

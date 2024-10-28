@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -51,8 +50,7 @@ public final class LordSkitterSewerKing extends CardImpl {
 
         // At the beginning of combat on your turn, create a 1/1 black Rat creature token with "This creature can't block."
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new CreateTokenEffect(new RatCantBlockToken()),
-                false
+                new CreateTokenEffect(new RatCantBlockToken())
         ));
     }
 

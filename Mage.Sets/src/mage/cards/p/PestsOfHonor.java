@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
 
@@ -31,8 +30,7 @@ public final class PestsOfHonor extends CardImpl {
         // Celebration - At the beginning of combat on your turn, if two or more nonland permanents entered the battlefield under your control this turn, put a +1/+1 counter on Pests of Honor.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        false
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                 ), CelebrationCondition.instance, "At the beginning of combat on your turn, if two or more " +
                 "nonland permanents entered the battlefield under your control this turn, put a +1/+1 counter on {this}."
         ).addHint(CelebrationCondition.getHint()).setAbilityWord(AbilityWord.CELEBRATION), new PermanentsEnteredBattlefieldWatcher());

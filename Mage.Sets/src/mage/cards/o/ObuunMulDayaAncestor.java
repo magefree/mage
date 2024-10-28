@@ -38,7 +38,7 @@ public final class ObuunMulDayaAncestor extends CardImpl {
 
         // At the beginning of combat on your turn, up to one target land you control becomes an X/X Elemental creature with trample and haste until end of turn, where X is Obuun's power. It's still a land.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new ObuunMulDayaAncestorEffect(), false
+                new ObuunMulDayaAncestorEffect()
         );
         ability.addTarget(new TargetPermanent(
                 0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND, false

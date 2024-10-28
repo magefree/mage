@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.permanent.token.TeyoToken;
@@ -42,7 +41,7 @@ public final class RammasEchorAncientShield extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of combat on your turn, creatures you control with defender gain exalted until end of turn.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new GainAbilityControlledEffect(new ExaltedAbility(), Duration.EndOfTurn, filter), false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new GainAbilityControlledEffect(new ExaltedAbility(), Duration.EndOfTurn, filter)));
     }
 
     private RammasEchorAncientShield(final RammasEchorAncientShield card) {

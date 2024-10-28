@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -50,7 +49,7 @@ public final class ClackbridgeTroll extends CardImpl {
 
         // At the beginning of combat on your turn, any opponent may sacrifice a creature. If a player does, tap Clackbridge Troll, you gain 3 life, and you draw a card.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new ClackbridgeTrollEffect(), false)
+                new ClackbridgeTrollEffect())
         );
     }
 

@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -34,7 +33,7 @@ public final class StandOrFall extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // At the beginning of combat on your turn, for each defending player, separate all creatures that player controls into two piles and that player chooses one. Only creatures in the chosen piles can block this turn.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new StandOrFallEffect(), false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new StandOrFallEffect()));
     }
 
     private StandOrFall(final StandOrFall card) {

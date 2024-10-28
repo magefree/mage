@@ -45,7 +45,7 @@ public final class CitadelSiege extends CardImpl {
 
         // * Khans - At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.
         Ability ability = new ConditionalTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), false),
+                new BeginningOfCombatTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2))),
                 new ModeChoiceSourceCondition("Khans"),
                 ruleTrigger1);
         ability.addTarget(new TargetControlledCreaturePermanent());

@@ -35,7 +35,7 @@ public final class OkaunEyeOfChaos extends CardImpl {
         this.addAbility(new PartnerWithAbility("Zndrsplt, Eye of Wisdom", true));
 
         // At the beginning of combat on your turn, flip a coin until you lose a flip.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new FlipUntilLoseEffect(), false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new FlipUntilLoseEffect()));
 
         // Whenever a player wins a coin flip, double Okaun's power and toughness until end of turn.
         this.addAbility(new WinsCoinFlipTriggeredAbility(

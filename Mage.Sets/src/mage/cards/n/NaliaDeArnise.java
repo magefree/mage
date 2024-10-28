@@ -57,7 +57,7 @@ public final class NaliaDeArnise extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(new AddCountersAllEffect(
                         CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE
-                ), false), FullPartyCondition.instance, "At the beginning " +
+                )), FullPartyCondition.instance, "At the beginning " +
                 "of combat on your turn, if you have a full party, put a +1/+1 counter on each creature " +
                 "you control and those creatures gain deathtouch until end of turn."
         );

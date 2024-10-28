@@ -35,7 +35,7 @@ public final class SightOfTheScalelords extends CardImpl {
         // At the beginning of combat on your turn, creature you control with toughness 4 or greater get +2/+2 and gain vigilance until end of turn.
         Effect effect = new BoostControlledEffect(2, 2, Duration.EndOfTurn, filter, false);
         effect.setText("creatures you control with toughness 4 or greater get +2/+2");
-        Ability ability = new BeginningOfCombatTriggeredAbility(effect, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(effect);
         effect = new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn, filter);
         effect.setText("and gain vigilance until end of turn");
         ability.addEffect(effect);

@@ -41,8 +41,7 @@ public final class HalanaAndAlenaPartners extends CardImpl {
         // At the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is Halana and Alena's power. That creature gains haste until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(0), SourcePermanentPowerValue.NOT_NEGATIVE)
-                        .setText("put X +1/+1 counters on another target creature you control, where X is {this}'s power"),
-                false
+                        .setText("put X +1/+1 counters on another target creature you control, where X is {this}'s power")
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn

@@ -38,7 +38,7 @@ public final class EowynLadyOfRohan extends CardImpl {
 
         // At the beginning of combat on your turn, target creature gains your choice of first strike or vigilance until end of turn. If that creature is equipped, it gains first strike and vigilance until end of turn instead.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new EowynLadyOfRohanEffect(), false
+                new EowynLadyOfRohanEffect()
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

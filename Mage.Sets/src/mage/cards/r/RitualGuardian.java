@@ -31,7 +31,7 @@ public final class RitualGuardian extends CardImpl {
                 new BeginningOfCombatTriggeredAbility(
                         new GainAbilitySourceEffect(
                                 LifelinkAbility.getInstance(), Duration.EndOfTurn
-                        ), false
+                        )
                 ), CovenCondition.instance, "At the beginning of combat on your turn, if you control three " +
                 "or more creatures with different powers, {this} gains lifelink until end of turn."
         ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));
