@@ -44,7 +44,7 @@ public final class LegionWarboss extends CardImpl {
         // At the beginning of combat on your turn, create a 1/1 red Goblin creature token. That token gains haste until end of turn and attacks this combat if able.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
                 new LegionWarbossEffect(),
-                TargetController.YOU, false
+                false
         ));
     }
 

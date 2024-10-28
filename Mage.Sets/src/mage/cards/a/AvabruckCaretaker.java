@@ -38,7 +38,7 @@ public final class AvabruckCaretaker extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new AddCountersTargetEffect(
                         CounterType.P1P1.createInstance(2)
-                ), TargetController.YOU, false
+                ), false
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);

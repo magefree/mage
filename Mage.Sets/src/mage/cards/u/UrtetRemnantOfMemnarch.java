@@ -46,7 +46,7 @@ public final class UrtetRemnantOfMemnarch extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new MyrToken()), filter, false));
 
         //At the beginning of combat on your turn, untap each Myr you control.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new UntapAllControllerEffect(filter2, "untap each Myr you control"), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new UntapAllControllerEffect(filter2, "untap each Myr you control"), false));
 
         // {W}{U}{B}{R}{G}, {T}: Put three +1/+1 counters on each Myr you control. Activate only during your turn.
         Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new AddCountersAllEffect(CounterType.P1P1.createInstance(3), filter2), new ManaCostsImpl<>("{W}{U}{B}{R}{G}"), MyTurnCondition.instance);

@@ -54,7 +54,6 @@ public class PhabineBosssConfidant extends CardImpl {
         //          Then each player draws a card.
         Ability parleyAbility = new BeginningOfCombatTriggeredAbility(
                 new PhabineBosssConfidantParleyEffect(),
-                TargetController.YOU,
                 false
         );
         Effect drawCardAllEffect = new DrawCardAllEffect(1);

@@ -33,7 +33,7 @@ public final class LoyalDrake extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new DrawCardSourceControllerEffect(1),
-                        TargetController.YOU, false
+                        false
                 ), CommanderInPlayCondition.instance,
                 "<i>Lieutenant</i> &mdash; At the beginning of combat "
                 + "on your turn, if you control your commander, draw a card."

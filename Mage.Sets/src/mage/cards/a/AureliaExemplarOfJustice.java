@@ -46,7 +46,7 @@ public final class AureliaExemplarOfJustice extends CardImpl {
         // At the beginning of combat on your turn, choose up to one target creature you control. Until end of turn, that creature gets +2/+0, gains trample if it's red, and gains vigilance if it's white.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new AureliaExemplarOfJusticeEffect(),
-                TargetController.YOU, false
+                false
         );
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1));
         this.addAbility(ability);

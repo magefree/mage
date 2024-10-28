@@ -51,7 +51,7 @@ public final class AuroraShifter extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(
                 new DoWhenCostPaid(reflexive, new PayEnergyCost(2),
                         "Pay {E}{E}? When you do, {this} becomes a copy of another target creature you control, except it has this ability and \"Whenever this creature deals combat damage to a player, you get that many {E}.\""),
-                TargetController.YOU, false));
+                false));
     }
 
     private AuroraShifter(final AuroraShifter card) {
@@ -108,7 +108,7 @@ class AuroraShifterCopyApplier extends CopyApplier {
         blueprint.getAbilities().add(new BeginningOfCombatTriggeredAbility(
                 new DoWhenCostPaid(reflexive, new PayEnergyCost(2),
                         "Pay {E}{E}? When you do, {this} becomes a copy of another target creature you control, except it has this ability and \"Whenever this creature deals combat damage to a player, you get that many {E}.\""),
-                TargetController.YOU, false));
+                false));
 
 
         blueprint.getAbilities().add(new DealsCombatDamageToAPlayerTriggeredAbility(

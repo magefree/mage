@@ -27,7 +27,7 @@ public final class UnnaturalGrowth extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}{G}{G}");
 
         // At the beginning of each combat, double the power and toughness of each creature you control until end of turn.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new UnnaturalGrowthEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.ANY, new UnnaturalGrowthEffect(), false));
     }
 
     private UnnaturalGrowth(final UnnaturalGrowth card) {

@@ -48,7 +48,6 @@ public final class MeTheImmortal extends CardImpl {
         this.addAbility(new BeginningOfCombatTriggeredAbility(new AddCounterChoiceSourceEffect(
                 CounterType.P1P1, CounterType.FIRST_STRIKE, CounterType.VIGILANCE, CounterType.MENACE
         ).setText("put your choice of a +1/+1, first strike, vigilance, or menace counter on {this}"),
-                TargetController.YOU,
                 false));
         // Counters remain on Me as it moves to any zone other than a player's hand or library.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new MeTheImmortalEffect()));

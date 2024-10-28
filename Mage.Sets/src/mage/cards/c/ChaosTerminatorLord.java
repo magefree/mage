@@ -31,7 +31,7 @@ public final class ChaosTerminatorLord extends CardImpl {
         // Lord of Chaos -- At the beginning of combat on your turn, another target creature you control gains double strike until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance()),
-                TargetController.YOU, false
+                false
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability.withFlavorWord("Lord of Chaos"));

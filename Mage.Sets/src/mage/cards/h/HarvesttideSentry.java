@@ -37,7 +37,7 @@ public final class HarvesttideSentry extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new CantBeBlockedByCreaturesSourceEffect(filter, Duration.EndOfTurn),
-                        TargetController.YOU, false
+                        false
                 ), CovenCondition.instance, "At the beginning of combat on your turn, " +
                 "if you control three or more creatures with different powers, " +
                 "{this} can't be blocked by creatures with power 2 or less this turn."

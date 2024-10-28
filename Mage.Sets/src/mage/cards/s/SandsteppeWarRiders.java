@@ -40,7 +40,7 @@ public final class SandsteppeWarRiders extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of combat on your turn, bolster X, where X is the number of differently named artifact tokens you control.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new BolsterEffect(SandsteppeWarRidersValue.instance), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new BolsterEffect(SandsteppeWarRidersValue.instance), false));
     }
 
     private SandsteppeWarRiders(final SandsteppeWarRiders card) {

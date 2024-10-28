@@ -48,8 +48,7 @@ public final class GoblinFlotilla extends CardImpl {
         );
         effect.setText("unless you pay {R}, whenever {this} blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.");
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                effect,
-                TargetController.ANY,
+                TargetController.ANY, effect,
                 false
         ));
 

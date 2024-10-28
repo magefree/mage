@@ -45,8 +45,8 @@ public final class StingTheGlintingDagger extends CardImpl {
 
         // At the beginning of each combat, untap equipped creature.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-            new UntapAttachedEffect(AttachmentType.EQUIPMENT, "creature"),
-            TargetController.ANY, false));
+                TargetController.ANY, new UntapAttachedEffect(AttachmentType.EQUIPMENT, "creature"),
+                false));
 
         // Equipped creature has first strike as long as it's blocking or blocked by a Goblin or Orc.
         this.addAbility(new SimpleStaticAbility(

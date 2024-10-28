@@ -48,7 +48,7 @@ public final class KotoriPilotProdigy extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new GainAbilityTargetEffect(LifelinkAbility.getInstance())
                         .setText("target artifact creature you control gains lifelink"),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 VigilanceAbility.getInstance()

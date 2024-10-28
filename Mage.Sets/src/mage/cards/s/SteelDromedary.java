@@ -50,7 +50,7 @@ public final class SteelDromedary extends CardImpl {
 
         // At the beginning of combat on your turn, you may move a +1/+1 counter from Steel Dromedary onto target creature.
         ability = new BeginningOfCombatTriggeredAbility(
-                new MoveCountersFromSourceToTargetEffect(), TargetController.YOU, true
+                new MoveCountersFromSourceToTargetEffect(), true
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

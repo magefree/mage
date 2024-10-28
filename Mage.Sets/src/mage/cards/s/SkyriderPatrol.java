@@ -46,7 +46,7 @@ public final class SkyriderPatrol extends CardImpl {
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
         this.addAbility(new BeginningOfCombatTriggeredAbility(new DoWhenCostPaid(
                 ability, new ManaCostsImpl<>("{G}{U}"), "Pay {G}{U}?"
-        ), TargetController.YOU, false));
+        ), false));
     }
 
     private SkyriderPatrol(final SkyriderPatrol card) {

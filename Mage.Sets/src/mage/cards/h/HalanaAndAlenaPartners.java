@@ -42,7 +42,7 @@ public final class HalanaAndAlenaPartners extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(0), SourcePermanentPowerValue.NOT_NEGATIVE)
                         .setText("put X +1/+1 counters on another target creature you control, where X is {this}'s power"),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn

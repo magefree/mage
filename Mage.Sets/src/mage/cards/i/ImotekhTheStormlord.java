@@ -54,7 +54,7 @@ public final class ImotekhTheStormlord extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(2, 2)
                         .setText("another target artifact creature you control gets +2/+2"),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new GainAbilityTargetEffect(new MenaceAbility(false))
                 .setText("and gains menace until end of turn"));

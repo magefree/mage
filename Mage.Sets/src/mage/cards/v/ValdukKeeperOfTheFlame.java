@@ -36,7 +36,7 @@ public final class ValdukKeeperOfTheFlame extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of combat on your turn, for each Aura and Equipment attached to Valduk, Keeper of the Flame, create a 3/1 red Elemental creature token with trample and haste. Exile those tokens at the beginning of the next end step.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new ValdukKeeperOfTheFlameEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new ValdukKeeperOfTheFlameEffect(), false));
     }
 
     private ValdukKeeperOfTheFlame(final ValdukKeeperOfTheFlame card) {

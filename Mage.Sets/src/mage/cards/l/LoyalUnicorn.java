@@ -39,7 +39,7 @@ public final class LoyalUnicorn extends CardImpl {
                         Duration.EndOfTurn,
                         StaticFilters.FILTER_CONTROLLED_CREATURES,
                         true
-                ), TargetController.YOU, false
+                ), false
         );
         ability.addEffect(new GainAbilityAllEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn,

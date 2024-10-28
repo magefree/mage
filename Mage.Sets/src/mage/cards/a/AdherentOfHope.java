@@ -38,7 +38,7 @@ public final class AdherentOfHope extends CardImpl {
 
         // At the beginning of combat on your turn, if you control a Basri planeswalker, put a +1/+1 counter on Adherent of Hope.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false),
+                new BeginningOfCombatTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "At the beginning of combat on your turn, if you control a Basri planeswalker, put a +1/+1 counter on {this}."));
     }

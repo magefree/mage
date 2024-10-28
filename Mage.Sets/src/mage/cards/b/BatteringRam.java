@@ -39,7 +39,7 @@ public final class BatteringRam extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of combat on your turn, Battering Ram gains banding until end of combat.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new GainAbilitySourceEffect(BandingAbility.getInstance(), Duration.EndOfCombat), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new GainAbilitySourceEffect(BandingAbility.getInstance(), Duration.EndOfCombat), false));
 
         // Whenever Battering Ram becomes blocked by a Wall, destroy that Wall at end of combat.
         Effect effect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect()), true);

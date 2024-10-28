@@ -30,7 +30,7 @@ public final class EvidenceExaminer extends CardImpl {
         // At the beginning of combat on your turn, you may collect evidence 4.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
                 new DoIfCostPaid(null, new CollectEvidenceCost(4)),
-                TargetController.YOU, false
+                false
         ));
 
         // Whenever you collect evidence, investigate.

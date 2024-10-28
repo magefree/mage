@@ -43,7 +43,7 @@ public final class FightRigging extends CardImpl {
         // At the beginning of combat on your turn, put a +1/+1 counter on target creature you control. Then if you control a creature with power 7 or greater, you may play the exiled card without paying its mana cost.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new HideawayPlayEffect(), condition, "Then if you control a creature " +

@@ -34,7 +34,7 @@ public final class PrimordialPlasm extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(2, 2)
                         .setText("another target creature gets +2/+2"),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn)
                 .setText("and loses all abilities until end of turn"));

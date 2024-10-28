@@ -44,7 +44,7 @@ public final class AzraOddsmaker extends CardImpl {
                 new DoIfCostPaid(
                         new AzraOddsmakerEffect(),
                         new DiscardCardCost()
-                ), TargetController.YOU, false
+                ), false
         ));
     }
 

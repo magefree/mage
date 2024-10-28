@@ -36,7 +36,7 @@ public final class StormChargedSlasher extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(2, 0)
                         .setText("target creature you control gets +2/+0"),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn

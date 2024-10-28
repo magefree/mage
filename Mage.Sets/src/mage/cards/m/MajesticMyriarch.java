@@ -42,7 +42,7 @@ public final class MajesticMyriarch extends CardImpl {
 
         // At the beginning of each combat, if you control a creature with flying, Majestic Myriarch gains flying until end of turn.
         // The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new MajesticMyriarchEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.ANY, new MajesticMyriarchEffect(), false));
     }
 
     private MajesticMyriarch(final MajesticMyriarch card) {

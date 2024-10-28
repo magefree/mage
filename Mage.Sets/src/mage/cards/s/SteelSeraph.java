@@ -38,7 +38,7 @@ public final class SteelSeraph extends CardImpl {
         // At the beginning of combat on your turn, target creature you control gains your choice of flying, vigilance, or lifelink until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new GainsChoiceOfAbilitiesEffect(
                         FlyingAbility.getInstance(), VigilanceAbility.getInstance(), LifelinkAbility.getInstance()),
-                TargetController.YOU, false
+                false
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

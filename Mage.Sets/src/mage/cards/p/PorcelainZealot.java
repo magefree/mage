@@ -35,8 +35,8 @@ public final class PorcelainZealot extends CardImpl {
 
         // At the beginning of combat on your turn, target creature you control gets +1/+1 until end of turn. If that creature has toxic, instead it gets +2/+2 until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-            new PorcelainZealotEffect(),
-            TargetController.YOU, false);
+                new PorcelainZealotEffect(),
+                false);
         ability.addTarget(new TargetControlledCreaturePermanent(1, 1));
         this.addAbility(ability);
     }

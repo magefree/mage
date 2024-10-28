@@ -38,7 +38,7 @@ public final class DesecrationDemon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each combat, any opponent may sacrifice a creature. If a player does, tap Desecration Demon and put a +1/+1 counter on it.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new DesecrationDemonEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.ANY, new DesecrationDemonEffect(), false));
     }
 
     private DesecrationDemon(final DesecrationDemon card) {

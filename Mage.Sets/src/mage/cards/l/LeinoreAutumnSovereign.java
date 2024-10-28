@@ -33,7 +33,7 @@ public final class LeinoreAutumnSovereign extends CardImpl {
         // Coven — At the beginning of combat on your turn, put a +1/+1 counter on up to one target creature you control. Then if you control three or more creatures with different powers, draw a card.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1), CovenCondition.instance,

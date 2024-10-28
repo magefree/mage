@@ -33,7 +33,7 @@ public final class MountVelusManticore extends CardImpl {
 
         // At the beginning of combat on your turn, you may discard a card. When you do, Mount Velus Manticore deals X damage to any target, where X is the number of card types the discarded card has.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new MountVelusManticoreEffect(), TargetController.YOU, false
+                new MountVelusManticoreEffect(), false
         ));
     }
 

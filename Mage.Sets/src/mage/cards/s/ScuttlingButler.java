@@ -37,7 +37,7 @@ public final class ScuttlingButler extends CardImpl {
 
         // At the beginning of combat on your turn, if you control two or more multicolored permanents, Scuttling Butler gains double strike until end of turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), TargetController.YOU, false),
+                new BeginningOfCombatTriggeredAbility(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), false),
                 condition,
                 "At the beginning of combat on your turn, if you control two or more multicolored permanents, {this} gains double strike until end of turn."
         ));

@@ -32,7 +32,7 @@ public final class BorosBattleshaper extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of each combat, up to one target creature attacks or blocks this combat if able and up to one target creature can't attack or block this combat.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new BorosBattleshaperEffect(), TargetController.ANY, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(TargetController.ANY, new BorosBattleshaperEffect(), false);
         ability.addTarget(new TargetCreaturePermanent(0, 1).withChooseHint("attacks or blocks this combat if able"));
         ability.addTarget(new TargetCreaturePermanent(0, 1).withChooseHint("can't attack or block this combat"));
         this.addAbility(ability);

@@ -38,7 +38,7 @@ public final class ManifoldMouse extends CardImpl {
 
         // At the beginning of combat on your turn, target Mouse you control gains your choice of double strike or trample until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new GainsChoiceOfAbilitiesEffect(
-                DoubleStrikeAbility.getInstance(), TrampleAbility.getInstance()), TargetController.YOU, false);
+                DoubleStrikeAbility.getInstance(), TrampleAbility.getInstance()), false);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

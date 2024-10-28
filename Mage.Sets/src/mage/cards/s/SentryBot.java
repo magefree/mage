@@ -57,7 +57,6 @@ public final class SentryBot extends CardImpl {
                                 CounterType.P1P1.createInstance(),
                                 StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED),
                         new PayEnergyCost(3)),
-                TargetController.YOU,
                 false));
     }
 

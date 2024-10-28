@@ -49,7 +49,7 @@ public final class ProftsEideticMemory extends CardImpl {
                         new AddCountersTargetEffect(
                                 CounterType.P1P1.createInstance(),
                                 new IntPlusDynamicValue(-1, CardsDrawnThisTurnDynamicValue.instance)),
-                        TargetController.YOU, false),
+                        false),
                 DrewTwoOrMoreCardsCondition.instance,
                 "At the beginning of combat on your turn, if you've drawn more than one card this turn, " +
                         "put X +1/+1 counters on target creature you control, " +

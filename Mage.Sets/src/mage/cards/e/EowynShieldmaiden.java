@@ -51,8 +51,8 @@ public final class EowynShieldmaiden extends CardImpl {
 
         TriggeredAbility triggeredAbility = new BeginningOfCombatTriggeredAbility(
             Zone.BATTLEFIELD,
-            new CreateTokenEffect(new HumanKnightToken(), 2),
-            TargetController.YOU, false
+                TargetController.YOU, new CreateTokenEffect(new HumanKnightToken(), 2),
+                false
         );
         triggeredAbility.addEffect(new ConditionalOneShotEffect(
             new DrawCardSourceControllerEffect(1),

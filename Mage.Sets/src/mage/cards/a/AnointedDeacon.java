@@ -36,7 +36,7 @@ public final class AnointedDeacon extends CardImpl {
 
         // At the beginning of combat on your turn, you may have target Vampire get +2/+0 until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new BoostTargetEffect(2, 0, Duration.EndOfTurn), TargetController.YOU, true);
+                new BoostTargetEffect(2, 0, Duration.EndOfTurn), true);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

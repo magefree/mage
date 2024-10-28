@@ -33,7 +33,7 @@ public final class ZndrspltEyeOfWisdom extends CardImpl {
         this.addAbility(new PartnerWithAbility("Okaun, Eye of Chaos", true));
 
         // At the beginning of combat on your turn, flip a coin until you lose a flip.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new FlipUntilLoseEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new FlipUntilLoseEffect(), false));
 
         // Whenever a player wins a coin flip, draw a card.
         this.addAbility(new WinsCoinFlipTriggeredAbility(new DrawCardSourceControllerEffect(1)));

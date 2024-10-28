@@ -20,8 +20,8 @@ public final class BasriKetEmblem extends Emblem {
         super("Emblem Basri");
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 Zone.COMMAND,
-                new CreateTokenEffect(new SoldierToken()),
-                TargetController.YOU, false);
+                TargetController.YOU, new CreateTokenEffect(new SoldierToken()),
+                false);
         ability.addEffect(
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED)
                         .setText(", then put a +1/+1 counter on each creature you control")

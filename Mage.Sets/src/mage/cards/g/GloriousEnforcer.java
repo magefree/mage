@@ -41,8 +41,8 @@ public final class GloriousEnforcer extends CardImpl {
         // At the beginning of each combat, if you have more life than an opponent, Glorious Enforcer gains double strike until end of turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn),
-                        TargetController.ANY, false
+                        TargetController.ANY, new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn),
+                        false
                 ),
                 GloriousEnforcerCondition.instance,
                 "At the beginning of each combat, if you have more life than an opponent, {this} gains double strike until end of turn."

@@ -41,7 +41,7 @@ public final class AethershieldArtificer extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(2, 2, Duration.EndOfTurn)
                         .setText("target artifact creature you control gets +2/+2"),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 IndestructibleAbility.getInstance(),

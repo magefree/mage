@@ -40,7 +40,7 @@ public final class GlissaHeraldOfPredation extends CardImpl {
         // At the beginning of combat on your turn, choose one --
         // * Incubate 2 twice.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new GlissaHeraldOfPredationIncubateEffect(), TargetController.YOU, false
+                new GlissaHeraldOfPredationIncubateEffect(), false
         );
 
         // * Transform all Incubator tokens you control.

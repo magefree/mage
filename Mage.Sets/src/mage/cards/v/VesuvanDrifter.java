@@ -40,7 +40,7 @@ public final class VesuvanDrifter extends CardImpl {
 
         // At the beginning of each combat, you may reveal the top card of your library. If you reveal a creature card this way, Vesuvan Drifter becomes a copy of that card until end of turn, except it has flying.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new VesuvanDrifterEffect(), TargetController.ANY, true
+                TargetController.ANY, new VesuvanDrifterEffect(), true
         ));
     }
 

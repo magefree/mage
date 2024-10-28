@@ -56,7 +56,7 @@ public final class ShadrixSilverquill extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // At the beginning of combat on your turn, you may choose two. Each mode must target a different player.
-        Ability ability = new BeginningOfCombatTriggeredAbility(null, TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(null, false);
         ability.getModes().setMinModes(2);
         ability.getModes().setMaxModes(2);
         ability.getModes().setMaxModesFilter(filter0);

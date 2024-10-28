@@ -29,7 +29,7 @@ public final class DeterminedIteration extends CardImpl {
 
         // At the beginning of combat on your turn, populate. The token created this way gains haste. Sacrifice it at the beginning of the next end step.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new DeterminedIterationEffect(), TargetController.YOU, false
+                new DeterminedIterationEffect(), false
         ));
     }
 

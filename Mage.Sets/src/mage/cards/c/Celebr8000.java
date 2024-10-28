@@ -40,7 +40,7 @@ public final class Celebr8000 extends CardImpl {
         // * 5 -- flying
         // * 6 -- indestructible
         this.addAbility(
-                new BeginningOfCombatTriggeredAbility(new Celebr8000Effect(), TargetController.YOU, false));
+                new BeginningOfCombatTriggeredAbility(new Celebr8000Effect(), false));
     }
 
     private Celebr8000(final Celebr8000 card) {

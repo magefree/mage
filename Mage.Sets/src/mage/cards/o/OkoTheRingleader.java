@@ -41,7 +41,7 @@ public final class OkoTheRingleader extends CardImpl {
 
         // At the beginning of combat on your turn, Oko, the Ringleader becomes a copy of up to one target creature you control until end of turn, except he has hexproof.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new OkoTheRingleaderCopySelfEffect(), TargetController.YOU, false
+                new OkoTheRingleaderCopySelfEffect(), false
         );
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1));
         this.addAbility(ability);

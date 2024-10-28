@@ -36,7 +36,7 @@ public final class WeldfastEngineer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of combat on your turn, target artifact creature you control gets +2/+0 until end of turn.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), false);
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
     }

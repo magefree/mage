@@ -40,7 +40,7 @@ public final class HandOfVecna extends CardImpl {
 
         // At the beginning of combat on your turn, equipped creature or a creature you control named Vecna gets +X/+X until end of turn, where X is the number of cards in your hand.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new HandOfVecnaEffect(), TargetController.YOU, false
+                new HandOfVecnaEffect(), false
         ));
 
         // Equip—Pay 1 life for each card in your hand.

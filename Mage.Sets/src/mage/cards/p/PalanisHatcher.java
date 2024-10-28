@@ -55,7 +55,7 @@ public final class PalanisHatcher extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new SacrificeControllerEffect(filterEgg, 1, ""),
-                        TargetController.YOU, false
+                        false
                 ), new PermanentsOnTheBattlefieldCondition(filterEgg),
                 "At the beginning of combat on your turn, if you control one or more Eggs, "
                         + "sacrifice an Egg, then create a 3/3 green Dinosaur creature token."

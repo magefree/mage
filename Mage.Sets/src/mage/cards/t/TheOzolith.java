@@ -39,7 +39,7 @@ public final class TheOzolith extends CardImpl {
         // At the beginning of combat on your turn, if The Ozolith has counters on it, you may move all counters from The Ozolith onto target creature.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new TheOzolithMoveCountersEffect(), TargetController.YOU, true
+                        new TheOzolithMoveCountersEffect(), true
                 ), SourceHasCountersCondition.instance, "At the beginning of combat on your turn, " +
                 "if {this} has counters on it, you may move all counters from {this} onto target creature."
         );

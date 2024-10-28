@@ -43,7 +43,7 @@ public final class SiegeVeteran extends CardImpl {
 
         // At the beginning of combat on your turn, put a +1/+1 counter on target creature you control.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false
+                new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

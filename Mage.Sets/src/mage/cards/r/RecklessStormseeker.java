@@ -35,7 +35,7 @@ public final class RecklessStormseeker extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(1, 0)
                         .setText("target creature you control gets +1/+0"),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn

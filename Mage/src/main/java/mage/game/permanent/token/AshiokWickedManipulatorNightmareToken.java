@@ -33,7 +33,6 @@ public final class AshiokWickedManipulatorNightmareToken extends TokenImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        TargetController.YOU,
                         false
                 ),
                 WasCardExiledThisTurnCondition.instance,

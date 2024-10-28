@@ -34,7 +34,7 @@ public final class SurrakTheHuntCaller extends CardImpl {
 
         // <i>Formidable</i> &mdash; At the beginning of combat on your turn, if creatures you control have total power 8 or greater, target creature you control gains haste until end of turn.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), TargetController.YOU, false),
+                new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), false),
                 FormidableCondition.instance,
                 "<i>Formidable</i> &mdash; At the beginning of combat on your turn, if creatures you control have total power 8 or greater, target creature you control gains haste until end of turn.");
         ability.addTarget(new TargetControlledCreaturePermanent());

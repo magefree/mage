@@ -65,7 +65,6 @@ public final class OverseerOfVault76 extends CardImpl {
                 .setText("remove three quest counters from among permanents you control");
         this.addAbility(new BeginningOfCombatTriggeredAbility(
                 new DoWhenCostPaid(boostAbility, cost, "Remove three quest counters from among permanents you control?"),
-                TargetController.YOU,
                 false));
     }
 

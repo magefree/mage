@@ -46,7 +46,7 @@ public final class HollowhengeHuntmaster extends CardImpl {
                 new AddCountersAllEffect(
                         CounterType.P1P1.createInstance(2),
                         StaticFilters.FILTER_CONTROLLED_CREATURE
-                ), TargetController.YOU, false
+                ), false
         ));
 
         // Nightbound

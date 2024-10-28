@@ -35,7 +35,7 @@ public final class ArdennIntrepidArchaeologist extends CardImpl {
 
         // At the beginning of combat on your turn, you may attach any number of Auras and Equipment you control to target permanent or player.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new ArdennIntrepidArchaeologistEffect(), TargetController.YOU, true
+                new ArdennIntrepidArchaeologistEffect(), true
         );
         ability.addTarget(new TargetPermanentOrPlayer());
         this.addAbility(ability);

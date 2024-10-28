@@ -42,7 +42,7 @@ public final class LandoCalrissian extends CardImpl {
         // At the beggining of each combat, target Starship you control gets +2/+2 and gains vigilance until end of turn.
         Effect effect = new BoostTargetEffect(2, 2, Duration.EndOfTurn);
         effect.setText("target Starship you control gets +2/+2");
-        BeginningOfCombatTriggeredAbility ability = new BeginningOfCombatTriggeredAbility(effect, TargetController.ANY, false);
+        BeginningOfCombatTriggeredAbility ability = new BeginningOfCombatTriggeredAbility(TargetController.ANY, effect, false);
         effect = new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains vigilance until end of turn");
         ability.addEffect(effect);

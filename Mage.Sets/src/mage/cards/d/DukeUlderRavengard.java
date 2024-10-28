@@ -36,7 +36,7 @@ public final class DukeUlderRavengard extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new GainAbilityTargetEffect(HasteAbility.getInstance())
                         .setText("another target creature you control gains haste"),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new GainAbilityTargetEffect(new MyriadAbility()).setText("and myriad until end of turn"));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));

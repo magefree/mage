@@ -35,7 +35,7 @@ public final class DormantGrove extends CardImpl {
 
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new TransformSourceEffect(),

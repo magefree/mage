@@ -39,7 +39,7 @@ public final class GavelOfTheRighteous extends CardImpl {
 
         // At the beginning of combat on your turn, put a charge counter on Gavel of the Righteous.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), TargetController.YOU, false
+                new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), false
         ));
 
         // Equipped creature gets +1/+1 for each counter on Gavel of the Righteous.

@@ -32,7 +32,7 @@ public final class TangletroveKelp extends CardImpl {
         this.addAbility(new WardAbility(new GenericManaCost(2), false));
 
         // At the beginning of each combat, other Clues you control become 6/6 Plant creatures in addition to their other types until end of turn.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new TangletroveKelpEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.ANY, new TangletroveKelpEffect(), false));
 
         // {2}, Sacrifice Tangletrove Kelp: Draw a card.
         this.addAbility(new ClueAbility(true));

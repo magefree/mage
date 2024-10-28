@@ -37,7 +37,7 @@ public final class CephalidFacetaker extends CardImpl {
 
         // At the beginning of combat on your turn, you may have Cephalid Facetaker become a copy of another target creature until end of turn, except its a 1/4 and has "This creature can't be blocked."
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new CephalidFacetakerEffect(), TargetController.YOU, true
+                new CephalidFacetakerEffect(), true
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE));
         this.addAbility(ability);

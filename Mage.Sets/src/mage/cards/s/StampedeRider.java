@@ -33,8 +33,8 @@ public final class StampedeRider extends CardImpl {
         // At the beginning of each combat, if you control a creature with power 4 or greater, Stampede Rider gets +1/+1 until end of turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new BoostSourceEffect(1, 1, Duration.EndOfTurn),
-                        TargetController.ANY, false
+                        TargetController.ANY, new BoostSourceEffect(1, 1, Duration.EndOfTurn),
+                        false
                 ), FerociousCondition.instance, "At the beginning of each combat, " +
                 "if you control a creature with power 4 or greater, {this} gets +1/+1 until end of turn."
         ));

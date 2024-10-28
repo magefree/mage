@@ -42,7 +42,7 @@ public final class MishraEminentOne extends CardImpl {
 
         // At the beginning of combat on your turn, create a token that's a copy of target noncreature artifact you control, except its name is Mishra's Warform and it's a 4/4 Construct artifact creature in addition to its other types. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new MishraEminentOneEffect(), TargetController.YOU, false
+                new MishraEminentOneEffect(), false
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

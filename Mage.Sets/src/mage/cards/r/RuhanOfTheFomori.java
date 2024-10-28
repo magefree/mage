@@ -28,7 +28,7 @@ public final class RuhanOfTheFomori extends CardImpl {
         this.toughness = new MageInt(7);
 
         // At the beginning of combat on your turn, choose an opponent at random. Ruhan of the Fomori attacks that player this combat if able.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new AttackIfAbleTargetRandomOpponentSourceEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new AttackIfAbleTargetRandomOpponentSourceEffect(), false));
     }
 
     private RuhanOfTheFomori(final RuhanOfTheFomori card) {

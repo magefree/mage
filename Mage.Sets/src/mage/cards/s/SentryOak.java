@@ -38,7 +38,7 @@ public final class SentryOak extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // At the beginning of combat on your turn, you may clash with an opponent. If you win, Sentry Oak gets +2/+0 and loses defender until end of turn.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new DoIfClashWonEffect(new SentryOakEffect()), TargetController.YOU, true));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new DoIfClashWonEffect(new SentryOakEffect()), true));
     }
 
     private SentryOak(final SentryOak card) {

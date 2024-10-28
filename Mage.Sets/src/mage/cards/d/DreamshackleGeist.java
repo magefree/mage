@@ -34,7 +34,7 @@ public final class DreamshackleGeist extends CardImpl {
         // At the beginning of combat on your turn, choose up to one —
         // • Tap target creature.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new TapTargetEffect(), TargetController.YOU, false
+                new TapTargetEffect(), false
         );
         ability.addTarget(new TargetCreaturePermanent());
         ability.getModes().setMinModes(0);

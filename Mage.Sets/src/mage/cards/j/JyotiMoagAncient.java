@@ -45,8 +45,8 @@ public final class JyotiMoagAncient extends CardImpl {
 
         // At the beginning of each combat, land creatures you control get +X/+X until end of turn, where X is Jyoti's power.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new BoostControlledEffect(SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn, filter, false),
-                TargetController.ANY, false));
+                TargetController.ANY, new BoostControlledEffect(SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn, filter, false),
+                false));
     }
 
     private JyotiMoagAncient(final JyotiMoagAncient card) {

@@ -37,8 +37,8 @@ public final class TiminYouthfulGeist extends CardImpl {
 
         // At the beginning of each combat, tap up to one target creature.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new TapTargetEffect().setText("tap up to one target creature"),
-                TargetController.ANY, false
+                TargetController.ANY, new TapTargetEffect().setText("tap up to one target creature"),
+                false
         );
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);

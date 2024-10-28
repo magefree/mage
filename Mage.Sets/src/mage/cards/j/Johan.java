@@ -40,7 +40,7 @@ public final class Johan extends CardImpl {
         Condition condition = new CompoundCondition("if {this} is untapped",
                 SourceTappedCondition.UNTAPPED,
                 SourceOnBattlefieldCondition.instance);
-        Ability ability = new BeginningOfCombatTriggeredAbility(new CantAttackSourceEffect(Duration.EndOfCombat).setText("you may have {this} gain \"{this} can't attack\" until end of combat"), TargetController.YOU, true);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new CantAttackSourceEffect(Duration.EndOfCombat).setText("you may have {this} gain \"{this} can't attack\" until end of combat"), true);
         ability.addEffect(new ConditionalContinuousEffect(
             new GainAbilityControlledEffect(JohanVigilanceAbility.getInstance(), Duration.EndOfCombat, new FilterControlledCreaturePermanent("creatures")),
             condition, 

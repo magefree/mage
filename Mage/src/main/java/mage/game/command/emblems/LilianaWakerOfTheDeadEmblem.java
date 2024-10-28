@@ -18,8 +18,8 @@ public final class LilianaWakerOfTheDeadEmblem extends Emblem {
         super("Emblem Liliana");
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 Zone.COMMAND,
-                new ReturnCreatureFromGraveyardToBattlefieldAndGainHasteEffect(),
-                TargetController.YOU, false);
+                TargetController.YOU, new ReturnCreatureFromGraveyardToBattlefieldAndGainHasteEffect(),
+                false);
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         this.getAbilities().add(ability);
     }

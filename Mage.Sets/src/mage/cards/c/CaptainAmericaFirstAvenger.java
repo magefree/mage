@@ -62,7 +62,7 @@ public final class CaptainAmericaFirstAvenger extends CardImpl {
 
         // ... Catch — At the beginning of combat on your turn, attach up to one target Equipment you control to Captain America.
         ability = new BeginningOfCombatTriggeredAbility(
-                new CaptainAmericaFirstAvengerCatchEffect(), TargetController.YOU, false
+                new CaptainAmericaFirstAvengerCatchEffect(), false
         );
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability.withFlavorWord("... Catch"));

@@ -53,7 +53,7 @@ public final class BloodbatSummoner extends CardImpl {
                         .withColor("B"),
                 false, false, Duration.Custom
         ).setText("up to one target Blood token you control becomes a " +
-                "2/2 black Bat creature with flying and haste in addition to its other types"), TargetController.YOU, false);
+                "2/2 black Bat creature with flying and haste in addition to its other types"), false);
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
     }

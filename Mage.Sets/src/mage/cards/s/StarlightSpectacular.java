@@ -28,7 +28,7 @@ public final class StarlightSpectacular extends CardImpl {
 
         // Parade! -- At the beginning of combat on your turn, choose creatures you control one at a time until each creature you control has been chosen. Each of those creatures gets +1/+1 until end of turn for each creature chosen before it.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new StarlightSpectacularEffect(), TargetController.YOU, false
+                new StarlightSpectacularEffect(), false
         ).withFlavorWord("Parade!"));
     }
 

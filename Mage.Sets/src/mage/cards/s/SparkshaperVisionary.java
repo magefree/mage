@@ -40,7 +40,7 @@ public final class SparkshaperVisionary extends CardImpl {
         // At the beginning of combat on your turn, choose any number of target planeswalkers you control. Until end of turn, they become 3/3 blue Bird creatures with flying, hexproof, and "Whenever this creature deals combat damage to a player, scry 1."
         TriggeredAbility triggeredAbility =
             new BeginningOfCombatTriggeredAbility(
-                new BecomesCreatureTargetEffect(
+                    TargetController.YOU, new BecomesCreatureTargetEffect(
                     new SparkshaperVisionaryToken(),
                     false, false, Duration.EndOfTurn,
                     false, true, true
@@ -48,8 +48,7 @@ public final class SparkshaperVisionary extends CardImpl {
                     + "they become 3/3 blue Bird creatures with flying, hexproof, and "
                     + "\"Whenever this creature deals combat damage to a player, scry 1.\""
                     + " <i>(They're no longer planeswalkers. Loyalty abilities can still be activated.)</i>"),
-                TargetController.YOU,
-                false
+                    false
             );
 
         triggeredAbility.addTarget(

@@ -35,7 +35,7 @@ public final class LeoninVanguard extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new BoostSourceEffect(1, 1, Duration.EndOfTurn),
-                        TargetController.YOU, false
+                        false
                 ),
                 new PermanentsOnTheBattlefieldCondition(
                         StaticFilters.FILTER_CONTROLLED_CREATURES,

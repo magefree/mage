@@ -31,7 +31,7 @@ public final class CandlelitCavalry extends CardImpl {
                 new BeginningOfCombatTriggeredAbility(
                         new GainAbilitySourceEffect(
                                 TrampleAbility.getInstance(), Duration.EndOfTurn
-                        ), TargetController.YOU, false
+                        ), false
                 ), CovenCondition.instance, "At the beginning of combat on your turn, if you control " +
                 "three or more creatures with different powers, {this} gains trample until end of turn."
         ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));

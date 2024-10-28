@@ -60,12 +60,12 @@ public final class KittKantoMayhemDiva extends CardImpl {
         ));
         ability.addEffect(new GoadTargetEffect().setText("Goad that creature"));
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new DoWhenCostPaid(
+        this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.EACH_PLAYER, new DoWhenCostPaid(
                 ability,
                 new TapTargetCost(new TargetControlledPermanent(
                         2, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES
                 )), "Tap two untapped creatures you control?"
-        ), TargetController.EACH_PLAYER, false));
+        ), false));
     }
 
     private KittKantoMayhemDiva(final KittKantoMayhemDiva card) {

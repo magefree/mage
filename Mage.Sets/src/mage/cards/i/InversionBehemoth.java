@@ -27,7 +27,7 @@ public final class InversionBehemoth extends CardImpl {
         this.toughness = new MageInt(9);
 
         // At the beginning of combat on your turn, switch the power and toughness of each of any number of target creatures until end of turn.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new SwitchPowerToughnessTargetEffect(Duration.EndOfTurn).setText("switch the power and toughness of each of any number of target creatures until end of turn."), TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new SwitchPowerToughnessTargetEffect(Duration.EndOfTurn).setText("switch the power and toughness of each of any number of target creatures until end of turn."), false);
         ability.addTarget(new TargetCreaturePermanent(0, Integer.MAX_VALUE));
         this.addAbility(ability);
     }

@@ -40,7 +40,7 @@ public final class SpellbookVendor extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(new BeginningOfCombatTriggeredAbility(new DoWhenCostPaid(
                 ability, new GenericManaCost(1), "Pay {1}?"
-        ), TargetController.YOU, false));
+        ), false));
     }
 
     private SpellbookVendor(final SpellbookVendor card) {

@@ -52,7 +52,7 @@ public final class LordSkitterSewerKing extends CardImpl {
         // At the beginning of combat on your turn, create a 1/1 black Rat creature token with "This creature can't block."
         this.addAbility(new BeginningOfCombatTriggeredAbility(
                 new CreateTokenEffect(new RatCantBlockToken()),
-                TargetController.YOU, false
+                false
         ));
     }
 

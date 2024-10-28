@@ -48,7 +48,7 @@ public final class AkromaVisionOfIxidor extends CardImpl {
 
         // At the beginning of each combat, until end of turn, each other creature you control gets +1/+1 if it has flying, +1/+1 if it has first strike, and so on for double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, vigilance, and partner.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new AkromaVisionOfIxidorEffect(), TargetController.ANY, false
+                TargetController.ANY, new AkromaVisionOfIxidorEffect(), false
         ));
 
         // Partner

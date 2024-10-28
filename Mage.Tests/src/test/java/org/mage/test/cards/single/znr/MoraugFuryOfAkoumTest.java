@@ -24,7 +24,7 @@ public class MoraugFuryOfAkoumTest extends CardTestPlayerBase {
         addCustomCardWithAbility(
                 "Combat Counter", playerA,
                 new BeginningOfCombatTriggeredAbility(
-                        new GainLifeEffect(1), TargetController.YOU, false
+                        new GainLifeEffect(1), false
                 )
         );
     }

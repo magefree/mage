@@ -32,7 +32,7 @@ public final class FangOfThePack extends CardImpl {
         this.addAbility(new MeleeAbility());
 
         // At the beginning of combat on your turn, another target creature you control gains melee until end of turn.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(new MeleeAbility(), Duration.EndOfTurn), TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(new MeleeAbility(), Duration.EndOfTurn), false);
         ability.addTarget(new TargetControlledCreaturePermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));
         this.addAbility(ability);
     }

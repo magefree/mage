@@ -53,8 +53,8 @@ public final class ArahboRoarOfTheWorld extends CardImpl {
 
         // Eminence &mdash; At the beginning of combat on your turn, if Arahbo, Roar of the World is in the command zone or on the battlefield, another target Cat you control gets +3/+3 until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(Zone.ALL,
-                new BoostTargetEffect(3, 3, Duration.EndOfTurn),
-                TargetController.YOU, false).withInterveningIf(
+                TargetController.YOU, new BoostTargetEffect(3, 3, Duration.EndOfTurn),
+                false).withInterveningIf(
                 SourceOnBattlefieldOrCommandZoneCondition.instance);
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.setAbilityWord(AbilityWord.EMINENCE);

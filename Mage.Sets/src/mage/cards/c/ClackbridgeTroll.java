@@ -50,7 +50,7 @@ public final class ClackbridgeTroll extends CardImpl {
 
         // At the beginning of combat on your turn, any opponent may sacrifice a creature. If a player does, tap Clackbridge Troll, you gain 3 life, and you draw a card.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new ClackbridgeTrollEffect(), TargetController.YOU, false)
+                new ClackbridgeTrollEffect(), false)
         );
     }
 

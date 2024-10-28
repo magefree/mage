@@ -37,7 +37,7 @@ public final class LoyalGuardian extends CardImpl {
                         new AddCountersAllEffect(
                                 CounterType.P1P1.createInstance(),
                                 StaticFilters.FILTER_CONTROLLED_CREATURE
-                        ), TargetController.YOU, false
+                        ), false
                 ), CommanderInPlayCondition.instance,
                 "<i>Lieutenant</i> &mdash; At the beginning of combat "
                 + "on your turn, if you control your commander, "

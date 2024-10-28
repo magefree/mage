@@ -34,7 +34,7 @@ public final class StandOrFall extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // At the beginning of combat on your turn, for each defending player, separate all creatures that player controls into two piles and that player chooses one. Only creatures in the chosen piles can block this turn.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new StandOrFallEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new StandOrFallEffect(), false));
     }
 
     private StandOrFall(final StandOrFall card) {

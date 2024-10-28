@@ -35,7 +35,7 @@ public final class FightOrFlight extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
         // At the beginning of combat on each opponent’s turn, separate all creatures that player controls into two piles. Only creatures in the pile of their choice can attack this turn.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new FightOrFlightEffect(), TargetController.OPPONENT, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.OPPONENT, new FightOrFlightEffect(), false));
     }
 
     private FightOrFlight(final FightOrFlight card) {

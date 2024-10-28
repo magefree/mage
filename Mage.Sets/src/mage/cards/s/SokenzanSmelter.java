@@ -37,7 +37,7 @@ public final class SokenzanSmelter extends CardImpl {
                         new GenericManaCost(1),
                         new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN), "pay {1} and sacrifice an artifact"
                 )
-        ), TargetController.YOU, false));
+        ), false));
     }
 
     private SokenzanSmelter(final SokenzanSmelter card) {

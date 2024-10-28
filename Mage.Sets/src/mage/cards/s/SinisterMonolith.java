@@ -26,7 +26,7 @@ public final class SinisterMonolith extends CardImpl {
 
         // At the beginning of combat on your turn, each opponent loses 1 life and you gain 1 life.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new LoseLifeOpponentsEffect(1), TargetController.YOU, false
+                new LoseLifeOpponentsEffect(1), false
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);

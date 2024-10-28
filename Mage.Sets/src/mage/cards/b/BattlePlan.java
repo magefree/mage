@@ -23,7 +23,7 @@ public final class BattlePlan extends CardImpl {
 
         // At the beginning of combat on your turn, target creature you control gets +2/+0 until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new BoostTargetEffect(2, 0), TargetController.YOU, false
+                new BoostTargetEffect(2, 0), false
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

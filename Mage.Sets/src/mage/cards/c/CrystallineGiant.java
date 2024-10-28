@@ -35,7 +35,7 @@ public final class CrystallineGiant extends CardImpl {
 
         // At the beginning of combat on your turn, choose a kind of counter at random that Crystalline Giant doesn't have on it from among flying, first strike, deathtouch, hexproof, lifelink, menace, reach, trample, vigilance, or +1/+1. Put a counter of that kind on Crystalline Giant.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new CrystallineGiantEffect(), TargetController.YOU, false
+                new CrystallineGiantEffect(), false
         ));
     }
 

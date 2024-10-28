@@ -45,7 +45,7 @@ public final class MirkwoodChanneler extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new GainAbilityTargetEffect(TrampleAbility.getInstance())
                         .setText("target Elf you control gains trample"),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new BoostTargetEffect(xValue, xValue)
                 .setText("and gets +X/+X until end of turn, where X is the number of Forests you control")

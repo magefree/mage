@@ -40,8 +40,8 @@ public final class SentinelOfTheEternalWatch extends CardImpl {
 
         // At the beginning of combat on each opponent's turn, tap target creature that player controls.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new TapTargetEffect("tap target creature that player controls"),
-                TargetController.OPPONENT, false
+                TargetController.OPPONENT, new TapTargetEffect("tap target creature that player controls"),
+                false
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

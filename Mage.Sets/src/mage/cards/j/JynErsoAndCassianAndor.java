@@ -31,7 +31,7 @@ public final class JynErsoAndCassianAndor extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(1, 0, Duration.EndOfTurn)
                     .setText("target creature gets +1/+0"),
-                TargetController.YOU, false);
+                false);
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn)
                 .setText("and gains haste until end of turn"));
         ability.addTarget(new TargetCreaturePermanent());

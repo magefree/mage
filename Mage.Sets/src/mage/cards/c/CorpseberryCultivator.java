@@ -31,7 +31,7 @@ public final class CorpseberryCultivator extends CardImpl {
         // At the beginning of combat on your turn, you may forage.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
                 new DoIfCostPaid(null, new ForageCost()),
-                TargetController.YOU, false
+                false
         ));
 
         // Whenever you forage, put a +1/+1 counter on Corpseberry Cultivator.

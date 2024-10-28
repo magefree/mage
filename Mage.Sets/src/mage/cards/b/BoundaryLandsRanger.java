@@ -34,7 +34,7 @@ public final class BoundaryLandsRanger extends CardImpl {
                 new BeginningOfCombatTriggeredAbility(
                         new DoIfCostPaid(
                                 new DrawCardSourceControllerEffect(1), new DiscardCardCost()
-                        ), TargetController.YOU, false
+                        ), false
                 ), FerociousCondition.instance, "At the beginning of combat on your turn, if you control " +
                 "a creature with power 4 or greater, you may discard a card. If you do, draw a card."
         ).addHint(FerociousHint.instance));

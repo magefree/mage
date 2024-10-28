@@ -55,7 +55,7 @@ public final class LinvalaShieldOfSeaGate extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new LinvalaShieldOfSeaGateRestrictionEffect(),
-                        TargetController.YOU, false
+                        false
                 ), FullPartyCondition.instance, "At the beginning of combat on your turn, " +
                 "if you have a full party, choose target nonland permanent an opponent controls. " +
                 "Until your next turn, it can't attack or block, and its activated abilities can't be activated."

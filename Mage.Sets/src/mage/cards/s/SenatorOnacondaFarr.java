@@ -30,7 +30,7 @@ public final class SenatorOnacondaFarr extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beggining of each combat, target creature you control gets +1/+1 until end of turn.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), TargetController.ANY, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(TargetController.ANY, new BoostTargetEffect(1, 1, Duration.EndOfTurn), false);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

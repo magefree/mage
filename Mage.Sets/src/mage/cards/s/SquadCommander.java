@@ -46,7 +46,7 @@ public final class SquadCommander extends CardImpl {
                 new BeginningOfCombatTriggeredAbility(
                         new BoostControlledEffect(
                                 1, 0, Duration.EndOfTurn
-                        ), TargetController.YOU, false
+                        ), false
                 ), FullPartyCondition.instance, "At the beginning of combat on your turn, " +
                 "if you have a full party, creatures you control get +1/+0 and gain indestructible until end of turn."
         );

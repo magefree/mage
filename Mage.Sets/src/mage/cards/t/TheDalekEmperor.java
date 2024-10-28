@@ -52,7 +52,7 @@ public final class TheDalekEmperor extends CardImpl {
 
         // At the beginning of combat on your turn, each opponent faces a villainous choice -- That player sacrifices a creature they control, or you create a 3/3 black Dalek artifact creature token with menace.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new TheDalekEmperorEffect(), TargetController.YOU, false
+                new TheDalekEmperorEffect(), false
         ));
     }
 

@@ -43,7 +43,7 @@ public final class JubilantMascot extends CardImpl {
                         new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                                 .setText("support 2"),
                         new ManaCostsImpl<>("{3}{W}")
-                ), TargetController.YOU, false);
+                ), false);
         ability.addTarget(new TargetCreaturePermanent(0, 2, filter, false));
         this.addAbility(ability);
     }

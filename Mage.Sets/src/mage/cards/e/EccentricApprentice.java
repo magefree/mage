@@ -43,7 +43,7 @@ public final class EccentricApprentice extends CardImpl {
         // At the beginning of combat on your turn, if you've completed a dungeon, up to one target creature becomes a Bird with base power and toughness 1/1 and flying until end of turn.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new EccentricApprenticeEffect(), TargetController.YOU, false
+                        new EccentricApprenticeEffect(), false
                 ), CompletedDungeonCondition.instance, "At the beginning of combat on your turn, " +
                 "if you've completed a dungeon, up to one target creature becomes a Bird " +
                 "with base power and toughness 1/1 and flying until end of turn."

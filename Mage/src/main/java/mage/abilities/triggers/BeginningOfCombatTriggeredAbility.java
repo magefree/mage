@@ -8,11 +8,18 @@ import mage.game.events.GameEvent;
 
 public class BeginningOfCombatTriggeredAbility extends AtStepTriggeredAbility {
 
-    public BeginningOfCombatTriggeredAbility(Effect effect, TargetController targetController, boolean optional) {
-        this(Zone.BATTLEFIELD, effect, targetController, optional);
+    /**
+     * At the beginning of combat on your turn
+     */
+    public BeginningOfCombatTriggeredAbility(Effect effect, boolean optional) {
+        this(TargetController.YOU, effect, optional);
     }
 
-    public BeginningOfCombatTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean optional) {
+    public BeginningOfCombatTriggeredAbility(TargetController targetController, Effect effect, boolean optional) {
+        this(Zone.BATTLEFIELD, targetController, effect, optional);
+    }
+
+    public BeginningOfCombatTriggeredAbility(Zone zone, TargetController targetController, Effect effect, boolean optional) {
         super(zone, targetController, effect, optional);
     }
 

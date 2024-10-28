@@ -50,7 +50,7 @@ public final class AtraxasSkitterfang extends CardImpl {
                 ability,
                 new RemoveCountersSourceCost(CounterType.OIL.createInstance()),
                 "Remove an oil counter?"
-        ), TargetController.YOU, false));
+        ), false));
     }
 
     private AtraxasSkitterfang(final AtraxasSkitterfang card) {

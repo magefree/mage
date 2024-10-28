@@ -44,7 +44,7 @@ public final class JarJarBinks extends CardImpl {
         this.addAbility(ability);
 
         // At the beggining of combat on your turn, tap the creature you control with the highest power. If two or more creatures are tied for the greatest power, you choose one of them.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new JarJarBinksTapEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new JarJarBinksTapEffect(), false));
     }
 
     private JarJarBinks(final JarJarBinks card) {

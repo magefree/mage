@@ -48,7 +48,7 @@ public final class VolrathTheShapestealer extends CardImpl {
 
         // At the beginning of combat on your turn, put a -1/-1 counter on up to one target creature.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.M1M1.createInstance(), Outcome.Detriment), TargetController.YOU, false
+                new AddCountersTargetEffect(CounterType.M1M1.createInstance(), Outcome.Detriment), false
         );
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);

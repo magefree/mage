@@ -33,7 +33,7 @@ public final class LoyalSubordinate extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new LoseLifeOpponentsEffect(3),
-                        TargetController.YOU, false
+                        false
                 ), CommanderInPlayCondition.instance,
                 "<i>Lieutenant</i> &mdash; At the beginning of combat "
                 + "on your turn, if you control your commander, "

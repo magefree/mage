@@ -43,8 +43,7 @@ public final class ChampionsOfMinasTirith extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         Zone.BATTLEFIELD,
-                        new ChampionsOfMinasTirithEffect(),
-                        TargetController.OPPONENT,
+                        TargetController.OPPONENT, new ChampionsOfMinasTirithEffect(),
                         false
                 ),
                 MonarchIsSourceControllerCondition.instance,

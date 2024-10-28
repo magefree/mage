@@ -29,7 +29,7 @@ public final class WebOfInertia extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // At the beginning of combat on each opponent's turn, that player may exile a card from their graveyard. If the player doesn't, creatures they control can't attack you this turn.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new WebOfInertiaEffect(), TargetController.OPPONENT, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.OPPONENT, new WebOfInertiaEffect(), false));
     }
 
     private WebOfInertia(final WebOfInertia card) {
