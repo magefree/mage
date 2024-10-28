@@ -85,9 +85,11 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Searslicer Goblin", 93, Rarity.RARE, mage.cards.s.SearslicerGoblin.class));
         cards.add(new SetCardInfo("Serra Angel", 147, Rarity.UNCOMMON, mage.cards.s.SerraAngel.class));
         cards.add(new SetCardInfo("Shivan Dragon", 206, Rarity.UNCOMMON, mage.cards.s.ShivanDragon.class));
+        cards.add(new SetCardInfo("Slagstorm", 207, Rarity.RARE, mage.cards.s.Slagstorm.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 257, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Sorcerous Spyglass", 679, Rarity.UNCOMMON, mage.cards.s.SorcerousSpyglass.class));
         cards.add(new SetCardInfo("Soul-Guide Lantern", 680, Rarity.UNCOMMON, mage.cards.s.SoulGuideLantern.class));
+        cards.add(new SetCardInfo("Stroke of Midnight", 148, Rarity.UNCOMMON, mage.cards.s.StrokeOfMidnight.class));
         cards.add(new SetCardInfo("Stromkirk Bloodthief", 185, Rarity.UNCOMMON, mage.cards.s.StromkirkBloodthief.class));
         cards.add(new SetCardInfo("Swamp", 276, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temple of Abandon", 696, Rarity.RARE, mage.cards.t.TempleOfAbandon.class));
