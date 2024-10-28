@@ -11,7 +11,6 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -32,7 +31,7 @@ public final class ChanceEncounter extends CardImpl {
         this.addAbility(new ChanceEncounterTriggeredAbility());
 
         // At the beginning of your upkeep, if Chance Encounter has ten or more luck counters on it, you win the game.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceHasCounterCondition(CounterType.LUCK, 10, Integer.MAX_VALUE),
                 "At the beginning of your upkeep, if {this} has ten or more luck counters on it, you win the game."));
     }

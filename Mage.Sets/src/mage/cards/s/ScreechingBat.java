@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -36,7 +35,7 @@ public final class ScreechingBat extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
                 new TransformSourceEffect(),
                 new ManaCostsImpl<>("{2}{B}{B}")
-        ), false));
+        )));
     }
 
     private ScreechingBat(final ScreechingBat card) {

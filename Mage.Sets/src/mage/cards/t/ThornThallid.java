@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetAnyTarget;
@@ -31,7 +30,7 @@ public final class ThornThallid extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, put a spore counter on Thorn Thallid.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance())));
         // Remove three spore counters from Thorn Thallid: Thorn Thallid deals 1 damage to any target.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(1, "it"),

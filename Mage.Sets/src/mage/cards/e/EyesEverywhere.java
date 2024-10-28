@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -26,8 +25,7 @@ public final class EyesEverywhere extends CardImpl {
 
         // At the beginning of your upkeep, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ScryEffect(1, false),
-                false
+                new ScryEffect(1, false)
         ));
 
         // {5}{U}: Exchange control of Eyes Everywhere and target nonland permanent. Activate this ability only any time you could cast a sorcery.

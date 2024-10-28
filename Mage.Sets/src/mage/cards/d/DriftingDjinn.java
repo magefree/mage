@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class DriftingDjinn extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}{U}")), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}{U}"))));
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }
 

@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -27,7 +26,7 @@ public final class HarrierGriffin extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new TapTargetEffect(), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new TapTargetEffect());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

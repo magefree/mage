@@ -17,7 +17,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.EldraziHorrorToken;
@@ -49,7 +48,7 @@ public final class ExtricatorOfSin extends CardImpl {
         // <i>Delirium</i> &mdash; At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, transform Extricator of Sin.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), false),
+                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect()),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, "
                         + " transform {this}.")

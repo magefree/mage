@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class Moroii extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your upkeep, you lose 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1)));
     }
 
     private Moroii(final Moroii card) {

@@ -48,7 +48,7 @@ public final class PallidMycoderm extends CardImpl {
 
         // At the beginning of your upkeep, put a spore counter on Pallid Mycoderm.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.SPORE.createInstance()), false
+                new AddCountersSourceEffect(CounterType.SPORE.createInstance())
         ));
 
         // Remove three spore counters from Pallid Mycoderm: Create a 1/1 green Saproling creature token.

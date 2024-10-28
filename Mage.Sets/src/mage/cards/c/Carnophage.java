@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class Carnophage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, tap Carnophage unless you pay 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(1)), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TapSourceUnlessPaysEffect(new PayLifeCost(1))));
     }
 
     private Carnophage(final Carnophage card) {

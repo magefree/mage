@@ -36,7 +36,7 @@ public final class LordOfThePit extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a creature other than Lord of the Pit. If you can't, Lord of the Pit deals 7 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LordOfThePitEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LordOfThePitEffect()));
     }
 
     private LordOfThePit(final LordOfThePit card) {

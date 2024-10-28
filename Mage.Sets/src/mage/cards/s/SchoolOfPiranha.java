@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class SchoolOfPiranha extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, sacrifice School of Piranha unless you pay {1}{U}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}{U}")), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}{U}"))));
     }
 
     private SchoolOfPiranha(final SchoolOfPiranha card) {

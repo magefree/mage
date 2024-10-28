@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.PhyrexianMyrToken;
@@ -34,7 +33,7 @@ public final class ParasiticImplant extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Sacrifice));
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
-        ability = new BeginningOfUpkeepTriggeredAbility(new ParasiticImplantEffect(), false);
+        ability = new BeginningOfUpkeepTriggeredAbility(new ParasiticImplantEffect());
         ability.addEffect(new CreateTokenEffect(new PhyrexianMyrToken()).concatBy("and you"));
         this.addAbility(ability);
     }

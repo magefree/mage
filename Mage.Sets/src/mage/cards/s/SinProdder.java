@@ -31,7 +31,7 @@ public final class SinProdder extends CardImpl {
 
         // At the beginning of your upkeep, reveal the top card of your library. Any opponent may have you put that card into your graveyard. If a player does,
         // Sin Prodder deals damage to that player equal to that card's converted mana cost. Otherwise, put that card into your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SinProdderEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SinProdderEffect()));
     }
 
     private SinProdder(final SinProdder card) {

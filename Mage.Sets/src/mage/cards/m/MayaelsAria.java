@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
@@ -31,7 +30,7 @@ public final class MayaelsAria extends CardImpl {
         // At the beginning of your upkeep, put a +1/+1 counter on each creature you control if you control a creature with power 5 or greater.
         // Then you gain 10 life if you control a creature with power 10 or greater.
         // Then you win the game if you control a creature with power 20 or greater.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MayaelsAriaEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MayaelsAriaEffect()));
     }
 
     private MayaelsAria(final MayaelsAria card) {

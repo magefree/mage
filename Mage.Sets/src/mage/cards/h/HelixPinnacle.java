@@ -14,7 +14,6 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -39,7 +38,7 @@ public final class HelixPinnacle extends CardImpl {
 
         // At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), false),
+                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect()),
                 new SourceHasCounterCondition(CounterType.TOWER, 100, Integer.MAX_VALUE),
                 rule));
 

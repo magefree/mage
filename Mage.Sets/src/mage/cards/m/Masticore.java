@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
@@ -34,7 +33,7 @@ public final class Masticore extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, sacrifice Masticore unless you discard a card.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand())), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand()))));
 
         // {2}: Masticore deals 1 damage to target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(2));

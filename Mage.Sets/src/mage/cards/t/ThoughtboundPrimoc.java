@@ -38,7 +38,7 @@ public final class ThoughtboundPrimoc extends CardImpl {
         // At the beginning of your upkeep, if a player controls more Wizards than each other player,
         // the player who controls the most Wizards gains control of Thoughtbound Primoc.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new ThoughtboundPrimocEffect(), false),
+                new BeginningOfUpkeepTriggeredAbility(new ThoughtboundPrimocEffect()),
                 OnePlayerHasTheMostWizards.instance,
                 "At the beginning of your upkeep, if a player controls more Wizards than each other player, the player who controls the most Wizards gains control of {this}"
         ));

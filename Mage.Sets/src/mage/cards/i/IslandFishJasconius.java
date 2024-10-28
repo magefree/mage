@@ -34,8 +34,8 @@ public final class IslandFishJasconius extends CardImpl {
         
         // At the beginning of your upkeep, you may pay {U}{U}{U}. If you do, untap Island Fish Jasconius.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoIfCostPaid(new UntapSourceEffect(), new ManaCostsImpl<>("{U}{U}{U}")),
-                false));
+                new DoIfCostPaid(new UntapSourceEffect(), new ManaCostsImpl<>("{U}{U}{U}"))
+        ));
         
         // Island Fish Jasconius can't attack unless defending player controls an Island.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));

@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.permanent.token.FaerieRogueToken;
 
 /**
@@ -24,7 +23,7 @@ public final class Bitterblossom extends CardImpl {
         this.subtype.add(SubType.FAERIE);
 
         // At the beginning of your upkeep, you lose 1 life and create a 1/1 black Faerie Rogue creature token with flying.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1));
         ability.addEffect(new CreateTokenEffect(new FaerieRogueToken(), 1).concatBy("and"));
         this.addAbility(ability);
     }

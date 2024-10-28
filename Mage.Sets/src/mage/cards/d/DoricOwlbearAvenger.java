@@ -54,7 +54,7 @@ public final class DoricOwlbearAvenger extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, transform Doric.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect()));
     }
 
     private DoricOwlbearAvenger(final DoricOwlbearAvenger card) {

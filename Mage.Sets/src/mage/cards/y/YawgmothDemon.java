@@ -34,7 +34,7 @@ public final class YawgmothDemon extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // At the beginning of your upkeep, you may sacrifice an artifact. If you don't, tap Yawgmoth Demon and it deals 2 damage to you.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new YawgmothDemonEffect(), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new YawgmothDemonEffect());
         this.addAbility(ability);
     }
 

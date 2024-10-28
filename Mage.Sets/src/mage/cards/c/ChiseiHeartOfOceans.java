@@ -44,7 +44,7 @@ public final class ChiseiHeartOfOceans extends CardImpl {
         // At the beginning of your upkeep, sacrifice Chisei, Heart of Oceans unless you remove a counter from a permanent you control.
         TargetPermanent target = new TargetPermanent(1, 1, filter, true);
         target.withTargetName("a permanent you control");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new RemoveCounterCost(target)), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new RemoveCounterCost(target))));
 
     }
 

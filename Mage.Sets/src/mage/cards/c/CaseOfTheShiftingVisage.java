@@ -38,7 +38,7 @@ public final class CaseOfTheShiftingVisage extends CardImpl {
         this.subtype.add(SubType.CASE);
 
         // At the beginning of your upkeep, surveil 1.
-        Ability initialAbility = new BeginningOfUpkeepTriggeredAbility(new SurveilEffect(1, false), false);
+        Ability initialAbility = new BeginningOfUpkeepTriggeredAbility(new SurveilEffect(1, false));
         // To solve — There are fifteen or more cards in your graveyard.
         Condition toSolveCondition = new CardsInControllerGraveyardCondition(15);
         // Solved — Whenever you cast a nonlegendary creature spell, copy that spell.

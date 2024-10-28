@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -26,7 +25,7 @@ public final class IntoTheWilds extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // At the beginning of your upkeep, look at the top card of your library. If it's a land card, you may put it onto the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IntoTheWildsEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IntoTheWildsEffect()));
 
     }
 

@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -43,8 +42,7 @@ public final class WojekInvestigator extends CardImpl {
         // At the beginning of your upkeep, investigate once for each opponent who has more cards in hand than you.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new InvestigateEffect(WojekInvestigatorValue.instance)
-                        .setText("investigate once for each opponent who has more cards in hand than you"),
-                false
+                        .setText("investigate once for each opponent who has more cards in hand than you")
         ).addHint(WojekInvestigatorValue.getHint()));
     }
 

@@ -134,8 +134,8 @@ class GlyphOfDelusionEffect extends OneShotEffect {
                 effect.setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
                 game.addEffect(effect, source);
 
-                BeginningOfUpkeepTriggeredAbility ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.GLYPH.createInstance()),
-                        false);
+                BeginningOfUpkeepTriggeredAbility ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.GLYPH.createInstance())
+                );
                 GainAbilityTargetEffect effect2 = new GainAbilityTargetEffect(ability2, Duration.Custom);
                 effect2.setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
                 game.addEffect(effect2, source);

@@ -20,7 +20,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicate;
@@ -55,14 +54,12 @@ public final class Tetravus extends CardImpl {
 
         // At the beginning of your upkeep, you may remove any number of +1/+1 counters from Tetravus. If you do, create that many 1/1 colorless Tetravite artifact creature tokens. They each have flying and "This creature can't be enchanted."
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TetravusCreateTokensEffect(),
-                true
+                new TetravusCreateTokensEffect(), true
         ));
 
         // At the beginning of your upkeep, you may exile any number of tokens created with Tetravus. If you do, put that many +1/+1 counters on Tetravus.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TetravusAddCountersEffect(),
-                true
+                new TetravusAddCountersEffect(), true
         ));
 
     }

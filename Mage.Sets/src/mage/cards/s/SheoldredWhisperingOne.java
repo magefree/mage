@@ -36,7 +36,7 @@ public final class SheoldredWhisperingOne extends CardImpl {
         this.addAbility(new SwampwalkAbility());
 
         // At the beginning of your upkeep, return target creature card from your graveyard to the battlefield.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(false), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(false));
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
 

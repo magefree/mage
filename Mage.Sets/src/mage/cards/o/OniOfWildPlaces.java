@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -36,7 +35,7 @@ public final class OniOfWildPlaces extends CardImpl {
         this.toughness = new MageInt(5);
         this.addAbility(HasteAbility.getInstance());
         // At the beginning of your upkeep, return a red creature you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter)));
     }
 
     private OniOfWildPlaces(final OniOfWildPlaces card) {

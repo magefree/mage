@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -33,7 +32,7 @@ public final class Fasting extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
 
         // At the beginning of your upkeep, put a hunger counter on Fasting. Then destroy Fasting if it has five or more hunger counters on it.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.HUNGER.createInstance()), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.HUNGER.createInstance()));
         ability.addEffect(new ConditionalOneShotEffect(new DestroySourceEffect(), new SourceHasCounterCondition(CounterType.HUNGER, 5), "Then destroy {this} if it has five or more hunger counters on it"));
         this.addAbility(ability);
 

@@ -14,7 +14,6 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -35,7 +34,7 @@ public final class IcyPrison extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Icy Prison unless any player pays {3}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoUnlessAnyPlayerPaysEffect(new SacrificeSourceEffect(), new GenericManaCost(3)), false));
+                new DoUnlessAnyPlayerPaysEffect(new SacrificeSourceEffect(), new GenericManaCost(3))));
 
         // When Icy Prison leaves the battlefield, return the exiled card to the battlefield under its owner's control.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false));

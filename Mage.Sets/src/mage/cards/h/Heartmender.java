@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -31,7 +30,7 @@ public final class Heartmender extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, remove a -1/-1 counter from each creature you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HeartmenderEffect(CounterType.M1M1.createInstance()), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HeartmenderEffect(CounterType.M1M1.createInstance())));
 
         // Persist
         this.addAbility(new PersistAbility());

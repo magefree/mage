@@ -17,7 +17,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -41,7 +40,7 @@ public final class CuriousHomunculus extends CardImpl {
         // At the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform Curious Homunculus.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), false),
+                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect()),
                 new InstantOrSorceryCardsInControllerGraveyardCondition(3),
                 "At the beginning of your upkeep, if there are three or more instant and/or sorcery cards in your graveyard, transform {this}"));
     }

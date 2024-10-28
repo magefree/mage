@@ -13,7 +13,6 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.token.CitizenGreenWhiteToken;
 import mage.game.permanent.token.Token;
@@ -40,8 +39,8 @@ public class MasterOfCeremonies extends CardImpl {
         // For each player who chose friends, you and that player each create a 1/1 green and white Citizen creature token.
         // For each player who chose secrets, you and that player each draw a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new MasterOfCeremoniesChoiceEffect(),
-                false)
+                        new MasterOfCeremoniesChoiceEffect(), false
+                )
         );
     }
 

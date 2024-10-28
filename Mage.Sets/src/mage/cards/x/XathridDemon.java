@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -39,7 +38,7 @@ public final class XathridDemon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a creature other than Xathrid Demon, then each opponent loses life equal to the sacrificed creature's power. If you can't sacrifice a creature, tap Xathrid Demon and you lose 7 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new XathridDemonEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new XathridDemonEffect()));
     }
 
     private XathridDemon(final XathridDemon card) {

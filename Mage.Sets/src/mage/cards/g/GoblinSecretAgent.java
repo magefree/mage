@@ -15,7 +15,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 /**
@@ -35,7 +34,7 @@ public final class GoblinSecretAgent extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of your upkeep, reveal a card from your hand at random.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GoblinSecretAgentEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GoblinSecretAgentEffect()));
     }
 
     private GoblinSecretAgent(final GoblinSecretAgent card) {

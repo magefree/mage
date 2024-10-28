@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -35,7 +34,7 @@ public final class RazormaneMasticore extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of your upkeep, sacrifice Razormane Masticore unless you discard a card.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand())), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand()))));
 
         // At the beginning of your draw step, you may have Razormane Masticore deal 3 damage to target creature.
         Ability ability = new BeginningOfDrawTriggeredAbility(new DamageTargetEffect(3), true);

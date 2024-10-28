@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.token.TreasureToken;
 import mage.players.Player;
@@ -24,7 +23,7 @@ public final class TemptingContract extends CardImpl {
 
         // At the beginning of your upkeep, each opponent may create a Treasure token. For each opponent who does, you create a Treasure token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new TemptingContractEffect(), false
+                new TemptingContractEffect()
         ));
     }
 

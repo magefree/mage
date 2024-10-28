@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -34,7 +33,7 @@ public final class PalladiaMors extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, sacrifice Palladia-Mors unless you pay {R}{G}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{R}{G}{W}")), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{R}{G}{W}"))));
     }
 
     private PalladiaMors(final PalladiaMors card) {

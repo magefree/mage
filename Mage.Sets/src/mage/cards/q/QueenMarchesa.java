@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.token.QueenMarchesaAssassinToken;
 
@@ -46,7 +45,7 @@ public final class QueenMarchesa extends CardImpl {
 
         // At the beginning of your upkeep, if an opponent is the monarch, create a 1/1 black Assassin creature token with deathtouch and haste.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new QueenMarchesaAssassinToken()), false),
+                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new QueenMarchesaAssassinToken())),
                 OpponentIsMonarchCondition.instance,
                 "At the beginning of your upkeep, if an opponent is the monarch, create a 1/1 black Assassin creature token with deathtouch and haste."));
     }

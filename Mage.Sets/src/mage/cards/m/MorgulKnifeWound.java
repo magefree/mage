@@ -41,7 +41,7 @@ public final class MorgulKnifeWound extends CardImpl {
                         new ExileSourceEffect(),
                         new PayLifeCost(2),
                         "Pay 2 life to prevent {this} from being exiled?"
-                ).setText("exile {this} unless you pay 2 life"), false
+                ).setText("exile {this} unless you pay 2 life")
         ), AttachmentType.AURA).setText("and has \"At the beginning of your upkeep, exile this creature unless you pay 2 life.\""));
         this.addAbility(ability);
     }

@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 
 /**
@@ -46,8 +45,7 @@ public final class GutwrencherOni extends CardImpl {
                         new DiscardControllerEffect(1),
                         condition,
                         "discard a card if you don't control an Ogre"
-                ),
-                false
+                )
         ));
     }
 

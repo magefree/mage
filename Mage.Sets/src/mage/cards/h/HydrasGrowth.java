@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -43,8 +42,8 @@ public final class HydrasGrowth extends CardImpl {
                 new AddCountersAttachedEffect(CounterType.P1P1.createInstance(), "enchanted creature"), false));
         // At the beginning of your upkeep, double the number of +1/+1 counters on enchanted creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new HydrasGrowthDoubleEffect(),
-                false));
+                new HydrasGrowthDoubleEffect()
+        ));
     }
 
     private HydrasGrowth(final HydrasGrowth card) {

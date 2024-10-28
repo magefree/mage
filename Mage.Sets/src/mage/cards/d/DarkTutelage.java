@@ -5,7 +5,6 @@ import mage.abilities.effects.common.RevealPutInHandLoseLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -18,7 +17,7 @@ public final class DarkTutelage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new RevealPutInHandLoseLifeEffect(), false
+                new RevealPutInHandLoseLifeEffect()
         ));
     }
 

@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -37,7 +36,7 @@ public final class Fettergeist extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, sacrifice Fettergeist unless you pay {1} for each other creature you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FettergeistUnlessPaysEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FettergeistUnlessPaysEffect()));
 
     }
 

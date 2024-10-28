@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class WhipstitchedZombie extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, sacrifice Whipstitched Zombie unless you pay {B}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{B}")), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{B}"))));
     }
 
     private WhipstitchedZombie(final WhipstitchedZombie card) {

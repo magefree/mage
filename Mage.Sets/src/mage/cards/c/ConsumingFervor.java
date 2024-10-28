@@ -18,7 +18,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.TargetPermanent;
@@ -44,7 +43,7 @@ public final class ConsumingFervor extends CardImpl {
 
         // Enchanted creature gets +3/+3 and has "At the beginning of your upkeep, put a -1/-1 counter on this creature."
         ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield));
-        Ability grantedAbility = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(1)), false);
+        Ability grantedAbility = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(1)));
         Effect effect = new GainAbilityAttachedEffect(grantedAbility, AttachmentType.AURA);
         effect.setText("and has \"At the beginning of your upkeep, put a -1/-1 counter on this creature.\"");
         ability.addEffect(effect);

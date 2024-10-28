@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class NyxFleeceRam extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, you gain 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1)));
     }
 
     private NyxFleeceRam(final NyxFleeceRam card) {

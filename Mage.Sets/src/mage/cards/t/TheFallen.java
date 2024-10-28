@@ -27,7 +27,7 @@ public final class TheFallen extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, The Fallen deals 1 damage to each opponent it has dealt damage to this game.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TheFallenEffect(), false), new TheFallenWatcher());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TheFallenEffect()), new TheFallenWatcher());
     }
 
     private TheFallen(final TheFallen card) {

@@ -34,7 +34,7 @@ public final class DeathbonnetHulk extends CardImpl {
 
         // At the beginning of your upkeep, you may exile a card from a graveyard. If a creature card was exiled this way, put a +1/+1 counter on Deathbonnet Hulk.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DeathbonnetHulkEffect(), false
+                new DeathbonnetHulkEffect()
         ));
     }
 

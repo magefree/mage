@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -35,7 +34,7 @@ public final class Chromium extends CardImpl {
         this.addAbility(new RampageAbility(2));
         // At the beginning of your upkeep, sacrifice Chromium unless you pay {W}{U}{B}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(
-            new ManaCostsImpl<>("{W}{U}{B}")), false));
+            new ManaCostsImpl<>("{W}{U}{B}"))));
     }
 
     private Chromium(final Chromium card) {

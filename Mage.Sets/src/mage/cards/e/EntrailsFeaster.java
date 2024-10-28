@@ -30,7 +30,7 @@ public final class EntrailsFeaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, you may exile a creature card from a graveyard. If you do, put a +1/+1 counter on Entrails Feaster. If you don't, tap Entrails Feaster.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new EntrailsFeasterEffect(), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new EntrailsFeasterEffect());
         this.addAbility(ability);
 
     }

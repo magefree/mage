@@ -35,7 +35,7 @@ public final class SerendibDjinn extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a land. If you sacrifice an Island this way, Serendib Djinn deals 3 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SerendibDjinnEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SerendibDjinnEffect()));
         // When you control no lands, sacrifice Serendib Djinn.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
                 filter, ComparisonType.EQUAL_TO, 0,

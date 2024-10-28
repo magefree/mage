@@ -62,7 +62,7 @@ public final class MinscBooTimelessHeroes extends CardImpl {
                 true,
                 "When {this} enters and at the beginning of your upkeep, ",
                 new EntersBattlefieldTriggeredAbility(null, false),
-                new BeginningOfUpkeepTriggeredAbility(null, false))
+                new BeginningOfUpkeepTriggeredAbility(null))
         );
 
         // +1: Put three +1/+1 counters on up to one target creature with trample or haste.

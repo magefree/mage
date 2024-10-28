@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.permanent.token.ZombieToken;
@@ -42,7 +41,7 @@ public final class ArchdemonOfUnx extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a non-Zombie creature, then create a 2/2 black Zombie creature token.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(filter, 1, ""), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(filter, 1, ""));
         ability.addEffect(new CreateTokenEffect(new ZombieToken()).concatBy(", then"));
         this.addAbility(ability);
     }

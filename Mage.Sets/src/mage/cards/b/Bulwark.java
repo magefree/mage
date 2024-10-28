@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -25,7 +24,7 @@ public final class Bulwark extends CardImpl {
 
         // At the beginning of your upkeep, Bulwark deals X damage to target opponent, where X is
         // the number of cards in your hand minus the number of cards in that player's hand.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BulwarkDamageEffect(), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BulwarkDamageEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
@@ -30,7 +29,7 @@ public final class AetherRift extends CardImpl {
 
 
         // At the beginning of your upkeep, discard a card at random. If you discard a creature card this way, return it from your graveyard to the battlefield unless any player pays 5 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AetherRiftEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AetherRiftEffect()));
 
     }
 

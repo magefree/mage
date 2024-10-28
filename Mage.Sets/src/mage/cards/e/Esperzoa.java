@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledArtifactPermanent;
 
 /**
@@ -32,7 +31,7 @@ public final class Esperzoa extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         //At the beginning of your upkeep, return an artifact you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledArtifactPermanent()), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledArtifactPermanent())));
     }
 
     private Esperzoa(final Esperzoa card) {

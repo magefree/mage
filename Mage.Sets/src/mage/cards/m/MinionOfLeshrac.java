@@ -38,7 +38,7 @@ public final class MinionOfLeshrac extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.BLACK));
 
         // At the beginning of your upkeep, Minion of Leshrac deals 5 damage to you unless you sacrifice a creature other than Minion of Leshrac. If Minion of Leshrac deals damage to you this way, tap it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MinionLeshracEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MinionLeshracEffect()));
 
         // {tap}: Destroy target creature or land.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());

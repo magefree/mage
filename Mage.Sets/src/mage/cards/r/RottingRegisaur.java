@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -26,8 +25,7 @@ public final class RottingRegisaur extends CardImpl {
 
         // At the beginning of your upkeep, discard a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DiscardControllerEffect(1),
-                false
+                new DiscardControllerEffect(1)
         ));
     }
 

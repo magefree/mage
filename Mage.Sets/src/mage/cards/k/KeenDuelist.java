@@ -27,7 +27,7 @@ public final class KeenDuelist extends CardImpl {
 
         // At the beginning of your upkeep, you and target opponent each reveal the top card of your library. You each lose life equal to the mana value of the card revealed by the other player. You each put the card you revealed into your hand.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new KeenDuelistEffect(), false
+                new KeenDuelistEffect()
         );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

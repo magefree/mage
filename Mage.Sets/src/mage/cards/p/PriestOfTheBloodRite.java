@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.permanent.token.DemonToken;
 
 /**
@@ -31,7 +30,7 @@ public final class PriestOfTheBloodRite extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new DemonToken())));
 
         // At the beginning of your upkeep, you lose 2 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2)));
     }
 
     private PriestOfTheBloodRite(final PriestOfTheBloodRite card) {

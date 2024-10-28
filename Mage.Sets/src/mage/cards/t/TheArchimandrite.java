@@ -67,8 +67,7 @@ public final class TheArchimandrite extends CardImpl {
         // At the beginning of your upkeep, you gain X life, where X is the number of cards in your hand minus 4.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new GainLifeEffect(xValue)
-                        .setText("you gain X life, where X is the number of cards in your hand minus 4"),
-                false
+                        .setText("you gain X life, where X is the number of cards in your hand minus 4")
         ));
 
         // Whenever you gain life, each Advisor, Artificer, and Monk you control gains vigilance and gets +X/+0 until end of turn, where X is the amount of life you gained.

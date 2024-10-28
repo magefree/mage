@@ -11,7 +11,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.Game;
@@ -32,7 +31,7 @@ public final class BelzenlokDemonToken extends TokenImpl {
         toughness = new MageInt(6);
         addAbility(FlyingAbility.getInstance());
         addAbility(TrampleAbility.getInstance());
-        addAbility(new BeginningOfUpkeepTriggeredAbility(new BelzenlokDemonTokenEffect(), false));
+        addAbility(new BeginningOfUpkeepTriggeredAbility(new BelzenlokDemonTokenEffect()));
     }
 
     private BelzenlokDemonToken(final BelzenlokDemonToken token) {

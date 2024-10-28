@@ -31,8 +31,7 @@ public final class TheaterOfHorrors extends CardImpl {
 
         // At the beginning of your upkeep, exile the top card of your library.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ExileCardsFromTopOfLibraryControllerEffect(1, true),
-                false
+                new ExileCardsFromTopOfLibraryControllerEffect(1, true)
         ));
 
         // During your turn, if an opponent lost life this turn, you may play cards exiled with Theater of Horrors.

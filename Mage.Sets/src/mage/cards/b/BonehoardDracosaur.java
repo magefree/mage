@@ -43,7 +43,7 @@ public final class BonehoardDracosaur extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of your upkeep, exile the top two cards of your library. You may play them this turn. If you exiled a land card this way, create a 3/1 red Dinosaur creature token. If you exiled a nonland card this way, create a Treasure token.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new BoneahoardDracosaurEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new BoneahoardDracosaurEffect()));
     }
 
     private BonehoardDracosaur(final BonehoardDracosaur card) {

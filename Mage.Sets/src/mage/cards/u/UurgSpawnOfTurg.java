@@ -40,7 +40,7 @@ public final class UurgSpawnOfTurg extends CardImpl {
 
         // At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SurveilEffect(1), false
+                new SurveilEffect(1)
         ));
 
         // {B}{G}, Sacrifice a land: You gain 2 life.

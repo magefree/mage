@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 
 /**
@@ -32,8 +31,8 @@ public final class BogElemental extends CardImpl {
         
         // At the beginning of your upkeep, sacrifice Bog Elemental unless you sacrifice a land.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_LAND)),
-                false));
+                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_LAND))
+        ));
     }
 
     private BogElemental(final BogElemental card) {

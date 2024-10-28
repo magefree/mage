@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class BenthicDjinn extends CardImpl {
         this.addAbility(new IslandwalkAbility());
 
         // At the beginning of your upkeep, you lose 2 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2)));
     }
 
     private BenthicDjinn(final BenthicDjinn card) {

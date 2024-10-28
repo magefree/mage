@@ -25,7 +25,7 @@ public final class SpeciesGorger extends CardImpl {
         this.toughness = new MageInt(6);
 
         // At the beginning of your upkeep, return a creature you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(StaticFilters.FILTER_CONTROLLED_CREATURE), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(StaticFilters.FILTER_CONTROLLED_CREATURE)));
         
     }
 

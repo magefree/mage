@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -25,7 +24,7 @@ public final class LimDulsHex extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // At the beginning of your upkeep, for each player, Lim-Dul's Hex deals 1 damage to that player unless they pay {B} or {3}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LimDulsHexEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LimDulsHexEffect()));
     }
 
     private LimDulsHex(final LimDulsHex card) {

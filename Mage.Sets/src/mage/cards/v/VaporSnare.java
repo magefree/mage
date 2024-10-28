@@ -41,7 +41,7 @@ public final class VaporSnare extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Vapor Snare unless you return a land you control to its owner's hand.
         Effect effect = new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(1, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_A_LAND, true)));
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect));
     }
 
     private VaporSnare(final VaporSnare card) {

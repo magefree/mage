@@ -44,7 +44,7 @@ public final class SoulEcho extends CardImpl {
         // At the beginning of your upkeep, sacrifice Soul Echo if there are no echo counters on it. 
         // Otherwise, target opponent may choose that for each 1 damage that would be dealt to you until your next upkeep, you remove an echo counter from Soul Echo instead.
         Effect effect = new ConditionalOneShotEffect(new SacrificeSourceEffect(), new SoulEchoOpponentsChoiceEffect(), new SourceHasCounterCondition(CounterType.ECHO, 0, 0), "sacrifice {this} if there are no echo counters on it. Otherwise, target opponent may choose that for each 1 damage that would be dealt to you until your next upkeep, you remove an echo counter from {this} instead");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

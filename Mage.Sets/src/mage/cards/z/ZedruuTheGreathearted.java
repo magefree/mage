@@ -34,7 +34,7 @@ public final class ZedruuTheGreathearted extends CardImpl {
         // At the beginning of your upkeep, you gain X life and draw X cards, where X is the number of permanents you own that your opponents control.
         Effect effect = new GainLifeEffect(PermanentsYouOwnThatOpponentsControlCount.instance);
         effect.setText("you gain X life");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect);
         effect = new DrawCardSourceControllerEffect(PermanentsYouOwnThatOpponentsControlCount.instance);
         effect.setText("and draw X cards, where X is the number of permanents you own that your opponents control");
         ability.addEffect(effect);

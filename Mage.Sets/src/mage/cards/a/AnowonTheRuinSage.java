@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 
@@ -35,7 +34,7 @@ public final class AnowonTheRuinSage extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeAllEffect(filter), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeAllEffect(filter)));
     }
 
     private AnowonTheRuinSage(final AnowonTheRuinSage card) {

@@ -37,7 +37,7 @@ public final class MaintenanceHangar extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}");
 
         // At the beginning of your upkeep, remove an additional repair counter from each card in your graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterMaintenanceHangarEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterMaintenanceHangarEffect()));
 
         // Starship creatures you control and starship creatures in your graveyard have Repair 6.
         Effect effect = new GainAbilityControlledEffect(new RepairAbility(6), Duration.WhileOnBattlefield, filterPermanent);

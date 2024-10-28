@@ -18,7 +18,6 @@ import mage.abilities.mana.conditional.ManaCondition;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -35,7 +34,7 @@ public final class TitansNest extends CardImpl {
 
         // At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SurveilEffect(1), false
+                new SurveilEffect(1)
         ));
 
         // Exile a card from your graveyard: Add {C}. Spend this mana only to cast a colored spell without {X} in its mana cost.

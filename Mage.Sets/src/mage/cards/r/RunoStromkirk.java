@@ -47,7 +47,7 @@ public final class RunoStromkirk extends CardImpl {
         // At the beginning of your upkeep, look at the top card of your library. You may reveal that card. If a creature card with mana value 6 or greater is revealed this way, transform Runo Stromkirk.
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new RunoStromkirkEffect(), false
+                new RunoStromkirkEffect()
         ));
     }
 

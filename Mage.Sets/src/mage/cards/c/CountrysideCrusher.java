@@ -32,7 +32,7 @@ public final class CountrysideCrusher extends CardImpl {
 
         // At the beginning of your upkeep, reveal the top card of your library. If it's a land card, put it into your graveyard and repeat this process.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CountrysideCrusherEffect(), false
+                new CountrysideCrusherEffect()
         ));
 
         // Whenever a land card is put into your graveyard from anywhere, put a +1/+1 counter on Countryside Crusher.

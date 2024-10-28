@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -33,7 +32,7 @@ public final class TortureChamber extends CardImpl {
 
         // At the beginning of your upkeep, put a pain counter on Torture Chamber.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.PAIN.createInstance()), false
+                new AddCountersSourceEffect(CounterType.PAIN.createInstance())
         ));
 
         // At the beginning of your end step, Torture Chamber deals damage to you equal to the number of pain counters on it.

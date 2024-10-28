@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -38,7 +37,7 @@ public final class ShisatoWhisperingHunter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, sacrifice a Snake.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(filter, 1,""), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(filter, 1,"")));
         // Whenever Shisato, Whispering Hunter deals combat damage to a player, that player skips their next untap step.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SkipNextPlayerUntapStepEffect("that player"), false, true));
     }

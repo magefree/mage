@@ -35,7 +35,7 @@ public final class LoxodonPeacekeeper extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, the player with the lowest life total gains control of Loxodon Peacekeeper. If two or more players are tied for lowest life total, you choose one of them, and that player gains control of Loxodon Peacekeeper.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoxodonPeacekeeperEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoxodonPeacekeeperEffect()));
 
     }
 

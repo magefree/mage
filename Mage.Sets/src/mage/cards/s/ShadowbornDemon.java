@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -53,7 +52,7 @@ public final class ShadowbornDemon extends CardImpl {
 
         // At the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, ""), false),
+                new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "")),
                 new InvertCondition(new CreatureCardsInControllerGraveyardCondition(6)),
                 "At the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature"));
 

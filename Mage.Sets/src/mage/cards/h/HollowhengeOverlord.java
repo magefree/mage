@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -53,8 +52,7 @@ public final class HollowhengeOverlord extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new CreateTokenEffect(new WolfToken(), xValue)
                         .setText("for each creature you control that's a Wolf or a Werewolf, " +
-                                "create a 2/2 green Wolf creature token"),
-                false
+                                "create a 2/2 green Wolf creature token")
         ).addHint(hint));
     }
 

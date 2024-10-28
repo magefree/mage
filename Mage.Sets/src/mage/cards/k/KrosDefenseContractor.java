@@ -37,7 +37,7 @@ public final class KrosDefenseContractor extends CardImpl {
 
         // At the beginning of your upkeep, put a shield counter on target creature an opponent controls.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.SHIELD.createInstance()), false);
+                new AddCountersTargetEffect(CounterType.SHIELD.createInstance()));
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
 

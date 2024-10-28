@@ -38,7 +38,7 @@ public final class AvariceAmulet extends CardImpl {
         effect.setText("and has vigilance");
         ability.addEffect(effect);
         //and "At the beginning of your upkeep, draw a card."
-        effect = new GainAbilityAttachedEffect(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), false), AttachmentType.EQUIPMENT);
+        effect = new GainAbilityAttachedEffect(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1)), AttachmentType.EQUIPMENT);
         effect.setText("and \"At the beginning of your upkeep, draw a card.\"");
         ability.addEffect(effect);
         this.addAbility(ability);

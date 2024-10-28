@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.HumanSoldierToken;
@@ -46,7 +45,7 @@ public final class LossarnachCaptain extends CardImpl {
 
         // At the beginning of your upkeep, create a 1/1 white Human Soldier creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new HumanSoldierToken()), false
+                new CreateTokenEffect(new HumanSoldierToken())
         ));
     }
 

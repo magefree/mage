@@ -32,7 +32,7 @@ public final class ThallidDevourer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, put a spore counter on Thallid Devourer.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance())));
         // Remove three spore counters from Thallid Devourer: Create a 1/1 green Saproling creature token.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SaprolingToken()), 

@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 
 /**
@@ -30,7 +29,7 @@ public final class HaazdaShieldMate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, sacrifice Haazda Shield Mate unless you pay {W}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}")), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}"))));
         
         // {W}: The next time a source of your choice would deal damage to you this turn, prevent that damage.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));

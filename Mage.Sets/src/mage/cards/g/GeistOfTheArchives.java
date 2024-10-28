@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class GeistOfTheArchives extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // At the beginning of your upkeep, scry 1.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ScryEffect(1), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ScryEffect(1)));
     }
 
     private GeistOfTheArchives(final GeistOfTheArchives card) {

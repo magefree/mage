@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -45,7 +44,7 @@ public final class ReaverDrone extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConditionalOneShotEffect(
                 new LoseLifeSourceControllerEffect(1),
                 new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter)),
-                "you lose 1 life unless you control another colorless creature"), false));
+                "you lose 1 life unless you control another colorless creature")));
     }
 
     private ReaverDrone(final ReaverDrone card) {

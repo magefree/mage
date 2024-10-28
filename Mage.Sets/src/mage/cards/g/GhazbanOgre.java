@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -34,7 +33,7 @@ public final class GhazbanOgre extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of Ghazbán Ogre.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GhazbanOgreEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GhazbanOgreEffect()));
 
     }
 

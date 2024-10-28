@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DieRolledEvent;
@@ -29,7 +28,7 @@ public final class NetheresePuzzleWard extends CardImpl {
 
         // Focus Beam — At the beginning of your upkeep, roll a d4. Scry X, where X is the result.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new NetheresePuzzleWardEffect(), false
+                new NetheresePuzzleWardEffect()
         ).withFlavorWord("Focus Beam"));
 
         // Perfect Illumination — Whenever you roll a die's highest natural result, draw a card.

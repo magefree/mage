@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -37,7 +36,7 @@ public final class EnergyChamber extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // At the beginning of your upkeep, choose one - Put a +1/+1 counter on target artifact creature;
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(), Outcome.BoostCreature), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(), Outcome.BoostCreature));
         ability.addTarget(new TargetPermanent(filter));
 
         // or put a charge counter on target noncreature artifact.

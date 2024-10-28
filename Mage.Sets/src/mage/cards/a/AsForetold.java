@@ -35,8 +35,8 @@ public final class AsForetold extends CardImpl {
                         new AddCountersSourceEffect(
                                 CounterType.TIME.createInstance(),
                                 StaticValue.get(1),
-                                true),
-                        false));
+                                true), false
+                ));
 
         // Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with converted mana cost X or less, where X is the number of time counters on As Foretold.
         addAbility(new SimpleStaticAbility(

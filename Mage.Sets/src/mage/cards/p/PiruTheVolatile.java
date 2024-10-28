@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -48,8 +47,7 @@ public final class PiruTheVolatile extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Piru, the Volatile unless you pay {R}{W}{B}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{R}{W}{B}")),
-                false
+                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{R}{W}{B}"))
         ));
 
         // When Piru dies, it deals 7 damage to each nonlegendary creature.

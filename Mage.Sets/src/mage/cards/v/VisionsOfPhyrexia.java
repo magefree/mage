@@ -29,7 +29,7 @@ public final class VisionsOfPhyrexia extends CardImpl {
 
         // At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn), false
+                new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
         ));
 
         // At the beginning of your end step, if you didn't play a card from exile this turn, create a tapped Powerstone token.

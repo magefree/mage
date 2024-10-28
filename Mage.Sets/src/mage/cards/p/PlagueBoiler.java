@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterNonlandPermanent;
@@ -34,7 +33,7 @@ public final class PlagueBoiler extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // At the beginning of your upkeep, put a plague counter on Plague Boiler.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.PLAGUE.createInstance()), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.PLAGUE.createInstance())));
         // {1}{B}{G}: Put a plague counter on Plague Boiler or remove a plague counter from it.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlagueBoilerEffect(), new ManaCostsImpl<>("{1}{B}{G}")));
         // When Plague Boiler has three or more plague counters on it, sacrifice it. If you do, destroy all nonland permanents.

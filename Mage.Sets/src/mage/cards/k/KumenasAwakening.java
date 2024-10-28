@@ -10,7 +10,6 @@ import mage.abilities.keyword.AscendAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -28,8 +27,8 @@ public final class KumenasAwakening extends CardImpl {
         // At the beginning of your upkeep, each player draws a card. If you have the city's blessing, instead only you draw a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new ConditionalOneShotEffect(new DrawCardSourceControllerEffect(1), new DrawCardAllEffect(1), CitysBlessingCondition.instance,
-                        "each player draws a card. If you have the city's blessing, instead only you draw a card"),
-                false)
+                        "each player draws a card. If you have the city's blessing, instead only you draw a card")
+        )
                 .addHint(CitysBlessingHint.instance));
     }
 

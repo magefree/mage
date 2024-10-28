@@ -17,7 +17,6 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -37,7 +36,7 @@ public final class TimberlineRidge extends CardImpl {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
         this.addAbility(ability);
         // At the beginning of your upkeep, remove a depletion counter from Timberline Ridge.
-        Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.DEPLETION.createInstance()), false);
+        Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.DEPLETION.createInstance()));
         this.addAbility(ability2);
         // {tap}: Add {R} or {G}. Put a depletion counter on Timberline Ridge.
         Ability ability3 = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(1), new TapSourceCost());

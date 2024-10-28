@@ -16,7 +16,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -49,8 +48,7 @@ public final class CharnelTroll extends CardImpl {
                         )), false
                 ).setText("exile a creature card from your graveyard. "
                         + "If you do, put a +1/+1 counter on {this}."
-                        + " Otherwise, sacrifice it."),
-                false
+                        + " Otherwise, sacrifice it.")
         ));
 
         // {B}{G}, Discard a creature card: Put a +1/+1 counter on Morgue Troll.

@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -33,7 +32,7 @@ public final class Justice extends CardImpl {
 
 
         // At the beginning of your upkeep, sacrifice Justice unless you pay {W}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}")), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}"))));
 
         // Whenever a red creature or spell deals damage, Justice deals that much damage to that creature's or spell's controller.
         this.addAbility(new JusticeTriggeredAbility(new JusticeEffect()));

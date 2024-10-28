@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.filter.FilterOpponent;
@@ -48,8 +47,8 @@ public final class DiseasedVermin extends CardImpl {
 
         // At the beginning of your upkeep, Diseased Vermin deals X damage to target opponent previously dealt damage by it, where X is the number of infection counters on it.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new DiseasedVerminEffect(),
-                false);
+                new DiseasedVerminEffect()
+        );
         ability.addWatcher(new DiseasedVerminWatcher());
         this.addAbility(ability);
 

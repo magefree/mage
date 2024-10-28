@@ -35,8 +35,7 @@ public final class Chlorophant extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new BeginningOfUpkeepTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance())
-                                .setText("put another +1/+1 counter on {this}"),
-                        true
+                                .setText("put another +1/+1 counter on {this}"), true
                 ), Duration.WhileOnBattlefield), ThresholdCondition.instance, "as long as seven or more cards " +
                 "are in your graveyard, {this} has \"At the beginning of your upkeep, you may put another +1/+1 counter on {this}.\""
         )).setAbilityWord(AbilityWord.THRESHOLD));

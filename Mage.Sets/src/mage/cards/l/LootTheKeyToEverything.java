@@ -40,8 +40,7 @@ public final class LootTheKeyToEverything extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new ExileTopXMayPlayUntilEffect(LootTheKeyToEverythingValue.instance, Duration.EndOfTurn)
                         .setText("exile the top X cards of your library, where X is the number of card types " +
-                                "among other nonland permanents you control. You may play those cards this turn"),
-                false
+                                "among other nonland permanents you control. You may play those cards this turn")
         ));
     }
 

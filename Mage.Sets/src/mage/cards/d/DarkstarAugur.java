@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -33,7 +32,7 @@ public final class DarkstarAugur extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its mana value.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RevealPutInHandLoseLifeEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RevealPutInHandLoseLifeEffect()));
     }
 
     private DarkstarAugur(final DarkstarAugur card) {

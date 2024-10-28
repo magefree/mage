@@ -43,7 +43,7 @@ public final class GlisteningOil extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.AURA)));
         
         // At the beginning of your upkeep, put a -1/-1 counter on enchanted creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GlisteningOilEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GlisteningOilEffect()));
         
         // When Glistening Oil is put into a graveyard from the battlefield, return Glistening Oil to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));

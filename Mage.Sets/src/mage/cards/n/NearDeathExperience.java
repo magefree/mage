@@ -20,7 +20,7 @@ public final class NearDeathExperience extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}{W}");
 
         // At the beginning of your upkeep, if you have exactly 1 life, you win the game.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), false)
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect())
                         .withInterveningIf(new LifeCompareCondition(TargetController.YOU, ComparisonType.EQUAL_TO, 1)));
     }
 

@@ -7,7 +7,6 @@ import mage.abilities.effects.common.PopulateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 
 /**
  * @author LevelX2
@@ -19,7 +18,7 @@ public final class GrowingRanks extends CardImpl {
 
 
         // At the beginning of your upkeep, populate. (Create a token that's a copy of a creature token you control.)
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PopulateEffect(""), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PopulateEffect("")));
     }
 
     private GrowingRanks(final GrowingRanks card) {

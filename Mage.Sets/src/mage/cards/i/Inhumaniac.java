@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,7 +29,7 @@ public final class Inhumaniac extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, roll a six-sided die. On a 3 or 4, put a +1/+1 counter on Inhumaniac. On a 5 or higher, put two +1/+1 counters on it. On a 1, remove all +1/+1 counters from Inhumaniac.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InhumaniacEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InhumaniacEffect()));
     }
 
     private Inhumaniac(final Inhumaniac card) {

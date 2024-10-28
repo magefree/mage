@@ -9,7 +9,6 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -23,7 +22,7 @@ public final class ConvalescentCare extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
 
         // At the beginning of your upkeep, if you have 5 or less life, you gain 3 life and draw a card.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(3), false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(3));
         ability.addEffect(new DrawCardSourceControllerEffect(1));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, FatefulHourCondition.instance,
                 "At the beginning of your upkeep, if you have 5 or less life, you gain 3 life and draw a card."));

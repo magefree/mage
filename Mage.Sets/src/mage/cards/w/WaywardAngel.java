@@ -52,7 +52,7 @@ public final class WaywardAngel extends CardImpl {
                 ThresholdCondition.instance, ", has trample"
         ));
         Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeControllerEffect(StaticFilters.FILTER_CONTROLLED_CREATURE, 1, ""), false
+                new SacrificeControllerEffect(StaticFilters.FILTER_CONTROLLED_CREATURE, 1, "")
         );
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(gainedAbility), ThresholdCondition.instance,

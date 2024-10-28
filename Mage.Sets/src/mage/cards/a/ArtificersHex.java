@@ -39,7 +39,7 @@ public final class ArtificersHex extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // At the beginning of your upkeep, if enchanted Equipment is attached to a creature, destroy that creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ArtificersHexEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ArtificersHexEffect()));
     }
 
     private ArtificersHex(final ArtificersHex card) {

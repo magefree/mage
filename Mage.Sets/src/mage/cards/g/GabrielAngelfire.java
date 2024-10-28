@@ -35,7 +35,7 @@ public final class GabrielAngelfire extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, choose flying, first strike, trample, or rampage 3. Gabriel Angelfire gains that ability until your next upkeep.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GabrielAngelfireGainAbilityEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GabrielAngelfireGainAbilityEffect()));
     }
 
     private GabrielAngelfire(final GabrielAngelfire card) {

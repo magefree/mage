@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.TreasureToken;
@@ -42,7 +41,7 @@ public final class BlackMarketTycoon extends CardImpl {
 
         // At the beginning of your upkeep, Black Market Tycoon deals 2 damage to you for each Treasure you control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DamageControllerEffect(xValue), false
+                new DamageControllerEffect(xValue)
         ).addHint(hint));
 
         // {T}: Create a Treasure token.

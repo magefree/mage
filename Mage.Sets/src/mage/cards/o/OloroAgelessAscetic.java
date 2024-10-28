@@ -36,7 +36,7 @@ public final class OloroAgelessAscetic extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, you gain 2 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(2), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(2)));
 
         // Whenever you gain life, you may pay {1}. If you do, draw a card and each opponent loses 1 life.
         DoIfCostPaid effect = new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(1));

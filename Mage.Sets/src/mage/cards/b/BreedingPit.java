@@ -10,7 +10,6 @@ import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.game.permanent.token.BreedingPitThrullToken;
 
 /**
@@ -23,7 +22,7 @@ public final class BreedingPit extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}");
 
         // At the beginning of your upkeep, sacrifice Breeding Pit unless you pay {B}{B}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{B}{B}")), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{B}{B}"))));
 
         // At the beginning of your end step, create a 0/1 black Thrull creature token.
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new BreedingPitThrullToken()), false));

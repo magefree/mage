@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -29,7 +28,7 @@ public final class FormOfTheDinosaur extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SetPlayerLifeSourceEffect(15), false));
 
         // At the beginning of your upkeep, Form of the Dinosaur deals 15 damage to target creature an opponent controls and that creature deals damage equal to its power to you.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new FormOfTheDinosaurEffect(), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new FormOfTheDinosaurEffect());
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
     }

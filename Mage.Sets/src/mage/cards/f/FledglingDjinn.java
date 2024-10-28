@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -28,7 +27,7 @@ public final class FledglingDjinn extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // At the beginning of your upkeep, Fledgling Djinn deals 1 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1)));
     }
 
     private FledglingDjinn(final FledglingDjinn card) {

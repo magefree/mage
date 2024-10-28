@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInGraveyard;
 
@@ -31,7 +30,7 @@ public final class PortalToPhyrexia extends CardImpl {
 
         // At the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control. It's a Phyrexian in addition to its other types.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldTargetEffect(), false
+                new ReturnFromGraveyardToBattlefieldTargetEffect()
         );
         ability.addEffect(new AddCreatureTypeAdditionEffect(SubType.PHYREXIAN, false));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));

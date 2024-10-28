@@ -34,7 +34,7 @@ public final class CommandersAuthority extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has "At the beginning of your upkeep, create a 1/1 white Human creature token."
-        ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new HumanToken()), false);
+        ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new HumanToken()));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
     }
 

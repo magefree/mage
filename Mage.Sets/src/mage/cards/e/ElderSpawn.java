@@ -38,7 +38,7 @@ public final class ElderSpawn extends CardImpl {
         this.toughness = new MageInt(6);
 
         // At the beginning of your upkeep, unless you sacrifice an Island, sacrifice Elder Spawn and it deals 6 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ElderSpawnEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ElderSpawnEffect()));
 
         // Elder Spawn can't be blocked by red creatures.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));

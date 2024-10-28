@@ -33,7 +33,7 @@ public final class Kezzerdrix extends CardImpl {
 
         // At the beginning of your upkeep, if your opponents control no creatures, Kezzerdrix deals 4 damage to you.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(4), false),
+                new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(4)),
                 new CreatureCountCondition(0, TargetController.OPPONENT),
                 "At the beginning of your upkeep, if your opponents control no creatures, {this} deals 4 damage to you."));
     }

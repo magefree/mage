@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -32,7 +31,7 @@ public final class Earthlink extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{R}{G}");
 
         // At the beginning of your upkeep, sacrifice Earthlink unless you pay {2}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{2}")), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{2}"))));
 
         // Whenever a creature dies, that creature's controller sacrifices a land.
         this.addAbility(new DiesCreatureTriggeredAbility(new EarthlinkEffect(), false, false, true));

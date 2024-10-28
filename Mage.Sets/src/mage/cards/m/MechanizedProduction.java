@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.game.Game;
@@ -44,7 +43,7 @@ public final class MechanizedProduction extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, create a token that's a copy of enchanted artifact. Then if you control eight or more artifacts with the same name as one another, you win the game.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MechanizedProductionEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MechanizedProductionEffect()));
     }
 
     private MechanizedProduction(final MechanizedProduction card) {

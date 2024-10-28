@@ -19,7 +19,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -56,8 +55,7 @@ public final class EvolvedSpinoderm extends CardImpl {
 
         // At the beginning of your upkeep, remove an oil counter from Evolved Spinoderm. Then if it has no oil counters on it, sacrifice it.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new RemoveCounterSourceEffect(CounterType.OIL.createInstance()),
-                false
+                new RemoveCounterSourceEffect(CounterType.OIL.createInstance())
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new SacrificeSourceEffect(), condition2,

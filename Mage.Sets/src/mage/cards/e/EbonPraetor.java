@@ -42,7 +42,7 @@ public final class EbonPraetor extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of your upkeep, put a -2/-2 counter on Ebon Praetor.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.M2M2.createInstance()), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.M2M2.createInstance())));
 
         // Sacrifice a creature: Remove a -2/-2 counter from Ebon Praetor. If the sacrificed creature was a Thrull, put a +1/+0 counter on Ebon Praetor. Activate this ability only during your upkeep and only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.M2M2.createInstance()),

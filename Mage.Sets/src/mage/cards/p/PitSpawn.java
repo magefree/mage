@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -31,7 +30,7 @@ public final class PitSpawn extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
         
         // At the beginning of your upkeep, sacrifice Pit Spawn unless you pay {B}{B}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{B}{B}")), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{B}{B}"))));
 
         // Whenever Pit Spawn deals damage to a creature, exile that creature.
         this.addAbility(new DealsDamageToACreatureTriggeredAbility(new ExileTargetEffect("exile that creature"), false, false, true));

@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 
 /**
@@ -32,7 +31,7 @@ public final class GoblinWarWagon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
         // At the beginning of your upkeep, you may pay {2}. If you do, untap Goblin War Wagon.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
-            new UntapSourceEffect(), new ManaCostsImpl<>("{2}")), false));
+            new UntapSourceEffect(), new ManaCostsImpl<>("{2}"))));
     }
 
     private GoblinWarWagon(final GoblinWarWagon card) {

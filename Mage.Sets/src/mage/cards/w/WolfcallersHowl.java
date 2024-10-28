@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.token.WolfToken;
 import mage.players.Player;
@@ -26,7 +25,7 @@ public final class WolfcallersHowl extends CardImpl {
 
 
         // At the beginning of your upkeep, create X 2/2 green Wolf creature tokens, where X is the number of your opponents with four or more cards in hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WolfcallersHowlEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WolfcallersHowlEffect()));
     }
 
     private WolfcallersHowl(final WolfcallersHowl card) {

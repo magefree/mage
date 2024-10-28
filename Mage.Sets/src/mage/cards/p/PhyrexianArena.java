@@ -7,7 +7,6 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -21,7 +20,7 @@ public final class PhyrexianArena extends CardImpl {
 
         // At the beginning of your upkeep, you draw a card and you lose 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1, true), false
+                new DrawCardSourceControllerEffect(1, true)
         );
         ability.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         this.addAbility(ability);

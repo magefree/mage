@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -38,8 +37,7 @@ public final class MinionOfTeveshSzat extends CardImpl {
                 new DoUnlessControllerPaysEffect(
                         new DamageControllerEffect(2),
                         new ManaCostsImpl<>("{B}{B}")
-                ),
-                false
+                )
         ));
 
         // {tap}: Target creature gets +3/-2 until end of turn.

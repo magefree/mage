@@ -10,7 +10,6 @@ import mage.abilities.effects.common.counter.MoveCountersFromSourceToTargetEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -33,7 +32,7 @@ public final class AfiyaGrove extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "with three +1/+1 counters on it"));
 
         // At the beginning of your upkeep, move a +1/+1 counter from Afiya Grove onto target creature.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new MoveCountersFromSourceToTargetEffect(), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new MoveCountersFromSourceToTargetEffect());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

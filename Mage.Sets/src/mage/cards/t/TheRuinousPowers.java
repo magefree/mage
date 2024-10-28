@@ -28,7 +28,7 @@ public final class TheRuinousPowers extends CardImpl {
         // At the beginning of your upkeep, choose an opponent at random. Exile the top card of that player's library.
         // Until end of turn, you may play that card and you may spend mana as though it were mana of any color to cast it.
         // When you cast a spell this way, its owner loses life equal to its mana value.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new TheRuinousPowersEffect(), false)
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new TheRuinousPowersEffect())
                 .setIdentifier(MageIdentifier.TheRuinousPowersAlternateCast);
         this.addAbility(ability);
     }

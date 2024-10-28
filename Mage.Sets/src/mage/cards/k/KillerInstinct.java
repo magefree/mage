@@ -19,7 +19,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,7 +36,7 @@ public final class KillerInstinct extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{G}");
 
         // At the beginning of your upkeep, reveal the top card of your library. If it's a creature card, put it onto the battlefield. That creature gains haste until end of turn. Sacrifice it at the beginning of the next end step.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KillerInstinctEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KillerInstinctEffect()));
     }
 
     private KillerInstinct(final KillerInstinct card) {

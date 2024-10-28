@@ -11,7 +11,6 @@ import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterPermanentCard;
@@ -36,7 +35,7 @@ public final class InSearchOfGreatness extends CardImpl {
         // equal to 1 plus the highest converted mana cost among other permanents you control
         // without paying its mana cost. If you don't, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new InSearchOfGreatnessEffect(), false
+                new InSearchOfGreatnessEffect()
         ));
     }
 

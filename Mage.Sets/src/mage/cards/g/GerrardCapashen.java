@@ -33,8 +33,8 @@ public final class GerrardCapashen extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, you gain 1 life for each card in target opponent's hand.
-        Ability ability1 = new BeginningOfUpkeepTriggeredAbility(new GerrardCapashenEffect(),
-                false);
+        Ability ability1 = new BeginningOfUpkeepTriggeredAbility(new GerrardCapashenEffect()
+        );
         ability1.addTarget(new TargetOpponent());
         this.addAbility(ability1);
 

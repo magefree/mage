@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -38,8 +37,8 @@ public final class DevouringStrossus extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a creature.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(new FilterControlledCreaturePermanent("creature"), 1, null),
-                false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(new FilterControlledCreaturePermanent("creature"), 1, null)
+        );
         this.addAbility(ability);
         // Sacrifice a creature: Regenerate Devouring Strossus.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),

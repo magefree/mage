@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 
@@ -47,8 +46,7 @@ public final class PainwrackerOni extends CardImpl {
                         new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, null),
                         condition,
                         "sacrifice a creature if you don't control an Ogre"
-                ),
-                false
+                )
         ));
     }
 

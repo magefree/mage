@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -31,8 +30,7 @@ public final class SearchForAzcanta extends CardImpl {
 
         // At the beginning of your upkeep, look at the top card of your library. You may put it into your graveyard. Then if you have seven or more cards in your graveyard, you may transform Search for Azcanta.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new SurveilEffect(1, false),
-                false
+                new SurveilEffect(1, false)
         );
         ability.addEffect(new SearchForAzcantaEffect());
         this.addAbility(new TransformAbility());

@@ -19,7 +19,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -45,7 +44,7 @@ public final class SerraBestiary extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, sacrifice Serra Bestiary unless you pay {W}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}")), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}"))));
 
         // Enchanted creature can't attack or block, and its activated abilities with {T} in their costs can't be activated.
         Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA));

@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.HarpyToken;
 
@@ -39,7 +38,7 @@ public final class AbhorrentOverlord extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect).addHint(DevotionCount.B.getHint()));
 
         // At the beginning of your upkeep, sacrifice a creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, null), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, null)));
     }
 
     private AbhorrentOverlord(final AbhorrentOverlord card) {

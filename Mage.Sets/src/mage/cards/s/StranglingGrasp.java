@@ -49,7 +49,7 @@ public final class StranglingGrasp extends CardImpl {
 
         // At the beginning of your upkeep, enchanted permanent's controller sacrifices a nonland permanent and loses 1 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new StranglingGraspEffect(), false
+                new StranglingGraspEffect()
         ));
     }
 

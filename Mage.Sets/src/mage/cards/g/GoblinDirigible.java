@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 
 /**
@@ -35,7 +34,7 @@ public final class GoblinDirigible extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
         // At the beginning of your upkeep, you may pay {4}. If you do, untap Goblin Dirigible.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
-            new UntapSourceEffect(), new ManaCostsImpl<>("{4}")), false));
+            new UntapSourceEffect(), new ManaCostsImpl<>("{4}"))));
     }
 
     private GoblinDirigible(final GoblinDirigible card) {

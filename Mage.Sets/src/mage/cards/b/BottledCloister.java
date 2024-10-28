@@ -33,7 +33,7 @@ public final class BottledCloister extends CardImpl {
 
         // At the beginning of your upkeep, return all cards you own exiled with Bottled Cloister to your hand, then draw a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new BottledCloisterReturnEffect(), false
+                new BottledCloisterReturnEffect()
         ));
     }
 

@@ -44,8 +44,8 @@ public final class TheMagicMirror extends CardImpl {
         // At the beginning of your upkeep, put a knowledge counter on The Magic Mirror, then draw a card for each knowledge counter on The Magic Mirror.
         ability = new BeginningOfUpkeepTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.KNOWLEDGE.createInstance())
-                        .setText("put a knowledge counter on {this},"),
-                false);
+                        .setText("put a knowledge counter on {this},")
+        );
         ability.addEffect(new DrawCardSourceControllerEffect(new CountersSourceCount(CounterType.KNOWLEDGE)).concatBy("then"));
         this.addAbility(ability);
     }

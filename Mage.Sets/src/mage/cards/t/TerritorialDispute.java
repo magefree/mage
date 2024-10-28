@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -30,8 +29,8 @@ public final class TerritorialDispute extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Territorial Dispute unless you sacrifice a land.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_LAND)),
-                false));
+                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_LAND))
+        ));
         
         // Players can't play lands.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TerritorialDisputeEffect()));

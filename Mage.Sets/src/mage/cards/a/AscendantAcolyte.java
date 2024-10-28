@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -41,7 +40,7 @@ public final class AscendantAcolyte extends CardImpl {
 
         // At the beginning of your upkeep, double the number of +1/+1 counters on Ascendant Acolyte.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoubleCountersSourceEffect(CounterType.P1P1), false
+                new DoubleCountersSourceEffect(CounterType.P1P1)
         ));
     }
 

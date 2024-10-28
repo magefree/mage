@@ -6,7 +6,6 @@ import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.RollDieWithResultTableEffect;
 import mage.cards.*;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -35,7 +34,7 @@ public final class JourneyToTheLostCity extends CardImpl {
         // 10-19 | Create a 2/2 green Wolf creature token, then put a +1/+1 counter on it for each creature card among those cards.
         // 20 | Put all permanent cards exiled with Journey to the Lost City onto the battlefield, then sacrifice it.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new JourneyToTheLostCityEffect(), false
+                new JourneyToTheLostCityEffect()
         ));
     }
 

@@ -7,7 +7,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -24,7 +23,7 @@ public final class AgentOfMasks extends CardImpl {
         // At the beginning of your upkeep, each opponent loses 1 life. You gain life equal to the life lost this way.
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeOpponentsYouGainLifeLostEffect(1), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeOpponentsYouGainLifeLostEffect(1)));
     }
 
     private AgentOfMasks(final AgentOfMasks card) {

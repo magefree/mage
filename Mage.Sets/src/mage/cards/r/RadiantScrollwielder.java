@@ -57,7 +57,7 @@ public final class RadiantScrollwielder extends CardImpl {
 
         // At the beginning of your upkeep, exile an instant or sorcery card at random from your graveyard. You may cast it this turn. If a spell cast this way would be put into your graveyard, exile it instead.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new RadiantScrollwielderEffect(), false
+                new RadiantScrollwielderEffect()
         ), new RadiantScrollwielderWatcher());
     }
 

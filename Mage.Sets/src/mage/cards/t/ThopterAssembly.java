@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 import mage.game.permanent.token.ThopterColorlessToken;
@@ -47,8 +46,7 @@ public final class ThopterAssembly extends CardImpl {
         // At the beginning of your upkeep, if you control no Thopters other than Thopter Assembly, return Thopter Assembly to its owner's hand and create five 1/1 colorless Thopter artifact creature tokens with flying.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new ReturnToHandSourceEffect(true),
-                        false
+                        new ReturnToHandSourceEffect(true), false
                 ), condition, "At the beginning of your upkeep, " +
                 "if you control no Thopters other than {this}, " +
                 "return {this} to its owner's hand and create five 1/1 colorless " +

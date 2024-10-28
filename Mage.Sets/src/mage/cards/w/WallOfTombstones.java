@@ -31,7 +31,7 @@ public final class WallOfTombstones extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // At the beginning of your upkeep, change Wall of Tombstones’s base toughness to 1 plus the number of creature cards in your graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WallOfTombstonesEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WallOfTombstonesEffect()));
 
     }
 

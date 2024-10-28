@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -32,7 +31,7 @@ public final class Painiac extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, roll a six-sided die. Painiac gets +X/+0 until end of turn, where X is the result.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PainiacEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PainiacEffect()));
     }
 
     private Painiac(final Painiac card) {

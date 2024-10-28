@@ -17,7 +17,6 @@ import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
@@ -40,7 +39,7 @@ public final class ShrineOfBoundlessGrowth extends CardImpl {
 
         // At the beginning of your upkeep or whenever you cast a green spell, put a charge counter on Shrine of Boundless Growth.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
-                new BeginningOfUpkeepTriggeredAbility(null, false),
+                new BeginningOfUpkeepTriggeredAbility(null),
                 new SpellCastControllerTriggeredAbility(null, filter, false)));
 
         // {T}, Sacrifice Shrine of Boundless Growth: Add {C} for each charge counter on Shrine of Boundless Growth.

@@ -18,7 +18,6 @@ import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -49,8 +48,7 @@ public final class T45PowerArmor extends CardImpl {
                 new DoIfCostPaid(
                         new T45PowerArmorEffect(),
                         new PayEnergyCost(1)
-                ),
-                false
+                )
         ));
 
         // Equip {3}

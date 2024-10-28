@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 
 /**
@@ -42,8 +41,7 @@ public final class ScourgeOfNumai extends CardImpl {
                         new LoseLifeSourceControllerEffect(2),
                         condition,
                         "you lose 2 life if you don't control an Ogre"
-                ),
-                false
+                )
         ));
     }
 

@@ -37,7 +37,7 @@ public final class TheGitrogMonster extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
         // At the beginning of your upkeep, sacrifice The Gitrog Monster unless you sacrifice a land.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(
-                new SacrificeTargetCost(StaticFilters.FILTER_LAND)), false));
+                new SacrificeTargetCost(StaticFilters.FILTER_LAND))));
 
         // You may play an additional land on each of your turns.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));

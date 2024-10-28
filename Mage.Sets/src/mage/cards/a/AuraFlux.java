@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.filter.common.FilterEnchantmentPermanent;
 
 /**
@@ -25,7 +24,7 @@ public final class AuraFlux extends CardImpl {
 
         // Other enchantments have "At the beginning of your upkeep, sacrifice this enchantment unless you pay {2}."
         Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(2))
-                .setText("sacrifice this enchantment unless you pay {2}"), false);
+                .setText("sacrifice this enchantment unless you pay {2}"));
         this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, new FilterEnchantmentPermanent("enchantments"), true)));
     }
 

@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -30,7 +29,7 @@ public final class SporeFlower extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, put a spore counter on Spore Flower.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance())));
 
         // Remove three spore counters from Spore Flower: Prevent all combat damage that would be dealt this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,

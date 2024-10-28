@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 
 /**
@@ -31,7 +30,7 @@ public final class VensersJournal extends CardImpl {
 
         // At the beginning of your upkeep, you gain 1 life for each card in your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(CardsInControllerHandCount.instance)
-                .setText("you gain 1 life for each card in your hand"), false));
+                .setText("you gain 1 life for each card in your hand")));
     }
 
     private VensersJournal(final VensersJournal card) {

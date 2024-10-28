@@ -25,7 +25,6 @@ import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -57,7 +56,7 @@ public final class CustodyBattle extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has "At the beginning of your upkeep, target opponent gains control of this creature unless you sacrifice a land."
-        ability = new BeginningOfUpkeepTriggeredAbility(new CustodyBattleUnlessPaysEffect(new SacrificeTargetCost(filter)), false);
+        ability = new BeginningOfUpkeepTriggeredAbility(new CustodyBattleUnlessPaysEffect(new SacrificeTargetCost(filter)));
         ability.addTarget(new TargetOpponent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
 

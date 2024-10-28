@@ -11,7 +11,6 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 
@@ -25,7 +24,7 @@ public final class PlanarCollapse extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // At the beginning of your upkeep, if there are four or more creatures on the battlefield, sacrifice Planar Collapse and destroy all creatures. They can't be regenerated.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect());
         ability.addEffect(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT_CREATURE, true));
         PlanarCollapseCondition contition = new PlanarCollapseCondition();
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, contition, "At the beginning of your upkeep, if there are four or more creatures on the battlefield, sacrifice {this} and destroy all creatures. They can't be regenerated"));

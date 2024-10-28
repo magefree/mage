@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -36,7 +35,7 @@ public final class InnocentTraveler extends CardImpl {
         // At the beginning of your upkeep, any opponent may sacrifice a creature. If no one does, transform Innocent Traveler.
         this.addAbility(new TransformAbility());
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new InnocentTravelerEffect(), false
+                new InnocentTravelerEffect()
         ));
     }
 

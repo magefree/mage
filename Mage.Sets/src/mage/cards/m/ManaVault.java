@@ -15,7 +15,6 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -33,8 +32,8 @@ public final class ManaVault extends CardImpl {
 
         // At the beginning of your upkeep, you may pay {4}. If you do, untap Mana Vault.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoIfCostPaid(new UntapSourceEffect(), new GenericManaCost(4), "Pay {4} to untap {this}?"),
-                false));
+                new DoIfCostPaid(new UntapSourceEffect(), new GenericManaCost(4), "Pay {4} to untap {this}?")
+        ));
 
         // At the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new DamageControllerEffect(1, "it"),

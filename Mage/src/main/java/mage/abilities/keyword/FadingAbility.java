@@ -8,7 +8,6 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -30,7 +29,7 @@ public class FadingAbility extends EntersBattlefieldAbility {
 
     public FadingAbility(int fadeCounter, Card card, boolean shortRuleText) {
         super(new AddCountersSourceEffect(CounterType.FADE.createInstance(fadeCounter)), "with");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new FadingEffect(), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new FadingEffect());
         ability.setRuleVisible(false);
         addSubAbility(ability);
         String cardTypeName;

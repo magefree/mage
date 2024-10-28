@@ -11,7 +11,6 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -39,7 +38,7 @@ public final class ReclusiveWight extends CardImpl {
 
         // At the beginning of your upkeep, if you control another nonland permanent, sacrifice Reclusive Wight.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), false),
+                new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect()),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "At the beginning of your upkeep, if you control another nonland permanent, sacrifice {this}."
         ));

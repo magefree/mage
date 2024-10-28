@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.target.common.TargetCardInLibrary;
 
 /**
@@ -36,7 +35,7 @@ public final class BringerOfTheBlackDawn extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, you may pay 2 life. If you do, search your library for a card, then shuffle your library and put that card on top of it.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(), false), new PayLifeCost(2)), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(), false), new PayLifeCost(2)));
         this.addAbility(ability);
     }
 

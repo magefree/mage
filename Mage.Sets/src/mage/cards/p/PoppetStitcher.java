@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.ZombieDecayedToken;
 
@@ -55,8 +54,7 @@ public final class PoppetStitcher extends CardImpl {
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new TransformSourceEffect(),
-                        true
+                        new TransformSourceEffect(), true
                 ), condition, "At the beginning of your upkeep, " +
                 "if you control three or more creature tokens, you may transform {this}."
         ).addHint(hint));

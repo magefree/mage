@@ -36,8 +36,7 @@ public final class SenTriplets extends CardImpl {
         // This turn, that player can't cast spells or activate abilities and plays with their hand revealed.
         // You may play cards from that player's hand this turn.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new SenTripletsRuleModifyingEffect(),
-                false
+                new SenTripletsRuleModifyingEffect()
         );
         ability.addEffect(new SenTripletsOpponentRevealsHandEffect());
         ability.addEffect(new SenTripletsPlayFromOpponentsHandEffect());

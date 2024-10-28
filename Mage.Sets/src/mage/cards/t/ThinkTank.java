@@ -5,7 +5,6 @@ import mage.abilities.effects.keyword.SurveilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -19,7 +18,7 @@ public final class ThinkTank extends CardImpl {
 
         // At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SurveilEffect(1), false
+                new SurveilEffect(1)
         ));
     }
 

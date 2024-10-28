@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
@@ -38,7 +37,7 @@ public final class IndulgentTormentor extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, draw a card unless target opponent sacrifices a creature or pays 3 life.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new IndulgentTormentorEffect(), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new IndulgentTormentorEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

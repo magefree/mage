@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -38,8 +37,7 @@ public final class WarpingWurm extends CardImpl {
                 new DoUnlessControllerPaysEffect(
                         new PhaseOutSourceEffect(),
                         new ManaCostsImpl<>("{2}{G}{U}")
-                ).setText("{this} phases out unless you pay {2}{G}{U}"),
-                false
+                ).setText("{this} phases out unless you pay {2}{G}{U}")
         ));
 
         // When Warping Wurm phases in, put a +1/+1 counter on it.

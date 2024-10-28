@@ -12,7 +12,6 @@ import mage.abilities.effects.common.WinGameSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -27,7 +26,7 @@ public final class NowIKnowMyABCs extends CardImpl {
 
         // At the beginning of your upkeep, if you control permanents with names that include all twenty-six letters of the English alphabet, you win the game.
         this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect(), false),
+                new BeginningOfUpkeepTriggeredAbility(new WinGameSourceControllerEffect()),
                 new NowIKnowMyABCsCondition(),
                 "At the beginning of your upkeep, if you control permanents with names that include all twenty-six letters of the English alphabet, you win the game."));
     }

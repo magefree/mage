@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -35,7 +34,7 @@ public final class DivineIntervention extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect, "with two intervention counters on it"));
 
         // At the beginning of your upkeep, remove an intervention counter from Divine Intervention.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.INTERVENTION.createInstance()), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.INTERVENTION.createInstance())));
 
         // When you remove the last intervention counter from Divine Intervention, the game is a draw.
         this.addAbility(new DivineInterventionAbility());

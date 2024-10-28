@@ -38,7 +38,7 @@ public final class SporesowerThallid extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, put a spore counter on each Fungus you control.  
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAllEffect(CounterType.SPORE.createInstance(), filter), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAllEffect(CounterType.SPORE.createInstance(), filter)));
         // Remove three spore counters from Sporesower Thallid: Create a 1/1 green Saproling creature token.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
     }

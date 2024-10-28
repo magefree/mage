@@ -34,7 +34,7 @@ public final class DelayingShield extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DelayingShieldReplacementEffect()));
 
         // At the beginning of your upkeep, remove all delay counters from Delaying Shield. For each delay counter removed this way, you lose 1 life unless you pay {1}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DelayingShieldUpkeepEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DelayingShieldUpkeepEffect()));
     }
 
     private DelayingShield(final DelayingShield card) {

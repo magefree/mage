@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -26,7 +25,7 @@ public final class GrinningDemon extends CardImpl {
         this.toughness = new MageInt(6);
 
         // At the beginning of your upkeep, you lose 2 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2)));
         // Morph {2}{B}{B}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{2}{B}{B}")));
     }

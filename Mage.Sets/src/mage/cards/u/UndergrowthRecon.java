@@ -6,7 +6,6 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -25,7 +24,7 @@ public final class UndergrowthRecon extends CardImpl {
 
         // At the beginning of your upkeep, return target land card from your graveyard to the battlefield tapped.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldTargetEffect(true), false
+                new ReturnFromGraveyardToBattlefieldTargetEffect(true)
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

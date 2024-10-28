@@ -15,7 +15,6 @@ import mage.abilities.mana.LimitedTimesPerTurnActivatedManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -43,7 +42,7 @@ public final class ManaBloom extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, if Mana Bloom has no charge counters on it, return it to its owner's hand.
-        TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandSourceEffect(true), false);
+        TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandSourceEffect(true));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(triggeredAbility, new SourceHasCounterCondition(CounterType.CHARGE, 0, 0), "At the beginning of your upkeep, if Mana Bloom has no charge counters on it, return it to its owner's hand."));
 
     }

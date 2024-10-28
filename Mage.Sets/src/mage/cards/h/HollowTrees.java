@@ -20,7 +20,6 @@ import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 /**
@@ -39,7 +38,7 @@ public final class HollowTrees extends CardImpl {
         // At the beginning of your upkeep, if Hollow Trees is tapped, put a storage counter on it.
         OneShotEffect addStorageCounter = new AddCountersSourceEffect(CounterType.STORAGE.createInstance());
         Effect effect = new ConditionalOneShotEffect(addStorageCounter, SourceTappedCondition.TAPPED, "if {this} is tapped, put a storage counter on it");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect));
         // {tap}, Remove any number of storage counters from Hollow Trees: Add {G} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.GreenMana(1),

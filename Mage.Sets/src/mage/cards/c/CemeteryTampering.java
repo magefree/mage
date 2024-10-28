@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -28,7 +27,7 @@ public final class CemeteryTampering extends CardImpl {
 
         // At the beginning of your upkeep, you may mill three cards. Then if there are twenty or more cards in your graveyard, you may play the exiled card without paying its mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CemeteryTamperingEffect(), false
+                new CemeteryTamperingEffect()
         ));
     }
 

@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -24,7 +23,7 @@ public final class NettletoothDjinn extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, Nettletooth Djinn deals 1 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), false));                                                                                 }
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1)));                                                                                 }
 
     private NettletoothDjinn(final NettletoothDjinn card) {
         super(card);

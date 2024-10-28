@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -29,7 +28,7 @@ public final class FeralThallid extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, put a spore counter on Feral Thallid.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance()), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance())));
         // Remove three spore counters from Feral Thallid: Regenerate Feral Thallid.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
     }

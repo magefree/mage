@@ -38,7 +38,7 @@ public final class LimDulsPaladin extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, you may discard a card. If you don't, sacrifice Lim-Dul's Paladin and draw a card.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LimDulsPaladinEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LimDulsPaladinEffect()));
         // Whenever Lim-Dul's Paladin becomes blocked, it gets +6/+3 until end of turn.
         this.addAbility(new BecomesBlockedSourceTriggeredAbility(new BoostSourceEffect(6, 3, Duration.EndOfTurn), false));
         // Whenever Lim-Dul's Paladin attacks and isn't blocked, it assigns no combat damage to defending player this turn and that player loses 4 life.

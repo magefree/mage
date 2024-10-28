@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetOpponentOrPlaneswalker;
 
@@ -41,7 +40,7 @@ public final class FirebladeArtist extends CardImpl {
         ability.addTarget(new TargetOpponentOrPlaneswalker());
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DoWhenCostPaid(ability, new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE
-                ), "Sacrifice a creature?"), false
+                ), "Sacrifice a creature?")
         ));
     }
 

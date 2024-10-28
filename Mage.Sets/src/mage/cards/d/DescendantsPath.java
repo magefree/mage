@@ -9,7 +9,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -29,7 +28,7 @@ public final class DescendantsPath extends CardImpl {
         // At the beginning of your upkeep, reveal the top card of your library. 
         // If it's a creature card that shares a creature type with a creature you control, 
         // you may cast that card without paying its mana cost. Otherwise, put that card on the bottom of your library.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DescendantsPathEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DescendantsPathEffect()));
     }
 
     private DescendantsPath(final DescendantsPath card) {

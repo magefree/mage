@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -33,7 +32,7 @@ public final class KrazyKow extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, roll a six-sided die. If you a roll a 1, sacrifice Krazy Kow and it deals 3 damage to each creature and each player.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KrazyKowEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KrazyKowEffect()));
     }
 
     private KrazyKow(final KrazyKow card) {

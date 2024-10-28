@@ -33,7 +33,7 @@ public final class DuskmantleSeer extends CardImpl {
 
         // At the beginning of your upkeep, each player reveals the top card of their library, loses life equal to that card's converted mana cost, then puts it into their hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DuskmantleSeerEffect(), false
+                new DuskmantleSeerEffect()
         ));
     }
 

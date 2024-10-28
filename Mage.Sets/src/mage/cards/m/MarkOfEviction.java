@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -42,7 +41,7 @@ public final class MarkOfEviction extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, return enchanted creature and all Auras attached to that creature to their owners' hands.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MarkOfEvictionEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MarkOfEvictionEffect()));
     }
 
     private MarkOfEviction(final MarkOfEviction card) {

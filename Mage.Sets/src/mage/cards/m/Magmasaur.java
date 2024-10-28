@@ -41,7 +41,7 @@ public final class Magmasaur extends CardImpl {
                 "with five +1/+1 counters on it"));
 
         // At the beginning of your upkeep, you may remove a +1/+1 counter from Magmasaur. If you don't, sacrifice Magmasaur and it deals damage equal to the number of +1/+1 counters on it to each creature without flying and each player.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MagmasaurEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MagmasaurEffect()));
     }
 
     private Magmasaur(final Magmasaur card) {

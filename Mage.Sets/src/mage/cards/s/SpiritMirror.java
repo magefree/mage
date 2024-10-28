@@ -37,7 +37,7 @@ public final class SpiritMirror extends CardImpl {
 
         // At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, create a 2/2 white Reflection creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new ReflectionToken()), false),
+                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new ReflectionToken())),
                 new PermanentsOnTheBattlefieldCondition(filterToken, ComparisonType.EQUAL_TO, 0, false),
                 "At the beginning of your upkeep, if there are no Reflection tokens on the battlefield, create a 2/2 white Reflection creature token."));
 

@@ -37,7 +37,7 @@ public final class PrimalCocoon extends CardImpl {
         // At the beginning of your upkeep, put a +1/+1 counter on enchanted creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAttachedEffect(
                 CounterType.P1P1.createInstance(), "enchanted creature"
-        ), false));
+        )));
 
         // When enchanted creature attacks or blocks, sacrifice Primal Cocoon.
         this.addAbility(new AttacksOrBlocksAttachedTriggeredAbility(

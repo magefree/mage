@@ -47,7 +47,7 @@ public final class OrcishMine extends CardImpl {
 
         // At the beginning of your upkeep or whenever enchanted land becomes tapped, remove an ore counter from Orcish Mine.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.ORE.createInstance()),
-                new BeginningOfUpkeepTriggeredAbility(null, false),
+                new BeginningOfUpkeepTriggeredAbility(null),
                 new BecomesTappedAttachedTriggeredAbility(null, "enchanted land")));
 
         // When the last ore counter is removed from Orcish Mine, destroy enchanted land and Orcish Mine deals 2 damage to that land's controller.

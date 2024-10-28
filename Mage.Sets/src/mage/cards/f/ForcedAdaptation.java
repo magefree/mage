@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -35,7 +34,7 @@ public final class ForcedAdaptation extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, put a +1/+1 counter on enchanted creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddPlusOneCountersAttachedEffect(1), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddPlusOneCountersAttachedEffect(1)));
     }
 
     private ForcedAdaptation(final ForcedAdaptation card) {

@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -35,7 +34,7 @@ public final class WildDogs extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of Wild Dogs.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WildDogsEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new WildDogsEffect()));
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));

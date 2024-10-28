@@ -17,7 +17,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.token.TokenImpl;
@@ -42,7 +41,7 @@ public final class PhantasmalSphere extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, put a +1/+1 counter on Phantasmal Sphere, then sacrifice Phantasmal Sphere unless you pay {1} for each +1/+1 counter on it.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         Effect effect = new SacrificeSourceUnlessPaysEffect(new CountersSourceCount(CounterType.P1P1));
         effect.setText("then sacrifice {this} unless you pay {1} for each +1/+1 counter on it.");
         ability.addEffect(effect);

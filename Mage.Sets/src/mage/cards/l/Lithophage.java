@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledLandPermanent;
 
 /**
@@ -33,7 +32,7 @@ public final class Lithophage extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Lithophage unless you sacrifice a Mountain.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(filter)), false));
+                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(filter))));
     }
 
     private Lithophage(final Lithophage card) {

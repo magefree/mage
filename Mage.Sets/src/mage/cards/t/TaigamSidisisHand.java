@@ -44,8 +44,8 @@ public final class TaigamSidisisHand extends CardImpl {
         // At the beginning of your upkeep, look at the top three cards of your library.
         // Put one of them into your hand and the rest into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.GRAVEYARD),
-                false));
+                new LookLibraryAndPickControllerEffect(3, 1, PutCards.HAND, PutCards.GRAVEYARD)
+        ));
 
         // {B}, {T}, Exile X cards from your graveyard: Target creature gets -X/-X until end of turn.
         Ability ability = new SimpleActivatedAbility(

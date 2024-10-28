@@ -27,7 +27,7 @@ public final class RumblingSlum extends CardImpl {
         // At the beginning of your upkeep, Rumbling Slum deals 1 damage to each player.
         Effect effect = new DamagePlayersEffect(1, TargetController.ANY);
         effect.setText("{this} deals 1 damage to each player");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect));
     }
 
     private RumblingSlum(final RumblingSlum card) {

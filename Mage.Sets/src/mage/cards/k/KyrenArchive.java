@@ -13,7 +13,6 @@ import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 
 /**
@@ -27,8 +26,8 @@ public final class KyrenArchive extends CardImpl {
 
         // At the beginning of your upkeep, you may exile the top card of your library face down.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ExileCardsFromTopOfLibraryControllerEffect(1, true, true),
-                true)
+                        new ExileCardsFromTopOfLibraryControllerEffect(1, true, true), true
+                )
         );
 
         // {5}, Discard your hand, Sacrifice Kyren Archive: Put all cards exiled with Kyren Archive into their owner's hand.

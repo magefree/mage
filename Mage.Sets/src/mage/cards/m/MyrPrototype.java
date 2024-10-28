@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -34,7 +33,7 @@ public final class MyrPrototype extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, put a +1/+1 counter on Myr Prototype.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 
         // Myr Prototype can't attack or block unless you pay {1} for each +1/+1 counter on it.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MyrPrototypeCantAttackUnlessYouPayEffect()));

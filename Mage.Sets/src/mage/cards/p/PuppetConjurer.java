@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.HomunculusToken;
@@ -40,7 +39,7 @@ public final class PuppetConjurer extends CardImpl {
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // At the beginning of your upkeep, sacrifice a Homunculus.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, ""), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, "")));
     }
 
     private PuppetConjurer(final PuppetConjurer card) {

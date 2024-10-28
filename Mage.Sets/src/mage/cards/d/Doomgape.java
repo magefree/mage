@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -37,7 +36,7 @@ public final class Doomgape extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of your upkeep, sacrifice a creature. You gain life equal to that creature's toughness.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoomgapeEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoomgapeEffect()));
 
     }
 

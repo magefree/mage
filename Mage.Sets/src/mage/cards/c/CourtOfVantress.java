@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactOrEnchantmentPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -58,7 +57,7 @@ public final class CourtOfVantress extends CardImpl {
 
     static Ability makeAbility() {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new CourtOfVantressEffect(), false
+                new CourtOfVantressEffect()
         );
         ability.addTarget(new TargetPermanent(0, 1, filter));
         return ability;

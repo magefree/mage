@@ -18,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -52,8 +51,7 @@ public final class FaithboundJudge extends CardImpl {
         // At the beginning of your upkeep, if Faithbound Judge has two or fewer judgment counters on it, put a judgment counter on it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.JUDGMENT.createInstance()),
-                        false
+                        new AddCountersSourceEffect(CounterType.JUDGMENT.createInstance()), false
                 ), condition1, "At the beginning of your upkeep, if {this} has " +
                 "two or fewer judgment counters on it, put a judgment counter on it."
         ));

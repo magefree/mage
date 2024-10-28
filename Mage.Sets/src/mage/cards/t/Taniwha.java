@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -43,7 +42,7 @@ public final class Taniwha extends CardImpl {
         this.addAbility(PhasingAbility.getInstance());
 
         // At the beginning of your upkeep, all lands you control phase out.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TaniwhaEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TaniwhaEffect()));
     }
 
     private Taniwha(final Taniwha card) {

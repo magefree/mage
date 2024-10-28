@@ -21,7 +21,7 @@ public final class MysticRedaction extends CardImpl {
 
         // At the beginning of your upkeep, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ScryEffect(1, false), false
+                new ScryEffect(1, false)
         ));
 
         // Whenever you discard a card, each opponent mills two cards.

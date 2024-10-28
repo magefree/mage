@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -41,7 +40,7 @@ public final class PrimordialHydra extends CardImpl {
 
         // At the beginning of your upkeep, double the number of +1/+1 counters on Primordial Hydra.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoubleCountersSourceEffect(CounterType.P1P1), false
+                new DoubleCountersSourceEffect(CounterType.P1P1)
         ));
 
         // Primordial Hydra has trample as long as it has ten or more +1/+1 counters on it.

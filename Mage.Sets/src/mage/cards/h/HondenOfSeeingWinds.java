@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 
 import java.util.UUID;
@@ -35,7 +34,7 @@ public final class HondenOfSeeingWinds extends CardImpl {
 
 
         // At the beginning of your upkeep, draw a card for each Shrine you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(xValue), false).addHint(hint));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(xValue)).addHint(hint));
     }
 
     private HondenOfSeeingWinds(final HondenOfSeeingWinds card) {

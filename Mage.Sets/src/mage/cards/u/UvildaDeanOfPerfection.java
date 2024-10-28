@@ -59,7 +59,7 @@ public final class UvildaDeanOfPerfection extends ModalDoubleFacedCard {
 
         // At the beginning of your upkeep, exile the top card of each opponent's library. Until end of turn, you may cast spells from among those exiled cards, and you many spend mana as though it were mana of any color to cast those spells.
         this.getRightHalfCard().addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new NassariDeanOfExpressionEffect(), false
+                new NassariDeanOfExpressionEffect()
         ));
 
         // Whenever you cast a spell from exile, put a +1/+1 counter on Nassari, Dean of Expression.

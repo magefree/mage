@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -34,7 +33,7 @@ public final class ExtravagantSpirit extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, sacrifice Extravagant Spirit unless you pay {1} for each card in your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ExtravagantSpiritEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ExtravagantSpiritEffect()));
     }
 
     private ExtravagantSpirit(final ExtravagantSpirit card) {

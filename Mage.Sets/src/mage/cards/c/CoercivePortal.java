@@ -25,8 +25,7 @@ public final class CoercivePortal extends CardImpl {
 
         // Will of the council - At the beginning of your upkeep, starting with you, each player votes for carnage or homage. If carnage gets more votes, sacrifice Coercive Portal and destroy all nonland permanents. If homage gets more votes or the vote is tied, draw a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CoercivePortalEffect(),
-                false
+                new CoercivePortalEffect()
         ).setAbilityWord(AbilityWord.WILL_OF_THE_COUNCIL));
     }
 

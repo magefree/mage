@@ -9,7 +9,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;

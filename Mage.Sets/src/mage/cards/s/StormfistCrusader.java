@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -33,7 +32,7 @@ public final class StormfistCrusader extends CardImpl {
 
         // At the beginning of your upkeep, each player draws a card and loses 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new DrawCardAllEffect(1), false
+                new DrawCardAllEffect(1)
         );
         ability.addEffect(new LoseLifeAllPlayersEffect(StaticValue.get(1), "and loses 1 life"));
         this.addAbility(ability);

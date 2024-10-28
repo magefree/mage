@@ -80,7 +80,7 @@ class ShiftingShadowGainEffect extends ContinuousEffectImpl {
         }
         permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
         permanent.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ShiftingShadowEffect(aura, game), false
+                new ShiftingShadowEffect(aura, game)
         ), source.getSourceId(), game);
         return true;
     }

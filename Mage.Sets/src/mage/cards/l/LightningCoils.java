@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -35,7 +34,7 @@ public final class LightningCoils extends CardImpl {
                         false, StaticFilters.FILTER_CONTROLLED_CREATURE_NON_TOKEN));
 
         // At the beginning of your upkeep, if Lightning Coils has five or more charge counters on it, remove all of them from it  and put that many 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LightningCoilsEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LightningCoilsEffect()));
     }
 
     private LightningCoils(final LightningCoils card) {

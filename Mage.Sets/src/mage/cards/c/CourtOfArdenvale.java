@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
@@ -45,7 +44,7 @@ public final class CourtOfArdenvale extends CardImpl {
                 new ReturnFromGraveyardToHandTargetEffect(),
                 MonarchIsSourceControllerCondition.instance,
                 "return target permanent card with mana value 3 or less from your graveyard to your hand. If you're the monarch, return that permanent card to the battlefield instead."
-            ), false
+            )
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.addHint(MonarchHint.instance);

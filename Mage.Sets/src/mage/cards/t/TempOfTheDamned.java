@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -35,7 +34,7 @@ public final class TempOfTheDamned extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new TempOfTheDamnedEffect()));
         
         // At the beginning of your upkeep, remove a funk counter from Temp of the Damned. If you can't, sacrifice it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TempOfTheDamnedUpkeepEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TempOfTheDamnedUpkeepEffect()));
     }
 
     private TempOfTheDamned(final TempOfTheDamned card) {

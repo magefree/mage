@@ -18,7 +18,6 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -50,8 +49,8 @@ public final class Wiitigo extends CardImpl {
                         new RemoveCounterSourceEffect(CounterType.P1P1.createInstance(1)),
                         new BlockedOrBeenBlockedSinceYourLastUpkeepCondition(),
                         "put a +1/+1 counter on {this} if it has blocked or been blocked since your last "
-                        + "upkeep. Otherwise, remove a +1/+1 counter from it"),
-                false);
+                        + "upkeep. Otherwise, remove a +1/+1 counter from it")
+        );
         triggeredAbility.addWatcher(new BlockedOrBeenBlockedSinceYourLastUpkeepWatcher());
         this.addAbility(triggeredAbility);
     }

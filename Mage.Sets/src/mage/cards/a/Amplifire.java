@@ -28,7 +28,7 @@ public final class Amplifire extends CardImpl {
         // Until your next turn, Amplifire's base power becomes twice that card's power and its base toughness becomes twice that card's toughness.
         // Put the revealed cards on the bottom of your library in a random order.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AmplifireEffect(), false
+                new AmplifireEffect()
         ));
     }
 

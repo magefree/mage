@@ -42,7 +42,7 @@ public final class RingOfXathrid extends CardImpl {
                 new AttachedToMatchesFilterCondition(filter),
                 "put a +1/+1 counter on equipped creature if it's black"
         );
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));

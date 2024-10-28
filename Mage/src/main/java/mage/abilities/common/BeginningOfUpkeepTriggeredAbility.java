@@ -17,6 +17,10 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
     private final TargetController targetController;
     private final boolean setTargetPointer;
 
+    public BeginningOfUpkeepTriggeredAbility(Effect effect) {
+        this(TargetController.YOU, effect, false);
+    }
+
     public BeginningOfUpkeepTriggeredAbility(Effect effect, boolean isOptional) {
         this(TargetController.YOU, effect, isOptional, true);
     }

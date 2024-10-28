@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.permanent.token.SaprolingToken;
 
@@ -34,9 +33,8 @@ public final class Mycoloth extends CardImpl {
 
         // At the beginning of your upkeep, create a 1/1 green Saproling creature token for each +1/+1 counter on Mycoloth.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new SaprolingToken(),new CountersSourceCount(CounterType.P1P1)),
-                false
-            ));
+                new CreateTokenEffect(new SaprolingToken(),new CountersSourceCount(CounterType.P1P1))
+        ));
     }
 
     private Mycoloth(final Mycoloth card) {

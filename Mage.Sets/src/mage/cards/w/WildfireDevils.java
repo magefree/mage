@@ -36,7 +36,7 @@ public final class WildfireDevils extends CardImpl {
                 Zone.BATTLEFIELD, new WildfireDevilsEffect(), false,
                 "When {this} enters and at the beginning of your upkeep, ",
                 new EntersBattlefieldTriggeredAbility(null, false),
-                new BeginningOfUpkeepTriggeredAbility(null, false)
+                new BeginningOfUpkeepTriggeredAbility(null)
         ));
     }
 

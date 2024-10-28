@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class BarrowGhoul extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, sacrifice Barrow Ghoul unless you exile the top creature card of your graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileTopCreatureCardOfGraveyardCost(1)), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ExileTopCreatureCardOfGraveyardCost(1))));
     }
 
     private BarrowGhoul(final BarrowGhoul card) {

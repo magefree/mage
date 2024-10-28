@@ -32,8 +32,8 @@ public final class Conversion extends CardImpl {
         // At the beginning of your upkeep, sacrifice Conversion unless you pay {W}{W}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(
-                        new ManaCostsImpl<>("{W}{W}")),
-                false));
+                        new ManaCostsImpl<>("{W}{W}"))
+        ));
 
         // All Mountains are Plains.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConversionEffect()));

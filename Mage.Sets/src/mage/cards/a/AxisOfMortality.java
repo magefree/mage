@@ -6,7 +6,6 @@ import mage.abilities.effects.common.ExchangeLifeTwoTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;

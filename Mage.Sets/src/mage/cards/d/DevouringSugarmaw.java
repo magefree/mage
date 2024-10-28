@@ -12,7 +12,6 @@ import mage.cards.AdventureCard;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -57,8 +56,7 @@ public final class DevouringSugarmaw extends AdventureCard {
                         new TapSourceEffect(),
                         new SacrificeTargetCost(filter),
                         true
-                ),
-                false
+                )
         ));
 
         // Have for Dinner

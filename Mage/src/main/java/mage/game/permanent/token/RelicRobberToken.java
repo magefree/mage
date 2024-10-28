@@ -8,7 +8,6 @@ import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 public final class RelicRobberToken extends TokenImpl {
 
@@ -26,7 +25,7 @@ public final class RelicRobberToken extends TokenImpl {
         ));
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(
                 1, "this creature"
-        ), false));
+        )));
     }
 
     private RelicRobberToken(final RelicRobberToken token) {

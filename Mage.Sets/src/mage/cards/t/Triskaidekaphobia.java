@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.players.PlayerList;
@@ -26,7 +25,7 @@ public final class Triskaidekaphobia extends CardImpl {
 
         // At the beginning of your upkeep, choose one - Each player with exactly 13 life loses the game, then each player gains 1 life.
         // Each player with exactly 13 life loses the game, then each player loses 1 life.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new TriskaidekaphobiaGainLifeEffect(), false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new TriskaidekaphobiaGainLifeEffect());
         Mode mode = new Mode(new TriskaidekaphobiaLoseLifeEffect());
         ability.addMode(mode);
         this.addAbility(ability);

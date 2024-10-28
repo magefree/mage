@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -23,7 +22,7 @@ public final class IvoryTower extends CardImpl {
     public IvoryTower(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IvoryTowerEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new IvoryTowerEffect()));
     }
 
     private IvoryTower(final IvoryTower card) {

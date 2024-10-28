@@ -32,7 +32,7 @@ public final class ExtravagantReplication extends CardImpl {
 
         // At the beginning of your upkeep, create a token that's a copy of another target nonland permanent you control.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenCopyTargetEffect(), false
+                new CreateTokenCopyTargetEffect()
         );
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

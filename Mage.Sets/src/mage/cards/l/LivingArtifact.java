@@ -19,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -48,7 +47,7 @@ public final class LivingArtifact extends CardImpl {
         // At the beginning of your upkeep, you may remove a vitality counter from Living Artifact. If you do, you gain 1 life.
         //TODO make this a custom ability- it's really not intervening if because you should be able to add counters in response to this trigger
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(new GainLifeEffect(1),
-            new RemoveCountersSourceCost(CounterType.VITALITY.createInstance(1))), false),
+            new RemoveCountersSourceCost(CounterType.VITALITY.createInstance(1)))),
             new SourceHasCounterCondition(CounterType.VITALITY, 1), "At the beginning of your upkeep, you may remove a vitality counter from {this}. If you do, you gain 1 life"));
     }
 

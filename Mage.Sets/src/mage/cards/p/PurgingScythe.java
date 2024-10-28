@@ -10,7 +10,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
@@ -30,7 +29,7 @@ public final class PurgingScythe extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // At the beginning of your upkeep, Purging Scythe deals 2 damage to the creature with the least toughness. If two or more creatures are tied for least toughness, you choose one of them.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PurgingScytheEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PurgingScytheEffect()));
     }
 
     private PurgingScythe(final PurgingScythe card) {

@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -45,8 +44,8 @@ public final class BloodSpeaker extends CardImpl {
                 new DoIfCostPaid(
                         new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterCard), true, true),
                         new SacrificeSourceCost()
-                ),
-                false);
+                )
+        );
         this.addAbility(ability);
 
         // Whenever a Demon you control enters, return Blood Speaker from your graveyard to your hand.

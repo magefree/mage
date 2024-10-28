@@ -18,7 +18,6 @@ import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
@@ -41,7 +40,7 @@ public final class ShrineOfBurningRage extends CardImpl {
 
         //At the beginning of your upkeep or whenever you cast a red spell, put a charge counter on Shrine of Burning Rage.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
-                new BeginningOfUpkeepTriggeredAbility(null, false),
+                new BeginningOfUpkeepTriggeredAbility(null),
                 new SpellCastControllerTriggeredAbility(null, filter, false)));
 
         //{3}, {T}, Sacrifice Shrine of Burning Rage: It deals damage equal to the number of charge counters on it to any target.

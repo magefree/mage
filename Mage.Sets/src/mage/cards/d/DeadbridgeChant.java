@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -29,7 +28,7 @@ public final class DeadbridgeChant extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(10)));
 
         // At the beginning of your upkeep, choose a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, put it into your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DeadbridgeChantEffect(), false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DeadbridgeChantEffect()));
     }
 
     private DeadbridgeChant(final DeadbridgeChant card) {
