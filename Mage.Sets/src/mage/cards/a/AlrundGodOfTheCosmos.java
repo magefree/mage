@@ -53,7 +53,7 @@ public final class AlrundGodOfTheCosmos extends ModalDoubleFacedCard {
         this.getLeftHalfCard().addAbility(ability);
 
         //  At the beginning of your end step, choose a card type, then reveal the top two cards of your library. Put all cards of the chosen type into your hand and the rest on the bottom of your library in any order.
-        Ability ability2 = new BeginningOfEndStepTriggeredAbility(new ChooseCardTypeEffect(Outcome.Neutral), false);
+        Ability ability2 = new BeginningOfEndStepTriggeredAbility(new ChooseCardTypeEffect(Outcome.Neutral));
         ability2.addEffect(new AlrundGodOfTheCosmosEffect());
         this.getLeftHalfCard().addAbility(ability2);
 

@@ -29,7 +29,7 @@ public final class CementShoes extends CardImpl {
         // Equipped creature gets +3/+3 and has "At the beginning of your end step, tap this creature."
         Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(3, 3));
         ability.addEffect(new GainAbilityAttachedEffect(
-                new BeginningOfEndStepTriggeredAbility(new TapSourceEffect(), false),
+                new BeginningOfEndStepTriggeredAbility(new TapSourceEffect()),
                 AttachmentType.EQUIPMENT
         ).setText("and has \"At the beginning of your end step, tap this creature.\""));
         this.addAbility(ability);

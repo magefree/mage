@@ -43,7 +43,7 @@ public final class Duplicity extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DuplicityExileHandEffect(), true));
 
         // At the beginning of your end step, discard a card.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DiscardControllerEffect(1), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DiscardControllerEffect(1)));
 
         // When you lose control of Duplicity, put all cards exiled with Duplicity into their owner's graveyard.
         this.addAbility(new DuplicityEntersBattlefieldAbility(new CreateDelayedTriggeredAbilityEffect(new LoseControlDuplicity())));

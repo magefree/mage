@@ -25,7 +25,7 @@ public final class BreedingPit extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{B}{B}"))));
 
         // At the beginning of your end step, create a 0/1 black Thrull creature token.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new BreedingPitThrullToken()), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new BreedingPitThrullToken())));
     }
 
     private BreedingPit(final BreedingPit card) {

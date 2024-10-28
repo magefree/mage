@@ -32,7 +32,7 @@ public final class SphinxSovereign extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your end step, you gain 3 life if Sphinx Sovereign is untapped. Otherwise, each opponent loses 3 life.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SphinxSovereignEffect(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new SphinxSovereignEffect()));
     }
 
     private SphinxSovereign(final SphinxSovereign card) {

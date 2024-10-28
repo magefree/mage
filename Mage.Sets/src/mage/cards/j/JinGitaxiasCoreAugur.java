@@ -32,7 +32,7 @@ public final class JinGitaxiasCoreAugur extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // At the beginning of your end step, draw seven cards.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(7), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(7)));
 
         // Each opponent's maximum hand size is reduced by seven.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,

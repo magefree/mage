@@ -53,7 +53,7 @@ public final class MirkoObsessiveTheorist extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.FINALITY.createInstance())
                         .setText("you may return target creature card with power less than {this}'s from your graveyard to the " +
-                                "battlefield with a finality counter on it. <i>(If it would die, exile it instead.)</i>"),true
+                                "battlefield with a finality counter on it. <i>(If it would die, exile it instead.)</i>"), true
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

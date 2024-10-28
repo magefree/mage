@@ -38,7 +38,7 @@ public final class MerenOfClanNelToth extends CardImpl {
 
         // At the beginning of your end step, choose target creature card in your graveyard. 
         // If that card's converted mana cost is less than or equal to the number of experience counters you have, return it to the battlefield. Otherwise, put it into your hand.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new MerenOfClanNelTothEffect(), false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new MerenOfClanNelTothEffect());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
         this.addAbility(ability);
     }

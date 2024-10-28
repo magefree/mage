@@ -40,8 +40,7 @@ public final class FromTheRubble extends CardImpl {
         // At the beginning of your end step, return target creature card of the chosen type from your graveyard to
         // the battlefield with a finality counter on it.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.FINALITY.createInstance()),
-                false
+                new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.FINALITY.createInstance())
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);

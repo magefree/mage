@@ -36,7 +36,7 @@ public final class WeddingAnnouncement extends CardImpl {
         // Otherwise, create a 1/1 white Human creature token.
         // Then if Wedding Announcement has three or more invitation counters on it, transform it.
         this.addAbility(new TransformAbility());
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.INVITATION.createInstance()), false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.INVITATION.createInstance()));
         ability.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),
                 new CreateTokenEffect(new HumanToken()),

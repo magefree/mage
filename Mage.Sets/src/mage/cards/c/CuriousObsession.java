@@ -55,7 +55,7 @@ public final class CuriousObsession extends CardImpl {
 
         // At the beginning of your end step, if you didn't attack with a creature this turn sacrifice Curious Obsession.
         ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), false),
+                new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect()),
                 new InvertCondition(RaidCondition.instance),
                 "At the beginning of your end step, if you didn't attack with a creature this turn, sacrifice {this}."
         );

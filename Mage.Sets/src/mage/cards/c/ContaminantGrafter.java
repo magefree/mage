@@ -49,7 +49,7 @@ public final class ContaminantGrafter extends CardImpl {
         // Corrupted — At the beginning of your end step, if an opponent has three or more poison
         // counters, draw a card, then you may put a land card from your hand onto the battlefield.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(1), false),
+                new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(1)),
                 CorruptedCondition.instance, "At the beginning of your end step, if an opponent has three or more poison " +
                 "counters, draw a card, then you may put a land card from your hand onto the battlefield"
         );

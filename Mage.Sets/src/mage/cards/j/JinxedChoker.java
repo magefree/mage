@@ -34,7 +34,7 @@ public final class JinxedChoker extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of your end step, target opponent gains control of Jinxed Choker and puts a charge counter on it.
-        Ability endStepAbility = new BeginningOfEndStepTriggeredAbility(new TargetPlayerGainControlSourceEffect(), false);
+        Ability endStepAbility = new BeginningOfEndStepTriggeredAbility(new TargetPlayerGainControlSourceEffect());
         endStepAbility.addEffect(new JinxedChokerAddCounterEffect());
         endStepAbility.addTarget(new TargetOpponent());
         this.addAbility(endStepAbility);

@@ -43,7 +43,7 @@ public final class ThirstingAxe extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, 0)));
 
         // At the beginning of your end step, if equipped creature didn't deal combat damage to a creature this turn, sacrifice it.
-        TriggeredAbility ability = new BeginningOfEndStepTriggeredAbility(new SacrificeEquippedEffect(), false);
+        TriggeredAbility ability = new BeginningOfEndStepTriggeredAbility(new SacrificeEquippedEffect());
         Condition condition = new CompoundCondition(
                 AttachedCondition.instance,
                 new InvertCondition(new EquippedDealtCombatDamageToCreatureCondition()));

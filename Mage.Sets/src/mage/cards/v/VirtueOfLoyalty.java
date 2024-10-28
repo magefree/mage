@@ -24,8 +24,7 @@ public final class VirtueOfLoyalty extends AdventureCard {
 
         // At the beginning of your end step, put a +1/+1 counter on each creature you control. Untap those creatures.
         TriggeredAbility trigger = new BeginningOfEndStepTriggeredAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE),
-                false
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE)
         );
         trigger.addEffect(new UntapAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE).setText("untap those creatures"));
         this.addAbility(trigger);

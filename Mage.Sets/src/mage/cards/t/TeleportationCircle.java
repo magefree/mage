@@ -32,7 +32,7 @@ public final class TeleportationCircle extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // At the beginning of your end step, exile up to one target artifact or creature you control, then return that card to the battlefield under its owner's control.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new ExileThenReturnTargetEffect(false, true), false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new ExileThenReturnTargetEffect(false, true));
         ability.addTarget(new TargetPermanent(0, 1, filter));
         this.addAbility(ability);
     }

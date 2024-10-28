@@ -36,7 +36,7 @@ public final class TortureChamber extends CardImpl {
         ));
 
         // At the beginning of your end step, Torture Chamber deals damage to you equal to the number of pain counters on it.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new TortureChamberEffect1(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new TortureChamberEffect1()));
 
         // {1}, {tap}, Remove all pain counters from Torture Chamber: Torture Chamber deals damage to target creature equal to the number of pain counters removed this way.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(

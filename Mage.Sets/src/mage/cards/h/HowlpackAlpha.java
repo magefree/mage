@@ -49,7 +49,7 @@ public final class HowlpackAlpha extends CardImpl {
         )));
 
         // At the beginning of your end step, create a 2/2 green Wolf creature token.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new WolfToken()), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new WolfToken())));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Howlpack Alpha.
         this.addAbility(new WerewolfBackTriggeredAbility());

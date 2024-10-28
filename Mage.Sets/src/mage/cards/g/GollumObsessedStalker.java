@@ -41,8 +41,7 @@ public final class GollumObsessedStalker extends CardImpl {
 
         // At the beginning of your end step, each opponent dealt combat damage this game by a creature named Gollum, Obsessed Stalker loses life equal to the amount of life you gained this turn.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new GollumObsessedStalkerEffect(),
-                false
+                new GollumObsessedStalkerEffect()
         );
         ability.addWatcher(new PlayerGainedLifeWatcher());
         ability.addWatcher(new GollumObsessedStalkerWatcher());

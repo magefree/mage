@@ -42,7 +42,7 @@ public final class IxhelScionOfAtraxa extends CardImpl {
         // exiles the top card of their library face down. You may look at and play those cards for as long as
         // they remain exiled, and you may spend mana as though it were mana of any color to cast those spells.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new IxhelScionOfAtraxaEffect(), false).setAbilityWord(AbilityWord.CORRUPTED)
+                new IxhelScionOfAtraxaEffect()).setAbilityWord(AbilityWord.CORRUPTED)
         );
     }
 

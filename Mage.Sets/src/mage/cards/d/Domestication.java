@@ -45,7 +45,7 @@ public final class Domestication extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
         
         // At the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice Domestication.
-        TriggeredAbility ability2 = new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), false);
+        TriggeredAbility ability2 = new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability2, new DomesticationCondition(), "At the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice {this}"));
     }
 

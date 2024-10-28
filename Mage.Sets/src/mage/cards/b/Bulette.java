@@ -28,7 +28,7 @@ public final class Bulette extends CardImpl {
 
         // At the beginning of your end step, if a creature died this turn, put a +1/+1 counter on Bulette.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false),
+                new BeginningOfEndStepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())),
                 MorbidCondition.instance,
                 "At the beginning of your end step, if a creature died this turn, put a +1/+1 counter on {this}."
         ).addHint(MorbidHint.instance));

@@ -35,8 +35,7 @@ public final class SolemnRecruit extends CardImpl {
         // <i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, put a +1/+1 counter on Solemn Recruit.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        false
+                        new AddCountersSourceEffect(CounterType.P1P1.createInstance())
                 ),
                 RevoltCondition.instance,
                 "<i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn, put a +1/+1 counter on {this}."

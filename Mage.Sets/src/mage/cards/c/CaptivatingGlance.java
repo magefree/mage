@@ -42,7 +42,7 @@ public final class CaptivatingGlance extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your end step, clash with an opponent. If you win, gain control of enchanted creature. Otherwise, that player gains control of enchanted creature.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CaptivatingGlanceEffect(), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new CaptivatingGlanceEffect()));
 
     }
 

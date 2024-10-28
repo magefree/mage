@@ -30,7 +30,7 @@ public final class TroveOfTemptation extends CardImpl {
         addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TroveOfTemptationForceAttackEffect(Duration.WhileOnBattlefield)));
 
         // At the beginning of your end step, create a colorless Treasure artifact token with "{t}, Sacrifice this artifact: Add one mana of any color.”
-        addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new TreasureToken()), false));
+        addAbility(new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
     }
 
     private TroveOfTemptation(final TroveOfTemptation card) {
