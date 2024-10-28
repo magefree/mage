@@ -34,7 +34,7 @@ public final class GerrardCapashen extends CardImpl {
 
         // At the beginning of your upkeep, you gain 1 life for each card in target opponent's hand.
         Ability ability1 = new BeginningOfUpkeepTriggeredAbility(new GerrardCapashenEffect(),
-                false, true);
+                false);
         ability1.addTarget(new TargetOpponent());
         this.addAbility(ability1);
 

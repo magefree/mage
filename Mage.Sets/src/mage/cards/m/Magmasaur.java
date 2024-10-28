@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -42,7 +41,7 @@ public final class Magmasaur extends CardImpl {
                 "with five +1/+1 counters on it"));
 
         // At the beginning of your upkeep, you may remove a +1/+1 counter from Magmasaur. If you don't, sacrifice Magmasaur and it deals damage equal to the number of +1/+1 counters on it to each creature without flying and each player.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MagmasaurEffect(), false, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MagmasaurEffect(), false));
     }
 
     private Magmasaur(final Magmasaur card) {

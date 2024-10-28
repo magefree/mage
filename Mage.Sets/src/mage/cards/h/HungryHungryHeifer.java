@@ -30,7 +30,7 @@ public final class HungryHungryHeifer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, you may remove a counter from a permanent you control. If you don't, sacrifice Hungry Hungry Heifer.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HungryHungryHeiferEffect(), false, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HungryHungryHeiferEffect(), false));
     }
 
     private HungryHungryHeifer(final HungryHungryHeifer card) {

@@ -29,10 +29,6 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl {
         this(zone, targetController, effect, isOptional, true);
     }
 
-    public BeginningOfUpkeepTriggeredAbility(Effect effect, boolean isOptional, boolean setTargetPointer) {
-        this(TargetController.YOU, effect, isOptional, setTargetPointer);
-    }
-
     public BeginningOfUpkeepTriggeredAbility(TargetController targetController, Effect effect, boolean isOptional, boolean setTargetPointer) {
         this(Zone.BATTLEFIELD, targetController, effect, isOptional, setTargetPointer);
     }
