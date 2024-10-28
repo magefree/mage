@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageControllerEffect;
@@ -16,7 +16,6 @@ import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponent;
@@ -39,7 +38,7 @@ public final class SleeperAgent extends CardImpl {
                 ability.addTarget(new TargetOpponent());
                 this.addAbility(ability);
         // At the beginning of your upkeep, Sleeper Agent deals 2 damage to you.
-                this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(2), TargetController.YOU, false));
+                this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(2)));
     }
 
     private SleeperAgent(final SleeperAgent card) {

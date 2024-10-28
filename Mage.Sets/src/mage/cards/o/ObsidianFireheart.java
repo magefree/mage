@@ -3,7 +3,7 @@ package mage.cards.o;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -99,8 +99,7 @@ class ObsidianFireheartOneShotEffect extends OneShotEffect {
                 && source.getTargets().get(0) != null) {
             ContinuousEffect effect = new ObsidianFireheartGainAbilityEffect(
                     new BeginningOfUpkeepTriggeredAbility(
-                            new DamageControllerEffect(1),
-                            TargetController.YOU,
+                            TargetController.YOU, new DamageControllerEffect(1),
                             false),
                     Duration.Custom, "");
 

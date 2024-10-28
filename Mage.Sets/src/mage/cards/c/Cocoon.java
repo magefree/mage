@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -54,7 +54,7 @@ public final class Cocoon extends CardImpl {
                 new SourceHasCounterCondition(CounterType.PUPA)).setText("Enchanted creature doesn't untap during its controller's untap step if Cocoon has a pupa counter on it")));
 
         // At the beginning of your upkeep, remove a pupa counter from Cocoon. If you can’t, sacrifice it, put a +1/+1 counter on enchanted creature, and that creature gains flying.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CocoonEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CocoonEffect()));
 
     }
 

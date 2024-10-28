@@ -4,7 +4,7 @@ package mage.cards.k;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -20,7 +20,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -48,7 +47,7 @@ public final class Kookus extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // At the beginning of your upkeep, if you don't control a creature named Keeper of Kookus, Kookus deals 3 damage to you and attacks this turn if able.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(3), TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(3));
         ability.addEffect(new AttacksIfAbleSourceEffect(Duration.EndOfTurn, false));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,

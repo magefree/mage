@@ -3,7 +3,7 @@ package mage.cards.w;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
@@ -28,8 +27,8 @@ public final class WarDance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}");
 
         // At the beginning of your upkeep, you may put a verse counter on War Dance.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), true));
 
         // Sacrifice War Dance: Target creature gets +X/+X until end of turn, where X is the number of verse counters on War Dance.
         Ability ability = new SimpleActivatedAbility(

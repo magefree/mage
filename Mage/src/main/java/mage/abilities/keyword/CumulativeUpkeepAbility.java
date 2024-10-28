@@ -1,7 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.OrCost;
@@ -10,7 +10,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -28,7 +27,7 @@ public class CumulativeUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
     private final Cost cumulativeCost;
 
     public CumulativeUpkeepAbility(Cost cumulativeCost) {
-        super(new AddCountersSourceEffect(CounterType.AGE.createInstance()), TargetController.YOU, false);
+        super(new AddCountersSourceEffect(CounterType.AGE.createInstance()));
         this.addEffect(new CumulativeUpkeepEffect(cumulativeCost));
         this.cumulativeCost = cumulativeCost;
     }

@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.costs.common.PayLifeCost;
@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 
 import java.util.UUID;
@@ -36,8 +35,8 @@ public final class ArguelsBloodFast extends CardImpl {
 
         // At the beginning of your upkeep, if you have 5 or less life, you may transform Arguel's Blood Fast.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(),
-                TargetController.YOU, true).withInterveningIf(FatefulHourCondition.instance));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), true
+        ).withInterveningIf(FatefulHourCondition.instance));
     }
 
     private ArguelsBloodFast(final ArguelsBloodFast card) {

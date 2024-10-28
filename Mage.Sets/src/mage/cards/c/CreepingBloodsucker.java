@@ -3,14 +3,13 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -30,7 +29,7 @@ public final class CreepingBloodsucker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, Creeping Bloodsucker deals 1 damage to each opponent. You gain life equal to the damage dealt this way.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreepingBloodsuckerEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreepingBloodsuckerEffect()));
     }
 
     private CreepingBloodsucker(final CreepingBloodsucker card) {

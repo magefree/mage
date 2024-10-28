@@ -3,7 +3,7 @@ package mage.cards.e;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.DiscardCardCost;
@@ -16,7 +16,6 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.common.TargetAnyTarget;
 
@@ -39,8 +38,8 @@ public final class ElaborateFirecannon extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may discard a card. If you do, untap Elaborate Firecannon.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DoIfCostPaid(
-                new UntapSourceEffect(), new DiscardCardCost()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
+                new UntapSourceEffect(), new DiscardCardCost())));
 
     }
 

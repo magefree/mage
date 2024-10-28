@@ -1,14 +1,13 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -26,9 +25,7 @@ public final class PatientRebuilding extends CardImpl {
 
         // At the beginning of your upkeep, target opponent puts the top three cards of their library into their graveyard, then you draw a card for each land card put into that graveyard this way.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new PatientRebuildingEffect(),
-                TargetController.YOU,
-                false
+                new PatientRebuildingEffect()
         );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

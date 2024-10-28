@@ -2,7 +2,7 @@
 package mage.cards.s;
 
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -15,7 +15,6 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 
 import java.util.UUID;
 
@@ -32,9 +31,9 @@ public final class SunDroplet extends CardImpl {
 
         // At the beginning of each upkeep, you may remove a charge counter from Sun Droplet. If you do, you gain 1 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoIfCostPaid(
+                TargetController.ANY, new DoIfCostPaid(
                         new GainLifeEffect(1), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance())
-                ), TargetController.EACH_PLAYER, false
+                ), false
         ));
     }
 

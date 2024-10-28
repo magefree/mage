@@ -3,8 +3,8 @@ package mage.cards.e;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.*;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.game.events.GameEvent;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -43,9 +43,7 @@ public final class EndlessEvil extends CardImpl {
 
         // At the beginning of your upkeep, create a token that’s a copy of enchanted creature, except the token is 1/1.
         TriggeredAbility cloneAbility = new BeginningOfUpkeepTriggeredAbility(
-                new EndlessEvilCloneEffect(),
-                TargetController.YOU,
-                false
+                new EndlessEvilCloneEffect()
         );
         this.addAbility(cloneAbility);
 

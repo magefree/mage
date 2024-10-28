@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.TapEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -35,7 +35,7 @@ public final class CurseOfChains extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of each upkeep, tap enchanted creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TapEnchantedEffect(), TargetController.EACH_PLAYER, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new TapEnchantedEffect(), false));
     }
 
     private CurseOfChains(final CurseOfChains card) {

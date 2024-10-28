@@ -4,7 +4,7 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
@@ -20,8 +20,6 @@ import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
@@ -40,7 +38,7 @@ public final class IcatianStore extends CardImpl {
         // At the beginning of your upkeep, if Icatian Store is tapped, put a storage counter on it.
         OneShotEffect addStorageCounter = new AddCountersSourceEffect(CounterType.STORAGE.createInstance());
         Effect effect = new ConditionalOneShotEffect(addStorageCounter, SourceTappedCondition.TAPPED, "if {this} is tapped, put a storage counter on it");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect));
         // {tap}, Remove any number of storage counters from Icatian Store: Add {W} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.WhiteMana(1),

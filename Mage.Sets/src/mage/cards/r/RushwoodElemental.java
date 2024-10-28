@@ -3,14 +3,13 @@ package mage.cards.r;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 /**
@@ -28,7 +27,7 @@ public final class RushwoodElemental extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, you may put a +1/+1 counter on Rushwood Elemental.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
     }
 
     private RushwoodElemental(final RushwoodElemental card) {

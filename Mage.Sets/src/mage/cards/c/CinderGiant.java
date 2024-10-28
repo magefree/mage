@@ -3,13 +3,12 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
@@ -31,7 +30,7 @@ public final class CinderGiant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, Cinder Giant deals 2 damage to each other creature you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageAllEffect(2, filter), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageAllEffect(2, filter)));
     }
 
     private CinderGiant(final CinderGiant card) {

@@ -3,7 +3,7 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.AttachedToMatchesFilterCondition;
 import mage.abilities.costs.Cost;
@@ -73,7 +73,7 @@ public final class TourachsGate extends CardImpl {
                 new SacrificeTargetCost(filterThrull)));
         
         // At the beginning of your upkeep, remove a time counter from Tourach's Gate. If there are no time counters on Tourach's Gate, sacrifice it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TourachsGateUpkeepEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TourachsGateUpkeepEffect()));
 
         // Tap enchanted land: Attacking creatures you control get +2/-1 until end of turn. Activate this ability only if enchanted land is untapped.
         Cost cost = new TapAttachedCost();

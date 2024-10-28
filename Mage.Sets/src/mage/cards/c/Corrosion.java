@@ -2,7 +2,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
@@ -33,7 +32,7 @@ public final class Corrosion extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new GenericManaCost(1)));
 
         // At the beginning of your upkeep, put a rust counter on each artifact target opponent controls. Then destroy each artifact with converted mana cost less than or equal to the number of rust counters on it. Artifacts destroyed this way can't be regenerated.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CorrosionUpkeepEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CorrosionUpkeepEffect());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 

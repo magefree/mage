@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -48,8 +48,8 @@ public final class StarfieldOfNyx extends CardImpl {
 
         // At the beginning of your upkeep, you may return target enchantment card
         // from your graveyard to the battlefield.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new ReturnFromGraveyardToBattlefieldTargetEffect(), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                new ReturnFromGraveyardToBattlefieldTargetEffect(), true);
         ability.addTarget(new TargetCardInYourGraveyard(filterGraveyardEnchantment));
         this.addAbility(ability);
 

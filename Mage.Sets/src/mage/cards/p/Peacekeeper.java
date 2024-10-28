@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RestrictionEffect;
@@ -28,7 +28,7 @@ public final class Peacekeeper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, sacrifice Peacekeeper unless you pay {1}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}{W}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}{W}"))));
 
         // Creatures can't attack.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PeacekeeperCantAttackEffect()));

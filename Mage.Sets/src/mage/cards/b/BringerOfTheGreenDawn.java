@@ -4,7 +4,7 @@ package mage.cards.b;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -13,8 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.permanent.token.BeastToken;
 
 /**
@@ -35,7 +33,7 @@ public final class BringerOfTheGreenDawn extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep,s you may create a 3/3 green Beast creature token.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new BeastToken()), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new BeastToken()), true);
         this.addAbility(ability);
     }
 

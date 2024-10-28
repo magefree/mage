@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
@@ -28,8 +28,7 @@ public class FurnacePunisher extends CardImpl {
 
         //At the beginning of each player’s upkeep, Furnace Punisher deals 2 damage to that player unless they control
         //two or more basic lands.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FurnacePunisherEffect(),
-                TargetController.EACH_PLAYER,
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new FurnacePunisherEffect(),
                 false
         ).setTriggerPhrase("At the beginning of each player's upkeep, "));
     }

@@ -4,7 +4,7 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -32,7 +32,7 @@ public final class InfiniteHourglass extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // At the beginning of your upkeep, put a time counter on Infinite Hourglass.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance())));
 
         // All creatures get +1/+0 for each time counter on Infinite Hourglass.
         this.addAbility(new SimpleStaticAbility(

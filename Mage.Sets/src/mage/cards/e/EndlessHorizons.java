@@ -1,7 +1,7 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -29,7 +29,7 @@ public final class EndlessHorizons extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EndlessHorizonsEffect(), false));
 
         // At the beginning of your upkeep, you may put a card you own exiled with Endless Horizons into your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EndlessHorizonsEffect2(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EndlessHorizonsEffect2()));
     }
 
     private EndlessHorizons(final EndlessHorizons card) {

@@ -3,7 +3,7 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.permanent.token.EldraziScionToken;
@@ -40,7 +39,7 @@ public final class FromBeyond extends CardImpl {
 
         // At the beginning of your upkeep, create a 1/1 colorless Eldrazi Scion creature token. It has "Sacrifice this creature: Add {C}."
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(
-                new EldraziScionToken()).withTextOptions(true), TargetController.YOU, false));
+                new EldraziScionToken()).withTextOptions(true)));
 
         // {1}{G}, Sacrifice From Beyond: Search your library for an Eldrazi card, reveal it, put it into your hand, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

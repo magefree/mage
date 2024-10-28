@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -59,9 +59,8 @@ public final class LilyBowenRagingGrandma extends CardImpl {
                         new SourceMatchesFilterCondition(filter),
                         "double the number of +1/+1 counters on {this} if its power is 16 or less. " +
                                 "Otherwise, remove all but one +1/+1 counter from it, " +
-                                "then you gain 1 life for each +1/+1 counter removed this way"),
-                TargetController.YOU,
-                false));
+                                "then you gain 1 life for each +1/+1 counter removed this way")
+        ));
     }
 
     private LilyBowenRagingGrandma(final LilyBowenRagingGrandma card) {

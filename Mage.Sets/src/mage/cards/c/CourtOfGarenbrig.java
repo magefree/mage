@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -12,7 +12,6 @@ import mage.abilities.hint.common.MonarchHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanentAmount;
@@ -35,7 +34,7 @@ public final class CourtOfGarenbrig extends CardImpl {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
                 new DistributeCountersEffect(
                         CounterType.P1P1, 2, false, "up to two target creatures"
-                ), TargetController.YOU, false
+                )
         );
         TargetCreaturePermanentAmount target = new TargetCreaturePermanentAmount(2);
         target.setMinNumberOfTargets(0);

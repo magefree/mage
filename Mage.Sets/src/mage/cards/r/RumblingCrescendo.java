@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,7 +12,6 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -37,8 +36,8 @@ public final class RumblingCrescendo extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
 
         // At the beginning of your upkeep, you may put a verse counter on Rumbling Crescendo.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), true));
 
         // {R}, Sacrifice Rumbling Crescendo: Destroy up to X target lands, where X is the number of verse counters on Rumbling Crescendo.        
         Effect effect = new DestroyTargetEffect(true);

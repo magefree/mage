@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.Effect;
@@ -43,8 +43,8 @@ public final class Withercrown extends CardImpl {
         Effect effect2 = new DoUnlessControllerPaysEffect(new LoseLifeSourceControllerEffect(1),
                 new SacrificeSourceCost(), rule);
         effect2.setText("you lose 1 life unless you sacrifice this creature.");
-        Effect effect3 = new GainAbilityAttachedEffect(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                effect2, TargetController.YOU, false, false), AttachmentType.AURA);
+        Effect effect3 = new GainAbilityAttachedEffect(new BeginningOfUpkeepTriggeredAbility(
+                effect2), AttachmentType.AURA);
         effect3.setText("and has \"At the beginning of your upkeep, you lose 1 life unless you sacrifice this creature.\"");
         abilityTest.addEffect(effect3);
         this.addAbility(abilityTest);

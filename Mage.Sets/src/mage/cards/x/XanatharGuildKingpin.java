@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.*;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -36,9 +36,8 @@ public final class XanatharGuildKingpin extends CardImpl {
 
         // At the beginning of your upkeep, choose target opponent. Until end of turn, that player can’t cast spells, you may look at the top card of their library any time, you may play the top card of their library, and you may spend mana as though it were mana of any color to cast spells this way.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new XanatharGuildKingpinRuleModifyingEffect()
-                .setText("choose target opponent. Until end of turn, that player can't cast spells,"),
-                TargetController.YOU, false
+                new XanatharGuildKingpinRuleModifyingEffect()
+                .setText("choose target opponent. Until end of turn, that player can't cast spells,")
         );
         ability.addEffect(new XanatharLookAtTopCardOfLibraryEffect()
                 .setText(" you may look at the top card of their library any time,"));

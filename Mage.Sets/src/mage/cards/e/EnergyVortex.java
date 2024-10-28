@@ -3,7 +3,7 @@ package mage.cards.e;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.IsStepCondition;
 import mage.abilities.costs.Cost;
@@ -39,14 +39,13 @@ public final class EnergyVortex extends CardImpl {
         // At the beginning of your upkeep, remove all vortex counters from Energy Vortex.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new RemoveAllCountersSourceEffect(CounterType.VORTEX)
-                        .setText("remove all vortex counters from {this}"),
-                TargetController.YOU, false
+                        .setText("remove all vortex counters from {this}")
         ));
 
         // At the beginning of the chosen player's upkeep, Energy Vortex deals 3 damage to that player unless they pay {1} for each vortex counter on Energy Vortex.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new EnergyVortexEffect(), TargetController.ANY, false
+                        TargetController.ANY, new EnergyVortexEffect(), false
                 ), EnergyVortexCondition.instance, "At the beginning of the chosen player's upkeep, " +
                 "{this} deals 3 damage to that player unless they pay {1} for each vortex counter on {this}."
         ));

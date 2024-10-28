@@ -2,7 +2,7 @@
 package mage.cards.r;
 
 import java.util.UUID;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
@@ -14,7 +14,6 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetArtifactPermanent;
@@ -36,8 +35,8 @@ public final class RelicBane extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
         // Enchanted artifact has "At the beginning of your upkeep, you lose 2 life."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(
-            new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2),
-            TargetController.YOU, false), AttachmentType.AURA)));
+            new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(2)
+            ), AttachmentType.AURA)));
      }
 
     private RelicBane(final RelicBane card) {

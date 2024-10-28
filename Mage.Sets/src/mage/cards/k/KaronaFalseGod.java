@@ -5,7 +5,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
@@ -40,7 +40,7 @@ public final class KaronaFalseGod extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // At the beginning of each player's upkeep, that player untaps Karona, False God and gains control of it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new KaronaFalseGodUntapGetControlEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new KaronaFalseGodUntapGetControlEffect(), false));
 
         // Whenever Karona attacks, creatures of the creature type of your choice get +3/+3 until end of turn.
         this.addAbility(new AttacksTriggeredAbility(new KaronaFalseGodEffect(), false));

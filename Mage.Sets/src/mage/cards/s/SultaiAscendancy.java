@@ -1,11 +1,10 @@
 package mage.cards.s;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.keyword.SurveilEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -20,7 +19,7 @@ public final class SultaiAscendancy extends CardImpl {
         // At the beginning of your upkeep, look at the top two cards of your library.
         // Put any number of them into your graveyard and the rest back on top of your library in any order.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SurveilEffect(2), TargetController.YOU, false
+                new SurveilEffect(2)
         ));
     }
 

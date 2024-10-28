@@ -4,7 +4,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.SetPlayerLifeSourceEffect;
@@ -37,7 +37,7 @@ public final class FormOfTheDragon extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{4}{R}{R}{R}");
 
         // At the beginning of your upkeep, Form of the Dragon deals 5 damage to any target.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(5), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageTargetEffect(5));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 

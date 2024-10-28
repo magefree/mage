@@ -3,7 +3,7 @@ package mage.cards.i;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.ControlsPermanentsControllerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -34,10 +34,8 @@ public final class IslandFishJasconius extends CardImpl {
         
         // At the beginning of your upkeep, you may pay {U}{U}{U}. If you do, untap Island Fish Jasconius.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new DoIfCostPaid(new UntapSourceEffect(), new ManaCostsImpl<>("{U}{U}{U}")),
-                TargetController.YOU,
-                false));
+                new DoIfCostPaid(new UntapSourceEffect(), new ManaCostsImpl<>("{U}{U}{U}"))
+        ));
         
         // Island Fish Jasconius can't attack unless defending player controls an Island.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));

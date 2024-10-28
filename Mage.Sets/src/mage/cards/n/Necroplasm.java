@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DredgeAbility;
@@ -37,7 +37,7 @@ public final class Necroplasm extends CardImpl {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, put a +1/+1 counter on Necroplasm.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
         
         // At the beginning of your end step, destroy each creature with converted mana cost equal to the number of +1/+1 counters on Necroplasm.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new NecroplasmEffect(), TargetController.YOU, false));

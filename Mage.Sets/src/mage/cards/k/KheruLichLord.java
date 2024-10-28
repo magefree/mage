@@ -3,7 +3,7 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -41,8 +41,8 @@ public final class KheruLichLord extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, you may pay {2}{B}. If you do, return a creature card at random from your graveyard to the battlefield. It gains flying, trample, and haste. Exile that card at the beginning of the next end step. If that card would leave the battlefield, exile it instead of putting it anywhere else.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new DoIfCostPaid(new KheruLichLordEffect(), new ManaCostsImpl<>("{2}{B}"), "Return creature card from your graveyard?"), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new DoIfCostPaid(new KheruLichLordEffect(), new ManaCostsImpl<>("{2}{B}"), "Return creature card from your graveyard?")));
     }
 
     private KheruLichLord(final KheruLichLord card) {

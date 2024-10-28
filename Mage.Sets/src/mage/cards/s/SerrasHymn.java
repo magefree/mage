@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetAnyTargetAmount;
@@ -29,8 +28,8 @@ public final class SerrasHymn extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
         // At the beginning of your upkeep, you may put a verse counter on Serra's Hymn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), true));
 
         // Sacrifice Serra's Hymn: Prevent the next X damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose, where X is the number of verse counters on Serra's Hymn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,

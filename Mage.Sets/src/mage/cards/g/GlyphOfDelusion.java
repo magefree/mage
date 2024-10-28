@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
 import mage.abilities.decorator.ConditionalContinuousRuleModifyingEffect;
@@ -134,8 +134,8 @@ class GlyphOfDelusionEffect extends OneShotEffect {
                 effect.setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
                 game.addEffect(effect, source);
 
-                BeginningOfUpkeepTriggeredAbility ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.GLYPH.createInstance()),
-                        TargetController.YOU, false);
+                BeginningOfUpkeepTriggeredAbility ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.GLYPH.createInstance())
+                );
                 GainAbilityTargetEffect effect2 = new GainAbilityTargetEffect(ability2, Duration.Custom);
                 effect2.setTargetPointer(new FixedTarget(targetPermanent.getId(), game));
                 game.addEffect(effect2, source);

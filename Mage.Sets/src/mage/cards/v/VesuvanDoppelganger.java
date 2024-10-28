@@ -3,7 +3,7 @@ package mage.cards.v;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -84,8 +84,8 @@ class VesuvanDoppelgangerCopyEffect extends OneShotEffect {
                         @Override
                         public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
                             blueprint.getColor().setColor(sourcePermanent.getColor(game));
-                            blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                                    new VesuvanDoppelgangerCopyEffect(), TargetController.YOU, true, false));
+                            blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
+                                    TargetController.YOU, new VesuvanDoppelgangerCopyEffect(), true));
                             return true;
                         }
                     });

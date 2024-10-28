@@ -2,7 +2,7 @@ package mage.cards.q;
 
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -35,8 +35,8 @@ public final class QuicksilverFountain extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of each player's upkeep, that player puts a flood counter on target non-Island land they control of their choice. That land is an Island for as long as it has a flood counter on it.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new QuicksilverFountainEffect(), TargetController.ANY, false, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                TargetController.EACH_PLAYER, new QuicksilverFountainEffect(), false);
         ability.addTarget(new TargetLandPermanent());
         ability.setTargetAdjuster(QuicksilverFountainAdjuster.instance);
         this.addAbility(ability);

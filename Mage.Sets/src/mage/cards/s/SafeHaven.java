@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -12,7 +12,6 @@ import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -37,7 +36,7 @@ public final class SafeHaven extends CardImpl {
                 new DoIfCostPaid(new ReturnFromExileEffect(
                         Zone.BATTLEFIELD, "return each card exiled with " +
                         "{this} to the battlefield under its owner's control"
-                ), new SacrificeSourceCost()), TargetController.YOU, false
+                ), new SacrificeSourceCost())
         ));
     }
 

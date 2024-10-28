@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -19,7 +19,6 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
@@ -47,7 +46,7 @@ public final class ShrineOfPiercingVision extends CardImpl {
 
         // At the beginning of your upkeep or whenever you cast a blue spell, put a charge counter on Shrine of Piercing Vision.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
-                new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(null),
                 new SpellCastControllerTriggeredAbility(null, filter, false)));
 
         // {tap}, Sacrifice Shrine of Piercing Vision: Look at the top X cards of your library, where X is the number of charge counters on Shrine of Piercing Vision.

@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -35,7 +34,7 @@ public final class CosmicHorror extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // At the beginning of your upkeep, destroy Cosmic Horror unless you pay {3}{B}{B}{B}. If Cosmic Horror is destroyed this way, it deals 7 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CosmicHorrorEffect(new ManaCostsImpl<>("{3}{B}{B}{B}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CosmicHorrorEffect(new ManaCostsImpl<>("{3}{B}{B}{B}"))));
     }
 
     private CosmicHorror(final CosmicHorror card) {

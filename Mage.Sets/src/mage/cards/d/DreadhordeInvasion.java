@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksAllTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.effects.keyword.AmassEffect;
@@ -35,7 +35,7 @@ public final class DreadhordeInvasion extends CardImpl {
 
         // At the beginning of your upkeep, you lose 1 life and amass 1.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new LoseLifeSourceControllerEffect(1), TargetController.YOU, false
+                new LoseLifeSourceControllerEffect(1)
         );
         ability.addEffect(new AmassEffect(1, SubType.ZOMBIE).concatBy("and"));
         this.addAbility(ability);

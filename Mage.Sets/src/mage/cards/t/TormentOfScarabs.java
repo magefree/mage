@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.OrCost;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -46,7 +46,7 @@ public final class TormentOfScarabs extends CardImpl {
 
         // At the beginning of enchanted player's upkeep, that player loses 3 life unless they sacrifice a nonland permanent or discards a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(
+                TargetController.ENCHANTED, new DoUnlessTargetPlayerOrTargetsControllerPaysEffect(
                         new LoseLifeTargetEffect(3),
                         new OrCost(
                                 "sacrifice a nonland permanent or discard a card",
@@ -54,7 +54,7 @@ public final class TormentOfScarabs extends CardImpl {
                                 new DiscardCardCost()
                         ),
                         "Sacrifice a nonland permanent or discard a card to prevent losing 3 life?"
-                ), TargetController.ENCHANTED, false
+                ), false
         ));
     }
 

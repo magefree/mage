@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
@@ -45,8 +45,7 @@ public final class SpawnOfMayhem extends CardImpl {
 
         // At the beginning of your upkeep, Spawn of Mayhem deals 1 damage to each player. Then if you have 10 or less life, put a +1/+1 counter on Spawn of Mayhem.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new DamagePlayersEffect(1, TargetController.ANY),
-                TargetController.YOU, false
+                new DamagePlayersEffect(1, TargetController.ANY)
         );
         ability.addEffect(new SpawnOfMayhemEffect());
         this.addAbility(ability);

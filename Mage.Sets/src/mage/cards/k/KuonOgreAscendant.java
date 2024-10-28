@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.SacrificeEffect;
@@ -68,9 +68,8 @@ class KuonsEssenceToken extends TokenImpl {
 
         // At the beginning of each player's upkeep, that player sacrifices a creature..
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"),
-                TargetController.ANY, false, true));
+                TargetController.ANY, new SacrificeEffect(StaticFilters.FILTER_PERMANENT_CREATURE, 1, "that player"),
+                false));
     }
     private KuonsEssenceToken(final KuonsEssenceToken token) {
         super(token);

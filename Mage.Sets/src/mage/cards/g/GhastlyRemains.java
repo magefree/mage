@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SourceInGraveyardCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AmplifyEffect;
@@ -35,8 +35,8 @@ public final class GhastlyRemains extends CardImpl {
 
         // At the beginning of your upkeep, if Ghastly Remains is in your graveyard, you may pay {B}{B}{B}. If you do, return Ghastly Remains to your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect().setText("return {this} to your hand"), new ManaCostsImpl<>("{B}{B}{B}")),
-                TargetController.YOU, false).withInterveningIf(SourceInGraveyardCondition.instance));
+                TargetController.YOU, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect().setText("return {this} to your hand"), new ManaCostsImpl<>("{B}{B}{B}")),
+                false).withInterveningIf(SourceInGraveyardCondition.instance));
 
     }
 

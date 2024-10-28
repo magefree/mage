@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -46,7 +46,7 @@ public final class HeadlinerScarlett extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, exile the top card of your library face down. You may look at and play that card this turn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HeadlinerScarlettExileEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HeadlinerScarlettExileEffect()));
     }
 
     private HeadlinerScarlett(final HeadlinerScarlett card) {

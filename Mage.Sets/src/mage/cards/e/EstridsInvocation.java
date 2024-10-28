@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyPermanentEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
@@ -59,7 +58,7 @@ class EstridsInvocationCopyApplier extends CopyApplier {
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         // At the beginning of your upkeep, you may exile this enchantment. If you do, return it to the battlefield under its owner's control.
         blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
-                new EstridsInvocationEffect(), TargetController.YOU, true
+                new EstridsInvocationEffect(), true
         ));
         return true;
     }

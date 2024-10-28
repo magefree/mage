@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ControlsPermanentsComparedToOpponentsCondition;
@@ -61,10 +61,7 @@ public final class ChaosLord extends CardImpl {
 class ChaosLordTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
     ChaosLordTriggeredAbility() {
-        super(Zone.BATTLEFIELD,
-                new TargetPlayerGainControlSourceEffect(),
-                TargetController.YOU,
-                false);
+        super(new TargetPlayerGainControlSourceEffect());
     }
 
     private ChaosLordTriggeredAbility(final ChaosLordTriggeredAbility ability) {

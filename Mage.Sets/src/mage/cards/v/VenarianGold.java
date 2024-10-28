@@ -2,7 +2,7 @@ package mage.cards.v;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.AttachedToCounterCondition;
@@ -52,8 +52,8 @@ public final class VenarianGold extends CardImpl {
                 new AttachedToCounterCondition(CounterType.SLEEP, 1)).setText("Enchanted creature doesn't untap during its controller's untap step if it has a sleep counter on it")));
 
         // At the beginning of the upkeep of enchanted creature’s controller, remove a sleep counter from that creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCountersAttachedEffect(CounterType.SLEEP.createInstance(), "that creature"),
-                TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new RemoveCountersAttachedEffect(CounterType.SLEEP.createInstance(), "that creature"),
+                false));
 
     }
 

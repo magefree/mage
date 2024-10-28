@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -15,7 +15,6 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
@@ -38,7 +37,7 @@ public final class SerratedArrows extends CardImpl {
 
         // At the beginning of your upkeep, if there are no arrowhead counters on Serrated Arrows, sacrifice it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect()),
                 new SourceHasCounterCondition(CounterType.ARROWHEAD, 0, 0),
                 "At the beginning of your upkeep, if there are no arrowhead counters on {this}, sacrifice it"
         ));

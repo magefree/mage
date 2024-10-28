@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
@@ -15,7 +15,6 @@ import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -31,8 +30,7 @@ public final class PillarTombsOfAku extends CardImpl {
 
         // At the beginning of each player's upkeep, that player may sacrifice a creature. If that player doesn't, they lose 5 life and you sacrifice Pillar Tombs of Aku.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new PillarTombsOfAkuEffect(),
-                TargetController.ANY,
+                TargetController.EACH_PLAYER, new PillarTombsOfAkuEffect(),
                 false
         ));
     }

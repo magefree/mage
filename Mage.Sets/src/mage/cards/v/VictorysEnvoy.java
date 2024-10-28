@@ -1,13 +1,12 @@
 package mage.cards.v;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -37,8 +36,7 @@ public final class VictorysEnvoy extends CardImpl {
 
         // At the beginning of your upkeep, put a +1/1 counter on each other creature you control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter),
-                TargetController.YOU, false
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter)
         ));
     }
 

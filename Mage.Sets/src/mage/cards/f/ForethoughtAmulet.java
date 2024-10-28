@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -29,7 +28,7 @@ public final class ForethoughtAmulet extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // At the beginning of your upkeep, sacrifice Forethought Amulet unless you pay {3}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(3)), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(3))));
 
         // If an instant or sorcery source would deal 3 or more damage to you, it deals 2 damage to you instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ForethoughtAmuletEffect()));

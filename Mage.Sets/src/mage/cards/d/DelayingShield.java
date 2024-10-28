@@ -2,7 +2,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -34,7 +34,7 @@ public final class DelayingShield extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DelayingShieldReplacementEffect()));
 
         // At the beginning of your upkeep, remove all delay counters from Delaying Shield. For each delay counter removed this way, you lose 1 life unless you pay {1}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DelayingShieldUpkeepEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DelayingShieldUpkeepEffect()));
     }
 
     private DelayingShield(final DelayingShield card) {

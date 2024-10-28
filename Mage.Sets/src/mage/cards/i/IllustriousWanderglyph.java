@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CitysBlessingCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -46,7 +46,7 @@ public final class IllustriousWanderglyph extends CardImpl {
 
         // At the beginning of each upkeep, create a 1/1 colorless Gnome artifact creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new GnomeToken()), TargetController.EACH_PLAYER, false
+                TargetController.ANY, new CreateTokenEffect(new GnomeToken()), false
         ));
     }
 

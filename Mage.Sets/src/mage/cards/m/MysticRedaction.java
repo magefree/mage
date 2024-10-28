@@ -1,6 +1,6 @@
 package mage.cards.m;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DiscardCardControllerTriggeredAbility;
 import mage.abilities.effects.common.MillCardsEachPlayerEffect;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -21,7 +21,7 @@ public final class MysticRedaction extends CardImpl {
 
         // At the beginning of your upkeep, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ScryEffect(1, false), TargetController.YOU, false
+                new ScryEffect(1, false)
         ));
 
         // Whenever you discard a card, each opponent mills two cards.

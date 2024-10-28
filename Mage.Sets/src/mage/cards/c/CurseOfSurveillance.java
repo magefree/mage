@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
@@ -43,10 +43,10 @@ public final class CurseOfSurveillance extends CardImpl {
 
         // At the beginning of enchanted player's upkeep, any number of target players other than that player each draw cards equal to the number of Curses attached to that player.
         ability = new BeginningOfUpkeepTriggeredAbility(
-                new DrawCardTargetEffect(CurseOfSurveillanceValue.instance).setText(
+                TargetController.ENCHANTED, new DrawCardTargetEffect(CurseOfSurveillanceValue.instance).setText(
                         "any number of target players other than that player each draw cards equal to the number of Curses attached to that player"
                 ),
-                TargetController.ENCHANTED, false
+                false
         );
         ability.setTargetAdjuster(CurseOfSurveillanceTargetAdjuster.instance);
         ability.addTarget(new TargetPlayer(0, Integer.MAX_VALUE, false));

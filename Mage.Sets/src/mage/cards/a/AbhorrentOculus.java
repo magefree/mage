@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.effects.keyword.ManifestDreadEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -37,7 +37,7 @@ public final class AbhorrentOculus extends CardImpl {
 
         // At the beginning of each opponent's upkeep, manifest dread.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ManifestDreadEffect(), TargetController.OPPONENT, false
+                TargetController.OPPONENT, new ManifestDreadEffect(), false
         ));
     }
 

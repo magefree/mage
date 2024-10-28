@@ -3,7 +3,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.ReturnToHandChosenControlledPermanentCost;
 import mage.abilities.effects.Effect;
@@ -41,7 +41,7 @@ public final class VaporSnare extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Vapor Snare unless you return a land you control to its owner's hand.
         Effect effect = new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(1, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_A_LAND, true)));
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect));
     }
 
     private VaporSnare(final VaporSnare card) {

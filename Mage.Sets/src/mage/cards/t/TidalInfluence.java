@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.ObjectColor;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.CastOnlyIfConditionIsTrueAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -56,8 +56,8 @@ public final class TidalInfluence extends CardImpl {
                 "with a tide counter on it."));
 
         // At the beginning of your upkeep, put a tide counter on Tidal Influence.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIDE.createInstance()),
-                TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIDE.createInstance())
+        ));
 
         // As long as there is exactly one tide counter on Tidal Influence, all blue creatures get -2/-0.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(

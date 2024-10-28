@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.ModeChoiceSourceCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -14,7 +14,6 @@ import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -36,7 +35,7 @@ public final class PalaceSiege extends CardImpl {
 
         // * Khans - At the beginning of your upkeep, return target creature card from your graveyard to your hand.
         Ability ability1 = new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()),
                 new ModeChoiceSourceCondition("Khans"),
                 ruleTrigger1);
         ability1.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
@@ -44,7 +43,7 @@ public final class PalaceSiege extends CardImpl {
 
         // * Dragons - At the beginning of your upkeep, each opponent loses 2 life and you gain 2 life.
         Ability ability2 = new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new LoseLifeOpponentsEffect(2), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new LoseLifeOpponentsEffect(2)),
                 new ModeChoiceSourceCondition("Dragons"),
                 ruleTrigger2);
         Effect effect = new GainLifeEffect(2);

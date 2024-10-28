@@ -4,7 +4,7 @@ package mage.cards.p;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -40,7 +39,7 @@ public final class PiousKitsune extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, put a devotion counter on Pious Kitsune. Then if a creature named Eight-and-a-Half-Tails is on the battlefield, you gain 1 life for each devotion counter on Pious Kitsune.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PiousKitsuneEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PiousKitsuneEffect()));
         // {tap}, Remove a devotion counter from Pious Kitsune: You gain 1 life.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.DEVOTION.createInstance()));

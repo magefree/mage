@@ -3,13 +3,12 @@ package mage.cards.m;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -34,7 +33,7 @@ public final class MoonringMirror extends CardImpl {
         this.addAbility(new DrawCardControllerTriggeredAbility(new MoonringMirrorExileEffect(), false));
 
         // At the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with Moonring Mirror into your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MoonringMirrorEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MoonringMirrorEffect(), true));
     }
 
     private MoonringMirror(final MoonringMirror card) {

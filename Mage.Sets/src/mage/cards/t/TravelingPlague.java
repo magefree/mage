@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
@@ -47,7 +47,7 @@ public final class TravelingPlague extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of each upkeep, put a plague counter on Traveling Plague.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.PLAGUE.createInstance()), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new AddCountersSourceEffect(CounterType.PLAGUE.createInstance()), false));
 
         // Enchanted creature gets -1/-1 for each plague counter on Traveling Plague.
         DynamicValue boostValue = new MultipliedValue(new CountersSourceCount(CounterType.PLAGUE), -1);

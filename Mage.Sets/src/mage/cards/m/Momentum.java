@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
 import mage.abilities.effects.common.AttachEffect;
@@ -17,7 +17,6 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -40,7 +39,7 @@ public final class Momentum extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, you may put a growth counter on Momentum.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.GROWTH.createInstance(), true), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.GROWTH.createInstance(), true), true));
 
         // Enchanted creature gets +1/+1 for each growth counter on Momentum.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(new CountersSourceCount(CounterType.GROWTH), new CountersSourceCount(CounterType.GROWTH))));

@@ -2,7 +2,7 @@
 package mage.cards.n;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -44,7 +44,7 @@ public final class NecroticPlague extends CardImpl {
 
         // Enchanted creature has "At the beginning of your upkeep, sacrifice this creature."
         // When enchanted creature dies, its controller chooses target creature one of their opponents controls. Return Necrotic Plague from its owner's graveyard to the battlefield attached to that creature.
-        ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect(), TargetController.YOU, false);
+        ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature has \"At the beginning of your upkeep, sacrifice this creature.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

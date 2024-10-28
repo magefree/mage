@@ -1,13 +1,12 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
@@ -36,7 +35,7 @@ public final class CullingScales extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of your upkeep, destroy target nonland permanent with the lowest converted mana cost.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DestroyTargetEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetPermanent(filterNonlandPermanentWithLowestCmc));
         this.addAbility(ability);
     }

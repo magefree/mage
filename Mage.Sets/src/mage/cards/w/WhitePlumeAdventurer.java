@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CompletedDungeonCondition;
 import mage.abilities.effects.OneShotEffect;
@@ -44,7 +44,7 @@ public final class WhitePlumeAdventurer extends CardImpl {
 
         // At the beginning of each opponent's upkeep, untap a creature you control. If you've completed a dungeon, untap all creatures you control instead.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new WhitePlumeAdventurerEffect(), TargetController.OPPONENT, false
+                TargetController.OPPONENT, new WhitePlumeAdventurerEffect(), false
         ).addHint(CompletedDungeonCondition.getHint()), new CompletedDungeonWatcher());
     }
 

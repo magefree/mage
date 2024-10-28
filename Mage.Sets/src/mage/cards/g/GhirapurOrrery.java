@@ -3,7 +3,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -32,7 +32,7 @@ public final class GhirapurOrrery extends CardImpl {
 
         // At the beginning of each player's upkeep, if that player has no cards in hand, that player draws three cards.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(3), TargetController.ANY, false, true),
+                new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new DrawCardTargetEffect(3), false),
                 new GhirapurOrreryCondition(),
                 "At the beginning of each player's upkeep, if that player has no cards in hand, that player draws three cards."));
     }

@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
@@ -53,7 +53,7 @@ public final class TitaniaVoiceOfGaea extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(new MeldEffect(
                         "Argoth, Sanctum of Nature", "Titania, Gaea Incarnate"
-                ), TargetController.YOU, false), condition, "At the beginning of your upkeep, " +
+                )), condition, "At the beginning of your upkeep, " +
                 "if there are four or more land cards in your graveyard and you both own and control {this} " +
                 "and a land named Argoth, Sanctum of Nature, exile them, then meld them into Titania, Gaea Incarnate."
         ));

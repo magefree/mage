@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -36,7 +36,7 @@ public final class CommanderCody extends CardImpl {
 
         // Non-token Trooper creatures you control have "At the beginning of your upkeep, create a 1/1 white Trooper creature token."
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
-                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new TrooperToken()), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new TrooperToken())),
                 Duration.WhileOnBattlefield, filter, false)
                 .withForceQuotes()
         ));

@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -42,7 +41,7 @@ public class RogueSkycaptain extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, put a wage counter on Rogue Skycaptain. You may pay 2 for each wage counter on it. If you don't, remove all wage counters from Rogue Skycaptain and an opponent gains control of it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RogueSkycaptainEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RogueSkycaptainEffect()));
     }
 
     private RogueSkycaptain(final RogueSkycaptain card) {

@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SourceInGraveyardCondition;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -34,8 +34,8 @@ public final class Gigapede extends CardImpl {
 
         // At the beginning of your upkeep, if Gigapede is in your graveyard, you may discard a card. If you do, return Gigapede to your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect().setText("return {this} to your hand"), new DiscardCardCost()),
-                TargetController.YOU, false).withInterveningIf(SourceInGraveyardCondition.instance));
+                TargetController.YOU, new DoIfCostPaid(new ReturnSourceFromGraveyardToHandEffect().setText("return {this} to your hand"), new DiscardCardCost()),
+                false).withInterveningIf(SourceInGraveyardCondition.instance));
     }
 
     private Gigapede(final Gigapede card) {

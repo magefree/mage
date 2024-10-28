@@ -1,7 +1,7 @@
 package mage.cards.v;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
@@ -41,8 +41,7 @@ public final class ViconiaDrowApostate extends CardImpl {
         // At the beginning of your upkeep, if there are four or more creature cards in your graveyard, return a creature card at random from your graveyard to your hand.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new ReturnFromGraveyardAtRandomEffect(StaticFilters.FILTER_CARD_CREATURE, Zone.HAND),
-                        TargetController.YOU, false
+                        new ReturnFromGraveyardAtRandomEffect(StaticFilters.FILTER_CARD_CREATURE, Zone.HAND), false
                 ), condition, "At the beginning of your upkeep, if there are four or more creature cards " +
                 "in your graveyard, return a creature card at random from your graveyard to your hand."
         ).addHint(hint));

@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -11,8 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -43,8 +41,7 @@ public final class SphinxOfForesight extends CardImpl {
 
         // At the beginning of your upkeep, scry 1.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new ScryEffect(1, false),
-                TargetController.YOU, false
+                new ScryEffect(1, false)
         ));
     }
 

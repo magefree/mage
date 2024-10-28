@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DontUntapInControllersUntapStepSourceEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
@@ -43,7 +43,7 @@ public final class SoldeviGolem extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
 
         // At the beginning of your upkeep, you may untap target tapped creature an opponent controls. If you do, untap Soldevi Golem.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new UntapTargetEffect().setText("untap target tapped creature an opponent controls"), TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new UntapTargetEffect().setText("untap target tapped creature an opponent controls"), true);
         ability.addEffect(new UntapSourceEffect().setText("If you do, untap {this}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

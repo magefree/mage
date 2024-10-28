@@ -3,7 +3,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -27,7 +27,7 @@ public final class TheFallen extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, The Fallen deals 1 damage to each opponent it has dealt damage to this game.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TheFallenEffect(), TargetController.YOU, false), new TheFallenWatcher());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TheFallenEffect()), new TheFallenWatcher());
     }
 
     private TheFallen(final TheFallen card) {

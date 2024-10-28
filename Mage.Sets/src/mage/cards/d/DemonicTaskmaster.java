@@ -4,14 +4,13 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
 
@@ -37,7 +36,7 @@ public final class DemonicTaskmaster extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, sacrifice a creature other than Demonic Taskmaster.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, ""), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(filter, 1, ""));
         this.addAbility(ability);
     }
 

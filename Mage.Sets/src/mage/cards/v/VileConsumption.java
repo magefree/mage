@@ -1,7 +1,7 @@
 package mage.cards.v;
 
 import java.util.UUID;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.Effect;
@@ -11,8 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
 
 /**
@@ -27,7 +25,7 @@ public final class VileConsumption extends CardImpl {
         // All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay 1 life."
         Effect effect = new SacrificeSourceUnlessPaysEffect(new PayLifeCost(1));
         effect.setText("sacrifice this creature unless you pay 1 life");
-        Effect effect2 = new GainAbilityAllEffect(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false),
+        Effect effect2 = new GainAbilityAllEffect(new BeginningOfUpkeepTriggeredAbility(effect),
             Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_CREATURES);
         this.addAbility(new SimpleStaticAbility(effect2));
     }

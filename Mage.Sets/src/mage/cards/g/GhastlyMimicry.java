@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromAnywhereSourceAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -43,7 +42,7 @@ public final class GhastlyMimicry extends CardImpl {
 
         // At the beginning of your upkeep, create a token that's a copy of enchanted creature, except it's a Spirit in addition to its other types.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new GhastlyMimicryEffect(), TargetController.YOU, false
+                new GhastlyMimicryEffect()
         ));
 
         // If Ghastly Mimicry would be put into a graveyard from anywhere, exile it instead.

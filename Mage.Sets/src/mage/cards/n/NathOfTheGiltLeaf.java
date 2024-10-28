@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiscardsACardOpponentTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.game.permanent.token.ElfWarriorToken;
 import mage.target.common.TargetOpponent;
 
@@ -35,7 +34,7 @@ public final class NathOfTheGiltLeaf extends CardImpl {
         // At the beginning of your upkeep, you may have target opponent discard a card at random.
         Effect effect = new DiscardTargetEffect(1, true);
         effect.setText("you may have target opponent discard a card at random");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, true);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
 

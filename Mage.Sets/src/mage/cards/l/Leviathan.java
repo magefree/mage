@@ -4,7 +4,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -19,12 +19,10 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetControlledPermanent;
 
 
 //import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -58,11 +56,9 @@ public final class Leviathan extends CardImpl {
 
         // At the beginning of your upkeep, you may sacrifice two Islands. If you do, untap Leviathan.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new DoIfCostPaid(new UntapSourceEffect(), 
-                new SacrificeTargetCost(2, filter)),
-                TargetController.YOU,
-                false));
+                new DoIfCostPaid(new UntapSourceEffect(),
+                new SacrificeTargetCost(2, filter))
+        ));
 
         // Leviathan can't attack unless you sacrifice two Islands. (This cost is paid as attackers are declared.)
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeviathanCostToAttackBlockEffect()));

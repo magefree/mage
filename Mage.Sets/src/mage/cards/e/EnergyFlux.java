@@ -2,7 +2,7 @@
 package mage.cards.e;
 
 import java.util.UUID;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
@@ -30,9 +30,8 @@ public final class EnergyFlux extends CardImpl {
                 Zone.BATTLEFIELD, 
                 new GainAbilityAllEffect(
                         new BeginningOfUpkeepTriggeredAbility(
-                                new SacrificeSourceUnlessPaysEffect(new GenericManaCost(2)), 
-                                TargetController.YOU, 
-                                false), 
+                                TargetController.YOU, new SacrificeSourceUnlessPaysEffect(new GenericManaCost(2)),
+                                false),
                         Duration.WhileOnBattlefield, 
                         new FilterArtifactPermanent(), 
                         "All artifacts have \"At the beginning of your upkeep, sacrifice this artifact unless you pay {2}.\"")));

@@ -4,7 +4,7 @@ package mage.cards.h;
 import java.util.UUID;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -36,7 +35,7 @@ public final class HanweirMilitiaCaptain extends CardImpl {
         // At the beginning of your upkeep, if you control four or more creatures, transform Hanweir Militia Captain.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect()),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.MORE_THAN, 3),
                 "At the beginning of your upkeep, if you control four or more creatures, transform {this}"));
     }

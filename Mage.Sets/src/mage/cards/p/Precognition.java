@@ -1,12 +1,11 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -23,7 +22,7 @@ public final class Precognition extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
 
         // At the beginning of your upkeep, you may look at the top card of target opponent's library. If you do, you may put that card on the bottom of that player's library.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PrecognitionEffect(), TargetController.YOU, true, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new PrecognitionEffect(), true);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

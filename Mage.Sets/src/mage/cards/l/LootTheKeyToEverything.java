@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -40,8 +40,7 @@ public final class LootTheKeyToEverything extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new ExileTopXMayPlayUntilEffect(LootTheKeyToEverythingValue.instance, Duration.EndOfTurn)
                         .setText("exile the top X cards of your library, where X is the number of card types " +
-                                "among other nonland permanents you control. You may play those cards this turn"),
-                TargetController.YOU, false
+                                "among other nonland permanents you control. You may play those cards this turn")
         ));
     }
 

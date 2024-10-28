@@ -2,7 +2,7 @@ package mage.cards.v;
 
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.CostAdjuster;
@@ -36,7 +36,7 @@ public final class VoodooDoll extends CardImpl {
 
         // At the beginning of your upkeep, put a pin counter on Voodoo Doll.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.PIN.createInstance()), TargetController.YOU, false
+                new AddCountersSourceEffect(CounterType.PIN.createInstance())
         ));
 
         // At the beginning of your end step, if Voodoo Doll is untapped, destroy Voodoo Doll and it deals damage to you equal to the number of pin counters on it.

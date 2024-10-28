@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.effects.RestrictionEffect;
@@ -35,7 +35,7 @@ public final class PatchworkBeastie extends CardImpl {
 
         // At the beginning of your upkeep, you may mill a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new MillCardsControllerEffect(1), TargetController.YOU, true
+                new MillCardsControllerEffect(1), true
         ));
     }
 

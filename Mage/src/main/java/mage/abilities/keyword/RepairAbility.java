@@ -2,7 +2,7 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
@@ -31,7 +31,7 @@ public class RepairAbility extends DiesSourceTriggeredAbility {
         super(new AddCountersSourceEffect(
                 CounterType.REPAIR.createInstance(), StaticValue.get(count), false, true));
         addSubAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                new RemoveCounterSourceEffect(CounterType.REPAIR.createInstance()), TargetController.YOU, false)
+                TargetController.YOU, new RemoveCounterSourceEffect(CounterType.REPAIR.createInstance()), false)
                 .setRuleVisible(false));
         addSubAbility(new RepairCastFromGraveyardTriggeredAbility());
         this.count = count;

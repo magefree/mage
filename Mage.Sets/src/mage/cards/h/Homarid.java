@@ -4,7 +4,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.StateTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -19,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -41,8 +40,8 @@ public final class Homarid extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIDE.createInstance()),
             "with a tide counter on it."));
         // At the beginning of your upkeep, put a tide counter on Homarid.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIDE.createInstance()),
-            TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIDE.createInstance())
+        ));
         // As long as there is exactly one tide counter on Homarid, it gets -1/-1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostSourceEffect(-1, -1, Duration.WhileOnBattlefield), new SourceHasCounterCondition(CounterType.TIDE, 1, 1),

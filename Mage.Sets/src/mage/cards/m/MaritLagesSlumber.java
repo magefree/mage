@@ -1,6 +1,6 @@
 package mage.cards.m;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -10,13 +10,11 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.keyword.ScryEffect;
 import mage.abilities.hint.ConditionHint;
-import mage.abilities.hint.Hint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.MaritLageToken;
@@ -55,7 +53,7 @@ public final class MaritLagesSlumber extends CardImpl {
                 new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
                         new CreateTokenEffect(new MaritLageToken()),
                         new SacrificeSourceCost(), "", false
-                ), TargetController.YOU, false), condition, "At the beginning of your upkeep, " +
+                )), condition, "At the beginning of your upkeep, " +
                 "if you control ten or more snow permanents, sacrifice {this}. If you do, create Marit Lage, " +
                 "a legendary 20/20 black Avatar creature token with flying and indestructible."
         ).addHint(hint));

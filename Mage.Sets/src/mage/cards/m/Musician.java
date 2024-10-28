@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DynamicValueGenericManaCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -96,12 +96,11 @@ class MusicianEffect extends OneShotEffect {
 class MusicianTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
     MusicianTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoUnlessControllerPaysEffect(
-                        new DestroySourceEffect(),
-                        new DynamicValueGenericManaCost(new CountersSourceCount(CounterType.MUSIC),
-                                "{1} for each music counter on {this}")
-                ).setText("destroy this creature unless you pay {1} for each music counter on it"),
-                TargetController.YOU, false, false);
+        super(new DoUnlessControllerPaysEffect(
+                new DestroySourceEffect(),
+                new DynamicValueGenericManaCost(new CountersSourceCount(CounterType.MUSIC),
+                        "{1} for each music counter on {this}")
+        ).setText("destroy this creature unless you pay {1} for each music counter on it"));
     }
 
     private MusicianTriggeredAbility(final MusicianTriggeredAbility ability) {

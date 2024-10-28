@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.abilities.Ability;
 import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
@@ -54,8 +54,8 @@ public final class BanditsTalent extends CardImpl {
         this.addAbility(new ClassLevelAbility(2, "{B}"));
         // At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, they lose 2 life.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(new BeginningOfUpkeepTriggeredAbility(
-                new ConditionalOneShotEffect(new LoseLifeTargetEffect(2), new CardsInHandCondition(ComparisonType.OR_LESS, 1, TargetController.ACTIVE)),
-                TargetController.OPPONENT, false), 2)));
+                TargetController.OPPONENT, new ConditionalOneShotEffect(new LoseLifeTargetEffect(2), new CardsInHandCondition(ComparisonType.OR_LESS, 1, TargetController.ACTIVE)),
+                false), 2)));
 
         // {3}{B}: Level 3
         this.addAbility(new ClassLevelAbility(3, "{3}{B}"));

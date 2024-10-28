@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -37,8 +37,8 @@ public final class Paroxysm extends CardImpl {
 
         // At the beginning of the upkeep of enchanted creature's controller, that player reveals the top card of their library.
         // If that card is a land card, destroy that creature. Otherwise, it gets +3/+3 until end of turn.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ParoxysmEffect(),
-                TargetController.CONTROLLER_ATTACHED_TO, false, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new ParoxysmEffect(),
+                false));
     }
 
     private Paroxysm(final Paroxysm card) {

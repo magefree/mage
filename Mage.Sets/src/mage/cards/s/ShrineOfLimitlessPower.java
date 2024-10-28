@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -17,7 +17,6 @@ import mage.abilities.meta.OrTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
@@ -41,7 +40,7 @@ public final class ShrineOfLimitlessPower extends CardImpl {
 
         //At the beginning of your upkeep or whenever you cast a black spell, put a charge counter on Shrine of Limitless Power.
         this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()),
-                new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(null),
                 new SpellCastControllerTriggeredAbility(null, filter, false)));
 
         //{4}, {T}, Sacrifice Shrine of Limitless Power: Target player discards a card for each charge counter on Shrine of Limitless Power.

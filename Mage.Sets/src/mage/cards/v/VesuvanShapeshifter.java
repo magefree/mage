@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.AsTurnedFaceUpEffect;
@@ -76,7 +76,7 @@ class VesuvanShapeShifterFaceUpCopyApplier extends CopyApplier {
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID copyToObjectId) {
         blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
-                new VesuvanShapeshifterFaceDownEffect(), TargetController.YOU, true
+                new VesuvanShapeshifterFaceDownEffect(), true
         ));
         return true;
     }

@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -40,7 +39,7 @@ public final class SigardasSplendor extends CardImpl {
 
         // At the beginning of your upkeep, draw a card if your life total is greater than or equal to the last noted life total for Sigarda's Splendor. Then note your life total.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SigardasSplendorDrawEffect(), TargetController.YOU, false
+                new SigardasSplendorDrawEffect()
         ).addHint(SigardasSplendorHint.instance));
 
         // Whenever you cast a white spell, you gain 1 life.

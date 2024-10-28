@@ -1,6 +1,6 @@
 package mage.cards.d;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.MoreCardsInHandThanOpponentsCondition;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -32,8 +32,8 @@ public final class DeathOfAThousandStings extends CardImpl {
 
         // At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return Death of a Thousand Stings from your graveyard to your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToHandEffect(),
-                TargetController.YOU, true).withInterveningIf(MoreCardsInHandThanOpponentsCondition.instance));
+                TargetController.YOU, new ReturnSourceFromGraveyardToHandEffect(),
+                true).withInterveningIf(MoreCardsInHandThanOpponentsCondition.instance));
     }
 
     private DeathOfAThousandStings(final DeathOfAThousandStings card) {

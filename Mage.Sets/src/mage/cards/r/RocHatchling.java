@@ -4,7 +4,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -19,7 +19,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 
@@ -38,7 +37,7 @@ public final class RocHatchling extends CardImpl {
         // Roc Hatchling enters the battlefield with four shell counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.SHELL.createInstance(4)), "with four shell counters on it"));
         // At the beginning of your upkeep, remove a shell counter from Roc Hatchling.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.SHELL.createInstance()), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.SHELL.createInstance())));
         // As long as Roc Hatchling has no shell counters on it, it gets +3/+2 and has flying.
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
             new BoostSourceEffect(3, 2, Duration.WhileOnBattlefield),

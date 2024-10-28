@@ -1,11 +1,10 @@
 package mage.cards.l;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -23,8 +22,7 @@ public final class LeylineSurge extends CardImpl {
 
         // At the beginning of your upkeep, you may put a permanent card from your hand onto the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_A_PERMANENT),
-                TargetController.YOU, false
+                new PutCardFromHandOntoBattlefieldEffect(StaticFilters.FILTER_CARD_A_PERMANENT)
         ));
     }
 

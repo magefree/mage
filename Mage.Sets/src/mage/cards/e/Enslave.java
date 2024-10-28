@@ -1,7 +1,7 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -38,7 +38,7 @@ public final class Enslave extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
 
         // At the beginning of your upkeep, enchanted creature deals 1 damage to its owner.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new EnslaveEffect(), TargetController.YOU, false, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EnslaveEffect()));
     }
 
     private Enslave(final Enslave card) {

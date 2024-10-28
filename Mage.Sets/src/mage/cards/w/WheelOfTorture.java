@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -22,7 +22,7 @@ public final class WheelOfTorture extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of each opponent's upkeep, Wheel of Torture deals X damage to that player, where X is 3 minus the number of cards in their hand.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new WheelOfTortureEffect(), TargetController.OPPONENT, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.OPPONENT, new WheelOfTortureEffect(), false);
         this.addAbility(ability);
     }
 

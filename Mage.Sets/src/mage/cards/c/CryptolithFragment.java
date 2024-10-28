@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.condition.common.LifeCompareCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -38,7 +38,7 @@ public final class CryptolithFragment extends CardImpl {
         // At the beginning of your upkeep, if each player has 10 or less life, transform Cryptolith Fragment.
         this.addAbility(new TransformAbility());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false),
+                new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect()),
                 new LifeCompareCondition(TargetController.EACH_PLAYER, ComparisonType.OR_LESS, 10),
                 "At the beginning of your upkeep, if each player has 10 or less life, transform {this}."));
     }

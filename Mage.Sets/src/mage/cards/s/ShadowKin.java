@@ -3,7 +3,7 @@ package mage.cards.s;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -36,7 +36,7 @@ public final class ShadowKin extends CardImpl {
 
         // At the beginning of your upkeep, each player mills three cards. You may exile a creature card from among the cards milled this way. If you do, Shadow Kin becomes a copy of that card, except it has this ability.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ShadowKinEffect(), TargetController.YOU, false
+                new ShadowKinEffect()
         ));
     }
 
@@ -112,7 +112,7 @@ class ShadowKinApplier extends CopyApplier {
     @Override
     public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
         blueprint.getAbilities().add(new BeginningOfUpkeepTriggeredAbility(
-                new ShadowKinEffect(), TargetController.YOU, false
+                new ShadowKinEffect()
         ));
         return true;
     }

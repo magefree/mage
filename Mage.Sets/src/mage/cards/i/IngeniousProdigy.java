@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -15,7 +15,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -47,7 +46,7 @@ public final class IngeniousProdigy extends CardImpl {
                         new DoIfCostPaid(
                                 new DrawCardSourceControllerEffect(1),
                                 new RemoveCountersSourceCost(CounterType.P1P1.createInstance())
-                        ), TargetController.YOU, false
+                        ), false
                 ), condition, "At the beginning of your upkeep, if {this} has one or more " +
                 "+1/+1 counters on it, you may remove a +1/+1 counter from it. If you do, draw a card."
         ));

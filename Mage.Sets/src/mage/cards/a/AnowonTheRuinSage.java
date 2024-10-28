@@ -3,14 +3,13 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 
@@ -35,7 +34,7 @@ public final class AnowonTheRuinSage extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeAllEffect(filter), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeAllEffect(filter)));
     }
 
     private AnowonTheRuinSage(final AnowonTheRuinSage card) {

@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -16,7 +16,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.ManaEvent;
 import mage.game.events.TappedForManaEvent;
 import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
 
@@ -30,7 +29,7 @@ public final class Contamination extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice Contamination unless you sacrifice a creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)), TargetController.YOU, false)
+                new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)))
         );
 
         // If a land is tapped for mana, it produces {B} instead of any other type and amount.

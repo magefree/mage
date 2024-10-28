@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -35,7 +35,7 @@ public final class HedronAlignment extends CardImpl {
         // Hexproof
         this.addAbility(HexproofAbility.getInstance());
         // At the beginning of your upkeep, you may reveal your hand. If you do, you win the game if you own a card named Hedron Alignment in exile, in your hand, in your graveyard, and on the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HedronAlignmentEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new HedronAlignmentEffect(), true));
         // {1}{U}: Scry 1.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1, false), new ManaCostsImpl<>("{1}{U}")));
     }

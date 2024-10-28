@@ -5,7 +5,7 @@ import mage.MageIdentifier;
 import mage.abilities.Ability;
 import mage.abilities.SpecialAction;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.mana.ManaCost;
@@ -430,8 +430,8 @@ class GainHasteEffect extends ContinuousEffectImpl {
 class SuspendBeginningOfUpkeepInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
 
     SuspendBeginningOfUpkeepInterveningIfTriggeredAbility() {
-        super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()),
-                        TargetController.YOU, false),
+        super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, TargetController.YOU, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()),
+                        false),
                 SuspendedCondition.instance,
                 "At the beginning of your upkeep, if {this} is suspended, remove a time counter from it.");
         this.setRuleVisible(false);

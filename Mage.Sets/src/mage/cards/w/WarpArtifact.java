@@ -1,6 +1,6 @@
 package mage.cards.w;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -28,9 +28,9 @@ public final class WarpArtifact extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of the upkeep of enchanted artifact's controller, Warp Artifact deals 1 damage to that player.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new DamageTargetEffect(1).withTargetDescription("that player"),
-                TargetController.CONTROLLER_ATTACHED_TO, false, true
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                TargetController.CONTROLLER_ATTACHED_TO, new DamageTargetEffect(1).withTargetDescription("that player"),
+                false
         ).setTriggerPhrase("At the beginning of the upkeep of enchanted artifact's controller, "));
     }
 

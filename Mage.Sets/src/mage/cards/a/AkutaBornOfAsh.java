@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.MoreCardsInHandThanOpponentsCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -38,8 +38,8 @@ public final class AkutaBornOfAsh extends CardImpl {
 
         // At the beginning of your upkeep, if you have more cards in hand than each opponent, you may sacrifice a Swamp. If you do, return Akuta, Born of Ash from your graveyard to the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new SacrificeTargetCost(filterSwamp)),
-                TargetController.YOU, false).withInterveningIf(MoreCardsInHandThanOpponentsCondition.instance));
+                TargetController.YOU, new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new SacrificeTargetCost(filterSwamp)),
+                false).withInterveningIf(MoreCardsInHandThanOpponentsCondition.instance));
     }
 
     private AkutaBornOfAsh(final AkutaBornOfAsh card) {

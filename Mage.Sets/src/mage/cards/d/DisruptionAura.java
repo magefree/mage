@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
@@ -38,7 +38,7 @@ public final class DisruptionAura extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted artifact has "At the beginning of your upkeep, sacrifice this artifact unless you pay its mana cost."
-        ability = new BeginningOfUpkeepTriggeredAbility(new DisruptionAuraEffect(), TargetController.YOU, false);
+        ability = new BeginningOfUpkeepTriggeredAbility(new DisruptionAuraEffect());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted artifact has \"At the beginning of your upkeep, sacrifice this artifact unless you pay its mana cost.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

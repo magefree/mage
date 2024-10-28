@@ -5,7 +5,7 @@ import java.util.Locale;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -17,7 +17,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -47,7 +46,7 @@ public final class DemonicHordes extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, unless you pay {B}{B}{B}, tap Demonic Hordes and sacrifice a land of an opponent's choice.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DemonicHordesEffect(new ManaCostsImpl<>("{B}{B}{B}")), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DemonicHordesEffect(new ManaCostsImpl<>("{B}{B}{B}"))));
     }
 
     private DemonicHordes(final DemonicHordes card) {
