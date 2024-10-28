@@ -32,8 +32,8 @@ public final class ShadowOfTheSecondSun extends CardImpl {
 
         // At the beginning of enchanted player's postcombat main phase, there is an additional beginning phase after this phase.
         this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(
-                new ShadowOfTheSecondSunTargetEffect(),
-                TargetController.ENCHANTED, false
+                TargetController.ENCHANTED, new ShadowOfTheSecondSunTargetEffect(),
+                false
         ));
     }
 

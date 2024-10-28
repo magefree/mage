@@ -32,7 +32,7 @@ public final class SphinxOfTheSecondSun extends CardImpl {
 
         // At the beginning of your postcombat main phase, you get an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)
         this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(
-                new SphinxOfTheSecondSunEffect(), TargetController.YOU, false
+                TargetController.YOU, new SphinxOfTheSecondSunEffect(), false
         ), new SphinxOfTheSecondSunWatcher());
     }
 

@@ -42,9 +42,8 @@ public final class MegatronTyrant extends CardImpl {
 
         // At the beginning of your postcombat main phase, you may convert Megatron. If you do, add {C} for each 1 life your opponents have lost this turn.
         TriggeredAbility trigger = new BeginningOfPostcombatMainTriggeredAbility(
-            new TransformSourceEffect().setText("convert {this}"),
-            TargetController.YOU,
-            true
+                TargetController.YOU, new TransformSourceEffect().setText("convert {this}"),
+                true
         );
         trigger.addEffect(
             new DynamicManaEffect(

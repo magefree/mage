@@ -39,7 +39,7 @@ public final class TymnaTheWeaver extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // At the beginning of your postcombat main phase, you may pay X life, where X is the number of opponents that were dealt combat damage this turn. If you do, draw X cards.
-        this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(new TymnaTheWeaverEffect(), TargetController.YOU, true), new TymnaTheWeaverWatcher());
+        this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(new TymnaTheWeaverEffect(), true), new TymnaTheWeaverWatcher());
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());

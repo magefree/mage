@@ -46,7 +46,7 @@ public final class BrazenCannonade extends CardImpl {
                 new BeginningOfPostcombatMainTriggeredAbility(
                         new ExileTopXMayPlayUntilEffect(
                                 1, Duration.UntilEndCombatOfYourNextTurn
-                        ), TargetController.YOU, false
+                        ), false
                 ), RaidCondition.instance, "At the beginning of each of your postcombat main phases, " +
                 "if you attacked this turn, exile the top card of your library. " +
                 "Until end of combat on your next turn, you may play that card."

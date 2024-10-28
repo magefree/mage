@@ -35,7 +35,7 @@ public final class FlorianVoldarenScion extends CardImpl {
 
         // At the beginning of your postcombat main phase, look at the top X cards of your library, where X is the total amount of life your opponents lost this turn.
         // Exile one of those cards and put the rest on the bottom of your library in a random order. You may play the exiled card this turn.
-        this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(new FlorianVoldarenScionEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(new FlorianVoldarenScionEffect(), false));
     }
 
     private FlorianVoldarenScion(final FlorianVoldarenScion card) {

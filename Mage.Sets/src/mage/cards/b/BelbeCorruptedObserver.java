@@ -38,7 +38,7 @@ public final class BelbeCorruptedObserver extends CardImpl {
 
         // At the beginning of each player's postcombat main phase, that player adds {C}{C} for each of your opponents who lost life this turn.
         this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(
-                new BelbeCorruptedObserverEffect(), TargetController.ANY, false
+                TargetController.ANY, new BelbeCorruptedObserverEffect(), false
         ).addHint(hint), new BelbeCorruptedObserverWatcher());
     }
 

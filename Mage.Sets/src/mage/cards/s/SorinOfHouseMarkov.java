@@ -49,7 +49,6 @@ public final class SorinOfHouseMarkov extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfPostcombatMainTriggeredAbility(
                         new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED, Pronoun.SHE),
-                        TargetController.YOU,
                         false
                 ), condition, "At the beginning of your postcombat main phase, "
                 + "if you gained 3 or more life this turn, exile {this}, "

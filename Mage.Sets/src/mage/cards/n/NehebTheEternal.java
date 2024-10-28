@@ -40,7 +40,6 @@ public final class NehebTheEternal extends CardImpl {
                                 Mana.RedMana(1),
                                 OpponentsLostLifeCount.instance,
                                 "add {R} for each 1 life your opponents have lost this turn"),
-                        TargetController.YOU,
                         false));
     }
 

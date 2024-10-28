@@ -52,7 +52,7 @@ public final class KirriTalentedSprout extends CardImpl {
 
         // At the beginning of your postcombat main phase, return target Plant, Treefolk, or land card from your graveyard to your hand.
         Ability ability = new BeginningOfPostcombatMainTriggeredAbility(
-                new ReturnFromGraveyardToHandTargetEffect(), TargetController.YOU, false
+                TargetController.YOU, new ReturnFromGraveyardToHandTargetEffect(), false
         );
         ability.addTarget(new TargetCardInYourGraveyard(filter2));
         this.addAbility(ability);

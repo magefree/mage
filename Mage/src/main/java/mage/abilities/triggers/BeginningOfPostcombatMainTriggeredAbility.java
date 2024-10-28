@@ -11,8 +11,15 @@ import mage.game.events.GameEvent;
  */
 public class BeginningOfPostcombatMainTriggeredAbility extends AtStepTriggeredAbility {
 
+    /**
+     * At the beginning of your postcombat main phase
+     */
+    public BeginningOfPostcombatMainTriggeredAbility(Effect effect, boolean optional) {
+        this(TargetController.YOU, effect, optional);
+    }
+
     // Note: new card implementations probably use BeginningOfSecondMainTriggeredAbility instead
-    public BeginningOfPostcombatMainTriggeredAbility(Effect effect, TargetController targetController, boolean optional) {
+    public BeginningOfPostcombatMainTriggeredAbility(TargetController targetController, Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, targetController, effect, optional);
     }
 
