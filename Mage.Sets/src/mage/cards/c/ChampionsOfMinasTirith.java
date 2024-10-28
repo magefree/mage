@@ -45,8 +45,7 @@ public final class ChampionsOfMinasTirith extends CardImpl {
                         Zone.BATTLEFIELD,
                         new ChampionsOfMinasTirithEffect(),
                         TargetController.OPPONENT,
-                        false,
-                        true
+                        false
                 ),
                 MonarchIsSourceControllerCondition.instance,
                 "At the beginning of combat on each opponent's turn, if you're the monarch, that opponent may pay {X}, "

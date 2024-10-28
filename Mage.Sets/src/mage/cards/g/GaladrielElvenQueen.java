@@ -39,7 +39,7 @@ public final class GaladrielElvenQueen extends CardImpl {
                 new BeginningOfCombatTriggeredAbility(
                         Zone.BATTLEFIELD,
                         new GaladrielElvenQueenEffect(),
-                        TargetController.YOU, false, false
+                        TargetController.YOU, false
                 ),
                 GaladrielElvenQueenCondition.instance,
                 "At the beginning of combat on your turn, if another Elf entered the battlefield under "

@@ -47,7 +47,7 @@ public final class XenagosGodOfRevels extends CardImpl {
                 new GainAbilityTargetEffect(
                         HasteAbility.getInstance(), Duration.EndOfTurn
                 ).setText("another target creature you control gains haste"),
-                TargetController.YOU, false, false
+                TargetController.YOU, false
         );
         ability.addEffect(new XenagosGodOfRevelsEffect());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));

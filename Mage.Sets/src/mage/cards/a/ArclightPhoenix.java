@@ -43,7 +43,7 @@ public final class ArclightPhoenix extends CardImpl {
                 new BeginningOfCombatTriggeredAbility(
                         Zone.GRAVEYARD,
                         new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                        TargetController.YOU, false, false
+                        TargetController.YOU, false
                 ), ArclightPhoenixCondition.instance,
                 "At the beginning of combat on your turn, "
                         + "if you've cast three or more instant "

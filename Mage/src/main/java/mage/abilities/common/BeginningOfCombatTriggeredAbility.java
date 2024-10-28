@@ -1,33 +1,24 @@
 package mage.abilities.common;
 
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.triggers.AtStepTriggeredAbility;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.targetpointer.FixedTarget;
 
-public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
+public class BeginningOfCombatTriggeredAbility extends AtStepTriggeredAbility {
 
-    private final TargetController targetController;
-    private final boolean setTargetPointer;
-
-    public BeginningOfCombatTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
-        this(Zone.BATTLEFIELD, effect, targetController, isOptional, false);
+    public BeginningOfCombatTriggeredAbility(Effect effect, TargetController targetController, boolean optional) {
+        this(Zone.BATTLEFIELD, effect, targetController, optional);
     }
 
-    public BeginningOfCombatTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional, boolean setTargetPointer) {
-        super(zone, effect, isOptional);
-        this.targetController = targetController;
-        this.setTargetPointer = setTargetPointer;
-        setTriggerPhrase(generateTriggerPhrase());
+    public BeginningOfCombatTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean optional) {
+        super(zone, targetController, effect, optional);
     }
 
     protected BeginningOfCombatTriggeredAbility(final BeginningOfCombatTriggeredAbility ability) {
         super(ability);
-        this.targetController = ability.targetController;
-        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -41,41 +32,7 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        switch (targetController) {
-            case YOU:
-                boolean yours = event.getPlayerId().equals(this.controllerId);
-                if (yours && setTargetPointer) {
-                    if (getTargets().isEmpty()) {
-                        this.getEffects().forEach(effect -> {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        });
-                    }
-                }
-                return yours;
-            case OPPONENT:
-                if (game.getPlayer(this.controllerId).hasOpponent(event.getPlayerId(), game)) {
-                    if (setTargetPointer) {
-                        this.getEffects().forEach(effect -> {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                        });
-                    }
-                    return true;
-                }
-                break;
-            case EACH_PLAYER:
-            case ANY:
-                if (setTargetPointer) {
-                    this.getEffects().forEach(effect -> {
-                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                    });
-                }
-                return true;
-        }
-        return false;
-    }
-
-    private String generateTriggerPhrase() {
+    protected String generateTriggerPhrase() {
         switch (targetController) {
             case YOU:
                 return "At the beginning of combat on your turn, ";
@@ -85,8 +42,9 @@ public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl {
                 return "At the beginning of combat on each player's turn, ";
             case ANY:
                 return "At the beginning of each combat, ";
+            default:
+                throw new UnsupportedOperationException("Unsupported TargetController in BeginningOfCombatTriggeredAbility: " + targetController);
         }
-        return "";
     }
 
 }
