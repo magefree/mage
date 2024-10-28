@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersPlayersEffect;
@@ -49,7 +49,7 @@ public final class EzuriClawOfProgress extends CardImpl {
         ), filter));
 
         // At the beginning of combat on your turn, put X +1/+1 counters on another target creature you control, where X is the number of experience counters you have.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new EzuriClawOfProgressEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new EzuriClawOfProgressEffect(), false);
         ability.addTarget(new TargetControlledCreaturePermanent(filter2));
         this.addAbility(ability);
     }

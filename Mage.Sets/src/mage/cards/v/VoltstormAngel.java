@@ -2,7 +2,7 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.PayEnergyCost;
@@ -54,7 +54,7 @@ public final class VoltstormAngel extends CardImpl {
         reflexive.addMode(new Mode(new BoostControlledEffect(1, 1, Duration.EndOfTurn, true)));
         this.addAbility(new BeginningOfCombatTriggeredAbility(
                 new DoWhenCostPaid(reflexive, new PayEnergyCost(2), "Pay {E}{E}?"),
-                TargetController.YOU, false
+                false
         ));
     }
 

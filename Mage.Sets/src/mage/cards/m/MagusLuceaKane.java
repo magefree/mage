@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CopyStackObjectEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -41,7 +41,7 @@ public final class MagusLuceaKane extends CardImpl {
         // Spiritual Leader -- At the beginning of combat on your turn, put a +1/+1 counter on target creature.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, false
+                false
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability.withFlavorWord("Spiritual Leader"));

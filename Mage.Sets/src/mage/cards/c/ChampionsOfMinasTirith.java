@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
 import mage.abilities.costs.Cost;
@@ -43,10 +43,8 @@ public final class ChampionsOfMinasTirith extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         Zone.BATTLEFIELD,
-                        new ChampionsOfMinasTirithEffect(),
-                        TargetController.OPPONENT,
-                        false,
-                        true
+                        TargetController.OPPONENT, new ChampionsOfMinasTirithEffect(),
+                        false
                 ),
                 MonarchIsSourceControllerCondition.instance,
                 "At the beginning of combat on each opponent's turn, if you're the monarch, that opponent may pay {X}, "

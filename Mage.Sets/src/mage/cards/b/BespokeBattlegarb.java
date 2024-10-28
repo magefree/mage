@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CelebrationCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -37,7 +37,6 @@ public final class BespokeBattlegarb extends CardImpl {
                                 Outcome.BoostCreature,
                                 "attach {this} to up to one target creature you control"
                         ),
-                        TargetController.YOU,
                         false
                 ), CelebrationCondition.instance, "At the beginning of combat on your turn, if two "
                 + "or more nonland permanents entered the battlefield under your control this turn, "

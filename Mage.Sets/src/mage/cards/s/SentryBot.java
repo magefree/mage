@@ -3,7 +3,7 @@ package mage.cards.s;
 import java.util.UUID;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayEnergyCost;
@@ -57,7 +57,6 @@ public final class SentryBot extends CardImpl {
                                 CounterType.P1P1.createInstance(),
                                 StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED),
                         new PayEnergyCost(3)),
-                TargetController.YOU,
                 false));
     }
 

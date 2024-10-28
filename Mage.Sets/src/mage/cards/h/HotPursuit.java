@@ -1,7 +1,7 @@
 package mage.cards.h;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -56,7 +56,7 @@ public final class HotPursuit extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new GainControlAllUntapGainHasteEffect(filter),
-                        TargetController.YOU, false
+                        false
                 ), HotPursuitCondition.instance, "At the beginning of combat on your turn, " +
                 "if two or more players have lost the game, gain control of all goaded and/or " +
                 "suspected creatures until end of turn. Untap them. They gain haste until end of turn."

@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CelebrationCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -32,7 +32,7 @@ public final class PestsOfHonor extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        TargetController.YOU, false
+                        false
                 ), CelebrationCondition.instance, "At the beginning of combat on your turn, if two or more " +
                 "nonland permanents entered the battlefield under your control this turn, put a +1/+1 counter on {this}."
         ).addHint(CelebrationCondition.getHint()).setAbilityWord(AbilityWord.CELEBRATION), new PermanentsEnteredBattlefieldWatcher());

@@ -1,7 +1,7 @@
 package mage.cards.n;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -32,7 +32,7 @@ public final class NestingDovehawk extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of combat on your turn, populate.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new PopulateEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new PopulateEffect(), false));
 
         // Whenever a creature token you control enters, put a +1/+1 counter on Nesting Dovehawk.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(

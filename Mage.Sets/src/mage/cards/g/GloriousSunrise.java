@@ -3,7 +3,7 @@ package mage.cards.g;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -51,7 +51,7 @@ public final class GloriousSunrise extends CardImpl {
         // • Creatures you control get +1/+1 and gain trample until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new BoostControlledEffect(
                 1, 1, Duration.EndOfTurn
-        ).setText("creatures you control get +1/+1"), TargetController.YOU, false);
+        ).setText("creatures you control get +1/+1"), false);
         ability.addEffect(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_PERMANENT_CREATURE

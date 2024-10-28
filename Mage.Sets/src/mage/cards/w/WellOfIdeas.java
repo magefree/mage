@@ -2,7 +2,7 @@
 package mage.cards.w;
 
 import java.util.UUID;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -28,12 +28,12 @@ public final class WellOfIdeas extends CardImpl {
         // At the beginning of each other player's draw step, that player draws an additional card.
         Effect effect  = new DrawCardTargetEffect(1);
         effect.setText("that player draws an additional card");
-        this.addAbility(new BeginningOfDrawTriggeredAbility(effect, TargetController.NOT_YOU, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(TargetController.NOT_YOU, effect, false));
 
         // At the beginning of your draw step, draw two additional cards.
         effect  = new DrawCardTargetEffect(2);
         effect.setText("draw two additional cards");
-        this.addAbility(new BeginningOfDrawTriggeredAbility(effect , TargetController.YOU, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(effect , false));
     }
 
     private WellOfIdeas(final WellOfIdeas card) {

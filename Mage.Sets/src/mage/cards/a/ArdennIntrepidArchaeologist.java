@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class ArdennIntrepidArchaeologist extends CardImpl {
 
         // At the beginning of combat on your turn, you may attach any number of Auras and Equipment you control to target permanent or player.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new ArdennIntrepidArchaeologistEffect(), TargetController.YOU, true
+                new ArdennIntrepidArchaeologistEffect(), true
         );
         ability.addTarget(new TargetPermanentOrPlayer());
         this.addAbility(ability);

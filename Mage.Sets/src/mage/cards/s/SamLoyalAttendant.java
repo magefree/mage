@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.cost.CostModificationEffectImpl;
@@ -36,7 +36,7 @@ public final class SamLoyalAttendant extends CardImpl {
 
         // At the beginning of combat on your turn, create a Food token.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new CreateTokenEffect(new FoodToken()), TargetController.YOU, false
+                new CreateTokenEffect(new FoodToken()), false
         ));
 
         // Activated abilities of Foods you control cost {1} less to activate.

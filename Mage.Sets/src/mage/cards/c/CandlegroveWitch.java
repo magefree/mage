@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CovenCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -31,7 +31,7 @@ public final class CandlegroveWitch extends CardImpl {
                 new BeginningOfCombatTriggeredAbility(
                         new GainAbilitySourceEffect(
                                 FlyingAbility.getInstance(), Duration.EndOfTurn
-                        ), TargetController.YOU, false
+                        ), false
                 ), CovenCondition.instance, "At the beginning of combat on your turn, if you control three " +
                 "or more creatures with different powers, {this} gains flying until end of turn."
         ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));

@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -37,7 +37,7 @@ public final class NumaJoragaChieftain extends CardImpl {
 
         // At the beginning of combat on your turn, you may pay {X}{X}. When you do, distribute X +1/+1 counters among any number of target Elves.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new NumaJoragaChieftainEffect(), TargetController.YOU, false
+                new NumaJoragaChieftainEffect(), false
         ));
 
         // Partner

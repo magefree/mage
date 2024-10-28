@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CompletedDungeonCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -43,7 +43,7 @@ public final class EccentricApprentice extends CardImpl {
         // At the beginning of combat on your turn, if you've completed a dungeon, up to one target creature becomes a Bird with base power and toughness 1/1 and flying until end of turn.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new EccentricApprenticeEffect(), TargetController.YOU, false
+                        new EccentricApprenticeEffect(), false
                 ), CompletedDungeonCondition.instance, "At the beginning of combat on your turn, " +
                 "if you've completed a dungeon, up to one target creature becomes a Bird " +
                 "with base power and toughness 1/1 and flying until end of turn."

@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CovenCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -36,7 +36,7 @@ public final class StalwartPathlighter extends CardImpl {
                 new BeginningOfCombatTriggeredAbility(new GainAbilityControlledEffect(
                         IndestructibleAbility.getInstance(), Duration.EndOfTurn,
                         StaticFilters.FILTER_CONTROLLED_CREATURE
-                ), TargetController.YOU, false), CovenCondition.instance, "At the beginning " +
+                ), false), CovenCondition.instance, "At the beginning " +
                 "of combat on your turn, if you control three or more creatures with different powers, " +
                 "creatures you control gain indestructible until end of turn."
         ).addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));

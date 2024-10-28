@@ -3,7 +3,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.constants.*;
@@ -36,7 +36,7 @@ public final class RiaIvorBaneOfBladehold extends CardImpl {
         this.addAbility(new BattleCryAbility());
 
         // At the beginning of combat on your turn, the next time target creature would deal combat damage to one or more players this combat, prevent that damage. If damage is prevented this way, create that many 1/1 colorless Phyrexian Mite artifact creature tokens with toxic 1 and "This creature can't block."
-        Ability ability = new BeginningOfCombatTriggeredAbility(new RiaIvorBaneOfBladeholdEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new RiaIvorBaneOfBladeholdEffect(), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.FullPartyCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -46,7 +46,7 @@ public final class SquadCommander extends CardImpl {
                 new BeginningOfCombatTriggeredAbility(
                         new BoostControlledEffect(
                                 1, 0, Duration.EndOfTurn
-                        ), TargetController.YOU, false
+                        ), false
                 ), FullPartyCondition.instance, "At the beginning of combat on your turn, " +
                 "if you have a full party, creatures you control get +1/+0 and gain indestructible until end of turn."
         );

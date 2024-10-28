@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.CastSecondSpellTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -42,7 +42,7 @@ public final class RammasEchorAncientShield extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of combat on your turn, creatures you control with defender gain exalted until end of turn.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new GainAbilityControlledEffect(new ExaltedAbility(), Duration.EndOfTurn, filter), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new GainAbilityControlledEffect(new ExaltedAbility(), Duration.EndOfTurn, filter), false));
     }
 
     private RammasEchorAncientShield(final RammasEchorAncientShield card) {

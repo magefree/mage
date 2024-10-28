@@ -3,7 +3,7 @@ package mage.cards.l;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CommanderInPlayCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.PreventAllDamageToAllEffect;
@@ -39,7 +39,7 @@ public final class LoyalUnicorn extends CardImpl {
                         Duration.EndOfTurn,
                         StaticFilters.FILTER_CONTROLLED_CREATURES,
                         true
-                ), TargetController.YOU, false
+                ), false
         );
         ability.addEffect(new GainAbilityAllEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn,

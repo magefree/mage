@@ -1,7 +1,7 @@
 package mage.cards.i;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -46,7 +46,7 @@ public final class InnkeepersTalent extends CardImpl {
         this.addAbility(new ClassReminderAbility());
 
         // At the beginning of combat on your turn, put a +1/+1 counter on target creature you control.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 

@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PopulateEffect;
@@ -29,7 +29,7 @@ public final class DeterminedIteration extends CardImpl {
 
         // At the beginning of combat on your turn, populate. The token created this way gains haste. Sacrifice it at the beginning of the next end step.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new DeterminedIterationEffect(), TargetController.YOU, false
+                new DeterminedIterationEffect(), false
         ));
     }
 

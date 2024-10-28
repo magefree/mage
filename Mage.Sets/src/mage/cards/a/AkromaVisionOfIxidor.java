@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -48,7 +48,7 @@ public final class AkromaVisionOfIxidor extends CardImpl {
 
         // At the beginning of each combat, until end of turn, each other creature you control gets +1/+1 if it has flying, +1/+1 if it has first strike, and so on for double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, vigilance, and partner.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new AkromaVisionOfIxidorEffect(), TargetController.ANY, false
+                TargetController.ANY, new AkromaVisionOfIxidorEffect(), false
         ));
 
         // Partner

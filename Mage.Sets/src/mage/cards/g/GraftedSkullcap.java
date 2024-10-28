@@ -2,7 +2,7 @@
 package mage.cards.g;
 
 import java.util.UUID;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.discard.DiscardHandControllerEffect;
@@ -23,7 +23,7 @@ public final class GraftedSkullcap extends CardImpl {
 
         // At the beginning of your draw step, draw an additional card.
         this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardSourceControllerEffect(1).setText("draw an additional card"),
-            TargetController.YOU, false));
+                false));
         // At the beginning of your end step, discard your hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DiscardHandControllerEffect(),
             TargetController.YOU, false));

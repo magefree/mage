@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ExploreSourceEffect;
 import mage.cards.Card;
@@ -37,7 +37,7 @@ public final class HakbalOfTheSurgingSoul extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of combat on your turn, each Merfolk creature you control explores.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new HakbalOfTheSurgingSoulExploreEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new HakbalOfTheSurgingSoulExploreEffect(), false));
 
         // Whenever Hakbal of the Surging Soul attacks, you may put a land card from your hand onto the battlefield. If you don't, draw a card.
         this.addAbility(new AttacksTriggeredAbility(new HakbalOfTheSurgingSoulEffect(), false));

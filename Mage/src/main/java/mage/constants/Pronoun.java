@@ -1,4 +1,4 @@
-package mage.abilities;
+package mage.constants;
 
 /**
  * Created by IGOUDT on 5-3-2017.

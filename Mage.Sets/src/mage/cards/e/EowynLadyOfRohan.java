@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -38,7 +38,7 @@ public final class EowynLadyOfRohan extends CardImpl {
 
         // At the beginning of combat on your turn, target creature gains your choice of first strike or vigilance until end of turn. If that creature is equipped, it gains first strike and vigilance until end of turn instead.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new EowynLadyOfRohanEffect(), TargetController.YOU, false
+                new EowynLadyOfRohanEffect(), false
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

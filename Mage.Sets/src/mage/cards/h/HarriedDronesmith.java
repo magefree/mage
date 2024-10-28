@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
@@ -33,7 +33,7 @@ public final class HarriedDronesmith extends CardImpl {
 
         // At the beginning of combat on your turn, create a 1/1 colorless Thopter artifact creature token with flying. It gains haste until end of turn. Sacrifice it at the beginning of your next end step.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new HarriedDronesmithEffect(), TargetController.YOU, false
+                new HarriedDronesmithEffect(), false
         ));
     }
 

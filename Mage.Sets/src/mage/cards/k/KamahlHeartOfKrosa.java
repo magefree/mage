@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.BecomesCreatureTargetEffect;
@@ -35,7 +35,7 @@ public final class KamahlHeartOfKrosa extends CardImpl {
         // At the beginning of combat on your turn, creatures you control get +3/+3 and gain trample until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new BoostControlledEffect(
                 3, 3, Duration.EndOfTurn
-        ).setText("creatures you control get +3/+3"), TargetController.YOU, false);
+        ).setText("creatures you control get +3/+3"), false);
         ability.addEffect(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURES

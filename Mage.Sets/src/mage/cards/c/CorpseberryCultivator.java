@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.ForageTriggeredAbility;
 import mage.abilities.costs.common.ForageCost;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -31,7 +31,7 @@ public final class CorpseberryCultivator extends CardImpl {
         // At the beginning of combat on your turn, you may forage.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
                 new DoIfCostPaid(null, new ForageCost()),
-                TargetController.YOU, false
+                false
         ));
 
         // Whenever you forage, put a +1/+1 counter on Corpseberry Cultivator.

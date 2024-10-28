@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
@@ -24,7 +24,7 @@ public final class DaringPiracy extends CardImpl {
 
         // At the beginning of your combat on your turn, create a 1/1 red Pirate creature token with menace and haste. Exile it at the beginning of the next end step.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new DaringPiracyEffect(), TargetController.YOU, false
+                new DaringPiracyEffect(), false
         ));
     }
 

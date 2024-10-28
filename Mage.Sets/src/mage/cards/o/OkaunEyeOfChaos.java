@@ -1,7 +1,7 @@
 package mage.cards.o;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.WinsCoinFlipTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
@@ -35,7 +35,7 @@ public final class OkaunEyeOfChaos extends CardImpl {
         this.addAbility(new PartnerWithAbility("Zndrsplt, Eye of Wisdom", true));
 
         // At the beginning of combat on your turn, flip a coin until you lose a flip.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new FlipUntilLoseEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new FlipUntilLoseEffect(), false));
 
         // Whenever a player wins a coin flip, double Okaun's power and toughness until end of turn.
         this.addAbility(new WinsCoinFlipTriggeredAbility(

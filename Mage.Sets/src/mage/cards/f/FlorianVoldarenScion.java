@@ -3,7 +3,7 @@ package mage.cards.f;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.*;
@@ -35,7 +35,7 @@ public final class FlorianVoldarenScion extends CardImpl {
 
         // At the beginning of your postcombat main phase, look at the top X cards of your library, where X is the total amount of life your opponents lost this turn.
         // Exile one of those cards and put the rest on the bottom of your library in a random order. You may play the exiled card this turn.
-        this.addAbility(new BeginningOfPostCombatMainTriggeredAbility(new FlorianVoldarenScionEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(new FlorianVoldarenScionEffect(), false));
     }
 
     private FlorianVoldarenScion(final FlorianVoldarenScion card) {

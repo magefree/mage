@@ -3,7 +3,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -29,7 +29,7 @@ public final class AnvilOfBogardan extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // At the beginning of each player's draw step, that player draws an additional card, then discards a card.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(Zone.BATTLEFIELD, new AnvilOfBogardanEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(TargetController.EACH_PLAYER, new AnvilOfBogardanEffect(), false));
     }
     
     private AnvilOfBogardan(final AnvilOfBogardan card) {

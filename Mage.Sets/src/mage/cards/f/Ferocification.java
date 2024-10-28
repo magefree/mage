@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -26,7 +26,7 @@ public final class Ferocification extends CardImpl {
         // At the beginning of combat on your turn, choose one--
         // * Target creature you control gets +2/+0 until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new BoostTargetEffect(2, 0), TargetController.YOU, false
+                new BoostTargetEffect(2, 0), false
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
 

@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.*;
@@ -30,7 +30,7 @@ public final class BleedingEffect extends CardImpl {
 
         // At the beginning of combat on your turn, creatures you control gain flying until end of turn if a creature card in your graveyard has flying.
         // The same is true for first strike, double strike, deathtouch, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new BleedingEffectEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new BleedingEffectEffect(), false));
     }
 
     private BleedingEffect(final BleedingEffect card) {

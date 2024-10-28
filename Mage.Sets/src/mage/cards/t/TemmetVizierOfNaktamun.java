@@ -4,7 +4,7 @@ package mage.cards.t;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.combat.CantBeBlockedTargetEffect;
@@ -43,7 +43,7 @@ public final class TemmetVizierOfNaktamun extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of combat on your turn, target creature token you control gets +1/+1 until end of turn and can't be blocked this turn.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), false);
         Effect effect = new CantBeBlockedTargetEffect();
         effect.setText(" and can't be blocked this turn");
         ability.addEffect(effect);

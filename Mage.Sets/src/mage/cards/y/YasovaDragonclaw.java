@@ -4,7 +4,7 @@ package mage.cards.y;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -56,7 +56,7 @@ public final class YasovaDragonclaw extends CardImpl {
         effect2.setText(", untap that creature");
         effect.addEffect(effect2);
         effect.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, ", and it gains haste until end of turn"));
-        Ability ability = new BeginningOfCombatTriggeredAbility(effect, TargetController.YOU, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(effect, false);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

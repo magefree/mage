@@ -4,7 +4,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -36,7 +36,7 @@ public final class HazoretsFavor extends CardImpl {
         // If you do, sacrifice it at the beginning of the next end step.
         Effect effect = new BoostTargetEffect(2, 0, Duration.EndOfTurn);
         effect.setText("you may have target creature you control get +2/+0");
-        Ability ability = new BeginningOfCombatTriggeredAbility(effect, TargetController.YOU, true);
+        Ability ability = new BeginningOfCombatTriggeredAbility(effect, true);
         effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
         effect.setText(" and gain haste until end of turn");
         ability.addEffect(effect);

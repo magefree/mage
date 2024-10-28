@@ -3,7 +3,7 @@ package mage.cards.b;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -37,8 +37,8 @@ public final class BelbeCorruptedObserver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // At the beginning of each player's postcombat main phase, that player adds {C}{C} for each of your opponents who lost life this turn.
-        this.addAbility(new BeginningOfPostCombatMainTriggeredAbility(
-                new BelbeCorruptedObserverEffect(), TargetController.ANY, false
+        this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(
+                TargetController.ANY, new BelbeCorruptedObserverEffect(), false
         ).addHint(hint), new BelbeCorruptedObserverWatcher());
     }
 

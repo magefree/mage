@@ -2,7 +2,7 @@ package mage.cards.j;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -50,7 +50,7 @@ public final class JolraelVoiceOfZhalfir extends CardImpl {
 
         // At the beginning of combat on your turn, up to one target land you control becomes an X/X green and blue Bird creature with flying and haste until end of turn, where X is the number of cards in your hand. It's still a land.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new JolraelVoiceOfZhalfirEffect(), TargetController.YOU, false
+                new JolraelVoiceOfZhalfirEffect(), false
         );
         ability.addTarget(new TargetPermanent(
                 0, 1, StaticFilters.FILTER_CONTROLLED_PERMANENT_LAND

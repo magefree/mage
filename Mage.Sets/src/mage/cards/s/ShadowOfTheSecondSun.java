@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -31,9 +31,9 @@ public final class ShadowOfTheSecondSun extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of enchanted player's postcombat main phase, there is an additional beginning phase after this phase.
-        this.addAbility(new BeginningOfPostCombatMainTriggeredAbility(
-                new ShadowOfTheSecondSunTargetEffect(),
-                TargetController.ENCHANTED, false
+        this.addAbility(new BeginningOfPostcombatMainTriggeredAbility(
+                TargetController.ENCHANTED, new ShadowOfTheSecondSunTargetEffect(),
+                false
         ));
     }
 

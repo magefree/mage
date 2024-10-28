@@ -5,7 +5,7 @@ import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.CaseAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -45,7 +45,7 @@ public final class CaseOfTheShatteredPact extends CardImpl {
         // Solved -- At the beginning of combat on your turn, target creature you control gains flying, double strike, and vigilance until end of turn.
         TriggeredAbility triggeredAbility = new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance())
                 .setText("target creature you control gains flying"),
-                TargetController.YOU, false);
+                false);
         triggeredAbility.addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance())
                 .setText(", double strike,"));
         triggeredAbility.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance())

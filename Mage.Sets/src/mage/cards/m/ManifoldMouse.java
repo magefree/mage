@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.GainsChoiceOfAbilitiesEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.OffspringAbility;
@@ -38,7 +38,7 @@ public final class ManifoldMouse extends CardImpl {
 
         // At the beginning of combat on your turn, target Mouse you control gains your choice of double strike or trample until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new GainsChoiceOfAbilitiesEffect(
-                DoubleStrikeAbility.getInstance(), TrampleAbility.getInstance()), TargetController.YOU, false);
+                DoubleStrikeAbility.getInstance(), TrampleAbility.getInstance()), false);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

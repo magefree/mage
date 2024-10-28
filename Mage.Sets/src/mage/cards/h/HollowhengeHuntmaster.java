@@ -1,7 +1,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
@@ -46,7 +46,7 @@ public final class HollowhengeHuntmaster extends CardImpl {
                 new AddCountersAllEffect(
                         CounterType.P1P1.createInstance(2),
                         StaticFilters.FILTER_CONTROLLED_CREATURE
-                ), TargetController.YOU, false
+                ), false
         ));
 
         // Nightbound

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -37,7 +37,7 @@ public final class MightMakesRight extends CardImpl {
 
         // At the beginning of combat on your turn, if you control each creature on the battlefield with the greatest power, gain control
         // of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.
-        TriggeredAbility gainControlAbility = new BeginningOfCombatTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), TargetController.YOU, false);
+        TriggeredAbility gainControlAbility = new BeginningOfCombatTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), false);
         gainControlAbility.addEffect(new UntapTargetEffect());
         gainControlAbility.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
         gainControlAbility.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE));

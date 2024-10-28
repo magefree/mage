@@ -1,6 +1,6 @@
 package org.mage.test.cards.single.znr;
 
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.constants.PhaseStep;
 import mage.constants.TargetController;
@@ -24,7 +24,7 @@ public class MoraugFuryOfAkoumTest extends CardTestPlayerBase {
         addCustomCardWithAbility(
                 "Combat Counter", playerA,
                 new BeginningOfCombatTriggeredAbility(
-                        new GainLifeEffect(1), TargetController.YOU, false
+                        new GainLifeEffect(1), false
                 )
         );
     }

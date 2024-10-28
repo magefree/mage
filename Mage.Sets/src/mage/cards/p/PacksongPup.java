@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -53,7 +53,7 @@ public final class PacksongPup extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        TargetController.YOU, false
+                        false
                 ), condition, "At the beginning of combat on your turn," +
                 " if you control another Wolf or Werewolf, put a +1/+1 counter on {this}"
         ).addHint(hint));

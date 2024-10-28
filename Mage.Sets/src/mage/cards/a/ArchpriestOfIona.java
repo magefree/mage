@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FullPartyCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -44,7 +44,7 @@ public final class ArchpriestOfIona extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new BoostTargetEffect(1, 1, Duration.EndOfTurn),
-                        TargetController.YOU, false
+                        false
                 ), FullPartyCondition.instance, "At the beginning of combat on your turn, " +
                 "if you have a full party, target creature gets +1/+1 and gains flying until end of turn."
         );

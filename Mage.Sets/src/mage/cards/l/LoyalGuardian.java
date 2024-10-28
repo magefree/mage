@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CommanderInPlayCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
@@ -37,7 +37,7 @@ public final class LoyalGuardian extends CardImpl {
                         new AddCountersAllEffect(
                                 CounterType.P1P1.createInstance(),
                                 StaticFilters.FILTER_CONTROLLED_CREATURE
-                        ), TargetController.YOU, false
+                        ), false
                 ), CommanderInPlayCondition.instance,
                 "<i>Lieutenant</i> &mdash; At the beginning of combat "
                 + "on your turn, if you control your commander, "

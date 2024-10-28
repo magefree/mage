@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -33,7 +33,7 @@ public final class MountVelusManticore extends CardImpl {
 
         // At the beginning of combat on your turn, you may discard a card. When you do, Mount Velus Manticore deals X damage to any target, where X is the number of card types the discarded card has.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new MountVelusManticoreEffect(), TargetController.YOU, false
+                new MountVelusManticoreEffect(), false
         ));
     }
 

@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -36,7 +36,7 @@ public final class SigardianZealot extends CardImpl {
 
         // At the beginning of combat on your turn, choose any number of creatures with different powers. Each of them gets +X/+X and gains vigilance until end of turn, where X is Sigardian Zealot's power.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new SigardianZealotEffect(), TargetController.YOU, false
+                new SigardianZealotEffect(), false
         ));
     }
 

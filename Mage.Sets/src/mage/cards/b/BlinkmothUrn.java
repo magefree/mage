@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class BlinkmothUrn extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // At the beginning of each player's precombat main phase, if Blinkmoth Urn is untapped, that player adds {C} for each artifact they control.
-        this.addAbility(new BeginningOfFirstMainTriggeredAbility(new BlinkmothUrnEffect(), TargetController.ANY, false)
+        this.addAbility(new BeginningOfFirstMainTriggeredAbility(TargetController.EACH_PLAYER, new BlinkmothUrnEffect(), false)
                         .withInterveningIf(SourceTappedCondition.UNTAPPED));
     }
 

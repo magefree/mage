@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.Mana;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.hint.ValueHint;
@@ -42,7 +42,7 @@ public final class SanctumOfFruitfulHarvest extends CardImpl {
                         xValue,
                         "add X mana of any one color, where X is the number of Shrines you control",
                         true),
-                TargetController.YOU, false)
+                false)
                 .addHint(new ValueHint("Shrines you control", xValue)));
     }
 

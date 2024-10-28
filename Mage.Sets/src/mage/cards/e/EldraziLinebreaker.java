@@ -2,7 +2,7 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -48,7 +48,7 @@ public final class EldraziLinebreaker extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new GainAbilityTargetEffect(HasteAbility.getInstance())
                         .setText("target creature you control gains haste"),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new BoostTargetEffect(xValue, StaticValue.get(0))
                 .setText("and gets +X/+0 until end of turn, where X is the number of Eldrazi you control"));

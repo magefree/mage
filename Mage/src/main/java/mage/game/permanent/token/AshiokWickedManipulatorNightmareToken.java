@@ -1,7 +1,7 @@
 package mage.game.permanent.token;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.WasCardExiledThisTurnCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -33,7 +33,6 @@ public final class AshiokWickedManipulatorNightmareToken extends TokenImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                        TargetController.YOU,
                         false
                 ),
                 WasCardExiledThisTurnCondition.instance,

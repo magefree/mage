@@ -1,7 +1,7 @@
 package mage.cards.h;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.CastSecondSpellTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -35,7 +35,7 @@ public final class HowlingMoon extends CardImpl {
         // At the beginning of combat on your turn, target Wolf or Werewolf you control gets +2/+2 until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(2, 2, Duration.EndOfTurn),
-                TargetController.YOU, false
+                false
         );
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);

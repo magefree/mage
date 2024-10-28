@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -43,7 +43,7 @@ public final class BrotherhoodSpy extends CardImpl {
         // At the beginning of combat on your turn, if you control a legendary Assassin, Brotherhood Spy gets +1/+0 until end of turn and can't be blocked this turn.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new BoostTargetEffect(1, 0), TargetController.YOU, false
+                        new BoostTargetEffect(1, 0), false
                 ), condition, "At the beginning of combat on your turn, if you control a legendary Assassin, " +
                 "{this} gets +1/+0 until end of turn and can't be blocked this turn."
         );

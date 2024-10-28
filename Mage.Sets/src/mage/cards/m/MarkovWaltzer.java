@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -37,7 +37,7 @@ public final class MarkovWaltzer extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new BoostTargetEffect(1, 0)
                         .setText("up to two target creatures you control each get +1/+0 until end of turn"),
-                TargetController.YOU, false
+                false
         );
         ability.addTarget(new TargetControlledCreaturePermanent(0, 2));
         this.addAbility(ability);

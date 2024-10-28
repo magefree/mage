@@ -3,7 +3,7 @@ package mage.game.command.planes;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MainPhaseStackEmptyCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -41,7 +41,7 @@ public class PanopticonPlane extends Plane {
         this.getAbilities().add(pwability);
 
         // At the beginning of your draw step, draw an additional card.
-        Ability ability = new BeginningOfDrawTriggeredAbility(Zone.COMMAND, new DrawCardTargetEffect(1), TargetController.ACTIVE, false);
+        Ability ability = new BeginningOfDrawTriggeredAbility(Zone.COMMAND, TargetController.YOU, new DrawCardTargetEffect(1), false);
         this.getAbilities().add(ability);
 
         // Active player can roll the planar die: Whenever you roll {CHAOS}, draw a card

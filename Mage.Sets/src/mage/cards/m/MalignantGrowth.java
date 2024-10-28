@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -38,7 +38,7 @@ public final class MalignantGrowth extends CardImpl {
 
         // At the beginning of each opponent's draw step, that player draws an additional card for each growth counter on Malignant Growth, then Malignant Growth deals damage to the player equal to the number of cards they drew this way.
         this.addAbility(new BeginningOfDrawTriggeredAbility(
-                new MalignantGrowthEffect(), TargetController.OPPONENT, false
+                TargetController.OPPONENT, new MalignantGrowthEffect(), false
         ));
     }
 

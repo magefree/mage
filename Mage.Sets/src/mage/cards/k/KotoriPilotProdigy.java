@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -48,7 +48,7 @@ public final class KotoriPilotProdigy extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new GainAbilityTargetEffect(LifelinkAbility.getInstance())
                         .setText("target artifact creature you control gains lifelink"),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new GainAbilityTargetEffect(
                 VigilanceAbility.getInstance()

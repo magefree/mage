@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -46,7 +46,7 @@ public final class CactusfolkSureshot extends CardImpl {
         // At the beginning of combat on your turn, other creatures you control with power 4 or greater gain trample and haste until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new GainAbilityControlledEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn, filter, true
-        ).setText("other creatures you control with power 4 or greater gain trample"), TargetController.YOU, false);
+        ).setText("other creatures you control with power 4 or greater gain trample"), false);
         ability.addEffect(new GainAbilityControlledEffect(
                 HasteAbility.getInstance(), Duration.EndOfTurn, filter, true
         ).setText("and haste until end of turn"));

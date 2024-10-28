@@ -4,7 +4,7 @@ package mage.cards.h;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
@@ -34,7 +34,6 @@ public final class HelmOfTheHost extends CardImpl {
         // At the beginning of combat on your turn, create a token that's a copy of equipped creature, except the token isn't legendary if equipped creature is legendary. That token gains haste.
         TriggeredAbility ability = new BeginningOfCombatTriggeredAbility(
                 new HelmOfTheHostEffect(),
-                TargetController.YOU,
                 false
         );
         this.addAbility(ability);

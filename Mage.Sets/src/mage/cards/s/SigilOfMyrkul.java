@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInControllerGraveyardCondition;
@@ -40,7 +40,7 @@ public final class SigilOfMyrkul extends CardImpl {
 
         // At the beginning of combat on your turn, mill a card. When you do, if there are four or more creature cards in your graveyard, put a +1/+1 counter on target creature you control and it gains deathtouch until end of turn.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new SigilOfMyrkulEffect(), TargetController.YOU, false
+                new SigilOfMyrkulEffect(), false
         ).addHint(hint));
     }
 

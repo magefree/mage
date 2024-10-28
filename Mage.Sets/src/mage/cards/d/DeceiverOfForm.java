@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyEffect;
 import mage.cards.*;
@@ -30,7 +30,7 @@ public final class DeceiverOfForm extends CardImpl {
         // At the beginning of combat on your turn, reveal the top card of your library.
         // If a creature card is revealed this way, you may have creatures you control other than Deceiver of Form becomes copies of that card until end of turn.
         // You may put that card on the bottom of your library.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new DeceiverOfFormEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new DeceiverOfFormEffect(), false));
     }
 
     private DeceiverOfForm(final DeceiverOfForm card) {

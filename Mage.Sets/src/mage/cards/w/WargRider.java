@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.effects.keyword.AmassEffect;
@@ -56,7 +56,7 @@ public final class WargRider extends CardImpl {
         // At the beginning of combat on your turn, amass Orcs 2.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
                 new AmassEffect(2, SubType.ORC),
-                TargetController.YOU, false
+                false
         ));
     }
 

@@ -3,7 +3,7 @@ package mage.cards.k;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfFirstMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfFirstMainTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
@@ -42,7 +42,7 @@ public final class KlothysGodOfDestiny extends CardImpl {
 
         // At the beginning of your precombat main phase, exile target card from a graveyard. If it was a land card, add {R} or {G}. Otherwise, you gain 2 life and Klothys deals 2 damage to each opponent.
         Ability ability = new BeginningOfFirstMainTriggeredAbility(
-                new KlothysGodOfDestinyEffect(), TargetController.YOU, false
+                new KlothysGodOfDestinyEffect(), false
         );
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);

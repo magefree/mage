@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -28,7 +28,7 @@ public final class StarlightSpectacular extends CardImpl {
 
         // Parade! -- At the beginning of combat on your turn, choose creatures you control one at a time until each creature you control has been chosen. Each of those creatures gets +1/+1 until end of turn for each creature chosen before it.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new StarlightSpectacularEffect(), TargetController.YOU, false
+                new StarlightSpectacularEffect(), false
         ).withFlavorWord("Parade!"));
     }
 

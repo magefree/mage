@@ -4,7 +4,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -39,7 +39,7 @@ public final class RazormaneMasticore extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand())), TargetController.YOU, false));
 
         // At the beginning of your draw step, you may have Razormane Masticore deal 3 damage to target creature.
-        Ability ability = new BeginningOfDrawTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), TargetController.YOU, true);
+        Ability ability = new BeginningOfDrawTriggeredAbility(new DamageTargetEffect(3), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

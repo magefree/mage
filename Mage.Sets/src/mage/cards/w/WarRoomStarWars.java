@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -32,7 +32,7 @@ public class WarRoomStarWars extends CardImpl {
         //At the beginning of each combat on your turn, target creature can't block this turn.
         BeginningOfCombatTriggeredAbility beginningOfCombatTriggeredAbility = new BeginningOfCombatTriggeredAbility(
                 new GainAbilityTargetEffect(new CantBlockAbility(), Duration.EndOfTurn)
-                        .setText("target creature can't block this turn"), TargetController.YOU, false);
+                        .setText("target creature can't block this turn"), false);
         beginningOfCombatTriggeredAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(beginningOfCombatTriggeredAbility);
 

@@ -2,7 +2,7 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CelebrationCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -36,7 +36,6 @@ public final class BelligerentOfTheBall extends CardImpl {
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         new BoostTargetEffect(1, 0),
-                        TargetController.YOU,
                         false),
                 CelebrationCondition.instance, "At the beginning of combat on your turn, if two or more nonland "
                 + "permanents entered the battlefield under your control this turn, target creature you control "

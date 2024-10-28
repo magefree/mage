@@ -4,10 +4,9 @@ package mage.cards.j;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.SourceOnBattlefieldCondition;
 import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -41,7 +40,7 @@ public final class Johan extends CardImpl {
         Condition condition = new CompoundCondition("if {this} is untapped",
                 SourceTappedCondition.UNTAPPED,
                 SourceOnBattlefieldCondition.instance);
-        Ability ability = new BeginningOfCombatTriggeredAbility(new CantAttackSourceEffect(Duration.EndOfCombat).setText("you may have {this} gain \"{this} can't attack\" until end of combat"), TargetController.YOU, true);
+        Ability ability = new BeginningOfCombatTriggeredAbility(new CantAttackSourceEffect(Duration.EndOfCombat).setText("you may have {this} gain \"{this} can't attack\" until end of combat"), true);
         ability.addEffect(new ConditionalContinuousEffect(
             new GainAbilityControlledEffect(JohanVigilanceAbility.getInstance(), Duration.EndOfCombat, new FilterControlledCreaturePermanent("creatures")),
             condition, 

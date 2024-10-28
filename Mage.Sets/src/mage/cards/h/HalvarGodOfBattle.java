@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -68,7 +68,7 @@ public final class HalvarGodOfBattle extends ModalDoubleFacedCard {
         ));
 
         // At the beginning of each combat, you may attach target Aura or Equipment attached to a creature you control to target creature you control.
-        Ability ability = new BeginningOfCombatTriggeredAbility(new HalvarGodOfBattleEffect(), TargetController.ANY, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(TargetController.ANY, new HalvarGodOfBattleEffect(), false);
         ability.addTarget(new TargetPermanent(filter2));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.getLeftHalfCard().addAbility(ability);

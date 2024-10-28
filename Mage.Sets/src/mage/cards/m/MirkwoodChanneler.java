@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
@@ -45,7 +45,7 @@ public final class MirkwoodChanneler extends CardImpl {
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 new GainAbilityTargetEffect(TrampleAbility.getInstance())
                         .setText("target Elf you control gains trample"),
-                TargetController.YOU, false
+                false
         );
         ability.addEffect(new BoostTargetEffect(xValue, xValue)
                 .setText("and gets +X/+X until end of turn, where X is the number of Forests you control")
