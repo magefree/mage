@@ -61,9 +61,7 @@ public final class ChaosLord extends CardImpl {
 class ChaosLordTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
     ChaosLordTriggeredAbility() {
-        super(Zone.BATTLEFIELD,
-                TargetController.YOU, new TargetPlayerGainControlSourceEffect(),
-                false);
+        super(new TargetPlayerGainControlSourceEffect());
     }
 
     private ChaosLordTriggeredAbility(final ChaosLordTriggeredAbility ability) {
