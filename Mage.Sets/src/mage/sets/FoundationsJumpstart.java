@@ -32,6 +32,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Saurian Symbiote", 23, Rarity.COMMON, mage.cards.s.SaurianSymbiote.class));
         cards.add(new SetCardInfo("Shardless Outlander", 28, Rarity.COMMON, mage.cards.s.ShardlessOutlander.class));
         cards.add(new SetCardInfo("Shroofus Sproutsire", 54, Rarity.RARE, mage.cards.s.ShroofusSproutsire.class));
+        cards.add(new SetCardInfo("Starlight Snare", 9, Rarity.COMMON, mage.cards.s.StarlightSnare.class));
         cards.add(new SetCardInfo("Starnheim Memento", 29, Rarity.UNCOMMON, mage.cards.s.StarnheimMemento.class));
         cards.add(new SetCardInfo("Vilis, Broker of Blood", 70, Rarity.RARE, mage.cards.v.VilisBrokerOfBlood.class));
     }
