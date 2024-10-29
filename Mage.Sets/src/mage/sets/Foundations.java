@@ -24,6 +24,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Adventuring Gear", 249, Rarity.UNCOMMON, mage.cards.a.AdventuringGear.class));
         cards.add(new SetCardInfo("Ajani's Pridemate", 135, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
         cards.add(new SetCardInfo("Ajani, Caller of the Pride", 134, Rarity.MYTHIC, mage.cards.a.AjaniCallerOfThePride.class));
+        cards.add(new SetCardInfo("An Offer You Can't Refuse", 160, Rarity.UNCOMMON, mage.cards.a.AnOfferYouCantRefuse.class));
         cards.add(new SetCardInfo("Angel of Finality", 136, Rarity.RARE, mage.cards.a.AngelOfFinality.class));
         cards.add(new SetCardInfo("Angelic Edict", 490, Rarity.COMMON, mage.cards.a.AngelicEdict.class));
         cards.add(new SetCardInfo("Anthem of Champions", 116, Rarity.RARE, mage.cards.a.AnthemOfChampions.class));
@@ -60,7 +61,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Firespitter Whelp", 197, Rarity.UNCOMMON, mage.cards.f.FirespitterWhelp.class));
         cards.add(new SetCardInfo("Flashfreeze", 590, Rarity.UNCOMMON, mage.cards.f.Flashfreeze.class));
         cards.add(new SetCardInfo("Forest", 280, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Giada, Font of Hope", 298, Rarity.RARE, mage.cards.g.GiadaFontOfHope.class));
+        cards.add(new SetCardInfo("Giada, Font of Hope", 141, Rarity.RARE, mage.cards.g.GiadaFontOfHope.class));
         cards.add(new SetCardInfo("Giant Growth", 223, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Gigantosaurus", 718, Rarity.RARE, mage.cards.g.Gigantosaurus.class));
         cards.add(new SetCardInfo("Gilded Lotus", 725, Rarity.RARE, mage.cards.g.GildedLotus.class));
@@ -110,6 +111,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Prideful Parent", 21, Rarity.COMMON, mage.cards.p.PridefulParent.class));
         cards.add(new SetCardInfo("Progenitus", 244, Rarity.MYTHIC, mage.cards.p.Progenitus.class));
         cards.add(new SetCardInfo("Pyromancer's Goggles", 677, Rarity.MYTHIC, mage.cards.p.PyromancersGoggles.class));
+        cards.add(new SetCardInfo("Reassembling Skeleton", 182, Rarity.UNCOMMON, mage.cards.r.ReassemblingSkeleton.class));
         cards.add(new SetCardInfo("Refute", 48, Rarity.COMMON, mage.cards.r.Refute.class));
         cards.add(new SetCardInfo("Rogue's Passage", 264, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Savannah Lions", 146, Rarity.UNCOMMON, mage.cards.s.SavannahLions.class));
@@ -150,5 +152,6 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Vampire Spawn", 532, Rarity.COMMON, mage.cards.v.VampireSpawn.class));
         cards.add(new SetCardInfo("Vengeful Bloodwitch", 76, Rarity.UNCOMMON, mage.cards.v.VengefulBloodwitch.class));
         cards.add(new SetCardInfo("Vivien Reid", 234, Rarity.MYTHIC, mage.cards.v.VivienReid.class));
+        cards.add(new SetCardInfo("Zombify", 187, Rarity.UNCOMMON, mage.cards.z.Zombify.class));
     }
 }
