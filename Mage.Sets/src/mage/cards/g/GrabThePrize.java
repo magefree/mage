@@ -30,6 +30,7 @@ public final class GrabThePrize extends CardImpl {
         // Draw two cards.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(2));
 
+        // If the discarded card wasn't a land card, {this} deals two damage to each opponent.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
             new DamagePlayersEffect(2, TargetController.OPPONENT),
             GrabThePrizeCondition.instance,
