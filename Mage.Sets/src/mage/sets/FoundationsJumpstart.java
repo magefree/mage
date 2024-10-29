@@ -25,6 +25,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Dawnwing Marshal", 1, Rarity.UNCOMMON, mage.cards.d.DawnwingMarshal.class));
         cards.add(new SetCardInfo("Dionus, Elvish Archdruid", 52, Rarity.UNCOMMON, mage.cards.d.DionusElvishArchdruid.class));
         cards.add(new SetCardInfo("Faithful Pikemaster", 3, Rarity.COMMON, mage.cards.f.FaithfulPikemaster.class));
+        cards.add(new SetCardInfo("Firespitter Whelp", 14, Rarity.UNCOMMON, mage.cards.f.FirespitterWhelp.class));
         cards.add(new SetCardInfo("Gilded Scuttler", 7, Rarity.COMMON, mage.cards.g.GildedScuttler.class));
         cards.add(new SetCardInfo("Goblin Surprise", 16, Rarity.UNCOMMON, mage.cards.g.GoblinSurprise.class));
         cards.add(new SetCardInfo("Hearts on Fire", 17, Rarity.COMMON, mage.cards.h.HeartsOnFire.class));
