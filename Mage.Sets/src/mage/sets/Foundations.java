@@ -50,6 +50,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Duress", 606, Rarity.COMMON, mage.cards.d.Duress.class));
         cards.add(new SetCardInfo("Elspeth's Smite", 493, Rarity.UNCOMMON, mage.cards.e.ElspethsSmite.class));
         cards.add(new SetCardInfo("Elvish Archdruid", 219, Rarity.RARE, mage.cards.e.ElvishArchdruid.class));
+        cards.add(new SetCardInfo("Elvish Regrower", 104, Rarity.UNCOMMON, mage.cards.e.ElvishRegrower.class));
         cards.add(new SetCardInfo("Empyrean Eagle", 239, Rarity.UNCOMMON, mage.cards.e.EmpyreanEagle.class));
         cards.add(new SetCardInfo("Erudite Wizard", 37, Rarity.COMMON, mage.cards.e.EruditeWizard.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 194, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));

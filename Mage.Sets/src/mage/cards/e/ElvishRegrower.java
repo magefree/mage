@@ -1,4 +1,4 @@
-package mage.cards.g;
+package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -16,17 +16,17 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class GolgariFindbroker extends CardImpl {
+public final class ElvishRegrower extends CardImpl {
 
-    public GolgariFindbroker(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}{B}{G}{G}");
+    public ElvishRegrower(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
 
         this.subtype.add(SubType.ELF);
-        this.subtype.add(SubType.SHAMAN);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        this.subtype.add(SubType.DRUID);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        // When Golgari Findbroker enters the battlefield, return target permanent card from your graveyard to your hand.
+        // When this creature enters, return target permanent card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new ReturnFromGraveyardToHandTargetEffect(), false
         );
@@ -34,12 +34,12 @@ public final class GolgariFindbroker extends CardImpl {
         this.addAbility(ability);
     }
 
-    private GolgariFindbroker(final GolgariFindbroker card) {
+    private ElvishRegrower(final ElvishRegrower card) {
         super(card);
     }
 
     @Override
-    public GolgariFindbroker copy() {
-        return new GolgariFindbroker(this);
+    public ElvishRegrower copy() {
+        return new ElvishRegrower(this);
     }
 }
