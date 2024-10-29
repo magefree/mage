@@ -23,6 +23,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
 
         cards.add(new SetCardInfo("Brigone, Soldier of Meletis", 30, Rarity.RARE, mage.cards.b.BrigoneSoldierOfMeletis.class));
         cards.add(new SetCardInfo("Brimaz, King of Oreskos", 58, Rarity.MYTHIC, mage.cards.b.BrimazKingOfOreskos.class));
+        cards.add(new SetCardInfo("Cleon, Merry Champion", 47, Rarity.UNCOMMON, mage.cards.c.CleonMerryChampion.class));
         cards.add(new SetCardInfo("Dawnwing Marshal", 1, Rarity.UNCOMMON, mage.cards.d.DawnwingMarshal.class));
         cards.add(new SetCardInfo("Dionus, Elvish Archdruid", 52, Rarity.UNCOMMON, mage.cards.d.DionusElvishArchdruid.class));
         cards.add(new SetCardInfo("Faithful Pikemaster", 3, Rarity.COMMON, mage.cards.f.FaithfulPikemaster.class));
