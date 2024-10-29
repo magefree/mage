@@ -35,6 +35,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Blanchwood Armor", 213, Rarity.UNCOMMON, mage.cards.b.BlanchwoodArmor.class));
         cards.add(new SetCardInfo("Bloodtithe Collector", 516, Rarity.UNCOMMON, mage.cards.b.BloodtitheCollector.class));
         cards.add(new SetCardInfo("Burst Lightning", 192, Rarity.COMMON, mage.cards.b.BurstLightning.class));
+        cards.add(new SetCardInfo("Clinquant Skymage", 33, Rarity.UNCOMMON, mage.cards.c.ClinquantSkymage.class));
         cards.add(new SetCardInfo("Cloudblazer", 653, Rarity.UNCOMMON, mage.cards.c.Cloudblazer.class));
         cards.add(new SetCardInfo("Consuming Aberration", 238, Rarity.RARE, mage.cards.c.ConsumingAberration.class));
         cards.add(new SetCardInfo("Crossway Troublemakers", 518, Rarity.RARE, mage.cards.c.CrosswayTroublemakers.class));
