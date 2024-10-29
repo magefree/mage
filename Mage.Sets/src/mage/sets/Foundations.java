@@ -79,6 +79,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 274, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jazal Goldmane", 497, Rarity.RARE, mage.cards.j.JazalGoldmane.class));
         cards.add(new SetCardInfo("Juggernaut", 255, Rarity.UNCOMMON, mage.cards.j.Juggernaut.class));
+        cards.add(new SetCardInfo("Koma, World-Eater", 121, Rarity.RARE, mage.cards.k.KomaWorldEater.class));
         cards.add(new SetCardInfo("Leonin Skyhunter", 498, Rarity.UNCOMMON, mage.cards.l.LeoninSkyhunter.class));
         cards.add(new SetCardInfo("Leonin Vanguard", 499, Rarity.UNCOMMON, mage.cards.l.LeoninVanguard.class));
         cards.add(new SetCardInfo("Leyline Axe", 129, Rarity.RARE, mage.cards.l.LeylineAxe.class));
