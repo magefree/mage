@@ -22,6 +22,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Brimaz, King of Oreskos", 58, Rarity.MYTHIC, mage.cards.b.BrimazKingOfOreskos.class));
+        cards.add(new SetCardInfo("Dawnwing Marshal", 1, Rarity.UNCOMMON, mage.cards.d.DawnwingMarshal.class));
         cards.add(new SetCardInfo("Dionus, Elvish Archdruid", 52, Rarity.UNCOMMON, mage.cards.d.DionusElvishArchdruid.class));
         cards.add(new SetCardInfo("Shroofus Sproutsire", 54, Rarity.RARE, mage.cards.s.ShroofusSproutsire.class));
         cards.add(new SetCardInfo("Vilis, Broker of Blood", 70, Rarity.RARE, mage.cards.v.VilisBrokerOfBlood.class));
