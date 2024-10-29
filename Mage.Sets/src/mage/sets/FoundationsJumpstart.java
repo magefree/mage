@@ -27,6 +27,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Faithful Pikemaster", 3, Rarity.COMMON, mage.cards.f.FaithfulPikemaster.class));
         cards.add(new SetCardInfo("Gilded Scuttler", 7, Rarity.COMMON, mage.cards.g.GildedScuttler.class));
         cards.add(new SetCardInfo("Goblin Surprise", 16, Rarity.UNCOMMON, mage.cards.g.GoblinSurprise.class));
+        cards.add(new SetCardInfo("Hearts on Fire", 17, Rarity.COMMON, mage.cards.h.HeartsOnFire.class));
         cards.add(new SetCardInfo("Hungry Megasloth", 21, Rarity.UNCOMMON, mage.cards.h.HungryMegasloth.class));
         cards.add(new SetCardInfo("Shroofus Sproutsire", 54, Rarity.RARE, mage.cards.s.ShroofusSproutsire.class));
         cards.add(new SetCardInfo("Vilis, Broker of Blood", 70, Rarity.RARE, mage.cards.v.VilisBrokerOfBlood.class));
