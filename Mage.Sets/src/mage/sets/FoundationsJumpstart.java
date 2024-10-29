@@ -38,5 +38,6 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Starlight Snare", 9, Rarity.COMMON, mage.cards.s.StarlightSnare.class));
         cards.add(new SetCardInfo("Starnheim Memento", 29, Rarity.UNCOMMON, mage.cards.s.StarnheimMemento.class));
         cards.add(new SetCardInfo("Vilis, Broker of Blood", 70, Rarity.RARE, mage.cards.v.VilisBrokerOfBlood.class));
+        cards.add(new SetCardInfo("Woodland Liege", 27, Rarity.COMMON, mage.cards.w.WoodlandLiege.class));
     }
 }
