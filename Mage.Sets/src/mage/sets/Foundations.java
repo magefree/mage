@@ -61,6 +61,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Growth", 223, Rarity.COMMON, mage.cards.g.GiantGrowth.class));
         cards.add(new SetCardInfo("Gigantosaurus", 718, Rarity.RARE, mage.cards.g.Gigantosaurus.class));
         cards.add(new SetCardInfo("Gilded Lotus", 725, Rarity.RARE, mage.cards.g.GildedLotus.class));
+        cards.add(new SetCardInfo("Grappling Kraken", 39, Rarity.UNCOMMON, mage.cards.g.GrapplingKraken.class));
         cards.add(new SetCardInfo("Halana and Alena, Partners", 659, Rarity.RARE, mage.cards.h.HalanaAndAlenaPartners.class));
         cards.add(new SetCardInfo("Harmless Offering", 625, Rarity.RARE, mage.cards.h.HarmlessOffering.class));
         cards.add(new SetCardInfo("Heartfire Immolator", 201, Rarity.UNCOMMON, mage.cards.h.HeartfireImmolator.class));
