@@ -238,6 +238,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Sire of Seven Deaths", 1, Rarity.MYTHIC, mage.cards.s.SireOfSevenDeaths.class));
         cards.add(new SetCardInfo("Skyship Buccaneer", 50, Rarity.UNCOMMON, mage.cards.s.SkyshipBuccaneer.class));
         cards.add(new SetCardInfo("Slagstorm", 207, Rarity.RARE, mage.cards.s.Slagstorm.class));
+        cards.add(new SetCardInfo("Slumbering Cerberus", 94, Rarity.UNCOMMON, mage.cards.s.SlumberingCerberus.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 257, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Sorcerous Spyglass", 679, Rarity.UNCOMMON, mage.cards.s.SorcerousSpyglass.class));
         cards.add(new SetCardInfo("Soul-Guide Lantern", 680, Rarity.UNCOMMON, mage.cards.s.SoulGuideLantern.class));
