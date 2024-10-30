@@ -44,6 +44,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Ancestral Anger", 516, Rarity.COMMON, mage.cards.a.AncestralAnger.class));
         cards.add(new SetCardInfo("Ancestral Blade", 160, Rarity.COMMON, mage.cards.a.AncestralBlade.class));
         cards.add(new SetCardInfo("Ancient Greenwarden", 627, Rarity.MYTHIC, mage.cards.a.AncientGreenwarden.class));
+        cards.add(new SetCardInfo("Anep, Vizier of Hazoret", 46, Rarity.UNCOMMON, mage.cards.a.AnepVizierOfHazoret.class));
         cards.add(new SetCardInfo("Angel of Mercy", 161, Rarity.COMMON, mage.cards.a.AngelOfMercy.class));
         cards.add(new SetCardInfo("Angel of Vitality", 162, Rarity.UNCOMMON, mage.cards.a.AngelOfVitality.class));
         cards.add(new SetCardInfo("Angelic Cub", 163, Rarity.UNCOMMON, mage.cards.a.AngelicCub.class));
