@@ -299,6 +299,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Gluttonous Guest", 445, Rarity.COMMON, mage.cards.g.GluttonousGuest.class));
         cards.add(new SetCardInfo("Gnarlid Colony", 664, Rarity.COMMON, mage.cards.g.GnarlidColony.class));
         cards.add(new SetCardInfo("Gnawing Zombie", 446, Rarity.COMMON, mage.cards.g.GnawingZombie.class));
+        cards.add(new SetCardInfo("Go Forth", 20, Rarity.COMMON, mage.cards.g.GoForth.class));
         cards.add(new SetCardInfo("Go for the Throat", 447, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
         cards.add(new SetCardInfo("Goblin Arsonist", 555, Rarity.COMMON, mage.cards.g.GoblinArsonist.class));
         cards.add(new SetCardInfo("Goblin Dark-Dwellers", 556, Rarity.RARE, mage.cards.g.GoblinDarkDwellers.class));
