@@ -338,6 +338,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Hero of the Games", 563, Rarity.COMMON, mage.cards.h.HeroOfTheGames.class));
         cards.add(new SetCardInfo("Hexgold Hoverwings", 208, Rarity.UNCOMMON, mage.cards.h.HexgoldHoverwings.class));
         cards.add(new SetCardInfo("High-Rise Sawjack", 670, Rarity.COMMON, mage.cards.h.HighRiseSawjack.class));
+        cards.add(new SetCardInfo("Hinterland Sanctifier", 5, Rarity.COMMON, mage.cards.h.HinterlandSanctifier.class));
         cards.add(new SetCardInfo("Hooded Blightfang", 455, Rarity.RARE, mage.cards.h.HoodedBlightfang.class));
         cards.add(new SetCardInfo("Howling Banshee", 119, Rarity.UNCOMMON, mage.cards.h.HowlingBanshee.class));
         cards.add(new SetCardInfo("Hungry Megasloth", 21, Rarity.UNCOMMON, mage.cards.h.HungryMegasloth.class));
