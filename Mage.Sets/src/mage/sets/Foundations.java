@@ -35,6 +35,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Arahbo, the First Fang", 2, Rarity.RARE, mage.cards.a.ArahboTheFirstFang.class));
         cards.add(new SetCardInfo("Arcane Epiphany", 29, Rarity.UNCOMMON, mage.cards.a.ArcaneEpiphany.class));
         cards.add(new SetCardInfo("Arcanis the Omnipotent", 585, Rarity.RARE, mage.cards.a.ArcanisTheOmnipotent.class));
+        cards.add(new SetCardInfo("Archmage of Runes", 30, Rarity.RARE, mage.cards.a.ArchmageOfRunes.class));
         cards.add(new SetCardInfo("Archway Angel", 566, Rarity.UNCOMMON, mage.cards.a.ArchwayAngel.class));
         cards.add(new SetCardInfo("Aurelia, the Warleader", 651, Rarity.MYTHIC, mage.cards.a.AureliaTheWarleader.class));
         cards.add(new SetCardInfo("Ayli, Eternal Pilgrim", 652, Rarity.RARE, mage.cards.a.AyliEternalPilgrim.class));
