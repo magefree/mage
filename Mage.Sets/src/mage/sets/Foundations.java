@@ -190,6 +190,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Muldrotha, the Gravetide", 243, Rarity.MYTHIC, mage.cards.m.MuldrothaTheGravetide.class));
         cards.add(new SetCardInfo("Myojin of Night's Reach", 610, Rarity.RARE, mage.cards.m.MyojinOfNightsReach.class));
         cards.add(new SetCardInfo("Mystical Teachings", 594, Rarity.UNCOMMON, mage.cards.m.MysticalTeachings.class));
+        cards.add(new SetCardInfo("Needletooth Pack", 108, Rarity.UNCOMMON, mage.cards.n.NeedletoothPack.class));
         cards.add(new SetCardInfo("Negate", 710, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Nessian Hornbeetle", 229, Rarity.UNCOMMON, mage.cards.n.NessianHornbeetle.class));
         cards.add(new SetCardInfo("Niv-Mizzet, Visionary", 123, Rarity.MYTHIC, mage.cards.n.NivMizzetVisionary.class));
