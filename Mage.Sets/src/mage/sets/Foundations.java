@@ -86,6 +86,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Herald of Eternal Dawn", 17, Rarity.MYTHIC, mage.cards.h.HeraldOfEternalDawn.class));
         cards.add(new SetCardInfo("Hero's Downfall", 175, Rarity.UNCOMMON, mage.cards.h.HerosDownfall.class));
         cards.add(new SetCardInfo("Hidetsugu's Second Rite", 202, Rarity.UNCOMMON, mage.cards.h.HidetsugusSecondRite.class));
+        cards.add(new SetCardInfo("High Fae Trickster", 40, Rarity.RARE, mage.cards.h.HighFaeTrickster.class));
         cards.add(new SetCardInfo("Highborn Vampire", 522, Rarity.COMMON, mage.cards.h.HighbornVampire.class));
         cards.add(new SetCardInfo("Homunculus Horde", 41, Rarity.RARE, mage.cards.h.HomunculusHorde.class));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 156, Rarity.UNCOMMON, mage.cards.i.ImprisonedInTheMoon.class));
