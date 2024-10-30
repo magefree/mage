@@ -49,6 +49,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Battlesong Berserker", 78, Rarity.UNCOMMON, mage.cards.b.BattlesongBerserker.class));
         cards.add(new SetCardInfo("Billowing Shriekmass", 56, Rarity.UNCOMMON, mage.cards.b.BillowingShriekmass.class));
         cards.add(new SetCardInfo("Blanchwood Armor", 213, Rarity.UNCOMMON, mage.cards.b.BlanchwoodArmor.class));
+        cards.add(new SetCardInfo("Bloodthirsty Conqueror", 58, Rarity.MYTHIC, mage.cards.b.BloodthirstyConqueror.class));
         cards.add(new SetCardInfo("Bloodtithe Collector", 516, Rarity.UNCOMMON, mage.cards.b.BloodtitheCollector.class));
         cards.add(new SetCardInfo("Bolt Bend", 619, Rarity.UNCOMMON, mage.cards.b.BoltBend.class));
         cards.add(new SetCardInfo("Boros Charm", 721, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
