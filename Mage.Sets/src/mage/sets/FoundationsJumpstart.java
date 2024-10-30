@@ -166,6 +166,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Cruel Witness", 302, Rarity.COMMON, mage.cards.c.CruelWitness.class));
         cards.add(new SetCardInfo("Crystacean", 303, Rarity.COMMON, mage.cards.c.Crystacean.class));
         cards.add(new SetCardInfo("Cyclops Electromancer", 534, Rarity.COMMON, mage.cards.c.CyclopsElectromancer.class));
+        cards.add(new SetCardInfo("Cynette, Jelly Drover", 35, Rarity.UNCOMMON, mage.cards.c.CynetteJellyDrover.class));
         cards.add(new SetCardInfo("Danitha Capashen, Paragon", 59, Rarity.UNCOMMON, mage.cards.d.DanithaCapashenParagon.class));
         cards.add(new SetCardInfo("Dark Bargain", 113, Rarity.COMMON, mage.cards.d.DarkBargain.class));
         cards.add(new SetCardInfo("Dark Confidant", 114, Rarity.MYTHIC, mage.cards.d.DarkConfidant.class));
