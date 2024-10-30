@@ -69,6 +69,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Crusader of Odric", 569, Rarity.COMMON, mage.cards.c.CrusaderOfOdric.class));
         cards.add(new SetCardInfo("Crypt Feaster", 59, Rarity.COMMON, mage.cards.c.CryptFeaster.class));
         cards.add(new SetCardInfo("Cryptic Caves", 686, Rarity.UNCOMMON, mage.cards.c.CrypticCaves.class));
+        cards.add(new SetCardInfo("Crystal Barricade", 7, Rarity.RARE, mage.cards.c.CrystalBarricade.class));
         cards.add(new SetCardInfo("Cultivator's Caravan", 670, Rarity.RARE, mage.cards.c.CultivatorsCaravan.class));
         cards.add(new SetCardInfo("Darksteel Colossus", 671, Rarity.MYTHIC, mage.cards.d.DarksteelColossus.class));
         cards.add(new SetCardInfo("Dawnwing Marshal", 570, Rarity.UNCOMMON, mage.cards.d.DawnwingMarshal.class));
