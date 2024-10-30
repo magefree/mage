@@ -25,6 +25,7 @@ public class SecretLairDrop extends ExpansionSet {
         // so it must be split to two different cards (one card for one side, another card for another side),
         // also must add second side to directDownloadLinks in scryfall
 
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Brisela, Voice of Nightmares", "1336b", Rarity.MYTHIC, mage.cards.b.BriselaVoiceOfNightmares.class));
         cards.add(new SetCardInfo("Demonlord Belzenlok", "159*", Rarity.MYTHIC, mage.cards.d.DemonlordBelzenlok.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Goblin Lackey", "1311*", Rarity.RARE, mage.cards.g.GoblinLackey.class, NON_FULL_USE_VARIOUS));
@@ -58,6 +59,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("The Ur-Dragon", 11, Rarity.MYTHIC, mage.cards.t.TheUrDragon.class));
         cards.add(new SetCardInfo("Bitterblossom", 12, Rarity.MYTHIC, mage.cards.b.Bitterblossom.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Goblin Bushwhacker", 17, Rarity.RARE, mage.cards.g.GoblinBushwhacker.class));
         cards.add(new SetCardInfo("Goblin Sharpshooter", 18, Rarity.RARE, mage.cards.g.GoblinSharpshooter.class));
         cards.add(new SetCardInfo("Goblin King", 19, Rarity.RARE, mage.cards.g.GoblinKing.class, NON_FULL_USE_VARIOUS));
@@ -67,6 +69,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Regal Caracal", 23, Rarity.RARE, mage.cards.r.RegalCaracal.class));
         cards.add(new SetCardInfo("Qasali Slingers", 24, Rarity.RARE, mage.cards.q.QasaliSlingers.class));
         cards.add(new SetCardInfo("Arahbo, Roar of the World", 25, Rarity.MYTHIC, mage.cards.a.ArahboRoarOfTheWorld.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Mirri, Weatherlight Duelist", 26, Rarity.MYTHIC, mage.cards.m.MirriWeatherlightDuelist.class));
         cards.add(new SetCardInfo("Serum Visions", 29, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Serum Visions", 30, Rarity.RARE, mage.cards.s.SerumVisions.class, NON_FULL_USE_VARIOUS));
@@ -98,6 +101,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Oona, Queen of the Fae", 54, Rarity.MYTHIC, mage.cards.o.OonaQueenOfTheFae.class));
         cards.add(new SetCardInfo("Saskia the Unyielding", 55, Rarity.MYTHIC, mage.cards.s.SaskiaTheUnyielding.class));
         cards.add(new SetCardInfo("Arcbound Ravager", 56, Rarity.RARE, mage.cards.a.ArcboundRavager.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Darksteel Colossus", 57, Rarity.MYTHIC, mage.cards.d.DarksteelColossus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Walking Ballista", 58, Rarity.RARE, mage.cards.w.WalkingBallista.class, NON_FULL_USE_VARIOUS));
@@ -121,6 +125,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Erebos, God of the Dead", 74, Rarity.MYTHIC, mage.cards.e.ErebosGodOfTheDead.class));
         cards.add(new SetCardInfo("Phenax, God of Deception", 75, Rarity.MYTHIC, mage.cards.p.PhenaxGodOfDeception.class));
         cards.add(new SetCardInfo("Athreos, God of Passage", 76, Rarity.MYTHIC, mage.cards.a.AthreosGodOfPassage.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Purphoros, God of the Forge", 77, Rarity.MYTHIC, mage.cards.p.PurphorosGodOfTheForge.class));
         cards.add(new SetCardInfo("Mogis, God of Slaughter", 78, Rarity.MYTHIC, mage.cards.m.MogisGodOfSlaughter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Keranos, God of Storms", 79, Rarity.MYTHIC, mage.cards.k.KeranosGodOfStorms.class));
@@ -133,18 +138,22 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Bolt", 85, Rarity.RARE, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Bolt", 86, Rarity.RARE, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani Steadfast", 87, Rarity.MYTHIC, mage.cards.a.AjaniSteadfast.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Domri Rade", 88, Rarity.MYTHIC, mage.cards.d.DomriRade.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Tamiyo, Field Researcher", 89, Rarity.MYTHIC, mage.cards.t.TamiyoFieldResearcher.class));
         cards.add(new SetCardInfo("Vraska, Golgari Queen", 90, Rarity.MYTHIC, mage.cards.v.VraskaGolgariQueen.class));
         cards.add(new SetCardInfo("Swan Song", 91, Rarity.RARE, mage.cards.s.SwanSong.class));
         cards.add(new SetCardInfo("Birds of Paradise", 92, Rarity.RARE, mage.cards.b.BirdsOfParadise.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Gilded Goose", 93, Rarity.RARE, mage.cards.g.GildedGoose.class));
         cards.add(new SetCardInfo("Baleful Strix", 94, Rarity.RARE, mage.cards.b.BalefulStrix.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Dovescape", 95, Rarity.RARE, mage.cards.d.Dovescape.class));
         cards.add(new SetCardInfo("Rest in Peace", 96, Rarity.RARE, mage.cards.r.RestInPeace.class));
         cards.add(new SetCardInfo("Dig Through Time", 97, Rarity.RARE, mage.cards.d.DigThroughTime.class));
         cards.add(new SetCardInfo("Ancient Grudge", 98, Rarity.RARE, mage.cards.a.AncientGrudge.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Lightning Greaves", 99, Rarity.RARE, mage.cards.l.LightningGreaves.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 100, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 101, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
@@ -162,6 +171,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Opt", 111, Rarity.RARE, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Fatal Push", 112, Rarity.RARE, mage.cards.f.FatalPush.class));
         cards.add(new SetCardInfo("Anger of the Gods", 113, Rarity.RARE, mage.cards.a.AngerOfTheGods.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Explore", 114, Rarity.RARE, mage.cards.e.Explore.class));
         cards.add(new SetCardInfo("Glen Elendra Archmage", 115, Rarity.RARE, mage.cards.g.GlenElendraArchmage.class));
         cards.add(new SetCardInfo("Mistbind Clique", 116, Rarity.RARE, mage.cards.m.MistbindClique.class));
@@ -186,12 +196,14 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Breeding Pool", 132, Rarity.RARE, mage.cards.b.BreedingPool.class));
         cards.add(new SetCardInfo("Necrotic Ooze", 133, Rarity.RARE, mage.cards.n.NecroticOoze.class));
         cards.add(new SetCardInfo("Acidic Slime", 134, Rarity.RARE, mage.cards.a.AcidicSlime.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 135, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("The Mimeoplasm", 136, Rarity.MYTHIC, mage.cards.t.TheMimeoplasm.class));
         cards.add(new SetCardInfo("Voidslime", 137, Rarity.RARE, mage.cards.v.Voidslime.class));
         cards.add(new SetCardInfo("Anguished Unmaking", 138, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class));
         cards.add(new SetCardInfo("Assassin's Trophy", 139, Rarity.RARE, mage.cards.a.AssassinsTrophy.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Decimate", 140, Rarity.RARE, mage.cards.d.Decimate.class));
         cards.add(new SetCardInfo("Dreadbore", 141, Rarity.RARE, mage.cards.d.Dreadbore.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
@@ -202,11 +214,13 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Enkira, Hostile Scavenger", 146, Rarity.MYTHIC, mage.cards.e.EnkiraHostileScavenger.class));
         cards.add(new SetCardInfo("Malik, Grim Manipulator", 147, Rarity.MYTHIC, mage.cards.m.MalikGrimManipulator.class));
         cards.add(new SetCardInfo("Admonition Angel", 154, Rarity.MYTHIC, mage.cards.a.AdmonitionAngel.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Roil Elemental", 155, Rarity.RARE, mage.cards.r.RoilElemental.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 156, Rarity.RARE, mage.cards.z.ZulaportCutthroat.class));
         cards.add(new SetCardInfo("Warren Instigator", 157, Rarity.MYTHIC, mage.cards.w.WarrenInstigator.class));
         cards.add(new SetCardInfo("Avenger of Zendikar", 158, Rarity.MYTHIC, mage.cards.a.AvengerOfZendikar.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Demonlord Belzenlok", 159, Rarity.MYTHIC, mage.cards.d.DemonlordBelzenlok.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Griselbrand", 160, Rarity.MYTHIC, mage.cards.g.Griselbrand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana's Contract", 161, Rarity.RARE, mage.cards.l.LilianasContract.class, NON_FULL_USE_VARIOUS));
@@ -218,9 +232,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Collected Company", 166, Rarity.RARE, mage.cards.c.CollectedCompany.class));
         cards.add(new SetCardInfo("Amulet of Vigor", 167, Rarity.RARE, mage.cards.a.AmuletOfVigor.class));
         cards.add(new SetCardInfo("Balance", 173, Rarity.MYTHIC, mage.cards.b.Balance.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Brainstorm", 174, Rarity.RARE, mage.cards.b.Brainstorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Counterspell", 175, Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Birds of Paradise", 176, Rarity.RARE, mage.cards.b.BirdsOfParadise.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Howling Mine", 177, Rarity.RARE, mage.cards.h.HowlingMine.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Wasteland", 178, Rarity.RARE, mage.cards.w.Wasteland.class));
@@ -241,6 +257,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Swarmyard", 199, Rarity.RARE, mage.cards.s.Swarmyard.class));
         cards.add(new SetCardInfo("Arcane Signet", 201, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Chromatic Lantern", 202, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Commander's Sphere", 203, Rarity.RARE, mage.cards.c.CommandersSphere.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darksteel Ingot", 204, Rarity.RARE, mage.cards.d.DarksteelIngot.class));
@@ -314,6 +331,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Reki, the History of Kamigawa", 263, Rarity.RARE, mage.cards.r.RekiTheHistoryOfKamigawa.class));
         cards.add(new SetCardInfo("All Is Dust", 268, Rarity.RARE, mage.cards.a.AllIsDust.class));
         cards.add(new SetCardInfo("Artifact Mutation", 269, Rarity.RARE, mage.cards.a.ArtifactMutation.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Drown in the Loch", 270, Rarity.RARE, mage.cards.d.DrownInTheLoch.class));
         cards.add(new SetCardInfo("Fire Covenant", 271, Rarity.RARE, mage.cards.f.FireCovenant.class));
         cards.add(new SetCardInfo("Fractured Identity", 272, Rarity.RARE, mage.cards.f.FracturedIdentity.class));
@@ -328,9 +346,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Karmic Guide", 281, Rarity.RARE, mage.cards.k.KarmicGuide.class));
         cards.add(new SetCardInfo("Mesa Enchantress", 282, Rarity.RARE, mage.cards.m.MesaEnchantress.class));
         cards.add(new SetCardInfo("Archaeomancer", 283, Rarity.RARE, mage.cards.a.Archaeomancer.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Bloom Tender", 284, Rarity.RARE, mage.cards.b.BloomTender.class));
         cards.add(new SetCardInfo("Meteor Golem", 285, Rarity.RARE, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Azorius Signet", 286, Rarity.RARE, mage.cards.a.AzoriusSignet.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Dimir Signet", 287, Rarity.RARE, mage.cards.d.DimirSignet.class));
         cards.add(new SetCardInfo("Gruul Signet", 288, Rarity.RARE, mage.cards.g.GruulSignet.class));
         cards.add(new SetCardInfo("Rakdos Signet", 289, Rarity.RARE, mage.cards.r.RakdosSignet.class));
@@ -345,6 +365,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Mother of Runes", 298, Rarity.RARE, mage.cards.m.MotherOfRunes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mother of Runes", 299, Rarity.RARE, mage.cards.m.MotherOfRunes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ancient Den", 300, Rarity.RARE, mage.cards.a.AncientDen.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Seat of the Synod", 301, Rarity.RARE, mage.cards.s.SeatOfTheSynod.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Vault of Whispers", 302, Rarity.RARE, mage.cards.v.VaultOfWhispers.class));
@@ -371,6 +392,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Dismember", 321, Rarity.RARE, mage.cards.d.Dismember.class));
         cards.add(new SetCardInfo("Blasphemous Act", 322, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Beast Within", 323, Rarity.RARE, mage.cards.b.BeastWithin.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Grafdigger's Cage", 324, Rarity.RARE, mage.cards.g.GrafdiggersCage.class));
         cards.add(new SetCardInfo("Snow-Covered Plains", 325, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Snow-Covered Island", 326, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class, FULL_ART_BFZ_VARIOUS));
@@ -378,15 +400,18 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Snow-Covered Mountain", 328, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Snow-Covered Forest", 329, Rarity.LAND, mage.cards.s.SnowCoveredForest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Aether Gust", 330, Rarity.RARE, mage.cards.a.AetherGust.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Counterspell", 331, Rarity.RARE, mage.cards.c.Counterspell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fabricate", 332, Rarity.RARE, mage.cards.f.Fabricate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fact or Fiction", 333, Rarity.RARE, mage.cards.f.FactOrFiction.class));
         cards.add(new SetCardInfo("Mystical Tutor", 334, Rarity.RARE, mage.cards.m.MysticalTutor.class));
         cards.add(new SetCardInfo("Arvinox, the Mind Flail", 340, Rarity.MYTHIC, mage.cards.a.ArvinoxTheMindFlail.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Sophina, Spearsage Deserter", 341, Rarity.RARE, mage.cards.s.SophinaSpearsageDeserter.class));
         cards.add(new SetCardInfo("Hargilde, Kindly Runechanter", 342, Rarity.RARE, mage.cards.h.HargildeKindlyRunechanter.class));
         cards.add(new SetCardInfo("Cecily, Haunted Mage", 343, Rarity.RARE, mage.cards.c.CecilyHauntedMage.class));
         cards.add(new SetCardInfo("Bjorna, Nightfall Alchemist", 344, Rarity.RARE, mage.cards.b.BjornaNightfallAlchemist.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Elmar, Ulvenwald Informant", 345, Rarity.RARE, mage.cards.e.ElmarUlvenwaldInformant.class));
         cards.add(new SetCardInfo("Othelm, Sigardian Outcast", 346, Rarity.RARE, mage.cards.o.OthelmSigardianOutcast.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
@@ -402,6 +427,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Slayers' Stronghold", 356, Rarity.RARE, mage.cards.s.SlayersStronghold.class));
         cards.add(new SetCardInfo("Gavony Township", 357, Rarity.RARE, mage.cards.g.GavonyTownship.class));
         cards.add(new SetCardInfo("Alchemist's Refuge", 358, Rarity.RARE, mage.cards.a.AlchemistsRefuge.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Plains", 359, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 360, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
@@ -459,6 +485,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Ajani, Mentor of Heroes", 397, Rarity.MYTHIC, mage.cards.a.AjaniMentorOfHeroes.class));
         cards.add(new SetCardInfo("Angrath, the Flame-Chained", 398, Rarity.MYTHIC, mage.cards.a.AngrathTheFlameChained.class));
         cards.add(new SetCardInfo("Ashiok, Dream Render", 399, Rarity.RARE, mage.cards.a.AshiokDreamRender.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Sorin, Grim Nemesis", 400, Rarity.MYTHIC, mage.cards.s.SorinGrimNemesis.class));
         cards.add(new SetCardInfo("Peek", 401, Rarity.RARE, mage.cards.p.Peek.class));
         cards.add(new SetCardInfo("Greed", 402, Rarity.RARE, mage.cards.g.Greed.class));
@@ -492,9 +519,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Boseiju, Who Shelters All", 426, Rarity.RARE, mage.cards.b.BoseijuWhoSheltersAll.class));
         cards.add(new SetCardInfo("Hall of the Bandit Lord", 427, Rarity.RARE, mage.cards.h.HallOfTheBanditLord.class));
         cards.add(new SetCardInfo("Baldin, Century Herdmaster", 428, Rarity.RARE, mage.cards.b.BaldinCenturyHerdmaster.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Vikya, Scorching Stalwart", 429, Rarity.RARE, mage.cards.v.VikyaScorchingStalwart.class));
         cards.add(new SetCardInfo("Aisha of Sparks and Smoke", 430, Rarity.RARE, mage.cards.a.AishaOfSparksAndSmoke.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("The Howling Abomination", 431, Rarity.RARE, mage.cards.t.TheHowlingAbomination.class));
         cards.add(new SetCardInfo("Zethi, Arcane Blademaster", 432, Rarity.RARE, mage.cards.z.ZethiArcaneBlademaster.class));
@@ -523,6 +552,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 451, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 452, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Atraxa, Praetors' Voice", 453, Rarity.MYTHIC, mage.cards.a.AtraxaPraetorsVoice.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Breya, Etherium Shaper", 454, Rarity.MYTHIC, mage.cards.b.BreyaEtheriumShaper.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Yidris, Maelstrom Wielder", 455, Rarity.MYTHIC, mage.cards.y.YidrisMaelstromWielder.class));
@@ -534,6 +564,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Sunpetal Grove", 460, Rarity.RARE, mage.cards.s.SunpetalGrove.class));
         cards.add(new SetCardInfo("Sram, Senior Edificer", 461, Rarity.RARE, mage.cards.s.SramSeniorEdificer.class));
         cards.add(new SetCardInfo("Balthor the Defiled", 462, Rarity.RARE, mage.cards.b.BalthorTheDefiled.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Torbran, Thane of Red Fell", 463, Rarity.RARE, mage.cards.t.TorbranThaneOfRedFell.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Depala, Pilot Exemplar", 464, Rarity.RARE, mage.cards.d.DepalaPilotExemplar.class));
@@ -542,6 +573,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Concordant Crossroads", 467, Rarity.RARE, mage.cards.c.ConcordantCrossroads.class));
         cards.add(new SetCardInfo("Ghost Quarter", 468, Rarity.RARE, mage.cards.g.GhostQuarter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ash Barrens", 469, Rarity.RARE, mage.cards.a.AshBarrens.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Command Beacon", 470, Rarity.RARE, mage.cards.c.CommandBeacon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fabled Passage", 471, Rarity.RARE, mage.cards.f.FabledPassage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
@@ -565,6 +597,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 487, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 488, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Akroma, Angel of Wrath", 489, Rarity.MYTHIC, mage.cards.a.AkromaAngelOfWrath.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Mikaeus, the Unhallowed", 490, Rarity.MYTHIC, mage.cards.m.MikaeusTheUnhallowed.class));
         cards.add(new SetCardInfo("Glissa Sunseeker", 491, Rarity.RARE, mage.cards.g.GlissaSunseeker.class));
         cards.add(new SetCardInfo("Olivia, Mobilized for War", 492, Rarity.MYTHIC, mage.cards.o.OliviaMobilizedForWar.class, NON_FULL_USE_VARIOUS));
@@ -575,6 +608,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Platinum Angel", 496, Rarity.RARE, mage.cards.p.PlatinumAngel.class));
         cards.add(new SetCardInfo("Brimaz, King of Oreskos", 497, Rarity.MYTHIC, mage.cards.b.BrimazKingOfOreskos.class));
         cards.add(new SetCardInfo("Arcanis the Omnipotent", 498, Rarity.RARE, mage.cards.a.ArcanisTheOmnipotent.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Queen Marchesa", 499, Rarity.MYTHIC, mage.cards.q.QueenMarchesa.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Savra, Queen of the Golgari", 500, Rarity.RARE, mage.cards.s.SavraQueenOfTheGolgari.class));
         cards.add(new SetCardInfo("Karn, the Great Creator", 501, Rarity.RARE, mage.cards.k.KarnTheGreatCreator.class, NON_FULL_USE_VARIOUS));
@@ -596,11 +630,13 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Tibalt, Rakish Instigator", 515, Rarity.UNCOMMON, mage.cards.t.TibaltRakishInstigator.class));
         cards.add(new SetCardInfo("Arlinn, Voice of the Pack", 516, Rarity.UNCOMMON, mage.cards.a.ArlinnVoiceOfThePack.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Jiang Yanggu, Wildcrafter", 517, Rarity.UNCOMMON, mage.cards.j.JiangYangguWildcrafter.class));
         cards.add(new SetCardInfo("Nissa, Who Shakes the World", 518, Rarity.RARE, mage.cards.n.NissaWhoShakesTheWorld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Vivien, Champion of the Wilds", 519, Rarity.RARE, mage.cards.v.VivienChampionOfTheWilds.class));
         cards.add(new SetCardInfo("Ajani, the Greathearted", 520, Rarity.RARE, mage.cards.a.AjaniTheGreathearted.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Domri, Anarch of Bolas", 521, Rarity.RARE, mage.cards.d.DomriAnarchOfBolas.class));
         cards.add(new SetCardInfo("Nicol Bolas, Dragon-God", 522, Rarity.MYTHIC, mage.cards.n.NicolBolasDragonGod.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ral, Storm Conduit", 523, Rarity.RARE, mage.cards.r.RalStormConduit.class));
@@ -610,6 +646,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Teferi, Time Raveler", 526, Rarity.RARE, mage.cards.t.TeferiTimeRaveler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Angrath, Captain of Chaos", 527, Rarity.UNCOMMON, mage.cards.a.AngrathCaptainOfChaos.class));
         cards.add(new SetCardInfo("Ashiok, Dream Render", 528, Rarity.UNCOMMON, mage.cards.a.AshiokDreamRender.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Dovin, Hand of Control", 529, Rarity.UNCOMMON, mage.cards.d.DovinHandOfControl.class));
         cards.add(new SetCardInfo("Huatli, the Sun's Heart", 530, Rarity.UNCOMMON, mage.cards.h.HuatliTheSunsHeart.class));
         cards.add(new SetCardInfo("Kaya, Bane of the Dead", 531, Rarity.UNCOMMON, mage.cards.k.KayaBaneOfTheDead.class));
@@ -673,6 +710,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Spellskite", 587, Rarity.RARE, mage.cards.s.Spellskite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sphere of Safety", 588, Rarity.RARE, mage.cards.s.SphereOfSafety.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Signet", 589, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Lurking Crocodile", 590, Rarity.RARE, mage.cards.l.LurkingCrocodile.class));
         cards.add(new SetCardInfo("Crash Through", 591, Rarity.RARE, mage.cards.c.CrashThrough.class));
         cards.add(new SetCardInfo("Persistent Petitioners", 593, Rarity.RARE, mage.cards.p.PersistentPetitioners.class, NON_FULL_USE_VARIOUS));
@@ -709,6 +747,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Telekinetic Sliver", 627, Rarity.RARE, mage.cards.t.TelekineticSliver.class));
         cards.add(new SetCardInfo("Winged Sliver", 628, Rarity.RARE, mage.cards.w.WingedSliver.class));
         cards.add(new SetCardInfo("Basal Sliver", 629, Rarity.RARE, mage.cards.b.BasalSliver.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Dregscape Sliver", 631, Rarity.RARE, mage.cards.d.DregscapeSliver.class));
         cards.add(new SetCardInfo("Leeching Sliver", 632, Rarity.RARE, mage.cards.l.LeechingSliver.class));
         cards.add(new SetCardInfo("Plague Sliver", 633, Rarity.RARE, mage.cards.p.PlagueSliver.class, NON_FULL_USE_VARIOUS));
@@ -716,6 +755,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Syphon Sliver", 634, Rarity.RARE, mage.cards.s.SyphonSliver.class));
         cards.add(new SetCardInfo("Toxin Sliver", 635, Rarity.RARE, mage.cards.t.ToxinSliver.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Belligerent Sliver", 636, Rarity.RARE, mage.cards.b.BelligerentSliver.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Blur Sliver", 637, Rarity.RARE, mage.cards.b.BlurSliver.class));
         cards.add(new SetCardInfo("Fury Sliver", 638, Rarity.RARE, mage.cards.f.FurySliver.class));
         cards.add(new SetCardInfo("Homing Sliver", 640, Rarity.RARE, mage.cards.h.HomingSliver.class));
@@ -749,6 +789,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Opaline Sliver", 667, Rarity.RARE, mage.cards.o.OpalineSliver.class));
         cards.add(new SetCardInfo("Sliver Hive", 668, Rarity.RARE, mage.cards.s.SliverHive.class));
         cards.add(new SetCardInfo("Battlefield Forge", 669, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Plains", 670, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Questing Phelddagrif", 671, Rarity.RARE, mage.cards.q.QuestingPhelddagrif.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Questing Phelddagrif", 672, Rarity.RARE, mage.cards.q.QuestingPhelddagrif.class, NON_FULL_USE_VARIOUS));
@@ -842,18 +883,21 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Thrun, the Last Troll", 810, Rarity.MYTHIC, mage.cards.t.ThrunTheLastTroll.class));
         cards.add(new SetCardInfo("Elesh Norn, Grand Cenobite", 811, Rarity.MYTHIC, mage.cards.e.EleshNornGrandCenobite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Signet", 820, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Norin the Wary", 827, Rarity.RARE, mage.cards.n.NorinTheWary.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("The Scarab God", 900, Rarity.MYTHIC, mage.cards.t.TheScarabGod.class));
         cards.add(new SetCardInfo("Elspeth, Knight-Errant", 1001, Rarity.MYTHIC, mage.cards.e.ElspethKnightErrant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Patron Wizard", 1002, Rarity.RARE, mage.cards.p.PatronWizard.class));
         cards.add(new SetCardInfo("Berserk", 1003, Rarity.MYTHIC, mage.cards.b.Berserk.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Verduran Enchantress", 1004, Rarity.RARE, mage.cards.v.VerduranEnchantress.class));
         cards.add(new SetCardInfo("Triumphant Reckoning", 1005, Rarity.MYTHIC, mage.cards.t.TriumphantReckoning.class));
         cards.add(new SetCardInfo("Savor the Moment", 1006, Rarity.RARE, mage.cards.s.SavorTheMoment.class));
         cards.add(new SetCardInfo("Alesha, Who Smiles at Death", 1007, Rarity.RARE, mage.cards.a.AleshaWhoSmilesAtDeath.class));
         cards.add(new SetCardInfo("Bearscape", 1008, Rarity.RARE, mage.cards.b.Bearscape.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Collective Voyage", 1009, Rarity.RARE, mage.cards.c.CollectiveVoyage.class));
         cards.add(new SetCardInfo("Heartbeat of Spring", 1010, Rarity.RARE, mage.cards.h.HeartbeatOfSpring.class));
         cards.add(new SetCardInfo("Sol Ring", 1011, Rarity.RARE, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
@@ -872,6 +916,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Veil of Summer", 1024, Rarity.RARE, mage.cards.v.VeilOfSummer.class));
         cards.add(new SetCardInfo("Merciless Executioner", 1025, Rarity.RARE, mage.cards.m.MercilessExecutioner.class));
         cards.add(new SetCardInfo("Aggravated Assault", 1026, Rarity.RARE, mage.cards.a.AggravatedAssault.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Krenko, Tin Street Kingpin", 1027, Rarity.RARE, mage.cards.k.KrenkoTinStreetKingpin.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Zurgo Helmsmasher", 1028, Rarity.MYTHIC, mage.cards.z.ZurgoHelmsmasher.class));
@@ -882,6 +927,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Scourge of the Throne", 1033, Rarity.MYTHIC, mage.cards.s.ScourgeOfTheThrone.class));
         cards.add(new SetCardInfo("Loxodon Warhammer", 1034, Rarity.RARE, mage.cards.l.LoxodonWarhammer.class));
         cards.add(new SetCardInfo("Approach of the Second Sun", 1035, Rarity.RARE, mage.cards.a.ApproachOfTheSecondSun.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Rewind", 1036, Rarity.RARE, mage.cards.r.Rewind.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bone Splinters", 1037, Rarity.RARE, mage.cards.b.BoneSplinters.class));
         cards.add(new SetCardInfo("Fling", 1038, Rarity.RARE, mage.cards.f.Fling.class));
@@ -917,6 +963,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Repercussion", 1065, Rarity.RARE, mage.cards.r.Repercussion.class));
         cards.add(new SetCardInfo("Pyromancer's Goggles", 1066, Rarity.MYTHIC, mage.cards.p.PyromancersGoggles.class));
         cards.add(new SetCardInfo("Arcades Sabboth", 1067, Rarity.RARE, mage.cards.a.ArcadesSabboth.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Chromium", 1068, Rarity.RARE, mage.cards.c.Chromium.class));
         cards.add(new SetCardInfo("Nicol Bolas", 1069, Rarity.RARE, mage.cards.n.NicolBolas.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
@@ -959,6 +1006,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Laboratory Maniac", 1097, Rarity.RARE, mage.cards.l.LaboratoryManiac.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stitcher's Supplier", 1098, Rarity.RARE, mage.cards.s.StitchersSupplier.class));
         cards.add(new SetCardInfo("Beast Whisperer", 1099, Rarity.RARE, mage.cards.b.BeastWhisperer.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Vizier of the Menagerie", 1100, Rarity.MYTHIC, mage.cards.v.VizierOfTheMenagerie.class));
         cards.add(new SetCardInfo("Wood Elves", 1101, Rarity.RARE, mage.cards.w.WoodElves.class));
@@ -968,9 +1016,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Wheel of Sun and Moon", 1105, Rarity.RARE, mage.cards.w.WheelOfSunAndMoon.class));
         cards.add(new SetCardInfo("Azami, Lady of Scrolls", 1106, Rarity.RARE, mage.cards.a.AzamiLadyOfScrolls.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Liliana of the Dark Realms", 1107, Rarity.MYTHIC, mage.cards.l.LilianaOfTheDarkRealms.class));
         cards.add(new SetCardInfo("Reflector Mage", 1108, Rarity.RARE, mage.cards.r.ReflectorMage.class));
         cards.add(new SetCardInfo("Adaptive Automaton", 1109, Rarity.RARE, mage.cards.a.AdaptiveAutomaton.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Phyrexian Metamorph", 1110, Rarity.RARE, mage.cards.p.PhyrexianMetamorph.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Tezzeret the Seeker", 1111, Rarity.MYTHIC, mage.cards.t.TezzeretTheSeeker.class, NON_FULL_USE_VARIOUS));
@@ -1000,6 +1050,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 1133, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 1134, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Abundant Growth", 1135, Rarity.RARE, mage.cards.a.AbundantGrowth.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Mycoloth", 1136, Rarity.RARE, mage.cards.m.Mycoloth.class));
         cards.add(new SetCardInfo("Ghave, Guru of Spores", 1137, Rarity.MYTHIC, mage.cards.g.GhaveGuruOfSpores.class));
         cards.add(new SetCardInfo("Slimefoot, the Stowaway", 1138, Rarity.RARE, mage.cards.s.SlimefootTheStowaway.class));
@@ -1012,6 +1063,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Lathliss, Dragon Queen", 1146, Rarity.RARE, mage.cards.l.LathlissDragonQueen.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Birds of Paradise", 1147, Rarity.RARE, mage.cards.b.BirdsOfParadise.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Birds of Paradise", 1148, Rarity.RARE, mage.cards.b.BirdsOfParadise.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Sliver Legion", 1149, Rarity.MYTHIC, mage.cards.s.SliverLegion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sliver Legion", 1150, Rarity.MYTHIC, mage.cards.s.SliverLegion.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
@@ -1022,6 +1074,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Esika, God of the Tree", 1155, Rarity.MYTHIC, mage.cards.e.EsikaGodOfTheTree.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archangel Avacyn", 1156, Rarity.MYTHIC, mage.cards.a.ArchangelAvacyn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacyn, the Purifier", 1156, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Bloodline Keeper", 1157, Rarity.RARE, mage.cards.b.BloodlineKeeper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord of Lineage", 1157, Rarity.RARE, mage.cards.l.LordOfLineage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nicol Bolas, the Ravager", 1158, Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class, NON_FULL_USE_VARIOUS));
@@ -1034,6 +1087,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Brainstorm", 1162, Rarity.RARE, mage.cards.b.Brainstorm.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Progenitus", 1163, Rarity.MYTHIC, mage.cards.p.Progenitus.class));
         cards.add(new SetCardInfo("Baral, Chief of Compliance", 1164, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Spellseeker", 1165, Rarity.RARE, mage.cards.s.Spellseeker.class));
         cards.add(new SetCardInfo("Magus of the Wheel", 1166, Rarity.RARE, mage.cards.m.MagusOfTheWheel.class));
         cards.add(new SetCardInfo("Kess, Dissident Mage", 1167, Rarity.MYTHIC, mage.cards.k.KessDissidentMage.class));
@@ -1072,6 +1126,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Yisan, the Wanderer Bard", 1196, Rarity.RARE, mage.cards.y.YisanTheWandererBard.class));
         cards.add(new SetCardInfo("Alela, Artful Provocateur", 1197, Rarity.MYTHIC, mage.cards.a.AlelaArtfulProvocateur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Sen Triplets", 1198, Rarity.MYTHIC, mage.cards.s.SenTriplets.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Tevesh Szat, Doom of Fools", 1199, Rarity.MYTHIC, mage.cards.t.TeveshSzatDoomOfFools.class));
@@ -1083,10 +1138,12 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("K'rrik, Son of Yawgmoth", 1204, Rarity.RARE, mage.cards.k.KrrikSonOfYawgmoth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glistener Elf", 1205, Rarity.RARE, mage.cards.g.GlistenerElf.class));
         cards.add(new SetCardInfo("Batterskull", 1206, Rarity.MYTHIC, mage.cards.b.Batterskull.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Inkmoth Nexus", 1207, Rarity.RARE, mage.cards.i.InkmothNexus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Esika, God of the Tree", 1208, Rarity.MYTHIC, mage.cards.e.EsikaGodOfTheTree.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archangel Avacyn", 1209, Rarity.MYTHIC, mage.cards.a.ArchangelAvacyn.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacyn, the Purifier", 1209, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Bloodline Keeper", 1210, Rarity.RARE, mage.cards.b.BloodlineKeeper.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lord of Lineage", 1210, Rarity.RARE, mage.cards.l.LordOfLineage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nicol Bolas, the Ravager", 1211, Rarity.MYTHIC, mage.cards.n.NicolBolasTheRavager.class, NON_FULL_USE_VARIOUS));
@@ -1109,6 +1166,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Ice-Fang Coatl", 1225, Rarity.RARE, mage.cards.i.IceFangCoatl.class));
         cards.add(new SetCardInfo("Stonecoil Serpent", 1226, Rarity.RARE, mage.cards.s.StonecoilSerpent.class));
         cards.add(new SetCardInfo("Alms Collector", 1227, Rarity.RARE, mage.cards.a.AlmsCollector.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Crested Sunmare", 1228, Rarity.MYTHIC, mage.cards.c.CrestedSunmare.class));
         cards.add(new SetCardInfo("Goreclaw, Terror of Qal Sisma", 1229, Rarity.RARE, mage.cards.g.GoreclawTerrorOfQalSisma.class));
         cards.add(new SetCardInfo("Rin and Seri, Inseparable", 1230, Rarity.MYTHIC, mage.cards.r.RinAndSeriInseparable.class, NON_FULL_USE_VARIOUS));
@@ -1116,6 +1174,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Sakashima the Impostor", 1232, Rarity.RARE, mage.cards.s.SakashimaTheImpostor.class));
         cards.add(new SetCardInfo("Massacre Girl", 1233, Rarity.RARE, mage.cards.m.MassacreGirl.class));
         cards.add(new SetCardInfo("Azusa, Lost but Seeking", 1234, Rarity.RARE, mage.cards.a.AzusaLostButSeeking.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Teysa Karlov", 1235, Rarity.RARE, mage.cards.t.TeysaKarlov.class));
         cards.add(new SetCardInfo("Paradise Mantle", 1236, Rarity.RARE, mage.cards.p.ParadiseMantle.class));
@@ -1176,6 +1235,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Grand Abolisher", 1285, Rarity.RARE, mage.cards.g.GrandAbolisher.class));
         cards.add(new SetCardInfo("Selfless Savior", 1286, Rarity.RARE, mage.cards.s.SelflessSavior.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Akroma, Angel of Fury", 1287, Rarity.MYTHIC, mage.cards.a.AkromaAngelOfFury.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Umezawa's Jitte", 1288, Rarity.RARE, mage.cards.u.UmezawasJitte.class));
         cards.add(new SetCardInfo("Linvala, Keeper of Silence", 1289, Rarity.MYTHIC, mage.cards.l.LinvalaKeeperOfSilence.class));
@@ -1213,11 +1273,13 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Gisela, the Broken Blade", 1335, Rarity.MYTHIC, mage.cards.g.GiselaTheBrokenBlade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bruna, the Fading Light", 1336, Rarity.RARE, mage.cards.b.BrunaTheFadingLight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Archangel of Thune", 1337, Rarity.MYTHIC, mage.cards.a.ArchangelOfThune.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Court of Grace", 1338, Rarity.RARE, mage.cards.c.CourtOfGrace.class));
         cards.add(new SetCardInfo("Commander's Plate", 1339, Rarity.MYTHIC, mage.cards.c.CommandersPlate.class));
         cards.add(new SetCardInfo("Angel of Finality", 1342, Rarity.RARE, mage.cards.a.AngelOfFinality.class));
         cards.add(new SetCardInfo("Angel of the Ruins", 1343, Rarity.RARE, mage.cards.a.AngelOfTheRuins.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arden Angel", 1344, Rarity.RARE, mage.cards.a.ArdenAngel.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Breathkeeper Seraph", 1345, Rarity.RARE, mage.cards.b.BreathkeeperSeraph.class));
         cards.add(new SetCardInfo("Dawnbreak Reclaimer", 1346, Rarity.RARE, mage.cards.d.DawnbreakReclaimer.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
@@ -1254,6 +1316,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Botanical Sanctum", 1376, Rarity.RARE, mage.cards.b.BotanicalSanctum.class));
         cards.add(new SetCardInfo("Angel of Serenity", 1377, Rarity.MYTHIC, mage.cards.a.AngelOfSerenity.class));
         cards.add(new SetCardInfo("Angel of the Ruins", 1378, Rarity.RARE, mage.cards.a.AngelOfTheRuins.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Blinding Angel", 1379, Rarity.RARE, mage.cards.b.BlindingAngel.class));
         cards.add(new SetCardInfo("Restoration Angel", 1380, Rarity.RARE, mage.cards.r.RestorationAngel.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
@@ -1277,6 +1340,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Tasha's Hideous Laughter", 1395, Rarity.RARE, mage.cards.t.TashasHideousLaughter.class));
         cards.add(new SetCardInfo("Tasigur, the Golden Fang", 1396, Rarity.RARE, mage.cards.t.TasigurTheGoldenFang.class));
         cards.add(new SetCardInfo("Atla Palani, Nest Tender", 1397, Rarity.MYTHIC, mage.cards.a.AtlaPalaniNestTender.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Plains", 1399, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 1400, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
@@ -1291,6 +1355,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Geier Reach Sanitarium", 1408, Rarity.RARE, mage.cards.g.GeierReachSanitarium.class));
         cards.add(new SetCardInfo("Captain Lannery Storm", 1409, Rarity.RARE, mage.cards.c.CaptainLanneryStorm.class));
         cards.add(new SetCardInfo("Admiral Beckett Brass", 1410, Rarity.MYTHIC, mage.cards.a.AdmiralBeckettBrass.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Elenda, the Dusk Rose", 1411, Rarity.MYTHIC, mage.cards.e.ElendaTheDuskRose.class));
         cards.add(new SetCardInfo("Kumena, Tyrant of Orazca", 1412, Rarity.MYTHIC, mage.cards.k.KumenaTyrantOfOrazca.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
@@ -1303,11 +1368,13 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Karn, Scion of Urza", 1419, Rarity.MYTHIC, mage.cards.k.KarnScionOfUrza.class));
         cards.add(new SetCardInfo("Chandra, Flame's Catalyst", 1420, Rarity.MYTHIC, mage.cards.c.ChandraFlamesCatalyst.class));
         cards.add(new SetCardInfo("Aminatou, the Fateshifter", 1421, Rarity.MYTHIC, mage.cards.a.AminatouTheFateshifter.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Daretti, Ingenious Iconoclast", 1422, Rarity.MYTHIC, mage.cards.d.DarettiIngeniousIconoclast.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Venser, the Sojourner", 1423, Rarity.MYTHIC, mage.cards.v.VenserTheSojourner.class));
         cards.add(new SetCardInfo("Oppression", 1424, Rarity.RARE, mage.cards.o.Oppression.class));
         cards.add(new SetCardInfo("Abrade", 1425, Rarity.RARE, mage.cards.a.Abrade.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Mass Hysteria", 1426, Rarity.RARE, mage.cards.m.MassHysteria.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Terminate", 1427, Rarity.RARE, mage.cards.t.Terminate.class));
@@ -1318,6 +1385,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Silence", 1445, Rarity.RARE, mage.cards.s.Silence.class));
         cards.add(new SetCardInfo("Battle of Wits", 1446, Rarity.RARE, mage.cards.b.BattleOfWits.class));
         cards.add(new SetCardInfo("Baral, Chief of Compliance", 1447, Rarity.RARE, mage.cards.b.BaralChiefOfCompliance.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Pack Rat", 1448, Rarity.RARE, mage.cards.p.PackRat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fynn, the Fangbearer", 1449, Rarity.RARE, mage.cards.f.FynnTheFangbearer.class));
         cards.add(new SetCardInfo("Brion Stoutarm", 1450, Rarity.RARE, mage.cards.b.BrionStoutarm.class));
@@ -1325,6 +1393,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Marchesa, the Black Rose", 1452, Rarity.RARE, mage.cards.m.MarchesaTheBlackRose.class));
         cards.add(new SetCardInfo("Ajani Goldmane", 1453, Rarity.MYTHIC, mage.cards.a.AjaniGoldmane.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ajani Goldmane", "1453b", Rarity.MYTHIC, mage.cards.a.AjaniGoldmane.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Jace Beleren", 1454, Rarity.MYTHIC, mage.cards.j.JaceBeleren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jace Beleren", "1454b", Rarity.MYTHIC, mage.cards.j.JaceBeleren.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Liliana Vess", 1455, Rarity.MYTHIC, mage.cards.l.LilianaVess.class, NON_FULL_USE_VARIOUS));
@@ -1373,12 +1442,14 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Voracious Hydra", 1491, Rarity.RARE, mage.cards.v.VoraciousHydra.class));
         cards.add(new SetCardInfo("Arcane Signet", 1492, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Lightning Greaves", 1493, Rarity.RARE, mage.cards.l.LightningGreaves.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 1494, Rarity.RARE, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Thought Vessel", 1495, Rarity.RARE, mage.cards.t.ThoughtVessel.class));
         cards.add(new SetCardInfo("Command Tower", 1496, Rarity.RARE, mage.cards.c.CommandTower.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Beacon of Tomorrows", 1497, Rarity.RARE, mage.cards.b.BeaconOfTomorrows.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Nexus of Fate", 1498, Rarity.MYTHIC, mage.cards.n.NexusOfFate.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Time Reversal", 1499, Rarity.MYTHIC, mage.cards.t.TimeReversal.class));
@@ -1387,9 +1458,11 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Search for Azcanta", 1502, Rarity.RARE, mage.cards.s.SearchForAzcanta.class));
         cards.add(new SetCardInfo("Azcanta, the Sunken Ruin", 1502, Rarity.RARE, mage.cards.a.AzcantaTheSunkenRuin.class));
         cards.add(new SetCardInfo("Anger of the Gods", 1503, Rarity.RARE, mage.cards.a.AngerOfTheGods.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Bow of Nylea", 1504, Rarity.RARE, mage.cards.b.BowOfNylea.class));
         cards.add(new SetCardInfo("Shadowspear", 1505, Rarity.RARE, mage.cards.s.Shadowspear.class));
         cards.add(new SetCardInfo("Academy Ruins", 1506, Rarity.RARE, mage.cards.a.AcademyRuins.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Rin and Seri, Inseparable", 1508, Rarity.MYTHIC, mage.cards.r.RinAndSeriInseparable.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rin and Seri, Inseparable", "1508b", Rarity.MYTHIC, mage.cards.r.RinAndSeriInseparable.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jetmir, Nexus of Revels", 1509, Rarity.MYTHIC, mage.cards.j.JetmirNexusOfRevels.class, NON_FULL_USE_VARIOUS));
@@ -1398,6 +1471,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Jinnie Fay, Jetmir's Second", "1510b", Rarity.RARE, mage.cards.j.JinnieFayJetmirsSecond.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anointed Procession", 1511, Rarity.RARE, mage.cards.a.AnointedProcession.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anointed Procession", "1511b", Rarity.RARE, mage.cards.a.AnointedProcession.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Sol Ring", 1512, Rarity.RARE, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", "1512b", Rarity.RARE, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 1513, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
@@ -1414,6 +1488,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Price of Glory", 1525, Rarity.RARE, mage.cards.p.PriceOfGlory.class));
         cards.add(new SetCardInfo("Reckless Fireweaver", 1526, Rarity.RARE, mage.cards.r.RecklessFireweaver.class));
         cards.add(new SetCardInfo("Akroma's Memorial", 1527, Rarity.MYTHIC, mage.cards.a.AkromasMemorial.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Bojuka Bog", 1532, Rarity.RARE, mage.cards.b.BojukaBog.class));
         cards.add(new SetCardInfo("Command Beacon", 1533, Rarity.RARE, mage.cards.c.CommandBeacon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fabled Passage", 1534, Rarity.RARE, mage.cards.f.FabledPassage.class, NON_FULL_USE_VARIOUS));
@@ -1429,6 +1504,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Adrix and Nev, Twincasters", 1544, Rarity.MYTHIC, mage.cards.a.AdrixAndNevTwincasters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Adrix and Nev, Twincasters", "1544b", Rarity.MYTHIC, mage.cards.a.AdrixAndNevTwincasters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Arcane Denial", 1545, Rarity.RARE, mage.cards.a.ArcaneDenial.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Nightscape Familiar", 1546, Rarity.RARE, mage.cards.n.NightscapeFamiliar.class));
         cards.add(new SetCardInfo("Rain of Filth", 1547, Rarity.RARE, mage.cards.r.RainOfFilth.class));
         cards.add(new SetCardInfo("Simian Spirit Guide", 1548, Rarity.RARE, mage.cards.s.SimianSpiritGuide.class));
@@ -1438,10 +1514,12 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Queen Marchesa", 1559, Rarity.MYTHIC, mage.cards.q.QueenMarchesa.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ramses, Assassin Lord", 1560, Rarity.RARE, mage.cards.r.RamsesAssassinLord.class));
         cards.add(new SetCardInfo("Admiral Beckett Brass", 1561, Rarity.MYTHIC, mage.cards.a.AdmiralBeckettBrass.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Gonti, Lord of Luxury", 1566, Rarity.RARE, mage.cards.g.GontiLordOfLuxury.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Vilis, Broker of Blood", 1567, Rarity.RARE, mage.cards.v.VilisBrokerOfBlood.class));
         cards.add(new SetCardInfo("Anowon, the Ruin Thief", 1568, Rarity.MYTHIC, mage.cards.a.AnowonTheRuinThief.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Grenzo, Dungeon Warden", 1569, Rarity.RARE, mage.cards.g.GrenzoDungeonWarden.class));
         cards.add(new SetCardInfo("Blade of Selves", 1570, Rarity.RARE, mage.cards.b.BladeOfSelves.class));
         cards.add(new SetCardInfo("Conqueror's Flail", 1571, Rarity.RARE, mage.cards.c.ConquerorsFlail.class));
@@ -1452,6 +1530,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Reconnaissance", 1575, Rarity.RARE, mage.cards.r.Reconnaissance.class));
         cards.add(new SetCardInfo("Jace, Wielder of Mysteries", 1576, Rarity.RARE, mage.cards.j.JaceWielderOfMysteries.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Black Market", 1577, Rarity.RARE, mage.cards.b.BlackMarket.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Dire Undercurrents", 1578, Rarity.RARE, mage.cards.d.DireUndercurrents.class));
         cards.add(new SetCardInfo("Obeka, Brute Chronologist", 1579, Rarity.RARE, mage.cards.o.ObekaBruteChronologist.class));
         cards.add(new SetCardInfo("Rose Noble", 1580, Rarity.RARE, mage.cards.r.RoseNoble.class));
@@ -1464,6 +1543,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Chord of Calling", 1595, Rarity.RARE, mage.cards.c.ChordOfCalling.class));
         cards.add(new SetCardInfo("Harmonize", 1596, Rarity.RARE, mage.cards.h.Harmonize.class));
         cards.add(new SetCardInfo("Azusa, Lost but Seeking", 1597, Rarity.RARE, mage.cards.a.AzusaLostButSeeking.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Child of Alara", 1599, Rarity.MYTHIC, mage.cards.c.ChildOfAlara.class));
         cards.add(new SetCardInfo("Feather, the Redeemed", 1602, Rarity.RARE, mage.cards.f.FeatherTheRedeemed.class));
         cards.add(new SetCardInfo("Song of Creation", 1603, Rarity.RARE, mage.cards.s.SongOfCreation.class));
@@ -1472,8 +1552,10 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Thespian's Stage", 1607, Rarity.RARE, mage.cards.t.ThespiansStage.class));
         cards.add(new SetCardInfo("Avabruck Caretaker", 1608, Rarity.MYTHIC, mage.cards.a.AvabruckCaretaker.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Hollowhenge Huntmaster", 1608, Rarity.MYTHIC, mage.cards.h.HollowhengeHuntmaster.class));
         cards.add(new SetCardInfo("Beastmaster Ascension", 1609, Rarity.RARE, mage.cards.b.BeastmasterAscension.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Howl of the Night Pack", 1610, Rarity.RARE, mage.cards.h.HowlOfTheNightPack.class));
         cards.add(new SetCardInfo("Second Harvest", 1611, Rarity.RARE, mage.cards.s.SecondHarvest.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
@@ -1499,6 +1581,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Faerie Artisans", 1628, Rarity.RARE, mage.cards.f.FaerieArtisans.class));
         cards.add(new SetCardInfo("Dockside Chef", 1629, Rarity.RARE, mage.cards.d.DocksideChef.class));
         cards.add(new SetCardInfo("Alela, Artful Provocateur", 1630, Rarity.MYTHIC, mage.cards.a.AlelaArtfulProvocateur.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Door of Destinies", 1631, Rarity.RARE, mage.cards.d.DoorOfDestinies.class));
         cards.add(new SetCardInfo("Steelshaper's Gift", 1632, Rarity.RARE, mage.cards.s.SteelshapersGift.class));
         cards.add(new SetCardInfo("Propaganda", 1633, Rarity.RARE, mage.cards.p.Propaganda.class, NON_FULL_USE_VARIOUS));
@@ -1506,14 +1589,17 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Council's Judgment", 1635, Rarity.RARE, mage.cards.c.CouncilsJudgment.class));
         cards.add(new SetCardInfo("Idyllic Tutor", 1636, Rarity.RARE, mage.cards.i.IdyllicTutor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anger", 1637, Rarity.RARE, mage.cards.a.Anger.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Lightning Bolt", 1638, Rarity.RARE, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inalla, Archmage Ritualist", 1639, Rarity.MYTHIC, mage.cards.i.InallaArchmageRitualist.class));
         cards.add(new SetCardInfo("Aether Vial", 1640, Rarity.RARE, mage.cards.a.AetherVial.class));
         cards.add(new SetCardInfo("Arcane Signet", 1641, Rarity.RARE, mage.cards.a.ArcaneSignet.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Storm, Force of Nature", 1742, Rarity.MYTHIC, mage.cards.s.StormForceOfNature.class));
         cards.add(new SetCardInfo("Sword of the Animist", 1642, Rarity.RARE, mage.cards.s.SwordOfTheAnimist.class));
         cards.add(new SetCardInfo("Gravebreaker Lamia", 1643, Rarity.RARE, mage.cards.g.GravebreakerLamia.class));
         cards.add(new SetCardInfo("Aura Shards", 1644, Rarity.RARE, mage.cards.a.AuraShards.class));
+        cards.add(new SetCardInfo("Black Panther, Wakandan King", 1747, Rarity.MYTHIC, mage.cards.b.BlackPantherWakandanKing.class));
         cards.add(new SetCardInfo("Fiend Artisan", 1645, Rarity.MYTHIC, mage.cards.f.FiendArtisan.class));
         cards.add(new SetCardInfo("Karador, Ghost Chieftain", 1646, Rarity.MYTHIC, mage.cards.k.KaradorGhostChieftain.class));
         cards.add(new SetCardInfo("Kalitas, Traitor of Ghet", 1687, Rarity.MYTHIC, mage.cards.k.KalitasTraitorOfGhet.class));
