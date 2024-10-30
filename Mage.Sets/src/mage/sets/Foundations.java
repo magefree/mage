@@ -43,6 +43,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Azorius Guildgate", 683, Rarity.COMMON, mage.cards.a.AzoriusGuildgate.class));
         cards.add(new SetCardInfo("Ball Lightning", 618, Rarity.RARE, mage.cards.b.BallLightning.class));
         cards.add(new SetCardInfo("Balmor, Battlemage Captain", 237, Rarity.UNCOMMON, mage.cards.b.BalmorBattlemageCaptain.class));
+        cards.add(new SetCardInfo("Battlesong Berserker", 78, Rarity.UNCOMMON, mage.cards.b.BattlesongBerserker.class));
         cards.add(new SetCardInfo("Billowing Shriekmass", 56, Rarity.UNCOMMON, mage.cards.b.BillowingShriekmass.class));
         cards.add(new SetCardInfo("Blanchwood Armor", 213, Rarity.UNCOMMON, mage.cards.b.BlanchwoodArmor.class));
         cards.add(new SetCardInfo("Bloodtithe Collector", 516, Rarity.UNCOMMON, mage.cards.b.BloodtitheCollector.class));
