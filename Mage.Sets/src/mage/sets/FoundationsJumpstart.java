@@ -748,6 +748,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Woodland Champion", 741, Rarity.UNCOMMON, mage.cards.w.WoodlandChampion.class));
         cards.add(new SetCardInfo("Woodland Liege", 27, Rarity.COMMON, mage.cards.w.WoodlandLiege.class));
         cards.add(new SetCardInfo("Wrecking Crew", 617, Rarity.COMMON, mage.cards.w.WreckingCrew.class));
+        cards.add(new SetCardInfo("Wriggling Grub", 12, Rarity.UNCOMMON, mage.cards.w.WrigglingGrub.class));
         cards.add(new SetCardInfo("Yarok's Wavecrasher", 395, Rarity.UNCOMMON, mage.cards.y.YaroksWavecrasher.class));
         cards.add(new SetCardInfo("Young Pyromancer", 618, Rarity.UNCOMMON, mage.cards.y.YoungPyromancer.class));
         cards.add(new SetCardInfo("Youthful Valkyrie", 280, Rarity.UNCOMMON, mage.cards.y.YouthfulValkyrie.class));
