@@ -170,6 +170,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Island", 274, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Izzet Guildgate", 691, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
         cards.add(new SetCardInfo("Jazal Goldmane", 497, Rarity.RARE, mage.cards.j.JazalGoldmane.class));
+        cards.add(new SetCardInfo("Joust Through", 19, Rarity.UNCOMMON, mage.cards.j.JoustThrough.class));
         cards.add(new SetCardInfo("Juggernaut", 255, Rarity.UNCOMMON, mage.cards.j.Juggernaut.class));
         cards.add(new SetCardInfo("Kalastria Highborn", 607, Rarity.RARE, mage.cards.k.KalastriaHighborn.class));
         cards.add(new SetCardInfo("Knight of Grace", 576, Rarity.UNCOMMON, mage.cards.k.KnightOfGrace.class));
