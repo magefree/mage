@@ -21,6 +21,7 @@ public final class Foundations extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 
+        cards.add(new SetCardInfo("Abrade", 188, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Adaptive Automaton", 723, Rarity.RARE, mage.cards.a.AdaptiveAutomaton.class));
         cards.add(new SetCardInfo("Adventuring Gear", 249, Rarity.UNCOMMON, mage.cards.a.AdventuringGear.class));
         cards.add(new SetCardInfo("Aetherize", 151, Rarity.UNCOMMON, mage.cards.a.Aetherize.class));
@@ -28,7 +29,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Ajani, Caller of the Pride", 134, Rarity.MYTHIC, mage.cards.a.AjaniCallerOfThePride.class));
         cards.add(new SetCardInfo("Alesha, Who Laughs at Fate", 115, Rarity.RARE, mage.cards.a.AleshaWhoLaughsAtFate.class));
         cards.add(new SetCardInfo("An Offer You Can't Refuse", 160, Rarity.UNCOMMON, mage.cards.a.AnOfferYouCantRefuse.class));
-        cards.add(new SetCardInfo("Angel of Finality", 136, Rarity.RARE, mage.cards.a.AngelOfFinality.class));
+        cards.add(new SetCardInfo("Angel of Finality", 136, Rarity.UNCOMMON, mage.cards.a.AngelOfFinality.class));
         cards.add(new SetCardInfo("Angel of Vitality", 706, Rarity.UNCOMMON, mage.cards.a.AngelOfVitality.class));
         cards.add(new SetCardInfo("Angelic Destiny", 565, Rarity.MYTHIC, mage.cards.a.AngelicDestiny.class));
         cards.add(new SetCardInfo("Angelic Edict", 490, Rarity.COMMON, mage.cards.a.AngelicEdict.class));
@@ -54,6 +55,8 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Bolt Bend", 619, Rarity.UNCOMMON, mage.cards.b.BoltBend.class));
         cards.add(new SetCardInfo("Boros Charm", 721, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
         cards.add(new SetCardInfo("Boros Guildgate", 684, Rarity.COMMON, mage.cards.b.BorosGuildgate.class));
+        cards.add(new SetCardInfo("Brass's Bounty", 190, Rarity.RARE, mage.cards.b.BrasssBounty.class));
+        cards.add(new SetCardInfo("Brineborn Cutthroat", 152, Rarity.UNCOMMON, mage.cards.b.BrinebornCutthroat.class));
         cards.add(new SetCardInfo("Bulk Up", 80, Rarity.UNCOMMON, mage.cards.b.BulkUp.class));
         cards.add(new SetCardInfo("Burst Lightning", 192, Rarity.COMMON, mage.cards.b.BurstLightning.class));
         cards.add(new SetCardInfo("Charming Prince", 568, Rarity.RARE, mage.cards.c.CharmingPrince.class));
@@ -94,14 +97,17 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Drogskol Reaver", 655, Rarity.RARE, mage.cards.d.DrogskolReaver.class));
         cards.add(new SetCardInfo("Dryad Militant", 656, Rarity.UNCOMMON, mage.cards.d.DryadMilitant.class));
         cards.add(new SetCardInfo("Duress", 606, Rarity.COMMON, mage.cards.d.Duress.class));
+        cards.add(new SetCardInfo("Dwynen, Gilt-Leaf Daen", 217, Rarity.UNCOMMON, mage.cards.d.DwynenGiltLeafDaen.class));
         cards.add(new SetCardInfo("Elspeth's Smite", 493, Rarity.UNCOMMON, mage.cards.e.ElspethsSmite.class));
         cards.add(new SetCardInfo("Elvish Archdruid", 219, Rarity.RARE, mage.cards.e.ElvishArchdruid.class));
         cards.add(new SetCardInfo("Elvish Regrower", 104, Rarity.UNCOMMON, mage.cards.e.ElvishRegrower.class));
         cards.add(new SetCardInfo("Empyrean Eagle", 239, Rarity.UNCOMMON, mage.cards.e.EmpyreanEagle.class));
         cards.add(new SetCardInfo("Enigma Drake", 657, Rarity.UNCOMMON, mage.cards.e.EnigmaDrake.class));
         cards.add(new SetCardInfo("Erudite Wizard", 37, Rarity.COMMON, mage.cards.e.EruditeWizard.class));
+        cards.add(new SetCardInfo("Essence Scatter", 153, Rarity.UNCOMMON, mage.cards.e.EssenceScatter.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 194, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
         cards.add(new SetCardInfo("Expedition Map", 724, Rarity.COMMON, mage.cards.e.ExpeditionMap.class));
+        cards.add(new SetCardInfo("Exsanguinate", 173, Rarity.UNCOMMON, mage.cards.e.Exsanguinate.class));
         cards.add(new SetCardInfo("Extravagant Replication", 154, Rarity.RARE, mage.cards.e.ExtravagantReplication.class));
         cards.add(new SetCardInfo("Faebloom Trick", 38, Rarity.UNCOMMON, mage.cards.f.FaebloomTrick.class));
         cards.add(new SetCardInfo("Feed the Swarm", 712, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
@@ -114,6 +120,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Finale of Revelation", 589, Rarity.MYTHIC, mage.cards.f.FinaleOfRevelation.class));
         cards.add(new SetCardInfo("Fireshrieker", 674, Rarity.UNCOMMON, mage.cards.f.Fireshrieker.class));
         cards.add(new SetCardInfo("Firespitter Whelp", 197, Rarity.UNCOMMON, mage.cards.f.FirespitterWhelp.class));
+        cards.add(new SetCardInfo("Flamewake Phoenix", 198, Rarity.RARE, mage.cards.f.FlamewakePhoenix.class));
         cards.add(new SetCardInfo("Flashfreeze", 590, Rarity.UNCOMMON, mage.cards.f.Flashfreeze.class));
         cards.add(new SetCardInfo("Fog Bank", 591, Rarity.UNCOMMON, mage.cards.f.FogBank.class));
         cards.add(new SetCardInfo("Forest", 280, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
@@ -123,6 +130,8 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Gate Colossus", 675, Rarity.UNCOMMON, mage.cards.g.GateColossus.class));
         cards.add(new SetCardInfo("Gatekeeper of Malakir", 713, Rarity.UNCOMMON, mage.cards.g.GatekeeperOfMalakir.class));
         cards.add(new SetCardInfo("Gateway Sneak", 592, Rarity.UNCOMMON, mage.cards.g.GatewaySneak.class));
+        cards.add(new SetCardInfo("Genesis Wave", 221, Rarity.RARE, mage.cards.g.GenesisWave.class));
+        cards.add(new SetCardInfo("Ghalta, Primal Hunger", 222, Rarity.RARE, mage.cards.g.GhaltaPrimalHunger.class));
         cards.add(new SetCardInfo("Ghitu Lavarunner", 623, Rarity.COMMON, mage.cards.g.GhituLavarunner.class));
         cards.add(new SetCardInfo("Giada, Font of Hope", 141, Rarity.RARE, mage.cards.g.GiadaFontOfHope.class));
         cards.add(new SetCardInfo("Giant Cindermaw", 624, Rarity.UNCOMMON, mage.cards.g.GiantCindermaw.class));
@@ -144,6 +153,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Herald of Eternal Dawn", 17, Rarity.MYTHIC, mage.cards.h.HeraldOfEternalDawn.class));
         cards.add(new SetCardInfo("Hero's Downfall", 175, Rarity.UNCOMMON, mage.cards.h.HerosDownfall.class));
         cards.add(new SetCardInfo("Heroes' Bane", 639, Rarity.RARE, mage.cards.h.HeroesBane.class));
+        cards.add(new SetCardInfo("Heroic Reinforcements", 241, Rarity.UNCOMMON, mage.cards.h.HeroicReinforcements.class));
         cards.add(new SetCardInfo("Hidetsugu's Second Rite", 202, Rarity.UNCOMMON, mage.cards.h.HidetsugusSecondRite.class));
         cards.add(new SetCardInfo("High Fae Trickster", 40, Rarity.RARE, mage.cards.h.HighFaeTrickster.class));
         cards.add(new SetCardInfo("Highborn Vampire", 522, Rarity.COMMON, mage.cards.h.HighbornVampire.class));
@@ -162,6 +172,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of Grace", 576, Rarity.UNCOMMON, mage.cards.k.KnightOfGrace.class));
         cards.add(new SetCardInfo("Knight of Malice", 608, Rarity.UNCOMMON, mage.cards.k.KnightOfMalice.class));
         cards.add(new SetCardInfo("Koma, World-Eater", 121, Rarity.RARE, mage.cards.k.KomaWorldEater.class));
+        cards.add(new SetCardInfo("Krenko, Mob Boss", 204, Rarity.RARE, mage.cards.k.KrenkoMobBoss.class));
         cards.add(new SetCardInfo("Lathliss, Dragon Queen", 627, Rarity.RARE, mage.cards.l.LathlissDragonQueen.class));
         cards.add(new SetCardInfo("Leonin Skyhunter", 498, Rarity.UNCOMMON, mage.cards.l.LeoninSkyhunter.class));
         cards.add(new SetCardInfo("Leonin Vanguard", 499, Rarity.UNCOMMON, mage.cards.l.LeoninVanguard.class));
@@ -178,8 +189,10 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Maze's End", 727, Rarity.MYTHIC, mage.cards.m.MazesEnd.class));
         cards.add(new SetCardInfo("Mazemind Tome", 676, Rarity.RARE, mage.cards.m.MazemindTome.class));
         cards.add(new SetCardInfo("Mentor of the Meek", 578, Rarity.RARE, mage.cards.m.MentorOfTheMeek.class));
+        cards.add(new SetCardInfo("Meteor Golem", 256, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Micromancer", 158, Rarity.UNCOMMON, mage.cards.m.Micromancer.class));
         cards.add(new SetCardInfo("Midnight Reaper", 609, Rarity.RARE, mage.cards.m.MidnightReaper.class));
+        cards.add(new SetCardInfo("Mild-Mannered Librarian", 228, Rarity.UNCOMMON, mage.cards.m.MildManneredLibrarian.class));
         cards.add(new SetCardInfo("Mindsparker", 628, Rarity.UNCOMMON, mage.cards.m.Mindsparker.class));
         cards.add(new SetCardInfo("Mischievous Mystic", 47, Rarity.UNCOMMON, mage.cards.m.MischievousMystic.class));
         cards.add(new SetCardInfo("Mold Adder", 640, Rarity.UNCOMMON, mage.cards.m.MoldAdder.class));
@@ -249,6 +262,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Solemn Simulacrum", 257, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Sorcerous Spyglass", 679, Rarity.UNCOMMON, mage.cards.s.SorcerousSpyglass.class));
         cards.add(new SetCardInfo("Soul-Guide Lantern", 680, Rarity.UNCOMMON, mage.cards.s.SoulGuideLantern.class));
+        cards.add(new SetCardInfo("Spectral Sailor", 164, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
         cards.add(new SetCardInfo("Sphinx of the Final Word", 597, Rarity.MYTHIC, mage.cards.s.SphinxOfTheFinalWord.class));
         cards.add(new SetCardInfo("Springbloom Druid", 646, Rarity.COMMON, mage.cards.s.SpringbloomDruid.class));
         cards.add(new SetCardInfo("Stasis Snare", 581, Rarity.UNCOMMON, mage.cards.s.StasisSnare.class));
@@ -258,6 +272,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Stromkirk Noble", 632, Rarity.RARE, mage.cards.s.StromkirkNoble.class));
         cards.add(new SetCardInfo("Surrak, the Hunt Caller", 647, Rarity.RARE, mage.cards.s.SurrakTheHuntCaller.class));
         cards.add(new SetCardInfo("Swamp", 276, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swiftblade Vindicator", 246, Rarity.RARE, mage.cards.s.SwiftbladeVindicator.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 258, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
         cards.add(new SetCardInfo("Syr Alin, the Lion's Claw", 582, Rarity.UNCOMMON, mage.cards.s.SyrAlinTheLionsClaw.class));
         cards.add(new SetCardInfo("Tatyova, Benthic Druid", 247, Rarity.UNCOMMON, mage.cards.t.TatyovaBenthicDruid.class));
@@ -275,8 +290,10 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Silence", 704, Rarity.RARE, mage.cards.t.TempleOfSilence.class));
         cards.add(new SetCardInfo("Temple of Triumph", 705, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
         cards.add(new SetCardInfo("Think Twice", 165, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
+        cards.add(new SetCardInfo("Thousand-Year Storm", 248, Rarity.RARE, mage.cards.t.ThousandYearStorm.class));
         cards.add(new SetCardInfo("Three Tree Mascot", 682, Rarity.COMMON, mage.cards.t.ThreeTreeMascot.class));
         cards.add(new SetCardInfo("Time Stop", 166, Rarity.RARE, mage.cards.t.TimeStop.class));
+        cards.add(new SetCardInfo("Tolarian Terror", 167, Rarity.COMMON, mage.cards.t.TolarianTerror.class));
         cards.add(new SetCardInfo("Tragic Banshee", 73, Rarity.UNCOMMON, mage.cards.t.TragicBanshee.class));
         cards.add(new SetCardInfo("Tribute to Hunger", 614, Rarity.UNCOMMON, mage.cards.t.TributeToHunger.class));
         cards.add(new SetCardInfo("Trygon Predator", 667, Rarity.UNCOMMON, mage.cards.t.TrygonPredator.class));
@@ -298,8 +315,10 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Vizier of the Menagerie", 649, Rarity.MYTHIC, mage.cards.v.VizierOfTheMenagerie.class));
         cards.add(new SetCardInfo("Voracious Greatshark", 600, Rarity.RARE, mage.cards.v.VoraciousGreatshark.class));
         cards.add(new SetCardInfo("Wildborn Preserver", 650, Rarity.RARE, mage.cards.w.WildbornPreserver.class));
+        cards.add(new SetCardInfo("Wildwood Scourge", 236, Rarity.UNCOMMON, mage.cards.w.WildwoodScourge.class));
         cards.add(new SetCardInfo("Wilt-Leaf Liege", 668, Rarity.RARE, mage.cards.w.WiltLeafLiege.class));
         cards.add(new SetCardInfo("Wishclaw Talisman", 617, Rarity.RARE, mage.cards.w.WishclawTalisman.class));
+        cards.add(new SetCardInfo("Youthful Valkyrie", 149, Rarity.UNCOMMON, mage.cards.y.YouthfulValkyrie.class));
         cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 584, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
         cards.add(new SetCardInfo("Zombify", 187, Rarity.UNCOMMON, mage.cards.z.Zombify.class));
     }
