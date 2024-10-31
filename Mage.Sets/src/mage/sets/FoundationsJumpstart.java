@@ -334,7 +334,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Heartstabber Mosquito", 454, Rarity.COMMON, mage.cards.h.HeartstabberMosquito.class));
         cards.add(new SetCardInfo("Heir of the Ancient Fang", 669, Rarity.COMMON, mage.cards.h.HeirOfTheAncientFang.class));
         cards.add(new SetCardInfo("Hellkite Whelp", 562, Rarity.UNCOMMON, mage.cards.h.HellkiteWhelp.class));
-        cards.add(new SetCardInfo("Herald of War", 207, Rarity.COMMON, mage.cards.h.HeraldOfWar.class));
+        cards.add(new SetCardInfo("Herald of War", 207, Rarity.RARE, mage.cards.h.HeraldOfWar.class));
         cards.add(new SetCardInfo("Herald of the Sun", 206, Rarity.UNCOMMON, mage.cards.h.HeraldOfTheSun.class));
         cards.add(new SetCardInfo("Hero of the Games", 563, Rarity.COMMON, mage.cards.h.HeroOfTheGames.class));
         cards.add(new SetCardInfo("Hexgold Hoverwings", 208, Rarity.UNCOMMON, mage.cards.h.HexgoldHoverwings.class));
