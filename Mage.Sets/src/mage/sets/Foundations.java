@@ -59,6 +59,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Brineborn Cutthroat", 152, Rarity.UNCOMMON, mage.cards.b.BrinebornCutthroat.class));
         cards.add(new SetCardInfo("Bulk Up", 80, Rarity.UNCOMMON, mage.cards.b.BulkUp.class));
         cards.add(new SetCardInfo("Burst Lightning", 192, Rarity.COMMON, mage.cards.b.BurstLightning.class));
+        cards.add(new SetCardInfo("Cephalid Inkmage", 32, Rarity.UNCOMMON, mage.cards.c.CephalidInkmage.class));
         cards.add(new SetCardInfo("Charming Prince", 568, Rarity.RARE, mage.cards.c.CharmingPrince.class));
         cards.add(new SetCardInfo("Chart a Course", 586, Rarity.UNCOMMON, mage.cards.c.ChartACourse.class));
         cards.add(new SetCardInfo("Circuitous Route", 635, Rarity.UNCOMMON, mage.cards.c.CircuitousRoute.class));
