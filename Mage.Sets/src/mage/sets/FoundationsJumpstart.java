@@ -660,6 +660,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Thriving Moor", 779, Rarity.COMMON, mage.cards.t.ThrivingMoor.class));
         cards.add(new SetCardInfo("Thryx, the Sudden Storm", 65, Rarity.RARE, mage.cards.t.ThryxTheSuddenStorm.class));
         cards.add(new SetCardInfo("Thundering Spineback", 726, Rarity.UNCOMMON, mage.cards.t.ThunderingSpineback.class));
+        cards.add(new SetCardInfo("Thurid, Mare of Destiny", 33, Rarity.MYTHIC, mage.cards.t.ThuridMareOfDestiny.class));
         cards.add(new SetCardInfo("Tide Skimmer", 375, Rarity.UNCOMMON, mage.cards.t.TideSkimmer.class));
         cards.add(new SetCardInfo("Tidepool Turtle", 376, Rarity.COMMON, mage.cards.t.TidepoolTurtle.class));
         cards.add(new SetCardInfo("Time to Feed", 727, Rarity.COMMON, mage.cards.t.TimeToFeed.class));
