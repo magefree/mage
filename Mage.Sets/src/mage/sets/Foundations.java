@@ -222,6 +222,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Arena", 180, Rarity.RARE, mage.cards.p.PhyrexianArena.class));
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Predator Ooze", 642, Rarity.RARE, mage.cards.p.PredatorOoze.class));
+        cards.add(new SetCardInfo("Preposterous Proportions", 109, Rarity.RARE, mage.cards.p.PreposterousProportions.class));
         cards.add(new SetCardInfo("Prideful Parent", 21, Rarity.COMMON, mage.cards.p.PridefulParent.class));
         cards.add(new SetCardInfo("Primal Might", 643, Rarity.RARE, mage.cards.p.PrimalMight.class));
         cards.add(new SetCardInfo("Prime Speaker Zegana", 664, Rarity.RARE, mage.cards.p.PrimeSpeakerZegana.class));
