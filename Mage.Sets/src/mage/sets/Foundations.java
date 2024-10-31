@@ -166,6 +166,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Imperious Perfect", 719, Rarity.UNCOMMON, mage.cards.i.ImperiousPerfect.class));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 156, Rarity.UNCOMMON, mage.cards.i.ImprisonedInTheMoon.class));
         cards.add(new SetCardInfo("Ingenious Leonin", 495, Rarity.UNCOMMON, mage.cards.i.IngeniousLeonin.class));
+        cards.add(new SetCardInfo("Inspiration from Beyond", 43, Rarity.UNCOMMON, mage.cards.i.InspirationFromBeyond.class));
         cards.add(new SetCardInfo("Island", 274, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Izzet Guildgate", 691, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
         cards.add(new SetCardInfo("Jazal Goldmane", 497, Rarity.RARE, mage.cards.j.JazalGoldmane.class));
