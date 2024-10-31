@@ -2,12 +2,12 @@ package mage.cards.l;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.keyword.WardAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -38,7 +38,7 @@ public final class LootTheKeyToEverything extends CardImpl {
 
         // At the beginning of your upkeep, exile the top X cards of your library, where X is the number of card types among other nonland permanents you control. You may play those cards this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ExileTopXMayPlayUntilEffect(LootTheKeyToEverythingValue.instance, Duration.EndOfTurn)
+                new ExileTopXMayPlayUntilEffect(LootTheKeyToEverythingValue.instance, false, Duration.EndOfTurn)
                         .setText("exile the top X cards of your library, where X is the number of card types " +
                                 "among other nonland permanents you control. You may play those cards this turn")
         ));

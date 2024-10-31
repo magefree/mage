@@ -273,6 +273,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Stroke of Midnight", 148, Rarity.UNCOMMON, mage.cards.s.StrokeOfMidnight.class));
         cards.add(new SetCardInfo("Stromkirk Bloodthief", 185, Rarity.UNCOMMON, mage.cards.s.StromkirkBloodthief.class));
         cards.add(new SetCardInfo("Stromkirk Noble", 632, Rarity.RARE, mage.cards.s.StromkirkNoble.class));
+        cards.add(new SetCardInfo("Strongbox Raider", 96, Rarity.UNCOMMON, mage.cards.s.StrongboxRaider.class));
         cards.add(new SetCardInfo("Surrak, the Hunt Caller", 647, Rarity.RARE, mage.cards.s.SurrakTheHuntCaller.class));
         cards.add(new SetCardInfo("Swamp", 276, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftblade Vindicator", 246, Rarity.RARE, mage.cards.s.SwiftbladeVindicator.class));

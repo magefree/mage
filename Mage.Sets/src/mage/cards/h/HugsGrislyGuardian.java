@@ -35,7 +35,7 @@ public final class HugsGrislyGuardian extends CardImpl {
 
         // When Hugs, Grisly Guardian enters, exile the top X cards of your library. Until the end of your next turn, you may play those cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ExileTopXMayPlayUntilEffect(
-                GetXValue.instance, Duration.UntilEndOfYourNextTurn
+                GetXValue.instance, false, Duration.UntilEndOfYourNextTurn
         )));
 
         // You may play an additional land on each of your turns.
