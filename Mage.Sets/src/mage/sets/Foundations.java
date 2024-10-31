@@ -145,6 +145,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Grappling Kraken", 39, Rarity.UNCOMMON, mage.cards.g.GrapplingKraken.class));
         cards.add(new SetCardInfo("Gratuitous Violence", 715, Rarity.RARE, mage.cards.g.GratuitousViolence.class));
         cards.add(new SetCardInfo("Gruul Guildgate", 690, Rarity.COMMON, mage.cards.g.GruulGuildgate.class));
+        cards.add(new SetCardInfo("Guarded Heir", 14, Rarity.UNCOMMON, mage.cards.g.GuardedHeir.class));
         cards.add(new SetCardInfo("Guttersnipe", 716, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
         cards.add(new SetCardInfo("Halana and Alena, Partners", 659, Rarity.RARE, mage.cards.h.HalanaAndAlenaPartners.class));
         cards.add(new SetCardInfo("Harbinger of the Tides", 593, Rarity.RARE, mage.cards.h.HarbingerOfTheTides.class));
