@@ -242,6 +242,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Rite of Replication", 711, Rarity.RARE, mage.cards.r.RiteOfReplication.class));
         cards.add(new SetCardInfo("River's Rebuke", 595, Rarity.RARE, mage.cards.r.RiversRebuke.class));
         cards.add(new SetCardInfo("Rogue's Passage", 264, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
+        cards.add(new SetCardInfo("Rune-Sealed Wall", 49, Rarity.UNCOMMON, mage.cards.r.RuneSealedWall.class));
         cards.add(new SetCardInfo("Sanguine Indulgence", 613, Rarity.COMMON, mage.cards.s.SanguineIndulgence.class));
         cards.add(new SetCardInfo("Savage Ventmaw", 665, Rarity.UNCOMMON, mage.cards.s.SavageVentmaw.class));
         cards.add(new SetCardInfo("Savannah Lions", 146, Rarity.UNCOMMON, mage.cards.s.SavannahLions.class));
