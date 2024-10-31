@@ -177,6 +177,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Knight of Malice", 608, Rarity.UNCOMMON, mage.cards.k.KnightOfMalice.class));
         cards.add(new SetCardInfo("Koma, World-Eater", 121, Rarity.RARE, mage.cards.k.KomaWorldEater.class));
         cards.add(new SetCardInfo("Krenko, Mob Boss", 204, Rarity.RARE, mage.cards.k.KrenkoMobBoss.class));
+        cards.add(new SetCardInfo("Kykar, Zephyr Awakener", 122, Rarity.RARE, mage.cards.k.KykarZephyrAwakener.class));
         cards.add(new SetCardInfo("Lathliss, Dragon Queen", 627, Rarity.RARE, mage.cards.l.LathlissDragonQueen.class));
         cards.add(new SetCardInfo("Leonin Skyhunter", 498, Rarity.UNCOMMON, mage.cards.l.LeoninSkyhunter.class));
         cards.add(new SetCardInfo("Leonin Vanguard", 499, Rarity.UNCOMMON, mage.cards.l.LeoninVanguard.class));
