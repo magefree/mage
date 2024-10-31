@@ -107,6 +107,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Erudite Wizard", 37, Rarity.COMMON, mage.cards.e.EruditeWizard.class));
         cards.add(new SetCardInfo("Essence Scatter", 153, Rarity.UNCOMMON, mage.cards.e.EssenceScatter.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 194, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
+        cards.add(new SetCardInfo("Exemplar of Light", 11, Rarity.RARE, mage.cards.e.ExemplarOfLight.class));
         cards.add(new SetCardInfo("Expedition Map", 724, Rarity.COMMON, mage.cards.e.ExpeditionMap.class));
         cards.add(new SetCardInfo("Exsanguinate", 173, Rarity.UNCOMMON, mage.cards.e.Exsanguinate.class));
         cards.add(new SetCardInfo("Extravagant Replication", 154, Rarity.RARE, mage.cards.e.ExtravagantReplication.class));
