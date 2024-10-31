@@ -229,6 +229,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Progenitus", 244, Rarity.MYTHIC, mage.cards.p.Progenitus.class));
         cards.add(new SetCardInfo("Pulse Tracker", 612, Rarity.COMMON, mage.cards.p.PulseTracker.class));
         cards.add(new SetCardInfo("Pyromancer's Goggles", 677, Rarity.MYTHIC, mage.cards.p.PyromancersGoggles.class));
+        cards.add(new SetCardInfo("Raise the Past", 22, Rarity.RARE, mage.cards.r.RaiseThePast.class));
         cards.add(new SetCardInfo("Rakdos Guildgate", 693, Rarity.COMMON, mage.cards.r.RakdosGuildgate.class));
         cards.add(new SetCardInfo("Ramos, Dragon Engine", 678, Rarity.MYTHIC, mage.cards.r.RamosDragonEngine.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 645, Rarity.RARE, mage.cards.r.RampagingBaloths.class));
