@@ -277,6 +277,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 276, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftblade Vindicator", 246, Rarity.RARE, mage.cards.s.SwiftbladeVindicator.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 258, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
+        cards.add(new SetCardInfo("Sylvan Scavenging", 113, Rarity.RARE, mage.cards.s.SylvanScavenging.class));
         cards.add(new SetCardInfo("Syr Alin, the Lion's Claw", 582, Rarity.UNCOMMON, mage.cards.s.SyrAlinTheLionsClaw.class));
         cards.add(new SetCardInfo("Tatyova, Benthic Druid", 247, Rarity.UNCOMMON, mage.cards.t.TatyovaBenthicDruid.class));
         cards.add(new SetCardInfo("Taurean Mauler", 633, Rarity.RARE, mage.cards.t.TaureanMauler.class));
