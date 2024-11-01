@@ -117,6 +117,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Duress", 606, Rarity.COMMON, mage.cards.d.Duress.class));
         cards.add(new SetCardInfo("Dwynen's Elite", 218, Rarity.COMMON, mage.cards.d.DwynensElite.class));
         cards.add(new SetCardInfo("Dwynen, Gilt-Leaf Daen", 217, Rarity.UNCOMMON, mage.cards.d.DwynenGiltLeafDaen.class));
+        cards.add(new SetCardInfo("Eager Trufflesnout", 102, Rarity.UNCOMMON, mage.cards.e.EagerTrufflesnout.class));
         cards.add(new SetCardInfo("Eaten Alive", 172, Rarity.COMMON, mage.cards.e.EatenAlive.class));
         cards.add(new SetCardInfo("Eaten by Piranhas", 507, Rarity.UNCOMMON, mage.cards.e.EatenByPiranhas.class));
         cards.add(new SetCardInfo("Elspeth's Smite", 493, Rarity.UNCOMMON, mage.cards.e.ElspethsSmite.class));
