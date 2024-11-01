@@ -601,6 +601,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Spectral Sailor", 363, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
         cards.add(new SetCardInfo("Spellgorger Weird", 601, Rarity.COMMON, mage.cards.s.SpellgorgerWeird.class));
         cards.add(new SetCardInfo("Sphinx of Enlightenment", 364, Rarity.MYTHIC, mage.cards.s.SphinxOfEnlightenment.class));
+        cards.add(new SetCardInfo("Spined Tyrranax", 26, Rarity.UNCOMMON, mage.cards.s.SpinedTyrranax.class));
         cards.add(new SetCardInfo("Spirited Companion", 256, Rarity.COMMON, mage.cards.s.SpiritedCompanion.class));
         cards.add(new SetCardInfo("Spore Crawler", 716, Rarity.COMMON, mage.cards.s.SporeCrawler.class));
         cards.add(new SetCardInfo("Spore Swarm", 717, Rarity.UNCOMMON, mage.cards.s.SporeSwarm.class));
