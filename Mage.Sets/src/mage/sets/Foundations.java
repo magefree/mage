@@ -58,6 +58,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodtithe Collector", 516, Rarity.UNCOMMON, mage.cards.b.BloodtitheCollector.class));
         cards.add(new SetCardInfo("Blossoming Sands", 260, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Bolt Bend", 619, Rarity.UNCOMMON, mage.cards.b.BoltBend.class));
+        cards.add(new SetCardInfo("Boltwave", 79, Rarity.UNCOMMON, mage.cards.b.Boltwave.class));
         cards.add(new SetCardInfo("Boros Charm", 721, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
         cards.add(new SetCardInfo("Boros Guildgate", 684, Rarity.COMMON, mage.cards.b.BorosGuildgate.class));
         cards.add(new SetCardInfo("Brass's Bounty", 190, Rarity.RARE, mage.cards.b.BrasssBounty.class));
