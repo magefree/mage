@@ -560,6 +560,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Scion of Darkness", 486, Rarity.UNCOMMON, mage.cards.s.ScionOfDarkness.class));
         cards.add(new SetCardInfo("Scion of Opulence", 597, Rarity.RARE, mage.cards.s.ScionOfOpulence.class));
         cards.add(new SetCardInfo("Scion of the Swarm", 487, Rarity.UNCOMMON, mage.cards.s.ScionOfTheSwarm.class));
+        cards.add(new SetCardInfo("Scourge of the Undercity", 11, Rarity.COMMON, mage.cards.s.ScourgeOfTheUndercity.class));
         cards.add(new SetCardInfo("Screaming Swarm", 351, Rarity.UNCOMMON, mage.cards.s.ScreamingSwarm.class));
         cards.add(new SetCardInfo("Search Party Captain", 250, Rarity.COMMON, mage.cards.s.SearchPartyCaptain.class));
         cards.add(new SetCardInfo("Seat of the Synod", 773, Rarity.COMMON, mage.cards.s.SeatOfTheSynod.class));
