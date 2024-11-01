@@ -50,6 +50,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Balmor, Battlemage Captain", 237, Rarity.UNCOMMON, mage.cards.b.BalmorBattlemageCaptain.class));
         cards.add(new SetCardInfo("Basilisk Collar", 669, Rarity.RARE, mage.cards.b.BasiliskCollar.class));
         cards.add(new SetCardInfo("Battlesong Berserker", 78, Rarity.UNCOMMON, mage.cards.b.BattlesongBerserker.class));
+        cards.add(new SetCardInfo("Bigfin Bouncer", 31, Rarity.COMMON, mage.cards.b.BigfinBouncer.class));
         cards.add(new SetCardInfo("Billowing Shriekmass", 56, Rarity.UNCOMMON, mage.cards.b.BillowingShriekmass.class));
         cards.add(new SetCardInfo("Blanchwood Armor", 213, Rarity.UNCOMMON, mage.cards.b.BlanchwoodArmor.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 259, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
