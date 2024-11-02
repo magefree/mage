@@ -45,7 +45,7 @@ public final class EzioBrashNovice extends CardImpl {
                 "as long as {this} has two or more counters on it, it has first strike"
         ));
         ability.addEffect(new ConditionalContinuousEffect(
-                new AddCardSubTypeSourceEffect(Duration.WhileOnBattlefield, SubType.ASSASSIN),
+                new AddCardSubTypeSourceEffect(Duration.WhileOnBattlefield, true, SubType.ASSASSIN),
                 EzioBrashNoviceCondition.instance, "and is an Assassin in addition to its other types"
         ));
         this.addAbility(ability);
