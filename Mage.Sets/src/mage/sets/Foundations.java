@@ -46,6 +46,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Arcanis the Omnipotent", 585, Rarity.RARE, mage.cards.a.ArcanisTheOmnipotent.class));
         cards.add(new SetCardInfo("Archmage of Runes", 30, Rarity.RARE, mage.cards.a.ArchmageOfRunes.class));
         cards.add(new SetCardInfo("Archway Angel", 566, Rarity.UNCOMMON, mage.cards.a.ArchwayAngel.class));
+        cards.add(new SetCardInfo("Armasaur Guide", 3, Rarity.COMMON, mage.cards.a.ArmasaurGuide.class));
         cards.add(new SetCardInfo("Aurelia, the Warleader", 651, Rarity.MYTHIC, mage.cards.a.AureliaTheWarleader.class));
         cards.add(new SetCardInfo("Authority of the Consuls", 137, Rarity.RARE, mage.cards.a.AuthorityOfTheConsuls.class));
         cards.add(new SetCardInfo("Axgard Cavalry", 189, Rarity.COMMON, mage.cards.a.AxgardCavalry.class));
