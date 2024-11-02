@@ -99,6 +99,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Celestial Armor", 5, Rarity.RARE, mage.cards.c.CelestialArmor.class));
         cards.add(new SetCardInfo("Cemetery Recruitment", 517, Rarity.COMMON, mage.cards.c.CemeteryRecruitment.class));
         cards.add(new SetCardInfo("Cephalid Inkmage", 32, Rarity.UNCOMMON, mage.cards.c.CephalidInkmage.class));
+        cards.add(new SetCardInfo("Chandra, Flameshaper", 81, Rarity.MYTHIC, mage.cards.c.ChandraFlameshaper.class));
         cards.add(new SetCardInfo("Charming Prince", 568, Rarity.RARE, mage.cards.c.CharmingPrince.class));
         cards.add(new SetCardInfo("Chart a Course", 586, Rarity.UNCOMMON, mage.cards.c.ChartACourse.class));
         cards.add(new SetCardInfo("Circuitous Route", 635, Rarity.UNCOMMON, mage.cards.c.CircuitousRoute.class));
