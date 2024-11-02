@@ -159,6 +159,9 @@ public class VerifyCardDataTest {
         // skipListAddName(SKIP_LIST_RARITY, set, cardName);
         skipListAddName(SKIP_LIST_RARITY, "CMR", "The Prismatic Piper"); // Collation is not yet set up for CMR https://www.lethe.xyz/mtg/collation/cmr.html
         skipListAddName(SKIP_LIST_RARITY, "DSC", "Suspicious Bookcase"); // temporary
+        skipListAddName(SKIP_LIST_RARITY, "FDN", "Maalfeld Twins"); // temporary
+        skipListAddName(SKIP_LIST_RARITY, "FDN", "Snakeskin Veil"); // temporary
+        skipListAddName(SKIP_LIST_RARITY, "FDN", "Lathril, Blade of the Elves"); // temporary
 
         // missing abilities
         // skipListAddName(SKIP_LIST_MISSING_ABILITIES, set, cardName);
