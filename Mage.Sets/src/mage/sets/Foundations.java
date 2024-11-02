@@ -230,6 +230,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Guttersnipe", 716, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
         cards.add(new SetCardInfo("Halana and Alena, Partners", 659, Rarity.RARE, mage.cards.h.HalanaAndAlenaPartners.class));
         cards.add(new SetCardInfo("Harbinger of the Tides", 593, Rarity.RARE, mage.cards.h.HarbingerOfTheTides.class));
+        cards.add(new SetCardInfo("Hare Apparent", 15, Rarity.COMMON, mage.cards.h.HareApparent.class));
         cards.add(new SetCardInfo("Harmless Offering", 625, Rarity.RARE, mage.cards.h.HarmlessOffering.class));
         cards.add(new SetCardInfo("Healer's Hawk", 142, Rarity.COMMON, mage.cards.h.HealersHawk.class));
         cards.add(new SetCardInfo("Heartfire Immolator", 201, Rarity.UNCOMMON, mage.cards.h.HeartfireImmolator.class));
