@@ -377,6 +377,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Simic Guildgate", 695, Rarity.COMMON, mage.cards.s.SimicGuildgate.class));
         cards.add(new SetCardInfo("Sire of Seven Deaths", 1, Rarity.MYTHIC, mage.cards.s.SireOfSevenDeaths.class));
         cards.add(new SetCardInfo("Skeleton Archer", 526, Rarity.COMMON, mage.cards.s.SkeletonArcher.class));
+        cards.add(new SetCardInfo("Skyknight Squire", 23, Rarity.RARE, mage.cards.s.SkyknightSquire.class));
         cards.add(new SetCardInfo("Skyraker Giant", 547, Rarity.COMMON, mage.cards.s.SkyrakerGiant.class));
         cards.add(new SetCardInfo("Skyship Buccaneer", 50, Rarity.UNCOMMON, mage.cards.s.SkyshipBuccaneer.class));
         cards.add(new SetCardInfo("Slagstorm", 207, Rarity.RARE, mage.cards.s.Slagstorm.class));
