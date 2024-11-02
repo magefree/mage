@@ -277,6 +277,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Liliana, Dreadhorde General", 176, Rarity.MYTHIC, mage.cards.l.LilianaDreadhordeGeneral.class));
         cards.add(new SetCardInfo("Linden, the Steadfast Queen", 577, Rarity.RARE, mage.cards.l.LindenTheSteadfastQueen.class));
         cards.add(new SetCardInfo("Llanowar Elves", 227, Rarity.COMMON, mage.cards.l.LlanowarElves.class));
+        cards.add(new SetCardInfo("Luminous Rebuke", 20, Rarity.COMMON, mage.cards.l.LuminousRebuke.class));
         cards.add(new SetCardInfo("Lunar Insight", 46, Rarity.RARE, mage.cards.l.LunarInsight.class));
         cards.add(new SetCardInfo("Lyra Dawnbringer", 707, Rarity.MYTHIC, mage.cards.l.LyraDawnbringer.class));
         cards.add(new SetCardInfo("Maalfeld Twins", 523, Rarity.UNCOMMON, mage.cards.m.MaalfeldTwins.class));
