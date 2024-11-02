@@ -367,6 +367,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Rune-Scarred Demon", 184, Rarity.RARE, mage.cards.r.RuneScarredDemon.class));
         cards.add(new SetCardInfo("Rune-Sealed Wall", 49, Rarity.UNCOMMON, mage.cards.r.RuneSealedWall.class));
         cards.add(new SetCardInfo("Sanguine Indulgence", 613, Rarity.COMMON, mage.cards.s.SanguineIndulgence.class));
+        cards.add(new SetCardInfo("Sanguine Syphoner", 68, Rarity.COMMON, mage.cards.s.SanguineSyphoner.class));
         cards.add(new SetCardInfo("Savage Ventmaw", 665, Rarity.UNCOMMON, mage.cards.s.SavageVentmaw.class));
         cards.add(new SetCardInfo("Savannah Lions", 146, Rarity.UNCOMMON, mage.cards.s.SavannahLions.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 232, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
