@@ -346,6 +346,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Regal Caracal", 579, Rarity.RARE, mage.cards.r.RegalCaracal.class));
         cards.add(new SetCardInfo("Release the Dogs", 580, Rarity.UNCOMMON, mage.cards.r.ReleaseTheDogs.class));
         cards.add(new SetCardInfo("Resolute Reinforcements", 145, Rarity.UNCOMMON, mage.cards.r.ResoluteReinforcements.class));
+        cards.add(new SetCardInfo("Revenge of the Rats", 67, Rarity.UNCOMMON, mage.cards.r.RevengeOfTheRats.class));
         cards.add(new SetCardInfo("Rise of the Dark Realms", 183, Rarity.MYTHIC, mage.cards.r.RiseOfTheDarkRealms.class));
         cards.add(new SetCardInfo("Rite of Replication", 711, Rarity.RARE, mage.cards.r.RiteOfReplication.class));
         cards.add(new SetCardInfo("River's Rebuke", 595, Rarity.RARE, mage.cards.r.RiversRebuke.class));
