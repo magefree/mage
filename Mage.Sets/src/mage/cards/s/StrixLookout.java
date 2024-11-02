@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -33,7 +34,7 @@ public final class StrixLookout extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // {1}{U}, {T}: Draw a card, then discard a card.
-        Ability ability = new SimpleActivatedAbility(new DrawDiscardControllerEffect(1, 1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
