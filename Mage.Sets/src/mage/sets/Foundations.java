@@ -89,6 +89,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Burrog Befuddler", 504, Rarity.COMMON, mage.cards.b.BurrogBefuddler.class));
         cards.add(new SetCardInfo("Burst Lightning", 192, Rarity.COMMON, mage.cards.b.BurstLightning.class));
         cards.add(new SetCardInfo("Bushwhack", 215, Rarity.COMMON, mage.cards.b.Bushwhack.class));
+        cards.add(new SetCardInfo("Cackling Prowler", 101, Rarity.COMMON, mage.cards.c.CacklingProwler.class));
         cards.add(new SetCardInfo("Campus Guide", 251, Rarity.COMMON, mage.cards.c.CampusGuide.class));
         cards.add(new SetCardInfo("Cancel", 505, Rarity.COMMON, mage.cards.c.Cancel.class));
         cards.add(new SetCardInfo("Carnelian Orb of Dragonkind", 534, Rarity.COMMON, mage.cards.c.CarnelianOrbOfDragonkind.class));
