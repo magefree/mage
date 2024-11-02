@@ -94,6 +94,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Campus Guide", 251, Rarity.COMMON, mage.cards.c.CampusGuide.class));
         cards.add(new SetCardInfo("Cancel", 505, Rarity.COMMON, mage.cards.c.Cancel.class));
         cards.add(new SetCardInfo("Carnelian Orb of Dragonkind", 534, Rarity.COMMON, mage.cards.c.CarnelianOrbOfDragonkind.class));
+        cards.add(new SetCardInfo("Cat Collector", 4, Rarity.UNCOMMON, mage.cards.c.CatCollector.class));
         cards.add(new SetCardInfo("Cathar Commando", 139, Rarity.COMMON, mage.cards.c.CatharCommando.class));
         cards.add(new SetCardInfo("Cemetery Recruitment", 517, Rarity.COMMON, mage.cards.c.CemeteryRecruitment.class));
         cards.add(new SetCardInfo("Cephalid Inkmage", 32, Rarity.UNCOMMON, mage.cards.c.CephalidInkmage.class));

@@ -36,7 +36,7 @@ public class GainLifeFirstTimeTriggeredAbility extends TriggeredAbilityImpl {
         setTriggerPhrase("When" + (when ? "" : "ever") + " you gain life for the first time each turn, ");
     }
 
-    private GainLifeFirstTimeTriggeredAbility(final GainLifeFirstTimeTriggeredAbility ability) {
+    protected GainLifeFirstTimeTriggeredAbility(final GainLifeFirstTimeTriggeredAbility ability) {
         super(ability);
         this.when = ability.when;
     }
