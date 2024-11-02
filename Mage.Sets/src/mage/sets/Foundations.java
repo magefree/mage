@@ -449,6 +449,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Tolarian Terror", 167, Rarity.COMMON, mage.cards.t.TolarianTerror.class));
         cards.add(new SetCardInfo("Tragic Banshee", 73, Rarity.UNCOMMON, mage.cards.t.TragicBanshee.class));
         cards.add(new SetCardInfo("Tranquil Cove", 270, Rarity.COMMON, mage.cards.t.TranquilCove.class));
+        cards.add(new SetCardInfo("Treetop Snarespinner", 114, Rarity.COMMON, mage.cards.t.TreetopSnarespinner.class));
         cards.add(new SetCardInfo("Tribute to Hunger", 614, Rarity.UNCOMMON, mage.cards.t.TributeToHunger.class));
         cards.add(new SetCardInfo("Trygon Predator", 667, Rarity.UNCOMMON, mage.cards.t.TrygonPredator.class));
         cards.add(new SetCardInfo("Twinblade Blessing", 26, Rarity.UNCOMMON, mage.cards.t.TwinbladeBlessing.class));
