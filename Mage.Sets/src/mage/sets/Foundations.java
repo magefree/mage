@@ -401,6 +401,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Sphinx of the Final Word", 597, Rarity.MYTHIC, mage.cards.s.SphinxOfTheFinalWord.class));
         cards.add(new SetCardInfo("Spitfire Lagac", 208, Rarity.COMMON, mage.cards.s.SpitfireLagac.class));
         cards.add(new SetCardInfo("Springbloom Druid", 646, Rarity.COMMON, mage.cards.s.SpringbloomDruid.class));
+        cards.add(new SetCardInfo("Stab", 71, Rarity.COMMON, mage.cards.s.Stab.class));
         cards.add(new SetCardInfo("Starlight Snare", 514, Rarity.COMMON, mage.cards.s.StarlightSnare.class));
         cards.add(new SetCardInfo("Stasis Snare", 581, Rarity.UNCOMMON, mage.cards.s.StasisSnare.class));
         cards.add(new SetCardInfo("Steel Hellkite", 681, Rarity.RARE, mage.cards.s.SteelHellkite.class));
