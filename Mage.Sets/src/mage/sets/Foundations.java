@@ -117,6 +117,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Dauntless Veteran", 8, Rarity.UNCOMMON, mage.cards.d.DauntlessVeteran.class));
         cards.add(new SetCardInfo("Dawnwing Marshal", 570, Rarity.UNCOMMON, mage.cards.d.DawnwingMarshal.class));
         cards.add(new SetCardInfo("Day of Judgment", 140, Rarity.RARE, mage.cards.d.DayOfJudgment.class));
+        cards.add(new SetCardInfo("Dazzling Angel", 9, Rarity.COMMON, mage.cards.d.DazzlingAngel.class));
         cards.add(new SetCardInfo("Deadly Brew", 654, Rarity.UNCOMMON, mage.cards.d.DeadlyBrew.class));
         cards.add(new SetCardInfo("Deadly Plot", 520, Rarity.UNCOMMON, mage.cards.d.DeadlyPlot.class));
         cards.add(new SetCardInfo("Deadly Riposte", 492, Rarity.COMMON, mage.cards.d.DeadlyRiposte.class));
