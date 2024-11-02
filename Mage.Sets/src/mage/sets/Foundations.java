@@ -218,6 +218,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Goldvein Pick", 253, Rarity.COMMON, mage.cards.g.GoldveinPick.class));
         cards.add(new SetCardInfo("Golgari Guildgate", 689, Rarity.COMMON, mage.cards.g.GolgariGuildgate.class));
         cards.add(new SetCardInfo("Good-Fortune Unicorn", 240, Rarity.UNCOMMON, mage.cards.g.GoodFortuneUnicorn.class));
+        cards.add(new SetCardInfo("Gorehorn Raider", 89, Rarity.COMMON, mage.cards.g.GorehornRaider.class));
         cards.add(new SetCardInfo("Grappling Kraken", 39, Rarity.UNCOMMON, mage.cards.g.GrapplingKraken.class));
         cards.add(new SetCardInfo("Gratuitous Violence", 715, Rarity.RARE, mage.cards.g.GratuitousViolence.class));
         cards.add(new SetCardInfo("Grow from the Ashes", 225, Rarity.COMMON, mage.cards.g.GrowFromTheAshes.class));
