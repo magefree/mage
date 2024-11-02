@@ -33,6 +33,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Ajani's Pridemate", 135, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
         cards.add(new SetCardInfo("Ajani, Caller of the Pride", 134, Rarity.MYTHIC, mage.cards.a.AjaniCallerOfThePride.class));
         cards.add(new SetCardInfo("Alesha, Who Laughs at Fate", 115, Rarity.RARE, mage.cards.a.AleshaWhoLaughsAtFate.class));
+        cards.add(new SetCardInfo("Ambush Wolf", 98, Rarity.COMMON, mage.cards.a.AmbushWolf.class));
         cards.add(new SetCardInfo("An Offer You Can't Refuse", 160, Rarity.UNCOMMON, mage.cards.a.AnOfferYouCantRefuse.class));
         cards.add(new SetCardInfo("Ancestor Dragon", 489, Rarity.RARE, mage.cards.a.AncestorDragon.class));
         cards.add(new SetCardInfo("Angel of Finality", 136, Rarity.UNCOMMON, mage.cards.a.AngelOfFinality.class));
