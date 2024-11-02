@@ -463,6 +463,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Vampire Interloper", 530, Rarity.COMMON, mage.cards.v.VampireInterloper.class));
         cards.add(new SetCardInfo("Vampire Neonate", 531, Rarity.COMMON, mage.cards.v.VampireNeonate.class));
         cards.add(new SetCardInfo("Vampire Nighthawk", 186, Rarity.UNCOMMON, mage.cards.v.VampireNighthawk.class));
+        cards.add(new SetCardInfo("Vampire Soulcaller", 75, Rarity.COMMON, mage.cards.v.VampireSoulcaller.class));
         cards.add(new SetCardInfo("Vampire Spawn", 532, Rarity.COMMON, mage.cards.v.VampireSpawn.class));
         cards.add(new SetCardInfo("Vampiric Rites", 615, Rarity.UNCOMMON, mage.cards.v.VampiricRites.class));
         cards.add(new SetCardInfo("Vanguard Seraph", 28, Rarity.COMMON, mage.cards.v.VanguardSeraph.class));
