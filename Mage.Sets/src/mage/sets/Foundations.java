@@ -341,6 +341,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Pyromancer's Goggles", 677, Rarity.MYTHIC, mage.cards.p.PyromancersGoggles.class));
         cards.add(new SetCardInfo("Quakestrider Ceratops", 110, Rarity.UNCOMMON, mage.cards.q.QuakestriderCeratops.class));
         cards.add(new SetCardInfo("Quick Study", 513, Rarity.COMMON, mage.cards.q.QuickStudy.class));
+        cards.add(new SetCardInfo("Quick-Draw Katana", 130, Rarity.COMMON, mage.cards.q.QuickDrawKatana.class));
         cards.add(new SetCardInfo("Raging Redcap", 543, Rarity.COMMON, mage.cards.r.RagingRedcap.class));
         cards.add(new SetCardInfo("Raise the Past", 22, Rarity.RARE, mage.cards.r.RaiseThePast.class));
         cards.add(new SetCardInfo("Rakdos Guildgate", 693, Rarity.COMMON, mage.cards.r.RakdosGuildgate.class));
