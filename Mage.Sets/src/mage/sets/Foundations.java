@@ -406,6 +406,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Stasis Snare", 581, Rarity.UNCOMMON, mage.cards.s.StasisSnare.class));
         cards.add(new SetCardInfo("Steel Hellkite", 681, Rarity.RARE, mage.cards.s.SteelHellkite.class));
         cards.add(new SetCardInfo("Storm Fleet Spy", 515, Rarity.UNCOMMON, mage.cards.s.StormFleetSpy.class));
+        cards.add(new SetCardInfo("Strix Lookout", 52, Rarity.COMMON, mage.cards.s.StrixLookout.class));
         cards.add(new SetCardInfo("Stroke of Midnight", 148, Rarity.UNCOMMON, mage.cards.s.StrokeOfMidnight.class));
         cards.add(new SetCardInfo("Stromkirk Bloodthief", 185, Rarity.UNCOMMON, mage.cards.s.StromkirkBloodthief.class));
         cards.add(new SetCardInfo("Stromkirk Noble", 632, Rarity.RARE, mage.cards.s.StromkirkNoble.class));
