@@ -465,6 +465,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Vampire Nighthawk", 186, Rarity.UNCOMMON, mage.cards.v.VampireNighthawk.class));
         cards.add(new SetCardInfo("Vampire Spawn", 532, Rarity.COMMON, mage.cards.v.VampireSpawn.class));
         cards.add(new SetCardInfo("Vampiric Rites", 615, Rarity.UNCOMMON, mage.cards.v.VampiricRites.class));
+        cards.add(new SetCardInfo("Vanguard Seraph", 28, Rarity.COMMON, mage.cards.v.VanguardSeraph.class));
         cards.add(new SetCardInfo("Vengeful Bloodwitch", 76, Rarity.UNCOMMON, mage.cards.v.VengefulBloodwitch.class));
         cards.add(new SetCardInfo("Venom Connoisseur", 648, Rarity.UNCOMMON, mage.cards.v.VenomConnoisseur.class));
         cards.add(new SetCardInfo("Viashino Pyromancer", 634, Rarity.COMMON, mage.cards.v.ViashinoPyromancer.class));
