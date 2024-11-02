@@ -244,6 +244,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Impact Tremors", 717, Rarity.COMMON, mage.cards.i.ImpactTremors.class));
         cards.add(new SetCardInfo("Imperious Perfect", 719, Rarity.UNCOMMON, mage.cards.i.ImperiousPerfect.class));
         cards.add(new SetCardInfo("Imprisoned in the Moon", 156, Rarity.UNCOMMON, mage.cards.i.ImprisonedInTheMoon.class));
+        cards.add(new SetCardInfo("Incinerating Blast", 90, Rarity.COMMON, mage.cards.i.IncineratingBlast.class));
         cards.add(new SetCardInfo("Ingenious Leonin", 495, Rarity.UNCOMMON, mage.cards.i.IngeniousLeonin.class));
         cards.add(new SetCardInfo("Inspiration from Beyond", 43, Rarity.UNCOMMON, mage.cards.i.InspirationFromBeyond.class));
         cards.add(new SetCardInfo("Inspiring Call", 226, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
