@@ -71,6 +71,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Bishop's Soldier", 491, Rarity.COMMON, mage.cards.b.BishopsSoldier.class));
         cards.add(new SetCardInfo("Bite Down", 212, Rarity.COMMON, mage.cards.b.BiteDown.class));
         cards.add(new SetCardInfo("Blanchwood Armor", 213, Rarity.UNCOMMON, mage.cards.b.BlanchwoodArmor.class));
+        cards.add(new SetCardInfo("Blasphemous Edict", 57, Rarity.RARE, mage.cards.b.BlasphemousEdict.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 259, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Bloodthirsty Conqueror", 58, Rarity.MYTHIC, mage.cards.b.BloodthirstyConqueror.class));
         cards.add(new SetCardInfo("Bloodtithe Collector", 516, Rarity.UNCOMMON, mage.cards.b.BloodtitheCollector.class));
