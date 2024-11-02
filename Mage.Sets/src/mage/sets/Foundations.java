@@ -22,6 +22,7 @@ public final class Foundations extends ExpansionSet {
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Abrade", 188, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
+        cards.add(new SetCardInfo("Abyssal Harvester", 54, Rarity.RARE, mage.cards.a.AbyssalHarvester.class));
         cards.add(new SetCardInfo("Adamant Will", 488, Rarity.COMMON, mage.cards.a.AdamantWill.class));
         cards.add(new SetCardInfo("Adaptive Automaton", 723, Rarity.RARE, mage.cards.a.AdaptiveAutomaton.class));
         cards.add(new SetCardInfo("Adventuring Gear", 249, Rarity.UNCOMMON, mage.cards.a.AdventuringGear.class));
