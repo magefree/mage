@@ -103,6 +103,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Confiscate", 709, Rarity.UNCOMMON, mage.cards.c.Confiscate.class));
         cards.add(new SetCardInfo("Consuming Aberration", 238, Rarity.RARE, mage.cards.c.ConsumingAberration.class));
         cards.add(new SetCardInfo("Corsair Captain", 506, Rarity.RARE, mage.cards.c.CorsairCaptain.class));
+        cards.add(new SetCardInfo("Crackling Cyclops", 83, Rarity.COMMON, mage.cards.c.CracklingCyclops.class));
         cards.add(new SetCardInfo("Crash Through", 620, Rarity.COMMON, mage.cards.c.CrashThrough.class));
         cards.add(new SetCardInfo("Crawling Barrens", 685, Rarity.RARE, mage.cards.c.CrawlingBarrens.class));
         cards.add(new SetCardInfo("Crossway Troublemakers", 518, Rarity.RARE, mage.cards.c.CrosswayTroublemakers.class));
