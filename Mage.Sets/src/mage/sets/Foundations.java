@@ -276,6 +276,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Inspiration from Beyond", 43, Rarity.UNCOMMON, mage.cards.i.InspirationFromBeyond.class));
         cards.add(new SetCardInfo("Inspiring Call", 226, Rarity.UNCOMMON, mage.cards.i.InspiringCall.class));
         cards.add(new SetCardInfo("Inspiring Overseer", 496, Rarity.COMMON, mage.cards.i.InspiringOverseer.class));
+        cards.add(new SetCardInfo("Inspiring Paladin", 18, Rarity.COMMON, mage.cards.i.InspiringPaladin.class));
         cards.add(new SetCardInfo("Into the Roil", 509, Rarity.COMMON, mage.cards.i.IntoTheRoil.class));
         cards.add(new SetCardInfo("Involuntary Employment", 203, Rarity.COMMON, mage.cards.i.InvoluntaryEmployment.class));
         cards.add(new SetCardInfo("Island", 274, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
