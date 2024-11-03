@@ -7,47 +7,47 @@ import mage.game.Game;
 import java.io.ObjectStreamException;
 
 /**
- * Hexproof from planeswalkers
+ * Hexproof from instants
  *
- * @author weirddan455
+ * @author ciaccona007
  */
-public class HexproofFromPlaneswalkersAbility extends HexproofBaseAbility {
+public class HexproofFromInstantsAbility extends HexproofBaseAbility {
 
-    private static final HexproofFromPlaneswalkersAbility instance;
+    private static final HexproofFromInstantsAbility instance;
 
     static {
-        instance = new HexproofFromPlaneswalkersAbility();
+        instance = new HexproofFromInstantsAbility();
     }
 
     private Object readResolve() throws ObjectStreamException {
         return instance;
     }
 
-    public static HexproofFromPlaneswalkersAbility getInstance() {
+    public static HexproofFromInstantsAbility getInstance() {
         return instance;
     }
 
-    private HexproofFromPlaneswalkersAbility() {
+    private HexproofFromInstantsAbility() {
         super();
     }
 
     @Override
     public boolean checkObject(MageObject sourceObject, Ability source, Game game) {
-        return sourceObject.isPlaneswalker(game);
+        return sourceObject.isInstant(game);
     }
 
     @Override
-    public HexproofFromPlaneswalkersAbility copy() {
+    public HexproofFromInstantsAbility copy() {
         return instance;
     }
 
     @Override
     public String getRule() {
-        return "hexproof from planeswalkers";
+        return "hexproof from instants";
     }
 
     @Override
     public String getCardIconHint(Game game) {
-        return "hexproof from planeswalkers";
+        return "hexproof from instants";
     }
 }

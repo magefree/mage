@@ -12,9 +12,10 @@ import java.util.Optional;
  * @author TheElk801
  */
 public enum MoreThanStartingLifeTotalCondition implements Condition {
+    ONE(1),
     SEVEN(7),
     TEN(10),
-    FIFTEEN(10);
+    FIFTEEN(15);
     private final int amount;
 
     MoreThanStartingLifeTotalCondition(int amount) {
