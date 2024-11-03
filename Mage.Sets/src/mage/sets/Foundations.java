@@ -263,6 +263,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Hinterland Sanctifier", 730, Rarity.COMMON, mage.cards.h.HinterlandSanctifier.class));
         cards.add(new SetCardInfo("Hoarding Dragon", 626, Rarity.UNCOMMON, mage.cards.h.HoardingDragon.class));
         cards.add(new SetCardInfo("Homunculus Horde", 41, Rarity.RARE, mage.cards.h.HomunculusHorde.class));
+        cards.add(new SetCardInfo("Hungry Ghoul", 62, Rarity.COMMON, mage.cards.h.HungryGhoul.class));
         cards.add(new SetCardInfo("Icewind Elemental", 42, Rarity.COMMON, mage.cards.i.IcewindElemental.class));
         cards.add(new SetCardInfo("Immersturm Predator", 660, Rarity.RARE, mage.cards.i.ImmersturmPredator.class));
         cards.add(new SetCardInfo("Impact Tremors", 717, Rarity.COMMON, mage.cards.i.ImpactTremors.class));
