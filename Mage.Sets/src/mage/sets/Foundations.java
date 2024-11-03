@@ -155,6 +155,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Dreadwing Scavenger", 118, Rarity.UNCOMMON, mage.cards.d.DreadwingScavenger.class));
         cards.add(new SetCardInfo("Driver of the Dead", 605, Rarity.COMMON, mage.cards.d.DriverOfTheDead.class));
         cards.add(new SetCardInfo("Drogskol Reaver", 655, Rarity.RARE, mage.cards.d.DrogskolReaver.class));
+        cards.add(new SetCardInfo("Dropkick Bomber", 537, Rarity.RARE, mage.cards.d.DropkickBomber.class));
         cards.add(new SetCardInfo("Druid of the Cowl", 554, Rarity.COMMON, mage.cards.d.DruidOfTheCowl.class));
         cards.add(new SetCardInfo("Dryad Militant", 656, Rarity.UNCOMMON, mage.cards.d.DryadMilitant.class));
         cards.add(new SetCardInfo("Duress", 606, Rarity.COMMON, mage.cards.d.Duress.class));

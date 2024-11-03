@@ -207,6 +207,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Dreadful Apathy", 192, Rarity.COMMON, mage.cards.d.DreadfulApathy.class));
         cards.add(new SetCardInfo("Dreadhorde Arcanist", 539, Rarity.RARE, mage.cards.d.DreadhordeArcanist.class));
         cards.add(new SetCardInfo("Dreadhound", 427, Rarity.UNCOMMON, mage.cards.d.Dreadhound.class));
+        cards.add(new SetCardInfo("Dropkick Bomber", 13, Rarity.RARE, mage.cards.d.DropkickBomber.class));
         cards.add(new SetCardInfo("Dross Hopper", 428, Rarity.COMMON, mage.cards.d.DrossHopper.class));
         cards.add(new SetCardInfo("Drover of the Mighty", 650, Rarity.UNCOMMON, mage.cards.d.DroverOfTheMighty.class));
         cards.add(new SetCardInfo("Drowsing Tyrannodon", 651, Rarity.COMMON, mage.cards.d.DrowsingTyrannodon.class));
