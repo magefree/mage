@@ -199,6 +199,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Firebrand Archer", 196, Rarity.COMMON, mage.cards.f.FirebrandArcher.class));
         cards.add(new SetCardInfo("Fireshrieker", 674, Rarity.UNCOMMON, mage.cards.f.Fireshrieker.class));
         cards.add(new SetCardInfo("Firespitter Whelp", 197, Rarity.UNCOMMON, mage.cards.f.FirespitterWhelp.class));
+        cards.add(new SetCardInfo("Fishing Pole", 128, Rarity.UNCOMMON, mage.cards.f.FishingPole.class));
         cards.add(new SetCardInfo("Flamewake Phoenix", 198, Rarity.RARE, mage.cards.f.FlamewakePhoenix.class));
         cards.add(new SetCardInfo("Flashfreeze", 590, Rarity.UNCOMMON, mage.cards.f.Flashfreeze.class));
         cards.add(new SetCardInfo("Fleeting Distraction", 155, Rarity.COMMON, mage.cards.f.FleetingDistraction.class));
