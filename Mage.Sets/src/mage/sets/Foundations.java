@@ -190,6 +190,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Felidar Cub", 573, Rarity.COMMON, mage.cards.f.FelidarCub.class));
         cards.add(new SetCardInfo("Felidar Retreat", 574, Rarity.RARE, mage.cards.f.FelidarRetreat.class));
         cards.add(new SetCardInfo("Felidar Savior", 12, Rarity.COMMON, mage.cards.f.FelidarSavior.class));
+        cards.add(new SetCardInfo("Felling Blow", 105, Rarity.UNCOMMON, mage.cards.f.FellingBlow.class));
         cards.add(new SetCardInfo("Fierce Empath", 636, Rarity.COMMON, mage.cards.f.FierceEmpath.class));
         cards.add(new SetCardInfo("Fiery Annihilation", 86, Rarity.UNCOMMON, mage.cards.f.FieryAnnihilation.class));
         cards.add(new SetCardInfo("Finale of Revelation", 589, Rarity.MYTHIC, mage.cards.f.FinaleOfRevelation.class));
