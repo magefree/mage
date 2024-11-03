@@ -142,6 +142,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Disenchant", 572, Rarity.COMMON, mage.cards.d.Disenchant.class));
         cards.add(new SetCardInfo("Dismal Backwater", 261, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Dive Down", 588, Rarity.COMMON, mage.cards.d.DiveDown.class));
+        cards.add(new SetCardInfo("Divine Resilience", 10, Rarity.UNCOMMON, mage.cards.d.DivineResilience.class));
         cards.add(new SetCardInfo("Doubling Season", 216, Rarity.MYTHIC, mage.cards.d.DoublingSeason.class));
         cards.add(new SetCardInfo("Dragon Fodder", 535, Rarity.COMMON, mage.cards.d.DragonFodder.class));
         cards.add(new SetCardInfo("Dragon Mage", 621, Rarity.UNCOMMON, mage.cards.d.DragonMage.class));
