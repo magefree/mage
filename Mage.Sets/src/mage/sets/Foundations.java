@@ -227,6 +227,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Gnarlid Colony", 224, Rarity.COMMON, mage.cards.g.GnarlidColony.class));
         cards.add(new SetCardInfo("Goblin Boarders", 87, Rarity.COMMON, mage.cards.g.GoblinBoarders.class));
         cards.add(new SetCardInfo("Goblin Firebomb", 562, Rarity.COMMON, mage.cards.g.GoblinFirebomb.class));
+        cards.add(new SetCardInfo("Goblin Negotiation", 88, Rarity.UNCOMMON, mage.cards.g.GoblinNegotiation.class));
         cards.add(new SetCardInfo("Goblin Oriflamme", 539, Rarity.UNCOMMON, mage.cards.g.GoblinOriflamme.class));
         cards.add(new SetCardInfo("Goblin Smuggler", 540, Rarity.COMMON, mage.cards.g.GoblinSmuggler.class));
         cards.add(new SetCardInfo("Goblin Surprise", 200, Rarity.COMMON, mage.cards.g.GoblinSurprise.class));
