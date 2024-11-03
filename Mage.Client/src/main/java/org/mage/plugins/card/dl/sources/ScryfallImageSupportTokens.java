@@ -2457,6 +2457,10 @@ public class ScryfallImageSupportTokens {
             // BLC
             put("BLC/Raccoon", "https://api.scryfall.com/cards/tblc/29/en?format=image");
 
+            // FDN
+            put("FDN/Emblem Kaito", "https://api.scryfall.com/cards/tfdn/24/en?format=image");
+            put("FDN/Ninja", "https://api.scryfall.com/cards/tfdn/12/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

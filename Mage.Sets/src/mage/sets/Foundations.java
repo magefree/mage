@@ -286,6 +286,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Joust Through", 19, Rarity.UNCOMMON, mage.cards.j.JoustThrough.class));
         cards.add(new SetCardInfo("Juggernaut", 255, Rarity.UNCOMMON, mage.cards.j.Juggernaut.class));
         cards.add(new SetCardInfo("Jungle Hollow", 263, Rarity.COMMON, mage.cards.j.JungleHollow.class));
+        cards.add(new SetCardInfo("Kaito, Cunning Infiltrator", 44, Rarity.MYTHIC, mage.cards.k.KaitoCunningInfiltrator.class));
         cards.add(new SetCardInfo("Kalastria Highborn", 607, Rarity.RARE, mage.cards.k.KalastriaHighborn.class));
         cards.add(new SetCardInfo("Kargan Dragonrider", 541, Rarity.COMMON, mage.cards.k.KarganDragonrider.class));
         cards.add(new SetCardInfo("Kindled Fury", 542, Rarity.COMMON, mage.cards.k.KindledFury.class));

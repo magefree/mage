@@ -136,6 +136,7 @@
 |Generate|EMBLEM:M3C|Emblem Vivien|||VivienReidEmblem|
 |Generate|EMBLEM:ACR|Emblem Capitoline Triad|||TheCapitolineTriadEmblem|
 |Generate|EMBLEM:BLB|Emblem Ral|||RalCracklingWitEmblem|
+|Generate|EMBLEM:FDN|Emblem Kaito|||KaitoCunningInfiltratorEmblem|
 
 # ALL PLANES
 # Usage hints:
@@ -2393,3 +2394,6 @@
 
 # BLC
 |Generate|TOK:BLC|Racoon|||RaccoonToken|
+
+# FDN
+|Generate|TOK:FDN|Ninja|||NinjaToken2|
