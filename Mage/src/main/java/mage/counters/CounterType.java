@@ -112,6 +112,7 @@ public enum CounterType {
     ICE("ice"),
     IMPOSTOR("impostor"),
     INCARNATION("incarnation"),
+    INCUBATION("incubation"),
     INDESTRUCTIBLE("indestructible"),
     INFECTION("infection"),
     INFLUENCE("influence"),

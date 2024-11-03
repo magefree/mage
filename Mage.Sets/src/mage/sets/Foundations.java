@@ -149,6 +149,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Dragon Trainer", 84, Rarity.UNCOMMON, mage.cards.d.DragonTrainer.class));
         cards.add(new SetCardInfo("Dragonlord's Servant", 536, Rarity.UNCOMMON, mage.cards.d.DragonlordsServant.class));
         cards.add(new SetCardInfo("Dragonmaster Outcast", 622, Rarity.MYTHIC, mage.cards.d.DragonmasterOutcast.class));
+        cards.add(new SetCardInfo("Drake Hatcher", 35, Rarity.RARE, mage.cards.d.DrakeHatcher.class));
         cards.add(new SetCardInfo("Drakuseth, Maw of Flames", 193, Rarity.RARE, mage.cards.d.DrakusethMawOfFlames.class));
         cards.add(new SetCardInfo("Dread Summons", 604, Rarity.RARE, mage.cards.d.DreadSummons.class));
         cards.add(new SetCardInfo("Dreadwing Scavenger", 118, Rarity.UNCOMMON, mage.cards.d.DreadwingScavenger.class));
