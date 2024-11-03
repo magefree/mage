@@ -258,6 +258,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Heroic Reinforcements", 241, Rarity.UNCOMMON, mage.cards.h.HeroicReinforcements.class));
         cards.add(new SetCardInfo("Hidetsugu's Second Rite", 202, Rarity.UNCOMMON, mage.cards.h.HidetsugusSecondRite.class));
         cards.add(new SetCardInfo("High Fae Trickster", 40, Rarity.RARE, mage.cards.h.HighFaeTrickster.class));
+        cards.add(new SetCardInfo("High-Society Hunter", 61, Rarity.RARE, mage.cards.h.HighSocietyHunter.class));
         cards.add(new SetCardInfo("Highborn Vampire", 522, Rarity.COMMON, mage.cards.h.HighbornVampire.class));
         cards.add(new SetCardInfo("Hinterland Sanctifier", 730, Rarity.COMMON, mage.cards.h.HinterlandSanctifier.class));
         cards.add(new SetCardInfo("Hoarding Dragon", 626, Rarity.UNCOMMON, mage.cards.h.HoardingDragon.class));
