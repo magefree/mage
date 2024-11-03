@@ -3,6 +3,7 @@ package mage.cards.c;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.common.CantBeCounteredSourceAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -38,6 +39,8 @@ public final class CuratorOfDestinies extends CardImpl {
         this.toughness = new MageInt(5);
 
         // This spell can't be countered.
+        this.addAbility(new CantBeCounteredSourceAbility());
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
