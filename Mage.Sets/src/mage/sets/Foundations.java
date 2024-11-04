@@ -345,6 +345,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Negate", 710, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Nessian Hornbeetle", 229, Rarity.UNCOMMON, mage.cards.n.NessianHornbeetle.class));
         cards.add(new SetCardInfo("New Horizons", 557, Rarity.COMMON, mage.cards.n.NewHorizons.class));
+        cards.add(new SetCardInfo("Nine-Lives Familiar", 66, Rarity.RARE, mage.cards.n.NineLivesFamiliar.class));
         cards.add(new SetCardInfo("Niv-Mizzet, Visionary", 123, Rarity.MYTHIC, mage.cards.n.NivMizzetVisionary.class));
         cards.add(new SetCardInfo("Nullpriest of Oblivion", 611, Rarity.RARE, mage.cards.n.NullpriestOfOblivion.class));
         cards.add(new SetCardInfo("Obliterating Bolt", 629, Rarity.UNCOMMON, mage.cards.o.ObliteratingBolt.class));
