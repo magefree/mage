@@ -15,7 +15,7 @@ import java.util.*;
  */
 public abstract class NthTargetPointer extends TargetPointerImpl {
 
-    private static final List<UUID> emptyTargets = Collections.unmodifiableList(new ArrayList<>(0));
+    private static final List<UUID> emptyTargets = Collections.unmodifiableList(new ArrayList<>());
 
     // TODO: rework to list of MageObjectReference instead zcc
     private final Map<UUID, Integer> zoneChangeCounter = new HashMap<>();

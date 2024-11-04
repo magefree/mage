@@ -1,5 +1,6 @@
 package mage.abilities.decorator;
 
+import mage.MageObject;
 import mage.abilities.Modes;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -7,6 +8,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.constants.EffectType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.util.CardUtil;
@@ -132,5 +134,15 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
     @Override
     public boolean caresAboutManaColor() {
         return condition.caresAboutManaColor();
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        if (isLeavesTheBattlefieldTrigger()) {
+            // TODO: leaves battlefield and die are not same! Is it possible make a diff logic?
+            return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
+        } else {
+            return super.isInUseableZone(game, source, event);
+        }
     }
 }

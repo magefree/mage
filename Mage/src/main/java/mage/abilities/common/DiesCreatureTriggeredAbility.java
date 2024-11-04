@@ -48,6 +48,7 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl {
         super(zone, effect, optional);
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
+        setLeavesTheBattlefieldTrigger(true);
         setTriggerPhrase("Whenever " + filter.getMessage() + (filter.getMessage().startsWith("one or more") ? " die, " : " dies, "));
     }
 

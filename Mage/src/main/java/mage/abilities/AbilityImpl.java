@@ -29,7 +29,9 @@ import mage.game.Game;
 import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
+import mage.game.events.BatchEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
@@ -1172,11 +1174,6 @@ public abstract class AbilityImpl implements Ability {
         return false;
     }
 
-    /**
-     * @param game
-     * @param source
-     * @return
-     */
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
         if (!this.hasSourceObjectAbility(game, source, event)) {
@@ -1201,13 +1198,74 @@ public abstract class AbilityImpl implements Ability {
         } else {
             parameterSourceId = getSourceId();
         }
+
+        // old code:
+        // TODO: delete after dies fix
         // check against shortLKI for effects that move multiple object at the same time (e.g. destroy all)
         if (game.checkShortLivingLKI(getSourceId(), getZone())) {
-            return true;
+            //return true; // fix 1
         }
-        // check against current state
-        Zone test = game.getState().getZone(parameterSourceId);
-        return zone.match(test);
+
+
+        // 603.10.
+        // Normally, objects that exist immediately after an event are checked to see if the event matched
+        // any trigger conditions, and continuous effects that exist at that time are used to determine what the
+        // trigger conditions are and what the objects involved in the event look like.
+        // ...
+        Zone lookingInZone = game.getState().getZone(parameterSourceId);
+
+        // 603.10.
+        // ...
+        // However, some triggered abilities are exceptions to this rule; the game “looks back in time” to determine
+        // if those abilities trigger, using the existence of those abilities and the appearance of objects
+        // immediately prior to the event. The list of exceptions is as follows:
+
+        // 603.10a
+        // Some zone-change triggers look back in time. These are leaves-the-battlefield abilities,
+        // abilities that trigger when a card leaves a graveyard, and abilities that trigger when an object that all
+        // players can see is put into a hand or library.
+        // TODO: research "leaves a graveyard"
+        // TODO: research "put into a hand or library"
+        if (source instanceof Permanent && isTriggerCanFireAfterLeaveBattlefield(event)) {
+            // support leaves-the-battlefield abilities
+            lookingInZone = Zone.BATTLEFIELD;
+        }
+
+        // TODO: research use cases and implement shared logic with "looking zone" instead LKI only
+        // 603.10b Abilities that trigger when a permanent phases out look back in time.
+        // 603.10c Abilities that trigger specifically when an object becomes unattached look back in time.
+        // 603.10d Abilities that trigger when a player loses control of an object look back in time.
+        // 603.10e Abilities that trigger when a spell is countered look back in time.
+        // 603.10f Abilities that trigger when a player loses the game look back in time.
+        // 603.10g Abilities that trigger when a player planeswalks away from a plane look back in time.
+
+        return zone.match(lookingInZone);
+    }
+
+    public static boolean isTriggerCanFireAfterLeaveBattlefield(GameEvent event) {
+        if (event == null) {
+            return false;
+        }
+
+        List<GameEvent> allEvents = new ArrayList<>();
+        if (event instanceof BatchEvent) {
+            allEvents.addAll(((BatchEvent) event).getEvents());
+        } else {
+            allEvents.add(event);
+        }
+
+        return allEvents.stream().anyMatch(e -> {
+            // TODO: add more events with zone change logic (or make it even't param)?
+            switch (e.getType()) {
+                case DESTROYED_PERMANENT:
+                case EXPLOITED_CREATURE:
+                    return true;
+                case ZONE_CHANGE:
+                    return ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD;
+                default:
+                    return false;
+            }
+        });
     }
 
     @Override

@@ -351,7 +351,12 @@ public interface Ability extends Controllable, Serializable {
     void addWatcher(Watcher watcher);
 
     /**
-     * Returns true if this abilities source is in the zone for the ability
+     * Allow to control ability/trigger's lifecycle
+     * <p>
+     * How-to use:
+     * - for normal abilities and triggers - keep default
+     * - for leave battlefield triggers - keep default + set setLeavesTheBattlefieldTrigger(true)
+     * - for dies triggers - override and use TriggeredAbilityImpl.isInUseableZoneDiesTrigger inside + set setLeavesTheBattlefieldTrigger(true)
      */
     boolean isInUseableZone(Game game, MageObject source, GameEvent event);
 

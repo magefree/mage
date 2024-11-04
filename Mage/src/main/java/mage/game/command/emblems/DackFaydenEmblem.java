@@ -63,7 +63,7 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         boolean returnValue = false;
-        List<UUID> targetedPermanentIds = new ArrayList<>(0);
+        List<UUID> targetedPermanentIds = new ArrayList<>();
         Player player = game.getPlayer(this.getControllerId());
         if (player != null) {
             if (event.getPlayerId().equals(this.getControllerId())) {

@@ -7,6 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.AbilityImpl;
 import mage.abilities.Mode;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -1979,9 +1980,22 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "legendary nonpermanent cards need to have LegendarySpellAbility");
         }
 
+        // special check: mutate is not supported yet, so must be removed from sets
         if (card.getAbilities().containsClass(MutateAbility.class)) {
             fail(card, "abilities", "mutate cards aren't implemented and shouldn't be available");
         }
+
+        // special check: wrong dies triggers
+        card.getAbilities().stream()
+                .filter(a -> a instanceof TriggeredAbility)
+                .map(a -> (TriggeredAbility) a)
+                .filter(a -> a.getRule().contains("whenever") || a.getRule().contains("Whenever"))
+                .filter(a -> a.getRule().contains("dies"))
+                .filter(a -> !a.getRule().contains("with \"When")) // ignore token creating effects
+                .filter(a -> !a.isLeavesTheBattlefieldTrigger())
+                .forEach(a -> {
+                    fail(card, "abilities", "dies trigger must use setLeavesTheBattlefieldTrigger(true) and override isInUseableZone - " + a.getClass().getSimpleName());
+                });
 
         // special check: duplicated words in ability text (wrong target/filter usage)
         // example: You may exile __two two__ blue cards

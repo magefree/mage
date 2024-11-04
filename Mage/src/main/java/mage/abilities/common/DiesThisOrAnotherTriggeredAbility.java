@@ -30,6 +30,7 @@ public class DiesThisOrAnotherTriggeredAbility extends TriggeredAbilityImpl {
             filterMessage = filterMessage.substring(2);
         }
         setTriggerPhrase("Whenever {this} or another " + filterMessage + " dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     protected DiesThisOrAnotherTriggeredAbility(final DiesThisOrAnotherTriggeredAbility ability) {

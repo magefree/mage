@@ -259,8 +259,8 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
             return false;
         }
 
-        // TODO: is it require Phyrexian stile effects here for single payment?
-        //AbilityImpl.preparePhyrexianCost(game, source, player, ability, this);
+        // no needs to call
+        //AbilityImpl.handlePhyrexianLikeEffects(game, source, ability, this);
 
         if (!player.getManaPool().isForcedToPay()) {
             assignPayment(game, ability, player.getManaPool(), costToPay != null ? costToPay : this);

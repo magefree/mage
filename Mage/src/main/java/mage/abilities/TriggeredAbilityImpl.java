@@ -49,7 +49,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         // verify check: DoIfCostPaid effect already asks about action (optional), so no needs to ask it again in triggered ability
         if (effect instanceof DoIfCostPaid && (this.optional && ((DoIfCostPaid) effect).isOptional())) {
             throw new IllegalArgumentException("DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): " + this.getClass().getSimpleName());
-
         }
     }
 
@@ -400,6 +399,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 }
                 break;
             case DESTROYED_PERMANENT:
+            case EXPLOITED_CREATURE:
                 if (isLeavesTheBattlefieldTrigger()) {
                     source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
                 }
@@ -408,20 +408,11 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         return super.isInUseableZone(game, source, event);
     }
 
-    /*
-     603.6c Leaves-the-battlefield abilities, 603.6d
-        if true the game “looks back in time” to determine if those abilities trigger,
-        using the existence of those abilities and the appearance of objects immediately prior to the event (603.10)
-     */
     @Override
     public boolean isLeavesTheBattlefieldTrigger() {
         return leavesTheBattlefieldTrigger;
     }
 
-    /*
-     603.6c,603.6d
-     This has to be set, if the triggered ability has to check back in time if the permanent the ability is connected to had the ability on the battlefield while the trigger is checked
-     */
     @Override
     public final void setLeavesTheBattlefieldTrigger(boolean leavesTheBattlefieldTrigger) {
         this.leavesTheBattlefieldTrigger = leavesTheBattlefieldTrigger;
@@ -453,12 +444,22 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     /**
+     * Looking object in GRAVEYARD zone only. If you need multi zone then use default isInUseableZone
+     * - good example: Whenever another creature you control dies
+     * - bad example: When {this} dies or is put into exile from the battlefield
+     * <p>
      * For triggered abilities that function from the battlefield that must trigger when the source permanent dies
      * and/or for any other events that happen simultaneously to the source permanent dying.
      * (Similar logic must be used for any leaves-the-battlefield, but this method assumes to graveyard only.)
      * NOTE: If your ability functions from another zone (not battlefield) then must use standard logic, not this.
      */
     public static boolean isInUseableZoneDiesTrigger(TriggeredAbility source, GameEvent event, Game game) {
+        // runtime check: wrong trigger settings
+        if (!source.isLeavesTheBattlefieldTrigger()) {
+            // TODO: enable after fix
+            // throw new IllegalArgumentException("Wrong code usage: all dies triggers must use setLeavesTheBattlefieldTrigger(true)");
+        }
+
         // Get the source permanent of the ability
         MageObject sourceObject = null;
         if (game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
@@ -481,7 +482,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             //   --!---------------!-------------!-----!-----------!
             //  -
             if (game.checkShortLivingLKI(source.getSourceId(), Zone.BATTLEFIELD)) {
-                sourceObject = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+                sourceObject = game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             }
         }
         if (sourceObject == null) { // source is no permanent

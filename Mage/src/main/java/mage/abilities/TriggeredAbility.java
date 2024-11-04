@@ -62,8 +62,17 @@ public interface TriggeredAbility extends Ability {
 
     TriggeredAbility setOptional();
 
+    /**
+     * Allow trigger to fire after source leave the battlefield (example: will use LKI on itself sacrifice)
+     */
     boolean isLeavesTheBattlefieldTrigger();
 
+    /**
+     * 603.6c,603.6d
+     * If true the game “looks back in time” to determine if those abilities trigger
+     * This has to be set, if the triggered ability has to check back in time if the permanent the ability is connected
+     * to had the ability on the battlefield while the trigger is checked
+     */
     void setLeavesTheBattlefieldTrigger(boolean leavesTheBattlefieldTrigger);
 
     @Override
