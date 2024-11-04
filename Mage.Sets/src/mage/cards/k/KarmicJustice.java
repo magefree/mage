@@ -44,6 +44,7 @@ class KarmicJusticeTriggeredAbility extends TriggeredAbilityImpl {
     
     KarmicJusticeTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DestroyTargetEffect(), true);
+        setLeavesTheBattlefieldTrigger(true);
     }
     
     private KarmicJusticeTriggeredAbility(final KarmicJusticeTriggeredAbility ability) {

@@ -57,6 +57,7 @@ class VindictiveVampireTriggeredAbility extends TriggeredAbilityImpl {
     public VindictiveVampireTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect, false);
         setTriggerPhrase("Whenever another creature you control dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private VindictiveVampireTriggeredAbility(final VindictiveVampireTriggeredAbility ability) {
@@ -70,16 +71,7 @@ class VindictiveVampireTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        Permanent sourcePermanent;
-        if (game.getState().getZone(getSourceId()) == Zone.BATTLEFIELD) {
-            sourcePermanent = game.getPermanent(getSourceId());
-        } else {
-            sourcePermanent = (Permanent) game.getPermanentOrLKIBattlefield(getSourceId());
-        }
-        if (sourcePermanent == null) {
-            return false;
-        }
-        return hasSourceObjectAbility(game, sourcePermanent, event);
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 
     @Override

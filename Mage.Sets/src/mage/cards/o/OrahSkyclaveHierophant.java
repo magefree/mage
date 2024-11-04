@@ -1,6 +1,7 @@
 package mage.cards.o;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.LifelinkAbility;
@@ -51,6 +52,7 @@ class OrahSkyclaveHierophantTriggeredAbility extends TriggeredAbilityImpl {
 
     OrahSkyclaveHierophantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect());
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private OrahSkyclaveHierophantTriggeredAbility(final OrahSkyclaveHierophantTriggeredAbility ability) {
@@ -93,5 +95,10 @@ class OrahSkyclaveHierophantTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever {this} or another Cleric you control dies, return target Cleric card " +
                 "with lesser mana value from your graveyard to the battlefield.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }
