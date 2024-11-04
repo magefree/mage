@@ -19,7 +19,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -45,7 +44,7 @@ public final class AhnCropInvader extends CardImpl {
                                 FirstStrikeAbility.getInstance(),
                                 Duration.WhileOnBattlefield
                         ), MyTurnCondition.instance,
-                        "As long as it's your turn, "
+                        "During your turn, "
                                 + "{this} has first strike."
                 )
         ).addHint(MyTurnHint.instance));

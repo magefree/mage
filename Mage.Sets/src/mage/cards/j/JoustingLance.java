@@ -32,7 +32,7 @@ public final class JoustingLance extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield),
                 MyTurnCondition.instance,
-                "As long as it's your turn, equipped creature has first strike."))
+                "During your turn, equipped creature has first strike."))
                 .addHint(MyTurnHint.instance));
 
         // Equip {3}

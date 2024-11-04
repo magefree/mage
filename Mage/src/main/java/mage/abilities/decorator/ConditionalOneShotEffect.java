@@ -113,7 +113,8 @@ public class ConditionalOneShotEffect extends OneShotEffect {
 
         if (otherwiseEffects.isEmpty()) {
             if (withConditionTextAtEnd) {
-                return CardUtil.getTextWithFirstCharLowerCase(effects.getText(mode))
+                String effectText = effects.getText(mode);
+                return CardUtil.getTextWithFirstCharLowerCase(effectText.substring(0, effectText.length() - 1))
                         + " if " + conditionText;
             } else {
                 return "if " + conditionText + ", "

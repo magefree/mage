@@ -47,7 +47,7 @@ public final class ThrunBreakerOfSilence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
                         MyTurnCondition.instance,
-                        "As long as it's your turn, {this} has indestructible"))
+                        "During your turn, {this} has indestructible"))
                 .addHint(MyTurnHint.instance));
     }
 

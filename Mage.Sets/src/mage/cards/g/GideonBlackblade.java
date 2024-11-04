@@ -52,7 +52,7 @@ public final class GideonBlackblade extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BecomesCreatureSourceEffect(
                         new GideonBlackbladeToken(), CardType.PLANESWALKER, Duration.WhileOnBattlefield
-                ), MyTurnCondition.instance, "As long as it's your turn, " +
+                ), MyTurnCondition.instance, "During your turn, " +
                 "{this} is a 4/4 Human Soldier creature with indestructible that's still a planeswalker."
         )).addHint(MyTurnHint.instance));
 

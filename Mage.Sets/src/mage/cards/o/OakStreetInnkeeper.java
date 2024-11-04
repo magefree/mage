@@ -41,7 +41,7 @@ public final class OakStreetInnkeeper extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter),
                 NotMyTurnCondition.instance,
-                "As long as it's not your turn, tapped creatures you control have hexproof"))
+                "During turns other than yours, tapped creatures you control have hexproof"))
                 .addHint(NotMyTurnHint.instance));
 
     }

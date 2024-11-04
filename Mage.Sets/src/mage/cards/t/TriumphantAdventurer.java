@@ -39,7 +39,7 @@ public final class TriumphantAdventurer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(
                         FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield
-                ), MyTurnCondition.instance, "As long as it's your turn, {this} has first strike.")
+                ), MyTurnCondition.instance, "During your turn, {this} has first strike.")
         ).addHint(MyTurnHint.instance));
 
         // Whenever Triumphant Adventurer attacks, venture into the dungeon.

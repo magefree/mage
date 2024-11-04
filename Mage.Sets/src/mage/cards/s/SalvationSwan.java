@@ -62,7 +62,7 @@ public final class SalvationSwan extends CardImpl {
 
         // Whenever Salvation Swan or another Bird you control enters, exile up to one target creature you control without flying. Return it to the battlefield under its owner's control with a flying counter on it at the beginning of the next end step.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new SalvationSwanTargetEffect(), filterBird, false, true
+                new SalvationSwanTargetEffect(), filterBird, false, false
         );
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1, filterWithoutFlying, false));
         this.addAbility(ability);
@@ -83,7 +83,7 @@ class SalvationSwanTargetEffect extends OneShotEffect {
 
     SalvationSwanTargetEffect() {
         super(Outcome.Benefit);
-        staticText = " exile up to one target creature you control without flying. "
+        staticText = "exile up to one target creature you control without flying. "
                 + "Return it to the battlefield under its owner's control "
                 + "with a flying counter on it at the beginning of the next end step";
     }

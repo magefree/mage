@@ -41,7 +41,7 @@ public final class BedrockTortoise extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES),
                 MyTurnCondition.instance,
-                "As long as it's your turn, creatures you control have hexproof"
+                "During your turn, creatures you control have hexproof"
         )));
 
         // Each creature you control with toughness greater than its power assigns combat damage equal to its toughness rather than its power.

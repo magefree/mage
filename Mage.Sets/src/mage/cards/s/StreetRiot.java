@@ -32,7 +32,7 @@ public final class StreetRiot extends CardImpl {
                         new BoostControlledEffect(
                                 1, 0, Duration.WhileOnBattlefield
                         ), MyTurnCondition.instance,
-                        "As long as it's your turn, "
+                        "During your turn, "
                                 + "creatures you control get +1/+0"
                 ));
         ability.addEffect(new ConditionalContinuousEffect(
