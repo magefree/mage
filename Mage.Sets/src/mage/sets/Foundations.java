@@ -359,6 +359,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Pacifism", 501, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Painful Quandary", 179, Rarity.RARE, mage.cards.p.PainfulQuandary.class));
         cards.add(new SetCardInfo("Pelakka Wurm", 720, Rarity.UNCOMMON, mage.cards.p.PelakkaWurm.class));
+        cards.add(new SetCardInfo("Perforating Artist", 124, Rarity.UNCOMMON, mage.cards.p.PerforatingArtist.class));
         cards.add(new SetCardInfo("Phyrexian Arena", 180, Rarity.RARE, mage.cards.p.PhyrexianArena.class));
         cards.add(new SetCardInfo("Pilfer", 181, Rarity.COMMON, mage.cards.p.Pilfer.class));
         cards.add(new SetCardInfo("Pirate's Cutlass", 563, Rarity.COMMON, mage.cards.p.PiratesCutlass.class));
