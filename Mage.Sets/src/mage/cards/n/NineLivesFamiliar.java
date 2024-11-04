@@ -79,7 +79,7 @@ class NineLivesFamiliarEffect extends OneShotEffect {
 
     NineLivesFamiliarEffect() {
         super(Outcome.Benefit);
-        staticText = "return it to the battlefield";
+        staticText = "return it to the battlefield with one fewer revival counter on it";
     }
 
     private NineLivesFamiliarEffect(final NineLivesFamiliarEffect effect) {
@@ -99,7 +99,7 @@ class NineLivesFamiliarEffect extends OneShotEffect {
         }
         final int counters = permanent.getCounters(game).getCount(CounterType.REVIVAL) - 1;
         ReturnSourceFromGraveyardToBattlefieldWithCounterEffect effect = new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(CounterType.REVIVAL.createInstance(counters), false);
-        effect.setText("return it to the battlefield with one fewer revival counter on it");
+        effect.setText(staticText);
         effect.apply(game, source);
         return true;
     }
