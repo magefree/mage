@@ -438,6 +438,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Spectral Sailor", 164, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
         cards.add(new SetCardInfo("Sphinx of Forgotten Lore", 51, Rarity.MYTHIC, mage.cards.s.SphinxOfForgottenLore.class));
         cards.add(new SetCardInfo("Sphinx of the Final Word", 597, Rarity.MYTHIC, mage.cards.s.SphinxOfTheFinalWord.class));
+        cards.add(new SetCardInfo("Spinner of Souls", 112, Rarity.RARE, mage.cards.s.SpinnerOfSouls.class));
         cards.add(new SetCardInfo("Spitfire Lagac", 208, Rarity.COMMON, mage.cards.s.SpitfireLagac.class));
         cards.add(new SetCardInfo("Springbloom Druid", 646, Rarity.COMMON, mage.cards.s.SpringbloomDruid.class));
         cards.add(new SetCardInfo("Stab", 71, Rarity.COMMON, mage.cards.s.Stab.class));
