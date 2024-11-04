@@ -433,6 +433,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Sorcerous Spyglass", 679, Rarity.UNCOMMON, mage.cards.s.SorcerousSpyglass.class));
         cards.add(new SetCardInfo("Soul-Guide Lantern", 680, Rarity.UNCOMMON, mage.cards.s.SoulGuideLantern.class));
         cards.add(new SetCardInfo("Soul-Shackled Zombie", 70, Rarity.COMMON, mage.cards.s.SoulShackledZombie.class));
+        cards.add(new SetCardInfo("Soulstone Sanctuary", 133, Rarity.RARE, mage.cards.s.SoulstoneSanctuary.class));
         cards.add(new SetCardInfo("Sower of Chaos", 95, Rarity.COMMON, mage.cards.s.SowerOfChaos.class));
         cards.add(new SetCardInfo("Spectral Sailor", 164, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
         cards.add(new SetCardInfo("Sphinx of the Final Word", 597, Rarity.MYTHIC, mage.cards.s.SphinxOfTheFinalWord.class));
