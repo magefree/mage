@@ -1,7 +1,6 @@
 package mage.cards.d;
 
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.KickerAbility;
@@ -28,7 +27,9 @@ public final class DivineResilience extends CardImpl {
         this.addAbility(new KickerAbility("{2}{W}"));
 
         // Target creature you control gains indestructible until end of turn. If this spell was kicked, instead any number of target creatures you control gain indestructible until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance()));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance())
+                .setText("Target creature you control gains indestructible until end of turn. " +
+                        "If this spell was kicked, instead any number of target creatures you control gain indestructible until end of turn"));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(
                 KickedCondition.ONCE,

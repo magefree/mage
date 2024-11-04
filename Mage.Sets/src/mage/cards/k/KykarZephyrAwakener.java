@@ -38,7 +38,7 @@ public final class KykarZephyrAwakener extends CardImpl {
         // Whenever you cast a noncreature spell, choose one --
         // * Exile another target creature you control. Return it to the battlefield under its owner's control at the beginning of the next end step.
         Ability ability = new SpellCastControllerTriggeredAbility(
-                new ExileReturnBattlefieldNextEndStepTargetEffect().withTextThatCard(false),
+                new ExileReturnBattlefieldNextEndStepTargetEffect().withTextThatCard(true),
                 StaticFilters.FILTER_SPELL_A_NON_CREATURE, false
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));

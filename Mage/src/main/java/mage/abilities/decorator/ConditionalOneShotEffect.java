@@ -21,6 +21,7 @@ public class ConditionalOneShotEffect extends OneShotEffect {
     private final Effects effects = new Effects();
     private final Effects otherwiseEffects = new Effects();
     private final Condition condition;
+    private boolean withConditionTextAtEnd = false;
 
     public ConditionalOneShotEffect(OneShotEffect effect, Condition condition) {
         this(effect, null, condition, null);
@@ -57,6 +58,7 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         this.effects.addAll(effect.effects.copy());
         this.otherwiseEffects.addAll(effect.otherwiseEffects.copy());
         this.condition = effect.condition;
+        this.withConditionTextAtEnd = effect.withConditionTextAtEnd;
     }
 
     @Override
@@ -78,6 +80,11 @@ public class ConditionalOneShotEffect extends OneShotEffect {
 
     public ConditionalOneShotEffect addOtherwiseEffect(OneShotEffect effect) {
         this.otherwiseEffects.add(effect);
+        return this;
+    }
+
+    public ConditionalOneShotEffect withConditionTextAtEnd(boolean withConditionTextAtEnd) {
+        this.withConditionTextAtEnd = withConditionTextAtEnd;
         return this;
     }
 
@@ -105,8 +112,13 @@ public class ConditionalOneShotEffect extends OneShotEffect {
         }
 
         if (otherwiseEffects.isEmpty()) {
-            return "if " + conditionText + ", "
-                    + CardUtil.getTextWithFirstCharLowerCase(effects.getText(mode));
+            if (withConditionTextAtEnd) {
+                return CardUtil.getTextWithFirstCharLowerCase(effects.getText(mode))
+                        + " if " + conditionText;
+            } else {
+                return "if " + conditionText + ", "
+                        + CardUtil.getTextWithFirstCharLowerCase(effects.getText(mode));
+            }
         }
         return effects.getText(mode) + ". If " + conditionText + ", "
                 + CardUtil.getTextWithFirstCharLowerCase(otherwiseEffects.getText(mode));

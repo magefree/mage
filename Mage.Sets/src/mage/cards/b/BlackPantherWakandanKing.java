@@ -1,6 +1,5 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldThisOrAnotherTriggeredAbility;
@@ -8,18 +7,23 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.constants.*;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -27,10 +31,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public final class BlackPantherWakandanKing extends CardImpl {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
-    static {
-        filter.add(TargetController.YOU.getControllerPredicate());
-    }
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent();
 
     public BlackPantherWakandanKing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}{W}");
@@ -51,13 +52,13 @@ public final class BlackPantherWakandanKing extends CardImpl {
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 StaticFilters.FILTER_PERMANENT_CREATURE, false, true).setTriggerPhrase(
                         "Whenever {this} or another creature you control enters, ");
-        ability.addTarget(new TargetLandPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability.withFlavorWord("Survey the Realm"));
 
         // Mine Vibranium — {3}: Move all +1/+1 counters from target land you control onto target creature. If one or
         // more +1/+1 counters are moved this way, you gain that much life and draw a card.
         ability = new SimpleActivatedAbility(new BlackPantherWakandanKingEffect(), new GenericManaCost(3));
-        ability.addTarget(new TargetLandPermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability.withFlavorWord("Mine Vibranium"));
     }

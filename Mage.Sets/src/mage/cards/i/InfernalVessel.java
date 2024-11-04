@@ -38,7 +38,7 @@ public final class InfernalVessel extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new DiesSourceTriggeredAbility(new InfernalVesselReturnEffect()),
                 InfernalVesselCondition.instance,
-                "if it wasn't a Demon, return it to the battlefield under its owner's control "
+                "When this creature dies, if it wasn't a Demon, return it to the battlefield under its owner's control "
                         + "with two +1/+1 counters on it. It's a Demon in addition to its other types"
         ));
     }
@@ -81,7 +81,7 @@ class InfernalVesselReturnEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null || !(game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD)) {
+        if (controller == null || game.getState().getZone(source.getSourceId()) != Zone.GRAVEYARD) {
             return false;
         }
         Card card = game.getCard(source.getSourceId());

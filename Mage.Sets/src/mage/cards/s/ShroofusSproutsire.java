@@ -20,7 +20,7 @@ import mage.game.permanent.token.SaprolingToken;
  * @author Grath
  */
 public final class ShroofusSproutsire extends CardImpl {
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.SAPROLING, "Saproling");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent(SubType.SAPROLING, "Saproling you control");
 
     public ShroofusSproutsire(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");

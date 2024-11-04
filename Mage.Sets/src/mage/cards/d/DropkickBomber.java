@@ -59,7 +59,8 @@ public final class DropkickBomber extends CardImpl {
         // {R}: Until end of turn, another target Goblin you control gains flying and "When this creature deals combat damage, sacrifice it."
         Ability ability = new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
+                new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn)
+                        .setText("Until end of turn, another target Goblin you control gains flying"),
                 new ManaCostsImpl<>("{R}")
         );
         ability.addEffect(

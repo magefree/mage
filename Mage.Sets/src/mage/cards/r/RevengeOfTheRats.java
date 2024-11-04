@@ -1,6 +1,5 @@
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
@@ -12,7 +11,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.RatToken;
-import mage.game.permanent.token.ZombieToken;
+
+import java.util.UUID;
 
 /**
  *
@@ -28,7 +28,7 @@ public final class RevengeOfTheRats extends CardImpl {
 
         // Create a tapped 1/1 black Rat creature token for each creature card in your graveyard.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new RatToken(), cardsCount, true, false));
-        this.getSpellAbility().addHint(new ValueHint("creature card card in your graveyard", cardsCount));
+        this.getSpellAbility().addHint(new ValueHint("Creature cards in your graveyard", cardsCount));
 
         // Flashback {2}{B}{B}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{B}{B}")));

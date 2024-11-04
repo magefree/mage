@@ -31,7 +31,8 @@ public final class CleonMerryChampion extends CardImpl {
         this.addAbility(DoubleStrikeAbility.getInstance());
 
         // Heroic -- Whenever you cast a spell that targets Cleon, exile the top card of your library. You may play that card until the end of your next turn.
-        this.addAbility(new HeroicAbility(new ExileTopXMayPlayUntilEffect(1, Duration.UntilEndOfYourNextTurn)));
+        this.addAbility(new HeroicAbility(new ExileTopXMayPlayUntilEffect(1, Duration.UntilEndOfYourNextTurn)
+                .withTextOptions("that card", true)));
     }
 
     private CleonMerryChampion(final CleonMerryChampion card) {

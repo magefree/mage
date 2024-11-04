@@ -52,7 +52,7 @@ public final class SkyknightSquire extends CardImpl {
         ));
         ability.addEffect(new ConditionalContinuousEffect(
                 new AddCardSubTypeSourceEffect(Duration.WhileOnBattlefield, true, SubType.KNIGHT),
-                condition, "and is an Knight in addition to its other types"
+                condition, "and is a Knight in addition to its other types"
         ));
         this.addAbility(ability);
     }

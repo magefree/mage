@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author ciaccona007
  */
 public final class AbyssalHarvester extends CardImpl {
@@ -43,7 +42,7 @@ public final class AbyssalHarvester extends CardImpl {
 
     public AbyssalHarvester(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        
+
         this.subtype.add(SubType.DEMON);
         this.subtype.add(SubType.WARLOCK);
         this.power = new MageInt(3);
@@ -68,10 +67,16 @@ public final class AbyssalHarvester extends CardImpl {
 
 class AbyssalHarvesterEffect extends OneShotEffect {
 
-    public AbyssalHarvesterEffect() {
+    private static final FilterPermanent filter = new FilterControlledPermanent();
+    static {
+        filter.add(TokenPredicate.TRUE);
+        filter.add(SubType.NIGHTMARE.getPredicate());
+    }
+
+    AbyssalHarvesterEffect() {
         super(Outcome.PutCreatureInPlay);
         this.staticText = "Exile target creature card from a graveyard that was put there this turn. "
-                + "Create a token that's a copy of it, except it's a Nightmare in addition to its other types."
+                + "Create a token that's a copy of it, except it's a Nightmare in addition to its other types. "
                 + "Then exile all other Nightmare tokens you control";
     }
 
@@ -88,25 +93,24 @@ class AbyssalHarvesterEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null && card != null) {
-            controller.moveCards(card, Zone.EXILED, source, game); // Also if the move to exile is replaced, the copy takes place
-            CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false, 1, false, false, null);
-            effect.setTargetPointer(new FixedTarget(card, game));
-            effect.withAdditionalSubType(SubType.NIGHTMARE);
-            effect.apply(game, source);
-            FilterPermanent filter = new FilterControlledPermanent();
-            filter.add(TokenPredicate.TRUE);
-            filter.add(SubType.NIGHTMARE.getPredicate());
-            List<Permanent> addedTokens = effect.getAddedPermanents();
-            Cards cards = new CardsImpl();
-            for(Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
-                if(!addedTokens.contains(permanent)) {
-                    cards.add(permanent.getId());
-                }
-            }
-            controller.moveCards(cards, Zone.EXILED, source, game);
-            return true;
+        if (controller == null || card == null) {
+            return false;
         }
-        return false;
+        controller.moveCards(card, Zone.EXILED, source, game); // Also if the move to exile is replaced, the copy takes place
+        game.processAction();
+        CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(source.getControllerId(), null, false, 1, false, false, null);
+        effect.setTargetPointer(new FixedTarget(card, game));
+        effect.withAdditionalSubType(SubType.NIGHTMARE);
+        effect.apply(game, source);
+        game.processAction();
+        List<Permanent> addedTokens = effect.getAddedPermanents();
+        Cards cards = new CardsImpl();
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+            if (!addedTokens.contains(permanent)) {
+                cards.add(permanent.getId());
+            }
+        }
+        controller.moveCards(cards, Zone.EXILED, source, game);
+        return true;
     }
 }

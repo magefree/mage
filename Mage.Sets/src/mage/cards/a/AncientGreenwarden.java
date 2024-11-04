@@ -56,7 +56,7 @@ class AncientGreenwardenEffect extends ReplacementEffectImpl {
 
     AncientGreenwardenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "If a land entering the battlefield causes a triggered ability " +
+        staticText = "If a land entering causes a triggered ability " +
                 "of a permanent you control to trigger, that ability triggers an additional time";
     }
 

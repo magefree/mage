@@ -18,7 +18,7 @@ public class KaitoCunningInfiltratorEmblem extends Emblem {
         super("Emblem Kaito");
         this.getAbilities().add(new SpellCastAllTriggeredAbility(
                 Zone.COMMAND, new CreateTokenEffect(new NinjaToken2()), new FilterSpell(), false, SetTargetPointer.NONE
-        ));
+        ).setTriggerPhrase("Whenever a player casts a spell, you "));
     }
 
     private KaitoCunningInfiltratorEmblem(final KaitoCunningInfiltratorEmblem card) {

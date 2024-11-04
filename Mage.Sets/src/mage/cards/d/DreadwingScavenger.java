@@ -47,7 +47,7 @@ public final class DreadwingScavenger extends CardImpl {
         ));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(DeathtouchAbility.getInstance()),
-                ThresholdCondition.instance, "and has deathtouch"
+                ThresholdCondition.instance, "and has deathtouch as long as there are seven or more cards in your graveyard"
         ));
         ability.setAbilityWord(AbilityWord.THRESHOLD);
         this.addAbility(ability);

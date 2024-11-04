@@ -48,8 +48,9 @@ public final class CatCollector extends CardImpl {
 
 class CatCollectorTriggeredAbility extends GainLifeFirstTimeTriggeredAbility {
 
-    public CatCollectorTriggeredAbility() {
+    CatCollectorTriggeredAbility() {
         super(new CreateTokenEffect(new CatToken3()));
+        setTriggerPhrase("Whenever you gain life for the first time during each of your turns, ");
     }
 
     private CatCollectorTriggeredAbility(final CatCollectorTriggeredAbility ability) {
@@ -66,9 +67,4 @@ class CatCollectorTriggeredAbility extends GainLifeFirstTimeTriggeredAbility {
         return super.checkTrigger(event, game) && game.isActivePlayer(event.getPlayerId());
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever you gain life for the first time during each of your turns, "
-                + "create a 1/1 white Cat creature token";
-    }
 }

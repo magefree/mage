@@ -53,7 +53,7 @@ public final class ThuridMareOfDestiny extends CardImpl {
 
         // Whenever you cast a Pegasus, Unicorn, or Horse creature spell, copy it.
         this.addAbility(new SpellCastControllerTriggeredAbility(
-                new CopyTargetStackObjectEffect(true)
+                new CopyTargetStackObjectEffect(false, true, false)
                         .withText("it"),
                 filter, false, SetTargetPointer.SPELL
         ));

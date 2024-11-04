@@ -194,7 +194,7 @@ class CaptainAmericaFirstAvengerCatchEffect extends OneShotEffect {
 
     CaptainAmericaFirstAvengerCatchEffect() {
         super(Outcome.Benefit);
-        staticText = "attach target Equipment you control to {this}";
+        staticText = "attach up to one target Equipment you control to {this}";
     }
 
     private CaptainAmericaFirstAvengerCatchEffect(final CaptainAmericaFirstAvengerCatchEffect effect) {

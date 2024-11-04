@@ -34,7 +34,7 @@ public final class GrabThePrize extends CardImpl {
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
             new DamagePlayersEffect(2, TargetController.OPPONENT),
             GrabThePrizeCondition.instance,
-        "If the discarded card wasn't a land card, {this} deals two damage to each opponent."));
+        "If the discarded card wasn't a land card, {this} deals 2 damage to each opponent."));
     }
 
     private GrabThePrize(final GrabThePrize card) {

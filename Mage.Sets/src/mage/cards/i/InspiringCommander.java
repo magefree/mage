@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -14,8 +14,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 
 import java.util.UUID;
 
@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class InspiringCommander extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature with power 2 or less");
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature you control with power 2 or less");
 
     static {
         filter.add(AnotherPredicate.instance);
@@ -42,7 +42,7 @@ public final class InspiringCommander extends CardImpl {
         // Whenever another creature with power 2 or less you control enters, you gain 1 life and draw a card.
         Effect effect1 = new GainLifeEffect(1);
         Effect effect2 = new DrawCardSourceControllerEffect(1);
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD, effect1, filter, false);
         ability.addEffect(effect2.setText("and draw a card"));
         this.addAbility(ability);

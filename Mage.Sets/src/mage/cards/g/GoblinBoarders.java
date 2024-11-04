@@ -32,7 +32,7 @@ public final class GoblinBoarders extends CardImpl {
         // Raid -- This creature enters with a +1/+1 counter on it if you attacked this turn.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()), RaidCondition.instance, ""
-        ), "with a +1/+1 counter on it if a creature died this turn")
+        ), "with a +1/+1 counter on it if you attacked this turn")
                 .setAbilityWord(AbilityWord.RAID)
                 .addHint(RaidHint.instance), new PlayerAttackedWatcher());
     }
