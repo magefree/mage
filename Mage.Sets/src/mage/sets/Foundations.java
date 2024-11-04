@@ -383,6 +383,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Ramos, Dragon Engine", 678, Rarity.MYTHIC, mage.cards.r.RamosDragonEngine.class));
         cards.add(new SetCardInfo("Rampaging Baloths", 645, Rarity.RARE, mage.cards.r.RampagingBaloths.class));
         cards.add(new SetCardInfo("Rapacious Dragon", 544, Rarity.COMMON, mage.cards.r.RapaciousDragon.class));
+        cards.add(new SetCardInfo("Ravenous Amulet", 131, Rarity.UNCOMMON, mage.cards.r.RavenousAmulet.class));
         cards.add(new SetCardInfo("Ravenous Giant", 630, Rarity.UNCOMMON, mage.cards.r.RavenousGiant.class));
         cards.add(new SetCardInfo("Reassembling Skeleton", 182, Rarity.UNCOMMON, mage.cards.r.ReassemblingSkeleton.class));
         cards.add(new SetCardInfo("Reclamation Sage", 231, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class));
