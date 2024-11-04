@@ -325,6 +325,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Meteor Golem", 256, Rarity.UNCOMMON, mage.cards.m.MeteorGolem.class));
         cards.add(new SetCardInfo("Micromancer", 158, Rarity.UNCOMMON, mage.cards.m.Micromancer.class));
         cards.add(new SetCardInfo("Midnight Reaper", 609, Rarity.RARE, mage.cards.m.MidnightReaper.class));
+        cards.add(new SetCardInfo("Midnight Snack", 65, Rarity.UNCOMMON, mage.cards.m.MidnightSnack.class));
         cards.add(new SetCardInfo("Mild-Mannered Librarian", 228, Rarity.UNCOMMON, mage.cards.m.MildManneredLibrarian.class));
         cards.add(new SetCardInfo("Mindsparker", 628, Rarity.UNCOMMON, mage.cards.m.Mindsparker.class));
         cards.add(new SetCardInfo("Mischievous Mystic", 47, Rarity.UNCOMMON, mage.cards.m.MischievousMystic.class));
