@@ -2460,6 +2460,7 @@ public class ScryfallImageSupportTokens {
             // FDN
             put("FDN/Emblem Kaito", "https://api.scryfall.com/cards/tfdn/24/en?format=image");
             put("FDN/Ninja", "https://api.scryfall.com/cards/tfdn/12/en?format=image");
+            put("FDN/Scion of the Deep", "https://api.scryfall.com/cards/tfdn/13/en?format=image");
 
             // generate supported sets
             supportedSets.clear();

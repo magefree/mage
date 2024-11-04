@@ -2397,3 +2397,4 @@
 
 # FDN
 |Generate|TOK:FDN|Ninja|||NinjaToken2|
+|Generate|TOK:FDN|Scion of the Deep|||ScionOfTheDeepToken|
