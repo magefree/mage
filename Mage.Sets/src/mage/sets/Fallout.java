@@ -250,6 +250,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("One with the Machine", 179, Rarity.RARE, mage.cards.o.OneWithTheMachine.class));
         cards.add(new SetCardInfo("Open the Vaults", 168, Rarity.RARE, mage.cards.o.OpenTheVaults.class));
         cards.add(new SetCardInfo("Opulent Palace", 278, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
+        cards.add(new SetCardInfo("Overencumbered", 18, Rarity.RARE, mage.cards.o.Overencumbered.class));
         cards.add(new SetCardInfo("Overflowing Basin", 152, Rarity.RARE, mage.cards.o.OverflowingBasin.class));
         cards.add(new SetCardInfo("Overseer of Vault 76", 19, Rarity.RARE, mage.cards.o.OverseerOfVault76.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Overseer of Vault 76", 368, Rarity.RARE, mage.cards.o.OverseerOfVault76.class, NON_FULL_USE_VARIOUS));

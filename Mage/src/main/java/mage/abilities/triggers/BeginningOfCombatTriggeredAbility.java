@@ -55,6 +55,8 @@ public class BeginningOfCombatTriggeredAbility extends AtStepTriggeredAbility {
                 return "At the beginning of combat on each player's turn, ";
             case ANY:
                 return "At the beginning of each combat, ";
+            case ENCHANTED:
+                return "At the beginning of combat on enchanted player's turn, ";
             default:
                 throw new UnsupportedOperationException("Unsupported TargetController in BeginningOfCombatTriggeredAbility: " + targetController);
         }
