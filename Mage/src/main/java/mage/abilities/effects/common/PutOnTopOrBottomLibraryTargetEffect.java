@@ -13,15 +13,24 @@ import mage.players.Player;
 public class PutOnTopOrBottomLibraryTargetEffect extends OneShotEffect {
 
     private final boolean textOwnerOf;
+    private final boolean textTheirChoice;
 
     public PutOnTopOrBottomLibraryTargetEffect(boolean textOwnerOf) {
         super(Outcome.ReturnToHand);
         this.textOwnerOf = textOwnerOf;
+        this.textTheirChoice = false;
+    }
+
+    public PutOnTopOrBottomLibraryTargetEffect(boolean textOwnerOf, boolean textTheirChoice) {
+        super(Outcome.ReturnToHand);
+        this.textOwnerOf = textOwnerOf;
+        this.textTheirChoice = textTheirChoice;
     }
 
     private PutOnTopOrBottomLibraryTargetEffect(final PutOnTopOrBottomLibraryTargetEffect effect) {
         super(effect);
         this.textOwnerOf = effect.textOwnerOf;
+        this.textTheirChoice = effect.textTheirChoice;
     }
 
     @Override
@@ -49,6 +58,6 @@ public class PutOnTopOrBottomLibraryTargetEffect extends OneShotEffect {
         }
         String targetText = getTargetPointer().describeTargets(mode.getTargets(), "that permanent");
         return (textOwnerOf ? "the owner of " + targetText : targetText + "'s owner") +
-                " puts it on the top or bottom of their library";
+                " puts it on " + (textTheirChoice ? "their choice of " : "") + "the top or bottom of their library";
     }
 }

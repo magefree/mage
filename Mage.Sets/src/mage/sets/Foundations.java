@@ -498,6 +498,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Twinblade Paladin", 503, Rarity.UNCOMMON, mage.cards.t.TwinbladePaladin.class));
         cards.add(new SetCardInfo("Twinflame Tyrant", 97, Rarity.MYTHIC, mage.cards.t.TwinflameTyrant.class));
         cards.add(new SetCardInfo("Uncharted Haven", 564, Rarity.COMMON, mage.cards.u.UnchartedHaven.class));
+        cards.add(new SetCardInfo("Uncharted Voyage", 53, Rarity.COMMON, mage.cards.u.UnchartedVoyage.class));
         cards.add(new SetCardInfo("Undying Malice", 528, Rarity.COMMON, mage.cards.u.UndyingMalice.class));
         cards.add(new SetCardInfo("Unflinching Courage", 722, Rarity.UNCOMMON, mage.cards.u.UnflinchingCourage.class));
         cards.add(new SetCardInfo("Unsummon", 599, Rarity.COMMON, mage.cards.u.Unsummon.class));
