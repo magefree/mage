@@ -25,21 +25,21 @@ import java.util.UUID;
  */
 public final class RavenousAmulet extends CardImpl {
 
-    private static final DynamicValue xValue = new CountersSourceCount(CounterType.SPIRIT);
+    private static final DynamicValue xValue = new CountersSourceCount(CounterType.SOUL);
 
     public RavenousAmulet(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
-        // {1}, {T}, Sacrifice a creature: Draw a card and put a spirit counter on this artifact. Activate only as a sorcery.
+        // {1}, {T}, Sacrifice a creature: Draw a card and put a soul counter on this artifact. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(1)
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_A_CREATURE));
-        ability.addEffect(new AddCountersSourceEffect(CounterType.SPIRIT.createInstance()).concatBy("and"));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.SOUL.createInstance()).concatBy("and"));
         this.addAbility(ability);
 
-        // {4}, {T}, Sacrifice this artifact: Each opponent loses life equal to the number of spirit counters on this artifact.
+        // {4}, {T}, Sacrifice this artifact: Each opponent loses life equal to the number of soul counters on this artifact.
         ability = new SimpleActivatedAbility(new LoseLifeOpponentsEffect(xValue), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
