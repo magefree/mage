@@ -488,6 +488,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Three Tree Mascot", 682, Rarity.COMMON, mage.cards.t.ThreeTreeMascot.class));
         cards.add(new SetCardInfo("Thrill of Possibility", 210, Rarity.COMMON, mage.cards.t.ThrillOfPossibility.class));
         cards.add(new SetCardInfo("Time Stop", 166, Rarity.RARE, mage.cards.t.TimeStop.class));
+        cards.add(new SetCardInfo("Tinybones, Bauble Burglar", 72, Rarity.RARE, mage.cards.t.TinybonesBaubleBurglar.class));
         cards.add(new SetCardInfo("Tolarian Terror", 167, Rarity.COMMON, mage.cards.t.TolarianTerror.class));
         cards.add(new SetCardInfo("Tragic Banshee", 73, Rarity.UNCOMMON, mage.cards.t.TragicBanshee.class));
         cards.add(new SetCardInfo("Tranquil Cove", 270, Rarity.COMMON, mage.cards.t.TranquilCove.class));
