@@ -2,12 +2,11 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.hint.common.MorbidHint;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -29,15 +28,11 @@ public final class SabertoothMauler extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your end step, if a creature died this turn, put a +1/+1 counter on Sabertooth Mauler and untap it.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P1P1.createInstance()
-                        )
-                ), MorbidCondition.instance, "At the beginning of your end step, " +
-                "if a creature died this turn, put a +1/+1 counter on {this} and untap it."
-        );
-        ability.addEffect(new UntapSourceEffect());
-        this.addAbility(ability.addHint(MorbidHint.instance));
+        Ability ability = new BeginningOfEndStepTriggeredAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance())
+        ).withInterveningIf(MorbidCondition.instance).addHint(MorbidHint.instance);
+        ability.addEffect(new UntapSourceEffect().concatBy("and "));
+        this.addAbility(ability);
     }
 
     private SabertoothMauler(final SabertoothMauler card) {

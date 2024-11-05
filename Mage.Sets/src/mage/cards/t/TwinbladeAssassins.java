@@ -1,11 +1,10 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.hint.common.MorbidHint;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -27,12 +26,9 @@ public final class TwinbladeAssassins extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your end step, if a creature died this turn, draw a card.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1)
-                ), MorbidCondition.instance, "At the beginning of your end step, " +
-                "if a creature died this turn, draw a card."
-        ).addHint(MorbidHint.instance));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new DrawCardSourceControllerEffect(1)
+        ).withInterveningIf(MorbidCondition.instance).addHint(MorbidHint.instance));
     }
 
     private TwinbladeAssassins(final TwinbladeAssassins card) {

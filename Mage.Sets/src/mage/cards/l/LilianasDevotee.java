@@ -1,15 +1,14 @@
 package mage.cards.l;
 
 import mage.MageInt;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.hint.common.MorbidHint;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,13 +40,9 @@ public final class LilianasDevotee extends CardImpl {
         )));
 
         // At the beginning of your end step, if a creature died this turn, you may pay {1}{B}. If you do, create a 2/2 black Zombie creature token.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfEndStepTriggeredAbility(new DoIfCostPaid(
-                        new CreateTokenEffect(new ZombieToken()), new ManaCostsImpl<>("{1}{B}")
-                )), MorbidCondition.instance,
-                "At the beginning of your end step, if a creature died this turn, " +
-                        "you may pay {1}{B}. If you do, create a 2/2 black Zombie creature token."
-        ).addHint(MorbidHint.instance));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                new DoIfCostPaid(new CreateTokenEffect(new ZombieToken()), new ManaCostsImpl<>("{1}{B}"))
+        ).withInterveningIf(MorbidCondition.instance).addHint(MorbidHint.instance));
     }
 
     private LilianasDevotee(final LilianasDevotee card) {
