@@ -520,6 +520,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Vizier of the Menagerie", 649, Rarity.MYTHIC, mage.cards.v.VizierOfTheMenagerie.class));
         cards.add(new SetCardInfo("Volley Veteran", 550, Rarity.UNCOMMON, mage.cards.v.VolleyVeteran.class));
         cards.add(new SetCardInfo("Voracious Greatshark", 600, Rarity.RARE, mage.cards.v.VoraciousGreatshark.class));
+        cards.add(new SetCardInfo("Wardens of the Cycle", 125, Rarity.UNCOMMON, mage.cards.w.WardensOfTheCycle.class));
         cards.add(new SetCardInfo("Wary Thespian", 235, Rarity.COMMON, mage.cards.w.WaryThespian.class));
         cards.add(new SetCardInfo("Wildborn Preserver", 650, Rarity.RARE, mage.cards.w.WildbornPreserver.class));
         cards.add(new SetCardInfo("Wildheart Invoker", 561, Rarity.COMMON, mage.cards.w.WildheartInvoker.class));
