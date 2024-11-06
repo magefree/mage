@@ -535,5 +535,6 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 584, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
         cards.add(new SetCardInfo("Zimone, Paradox Sculptor", 126, Rarity.MYTHIC, mage.cards.z.ZimoneParadoxSculptor.class));
         cards.add(new SetCardInfo("Zombify", 187, Rarity.UNCOMMON, mage.cards.z.Zombify.class));
+        cards.add(new SetCardInfo("Zul Ashur, Lich Lord", 77, Rarity.RARE, mage.cards.z.ZulAshurLichLord.class));
     }
 }
