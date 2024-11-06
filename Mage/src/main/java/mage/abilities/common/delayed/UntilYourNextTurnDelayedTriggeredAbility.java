@@ -27,7 +27,7 @@ public class UntilYourNextTurnDelayedTriggeredAbility extends DelayedTriggeredAb
     public UntilYourNextTurnDelayedTriggeredAbility(TriggeredAbility ability) {
         super(null, Duration.UntilYourNextTurn, false);
         if (ability.isLeavesTheBattlefieldTrigger()) {
-            this.setLeavesTheBattlefieldTrigger(true);
+            setLeavesTheBattlefieldTrigger(true);
         }
         this.ability = ability;
     }

@@ -3,6 +3,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
@@ -48,6 +49,7 @@ class VillageCannibalsTriggeredAbility extends TriggeredAbilityImpl {
     public VillageCannibalsTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         setTriggerPhrase("Whenever another Human creature dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private VillageCannibalsTriggeredAbility(final VillageCannibalsTriggeredAbility ability) {
@@ -73,5 +75,10 @@ class VillageCannibalsTriggeredAbility extends TriggeredAbilityImpl {
         Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
         return permanent != null && permanent.isCreature(game) && permanent.hasSubtype(SubType.HUMAN, game)
                 && !permanent.getId().equals(this.getSourceId());
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }

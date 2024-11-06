@@ -62,6 +62,7 @@ class VerdantSuccessionTriggeredAbility extends TriggeredAbilityImpl {
 
     VerdantSuccessionTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, true);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private VerdantSuccessionTriggeredAbility(final VerdantSuccessionTriggeredAbility ability) {
@@ -97,6 +98,11 @@ class VerdantSuccessionTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a green nontoken creature dies, that creature's controller may search their library for a card with the same name as that creature, put it onto the battlefield, then shuffle.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }
 

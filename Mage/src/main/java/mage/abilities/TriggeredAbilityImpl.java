@@ -416,6 +416,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     @Override
     public final void setLeavesTheBattlefieldTrigger(boolean leavesTheBattlefieldTrigger) {
         this.leavesTheBattlefieldTrigger = leavesTheBattlefieldTrigger;
+
+        // TODO: replace override of isInUseableZone in dies only triggers by like "isDiesOnlyTrigger" here
     }
 
     @Override

@@ -1,6 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -165,6 +166,7 @@ class MariTheKillingQuillCreatureDiesAbility extends TriggeredAbilityImpl {
 
     public MariTheKillingQuillCreatureDiesAbility() {
         super(Zone.BATTLEFIELD, new MariTheKillingQuillExileCreatureEffect(), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private MariTheKillingQuillCreatureDiesAbility(final MariTheKillingQuillCreatureDiesAbility ability) {
@@ -201,6 +203,11 @@ class MariTheKillingQuillCreatureDiesAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a creature an opponent controls dies, exile it with a hit counter on it.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }
 

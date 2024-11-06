@@ -78,7 +78,7 @@ class KayaTheInexorableTriggeredAbility extends TriggeredAbilityImpl {
 
     public KayaTheInexorableTriggeredAbility() {
         super(Zone.ALL, null, false);
-        setLeavesTheBattlefieldTrigger(true);
+        this.setLeavesTheBattlefieldTrigger(true);
     }
 
     private KayaTheInexorableTriggeredAbility(KayaTheInexorableTriggeredAbility ability) {

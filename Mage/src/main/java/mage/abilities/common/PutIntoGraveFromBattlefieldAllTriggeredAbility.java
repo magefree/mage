@@ -26,7 +26,7 @@ public class PutIntoGraveFromBattlefieldAllTriggeredAbility extends TriggeredAbi
 
     public PutIntoGraveFromBattlefieldAllTriggeredAbility(Effect effect, boolean optional, FilterPermanent filter, boolean setTargetPointer, boolean onlyToControllerGraveyard) {
         super(Zone.BATTLEFIELD, effect, optional);
-        this.setLeavesTheBattlefieldTrigger(true);
+        setLeavesTheBattlefieldTrigger(true);
         this.filter = filter;
         this.onlyToControllerGraveyard = onlyToControllerGraveyard;
         this.setTargetPointer = setTargetPointer;

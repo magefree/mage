@@ -1,6 +1,7 @@
 
 package mage.cards.r;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
@@ -52,6 +53,7 @@ class RemembranceTriggeredAbility extends TriggeredAbilityImpl {
 
     RemembranceTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, true);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private RemembranceTriggeredAbility(final RemembranceTriggeredAbility ability) {
@@ -91,5 +93,10 @@ class RemembranceTriggeredAbility extends TriggeredAbilityImpl {
         return "Whenever a nontoken creature you control dies, " +
                 "you may search your library for a card with the same name as that creature, " +
                 "reveal it, put it into your hand, then shuffle.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }

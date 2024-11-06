@@ -55,7 +55,7 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl {
 
     public GraveBetrayalTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
-        this.setLeavesTheBattlefieldTrigger(true);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private GraveBetrayalTriggeredAbility(final GraveBetrayalTriggeredAbility ability) {

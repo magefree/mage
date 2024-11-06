@@ -54,6 +54,7 @@ class SyrKonradTheGrimTriggeredAbility extends TriggeredAbilityImpl {
 
     SyrKonradTheGrimTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private SyrKonradTheGrimTriggeredAbility(final SyrKonradTheGrimTriggeredAbility ability) {

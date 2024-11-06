@@ -46,7 +46,7 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
             }
 
             if (ability.isLeavesTheBattlefieldTrigger()) {
-                this.setLeavesTheBattlefieldTrigger(true);
+                setLeavesTheBattlefieldTrigger(true);
             }
         }
         setTriggerPhrase(generateTriggerPhrase());

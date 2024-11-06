@@ -1992,6 +1992,8 @@ public class VerifyCardDataTest {
                 .filter(a -> a.getRule().contains("whenever") || a.getRule().contains("Whenever"))
                 .filter(a -> a.getRule().contains("dies"))
                 .filter(a -> !a.getRule().contains("with \"When")) // ignore token creating effects
+                .filter(a -> !a.getRule().contains("gains \"When")) // ignore token creating effects
+                .filter(a -> !a.getRule().contains("and \"When")) // ignore token creating effects
                 .filter(a -> !a.isLeavesTheBattlefieldTrigger())
                 .forEach(a -> {
                     fail(card, "abilities", "dies trigger must use setLeavesTheBattlefieldTrigger(true) and override isInUseableZone - " + a.getClass().getSimpleName());

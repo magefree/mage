@@ -21,7 +21,7 @@ public class GodEternalDiesTriggeredAbility extends TriggeredAbilityImpl {
 
     public GodEternalDiesTriggeredAbility() {
         super(Zone.ALL, null, true);
-        this.setLeavesTheBattlefieldTrigger(true);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private GodEternalDiesTriggeredAbility(GodEternalDiesTriggeredAbility ability) {

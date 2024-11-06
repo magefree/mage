@@ -1,6 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -70,6 +71,7 @@ class RienneAngelOfRebirthTriggeredAbility extends TriggeredAbilityImpl {
 
     RienneAngelOfRebirthTriggeredAbility() {
         super(Zone.BATTLEFIELD, new RienneAngelOfRebirthEffect(), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private RienneAngelOfRebirthTriggeredAbility(final RienneAngelOfRebirthTriggeredAbility ability) {
@@ -108,6 +110,11 @@ class RienneAngelOfRebirthTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever another multicolored creature you control dies, " +
                 "return it to its owner's hand at the beginning of the next end step.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }
 

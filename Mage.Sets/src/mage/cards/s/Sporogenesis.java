@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
@@ -68,6 +69,7 @@ class SporogenesisTriggeredAbility extends TriggeredAbilityImpl {
 
     SporogenesisTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken(), new SporogenesisCount()), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private SporogenesisTriggeredAbility(final SporogenesisTriggeredAbility ability) {
@@ -103,6 +105,11 @@ class SporogenesisTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a creature with a fungus counter on it dies, create a 1/1 green Saproling creature token for each fungus counter on that creature.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }
 

@@ -4,6 +4,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -46,9 +47,11 @@ public final class Sangromancer extends CardImpl {
 }
 
 class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl {
+
     SangromancerFirstTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(3), true);
         setTriggerPhrase("Whenever a creature an opponent controls dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private SangromancerFirstTriggeredAbility(final SangromancerFirstTriggeredAbility ability) {
@@ -74,6 +77,11 @@ class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }
 

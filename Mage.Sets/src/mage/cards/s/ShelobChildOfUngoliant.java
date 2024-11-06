@@ -146,6 +146,7 @@ class ShelobChildOfUngoliantTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, effect);
         this.addWatcher(new ShelobChildOfUngoliantWatcher());
         this.setTriggerPhrase("Whenever another creature dealt damage this turn by a Spider you controlled dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private ShelobChildOfUngoliantTriggeredAbility(final ShelobChildOfUngoliantTriggeredAbility ability) {

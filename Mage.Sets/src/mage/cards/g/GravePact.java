@@ -49,7 +49,7 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
     public GravePactTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GravePactEffect());
         setTriggerPhrase("Whenever a creature you control dies, ");
-        setLeavesTheBattlefieldTrigger(true);
+        this.setLeavesTheBattlefieldTrigger(true);
     }
 
     private GravePactTriggeredAbility(final GravePactTriggeredAbility ability) {

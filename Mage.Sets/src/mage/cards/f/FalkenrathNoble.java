@@ -53,7 +53,7 @@ class FalkenrathNobleTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
         this.addEffect(new GainLifeEffect(1));
         this.addTarget(new TargetPlayer());
-        this.setLeavesTheBattlefieldTrigger(true);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private FalkenrathNobleTriggeredAbility(final FalkenrathNobleTriggeredAbility ability) {
