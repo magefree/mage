@@ -504,6 +504,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Unflinching Courage", 722, Rarity.UNCOMMON, mage.cards.u.UnflinchingCourage.class));
         cards.add(new SetCardInfo("Unsummon", 599, Rarity.COMMON, mage.cards.u.Unsummon.class));
         cards.add(new SetCardInfo("Untamed Hunger", 529, Rarity.COMMON, mage.cards.u.UntamedHunger.class));
+        cards.add(new SetCardInfo("Valkyrie's Call", 27, Rarity.MYTHIC, mage.cards.v.ValkyriesCall.class));
         cards.add(new SetCardInfo("Valorous Stance", 583, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
         cards.add(new SetCardInfo("Vampire Gourmand", 74, Rarity.UNCOMMON, mage.cards.v.VampireGourmand.class));
         cards.add(new SetCardInfo("Vampire Interloper", 530, Rarity.COMMON, mage.cards.v.VampireInterloper.class));
