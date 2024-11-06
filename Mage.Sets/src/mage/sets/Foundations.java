@@ -533,6 +533,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Witness Protection", 168, Rarity.COMMON, mage.cards.w.WitnessProtection.class));
         cards.add(new SetCardInfo("Youthful Valkyrie", 149, Rarity.UNCOMMON, mage.cards.y.YouthfulValkyrie.class));
         cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 584, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
+        cards.add(new SetCardInfo("Zimone, Paradox Sculptor", 126, Rarity.MYTHIC, mage.cards.z.ZimoneParadoxSculptor.class));
         cards.add(new SetCardInfo("Zombify", 187, Rarity.UNCOMMON, mage.cards.z.Zombify.class));
     }
 }
