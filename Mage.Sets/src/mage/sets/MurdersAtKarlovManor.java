@@ -781,9 +781,9 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
         int wildFoil = RandomUtil.nextInt(377);
         if (wildFoil < 245) {
             booster.addAll(foilCommonRuns.getNext().makeRun());
-        } else if (wildFoil < 344()) {
+        } else if (wildFoil < 344) {
             booster.addAll(foilUncommonRuns.getNext().makeRun());
-        } else if (wildFoil < 374()) {
+        } else if (wildFoil < 374) {
             booster.addAll(foilRareRuns.getNext().makeRun());
         } else {
             booster.addAll(foilRareLandRuns.getNext().makeRun());
