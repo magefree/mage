@@ -1,9 +1,11 @@
 
 package mage.abilities.common.delayed;
 
+import mage.MageObject;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Modes;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.constants.Duration;
@@ -102,5 +104,15 @@ public class UntilYourNextTurnDelayedTriggeredAbility extends DelayedTriggeredAb
     @Override
     public int getSourceObjectZoneChangeCounter() {
         return ability.getSourceObjectZoneChangeCounter();
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        if (isLeavesTheBattlefieldTrigger()) {
+            // TODO: leaves battlefield and die are not same! Is it possible make a diff logic?
+            return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
+        } else {
+            return super.isInUseableZone(game, source, event);
+        }
     }
 }

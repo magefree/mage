@@ -94,6 +94,7 @@ class JerrenCorruptedBishopTriggeredAbility extends TriggeredAbilityImpl {
     JerrenCorruptedBishopTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseLifeSourceControllerEffect(1));
         this.addEffect(new CreateTokenEffect(new HumanToken()));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private JerrenCorruptedBishopTriggeredAbility(final JerrenCorruptedBishopTriggeredAbility ability) {

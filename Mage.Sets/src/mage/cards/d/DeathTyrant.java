@@ -62,6 +62,7 @@ class DeathTyrantTriggeredAbility extends TriggeredAbilityImpl {
     DeathTyrantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new ZombieToken()));
         setTriggerPhrase("Whenever an attacking creature you control or a blocking creature an opponent controls dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private DeathTyrantTriggeredAbility(final DeathTyrantTriggeredAbility ability) {

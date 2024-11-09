@@ -1994,6 +1994,9 @@ public class VerifyCardDataTest {
                 .filter(a -> !a.getRule().contains("with \"When")) // ignore token creating effects
                 .filter(a -> !a.getRule().contains("gains \"When")) // ignore token creating effects
                 .filter(a -> !a.getRule().contains("and \"When")) // ignore token creating effects
+                .filter(a -> !card.getName().equals("Massacre Girl") // delayed trigger fixed, but verify check can't find it
+                        && !card.getName().equals("Infested Thrinax")
+                )
                 .filter(a -> !a.isLeavesTheBattlefieldTrigger())
                 .forEach(a -> {
                     fail(card, "abilities", "dies trigger must use setLeavesTheBattlefieldTrigger(true) and override isInUseableZone - " + a.getClass().getSimpleName());
@@ -2319,6 +2322,9 @@ public class VerifyCardDataTest {
     }
 
     private void checkWrongAbilitiesTextStart() {
+        if (FULL_ABILITIES_CHECK_SET_CODES.isEmpty()) {
+            return;
+        }
         System.out.println("Ability text checks started for " + FULL_ABILITIES_CHECK_SET_CODES);
         wrongAbilityStatsTotal = 0;
         wrongAbilityStatsGood = 0;
@@ -2326,6 +2332,10 @@ public class VerifyCardDataTest {
     }
 
     private void checkWrongAbilitiesTextEnd() {
+        if (FULL_ABILITIES_CHECK_SET_CODES.isEmpty()) {
+            return;
+        }
+
         // TODO: implement tests result/stats by github actions to show in check message compared to prev version
         System.out.println();
         System.out.printf("Stats for %d cards checked for abilities text:%n", wrongAbilityStatsTotal);

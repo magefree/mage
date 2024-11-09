@@ -1,5 +1,6 @@
 package mage.abilities.decorator;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Modes;
 import mage.abilities.TriggeredAbility;
@@ -41,6 +42,9 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
         this.ability = ability;
         this.condition = condition;
         this.abilityText = text;
+        if (ability.isLeavesTheBattlefieldTrigger()) {
+            this.setLeavesTheBattlefieldTrigger(true);
+        }
     }
 
     protected ConditionalTriggeredAbility(final ConditionalTriggeredAbility triggered) {
@@ -118,4 +122,13 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl {
         return this;
     }
 
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        if (isLeavesTheBattlefieldTrigger()) {
+            // TODO: leaves battlefield and die are not same! Is it possible make a diff logic?
+            return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
+        } else {
+            return super.isInUseableZone(game, source, event);
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -51,6 +52,7 @@ class HatefulEidolonTriggeredAbility extends TriggeredAbilityImpl {
 
     HatefulEidolonTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private HatefulEidolonTriggeredAbility(final HatefulEidolonTriggeredAbility ability) {
@@ -104,5 +106,10 @@ class HatefulEidolonTriggeredAbility extends TriggeredAbilityImpl {
     public String getRule() {
         return "Whenever an enchanted creature dies, draw a card for each "
                 + "Aura you controlled that was attached to it.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }

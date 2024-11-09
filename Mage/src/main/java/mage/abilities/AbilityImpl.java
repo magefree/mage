@@ -1255,13 +1255,13 @@ public abstract class AbilityImpl implements Ability {
         }
 
         return allEvents.stream().anyMatch(e -> {
-            // TODO: add more events with zone change logic (or make it even't param)?
+            // TODO: add more events with zone change logic (or make it event's param)?
             switch (e.getType()) {
                 case DESTROYED_PERMANENT:
                 case EXPLOITED_CREATURE:
                     return true;
                 case ZONE_CHANGE:
-                    return ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD;
+                    return ((ZoneChangeEvent) e).getFromZone() == Zone.BATTLEFIELD;
                 default:
                     return false;
             }

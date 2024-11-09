@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -32,6 +33,7 @@ public class DealtDamageAttachedAndDiedTriggeredAbility extends TriggeredAbility
         setTriggerPhrase(getWhen() + CardUtil.addArticle(filter.getMessage()) + " dealt damage by "
                 + CardUtil.getTextWithFirstCharLowerCase(attachmentType.verb()) +
                 " creature this turn dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     protected DealtDamageAttachedAndDiedTriggeredAbility(final DealtDamageAttachedAndDiedTriggeredAbility ability) {
@@ -74,5 +76,10 @@ public class DealtDamageAttachedAndDiedTriggeredAbility extends TriggeredAbility
             getEffects().setTargetPointer(new FixedTarget(event.getTargetId(), game));
         }
         return true;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }
