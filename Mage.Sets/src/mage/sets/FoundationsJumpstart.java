@@ -495,6 +495,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Persistent Specimen", 473, Rarity.COMMON, mage.cards.p.PersistentSpecimen.class));
         cards.add(new SetCardInfo("Pestermite", 343, Rarity.COMMON, mage.cards.p.Pestermite.class));
         cards.add(new SetCardInfo("Phantasmal Form", 344, Rarity.COMMON, mage.cards.p.PhantasmalForm.class));
+        cards.add(new SetCardInfo("Phantasmal Shieldback", 8, Rarity.UNCOMMON, mage.cards.p.PhantasmalShieldback.class));
         cards.add(new SetCardInfo("Phantom Ninja", 345, Rarity.COMMON, mage.cards.p.PhantomNinja.class));
         cards.add(new SetCardInfo("Pharika's Chosen", 474, Rarity.COMMON, mage.cards.p.PharikasChosen.class));
         cards.add(new SetCardInfo("Pigment Storm", 585, Rarity.COMMON, mage.cards.p.PigmentStorm.class));
