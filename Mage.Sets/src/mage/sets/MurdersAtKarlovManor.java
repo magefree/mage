@@ -531,10 +531,10 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
     // 7:1 regular:borderless - regular rare dual lands 14.58% of the time or borderless 2.08% of the time
     private final CardRun rareLand = new CardRun(false, "259", "259", "259", "259", "259", "259", "259", "324", "260", "260", "260", "260", "260", "260", "260", "325", "262", "262", "262", "262", "262", "262", "262", "326", "263", "263", "263", "263", "263", "263", "263", "327", "264", "264", "264", "264", "264", "264", "264", "328", "266", "266", "266", "266", "266", "266", "266", "329", "268", "268", "268", "268", "268", "268", "268", "330", "269", "269", "269", "269", "269", "269", "269", "331", "270", "270", "270", "270", "270", "270", "270", "332", "271", "271", "271", "271", "271", "271", "271", "333");
     private final CardRun land = new CardRun(false, "272", "273", "274", "275", "276", "277", "278", "279", "280", "281", "282", "283", "284", "285", "286");
-    // I used 1:1 common:uncommon ratio. No idea what ratio is.
-    private final CardRun list = new CardRun(false, "XLN_91", "DKA_4", "MH2_191", "HOU_149", "RAV_277", "ARB_68", "DIS_173", "ISD_183", "DOM_130", "MH2_46", "RNA_182", "ONS_272", "SOM_96", "VOW_207", "MBS_10", "UMA_138", "DDU_50", "2X2_17", "KLD_221", "M14_213", "UMA_247", "CLB_85", "JOU_153", "APC_117", "STX_220", "SOI_262", "DIS_33", "DKA_143", "ELD_107", "C16_47");
-    // I used 1:1 rare:mythic ratio. No idea what ratio is.
-    private final CardRun listRare = new CardRun(false, "STX_64", "M20_167", "DST_40", "ONS_89", "WAR_54", "MRD_99", "SOM_98", "C21_19", "MH1_21", "RTR_140");
+    // I used 5:2 common:uncommon ratio, which is plausible based on observed rates.
+    private final CardRun list = new CardRun(false, "DKA_4", "DKA_4", "DKA_4", "DKA_4", "DKA_4", "ISD_183", "ISD_183", "ISD_183", "ISD_183", "ISD_183", "MH2_46", "MH2_46", "MH2_46", "MH2_46", "MH2_46", "ONS_272", "ONS_272", "ONS_272", "ONS_272", "ONS_272", "SOM_96", "SOM_96", "SOM_96", "SOM_96", "SOM_96", "KLD_221", "KLD_221", "KLD_221", "KLD_221", "KLD_221", "APC_117", "APC_117", "APC_117", "APC_117", "APC_117", "SOI_262", "SOI_262", "SOI_262", "SOI_262", "SOI_262", "XLN_91", "XLN_91", "MH2_191", "MH2_191", "HOU_149", "HOU_149", "RAV_277", "RAV_277", "ARB_68", "ARB_68", "DIS_173", "DIS_173", "DOM_130", "DOM_130", "RNA_182", "RNA_182", "VOW_207", "VOW_207", "MBS_10", "MBS_10", "UMA_138", "UMA_138", "DDU_50", "DDU_50", "2X2_17", "2X2_17", "M14_213", "M14_213", "UMA_247", "UMA_247", "CLB_85", "CLB_85", "JOU_153", "JOU_153", "STX_220", "STX_220", "DIS_33", "DIS_33", "DKA_143", "DKA_143", "ELD_107", "ELD_107", "C16_47", "C16_47");
+    // I used 2:1 rare:mythic ratio. No idea what ratio is.
+    private final CardRun listRare = new CardRun(false, "STX_64", "STX_64", "DST_40", "DST_40", "ONS_89", "ONS_89", "WAR_54", "WAR_54", "MRD_99", "MRD_99", "SOM_98", "SOM_98", "C21_19", "C21_19", "M20_167", "MH1_21", "RTR_140");
     private final CardRun listGuest = new CardRun(false, "SPG_25", "SPG_27", "SPG_20", "SPG_28", "SPG_24", "SPG_19", "SPG_21", "SPG_26", "SPG_22", "SPG_23" );
 
     // because a foil card is independant from sorted runs, repeated as unsorted runs
@@ -598,7 +598,7 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
 
     private final BoosterStructure R1 = new BoosterStructure(rare);
     private final BoosterStructure R2 = new BoosterStructure(rare,rare);
-    private final BoosterStructure R3 = new BoosterStructure(rareLand,rare);
+    private final BoosterStructure R3 = new BoosterStructure(rare,rareLand);
     private final BoosterStructure L1 = new BoosterStructure(land);
     private final BoosterStructure S1 = new BoosterStructure(list);
     private final BoosterStructure S2 = new BoosterStructure(listRare);
@@ -750,8 +750,8 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
         fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC,
         fuC, fuC, fuC, fuC, fuC, fuC, fuC
     );
-    // guessing the rareland to rare ratio same as wildcard slot 2:1
-    private final RarityConfiguration foilRareRuns = new RarityConfiguration(frR,frL,frL);
+    private final RarityConfiguration foilRareRuns = new RarityConfiguration(frR);
+    private final RarityConfiguration foilRareLandRuns = new RarityConfiguration(frL);
 
     @Override
     public List<String> makeBooster() {
@@ -776,13 +776,17 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
             booster.addAll(listRuns.getNext().makeRun());
             --numCommon;
         }
-        // foil wildcard separate, but no data on distribution - using same distribution as regular wildcard
-        if (RandomUtil.nextBoolean()) {
-            booster.addAll(foilUncommonRuns.getNext().makeRun());
-        } else if (RandomUtil.nextBoolean()) {
+        // foil wildcard separate, watched 327 pack openings and using the observed rates.
+        // 245 common, 99 uncommon, 30 rare, 3 rareland
+        int wildFoil = RandomUtil.nextInt(377);
+        if (wildFoil < 245) {
             booster.addAll(foilCommonRuns.getNext().makeRun());
-        } else {
+        } else if (wildFoil < 344()) {
+            booster.addAll(foilUncommonRuns.getNext().makeRun());
+        } else if (wildFoil < 374()) {
             booster.addAll(foilRareRuns.getNext().makeRun());
+        } else {
+            booster.addAll(foilRareLandRuns.getNext().makeRun());
         }
         if (wildRare) {
             booster.addAll(rareRuns2.getNext().makeRun());
