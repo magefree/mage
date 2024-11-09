@@ -359,6 +359,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Ipnu Rivulet", 767, Rarity.UNCOMMON, mage.cards.i.IpnuRivulet.class));
         cards.add(new SetCardInfo("Isareth the Awakener", 68, Rarity.RARE, mage.cards.i.IsarethTheAwakener.class));
         cards.add(new SetCardInfo("Island", 84, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ivora, Insatiable Heir", 50, Rarity.UNCOMMON, mage.cards.i.IvoraInsatiableHeir.class));
         cards.add(new SetCardInfo("Ivy Lane Denizen", 674, Rarity.COMMON, mage.cards.i.IvyLaneDenizen.class));
         cards.add(new SetCardInfo("Ixalli's Diviner", 675, Rarity.COMMON, mage.cards.i.IxallisDiviner.class));
         cards.add(new SetCardInfo("Jadelight Ranger", 676, Rarity.RARE, mage.cards.j.JadelightRanger.class));

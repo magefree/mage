@@ -41,7 +41,7 @@ public class AerialExtortionist extends CardImpl {
                 Zone.BATTLEFIELD,
                 new AerialExtortionistExileEffect(),
                 false,
-                "Whenever Aerial Extortionist enters the battlefield or deals combat damage to a player, ",
+                "Whenever {this} enters the battlefield or deals combat damage to a player, ",
                 new EntersBattlefieldTriggeredAbility(null, false),
                 new DealsCombatDamageToAPlayerTriggeredAbility(null, false)
         );
