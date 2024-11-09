@@ -520,6 +520,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Rally of Wings", 238, Rarity.UNCOMMON, mage.cards.r.RallyOfWings.class));
         cards.add(new SetCardInfo("Rampant Growth", 704, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
         cards.add(new SetCardInfo("Rapacious Dragon", 588, Rarity.UNCOMMON, mage.cards.r.RapaciousDragon.class));
+        cards.add(new SetCardInfo("Razorgrass Invoker", 22, Rarity.COMMON, mage.cards.r.RazorgrassInvoker.class));
         cards.add(new SetCardInfo("Read the Bones", 479, Rarity.COMMON, mage.cards.r.ReadTheBones.class));
         cards.add(new SetCardInfo("Realm Seekers", 705, Rarity.RARE, mage.cards.r.RealmSeekers.class));
         cards.add(new SetCardInfo("Reaper from the Abyss", 480, Rarity.MYTHIC, mage.cards.r.ReaperFromTheAbyss.class));
