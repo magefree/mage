@@ -1989,15 +1989,17 @@ public class VerifyCardDataTest {
         card.getAbilities().stream()
                 .filter(a -> a instanceof TriggeredAbility)
                 .map(a -> (TriggeredAbility) a)
+                .filter(a -> !a.isLeavesTheBattlefieldTrigger())
                 .filter(a -> a.getRule().contains("whenever") || a.getRule().contains("Whenever"))
                 .filter(a -> a.getRule().contains("dies"))
                 .filter(a -> !a.getRule().contains("with \"When")) // ignore token creating effects
                 .filter(a -> !a.getRule().contains("gains \"When")) // ignore token creating effects
                 .filter(a -> !a.getRule().contains("and \"When")) // ignore token creating effects
+                .filter(a -> !a.getRule().contains("dies while {this} is in your graveyard")) // ignore Boneyard Scourge
                 .filter(a -> !card.getName().equals("Massacre Girl") // delayed trigger fixed, but verify check can't find it
                         && !card.getName().equals("Infested Thrinax")
+                        && !card.getName().equals("Xira, the Golden Sting")
                 )
-                .filter(a -> !a.isLeavesTheBattlefieldTrigger())
                 .forEach(a -> {
                     fail(card, "abilities", "dies trigger must use setLeavesTheBattlefieldTrigger(true) and override isInUseableZone - " + a.getClass().getSimpleName());
                 });

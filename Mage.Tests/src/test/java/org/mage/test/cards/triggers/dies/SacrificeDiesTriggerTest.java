@@ -314,7 +314,7 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
 
     @Test
     public void test_MultiModesDiesTrigger_ByDamage() {
-        addCustomEffect_BlinkTarget(playerA);
+        addCustomEffect_TargetBlink(playerA);
 
         // When Junji, the Midnight Sky dies, choose one —
         // • Each opponent discards two cards and loses 2 life.
@@ -346,7 +346,7 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
 
     @Test
     public void test_MultiModesDiesTrigger_BySacrificeCost() {
-        addCustomEffect_BlinkTarget(playerA);
+        addCustomEffect_TargetBlink(playerA);
 
         // When Junji, the Midnight Sky dies, choose one —
         // • Each opponent discards two cards and loses 2 life.

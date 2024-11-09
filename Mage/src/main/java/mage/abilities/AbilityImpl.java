@@ -1256,6 +1256,9 @@ public abstract class AbilityImpl implements Ability {
 
         return allEvents.stream().anyMatch(e -> {
             // TODO: add more events with zone change logic (or make it event's param)?
+            //   need research: is it ability's or event's task?
+            //   - ability's task: code like ability.setLookBackInTime
+            //   - event's task: code like current switch
             switch (e.getType()) {
                 case DESTROYED_PERMANENT:
                 case EXPLOITED_CREATURE:

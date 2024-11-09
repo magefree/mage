@@ -136,7 +136,7 @@ public class GeodeGolemTest extends CardTestCommanderDuelBase {
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
         //
         addCustomEffect_TargetDamage(playerA, 3);
-        addCustomEffect_DestroyTarget(playerA);
+        addCustomEffect_TargetDestroy(playerA);
 
         checkCommandCardCount("before 1", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Birgi, God of Storytelling", 1);
 

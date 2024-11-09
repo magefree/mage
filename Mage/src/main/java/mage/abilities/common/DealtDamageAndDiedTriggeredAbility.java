@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -35,6 +36,7 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
         this.filter = filter;
         this.setTargetPointer = setTargetPointer;
         setTriggerPhrase(getWhen() + CardUtil.addArticle(filter.getMessage()) + " dealt damage by {this} this turn dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     protected DealtDamageAndDiedTriggeredAbility(final DealtDamageAndDiedTriggeredAbility ability) {
@@ -55,6 +57,9 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        // If Axelrod Gunnarson and a creature it dealt damage to are both put into a graveyard at the same time,
+        // Axelrod Gunnarson’s second ability will trigger.
+        // (2009-10-01)
         if (((ZoneChangeEvent) event).isDiesEvent()) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (filter.match(zEvent.getTarget(), game)) {
@@ -77,5 +82,10 @@ public class DealtDamageAndDiedTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }

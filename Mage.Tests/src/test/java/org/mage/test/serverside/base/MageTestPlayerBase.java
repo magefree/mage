@@ -318,9 +318,6 @@ public abstract class MageTestPlayerBase {
 
     /**
      * Add cost modification effect to the game (all cast cost will be increaded or decreased for controller)
-     *
-     * @param controller
-     * @param modificationAmount
      */
     protected void addCustomEffect_SpellCostModification(TestPlayer controller, int modificationAmount) {
         Effect effect;
@@ -339,9 +336,6 @@ public abstract class MageTestPlayerBase {
 
     /**
      * Add target damage ability that can be called by text: "target damage xxx"
-     *
-     * @param controller
-     * @param damageAmount
      */
     protected void addCustomEffect_TargetDamage(TestPlayer controller, int damageAmount) {
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(damageAmount).setText("target damage " + damageAmount), new ManaCostsImpl<>(""));
@@ -355,10 +349,8 @@ public abstract class MageTestPlayerBase {
 
     /**
      * Add target destroy ability that can be called by text "target destroy"
-     *
-     * @param controller
      */
-    protected void addCustomEffect_DestroyTarget(TestPlayer controller) {
+    protected void addCustomEffect_TargetDestroy(TestPlayer controller) {
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect().setText("target destroy"), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetPermanent());
         addCustomCardWithAbility(
@@ -369,11 +361,21 @@ public abstract class MageTestPlayerBase {
     }
 
     /**
-     * Add target transform ability that can be called by text "target transform"
-     *
-     * @param controller
+     * Add all destroy ability that can be called by text "all destroy"
      */
-    protected void addCustomEffect_TransformTarget(TestPlayer controller) {
+    protected void addCustomEffect_AllDestroy(TestPlayer controller) {
+        Ability ability = new SimpleActivatedAbility(new DestroyAllEffect(StaticFilters.FILTER_PERMANENT).setText("all destroy"), new ManaCostsImpl<>(""));
+        addCustomCardWithAbility(
+                "all destroy for " + controller.getName(),
+                controller,
+                ability
+        );
+    }
+
+    /**
+     * Add target transform ability that can be called by text "target transform"
+     */
+    protected void addCustomEffect_TargetTransform(TestPlayer controller) {
         Ability ability = new SimpleActivatedAbility(new TransformTargetEffect().setText("target transform"), new ManaCostsImpl<>(""));
         ability.addTarget(new TargetPermanent());
         addCustomCardWithAbility(
@@ -385,10 +387,8 @@ public abstract class MageTestPlayerBase {
 
     /**
      * Add target blink ability that can be called by text "target blink"
-     *
-     * @param controller
      */
-    protected void addCustomEffect_BlinkTarget(TestPlayer controller) {
+    protected void addCustomEffect_TargetBlink(TestPlayer controller) {
         Ability ability = new SimpleActivatedAbility(
                 new ExileThenReturnTargetEffect(true, true).setText("target blink"),
                 new ManaCostsImpl<>("")
@@ -403,8 +403,6 @@ public abstract class MageTestPlayerBase {
 
     /**
      * Return target card to hand that can be called by text "return from ..."
-     *
-     * @param controller
      */
     protected void addCustomEffect_ReturnFromAnyToHand(TestPlayer controller) {
         // graveyard

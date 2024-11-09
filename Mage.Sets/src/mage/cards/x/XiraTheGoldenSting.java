@@ -1,7 +1,9 @@
 package mage.cards.x;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.delayed.WhenTargetDiesDelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -78,6 +80,7 @@ class XiraTheGoldenStingTriggeredAbility extends WhenTargetDiesDelayedTriggeredA
         super(new DrawCardSourceControllerEffect(1), Duration.Custom, SetTargetPointer.NONE);
         this.addEffect(new CreateTokenEffect(new XiraBlackInsectToken()).concatBy("and"));
         setTriggerPhrase("When that creature dies, if it has an egg counter on it, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private XiraTheGoldenStingTriggeredAbility(final XiraTheGoldenStingTriggeredAbility ability) {
@@ -99,5 +102,10 @@ class XiraTheGoldenStingTriggeredAbility extends WhenTargetDiesDelayedTriggeredA
     public boolean isInactive(Game game) {
         int zccdiff = game.getState().getZoneChangeCounter(mor.getSourceId()) - mor.getZoneChangeCounter();
         return zccdiff > 1 || zccdiff > 0 && game.getState().getZone(mor.getSourceId()) != Zone.GRAVEYARD;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }

@@ -1,6 +1,8 @@
 package mage.cards.b;
 
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.discard.DiscardTargetEffect;
 import mage.cards.CardImpl;
@@ -41,6 +43,7 @@ class BereavementTriggeredAbility extends TriggeredAbilityImpl {
 
     BereavementTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DiscardTargetEffect(1));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private BereavementTriggeredAbility(final BereavementTriggeredAbility ability) {
@@ -72,5 +75,10 @@ class BereavementTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a green creature dies, its controller discards a card.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }
