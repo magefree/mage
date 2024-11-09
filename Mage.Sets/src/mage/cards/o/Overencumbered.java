@@ -79,10 +79,13 @@ class OverencumberedTokenEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent overencumbered = game.getPermanentOrLKIBattlefield(source.getSourceId());
-        new ClueArtifactToken().putOntoBattlefield(1, game, source, overencumbered.getAttachedTo());
-        new FoodToken().putOntoBattlefield(1, game, source, overencumbered.getAttachedTo());
-        new JunkToken().putOntoBattlefield(1, game, source, overencumbered.getAttachedTo());
-        return true;
+        if (overencumbered != null) {
+            new ClueArtifactToken().putOntoBattlefield(1, game, source, overencumbered.getAttachedTo());
+            new FoodToken().putOntoBattlefield(1, game, source, overencumbered.getAttachedTo());
+            new JunkToken().putOntoBattlefield(1, game, source, overencumbered.getAttachedTo());
+            return true;
+        }
+        return false;
     }
 
 }
