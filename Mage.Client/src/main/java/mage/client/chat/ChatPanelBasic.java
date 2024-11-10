@@ -265,7 +265,7 @@ public class ChatPanelBasic extends javax.swing.JPanel {
         }
 
         String cachedProfanityFilterValue = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_USE_PROFANITY_FILTER, "0");
-        boolean isContainsSwearing = !containsSwearing(messageToTest, cachedProfanityFilterValue);
+        boolean isContainsSwearing = containsSwearing(messageToTest, cachedProfanityFilterValue);
         boolean isUserInfoOrGameOrStatus = messageType == MessageType.USER_INFO || messageType == MessageType.GAME || messageType == MessageType.STATUS;
         if (isUserInfoOrGameOrStatus || cachedProfanityFilterValue.equals("0") || (!cachedProfanityFilterValue.equals("0") && !isContainsSwearing)) {
             if (username != null && !username.isEmpty()) {
