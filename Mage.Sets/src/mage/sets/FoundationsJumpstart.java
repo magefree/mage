@@ -285,6 +285,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Garruk, Caller of Beasts", 659, Rarity.MYTHIC, mage.cards.g.GarrukCallerOfBeasts.class));
         cards.add(new SetCardInfo("Gavony Silversmith", 201, Rarity.COMMON, mage.cards.g.GavonySilversmith.class));
         cards.add(new SetCardInfo("Gearseeker Serpent", 314, Rarity.COMMON, mage.cards.g.GearseekerSerpent.class));
+        cards.add(new SetCardInfo("Generous Pup", 4, Rarity.RARE, mage.cards.g.GenerousPup.class));
         cards.add(new SetCardInfo("Ghalta, Primal Hunger", 77, Rarity.RARE, mage.cards.g.GhaltaPrimalHunger.class));
         cards.add(new SetCardInfo("Ghirapur Guide", 661, Rarity.UNCOMMON, mage.cards.g.GhirapurGuide.class));
         cards.add(new SetCardInfo("Ghitu Encampment", 155, Rarity.UNCOMMON, mage.cards.g.GhituEncampment.class));

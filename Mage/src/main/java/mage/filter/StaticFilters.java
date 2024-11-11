@@ -619,6 +619,14 @@ public final class StaticFilters {
     }
 
 
+    public static final FilterControlledCreaturePermanent FILTER_OTHER_CONTROLLED_CREATURE = new FilterControlledCreaturePermanent("other creature you control");
+
+    static {
+        FILTER_OTHER_CONTROLLED_CREATURE.add(AnotherPredicate.instance);
+        FILTER_OTHER_CONTROLLED_CREATURE.setLockedFilter(true);
+    }
+
+
     public static final FilterControlledCreaturePermanent FILTER_OTHER_CONTROLLED_CREATURES = new FilterControlledCreaturePermanent("other creatures you control");
 
     static {
