@@ -509,6 +509,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 81, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plate Armor", 100, Rarity.UNCOMMON, mage.cards.p.PlateArmor.class));
         cards.add(new SetCardInfo("Play with Fire", 586, Rarity.UNCOMMON, mage.cards.p.PlayWithFire.class));
+        cards.add(new SetCardInfo("Pol Jamaar, Illusionist", 38, Rarity.MYTHIC, mage.cards.p.PolJamaarIllusionist.class));
         cards.add(new SetCardInfo("Powerstone Fracture", 477, Rarity.COMMON, mage.cards.p.PowerstoneFracture.class));
         cards.add(new SetCardInfo("Predator's Strike", 699, Rarity.COMMON, mage.cards.p.PredatorsStrike.class));
         cards.add(new SetCardInfo("Pridemalkin", 700, Rarity.COMMON, mage.cards.p.Pridemalkin.class));
