@@ -111,6 +111,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Bonecaller Cleric", 112, Rarity.UNCOMMON, mage.cards.b.BonecallerCleric.class));
         cards.add(new SetCardInfo("Boneclad Necromancer", 411, Rarity.COMMON, mage.cards.b.BonecladNecromancer.class));
         cards.add(new SetCardInfo("Bounty of Skemfar", 638, Rarity.UNCOMMON, mage.cards.b.BountyOfSkemfar.class));
+        cards.add(new SetCardInfo("Braulios of Pheres Band", 51, Rarity.UNCOMMON, mage.cards.b.BrauliosOfPheresBand.class));
         cards.add(new SetCardInfo("Breaching Hippocamp", 290, Rarity.COMMON, mage.cards.b.BreachingHippocamp.class));
         cards.add(new SetCardInfo("Briarbridge Tracker", 639, Rarity.RARE, mage.cards.b.BriarbridgeTracker.class));
         cards.add(new SetCardInfo("Brightmare", 175, Rarity.UNCOMMON, mage.cards.b.Brightmare.class));
