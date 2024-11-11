@@ -80,6 +80,7 @@ public enum CounterType {
     FADE("fade"),
     FATE("fate"),
     FEATHER("feather"),
+    FEEDING("feeding"),
     FETCH("fetch"),
     FILIBUSTER("filibuster"),
     FINALITY("finality"),

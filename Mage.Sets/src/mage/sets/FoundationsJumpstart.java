@@ -457,6 +457,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Nadir Kraken", 332, Rarity.RARE, mage.cards.n.NadirKraken.class));
         cards.add(new SetCardInfo("Naiad of Hidden Coves", 333, Rarity.COMMON, mage.cards.n.NaiadOfHiddenCoves.class));
         cards.add(new SetCardInfo("Nantuko Husk", 468, Rarity.COMMON, mage.cards.n.NantukoHusk.class));
+        cards.add(new SetCardInfo("Nazar, the Velvet Fang", 43, Rarity.UNCOMMON, mage.cards.n.NazarTheVelvetFang.class));
         cards.add(new SetCardInfo("Necropolis Regent", 469, Rarity.MYTHIC, mage.cards.n.NecropolisRegent.class));
         cards.add(new SetCardInfo("Necrotic Wound", 470, Rarity.UNCOMMON, mage.cards.n.NecroticWound.class));
         cards.add(new SetCardInfo("Nef-Crop Entangler", 581, Rarity.COMMON, mage.cards.n.NefCropEntangler.class));
