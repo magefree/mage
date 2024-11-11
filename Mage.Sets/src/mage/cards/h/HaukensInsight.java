@@ -185,7 +185,7 @@ class HaukensInsightWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST || event.getType() == GameEvent.EventType.LAND_PLAYED) {
             if (event.hasApprovingIdentifier(MageIdentifier.HaukensInsightWatcher)) {
-                usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
+                usedFrom.add(event.getApprovingObject().getApprovingMageObjectReference());
             }
         }
     }

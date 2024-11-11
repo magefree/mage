@@ -146,8 +146,8 @@ class MuldrothaTheGravetideWatcher extends Watcher {
 
     private void addPermanentTypes(GameEvent event, Card mageObject, Game game) {
         if (mageObject != null 
-                && event.getAdditionalReference() != null 
-                && MageIdentifier.MuldrothaTheGravetideWatcher.equals(event.getAdditionalReference().getApprovingAbility().getIdentifier())) {
+                && event.getApprovingObject() != null
+                && MageIdentifier.MuldrothaTheGravetideWatcher.equals(event.getApprovingObject().getApprovingAbility().getIdentifier())) {
             UUID playerId = null;
             if (mageObject instanceof Spell) {
                 playerId = ((Spell) mageObject).getControllerId();
@@ -155,10 +155,10 @@ class MuldrothaTheGravetideWatcher extends Watcher {
                 playerId = ((Permanent) mageObject).getControllerId();
             }
             if (playerId != null) {
-                Set<CardType> permanentTypes = sourcePlayedPermanentTypes.get(event.getAdditionalReference().getApprovingMageObjectReference());
+                Set<CardType> permanentTypes = sourcePlayedPermanentTypes.get(event.getApprovingObject().getApprovingMageObjectReference());
                 if (permanentTypes == null) {
                     permanentTypes = EnumSet.noneOf(CardType.class);
-                    sourcePlayedPermanentTypes.put(event.getAdditionalReference().getApprovingMageObjectReference(), permanentTypes);
+                    sourcePlayedPermanentTypes.put(event.getApprovingObject().getApprovingMageObjectReference(), permanentTypes);
                 }
                 Set<CardType> typesNotCast = EnumSet.noneOf(CardType.class);
                 for (CardType cardType : mageObject.getCardType(game)) {

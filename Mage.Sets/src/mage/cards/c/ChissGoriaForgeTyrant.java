@@ -194,10 +194,10 @@ class ChissGoriaForgeTyrantWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getAdditionalReference() == null) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getApprovingObject() == null) {
             return;
         }
-        MageObjectReference mor = event.getAdditionalReference().getApprovingMageObjectReference();
+        MageObjectReference mor = event.getApprovingObject().getApprovingMageObjectReference();
         Spell spell = game.getSpell(event.getTargetId());
         if (mor == null || spell == null) {
             return;

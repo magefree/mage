@@ -178,9 +178,9 @@ class KessDissidentMageWatcher extends Watcher {
                 && event.hasApprovingIdentifier(MageIdentifier.KessDissidentMageWatcher)) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
             if (spell != null) {
-                allowingObjects.add(event.getAdditionalReference().getApprovingMageObjectReference());
+                allowingObjects.add(event.getApprovingObject().getApprovingMageObjectReference());
                 castSpells.put(new MageObjectReference(spell.getMainCard().getId(), game),
-                        event.getAdditionalReference().getApprovingAbility().getSourceId());
+                        event.getApprovingObject().getApprovingAbility().getSourceId());
             }
         }
     }

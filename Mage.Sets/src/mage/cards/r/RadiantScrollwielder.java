@@ -159,12 +159,12 @@ class RadiantScrollwielderWatcher extends Watcher {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getAdditionalReference() == null) {
+        if (event.getType() != GameEvent.EventType.SPELL_CAST || event.getApprovingObject() == null) {
             return;
         }
         morMap.put(
                 new MageObjectReference(event.getSourceId(), game),
-                event.getAdditionalReference().getApprovingMageObjectReference()
+                event.getApprovingObject().getApprovingMageObjectReference()
         );
     }
 

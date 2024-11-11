@@ -32,7 +32,7 @@ public class OnceEachTurnCastWatcher extends Watcher {
                 && event.getPlayerId() != null
                 && event.hasApprovingIdentifier(MageIdentifier.OnceEachTurnCastWatcher)) {
             usedFrom.computeIfAbsent(event.getPlayerId(), k -> new HashSet<>())
-                    .add(event.getAdditionalReference().getApprovingMageObjectReference());
+                    .add(event.getApprovingObject().getApprovingMageObjectReference());
         }
     }
 

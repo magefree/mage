@@ -116,7 +116,7 @@ class CastFromGraveyardOnceWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (GameEvent.EventType.SPELL_CAST.equals(event.getType())
                 && event.hasApprovingIdentifier(MageIdentifier.CastFromGraveyardOnceWatcher)) {
-            usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
+            usedFrom.add(event.getApprovingObject().getApprovingMageObjectReference());
         }
     }
 

@@ -237,15 +237,15 @@ class CoramTheUndertakerWatcher extends Watcher {
             cardsAllowedToBePlayedOrCast.add(new MageObjectReference(mainCard, game));
             return;
         }
-        if (event.getAdditionalReference() == null
-                || !MageIdentifier.CoramTheUndertakerWatcher.equals(event.getAdditionalReference().getApprovingAbility().getIdentifier())) {
+        if (event.getApprovingObject() == null
+                || !MageIdentifier.CoramTheUndertakerWatcher.equals(event.getApprovingObject().getApprovingAbility().getIdentifier())) {
             return;
         }
         if (event.getType() == GameEvent.EventType.LAND_PLAYED) {
-            landPlayedForSource.add(event.getAdditionalReference().getApprovingMageObjectReference());
+            landPlayedForSource.add(event.getApprovingObject().getApprovingMageObjectReference());
         }
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            spellCastForSource.add(event.getAdditionalReference().getApprovingMageObjectReference());
+            spellCastForSource.add(event.getApprovingObject().getApprovingMageObjectReference());
         }
     }
 
