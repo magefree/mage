@@ -642,6 +642,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Sunmane Pegasus", 267, Rarity.COMMON, mage.cards.s.SunmanePegasus.class));
         cards.add(new SetCardInfo("Sunspear Shikari", 268, Rarity.COMMON, mage.cards.s.SunspearShikari.class));
         cards.add(new SetCardInfo("Supreme Will", 370, Rarity.UNCOMMON, mage.cards.s.SupremeWill.class));
+        cards.add(new SetCardInfo("Sutina, Speaker of the Tajuru", 56, Rarity.UNCOMMON, mage.cards.s.SutinaSpeakerOfTheTajuru.class));
         cards.add(new SetCardInfo("Swamp", 87, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swarm of Bloodflies", 492, Rarity.UNCOMMON, mage.cards.s.SwarmOfBloodflies.class));
         cards.add(new SetCardInfo("Swift Response", 269, Rarity.COMMON, mage.cards.s.SwiftResponse.class));
