@@ -46,7 +46,7 @@ public final class Overencumbered extends CardImpl {
         // At the beginning of combat on enchanted opponent's turn, that player may pay {1} for each artifact they control. If they don't, creatures can't attack this combat.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 TargetController.ENCHANTED, new OverencumberedEffect(), false
-        );
+        ).setTriggerPhrase("At the beginning of combat on enchanted opponent's turn, ");
         this.addAbility(ability);
     }
 

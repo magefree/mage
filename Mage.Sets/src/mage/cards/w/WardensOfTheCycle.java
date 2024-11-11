@@ -36,7 +36,7 @@ public final class WardensOfTheCycle extends CardImpl {
                 .withInterveningIf(MorbidCondition.instance).setAbilityWord(AbilityWord.MORBID).addHint(MorbidHint.instance);
 
         // * You draw a card and you lose 1 life.
-        Mode mode = new Mode(new DrawCardSourceControllerEffect(1));
+        Mode mode = new Mode(new DrawCardSourceControllerEffect(1, true));
         mode.addEffect(new LoseLifeSourceControllerEffect(1).concatBy("and"));
         ability.addMode(mode);
         this.addAbility(ability);

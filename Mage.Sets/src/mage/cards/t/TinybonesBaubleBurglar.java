@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -17,14 +16,13 @@ import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
 import mage.game.CardState;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.ManaPoolItem;
 import mage.players.Player;
-import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -74,7 +72,7 @@ class TinybonesBaubleBurglarExileEffect extends OneShotEffect {
 
     TinybonesBaubleBurglarExileEffect() {
         super(Outcome.Benefit);
-        staticText = "exile that card from their graveyard with a stash counter on it";
+        staticText = "exile it from their graveyard with a stash counter on it";
     }
 
     private TinybonesBaubleBurglarExileEffect(final TinybonesBaubleBurglarExileEffect effect) {
@@ -104,7 +102,7 @@ class TinybonesBaubleBurglarExileEffect extends OneShotEffect {
 
 class TinybonesBaubleBurglarTriggeredAbility extends TriggeredAbilityImpl {
 
-    public TinybonesBaubleBurglarTriggeredAbility(Effect effect) {
+    TinybonesBaubleBurglarTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
         setTriggerPhrase("Whenever an opponent discards a card, ");
     }
@@ -173,7 +171,7 @@ class TinybonesBaubleBurglarSpendAnyManaEffect extends AsThoughEffectImpl implem
 
     TinybonesBaubleBurglarSpendAnyManaEffect() {
         super(AsThoughEffectType.SPEND_OTHER_MANA, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = ", and you may spend mana from snow sources as though it were mana of any color to cast those spells";
+        staticText = ", and mana of any type can be spent to cast those spells";
     }
 
     private TinybonesBaubleBurglarSpendAnyManaEffect(final TinybonesBaubleBurglarSpendAnyManaEffect effect) {

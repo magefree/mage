@@ -60,7 +60,7 @@ class PerforatingArtistEffect extends OneShotEffect {
 
     PerforatingArtistEffect() {
         super(Outcome.Damage);
-        staticText = "each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card";
+        staticText = "each opponent loses 3 life unless that player sacrifices a nonland permanent of their choice or discards a card";
     }
 
     private PerforatingArtistEffect(final PerforatingArtistEffect effect) {

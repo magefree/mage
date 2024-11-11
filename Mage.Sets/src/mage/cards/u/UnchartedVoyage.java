@@ -22,7 +22,7 @@ public final class UnchartedVoyage extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Surveil 1.
-        this.getSpellAbility().addEffect(new SurveilEffect(1));
+        this.getSpellAbility().addEffect(new SurveilEffect(1).concatBy("<br>"));
     }
 
     private UnchartedVoyage(final UnchartedVoyage card) {

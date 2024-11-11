@@ -31,7 +31,7 @@ public final class SabertoothMauler extends CardImpl {
         Ability ability = new BeginningOfEndStepTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance())
         ).withInterveningIf(MorbidCondition.instance).addHint(MorbidHint.instance);
-        ability.addEffect(new UntapSourceEffect().concatBy("and "));
+        ability.addEffect(new UntapSourceEffect().setText("and untap it"));
         this.addAbility(ability);
     }
 

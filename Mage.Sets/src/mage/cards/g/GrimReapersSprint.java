@@ -116,6 +116,7 @@ class GrimReapersSprintEffect extends OneShotEffect {
 
     GrimReapersSprintEffect() {
         super(Outcome.Benefit);
+        this.staticText = "If it's your main phase, there is an additional combat phase after this phase";
     }
 
     private GrimReapersSprintEffect(final GrimReapersSprintEffect effect) {
