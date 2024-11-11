@@ -565,6 +565,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Savage Stomp", 710, Rarity.UNCOMMON, mage.cards.s.SavageStomp.class));
         cards.add(new SetCardInfo("Savannah Lions", 249, Rarity.COMMON, mage.cards.s.SavannahLions.class));
         cards.add(new SetCardInfo("Scavenged Blade", 596, Rarity.COMMON, mage.cards.s.ScavengedBlade.class));
+        cards.add(new SetCardInfo("Scholar of Combustion", 19, Rarity.COMMON, mage.cards.s.ScholarOfCombustion.class));
         cards.add(new SetCardInfo("Scion of Darkness", 486, Rarity.UNCOMMON, mage.cards.s.ScionOfDarkness.class));
         cards.add(new SetCardInfo("Scion of Opulence", 597, Rarity.RARE, mage.cards.s.ScionOfOpulence.class));
         cards.add(new SetCardInfo("Scion of the Swarm", 487, Rarity.UNCOMMON, mage.cards.s.ScionOfTheSwarm.class));
