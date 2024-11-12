@@ -14,6 +14,7 @@ import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -69,14 +70,16 @@ class PopularEntertainerAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
-
         int damage = dEvent.getEvents()
                 .stream()
-                .filter(ev -> ev.getSourceId().equals(controllerId))
+                .filter(e -> {
+                    Permanent permanent = game.getPermanentOrLKIBattlefield(e.getSourceId());
+                    return permanent != null && permanent.isControlledBy(getControllerId());
+                })
                 .mapToInt(GameEvent::getAmount)
                 .sum();
 
-        if (!dEvent.isCombatDamage() || damage < 1){
+        if (!dEvent.isCombatDamage() || damage < 1) {
             return false;
         }
         FilterPermanent filter = new FilterCreaturePermanent(
