@@ -549,6 +549,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Resistance Skywarden", 591, Rarity.UNCOMMON, mage.cards.r.ResistanceSkywarden.class));
         cards.add(new SetCardInfo("Retreat to Kazandu", 707, Rarity.UNCOMMON, mage.cards.r.RetreatToKazandu.class));
         cards.add(new SetCardInfo("Revitalize", 244, Rarity.COMMON, mage.cards.r.Revitalize.class));
+        cards.add(new SetCardInfo("Revoke Demise", 10, Rarity.COMMON, mage.cards.r.RevokeDemise.class));
         cards.add(new SetCardInfo("Rhox Faithmender", 245, Rarity.RARE, mage.cards.r.RhoxFaithmender.class));
         cards.add(new SetCardInfo("Righteous Valkyrie", 246, Rarity.RARE, mage.cards.r.RighteousValkyrie.class));
         cards.add(new SetCardInfo("Rionya, Fire Dancer", 75, Rarity.RARE, mage.cards.r.RionyaFireDancer.class));
