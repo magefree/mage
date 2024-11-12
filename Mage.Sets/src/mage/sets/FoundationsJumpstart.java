@@ -349,6 +349,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Howling Banshee", 119, Rarity.UNCOMMON, mage.cards.h.HowlingBanshee.class));
         cards.add(new SetCardInfo("Hungry Megasloth", 21, Rarity.UNCOMMON, mage.cards.h.HungryMegasloth.class));
         cards.add(new SetCardInfo("Hunter's Edge", 671, Rarity.COMMON, mage.cards.h.HuntersEdge.class));
+        cards.add(new SetCardInfo("Hurska Sweet-Tooth", 53, Rarity.MYTHIC, mage.cards.h.HurskaSweetTooth.class));
         cards.add(new SetCardInfo("Impeccable Timing", 209, Rarity.COMMON, mage.cards.i.ImpeccableTiming.class));
         cards.add(new SetCardInfo("Incorrigible Youths", 564, Rarity.UNCOMMON, mage.cards.i.IncorrigibleYouths.class));
         cards.add(new SetCardInfo("Indomitable Will", 210, Rarity.COMMON, mage.cards.i.IndomitableWill.class));
