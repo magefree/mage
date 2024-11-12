@@ -491,6 +491,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Overflowing Insight", 341, Rarity.MYTHIC, mage.cards.o.OverflowingInsight.class));
         cards.add(new SetCardInfo("Overwhelm", 697, Rarity.UNCOMMON, mage.cards.o.Overwhelm.class));
         cards.add(new SetCardInfo("Owl Familiar", 342, Rarity.COMMON, mage.cards.o.OwlFamiliar.class));
+        cards.add(new SetCardInfo("Ozox, the Clattering King", 44, Rarity.UNCOMMON, mage.cards.o.OzoxTheClatteringKing.class));
         cards.add(new SetCardInfo("Pacifism", 234, Rarity.COMMON, mage.cards.p.Pacifism.class));
         cards.add(new SetCardInfo("Padeem, Consul of Innovation", 62, Rarity.RARE, mage.cards.p.PadeemConsulOfInnovation.class));
         cards.add(new SetCardInfo("Paladin of the Bloodstained", 235, Rarity.COMMON, mage.cards.p.PaladinOfTheBloodstained.class));
