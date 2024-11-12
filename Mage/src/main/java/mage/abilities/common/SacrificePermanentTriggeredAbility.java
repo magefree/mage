@@ -28,7 +28,11 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
      * zone = battlefield, setTargetPointer = NONE, optional = false
      */
     public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter) {
-        this(Zone.BATTLEFIELD, effect, filter, TargetController.YOU, SetTargetPointer.NONE, false);
+        this(effect, filter, TargetController.YOU);
+    }
+
+    public SacrificePermanentTriggeredAbility(Effect effect, FilterPermanent filter, TargetController sacrificingPlayer) {
+        this(Zone.BATTLEFIELD, effect, filter, sacrificingPlayer, SetTargetPointer.NONE, false);
     }
 
     public SacrificePermanentTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter,
@@ -115,7 +119,7 @@ public class SacrificePermanentTriggeredAbility extends TriggeredAbilityImpl {
             default:
                 throw new IllegalArgumentException("Unsupported TargetController in SacrificePermanentTriggeredAbility: " + sacrificingPlayer);
         }
-        return getWhen() + targetControllerText +  CardUtil.addArticle(filter.getMessage()) + ", ";
+        return getWhen() + targetControllerText + CardUtil.addArticle(filter.getMessage()) + ", ";
     }
 
 }
