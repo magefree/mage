@@ -523,6 +523,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Prosperous Thief", 346, Rarity.UNCOMMON, mage.cards.p.ProsperousThief.class));
         cards.add(new SetCardInfo("Purple-Crystal Crab", 347, Rarity.COMMON, mage.cards.p.PurpleCrystalCrab.class));
         cards.add(new SetCardInfo("Pyrophobia", 587, Rarity.COMMON, mage.cards.p.Pyrophobia.class));
+        cards.add(new SetCardInfo("Qala, Ajani's Pridemate", 32, Rarity.UNCOMMON, mage.cards.q.QalaAjanisPridemate.class));
         cards.add(new SetCardInfo("Quirion Beastcaller", 703, Rarity.RARE, mage.cards.q.QuirionBeastcaller.class));
         cards.add(new SetCardInfo("Raise the Alarm", 101, Rarity.COMMON, mage.cards.r.RaiseTheAlarm.class));
         cards.add(new SetCardInfo("Rally of Wings", 238, Rarity.UNCOMMON, mage.cards.r.RallyOfWings.class));
