@@ -508,6 +508,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Pigment Storm", 585, Rarity.COMMON, mage.cards.p.PigmentStorm.class));
         cards.add(new SetCardInfo("Pilfering Imp", 475, Rarity.UNCOMMON, mage.cards.p.PilferingImp.class));
         cards.add(new SetCardInfo("Pitiless Plunderer", 476, Rarity.UNCOMMON, mage.cards.p.PitilessPlunderer.class));
+        cards.add(new SetCardInfo("Plagon, Lord of the Beach", 37, Rarity.RARE, mage.cards.p.PlagonLordOfTheBeach.class));
         cards.add(new SetCardInfo("Plains", 81, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plate Armor", 100, Rarity.UNCOMMON, mage.cards.p.PlateArmor.class));
         cards.add(new SetCardInfo("Play with Fire", 586, Rarity.UNCOMMON, mage.cards.p.PlayWithFire.class));

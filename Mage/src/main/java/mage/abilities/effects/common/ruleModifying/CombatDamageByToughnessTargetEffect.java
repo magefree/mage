@@ -1,9 +1,5 @@
 package mage.abilities.effects.common.ruleModifying;
 
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -16,8 +12,16 @@ import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
+import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class CombatDamageByToughnessTargetEffect extends ContinuousEffectImpl {
-    
+
+    public CombatDamageByToughnessTargetEffect() {
+        this(Duration.EndOfTurn);
+    }
+
     public CombatDamageByToughnessTargetEffect(Duration duration) {
         super(duration, Layer.RulesEffects, SubLayer.NA, Outcome.Neutral);
     }
@@ -34,9 +38,9 @@ public class CombatDamageByToughnessTargetEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Set<Permanent> set = getTargetPointer().getTargets(game, source).stream()
-            .map(game::getPermanent)
-            .filter(Objects::nonNull)
-            .collect(Collectors.toSet());
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(new PermanentReferenceInCollectionPredicate(set, game));
@@ -53,7 +57,7 @@ public class CombatDamageByToughnessTargetEffect extends ContinuousEffectImpl {
         }
         return (duration.toString().isEmpty() ? "" : duration.toString() + ", ")
                 + getTargetPointer().describeTargets(mode.getTargets(), "that creature")
-            + " assigns combat damage equal to its toughness rather than its power";
+                + " assigns combat damage equal to its toughness rather than its power";
     }
 
 }
