@@ -562,6 +562,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Sai, Master Thopterist", 63, Rarity.RARE, mage.cards.s.SaiMasterThopterist.class));
         cards.add(new SetCardInfo("Sanctum Seeker", 485, Rarity.RARE, mage.cards.s.SanctumSeeker.class));
         cards.add(new SetCardInfo("Sandsteppe Outcast", 248, Rarity.COMMON, mage.cards.s.SandsteppeOutcast.class));
+        cards.add(new SetCardInfo("Sandstorm Crasher", 18, Rarity.RARE, mage.cards.s.SandstormCrasher.class));
         cards.add(new SetCardInfo("Sangromancer", 122, Rarity.RARE, mage.cards.s.Sangromancer.class));
         cards.add(new SetCardInfo("Saproling Migration", 709, Rarity.COMMON, mage.cards.s.SaprolingMigration.class));
         cards.add(new SetCardInfo("Sarkhan's Rage", 594, Rarity.COMMON, mage.cards.s.SarkhansRage.class));
