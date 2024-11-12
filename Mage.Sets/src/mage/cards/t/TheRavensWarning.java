@@ -18,6 +18,7 @@ import mage.game.events.DamagedBatchForOnePlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BlueBirdToken;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -89,14 +90,18 @@ class TheRavensWarningTriggeredAbility extends DelayedTriggeredAbility {
         if (!dEvent.isCombatDamage()) {
             return false;
         }
-        return dEvent.getEvents().stream()
+        if (dEvent.getEvents().stream()
                 .anyMatch(e -> {
                     Permanent permanent = game.getPermanentOrLKIBattlefield(e.getSourceId());
                     return permanent != null
                             && permanent.isCreature(game)
                             && permanent.isControlledBy(this.getControllerId())
                             && permanent.hasAbility(FlyingAbility.getInstance(), game);
-                });
+                })) {
+            getEffects().setTargetPointer(new FixedTarget(dEvent.getTargetId()));
+            return true;
+        }
+        return false;
     }
 
     @Override
