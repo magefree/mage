@@ -36,11 +36,11 @@ public final class NazarTheVelvetFang extends CardImpl {
         this.addAbility(new MenaceAbility());
 
         // Whenever you gain life, put a feeding counter on Nazar, the Velvet Fang.
-        this.addAbility(new GainLifeControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.FETCH.createInstance())));
+        this.addAbility(new GainLifeControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.FEEDING.createInstance())));
 
         // Whenever Nazar attacks, you may remove three feeding counters from it. If you do, you draw three cards and you lose 3 life.
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
-                new DrawCardSourceControllerEffect(1, true),
+                new DrawCardSourceControllerEffect(3, true),
                 new RemoveCountersSourceCost(CounterType.FEEDING.createInstance(3))
                         .setText("remove three feeding counters from it")
         ).addEffect(new LoseLifeSourceControllerEffect(3).concatBy("and"))));
