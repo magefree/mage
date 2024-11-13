@@ -221,6 +221,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Eager Construct", 749, Rarity.COMMON, mage.cards.e.EagerConstruct.class));
         cards.add(new SetCardInfo("Eaten Alive", 116, Rarity.COMMON, mage.cards.e.EatenAlive.class));
         cards.add(new SetCardInfo("Eerie Soultender", 431, Rarity.COMMON, mage.cards.e.EerieSoultender.class));
+        cards.add(new SetCardInfo("Eidolon of Astral Winds", 2, Rarity.RARE, mage.cards.e.EidolonOfAstralWinds.class));
         cards.add(new SetCardInfo("Elderfang Disciple", 432, Rarity.COMMON, mage.cards.e.ElderfangDisciple.class));
         cards.add(new SetCardInfo("Elite Skirmisher", 193, Rarity.COMMON, mage.cards.e.EliteSkirmisher.class));
         cards.add(new SetCardInfo("Elvish Archdruid", 655, Rarity.RARE, mage.cards.e.ElvishArchdruid.class));
