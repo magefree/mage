@@ -279,6 +279,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Forgotten Cave", 766, Rarity.UNCOMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Foul Play", 442, Rarity.UNCOMMON, mage.cards.f.FoulPlay.class));
         cards.add(new SetCardInfo("Fretwork Colony", 443, Rarity.UNCOMMON, mage.cards.f.FretworkColony.class));
+        cards.add(new SetCardInfo("Frontline Heroism", 15, Rarity.RARE, mage.cards.f.FrontlineHeroism.class));
         cards.add(new SetCardInfo("Frost Trickster", 313, Rarity.COMMON, mage.cards.f.FrostTrickster.class));
         cards.add(new SetCardInfo("Fumulus, the Infestation", 42, Rarity.RARE, mage.cards.f.FumulusTheInfestation.class));
         cards.add(new SetCardInfo("Fungal Plots", 658, Rarity.UNCOMMON, mage.cards.f.FungalPlots.class));
