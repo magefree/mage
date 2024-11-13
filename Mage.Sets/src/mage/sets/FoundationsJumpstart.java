@@ -325,6 +325,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Gorex, the Tombshell", 67, Rarity.RARE, mage.cards.g.GorexTheTombshell.class));
         cards.add(new SetCardInfo("Gorging Vulture", 449, Rarity.COMMON, mage.cards.g.GorgingVulture.class));
         cards.add(new SetCardInfo("Gorgon Flail", 752, Rarity.UNCOMMON, mage.cards.g.GorgonFlail.class));
+        cards.add(new SetCardInfo("Gornog, the Red Reaper", 49, Rarity.RARE, mage.cards.g.GornogTheRedReaper.class));
         cards.add(new SetCardInfo("Grave Strength", 450, Rarity.UNCOMMON, mage.cards.g.GraveStrength.class));
         cards.add(new SetCardInfo("Graveblade Marauder", 451, Rarity.UNCOMMON, mage.cards.g.GravebladeMarauder.class));
         cards.add(new SetCardInfo("Gravedigger", 452, Rarity.COMMON, mage.cards.g.Gravedigger.class));
