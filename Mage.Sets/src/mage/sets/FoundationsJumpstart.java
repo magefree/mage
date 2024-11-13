@@ -722,6 +722,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Universal Solvent", 761, Rarity.COMMON, mage.cards.u.UniversalSolvent.class));
         cards.add(new SetCardInfo("Unleash Fury", 608, Rarity.UNCOMMON, mage.cards.u.UnleashFury.class));
         cards.add(new SetCardInfo("Unstoppable Ogre", 609, Rarity.COMMON, mage.cards.u.UnstoppableOgre.class));
+        cards.add(new SetCardInfo("Urdnan, Dromoka Warrior", 34, Rarity.UNCOMMON, mage.cards.u.UrdnanDromokaWarrior.class));
         cards.add(new SetCardInfo("Urge to Feed", 502, Rarity.UNCOMMON, mage.cards.u.UrgeToFeed.class));
         cards.add(new SetCardInfo("Valkyrie Harbinger", 275, Rarity.RARE, mage.cards.v.ValkyrieHarbinger.class));
         cards.add(new SetCardInfo("Valkyrie's Sword", 276, Rarity.UNCOMMON, mage.cards.v.ValkyriesSword.class));
