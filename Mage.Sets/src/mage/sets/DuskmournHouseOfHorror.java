@@ -226,6 +226,9 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Unidentified Hovership", 37, Rarity.RARE, mage.cards.u.UnidentifiedHovership.class));
         cards.add(new SetCardInfo("Unnerving Grasp", 80, Rarity.UNCOMMON, mage.cards.u.UnnervingGrasp.class));
         cards.add(new SetCardInfo("Unsettling Twins", 38, Rarity.COMMON, mage.cards.u.UnsettlingTwins.class));
+        cards.add(new SetCardInfo("Unstoppable Slasher", 119, Rarity.RARE, mage.cards.u.UnstoppableSlasher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Unstoppable Slasher", 294, Rarity.RARE, mage.cards.u.UnstoppableSlasher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Unstoppable Slasher", 312, Rarity.RARE, mage.cards.u.UnstoppableSlasher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Untimely Malfunction", 161, Rarity.UNCOMMON, mage.cards.u.UntimelyMalfunction.class));
         cards.add(new SetCardInfo("Unwanted Remake", 39, Rarity.UNCOMMON, mage.cards.u.UnwantedRemake.class));
         cards.add(new SetCardInfo("Unwilling Vessel", 81, Rarity.UNCOMMON, mage.cards.u.UnwillingVessel.class));
