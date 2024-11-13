@@ -136,6 +136,8 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Leyline of Mutation", 188, Rarity.RARE, mage.cards.l.LeylineOfMutation.class));
         cards.add(new SetCardInfo("Leyline of Resonance", 143, Rarity.RARE, mage.cards.l.LeylineOfResonance.class));
         cards.add(new SetCardInfo("Leyline of the Void", 106, Rarity.RARE, mage.cards.l.LeylineOfTheVoid.class));
+        cards.add(new SetCardInfo("Leyline of Transformation", 63, Rarity.RARE, mage.cards.l.LeylineOfTransformation.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Leyline of Transformation", 372, Rarity.RARE, mage.cards.l.LeylineOfTransformation.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lionheart Glimmer", 19, Rarity.UNCOMMON, mage.cards.l.LionheartGlimmer.class));
         cards.add(new SetCardInfo("Live or Die", 107, Rarity.UNCOMMON, mage.cards.l.LiveOrDie.class));
         cards.add(new SetCardInfo("Living Phone", 20, Rarity.COMMON, mage.cards.l.LivingPhone.class));
