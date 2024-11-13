@@ -186,6 +186,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Defend the Celestus", 649, Rarity.UNCOMMON, mage.cards.d.DefendTheCelestus.class));
         cards.add(new SetCardInfo("Defenestrate", 420, Rarity.COMMON, mage.cards.d.Defenestrate.class));
         cards.add(new SetCardInfo("Defiant Strike", 187, Rarity.COMMON, mage.cards.d.DefiantStrike.class));
+        cards.add(new SetCardInfo("Delightful Discovery", 6, Rarity.UNCOMMON, mage.cards.d.DelightfulDiscovery.class));
         cards.add(new SetCardInfo("Desert of the Fervent", 764, Rarity.COMMON, mage.cards.d.DesertOfTheFervent.class));
         cards.add(new SetCardInfo("Desperate Lunge", 188, Rarity.COMMON, mage.cards.d.DesperateLunge.class));
         cards.add(new SetCardInfo("Destroy Evil", 189, Rarity.COMMON, mage.cards.d.DestroyEvil.class));
