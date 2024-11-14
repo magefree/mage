@@ -2,20 +2,20 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.EntersWithCountersControlledEffect;
 import mage.abilities.effects.common.continuous.CastAsThoughItHadFlashAllEffect;
 import mage.abilities.keyword.DayboundAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.WolfToken;
 
 import java.util.UUID;
@@ -42,7 +42,9 @@ public final class ArlinnThePacksHope extends CardImpl {
         Ability ability = new LoyaltyAbility(new CastAsThoughItHadFlashAllEffect(
                 Duration.UntilYourNextTurn, filter
         ).setText("until your next turn, you may cast creature spells as though they had flash"), 1);
-        ability.addEffect(new ArlinnThePacksHopeEffect());
+        ability.addEffect(new EntersWithCountersControlledEffect(
+                StaticFilters.FILTER_PERMANENT_CREATURE, CounterType.P1P1.createInstance(), false
+        ));
         this.addAbility(ability);
 
         // −3: Create two 2/2 green Wolf creature tokens.
@@ -56,42 +58,5 @@ public final class ArlinnThePacksHope extends CardImpl {
     @Override
     public ArlinnThePacksHope copy() {
         return new ArlinnThePacksHope(this);
-    }
-}
-
-class ArlinnThePacksHopeEffect extends ReplacementEffectImpl {
-
-    ArlinnThePacksHopeEffect() {
-        super(Duration.UntilYourNextTurn, Outcome.BoostCreature);
-        this.staticText = ", and each creature you control enters the battlefield with an additional +1/+1 counter on it";
-    }
-
-    private ArlinnThePacksHopeEffect(ArlinnThePacksHopeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-        return permanent != null && permanent.isControlledBy(source.getControllerId()) && permanent.isCreature(game);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent target = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (target != null) {
-            target.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game, event.getAppliedEffects());
-        }
-        return false;
-    }
-
-    @Override
-    public ArlinnThePacksHopeEffect copy() {
-        return new ArlinnThePacksHopeEffect(this);
     }
 }

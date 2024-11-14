@@ -613,6 +613,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Skymarch Bloodletter", 125, Rarity.COMMON, mage.cards.s.SkymarchBloodletter.class));
         cards.add(new SetCardInfo("Slimebind", 360, Rarity.COMMON, mage.cards.s.Slimebind.class));
         cards.add(new SetCardInfo("Slimy Piper", 25, Rarity.COMMON, mage.cards.s.SlimyPiper.class));
+        cards.add(new SetCardInfo("Slinza, the Spiked Stampede", 55, Rarity.RARE, mage.cards.s.SlinzaTheSpikedStampede.class));
         cards.add(new SetCardInfo("Smoke Shroud", 361, Rarity.COMMON, mage.cards.s.SmokeShroud.class));
         cards.add(new SetCardInfo("Snakeskin Veil", 713, Rarity.COMMON, mage.cards.s.SnakeskinVeil.class));
         cards.add(new SetCardInfo("Snapping Gnarlid", 714, Rarity.COMMON, mage.cards.s.SnappingGnarlid.class));
