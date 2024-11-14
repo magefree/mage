@@ -664,6 +664,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Swift Response", 269, Rarity.COMMON, mage.cards.s.SwiftResponse.class));
         cards.add(new SetCardInfo("Syr Elenora, the Discerning", 64, Rarity.UNCOMMON, mage.cards.s.SyrElenoraTheDiscerning.class));
         cards.add(new SetCardInfo("Taborax, Hope's Demise", 69, Rarity.RARE, mage.cards.t.TaboraxHopesDemise.class));
+        cards.add(new SetCardInfo("Taeko, the Patient Avalanche", 39, Rarity.MYTHIC, mage.cards.t.TaekoThePatientAvalanche.class));
         cards.add(new SetCardInfo("Tail Swipe", 721, Rarity.UNCOMMON, mage.cards.t.TailSwipe.class));
         cards.add(new SetCardInfo("Tajuru Pathwarden", 722, Rarity.COMMON, mage.cards.t.TajuruPathwarden.class));
         cards.add(new SetCardInfo("Take Up the Shield", 270, Rarity.COMMON, mage.cards.t.TakeUpTheShield.class));
