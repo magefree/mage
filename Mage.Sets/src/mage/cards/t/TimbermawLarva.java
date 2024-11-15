@@ -5,12 +5,15 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandPermanent;
 
 import java.util.UUID;
@@ -19,6 +22,9 @@ import java.util.UUID;
  * @author North
  */
 public final class TimbermawLarva extends CardImpl {
+
+    private static final DynamicValue xValue2 = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.FOREST));
+    private static final Hint hint = new ValueHint("Forests you control", xValue2);
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest you control");
 
@@ -40,6 +46,7 @@ public final class TimbermawLarva extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
                 xValue, xValue, Duration.EndOfTurn, "it"
         ), false));
+        this.getSpellAbility().addHint(hint);
     }
 
     private TimbermawLarva(final TimbermawLarva card) {

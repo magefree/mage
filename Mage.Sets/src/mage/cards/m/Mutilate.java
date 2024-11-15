@@ -1,7 +1,10 @@
 package mage.cards.m;
 
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -9,6 +12,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandPermanent;
 
 import java.util.UUID;
@@ -18,6 +22,9 @@ import java.util.UUID;
  * @author North
  */
 public final class Mutilate extends CardImpl {
+
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.SWAMP));
+    private static final Hint hint = new ValueHint("Swamps you control", xValue);
 
     private static final String ruleText = "All creatures get -1/-1 until end of turn for each Swamp you control";
 
@@ -38,6 +45,7 @@ public final class Mutilate extends CardImpl {
                 new BoostAllEffect(count, count, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, false, null)
                         .setText(ruleText)
         );
+        this.getSpellAbility().addHint(hint);
     }
 
     private Mutilate(final Mutilate card) {

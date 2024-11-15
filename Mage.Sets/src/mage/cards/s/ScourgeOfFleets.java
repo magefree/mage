@@ -1,11 +1,14 @@
 
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -19,14 +22,18 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class ScourgeOfFleets extends CardImpl {
 
+    private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(new FilterControlledPermanent(SubType.ISLAND));
+    private static final Hint hint = new ValueHint("Islands you control", xValue);
+
     public ScourgeOfFleets(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{5}{U}{U}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.subtype.add(SubType.KRAKEN);
 
         this.power = new MageInt(6);
@@ -34,6 +41,7 @@ public final class ScourgeOfFleets extends CardImpl {
 
         // When Scourge of Fleets enters the battlefield, return each creature your opponents control with toughness X or less, where X is the number of Islands you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScourgeOfFleetsEffect(), false));
+        this.getSpellAbility().addHint(hint);
     }
 
     private ScourgeOfFleets(final ScourgeOfFleets card) {
