@@ -2458,9 +2458,38 @@ public class ScryfallImageSupportTokens {
             put("BLC/Raccoon", "https://api.scryfall.com/cards/tblc/29/en?format=image");
 
             // FDN
+            put("FDN/Beast/1", "https://api.scryfall.com/cards/tfdn/32/en?format=image");
+            put("FDN/Beast/2", "https://api.scryfall.com/cards/tfdn/33/en?format=image");
+            put("FDN/Cat/1", "https://api.scryfall.com/cards/tfdn/1/en?format=image");
+            put("FDN/Cat/2", "https://api.scryfall.com/cards/tfdn/27/en?format=image");
+            put("FDN/Cat/3", "https://api.scryfall.com/cards/tfdn/2/en?format=image");
+            put("FDN/Cat Beast", "https://api.scryfall.com/cards/tfdn/28/en?format=image");
+            put("FDN/Dog", "https://api.scryfall.com/cards/tfdn/29/en?format=image");
+            put("FDN/Dragon/1", "https://api.scryfall.com/cards/tfdn/16/en?format=image");
+            put("FDN/Dragon/2", "https://api.scryfall.com/cards/tfdn/17/en?format=image");
+            put("FDN/Drake", "https://api.scryfall.com/cards/tfdn/8/en?format=image");
+            put("FDN/Elf Warrior", "https://api.scryfall.com/cards/tfdn/19/en?format=image");
+            put("FDN/Faerie", "https://api.scryfall.com/cards/tfdn/9/en?format=image");
+            put("FDN/Fish", "https://api.scryfall.com/cards/tfdn/10/en?format=image");
+            put("FDN/Food", "https://api.scryfall.com/cards/tfdn/22/en?format=image");
+            put("FDN/Goblin", "https://api.scryfall.com/cards/tfdn/18/en?format=image");
+            put("FDN/Human", "https://api.scryfall.com/cards/tfdn/3/en?format=image");
+            put("FDN/Insect", "https://api.scryfall.com/cards/tfdn/21/en?format=image");
             put("FDN/Emblem Kaito", "https://api.scryfall.com/cards/tfdn/24/en?format=image");
+            put("FDN/Knight", "https://api.scryfall.com/cards/tfdn/4/en?format=image");
+            put("FDN/Koma's Coil", "https://api.scryfall.com/cards/tfdn/11/en?format=image");
             put("FDN/Ninja", "https://api.scryfall.com/cards/tfdn/12/en?format=image");
+            put("FDN/Phyrexian Goblin", "https://api.scryfall.com/cards/tfdn/31/en?format=image");
+            put("FDN/Rabbit", "https://api.scryfall.com/cards/tfdn/5/en?format=image");
+            put("FDN/Raccoon", "https://api.scryfall.com/cards/tfdn/20/en?format=image");
+            put("FDN/Rat/1", "https://api.scryfall.com/cards/tfdn/14/en?format=image");
+            put("FDN/Rat/2", "https://api.scryfall.com/cards/tfdn/30/en?format=image");
             put("FDN/Scion of the Deep", "https://api.scryfall.com/cards/tfdn/13/en?format=image");
+            put("FDN/Soldier", "https://api.scryfall.com/cards/tfdn/6/en?format=image");
+            put("FDN/Spirit", "https://api.scryfall.com/cards/tfdn/7/en?format=image");
+            put("FDN/Treasure", "https://api.scryfall.com/cards/tfdn/23/en?format=image");
+            put("FDN/Emblem Vivien", "https://api.scryfall.com/cards/tfdn/25/en?format=image");
+            put("FDN/Zombie", "https://api.scryfall.com/cards/tfdn/15/en?format=image");
 
             // generate supported sets
             supportedSets.clear();

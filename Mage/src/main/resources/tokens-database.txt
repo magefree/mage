@@ -137,6 +137,7 @@
 |Generate|EMBLEM:ACR|Emblem Capitoline Triad|||TheCapitolineTriadEmblem|
 |Generate|EMBLEM:BLB|Emblem Ral|||RalCracklingWitEmblem|
 |Generate|EMBLEM:FDN|Emblem Kaito|||KaitoCunningInfiltratorEmblem|
+|Generate|EMBLEM:FDN|Emblem Vivien|||VivienReidEmblem|
 
 # ALL PLANES
 # Usage hints:
@@ -2396,5 +2397,33 @@
 |Generate|TOK:BLC|Racoon|||RaccoonToken|
 
 # FDN
+|Generate|TOK:FDN|Beast|1||BeastToken|
+|Generate|TOK:FDN|Beast|2||BeastToken2|
+|Generate|TOK:FDN|Cat|1||CatToken3|
+|Generate|TOK:FDN|Cat|2||CatToken2|
+|Generate|TOK:FDN|Cat|3||CatToken|
+|Generate|TOK:FDN|Cat Beast|||CatBeastToken|
+|Generate|TOK:FDN|Dog|||WhiteDogToken|
+|Generate|TOK:FDN|Dragon|1||DragonToken|
+|Generate|TOK:FDN|Dragon|2||DragonToken2|
+|Generate|TOK:FDN|Drake|||DrakeToken|
+|Generate|TOK:FDN|Elf Warrior|||ElfWarriorToken|
+|Generate|TOK:FDN|Faerie|||FaerieToken|
+|Generate|TOK:FDN|Fish|||FishNoAbilityToken|
+|Generate|TOK:FDN|Food|||FoodToken|
+|Generate|TOK:FDN|Goblin|||GoblinToken|
+|Generate|TOK:FDN|Human|||HumanToken|
+|Generate|TOK:FDN|Insect|||InsectBlackGreenFlyingToken|
+|Generate|TOK:FDN|Knight|||Knight33Token|
+|Generate|TOK:FDN|Koma's Coil|||KomasCoilToken|
 |Generate|TOK:FDN|Ninja|||NinjaToken2|
+|Generate|TOK:FDN|Phyrexian Goblin|||PhyrexianGoblinToken|
+|Generate|TOK:FDN|Rabbit|||RabbitToken|
+|Generate|TOK:FDN|Raccoon|||RaccoonToken|
+|Generate|TOK:FDN|Rat|1||RatToken|
+|Generate|TOK:FDN|Rat|2||RatCantBlockToken|
 |Generate|TOK:FDN|Scion of the Deep|||ScionOfTheDeepToken|
+|Generate|TOK:FDN|Soldier|||SoldierToken|
+|Generate|TOK:FDN|Spirit|||SpiritWhiteToken|
+|Generate|TOK:FDN|Treasure|||TreasureToken|
+|Generate|TOK:FDN|Zombie|||ZombieToken|
