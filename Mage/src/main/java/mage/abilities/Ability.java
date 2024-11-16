@@ -357,6 +357,8 @@ public interface Ability extends Controllable, Serializable {
      * - for normal abilities and triggers - keep default
      * - for leave battlefield triggers - keep default + set setLeavesTheBattlefieldTrigger(true)
      * - for dies triggers - override and use TriggeredAbilityImpl.isInUseableZoneDiesTrigger inside + set setLeavesTheBattlefieldTrigger(true)
+     *
+     * @param source can be null for static continues effects checking like rules modification (example: Yixlid Jailer)
      */
     boolean isInUseableZone(Game game, MageObject source, GameEvent event);
 

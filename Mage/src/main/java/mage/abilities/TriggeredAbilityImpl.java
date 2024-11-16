@@ -376,11 +376,16 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
          * Kozilek card is itself and has the ability.
          */
 
+        // process events from other objects
         Set<UUID> eventTargets = CardUtil.getEventTargets(event);
         if (!eventTargets.contains(getSourceId())) {
             return super.isInUseableZone(game, source, event);
         }
 
+        // process events from own object
+
+        // inject process of "look back in time" events
+        // TODO: need sync code with AbilityImpl.isInUseableZone
         switch (event.getType()) {
             case ZONE_CHANGE:
                 ZoneChangeEvent zce = (ZoneChangeEvent) event;
@@ -405,6 +410,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                 }
                 break;
         }
+
+        // all other events from own object
         return super.isInUseableZone(game, source, event);
     }
 

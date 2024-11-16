@@ -1179,6 +1179,8 @@ public abstract class AbilityImpl implements Ability {
         if (!this.hasSourceObjectAbility(game, source, event)) {
             return false;
         }
+
+        // in command zone
         if (zone == Zone.COMMAND) {
             if (this.getSourceId() == null) { // commander effects
                 return true;
@@ -1199,20 +1201,18 @@ public abstract class AbilityImpl implements Ability {
             parameterSourceId = getSourceId();
         }
 
-        // old code:
-        // TODO: delete after dies fix
-        // check against shortLKI for effects that move multiple object at the same time (e.g. destroy all)
-        if (game.checkShortLivingLKI(getSourceId(), getZone())) {
-            //return true; // fix 1
+        // on entering permanents - must use static abilities like it already on battlefield
+        // example: Tatterkite enters without counters from Mikaeus, the Unhallowed
+        if (game.getPermanentEntering(parameterSourceId) != null && zone == Zone.BATTLEFIELD) {
+            return true;
         }
-
 
         // 603.10.
         // Normally, objects that exist immediately after an event are checked to see if the event matched
         // any trigger conditions, and continuous effects that exist at that time are used to determine what the
         // trigger conditions are and what the objects involved in the event look like.
         // ...
-        Zone lookingInZone = game.getState().getZone(parameterSourceId);
+        Zone sourceObjectZone = game.getState().getZone(parameterSourceId);
 
         // 603.10.
         // ...
@@ -1226,9 +1226,16 @@ public abstract class AbilityImpl implements Ability {
         // players can see is put into a hand or library.
         // TODO: research "leaves a graveyard"
         // TODO: research "put into a hand or library"
-        if (source instanceof Permanent && isTriggerCanFireAfterLeaveBattlefield(event)) {
-            // support leaves-the-battlefield abilities
-            lookingInZone = Zone.BATTLEFIELD;
+        if (isTriggerCanFireAfterLeaveBattlefield(event)) {
+            // permanents with normal triggers
+            if (source instanceof Permanent) {
+                // support leaves-the-battlefield abilities
+                sourceObjectZone = Zone.BATTLEFIELD;
+            }
+            // permanents with continues effects like Yixlid Jailer, see related code "isInUseableZone(game, null"
+            if (source == null && this instanceof StaticAbility) {
+                sourceObjectZone = Zone.BATTLEFIELD;
+            }
         }
 
         // TODO: research use cases and implement shared logic with "looking zone" instead LKI only
@@ -1239,7 +1246,7 @@ public abstract class AbilityImpl implements Ability {
         // 603.10f Abilities that trigger when a player loses the game look back in time.
         // 603.10g Abilities that trigger when a player planeswalks away from a plane look back in time.
 
-        return zone.match(lookingInZone);
+        return zone.match(sourceObjectZone);
     }
 
     public static boolean isTriggerCanFireAfterLeaveBattlefield(GameEvent event) {
@@ -1255,6 +1262,7 @@ public abstract class AbilityImpl implements Ability {
         }
 
         return allEvents.stream().anyMatch(e -> {
+            // TODO: need sync code with TriggeredAbilityImpl.isInUseableZone
             // TODO: add more events with zone change logic (or make it event's param)?
             //   need research: is it ability's or event's task?
             //   - ability's task: code like ability.setLookBackInTime
