@@ -43,7 +43,7 @@ public final class GalecasterColossus extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Tap an untapped Wizard you control: Return target nonland permanent you don't control to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new TapTargetCost(new TargetControlledPermanent(1, 1, filter2, true)));
+        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new TapTargetCost(new TargetControlledPermanent(1, 1, filter2, true)));
         ability.addTarget(new TargetNonlandPermanent(filter));
         this.addAbility(ability);
     }

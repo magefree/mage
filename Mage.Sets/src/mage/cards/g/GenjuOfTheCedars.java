@@ -40,7 +40,7 @@ public final class GenjuOfTheCedars extends CardImpl {
         this.addAbility(ability);
 
         // {2}: Enchanted Forest becomes a 4/4 green Spirit creature until end of turn. It's still a land.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(new SpiritToken(), "Enchanted Forest becomes a 4/4 green Spirit creature until end of turn. It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(new SpiritToken(), "Enchanted Forest becomes a 4/4 green Spirit creature until end of turn. It's still a land", Duration.EndOfTurn), new GenericManaCost(2));
         this.addAbility(ability2);
 
         // When enchanted Forest is put into a graveyard, you may return Genju of the Cedars from your graveyard to your hand.

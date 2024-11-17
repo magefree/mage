@@ -39,7 +39,7 @@ public final class GargantuanGorilla extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GargantuanGorillaSacrificeEffect()));
 
         // {T}: Gargantuan Gorilla deals damage equal to its power to another target creature. That creature deals damage equal to its power to Gargantuan Gorilla.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GargantuanGorillaFightEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new GargantuanGorillaFightEffect(), new TapSourceCost());
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         filter.add(AnotherPredicate.instance);
         ability.addTarget(new TargetCreaturePermanent(filter));

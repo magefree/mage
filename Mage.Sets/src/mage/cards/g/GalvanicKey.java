@@ -30,7 +30,7 @@ public final class GalvanicKey extends CardImpl {
     public GalvanicKey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
         this.addAbility(FlashAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

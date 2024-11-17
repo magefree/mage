@@ -26,7 +26,7 @@ public final class GoldenUrn extends CardImpl {
     public GoldenUrn (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), true));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new CountersSourceCount(CounterType.CHARGE)), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(new CountersSourceCount(CounterType.CHARGE)), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

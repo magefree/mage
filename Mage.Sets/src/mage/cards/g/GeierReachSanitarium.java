@@ -30,7 +30,7 @@ public final class GeierReachSanitarium extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {2}, {T}: Each player draws a card, then discards a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardAllEffect(1), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new DrawCardAllEffect(1), new GenericManaCost(2));
         Effect effect = new DiscardEachPlayerEffect();
         effect.setText(", then discards a card");
         ability.addEffect(effect);

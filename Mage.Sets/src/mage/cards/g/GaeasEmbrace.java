@@ -41,7 +41,7 @@ public final class GaeasEmbrace extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
         // {G}: Regenerate enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new ColoredManaCost(ColoredManaSymbol.G)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateAttachedEffect(AttachmentType.AURA), new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
     private GaeasEmbrace(final GaeasEmbrace card) {

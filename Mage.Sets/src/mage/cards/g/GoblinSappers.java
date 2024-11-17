@@ -33,7 +33,7 @@ public final class GoblinSappers extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}{R}, {T}: Target creature you control can’t be blocked this turn. Destroy it and Goblin Sappers at end of combat.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{R}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         DelayedTriggeredAbility triggeredAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect().setText("destroy that creature"));
@@ -42,7 +42,7 @@ public final class GoblinSappers extends CardImpl {
         this.addAbility(ability);
 
         // {R}{R}{R}{R}, {T}: Target creature you control can’t be blocked this turn. Destroy it at end of combat.
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{R}{R}{R}{R}"));
+        Ability secondAbility = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{R}{R}{R}{R}"));
         secondAbility.addCost(new TapSourceCost());
         secondAbility.addTarget(new TargetControlledCreaturePermanent());
         DelayedTriggeredAbility secondTriggeredAbility = new AtTheEndOfCombatDelayedTriggeredAbility(new DestroyTargetEffect().setText("destroy that creature"));

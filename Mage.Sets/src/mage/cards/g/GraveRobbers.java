@@ -32,7 +32,7 @@ public final class GraveRobbers extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}, {tap}: Exile target artifact card from a graveyard. You gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl<>("{B}"));
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInGraveyard(filter));
         ability.addEffect(new GainLifeEffect(2));

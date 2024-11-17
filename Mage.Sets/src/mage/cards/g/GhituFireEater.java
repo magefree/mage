@@ -31,7 +31,7 @@ public final class GhituFireEater extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}, Sacrifice Ghitu Fire-Eater: Ghitu Fire-Eater deals damage equal to its power to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("it deals damage equal to its power to any target"), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());

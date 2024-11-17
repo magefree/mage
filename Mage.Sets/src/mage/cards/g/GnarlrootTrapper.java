@@ -54,7 +54,7 @@ public final class GnarlrootTrapper extends CardImpl {
         // {T}: Target attacking Elf you control gains deathtouch until end of turn.
         Effect effect = new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("Target attacking Elf you control gains deathtouch until end of turn. <i>(Any amount of damage it deals to a creature is enough to destroy it.)</i>");
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
 

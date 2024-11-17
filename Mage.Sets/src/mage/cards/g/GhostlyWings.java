@@ -48,7 +48,7 @@ public final class GhostlyWings extends CardImpl {
         ability.addEffect(effect);
         this.addAbility(ability);
         // Discard a card: Return enchanted creature to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GhostlyWingsReturnEffect(), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(new GhostlyWingsReturnEffect(), new DiscardCardCost()));
 
     }
 

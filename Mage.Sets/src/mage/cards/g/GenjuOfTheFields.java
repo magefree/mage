@@ -44,7 +44,7 @@ public final class GenjuOfTheFields extends CardImpl {
         // {2}: Until end of turn, enchanted Plains becomes a 2/5 white Spirit creature with "Whenever this creature deals damage, its controller gains that much life." It's still a land.
         Effect effect = new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(new SpiritToken(),
                 "Until end of turn, enchanted Plains becomes a 2/5 white Spirit creature", Duration.EndOfTurn);
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(effect, new GenericManaCost(2));
         effect = new GainAbilityAttachedEffect(new DealsDamageGainLifeSourceTriggeredAbility(), AttachmentType.AURA, Duration.EndOfTurn);
         effect.setText("with \"Whenever this creature deals damage, its controller gains that much life.\" It's still a land");
         ability2.addEffect(effect);

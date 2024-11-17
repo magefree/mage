@@ -32,13 +32,13 @@ public final class GoblinLegionnaire extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}, Sacrifice Goblin Legionnaire: It deals 2 damage to any target.
-        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2, "it"), new ColoredManaCost(ColoredManaSymbol.R));
+        Ability firstAbility = new SimpleActivatedAbility(new DamageTargetEffect(2, "it"), new ColoredManaCost(ColoredManaSymbol.R));
         firstAbility.addCost(new SacrificeSourceCost());
         firstAbility.addTarget(new TargetAnyTarget());
         this.addAbility(firstAbility);
 
         // {W}, Sacrifice Goblin Legionnaire: Prevent the next 2 damage that would be dealt to any target this turn.
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ColoredManaCost(ColoredManaSymbol.W));
+        Ability secondAbility = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ColoredManaCost(ColoredManaSymbol.W));
         secondAbility.addCost(new SacrificeSourceCost());
         secondAbility.addTarget(new TargetAnyTarget());
         this.addAbility(secondAbility);
