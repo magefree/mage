@@ -36,7 +36,7 @@ public final class PirateShip extends CardImpl {
         // Pirate Ship can't attack unless defending player controls an Island.
         this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
         // {tap}: Pirate Ship deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // When you control no Islands, sacrifice Pirate Ship.

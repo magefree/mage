@@ -31,7 +31,7 @@ public final class PhyrexianDefiler extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {tap}, Sacrifice Phyrexian Defiler: Target creature gets -3/-3 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-3, -3, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-3, -3, Duration.EndOfTurn), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

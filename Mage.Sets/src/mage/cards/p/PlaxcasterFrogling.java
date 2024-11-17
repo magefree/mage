@@ -35,7 +35,7 @@ public final class PlaxcasterFrogling extends CardImpl {
         this.addAbility(new GraftAbility(this, 3));
         
         // {2}: Target creature with a +1/+1 counter on it gains shroud until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_P1P1));
         this.addAbility(ability);        
     }

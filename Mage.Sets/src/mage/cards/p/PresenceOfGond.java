@@ -35,7 +35,7 @@ public final class PresenceOfGond extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has "{tap}: Create a 1/1 green Elf Warrior creature token."
-        Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ElfWarriorToken()), new TapSourceCost());
+        Ability abilityToGain = new SimpleActivatedAbility(new CreateTokenEffect(new ElfWarriorToken()), new TapSourceCost());
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(abilityToGain, AttachmentType.AURA, Duration.WhileOnBattlefield,
                 "Enchanted creature has \"{T}: Create a 1/1 green Elf Warrior creature token.\"")));
     }

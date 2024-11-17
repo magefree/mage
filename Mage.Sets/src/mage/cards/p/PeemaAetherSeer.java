@@ -39,7 +39,7 @@ public final class PeemaAetherSeer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect));
 
         // Pay {E}{E}{E}: Target creature blocks this turn if able.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlocksIfAbleTargetEffect(Duration.EndOfTurn), new PayEnergyCost(3));
+        Ability ability = new SimpleActivatedAbility(new BlocksIfAbleTargetEffect(Duration.EndOfTurn), new PayEnergyCost(3));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

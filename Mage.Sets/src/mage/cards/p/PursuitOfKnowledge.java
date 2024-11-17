@@ -34,7 +34,7 @@ public final class PursuitOfKnowledge extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new PursuitOfKnowledgeEffect()));
 
         // Remove three study counters from Pursuit of Knowledge, Sacrifice Pursuit of Knowledge: Draw seven cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(7),
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(7),
             new RemoveCountersSourceCost(CounterType.STUDY.createInstance(3)));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

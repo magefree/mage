@@ -40,7 +40,7 @@ public final class PatronWizard extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Tap an untapped Wizard you control: Counter target spell unless its controller pays {1}.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(1)), new TapTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(new CounterUnlessPaysEffect(new GenericManaCost(1)), new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }
