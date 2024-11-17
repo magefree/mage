@@ -41,7 +41,7 @@ public final class HazoretsMonument extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Red creature spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Whenever you cast a creature spell, you may discard a card. If you do, draw a card.
         this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost()), filter2, false));

@@ -43,11 +43,11 @@ public final class Homarid extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.TIDE.createInstance())
         ));
         // As long as there is exactly one tide counter on Homarid, it gets -1/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
             new BoostSourceEffect(-1, -1, Duration.WhileOnBattlefield), new SourceHasCounterCondition(CounterType.TIDE, 1, 1),
             "As long as there is exactly one tide counter on {this}, it gets -1/-1.")));
         // As long as there are exactly three tide counters on Homarid, it gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
             new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new SourceHasCounterCondition(CounterType.TIDE, 3, 3),
             "As long as there are exactly three tide counters on {this}, it gets +1/+1.")));
         // Whenever there are four or more tide counters on Homarid, remove all tide counters from it.

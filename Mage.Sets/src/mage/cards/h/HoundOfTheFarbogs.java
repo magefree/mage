@@ -31,7 +31,7 @@ public final class HoundOfTheFarbogs extends CardImpl {
         this.toughness = new MageInt(3);
 
         // <i>Delirium</i> &mdash; Hound of the Farborgs has menace as long as there are four or more card types among cards in your graveyard.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new MenaceAbility(), Duration.WhileOnBattlefield),
                 DeliriumCondition.instance,
                 "{this} has menace as long as there are four or more card types among cards in your graveyard. " +

@@ -42,11 +42,11 @@ public final class HelmOfTheGhastlord extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // As long as enchanted creature is blue, it gets +1/+1 and has "Whenever this creature deals damage to an opponent, draw a card."
-        SimpleStaticAbility blueAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "As long as enchanted creature is blue, it gets +1/+1"));
+        SimpleStaticAbility blueAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "As long as enchanted creature is blue, it gets +1/+1"));
         blueAbility.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(new DealsDamageToAPlayerTriggeredAbility(new DrawCardSourceControllerEffect(1),false), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "and has \"Whenever this creature deals damage to an opponent, draw a card.\""));
         this.addAbility(blueAbility);
         // As long as enchanted creature is black, it gets +1/+1 and has "Whenever this creature deals damage to an opponent, that player discards a card."
-        SimpleStaticAbility blackAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLACK), "As long as enchanted creature is black, it gets +1/+1"));
+        SimpleStaticAbility blackAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLACK), "As long as enchanted creature is black, it gets +1/+1"));
         blackAbility.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1), false, true), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.BLACK), "and has \"Whenever this creature deals damage to an opponent, that player discards a card.\""));
         this.addAbility(blackAbility);
     }

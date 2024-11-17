@@ -31,7 +31,7 @@ public final class HornedSliver extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
     private HornedSliver(final HornedSliver card) {

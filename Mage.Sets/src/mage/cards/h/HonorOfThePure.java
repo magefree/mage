@@ -29,7 +29,7 @@ public final class HonorOfThePure extends CardImpl {
     public HonorOfThePure(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private HonorOfThePure(final HonorOfThePure card) {

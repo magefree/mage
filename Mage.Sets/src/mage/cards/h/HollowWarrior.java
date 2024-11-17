@@ -37,7 +37,7 @@ public final class HollowWarrior extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Hollow Warrior can't attack or block unless you tap an untapped creature you control not declared as an attacking or blocking creature this combat. (This cost is paid as attackers are declared.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HollowWarriorCostToAttackBlockEffect()));
+        this.addAbility(new SimpleStaticAbility(new HollowWarriorCostToAttackBlockEffect()));
 
     }
         

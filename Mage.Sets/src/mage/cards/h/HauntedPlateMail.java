@@ -33,7 +33,7 @@ public final class HauntedPlateMail extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +4/+4.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, 4)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(4, 4)));
         // {0}: Until end of turn, Haunted Plate Mail becomes a 4/4 Spirit artifact creature that's no longer an Equipment. Activate this ability only if you control no creatures.
         Ability ability = new ConditionalActivatedAbility(
                 Zone.BATTLEFIELD,

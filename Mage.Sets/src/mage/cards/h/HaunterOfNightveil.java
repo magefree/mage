@@ -26,7 +26,7 @@ public final class HaunterOfNightveil extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Creatures your opponents control get -1/-0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostOpponentsEffect(-1,0, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostOpponentsEffect(-1,0, Duration.WhileOnBattlefield)));
     }
 
     private HaunterOfNightveil(final HaunterOfNightveil card) {

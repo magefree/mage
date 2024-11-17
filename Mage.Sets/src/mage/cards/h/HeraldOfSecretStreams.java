@@ -35,7 +35,7 @@ public final class HeraldOfSecretStreams extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Creatures you control with +1/+1 counters on them can't be blocked.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAllEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedAllEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     private HeraldOfSecretStreams(final HeraldOfSecretStreams card) {

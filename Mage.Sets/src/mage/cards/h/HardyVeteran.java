@@ -35,7 +35,7 @@ public final class HardyVeteran extends CardImpl {
                 new BoostSourceEffect(0, 2, Duration.WhileOnBattlefield),
                 MyTurnCondition.instance,
                 "During your turn, {this} gets +0/+2");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect);
+        Ability ability = new SimpleStaticAbility(boostEffect);
         ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);
     }
