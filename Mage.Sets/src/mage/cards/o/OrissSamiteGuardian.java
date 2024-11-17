@@ -39,7 +39,7 @@ public final class OrissSamiteGuardian extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Prevent all damage that would be dealt to target creature this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

@@ -23,7 +23,7 @@ public final class Oasis extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},"");
 
         // {tap}: Prevent the next 1 damage that would be dealt to target creature this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

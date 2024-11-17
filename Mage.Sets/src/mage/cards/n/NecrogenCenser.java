@@ -26,7 +26,7 @@ public final class NecrogenCenser extends CardImpl {
     public NecrogenCenser (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)), "with two charge counters on it"));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(2), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

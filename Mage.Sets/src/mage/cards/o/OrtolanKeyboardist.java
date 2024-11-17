@@ -25,7 +25,7 @@ public final class OrtolanKeyboardist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Draw a card then discard a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DrawDiscardControllerEffect(), new TapSourceCost()));
 
     }
 

@@ -38,7 +38,7 @@ public final class OrcishSettlers extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}{X}{R}, {tap}, Sacrifice Orcish Settlers: Destroy X target lands.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OrcishSettlersEffect(), new ManaCostsImpl<>("{X}{X}{R}"));
+        Ability ability = new SimpleActivatedAbility(new OrcishSettlersEffect(), new ManaCostsImpl<>("{X}{X}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

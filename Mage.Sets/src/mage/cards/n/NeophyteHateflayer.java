@@ -28,7 +28,7 @@ public final class NeophyteHateflayer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}, Pay 1 life: Each opponent loses 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LoseLifeOpponentsEffect(1), new TapSourceCost());
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
     }

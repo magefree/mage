@@ -30,7 +30,7 @@ public final class NobleVestige extends CardImpl {
         this.toughness = new MageInt(2);
 
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }

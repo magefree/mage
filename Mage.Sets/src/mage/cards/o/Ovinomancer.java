@@ -49,7 +49,7 @@ public final class Ovinomancer extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(3, 3, filter, true)))));
         
         // {T}, Return Ovinomancer to its owner's hand: Destroy target creature. It can't be regenerated. That creature's controller creates a 0/1 green Sheep creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(true), new TapSourceCost());
         ability.addEffect(new OvinomancerEffect());
         ability.addCost(new ReturnToHandFromBattlefieldSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

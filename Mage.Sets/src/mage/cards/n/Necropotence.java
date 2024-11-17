@@ -43,7 +43,7 @@ public final class Necropotence extends CardImpl {
         effect.setText("exile that card from your graveyard");
         this.addAbility(new NecropotenceTriggeredAbility(effect));
         // Pay 1 life: Exile the top card of your library face down. Put that card into your hand at the beginning of your next end step.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new NecropotenceEffect(), new PayLifeCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new NecropotenceEffect(), new PayLifeCost(1)));
 
     }
 

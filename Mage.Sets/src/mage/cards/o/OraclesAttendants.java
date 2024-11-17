@@ -37,7 +37,7 @@ public final class OraclesAttendants extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {tap}: All damage that would be dealt to target creature this turn by a source of your choice is dealt to Oracle's Attendants instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OraclesAttendantsReplacementEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new OraclesAttendantsReplacementEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

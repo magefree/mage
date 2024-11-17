@@ -44,7 +44,7 @@ public final class Opposition extends CardImpl {
         this.color.setBlue(true);
 
         // Tap an untapped creature you control: Tap target artifact, creature, or land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapTargetCost(new TargetControlledPermanent(untappedcreatureyoucontrol)));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapTargetCost(new TargetControlledPermanent(untappedcreatureyoucontrol)));
         ability.addTarget(new TargetPermanent(artifactcreatureorland));
         this.addAbility(ability);
 

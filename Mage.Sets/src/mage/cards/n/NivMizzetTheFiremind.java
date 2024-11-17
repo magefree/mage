@@ -42,7 +42,7 @@ public final class NivMizzetTheFiremind extends CardImpl {
         this.addAbility(ability);
 
         // {T}: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost()));
     }
 
     private NivMizzetTheFiremind(final NivMizzetTheFiremind card) {

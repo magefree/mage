@@ -29,7 +29,7 @@ public final class OgreShaman extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}, Discard a card at random: Ogre Shaman deals 2 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new GenericManaCost(2));
         ability.addCost(new DiscardCardCost(true));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
