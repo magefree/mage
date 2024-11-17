@@ -38,7 +38,7 @@ public final class CentaurOmenreader extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As long as Centaur Omenreader is tapped, creature spells you cast cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CentaurOmenreaderSpellsCostReductionEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new CentaurOmenreaderSpellsCostReductionEffect(filter)));
     }
 
     private CentaurOmenreader(final CentaurOmenreader card) {

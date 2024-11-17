@@ -22,7 +22,7 @@ public final class Crawlspace extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // No more than two creatures can attack you each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChangeMaxNumberThatCanAttackSourceEffect(2)));
+        this.addAbility(new SimpleStaticAbility(new ChangeMaxNumberThatCanAttackSourceEffect(2)));
 
     }
 

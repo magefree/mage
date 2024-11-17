@@ -49,7 +49,7 @@ public final class CoralNet extends CardImpl {
         // Enchanted creature has "At the beginning of your upkeep, sacrifice this creature unless you discard a card."
         Ability abilityToGain = new BeginningOfUpkeepTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(new DiscardCardCost()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(abilityToGain, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 

@@ -51,7 +51,7 @@ public final class CaribouRange extends CardImpl {
         ability.addCost(new TapSourceCost());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted land has \"{W}{W}, {T}: Create a 0/1 white Caribou creature token.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
         // Sacrifice a Caribou token: You gain 1 life.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1),
                 new SacrificeTargetCost(filter)));

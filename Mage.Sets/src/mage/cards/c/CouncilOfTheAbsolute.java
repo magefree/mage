@@ -36,9 +36,9 @@ public final class CouncilOfTheAbsolute extends CardImpl {
         // As Council of the Absolute enters the battlefield, name a card other than a creature or a land card.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_AND_NON_CREATURE_NAME)));
         // Your opponents can't cast the chosen card.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CouncilOfTheAbsoluteReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new CouncilOfTheAbsoluteReplacementEffect()));
         // Spells with the chosen name cost 2 less for you to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CouncilOfTheAbsoluteCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new CouncilOfTheAbsoluteCostReductionEffect()));
 
     }
 

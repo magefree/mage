@@ -36,7 +36,7 @@ public final class Conversion extends CardImpl {
         ));
 
         // All Mountains are Plains.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConversionEffect()));
+        this.addAbility(new SimpleStaticAbility(new ConversionEffect()));
 
     }
 

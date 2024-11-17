@@ -38,7 +38,7 @@ public final class CoilsOfTheMedusa extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, -1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, -1, Duration.WhileOnBattlefield)));
 
         // Sacrifice Coils of the Medusa: Destroy all non-Wall creatures blocking enchanted creature.
         this.addAbility(new SimpleActivatedAbility(

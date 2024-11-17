@@ -56,7 +56,7 @@ public final class ConduitOfRuin extends CardImpl {
 
         // The first creature spell you cast each turn costs {2} less to cast.
         Effect effect = new SpellsCostReductionControllerEffect(filterCost, 2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new ConduitOfRuinWatcher());
+        this.addAbility(new SimpleStaticAbility(effect), new ConduitOfRuinWatcher());
     }
 
     private ConduitOfRuin(final ConduitOfRuin card) {

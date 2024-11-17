@@ -40,7 +40,7 @@ public final class CandlelightVigil extends CardImpl {
         // Enchanted creature gets +3/+2 and has vigilance.
         Effect effect = new BoostEnchantedEffect(3, 2, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +3/+2");
-        SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        SimpleStaticAbility ability2 = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has vigilance");
         ability2.addEffect(effect);

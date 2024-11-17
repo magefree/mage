@@ -39,7 +39,7 @@ public final class ClaimOfErebos extends CardImpl {
         Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl<>("{1}{B}"));
         grantedAbility.addCost(new TapSourceCost());
         grantedAbility.addTarget(new TargetPlayer());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(grantedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(grantedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield)));
         
         
     }

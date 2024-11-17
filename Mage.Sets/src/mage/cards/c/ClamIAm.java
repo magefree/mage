@@ -24,7 +24,7 @@ public final class ClamIAm extends CardImpl {
         this.toughness = new MageInt(2);
 
         // If you roll a 3 on a six-sided die, you may reroll that die.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ClamIAmEffect()));
+        this.addAbility(new SimpleStaticAbility(new ClamIAmEffect()));
     }
 
     private ClamIAm(final ClamIAm card) {

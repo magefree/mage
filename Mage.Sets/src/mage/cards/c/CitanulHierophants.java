@@ -35,7 +35,7 @@ public final class CitanulHierophants extends CardImpl {
         this.toughness = new MageInt(2);
 
         //Creatures you control have "{T}: Add {G}."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new GreenManaAbility(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(new GreenManaAbility(), Duration.WhileOnBattlefield, filter, false)));
     }
 
     private CitanulHierophants(final CitanulHierophants card) {

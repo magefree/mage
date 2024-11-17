@@ -52,7 +52,7 @@ public final class ChainerDementiaMaster extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Nightmare creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterCreature, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterCreature, false)));
         
         // {B}{B}{B}, Pay 3 life: Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChainerDementiaMasterEffect(), new ManaCostsImpl<>("{B}{B}{B}"));

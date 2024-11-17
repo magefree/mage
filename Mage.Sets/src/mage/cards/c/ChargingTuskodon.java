@@ -36,7 +36,7 @@ public final class ChargingTuskodon extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // If Charging Tuskodon would deal combat damage to a player, it deals double that damage to that player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChargingTuskodonEffect()));
+        this.addAbility(new SimpleStaticAbility(new ChargingTuskodonEffect()));
     }
 
     private ChargingTuskodon(final ChargingTuskodon card) {

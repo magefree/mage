@@ -37,7 +37,7 @@ public final class ChaosImps extends CardImpl {
         this.addAbility(new UnleashAbility());
         
         // Chaos Imps has trample as long as it has a +1/+1 counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), 
                 new SourceHasCounterCondition(CounterType.P1P1),"{this} has trample as long as it has a +1/+1 counter on it")));
         

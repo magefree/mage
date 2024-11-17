@@ -38,8 +38,8 @@ public final class ChorusOfTheConclave extends CardImpl {
         this.addAbility(new ForestwalkAbility());
 
         // As an additional cost to cast creature spells, you may pay any amount of mana. If you do, that creature enters the battlefield with that many additional +1/+1 counters on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChorusOfTheConclaveReplacementEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChorusOfTheConclaveReplacementEffect2()));
+        this.addAbility(new SimpleStaticAbility(new ChorusOfTheConclaveReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ChorusOfTheConclaveReplacementEffect2()));
 
     }
 

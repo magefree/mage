@@ -22,7 +22,7 @@ public final class CursedTotem extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Activated abilities of creatures can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CursedTotemCantActivateEffect()));
+        this.addAbility(new SimpleStaticAbility(new CursedTotemCantActivateEffect()));
     }
 
     private CursedTotem(final CursedTotem card) {

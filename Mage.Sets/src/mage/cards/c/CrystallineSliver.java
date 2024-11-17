@@ -28,7 +28,7 @@ public final class CrystallineSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Slivers have shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, new FilterPermanent(SubType.SLIVER, "All Slivers"))));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, new FilterPermanent(SubType.SLIVER, "All Slivers"))));
     }
 
     private CrystallineSliver(final CrystallineSliver card) {

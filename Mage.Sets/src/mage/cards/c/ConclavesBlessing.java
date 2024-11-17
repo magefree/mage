@@ -45,7 +45,7 @@ public final class ConclavesBlessing extends CardImpl {
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter, 2);
         BoostEnchantedEffect effect = new BoostEnchantedEffect(StaticValue.get(0), value, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +0/+2 for each other creature you control.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private ConclavesBlessing(final ConclavesBlessing card) {

@@ -35,7 +35,7 @@ public final class CrownHunterHireling extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // Crown-Hunter Hireling can't attack unless defending player is the monarch.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CrownHunterHirelingCantAttackEffect()));
+        this.addAbility(new SimpleStaticAbility(new CrownHunterHirelingCantAttackEffect()));
     }
 
     private CrownHunterHireling(final CrownHunterHireling card) {

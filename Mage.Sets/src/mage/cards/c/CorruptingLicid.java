@@ -32,7 +32,7 @@ public final class CorruptingLicid extends CardImpl {
         this.addAbility(new LicidAbility(new ColoredManaCost(ColoredManaSymbol.B), new ColoredManaCost(ColoredManaSymbol.B)));
         
         // Enchanted creature has fear.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private CorruptingLicid(final CorruptingLicid card) {

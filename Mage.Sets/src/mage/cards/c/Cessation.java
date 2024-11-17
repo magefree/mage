@@ -32,7 +32,7 @@ public final class Cessation extends CardImpl {
         this.addAbility(ability);
 
         //Enchanted creature can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackAttachedEffect(AttachmentType.AURA)));
 
         //When Cessation is put into a graveyard from the battlefield, return Cessation to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));

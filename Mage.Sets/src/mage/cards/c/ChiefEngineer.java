@@ -36,7 +36,7 @@ public final class ChiefEngineer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Artifact spells you cast have convoke.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new ConvokeAbility(), filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new ConvokeAbility(), filter)));
     }
 
     private ChiefEngineer(final ChiefEngineer card) {
