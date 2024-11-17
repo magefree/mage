@@ -25,7 +25,7 @@ public final class MoonwingMoth extends CardImpl {
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
         // {W}: Moonwing Moth gets +0/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
     }
 
     private MoonwingMoth(final MoonwingMoth card) {

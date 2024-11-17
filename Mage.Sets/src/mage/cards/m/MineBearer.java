@@ -29,7 +29,7 @@ public final class MineBearer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}, Sacrifice Mine Bearer: Destroy target attacking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);

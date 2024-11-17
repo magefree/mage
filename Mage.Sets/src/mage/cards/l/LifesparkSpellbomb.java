@@ -38,7 +38,7 @@ public final class LifesparkSpellbomb extends CardImpl {
         this.addAbility(firstAbility);
 
         // {1}, Sacrifice Lifespark Spellbomb: Draw a card.
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
+        Ability secondAbility = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         secondAbility.addCost(new SacrificeSourceCost());
         this.addAbility(secondAbility);
     }

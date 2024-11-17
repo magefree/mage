@@ -43,7 +43,7 @@ public final class MagetaTheLion extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{W}{W}, {tap}, Discard two cards: Destroy all creatures except for Mageta the Lion. Those creatures can't be regenerated.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter, true), new ManaCostsImpl<>("{2}{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(new DestroyAllEffect(filter, true), new ManaCostsImpl<>("{2}{W}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)));
         this.addAbility(ability);

@@ -29,7 +29,7 @@ public final class MerfolkMesmerist extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(2), new ColoredManaCost(ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(2), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

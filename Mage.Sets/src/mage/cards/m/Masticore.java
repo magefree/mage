@@ -36,11 +36,11 @@ public final class Masticore extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand()))));
 
         // {2}: Masticore deals 1 damage to target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new GenericManaCost(2));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // {2}: Regenerate Masticore.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(2)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new GenericManaCost(2)));
     }
 
     private Masticore(final Masticore card) {

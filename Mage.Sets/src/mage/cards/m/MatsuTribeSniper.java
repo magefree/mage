@@ -42,7 +42,7 @@ public final class MatsuTribeSniper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {t}: Matsu-Tribe Sniper deals 1 damage to target creature with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         

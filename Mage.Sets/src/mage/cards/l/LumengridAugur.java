@@ -34,7 +34,7 @@ public final class LumengridAugur extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}, {T}: Target player draws a card, then discards a card. If that player discards an artifact card this way, untap Lumengrid Augur.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LumengridAugurEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new LumengridAugurEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

@@ -46,7 +46,7 @@ public final class MausoleumWanderer extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter));
 
         // Sacrifice Mausoleum Wanderer: Counter target instant or sorcery spell unless its controller pays {X}, where X is Mausoleum Wanderer's power.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(SourcePermanentPowerValue.NOT_NEGATIVE), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new CounterUnlessPaysEffect(SourcePermanentPowerValue.NOT_NEGATIVE), new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(new FilterInstantOrSorcerySpell()));
         this.addAbility(ability);
     }

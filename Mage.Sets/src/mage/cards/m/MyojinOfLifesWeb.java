@@ -49,7 +49,7 @@ public final class MyojinOfLifesWeb extends CardImpl {
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
                         new SourceHasCounterCondition(CounterType.DIVINITY), "{this} has indestructible as long as it has a divinity counter on it")));
         // Remove a divinity counter from Myojin of Life's Web: Put any number of creature cards from your hand onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyojinOfLifesWebPutCreatureOnBattlefieldEffect(), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance()));
+        Ability ability = new SimpleActivatedAbility(new MyojinOfLifesWebPutCreatureOnBattlefieldEffect(), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance()));
 
         this.addAbility(ability);
     }

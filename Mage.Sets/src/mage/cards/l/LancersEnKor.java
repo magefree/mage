@@ -34,7 +34,7 @@ public final class LancersEnKor extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // {0}: The next 1 damage that would be dealt to Lancers en-Kor this turn is dealt to target creature you control instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, RedirectionEffect.UsageType.ONE_USAGE_ABSOLUTE), new GenericManaCost(0));
+        Ability ability = new SimpleActivatedAbility(new RedirectDamageFromSourceToTargetEffect(Duration.EndOfTurn, 1, RedirectionEffect.UsageType.ONE_USAGE_ABSOLUTE), new GenericManaCost(0));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

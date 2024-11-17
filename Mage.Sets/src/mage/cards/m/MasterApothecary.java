@@ -39,7 +39,7 @@ public final class MasterApothecary extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Tap an untapped Cleric you control: Prevent the next 2 damage that would be dealt to any target this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2),
                 new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetAnyTarget());

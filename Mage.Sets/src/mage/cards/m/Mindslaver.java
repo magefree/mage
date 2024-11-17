@@ -25,7 +25,7 @@ public final class Mindslaver extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // {4}, {T}, Sacrifice Mindslaver: You control target player during that player's next turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ControlTargetPlayerNextTurnEffect(), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new ControlTargetPlayerNextTurnEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());

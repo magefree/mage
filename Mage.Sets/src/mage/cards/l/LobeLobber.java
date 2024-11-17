@@ -31,7 +31,7 @@ public final class LobeLobber extends CardImpl {
 
         // Equipped creature has "T: This creature deals 1 damage to target player. Roll a six-sided die. On a 5 or higher, untap it."
         Effect effect = new LobeLobberEffect();
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
 

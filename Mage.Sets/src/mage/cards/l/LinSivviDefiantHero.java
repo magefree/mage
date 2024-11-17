@@ -55,7 +55,7 @@ public final class LinSivviDefiantHero extends CardImpl {
         this.addAbility(ability);
 
         // {3}: Put target Rebel card from your graveyard on the bottom of your library.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false, rule), new GenericManaCost(3));
+        ability = new SimpleActivatedAbility(new PutOnLibraryTargetEffect(false, rule), new GenericManaCost(3));
         ability.addTarget(new TargetCardInYourGraveyard(1, filter));
         this.addAbility(ability);
     }

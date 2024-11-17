@@ -32,7 +32,7 @@ public final class MyrWelder extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Imprint - {tap}: Exile target artifact card from a graveyard
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyrWelderEffect(), new TapSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new MyrWelderEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability.setAbilityWord(AbilityWord.IMPRINT));
 

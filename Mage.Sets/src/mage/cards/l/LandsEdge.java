@@ -31,7 +31,7 @@ public final class LandsEdge extends CardImpl {
         this.supertype.add(SuperType.WORLD);
 
         // Discard a card: If the discarded card was a land card, Land's Edge deals 2 damage to target player. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LandsEdgeEffect(), new DiscardCardCost(false));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new LandsEdgeEffect(), new DiscardCardCost(false));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));

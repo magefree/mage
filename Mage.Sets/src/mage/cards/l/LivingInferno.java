@@ -34,7 +34,7 @@ public final class LivingInferno extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {T}: Living Inferno deals damage equal to its power divided as you choose among any number of target creatures. Each of those creatures deals damage equal to its power to Living Inferno.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LivingInfernoEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LivingInfernoEffect(), new TapSourceCost());
         ability.setTargetAdjuster(LivingInfernoAdjuster.instance);
         this.addAbility(ability);
     }

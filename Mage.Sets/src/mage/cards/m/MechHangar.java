@@ -43,7 +43,7 @@ public final class MechHangar extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new ConditionalSpellManaBuilder(filter), true));
 
         // {3}, {T}, Target Vehicle becomes an artifact creature until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCardTypeTargetEffect(
+        Ability ability = new SimpleActivatedAbility(new AddCardTypeTargetEffect(
         		Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE)
         		.setText("Target Vehicle becomes an artifact creature until end of turn"), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());

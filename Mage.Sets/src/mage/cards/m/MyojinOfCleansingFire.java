@@ -53,7 +53,7 @@ public final class MyojinOfCleansingFire extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
                 new SourceHasCounterCondition(CounterType.DIVINITY), "{this} has indestructible as long as it has a divinity counter on it")));
         // Remove a divinity counter from Myojin of Cleansing Fire: Destroy all other creatures.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance())));
+        this.addAbility(new SimpleActivatedAbility(new DestroyAllEffect(filter), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance())));
     }
 
     private MyojinOfCleansingFire(final MyojinOfCleansingFire card) {

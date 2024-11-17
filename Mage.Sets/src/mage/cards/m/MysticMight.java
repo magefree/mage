@@ -43,7 +43,7 @@ public final class MysticMight extends CardImpl {
         // Cumulative upkeep {1}{U}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}{U}")));
         // Enchanted land has "{tap}: Target creature gets +2/+2 until end of turn."
-        Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new TapSourceCost());
+        Ability gainAbility = new SimpleActivatedAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new TapSourceCost());
         gainAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA,
             Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Target creature gets +2/+2 until end of turn.\"")));

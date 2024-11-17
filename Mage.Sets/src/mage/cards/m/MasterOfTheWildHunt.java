@@ -43,7 +43,7 @@ public final class MasterOfTheWildHunt extends CardImpl {
                 new CreateTokenEffect(new WolfToken())));
 
         // {T}: Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MasterOfTheWildHuntEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new MasterOfTheWildHuntEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.addHint(new ValueHint("Untapped wolfs you control", new PermanentsOnBattlefieldCount(MasterOfTheWildHuntEffect.filter)));
         this.addAbility(ability);

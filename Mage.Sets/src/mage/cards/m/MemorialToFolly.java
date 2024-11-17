@@ -31,7 +31,7 @@ public final class MemorialToFolly extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // {2}{B}, {T}, Sacrifice Memorial to Folly: Return target creature card from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect()
+        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect()
                 .setText("Return target creature card from your graveyard to your hand"),
                 new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new TapSourceCost());

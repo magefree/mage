@@ -34,7 +34,7 @@ public final class LobberCrew extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // {T}: Lobber Crew deals 1 damage to each opponent.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DamagePlayersEffect(1, TargetController.OPPONENT), new TapSourceCost()));
         // Whenever you cast a multicolored spell, untap Lobber Crew.
         this.addAbility(new SpellCastControllerTriggeredAbility(
                 new UntapSourceEffect(), StaticFilters.FILTER_SPELL_A_MULTICOLORED, false));
