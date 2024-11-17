@@ -29,7 +29,7 @@ public final class ArgothianElder extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetLandPermanent(2));
                 this.addAbility(ability);
         }

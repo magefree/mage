@@ -30,7 +30,7 @@ public final class AetherStorm extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new AetherStormReplacementEffect()));
 
         // Pay 4 life: Destroy Aether Storm. It can't be regenerated. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroySourceEffect(true), new PayLifeCost(4));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new DestroySourceEffect(true), new PayLifeCost(4));
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);

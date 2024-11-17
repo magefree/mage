@@ -30,12 +30,12 @@ public final class AzoriusGuildmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}{W}: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{2}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
         // {2}{U}: Counter target activated ability.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl<>("{2}{U}"));
+        ability = new SimpleActivatedAbility(new CounterTargetEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addTarget(new TargetActivatedAbility());
         this.addAbility(ability);
     }

@@ -29,7 +29,7 @@ public final class ArmorThrull extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}, Sacrifice Armor Thrull: Put a +1/+2 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P2.createInstance()), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P1P2.createInstance()), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

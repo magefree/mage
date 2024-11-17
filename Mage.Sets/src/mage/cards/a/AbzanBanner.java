@@ -31,7 +31,7 @@ public final class AbzanBanner extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {W}{B}{G}, {T}, Sacrifice Abzan Banner: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{W}{B}{G}"));       
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{W}{B}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

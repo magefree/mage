@@ -38,7 +38,7 @@ public final class AuraOfSilence extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SpellsCostIncreasingAllEffect(2, filter, TargetController.OPPONENT)));
 
         // Sacrifice Aura of Silence: Destroy target artifact or enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(ability);
     }

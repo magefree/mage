@@ -28,11 +28,11 @@ public final class AnaDisciple extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability firstAbility  = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.U));
+        Ability firstAbility  = new SimpleActivatedAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.U));
         firstAbility.addCost(new TapSourceCost());
         firstAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(firstAbility);
-        Ability secondAbility  = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B));
+        Ability secondAbility  = new SimpleActivatedAbility(new BoostTargetEffect(-2, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B));
         secondAbility.addCost(new TapSourceCost());
         secondAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(secondAbility);

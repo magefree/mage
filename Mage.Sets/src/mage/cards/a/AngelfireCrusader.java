@@ -24,7 +24,7 @@ public final class AngelfireCrusader extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
     private AngelfireCrusader(final AngelfireCrusader card) {

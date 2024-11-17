@@ -33,7 +33,7 @@ public final class ArborElf extends CardImpl {
         this.toughness = new MageInt(1);
         
         // (T): Untap target Forest.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());
         TargetLandPermanent target = new TargetLandPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);

@@ -39,7 +39,7 @@ public final class AjanisAid extends CardImpl {
         // Sacrifice Ajani's Aid: Prevent all combat damage a creature of your choice would deal this turn.
         Effect effect = new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, new FilterCreaturePermanent("creature of your choice"), true);
         effect.setText("Prevent all combat damage a creature of your choice would deal this turn");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(effect, new SacrificeSourceCost()));
     }
 
     private AjanisAid(final AjanisAid card) {

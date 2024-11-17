@@ -42,7 +42,7 @@ public final class AllyEncampment extends CardImpl {
         this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 1, new ConditionalSpellManaBuilder(filterSpell), true));
 
         // {1}, {T}, Sacrifice Ally Encampment: Return target Ally you control to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetControlledPermanent(filterPermanent));

@@ -32,12 +32,12 @@ public final class ArmoredGuardian extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {1}{W}{W}: Target creature you control gains protection from the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn),
+        Ability ability = new SimpleActivatedAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn),
             new ManaCostsImpl<>("{1}{W}{W}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
         // {1}{U}{U}: Armored Guardian gains shroud until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn),
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn),
             new ManaCostsImpl<>("{1}{U}{U}")));
     }
 

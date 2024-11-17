@@ -29,7 +29,7 @@ public final class AngelicShield extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield)));
         
         // Sacrifice Angelic Shield: Return target creature to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

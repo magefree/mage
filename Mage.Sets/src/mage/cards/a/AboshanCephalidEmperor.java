@@ -45,12 +45,12 @@ public final class AboshanCephalidEmperor extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Tap an untapped Octopus you control: Tap target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapTargetCost(new TargetControlledPermanent(1, filter1)));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapTargetCost(new TargetControlledPermanent(1, filter1)));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
 
         // {U}{U}{U}: Tap all creatures without flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapAllEffect(filter2), new ManaCostsImpl<>("{U}{U}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new TapAllEffect(filter2), new ManaCostsImpl<>("{U}{U}{U}")));
     }
 
     private AboshanCephalidEmperor(final AboshanCephalidEmperor card) {

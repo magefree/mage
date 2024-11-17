@@ -33,7 +33,7 @@ public final class AetherTheorist extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(3)));
 
         // Tap, Pay {E}: Scry 1.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ScryEffect(1), new TapSourceCost());
         ability.addCost(new PayEnergyCost(1));
         this.addAbility(ability);
     }

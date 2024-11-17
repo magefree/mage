@@ -35,12 +35,12 @@ public final class AethertorchRenegade extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(4)));
 
         // {t}, Pay {E}{E} Aethertorch Renegade deals 1 damage to target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new PayEnergyCost(2));
         this.addAbility(ability);
         // {t}, Pay {E}{E}{E}{E}{E}{E}{E}{E}: Aethertorch Renegade deals 6 damage to target player.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(6), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new DamageTargetEffect(6), new TapSourceCost());
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         ability.addCost(new PayEnergyCost(8));
         this.addAbility(ability);

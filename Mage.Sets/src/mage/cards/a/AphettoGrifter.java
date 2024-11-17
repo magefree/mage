@@ -38,7 +38,7 @@ public final class AphettoGrifter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Tap two untapped Wizards you control: Tap target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }
