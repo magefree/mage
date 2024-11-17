@@ -43,7 +43,7 @@ public final class TradeFederationBattleship extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
 
         // {T}: Create two 1/1 colorless Droid artifact token cretures.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DroidToken(), 2), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new DroidToken(), 2), new TapSourceCost()));
     }
 
     private TradeFederationBattleship(final TradeFederationBattleship card) {

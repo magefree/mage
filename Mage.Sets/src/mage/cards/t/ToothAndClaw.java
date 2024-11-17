@@ -23,7 +23,7 @@ public final class ToothAndClaw extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // Sacrifice two creatures: Create a 3/1 red Beast creature token named Carnivore.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new CarnivoreToken(), 1),
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new CarnivoreToken(), 1),
                 new SacrificeTargetCost(2, StaticFilters.FILTER_PERMANENT_CREATURES)));
     }
 

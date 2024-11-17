@@ -41,7 +41,7 @@ public final class TidewaterMinion extends CardImpl {
                 new ManaCostsImpl<>("{4}")));
         
         // {tap}: Untap target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

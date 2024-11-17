@@ -32,12 +32,12 @@ public final class TradeRoutes extends CardImpl {
         // {1}: Return target land you control to its owner's hand.
         Effect returnToHand = new ReturnToHandTargetEffect();
         Target targetLandYouControl = new TargetPermanent(new FilterControlledLandPermanent());
-        Ability returnLandToHand = new SimpleActivatedAbility(Zone.BATTLEFIELD, returnToHand, new GenericManaCost(1));
+        Ability returnLandToHand = new SimpleActivatedAbility(returnToHand, new GenericManaCost(1));
         returnLandToHand.addTarget(targetLandYouControl);
         this.addAbility(returnLandToHand);
 
         // {1}, Discard a land card: Draw a card.
-        Ability drawACard = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
+        Ability drawACard = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(1));
         drawACard.addCost(new DiscardTargetCost(new TargetCardInHand(new FilterLandCard("a land card"))));
         this.addAbility(drawACard);
     }

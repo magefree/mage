@@ -29,12 +29,12 @@ public final class TrigonOfInfestation extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(3)), "with three charge counters on it"));
 
         // {G}{G}, {T}: Put a charge counter on Trigon of Infestation.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
+        Ability ability2 = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
         ability2.addCost(new ManaCostsImpl<>("{G}{G}"));
         this.addAbility(ability2);
 
         // {2}, {T}, Remove a charge counter from Trigon of Infestation: Create a 1/1 green Phyrexian Insect creature token with infect.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new InsectInfectToken()), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new InsectInfectToken()), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         this.addAbility(ability);

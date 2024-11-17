@@ -30,7 +30,7 @@ public final class TowerOfCoireall extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {tap}: Target creature can't be blocked by Walls this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfTurn).setText("Target creature can't be blocked by Walls this turn"), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new CantBeBlockedByAllTargetEffect(filter, Duration.EndOfTurn).setText("Target creature can't be blocked by Walls this turn"), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

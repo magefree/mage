@@ -35,12 +35,12 @@ public final class TheDeathStar extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {2},{T}: Put a charge counter on The Death Star.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {T}, Remove three charge counters from The Death Star: Destroy target permanent.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3)));
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
@@ -48,7 +48,7 @@ public final class TheDeathStar extends CardImpl {
         // {T}, Remove ten charge counters from The Death Star: Destroy target player.
         Effect effect = new LoseGameTargetPlayerEffect();
         effect.setText("Destroy target player");
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(10)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

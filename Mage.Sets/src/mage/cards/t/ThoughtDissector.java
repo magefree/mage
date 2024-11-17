@@ -31,7 +31,7 @@ public final class ThoughtDissector extends CardImpl {
 
 
         // {X}, {tap}: Target opponent reveals cards from the top of their library until an artifact card or X cards are revealed, whichever comes first. If an artifact card is revealed this way, put it onto the battlefield under your control and sacrifice Thought Dissector. Put the rest of the revealed cards into that player's graveyard.
-        SimpleActivatedAbility abilitiy = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThoughtDissectorEffect(), new VariableManaCost(VariableCostType.NORMAL));
+        SimpleActivatedAbility abilitiy = new SimpleActivatedAbility(new ThoughtDissectorEffect(), new VariableManaCost(VariableCostType.NORMAL));
         abilitiy.addCost(new TapSourceCost());
         abilitiy.addTarget(new TargetOpponent());
         this.addAbility(abilitiy);

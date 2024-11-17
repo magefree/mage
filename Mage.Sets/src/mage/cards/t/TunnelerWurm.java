@@ -25,7 +25,7 @@ public final class TunnelerWurm extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Discard a card: Regenerate Tunneler Wurm.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new DiscardCardCost()));
     }
 
     private TunnelerWurm(final TunnelerWurm card) {

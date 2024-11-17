@@ -41,7 +41,7 @@ public final class TimeVault extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new TimeVaultReplacementEffect()));
         
         // {tap}: Take an extra turn after this one.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddExtraTurnControllerEffect(), new TapSourceCost()));
 
     }
 

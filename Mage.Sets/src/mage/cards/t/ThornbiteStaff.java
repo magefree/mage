@@ -36,7 +36,7 @@ public final class ThornbiteStaff extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "{2}, {T}: This creature deals 1 damage to any target" and "Whenever a creature dies, untap this creature."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(2));
+        Ability gainedAbility = new SimpleActivatedAbility(new DamageTargetEffect(1), new GenericManaCost(2));
         gainedAbility.addCost(new TapSourceCost());
         gainedAbility.addTarget(new TargetAnyTarget());
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT);

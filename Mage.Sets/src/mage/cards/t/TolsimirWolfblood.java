@@ -46,7 +46,7 @@ public final class TolsimirWolfblood extends CardImpl {
         // Other white creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterWhite, true)));
         // {tap}: Create a legendary 2/2 green and white Wolf creature token named Voja.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VojaToken()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new VojaToken()), new TapSourceCost()));
     }
 
     private TolsimirWolfblood(final TolsimirWolfblood card) {

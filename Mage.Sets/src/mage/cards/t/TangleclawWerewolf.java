@@ -36,7 +36,7 @@ public final class TangleclawWerewolf extends CardImpl {
 
         // {6}{G}: Transform Tangleclaw Werewolf.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{6}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{6}{G}")));
     }
 
     private TangleclawWerewolf(final TangleclawWerewolf card) {

@@ -41,7 +41,7 @@ public final class TombOfTheDuskRose extends CardImpl {
         this.addAbility(new AnyColorManaAbility());
 
         // {2}{W}{B}，{T} : Put a creature card exiled with this permanent onto the battlefield under your control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TombOfTheDuskRoseEffect(), new ManaCostsImpl<>("{2}{W}{B}"));
+        Ability ability = new SimpleActivatedAbility(new TombOfTheDuskRoseEffect(), new ManaCostsImpl<>("{2}{W}{B}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

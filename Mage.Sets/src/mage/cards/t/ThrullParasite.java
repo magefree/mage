@@ -33,7 +33,7 @@ public final class ThrullParasite extends CardImpl {
         this.addAbility(new ExtortAbility());
 
         // {tap}, Pay 2 life: Remove a counter from target nonland permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new RemoveCounterTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetNonlandPermanent());
         ability.addCost(new PayLifeCost(2));
         this.addAbility(ability);

@@ -32,7 +32,7 @@ public final class TawnossWand extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {2}, {tap}: Target creature with power 2 or less is unblockable this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(), new TapSourceCost());
         ability.addCost(new ManaCostsImpl<>("{2}"));
         ability.addTarget(new TargetCreaturePermanent(filter));        
         this.addAbility(ability);        

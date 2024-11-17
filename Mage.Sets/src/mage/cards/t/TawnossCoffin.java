@@ -45,7 +45,7 @@ public final class TawnossCoffin extends CardImpl {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {3}, {T}: Exile target creature and all Auras attached to it. Note the number and kind of counters that were on that creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TawnossCoffinEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TawnossCoffinEffect(), new TapSourceCost());
         ability.addCost(new ManaCostsImpl<>("{3}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
