@@ -66,6 +66,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Escarpment Fortress", 278, Rarity.RARE, mage.cards.e.EscarpmentFortress.class));
         cards.add(new SetCardInfo("Evie Frye", 19, Rarity.RARE, mage.cards.e.EvieFrye.class));
         cards.add(new SetCardInfo("Excalibur, Sword of Eden", 72, Rarity.RARE, mage.cards.e.ExcaliburSwordOfEden.class));
+        cards.add(new SetCardInfo("Ezio Auditore da Firenze", 25, Rarity.MYTHIC, mage.cards.e.EzioAuditoreDaFirenze.class));
         cards.add(new SetCardInfo("Ezio, Blade of Vengeance", 275, Rarity.MYTHIC, mage.cards.e.EzioBladeOfVengeance.class));
         cards.add(new SetCardInfo("Ezio, Brash Novice", 55, Rarity.UNCOMMON, mage.cards.e.EzioBrashNovice.class));
         cards.add(new SetCardInfo("Fatal Push", 90, Rarity.UNCOMMON, mage.cards.f.FatalPush.class));
