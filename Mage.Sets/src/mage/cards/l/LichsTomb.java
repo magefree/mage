@@ -28,7 +28,7 @@ public final class LichsTomb extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // You don't lose the game for having 0 or less life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontLoseByZeroOrLessLifeEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new DontLoseByZeroOrLessLifeEffect(Duration.WhileOnBattlefield)));
 
         // Whenever you lose life, sacrifice a permanent for each 1 life you lost.
         this.addAbility(new LichsTombTriggeredAbility());

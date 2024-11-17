@@ -28,7 +28,7 @@ public final class ManaVault extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // Mana Vault doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // At the beginning of your upkeep, you may pay {4}. If you do, untap Mana Vault.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

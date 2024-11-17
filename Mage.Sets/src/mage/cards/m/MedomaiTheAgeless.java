@@ -38,7 +38,7 @@ public final class MedomaiTheAgeless extends CardImpl {
         // Medomai the Ageless can't attack during extra turns.
         Effect effect = new ConditionalRestrictionEffect(new CantAttackSourceEffect(Duration.WhileOnBattlefield), ExtraTurnCondition.instance);
         effect.setText("{this} can't attack during extra turns");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private MedomaiTheAgeless(final MedomaiTheAgeless card) {

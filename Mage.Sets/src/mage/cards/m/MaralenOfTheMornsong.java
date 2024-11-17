@@ -32,7 +32,7 @@ public final class MaralenOfTheMornsong extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Players can't draw cards.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaralenOfTheMornsongEffect()));
+        this.addAbility(new SimpleStaticAbility(new MaralenOfTheMornsongEffect()));
 
         // At the beginning of each player's draw step, that player loses 3 life, searches their library for a card, puts it into their hand, then shuffles their library.
         this.addAbility(new BeginningOfDrawTriggeredAbility(TargetController.EACH_PLAYER, new MaralenOfTheMornsongEffect2(), false));

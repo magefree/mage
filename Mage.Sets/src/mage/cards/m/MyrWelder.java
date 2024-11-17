@@ -37,7 +37,7 @@ public final class MyrWelder extends CardImpl {
         this.addAbility(ability.setAbilityWord(AbilityWord.IMPRINT));
 
         // Myr Welder has all activated abilities of all cards exiled with it
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MyrWelderContinuousEffect()));
+        this.addAbility(new SimpleStaticAbility(new MyrWelderContinuousEffect()));
 
     }
 

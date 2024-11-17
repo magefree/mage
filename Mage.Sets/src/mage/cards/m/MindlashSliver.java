@@ -39,7 +39,7 @@ public final class MindlashSliver extends CardImpl {
         // All Slivers have "{1}, Sacrifice this permanent: Each player discards a card."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardEachPlayerEffect(),new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 ability, Duration.WhileOnBattlefield,
                 filter, "All Slivers have \"{1}, Sacrifice this permanent: Each player discards a card.\"")));
     }

@@ -38,7 +38,7 @@ public final class MogissWarhound extends CardImpl {
         // Enchanted creature gets +2/+2 and attacks each turn if able.
         Effect effect = new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +2/+2");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA);
         effect.setText("and attacks each combat if able");
         ability.addEffect(effect);

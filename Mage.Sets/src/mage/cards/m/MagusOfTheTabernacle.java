@@ -36,7 +36,7 @@ public final class MagusOfTheTabernacle extends CardImpl {
 
         // All creatures have "At the beginning of your upkeep, sacrifice this creature unless you pay {1}."
         Ability abilityToGain = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(1)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(abilityToGain, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, rule)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(abilityToGain, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, rule)));
     }
 
     private MagusOfTheTabernacle(final MagusOfTheTabernacle card) {

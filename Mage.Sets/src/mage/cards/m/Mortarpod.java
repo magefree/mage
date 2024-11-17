@@ -36,7 +36,7 @@ public final class Mortarpod extends CardImpl {
         this.addAbility(new LivingWeaponAbility());
         
         // Equipped creature gets +0/+1 and has "Sacrifice this creature: This creature deals 1 damage to any target."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 1));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(0, 1));
         SimpleActivatedAbility abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new DamageTargetEffect(1),
                 new SacrificeSourceCost());

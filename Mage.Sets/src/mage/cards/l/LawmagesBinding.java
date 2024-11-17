@@ -38,7 +38,7 @@ public final class LawmagesBinding extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block, and its activate abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAttackActivateAttachedEffect()));
     }
 
     private LawmagesBinding(final LawmagesBinding card) {

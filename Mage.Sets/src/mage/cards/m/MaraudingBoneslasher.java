@@ -35,7 +35,7 @@ public final class MaraudingBoneslasher extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Marauding Boneslasher can't block unless you control another Zombie.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockUnlessYouControlSourceEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockUnlessYouControlSourceEffect(filter)));
 
     }
 

@@ -64,7 +64,7 @@ public final class ManorGargoyle extends CardImpl {
         gainEffect.setDependedToType(DependencyType.LooseDefenderEffect);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(gainEffect, HasDefenderCondition.instance, rule);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // {1}: Until end of turn, Manor Gargoyle loses defender and gains flying.
         ContinuousEffect effect2 = new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.EndOfTurn);

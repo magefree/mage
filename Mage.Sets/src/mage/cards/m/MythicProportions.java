@@ -38,7 +38,7 @@ public final class MythicProportions extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +8/+8 and has trample.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(8, 8));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(8, 8));
         Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has trample");
         ability.addEffect(effect);

@@ -44,7 +44,7 @@ public final class MindbenderSpores extends CardImpl {
         // and "At the beginning of your upkeep, remove a fungus counter from this creature."
         Ability ability = new BlocksCreatureTriggeredAbility(new AddCountersTargetEffect(CounterType.FUNGUS.createInstance(4)));
 
-        SimpleStaticAbility doesntUntapAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(
+        SimpleStaticAbility doesntUntapAbility = new SimpleStaticAbility(new ConditionalContinuousRuleModifyingEffect(
                 new DontUntapInControllersUntapStepSourceEffect(), new SourceHasCounterCondition(CounterType.FUNGUS))
                 .setText("{this} doesn't untap during your untap step if it has a fungus counter on it"));
         ability.addEffect(new GainAbilityTargetEffect(doesntUntapAbility, Duration.Custom)

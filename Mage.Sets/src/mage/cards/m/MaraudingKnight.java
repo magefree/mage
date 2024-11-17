@@ -38,7 +38,7 @@ public final class MaraudingKnight extends CardImpl {
 
         // Marauding Knight gets +1/+1 for each Plains your opponents control.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(plainsFilter, 1);
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
+        SimpleStaticAbility ability = new SimpleStaticAbility(new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
 

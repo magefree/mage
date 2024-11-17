@@ -46,7 +46,7 @@ public final class MondrakGloryDominus extends CardImpl {
         this.toughness = new MageInt(4);
 
         // If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreateTwiceThatManyTokensEffect()));
+        this.addAbility(new SimpleStaticAbility(new CreateTwiceThatManyTokensEffect()));
 
         // {1}{W/P}{W/P}, Sacrifice two other artifacts and/or creatures: Put an indestructible counter on Mondrak, Glory Dominus.
         Ability ability = new SimpleActivatedAbility(

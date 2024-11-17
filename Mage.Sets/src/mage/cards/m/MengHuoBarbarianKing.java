@@ -35,7 +35,7 @@ public final class MengHuoBarbarianKing extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Other green creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterGreen, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterGreen, true)));
     }
 
     private MengHuoBarbarianKing(final MengHuoBarbarianKing card) {

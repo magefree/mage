@@ -24,7 +24,7 @@ public final class MaskOfRiddles extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has fear.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FearAbility.getInstance(), AttachmentType.EQUIPMENT)));
         // Whenever equipped creature deals combat damage to a player, you may draw a card.
         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DrawCardSourceControllerEffect(1), "equipped", true));
         // Equip {2}

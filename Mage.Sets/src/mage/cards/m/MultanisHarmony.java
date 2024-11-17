@@ -37,7 +37,7 @@ public final class MultanisHarmony extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has "{T}: Add one mana of any color."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new AnyColorManaAbility(),
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(new AnyColorManaAbility(),
             AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted creature has \"{T}: Add one mana of any color.\"")));
     }
 

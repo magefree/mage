@@ -55,7 +55,7 @@ public final class Lashknife extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private Lashknife(final Lashknife card) {

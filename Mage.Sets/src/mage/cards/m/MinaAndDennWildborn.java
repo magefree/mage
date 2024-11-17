@@ -39,7 +39,7 @@ public final class MinaAndDennWildborn extends CardImpl {
         this.toughness = new MageInt(4);
 
         // You may play an additional land on each of your turns.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
         
         // {R}{G}, Return a land you control to its owner's hand: Target creature gains trample until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}{G}"));

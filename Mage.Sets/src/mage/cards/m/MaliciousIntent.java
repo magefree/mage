@@ -38,7 +38,7 @@ public final class MaliciousIntent extends CardImpl {
         // Enchanted creature has "{tap}: Target creature can't block this turn."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBlockTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
     }
 
     private MaliciousIntent(final MaliciousIntent card) {

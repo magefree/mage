@@ -43,7 +43,7 @@ public final class MarkovCrusader extends CardImpl {
 
         // Markov Crusader has haste as long as you control another Vampire.
         Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(HasteAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private MarkovCrusader(final MarkovCrusader card) {

@@ -29,7 +29,7 @@ public final class Lightwalker extends CardImpl {
         this.toughness = new MageInt(1);
 
             // Lightwalker has flying as long as it has a +1/+1 counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), 
                 new SourceHasCounterCondition(CounterType.P1P1),"Lightwalker has flying as long as it has a +1/+1 counter on it")));
     }

@@ -47,7 +47,7 @@ public final class LichsMastery extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
 
         // You can't lose the game.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LichsMasteryCantLoseEffect()));
+        this.addAbility(new SimpleStaticAbility(new LichsMasteryCantLoseEffect()));
 
         // Whenever you gain life, draw that many cards.
         this.addAbility(new GainLifeControllerTriggeredAbility(

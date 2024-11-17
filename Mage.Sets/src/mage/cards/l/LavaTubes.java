@@ -33,7 +33,7 @@ public final class LavaTubes extends CardImpl {
         Effect effect = new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepSourceEffect(false, true),
                 new SourceHasCounterCondition(CounterType.DEPLETION, 1, Integer.MAX_VALUE));
         effect.setText("{this} doesn't untap during your untap step if it has a depletion counter on it");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         this.addAbility(ability);
         // At the beginning of your upkeep, remove a depletion counter from Lava Tubes.
         Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.DEPLETION.createInstance()));

@@ -36,7 +36,7 @@ public final class LeshracsRite extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has swampwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SwampwalkAbility(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(new SwampwalkAbility(), AttachmentType.AURA)));
     }
 
     private LeshracsRite(final LeshracsRite card) {

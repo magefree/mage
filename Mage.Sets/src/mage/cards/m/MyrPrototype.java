@@ -36,7 +36,7 @@ public final class MyrPrototype extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 
         // Myr Prototype can't attack or block unless you pay {1} for each +1/+1 counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MyrPrototypeCantAttackUnlessYouPayEffect()));
+        this.addAbility(new SimpleStaticAbility(new MyrPrototypeCantAttackUnlessYouPayEffect()));
     }
 
     private MyrPrototype(final MyrPrototype card) {

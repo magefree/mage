@@ -33,7 +33,7 @@ public final class MasterSplicer extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PhyrexianGolemToken())));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private MasterSplicer(final MasterSplicer card) {

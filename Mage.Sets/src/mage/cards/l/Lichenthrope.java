@@ -36,7 +36,7 @@ public final class Lichenthrope extends CardImpl {
         this.toughness = new MageInt(5);
 
         // If damage would be dealt to Lichenthrope, put that many -1/-1 counters on it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LichenthropeEffect()));
+        this.addAbility(new SimpleStaticAbility(new LichenthropeEffect()));
 
         // At the beginning of your upkeep, remove a -1/-1 counter from Lichenthrope.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance())));

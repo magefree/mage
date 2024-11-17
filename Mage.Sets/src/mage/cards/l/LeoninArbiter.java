@@ -34,7 +34,7 @@ public final class LeoninArbiter extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Players can't search libraries.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeoninArbiterCantSearchEffect(KEY_STRING)));
+        this.addAbility(new SimpleStaticAbility(new LeoninArbiterCantSearchEffect(KEY_STRING)));
 
         //  Any player may pay {2} for that player to ignore this effect until end of turn.
         this.addAbility(new LeoninArbiterSpecialAction(KEY_STRING));

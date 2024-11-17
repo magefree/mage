@@ -36,7 +36,7 @@ public final class MycosynthGolem extends CardImpl {
         this.addAbility(new AffinityForArtifactsAbility());
 
         // Artifact creature spells you cast have affinity for artifacts.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new AffinityForArtifactsAbility(), filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(new AffinityForArtifactsAbility(), filter)));
 
     }
 

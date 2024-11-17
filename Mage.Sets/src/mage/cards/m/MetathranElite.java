@@ -32,7 +32,7 @@ public final class MetathranElite extends CardImpl {
         ConditionalRestrictionEffect effect = new ConditionalRestrictionEffect(
                 new CantBeBlockedSourceEffect(), new EnchantedSourceCondition());
         effect.setText(rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
     }
 

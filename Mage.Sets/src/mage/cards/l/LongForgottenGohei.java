@@ -31,10 +31,10 @@ public final class LongForgottenGohei extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Arcane spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(arcaneFilter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(arcaneFilter, 1)));
 
         // Spirit creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, spiritFilter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, spiritFilter, false)));
     }
 
     private LongForgottenGohei(final LongForgottenGohei card) {

@@ -46,7 +46,7 @@ public final class LunarchMantle extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 and has "{1}, Sacrifice a permanent: This creature gains flying until end of turn."
-        SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        SimpleStaticAbility ability2 = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
         Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
         abilityToGain.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT));

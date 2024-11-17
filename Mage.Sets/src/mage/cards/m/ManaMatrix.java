@@ -30,7 +30,7 @@ public final class ManaMatrix extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // Instant and enchantment spells you cast cost up to {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2, true)));        
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2, true)));        
     }
 
     private ManaMatrix(final ManaMatrix card) {

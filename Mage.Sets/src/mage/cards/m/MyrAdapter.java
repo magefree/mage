@@ -28,7 +28,7 @@ public final class MyrAdapter extends CardImpl {
 
         // Myr Adapter gets +1/+1 for each Equipment attached to it.
         EquipmentAttachedCount amount = new EquipmentAttachedCount();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield)));
     }
 
     private MyrAdapter(final MyrAdapter card) {

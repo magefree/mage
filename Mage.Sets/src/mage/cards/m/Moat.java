@@ -31,7 +31,7 @@ public final class Moat extends CardImpl {
 
 
         // Creatures without flying can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private Moat(final Moat card) {

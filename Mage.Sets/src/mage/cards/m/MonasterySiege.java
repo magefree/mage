@@ -41,7 +41,7 @@ public final class MonasterySiege extends CardImpl {
                 "&bull; Khans &mdash; At the beginning of your draw step, draw an additional card, then discard a card."));
 
         // * Dragons - Spells your opponents cast that target you or a permanent you control cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MonasterySiegeCostIncreaseEffect()));
+        this.addAbility(new SimpleStaticAbility(new MonasterySiegeCostIncreaseEffect()));
     }
 
     private MonasterySiege(final MonasterySiege card) {

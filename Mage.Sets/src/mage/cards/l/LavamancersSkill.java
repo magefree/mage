@@ -40,14 +40,14 @@ public final class LavamancersSkill extends CardImpl {
         // Enchanted creature has "{tap}: This creature deals 1 damage to target creature."
         Ability pingAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         pingAbility.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(pingAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, 
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(pingAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, 
         "Enchanted creature has \"{T}: This creature deals 1 damage to target creature.\"")));
         
         // As long as enchanted creature is a Wizard, it has "{tap}: This creature deals 2 damage to target creature."
         Ability pingTwoAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
         pingTwoAbility.addTarget(new TargetCreaturePermanent());
         ContinuousEffect isWizardEffect = new GainAbilityAttachedEffect(pingTwoAbility, AttachmentType.AURA);
-        SimpleStaticAbility ifWizardAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(isWizardEffect, new EnchantedCreatureSubtypeCondition(SubType.WIZARD),
+        SimpleStaticAbility ifWizardAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(isWizardEffect, new EnchantedCreatureSubtypeCondition(SubType.WIZARD),
                 "As long as enchanted creature is a Wizard, it has \"{T}: This creature deals 2 damage to target creature.\""));
         
         this.addAbility(ifWizardAbility);
