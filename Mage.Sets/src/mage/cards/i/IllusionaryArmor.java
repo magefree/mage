@@ -35,7 +35,7 @@ public final class IllusionaryArmor extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget));
         // Enchanted creature gets +4/+4.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4, 4, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(4, 4, Duration.WhileOnBattlefield)));
         // When enchanted creature becomes the target of a spell or ability, sacrifice Illusionary Armor.
         this.addAbility(new BecomesTargetAttachedTriggeredAbility(new SacrificeSourceEffect()));
     }

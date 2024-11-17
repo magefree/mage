@@ -49,7 +49,7 @@ public final class KindredBoon extends CardImpl {
         // Each creature you control with a divinity counter on it has indestructible.
         Effect effect = new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filterDivinity);
         effect.setText("Each creature you control with a divinity counter on it has indestructible");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private KindredBoon(final KindredBoon card) {

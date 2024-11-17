@@ -30,7 +30,7 @@ public final class KembasBanner extends CardImpl {
 
         // Equipped creature gets +1/+1 for each creature you control.
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURE);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(value, value)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(value, value)));
 
         // Equip {2}{W}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{2}{W}"), false));

@@ -41,7 +41,7 @@ public final class InfectiousCurse extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Spells you cast that target enchanted player cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfectiousCurseCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new InfectiousCurseCostReductionEffect()));
 
         // At the beginning of enchanted player's upkeep, that player loses 1 life and you gain 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(

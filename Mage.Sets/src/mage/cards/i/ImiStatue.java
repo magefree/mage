@@ -25,7 +25,7 @@ public final class ImiStatue extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // Players can't untap more than one artifact during their untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ImiStatueEffect()));
+        this.addAbility(new SimpleStaticAbility(new ImiStatueEffect()));
 
     }
 

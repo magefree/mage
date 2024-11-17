@@ -46,7 +46,7 @@ public final class JaradGolgariLichLord extends CardImpl {
 
         // Jarad, Golgari Lich Lord gets +1/+1 for each creature card in your graveyard.
         DynamicValue amount = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
         this.addAbility(ability);
 
         // {1}{B}{G}, Sacrifice another creature: Each opponent loses life equal to the sacrificed creature's power.

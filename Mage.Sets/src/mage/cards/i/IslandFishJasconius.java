@@ -30,7 +30,7 @@ public final class IslandFishJasconius extends CardImpl {
         this.toughness = new MageInt(8);
 
         // Island Fish Jasconius doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
         
         // At the beginning of your upkeep, you may pay {U}{U}{U}. If you do, untap Island Fish Jasconius.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
@@ -38,7 +38,7 @@ public final class IslandFishJasconius extends CardImpl {
         ));
         
         // Island Fish Jasconius can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
         
         // When you control no Islands, sacrifice Island Fish Jasconius.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(

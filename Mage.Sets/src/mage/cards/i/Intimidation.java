@@ -22,7 +22,7 @@ public final class Intimidation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}{B}");
 
         // Creatures you control have fear.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FearAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(FearAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
     }
 
     private Intimidation(final Intimidation card) {

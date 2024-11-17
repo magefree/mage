@@ -35,7 +35,7 @@ public final class KoboldOverlord extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // Other Kobold creatures you control have first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
 
     private KoboldOverlord(final KoboldOverlord card) {

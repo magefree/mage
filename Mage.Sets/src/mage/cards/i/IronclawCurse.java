@@ -33,10 +33,10 @@ public final class IronclawCurse extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets 0/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, -1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(0, -1, Duration.WhileOnBattlefield)));
 
         // Enchanted creature can't block creatures with power equal to or greater than the enchanted creature's toughness.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IronclawCurseEffect()));
+        this.addAbility(new SimpleStaticAbility(new IronclawCurseEffect()));
     }
 
     private IronclawCurse(final IronclawCurse card) {

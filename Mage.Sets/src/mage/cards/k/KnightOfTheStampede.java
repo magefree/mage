@@ -32,7 +32,7 @@ public final class KnightOfTheStampede extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Dinosaur spells you cast cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)));
     }
 
     private KnightOfTheStampede(final KnightOfTheStampede card) {

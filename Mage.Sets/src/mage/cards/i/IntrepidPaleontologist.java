@@ -50,7 +50,7 @@ public final class IntrepidPaleontologist extends CardImpl {
         this.addAbility(exileAbility);
 
         // You may cast Dinosaur creature spells from among cards you own exiled with Intrepid Paleontologist. If you cast a spell this way, that creature enters the battlefield with a finality counter on it.
-        Ability castAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new IntrepidPaleontologistPlayEffect());
+        Ability castAbility = new SimpleStaticAbility(new IntrepidPaleontologistPlayEffect());
         castAbility.setIdentifier(MageIdentifier.IntrepidPaleontologistWatcher);
         castAbility.addWatcher(new IntrepidPaleontologistWatcher());
         this.addAbility(castAbility);

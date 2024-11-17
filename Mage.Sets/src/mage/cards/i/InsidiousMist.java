@@ -44,7 +44,7 @@ public final class InsidiousMist extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // Insideous Mist can't block and can't be blocked.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockSourceEffect(Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(new CantBlockSourceEffect(Duration.WhileOnBattlefield));
         Effect effect = new CantBeBlockedSourceEffect();
         effect.setText("and can't be blocked");
         ability.addEffect(effect);

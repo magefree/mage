@@ -31,7 +31,7 @@ public final class KembasLegion extends CardImpl {
 
         this.addAbility(VigilanceAbility.getInstance());
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KembasLegionEffect()));
+        this.addAbility(new SimpleStaticAbility(new KembasLegionEffect()));
     }
 
     private KembasLegion(final KembasLegion card) {

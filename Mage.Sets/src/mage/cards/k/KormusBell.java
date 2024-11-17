@@ -32,7 +32,7 @@ public final class KormusBell extends CardImpl {
         effect.addDependedToType(DependencyType.BecomeForest);
         effect.addDependedToType(DependencyType.BecomeMountain);
         effect.addDependedToType(DependencyType.BecomePlains);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private KormusBell(final KormusBell card) {

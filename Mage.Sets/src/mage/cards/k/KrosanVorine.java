@@ -29,7 +29,7 @@ public final class KrosanVorine extends CardImpl {
         // Provoke
         this.addAbility(new ProvokeAbility());
         // Krosan Vorine can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
     private KrosanVorine(final KrosanVorine card) {

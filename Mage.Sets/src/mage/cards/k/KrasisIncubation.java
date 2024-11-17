@@ -39,7 +39,7 @@ public final class KrasisIncubation extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAttackActivateAttachedEffect()));
 
         // {1}{G}{U}, Return Krasis Incubation to its owner's hand: Put two +1/+1 counters on enchanted creature.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(2), new ManaCostsImpl<>("{1}{G}{U}"));

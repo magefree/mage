@@ -39,10 +39,10 @@ public final class KondasBanner extends CardImpl {
         this.addAbility(new AttachableToRestrictedAbility(target));
 
         // Creatures that share a color with equipped creature get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KondasBannerColorBoostEffect()));
+        this.addAbility(new SimpleStaticAbility(new KondasBannerColorBoostEffect()));
 
         // Creatures that share a creature type with equipped creature get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KondasBannerTypeBoostEffect()));
+        this.addAbility(new SimpleStaticAbility(new KondasBannerTypeBoostEffect()));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), target, false));

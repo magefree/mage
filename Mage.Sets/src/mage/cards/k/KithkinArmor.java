@@ -44,7 +44,7 @@ public final class KithkinArmor extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't be blocked by creatures with power 3 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KithkinArmorRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new KithkinArmorRestrictionEffect()));
 
         // Sacrifice Kithkin Armor: The next time a source of your choice would deal damage to enchanted creature this turn, prevent that damage.
         Ability protectionAbility = new SimpleActivatedAbility(

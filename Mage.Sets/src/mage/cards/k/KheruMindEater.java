@@ -47,7 +47,7 @@ public final class KheruMindEater extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new KheruMindEaterExileEffect(), false, true));
 
         // You may look at and play cards exiled with Kheru Mind-Eater.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KheruMindEaterEffect()));
+        this.addAbility(new SimpleStaticAbility(new KheruMindEaterEffect()));
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new KheruMindEaterLookAtCardEffect()));
     }
 

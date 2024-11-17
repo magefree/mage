@@ -33,7 +33,7 @@ public final class KinsbaileCavalier extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
     private KinsbaileCavalier(final KinsbaileCavalier card) {

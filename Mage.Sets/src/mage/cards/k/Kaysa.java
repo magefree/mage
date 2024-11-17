@@ -38,7 +38,7 @@ public final class Kaysa extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Green creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1, Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1,1, Duration.WhileOnBattlefield, filter)));
     }
 
     private Kaysa(final Kaysa card) {

@@ -45,7 +45,7 @@ public final class KrovikanWhispers extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new OrCost("{U} or {B}", new ManaCostsImpl<>("{U}"), new ManaCostsImpl<>("{B}"))));
 
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
 
         // When Krovikan Whispers is put into a graveyard from the battlefield, you lose 2 life for each age counter on it.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new LoseLifeSourceControllerEffect(new MultipliedValue(new CountersSourceCount(CounterType.AGE), 2))
