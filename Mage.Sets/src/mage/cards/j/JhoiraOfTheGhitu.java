@@ -38,7 +38,7 @@ public final class JhoiraOfTheGhitu extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}, Exile a nonland card from your hand: Put four time counters on the exiled card. If it doesn't have suspend, it gains suspend.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JhoiraOfTheGhituSuspendEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new JhoiraOfTheGhituSuspendEffect(), new GenericManaCost(2));
         ability.addCost(new ExileFromHandCost(new TargetCardInHand(new FilterNonlandCard("a nonland card from your hand"))));
         this.addAbility(ability);
 

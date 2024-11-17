@@ -28,7 +28,7 @@ public final class JestersMask extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         
         // {1}, {tap}, Sacrifice Jester's Mask: Target opponent puts the cards from their hand on top of their library. Search that player's library for that many cards. That player puts those cards into their hand, then shuffles their library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReplaceOpponentCardsInHandWithSelectedEffect(), new ManaCostsImpl<>("{1}"));       
+        Ability ability = new SimpleActivatedAbility(new ReplaceOpponentCardsInHandWithSelectedEffect(), new ManaCostsImpl<>("{1}"));       
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetOpponent());

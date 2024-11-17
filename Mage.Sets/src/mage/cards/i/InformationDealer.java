@@ -37,7 +37,7 @@ public final class InformationDealer extends CardImpl {
         // {tap}: Look at the top X cards of your library, where X is the number of Wizards on the battlefield, then put them back in any order.
         Effect effect = new LookLibraryControllerEffect(new PermanentsOnBattlefieldCount(filter));
         effect.setText("Look at the top X cards of your library, where X is the number of Wizards on the battlefield, then put them back in any order.");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(effect, new TapSourceCost()));
     }
 
     private InformationDealer(final InformationDealer card) {

@@ -54,7 +54,7 @@ public final class InfernalDenizen extends CardImpl {
                 new GainControlTargetEffect(Duration.Custom, true),
                 new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
                 "gain control of target creature for as long as {this} remains on the battlefield");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

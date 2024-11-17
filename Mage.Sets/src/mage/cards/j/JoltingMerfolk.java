@@ -31,7 +31,7 @@ public final class JoltingMerfolk extends CardImpl {
         // Fading 4
         this.addAbility(new FadingAbility(4, this));
         // Remove a fade counter from Jolting Merfolk: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(),
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(),
             new RemoveCountersSourceCost(CounterType.FADE.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

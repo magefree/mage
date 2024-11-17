@@ -36,7 +36,7 @@ public final class IslandOfWakWak extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // {tap}: Target creature with flying has base power 0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new IslandOfWakWakEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new IslandOfWakWakEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filterWithFlying));
         this.addAbility(ability);
     }

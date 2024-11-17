@@ -41,7 +41,7 @@ public final class JhoirasTimebug extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Choose target permanent you control or suspended card you own. If that permanent or card has a time counter on it, you may remove a time counter from it or put another time counter on it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JhoirasTimebugEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new JhoirasTimebugEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanentOrSuspendedCard(filter, false));
         this.addAbility(ability);
     }

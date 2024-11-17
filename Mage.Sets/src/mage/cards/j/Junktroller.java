@@ -30,7 +30,7 @@ public final class Junktroller extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // {tap}: Put target card from a graveyard on the bottom of its owner's library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PutOnLibraryTargetEffect(false), new TapSourceCost());
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);
     }

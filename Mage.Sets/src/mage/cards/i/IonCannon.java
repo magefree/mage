@@ -33,7 +33,7 @@ public final class IonCannon extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {T}: Target creature an opponent control loses spaceflight until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseAbilityTargetEffect(SpaceflightAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LoseAbilityTargetEffect(SpaceflightAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
     }
