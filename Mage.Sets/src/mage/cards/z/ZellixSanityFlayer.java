@@ -2,6 +2,7 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.ChooseABackgroundAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -9,16 +10,17 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.MillCardsTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.constants.Zone;
-import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.MilledBatchForOnePlayerEvent;
+import mage.game.events.MilledCardEvent;
 import mage.game.permanent.token.Horror2Token;
 import mage.target.TargetPlayer;
 
@@ -60,7 +62,7 @@ public final class ZellixSanityFlayer extends CardImpl {
     }
 }
 
-class ZellixSanityFlayerTriggeredAbility extends TriggeredAbilityImpl {
+class ZellixSanityFlayerTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<MilledCardEvent> {
 
     ZellixSanityFlayerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new Horror2Token()));
@@ -83,7 +85,13 @@ class ZellixSanityFlayerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEvent(MilledCardEvent event, Game game) {
+        Card card = event.getCard(game);
+        return card != null && card.isCreature(game);
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return ((MilledBatchForOnePlayerEvent) event).getCards(game).count(StaticFilters.FILTER_CARD_CREATURE, game) > 0;
+        return !getFilteredEvents((MilledBatchForOnePlayerEvent) event, game).isEmpty();
     }
 }

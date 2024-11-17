@@ -73,7 +73,7 @@ public class GameEvent implements Serializable {
          */
         ZONE_CHANGE,
         ZONE_CHANGE_GROUP, // between two specific zones only; TODO: rework all usages to ZONE_CHANGE_BATCH instead, see #11895
-        ZONE_CHANGE_BATCH, // all zone changes that occurred from a single effect
+        ZONE_CHANGE_BATCH(true), // all zone changes that occurred from a single effect
         DRAW_TWO_OR_MORE_CARDS, // event calls for multi draws only (if player draws 2+ cards at once)
         DRAW_CARD, DREW_CARD,
         EXPLORE, EXPLORED, // targetId is exploring permanent, playerId is its controller
@@ -116,11 +116,11 @@ public class GameEvent implements Serializable {
          combines all MILLED_CARD events for a player milling card at the same time in a single batch
          playerId    the id of the player whose batch it is
          */
-        MILLED_CARDS_BATCH_FOR_ONE_PLAYER,
+        MILLED_CARDS_BATCH_FOR_ONE_PLAYER(true),
         /* MILLED_CARDS_BATCH_FOR_ALL,
          combines all MILLED_CARD events for any player in a single batch
          */
-        MILLED_CARDS_BATCH_FOR_ALL,
+        MILLED_CARDS_BATCH_FOR_ALL(true),
 
         /* DAMAGED_PLAYER
          targetId    the id of the damaged player
@@ -134,18 +134,18 @@ public class GameEvent implements Serializable {
         /* DAMAGED_BATCH_FOR_PLAYERS,
          combines all player damage events to a single batch (event)
          */
-        DAMAGED_BATCH_FOR_PLAYERS,
+        DAMAGED_BATCH_FOR_PLAYERS(true),
 
         /* DAMAGED_BATCH_FOR_ONE_PLAYER
          combines all player damage events to a single batch (event) and split it per damaged player
          targetId    the id of the damaged player (playerId won't work for batch)
          */
-        DAMAGED_BATCH_FOR_ONE_PLAYER,
+        DAMAGED_BATCH_FOR_ONE_PLAYER(true),
 
         /* DAMAGED_BATCH_FOR_ALL
         includes all damage events, both permanent damage and player damage, in single batch event
          */
-        DAMAGED_BATCH_FOR_ALL,
+        DAMAGED_BATCH_FOR_ALL(true),
         /* DAMAGED_BATCH_FIRED
          * Does not contain any info on damage events, and can fire even when all damage is prevented.
          * Fire any time a DAMAGED_BATCH_FOR_ALL could have fired (combat & noncombat).
@@ -171,7 +171,7 @@ public class GameEvent implements Serializable {
          amount      amount of life loss
          flag        true = from combat damage - other from non combat damage
          */
-        LOST_LIFE_BATCH,
+        LOST_LIFE_BATCH(true),
         /* LOST_LIFE_BATCH
          combines all player life lost events to a single batch (event)
         */
@@ -426,7 +426,7 @@ public class GameEvent implements Serializable {
         /*  TAPPED_BATCH
          combine all TAPPED events occuring at the same time in a single event
          */
-        TAPPED_BATCH,
+        TAPPED_BATCH(true),
         UNTAP,
         /* UNTAPPED,
          targetId    untapped permanent
@@ -439,7 +439,7 @@ public class GameEvent implements Serializable {
         /*  UNTAPPED_BATCH
          combine all UNTAPPED events occuring at the same time in a single event
          */
-        UNTAPPED_BATCH,
+        UNTAPPED_BATCH(true),
         FLIP, FLIPPED,
         TRANSFORMING, TRANSFORMED,
         ADAPT,
@@ -494,12 +494,12 @@ public class GameEvent implements Serializable {
         /*  DAMAGED_BATCH_FOR_PERMANENTS
          combine all permanent damage events to a single batch (event)
          */
-        DAMAGED_BATCH_FOR_PERMANENTS,
+        DAMAGED_BATCH_FOR_PERMANENTS(true),
 
         /* DAMAGED_BATCH_FOR_ONE_PERMANENT
          combines all permanent damage events to a single batch (event) and split it per damaged permanent
          */
-        DAMAGED_BATCH_FOR_ONE_PERMANENT,
+        DAMAGED_BATCH_FOR_ONE_PERMANENT(true),
 
         DESTROY_PERMANENT,
         /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
@@ -515,7 +515,7 @@ public class GameEvent implements Serializable {
          flag        true if no regeneration is allowed
          */
         DESTROYED_PERMANENT,
-        SACRIFICE_PERMANENT, SACRIFICED_PERMANENT, SACRIFICED_PERMANENT_BATCH,
+        SACRIFICE_PERMANENT, SACRIFICED_PERMANENT, SACRIFICED_PERMANENT_BATCH(true),
         FIGHTED_PERMANENT,
         BATCH_FIGHT,
         EXPLOITED_CREATURE,
@@ -669,7 +669,21 @@ public class GameEvent implements Serializable {
          */
         GAVE_GIFT,
         // custom events - must store some unique data to track
-        CUSTOM_EVENT
+        CUSTOM_EVENT;
+
+        private final boolean isBatch;
+
+        EventType() {
+            this(false);
+        }
+
+        EventType(boolean isBatch) {
+            this.isBatch = isBatch;
+        }
+
+        public boolean isBatch() {
+            return isBatch;
+        }
     }
 
     public GameEvent(EventType type, UUID targetId, Ability source, UUID playerId) {
