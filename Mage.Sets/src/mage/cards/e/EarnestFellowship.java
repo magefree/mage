@@ -30,7 +30,7 @@ public final class EarnestFellowship extends CardImpl {
 
 
         // Each creature has protection from its colors.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EarnestFellowshipEffect()));
+        this.addAbility(new SimpleStaticAbility(new EarnestFellowshipEffect()));
     }
 
     private EarnestFellowship(final EarnestFellowship card) {

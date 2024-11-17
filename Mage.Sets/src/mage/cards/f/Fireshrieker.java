@@ -26,7 +26,7 @@ public final class Fireshrieker extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has double strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}")));

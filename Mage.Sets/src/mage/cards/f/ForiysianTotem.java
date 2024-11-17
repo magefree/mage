@@ -39,7 +39,7 @@ public final class ForiysianTotem extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new ForiysianTotemToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{4}{R}")));
 
         // As long as Foriysian Totem is a creature, it can block an additional creature each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new CanBlockAdditionalCreatureEffect(1), new SourceMatchesFilterCondition(new FilterCreaturePermanent()), ruleText)));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new CanBlockAdditionalCreatureEffect(1), new SourceMatchesFilterCondition(new FilterCreaturePermanent()), ruleText)));
     }
 
     private ForiysianTotem(final ForiysianTotem card) {

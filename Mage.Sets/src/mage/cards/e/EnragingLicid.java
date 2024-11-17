@@ -32,7 +32,7 @@ public final class EnragingLicid extends CardImpl {
         this.addAbility(new LicidAbility(new ColoredManaCost(ColoredManaSymbol.R), new ColoredManaCost(ColoredManaSymbol.R)));
         
         // Enchanted creature has haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private EnragingLicid(final EnragingLicid card) {

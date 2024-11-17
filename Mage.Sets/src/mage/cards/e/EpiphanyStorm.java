@@ -44,7 +44,7 @@ public final class EpiphanyStorm extends CardImpl {
         Ability drawAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{R}"));
         drawAbility.addCost(new TapSourceCost());
         drawAbility.addCost(new DiscardCardCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(drawAbility, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(drawAbility, AttachmentType.AURA)));
     }
 
     private EpiphanyStorm(final EpiphanyStorm card) {

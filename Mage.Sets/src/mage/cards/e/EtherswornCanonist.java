@@ -33,7 +33,7 @@ public final class EtherswornCanonist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Each player who has cast a nonartifact spell this turn can't cast additional nonartifact spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EtherswornCanonistReplacementEffect()), new EtherswornCanonistWatcher());
+        this.addAbility(new SimpleStaticAbility(new EtherswornCanonistReplacementEffect()), new EtherswornCanonistWatcher());
     }
 
     private EtherswornCanonist(final EtherswornCanonist card) {

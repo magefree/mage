@@ -38,7 +38,7 @@ public final class FullMoonsRise extends CardImpl {
 
 
         // Werewolf creatures you control get +1/+0 and have trample.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter));
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter));
         Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         effect.setText("and have trample");
         ability.addEffect(effect);

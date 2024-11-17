@@ -31,7 +31,7 @@ public final class ForethoughtAmulet extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(3))));
 
         // If an instant or sorcery source would deal 3 or more damage to you, it deals 2 damage to you instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ForethoughtAmuletEffect()));
+        this.addAbility(new SimpleStaticAbility(new ForethoughtAmuletEffect()));
     }
 
     private ForethoughtAmulet(final ForethoughtAmulet card) {

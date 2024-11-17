@@ -26,7 +26,7 @@ public final class Evermind extends CardImpl {
         this.color.setBlue(true);
 
         // <i>(Nonexistent mana costs can't be paid.)</i>
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("<i>(Nonexistent mana costs can't be paid.)</i>"));
+        Ability ability = new SimpleStaticAbility(new InfoEffect("<i>(Nonexistent mana costs can't be paid.)</i>"));
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 

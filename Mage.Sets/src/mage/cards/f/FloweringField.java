@@ -39,7 +39,7 @@ public final class FloweringField extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted land has \"{T}: Prevent the next 1 damage that would be dealt to any target this turn.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private FloweringField(final FloweringField card) {

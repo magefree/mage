@@ -34,7 +34,7 @@ public final class FelhideBrawler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Felhide Brawler can't block unless you control another Minotaur.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockUnlessYouControlSourceEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockUnlessYouControlSourceEffect(filter)));
     }
 
     private FelhideBrawler(final FelhideBrawler card) {

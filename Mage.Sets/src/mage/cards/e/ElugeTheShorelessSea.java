@@ -79,7 +79,7 @@ public final class ElugeTheShorelessSea extends CardImpl {
         // The first instant or sorcery spell you cast each turn costs {U} (or {1}) less to cast for each land you
         // control with a flood counter on it.
         Effect effect = new SpellsCostReductionControllerEffect(spellFilter, new ManaCostsImpl<>("{U}"), new PermanentsOnBattlefieldCount(floodLandFilter), true);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect),
+        this.addAbility(new SimpleStaticAbility(effect),
                 new ElugeTheShorelessSeaWatcher());
     }
 

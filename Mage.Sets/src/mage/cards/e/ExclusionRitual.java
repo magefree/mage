@@ -40,7 +40,7 @@ public final class ExclusionRitual extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability.setAbilityWord(AbilityWord.IMPRINT));
         // Players can't cast spells with the same name as the exiled card.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ExclusionRitualReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ExclusionRitualReplacementEffect()));
     }
 
     private ExclusionRitual(final ExclusionRitual card) {

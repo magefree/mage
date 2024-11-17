@@ -30,7 +30,7 @@ public final class EarthSurge extends CardImpl {
         //Each land gets +2/+2 as long as it's a creature.
         Effect effect = new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, true);
         effect.setText("Each land gets +2/+2 as long as it\'s a creature");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private EarthSurge(final EarthSurge card) {

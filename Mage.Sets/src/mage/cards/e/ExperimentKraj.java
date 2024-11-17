@@ -35,7 +35,7 @@ public final class ExperimentKraj extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Experiment Kraj has all activated abilities of each other creature with a +1/+1 counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ExperimentKrajEffect()));
+        this.addAbility(new SimpleStaticAbility(new ExperimentKrajEffect()));
 
         // {tap}: Put a +1/+1 counter on target creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new TapSourceCost());

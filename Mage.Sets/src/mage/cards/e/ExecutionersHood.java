@@ -26,7 +26,7 @@ public final class ExecutionersHood extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has intimidate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.EQUIPMENT)));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }

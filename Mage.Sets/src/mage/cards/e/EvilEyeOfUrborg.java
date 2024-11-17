@@ -33,7 +33,7 @@ public final class EvilEyeOfUrborg extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Non-Eye creatures you control can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAllEffect(Duration.WhileOnBattlefield, cantAttackFilter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackAllEffect(Duration.WhileOnBattlefield, cantAttackFilter)));
         
         // Whenever Evil Eye of Urborg becomes blocked by a creature, destroy that creature.
         this.addAbility(new BecomesBlockedByCreatureTriggeredAbility(new DestroyTargetEffect(), false));

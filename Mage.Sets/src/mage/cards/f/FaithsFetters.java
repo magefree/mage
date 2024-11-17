@@ -43,7 +43,7 @@ public final class FaithsFetters extends CardImpl {
         // Enchanted permanent's activated abilities can't be activated unless they're mana abilities. If enchanted permanent is a creature, it can't attack or block.
         Effect effect = new CantAttackBlockAttachedEffect(AttachmentType.AURA);
         effect.setText("Enchanted permanent can't attack or block,");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         ability.addEffect(new FaithsFettersEffect());
         this.addAbility(ability);
     }

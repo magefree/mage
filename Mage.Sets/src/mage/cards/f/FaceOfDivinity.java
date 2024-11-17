@@ -38,14 +38,14 @@ public final class FaceOfDivinity extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
 
         // As long as another Aura is attached to enchanted creature, it has first strike and lifelink.
         Effect effect1 = new ConditionalContinuousEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA),
                 FaceOfDivinityCondition.instance, "As long as another Aura is attached to enchanted creature, it has first strike");
         Effect effect2 = new ConditionalContinuousEffect(new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA),
                 FaceOfDivinityCondition.instance, "and lifelink");
-        Ability abilityBoost = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        Ability abilityBoost = new SimpleStaticAbility(effect1);
         abilityBoost.addEffect(effect2);
         this.addAbility(abilityBoost);
     }
@@ -88,5 +88,3 @@ enum FaceOfDivinityCondition implements Condition {
         return "another Aura is attached to enchanted creature";
     }
 }
-
-

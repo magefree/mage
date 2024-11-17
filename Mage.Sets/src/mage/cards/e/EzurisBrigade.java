@@ -32,7 +32,7 @@ public final class EzurisBrigade extends CardImpl {
         // Metalcraft — As long as you control three or more artifacts, Ezuri’s Brigade gets +4/+4 and has trample.
         ContinuousEffect boostSource = new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, MetalcraftCondition.instance, rule);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield), MetalcraftCondition.instance, "and has trample"));
         ability.setAbilityWord(AbilityWord.METALCRAFT);
         ability.addHint(MetalcraftHint.instance);

@@ -37,7 +37,7 @@ public final class Encrust extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect("permanent"));
+        ability = new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect("permanent"));
         Effect effect = new CantActivateAbilitiesAttachedEffect();
         effect.setText("and its activated abilities can't be activated");
         ability.addEffect(effect);

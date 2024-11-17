@@ -43,7 +43,7 @@ public final class ErebossEmissary extends CardImpl {
                 new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE))));
 
         // Enchanted creature gets +3/+3
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
     }
 
     private ErebossEmissary(final ErebossEmissary card) {

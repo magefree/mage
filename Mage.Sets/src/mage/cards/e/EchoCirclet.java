@@ -25,7 +25,7 @@ public final class EchoCirclet extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature can block an additional creature each combat. (static abilit of equipment, no ability that will be gained to equiped creature!)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EchoCircletEffect()));
+        this.addAbility(new SimpleStaticAbility(new EchoCircletEffect()));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));

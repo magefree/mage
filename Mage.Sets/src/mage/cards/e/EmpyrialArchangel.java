@@ -36,7 +36,7 @@ public final class EmpyrialArchangel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(ShroudAbility.getInstance());
         // All damage that would be dealt to you is dealt to Empyrial Archangel instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EmpyrialArchangelEffect()));
+        this.addAbility(new SimpleStaticAbility(new EmpyrialArchangelEffect()));
     }
 
     private EmpyrialArchangel(final EmpyrialArchangel card) {

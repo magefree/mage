@@ -39,7 +39,7 @@ public final class ElderscaleWurm extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ElderscaleWurmSetLifeEffect(), false));
 
         // As long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ElderscaleWurmReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ElderscaleWurmReplacementEffect()));
     }
 
     private ElderscaleWurm(final ElderscaleWurm card) {
