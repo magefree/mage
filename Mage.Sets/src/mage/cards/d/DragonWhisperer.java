@@ -35,7 +35,7 @@ public final class DragonWhisperer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {R}: Dragon Whisperer gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), 
                         Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
         

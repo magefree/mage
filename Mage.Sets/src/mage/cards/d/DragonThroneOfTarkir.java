@@ -35,7 +35,7 @@ public final class DragonThroneOfTarkir extends CardImpl {
         Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(DefenderAbility.getInstance(), AttachmentType.EQUIPMENT));
         Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, true);
         effect.setText("Other creatures you control gain trample");
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
+        Ability gainedAbility = new SimpleActivatedAbility(effect, new GenericManaCost(2));
         effect = new BoostControlledEffect(SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true);
         effect.setText("and get +X/+X until end of turn, where X is this creature's power");
         gainedAbility.addEffect(effect);

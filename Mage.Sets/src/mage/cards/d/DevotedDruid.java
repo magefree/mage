@@ -31,7 +31,7 @@ public final class DevotedDruid extends CardImpl {
         // {tap}: Add {G}.
         this.addAbility(new GreenManaAbility());
         // Put a -1/-1 counter on Devoted Druid: Untap Devoted Druid.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new PutCountersSourceCost(CounterType.M1M1.createInstance())));
+        this.addAbility(new SimpleActivatedAbility(new UntapSourceEffect(), new PutCountersSourceCost(CounterType.M1M1.createInstance())));
     }
 
     private DevotedDruid(final DevotedDruid card) {

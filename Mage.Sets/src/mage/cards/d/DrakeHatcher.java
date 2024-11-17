@@ -50,7 +50,7 @@ public final class DrakeHatcher extends CardImpl {
         this.addAbility(ability);
 
         // Remove three incubation counters from this creature: Create a 2/2 blue Drake creature token with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(
                 new DrakeToken()),
                 new RemoveCountersSourceCost(CounterType.INCUBATION.createInstance(3)))
         );

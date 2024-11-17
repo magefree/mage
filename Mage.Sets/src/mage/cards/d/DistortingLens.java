@@ -29,7 +29,7 @@ public final class DistortingLens extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {tap}: Target permanent becomes the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChangeColorEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ChangeColorEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

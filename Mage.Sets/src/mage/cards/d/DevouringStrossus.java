@@ -41,7 +41,7 @@ public final class DevouringStrossus extends CardImpl {
         );
         this.addAbility(ability);
         // Sacrifice a creature: Regenerate Devouring Strossus.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)));
     }
 

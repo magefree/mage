@@ -41,7 +41,7 @@ public final class DemonicHordes extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {tap}: Destroy target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(new FilterLandPermanent()));
         this.addAbility(ability);
 

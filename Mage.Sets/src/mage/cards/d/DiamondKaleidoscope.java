@@ -36,7 +36,7 @@ public final class DiamondKaleidoscope extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {3}, {tap}: Create a 0/1 colorless Prism artifact creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PrismToken(), 1), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new PrismToken(), 1), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

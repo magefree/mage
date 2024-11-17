@@ -40,7 +40,7 @@ public final class DarajaGriffin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Sacrifice Daraja Griffin: Destroy target black creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

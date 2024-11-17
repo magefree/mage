@@ -24,7 +24,7 @@ public final class DraconianCylix extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {2}, {tap}, Discard a card at random: Regenerate target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost(true));
         ability.addTarget(new TargetCreaturePermanent());

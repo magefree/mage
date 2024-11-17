@@ -25,7 +25,7 @@ public final class DarksteelPendant extends CardImpl {
         // Darksteel Pendant is indestructible.
         this.addAbility(IndestructibleAbility.getInstance());
         // {1}, {tap}: Scry 1.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new ScryEffect(1), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

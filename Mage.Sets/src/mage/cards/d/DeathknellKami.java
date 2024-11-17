@@ -37,7 +37,7 @@ public final class DeathknellKami extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {2}: Deathknell Kami gets +1/+1 until end of turn. Sacrifice it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,1,Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(1,1,Duration.EndOfTurn), new GenericManaCost(2));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY)));
         this.addAbility(ability);
 

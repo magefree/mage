@@ -52,7 +52,7 @@ public final class DenOfTheBugbear extends CardImpl {
                 new CreateTokenEffect(new GoblinToken(), 1, true, true), false,
                 "Whenever this creature attacks, create a 1/1 red Goblin creature token that's tapped and attacking."
         );
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(3, 2, "3/2 red Goblin creature with \"Whenever this creature attacks, create a 1/1 red Goblin creature token that's tapped and attacking.\"")
                         .withColor("R")
                         .withSubType(SubType.GOBLIN)
