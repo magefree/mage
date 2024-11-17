@@ -26,7 +26,7 @@ public final class LlanowarVanguard extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Llanowar Vanguard gets +0/+4 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
             new BoostSourceEffect(0, 4, Duration.EndOfTurn), new TapSourceCost()));
     }
 

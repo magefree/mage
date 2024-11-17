@@ -26,7 +26,7 @@ public final class FlowstoneCrusher extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {R}: Flowstone Crusher gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
             new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 

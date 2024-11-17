@@ -30,7 +30,7 @@ public final class SkywingAven extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Discard a card: Return Skywing Aven to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
             new ReturnToHandSourceEffect(),
             new DiscardCardCost()));
     }
