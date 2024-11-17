@@ -49,7 +49,7 @@ public final class SecurityBlockade extends CardImpl {
 
         // Enchanted land has "{T}: Prevent the next 1 damage that would be dealt to you this turn."
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.EndOfTurn, 1), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 
     private SecurityBlockade(final SecurityBlockade card) {

@@ -37,7 +37,7 @@ public final class SkirkOutrider extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As long as you control a Beast, Skirk Outrider gets +2/+2 and has trample.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
             new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
             new PermanentsOnTheBattlefieldCondition(filter),
             "As long as you control a Beast, {this} gets +2/+2"));

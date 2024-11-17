@@ -33,11 +33,11 @@ public final class SpectralShield extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature get's +0/+2
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(0, 2, Duration.WhileOnBattlefield)));
 
         // Enchanted creature can't be the target of spells.
         CantBeTargetedAttachedEffect cantTargetEffect = new CantBeTargetedAttachedEffect(new FilterSpell("spells"), Duration.WhileOnBattlefield, AttachmentType.AURA, TargetController.ANY);
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, cantTargetEffect);
+        Ability ability2 = new SimpleStaticAbility(cantTargetEffect);
         this.addAbility(ability2);
 
 

@@ -31,7 +31,7 @@ public final class SunQuanLordOfWu extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Creatures you control have horsemanship.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HorsemanshipAbility.getInstance(),
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(HorsemanshipAbility.getInstance(),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
     }
 

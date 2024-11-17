@@ -24,7 +24,7 @@ public final class StaffOfTheAges extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Creatures with landwalk abilities can be blocked as though they didn't have those abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StaffOfTheAgesEffect()));
+        this.addAbility(new SimpleStaticAbility(new StaffOfTheAgesEffect()));
     }
 
     private StaffOfTheAges(final StaffOfTheAges card) {

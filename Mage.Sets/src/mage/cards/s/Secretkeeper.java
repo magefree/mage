@@ -31,7 +31,7 @@ public final class Secretkeeper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As long as you have more cards in hand than each opponent, Secretkeeper gets +2/+2 and has flying.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2,2, Duration.WhileOnBattlefield),
                 MoreCardsInHandThanOpponentsCondition.instance,
                 "As long as you have more cards in hand than each opponent, Secretkeeper gets +2/+2"));

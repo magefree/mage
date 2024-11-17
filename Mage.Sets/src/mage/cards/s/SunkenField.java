@@ -44,7 +44,7 @@ public final class SunkenField extends CardImpl {
         ability.addTarget(new TargetSpell());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted land has \"{T}: Counter target spell unless its controller pays {1}.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private SunkenField(final SunkenField card) {

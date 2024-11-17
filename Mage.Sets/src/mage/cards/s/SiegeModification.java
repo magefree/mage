@@ -43,12 +43,12 @@ public final class SiegeModification extends CardImpl {
         this.addAbility(ability);
 
         // As long as enchanted permanent is a Vehicle, it's a creature in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureIfVehicleEffect()));
+        this.addAbility(new SimpleStaticAbility(new BecomesCreatureIfVehicleEffect()));
 
         // Enchanted creature gets +3/+0 and has first strike.
         Effect effect = new BoostEnchantedEffect(3, 0);
         effect.setText("Enchanted creature gets +3/+0");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
         effect.setText(" and has first strike");
         ability.addEffect(effect);

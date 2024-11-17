@@ -43,11 +43,11 @@ public final class SteelOfTheGodhead extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // As long as enchanted creature is white, it gets +1/+1 and has lifelink.
-        SimpleStaticAbility whiteAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.WHITE), "As long as enchanted creature is white, it gets +1/+1"));
+        SimpleStaticAbility whiteAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.WHITE), "As long as enchanted creature is white, it gets +1/+1"));
         whiteAbility.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.WHITE), "and has lifelink"));
         this.addAbility(whiteAbility);
         // As long as enchanted creature is blue, it gets +1/+1 and can't be blocked.
-        SimpleStaticAbility blueAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "As long as enchanted creature is blue, it gets +1/+1"));
+        SimpleStaticAbility blueAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "As long as enchanted creature is blue, it gets +1/+1"));
         Effect effect = new ConditionalRestrictionEffect(new CantBeBlockedAttachedEffect(AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.BLUE));
         effect.setText("and can't be blocked");
         blueAbility.addEffect(effect);

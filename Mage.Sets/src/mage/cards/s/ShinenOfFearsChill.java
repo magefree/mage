@@ -30,7 +30,7 @@ public final class ShinenOfFearsChill extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Shinen of Fear's Chill can't block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockSourceEffect(Duration.WhileOnBattlefield)));
         // Channel - {1}{B}, Discard Shinen of Fear's Chill: Target creature can't block this turn.
         Ability ability = new ChannelAbility("{1}{B}", new CantBlockTargetEffect(Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());

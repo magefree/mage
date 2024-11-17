@@ -31,7 +31,7 @@ public final class ScytheOfTheWretched extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 2, Duration.WhileOnBattlefield)));
 
         // Whenever a creature dealt damage by equipped creature this turn dies, return that card to the battlefield under your control. Attach Scythe of the Wretched to that creature.
         this.addAbility(new DealtDamageAttachedAndDiedTriggeredAbility(new ScytheOfTheWretchedReanimateEffect(), false));

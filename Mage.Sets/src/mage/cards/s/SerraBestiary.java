@@ -47,7 +47,7 @@ public final class SerraBestiary extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}"))));
 
         // Enchanted creature can't attack or block, and its activated abilities with {T} in their costs can't be activated.
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA));
+        Ability ability2 = new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA));
         ability2.addEffect(new SerraBestiaryRuleModifyingEffect());
         this.addAbility(ability2);
 

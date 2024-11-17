@@ -40,7 +40,7 @@ public final class StampedingHorncrest extends CardImpl {
         // Stampeding Horncrest has haste as long as you control another Dinosaur.
         Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(HasteAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter),
                 "{this} has haste as long as you control another Dinosaur");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private StampedingHorncrest(final StampedingHorncrest card) {

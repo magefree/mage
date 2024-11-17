@@ -25,7 +25,7 @@ public final class StaticOrb extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // As long as Static Orb is untapped, players can't untap more than two permanents during their untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StaticOrbEffect()));
+        this.addAbility(new SimpleStaticAbility(new StaticOrbEffect()));
     }
 
     private StaticOrb(final StaticOrb card) {

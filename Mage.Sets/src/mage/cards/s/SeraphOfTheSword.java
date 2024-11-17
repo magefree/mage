@@ -29,7 +29,7 @@ public final class SeraphOfTheSword extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Prevent all combat damage that would be dealt to Seraph of the Sword.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventCombatDamageToSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new PreventCombatDamageToSourceEffect(Duration.WhileOnBattlefield)));
     }
 
     private SeraphOfTheSword(final SeraphOfTheSword card) {

@@ -31,7 +31,7 @@ public final class ShrillHowler extends CardImpl {
         this.secondSideCardClazz = mage.cards.h.HowlingChorus.class;
 
         // Creatures with power less than Shrill Howler's power can't block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesWithLessPowerEffect()));
 
         // {5}{G}: Transform Shrill Howler.
         this.addAbility(new TransformAbility());

@@ -38,7 +38,7 @@ public final class SedgeSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Sliver creatures have "This creature gets +1/+1 as long as you control a Swamp."
-        Ability boost = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filterSwamp, 1, 1));
+        Ability boost = new SimpleStaticAbility(new BoostSourceWhileControlsEffect(filterSwamp, 1, 1));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(boost, Duration.WhileOnBattlefield,
                         filter, "All Sliver creatures have \"This creature gets +1/+1 as long as you control a Swamp.\"")));

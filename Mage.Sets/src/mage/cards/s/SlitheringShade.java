@@ -43,7 +43,7 @@ public final class SlitheringShade extends CardImpl {
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                 HellbentCondition.instance);
         effect.setText("<i>Hellbent</i> &mdash; {this} can attack as though it didn't have defender as long as you have no cards in hand");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
     }
 

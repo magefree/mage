@@ -51,7 +51,7 @@ public final class SwordOfDungeonsAndDragons extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2 and has protection from Rogues and from Clerics.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(2, 2));
         Effect effect = new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT);
         effect.setText("and has protection from Rogues and from Clerics");
         ability.addEffect(effect);

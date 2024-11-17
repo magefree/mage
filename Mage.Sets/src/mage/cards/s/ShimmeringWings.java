@@ -36,7 +36,7 @@ public final class ShimmeringWings extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature has flying. (It can't be blocked except by creatures with flying or reach.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
         
         // {U}: Return Shimmering Wings to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ColoredManaCost(ColoredManaSymbol.U)));

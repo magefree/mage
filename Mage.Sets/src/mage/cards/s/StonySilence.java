@@ -23,7 +23,7 @@ public final class StonySilence extends CardImpl {
 
 
         // Activated abilities of artifacts can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StonySilenceCantActivateEffect()));
+        this.addAbility(new SimpleStaticAbility(new StonySilenceCantActivateEffect()));
 
     }
 

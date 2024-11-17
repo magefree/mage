@@ -25,7 +25,7 @@ public final class SkyblinderStaff extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+0 and can't be blocked by creatures with flying.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 0));
         ability.addEffect(new CantBeBlockedByCreaturesWithFlyingAttachedEffect());
         this.addAbility(ability);
 

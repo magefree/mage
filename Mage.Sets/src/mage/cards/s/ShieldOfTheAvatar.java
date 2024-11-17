@@ -30,7 +30,7 @@ public final class ShieldOfTheAvatar extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // If a source would deal damage to equipped creature, prevent X of that damage, where X is the number of creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShieldOfTheAvatarPreventionEffect())
+        this.addAbility(new SimpleStaticAbility(new ShieldOfTheAvatarPreventionEffect())
                 .addHint(CreaturesYouControlHint.instance));
 
         // Equip {2}

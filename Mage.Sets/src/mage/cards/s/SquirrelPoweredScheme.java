@@ -21,7 +21,7 @@ public final class SquirrelPoweredScheme extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // Increase the result of each die you roll by 2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SquirrelPoweredSchemeEffect()));
+        this.addAbility(new SimpleStaticAbility(new SquirrelPoweredSchemeEffect()));
     }
 
     private SquirrelPoweredScheme(final SquirrelPoweredScheme card) {

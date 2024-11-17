@@ -32,7 +32,7 @@ public final class SoltariLancer extends CardImpl {
         this.addAbility(ShadowAbility.getInstance());
 
         // Soltari Lancer has first strike as long as it's attacking.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), SourceAttackingCondition.instance, "{this} has first strike as long as it's attacking")));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), SourceAttackingCondition.instance, "{this} has first strike as long as it's attacking")));
     }
 
     private SoltariLancer(final SoltariLancer card) {

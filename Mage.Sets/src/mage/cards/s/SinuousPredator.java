@@ -28,7 +28,7 @@ public final class SinuousPredator extends CardImpl {
         this.nightCard = true;
 
         // Sinuous Predator can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
     private SinuousPredator(final SinuousPredator card) {

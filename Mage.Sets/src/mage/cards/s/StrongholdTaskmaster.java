@@ -36,7 +36,7 @@ public final class StrongholdTaskmaster extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Other black creatures get -1/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1,
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(-1, -1,
             Duration.WhileOnBattlefield, filter, true)));
     }
 

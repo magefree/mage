@@ -34,7 +34,7 @@ public final class SpeederTrooper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Trooper creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
 
     }
 

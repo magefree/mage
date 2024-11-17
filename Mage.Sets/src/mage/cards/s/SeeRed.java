@@ -47,7 +47,7 @@ public final class SeeRed extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+1 and has first strike.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has first strike");
         ability.addEffect(effect);

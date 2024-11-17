@@ -29,7 +29,7 @@ public final class SterlingGrove extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{W}");
 
         // Other enchantments you control have shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, new FilterEnchantmentPermanent("enchantments"), true)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, new FilterEnchantmentPermanent("enchantments"), true)));
         
         // {1}, Sacrifice Sterling Grove: Search your library for an enchantment card and reveal that card. Shuffle your library, then put the card on top of it.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutOnLibraryEffect(new TargetCardInLibrary(new FilterEnchantmentCard("enchantment card")), true), new GenericManaCost(1));

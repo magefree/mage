@@ -43,7 +43,7 @@ public final class SpiderClimb extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +0/+3 and has reach.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 3, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(0, 3, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(ReachAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has reach");
         ability.addEffect(effect);
