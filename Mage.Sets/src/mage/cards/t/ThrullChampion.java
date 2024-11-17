@@ -32,7 +32,7 @@ public final class ThrullChampion extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Thrull creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
 
         // {tap}: Gain control of target Thrull for as long as you control Thrull Champion.
         Ability ability = new SimpleActivatedAbility(new GainControlTargetEffect(Duration.WhileControlled)

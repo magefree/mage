@@ -31,7 +31,7 @@ public final class Transcendence extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}{W}");
 
         // You don't lose the game for having 0 or less life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontLoseByZeroOrLessLifeEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new DontLoseByZeroOrLessLifeEffect(Duration.WhileOnBattlefield)));
 
         // When you have 20 or more life, you lose the game.
         this.addAbility(new TranscendenceStateTriggeredAbility());

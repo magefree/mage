@@ -45,11 +45,11 @@ public final class ThornwatchScarecrow extends CardImpl {
 
         // Thornwatch Scarecrow has wither as long as you control a green creature.
         ContinuousEffect effect = new GainAbilitySourceEffect(WitherAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, new PermanentsOnTheBattlefieldCondition(filter), rule)));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(effect, new PermanentsOnTheBattlefieldCondition(filter), rule)));
 
         // Thornwatch Scarecrow has vigilance as long as you control a white creature.
         ContinuousEffect effect2 = new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect2, new PermanentsOnTheBattlefieldCondition(filter2), rule2)));
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(effect2, new PermanentsOnTheBattlefieldCondition(filter2), rule2)));
         
     }
 

@@ -30,7 +30,7 @@ public final class TormentorsTrident extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+0 and attacks each turn if able.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 0));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(3, 0));
         Effect effect = new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT);
         effect.setText("and attacks each combat if able");
         ability.addEffect(effect);

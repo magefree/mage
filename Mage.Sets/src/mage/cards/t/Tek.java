@@ -49,7 +49,7 @@ public final class Tek extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Tek gets +0/+2 as long as you control a Plains, has flying as long as you control an Island, gets +2/+0 as long as you control a Swamp, has first strike as long as you control a Mountain, and has trample as long as you control a Forest.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostSourceEffect(0, 2, Duration.WhileOnBattlefield),
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostSourceEffect(0, 2, Duration.WhileOnBattlefield),
             new PermanentsOnTheBattlefieldCondition(filterPlains), "{this} gets +0/+2 as long as you control a Plains"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
             new PermanentsOnTheBattlefieldCondition(filterIsland), ", has flying as long as you control an Island"));

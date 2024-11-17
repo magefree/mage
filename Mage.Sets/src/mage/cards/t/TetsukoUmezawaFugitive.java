@@ -46,7 +46,7 @@ public final class TetsukoUmezawaFugitive extends CardImpl {
         // Creatures you control with power or toughness 1 or less can't be blocked.
         Effect effect = new CantBeBlockedAllEffect(filter, Duration.Custom);
         effect.setText("Creatures you control with power or toughness 1 or less can't be blocked");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private TetsukoUmezawaFugitive(final TetsukoUmezawaFugitive card) {

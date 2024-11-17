@@ -34,7 +34,7 @@ public final class TalruumPiper extends CardImpl {
         this.toughness = new MageInt(3);
 
         // All creatures with flying able to block Talruum Piper do so.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAllSourceEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private TalruumPiper(final TalruumPiper card) {

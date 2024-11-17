@@ -24,7 +24,7 @@ public final class TorchGauntlet extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 0)));
         
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));

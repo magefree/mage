@@ -34,7 +34,7 @@ public final class ThranGolem extends CardImpl {
 
         // As long as Thran Golem is enchanted, it gets +2/+2 and has flying, first strike, and trample.
         EnchantedSourceCondition enchanted = new EnchantedSourceCondition();
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
             new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), enchanted,
             "As long as {this} is enchanted, it gets +2/+2"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()),

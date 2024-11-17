@@ -31,7 +31,7 @@ public final class TakenoSamuraiGeneral extends CardImpl {
         this.toughness = new MageInt(3);
         this.addAbility(new BushidoAbility(2));
         // Each other Samurai creature you control gets +1/+1 for each point of bushido it has.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TakenoSamuraiGeneralEffect()));
+        this.addAbility(new SimpleStaticAbility(new TakenoSamuraiGeneralEffect()));
     }
 
     private TakenoSamuraiGeneral(final TakenoSamuraiGeneral card) {

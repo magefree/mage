@@ -53,7 +53,7 @@ public final class TravelingPlague extends CardImpl {
         DynamicValue boostValue = new MultipliedValue(new CountersSourceCount(CounterType.PLAGUE), -1);
         Effect effect = new BoostEnchantedEffect(boostValue, boostValue, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets -1/-1 for each plague counter on {this}");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // When enchanted creature leaves the battlefield, that creature's controller returns Traveling Plague from its owner's graveyard to the battlefield.
         this.addAbility(new TravelingPlagueTriggeredAbility());

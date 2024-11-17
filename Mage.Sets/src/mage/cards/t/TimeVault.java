@@ -35,10 +35,10 @@ public final class TimeVault extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
         
         // Time Vault doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
         
         // If you would begin your turn while Time Vault is tapped, you may skip that turn instead. If you do, untap Time Vault.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TimeVaultReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new TimeVaultReplacementEffect()));
         
         // {tap}: Take an extra turn after this one.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost()));

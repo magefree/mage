@@ -26,7 +26,7 @@ public final class TsabosWeb extends CardImpl {
         // When Tsabo's Web enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
         // Each land with an activated ability that isn't a mana ability doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TsabosWebPreventUntapEffect()));
+        this.addAbility(new SimpleStaticAbility(new TsabosWebPreventUntapEffect()));
     }
 
     private TsabosWeb(final TsabosWeb card) {

@@ -40,7 +40,7 @@ public final class TradeFederationBattleship extends CardImpl {
         this.addAbility(SpaceflightAbility.getInstance());
 
         // Droid creatures you control get +1/+1
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
 
         // {T}: Create two 1/1 colorless Droid artifact token cretures.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DroidToken(), 2), new TapSourceCost()));

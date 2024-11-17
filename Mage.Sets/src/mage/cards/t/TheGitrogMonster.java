@@ -40,7 +40,7 @@ public final class TheGitrogMonster extends CardImpl {
                 new SacrificeTargetCost(StaticFilters.FILTER_LAND))));
 
         // You may play an additional land on each of your turns.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
 
         // Whenever one or more land cards are put into your graveyard from anywhere, draw a card.
         this.addAbility(new TheGitrogMonsterTriggeredAbility());

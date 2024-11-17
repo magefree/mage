@@ -38,7 +38,7 @@ public final class ThassasEmissary extends CardImpl {
         // Whenever Thassa's Emissary or enchanted creature deals combat damage to a player, draw a card.
         this.addAbility(new ThassasEmissaryTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
         // Enchanted creature gets +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3,3)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(3,3)));
     }
 
     private ThassasEmissary(final ThassasEmissary card) {
