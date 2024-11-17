@@ -39,11 +39,11 @@ public final class KitsuneHealer extends CardImpl {
         this.toughness = new MageInt(2);
         
         // {T}: Prevent the next 1 damage that would be dealt to any target this turn.        
-        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
+        Ability firstAbility = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         firstAbility.addTarget(new TargetAnyTarget());
         this.addAbility(firstAbility);
         // {T}: Prevent all damage that would be dealt to target legendary creature this turn.
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), new TapSourceCost());
+        Ability secondAbility = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE), new TapSourceCost());
         secondAbility.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(secondAbility);
     }

@@ -37,7 +37,7 @@ public final class KnowledgeVault extends CardImpl {
         this.addAbility(ability);
 
         // {0}: Sacrifice Knowledge Vault. If you do, discard your hand, then put all cards exiled with Knowledge Vault into their owner’s hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new KnowledgeVaultReturnEffect(), new GenericManaCost(0)));
+        this.addAbility(new SimpleActivatedAbility(new KnowledgeVaultReturnEffect(), new GenericManaCost(0)));
 
         // When Knowledge Vault leaves the battlefield, put all cards exiled with Knowledge Vault into their owner’s graveyard.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(

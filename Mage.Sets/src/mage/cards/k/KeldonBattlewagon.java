@@ -58,7 +58,7 @@ public final class KeldonBattlewagon extends CardImpl {
                 .setText("sacrifice it at end of combat"), false).setTriggerPhrase("When {this} attacks, "));
 
         // Tap an untapped creature you control: Keldon Battlewagon gets +X/+0 until end of turn, where X is the power of the creature tapped this way.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new KeldonBattlewagonBoostEffect(), new KeldonBattlewagonCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(new KeldonBattlewagonBoostEffect(), new KeldonBattlewagonCost(new TargetControlledPermanent(filter))));
 
     }
 

@@ -45,7 +45,7 @@ public final class KukemssaSerpent extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
 
         // {U}, Sacrifice an Island: Target land an opponent controls becomes an Island until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn, SubType.ISLAND), new ManaCostsImpl<>("{U}"));
+        Ability ability = new SimpleActivatedAbility(new BecomesBasicLandTargetEffect(Duration.EndOfTurn, SubType.ISLAND), new ManaCostsImpl<>("{U}"));
         ability.addCost(new SacrificeTargetCost(filterControlledLand));
         ability.addTarget(new TargetLandPermanent(filterOpponentLand));
         this.addAbility(ability);

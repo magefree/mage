@@ -40,7 +40,7 @@ public final class KrosanConstrictor extends CardImpl {
         // Swampwalk
         this.addAbility(new SwampwalkAbility());
         // {tap}: Target black creature gets -2/-0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, -0, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-2, -0, Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
