@@ -1,6 +1,7 @@
 package mage.cards.h;
 
 import mage.MageInt;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.MillCardsControllerEffect;
@@ -55,7 +56,7 @@ public final class HedgeShredder extends CardImpl {
     }
 }
 
-class HedgeShredderTriggeredAbility extends TriggeredAbilityImpl {
+class HedgeShredderTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     HedgeShredderTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(true));
@@ -76,16 +77,21 @@ class HedgeShredderTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getFromZone() != Zone.LIBRARY || event.getToZone() != Zone.GRAVEYARD) {
+            return false;
+        }
+        Card card = game.getCard(event.getTargetId());
+        return card != null && card.isLand(game) && card.isOwnedBy(getControllerId());
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Set<Card> set = ((ZoneChangeBatchEvent) event).getEvents()
+        Set<Card> set = getFilteredEvents((ZoneChangeBatchEvent) event, game)
                 .stream()
-                .filter(e -> isControlledBy(e.getPlayerId()))
-                .filter(e -> e.getFromZone().match(Zone.LIBRARY))
-                .filter(e -> e.getToZone().match(Zone.GRAVEYARD))
                 .map(ZoneChangeEvent::getTargetId)
                 .map(game::getCard)
                 .filter(Objects::nonNull)
-                .filter(card -> card.isLand(game))
                 .collect(Collectors.toSet());
         if (set.isEmpty()) {
             return false;
