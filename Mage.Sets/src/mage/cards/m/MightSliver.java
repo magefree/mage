@@ -33,7 +33,7 @@ public final class MightSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Sliver creatures get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private MightSliver(final MightSliver card) {

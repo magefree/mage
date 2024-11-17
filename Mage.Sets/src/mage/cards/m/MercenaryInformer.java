@@ -47,7 +47,7 @@ public final class MercenaryInformer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Mercenary Informer can't be the target of black spells or abilities from black sources.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedSourceEffect(filterBlack, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBeTargetedSourceEffect(filterBlack, Duration.WhileOnBattlefield)));
         
         // {2}{W}: Put target nontoken Mercenary on the bottom of its owner's library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false), new ManaCostsImpl<>("{2}{W}"));

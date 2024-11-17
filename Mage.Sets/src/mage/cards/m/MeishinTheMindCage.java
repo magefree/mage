@@ -26,7 +26,7 @@ public final class MeishinTheMindCage extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // All creatures get -X/-0, where X is the number of cards in your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new SignInversionDynamicValue(CardsInControllerHandCount.instance), StaticValue.get(0), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false, "All creatures get -X/-0, where X is the number of cards in your hand")));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(new SignInversionDynamicValue(CardsInControllerHandCount.instance), StaticValue.get(0), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE, false, "All creatures get -X/-0, where X is the number of cards in your hand")));
     }
 
     private MeishinTheMindCage(final MeishinTheMindCage card) {

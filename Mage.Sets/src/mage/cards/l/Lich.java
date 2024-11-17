@@ -43,10 +43,10 @@ public final class Lich extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new LoseLifeSourceControllerEffect(ControllerLifeCount.instance), null, "As Lich enters the battlefield, you lose life equal to your life total.", null));
         
         // You don't lose the game for having 0 or less life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontLoseByZeroOrLessLifeEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new DontLoseByZeroOrLessLifeEffect(Duration.WhileOnBattlefield)));
         
         // If you would gain life, draw that many cards instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LichLifeGainReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new LichLifeGainReplacementEffect()));
         
         // Whenever you're dealt damage, sacrifice that many nontoken permanents. If you can't, you lose the game.
         this.addAbility(new LichDamageTriggeredAbility());

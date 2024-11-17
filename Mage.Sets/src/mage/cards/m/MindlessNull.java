@@ -29,7 +29,7 @@ public final class MindlessNull extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockUnlessYouControlSourceEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockUnlessYouControlSourceEffect(filter)));
     }
 
     private MindlessNull(final MindlessNull card) {

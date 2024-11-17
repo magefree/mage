@@ -48,7 +48,7 @@ public class MazesMantle extends CardImpl {
         ));
 
         //Enchanted creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
     }
 
     private MazesMantle(final MazesMantle card) {

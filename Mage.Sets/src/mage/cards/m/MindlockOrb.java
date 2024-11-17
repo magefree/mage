@@ -26,7 +26,7 @@ public final class MindlockOrb extends CardImpl {
 
 
         // Players can't search libraries.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MindlockRuleModifyingEffect()));
+        this.addAbility(new SimpleStaticAbility(new MindlockRuleModifyingEffect()));
 
     }
 

@@ -33,7 +33,7 @@ public final class LobeLobber extends CardImpl {
         Effect effect = new LobeLobberEffect();
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addTarget(new TargetPlayer());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
 
         // Equip 2
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));

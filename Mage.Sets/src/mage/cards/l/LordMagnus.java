@@ -30,10 +30,10 @@ public final class LordMagnus extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Creatures with plainswalk can be blocked as though they didn't have plainswalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LordMagnusFirstEffect()));
+        this.addAbility(new SimpleStaticAbility(new LordMagnusFirstEffect()));
 
         // Creatures with forestwalk can be blocked as though they didn't have forestwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LordMagnusSecondEffect()));
+        this.addAbility(new SimpleStaticAbility(new LordMagnusSecondEffect()));
     }
 
     private LordMagnus(final LordMagnus card) {

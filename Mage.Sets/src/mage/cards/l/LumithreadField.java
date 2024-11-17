@@ -22,7 +22,7 @@ public final class LumithreadField extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // Creatures you control get +0/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield)));
         
         // Morph {1}{W}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{1}{W}")));

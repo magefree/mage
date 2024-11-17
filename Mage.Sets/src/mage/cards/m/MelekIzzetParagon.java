@@ -43,10 +43,10 @@ public final class MelekIzzetParagon extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Play with the top card of your library revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
 
         // You may cast instant and sorcery spells from the top of your library.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayFromTopOfLibraryEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter)));
 
         // Whenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for the copy.
         this.addAbility(new MelekIzzetParagonTriggeredAbility());

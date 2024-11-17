@@ -39,7 +39,7 @@ public final class MoggSquad extends CardImpl {
 
         // Mogg Squad gets -1/-1 for each other creature on the battlefield.
         DynamicValue amount = new SignInversionDynamicValue(new PermanentsOnBattlefieldCount(filter));
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
 

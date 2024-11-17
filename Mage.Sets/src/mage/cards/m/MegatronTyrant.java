@@ -38,7 +38,7 @@ public final class MegatronTyrant extends CardImpl {
         this.addAbility(new MoreThanMeetsTheEyeAbility(this, "{1}{R}{W}{B}"));
 
         // Your opponents can't cast spells during combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MegatronTyrantCantCastSpellsEffect()));
+        this.addAbility(new SimpleStaticAbility(new MegatronTyrantCantCastSpellsEffect()));
 
         // At the beginning of your postcombat main phase, you may convert Megatron. If you do, add {C} for each 1 life your opponents have lost this turn.
         TriggeredAbility trigger = new BeginningOfPostcombatMainTriggeredAbility(

@@ -32,7 +32,7 @@ public final class LeylineOfAnticipation extends CardImpl {
         this.addAbility(LeylineAbility.getInstance());
 
         // You may cast spells as though they had flash. (You may cast them any time you could cast an instant.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private LeylineOfAnticipation(final LeylineOfAnticipation card) {

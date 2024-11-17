@@ -24,7 +24,7 @@ public final class MurderersAxe extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 2)));
 
         // Equip &mdash; Discard a card.
         this.addAbility(new EquipAbility(Outcome.AddAbility, new DiscardCardCost(), false));

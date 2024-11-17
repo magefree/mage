@@ -42,7 +42,7 @@ public final class MetamorphicAlteration extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseACreature()));
 
         // Enchanted creature is a copy of the chosen creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MetamorphicAlterationEffect()));
+        this.addAbility(new SimpleStaticAbility(new MetamorphicAlterationEffect()));
     }
 
     private MetamorphicAlteration(final MetamorphicAlteration card) {

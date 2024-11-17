@@ -41,7 +41,7 @@ public final class MirriWeatherlightDuelist extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new AddContinuousEffectToGame(new MirriWeatherlightDuelistBlockRestrictionEffect()), false));
 
         // As long as Mirri, Weatherlight Duelist is tapped, no more than one creature can attack you each combat.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new ChangeMaxNumberThatCanAttackSourceEffect(1), SourceTappedCondition.TAPPED,
                 "As long as {this} is tapped, no more than one creature can attack you each combat."));
         this.addAbility(ability);

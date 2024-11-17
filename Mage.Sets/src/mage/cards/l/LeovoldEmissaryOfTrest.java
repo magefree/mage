@@ -32,7 +32,7 @@ public final class LeovoldEmissaryOfTrest extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Each opponent can't draw more than one card each turn.  (Based on SpiritOfTheLabyrinth)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeovoldEmissaryOfTrestEffect()), new CardsAmountDrawnThisTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(new LeovoldEmissaryOfTrestEffect()), new CardsAmountDrawnThisTurnWatcher());
 
         // Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, you may draw a card.
         this.addAbility(new BecomesTargetControllerTriggeredAbility(new DrawCardSourceControllerEffect(1),

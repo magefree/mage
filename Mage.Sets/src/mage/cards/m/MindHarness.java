@@ -49,7 +49,7 @@ public final class MindHarness extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
     }
 
     private MindHarness(final MindHarness card) {

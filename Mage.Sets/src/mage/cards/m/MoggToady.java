@@ -29,10 +29,10 @@ public final class MoggToady extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Mogg Toady can't attack unless you control more creatures than defending player.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MoggToadyCantAttackEffect()));
+        this.addAbility(new SimpleStaticAbility(new MoggToadyCantAttackEffect()));
 
         // Mogg Toady can't block unless you control more creatures than attacking player.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MoggToadyCantBlockEffect()));
+        this.addAbility(new SimpleStaticAbility(new MoggToadyCantBlockEffect()));
     }
 
     private MoggToady(final MoggToady card) {

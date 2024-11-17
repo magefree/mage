@@ -37,7 +37,7 @@ public final class MoggJailer extends CardImpl {
         // Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.
         Effect effect = new CantAttackIfDefenderControlsPermanent(filter);
         effect.setText("Mogg Jailer can't attack if defending player controls an untapped creature with power 2 or less.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private MoggJailer(final MoggJailer card) {

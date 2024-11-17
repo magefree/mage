@@ -37,7 +37,7 @@ public final class LordOfTheUnreal extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Illusion creatures you control get +1/+1 and have hexproof
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false));
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false));
         ability.addEffect(new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)
                 .setText("and have hexproof"));
         this.addAbility(ability);

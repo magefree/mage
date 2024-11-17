@@ -44,7 +44,7 @@ public class MiragePhalanx extends CardImpl {
         // except it has haste and loses soulbond.
         // Exile it at end of combat.”
         Ability ability = new BeginningOfCombatTriggeredAbility(new MiragePhalanxEffect());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(ability, ruleText)));
     }
 
     private MiragePhalanx(final MiragePhalanx card) {

@@ -40,7 +40,7 @@ public final class MazeAbomination extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Multicolored creatures you control have deathtouch.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
 
     }
 

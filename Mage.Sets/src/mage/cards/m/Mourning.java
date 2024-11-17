@@ -34,7 +34,7 @@ public final class Mourning extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets -2/-0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-2, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(-2, 0)));
 
         // {B}: Return Mourning to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{B}")));

@@ -42,7 +42,7 @@ public final class MaintenanceHangar extends CardImpl {
         // Starship creatures you control and starship creatures in your graveyard have Repair 6.
         Effect effect = new GainAbilityControlledEffect(new RepairAbility(6), Duration.WhileOnBattlefield, filterPermanent);
         effect.setText("Starship creatures you control");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         ability.addEffect(new MaintenanceHangarEffect());
         this.addAbility(ability);
     }

@@ -21,7 +21,7 @@ public final class Melting extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // All lands are no longer snow.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MeltingEffect()));
+        this.addAbility(new SimpleStaticAbility(new MeltingEffect()));
     }
 
     private Melting(final Melting card) {

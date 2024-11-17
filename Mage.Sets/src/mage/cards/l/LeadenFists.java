@@ -41,7 +41,7 @@ public final class LeadenFists extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +3/+3 and doesn't untap during its controller's untap step.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield));
         Effect effect = new DontUntapInControllersUntapStepEnchantedEffect();
         effect.setText("and doesn't untap during its controller's untap step");
         ability.addEffect(effect);

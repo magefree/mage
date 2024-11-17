@@ -61,7 +61,7 @@ public final class Leviathan extends CardImpl {
         ));
 
         // Leviathan can't attack unless you sacrifice two Islands. (This cost is paid as attackers are declared.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeviathanCostToAttackBlockEffect()));
+        this.addAbility(new SimpleStaticAbility(new LeviathanCostToAttackBlockEffect()));
 
     }
         

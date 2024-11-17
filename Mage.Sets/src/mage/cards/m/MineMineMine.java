@@ -40,10 +40,10 @@ public final class MineMineMine extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, HandSizeModification.SET, TargetController.ANY)
                         .setText("Players have no maximum hand size and don't lose the game for drawing from an empty library")));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MineMineMineDontLoseEffect()));
+        this.addAbility(new SimpleStaticAbility(new MineMineMineDontLoseEffect()));
 
         // Each player can't cast more than one spell each turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.ANY)));
+        this.addAbility(new SimpleStaticAbility(new CantCastMoreThanOneSpellEffect(TargetController.ANY)));
 
         // When Mine, Mine, Mine leaves the battlefield, each player shuffles their hand and graveyard into their library.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new ShuffleHandGraveyardAllEffect(), false));

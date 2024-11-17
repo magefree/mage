@@ -33,7 +33,7 @@ public final class MidnightCovenant extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         this.addAbility(new EnchantAbility(auraTarget));
         // Enchanted creature has "{B}: This creature gets +1/+1 until end of turn."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)), AttachmentType.AURA)));
     }
 
     private MidnightCovenant(final MidnightCovenant card) {

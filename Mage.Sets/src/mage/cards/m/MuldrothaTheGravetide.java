@@ -48,7 +48,7 @@ public final class MuldrothaTheGravetide extends CardImpl {
         this.toughness = new MageInt(6);
 
         // During each of your turns, you may play up to one permanent card of each permanent type from your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MuldrothaTheGravetideCastFromGraveyardEffect())
+        this.addAbility(new SimpleStaticAbility(new MuldrothaTheGravetideCastFromGraveyardEffect())
                 .setIdentifier(MageIdentifier.MuldrothaTheGravetideWatcher), 
                 new MuldrothaTheGravetideWatcher());
     }

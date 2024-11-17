@@ -24,7 +24,7 @@ public final class MaskOfAvacyn extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+2 and has hexproof.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 2));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(1, 2));
         Effect effect = new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and has hexproof");
         ability.addEffect(effect);

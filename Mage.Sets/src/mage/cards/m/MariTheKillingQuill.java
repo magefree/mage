@@ -64,7 +64,7 @@ public class MariTheKillingQuill extends CardImpl {
         //  "Whenever this creature deals combat damage to a player, you may remove a hit counter from a card that player owns in exile.
         //   If you do, draw a card and create two Treasure tokens."
         GainAbilityControlledEffect gainDeathTouchEffect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter);
-        Ability mainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, gainDeathTouchEffect);
+        Ability mainAbility = new SimpleStaticAbility(gainDeathTouchEffect);
 
         // NOTE: Optional part is handled inside the effect
         Ability dealsDamageAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new MariTheKillingQuillDealsDamageEffect(), false, true);

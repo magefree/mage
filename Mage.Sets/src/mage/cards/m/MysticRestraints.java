@@ -38,7 +38,7 @@ public final class MysticRestraints extends CardImpl {
         // When Mystic Restraints enters the battlefield, tap enchanted creature.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect()));
         // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect()));
     }
 
     private MysticRestraints(final MysticRestraints card) {

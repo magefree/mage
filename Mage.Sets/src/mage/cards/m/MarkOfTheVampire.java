@@ -37,7 +37,7 @@ public final class MarkOfTheVampire extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +2/+2 and has lifelink.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA).setText("and has lifelink"));
         this.addAbility(ability);
     }

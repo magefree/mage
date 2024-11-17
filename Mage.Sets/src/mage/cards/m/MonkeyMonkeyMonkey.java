@@ -45,7 +45,7 @@ public final class MonkeyMonkeyMonkey extends CardImpl {
         
         // Monkey Monkey Monkey gets +1/+1 for each nonland permanent whose name begins with the chosen letter.
         MonkeyMonkeyMonkeyCount count = new MonkeyMonkeyMonkeyCount();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
 
     }
 

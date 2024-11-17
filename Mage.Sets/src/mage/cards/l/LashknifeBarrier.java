@@ -29,7 +29,7 @@ public final class LashknifeBarrier extends CardImpl {
         // When Lashknife Barrier enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
         // If a source would deal damage to a creature you control, it deals that much damage minus 1 to that creature instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LashknifeBarrierEffect()));
+        this.addAbility(new SimpleStaticAbility(new LashknifeBarrierEffect()));
     }
 
     private LashknifeBarrier(final LashknifeBarrier card) {

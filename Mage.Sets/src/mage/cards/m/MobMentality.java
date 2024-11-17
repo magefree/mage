@@ -41,7 +41,7 @@ public final class MobMentality extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
 
         // Whenever all non-Wall creatures you control attack, enchanted creature gets +X/+0 until end of turn, where X is the number of attacking creatures.
         this.addAbility(new MobMentalityTriggeredAbility());
