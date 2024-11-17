@@ -36,7 +36,7 @@ public final class GoblinChieftain extends CardImpl {
         // Other Goblin creatures you control get +1/+1 and have haste.
         Effect effect = new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, true);
         effect.setText("Other Goblin creatures you control get +1/+1");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_GOBLINS, true);
         effect.setText("and have haste");
         ability.addEffect(effect);

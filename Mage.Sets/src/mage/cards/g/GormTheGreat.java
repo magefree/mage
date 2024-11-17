@@ -37,7 +37,7 @@ public final class GormTheGreat extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Gorm the Great must be blocked if able, and Gorm must be blocked by two or more creatures if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield, 2)
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield, 2)
                 .setText("{this} must be blocked if able, and {this} must be blocked by two or more creatures if able")));
     }
 

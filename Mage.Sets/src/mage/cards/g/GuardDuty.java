@@ -36,7 +36,7 @@ public final class GuardDuty extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DefenderAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(DefenderAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private GuardDuty(final GuardDuty card) {

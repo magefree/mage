@@ -40,7 +40,7 @@ public final class GeistOfTheLonelyVigil extends CardImpl {
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                 DeliriumCondition.instance);
         effect.setText("<i>Delirium</i> &mdash; {this} can attack as though it didn't have defender as long as there are four or more card types among cards in your graveyard");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(CardTypesInGraveyardHint.YOU));
+        this.addAbility(new SimpleStaticAbility(effect).addHint(CardTypesInGraveyardHint.YOU));
     }
 
     private GeistOfTheLonelyVigil(final GeistOfTheLonelyVigil card) {

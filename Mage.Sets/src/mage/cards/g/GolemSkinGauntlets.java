@@ -30,7 +30,7 @@ public final class GolemSkinGauntlets extends CardImpl {
 
         // Equipped creature gets +1/+0 for each Equipment attached to it.
         // Equip 2 (2: Attach to target creature you control. Equip only as a sorcery. This card enters the battlefield unattached and stays on the battlefield if the creature leaves.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new GolemSkinGauntletsAttachedCount(), StaticValue.get(0), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(new GolemSkinGauntletsAttachedCount(), StaticValue.get(0), Duration.WhileOnBattlefield)));
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 

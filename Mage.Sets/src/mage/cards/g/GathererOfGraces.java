@@ -39,7 +39,7 @@ public final class GathererOfGraces extends CardImpl {
 
         // Gatherer of Graces gets +1/+1 for each Aura attached to it.
         AuraAttachedCount count = new AuraAttachedCount(1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
 
         // Sacrifice an Aura: Regenerate Gatherer of Graces
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(filter)));

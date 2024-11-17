@@ -21,11 +21,11 @@ public final class GrandMelee extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // All creatures attack each turn if able.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_ALL_CREATURES));
+        Ability ability = new SimpleStaticAbility(new AttacksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_ALL_CREATURES));
         this.addAbility(ability);
 
         // All creatures block each turn if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlocksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_ALL_CREATURES)));
+        this.addAbility(new SimpleStaticAbility(new BlocksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_ALL_CREATURES)));
     }
 
     private GrandMelee(final GrandMelee card) {

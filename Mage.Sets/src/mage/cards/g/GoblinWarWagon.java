@@ -28,7 +28,7 @@ public final class GoblinWarWagon extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Goblin War Wagon doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
         // At the beginning of your upkeep, you may pay {2}. If you do, untap Goblin War Wagon.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
             new UntapSourceEffect(), new ManaCostsImpl<>("{2}"))));

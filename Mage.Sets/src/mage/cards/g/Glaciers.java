@@ -34,7 +34,7 @@ public final class Glaciers extends CardImpl {
                 new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{U}"))));
 
         // All Mountains are Plains.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GlaciersEffect()));
+        this.addAbility(new SimpleStaticAbility(new GlaciersEffect()));
     }
 
     private Glaciers(final Glaciers card) {

@@ -29,9 +29,9 @@ public final class GaddockTeeg extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Noncreature spells with converted mana cost 4 or greater can't be cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GaddockTeegReplacementEffect4()));
+        this.addAbility(new SimpleStaticAbility(new GaddockTeegReplacementEffect4()));
         // Noncreature spells with {X} in their mana costs can't be cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GaddockTeegReplacementEffectX()));
+        this.addAbility(new SimpleStaticAbility(new GaddockTeegReplacementEffectX()));
     }
 
     private GaddockTeeg(final GaddockTeeg card) {

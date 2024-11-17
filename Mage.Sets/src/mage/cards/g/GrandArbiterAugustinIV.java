@@ -36,13 +36,13 @@ public final class GrandArbiterAugustinIV extends CardImpl {
         this.toughness = new MageInt(3);
 
         // White spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filterWhite, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filterWhite, 1)));
 
         // Blue spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filterBlue, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filterBlue, 1)));
 
         // Spells your opponents cast cost {1} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(1, new FilterCard("Spells"), TargetController.OPPONENT)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostIncreasingAllEffect(1, new FilterCard("Spells"), TargetController.OPPONENT)));
     }
 
     private GrandArbiterAugustinIV(final GrandArbiterAugustinIV card) {

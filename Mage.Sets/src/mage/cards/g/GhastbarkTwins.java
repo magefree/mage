@@ -28,7 +28,7 @@ public final class GhastbarkTwins extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Ghastbark Twins can block an additional creature each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect()));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect()));
     }
 
     private GhastbarkTwins(final GhastbarkTwins card) {

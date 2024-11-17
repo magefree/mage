@@ -35,7 +35,7 @@ public final class GriffinGuide extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 and has flying.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield, "and has flying"));
         this.addAbility(ability);
 

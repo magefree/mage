@@ -35,7 +35,7 @@ public final class GoblinBrawler extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // Goblin Brawler can't be equipped.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeEquippedSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeEquippedSourceEffect()));
     }
 
     private GoblinBrawler(final GoblinBrawler card) {

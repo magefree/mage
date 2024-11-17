@@ -28,7 +28,7 @@ public final class GorillaPack extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Gorilla Pack can't attack unless defending player controls a Forest.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.FOREST, "a Forest"))));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.FOREST, "a Forest"))));
 
         // When you control no Forests, sacrifice Gorilla Pack.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(

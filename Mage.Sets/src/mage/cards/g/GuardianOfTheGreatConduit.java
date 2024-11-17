@@ -43,7 +43,7 @@ public final class GuardianOfTheGreatConduit extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
         // As long as you control a Nissa planeswalker, Guardian of the Great Conduit gets +2/+0 and has vigilance.
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filter), rule);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        Ability ability = new SimpleStaticAbility(effect1);
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filter), "and has vigilance"));
         this.addAbility(ability);
     }

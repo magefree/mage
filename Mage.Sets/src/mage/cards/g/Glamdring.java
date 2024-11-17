@@ -43,7 +43,7 @@ public final class Glamdring extends CardImpl {
                 new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_INSTANT_AND_SORCERY), StaticValue.get(0))
                 .setText(" and gets +1/+0 for each instant and sorcery card in your graveyard.");
 
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, firstStrike);
+        Ability ability = new SimpleStaticAbility(firstStrike);
         ability.addEffect(boost);
         this.addAbility(ability);
 

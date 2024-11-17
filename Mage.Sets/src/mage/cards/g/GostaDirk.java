@@ -30,7 +30,7 @@ public final class GostaDirk extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Creatures with islandwalk can be blocked as though they didn't have islandwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GostaDirkEffect()));
+        this.addAbility(new SimpleStaticAbility(new GostaDirkEffect()));
     }
 
     private GostaDirk(final GostaDirk card) {

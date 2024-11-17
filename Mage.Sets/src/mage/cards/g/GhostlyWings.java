@@ -42,7 +42,7 @@ public final class GhostlyWings extends CardImpl {
         // Enchanted creature gets +1/+1 and has flying.
         Effect effect = new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +1/+1");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has flying");
         ability.addEffect(effect);
