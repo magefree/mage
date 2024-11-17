@@ -2,8 +2,8 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.CorruptedCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -11,6 +11,7 @@ import mage.abilities.effects.common.PutCardFromHandOntoBattlefieldEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.keyword.ToxicAbility;
 import mage.abilities.keyword.TrampleAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -19,8 +20,8 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
 import mage.game.events.DamagedBatchForPlayersEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
@@ -69,7 +70,7 @@ public final class ContaminantGrafter extends CardImpl {
     }
 }
 
-class ContaminantGrafterTriggeredAbility extends TriggeredAbilityImpl {
+class ContaminantGrafterTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     ContaminantGrafterTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ProliferateEffect(false), false);
@@ -86,18 +87,19 @@ class ContaminantGrafterTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
-        for (DamagedEvent damagedEvent : dEvent.getEvents()) {
-            if (!damagedEvent.isCombatDamage()) {
-                continue;
-            }
-            Permanent permanent = game.getPermanent(damagedEvent.getSourceId());
-            if (permanent != null && permanent.isControlledBy(getControllerId())) {
-                return true;
-            }
+    public boolean checkEvent(DamagedPlayerEvent event, Game game) {
+        if (!event.isCombatDamage()) {
+            return false;
         }
-        return false;
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        return permanent != null
+                && permanent.isCreature(game)
+                && permanent.isControlledBy(getControllerId());
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        return !getFilteredEvents((DamagedBatchForPlayersEvent) event, game).isEmpty();
     }
 
     @Override
