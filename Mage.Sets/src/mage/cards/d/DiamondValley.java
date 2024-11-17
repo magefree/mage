@@ -27,7 +27,7 @@ public final class DiamondValley extends CardImpl {
 
         Effect effect = new GainLifeEffect(SacrificeCostCreaturesToughness.instance);
         effect.setText("You gain life equal to the sacrificed creature's toughness");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
     }

@@ -39,7 +39,7 @@ public final class DuneDiviner extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}, Tap an untapped Desert you control: You gain 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(1), new GenericManaCost(1));
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }

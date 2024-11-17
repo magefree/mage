@@ -37,7 +37,7 @@ public final class DwarvenPony extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{R}, {tap}: Target Dwarf creature gains mountainwalk until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(new MountainwalkAbility(false), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));

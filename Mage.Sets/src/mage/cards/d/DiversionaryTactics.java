@@ -29,7 +29,7 @@ public final class DiversionaryTactics extends CardImpl {
     public DiversionaryTactics(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false)));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(2, 2, filter, false)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

@@ -34,7 +34,7 @@ public final class DoomedNecromancer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {B}, {tap}, Sacrifice Doomed Necromancer: Return target creature card from your graveyard to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ColoredManaCost(ColoredManaSymbol.B));
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));

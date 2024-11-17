@@ -37,7 +37,7 @@ public final class DebtorsPulpit extends CardImpl {
 
 
         // Enchanted land has "{T}: Tap target creature."
-        Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        Ability gainAbility = new SimpleActivatedAbility(new TapTargetEffect(), new TapSourceCost());
         gainAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA,
                 Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Tap target creature.\"")));

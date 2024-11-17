@@ -28,7 +28,7 @@ public final class DragonMask extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {3}, {tap}: Target creature you control gets +2/+2 until end of turn. Return it to its owner's hand at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         Effect returnEffect = new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new ReturnToHandTargetEffect()));

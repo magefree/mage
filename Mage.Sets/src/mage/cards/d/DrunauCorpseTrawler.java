@@ -36,7 +36,7 @@ public final class DrunauCorpseTrawler extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ZombieToken())));
 
         // {2}{B}: Target Zombie gains deathtouch until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{B}"));
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent(SubType.ZOMBIE, "Zombie")));
         this.addAbility(ability);
 

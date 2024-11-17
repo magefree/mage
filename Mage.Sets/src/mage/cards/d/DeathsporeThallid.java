@@ -40,7 +40,7 @@ public final class DeathsporeThallid extends CardImpl {
                 new CreateTokenEffect(new SaprolingToken()), 
                 new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
         // Sacrifice a Saproling: Target creature gets -1/-1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(-1,-1, Duration.EndOfTurn), 
                 new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCreaturePermanent());

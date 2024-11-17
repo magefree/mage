@@ -39,7 +39,7 @@ public final class DragonTyrant extends CardImpl {
         // At the beginning of your upkeep, sacrifice Dragon Tyrant unless you pay {R}{R}{R}{R}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{R}{R}{R}{R}"))));
         // {R}: Dragon Tyrant gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
     }
 
     private DragonTyrant(final DragonTyrant card) {

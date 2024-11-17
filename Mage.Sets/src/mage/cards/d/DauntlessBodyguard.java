@@ -41,7 +41,7 @@ public final class DauntlessBodyguard extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureEffect()));
 
         // Sacrifice Dauntless Bodyguard: The chosen creature gains indestructible until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DauntlessBodyguardGainAbilityEffect(), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DauntlessBodyguardGainAbilityEffect(), new SacrificeSourceCost()));
     }
 
     private DauntlessBodyguard(final DauntlessBodyguard card) {

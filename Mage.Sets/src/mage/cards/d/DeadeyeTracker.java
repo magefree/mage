@@ -33,7 +33,7 @@ public final class DeadeyeTracker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{B}, {T}: Exile two target cards from an opponent's graveyard. Deadeye Tracker explores.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new TapSourceCost());
         ability.addCost(new ManaCostsImpl<>("{1}{B}"));
         Effect effect = new ExploreSourceEffect(true, "{this}");
         ability.addEffect(effect);

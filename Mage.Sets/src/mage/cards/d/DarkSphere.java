@@ -32,7 +32,7 @@ public final class DarkSphere extends CardImpl {
         
 
         // {tap}, Sacrifice Dark Sphere: The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DarkSpherePreventionEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DarkSpherePreventionEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

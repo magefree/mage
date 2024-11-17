@@ -36,7 +36,7 @@ public final class DoggedHunter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Destroy target creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
         

@@ -28,7 +28,7 @@ public final class DeeptreadMerrow extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
                 new IslandwalkAbility(), Duration.EndOfTurn)
                 .setText("{this} gains islandwalk until end of turn"),
                 new ColoredManaCost(ColoredManaSymbol.U)));

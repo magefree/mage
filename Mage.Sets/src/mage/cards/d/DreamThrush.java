@@ -33,7 +33,7 @@ public final class DreamThrush extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {tap}: Target land becomes the basic land type of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BecomesBasicLandTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         Target target = new TargetLandPermanent();
         ability.addTarget(target);
         this.addAbility(ability);
