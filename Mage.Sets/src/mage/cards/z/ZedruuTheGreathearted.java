@@ -41,7 +41,7 @@ public final class ZedruuTheGreathearted extends CardImpl {
         this.addAbility(ability);
 
         // {R}{W}{U}: Target opponent gains control of target permanent you control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TargetPlayerGainControlTargetPermanentEffect(), new ManaCostsImpl<>("{U}{R}{W}"));
+        ability = new SimpleActivatedAbility(new TargetPlayerGainControlTargetPermanentEffect(), new ManaCostsImpl<>("{U}{R}{W}"));
         ability.addTarget(new TargetOpponent());
         ability.addTarget(new TargetControlledPermanent());
         this.addAbility(ability);

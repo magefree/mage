@@ -26,7 +26,7 @@ public final class YawgmothsBargain extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect())); 
          
         // Pay 1 life: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new PayLifeCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new PayLifeCost(1)));
     }
 
     private YawgmothsBargain(final YawgmothsBargain card) {

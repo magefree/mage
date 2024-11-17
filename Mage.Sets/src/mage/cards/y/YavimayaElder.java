@@ -36,7 +36,7 @@ public final class YavimayaElder extends CardImpl {
         // When Yavimaya Elder dies, you may search your library for up to two basic land cards, reveal them, and put them into your hand. If you do, shuffle your library.
         this.addAbility(new DiesSourceTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS), true), true));
         // {2}, Sacrifice Yavimaya Elder: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

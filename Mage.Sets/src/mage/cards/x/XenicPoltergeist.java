@@ -42,7 +42,7 @@ public final class XenicPoltergeist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Until your next upkeep, target noncreature artifact becomes an artifact creature with power and toughness each equal to its converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new XenicPoltergeistEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new XenicPoltergeistEffect(), new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent(filter));
         this.addAbility(ability);
 
