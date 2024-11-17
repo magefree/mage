@@ -28,7 +28,7 @@ public final class EnhancedSurveillance extends CardImpl {
 
         // You may look at an additional two cards each time you surveil.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new EnhancedSurveillanceReplacementEffect()
+                new EnhancedSurveillanceReplacementEffect()
         ));
 
         // Exile Enhanced Surveillance: Shuffle your graveyard into your library.
