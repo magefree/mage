@@ -37,7 +37,7 @@ public final class RidersOfGavony extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.Protect)));
 
         // Human creatures you control have protection from creatures of the chosen type.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RidersOfGavonyGainAbilityControlledEffect()));
+        this.addAbility(new SimpleStaticAbility(new RidersOfGavonyGainAbilityControlledEffect()));
     }
 
     private RidersOfGavony(final RidersOfGavony card) {

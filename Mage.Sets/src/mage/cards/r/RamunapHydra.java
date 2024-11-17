@@ -50,10 +50,10 @@ public final class RamunapHydra extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Ramunap Hydra gets +1/+1 as long as you control a Desert.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(new FilterPermanent(SubType.DESERT, "Desert"), 1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceWhileControlsEffect(new FilterPermanent(SubType.DESERT, "Desert"), 1, 1)));
 
         // Ramunap Hydra gets +1/+1 as long as there is a Desert card in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RamunapHydraBoostEffect(1, 1)).addHint(DesertControlledOrGraveyardCondition.getHint()));
+        this.addAbility(new SimpleStaticAbility(new RamunapHydraBoostEffect(1, 1)).addHint(DesertControlledOrGraveyardCondition.getHint()));
     }
 
     private RamunapHydra(final RamunapHydra card) {

@@ -31,7 +31,7 @@ public final class RiverSerpent extends CardImpl {
         this.toughness = new MageInt(5);
 
         // River Serpent can't attack unless there are five or more cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RiverSerpentEffect()));
+        this.addAbility(new SimpleStaticAbility(new RiverSerpentEffect()));
 
         // Cycling {U}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{U}")));

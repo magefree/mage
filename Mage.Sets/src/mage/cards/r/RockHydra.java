@@ -41,7 +41,7 @@ public final class RockHydra extends CardImpl {
         // Rock Hydra enters the battlefield with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new EntersBattlefieldWithXCountersEffect(CounterType.P1P1.createInstance())));
         // For each 1 damage that would be dealt to Rock Hydra, if it has a +1/+1 counter on it, remove a +1/+1 counter from it and prevent that 1 damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RockHydraEffect()));
+        this.addAbility(new SimpleStaticAbility(new RockHydraEffect()));
         // {R}: Prevent the next 1 damage that would be dealt to Rock Hydra this turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new ManaCostsImpl<>("{R}")));
         // {R}{R}{R}: Put a +1/+1 counter on Rock Hydra. Activate this ability only during your upkeep.

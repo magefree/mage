@@ -41,7 +41,7 @@ public final class RenegadeFirebrand extends CardImpl {
 
         // As long as you control a Chandra planeswalker, Renegade Firebrand gets +1/+0 and has first strike.
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filter), rule);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        Ability ability = new SimpleStaticAbility(effect1);
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filter), "and has first strike"));
         this.addAbility(ability);
     }

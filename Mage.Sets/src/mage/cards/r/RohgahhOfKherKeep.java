@@ -55,7 +55,7 @@ public final class RohgahhOfKherKeep extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RohgahhOfKherKeepEffect()));
 
         // Creatures you control named Kobolds of Kher Keep get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private RohgahhOfKherKeep(final RohgahhOfKherKeep card) {

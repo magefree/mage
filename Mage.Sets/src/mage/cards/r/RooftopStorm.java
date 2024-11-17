@@ -25,7 +25,7 @@ public final class RooftopStorm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}");
 
         // You may pay {0} rather than pay the mana cost for Zombie creature spells you cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RooftopStormRuleEffect()));
+        this.addAbility(new SimpleStaticAbility(new RooftopStormRuleEffect()));
 
     }
 

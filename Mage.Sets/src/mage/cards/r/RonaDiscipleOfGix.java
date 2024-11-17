@@ -49,7 +49,7 @@ public final class RonaDiscipleOfGix extends CardImpl {
         this.addAbility(ability);
 
         // You may cast nonland cards exiled with Rona.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RonaDiscipleOfGixPlayNonLandEffect()));
+        this.addAbility(new SimpleStaticAbility(new RonaDiscipleOfGixPlayNonLandEffect()));
 
         // {4}, {T}: Exile the top card of your library.
         ability = new SimpleActivatedAbility(

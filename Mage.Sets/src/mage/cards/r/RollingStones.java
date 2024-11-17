@@ -29,7 +29,7 @@ public final class RollingStones extends CardImpl {
 
 
         // Wall creatures can attack as though they didn't have defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new CanAttackAsThoughItDidntHaveDefenderAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private RollingStones(final RollingStones card) {

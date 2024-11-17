@@ -100,7 +100,7 @@ class QuicksilverFountainEffect extends OneShotEffect {
                     = new ConditionalContinuousEffect(becomesBasicLandTargetEffect,
                     LandHasFloodCounterCondition.instance, staticText);
             // Bug #6885 Fixed when owner/controller leaves the game the effect still applies
-            SimpleStaticAbility gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+            SimpleStaticAbility gainAbility = new SimpleStaticAbility(effect);
             gainAbility.setSourceId(landChosen.getId());
             gainAbility.getTargets().add(source.getTargets().get(0));
             game.addEffect(effect, gainAbility);

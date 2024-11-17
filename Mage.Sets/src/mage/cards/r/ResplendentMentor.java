@@ -41,7 +41,7 @@ public final class ResplendentMentor extends CardImpl {
 
         // White creatures you control have {tap}: You gain 1 life.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, filter)));
     }
 
     private ResplendentMentor(final ResplendentMentor card) {

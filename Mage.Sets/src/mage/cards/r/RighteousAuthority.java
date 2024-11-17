@@ -41,7 +41,7 @@ public final class RighteousAuthority extends CardImpl {
 
         // Enchanted creature gets +1/+1 for each card in its controller's hand.
         CardsInEnchantedControllerHandCount boost = new CardsInEnchantedControllerHandCount();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(boost, boost, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(boost, boost, Duration.WhileOnBattlefield)));
 
         // At the beginning of the draw step of enchanted creature's controller, that player draws an additional card.
         this.addAbility(new BeginningOfDrawTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new DrawCardTargetEffect(1)

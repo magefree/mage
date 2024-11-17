@@ -28,7 +28,7 @@ public final class RitesOfFlourishing extends CardImpl {
         this.addAbility(new RitesOfFlourishingAbility());
 
         // Each player may play an additional land on each of their turns.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsAllEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayAdditionalLandsAllEffect()));
     }
 
     private RitesOfFlourishing(final RitesOfFlourishing card) {

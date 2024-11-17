@@ -35,7 +35,7 @@ public final class RavosSoultender extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Other creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, true)));
 
         // At the beginning of your upkeep, you may return target creature card from your graveyard to your hand.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), true);
