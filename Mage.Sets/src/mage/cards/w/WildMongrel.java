@@ -32,7 +32,7 @@ public final class WildMongrel extends CardImpl {
         // Discard a card: Wild Mongrel gets +1/+1 and becomes the color of your choice until end of turn.
         Effect effect = new BoostSourceEffect(1, 1, Duration.EndOfTurn);
         effect.setText("{this} gets +1/+1");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new DiscardTargetCost(new TargetCardInHand()));
+        Ability ability = new SimpleActivatedAbility(effect, new DiscardTargetCost(new TargetCardInHand()));
         effect = new BecomesColorSourceEffect(Duration.EndOfTurn);
         effect.setText("and becomes the color of your choice until end of turn.");
         ability.addEffect(effect);

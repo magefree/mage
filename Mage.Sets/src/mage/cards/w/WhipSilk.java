@@ -41,7 +41,7 @@ public final class WhipSilk extends CardImpl {
         // Enchanted creature has reach.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ReachAbility.getInstance(), AttachmentType.AURA)));
         // {G}: Return Whip Silk to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ColoredManaCost(ColoredManaSymbol.G)));        
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ColoredManaCost(ColoredManaSymbol.G)));        
     }
 
     private WhipSilk(final WhipSilk card) {

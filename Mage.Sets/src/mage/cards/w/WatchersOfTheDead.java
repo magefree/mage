@@ -33,7 +33,7 @@ public final class WatchersOfTheDead extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Exile Watchers of the Dead: Each opponent chooses 2 cards in their graveyard and exiles the rest.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new WatchersOfTheDeadEffect(), new ExileSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new WatchersOfTheDeadEffect(), new ExileSourceCost()));
 
     }
 

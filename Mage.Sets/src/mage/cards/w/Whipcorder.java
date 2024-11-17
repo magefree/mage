@@ -32,7 +32,7 @@ public final class Whipcorder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {W}, {tap}: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{W}"));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());        
         this.addAbility(ability);

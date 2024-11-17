@@ -23,7 +23,7 @@ public final class Whirlermaker extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {4}, {T}: Create a 1/1 colorless Thopter artifact creature token with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterColorlessToken()), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new ThopterColorlessToken()), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

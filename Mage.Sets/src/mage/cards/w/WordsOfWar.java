@@ -28,7 +28,7 @@ public final class WordsOfWar extends CardImpl {
 
 
         // {1}: The next time you would draw a card this turn, Words of War deals 2 damage to any target instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WordsOfWarEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new WordsOfWarEffect(), new GenericManaCost(1));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

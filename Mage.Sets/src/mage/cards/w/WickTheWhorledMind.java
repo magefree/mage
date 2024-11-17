@@ -45,7 +45,7 @@ public final class WickTheWhorledMind extends CardImpl {
         ));
 
         // {U}{B}{R}, Sacrifice a Snail: Wick deals damage equal to the sacrificed creature's power to each opponent. Then draw cards equal to the sacrificed creature's power.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(SacrificeCostCreaturesPower.instance, TargetController.OPPONENT)
+        Ability ability = new SimpleActivatedAbility(new DamagePlayersEffect(SacrificeCostCreaturesPower.instance, TargetController.OPPONENT)
                 .setText("{this} deals damage equal to the sacrificed creature's power to each opponent"), new ManaCostsImpl<>("{U}{B}{R}")
         );
         ability.addEffect(new DrawCardSourceControllerEffect(SacrificeCostCreaturesPower.instance)

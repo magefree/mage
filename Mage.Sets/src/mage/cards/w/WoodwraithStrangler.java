@@ -28,7 +28,7 @@ public final class WoodwraithStrangler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Exile a creature card from your graveyard: Regenerate Woodwraith Strangler.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(),
                 new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card from your graveyard")))));
     }
 

@@ -32,7 +32,7 @@ public final class WoodweaversPuzzleknot extends CardImpl {
         this.addAbility(ability);
 
         // {2}{G}, Sacrifice Woodweaver's Puzzleknot: You gain 3 life and get {E}{E}{E}.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new ManaCostsImpl<>("{2}{G}"));
+        ability = new SimpleActivatedAbility(new GainLifeEffect(3), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(effect);
         this.addAbility(ability);
