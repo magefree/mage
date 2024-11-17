@@ -44,7 +44,7 @@ public final class RoamingThrone extends CardImpl {
         // Roaming Throne is the chosen type in addition to its other types.
         ability.addEffect(new EnterAttributeAddChosenSubtypeEffect());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddChosenSubtypeEffect()));
+        this.addAbility(new SimpleStaticAbility(new AddChosenSubtypeEffect()));
 
         // If a triggered ability of another creature you control of the chosen type triggers, it triggers an additional time.
         this.addAbility(new SimpleStaticAbility(new RoamingThroneReplacementEffect()));

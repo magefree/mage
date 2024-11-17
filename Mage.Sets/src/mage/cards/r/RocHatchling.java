@@ -39,7 +39,7 @@ public final class RocHatchling extends CardImpl {
         // At the beginning of your upkeep, remove a shell counter from Roc Hatchling.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RemoveCounterSourceEffect(CounterType.SHELL.createInstance())));
         // As long as Roc Hatchling has no shell counters on it, it gets +3/+2 and has flying.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
             new BoostSourceEffect(3, 2, Duration.WhileOnBattlefield),
             new SourceHasCounterCondition(CounterType.SHELL, 0, 0),
             "As long as {this} has no shell counters on it, it gets +3/+2"));

@@ -26,7 +26,7 @@ public final class RazorfieldRhino extends CardImpl {
 
         // Metalcraft — Razorfield Rhino gets +2/+2 as long as you control three or more artifacts.
         ContinuousEffect effect1 = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect1, MetalcraftCondition.instance, "{this} gets +2/+2 as long as you control three or more artifacts"))
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(effect1, MetalcraftCondition.instance, "{this} gets +2/+2 as long as you control three or more artifacts"))
                 .setAbilityWord(AbilityWord.METALCRAFT)
                 .addHint(MetalcraftHint.instance));
     }

@@ -37,7 +37,7 @@ public final class RhoxFaithmender extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
         
         // If you would gain life, you gain twice that much life instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RhoxFaithmenderEffect()));
+        this.addAbility(new SimpleStaticAbility(new RhoxFaithmenderEffect()));
     }
 
     private RhoxFaithmender(final RhoxFaithmender card) {

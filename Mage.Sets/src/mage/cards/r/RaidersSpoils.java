@@ -28,7 +28,7 @@ public final class RaidersSpoils extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}");
 
         // Creatures you control get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield)));
         
         // Whenever a Warrior you control deals combat damage to a player, you may pay 1 life.  If you do, draw a card.
         this.addAbility(new RaidersSpoilsTriggeredAbility());

@@ -27,7 +27,7 @@ public final class RainOfGore extends CardImpl {
 
 
         // If a spell or ability would cause its controller to gain life, that player loses that much life instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RainOfGoreEffect()));
+        this.addAbility(new SimpleStaticAbility(new RainOfGoreEffect()));
 
     }
 

@@ -42,7 +42,7 @@ public final class RedemptionArc extends CardImpl {
 
         Effect effect2 = new GoadAttachedEffect();
 
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         ability.addEffect(effect2);
         ability.addCustomOutcome(Outcome.Protect);
         this.addAbility(ability);

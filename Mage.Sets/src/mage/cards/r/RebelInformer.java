@@ -47,7 +47,7 @@ public final class RebelInformer extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Rebel Informer can't be the target of white spells or abilities from white sources.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedSourceEffect(filterWhite, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBeTargetedSourceEffect(filterWhite, Duration.WhileOnBattlefield)));
         
         // {3}: Put target nontoken Rebel on the bottom of its owner's library.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false), new GenericManaCost(3));

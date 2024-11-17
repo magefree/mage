@@ -37,7 +37,7 @@ public final class RoughshodMentor extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Green creatures you control have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
     private RoughshodMentor(final RoughshodMentor card) {

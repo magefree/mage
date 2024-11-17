@@ -42,7 +42,7 @@ public final class Ramroller extends CardImpl {
         Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(2, 0,
                 Duration.WhileOnBattlefield), condition, "{this} gets +2/+0 as long as you control another artifact.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private Ramroller(final Ramroller card) {

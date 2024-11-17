@@ -33,7 +33,7 @@ public final class RuleOfTwo extends CardImpl {
         ContinuousEffect boostEffect = new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield);
         Effect effect = new ConditionalContinuousEffect(boostEffect, new CreatureCountCondition(2, TargetController.YOU),
                 "As long as you control exactly two creatures, those creatures get +2/+0");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         ContinuousEffect deathtouchEffect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent());
         effect = new ConditionalContinuousEffect(deathtouchEffect, new CreatureCountCondition(2, TargetController.YOU),
                 "and have deathtouch");

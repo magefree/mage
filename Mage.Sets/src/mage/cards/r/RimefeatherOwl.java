@@ -67,7 +67,7 @@ public final class RimefeatherOwl extends CardImpl {
         this.addAbility(ability);
 
         // Permanents with ice counters on them are snow.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RimefeatherOwlEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new RimefeatherOwlEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private RimefeatherOwl(final RimefeatherOwl card) {
