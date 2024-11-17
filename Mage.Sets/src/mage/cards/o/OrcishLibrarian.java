@@ -36,7 +36,7 @@ public final class OrcishLibrarian extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {R}, {tap}: Look at the top eight cards of your library. Exile four of them at random, then put the rest on top of your library in any order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OrcishLibrarianEffect(), new ColoredManaCost(ColoredManaSymbol.R));
+        Ability ability = new SimpleActivatedAbility(new OrcishLibrarianEffect(), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

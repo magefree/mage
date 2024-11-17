@@ -26,10 +26,10 @@ public final class OtherworldAtlas extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {tap}: Put a charge counter on Otherworld Atlas.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
 
         // {tap}: Each player draws a card for each charge counter on Otherworld Atlas.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OtherworldAtlasDrawEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new OtherworldAtlasDrawEffect(), new TapSourceCost()));
     }
 
     private OtherworldAtlas(final OtherworldAtlas card) {

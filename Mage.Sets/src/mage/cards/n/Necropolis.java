@@ -38,7 +38,7 @@ public final class Necropolis extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Exile a creature card from your graveyard: Put X +0/+1 counters on Necropolis, where X is the exiled card's converted mana cost.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.P0P1.createInstance(0), new NecropolisValue(), true).setText("Put X +0/+1 counters on {this}, where X is the exiled card's mana value"),
                 new ExileFromGraveCost(new TargetCardInYourGraveyard(new FilterCreatureCard("a creature card")))));
     }

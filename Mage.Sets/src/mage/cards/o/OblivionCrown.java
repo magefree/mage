@@ -41,7 +41,7 @@ public final class OblivionCrown extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
         
         // Enchanted creature has "Discard a card: This creature gets +1/+1 until end of turn."
-        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),new DiscardCardCost()), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn),new DiscardCardCost()), AttachmentType.AURA)));
     }
 
     private OblivionCrown(final OblivionCrown card) {

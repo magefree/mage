@@ -24,7 +24,7 @@ public final class NightSoil extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{G}{G}");
 
         // {1}, Exile two creature cards from a single graveyard: Create a 1/1 green Saproling creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken()), new GenericManaCost(1));
         ability.addCost(new ExileFromGraveCost(new TargetCardInASingleGraveyard(2, 2, new FilterCreatureCard("creature cards"))));
         this.addAbility(ability);
     }

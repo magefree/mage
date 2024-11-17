@@ -31,7 +31,7 @@ public final class OjutaiMonument extends CardImpl {
         this.addAbility(new BlueManaAbility());
         
         // {4}{W}{U}: Ojutai Monument becomes a 4/4 white and blue Dragon artifact creature with flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect
             (new OjutaiMonumentToken(), CardType.ARTIFACT, Duration.EndOfTurn), new ManaCostsImpl<>("{4}{W}{U}")));
     }
 

@@ -29,7 +29,7 @@ public final class OutlawHolocron extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {T}: Put a charge counter on Outlaw Holocron.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new TapSourceCost()));
 
         // {T}, Remove a charge counter from Outlaw Holocron: Add {B}, {R} or {G}.
         Cost cost = new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1));

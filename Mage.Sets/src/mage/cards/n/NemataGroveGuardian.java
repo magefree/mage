@@ -38,9 +38,9 @@ public final class NemataGroveGuardian extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {2}{G}: Create a 1/1 green Saproling creature token.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl<>("{2}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new SaprolingToken()), new ManaCostsImpl<>("{2}{G}")));
         // Sacrifice a Saproling: Saproling creatures get +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false), new SacrificeTargetCost(filter1)));
+        this.addAbility(new SimpleActivatedAbility(new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false), new SacrificeTargetCost(filter1)));
     }
 
     private NemataGroveGuardian(final NemataGroveGuardian card) {

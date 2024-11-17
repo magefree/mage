@@ -48,7 +48,7 @@ public final class NuteGunray extends CardImpl {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new GenericManaCost(1)), new FilterArtifactPermanent()));
 
         // {1}{T}, Sacrifice a non-token artifact: Create a 1/1 colorless Battle Droid artifact creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DroidToken()), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new DroidToken()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
