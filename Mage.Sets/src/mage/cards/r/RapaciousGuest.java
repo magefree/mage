@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
@@ -38,7 +38,7 @@ public final class RapaciousGuest extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // Whenever one or more creatures you control deal combat damage to a player, create a Food token.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(
                 new CreateTokenEffect(new FoodToken())
         ));
 

@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -65,7 +65,7 @@ public final class FelineSovereign extends CardImpl {
     }
 }
 
-class FelineSovereignTriggeredAbility extends DealCombatDamageControlledTriggeredAbility {
+class FelineSovereignTriggeredAbility extends OneOrMoreCombatDamagePlayerTriggeredAbility {
 
     private static final FilterCreaturePermanent catFilter = new FilterCreaturePermanent(SubType.CAT, "Cats");
 

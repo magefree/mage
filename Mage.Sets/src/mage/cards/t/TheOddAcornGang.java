@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -64,7 +64,7 @@ public final class TheOddAcornGang extends CardImpl {
         )));
 
         // Whenever one or more Squirrels you control deal combat damage to a player, draw a card.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD,
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1), filter, SetTargetPointer.NONE, false));
     }
 

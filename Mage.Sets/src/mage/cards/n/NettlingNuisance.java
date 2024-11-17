@@ -11,7 +11,7 @@ import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -42,7 +42,7 @@ public final class NettlingNuisance extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever one or more Faeries you control deal combat damage to a player, that player creates a 4/2 red Pirate creature token with "This creature can't block." The token is goaded for the rest of the game.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, new NettlingNuisanceEffect(), filter, SetTargetPointer.PLAYER, false));
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(Zone.BATTLEFIELD, new NettlingNuisanceEffect(), filter, SetTargetPointer.PLAYER, false));
     }
 
     private NettlingNuisance(final NettlingNuisance card) {

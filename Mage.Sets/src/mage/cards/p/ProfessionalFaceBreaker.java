@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -37,7 +37,7 @@ public final class ProfessionalFaceBreaker extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // Whenever one or more creatures you control deal combat damage to a player, create a Treasure token.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
 
         // Sacrifice a Treasure: Exile the top card of your library. You may play that card this turn.
         this.addAbility(new SimpleActivatedAbility(

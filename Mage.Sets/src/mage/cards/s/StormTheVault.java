@@ -4,7 +4,7 @@ package mage.cards.s;
 import java.util.UUID;
 
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -33,7 +33,7 @@ public final class StormTheVault extends CardImpl {
         this.secondSideCardClazz = mage.cards.v.VaultOfCatlacan.class;
 
         // Whenever one or more creatures you control deal combat damage to a player, create a colorless Treasure artifact token with "{T}, Sacrifice this artifact: Add one mana of any color."
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(new CreateTokenEffect(new TreasureToken())));
 
         // At the beginning of your end step, if you control five or more artifacts, transform Storm the Vault.
         this.addAbility(new TransformAbility());

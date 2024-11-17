@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
@@ -47,7 +47,7 @@ public final class KastralTheWindcrested extends CardImpl {
 
         // Whenever one or more Birds you control deal combat damage to a player, choose one --
         // * You may put a Bird creature card from your hand or graveyard onto the battlefield with a finality counter on it.
-        Ability ability = new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD,
+        Ability ability = new OneOrMoreCombatDamagePlayerTriggeredAbility(Zone.BATTLEFIELD,
                 new KastralTheWindcrestedEffect(), filter, SetTargetPointer.NONE, false);
 
         // * Put a +1/+1 counter on each Bird you control.

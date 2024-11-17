@@ -3,7 +3,7 @@ package mage.cards.o;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,7 +12,6 @@ import mage.abilities.effects.keyword.InvestigateEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -26,7 +25,7 @@ public final class OngoingInvestigation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         // Whenever one or more creatures you control deal combat damage to a player, investigate.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new InvestigateEffect()));
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(new InvestigateEffect()));
 
         // {1}{G}, Exile a creature card from your graveyard: Investigate. You gain 2 life.
         Ability ability = new SimpleActivatedAbility(new InvestigateEffect().setText("investigate"), new ManaCostsImpl<>("{1}{G}"));

@@ -18,20 +18,20 @@ import java.util.stream.Collectors;
 /**
  * @author Xanderhall, xenohedron
  */
-public class OneOrMoreDealDamageTriggeredAbility extends TriggeredAbilityImpl {
+public class OneOrMoreDamagePlayerTriggeredAbility extends TriggeredAbilityImpl {
 
     private final SetTargetPointer setTargetPointer;
     private final FilterPermanent filter;
     private final boolean onlyCombat;
     private final boolean onlyControlled;
 
-    public OneOrMoreDealDamageTriggeredAbility(Effect effect, FilterPermanent filter, boolean onlyCombat, boolean onlyControlled) {
+    public OneOrMoreDamagePlayerTriggeredAbility(Effect effect, FilterPermanent filter, boolean onlyCombat, boolean onlyControlled) {
         this(Zone.BATTLEFIELD, effect, filter, onlyCombat, onlyControlled, SetTargetPointer.NONE, false);
     }
 
-    public OneOrMoreDealDamageTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter,
-                                               boolean onlyCombat, boolean onlyControlled,
-                                               SetTargetPointer setTargetPointer, boolean optional) {
+    public OneOrMoreDamagePlayerTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter,
+                                                 boolean onlyCombat, boolean onlyControlled,
+                                                 SetTargetPointer setTargetPointer, boolean optional) {
         super(zone, effect, optional);
         this.setTargetPointer = setTargetPointer;
         this.filter = filter;
@@ -40,7 +40,7 @@ public class OneOrMoreDealDamageTriggeredAbility extends TriggeredAbilityImpl {
         makeTriggerPhrase();
     }
 
-    protected OneOrMoreDealDamageTriggeredAbility(final OneOrMoreDealDamageTriggeredAbility ability) {
+    protected OneOrMoreDamagePlayerTriggeredAbility(final OneOrMoreDamagePlayerTriggeredAbility ability) {
         super(ability);
         this.setTargetPointer = ability.setTargetPointer;
         this.filter = ability.filter;
@@ -49,8 +49,8 @@ public class OneOrMoreDealDamageTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public OneOrMoreDealDamageTriggeredAbility copy() {
-        return new OneOrMoreDealDamageTriggeredAbility(this);
+    public OneOrMoreDamagePlayerTriggeredAbility copy() {
+        return new OneOrMoreDamagePlayerTriggeredAbility(this);
     }
 
     @Override
