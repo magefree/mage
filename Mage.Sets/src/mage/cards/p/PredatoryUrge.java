@@ -44,7 +44,7 @@ public final class PredatoryUrge extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted creature has \"{T}: This creature deals damage equal to its power to target creature. That creature deals damage equal to its power to this creature.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private PredatoryUrge(final PredatoryUrge card) {

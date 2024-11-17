@@ -43,11 +43,11 @@ public final class Orgg extends CardImpl {
         // Orgg can't attack if defending player controls an untapped creature with power 3 or greater.
         Effect effect = new CantAttackIfDefenderControlsPermanent(filter);
         effect.setText("{this} can't attack if defending player controls an untapped creature with power 3 or greater.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
         // Orgg can't block creatures with power 3 or greater.
         Effect effectBlock = new CantBlockCreaturesSourceEffect(filter2);
         effectBlock.setText("{this} can't block creatures with power 3 or greater.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effectBlock));
+        this.addAbility(new SimpleStaticAbility(effectBlock));
     }
 
     private Orgg(final Orgg card) {

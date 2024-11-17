@@ -46,7 +46,7 @@ public final class PrismaticWard extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
 
         // Prevent all damage that would be dealt to enchanted creature by sources of the chosen color.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PrismaticWardPreventDamageEffect()));
+        this.addAbility(new SimpleStaticAbility(new PrismaticWardPreventDamageEffect()));
     }
 
     private PrismaticWard(final PrismaticWard card) {

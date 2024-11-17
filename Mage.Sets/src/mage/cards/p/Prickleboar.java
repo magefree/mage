@@ -40,7 +40,7 @@ public final class Prickleboar extends CardImpl {
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
                 MyTurnCondition.instance,
                 "and has first strike");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect);
+        Ability ability = new SimpleStaticAbility(boostEffect);
         ability.addEffect(gainAbilityEffect);
         ability.addHint(MyTurnHint.instance);
         this.addAbility(ability);

@@ -31,7 +31,7 @@ public final class ObeliskOfUrd extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
 
         // Creatures you control of the chosen type get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ObeliskOfUrdBoostEffect()));
+        this.addAbility(new SimpleStaticAbility(new ObeliskOfUrdBoostEffect()));
     }
 
     private ObeliskOfUrd(final ObeliskOfUrd card) {

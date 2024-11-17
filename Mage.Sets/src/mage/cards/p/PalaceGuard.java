@@ -27,7 +27,7 @@ public final class PalaceGuard extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Palace Guard can block any number of creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect(0)));
     }
 
     private PalaceGuard(final PalaceGuard card) {

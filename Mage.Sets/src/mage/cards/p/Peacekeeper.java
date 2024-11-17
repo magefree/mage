@@ -31,7 +31,7 @@ public final class Peacekeeper extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}{W}"))));
 
         // Creatures can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PeacekeeperCantAttackEffect()));
+        this.addAbility(new SimpleStaticAbility(new PeacekeeperCantAttackEffect()));
     }
 
     private Peacekeeper(final Peacekeeper card) {

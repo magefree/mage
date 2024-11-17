@@ -53,7 +53,7 @@ public final class NightveilSpecter extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new NightveilSpecterExileEffect(), false, true));
 
         // You may play cards exiled with Nightveil Specter.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NightveilSpecterEffect()));
+        this.addAbility(new SimpleStaticAbility(new NightveilSpecterEffect()));
     }
 
     private NightveilSpecter(final NightveilSpecter card) {

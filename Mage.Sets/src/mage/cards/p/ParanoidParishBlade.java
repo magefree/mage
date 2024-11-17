@@ -34,7 +34,7 @@ public final class ParanoidParishBlade extends CardImpl {
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                 DeliriumCondition.instance, "<i>Delirium</i> &mdash; {this} gets +1/+0 ");
         effect.setText("<i>Delirium</i> &mdash; {this} gets +1/+0");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
                 DeliriumCondition.instance, "and has first strike as long as there are four or more card types among cards in your graveyard.");
         ability.addEffect(effect);

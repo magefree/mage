@@ -104,7 +104,7 @@ class ObsidianFireheartOneShotEffect extends OneShotEffect {
                     Duration.Custom, "");
 
             // add a new independent ability that is not reliant on the source ability
-            SimpleStaticAbility gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+            SimpleStaticAbility gainAbility = new SimpleStaticAbility(effect);
 
             // set sourcecard of the independent ability to the targeted permanent of the source ability
             gainAbility.setSourceId(targetLand.getId());

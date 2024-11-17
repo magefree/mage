@@ -34,7 +34,7 @@ public final class PlagueSliver extends CardImpl {
 
         // All Slivers have "At the beginning of your upkeep, this permanent deals 1 damage to you."
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 ability, Duration.WhileOnBattlefield,
                 filterSliver, "All Slivers have \"At the beginning of your upkeep, this permanent deals 1 damage to you.\"")));
     }

@@ -35,7 +35,7 @@ public final class Persuasion extends CardImpl {
         this.addAbility(ability);
 
         // You control enchanted creature.
-        Ability controlAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect());
+        Ability controlAbility = new SimpleStaticAbility(new ControlEnchantedEffect());
         this.addAbility(controlAbility);
     }
 

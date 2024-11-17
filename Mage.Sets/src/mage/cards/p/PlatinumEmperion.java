@@ -26,7 +26,7 @@ public final class PlatinumEmperion extends CardImpl {
         this.toughness = new MageInt(8);
 
         // Your life total can't change.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LifeTotalCantChangeControllerEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new LifeTotalCantChangeControllerEffect(Duration.WhileOnBattlefield)));
     }
 
     private PlatinumEmperion(final PlatinumEmperion card) {

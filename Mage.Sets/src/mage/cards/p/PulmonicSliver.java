@@ -34,11 +34,11 @@ public final class PulmonicSliver extends CardImpl {
         this.toughness = new MageInt(3);
 
         // All Sliver creatures have flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 FlyingAbility.getInstance(), Duration.WhileOnBattlefield,
                 filter, "All Sliver creatures have flying.")));
         // All Slivers have "If this permanent would be put into a graveyard, you may put it on top of its owner's library instead."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new PutIntoGraveFromAnywhereSourceAbility(new ReturnToLibraryPermanentEffect(true), null, null, false, true), Duration.WhileOnBattlefield,
                 filterSlivers, "All Slivers have \"If this permanent would be put into a graveyard, you may put it on top of its owner's library instead.\"")));
     }

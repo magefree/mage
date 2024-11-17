@@ -41,7 +41,7 @@ public final class PropheticRavings extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has haste and "{T}, Discard a card: Draw a card."
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA));
+        ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA));
         Ability abilityToGain = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
         abilityToGain.addCost(new DiscardCardCost());
         Effect effect = new GainAbilityAttachedEffect(abilityToGain, AttachmentType.AURA);

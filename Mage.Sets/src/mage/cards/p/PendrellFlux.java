@@ -42,7 +42,7 @@ public final class PendrellFlux extends CardImpl {
         ability = new BeginningOfUpkeepTriggeredAbility(new PendrellFluxEffect());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted creature has \"At the beginning of your upkeep, sacrifice this creature unless you pay its mana cost.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private PendrellFlux(final PendrellFlux card) {

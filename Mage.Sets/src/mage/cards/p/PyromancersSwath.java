@@ -25,7 +25,7 @@ public final class PyromancersSwath extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // If an instant or sorcery source you control would deal damage to a creature or player, it deals that much damage plus 2 to that creature or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PyromancersSwathReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new PyromancersSwathReplacementEffect()));
 
         // At the beginning of each end step, discard your hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new DiscardHandControllerEffect(), false, null));

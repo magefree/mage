@@ -38,10 +38,10 @@ public final class PilloryOfTheSleepless extends CardImpl {
         this.addAbility(ability);
 	
         // Enchanted creature can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
 	
         // Enchanted creature has "At the beginning of your upkeep, you lose 1 life."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
                 new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1)), AttachmentType.AURA)));
     }
 

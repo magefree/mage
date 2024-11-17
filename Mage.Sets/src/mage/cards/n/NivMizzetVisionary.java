@@ -37,7 +37,7 @@ public final class NivMizzetVisionary extends CardImpl {
 
         // You have no maximum hand size.
         Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Whenever a source you control deals noncombat damage to an opponent, you draw that many cards.
         this.addAbility(new NivMizzetVisionaryAbility());

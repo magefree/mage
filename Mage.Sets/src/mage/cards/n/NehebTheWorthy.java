@@ -44,11 +44,11 @@ public final class NehebTheWorthy extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Other Minotaurs you control have first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
 
         // As long as you have one or fewer cards in hand, Minotaurs you control get +2/+0.
         Condition condition = new CardsInHandCondition(ComparisonType.FEWER_THAN, 2);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, filter), condition, "As long as you have one or fewer cards in hand, Minotaurs you control get +2/+0"));
         this.addAbility(ability);
 

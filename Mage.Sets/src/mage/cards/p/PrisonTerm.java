@@ -50,7 +50,7 @@ public final class PrisonTerm extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAttackActivateAttachedEffect()));
 
         // Whenever a creature enters the battlefield under an opponent's control, you may attach Prison Term to that creature.
         this.addAbility(new EntersBattlefieldOpponentTriggeredAbility(

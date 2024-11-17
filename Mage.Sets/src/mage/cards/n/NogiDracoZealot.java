@@ -50,7 +50,7 @@ public final class NogiDracoZealot extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Dragon spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter2, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter2, 1)));
 
         // Whenever Nogi, Draco-Zealot attacks, if you control three or more Dragons, until end
         // of turn, Nogi becomes a Dragon with base power and toughness 5/5 and gains flying.

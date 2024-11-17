@@ -34,7 +34,7 @@ public final class PhyrexianRevoker extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME)));
 
         // Activated abilities of sources with the chosen name can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianRevokerEffect2()));
+        this.addAbility(new SimpleStaticAbility(new PhyrexianRevokerEffect2()));
     }
 
     private PhyrexianRevoker(final PhyrexianRevoker card) {

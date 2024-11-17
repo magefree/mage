@@ -39,7 +39,7 @@ public final class ParallaxDementia extends CardImpl {
         // Fading 1
         this.addAbility(new FadingAbility(1, this));
         // Enchanted creature gets +3/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(3, 2, Duration.WhileOnBattlefield)));
         // When Parallax Dementia leaves the battlefield, destroy enchanted creature. That creature can't be regenerated.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new DestroyAttachedToEffect("enchanted creature", true), false));
     }

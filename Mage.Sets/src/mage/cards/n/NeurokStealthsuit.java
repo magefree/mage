@@ -31,7 +31,7 @@ public final class NeurokStealthsuit extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT)));
         // {U}{U}: Attach Neurok Stealthsuit to target creature you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttachEffect(Outcome.BoostCreature, "Attach {this} to target creature you control"), new ManaCostsImpl<>("{U}{U}"));
         ability.addTarget(new TargetControlledCreaturePermanent());

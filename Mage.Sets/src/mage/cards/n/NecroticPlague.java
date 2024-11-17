@@ -47,7 +47,7 @@ public final class NecroticPlague extends CardImpl {
         ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceEffect());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature has \"At the beginning of your upkeep, sacrifice this creature.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         ability = new DiesAttachedTriggeredAbility(new NecroticPlagueEffect(), "enchanted creature", false);
         ability.setTargetAdjuster(NecroticPlagueAdjuster.instance);

@@ -26,9 +26,9 @@ public final class PhialOfGaladriel extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // If you would draw a card while you have no cards in hand, draw two cards instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhialOfGaladrielDrawEffect()));
+        this.addAbility(new SimpleStaticAbility(new PhialOfGaladrielDrawEffect()));
         // If you would gain life while you have 5 or less life, you gain twice that much life instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhialOfGaladrielLifeEffect()));
+        this.addAbility(new SimpleStaticAbility(new PhialOfGaladrielLifeEffect()));
 
         // {T}: Add one mana of any color.
         this.addAbility(new AnyColorManaAbility());

@@ -37,7 +37,7 @@ public final class NimbusWings extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget));
         // Enchanted creature gets +1/+2 and has flying.
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield));
+        SimpleStaticAbility ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA).setText("and has flying"));
         this.addAbility(ability);
     }

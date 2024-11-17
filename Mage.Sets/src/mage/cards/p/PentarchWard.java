@@ -42,7 +42,7 @@ public final class PentarchWard extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
         
         // Enchanted creature has protection from the chosen color. This effect doesn't remove Pentarch Ward.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorAttachedEffect(true)));
+        this.addAbility(new SimpleStaticAbility(new ProtectionChosenColorAttachedEffect(true)));
     }
 
     private PentarchWard(final PentarchWard card) {

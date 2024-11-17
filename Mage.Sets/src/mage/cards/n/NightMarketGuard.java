@@ -26,7 +26,7 @@ public final class NightMarketGuard extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Night Market Guard can block an additional creature each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.WhileOnBattlefield, 1)));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect(Duration.WhileOnBattlefield, 1)));
     }
 
     private NightMarketGuard(final NightMarketGuard card) {
