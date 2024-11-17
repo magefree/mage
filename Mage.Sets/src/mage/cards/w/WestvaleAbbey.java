@@ -37,14 +37,14 @@ public final class WestvaleAbbey extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {5}, {T}, Pay 1 life: Create a 1/1 white and black Human Cleric creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanClericToken()), new GenericManaCost(5));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new HumanClericToken()), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
         ability.addCost(new PayLifeCost(1));
         this.addAbility(ability);
 
         // {5}, {T}, Sacrifice five creatures: Transform Westvale Abbey and untap it.
         this.addAbility(new TransformAbility());
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new GenericManaCost(5));
+        ability = new SimpleActivatedAbility(new TransformSourceEffect(), new GenericManaCost(5));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(5, StaticFilters.FILTER_PERMANENT_CREATURES));
         ability.addEffect(new UntapSourceEffect().setText("untap it").concatBy(", then"));

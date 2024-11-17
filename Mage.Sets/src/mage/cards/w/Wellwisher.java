@@ -35,7 +35,7 @@ public final class Wellwisher extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: You gain 1 life for each Elf on the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(new PermanentsOnBattlefieldCount(filter))
+        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter))
                 .setText("you gain 1 life for each Elf on the battlefield"), new TapSourceCost())
                 .addHint(new ValueHint("Elves on the battlefield", new PermanentsOnBattlefieldCount(filter))));
     }

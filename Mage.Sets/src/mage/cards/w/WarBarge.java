@@ -32,7 +32,7 @@ public final class WarBarge extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
         
         // {3}: Target creature gains islandwalk until end of turn. When War Barge leaves the battlefield this turn, destroy that creature. A creature destroyed this way can't be regenerated.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(new IslandwalkAbility(false), Duration.EndOfTurn), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(new IslandwalkAbility(false), Duration.EndOfTurn), new GenericManaCost(3));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new WarBargeDelayedTriggeredAbility()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

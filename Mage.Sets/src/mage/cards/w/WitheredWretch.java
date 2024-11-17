@@ -29,7 +29,7 @@ public final class WitheredWretch extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}: Exile target card from a graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new GenericManaCost(1));
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);
     }

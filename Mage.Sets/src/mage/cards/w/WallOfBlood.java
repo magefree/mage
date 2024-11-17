@@ -27,7 +27,7 @@ public final class WallOfBlood extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
         this.addAbility(DefenderAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new PayLifeCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), new PayLifeCost(1)));
         // Pay 1 life: Wall of Blood gets +1/+1 until end of turn.
     }
 

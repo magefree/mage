@@ -41,7 +41,7 @@ public final class WallOfMulch extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // {G}, Sacrifice a Wall: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{G}"));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{G}"));
         ability.addCost(new SacrificeTargetCost(filter));
         this.addAbility(ability);
         
