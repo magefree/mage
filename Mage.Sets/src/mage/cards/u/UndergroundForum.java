@@ -42,7 +42,7 @@ public final class UndergroundForum extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {T}: Put a bounty counter on target creature.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), new GenericManaCost(2));
         ability2.addCost(new TapSourceCost());
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);

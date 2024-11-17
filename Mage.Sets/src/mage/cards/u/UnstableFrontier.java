@@ -28,7 +28,7 @@ public final class UnstableFrontier extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Target land you control becomes the basic land type of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesBasicLandTargetEffect(Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BecomesBasicLandTargetEffect(Duration.EndOfTurn), new TapSourceCost());
         Target target = new TargetControlledPermanent(new FilterControlledLandPermanent());
         ability.addTarget(target);
         this.addAbility(ability);

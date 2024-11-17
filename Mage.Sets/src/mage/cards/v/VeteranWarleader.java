@@ -50,7 +50,7 @@ public final class VeteranWarleader extends CardImpl {
                 .addHint(CreaturesYouControlHint.instance));
 
         // Tap another untapped Ally you control: Veteran Warleader gains your choice of first strike, vigilance, or trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Source,
+        this.addAbility(new SimpleActivatedAbility(new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Source,
                 FirstStrikeAbility.getInstance(), VigilanceAbility.getInstance(), TrampleAbility.getInstance()),
                 new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true))));
     }

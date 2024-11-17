@@ -35,7 +35,7 @@ public final class VastwoodAnimist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target land you control becomes an X/X Elemental creature until end of turn, where X is the number of Allies you control. It's still a land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VastwoodAnimistEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new VastwoodAnimistEffect(), new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent(new FilterControlledLandPermanent()));
         this.addAbility(ability);
     }

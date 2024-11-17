@@ -48,11 +48,11 @@ public final class VodalianWarMachine extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Tap an untapped Merfolk you control: Vodalian War Machine can attack this turn as though it didn't have defender.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
+        Ability ability = new SimpleActivatedAbility(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.addAbility(ability);
 
         // Tap an untapped Merfolk you control: Vodalian War Machine gets +2/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true))));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(2, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, true))));
 
         // When Vodalian War Machine dies, destroy all Merfolk tapped this turn to pay for its abilities.
         this.addAbility(new DiesSourceTriggeredAbility(new VodalianWarMachineEffect()), new VodalianWarMachineWatcher());

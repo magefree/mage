@@ -29,7 +29,7 @@ public final class ViashinoFangtail extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {tap}: Viashino Fangtail deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

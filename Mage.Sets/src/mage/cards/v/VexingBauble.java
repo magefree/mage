@@ -29,7 +29,7 @@ public final class VexingBauble extends CardImpl {
                 new CounterTargetEffect().setText("counter that spell")));
 
         // {1}, {T}, Sacrifice Vexing Bauble: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1),
                 new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

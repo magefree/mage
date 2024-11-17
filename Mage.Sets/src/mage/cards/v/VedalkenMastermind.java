@@ -30,7 +30,7 @@ public final class VedalkenMastermind extends CardImpl {
         this.toughness = new MageInt(2);
         
         // {U}{Tap}: Return target permanent you control to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent());
         this.addAbility(ability);

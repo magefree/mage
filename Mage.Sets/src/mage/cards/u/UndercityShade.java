@@ -26,7 +26,7 @@ public final class UndercityShade extends CardImpl {
 
         this.addAbility(FearAbility.getInstance());
         // {B}: Undercity Shade gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
     private UndercityShade(final UndercityShade card) {
