@@ -36,7 +36,7 @@ public final class Batterskull extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.EQUIPMENT)));
 
         // {3}: Return Batterskull to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new GenericManaCost(3)));
 
         // Equip {5}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5), false));

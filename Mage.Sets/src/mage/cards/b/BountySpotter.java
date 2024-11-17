@@ -36,7 +36,7 @@ public final class BountySpotter extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // {T}: Put a bounty counter on target creature an opponent controls.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), new TapSourceCost());
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
 

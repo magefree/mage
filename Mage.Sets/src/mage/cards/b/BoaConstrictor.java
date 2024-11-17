@@ -27,7 +27,7 @@ public final class BoaConstrictor extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {tap}: Boa Constrictor gets +3/+3 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, 3, Duration.EndOfTurn), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(3, 3, Duration.EndOfTurn), new TapSourceCost()));
     }
 
     private BoaConstrictor(final BoaConstrictor card) {

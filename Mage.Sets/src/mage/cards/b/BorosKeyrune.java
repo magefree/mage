@@ -30,7 +30,7 @@ public final class BorosKeyrune extends CardImpl {
         this.addAbility(new WhiteManaAbility());
 
         // {R}{W}: Boros Keyrune becomes a 1/1 red and white Soldier artifact creature with double strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(1, 1, "1/1 red and white Soldier artifact creature with double strike")
                         .withColor("RW")
                         .withSubType(SubType.SOLDIER)

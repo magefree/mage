@@ -37,7 +37,7 @@ public final class BrutalDeceiver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}: Look at the top card of your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new LookLibraryControllerEffect(), new GenericManaCost(1)));
 
         // {2}: Reveal the top card of your library. If it's a land card, {this} gets +1/+0 and gains first strike until end of turn.
         this.addAbility(new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new BrutalDeceiverEffect(), new ManaCostsImpl<>("{2}")));

@@ -39,7 +39,7 @@ public final class BenBenAkkiHermit extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter), true), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(new PermanentsOnBattlefieldCount(filter), true), new TapSourceCost());
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }
