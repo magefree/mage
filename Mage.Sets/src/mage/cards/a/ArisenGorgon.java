@@ -37,7 +37,6 @@ public final class ArisenGorgon extends CardImpl {
 
         // Arisen Gorgon has deathtouch as long as you control a Liliana planeswalker.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(
                                 DeathtouchAbility.getInstance(),

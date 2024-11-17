@@ -34,7 +34,6 @@ public final class CrashOfRhinoBeetles extends CardImpl {
 
         // Crash of Rhino Beetles gets +10/+10 as long as you control ten or more lands.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new BoostSourceEffect(
                                 10, 10, Duration.WhileOnBattlefield

@@ -52,7 +52,6 @@ public final class PalladiaMorsTheRuiner extends CardImpl {
 
         // Palladia-Mors, the Ruiner has hexproof if it hasn't dealt damage yet.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(HexproofAbility.getInstance()),
                         PalladiaMorsTheRuinerCondition.instance,

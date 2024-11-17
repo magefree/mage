@@ -47,7 +47,6 @@ public final class WitheringHex extends CardImpl {
         // Enchanted creature gets -1/-1 for each plague counter on Withering Hex.
         DynamicValue value = new MultipliedValue(new CountersSourceCount(CounterType.PLAGUE), -1);
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostEnchantedEffect(value, value, Duration.WhileOnBattlefield)
                         .setText("Enchanted creature gets -1/-1 for each plague counter on {this}.")
         ));

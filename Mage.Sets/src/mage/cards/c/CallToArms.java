@@ -50,7 +50,6 @@ public final class CallToArms extends CardImpl {
 
         // White creatures get +1/+1 as long as the chosen color is the most common color among nontoken permanents the chosen player controls but isn't tied for most common.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new CallToArmsEffect()
         ));
 

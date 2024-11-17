@@ -43,7 +43,6 @@ public final class ChaosLord extends CardImpl {
 
         // Chaos Lord can attack as though it had haste unless it entered the battlefield this turn.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ChaosLordEffect()));
 
     }

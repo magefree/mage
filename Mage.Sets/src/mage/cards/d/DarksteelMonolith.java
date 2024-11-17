@@ -34,7 +34,6 @@ public final class DarksteelMonolith extends CardImpl {
 
         // Once each turn, you may pay {0} rather than pay the mana cost for a colorless spell that you cast from your hand.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new DarksteelMonolithAddAltCostEffect()
         ));
     }

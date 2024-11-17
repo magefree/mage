@@ -44,7 +44,6 @@ public final class TendershootDryad extends CardImpl {
 
         // Saprolings you control get +2/+2 as long as you have the city's blessing.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter),
                         CitysBlessingCondition.instance,

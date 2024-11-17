@@ -36,7 +36,6 @@ public final class DovinsAutomaton extends CardImpl {
 
         // As long as you control a Dovin planeswalker, Dovin's Automaton gets +2/+2 and has vigilance.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                         condition, "As long as you control a Dovin planeswalker, {this} gets +2/+2"

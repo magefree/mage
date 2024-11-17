@@ -44,7 +44,6 @@ public final class CennsTactician extends CardImpl {
         
         // Each creature you control with a +1/+1 counter on it can block an additional creature each combat.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new CanBlockAdditionalCreatureAllEffect(
                         1,
                         StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1,

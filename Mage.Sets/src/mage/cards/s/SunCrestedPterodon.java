@@ -45,7 +45,6 @@ public final class SunCrestedPterodon extends CardImpl {
         ContinuousEffect effect = new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield);
         Condition condition = new PermanentsOnTheBattlefieldCondition(filterAnotherDino);
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(effect, condition,
                 "{this} has vigilance as long as you control another Dinosaur.")
         ));

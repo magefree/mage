@@ -31,7 +31,6 @@ public final class GearsmithProdigy extends CardImpl {
 
         // Gearsmith Prodigy gets +1/+0 as long as you control an artifact.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                         new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT),

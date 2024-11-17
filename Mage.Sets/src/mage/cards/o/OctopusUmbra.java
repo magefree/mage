@@ -51,7 +51,6 @@ public final class OctopusUmbra extends CardImpl {
         Ability abilityToAdd = new AttacksTriggeredAbility(new TapTargetEffect(), true);
         abilityToAdd.addTarget(new TargetCreaturePermanent(filter));
         ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new SetBasePowerToughnessEnchantedEffect(8, 8)
         );
         ability.addEffect(new GainAbilityAttachedEffect(

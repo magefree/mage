@@ -33,7 +33,6 @@ public final class KarganDragonrider extends CardImpl {
 
         // As long as you control a Dragon, Kargan Dragonrider has flying.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(
                                 FlyingAbility.getInstance(),

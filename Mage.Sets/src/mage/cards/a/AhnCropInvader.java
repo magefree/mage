@@ -38,7 +38,6 @@ public final class AhnCropInvader extends CardImpl {
 
         // As long as it's your turn, Ahn-Crop Invader has first strike.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(
                                 FirstStrikeAbility.getInstance(),

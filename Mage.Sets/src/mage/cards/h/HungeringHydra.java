@@ -39,7 +39,6 @@ public final class HungeringHydra extends CardImpl {
 
         // Hungering Hydra can't be blocked by more than one creature.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new CantBeBlockedByMoreThanOneSourceEffect()
         ));
 

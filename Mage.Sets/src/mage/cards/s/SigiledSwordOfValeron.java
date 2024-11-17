@@ -34,7 +34,6 @@ public final class SigiledSwordOfValeron extends CardImpl {
 
         // Equipped creature gets +2/+0, has vigilance, and is a Knight in addition to its other types.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostEquippedEffect(2, 0)
         );
         ability.addEffect(new GainAbilityAttachedEffect(

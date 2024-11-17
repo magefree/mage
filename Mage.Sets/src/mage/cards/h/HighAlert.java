@@ -31,7 +31,6 @@ public final class HighAlert extends CardImpl {
 
         // Creatures you control can attack as though they didn't have defender.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new CanAttackAsThoughItDidntHaveDefenderAllEffect(
                         Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_CONTROLLED_CREATURES

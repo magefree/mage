@@ -33,7 +33,6 @@ public final class RighteousWar extends CardImpl {
 
         // White creatures you control have protection from black.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(
                         ProtectionAbility.from(ObjectColor.BLACK),
                         Duration.WhileOnBattlefield,
@@ -43,7 +42,6 @@ public final class RighteousWar extends CardImpl {
 
         // Black creatures you control have protection from white.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(
                         ProtectionAbility.from(ObjectColor.WHITE),
                         Duration.WhileOnBattlefield,

@@ -50,7 +50,6 @@ public final class SnowDevil extends CardImpl {
 
         // Enchanted creature has first strike as long as it's blocking and you control a snow land.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilityAttachedEffect(
                                 FirstStrikeAbility.getInstance(),

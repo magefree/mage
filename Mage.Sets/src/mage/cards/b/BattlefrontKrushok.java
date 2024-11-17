@@ -33,7 +33,6 @@ public final class BattlefrontKrushok extends CardImpl {
 
         // Each creature you control with a +1/+1 counter on it can't be blocked by more than one creature.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new CantBeBlockedByMoreThanOneAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE_P1P1)));
     }
 

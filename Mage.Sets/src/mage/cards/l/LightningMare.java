@@ -43,7 +43,6 @@ public final class LightningMare extends CardImpl {
 
         // Lightning Mare can't be blocked by blue creatures.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new CantBeBlockedByCreaturesSourceEffect(
                         filter, Duration.WhileOnBattlefield
                 )

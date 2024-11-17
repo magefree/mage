@@ -40,7 +40,6 @@ public final class SinstrikersWill extends CardImpl {
         ability = new SimpleActivatedAbility(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE), new TapSourceCost());
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityAttachedEffect(
                         ability,
                         AttachmentType.AURA,

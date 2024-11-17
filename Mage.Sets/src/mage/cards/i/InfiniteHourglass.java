@@ -36,7 +36,6 @@ public final class InfiniteHourglass extends CardImpl {
 
         // All creatures get +1/+0 for each time counter on Infinite Hourglass.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostAllEffect(
                         new CountersSourceCount(CounterType.TIME),
                         StaticValue.get(0),

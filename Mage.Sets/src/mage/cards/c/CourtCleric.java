@@ -40,7 +40,6 @@ public final class CourtCleric extends CardImpl {
 
         // Court Cleric gets +1/+1 as long as you control an Ajani planeswalker.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
                         new PermanentsOnTheBattlefieldCondition(filter),
