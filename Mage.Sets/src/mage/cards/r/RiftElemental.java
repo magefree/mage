@@ -40,7 +40,7 @@ public final class RiftElemental extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{R}, Remove a time counter from a permanent you control or suspended card you own: Rift Elemental gets +2/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new RiftElementalCost());
         this.addAbility(ability);
     }

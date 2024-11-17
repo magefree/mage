@@ -52,7 +52,7 @@ public final class RaziaBorosArchangel extends CardImpl {
 
         // {T}: The next 3 damage that would be dealt to target creature you control this turn is dealt to another target creature instead.
         Effect effect = new RaziaBorosArchangelEffect(Duration.EndOfTurn, 3);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         Target target = new TargetControlledCreaturePermanent();
         target.setTargetTag(1);
         ability.addTarget(target);

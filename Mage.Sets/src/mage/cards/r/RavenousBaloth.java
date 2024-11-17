@@ -29,7 +29,7 @@ public final class RavenousBaloth extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Sacrifice a Beast: You gain 4 life.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(4),
+        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(4),
                 new SacrificeTargetCost(filter)));
     }
 

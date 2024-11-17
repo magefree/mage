@@ -36,7 +36,7 @@ public final class Recantation extends CardImpl {
         // {U}, Sacrifice Recantation: Return up to X target permanents to their owners' hands, where X is the number of verse counters on Recantation.
         Effect effect = new ReturnToHandTargetEffect();
         effect.setText("Return up to X target permanents to their owners' hands, where X is the number of verse counters on {this}.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{U}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{U}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(0, 0, new FilterPermanent("up to X target permanents, where X is the number of verse counters on {this}."), false));
         ability.setTargetAdjuster(new TargetsCountAdjuster(new CountersSourceCount(CounterType.VERSE)));

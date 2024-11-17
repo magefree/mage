@@ -33,7 +33,7 @@ public final class RiverHoopoe extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}{G}{U}: You gain 2 life and draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new ManaCostsImpl<>("{3}{G}{U}"));
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(2), new ManaCostsImpl<>("{3}{G}{U}"));
         Effect effect = new DrawCardSourceControllerEffect(1);
         effect.setText("and draw a card");
         ability.addEffect(effect);

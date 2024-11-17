@@ -39,7 +39,7 @@ public final class RuinsOfOranRief extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {T}: Put a +1/+1 counter on target colorless creature that entered the battlefield this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
 
         this.addAbility(ability);
