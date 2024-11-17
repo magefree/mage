@@ -42,7 +42,6 @@ public final class StonehewerGiant extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
         // {1}{W}, {tap}: Search your library for an Equipment card and put it onto the battlefield. Attach it to a creature you control. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new StonehewerGiantEffect(),
                 new ManaCostsImpl<>("{1}{W}")
         );

@@ -48,7 +48,6 @@ public final class KithkinArmor extends CardImpl {
 
         // Sacrifice Kithkin Armor: The next time a source of your choice would deal damage to enchanted creature this turn, prevent that damage.
         Ability protectionAbility = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new KithkinArmorPreventionEffect(),
                 new KithkinArmorCost());
         protectionAbility.addTarget(new TargetSource());

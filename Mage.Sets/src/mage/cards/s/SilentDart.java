@@ -24,7 +24,6 @@ public final class SilentDart extends CardImpl {
 
         // {4}, {T}, Sacrifice Silent Dart: It deals 3 damage to target creature.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new DamageTargetEffect(3, "it"),
                 new GenericManaCost(4)
         );

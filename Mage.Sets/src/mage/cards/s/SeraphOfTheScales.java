@@ -34,7 +34,6 @@ public final class SeraphOfTheScales extends CardImpl {
 
         // {W}: Seraph of the Scales gains vigilance until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(
                         VigilanceAbility.getInstance(),
                         Duration.EndOfTurn
@@ -43,7 +42,6 @@ public final class SeraphOfTheScales extends CardImpl {
 
         // {B}: Seraph of the Scales gains deathtouch until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(
                         DeathtouchAbility.getInstance(),
                         Duration.EndOfTurn

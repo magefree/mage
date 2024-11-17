@@ -30,7 +30,6 @@ public final class KnowledgeVault extends CardImpl {
 
         // {2}, {T}: Exile the top card of your library face down.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new ExileCardsFromTopOfLibraryControllerEffect(1, true, true),
                 new GenericManaCost(2));
         ability.addCost(new TapSourceCost());

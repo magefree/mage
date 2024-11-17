@@ -28,7 +28,6 @@ public final class GargoyleCastle extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         // {T}, {5}, Sacrifice Gargoyle Castle: Put a 3/4 colorless Gargoyle artifact creature token with flying onto the battlefield.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new CreateTokenEffect(new GargoyleToken()),
                 new ManaCostsImpl<>("{5}"));
         ability.addCost(new TapSourceCost());

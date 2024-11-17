@@ -26,7 +26,6 @@ public final class EvolvingWilds extends CardImpl {
 
         // {T}, Sacrifice Evolving Wilds: Search your library for a basic land card and put it onto the battlefield tapped. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

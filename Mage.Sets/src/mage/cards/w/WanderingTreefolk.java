@@ -33,7 +33,6 @@ public final class WanderingTreefolk extends CardImpl {
 
         // Domain -- {7}{G}: Seek a creature card. This ability costs {1} less to activate for each basic land type among lands you control.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new SeekCardEffect(StaticFilters.FILTER_CARD_CREATURE),
                 new ManaCostsImpl<>("{7}{G}")
         );

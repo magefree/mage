@@ -57,7 +57,6 @@ public final class TajicLegionsEdge extends CardImpl {
 
         // {R}{W}: Tajic, Legion's Edge gains first strike until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(
                         FirstStrikeAbility.getInstance(),
                         Duration.EndOfTurn

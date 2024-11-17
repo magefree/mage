@@ -47,7 +47,6 @@ public final class RuthlessKnave extends CardImpl {
 
         // Sacrifice three Treasures: Draw a card.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 new SacrificeTargetCost(3, filter)
         ));

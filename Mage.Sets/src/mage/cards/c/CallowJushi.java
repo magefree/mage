@@ -75,7 +75,6 @@ class JarakuTheInterloper extends TokenImpl {
 
         // Remove a ki counter from Jaraku the Interloper: Counter target spell unless its controller pays {2}.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new CounterUnlessPaysEffect(new GenericManaCost(2)),
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
         ability.addTarget(new TargetSpell());

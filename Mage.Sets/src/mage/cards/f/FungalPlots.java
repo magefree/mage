@@ -45,7 +45,6 @@ public final class FungalPlots extends CardImpl {
 
         // Sacrifice two Saprolings: You gain 2 life and draw a card.
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainLifeEffect(2),
                 new SacrificeTargetCost(2, filter2)
         );

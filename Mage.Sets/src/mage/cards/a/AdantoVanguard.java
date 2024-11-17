@@ -41,7 +41,6 @@ public final class AdantoVanguard extends CardImpl {
 
         // Pay 4 life: Adanto Vanguard gains indestructible until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
                 new PayLifeCost(4)
         ));

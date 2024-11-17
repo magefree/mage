@@ -40,7 +40,6 @@ public final class MidnightSnack extends CardImpl {
 
         // {2}{B}, Sacrifice this enchantment: Target opponent loses X life, where X is the amount of life you gained this turn.
         Ability sacrificeAbility = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new LoseLifeTargetEffect(ControllerGainedLifeCount.instance),
                 new ManaCostsImpl<>("{2}{B}")
         );

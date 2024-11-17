@@ -49,7 +49,6 @@ public final class FiresOfMountDoom extends CardImpl {
         // {2}{R}: Exile the top card of your library. You may play that card this turn.
         // When you play a card this way, Fires of Mount Doom deals 2 damage to each player.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new FiresOfMountDoomEffect(),
                 new ManaCostsImpl<>("{2}{R}")
         ).setIdentifier(MageIdentifier.FiresOfMountDoomAlternateCast));

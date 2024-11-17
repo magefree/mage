@@ -36,7 +36,6 @@ public final class GoblinBomb extends CardImpl {
 
         // Remove five fuse counters from Goblin Bomb, Sacrifice Goblin Bomb: Goblin Bomb deals 20 damage to target player.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new DamageTargetEffect(20),
                 new RemoveCountersSourceCost(CounterType.FUSE.createInstance(5))
         );

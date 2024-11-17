@@ -33,7 +33,6 @@ public final class Helldozer extends CardImpl {
 
         // {B}{B}{B}, {tap}: Destroy target land. If that land was nonbasic, untap Helldozer.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new HelldozerEffect(),
                 new ManaCostsImpl<>("{B}{B}{B}"));
         ability.addTarget(new TargetLandPermanent());

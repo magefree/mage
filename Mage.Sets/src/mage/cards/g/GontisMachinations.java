@@ -34,7 +34,6 @@ public final class GontisMachinations extends CardImpl {
 
         // Pay {E}{E}, Sacrifice Gonti's Machinations: Each opponent loses 3 life. You gain life equal to the life lost this way.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new LoseLifeOpponentsYouGainLifeLostEffect(3),
                 new PayEnergyCost(2));
         ability.addCost(new SacrificeSourceCost());

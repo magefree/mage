@@ -58,7 +58,6 @@ public final class RukarumelBiologist extends CardImpl {
 
         // {3}, {T}: Create a 1/1 colorless Sliver creature token.
         ActivatedAbility activated = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SliverToken()),
                 new ManaCostsImpl<>("{3}")
         );

@@ -40,7 +40,6 @@ public final class LedevChampion extends CardImpl {
 
         // {3}{G}{W}: Create a 1/1 white soldier creature token with lifelink.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SoldierLifelinkToken()),
                 new ManaCostsImpl<>("{3}{G}{W}")
         ));

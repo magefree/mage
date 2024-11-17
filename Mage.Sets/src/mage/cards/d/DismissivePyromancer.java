@@ -33,7 +33,6 @@ public final class DismissivePyromancer extends CardImpl {
 
         // {R}, {T}, Discard a card: Draw a card.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 new ManaCostsImpl<>("{R}")
         );
@@ -43,7 +42,6 @@ public final class DismissivePyromancer extends CardImpl {
 
         // {2}{R}, {T}, Sacrifice Dismissive Pyromancer: It deals 4 damage to target creature.
         ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new DamageTargetEffect(4, "it"),
                 new ManaCostsImpl<>("{2}{R}")
         );

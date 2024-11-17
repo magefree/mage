@@ -42,7 +42,6 @@ public final class SoulRansom extends CardImpl {
 
         // Discard two cards: Soul Ransom's controller sacrifices it, then draws two cards. Only any opponent may activate this ability.
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new SoulRansomEffect(),
                 new DiscardTargetCost(
                         new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS)

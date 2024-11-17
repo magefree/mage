@@ -42,7 +42,6 @@ public final class Musician extends CardImpl {
 
         // : Put a music counter on target creature. If it doesn’t have "At the beginning of your upkeep, destroy this creature unless you pay {1} for each music counter on it," it gains that ability.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.MUSIC.createInstance()),
                 new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

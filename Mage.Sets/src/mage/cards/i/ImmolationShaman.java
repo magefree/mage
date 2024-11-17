@@ -43,7 +43,6 @@ public final class ImmolationShaman extends CardImpl {
 
         // {3}{R}{R}: Immolation Shaman gets +3/+3 and gains menace until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(
                         3, 3, Duration.EndOfTurn
                 ).setText("{this} gets +3/+3"),

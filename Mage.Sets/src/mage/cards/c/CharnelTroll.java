@@ -53,7 +53,6 @@ public final class CharnelTroll extends CardImpl {
 
         // {B}{G}, Discard a creature card: Put a +1/+1 counter on Morgue Troll.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
                 new ManaCostsImpl<>("{B}{G}")
         );
