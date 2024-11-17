@@ -27,7 +27,7 @@ public final class ElkinBottle extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {3}, {tap}, Exile the top card of your library. Until the beginning of your next upkeep, you may play that card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElkinBottleExileEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new ElkinBottleExileEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

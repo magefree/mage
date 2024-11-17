@@ -39,7 +39,7 @@ public final class ElvishBranchbender extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Until end of turn, target Forest becomes an X/X Treefolk creature in addition to its other types, where X is the number of Elves you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElvishBranchbenderEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ElvishBranchbenderEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

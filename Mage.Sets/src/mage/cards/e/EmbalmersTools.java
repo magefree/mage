@@ -40,7 +40,7 @@ public final class EmbalmersTools extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new EmbalmersToolsEffect()));
 
         // Tap an untapped Zombie you control: Target player puts the top card of their library into their graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MillCardsTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(new MillCardsTargetEffect(1), new TapTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

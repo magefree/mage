@@ -33,7 +33,7 @@ public final class EdificeOfAuthority extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {1}, {T}: Target creature can't attack this turn. Put a brick counter on Edifice of Authority.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
+        Ability ability = new SimpleActivatedAbility(new CantAttackTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new AddCountersSourceEffect(CounterType.BRICK.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());

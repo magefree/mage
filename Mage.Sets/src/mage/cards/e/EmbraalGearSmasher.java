@@ -33,7 +33,7 @@ public final class EmbraalGearSmasher extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}, Sacrifice an artifact: Embraal Gear-Smasher deals 2 damage to each opponent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(2, TargetController.OPPONENT), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamagePlayersEffect(2, TargetController.OPPONENT), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT));
         this.addAbility(ability);
 

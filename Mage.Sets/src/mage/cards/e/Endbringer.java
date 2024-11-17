@@ -37,18 +37,18 @@ public final class Endbringer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new UntapSourceDuringEachOtherPlayersUntapStepEffect()));
         
         // {T}: Endbringer deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         
         // {C}, {T}: Target creature can't attack or block this turn.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantAttackBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{C}"));
+        ability = new SimpleActivatedAbility(new CantAttackBlockTargetEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{C}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
         // {C}{C}, {T}: Draw a card.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{C}{C}"));
+        ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{C}{C}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

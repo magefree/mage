@@ -43,7 +43,7 @@ public final class EnslavedDwarf extends CardImpl {
         // {R}, Sacrifice Enslaved Dwarf: Target black creature gets +1/+0 and gains first strike until end of turn.
         Effect effect = new BoostTargetEffect(1,0,Duration.EndOfTurn);
         effect.setText("Target black creature gets +1/+0");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{R}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{R}"));
         ability.addCost(new SacrificeSourceCost());
         effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains first strike until end of turn");
