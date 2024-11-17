@@ -23,14 +23,14 @@ public final class VibratingSphere extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // As long as it's your turn, creatures you control get +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield),
                 MyTurnCondition.instance,
                 "During your turn, creatures you control get +2/+0"))
                 .addHint(MyTurnHint.instance));
 
         // As long as it's not your turn, creatures you control get -0/-2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostControlledEffect(0, -2, Duration.WhileOnBattlefield),
                 NotMyTurnCondition.instance,
                 "During turns other than yours, creatures you control get -0/-2")));

@@ -45,7 +45,7 @@ public final class UnbridledGrowth extends CardImpl {
         Ability gainedAbility = new AnyColorManaAbility(new TapSourceCost());
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA);
         effect.setText("Enchanted land has \"{T}: Add one mana of any color.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Sacrifice Unbridled Growth: Draw a card.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new SacrificeSourceCost()));

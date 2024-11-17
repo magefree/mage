@@ -27,7 +27,7 @@ public final class UrzasFilter extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Multicolored spells cost up to {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionAllEffect(filter, 2, true)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionAllEffect(filter, 2, true)));
     }
 
     private UrzasFilter(final UrzasFilter card) {

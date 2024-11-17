@@ -34,7 +34,7 @@ public final class VoiceOfAll extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
 
         // Voice of All has protection from the chosen color.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new ProtectionChosenColorSourceEffect()));
     }
 
     private VoiceOfAll(final VoiceOfAll card) {

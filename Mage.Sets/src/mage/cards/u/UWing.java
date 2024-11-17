@@ -33,13 +33,13 @@ public final class UWing extends CardImpl {
         this.addAbility(SpaceflightAbility.getInstance());
 
         // As long as U-Wing is tapped, it gets +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                 SourceTappedCondition.TAPPED,
                 "As long as {this} is tapped, it gets +1/+0")));
 
         // As long as U-Wing is untapped, it gets +0/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(0, 1, Duration.WhileOnBattlefield),
                 SourceTappedCondition.UNTAPPED,
                 "As long as {this} is untapped, it gets +0/+1")));

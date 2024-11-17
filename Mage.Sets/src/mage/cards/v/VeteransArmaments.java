@@ -38,7 +38,7 @@ public final class VeteransArmaments extends CardImpl {
         Ability gainedAbility = new AttacksOrBlocksTriggeredAbility(new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn), false);
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT);
         effect.setText("Equipped creature has \"Whenever this creature attacks or blocks, it gets +1/+1 until end of turn for each attacking creature.\"");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         this.addAbility(ability);
 
         // Whenever a Soldier creature enters the battlefield, you may attach Veteran's Armaments to it.

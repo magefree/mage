@@ -28,7 +28,7 @@ public final class Upwelling extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // Mana pools don't empty as steps and phases end.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UpwellingRuleEffect()));
+        this.addAbility(new SimpleStaticAbility(new UpwellingRuleEffect()));
 
     }
 

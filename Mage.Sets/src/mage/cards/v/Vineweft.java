@@ -39,7 +39,7 @@ public final class Vineweft extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1,Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1,1,Duration.WhileOnBattlefield)));
 
         // {4}{G}: Return Vineweft from your graveyard to your hand.
         this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ManaCostsImpl<>("{4}{G}")));

@@ -39,7 +39,7 @@ public final class UnflinchingCourage extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 and has trample and lifelink.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA).setText("and has trample"));
         ability.addEffect(new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA).setText("and lifelink"));
         this.addAbility(ability);

@@ -32,7 +32,7 @@ public final class VigeanHydropon extends CardImpl {
         this.addAbility(new GraftAbility(this, 5));
 
         // Vigean Hydropon can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VigeanHydroponEffect()));
+        this.addAbility(new SimpleStaticAbility(new VigeanHydroponEffect()));
     }
 
     private VigeanHydropon(final VigeanHydropon card) {

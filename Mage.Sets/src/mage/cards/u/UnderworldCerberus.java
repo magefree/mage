@@ -31,10 +31,10 @@ public final class UnderworldCerberus extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Underworld Cerberus can't be blocked except by three or more creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(3)));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByOneEffect(3)));
 
         // Cards in graveyards can't be the targets of spells or abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedCardsGraveyardsEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeTargetedCardsGraveyardsEffect()));
 
         // When Underworld Cerberus dies, exile it and each player returns all creature cards from their graveyard to their hand.
         Ability ability = new DiesSourceTriggeredAbility(new ExileSourceEffect());

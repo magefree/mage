@@ -27,7 +27,7 @@ public final class VirulentPlague extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{B}");
 
         // Creature tokens get -2/-2
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-2,-2, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(-2,-2, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private VirulentPlague(final VirulentPlague card) {
