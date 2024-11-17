@@ -1,12 +1,12 @@
-
 package mage.cards.n;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
+import mage.abilities.common.DealsDamageSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCostCondition;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -14,19 +14,19 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
-/**
- *
- * @author LoneFox
+import java.util.UUID;
 
+/**
+ * @author LoneFox
  */
 public final class Necravolver extends CardImpl {
 
     public Necravolver(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.CREATURE},"{2}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.VOLVER);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
@@ -36,14 +36,14 @@ public final class Necravolver extends CardImpl {
         kickerAbility.addKickerCost("{W}");
         this.addAbility(kickerAbility);
         // If Necravolver was kicked with its {1}{G} kicker, it enters with two +1/+1 counters on it and with trample.
-        Ability ability = new  EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
-            new KickedCostCondition("{1}{G}"), "If {this} was kicked with its {1}{G} kicker, it enters with two +1/+1 counters on it and with trample.", "");
+        Ability ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)),
+                new KickedCostCondition("{1}{G}"), "If {this} was kicked with its {1}{G} kicker, it enters with two +1/+1 counters on it and with trample.", "");
         ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability);
         // If Necravolver was kicked with its {W} kicker, it enters with a +1/+1 counter on it and with "Whenever Necravolver deals damage, you gain that much life."
-        ability = new  EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
-            new KickedCostCondition("{W}"), "If {this} was kicked with its {W} kicker, it enters with a +1/+1 counter on it and with \"Whenever {this} deals damage, you gain that much life.\"", "");
-        ability.addEffect(new GainAbilitySourceEffect(new DealsDamageGainLifeSourceTriggeredAbility(), Duration.WhileOnBattlefield));
+        ability = new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
+                new KickedCostCondition("{W}"), "If {this} was kicked with its {W} kicker, it enters with a +1/+1 counter on it and with \"Whenever {this} deals damage, you gain that much life.\"", "");
+        ability.addEffect(new GainAbilitySourceEffect(new DealsDamageSourceTriggeredAbility(new GainLifeEffect(SavedDamageValue.MUCH)), Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
 

@@ -1,10 +1,10 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.abilities.Mode;
-import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
+import mage.abilities.common.DealsDamageSourceTriggeredAbility;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
 import mage.abilities.keyword.EntwineAbility;
@@ -14,23 +14,23 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.filter.StaticFilters;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class StirThePride extends CardImpl {
 
     public StirThePride(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{4}{W}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{4}{W}");
 
         // Choose one - 
         this.getSpellAbility().getModes().setMinModes(1);
         this.getSpellAbility().getModes().setMaxModes(1);
         // Creatures you control get +2/+2 until end of turn;
-        this.getSpellAbility().addEffect(new BoostControlledEffect(2,2, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn));
         // or until end of turn, creatures you control gain "Whenever this creature deals damage, you gain that much life."
-        Effect effect = new GainAbilityControlledEffect(new DealsDamageGainLifeSourceTriggeredAbility(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
+        Effect effect = new GainAbilityControlledEffect(new DealsDamageSourceTriggeredAbility(new GainLifeEffect(SavedDamageValue.MUCH)), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("until end of turn, creatures you control gain \"Whenever this creature deals damage, you gain that much life.\"");
         Mode mode = new Mode(effect);
         this.getSpellAbility().getModes().addMode(mode);
