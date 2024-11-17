@@ -35,7 +35,7 @@ public final class FlaringFlameKin extends CardImpl {
 
         // As long as Flaring Flame-Kin is enchanted, it gets +2/+2, has trample, and has "{R}: Flaring Flame-Kin gets +1/+0 until end of turn."
         EnchantedSourceCondition enchanted = new EnchantedSourceCondition();
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
             new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), enchanted,
             "As long as {this} is enchanted, it gets +2/+2"));
         ability.addEffect(new ConditionalContinuousEffect(

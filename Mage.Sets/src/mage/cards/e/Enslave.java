@@ -35,7 +35,7 @@ public final class Enslave extends CardImpl {
         this.addAbility(ability);
 
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
 
         // At the beginning of your upkeep, enchanted creature deals 1 damage to its owner.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EnslaveEffect()));

@@ -46,7 +46,7 @@ public final class ExtricatorOfFlesh extends CardImpl {
         this.nightCard = true;
 
         // Eldrazi you control have vigilance
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filterEldrazi)));
 
         // {2}, {T}, Sacrifice a non-Eldrazi creature: Create a 3/2 colorless Eldrazi Horror creature token.

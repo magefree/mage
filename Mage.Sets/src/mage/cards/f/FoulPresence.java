@@ -35,7 +35,7 @@ public final class FoulPresence extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets -1/-1 and has "{T}: Target creature gets -1/-1 until end of turn."
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield));
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
             new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent());

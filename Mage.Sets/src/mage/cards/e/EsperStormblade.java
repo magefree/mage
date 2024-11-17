@@ -45,7 +45,7 @@ public final class EsperStormblade extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As long as you control another multicolored permanent, Esper Stormblade gets +1/+1 and has flying.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1,1, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter),
                 "As long as you control another multicolored permanent, {this} gets +1/+1"));

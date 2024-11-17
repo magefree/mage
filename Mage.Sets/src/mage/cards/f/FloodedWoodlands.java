@@ -26,7 +26,7 @@ public final class FloodedWoodlands extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{B}");
 
         // Green creatures can't attack unless their controller sacrifices a land for each green creature they control that's attacking.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FloodedWoodlandsCostToAttackBlockEffect()));
+        this.addAbility(new SimpleStaticAbility(new FloodedWoodlandsCostToAttackBlockEffect()));
         
     }
 

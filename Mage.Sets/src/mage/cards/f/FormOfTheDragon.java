@@ -45,7 +45,7 @@ public final class FormOfTheDragon extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new SetPlayerLifeSourceEffect(5), false));
 
         // Creatures without flying can't attack you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private FormOfTheDragon(final FormOfTheDragon card) {

@@ -37,7 +37,7 @@ public final class FlamespeakersWill extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield)));
         // Whenever enchanted creature deals combat damage to a player, you may sacrifice Flamespeaker's Will. If you do, destroy target artifact.
         ability = new DealsDamageToAPlayerAttachedTriggeredAbility(
                 new DoIfCostPaid(new DestroyTargetEffect(), new SacrificeSourceCost()), "enchanted creature", false, false, true, TargetController.ANY);

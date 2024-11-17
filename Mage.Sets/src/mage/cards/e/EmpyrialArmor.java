@@ -39,7 +39,7 @@ public final class EmpyrialArmor extends CardImpl {
 
         // Enchanted creature gets +1/+1 for each card in your hand.
         DynamicValue xValue = CardsInControllerHandCount.instance;
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(xValue, xValue, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(xValue, xValue, Duration.WhileOnBattlefield)));
     }
 
     private EmpyrialArmor(final EmpyrialArmor card) {

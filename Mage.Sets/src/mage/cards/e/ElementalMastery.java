@@ -43,7 +43,7 @@ public final class ElementalMastery extends CardImpl {
 
         // Enchanted creature has "{tap}: create X 1/1 red Elemental creature tokens with haste, where X is this creature's power. Exile them at the beginning of the next end step."
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElementalMasteryEffect(), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability2, AttachmentType.AURA)));
     }
 
     private ElementalMastery(final ElementalMastery card) {

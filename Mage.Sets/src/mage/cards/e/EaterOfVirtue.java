@@ -56,10 +56,10 @@ public final class EaterOfVirtue extends CardImpl {
         this.addAbility(new DiesAttachedTriggeredAbility(new EaterOfVirtueExileEffect(), "equipped creature", false, true, SetTargetPointer.CARD));
 
         // Equipped creature gets +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 0, Duration.WhileOnBattlefield)));
 
         // As long as a card exiled with Eater of Virtue has flying, equipped creature has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EaterOfVirtueGainAbilityAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new EaterOfVirtueGainAbilityAttachedEffect()));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), false));

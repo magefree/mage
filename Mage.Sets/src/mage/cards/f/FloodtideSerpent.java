@@ -28,7 +28,7 @@ public final class FloodtideSerpent extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Floodtide Serpent can't attack unless you return an enchantment you control to its owner's hand <i>(This cost is paid as attackers are declared.)</i>
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockUnlessPaysSourceEffect(
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockUnlessPaysSourceEffect(
                 new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_AN_ENCHANTMENT)), PayCostToAttackBlockEffectImpl.RestrictType.ATTACK)));
 
     }

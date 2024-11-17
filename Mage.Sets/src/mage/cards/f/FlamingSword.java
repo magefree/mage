@@ -46,7 +46,7 @@ public final class FlamingSword extends CardImpl {
         // Enchanted creature gets +1/+0 and has first strike.
         Effect effect = new BoostEnchantedEffect(1, 0, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +1/+0");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has first strike");
         ability.addEffect(effect);

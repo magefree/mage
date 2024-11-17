@@ -52,7 +52,7 @@ public final class ExcaliburSwordOfEden extends CardImpl {
         );
 
         // Equipped creature gets +10/+0 and has vigilance.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(10, 0));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(10, 0));
         ability.addEffect(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT).setText("and has vigilance"));
         this.addAbility(ability);
 

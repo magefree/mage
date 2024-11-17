@@ -38,7 +38,7 @@ public final class ElephantGrass extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // Black creatures can't attack you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filterBlack)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackYouAllEffect(Duration.WhileOnBattlefield, filterBlack)));
 
         // Nonblack creatures can't attack you unless their controller pays {2} for each creature they control that's attacking you.
         this.addAbility(new SimpleStaticAbility(

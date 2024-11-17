@@ -38,7 +38,7 @@ public final class FungalFortitude extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 0)));
 
         // When enchanted creature dies, return it to the battlefield tapped under its owner's control.
         this.addAbility(new DiesAttachedTriggeredAbility(

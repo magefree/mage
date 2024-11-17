@@ -40,7 +40,7 @@ public final class FlickeringWard extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
 
         // Enchanted creature has protection from the chosen color. This effect doesn't remove Flickering Ward.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorAttachedEffect(true)));
+        this.addAbility(new SimpleStaticAbility(new ProtectionChosenColorAttachedEffect(true)));
 
         // {W}: Return Flickering Ward to its owner's hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl<>("{W}")));

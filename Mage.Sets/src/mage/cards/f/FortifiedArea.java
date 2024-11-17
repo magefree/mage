@@ -32,7 +32,7 @@ public final class FortifiedArea extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}{W}");
 
         // Wall creatures you control get +1/+0 and have banding.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter));
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter));
         Effect effect = new GainAbilityControlledEffect(BandingAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         effect.setText("and have banding");
         ability.addEffect(effect);

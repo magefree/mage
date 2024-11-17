@@ -26,7 +26,7 @@ public final class Fastbond extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}");
 
         // You may play any number of additional lands on each of your turns.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new PlayAdditionalLandsControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield)));
         // Whenever you play a land, if it wasn't the first land you played this turn, Fastbond deals 1 damage to you.
         this.addAbility(new PlayALandTriggeredAbility());
     }

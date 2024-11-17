@@ -44,7 +44,7 @@ public final class EmbodimentOfInsight extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Land creatures you control have vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filterLandCreatures)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filterLandCreatures)));
 
         // <i>Landfall</i> &mdash; Whenever a land enters the battlefield under you control, you may have target land you control
         // become a 3/3 Elemental creature with haste until end of turn. It's still a land.

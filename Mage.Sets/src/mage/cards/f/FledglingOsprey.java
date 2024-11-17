@@ -29,7 +29,7 @@ public final class FledglingOsprey extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Fledgling Osprey has flying as long as it's enchanted.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
                 new EnchantedSourceCondition(),
                 "{this} has flying as long as it's enchanted")));

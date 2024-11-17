@@ -44,7 +44,7 @@ public final class FelineSovereign extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Other Cats you control get +1/+1 and have protection from Dogs.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterCat, true));
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterCat, true));
         //
         Effect effect = new GainAbilityAllEffect(new ProtectionAbility(filterProtectionFromDogs), Duration.WhileOnBattlefield, filterCat, true);
         effect.setText("and have protection from Dogs");

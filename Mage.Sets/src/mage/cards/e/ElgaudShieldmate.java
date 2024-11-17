@@ -32,7 +32,7 @@ public final class ElgaudShieldmate extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Elgaud Shieldmate is paired with another creature, both creatures have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(HexproofAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(HexproofAbility.getInstance(), ruleText)));
     }
 
     private ElgaudShieldmate(final ElgaudShieldmate card) {

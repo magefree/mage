@@ -37,7 +37,7 @@ public final class EldraziConscription extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +10/+10 and has trample and annihilator 2        
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(10, 10, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(10, 10, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has trample");
         ability.addEffect(effect);

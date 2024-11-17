@@ -36,7 +36,7 @@ public final class EvilEyeOfOrmsByGore extends CardImpl {
         this.toughness = new MageInt(6);
 
         // Non-Eye creatures you control can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAllEffect(Duration.WhileOnBattlefield, cantAttackFilter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackAllEffect(Duration.WhileOnBattlefield, cantAttackFilter)));
 
         // Evil Eye of Orms-by-Gore can't be blocked except by Walls.
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(cantBeBlockedByFilter, Duration.WhileOnBattlefield)));

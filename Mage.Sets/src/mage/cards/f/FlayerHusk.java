@@ -28,7 +28,7 @@ public final class FlayerHusk extends CardImpl {
         this.addAbility(new LivingWeaponAbility());
 
         // Equipped creature gets +1/+1
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));

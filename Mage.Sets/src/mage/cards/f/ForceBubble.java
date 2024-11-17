@@ -33,7 +33,7 @@ public final class ForceBubble extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{W}{W}");
 
         // If damage would be dealt to you, put that many depletion counters on Force Bubble instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ForceBubbleReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ForceBubbleReplacementEffect()));
 
         // When there are four or more depletion counters on Force Bubble, sacrifice it.
         this.addAbility(new ForceBubbleStateTriggeredAbility());

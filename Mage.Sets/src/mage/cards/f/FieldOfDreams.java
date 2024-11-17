@@ -21,7 +21,7 @@ public final class FieldOfDreams extends CardImpl {
         this.supertype.add(SuperType.WORLD);
 
         // Players play with the top card of their libraries revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect(true)));
+        this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect(true)));
     }
 
     private FieldOfDreams(final FieldOfDreams card) {

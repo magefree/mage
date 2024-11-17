@@ -30,7 +30,7 @@ public final class Excruciator extends CardImpl {
         this.toughness = new MageInt(7);
 
         // Damage that would be dealt by Excruciator can't be prevented.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ExcruciatorEffect()));
+        this.addAbility(new SimpleStaticAbility(new ExcruciatorEffect()));
     }
 
     private Excruciator(final Excruciator card) {

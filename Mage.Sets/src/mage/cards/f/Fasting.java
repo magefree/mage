@@ -37,7 +37,7 @@ public final class Fasting extends CardImpl {
         this.addAbility(ability);
 
         // If you would begin your draw step, you may skip that step instead. If you do, you gain 2 life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FastingReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new FastingReplacementEffect()));
         
         // When you draw a card, destroy Fasting.
         this.addAbility(new DrawCardControllerTriggeredAbility(new DestroySourceEffect(), false));

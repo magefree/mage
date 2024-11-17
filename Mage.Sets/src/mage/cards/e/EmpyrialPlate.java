@@ -25,7 +25,7 @@ public final class EmpyrialPlate extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 for each card in your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(CardsInControllerHandCount.instance, CardsInControllerHandCount.instance)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(CardsInControllerHandCount.instance, CardsInControllerHandCount.instance)));
         
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));

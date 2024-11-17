@@ -26,7 +26,7 @@ public final class FurnaceOfRath extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}{R}");
 
         // If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FurnaceOfRathEffect()));
+        this.addAbility(new SimpleStaticAbility(new FurnaceOfRathEffect()));
     }
 
     private FurnaceOfRath(final FurnaceOfRath card) {

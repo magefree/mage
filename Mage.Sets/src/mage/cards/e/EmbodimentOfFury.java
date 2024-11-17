@@ -44,7 +44,7 @@ public final class EmbodimentOfFury extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         
         // Land creatures you control have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filterLandCreatures)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filterLandCreatures)));
         
         // <i>Landfall</i> &mdash; Whenever a land you control enters, you may have target land you control
         // become a 3/3 Elemental creature with haste until end of turn. It's still a land.
