@@ -36,7 +36,7 @@ public final class SpinalVillain extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Destroy target blue creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

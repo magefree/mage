@@ -36,15 +36,15 @@ public final class ShattergangBrothers extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{B}, Sacrifice a creature: Each other player sacrifices a creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(StaticFilters.FILTER_PERMANENT_CREATURE), new ManaCostsImpl<>("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(new ShattergangBrothersEffect(StaticFilters.FILTER_PERMANENT_CREATURE), new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         this.addAbility(ability);
         // {2}{R}, Sacrifice an artifact: Each other player sacrifices an artifact.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(StaticFilters.FILTER_PERMANENT_ARTIFACT), new ManaCostsImpl<>("{2}{R}"));
+        ability = new SimpleActivatedAbility(new ShattergangBrothersEffect(StaticFilters.FILTER_PERMANENT_ARTIFACT), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT));
         this.addAbility(ability);
         // {2}{G}, Sacrifice an enchantment: Each other player sacrifices an enchantment.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShattergangBrothersEffect(StaticFilters.FILTER_PERMANENT_ENCHANTMENT), new ManaCostsImpl<>("{2}{G}"));
+        ability = new SimpleActivatedAbility(new ShattergangBrothersEffect(StaticFilters.FILTER_PERMANENT_ENCHANTMENT), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ENCHANTMENT));
         this.addAbility(ability);
     }

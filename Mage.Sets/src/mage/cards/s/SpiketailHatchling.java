@@ -29,7 +29,7 @@ public final class SpiketailHatchling extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(1)), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new CounterUnlessPaysEffect(new GenericManaCost(1)), new SacrificeSourceCost());
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
     }

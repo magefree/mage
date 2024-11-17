@@ -27,7 +27,7 @@ public final class SentinelTotem extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ScryEffect(1)));
 
         // {T}, Exile Sentinel Totem: Exile all cards from all graveyards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileGraveyardAllPlayersEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ExileGraveyardAllPlayersEffect(), new TapSourceCost());
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }

@@ -30,7 +30,7 @@ public final class ShieldMate extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Shield Mate: Target creature gets +0/+4 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(0, 4, Duration.EndOfTurn), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(0, 4, Duration.EndOfTurn), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

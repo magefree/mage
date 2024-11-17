@@ -43,7 +43,7 @@ public final class SubterraneanSpirit extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
 
         // {tap}: Subterranean Spirit deals 1 damage to each creature without flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageAllEffect(1, filter), new TapSourceCost());
         this.addAbility(ability);
     }
 

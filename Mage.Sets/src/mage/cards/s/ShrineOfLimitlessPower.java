@@ -44,7 +44,7 @@ public final class ShrineOfLimitlessPower extends CardImpl {
                 new SpellCastControllerTriggeredAbility(null, filter, false)));
 
         //{4}, {T}, Sacrifice Shrine of Limitless Power: Target player discards a card for each charge counter on Shrine of Limitless Power.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(new CountersSourceCount(CounterType.CHARGE)), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new DiscardTargetEffect(new CountersSourceCount(CounterType.CHARGE)), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());

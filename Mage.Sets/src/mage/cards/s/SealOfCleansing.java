@@ -24,7 +24,7 @@ public final class SealOfCleansing extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // Sacrifice Seal of Cleansing: Destroy target artifact or enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_ENCHANTMENT));
         this.addAbility(ability);
     }

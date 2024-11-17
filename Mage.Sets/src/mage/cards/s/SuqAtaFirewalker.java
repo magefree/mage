@@ -44,7 +44,7 @@ public final class SuqAtaFirewalker extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantBeTargetedSourceEffect(filterRed, Duration.WhileOnBattlefield)));
 
         //{T}: Suq'Ata Firewalker deals 1 damage to any target.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

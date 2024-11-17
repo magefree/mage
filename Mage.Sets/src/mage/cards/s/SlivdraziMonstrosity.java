@@ -59,7 +59,7 @@ public final class SlivdraziMonstrosity extends CardImpl {
         this.addAbility(ability);
 
         // {3}: Create a 1/1 colorless Eldrazi Sliver creature token. It has “Sacrifice this creature: Add {C}.”
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new EldraziSliverToken()), new ManaCostsImpl<>("{3}")));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new EldraziSliverToken()), new ManaCostsImpl<>("{3}")));
     }
 
     private SlivdraziMonstrosity(final SlivdraziMonstrosity card) {

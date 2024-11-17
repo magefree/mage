@@ -39,7 +39,7 @@ public final class SoratamiSavant extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}, Return a land you control to its owner's hand: Counter target spell unless its controller pays {3}.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(3)), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new CounterUnlessPaysEffect(new GenericManaCost(3)), new GenericManaCost(3));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);

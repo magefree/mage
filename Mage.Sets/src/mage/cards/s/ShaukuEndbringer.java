@@ -44,7 +44,7 @@ public final class ShaukuEndbringer extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(3)));
 
         // {T}: Exile target creature and put a +1/+1 counter on Shauku.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new TapSourceCost());
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).concatBy("and"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

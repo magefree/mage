@@ -34,7 +34,7 @@ public final class SeleniaDarkAngel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Pay 2 life: Return Selenia, Dark Angel to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new PayLifeCost(2)));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new PayLifeCost(2)));
     }
 
     private SeleniaDarkAngel(final SeleniaDarkAngel card) {

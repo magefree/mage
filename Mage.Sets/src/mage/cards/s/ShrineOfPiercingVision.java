@@ -51,7 +51,7 @@ public final class ShrineOfPiercingVision extends CardImpl {
 
         // {tap}, Sacrifice Shrine of Piercing Vision: Look at the top X cards of your library, where X is the number of charge counters on Shrine of Piercing Vision.
         // Put one of those cards into your hand and the rest on the bottom of your library in any order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShrineOfPiercingVisionEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ShrineOfPiercingVisionEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

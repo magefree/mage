@@ -36,7 +36,7 @@ public final class ScarbladeElite extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

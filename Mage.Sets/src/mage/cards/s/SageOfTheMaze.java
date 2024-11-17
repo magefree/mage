@@ -55,7 +55,7 @@ public final class SageOfTheMaze extends CardImpl {
         this.addAbility(ability);
 
         // Tap an untapped Gate you control: Untap Sage of the Maze.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(1, filter)));
+        ability = new SimpleActivatedAbility(new UntapSourceEffect(), new TapTargetCost(new TargetControlledPermanent(1, filter)));
         this.addAbility(ability);
 
     }

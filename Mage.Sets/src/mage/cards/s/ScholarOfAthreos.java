@@ -27,7 +27,7 @@ public final class ScholarOfAthreos extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {2}{B}: Each opponent loses 1 life. You gain life equal to the life lost this way.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsYouGainLifeLostEffect(1), new ManaCostsImpl<>("{2}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new LoseLifeOpponentsYouGainLifeLostEffect(1), new ManaCostsImpl<>("{2}{B}")));
     }
 
     private ScholarOfAthreos(final ScholarOfAthreos card) {

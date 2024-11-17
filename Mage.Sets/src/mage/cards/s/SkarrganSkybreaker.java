@@ -34,7 +34,7 @@ public final class SkarrganSkybreaker extends CardImpl {
         // Bloodthirst 3
         this.addAbility(new BloodthirstAbility(3));
         // {1}, Sacrifice Skarrgan Skybreaker: Skarrgan Skybreaker deals damage equal to its power to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("It deals damage equal to its power to any target"), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());

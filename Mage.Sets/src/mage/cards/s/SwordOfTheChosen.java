@@ -32,7 +32,7 @@ public final class SwordOfTheChosen extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // {tap}: Target legendary creature gets +2/+2 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

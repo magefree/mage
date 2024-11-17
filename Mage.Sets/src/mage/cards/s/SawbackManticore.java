@@ -34,7 +34,7 @@ public final class SawbackManticore extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {4}: Sawback Manticore gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(4)));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(4)));
 
         // {1}: Sawback Manticore deals 2 damage to target attacking or blocking creature. Activate this ability only if Sawback Manticore is attacking or blocking and only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(

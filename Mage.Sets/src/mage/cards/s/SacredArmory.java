@@ -23,7 +23,7 @@ public final class SacredArmory extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {2}: Target creature gets +1/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(2));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -44,13 +44,13 @@ public final class SnowFortress extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {1}: Snow Fortress gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(1)));
 
         // {1}: Snow Fortress gets +0/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(0, 1, Duration.EndOfTurn), new GenericManaCost(1)));
 
         // {3}: Snow Fortress deals 1 damage to target creature without flying that's attacking you.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new GenericManaCost(3));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

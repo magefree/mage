@@ -54,7 +54,7 @@ public final class SwordOfTheParuns extends CardImpl {
         )));
 
         // {3}: You may tap or untap equipped creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapAttachedEffect(), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(new MayTapOrUntapAttachedEffect(), new GenericManaCost(3)));
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3), false));
     }

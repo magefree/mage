@@ -30,7 +30,7 @@ public final class ScrollRack extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {1}, {tap}: Exile any number of cards from your hand face down. Put that many cards from the top of your library into your hand. Then look at the exiled cards and put them on top of your library in any order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScrollRackEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new ScrollRackEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

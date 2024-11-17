@@ -33,7 +33,7 @@ public final class StewardOfSolidarity extends CardImpl {
         // {T}, Exert Steward of Solidarity: Create a 1/1 white Warrior creature token with vigilance. 
         Effect effect = new CreateTokenEffect(new WarriorVigilantToken());
         effect.setText("Create a 1/1 white Warrior creature token with vigilance");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addCost(new ExertSourceCost());
         this.addAbility(ability);
     }

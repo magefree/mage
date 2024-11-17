@@ -28,7 +28,7 @@ public final class SimicLocket extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // {G/U}{G/U}{G/U}{G/U}, {T}, Sacrifice Simic Locket: Draw two cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{G/U}{G/U}{G/U}{G/U}"));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{G/U}{G/U}{G/U}{G/U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
