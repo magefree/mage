@@ -1,18 +1,13 @@
 package mage.cards.e;
 
-import java.util.AbstractMap;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import mage.MageInt;
-import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DoIfAnyNumberCostPaid;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
@@ -22,14 +17,8 @@ import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.watchers.Watcher;
-import mage.watchers.common.LifeLossOtherFromCombatWatcher;
 
 /**
  *
@@ -64,8 +53,8 @@ public final class EzioAuditoreDaFirenze extends CardImpl {
                                 new DoIfCostPaid(
                                         new LoseGameTargetPlayerEffect(),new ManaCostsImpl<>("{W}{U}{B}{R}{G}")
                                 ), false, true
-                        ),EzioAuditoreDaFirenzeWatcher::checkPermanent, "Whenever {this} deals combat damage to a player, you may pay {W}{U}{B}{R}{G} if that player has 10 or less life. When you do, that player loses the game."
-                ), new EzioAuditoreDaFirenzeWatcher()
+                        ), EzioAuditoreDaFirenzeCondition.instance, "Whenever {this} deals combat damage to a player, you may pay {W}{U}{B}{R}{G} if that player has 10 or less life. When you do, that player loses the game."
+                )
         );
 
     }
@@ -81,44 +70,16 @@ public final class EzioAuditoreDaFirenze extends CardImpl {
 
 }
 
-class EzioAuditoreDaFirenzeWatcher extends Watcher {
-
-    private final Map<Map.Entry<MageObjectReference, UUID>, Integer> morMap = new HashMap<>();
-
-    EzioAuditoreDaFirenzeWatcher() {
-        super(WatcherScope.GAME);
-    }
+enum EzioAuditoreDaFirenzeCondition implements Condition {
+    instance;
 
     @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() != GameEvent.EventType.DAMAGED_PLAYER) {
-            return;
+    public boolean apply(Game game, Ability source) {
+        UUID playerId = source.getEffects().get(0).getTargetPointer().getFirst(game, source);
+        if (playerId == null) {
+            return false;
         }
-        Permanent permanent = game.getPermanent(event.getSourceId());
-        if (permanent != null) {
-            UUID target = event.getTargetId();
-            Player player = game.getPlayer(target);
-            int damage = event.getAmount();
-            int life = player.getLife();
-            morMap.compute(new AbstractMap.SimpleImmutableEntry(new MageObjectReference(permanent, game), event.getTargetId()),
-                    (u, i) -> i == null ? life : Integer.sum(i, -damage));
-        }
-    }
-
-
-    @Override
-    public void reset() {
-        super.reset();
-        morMap.clear();
-    }
-
-    static boolean checkPermanent(Game game, Ability source) {
-        Map<Map.Entry<MageObjectReference, UUID>, Integer> morMap = game.getState()
-                .getWatcher(EzioAuditoreDaFirenzeWatcher.class)
-                .morMap;
-        Map.Entry<MageObjectReference, UUID> key = new AbstractMap.SimpleImmutableEntry(
-                new MageObjectReference(game.getPermanent(source.getSourceId()), game),
-                source.getEffects().get(0).getTargetPointer().getFirst(game, source));
-        return morMap.getOrDefault(key, 0) <= 10;
+        Player player = game.getPlayer(playerId);
+        return player != null && player.getLife() <= 10;
     }
 }
