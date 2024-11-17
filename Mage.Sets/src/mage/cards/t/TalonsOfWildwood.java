@@ -42,7 +42,7 @@ public final class TalonsOfWildwood extends CardImpl {
 
         // Enchanted creature gets +1/+1 and has trample.
         ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)
+                new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)
         );
         ability.addEffect(new GainAbilityAttachedEffect(
                 TrampleAbility.getInstance(),

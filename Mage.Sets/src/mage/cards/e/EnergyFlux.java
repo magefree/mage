@@ -27,7 +27,7 @@ public final class EnergyFlux extends CardImpl {
 
         // All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {2}."
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, 
+                
                 new GainAbilityAllEffect(
                         new BeginningOfUpkeepTriggeredAbility(
                                 TargetController.YOU, new SacrificeSourceUnlessPaysEffect(new GenericManaCost(2)),

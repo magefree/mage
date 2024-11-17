@@ -30,7 +30,7 @@ public final class OchranAssassin extends CardImpl {
 
         // All creatures able to block Ochran Assassin do so.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect()
+                new MustBeBlockedByAllSourceEffect()
         ));
     }
 
