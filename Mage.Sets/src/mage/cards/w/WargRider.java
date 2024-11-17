@@ -44,7 +44,6 @@ public final class WargRider extends CardImpl {
 
         // Other Orcs and Goblins you control have menace.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(
                         new MenaceAbility(false),
                         Duration.WhileOnBattlefield,

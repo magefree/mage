@@ -27,7 +27,6 @@ public final class StreetRiot extends CardImpl {
 
         // As long as it's your turn, creatures you control get +1/+0 and have trample.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new BoostControlledEffect(
                                 1, 0, Duration.WhileOnBattlefield

@@ -34,7 +34,6 @@ public final class SkitteringCrustacean extends CardImpl {
 
         // As long as Skittering Crustacean is monstrous, it has hexproof.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
                         MonstrousCondition.instance,
                         "As long as {this} is monstrous, it has hexproof"));

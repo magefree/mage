@@ -50,7 +50,6 @@ public final class TajicLegionsEdge extends CardImpl {
 
         // Prevent all noncombat damage that would be dealt to other creatures you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new PreventAllNonCombatDamageToAllEffect(
                         Duration.WhileOnBattlefield, filter
                 )

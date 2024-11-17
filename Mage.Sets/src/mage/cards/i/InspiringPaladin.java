@@ -42,7 +42,6 @@ public final class InspiringPaladin extends CardImpl {
 
         // During your turn, this creature has first strike.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(
                                 FirstStrikeAbility.getInstance(),
@@ -54,7 +53,6 @@ public final class InspiringPaladin extends CardImpl {
 
         // During your turn, creatures you control with +1/+1 counters on them have first strike.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilityControlledEffect(
                                 FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter

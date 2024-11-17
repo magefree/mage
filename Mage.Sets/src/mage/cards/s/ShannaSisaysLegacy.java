@@ -45,7 +45,6 @@ public final class ShannaSisaysLegacy extends CardImpl {
         // Shanna gets +1/+1 for each creature you control.
         DynamicValue value = new PermanentsOnBattlefieldCount(StaticFilters.FILTER_CONTROLLED_CREATURES);
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)
                         .setText("{this} gets +1/+1 for each creature you control")
         ));

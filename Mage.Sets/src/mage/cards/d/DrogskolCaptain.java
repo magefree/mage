@@ -36,7 +36,6 @@ public final class DrogskolCaptain extends CardImpl {
 
         // Other Spirit creatures you control get +1/+1 and have hexproof.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostControlledEffect(
                         1, 1, Duration.WhileOnBattlefield,
                         filter, true

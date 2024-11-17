@@ -34,7 +34,6 @@ public final class LongshotSquad extends CardImpl {
         this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{1}{G}")));
         // Each creature you control with a +1/+1 counter on it has reach.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(
                         ReachAbility.getInstance(),
                         Duration.WhileOnBattlefield,

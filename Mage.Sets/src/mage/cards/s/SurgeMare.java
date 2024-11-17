@@ -41,7 +41,6 @@ public final class SurgeMare extends CardImpl {
 
         // Surge Mare can't be blocked by green creatures.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new CantBeBlockedByCreaturesSourceEffect(
                         filter, Duration.WhileOnBattlefield
                 )

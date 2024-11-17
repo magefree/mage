@@ -38,7 +38,6 @@ public final class GarrisonSergeant extends CardImpl {
 
         // Garrison Sergeant has double strike as long as you control a Gate.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(
                                 DoubleStrikeAbility.getInstance(),

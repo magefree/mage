@@ -38,7 +38,6 @@ public final class ThoughtboundPhantasm extends CardImpl {
 
         // As long as Thoughtbound Phantasm has three or more +1/+1 counters on it, it can attack as though it didn't have defender.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalAsThoughEffect(
                         new CanAttackAsThoughItDidntHaveDefenderSourceEffect(
                                 Duration.WhileOnBattlefield

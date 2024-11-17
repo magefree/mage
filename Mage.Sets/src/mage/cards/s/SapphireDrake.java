@@ -29,7 +29,6 @@ public final class SapphireDrake extends CardImpl {
         
         // Each creature you control with a +1/+1 counter on it has flying.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityAllEffect(FlyingAbility.getInstance(),
                         Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1)

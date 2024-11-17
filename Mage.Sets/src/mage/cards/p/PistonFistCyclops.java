@@ -37,7 +37,6 @@ public final class PistonFistCyclops extends CardImpl {
 
         // As long as you've cast an instant or sorcery spell this turn, Piston-Fist Cyclops can attack as though it didn't have defender.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalAsThoughEffect(
                         new CanAttackAsThoughItDidntHaveDefenderSourceEffect(
                                 Duration.WhileOnBattlefield

@@ -42,7 +42,6 @@ public final class ChargingWarBoar extends CardImpl {
 
         // As long as you control a Domri planeswalker, Charging War Boar gets +1/+1 and has trample.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
                         condition, "As long as you control a Domri planeswalker, {this} gets +1/+1"

@@ -40,7 +40,6 @@ public final class TlincalliHunter extends AdventureCard {
 
         // Once each turn, you may pay {0} rather than pay the mana cost for a creature spell you cast from exile.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new TlincalliHunterAddAltCostEffect()));
 
         // Retrieve Prey

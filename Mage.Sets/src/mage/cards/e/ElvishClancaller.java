@@ -44,7 +44,6 @@ public final class ElvishClancaller extends CardImpl {
 
         // Other Elves you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostControlledEffect(
                         1, 1, Duration.WhileOnBattlefield,
                         filter, true

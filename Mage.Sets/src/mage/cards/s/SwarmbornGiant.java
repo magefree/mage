@@ -44,7 +44,6 @@ public final class SwarmbornGiant extends CardImpl {
 
         // As long as Swarmborn Giant is monstrous, it has reach.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.WhileOnBattlefield),
                         MonstrousCondition.instance,
                         "As long as {this} is monstrous, it has reach"));

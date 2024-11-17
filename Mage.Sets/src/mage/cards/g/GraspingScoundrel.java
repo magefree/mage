@@ -30,7 +30,6 @@ public final class GraspingScoundrel extends CardImpl{
         // Grasping Scoundrel gets +1/+0 as long as it's attacking.
         this.addAbility(
             new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                     new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                     SourceAttackingCondition.instance,

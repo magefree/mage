@@ -38,7 +38,6 @@ public final class HuntingVelociraptor extends CardImpl {
         // Dinosaur spells you cast have prowl {2}{R}.
         // Based on Chief Engineer
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityControlledSpellsEffect(new ProwlAbility("{2}{R}"), filter)
         ));
     }
