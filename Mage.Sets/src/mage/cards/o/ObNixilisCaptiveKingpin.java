@@ -89,7 +89,7 @@ class ObNixilisCaptiveKingpinAbility extends TriggeredAbilityImpl implements Bat
         }
         // if here, at least one opponent lost some amount of life
         return CardUtil.getEventTargets(event).stream()
-                .allMatch(uuid -> LifeLostBatchEvent.getLifeLostByPlayer(filteredEvents, uuid) == 1);
+                .allMatch(uuid -> LifeLostBatchEvent.getLifeLostByPlayer(filteredEvents, uuid) <= 1);
     }
 
     @Override

@@ -68,7 +68,7 @@ public class SacrificeOneOrMorePermanentsTriggeredAbility extends TriggeredAbili
 
     @Override
     public boolean checkEvent(SacrificedPermanentEvent event, Game game) {
-        Permanent permanent = game.getPermanent(event.getTargetId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
         if (permanent == null || !filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
@@ -88,7 +88,7 @@ public class SacrificeOneOrMorePermanentsTriggeredAbility extends TriggeredAbili
         List<Permanent> matchingPermanents = getFilteredEvents((SacrificedPermanentBatchEvent) event, game)
                 .stream()
                 .map(GameEvent::getTargetId)
-                .map(game::getPermanent)
+                .map(game::getPermanentOrLKIBattlefield)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
         if (matchingPermanents.isEmpty()) {
