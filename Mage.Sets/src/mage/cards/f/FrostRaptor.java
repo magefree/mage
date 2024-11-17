@@ -32,7 +32,7 @@ public final class FrostRaptor extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {S}{S}: Frost Raptor gains shroud until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
             ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{S}{S}")));
     }
 

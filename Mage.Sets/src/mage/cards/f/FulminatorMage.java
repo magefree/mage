@@ -29,7 +29,7 @@ public final class FulminatorMage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice Fulminator Mage: Destroy target nonbasic land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetNonBasicLandPermanent());
         this.addAbility(ability);
     }

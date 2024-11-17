@@ -22,7 +22,7 @@ public final class FeldonsCane extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
 
         // {tap}, Exile Feldon's Cane: Shuffle your graveyard into your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ShuffleYourGraveyardIntoLibraryEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ShuffleYourGraveyardIntoLibraryEffect(), new TapSourceCost());
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }

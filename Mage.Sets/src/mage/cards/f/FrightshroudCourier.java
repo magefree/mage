@@ -43,7 +43,7 @@ public final class FrightshroudCourier extends CardImpl {
         // You may choose not to untap Frightshroud Courier during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
         // {2}{B}, {tap}: Target Zombie creature gets +2/+2 and has fear for as long as Frightshroud Courier remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(
             new BoostTargetEffect(2, 2, Duration.Custom), SourceTappedCondition.TAPPED,
             "target Zombie creature gets +2/+2"), new ManaCostsImpl<>("{2}{B}"));
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilityTargetEffect(FearAbility.getInstance(),

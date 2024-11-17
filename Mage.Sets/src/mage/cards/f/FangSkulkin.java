@@ -35,7 +35,7 @@ public final class FangSkulkin extends CardImpl {
         this.subtype.add(SubType.SCARECROW);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(WitherAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(WitherAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2));
         ability.addTarget(new TargetCreaturePermanent(filterBlackCreature));
         this.addAbility(ability);
     }

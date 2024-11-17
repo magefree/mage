@@ -43,7 +43,7 @@ public final class FreyaliseSupplicant extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}, Sacrifice a red or white creature: Freyalise Supplicant deals damage to any target equal to half the sacrificed creature's power, rounded down.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new HalfValue(SacrificeCostCreaturesPower.instance, false)), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(new HalfValue(SacrificeCostCreaturesPower.instance, false)), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(filter));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

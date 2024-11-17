@@ -45,7 +45,7 @@ public final class FullMoonsRise extends CardImpl {
         this.addAbility(ability);
 
         // Sacrifice Full Moon's Rise: Regenerate all Werewolf creatures you control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FullMoonsRiseEffect(filter), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new FullMoonsRiseEffect(filter), new SacrificeSourceCost()));
     }
 
     private FullMoonsRise(final FullMoonsRise card) {
