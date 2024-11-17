@@ -25,10 +25,10 @@ public final class WarmongersChariot extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 2)));
 
         // As long as equipped creature has defender, it can attack as though it didn't have defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WarmongersChariotEffect()));
+        this.addAbility(new SimpleStaticAbility(new WarmongersChariotEffect()));
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));

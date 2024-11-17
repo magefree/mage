@@ -28,7 +28,7 @@ public final class WanderingEye extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Players play with their hands revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithHandRevealedEffect(TargetController.ANY)));
+        this.addAbility(new SimpleStaticAbility(new PlayWithHandRevealedEffect(TargetController.ANY)));
     }
 
     private WanderingEye(final WanderingEye card) {

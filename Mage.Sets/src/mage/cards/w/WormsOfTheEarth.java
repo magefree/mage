@@ -29,10 +29,10 @@ public final class WormsOfTheEarth extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}{B}");
 
         // Players can't play lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WormsOfTheEarthPlayEffect()));
+        this.addAbility(new SimpleStaticAbility(new WormsOfTheEarthPlayEffect()));
 
         // Lands can't enter the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WormsOfTheEarthEnterEffect()));
+        this.addAbility(new SimpleStaticAbility(new WormsOfTheEarthEnterEffect()));
 
         // At the beginning of each upkeep, any player may sacrifice two lands or have Worms of the Earth deal 5 damage to that player. If a player does either, destroy Worms of the Earth.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new WormsOfTheEarthDestroyEffect(), false));

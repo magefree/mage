@@ -38,7 +38,7 @@ public final class YgraEaterOfAll extends CardImpl {
         this.addAbility(new WardAbility(new SacrificeTargetCost(filter), false));
 
         // Other creatures are Food artifacts in addition to their other types and have "{2}, {T}, Sacrifice this permanent: You gain 3 life."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new YgraEaterOfAllEffect()));
+        this.addAbility(new SimpleStaticAbility(new YgraEaterOfAllEffect()));
 
         // Whenever a Food is put into a graveyard from the battlefield, put two +1/+1 counters on Ygra, Eater of All.
         this.addAbility(new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.GRAVEYARD,

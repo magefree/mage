@@ -38,7 +38,7 @@ public final class WreathOfGeists extends CardImpl {
 
         // Enchanted creature gets +X/+X, where X is the number of creature cards in your graveyard.
         DynamicValue value = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURE);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(value, value)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(value, value)));
     }
 
     private WreathOfGeists(final WreathOfGeists card) {

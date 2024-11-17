@@ -28,7 +28,7 @@ public final class WizenedSnitches extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Players play with the top card of their libraries revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect(true)));
+        this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect(true)));
     }
 
     private WizenedSnitches(final WizenedSnitches card) {

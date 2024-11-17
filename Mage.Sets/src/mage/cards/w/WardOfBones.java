@@ -32,7 +32,7 @@ public final class WardOfBones extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{6}");
 
         // Each opponent who controls more creatures than you can't play creature cards. The same is true for artifacts, enchantments, and lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WardOfBonesEffect()));
+        this.addAbility(new SimpleStaticAbility(new WardOfBonesEffect()));
 
     }
 

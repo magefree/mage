@@ -23,7 +23,7 @@ public final class YawgmothsBargain extends CardImpl {
 
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect())); 
+        this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect())); 
          
         // Pay 1 life: Draw a card.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new PayLifeCost(1)));

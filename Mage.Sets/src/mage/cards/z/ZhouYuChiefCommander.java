@@ -27,7 +27,7 @@ public final class ZhouYuChiefCommander extends CardImpl {
         this.toughness = new MageInt(8);
 
         // Zhou Yu, Chief Commander can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND,"an Island"))));
     }
 
     private ZhouYuChiefCommander(final ZhouYuChiefCommander card) {

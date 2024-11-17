@@ -22,7 +22,7 @@ public final class Worship extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
         // If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WorshipReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new WorshipReplacementEffect()));
     }
 
     private Worship(final Worship card) {

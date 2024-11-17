@@ -43,7 +43,7 @@ public final class WoollyRazorback extends CardImpl {
         ConditionalReplacementEffect effect = new ConditionalReplacementEffect(new PreventCombatDamageBySourceEffect(Duration.WhileOnBattlefield),
                 new SourceHasCounterCondition(CounterType.ICE));
         effect.setText("as long as {this} has an ice counter on it, prevent all combat damage it would deal");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(DefenderAbility.getInstance()),
                 new SourceHasCounterCondition(CounterType.ICE), "and it has defender"));
         this.addAbility(ability);

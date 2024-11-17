@@ -24,7 +24,7 @@ public final class WellLaidPlans extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // Prevent all damage that would be dealt to a creature by another creature if they share a color.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WellLaidPlansPreventionEffect()));
+        this.addAbility(new SimpleStaticAbility(new WellLaidPlansPreventionEffect()));
     }
 
     private WellLaidPlans(final WellLaidPlans card) {

@@ -35,7 +35,7 @@ public final class WeatheredBodyguards extends CardImpl {
         this.toughness = new MageInt(5);
 
         // As long as Weathered Bodyguards is untapped, all combat damage that would be dealt to you by unblocked creatures is dealt to Weathered Bodyguards instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WeatheredBodyguardsEffect()));
+        this.addAbility(new SimpleStaticAbility(new WeatheredBodyguardsEffect()));
 
         // Morph {3}{W}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{W}")));

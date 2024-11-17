@@ -36,7 +36,7 @@ public final class WaywardSwordtooth extends CardImpl {
                 new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
 
         // Wayward Sawtooth can't attack or block unless you have the city's blessing.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockUnlessConditionSourceEffect(CitysBlessingCondition.instance))
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockUnlessConditionSourceEffect(CitysBlessingCondition.instance))
                 .addHint(CitysBlessingHint.instance)
         );
     }

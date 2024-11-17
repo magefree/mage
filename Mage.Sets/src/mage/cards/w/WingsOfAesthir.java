@@ -42,7 +42,7 @@ public final class WingsOfAesthir extends CardImpl {
         // Enchanted creature gets +1/+0 and has flying and first strike.
         Effect effect = new BoostEnchantedEffect(1, 0, Duration.WhileOnBattlefield);
         effect.setText("enchanted creature gets +1/+0");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("and has flying");
         ability.addEffect(effect);

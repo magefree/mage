@@ -32,7 +32,7 @@ public final class WitchesEye extends CardImpl {
         // Equipped creature has "{1}, {T}: Scry 1."</i>
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1, false), new GenericManaCost(1));
         gainedAbility.addCost(new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield)));
         
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(1), false));

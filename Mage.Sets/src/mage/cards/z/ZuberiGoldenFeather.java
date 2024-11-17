@@ -29,7 +29,7 @@ public final class ZuberiGoldenFeather extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Other Griffin creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
     private ZuberiGoldenFeather(final ZuberiGoldenFeather card) {
