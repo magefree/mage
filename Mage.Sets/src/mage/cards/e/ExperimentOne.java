@@ -32,7 +32,7 @@ public final class ExperimentOne extends CardImpl {
         this.addAbility(new EvolveAbility());
 
         //Remove two +1/+1 counters from Experiment One: Regenerate Experiment One.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
     }
 
     private ExperimentOne(final ExperimentOne card) {

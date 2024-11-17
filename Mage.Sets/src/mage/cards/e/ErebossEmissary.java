@@ -35,7 +35,7 @@ public final class ErebossEmissary extends CardImpl {
         this.addAbility(new BestowAbility(this, "{5}{B}"));
 
         // Discard a creature card: Erebos's Emissary gets +2/+2 until end of turn. If Erebos's Emissary is an Aura, enchanted creature gets +2/+2 until end of turn instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleActivatedAbility(new ConditionalContinuousEffect(
                 new BoostEnchantedEffect(2, 2, Duration.EndOfTurn),
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
                 new SourceHasSubtypeCondition(SubType.AURA),

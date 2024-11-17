@@ -30,7 +30,7 @@ public final class EarsplittingRats extends CardImpl {
         // When Earsplitting Rats enters the battlefield, each player discards a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect()));
         // Discard a card: Regenerate Earsplitting Rats.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new DiscardCardCost()));
     }
 
     private EarsplittingRats(final EarsplittingRats card) {

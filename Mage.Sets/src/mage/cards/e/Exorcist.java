@@ -37,7 +37,7 @@ public final class Exorcist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{W}, {tap}: Destroy target black creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new SimpleActivatedAbility(
                 new DestroyTargetEffect(),  
                 new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new TapSourceCost());

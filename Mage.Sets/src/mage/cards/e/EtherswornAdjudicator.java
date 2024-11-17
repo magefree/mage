@@ -35,13 +35,13 @@ public final class EtherswornAdjudicator extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {1}{W}{B}, {T}: Destroy target creature or enchantment.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{1}{W}{B}"));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{1}{W}{B}"));
         ability.addCost(new TapSourceCost());
         Target target = new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_ENCHANTMENT);
         ability.addTarget(target);
         this.addAbility(ability);
         // {2}{U}: Untap Ethersworn Adjudicator.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new UntapSourceEffect(), new ManaCostsImpl<>("{2}{U}")));
     }
 
     private EtherswornAdjudicator(final EtherswornAdjudicator card) {
