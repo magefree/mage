@@ -37,7 +37,7 @@ public final class ProfaneProcession extends CardImpl {
 
         // {3}{W}{B}: Exile target creature. Then if there are three or more cards exiled with Profane Procession, transform it.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProfaneProcessionEffect(), new ManaCostsImpl<>("{3}{W}{B}"));
+        Ability ability = new SimpleActivatedAbility(new ProfaneProcessionEffect(), new ManaCostsImpl<>("{3}{W}{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

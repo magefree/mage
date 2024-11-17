@@ -33,7 +33,7 @@ public final class PardicLancer extends CardImpl {
         // Discard a card at random: Pardic Lancer gets +1/+0 and gains first strike until end of turn.
         Effect effect = new BoostSourceEffect(1,0,Duration.EndOfTurn);
         effect.setText("{this} gets +1/+0");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new DiscardCardCost(true));
+        Ability ability = new SimpleActivatedAbility(effect, new DiscardCardCost(true));
         effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains first strike until end of turn");
         ability.addEffect(effect);

@@ -32,7 +32,7 @@ public final class PhyrexianProwler extends CardImpl {
         // Fading 3
         this.addAbility(new FadingAbility(3, this));
         // Remove a fade counter from Phyrexian Prowler: Phyrexian Prowler gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn),
             new RemoveCountersSourceCost(CounterType.FADE.createInstance())));
     }
 

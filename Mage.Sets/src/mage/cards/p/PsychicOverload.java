@@ -48,7 +48,7 @@ public final class PsychicOverload extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect("permanent")));
         
         // Enchanted permanent has "Discard two artifact cards: Untap this permanent."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new DiscardTargetCost(new TargetCardInHand(2, new FilterArtifactCard("two artifact cards"))));       
+        Ability gainedAbility = new SimpleActivatedAbility(new UntapSourceEffect(), new DiscardTargetCost(new TargetCardInHand(2, new FilterArtifactCard("two artifact cards"))));       
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted permanent has \"Discard two artifact cards: Untap this permanent.\"");
         this.addAbility(new SimpleStaticAbility( effect));
     }

@@ -27,7 +27,7 @@ public final class Penance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // Put a card from your hand on top of your library: The next time a black or red source of your choice would deal damage this turn, prevent that damage.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PenanceEffect(), new PutCardFromHandOnTopOfLibraryCost()));
+        this.addAbility(new SimpleActivatedAbility(new PenanceEffect(), new PutCardFromHandOnTopOfLibraryCost()));
 
     }
 

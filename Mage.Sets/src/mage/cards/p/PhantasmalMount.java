@@ -53,7 +53,7 @@ public final class PhantasmalMount extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {tap}: Target creature you control with toughness 2 or less gets +1/+1 and gains flying until end of turn. When Phantasmal Mount leaves the battlefield this turn, sacrifice that creature. When the creature leaves the battlefield this turn, sacrifice Phantasmal Mount.
-        Ability activatedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhantasmalMountEffect(), new TapSourceCost());
+        Ability activatedAbility = new SimpleActivatedAbility(new PhantasmalMountEffect(), new TapSourceCost());
         activatedAbility.addTarget(new TargetControlledCreaturePermanent(filter));
         this.addAbility(activatedAbility);
 

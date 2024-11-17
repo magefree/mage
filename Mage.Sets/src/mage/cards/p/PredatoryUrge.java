@@ -40,7 +40,7 @@ public final class PredatoryUrge extends CardImpl {
         this.addAbility(ability);
         // Enchanted creature has "{tap}: This creature deals damage equal to its power to target creature.
         // That creature deals damage equal to its power to this creature."
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEachOtherEffect(), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new DamageEachOtherEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted creature has \"{T}: This creature deals damage equal to its power to target creature. That creature deals damage equal to its power to this creature.\"");

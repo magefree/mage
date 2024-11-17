@@ -39,7 +39,7 @@ public final class Plaguebearer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}{X}{B}: Destroy target nonblack creature with converted mana cost X.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{X}{X}{B}"));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ManaCostsImpl<>("{X}{X}{B}"));
         ability.addTarget(new TargetPermanent(filter));
         ability.setTargetAdjuster(new XManaValueTargetAdjuster());
         this.addAbility(ability);

@@ -30,7 +30,7 @@ public final class PerniciousDeed extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{G}");
 
         // {X}, Sacrifice Pernicious Deed: Destroy each artifact, creature, and enchantment with converted mana cost X or less.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PerniciousDeedEffect(), new VariableManaCost(VariableCostType.NORMAL));
+        Ability ability = new SimpleActivatedAbility(new PerniciousDeedEffect(), new VariableManaCost(VariableCostType.NORMAL));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

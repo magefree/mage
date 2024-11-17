@@ -30,10 +30,10 @@ public final class Psychatog extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Discard a card: Psychatog gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,1,Duration.EndOfTurn), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1,1,Duration.EndOfTurn), new DiscardCardCost()));
         
         // Exile two cards from your graveyard: Psychatog gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,1,Duration.EndOfTurn), new ExileFromGraveCost(new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD))));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1,1,Duration.EndOfTurn), new ExileFromGraveCost(new TargetCardInYourGraveyard(2, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD))));
 
     }
 

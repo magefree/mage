@@ -41,7 +41,7 @@ public final class PhyrexianDevourer extends CardImpl {
         this.addAbility(new PhyrexianDevourerStateTriggeredAbility());
 
         // Exile the top card of your library: Put X +1/+1 counters on Phyrexian Devourer, where X is the exiled card's converted mana cost.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PhyrexianDevourerEffect(), new ExileTopCardLibraryCost()));
+        this.addAbility(new SimpleActivatedAbility(new PhyrexianDevourerEffect(), new ExileTopCardLibraryCost()));
 
     }
 
