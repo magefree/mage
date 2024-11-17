@@ -37,7 +37,7 @@ public final class IllusoryGains extends CardImpl {
         this.addAbility(ability);
 
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
 
         // Whenever a creature enters the battlefield under an opponent's control, attach Illusory Gains to that creature.
         this.addAbility(new EntersBattlefieldOpponentTriggeredAbility(

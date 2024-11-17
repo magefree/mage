@@ -44,7 +44,7 @@ public final class KjeldoranPride extends CardImpl {
         this.addAbility(enchantAbility);
 
         // Enchanted creature gets +1/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 2)));
 
         // 2U: Attach Kjeldoran Pride to target creature other than enchanted creature.
         Ability ability = new SimpleActivatedAbility(new AttachEffect(Outcome.Benefit, "attach {this} to target " + filter.getMessage()), new ManaCostsImpl<>("{2}{U}"));

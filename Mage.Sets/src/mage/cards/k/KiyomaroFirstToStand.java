@@ -47,7 +47,7 @@ public final class KiyomaroFirstToStand extends CardImpl {
         
         // As long as you have four or more cards in hand, Kiyomaro has vigilance.
         Condition condition = new CardsInHandCondition(ComparisonType.MORE_THAN,3);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield), condition,
                 "As long as you have four or more cards in hand, {this} has vigilance"));
         this.addAbility(ability);

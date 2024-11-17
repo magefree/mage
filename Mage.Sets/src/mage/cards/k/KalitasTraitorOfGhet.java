@@ -52,7 +52,7 @@ public final class KalitasTraitorOfGhet extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // If a nontoken creature an opponent controls would die, instead exile that card and create a 2/2 black Zombie creature token.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KalitasTraitorOfGhetEffect()));
+        this.addAbility(new SimpleStaticAbility(new KalitasTraitorOfGhetEffect()));
 
         // {2}{B}, Sacrifice another Vampire or Zombie: Put two +1/+1 counters on Kalitas, Traitor of Ghet.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new ManaCostsImpl<>("{2}{B}"));

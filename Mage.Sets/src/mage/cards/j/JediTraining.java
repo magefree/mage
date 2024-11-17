@@ -34,7 +34,7 @@ public final class JediTraining extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{U}");
 
         // Meditate abilities you activate costs {1} less to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbilitiesCostReductionControllerEffect(MeditateAbility.class, "Meditate")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(MeditateAbility.class, "Meditate")));
 
         // Whenever a Jedi creature you control meditates, scry 1.
         this.addAbility(new JediTrainingTriggeredAbility());

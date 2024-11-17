@@ -37,7 +37,7 @@ public final class KashiTribeElite extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Legendary Snakes you control have shroud. (They can't be the targets of spells or abilities.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
 
         // Whenever Kashi-Tribe Elite deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
         Ability ability;

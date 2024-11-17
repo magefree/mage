@@ -36,7 +36,7 @@ public final class KrosanDrover extends CardImpl {
 
         // Creature spells you cast with converted mana cost 6 or greater cost {2} less to cast.
         Effect effect = new SpellsCostReductionControllerEffect(filter, 2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private KrosanDrover(final KrosanDrover card) {

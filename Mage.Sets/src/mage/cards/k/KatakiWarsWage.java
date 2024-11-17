@@ -38,7 +38,7 @@ public final class KatakiWarsWage extends CardImpl {
         Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(1)));
         Effect effect = new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, filter, false);
         effect.setText("All artifacts have \"At the beginning of your upkeep, sacrifice this artifact unless you pay {1}.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private KatakiWarsWage(final KatakiWarsWage card) {

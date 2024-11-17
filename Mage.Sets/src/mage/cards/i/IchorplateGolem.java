@@ -43,7 +43,7 @@ public final class IchorplateGolem extends CardImpl {
         this.addAbility(new IchorplateGolemTriggeredAbility());
 
         // Creatures you control with oil counters on them get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)
                 .setText("Creatures you control with oil counters on them get +1/+1")));
     }
 

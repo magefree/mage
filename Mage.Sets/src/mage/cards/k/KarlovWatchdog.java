@@ -36,7 +36,7 @@ public final class KarlovWatchdog extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Permanents your opponents control can't be turned face up during your turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KarlovWatchdogEffect()));
+        this.addAbility(new SimpleStaticAbility(new KarlovWatchdogEffect()));
 
         // Whenever you attack with three or more creatures, creatures you control get +1/+1 until end of turn.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(

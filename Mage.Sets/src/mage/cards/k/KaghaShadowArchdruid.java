@@ -54,7 +54,7 @@ public final class KaghaShadowArchdruid extends CardImpl {
         this.addAbility(ability);
 
         // Once during each of your turns, you may play a land or cast a permanent spell from among cards in your graveyard that were put there from your library this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KaghaShadowArchdruidEffect())
+        this.addAbility(new SimpleStaticAbility(new KaghaShadowArchdruidEffect())
             .setIdentifier(MageIdentifier.KaghaShadowArchdruidWatcher),
             new KaghaShadowArchdruidWatcher());
     }

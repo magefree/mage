@@ -40,7 +40,7 @@ public final class KefnetsMonument extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Blue creature spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Whenever you cast a creature spell, target creature an opponent controls doesn't untap during its controller's next untap step.
         Ability ability = new SpellCastControllerTriggeredAbility(new DontUntapInControllersNextUntapStepTargetEffect(), filter2, false);

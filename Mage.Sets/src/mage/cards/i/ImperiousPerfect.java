@@ -34,7 +34,7 @@ public final class ImperiousPerfect extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ElfWarriorToken(), 1), new ColoredManaCost(ColoredManaSymbol.G));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

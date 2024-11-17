@@ -43,7 +43,7 @@ public final class IllusionaryTerrain extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseTwoBasicLandTypesEffect(Outcome.Neutral)));
 
         // Basic lands of the first chosen type are the second chosen type.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IllusionaryTerrainEffect()));
+        this.addAbility(new SimpleStaticAbility(new IllusionaryTerrainEffect()));
 
     }
 

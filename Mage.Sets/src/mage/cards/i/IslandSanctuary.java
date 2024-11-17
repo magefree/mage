@@ -32,7 +32,7 @@ public final class IslandSanctuary extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{W}");
 
         // If you would draw a card during your draw step, instead you may skip that draw. If you do, until your next turn, you can't be attacked except by creatures with flying and/or islandwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IslandSanctuaryEffect()));
+        this.addAbility(new SimpleStaticAbility(new IslandSanctuaryEffect()));
     }
 
     private IslandSanctuary(final IslandSanctuary card) {

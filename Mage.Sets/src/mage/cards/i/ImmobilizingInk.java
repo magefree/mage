@@ -43,15 +43,15 @@ public final class ImmobilizingInk extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
-                                                new GainAbilityAttachedEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()),
+        this.addAbility(new SimpleStaticAbility(
+                                                new GainAbilityAttachedEffect(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()),
                                                     AttachmentType.AURA,
                                                     Duration.WhileOnBattlefield,"Enchanted creature doesn't untap during its controller's untap step.")));
         
         // Enchanted creature has "{1}, Discard a card: Untap this creature."
         Ability untapAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{1}"));
         untapAbility.addCost(new DiscardTargetCost(new TargetCardInHand()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(
                                                 new GainAbilityAttachedEffect(untapAbility,
                                                     AttachmentType.AURA,
                                                     Duration.WhileOnBattlefield, "Enchanted creature has \"{1}, Discard a card: Untap this creature.\"")));

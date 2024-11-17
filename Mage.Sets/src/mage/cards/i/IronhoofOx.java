@@ -24,7 +24,7 @@ public final class IronhoofOx extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ironhoof Ox can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
     private IronhoofOx(final IronhoofOx card) {

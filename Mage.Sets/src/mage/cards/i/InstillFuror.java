@@ -48,7 +48,7 @@ public final class InstillFuror extends CardImpl {
                         "sacrifice this creature unless it attacked this turn"));
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature has \"At the beginning of your end step, sacrifice this creature unless it attacked this turn.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
     }
 

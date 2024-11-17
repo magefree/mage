@@ -32,7 +32,7 @@ public final class KhenraCharioteer extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Other creatures you control have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("creatures"), true)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("creatures"), true)));
 
     }
 

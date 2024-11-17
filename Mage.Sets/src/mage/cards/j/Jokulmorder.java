@@ -50,7 +50,7 @@ public final class Jokulmorder extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(effect, false));
 
         // Jokulmorder doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // Whenever you play an Island, you may untap Jokulmorder.
         this.addAbility(new JokulmorderTriggeredAbility());
