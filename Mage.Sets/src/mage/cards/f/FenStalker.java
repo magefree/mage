@@ -37,7 +37,7 @@ public final class FenStalker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Fen Stalker has fear as long as you control no untapped lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
             new ConditionalContinuousEffect(new GainAbilitySourceEffect(FearAbility.getInstance(),
             Duration.WhileOnBattlefield), new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter)),
             "{this} has fear as long as you control no untapped lands")));

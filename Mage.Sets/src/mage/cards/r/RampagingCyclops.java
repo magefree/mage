@@ -32,7 +32,7 @@ public final class RampagingCyclops extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Rampaging Cyclops gets -2/-0 as long as two or more creatures are blocking it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(
                         new BoostSourceEffect(-2, 0, Duration.WhileOnBattlefield),
                         RampagingCyclopsCondition.instance,

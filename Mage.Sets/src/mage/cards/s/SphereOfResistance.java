@@ -20,7 +20,7 @@ public final class SphereOfResistance extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Spells cost {1} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostIncreasingAllEffect(1, new FilterCard("Spells"), TargetController.ANY))
         );
     }

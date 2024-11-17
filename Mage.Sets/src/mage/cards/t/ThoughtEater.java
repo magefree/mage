@@ -31,7 +31,7 @@ public final class ThoughtEater extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Your maximum hand size is reduced by three.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new MaximumHandSizeControllerEffect(3, Duration.WhileOnBattlefield, HandSizeModification.REDUCE)));
     }
 

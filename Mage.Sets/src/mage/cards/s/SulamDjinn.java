@@ -33,7 +33,7 @@ public final class SulamDjinn extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Sulam Djinn gets -2/-2 as long as green is the most common color among all permanents or is tied for most common.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new BoostSourceEffect(-2, -2, Duration.WhileOnBattlefield),
                         new MostCommonColorCondition(new ObjectColor(ObjectColor.GREEN)),
                         "{this} gets -2/-2 as long as green is the most common color among all permanents or is tied for most common")));

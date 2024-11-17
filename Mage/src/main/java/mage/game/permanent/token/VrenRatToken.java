@@ -31,7 +31,7 @@ public final class VrenRatToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter),
                         new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield
                 )

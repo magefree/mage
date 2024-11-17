@@ -56,7 +56,7 @@ public final class JoragaTreespeaker extends LevelerCard {
         // 1/4
         // Elves you control have "{T}: Add {G}{G}."
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
-        abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        abilities2.add(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()),
                 Duration.WhileOnBattlefield, filter)));
 

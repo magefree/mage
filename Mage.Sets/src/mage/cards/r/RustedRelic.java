@@ -22,7 +22,7 @@ public final class RustedRelic extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Metalcraft — Rusted Relic is a 5/5 Golem artifact creature as long as you control three or more artifacts.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(
                         new BecomesCreatureSourceEffect(new RustedRelicToken(), CardType.ARTIFACT, Duration.WhileOnBattlefield),
                         MetalcraftCondition.instance,

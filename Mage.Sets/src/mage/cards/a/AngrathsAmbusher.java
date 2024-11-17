@@ -37,7 +37,7 @@ public final class AngrathsAmbusher extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Angrath's Ambusher gets +2/+0 as long as you control an Angrath planeswalker.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
                         new PermanentsOnTheBattlefieldCondition(filter),
                         "{this} gets +2/+0 as long as you control an Angrath planeswalker")));

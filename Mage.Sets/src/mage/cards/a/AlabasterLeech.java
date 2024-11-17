@@ -34,7 +34,7 @@ public final class AlabasterLeech extends CardImpl {
         this.toughness = new MageInt(3);
 
         // White spells you cast cost {W} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostIncreasingAllEffect(new ManaCostsImpl<>("{W}"), filter, TargetController.YOU)));
     }
 

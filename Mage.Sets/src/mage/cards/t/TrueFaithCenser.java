@@ -37,7 +37,7 @@ public final class TrueFaithCenser extends CardImpl {
         this.addAbility(ability);
 
         // As long as equipped creature is a Human, it gets an additional +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new BoostEquippedEffect(1, 0),
                 new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
 

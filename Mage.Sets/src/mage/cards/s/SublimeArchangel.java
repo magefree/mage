@@ -33,7 +33,7 @@ public final class SublimeArchangel extends CardImpl {
         // Exalted
         this.addAbility(new ExaltedAbility());
         // Other creatures you control have exalted.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(new ExaltedAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, true)));
     }
 

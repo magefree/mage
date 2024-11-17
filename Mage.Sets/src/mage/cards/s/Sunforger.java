@@ -44,7 +44,7 @@ public final class Sunforger extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +4/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostEquippedEffect(4, 0, Duration.WhileOnBattlefield)));
 
         // {R}{W}, Unattach Sunforger: Search your library for a red or white 

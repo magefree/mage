@@ -39,7 +39,7 @@ public final class TrustedAdvisor extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Your maximum hand size is increased by two.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new MaximumHandSizeControllerEffect(2, Duration.WhileOnBattlefield, HandSizeModification.INCREASE)));
 
         // At the beginning of your upkeep, return a blue creature you control to its owner's hand.

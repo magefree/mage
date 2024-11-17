@@ -35,7 +35,7 @@ public final class GohamDjinn extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
 
         // Goham Djinn gets -2/-2 as long as black is the most common color among all permanents or is tied for most common.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new BoostSourceEffect(-2, -2, Duration.WhileOnBattlefield),
                         new MostCommonColorCondition(new ObjectColor(ObjectColor.BLACK)),
                         "{this} gets -2/-2 as long as black is the most common color among all permanents or is tied for most common")));

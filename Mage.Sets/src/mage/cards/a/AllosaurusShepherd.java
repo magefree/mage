@@ -42,7 +42,7 @@ public class AllosaurusShepherd extends CardImpl {
         this.addAbility(new CantBeCounteredSourceAbility());
 
         //Green spells you control can't be countered.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new CantBeCounteredControlledEffect(greenSpellsFilter, null, Duration.WhileOnBattlefield)));
 
         //4GG: Until end of turn, each Elf creature you control has base power and toughness 5/5 

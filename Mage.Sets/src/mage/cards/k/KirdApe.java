@@ -37,7 +37,7 @@ public final class KirdApe extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Kird Ape gets +1/+2 as long as you control a Forest.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter), rule)));
     }

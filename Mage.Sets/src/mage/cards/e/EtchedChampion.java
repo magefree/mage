@@ -44,7 +44,7 @@ public final class EtchedChampion extends CardImpl {
 
         // Metalcraft — Etched Champion has protection from all colors as long as you control three or more artifacts.
         ContinuousEffect effect = new GainAbilitySourceEffect(new ProtectionAbility(filter), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(effect, MetalcraftCondition.instance, ruleText))
                 .setAbilityWord(AbilityWord.METALCRAFT)
                 .addHint(MetalcraftHint.instance)

@@ -60,7 +60,7 @@ class VeiledSerpentToken extends TokenImpl {
         subtype.add(SubType.SERPENT);
         power = new MageInt(4);
         toughness = new MageInt(4);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new CantAttackUnlessDefenderControllsPermanent(
                         new FilterLandPermanent(SubType.ISLAND, "an Island"))));
     }

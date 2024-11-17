@@ -28,7 +28,7 @@ public final class Shimmer extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseLandTypeEffect(Outcome.Detriment)));
 
         // Each land of the chosen type has phasing.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllOfChosenSubtypeEffect(PhasingAbility.getInstance(), Duration.WhileOnBattlefield,
                         new FilterLandPermanent("Each land of the chosen type"))));
     }

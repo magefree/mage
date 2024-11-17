@@ -41,7 +41,7 @@ public final class LootExuberantExplorer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // You may play an additional land on each of your turns.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
 
         // {4}{G}{G}, {T}: Look at the top six cards of your library. You may reveal a creature card with mana value less than or equal to the number of lands you control from among them and put it onto the battlefield. Put the rest on the bottom in a random order.

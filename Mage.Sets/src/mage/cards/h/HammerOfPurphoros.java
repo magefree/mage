@@ -33,7 +33,7 @@ public final class HammerOfPurphoros extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
 
         // {2}{R}, {tap}, Sacrifice a land: Create a 3/3 colorless Golem enchantment artifact creature token.

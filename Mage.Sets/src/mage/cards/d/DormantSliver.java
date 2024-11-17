@@ -35,11 +35,11 @@ public final class DormantSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Sliver creatures have defender.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield, filter, "All Sliver creatures have defender.")));
         // All Slivers have "When this permanent enters the battlefield, draw a card."
         Ability ability2 = new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(ability2, Duration.WhileOnBattlefield, filter, "All Slivers have \"When this permanent enters the battlefield, draw a card.\"")));
     }
 

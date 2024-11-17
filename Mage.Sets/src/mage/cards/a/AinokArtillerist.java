@@ -29,7 +29,7 @@ public final class AinokArtillerist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Ainok Artillerist has reach as long as it has a +1/+1 counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(ReachAbility.getInstance()),
                 new SourceHasCounterCondition(CounterType.P1P1),"{this} has reach as long as it has a +1/+1 counter on it")));
     }

@@ -43,7 +43,7 @@ public final class JorubaiMurkLurker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Jorubai Murk Lurker gets +1/+1 as long as you control a Swamp.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter), rule)));
 

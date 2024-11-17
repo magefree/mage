@@ -28,7 +28,7 @@ public final class ProwlersHelm extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature can't be blocked except by Walls.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new CantBeBlockedByCreaturesAttachedEffect(Duration.WhileOnBattlefield, filter, AttachmentType.EQUIPMENT)));
 
         // Equip {2}

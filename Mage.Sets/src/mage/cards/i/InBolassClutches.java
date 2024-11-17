@@ -42,7 +42,7 @@ public final class InBolassClutches extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect("permanent")));
 
         // Enchanted permanent is legendary.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new AddCardSuperTypeAttachedEffect(SuperType.LEGENDARY, Duration.WhileOnBattlefield, AttachmentType.AURA)
         ));
     }

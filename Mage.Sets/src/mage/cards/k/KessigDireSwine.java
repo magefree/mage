@@ -29,7 +29,7 @@ public final class KessigDireSwine extends CardImpl {
         this.toughness = new MageInt(6);
 
         // <i>Delirium</i> &mdash; Kessig Dire Swine has trample as long as there are four or more card types among cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
                         DeliriumCondition.instance, "<i>Delirium</i> &mdash; {this} has trample as long as there are four or more card types among cards in your graveyard"))
                 .addHint(CardTypesInGraveyardHint.YOU));

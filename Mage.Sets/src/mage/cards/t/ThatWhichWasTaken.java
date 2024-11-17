@@ -51,7 +51,7 @@ public final class ThatWhichWasTaken extends CardImpl {
         // Each permanent with a divinity counter on it has indestructible.
         Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filterIndestructible, false);
         effect.setText("Each permanent with a divinity counter on it has indestructible");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 effect));
 
     }

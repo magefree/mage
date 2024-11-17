@@ -30,7 +30,7 @@ public final class HiddenPath extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}{G}{G}{G}");
 
         // Green creatures have forestwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(new ForestwalkAbility(false), Duration.WhileOnBattlefield, filter)));
     }
 

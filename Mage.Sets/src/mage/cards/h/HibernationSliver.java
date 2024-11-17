@@ -35,7 +35,7 @@ public final class HibernationSliver extends CardImpl {
         Effect effect = new ReturnToHandSourceEffect(true);
         effect.setText("Return this permanent to its owner's hand");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new PayLifeCost(2));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield,
                         new FilterPermanent(SubType.SLIVER, "All Slivers"), "All Slivers have \"Pay 2 life: Return this permanent to its owner's hand.\"")));
     }

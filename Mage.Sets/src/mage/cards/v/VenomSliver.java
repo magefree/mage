@@ -28,7 +28,7 @@ public final class VenomSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sliver creatures you control have deathtouch.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(DeathtouchAbility.getInstance(),
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_SLIVERS)));
     }

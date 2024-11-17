@@ -26,7 +26,7 @@ public final class MaelstromWanderer extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES, false)));
         // Cascade
         this.addAbility(new CascadeAbility(false));

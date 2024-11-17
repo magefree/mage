@@ -50,7 +50,7 @@ public final class SurrakDragonclaw extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantBeCounteredControlledEffect(filterTarget, null, Duration.WhileOnBattlefield)));
 
         // Other creatures you control have trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, true)));
 
     }

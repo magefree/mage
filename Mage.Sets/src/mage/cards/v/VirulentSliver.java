@@ -32,7 +32,7 @@ public final class VirulentSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // All Sliver creatures have poisonous 1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(new PoisonousAbility(1),
                         Duration.WhileOnBattlefield, filter,
                         "All Sliver creatures have poisonous 1. <i>(Whenever a Sliver deals combat damage to a player, that player gets a poison counter.)</i>")));
