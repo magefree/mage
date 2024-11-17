@@ -43,7 +43,7 @@ public final class DrillSkimmer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // Drill-Skimmer has shroud as long as you control another artifact creature.
         Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield),
                 condition, "{this} has shroud as long as you control another artifact creature.")));
     }

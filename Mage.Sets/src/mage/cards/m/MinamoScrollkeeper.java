@@ -32,7 +32,7 @@ public final class MinamoScrollkeeper extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Your maximum hand size is increased by one.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new MaximumHandSizeControllerEffect(1, Duration.WhileOnBattlefield, HandSizeModification.INCREASE)));
     }
 

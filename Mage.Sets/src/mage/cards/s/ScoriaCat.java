@@ -36,7 +36,7 @@ public final class ScoriaCat extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Scoria Cat gets +3/+3 as long as you control no untapped lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
             new ConditionalContinuousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
             new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter)),
             "{this} gets +3/+3 as long as you control no untapped lands")));

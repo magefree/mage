@@ -35,7 +35,7 @@ public final class MyrGalvanizer extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         // Other Myr creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // {1}, {T}: Untap each other Myr you control.

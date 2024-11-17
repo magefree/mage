@@ -51,7 +51,7 @@ public final class RoshanHiddenMagister extends CardImpl {
         )));
 
         // Face-down creatures you control have menace.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,new GainAbilityControlledEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new MenaceAbility(false),
                 Duration.WhileOnBattlefield,
                 filter

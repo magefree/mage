@@ -40,7 +40,7 @@ public final class KessDissidentMage extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // During each of your turns, you may cast an instant or sorcery card from your graveyard. If a card cast this way would be put into your graveyard this turn, exile it instead.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleStaticAbility(
                 new KessDissidentMageCastFromGraveyardEffect())
                 .setIdentifier(MageIdentifier.KessDissidentMageWatcher);
         ability.addEffect(new KessDissidentMageReplacementEffect());

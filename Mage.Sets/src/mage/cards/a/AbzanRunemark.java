@@ -46,7 +46,7 @@ public final class AbzanRunemark extends CardImpl {
         // Enchanted creature gets +2/+2.
         this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
         // Enchanted creature has vigilance as long as you control a black or green permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA),
                 new PermanentsOnTheBattlefieldCondition(filter), "Enchanted creature has vigilance as long as you control a black or green permanent")));
     }

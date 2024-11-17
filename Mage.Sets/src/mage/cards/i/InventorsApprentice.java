@@ -31,7 +31,7 @@ public final class InventorsApprentice extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Inventor's Apprentice gets +1/+1 as long as you control an artifact.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
             new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
             new PermanentsOnTheBattlefieldCondition(new FilterControlledArtifactPermanent()), rule)));
     }

@@ -41,7 +41,7 @@ public final class UnquestionedAuthority extends CardImpl {
         // When Unquestioned Authority enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
         // Enchanted creature has protection from creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(new ProtectionAbility(StaticFilters.FILTER_PERMANENT_CREATURES), AttachmentType.AURA)));
     }
 

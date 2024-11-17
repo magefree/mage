@@ -45,7 +45,7 @@ public final class FavorableDestiny extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+2 as long as it's white.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(
                         new BoostEnchantedEffect(1, 2),
                         new EnchantedCreatureColorCondition(ObjectColor.WHITE),
@@ -54,7 +54,7 @@ public final class FavorableDestiny extends CardImpl {
         ));
 
         // Enchanted creature has shroud as long as its controller controls another creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(
                         new GainAbilityAttachedEffect(
                                 ShroudAbility.getInstance(),

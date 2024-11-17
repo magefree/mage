@@ -35,7 +35,7 @@ public final class JinGitaxiasCoreAugur extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(7)));
 
         // Each opponent's maximum hand size is reduced by seven.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new MaximumHandSizeControllerEffect(7, Duration.WhileOnBattlefield, HandSizeModification.REDUCE, TargetController.OPPONENT)));
     }
 

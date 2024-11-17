@@ -36,7 +36,7 @@ public final class SpurGrappler extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Spur Grappler gets +2/+1 as long as you control no untapped lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
             new ConditionalContinuousEffect(new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield),
             new InvertCondition(new PermanentsOnTheBattlefieldCondition(filter)),
             "{this} gets +2/+1 as long as you control no untapped lands")));

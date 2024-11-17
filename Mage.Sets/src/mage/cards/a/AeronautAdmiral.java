@@ -38,7 +38,7 @@ public final class AeronautAdmiral extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Vehicles you control have flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 

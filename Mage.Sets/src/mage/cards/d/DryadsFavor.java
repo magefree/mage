@@ -37,7 +37,7 @@ public final class DryadsFavor extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has forestwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(new ForestwalkAbility(), AttachmentType.AURA)));
     }
 

@@ -42,7 +42,7 @@ public final class CuratorsWard extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted permanent has hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.AURA)
                         .setText("Enchanted permanent has hexproof")));
 

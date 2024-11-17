@@ -39,12 +39,12 @@ public final class SedgeSliver extends CardImpl {
 
         // All Sliver creatures have "This creature gets +1/+1 as long as you control a Swamp."
         Ability boost = new SimpleStaticAbility(new BoostSourceWhileControlsEffect(filterSwamp, 1, 1));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(boost, Duration.WhileOnBattlefield,
                         filter, "All Sliver creatures have \"This creature gets +1/+1 as long as you control a Swamp.\"")));
         // All Slivers have "{B}: Regenerate this permanent."
         Ability regenerate = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(regenerate, Duration.WhileOnBattlefield,
                         filterSlivers, "All Slivers have \"{B}: Regenerate this permanent.\"")));
     }

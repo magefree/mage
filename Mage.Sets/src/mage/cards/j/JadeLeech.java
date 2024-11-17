@@ -34,7 +34,7 @@ public final class JadeLeech extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Green spells you cast cost {G} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostIncreasingAllEffect(new ManaCostsImpl<>("{G}"), filter, TargetController.YOU)));
     }
 

@@ -25,7 +25,7 @@ public final class BehindTheScenes extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // Creatures you control have skulk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(new SkulkAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
 
         // {4}{W}: Creatures you control get +1/+1 until end of turn.

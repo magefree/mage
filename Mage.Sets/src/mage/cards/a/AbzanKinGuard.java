@@ -39,7 +39,7 @@ public final class AbzanKinGuard extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Abzan Kin-Guard has lifelink as long as you control a white or black permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter), "{this} has lifelink as long as you control a white or black permanent")));
     }

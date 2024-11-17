@@ -27,7 +27,7 @@ public final class PredatorySliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sliver creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostControlledEffect(1, 1, Duration.WhileInGraveyard, StaticFilters.FILTER_PERMANENT_SLIVERS)));
     }
 

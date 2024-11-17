@@ -39,7 +39,7 @@ public final class FreewindEquenaut extends CardImpl {
                 new DamageTargetEffect(2),
                 new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield),
                 new EnchantedSourceCondition(),

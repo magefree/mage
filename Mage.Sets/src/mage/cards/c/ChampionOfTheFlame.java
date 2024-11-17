@@ -38,7 +38,7 @@ public final class ChampionOfTheFlame extends CardImpl {
         DynamicValue auraAmount = new AuraAttachedCount(2);
         DynamicValue equipAmount = new EquipmentAttachedCount(2);
         DynamicValue totalAmount = new AdditiveDynamicValue(auraAmount, equipAmount);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostSourceEffect(totalAmount, totalAmount, Duration.WhileOnBattlefield)
                         .setText("{this} gets +2/+2 for each Aura and Equipment attached to it")));
     }

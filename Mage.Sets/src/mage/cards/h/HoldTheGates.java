@@ -26,7 +26,7 @@ public final class HoldTheGates extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // Creatures you control get +0/+1 for each Gate you control and have vigilance.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleStaticAbility(
                 new BoostControlledEffect(StaticValue.get(0), GateYouControlCount.instance, Duration.WhileOnBattlefield)
         );
         ability.addEffect(

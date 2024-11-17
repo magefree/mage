@@ -45,7 +45,7 @@ public final class ZaskSkitteringSwarmlord extends CardImpl {
         this.toughness = new MageInt(5);
 
         // You may play lands and cast Insect spells from your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new PlayFromGraveyardControllerEffect(filter)
         ));
 

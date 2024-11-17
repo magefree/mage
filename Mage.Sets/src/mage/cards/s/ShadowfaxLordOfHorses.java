@@ -37,7 +37,7 @@ public final class ShadowfaxLordOfHorses extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Horses you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
             new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
 
         // Whenever Shadowfax, Lord of Horses attacks, you may put a creature card

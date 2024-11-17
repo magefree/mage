@@ -34,7 +34,7 @@ public final class IriniSengir extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Green enchantment spells and white enchantment spells cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostIncreasingAllEffect(2, filter, TargetController.ANY))
         );
     }

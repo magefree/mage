@@ -25,7 +25,7 @@ public final class UrzasIncubator extends CardImpl {
         // As Urza's Incubator enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.BoostCreature)));
         // Creature spells of the chosen type cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostReductionAllOfChosenSubtypeEffect(new FilterCreatureCard("creature spells of the chosen type"), 2)));
     }
 

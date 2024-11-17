@@ -30,7 +30,7 @@ public final class BorealElemental extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Spells your opponents cast that target Boreal Elemental cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostModificationThatTargetSourceEffect(2, new FilterCard("Spells"), TargetController.OPPONENT))
         );
     }

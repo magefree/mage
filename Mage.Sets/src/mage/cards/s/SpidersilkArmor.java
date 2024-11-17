@@ -25,7 +25,7 @@ public final class SpidersilkArmor extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
         // Creatures you control get +0/+1 and have reach.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleStaticAbility(
                 new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityControlledEffect(ReachAbility.getInstance(),
                 Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES);

@@ -37,7 +37,7 @@ public final class MineMineMine extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MineMineMineDrawEffect()));
 
         // Players have no maximum hand size and don't lose the game for drawing from an empty library.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, HandSizeModification.SET, TargetController.ANY)
                         .setText("Players have no maximum hand size and don't lose the game for drawing from an empty library")));
         this.addAbility(new SimpleStaticAbility(new MineMineMineDontLoseEffect()));

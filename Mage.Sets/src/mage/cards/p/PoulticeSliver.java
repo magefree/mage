@@ -37,7 +37,7 @@ public final class PoulticeSliver extends CardImpl {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ALL_SLIVERS));
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(ability,
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS,
                         "All Slivers have \"{2}, {T}: Regenerate target Sliver.\"")));

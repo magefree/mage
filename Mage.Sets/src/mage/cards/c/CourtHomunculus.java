@@ -33,7 +33,7 @@ public final class CourtHomunculus extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Court Homunculus gets +1/+1 as long as you control another artifact.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
                 new ControlsAnotherArtifactCondition(), "{this} gets +1/+1 as long as you control another artifact")));
     }

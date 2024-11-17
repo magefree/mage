@@ -39,7 +39,7 @@ public final class GraniteGrip extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/+0 for each Mountain you control.
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+        SimpleStaticAbility ability = new SimpleStaticAbility(
                 new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter, 1), new PermanentsOnBattlefieldCount(filter, 0),
                 Duration.WhileOnBattlefield));
         this.addAbility(ability);

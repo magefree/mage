@@ -33,7 +33,7 @@ public final class ArtifactWard extends CardImpl {
         // Enchanted creature can't be blocked by artifact creatures.
         // Prevent all damage that would be dealt to enchanted creature by artifact sources.
         // Enchanted creature can't be the target of abilities from artifact sources.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(new ProtectionAbility(new FilterArtifactCard("artifacts")), AttachmentType.AURA)));
     }
 

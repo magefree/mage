@@ -39,7 +39,7 @@ public final class MindwhipSliver extends CardImpl {
         // All Slivers have "{2}, Sacrifice this permanent: Target player discards a card at random. Activate this ability only any time you could cast a sorcery."
         Ability gainedAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1, true), new GenericManaCost(2));
         gainedAbility.addCost(new SacrificeSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, filter,
                         "All Slivers have \"{2}, Sacrifice this permanent: Target player discards a card at random. Activate only as a sorcery.\"")));
     }

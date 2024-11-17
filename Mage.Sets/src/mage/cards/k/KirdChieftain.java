@@ -45,7 +45,7 @@ public final class KirdChieftain extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Kird Chieftain gets +1/+1 as long as you control a Forest.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter), rule)));
         

@@ -31,7 +31,7 @@ public final class NimDevourer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Nim Devourer gets +1/+0 for each artifact you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostSourceEffect(ArtifactYouControlCount.instance, StaticValue.get(0), Duration.WhileOnBattlefield))
                 .addHint(ArtifactYouControlHint.instance)
         );

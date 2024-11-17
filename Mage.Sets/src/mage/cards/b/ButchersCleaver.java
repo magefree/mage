@@ -30,7 +30,7 @@ public final class ButchersCleaver extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(3, 0)));
 
         // As long as equipped creature is a Human, it has lifelink.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.EQUIPMENT),
                 new EquippedHasSubtypeCondition(SubType.HUMAN), staticText)));
 

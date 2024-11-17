@@ -34,7 +34,7 @@ public final class Burrowing extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has mountainwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(new MountainwalkAbility(), AttachmentType.AURA)));
     }
 

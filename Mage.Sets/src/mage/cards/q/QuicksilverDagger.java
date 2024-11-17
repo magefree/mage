@@ -44,7 +44,7 @@ public final class QuicksilverDagger extends CardImpl {
         Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         gainAbility.addTarget(new TargetPlayerOrPlaneswalker());
         gainAbility.addEffect(new DrawCardSourceControllerEffect(1));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA, Duration.WhileOnBattlefield,
                         "Enchanted creature has \"{T}: This creature deals 1 damage to target player or planeswalker. You draw a card.\"")
         ));

@@ -32,7 +32,7 @@ public final class DeadeyePlunderers extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Deadeye Plunderers gets +1/+1 for each artifact you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostSourceEffect(ArtifactYouControlCount.instance, ArtifactYouControlCount.instance, Duration.WhileOnBattlefield)
         ).addHint(ArtifactYouControlHint.instance));
 

@@ -28,7 +28,7 @@ public final class ThresherLizard extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Thresher Lizard gets +1/+2 as long as you have one or fewer cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(
                         new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
                         HeckbentCondition.instance,

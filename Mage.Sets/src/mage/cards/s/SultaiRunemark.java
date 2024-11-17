@@ -51,7 +51,7 @@ public final class SultaiRunemark extends CardImpl {
         // Enchanted creature gets +2/+2.
         this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
         // Enchanted creature has deathtouch as long as you control a green or blue permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.AURA),
                 new PermanentsOnTheBattlefieldCondition(filter), "Enchanted creature has deathtouch as long as you control a green or blue permanent")));
     }

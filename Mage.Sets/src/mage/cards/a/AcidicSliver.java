@@ -36,7 +36,7 @@ public final class AcidicSliver extends CardImpl {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new SacrificeSourceCost());
         ability.addCost(new GenericManaCost(2));
         ability.addTarget(new TargetAnyTarget());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(ability,
                         Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS,
                         "All Slivers have \"{2}, Sacrifice this permanent: This permanent deals 2 damage to any target.\"")));

@@ -41,7 +41,7 @@ public final class SeaLegs extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +0/+2 as long as it's a Pirate. Otherwise, it gets -2/-0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(
                         new BoostEnchantedEffect(0, 2),
                         new BoostEnchantedEffect(-2, -0),

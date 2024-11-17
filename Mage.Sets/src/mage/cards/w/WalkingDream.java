@@ -38,7 +38,7 @@ public final class WalkingDream extends CardImpl {
         // Walking Dream doesn't untap during your untap step if an opponent controls two or more creatures.
         ContinuousRuleModifyingEffect dontUntap = new DontUntapInControllersUntapStepSourceEffect(false, true);
         dontUntap.setText(rule);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleStaticAbility(
                 new ConditionalContinuousRuleModifyingEffect(
                         dontUntap,
                         new OpponentControlsPermanentCondition(

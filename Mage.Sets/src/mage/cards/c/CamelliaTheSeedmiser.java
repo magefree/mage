@@ -56,7 +56,7 @@ public final class CamelliaTheSeedmiser extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // Other Squirrels you control have menace.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,new GainAbilityControlledEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new MenaceAbility(false),
                 Duration.WhileOnBattlefield,
                 filterSquirrelCreatures,

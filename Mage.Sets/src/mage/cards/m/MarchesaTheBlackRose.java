@@ -44,7 +44,7 @@ public final class MarchesaTheBlackRose extends CardImpl {
         this.addAbility(new DethroneAbility());
 
         // Other creatures you control have dethrone.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(new DethroneAbility(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, true)));
 
         // Whenever a creature you control with a +1/+1 counter on it dies, return that card to the battlefield under your control at the beginning of the next end step.
