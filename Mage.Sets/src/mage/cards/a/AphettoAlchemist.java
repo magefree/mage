@@ -31,7 +31,7 @@ public final class AphettoAlchemist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Untap target artifact or creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);
         

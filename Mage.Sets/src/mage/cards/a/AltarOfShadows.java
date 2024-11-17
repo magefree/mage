@@ -35,7 +35,7 @@ public final class AltarOfShadows extends CardImpl {
         this.addAbility(new BeginningOfFirstMainTriggeredAbility(new AltarOfShadowsEffect()));
         
         // {7}, {tap}: Destroy target creature. Then put a charge counter on Altar of Shadows.
-        Ability destroyAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new GenericManaCost(7));
+        Ability destroyAbility = new SimpleActivatedAbility(new DestroyTargetEffect(), new GenericManaCost(7));
         destroyAbility.addCost(new TapSourceCost());
         destroyAbility.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true)
                 .concatBy("Then"));

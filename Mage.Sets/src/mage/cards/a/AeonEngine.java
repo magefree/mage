@@ -26,7 +26,7 @@ public final class AeonEngine extends CardImpl {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {T}, Exile Aeon Engine: Reverse the gameâs turn order. (For example, if play had proceeded clockwise around the table, it now goes counterclockwise.)
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AeonEngineEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AeonEngineEffect(), new TapSourceCost());
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }

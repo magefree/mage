@@ -28,7 +28,7 @@ public final class AdvanceScout extends CardImpl {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(FirstStrikeAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

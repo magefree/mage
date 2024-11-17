@@ -24,7 +24,7 @@ public final class AlchorsTomb extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {2}, {tap}: Target permanent you control becomes the color of your choice.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(Duration.WhileOnBattlefield), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new BecomesColorTargetEffect(Duration.WhileOnBattlefield), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent());
         this.addAbility(ability);

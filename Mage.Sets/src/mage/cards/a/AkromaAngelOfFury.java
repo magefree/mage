@@ -39,7 +39,7 @@ public final class AkromaAngelOfFury extends CardImpl {
         // protection from white and from blue
         this.addAbility(ProtectionAbility.from(ObjectColor.WHITE, ObjectColor.BLUE));
         // {R}: Akroma, Angel of Fury gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1,0, Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));
         // Morph {3}{R}{R}{R}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{3}{R}{R}{R}")));
     }

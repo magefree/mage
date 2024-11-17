@@ -35,7 +35,7 @@ public final class AetherVial extends CardImpl {
         // At the beginning of your upkeep, you may put a charge counter on Aether Vial.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance(), true), true));
         // {tap}: You may put a creature card with converted mana cost equal to the number of charge counters on Aether Vial from your hand onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AetherVialEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AetherVialEffect(), new TapSourceCost()));
     }
 
     private AetherVial(final AetherVial card) {

@@ -35,7 +35,7 @@ public final class AlphaKavu extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {1}{G}: Target Kavu creature gets -1/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, 1, Duration.EndOfTurn),
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-1, 1, Duration.EndOfTurn),
             new ManaCostsImpl<>("{1}{G}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

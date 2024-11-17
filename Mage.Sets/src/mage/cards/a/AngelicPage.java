@@ -34,7 +34,7 @@ public final class AngelicPage extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         //{T}: Target attacking or blocking creature gets +1/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);
     }

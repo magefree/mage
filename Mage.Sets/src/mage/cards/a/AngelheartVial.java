@@ -34,7 +34,7 @@ public final class AngelheartVial extends CardImpl {
         this.addAbility(new AngelheartVialTriggeredAbility());
 
         // {2}, {tap}, Remove four charge counters from Angelheart Vial: You gain 2 life and draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(2), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(4)));
         ability.addEffect(new DrawCardSourceControllerEffect(1).concatBy("and"));

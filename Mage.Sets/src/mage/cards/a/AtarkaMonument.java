@@ -30,7 +30,7 @@ public final class AtarkaMonument extends CardImpl {
         this.addAbility(new GreenManaAbility());
 
         // {4}{R}{G}: Atarka Monument becomes a 4/4 red and green Dragon artifact creature with flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(4, 4, "4/4 red and green Dragon artifact creature with flying")
                         .withColor("RG")
                         .withSubType(SubType.DRAGON)
