@@ -44,7 +44,7 @@ public final class TilonallisCrown extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DamageAttachedEffect(1, "it")));
 
         // Enchanted creature gets +3/+0 and has trample.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 0));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(3, 0));
         Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has trample");
         ability.addEffect(effect);

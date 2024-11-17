@@ -47,7 +47,7 @@ public final class TetsuoUmezawa extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Tetsuo Umezawa can't be the target of Aura spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TetsuoUmezawaEffect()));
+        this.addAbility(new SimpleStaticAbility(new TetsuoUmezawaEffect()));
         // {U}{B}{B}{R}, {tap}: Destroy target tapped or blocking creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl<>("{U}{B}{B}{R}"));
         ability.addCost(new TapSourceCost());

@@ -51,7 +51,7 @@ public class ThranPortal extends CardImpl {
         AsEntersBattlefieldAbility chooseLandTypeAbility = new AsEntersBattlefieldAbility(new ChooseBasicLandTypeEffect(Outcome.AddAbility));
         chooseLandTypeAbility.addEffect(new EnterAttributeAddChosenSubtypeEffect()); // While it enters
         this.addAbility(chooseLandTypeAbility);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddChosenSubtypeEffect())); // While on the battlefield
+        this.addAbility(new SimpleStaticAbility(new AddChosenSubtypeEffect())); // While on the battlefield
 
         // Mana abilities of Thran Portal cost an additional 1 life to activate.
         // This also adds the mana ability

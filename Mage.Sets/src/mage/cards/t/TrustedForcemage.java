@@ -31,7 +31,7 @@ public final class TrustedForcemage extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Trusted Forcemage is paired with another creature, each of those creatures gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostPairedEffect(1, 1, ruleText)));
+        this.addAbility(new SimpleStaticAbility(new BoostPairedEffect(1, 1, ruleText)));
     }
 
     private TrustedForcemage(final TrustedForcemage card) {

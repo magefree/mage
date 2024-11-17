@@ -28,7 +28,7 @@ public final class TrainingDrone extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TrainingDroneEffect()));
+        this.addAbility(new SimpleStaticAbility(new TrainingDroneEffect()));
 
     }
 

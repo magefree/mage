@@ -44,7 +44,7 @@ public final class TigerClaws extends CardImpl {
         // Enchanted creature gets +1/+1 and has trample.
         Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has trample");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1));
         ability.addEffect(effect);
         this.addAbility(ability);
     }

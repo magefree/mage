@@ -42,10 +42,10 @@ public final class Tromokratis extends CardImpl {
                 new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
                 new InvertCondition(new SourceMatchesFilterCondition(new FilterAttackingOrBlockingCreature())),
                 "{this} has hexproof unless it's attacking or blocking");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Tromokratis can't be blocked unless all creatures defending player controls block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedUnlessAllEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedUnlessAllEffect()));
     }
 
     private Tromokratis(final Tromokratis card) {

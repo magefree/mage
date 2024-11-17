@@ -36,7 +36,7 @@ public final class TakePossession extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // You control enchanted permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("permanent")));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect("permanent")));
     }
 
     private TakePossession(final TakePossession card) {

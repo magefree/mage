@@ -31,7 +31,7 @@ public final class TitaniasSong extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // Each noncreature artifact loses all abilities and becomes an artifact creature with power and toughness each equal to its converted mana cost. If Titania's Song leaves the battlefield, this effect continues until end of turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TitaniasSongEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new TitaniasSongEffect(Duration.WhileOnBattlefield)));
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new TitaniasSongEffect(Duration.EndOfTurn), false));
     }
 

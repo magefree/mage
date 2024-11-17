@@ -38,7 +38,7 @@ public final class Thunderblust extends CardImpl {
 
         // Thunderblust has trample as long as it has a -1/-1 counter on it.
         Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), new SourceHasCounterCondition(CounterType.M1M1), rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Persist
         this.addAbility(new PersistAbility());

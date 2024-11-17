@@ -57,7 +57,7 @@ public final class TheEternalWanderer extends CardImpl {
         this.setStartingLoyalty(5);
 
         // No more than one creature can attack The Eternal Wanderer each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TheEternalWandererAttackRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new TheEternalWandererAttackRestrictionEffect()));
 
         // +1: Exile up to one target artifact or creature. Return that card to the battlefield under its owner's control at the beginning of that player's next end step.
         Ability ability = new LoyaltyAbility(new TheEternalWandererExileEffect(), 1);

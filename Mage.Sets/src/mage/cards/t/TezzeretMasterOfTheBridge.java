@@ -43,7 +43,7 @@ public final class TezzeretMasterOfTheBridge extends CardImpl {
         this.setStartingLoyalty(5);
 
         // Creature and planeswalker spells you cast have affinity for artifacts.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledSpellsEffect(
                 new AffinityForArtifactsAbility(), filter
         )));
 

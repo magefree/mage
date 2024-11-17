@@ -33,7 +33,7 @@ public final class TerritorialDispute extends CardImpl {
         ));
         
         // Players can't play lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TerritorialDisputeEffect()));
+        this.addAbility(new SimpleStaticAbility(new TerritorialDisputeEffect()));
     }
 
     private TerritorialDispute(final TerritorialDispute card) {

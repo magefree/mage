@@ -39,7 +39,7 @@ public final class TitanOfEternalFire extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         Effect effect = new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.HUMAN, "Each Human creature"));
         effect.setText("Each Human creature you control has \"{R}, {T}: This creature deals 1 damage to any target.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private TitanOfEternalFire(final TitanOfEternalFire card) {

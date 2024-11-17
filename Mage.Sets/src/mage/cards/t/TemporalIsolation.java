@@ -40,9 +40,9 @@ public final class TemporalIsolation extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature has shadow.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShadowAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ShadowAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
         // Prevent all damage that would be dealt by enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false)));
+        this.addAbility(new SimpleStaticAbility(new PreventAllDamageByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", false)));
     }
 
     private TemporalIsolation(final TemporalIsolation card) {

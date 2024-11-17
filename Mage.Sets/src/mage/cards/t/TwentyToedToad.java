@@ -36,7 +36,7 @@ public final class TwentyToedToad extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Your maximum hand size is twenty.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaximumHandSizeControllerEffect(20, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET)));
+        this.addAbility(new SimpleStaticAbility(new MaximumHandSizeControllerEffect(20, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET)));
 
         // Whenever you attack with two or more creatures, put a +1/+1 counter on Twenty-Toed Toad and draw a card.
         Ability ability = new AttacksWithCreaturesTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), 2);
