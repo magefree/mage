@@ -23,7 +23,7 @@ public final class TetraviteToken extends TokenImpl {
         toughness = new MageInt(1);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TetraviteTokenEffect()));
+        this.addAbility(new SimpleStaticAbility(new TetraviteTokenEffect()));
     }
 
     private TetraviteToken(final TetraviteToken token) {

@@ -90,7 +90,7 @@ public class BestowAbility extends SpellAbility {
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.addTarget(auraTarget);
         this.addEffect(new AttachEffect(Outcome.BoostCreature));
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BestowEntersBattlefieldEffect());
+        Ability ability = new SimpleStaticAbility(new BestowEntersBattlefieldEffect());
         ability.setRuleVisible(false);
         addSubAbility(ability);
     }
