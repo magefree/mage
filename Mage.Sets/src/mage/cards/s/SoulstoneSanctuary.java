@@ -30,7 +30,6 @@ public final class SoulstoneSanctuary extends CardImpl {
 
         // {4}: This land becomes a 3/3 creature with vigilance and all creature types. It's still a land.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BecomesCreatureSourceEffect(new SoulStoneSanctuaryToken(), CardType.LAND, Duration.WhileOnBattlefield)
                         .setText("this land becomes a 3/3 creature with vigilance and all creature types. It's still a land"),
                 new GenericManaCost(4)

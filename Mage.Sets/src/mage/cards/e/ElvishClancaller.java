@@ -52,7 +52,6 @@ public final class ElvishClancaller extends CardImpl {
 
         // {4}{G}{G}, {T}: Search your library for a card named Elvish Clancaller, put it onto the battlefield, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(
                         new TargetCardInLibrary(filter2),
                         false

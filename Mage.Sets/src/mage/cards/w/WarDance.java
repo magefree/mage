@@ -32,7 +32,6 @@ public final class WarDance extends CardImpl {
 
         // Sacrifice War Dance: Target creature gets +X/+X until end of turn, where X is the number of verse counters on War Dance.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostTargetEffect(
                         new CountersSourceCount(CounterType.VERSE),
                         new CountersSourceCount(CounterType.VERSE),

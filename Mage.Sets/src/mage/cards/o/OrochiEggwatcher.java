@@ -76,7 +76,6 @@ class ShidakoBroodmistress extends TokenImpl {
         // {G}, Sacrifice a creature: Target creature gets +3/+3 until end of turn.
         Ability ability;
         ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostTargetEffect(3, 3, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{G}"));
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));

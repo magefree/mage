@@ -34,13 +34,11 @@ public final class Sarcatog extends CardImpl {
 
         // Exile two cards from your graveyard: Sarcatog gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(1,1, Duration.EndOfTurn),
                 new ExileFromGraveCost(new TargetCardInYourGraveyard(2,new FilterCard("cards")))));
 
         // Sacrifice an artifact: Sarcatog gets +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(1,1, Duration.EndOfTurn),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_ARTIFACT)));
     }

@@ -30,13 +30,11 @@ public final class PyxisOfPandemonium extends CardImpl {
 
         // {T}: Each player exiles the top card of their library face down.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new PyxisOfPandemoniumExileEffect(),
                 new TapSourceCost()));
 
         // {7}, {T}, Sacrifice Pyxis of Pandemonium: Each player turns face up all cards they own exiled with Pyxis of Pandemonium, then puts all permanent cards among them onto the battlefield.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new PyxisOfPandemoniumPutOntoBattlefieldEffect(),
                 new GenericManaCost(7));
         ability.addCost(new TapSourceCost());

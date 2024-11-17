@@ -29,7 +29,6 @@ public final class PasswallAdept extends CardImpl {
 
         // {2}{U}: Target creature can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new CantBeBlockedTargetEffect(),
                 new ManaCostsImpl<>("{2}{U}")
         );

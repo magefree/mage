@@ -38,7 +38,6 @@ public final class RetrofitterFoundry extends CardImpl {
 
         // {3}: Untap Retrofitter Foundry.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new UntapSourceEffect(),
                 new GenericManaCost(3))
         );

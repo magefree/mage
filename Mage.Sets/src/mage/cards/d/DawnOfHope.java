@@ -32,7 +32,6 @@ public final class DawnOfHope extends CardImpl {
 
         // {3}{W}: Create a 1/1 white Soldier creature token with lifelink.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new CreateTokenEffect(new SoldierLifelinkToken()),
                 new ManaCostsImpl<>("{3}{W}")
         ));

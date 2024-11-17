@@ -42,7 +42,6 @@ public final class CoilsOfTheMedusa extends CardImpl {
 
         // Sacrifice Coils of the Medusa: Destroy all non-Wall creatures blocking enchanted creature.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new CoilsOfTheMedusaDestroyEffect(),
                 new SacrificeSourceCost())
         );

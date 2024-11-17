@@ -48,7 +48,6 @@ public final class GeneralTazri extends CardImpl {
         DynamicValue xValue = new GeneralTazriColorCount();
         BoostControlledEffect effect = new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, new FilterCreaturePermanent(SubType.ALLY, "Ally creatures"), false);
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 effect,
                 new ManaCostsImpl<>("{W}{U}{B}{R}{G}")));
 

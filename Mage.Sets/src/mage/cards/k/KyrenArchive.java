@@ -32,7 +32,6 @@ public final class KyrenArchive extends CardImpl {
 
         // {5}, Discard your hand, Sacrifice Kyren Archive: Put all cards exiled with Kyren Archive into their owner's hand.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new ReturnFromExileForSourceEffect(Zone.HAND).withText(true, false, true),
                 new GenericManaCost(5)
         );

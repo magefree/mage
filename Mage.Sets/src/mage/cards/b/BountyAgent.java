@@ -48,7 +48,6 @@ public final class BountyAgent extends CardImpl {
 
         // {T}, Sacrifice Bounty Agent: Destroy target legendary permanent that's an artifact, creature, or enchantment.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new DestroyTargetEffect(),
                 new TapSourceCost()
         );

@@ -44,7 +44,6 @@ public final class SteelHellkite extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // {2}: Steel Hellkite gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 new GenericManaCost(2)
         ));

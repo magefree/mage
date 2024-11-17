@@ -32,7 +32,6 @@ public final class TorchSong extends CardImpl {
 
         // {2}{R}, Sacrifice Torch Song: Torch Song deals X damage to any target, where X is the number of verse counters on Torch Song.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new DamageTargetEffect(new CountersSourceCount(CounterType.VERSE)),
                 new ManaCostsImpl<>("{2}{R}")
         );

@@ -39,7 +39,6 @@ public final class ScavengerGrounds extends CardImpl {
 
         // {2}, {T}, Sacrifice a Desert: Exile all cards from all graveyards.
         Ability ability2 = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new ExileGraveyardAllPlayersEffect(),
                 new ManaCostsImpl<>("{2}"));
         ability2.addCost(new TapSourceCost());

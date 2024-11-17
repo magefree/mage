@@ -34,7 +34,6 @@ public final class TideforceElemental extends CardImpl {
 
         // {U}, {tap}: You may tap or untap another target creature.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new MayTapOrUntapTargetEffect(), 
                 new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());

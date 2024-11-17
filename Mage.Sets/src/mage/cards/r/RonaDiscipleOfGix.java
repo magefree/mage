@@ -53,7 +53,6 @@ public final class RonaDiscipleOfGix extends CardImpl {
 
         // {4}, {T}: Exile the top card of your library.
         ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new ExileCardsFromTopOfLibraryControllerEffect(1, true),
                 new GenericManaCost(4));
         ability.addCost(new TapSourceCost());

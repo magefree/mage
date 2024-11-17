@@ -29,7 +29,6 @@ public final class VampireHounds extends CardImpl {
 
         // Discard a creature card: Vampire Hounds gets +2/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
                 new DiscardTargetCost(new TargetCardInHand(StaticFilters.FILTER_CARD_CREATURE))));
     }

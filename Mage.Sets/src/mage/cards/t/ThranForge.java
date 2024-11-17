@@ -33,7 +33,6 @@ public final class ThranForge extends CardImpl {
 
         // {2}: Until end of turn, target nonartifact creature gets +1/+0 and becomes an artifact in addition to its other types.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostTargetEffect(1, 0, Duration.EndOfTurn)
                         .setText("Until end of turn, target nonartifact creature gets +1/+0"),
                 new GenericManaCost(2));

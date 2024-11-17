@@ -32,7 +32,6 @@ public final class BurnishedHart extends CardImpl {
 
         // {3}, Sacrifice Burnished Hart: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0,2, StaticFilters.FILTER_CARD_BASIC_LANDS), true),
                 new GenericManaCost(3));
         ability.addCost(new SacrificeSourceCost());

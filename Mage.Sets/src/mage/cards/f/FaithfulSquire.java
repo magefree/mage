@@ -78,7 +78,6 @@ class KaisoMemoryOfLoyaltyToken extends TokenImpl {
 
         // Remove a ki counter from Kaiso, Memory of Loyalty: Prevent all damage that would be dealt to target creature this turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE),
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());

@@ -55,7 +55,6 @@ public final class SurgeMare extends CardImpl {
 
         // {1}{U}: Surge Mare gets +2/-2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, -2, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}{U}")
         ));

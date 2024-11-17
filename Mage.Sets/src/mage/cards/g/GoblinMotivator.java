@@ -32,7 +32,6 @@ public final class GoblinMotivator extends CardImpl {
 
         // {T}: Target creature gains haste until end of turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityTargetEffect(
                         HasteAbility.getInstance(),
                         Duration.EndOfTurn

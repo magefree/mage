@@ -35,7 +35,6 @@ public final class DraconicDisciple extends CardImpl {
 
         // {7}, {T}, Sacrifice Draconic Disciple: Create a 5/5 red Dragon creature token with flying.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new CreateTokenEffect(new DragonToken2()),
                 new GenericManaCost(7)
         );

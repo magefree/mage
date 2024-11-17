@@ -47,7 +47,6 @@ public final class CarnifexDemon extends CardImpl {
         ));
 
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new AddCountersAllEffect(
                         CounterType.M1M1.createInstance(),
                         filter
