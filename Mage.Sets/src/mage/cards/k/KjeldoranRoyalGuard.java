@@ -37,7 +37,7 @@ public final class KjeldoranRoyalGuard extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {tap}: All combat damage that would be dealt to you by unblocked creatures this turn is dealt to Kjeldoran Royal Guard instead.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new KjeldoranRoyalGuardEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new KjeldoranRoyalGuardEffect(), new TapSourceCost()));
     }
 
     private KjeldoranRoyalGuard(final KjeldoranRoyalGuard card) {

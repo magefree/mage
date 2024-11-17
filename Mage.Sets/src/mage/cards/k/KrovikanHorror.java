@@ -44,7 +44,7 @@ public final class KrovikanHorror extends CardImpl {
         ));
 
         // {1}, Sacrifice a creature: Krovikan Horror deals 1 damage to any target.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new GenericManaCost(1));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

@@ -33,7 +33,7 @@ public final class KnollspineInvocation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{R}");
 
         // {X}, Discard a card with converted mana cost X: Knollspine Invocation deals X damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(GetXValue.instance, true), new ManaCostsImpl<>("{X}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(GetXValue.instance, true), new ManaCostsImpl<>("{X}"));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(filter)));
         ability.addTarget(new TargetAnyTarget());
         ability.setCostAdjuster(KnollspineInvocationAdjuster.instance);
