@@ -45,7 +45,7 @@ public final class RacecourseFury extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted land has "{T}: Target creature gains haste until end of turn."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
+        Ability gainedAbility = new SimpleActivatedAbility(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }

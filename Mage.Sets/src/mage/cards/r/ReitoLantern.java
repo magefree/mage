@@ -22,7 +22,7 @@ public final class ReitoLantern extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // Put target card from a graveyard on the bottom of its owner's library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new PutOnLibraryTargetEffect(false), new GenericManaCost(3));
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);
 

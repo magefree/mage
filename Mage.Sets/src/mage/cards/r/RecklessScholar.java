@@ -29,7 +29,7 @@ public final class RecklessScholar extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Target player draws a card, then discards a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardTargetEffect(1, 1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DrawDiscardTargetEffect(1, 1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

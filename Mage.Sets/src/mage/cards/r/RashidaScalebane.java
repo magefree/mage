@@ -44,7 +44,7 @@ public final class RashidaScalebane extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {tap}: Destroy target attacking or blocking Dragon. It can't be regenerated. You gain life equal to its power.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(true), new TapSourceCost());
         Effect effect = new GainLifeEffect(TargetPermanentPowerCount.instance);
         effect.setText("You gain life equal to its power");
         ability.addEffect(effect);

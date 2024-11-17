@@ -50,7 +50,7 @@ public final class RebelInformer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantBeTargetedSourceEffect(filterWhite, Duration.WhileOnBattlefield)));
         
         // {3}: Put target nontoken Rebel on the bottom of its owner's library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new PutOnLibraryTargetEffect(false), new GenericManaCost(3));
         ability.addTarget(new TargetPermanent(filterRebel));
         this.addAbility(ability);
     }

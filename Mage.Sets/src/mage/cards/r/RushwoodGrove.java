@@ -30,7 +30,7 @@ public final class RushwoodGrove extends CardImpl {
         // Rushwood Grove enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {T}: Put a storage counter on Rushwood Grove.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new TapSourceCost()));
         // {T}, Remove any number of storage counters from Rushwood Grove: Add {G} for each storage counter removed this way.
         Ability ability = new DynamicManaAbility(
                 Mana.GreenMana(1),

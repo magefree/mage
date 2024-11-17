@@ -44,7 +44,7 @@ public final class RatsOfRath extends CardImpl {
         // {B}: Destroy target artifact, creature, or land you control.
         Effect effect = new DestroyTargetEffect();
         effect.setOutcome(Outcome.AIDontUseIt); // AI can't handle this
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ColoredManaCost(ColoredManaSymbol.B));
+        Ability ability = new SimpleActivatedAbility(effect, new ColoredManaCost(ColoredManaSymbol.B));
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
     }

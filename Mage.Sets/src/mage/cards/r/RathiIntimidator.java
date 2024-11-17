@@ -43,7 +43,7 @@ public final class RathiIntimidator extends CardImpl {
 
         this.addAbility(FearAbility.getInstance());
         // {2}, {T}: Search your library for a Mercenary permanent card with converted mana cost 2 or less and put it onto the battlefield. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
         ability.addCost(new GenericManaCost(2));
         this.addAbility(ability);
     }

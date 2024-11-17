@@ -51,7 +51,7 @@ public final class RasputinDreamweaver extends CardImpl {
                 new CountersSourceCount(CounterType.DREAM)));
 
         // Remove a dream counter from Rasputin: Prevent the next 1 damage that would be dealt to Rasputin this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new RemoveCountersSourceCost(CounterType.DREAM.createInstance())));
+        this.addAbility(new SimpleActivatedAbility(new PreventDamageToSourceEffect(Duration.EndOfTurn, 1), new RemoveCountersSourceCost(CounterType.DREAM.createInstance())));
 
         // At the beginning of your upkeep, if Rasputin started the turn untapped, put a dream counter on it.
         this.addAbility(

@@ -38,7 +38,7 @@ public final class QuicksilverDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {U}: If target spell has only one target and that target is Quicksilver Dragon, change that spell's target to another creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new QuicksilverDragonEffect(), new ColoredManaCost(ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(new QuicksilverDragonEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
         
