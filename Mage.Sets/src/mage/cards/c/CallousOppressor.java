@@ -49,7 +49,7 @@ public final class CallousOppressor extends CardImpl {
                 new GainControlTargetEffect(Duration.OneUse),
                 SourceTappedCondition.TAPPED,
                 "Gain control of target creature for as long as {this} remains tapped");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new CallousOppressorFilter()));
         this.addAbility(ability);
     }

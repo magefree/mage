@@ -50,7 +50,7 @@ public final class ChandraFireOfKaladesh extends CardImpl {
 
         // {T}: Chandra, Fire of Kaladesh deals 1 damage to target player. If Chandra has dealt 3 or more damage this turn, exile her, then return her to the battlefield transformed under her owner's control.        
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED,Pronoun.SHE), new SourceDealtDamageCondition(3)));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability, new DamageDoneWatcher());

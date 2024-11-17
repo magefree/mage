@@ -37,7 +37,7 @@ public final class CrabUmbra extends CardImpl {
         this.addAbility(ability);
 
         // {2}{U}: Untap enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapAttachedEffect(), new ManaCostsImpl<>("{2}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new UntapAttachedEffect(), new ManaCostsImpl<>("{2}{U}")));
 
         // Umbra armor
         this.addAbility(new UmbraArmorAbility());

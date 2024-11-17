@@ -36,7 +36,7 @@ public final class CantinaBand extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}, {1}: Tap target nonartifact creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

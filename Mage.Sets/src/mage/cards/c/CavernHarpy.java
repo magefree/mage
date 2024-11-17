@@ -44,7 +44,7 @@ public final class CavernHarpy extends CardImpl {
         // When Cavern Harpy enters the battlefield, return a blue or black creature you control to its owner's hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
         // Pay 1 life: Return Cavern Harpy to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new PayLifeCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new PayLifeCost(1)));
     }
 
     private CavernHarpy(final CavernHarpy card) {

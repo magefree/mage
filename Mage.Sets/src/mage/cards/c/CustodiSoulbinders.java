@@ -49,7 +49,7 @@ public final class CustodiSoulbinders extends CardImpl {
 
 
         // {2}{W}, Remove a +1/+1 counter from Custodi Soulbinders: Create a 1/1 white Spirit creature token with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl<>("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         this.addAbility(ability);
     }

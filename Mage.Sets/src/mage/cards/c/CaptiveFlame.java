@@ -24,7 +24,7 @@ public final class CaptiveFlame extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{R}");
 
         // {R}: Target creature gets +1/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -30,7 +30,7 @@ public final class CreditVoucher extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {2}, {tap}, Sacrifice Credit Voucher: Shuffle any number of cards from your hand into your library, then draw that many cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreditVoucherEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new CreditVoucherEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

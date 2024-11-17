@@ -55,7 +55,7 @@ public final class ChainerDementiaMaster extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterCreature, false)));
         
         // {B}{B}{B}, Pay 3 life: Put target creature card from a graveyard onto the battlefield under your control. That creature is black and is a Nightmare in addition to its other creature types.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChainerDementiaMasterEffect(), new ManaCostsImpl<>("{B}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(new ChainerDementiaMasterEffect(), new ManaCostsImpl<>("{B}{B}{B}"));
         ability.addCost(new PayLifeCost(3));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);

@@ -34,7 +34,7 @@ public final class CopperLeafAngel extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {tap}, Sacrifice X lands: Put X +1/+1 counters on Copper-Leaf Angel.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(), GetXValue.instance, false), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), GetXValue.instance, false), new TapSourceCost());
         ability.addCost(new SacrificeXTargetCost(new FilterControlledLandPermanent("lands")));
         this.addAbility(ability);
     }

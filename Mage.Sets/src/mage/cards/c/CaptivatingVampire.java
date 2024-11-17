@@ -45,7 +45,7 @@ public final class CaptivatingVampire extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
 
         // Tap five untapped Vampires you control: Gain control of target creature. It becomes a Vampire in addition to its other types.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CaptivatingVampireEffect(), new TapTargetCost(new TargetControlledPermanent(5, 5, filter2, true)));
+        Ability ability = new SimpleActivatedAbility(new CaptivatingVampireEffect(), new TapTargetCost(new TargetControlledPermanent(5, 5, filter2, true)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

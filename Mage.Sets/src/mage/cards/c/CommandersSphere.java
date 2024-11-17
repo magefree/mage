@@ -24,7 +24,7 @@ public final class CommandersSphere extends CardImpl {
         this.addAbility(new CommanderColorIdentityManaAbility());
 
         // Sacrifice Commander's Sphere: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new SacrificeSourceCost()));
     }
 
     private CommandersSphere(final CommandersSphere card) {

@@ -37,7 +37,7 @@ public final class CanalDredger extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new InfoEffect("Each player passes the last card from each booster pack to a player who drafted a card named Canal Dredger - not implemented.")));
 
         // {T}: Put target card from your graveyard on the bottom of your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PutOnLibraryTargetEffect(false), new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard());
         this.addAbility(ability);
     }

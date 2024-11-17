@@ -35,7 +35,7 @@ public final class Carapace extends CardImpl {
         // Enchanted creature gets +0/+2.
         this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(0, 2, Duration.WhileOnBattlefield)));
         // Sacrifice Carapace: Regenerate enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateAttachedEffect(AttachmentType.AURA), new SacrificeSourceCost()));
     }
 
     private Carapace(final Carapace card) {

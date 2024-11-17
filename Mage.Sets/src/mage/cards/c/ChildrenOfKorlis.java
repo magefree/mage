@@ -33,7 +33,7 @@ public final class ChildrenOfKorlis extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Children of Korlis: You gain life equal to the life you've lost this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleActivatedAbility(
                 new GainLifeEffect(new SourceControllerLostLifeCount(),"You gain life equal to the life you've lost this turn"), 
                 new SacrificeSourceCost()));
     }
