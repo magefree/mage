@@ -48,7 +48,7 @@ public final class CrabappleCohort extends CardImpl {
         // Crabapple Cohort gets +1/+1 as long as you control another green creature.
         Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
         Effect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), condition, rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private CrabappleCohort(final CrabappleCohort card) {

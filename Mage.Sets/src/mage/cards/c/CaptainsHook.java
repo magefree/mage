@@ -35,7 +35,7 @@ public final class CaptainsHook extends CardImpl {
         // Equipped creature gets +2/+0
         Effect effect = new BoostEquippedEffect(2, 0);
         effect.setText("Equipped creature gets +2/+0");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         // has menace,
         effect = new GainAbilityAttachedEffect(new MenaceAbility(), AttachmentType.EQUIPMENT);
         effect.setText(", has menace");

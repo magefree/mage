@@ -41,7 +41,7 @@ public final class CrystallineNautilus extends CardImpl {
         // Enchanted creature gets +4/+4 and has "When this creature becomes the target of a spell or ability, sacrifice it."        
         Effect effect = new BoostEnchantedEffect(4,4,Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +4/+4");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(new BecomesTargetSourceTriggeredAbility(new SacrificeSourceEffect()), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("and has \"When this creature becomes the target of a spell or ability, sacrifice it.\"");
         ability.addEffect(effect);

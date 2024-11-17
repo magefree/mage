@@ -21,7 +21,7 @@ public final class CollectiveBlessing extends CardImpl {
 
 
         // Creatures you control get +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(3,3, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(3,3, Duration.WhileOnBattlefield)));
     }
 
     private CollectiveBlessing(final CollectiveBlessing card) {

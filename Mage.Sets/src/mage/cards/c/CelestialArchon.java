@@ -39,7 +39,7 @@ public final class CelestialArchon extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // Enchanted creature gets +4/+4 and has flying and first strike.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4,4));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(4,4));
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has flying");
         ability.addEffect(effect);

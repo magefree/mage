@@ -50,7 +50,7 @@ public final class Cocoon extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature doesn’t untap during your untap step if Cocoon has a pupa counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepEnchantedEffect(),
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepEnchantedEffect(),
                 new SourceHasCounterCondition(CounterType.PUPA)).setText("Enchanted creature doesn't untap during its controller's untap step if Cocoon has a pupa counter on it")));
 
         // At the beginning of your upkeep, remove a pupa counter from Cocoon. If you can’t, sacrifice it, put a +1/+1 counter on enchanted creature, and that creature gains flying.

@@ -29,7 +29,7 @@ public final class CyclopsOfEternalFury extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES)));
     }
 
     private CyclopsOfEternalFury(final CyclopsOfEternalFury card) {

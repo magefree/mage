@@ -29,7 +29,7 @@ public final class CivicSaber extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
  
         // Equipped creature gets +1/+0 for each of its colors.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new CivicSaberColorCount(), StaticValue.get(0), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(new CivicSaberColorCount(), StaticValue.get(0), Duration.WhileOnBattlefield)));
 
         // Equip {1}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1), new TargetControlledCreaturePermanent(), false));
@@ -81,4 +81,3 @@ class CivicSaberColorCount implements DynamicValue {
         return "of its colors";
     }
 }
- 

@@ -29,7 +29,7 @@ public final class CallousGiant extends CardImpl {
         this.toughness = new MageInt(4);
 
         // If a source would deal 3 or less damage to Callous Giant, prevent that damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CallousGiantEffect()));
+        this.addAbility(new SimpleStaticAbility(new CallousGiantEffect()));
     }
 
     private CallousGiant(final CallousGiant card) {

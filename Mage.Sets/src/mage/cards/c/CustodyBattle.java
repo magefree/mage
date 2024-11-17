@@ -58,7 +58,7 @@ public final class CustodyBattle extends CardImpl {
         // Enchanted creature has "At the beginning of your upkeep, target opponent gains control of this creature unless you sacrifice a land."
         ability = new BeginningOfUpkeepTriggeredAbility(new CustodyBattleUnlessPaysEffect(new SacrificeTargetCost(filter)));
         ability.addTarget(new TargetOpponent());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
 
     }
 

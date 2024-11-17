@@ -33,7 +33,7 @@ public final class Contamination extends CardImpl {
         );
 
         // If a land is tapped for mana, it produces {B} instead of any other type and amount.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ContaminationReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ContaminationReplacementEffect()));
     }
 
     private Contamination(final Contamination card) {

@@ -30,7 +30,7 @@ public final class ChromaticOrrery extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // You may spend mana as though it were mana of any color.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChromaticOrreryEffect()));
+        this.addAbility(new SimpleStaticAbility(new ChromaticOrreryEffect()));
 
         // {T}: Add {C}{C}{C}{C}{C}.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(5), new TapSourceCost()));

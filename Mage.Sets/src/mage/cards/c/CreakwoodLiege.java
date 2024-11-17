@@ -40,9 +40,9 @@ public final class CreakwoodLiege extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Other black creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlackCreature, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlackCreature, true)));
         // Other green creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterGreenCreature, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterGreenCreature, true)));
         // At the beginning of your upkeep, you may create a 1/1 black and green Worm creature token.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new BlackGreenWormToken(), 1), true));
     }

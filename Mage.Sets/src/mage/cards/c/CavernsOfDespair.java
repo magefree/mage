@@ -25,10 +25,10 @@ public final class CavernsOfDespair extends CardImpl {
         this.supertype.add(SuperType.WORLD);
 
         // No more than two creatures can attack each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CavernsOfDespairAttackRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new CavernsOfDespairAttackRestrictionEffect()));
 
         // No more than two creatures can block each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CavernsOfDespairBlockRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new CavernsOfDespairBlockRestrictionEffect()));
     }
 
     private CavernsOfDespair(final CavernsOfDespair card) {

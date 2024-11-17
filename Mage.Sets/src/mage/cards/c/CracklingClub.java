@@ -37,7 +37,7 @@ public final class CracklingClub extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 0, Duration.WhileOnBattlefield)));
         // Sacrifice Crackling Club: Crackling Club deals 1 damage to target creature.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, "it"), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

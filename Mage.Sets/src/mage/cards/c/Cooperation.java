@@ -36,7 +36,7 @@ public final class Cooperation extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has banding.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(BandingAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(BandingAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private Cooperation(final Cooperation card) {

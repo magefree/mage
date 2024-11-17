@@ -36,11 +36,11 @@ public final class CrownOfConvergence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Play with the top card of your library revealed.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
 
         // As long as the top card of your library is a creature card, creatures you control that share a color with that card get +1/+1.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new CrownOfConvergenceColorBoostEffect(), new TopLibraryCardTypeCondition(CardType.CREATURE), rule1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // {G}{W}: Put the top card of your library on the bottom of your library.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrownOfConvergenceEffect(), new ManaCostsImpl<>("{G}{W}")));

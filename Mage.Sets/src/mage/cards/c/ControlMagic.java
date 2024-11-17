@@ -33,7 +33,7 @@ public final class ControlMagic extends CardImpl {
         this.addAbility(ability);
 
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
     }
 
     private ControlMagic(final ControlMagic card) {

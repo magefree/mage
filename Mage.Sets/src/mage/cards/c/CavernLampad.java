@@ -35,7 +35,7 @@ public final class CavernLampad extends CardImpl {
         // Intimidate
         this.addAbility(IntimidateAbility.getInstance());
         // Enchanted creature gets +2/+2 and has intimidate.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,2));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(2,2));
         Effect effect = new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has intimidate");
         ability.addEffect(effect);

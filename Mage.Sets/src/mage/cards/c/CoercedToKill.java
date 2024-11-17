@@ -34,7 +34,7 @@ public final class CoercedToKill extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
 
         // Enchanted creature has base power and toughness 1/1, has deathtouch, and is an Assassin in addition to its other types.
         Ability ability = new SimpleStaticAbility(new SetBasePowerToughnessEnchantedEffect(1, 1));
