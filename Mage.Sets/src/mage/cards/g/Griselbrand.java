@@ -32,7 +32,7 @@ public final class Griselbrand extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(LifelinkAbility.getInstance());
         // Pay 7 life: Draw seven cards.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(7), new PayLifeCost(7)));
+        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(7), new PayLifeCost(7)));
     }
 
     private Griselbrand(final Griselbrand card) {

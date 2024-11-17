@@ -31,7 +31,7 @@ public final class GossamerChains extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}{W}");
 
         // Return Gossamer Chains to its owner's hand: Prevent all combat damage that would be dealt by target unblocked creature this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageByTargetEffect(Duration.EndOfTurn, true), new ReturnToHandFromBattlefieldSourceCost());
+        Ability ability = new SimpleActivatedAbility(new PreventDamageByTargetEffect(Duration.EndOfTurn, true), new ReturnToHandFromBattlefieldSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

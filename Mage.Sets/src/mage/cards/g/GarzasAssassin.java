@@ -36,7 +36,7 @@ public final class GarzasAssassin extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice Garza's Assassin: Destroy target nonblack creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_PERMANENT_CREATURE_NON_BLACK));
         this.addAbility(ability);
 

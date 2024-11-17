@@ -27,7 +27,7 @@ public final class Godsire extends CardImpl {
         this.power = new MageInt(8);
         this.toughness = new MageInt(8);
         this.addAbility(VigilanceAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GodSireBeastToken()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new GodSireBeastToken()), new TapSourceCost()));
     }
 
     private Godsire(final Godsire card) {

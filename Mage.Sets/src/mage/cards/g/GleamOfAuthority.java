@@ -49,7 +49,7 @@ public final class GleamOfAuthority extends CardImpl {
 
         // Enchanted creature has vigilance and "{W}, {T}: Bloster 1."
         ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA));
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BolsterEffect(1), new ManaCostsImpl<>("{W}"));
+        Ability gainedAbility = new SimpleActivatedAbility(new BolsterEffect(1), new ManaCostsImpl<>("{W}"));
         gainedAbility.addCost(new TapSourceCost());
         ability.addEffect(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA).setText("and \"{W}, {T}: Bolster 1.\""));
         this.addAbility(ability);

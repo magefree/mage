@@ -40,7 +40,7 @@ public final class GiltspireAvenger extends CardImpl {
         this.addAbility(new ExaltedAbility());
 
         // {T}: Destroy target creature that dealt damage to you this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addTarget(new GiltspireAvengerTarget());
         this.addAbility(ability);
 

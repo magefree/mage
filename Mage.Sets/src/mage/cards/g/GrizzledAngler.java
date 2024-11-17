@@ -36,7 +36,7 @@ public final class GrizzledAngler extends CardImpl {
 
         // {T}: Put the top two cards of your library into your graveyard. Then if there is a colorless creature card in your graveyard, transform Grizzled Angler.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrizzledAnglerEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new GrizzledAnglerEffect(), new TapSourceCost()));
     }
 
     private GrizzledAngler(final GrizzledAngler card) {

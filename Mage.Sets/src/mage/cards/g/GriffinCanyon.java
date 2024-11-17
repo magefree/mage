@@ -31,7 +31,7 @@ public final class GriffinCanyon extends CardImpl {
         // {tap}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Untap target Griffin. If it's a creature, it gets +1/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GriffinCanyonEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new GriffinCanyonEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
