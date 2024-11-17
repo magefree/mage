@@ -112,10 +112,10 @@ class KayaSpiritsJusticeTriggeredAbility extends TriggeredAbilityImpl implements
         switch (event.getFromZone()) {
             case BATTLEFIELD:
                 Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-                return permanent != null && StaticFilters.FILTER_PERMANENT_CREATURE.match(permanent, getControllerId(), this, game);
+                return permanent != null && StaticFilters.FILTER_CONTROLLED_CREATURE.match(permanent, getControllerId(), this, game);
             case GRAVEYARD:
                 Card card = game.getCard(event.getTargetId());
-                return card != null && StaticFilters.FILTER_CARD_CREATURE.match(card, getControllerId(), this, game);
+                return card != null && card.isOwnedBy(getControllerId()) && StaticFilters.FILTER_CARD_CREATURE.match(card, getControllerId(), this, game);
             default:
                 return false;
         }
