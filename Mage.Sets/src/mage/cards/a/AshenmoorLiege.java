@@ -38,9 +38,9 @@ public final class AshenmoorLiege extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Other black creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlackCreature, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlackCreature, true)));
         // Other red creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterRedCreature, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterRedCreature, true)));
 
         // Whenever Ashenmoor Liege becomes the target of a spell or ability an opponent controls, that player loses 4 life.
         this.addAbility(new BecomesTargetSourceTriggeredAbility(new LoseLifeTargetEffect(4),

@@ -47,7 +47,7 @@ public final class AetherMeltdown extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(2)));
         // Enchanted permanent gets -4/-0.
         Effect effect = new BoostEnchantedEffect(-4, 0, Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private AetherMeltdown(final AetherMeltdown card) {

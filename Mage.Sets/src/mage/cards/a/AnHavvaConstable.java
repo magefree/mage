@@ -29,7 +29,7 @@ public final class AnHavvaConstable extends CardImpl {
         this.toughness = new MageInt(1);
 
         // An-Havva Constable's toughness is equal to 1 plus the number of green creatures on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnHavvaConstableEffect()));
+        this.addAbility(new SimpleStaticAbility(new AnHavvaConstableEffect()));
     }
 
     private AnHavvaConstable(final AnHavvaConstable card) {

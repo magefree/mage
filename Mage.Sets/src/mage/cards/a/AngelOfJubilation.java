@@ -36,7 +36,7 @@ public final class AngelOfJubilation extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Other nonblack creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES_NON_BLACK, true)));
 
         // Players can't pay life or sacrifice creatures to cast spells or activate abilities.
         Ability ability = new SimpleStaticAbility(new AngelOfJubilationEffect());

@@ -52,7 +52,7 @@ public final class AnafenzaTheForemost extends CardImpl {
         this.addAbility(ability);
 
         // If a nontoken creature an opponent owns would die or a creature card not on the battlefield would be put into an opponent's graveyard, exile that card instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnafenzaTheForemostEffect()));
+        this.addAbility(new SimpleStaticAbility(new AnafenzaTheForemostEffect()));
     }
 
     private AnafenzaTheForemost(final AnafenzaTheForemost card) {

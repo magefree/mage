@@ -28,7 +28,7 @@ public final class AliFromCairo extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Damage that would reduce your life total to less than 1 reduces it to 1 instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AliFromCairoReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new AliFromCairoReplacementEffect()));
     }
 
     private AliFromCairo(final AliFromCairo card) {

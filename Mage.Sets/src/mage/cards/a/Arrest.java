@@ -36,7 +36,7 @@ public final class Arrest extends CardImpl {
         this.addAbility(ability);
 
         //Enchanted creature can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAttackActivateAttachedEffect()));
     }
 
     private Arrest(final Arrest card) {

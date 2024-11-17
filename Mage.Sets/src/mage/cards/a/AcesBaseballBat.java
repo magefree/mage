@@ -43,7 +43,7 @@ public final class AcesBaseballBat extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+0
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(3, 0)));
 
         // As long as equipped creature is attacking, it has first strike and must be blocked by a Dalek if able.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(

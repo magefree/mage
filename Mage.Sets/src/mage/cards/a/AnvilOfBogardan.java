@@ -26,7 +26,7 @@ public final class AnvilOfBogardan extends CardImpl {
 
         // Players have no maximum hand size.
         Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, HandSizeModification.SET, TargetController.ANY);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // At the beginning of each player's draw step, that player draws an additional card, then discards a card.
         this.addAbility(new BeginningOfDrawTriggeredAbility(TargetController.EACH_PLAYER, new AnvilOfBogardanEffect(), false));

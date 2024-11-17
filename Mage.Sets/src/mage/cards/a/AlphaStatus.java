@@ -37,7 +37,7 @@ public final class AlphaStatus extends CardImpl {
 
         // Enchanted creature gets +2/+2 for each other creature on the battlefield that shares a creature type with it.
         DynamicValue dynamicValue = new AlphaStatusDynamicValue();
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(dynamicValue, dynamicValue, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(dynamicValue, dynamicValue, Duration.WhileOnBattlefield)));
     }
 
     private AlphaStatus(final AlphaStatus card) {

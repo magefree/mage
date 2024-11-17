@@ -32,7 +32,7 @@ public final class AvariceAmulet extends CardImpl {
         // Equipped creature gets +2/+0
         Effect effect = new BoostEquippedEffect(2, 0);
         effect.setText("Equipped creature gets +2/+0");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         // and has vigilance
         effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and has vigilance");

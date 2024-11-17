@@ -30,7 +30,7 @@ public final class AysenHighway extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}{W}{W}");
 
         // White creatures have plainswalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(new PlainswalkAbility(false), Duration.WhileOnBattlefield, filter)));
     }
 

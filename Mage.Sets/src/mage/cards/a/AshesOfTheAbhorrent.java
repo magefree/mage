@@ -27,7 +27,7 @@ public final class AshesOfTheAbhorrent extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // Players can't cast spells from graveyards or activate abilities of cards in graveyards.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AshesOfTheAbhorrentEffect()));
+        this.addAbility(new SimpleStaticAbility(new AshesOfTheAbhorrentEffect()));
 
         // Whenever a creature dies, you gain 1 life.
         this.addAbility(new DiesCreatureTriggeredAbility(new GainLifeEffect(1), false));
