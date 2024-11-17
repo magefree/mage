@@ -1,18 +1,16 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.common.YoureDealtDamageTriggeredAbility;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.RemoveAllCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 
 import java.util.UUID;
 
@@ -29,7 +27,8 @@ public final class BloodHound extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever you're dealt damage, you may put that many +1/+1 counters on Blood Hound.
-        this.addAbility(new BloodHoundTriggeredAbility());
+        this.addAbility(new YoureDealtDamageTriggeredAbility(new AddCountersSourceEffect(
+                CounterType.P1P1.createInstance(), SavedDamageValue.MANY), true));
 
         // At the beginning of your end step, remove all +1/+1 counters from Blood Hound.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
@@ -45,43 +44,5 @@ public final class BloodHound extends CardImpl {
     @Override
     public BloodHound copy() {
         return new BloodHound(this);
-    }
-}
-
-class BloodHoundTriggeredAbility extends TriggeredAbilityImpl {
-
-    BloodHoundTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true);
-    }
-
-    private BloodHoundTriggeredAbility(final BloodHoundTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public BloodHoundTriggeredAbility copy() {
-        return new BloodHoundTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getTargetId().equals(this.getControllerId()) && event.getAmount() > 0) {
-            this.getEffects().clear();
-            if (event.getAmount() > 0) {
-                this.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(event.getAmount())));
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you're dealt damage, you may put that many +1/+1 counters on {this}.";
     }
 }
