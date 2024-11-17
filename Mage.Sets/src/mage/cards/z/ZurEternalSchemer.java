@@ -58,7 +58,7 @@ public final class ZurEternalSchemer extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(compoundAbilities, Duration.WhileOnBattlefield, filter)));
 
         // {1}{W}: Target non-Aura enchantment you control becomes a creature in addition to its other types and has base power and toughness each equal to its mana value.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZurEternalSchemerEffect(), new ManaCostsImpl<>("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(new ZurEternalSchemerEffect(), new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);
     }

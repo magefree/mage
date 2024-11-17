@@ -24,7 +24,7 @@ public final class TriskelaviteToken extends TokenImpl {
         power = new MageInt(1);
         toughness = new MageInt(1);
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new SacrificeSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
 
