@@ -39,12 +39,12 @@ public final class HypervoltGrasp extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature has "Tap: This creature deals 1 damage to any target."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability gainedAbility = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         gainedAbility.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
         
         // {1}{U}: Return Hypervolt Grasp to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{1}{U}")));
     }
 
     private HypervoltGrasp(final HypervoltGrasp card) {

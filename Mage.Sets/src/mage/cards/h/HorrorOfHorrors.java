@@ -36,7 +36,7 @@ public final class HorrorOfHorrors extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
 
         // Sacrifice a Swamp: Regenerate target black creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(),
+        Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(),
             new SacrificeTargetCost(filter1));
         ability.addTarget(new TargetCreaturePermanent(filter2));
         this.addAbility(ability);

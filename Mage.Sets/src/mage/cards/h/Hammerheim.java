@@ -38,7 +38,7 @@ public final class Hammerheim extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // {tap}: Target creature loses all landwalk abilities until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HammerheimEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new HammerheimEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

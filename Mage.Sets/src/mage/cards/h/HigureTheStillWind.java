@@ -51,7 +51,7 @@ public final class HigureTheStillWind extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true));
 
         // {2}: Target Ninja creature can't be blocked this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(), new GenericManaCost(2));
         ability.addTarget(new TargetCreaturePermanent(filterCreature));
         this.addAbility(ability);
 

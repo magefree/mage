@@ -27,7 +27,7 @@ public final class HaplessResearcher extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Hapless Researcher: Draw a card, then discard a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DrawDiscardControllerEffect(), new SacrificeSourceCost()));
     }
 
     private HaplessResearcher(final HaplessResearcher card) {

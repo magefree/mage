@@ -38,7 +38,7 @@ public final class HolyArmor extends CardImpl {
         // Enchanted creature gets +0/+2.
         this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(0, 2, Duration.WhileOnBattlefield)));
         // {W}: Enchanted creature gets +0/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
+        this.addAbility(new SimpleActivatedAbility(new BoostEnchantedEffect(0, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
     }
 
     private HolyArmor(final HolyArmor card) {

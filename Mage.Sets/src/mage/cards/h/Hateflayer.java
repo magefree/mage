@@ -34,7 +34,7 @@ public final class Hateflayer extends CardImpl {
         this.addAbility(WitherAbility.getInstance());
         
         // {2}{R}, {untap}: Hateflayer deals damage equal to its power to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
                 .setText("{this} deals damage equal to its power to any target"), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new UntapSourceCost());
         ability.addTarget(new TargetAnyTarget());
