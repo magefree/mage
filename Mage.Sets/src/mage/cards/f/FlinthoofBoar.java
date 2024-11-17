@@ -40,7 +40,7 @@ public final class FlinthoofBoar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostSourceWhileControlsEffect(filter, 1, 1)));
 
         // {R}: Flinthoof Boar gains haste until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{R}")));
     }

@@ -42,7 +42,7 @@ public final class EyeOfUgin extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filterSpells, 2)));
 
         // {7}, {tap}: Search your library for a colorless creature card, reveal it, and put it into your hand. Then shuffle your library.
-        Ability searchAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability searchAbility = new SimpleActivatedAbility(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true),
                 new TapSourceCost());
         searchAbility.addCost(new ManaCostsImpl<>("{7}"));

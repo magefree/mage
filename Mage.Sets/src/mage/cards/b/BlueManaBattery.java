@@ -28,7 +28,7 @@ public final class BlueManaBattery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {2}, {T}: Put a charge counter on Blue Mana Battery.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.CHARGE.createInstance(1)), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

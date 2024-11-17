@@ -34,7 +34,7 @@ public final class CacklingWitch extends CardImpl {
 
         // {X}{B}, {tap}, Discard a card: Target creature gets +X/+0 until end of turn.
         GetXValue manaX = GetXValue.instance;
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new BoostTargetEffect(manaX, StaticValue.get(0), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{X}{B}"));
         ability.addCost(new TapSourceCost());

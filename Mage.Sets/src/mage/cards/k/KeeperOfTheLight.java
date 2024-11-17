@@ -36,7 +36,7 @@ public final class KeeperOfTheLight extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {W}, {T}: Choose target opponent who had more life than you did as you activated this ability. You gain 3 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new GainLifeEffect(3).setText("Choose target opponent who had more life than you did as you activated this ability. You gain 3 life."),
                 new ManaCostsImpl<>("{W}"));
         ability.addCost(new TapSourceCost());

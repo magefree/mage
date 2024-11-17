@@ -39,7 +39,7 @@ public final class BogbrewWitch extends CardImpl {
 
         // {2}, {T}: Search your library for a card named Festering Newt or Bubbling Cauldron, put it onto the battlefield tapped, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(1, 1, filter);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInPlayEffect(target, true),
                 new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());

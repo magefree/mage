@@ -43,7 +43,7 @@ public final class RimescaleDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {2}{snow}: Tap target creature and put an ice counter on it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new TapTargetEffect("tap target creature"),
                 new ManaCostsImpl<>("{2}{S}")
         );

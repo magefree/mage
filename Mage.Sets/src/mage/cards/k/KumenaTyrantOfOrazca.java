@@ -52,17 +52,17 @@ public final class KumenaTyrantOfOrazca extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Tap another untapped Merfolk you control: Kumena, Tyrant of Orzca can't be blocked this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),
                 new TapTargetCost(new TargetControlledPermanent(1, 1, filterAnotherNotTapped, true))));
 
         // Tap three untapped Merfolk you control: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(1),
                 new TapTargetCost(new TargetControlledPermanent(3, 3, filterNotTapped, true))));
 
         // Tap five untapped Merfolk you control: Put a +1/+1 counter on each Merfolk you control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new AddCountersAllEffect(CounterType.P1P1.createInstance(), filterAll),
                 new TapTargetCost(new TargetControlledPermanent(5, 5, filterNotTapped, true))));
 

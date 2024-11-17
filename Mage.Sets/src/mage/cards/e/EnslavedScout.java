@@ -28,7 +28,7 @@ public final class EnslavedScout extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {2}: Enslaved Scout gains mountainwalk until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(new MountainwalkAbility(false), Duration.EndOfTurn),
                 new GenericManaCost(2)));
     }

@@ -31,7 +31,7 @@ public final class FungalBloom extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{G}{G}");
 
         // {G}{G}: Put a spore counter on target Fungus.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new AddCountersTargetEffect(CounterType.SPORE.createInstance()),
                 new ManaCostsImpl<>("{G}{G}"));
         ability.addTarget(new TargetPermanent(filter));

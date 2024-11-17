@@ -45,7 +45,7 @@ public final class HarborBandit extends CardImpl {
         this.addAbility(new SimpleStaticAbility(effect));
         
         // {1}{U}: Harbor Bandit can't be blocked this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),
                 new ManaCostsImpl<>("{1}{U}")));
     }

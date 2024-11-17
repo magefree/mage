@@ -32,7 +32,7 @@ public final class ScarwoodHag extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {G}{G}{G}{G}, {tap}: Target creature gains forestwalk until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(new ForestwalkAbility(false), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{G}{G}{G}{G}"));
         ability.addCost(new TapSourceCost());
@@ -42,7 +42,7 @@ public final class ScarwoodHag extends CardImpl {
         // {tap}: Target creature loses forestwalk until end of turn.
         Effect effect = new LoseAbilityTargetEffect(new ForestwalkAbility(true), Duration.EndOfTurn);
         effect.setText("Target creature loses forestwalk until end of turn");
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        ability = new SimpleActivatedAbility(
                 effect,
                 new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

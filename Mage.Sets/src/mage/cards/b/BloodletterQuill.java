@@ -35,7 +35,7 @@ public final class BloodletterQuill extends CardImpl {
         ability.addCost(new PutCountersSourceCost(CounterType.BLOOD.createInstance()));
         this.addAbility(ability);
         // {U}{B}: Remove a blood counter from Bloodletter Quill.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new RemoveCounterSourceEffect(CounterType.BLOOD.createInstance()), new ManaCostsImpl<>("{U}{B}")));
     }
 

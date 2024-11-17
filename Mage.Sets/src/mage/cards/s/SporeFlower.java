@@ -32,7 +32,7 @@ public final class SporeFlower extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance())));
 
         // Remove three spore counters from Spore Flower: Prevent all combat damage that would be dealt this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new PreventAllDamageByAllPermanentsEffect(Duration.EndOfTurn, true),
                 new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
     }

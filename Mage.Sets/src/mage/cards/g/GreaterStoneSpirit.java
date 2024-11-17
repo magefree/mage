@@ -46,7 +46,7 @@ public final class GreaterStoneSpirit extends CardImpl {
         this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
 
         // {2}{R}: Until end of turn, target creature gets +0/+2 and gains "{R}: This creature gets +1/+0 until end of turn."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability gainedAbility = new SimpleActivatedAbility(
                 new BoostSourceEffect(1, 0, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{R}")
         );

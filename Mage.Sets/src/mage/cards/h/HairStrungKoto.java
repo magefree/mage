@@ -31,7 +31,7 @@ public final class HairStrungKoto extends CardImpl {
         /* Tap an untapped creature you control: Target player puts the top 
          * card of their library into their graveyard.
          */
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new MillCardsTargetEffect(1),
                 new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         ability.addTarget(new TargetPlayer());

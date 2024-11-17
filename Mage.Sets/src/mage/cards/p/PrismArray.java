@@ -33,7 +33,7 @@ public final class PrismArray extends CardImpl {
                 null, "<i>Converge</i> &mdash; {this} enters with a +1/+1 counter on it for each color of mana spent to cast it.", null));
 
         // Remove a crystal counter from Prism Array: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new TapTargetEffect(),
                 new RemoveCountersSourceCost(CounterType.CRYSTAL.createInstance(1)));
         ability.addTarget(new TargetCreaturePermanent());

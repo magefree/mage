@@ -41,7 +41,7 @@ public final class PrimordialMist extends CardImpl {
         // Exile a face-down permanent you control face-up: You may play that card this turn
         TargetPermanent target = new TargetPermanent(filter);
         target.withNotTarget(true);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new PrimordialMistCastFromExileEffect(),
                 new PrimordialMistCost(target));
         this.addAbility(ability);

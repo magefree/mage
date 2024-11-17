@@ -33,7 +33,7 @@ public final class BattleRampart extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {T}: Target creature gains haste until end of turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn),
                 new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

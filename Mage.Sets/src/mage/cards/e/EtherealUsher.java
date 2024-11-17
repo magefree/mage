@@ -30,7 +30,7 @@ public final class EtherealUsher extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {U}, {tap}: Target creature can't be blocked this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new CantBeBlockedTargetEffect(),
                 new ManaCostsImpl<>("{U}"));
         ability.addCost(new TapSourceCost());

@@ -27,7 +27,7 @@ public final class ConsulateSurveillance extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(4)));
 
         // Pay {E}{E}: Prevent all damage that would be dealt to you this turn by a source of your choice.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new PreventAllDamageFromChosenSourceToYouEffect(Duration.EndOfTurn, new FilterObject("source"), false),
                 new PayEnergyCost(2)));
 

@@ -53,7 +53,7 @@ public final class ObsidianFireheart extends CardImpl {
         // For as long as that land has a blaze counter on it, it has "At the beginning
         // of your upkeep, this land deals 1 damage to you." (The land continues to burn
         // after Obsidian Fireheart has left the battlefield.)
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new AddCountersTargetEffect(CounterType.BLAZE.createInstance()),
                 new ManaCostsImpl<>("{1}{R}{R}"));
         ability.addTarget(new TargetLandPermanent(filter));

@@ -28,7 +28,7 @@ public final class GoblinDiplomats extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Each creature attacks this turn if able.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new AttacksIfAbleAllEffect(StaticFilters.FILTER_PERMANENT_ALL_CREATURES, Duration.EndOfTurn)
                         .setText("Each creature attacks this turn if able"),
                 new TapSourceCost()));

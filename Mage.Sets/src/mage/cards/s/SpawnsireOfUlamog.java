@@ -44,7 +44,7 @@ public final class SpawnsireOfUlamog extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new EldraziSpawnToken(), 2).withTextOptions(true), new GenericManaCost(4)));
 
         // {20}: Cast any number of Eldrazi cards you own from outside the game without paying their mana costs.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new CastCardFromOutsideTheGameEffect(filter, ruleText), new GenericManaCost(20)
         ).addHint(OpenSideboardHint.instance));
     }

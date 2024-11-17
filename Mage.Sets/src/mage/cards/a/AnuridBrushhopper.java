@@ -29,7 +29,7 @@ public final class AnuridBrushhopper extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Discard two cards: Exile Anurid Brushhopper. Return it to the battlefield under its owner's control at the beginning of the next end step.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new ExileReturnBattlefieldOwnerNextEndStepSourceEffect(),
                 new DiscardTargetCost(new TargetCardInHand(2, StaticFilters.FILTER_CARD_CARDS))));
     }

@@ -60,7 +60,7 @@ public final class ShalaiVoiceOfPlenty extends CardImpl {
         this.addAbility(ability);
 
         // {4}{G}{G}: Put a +1/+1 counter on each creature you control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new AddCountersAllEffect(
                         CounterType.P1P1.createInstance(),
                         StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED

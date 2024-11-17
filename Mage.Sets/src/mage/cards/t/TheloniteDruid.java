@@ -42,7 +42,7 @@ public final class TheloniteDruid extends CardImpl {
                 new CreatureToken(2, 3),
                 "Forests", filter, Duration.EndOfTurn, false);
         effect.getDependencyTypes().add(DependencyType.BecomeForest);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 effect,
                 new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new TapSourceCost());

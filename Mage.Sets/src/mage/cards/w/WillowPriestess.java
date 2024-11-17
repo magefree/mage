@@ -44,12 +44,12 @@ public final class WillowPriestess extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: You may put a Faerie permanent card from your hand onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new PutCardFromHandOntoBattlefieldEffect(filter),
                 new TapSourceCost()));
         
         // {2}{G}: Target green creature gains protection from black until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(ProtectionAbility.from(ObjectColor.BLACK), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}"));
         Target target = new TargetPermanent(greenCreature);
         ability.addTarget(target);

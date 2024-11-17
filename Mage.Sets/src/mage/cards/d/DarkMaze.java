@@ -34,7 +34,7 @@ public final class DarkMaze extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {0}: Dark Maze can attack this turn as though it didn't have defender. Exile it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn),
                 new GenericManaCost(0));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(

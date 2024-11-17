@@ -29,7 +29,7 @@ public final class SkitteringHeartstopper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {B}: Skittering Heartstopper gains deathtouch until end of turn. (Any amount of damage it deals to a creature is enough to destroy it.)
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 

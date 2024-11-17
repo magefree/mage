@@ -31,7 +31,7 @@ public final class ArmsDealer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{R}, Sacrifice a Goblin: Arms Dealer deals 4 damage to target creature.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(4),
                 new ManaCostsImpl<>("{1}{R}"));
         ability.addCost(new SacrificeTargetCost(filter));

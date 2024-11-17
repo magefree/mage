@@ -32,7 +32,7 @@ public final class HelixPinnacle extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
 
         // {X}: Put X tower counters on Helix Pinnacle.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.TOWER.createInstance(), GetXValue.instance, true),
                 new ManaCostsImpl<>("{X}")));
 

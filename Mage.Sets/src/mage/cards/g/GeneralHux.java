@@ -38,7 +38,7 @@ public final class GeneralHux extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever General Hux or another nontoken creature you control enters, until end of turn, target creature gains "{B}: This creature gets +1/+1 until end of turn."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn)
                         .setText("This creature gets +1/+1 until end of turn"),
                 new ManaCostsImpl<>("{B}"));

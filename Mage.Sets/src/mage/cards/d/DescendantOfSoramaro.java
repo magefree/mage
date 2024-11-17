@@ -30,7 +30,7 @@ public final class DescendantOfSoramaro extends CardImpl {
         // {1}{U}: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.
         Effect effect = new LookLibraryControllerEffect(CardsInControllerHandCount.instance);
         effect.setText("Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 effect, new ManaCostsImpl<>("{1}{U}")));
     }
 

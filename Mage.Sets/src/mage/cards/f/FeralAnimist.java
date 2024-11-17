@@ -30,7 +30,7 @@ public final class FeralAnimist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}: Feral Animist gets +X/+0 until end of turn, where X is its power.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(SourcePermanentPowerValue.NOT_NEGATIVE, StaticValue.get(0), Duration.EndOfTurn),
                 new GenericManaCost(3)));
     }

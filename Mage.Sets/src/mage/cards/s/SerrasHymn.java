@@ -32,7 +32,7 @@ public final class SerrasHymn extends CardImpl {
                 new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), true));
 
         // Sacrifice Serra's Hymn: Prevent the next X damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose, where X is the number of verse counters on Serra's Hymn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetMultiAmountEffect(
                         Duration.EndOfTurn,
                         1, false, true, // the integer 1 is ignored due to the dynamic number being set

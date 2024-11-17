@@ -39,7 +39,7 @@ public final class MyrGalvanizer extends CardImpl {
                 new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // {1}, {T}: Untap each other Myr you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new MyrGalvanizerEffect(), new TapSourceCost());
         ability.addCost(new GenericManaCost(1));
         this.addAbility(ability);

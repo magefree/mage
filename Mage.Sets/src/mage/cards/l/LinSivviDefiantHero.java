@@ -48,7 +48,7 @@ public final class LinSivviDefiantHero extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {X}, {tap}: Search your library for a Rebel permanent card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new LinSivviDefiantHeroEffect(),
                 new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
