@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
@@ -8,17 +9,17 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePlayerEvent;
 import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Xanderhall, xenohedron
  */
-public class OneOrMoreDamagePlayerTriggeredAbility extends TriggeredAbilityImpl {
+public class OneOrMoreDamagePlayerTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent>  {
 
     private final SetTargetPointer setTargetPointer;
     private final FilterPermanent filter;
@@ -59,30 +60,26 @@ public class OneOrMoreDamagePlayerTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
-        if (onlyCombat && !dEvent.isCombatDamage()) {
+    public boolean checkEvent(DamagedPlayerEvent event, Game game) {
+        if (onlyCombat && !event.isCombatDamage()) {
             return false;
         }
-        List<DamagedEvent> events = dEvent
-                .getEvents()
-                .stream()
-                .filter(e -> {
-                    Permanent permanent = game.getPermanentOrLKIBattlefield(e.getSourceId());
-                    if (permanent == null) {
-                        return false;
-                    }
-                    if (onlyControlled && !permanent.isControlledBy(this.getControllerId())) {
-                        return false;
-                    }
-                    return filter.match(permanent, this.getControllerId(), this, game);
-                })
-                .collect(Collectors.toList());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
+        if (onlyControlled && !permanent.isControlledBy(this.getControllerId())) {
+            return false;
+        }
+        return filter.match(permanent, this.getControllerId(), this, game);
+    }
 
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        List<DamagedPlayerEvent> events = getFilteredEvents((DamagedBatchForOnePlayerEvent) event, game);
         if (events.isEmpty()) {
             return false;
         }
-
         this.getAllEffects().setValue("damage", events.stream().mapToInt(DamagedEvent::getAmount).sum());
         switch (setTargetPointer) {
             case PLAYER:
@@ -91,9 +88,8 @@ public class OneOrMoreDamagePlayerTriggeredAbility extends TriggeredAbilityImpl 
             case NONE:
                 break;
             default:
-                throw new IllegalArgumentException("Invalid SetTargetPointer option");
+                throw new IllegalArgumentException("Unsupported SetTargetPointer in OneOrMoreDamagePlayerTriggeredAbility");
         }
-
         return true;
     }
 
