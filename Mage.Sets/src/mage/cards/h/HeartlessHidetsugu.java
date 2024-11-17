@@ -28,7 +28,7 @@ public final class HeartlessHidetsugu extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {tap}: Heartless Hidetsugu deals damage to each player equal to half that player's life total, rounded down.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new HeartlessHidetsuguDamageEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new HeartlessHidetsuguDamageEffect(), new TapSourceCost()));
 
     }
 

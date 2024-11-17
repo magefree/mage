@@ -35,7 +35,7 @@ public final class HeliumSquirter extends CardImpl {
         this.addAbility(new GraftAbility(this, 3));
         
         // {1}: Target creature with a +1/+1 counter on it gains flying until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(1));
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_P1P1));
         this.addAbility(ability);        
     }

@@ -30,7 +30,7 @@ public final class HithlainRope extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantBeSacrificedSourceEffect()));
 
         // {1}, {T}: Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. The player to your right gains control of Hithlain Rope.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(
+        Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInPlayEffect(
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND_A), true
         ), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
@@ -38,7 +38,7 @@ public final class HithlainRope extends CardImpl {
         this.addAbility(ability);
 
         // {2}, {T}: Draw a card. The player to your right gains control of Hithlain Rope.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
+        ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new PlayerToRightGainsControlOfSourceEffect());
         this.addAbility(ability);

@@ -40,7 +40,7 @@ public final class HeavyArbalest extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new HeavyArbalestEffect()));
 
         // Equipped creature has "{T}: This creature deals 2 damage to any target."
-        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(new DamageTargetEffect(2), new TapSourceCost());
         ability2.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability2, AttachmentType.EQUIPMENT)));
 

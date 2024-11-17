@@ -36,7 +36,7 @@ public final class HammerfistGiant extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {tap}: Hammerfist Giant deals 4 damage to each creature without flying and each player.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(4, filter), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DamageEverythingEffect(4, filter), new TapSourceCost()));
     }
 
     private HammerfistGiant(final HammerfistGiant card) {

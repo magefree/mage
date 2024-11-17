@@ -32,7 +32,7 @@ public final class HaazdaShieldMate extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}"))));
         
         // {W}: The next time a source of your choice would deal damage to you this turn, prevent that damage.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
+        this.addAbility(new SimpleActivatedAbility(new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));
     }
 
     private HaazdaShieldMate(final HaazdaShieldMate card) {
