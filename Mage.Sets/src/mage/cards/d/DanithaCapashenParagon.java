@@ -50,7 +50,7 @@ public final class DanithaCapashenParagon extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Aura and Equipment spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     private DanithaCapashenParagon(final DanithaCapashenParagon card) {

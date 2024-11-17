@@ -49,7 +49,7 @@ public final class DualCasting extends CardImpl {
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CopyTargetStackObjectEffect(), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell(filter));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.AURA)));
     }
 
     private DualCasting(final DualCasting card) {

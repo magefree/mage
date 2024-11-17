@@ -40,7 +40,7 @@ public final class DamiaSageOfStone extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
 
         // At the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference.
         this.addAbility(new DamiaSageOfStoneTriggeredAbility());

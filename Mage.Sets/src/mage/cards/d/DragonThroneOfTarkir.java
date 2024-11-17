@@ -32,7 +32,7 @@ public final class DragonThroneOfTarkir extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has defender and "{2}, {T}: Other creatures you control gain trample and get +X/+X until end of turn, where X is this creature's power."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DefenderAbility.getInstance(), AttachmentType.EQUIPMENT));
+        Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(DefenderAbility.getInstance(), AttachmentType.EQUIPMENT));
         Effect effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES, true);
         effect.setText("Other creatures you control gain trample");
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));

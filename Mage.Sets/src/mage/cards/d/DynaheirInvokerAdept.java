@@ -40,7 +40,7 @@ public final class DynaheirInvokerAdept extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // You may activate abilities of other creatures you control as though those creatures had haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DynaheirInvokerAdeptHasteEffect()));
+        this.addAbility(new SimpleStaticAbility(new DynaheirInvokerAdeptHasteEffect()));
 
         // {T}: When you next activate an ability that isn't a mana ability this turn by spending four or more mana to activate it, copy that ability. You may choose new targets for the copy.
         this.addAbility(new SimpleActivatedAbility(new CreateDelayedTriggeredAbilityEffect(new DynaheirInvokerAdeptTriggeredAbility()), new TapSourceCost()));

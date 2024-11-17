@@ -41,7 +41,7 @@ public final class DisruptionAura extends CardImpl {
         ability = new BeginningOfUpkeepTriggeredAbility(new DisruptionAuraEffect());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted artifact has \"At the beginning of your upkeep, sacrifice this artifact unless you pay its mana cost.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private DisruptionAura(final DisruptionAura card) {

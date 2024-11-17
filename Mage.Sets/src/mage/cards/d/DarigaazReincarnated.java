@@ -49,7 +49,7 @@ public final class DarigaazReincarnated extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // If Darigaaz Reincarnated would die, instead exile it with three egg counters on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DarigaazReincarnatedDiesEffect()));
+        this.addAbility(new SimpleStaticAbility(new DarigaazReincarnatedDiesEffect()));
 
         // At the beginning of your upkeep, if Darigaaz is exiled with an egg counter on it, remove an egg counter from it. Then if Darigaaz has no egg counters on it, return it to the battlefield.
         this.addAbility(new DarigaazReincarnatedInterveningIfTriggeredAbility());

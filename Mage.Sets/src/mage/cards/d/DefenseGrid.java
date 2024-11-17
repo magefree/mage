@@ -22,7 +22,7 @@ public final class DefenseGrid extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Each spell costs {3} more to cast except during its controller's turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DefenseGridCostModificationEffect()));
+        this.addAbility(new SimpleStaticAbility(new DefenseGridCostModificationEffect()));
 
     }
 

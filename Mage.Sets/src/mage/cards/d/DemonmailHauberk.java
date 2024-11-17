@@ -26,7 +26,7 @@ public final class DemonmailHauberk extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +4/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, 2)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(4, 2)));
 
         // Equip - Sacrifice a creature.
         this.addAbility(new EquipAbility(

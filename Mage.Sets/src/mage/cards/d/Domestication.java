@@ -42,7 +42,7 @@ public final class Domestication extends CardImpl {
         this.addAbility(ability);
         
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
         
         // At the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice Domestication.
         TriggeredAbility ability2 = new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect());

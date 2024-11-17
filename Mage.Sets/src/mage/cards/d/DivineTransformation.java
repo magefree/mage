@@ -35,7 +35,7 @@ public final class DivineTransformation extends CardImpl {
         // Enchanted creature gets +3/+3.
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
     }
 
     private DivineTransformation(final DivineTransformation card) {

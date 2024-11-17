@@ -40,7 +40,7 @@ public final class Domineer extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // You control enchanted artifact creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("artifact creature")));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect("artifact creature")));
     }
 
     private Domineer(final Domineer card) {
