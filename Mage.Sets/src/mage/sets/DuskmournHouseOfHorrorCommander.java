@@ -123,7 +123,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Gray Merchant of Asphodel", 142, Rarity.UNCOMMON, mage.cards.g.GrayMerchantOfAsphodel.class));
         cards.add(new SetCardInfo("Greater Tanuki", 181, Rarity.COMMON, mage.cards.g.GreaterTanuki.class));
         cards.add(new SetCardInfo("Grim Backwoods", 281, Rarity.RARE, mage.cards.g.GrimBackwoods.class));
-        cards.add(new SetCardInfo("Grim Flayer", 218, Rarity.RARE, mage.cards.g.GrimFlayer.class));
+        cards.add(new SetCardInfo("Grim Flayer", 218, Rarity.MYTHIC, mage.cards.g.GrimFlayer.class));
         cards.add(new SetCardInfo("Grisly Salvage", 219, Rarity.COMMON, mage.cards.g.GrislySalvage.class));
         cards.add(new SetCardInfo("Grist, the Hunger Tide", 220, Rarity.MYTHIC, mage.cards.g.GristTheHungerTide.class));
         cards.add(new SetCardInfo("Growth Spiral", 88, Rarity.COMMON, mage.cards.g.GrowthSpiral.class));
