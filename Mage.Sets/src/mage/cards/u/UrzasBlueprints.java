@@ -23,7 +23,7 @@ public final class UrzasBlueprints extends CardImpl {
         // Echo {6}
         this.addAbility(new EchoAbility("{6}"));
         // {tap}: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost()));
     }
 
     private UrzasBlueprints(final UrzasBlueprints card) {

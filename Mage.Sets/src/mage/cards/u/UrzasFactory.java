@@ -29,7 +29,7 @@ public final class UrzasFactory extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {7}, {T}: Create a 2/2 colorless Assembly-Worker artifact creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new AssemblyWorkerToken()), new GenericManaCost(7));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new AssemblyWorkerToken()), new GenericManaCost(7));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -32,7 +32,7 @@ public final class ViridianLongbow extends CardImpl {
         // Equipped creature has "{tap}: This creature deals 1 damage to any target."
         Effect effect = new DamageTargetEffect(1);
         effect.setText("This creature deals 1 damage to any target");
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability, AttachmentType.EQUIPMENT)));
         

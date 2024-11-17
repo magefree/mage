@@ -48,7 +48,7 @@ public final class UnbridledGrowth extends CardImpl {
         this.addAbility(new SimpleStaticAbility(effect));
 
         // Sacrifice Unbridled Growth: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new SacrificeSourceCost()));
     }
 
     private UnbridledGrowth(final UnbridledGrowth card) {

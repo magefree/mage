@@ -22,7 +22,7 @@ public final class UnnaturalSelection extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         // {1}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesChosenCreatureTypeTargetEffect(true), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new BecomesChosenCreatureTypeTargetEffect(true), new GenericManaCost(1));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

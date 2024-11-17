@@ -28,7 +28,7 @@ public final class UndercityTroll extends CardImpl {
         // Renown 1
         this.addAbility(new RenownAbility(1));
         // {2}{G}: Regenerate Undercity Troll.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{2}{G}")));
     }
 
     private UndercityTroll(final UndercityTroll card) {

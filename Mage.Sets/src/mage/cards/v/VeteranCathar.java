@@ -31,7 +31,7 @@ public final class VeteranCathar extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {3}{W}: Target Human gains double strike until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{3}{W}"));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{3}{W}"));
         ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent(SubType.HUMAN, "Human")));
         this.addAbility(ability);
 

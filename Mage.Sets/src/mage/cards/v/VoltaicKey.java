@@ -20,7 +20,7 @@ public final class VoltaicKey extends CardImpl {
 
     public VoltaicKey(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());
         ability.addCost(new GenericManaCost(1));
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);

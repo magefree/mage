@@ -36,10 +36,10 @@ public final class UrsineFylgja extends CardImpl {
         effect.setText("with four healing counters on it.");
         this.addAbility(new EntersBattlefieldAbility(effect));
         // Remove a healing counter from Ursine Fylgja: Prevent the next 1 damage that would be dealt to Ursine Fylgja this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToSourceEffect(Duration.EndOfTurn, 1),
+        this.addAbility(new SimpleActivatedAbility(new PreventDamageToSourceEffect(Duration.EndOfTurn, 1),
             new RemoveCountersSourceCost(CounterType.HEALING.createInstance(1))));
         // {2}{W}: Put a healing counter on Ursine Fylgja.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.HEALING.createInstance(1)),
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.HEALING.createInstance(1)),
             new ManaCostsImpl<>("{2}{W}")));
     }
 

@@ -44,7 +44,7 @@ public final class VoidMaw extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new VoidMawEffect()));
 
         // Put a card exiled with Void Maw into its owner's graveyard: Void Maw gets +2/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new VoidMawCost()));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), new VoidMawCost()));
     }
 
     private VoidMaw(final VoidMaw card) {

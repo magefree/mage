@@ -27,7 +27,7 @@ public final class VexingArcanix extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {3}, {tap}: Target player chooses a card name, then reveals the top card of their library. If that card has the chosen name, the player puts it into their hand. Otherwise, the player puts it into their graveyard and Vexing Arcanix deals 2 damage to them.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VexingArcanixEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new VexingArcanixEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

@@ -32,7 +32,7 @@ public final class VictualSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Slivers have "{2}, Sacrifice this permanent: You gain 4 life."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(4), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(4), new SacrificeSourceCost());
         ability.addCost(new GenericManaCost(2));
 
         this.addAbility(new SimpleStaticAbility(

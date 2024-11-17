@@ -33,7 +33,7 @@ public final class VoltaicConstruct extends CardImpl {
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new GenericManaCost(2));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
