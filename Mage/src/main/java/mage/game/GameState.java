@@ -845,6 +845,8 @@ public class GameState implements Serializable, Copyable<GameState> {
             // DAMAGED_BATCH_FOR_PERMANENTS + DAMAGED_BATCH_FOR_ONE_PERMANENT
             addSimultaneousDamageToPermanentBatches((DamagedPermanentEvent) damagedEvent, game);
         }
+        // DAMAGED_BATCH_BY_SOURCE
+        addSimultaneousDamageBySourceBatched(damagedEvent, game);
         // DAMAGED_BATCH_FOR_ALL
         addSimultaneousDamageToBatchForAll(damagedEvent, game);
     }
@@ -892,6 +894,22 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         if (!isSingleBatchUsed) {
             addSimultaneousEvent(new DamagedBatchForOnePermanentEvent(damagedPermanentEvent), game);
+        }
+    }
+
+    public void addSimultaneousDamageBySourceBatched(DamagedEvent damageEvent, Game game) {
+        // find existing batch first
+        boolean isBatchUsed = false;
+        for (GameEvent event : simultaneousEvents) {
+            if (event instanceof DamagedBatchBySourceEvent
+                    && damageEvent.getSourceId().equals(event.getSourceId())) {
+                ((DamagedBatchBySourceEvent) event).addEvent(damageEvent);
+                isBatchUsed = true;
+            }
+        }
+        // new batch if necessary
+        if (!isBatchUsed) {
+            addSimultaneousEvent(new DamagedBatchBySourceEvent(damageEvent), game);
         }
     }
 
