@@ -38,7 +38,7 @@ public final class GraveServitude extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +3/-1 and is black.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, -1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(3, -1, Duration.WhileOnBattlefield));
         Effect effect = new SetCardColorAttachedEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield, AttachmentType.AURA);
         effect.setText("and is black");
         ability.addEffect(effect);

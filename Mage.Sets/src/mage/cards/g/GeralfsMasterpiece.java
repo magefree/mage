@@ -45,7 +45,7 @@ public final class GeralfsMasterpiece extends CardImpl {
         DynamicValue count = new SignInversionDynamicValue(CardsInControllerHandCount.instance);
         Effect effect = new BoostSourceEffect(count, count, Duration.WhileOnBattlefield);
         effect.setText("{this} gets -1/-1 for each card in your hand");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // {3}{U}, Discard three cards: Return Geralf's Masterpiece from your graveyard to the battlefield tapped.
         Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(true), new ManaCostsImpl<>("{3}{U}"));

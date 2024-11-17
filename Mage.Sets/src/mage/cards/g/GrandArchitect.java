@@ -50,7 +50,7 @@ public final class GrandArchitect extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Other blue creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, boostFilter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, boostFilter, true)));
 
         // {U}: Target artifact creature becomes blue until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GrandArchitectEffect(), new ManaCostsImpl<>("{U}"));

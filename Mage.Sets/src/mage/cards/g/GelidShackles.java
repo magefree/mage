@@ -36,7 +36,7 @@ public final class GelidShackles extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockActivateAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBlockActivateAttachedEffect()));
         
         // {snow}: Enchanted creature gains defender until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DefenderAbility.getInstance(),

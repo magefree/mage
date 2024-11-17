@@ -23,10 +23,10 @@ public final class GeneralsKabuto extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has shroud. (It can't be the target of spells or abilities.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT)));
 
         // Prevent all combat damage that would be dealt to equipped creature
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT, true)));
+        this.addAbility(new SimpleStaticAbility(new PreventDamageToAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT, true)));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.PreventDamage, new GenericManaCost(2)));

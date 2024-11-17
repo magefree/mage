@@ -39,7 +39,7 @@ public final class GodEternalKefnet extends CardImpl {
 
         // You may reveal the first card you draw each turn as you draw it. Whenever you reveal an instant or sorcery card this way,
         // copy that card and you may cast the copy. That copy costs {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GodEternalKefnetDrawCardReplacementEffect()), new CardsAmountDrawnThisTurnWatcher());
+        this.addAbility(new SimpleStaticAbility(new GodEternalKefnetDrawCardReplacementEffect()), new CardsAmountDrawnThisTurnWatcher());
 
         // When God-Eternal Kefnet dies or is put into exile from the battlefield, you may put it into its owner’s library third from the top.
         this.addAbility(new GodEternalDiesTriggeredAbility());

@@ -32,7 +32,7 @@ public final class GeistTrappers extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Geist Trappers is paired with another creature, both creatures have reach.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ReachAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(ReachAbility.getInstance(), ruleText)));
     }
 
     private GeistTrappers(final GeistTrappers card) {

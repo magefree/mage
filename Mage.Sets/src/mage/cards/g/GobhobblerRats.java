@@ -33,7 +33,7 @@ public final class GobhobblerRats extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Hellbent - As long as you have no cards in hand, Gobhobbler Rats gets +1/+0 and has "{B}: Regenerate Gobhobbler Rats."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(1,0, Duration.WhileOnBattlefield), HellbentCondition.instance, "<i>Hellbent</i> &mdash; As long as you have no cards in hand, {this} gets +1/+0"));
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}"));
         ability.addEffect(new ConditionalContinuousEffect(

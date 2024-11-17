@@ -30,7 +30,7 @@ public final class GalvanicJuggernaut extends CardImpl {
         // Galvanic Juggernaut attacks each turn if able.
         this.addAbility(new AttacksEachCombatStaticAbility());
         // Galvanic Juggernaut doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
         // Whenever another creature dies, untap Galvanic Juggernaut.
         this.addAbility(new DiesCreatureTriggeredAbility(new UntapSourceEffect(), false, true));
     }

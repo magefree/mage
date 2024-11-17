@@ -43,7 +43,7 @@ public final class GrothamaAllDevouring extends CardImpl {
         this.toughness = new MageInt(8);
 
         // Other creatures have "Whenever this creature attacks, you may have it fight Grothama, All-Devouring."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GrothamaAllDevouringGainAbilityEffect()));
+        this.addAbility(new SimpleStaticAbility(new GrothamaAllDevouringGainAbilityEffect()));
 
         // When Grothama leaves the battlefield, each player draws cards equal to the amount of damage dealt to Grothama this turn by sources they controlled.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new GrothamaAllDevouringDrawCardsEffect(), false), new GrothamaAllDevouringWatcher());

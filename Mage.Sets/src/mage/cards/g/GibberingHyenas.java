@@ -34,7 +34,7 @@ public final class GibberingHyenas extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Gibbering Hyenas can't block black creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockCreaturesSourceEffect(filter)));
     }
 
     private GibberingHyenas(final GibberingHyenas card) {

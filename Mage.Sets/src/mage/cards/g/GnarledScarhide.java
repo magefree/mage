@@ -36,7 +36,7 @@ public final class GnarledScarhide extends CardImpl {
         // Gnarled Scarhide can't block.
         this.addAbility(new CantBlockAbility());
         // Enchanted creature gets +2/+1 and can't block.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,1, Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(2,1, Duration.WhileOnBattlefield));
         Effect effect = new CantBlockAttachedEffect(AttachmentType.AURA);
         effect.setText("and can't block");
         ability.addEffect(effect);

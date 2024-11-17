@@ -47,7 +47,7 @@ public final class GateSmasher extends CardImpl {
         // Equipped creature gets +3/+0 and has trample.
         Effect effect = new BoostEquippedEffect(3, 0);
         effect.setText("Equipped creature gets +3/+0");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and has trample");
         ability.addEffect(effect);

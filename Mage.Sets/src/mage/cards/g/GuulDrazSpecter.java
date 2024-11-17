@@ -37,7 +37,7 @@ public final class GuulDrazSpecter extends CardImpl {
 
         this.addAbility(FlyingAbility.getInstance());
         // Guul Draz Specter gets +3/+3 as long as an opponent has no cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield),
                 GuulDrazSpecterCondition.instance,
                 ruleText)));

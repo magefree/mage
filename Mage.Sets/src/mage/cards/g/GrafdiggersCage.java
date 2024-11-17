@@ -27,10 +27,10 @@ public final class GrafdiggersCage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // Creature cards can't enter the battlefield from graveyards or libraries.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GrafdiggersCageEffect()));
+        this.addAbility(new SimpleStaticAbility(new GrafdiggersCageEffect()));
 
         // Players can't cast cards in graveyards or libraries.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GrafdiggersCageEffect2()));
+        this.addAbility(new SimpleStaticAbility(new GrafdiggersCageEffect2()));
     }
 
     private GrafdiggersCage(final GrafdiggersCage card) {

@@ -33,7 +33,7 @@ public final class Glowrider extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Noncreature spells cost {1} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(1, filter, TargetController.ANY)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostIncreasingAllEffect(1, filter, TargetController.ANY)));
     }
 
     private Glowrider(final Glowrider card) {

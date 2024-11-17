@@ -35,7 +35,7 @@ public final class GlaringSpotlight extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // Creatures your opponents control with hexproof can be the targets of spells and abilities you control as though they didn't have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GlaringSpotlightEffect()));
+        this.addAbility(new SimpleStaticAbility(new GlaringSpotlightEffect()));
 
         // {3}, Sacrifice Glaring Spotlight: Creatures you control gain hexproof until end of turn and can't be blocked this turn.
         Ability ability = new SimpleActivatedAbility(

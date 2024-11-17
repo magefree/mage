@@ -36,7 +36,7 @@ public final class GuulDrazVampire extends CardImpl {
 
         // As long as an opponent has 10 or less life, Guul Draz Vampire gets +2/+1 and has intimidate. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield), condition, rule1);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        Ability ability = new SimpleStaticAbility(effect1);
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(IntimidateAbility.getInstance()), condition, rule2));
         this.addAbility(ability);
 

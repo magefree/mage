@@ -28,7 +28,7 @@ public final class GhirapurOrrery extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Each player may play an additional land on each of their turns.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsAllEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayAdditionalLandsAllEffect()));
 
         // At the beginning of each player's upkeep, if that player has no cards in hand, that player draws three cards.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

@@ -31,7 +31,7 @@ public final class GuardGomazoa extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Prevent all combat damage that would be dealt to Guard Gomazoa.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventCombatDamageToSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new PreventCombatDamageToSourceEffect(Duration.WhileOnBattlefield)));
     }
 
     private GuardGomazoa(final GuardGomazoa card) {

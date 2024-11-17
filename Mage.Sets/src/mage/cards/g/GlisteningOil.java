@@ -40,7 +40,7 @@ public final class GlisteningOil extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature has infect.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.AURA)));
         
         // At the beginning of your upkeep, put a -1/-1 counter on enchanted creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GlisteningOilEffect()));

@@ -23,7 +23,7 @@ public final class GroundSeal extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
 
         // Cards in graveyards can't be the targets of spells or abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedCardsGraveyardsEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeTargetedCardsGraveyardsEffect()));
     }
 
     private GroundSeal(final GroundSeal card) {

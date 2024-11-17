@@ -35,7 +35,7 @@ public final class GallowsWarden extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Other Spirit creatures you control get +0/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
     private GallowsWarden(final GallowsWarden card) {

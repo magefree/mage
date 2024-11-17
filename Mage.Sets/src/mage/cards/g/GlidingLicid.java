@@ -32,7 +32,7 @@ public final class GlidingLicid extends CardImpl {
         this.addAbility(new LicidAbility(new ColoredManaCost(ColoredManaSymbol.U), new ColoredManaCost(ColoredManaSymbol.U)));
         
         // Enchanted creature has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private GlidingLicid(final GlidingLicid card) {

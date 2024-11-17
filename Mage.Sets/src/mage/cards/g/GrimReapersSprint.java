@@ -65,7 +65,7 @@ public final class GrimReapersSprint extends CardImpl {
         // Enchanted creature gets +2/+2 and has haste.
         Effect effect = new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has haste");
-        Ability staticAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2));
+        Ability staticAbility = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2));
         staticAbility.addEffect(effect);
         this.addAbility(staticAbility);
     }
