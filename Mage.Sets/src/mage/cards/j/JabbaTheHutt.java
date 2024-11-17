@@ -54,7 +54,7 @@ public final class JabbaTheHutt extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {T}: Put a bounty counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

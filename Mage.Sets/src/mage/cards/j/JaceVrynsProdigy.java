@@ -35,7 +35,7 @@ public final class JaceVrynsProdigy extends CardImpl {
 
         // {T}: Draw a card, then discard a card. If there are five or more cards in your graveyard, exile Jace, Vryn's Prodigy, then return him to the battefield transformed under his owner's control.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DrawDiscardControllerEffect(1, 1), new TapSourceCost());
         Effect effect = new ConditionalOneShotEffect(new ExileAndReturnSourceEffect(PutCards.BATTLEFIELD_TRANSFORMED,Pronoun.HE), new CardsInControllerGraveyardCondition(5));
         ability.addEffect(effect);
         this.addAbility(ability);

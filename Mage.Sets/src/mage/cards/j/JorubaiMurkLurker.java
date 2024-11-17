@@ -48,7 +48,7 @@ public final class JorubaiMurkLurker extends CardImpl {
                 new PermanentsOnTheBattlefieldCondition(filter), rule)));
 
         // {1}{B}: Target creature gains lifelink until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

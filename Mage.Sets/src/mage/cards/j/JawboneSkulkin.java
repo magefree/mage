@@ -35,7 +35,7 @@ public final class JawboneSkulkin extends CardImpl {
         this.subtype.add(SubType.SCARECROW);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(2));
         ability.addTarget(new TargetCreaturePermanent(filterRedCreature));
         this.addAbility(ability);
 

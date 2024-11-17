@@ -28,7 +28,7 @@ public final class JinxedIdol extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(2)));
 
         // Sacrifice a creature: Target opponent gains control of Jinxed Idol.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TargetPlayerGainControlSourceEffect(),
+        Ability ability = new SimpleActivatedAbility(new TargetPlayerGainControlSourceEffect(),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

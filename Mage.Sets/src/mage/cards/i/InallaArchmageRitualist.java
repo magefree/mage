@@ -76,7 +76,7 @@ public final class InallaArchmageRitualist extends CardImpl {
         this.addAbility(ability);
 
         // Tap five untapped Wizards you control: Target player loses 7 life.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(7), new TapTargetCost(new TargetControlledPermanent(5, 5, filter2, true)));
+        ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(7), new TapTargetCost(new TargetControlledPermanent(5, 5, filter2, true)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
