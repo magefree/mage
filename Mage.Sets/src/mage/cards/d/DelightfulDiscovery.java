@@ -73,11 +73,11 @@ enum DelightfulDiscoveryValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "1";
+        return "spell your opponents have cast this turn";
     }
 
     @Override
     public String toString() {
-        return "spell your opponents have cast this turn";
+        return "1";
     }
 }

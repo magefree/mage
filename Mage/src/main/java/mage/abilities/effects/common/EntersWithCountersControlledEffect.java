@@ -79,6 +79,7 @@ public class EntersWithCountersControlledEffect extends ReplacementEffectImpl {
         sb.append(CardUtil.numberToText(counter.getCount(), "an"));
         sb.append(" additional ");
         sb.append(counter.getName());
+        sb.append(" counter");
         if (counter.getCount() > 1) {
             sb.append('s');
         }

@@ -44,7 +44,7 @@ public final class ArlinnThePacksHope extends CardImpl {
         ).setText("until your next turn, you may cast creature spells as though they had flash"), 1);
         ability.addEffect(new EntersWithCountersControlledEffect(
                 StaticFilters.FILTER_PERMANENT_CREATURE, CounterType.P1P1.createInstance(), false
-        ));
+        ).concatBy(", and"));
         this.addAbility(ability);
 
         // −3: Create two 2/2 green Wolf creature tokens.

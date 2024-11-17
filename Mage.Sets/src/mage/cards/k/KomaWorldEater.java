@@ -36,7 +36,7 @@ public final class KomaWorldEater extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Ward {4}
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("{4}")));
+        this.addAbility(new WardAbility(new ManaCostsImpl<>("{4}"), false));
 
         // Whenever Koma deals combat damage to a player, create four 3/3 blue Serpent creature tokens named Koma's Coil.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(new KomasCoilToken(), 4)));

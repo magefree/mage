@@ -60,7 +60,7 @@ public final class FumulusTheInfestation extends CardImpl {
 
         // Whenever an Insect, Leech, Slug, or Worm you control attacks, defending player loses 1 life and you gain 1 life.
         Ability ability = new AttacksAllTriggeredAbility(
-                new LoseLifeTargetEffect(1), false,
+                new LoseLifeTargetEffect(1).setText("defending player loses 1 life"), false,
                 filter, SetTargetPointer.PLAYER, false
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));

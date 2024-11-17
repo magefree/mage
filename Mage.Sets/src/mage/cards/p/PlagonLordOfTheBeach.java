@@ -51,7 +51,8 @@ public final class PlagonLordOfTheBeach extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(xValue)).addHint(hint));
 
         // {W/U}: Target creature you control assigns combat damage equal to its toughness rather than its power this turn.
-        Ability ability = new SimpleActivatedAbility(new CombatDamageByToughnessTargetEffect(), new ManaCostsImpl<>("{W/U}"));
+        Ability ability = new SimpleActivatedAbility(new CombatDamageByToughnessTargetEffect()
+                .setText("target creature you control assigns combat damage equal to its toughness rather than its power this turn"), new ManaCostsImpl<>("{W/U}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }
