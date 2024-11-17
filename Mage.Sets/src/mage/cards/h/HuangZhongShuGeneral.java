@@ -27,7 +27,7 @@ public final class HuangZhongShuGeneral extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Huang Zhong, Shu General can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
     private HuangZhongShuGeneral(final HuangZhongShuGeneral card) {

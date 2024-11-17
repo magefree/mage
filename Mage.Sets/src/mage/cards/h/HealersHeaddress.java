@@ -40,7 +40,7 @@ public final class HealersHeaddress extends CardImpl {
         gainAbility.addTarget(new TargetAnyTarget());
         Effect effect = new BoostEquippedEffect(0, 2);
         effect.setText("Equipped creature gets +0/+2");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(gainAbility, AttachmentType.EQUIPMENT);
         effect.setText("and has \"{T}: Prevent the next 1 damage that would be dealt to any target this turn.\"");
         ability.addEffect(effect);

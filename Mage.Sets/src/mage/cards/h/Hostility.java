@@ -40,7 +40,7 @@ public final class Hostility extends CardImpl {
 
         // If a spell you control would deal damage to an opponent, prevent that damage.
         // Create a 3/1 red Elemental Shaman creature token with haste for each 1 damage prevented this way.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HostilityEffect()));
+        this.addAbility(new SimpleStaticAbility(new HostilityEffect()));
 
         // When Hostility is put into a graveyard from anywhere, shuffle it into its owner's library.
         this.addAbility(new PutIntoGraveFromAnywhereSourceTriggeredAbility(new ShuffleIntoLibrarySourceEffect()));

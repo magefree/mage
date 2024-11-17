@@ -42,7 +42,7 @@ public final class HazyHomunculus extends CardImpl {
                 new CantBeBlockedSourceEffect(),
                 new DefendingPlayerControlsSourceAttackingCondition(filter));
         effect.setText("{this} can't be blocked as long as defending player controls an untapped land");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private HazyHomunculus(final HazyHomunculus card) {

@@ -49,7 +49,7 @@ public final class HoodedHydra extends CardImpl {
         // As Hooded Hydra is turned face up, put five +1/+1 counters on it.
         Effect effect = new AddCountersSourceEffect(CounterType.P1P1.createInstance(5));
         effect.setText("put five +1/+1 counters on it");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AsTurnedFaceUpEffect(effect, false));
+        Ability ability = new SimpleStaticAbility(new AsTurnedFaceUpEffect(effect, false));
         ability.setWorksFaceDown(true);
         this.addAbility(ability);
     }

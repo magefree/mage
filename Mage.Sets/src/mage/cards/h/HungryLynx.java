@@ -46,7 +46,7 @@ public final class HungryLynx extends CardImpl {
         // Cats you control have protection from Rats.
         Effect effect = new GainAbilityAllEffect(new ProtectionAbility(filterProRat), Duration.WhileOnBattlefield, filterCat);
         effect.setText("Cats you control have protection from Rats. <i>(They can't be blocked, targeted, or dealt damage by Rats.)</i>");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
         
         // At the beginning of your end step, target opponent creates a 1/1 black Rat creature token with deathtouch. 
         Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new CreateTokenTargetEffect(new DeathtouchRatToken()), false, null);

@@ -42,7 +42,7 @@ public final class HeraldOfTorment extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1)));
 
         // Enchanted creature gets +3/+3 and has flying.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(3, 3));
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has flying");
         ability.addEffect(effect);

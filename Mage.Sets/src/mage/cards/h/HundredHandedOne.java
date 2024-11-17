@@ -47,7 +47,7 @@ public final class HundredHandedOne extends CardImpl {
                 new CanBlockAdditionalCreatureEffect(99), 
                 MonstrousCondition.instance,
                 "and can block an additional ninety-nine creatures each combat");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        Ability ability = new SimpleStaticAbility(effect1);
         ability.addEffect(effect2);
         this.addAbility(ability);
 

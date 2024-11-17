@@ -31,7 +31,7 @@ public final class HotSoup extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature can't be blocked.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedAttachedEffect(AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedAttachedEffect(AttachmentType.EQUIPMENT)));
         
         // Whenever equipped creature is dealt damage, destroy it.
         this.addAbility(new HotSoupTriggeredAbility());

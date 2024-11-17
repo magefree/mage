@@ -37,11 +37,11 @@ public final class HypnoticSiren extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
         // Enchanted creature gets +1/+1 and has flying.
         Effect effect = new BoostEnchantedEffect(1,1,Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +1/+1");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has flying");
         ability.addEffect(effect);

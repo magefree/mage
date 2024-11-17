@@ -28,7 +28,7 @@ public final class Hivestone extends CardImpl {
         // Creatures you control are Slivers in addition to their other creature types.
         Effect effect = new BecomesSubtypeAllEffect(Duration.WhileOnBattlefield, Arrays.asList(SubType.SLIVER), filter, false);
         effect.setText("Creatures you control are Slivers in addition to their other creature types");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private Hivestone(final Hivestone card) {

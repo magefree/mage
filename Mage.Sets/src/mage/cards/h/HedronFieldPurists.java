@@ -42,12 +42,12 @@ public final class HedronFieldPurists extends LevelerCard {
         // 1/4
         // If a source would deal damage to you or a creature you control, prevent 1 of that damage.
         Abilities<Ability> abilities1 = new AbilitiesImpl<>();
-        abilities1.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new HedronFieldPuristsEffect(1)));
+        abilities1.add(new SimpleStaticAbility(new HedronFieldPuristsEffect(1)));
         // LEVEL 5+
         // 2/5
         // If a source would deal damage to you or a creature you control, prevent 2 of that damage.
         Abilities<Ability> abilities2 = new AbilitiesImpl<>();
-        abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD, new HedronFieldPuristsEffect(2)));
+        abilities2.add(new SimpleStaticAbility(new HedronFieldPuristsEffect(2)));
 
         this.addAbilities(LevelerCardBuilder.construct(
                 new LevelerCardBuilder.LevelAbility(1, 4, abilities1, 1, 4),

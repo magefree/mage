@@ -29,7 +29,7 @@ public final class Hipparion extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Hipparion can't block creatures with power 3 or greater unless you pay {1}.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HipparionEffect()));
+        this.addAbility(new SimpleStaticAbility(new HipparionEffect()));
     }
 
     private Hipparion(final Hipparion card) {

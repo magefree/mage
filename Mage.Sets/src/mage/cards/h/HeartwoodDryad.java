@@ -25,7 +25,7 @@ public final class HeartwoodDryad extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Heartwood Dryad can block creatures with shadow as though Heartwood Dryad had shadow.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAsThoughtItHadShadowEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAsThoughtItHadShadowEffect(Duration.WhileOnBattlefield)));
     }
 
     private HeartwoodDryad(final HeartwoodDryad card) {

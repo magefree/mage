@@ -37,7 +37,7 @@ public final class HomingSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Each Sliver card in each player's hand has slivercycling {3}.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HomingSliverEffect()));
+        this.addAbility(new SimpleStaticAbility(new HomingSliverEffect()));
         
         // Slivercycling {3}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{3}"), filter, "Slivercycling"));
