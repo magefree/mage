@@ -29,7 +29,7 @@ public final class BlazingArchon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Creatures can't attack you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackYouAllEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackYouAllEffect(Duration.WhileOnBattlefield)));
 
     }
 

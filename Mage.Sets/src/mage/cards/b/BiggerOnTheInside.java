@@ -58,7 +58,7 @@ public final class BiggerOnTheInside extends CardImpl {
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BiggerOnTheInsideEffect(), new TapSourceCost());
         gainedAbility.addTarget(new TargetPlayer());
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, null, "permanent");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private BiggerOnTheInside(final BiggerOnTheInside card) {

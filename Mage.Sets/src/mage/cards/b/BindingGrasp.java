@@ -36,9 +36,9 @@ public final class BindingGrasp extends CardImpl {
         // At the beginning of your upkeep, sacrifice Binding Grasp unless you pay {1}{U}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}{U}"))));
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
         // Enchanted creature gets +0/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(0, 1, Duration.WhileOnBattlefield)));
     }
 
     private BindingGrasp(final BindingGrasp card) {

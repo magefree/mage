@@ -24,7 +24,7 @@ public final class BoonReflection extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
 
         // If you would gain life, you gain twice that much life instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoonReflectionEffect()));
+        this.addAbility(new SimpleStaticAbility(new BoonReflectionEffect()));
     }
 
     private BoonReflection(final BoonReflection card) {

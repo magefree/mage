@@ -44,7 +44,7 @@ public final class BrudicladTelchorEngineer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Creature tokens you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
 
         // At the beginning of combat on your turn, create a 2/1 blue Myr artifact creature token. Then you may choose a token you control. If you do, each other token you control becomes a copy of that token.
         this.addAbility(new BeginningOfCombatTriggeredAbility(new BrudicladTelchorEngineerEffect()));

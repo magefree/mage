@@ -32,7 +32,7 @@ public final class BoonSatyr extends CardImpl {
         // Bestow {3}{G}{G}
         this.addAbility(new BestowAbility(this, "{3}{G}{G}"));
         // Enchanted creature gets +4/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(4,2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(4,2, Duration.WhileOnBattlefield)));
     }
 
     private BoonSatyr(final BoonSatyr card) {

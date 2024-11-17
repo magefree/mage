@@ -30,7 +30,7 @@ public final class BloodSun extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
 
         // All lands lose all abilities except mana abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodSunEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BloodSunEffect(Duration.WhileOnBattlefield)));
     }
 
     private BloodSun(final BloodSun card) {

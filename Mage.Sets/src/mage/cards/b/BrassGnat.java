@@ -31,7 +31,7 @@ public final class BrassGnat extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Brass Gnat doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
         // At the beginning of your upkeep, you may pay {1}. If you do, untap Brass Gnat.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DoIfCostPaid(new UntapSourceEffect(), new GenericManaCost(1))

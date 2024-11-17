@@ -35,7 +35,7 @@ public final class BattlegroundGeist extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Other Spirit creatures you control get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
     }
 
     private BattlegroundGeist(final BattlegroundGeist card) {

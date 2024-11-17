@@ -32,7 +32,7 @@ public final class BalothPup extends CardImpl {
 
         // Baloth Pup has trample as long as it has a +1/+1 counter on it.
         Effect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), new SourceHasCounterCondition(CounterType.P1P1), rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private BalothPup(final BalothPup card) {

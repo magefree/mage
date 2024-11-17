@@ -39,7 +39,7 @@ public final class BarbedField extends CardImpl {
         ability.addTarget(new TargetAnyTarget());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted land has \"{T}: This land deals 1 damage to any target.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private BarbedField(final BarbedField card) {

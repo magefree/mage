@@ -25,7 +25,7 @@ public final class BrutalSuppression extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{R}");
 
         // Activated abilities of nontoken Rebels cost an additional "Sacrifice a land" to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BrutalSuppressionAdditionalCostEffect()));
+        this.addAbility(new SimpleStaticAbility(new BrutalSuppressionAdditionalCostEffect()));
     }
 
     private BrutalSuppression(final BrutalSuppression card) {

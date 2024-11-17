@@ -44,8 +44,8 @@ public final class BalefireLiege extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterRedCreature, true)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterWhiteCreature, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterRedCreature, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterWhiteCreature, true)));
         Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(3), filterRedSpell, false);
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);

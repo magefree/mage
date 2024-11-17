@@ -22,7 +22,7 @@ public final class BenalishMarshal extends CardImpl {
         toughness = new MageInt(3);
 
         // Other creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, true)));
 
     }
 

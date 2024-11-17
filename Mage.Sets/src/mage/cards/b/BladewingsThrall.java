@@ -33,7 +33,7 @@ public final class BladewingsThrall extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Bladewing's Thrall has flying as long as you control a Dragon.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledPermanent(SubType.DRAGON, "a Dragon")),
                 RULE)));

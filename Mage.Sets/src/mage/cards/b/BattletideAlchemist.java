@@ -30,7 +30,7 @@ public final class BattletideAlchemist extends CardImpl {
         this.toughness = new MageInt(4);
 
         // If a source would deal damage to a player, you may prevent X of that damage, where X is the number of Clerics you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BattletideAlchemistEffect()));
+        this.addAbility(new SimpleStaticAbility(new BattletideAlchemistEffect()));
     }
 
     private BattletideAlchemist(final BattletideAlchemist card) {
