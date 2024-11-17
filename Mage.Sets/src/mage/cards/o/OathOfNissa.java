@@ -43,7 +43,7 @@ public final class OathOfNissa extends CardImpl {
                 3, 1, filter, PutCards.HAND, PutCards.BOTTOM_ANY)));
 
         // You may spend mana as though it were mana of any color to cast planeswalker spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OathOfNissaSpendAnyManaEffect()));
+        this.addAbility(new SimpleStaticAbility(new OathOfNissaSpendAnyManaEffect()));
     }
 
     private OathOfNissa(final OathOfNissa card) {

@@ -35,7 +35,7 @@ public final class PlumesOfPeace extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect()));
 
         // Forecast - {W}{U}, Reveal Plumes of Peace from your hand: Tap target creature.
         ForecastAbility ability = new ForecastAbility(new TapTargetEffect(), new ManaCostsImpl<>("{W}{U}"));

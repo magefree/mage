@@ -39,10 +39,10 @@ public final class OverwhelmingSplendor extends CardImpl {
         this.addAbility(ability);
 
         // Creatures enchanted player controls lose all abilities and have base power and toughness 1/1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OverwhelmingSplendorLoseAbilitiesEffect()));
+        this.addAbility(new SimpleStaticAbility(new OverwhelmingSplendorLoseAbilitiesEffect()));
 
         // Enchanted player can't activate abilities that aren't mana abilities or loyalty abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OverwhelmingSplendorCantActivateEffect()));
+        this.addAbility(new SimpleStaticAbility(new OverwhelmingSplendorCantActivateEffect()));
     }
 
     private OverwhelmingSplendor(final OverwhelmingSplendor card) {

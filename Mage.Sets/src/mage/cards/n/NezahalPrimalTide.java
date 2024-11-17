@@ -43,7 +43,7 @@ public final class NezahalPrimalTide extends CardImpl {
 
         // You have no maximum hand size.
         Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, MaximumHandSizeControllerEffect.HandSizeModification.SET);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Whenever an opponent casts a noncreature spell, draw a card.
         this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD,

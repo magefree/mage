@@ -19,7 +19,7 @@ public final class Omniscience extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{7}{U}{U}{U}");
 
         // You may cast nonland cards from your hand without paying their mana costs.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastFromHandWithoutPayingManaCostEffect()));
+        this.addAbility(new SimpleStaticAbility(new CastFromHandWithoutPayingManaCostEffect()));
     }
 
     private Omniscience(final Omniscience card) {
@@ -31,4 +31,3 @@ public final class Omniscience extends CardImpl {
         return new Omniscience(this);
     }
 }
-

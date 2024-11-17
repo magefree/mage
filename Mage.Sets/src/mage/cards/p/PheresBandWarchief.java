@@ -43,7 +43,7 @@ public final class PheresBandWarchief extends CardImpl {
         // Other Centaur creatures you control get +1/+1 and have vigilance and trample.
         Effect effect = new BoostControlledEffect(1,1,Duration.WhileOnBattlefield, filter, true);
         effect.setText("Other Centaur creatures you control get +1/+1");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filter, true);
         effect.setText("and have vigilance");
         ability.addEffect(effect);

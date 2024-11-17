@@ -41,7 +41,7 @@ public final class OrcishVeteran extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Orcish Veteran can't block white creatures with power 2 or greater.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockCreaturesSourceEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockCreaturesSourceEffect(filter)));
         
         // {R}: Orcish Veteran gains first strike until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{R}")));

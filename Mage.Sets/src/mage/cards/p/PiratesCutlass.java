@@ -33,7 +33,7 @@ public final class PiratesCutlass extends CardImpl {
         this.addAbility(new EntersBattlefieldAttachToTarget(filter));
 
         // Equipped creature gets +2/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 1)));
 
         // Equip 2
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));

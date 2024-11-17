@@ -20,7 +20,7 @@ public final class PlanarGate extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // Creature spells you cast cost up to {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(new FilterCreatureCard("Creature spells"), 2, true)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(new FilterCreatureCard("Creature spells"), 2, true)));
     }
 
     private PlanarGate(final PlanarGate card) {

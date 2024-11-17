@@ -31,7 +31,7 @@ public final class PithingNeedle extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL)));
 
         // Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PithingNeedleEffect()));
+        this.addAbility(new SimpleStaticAbility(new PithingNeedleEffect()));
     }
 
     private PithingNeedle(final PithingNeedle card) {

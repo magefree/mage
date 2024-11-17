@@ -29,7 +29,7 @@ public final class NyxbornTriton extends CardImpl {
         // Bestow {4}{U}
         this.addAbility(new BestowAbility(this, "{4}{U}"));
         // Enchanted creature gets +2/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2,3, Duration.WhileOnBattlefield)));        
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2,3, Duration.WhileOnBattlefield)));        
     }
 
     private NyxbornTriton(final NyxbornTriton card) {

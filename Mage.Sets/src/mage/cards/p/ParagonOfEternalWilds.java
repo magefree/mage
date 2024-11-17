@@ -50,7 +50,7 @@ public final class ParagonOfEternalWilds extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Other green creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterGreen, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filterGreen, true)));
         // {G}, {t}: Another target green creature you control gains trample until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(TrampleAbility.getInstance(),Duration.EndOfTurn), new ManaCostsImpl<>("{G}"));
         ability.addCost(new TapSourceCost());

@@ -35,7 +35,7 @@ public final class OhabiCaleria extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // Untap all Archers you control during each other player's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapAllDuringEachOtherPlayersUntapStepEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new UntapAllDuringEachOtherPlayersUntapStepEffect(filter)));
 
         // Whenever an Archer you control deals damage to a creature, you may pay {2}. If you do, draw a card.
         this.addAbility(new DealsDamageToACreatureAllTriggeredAbility(new DoIfCostPaid(

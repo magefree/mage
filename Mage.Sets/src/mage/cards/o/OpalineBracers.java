@@ -29,7 +29,7 @@ public final class OpalineBracers extends CardImpl {
         // Sunburst
         this.addAbility(new SunburstAbility(this));
         // Equipped creature gets +X/+X, where X is the number of charge counters on Opaline Bracers.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new CountersSourceCount(CounterType.CHARGE), new CountersSourceCount(CounterType.CHARGE))));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(new CountersSourceCount(CounterType.CHARGE), new CountersSourceCount(CounterType.CHARGE))));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }

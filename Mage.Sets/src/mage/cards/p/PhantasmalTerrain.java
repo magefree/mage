@@ -37,7 +37,7 @@ public final class PhantasmalTerrain extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseBasicLandTypeEffect(Outcome.Neutral)));
 
         // Enchanted land is the chosen type.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhantasmalTerrainContinuousEffect()));
+        this.addAbility(new SimpleStaticAbility(new PhantasmalTerrainContinuousEffect()));
     }
 
     private PhantasmalTerrain(final PhantasmalTerrain card) {

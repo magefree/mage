@@ -40,7 +40,7 @@ public final class OpenSeason extends CardImpl {
         this.addAbility(ability);
 
         // Creatures your opponent control with bounty counters on them can't activate abilities
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OpenSeasonRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new OpenSeasonRestrictionEffect()));
 
         // Bounty - Whenever a creature an opponent controls with a bounty counter on it dies, that creature's controller loses 2 life. Each other player gains 2 life.
         this.addAbility(new BountyAbility(new OpenSeasonEffect(), false, true));

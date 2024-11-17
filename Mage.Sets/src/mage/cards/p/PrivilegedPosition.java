@@ -23,7 +23,7 @@ public final class PrivilegedPosition extends CardImpl {
 
 
         // Other permanents you control have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENTS, true)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENTS, true)));
     }
 
     private PrivilegedPosition(final PrivilegedPosition card) {

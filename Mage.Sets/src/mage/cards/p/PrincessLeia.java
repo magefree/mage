@@ -46,10 +46,10 @@ public final class PrincessLeia extends CardImpl {
 
         // Princess Leia gets +1/+1 for each other Rebel creature you control.
         DynamicValue count = new PermanentsOnBattlefieldCount(filter1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
 
         // Other Rebel creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter2, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter2, true)));
 
     }
 

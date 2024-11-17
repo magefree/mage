@@ -36,7 +36,7 @@ public final class PinToTheEarth extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets -6/-0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-6,-0,Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(-6,-0,Duration.WhileOnBattlefield)));
     }
 
     private PinToTheEarth(final PinToTheEarth card) {

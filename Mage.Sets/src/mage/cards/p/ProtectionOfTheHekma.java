@@ -24,7 +24,7 @@ public final class ProtectionOfTheHekma extends CardImpl {
 
 
         // If a source an opponent controls would deal damage to you, prevent 1 of that damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionOfTheHekmaEffect()));
+        this.addAbility(new SimpleStaticAbility(new ProtectionOfTheHekmaEffect()));
     }
 
     private ProtectionOfTheHekma(final ProtectionOfTheHekma card) {

@@ -43,7 +43,7 @@ public final class PsionicSliver extends CardImpl {
         ability.addEffect(new DamageSelfEffect(3).setText("3 damage to itself."));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(
-                new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, filter,
+                new SimpleStaticAbility(new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, filter,
                         "All Sliver creatures have \"{T}: This creature deals 2 damage to any target and 3 damage to itself.\"")
                 )
         );

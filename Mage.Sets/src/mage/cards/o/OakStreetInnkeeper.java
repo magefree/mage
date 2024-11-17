@@ -38,7 +38,7 @@ public final class OakStreetInnkeeper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As long as it's not your turn, tapped creatures you control have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter),
                 NotMyTurnCondition.instance,
                 "During turns other than yours, tapped creatures you control have hexproof"))

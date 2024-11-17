@@ -27,7 +27,7 @@ public final class PossessedPortal extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{8}");
 
         // If a player would draw a card, that player skips that draw instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PossessedPortalReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new PossessedPortalReplacementEffect()));
         
         // At the beginning of each end step, each player sacrifices a permanent unless they discard a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new PossessedPortalEffect(), false));
