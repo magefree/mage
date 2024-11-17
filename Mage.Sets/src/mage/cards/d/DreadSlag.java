@@ -35,7 +35,7 @@ public final class DreadSlag extends CardImpl {
         DynamicValue amount = new MultipliedValue(CardsInControllerHandCount.instance, -4);
         Effect effect = new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield);
         effect.setText("{this} gets -4/-4 for each card in your hand");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private DreadSlag(final DreadSlag card) {

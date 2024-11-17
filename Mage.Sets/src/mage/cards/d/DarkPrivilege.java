@@ -42,7 +42,7 @@ public final class DarkPrivilege extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
 
         // Sacrifice a creature: Regenerate enchanted creature.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA),

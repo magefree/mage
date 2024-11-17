@@ -37,7 +37,7 @@ public final class DuskCharger extends CardImpl {
         ContinuousEffect boostSource = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(boostSource, CitysBlessingCondition.instance,
                 "{this} gets +2/+2 as long as you have the city's blessing");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect).addHint(CitysBlessingHint.instance);
+        Ability ability = new SimpleStaticAbility(effect).addHint(CitysBlessingHint.instance);
         this.addAbility(ability);
     }
 

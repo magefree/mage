@@ -41,7 +41,7 @@ public final class DhundOperative extends CardImpl {
                 new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT),
                 "and has deathtouch");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect);
+        Ability ability = new SimpleStaticAbility(boostEffect);
         ability.addEffect(gainAbilityEffect);
         this.addAbility(ability);
     }

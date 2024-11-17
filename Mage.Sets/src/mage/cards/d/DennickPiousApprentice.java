@@ -34,7 +34,7 @@ public final class DennickPiousApprentice extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Cards in graveyards can't be the targets of spells or abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeTargetedCardsGraveyardsEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeTargetedCardsGraveyardsEffect()));
 
         // Disturb {2}{W}{U}
         this.addAbility(new DisturbAbility(this, "{2}{W}{U}"));

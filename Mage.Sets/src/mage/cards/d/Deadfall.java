@@ -24,7 +24,7 @@ public final class Deadfall extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // Creatures with forestwalk can be blocked as though they didn't have forestwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DeadfallEffect()));
+        this.addAbility(new SimpleStaticAbility(new DeadfallEffect()));
     }
 
     private Deadfall(final Deadfall card) {

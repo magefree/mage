@@ -46,8 +46,8 @@ public final class DragonFangs extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +1/+1 and has trample.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA)));
                
         // When a creature with converted mana cost 6 or greater enters the battlefield, you may return Dragon Fangs from your graveyard to the battlefield attached to that creature.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.GRAVEYARD, new DragonFangsEffect(), filter, true, SetTargetPointer.PERMANENT));

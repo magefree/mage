@@ -31,7 +31,7 @@ public final class DenProtector extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Creatures with power less than Den Protector's power can't block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesWithLessPowerEffect()));
 
         // Megamorph {1}{G}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{1}{G}"), true));

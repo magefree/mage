@@ -29,7 +29,7 @@ public final class DampingMatrix extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // Activated abilities of artifacts and creatures can't be activated unless they're mana abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DampingMatrixEffect()));
+        this.addAbility(new SimpleStaticAbility(new DampingMatrixEffect()));
     }
 
     private DampingMatrix(final DampingMatrix card) {

@@ -40,7 +40,7 @@ public final class DiregrafCaptain extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Other Zombie creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // Whenever another Zombie you control dies, target opponent loses 1 life.
         this.addAbility(new DiregrafCaptainTriggeredAbility());

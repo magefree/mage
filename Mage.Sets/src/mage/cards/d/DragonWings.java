@@ -47,7 +47,7 @@ public final class DragonWings extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
         // Cycling {1}{U}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{1}{U}")));
         

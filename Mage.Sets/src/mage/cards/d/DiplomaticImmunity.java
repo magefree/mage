@@ -39,7 +39,7 @@ public final class DiplomaticImmunity extends CardImpl {
         this.addAbility(ShroudAbility.getInstance());
         
         // Enchanted creature has shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private DiplomaticImmunity(final DiplomaticImmunity card) {

@@ -32,7 +32,7 @@ public final class Demotion extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockActivateAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBlockActivateAttachedEffect()));
               
     }
 

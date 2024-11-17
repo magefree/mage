@@ -36,7 +36,7 @@ public final class DemonicRuckus extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +1/+1 and has menace and trample.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1));
         ability.addEffect(new GainAbilityAttachedEffect(new MenaceAbility(false), AttachmentType.AURA).setText("and has menace"));
         ability.addEffect(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA).setText("and trample"));
         this.addAbility(ability);

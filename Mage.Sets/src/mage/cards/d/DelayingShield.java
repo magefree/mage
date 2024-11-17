@@ -31,7 +31,7 @@ public final class DelayingShield extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // If damage would be dealt to you, put that many delay counters on Delaying Shield instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DelayingShieldReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new DelayingShieldReplacementEffect()));
 
         // At the beginning of your upkeep, remove all delay counters from Delaying Shield. For each delay counter removed this way, you lose 1 life unless you pay {1}{W}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DelayingShieldUpkeepEffect()));

@@ -27,10 +27,10 @@ public final class Drought extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{W}{W}"))));
 
         // Spells cost an additional "Sacrifice a Swamp" to cast for each black mana symbol in their mana costs.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DroughtAdditionalCostEffect(true)));
+        this.addAbility(new SimpleStaticAbility(new DroughtAdditionalCostEffect(true)));
 
         // Activated abilities cost an additional "Sacrifice a Swamp" to activate for each black mana symbol in their activation costs.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DroughtAdditionalCostEffect(false)));
+        this.addAbility(new SimpleStaticAbility(new DroughtAdditionalCostEffect(false)));
     }
 
     private Drought(final Drought card) {

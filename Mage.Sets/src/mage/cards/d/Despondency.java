@@ -36,7 +36,7 @@ public final class Despondency extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets -2/-0.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-2, 0));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(-2, 0));
         this.addAbility(ability);
         
         // When Despondency is put into a graveyard from the battlefield, return Despondency to its owner's hand.

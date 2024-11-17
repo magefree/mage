@@ -39,7 +39,7 @@ public final class DraconicDestiny extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 and has flying, haste, and "{1}: This creature gets +1/+0 until end of turn." It's a Dragon in addition to its other types.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA).setText("and has flying"));
         ability.addEffect(new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.AURA).setText(", haste"));
         ability.addEffect(new GainAbilityAttachedEffect(new SimpleActivatedAbility(

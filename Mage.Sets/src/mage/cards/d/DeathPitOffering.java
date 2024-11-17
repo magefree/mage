@@ -24,7 +24,7 @@ public final class DeathPitOffering extends CardImpl {
         // When Death Pit Offering enters the battlefield, sacrifice all creatures you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeAllControllerEffect(StaticFilters.FILTER_PERMANENT_CREATURES)));
         // Creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, StaticFilters.FILTER_CONTROLLED_CREATURES, false)));
     }
 
     private DeathPitOffering(final DeathPitOffering card) {

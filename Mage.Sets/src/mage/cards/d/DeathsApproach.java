@@ -43,7 +43,7 @@ public final class DeathsApproach extends CardImpl {
         // Enchanted Creature gets -X/-X, where X is the number of creature cards in its controller's graveyard.
         DynamicValue unboost = new SignInversionDynamicValue(
                 new CardsInEnchantedCreaturesControllerGraveyardCount(new FilterCreatureCard("the number of creature cards in its controller's graveyard")));
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(unboost,unboost, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(unboost,unboost, Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
 

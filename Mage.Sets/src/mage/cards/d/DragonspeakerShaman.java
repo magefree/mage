@@ -34,7 +34,7 @@ public final class DragonspeakerShaman extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Dragon spells you cast cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)));
     }
 
     private DragonspeakerShaman(final DragonspeakerShaman card) {

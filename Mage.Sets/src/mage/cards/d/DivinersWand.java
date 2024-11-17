@@ -45,7 +45,7 @@ public final class DivinersWand extends CardImpl {
         Effect effectDraw = new GainAbilityAttachedEffect(newDraw, AttachmentType.EQUIPMENT)
                 .setText("\"{4}: Draw a card.\"");
         // total ability
-        Ability totalAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, effectBoost);
+        Ability totalAbility = new SimpleStaticAbility(effectBoost);
         totalAbility.addEffect(effectDraw.concatBy("and"));
         this.addAbility(totalAbility);
 
