@@ -36,7 +36,6 @@ public final class TidewaterMinion extends CardImpl {
         
         // {4}: Tidewater Minion loses defender until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, 
                 new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.EndOfTurn), 
                 new ManaCostsImpl<>("{4}")));
         

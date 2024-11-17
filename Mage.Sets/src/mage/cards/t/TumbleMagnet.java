@@ -31,7 +31,6 @@ public final class TumbleMagnet extends CardImpl {
         ));
 
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, 
                 new TapTargetEffect(),
                 new TapSourceCost()
         );
