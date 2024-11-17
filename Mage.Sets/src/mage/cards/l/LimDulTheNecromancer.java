@@ -48,7 +48,7 @@ public final class LimDulTheNecromancer extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new DoIfCostPaid(new LimDulTheNecromancerEffect(), new ManaCostsImpl<>("{1}{B}")), false, StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE, true));
 
         // {1}{B}: Regenerate target Zombie.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl<>("{1}{B}"));
+        Ability ability2 = new SimpleActivatedAbility(new RegenerateTargetEffect(), new ManaCostsImpl<>("{1}{B}"));
         ability2.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability2);
 

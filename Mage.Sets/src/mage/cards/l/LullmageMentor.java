@@ -44,7 +44,7 @@ public final class LullmageMentor extends CardImpl {
         this.addAbility(new SpellCounteredControllerTriggeredAbility(new CreateTokenEffect(new MerfolkToken()), true));
 
         // Tap seven untapped Merfolk you control: Counter target spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new TapTargetCost(new TargetControlledPermanent(7, 7, filter, true)));
+        Ability ability = new SimpleActivatedAbility(new CounterTargetEffect(), new TapTargetCost(new TargetControlledPermanent(7, 7, filter, true)));
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
 

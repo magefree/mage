@@ -30,7 +30,7 @@ public final class MindOverMatter extends CardImpl {
 
 
         // Discard a card: You may tap or untap target artifact, creature, or land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new DiscardCardCost());
+        Ability ability = new SimpleActivatedAbility(new MayTapOrUntapTargetEffect(), new DiscardCardCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

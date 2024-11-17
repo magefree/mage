@@ -42,7 +42,7 @@ public final class LeadBellyChimera extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Sacrifice Lead-Belly Chimera: Put a +2/+2 counter on target Chimera creature. It gains trample.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield)
                 .setText("It gains trample. <i>(This effect lasts indefinitely.)</i>"));
         ability.addTarget(new TargetCreaturePermanent(filter));

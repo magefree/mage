@@ -28,7 +28,7 @@ public final class MyrPropagator extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {3}, {tap}: Create a token that's a copy of Myr Propagator.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenCopySourceEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenCopySourceEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

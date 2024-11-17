@@ -30,15 +30,15 @@ public final class MistDragon extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {0}: Mist Dragon gains flying. <i>This effect lasts indefinitely</i>
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield), new GenericManaCost(0)));
         
         // {0}: Mist Dragon loses flying. <i>This effect lasts indefinitely</i>
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleActivatedAbility(
                 new LoseAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield), new GenericManaCost(0)));
         
         // {3}{U}{U}: Mist Dragon phases out.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleActivatedAbility(
                 new PhaseOutSourceEffect(), new ManaCostsImpl<>("{3}{U}{U}")));
     }
 

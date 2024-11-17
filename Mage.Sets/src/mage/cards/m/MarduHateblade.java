@@ -30,7 +30,7 @@ public final class MarduHateblade extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}: Mardu Hateblade gains deathtouch until end of turn
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
     private MarduHateblade(final MarduHateblade card) {

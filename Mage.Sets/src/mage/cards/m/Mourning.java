@@ -37,7 +37,7 @@ public final class Mourning extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(-2, 0)));
 
         // {B}: Return Mourning to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{B}")));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{B}")));
     }
 
     private Mourning(final Mourning card) {

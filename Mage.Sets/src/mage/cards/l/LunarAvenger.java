@@ -33,7 +33,7 @@ public final class LunarAvenger extends CardImpl {
         // Sunburst
         this.addAbility(new SunburstAbility(this));
         // Remove a +1/+1 counter from Lunar Avenger: Lunar Avenger gains your choice of flying, first strike, or haste until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Source,
+        this.addAbility(new SimpleActivatedAbility(new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Source,
                 FlyingAbility.getInstance(), FirstStrikeAbility.getInstance(), HasteAbility.getInstance()),
                 new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1))));
     }

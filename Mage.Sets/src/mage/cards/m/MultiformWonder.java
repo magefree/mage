@@ -38,11 +38,11 @@ public final class MultiformWonder extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(3), false));
 
         // Pay {E}: Multiform Wonder gains your choice of flying, vigilance, or lifelink until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Source,
+        this.addAbility(new SimpleActivatedAbility(new GainsChoiceOfAbilitiesEffect(GainsChoiceOfAbilitiesEffect.TargetType.Source,
                 FlyingAbility.getInstance(), VigilanceAbility.getInstance(), LifelinkAbility.getInstance()), new PayEnergyCost(1)));
 
         // Pay {E}: Multiform Wonder gets +2/-2 or -2/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MultiformWonder2Effect(), new PayEnergyCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new MultiformWonder2Effect(), new PayEnergyCost(1)));
     }
 
     private MultiformWonder(final MultiformWonder card) {

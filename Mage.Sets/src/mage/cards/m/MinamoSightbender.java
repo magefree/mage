@@ -35,7 +35,7 @@ public final class MinamoSightbender extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {X}, {T}: Target creature with power X or less can't be blocked this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{X}"));
+        Ability ability = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(), new ManaCostsImpl<>("{X}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.setTargetAdjuster(new PowerTargetAdjuster(ComparisonType.OR_LESS));
         ability.addCost(new TapSourceCost());

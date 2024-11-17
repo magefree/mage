@@ -41,7 +41,7 @@ public final class MinionOfLeshrac extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new MinionLeshracEffect()));
 
         // {tap}: Destroy target creature or land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_LAND));
         this.addAbility(ability);
 

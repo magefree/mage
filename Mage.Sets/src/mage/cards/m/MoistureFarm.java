@@ -29,7 +29,7 @@ public final class MoistureFarm extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {T}: Put a storage counter on Moisture Farm.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
 
         // {T}, Remove a storage counter from Moisture Farm: Add one mana of any color.
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(1), new TapSourceCost());

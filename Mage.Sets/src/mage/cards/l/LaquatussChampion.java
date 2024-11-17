@@ -46,7 +46,7 @@ public final class LaquatussChampion extends CardImpl {
         // When Laquatus's Champion leaves the battlefield, that player gains 6 life.
         this.addAbility(new LaquatussChampionLeavesBattlefieldTriggeredAbility());
         // {B}: Regenerate Laquatus's Champion.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{B}")));
     }
 
     private LaquatussChampion(final LaquatussChampion card) {

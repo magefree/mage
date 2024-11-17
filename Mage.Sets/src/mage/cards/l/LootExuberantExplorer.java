@@ -45,7 +45,7 @@ public final class LootExuberantExplorer extends CardImpl {
                 new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
 
         // {4}{G}{G}, {T}: Look at the top six cards of your library. You may reveal a creature card with mana value less than or equal to the number of lands you control from among them and put it onto the battlefield. Put the rest on the bottom in a random order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(
+        Ability ability = new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(
                 6, 1, filter,
                 PutCards.BATTLEFIELD, PutCards.BOTTOM_RANDOM
         ), new ManaCostsImpl<>("{4}{G}{G}"));

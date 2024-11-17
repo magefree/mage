@@ -41,7 +41,7 @@ public final class MimicVat extends CardImpl {
         this.addAbility(new MimicVatTriggeredAbility());
 
         // {3}, {tap}: Create a token that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MimicVatCreateTokenEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new MimicVatCreateTokenEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
