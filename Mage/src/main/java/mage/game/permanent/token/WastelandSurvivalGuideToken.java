@@ -27,7 +27,7 @@ public final class WastelandSurvivalGuideToken extends TokenImpl {
         this.cardType.add(CardType.ARTIFACT);
         this.subtype.add(SubType.EQUIPMENT);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(xValue, xValue)).addHint(hint));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(xValue, xValue)).addHint(hint));
         this.addAbility(new EquipAbility(1, false));
     }
 

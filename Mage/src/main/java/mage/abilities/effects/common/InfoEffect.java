@@ -53,7 +53,7 @@ public class InfoEffect extends OneShotEffect {
      */
     public static void addInfoToPermanent(Game game, Ability source, Permanent permanent, String info, Duration duration) {
         // add simple static info to permanent's rules
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect(info));
+        SimpleStaticAbility ability = new SimpleStaticAbility(new InfoEffect(info));
 
         GainAbilityTargetEffect gainEffect = new GainAbilityTargetEffect(ability, duration);
         gainEffect.setTargetPointer(new FixedTarget(permanent, game));
@@ -70,7 +70,7 @@ public class InfoEffect extends OneShotEffect {
      * @param duration
      */
     public static void addCardHintToPermanent(Game game, Ability source, Permanent permanent, Hint cardHint, Duration duration) {
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("hint"));
+        SimpleStaticAbility ability = new SimpleStaticAbility(new InfoEffect("hint"));
         ability.setRuleVisible(false);
         ability.addHint(cardHint);
 
@@ -91,7 +91,7 @@ public class InfoEffect extends OneShotEffect {
      * @param condition
      */
     public static void addCardHintToPermanentConditional(Game game, Ability source, Permanent permanent, Hint cardHint, Duration duration, Condition condition) {
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new InfoEffect("hint"));
+        SimpleStaticAbility ability = new SimpleStaticAbility(new InfoEffect("hint"));
         ability.setRuleVisible(false);
         ability.addHint(cardHint);
 

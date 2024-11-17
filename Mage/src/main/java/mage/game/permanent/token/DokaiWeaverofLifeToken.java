@@ -27,7 +27,7 @@ public final class DokaiWeaverofLifeToken extends TokenImpl {
         power = new MageInt(0);
         toughness = new MageInt(0);
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filterLands);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(controlledLands, controlledLands, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(controlledLands, controlledLands, Duration.WhileOnBattlefield)));
     }
 
     private DokaiWeaverofLifeToken(final DokaiWeaverofLifeToken token) {
