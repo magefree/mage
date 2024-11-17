@@ -47,7 +47,7 @@ public final class SurrakDragonclaw extends CardImpl {
         this.addAbility(new CantBeCounteredSourceAbility());
 
         // Creature spells you control can't be countered.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filterTarget, null, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBeCounteredControlledEffect(filterTarget, null, Duration.WhileOnBattlefield)));
 
         // Other creatures you control have trample.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,

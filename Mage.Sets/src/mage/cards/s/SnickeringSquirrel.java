@@ -28,7 +28,7 @@ public final class SnickeringSquirrel extends CardImpl {
         this.toughness = new MageInt(1);
 
         // You may tap Snickering Squirrel to increase the result of a die any player rolled by 1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SnickeringSquirrelEffect()));
+        this.addAbility(new SimpleStaticAbility(new SnickeringSquirrelEffect()));
     }
 
     private SnickeringSquirrel(final SnickeringSquirrel card) {

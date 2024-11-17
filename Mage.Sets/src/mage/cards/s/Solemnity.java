@@ -29,10 +29,10 @@ public final class Solemnity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
 
         // Players can't get counters.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SolemnityEffect()));
+        this.addAbility(new SimpleStaticAbility(new SolemnityEffect()));
 
         // Counters can't be put on artifacts, creatures, enchantments, or lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SolemnityEffect2()));
+        this.addAbility(new SimpleStaticAbility(new SolemnityEffect2()));
     }
 
     private Solemnity(final Solemnity card) {

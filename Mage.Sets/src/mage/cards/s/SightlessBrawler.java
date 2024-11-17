@@ -39,7 +39,7 @@ public final class SightlessBrawler extends CardImpl {
         // Enchanted creature gets +3/+2 and can't attack alone.
         Effect effect = new BoostEnchantedEffect(3, 2, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +3/+2");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new CantAttackAloneAttachedEffect(AttachmentType.AURA);
         effect.setText("and can't attack alone");
         ability.addEffect(effect);

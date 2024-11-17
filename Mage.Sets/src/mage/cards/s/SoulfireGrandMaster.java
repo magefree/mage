@@ -49,7 +49,7 @@ public final class SoulfireGrandMaster extends CardImpl {
         // Instant and sorcery spells you control have lifelink.
         Effect effect = new GainAbilityControlledSpellsEffect(LifelinkAbility.getInstance(), filter);
         effect.setText("Instant and sorcery spells you control have lifelink");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // {2}{U/R}{U/R}: The next time you cast an instant or sorcery spell from your hand this turn, put that card into your hand instead of your graveyard as it resolves.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoulfireGrandMasterCastFromHandReplacementEffect(), new ManaCostsImpl<>("{2}{U/R}{U/R}")));

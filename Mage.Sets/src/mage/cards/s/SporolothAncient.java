@@ -43,7 +43,7 @@ public final class SporolothAncient extends CardImpl {
                 new FilterCreaturePermanent("Creatures you control")
         );
         effect.setText("Creatures you control have \"Remove two spore counters from this creature: Create a 1/1 green Saproling creature token.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private SporolothAncient(final SporolothAncient card) {

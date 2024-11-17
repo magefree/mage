@@ -45,7 +45,7 @@ public final class SpreadingSeas extends CardImpl {
         // Enchanted land is an Island.
         ContinuousEffect effect = new BecomesBasicLandEnchantedEffect(SubType.ISLAND);
         effect.addDependencyType(DependencyType.BecomeIsland);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
     }
 

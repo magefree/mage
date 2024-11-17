@@ -30,13 +30,13 @@ public final class SolitaryConfinement extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new DiscardTargetCost(new TargetCardInHand()))));
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
 
         // You have shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(ShroudAbility.getInstance())));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControllerEffect(ShroudAbility.getInstance())));
 
         // Prevent all damage that would be dealt to you.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventDamageToControllerEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new PreventDamageToControllerEffect(Duration.WhileOnBattlefield)));
     }
 
     private SolitaryConfinement(final SolitaryConfinement card) {

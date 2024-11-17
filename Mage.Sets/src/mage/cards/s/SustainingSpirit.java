@@ -33,7 +33,7 @@ public final class SustainingSpirit extends CardImpl {
         // Cumulative upkeep {1}{W}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}{W}")));
         // Damage that would reduce your life total to less than 1 reduces it to 1 instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SustainingSpiritReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new SustainingSpiritReplacementEffect()));
 
     }
 

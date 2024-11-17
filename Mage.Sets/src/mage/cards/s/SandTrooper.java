@@ -34,7 +34,7 @@ public final class SandTrooper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Trooper creatures you control have vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
 
     }
 

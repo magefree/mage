@@ -36,7 +36,7 @@ public final class SpireSerpent extends CardImpl {
 
         // Metalcraft — As long as you control three or more artifacts, Spire Serpent gets +2/+2 and can attack as though it didn’t have defender.
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), MetalcraftCondition.instance, abilityText1);
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        Ability ability = new SimpleStaticAbility(effect1);
         Effect effect = new ConditionalAsThoughEffect(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield),
                 MetalcraftCondition.instance);
         effect.setText("and can attack as though it didn't have defender");

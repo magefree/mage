@@ -34,7 +34,7 @@ public final class SpinneretSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Sliver creatures have reach.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 ReachAbility.getInstance(), Duration.WhileOnBattlefield,
                 filter, "All Sliver creatures have reach.")));
     }

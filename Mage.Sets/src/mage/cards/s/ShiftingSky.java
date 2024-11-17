@@ -35,7 +35,7 @@ public final class ShiftingSky extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Detriment)));
 
         // All nonland permanents are the chosen color.        
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShiftingSkyEffect()));
+        this.addAbility(new SimpleStaticAbility(new ShiftingSkyEffect()));
     }
 
     private ShiftingSky(final ShiftingSky card) {

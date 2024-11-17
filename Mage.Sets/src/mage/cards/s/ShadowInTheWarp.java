@@ -42,7 +42,7 @@ public final class ShadowInTheWarp extends CardImpl {
 
         // The first creature spell you cast each turn costs {2} less to cast.
         Effect effect = new SpellsCostReductionControllerEffect(filterCost, 2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect), new ShadowInTheWarpWatcher());
+        this.addAbility(new SimpleStaticAbility(effect), new ShadowInTheWarpWatcher());
 
         // Whenever an opponent casts their first noncreature spell each turn, Shadow in the Warp deals 2 damage to that player.
         this.addAbility(new ShadowInTheWarpTriggeredAbility());

@@ -45,7 +45,7 @@ public final class SixthSense extends CardImpl {
         // Enchanted creature has "Whenever this creature deals combat damage to a player, you may draw a card."
         Effect effect  = new GainAbilityAttachedEffect(new SixthSenseTriggeredAbility(), AttachmentType.AURA);
         effect.setText("Enchanted creature has \"Whenever this creature deals combat damage to a player, you may draw a card.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private SixthSense(final SixthSense card) {

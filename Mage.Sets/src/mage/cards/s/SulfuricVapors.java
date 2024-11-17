@@ -27,7 +27,7 @@ public final class SulfuricVapors extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{R}");
 
         // If a red spell would deal damage to a permanent or player, it deals that much damage plus 1 to that permanent or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SulfuricVaporsEffect()));
+        this.addAbility(new SimpleStaticAbility(new SulfuricVaporsEffect()));
     }
 
     private SulfuricVapors(final SulfuricVapors card) {

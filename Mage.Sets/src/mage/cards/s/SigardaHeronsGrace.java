@@ -45,7 +45,7 @@ public final class SigardaHeronsGrace extends CardImpl {
         // You and Humans you control have hexproof.
         Effect effect = new GainAbilityControllerEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield);
         effect.setText("You");
-        Ability ability =new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability =new SimpleStaticAbility(effect);
         effect = new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         effect.concatBy("and");
         ability.addEffect(effect);

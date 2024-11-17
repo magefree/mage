@@ -42,7 +42,7 @@ public final class SquirrelNest extends CardImpl {
         
         // Enchanted land has "{tap}: Create a 1/1 green Squirrel creature token."
         Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SquirrelToken()), new TapSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Create a 1/1 green Squirrel creature token.\"")));
     }
 

@@ -30,7 +30,7 @@ public final class ShinenOfLifesRoar extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All creatures able to block Shinen of Life's Roar do so.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAllSourceEffect()));
         // Channel - {2}{G}{G}, Discard Shinen of Life's Roar: All creatures able to block target creature this turn do so.
         Ability ability = new ChannelAbility("{2}{G}{G}", new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());

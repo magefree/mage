@@ -22,7 +22,7 @@ public final class StormCauldron extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // Each player may play an additional land during each of their turns.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsAllEffect()));
+        this.addAbility(new SimpleStaticAbility(new PlayAdditionalLandsAllEffect()));
 
         // Whenever a land is tapped for mana, return it to its owner's hand.
         this.addAbility(new TapForManaAllTriggeredAbility(

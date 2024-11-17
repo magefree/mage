@@ -40,7 +40,7 @@ public final class SpellbreakerBehemoth extends CardImpl {
         this.toughness = new MageInt(5);
 
         this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantBeCounteredSourceEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeCounteredControlledEffect(filter, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CantBeCounteredControlledEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     private SpellbreakerBehemoth(final SpellbreakerBehemoth card) {

@@ -59,7 +59,7 @@ public final class StarfieldOfNyx extends CardImpl {
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new StarfieldOfNyxEffect(), new PermanentsOnTheBattlefieldCondition(
                         filterEnchantmentYouControl, ComparisonType.MORE_THAN, 4), rule1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private StarfieldOfNyx(final StarfieldOfNyx card) {

@@ -29,7 +29,7 @@ public final class SandsOfTime extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // Each player skips their untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipUntapStepEffect()));
 
         // At the beginning of each player's upkeep, that player simultaneously untaps each tapped artifact, creature, and land they control and taps each untapped artifact, creature, and land they control.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new SandsOfTimeEffect(), false));

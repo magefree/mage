@@ -38,7 +38,7 @@ public final class Sluggishness extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAttachedEffect(AttachmentType.AURA)));
 
         // When Sluggishness is put into a graveyard from the battlefield, return Sluggishness to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(new ReturnToHandSourceEffect()));

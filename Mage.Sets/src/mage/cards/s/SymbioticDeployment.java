@@ -33,7 +33,7 @@ public final class SymbioticDeployment extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect())); 
+        this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
         
         // {1}, Tap two untapped creatures you control: Draw a card.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{1}"));

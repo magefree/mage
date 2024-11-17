@@ -40,7 +40,7 @@ public final class SoldeviGolem extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Soldevi Golem doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // At the beginning of your upkeep, you may untap target tapped creature an opponent controls. If you do, untap Soldevi Golem.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(new UntapTargetEffect().setText("untap target tapped creature an opponent controls"), true);

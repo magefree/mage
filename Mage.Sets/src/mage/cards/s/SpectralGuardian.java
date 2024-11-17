@@ -38,7 +38,7 @@ public final class SpectralGuardian extends CardImpl {
         this.toughness = new MageInt(3);
 
         // As long as Spectral Guardian is untapped, noncreature artifacts have shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAllEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter, false),
                 SourceTappedCondition.UNTAPPED,
                 "as long as {this} is untapped, noncreature artifacts have shroud.")));

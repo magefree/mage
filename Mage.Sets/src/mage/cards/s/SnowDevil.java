@@ -46,7 +46,7 @@ public final class SnowDevil extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
 
         // Enchanted creature has first strike as long as it's blocking and you control a snow land.
         this.addAbility(new SimpleStaticAbility(

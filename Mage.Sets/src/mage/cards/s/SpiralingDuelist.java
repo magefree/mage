@@ -30,7 +30,7 @@ public final class SpiralingDuelist extends CardImpl {
 
         // Metalcraft — Spiraling Duelist has double strike as long as you control three or more artifacts.
         ContinuousEffect effect = new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, MetalcraftCondition.instance, effectText))
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(effect, MetalcraftCondition.instance, effectText))
                 .setAbilityWord(AbilityWord.METALCRAFT)
                 .addHint(MetalcraftHint.instance));
     }

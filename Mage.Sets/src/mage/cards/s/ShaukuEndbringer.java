@@ -38,7 +38,7 @@ public final class ShaukuEndbringer extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Shauku, Endbringer can't attack if there's another creature on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShaukuEndbringerEffect()));
+        this.addAbility(new SimpleStaticAbility(new ShaukuEndbringerEffect()));
 
         // At the beginning of your upkeep, you lose 3 life.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(3)));

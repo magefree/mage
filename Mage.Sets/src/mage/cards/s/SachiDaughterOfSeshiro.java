@@ -38,9 +38,9 @@ public final class SachiDaughterOfSeshiro extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Other Snake creatures you control get +0/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, snakeFilter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, snakeFilter, true)));
         // Shamans you control have "{T}: Add {G}{G}."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(
                 new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()), Duration.WhileOnBattlefield, shamanFilter, false)));
     }
 

@@ -40,7 +40,7 @@ public final class SunscapeFamiliar extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // Green spells and blue spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     private SunscapeFamiliar(final SunscapeFamiliar card) {

@@ -35,7 +35,7 @@ public final class StoicAngel extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // Players can't untap more than one creature during their untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StoicAngelEffect()));
+        this.addAbility(new SimpleStaticAbility(new StoicAngelEffect()));
     }
 
     private StoicAngel(final StoicAngel card) {

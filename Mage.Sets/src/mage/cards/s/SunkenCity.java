@@ -34,7 +34,7 @@ public final class SunkenCity extends CardImpl {
         // At the beginning of your upkeep, sacrifice Sunken City unless you pay {U}{U}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{U}{U}"))));
         // Blue creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private SunkenCity(final SunkenCity card) {

@@ -29,7 +29,7 @@ public final class ShelteringPrayers extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
         // Basic lands each player controls have shroud as long as that player controls three or fewer lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShelteringPrayersEffect()));
+        this.addAbility(new SimpleStaticAbility(new ShelteringPrayersEffect()));
 
     }
 

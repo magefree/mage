@@ -50,7 +50,7 @@ public final class ShalaiVoiceOfPlenty extends CardImpl {
         // You, planeswalkers you control, and other creatures you control have hexproof.
         Effect effect = new GainAbilityControllerEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield);
         effect.setText("You");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter1);
         effect.setText(", planeswalkers you control");
         ability.addEffect(effect);

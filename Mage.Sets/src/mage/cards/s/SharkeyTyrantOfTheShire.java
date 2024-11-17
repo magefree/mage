@@ -45,7 +45,7 @@ public final class SharkeyTyrantOfTheShire extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Activated abilities of lands your opponents control can't be activated unless they're mana abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SharkeyTyrantOfTheShireReplacementEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new SharkeyTyrantOfTheShireReplacementEffect(filter)));
 
         // Sharkey, Tyrant of the Shire has all activated abilities of lands your opponents control except mana abilities.
         this.addAbility(new SimpleStaticAbility(new SharkeyTyrantOfTheShireContinousEffect(filter)));

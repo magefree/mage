@@ -36,7 +36,7 @@ public final class SpiritualAsylum extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
 
         // Creatures and lands you control have shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(),
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(ShroudAbility.getInstance(),
                 Duration.WhileOnBattlefield, filter)));
 
         // When a creature you control attacks, sacrifice Spiritual Asylum.

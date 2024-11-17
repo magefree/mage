@@ -27,7 +27,7 @@ public final class StormriderRig extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
 
         // Whenever a creature you control enters, you may attach Stormrider Rig to it.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(

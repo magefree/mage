@@ -37,7 +37,7 @@ public final class ShadowTrooper extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // You may cast Trooper creature cards as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
 
     }
 

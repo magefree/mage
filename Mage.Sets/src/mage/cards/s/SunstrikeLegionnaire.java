@@ -44,7 +44,7 @@ public final class SunstrikeLegionnaire extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sunstrike Legionnaire doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
         // Whenever another creature enters the battlefield, untap Sunstrike Legionnaire.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), untapFilter, false));
         // {tap}: Tap target creature with converted mana cost 3 or less.

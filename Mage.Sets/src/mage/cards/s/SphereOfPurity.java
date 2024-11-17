@@ -24,7 +24,7 @@ public final class SphereOfPurity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // If an artifact would deal damage to you, prevent 1 of that damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SphereOfPurityEffect()));
+        this.addAbility(new SimpleStaticAbility(new SphereOfPurityEffect()));
     }
 
     private SphereOfPurity(final SphereOfPurity card) {

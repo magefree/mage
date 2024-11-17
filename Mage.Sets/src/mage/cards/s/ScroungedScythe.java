@@ -29,7 +29,7 @@ public final class ScroungedScythe extends CardImpl {
         this.nightCard = true;
 
         // Equipped creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
 
         // As long as equipped creature is a Human, it has menace.
         this.addAbility(new SimpleStaticAbility(

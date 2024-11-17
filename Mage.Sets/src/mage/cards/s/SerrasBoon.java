@@ -46,7 +46,7 @@ public final class SerrasBoon extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +1/+2 as long as it's white. Otherwise, it gets -2/-1.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield),
                 new BoostEnchantedEffect(-2, -1, Duration.WhileOnBattlefield),
                 new AttachedToMatchesFilterCondition(filter),

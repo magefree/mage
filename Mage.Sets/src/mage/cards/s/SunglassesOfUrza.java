@@ -21,7 +21,7 @@ public final class SunglassesOfUrza extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // You may spend white mana as though it were red mana.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SunglassesOfUrzaManaAsThoughtEffect()));
+        this.addAbility(new SimpleStaticAbility(new SunglassesOfUrzaManaAsThoughtEffect()));
     }
 
     private SunglassesOfUrza(final SunglassesOfUrza card) {

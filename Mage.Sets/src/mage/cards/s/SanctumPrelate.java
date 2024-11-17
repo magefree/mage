@@ -34,7 +34,7 @@ public final class SanctumPrelate extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseNumberEffect()));
 
         // Noncreature spells with converted mana cost equal to the chosen number can't be cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SanctumPrelateReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new SanctumPrelateReplacementEffect()));
     }
 
     private SanctumPrelate(final SanctumPrelate card) {

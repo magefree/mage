@@ -34,7 +34,7 @@ public final class SanctuaryBlade extends CardImpl {
         // Equipped creature gets +2/+0 and has protection from the last chosen color.
         Effect boostEffect = new BoostEquippedEffect(2, 0);
         boostEffect.concatBy(".");
-        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect);
+        SimpleStaticAbility ability = new SimpleStaticAbility(boostEffect);
         ProtectionChosenColorAttachedEffect protectionEfect = new ProtectionChosenColorAttachedEffect(false);
         protectionEfect.setText("and has protection from the last chosen color.");
         ability.addEffect(protectionEfect);

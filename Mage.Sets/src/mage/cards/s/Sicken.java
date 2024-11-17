@@ -33,7 +33,7 @@ public final class Sicken extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets -2/-2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield)));
         //Cycling
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
     }

@@ -33,7 +33,7 @@ public final class SeekerOfSlaanesh extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Allure of Slaanesh -- Each opponent must attack with at least one creature each combat if able.
-        addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SeekerOfSlaaneshForceAttackEffect(Duration.WhileOnBattlefield))
+        addAbility(new SimpleStaticAbility(new SeekerOfSlaaneshForceAttackEffect(Duration.WhileOnBattlefield))
                 .withFlavorWord("Allure of Slaanesh"));
     }
 

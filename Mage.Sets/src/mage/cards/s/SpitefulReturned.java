@@ -40,7 +40,7 @@ public final class SpitefulReturned extends CardImpl {
         effect.setText("defending player loses 2 life");
         this.addAbility(new SpitefulReturnedTriggeredAbility(effect));
         // Enchanted creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
     }
 
     private SpitefulReturned(final SpitefulReturned card) {

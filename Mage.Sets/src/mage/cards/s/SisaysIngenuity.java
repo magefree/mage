@@ -48,7 +48,7 @@ public final class SisaysIngenuity extends CardImpl {
         ability.addTarget(new TargetCreaturePermanent());
         Effect effect = new GainAbilityAttachedEffect(ability, AttachmentType.AURA);
         effect.setText("Enchanted creature has \"{2}{U}: Target creature becomes the color of your choice until end of turn.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private SisaysIngenuity(final SisaysIngenuity card) {

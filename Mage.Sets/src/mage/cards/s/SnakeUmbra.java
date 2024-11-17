@@ -36,7 +36,7 @@ public final class SnakeUmbra extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield));
 
         // and has "Whenever this creature deals damage to an opponent, you may draw a card."
         Ability gainedAbility = new DealsDamageToOpponentTriggeredAbility(new DrawCardSourceControllerEffect(1), true);
