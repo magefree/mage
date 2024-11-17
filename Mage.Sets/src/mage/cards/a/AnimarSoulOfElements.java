@@ -40,7 +40,7 @@ public final class AnimarSoulOfElements extends CardImpl {
         this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), StaticFilters.FILTER_SPELL_A_CREATURE, false));
 
         // Creature spells you cast cost {1} less to cast for each +1/+1 counter on Animar.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnimarCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new AnimarCostReductionEffect()));
 
     }
 

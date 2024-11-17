@@ -40,7 +40,7 @@ public final class Abduction extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new UntapAttachedEffect()));
         
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
         
         // When enchanted creature dies, return that card to the battlefield under its owner's control.
         this.addAbility(new DiesAttachedTriggeredAbility(new ReturnToBattlefieldUnderOwnerControlAttachedEffect(), "enchanted creature", false));

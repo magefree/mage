@@ -34,7 +34,7 @@ public final class AlphaAuthority extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has hexproof and can't be blocked by more than one creature.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
         Effect effect = new CantBeBlockedByMoreThanOneAttachedEffect(AttachmentType.AURA);
         effect.setText("and can't be blocked by more than one creature");
         ability.addEffect(effect);

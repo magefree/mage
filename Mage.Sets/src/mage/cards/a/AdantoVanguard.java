@@ -33,7 +33,7 @@ public final class AdantoVanguard extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As long as Adanto Vanguard is attacking, it gets +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
                 SourceAttackingCondition.instance,
                 "As long as {this} is attacking, it gets +2/+0"

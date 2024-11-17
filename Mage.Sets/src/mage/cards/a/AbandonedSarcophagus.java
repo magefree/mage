@@ -40,7 +40,7 @@ public final class AbandonedSarcophagus extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new PlayFromGraveyardControllerEffect(filter)));
 
         // If a card with cycling would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbandonedSarcophagusReplacementEffect()), new AbandonedSarcophagusWatcher());
+        this.addAbility(new SimpleStaticAbility(new AbandonedSarcophagusReplacementEffect()), new AbandonedSarcophagusWatcher());
 
     }
 

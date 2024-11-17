@@ -35,7 +35,7 @@ public final class ArmamentMaster extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArmamentMasterEffect()));
+        this.addAbility(new SimpleStaticAbility(new ArmamentMasterEffect()));
     }
 
     private ArmamentMaster(final ArmamentMaster card) {

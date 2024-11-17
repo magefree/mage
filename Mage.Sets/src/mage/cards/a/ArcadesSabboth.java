@@ -48,7 +48,7 @@ public final class ArcadesSabboth extends CardImpl {
                 new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{G}{W}{U}"))));
 
         // Each untapped creature you control gets +0/+2 as long as it's not attacking.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(0, 2, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(0, 2, Duration.WhileOnBattlefield, filter, false)));
 
         // {W}: Arcades Sabboth gets +0/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{W}")));

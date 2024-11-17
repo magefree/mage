@@ -37,7 +37,7 @@ public final class AspectOfGorgon extends CardImpl {
         // Enchanted creature gets +1/+3 and has deathtouch.
         Effect effect = new BoostEnchantedEffect(1,3, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets +1/+3");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("and has deathtouch");
         ability.addEffect(effect);

@@ -31,7 +31,7 @@ public final class AinokBondKin extends CardImpl {
         this.addAbility(new OutlastAbility(new ManaCostsImpl<>("{1}{W}")));
 
         // Each creature you control with a +1/+1 counter on it has first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 FirstStrikeAbility.getInstance(),
                 Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_EACH_CONTROLLED_CREATURE_P1P1)));
@@ -46,4 +46,3 @@ public final class AinokBondKin extends CardImpl {
         return new AinokBondKin(this);
     }
 }
-

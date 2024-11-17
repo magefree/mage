@@ -40,7 +40,7 @@ public final class AkiriLineSlinger extends CardImpl {
         // Akiri, Line-Slinger gets +1/+0 for each artifact you control.
         Effect effect = new BoostSourceEffect(ArtifactYouControlCount.instance, StaticValue.get(0), Duration.WhileOnBattlefield);
         effect.setText("{this} gets +1/+0 for each artifact you control");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect)
+        this.addAbility(new SimpleStaticAbility(effect)
                 .addHint(ArtifactYouControlHint.instance));
 
         // Partner

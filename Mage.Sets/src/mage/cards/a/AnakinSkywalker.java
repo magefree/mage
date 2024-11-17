@@ -51,7 +51,7 @@ public final class AnakinSkywalker extends CardImpl {
 
         // If Anakin Skywalker would be destroyed, regenerate, then transform him instead.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnakinSkywalkerEffect()));
+        this.addAbility(new SimpleStaticAbility(new AnakinSkywalkerEffect()));
 
     }
 

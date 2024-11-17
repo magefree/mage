@@ -38,7 +38,7 @@ public final class AnthemOfRakdos extends CardImpl {
         this.addAbility(ability);
 
         // Hellbent - As long as you have no cards in hand, if a source you control would deal damage to a creature or player, it deals double that damage to that creature or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AnthemOfRakdosHellbentEffect()));
+        this.addAbility(new SimpleStaticAbility(new AnthemOfRakdosHellbentEffect()));
     }
 
     private AnthemOfRakdos(final AnthemOfRakdos card) {

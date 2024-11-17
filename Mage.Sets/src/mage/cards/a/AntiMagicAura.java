@@ -38,7 +38,7 @@ public final class AntiMagicAura extends CardImpl {
 
         // Enchanted creature can't be the target of spells and can't be enchanted by other Auras.
         CantBeTargetedAttachedEffect cantTargetEffect = new CantBeTargetedAttachedEffect(new FilterSpell("spells"), Duration.WhileOnBattlefield, AttachmentType.AURA, TargetController.ANY);
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, cantTargetEffect);
+        Ability ability2 = new SimpleStaticAbility(cantTargetEffect);
         ability2.addEffect(new AntiMagicAuraRuleEffect());
         this.addAbility(ability2);
     }

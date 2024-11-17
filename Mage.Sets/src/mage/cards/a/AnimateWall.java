@@ -41,10 +41,10 @@ public final class AnimateWall extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted Wall can attack as though it didn't have defender.
-        Ability canAttackAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield));
+        Ability canAttackAbility = new SimpleStaticAbility(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.WhileOnBattlefield));
         Effect enchantEffect = new GainAbilityAttachedEffect(canAttackAbility, AttachmentType.AURA, Duration.WhileOnBattlefield);
         enchantEffect.setText("Enchanted Wall can attack as though it didn't have defender");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, enchantEffect));
+        this.addAbility(new SimpleStaticAbility(enchantEffect));
     }
 
     private AnimateWall(final AnimateWall card) {

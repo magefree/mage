@@ -36,7 +36,7 @@ public final class ArachnusWeb extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block, and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAttackActivateAttachedEffect()));
         // At the beginning of the end step, if enchanted creature's power is 4 or greater, destroy Arachnus Web.
         FilterPermanent filter = new FilterPermanent("if enchanted creature's power is 4 or greater");
         filter.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));

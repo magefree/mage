@@ -40,7 +40,7 @@ public final class AvatarOfHope extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Avatar of Hope can block any number of creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect(0)));
     }
 
     private AvatarOfHope(final AvatarOfHope card) {

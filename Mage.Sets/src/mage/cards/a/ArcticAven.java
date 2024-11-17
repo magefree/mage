@@ -41,7 +41,7 @@ public final class ArcticAven extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Arctic Aven gets +1/+1 as long as you control a Plains.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter, 1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceWhileControlsEffect(filter, 1, 1)));
         // {W}: Arctic Aven gains lifelink until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn),

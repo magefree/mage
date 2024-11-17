@@ -29,7 +29,7 @@ public final class AshmouthBlade extends CardImpl {
         this.nightCard = true;
 
         // Equipped creature gets +3/+3
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3));
+        Ability ability = new SimpleStaticAbility(new BoostEquippedEffect(3, 3));
         this.addAbility(ability);
 
         // and has first strike.

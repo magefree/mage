@@ -44,12 +44,12 @@ public final class AerialModification extends CardImpl {
         this.addAbility(ability);
 
         // As long as enchanted permanent is a Vehicle, it's a creature in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureIfVehicleEffect()));
+        this.addAbility(new SimpleStaticAbility(new BecomesCreatureIfVehicleEffect()));
 
         // Enchanted creature gets +2/+2 and has flying.
         Effect effect = new BoostEnchantedEffect(2, 2);
         effect.setText("Enchanted creature gets +2/+2");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText(" and has flying");
         ability.addEffect(effect);

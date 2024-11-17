@@ -37,7 +37,7 @@ public final class AkronLegionnaire extends CardImpl {
         // Except for creatures named Akron Legionnaire and artifact creatures, creatures you control can't attack.
         Effect effect = new CantAttackAllEffect(Duration.WhileOnBattlefield, filter);
         effect.setText("Except for creatures named Akron Legionnaire and artifact creatures, creatures you control can't attack");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
         
     }
 

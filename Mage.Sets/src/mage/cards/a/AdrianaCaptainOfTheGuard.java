@@ -29,7 +29,7 @@ public final class AdrianaCaptainOfTheGuard extends CardImpl {
         this.addAbility(new MeleeAbility());
 
         // Other creatures you control have melee.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new MeleeAbility(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("creatures"), true)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(new MeleeAbility(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("creatures"), true)));
 
     }
 

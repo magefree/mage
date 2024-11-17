@@ -19,7 +19,7 @@ public final class AnointedProcession extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}");
 
         // If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CreateTwiceThatManyTokensEffect()));
+        this.addAbility(new SimpleStaticAbility(new CreateTwiceThatManyTokensEffect()));
     }
 
     private AnointedProcession(final AnointedProcession card) {

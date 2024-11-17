@@ -37,10 +37,10 @@ public final class ArchangelOfStrife extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ArchangelOfStrifeChooseEffect()));
 
         // Creatures controlled by players who chose war get +3/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchangelOfStrifeWarEffect()));
+        this.addAbility(new SimpleStaticAbility(new ArchangelOfStrifeWarEffect()));
 
         // Creatures controlled by players who chose peace get +0/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchangelOfStrifePeaceEffect()));
+        this.addAbility(new SimpleStaticAbility(new ArchangelOfStrifePeaceEffect()));
     }
 
     private ArchangelOfStrife(final ArchangelOfStrife card) {

@@ -33,7 +33,7 @@ public final class AnabaSpiritCrafter extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Minotaur creatures get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 0, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private AnabaSpiritCrafter(final AnabaSpiritCrafter card) {

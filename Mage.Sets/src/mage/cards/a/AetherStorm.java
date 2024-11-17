@@ -27,7 +27,7 @@ public final class AetherStorm extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
 
         // Creature spells can't be cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AetherStormReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new AetherStormReplacementEffect()));
 
         // Pay 4 life: Destroy Aether Storm. It can't be regenerated. Any player may activate this ability.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroySourceEffect(true), new PayLifeCost(4));
