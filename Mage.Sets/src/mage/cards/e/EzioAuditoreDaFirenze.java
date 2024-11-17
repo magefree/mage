@@ -41,7 +41,6 @@ public final class EzioAuditoreDaFirenze extends CardImpl {
 
     static {
         filter.add(SubType.ASSASSIN.getPredicate());
-        filter.add(Predicates.not(new AbilityPredicate(FreerunningAbility.class))); // So there are not redundant copies being added to each card
     }
     
     public EzioAuditoreDaFirenze(UUID ownerId, CardSetInfo setInfo) {
@@ -54,16 +53,11 @@ public final class EzioAuditoreDaFirenze extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Menace
-        this.addAbility(new MenaceAbility(), makeWatcher());
+        this.addAbility(new MenaceAbility(false));
 
         // Assassin spells you cast have freerunning {B}{B}.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new FreerunningAbility("{B}{B}"), filter)));
         // Whenever Ezio deals combat damage to a player, you may pay {W}{U}{B}{R}{G} if that player has 10 or less life. When you do, that player loses the game.
-        //Phage this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new LoseGameTargetPlayerEffect(), false, true));
-
-        //this.addAbility(new ConditionalTriggeredAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new EzioAuditoreDaFirenzeEffect(), true, true)), new LifeLossOtherFromCombatWatcher());
-        //this.addAbility(new ConditionalTriggeredAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfAnyNumberCostPaid(new EzioAuditoreDaFirenzeEffect(),new ManaCostsImpl<>("{W}{U}{B}{R}{G}")), true, true),condition, "pay {W}{U}{B}{R}{G} if that player has 10 or less life. When you do, that player loses the game."));
-        //Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DoIfCostPaid(new EzioAuditoreDaFirenzeEffect(), new ManaCostsImpl<>("{W}{U}{B}{R}{G}")), true, true)
         this.addAbility(
                 new ConditionalTriggeredAbility(
                         new DealsCombatDamageToAPlayerTriggeredAbility(
@@ -71,7 +65,7 @@ public final class EzioAuditoreDaFirenze extends CardImpl {
                                         new LoseGameTargetPlayerEffect(),new ManaCostsImpl<>("{W}{U}{B}{R}{G}")
                                 ), false, true
                         ),EzioAuditoreDaFirenzeWatcher::checkPermanent, "Whenever {this} deals combat damage to a player, you may pay {W}{U}{B}{R}{G} if that player has 10 or less life. When you do, that player loses the game."
-                )
+                ), new EzioAuditoreDaFirenzeWatcher()
         );
 
     }
@@ -85,9 +79,6 @@ public final class EzioAuditoreDaFirenze extends CardImpl {
         return new EzioAuditoreDaFirenze(this);
     }
 
-    public static Watcher makeWatcher(){
-        return new EzioAuditoreDaFirenzeWatcher();
-    }
 }
 
 class EzioAuditoreDaFirenzeWatcher extends Watcher {
