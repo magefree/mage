@@ -26,7 +26,7 @@ public final class FountainOfRenewal extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1)));
 
         // {3}, Sacrifice Fountain of Renewal: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(3));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

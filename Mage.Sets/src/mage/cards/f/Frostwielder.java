@@ -33,7 +33,7 @@ public final class Frostwielder extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}: Frostwielder deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
         // If a creature dealt damage by Frostwielder this turn would die, exile it instead.

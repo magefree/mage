@@ -46,7 +46,7 @@ public final class FruitcakeElemental extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(new DamageControllerEffect(7)));
 
         // {3}: Target player gains control of Fruitcake Elemental.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FruitcakeElementalEffect(), new ManaCostsImpl<>("{3}"));
+        Ability ability = new SimpleActivatedAbility(new FruitcakeElementalEffect(), new ManaCostsImpl<>("{3}"));
         ability.addTarget(new TargetPlayer(1, 1, false));
         this.addAbility(ability);
     }

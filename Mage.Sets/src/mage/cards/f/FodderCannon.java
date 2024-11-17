@@ -26,7 +26,7 @@ public final class FodderCannon extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {4}, {tap}, Sacrifice a creature: Fodder Cannon deals 4 damage to target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(4), new ManaCostsImpl<>("{4}"));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(4), new ManaCostsImpl<>("{4}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));

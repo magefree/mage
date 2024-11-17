@@ -30,7 +30,7 @@ public final class FeralThallid extends CardImpl {
         // At the beginning of your upkeep, put a spore counter on Feral Thallid.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance())));
         // Remove three spore counters from Feral Thallid: Regenerate Feral Thallid.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
     }
 
     private FeralThallid(final FeralThallid card) {

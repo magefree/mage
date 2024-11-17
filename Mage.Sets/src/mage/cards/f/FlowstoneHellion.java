@@ -31,7 +31,7 @@ public final class FlowstoneHellion extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // {0}: Flowstone Hellion gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(+1,-1,Duration.EndOfTurn), new GenericManaCost(0)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(+1,-1,Duration.EndOfTurn), new GenericManaCost(0)));
     }
 
     private FlowstoneHellion(final FlowstoneHellion card) {
