@@ -36,10 +36,10 @@ public final class WildNacatl extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Wild Nacatl gets +1/+1 as long as you control a Mountain.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter1, 1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceWhileControlsEffect(filter1, 1, 1)));
         
         // Wild Nacatl gets +1/+1 as long as you control a Plains.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter2, 1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceWhileControlsEffect(filter2, 1, 1)));
     }
 
     private WildNacatl(final WildNacatl card) {

@@ -28,7 +28,7 @@ public final class WildwoodGeist extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Wildwood Geist gets +2/+2 as long as it's your turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                 MyTurnCondition.instance,
                 "{this} gets +2/+2 as long as it's your turn"))

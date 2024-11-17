@@ -29,7 +29,7 @@ public final class WallOfDiffusion extends CardImpl {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Wall of Diffusion can block creatures with shadow as though Wall of Diffusion had shadow.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAsThoughtItHadShadowEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAsThoughtItHadShadowEffect(Duration.WhileOnBattlefield)));
     }
 
     private WallOfDiffusion(final WallOfDiffusion card) {

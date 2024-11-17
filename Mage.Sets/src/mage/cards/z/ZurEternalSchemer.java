@@ -55,7 +55,7 @@ public final class ZurEternalSchemer extends CardImpl {
 
         // Enchantment creatures you control have deathtouch, lifelink, and hexproof.
         CompoundAbility compoundAbilities = new CompoundAbility(DeathtouchAbility.getInstance(), LifelinkAbility.getInstance(), HexproofAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(compoundAbilities, Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(compoundAbilities, Duration.WhileOnBattlefield, filter)));
 
         // {1}{W}: Target non-Aura enchantment you control becomes a creature in addition to its other types and has base power and toughness each equal to its mana value.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ZurEternalSchemerEffect(), new ManaCostsImpl<>("{1}{W}"));

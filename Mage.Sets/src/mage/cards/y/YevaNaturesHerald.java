@@ -41,7 +41,7 @@ public final class YevaNaturesHerald extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // You may cast green creature spells as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private YevaNaturesHerald(final YevaNaturesHerald card) {

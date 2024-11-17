@@ -42,7 +42,7 @@ public final class WardSliver extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Protect)));
 
         // All Slivers have protection from the chosen color.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WardSliverGainAbilityControlledEffect()));
+        this.addAbility(new SimpleStaticAbility(new WardSliverGainAbilityControlledEffect()));
         
     }
 

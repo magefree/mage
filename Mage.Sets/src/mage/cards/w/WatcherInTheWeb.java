@@ -31,7 +31,7 @@ public final class WatcherInTheWeb extends CardImpl {
         // Watcher in the Web can block an additional seven creatures each combat.
         Effect effect = new CanBlockAdditionalCreatureEffect(7);
         effect.setText("{this} can block an additional seven creatures each combat");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private WatcherInTheWeb(final WatcherInTheWeb card) {

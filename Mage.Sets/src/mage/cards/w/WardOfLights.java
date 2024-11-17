@@ -43,7 +43,7 @@ public final class WardOfLights extends CardImpl {
         // As Ward of Lights enters the battlefield, choose a color.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Benefit)));
         // Enchanted creature has protection from the chosen color. This effect doesn't remove Ward of Lights.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProtectionChosenColorAttachedEffect(true)));
+        this.addAbility(new SimpleStaticAbility(new ProtectionChosenColorAttachedEffect(true)));
     }
 
     private WardOfLights(final WardOfLights card) {

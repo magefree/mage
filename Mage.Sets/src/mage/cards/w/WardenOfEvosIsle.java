@@ -38,7 +38,7 @@ public final class WardenOfEvosIsle extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Creature spells with flying you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
     }
 

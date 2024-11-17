@@ -40,7 +40,7 @@ public final class WoodbornBehemoth extends CardImpl {
         ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
                 eightOrMoreLandCondition, " and has trample");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        Ability ability = new SimpleStaticAbility(effect1);
         ability.addEffect(effect2);
         this.addAbility(ability);
     }

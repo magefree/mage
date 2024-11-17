@@ -34,7 +34,7 @@ public final class Wingcrafter extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Wingcrafter is paired with another creature, both creatures have flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(FlyingAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(FlyingAbility.getInstance(), ruleText)));
     }
 
     private Wingcrafter(final Wingcrafter card) {
