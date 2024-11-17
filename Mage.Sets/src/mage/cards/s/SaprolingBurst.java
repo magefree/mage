@@ -38,7 +38,7 @@ public final class SaprolingBurst extends CardImpl {
         this.addAbility(new FadingAbility(7, this));
 
         // Remove a fade counter from Saproling Burst: create a green Saproling creature token. It has "This creature's power and toughness are each equal to the number of fade counters on Saproling Burst."
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SaprolingBurstCreateTokenEffect(), new RemoveCountersSourceCost(CounterType.FADE.createInstance())));
+        this.addAbility(new SimpleActivatedAbility(new SaprolingBurstCreateTokenEffect(), new RemoveCountersSourceCost(CounterType.FADE.createInstance())));
 
         // When Saproling Burst leaves the battlefield, destroy all tokens created with Saproling Burst. They can't be regenerated.
         this.addAbility(new SaprolingBurstLeavesBattlefieldTriggeredAbility());

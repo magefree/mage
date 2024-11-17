@@ -40,7 +40,7 @@ public final class Swarmyard extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         
         // {tap}: Regenerate target Insect, Rat, Spider, or Squirrel.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
 

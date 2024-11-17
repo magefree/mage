@@ -32,7 +32,7 @@ public final class SoulOfInnistrad extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
         // {3}{B}{B}: Return up to three target creature cards from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl<>("{3}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToHandTargetEffect(), new ManaCostsImpl<>("{3}{B}{B}"));
         ability.addTarget(new TargetCardInYourGraveyard(0, 3, StaticFilters.FILTER_CARD_CREATURES_YOUR_GRAVEYARD));
         this.addAbility(ability);
 

@@ -28,7 +28,7 @@ public final class ScuttlingDeath extends CardImpl {
 
         this.power = new MageInt(4);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         this.addAbility(new SoulshiftAbility(4));

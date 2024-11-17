@@ -31,7 +31,7 @@ public final class SpitfireBastion extends CardImpl {
         this.addAbility(new RedManaAbility());
 
         // {2}{R}, {T}: Spitfire Bastion deals 3 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(3), new TapSourceCost());
         ability.addCost(new ManaCostsImpl<>("{2}{R}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

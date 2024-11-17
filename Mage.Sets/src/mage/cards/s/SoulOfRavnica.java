@@ -33,7 +33,7 @@ public final class SoulOfRavnica extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {5}{U}{U}: Draw a card for each color among permanents you control.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardForEachColorAmongControlledPermanentsEffect(), new ManaCostsImpl<>("{5}{U}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new DrawCardForEachColorAmongControlledPermanentsEffect(), new ManaCostsImpl<>("{5}{U}{U}")));
 
         // {5}{U}{U}, Exile Soul of Ravnica from your graveyard: Draw a card for each color among permanents you control.
         Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new DrawCardForEachColorAmongControlledPermanentsEffect(), new ManaCostsImpl<>("{5}{U}{U}"));
@@ -50,4 +50,3 @@ public final class SoulOfRavnica extends CardImpl {
         return new SoulOfRavnica(this);
     }
 }
-

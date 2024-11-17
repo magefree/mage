@@ -30,7 +30,7 @@ public final class SternConstable extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}, Discard a card: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect("tap target creature"), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect("tap target creature"), new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

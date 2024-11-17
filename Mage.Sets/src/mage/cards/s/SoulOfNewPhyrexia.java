@@ -34,7 +34,7 @@ public final class SoulOfNewPhyrexia extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // {5}: Permanents you control gain indestructible until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(5)));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(5)));
         // {5}, Exile Soul of New Phyrexia from your graveyard: Permanents you control gain indestructible until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(5));
         ability.addCost(new ExileSourceFromGraveCost());

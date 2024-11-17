@@ -34,7 +34,7 @@ public final class SacredMesa extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(filter))));
 
         // {1}{W}: Create a 1/1 white Pegasus creature token with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PegasusToken()), new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new PegasusToken()), new ManaCostsImpl<>("{1}{W}")));
     }
 
     private SacredMesa(final SacredMesa card) {

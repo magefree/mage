@@ -33,7 +33,7 @@ public final class ScribNibblers extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Exile the top card of target player's library. If it's a land card, you gain 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScribNibblersEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ScribNibblersEffect(), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 

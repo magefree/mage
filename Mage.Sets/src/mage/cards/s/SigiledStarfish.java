@@ -26,7 +26,7 @@ public final class SigiledStarfish extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Scry 1.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScryEffect(1), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new ScryEffect(1), new TapSourceCost()));
     }
 
     private SigiledStarfish(final SigiledStarfish card) {

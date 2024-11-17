@@ -48,7 +48,7 @@ public final class SingingBellStrike extends CardImpl {
         // Enchanted creature doesn't untap during its controller's untap step.
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect()));
         // Enchanted creature has "{6}: Untap this creature."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new GenericManaCost(6));
+        Ability gainedAbility = new SimpleActivatedAbility(new UntapSourceEffect(), new GenericManaCost(6));
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature has \"{6}: Untap this creature.\"");
         this.addAbility(new SimpleStaticAbility(effect));

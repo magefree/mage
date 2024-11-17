@@ -41,7 +41,7 @@ public final class SoratamiRainshaper extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}, Return a land you control to its owner's hand: Target creature you control gains shroud until end of turn. (It can't be the target of spells or abilities.)
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(3));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);

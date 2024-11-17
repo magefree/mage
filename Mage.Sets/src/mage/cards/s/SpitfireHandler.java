@@ -31,7 +31,7 @@ public final class SpitfireHandler extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new SpitfireHandlerCantBlockEffect()));
 
         // {R}: Spitfire Handler gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
     private SpitfireHandler(final SpitfireHandler card) {

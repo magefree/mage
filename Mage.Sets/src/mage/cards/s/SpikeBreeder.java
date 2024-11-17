@@ -36,13 +36,13 @@ public final class SpikeBreeder extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), "with three +1/+1 counters on it"));
 
         // {2}, Remove a +1/+1 counter from Spike Breeder: Put a +1/+1 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new GenericManaCost(2));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {2}, Remove a +1/+1 counter from Spike Breeder: Create a 1/1 green Spike creature token.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpikeToken()), new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(new CreateTokenEffect(new SpikeToken()), new GenericManaCost(2));
         ability2.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         this.addAbility(ability2);
 

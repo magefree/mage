@@ -32,7 +32,7 @@ public final class SingingTree extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {tap}: Target attacking creature's power becomes 0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SingingTreeEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new SingingTreeEffect(), new TapSourceCost());
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }

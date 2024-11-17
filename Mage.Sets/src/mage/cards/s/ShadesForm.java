@@ -34,7 +34,7 @@ public final class ShadesForm extends CardImpl {
         this.addAbility(ability);
 
 	    // Enchanted creature has "{B}: This creature gets +1/+1 until end of turn."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn),
+        Ability gainedAbility = new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn),
                 new ColoredManaCost(ColoredManaSymbol.B));
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)));
 

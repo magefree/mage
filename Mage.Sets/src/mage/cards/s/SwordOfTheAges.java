@@ -43,7 +43,7 @@ public final class SwordOfTheAges extends CardImpl {
         cost.setText("Sacrifice {this} and any number of creatures you control");
         Cost cost2 = new SacrificeTargetCost(new TargetSacrifice(0, Integer.MAX_VALUE, StaticFilters.FILTER_PERMANENT_CREATURES));
         cost2.setText("");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwordOfTheAgesEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new SwordOfTheAgesEffect(), new TapSourceCost());
         ability.addCost(cost);
         ability.addCost(cost2);
         ability.addTarget(new TargetAnyTarget());

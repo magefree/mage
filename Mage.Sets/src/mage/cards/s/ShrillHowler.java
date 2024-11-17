@@ -35,7 +35,7 @@ public final class ShrillHowler extends CardImpl {
 
         // {5}{G}: Transform Shrill Howler.
         this.addAbility(new TransformAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new ManaCostsImpl<>("{5}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new TransformSourceEffect(), new ManaCostsImpl<>("{5}{G}")));
 
     }
 

@@ -40,7 +40,7 @@ public final class SoulOfTheros extends CardImpl {
         // {4}{W}{W}: Creatures you control get +2/+2 and gain first strike and lifelink until end of turn.
         Effect effect1 = new BoostControlledEffect(2, 2, Duration.EndOfTurn);
         effect1.setText("Creatures you control get +2/+2");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect1, new ManaCostsImpl<>("{4}{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(effect1, new ManaCostsImpl<>("{4}{W}{W}"));
         Effect effect2 = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect2.setText("and gain first strike");
         ability.addEffect(effect2);

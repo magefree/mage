@@ -52,7 +52,7 @@ public final class SigardaHeronsGrace extends CardImpl {
         this.addAbility(ability);
 
         // {2}, Exile a card from your graveyard: Create a 1/1 white Human Soldier creature token.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HumanSoldierToken()), new GenericManaCost(2));
+        ability = new SimpleActivatedAbility(new CreateTokenEffect(new HumanSoldierToken()), new GenericManaCost(2));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard()));
         this.addAbility(ability);
     }

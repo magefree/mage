@@ -38,7 +38,7 @@ public final class SerpentSkin extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
 
         // {G}: Regenerate enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA),new ColoredManaCost(ColoredManaSymbol.G)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateAttachedEffect(AttachmentType.AURA),new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
     private SerpentSkin(final SerpentSkin card) {

@@ -39,7 +39,7 @@ public final class ShimmeringWings extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
         
         // {U}: Return Shimmering Wings to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ColoredManaCost(ColoredManaSymbol.U)));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ColoredManaCost(ColoredManaSymbol.U)));
     }
 
     private ShimmeringWings(final ShimmeringWings card) {

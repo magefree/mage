@@ -30,7 +30,7 @@ public final class SamitePilgrim extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Domain - {T}: Prevent the next X damage that would be dealt to target creature this turn, where X is the number of basic land types among lands you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SamitePilgrimPreventDamageToTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new SamitePilgrimPreventDamageToTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.setAbilityWord(AbilityWord.DOMAIN);
         this.addAbility(ability.addHint(DomainHint.instance));

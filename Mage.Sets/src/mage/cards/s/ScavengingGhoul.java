@@ -34,7 +34,7 @@ public final class ScavengingGhoul extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new AddCountersSourceEffect(CounterType.CORPSE.createInstance(),
             CreaturesDiedThisTurnCount.instance, true), false).addHint(CreaturesDiedThisTurnHint.instance));
         // Remove a corpse counter from Scavenging Ghoul: Regenerate Scavenging Ghoul.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(),
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(),
             new RemoveCountersSourceCost(CounterType.CORPSE.createInstance())));
     }
 

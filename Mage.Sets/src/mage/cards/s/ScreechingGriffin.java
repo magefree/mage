@@ -32,7 +32,7 @@ public final class ScreechingGriffin extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {R}: Target creature can't block Screeching Griffin this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn),
+        Ability ability = new SimpleActivatedAbility(new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn),
                 new ManaCostsImpl<>("{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

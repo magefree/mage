@@ -40,7 +40,7 @@ public final class Shackles extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect()));
 
         // {W}: Return Shackles to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{W}")));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{W}")));
     }
 
     private Shackles(final Shackles card) {

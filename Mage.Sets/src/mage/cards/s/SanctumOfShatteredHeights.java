@@ -44,7 +44,7 @@ public final class SanctumOfShatteredHeights extends CardImpl {
         this.subtype.add(SubType.SHRINE);
 
         // {1}, Discard a land card or Shrine card: Sanctum of Shattered Heights deals X damage to target creature or planeswalker, where X is the number of Shrines you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(xValue)
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(xValue)
                 .setText("Sanctum of Shattered Heights deals X damage to target creature or planeswalker, where X is the number of Shrines you control"),
                 new ManaCostsImpl<>("{1}"))
                 .addHint(new ValueHint("Shrines you control", xValue));

@@ -27,7 +27,7 @@ public final class Soulmender extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: You gain 1 life.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(1), new TapSourceCost()));
         
     }
 

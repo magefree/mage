@@ -34,7 +34,7 @@ public final class SludgeCrawler extends CardImpl {
         // Ingest
         this.addAbility(new IngestAbility());
         // {2}: Sludge Crawler gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(2)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(2)));
     }
 
     private SludgeCrawler(final SludgeCrawler card) {
