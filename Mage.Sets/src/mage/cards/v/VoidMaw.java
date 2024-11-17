@@ -41,7 +41,7 @@ public final class VoidMaw extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // If another creature would die, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidMawEffect()));
+        this.addAbility(new SimpleStaticAbility(new VoidMawEffect()));
 
         // Put a card exiled with Void Maw into its owner's graveyard: Void Maw gets +2/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new VoidMawCost()));

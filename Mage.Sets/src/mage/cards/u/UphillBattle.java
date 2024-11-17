@@ -28,7 +28,7 @@ public final class UphillBattle extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // Creatures played by your opponents enter the battlefield tapped.
-        Ability tapAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new UphillBattleTapEffect());
+        Ability tapAbility = new SimpleStaticAbility(new UphillBattleTapEffect());
         tapAbility.addWatcher(new PermanentWasCastWatcher());
         tapAbility.addWatcher(new PlayCreatureLandWatcher());
         addAbility(tapAbility);

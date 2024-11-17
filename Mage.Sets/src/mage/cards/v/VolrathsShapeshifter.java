@@ -29,7 +29,7 @@ public final class VolrathsShapeshifter extends CardImpl {
         this.toughness = new MageInt(1);
 
         // As long as the top card of your graveyard is a creature card, Volrath's Shapeshifter has the full text of that card and has the text "{2}: Discard a card."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VolrathsShapeshifterEffect()));
+        this.addAbility(new SimpleStaticAbility(new VolrathsShapeshifterEffect()));
 
         // {2}: Discard a card.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardControllerEffect(1), new ManaCostsImpl<>("{2}")));

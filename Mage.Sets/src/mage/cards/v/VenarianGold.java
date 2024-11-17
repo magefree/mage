@@ -48,7 +48,7 @@ public final class VenarianGold extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature doesn’t untap during its controller’s untap step if it has a sleep counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepEnchantedEffect(),
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepEnchantedEffect(),
                 new AttachedToCounterCondition(CounterType.SLEEP, 1)).setText("Enchanted creature doesn't untap during its controller's untap step if it has a sleep counter on it")));
 
         // At the beginning of the upkeep of enchanted creature’s controller, remove a sleep counter from that creature.

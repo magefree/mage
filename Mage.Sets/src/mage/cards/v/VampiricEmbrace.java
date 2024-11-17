@@ -38,7 +38,7 @@ public final class VampiricEmbrace extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 and has flying.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2));
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText("and has flying");
         ability.addEffect(effect);

@@ -36,7 +36,7 @@ public final class VengefulFirebrand extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Vengeful Firebrand has haste as long as a Warrior card is in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield),
                 VengefulFirebrandCondition.instance,
                 "{this} has haste as long as a Warrior card is in your graveyard")));

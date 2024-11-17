@@ -41,7 +41,7 @@ public final class VowOfWildness extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +3/+3, has trample, and can't attack you or a planeswalker you control.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3,3,Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(3,3,Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText(", has trample");
         ability.addEffect(effect);

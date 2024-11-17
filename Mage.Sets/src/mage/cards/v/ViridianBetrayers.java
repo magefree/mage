@@ -38,7 +38,7 @@ public final class ViridianBetrayers extends CardImpl {
 
         // Viridian Betrayers has infect as long as an opponent is poisoned.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(InfectAbility.getInstance()), PoisonedCondition.instance, rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private ViridianBetrayers(final ViridianBetrayers card) {

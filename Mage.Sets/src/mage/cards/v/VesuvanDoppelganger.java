@@ -34,7 +34,7 @@ public final class VesuvanDoppelganger extends CardImpl {
         this.toughness = new MageInt(0);
 
         // You may have Vesuvan Doppelganger enter the battlefield as a copy of any creature on the battlefield except it doesn't copy that creature's color and it has "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color and it has this ability."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new VesuvanDoppelgangerCopyEffect(), rule, true));
+        Ability ability = new SimpleStaticAbility(new EntersBattlefieldEffect(new VesuvanDoppelgangerCopyEffect(), rule, true));
         this.addAbility(ability);
 
     }
