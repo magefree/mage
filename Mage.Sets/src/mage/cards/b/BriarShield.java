@@ -34,7 +34,7 @@ public final class BriarShield extends CardImpl {
         // Enchanted creature gets +1/+1.
         this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
         // Sacrifice Briar Shield: Enchanted creature gets +3/+3 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.EndOfTurn), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new BoostEnchantedEffect(3, 3, Duration.EndOfTurn), new SacrificeSourceCost()));
     }
 
     private BriarShield(final BriarShield card) {

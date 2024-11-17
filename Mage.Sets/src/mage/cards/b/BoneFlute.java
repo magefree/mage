@@ -23,7 +23,7 @@ public final class BoneFlute extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {2}, {tap}: All creatures get -1/-0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -0, Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new BoostAllEffect(-1, -0, Duration.EndOfTurn), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

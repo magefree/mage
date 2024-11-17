@@ -41,7 +41,7 @@ public final class Blightspeaker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Target player loses 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         

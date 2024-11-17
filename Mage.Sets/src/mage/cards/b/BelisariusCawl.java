@@ -42,12 +42,12 @@ public final class BelisariusCawl extends CardImpl {
 
         // Ultima Founding -- {T}, Tap two untapped artifacts you control: Create a 2/2 white Astartes Warrior creature token with vigilance.
         Effect effect = new CreateTokenEffect(new WhiteAstartesWarriorToken());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
         this.addAbility(ability.withFlavorWord("Ultima Founding"));
 
         // Master of Machines -- {T}, Tap X untapped creatures you control: Look at the top X cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(GetXValue.instance, 1, StaticFilters.FILTER_CARD_ARTIFACT, PutCards.HAND, PutCards.BOTTOM_RANDOM, true), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new LookLibraryAndPickControllerEffect(GetXValue.instance, 1, StaticFilters.FILTER_CARD_ARTIFACT, PutCards.HAND, PutCards.BOTTOM_RANDOM, true), new TapSourceCost());
         ability.addCost(new TapVariableTargetCost(StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES));
         this.addAbility(ability.withFlavorWord("Master of Machines"));
     }

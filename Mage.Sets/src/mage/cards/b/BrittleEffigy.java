@@ -25,7 +25,7 @@ public final class BrittleEffigy extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
         
         // {4}, {T}, Exile Brittle Effigy: Exile target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

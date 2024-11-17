@@ -55,7 +55,7 @@ public final class BiggerOnTheInside extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted permanent has "{T}: Target player adds two mana of any one color. The next spell they cast this turn has cascade."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BiggerOnTheInsideEffect(), new TapSourceCost());
+        Ability gainedAbility = new SimpleActivatedAbility(new BiggerOnTheInsideEffect(), new TapSourceCost());
         gainedAbility.addTarget(new TargetPlayer());
         Effect effect = new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, null, "permanent");
         this.addAbility(new SimpleStaticAbility(effect));

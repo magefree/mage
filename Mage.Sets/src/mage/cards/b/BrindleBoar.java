@@ -26,7 +26,7 @@ public final class BrindleBoar extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(4), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new GainLifeEffect(4), new SacrificeSourceCost()));
     }
 
     private BrindleBoar(final BrindleBoar card) {

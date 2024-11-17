@@ -24,7 +24,7 @@ public final class BottleOfSuleiman extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {1}, Sacrifice Bottle of Suleiman: Flip a coin. If you lose the flip, Bottle of Suleiman deals 5 damage to you. If you win the flip, create a 5/5 colorless Djinn artifact creature token with flying.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new FlipCoinEffect(
+        Ability ability = new SimpleActivatedAbility(new FlipCoinEffect(
                 new CreateTokenEffect(new DjinnToken()),
                 new DamageControllerEffect(5)
         ), new GenericManaCost(1));

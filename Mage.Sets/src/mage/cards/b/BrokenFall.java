@@ -21,7 +21,7 @@ public final class BrokenFall extends CardImpl {
     public BrokenFall(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{G}");
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ReturnToHandFromBattlefieldSourceCost());
+        Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new ReturnToHandFromBattlefieldSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

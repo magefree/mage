@@ -28,7 +28,7 @@ public final class BorealGriffin extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {S}: Boreal Griffin gains first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(
             FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{S}")));
     }
 

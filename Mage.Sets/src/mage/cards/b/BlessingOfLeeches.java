@@ -41,7 +41,7 @@ public final class BlessingOfLeeches extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceControllerEffect(1)));
 
         // {0}: Regenerate enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.AURA),new GenericManaCost(0)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateAttachedEffect(AttachmentType.AURA),new GenericManaCost(0)));
     }
 
     private BlessingOfLeeches(final BlessingOfLeeches card) {

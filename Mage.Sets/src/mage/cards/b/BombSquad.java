@@ -45,7 +45,7 @@ public final class BombSquad extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Put a fuse counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.FUSE.createInstance()), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.FUSE.createInstance()), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // At the beginning of your upkeep, put a fuse counter on each creature with a fuse counter on it.

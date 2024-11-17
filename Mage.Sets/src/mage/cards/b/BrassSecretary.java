@@ -27,7 +27,7 @@ public final class BrassSecretary extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}, Sacrifice Brass Secretary: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new GenericManaCost(2));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

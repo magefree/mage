@@ -27,7 +27,7 @@ public final class BlindSeer extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{U}: Target spell or permanent becomes the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(Duration.EndOfTurn),
+        Ability ability = new SimpleActivatedAbility(new BecomesColorTargetEffect(Duration.EndOfTurn),
             new ManaCostsImpl<>("{1}{U}"));
         ability.addTarget(new TargetSpellOrPermanent());
         this.addAbility(ability);

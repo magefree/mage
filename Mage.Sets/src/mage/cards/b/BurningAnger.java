@@ -41,7 +41,7 @@ public final class BurningAnger extends CardImpl {
         // Enchanted creature has "{T}: This creature deals damage equal to its power to any target."
         Effect effect = new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE);
         effect.setText("{this} deals damage equal to its power to any target");
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability gainedAbility = new SimpleActivatedAbility(effect, new TapSourceCost());
         gainedAbility.addTarget(new TargetAnyTarget());
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield,
                 "Enchanted creature has \"{T}: This creature deals damage equal to its power to any target.\"")));
