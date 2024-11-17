@@ -1,6 +1,7 @@
 package mage.abilities.common;
 
 import mage.MageObject;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -9,30 +10,29 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
-
-import java.util.Objects;
+import mage.game.permanent.Permanent;
 
 /**
  * @author Susucr
  */
-public class DiesOneOrMoreCreatureTriggeredAbility extends TriggeredAbilityImpl {
+public class DiesOneOrMoreTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent> {
 
     private final FilterCreaturePermanent filter;
 
-    public DiesOneOrMoreCreatureTriggeredAbility(Effect effect, FilterCreaturePermanent filter, boolean optional) {
+    public DiesOneOrMoreTriggeredAbility(Effect effect, FilterCreaturePermanent filter, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTriggerPhrase("Whenever one or more " + filter.getMessage() + " die, ");
     }
 
-    private DiesOneOrMoreCreatureTriggeredAbility(final DiesOneOrMoreCreatureTriggeredAbility ability) {
+    private DiesOneOrMoreTriggeredAbility(final DiesOneOrMoreTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
     }
 
     @Override
-    public DiesOneOrMoreCreatureTriggeredAbility copy() {
-        return new DiesOneOrMoreCreatureTriggeredAbility(this);
+    public DiesOneOrMoreTriggeredAbility copy() {
+        return new DiesOneOrMoreTriggeredAbility(this);
     }
 
     @Override
@@ -41,21 +41,22 @@ public class DiesOneOrMoreCreatureTriggeredAbility extends TriggeredAbilityImpl 
     }
 
     @Override
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (!event.isDiesEvent()) {
+            return false;
+        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        return permanent != null && filter.match(permanent, getControllerId(), this, game);
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return ((ZoneChangeBatchEvent) event)
-                .getEvents()
-                .stream()
-                .filter(ZoneChangeEvent::isDiesEvent)
-                .map(ZoneChangeEvent::getTargetId)
-                .map(game::getPermanentOrLKIBattlefield)
-                .filter(Objects::nonNull)
-                .anyMatch(p -> filter.match(p, getControllerId(), this, game));
+        return !getFilteredEvents((ZoneChangeBatchEvent) event, game).isEmpty();
     }
 
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return ((ZoneChangeBatchEvent) event)
-                .getEvents()
+        return getFilteredEvents((ZoneChangeBatchEvent) event, game)
                 .stream()
                 .allMatch(e -> TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, e, game));
     }

@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DiesOneOrMoreCreaturesTriggeredAbility;
+import mage.abilities.common.DiesOneOrMoreTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -41,7 +41,8 @@ public final class BloodSpatterAnalysis extends CardImpl {
         // Whenever one or more creatures die, mill a card and put a bloodstain counter on Blood Spatter Analysis.
         // Then sacrifice it if it has five or more bloodstain counters on it.
         // When you do, return target creature card from your graveyard to your hand.
-        ability = new DiesOneOrMoreCreaturesTriggeredAbility(new MillCardsControllerEffect(1));
+        ability = new DiesOneOrMoreTriggeredAbility(new MillCardsControllerEffect(1),
+                StaticFilters.FILTER_PERMANENT_CREATURES, false);
         ability.addEffect(new AddCountersSourceEffect(CounterType.BLOODSTAIN.createInstance()).concatBy("and"));
         ReflexiveTriggeredAbility returnAbility = new ReflexiveTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false);
         returnAbility.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));

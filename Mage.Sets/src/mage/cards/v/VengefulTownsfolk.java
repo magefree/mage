@@ -1,7 +1,7 @@
 package mage.cards.v;
 
 import mage.MageInt;
-import mage.abilities.common.DiesOneOrMoreCreatureTriggeredAbility;
+import mage.abilities.common.DiesOneOrMoreTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +35,7 @@ public final class VengefulTownsfolk extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Whenever one or more other creatures you control die, put a +1/+1 counter on Vengeful Townsfolk.
-        this.addAbility(new DiesOneOrMoreCreatureTriggeredAbility(
+        this.addAbility(new DiesOneOrMoreTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)),
                 filter,
                 false));
