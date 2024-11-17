@@ -25,7 +25,7 @@ public final class ChaliceOfDeath extends CardImpl {
         this.nightCard = true;
 
         // {tap}: Target player loses 5 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(5), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(5), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

@@ -37,7 +37,7 @@ public final class CennsTactician extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {W}, {tap}: Put a +1/+1 counter on target Soldier creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ColoredManaCost(ColoredManaSymbol.W));
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filterSoldier));
         this.addAbility(ability);

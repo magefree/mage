@@ -40,7 +40,7 @@ public final class CrystallineCrawler extends CardImpl {
                 new CountersSourceCount(CounterType.P1P1), false));
 
         // {T}: Put a +1/+1 counter on Crystalline Crawler.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new TapSourceCost()));
     }
 
     private CrystallineCrawler(final CrystallineCrawler card) {

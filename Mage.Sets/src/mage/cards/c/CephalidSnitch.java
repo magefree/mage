@@ -34,7 +34,7 @@ public final class CephalidSnitch extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Cephalid Snitch: Target creature loses protection from black until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CephalidSnitchEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new CephalidSnitchEffect(), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

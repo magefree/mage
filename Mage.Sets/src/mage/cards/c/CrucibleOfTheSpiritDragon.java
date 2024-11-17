@@ -37,7 +37,7 @@ public final class CrucibleOfTheSpiritDragon extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {1}, {T}: Put a storage counter on Crucible of the Spirit Dragon.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.STORAGE.createInstance()), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 

@@ -32,7 +32,7 @@ public final class CrypticCruiser extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
         // {2}{U}, Put a card an opponent owns from exile into that player's graveyard: Tap target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl<>("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new ManaCostsImpl<>("{2}{U}"));
         ability.addCost(new ExileOpponentsCardFromExileToGraveyardCost(true));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

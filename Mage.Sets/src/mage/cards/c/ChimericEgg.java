@@ -40,7 +40,7 @@ public final class ChimericEgg extends CardImpl {
         this.addAbility(new SpellCastOpponentTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), nonArtifactFilter, false));
 
         // Remove three charge counters from Chimeric Egg: Chimeric Egg becomes a 6/6 Construct artifact creature with trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(6, 6, "6/6 Construct artifact creature with trample")
                         .withSubType(SubType.CONSTRUCT)
                         .withType(CardType.ARTIFACT)

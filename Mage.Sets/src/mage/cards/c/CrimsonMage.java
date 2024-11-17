@@ -30,7 +30,7 @@ public final class CrimsonMage extends CardImpl {
 
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

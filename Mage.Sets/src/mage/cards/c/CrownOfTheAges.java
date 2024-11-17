@@ -41,7 +41,7 @@ public final class CrownOfTheAges extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {4}, {tap}: Attach target Aura attached to a creature to another creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrownOfTheAgesEffect(), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new CrownOfTheAgesEffect(), new GenericManaCost(4));
         ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

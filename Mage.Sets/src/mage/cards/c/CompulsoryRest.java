@@ -46,7 +46,7 @@ public final class CompulsoryRest extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
 
         // Enchanted creature has "{2}, Sacrifice this creature: You gain 2 life."
-        Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new GenericManaCost(2));
+        Ability grantedAbility = new SimpleActivatedAbility(new GainLifeEffect(2), new GenericManaCost(2));
         Cost cost = new SacrificeSourceCost();
         cost.setText("Sacrifice this creature");
         grantedAbility.addCost(cost);

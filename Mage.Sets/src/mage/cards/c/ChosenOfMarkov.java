@@ -41,7 +41,7 @@ public final class ChosenOfMarkov extends CardImpl {
 
         // {tap}, Tap an untapped Vampire you control: Transform Chosen of Markov.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TransformSourceEffect(), new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }

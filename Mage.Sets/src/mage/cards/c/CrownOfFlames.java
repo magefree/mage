@@ -33,10 +33,10 @@ public final class CrownOfFlames extends CardImpl {
         this.addAbility(ability);
         
         // {R}: Enchanted creature gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
+        this.addAbility(new SimpleActivatedAbility(new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R)));
 
         // {R}: Return Crown of Flames to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ColoredManaCost(ColoredManaSymbol.R)));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ColoredManaCost(ColoredManaSymbol.R)));
     }
 
     private CrownOfFlames(final CrownOfFlames card) {
