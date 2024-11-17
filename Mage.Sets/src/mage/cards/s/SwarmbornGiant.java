@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.MageInt;
@@ -62,7 +61,7 @@ public final class SwarmbornGiant extends CardImpl {
 
 class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
 
-    public SwarmbornGiantTriggeredAbility() {
+    SwarmbornGiantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
         setTriggerPhrase("When you're dealt combat damage, ");
     }
@@ -83,9 +82,10 @@ class SwarmbornGiantTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
-        if (dEvent.getTargetId().equals(this.getControllerId())) {
-            return dEvent.isCombatDamage() && dEvent.getAmount() > 0;
+        // all events in the batch are always relevant
+        if (isControlledBy(event.getTargetId()) && ((DamagedBatchForOnePlayerEvent) event).isCombatDamage()) {
+            this.getAllEffects().setValue("damage", event.getAmount());
+            return true;
         }
         return false;
     }

@@ -109,7 +109,7 @@ class SowerOfDiscordEntersBattlefieldEffect extends OneShotEffect {
 
 class SowerOfDiscordTriggeredAbility extends TriggeredAbilityImpl {
 
-    public SowerOfDiscordTriggeredAbility() {
+    SowerOfDiscordTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
     }
 
