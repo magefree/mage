@@ -32,7 +32,7 @@ public final class TriassicEgg extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {3}, {tap}: Put a hatchling counter on Triassic Egg.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new AddCountersSourceEffect(CounterType.HATCHLING.createInstance(), true),
                 new GenericManaCost(3));
         ability.addCost(new TapSourceCost());

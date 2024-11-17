@@ -22,7 +22,7 @@ public final class VoyagerStaff extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {2}, Sacrifice Voyager Staff: Exile target creature. Return the exiled card to the battlefield under its owner's control at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new ExileReturnBattlefieldNextEndStepTargetEffect().returnExiledOnly(true),
                 new GenericManaCost(2));
         ability.addCost(new SacrificeSourceCost());

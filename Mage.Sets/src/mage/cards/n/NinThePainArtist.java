@@ -34,7 +34,7 @@ public final class NinThePainArtist extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {X}{U}{R}, {tap}: Nin, the Pain Artist deals X damage to target creature. That creature's controller draws X cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(GetXValue.instance), new ManaCostsImpl<>("{X}{U}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

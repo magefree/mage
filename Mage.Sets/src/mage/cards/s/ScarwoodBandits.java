@@ -43,7 +43,7 @@ public final class ScarwoodBandits extends CardImpl {
         this.addAbility(new ForestwalkAbility());
 
         // {2}{G}, {tap}: Unless an opponent pays {2}, gain control of target artifact for as long as Scarwood Bandits remains on the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new DoUnlessAnyOpponentPaysEffect(
                         new ConditionalContinuousEffect(
                                 new GainControlTargetEffect(Duration.Custom, true),

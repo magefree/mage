@@ -26,7 +26,7 @@ public final class BlockadeRunner extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {U}: Blockade Runner is unblockable this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),
                 new ManaCostsImpl<>("{U}")));
     }

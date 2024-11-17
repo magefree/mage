@@ -28,7 +28,7 @@ public final class LifesparkSpellbomb extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {G}, Sacrifice Lifespark Spellbomb: Until end of turn, target land becomes a 3/3 creature that's still a land.
-        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability firstAbility = new SimpleActivatedAbility(
                 new BecomesCreatureTargetEffect(
                         new CreatureToken(3, 3),
                         false, true, Duration.EndOfTurn)

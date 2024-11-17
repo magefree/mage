@@ -28,7 +28,7 @@ public final class WallOfTanglecord extends CardImpl {
         this.power = new MageInt(0);
         this.toughness = new MageInt(6);
         this.addAbility(DefenderAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{G}")));
     }

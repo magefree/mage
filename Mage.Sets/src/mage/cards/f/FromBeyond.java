@@ -42,7 +42,7 @@ public final class FromBeyond extends CardImpl {
                 new EldraziScionToken()).withTextOptions(true)));
 
         // {1}{G}, Sacrifice From Beyond: Search your library for an Eldrazi card, reveal it, put it into your hand, then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true),
                 new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new SacrificeSourceCost());

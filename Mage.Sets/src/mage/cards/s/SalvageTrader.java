@@ -32,7 +32,7 @@ public final class SalvageTrader extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Exchange control of target artifact you control and target artifact an opponent controls with the same converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new ExchangeControlTargetEffect(Duration.EndOfGame,
                         "Exchange control of target artifact you control and target artifact an opponent controls with the same mana value", false, true),
                 new TapSourceCost());

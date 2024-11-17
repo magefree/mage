@@ -37,7 +37,7 @@ public final class OrderOfTheSacredTorch extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}, Pay 1 life: Counter target black spell.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new mage.abilities.effects.common.CounterTargetEffect(),
                 new TapSourceCost());
         ability.addCost(new PayLifeCost(1));

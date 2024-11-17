@@ -31,7 +31,7 @@ public final class ClockOfOmens extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // Tap two untapped artifacts you control: Untap target artifact.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new UntapTargetEffect(),
                 new TapTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
         ability.addTarget(new TargetArtifactPermanent());

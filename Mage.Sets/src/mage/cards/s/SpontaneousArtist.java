@@ -35,7 +35,7 @@ public final class SpontaneousArtist extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(1)));
 
         // Pay {E}: Target creature gains haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn),
                 new PayEnergyCost(1));
         ability.addTarget(new TargetCreaturePermanent());

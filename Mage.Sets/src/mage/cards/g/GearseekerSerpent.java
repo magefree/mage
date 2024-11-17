@@ -34,7 +34,7 @@ public final class GearseekerSerpent extends CardImpl {
         ).addHint(ArtifactYouControlHint.instance));
 
         // 5U: Gearseeker Serpent can't be blocked this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),
                 new ManaCostsImpl<>("{5}{U}")));
     }

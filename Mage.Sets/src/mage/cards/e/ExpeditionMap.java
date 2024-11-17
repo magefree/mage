@@ -25,7 +25,7 @@ public final class ExpeditionMap extends CardImpl {
 
         // {2}, {tap}, Sacrifice Expedition Map: Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInHandEffect(target, true),
                 new GenericManaCost(2));
         ability.addCost(new TapSourceCost());

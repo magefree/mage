@@ -28,7 +28,7 @@ public final class NarnamCobra extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {G}: Narnam Cobra gains deathtouch until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G)));
 
     }

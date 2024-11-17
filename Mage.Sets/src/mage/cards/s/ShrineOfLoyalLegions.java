@@ -43,7 +43,7 @@ public final class ShrineOfLoyalLegions extends CardImpl {
                 new SpellCastControllerTriggeredAbility(null, filter, false)));
 
         //{3}, {T}, Sacrifice Shrine of Loyal Legions: Create a 1/1 colorless Myr artifact creature token for each charge counter on Shrine of Loyal Legions.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new CreateTokenEffect(new PhyrexianMyrToken(), new CountersSourceCount(CounterType.CHARGE)),
                 new GenericManaCost(3));
         ability.addCost(new TapSourceCost());

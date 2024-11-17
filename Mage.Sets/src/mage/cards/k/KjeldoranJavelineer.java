@@ -36,7 +36,7 @@ public final class KjeldoranJavelineer extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{1}")));
 
         // {T}: Kjeldoran Javelineer deals damage equal to the number of age counters on it to target attacking or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(new CountersSourceCount(CounterType.AGE))
                         .setText("{this} deals damage equal to the number of age counters on it to target attacking or blocking creature."),
                  new TapSourceCost());

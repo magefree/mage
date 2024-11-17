@@ -33,7 +33,7 @@ public final class Atogatog extends CardImpl {
 
         DynamicValue xValue = SacrificeCostCreaturesPower.instance;
         // Sacrifice an Atog creature: Atogatog gets +X/+X until end of turn, where X is the sacrificed creature's power.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(xValue, xValue, Duration.EndOfTurn),
                 new SacrificeTargetCost(filter)));
         

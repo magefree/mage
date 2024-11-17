@@ -39,7 +39,7 @@ public final class SilklashSpider extends CardImpl {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // {X}{G}{G}: Silklash Spider deals X damage to each creature with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new DamageAllEffect(GetXValue.instance, filter),
                 new ManaCostsImpl<>("{X}{G}{G}")));
     }

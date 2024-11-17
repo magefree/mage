@@ -34,7 +34,7 @@ public final class ThallidDevourer extends CardImpl {
         // At the beginning of your upkeep, put a spore counter on Thallid Devourer.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.SPORE.createInstance())));
         // Remove three spore counters from Thallid Devourer: Create a 1/1 green Saproling creature token.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new CreateTokenEffect(new SaprolingToken()), 
                 new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
         // Sacrifice a Saproling: Thallid Devourer gets +1/+2 until end of turn.

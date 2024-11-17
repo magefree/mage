@@ -30,7 +30,7 @@ public final class FlowstoneMauler extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         
         // {R}: Flowstone Mauler gets +1/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(1, -1, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{R}")));
     }

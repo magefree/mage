@@ -38,7 +38,7 @@ public final class WhipgrassEntangler extends CardImpl {
 
         // {1}{W}: Until end of turn, target creature gains "This creature can't attack or block unless its controller pays {1} for each Cleric on the battlefield."
         Ability gainedAbility = new LinkedEffectIdStaticAbility(new WhipgrassEntanglerCantAttackUnlessYouPayEffect());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(gainedAbility, Duration.EndOfTurn).setText("Until end of turn, target creature gains \"This creature can't attack or block unless its controller pays {1} for each Cleric on the battlefield.\""),
                 new ManaCostsImpl<>("{1}{W}"));
         ability.addTarget(new TargetCreaturePermanent());

@@ -33,7 +33,7 @@ public final class ThaumaticCompass extends CardImpl {
         this.secondSideCardClazz = mage.cards.s.SpiresOfOrazca.class;
 
         // {3}, {T}: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 new GenericManaCost(3));
         ability.addCost(new TapSourceCost());

@@ -32,7 +32,7 @@ public final class RiptideDirector extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{U}{U}, {tap}: Draw a card for each Wizard you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)),
                 new ManaCostsImpl<>("{2}{U}{U}"));
         ability.addCost(new TapSourceCost());

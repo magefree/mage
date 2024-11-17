@@ -29,7 +29,7 @@ public final class YewSpirit extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{G}{G}: Yew Spirit gets +X/+X until end of turn, where X is its power.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{2}{G}{G}")));
     }

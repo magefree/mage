@@ -41,7 +41,7 @@ public final class SkirkFireMarshal extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
 
         // Tap five untapped Goblins you control: Skirk Fire Marshal deals 10 damage to each creature and each player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new DamageEverythingEffect(10),
                 new TapTargetCost(new TargetControlledPermanent(5,5, filter, true)));
         this.addAbility(ability);

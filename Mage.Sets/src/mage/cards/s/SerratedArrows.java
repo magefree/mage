@@ -43,7 +43,7 @@ public final class SerratedArrows extends CardImpl {
         ));
 
         // {T}, Remove an arrowhead counter from Serrated Arrows: Put a -1/-1 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new AddCountersTargetEffect(CounterType.M1M1.createInstance()),
                 new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.ARROWHEAD.createInstance()));
