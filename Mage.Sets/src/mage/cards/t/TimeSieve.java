@@ -27,7 +27,7 @@ public final class TimeSieve extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{U}{B}");
 
         // {tap}, Sacrifice five artifacts: Take an extra turn after this one.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddExtraTurnControllerEffect(), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(5, filter));
         this.addAbility(ability);
     }

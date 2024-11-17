@@ -20,7 +20,7 @@ public final class Tanglebloom extends CardImpl {
 
     public Tanglebloom(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{1}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(1), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // {1}, {tap}: You gain 1 life.

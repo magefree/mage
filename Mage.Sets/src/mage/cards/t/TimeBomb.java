@@ -34,7 +34,7 @@ public final class TimeBomb extends CardImpl {
         // {1}, {tap}, Sacrifice Time Bomb: Time Bomb deals damage equal to the number of time counters on it to each creature and each player.
         Effect effect = new DamageEverythingEffect(new CountersSourceCount(CounterType.TIME), new FilterCreaturePermanent());
         effect.setText("{this} deals damage equal to the number of time counters on it to each creature and each player");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(effect, new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

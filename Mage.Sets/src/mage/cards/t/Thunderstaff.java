@@ -31,7 +31,7 @@ public final class Thunderstaff extends CardImpl {
         // As long as Thunderstaff is untapped, if a creature would deal combat damage to you, prevent 1 of that damage.
         this.addAbility(new SimpleStaticAbility(new ThunderstaffPreventionEffect()));
         // {2}, {tap}: Attacking creatures get +1/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,0,Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new BoostAllEffect(1,0,Duration.EndOfTurn, StaticFilters.FILTER_ATTACKING_CREATURES, false), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

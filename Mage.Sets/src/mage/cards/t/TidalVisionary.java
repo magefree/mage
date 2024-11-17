@@ -29,7 +29,7 @@ public final class TidalVisionary extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Target creature becomes the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesColorTargetEffect(Duration.EndOfTurn),
+        Ability ability = new SimpleActivatedAbility(new BecomesColorTargetEffect(Duration.EndOfTurn),
             new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

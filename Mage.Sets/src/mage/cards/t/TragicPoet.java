@@ -36,7 +36,7 @@ public final class TragicPoet extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}, Sacrifice Tragic Poet: Return target enchantment card from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect()
+        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect()
                 .setText("Return target enchantment card from your graveyard to your hand"), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(filter));

@@ -35,7 +35,7 @@ public final class TolarianSentinel extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {U}, {tap}, Discard a card: Return target permanent you control to its owner's hand.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(new ReturnToHandTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
         ability.addTarget(new TargetControlledPermanent());

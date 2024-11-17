@@ -38,7 +38,7 @@ public final class ThallidDevourer extends CardImpl {
                 new CreateTokenEffect(new SaprolingToken()), 
                 new RemoveCountersSourceCost(CounterType.SPORE.createInstance(3))));
         // Sacrifice a Saproling: Thallid Devourer gets +1/+2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(1, 2, Duration.EndOfTurn), 
                 new SacrificeTargetCost(filter)));
     }

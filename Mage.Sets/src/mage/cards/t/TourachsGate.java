@@ -69,7 +69,7 @@ public final class TourachsGate extends CardImpl {
         this.addAbility(ability);
 
         // Sacrifice a Thrull: Put three time counters on Tourach's Gate.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.TIME.createInstance(3)), 
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(3)), 
                 new SacrificeTargetCost(filterThrull)));
         
         // At the beginning of your upkeep, remove a time counter from Tourach's Gate. If there are no time counters on Tourach's Gate, sacrifice it.
