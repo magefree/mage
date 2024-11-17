@@ -35,7 +35,7 @@ public final class BasandraBattleSeraph extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Players can't cast spells during combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BasandraBattleSeraphEffect()));
+        this.addAbility(new SimpleStaticAbility(new BasandraBattleSeraphEffect()));
 
         // {R}: Target creature attacks this turn if able.
         Effect effect = new AttacksIfAbleTargetEffect(Duration.EndOfTurn);

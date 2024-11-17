@@ -33,7 +33,7 @@ public final class BubblingBeebles extends CardImpl {
                 new CantBeBlockedSourceEffect(),
                 new DefendingPlayerControlsSourceAttackingCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT));
         effect.setText("{this} can't be blocked as long as defending player controls an enchantment");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private BubblingBeebles(final BubblingBeebles card) {

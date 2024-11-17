@@ -36,7 +36,7 @@ public final class BelligerentSliver extends CardImpl {
         // Sliver creatures you control have menace. (They can't be blocked except by two or more creatures.)"
         Effect effect = new GainAbilityAllEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter);
         effect.setText("Sliver creatures you control have menace. (They can't be blocked except by two or more creatures.)");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private BelligerentSliver(final BelligerentSliver card) {

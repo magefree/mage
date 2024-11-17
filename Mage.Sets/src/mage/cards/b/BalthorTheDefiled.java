@@ -37,7 +37,7 @@ public final class BalthorTheDefiled extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Minion creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield,
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield,
                 new FilterCreaturePermanent(SubType.MINION, "Minion creatures"), false)));
 
         // {B}{B}{B}, Exile Balthor the Defiled: Each player returns all black and all red creature cards from their graveyard to the battlefield.

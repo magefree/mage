@@ -29,7 +29,7 @@ public final class BattlefrontKrushok extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Battlefront Krushok can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByMoreThanOneSourceEffect()));
 
         // Each creature you control with a +1/+1 counter on it can't be blocked by more than one creature.
         this.addAbility(new SimpleStaticAbility(

@@ -36,7 +36,7 @@ public final class BoggartSpriteChaser extends CardImpl {
         FilterPermanent filter = new FilterPermanent(SubType.FAERIE, "Faerie");
         Effect effect = new BoostSourceWhileControlsEffect(filter, 1, 1);
         effect.setText("As long as you control a Faerie, {this} gets +1/+1");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter), "and has flying"));

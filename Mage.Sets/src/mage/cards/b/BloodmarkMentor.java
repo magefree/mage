@@ -36,7 +36,7 @@ public final class BloodmarkMentor extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Red creatures you control have first strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
     private BloodmarkMentor(final BloodmarkMentor card) {

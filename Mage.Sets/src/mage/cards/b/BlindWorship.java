@@ -39,7 +39,7 @@ public final class BlindWorship extends CardImpl {
         Ability attachedAbility = new AttacksTriggeredAbility(new BoostControlledEffect(SourcePermanentPowerValue.NOT_NEGATIVE, SourcePermanentPowerValue.NOT_NEGATIVE, Duration.EndOfTurn, StaticFilters.FILTER_PERMANENT_CREATURE, true), false);
         Effect gainAbilityEffect = new GainAbilityAttachedEffect(attachedAbility, AttachmentType.AURA);
         gainAbilityEffect.setText("Enchanted creature has \"Whenever this creature attacks, each other creature you control gets +X/+X until end of turn, where X is this creature's power\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, gainAbilityEffect));
+        this.addAbility(new SimpleStaticAbility(gainAbilityEffect));
 
     }
 

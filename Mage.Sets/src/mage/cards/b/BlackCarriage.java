@@ -35,7 +35,7 @@ public final class BlackCarriage extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Black Carriage doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
 
         // Sacrifice a creature: Untap Black Carriage. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD,

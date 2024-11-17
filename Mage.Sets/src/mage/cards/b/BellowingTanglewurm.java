@@ -36,7 +36,7 @@ public final class BellowingTanglewurm extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(IntimidateAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(IntimidateAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(IntimidateAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
 
     private BellowingTanglewurm(final BellowingTanglewurm card) {

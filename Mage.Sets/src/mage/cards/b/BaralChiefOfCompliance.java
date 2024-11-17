@@ -40,7 +40,7 @@ public final class BaralChiefOfCompliance extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Instant and sorcery spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Whenever a spell or ability you control counters a spell, you may draw a card. If you do, discard a card.
         this.addAbility(new SpellCounteredControllerTriggeredAbility(new DrawDiscardControllerEffect(true)));

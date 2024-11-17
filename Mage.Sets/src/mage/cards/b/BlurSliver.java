@@ -28,7 +28,7 @@ public final class BlurSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sliver creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield,
                         new FilterControlledCreaturePermanent(SubType.SLIVER, "Sliver creatures you control"))));
         
