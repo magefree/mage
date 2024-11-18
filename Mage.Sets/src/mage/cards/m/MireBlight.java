@@ -33,7 +33,7 @@ public final class MireBlight extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // When enchanted creature is dealt damage, destroy it.
-        this.addAbility(new DealtDamageAttachedTriggeredAbility(new DestroyAttachedToEffect("it"), false).setTriggerPhrase("When enchanted creature is dealt damage, "));
+        this.addAbility(new DealtDamageAttachedTriggeredAbility(new DestroyAttachedToEffect("it")).setTriggerPhrase("When enchanted creature is dealt damage, "));
     }
 
     private MireBlight(final MireBlight card) {

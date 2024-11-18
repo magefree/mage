@@ -20,8 +20,8 @@ public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl im
 
     private final SetTargetPointer setTargetPointer;
 
-    public DealtDamageAttachedTriggeredAbility(Effect effect, boolean optional) {
-        this(Zone.BATTLEFIELD, effect, optional, SetTargetPointer.NONE);
+    public DealtDamageAttachedTriggeredAbility(Effect effect) {
+        this(Zone.BATTLEFIELD, effect, false, SetTargetPointer.NONE);
     }
 
     public DealtDamageAttachedTriggeredAbility(Zone zone, Effect effect, boolean optional, SetTargetPointer setTargetPointer) {
@@ -48,16 +48,16 @@ public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl im
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         // all events in the batch are always relevant if triggers at all
-        Permanent enchantment = getSourcePermanentOrLKI(game);
+        Permanent attachment = getSourcePermanentOrLKI(game);
         UUID targetId = event.getTargetId();
-        if (enchantment != null && enchantment.getAttachedTo() != null && targetId.equals(enchantment.getAttachedTo())) {
+        if (attachment != null && attachment.getAttachedTo() != null && targetId.equals(attachment.getAttachedTo())) {
             getEffects().setValue("damage", event.getAmount());
             switch (setTargetPointer) {
                 case PERMANENT:
                     getEffects().setTargetPointer(new FixedTarget(targetId, game));
                     return true;
                 case PLAYER:
-                    getEffects().setTargetPointer(new FixedTarget(enchantment.getControllerId()));
+                    getEffects().setTargetPointer(new FixedTarget(attachment.getControllerId()));
                     return true;
                 default:
                     throw new IllegalArgumentException("Unsupported SetTargetPointer in DealtDamageAttachedTriggeredAbility");
