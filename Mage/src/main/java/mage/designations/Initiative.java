@@ -9,7 +9,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Controllable;
 import mage.game.Game;
-import mage.game.events.DamagedBatchForPlayersEvent;
+import mage.game.events.DamagedBatchForOnePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -74,7 +74,7 @@ class InitiativeDamageTriggeredAbility extends TriggeredAbilityImpl implements B
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        UUID playerId = getFilteredEvents((DamagedBatchForPlayersEvent) event, game)
+        UUID playerId = getFilteredEvents((DamagedBatchForOnePlayerEvent) event, game)
                 .stream()
                 .map(GameEvent::getSourceId)
                 .map(game::getPermanent)
