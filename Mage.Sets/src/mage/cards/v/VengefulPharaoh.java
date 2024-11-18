@@ -1,6 +1,7 @@
 package mage.cards.v;
 
 import mage.MageInt;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.common.SourceInGraveyardCondition;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -14,6 +15,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePermanentEvent;
 import mage.game.events.DamagedBatchForOnePlayerEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAttackingCreature;
@@ -49,7 +51,7 @@ public final class VengefulPharaoh extends CardImpl {
     }
 }
 
-class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl {
+class VengefulPharaohTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedEvent> {
 
     VengefulPharaohTriggeredAbility() {
         super(Zone.GRAVEYARD, new DestroyTargetEffect(), false);

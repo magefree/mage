@@ -1,10 +1,12 @@
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -14,9 +16,9 @@ import java.util.UUID;
 /**
  * @author LoneFox
  */
-public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
+public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
-    protected SetTargetPointer setTargetPointer;
+    private final SetTargetPointer setTargetPointer;
 
     public DealtDamageAttachedTriggeredAbility(Effect effect, boolean optional) {
         this(Zone.BATTLEFIELD, effect, optional, SetTargetPointer.NONE);
@@ -45,21 +47,21 @@ public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent enchantment = game.getPermanent(sourceId);
+        // all events in the batch are always relevant if triggers at all
+        Permanent enchantment = getSourcePermanentOrLKI(game);
         UUID targetId = event.getTargetId();
         if (enchantment != null && enchantment.getAttachedTo() != null && targetId.equals(enchantment.getAttachedTo())) {
-            for (Effect effect : this.getEffects()) {
-                effect.setValue("damage", event.getAmount());
-                switch (setTargetPointer) {
-                    case PERMANENT:
-                        effect.setTargetPointer(new FixedTarget(targetId, game));
-                        break;
-                    case PLAYER:
-                        effect.setTargetPointer(new FixedTarget(game.getPermanentOrLKIBattlefield(targetId).getControllerId()));
-                        break;
-                }
+            getEffects().setValue("damage", event.getAmount());
+            switch (setTargetPointer) {
+                case PERMANENT:
+                    getEffects().setTargetPointer(new FixedTarget(targetId, game));
+                    return true;
+                case PLAYER:
+                    getEffects().setTargetPointer(new FixedTarget(enchantment.getControllerId()));
+                    return true;
+                default:
+                    throw new IllegalArgumentException("Unsupported SetTargetPointer in DealtDamageAttachedTriggeredAbility");
             }
-            return true;
         }
         return false;
     }

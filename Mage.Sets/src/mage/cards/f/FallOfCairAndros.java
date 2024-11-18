@@ -1,6 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -48,7 +49,7 @@ public final class FallOfCairAndros extends CardImpl {
     }
 }
 
-class FallOfCairAndrosTriggeredAbility extends TriggeredAbilityImpl {
+class FallOfCairAndrosTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     FallOfCairAndrosTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
@@ -70,6 +71,7 @@ class FallOfCairAndrosTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        // all events in the batch are always relevant if triggers at all
         Permanent permanent = game.getPermanent(event.getTargetId());
         if (permanent == null || !permanent.isCreature(game)
                 || !game.getOpponents(getControllerId()).contains(permanent.getControllerId())) {
