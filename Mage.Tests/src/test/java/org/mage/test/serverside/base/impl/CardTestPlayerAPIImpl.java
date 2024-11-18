@@ -108,7 +108,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_STACK_SIZE = "STACK_SIZE";
     public static final String CHECK_COMMAND_STACK_OBJECT = "STACK_OBJECT";
     public static final String CHECK_COMMAND_MONARCH = "MONARCH";
-    public static final String CHECK_COMMAND_INITIATIVE = "INITIATIVE";
 
     // TODO: add target player param to commands
     public static final String SHOW_COMMAND_LIBRARY = "LIBRARY";
@@ -536,10 +535,6 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
     public void checkMonarch(String checkName, int turnNum, PhaseStep step, TestPlayer player, TestPlayer monarch) {
         check(checkName, turnNum, step, player, CHECK_COMMAND_MONARCH, (monarch == null ? "null" : monarch.getId().toString()));
-    }
-
-    public void checkInitative(String checkName, int turnNum, PhaseStep step, TestPlayer player, TestPlayer withInitiative) {
-        check(checkName, turnNum, step, player, CHECK_COMMAND_INITIATIVE, (withInitiative == null ? "null" : withInitiative.getId().toString()));
     }
 
     // show commands

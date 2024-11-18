@@ -979,16 +979,9 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
-                        // check monarch: player id with monarch
+                        // check monarch: plyer id with monarch
                         if (params[0].equals(CHECK_COMMAND_MONARCH) && params.length == 2) {
                             assertMonarch(action, game, params[1].equals("null") ? null : game.getPlayer(UUID.fromString(params[1])));
-                            actions.remove(action);
-                            wasProccessed = true;
-                        }
-
-                        // check initiative: player id with monarch
-                        if (params[0].equals(CHECK_COMMAND_INITIATIVE) && params.length == 2) {
-                            assertInitiative(action, game, params[1].equals("null") ? null : game.getPlayer(UUID.fromString(params[1])));
                             actions.remove(action);
                             wasProccessed = true;
                         }
@@ -1732,20 +1725,6 @@ public class TestPlayer implements Player {
             // must not be
             if (game.getMonarchId() != null) {
                 Assert.fail(action.getActionName() + " - game must be without monarch, but found " + game.getPlayer(game.getMonarchId()));
-            }
-        }
-    }
-
-    private void assertInitiative(PlayerAction action, Game game, Player player) {
-        if (player != null) {
-            // must be
-            if (game.getInitiativeId() != player.getId()) {
-                Assert.fail(action.getActionName() + " - game must have " + player.getName() + " as player with the initiative, but found " + game.getPlayer(game.getInitiativeId()));
-            }
-        } else {
-            // must not be
-            if (game.getInitiativeId() != null) {
-                Assert.fail(action.getActionName() + " - game must be without initiative, but found " + game.getPlayer(game.getInitiativeId()));
             }
         }
     }
