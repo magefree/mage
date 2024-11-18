@@ -59,6 +59,8 @@ public class DealtDamageAttachedTriggeredAbility extends TriggeredAbilityImpl im
                 case PLAYER:
                     getEffects().setTargetPointer(new FixedTarget(attachment.getControllerId()));
                     return true;
+                case NONE:
+                    return true;
                 default:
                     throw new IllegalArgumentException("Unsupported SetTargetPointer in DealtDamageAttachedTriggeredAbility");
             }
