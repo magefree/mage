@@ -3,6 +3,7 @@ package mage.cards.t;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -12,6 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 
 import java.util.UUID;
@@ -44,7 +46,7 @@ public final class Tamanoa extends CardImpl {
     }
 }
 
-class TamanoaDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
+class TamanoaDealsDamageTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedEvent> {
 
     TamanoaDealsDamageTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(SavedDamageValue.MUCH), false);
