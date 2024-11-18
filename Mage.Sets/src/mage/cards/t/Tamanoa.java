@@ -1,12 +1,10 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -16,8 +14,9 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class Tamanoa extends CardImpl {
@@ -30,7 +29,7 @@ public final class Tamanoa extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whenever a noncreature source you control deals damage, you gain that much life.
-        Ability ability = new TamanoaDealsDamageTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(SavedDamageValue.MUCH), false);
+        Ability ability = new TamanoaDealsDamageTriggeredAbility();
 
         this.addAbility(ability);
     }
@@ -47,8 +46,8 @@ public final class Tamanoa extends CardImpl {
 
 class TamanoaDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
 
-    public TamanoaDealsDamageTriggeredAbility(Zone zone, Effect effect, boolean optional) {
-        super(zone, effect, optional);
+    TamanoaDealsDamageTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new GainLifeEffect(SavedDamageValue.MUCH), false);
         setTriggerPhrase("Whenever a noncreature source you control deals damage, ");
     }
 
@@ -63,21 +62,17 @@ class TamanoaDealsDamageTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT
-                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_BY_SOURCE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         MageObject eventSourceObject = game.getObject(event.getSourceId());
-        if (eventSourceObject != null && !eventSourceObject.isCreature(game)) {
-            if (isControlledBy(game.getControllerId(event.getSourceId()))) {
-                this.getEffects().forEach((effect) -> {
-                    effect.setValue("damage", event.getAmount());
-                });
-                return true;
-            }
+        if (eventSourceObject == null || eventSourceObject.isCreature(game)
+                || !isControlledBy(game.getControllerId(event.getSourceId()))) {
+            return false;
         }
-        return false;
+        getEffects().setValue("damage", event.getAmount());
+        return true;
     }
 }
