@@ -1,16 +1,16 @@
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedBatchForOnePlayerEvent;
-import mage.game.events.GameEvent;
+import mage.game.events.*;
 
 /**
  * @author xenohedron
  */
-public class OpponentDealtNoncombatDamageTriggeredAbility extends TriggeredAbilityImpl {
+public class OpponentDealtNoncombatDamageTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     public OpponentDealtNoncombatDamageTriggeredAbility(Effect effect) {
         this(Zone.BATTLEFIELD, effect, false);

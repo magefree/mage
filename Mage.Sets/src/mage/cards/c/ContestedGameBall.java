@@ -1,6 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -23,6 +24,7 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePlayerEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
@@ -66,7 +68,7 @@ public final class ContestedGameBall extends CardImpl {
     }
 }
 
-class ContestedGameBallTriggeredAbility extends TriggeredAbilityImpl {
+class ContestedGameBallTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     ContestedGameBallTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ContestedGameBallEffect());
