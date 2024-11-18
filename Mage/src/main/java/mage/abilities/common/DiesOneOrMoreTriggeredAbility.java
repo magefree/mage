@@ -56,7 +56,8 @@ public class DiesOneOrMoreTriggeredAbility extends TriggeredAbilityImpl implemen
 
     @Override
     public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return getFilteredEvents((ZoneChangeBatchEvent) event, game)
+        return ((ZoneChangeBatchEvent) event)
+                .getEvents()
                 .stream()
                 .allMatch(e -> TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, e, game));
     }
