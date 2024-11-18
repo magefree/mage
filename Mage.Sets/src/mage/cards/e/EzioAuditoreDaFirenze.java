@@ -5,9 +5,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledSpellsEffect;
@@ -19,6 +21,8 @@ import mage.cards.CardSetInfo;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.Target;
+import mage.target.TargetPlayer;
 
 /**
  *
@@ -48,12 +52,10 @@ public final class EzioAuditoreDaFirenze extends CardImpl {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledSpellsEffect(new FreerunningAbility("{B}{B}"), filter)));
         // Whenever Ezio deals combat damage to a player, you may pay {W}{U}{B}{R}{G} if that player has 10 or less life. When you do, that player loses the game.
         this.addAbility(
-                new ConditionalTriggeredAbility(
-                        new DealsCombatDamageToAPlayerTriggeredAbility(
-                                new DoIfCostPaid(
-                                        new LoseGameTargetPlayerEffect(),new ManaCostsImpl<>("{W}{U}{B}{R}{G}")
-                                ), false, true
-                        ), EzioAuditoreDaFirenzeCondition.instance, "Whenever {this} deals combat damage to a player, you may pay {W}{U}{B}{R}{G} if that player has 10 or less life. When you do, that player loses the game."
+                new DealsCombatDamageToAPlayerTriggeredAbility(
+                        new ConditionalOneShotEffect(new DoIfCostPaid(
+                                new EzioAuditoreDaFirenzeCreateReflexiveTriggerEffect(), new ManaCostsImpl<>("{W}{U}{B}{R}{G}")
+                        ), EzioAuditoreDaFirenzeCondition.instance, "you may pay {W}{U}{B}{R}{G} if that player has 10 or less life. When you do, that player loses the game."), false, true
                 )
         );
 
@@ -81,5 +83,31 @@ enum EzioAuditoreDaFirenzeCondition implements Condition {
         }
         Player player = game.getPlayer(playerId);
         return player != null && player.getLife() <= 10;
+    }
+}
+
+class EzioAuditoreDaFirenzeCreateReflexiveTriggerEffect extends OneShotEffect {
+    EzioAuditoreDaFirenzeCreateReflexiveTriggerEffect() {
+        super(Outcome.Benefit);
+        staticText = "When you do, that player loses the game.";
+    }
+
+    private EzioAuditoreDaFirenzeCreateReflexiveTriggerEffect(final EzioAuditoreDaFirenzeCreateReflexiveTriggerEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public EzioAuditoreDaFirenzeCreateReflexiveTriggerEffect copy() {
+        return new EzioAuditoreDaFirenzeCreateReflexiveTriggerEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(new LoseGameTargetPlayerEffect(), false, "When you do, that player loses the game");
+        Target target = new TargetPlayer();
+        target.addTarget(getTargetPointer().getFirst(game, source), source, game);
+        ability.addTarget(target);
+        game.fireReflexiveTriggeredAbility(ability, source);
+        return true;
     }
 }
