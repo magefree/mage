@@ -111,6 +111,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Flooded Grove", 276, Rarity.RARE, mage.cards.f.FloodedGrove.class));
         cards.add(new SetCardInfo("Florian, Voldaren Scion", 217, Rarity.RARE, mage.cards.f.FlorianVoldarenScion.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 277, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
+        cards.add(new SetCardInfo("Formless Genesis", 34, Rarity.RARE, mage.cards.f.FormlessGenesis.class));
         cards.add(new SetCardInfo("Geothermal Bog", 278, Rarity.COMMON, mage.cards.g.GeothermalBog.class));
         cards.add(new SetCardInfo("Giant Adephage", 179, Rarity.MYTHIC, mage.cards.g.GiantAdephage.class));
         cards.add(new SetCardInfo("Gleeful Arsonist", 27, Rarity.RARE, mage.cards.g.GleefulArsonist.class));
