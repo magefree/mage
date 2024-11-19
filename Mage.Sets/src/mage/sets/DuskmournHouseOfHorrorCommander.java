@@ -77,6 +77,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Crypt Ghast", 368, Rarity.MYTHIC, mage.cards.c.CryptGhast.class));
         cards.add(new SetCardInfo("Culling Ritual", 85, Rarity.RARE, mage.cards.c.CullingRitual.class));
         cards.add(new SetCardInfo("Cultivate", 174, Rarity.COMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Curator Beastie", 30, Rarity.RARE, mage.cards.c.CuratorBeastie.class));
         cards.add(new SetCardInfo("Damn", 369, Rarity.MYTHIC, mage.cards.d.Damn.class));
         cards.add(new SetCardInfo("Darkmoss Bridge", 269, Rarity.COMMON, mage.cards.d.DarkmossBridge.class));
         cards.add(new SetCardInfo("Deadbridge Chant", 215, Rarity.MYTHIC, mage.cards.d.DeadbridgeChant.class));
