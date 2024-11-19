@@ -222,6 +222,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shark Typhoon", 127, Rarity.RARE, mage.cards.s.SharkTyphoon.class));
         cards.add(new SetCardInfo("Shigeki, Jukai Visionary", 198, Rarity.RARE, mage.cards.s.ShigekiJukaiVisionary.class));
         cards.add(new SetCardInfo("Shivan Gorge", 297, Rarity.RARE, mage.cards.s.ShivanGorge.class));
+        cards.add(new SetCardInfo("Shriekwood Devourer", 35, Rarity.RARE, mage.cards.s.ShriekwoodDevourer.class));
         cards.add(new SetCardInfo("Sigil of the Empty Throne", 103, Rarity.RARE, mage.cards.s.SigilOfTheEmptyThrone.class));
         cards.add(new SetCardInfo("Sign in Blood", 156, Rarity.COMMON, mage.cards.s.SignInBlood.class));
         cards.add(new SetCardInfo("Simic Growth Chamber", 298, Rarity.UNCOMMON, mage.cards.s.SimicGrowthChamber.class));
