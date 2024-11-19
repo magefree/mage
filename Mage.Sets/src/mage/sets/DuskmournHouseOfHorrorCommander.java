@@ -115,6 +115,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Geothermal Bog", 278, Rarity.COMMON, mage.cards.g.GeothermalBog.class));
         cards.add(new SetCardInfo("Giant Adephage", 179, Rarity.MYTHIC, mage.cards.g.GiantAdephage.class));
         cards.add(new SetCardInfo("Gleeful Arsonist", 27, Rarity.RARE, mage.cards.g.GleefulArsonist.class));
+        cards.add(new SetCardInfo("Glitch Interpreter", 13, Rarity.RARE, mage.cards.g.GlitchInterpreter.class));
         cards.add(new SetCardInfo("Gnarlwood Dryad", 180, Rarity.UNCOMMON, mage.cards.g.GnarlwoodDryad.class));
         cards.add(new SetCardInfo("Golgari Rot Farm", 279, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Golgari Signet", 246, Rarity.UNCOMMON, mage.cards.g.GolgariSignet.class));
