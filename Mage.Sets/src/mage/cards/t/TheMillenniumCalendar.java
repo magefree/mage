@@ -1,6 +1,7 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -23,7 +24,6 @@ import mage.game.events.UntappedBatchEvent;
 import mage.game.events.UntappedEvent;
 import mage.game.permanent.Permanent;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -61,13 +61,13 @@ public final class TheMillenniumCalendar extends CardImpl {
     }
 }
 
-class TheMillenniumCalendarTriggeredAbility extends TriggeredAbilityImpl {
+class TheMillenniumCalendarTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<UntappedEvent> {
 
-    public TheMillenniumCalendarTriggeredAbility() {
+    TheMillenniumCalendarTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);
     }
 
-    protected TheMillenniumCalendarTriggeredAbility(final TheMillenniumCalendarTriggeredAbility ability) {
+    private TheMillenniumCalendarTriggeredAbility(final TheMillenniumCalendarTriggeredAbility ability) {
         super(ability);
     }
 
@@ -82,26 +82,23 @@ class TheMillenniumCalendarTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEvent(UntappedEvent event, Game game) {
+        if (!event.isAnUntapStepEvent()) {
+            return false;
+        }
+        Permanent permanent = game.getPermanent(event.getTargetId());
+        return permanent != null && isControlledBy(permanent.getControllerId());
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (!game.isActivePlayer(getControllerId())) {
             return false;
         }
-        UntappedBatchEvent batchEvent = (UntappedBatchEvent) event;
-        int count = batchEvent
-                .getEvents()
-                .stream()
-                .filter(UntappedEvent::isAnUntapStepEvent)
-                .map(UntappedEvent::getTargetId)
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .filter(p -> p.getControllerId().equals(getControllerId()))
-                .mapToInt(p -> 1)
-                .sum();
-
-        if (count <= 0) {
+        int count = getFilteredEvents((UntappedBatchEvent) event, game).size();
+        if (count == 0) {
             return false;
         }
-
         this.getEffects().clear();
         this.addEffect(new AddCountersSourceEffect(CounterType.TIME.createInstance(count)));
         this.getHints().clear();
@@ -121,7 +118,7 @@ class TheMillenniumCalendarTriggeredAbility extends TriggeredAbilityImpl {
  */
 class TheMillenniumCalendarStateTriggeredAbility extends StateTriggeredAbility {
 
-    public TheMillenniumCalendarStateTriggeredAbility() {
+    TheMillenniumCalendarStateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
         withRuleTextReplacement(true);
         addEffect(new LoseLifeOpponentsEffect(1000).setText("and each opponent loses 1,000 life"));

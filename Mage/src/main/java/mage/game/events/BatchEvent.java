@@ -39,6 +39,9 @@ public abstract class BatchEvent<T extends GameEvent> extends GameEvent {
         if (firstEvent instanceof BatchEvent) { // sanity check, if you need it then think twice and research carefully
             throw new UnsupportedOperationException("Wrong code usage: nesting batch events not supported");
         }
+        if (!eventType.isBatch()) { // sanity check, a batch event should use a batch EventType
+            throw new IllegalArgumentException("Wrong code usage: batch event should use batch EventType: " + eventType);
+        }
         this.addEvent(firstEvent);
     }
 
@@ -50,6 +53,9 @@ public abstract class BatchEvent<T extends GameEvent> extends GameEvent {
         this.singleTargetId = false;
         this.singleSourceId = false;
         this.singlePlayerId = false;
+        if (!eventType.isBatch()) { // sanity check, a batch event should use a batch EventType
+            throw new IllegalArgumentException("Wrong code usage: batch event should use batch EventType: " + eventType);
+        }
     }
 
     public void addEvent(T event) {

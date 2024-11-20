@@ -1,26 +1,26 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.SacrificeSourceUnlessConditionEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.watchers.common.BloodthirstWatcher;
+
+import java.util.UUID;
 
 /**
  *
@@ -36,7 +36,7 @@ public final class WarElemental extends CardImpl {
         this.toughness = new MageInt(1);
 
         // When War Elemental enters the battlefield, sacrifice it unless an opponent was dealt damage this turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(new OpponentWasDealtDamageCondition())));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessConditionEffect(WarElementalCondition.instance)));
 
         // Whenever an opponent is dealt damage, put that many +1/+1 counters on War Elemental.
         this.addAbility(new WarElementalTriggeredAbility());
@@ -53,10 +53,11 @@ public final class WarElemental extends CardImpl {
     }
 }
 
-class WarElementalTriggeredAbility extends TriggeredAbilityImpl {
+class WarElementalTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
-    public WarElementalTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new WarElementalEffect(), false);
+    WarElementalTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(), SavedDamageValue.MANY), false);
+        setTriggerPhrase("Whenever an opponent is dealt damage, ");
     }
 
     private WarElementalTriggeredAbility(final WarElementalTriggeredAbility ability) {
@@ -75,44 +76,18 @@ class WarElementalTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (game.getOpponents(this.controllerId).contains(event.getTargetId())) {
-            this.getEffects().get(0).setValue("damageAmount", event.getAmount());
+        // all events in the batch are always relevant
+        if (game.getOpponents(getControllerId()).contains(event.getTargetId())) {
+            this.getAllEffects().setValue("damage", event.getAmount());
             return true;
         }
         return false;
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever an opponent is dealt damage, put that many +1/+1 counters on {this}.";
-    }
 }
 
-class WarElementalEffect extends OneShotEffect {
-
-    WarElementalEffect() {
-        super(Outcome.Benefit);
-    }
-
-    private WarElementalEffect(final WarElementalEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public WarElementalEffect copy() {
-        return new WarElementalEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return new AddCountersSourceEffect(CounterType.P1P1.createInstance((Integer) this.getValue("damageAmount"))).apply(game, source);
-    }
-}
-
-class OpponentWasDealtDamageCondition implements Condition {
-
-    public OpponentWasDealtDamageCondition() {
-    }
+enum WarElementalCondition implements Condition {
+    instance;
 
     @Override
     public boolean apply(Game game, Ability source) {

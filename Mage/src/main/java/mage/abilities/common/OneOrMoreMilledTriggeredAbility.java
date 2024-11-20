@@ -1,19 +1,21 @@
-
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.SavedMilledValue;
 import mage.abilities.effects.Effect;
+import mage.cards.Card;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.MilledBatchAllEvent;
+import mage.game.events.MilledCardEvent;
 
 /**
  * @author Susucr
  */
-public class OneOrMoreMilledTriggeredAbility extends TriggeredAbilityImpl {
+public class OneOrMoreMilledTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<MilledCardEvent> {
 
     private final FilterCard filter;
 
@@ -43,9 +45,15 @@ public class OneOrMoreMilledTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEvent(MilledCardEvent event, Game game) {
+        Card card = event.getCard(game);
+        return card != null && filter.match(card, getControllerId(), this, game);
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        int count = ((MilledBatchAllEvent) event).getCards(game).count(filter, getControllerId(), this, game);
-        if (count <= 0) {
+        int count = getFilteredEvents((MilledBatchAllEvent) event, game).size();
+        if (count == 0) {
             return false;
         }
         getEffects().setValue(SavedMilledValue.VALUE_KEY, count);

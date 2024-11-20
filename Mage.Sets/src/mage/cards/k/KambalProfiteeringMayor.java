@@ -2,6 +2,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldOneOrMoreTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -19,12 +20,10 @@ import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -69,7 +68,7 @@ public final class KambalProfiteeringMayor extends CardImpl {
     }
 }
 
-class KambalProfiteeringMayorTriggeredAbility extends TriggeredAbilityImpl {
+class KambalProfiteeringMayorTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<ZoneChangeEvent>  {
 
     KambalProfiteeringMayorTriggeredAbility() {
         super(Zone.BATTLEFIELD, null);
@@ -91,19 +90,22 @@ class KambalProfiteeringMayorTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ZoneChangeBatchEvent zEvent = (ZoneChangeBatchEvent) event;
-        Player controller = game.getPlayer(this.controllerId);
-        if (controller == null) {
+    public boolean checkEvent(ZoneChangeEvent event, Game game) {
+        if (event.getToZone() != Zone.BATTLEFIELD) {
             return false;
         }
-        List<UUID> tokensIds = zEvent.getEvents()
+        if (!game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
+            return false;
+        }
+        Permanent permanent = event.getTarget();
+        return permanent instanceof PermanentToken;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        List<UUID> tokensIds = getFilteredEvents((ZoneChangeBatchEvent) event, game)
                 .stream()
-                .filter(zce -> zce.getToZone() == Zone.BATTLEFIELD             // keep enter the battlefield
-                        && controller.hasOpponent(zce.getPlayerId(), game))   // & under your opponent's control
                 .map(ZoneChangeEvent::getTarget)
-                .filter(Objects::nonNull)
-                .filter(PermanentToken.class::isInstance) // collect only tokens
                 .map(Permanent::getId)
                 .collect(Collectors.toList());
         if (tokensIds.isEmpty()) {

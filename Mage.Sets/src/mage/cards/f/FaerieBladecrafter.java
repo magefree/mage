@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -38,7 +38,7 @@ public final class FaerieBladecrafter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever one or more Faeries you control deal combat damage to a player, put a +1/+1 counter on Faerie Bladecrafter.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
         
         //  When Faerie Bladecrafter dies, each opponent loses X life and you gain X life, where X is its power.
         Ability ability = new DiesSourceTriggeredAbility(new LoseLifeOpponentsEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("each opponent loses X life"));

@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -39,7 +39,7 @@ public final class KaitoDancingShadow extends CardImpl {
         this.setStartingLoyalty(3);
 
         // Whenever one or more creatures you control deal combat damage to a player, you may return one of them to its owner's hand. If you do, you may activate loyalty abilities of Kaito twice this turn rather than only once.
-        Ability ability = new DealCombatDamageControlledTriggeredAbility(new KaitoDancingShadowEffect(), SetTargetPointer.PLAYER);
+        Ability ability = new OneOrMoreCombatDamagePlayerTriggeredAbility(new KaitoDancingShadowEffect(), SetTargetPointer.PLAYER);
         ability.addWatcher(new DamagedPlayerThisCombatWatcher());
         this.addAbility(ability);
 

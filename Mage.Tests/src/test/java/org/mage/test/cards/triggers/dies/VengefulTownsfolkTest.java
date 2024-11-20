@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- * Tests the {@link mage.abilities.common.DiesOneOrMoreCreatureTriggeredAbility} batching.
+ * Tests the {@link mage.abilities.common.DiesOneOrMoreTriggeredAbility} batching.
  *
  * @author Susucr
  */

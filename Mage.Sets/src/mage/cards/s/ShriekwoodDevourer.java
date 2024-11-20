@@ -37,7 +37,7 @@ public final class ShriekwoodDevourer extends CardImpl {
         // Whenever you attack with one or more creatures, untap up to X lands, where X is the greatest power among those creatures.
         this.addAbility(new AttacksWithCreaturesTriggeredAbility(
                 Zone.BATTLEFIELD, new ShriekwoodDevourerEffect(),
-                1, StaticFilters.FILTER_PERMANENT_CREATURES
+                1, StaticFilters.FILTER_PERMANENT_CREATURES, true
         ).setTriggerPhrase("Whenever you attack with one or more creatures, "));
     }
 

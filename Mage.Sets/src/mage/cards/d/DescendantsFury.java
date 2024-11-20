@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.SacrificeCost;
@@ -17,9 +17,7 @@ import mage.filter.predicate.permanent.PermanentReferenceInCollectionPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetSacrifice;
-import mage.target.targetpointer.TargetPointer;
 import mage.watchers.common.DamagedPlayerThisCombatWatcher;
 
 import java.util.UUID;
@@ -33,7 +31,7 @@ public final class DescendantsFury extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
 
         // Whenever one or more creatures you control deal combat damage to a player, you may sacrifice one of them. If you do, reveal cards from the top of your library until you reveal a creature card that shares a creature type with the sacrificed creature. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
-        Ability ability = new DealCombatDamageControlledTriggeredAbility(
+        Ability ability = new OneOrMoreCombatDamagePlayerTriggeredAbility(
                 new DoIfCostPaid(
                         new DescendantsFuryEffect(),
                         new DescendantsFurySacrificeCost()

@@ -2,8 +2,8 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SpellControlledDealsDamageTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
@@ -15,9 +15,7 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.stack.Spell;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -37,7 +35,10 @@ public final class EmbodimentOfFlame extends CardImpl {
         this.nightCard = true;
 
         // Whenever a spell you control deals damage, put a flame counter on Embodiment of Flame.
-        this.addAbility(new EmbodimentOfFlameTriggeredAbility());
+        this.addAbility(new SpellControlledDealsDamageTriggeredAbility(Zone.BATTLEFIELD,
+                new AddCountersSourceEffect(CounterType.FLAME.createInstance()),
+                StaticFilters.FILTER_SPELL, false
+        ));
 
         // {1}, Remove a flame counter from Embodiment of Flame: Exile the top card of your library. You may play that card this turn.
         Ability ability = new SimpleActivatedAbility(
@@ -55,38 +56,5 @@ public final class EmbodimentOfFlame extends CardImpl {
     @Override
     public EmbodimentOfFlame copy() {
         return new EmbodimentOfFlame(this);
-    }
-}
-
-class EmbodimentOfFlameTriggeredAbility extends TriggeredAbilityImpl {
-
-    EmbodimentOfFlameTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.FLAME.createInstance()));
-    }
-
-    private EmbodimentOfFlameTriggeredAbility(final EmbodimentOfFlameTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public EmbodimentOfFlameTriggeredAbility copy() {
-        return new EmbodimentOfFlameTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_PERMANENT
-                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Spell spell = game.getSpellOrLKIStack(event.getSourceId());
-        return spell != null && isControlledBy(spell.getControllerId()) && spell.isInstantOrSorcery(game);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a spell you control deals damage, put a flame counter on {this}.";
     }
 }

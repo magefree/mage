@@ -1,29 +1,26 @@
-
 package mage.cards.k;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealtDamageAnyTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.constants.SubType;
-import mage.constants.SuperType;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
+import mage.constants.SetTargetPointer;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author TheElk801
  */
 public final class KazarovSengirPureblood extends CardImpl {
@@ -40,7 +37,8 @@ public final class KazarovSengirPureblood extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever a creature an opponent controls is dealt damage, put a +1/+1 counter on Kazarov, Sengir Pureblood.
-        this.addAbility(new KazarovSengirPurebloodTriggeredAbility());
+        this.addAbility(new DealtDamageAnyTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                StaticFilters.FILTER_OPPONENTS_PERMANENT_A_CREATURE, SetTargetPointer.NONE, false));
 
         // {3}{R}: Kazarov deals 2 damage to target creature.
         Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new ManaCostsImpl<>("{3}{R}"));
@@ -55,39 +53,5 @@ public final class KazarovSengirPureblood extends CardImpl {
     @Override
     public KazarovSengirPureblood copy() {
         return new KazarovSengirPureblood(this);
-    }
-}
-
-class KazarovSengirPurebloodTriggeredAbility extends TriggeredAbilityImpl {
-
-    public KazarovSengirPurebloodTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-    }
-
-    private KazarovSengirPurebloodTriggeredAbility(final KazarovSengirPurebloodTriggeredAbility effect) {
-        super(effect);
-    }
-
-    @Override
-    public KazarovSengirPurebloodTriggeredAbility copy() {
-        return new KazarovSengirPurebloodTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PERMANENT;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
-        return permanent!=null
-                && permanent.isCreature(game)
-                && game.getOpponents(permanent.getControllerId()).contains(this.getControllerId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a creature an opponent controls is dealt damage, put a +1/+1 counter on {this}.";
     }
 }

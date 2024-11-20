@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.PutCardIntoGraveFromAnywhereAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
@@ -35,7 +35,7 @@ public final class DisaTheRestless extends CardImpl {
         this.addAbility(new DisaTheRestlessTriggeredAbility());
 
         // Whenever one or more creatures you control deal combat damage to a player, create a Tarmogoyf token.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(
                 new CreateTokenEffect(new TarmogoyfToken())
         ));
     }

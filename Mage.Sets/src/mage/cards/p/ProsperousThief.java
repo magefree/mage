@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
@@ -37,7 +37,7 @@ public final class ProsperousThief extends CardImpl {
         this.addAbility(new NinjutsuAbility("{1}{U}"));
 
         // Whenever one or more Ninja or Rogue creatures you control deal combat damage to a player, create a Treasure token.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new CreateTokenEffect(new TreasureToken()), filter));
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(new CreateTokenEffect(new TreasureToken()), filter));
     }
 
     private ProsperousThief(final ProsperousThief card) {

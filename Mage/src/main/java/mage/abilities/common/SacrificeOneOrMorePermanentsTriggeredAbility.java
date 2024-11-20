@@ -1,5 +1,6 @@
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.SetTargetPointer;
@@ -9,16 +10,18 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.SacrificedPermanentBatchEvent;
+import mage.game.events.SacrificedPermanentEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTargets;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * @author TheElk801, xenohedron
  */
-public class SacrificeOneOrMorePermanentsTriggeredAbility extends TriggeredAbilityImpl {
+public class SacrificeOneOrMorePermanentsTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<SacrificedPermanentEvent> {
 
     private final FilterPermanent filter;
     private final SetTargetPointer setTargetPointer;
@@ -64,31 +67,30 @@ public class SacrificeOneOrMorePermanentsTriggeredAbility extends TriggeredAbili
     }
 
     @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        ArrayList<Permanent> matchingPermanents = new ArrayList<>();
-        for (GameEvent sEvent : ((SacrificedPermanentBatchEvent) event).getEvents()) {
-            Permanent permanent = game.getPermanentOrLKIBattlefield(sEvent.getTargetId());
-            if (permanent != null && filter.match(permanent, getControllerId(), this, game)) {
-                switch (sacrificingPlayer) {
-                    case YOU:
-                        if (!sEvent.getPlayerId().equals(getControllerId())) {
-                            continue;
-                        }
-                        break;
-                    case OPPONENT:
-                        Player controller = game.getPlayer(getControllerId());
-                        if (controller == null || !controller.hasOpponent(sEvent.getPlayerId(), game)) {
-                            continue;
-                        }
-                        break;
-                    case ANY:
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Unsupported TargetController in SacrificePermanentTriggeredAbility: " + sacrificingPlayer);
-                }
-                matchingPermanents.add(permanent);
-            }
+    public boolean checkEvent(SacrificedPermanentEvent event, Game game) {
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        if (permanent == null || !filter.match(permanent, getControllerId(), this, game)) {
+            return false;
         }
+        switch (sacrificingPlayer) {
+            case YOU:
+                return isControlledBy(event.getPlayerId());
+            case OPPONENT:
+                return game.getOpponents(getControllerId()).contains(event.getPlayerId());
+            case ANY:
+                return true;
+            default:
+                throw new IllegalArgumentException("Unsupported TargetController in SacrificePermanentTriggeredAbility: " + sacrificingPlayer);        }
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        List<Permanent> matchingPermanents = getFilteredEvents((SacrificedPermanentBatchEvent) event, game)
+                .stream()
+                .map(GameEvent::getTargetId)
+                .map(game::getPermanentOrLKIBattlefield)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
         if (matchingPermanents.isEmpty()) {
             return false;
         }

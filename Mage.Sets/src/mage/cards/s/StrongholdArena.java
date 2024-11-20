@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
@@ -39,7 +39,7 @@ public final class StrongholdArena extends CardImpl {
 
         // Whenever one or more creatures you control deal combat damage to a player, you may reveal the top card of your library and put it into your hand.
         // If you do, you lose life equal to its mana value.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(
                 Zone.BATTLEFIELD, new RevealPutInHandLoseLifeEffect(true),
                 StaticFilters.FILTER_PERMANENT_CREATURES,
                 SetTargetPointer.NONE, true

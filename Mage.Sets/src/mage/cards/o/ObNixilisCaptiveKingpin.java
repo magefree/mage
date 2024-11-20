@@ -1,8 +1,10 @@
 package mage.cards.o;
 
+import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
@@ -58,7 +60,7 @@ public final class ObNixilisCaptiveKingpin extends CardImpl {
     }
 }
 
-class ObNixilisCaptiveKingpinAbility extends TriggeredAbilityImpl {
+class ObNixilisCaptiveKingpinAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<LifeLostEvent> {
     
     ObNixilisCaptiveKingpinAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect);
@@ -75,27 +77,19 @@ class ObNixilisCaptiveKingpinAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEvent(LifeLostEvent event, Game game) {
+        return game.getOpponents(getControllerId()).contains(event.getTargetId());
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-
-        LifeLostBatchEvent lifeLostBatchEvent = (LifeLostBatchEvent) event;
-
-        boolean opponentLostLife = false;
-        boolean allis1 = true;
-
-        for (UUID targetPlayer : CardUtil.getEventTargets(lifeLostBatchEvent)) {
-            // skip controller
-            if (targetPlayer.equals(getControllerId())) {
-                continue;
-            }
-            opponentLostLife = true;
-
-            int lifeLost = lifeLostBatchEvent.getLifeLostByPlayer(targetPlayer);
-            if (lifeLost != 1) {
-                allis1 = false;
-                break;
-            }
+        List<LifeLostEvent> filteredEvents = getFilteredEvents((LifeLostBatchEvent) event, game);
+        if (filteredEvents.isEmpty()) {
+            return false;
         }
-        return opponentLostLife && allis1;
+        // if here, at least one opponent lost some amount of life
+        return CardUtil.getEventTargets(event).stream()
+                .allMatch(uuid -> LifeLostBatchEvent.getLifeLostByPlayer(filteredEvents, uuid) <= 1);
     }
 
     @Override

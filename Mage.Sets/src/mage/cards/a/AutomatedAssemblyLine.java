@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -22,7 +22,7 @@ public final class AutomatedAssemblyLine extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}{W}");
 
         // Whenever one or more artifact creatures you control deal combat damage to a player, you get {E}.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(
                 new GetEnergyCountersControllerEffect(1), StaticFilters.FILTER_PERMANENTS_ARTIFACT_CREATURE));
 
         // Pay {E}{E}{E}: Create a tapped 3/3 colorless Robot artifact creature token.

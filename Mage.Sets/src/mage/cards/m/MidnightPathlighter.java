@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAllEffect;
 import mage.abilities.effects.keyword.VentureIntoTheDungeonEffect;
@@ -45,7 +45,7 @@ public final class MidnightPathlighter extends CardImpl {
         )));
 
         // Whenever one or more creatures you control deal combat damage to a player, venture into the dungeon.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new VentureIntoTheDungeonEffect())
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(new VentureIntoTheDungeonEffect())
                 .addHint(CurrentDungeonHint.instance));
     }
 

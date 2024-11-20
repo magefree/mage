@@ -1,16 +1,14 @@
 package mage.abilities.common;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedBatchForPlayersEvent;
-import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedBatchForOnePlayerEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  * A triggered ability for whenever one or more creatures deal combat damage to
@@ -19,87 +17,47 @@ import java.util.UUID;
  *
  * @author alexander-novo
  */
-public class CombatDamageDealtToYouTriggeredAbility extends TriggeredAbilityImpl {
+public class CombatDamageDealtToYouTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent>  {
 
-    // Whether the ability should set a target targetting the opponent who
+    // Whether the ability should set a target targeting the opponent who
     // controls the creatures who dealt damage to you
-    private final boolean setTarget;
+    private final boolean setTargetPointer;
 
-    /**
-     * @param effect The effect that should happen when the ability resolves
-     */
     public CombatDamageDealtToYouTriggeredAbility(Effect effect) {
-        this(effect, false);
+        this(Zone.BATTLEFIELD, effect, false, false);
     }
 
-    /**
-     * @param effect    The effect that should happen when the ability resolves
-     * @param setTarget Whether or not the ability should set a target targetting
-     *                  the opponent who controls the creatures who dealt damage to
-     *                  you
-     */
-    public CombatDamageDealtToYouTriggeredAbility(Effect effect, boolean setTarget) {
-        this(Zone.BATTLEFIELD, effect, setTarget, false);
-    }
-
-    /**
-     * @param zone      Which zone the ability shoudl take effect in
-     * @param effect    The effect that should happen when the ability resolves
-     * @param setTarget Whether or not the ability should set a target targetting
-     *                  the opponent who controls the creatures who dealt damage to
-     *                  you
-     * @param optional  Whether or not the ability is optional
-     */
-    public CombatDamageDealtToYouTriggeredAbility(Zone zone, Effect effect, boolean setTarget,
-                                                  boolean optional) {
+    public CombatDamageDealtToYouTriggeredAbility(Zone zone, Effect effect, boolean setTargetPointer, boolean optional) {
         super(zone, effect, optional);
-
-        this.setTarget = setTarget;
-
+        this.setTargetPointer = setTargetPointer;
         setTriggerPhrase(generateTriggerPhrase());
     }
 
     private CombatDamageDealtToYouTriggeredAbility(final CombatDamageDealtToYouTriggeredAbility ability) {
         super(ability);
-
-        this.setTarget = ability.setTarget;
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_PLAYERS;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForPlayersEvent dEvent = (DamagedBatchForPlayersEvent) event;
-
-        boolean isDamaged = false;
-        UUID damageSourceControllerID = null;
-        for (DamagedEvent damagedEvent : dEvent.getEvents()) {
-            if (damagedEvent.isCombatDamage() && damagedEvent.getPlayerId() == this.controllerId) {
-                isDamaged = true;
-                // TODO: current code support only one controller
-                //  (it's can be potentially bugged in team mode with multiple attack players)
-                Permanent damageSource = game.getPermanent(damagedEvent.getSourceId());
-                if (damageSource != null) {
-                    damageSourceControllerID = damageSource.getControllerId();
-                }
-            }
+        if (!isControlledBy(event.getTargetId()) || !((DamagedBatchForOnePlayerEvent) event).isCombatDamage()) {
+            return false;
         }
-
-        if (isDamaged) {
-            if (this.setTarget && damageSourceControllerID != null) {
-                this.getEffects().setTargetPointer(new FixedTarget(damageSourceControllerID));
-            }
-            return true;
+        if (setTargetPointer) {
+            // attacking player is active player
+            this.getEffects().setTargetPointer(new FixedTarget(game.getActivePlayerId()));
         }
+        return true;
 
-        return false;
     }
 
     private String generateTriggerPhrase() {
-        if (setTarget) {
+        if (setTargetPointer) {
             return "Whenever one or more creatures an opponent controls deal combat damage to you, ";
         } else {
             return "Whenever one or more creatures deal combat damage to you, ";

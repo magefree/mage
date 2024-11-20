@@ -3,7 +3,7 @@ package mage.cards.v;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.DealsDamageSourceTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.LoseGameTargetPlayerEffect;
@@ -14,10 +14,8 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.WatcherScope;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.Watcher;
@@ -25,8 +23,8 @@ import mage.watchers.Watcher;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 /**
  * @author TheElk801
@@ -48,7 +46,7 @@ public final class VesselOfTheAllConsuming extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever Vessel of the All-Consuming deals damage, put a +1/+1 counter on it.
-        this.addAbility(new VesselOfTheAllConsumingTriggeredAbility());
+        this.addAbility(new DealsDamageSourceTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
 
         // Whenever Vessel of the All-Consuming deals damage to a player, if it has dealt 10 or more damage to that player this turn, they lose the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
@@ -70,37 +68,6 @@ public final class VesselOfTheAllConsuming extends CardImpl {
 
     public static Watcher makeWatcher() {
         return new VesselOfTheAllConsumingWatcher();
-    }
-}
-
-class VesselOfTheAllConsumingTriggeredAbility extends TriggeredAbilityImpl {
-
-    VesselOfTheAllConsumingTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
-    }
-
-    private VesselOfTheAllConsumingTriggeredAbility(final VesselOfTheAllConsumingTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VesselOfTheAllConsumingTriggeredAbility copy() {
-        return new VesselOfTheAllConsumingTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event instanceof DamagedEvent;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return event.getSourceId().equals(getSourceId());
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} deals damage, put a +1/+1 counter on it.";
     }
 }
 
