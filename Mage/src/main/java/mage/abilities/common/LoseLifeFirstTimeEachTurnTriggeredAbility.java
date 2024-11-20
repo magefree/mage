@@ -33,7 +33,7 @@ public class LoseLifeFirstTimeEachTurnTriggeredAbility extends LoseLifeTriggered
     public boolean checkTrigger(GameEvent event, Game game) {
         LifeLostThisTurnWatcher watcher = game.getState().getWatcher(LifeLostThisTurnWatcher.class);
         return watcher != null
-                && watcher.timesLostLifeThisTurn(event.getPlayerId()) <= 1
+                && watcher.timesLostLifeThisTurn(event.getTargetId()) <= 1
                 && super.checkTrigger(event, game);
     }
 
