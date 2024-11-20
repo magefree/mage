@@ -2,8 +2,8 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -51,7 +51,7 @@ public final class GlitchInterpreter extends CardImpl {
         this.addAbility(ability);
 
         // Whenever one or more colorless creatures you control deal combat damage to a player, draw a card.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter2));
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter2));
     }
 
     private GlitchInterpreter(final GlitchInterpreter card) {
