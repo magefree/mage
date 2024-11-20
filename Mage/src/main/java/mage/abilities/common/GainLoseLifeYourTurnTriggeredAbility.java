@@ -28,12 +28,12 @@ public class GainLoseLifeYourTurnTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.GAINED_LIFE
-                || event.getType() == GameEvent.EventType.LOST_LIFE;
+                || event.getType() == GameEvent.EventType.LOST_LIFE_BATCH_FOR_ONE_PLAYER;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         return isControlledBy(game.getActivePlayerId())
-                && isControlledBy(event.getPlayerId());
+                && isControlledBy(event.getTargetId());
     }
 }
