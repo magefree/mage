@@ -21,6 +21,7 @@ public class DealsDamageSourceTriggeredAbility extends TriggeredAbilityImpl impl
     public DealsDamageSourceTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.BATTLEFIELD, effect, optional);
         setTriggerPhrase("Whenever {this} deals damage, ");
+        this.withRuleTextReplacement(true);
     }
 
     protected DealsDamageSourceTriggeredAbility(final DealsDamageSourceTriggeredAbility ability) {

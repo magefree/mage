@@ -9,6 +9,7 @@ import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.target.common.TargetOpponentsCreaturePermanent;
@@ -35,7 +36,7 @@ public final class AngelOfDeliverance extends CardImpl {
                 .withInterveningIf(DeliriumCondition.instance);
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         ability.addHint(CardTypesInGraveyardHint.YOU);
-        this.addAbility(ability);
+        this.addAbility(ability.setAbilityWord(AbilityWord.DELIRIUM));
     }
 
     private AngelOfDeliverance(final AngelOfDeliverance card) {

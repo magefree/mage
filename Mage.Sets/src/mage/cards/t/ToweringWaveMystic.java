@@ -1,6 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.MillCardsTargetEffect;
@@ -8,6 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
+import mage.target.TargetPlayer;
 
 import java.util.UUID;
 
@@ -25,7 +27,9 @@ public final class ToweringWaveMystic extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Whenever Towering-Wave Mystic deals damage, target player mills that many cards.
-        this.addAbility(new DealsDamageSourceTriggeredAbility(new MillCardsTargetEffect(SavedDamageValue.MANY)));
+        Ability ability = new DealsDamageSourceTriggeredAbility(new MillCardsTargetEffect(SavedDamageValue.MANY));
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
     }
 
     private ToweringWaveMystic(final ToweringWaveMystic card) {

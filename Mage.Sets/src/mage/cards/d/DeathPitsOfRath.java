@@ -19,7 +19,8 @@ public final class DeathPitsOfRath extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
 
         // Whenever a creature is dealt damage, destroy it. It can't be regenerated.
-        this.addAbility(new DealtDamageAnyTriggeredAbility(new DestroyTargetEffect(true),
+        this.addAbility(new DealtDamageAnyTriggeredAbility(new DestroyTargetEffect(true)
+                .setText("destroy it. It can't be regenerated"),
                 StaticFilters.FILTER_PERMANENT_A_CREATURE, SetTargetPointer.PERMANENT, false));
     }
 
