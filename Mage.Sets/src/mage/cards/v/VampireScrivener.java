@@ -1,8 +1,8 @@
 package mage.cards.v;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
+import mage.abilities.common.LoseLifeTriggeredAbility;
 import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,10 +53,11 @@ public final class VampireScrivener extends CardImpl {
     }
 }
 
-class VampireScrivenerTriggeredAbility extends TriggeredAbilityImpl {
+class VampireScrivenerTriggeredAbility extends LoseLifeTriggeredAbility {
 
     VampireScrivenerTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        super(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        setTriggerPhrase("Whenever you lose life during your turn, ");
     }
 
     private VampireScrivenerTriggeredAbility(final VampireScrivenerTriggeredAbility ability) {
@@ -70,17 +70,8 @@ class VampireScrivenerTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.LOST_LIFE;
-    }
-
-    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return game.isActivePlayer(event.getPlayerId()) && game.isActivePlayer(getControllerId());
+        return game.isActivePlayer(getControllerId()) && super.checkTrigger(event, game);
     }
 
-    @Override
-    public String getRule() {
-        return "Whenever you lose life during your turn, put a +1/+1 counter on {this}.";
-    }
 }
