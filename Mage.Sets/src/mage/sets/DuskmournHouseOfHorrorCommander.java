@@ -77,6 +77,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Crypt Ghast", 368, Rarity.MYTHIC, mage.cards.c.CryptGhast.class));
         cards.add(new SetCardInfo("Culling Ritual", 85, Rarity.RARE, mage.cards.c.CullingRitual.class));
         cards.add(new SetCardInfo("Cultivate", 174, Rarity.COMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Curator Beastie", 30, Rarity.RARE, mage.cards.c.CuratorBeastie.class));
         cards.add(new SetCardInfo("Damn", 369, Rarity.MYTHIC, mage.cards.d.Damn.class));
         cards.add(new SetCardInfo("Darkmoss Bridge", 269, Rarity.COMMON, mage.cards.d.DarkmossBridge.class));
         cards.add(new SetCardInfo("Deadbridge Chant", 215, Rarity.MYTHIC, mage.cards.d.DeadbridgeChant.class));
@@ -111,9 +112,11 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Flooded Grove", 276, Rarity.RARE, mage.cards.f.FloodedGrove.class));
         cards.add(new SetCardInfo("Florian, Voldaren Scion", 217, Rarity.RARE, mage.cards.f.FlorianVoldarenScion.class));
         cards.add(new SetCardInfo("Foreboding Ruins", 277, Rarity.RARE, mage.cards.f.ForebodingRuins.class));
+        cards.add(new SetCardInfo("Formless Genesis", 34, Rarity.RARE, mage.cards.f.FormlessGenesis.class));
         cards.add(new SetCardInfo("Geothermal Bog", 278, Rarity.COMMON, mage.cards.g.GeothermalBog.class));
         cards.add(new SetCardInfo("Giant Adephage", 179, Rarity.MYTHIC, mage.cards.g.GiantAdephage.class));
         cards.add(new SetCardInfo("Gleeful Arsonist", 27, Rarity.RARE, mage.cards.g.GleefulArsonist.class));
+        cards.add(new SetCardInfo("Glitch Interpreter", 13, Rarity.RARE, mage.cards.g.GlitchInterpreter.class));
         cards.add(new SetCardInfo("Gnarlwood Dryad", 180, Rarity.UNCOMMON, mage.cards.g.GnarlwoodDryad.class));
         cards.add(new SetCardInfo("Golgari Rot Farm", 279, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Golgari Signet", 246, Rarity.UNCOMMON, mage.cards.g.GolgariSignet.class));
@@ -219,6 +222,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shark Typhoon", 127, Rarity.RARE, mage.cards.s.SharkTyphoon.class));
         cards.add(new SetCardInfo("Shigeki, Jukai Visionary", 198, Rarity.RARE, mage.cards.s.ShigekiJukaiVisionary.class));
         cards.add(new SetCardInfo("Shivan Gorge", 297, Rarity.RARE, mage.cards.s.ShivanGorge.class));
+        cards.add(new SetCardInfo("Shriekwood Devourer", 35, Rarity.RARE, mage.cards.s.ShriekwoodDevourer.class));
         cards.add(new SetCardInfo("Sigil of the Empty Throne", 103, Rarity.RARE, mage.cards.s.SigilOfTheEmptyThrone.class));
         cards.add(new SetCardInfo("Sign in Blood", 156, Rarity.COMMON, mage.cards.s.SignInBlood.class));
         cards.add(new SetCardInfo("Simic Growth Chamber", 298, Rarity.UNCOMMON, mage.cards.s.SimicGrowthChamber.class));
