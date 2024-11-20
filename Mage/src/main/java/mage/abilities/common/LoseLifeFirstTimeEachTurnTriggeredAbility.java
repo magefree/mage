@@ -20,7 +20,7 @@ public class LoseLifeFirstTimeEachTurnTriggeredAbility extends LoseLifeTriggered
         addWatcher(new LifeLostThisTurnWatcher());
     }
 
-    private LoseLifeFirstTimeEachTurnTriggeredAbility(final LoseLifeFirstTimeEachTurnTriggeredAbility ability) {
+    protected LoseLifeFirstTimeEachTurnTriggeredAbility(final LoseLifeFirstTimeEachTurnTriggeredAbility ability) {
         super(ability);
     }
 
