@@ -46,7 +46,8 @@ public final class GlitchInterpreter extends CardImpl {
         this.toughness = new MageInt(3);
 
         // When Glitch Interpreter enters, if you control no face-down permanents, return Glitch Interpreter to its owner's hand and manifest dread.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandSourceEffect()).withInterveningIf(condition);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandSourceEffect())
+                .withRuleTextReplacement(false).withInterveningIf(condition);
         ability.addEffect(new ManifestDreadEffect().concatBy("and"));
         this.addAbility(ability);
 

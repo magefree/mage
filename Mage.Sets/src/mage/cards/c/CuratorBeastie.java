@@ -41,7 +41,7 @@ public final class CuratorBeastie extends CardImpl {
         // Colorless creatures you control enter with two additional +1/+1 counters on them.
         this.addAbility(new SimpleStaticAbility(new EntersWithCountersControlledEffect(
                 filter, CounterType.P1P1.createInstance(2), false
-        )));
+        ).setText("colorless creatures you control enter with two additional +1/+1 counters on them")));
 
         // Whenever Curator Beastie enters or attacks, manifest dread.
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new ManifestDreadEffect()));
