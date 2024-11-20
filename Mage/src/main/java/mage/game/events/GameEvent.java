@@ -166,7 +166,6 @@ public class GameEvent implements Serializable {
         DAMAGE_CAUSES_LIFE_LOSS,
         PLAYER_LIFE_CHANGE,
         GAIN_LIFE, GAINED_LIFE,
-        LOSE_LIFE, LOST_LIFE,
         /* LOSE_LIFE + LOST_LIFE
          targetId    the id of the player loosing life
          sourceId    sourceId of the ability which caused the lose
@@ -174,10 +173,17 @@ public class GameEvent implements Serializable {
          amount      amount of life loss
          flag        true = from combat damage - other from non combat damage
          */
-        LOST_LIFE_BATCH(true),
+        
+        LOSE_LIFE, LOST_LIFE,
+        /* LOST_LIFE_BATCH_FOR_ONE_PLAYER
+         combines all life lost events for a player to a single batch (event)
+        */
+        LOST_LIFE_BATCH_FOR_ONE_PLAYER(true),
         /* LOST_LIFE_BATCH
          combines all player life lost events to a single batch (event)
         */
+        LOST_LIFE_BATCH(true),
+
         PLAY_LAND, LAND_PLAYED,
         CREATURE_CHAMPIONED,
         /* CREATURE_CHAMPIONED

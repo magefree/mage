@@ -1,12 +1,12 @@
-
 package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.GainLifeControllerTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
+import mage.abilities.common.LoseLifeTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
+import mage.abilities.dynamicvalue.common.SavedLifeLossValue;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -56,7 +56,7 @@ public final class LichsMastery extends CardImpl {
         ));
 
         // Whenever you lose life, for each 1 life you lost, exile a permanent you control or a card from your hand or graveyard.
-        this.addAbility(new LichsMasteryLoseLifeTriggeredAbility());
+        this.addAbility(new LoseLifeTriggeredAbility(new LichsMasteryLoseLifeEffect()));
 
         // When Lich's Mastery leaves the battlefield, you lose the game.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new LoseGameSourceControllerEffect(), false));
@@ -99,57 +99,15 @@ class LichsMasteryCantLoseEffect extends ContinuousRuleModifyingEffectImpl {
     }
 }
 
-class LichsMasteryLoseLifeTriggeredAbility extends TriggeredAbilityImpl {
-
-    public LichsMasteryLoseLifeTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LichsMasteryLoseLifeEffect(), false);
-    }
-
-    private LichsMasteryLoseLifeTriggeredAbility(final LichsMasteryLoseLifeTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public LichsMasteryLoseLifeTriggeredAbility copy() {
-        return new LichsMasteryLoseLifeTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.LOST_LIFE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
-            for (Effect effect : this.getEffects()) {
-                if (effect instanceof LichsMasteryLoseLifeEffect) {
-                    ((LichsMasteryLoseLifeEffect) effect).setAmount(event.getAmount());
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you lose life, for each 1 life you lost, exile a permanent you control or a card from your hand or graveyard.";
-    }
-}
-
 class LichsMasteryLoseLifeEffect extends OneShotEffect {
 
-    private int amount = 0;
-
-    public LichsMasteryLoseLifeEffect() {
+    LichsMasteryLoseLifeEffect() {
         super(Outcome.Exile);
-        this.staticText = "for each 1 life you lost, exile a permanent you control or a card from your hand or graveyard.";
+        this.staticText = "for each 1 life you lost, exile a permanent you control or a card from your hand or graveyard";
     }
 
     private LichsMasteryLoseLifeEffect(final LichsMasteryLoseLifeEffect effect) {
         super(effect);
-        this.amount = effect.amount;
     }
 
     @Override
@@ -165,7 +123,7 @@ class LichsMasteryLoseLifeEffect extends OneShotEffect {
         }
         FilterPermanent filter = new FilterPermanent();
         filter.add(new ControllerIdPredicate(controller.getId()));
-        for (int i = 0; i < amount; i++) {
+        for (int i = 0; i < SavedLifeLossValue.MANY.calculate(game, source, this); i++) {
             int handCount = controller.getHand().size();
             int graveCount = controller.getGraveyard().size();
             int permCount = game.getBattlefield().getActivePermanents(filter, controller.getId(), game).size();
@@ -182,7 +140,7 @@ class LichsMasteryLoseLifeEffect extends OneShotEffect {
                 if (card != null) {
                     controller.moveCards(card, Zone.EXILED, source, game);
                 }
-            } else if (graveCount > 0) {
+            } else {
                 Target target = new TargetCardInYourGraveyard(1, 1, new FilterCard(), true);
                 target.choose(Outcome.Exile, source.getControllerId(), source.getSourceId(), source, game);
                 Card card = controller.getGraveyard().get(target.getFirstTarget(), game);
@@ -194,7 +152,4 @@ class LichsMasteryLoseLifeEffect extends OneShotEffect {
         return true;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
 }

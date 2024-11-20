@@ -2,10 +2,11 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.LoseLifeTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.SavedLifeLossValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -14,9 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -46,7 +44,7 @@ public final class VilisBrokerOfBlood extends CardImpl {
         this.addAbility(ability);
 
         // Whenever you lose life, draw that many cards.
-        this.addAbility(new VilisBrokerOfBloodTriggeredAbility());
+        this.addAbility(new LoseLifeTriggeredAbility(new DrawCardSourceControllerEffect(SavedLifeLossValue.MANY)));
     }
 
     private VilisBrokerOfBlood(final VilisBrokerOfBlood card) {
@@ -56,41 +54,5 @@ public final class VilisBrokerOfBlood extends CardImpl {
     @Override
     public VilisBrokerOfBlood copy() {
         return new VilisBrokerOfBlood(this);
-    }
-}
-
-class VilisBrokerOfBloodTriggeredAbility extends TriggeredAbilityImpl {
-
-    VilisBrokerOfBloodTriggeredAbility() {
-        super(Zone.BATTLEFIELD, null, false);
-    }
-
-    private VilisBrokerOfBloodTriggeredAbility(final VilisBrokerOfBloodTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public VilisBrokerOfBloodTriggeredAbility copy() {
-        return new VilisBrokerOfBloodTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.LOST_LIFE;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getPlayerId().equals(this.getControllerId())) {
-            this.getEffects().clear();
-            this.addEffect(new DrawCardSourceControllerEffect(event.getAmount()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever you lose life, draw that many cards.";
     }
 }

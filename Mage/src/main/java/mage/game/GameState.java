@@ -975,18 +975,26 @@ public class GameState implements Serializable, Copyable<GameState> {
         // Combine multiple life loss events in the single event (batch)
         // see GameEvent.LOST_LIFE_BATCH
 
-        // existing batch
+        // existing batchs
         boolean isLifeLostBatchUsed = false;
+        boolean isSingleBatchUsed = false;
         for (GameEvent event : simultaneousEvents) {
             if (event instanceof LifeLostBatchEvent) {
                 ((LifeLostBatchEvent) event).addEvent(lifeLossEvent);
                 isLifeLostBatchUsed = true;
+            } else if (event instanceof LifeLostBatchForOnePlayerEvent
+                    && event.getTargetId().equals(lifeLossEvent.getTargetId())) {
+                ((LifeLostBatchForOnePlayerEvent) event).addEvent(lifeLossEvent);
+                isSingleBatchUsed = true;
             }
         }
 
         // new batch
         if (!isLifeLostBatchUsed) {
             addSimultaneousEvent(new LifeLostBatchEvent(lifeLossEvent), game);
+        }
+        if (!isSingleBatchUsed) {
+            addSimultaneousEvent(new LifeLostBatchForOnePlayerEvent(lifeLossEvent), game);
         }
     }
 
