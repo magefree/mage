@@ -112,6 +112,7 @@ class TheSkullsporeNexusTrigger extends TriggeredAbilityImpl {
 
     TheSkullsporeNexusTrigger() {
         super(Zone.BATTLEFIELD, null, false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private TheSkullsporeNexusTrigger(final TheSkullsporeNexusTrigger ability) {

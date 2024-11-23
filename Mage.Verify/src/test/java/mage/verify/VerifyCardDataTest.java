@@ -1990,12 +1990,21 @@ public class VerifyCardDataTest {
                 .filter(a -> a instanceof TriggeredAbility)
                 .map(a -> (TriggeredAbility) a)
                 .filter(a -> !a.isLeavesTheBattlefieldTrigger())
-                .filter(a -> a.getRule().contains("whenever") || a.getRule().contains("Whenever"))
-                .filter(a -> a.getRule().contains("dies"))
+                //.filter(a -> a.getRule().contains("whenever") || a.getRule().contains("Whenever")) // TODO: research failed cards
+                .filter(a -> a.getRule().contains("die ")
+                        || a.getRule().contains("dies ")
+                        || a.getRule().contains("die,")
+                        || a.getRule().contains("dies,")
+                        || (a.getRule().contains("put into")
+                        && a.getRule().contains("graveyard")
+                        && a.getRule().contains("from the battlefield"))
+                )
+                .filter(a -> !a.getRule().contains("roll")) // ignore roll die effects
                 .filter(a -> !a.getRule().contains("with \"When")) // ignore token creating effects
                 .filter(a -> !a.getRule().contains("gains \"When")) // ignore token creating effects
                 .filter(a -> !a.getRule().contains("and \"When")) // ignore token creating effects
                 .filter(a -> !a.getRule().contains("dies while {this} is in your graveyard")) // ignore Boneyard Scourge
+                .filter(a -> !a.getRule().contains("all creature cards that were put into your")) // ignore Fell Shepherd
                 .filter(a -> !card.getName().equals("Massacre Girl") // delayed trigger fixed, but verify check can't find it
                         && !card.getName().equals("Infested Thrinax")
                         && !card.getName().equals("Xira, the Golden Sting")

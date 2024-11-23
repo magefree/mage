@@ -1,5 +1,6 @@
 package mage.cards.n;
 
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -72,6 +73,7 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
 
     NimDeathmantleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new NimDeathmantleEffect(), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private NimDeathmantleTriggeredAbility(final NimDeathmantleTriggeredAbility ability) {
@@ -107,6 +109,11 @@ class NimDeathmantleTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {4}. If you do, return that card to the battlefield and attach {this} to it.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }
 

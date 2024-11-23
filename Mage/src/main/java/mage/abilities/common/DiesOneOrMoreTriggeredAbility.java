@@ -23,6 +23,7 @@ public class DiesOneOrMoreTriggeredAbility extends TriggeredAbilityImpl implemen
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.setTriggerPhrase("Whenever one or more " + filter.getMessage() + " die, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private DiesOneOrMoreTriggeredAbility(final DiesOneOrMoreTriggeredAbility ability) {
@@ -59,6 +60,6 @@ public class DiesOneOrMoreTriggeredAbility extends TriggeredAbilityImpl implemen
         return ((ZoneChangeBatchEvent) event)
                 .getEvents()
                 .stream()
-                .allMatch(e -> TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, e, game));
+                .anyMatch(e -> TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, e, game));
     }
 }

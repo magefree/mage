@@ -62,6 +62,7 @@ class PurgatoryTriggeredAbility extends TriggeredAbilityImpl {
 
     PurgatoryTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PurgatoryExileEffect(), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private PurgatoryTriggeredAbility(final PurgatoryTriggeredAbility ability) {
@@ -102,6 +103,11 @@ class PurgatoryTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a nontoken creature is put into your graveyard from the battlefield, exile that card.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }
 

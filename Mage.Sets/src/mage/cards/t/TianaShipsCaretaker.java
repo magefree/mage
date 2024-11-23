@@ -3,6 +3,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -65,6 +66,7 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
     TianaShipsCaretakerTriggeredAbility() {
         super(Zone.BATTLEFIELD, new TianaShipsCaretakerEffect(), true);
         setTriggerPhrase("Whenever an Aura or Equipment you control is put into a graveyard from the battlefield, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private TianaShipsCaretakerTriggeredAbility(final TianaShipsCaretakerTriggeredAbility ability) {
@@ -97,6 +99,11 @@ class TianaShipsCaretakerTriggeredAbility extends TriggeredAbilityImpl {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }
 

@@ -3,6 +3,7 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -55,6 +56,7 @@ class NetherTraitorTriggeredAbility extends TriggeredAbilityImpl {
     
     NetherTraitorTriggeredAbility(){
         super(Zone.GRAVEYARD, new DoIfCostPaid(new ReturnSourceFromGraveyardToBattlefieldEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
+        setLeavesTheBattlefieldTrigger(true);
     }
     
     private NetherTraitorTriggeredAbility(final NetherTraitorTriggeredAbility ability) {
@@ -93,5 +95,10 @@ class NetherTraitorTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever another creature is put into your graveyard from the battlefield, you may pay {B}. If you do, return {this} from your graveyard to the battlefield.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }

@@ -1,5 +1,6 @@
 package mage.cards.s;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
@@ -40,6 +41,7 @@ class SacredGroundTriggeredAbility extends TriggeredAbilityImpl {
 
     SacredGroundTriggeredAbility() {
         super(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect());
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private SacredGroundTriggeredAbility(final SacredGroundTriggeredAbility ability) {
@@ -74,5 +76,10 @@ class SacredGroundTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a spell or ability an opponent controls causes a land to be put into your graveyard from the battlefield, return that card to the battlefield.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }

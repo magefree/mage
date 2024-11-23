@@ -351,8 +351,15 @@ public abstract class MageTestPlayerBase {
      * Add target destroy ability that can be called by text "target destroy"
      */
     protected void addCustomEffect_TargetDestroy(TestPlayer controller) {
+        addCustomEffect_TargetDestroy(controller, 1);
+    }
+
+    /**
+     * Add target destroy ability that can be called by text "target destroy"
+     */
+    protected void addCustomEffect_TargetDestroy(TestPlayer controller, int numberOfTargets) {
         Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect().setText("target destroy"), new ManaCostsImpl<>(""));
-        ability.addTarget(new TargetPermanent());
+        ability.addTarget(new TargetPermanent(numberOfTargets, StaticFilters.FILTER_PERMANENT));
         addCustomCardWithAbility(
                 "target destroy for " + controller.getName(),
                 controller,

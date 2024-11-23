@@ -1,6 +1,7 @@
 
 package mage.cards.s;
 
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
@@ -45,12 +46,13 @@ class ScrapheapTriggeredAbility extends TriggeredAbilityImpl {
         return new ScrapheapTriggeredAbility(this);
     }
     
-    private ScrapheapTriggeredAbility(final ScrapheapTriggeredAbility ability){
-        super(ability);
-    }
-    
     public ScrapheapTriggeredAbility(){
        super(Zone.BATTLEFIELD, new GainLifeEffect(1));
+       setLeavesTheBattlefieldTrigger(true);
+    }
+
+    private ScrapheapTriggeredAbility(final ScrapheapTriggeredAbility ability){
+        super(ability);
     }
 
     @Override
@@ -75,5 +77,10 @@ class ScrapheapTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever an artifact or enchantment is put into your graveyard from the battlefield, you gain 1 life.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }

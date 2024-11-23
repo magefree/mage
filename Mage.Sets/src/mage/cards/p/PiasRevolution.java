@@ -1,5 +1,6 @@
 package mage.cards.p;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -97,6 +98,7 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
     public PiasRevolutionTriggeredAbility() {
         super(Zone.BATTLEFIELD, new PiasRevolutionReturnEffect(), false);
         setTriggerPhrase("Whenever a nontoken artifact is put into your graveyard from the battlefield, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private PiasRevolutionTriggeredAbility(final PiasRevolutionTriggeredAbility ability) {
@@ -126,5 +128,10 @@ class PiasRevolutionTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
     }
 }

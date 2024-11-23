@@ -70,6 +70,7 @@ class LyndeCheerfulTormentorCurseDiesTriggeredAbility extends TriggeredAbilityIm
                         new LyndeCheerfulTormentorReturnCurseEffect()
                 )
         ));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private LyndeCheerfulTormentorCurseDiesTriggeredAbility(final LyndeCheerfulTormentorCurseDiesTriggeredAbility ability) {

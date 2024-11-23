@@ -8,7 +8,9 @@ import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.BatchEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -465,8 +467,14 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     public static boolean isInUseableZoneDiesTrigger(TriggeredAbility source, GameEvent event, Game game) {
         // runtime check: wrong trigger settings
         if (!source.isLeavesTheBattlefieldTrigger()) {
-            // TODO: enable after fix
-            // throw new IllegalArgumentException("Wrong code usage: all dies triggers must use setLeavesTheBattlefieldTrigger(true)");
+            throw new IllegalArgumentException("Wrong code usage: all dies triggers must use setLeavesTheBattlefieldTrigger(true) and override isInUseableZone - "
+                    + source.getSourceObject(game) + " - " + source);
+        }
+
+        // runtime check: wrong isInUseableZone for batch related triggers
+        if (event instanceof BatchEvent) {
+            throw new IllegalArgumentException("Wrong code usage: batch events unsupported here, possible miss of override isInUseableZone - "
+                    + source.getSourceObject(game) + " - " + source);
         }
 
         // Get the source permanent of the ability
