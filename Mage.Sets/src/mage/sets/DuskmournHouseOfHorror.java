@@ -156,6 +156,8 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Niko, Light of Hope", 224, Rarity.MYTHIC, mage.cards.n.NikoLightOfHope.class));
         cards.add(new SetCardInfo("Norin, Swift Survivalist", 145, Rarity.UNCOMMON, mage.cards.n.NorinSwiftSurvivalist.class));
         cards.add(new SetCardInfo("Oblivious Bookworm", 225, Rarity.UNCOMMON, mage.cards.o.ObliviousBookworm.class));
+        cards.add(new SetCardInfo("Omnivorous Flytrap", 192, Rarity.RARE, mage.cards.o.OmnivorousFlytrap.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Omnivorous Flytrap", 322, Rarity.RARE, mage.cards.o.OmnivorousFlytrap.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Optimistic Scavenger", 21, Rarity.UNCOMMON, mage.cards.o.OptimisticScavenger.class));
         cards.add(new SetCardInfo("Orphans of the Wheat", 22, Rarity.UNCOMMON, mage.cards.o.OrphansOfTheWheat.class));
         cards.add(new SetCardInfo("Overlord of the Balemurk", 113, Rarity.MYTHIC, mage.cards.o.OverlordOfTheBalemurk.class));
