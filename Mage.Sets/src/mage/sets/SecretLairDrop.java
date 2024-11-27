@@ -1633,7 +1633,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("In the Trenches", 1729, Rarity.MYTHIC, mage.cards.i.InTheTrenches.class));
         cards.add(new SetCardInfo("Sword of War and Peace", 1730, Rarity.MYTHIC, mage.cards.s.SwordOfWarAndPeace.class));
         cards.add(new SetCardInfo("Iron Man, Titan of Innovation", 1731, Rarity.MYTHIC, mage.cards.i.IronManTitanOfInnovation.class));
-        cards.add(new SetCardInfo("Galvanic Blast", 1732, Rarity.UNCOMMON, mage.cards.g.GalvanicBlast.class));
+        cards.add(new SetCardInfo("Galvanic Blast", 1732, Rarity.RARE, mage.cards.g.GalvanicBlast.class));
         cards.add(new SetCardInfo("Commander's Plate", 1733, Rarity.MYTHIC, mage.cards.c.CommandersPlate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sol Ring", 1734, Rarity.RARE, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Inventors' Fair", 1735, Rarity.RARE, mage.cards.i.InventorsFair.class));
