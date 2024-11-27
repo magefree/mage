@@ -212,6 +212,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("The Jolly Balloon Man", 219, Rarity.RARE, mage.cards.t.TheJollyBalloonMan.class));
         cards.add(new SetCardInfo("The Mindskinner", 66, Rarity.RARE, mage.cards.t.TheMindskinner.class));
         cards.add(new SetCardInfo("The Swarmweaver", 236, Rarity.RARE, mage.cards.t.TheSwarmweaver.class));
+        cards.add(new SetCardInfo("The Tale of Tamiyo", 75, Rarity.RARE, mage.cards.t.TheTaleOfTamiyo.class));
         cards.add(new SetCardInfo("The Wandering Rescuer", 41, Rarity.MYTHIC, mage.cards.t.TheWanderingRescuer.class));
         cards.add(new SetCardInfo("Thornspire Verge", 270, Rarity.RARE, mage.cards.t.ThornspireVerge.class));
         cards.add(new SetCardInfo("Threats Around Every Corner", 200, Rarity.UNCOMMON, mage.cards.t.ThreatsAroundEveryCorner.class));
