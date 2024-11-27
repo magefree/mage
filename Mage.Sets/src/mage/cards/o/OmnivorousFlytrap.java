@@ -45,7 +45,9 @@ public final class OmnivorousFlytrap extends CardImpl {
                 new OmnivorousFlytrapEffect(),
                 new OmnivorousFlytrapCondition())
                 .concatBy("Then"));
-        ability.addTarget(new TargetCreaturePermanentAmount(2));
+        TargetCreaturePermanentAmount target = new TargetCreaturePermanentAmount(2);
+        target.setMinNumberOfTargets(1);
+        ability.addTarget(target);
         ability.addHint(CardTypesInGraveyardHint.YOU);
         this.addAbility(ability.setAbilityWord(AbilityWord.DELIRIUM));
     }
