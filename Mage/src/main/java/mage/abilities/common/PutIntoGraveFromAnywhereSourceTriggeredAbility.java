@@ -41,7 +41,7 @@ public class PutIntoGraveFromAnywhereSourceTriggeredAbility extends ZoneChangeTr
 //     * @return
 //     */
 //    @Override
-//    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+//    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
 //        if (game.getState().getZone(source.getId()).equals(Zone.GRAVEYARD)) {
 //            return this.hasSourceObjectAbility(game, source, event);
 //        }

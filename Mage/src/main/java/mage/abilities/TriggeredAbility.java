@@ -72,6 +72,15 @@ public interface TriggeredAbility extends Ability {
      * If true the game “looks back in time” to determine if those abilities trigger
      * This has to be set, if the triggered ability has to check back in time if the permanent the ability is connected
      * to had the ability on the battlefield while the trigger is checked
+     * <p>
+     * 603.6c
+     * Leaves-the-battlefield abilities trigger when a permanent moves from the battlefield to another zone,
+     * or when a phased-in permanent leaves the game because its owner leaves the game. These are written as,
+     * but aren’t limited to, “When [this object] leaves the battlefield, . . .” or “Whenever [something] is put
+     * into a graveyard from the battlefield, . . . .” (See also rule 603.10.) An ability that attempts to do
+     * something to the card that left the battlefield checks for it only in the first zone that it went to.
+     * An ability that triggers when a card is put into a certain zone “from anywhere” is never treated as a
+     * leaves-the-battlefield ability, even if an object is put into that zone from the battlefield.
      */
     void setLeavesTheBattlefieldTrigger(boolean leavesTheBattlefieldTrigger);
 

@@ -1175,35 +1175,31 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        if (!this.hasSourceObjectAbility(game, source, event)) {
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        if (!this.hasSourceObjectAbility(game, sourceObject, event)) {
             return false;
         }
 
+        // workaround for singleton abilities like Flying
+        UUID affectedSourceId = getRealSourceObjectId(this, sourceObject);
+
         // in command zone
         if (zone == Zone.COMMAND) {
-            if (this.getSourceId() == null) { // commander effects
+            if (affectedSourceId == null) {
+                // commander effects
                 return true;
+            } else {
+                MageObject object = game.getObject(affectedSourceId);
+                // emblem/planes are always actual
+                if (object instanceof Emblem || object instanceof Dungeon || object instanceof Plane) {
+                    return true;
+                }
             }
-            MageObject object = game.getObject(this.getSourceId());
-            // emblem/planes are always actual
-            if (object instanceof Emblem || object instanceof Dungeon || object instanceof Plane) {
-                return true;
-            }
-        }
-
-        UUID parameterSourceId;
-        // for singleton abilities like Flying we can't rely on abilities' source because it's only once in continuous effects
-        // so will use the sourceId of the object itself that came as a parameter if it is not null
-        if (this instanceof MageSingleton && source != null) {
-            parameterSourceId = source.getId();
-        } else {
-            parameterSourceId = getSourceId();
         }
 
         // on entering permanents - must use static abilities like it already on battlefield
         // example: Tatterkite enters without counters from Mikaeus, the Unhallowed
-        if (game.getPermanentEntering(parameterSourceId) != null && zone == Zone.BATTLEFIELD) {
+        if (game.getPermanentEntering(affectedSourceId) != null && zone == Zone.BATTLEFIELD) {
             return true;
         }
 
@@ -1212,7 +1208,7 @@ public abstract class AbilityImpl implements Ability {
         // any trigger conditions, and continuous effects that exist at that time are used to determine what the
         // trigger conditions are and what the objects involved in the event look like.
         // ...
-        Zone sourceObjectZone = game.getState().getZone(parameterSourceId);
+        Zone sourceObjectZone = game.getState().getZone(affectedSourceId);
 
         // 603.10.
         // ...
@@ -1228,12 +1224,12 @@ public abstract class AbilityImpl implements Ability {
         // TODO: research "put into a hand or library"
         if (isTriggerCanFireAfterLeaveBattlefield(event)) {
             // permanents with normal triggers
-            if (source instanceof Permanent) {
+            if (sourceObject instanceof Permanent) { // TODO: use affectedSourceObject here?
                 // support leaves-the-battlefield abilities
                 sourceObjectZone = Zone.BATTLEFIELD;
             }
             // permanents with continues effects like Yixlid Jailer, see related code "isInUseableZone(game, null"
-            if (source == null && this instanceof StaticAbility) {
+            if (sourceObject == null && this instanceof StaticAbility) {
                 sourceObjectZone = Zone.BATTLEFIELD;
             }
         }
@@ -1267,6 +1263,7 @@ public abstract class AbilityImpl implements Ability {
             //   need research: is it ability's or event's task?
             //   - ability's task: code like ability.setLookBackInTime
             //   - event's task: code like current switch
+            // TODO: alternative solution: replace check by source.isLeavesTheBattlefieldTrigger?
             switch (e.getType()) {
                 case DESTROYED_PERMANENT:
                 case EXPLOITED_CREATURE:
@@ -1279,31 +1276,43 @@ public abstract class AbilityImpl implements Ability {
         });
     }
 
-    @Override
-    public boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event) {
-        // if source object have this ability
-        // uses for ability.isInUseableZone
-        // replacement and other continues effects can be without source, but active (must return true)
-
-        MageObject object = source;
-        // for singleton abilities like Flying we can't rely on abilities' source because it's only once in continuous effects
+    /**
+     * Find real source object id from any ability (real and singleton)
+     */
+    protected static UUID getRealSourceObjectId(Ability sourceAbility, MageObject sourceObject) {
+        // In singleton abilities like Flying we can't rely on ability's source because it's init only once in continuous effects
         // so will use the sourceId of the object itself that came as a parameter if it is not null
+        if (sourceAbility instanceof MageSingleton && sourceObject != null) {
+            return sourceObject.getId();
+        } else {
+            return sourceAbility.getSourceId();
+        }
+    }
+
+    @Override
+    public boolean hasSourceObjectAbility(Game game, MageObject sourceObject, GameEvent event) {
+        MageObject object = sourceObject;
         if (object == null) {
             object = game.getPermanentEntering(getSourceId());
             if (object == null) {
                 object = game.getObject(getSourceId());
             }
         }
-        if (object != null) {
-            if (object instanceof Permanent) {
-                return object.hasAbility(this, game) && (
-                        ((Permanent) object).isPhasedIn() || this.getWorksPhasedOut()
-                );
-            } else {
-                // cards and other objects
-                return object.hasAbility(this, game);
-            }
+
+        if (object == null) {
+            // replacement and other continues effects can be without source, but active (must return true all time)
+            return true;
         }
+
+        if (!object.hasAbility(this, game)) {
+            return false;
+        }
+
+        // phase in/out support
+        if (object instanceof Permanent) {
+            return ((Permanent) object).isPhasedIn() || this.getWorksPhasedOut();
+        }
+
         return true;
     }
 

@@ -127,15 +127,15 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
         boolean res = false;
         for (TriggeredAbility ability : triggeredAbilities) {
             // TODO: call full inner trigger instead like ability.isInUseableZone()?! Need research why it fails
             if (ability.isLeavesTheBattlefieldTrigger()) {
                 // TODO: leaves battlefield and die are not same! Is it possible make a diff logic?
-                res |= TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
+                res |= TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
             } else {
-                res |= super.isInUseableZone(game, source, event);
+                res |= super.isInUseableZone(game, sourceObject, event);
             }
         }
         return res;
