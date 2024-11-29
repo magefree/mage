@@ -18,7 +18,7 @@ public final class UnchartedVoyage extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{U}");
 
         // Target creature's owner puts it on their choice of the top or bottom of their library.
-        this.getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect(false, true));
+        this.getSpellAbility().addEffect(new PutOnTopOrBottomLibraryTargetEffect(false));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Surveil 1.
