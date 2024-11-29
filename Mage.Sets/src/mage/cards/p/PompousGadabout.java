@@ -43,7 +43,7 @@ public final class PompousGadabout extends CardImpl {
         // Pompous Gadabout has hexproof as long as it's your turn.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield),
-                MyTurnCondition.instance, "{this} has hexproof as long as it's your turn"
+                MyTurnCondition.instance, "during your turn, {this} has hexproof"
         )).addHint(MyTurnHint.instance));
 
         // Pompous Gadabout can't be blocked by creatures that don't have a name.
