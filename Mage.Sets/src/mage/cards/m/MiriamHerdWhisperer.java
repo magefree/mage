@@ -47,7 +47,7 @@ public final class MiriamHerdWhisperer extends CardImpl {
         // As long as it's your turn, Mounts and Vehicles you control have hexproof.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, filter),
-                MyTurnCondition.instance, "as long as it's your turn, Mounts and Vehicles you control have hexproof"
+                MyTurnCondition.instance, "during your turn, Mounts and Vehicles you control have hexproof"
         )));
 
         // Whenever a Mount or Vehicle you control attacks, put a +1/+1 counter on it.

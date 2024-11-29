@@ -29,7 +29,7 @@ public final class SporebackWolf extends CardImpl {
         // As long as it's your turn, Sporeback Wolf gets +0/+2.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(0, 2, Duration.WhileOnBattlefield),
-                MyTurnCondition.instance, "as long as it's your turn, {this} gets +0/+2."
+                MyTurnCondition.instance, "during your turn, {this} gets +0/+2."
         )).addHint(MyTurnHint.instance));
     }
 
