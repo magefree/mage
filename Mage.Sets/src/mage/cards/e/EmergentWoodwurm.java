@@ -69,7 +69,6 @@ enum EmergentWoodwurmPredicate implements ObjectSourcePlayerPredicate<Card> {
                 .of(input)
                 .map(ObjectSourcePlayer::getSource)
                 .map(ability -> ability.getSourcePermanentOrLKI(game))
-                .filter(Objects::nonNull)
                 .map(MageObject::getPower)
                 .map(MageInt::getValue)
                 .map(i -> input.getObject().getManaValue() <= i)

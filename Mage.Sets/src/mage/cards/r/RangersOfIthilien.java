@@ -70,7 +70,6 @@ enum RangersOfIthilienPredicate implements ObjectSourcePlayerPredicate<Permanent
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         return Optional
                 .ofNullable(input.getSource().getSourcePermanentIfItStillExists(game))
-                .filter(Objects::nonNull)
                 .map(MageObject::getPower)
                 .map(MageInt::getValue)
                 .map(i -> i > input.getObject().getPower().getValue())

@@ -103,11 +103,9 @@ class PainDistributorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         return Optional
                 .ofNullable(getValue("permanentDied"))
-                .filter(Objects::nonNull)
                 .map(Permanent.class::cast)
                 .map(Controllable::getControllerId)
                 .map(game::getPlayer)
-                .filter(Objects::nonNull)
                 .map(player -> player.damage(1, source, game) > 0)
                 .orElse(false);
     }

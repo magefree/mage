@@ -110,7 +110,6 @@ enum QuintoriusLoremasterPredicate implements ObjectSourcePlayerPredicate<Card> 
                     UUID exileZoneId = CardUtil.getExileZoneId(game, quintorius.getId(), quintorius.getZoneChangeCounter(game));
                     return exile.getExileZone(exileZoneId);
                 })
-                .filter(Objects::nonNull)
                 .map(exile -> exile.contains(input.getObject().getId()))
                 .orElse(false);
     }

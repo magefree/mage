@@ -76,11 +76,9 @@ class AssaultIntercessorEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         return Optional
                 .ofNullable(getValue("creatureDied"))
-                .filter(Objects::nonNull)
                 .map(Permanent.class::cast)
                 .map(Controllable::getControllerId)
                 .map(game::getPlayer)
-                .filter(Objects::nonNull)
                 .map(player -> player.loseLife(2, game, source, false) > 0)
                 .orElse(false);
     }
