@@ -33,11 +33,7 @@ public final class OmnivorousFlytrap extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
-        // Delirium -- Whenever Omnivorous Flytrap enters or attacks,
-        // if there are four or more card types among cards in your graveyard,
-        // distribute two +1/+1 counters among one or two target creatures.
-        // Then if there are six or more card types among cards in your graveyard,
-        // double the number of +1/+1 counters on those creatures.
+        // Delirium -- Whenever Omnivorous Flytrap enters or attacks, if there are four or more card types among cards in your graveyard, distribute two +1/+1 counters among one or two target creatures. Then if there are six or more card types among cards in your graveyard, double the number of +1/+1 counters on those creatures.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
                 new DistributeCountersEffect(CounterType.P1P1, 2, "one or two target creatures"))
                 .withInterveningIf(DeliriumCondition.instance);
