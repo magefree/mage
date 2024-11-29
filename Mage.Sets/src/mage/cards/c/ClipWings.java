@@ -1,4 +1,3 @@
-
 package mage.cards.c;
 
 import java.util.UUID;
@@ -26,7 +25,8 @@ public final class ClipWings extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{G}");
 
         // Each opponent sacrifices a creature with flying.
-        this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(filter));
+        this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(filter)
+                .setText("each opponent sacrifices a creature of their choice with flying"));
     }
 
     private ClipWings(final ClipWings card) {

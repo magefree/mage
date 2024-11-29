@@ -50,7 +50,7 @@ public final class VileMutilator extends CardImpl {
 
         // When Vile Mutilator enters, each opponent sacrifices a nontoken enchantment, then sacrifices a nontoken creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new SacrificeOpponentsEffect(filter));
-        ability.addEffect(new SacrificeOpponentsEffect(filter2).setText(", then sacrifices a nontoken creature"));
+        ability.addEffect(new SacrificeOpponentsEffect(filter2).setText(", then sacrifices a nontoken creature of their choice"));
         this.addAbility(ability);
     }
 

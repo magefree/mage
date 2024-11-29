@@ -55,7 +55,7 @@ class RampageOfTheValkyriesEffect extends OneShotEffect {
 
     RampageOfTheValkyriesEffect() {
         super(Outcome.Benefit);
-        staticText = "each other player sacrifices a creature";
+        staticText = "each other player sacrifices a creature of their choice";
     }
 
     private RampageOfTheValkyriesEffect(final RampageOfTheValkyriesEffect effect) {
