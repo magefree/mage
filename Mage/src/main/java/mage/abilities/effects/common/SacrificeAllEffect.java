@@ -139,7 +139,9 @@ public class SacrificeAllEffect extends OneShotEffect {
                 sb.append(' ');
                 sb.append(filter.getMessage());
         }
-        sb.append(" of their choice");
+        if (!filter.getMessage().contains("with")) {
+            sb.append(" of their choice");
+        }
         staticText = sb.toString();
     }
 
