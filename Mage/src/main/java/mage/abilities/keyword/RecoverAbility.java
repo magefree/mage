@@ -1,20 +1,16 @@
-
 package mage.abilities.keyword;
 
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.Card;
-import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.players.Player;
 
 /**
  * 702.58a Recover is a triggered ability that functions only while the card
@@ -28,7 +24,8 @@ import mage.players.Player;
 public class RecoverAbility extends TriggeredAbilityImpl {
 
     public RecoverAbility(Cost cost, Card card) {
-        super(Zone.GRAVEYARD, new RecoverEffect(cost, card.isCreature()), false);
+        super(Zone.GRAVEYARD, new RecoverEffect(cost, card), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     protected RecoverAbility(final RecoverAbility ability) {
@@ -64,41 +61,20 @@ public class RecoverAbility extends TriggeredAbilityImpl {
     }
 }
 
-class RecoverEffect extends OneShotEffect {
+class RecoverEffect extends DoIfCostPaid {
 
-    protected Cost cost;
-
-    public RecoverEffect(Cost cost, boolean creature) {
-        super(Outcome.ReturnToHand);
-        this.cost = cost;
-        this.staticText = setText(cost, creature);
+    public RecoverEffect(Cost cost, Card card) {
+        super(new ReturnToHandSourceEffect(), new ExileSourceEffect(), cost);
+        this.staticText = setText(cost, card.isCreature());
     }
 
     protected RecoverEffect(final RecoverEffect effect) {
         super(effect);
-        this.cost = effect.cost.copy();
     }
 
     @Override
     public RecoverEffect copy() {
         return new RecoverEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        Card sourceCard = game.getCard(source.getSourceId());
-        if (controller != null && sourceCard != null
-                && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
-            if (controller.chooseUse(Outcome.Damage, "Pay " + cost.getText() + " to recover " + sourceCard.getLogName() + "? (Otherwise the card will be exiled)", source, game)) {
-                cost.clearPaid();
-                if (cost.pay(source, game, source, controller.getId(), false, null)) {
-                    return new ReturnToHandSourceEffect().apply(game, source);
-                }
-            }
-            return new ExileSourceEffect().apply(game, source);
-        }
-        return false;
     }
 
     private String setText(Cost cost, boolean creature) {
