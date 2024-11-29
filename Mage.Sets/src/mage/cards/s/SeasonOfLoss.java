@@ -74,7 +74,7 @@ enum SeasonOfLossValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "creature you controlled that died this turn";
+        return "creature that died under your control this turn";
     }
 
     @Override
