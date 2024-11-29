@@ -31,7 +31,7 @@ public final class VerdurousGearhulk extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Verdurous Gearhulk enters the battlefield, distribute four +1/+1 counters among any number of target creatures you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 4, false, "any number of target creatures you control"), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(4, "any number of target creatures you control"), false);
         ability.addTarget(new TargetCreaturePermanentAmount(4, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);
     }

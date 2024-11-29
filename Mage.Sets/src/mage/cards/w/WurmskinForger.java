@@ -27,7 +27,7 @@ public final class WurmskinForger extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Wurmskin Forger enters the battlefield, distribute three +1/+1 counters among one, two, or three target creatures.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 3, false, "one, two, or three target creatures"), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(3, "one, two, or three target creatures"), false);
         ability.addTarget(new TargetCreaturePermanentAmount(3));
         this.addAbility(ability);
     }

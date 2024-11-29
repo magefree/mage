@@ -40,7 +40,7 @@ public final class QuirionBeastcaller extends CardImpl {
         // When Quirion Beastcaller dies, distribute X +1/+1 counters among any number of target creatures you control, where X is the number of +1/+1 counters on Quirion Beastcaller.
         Ability ability = new DiesSourceTriggeredAbility(new DistributeCountersEffect(
                 // Amount here is only used for text generation.  Real amount is set in target.
-                CounterType.P1P1, 1, false, "any number of target creatures you control"
+                1, "any number of target creatures you control"
         ).setText("distribute X +1/+1 counters among any number of target creatures you control, where X is the number of +1/+1 counters on {this}"));
         ability.addTarget(new TargetPermanentAmount(new CountersSourceCount(CounterType.P1P1), StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);

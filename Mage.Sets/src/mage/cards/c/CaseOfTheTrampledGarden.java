@@ -40,7 +40,7 @@ public final class CaseOfTheTrampledGarden extends CardImpl {
         this.subtype.add(SubType.CASE);
 
         // When this Case enters the battlefield, distribute two +1/+1 counters among one or two target creatures you control.
-        Ability initialAbility = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 2,
+        Ability initialAbility = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(2,
                 "one or two target creatures you control"));
         TargetPermanentAmount target = new TargetPermanentAmount(2, StaticFilters.FILTER_CONTROLLED_CREATURES);
         target.setMinNumberOfTargets(1);

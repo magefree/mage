@@ -38,7 +38,7 @@ public final class ElusiveOtter extends AdventureCard {
         // Grove's Bounty
         // Distribute X +1/+1 counters among any number of target creatures you control.
         this.getSpellCard().getSpellAbility().addEffect(new DistributeCountersEffect(
-                CounterType.P1P1, GetXValue.instance, false,
+                CounterType.P1P1, GetXValue.instance,
                 "any number of target creatures you control"
         ));
         Target target = new TargetCreaturePermanentAmount(GetXValue.instance, StaticFilters.FILTER_CONTROLLED_CREATURES);

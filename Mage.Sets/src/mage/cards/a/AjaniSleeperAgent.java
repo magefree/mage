@@ -42,7 +42,7 @@ public final class AjaniSleeperAgent extends CardImpl {
         this.addAbility(new LoyaltyAbility(new AjaniSleeperAgentEffect(), 1));
 
         // −3: Distribute three +1/+1 counters among up to three target creatures. They gain vigilance until end of turn.
-        Ability ability = new LoyaltyAbility(new DistributeCountersEffect(CounterType.P1P1, 3, false, "up to three target creatures"), -3);
+        Ability ability = new LoyaltyAbility(new DistributeCountersEffect(3, "up to three target creatures"), -3);
         ability.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance()).setText("They gain vigilance until end of turn"));
         Target target = new TargetCreaturePermanentAmount(3);
         target.setMinNumberOfTargets(0);

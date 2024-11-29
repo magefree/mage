@@ -38,7 +38,7 @@ public final class AjaniMentorOfHeroes extends CardImpl {
         this.setStartingLoyalty(4);
 
         // +1: Distribute three +1/+1 counters among one, two, or three target creatures you control
-        Ability ability = new LoyaltyAbility(new DistributeCountersEffect(CounterType.P1P1, 3, false, "one, two, or three target creatures you control"), 1);
+        Ability ability = new LoyaltyAbility(new DistributeCountersEffect(3, "one, two, or three target creatures you control"), 1);
         ability.addTarget(new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);
 

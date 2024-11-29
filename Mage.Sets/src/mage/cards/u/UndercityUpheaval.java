@@ -30,7 +30,7 @@ public final class UndercityUpheaval extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{G}{G}");
 
         // Undergrowth -- Distribute X +1/+1 counters among any number of target creatures you control, where X is the number of creature cards in your graveyard as you cast this spell. Creatures you control gain vigilance until end of turn.
-        this.getSpellAbility().addEffect(new DistributeCountersEffect(CounterType.P1P1, 1, "")
+        this.getSpellAbility().addEffect(new DistributeCountersEffect(1, "")
                 .setText("distribute X +1/+1 counters among any number of target creatures you control, " +
                         "where X is the number of creature cards in your graveyard as you cast this spell"));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(

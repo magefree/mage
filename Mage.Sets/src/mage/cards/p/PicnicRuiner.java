@@ -42,7 +42,7 @@ public final class PicnicRuiner extends AdventureCard {
         // Distribute three +1/+1 counters among any number of target creatures you control.
         this.getSpellCard().getSpellAbility().addEffect(
                 new DistributeCountersEffect(
-                        CounterType.P1P1, 3, false,
+                       3,
                         "any number of target creatures you control"
                 )
         );

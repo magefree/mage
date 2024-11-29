@@ -46,7 +46,7 @@ public final class TheGrandEvolution extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II,
                 new DistributeCountersEffect(
-                        CounterType.P1P1, 7,
+                       7,
                         "any number of target creatures you control"
                 ), new TargetPermanentAmount(7, StaticFilters.FILTER_CONTROLLED_CREATURES)
         );

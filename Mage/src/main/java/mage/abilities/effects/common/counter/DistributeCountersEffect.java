@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.counter;
 
 import mage.abilities.Ability;
@@ -24,22 +23,24 @@ public class DistributeCountersEffect extends OneShotEffect {
 
     private final CounterType counterType;
     private final DynamicValue amount;
-    private final boolean removeAtEndOfTurn;
+    private boolean removeAtEndOfTurn = false;
     private final String targetDescription;
 
+    /**
+     * Distribute +1/+1 counters among targets
+     */
+    public DistributeCountersEffect(int amount, String targetDescription) {
+        this(CounterType.P1P1, StaticValue.get(amount), targetDescription);
+    }
+
     public DistributeCountersEffect(CounterType counterType, int amount, String targetDescription) {
-        this(counterType, amount, false, targetDescription);
+        this(counterType, StaticValue.get(amount), targetDescription);
     }
 
-    public DistributeCountersEffect(CounterType counterType, int amount, boolean removeAtEndOfTurn, String targetDescription) {
-        this(counterType, StaticValue.get(amount), removeAtEndOfTurn, targetDescription);
-    }
-
-    public DistributeCountersEffect(CounterType counterType, DynamicValue amount, boolean removeAtEndOfTurn, String targetDescription) {
+    public DistributeCountersEffect(CounterType counterType, DynamicValue amount, String targetDescription) {
         super(Outcome.BoostCreature);
         this.counterType = counterType;
         this.amount = amount;
-        this.removeAtEndOfTurn = removeAtEndOfTurn;
         this.targetDescription = targetDescription;
     }
 
@@ -54,6 +55,11 @@ public class DistributeCountersEffect extends OneShotEffect {
     @Override
     public DistributeCountersEffect copy() {
         return new DistributeCountersEffect(this);
+    }
+
+    public DistributeCountersEffect withRemoveAtEndOfTurn() {
+        this.removeAtEndOfTurn = true;
+        return this;
     }
 
     @Override
@@ -99,7 +105,7 @@ class RemoveCountersAtEndOfTurn extends OneShotEffect {
 
     private final CounterType counterType;
 
-    public RemoveCountersAtEndOfTurn(CounterType counterType) {
+    RemoveCountersAtEndOfTurn(CounterType counterType) {
         super(Outcome.Detriment);
         this.counterType = counterType;
         String name = counterType.getName();
