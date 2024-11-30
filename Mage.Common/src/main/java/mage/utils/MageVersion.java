@@ -17,8 +17,8 @@ public class MageVersion implements Serializable, Comparable<MageVersion> {
     // * launcher gives priority to 1.4.48 instead 1.4.48-any-text, so don't use empty release info
     public static final int MAGE_VERSION_MAJOR = 1;
     public static final int MAGE_VERSION_MINOR = 4;
-    public static final int MAGE_VERSION_RELEASE = 54;
-    public static final String MAGE_VERSION_RELEASE_INFO = "V3"; // V1, V1a, V1b for releases; V1-beta3, V1-beta4 for betas
+    public static final int MAGE_VERSION_RELEASE = 55;
+    public static final String MAGE_VERSION_RELEASE_INFO = "V1"; // V1, V1a, V1b for releases; V1-beta3, V1-beta4 for betas
 
     // strict mode
     // Each update requires a strict version

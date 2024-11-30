@@ -5,7 +5,7 @@
 
     <groupId>org.mage</groupId>
     <artifactId>mage-root</artifactId>
-    <version>1.4.54</version>
+    <version>1.4.55</version>
     <packaging>pom</packaging>
     <name>Mage Root</name>
     <description>Mage Root POM</description>
@@ -16,7 +16,7 @@
         <root.dir>${project.basedir}</root.dir>
 
         <!-- TODO: research and optimize version in modules (version change for modules and server configs must be changeable by one line instead perl script -->
-        <mage-version>1.4.54</mage-version>
+        <mage-version>1.4.55</mage-version>
         <argLine>-Dfile.encoding=UTF-8</argLine>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss'Z'</maven.build.timestamp.format>
