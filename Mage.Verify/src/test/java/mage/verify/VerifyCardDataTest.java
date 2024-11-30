@@ -7,6 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.AbilityImpl;
 import mage.abilities.Mode;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.*;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -1979,8 +1980,56 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "legendary nonpermanent cards need to have LegendarySpellAbility");
         }
 
+        // special check: mutate is not supported yet, so must be removed from sets
         if (card.getAbilities().containsClass(MutateAbility.class)) {
             fail(card, "abilities", "mutate cards aren't implemented and shouldn't be available");
+        }
+
+        // special check: wrong dies triggers (there are also a runtime check on wrong usage, see isInUseableZoneDiesTrigger)
+        Set<String> ignoredCards = new HashSet<>();
+        ignoredCards.add("Caller of the Claw");
+        ignoredCards.add("Boneyard Scourge");
+        ignoredCards.add("Fell Shepherd");
+        ignoredCards.add("Massacre Girl");
+        ignoredCards.add("Infested Thrinax");
+        ignoredCards.add("Xira, the Golden Sting");
+        ignoredCards.add("Mawloc");
+        List<String> ignoredAbilities = new ArrayList<>();
+        ignoredAbilities.add("roll"); // roll die effects
+        ignoredAbilities.add("with \"When"); // token creating effects
+        ignoredAbilities.add("gains \"When"); // token creating effects
+        ignoredAbilities.add("and \"When"); // token creating effects
+        ignoredAbilities.add("it has \"When"); // token creating effects
+        ignoredAbilities.add("beginning of your end step"); // step triggers
+        ignoredAbilities.add("beginning of each end step"); // step triggers
+        ignoredAbilities.add("beginning of combat"); // step triggers
+        if (!ignoredCards.contains(card.getName())) {
+            for (Ability ability : card.getAbilities()) {
+                TriggeredAbility triggeredAbility = ability instanceof TriggeredAbility ? (TriggeredAbility) ability : null;
+                if (triggeredAbility == null) {
+                    continue;
+                }
+                // search and check dies related abilities
+                String rules = triggeredAbility.getRule();
+                if (ignoredAbilities.stream().anyMatch(rules::contains)) {
+                    continue;
+                }
+                boolean isDiesAbility = rules.contains("die ")
+                        || rules.contains("dies ")
+                        || rules.contains("die,")
+                        || rules.contains("dies,");
+                boolean isPutToGraveAbility = rules.contains("put into")
+                        && rules.contains("graveyard")
+                        && rules.contains("from the battlefield");
+                if (triggeredAbility.isLeavesTheBattlefieldTrigger()) {
+                    // TODO: add check for wrongly enabled settings too?
+                } else {
+                    if (isDiesAbility || isPutToGraveAbility) {
+                        fail(card, "abilities", "dies related trigger must use setLeavesTheBattlefieldTrigger(true) and possibly override isInUseableZone - "
+                                + triggeredAbility.getClass().getSimpleName());
+                    }
+                }
+            }
         }
 
         // special check: duplicated words in ability text (wrong target/filter usage)
@@ -2303,6 +2352,9 @@ public class VerifyCardDataTest {
     }
 
     private void checkWrongAbilitiesTextStart() {
+        if (FULL_ABILITIES_CHECK_SET_CODES.isEmpty()) {
+            return;
+        }
         System.out.println("Ability text checks started for " + FULL_ABILITIES_CHECK_SET_CODES);
         wrongAbilityStatsTotal = 0;
         wrongAbilityStatsGood = 0;
@@ -2310,6 +2362,10 @@ public class VerifyCardDataTest {
     }
 
     private void checkWrongAbilitiesTextEnd() {
+        if (FULL_ABILITIES_CHECK_SET_CODES.isEmpty()) {
+            return;
+        }
+
         // TODO: implement tests result/stats by github actions to show in check message compared to prev version
         System.out.println();
         System.out.printf("Stats for %d cards checked for abilities text:%n", wrongAbilityStatsTotal);

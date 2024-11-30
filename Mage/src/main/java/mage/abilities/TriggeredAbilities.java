@@ -209,7 +209,7 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
         if (ability.isInUseableZone(game, object, event)) {
             if (event == null || !game.getContinuousEffects().preventedByRuleModification(event, ability, game, false)) {
                 if (object != null) {
-                    boolean controllerSet = false;
+                    boolean controllerSet = false; // TODO: wtf?!?!? Need rework whole "set" logic here
                     Set<UUID> eventTargets = CardUtil.getEventTargets(event);
                     if (ability.getZone() != Zone.COMMAND
                             && event != null

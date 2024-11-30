@@ -91,7 +91,7 @@ class GaleaKindlerOfHopeTriggeredAbility extends TriggeredAbilityImpl {
         if (!isControlledBy(event.getPlayerId())
                 || event.getZone() != Zone.LIBRARY
                 || !event
-                .getAdditionalReference()
+                .getApprovingObject()
                 .getApprovingMageObjectReference()
                 .refersTo(this.getSourceObject(game), game)) {
             return false;

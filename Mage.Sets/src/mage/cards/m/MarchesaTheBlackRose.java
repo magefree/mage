@@ -3,6 +3,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -67,6 +68,7 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
     public MarchesaTheBlackRoseTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MarchesaTheBlackRoseEffect());
         setTriggerPhrase("Whenever a creature you control with a +1/+1 counter on it dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private MarchesaTheBlackRoseTriggeredAbility(final MarchesaTheBlackRoseTriggeredAbility ability) {
@@ -99,6 +101,11 @@ class MarchesaTheBlackRoseTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }
 

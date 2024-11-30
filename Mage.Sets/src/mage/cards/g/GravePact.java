@@ -1,5 +1,6 @@
 package mage.cards.g;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -29,7 +30,6 @@ public final class GravePact extends CardImpl {
     public GravePact(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}{B}");
 
-
         // Whenever a creature you control dies, each other player sacrifices a creature.
         this.addAbility(new GravePactTriggeredAbility());
     }
@@ -49,6 +49,7 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
     public GravePactTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GravePactEffect());
         setTriggerPhrase("Whenever a creature you control dies, ");
+        this.setLeavesTheBattlefieldTrigger(true);
     }
 
     private GravePactTriggeredAbility(final GravePactTriggeredAbility ability) {
@@ -73,6 +74,11 @@ class GravePactTriggeredAbility extends TriggeredAbilityImpl {
             return permanent != null && permanent.isControlledBy(this.getControllerId()) && permanent.isCreature(game);
         }
         return false;
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }
 

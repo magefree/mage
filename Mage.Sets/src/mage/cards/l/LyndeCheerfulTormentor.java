@@ -70,6 +70,7 @@ class LyndeCheerfulTormentorCurseDiesTriggeredAbility extends TriggeredAbilityIm
                         new LyndeCheerfulTormentorReturnCurseEffect()
                 )
         ));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private LyndeCheerfulTormentorCurseDiesTriggeredAbility(final LyndeCheerfulTormentorCurseDiesTriggeredAbility ability) {
@@ -102,8 +103,8 @@ class LyndeCheerfulTormentorCurseDiesTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 
     @Override

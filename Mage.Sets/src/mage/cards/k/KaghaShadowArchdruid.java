@@ -123,7 +123,7 @@ class KaghaShadowArchdruidWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if ((GameEvent.EventType.SPELL_CAST.equals(event.getType()) || GameEvent.EventType.LAND_PLAYED.equals(event.getType()))
                 && event.hasApprovingIdentifier(MageIdentifier.KaghaShadowArchdruidWatcher)) {
-            usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
+            usedFrom.add(event.getApprovingObject().getApprovingMageObjectReference());
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;

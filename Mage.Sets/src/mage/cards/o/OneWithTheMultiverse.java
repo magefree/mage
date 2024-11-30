@@ -136,7 +136,7 @@ class OneWithTheMultiverseWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST
                 && event.hasApprovingIdentifier(MageIdentifier.OneWithTheMultiverseWatcher)) {
-            usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
+            usedFrom.add(event.getApprovingObject().getApprovingMageObjectReference());
         }
     }
 

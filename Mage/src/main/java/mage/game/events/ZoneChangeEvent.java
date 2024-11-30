@@ -96,8 +96,6 @@ public class ZoneChangeEvent extends GameEvent {
 
     /**
      * Source ability of the event, can be null in rare cases
-     *
-     * @return
      */
     public Ability getSource() {
         return this.source;
@@ -105,6 +103,9 @@ public class ZoneChangeEvent extends GameEvent {
 
     @Override
     public String toString() {
-        return super.toString() + ", from " + getFromZone() + " to " + getToZone();
+        return super.toString()
+                + ", from " + getFromZone() + " to " + getToZone()
+                + ", " + (this.target == null ? "no target" : "target " + this.target)
+                + ", " + (this.source == null ? "no source" : "source " + this.source);
     }
 }

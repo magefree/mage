@@ -4,6 +4,8 @@ package mage.cards.m;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -60,6 +62,7 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
 
     MimicVatTriggeredAbility() {
         super(Zone.BATTLEFIELD, new MimicVatEffect(), true);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private MimicVatTriggeredAbility(final MimicVatTriggeredAbility ability) {
@@ -104,6 +107,11 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return AbilityWord.IMPRINT.formatWord() + "Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with {this} to its owner's graveyard.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }
 

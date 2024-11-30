@@ -2,6 +2,8 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -56,6 +58,7 @@ class SlayersPlateTriggeredAbility extends TriggeredAbilityImpl {
 
     public SlayersPlateTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private SlayersPlateTriggeredAbility(final SlayersPlateTriggeredAbility ability) {
@@ -86,5 +89,10 @@ class SlayersPlateTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever equipped creature dies, if it was a Human, create a 1/1 white Spirit creature token with flying.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

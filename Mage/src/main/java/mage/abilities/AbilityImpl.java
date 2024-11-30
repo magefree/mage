@@ -29,7 +29,9 @@ import mage.game.Game;
 import mage.game.command.Dungeon;
 import mage.game.command.Emblem;
 import mage.game.command.Plane;
+import mage.game.events.BatchEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
@@ -1172,69 +1174,145 @@ public abstract class AbilityImpl implements Ability {
         return false;
     }
 
-    /**
-     * @param game
-     * @param source
-     * @return
-     */
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        if (!this.hasSourceObjectAbility(game, source, event)) {
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        if (!this.hasSourceObjectAbility(game, sourceObject, event)) {
             return false;
         }
+
+        // workaround for singleton abilities like Flying
+        UUID affectedSourceId = getRealSourceObjectId(this, sourceObject);
+
+        // in command zone
         if (zone == Zone.COMMAND) {
-            if (this.getSourceId() == null) { // commander effects
+            if (affectedSourceId == null) {
+                // commander effects
                 return true;
-            }
-            MageObject object = game.getObject(this.getSourceId());
-            // emblem/planes are always actual
-            if (object instanceof Emblem || object instanceof Dungeon || object instanceof Plane) {
-                return true;
+            } else {
+                MageObject object = game.getObject(affectedSourceId);
+                // emblem/planes are always actual
+                if (object instanceof Emblem || object instanceof Dungeon || object instanceof Plane) {
+                    return true;
+                }
             }
         }
 
-        UUID parameterSourceId;
-        // for singleton abilities like Flying we can't rely on abilities' source because it's only once in continuous effects
-        // so will use the sourceId of the object itself that came as a parameter if it is not null
-        if (this instanceof MageSingleton && source != null) {
-            parameterSourceId = source.getId();
-        } else {
-            parameterSourceId = getSourceId();
-        }
-        // check against shortLKI for effects that move multiple object at the same time (e.g. destroy all)
-        if (game.checkShortLivingLKI(getSourceId(), getZone())) {
+        // on entering permanents - must use static abilities like it already on battlefield
+        // example: Tatterkite enters without counters from Mikaeus, the Unhallowed
+        if (game.getPermanentEntering(affectedSourceId) != null && zone == Zone.BATTLEFIELD) {
             return true;
         }
-        // check against current state
-        Zone test = game.getState().getZone(parameterSourceId);
-        return zone.match(test);
+
+        // 603.10.
+        // Normally, objects that exist immediately after an event are checked to see if the event matched
+        // any trigger conditions, and continuous effects that exist at that time are used to determine what the
+        // trigger conditions are and what the objects involved in the event look like.
+        // ...
+        Zone sourceObjectZone = game.getState().getZone(affectedSourceId);
+
+        // 603.10.
+        // ...
+        // However, some triggered abilities are exceptions to this rule; the game “looks back in time” to determine
+        // if those abilities trigger, using the existence of those abilities and the appearance of objects
+        // immediately prior to the event. The list of exceptions is as follows:
+
+        // 603.10a
+        // Some zone-change triggers look back in time. These are leaves-the-battlefield abilities,
+        // abilities that trigger when a card leaves a graveyard, and abilities that trigger when an object that all
+        // players can see is put into a hand or library.
+        // TODO: research "leaves a graveyard"
+        // TODO: research "put into a hand or library"
+        if (isTriggerCanFireAfterLeaveBattlefield(event)) {
+            // permanents with normal triggers
+            if (sourceObject instanceof Permanent) { // TODO: use affectedSourceObject here?
+                // support leaves-the-battlefield abilities
+                sourceObjectZone = Zone.BATTLEFIELD;
+            }
+            // permanents with continues effects like Yixlid Jailer, see related code "isInUseableZone(game, null"
+            if (sourceObject == null && this instanceof StaticAbility) {
+                sourceObjectZone = Zone.BATTLEFIELD;
+            }
+        }
+
+        // TODO: research use cases and implement shared logic with "looking zone" instead LKI only
+        // 603.10b Abilities that trigger when a permanent phases out look back in time.
+        // 603.10c Abilities that trigger specifically when an object becomes unattached look back in time.
+        // 603.10d Abilities that trigger when a player loses control of an object look back in time.
+        // 603.10e Abilities that trigger when a spell is countered look back in time.
+        // 603.10f Abilities that trigger when a player loses the game look back in time.
+        // 603.10g Abilities that trigger when a player planeswalks away from a plane look back in time.
+
+        return zone.match(sourceObjectZone);
+    }
+
+    public static boolean isTriggerCanFireAfterLeaveBattlefield(GameEvent event) {
+        if (event == null) {
+            return false;
+        }
+
+        List<GameEvent> allEvents = new ArrayList<>();
+        if (event instanceof BatchEvent) {
+            allEvents.addAll(((BatchEvent) event).getEvents());
+        } else {
+            allEvents.add(event);
+        }
+
+        return allEvents.stream().anyMatch(e -> {
+            // TODO: need sync code with TriggeredAbilityImpl.isInUseableZone
+            // TODO: add more events with zone change logic (or make it event's param)?
+            //   need research: is it ability's or event's task?
+            //   - ability's task: code like ability.setLookBackInTime
+            //   - event's task: code like current switch
+            // TODO: alternative solution: replace check by source.isLeavesTheBattlefieldTrigger?
+            switch (e.getType()) {
+                case DESTROYED_PERMANENT:
+                case EXPLOITED_CREATURE:
+                    return true;
+                case ZONE_CHANGE:
+                    return ((ZoneChangeEvent) e).getFromZone() == Zone.BATTLEFIELD;
+                default:
+                    return false;
+            }
+        });
+    }
+
+    /**
+     * Find real source object id from any ability (real and singleton)
+     */
+    protected static UUID getRealSourceObjectId(Ability sourceAbility, MageObject sourceObject) {
+        // In singleton abilities like Flying we can't rely on ability's source because it's init only once in continuous effects
+        // so will use the sourceId of the object itself that came as a parameter if it is not null
+        if (sourceAbility instanceof MageSingleton && sourceObject != null) {
+            return sourceObject.getId();
+        } else {
+            return sourceAbility.getSourceId();
+        }
     }
 
     @Override
-    public boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event) {
-        // if source object have this ability
-        // uses for ability.isInUseableZone
-        // replacement and other continues effects can be without source, but active (must return true)
-
-        MageObject object = source;
-        // for singleton abilities like Flying we can't rely on abilities' source because it's only once in continuous effects
-        // so will use the sourceId of the object itself that came as a parameter if it is not null
+    public final boolean hasSourceObjectAbility(Game game, MageObject sourceObject, GameEvent event) {
+        MageObject object = sourceObject;
         if (object == null) {
             object = game.getPermanentEntering(getSourceId());
             if (object == null) {
                 object = game.getObject(getSourceId());
             }
         }
-        if (object != null) {
-            if (object instanceof Permanent) {
-                return object.hasAbility(this, game) && (
-                        ((Permanent) object).isPhasedIn() || this.getWorksPhasedOut()
-                );
-            } else {
-                // cards and other objects
-                return object.hasAbility(this, game);
-            }
+
+        if (object == null) {
+            // replacement and other continues effects can be without source, but active (must return true all time)
+            return true;
         }
+
+        if (!object.hasAbility(this, game)) {
+            return false;
+        }
+
+        // phase in/out support
+        if (object instanceof Permanent) {
+            return ((Permanent) object).isPhasedIn() || this.getWorksPhasedOut();
+        }
+
         return true;
     }
 

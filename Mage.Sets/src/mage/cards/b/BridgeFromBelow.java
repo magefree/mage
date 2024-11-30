@@ -65,6 +65,7 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl {
         this.filter = filter;
         this.withInterveningIf(SourceInGraveyardCondition.instance);
         setTriggerPhrase(filter.getMessage());
+        setLeavesTheBattlefieldTrigger(true); // it's not required for Bridge from Below, but better to keep same code style and verify pass
     }
 
     private BridgeFromBelowAbility(final BridgeFromBelowAbility ability) {

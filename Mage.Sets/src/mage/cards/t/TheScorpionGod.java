@@ -3,6 +3,7 @@ package mage.cards.t;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -71,6 +72,7 @@ class TheScorpionGodTriggeredAbility extends TriggeredAbilityImpl {
 
     public TheScorpionGodTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private TheScorpionGodTriggeredAbility(final TheScorpionGodTriggeredAbility ability) {
@@ -104,6 +106,11 @@ class TheScorpionGodTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a creature with a -1/-1 counter on it dies, draw a card.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }
 

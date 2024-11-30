@@ -148,14 +148,14 @@ class MaestrosAscendancyWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST
                 && event.hasApprovingIdentifier(MageIdentifier.MaestrosAscendencyAlternateCast)
-                && event.getAdditionalReference() != null) {
+                && event.getApprovingObject() != null) {
             playerMap.computeIfAbsent(
-                    event.getAdditionalReference()
+                    event.getApprovingObject()
                             .getApprovingMageObjectReference(),
                     x -> new HashSet<>()
             ).add(event.getPlayerId());
             spellMap.computeIfAbsent(
-                    event.getAdditionalReference()
+                    event.getApprovingObject()
                             .getApprovingMageObjectReference(),
                     x -> new HashSet<>()
             ).add(new MageObjectReference(event.getTargetId(), game));

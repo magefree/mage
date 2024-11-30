@@ -13,7 +13,7 @@ import org.mage.test.serverside.base.CardTestCommanderDuelBase;
  *
  * @author LevelX2
  */
-public class CommanderManaReplacmentTest extends CardTestCommanderDuelBase {
+public class CommanderManaReplacementTest extends CardTestCommanderDuelBase {
 
     @Override
     protected Game createNewGameAndPlayers() throws GameException, FileNotFoundException {

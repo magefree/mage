@@ -116,4 +116,25 @@ public class VerrakWarpedSengirTest extends CardTestPlayerBase {
         assertLife(playerA, 20 - 2 * 2 + 2 * 2); // x2 pays, x2 gains
         assertLife(playerB, 20 - 2 * 2); // x2 lose
     }
+
+    @Test
+    public void test_MustNotTriggerOnDiscardCost() {
+        // bug: https://github.com/magefree/mage/issues/12089
+
+        // Whenever you activate an ability that isn’t a mana ability, if life was paid to activate it,
+        // you may pay that much life again. If you do, copy that ability. You may choose new targets for the copy.
+        addCard(Zone.BATTLEFIELD, playerA, "Verrak, Warped Sengir");
+        //
+        // Pay 2 life, Sacrifice another creature: Search your library for a card, put that card into your hand, then shuffle.
+        addCard(Zone.BATTLEFIELD, playerA, "Razaketh, the Foulblooded");
+
+        // activate without copy trigger (discard cost pay will remove Verrak before activate the ability)
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Pay 2 life, Sacrifice");
+        setChoice(playerA, "Verrak, Warped Sengir"); // sacrifice cost
+        addTarget(playerA, "Mountain"); // search lib
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
+        execute();
+    }
 }

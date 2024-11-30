@@ -511,11 +511,6 @@ public class GameEvent implements Serializable {
         DAMAGED_BATCH_FOR_ONE_PERMANENT(true),
 
         DESTROY_PERMANENT,
-        /* DESTROY_PERMANENT_BY_LEGENDARY_RULE
-         targetId    id of the permanent to destroy
-         playerId    controller of the permanent to detroy
-         */
-        DESTROY_PERMANENT_BY_LEGENDARY_RULE,
         /* DESTROYED_PERMANENT
          targetId    id of the destroyed creature
          sourceId    sourceId of the ability with the destroy effect
@@ -819,14 +814,10 @@ public class GameEvent implements Serializable {
     }
 
     /**
-     * Returns possibly approving object that allowed the creation of the event.
+     * Returns possibly approving object that allowed the creation of the event. Used for cast spell and play land events.
      */
-    public ApprovingObject getAdditionalReference() {
+    public ApprovingObject getApprovingObject() {
         return approvingObject;
-    }
-
-    public void setAdditionalReference(ApprovingObject approvingObject) {
-        this.approvingObject = approvingObject;
     }
 
     /**

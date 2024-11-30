@@ -226,7 +226,7 @@ class CourtOfLocthwainWatcher extends Watcher {
                 && event.getPlayerId() != null) {
             decrementCastAvailable(
                     event.getPlayerId(),
-                    event.getAdditionalReference().getApprovingMageObjectReference()
+                    event.getApprovingObject().getApprovingMageObjectReference()
             );
         }
     }

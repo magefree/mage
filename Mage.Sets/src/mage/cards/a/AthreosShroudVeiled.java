@@ -80,6 +80,7 @@ class AthreosShroudVeiledTriggeredAbility extends TriggeredAbilityImpl {
 
     AthreosShroudVeiledTriggeredAbility() {
         super(Zone.BATTLEFIELD, null, false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private AthreosShroudVeiledTriggeredAbility(final AthreosShroudVeiledTriggeredAbility ability) {

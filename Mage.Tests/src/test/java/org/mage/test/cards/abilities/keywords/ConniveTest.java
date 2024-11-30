@@ -239,7 +239,7 @@ public class ConniveTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.HAND, playerA, "Grizzly Bears", 1);
         //
-        addCustomEffect_DestroyTarget(playerA);
+        addCustomEffect_TargetDestroy(playerA);
         addCard(Zone.BATTLEFIELD, playerA, "Razorclaw Bear", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
@@ -267,7 +267,7 @@ public class ConniveTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
         addCard(Zone.HAND, playerA, "Grizzly Bears", 1);
         //
-        addCustomEffect_DestroyTarget(playerA);
+        addCustomEffect_TargetDestroy(playerA);
         addCard(Zone.BATTLEFIELD, playerA, "Razorclaw Bear", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
 
@@ -323,7 +323,7 @@ public class ConniveTest extends CardTestPlayerBase {
         //
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
         //
-        addCustomEffect_DestroyTarget(playerA);
+        addCustomEffect_TargetDestroy(playerA);
 
         // connive lion
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Change of Plans");
@@ -350,7 +350,7 @@ public class ConniveTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Razorclaw Bear", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion", 1);
         //
-        addCustomEffect_DestroyTarget(playerA);
+        addCustomEffect_TargetDestroy(playerA);
 
         // connive lion
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Change of Plans");

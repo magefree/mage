@@ -1,6 +1,8 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.DiscardedByOpponentTriggeredAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -63,6 +65,7 @@ class AjanisLastStandTriggeredAbility extends TriggeredAbilityImpl {
                 new CreateTokenEffect(new AvatarToken2()),
                 new SacrificeSourceCost()
         ), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private AjanisLastStandTriggeredAbility(final AjanisLastStandTriggeredAbility ability) {
@@ -97,5 +100,10 @@ class AjanisLastStandTriggeredAbility extends TriggeredAbilityImpl {
         return "Whenever a creature or planeswalker you control dies, "
                 + "you may sacrifice {this}. "
                 + "If you do, create a 4/4 white Avatar creature token with flying.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

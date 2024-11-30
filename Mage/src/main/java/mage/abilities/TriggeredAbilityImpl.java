@@ -8,7 +8,9 @@ import mage.constants.AbilityType;
 import mage.constants.AbilityWord;
 import mage.constants.Zone;
 import mage.game.Game;
+import mage.game.events.BatchEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -49,7 +51,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         // verify check: DoIfCostPaid effect already asks about action (optional), so no needs to ask it again in triggered ability
         if (effect instanceof DoIfCostPaid && (this.optional && ((DoIfCostPaid) effect).isOptional())) {
             throw new IllegalArgumentException("DoIfCostPaid effect must have only one optional settings, but it have two (trigger + DoIfCostPaid): " + this.getClass().getSimpleName());
-
         }
     }
 
@@ -347,84 +348,73 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
 
-        /**
-         * 603.6. Trigger events that involve objects changing zones are called
-         * “zone-change triggers.” Many abilities with zone-change triggers
-         * attempt to do something to that object after it changes zones. During
-         * resolution, these abilities look for the object in the zone that it
-         * moved to. If the object is unable to be found in the zone it went to,
-         * the part of the ability attempting to do something to the object will
-         * fail to do anything. The ability could be unable to find the object
-         * because the object never entered the specified zone, because it left
-         * the zone before the ability resolved, or because it is in a zone that
-         * is hidden from a player, such as a library or an opponent's hand.
-         * (This rule applies even if the object leaves the zone and returns
-         * again before the ability resolves.) The most common zone-change
-         * triggers are enters-the-battlefield triggers and
-         * leaves-the-battlefield triggers.
-         *
-         * from:
-         * http://www.mtgsalvation.com/forums/magic-fundamentals/magic-rulings/magic-rulings-archives/537065-ixidron-and-kozilek
-         * There are two types of triggers that involve the graveyard: dies
-         * triggers (which are a subset of leave-the-battlefield triggers) and
-         * put into the graveyard from anywhere triggers.
-         *
-         * The former triggers trigger based on the game state prior to the move
-         * where the Kozilek permanent is face down and has no abilities. The
-         * latter triggers trigger from the game state after the move where the
-         * Kozilek card is itself and has the ability.
-         */
+        // workaround for singleton abilities like Flying
+        UUID affectedSourceId = getRealSourceObjectId(this, sourceObject);
 
-        Set<UUID> eventTargets = CardUtil.getEventTargets(event);
-        if (!eventTargets.contains(getSourceId())) {
-            return super.isInUseableZone(game, source, event);
-        }
+        // 603.6
+        // Trigger events that involve objects changing zones are called "zone-change triggers." Many abilities with
+        // zone-change triggers attempt to do something to that object after it changes zones. During resolution,
+        // these abilities look for the object in the zone that it moved to. If the object is unable to be found
+        // in the zone it went to, the part of the ability attempting to do something to the object will fail to
+        // do anything. The ability could be unable to find the object because the object never entered the
+        // specified zone, because it left the zone before the ability resolved, or because it is in a zone that
+        // is hidden from a player, such as a library or an opponent’s hand. (This rule applies even if the
+        // object leaves the zone and returns again before the ability resolves.) The most common zone-change
+        // triggers are enters-the-battlefield triggers and leaves-the-battlefield triggers.
 
-        switch (event.getType()) {
-            case ZONE_CHANGE:
-                ZoneChangeEvent zce = (ZoneChangeEvent) event;
-                if (eventTargets.contains(getSourceId()) && !zce.getToZone().isPublicZone()) {
-                    // If an ability triggers when the object that has it is put into a hidden zone from a graveyard,
-                    // that ability triggers from the graveyard, (such as Golgari Brownscale),
-                    // Yixlid Jailer will prevent that ability from triggering.
-                    if (zce.getFromZone().match(Zone.GRAVEYARD)) {
-                        if (!CardUtil.cardHadAbility(this, game.getLastKnownInformationCard(getSourceId(), zce.getFromZone()), getSourceId(), game)) {
-                            return false;
+        // There are possible two different use cases:
+        // * look in current game state (normal events):
+        // * look back in time (leaves battlefield, dies, etc);
+
+        // TODO: need sync or shared code with AbilityImpl.isInUseableZone
+        MageObject affectedSourceObject = sourceObject;
+        if (event == null) {
+            // state base triggers - use only actual state
+        } else {
+            // event triggers - can look back in time for some use cases
+            switch (event.getType()) {
+                case ZONE_CHANGE:
+                    ZoneChangeEvent zce = (ZoneChangeEvent) event;
+                    Set<UUID> eventTargets = CardUtil.getEventTargets(event);
+                    if (eventTargets.contains(getSourceId()) && !zce.getToZone().isPublicZone()) {
+                        // TODO: need research and share with AbilityImpl
+                        // If an ability triggers when the object that has it is put into a hidden zone from a graveyard,
+                        // that ability triggers from the graveyard, (such as Golgari Brownscale),
+                        // Yixlid Jailer will prevent that ability from triggering.
+                        if (zce.getFromZone().match(Zone.GRAVEYARD)) {
+                            if (!CardUtil.cardHadAbility(this, game.getLastKnownInformationCard(getSourceId(), zce.getFromZone()), getSourceId(), game)) {
+                                return false;
+                            }
                         }
                     }
-                }
-                if (isLeavesTheBattlefieldTrigger()) {
-                    source = zce.getTarget();
-                }
-                break;
-            case DESTROYED_PERMANENT:
-                if (isLeavesTheBattlefieldTrigger()) {
-                    source = game.getLastKnownInformation(getSourceId(), Zone.BATTLEFIELD);
-                }
-                break;
+                    if (isLeavesTheBattlefieldTrigger() && game.checkShortLivingLKI(affectedSourceId, Zone.BATTLEFIELD)) {
+                        affectedSourceObject = game.getLastKnownInformation(affectedSourceId, Zone.BATTLEFIELD);
+                    }
+                    break;
+                case DESTROYED_PERMANENT:
+                case EXPLOITED_CREATURE:
+                    if (isLeavesTheBattlefieldTrigger() && game.checkShortLivingLKI(affectedSourceId, Zone.BATTLEFIELD)) {
+                        affectedSourceObject = game.getPermanentOrLKIBattlefield(affectedSourceId);
+                    }
+                    break;
+            }
         }
-        return super.isInUseableZone(game, source, event);
+
+        return super.isInUseableZone(game, affectedSourceObject, event);
     }
 
-    /*
-     603.6c Leaves-the-battlefield abilities, 603.6d
-        if true the game “looks back in time” to determine if those abilities trigger,
-        using the existence of those abilities and the appearance of objects immediately prior to the event (603.10)
-     */
     @Override
     public boolean isLeavesTheBattlefieldTrigger() {
         return leavesTheBattlefieldTrigger;
     }
 
-    /*
-     603.6c,603.6d
-     This has to be set, if the triggered ability has to check back in time if the permanent the ability is connected to had the ability on the battlefield while the trigger is checked
-     */
     @Override
     public final void setLeavesTheBattlefieldTrigger(boolean leavesTheBattlefieldTrigger) {
         this.leavesTheBattlefieldTrigger = leavesTheBattlefieldTrigger;
+
+        // TODO: replace override of isInUseableZone in dies only triggers by like "isDiesOnlyTrigger" here
     }
 
     @Override
@@ -453,16 +443,35 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     /**
+     * Looking object in GRAVEYARD zone only. If you need multi zone then use default isInUseableZone
+     * - good example: Whenever another creature you control dies
+     * - bad example: When {this} dies or is put into exile from the battlefield
+     * <p>
      * For triggered abilities that function from the battlefield that must trigger when the source permanent dies
      * and/or for any other events that happen simultaneously to the source permanent dying.
      * (Similar logic must be used for any leaves-the-battlefield, but this method assumes to graveyard only.)
      * NOTE: If your ability functions from another zone (not battlefield) then must use standard logic, not this.
      */
-    public static boolean isInUseableZoneDiesTrigger(TriggeredAbility source, GameEvent event, Game game) {
-        // Get the source permanent of the ability
-        MageObject sourceObject = null;
-        if (game.getState().getZone(source.getSourceId()) == Zone.BATTLEFIELD) {
-            sourceObject = game.getPermanent(source.getSourceId());
+    public static boolean isInUseableZoneDiesTrigger(TriggeredAbility sourceAbility, MageObject sourceObject, GameEvent event, Game game) {
+        // runtime check: wrong trigger settings
+        if (!sourceAbility.isLeavesTheBattlefieldTrigger()) {
+            throw new IllegalArgumentException("Wrong code usage: all dies triggers must use setLeavesTheBattlefieldTrigger(true) and override isInUseableZone - "
+                    + sourceAbility.getSourceObject(game) + " - " + sourceAbility);
+        }
+
+        // runtime check: wrong isInUseableZone for batch related triggers
+        if (event instanceof BatchEvent) {
+            throw new IllegalArgumentException("Wrong code usage: batch events unsupported here, possible miss of override isInUseableZone - "
+                    + sourceAbility.getSourceObject(game) + " - " + sourceAbility);
+        }
+
+        // workaround for singleton abilities like Flying
+        UUID affectedSourceId = getRealSourceObjectId(sourceAbility, sourceObject);
+
+        // on permanent - can use actual or look back in time
+        MageObject affectedObject = null;
+        if (game.getState().getZone(affectedSourceId) == Zone.BATTLEFIELD) {
+            affectedObject = game.getPermanent(affectedSourceId);
         } else {
             //  The idea: short living LKI must help to find a moment in the inner of resolve
             //  -
@@ -480,26 +489,29 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             //   - ! empty stack   !  graveyard  ! no  !   no      ! no more to resolve
             //   --!---------------!-------------!-----!-----------!
             //  -
-            if (game.checkShortLivingLKI(source.getSourceId(), Zone.BATTLEFIELD)) {
-                sourceObject = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
-            }
-        }
-        if (sourceObject == null) { // source is no permanent
-            sourceObject = game.getObject(source);
-            if (sourceObject == null || sourceObject.isPermanent(game)) {
-                return false; // No source object found => ability is not valid
+            if (game.checkShortLivingLKI(affectedSourceId, Zone.BATTLEFIELD)) {
+                affectedObject = game.getLastKnownInformation(affectedSourceId, Zone.BATTLEFIELD);
             }
         }
 
-        if (!source.hasSourceObjectAbility(game, sourceObject, event)) {
+        if (affectedObject == null) {
+            affectedObject = game.getObject(sourceAbility);
+            if (affectedObject == null || affectedObject.isPermanent(game)) {
+                // if it was a permanent, but now removed then ignore
+                return false;
+            }
+        }
+
+        if (!sourceAbility.hasSourceObjectAbility(game, affectedObject, event)) {
             return false; // the permanent does currently not have or before it dies the ability so no trigger
         }
 
         // check now it is in graveyard (only if it is no token and was the target itself)
-        if (source.getSourceId().equals(event.getTargetId()) // source is also the target
-                && !(sourceObject instanceof PermanentToken) // it's no token
-                && sourceObject.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(source.getSourceId())) { // It's in the next zone
-            Zone after = game.getState().getZone(source.getSourceId());
+        // TODO: need research
+        if (affectedSourceId.equals(event.getTargetId()) // source is also the target
+                && !(affectedObject instanceof PermanentToken) // it's no token
+                && affectedObject.getZoneChangeCounter(game) + 1 == game.getState().getZoneChangeCounter(affectedSourceId)) { // It's in the next zone
+            Zone after = game.getState().getZone(affectedSourceId);
             if (!Zone.GRAVEYARD.match(after)) { // Zone is not the graveyard
                 return false; // Moving to graveyard was replaced so no trigger
             }

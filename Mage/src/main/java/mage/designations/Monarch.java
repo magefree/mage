@@ -61,7 +61,7 @@ class MonarchDrawTriggeredAbility extends BeginningOfEndStepTriggeredAbility {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
         return true;
     }
 
@@ -108,7 +108,7 @@ class MonarchDealsCombatDamageToAPlayerTriggeredAbility extends TriggeredAbility
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
         return true;
     }
 
