@@ -277,6 +277,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Wasteland", 115, Rarity.UNCOMMON, mage.cards.w.Wasteland.class));
         cards.add(new SetCardInfo("Whiteout", 77, Rarity.COMMON, mage.cards.w.Whiteout.class));
         cards.add(new SetCardInfo("Winds of Change", 201, Rarity.UNCOMMON, mage.cards.w.WindsOfChange.class));
+        cards.add(new SetCardInfo("Wisedrafter's Will", 303, Rarity.RARE, mage.cards.w.WisedraftersWill.class));
         cards.add(new SetCardInfo("Wish", 64, Rarity.RARE, mage.cards.w.Wish.class));
         cards.add(new SetCardInfo("Wishclaw Talisman", 51, Rarity.RARE, mage.cards.w.WishclawTalisman.class));
         cards.add(new SetCardInfo("Worst Fears", 52, Rarity.MYTHIC, mage.cards.w.WorstFears.class));
