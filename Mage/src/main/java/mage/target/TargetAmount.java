@@ -2,7 +2,6 @@ package mage.target;
 
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -19,14 +18,8 @@ public abstract class TargetAmount extends TargetImpl {
     DynamicValue amount;
     int remainingAmount;
 
-    public TargetAmount(int amount) {
-        this(StaticValue.get(amount));
-    }
-
-    public TargetAmount(DynamicValue amount) {
+    protected TargetAmount(DynamicValue amount) {
         this.amount = amount;
-        //this.remainingAmount = amount;
-        amountWasSet = false;
     }
 
     protected TargetAmount(final TargetAmount target) {

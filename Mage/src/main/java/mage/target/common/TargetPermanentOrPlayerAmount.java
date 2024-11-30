@@ -22,10 +22,6 @@ public abstract class TargetPermanentOrPlayerAmount extends TargetAmount {
 
     protected FilterPermanentOrPlayer filter;
 
-    TargetPermanentOrPlayerAmount(DynamicValue amount) {
-        this(amount, 0);
-    }
-
     TargetPermanentOrPlayerAmount(DynamicValue amount, int maxNumberOfTargets) {
         super(amount);
         this.maxNumberOfTargets = maxNumberOfTargets;
