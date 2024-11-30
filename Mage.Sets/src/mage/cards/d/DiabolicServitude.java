@@ -1,6 +1,8 @@
 package mage.cards.d;
 
 import java.util.UUID;
+
+import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -91,6 +93,7 @@ class DiabolicServitudeCreatureDiesTriggeredAbility extends TriggeredAbilityImpl
 
     public DiabolicServitudeCreatureDiesTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DiabolicServitudeExileCreatureEffect(), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private DiabolicServitudeCreatureDiesTriggeredAbility(final DiabolicServitudeCreatureDiesTriggeredAbility ability) {
@@ -122,6 +125,11 @@ class DiabolicServitudeCreatureDiesTriggeredAbility extends TriggeredAbilityImpl
     @Override
     public String getRule() {
         return "When the creature put onto the battlefield with {this} dies, exile it and return {this} to its owner's hand.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }
 

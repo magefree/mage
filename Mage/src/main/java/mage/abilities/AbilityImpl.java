@@ -1290,7 +1290,7 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public boolean hasSourceObjectAbility(Game game, MageObject sourceObject, GameEvent event) {
+    public final boolean hasSourceObjectAbility(Game game, MageObject sourceObject, GameEvent event) {
         MageObject object = sourceObject;
         if (object == null) {
             object = game.getPermanentEntering(getSourceId());

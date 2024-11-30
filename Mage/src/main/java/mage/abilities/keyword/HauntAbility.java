@@ -47,6 +47,7 @@ public class HauntAbility extends TriggeredAbilityImpl {
         setTriggerPhrase((creatureHaunt ? "When {this} enters or the creature it haunts dies, "
                                         : "When the creature {this} haunts dies, ")
         );
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private HauntAbility(final HauntAbility ability) {

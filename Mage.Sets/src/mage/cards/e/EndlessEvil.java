@@ -1,5 +1,6 @@
 package mage.cards.e;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -97,6 +98,7 @@ class EndlessEvilBounceAbility extends TriggeredAbilityImpl {
 
     public EndlessEvilBounceAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(false, true));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private EndlessEvilBounceAbility(final EndlessEvilBounceAbility effect) {
@@ -125,5 +127,10 @@ class EndlessEvilBounceAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "When enchanted creature dies, if that creature was a Horror, return {this} to its owner's hand.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

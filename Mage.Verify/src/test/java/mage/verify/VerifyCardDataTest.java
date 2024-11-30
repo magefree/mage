@@ -1985,33 +1985,52 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "mutate cards aren't implemented and shouldn't be available");
         }
 
-        // special check: wrong dies triggers
-        card.getAbilities().stream()
-                .filter(a -> a instanceof TriggeredAbility)
-                .map(a -> (TriggeredAbility) a)
-                .filter(a -> !a.isLeavesTheBattlefieldTrigger())
-                //.filter(a -> a.getRule().contains("whenever") || a.getRule().contains("Whenever")) // TODO: research failed cards
-                .filter(a -> a.getRule().contains("die ")
-                        || a.getRule().contains("dies ")
-                        || a.getRule().contains("die,")
-                        || a.getRule().contains("dies,")
-                        || (a.getRule().contains("put into")
-                        && a.getRule().contains("graveyard")
-                        && a.getRule().contains("from the battlefield"))
-                )
-                .filter(a -> !a.getRule().contains("roll")) // ignore roll die effects
-                .filter(a -> !a.getRule().contains("with \"When")) // ignore token creating effects
-                .filter(a -> !a.getRule().contains("gains \"When")) // ignore token creating effects
-                .filter(a -> !a.getRule().contains("and \"When")) // ignore token creating effects
-                .filter(a -> !a.getRule().contains("dies while {this} is in your graveyard")) // ignore Boneyard Scourge
-                .filter(a -> !a.getRule().contains("all creature cards that were put into your")) // ignore Fell Shepherd
-                .filter(a -> !card.getName().equals("Massacre Girl") // delayed trigger fixed, but verify check can't find it
-                        && !card.getName().equals("Infested Thrinax")
-                        && !card.getName().equals("Xira, the Golden Sting")
-                )
-                .forEach(a -> {
-                    fail(card, "abilities", "dies trigger must use setLeavesTheBattlefieldTrigger(true) and override isInUseableZone - " + a.getClass().getSimpleName());
-                });
+        // special check: wrong dies triggers (there are also a runtime check on wrong usage, see isInUseableZoneDiesTrigger)
+        Set<String> ignoredCards = new HashSet<>();
+        ignoredCards.add("Caller of the Claw");
+        ignoredCards.add("Boneyard Scourge");
+        ignoredCards.add("Fell Shepherd");
+        ignoredCards.add("Massacre Girl");
+        ignoredCards.add("Infested Thrinax");
+        ignoredCards.add("Xira, the Golden Sting");
+        ignoredCards.add("Mawloc");
+        List<String> ignoredAbilities = new ArrayList<>();
+        ignoredAbilities.add("roll"); // roll die effects
+        ignoredAbilities.add("with \"When"); // token creating effects
+        ignoredAbilities.add("gains \"When"); // token creating effects
+        ignoredAbilities.add("and \"When"); // token creating effects
+        ignoredAbilities.add("it has \"When"); // token creating effects
+        ignoredAbilities.add("beginning of your end step"); // step triggers
+        ignoredAbilities.add("beginning of each end step"); // step triggers
+        ignoredAbilities.add("beginning of combat"); // step triggers
+        if (!ignoredCards.contains(card.getName())) {
+            for (Ability ability : card.getAbilities()) {
+                TriggeredAbility triggeredAbility = ability instanceof TriggeredAbility ? (TriggeredAbility) ability : null;
+                if (triggeredAbility == null) {
+                    continue;
+                }
+                // search and check dies related abilities
+                String rules = triggeredAbility.getRule();
+                if (ignoredAbilities.stream().anyMatch(rules::contains)) {
+                    continue;
+                }
+                boolean isDiesAbility = rules.contains("die ")
+                        || rules.contains("dies ")
+                        || rules.contains("die,")
+                        || rules.contains("dies,");
+                boolean isPutToGraveAbility = rules.contains("put into")
+                        && rules.contains("graveyard")
+                        && rules.contains("from the battlefield");
+                if (triggeredAbility.isLeavesTheBattlefieldTrigger()) {
+                    // TODO: add check for wrongly enabled settings too?
+                } else {
+                    if (isDiesAbility || isPutToGraveAbility) {
+                        fail(card, "abilities", "dies related trigger must use setLeavesTheBattlefieldTrigger(true) and possibly override isInUseableZone - "
+                                + triggeredAbility.getClass().getSimpleName());
+                    }
+                }
+            }
+        }
 
         // special check: duplicated words in ability text (wrong target/filter usage)
         // example: You may exile __two two__ blue cards

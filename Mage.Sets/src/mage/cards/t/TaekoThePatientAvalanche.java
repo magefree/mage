@@ -67,6 +67,7 @@ class TaekoThePatientAvalancheTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new ScryEffect(1, false));
         this.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).concatBy("and"));
         this.setTriggerPhrase("Whenever another creature you control leaves the battlefield, if it didn't die, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private TaekoThePatientAvalancheTriggeredAbility(final TaekoThePatientAvalancheTriggeredAbility ability) {
