@@ -107,6 +107,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Gitaxian Probe", 28, Rarity.COMMON, mage.cards.g.GitaxianProbe.class));
         cards.add(new SetCardInfo("Giver of Runes", 147, Rarity.RARE, mage.cards.g.GiverOfRunes.class));
         cards.add(new SetCardInfo("Gix, Yawgmoth Praetor", 245, Rarity.MYTHIC, mage.cards.g.GixYawgmothPraetor.class));
+        cards.add(new SetCardInfo("Gobland", 374, Rarity.RARE, mage.cards.g.Gobland.class));
         cards.add(new SetCardInfo("Goblin Charbelcher", 221, Rarity.RARE, mage.cards.g.GoblinCharbelcher.class));
         cards.add(new SetCardInfo("Goblin Gang Leader", 144, Rarity.UNCOMMON, mage.cards.g.GoblinGangLeader.class));
         cards.add(new SetCardInfo("Goblin Guide", 58, Rarity.RARE, mage.cards.g.GoblinGuide.class));
