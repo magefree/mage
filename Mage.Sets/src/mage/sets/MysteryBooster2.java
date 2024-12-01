@@ -162,6 +162,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Mirri's Guile", 209, Rarity.RARE, mage.cards.m.MirrisGuile.class));
         cards.add(new SetCardInfo("Mirri, Weatherlight Duelist", 252, Rarity.MYTHIC, mage.cards.m.MirriWeatherlightDuelist.class));
         cards.add(new SetCardInfo("Mishra's Bauble", 97, Rarity.UNCOMMON, mage.cards.m.MishrasBauble.class));
+        cards.add(new SetCardInfo("Mox Poison", 369, Rarity.RARE, mage.cards.m.MoxPoison.class));
         cards.add(new SetCardInfo("Multani, Yavimaya's Avatar", 248, Rarity.MYTHIC, mage.cards.m.MultaniYavimayasAvatar.class));
         cards.add(new SetCardInfo("Mutilate", 45, Rarity.RARE, mage.cards.m.Mutilate.class));
         cards.add(new SetCardInfo("Mystic Sanctuary", 110, Rarity.COMMON, mage.cards.m.MysticSanctuary.class));
