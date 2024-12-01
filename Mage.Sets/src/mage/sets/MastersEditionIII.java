@@ -90,7 +90,7 @@ public final class MastersEditionIII extends ExpansionSet {
         cards.add(new SetCardInfo("Fire Ambush", 97, Rarity.COMMON, mage.cards.f.FireAmbush.class));
         cards.add(new SetCardInfo("Fire Drake", 98, Rarity.COMMON, mage.cards.f.FireDrake.class));
         cards.add(new SetCardInfo("Fire Sprites", 118, Rarity.COMMON, mage.cards.f.FireSprites.class));
-        cards.add(new SetCardInfo("Firestorm Phoenix", 145, Rarity.RARE, mage.cards.f.FirestormPhoenix.class));
+        cards.add(new SetCardInfo("Firestorm Phoenix", 99, Rarity.RARE, mage.cards.f.FirestormPhoenix.class));
         cards.add(new SetCardInfo("Flash Flood", 35, Rarity.UNCOMMON, mage.cards.f.FlashFlood.class));
         cards.add(new SetCardInfo("Forced Retreat", 37, Rarity.COMMON, mage.cards.f.ForcedRetreat.class));
         cards.add(new SetCardInfo("Force Spike", 36, Rarity.COMMON, mage.cards.f.ForceSpike.class));
