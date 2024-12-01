@@ -82,8 +82,8 @@ enum AleshaWhoLaughsAtFatePredicate implements ObjectSourcePlayerPredicate<Card>
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         return Optional
                 .ofNullable(input.getSource().getSourcePermanentOrLKI(game))
-                .map(MageObject::getManaValue)
-                .map(p -> input.getObject().getManaValue() <= p)
+                .map(MageObject::getPower)
+                .map(p -> input.getObject().getManaValue() <= p.getValue())
                 .orElse(false);
     }
 }
