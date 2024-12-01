@@ -1,6 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.EvolveAbility;
@@ -15,6 +16,7 @@ import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -62,13 +64,10 @@ enum PollywogProdigyPredicate implements ObjectSourcePlayerPredicate<StackObject
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
-        return input
-                .getObject()
-                .getManaValue()
-                < input
-                .getSource()
-                .getSourcePermanentIfItStillExists(game)
-                .getPower()
-                .getValue();
+        return Optional
+                .ofNullable(input.getSource().getSourcePermanentOrLKI(game))
+                .map(MageObject::getPower)
+                .map(p -> input.getObject().getManaValue() < p.getValue())
+                .orElse(false);
     }
 }
