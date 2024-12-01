@@ -126,6 +126,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Hunting Cheetah", 134, Rarity.COMMON, mage.cards.h.HuntingCheetah.class));
         cards.add(new SetCardInfo("Hydroblast", 165, Rarity.COMMON, mage.cards.h.Hydroblast.class));
         cards.add(new SetCardInfo("Ice-Fang Coatl", 83, Rarity.RARE, mage.cards.i.IceFangCoatl.class));
+        cards.add(new SetCardInfo("Indicate", 265, Rarity.RARE, mage.cards.i.Indicate.class));
         cards.add(new SetCardInfo("Iona, Shield of Emeria", 12, Rarity.MYTHIC, mage.cards.i.IonaShieldOfEmeria.class));
         cards.add(new SetCardInfo("Isochron Scepter", 96, Rarity.UNCOMMON, mage.cards.i.IsochronScepter.class));
         cards.add(new SetCardInfo("Jace Beleren", 29, Rarity.MYTHIC, mage.cards.j.JaceBeleren.class));
