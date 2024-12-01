@@ -1182,22 +1182,21 @@ public abstract class AbilityImpl implements Ability {
 
         // workaround for singleton abilities like Flying
         UUID affectedSourceId = getRealSourceObjectId(this, sourceObject);
+        MageObject affectedSourceObject = game.getObject(affectedSourceId);
 
-        // in command zone
+        // global game effects (works all the time and don't have sourceId, example: FinalityCounterEffect)
+        if (affectedSourceId == null) {
+            return true;
+        }
+
+        // emblems/dungeons/planes effects (works all the time, store in command zone)
         if (zone == Zone.COMMAND) {
-            if (affectedSourceId == null) {
-                // commander effects
+            if (affectedSourceObject instanceof Emblem || affectedSourceObject instanceof Dungeon || affectedSourceObject instanceof Plane) {
                 return true;
-            } else {
-                MageObject object = game.getObject(affectedSourceId);
-                // emblem/planes are always actual
-                if (object instanceof Emblem || object instanceof Dungeon || object instanceof Plane) {
-                    return true;
-                }
             }
         }
 
-        // on entering permanents - must use static abilities like it already on battlefield
+        // on entering permanents must use static abilities like it already on battlefield
         // example: Tatterkite enters without counters from Mikaeus, the Unhallowed
         if (game.getPermanentEntering(affectedSourceId) != null && zone == Zone.BATTLEFIELD) {
             return true;
@@ -1208,7 +1207,7 @@ public abstract class AbilityImpl implements Ability {
         // any trigger conditions, and continuous effects that exist at that time are used to determine what the
         // trigger conditions are and what the objects involved in the event look like.
         // ...
-        Zone sourceObjectZone = game.getState().getZone(affectedSourceId);
+        Zone affectedObjectZone = game.getState().getZone(affectedSourceId);
 
         // 603.10.
         // ...
@@ -1220,32 +1219,50 @@ public abstract class AbilityImpl implements Ability {
         // Some zone-change triggers look back in time. These are leaves-the-battlefield abilities,
         // abilities that trigger when a card leaves a graveyard, and abilities that trigger when an object that all
         // players can see is put into a hand or library.
-        // TODO: research "leaves a graveyard"
-        // TODO: research "put into a hand or library"
-        if (isTriggerCanFireAfterLeaveBattlefield(event)) {
-            // permanents with normal triggers
-            if (sourceObject instanceof Permanent) { // TODO: use affectedSourceObject here?
-                // support leaves-the-battlefield abilities
-                sourceObjectZone = Zone.BATTLEFIELD;
-            }
-            // permanents with continues effects like Yixlid Jailer, see related code "isInUseableZone(game, null"
-            if (sourceObject == null && this instanceof StaticAbility) {
-                sourceObjectZone = Zone.BATTLEFIELD;
+
+        // TODO: research use cases and implement shared logic with "looking zone" instead LKI only
+        //  in most use cases it's already supported by event (example: saved permanent object in event's target)
+        // [x] 603.10a leaves-the-battlefield abilities and other
+        // [ ] 603.10b Abilities that trigger when a permanent phases out look back in time.
+        // [ ] 603.10c Abilities that trigger specifically when an object becomes unattached look back in time.
+        // [ ] 603.10d Abilities that trigger when a player loses control of an object look back in time.
+        // [ ] 603.10e Abilities that trigger when a spell is countered look back in time.
+        // [ ] 603.10f Abilities that trigger when a player loses the game look back in time.
+        // [ ] 603.10g Abilities that trigger when a player planeswalks away from a plane look back in time.
+
+        if (event == null) {
+            // state base triggers - use only actual state
+        } else {
+            // event triggers and continues effects - can look back in time
+            if (isAbilityCanLookBackInTime(this) && isEventCanLookBackInTime(event)) {
+                // 603.10a leaves-the-battlefield
+                if (game.checkShortLivingLKI(affectedSourceId, Zone.BATTLEFIELD)) {
+                    affectedObjectZone = Zone.BATTLEFIELD;
+                }
+                // 603.10a leaves a graveyard
+                // TODO: need tests
+                if (game.checkShortLivingLKI(affectedSourceId, Zone.GRAVEYARD)) {
+                    affectedObjectZone = Zone.GRAVEYARD;
+                }
+                // 603.10a put into a hand or library
+                // TODO: need tests and implementation?
             }
         }
 
-        // TODO: research use cases and implement shared logic with "looking zone" instead LKI only
-        // 603.10b Abilities that trigger when a permanent phases out look back in time.
-        // 603.10c Abilities that trigger specifically when an object becomes unattached look back in time.
-        // 603.10d Abilities that trigger when a player loses control of an object look back in time.
-        // 603.10e Abilities that trigger when a spell is countered look back in time.
-        // 603.10f Abilities that trigger when a player loses the game look back in time.
-        // 603.10g Abilities that trigger when a player planeswalks away from a plane look back in time.
-
-        return zone.match(sourceObjectZone);
+        return zone.match(affectedObjectZone);
     }
 
-    public static boolean isTriggerCanFireAfterLeaveBattlefield(GameEvent event) {
+    public static boolean isAbilityCanLookBackInTime(Ability ability) {
+        if (ability instanceof StaticAbility) {
+            return true;
+        }
+        if (ability instanceof TriggeredAbility) {
+            return ((TriggeredAbility) ability).isLeavesTheBattlefieldTrigger();
+        }
+        return false;
+    }
+
+    public static boolean isEventCanLookBackInTime(GameEvent event) {
         if (event == null) {
             return false;
         }
@@ -1300,7 +1317,7 @@ public abstract class AbilityImpl implements Ability {
         }
 
         if (object == null) {
-            // replacement and other continues effects can be without source, but active (must return true all time)
+            // global replacement and other continues effects can be without source, but active (must return true all time)
             return true;
         }
 
