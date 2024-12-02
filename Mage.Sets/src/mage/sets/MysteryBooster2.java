@@ -119,6 +119,7 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Greater Good", 207, Rarity.RARE, mage.cards.g.GreaterGood.class));
         cards.add(new SetCardInfo("Grinding Station", 223, Rarity.UNCOMMON, mage.cards.g.GrindingStation.class));
         cards.add(new SetCardInfo("Gush", 164, Rarity.COMMON, mage.cards.g.Gush.class));
+        cards.add(new SetCardInfo("Hish of the Snake Cult", 356, Rarity.RARE, mage.cards.h.HishOfTheSnakeCult.class));
         cards.add(new SetCardInfo("Hogaak, Arisen Necropolis", 136, Rarity.RARE, mage.cards.h.HogaakArisenNecropolis.class));
         cards.add(new SetCardInfo("Hollow One", 95, Rarity.RARE, mage.cards.h.HollowOne.class));
         cards.add(new SetCardInfo("Hoodwink", 123, Rarity.COMMON, mage.cards.h.Hoodwink.class));
