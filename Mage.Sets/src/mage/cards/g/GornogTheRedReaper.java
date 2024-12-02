@@ -18,7 +18,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
-import mage.filter.predicate.permanent.PermanentIdPredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DefenderAttackedEvent;
 import mage.game.events.GameEvent;
@@ -79,7 +79,7 @@ public final class GornogTheRedReaper extends CardImpl {
 class GornogTheRedReaperTriggeredAbility extends TriggeredAbilityImpl {
 
     GornogTheRedReaperTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BecomesCreatureTypeTargetEffect(Duration.EndOfTurn, SubType.COWARD)
+        super(Zone.BATTLEFIELD, new BecomesCreatureTypeTargetEffect(Duration.EndOfGame, SubType.COWARD)
                 .setText("target creature that player controls becomes a Coward"));
         this.setTriggerPhrase("Whenever one or more Warriors you control attack a player, ");
     }
@@ -100,16 +100,15 @@ class GornogTheRedReaperTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!isControlledBy(event.getPlayerId())
-                || game.getPlayer(event.getTargetId()) == null
+        if (game.getPlayer(event.getTargetId()) == null
                 || ((DefenderAttackedEvent) event)
                 .getAttackers(game)
                 .stream()
-                .noneMatch(permanent -> permanent.hasSubtype(SubType.WARRIOR, game))) {
+                .noneMatch(p -> p.hasSubtype(SubType.WARRIOR, game) && p.isControlledBy(getControllerId()))) {
             return false;
         }
         FilterPermanent filter = new FilterCreaturePermanent("creature controlled by defending player");
-        filter.add(new PermanentIdPredicate(event.getTargetId()));
+        filter.add(new ControllerIdPredicate(event.getTargetId()));
         this.getTargets().clear();
         this.addTarget(new TargetPermanent(filter));
         return true;
