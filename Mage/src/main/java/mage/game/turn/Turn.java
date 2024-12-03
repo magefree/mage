@@ -365,8 +365,11 @@ public class Turn implements Serializable {
     }
 
     private void logStartOfTurn(Game game, Player player) {
-        StringBuilder sb = new StringBuilder(game.getState().isExtraTurn() ? "Extra turn" : "Turn ");
+        StringBuilder sb = new StringBuilder("Turn ");
         sb.append(game.getState().getTurnNum()).append(' ');
+        if (game.getState().isExtraTurn()) {
+            sb.append("(extra) ");
+        }
         sb.append(player.getLogName());
         sb.append(" (");
         int delimiter = game.getPlayers().size() - 1;
