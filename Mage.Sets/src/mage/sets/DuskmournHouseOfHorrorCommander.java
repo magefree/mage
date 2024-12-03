@@ -266,6 +266,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Terminus", 70, Rarity.RARE, mage.cards.t.Terminus.class));
         cards.add(new SetCardInfo("The Eldest Reborn", 139, Rarity.UNCOMMON, mage.cards.t.TheEldestReborn.class));
         cards.add(new SetCardInfo("The Lord of Pain", 3, Rarity.MYTHIC, mage.cards.t.TheLordOfPain.class));
+        cards.add(new SetCardInfo("The Master of Keys", 4, Rarity.MYTHIC, mage.cards.t.TheMasterOfKeys.class));
         cards.add(new SetCardInfo("Theater of Horrors", 236, Rarity.RARE, mage.cards.t.TheaterOfHorrors.class));
         cards.add(new SetCardInfo("They Came from the Pipes", 14, Rarity.RARE, mage.cards.t.TheyCameFromThePipes.class));
         cards.add(new SetCardInfo("Thirst for Meaning", 129, Rarity.COMMON, mage.cards.t.ThirstForMeaning.class));
