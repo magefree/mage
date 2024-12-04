@@ -17,6 +17,7 @@ import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
+import mage.game.permanent.PermanentToken;
 
 /**
  * @author TheElk801
@@ -44,7 +45,7 @@ public final class ComeBackWrong extends CardImpl {
 class ComeBackWrongEffect extends OneShotEffect {
 
     ComeBackWrongEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.Neutral);
         staticText = "destroy target creature. If a creature card is put into a graveyard this way, " +
                 "return it to the battlefield under your control. Sacrifice it at the beginning of your next end step";
     }
@@ -65,8 +66,14 @@ class ComeBackWrongEffect extends OneShotEffect {
             return false;
         }
         permanent.destroy(source, game);
+        // tokens are not creature cards
+        if (permanent instanceof PermanentToken) {
+            return false;
+        }
         Card card = permanent.getMainCard();
-        if (card == null || !card.isCreature(game) || !Zone.GRAVEYARD.match(game.getState().getZone(card.getId()))) {
+        if (card == null 
+                || !card.isCreature(game) 
+                || !Zone.GRAVEYARD.match(game.getState().getZone(card.getId()))) {
             return true;
         }
         Player player = game.getPlayer(source.getControllerId());
