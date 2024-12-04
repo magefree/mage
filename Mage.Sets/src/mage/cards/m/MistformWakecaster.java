@@ -78,10 +78,8 @@ class BecomesChosenCreatureTypeControlledEffect extends OneShotEffect {
         String chosenType = "";
         if (player != null && card != null) {
             Choice typeChoice = new ChoiceCreatureType(game, source);
-            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
-                if (!player.canRespond()) {
-                    return false;
-                }
+            if (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
+                return false;
             }
             game.informPlayers(card.getName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoiceKey());
             chosenType = typeChoice.getChoiceKey();

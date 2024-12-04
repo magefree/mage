@@ -69,9 +69,8 @@ class PatriarchsBiddingEffect extends OneShotEffect {
                 if (!player.choose(Outcome.PutCreatureInPlay, typeChoice, game)) {
                     continue;
                 }
-                String chosenType = typeChoice.getChoiceKey();
-                game.informPlayers(sourceObject.getLogName() + ": " + player.getLogName() + " has chosen " + chosenType);
-                chosenTypes.add(chosenType);
+                game.informPlayers(sourceObject.getLogName() + ": " + player.getLogName() + " has chosen " + typeChoice.getChoiceKey());
+                chosenTypes.add(typeChoice.getChoiceKey());
             }
 
             List<SubType.SubTypePredicate> predicates = new ArrayList<>();

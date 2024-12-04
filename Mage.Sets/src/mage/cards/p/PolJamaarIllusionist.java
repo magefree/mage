@@ -73,12 +73,10 @@ class PolJamaarIllusionistEffect extends OneShotEffect {
             return false;
         }
         ChoiceCreatureType choice = new ChoiceCreatureType(game, source);
-        player.choose(outcome, choice, game);
-        // must use choice.getChoiceKey() so that actual subtype is used
-        SubType subType = SubType.byDescription(choice.getChoiceKey());
-        if (subType == null) {
+        if (!player.choose(outcome, choice, game)) {
             return false;
         }
+        SubType subType = SubType.byDescription(choice.getChoiceKey());
         game.informPlayers(player.getLogName() + " chooses " + subType);
         int amount = game
                 .getBattlefield()
