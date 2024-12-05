@@ -35,7 +35,6 @@
             <xs:attribute name="maxPasswordLength" type="xs:positiveInteger" use="required"/>
             <xs:attribute name="maxAiOpponents" type="xs:string" use="optional"/>
             <xs:attribute name="saveGameActivated" type="xs:boolean" use="optional"/>
-            <xs:attribute name="authenticationActivated" type="xs:boolean" use="optional"/>
             <xs:attribute name="googleAccount" type="xs:string" use="optional"/>
             <xs:attribute name="mailgunApiKey" type="xs:string" use="optional"/>
             <xs:attribute name="mailgunDomain" type="xs:string" use="optional"/>
@@ -44,6 +43,8 @@
             <xs:attribute name="mailUser" type="xs:string" use="optional"/>
             <xs:attribute name="mailPassword" type="xs:string" use="optional"/>
             <xs:attribute name="mailFromAddress" type="xs:string" use="optional"/>
+            <xs:attribute name="registrationEnabled" type="xs:boolean" use="required"/>
+            <xs:attribute name="checkUsers" type="xs:boolean" use="required"/>
         </xs:complexType>
     </xs:element>
 

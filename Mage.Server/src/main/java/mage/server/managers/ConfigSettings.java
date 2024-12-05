@@ -42,7 +42,7 @@ public interface ConfigSettings {
 
     Boolean isSaveGameActivated();
 
-    Boolean isAuthenticationActivated();
+    Boolean isRegistrationEnabled();
 
     String getGoogleAccount();
 
@@ -69,4 +69,6 @@ public interface ConfigSettings {
     List<Plugin> getDraftCubes();
 
     List<Plugin> getDeckTypes();
+
+    Boolean shouldCheckUsers();
 }
