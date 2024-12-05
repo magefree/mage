@@ -1,0 +1,39 @@
+package mage.cards.v;
+
+import java.util.UUID;
+
+import mage.abilities.effects.common.search.SearchLibraryPutOneInHandRestOntoBattlefieldTappedEffect;
+import mage.abilities.keyword.FreerunningAbility;
+import mage.cards.CardImpl;
+import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.filter.StaticFilters;
+import mage.target.common.TargetCardInLibrary;
+
+/**
+ *
+ * @author Kr4u7
+ */
+public final class ViewpointSynchronization extends CardImpl {
+
+    public ViewpointSynchronization(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{4}{G}");
+
+
+        // Freerunning {2}{G}
+        this.addAbility(new FreerunningAbility("{2}{G}"));
+
+        // Search your library for up to three basic land cards and reveal them. Put two of them onto the battlefield tapped and the other into your hand, then shuffle.
+        this.getSpellAbility().addEffect(new SearchLibraryPutOneInHandRestOntoBattlefieldTappedEffect(
+                new TargetCardInLibrary(0, 3, StaticFilters.FILTER_CARD_BASIC_LANDS)));
+    }
+
+    private ViewpointSynchronization(final ViewpointSynchronization card) {
+        super(card);
+    }
+
+    @Override
+    public ViewpointSynchronization copy() {
+        return new ViewpointSynchronization(this);
+    }
+}
