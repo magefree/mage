@@ -262,6 +262,28 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
                         + " (found actions after stop on " + maxTurn + " / " + maxPhase + ")",
                 (maxTurn > this.stopOnTurn) || (maxTurn == this.stopOnTurn && maxPhase > this.stopAtStep.getIndex()));
 
+        // check commands order
+        for (Player player : currentGame.getPlayers().values()) {
+            if (true) break; // TODO: delete/comment and fix all failed tests
+            if (player instanceof TestPlayer) {
+                TestPlayer testPlayer = (TestPlayer) player;
+                int lastActionIndex = 0;
+                PlayerAction lastAction = null;
+                for (PlayerAction currentAction : testPlayer.getActions()) {
+                    int currentActionIndex = 1000 * currentAction.getTurnNum() + currentAction.getStep().getIndex();
+                    if (currentActionIndex < lastActionIndex) {
+                        // how-to fix: find typo in step/turn number
+                        Assert.fail("Found wrong commands order for " + testPlayer.getName() + ":" + "\n"
+                                + lastAction + "\n"
+                                + currentAction);
+                    } else {
+                        lastActionIndex = currentActionIndex;
+                        lastAction = currentAction;
+                    }
+                }
+            }
+        }
+
         if (!currentGame.isPaused()) {
             // workaround to fill range info (cause real range fills after game start, but some cheated cards needs range on ETB)
             for (Player player : currentGame.getPlayers().values()) {

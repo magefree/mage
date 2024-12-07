@@ -57,6 +57,8 @@ public class PlayerAction {
 
     @Override
     public String toString() {
-        return "T" + this.turnNum + "." + this.step.getStepShortText() + ": " + this.action;
+        return "T" + this.turnNum + "." + this.step.getStepShortText()
+                + ": " + this.action
+                + (this.actionName.isEmpty() ? "" : " (" + this.actionName + ")");
     }
 }

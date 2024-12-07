@@ -102,10 +102,11 @@ public class BloodCultistTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blood Cultist");
         activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {this} deals", "Devilthorn Fox");
-        activateAbility(5, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {this} deals", "Shambling Ghoul");
         attack(5, playerA, "Silvercoat Lion");
         block(5, playerB, "Shambling Ghoul", "Silvercoat Lion");
+        activateAbility(5, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: {this} deals", "Shambling Ghoul");
 
+        setStrictChooseMode(true);
         setStopAt(5, PhaseStep.END_TURN);
         execute();
 
