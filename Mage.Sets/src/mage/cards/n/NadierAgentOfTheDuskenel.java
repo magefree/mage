@@ -83,6 +83,9 @@ class NadierAgentOfTheDuskenelEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        // For Nadier's second ability, use its power from when it was last on the battlefield to determine
+        // how many tokens to create.
+        // (2020-11-10)
         Object obj = getValue("permanentLeftBattlefield");
         if (!(obj instanceof Permanent)) {
             return false;

@@ -2021,10 +2021,12 @@ public class VerifyCardDataTest {
                 boolean isPutToGraveAbility = rules.contains("put into")
                         && rules.contains("graveyard")
                         && rules.contains("from the battlefield");
+                boolean isLeavesBattlefield = rules.contains("leaves the battlefield");
+                isLeavesBattlefield = false; // TODO: remove and fix all bad cards
                 if (triggeredAbility.isLeavesTheBattlefieldTrigger()) {
                     // TODO: add check for wrongly enabled settings too?
                 } else {
-                    if (isDiesAbility || isPutToGraveAbility) {
+                    if (isDiesAbility || isPutToGraveAbility || isLeavesBattlefield) {
                         fail(card, "abilities", "dies related trigger must use setLeavesTheBattlefieldTrigger(true) and possibly override isInUseableZone - "
                                 + triggeredAbility.getClass().getSimpleName());
                     }
