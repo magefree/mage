@@ -68,7 +68,7 @@ class ComeBackWrongEffect extends OneShotEffect {
         permanent.destroy(source, game);
         // tokens are not creature cards
         if (permanent instanceof PermanentToken) {
-            return false;
+            return true;
         }
         Card card = permanent.getMainCard();
         if (card == null 
@@ -78,11 +78,11 @@ class ComeBackWrongEffect extends OneShotEffect {
         }
         Player player = game.getPlayer(source.getControllerId());
         if (player == null) {
-            return false;
+            return true;
         }
         player.moveCards(card, Zone.BATTLEFIELD, source, game);
         Permanent creature = game.getPermanent(card.getId());
-        if (permanent != null) {
+        if (creature != null) {
             game.addDelayedTriggeredAbility(new AtTheBeginOfPlayersNextEndStepDelayedTriggeredAbility(
                     new SacrificeTargetEffect("sacrifice it")
                             .setTargetPointer(new FixedTarget(creature, game)),
