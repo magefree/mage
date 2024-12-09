@@ -305,6 +305,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Hedron Archive", 861, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
         cards.add(new SetCardInfo("Herald's Horn", 862, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
         cards.add(new SetCardInfo("Hex", 757, Rarity.RARE, mage.cards.h.Hex.class));
+        cards.add(new SetCardInfo("Hezrou", 131, Rarity.COMMON, mage.cards.h.Hezrou.class));
         cards.add(new SetCardInfo("High Priest of Penance", 848, Rarity.RARE, mage.cards.h.HighPriestOfPenance.class));
         cards.add(new SetCardInfo("Highland Forest", 896, Rarity.COMMON, mage.cards.h.HighlandForest.class));
         cards.add(new SetCardInfo("Hoarding Ogre", 181, Rarity.COMMON, mage.cards.h.HoardingOgre.class));
