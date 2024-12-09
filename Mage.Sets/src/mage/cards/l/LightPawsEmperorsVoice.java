@@ -74,7 +74,7 @@ enum LightPawsEmperorsVoicePredicate implements Predicate<Permanent> {
 
 class LightPawsEmperorsVoiceEffect extends OneShotEffect {
 
-    private static enum LightPawsEmperorsVoiceEffectPredicate implements ObjectSourcePlayerPredicate<Card> {
+    private enum LightPawsEmperorsVoiceEffectPredicate implements ObjectSourcePlayerPredicate<Card> {
         instance;
         private static final FilterPermanent filter = new FilterControlledPermanent(SubType.AURA);
 
