@@ -1502,7 +1502,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (!Charset.defaultCharset().toString().equals("UTF-8")) {
             LOGGER.warn("WARNING, bad charset. Some images will not be downloaded. You must:");
             LOGGER.warn("* Open launcher -> settings -> java -> client java options");
-            LOGGER.warn("* Insert additional command at the the end: -Dfile.encoding=UTF-8");
+            LOGGER.warn("* Insert at the the end: -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8");
         }
 
         startTime = System.currentTimeMillis();
