@@ -43,7 +43,7 @@ public final class SkarrganHellkite extends CardImpl {
                 "{3}{R}: {this} deals 2 damage divided as you choose among one or two targets. " +
                         "Activate only if {this} has a +1/+1 counter on it."
         );
-        ability.addTarget(new TargetAnyTargetAmount(2));
+        ability.addTarget(new TargetAnyTargetAmount(2, 1));
         this.addAbility(ability);
     }
 

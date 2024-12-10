@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -47,7 +46,7 @@ public final class PicnicRuiner extends AdventureCard {
                 )
         );
         this.getSpellCard().getSpellAbility().addTarget(
-                new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_CONTROLLED_CREATURES)
+                new TargetCreaturePermanentAmount(3, 0, StaticFilters.FILTER_CONTROLLED_CREATURES)
         );
 
         this.finalizeAdventure();

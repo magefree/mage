@@ -11,7 +11,6 @@ import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -35,7 +34,7 @@ public final class MythosOfVadrok extends CardImpl {
 
         // Mythos of Vadrok deals 5 damage divided as you choose among any number of target creatures and/or planeswalkers. If {W}{U} was spent to cast this spell, until your next turn, those permanents can't attack or block and their activated abilities can't be activated.
         this.getSpellAbility().addEffect(new DamageMultiEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalkerAmount(5));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalkerAmount(5, 0));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new MythosOfVadrokEffect(), condition, "If {W}{U} was spent to cast this spell, " +
                 "until your next turn, those permanents can't attack or block " +

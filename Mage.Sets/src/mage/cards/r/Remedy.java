@@ -19,9 +19,9 @@ public final class Remedy extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{W}");
 
 
-        // Prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
+        // Prevent the next 5 damage that would be dealt this turn to any number of targets, divided as you choose.
         this.getSpellAbility().addEffect(new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 5));
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(5));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(5, 0));
     }
 
     private Remedy(final Remedy card) {

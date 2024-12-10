@@ -28,7 +28,7 @@ public final class ArrowVolleyTrap extends CardImpl {
 
         // Arrow Volley Trap deals 5 damage divided as you choose among any number of target attacking creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(5));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(5, StaticFilters.FILTER_ATTACKING_CREATURES));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(5, 0, StaticFilters.FILTER_ATTACKING_CREATURES));
     }
 
     private ArrowVolleyTrap(final ArrowVolleyTrap card) {

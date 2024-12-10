@@ -7,9 +7,8 @@ import mage.abilities.keyword.CraftAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetPermanentAmount;
+import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
 
@@ -26,9 +25,7 @@ public final class JadeSeedstones extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(
                 3, "one, two, or three target creatures you control"
         ));
-        TargetPermanentAmount target = new TargetPermanentAmount(3, StaticFilters.FILTER_CONTROLLED_CREATURES);
-        target.setMinNumberOfTargets(1);
-        ability.addTarget(target);
+        ability.addTarget(new TargetCreaturePermanentAmount(3, 1, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);
 
         // Craft with creature {5}{G}{G}

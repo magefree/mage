@@ -30,7 +30,7 @@ public final class SunderingStroke extends CardImpl {
                         "If at least seven red mana was spent to cast this spell, " +
                         "instead {this} deals 7 damage to each of those permanents and/or players"
         ));
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(7, 3));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(7, 1, 3));
         this.getSpellAbility().addHint(new StaticHint(
                 "(You have to choose how 7 damage is divided even if you spend seven red mana.)"
         ));

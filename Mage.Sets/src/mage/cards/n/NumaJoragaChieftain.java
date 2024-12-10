@@ -13,7 +13,6 @@ import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.players.Player;
@@ -91,7 +90,7 @@ class NumaJoragaChieftainEffect extends OneShotEffect {
                 new DistributeCountersEffect(costX, ""),
                 false, "distribute " + costX + " +1/+1 counters among any number of target Elves"
         );
-        ability.addTarget(new TargetCreaturePermanentAmount(costX, filter));
+        ability.addTarget(new TargetCreaturePermanentAmount(costX, 0, filter));
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }

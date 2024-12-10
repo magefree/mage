@@ -18,7 +18,7 @@ public final class ChandrasPyrohelix extends CardImpl {
 
         // Chandra's Pyrohelix deals 2 damage divided as you choose among one or two targets.
         this.getSpellAbility().addEffect(new DamageMultiEffect(2));
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(2));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(2, 1));
     }
 
     private ChandrasPyrohelix(final ChandrasPyrohelix card) {

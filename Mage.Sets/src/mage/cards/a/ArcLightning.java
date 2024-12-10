@@ -18,7 +18,7 @@ public final class ArcLightning extends CardImpl {
 
         // Arc Lightning deals 3 damage divided as you choose among one, two, or three targets.
         this.getSpellAbility().addEffect(new DamageMultiEffect(3));
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(3));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(3, 1));
     }
 
     private ArcLightning(final ArcLightning card) {

@@ -29,7 +29,7 @@ public final class MoggMob extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new DamageMultiEffect(3, "it"), new SacrificeSourceCost()
         );
-        ability.addTarget(new TargetAnyTargetAmount(3));
+        ability.addTarget(new TargetAnyTargetAmount(3, 1));
         this.addAbility(ability);
     }
 

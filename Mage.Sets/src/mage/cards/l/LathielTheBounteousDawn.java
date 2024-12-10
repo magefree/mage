@@ -15,10 +15,8 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.target.TargetAmount;
 import mage.target.common.TargetCreaturePermanentAmount;
 import mage.watchers.common.PlayerGainedLifeWatcher;
 
@@ -50,12 +48,9 @@ public final class LathielTheBounteousDawn extends CardImpl {
                 condition, "At the beginning of each end step, if you gained life this turn, " +
                 "distribute up to that many +1/+1 counters among any number of other target creatures."
         );
-        TargetAmount target = new TargetCreaturePermanentAmount(
+        ability.addTarget(new TargetCreaturePermanentAmount(
                 LathielTheBounteousDawnValue.instance,
-                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE
-        );
-        target.setMinNumberOfTargets(0);
-        ability.addTarget(target);
+                StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability.addHint(LathielTheBounteousDawnValue.getHint()), new PlayerGainedLifeWatcher());
     }
 

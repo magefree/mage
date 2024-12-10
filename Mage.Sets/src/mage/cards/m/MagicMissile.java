@@ -22,7 +22,7 @@ public final class MagicMissile extends CardImpl {
 
         // Magic Missile deals 3 damage divided as you choose among one, two, or three targets.
         this.getSpellAbility().addEffect(new DamageMultiEffect(3));
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(3));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(3, 1));
     }
 
     private MagicMissile(final MagicMissile card) {

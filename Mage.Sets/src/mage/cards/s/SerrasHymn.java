@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetAnyTargetAmount;
 
@@ -22,7 +21,7 @@ import mage.target.common.TargetAnyTargetAmount;
  */
 public final class SerrasHymn extends CardImpl {
 
-    private static final String rule = "Prevent the next X damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose, where X is the number of verse counters on {this}.";
+    private static final String rule = "Prevent the next X damage that would be dealt this turn to any number of targets, divided as you choose, where X is the number of verse counters on {this}.";
 
     public SerrasHymn(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
@@ -31,7 +30,7 @@ public final class SerrasHymn extends CardImpl {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new AddCountersSourceEffect(CounterType.VERSE.createInstance(), true), true));
 
-        // Sacrifice Serra's Hymn: Prevent the next X damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose, where X is the number of verse counters on Serra's Hymn.
+        // Sacrifice Serra's Hymn: Prevent the next X damage that would be dealt this turn to any number of targets, divided as you choose, where X is the number of verse counters on Serra's Hymn.
         Ability ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetMultiAmountEffect(
                         Duration.EndOfTurn,

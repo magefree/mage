@@ -31,7 +31,7 @@ public final class AvacynsJudgment extends CardImpl {
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
-        // Avacyn's Judgment deals 2 damage divided as you choose among any number of target creatures and/or players. If Avacyn's Judgment's madness cost was paid, it deals X damage divided as you choose among those creatures and/or players instead.
+        // Avacyn's Judgment deals 2 damage divided as you choose among any number of targets. If this spell's madness cost was paid, it deals X damage divided as you choose among those creatures and/or players instead.
         DynamicValue xValue = new AvacynsJudgmentManacostVariableValue();
         Effect effect = new DamageMultiEffect(xValue);
         effect.setText("{this} deals 2 damage divided as you choose among any number of targets. If this spell's madness cost was paid, it deals X damage divided as you choose among those permanents and/or players instead.");

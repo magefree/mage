@@ -18,8 +18,10 @@ public abstract class TargetAmount extends TargetImpl {
     DynamicValue amount;
     int remainingAmount;
 
-    protected TargetAmount(DynamicValue amount) {
+    protected TargetAmount(DynamicValue amount, int minNumberOfTargets, int maxNumberOfTargets) {
         this.amount = amount;
+        setMinNumberOfTargets(minNumberOfTargets);
+        setMaxNumberOfTargets(maxNumberOfTargets);
     }
 
     protected TargetAmount(final TargetAmount target) {

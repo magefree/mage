@@ -56,7 +56,7 @@ public final class OnduKnotmaster extends AdventureCard {
                         "one or two target creatures"
                 )
         );
-        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanentAmount(2));
+        this.getSpellCard().getSpellAbility().addTarget(new TargetCreaturePermanentAmount(2, 1));
 
         this.finalizeAdventure();
     }

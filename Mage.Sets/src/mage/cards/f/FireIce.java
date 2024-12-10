@@ -19,7 +19,7 @@ public final class FireIce extends SplitCard {
         // Fire
         // Fire deals 2 damage divided as you choose among one or two targets.
         getLeftHalfCard().getSpellAbility().addEffect(new DamageMultiEffect(2, "Fire"));
-        getLeftHalfCard().getSpellAbility().addTarget(new TargetAnyTargetAmount(2));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetAnyTargetAmount(2, 1));
 
         // Ice
         // Tap target permanent.

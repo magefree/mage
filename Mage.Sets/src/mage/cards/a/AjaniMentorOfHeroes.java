@@ -9,7 +9,6 @@ import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
@@ -39,7 +38,7 @@ public final class AjaniMentorOfHeroes extends CardImpl {
 
         // +1: Distribute three +1/+1 counters among one, two, or three target creatures you control
         Ability ability = new LoyaltyAbility(new DistributeCountersEffect(3, "one, two, or three target creatures you control"), 1);
-        ability.addTarget(new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_CONTROLLED_CREATURES));
+        ability.addTarget(new TargetCreaturePermanentAmount(3, 1, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);
 
         // +1: Look at the top four cards of your library. You may reveal an Aura, creature, or planeswalker card

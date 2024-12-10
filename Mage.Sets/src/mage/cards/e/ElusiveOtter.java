@@ -12,7 +12,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.target.Target;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
@@ -41,10 +40,8 @@ public final class ElusiveOtter extends AdventureCard {
                 CounterType.P1P1, GetXValue.instance,
                 "any number of target creatures you control"
         ));
-        Target target = new TargetCreaturePermanentAmount(GetXValue.instance, StaticFilters.FILTER_CONTROLLED_CREATURES);
-        target.setMinNumberOfTargets(0);
-        target.setMaxNumberOfTargets(Integer.MAX_VALUE);
-        this.getSpellCard().getSpellAbility().addTarget(target);
+        this.getSpellCard().getSpellAbility().addTarget(
+                new TargetCreaturePermanentAmount(GetXValue.instance, StaticFilters.FILTER_CONTROLLED_CREATURES));
 
         this.finalizeAdventure();
     }

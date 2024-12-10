@@ -47,7 +47,7 @@ public final class SamutTheTested extends CardImpl {
         // -2: Samut, the Tested deals 2 damage divided as you choose among one or two targets.
         effect = new DamageMultiEffect(2);
         ability = new LoyaltyAbility(effect, -2);
-        ability.addTarget(new TargetAnyTargetAmount(2));
+        ability.addTarget(new TargetAnyTargetAmount(2, 1));
         this.addAbility(ability);
 
         // -7: Search your library for up to two creature and/or planeswalker cards, put them onto the battlefield, then shuffle your library.

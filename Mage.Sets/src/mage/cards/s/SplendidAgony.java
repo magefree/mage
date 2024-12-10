@@ -20,7 +20,7 @@ public final class SplendidAgony extends CardImpl {
 
         // Distribute two -1/-1 counters among one or two target creatures.
         getSpellAbility().addEffect(new DistributeCountersEffect(CounterType.M1M1, 2, "one or two target creatures"));
-        getSpellAbility().addTarget(new TargetCreaturePermanentAmount(2));
+        getSpellAbility().addTarget(new TargetCreaturePermanentAmount(2, 1));
 
     }
 

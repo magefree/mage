@@ -14,13 +14,12 @@ import mage.cards.CardSetInfo;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetPermanentAmount;
+import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
 
@@ -48,7 +47,7 @@ public final class TheGrandEvolution extends CardImpl {
                 new DistributeCountersEffect(
                        7,
                         "any number of target creatures you control"
-                ), new TargetPermanentAmount(7, StaticFilters.FILTER_CONTROLLED_CREATURES)
+                ), new TargetCreaturePermanentAmount(7, 0, StaticFilters.FILTER_CONTROLLED_CREATURES)
         );
 
         // III -- Until end of turn, creatures you control gain "{1}: This creature fights target creature you don't control." Exile The Grand Evolution, then return it to the battlefield.

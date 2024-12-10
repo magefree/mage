@@ -57,7 +57,7 @@ public final class CaptainAmericaFirstAvenger extends CardImpl {
                         "he deals damage equal to that Equipment's mana value divided as you choose among one, two, or three targets."),
                 new GenericManaCost(3));
         ability.addCost(new CaptainAmericaFirstAvengerUnattachCost());
-        ability.addTarget(new TargetAnyTargetAmount(CaptainAmericaFirstAvengerValue.instance, 3));
+        ability.addTarget(new TargetAnyTargetAmount(CaptainAmericaFirstAvengerValue.instance, 1, 3));
         this.addAbility(ability.withFlavorWord("Throw ..."));
 
         // ... Catch — At the beginning of combat on your turn, attach up to one target Equipment you control to Captain America.

@@ -13,7 +13,6 @@ import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -103,7 +102,7 @@ class YannikScavengingSentinelEffect extends OneShotEffect {
                     "distribute X +1/+1 counters among any number of target creatures, " +
                     "where X is the exiled creature's power"
             );
-            ability.addTarget(new TargetCreaturePermanentAmount(power));
+            ability.addTarget(new TargetCreaturePermanentAmount(power, 0));
             game.fireReflexiveTriggeredAbility(ability, source);
         }
         return true;

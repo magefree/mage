@@ -4,7 +4,6 @@ import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -24,7 +23,7 @@ public final class DefendTheCelestus extends CardImpl {
                 "one, two, or three target creatures you control"
         ));
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(
-                3, StaticFilters.FILTER_CONTROLLED_CREATURES
+                3, 1, StaticFilters.FILTER_CONTROLLED_CREATURES
         ));
     }
 

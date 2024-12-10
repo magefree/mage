@@ -51,7 +51,7 @@ public final class MyojinOfToweringMight extends CardImpl {
         ability.addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("They gain trample until end of turn"));
-        ability.addTarget(new TargetCreaturePermanentAmount(8, StaticFilters.FILTER_CONTROLLED_CREATURES));
+        ability.addTarget(new TargetCreaturePermanentAmount(8, 0, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);
     }
 

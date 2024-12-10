@@ -19,7 +19,7 @@ public final class Electrolyze extends CardImpl {
 
         // Electrolyze deals 2 damage divided as you choose among one or two targets.
         this.getSpellAbility().addEffect(new DamageMultiEffect(2));
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(2));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(2, 1));
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1).concatBy("<br>"));
     }

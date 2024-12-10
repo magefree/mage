@@ -5,7 +5,6 @@ import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
@@ -20,7 +19,7 @@ public final class BlessingsOfNature extends CardImpl {
 
         // Distribute four +1/+1 counters among any number of target creatures.
         this.getSpellAbility().addEffect(new DistributeCountersEffect(4, "any number of target creatures"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(4));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(4, 0));
 
         this.addAbility(new MiracleAbility("{G}"));
     }

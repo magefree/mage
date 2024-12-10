@@ -27,7 +27,7 @@ public final class GangOfDevils extends CardImpl {
 
         // When Gang of Devils dies, it deals 3 damage divided as you choose among one, two, or three targets.
         Ability ability = new DiesSourceTriggeredAbility(new DamageMultiEffect(3, "it"));
-        ability.addTarget(new TargetAnyTargetAmount(3));
+        ability.addTarget(new TargetAnyTargetAmount(3, 1));
         this.addAbility(ability);
     }
 

@@ -90,12 +90,10 @@ enum ShatterskullSmashingAdjuster implements TargetAdjuster {
         ability.getTargets().clear();
         TargetAmount target;
         if (CardUtil.getSourceCostsTag(game, ability, "X", 0) >= 6) {
-            target = new TargetCreatureOrPlaneswalkerAmount(2 * CardUtil.getSourceCostsTag(game, ability, "X", 0));
+            target = new TargetCreatureOrPlaneswalkerAmount(2 * CardUtil.getSourceCostsTag(game, ability, "X", 0), 0, 2);
         } else {
-            target = new TargetCreatureOrPlaneswalkerAmount(CardUtil.getSourceCostsTag(game, ability, "X", 0));
+            target = new TargetCreatureOrPlaneswalkerAmount(CardUtil.getSourceCostsTag(game, ability, "X", 0), 0, 2);
         }
-        target.setMinNumberOfTargets(0);
-        target.setMaxNumberOfTargets(2);
         ability.addTarget(target);
     }
 }

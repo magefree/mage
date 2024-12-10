@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
@@ -37,7 +36,7 @@ public final class GlintWeaver extends CardImpl {
         ));
         ability.addEffect(new GainLifeEffect(GreatestToughnessAmongControlledCreaturesValue.instance)
                 .setText(", then you gain life equal to the greatest toughness among creatures you control"));
-        ability.addTarget(new TargetCreaturePermanentAmount(3));
+        ability.addTarget(new TargetCreaturePermanentAmount(3, 1));
         this.addAbility(ability);
     }
 

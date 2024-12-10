@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.target.common.TargetPermanentAmount;
+import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
  *
@@ -42,7 +42,7 @@ public final class QuirionBeastcaller extends CardImpl {
                 // Amount here is only used for text generation.  Real amount is set in target.
                 1, "any number of target creatures you control"
         ).setText("distribute X +1/+1 counters among any number of target creatures you control, where X is the number of +1/+1 counters on {this}"));
-        ability.addTarget(new TargetPermanentAmount(new CountersSourceCount(CounterType.P1P1), StaticFilters.FILTER_CONTROLLED_CREATURES));
+        ability.addTarget(new TargetCreaturePermanentAmount(new CountersSourceCount(CounterType.P1P1), StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);
     }
 

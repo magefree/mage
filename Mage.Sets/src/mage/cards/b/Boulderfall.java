@@ -18,7 +18,7 @@ public final class Boulderfall extends CardImpl {
 
         // Boulderfall deals 5 damage divided as you choose among any number of targets.
         this.getSpellAbility().addEffect(new DamageMultiEffect(5));
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(5));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(5, 0));
     }
 
     private Boulderfall(final Boulderfall card) {

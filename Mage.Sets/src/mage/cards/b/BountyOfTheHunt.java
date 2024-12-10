@@ -7,7 +7,6 @@ import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetCardInHand;
@@ -38,7 +37,7 @@ public final class BountyOfTheHunt extends CardImpl {
                 3,
                 "one, two, or three target creatures"
         ).withRemoveAtEndOfTurn());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, 1));
     }
 
     private BountyOfTheHunt(final BountyOfTheHunt card) {

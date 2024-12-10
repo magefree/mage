@@ -10,7 +10,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -28,7 +27,7 @@ public final class WurmskinForger extends CardImpl {
 
         // When Wurmskin Forger enters the battlefield, distribute three +1/+1 counters among one, two, or three target creatures.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(3, "one, two, or three target creatures"), false);
-        ability.addTarget(new TargetCreaturePermanentAmount(3));
+        ability.addTarget(new TargetCreaturePermanentAmount(3, 1));
         this.addAbility(ability);
     }
 

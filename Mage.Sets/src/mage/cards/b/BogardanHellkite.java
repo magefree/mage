@@ -28,10 +28,15 @@ public final class BogardanHellkite extends CardImpl {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
+        // Flash
         this.addAbility(FlashAbility.getInstance());
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // When Bogardan Hellkite enters, it deals 5 damage divided as you choose among any number of targets.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect(5, "it"), false);
-        ability.addTarget(new TargetAnyTargetAmount(5));
+        ability.addTarget(new TargetAnyTargetAmount(5, 0));
         this.addAbility(ability);
     }
 

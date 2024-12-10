@@ -36,10 +36,7 @@ public final class CourtOfGarenbrig extends CardImpl {
                        2, "up to two target creatures"
                 )
         );
-        TargetCreaturePermanentAmount target = new TargetCreaturePermanentAmount(2);
-        target.setMinNumberOfTargets(0);
-        target.setMaxNumberOfTargets(2);
-        ability.addTarget(target);
+        ability.addTarget(new TargetCreaturePermanentAmount(2, 0));
         ability.addEffect(new ConditionalOneShotEffect(
                 new DoubleCounterOnEachPermanentEffect(CounterType.P1P1, StaticFilters.FILTER_CONTROLLED_CREATURE),
                 MonarchIsSourceControllerCondition.instance

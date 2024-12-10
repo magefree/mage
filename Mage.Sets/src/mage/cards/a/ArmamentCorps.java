@@ -9,7 +9,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -29,7 +28,7 @@ public final class ArmamentCorps extends CardImpl {
 
         // When Armament Corps enters the battlefield, distribute two +1/+1 counters among one or two target creatures you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(2, "one or two target creatures you control"), false);
-        ability.addTarget(new TargetCreaturePermanentAmount(2, StaticFilters.FILTER_CONTROLLED_CREATURES));
+        ability.addTarget(new TargetCreaturePermanentAmount(2, 1, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);
     }
 

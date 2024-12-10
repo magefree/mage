@@ -11,20 +11,24 @@ public class TargetCreaturePermanentAmount extends TargetPermanentAmount {
 
     private static final FilterCreaturePermanent defaultFilter = new FilterCreaturePermanent("target creatures");
 
-    public TargetCreaturePermanentAmount(int amount) {
-        super(amount, defaultFilter);
+    public TargetCreaturePermanentAmount(int amount, int minNumberOfTargets) {
+        super(amount, minNumberOfTargets, defaultFilter);
+    }
+
+    public TargetCreaturePermanentAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets) {
+        super(amount, minNumberOfTargets, maxNumberOfTargets, defaultFilter);
     }
 
     public TargetCreaturePermanentAmount(DynamicValue amount) {
-        this(amount, defaultFilter);
+        super(amount, 0, defaultFilter);
     }
 
-    public TargetCreaturePermanentAmount(int amount, FilterPermanent filter) {
-        super(amount, filter);
+    public TargetCreaturePermanentAmount(int amount, int minNumberOfTargets, FilterPermanent filter) {
+        super(amount, minNumberOfTargets, filter);
     }
 
     public TargetCreaturePermanentAmount(DynamicValue amount, FilterPermanent filter) {
-        super(amount, filter);
+        super(amount, 0, filter);
     }
 
     private TargetCreaturePermanentAmount(final TargetCreaturePermanentAmount target) {

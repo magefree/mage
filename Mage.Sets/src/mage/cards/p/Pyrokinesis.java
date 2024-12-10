@@ -34,7 +34,7 @@ public final class Pyrokinesis extends CardImpl {
 
         // Pyrokinesis deals 4 damage divided as you choose among any number of target creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect(4));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(4));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(4, 0));
     }
 
     private Pyrokinesis(final Pyrokinesis card) {
