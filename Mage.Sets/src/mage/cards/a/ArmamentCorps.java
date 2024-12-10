@@ -27,7 +27,7 @@ public final class ArmamentCorps extends CardImpl {
         this.toughness = new MageInt(4);
 
         // When Armament Corps enters the battlefield, distribute two +1/+1 counters among one or two target creatures you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(2, "one or two target creatures you control"), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(), false);
         ability.addTarget(new TargetCreaturePermanentAmount(2, 1, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);
     }

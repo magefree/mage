@@ -42,7 +42,7 @@ public final class AbzanCharm extends CardImpl {
         this.getSpellAbility().addMode(mode);
 
         // *Distribute two +1/+1 counters among one or two target creatures.
-        mode = new Mode(new DistributeCountersEffect(2, "one or two target creatures"));
+        mode = new Mode(new DistributeCountersEffect());
         mode.addTarget(new TargetCreaturePermanentAmount(2, 1));
         this.getSpellAbility().addMode(mode);
 

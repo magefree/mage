@@ -27,7 +27,7 @@ public final class ShamblingSwarm extends CardImpl {
 
         // When Shambling Swarm dies, distribute three -1/-1 counters among one, two, or three target creatures. For each -1/-1 counter you put on a creature this way, remove a -1/-1 counter from that creature at the beginning of the next end step.
         Ability ability = new DiesSourceTriggeredAbility(new DistributeCountersEffect(
-                CounterType.M1M1, 3, "one, two, or three target creatures"
+                CounterType.M1M1
         ).withRemoveAtEndOfTurn(), false);
         ability.addTarget(new TargetCreaturePermanentAmount(3, 1));
         this.addAbility(ability);

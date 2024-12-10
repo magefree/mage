@@ -87,7 +87,7 @@ class NumaJoragaChieftainEffect extends OneShotEffect {
             return false;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new DistributeCountersEffect(costX, ""),
+                new DistributeCountersEffect(),
                 false, "distribute " + costX + " +1/+1 counters among any number of target Elves"
         );
         ability.addTarget(new TargetCreaturePermanentAmount(costX, 0, filter));

@@ -35,7 +35,7 @@ public final class OmnivorousFlytrap extends CardImpl {
 
         // Delirium -- Whenever Omnivorous Flytrap enters or attacks, if there are four or more card types among cards in your graveyard, distribute two +1/+1 counters among one or two target creatures. Then if there are six or more card types among cards in your graveyard, double the number of +1/+1 counters on those creatures.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(
-                new DistributeCountersEffect(CounterType.P1P1, 2, "one or two target creatures"))
+                new DistributeCountersEffect())
                 .withInterveningIf(DeliriumCondition.instance);
         ability.addEffect(new ConditionalOneShotEffect(
                 new OmnivorousFlytrapEffect(),

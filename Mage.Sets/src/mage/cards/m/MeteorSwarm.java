@@ -19,7 +19,7 @@ public final class MeteorSwarm extends CardImpl {
 
         // Meteor Swarm deals 8 damage divided as you choose among X target creatures and/or planeswalkers.
         this.getSpellAbility().addEffect(
-                new DamageMultiEffect(8).
+                new DamageMultiEffect().
                         setText("{this} deals 8 damage divided as you choose among X target creatures and/or planeswalkers.")
         );
         // Minimum number of targets will be overridden to X by the adjuster

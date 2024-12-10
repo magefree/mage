@@ -98,7 +98,7 @@ class YannikScavengingSentinelEffect extends OneShotEffect {
         game.addDelayedTriggeredAbility(new OnLeaveReturnExiledAbility(), source);
         if (game.getState().getZone(permanent.getId()) != Zone.BATTLEFIELD) {
             ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                    new DistributeCountersEffect(power, ""), false,
+                    new DistributeCountersEffect(), false,
                     "distribute X +1/+1 counters among any number of target creatures, " +
                     "where X is the exiled creature's power"
             );

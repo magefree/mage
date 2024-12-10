@@ -43,7 +43,7 @@ public final class Fury extends CardImpl {
 
         // When Fury enters the battlefield, it deals 4 damage divided as you choose among any number of target creatures and/or planeswalkers.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new DamageMultiEffect(4, "it")
+                new DamageMultiEffect("it")
         );
         ability.addTarget(new TargetCreatureOrPlaneswalkerAmount(4, 0));
         this.addAbility(ability);

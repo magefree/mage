@@ -18,10 +18,7 @@ public final class DefendTheCelestus extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{G}{G}");
 
         // Distribute three +1/+1 counters among one, two, or three target creatures you control.
-        this.getSpellAbility().addEffect(new DistributeCountersEffect(
-                3,
-                "one, two, or three target creatures you control"
-        ));
+        this.getSpellAbility().addEffect(new DistributeCountersEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(
                 3, 1, StaticFilters.FILTER_CONTROLLED_CREATURES
         ));

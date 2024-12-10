@@ -25,7 +25,7 @@ public final class SunderingStroke extends CardImpl {
 
         // Sundering Stroke deals 7 damage divided as you choose among one, two, or three targets. If at least seven red mana was spent to cast this spell, instead Sundering Stroke deals 7 damage to each of those permanents and/or players.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageTargetEffect(7), new DamageMultiEffect(7), SunderingStrokeCondtition.instance,
+                new DamageTargetEffect(7), new DamageMultiEffect(), SunderingStrokeCondtition.instance,
                 "{this} deals 7 damage divided as you choose among one, two, or three targets. " +
                         "If at least seven red mana was spent to cast this spell, " +
                         "instead {this} deals 7 damage to each of those permanents and/or players"

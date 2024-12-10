@@ -67,6 +67,10 @@ public abstract class TargetAmount extends TargetImpl {
         amountWasSet = true;
     }
 
+    public DynamicValue getAmount() {
+        return amount;
+    }
+
     public int getAmountTotal(Game game, Ability source) {
         return amount.calculate(game, source, null);
     }

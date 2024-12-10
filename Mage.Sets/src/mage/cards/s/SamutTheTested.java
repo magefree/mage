@@ -45,7 +45,7 @@ public final class SamutTheTested extends CardImpl {
         this.addAbility(ability);
 
         // -2: Samut, the Tested deals 2 damage divided as you choose among one or two targets.
-        effect = new DamageMultiEffect(2);
+        effect = new DamageMultiEffect();
         ability = new LoyaltyAbility(effect, -2);
         ability.addTarget(new TargetAnyTargetAmount(2, 1));
         this.addAbility(ability);

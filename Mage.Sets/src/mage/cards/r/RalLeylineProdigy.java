@@ -75,7 +75,7 @@ public final class RalLeylineProdigy extends CardImpl {
         this.addAbility(new LoyaltyAbility(new RalLeylineProdigyCostReductionEffect(), 1));
 
         // -2: Ral deals 2 damage divided as you choose among one or two targets. Draw a card if you control a blue permanent other than Ral.
-        Ability ability = new LoyaltyAbility(new DamageMultiEffect(2), -2);
+        Ability ability = new LoyaltyAbility(new DamageMultiEffect(), -2);
         ability.addTarget(new TargetAnyTargetAmount(2, 1));
         ability.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(1),

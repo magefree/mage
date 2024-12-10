@@ -40,7 +40,7 @@ public final class RalCallerOfStorms extends CardImpl {
         ));
 
         // -2: Ral, Caller of Storms deals 3 damage divided as you choose among one, two, or three targets.
-        Ability ability = new LoyaltyAbility(new DamageMultiEffect(3), -2);
+        Ability ability = new LoyaltyAbility(new DamageMultiEffect(), -2);
         ability.addTarget(new TargetAnyTargetAmount(3, 1));
         this.addAbility(ability);
 

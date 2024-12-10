@@ -32,7 +32,7 @@ public final class JuganTheRisingStar extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
-        Ability ability = new DiesSourceTriggeredAbility(new DistributeCountersEffect(5, "any number of target creatures"), true);
+        Ability ability = new DiesSourceTriggeredAbility(new DistributeCountersEffect(), true);
         ability.addTarget(new TargetCreaturePermanentAmount(5, 0));
         this.addAbility(ability);
     }

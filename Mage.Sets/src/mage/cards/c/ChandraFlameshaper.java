@@ -50,7 +50,7 @@ public final class ChandraFlameshaper extends CardImpl {
 
         // -4: Chandra deals 8 damage divided as you choose among any number of target creatures and/or planeswalkers.
         Ability minusFourAbility = new LoyaltyAbility(
-                new DamageMultiEffect(8, "{this}"), -4
+                new DamageMultiEffect(), -4
         );
         minusFourAbility.addTarget(new TargetCreatureOrPlaneswalkerAmount(8, 0));
         this.addAbility(minusFourAbility);

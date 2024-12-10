@@ -21,7 +21,7 @@ public final class MagicMissile extends CardImpl {
         this.addAbility(new CantBeCounteredSourceAbility().setRuleAtTheTop(true));
 
         // Magic Missile deals 3 damage divided as you choose among one, two, or three targets.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(3));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(3, 1));
     }
 

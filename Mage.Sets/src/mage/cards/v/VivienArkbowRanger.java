@@ -34,8 +34,8 @@ public final class VivienArkbowRanger extends CardImpl {
         this.setStartingLoyalty(4);
 
         // +1: Distribute two +1/+1 counters among up to two target creatures. They gain trample until end of turn.
-        Ability ability = new LoyaltyAbility(new DistributeCountersEffect(
-                2, "up to two target creatures"), 1);
+        Ability ability = new LoyaltyAbility(new DistributeCountersEffect()
+                .setText("distribute two +1/+1 counters among up to two target creatures"), 1);
         ability.addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn,
                 "They gain trample until end of turn"

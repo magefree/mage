@@ -22,7 +22,7 @@ public final class FieryJustice extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{R}{G}{W}");
 
         // Fiery Justice deals 5 damage divided as you choose among any number of targets. Target opponent gains 5 life.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(5));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(5, 0));
         Effect effect = new GainLifeTargetEffect(5);
         effect.setTargetPointer(new SecondTargetPointer());

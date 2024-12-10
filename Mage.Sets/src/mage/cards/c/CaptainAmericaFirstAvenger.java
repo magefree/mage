@@ -53,7 +53,7 @@ public final class CaptainAmericaFirstAvenger extends CardImpl {
 
         // Throw ... — {3}, Unattach an Equipment from Captain America: He deals damage equal to that Equipment’s mana value divided as you choose among one, two, or three targets.
         Ability ability = new SimpleActivatedAbility(
-                new DamageMultiEffect(CaptainAmericaFirstAvengerValue.instance).setText(
+                new DamageMultiEffect().setText(
                         "he deals damage equal to that Equipment's mana value divided as you choose among one, two, or three targets."),
                 new GenericManaCost(3));
         ability.addCost(new CaptainAmericaFirstAvengerUnattachCost());

@@ -19,7 +19,7 @@ public final class Pyrotechnics extends CardImpl {
 
 
         // Pyrotechnics deals 4 damage divided as you choose among any number of targets.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(4));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4, 0));
     }
 
