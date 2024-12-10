@@ -84,7 +84,7 @@ class FirstResponderEffect extends OneShotEffect {
         player.moveCards(permanent, Zone.HAND, source, game);
         int power = permanent.getPower().getValue();
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
-        if (power < 1 || sourcePermanent == null) {
+        if (power > 0 && sourcePermanent != null) {
             sourcePermanent.addCounters(CounterType.P1P1.createInstance(power), source, game);
         }
         return true;
