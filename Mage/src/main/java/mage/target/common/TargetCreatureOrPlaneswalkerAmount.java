@@ -12,15 +12,19 @@ public class TargetCreatureOrPlaneswalkerAmount extends TargetPermanentAmount {
             = new FilterCreatureOrPlaneswalkerPermanent("target creatures and/or planeswalkers");
 
     public TargetCreatureOrPlaneswalkerAmount(int amount, int minNumberOfTargets) {
-        super(amount, minNumberOfTargets, defaultFilter);
-    }
-
-    public TargetCreatureOrPlaneswalkerAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets) {
-        super(amount, minNumberOfTargets, maxNumberOfTargets, defaultFilter);
+        this(amount, minNumberOfTargets, defaultFilter);
     }
 
     public TargetCreatureOrPlaneswalkerAmount(int amount, int minNumberOfTargets, FilterPermanent filter) {
-        super(amount, minNumberOfTargets, filter);
+        this(amount, minNumberOfTargets, 0, filter);
+    }
+
+    public TargetCreatureOrPlaneswalkerAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets) {
+        this(amount, minNumberOfTargets, maxNumberOfTargets, defaultFilter);
+    }
+
+    public TargetCreatureOrPlaneswalkerAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets, FilterPermanent filter) {
+        super(amount, minNumberOfTargets, maxNumberOfTargets, filter);
     }
 
     private TargetCreatureOrPlaneswalkerAmount(final TargetCreatureOrPlaneswalkerAmount target) {
