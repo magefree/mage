@@ -28,7 +28,7 @@ public class TargetPermanentAmount extends TargetAmount {
     }
 
     public TargetPermanentAmount(DynamicValue amount, int minNumberOfTargets, FilterPermanent filter) {
-        this(amount, minNumberOfTargets, 0, filter);
+        this(amount, minNumberOfTargets, Integer.MAX_VALUE, filter);
     }
 
     public TargetPermanentAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets, FilterPermanent filter) {

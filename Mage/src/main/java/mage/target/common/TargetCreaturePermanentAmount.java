@@ -16,7 +16,7 @@ public class TargetCreaturePermanentAmount extends TargetPermanentAmount {
     }
 
     public TargetCreaturePermanentAmount(int amount, int minNumberOfTargets, FilterPermanent filter) {
-        this(amount, minNumberOfTargets, 0, filter);
+        this(amount, minNumberOfTargets, amount, filter);
     }
 
     public TargetCreaturePermanentAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets) {

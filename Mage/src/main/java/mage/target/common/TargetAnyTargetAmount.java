@@ -23,7 +23,7 @@ public class TargetAnyTargetAmount extends TargetPermanentOrPlayerAmount {
     }
 
     public TargetAnyTargetAmount(DynamicValue amount) {
-        this(amount, 0, 0);
+        this(amount, 0, Integer.MAX_VALUE);
     }
 
     public TargetAnyTargetAmount(DynamicValue amount, int minNumberOfTargets, int maxNumberOfTargets) {

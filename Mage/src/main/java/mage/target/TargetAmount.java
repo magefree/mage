@@ -195,12 +195,12 @@ public abstract class TargetAmount extends TargetImpl {
             return true;
         }
         // For a TargetAmount with a min of 0:
-        // A max of 0, or a max that equals the amount when the amount is a StaticValue,
+        // A max that equals the amount, when the amount is a StaticValue,
         // usually represents "any number of target __s", since you can't target more than the amount.
         //
         // 601.2d. If the spell requires the player to divide or distribute an effect
         // (such as damage or counters) among one or more targets, the player announces the division.
         // Each of these targets must receive at least one of whatever is being divided.
-        return max == 0 || (amount instanceof StaticValue && max == ((StaticValue) amount).getValue());
+        return amount instanceof StaticValue && max == ((StaticValue) amount).getValue();
     }
 }
