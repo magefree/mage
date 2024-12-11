@@ -3,6 +3,7 @@ package org.mage.test.cards.enchantments;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
@@ -192,6 +193,7 @@ public class AnimateDeadTest extends CardTestPlayerBase {
         addCard(Zone.GRAVEYARD, playerB, "Dragonlord Atarka", 1);
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Animate Dead", "Dragonlord Atarka");
+        addTarget(playerA, TestPlayer.TARGET_SKIP);
 
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();

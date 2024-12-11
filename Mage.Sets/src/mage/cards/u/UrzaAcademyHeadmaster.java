@@ -144,8 +144,8 @@ class UrzaAcademyHeadmasterRandomEffect extends OneShotEffect {
                                 break;
                             case 2: // AJANI MENTOR OF HEROES 1
                                 sb.append("Distribute three +1/+1 counters among one, two, or three target creatures you control.");
-                                effects.add(new DistributeCountersEffect(3, "one, two, or three target creatures you control"));
-                                target = new TargetCreaturePermanentAmount(3, filter1);
+                                effects.add(new DistributeCountersEffect());
+                                target = new TargetCreaturePermanentAmount(3, 1, filter1);
                                 break;
                             case 3: // NICOL BOLAS PLANESWALKER 1
                                 sb.append("Destroy target noncreature permanent.");

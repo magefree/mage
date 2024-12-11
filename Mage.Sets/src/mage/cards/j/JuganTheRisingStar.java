@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -33,8 +32,8 @@ public final class JuganTheRisingStar extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // When Jugan, the Rising Star dies, you may distribute five +1/+1 counters among any number of target creatures.
-        Ability ability = new DiesSourceTriggeredAbility(new DistributeCountersEffect(5, "any number of target creatures"), true);
-        ability.addTarget(new TargetCreaturePermanentAmount(5));
+        Ability ability = new DiesSourceTriggeredAbility(new DistributeCountersEffect(), true);
+        ability.addTarget(new TargetCreaturePermanentAmount(5, 0));
         this.addAbility(ability);
     }
 

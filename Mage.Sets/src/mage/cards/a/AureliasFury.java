@@ -59,10 +59,10 @@ public final class AureliasFury extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{X}{R}{W}");
 
 
-        // Aurelia's Fury deals X damage divided as you choose among any number of target creatures and/or players.
+        // Aurelia's Fury deals X damage divided as you choose among any number of targets.
         // Tap each creature dealt damage this way. Players dealt damage this way can't cast noncreature spells this turn.
         DynamicValue xValue = GetXValue.instance;
-        this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addEffect(new AureliasFuryEffect());
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));
         this.getSpellAbility().addWatcher(new AureliasFuryDamagedByWatcher());

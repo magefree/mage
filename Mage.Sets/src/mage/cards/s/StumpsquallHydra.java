@@ -96,8 +96,7 @@ class StumpsquallHydraEffect extends OneShotEffect {
             return false;
         }
 
-        TargetAmount targetAmount = new TargetCreatureOrPlaneswalkerAmount(xValue, filter);
-        targetAmount.setMinNumberOfTargets(1);
+        TargetAmount targetAmount = new TargetCreatureOrPlaneswalkerAmount(xValue, 1, filter);
         targetAmount.withNotTarget(true);
         targetAmount.chooseTarget(outcome, player.getId(), source, game);
         for (UUID targetId : targetAmount.getTargets()) {

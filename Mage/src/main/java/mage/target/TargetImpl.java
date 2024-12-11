@@ -2,6 +2,8 @@ package mage.target;
 
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.cards.Card;
 import mage.constants.AbilityType;
 import mage.constants.Outcome;
@@ -109,17 +111,43 @@ public abstract class TargetImpl implements Target {
             sb.append(" or more ");
         } else if (!targetName.startsWith("X ") && (min != 1 || max != 1)) {
             targetName = targetName.replace("another", "other"); //If non-singular, use "other" instead of "another"
-            if (min < max && max != Integer.MAX_VALUE) {
-                if (min == 1 && max == 2) {
-                    sb.append("one or ");
-                } else if (min == 1 && max == 3) {
-                    sb.append("one, two, or ");
+
+            boolean useAnyNumber = false;
+            if (min == 0 && max == Integer.MAX_VALUE) {
+                useAnyNumber = true;
+            } else if (min == 0 && this instanceof TargetAmount) {
+                // For a TargetAmount with a min of 0:
+                // A max of 0, or a max that equals the amount when the amount is a StaticValue,
+                // usually represents "any number of target __s", since you can't target more than the amount.
+                //
+                // 601.2d. If the spell requires the player to divide or distribute an effect
+                // (such as damage or counters) among one or more targets, the player announces the division.
+                // Each of these targets must receive at least one of whatever is being divided.
+                if (max == 0) {
+                    useAnyNumber = true;
                 } else {
-                    sb.append("up to ");
+                    DynamicValue amount = ((TargetAmount) this).getAmount();
+                    if ((amount instanceof StaticValue && max == ((StaticValue) amount).getValue())) {
+                        useAnyNumber = true;
+                    }
                 }
             }
-            sb.append(CardUtil.numberToText(max));
-            sb.append(' ');
+
+            if (useAnyNumber) {
+                sb.append(("any number of "));
+            } else {
+                if (min < max && max != Integer.MAX_VALUE) {
+                    if (min == 1 && max == 2) {
+                        sb.append("one or ");
+                    } else if (min == 1 && max == 3) {
+                        sb.append("one, two, or ");
+                    } else {
+                        sb.append("up to ");
+                    }
+                }
+                sb.append(CardUtil.numberToText(max));
+                sb.append(' ');
+            }
         }
         boolean addTargetWord = false;
         if (!isNotTarget()) {
@@ -127,7 +155,8 @@ public abstract class TargetImpl implements Target {
             if (targetName.contains("target ")) {
                 addTargetWord = false;
             } else if (targetName.endsWith("any target")
-                    || targetName.endsWith("any other target")) {
+                    || targetName.endsWith("any other target")
+                    || targetName.endsWith("targets")) {
                 addTargetWord = false;
             }
             // endsWith needs to be specific.

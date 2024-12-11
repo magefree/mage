@@ -18,8 +18,8 @@ public final class DeftDismissal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{W}");
 
         // Deft Dismissal deals 3 damage divided as you choose among one, two, or three target attacking or blocking creatures.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_ATTACKING_OR_BLOCKING_CREATURES));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, 1, StaticFilters.FILTER_ATTACKING_OR_BLOCKING_CREATURES));
     }
 
     private DeftDismissal(final DeftDismissal card) {

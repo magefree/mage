@@ -17,8 +17,8 @@ public final class ForkedBolt extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{R}");
 
         // Forked Bolt deals 2 damage divided as you choose among one or two targets.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(2));
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(2));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(2, 1));
     }
 
     private ForkedBolt(final ForkedBolt card) {

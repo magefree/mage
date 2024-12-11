@@ -27,9 +27,9 @@ public final class MoggMob extends CardImpl {
 
         // Sacrifice Mogg Mob: It deals 3 damage divided as you choose among one, two, or three targets.
         Ability ability = new SimpleActivatedAbility(
-                new DamageMultiEffect(3, "it"), new SacrificeSourceCost()
+                new DamageMultiEffect("it"), new SacrificeSourceCost()
         );
-        ability.addTarget(new TargetAnyTargetAmount(3));
+        ability.addTarget(new TargetAnyTargetAmount(3, 1));
         this.addAbility(ability);
     }
 

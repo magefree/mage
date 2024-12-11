@@ -38,7 +38,7 @@ public final class OrcaSiegeDemon extends CardImpl {
         this.addAbility(new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, true));
 
         // When Orca dies, it deals damage equal to its power divided as you choose among any number of targets.
-        Ability ability = new DiesSourceTriggeredAbility(new DamageMultiEffect(SourcePermanentPowerValue.NOT_NEGATIVE)
+        Ability ability = new DiesSourceTriggeredAbility(new DamageMultiEffect()
                 .setText("it deals damage equal to its power divided as you choose among any number of targets."));
         ability.addTarget(new TargetAnyTargetAmount(SourcePermanentPowerValue.NOT_NEGATIVE));
         this.addAbility(ability);

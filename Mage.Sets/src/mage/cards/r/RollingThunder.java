@@ -20,7 +20,7 @@ public final class RollingThunder extends CardImpl {
 
         // Rolling Thunder deals X damage divided as you choose among any number of targets.
         DynamicValue xValue = GetXValue.instance;
-        this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(xValue));  
     }
 

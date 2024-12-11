@@ -30,7 +30,7 @@ public final class RockSlide extends CardImpl {
 
         // Rock Slide deals X damage divided as you choose among any number of target attacking or blocking creatures without flying.
         DynamicValue xValue = GetXValue.instance;
-        this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(xValue, filter));
     }
 

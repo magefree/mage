@@ -23,16 +23,20 @@ public class TargetPermanentAmount extends TargetAmount {
 
     protected final FilterPermanent filter;
 
-    public TargetPermanentAmount(int amount, FilterPermanent filter) {
-        // 107.1c If a rule or ability instructs a player to choose “any number,” that player may choose
-        // any positive number or zero, unless something (such as damage or counters) is being divided
-        // or distributed among “any number” of players and/or objects. In that case, a nonzero number
-        // of players and/or objects must be chosen if possible.
-        this(StaticValue.get(amount), filter);
+    public TargetPermanentAmount(int amount, int minNumberOfTargets, FilterPermanent filter) {
+        this(amount, minNumberOfTargets, amount, filter);
     }
 
-    public TargetPermanentAmount(DynamicValue amount, FilterPermanent filter) {
-        super(amount);
+    public TargetPermanentAmount(DynamicValue amount, int minNumberOfTargets, FilterPermanent filter) {
+        this(amount, minNumberOfTargets, 0, filter);
+    }
+
+    public TargetPermanentAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets, FilterPermanent filter) {
+        this(StaticValue.get(amount), minNumberOfTargets, maxNumberOfTargets, filter);
+    }
+
+    public TargetPermanentAmount(DynamicValue amount, int minNumberOfTargets, int maxNumberOfTargets, FilterPermanent filter) {
+        super(amount, minNumberOfTargets, maxNumberOfTargets);
         this.zone = Zone.ALL;
         this.filter = filter;
         this.targetName = filter.getMessage();

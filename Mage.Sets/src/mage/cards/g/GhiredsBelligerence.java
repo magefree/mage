@@ -46,7 +46,7 @@ public final class GhiredsBelligerence extends CardImpl {
 
 class GhiredsBelligerenceEffect extends OneShotEffect {
 
-    private static final DamageMultiEffect effect = new DamageMultiEffect(GetXValue.instance);
+    private static final DamageMultiEffect effect = new DamageMultiEffect();
 
     GhiredsBelligerenceEffect() {
         super(Outcome.Benefit);

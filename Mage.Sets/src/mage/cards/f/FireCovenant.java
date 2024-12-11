@@ -26,7 +26,7 @@ public final class FireCovenant extends CardImpl {
 
         // Fire Covenant deals X damage divided as you choose among any number of target creatures.
         DynamicValue xValue = GetXValue.instance;
-        this.getSpellAbility().addEffect(new DamageMultiEffect(xValue));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(xValue));
     }
 

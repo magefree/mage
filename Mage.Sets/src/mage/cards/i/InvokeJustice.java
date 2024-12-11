@@ -85,7 +85,7 @@ class InvokeJusticeEffect extends OneShotEffect {
         if (!game.getBattlefield().contains(filter, source, game, 1)) {
             return false;
         }
-        TargetPermanentAmount target = new TargetPermanentAmount(4, filter);
+        TargetPermanentAmount target = new TargetPermanentAmount(4, 0, filter);
         target.withNotTarget(true);
         target.chooseTarget(outcome, player.getId(), source, game);
         for (UUID targetId : target.getTargets()) {

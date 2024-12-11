@@ -14,25 +14,20 @@ public class TargetAnyTargetAmount extends TargetPermanentOrPlayerAmount {
     private static final FilterPermanentOrPlayer defaultFilter
             = new FilterAnyTarget("targets");
 
-    public TargetAnyTargetAmount(int amount) {
-        this(amount, 0);
+    public TargetAnyTargetAmount(int amount, int minNumberOfTargets) {
+        this(amount, minNumberOfTargets, amount);
     }
 
-    public TargetAnyTargetAmount(int amount, int maxNumberOfTargets) {
-        // 107.1c If a rule or ability instructs a player to choose “any number,” that player may choose
-        // any positive number or zero, unless something (such as damage or counters) is being divided
-        // or distributed among “any number” of players and/or objects. In that case, a nonzero number
-        // of players and/or objects must be chosen if possible.
-        this(StaticValue.get(amount), maxNumberOfTargets);
-        this.minNumberOfTargets = 1;
+    public TargetAnyTargetAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets) {
+        this(StaticValue.get(amount), minNumberOfTargets, maxNumberOfTargets);
     }
 
     public TargetAnyTargetAmount(DynamicValue amount) {
-        this(amount, 0);
+        this(amount, 0, 0);
     }
 
-    public TargetAnyTargetAmount(DynamicValue amount, int maxNumberOfTargets) {
-        super(amount, maxNumberOfTargets);
+    public TargetAnyTargetAmount(DynamicValue amount, int minNumberOfTargets, int maxNumberOfTargets) {
+        super(amount, minNumberOfTargets, maxNumberOfTargets);
         this.zone = Zone.ALL;
         this.filter = defaultFilter;
         this.targetName = filter.getMessage();
