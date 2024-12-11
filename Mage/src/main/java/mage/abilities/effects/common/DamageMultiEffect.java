@@ -73,15 +73,16 @@ public class DamageMultiEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder(sourceName);
         sb.append(" deals ");
 
-        TargetAmount target = (TargetAmount) mode.getTargets().get(0);
-        if (target == null) {
+        Target target = mode.getTargets().get(0);
+        if (!(target instanceof TargetAmount)) {
             throw new IllegalStateException("Must use TargetAmount");
         }
+        TargetAmount targetAmount = (TargetAmount) target;
 
-        DynamicValue amount = target.getAmount();
+        DynamicValue amount = targetAmount.getAmount();
         sb.append(amount.toString());
         sb.append(" damage divided as you choose among ");
-        sb.append(target.getDescription());
+        sb.append(targetAmount.getDescription());
 
         return sb.toString();
     }

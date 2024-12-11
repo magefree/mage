@@ -81,15 +81,16 @@ public class DistributeCountersEffect extends OneShotEffect {
         if (staticText != null && !staticText.isEmpty()) {
             return staticText;
         }
-        TargetAmount target = (TargetAmount) mode.getTargets().get(0);
-        if (target == null) {
+        Target target = mode.getTargets().get(0);
+        if (!(target instanceof TargetAmount)) {
             throw new IllegalStateException("Must use TargetAmount");
         }
-        DynamicValue amount = target.getAmount();
+        TargetAmount targetAmount = (TargetAmount) target;
+        DynamicValue amount = targetAmount.getAmount();
 
         String name = counterType.getName();
         String number = (amount instanceof StaticValue) ? CardUtil.numberToText(((StaticValue) amount).getValue()) : amount.toString();
-        String text = "distribute " + number + ' ' + name + " counters among " + target.getDescription();
+        String text = "distribute " + number + ' ' + name + " counters among " + targetAmount.getDescription();
         if (removeAtEndOfTurn) {
             text += ". For each " + name + " counter you put on a creature this way, remove a "
                     + name + " counter from that creature at the beginning of the next cleanup step.";
