@@ -36,7 +36,7 @@ public final class BogardanHellkite extends CardImpl {
 
         // When Bogardan Hellkite enters, it deals 5 damage divided as you choose among any number of targets.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect("it"), false);
-        ability.addTarget(new TargetAnyTargetAmount(5, 0));
+        ability.addTarget(new TargetAnyTargetAmount(5));
         this.addAbility(ability);
     }
 

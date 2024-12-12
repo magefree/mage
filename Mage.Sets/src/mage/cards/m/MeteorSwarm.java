@@ -23,7 +23,7 @@ public final class MeteorSwarm extends CardImpl {
                         setText("{this} deals 8 damage divided as you choose among X target creatures and/or planeswalkers.")
         );
         // Minimum number of targets will be overridden to X by the adjuster
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalkerAmount(8, 1));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalkerAmount(8, 1, 8));
         this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
     }
 

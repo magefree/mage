@@ -20,7 +20,7 @@ public final class VolleyOfBoulders extends CardImpl {
 
         // Volley of Boulders deals 6 damage divided as you choose among any number of targets.
         this.getSpellAbility().addEffect(new DamageMultiEffect());
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(6, 0));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(6));
         // Flashback {R}{R}{R}{R}{R}{R}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{R}{R}{R}{R}{R}{R}")));
     }

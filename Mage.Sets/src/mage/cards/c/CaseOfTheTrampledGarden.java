@@ -41,7 +41,7 @@ public final class CaseOfTheTrampledGarden extends CardImpl {
 
         // When this Case enters the battlefield, distribute two +1/+1 counters among one or two target creatures you control.
         Ability initialAbility = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect());
-        initialAbility.addTarget(new TargetCreaturePermanentAmount(2, 1, StaticFilters.FILTER_CONTROLLED_CREATURES));
+        initialAbility.addTarget(new TargetCreaturePermanentAmount(2, StaticFilters.FILTER_CONTROLLED_CREATURES));
         // To solve -- Creatures you control have total power 8 or greater.
         // Solved -- Whenever you attack, put a +1/+1 counter on target attacking creature. It gains trample until end of turn.
         Ability solvedAbility = new ConditionalTriggeredAbility(

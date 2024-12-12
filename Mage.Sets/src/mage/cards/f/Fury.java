@@ -45,7 +45,7 @@ public final class Fury extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(
                 new DamageMultiEffect("it")
         );
-        ability.addTarget(new TargetCreatureOrPlaneswalkerAmount(4, 0));
+        ability.addTarget(new TargetCreatureOrPlaneswalkerAmount(4));
         this.addAbility(ability);
 
         // Evoke—Exile a red card from your hand.

@@ -23,7 +23,7 @@ public final class JadeSeedstones extends CardImpl {
 
         // When Jade Seedstones enters the battlefield, distribute three +1/+1 counters among one, two, or three target creatures you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect());
-        ability.addTarget(new TargetCreaturePermanentAmount(3, 1, StaticFilters.FILTER_CONTROLLED_CREATURES));
+        ability.addTarget(new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);
 
         // Craft with creature {5}{G}{G}

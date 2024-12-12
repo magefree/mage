@@ -18,7 +18,7 @@ public final class FlamesOfTheFirebrand extends CardImpl {
 
         // Flames of the Firebrand deals 3 damage divided as you choose among one, two, or three targets.
         this.getSpellAbility().addEffect(new DamageMultiEffect());
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(3, 1));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(3));
     }
 
     private FlamesOfTheFirebrand(final FlamesOfTheFirebrand card) {

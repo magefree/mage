@@ -24,7 +24,7 @@ public final class StormTheSeedcore extends CardImpl {
         // Distribute four +1/+1 counters among up to four target creatures you control. Creatures you control gain vigilance and trample until end of turn.
         this.getSpellAbility().addEffect(new DistributeCountersEffect()
                 .setText("distribute four +1/+1 counters among up to four target creatures you control"));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(4, 0, StaticFilters.FILTER_CONTROLLED_CREATURES));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(4, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(
                 VigilanceAbility.getInstance(), Duration.EndOfTurn,
                 StaticFilters.FILTER_CONTROLLED_CREATURES

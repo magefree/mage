@@ -31,7 +31,7 @@ public final class InfernoTitan extends CardImpl {
 
         // Whenever Inferno Titan enters the battlefield or attacks, it deals 3 damage divided as you choose among one, two, or three targets.
         Ability ability = new EntersBattlefieldOrAttacksSourceTriggeredAbility(new DamageMultiEffect("it"));
-        ability.addTarget(new TargetAnyTargetAmount(3, 1));
+        ability.addTarget(new TargetAnyTargetAmount(3));
         this.addAbility(ability);
     }
 

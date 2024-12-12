@@ -40,7 +40,7 @@ public final class VivienArkbowRanger extends CardImpl {
                 TrampleAbility.getInstance(), Duration.EndOfTurn,
                 "They gain trample until end of turn"
         ));
-        ability.addTarget(new TargetCreaturePermanentAmount(2, 0));
+        ability.addTarget(new TargetCreaturePermanentAmount(2, 0, 2));
         this.addAbility(ability);
 
         // −3: Target creature you control deals damage equal to its power to target creature or planeswalker.

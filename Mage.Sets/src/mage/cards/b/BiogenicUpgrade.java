@@ -27,7 +27,7 @@ public final class BiogenicUpgrade extends CardImpl {
 
         // Distribute three +1/+1 counters among one, two, or three target creatures, then double the number of +1/+1 counters on each of those creatures.
         this.getSpellAbility().addEffect(new DistributeCountersEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, 1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3));
         this.getSpellAbility().addEffect(new BiogenicUpgradeEffect());
     }
 

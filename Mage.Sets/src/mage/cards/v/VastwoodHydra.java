@@ -88,7 +88,7 @@ class VastwoodHydraDistributeEffect extends OneShotEffect {
             return false;
         }
 
-        TargetPermanentAmount target = new TargetCreaturePermanentAmount(amount, 0, StaticFilters.FILTER_CONTROLLED_CREATURE);
+        TargetPermanentAmount target = new TargetCreaturePermanentAmount(amount, 0, amount, StaticFilters.FILTER_CONTROLLED_CREATURE);
         target.withNotTarget(true);
         target.withChooseHint("to distribute " + amount + " counters");
         target.chooseTarget(outcome, player.getId(), source, game);

@@ -20,7 +20,7 @@ public final class ViolentEruption extends CardImpl {
 
         // Violent Eruption deals 4 damage divided as you choose among any number of targets.
         this.getSpellAbility().addEffect(new DamageMultiEffect());
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4, 0));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4));
 
         // Madness {1}{R}{R}
         this.addAbility(new MadnessAbility(new ManaCostsImpl<>("{1}{R}{R}")));

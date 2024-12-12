@@ -114,7 +114,7 @@ class AwakenTheMaelstromEffect extends OneShotEffect {
         if (game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURE, player.getId(), source, game) < 1) {
             return;
         }
-        TargetPermanentAmount target = new TargetCreaturePermanentAmount(3, 1, StaticFilters.FILTER_CONTROLLED_CREATURE);
+        TargetPermanentAmount target = new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_CONTROLLED_CREATURE);
         target.withNotTarget(true);
         target.withChooseHint("to distribute counters");
         target.chooseTarget(outcome, player.getId(), source, game);

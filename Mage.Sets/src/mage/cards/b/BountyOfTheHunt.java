@@ -34,7 +34,7 @@ public final class BountyOfTheHunt extends CardImpl {
 
         // Distribute three +1/+1 counters among one, two, or three target creatures. For each +1/+1 counter you put on a creature this way, remove a +1/+1 counter from that creature at the beginning of the next cleanup step.
         this.getSpellAbility().addEffect(new DistributeCountersEffect().withRemoveAtEndOfTurn());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, 1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3));
     }
 
     private BountyOfTheHunt(final BountyOfTheHunt card) {

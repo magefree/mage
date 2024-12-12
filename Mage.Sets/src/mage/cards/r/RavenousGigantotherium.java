@@ -79,7 +79,7 @@ class RavenousGigantotheriumAbility extends EntersBattlefieldTriggeredAbility {
         if (power < 1) {
             return true;
         }
-        this.addTarget(new TargetCreaturePermanentAmount(power, 0));
+        this.addTarget(new TargetCreaturePermanentAmount(power, 0, power));
         return true;
     }
 

@@ -45,7 +45,7 @@ public final class TheGrandEvolution extends CardImpl {
         sagaAbility.addChapterEffect(
                 this, SagaChapter.CHAPTER_II, SagaChapter.CHAPTER_II,
                 new DistributeCountersEffect(),
-                new TargetCreaturePermanentAmount(7, 0, StaticFilters.FILTER_CONTROLLED_CREATURES)
+                new TargetCreaturePermanentAmount(7, StaticFilters.FILTER_CONTROLLED_CREATURES)
         );
 
         // III -- Until end of turn, creatures you control gain "{1}: This creature fights target creature you don't control." Exile The Grand Evolution, then return it to the battlefield.

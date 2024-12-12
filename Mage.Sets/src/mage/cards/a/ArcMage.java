@@ -31,7 +31,7 @@ public final class ArcMage extends CardImpl {
         Ability ability = new SimpleActivatedAbility(new DamageMultiEffect(), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new DiscardCardCost());
-        ability.addTarget(new TargetAnyTargetAmount(2, 1));
+        ability.addTarget(new TargetAnyTargetAmount(2));
         this.addAbility(ability);
     }
 

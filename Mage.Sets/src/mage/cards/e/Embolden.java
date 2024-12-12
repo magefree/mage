@@ -22,7 +22,7 @@ public final class Embolden extends CardImpl {
 
         // Prevent the next 4 damage that would be dealt this turn to any number of targets, divided as you choose.
         this.getSpellAbility().addEffect(new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 4));
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4, 0));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4));
 
         // Flashback {1}{W}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{1}{W}")));

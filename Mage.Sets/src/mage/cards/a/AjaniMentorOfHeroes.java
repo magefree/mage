@@ -38,7 +38,7 @@ public final class AjaniMentorOfHeroes extends CardImpl {
 
         // +1: Distribute three +1/+1 counters among one, two, or three target creatures you control
         Ability ability = new LoyaltyAbility(new DistributeCountersEffect(), 1);
-        ability.addTarget(new TargetCreaturePermanentAmount(3, 1, StaticFilters.FILTER_CONTROLLED_CREATURES));
+        ability.addTarget(new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_CONTROLLED_CREATURES));
         this.addAbility(ability);
 
         // +1: Look at the top four cards of your library. You may reveal an Aura, creature, or planeswalker card

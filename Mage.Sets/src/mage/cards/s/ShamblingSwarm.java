@@ -29,7 +29,7 @@ public final class ShamblingSwarm extends CardImpl {
         Ability ability = new DiesSourceTriggeredAbility(new DistributeCountersEffect(
                 CounterType.M1M1
         ).withRemoveAtEndOfTurn(), false);
-        ability.addTarget(new TargetCreaturePermanentAmount(3, 1));
+        ability.addTarget(new TargetCreaturePermanentAmount(3));
         this.addAbility(ability);
     }
 

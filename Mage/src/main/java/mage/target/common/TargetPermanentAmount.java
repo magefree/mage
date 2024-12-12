@@ -23,18 +23,39 @@ public class TargetPermanentAmount extends TargetAmount {
 
     protected final FilterPermanent filter;
 
+    /**
+     * {@code maxNumberOfTargets} defaults to {@code amount}.
+     *
+     * @see TargetPermanentAmount#TargetPermanentAmount(DynamicValue, int, int, FilterPermanent)
+     */
     public TargetPermanentAmount(int amount, int minNumberOfTargets, FilterPermanent filter) {
         this(amount, minNumberOfTargets, amount, filter);
     }
 
+    /**
+     * {@code maxNumberOfTargets} defaults to Integer.MAX_VALUE.
+     *
+     * @see TargetPermanentAmount#TargetPermanentAmount(DynamicValue, int, int, FilterPermanent)
+     */
     public TargetPermanentAmount(DynamicValue amount, int minNumberOfTargets, FilterPermanent filter) {
         this(amount, minNumberOfTargets, Integer.MAX_VALUE, filter);
     }
 
+    /**
+     * @see TargetPermanentAmount#TargetPermanentAmount(DynamicValue, int, int, FilterPermanent)
+     */
     public TargetPermanentAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets, FilterPermanent filter) {
         this(StaticValue.get(amount), minNumberOfTargets, maxNumberOfTargets, filter);
     }
 
+    /**
+     * @param amount             Amount of stuff (e.g. damage, counters) to distribute.
+     * @param minNumberOfTargets Minimum number of targets.
+     * @param maxNumberOfTargets Maximum number of targets. If no lower max is needed:
+     *                           set to {@code amount} if amount is static; otherwise, set to Integer.MAX_VALUE.
+     *                           (Game will always prevent distributing among more than {@code amount} permanents.)
+     * @param filter             Filter for permanents that something will be distributed amongst.
+     */
     public TargetPermanentAmount(DynamicValue amount, int minNumberOfTargets, int maxNumberOfTargets, FilterPermanent filter) {
         super(amount, minNumberOfTargets, maxNumberOfTargets);
         this.zone = Zone.ALL;

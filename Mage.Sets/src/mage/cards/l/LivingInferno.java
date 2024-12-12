@@ -56,7 +56,8 @@ enum LivingInfernoAdjuster implements TargetAdjuster {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
         if (sourcePermanent != null) {
             ability.getTargets().clear();
-            ability.addTarget(new TargetCreaturePermanentAmount(sourcePermanent.getPower().getValue(), 0));
+            int power = sourcePermanent.getPower().getValue();
+            ability.addTarget(new TargetCreaturePermanentAmount(power, 0, power));
         }
     }
 }

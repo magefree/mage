@@ -33,7 +33,7 @@ public final class Flameshot extends CardImpl {
         
         // Flameshot deals 3 damage divided as you choose among one, two, or three target creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, 1));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3));
     }
 
     private Flameshot(final Flameshot card) {

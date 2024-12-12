@@ -34,7 +34,7 @@ public final class GlintWeaver extends CardImpl {
         Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect());
         ability.addEffect(new GainLifeEffect(GreatestToughnessAmongControlledCreaturesValue.instance)
                 .setText(", then you gain life equal to the greatest toughness among creatures you control"));
-        ability.addTarget(new TargetCreaturePermanentAmount(3, 1));
+        ability.addTarget(new TargetCreaturePermanentAmount(3));
         this.addAbility(ability);
     }
 

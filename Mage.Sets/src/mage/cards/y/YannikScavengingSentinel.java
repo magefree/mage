@@ -102,7 +102,7 @@ class YannikScavengingSentinelEffect extends OneShotEffect {
                     "distribute X +1/+1 counters among any number of target creatures, " +
                     "where X is the exiled creature's power"
             );
-            ability.addTarget(new TargetCreaturePermanentAmount(power, 0));
+            ability.addTarget(new TargetCreaturePermanentAmount(power, 0, power));
             game.fireReflexiveTriggeredAbility(ability, source);
         }
         return true;

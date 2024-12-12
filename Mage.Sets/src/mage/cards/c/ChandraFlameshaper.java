@@ -52,7 +52,7 @@ public final class ChandraFlameshaper extends CardImpl {
         Ability minusFourAbility = new LoyaltyAbility(
                 new DamageMultiEffect(), -4
         );
-        minusFourAbility.addTarget(new TargetCreatureOrPlaneswalkerAmount(8, 0));
+        minusFourAbility.addTarget(new TargetCreatureOrPlaneswalkerAmount(8));
         this.addAbility(minusFourAbility);
     }
 

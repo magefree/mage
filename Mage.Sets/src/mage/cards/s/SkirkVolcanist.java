@@ -37,7 +37,7 @@ public final class SkirkVolcanist extends CardImpl {
         
         // When Skirk Volcanist is turned face up, it deals 3 damage divided as you choose among one, two, or three target creatures.
         Ability ability = new TurnedFaceUpSourceTriggeredAbility(new DamageMultiEffect("it"));
-        ability.addTarget(new TargetCreaturePermanentAmount(3, 1));
+        ability.addTarget(new TargetCreaturePermanentAmount(3));
         this.addAbility(ability);
     }
 

@@ -20,7 +20,7 @@ public final class FireAtWill extends CardImpl {
 
         // Fire at Will deals 3 damage divided as you choose among one, two, or three target attacking or blocking creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, 1, StaticFilters.FILTER_ATTACKING_OR_BLOCKING_CREATURES));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_ATTACKING_OR_BLOCKING_CREATURES));
     }
 
     private FireAtWill(final FireAtWill card) {

@@ -43,7 +43,7 @@ public final class AjaniSleeperAgent extends CardImpl {
         Ability ability = new LoyaltyAbility(new DistributeCountersEffect()
                 .setText("distribute three +1/+1 counters among up to three target creatures"), -3);
         ability.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance()).setText("They gain vigilance until end of turn"));
-        ability.addTarget(new TargetCreaturePermanentAmount(3, 0));
+        ability.addTarget(new TargetCreaturePermanentAmount(3, 0, 3));
         this.addAbility(ability);
 
         // −6: You get an emblem with "Whenever you cast a creature or planeswalker spell, target opponent gets two poison counters."

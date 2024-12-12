@@ -133,6 +133,6 @@ enum LukkaBoundToRuinAdjuster implements TargetAdjuster {
         // Maximum targets is equal to the damage - as each target need to be assigned at least 1 damage
         ability.getTargets().clear();
         int xValue = GreatestPowerAmongControlledCreaturesValue.instance.calculate(game, ability, null);
-        ability.addTarget(new TargetCreatureOrPlaneswalkerAmount(xValue, 0));
+        ability.addTarget(new TargetCreatureOrPlaneswalkerAmount(xValue, 0, xValue));
     }
 }
