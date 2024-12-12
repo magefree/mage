@@ -150,6 +150,9 @@ public abstract class TargetImpl implements Target {
         return sb.toString();
     }
 
+    /**
+     * Used for generating text description. Needed so that subclasses may override.
+     */
     protected boolean getUseAnyNumber() {
         int min = getMinNumberOfTargets();
         int max = getMaxNumberOfTargets();
