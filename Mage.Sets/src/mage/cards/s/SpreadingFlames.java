@@ -19,7 +19,7 @@ public final class SpreadingFlames extends CardImpl {
 
         // Spreading Flames deals 6 damage divided as you choose among any number of target creatures.
         this.getSpellAbility().addEffect(new DamageMultiEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(6, 0));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(6));
     }
 
     private SpreadingFlames(final SpreadingFlames card) {

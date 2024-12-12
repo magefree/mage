@@ -19,7 +19,7 @@ public final class BlessingsOfNature extends CardImpl {
 
         // Distribute four +1/+1 counters among any number of target creatures.
         this.getSpellAbility().addEffect(new DistributeCountersEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(4, 0));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(4));
 
         this.addAbility(new MiracleAbility("{G}"));
     }
