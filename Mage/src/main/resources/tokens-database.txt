@@ -485,12 +485,6 @@
 |Generate|TOK:DDQ|Spirit|||SpiritWhiteToken|
 |Generate|TOK:DDQ|Zombie|||ZombieToken|
 |Generate|TOK:DGM|Elemental|||VoiceOfResurgenceToken|
-|Generate|TOK:DIS|Bird|||WhiteBlueBirdToken|
-|Generate|TOK:DIS|Drake|||LeafdrakeRoostDrakeToken|
-|Generate|TOK:DIS|Elemental|||ResearchDevelopmentToken|
-|Generate|TOK:DIS|Goblin|||RakdosGuildmageGoblinToken|
-|Generate|TOK:DIS|Saproling|||SaprolingToken|
-|Generate|TOK:DIS|Snake|||PatagiaViperSnakeToken|
 |Generate|TOK:DKA|Human|||HumanToken|
 |Generate|TOK:DKA|Vampire|||SorinLordOfInnistradVampireToken|
 |Generate|TOK:DOM|Cleric|||BelzenlokClericToken|
@@ -594,10 +588,6 @@
 #|Generate|TOK:HOU|Steadfast Sentinel||||
 #|Generate|TOK:HOU|Sunscourge Champion||||
 |Generate|TOK:ICE|Caribou|||CaribouToken|
-|Generate|TOK:INV|Bird|||BlueBirdToken|
-|Generate|TOK:INV|Elephant|||ElephantToken|
-|Generate|TOK:INV|Reflection|||ReflectionToken|
-|Generate|TOK:INV|Saproling|||SaprolingToken|
 |Generate|TOK:ISD|Angel|||AngelToken|
 |Generate|TOK:ISD|Demon|||DemonToken|
 |Generate|TOK:ISD|Homunculus|||StitchersApprenticeHomunculusToken|
