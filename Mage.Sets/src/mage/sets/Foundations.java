@@ -60,9 +60,6 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Ballyrush Banneret", 567, Rarity.COMMON, mage.cards.b.BallyrushBanneret.class));
         cards.add(new SetCardInfo("Balmor, Battlemage Captain", 237, Rarity.UNCOMMON, mage.cards.b.BalmorBattlemageCaptain.class));
         cards.add(new SetCardInfo("Banishing Light", 138, Rarity.COMMON, mage.cards.b.BanishingLight.class));
-        cards.add(new SetCardInfo("Banner of Kinship", 127, Rarity.RARE, mage.cards.b.BannerOfKinship.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Banner of Kinship", 352, Rarity.RARE, mage.cards.b.BannerOfKinship.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Banner of Kinship", 484, Rarity.RARE, mage.cards.b.BannerOfKinship.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Basilisk Collar", 669, Rarity.RARE, mage.cards.b.BasiliskCollar.class));
         cards.add(new SetCardInfo("Battle-Rattle Shaman", 533, Rarity.UNCOMMON, mage.cards.b.BattleRattleShaman.class));
         cards.add(new SetCardInfo("Battlesong Berserker", 78, Rarity.UNCOMMON, mage.cards.b.BattlesongBerserker.class));
