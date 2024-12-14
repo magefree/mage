@@ -466,10 +466,16 @@ public abstract class AbilityImpl implements Ability {
     }
 
     /**
-     * @return true if choices for the activation were made (can be to activate with the regular cost)
+     * @return false to stop activation process, e.g. on wrong data/choices
      */
     @Override
     public boolean activateAlternateOrAdditionalCosts(MageObject sourceObject, Set<MageIdentifier> allowedIdentifiers, boolean noMana, Player controller, Game game) {
+        // alternative or additional costs supported for spells or activated abilities only
+        if (!this.getAbilityType().isActivatedAbility()
+                && !this.getAbilityType().isPlayCardAbility()) {
+            return true;
+        }
+
         boolean canUseAlternativeCost = true;
         boolean canUseAdditionalCost = true;
 
