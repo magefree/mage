@@ -441,7 +441,7 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_SavraQueenOfTheGolgari_SacrificeAnother() {
+    public void test_SingleEvent_SavraQueenOfTheGolgari_SacrificeAnother() {
         // Whenever you sacrifice a black creature, you may pay 2 life. If you do, each other player sacrifices a creature.
         // Whenever you sacrifice a green creature, you may gain 2 life.
         addCard(Zone.BATTLEFIELD, playerA, "Savra, Queen of the Golgari"); // {2}{B}{G}
@@ -465,7 +465,7 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_SavraQueenOfTheGolgari_SacrificeItself() {
+    public void test_SingleEvent_SavraQueenOfTheGolgari_SacrificeItself() {
         // make sure it works on itself, bug #13089
 
         // Whenever you sacrifice a black creature, you may pay 2 life. If you do, each other player sacrifices a creature.
@@ -488,5 +488,49 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
         execute();
 
         assertLife(playerA, 20 + 2); // from green trigger
+    }
+
+    @Test
+    public void test_BatchEvent_ForgeNeverwinterCharlatan_SacrificeAnother() {
+        // Whenever one or more players sacrifice one or more creatures, you create a tapped Treasure token.
+        // This ability triggers only once each turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Forge, Neverwinter Charlatan");
+        //
+        // {2}, {T}, Sacrifice a creature: Draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Vault", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+
+        // sacrifice another creature
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice");
+        setChoice(playerA, "Grizzly Bears"); // to sacrifice
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTokenCount(playerA, "Treasure Token", 1);
+    }
+
+    @Test
+    public void test_BatchEvent_ForgeNeverwinterCharlatan_SacrificeItself() {
+        // Whenever one or more players sacrifice one or more creatures, you create a tapped Treasure token.
+        // This ability triggers only once each turn.
+        addCard(Zone.BATTLEFIELD, playerA, "Forge, Neverwinter Charlatan");
+        //
+        // {2}, {T}, Sacrifice a creature: Draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Vault", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        // sacrifice itself
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice");
+        setChoice(playerA, "Forge, Neverwinter Charlatan"); // to sacrifice
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertTokenCount(playerA, "Treasure Token", 1);
     }
 }
