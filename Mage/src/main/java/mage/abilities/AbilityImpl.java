@@ -1284,6 +1284,7 @@ public abstract class AbilityImpl implements Ability {
             switch (e.getType()) {
                 case DESTROYED_PERMANENT:
                 case EXPLOITED_CREATURE:
+                case SACRIFICED_PERMANENT:
                     return true;
                 case ZONE_CHANGE:
                     return ((ZoneChangeEvent) e).getFromZone() == Zone.BATTLEFIELD;

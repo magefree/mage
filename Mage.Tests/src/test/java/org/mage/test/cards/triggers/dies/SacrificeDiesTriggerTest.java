@@ -413,9 +413,9 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Silvercoat Lion", 1);
     }
 
-    // bug #9688
     @Test
-    public void testIndustrialAdvancement() {
+    public void test_IndustrialAdvancement() {
+        // bug #9688
         skipInitShuffling();
         addCard(Zone.BATTLEFIELD, playerA, "Industrial Advancement");
         // At the beginning of your end step, you may sacrifice a creature. If you do, look at the top X cards of your
@@ -438,7 +438,55 @@ public class SacrificeDiesTriggerTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Lone Missionary", 1);
         assertGraveyardCount(playerA, "Guardian Automaton", 1);
         assertLife(playerA, 27);
-
     }
 
+    @Test
+    public void test_SavraQueenOfTheGolgari_SacrificeAnother() {
+        // Whenever you sacrifice a black creature, you may pay 2 life. If you do, each other player sacrifices a creature.
+        // Whenever you sacrifice a green creature, you may gain 2 life.
+        addCard(Zone.BATTLEFIELD, playerA, "Savra, Queen of the Golgari"); // {2}{B}{G}
+        //
+        // {2}, {T}, Sacrifice a creature: Draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Vault", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        //
+        addCard(Zone.BATTLEFIELD, playerA, "Grizzly Bears");
+
+        // sacrifice another creature
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice");
+        setChoice(playerA, "Grizzly Bears"); // to sacrifice
+        setChoice(playerA, true); // use gain life
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20 + 2); // from green trigger
+    }
+
+    @Test
+    public void test_SavraQueenOfTheGolgari_SacrificeItself() {
+        // make sure it works on itself, bug #13089
+
+        // Whenever you sacrifice a black creature, you may pay 2 life. If you do, each other player sacrifices a creature.
+        // Whenever you sacrifice a green creature, you may gain 2 life.
+        addCard(Zone.BATTLEFIELD, playerA, "Savra, Queen of the Golgari"); // {2}{B}{G}
+        //
+        // {2}, {T}, Sacrifice a creature: Draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Phyrexian Vault", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+
+        // sacrifice itself (must catch x2 triggers from savra)
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}, {T}, Sacrifice");
+        setChoice(playerA, "Savra, Queen of the Golgari");
+        setChoice(playerA, "Whenever you sacrifice a black creature"); // x2 triggers order from savra
+        setChoice(playerA, true); // use gain life from green trigger
+        setChoice(playerA, false); // ignore black trigger
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 20 + 2); // from green trigger
+    }
 }

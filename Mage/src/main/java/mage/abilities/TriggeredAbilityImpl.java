@@ -395,6 +395,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                     break;
                 case DESTROYED_PERMANENT:
                 case EXPLOITED_CREATURE:
+                case SACRIFICED_PERMANENT:
                     if (isLeavesTheBattlefieldTrigger() && game.checkShortLivingLKI(affectedSourceId, Zone.BATTLEFIELD)) {
                         affectedSourceObject = game.getPermanentOrLKIBattlefield(affectedSourceId);
                     }
