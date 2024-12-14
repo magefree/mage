@@ -13,6 +13,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.ExileUntilSourceLeavesEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.abilities.effects.keyword.ScryEffect;
@@ -74,6 +75,7 @@ public class VerifyCardDataTest {
 
     private static final String FULL_ABILITIES_CHECK_SET_CODES = "MH3;M3C"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
+    private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
 
     private static final boolean AUTO_FIX_SAMPLE_DECKS = false; // debug only: auto-fix sample decks by test_checkSampleDecks test run
 
@@ -1632,7 +1634,9 @@ public class VerifyCardDataTest {
             checkRarityAndBasicLands(card, ref);
             checkMissingAbilities(card, ref);
             checkWrongSymbolsInRules(card);
-            checkCardCanBeCopied(card);
+            if (CHECK_COPYABLE_FIELDS) {
+                checkCardCanBeCopied(card);
+            }
         }
         checkWrongAbilitiesText(card, ref, cardIndex);
     }
@@ -1994,6 +1998,10 @@ public class VerifyCardDataTest {
         ignoredCards.add("Infested Thrinax");
         ignoredCards.add("Xira, the Golden Sting");
         ignoredCards.add("Mawloc");
+        ignoredCards.add("Crack in Time");
+        ignoredCards.add("Mysterious Limousine");
+        ignoredCards.add("Graceful Antelope");
+        ignoredCards.add("Portcullis");
         List<String> ignoredAbilities = new ArrayList<>();
         ignoredAbilities.add("roll"); // roll die effects
         ignoredAbilities.add("with \"When"); // token creating effects
@@ -2009,6 +2017,18 @@ public class VerifyCardDataTest {
                 if (triggeredAbility == null) {
                     continue;
                 }
+
+                // ignore exile effects
+                // example 1: exile up to one other target nonland permanent until Constable of the Realm leaves the battlefield.
+                if (ability.getAllEffects().stream().anyMatch(e -> e instanceof ExileUntilSourceLeavesEffect)) {
+                    continue;
+                }
+                // example 2: When Hostage Taker enters the battlefield, exile another target artifact or creature until Hostage Taker leaves the battlefield
+                if (ability instanceof EntersBattlefieldTriggeredAbility) {
+                    continue;
+                }
+
+
                 // search and check dies related abilities
                 String rules = triggeredAbility.getRule();
                 if (ignoredAbilities.stream().anyMatch(rules::contains)) {
@@ -2022,7 +2042,6 @@ public class VerifyCardDataTest {
                         && rules.contains("graveyard")
                         && rules.contains("from the battlefield");
                 boolean isLeavesBattlefield = rules.contains("leaves the battlefield");
-                isLeavesBattlefield = false; // TODO: remove and fix all bad cards
                 if (triggeredAbility.isLeavesTheBattlefieldTrigger()) {
                     // TODO: add check for wrongly enabled settings too?
                 } else {
