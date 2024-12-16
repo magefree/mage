@@ -87,7 +87,7 @@ public class AddLandDialog extends MageDialog {
             landSetNames.add(expansionInfo.getName());
         }
         if (landSetNames.isEmpty()) {
-            throw new IllegalArgumentException("No set with basic land was found");
+            throw new IllegalArgumentException("No set with basic land was found (possible memory problems, need client restart)");
         }
         if (landSetNames.size() > 1) {
             landSetNames.add("<Random lands>");
@@ -477,6 +477,7 @@ public class AddLandDialog extends MageDialog {
     }//GEN-LAST:event_btnSetFastSearchActionPerformed
 
     private void autoAddLands() {
+        // suggest lands amount for deck without lands
         int deckSize = ((Number) spnDeckSize.getValue()).intValue();
         int[] lands = DeckBuildUtils.landCountSuggestion(deckSize, deck.getMaindeckCards());
         spnPlains.setValue(lands[0]);
