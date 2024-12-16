@@ -231,11 +231,7 @@
 |Generate|TOK:ARB|Bird Soldier|||BirdSoldierToken|
 |Generate|TOK:ARB|Dragon|||DragonBroodmotherDragonToken|
 |Generate|TOK:ARB|Lizard|||LizardToken|
-|Generate|TOK:ARB|Zombie Wizard|||ZombieWizardToken|
-|Generate|TOK:ARN|Bird|||RukhEggBirdToken|
 |Generate|TOK:ARN|Djinn|||DjinnToken|
-|Generate|TOK:ATQ|Assembly-Worker|||AssemblyWorkerToken|
-|Generate|TOK:ATQ|Tetravite|||TetraviteToken|
 |Generate|TOK:AVR|Angel|||AngelToken|
 |Generate|TOK:AVR|Demon|||DemonToken|
 |Generate|TOK:AVR|Human|1||RedHumanToken|
@@ -401,12 +397,6 @@
 |Generate|TOK:C19|Wurm|||WurmToken|
 |Generate|TOK:C19|Zombie|1||ZombieToken|
 |Generate|TOK:C19|Zombie|2||ZombieToken|
-|Generate|TOK:CHK|Dragon Spirit|||TatsumaDragonToken|
-|Generate|TOK:CHK|Elemental|||SeedGuardianToken|
-|Generate|TOK:CHK|Illusion|||MelokuTheCloudedMirrorToken|
-|Generate|TOK:CHK|Rat|||RatToken|
-|Generate|TOK:CHK|Snake|||SnakeToken|
-|Generate|TOK:CHR|Snake|||SerpentGeneratorSnakeToken|
 |Generate|TOK:CMA|Beast|1||BeastToken|
 |Generate|TOK:CMA|Beast|2||BeastToken2|
 |Generate|TOK:CMA|Dragon|||DragonToken2|
@@ -445,7 +435,6 @@
 |Generate|TOK:CNS|Zombie|||ZombieToken|
 |Generate|TOK:CON|Angel|||AngelToken|
 |Generate|TOK:CON|Elemental|||ElementalTokenWithHaste|
-|Generate|TOK:DD2|Elemental Shaman|||ElementalShamanToken|
 |Generate|TOK:DVD|Demon|||DemonFlyingToken|
 |Generate|TOK:DVD|Spirit|||SpiritWhiteToken|
 |Generate|TOK:DVD|Thrull|||BreedingPitThrullToken|
@@ -453,7 +442,6 @@
 |Generate|TOK:GVL|Beast|1||BeastToken|
 |Generate|TOK:GVL|Beast|2||BeastToken2|
 |Generate|TOK:GVL|Elephant|||ElephantToken|
-|Generate|TOK:JVC|Elemental Shaman|||ElementalShamanToken|
 |Generate|TOK:DDC|Demon|||DemonFlyingToken|
 |Generate|TOK:DDC|Spirit|||SpiritWhiteToken|
 |Generate|TOK:DDC|Thrull|||BreedingPitThrullToken|
@@ -501,14 +489,6 @@
 |Generate|TOK:DOM|Saproling|3||SaprolingToken|
 |Generate|TOK:DOM|Soldier|||SoldierToken|
 |Generate|TOK:DOM|Zombie Knight|||ZombieKnightToken|
-|Generate|TOK:DRB|Saproling|||SaprolingToken|
-|Generate|TOK:DST|Beast|||BeastToken|
-|Generate|TOK:DST|Elemental|1||WandOfTheElementsFirstToken|
-|Generate|TOK:DST|Elemental|2||WandOfTheElementsSecondToken|
-|Generate|TOK:DST|Wirefly|||WireflyToken|
-|Generate|TOK:DST|Insect|||InsectToken|
-|Generate|TOK:DST|Myr|||MyrToken|
-|Generate|TOK:DST|Spawn|||SpawningPitToken|
 |Generate|TOK:DTK|Djinn Monk|||DjinnMonkToken|
 |Generate|TOK:DTK|Dragon|||DragonToken|
 |Generate|TOK:DTK|Goblin|||GoblinToken|
@@ -570,9 +550,6 @@
 |Generate|TOK:GTC|Soldier|||SoldierTokenWithHaste|
 |Generate|TOK:GTC|Spirit|||WhiteBlackSpiritToken|
 |Generate|TOK:H17|Dragon|||DragonTokenGold|
-|Generate|TOK:HML|Plant Wall|||KelpToken|
-|Generate|TOK:HML|Serf|||SerfToken|
-|Generate|TOK:HML|Skeleton|||SkeletonRegenerateToken|
 |Generate|TOK:HOU|Horse|||CrestedSunmareToken|
 |Generate|TOK:HOU|Insect|||TheLocustGodInsectToken|
 |Generate|TOK:HOU|Snake|||RhonassLastStandToken|
@@ -587,7 +564,6 @@
 #|Generate|TOK:HOU|Sinuous Striker||||
 #|Generate|TOK:HOU|Steadfast Sentinel||||
 #|Generate|TOK:HOU|Sunscourge Champion||||
-|Generate|TOK:ICE|Caribou|||CaribouToken|
 |Generate|TOK:ISD|Angel|||AngelToken|
 |Generate|TOK:ISD|Demon|||DemonToken|
 |Generate|TOK:ISD|Homunculus|||StitchersApprenticeHomunculusToken|
@@ -606,12 +582,6 @@
 |Generate|TOK:JOU|Sphinx|||HourOfNeedSphinxToken|
 |Generate|TOK:JOU|Spider|||RenownedWeaverSpiderToken|
 |Generate|TOK:JOU|Zombie|||RitualOfTheReturnedZombieToken|
-|Generate|TOK:JUD|Bear|||BearToken|
-|Generate|TOK:JUD|Bird|||BirdToken|
-|Generate|TOK:JUD|Elemental Cat|||ElementalCatToken|
-|Generate|TOK:JUD|Elephant|||ElephantToken|
-|Generate|TOK:JUD|Spirit|||SpiritWhiteToken|
-|Generate|TOK:JUD|Wurm|||WurmToken|
 |Generate|TOK:KLD|Beast|||ArchitectOfTheUntamedBeastToken|
 |Generate|TOK:KLD|Construct|1||OviyaPashiriSageLifecrafterToken|
 |Generate|TOK:KLD|Construct|2||MetallurgicSummoningsConstructToken|
@@ -631,9 +601,6 @@
 |Generate|TOK:KTK|Warrior|1||WarriorToken|
 |Generate|TOK:KTK|Warrior|2||WarriorToken|
 |Generate|TOK:KTK|Zombie|||ZombieToken|
-|Generate|TOK:LEG|Demon|||MinorDemonToken|
-|Generate|TOK:LEG|Sand Warrior|||HazezonTamarSandWarriorToken|
-|Generate|TOK:LEG|Snake|||SerpentGeneratorSnakeToken|
 # LGN don't have tokens, from wiki: A Sliver token for Brood Sliver and a Goblin token for Warbreak Trumpeter were featured as a Magic Player Reward.
 |Generate|TOK:LRW|Avatar|||AvatarToken|
 |Generate|TOK:LRW|Beast|||BeastToken|
@@ -765,15 +732,6 @@
 |Generate|TOK:MOR|Faerie Rogue|||FaerieRogueToken|
 |Generate|TOK:MOR|Giant Warrior|||GiantWarriorToken|
 |Generate|TOK:MOR|Treefolk Shaman|||TreefolkShamanToken|
-|Generate|TOK:MRD|Beast|||OneDozenEyesBeastToken|
-|Generate|TOK:MRD|Demon|||ReignOfThePitToken|
-|Generate|TOK:MRD|Elemental|||ElementalTokenWithHaste|
-|Generate|TOK:MRD|Insect|||InsectToken|
-|Generate|TOK:MRD|Myr|||MyrToken|
-|Generate|TOK:MRD|Pentavite|||PentaviteToken|
-|Generate|TOK:MRD|Pest|||PestToken|
-|Generate|TOK:MRD|Soldier|||SoldierToken|
-|Generate|TOK:MRD|Spirit|||SpiritWhiteToken|
 |Generate|TOK:NPH|Beast|||BeastToken|
 |Generate|TOK:NPH|Phyrexian Goblin|||PhyrexianGoblinHasteToken|
 |Generate|TOK:NPH|Phyrexian Golem|||PhyrexianGolemToken|
@@ -886,16 +844,8 @@
 |Generate|TOK:THS|Soldier|1||SoldierToken|
 |Generate|TOK:THS|Soldier|2||SoldierToken|
 |Generate|TOK:THS|Soldier|3||AkroanSoldierToken|
-|Generate|TOK:TOR|Squirrel|||SquirrelToken|
 |Generate|TOK:UST|Dragon|||DragonTokenGold|
 |Generate|TOK:UST|Storm Crow|||StormCrowToken|
-|Generate|TOK:V10|Wolf|||WolfToken|
-|Generate|TOK:V11|Faerie Rogue|||OonaQueenFaerieToken|
-|Generate|TOK:VIS|Butterfly|||ButterflyToken|
-|Generate|TOK:VIS|Insect|||InsectToken|
-|Generate|TOK:VIS|Prism|||PrismToken|
-|Generate|TOK:VIS|Snake|||SnakeToken|
-|Generate|TOK:WTH|Squirrel|||SquirrelToken|
 |Generate|TOK:WWK|Construct|||StoneTrapIdolToken|
 |Generate|TOK:WWK|Dragon|||DragonToken2|
 |Generate|TOK:WWK|Elephant|||ElephantToken|
@@ -1091,11 +1041,6 @@
 |Generate|TOK:M21|Treasure|||TreasureToken|
 |Generate|TOK:M21|Weird|||WeirdToken2|
 |Generate|TOK:M21|Zombie|||ZombieToken|
-
-# JMP
-# Jumpstart uses tokens and emblems from M21 set,
-# TODO: check scryfall for JMP tokens after set's release
-|Generate|TOK:JMP|Unicorn|||UnicornToken|
 
 # ZNR
 |Generate|TOK:ZNR|Angel Warrior|||AngelWarriorToken|
