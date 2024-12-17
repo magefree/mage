@@ -1,6 +1,6 @@
 package mage.target.common;
 
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreatureOrPlaneswalkerPermanent;
 import mage.filter.common.FilterCreatureOrPlaneswalkerPermanent;
 
 /**
@@ -17,7 +17,7 @@ public class TargetCreatureOrPlaneswalkerAmount extends TargetPermanentAmount {
      * {@code maxNumberOfTargets} defaults to {@code amount}.<br>
      * {@code filter} defaults to all creature and planeswalker permanents. ("target creatures and/or planeswalkers")
      *
-     * @see TargetCreatureOrPlaneswalkerAmount#TargetCreatureOrPlaneswalkerAmount(int, int, int, FilterPermanent)
+     * @see TargetCreatureOrPlaneswalkerAmount#TargetCreatureOrPlaneswalkerAmount(int, int, int, FilterCreatureOrPlaneswalkerPermanent)
      */
     public TargetCreatureOrPlaneswalkerAmount(int amount) {
         this(amount, defaultFilter);
@@ -28,16 +28,16 @@ public class TargetCreatureOrPlaneswalkerAmount extends TargetPermanentAmount {
      * {@code minNumberOfTargets} defaults to zero for {@code amount} > 3, otherwise to one, in line with typical templating.<br>
      * {@code maxNumberOfTargets} defaults to {@code amount}.
      *
-     * @see TargetCreatureOrPlaneswalkerAmount#TargetCreatureOrPlaneswalkerAmount(int, int, int, FilterPermanent)
+     * @see TargetCreatureOrPlaneswalkerAmount#TargetCreatureOrPlaneswalkerAmount(int, int, int, FilterCreatureOrPlaneswalkerPermanent)
      */
-    public TargetCreatureOrPlaneswalkerAmount(int amount, FilterPermanent filter) {
+    public TargetCreatureOrPlaneswalkerAmount(int amount, FilterCreatureOrPlaneswalkerPermanent filter) {
         this(amount, amount > 3 ? 0 : 1, amount, filter);
     }
 
     /**
      * {@code filter} defaults to all creature and planeswalker permanents. ("target creatures and/or planeswalkers")
      *
-     * @see TargetCreatureOrPlaneswalkerAmount#TargetCreatureOrPlaneswalkerAmount(int, int, int, FilterPermanent)
+     * @see TargetCreatureOrPlaneswalkerAmount#TargetCreatureOrPlaneswalkerAmount(int, int, int, FilterCreatureOrPlaneswalkerPermanent)
      */
     public TargetCreatureOrPlaneswalkerAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets) {
         this(amount, minNumberOfTargets, maxNumberOfTargets, defaultFilter);
@@ -49,7 +49,23 @@ public class TargetCreatureOrPlaneswalkerAmount extends TargetPermanentAmount {
      * @param maxNumberOfTargets Maximum number of targets. If no lower max is needed, set to {@code amount}.
      * @param filter             Filter for creatures and/or planeswalkers that something will be distributed amongst.
      */
-    public TargetCreatureOrPlaneswalkerAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets, FilterPermanent filter) {
+    public TargetCreatureOrPlaneswalkerAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets, FilterCreatureOrPlaneswalkerPermanent filter) {
+        super(amount, minNumberOfTargets, maxNumberOfTargets, filter);
+    }
+
+    /**
+     * <b>IMPORTANT</b>: Use more specific constructor if {@code amount} is not always the same number!
+     *
+     * @see TargetCreatureOrPlaneswalkerAmount#TargetCreatureOrPlaneswalkerAmount(int, FilterCreatureOrPlaneswalkerPermanent)
+     */
+    public TargetCreatureOrPlaneswalkerAmount(int amount, FilterControlledCreatureOrPlaneswalkerPermanent filter) {
+        this(amount, amount > 3 ? 0 : 1, amount, filter);
+    }
+
+    /**
+     * @see TargetCreatureOrPlaneswalkerAmount#TargetCreatureOrPlaneswalkerAmount(int, int, int, FilterCreatureOrPlaneswalkerPermanent)
+     */
+    public TargetCreatureOrPlaneswalkerAmount(int amount, int minNumberOfTargets, int maxNumberOfTargets, FilterControlledCreatureOrPlaneswalkerPermanent filter) {
         super(amount, minNumberOfTargets, maxNumberOfTargets, filter);
     }
 

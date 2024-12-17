@@ -20,7 +20,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetAmount;
-import mage.target.common.TargetCreatureOrPlaneswalkerAmount;
+import mage.target.common.TargetPermanentAmount;
 
 import java.util.UUID;
 
@@ -96,7 +96,7 @@ class StumpsquallHydraEffect extends OneShotEffect {
             return false;
         }
 
-        TargetAmount targetAmount = new TargetCreatureOrPlaneswalkerAmount(xValue, 1, xValue, filter);
+        TargetAmount targetAmount = new TargetPermanentAmount(xValue, 1, filter);
         targetAmount.withNotTarget(true);
         targetAmount.chooseTarget(outcome, player.getId(), source, game);
         for (UUID targetId : targetAmount.getTargets()) {

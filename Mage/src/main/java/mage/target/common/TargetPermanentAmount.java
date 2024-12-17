@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.constants.Zone;
-import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -74,7 +73,7 @@ public class TargetPermanentAmount extends TargetAmount {
     }
 
     @Override
-    public Filter getFilter() {
+    public FilterPermanent getFilter() {
         return this.filter;
     }
 

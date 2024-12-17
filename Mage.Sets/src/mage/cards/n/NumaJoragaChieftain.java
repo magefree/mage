@@ -16,7 +16,7 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.target.common.TargetPermanentAmount;
 
 import java.util.UUID;
 
@@ -90,7 +90,7 @@ class NumaJoragaChieftainEffect extends OneShotEffect {
                 new DistributeCountersEffect(),
                 false, "distribute " + costX + " +1/+1 counters among any number of target Elves"
         );
-        ability.addTarget(new TargetCreaturePermanentAmount(costX, 0, costX, filter));
+        ability.addTarget(new TargetPermanentAmount(costX, 0, filter));
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }
