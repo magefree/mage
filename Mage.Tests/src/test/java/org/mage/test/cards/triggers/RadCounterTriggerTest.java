@@ -1,4 +1,4 @@
-package org.mage.test.cards.single.pip;
+package org.mage.test.cards.triggers;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
