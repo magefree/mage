@@ -430,6 +430,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Windbrisk Heights", 315, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
         cards.add(new SetCardInfo("Winding Constrictor", 223, Rarity.UNCOMMON, mage.cards.w.WindingConstrictor.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 316, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
+        cards.add(new SetCardInfo("Yes Man, Personal Securitron", 29, Rarity.RARE, mage.cards.y.YesManPersonalSecuritron.class));
         cards.add(new SetCardInfo("Young Deathclaws", 125, Rarity.UNCOMMON, mage.cards.y.YoungDeathclaws.class));
 
         cards.removeIf(setCardInfo -> IkoriaLairOfBehemoths.mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
