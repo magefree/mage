@@ -5,9 +5,6 @@ import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.MultipliedValue;
-import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.TapSourceUnlessPaysEffect;
 import mage.abilities.mana.RedManaAbility;
@@ -28,8 +25,6 @@ import java.util.UUID;
  */
 public final class ShatterskullSmashing extends ModalDoubleFacedCard {
 
-    private static final DynamicValue xValue = new MultipliedValue(GetXValue.instance, 2);
-
     public ShatterskullSmashing(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,
                 new CardType[]{CardType.SORCERY}, new SubType[]{}, "{X}{R}{R}",
@@ -42,7 +37,7 @@ public final class ShatterskullSmashing extends ModalDoubleFacedCard {
 
         // Shatterskull Smashing deals X damage divided as you choose among up to two target creatures and/or planeswalkers. If X is 6 or more, Shatterskull Smashing deals twice X damage divided as you choose among them instead.
         this.getLeftHalfCard().getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new DamageMultiEffect(xValue), new DamageMultiEffect(GetXValue.instance),
+                new DamageMultiEffect(), new DamageMultiEffect(),
                 ShatterskullSmashingCondition.instance, "{this} deals X damage divided as you choose " +
                 "among up to two target creatures and/or planeswalkers. If X is 6 or more, " +
                 "{this} deals twice X damage divided as you choose among them instead."
@@ -90,12 +85,10 @@ enum ShatterskullSmashingAdjuster implements TargetAdjuster {
         ability.getTargets().clear();
         TargetAmount target;
         if (CardUtil.getSourceCostsTag(game, ability, "X", 0) >= 6) {
-            target = new TargetCreatureOrPlaneswalkerAmount(2 * CardUtil.getSourceCostsTag(game, ability, "X", 0));
+            target = new TargetCreatureOrPlaneswalkerAmount(2 * CardUtil.getSourceCostsTag(game, ability, "X", 0), 0, 2);
         } else {
-            target = new TargetCreatureOrPlaneswalkerAmount(CardUtil.getSourceCostsTag(game, ability, "X", 0));
+            target = new TargetCreatureOrPlaneswalkerAmount(CardUtil.getSourceCostsTag(game, ability, "X", 0), 0, 2);
         }
-        target.setMinNumberOfTargets(0);
-        target.setMaxNumberOfTargets(2);
         ability.addTarget(target);
     }
 }

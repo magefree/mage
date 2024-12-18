@@ -30,7 +30,7 @@ public final class MagmaOpus extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{6}{U}{R}");
 
         // Magma Opus deals 4 damage divided as you choose among any number of targets. Tap two target permanents. Create a 4/4 blue and red Elemental creature token. Draw two cards.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(4));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(4).withChooseHint("damage"));
         this.getSpellAbility().addEffect(new TapTargetEffect("tap two target permanents").setTargetPointer(new SecondTargetPointer()));
         this.getSpellAbility().addTarget(new TargetPermanent(2, StaticFilters.FILTER_PERMANENTS).withChooseHint("tap"));

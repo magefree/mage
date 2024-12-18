@@ -29,7 +29,7 @@ public final class IgniteDisorder extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{1}{R}");
 
         // Ignite Disorder deals 3 damage divided as you choose among one, two, or three target white and/or blue creatures.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(3));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, filter));
     }
 

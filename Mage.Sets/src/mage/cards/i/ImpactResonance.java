@@ -29,7 +29,7 @@ public final class ImpactResonance extends CardImpl {
 
         // Impact Resonance deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn.
         DynamicValue xValue = GreatestAmountOfDamageDealtValue.instance;
-        Effect effect = new DamageMultiEffect(xValue);
+        Effect effect = new DamageMultiEffect();
         effect.setText("{this} deals X damage divided as you choose among any number of target creatures, where X is the greatest amount of damage dealt by a source to a permanent or player this turn");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(xValue));

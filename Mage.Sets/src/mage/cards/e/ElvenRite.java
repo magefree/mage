@@ -6,7 +6,6 @@ import mage.abilities.effects.common.counter.DistributeCountersEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
@@ -19,7 +18,7 @@ public final class ElvenRite extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{1}{G}");
 
         // Distribute two +1/+1 counters among one or two target creatures.
-        this.getSpellAbility().addEffect(new DistributeCountersEffect(2, "one or two target creatures"));
+        this.getSpellAbility().addEffect(new DistributeCountersEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(2));
     }
 

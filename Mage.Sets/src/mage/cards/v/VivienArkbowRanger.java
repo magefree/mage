@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
@@ -35,16 +34,13 @@ public final class VivienArkbowRanger extends CardImpl {
         this.setStartingLoyalty(4);
 
         // +1: Distribute two +1/+1 counters among up to two target creatures. They gain trample until end of turn.
-        Ability ability = new LoyaltyAbility(new DistributeCountersEffect(
-                2, "up to two target creatures"), 1);
+        Ability ability = new LoyaltyAbility(new DistributeCountersEffect()
+                .setText("distribute two +1/+1 counters among up to two target creatures"), 1);
         ability.addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn,
                 "They gain trample until end of turn"
         ));
-        TargetCreaturePermanentAmount target = new TargetCreaturePermanentAmount(2);
-        target.setMinNumberOfTargets(0);
-        target.setMaxNumberOfTargets(2);
-        ability.addTarget(target);
+        ability.addTarget(new TargetCreaturePermanentAmount(2, 0, 2));
         this.addAbility(ability);
 
         // −3: Target creature you control deals damage equal to its power to target creature or planeswalker.

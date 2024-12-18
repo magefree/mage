@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanentAmount;
 
@@ -40,14 +39,9 @@ public final class PicnicRuiner extends AdventureCard {
 
         // Stolen Goodies
         // Distribute three +1/+1 counters among any number of target creatures you control.
-        this.getSpellCard().getSpellAbility().addEffect(
-                new DistributeCountersEffect(
-                       3,
-                        "any number of target creatures you control"
-                )
-        );
+        this.getSpellCard().getSpellAbility().addEffect(new DistributeCountersEffect());
         this.getSpellCard().getSpellAbility().addTarget(
-                new TargetCreaturePermanentAmount(3, StaticFilters.FILTER_CONTROLLED_CREATURES)
+                new TargetCreaturePermanentAmount(3, 0, 3, StaticFilters.FILTER_CONTROLLED_CREATURES)
         );
 
         this.finalizeAdventure();

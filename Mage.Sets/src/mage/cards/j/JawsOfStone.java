@@ -30,7 +30,7 @@ public final class JawsOfStone extends CardImpl {
 
         // Jaws of Stone deals X damage divided as you choose among any number of targets, where X is the number of Mountains you control as you cast this spell.
         PermanentsOnBattlefieldCount mountains = new PermanentsOnBattlefieldCount(filter, null);
-        Effect effect = new DamageMultiEffect(mountains);
+        Effect effect = new DamageMultiEffect();
         effect.setText(rule);
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetAnyTargetAmount(mountains));

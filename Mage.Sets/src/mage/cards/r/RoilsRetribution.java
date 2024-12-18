@@ -18,7 +18,7 @@ public final class RoilsRetribution extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.INSTANT},"{3}{W}{W}");
 
         // Roil's Retribution deals 5 damage divided as you choose among any number of target attacking or blocking creatures.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(5));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(5, StaticFilters.FILTER_ATTACKING_OR_BLOCKING_CREATURES));
     }
 

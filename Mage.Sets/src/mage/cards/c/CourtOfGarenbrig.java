@@ -31,15 +31,9 @@ public final class CourtOfGarenbrig extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesMonarchSourceEffect()).addHint(MonarchHint.instance));
 
         // At the beginning of your upkeep, distribute two +1/+1 counters among up to two target creatures. Then if you're the monarch, double the number of +1/+1 counters on each creature you control.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new DistributeCountersEffect(
-                       2, "up to two target creatures"
-                )
-        );
-        TargetCreaturePermanentAmount target = new TargetCreaturePermanentAmount(2);
-        target.setMinNumberOfTargets(0);
-        target.setMaxNumberOfTargets(2);
-        ability.addTarget(target);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DistributeCountersEffect()
+                .setText("distribute two +1/+1 counters among up to two target creatures"));
+        ability.addTarget(new TargetCreaturePermanentAmount(2, 0, 2));
         ability.addEffect(new ConditionalOneShotEffect(
                 new DoubleCounterOnEachPermanentEffect(CounterType.P1P1, StaticFilters.FILTER_CONTROLLED_CREATURE),
                 MonarchIsSourceControllerCondition.instance

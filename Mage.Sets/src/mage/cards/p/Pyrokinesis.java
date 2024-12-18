@@ -33,7 +33,7 @@ public final class Pyrokinesis extends CardImpl {
         this.addAbility(new AlternativeCostSourceAbility(new ExileFromHandCost(new TargetCardInHand(filter))));
 
         // Pyrokinesis deals 4 damage divided as you choose among any number of target creatures.
-        this.getSpellAbility().addEffect(new DamageMultiEffect(4));
+        this.getSpellAbility().addEffect(new DamageMultiEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(4));
     }
 

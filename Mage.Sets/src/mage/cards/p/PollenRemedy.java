@@ -27,13 +27,13 @@ public final class PollenRemedy extends CardImpl {
         // Kicker-Sacrifice a land.
         this.addAbility(new KickerAbility(new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
 
-        // Prevent the next 3 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
+        // Prevent the next 3 damage that would be dealt this turn to any number of targets, divided as you choose.
         // If Pollen Remedy was kicked, prevent the next 6 damage this way instead.
         Effect effect = new ConditionalReplacementEffect(new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 6),
                 KickedCondition.ONCE, new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 3));
         effect.setText("Prevent the next 3 damage that would be dealt this turn to any number of targets, divided as you choose. If this spell was kicked, prevent the next 6 damage this way instead.");
         this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(3));
+        this.getSpellAbility().addTarget(new TargetAnyTargetAmount(3, 0, 3));
         this.getSpellAbility().setTargetAdjuster(new ConditionalTargetAdjuster(KickedCondition.ONCE,
                 new TargetAnyTargetAmount(6)));
     }

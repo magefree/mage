@@ -41,7 +41,7 @@ public final class NahirisSacrifice extends CardImpl {
         this.getSpellAbility().addCost(new SacrificeXManaValueCost(filter,true));
 
         // Nahiri’s Sacrifice deals X damage divided as you choose among any number of target creatures.
-        Effect effect = new DamageMultiEffect(GetXValue.instance);
+        Effect effect = new DamageMultiEffect();
         effect.setText("{this} deals X damage divided as you choose among any number of target creatures.");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(GetXValue.instance));

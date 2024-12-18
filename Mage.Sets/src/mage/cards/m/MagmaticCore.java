@@ -30,7 +30,7 @@ public final class MagmaticCore extends CardImpl {
         // At the beginning of your end step, Magmatic Core deals X damage divided as you choose among any number of target creatures, where X is the number of age counters on it.
         DynamicValue value = new CountersSourceCount(CounterType.AGE);
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new DamageMultiEffect(value)
+                new DamageMultiEffect()
                         .setText("{this} deals X damage divided as you choose "
                                 + "among any number of target creatures,"
                                 + " where X is the number of age counters on it.")

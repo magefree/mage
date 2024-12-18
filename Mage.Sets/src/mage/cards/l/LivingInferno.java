@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -57,7 +56,8 @@ enum LivingInfernoAdjuster implements TargetAdjuster {
         Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(ability.getSourceId());
         if (sourcePermanent != null) {
             ability.getTargets().clear();
-            ability.addTarget(new TargetCreaturePermanentAmount(sourcePermanent.getPower().getValue()));
+            int power = sourcePermanent.getPower().getValue();
+            ability.addTarget(new TargetCreaturePermanentAmount(power, 0, power));
         }
     }
 }

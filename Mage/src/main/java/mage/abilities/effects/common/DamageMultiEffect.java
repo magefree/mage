@@ -4,13 +4,13 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetAmount;
 
 import java.util.*;
 
@@ -19,32 +19,21 @@ import java.util.*;
  */
 public class DamageMultiEffect extends OneShotEffect {
 
-    protected DynamicValue amount;
     private String sourceName = "{this}";
     private final Set<MageObjectReference> damagedSet = new HashSet<>();
 
-    public DamageMultiEffect(int amount) {
-        this(StaticValue.get(amount));
-    }
-
-    public DamageMultiEffect(int amount, String whoDealDamageName) {
-        this(StaticValue.get(amount), whoDealDamageName);
-    }
-
-    public DamageMultiEffect(DynamicValue amount, String whoDealDamageName) {
-        this(amount);
-        this.sourceName = whoDealDamageName;
-    }
-
-    public DamageMultiEffect(DynamicValue amount) {
+    public DamageMultiEffect() {
         super(Outcome.Damage);
-        this.amount = amount;
+    }
+
+    public DamageMultiEffect(String whoDealDamageName) {
+        super(Outcome.Damage);
+        this.sourceName = whoDealDamageName;
     }
 
     protected DamageMultiEffect(final DamageMultiEffect effect) {
         super(effect);
         this.damagedSet.addAll(effect.damagedSet);
-        this.amount = effect.amount;
         this.sourceName = effect.sourceName;
     }
 
@@ -84,16 +73,16 @@ public class DamageMultiEffect extends OneShotEffect {
         StringBuilder sb = new StringBuilder(sourceName);
         sb.append(" deals ");
 
-        String amountString = amount.toString();
-        sb.append(amountString);
-        sb.append(" damage divided as you choose among ");
-        sb.append(amountString.equals("2") ? "one or two " : amountString.equals("3") ? "one, two, or three " : "any number of ");
-
-        String targetName = mode.getTargets().get(0).getTargetName();
-        if (!targetName.contains("target")) {
-            sb.append("target ");
+        Target target = mode.getTargets().get(0);
+        if (!(target instanceof TargetAmount)) {
+            throw new IllegalStateException("Must use TargetAmount");
         }
-        sb.append(targetName);
+        TargetAmount targetAmount = (TargetAmount) target;
+
+        DynamicValue amount = targetAmount.getAmount();
+        sb.append(amount.toString());
+        sb.append(" damage divided as you choose among ");
+        sb.append(targetAmount.getDescription());
 
         return sb.toString();
     }

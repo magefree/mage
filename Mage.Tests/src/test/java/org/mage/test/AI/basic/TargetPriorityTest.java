@@ -223,8 +223,8 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
 
     @Test
     public void test_targetAmount_NormalCase() {
-        Ability ability = new SimpleActivatedAbility(Zone.ALL, new DamageMultiEffect(3), new ManaCostsImpl<>("{R}"));
-        ability.addTarget(new TargetCreaturePermanentAmount(3));
+        Ability ability = new SimpleActivatedAbility(Zone.ALL, new DamageMultiEffect(), new ManaCostsImpl<>("{R}"));
+        ability.addTarget(new TargetCreaturePermanentAmount(3, 0, 3));
         addCustomCardWithAbility("damage 3", playerA, ability);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         //
@@ -250,8 +250,8 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
     public void test_targetAmount_BadCase() {
         // choose targets as enters battlefield (e.g. can't be canceled)
         SpellAbility spell = new SpellAbility(new ManaCostsImpl<>("{R}"), "damage 3", Zone.HAND);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect(3));
-        ability.addTarget(new TargetCreaturePermanentAmount(3));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect());
+        ability.addTarget(new TargetCreaturePermanentAmount(3, 0, 3));
         addCustomCardWithSpell(playerA, spell, ability, CardType.ENCHANTMENT);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         //
@@ -283,8 +283,8 @@ public class TargetPriorityTest extends CardTestPlayerBaseAI {
     public void test_targetAmount_Performance() {
         int cardsMultiplier = 3;
 
-        Ability ability = new SimpleActivatedAbility(Zone.ALL, new DamageMultiEffect(3), new ManaCostsImpl<>("{R}"));
-        ability.addTarget(new TargetCreaturePermanentAmount(3));
+        Ability ability = new SimpleActivatedAbility(Zone.ALL, new DamageMultiEffect(), new ManaCostsImpl<>("{R}"));
+        ability.addTarget(new TargetCreaturePermanentAmount(3, 0, 3));
         addCustomCardWithAbility("damage 3", playerA, ability);
         addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         //

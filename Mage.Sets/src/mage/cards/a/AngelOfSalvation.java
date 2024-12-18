@@ -34,7 +34,7 @@ public final class AngelOfSalvation extends CardImpl {
         this.addAbility(new ConvokeAbility());
         // Flying
         this.addAbility(FlyingAbility.getInstance());
-        // When Angel of Salvation enters the battlefield, prevent the next 5 damage that would be dealt this turn to any number of target creatures and/or players, divided as you choose.
+        // When Angel of Salvation enters, prevent the next 5 damage that would be dealt this turn to any number of targets, divided as you choose.
         Ability ability = new EntersBattlefieldTriggeredAbility(new PreventDamageToTargetMultiAmountEffect(Duration.EndOfTurn, 5));
         ability.addTarget(new TargetAnyTargetAmount(5));
         this.addAbility(ability);

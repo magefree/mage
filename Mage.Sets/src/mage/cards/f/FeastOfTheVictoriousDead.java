@@ -77,8 +77,7 @@ class FeastOfTheVictoriousDeadEffect extends OneShotEffect {
         if (player == null || game.getBattlefield().count(StaticFilters.FILTER_CONTROLLED_CREATURE, player.getId(), source, game) < 1) {
             return false;
         }
-        TargetPermanentAmount target = new TargetCreaturePermanentAmount(amount, StaticFilters.FILTER_CONTROLLED_CREATURE);
-        target.setMinNumberOfTargets(1);
+        TargetPermanentAmount target = new TargetCreaturePermanentAmount(amount, 1, amount, StaticFilters.FILTER_CONTROLLED_CREATURE);
         target.withNotTarget(true);
         target.withChooseHint("to distribute " + amount + " counters");
         target.chooseTarget(outcome, player.getId(), source, game);

@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
@@ -32,9 +31,7 @@ public final class GlintWeaver extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // When Glint Weaver enters the battlefield, distribute three +1/+1 counters among one, two, or three target creatures, then you gain life equal to the greatest toughness among creatures you control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(
-                3, "one, two, or three target creatures"
-        ));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect());
         ability.addEffect(new GainLifeEffect(GreatestToughnessAmongControlledCreaturesValue.instance)
                 .setText(", then you gain life equal to the greatest toughness among creatures you control"));
         ability.addTarget(new TargetCreaturePermanentAmount(3));
