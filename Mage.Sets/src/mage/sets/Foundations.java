@@ -87,10 +87,10 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Bite Down", 212, Rarity.COMMON, mage.cards.b.BiteDown.class));
         cards.add(new SetCardInfo("Blanchwood Armor", 213, Rarity.UNCOMMON, mage.cards.b.BlanchwoodArmor.class));
         cards.add(new SetCardInfo("Blasphemous Edict", 57, Rarity.RARE, mage.cards.b.BlasphemousEdict.class));
-        cards.add(new SetCardInfo("Bloodfell Caves", 259, Rarity.LAND, mage.cards.b.BloodfellCaves.class));
+        cards.add(new SetCardInfo("Bloodfell Caves", 259, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Bloodthirsty Conqueror", 58, Rarity.MYTHIC, mage.cards.b.BloodthirstyConqueror.class));
         cards.add(new SetCardInfo("Bloodtithe Collector", 516, Rarity.UNCOMMON, mage.cards.b.BloodtitheCollector.class));
-        cards.add(new SetCardInfo("Blossoming Sands", 260, Rarity.LAND, mage.cards.b.BlossomingSands.class));
+        cards.add(new SetCardInfo("Blossoming Sands", 260, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Bolt Bend", 619, Rarity.UNCOMMON, mage.cards.b.BoltBend.class));
         cards.add(new SetCardInfo("Boltwave", 79, Rarity.UNCOMMON, mage.cards.b.Boltwave.class));
         cards.add(new SetCardInfo("Boros Charm", 721, Rarity.UNCOMMON, mage.cards.b.BorosCharm.class));
@@ -155,7 +155,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Dimir Guildgate", 688, Rarity.COMMON, mage.cards.d.DimirGuildgate.class));
         cards.add(new SetCardInfo("Diregraf Ghoul", 171, Rarity.UNCOMMON, mage.cards.d.DiregrafGhoul.class));
         cards.add(new SetCardInfo("Disenchant", 572, Rarity.COMMON, mage.cards.d.Disenchant.class));
-        cards.add(new SetCardInfo("Dismal Backwater", 261, Rarity.LAND, mage.cards.d.DismalBackwater.class));
+        cards.add(new SetCardInfo("Dismal Backwater", 261, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Dive Down", 588, Rarity.COMMON, mage.cards.d.DiveDown.class));
         cards.add(new SetCardInfo("Divine Resilience", 10, Rarity.UNCOMMON, mage.cards.d.DivineResilience.class));
         cards.add(new SetCardInfo("Doubling Season", 216, Rarity.MYTHIC, mage.cards.d.DoublingSeason.class));
@@ -305,7 +305,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Joraga Invocation", 555, Rarity.UNCOMMON, mage.cards.j.JoragaInvocation.class));
         cards.add(new SetCardInfo("Joust Through", 19, Rarity.UNCOMMON, mage.cards.j.JoustThrough.class));
         cards.add(new SetCardInfo("Juggernaut", 255, Rarity.UNCOMMON, mage.cards.j.Juggernaut.class));
-        cards.add(new SetCardInfo("Jungle Hollow", 263, Rarity.LAND, mage.cards.j.JungleHollow.class));
+        cards.add(new SetCardInfo("Jungle Hollow", 263, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Kaito, Cunning Infiltrator", 44, Rarity.MYTHIC, mage.cards.k.KaitoCunningInfiltrator.class));
         cards.add(new SetCardInfo("Kalastria Highborn", 607, Rarity.RARE, mage.cards.k.KalastriaHighborn.class));
         cards.add(new SetCardInfo("Kargan Dragonrider", 541, Rarity.COMMON, mage.cards.k.KarganDragonrider.class));
@@ -428,7 +428,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("River's Rebuke", 595, Rarity.RARE, mage.cards.r.RiversRebuke.class));
         cards.add(new SetCardInfo("Rogue's Passage", 264, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
         cards.add(new SetCardInfo("Ruby, Daring Tracker", 245, Rarity.UNCOMMON, mage.cards.r.RubyDaringTracker.class));
-        cards.add(new SetCardInfo("Rugged Highlands", 265, Rarity.LAND, mage.cards.r.RuggedHighlands.class));
+        cards.add(new SetCardInfo("Rugged Highlands", 265, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Run Away Together", 162, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
         cards.add(new SetCardInfo("Rune-Scarred Demon", 184, Rarity.RARE, mage.cards.r.RuneScarredDemon.class));
         cards.add(new SetCardInfo("Rune-Sealed Wall", 49, Rarity.UNCOMMON, mage.cards.r.RuneSealedWall.class));
@@ -438,7 +438,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Savannah Lions", 146, Rarity.UNCOMMON, mage.cards.s.SavannahLions.class));
         cards.add(new SetCardInfo("Scavenging Ooze", 232, Rarity.RARE, mage.cards.s.ScavengingOoze.class));
         cards.add(new SetCardInfo("Scorching Dragonfire", 545, Rarity.COMMON, mage.cards.s.ScorchingDragonfire.class));
-        cards.add(new SetCardInfo("Scoured Barrens", 266, Rarity.LAND, mage.cards.s.ScouredBarrens.class));
+        cards.add(new SetCardInfo("Scoured Barrens", 266, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Scrawling Crawler", 132, Rarity.RARE, mage.cards.s.ScrawlingCrawler.class));
         cards.add(new SetCardInfo("Searslicer Goblin", 93, Rarity.RARE, mage.cards.s.SearslicerGoblin.class));
         cards.add(new SetCardInfo("Secluded Courtyard", 267, Rarity.UNCOMMON, mage.cards.s.SecludedCourtyard.class));
@@ -493,7 +493,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Swiftblade Vindicator", 246, Rarity.RARE, mage.cards.s.SwiftbladeVindicator.class));
         cards.add(new SetCardInfo("Swiftfoot Boots", 258, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftfoot Boots", 355, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Swiftwater Cliffs", 268, Rarity.LAND, mage.cards.s.SwiftwaterCliffs.class));
+        cards.add(new SetCardInfo("Swiftwater Cliffs", 268, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
         cards.add(new SetCardInfo("Sylvan Scavenging", 113, Rarity.RARE, mage.cards.s.SylvanScavenging.class));
         cards.add(new SetCardInfo("Syr Alin, the Lion's Claw", 582, Rarity.UNCOMMON, mage.cards.s.SyrAlinTheLionsClaw.class));
         cards.add(new SetCardInfo("Tajuru Pathwarden", 558, Rarity.COMMON, mage.cards.t.TajuruPathwarden.class));
@@ -515,7 +515,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Think Twice", 165, Rarity.COMMON, mage.cards.t.ThinkTwice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Think Twice", 315, Rarity.COMMON, mage.cards.t.ThinkTwice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thornweald Archer", 559, Rarity.COMMON, mage.cards.t.ThornwealdArcher.class));
-        cards.add(new SetCardInfo("Thornwood Falls", 269, Rarity.LAND, mage.cards.t.ThornwoodFalls.class));
+        cards.add(new SetCardInfo("Thornwood Falls", 269, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thousand-Year Storm", 248, Rarity.RARE, mage.cards.t.ThousandYearStorm.class));
         cards.add(new SetCardInfo("Thrashing Brontodon", 560, Rarity.UNCOMMON, mage.cards.t.ThrashingBrontodon.class));
         cards.add(new SetCardInfo("Three Tree Mascot", 682, Rarity.COMMON, mage.cards.t.ThreeTreeMascot.class));
@@ -524,7 +524,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Tinybones, Bauble Burglar", 72, Rarity.RARE, mage.cards.t.TinybonesBaubleBurglar.class));
         cards.add(new SetCardInfo("Tolarian Terror", 167, Rarity.COMMON, mage.cards.t.TolarianTerror.class));
         cards.add(new SetCardInfo("Tragic Banshee", 73, Rarity.UNCOMMON, mage.cards.t.TragicBanshee.class));
-        cards.add(new SetCardInfo("Tranquil Cove", 270, Rarity.LAND, mage.cards.t.TranquilCove.class));
+        cards.add(new SetCardInfo("Tranquil Cove", 270, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Treetop Snarespinner", 114, Rarity.COMMON, mage.cards.t.TreetopSnarespinner.class));
         cards.add(new SetCardInfo("Tribute to Hunger", 614, Rarity.UNCOMMON, mage.cards.t.TributeToHunger.class));
         cards.add(new SetCardInfo("Trygon Predator", 667, Rarity.UNCOMMON, mage.cards.t.TrygonPredator.class));
@@ -562,7 +562,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Wildheart Invoker", 561, Rarity.COMMON, mage.cards.w.WildheartInvoker.class));
         cards.add(new SetCardInfo("Wildwood Scourge", 236, Rarity.UNCOMMON, mage.cards.w.WildwoodScourge.class));
         cards.add(new SetCardInfo("Wilt-Leaf Liege", 668, Rarity.RARE, mage.cards.w.WiltLeafLiege.class));
-        cards.add(new SetCardInfo("Wind-Scarred Crag", 271, Rarity.LAND, mage.cards.w.WindScarredCrag.class));
+        cards.add(new SetCardInfo("Wind-Scarred Crag", 271, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Wishclaw Talisman", 617, Rarity.RARE, mage.cards.w.WishclawTalisman.class));
         cards.add(new SetCardInfo("Witness Protection", 168, Rarity.COMMON, mage.cards.w.WitnessProtection.class));
         cards.add(new SetCardInfo("Youthful Valkyrie", 149, Rarity.UNCOMMON, mage.cards.y.YouthfulValkyrie.class, NON_FULL_USE_VARIOUS));
