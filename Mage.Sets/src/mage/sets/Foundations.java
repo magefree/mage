@@ -688,7 +688,7 @@ class FoundationsCollator implements BoosterCollator {
     private final BoosterStructure Sg = new BoosterStructure(listGuest);
     private final BoosterStructure fcA = new BoosterStructure(commonA);
     private final BoosterStructure fcB = new BoosterStructure(commonFoilB);
-    private final BoosterStructure fcB = new BoosterStructure(commonFoilC);
+    private final BoosterStructure fcC = new BoosterStructure(commonFoilC);
     private final BoosterStructure fuA = new BoosterStructure(uncommonA);
     private final BoosterStructure fuB = new BoosterStructure(uncommonFoilB);
     private final BoosterStructure fuC = new BoosterStructure(uncommonFoilC);
