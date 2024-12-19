@@ -217,7 +217,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Fleeting Distraction", 155, Rarity.COMMON, mage.cards.f.FleetingDistraction.class));
         cards.add(new SetCardInfo("Fleeting Flight", 13, Rarity.COMMON, mage.cards.f.FleetingFlight.class));
         cards.add(new SetCardInfo("Fog Bank", 591, Rarity.UNCOMMON, mage.cards.f.FogBank.class));
-        cards.add(new SetCardInfo("Forest", 280, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 280, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 290, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 291, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frenzied Goblin", 199, Rarity.UNCOMMON, mage.cards.f.FrenziedGoblin.class));
@@ -294,7 +294,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Inspiring Paladin", 18, Rarity.COMMON, mage.cards.i.InspiringPaladin.class));
         cards.add(new SetCardInfo("Into the Roil", 509, Rarity.COMMON, mage.cards.i.IntoTheRoil.class));
         cards.add(new SetCardInfo("Involuntary Employment", 203, Rarity.COMMON, mage.cards.i.InvoluntaryEmployment.class));
-        cards.add(new SetCardInfo("Island", 274, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 274, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Island", 284, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Island", 285, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Izzet Guildgate", 691, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
@@ -353,7 +353,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Moment of Triumph", 500, Rarity.COMMON, mage.cards.m.MomentOfTriumph.class));
         cards.add(new SetCardInfo("Mortify", 662, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mossborn Hydra", 107, Rarity.RARE, mage.cards.m.MossbornHydra.class));
-        cards.add(new SetCardInfo("Mountain", 278, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 278, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 288, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mountain", 289, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Muldrotha, the Gravetide", 243, Rarity.MYTHIC, mage.cards.m.MuldrothaTheGravetide.class));
@@ -382,7 +382,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Arena", 180, Rarity.RARE, mage.cards.p.PhyrexianArena.class));
         cards.add(new SetCardInfo("Pilfer", 181, Rarity.COMMON, mage.cards.p.Pilfer.class));
         cards.add(new SetCardInfo("Pirate's Cutlass", 563, Rarity.COMMON, mage.cards.p.PiratesCutlass.class));
-        cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Plains", 282, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 283, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prayer of Binding", 502, Rarity.UNCOMMON, mage.cards.p.PrayerOfBinding.class));
@@ -484,7 +484,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Surrak, the Hunt Caller", 647, Rarity.RARE, mage.cards.s.SurrakTheHuntCaller.class));
         cards.add(new SetCardInfo("Suspicious Shambler", 527, Rarity.COMMON, mage.cards.s.SuspiciousShambler.class));
         cards.add(new SetCardInfo("Swab Goblin", 548, Rarity.COMMON, mage.cards.s.SwabGoblin.class));
-        cards.add(new SetCardInfo("Swamp", 276, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 276, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 286, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 287, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftblade Vindicator", 246, Rarity.RARE, mage.cards.s.SwiftbladeVindicator.class));
@@ -776,7 +776,7 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
         boolean wildRare = false;
         boolean wildUncommon = false;
         if( wildNum < 2 ){
-            numCommon++
+            numCommon++;
         }else if( wildNum < 9 ){
             wildUncommon = true;
         }else{
