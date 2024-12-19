@@ -40,7 +40,7 @@ public final class SeshiroTheAnointed extends CardImpl {
         this.toughness = new MageInt(4);
         
         // Other Snake creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
         // Whenever a Snake you control deals combat damage to a player, you may draw a card.
         this.addAbility(new SeshiroTheAnointedAbility());
     }

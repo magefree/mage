@@ -36,7 +36,7 @@ public final class ProgenitorsIcon extends CardImpl {
 
         // {T}: The next spell of the chosen type you cast this turn can be cast as though it had flash.
         // Based on Ride the Avalanche
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ProgenitorsIconAsThoughEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ProgenitorsIconAsThoughEffect(), new TapSourceCost());
         ability.addWatcher(new ProgenitorsIconWatcher());
         this.addAbility(ability);
     }

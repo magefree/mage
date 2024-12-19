@@ -28,7 +28,7 @@ public final class UginsNexus extends CardImpl {
         this.addAbility(new SkipExtraTurnsAbility());
         
         // If Ugin's Nexus would be put into a graveyard from the battlefield, instead exile it and take an extra turn after this one.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UginsNexusExileEffect()));
+        this.addAbility(new SimpleStaticAbility(new UginsNexusExileEffect()));
     }
 
     private UginsNexus(final UginsNexus card) {

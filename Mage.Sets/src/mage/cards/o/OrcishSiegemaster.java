@@ -49,7 +49,6 @@ public final class OrcishSiegemaster extends CardImpl {
 
         // Other Orcs and Goblins you control have trample.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(
                         TrampleAbility.getInstance(),
                         Duration.WhileOnBattlefield,

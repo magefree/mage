@@ -50,13 +50,13 @@ public final class EverythingamajigB extends CardImpl {
         
         // Tower of Eons
         // 8, T: You gain 10 life.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(10), new GenericManaCost(8));
+        Ability ability2 = new SimpleActivatedAbility(new GainLifeEffect(10), new GenericManaCost(8));
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);
 
         // Spatula of the Ages
         // 4, T, Sacrifice Everythingamajig: You may put a silver-bordered permanent card from your hand onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(filter), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new PutCardFromHandOntoBattlefieldEffect(filter), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

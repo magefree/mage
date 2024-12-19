@@ -33,7 +33,7 @@ public final class ComaVeil extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted permanent doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect("permanent")));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect("permanent")));
     }
 
     private ComaVeil(final ComaVeil card) {

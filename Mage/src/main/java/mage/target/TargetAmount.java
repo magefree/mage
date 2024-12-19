@@ -19,14 +19,10 @@ public abstract class TargetAmount extends TargetImpl {
     DynamicValue amount;
     int remainingAmount;
 
-    public TargetAmount(int amount) {
-        this(StaticValue.get(amount));
-    }
-
-    public TargetAmount(DynamicValue amount) {
+    protected TargetAmount(DynamicValue amount, int minNumberOfTargets, int maxNumberOfTargets) {
         this.amount = amount;
-        //this.remainingAmount = amount;
-        amountWasSet = false;
+        setMinNumberOfTargets(minNumberOfTargets);
+        setMaxNumberOfTargets(maxNumberOfTargets);
     }
 
     protected TargetAmount(final TargetAmount target) {
@@ -70,6 +66,10 @@ public abstract class TargetAmount extends TargetImpl {
     public void setAmount(Ability source, Game game) {
         remainingAmount = amount.calculate(game, source, null);
         amountWasSet = true;
+    }
+
+    public DynamicValue getAmount() {
+        return amount;
     }
 
     public int getAmountTotal(Game game, Ability source) {
@@ -182,5 +182,25 @@ public abstract class TargetAmount extends TargetImpl {
         }
         remainingAmount -= (amount - this.getTargetAmount(targetId));
         this.setTargetAmount(targetId, amount, game);
+    }
+
+    @Override
+    protected boolean getUseAnyNumber() {
+        int min = getMinNumberOfTargets();
+        int max = getMaxNumberOfTargets();
+        if (min != 0) {
+            return false;
+        }
+        if (max == Integer.MAX_VALUE) {
+            return true;
+        }
+        // For a TargetAmount with a min of 0:
+        // A max that equals the amount, when the amount is a StaticValue,
+        // usually represents "any number of target __s", since you can't target more than the amount.
+        //
+        // 601.2d. If the spell requires the player to divide or distribute an effect
+        // (such as damage or counters) among one or more targets, the player announces the division.
+        // Each of these targets must receive at least one of whatever is being divided.
+        return amount instanceof StaticValue && max == ((StaticValue) amount).getValue();
     }
 }

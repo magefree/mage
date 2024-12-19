@@ -4,7 +4,7 @@ package mage.cards.n;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -37,7 +37,7 @@ public final class NezumiShortfang extends CardImpl {
         this.flipCardName = "Stabwhisker the Odious";
 
         // {1}{B}, {tap}: Target opponent discards a card. Then if that player has no cards in hand, flip Nezumi Shortfang.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl<>("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new DiscardTargetEffect(1), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         ability.addEffect(new ConditionalOneShotEffect(
@@ -71,7 +71,7 @@ class StabwhiskerTheOdious extends TokenImpl {
 
         // At the beginning of each opponent's upkeep, that player loses 1 life for each card fewer than three in their hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD, new StabwhiskerLoseLifeEffect(), TargetController.OPPONENT, false, true));
+                TargetController.OPPONENT, new StabwhiskerLoseLifeEffect(), false));
     }
     private StabwhiskerTheOdious(final StabwhiskerTheOdious token) {
         super(token);

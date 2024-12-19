@@ -40,7 +40,7 @@ public final class GangrenousZombies extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {T}, Sacrifice Gangrenous Zombies: Gangrenous Zombies deals 1 damage to each creature and each player. If you control a snow Swamp, Gangrenous Zombies deals 2 damage to each creature and each player instead.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalOneShotEffect(
+        Ability ability = new SimpleActivatedAbility(new ConditionalOneShotEffect(
                 new DamageEverythingEffect(2),
                 new DamageEverythingEffect(1),
                 new PermanentsOnTheBattlefieldCondition(filter),

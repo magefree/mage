@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.keyword.ExploreSourceEffect;
 import mage.cards.CardImpl;
@@ -32,7 +32,7 @@ public final class DeepfathomEcho extends CardImpl {
 
         // At the beginning of combat on your turn, Deepfathom Echo explores. Then you may have it become a copy of another creature you control until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new ExploreSourceEffect(false, "{this}"), TargetController.YOU, false
+                new ExploreSourceEffect(false, "{this}")
         );
         ability.addEffect(new DeepfathomEchoEffect());
         this.addAbility(ability);

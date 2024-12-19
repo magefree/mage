@@ -32,10 +32,10 @@ public final class HeatWave extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{R}")));
 
         // Blue creatures can't block creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeatWaveEffect1()));
+        this.addAbility(new SimpleStaticAbility(new HeatWaveEffect1()));
 
         // Nonblue creatures can't block creatures you control unless their controller pays 1 life for each blocking creature they control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeatWaveEffect2()));
+        this.addAbility(new SimpleStaticAbility(new HeatWaveEffect2()));
 
     }
 

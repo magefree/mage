@@ -1,7 +1,7 @@
 package mage.cards.t;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.DescendedThisTurnCount;
@@ -58,8 +58,7 @@ public final class TheMycotyrant extends CardImpl {
 
         // At the beginning of your end step, create X 1/1 black Fungus creature tokens with "This creature can't block," where X is the number of times you descended this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new FungusCantBlockToken(), DescendedThisTurnCount.instance),
-                TargetController.YOU, false
+                new CreateTokenEffect(new FungusCantBlockToken(), DescendedThisTurnCount.instance)
         ).addHint(DescendedThisTurnCount.getHint()), new DescendedWatcher());
     }
 

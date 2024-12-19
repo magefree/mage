@@ -40,7 +40,7 @@ public final class GuildscornWard extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has protection from multicolored.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.AURA, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.AURA, Duration.WhileOnBattlefield)));
     }
 
     private GuildscornWard(final GuildscornWard card) {

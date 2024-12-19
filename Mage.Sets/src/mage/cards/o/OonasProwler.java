@@ -33,7 +33,7 @@ public final class OonasProwler extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Discard a card: Oona's Prowler gets -2/-0 until end of turn. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-2,-0, Duration.EndOfTurn) , new DiscardCardCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new BoostSourceEffect(-2,-0, Duration.EndOfTurn) , new DiscardCardCost());
         ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new InfoEffect("Any player may activate this ability"));
         this.addAbility(ability);

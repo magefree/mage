@@ -49,7 +49,7 @@ public final class RadiantArchangel extends CardImpl {
         
         // Radiant, Archangel gets +1/+1 for each other creature with flying on the battlefield.
         DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)));        
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(xValue, xValue, Duration.WhileOnBattlefield)));        
     }
 
     private RadiantArchangel(final RadiantArchangel card) {

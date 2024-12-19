@@ -83,7 +83,6 @@ class MercadianLiftEffect extends OneShotEffect {
             if (target.canChoose(controller.getId(), source, game)
                     && controller.chooseUse(Outcome.PutCardInPlay, "Put " + filter.getMessage() + " from your hand onto the battlefield?", source, game)
                     && controller.choose(Outcome.PutCardInPlay, target, source, game)) {
-                target.setRequired(false);
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     return controller.moveCards(card, Zone.BATTLEFIELD, source, game);

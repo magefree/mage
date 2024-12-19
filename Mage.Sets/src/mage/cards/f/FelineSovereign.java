@@ -2,7 +2,7 @@ package mage.cards.f;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -44,7 +44,7 @@ public final class FelineSovereign extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Other Cats you control get +1/+1 and have protection from Dogs.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterCat, true));
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterCat, true));
         //
         Effect effect = new GainAbilityAllEffect(new ProtectionAbility(filterProtectionFromDogs), Duration.WhileOnBattlefield, filterCat, true);
         effect.setText("and have protection from Dogs");
@@ -65,7 +65,7 @@ public final class FelineSovereign extends CardImpl {
     }
 }
 
-class FelineSovereignTriggeredAbility extends DealCombatDamageControlledTriggeredAbility {
+class FelineSovereignTriggeredAbility extends OneOrMoreCombatDamagePlayerTriggeredAbility {
 
     private static final FilterCreaturePermanent catFilter = new FilterCreaturePermanent(SubType.CAT, "Cats");
 

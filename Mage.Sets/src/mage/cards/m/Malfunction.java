@@ -38,7 +38,7 @@ public final class Malfunction extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapEnchantedEffect("permanent")));
 
         // Enchanted permanent doesn't untap during its controller's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepEnchantedEffect("permanent")));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepEnchantedEffect("permanent")));
     }
 
     private Malfunction(final Malfunction card) {

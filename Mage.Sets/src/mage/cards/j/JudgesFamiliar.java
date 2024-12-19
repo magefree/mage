@@ -34,7 +34,7 @@ public final class JudgesFamiliar extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Sacrifice Judge's Familiar: Counter target instant or sorcery spell unless its controller pays {1}.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new CounterUnlessPaysEffect(new GenericManaCost(1)),
                 new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));

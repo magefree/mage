@@ -34,7 +34,7 @@ public final class WardscaleDragon extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // As long as Wardscale Dragon is attacking, defending player can't cast spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WardscaleDragonRuleEffect()));
+        this.addAbility(new SimpleStaticAbility(new WardscaleDragonRuleEffect()));
 
     }
 

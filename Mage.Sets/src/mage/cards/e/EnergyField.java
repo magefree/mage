@@ -30,7 +30,7 @@ public final class EnergyField extends CardImpl {
 
 
         // Prevent all damage that would be dealt to you by sources you don't control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EnergyFieldEffect()));
+        this.addAbility(new SimpleStaticAbility(new EnergyFieldEffect()));
         // When a card is put into your graveyard from anywhere, sacrifice Energy Field.
         this.addAbility(new PutCardIntoGraveFromAnywhereAllTriggeredAbility(
                 new SacrificeSourceEffect(), false, TargetController.YOU));

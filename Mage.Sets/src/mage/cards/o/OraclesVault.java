@@ -29,7 +29,7 @@ public final class OraclesVault extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {2}, {T}: Exile the top card of your library. Until end of turn, you may play that card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
+        Ability ability = new SimpleActivatedAbility(new ExileTopXMayPlayUntilEffect(1, Duration.EndOfTurn)
                 .withTextOptions("that card", false), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
 

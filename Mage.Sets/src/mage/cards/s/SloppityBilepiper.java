@@ -30,7 +30,7 @@ public final class SloppityBilepiper extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Jolly Gutpipes -- {2}, {T}, Sacrifice a creature: The next creature spell you cast this turn has cascade.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new NextSpellCastHasAbilityEffect(new CascadeAbility(), StaticFilters.FILTER_CARD_CREATURE),
                 new GenericManaCost(2));
         ability.addCost(new TapSourceCost());

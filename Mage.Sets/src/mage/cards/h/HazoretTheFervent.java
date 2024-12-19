@@ -43,12 +43,12 @@ public final class HazoretTheFervent extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Hazoret the Fervent can't attack or block unless you have one or fewer cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new CantAttackBlockUnlessConditionSourceEffect(new CardsInHandCondition(ComparisonType.FEWER_THAN, 2))
                         .setText("{this} can't attack or block unless you have one or fewer cards in hand")));
 
         // {2}{R}, Discard a card: Hazoret deals 2 damage to each opponent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(2, TargetController.OPPONENT), new ManaCostsImpl<>("{2}{R}"));
+        Ability ability = new SimpleActivatedAbility(new DamagePlayersEffect(2, TargetController.OPPONENT), new ManaCostsImpl<>("{2}{R}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }

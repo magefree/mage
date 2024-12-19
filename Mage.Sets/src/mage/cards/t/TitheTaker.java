@@ -30,7 +30,7 @@ public final class TitheTaker extends CardImpl {
         this.toughness = new MageInt(1);
 
         // During your turn, spells your opponents cast cost {1} more to cast and abilities your opponents activate cost {1} more to activate unless they're mana abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TitheTakerCostReductionEffect())
+        this.addAbility(new SimpleStaticAbility(new TitheTakerCostReductionEffect())
                 .addHint(MyTurnHint.instance));
 
         // Afterlife 1

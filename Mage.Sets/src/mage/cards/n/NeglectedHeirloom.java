@@ -32,7 +32,7 @@ public final class NeglectedHeirloom extends CardImpl {
         this.secondSideCardClazz = mage.cards.a.AshmouthBlade.class;
 
         // Equipped creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
 
         // When equipped creature transforms, transform Neglected Heirloom.
         this.addAbility(new TransformAbility());

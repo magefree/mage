@@ -3,7 +3,7 @@ package mage.cards.v;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -19,7 +19,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,7 +48,7 @@ public final class VolrathTheShapestealer extends CardImpl {
 
         // At the beginning of combat on your turn, put a -1/-1 counter on up to one target creature.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AddCountersTargetEffect(CounterType.M1M1.createInstance(), Outcome.Detriment), TargetController.YOU, false
+                new AddCountersTargetEffect(CounterType.M1M1.createInstance(), Outcome.Detriment)
         );
         ability.addTarget(new TargetCreaturePermanent(0, 1));
         this.addAbility(ability);

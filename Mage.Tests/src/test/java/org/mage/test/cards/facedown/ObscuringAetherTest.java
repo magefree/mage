@@ -33,7 +33,7 @@ public class ObscuringAetherTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Obscuring Aether", 0);
         assertGraveyardCount(playerA, "Obscuring Aether", 0);
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2);
     }
 }

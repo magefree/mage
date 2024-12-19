@@ -21,7 +21,7 @@ public final class HerbalPoultice extends CardImpl {
 
     public HerbalPoultice(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new GenericManaCost(3));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

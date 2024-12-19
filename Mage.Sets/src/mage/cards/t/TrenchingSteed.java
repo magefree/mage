@@ -31,7 +31,6 @@ public final class TrenchingSteed extends CardImpl {
 
         // Sacrifice a land: Trenching Steed gets +0/+3 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, 
                 new BoostSourceEffect(0, 3, Duration.EndOfTurn), 
                 new SacrificeTargetCost(StaticFilters.FILTER_LAND)));
     }

@@ -20,7 +20,7 @@ public final class Attunement extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{2}{U}");
 
         // Return Attunement to its owner's hand: Draw three cards, then discard four cards.
-		SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(3), new ReturnToHandFromBattlefieldSourceCost());
+		SimpleActivatedAbility ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(3), new ReturnToHandFromBattlefieldSourceCost());
 		ability.addEffect(new DiscardControllerEffect(4).concatBy(", then"));
         this.addAbility(ability);
     }

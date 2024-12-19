@@ -2,8 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
@@ -21,8 +20,6 @@ import java.util.UUID;
  */
 public final class GleefulArsonist extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
-
     public GleefulArsonist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}");
 
@@ -33,7 +30,7 @@ public final class GleefulArsonist extends CardImpl {
 
         // Whenever an opponent casts a noncreature spell, Gleeful Arsonist deals damage equal to its power to that player.
         this.addAbility(new SpellCastOpponentTriggeredAbility(
-                Zone.BATTLEFIELD, new DamageTargetEffect(xValue).setText("{this} deals damage equal to its power to that player"),
+                Zone.BATTLEFIELD, new DamageTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("{this} deals damage equal to its power to that player"),
                 StaticFilters.FILTER_SPELL_A_NON_CREATURE, false, SetTargetPointer.PLAYER
         ));
 

@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
@@ -54,8 +54,8 @@ public final class AshcoatOfTheShadowSwarm extends CardImpl {
 
         // At the beginning of your end step, you may mill four cards. If you do,
         // return up to two Rat creature cards from your graveyard to your hand.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new MillCardsControllerEffect(4), TargetController.YOU, true
+        Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.YOU,
+                new MillCardsControllerEffect(4), true
         );
         ability.addEffect(new AshcoatEffect());
         this.addAbility(ability);

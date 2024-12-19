@@ -2,7 +2,7 @@ package mage.cards.x;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DevotionCount;
 import mage.abilities.effects.OneShotEffect;
@@ -44,10 +44,10 @@ public final class XenagosGodOfRevels extends CardImpl {
         // At the beginning of combat on your turn, another target creature you control gains haste and gets +X/+X until end of turn, where X is that creature's power.
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(
+                TargetController.YOU, new GainAbilityTargetEffect(
                         HasteAbility.getInstance(), Duration.EndOfTurn
                 ).setText("another target creature you control gains haste"),
-                TargetController.YOU, false, false
+                false
         );
         ability.addEffect(new XenagosGodOfRevelsEffect());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_TARGET_CREATURE_YOU_CONTROL));

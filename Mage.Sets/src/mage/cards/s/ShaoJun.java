@@ -44,7 +44,7 @@ public final class ShaoJun extends CardImpl {
         // Leap Strike -- As long as it's your turn, Shao Jun has flying and first strike.
         Ability ability = new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
-                MyTurnCondition.instance, "as long as it's your turn, {this} has flying"
+                MyTurnCondition.instance, "during your turn, {this} has flying"
         ));
         ability.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),

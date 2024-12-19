@@ -39,7 +39,7 @@ public final class ShaperApprentice extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Shaper Apprentice has flying as long as you control another Merfolk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
                         new PermanentsOnTheBattlefieldCondition(filter), "{this} has flying as long as you control another Merfolk")));
     }

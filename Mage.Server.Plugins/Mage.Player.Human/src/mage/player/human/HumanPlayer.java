@@ -41,7 +41,6 @@ import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetDefender;
 import mage.target.targetpointer.TargetPointer;
@@ -682,7 +681,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
@@ -781,7 +780,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
@@ -878,8 +877,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets)
-                    : null;
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
 
             if (responseId == null) {
                 Map<String, Serializable> options = getOptions(target, null);
@@ -959,8 +957,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets)
-                    : null;
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game, possibleTargets);
 
             if (responseId == null) {
                 List<UUID> chosenTargets = target.getTargets();
@@ -1042,7 +1039,7 @@ public class HumanPlayer extends PlayerImpl {
                 required = false;
             }
 
-            UUID responseId = required ? target.tryToAutoChoose(abilityControllerId, source, game) : null;
+            UUID responseId = target.tryToAutoChoose(abilityControllerId, source, game);
 
             // responseId is null if a choice couldn't be automatically made
             if (responseId == null) {
@@ -1125,7 +1122,7 @@ public class HumanPlayer extends PlayerImpl {
             MageObject targetObject = game.getObject(targetId);
             if (targetObject != null) {
                 targetNames.add(String.format("%s, P/T: %d/%d",
-                        targetObject.getIdName(),
+                        targetObject.getLogName(),
                         targetObject.getPower().getValue(),
                         targetObject.getToughness().getValue()
                 ));
@@ -1140,7 +1137,7 @@ public class HumanPlayer extends PlayerImpl {
         }
 
         // ask and assign new amount
-        List<Integer> targetValues = getMultiAmount(outcome, targetNames, 1, amountTotal, multiAmountType, game);
+        List<Integer> targetValues = getMultiAmount(outcome, targetNames, 1, amountTotal, amountTotal, multiAmountType, game);
         for (int i = 0; i < targetValues.size(); i++) {
             int newAmount = targetValues.get(i);
             UUID targetId = targets.get(i);
@@ -1916,7 +1913,7 @@ public class HumanPlayer extends PlayerImpl {
         // check if enough attackers are declared
         // check if players have to be attacked
         Set<UUID> playersToAttackIfAble = new HashSet<>();
-        
+
         // or if active player must attack with anything
         boolean mustAttack = false;
 
@@ -1927,7 +1924,7 @@ public class HumanPlayer extends PlayerImpl {
                 if (playerToAttack != null) {
                     playersToAttackIfAble.add(playerToAttack);
                 }
-                if (effect.mustAttack(game)){
+                if (effect.mustAttack(game)) {
                     mustAttack = true;
                 }
             }
@@ -1967,10 +1964,10 @@ public class HumanPlayer extends PlayerImpl {
             }
         }
 
-        if (mustAttack && game.getCombat().getAttackers().isEmpty()){
+        if (mustAttack && game.getCombat().getAttackers().isEmpty()) {
             // no attackers, but required to attack with something -- check if anything can attack
             for (Permanent attacker : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, getId(), game)) {
-                if (attacker.canAttackInPrinciple(null, game)){
+                if (attacker.canAttackInPrinciple(null, game)) {
                     game.informPlayer(this, "You are forced to attack with at least one creature, e.g. " + attacker.getIdName() + ".");
                     return false;
                 }
@@ -2207,33 +2204,6 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     @Override
-    public void assignDamage(int damage, java.util.List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game) {
-        int remainingDamage = damage;
-        while (remainingDamage > 0 && canRespond()) {
-            Target target = new TargetAnyTarget();
-            target.withNotTarget(true);
-            if (singleTargetName != null) {
-                target.withTargetName(singleTargetName);
-            }
-            this.choose(Outcome.Damage, target, source, game);
-            if (targets.isEmpty() || targets.contains(target.getFirstTarget())) {
-                int damageAmount = this.getAmount(0, remainingDamage, "Select amount", game);
-                Permanent permanent = game.getPermanent(target.getFirstTarget());
-                if (permanent != null) {
-                    permanent.damage(damageAmount, attackerId, source, game, false, true);
-                    remainingDamage -= damageAmount;
-                } else {
-                    Player player = game.getPlayer(target.getFirstTarget());
-                    if (player != null) {
-                        player.damage(damageAmount, attackerId, source, game);
-                        remainingDamage -= damageAmount;
-                    }
-                }
-            }
-        }
-    }
-
-    @Override
     public int getAmount(int min, int max, String message, Game game) {
         if (gameInCheckPlayableState(game)) {
             return 0;
@@ -2262,15 +2232,16 @@ public class HumanPlayer extends PlayerImpl {
     public List<Integer> getMultiAmountWithIndividualConstraints(
             Outcome outcome,
             List<MultiAmountMessage> messages,
-            int min,
-            int max,
+            int totalMin,
+            int totalMax,
             MultiAmountType type,
             Game game
     ) {
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
-        if (needCount == 0 || (needCount == 1 && min == max)
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, totalMin, totalMax);
+        if (needCount == 0 || (needCount == 1 && totalMin == totalMax)
                 || messages.stream().map(m -> m.min == m.max).reduce(true, Boolean::logicalAnd)) {
+            // nothing to choose
             return defaultList;
         }
 
@@ -2288,19 +2259,19 @@ public class HumanPlayer extends PlayerImpl {
                 if (type.isCanCancel()) {
                     options.put("canCancel", true);
                 }
-                game.fireGetMultiAmountEvent(playerId, messages, min, max, options);
+                game.fireGetMultiAmountEvent(playerId, messages, totalMin, totalMax, options);
             }
             waitForResponse(game);
 
             // waiting correct values only
             if (response.getString() != null) {
-                answer = MultiAmountType.parseAnswer(response.getString(), messages, min, max, false);
-                if (MultiAmountType.isGoodValues(answer, messages, min, max)) {
+                answer = MultiAmountType.parseAnswer(response.getString(), messages, totalMin, totalMax, false);
+                if (MultiAmountType.isGoodValues(answer, messages, totalMin, totalMax)) {
                     break;
                 } else {
                     // it's not normal: can be cheater or a wrong GUI checks
                     answer = null;
-                    logger.error(String.format("GUI return wrong MultiAmountType values: %d %d %d - %s", needCount, min, max, response.getString()));
+                    logger.error(String.format("GUI return wrong MultiAmountType values: %d %d %d - %s", needCount, totalMin, totalMax, response.getString()));
                     game.informPlayer(this, "Error, you must enter correct values.");
                 }
             } else if (type.isCanCancel() && response.getBoolean() != null) {
@@ -2594,8 +2565,8 @@ public class HumanPlayer extends PlayerImpl {
                         modeText = Character.toUpperCase(modeText.charAt(0)) + modeText.substring(1);
                     }
                     StringBuilder sb = new StringBuilder();
-                    if (mode.getPawPrintValue() > 0){
-                        for (int i = 0; i < mode.getPawPrintValue(); ++i){
+                    if (mode.getPawPrintValue() > 0) {
+                        for (int i = 0; i < mode.getPawPrintValue(); ++i) {
                             sb.append("{P}");
                         }
                         sb.append(": ");
@@ -2617,7 +2588,7 @@ public class HumanPlayer extends PlayerImpl {
 
             // prepare dialog
             String message;
-            if (modes.getMaxPawPrints() == 0){
+            if (modes.getMaxPawPrints() == 0) {
                 message = "Choose mode (selected " + modes.getSelectedModes().size() + " of " + modes.getMaxModes(game, source)
                         + ", min " + modes.getMinModes() + ")";
             } else {

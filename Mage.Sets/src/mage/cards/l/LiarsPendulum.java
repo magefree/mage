@@ -28,7 +28,7 @@ public final class LiarsPendulum extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
         // {2}, {T}: Choose a card name. Target opponent guesses whether a card with that name is in your hand. You may reveal your hand. If you do and your opponent guessed wrong, draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LiarsPendulumEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new LiarsPendulumEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

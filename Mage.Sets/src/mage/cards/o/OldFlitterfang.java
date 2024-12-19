@@ -2,7 +2,7 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -38,8 +38,8 @@ public final class OldFlitterfang extends CardImpl {
 
         // At the beginning of each end step, if a creature died this turn, create a Food token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new FoodToken()), TargetController.ANY,
-                MorbidCondition.instance, false
+                TargetController.ANY, new CreateTokenEffect(new FoodToken()),
+                false, MorbidCondition.instance
         ).addHint(MorbidHint.instance));
 
         // {2}{B}, Sacrifice another creature or artifact: Old Flitterfang gets +2/+2 until end of turn.

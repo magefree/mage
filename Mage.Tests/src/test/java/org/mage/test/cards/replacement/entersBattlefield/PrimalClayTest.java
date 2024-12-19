@@ -3,6 +3,7 @@ package org.mage.test.cards.replacement.entersBattlefield;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.constants.EmptyNames;
 import mage.constants.PhaseStep;
 import mage.constants.SubType;
 import mage.constants.Zone;
@@ -220,7 +221,7 @@ public class PrimalClayTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aquamorph+" using Morph");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Savage Swipe");
-        addTarget(playerA, ""); // morph
+        addTarget(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand()); // morph
         addTarget(playerA, "Siege Mastodon");
         // 2/2 becomes 4/4, fights 3/5, neither dies
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);

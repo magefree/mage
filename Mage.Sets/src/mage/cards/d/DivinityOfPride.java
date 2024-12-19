@@ -33,7 +33,7 @@ public final class DivinityOfPride extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Divinity of Pride gets +4/+4 as long as you have 25 or more life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new BoostSourceEffect(4, 4, Duration.WhileOnBattlefield),
                         new LifeCompareCondition(TargetController.YOU, ComparisonType.OR_GREATER, 25),
                         "{this} gets +4/+4 as long as you have 25 or more life")));

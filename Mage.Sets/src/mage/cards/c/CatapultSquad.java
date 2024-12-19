@@ -39,7 +39,7 @@ public final class CatapultSquad extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Tap two untapped Soldiers you control: Catapult Squad deals 2 damage to target attacking or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
         ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);
     }

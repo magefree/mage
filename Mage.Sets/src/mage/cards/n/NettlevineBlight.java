@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -43,7 +43,7 @@ public final class NettlevineBlight extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted permanent has "At the beginning of your end step, sacrifice this permanent and attach Nettlevine Blight to a creature or land you control."
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new NettlevineBlightEffect(), TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new NettlevineBlightEffect(), false));
 
     }
 

@@ -42,7 +42,7 @@ public final class SwansOfBrynArgoll extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // If a source would deal damage to Swans of Bryn Argoll, prevent that damage. The source's controller draws cards equal to the damage prevented this way.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SwansOfBrynArgollEffect()));
+        this.addAbility(new SimpleStaticAbility(new SwansOfBrynArgollEffect()));
 
     }
 

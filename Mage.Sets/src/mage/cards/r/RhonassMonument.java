@@ -45,7 +45,7 @@ public final class RhonassMonument extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Green creature spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Whenever you cast a creature spell, target creature you control gets +2/+2 and gains trample until end of turn.
         Ability ability = new SpellCastControllerTriggeredAbility(new BoostTargetEffect(2, 2, Duration.EndOfTurn)

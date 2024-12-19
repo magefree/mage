@@ -28,7 +28,7 @@ public final class BenevolentBodyguard extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Benevolent Bodyguard: Target creature you control gains protection from the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn), new SacrificeSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

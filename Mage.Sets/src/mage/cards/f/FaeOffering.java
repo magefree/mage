@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -33,8 +33,8 @@ public final class FaeOffering extends CardImpl {
         // At the beginning of each end step, if you've cast both a creature spell and a noncreature spell this turn, create a Clue token, a Food token, and a Treasure token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new ClueArtifactToken()).withAdditionalTokens(new FoodToken(), new TreasureToken()),
-                        TargetController.ANY, false
+                        TargetController.ANY, new CreateTokenEffect(new ClueArtifactToken()).withAdditionalTokens(new FoodToken(), new TreasureToken()),
+                        false
                 ), FaeOfferingCondition.instance, "At the beginning of each end step, " +
                 "if you've cast both a creature spell and a noncreature spell this turn, " +
                 "create a Clue token, a Food token, and a Treasure token."

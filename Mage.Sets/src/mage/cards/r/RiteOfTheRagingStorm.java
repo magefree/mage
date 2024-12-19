@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
@@ -36,7 +36,7 @@ public final class RiteOfTheRagingStorm extends CardImpl {
 
         // At the beginning of each player's upkeep, that player creates a 5/1 red Elemental creature token named Lightning Rager.
         // It has trample, haste, and "At the beginning of the end step, sacrifice this creature."
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new RiteOfTheRagingStormEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new RiteOfTheRagingStormEffect(), false));
     }
 
     private RiteOfTheRagingStorm(final RiteOfTheRagingStorm card) {

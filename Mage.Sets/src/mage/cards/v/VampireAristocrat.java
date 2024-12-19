@@ -28,7 +28,6 @@ public final class VampireAristocrat extends CardImpl {
 
         // Sacrifice a creature: Vampire Aristocrat gets +2/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE)));
     }

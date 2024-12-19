@@ -35,7 +35,7 @@ public final class FreneticSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Slivers have "{0}: If this permanent is on the battlefield, flip a coin. If you win the flip, exile this permanent and return it to the battlefield under its owner's control at the beginning of the next end step. If you lose the flip, sacrifice it."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(
                         new SimpleActivatedAbility(
                                 Zone.BATTLEFIELD,

@@ -19,7 +19,7 @@ public class AlternativeCostRuleTest extends CardTestPlayerBase {
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
-        
+
         Card firewildBorderpost = playerA.getGraveyard().getCards(currentGame).iterator().next();
         boolean found = false;
         for (String rule : firewildBorderpost.getRules(currentGame)) {
@@ -29,6 +29,28 @@ public class AlternativeCostRuleTest extends CardTestPlayerBase {
             }
         }
         Assert.assertTrue("Couldn't find rule text for alternative cost on a card: " + firewildBorderpost.getName(), found);
+    }
+
+    @Test
+    public void test_PayLife() {
+        // You may pay 1 life and exile a black card from your hand rather than pay this spell’s mana cost.
+        // Distribute two -2/-1 counters among one or two target creatures.
+        addCard(Zone.HAND, playerA, "Contagion"); // {3}{B}{B}
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.HAND, playerA, "Arrogant Vampire", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Ancient Bronze Dragon"); // 7/7
+
+        // cast alternative
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Contagion");
+        setChoice(playerA, "Cast with alternative cost: Pay 1 life");
+        addTargetAmount(playerA, "Ancient Bronze Dragon", 2);
+        setChoice(playerA, "Arrogant Vampire"); // to pay discard cost
+
+        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertPowerToughness(playerA, "Ancient Bronze Dragon", 7 - 2 * 2, 7 - 1 * 2); // from x1 boost
     }
 
     @Test

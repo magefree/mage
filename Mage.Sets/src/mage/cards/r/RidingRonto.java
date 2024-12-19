@@ -33,7 +33,7 @@ public final class RidingRonto extends CardImpl {
         this.addAbility(new MonstrosityAbility("{3}{W}{W}", 3));
 
         // As long as Riding Ronto is monstrous, it has vigilance
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield),
                 MonstrousCondition.instance,
                 "As long as Riding Ronto is monstrous, it has vigilance")

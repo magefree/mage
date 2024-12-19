@@ -24,10 +24,10 @@ public final class ConsulateTurret extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {T}: You get {E}.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GetEnergyCountersControllerEffect(1), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new GetEnergyCountersControllerEffect(1), new TapSourceCost()));
 
         // {T}, Pay {E}{E}{E}: Consulate Turret deals 2 damage to target player.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(2), new TapSourceCost());
         ability.addCost(new PayEnergyCost(3));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);

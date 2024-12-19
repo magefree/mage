@@ -34,14 +34,14 @@ public final class ColfenorsPlans extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ColfenorsPlansExileEffect(), false));
 
         // You may look at and play cards exiled with Colfenor's Plans.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ColfenorsPlansPlayCardEffect()));
+        this.addAbility(new SimpleStaticAbility(new ColfenorsPlansPlayCardEffect()));
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new ColfenorsPlansLookAtCardEffect()));
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
 
         // You can't cast more than one spell each turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.YOU)));
+        this.addAbility(new SimpleStaticAbility(new CantCastMoreThanOneSpellEffect(TargetController.YOU)));
 
     }
 

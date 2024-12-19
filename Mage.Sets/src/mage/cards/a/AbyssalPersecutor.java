@@ -33,7 +33,7 @@ public final class AbyssalPersecutor extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         
         // You can't win the game and your opponents can't lose the game.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbyssalPersecutorCannotWinEffect()));
+        this.addAbility(new SimpleStaticAbility(new AbyssalPersecutorCannotWinEffect()));
     }
 
     private AbyssalPersecutor(final AbyssalPersecutor card) {

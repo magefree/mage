@@ -30,7 +30,7 @@ public final class LadyCaleria extends CardImpl {
         this.toughness = new MageInt(6);
 
         // {T}: Lady Caleria deals 3 damage to target attacking or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(3), new TapSourceCost());
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         this.addAbility(ability);
     }

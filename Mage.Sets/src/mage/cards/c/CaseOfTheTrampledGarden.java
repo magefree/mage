@@ -26,7 +26,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetAttackingCreature;
-import mage.target.common.TargetPermanentAmount;
+import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
  *
@@ -40,11 +40,8 @@ public final class CaseOfTheTrampledGarden extends CardImpl {
         this.subtype.add(SubType.CASE);
 
         // When this Case enters the battlefield, distribute two +1/+1 counters among one or two target creatures you control.
-        Ability initialAbility = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect(CounterType.P1P1, 2,
-                "one or two target creatures you control"));
-        TargetPermanentAmount target = new TargetPermanentAmount(2, StaticFilters.FILTER_CONTROLLED_CREATURES);
-        target.setMinNumberOfTargets(1);
-        initialAbility.addTarget(target);
+        Ability initialAbility = new EntersBattlefieldTriggeredAbility(new DistributeCountersEffect());
+        initialAbility.addTarget(new TargetCreaturePermanentAmount(2, StaticFilters.FILTER_CONTROLLED_CREATURES));
         // To solve -- Creatures you control have total power 8 or greater.
         // Solved -- Whenever you attack, put a +1/+1 counter on target attacking creature. It gains trample until end of turn.
         Ability solvedAbility = new ConditionalTriggeredAbility(
@@ -91,7 +88,8 @@ class CaseOfTheTrampledGardenHint extends CaseSolvedHint {
                 .stream()
                 .map(Permanent::getPower)
                 .map(MageInt::getValue)
-                .reduce(0, Integer::sum);
+                .mapToInt(x -> x)
+                .sum();
         return "Total power: " + power + " (need 8).";
     }
 }

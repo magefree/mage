@@ -41,11 +41,11 @@ public final class ShieldOfTheOversoul extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // As long as enchanted creature is green, it gets +1/+1 and is indestructible.
-        SimpleStaticAbility greenAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.GREEN), "As long as enchanted creature is green, it gets +1/+1"));
+        SimpleStaticAbility greenAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.GREEN), "As long as enchanted creature is green, it gets +1/+1"));
         greenAbility.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(IndestructibleAbility.getInstance() ,AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.GREEN), "and has indestructible"));
         this.addAbility(greenAbility);
         // As long as enchanted creature is white, it gets +1/+1 and has flying.
-        SimpleStaticAbility whiteAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.WHITE), "As long as enchanted creature is white, it gets +1/+1"));
+        SimpleStaticAbility whiteAbility = new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.WHITE), "As long as enchanted creature is white, it gets +1/+1"));
         whiteAbility.addEffect(new ConditionalContinuousEffect(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.WHITE), "and has flying"));
         this.addAbility(whiteAbility);
     }

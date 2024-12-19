@@ -30,7 +30,7 @@ public final class BlightedWoodland extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {3}{G}, {T}, Sacrifice Blighted Woodland: Search your library for up to two basic land cards and put them onto the battlefield tapped. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS), true),
                 new ManaCostsImpl<>("{3}{G}"));
         ability.addCost(new TapSourceCost());

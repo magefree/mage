@@ -3,7 +3,7 @@ package mage.cards.x;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldOrAttacksSourceTriggeredAbility;
 import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.effects.common.continuous.BecomesBasicLandTargetEffect;
@@ -50,8 +50,7 @@ public final class XolatoyacTheSmilingFlood extends CardImpl {
         // At the beginning of your end step, untap each permanent you control with a counter on it.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new UntapAllEffect(filter)
-                        .setText("untap each permanent you control with a counter on it"),
-                TargetController.YOU, false
+                        .setText("untap each permanent you control with a counter on it")
         ));
     }
 

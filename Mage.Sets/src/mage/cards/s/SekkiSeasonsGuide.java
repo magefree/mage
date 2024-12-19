@@ -42,7 +42,7 @@ public final class SekkiSeasonsGuide extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(8)), "with eight +1/+1 counters on it"));
 
         // If damage would be dealt to Sekki, prevent that damage, remove that many +1/+1 counters from Sekki, and create that many 1/1 colorless Spirit creature tokens.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SekkiSeasonsGuideEffect()));
+        this.addAbility(new SimpleStaticAbility(new SekkiSeasonsGuideEffect()));
 
         // Sacrifice eight Spirits: Return Sekki from your graveyard to the battlefield.
         this.addAbility(new SimpleActivatedAbility(

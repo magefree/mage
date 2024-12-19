@@ -3,7 +3,7 @@ package mage.cards.d;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.IntPlusDynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
@@ -40,7 +40,7 @@ public final class DamiaSageOfStone extends CardImpl {
         this.addAbility(DeathtouchAbility.getInstance());
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
 
         // At the beginning of your upkeep, if you have fewer than seven cards in hand, draw cards equal to the difference.
         this.addAbility(new DamiaSageOfStoneTriggeredAbility());
@@ -59,7 +59,7 @@ public final class DamiaSageOfStone extends CardImpl {
 class DamiaSageOfStoneTriggeredAbility extends BeginningOfUpkeepTriggeredAbility {
 
     DamiaSageOfStoneTriggeredAbility() {
-        super(new DrawCardSourceControllerEffect(new IntPlusDynamicValue(7, new MultipliedValue(CardsInControllerHandCount.instance, -1))), TargetController.YOU, false);
+        super(TargetController.YOU, new DrawCardSourceControllerEffect(new IntPlusDynamicValue(7, new MultipliedValue(CardsInControllerHandCount.instance, -1))), false);
     }
 
     private DamiaSageOfStoneTriggeredAbility(final DamiaSageOfStoneTriggeredAbility ability) {

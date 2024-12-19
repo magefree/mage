@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -12,13 +12,11 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 
@@ -31,13 +29,13 @@ public final class WormsOfTheEarth extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}{B}{B}");
 
         // Players can't play lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WormsOfTheEarthPlayEffect()));
+        this.addAbility(new SimpleStaticAbility(new WormsOfTheEarthPlayEffect()));
 
         // Lands can't enter the battlefield.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WormsOfTheEarthEnterEffect()));
+        this.addAbility(new SimpleStaticAbility(new WormsOfTheEarthEnterEffect()));
 
         // At the beginning of each upkeep, any player may sacrifice two lands or have Worms of the Earth deal 5 damage to that player. If a player does either, destroy Worms of the Earth.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WormsOfTheEarthDestroyEffect(), TargetController.EACH_PLAYER, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new WormsOfTheEarthDestroyEffect(), false));
     }
 
     private WormsOfTheEarth(final WormsOfTheEarth card) {

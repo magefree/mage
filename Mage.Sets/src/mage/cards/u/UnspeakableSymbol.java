@@ -24,7 +24,7 @@ public final class UnspeakableSymbol extends CardImpl {
 
 
         // Pay 3 life: Put a +1/+1 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new PayLifeCost(3));
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new PayLifeCost(3));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -28,7 +28,7 @@ public final class GrapplingHook extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has double strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
         // Whenever equipped creature attacks, you may have target creature block it this turn if able.
         Ability ability = new AttacksAttachedTriggeredAbility(new GrapplingHookEffect(), true);
         ability.addTarget(new TargetCreaturePermanent());

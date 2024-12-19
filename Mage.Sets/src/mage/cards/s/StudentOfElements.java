@@ -96,7 +96,7 @@ class TobitaMasterOfWinds extends TokenImpl {
 
         // Creatures you control have flying.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+                new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
     }
     private TobitaMasterOfWinds(final TobitaMasterOfWinds token) {
         super(token);

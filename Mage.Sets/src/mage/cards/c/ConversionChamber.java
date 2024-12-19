@@ -29,13 +29,13 @@ public final class ConversionChamber extends CardImpl {
     public ConversionChamber(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
         // {2}, {T}: Exile target artifact card from a graveyard. Put a charge counter on Conversion Chamber.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new ExileTargetEffect(), new GenericManaCost(2));
         ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()));
         ability.addTarget(new TargetCardInGraveyard(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         // {2}, {T}, Remove a charge counter from Conversion Chamber: Create a 3/3 colorless Golem artifact creature token.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PhyrexianGolemToken()), new GenericManaCost(2));
+        ability = new SimpleActivatedAbility(new CreateTokenEffect(new PhyrexianGolemToken()), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         this.addAbility(ability);

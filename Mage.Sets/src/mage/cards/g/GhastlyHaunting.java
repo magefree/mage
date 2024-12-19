@@ -33,7 +33,7 @@ public final class GhastlyHaunting extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
     }
 
     private GhastlyHaunting(final GhastlyHaunting card) {

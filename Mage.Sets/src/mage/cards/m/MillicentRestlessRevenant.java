@@ -79,6 +79,7 @@ class MillicentRestlessRevenantTriggeredAbility extends TriggeredAbilityImpl {
 
     MillicentRestlessRevenantTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new SpiritWhiteToken()));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private MillicentRestlessRevenantTriggeredAbility(final MillicentRestlessRevenantTriggeredAbility ability) {
@@ -124,8 +125,12 @@ class MillicentRestlessRevenantTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+            return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+        } else {
+            return super.isInUseableZone(game, sourceObject, event);
+        }
     }
 
     @Override

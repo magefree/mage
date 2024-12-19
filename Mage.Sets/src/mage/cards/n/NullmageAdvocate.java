@@ -37,7 +37,7 @@ public final class NullmageAdvocate extends CardImpl {
         // {tap}: Return two target cards from an opponent's graveyard to their hand. Destroy target artifact or enchantment.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return two target cards from an opponent's graveyard to their hand");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
 
         effect = new DestroyTargetEffect("Destroy target artifact or enchantment");
         effect.setTargetPointer(new SecondTargetPointer());

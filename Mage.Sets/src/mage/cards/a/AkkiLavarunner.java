@@ -94,7 +94,7 @@ class TokTokVolcanoBorn extends TokenImpl {
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TokTokVolcanoBornEffect()));
+        this.addAbility(new SimpleStaticAbility(new TokTokVolcanoBornEffect()));
     }
     private TokTokVolcanoBorn(final TokTokVolcanoBorn token) {
         super(token);

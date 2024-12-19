@@ -2,7 +2,7 @@
 package mage.cards.o;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -31,7 +31,7 @@ public final class OathOfDruids extends CardImpl {
         // At the beginning of each player's upkeep, that player chooses target player who controls more creatures than they do and is their opponent.
         // The first player may reveal cards from the top of their library until they reveal a creature card.
         // If they do, that player puts that card onto the battlefield and all other cards revealed this way into their graveyard.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new OathOfDruidsEffect(), TargetController.ANY, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new OathOfDruidsEffect(), false).withTargetPointerSet(false);
         ability.setTargetAdjuster(OathOfDruidsAdjuster.instance);
         this.addAbility(ability);
     }
@@ -99,7 +99,7 @@ class OathOfDruidsEffect extends OneShotEffect {
         super(Outcome.PutCardInPlay);
         staticText = "that player chooses target player who controls more creatures than they do and is their opponent. "
                 + "The first player may reveal cards from the top of their library until they reveal a creature card. "
-                + "If they do, that player puts that card onto the battlefield and all other cards revealed this way into their graveyard";
+                + "If the first player does, that player puts that card onto the battlefield and all other cards revealed this way into their graveyard";
     }
 
     private OathOfDruidsEffect(final OathOfDruidsEffect effect) {

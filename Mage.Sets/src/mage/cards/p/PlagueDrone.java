@@ -29,7 +29,7 @@ public final class PlagueDrone extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Rot Fly — If an opponent would gain life, that player loses that much life instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlagueDroneReplacementEffect()).withFlavorWord("Rot Fly"));
+        this.addAbility(new SimpleStaticAbility(new PlagueDroneReplacementEffect()).withFlavorWord("Rot Fly"));
     }
 
     private PlagueDrone(final PlagueDrone card) {

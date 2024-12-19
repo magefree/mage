@@ -37,7 +37,7 @@ public final class WightOfPrecinctSix extends CardImpl {
 
         // Wight of Precinct Six gets +1/+1 for each creature card in your opponents' graveyards.
         DynamicValue boost = new CardsInOpponentGraveyardsCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(boost, boost, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(boost, boost, Duration.WhileOnBattlefield)));
     }
 
     private WightOfPrecinctSix(final WightOfPrecinctSix card) {

@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.OpponentLostLifeCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -45,8 +45,7 @@ public final class DavrosDalekCreator extends CardImpl {
                         new CreateTokenEffect(new DalekToken()),
                         new OpponentLostLifeCondition(ComparisonType.OR_GREATER, 3),
                         "create a 3/3 black Dalek artifact creature token with menace if an opponent lost 3 or more life this turn"
-                ),
-                TargetController.YOU, false
+                )
         );
         ability.addHint(DavrosDalekCreatorHint.instance);
         ability.addEffect(new DavrosDalekCreatorEffect());

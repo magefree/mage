@@ -35,7 +35,7 @@ public final class Whimwader extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Whimwader can't attack unless defending player controls a blue permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(filter)));
         
     }
 

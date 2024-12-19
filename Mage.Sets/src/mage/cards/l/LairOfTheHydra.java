@@ -55,7 +55,7 @@ public final class LairOfTheHydra extends CardImpl {
                 break;
             }
         }
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LairOfTheHydraEffect(), manaCosts));
+        this.addAbility(new SimpleActivatedAbility(new LairOfTheHydraEffect(), manaCosts));
     }
 
     private LairOfTheHydra(final LairOfTheHydra card) {

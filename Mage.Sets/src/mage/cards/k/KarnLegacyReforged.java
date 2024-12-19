@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
@@ -42,7 +42,7 @@ public final class KarnLegacyReforged extends CardImpl {
 
         // At the beginning of your upkeep, add {C} for each artifact you control. This mana can't be spent to cast nonartifact spells. Until end of turn, you don't lose this mana as steps and phases end.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new KarnLegacyReforgedEffect(), TargetController.YOU, false
+                new KarnLegacyReforgedEffect()
         ));
     }
 

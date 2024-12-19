@@ -31,10 +31,10 @@ public final class SirenSongLyre extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "{2}, {T}: Tap target creature."
-        Ability grantedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(2));
+        Ability grantedAbility = new SimpleActivatedAbility(new TapTargetEffect(), new GenericManaCost(2));
         grantedAbility.addCost(new TapSourceCost());
         grantedAbility.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(grantedAbility, AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(grantedAbility, AttachmentType.EQUIPMENT)));
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new ManaCostsImpl<>("{2}"), false));
     }

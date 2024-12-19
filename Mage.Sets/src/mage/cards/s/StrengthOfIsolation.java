@@ -41,7 +41,7 @@ public final class StrengthOfIsolation extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +1/+2 and has protection from black.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.BLACK), AttachmentType.AURA);
         effect.setText("and has protection from black");
         ability.addEffect(effect);

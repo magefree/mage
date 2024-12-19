@@ -27,7 +27,7 @@ public final class BladeSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Sliver creatures get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostAllEffect(1, 0, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_ALL_SLIVERS, false)));
     }
 

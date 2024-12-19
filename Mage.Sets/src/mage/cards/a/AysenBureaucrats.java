@@ -37,7 +37,7 @@ public final class AysenBureaucrats extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Tap target creature with power 2 or less.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapSourceCost());
         Target target = new TargetCreaturePermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);

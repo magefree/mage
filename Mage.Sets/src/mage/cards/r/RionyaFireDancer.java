@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.hint.Hint;
@@ -37,7 +37,7 @@ public final class RionyaFireDancer extends CardImpl {
 
         // At the beginning of combat on your turn, create X tokens that are copies of another target creature you control, where X is one plus the number of instant and sorcery spells you've cast this turn. They gain haste. Exile them at the beginning of the next end step.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new RionyaFireDancerEffect(), TargetController.YOU, false
+                new RionyaFireDancerEffect()
         );
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_ANOTHER_CREATURE_YOU_CONTROL));
         this.addAbility(ability.addHint(RionyaFireDancerHint.instance), new RionyaFireDancerWatcher());

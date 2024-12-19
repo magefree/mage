@@ -43,12 +43,12 @@ public final class Hobble extends CardImpl {
         // When Hobble enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
         // Enchanted creature can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackAttachedEffect(AttachmentType.AURA)));
         // Enchanted creature can't block if it's black.
         Effect effect = new ConditionalRestrictionEffect(new CantBlockAttachedEffect(AttachmentType.AURA),
             new EnchantedCreatureColorCondition(ObjectColor.BLACK));
         effect.setText("Enchanted creature can't block if it's black.");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private Hobble(final Hobble card) {

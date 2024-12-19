@@ -34,7 +34,7 @@ public final class RockLobster extends CardImpl {
         this.toughness = new MageInt(3);
 
         //  Creatures named Scissors Lizard can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private RockLobster(final RockLobster card) {

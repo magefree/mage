@@ -38,7 +38,7 @@ public final class RaffinesGuidance extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 1, Duration.WhileOnBattlefield)));
 
         // You may cast Raffine's Guidance from your graveyard by paying {2}{W} instead of its mana cost.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new RafinnesGuidancePlayEffect())

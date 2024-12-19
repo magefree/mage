@@ -42,10 +42,10 @@ public final class AuriokSteelshaper extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Equip costs you pay cost {1} less.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AbilitiesCostReductionControllerEffect(EquipAbility.class, "Equip")));
+        this.addAbility(new SimpleStaticAbility(new AbilitiesCostReductionControllerEffect(EquipAbility.class, "Equip")));
 
         // As long as Auriok Steelshaper is equipped, each creature you control that's a Soldier or a Knight gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, soldiersOrKnights, false),
                 EquippedSourceCondition.instance,
                 "As long as {this} is equipped, each creature you control that's a Soldier or a Knight gets +1/+1"

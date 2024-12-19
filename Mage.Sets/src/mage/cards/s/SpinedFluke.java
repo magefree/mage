@@ -34,7 +34,7 @@ public final class SpinedFluke extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(StaticFilters.FILTER_PERMANENT_A_CREATURE, 1, "")));
 
         // {B}: Regenerate Spined Fluke.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
     private SpinedFluke(final SpinedFluke card) {

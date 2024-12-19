@@ -86,9 +86,6 @@ public interface Ability extends Controllable, Serializable {
      * Gets the id of the object which put this ability in motion.
      * <p>
      * WARNING, MageSingleton abilities contains dirty data here, so you can't use sourceId with it
-     *
-     * @return The {@link java.util.UUID} of the object this ability is
-     * associated with.
      */
     UUID getSourceId();
 
@@ -351,16 +348,24 @@ public interface Ability extends Controllable, Serializable {
     void addWatcher(Watcher watcher);
 
     /**
-     * Returns true if this abilities source is in the zone for the ability
+     * Allow to control ability/trigger's lifecycle
+     * <p>
+     * How-to use:
+     * - for normal abilities and triggers - keep default
+     * - for leave battlefield triggers - keep default + set setLeavesTheBattlefieldTrigger(true)
+     * - for dies triggers - override and use TriggeredAbilityImpl.isInUseableZoneDiesTrigger inside + set setLeavesTheBattlefieldTrigger(true)
+     *
+     * @param sourceObject can be null for static continues effects checking like rules modification (example: Yixlid Jailer)
+     * @param event can be null for state base effects checking like "when you control seven or more" (example: Endrek Sahr, Master Breeder)
      */
-    boolean isInUseableZone(Game game, MageObject source, GameEvent event);
+    boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event);
 
     /**
      * Returns true if the source object has currently the ability (e.g. The
      * object can have lost all or some abilities for some time (e.g. Turn to
      * Frog)
      */
-    boolean hasSourceObjectAbility(Game game, MageObject source, GameEvent event);
+    boolean hasSourceObjectAbility(Game game, MageObject sourceObject, GameEvent event);
 
     /**
      * Returns true if the ability has a tap itself in their costs
@@ -478,6 +483,7 @@ public interface Ability extends Controllable, Serializable {
 
     /**
      * Finds the source object regardless of its zcc. Can be LKI from battlefield in some cases.
+     * Warning, do not use with singleton abilities
      */
     MageObject getSourceObject(Game game);
 

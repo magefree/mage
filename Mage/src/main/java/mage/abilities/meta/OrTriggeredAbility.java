@@ -1,5 +1,6 @@
 package mage.abilities.meta;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -10,10 +11,7 @@ import mage.game.events.GameEvent;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -45,6 +43,10 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
 
             for(Watcher watcher : ability.getWatchers()) {
                 super.addWatcher(watcher);
+            }
+
+            if (ability.isLeavesTheBattlefieldTrigger()) {
+                setLeavesTheBattlefieldTrigger(true);
             }
         }
         setTriggerPhrase(generateTriggerPhrase());
@@ -122,5 +124,20 @@ public class OrTriggeredAbility extends TriggeredAbilityImpl {
         for (TriggeredAbility ability : triggeredAbilities) {
             ability.addWatcher(watcher);
         }
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        boolean res = false;
+        for (TriggeredAbility ability : triggeredAbilities) {
+            // TODO: call full inner trigger instead like ability.isInUseableZone()?! Need research why it fails
+            if (ability.isLeavesTheBattlefieldTrigger()) {
+                // TODO: leaves battlefield and die are not same! Is it possible make a diff logic?
+                res |= TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
+            } else {
+                res |= super.isInUseableZone(game, sourceObject, event);
+            }
+        }
+        return res;
     }
 }

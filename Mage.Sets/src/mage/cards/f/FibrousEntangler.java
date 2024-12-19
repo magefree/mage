@@ -33,10 +33,10 @@ public final class FibrousEntangler extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // Fibrous Entangler must be blocked if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new MustBeBlockedByAtLeastOneSourceEffect(Duration.WhileOnBattlefield)));
 
         // Fibrous Entangler can block an additional creature each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.WhileOnBattlefield, 1)));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect(Duration.WhileOnBattlefield, 1)));
     }
 
     private FibrousEntangler(final FibrousEntangler card) {

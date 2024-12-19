@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.ApprovingObject;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -28,11 +28,10 @@ public final class WildEvocation extends CardImpl {
     public WildEvocation(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{5}{R}");
 
-        //At the beginning of each player's upkeep, that player reveals a card at 
-        // random from their hand. If it's a land card, the player puts it onto 
-        // the battlefield. Otherwise, the player casts it without paying its mana cost if able.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, 
-                new WildEvocationEffect(), TargetController.ANY, false));
+        // At the beginning of each player's upkeep, that player reveals a card at random from their hand.
+        // If it's a land card, the player puts it onto the battlefield. Otherwise, the player casts it without paying its mana cost if able.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                TargetController.EACH_PLAYER, new WildEvocationEffect(), false));
     }
 
     private WildEvocation(final WildEvocation card) {

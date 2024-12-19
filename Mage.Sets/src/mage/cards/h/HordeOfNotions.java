@@ -47,7 +47,7 @@ public final class HordeOfNotions extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // {W}{U}{B}{R}{G}: You may play target Elemental card from your graveyard without paying its mana cost.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HordeOfNotionsEffect(), new ManaCostsImpl<>("{W}{U}{B}{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(new HordeOfNotionsEffect(), new ManaCostsImpl<>("{W}{U}{B}{R}{G}"));
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }

@@ -31,7 +31,7 @@ public final class Cloudform extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesAuraAttachToManifestSourceEffect()));
         
         // Enchanted creature has flying and hexproof.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        Ability ability = new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(FlyingAbility.getInstance(), 
                         AttachmentType.AURA, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(

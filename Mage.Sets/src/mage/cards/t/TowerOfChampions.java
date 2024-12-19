@@ -23,7 +23,7 @@ public final class TowerOfChampions extends CardImpl {
 
     public TowerOfChampions (UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(6, 6, Duration.EndOfTurn), new GenericManaCost(8));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(6, 6, Duration.EndOfTurn), new GenericManaCost(8));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

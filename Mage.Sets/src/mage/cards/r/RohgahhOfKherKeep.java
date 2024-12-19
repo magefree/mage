@@ -3,7 +3,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -52,10 +52,10 @@ public final class RohgahhOfKherKeep extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, you may pay {R}{R}{R}. If you don't, tap Rohgahh of Kher Keep and all creatures named Kobolds of Kher Keep, then an opponent gains control of them.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RohgahhOfKherKeepEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new RohgahhOfKherKeepEffect()));
 
         // Creatures you control named Kobolds of Kher Keep get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private RohgahhOfKherKeep(final RohgahhOfKherKeep card) {

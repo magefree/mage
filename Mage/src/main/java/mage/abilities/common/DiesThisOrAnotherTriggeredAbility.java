@@ -30,6 +30,7 @@ public class DiesThisOrAnotherTriggeredAbility extends TriggeredAbilityImpl {
             filterMessage = filterMessage.substring(2);
         }
         setTriggerPhrase("Whenever {this} or another " + filterMessage + " dies, ");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     protected DiesThisOrAnotherTriggeredAbility(final DiesThisOrAnotherTriggeredAbility ability) {
@@ -56,23 +57,16 @@ public class DiesThisOrAnotherTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.isDiesEvent()) {
-            if (zEvent.getTarget() != null) {
-                if (!applyFilterOnSource && zEvent.getTarget().getId().equals(this.getSourceId())) {
-                    // TODO: remove this workaround for Basri's Lieutenant
-                    return true;
-                } else {
-                    if (filter.match(zEvent.getTarget(), getControllerId(), this, game)) {
-                        return true;
-                    }
-                }
-            }
+        if (!zEvent.isDiesEvent() || zEvent.getTarget() == null) {
+            return false;
         }
-        return false;
+        // TODO: remove applyFilterOnSource workaround for Basri's Lieutenant
+        return ((!applyFilterOnSource && zEvent.getTarget().getId().equals(this.getSourceId()))
+                || filter.match(zEvent.getTarget(), getControllerId(), this, game));
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

@@ -36,7 +36,6 @@ public final class MoonEatingDog extends CardImpl {
 
         // As long as you control a Yanling planeswalker, Moon-Eating Dog has flying.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(
                                 FlyingAbility.getInstance(),

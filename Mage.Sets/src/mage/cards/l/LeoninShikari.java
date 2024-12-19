@@ -26,7 +26,7 @@ public final class LeoninShikari extends CardImpl {
         this.toughness = new MageInt(2);
 
         // You may activate equip abilities any time you could cast an instant.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(EquipAbility.class, "equip abilities")));
+        this.addAbility(new SimpleStaticAbility(new ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(EquipAbility.class, "equip abilities")));
     }
 
     private LeoninShikari(final LeoninShikari card) {

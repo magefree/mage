@@ -2,7 +2,7 @@ package mage.cards.i;
 
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -41,12 +41,12 @@ public final class InfectiousCurse extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Spells you cast that target enchanted player cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfectiousCurseCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new InfectiousCurseCostReductionEffect()));
 
         // At the beginning of enchanted player's upkeep, that player loses 1 life and you gain 1 life.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new LoseLifeTargetEffect(1).setText("that player loses 1 life"),
-                TargetController.ENCHANTED, false
+                TargetController.ENCHANTED, new LoseLifeTargetEffect(1).setText("that player loses 1 life"),
+                false
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);

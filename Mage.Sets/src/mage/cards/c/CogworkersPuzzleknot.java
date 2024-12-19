@@ -27,7 +27,7 @@ public final class CogworkersPuzzleknot extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ServoToken())));
 
         // {1}{W}, Sacrifice Cogworker's Puzzleknot: Create a 1/1 colorless Servo artifact creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ServoToken()), new ManaCostsImpl<>("{1}{W}"));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new ServoToken()), new ManaCostsImpl<>("{1}{W}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

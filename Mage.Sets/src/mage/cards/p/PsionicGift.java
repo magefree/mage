@@ -40,9 +40,9 @@ public final class PsionicGift extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature has "{tap}: This creature deals 1 damage to any target."
-        Ability psiAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability psiAbility = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         psiAbility.addTarget(new TargetAnyTarget());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(psiAbility, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(psiAbility, AttachmentType.AURA)));
     }
 
     private PsionicGift(final PsionicGift card) {

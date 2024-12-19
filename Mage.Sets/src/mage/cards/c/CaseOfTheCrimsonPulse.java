@@ -3,7 +3,7 @@ package mage.cards.c;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.CaseAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.HellbentCondition;
@@ -17,7 +17,6 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -43,7 +42,7 @@ public final class CaseOfTheCrimsonPulse extends CardImpl {
         // To solve -- You have no cards in hand.
         // Solved -- At the beginning of your upkeep, discard your hand, then draw two cards.
         Ability solvedAbility = new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DiscardHandControllerEffect(), TargetController.YOU, false),
+                new DiscardHandControllerEffect()),
                 SolvedSourceCondition.SOLVED, null);
         solvedAbility.addEffect(new DrawCardSourceControllerEffect(2).concatBy(", then"));
 

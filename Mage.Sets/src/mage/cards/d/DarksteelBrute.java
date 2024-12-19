@@ -28,7 +28,7 @@ public final class DarksteelBrute extends CardImpl {
         this.addAbility(IndestructibleAbility.getInstance());
 
         // {3}: Darksteel Brute becomes a 2/2 Beast artifact creature until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(2, 2, "2/2 Beast artifact creature")
                         .withSubType(SubType.BEAST)
                         .withType(CardType.ARTIFACT),

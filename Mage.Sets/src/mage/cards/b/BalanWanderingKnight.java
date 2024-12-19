@@ -39,10 +39,10 @@ public final class BalanWanderingKnight extends CardImpl {
 
         // Balan, Wandering Knight has double strike as long as two or more Equipment are attached to it.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance()), EquippedMultipleSourceCondition.instance, rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // {1}{W}: Attach all Equipment you control to Balan.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BalanWanderingKnightEffect(), new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new BalanWanderingKnightEffect(), new ManaCostsImpl<>("{1}{W}")));
     }
 
     private BalanWanderingKnight(final BalanWanderingKnight card) {

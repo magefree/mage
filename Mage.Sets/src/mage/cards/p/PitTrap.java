@@ -33,7 +33,7 @@ public final class PitTrap extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // {2}, {tap}, Sacrifice Pit Trap: Destroy target attacking creature without flying. It can't be regenerated.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(true), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPermanent(filter));

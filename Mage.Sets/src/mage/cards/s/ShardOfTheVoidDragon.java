@@ -59,6 +59,7 @@ class ShardOfTheVoidDragonTriggeredAbility extends TriggeredAbilityImpl {
         super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)));
         setTriggerPhrase("Whenever an artifact is put into a graveyard from the battlefield or is put into exile from the battlefield, ");
         withFlavorWord("Matter Absorption");
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private ShardOfTheVoidDragonTriggeredAbility(final ShardOfTheVoidDragonTriggeredAbility ability) {

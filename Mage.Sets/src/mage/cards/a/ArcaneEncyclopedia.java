@@ -22,7 +22,6 @@ public final class ArcaneEncyclopedia extends CardImpl {
 
         // {3}, {T}: Draw a card.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new DrawCardSourceControllerEffect(1),
                 new GenericManaCost(3)
         );

@@ -39,7 +39,7 @@ public final class NeurokProdigy extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Discard an artifact card: Return Neurok Prodigy to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new DiscardTargetCost(new TargetCardInHand(filter))));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new DiscardTargetCost(new TargetCardInHand(filter))));
     }
 
     private NeurokProdigy(final NeurokProdigy card) {

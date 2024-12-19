@@ -44,13 +44,13 @@ public final class AryelKnightOfWindgrace extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // {2}{W}, {T}: Create a 2/2 white Knight creature token with vigilance.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new KnightToken()), new ManaCostsImpl<>("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new KnightToken()), new ManaCostsImpl<>("{2}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
         // {B}, {T}, Tap X untapped Knights you control: Destroy target creature with power X or less.
         //Simple costs
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect()
+        ability = new SimpleActivatedAbility(new DestroyTargetEffect()
                 .setText("Destroy target creature with power X or less"), new ManaCostsImpl<>("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapVariableTargetCost(filter));

@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.BecomesTappedSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.CastFromEverywhereSourceCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.abilities.keyword.FlashAbility;
@@ -43,12 +42,8 @@ public final class AnnieFlashTheVeteran extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // When Annie Flash, the Veteran enters the battlefield, if you cast it, return target permanent card with mana value 3 or less from your graveyard to the battlefield tapped.
-        Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(true)),
-                CastFromEverywhereSourceCondition.instance,
-                "When {this} enters, if you cast it, "
-                        + "return target permanent card with mana value 3 or less from your graveyard to the battlefield tapped"
-        );
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(true))
+                .withInterveningIf(CastFromEverywhereSourceCondition.instance);
         ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
 

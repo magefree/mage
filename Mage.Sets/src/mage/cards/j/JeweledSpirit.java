@@ -43,7 +43,7 @@ public final class JeweledSpirit extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Sacrifice two lands: Jeweled Spirit gains protection from artifacts or from the color of your choice until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new JeweledSpiritEffect(),
+        this.addAbility(new SimpleActivatedAbility(new JeweledSpiritEffect(),
                 new SacrificeTargetCost(2, StaticFilters.FILTER_LANDS)));
     }
 

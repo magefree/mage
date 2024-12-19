@@ -40,13 +40,13 @@ public final class MurkfiendLiege extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Other green creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1, Duration.WhileOnBattlefield, filterGreen, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1,1, Duration.WhileOnBattlefield, filterGreen, true)));
 
         // Other blue creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1,1, Duration.WhileOnBattlefield, filterBlue, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1,1, Duration.WhileOnBattlefield, filterBlue, true)));
 
         // Untap all green and/or blue creatures you control during each other player's untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UntapAllDuringEachOtherPlayersUntapStepEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new UntapAllDuringEachOtherPlayersUntapStepEffect(filter)));
 
     }
 

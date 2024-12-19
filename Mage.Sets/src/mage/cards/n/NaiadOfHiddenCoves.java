@@ -29,7 +29,7 @@ public final class NaiadOfHiddenCoves extends CardImpl {
         // As long as it's not your turn, spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(new ConditionalCostModificationEffect(
                 new SpellsCostReductionControllerEffect(StaticFilters.FILTER_CARD, 1),
-                NotMyTurnCondition.instance, "As long as it's not your turn, " +
+                NotMyTurnCondition.instance, "During turns other than yours, " +
                 "spells you cast cost {1} less to cast."
         )).addHint(MyTurnHint.instance));
     }

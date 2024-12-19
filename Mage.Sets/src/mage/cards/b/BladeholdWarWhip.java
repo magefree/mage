@@ -39,7 +39,7 @@ public final class BladeholdWarWhip extends CardImpl {
         this.addAbility(ability);
 
         // Equipped creature has double strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
 
         // Equip {3}{R}{W}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl<>("{3}{R}{W}"), false));

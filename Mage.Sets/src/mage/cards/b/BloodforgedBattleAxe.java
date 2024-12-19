@@ -32,7 +32,7 @@ public final class BloodforgedBattleAxe extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 0)));
 
         // Whenever equipped creature deals combat damage to a player, create a token that's a copy of Bloodforged War Axe.
         this.addAbility(new BloodforgedBattleAxeAbility());

@@ -59,8 +59,7 @@ public abstract class CardTestPlayerBaseAI extends CardTestPlayerAPIImpl {
     protected TestPlayer createPlayer(String name, RangeOfInfluence rangeOfInfluence) {
         if (getFullSimulatedPlayers().contains(name)) {
             TestPlayer testPlayer = new TestPlayer(new TestComputerPlayer7(name, RangeOfInfluence.ONE, getSkillLevel()));
-            testPlayer.setAIPlayer(true);
-            testPlayer.setAIRealGameSimulation(true); // enable full AI support (game simulations) for all turns by default
+            testPlayer.setAIPlayer(true); // enable full AI support (game simulations) for all turns by default
             return testPlayer;
         }
         return super.createPlayer(name, rangeOfInfluence);

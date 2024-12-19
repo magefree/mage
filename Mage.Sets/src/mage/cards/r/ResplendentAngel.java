@@ -2,7 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.YouGainedLifeCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -37,8 +37,8 @@ public final class ResplendentAngel extends CardImpl {
 
         // At the beginning of each end step, if you gained 5 or more life this turn, create a 4/4 white Angel creature token with flying and vigilance.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new CreateTokenEffect(new AngelVigilanceToken()),
-                TargetController.ANY, new YouGainedLifeCondition(ComparisonType.MORE_THAN, 4), false
+                TargetController.ANY, new CreateTokenEffect(new AngelVigilanceToken()),
+                false, new YouGainedLifeCondition(ComparisonType.MORE_THAN, 4)
         ).addHint(ControllerGainedLifeCount.getHint()), new PlayerGainedLifeWatcher());
 
         // {3}{W}{W}{W}: Until end of turn, Resplendent Angel gets +2/+2 and gains lifelink.

@@ -29,7 +29,7 @@ public final class MoggConscripts extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Mogg Conscripts can't attack unless you've cast a creature spell this turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MoggConscriptsEffect()), new PlayerCastCreatureWatcher());
+        this.addAbility(new SimpleStaticAbility(new MoggConscriptsEffect()), new PlayerCastCreatureWatcher());
     }
 
     private MoggConscripts(final MoggConscripts card) {

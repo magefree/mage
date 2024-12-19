@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.HaventCastSpellFromHandThisTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -33,8 +33,8 @@ public final class CanyonCrab extends CardImpl {
 
         // At the beginning of your end step, if you haven't cast a spell from your hand this turn, draw a card, then discard a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1),
-                TargetController.YOU, HaventCastSpellFromHandThisTurnCondition.instance, false
+                TargetController.YOU, new DrawDiscardControllerEffect(1, 1),
+                false, HaventCastSpellFromHandThisTurnCondition.instance
         ).addHint(HaventCastSpellFromHandThisTurnCondition.hint));
     }
 

@@ -3,7 +3,7 @@ package mage.cards.o;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -53,7 +53,7 @@ public final class ObsidianFireheart extends CardImpl {
         // For as long as that land has a blaze counter on it, it has "At the beginning
         // of your upkeep, this land deals 1 damage to you." (The land continues to burn
         // after Obsidian Fireheart has left the battlefield.)
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new AddCountersTargetEffect(CounterType.BLAZE.createInstance()),
                 new ManaCostsImpl<>("{1}{R}{R}"));
         ability.addTarget(new TargetLandPermanent(filter));
@@ -99,13 +99,12 @@ class ObsidianFireheartOneShotEffect extends OneShotEffect {
                 && source.getTargets().get(0) != null) {
             ContinuousEffect effect = new ObsidianFireheartGainAbilityEffect(
                     new BeginningOfUpkeepTriggeredAbility(
-                            new DamageControllerEffect(1),
-                            TargetController.YOU,
+                            TargetController.YOU, new DamageControllerEffect(1),
                             false),
                     Duration.Custom, "");
 
             // add a new independent ability that is not reliant on the source ability
-            SimpleStaticAbility gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+            SimpleStaticAbility gainAbility = new SimpleStaticAbility(effect);
 
             // set sourcecard of the independent ability to the targeted permanent of the source ability
             gainAbility.setSourceId(targetLand.getId());

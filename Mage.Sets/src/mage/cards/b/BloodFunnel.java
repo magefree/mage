@@ -32,7 +32,7 @@ public final class BloodFunnel extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
 
         // Noncreature spells you cast cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 2)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 2)));
 
         // Whenever you cast a noncreature spell, counter that spell unless you sacrifice a creature.
         Effect effect = new CounterUnlessPaysEffect(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));

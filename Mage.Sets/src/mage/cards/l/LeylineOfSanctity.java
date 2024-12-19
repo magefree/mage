@@ -34,7 +34,7 @@ public final class LeylineOfSanctity extends CardImpl {
         this.addAbility(LeylineAbility.getInstance());
 
         // You have hexproof. (You can't be the target of spells or abilities your opponents control.)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(HexproofAbility.getInstance())));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControllerEffect(HexproofAbility.getInstance())));
     }
 
     private LeylineOfSanctity(final LeylineOfSanctity card) {
@@ -47,4 +47,3 @@ public final class LeylineOfSanctity extends CardImpl {
     }
 
 }
-

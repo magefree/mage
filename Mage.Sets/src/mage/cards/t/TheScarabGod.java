@@ -4,7 +4,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
@@ -51,10 +51,10 @@ public final class TheScarabGod extends CardImpl {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, each opponent loses X life and you scry X, where X is the number of Zombies you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TheScarabGodEffect(xValue), TargetController.YOU, false).addHint(hint));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TheScarabGodEffect(xValue)).addHint(hint));
 
         // {2}{U}{B}: Exile target creature card from a graveyard. Create a token that's a copy of it, except it's a 4/4 black Zombie.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TheScarabGodEffect2(), new ManaCostsImpl<>("{2}{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(new TheScarabGodEffect2(), new ManaCostsImpl<>("{2}{U}{B}"));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
 

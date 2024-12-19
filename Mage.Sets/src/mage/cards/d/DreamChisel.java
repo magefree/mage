@@ -17,7 +17,7 @@ public final class DreamChisel extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
         // Face-down creature spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FaceDownSpellsCostReductionControllerEffect(1)));
+        this.addAbility(new SimpleStaticAbility(new FaceDownSpellsCostReductionControllerEffect(1)));
     }
 
     private DreamChisel(final DreamChisel card) {

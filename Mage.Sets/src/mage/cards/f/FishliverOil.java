@@ -35,7 +35,7 @@ public final class FishliverOil extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has islandwalk.        
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAttachedEffect(new IslandwalkAbility(), AttachmentType.AURA)));
     }
 

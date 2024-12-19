@@ -6,17 +6,13 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.effects.common.ReturnFromYourGraveyardToBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -37,7 +33,8 @@ public final class AftermathAnalyst extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(3)));
 
         // {3}{G}, Sacrifice Aftermath Analyst: Return all land cards from your graveyard to the battlefield tapped.
-        Ability ability = new SimpleActivatedAbility(new AftermathAnalystEffect(), new ManaCostsImpl<>("{3}{G}"));
+        Ability ability = new SimpleActivatedAbility(new ReturnFromYourGraveyardToBattlefieldAllEffect(StaticFilters.FILTER_CARD_LANDS, true),
+                new ManaCostsImpl<>("{3}{G}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -49,31 +46,5 @@ public final class AftermathAnalyst extends CardImpl {
     @Override
     public AftermathAnalyst copy() {
         return new AftermathAnalyst(this);
-    }
-}
-
-class AftermathAnalystEffect extends OneShotEffect {
-
-    AftermathAnalystEffect() {
-        super(Outcome.Benefit);
-        staticText = "return all land cards from your graveyard to the battlefield tapped";
-    }
-
-    private AftermathAnalystEffect(final AftermathAnalystEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AftermathAnalystEffect copy() {
-        return new AftermathAnalystEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.moveCards(
-                player.getGraveyard().getCards(StaticFilters.FILTER_CARD_LAND, game),
-                Zone.BATTLEFIELD, source, game, true, false, false, null
-        );
     }
 }

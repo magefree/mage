@@ -30,7 +30,7 @@ public final class Cursecatcher extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Cursecatcher: Counter target instant or sorcery spell unless its controller pays {1}.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new CounterUnlessPaysEffect(new GenericManaCost(1)),
                 new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(StaticFilters.FILTER_SPELL_INSTANT_OR_SORCERY));

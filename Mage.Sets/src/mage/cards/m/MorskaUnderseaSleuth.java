@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DrawNthCardTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
@@ -37,7 +37,7 @@ public final class MorskaUnderseaSleuth extends CardImpl {
 
         // At the beginning of your upkeep, investigate.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new InvestigateEffect(), TargetController.YOU, false
+                new InvestigateEffect()
         ));
 
         // Whenever you draw your second card each turn, put two +1/+1 counters on Morska, Undersea Sleuth.

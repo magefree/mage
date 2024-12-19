@@ -28,7 +28,7 @@ public final class WilyBandar extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {2}{G}: Wily Bandar gains indestructible until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{G}")));
     }
 
     private WilyBandar(final WilyBandar card) {

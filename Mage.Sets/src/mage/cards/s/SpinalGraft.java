@@ -34,7 +34,7 @@ public final class SpinalGraft extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // Enchanted creature gets +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
 
         // When enchanted creature becomes the target of a spell or ability, destroy that creature. It can't be regenerated.
         this.addAbility(new BecomesTargetAttachedTriggeredAbility(new DestroyAttachedToEffect("that creature", true)));

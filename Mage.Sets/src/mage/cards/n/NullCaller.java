@@ -31,7 +31,7 @@ public final class NullCaller extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {3}{B}, Exile a creature card from your graveyard: Create a tapped 2/2 black Zombie creature token.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new CreateTokenEffect(new ZombieToken(), 1, true, false),
                 new ManaCostsImpl<>("{3}{B}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD)));

@@ -1,6 +1,6 @@
 package mage.cards.s;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -13,7 +13,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -41,7 +40,7 @@ public final class SmokeBomb extends CardImpl {
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoWhenCostPaid(
                 ability, new SacrificeSourceCost(), "", false
-        ), TargetController.YOU, false));
+        )));
     }
 
     private SmokeBomb(final SmokeBomb card) {

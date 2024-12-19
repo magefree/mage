@@ -37,7 +37,7 @@ public final class FungalPlots extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
         // {1}{G}, Exile a creature card from your graveyard: Create a 1/1 green Saproling creature token.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new CreateTokenEffect(new SaprolingToken()),
                 new ManaCostsImpl<>("{1}{G}"));
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filter)));
@@ -45,7 +45,6 @@ public final class FungalPlots extends CardImpl {
 
         // Sacrifice two Saprolings: You gain 2 life and draw a card.
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainLifeEffect(2),
                 new SacrificeTargetCost(2, filter2)
         );

@@ -31,7 +31,7 @@ public final class DismissIntoDream extends CardImpl {
 
         // Each creature your opponents control is an Illusion in addition to its other types 
         // and has "When this creature becomes the target of a spell or ability, sacrifice it."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DismissIntoDreamEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new DismissIntoDreamEffect(filter)));
     }
 
     private DismissIntoDream(final DismissIntoDream card) {

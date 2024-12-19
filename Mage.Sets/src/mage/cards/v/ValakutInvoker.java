@@ -28,7 +28,7 @@ public final class ValakutInvoker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {8}: Valakut Invoker deals 3 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(3), new GenericManaCost(8));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(3), new GenericManaCost(8));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

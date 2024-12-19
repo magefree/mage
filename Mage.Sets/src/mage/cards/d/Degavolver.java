@@ -44,7 +44,7 @@ public final class Degavolver extends CardImpl {
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2),false),
                 new KickedCostCondition("{1}{B}"), "If Degavolver was kicked with its {1}{B} kicker, it enters with two +1/+1 counters on it and with \"Pay 3 life: Regenerate Degavolver.\"",
                 "{this} enters with two +1/+1 counters on it and with \"Pay 3 life: Regenerate Degavolver.\"");
-        ((EntersBattlefieldEffect)ability1.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new PayLifeCost(3)), Duration.WhileOnBattlefield));
+        ((EntersBattlefieldEffect)ability1.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(new SimpleActivatedAbility(new RegenerateSourceEffect(), new PayLifeCost(3)), Duration.WhileOnBattlefield));
         this.addAbility(ability1);
 
         // If Degavolver was kicked with its {R} kicker, it enters with a +1/+1 counter on it and with first strike.

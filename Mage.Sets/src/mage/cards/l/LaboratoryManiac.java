@@ -33,7 +33,7 @@ public final class LaboratoryManiac extends CardImpl {
         this.toughness = new MageInt(2);
 
         // If you would draw a card while your library has no cards in it, you win the game instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LaboratoryManiacEffect()));
+        this.addAbility(new SimpleStaticAbility(new LaboratoryManiacEffect()));
 
     }
 

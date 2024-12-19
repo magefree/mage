@@ -40,7 +40,7 @@ public final class MerchantsDockhand extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {3}{U}, {T}, Tap X untapped artifacts you control: Look at the top X cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MerchantsDockhandEffect(), new ManaCostsImpl<>("{3}{U}"));
+        Ability ability = new SimpleActivatedAbility(new MerchantsDockhandEffect(), new ManaCostsImpl<>("{3}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapXTargetCost());
         this.addAbility(ability);

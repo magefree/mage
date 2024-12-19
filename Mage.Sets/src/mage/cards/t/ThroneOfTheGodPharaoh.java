@@ -1,6 +1,6 @@
 package mage.cards.t;
 
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -37,7 +36,7 @@ public final class ThroneOfTheGodPharaoh extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new LoseLifeOpponentsEffect(xValue).setText(
                         "each opponent loses life equal to the number of tapped creatures you control"
-                ), TargetController.YOU, false
+                )
         ));
     }
 

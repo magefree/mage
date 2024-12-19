@@ -32,7 +32,7 @@ public final class ObstinateFamiliar extends CardImpl {
         this.toughness = new MageInt(1);
 
         // If you would draw a card, you may skip that draw instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ObstinateFamiliarReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ObstinateFamiliarReplacementEffect()));
     }
 
     private ObstinateFamiliar(final ObstinateFamiliar card) {

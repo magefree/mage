@@ -40,7 +40,7 @@ public class RainOfRiches extends CardImpl {
         //       You may cast it without paying its mana cost.
         //       Put the exiled cards on the bottom of your library in a random order.)
         this.addAbility(
-                new SimpleStaticAbility(Zone.BATTLEFIELD, new RainOfRichesGainsCascadeEffect()),
+                new SimpleStaticAbility(new RainOfRichesGainsCascadeEffect()),
                 new RainOfRichesWatcher()
         );
     }

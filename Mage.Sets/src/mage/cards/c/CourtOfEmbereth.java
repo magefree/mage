@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.MonarchIsSourceControllerCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -33,8 +33,7 @@ public final class CourtOfEmbereth extends CardImpl {
 
         //  At the beginning of your upkeep, create a 3/1 red Knight creature token. Then if you're the monarch, Court of Embereth deals X damage to each opponent, where X is the number of creatures you control.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new CreateTokenEffect(new Knight31RedToken()),
-                TargetController.YOU, false
+                new CreateTokenEffect(new Knight31RedToken())
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new DamagePlayersEffect(CreaturesYouControlCount.instance, TargetController.OPPONENT)

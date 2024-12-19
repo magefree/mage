@@ -37,7 +37,7 @@ public final class FireAnts extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Fire Ants deals 1 damage to each other creature without flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DamageAllEffect(1, filter), new TapSourceCost()));
     }
 
     private FireAnts(final FireAnts card) {

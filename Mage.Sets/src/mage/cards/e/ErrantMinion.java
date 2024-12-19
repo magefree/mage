@@ -1,7 +1,7 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -39,9 +39,7 @@ public final class ErrantMinion extends CardImpl {
 
         // At the beginning of the upkeep of enchanted creature's controller, that player may pay any amount of mana. Errant Minion deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                Zone.BATTLEFIELD,
-                new ErrantMinionEffect(),
-                TargetController.CONTROLLER_ATTACHED_TO,
+                TargetController.CONTROLLER_ATTACHED_TO, new ErrantMinionEffect(),
                 false));
 
     }

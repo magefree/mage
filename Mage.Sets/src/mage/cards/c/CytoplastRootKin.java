@@ -39,7 +39,7 @@ public final class CytoplastRootKin extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE_P1P1)));
         
         // {2}: Move a +1/+1 counter from target creature you control onto Cytoplast Root-Kin.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MoveCountersFromTargetToSourceEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new MoveCountersFromTargetToSourceEffect(), new GenericManaCost(2));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

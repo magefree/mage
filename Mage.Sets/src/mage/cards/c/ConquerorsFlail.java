@@ -114,7 +114,6 @@ class ConquerorsFlailEffect extends ContinuousRuleModifyingEffectImpl {
                 .ofNullable(source.getSourcePermanentIfItStillExists(game))
                 .map(Permanent::getAttachedTo)
                 .map(game::getPermanent)
-                .filter(Objects::nonNull)
                 .map(permanent -> permanent.isCreature(game))
                 .orElse(false);
     }

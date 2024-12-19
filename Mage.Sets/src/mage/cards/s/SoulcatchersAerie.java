@@ -38,7 +38,7 @@ public final class SoulcatchersAerie extends CardImpl {
                 false, filter, false, true));
 
         // Bird creatures get +1/+1 for each feather counter on Soulcatchers' Aerie.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new CountersSourceCount(CounterType.FEATHER),
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(new CountersSourceCount(CounterType.FEATHER),
                 new CountersSourceCount(CounterType.FEATHER), Duration.WhileOnBattlefield, filter2, false,
                 "Bird creatures get +1/+1 for each feather counter on {this}.")));
     }

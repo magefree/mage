@@ -38,10 +38,7 @@ public final class Contagion extends CardImpl {
 
         // Distribute two -2/-1 counters among one or two target creatures.
         this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(2));
-        this.getSpellAbility().addEffect(new DistributeCountersEffect(
-                CounterType.M2M1, 2, false,
-                "one or two target creatures"
-        ));
+        this.getSpellAbility().addEffect(new DistributeCountersEffect(CounterType.M2M1));
     }
 
     private Contagion(final Contagion card) {

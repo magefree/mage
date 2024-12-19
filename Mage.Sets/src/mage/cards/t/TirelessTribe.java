@@ -29,7 +29,7 @@ public final class TirelessTribe extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Discard a card: Tireless Tribe gets +0/+4 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 4, Duration.EndOfTurn), new DiscardTargetCost(new TargetCardInHand())));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(0, 4, Duration.EndOfTurn), new DiscardTargetCost(new TargetCardInHand())));
     }
 
     private TirelessTribe(final TirelessTribe card) {

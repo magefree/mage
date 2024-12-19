@@ -7,7 +7,7 @@ import mage.game.Game;
 import java.io.ObjectStreamException;
 
 /**
- * Hexproof from planesalkers
+ * Hexproof from planeswalkers
  *
  * @author weirddan455
  */

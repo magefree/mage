@@ -19,7 +19,7 @@ public final class ArcaneMelee extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
 
         // Instant and sorcery spells cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostReductionAllEffect(new FilterInstantOrSorceryCard("Instant and sorcery spells"), 2))
         );
     }

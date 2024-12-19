@@ -37,7 +37,7 @@ public final class TheFallenApart extends CardImpl {
         this.addAbility(new DealtDamageToSourceTriggeredAbility(new TheFallenApartToggleEffect(), false));
 
         // The Fallen Apart can’t attack if it has no legs and can’t block if it has no arms.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TheFallenApartRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new TheFallenApartRestrictionEffect()));
     }
 
     private TheFallenApart(final TheFallenApart card) {

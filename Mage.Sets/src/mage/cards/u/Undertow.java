@@ -24,7 +24,7 @@ public final class Undertow extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         // Creatures with islandwalk can be blocked as though they didn't have islandwalk.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UndertowEffect()));
+        this.addAbility(new SimpleStaticAbility(new UndertowEffect()));
     }
 
     private Undertow(final Undertow card) {

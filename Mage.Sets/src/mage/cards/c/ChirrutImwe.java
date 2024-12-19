@@ -38,12 +38,12 @@ public final class ChirrutImwe extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Chirrut Imwe can block up to two additional creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChirrutImweEffect()));
+        this.addAbility(new SimpleStaticAbility(new ChirrutImweEffect()));
         
         // {1}{W}: Prevent all combat damage that would be dealt to Chirrut Imwe until end of turn.
         Effect effect = new PreventCombatDamageToSourceEffect(Duration.EndOfTurn);
         effect.setText("Prevent all combat damage that would be dealt to {this} until end of turn");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{W}")));
+        this.addAbility(new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{1}{W}")));
     }
 
     private ChirrutImwe(final ChirrutImwe card) {

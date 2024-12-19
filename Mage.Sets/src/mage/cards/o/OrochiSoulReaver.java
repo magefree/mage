@@ -2,7 +2,7 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.keyword.ManifestEffect;
@@ -37,7 +37,7 @@ public final class OrochiSoulReaver extends CardImpl {
         this.addAbility(new NinjutsuAbility("{3}{B}"));
 
         // Whenever one or more creatures you control deal combat damage to a player, create a Treasure token and manifest the top card of that player's library.
-        Ability ability = new DealCombatDamageControlledTriggeredAbility(
+        Ability ability = new OneOrMoreCombatDamagePlayerTriggeredAbility(
                 new CreateTokenEffect(new TreasureToken()),
                 SetTargetPointer.PLAYER
         );

@@ -52,7 +52,7 @@ public final class GoblinShrine extends CardImpl {
 
         // As long as enchanted land is a basic Mountain, Goblin creatures get +1/+0.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostAllEffect(1, 0, Duration.WhileOnBattlefield, filterGoblin, false), new EnchantedPermanentSubtypeCondition(SubType.MOUNTAIN), rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // When Goblin Shrine leaves the battlefield, it deals 1 damage to each Goblin creature.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new DamageAllEffect(1, "it", filterGoblin), false));

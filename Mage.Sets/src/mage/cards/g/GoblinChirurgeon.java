@@ -33,7 +33,7 @@ public final class GoblinChirurgeon extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Sacrifice a Goblin: Regenerate target creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new RegenerateTargetEffect(),
                 new SacrificeTargetCost(filter));
         ability.addTarget(new TargetCreaturePermanent());

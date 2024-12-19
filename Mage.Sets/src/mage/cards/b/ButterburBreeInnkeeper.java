@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -35,7 +35,7 @@ public final class ButterburBreeInnkeeper extends CardImpl {
 
         // At the beginning of your end step, if you don't control a Food, create a Food token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new FoodToken()), TargetController.YOU, condition, false
+                TargetController.YOU, new CreateTokenEffect(new FoodToken()), false, condition
         ));
     }
 

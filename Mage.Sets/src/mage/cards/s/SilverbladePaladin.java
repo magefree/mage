@@ -32,7 +32,7 @@ public final class SilverbladePaladin extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Silverblade Paladin is paired with another creature, both creatures have double strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(DoubleStrikeAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(DoubleStrikeAbility.getInstance(), ruleText)));
     }
 
     private SilverbladePaladin(final SilverbladePaladin card) {

@@ -43,7 +43,7 @@ public final class FlamekinVillage extends CardImpl {
         this.addAbility(new RedManaAbility());
         
         // {R}, {tap}: Target creature gains haste until end of turn.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{R}"));
         ability.addCost(new TapSourceCost());

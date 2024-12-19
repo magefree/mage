@@ -1,8 +1,8 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -32,13 +32,12 @@ public final class MalignantGrowth extends CardImpl {
 
         // At the beginning of your upkeep, put a growth counter on Malignant Growth.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.GROWTH.createInstance()),
-                TargetController.YOU, false
+                new AddCountersSourceEffect(CounterType.GROWTH.createInstance())
         ));
 
         // At the beginning of each opponent's draw step, that player draws an additional card for each growth counter on Malignant Growth, then Malignant Growth deals damage to the player equal to the number of cards they drew this way.
         this.addAbility(new BeginningOfDrawTriggeredAbility(
-                new MalignantGrowthEffect(), TargetController.OPPONENT, false
+                TargetController.OPPONENT, new MalignantGrowthEffect(), false
         ));
     }
 

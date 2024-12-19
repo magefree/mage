@@ -35,7 +35,7 @@ public final class DealBroker extends CardImpl {
                 + "Each other player may offer you one card in their card pool in exchange. You may accept any one offer - not implemented.")));
 
         // {T}: Draw a card, then discard a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DrawDiscardControllerEffect(), new TapSourceCost()));
     }
 
     private DealBroker(final DealBroker card) {

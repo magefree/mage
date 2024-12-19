@@ -30,7 +30,7 @@ public final class Nevermore extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.NON_LAND_NAME)));
 
         // The named card can't be cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NevermoreEffect2()));
+        this.addAbility(new SimpleStaticAbility(new NevermoreEffect2()));
 
     }
 

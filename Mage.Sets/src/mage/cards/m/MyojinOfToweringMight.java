@@ -44,10 +44,8 @@ public final class MyojinOfToweringMight extends CardImpl {
         ), new CastFromHandWatcher());
 
         // Remove an indestructible counter from Myojin of Towering Might: Distribute eight +1/+1 counters among any number of target creatures you control. They gain trample until end of turn.
-        Ability ability = new SimpleActivatedAbility(new DistributeCountersEffect(
-                CounterType.P1P1, 8, false,
-                "any number of target creatures you control"
-        ), new RemoveCountersSourceCost(CounterType.INDESTRUCTIBLE.createInstance()));
+        Ability ability = new SimpleActivatedAbility(new DistributeCountersEffect(),
+                new RemoveCountersSourceCost(CounterType.INDESTRUCTIBLE.createInstance()));
         ability.addEffect(new GainAbilityTargetEffect(
                 TrampleAbility.getInstance(), Duration.EndOfTurn
         ).setText("They gain trample until end of turn"));

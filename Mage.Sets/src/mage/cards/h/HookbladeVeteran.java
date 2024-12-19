@@ -31,7 +31,7 @@ public final class HookbladeVeteran extends CardImpl {
         // As long as it's your turn, Hookblade Veteran has flying.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield),
-                MyTurnCondition.instance, "as long as it's your turn, {this} has flying"
+                MyTurnCondition.instance, "during your turn, {this} has flying"
         )).addHint(MyTurnHint.instance));
     }
 

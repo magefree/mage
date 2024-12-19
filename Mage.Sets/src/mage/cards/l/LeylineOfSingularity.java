@@ -27,7 +27,7 @@ public final class LeylineOfSingularity extends CardImpl {
         this.addAbility(LeylineAbility.getInstance());
 
         // All nonland permanents are legendary.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetSupertypeAllEffect()));
+        this.addAbility(new SimpleStaticAbility(new SetSupertypeAllEffect()));
     }
 
     private LeylineOfSingularity(final LeylineOfSingularity card) {

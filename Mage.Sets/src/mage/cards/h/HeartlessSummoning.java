@@ -23,10 +23,10 @@ public final class HeartlessSummoning extends CardImpl {
 
 
         // Creature spells you cast cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(new FilterCreatureCard("Creature spells"), 2)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(new FilterCreatureCard("Creature spells"), 2)));
 
         // Creatures you control get -1/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(-1, -1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(-1, -1, Duration.WhileOnBattlefield)));
     }
 
     private HeartlessSummoning(final HeartlessSummoning card) {

@@ -3,7 +3,7 @@ package mage.cards.a;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DealsDamageToAPlayerAllTriggeredAbility;
 import mage.abilities.condition.common.MoreThanStartingLifeTotalCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -49,7 +49,7 @@ public final class AngelOfDestiny extends CardImpl {
         // At the beginning of your end step, if you have at least 15 life more than your starting life total, each player Angel of Destiny attacked this turn loses the game.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new AngelOfDestinyLoseEffect(), TargetController.YOU, false
+                        new AngelOfDestinyLoseEffect()
                 ), MoreThanStartingLifeTotalCondition.FIFTEEN, "At the beginning of your end step, " +
                 "if you have at least 15 life more than your starting life total, " +
                 "each player {this} attacked this turn loses the game."

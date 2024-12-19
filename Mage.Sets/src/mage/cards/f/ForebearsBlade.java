@@ -34,7 +34,7 @@ public final class ForebearsBlade extends CardImpl {
         // Equipped creature gets +3/+0
         Effect effect = new BoostEquippedEffect(3, 0);
         effect.setText("Equipped creature gets +3/+0");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         // and has vigilance
         effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and has vigilance");

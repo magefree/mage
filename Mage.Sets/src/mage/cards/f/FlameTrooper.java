@@ -34,7 +34,7 @@ public final class FlameTrooper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Trooper creatures you control have menace.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(new MenaceAbility(), Duration.WhileOnBattlefield, filter, false)));
     }
 
     private FlameTrooper(final FlameTrooper card) {

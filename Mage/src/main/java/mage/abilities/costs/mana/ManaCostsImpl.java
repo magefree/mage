@@ -2,6 +2,7 @@ package mage.abilities.costs.mana;
 
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.AbilityImpl;
 import mage.abilities.costs.*;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.mana.ManaOptions;
@@ -127,17 +128,17 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             return false;
         }
 
-        handleLikePhyrexianManaCosts(player, ability, game); // e.g. K'rrik, Son of Yawgmoth
+        AbilityImpl.handlePhyrexianLikeEffects(game, source, ability, this);
 
         if (!player.getManaPool().isForcedToPay()) {
-            assignPayment(game, ability, player.getManaPool(), this);
+            assignPayment(game, ability, player.getManaPool(), costToPay != null ? costToPay : this);
         }
         game.getState().getSpecialActions().removeManaActions();
         while (player.canRespond() && !isPaid()) {
             ManaCost unpaid = this.getUnpaid();
             String promptText = ManaUtil.addSpecialManaPayAbilities(ability, game, unpaid);
             if (player.playMana(ability, unpaid, promptText, game)) {
-                assignPayment(game, ability, player.getManaPool(), this);
+                assignPayment(game, ability, player.getManaPool(), costToPay != null ? costToPay : this);
             } else {
                 return false;
             }
@@ -193,40 +194,6 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         }
 
         tempCosts.pay(source, game, source, payingPlayer.getId(), false, null);
-    }
-
-
-    private void handleLikePhyrexianManaCosts(Player player, Ability source, Game game) {
-        if (this.isEmpty()) {
-            return; // nothing to be done without any mana costs. prevents NRE from occurring here
-        }
-        FilterMana phyrexianColors = player.getPhyrexianColors();
-        if (player.getPhyrexianColors() == null) {
-            return;
-        }
-        Costs<PayLifeCost> tempCosts = new CostsImpl<>();
-
-        Iterator<T> manaCostIterator = this.iterator();
-        while (manaCostIterator.hasNext()) {
-            ManaCost manaCost = manaCostIterator.next();
-            Mana mana = manaCost.getMana();
-
-            /* find which color mana is in the cost and set it in the temp Phyrexian cost */
-            if ((!phyrexianColors.isWhite() || mana.getWhite() <= 0)
-                    && (!phyrexianColors.isBlue() || mana.getBlue() <= 0)
-                    && (!phyrexianColors.isBlack() || mana.getBlack() <= 0)
-                    && (!phyrexianColors.isRed() || mana.getRed() <= 0)
-                    && (!phyrexianColors.isGreen() || mana.getGreen() <= 0)) {
-                continue;
-            }
-            PayLifeCost payLifeCost = new PayLifeCost(2);
-            if (payLifeCost.canPay(source, source, player.getId(), game)
-                    && player.chooseUse(Outcome.LoseLife, "Pay 2 life (using an active ability) instead of " + manaCost.getMana() + '?', source, game)) {
-                manaCostIterator.remove();
-                tempCosts.add(payLifeCost);
-            }
-        }
-        tempCosts.pay(source, game, source, player.getId(), false, null);
     }
 
     @Override

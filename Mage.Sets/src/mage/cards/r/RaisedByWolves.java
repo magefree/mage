@@ -42,7 +42,7 @@ public final class RaisedByWolves extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken(), 2)));
         // Enchanted creature gets +1/+1 for each Wolf you control.
         DynamicValue amountOfWolves = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(amountOfWolves, amountOfWolves, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(amountOfWolves, amountOfWolves, Duration.WhileOnBattlefield)));
     }
 
     private RaisedByWolves(final RaisedByWolves card) {

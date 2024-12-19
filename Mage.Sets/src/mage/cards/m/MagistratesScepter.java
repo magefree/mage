@@ -25,12 +25,12 @@ public final class MagistratesScepter extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{3}");
 
         // {4}, {tap}: Put a charge counter on Magistrate's Scepter.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         
         // {tap}, Remove three charge counters from Magistrate's Scepter: Take an extra turn after this one.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new AddExtraTurnControllerEffect(), new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3)));
         this.addAbility(ability);
     }

@@ -40,7 +40,7 @@ public final class OketrasMonument extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // White creature spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Whenever you cast a creature spell, create a 1/1 white Warrior creature token with vigilance.
         this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new WarriorVigilantToken()), filter2, false));

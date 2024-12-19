@@ -870,7 +870,7 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
     @Override
     public String getLogName() {
         if (name.isEmpty()) {
-            return GameLog.getNeutralColoredText(EmptyNames.FACE_DOWN_CREATURE.toString());
+            return GameLog.getNeutralColoredText(EmptyNames.FACE_DOWN_CREATURE.getObjectName());
         } else {
             return GameLog.getColoredObjectIdName(this);
         }

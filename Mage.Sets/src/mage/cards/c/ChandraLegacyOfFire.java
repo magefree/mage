@@ -3,7 +3,7 @@ package mage.cards.c;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
@@ -45,7 +45,7 @@ public final class ChandraLegacyOfFire extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new DamagePlayersEffect(
                         Outcome.Benefit, xValue, TargetController.OPPONENT
-                ), TargetController.YOU, false
+                )
         ).addHint(hint));
 
         // +1: Add {R} for each planeswalker you control.

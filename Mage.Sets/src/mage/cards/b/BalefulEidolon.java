@@ -31,7 +31,7 @@ public final class BalefulEidolon extends CardImpl {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
         // Enchanted creature gets +1/+1 and has deathtouch.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield,"and has deathtouch"));
         this.addAbility(ability);
     }

@@ -30,7 +30,7 @@ public final class ScorchedRusalka extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.R));
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);

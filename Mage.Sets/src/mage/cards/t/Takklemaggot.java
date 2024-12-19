@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -49,9 +49,9 @@ public final class Takklemaggot extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         // At the beginning of the upkeep of enchanted creature's controller, put a -0/-1 counter on that creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersAttachedEffect(CounterType.M0M1.createInstance(), "that creature"),
-                TargetController.CONTROLLER_ATTACHED_TO, false, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                TargetController.CONTROLLER_ATTACHED_TO, new AddCountersAttachedEffect(CounterType.M0M1.createInstance(), "that creature"),
+                false));
 
         // When enchanted creature dies, that creature's controller chooses a creature that Takklemaggot could enchant.
         // If they do, return Takklemaggot to the battlefield under your control attached to that creature.

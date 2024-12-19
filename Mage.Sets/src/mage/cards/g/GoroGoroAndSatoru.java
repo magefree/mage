@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -40,7 +40,7 @@ public final class GoroGoroAndSatoru extends CardImpl {
 
         // Whenever one or more creatures you control that entered the battlefield this turn deal combat damage to a
         // player, create a 5/5 red Dragon Spirit creature token with flying.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(
                 new CreateTokenEffect(new DragonSpiritToken()), filter
         ));
 

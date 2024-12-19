@@ -29,7 +29,7 @@ public final class NakayaShade extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {B}: Nakaya Shade gets +1/+1 until end of turn unless any player pays {2}.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new DoUnlessAnyPlayerPaysEffect(new BoostSourceEffect(1,1, Duration.EndOfTurn),new GenericManaCost(2)),
                 new ManaCostsImpl<>("{B}")));
     }

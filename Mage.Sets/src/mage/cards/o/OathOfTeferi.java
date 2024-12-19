@@ -31,7 +31,7 @@ public final class OathOfTeferi extends CardImpl {
         this.addAbility(ability);
 
         // You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OathOfTeferiLoyaltyEffect()));
+        this.addAbility(new SimpleStaticAbility(new OathOfTeferiLoyaltyEffect()));
     }
 
     private OathOfTeferi(final OathOfTeferi card) {

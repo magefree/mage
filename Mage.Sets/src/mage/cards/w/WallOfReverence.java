@@ -5,7 +5,7 @@ package mage.cards.w;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -34,7 +34,7 @@ public final class WallOfReverence extends CardImpl {
         this.toughness = new MageInt(6);
         this.addAbility(DefenderAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new BeginningOfYourEndStepTriggeredAbility(new WallOfReverenceTriggeredEffect(), true);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new WallOfReverenceTriggeredEffect(), true);
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

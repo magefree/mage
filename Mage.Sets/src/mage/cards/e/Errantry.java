@@ -37,7 +37,7 @@ public final class Errantry extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +3/+0 and can only attack alone.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield));
         Effect effect = new CanAttackOnlyAloneEffect();
         effect.setText("and can only attack alone");
         ability.addEffect(effect);

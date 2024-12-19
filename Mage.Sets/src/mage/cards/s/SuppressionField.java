@@ -21,7 +21,7 @@ public final class SuppressionField extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{W}");
 
         // Activated abilities cost {2} more to activate unless they're mana abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SuppressionFieldCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new SuppressionFieldCostReductionEffect()));
     }
 
     private SuppressionField(final SuppressionField card) {

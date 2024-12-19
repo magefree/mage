@@ -33,7 +33,7 @@ public final class WojekEmbermage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Radiance - {tap}: Wojek Embermage deals 1 damage to target creature and each other creature that shares a color with it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WojekEmbermageEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new WojekEmbermageEffect(), new TapSourceCost());
         ability.setAbilityWord(AbilityWord.RADIANCE);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -41,7 +41,7 @@ public final class LustForWar extends CardImpl {
         this.addAbility(new BecomesTappedAttachedTriggeredAbility(new DamageAttachedControllerEffect(3), "enchanted creature"));
 
         // Enchanted creature attacks each turn if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
             new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA)));
     }
 

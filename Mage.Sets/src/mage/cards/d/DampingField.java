@@ -26,7 +26,7 @@ public final class DampingField extends CardImpl {
 
 
         // Players can't untap more than one artifact during their untap steps.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DampingFieldEffect()));
+        this.addAbility(new SimpleStaticAbility(new DampingFieldEffect()));
     }
 
     private DampingField(final DampingField card) {

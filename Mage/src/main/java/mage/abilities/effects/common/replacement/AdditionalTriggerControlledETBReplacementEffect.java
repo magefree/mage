@@ -8,6 +8,7 @@ import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.NumberOfTriggersEvent;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -36,15 +37,11 @@ public class AdditionalTriggerControlledETBReplacementEffect extends Replacement
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!(event instanceof NumberOfTriggersEvent)) {
-            return false;
-        }
-        NumberOfTriggersEvent numberOfTriggersEvent = (NumberOfTriggersEvent) event;
         // Only triggers for the source controller
         if (!source.isControlledBy(event.getPlayerId())) {
             return false;
         }
-        GameEvent sourceEvent = numberOfTriggersEvent.getSourceEvent();
+        GameEvent sourceEvent = ((NumberOfTriggersEvent) event).getSourceEvent();
         // Only EtB triggers
         if (sourceEvent == null
                 || sourceEvent.getType() != GameEvent.EventType.ENTERS_THE_BATTLEFIELD
@@ -52,12 +49,12 @@ public class AdditionalTriggerControlledETBReplacementEffect extends Replacement
             return false;
         }
         // Only for triggers of permanents
-        return game.getPermanent(numberOfTriggersEvent.getSourceId()) != null;
+        return game.getPermanent(event.getSourceId()) != null;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        event.setAmount(event.getAmount() + 1);
+        event.setAmount(CardUtil.overflowInc(event.getAmount(), 1));
         return false;
     }
 }

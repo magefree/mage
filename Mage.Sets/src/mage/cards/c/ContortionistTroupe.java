@@ -2,7 +2,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.CovenCondition;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
@@ -33,8 +33,8 @@ public final class ContortionistTroupe extends CardImpl {
 
         // Coven — At the beginning of your end step, if you control three or more creatures with different powers, put a +1/+1 counter on target creature you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, CovenCondition.instance, false
+                TargetController.YOU, new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
+                false, CovenCondition.instance
         );
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability.addHint(CovenHint.instance).setAbilityWord(AbilityWord.COVEN));

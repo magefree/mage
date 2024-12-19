@@ -40,9 +40,9 @@ public final class KondasHatamoto extends CardImpl {
         this.addAbility(new BushidoAbility(1));
 
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield), new PermanentsOnTheBattlefieldCondition(filter), rule1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
+        this.addAbility(new SimpleStaticAbility(effect1));
         ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), new PermanentsOnTheBattlefieldCondition(filter), rule2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
+        this.addAbility(new SimpleStaticAbility(effect2));
 
     }
 

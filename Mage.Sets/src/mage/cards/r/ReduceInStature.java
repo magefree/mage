@@ -34,7 +34,7 @@ public final class ReduceInStature extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature has base power and toughness 0/2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetBasePowerToughnessEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new SetBasePowerToughnessEnchantedEffect()));
 
     }
 

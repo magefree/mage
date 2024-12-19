@@ -27,7 +27,7 @@ public final class ThoughtCourier extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Draw a card, then discard a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DrawDiscardControllerEffect(), new TapSourceCost()));
     }
 
     private ThoughtCourier(final ThoughtCourier card) {

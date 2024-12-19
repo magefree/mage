@@ -25,7 +25,7 @@ public final class CrumblingSanctuary extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // If damage would be dealt to a player, that player exiles that many cards from the top of their library instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CrumblingSanctuaryEffect()));
+        this.addAbility(new SimpleStaticAbility(new CrumblingSanctuaryEffect()));
     }
 
     private CrumblingSanctuary(final CrumblingSanctuary card) {

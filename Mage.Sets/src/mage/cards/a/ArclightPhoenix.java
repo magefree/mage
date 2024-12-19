@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
@@ -42,8 +42,8 @@ public final class ArclightPhoenix extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
                         Zone.GRAVEYARD,
-                        new ReturnSourceFromGraveyardToBattlefieldEffect(),
-                        TargetController.YOU, false, false
+                        TargetController.YOU, new ReturnSourceFromGraveyardToBattlefieldEffect(),
+                        false
                 ), ArclightPhoenixCondition.instance,
                 "At the beginning of combat on your turn, "
                         + "if you've cast three or more instant "

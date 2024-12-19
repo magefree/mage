@@ -38,7 +38,7 @@ public final class Bramblesnap extends CardImpl {
         this.toughness = new MageInt(1);
 
         this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new BoostSourceEffect(1, 1, Duration.EndOfTurn),
                 new TapTargetCost(new TargetControlledPermanent(filter))));
     }

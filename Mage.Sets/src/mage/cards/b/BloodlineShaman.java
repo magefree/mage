@@ -32,7 +32,7 @@ public final class BloodlineShaman extends CardImpl {
 
         // {tap}: Choose a creature type. Reveal the top card of your library. If that card is a creature card of the chosen type, put it into your hand.
         // Otherwise, put it into your graveyard.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BloodlineShamanEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new BloodlineShamanEffect(), new TapSourceCost()));
     }
 
     private BloodlineShaman(final BloodlineShaman card) {

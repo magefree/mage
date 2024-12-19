@@ -29,7 +29,7 @@ public final class SnapsailGlider extends CardImpl {
 
         // Metalcraft — Snapsail Glider has flying as long as you control three or more artifacts.
         ContinuousEffect effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(effect, MetalcraftCondition.instance, rule))
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(effect, MetalcraftCondition.instance, rule))
                 .setAbilityWord(AbilityWord.METALCRAFT)
                 .addHint(MetalcraftHint.instance));
     }

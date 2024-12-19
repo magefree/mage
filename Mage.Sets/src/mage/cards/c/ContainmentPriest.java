@@ -34,7 +34,7 @@ public final class ContainmentPriest extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // If a nontoken creature would enter the battlefield and it wasn't cast, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ContainmentPriestReplacementEffect()),
+        this.addAbility(new SimpleStaticAbility(new ContainmentPriestReplacementEffect()),
                 new PermanentWasCastWatcher());
     }
 

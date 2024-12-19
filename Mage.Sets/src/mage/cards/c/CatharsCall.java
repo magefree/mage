@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -38,8 +38,7 @@ public final class CatharsCall extends CardImpl {
         ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.AURA));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new HumanToken()),
-                        TargetController.YOU, false
+                        new CreateTokenEffect(new HumanToken())
                 ), AttachmentType.AURA
         ).setText("and \"At the beginning of your end step, create a 1/1 white Human creature token.\""));
         this.addAbility(ability);

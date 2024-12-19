@@ -34,7 +34,7 @@ public final class SiegeBehemoth extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
 
         // As long as Siege Behemoth is attacking, for each creature you control, you may have that creature assign its combat damage as though it weren't blocked.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SiegeBehemothEffect()));
+        this.addAbility(new SimpleStaticAbility(new SiegeBehemothEffect()));
     }
 
     private SiegeBehemoth(final SiegeBehemoth card) {

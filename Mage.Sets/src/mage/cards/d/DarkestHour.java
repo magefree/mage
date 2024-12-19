@@ -23,7 +23,7 @@ public final class DarkestHour extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}");
 
         // All creatures are black.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DarkestHourEffect()));
+        this.addAbility(new SimpleStaticAbility(new DarkestHourEffect()));
     }
 
     private DarkestHour(final DarkestHour card) {

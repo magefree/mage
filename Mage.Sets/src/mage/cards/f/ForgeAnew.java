@@ -47,7 +47,7 @@ public class ForgeAnew extends CardImpl {
         //As long as it’s your turn, you may activate equip abilities any time you could cast an instant.
         this.addAbility(new SimpleStaticAbility(new ConditionalAsThoughEffect(
             new ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(EquipAbility.class, "equip abilities"), MyTurnCondition.instance
-            ).setText("as long as it's your turn, you may activate equip abilities any time you could cast an instant."))
+            ).setText("during your turn, you may activate equip abilities any time you could cast an instant."))
         );
 
         //You may pay {0} rather than pay the equip cost of the first equip ability you activate during each of your turns.

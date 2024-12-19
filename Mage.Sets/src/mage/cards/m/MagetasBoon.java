@@ -37,7 +37,7 @@ public final class MagetasBoon extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +1/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield)));
     }
 
     private MagetasBoon(final MagetasBoon card) {

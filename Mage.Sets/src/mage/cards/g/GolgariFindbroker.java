@@ -14,7 +14,6 @@ import mage.target.common.TargetCardInYourGraveyard;
 import java.util.UUID;
 
 /**
- *
  * @author TheElk801
  */
 public final class GolgariFindbroker extends CardImpl {
@@ -29,8 +28,7 @@ public final class GolgariFindbroker extends CardImpl {
 
         // When Golgari Findbroker enters the battlefield, return target permanent card from your graveyard to your hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(
-                new ReturnFromGraveyardToHandTargetEffect().setText("return target permanent card from your graveyard to your hand"),
-                false
+                new ReturnFromGraveyardToHandTargetEffect(), false
         );
         ability.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_PERMANENT));
         this.addAbility(ability);

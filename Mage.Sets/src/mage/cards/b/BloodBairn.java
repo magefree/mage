@@ -30,7 +30,6 @@ public final class BloodBairn extends CardImpl {
 
         // Sacrifice another creature: Blood Bairn gets +2/+2 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(2, 2, Duration.EndOfTurn),
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE)));
 

@@ -41,7 +41,7 @@ public class MageTextArea extends MageEditorPane {
 
         // prepare text format as header and details texts
 
-        final StringBuilder buffer = new StringBuilder(512);
+        final StringBuilder buffer = new StringBuilder();
         // Dialog is a java logical font family, so it should work on all systems
         buffer.append("<body style='font-family:Dialog;font-size:");
         buffer.append(GUISizeHelper.gameFeedbackPanelMainMessageFontSize);

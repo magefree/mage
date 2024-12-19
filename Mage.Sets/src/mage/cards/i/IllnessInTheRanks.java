@@ -28,7 +28,7 @@ public final class IllnessInTheRanks extends CardImpl {
 
 
         // Creature tokens get -1/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1,-1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(-1,-1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private IllnessInTheRanks(final IllnessInTheRanks card) {

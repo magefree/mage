@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
@@ -20,7 +20,7 @@ public final class BanefulOmen extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{B}{B}{B}");
 
         // At the beginning of your end step, you may reveal the top card of your library. If you do, each opponent loses life equal to that card's converted mana cost.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new BanefulOmenEffect(), true));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new BanefulOmenEffect(), true));
     }
 
     private BanefulOmen(final BanefulOmen card) {

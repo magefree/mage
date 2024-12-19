@@ -2,7 +2,7 @@ package mage.cards.z;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.PermanentsYouOwnThatOpponentsControlCount;
@@ -34,14 +34,14 @@ public final class ZedruuTheGreathearted extends CardImpl {
         // At the beginning of your upkeep, you gain X life and draw X cards, where X is the number of permanents you own that your opponents control.
         Effect effect = new GainLifeEffect(PermanentsYouOwnThatOpponentsControlCount.instance);
         effect.setText("you gain X life");
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(effect);
         effect = new DrawCardSourceControllerEffect(PermanentsYouOwnThatOpponentsControlCount.instance);
         effect.setText("and draw X cards, where X is the number of permanents you own that your opponents control");
         ability.addEffect(effect);
         this.addAbility(ability);
 
         // {R}{W}{U}: Target opponent gains control of target permanent you control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TargetPlayerGainControlTargetPermanentEffect(), new ManaCostsImpl<>("{U}{R}{W}"));
+        ability = new SimpleActivatedAbility(new TargetPlayerGainControlTargetPermanentEffect(), new ManaCostsImpl<>("{U}{R}{W}"));
         ability.addTarget(new TargetOpponent());
         ability.addTarget(new TargetControlledPermanent());
         this.addAbility(ability);

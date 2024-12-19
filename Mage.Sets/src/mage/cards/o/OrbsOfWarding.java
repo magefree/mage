@@ -26,10 +26,10 @@ public final class OrbsOfWarding extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // You have hexproof.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControllerEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControllerEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield)));
 
         // If a creature would deal damage to you, prevent 1 of that damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OrbsOfWardingEffect()));
+        this.addAbility(new SimpleStaticAbility(new OrbsOfWardingEffect()));
     }
 
     private OrbsOfWarding(final OrbsOfWarding card) {

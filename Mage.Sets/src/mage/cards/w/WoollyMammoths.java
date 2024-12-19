@@ -41,7 +41,6 @@ public final class WoollyMammoths extends CardImpl {
 
         // Woolly Mammoths has trample as long as you control a snow land.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(
                                 TrampleAbility.getInstance(),

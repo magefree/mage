@@ -391,38 +391,6 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game) {
-        if (this.isHuman()) {
-            int remainingDamage = damage;
-            UUID targetId;
-            int amount;
-            while (remainingDamage > 0) {
-                if (targets.size() == 1) {
-                    targetId = targets.get(0);
-                    amount = remainingDamage;
-                } else {
-                    targetId = targets.get(RandomUtil.nextInt(targets.size()));
-                    amount = RandomUtil.nextInt(damage + 1);
-                }
-                Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null) {
-                    permanent.damage(amount, attackerId, source, game, false, true);
-                    remainingDamage -= amount;
-                } else {
-                    Player player = game.getPlayer(targetId);
-                    if (player != null) {
-                        player.damage(amount, attackerId, source, game);
-                        remainingDamage -= amount;
-                    }
-                }
-                targets.remove(targetId);
-            }
-        } else {
-            super.assignDamage(damage, targets, singleTargetName, attackerId, source, game);
-        }
-    }
-
-    @Override
     public int getAmount(int min, int max, String message, Game game) {
         if (this.isHuman()) {
             return RandomUtil.nextInt(max - min) + min;

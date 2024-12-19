@@ -35,7 +35,7 @@ public final class HedronBlade extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(1, 1)));
 
         // Whenever equipped creature becomes blocked by one or more colorless creatures, it gains deathtouch until end of turn.
         this.addAbility(new HedronBladeTriggeredAbility(

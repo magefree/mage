@@ -1,8 +1,8 @@
 package mage.cards.q;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -35,16 +35,16 @@ public final class QuicksilverFountain extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // At the beginning of each player's upkeep, that player puts a flood counter on target non-Island land they control of their choice. That land is an Island for as long as it has a flood counter on it.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new QuicksilverFountainEffect(), TargetController.ANY, false, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                TargetController.EACH_PLAYER, new QuicksilverFountainEffect(), false);
         ability.addTarget(new TargetLandPermanent());
         ability.setTargetAdjuster(QuicksilverFountainAdjuster.instance);
         this.addAbility(ability);
 
         // At the beginning of each end step, if all lands on the battlefield are Islands, remove all flood counters from them.
         // Note: This applies only if Quicksilver Fountain is on the battlefield
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
-                new QuicksilverFountainEffect2(), TargetController.ANY, condition, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(
+                TargetController.ANY, new QuicksilverFountainEffect2(), false, condition));
     }
 
     private QuicksilverFountain(final QuicksilverFountain card) {
@@ -100,7 +100,7 @@ class QuicksilverFountainEffect extends OneShotEffect {
                     = new ConditionalContinuousEffect(becomesBasicLandTargetEffect,
                     LandHasFloodCounterCondition.instance, staticText);
             // Bug #6885 Fixed when owner/controller leaves the game the effect still applies
-            SimpleStaticAbility gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+            SimpleStaticAbility gainAbility = new SimpleStaticAbility(effect);
             gainAbility.setSourceId(landChosen.getId());
             gainAbility.getTargets().add(source.getTargets().get(0));
             game.addEffect(effect, gainAbility);

@@ -25,7 +25,7 @@ public final class LivingPlane extends CardImpl {
         this.supertype.add(SuperType.WORLD);
 
         // All lands are 1/1 creatures that are still lands.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAllEffect(
+        this.addAbility(new SimpleStaticAbility(new BecomesCreatureAllEffect(
                 new CreatureToken(1, 1, "1/1 creatures"),
                 "lands", filter, Duration.WhileOnBattlefield, false)));
     }

@@ -50,7 +50,6 @@ public final class DepartedDeckhand extends CardImpl {
 
         // Departed Deckhand can only be blocked by Spirits.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new CantBeBlockedByCreaturesSourceEffect(
                         filter, Duration.WhileOnBattlefield
                 ).setText("{this} can't be blocked except by Spirits")

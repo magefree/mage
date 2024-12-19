@@ -33,7 +33,7 @@ public final class Realmwright extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseBasicLandTypeEffect(Outcome.Neutral)));
 
         // Lands you control are the chosen type in addition to their other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RealmwrightEffect()));
+        this.addAbility(new SimpleStaticAbility(new RealmwrightEffect()));
     }
 
     private Realmwright(final Realmwright card) {

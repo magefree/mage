@@ -6,7 +6,7 @@ import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
-import mage.abilities.effects.common.ruleModifying.PlayLandsFromGraveyardControllerEffect;
+import mage.abilities.effects.common.ruleModifying.PlayFromGraveyardControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public final class TitaniaNaturesForce extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("Forests");
+    private static final FilterCard filter = new FilterCard("play Forests");
     private static final FilterPermanent filter2 = new FilterPermanent(SubType.FOREST, "a Forest");
     private static final FilterPermanent filter3
             = new FilterControlledPermanent(SubType.ELEMENTAL, "an Elemental you control");
@@ -42,7 +42,7 @@ public final class TitaniaNaturesForce extends CardImpl {
         this.toughness = new MageInt(6);
 
         // You may play Forests from your graveyard.
-        this.addAbility(new SimpleStaticAbility(new PlayLandsFromGraveyardControllerEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new PlayFromGraveyardControllerEffect(filter)));
 
         // Whenever a Forest you control enters, create a 5/3 green Elemental creature token.
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(

@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.BlocksCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -44,14 +44,14 @@ public final class MindbenderSpores extends CardImpl {
         // and "At the beginning of your upkeep, remove a fungus counter from this creature."
         Ability ability = new BlocksCreatureTriggeredAbility(new AddCountersTargetEffect(CounterType.FUNGUS.createInstance(4)));
 
-        SimpleStaticAbility doesntUntapAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(
+        SimpleStaticAbility doesntUntapAbility = new SimpleStaticAbility(new ConditionalContinuousRuleModifyingEffect(
                 new DontUntapInControllersUntapStepSourceEffect(), new SourceHasCounterCondition(CounterType.FUNGUS))
                 .setText("{this} doesn't untap during your untap step if it has a fungus counter on it"));
         ability.addEffect(new GainAbilityTargetEffect(doesntUntapAbility, Duration.Custom)
                 .setText("The creature gains \"This creature doesn't untap during your untap step if it has a fungus counter on it\""));
 
         BeginningOfUpkeepTriggeredAbility removeCounterAbility = new BeginningOfUpkeepTriggeredAbility(
-                new RemoveCounterSourceEffect(CounterType.FUNGUS.createInstance()), TargetController.YOU, false);
+                new RemoveCounterSourceEffect(CounterType.FUNGUS.createInstance()));
         ability.addEffect(new GainAbilityTargetEffect(removeCounterAbility, Duration.Custom)
                 .concatBy("and")
                 .setText("\"At the beginning of your upkeep, remove a fungus counter from this creature.\""));

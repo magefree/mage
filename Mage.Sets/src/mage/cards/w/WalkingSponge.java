@@ -40,7 +40,7 @@ public final class WalkingSponge extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {T}: Target creature loses your choice of flying, first strike, or trample until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WalkingSpongeEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new WalkingSpongeEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

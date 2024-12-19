@@ -16,8 +16,10 @@ import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetPermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -39,7 +41,7 @@ public final class ElvishBranchbender extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Until end of turn, target Forest becomes an X/X Treefolk creature in addition to its other types, where X is the number of Elves you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElvishBranchbenderEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ElvishBranchbenderEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
@@ -78,13 +80,18 @@ class ElvishBranchbenderEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int xValue = new PermanentsOnBattlefieldCount(filter).calculate(game, source, this);
+        Permanent targetForest = game.getPermanent(this.getTargetPointer().copy().getFirst(game, source));
+        if (targetForest == null) {
+            return false;
+        }
         ContinuousEffect effect = new BecomesCreatureTargetEffect(
                 new ElvishBranchbenderToken(xValue),
                 false, false, Duration.EndOfTurn)
                 .withDurationRuleAtStart(true);
-        effect.setTargetPointer(this.getTargetPointer().copy());
+        // works well with blinked effects
+        effect.setTargetPointer(new FixedTarget(targetForest, game));
         game.addEffect(effect, source);
-        return false;
+        return true;
     }
 }
 
@@ -101,6 +108,7 @@ class ElvishBranchbenderToken extends TokenImpl {
         super(token);
     }
 
+    @Override
     public ElvishBranchbenderToken copy() {
         return new ElvishBranchbenderToken(this);
     }

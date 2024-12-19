@@ -30,7 +30,7 @@ public final class ShimmerMyr extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // You may cast artifact spells as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, new FilterArtifactCard("artifact spells"), false)));
+        this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, new FilterArtifactCard("artifact spells"), false)));
     }
 
     private ShimmerMyr(final ShimmerMyr card) {

@@ -34,7 +34,7 @@ public final class Forcefield extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {1}: The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ForcefieldEffect(), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new ForcefieldEffect(), new GenericManaCost(1)));
     }
 
     private Forcefield(final Forcefield card) {

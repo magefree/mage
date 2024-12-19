@@ -37,7 +37,7 @@ public final class NazgulBattleMace extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
         // Equipped creature has menace, deathtouch, annihilator 1, and
         // "Whenever an opponent sacrifices a nontoken permanent, put that card onto the battlefield under your control unless that player pays 3 life."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new MenaceAbility(false), AttachmentType.EQUIPMENT));
+        Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(new MenaceAbility(false), AttachmentType.EQUIPMENT));
         ability.addEffect(new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.EQUIPMENT).setText(", deathtouch"));
         ability.addEffect(new GainAbilityAttachedEffect(new AnnihilatorAbility(1), AttachmentType.EQUIPMENT).setText(", annihilator 1"));
         Ability sacTriggerAbility = new SacrificePermanentTriggeredAbility(Zone.BATTLEFIELD,

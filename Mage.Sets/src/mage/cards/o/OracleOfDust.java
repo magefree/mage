@@ -31,7 +31,7 @@ public final class OracleOfDust extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
         // {2}, Put a card an opponent owns from exile into that player's graveyard: Draw a card, then discard a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl<>("{2}"));
+        Ability ability = new SimpleActivatedAbility(new DrawDiscardControllerEffect(1, 1), new ManaCostsImpl<>("{2}"));
         ability.addCost(new ExileOpponentsCardFromExileToGraveyardCost(true));
         this.addAbility(ability);
     }

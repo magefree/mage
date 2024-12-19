@@ -36,7 +36,7 @@ public final class SalvagingStation extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{6}");
 
         // {tap}: Return target noncreature artifact card with converted mana cost 1 or less from your graveyard to the battlefield.
-        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new TapSourceCost());
+        Ability secondAbility = new SimpleActivatedAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), new TapSourceCost());
         secondAbility.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(secondAbility);            
         // Whenever a creature dies, you may untap Salvaging Station.

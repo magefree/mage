@@ -38,7 +38,7 @@ public final class TsabosAssassin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}: Destroy target creature if it shares a color with the most common color among all permanents or a color tied for most common. A creature destroyed this way can't be regenerated.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,new TsabosAssasinEffect(),new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TsabosAssasinEffect(),new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

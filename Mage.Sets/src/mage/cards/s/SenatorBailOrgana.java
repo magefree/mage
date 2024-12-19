@@ -32,7 +32,7 @@ public final class SenatorBailOrgana extends CardImpl {
         this.toughness = new MageInt(2);
 
         // As long as you control four or more creatures, creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(new FilterControlledCreaturePermanent(), ComparisonType.MORE_THAN, 3),
                 "As long as you control four or more creatures, creatures you control get +1/+1")

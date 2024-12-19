@@ -31,7 +31,7 @@ public final class MetalspinnersPuzzleknot extends CardImpl {
         this.addAbility(ability);
 
         // {2}{B}, Sacrifice Metalspinner's Puzzleknot: You draw a card and you lose 1 life.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, drawEffect, new ManaCostsImpl<>("{2}{B}"));
+        ability = new SimpleActivatedAbility(drawEffect, new ManaCostsImpl<>("{2}{B}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addEffect(lifeEffect);
         this.addAbility(ability);

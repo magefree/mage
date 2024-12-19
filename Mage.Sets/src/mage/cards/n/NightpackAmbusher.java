@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
@@ -56,7 +55,7 @@ public final class NightpackAmbusher extends CardImpl {
         // At the beginning of your end step, if you didn't cast a spell this turn, create a 2/2 green Wolf creature token.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new CreateTokenEffect(new WolfToken()), TargetController.YOU, false
+                        new CreateTokenEffect(new WolfToken())
                 ), NightpackAmbusherCondition.instance, "At the beginning of your end step, " +
                 "if you didn't cast a spell this turn, create a 2/2 green Wolf creature token."
         ));

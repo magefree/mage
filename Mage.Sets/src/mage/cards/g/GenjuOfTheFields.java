@@ -1,15 +1,15 @@
-
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
+import mage.abilities.common.DealsDamageSourceTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
@@ -22,8 +22,9 @@ import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class GenjuOfTheFields extends CardImpl {
@@ -31,7 +32,7 @@ public final class GenjuOfTheFields extends CardImpl {
     private static final FilterLandPermanent FILTER = new FilterLandPermanent(SubType.PLAINS, "Plains");
 
     public GenjuOfTheFields(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{W}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
         this.subtype.add(SubType.AURA);
 
         // Enchant Plains
@@ -44,8 +45,8 @@ public final class GenjuOfTheFields extends CardImpl {
         // {2}: Until end of turn, enchanted Plains becomes a 2/5 white Spirit creature with "Whenever this creature deals damage, its controller gains that much life." It's still a land.
         Effect effect = new BecomesCreatureAttachedWithActivatedAbilityOrSpellEffect(new SpiritToken(),
                 "Until end of turn, enchanted Plains becomes a 2/5 white Spirit creature", Duration.EndOfTurn);
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
-        effect = new GainAbilityAttachedEffect(new DealsDamageGainLifeSourceTriggeredAbility(), AttachmentType.AURA, Duration.EndOfTurn);
+        Ability ability2 = new SimpleActivatedAbility(effect, new GenericManaCost(2));
+        effect = new GainAbilityAttachedEffect(new DealsDamageSourceTriggeredAbility(new GainLifeEffect(SavedDamageValue.MUCH)), AttachmentType.AURA, Duration.EndOfTurn);
         effect.setText("with \"Whenever this creature deals damage, its controller gains that much life.\" It's still a land");
         ability2.addEffect(effect);
         this.addAbility(ability2);
@@ -76,6 +77,7 @@ public final class GenjuOfTheFields extends CardImpl {
             power = new MageInt(2);
             toughness = new MageInt(5);
         }
+
         private SpiritToken(final SpiritToken token) {
             super(token);
         }

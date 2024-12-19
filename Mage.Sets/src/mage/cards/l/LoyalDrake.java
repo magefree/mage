@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.CommanderInPlayCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -11,7 +11,6 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -32,8 +31,7 @@ public final class LoyalDrake extends CardImpl {
         // Lieutenant — At the beginning of combat on your turn, if you control your commander, draw a card.
         this.addAbility(new ConditionalTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new DrawCardSourceControllerEffect(1),
-                        TargetController.YOU, false
+                        new DrawCardSourceControllerEffect(1)
                 ), CommanderInPlayCondition.instance,
                 "<i>Lieutenant</i> &mdash; At the beginning of combat "
                 + "on your turn, if you control your commander, draw a card."

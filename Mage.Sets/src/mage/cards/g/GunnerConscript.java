@@ -44,7 +44,7 @@ public final class GunnerConscript extends CardImpl {
 
         // Gunner Conscript gets +1/+1 for each Aura and Equipment attached to it.
         DynamicValue totalAmount = new AdditiveDynamicValue(new AuraAttachedCount(), new EquipmentAttachedCount());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostSourceEffect(totalAmount, totalAmount, Duration.WhileOnBattlefield)
                         .setText("{this} gets +1/+1 for each Aura and Equipment attached to it")));
 

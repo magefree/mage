@@ -24,7 +24,7 @@ public final class Heartstone extends CardImpl {
         // Activated abilities of creatures cost {1} less to activate. 
         // This effect can't reduce the amount of mana an ability 
         // costs to activate to less than one mana.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeartstoneEffect()));
+        this.addAbility(new SimpleStaticAbility(new HeartstoneEffect()));
     }
 
     private Heartstone(final Heartstone card) {

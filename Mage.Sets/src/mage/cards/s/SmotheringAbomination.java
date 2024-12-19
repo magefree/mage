@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 
 import java.util.UUID;
@@ -36,7 +35,7 @@ public final class SmotheringAbomination extends CardImpl {
 
         // At the beginning of your upkeep, sacrifice a creature
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(
-                StaticFilters.FILTER_PERMANENT_CREATURE, 1, null), TargetController.YOU, false));
+                StaticFilters.FILTER_PERMANENT_CREATURE, 1, null)));
 
         // Whenever you sacrifice a creature, draw a card.
         this.addAbility(new SacrificePermanentTriggeredAbility(

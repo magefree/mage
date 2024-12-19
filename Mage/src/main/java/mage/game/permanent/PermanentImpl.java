@@ -248,7 +248,7 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public String getName() {
         if (name.isEmpty()) {
             if (faceDown) {
-                return EmptyNames.FACE_DOWN_CREATURE.toString();
+                return EmptyNames.FACE_DOWN_CREATURE.getObjectName();
             } else {
                 return "";
             }
@@ -1255,11 +1255,26 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         }
 
         // own etb event
+        // 616.1a
+        // If any of the replacement and/or prevention effects are self-replacement effects (see rule 614.15),
+        // one of them must be chosen. If not, proceed to rule 616.1b.
         if (game.replaceEvent(new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone, EnterEventType.SELF))) {
             return false;
         }
 
+        // 616.1b
+        // If any of the replacement and/or prevention effects would modify under whose control an object would
+        // enter the battlefield, one of them must be chosen. If not, proceed to rule 616.1c.
+        // TODO: need implementation? See #13062
+
+        // 616.1c
+        // If any of the replacement and/or prevention effects would cause an object to become a copy of another
+        // object as it enters the battlefield, one of them must be chosen. If not, proceed to rule 616.1d.
+        // TODO: need implementation? See #13062
+
         // normal etb event
+        // 616.1d
+        // Any of the applicable replacement and/or prevention effects may be chosen.
         EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, source, getControllerId(), fromZone);
         if (game.replaceEvent(event)) {
             return false;

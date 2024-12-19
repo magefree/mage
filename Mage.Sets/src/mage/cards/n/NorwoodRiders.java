@@ -24,7 +24,7 @@ public final class NorwoodRiders extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Norwood Riders can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByMoreThanOneSourceEffect()));
     }
 
     private NorwoodRiders(final NorwoodRiders card) {

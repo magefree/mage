@@ -41,7 +41,7 @@ public final class SinisterStrength extends CardImpl {
         // Enchanted creature gets +3/+1 and is black.
         Effect effect = new BoostEnchantedEffect(3, 1);
         effect.setText("Enchanted creature gets +3/+1");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new SetCardColorAttachedEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield, AttachmentType.AURA);
         effect.setText("and is black");
         ability.addEffect(effect);

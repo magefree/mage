@@ -31,7 +31,7 @@ public final class ThespiansStage extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // 2, {T}: Thespian's Stage becomes a copy of target land, except it has this ability.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThespiansStageCopyEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new ThespiansStageCopyEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
@@ -70,7 +70,7 @@ class ThespiansStageCopyEffect extends OneShotEffect {
         Permanent copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (sourcePermanent != null && copyFromPermanent != null) {
             Permanent newPermanent = game.copyPermanent(copyFromPermanent, sourcePermanent.getId(), source, new EmptyCopyApplier());
-            Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThespiansStageCopyEffect(), new GenericManaCost(2));
+            Ability ability = new SimpleActivatedAbility(new ThespiansStageCopyEffect(), new GenericManaCost(2));
             ability.addCost(new TapSourceCost());
             ability.addTarget(new TargetLandPermanent());
             newPermanent.addAbility(ability, source.getSourceId(), game);

@@ -23,7 +23,7 @@ public final class FlameFusillade extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
 
         // Until end of turn, permanents you control gain "{tap}: This permanent deals 1 damage to any target."
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1, "this permanent"), new TapSourceCost());
+        Ability gainedAbility = new SimpleActivatedAbility(new DamageTargetEffect(1, "this permanent"), new TapSourceCost());
         gainedAbility.addTarget(new TargetAnyTarget());
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(gainedAbility, Duration.EndOfTurn).withDurationRuleAtStart(true));
     }

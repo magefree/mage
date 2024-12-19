@@ -4,7 +4,7 @@ package mage.cards.j;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -12,7 +12,6 @@ import mage.constants.SubType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -43,7 +42,7 @@ public final class JubilantMascot extends CardImpl {
                         new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                                 .setText("support 2"),
                         new ManaCostsImpl<>("{3}{W}")
-                ), TargetController.YOU, false);
+                ));
         ability.addTarget(new TargetCreaturePermanent(0, 2, filter, false));
         this.addAbility(ability);
     }

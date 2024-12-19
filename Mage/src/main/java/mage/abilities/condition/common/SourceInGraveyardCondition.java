@@ -10,7 +10,6 @@ import mage.game.Game;
  *
  * @author Susucr
  */
-
 public enum SourceInGraveyardCondition implements Condition {
     instance;
 
@@ -18,4 +17,10 @@ public enum SourceInGraveyardCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD;
     }
+
+    @Override
+    public String toString() {
+        return "{this} is in your graveyard";
+    }
+
 }

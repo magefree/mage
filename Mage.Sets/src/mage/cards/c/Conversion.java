@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -32,12 +32,11 @@ public final class Conversion extends CardImpl {
         // At the beginning of your upkeep, sacrifice Conversion unless you pay {W}{W}.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new SacrificeSourceUnlessPaysEffect(
-                        new ManaCostsImpl<>("{W}{W}")),
-                TargetController.YOU,
-                false));
+                        new ManaCostsImpl<>("{W}{W}"))
+        ));
 
         // All Mountains are Plains.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConversionEffect()));
+        this.addAbility(new SimpleStaticAbility(new ConversionEffect()));
 
     }
 

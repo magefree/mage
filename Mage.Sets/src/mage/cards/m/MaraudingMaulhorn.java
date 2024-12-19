@@ -38,7 +38,7 @@ public final class MaraudingMaulhorn extends CardImpl {
                 new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield, true),
                 new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.FEWER_THAN, 1));
         effect.setText("{this} attacks each combat if able unless you control a creature named Advocate of the Beast");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private MaraudingMaulhorn(final MaraudingMaulhorn card) {

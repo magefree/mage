@@ -528,6 +528,7 @@ public class ScryfallImageSupportCards {
             add("ONE"); // Phyrexia: All Will Be One
             add("ONC"); // Phyrexia: All Will Be One Commander
             add("PL23"); // Year of the Rabbit 2023
+            add("DA1"); // Unknown Event
             add("SLP"); // Secret Lair Showdown
             add("MOM"); // March of the Machine
             add("MOC"); // March of the Machine Commander
@@ -563,6 +564,8 @@ public class ScryfallImageSupportCards {
             add("DSK"); // Duskmourn: House of Horror
             add("DSC"); // Duskmourn: House of Horror Commander
             add("FDN"); // Foundations
+            add("J25"); // Foundations Jumpstart
+            add("DFT"); // Aetherdrift
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards

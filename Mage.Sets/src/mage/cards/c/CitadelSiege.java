@@ -2,7 +2,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.ModeChoiceSourceCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -45,7 +45,7 @@ public final class CitadelSiege extends CardImpl {
 
         // * Khans - At the beginning of combat on your turn, put two +1/+1 counters on target creature you control.
         Ability ability = new ConditionalTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)), TargetController.YOU, false),
+                new BeginningOfCombatTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2))),
                 new ModeChoiceSourceCondition("Khans"),
                 ruleTrigger1);
         ability.addTarget(new TargetControlledCreaturePermanent());
@@ -53,7 +53,7 @@ public final class CitadelSiege extends CardImpl {
 
         // * Dragons - At the beginning of combat on each opponent's turn, tap target creature that player controls.
         ability = new ConditionalTriggeredAbility(
-                new BeginningOfCombatTriggeredAbility(new TapTargetEffect(), TargetController.OPPONENT, false),
+                new BeginningOfCombatTriggeredAbility(TargetController.OPPONENT, new TapTargetEffect(), false),
                 new ModeChoiceSourceCondition("Dragons"),
                 ruleTrigger2);
         ability.addTarget(new TargetCreaturePermanent(filter));

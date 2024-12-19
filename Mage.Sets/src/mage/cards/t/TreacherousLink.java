@@ -39,7 +39,7 @@ public final class TreacherousLink extends CardImpl {
         this.addAbility(ability);
 
         // All damage that would be dealt to enchanted creature is dealt to its controller instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TreacherousLinkEffect()));
+        this.addAbility(new SimpleStaticAbility(new TreacherousLinkEffect()));
     }
 
     private TreacherousLink(final TreacherousLink card) {

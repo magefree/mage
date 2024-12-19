@@ -28,7 +28,7 @@ public final class CarrionHowler extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Pay 1 life: Carrion Howler gets +2/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -1, Duration.EndOfTurn), new PayLifeCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(2, -1, Duration.EndOfTurn), new PayLifeCost(1)));
     }
 
     private CarrionHowler(final CarrionHowler card) {

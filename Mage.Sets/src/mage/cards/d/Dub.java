@@ -40,7 +40,7 @@ public final class Dub extends CardImpl {
 
         // Enchanted creature gets +2/+2, has first strike, and is a Knight in addition to its other types.
         Effect effect = new BoostEnchantedEffect(2, 2);
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        ability = new SimpleStaticAbility(effect);
         effect = new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA);
         effect.setText(", has first strike");
         ability.addEffect(effect);

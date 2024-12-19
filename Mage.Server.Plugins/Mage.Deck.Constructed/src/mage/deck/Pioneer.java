@@ -31,6 +31,7 @@ public class Pioneer extends Constructed {
         banned.add("Flooded Strand");
         banned.add("Geological Appraiser");
         banned.add("Inverter of Truth");
+        banned.add("Jegantha, the Wellspring");
         banned.add("Karn, the Great Creator");
         banned.add("Kethis, the Hidden Hand");
         banned.add("Leyline of Abundance");

@@ -37,7 +37,7 @@ public final class PetrifiedPlating extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
         
         // Suspend 2-{G}
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl<>("{G}"), this));

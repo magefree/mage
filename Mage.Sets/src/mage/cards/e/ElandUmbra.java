@@ -36,7 +36,7 @@ public final class ElandUmbra extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +0/+4.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 4, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(0, 4, Duration.WhileOnBattlefield)));
 
         // Umbra armor
         this.addAbility(new UmbraArmorAbility());

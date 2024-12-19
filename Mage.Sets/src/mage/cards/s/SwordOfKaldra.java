@@ -27,7 +27,7 @@ public final class SwordOfKaldra extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +5/+5.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(5, 5, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(5, 5, Duration.WhileOnBattlefield)));
         // Whenever equipped creature deals damage to a creature, exile that creature.
         this.addAbility(new SwordOfKaldraTriggeredAbility());
         // Equip {4}

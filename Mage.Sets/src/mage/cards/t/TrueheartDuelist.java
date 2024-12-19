@@ -29,7 +29,7 @@ public final class TrueheartDuelist extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Trueheart Duelist can block an additional creature each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(Duration.WhileOnBattlefield, 1)));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect(Duration.WhileOnBattlefield, 1)));
 
         // Embalm {2}{W}
         this.addAbility(new EmbalmAbility(new ManaCostsImpl<>("{2}{W}"), this));

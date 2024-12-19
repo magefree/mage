@@ -1,7 +1,5 @@
-
 package mage.cards.r;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
@@ -10,20 +8,14 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
+
+import java.util.UUID;
 
 /**
- *
  * @author fireshoes
  */
 public final class RidgescaleTusker extends CardImpl {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public RidgescaleTusker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
@@ -34,7 +26,7 @@ public final class RidgescaleTusker extends CardImpl {
         this.toughness = new MageInt(5);
 
         // When Ridgescale Tusker enters the battlefield, put a +1/+1 counter on each other creature you control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(1), filter)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(1), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE)));
     }
 
     private RidgescaleTusker(final RidgescaleTusker card) {

@@ -40,7 +40,7 @@ public final class PhantomNantuko extends CardImpl {
                 new PreventDamageAndRemoveCountersEffect(false, false, false).withPhantomText()
         ), PreventDamageAndRemoveCountersEffect.createWatcher());
         // {tap}: Put a +1/+1 counter on Phantom Nantuko.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new TapSourceCost()));
     }
 
     private PhantomNantuko(final PhantomNantuko card) {
@@ -52,4 +52,3 @@ public final class PhantomNantuko extends CardImpl {
         return new PhantomNantuko(this);
     }
 }
-

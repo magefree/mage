@@ -37,7 +37,7 @@ public final class BrassHerald extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BrassHeraldEntersEffect()));
 
         // Creatures of the chosen type get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, false)));
     }
 
     private BrassHerald(final BrassHerald card) {

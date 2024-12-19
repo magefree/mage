@@ -38,9 +38,9 @@ public final class AvenBrigadier extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Other Bird creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
         // Other Soldier creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter2, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter2, true)));
     }
 
     private AvenBrigadier(final AvenBrigadier card) {

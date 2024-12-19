@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -40,8 +40,8 @@ public final class WallOfResistance extends CardImpl {
         // At the beginning of each end step, if Wall of Resistance was dealt damage this turn, put a +0/+1 counter on it.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfEndStepTriggeredAbility(
-                        new AddCountersSourceEffect(CounterType.P0P1.createInstance()),
-                        TargetController.ANY, false
+                        TargetController.ANY, new AddCountersSourceEffect(CounterType.P0P1.createInstance()),
+                        false
                 ), WallOfResistanceCondition.instance, "At the beginning of each end step, " +
                 "if {this} was dealt damage this turn, put a +0/+1 counter on it."
         ));

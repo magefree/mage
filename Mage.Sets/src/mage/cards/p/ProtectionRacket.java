@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -32,7 +31,7 @@ public final class ProtectionRacket extends CardImpl {
         //          If they do, exile that card.
         //          Otherwise, put it into your hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ProtectionRacketEffect(), TargetController.YOU, false
+                new ProtectionRacketEffect()
         ));
     }
 

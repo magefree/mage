@@ -2,7 +2,7 @@ package mage.cards.y;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -34,7 +34,7 @@ public final class YawgmothDemon extends CardImpl {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // At the beginning of your upkeep, you may sacrifice an artifact. If you don't, tap Yawgmoth Demon and it deals 2 damage to you.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new YawgmothDemonEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new YawgmothDemonEffect());
         this.addAbility(ability);
     }
 

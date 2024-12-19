@@ -1,6 +1,7 @@
 package mage.cards.k;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -74,7 +75,13 @@ enum KeenEyedCuratorCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+        MageObject sourceObject = source.getSourceObject(game);
+        if (sourceObject == null) {
+            return false;
+        }
+        // must use object's zcc cause static and activated abilities init in diff time with diff zcc (see #13022)
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), sourceObject.getZoneChangeCounter(game));
+        ExileZone exileZone = game.getExile().getExileZone(exileId);
         return exileZone != null && exileZone.getCards(game)
                 .stream()
                 .map(card -> card.getCardType(game))
@@ -89,19 +96,27 @@ enum KeenEyedCuratorHint implements Hint {
 
     @Override
     public String getText(Game game, Ability ability) {
-        List<String> types = new ArrayList<>();
-        ExileZone exileZone = game.getExile().getExileZone(CardUtil.getExileZoneId(game, ability));
-        if (exileZone != null) {
-            types = exileZone.getCards(game).stream()
+        MageObject sourceObject = ability.getSourceObject(game);
+        if (sourceObject == null) {
+            return "Card types exiled: 0";
+        }
+
+        // must use object's zcc cause static and activated abilities init in diff time with diff zcc (see #13022)
+        UUID exileId = CardUtil.getExileZoneId(game, ability.getSourceId(), sourceObject.getZoneChangeCounter(game));
+        ExileZone exileZone = game.getExile().getExileZone(exileId);
+        if (exileZone == null) {
+            return "Card types exiled: 0";
+        }
+
+        List<String> types = exileZone.getCards(game).stream()
                     .map(card -> card.getCardType(game))
                     .flatMap(Collection::stream)
                     .distinct()
                     .map(CardType::toString)
                     .sorted()
                     .collect(Collectors.toList());
-        }
-        return "Card types exiled: " + types.size()
-                + (types.size() > 0 ? " (" + String.join(", ", types) + ')' : "");
+        String details = types.isEmpty() ? "" : " (" + String.join(", ", types) + ")";
+        return "Card types exiled: " + types.size() + details;
     }
 
     @Override

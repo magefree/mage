@@ -48,7 +48,7 @@ public final class MizzixOfTheIzmagnus extends CardImpl {
         ), filter, false));
 
         // Instant and sorcery spells you cast cost {1} less to cast for each experience counter you have.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MizzixOfTheIzmagnusCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(new MizzixOfTheIzmagnusCostReductionEffect()));
     }
 
     private MizzixOfTheIzmagnus(final MizzixOfTheIzmagnus card) {

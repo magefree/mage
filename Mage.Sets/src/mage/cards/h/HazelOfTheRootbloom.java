@@ -3,7 +3,7 @@ package mage.cards.h;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.common.TapVariableTargetCost;
@@ -57,8 +57,7 @@ public final class HazelOfTheRootbloom extends CardImpl {
 
         // At the beginning of your end step, create a token that's a copy of target token you control. If that token is a Squirrel, instead create two tokens that are copies of it.
         ability = new BeginningOfEndStepTriggeredAbility(
-                new HazelOfTheRootbloomEffect(),
-                TargetController.YOU, false
+                new HazelOfTheRootbloomEffect()
         );
         ability.addTarget(new TargetPermanent(filter2));
         this.addAbility(ability);

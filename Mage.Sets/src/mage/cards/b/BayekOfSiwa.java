@@ -47,7 +47,7 @@ public final class BayekOfSiwa extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilityControlledEffect(
                         DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, true
-                ), MyTurnCondition.instance, "as long as it's your turn, " +
+                ), MyTurnCondition.instance, "during your turn, " +
                 "other historic creatures you control have double strike"
         )));
 

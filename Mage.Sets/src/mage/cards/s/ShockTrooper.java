@@ -33,7 +33,7 @@ public final class ShockTrooper extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Trooper creatures you control get +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, filter, false)));
 
     }
 

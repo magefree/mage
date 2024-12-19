@@ -1,33 +1,36 @@
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
-import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.constants.*;
-import mage.abilities.keyword.SoulbondAbility;
 import mage.abilities.keyword.DoctorsCompanionAbility;
+import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedBatchForOnePermanentEvent;
+import mage.game.events.DamagedPermanentEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponent;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
- *
  * @author jimga150
  */
 public final class DonnaNoble extends CardImpl {
 
     public DonnaNoble(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
-        
+
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.HUMAN);
         this.power = new MageInt(2);
@@ -59,9 +62,10 @@ public final class DonnaNoble extends CardImpl {
         return new DonnaNoble(this);
     }
 }
+
 // Based on DealtDamageToSourceTriggeredAbility, except this uses DamagedBatchForOnePermanentEvent,
 // which batches all damage dealt at the same time on a permanent-by-permanent basis
-class DonnaNobleTriggeredAbility extends TriggeredAbilityImpl {
+class DonnaNobleTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     DonnaNobleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DamageTargetEffect(SavedDamageValue.MUCH));
@@ -85,10 +89,8 @@ class DonnaNobleTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForOnePermanentEvent dEvent = (DamagedBatchForOnePermanentEvent) event;
-
         // check if the permanent is Donna or its paired card
-        if (!CardUtil.getEventTargets(dEvent).contains(getSourceId())){
+        if (!CardUtil.getEventTargets(event).contains(getSourceId())) {
             Permanent paired;
             Permanent permanent = game.getPermanent(getSourceId());
             if (permanent != null && permanent.getPairedCard() != null) {
@@ -99,12 +101,12 @@ class DonnaNobleTriggeredAbility extends TriggeredAbilityImpl {
             } else {
                 return false;
             }
-            if (!CardUtil.getEventTargets(dEvent).contains(paired.getId())){
+            if (!CardUtil.getEventTargets(event).contains(paired.getId())) {
                 return false;
             }
         }
 
-        int damage = dEvent.getAmount();
+        int damage = event.getAmount();
         if (damage < 1) {
             return false;
         }

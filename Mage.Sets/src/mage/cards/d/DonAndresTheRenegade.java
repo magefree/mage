@@ -61,7 +61,7 @@ public final class DonAndresTheRenegade extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Each creature you control but don't own gets +2/+2, has menace and deathtouch, and is a Pirate in addition to its other types.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleStaticAbility(
                 new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, creatureFilter, false)
                         .setText("Each creature you control but don't own gets +2/+2"));
         ability.addEffect(new GainAbilityControlledEffect(

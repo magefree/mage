@@ -31,7 +31,7 @@ public final class DominatingLicid extends CardImpl {
         this.addAbility(new LicidAbility(new ManaCostsImpl<>("{1}{U}{U}"), new ColoredManaCost(ColoredManaSymbol.U)));
         
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
     }
 
     private DominatingLicid(final DominatingLicid card) {

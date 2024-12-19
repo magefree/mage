@@ -60,7 +60,9 @@ class SuntailSquadronEffect extends OneShotEffect {
         }
         Effect effect = new ConjureCardEffect("Suntail Hawk");
         do {
-            effect.apply(game, source);
+            if (!effect.apply(game, source)) {
+                break;
+            }
         } while (player.getHand().size() < 7);
         return true;
     }

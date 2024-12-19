@@ -31,10 +31,10 @@ public final class Gloom extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // White spells cost {3} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostIncreasingAllEffect(3, filter, TargetController.ANY)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostIncreasingAllEffect(3, filter, TargetController.ANY)));
 
         // Activated abilities of white enchantments cost {3} more to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GloomCostIncreaseEffect()));
+        this.addAbility(new SimpleStaticAbility(new GloomCostIncreaseEffect()));
     }
 
     private Gloom(final Gloom card) {

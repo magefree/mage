@@ -152,7 +152,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean canLoseLife = true;
     protected PayLifeCostLevel payLifeCostLevel = PayLifeCostLevel.allAbilities;
     protected boolean loseByZeroOrLessLife = true;
-    protected boolean canPlayCardsFromGraveyard = true;
     protected boolean canPlotFromTopOfLibrary = false;
     protected boolean drawsFromBottom = false;
     protected boolean drawsOnOpponentsTurn = false;
@@ -252,7 +251,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canGainLife = player.canGainLife;
         this.canLoseLife = player.canLoseLife;
         this.loseByZeroOrLessLife = player.loseByZeroOrLessLife;
-        this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard;
         this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary;
         this.drawsFromBottom = player.drawsFromBottom;
         this.drawsOnOpponentsTurn = player.drawsOnOpponentsTurn;
@@ -367,7 +365,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.sacrificeCostFilter = player.getSacrificeCostFilter() != null
                 ? player.getSacrificeCostFilter().copy() : null;
         this.loseByZeroOrLessLife = player.canLoseByZeroOrLessLife();
-        this.canPlayCardsFromGraveyard = player.canPlayCardsFromGraveyard();
         this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary();
         this.drawsFromBottom = player.isDrawsFromBottom();
         this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
@@ -482,7 +479,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canLoseLife = true;
         this.payLifeCostLevel = PayLifeCostLevel.allAbilities;
         this.loseByZeroOrLessLife = true;
-        this.canPlayCardsFromGraveyard = true;
         this.canPlotFromTopOfLibrary = false;
         this.drawsFromBottom = false;
         this.drawsOnOpponentsTurn = false;
@@ -526,7 +522,6 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.payLifeCostLevel = PayLifeCostLevel.allAbilities;
         this.sacrificeCostFilter = null;
         this.loseByZeroOrLessLife = true;
-        this.canPlayCardsFromGraveyard = false;
         this.canPlotFromTopOfLibrary = false;
         this.drawsFromBottom = false;
         this.drawsOnOpponentsTurn = false;
@@ -4138,9 +4133,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 approvingObjects = new HashSet<>();
             }
 
-            boolean canActivateAsHandZone = !approvingObjects.isEmpty()
-                    || (fromZone == Zone.GRAVEYARD && canPlayCardsFromGraveyard());
-            boolean possibleToPlay = canActivateAsHandZone
+            boolean possibleToPlay = !approvingObjects.isEmpty()
                     && ability.getZone().match(Zone.HAND)
                     && (isPlaySpell || isPlayLand);
 
@@ -4164,7 +4157,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
 
             // from non hand mode (with affected controller)
-            if (canActivateAsHandZone && ability.getControllerId() != this.getId()) {
+            if (!approvingObjects.isEmpty() && ability.getControllerId() != this.getId()) {
                 UUID savedControllerId = ability.getControllerId();
                 ability.setControllerId(this.getId());
                 try {
@@ -4644,16 +4637,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void setLoseByZeroOrLessLife(boolean loseByZeroOrLessLife) {
         this.loseByZeroOrLessLife = loseByZeroOrLessLife;
-    }
-
-    @Override
-    public boolean canPlayCardsFromGraveyard() {
-        return canPlayCardsFromGraveyard;
-    }
-
-    @Override
-    public void setPlayCardsFromGraveyard(boolean playCardsFromGraveyard) {
-        this.canPlayCardsFromGraveyard = playCardsFromGraveyard;
     }
 
     @Override
@@ -5199,7 +5182,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                         }
                         visibleName = card.getLogName() + (card.isCopy() ? " (Copy)" : "");
                     } else {
-                        visibleName = "a " + GameLog.getNeutralObjectIdName(EmptyNames.FACE_DOWN_CARD.toString(), card.getId());
+                        visibleName = "a " + GameLog.getNeutralObjectIdName(EmptyNames.FACE_DOWN_CARD.getObjectName(), card.getId());
                     }
                     game.informPlayers(this.getLogName() + " moves " + visibleName
                             + (fromZone != null ? " from " + fromZone.toString().toLowerCase(Locale.ENGLISH) : "")

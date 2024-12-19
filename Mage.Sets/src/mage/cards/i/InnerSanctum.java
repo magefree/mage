@@ -25,7 +25,7 @@ public final class InnerSanctum extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new PayLifeCost(2)));
 
         // Prevent all damage that would be dealt to creatures you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new PreventAllDamageToAllEffect(Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED)
         ));
     }

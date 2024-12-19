@@ -50,7 +50,6 @@ public final class TajicLegionsEdge extends CardImpl {
 
         // Prevent all noncombat damage that would be dealt to other creatures you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new PreventAllNonCombatDamageToAllEffect(
                         Duration.WhileOnBattlefield, filter
                 )
@@ -58,7 +57,6 @@ public final class TajicLegionsEdge extends CardImpl {
 
         // {R}{W}: Tajic, Legion's Edge gains first strike until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(
                         FirstStrikeAbility.getInstance(),
                         Duration.EndOfTurn

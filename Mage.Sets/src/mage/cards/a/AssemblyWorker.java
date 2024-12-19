@@ -36,7 +36,7 @@ public final class AssemblyWorker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}: Target Assembly-Worker creature gets +1/+1 until end of turn.
-       Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
+       Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), new TapSourceCost());
        ability.addTarget(new TargetPermanent(filter));
        this.addAbility(ability);
     }

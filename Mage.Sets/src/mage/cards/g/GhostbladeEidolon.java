@@ -36,7 +36,7 @@ public final class GhostbladeEidolon extends CardImpl {
         // Double strike
         this.addAbility(DoubleStrikeAbility.getInstance());
         // Enchanted creature gets +1/+1 and has double strike.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1,1));
         Effect effect = new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("and has double strike");
         ability.addEffect(effect);

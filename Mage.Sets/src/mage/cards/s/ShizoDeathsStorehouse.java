@@ -31,7 +31,7 @@ public final class ShizoDeathsStorehouse extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.supertype.add(SuperType.LEGENDARY);
         this.addAbility(new BlackManaAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(FearAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

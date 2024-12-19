@@ -1,7 +1,7 @@
 package mage.game.command.emblems;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.common.ReturnCreatureFromGraveyardToBattlefieldAndGainHasteEffect;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -18,8 +18,8 @@ public final class LilianaWakerOfTheDeadEmblem extends Emblem {
         super("Emblem Liliana");
         Ability ability = new BeginningOfCombatTriggeredAbility(
                 Zone.COMMAND,
-                new ReturnCreatureFromGraveyardToBattlefieldAndGainHasteEffect(),
-                TargetController.YOU, false, false);
+                TargetController.YOU, new ReturnCreatureFromGraveyardToBattlefieldAndGainHasteEffect(),
+                false);
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE));
         this.getAbilities().add(ability);
     }

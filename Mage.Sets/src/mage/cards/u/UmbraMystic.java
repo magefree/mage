@@ -37,7 +37,7 @@ public final class UmbraMystic extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Auras attached to permanents you control have umbra armor.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new UmbraArmorAbility(), Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(new UmbraArmorAbility(), Duration.WhileOnBattlefield, filter, false)));
     }
 
     private UmbraMystic(final UmbraMystic card) {

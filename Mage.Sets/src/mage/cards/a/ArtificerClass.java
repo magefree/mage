@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.common.BecomesClassLevelTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.RevealCardsFromLibraryUntilEffect;
@@ -69,7 +69,7 @@ public final class ArtificerClass extends CardImpl {
         this.addAbility(new ClassLevelAbility(3, "{5}{U}"));
 
         // At the beginning of your end step, create a token that's a copy of target artifact you control.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(new CreateTokenCopyTargetEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(new CreateTokenCopyTargetEffect());
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT));
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(ability, 3)));
     }

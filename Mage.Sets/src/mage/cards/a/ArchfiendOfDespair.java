@@ -4,7 +4,7 @@ package mage.cards.a;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.CantGainLifeAllEffect;
@@ -39,7 +39,6 @@ public final class ArchfiendOfDespair extends CardImpl {
 
         // Your opponents can't gain life.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new CantGainLifeAllEffect(
                         Duration.WhileOnBattlefield,
                         TargetController.OPPONENT
@@ -47,7 +46,7 @@ public final class ArchfiendOfDespair extends CardImpl {
         ));
 
         // At the beginning of each end step, each opponent loses life equal to the life that player lost this turn. (Damage causes loss of life.)
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ArchfiendOfDespairEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new ArchfiendOfDespairEffect(), false));
     }
 
     private ArchfiendOfDespair(final ArchfiendOfDespair card) {

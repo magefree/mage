@@ -3,12 +3,11 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
@@ -23,7 +22,7 @@ public final class ForceMastery extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{U}{W}");
 
         // At the beggining of your upkeep, reveal the top card of your library and put that card into your hand. You gain life equal to its converted mana cost.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForceMasteryEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ForceMasteryEffect()));
 
     }
 

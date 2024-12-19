@@ -4,7 +4,7 @@ package mage.cards.d;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.MillCardsCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -20,7 +20,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 
 /**
@@ -40,9 +39,9 @@ public final class DeepSpawn extends CardImpl {
         // At the beginning of your upkeep, sacrifice Deep Spawn unless you put the top two cards of your library into your graveyard.
         Effect effect = new SacrificeSourceUnlessPaysEffect(new MillCardsCost(2));
         effect.setText("sacrifice {this} unless you mill two cards");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect, TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(effect));
         // {U}: Deep Spawn gains shroud until end of turn and doesn't untap during your next untap step. Tap Deep Spawn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(
+        Ability ability = new SimpleActivatedAbility(new GainAbilitySourceEffect(
             ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}"));
         effect = new DontUntapInControllersNextUntapStepSourceEffect();
         effect.setText("and doesn't untap during your next untap step");

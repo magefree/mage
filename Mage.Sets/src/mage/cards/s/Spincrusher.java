@@ -31,7 +31,7 @@ public final class Spincrusher extends CardImpl {
         // Whenever Spincrusher blocks, put a +1/+1 counter on it.
         this.addAbility(new BlocksSourceTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
         // Remove a +1/+1 counter from Spincrusher: Spincrusher can't be blocked this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 new CantBeBlockedSourceEffect(Duration.EndOfTurn),
                 new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1))));
     }

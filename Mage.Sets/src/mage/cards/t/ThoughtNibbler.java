@@ -31,7 +31,7 @@ public final class ThoughtNibbler extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Your maximum hand size is reduced by two.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new MaximumHandSizeControllerEffect(2, Duration.WhileOnBattlefield, HandSizeModification.REDUCE)));
     }
 

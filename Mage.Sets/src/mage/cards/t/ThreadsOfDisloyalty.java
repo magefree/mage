@@ -45,7 +45,7 @@ public final class ThreadsOfDisloyalty extends CardImpl {
         this.addAbility(ability);
 
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect()));
 
     }
 
@@ -58,4 +58,3 @@ public final class ThreadsOfDisloyalty extends CardImpl {
         return new ThreadsOfDisloyalty(this);
     }
 }
-

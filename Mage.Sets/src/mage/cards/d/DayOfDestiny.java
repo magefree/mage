@@ -29,7 +29,7 @@ public final class DayOfDestiny extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Legendary creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private DayOfDestiny(final DayOfDestiny card) {

@@ -39,7 +39,7 @@ public final class AzamiLadyOfScrolls extends CardImpl {
         this.toughness = new MageInt(2);
         
         // Tap an untapped Wizard you control: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
     }
 
     private AzamiLadyOfScrolls(final AzamiLadyOfScrolls card) {

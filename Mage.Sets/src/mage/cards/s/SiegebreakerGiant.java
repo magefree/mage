@@ -34,7 +34,6 @@ public final class SiegebreakerGiant extends CardImpl {
 
         // {3}{R}: Target creature can't block this turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new CantBlockTargetEffect(Duration.EndOfTurn),
                 new ManaCostsImpl<>("{3}{R}")
         );

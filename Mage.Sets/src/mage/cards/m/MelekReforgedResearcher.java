@@ -57,7 +57,7 @@ public final class MelekReforgedResearcher extends CardImpl {
 
         // The first instant or sorcery spell you cast each turn costs {3} less to cast.
         Effect effect = new SpellsCostReductionControllerEffect(filter, 3);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect),
+        this.addAbility(new SimpleStaticAbility(effect),
                 new MelekReforgedResearcherWatcher());
     }
 

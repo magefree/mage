@@ -3,7 +3,7 @@ package mage.cards.r;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DoUnlessTargetPlayerOrTargetsControllerPaysEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -14,7 +14,6 @@ import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -52,8 +51,8 @@ public final class RakdosPatronOfChaos extends CardImpl {
                         new DrawCardSourceControllerEffect(2),
                         new SacrificeTargetCost(2, filter))
                         .setText("target opponent may sacrifice two nonland, nontoken permanents. " +
-                                "If they don't, you draw two cards."),
-                TargetController.YOU, false);
+                                "If they don't, you draw two cards.")
+        );
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

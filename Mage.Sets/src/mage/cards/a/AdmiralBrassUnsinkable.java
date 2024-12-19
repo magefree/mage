@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
@@ -16,7 +16,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -52,9 +51,7 @@ public final class AdmiralBrassUnsinkable extends CardImpl {
         // It gains haste until end of turn. (If a creature with a finality counter on it would die, exile it instead.)
         Effect returnFromGraveyardEffect = new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.FINALITY.createInstance());
         BeginningOfCombatTriggeredAbility ability = new BeginningOfCombatTriggeredAbility(
-                returnFromGraveyardEffect,
-                TargetController.YOU,
-                true
+                returnFromGraveyardEffect, true
         );
         ability.addEffect(new SetBasePowerToughnessTargetEffect(4, 4, Duration.WhileOnBattlefield).setText("It has base power and toughness 4/4."));
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("It gains haste until end of turn. <i>(If a creature with a finality counter on it would die, exile it instead.)</i>"));

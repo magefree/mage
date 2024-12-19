@@ -47,7 +47,7 @@ public final class MultaniYavimayasAvatar extends CardImpl {
         PermanentsOnBattlefieldCount permanentsOnBattlefieldCount = new PermanentsOnBattlefieldCount(LANDS_YOU_CONTROL_FILTER);
 
         DynamicValue powerToughnessValue = new AdditiveDynamicValue(graveyardCount, permanentsOnBattlefieldCount);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new BoostSourceEffect(powerToughnessValue, powerToughnessValue, Duration.WhileOnBattlefield)
                         .setText("{this} gets +1/+1 for each land you control and each land card in your graveyard")
         ));

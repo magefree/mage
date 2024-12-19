@@ -27,7 +27,7 @@ public final class ThoughtReflection extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}{U}{U}");
 
         // If you would draw a card, draw two cards instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThoughtReflectionReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ThoughtReflectionReplacementEffect()));
 
     }
 

@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.CommanderInPlayCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -11,7 +11,6 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.hint.common.ControlACommanderHint;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,7 +42,7 @@ public final class SiegeGangLieutenant extends CardImpl {
         // Lieutenant -- At the beginning of combat on your turn, if you control your commander, create two 1/1 red Goblin creature tokens. Those tokens gain haste until end of turn.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new SiegeGangLieutenantEffect(), TargetController.YOU, false
+                        new SiegeGangLieutenantEffect()
                 ), CommanderInPlayCondition.instance, "At the beginning of combat on your turn, " +
                 "if you control your commander, create two 1/1 red Goblin creature tokens. " +
                 "Those tokens gain haste until end of turn."

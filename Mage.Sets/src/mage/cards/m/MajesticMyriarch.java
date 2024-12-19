@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
@@ -42,7 +42,7 @@ public final class MajesticMyriarch extends CardImpl {
 
         // At the beginning of each combat, if you control a creature with flying, Majestic Myriarch gains flying until end of turn.
         // The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, reach, trample, and vigilance.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new MajesticMyriarchEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.ANY, new MajesticMyriarchEffect(), false));
     }
 
     private MajesticMyriarch(final MajesticMyriarch card) {

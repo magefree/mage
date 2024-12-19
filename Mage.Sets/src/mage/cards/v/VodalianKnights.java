@@ -34,7 +34,7 @@ public final class VodalianKnights extends CardImpl {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Vodalian Knights can't attack unless defending player controls an Island.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(new FilterLandPermanent(SubType.ISLAND, "an Island"))));
 
         // When you control no Islands, sacrifice Vodalian Knights.
         this.addAbility(new ControlsPermanentsControllerTriggeredAbility(
@@ -42,7 +42,7 @@ public final class VodalianKnights extends CardImpl {
                 new SacrificeSourceEffect()));
 
         // {U}: Vodalian Knights gains flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{U}")));
     }
 
     private VodalianKnights(final VodalianKnights card) {

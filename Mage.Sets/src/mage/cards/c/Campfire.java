@@ -7,6 +7,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.effects.common.ShuffleYourGraveyardIntoLibraryEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.cards.Cards;
@@ -37,6 +38,7 @@ public final class Campfire extends CardImpl {
 
         // {2}, {T}: Exile Campfire: Put all commanders you own from the command zone and from your graveyard into your hand. Then shuffle your graveyard into your library.
         ability = new SimpleActivatedAbility(new CampfireEffect(), new GenericManaCost(2));
+        ability.addEffect(new ShuffleYourGraveyardIntoLibraryEffect().concatBy("Then"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
@@ -62,8 +64,7 @@ class CampfireEffect extends OneShotEffect {
 
     CampfireEffect() {
         super(Outcome.Benefit);
-        staticText = "put all commanders you own from the command zone and from " +
-                "your graveyard into your hand. Then shuffle your graveyard into your library";
+        staticText = "put all commanders you own from the command zone and from your graveyard into your hand";
     }
 
     private CampfireEffect(final CampfireEffect effect) {
@@ -84,8 +85,6 @@ class CampfireEffect extends OneShotEffect {
         Cards cards = new CardsImpl(game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY));
         cards.addAllCards(player.getGraveyard().getCards(filter, game));
         player.moveCards(cards, Zone.HAND, source, game);
-        player.putCardsOnBottomOfLibrary(player.getGraveyard(), game, source, false);
-        player.shuffleLibrary(source, game);
         return true;
     }
 }

@@ -3,6 +3,7 @@ package mage.cards.l;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -21,7 +22,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.events.DamagedBatchAllEvent;
+import mage.game.events.DamagedBatchBySourceEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -96,7 +97,7 @@ class LongRiverLurkerEffect extends OneShotEffect {
     }
 }
 
-class LongRiverLurkerTriggeredAbility extends DelayedTriggeredAbility {
+class LongRiverLurkerTriggeredAbility extends DelayedTriggeredAbility implements BatchTriggeredAbility<DamagedEvent> {
 
     private final MageObjectReference mor;
 
@@ -118,16 +119,13 @@ class LongRiverLurkerTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_FOR_ALL;
+        return event.getType() == GameEvent.EventType.DAMAGED_BATCH_BY_SOURCE;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        return ((DamagedBatchAllEvent) event)
-                .getEvents()
-                .stream()
-                .filter(DamagedEvent::isCombatDamage)
-                .anyMatch(e -> mor.refersTo(e.getAttackerId(), game));
+        return ((DamagedBatchBySourceEvent) event).isCombatDamage()
+                && mor.refersTo(event.getSourceId(), game);
     }
 
     @Override

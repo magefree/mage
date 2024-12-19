@@ -9,9 +9,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AnotherPredicate;
+import mage.filter.StaticFilters;
 
 import java.util.UUID;
 
@@ -19,13 +17,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class ThunderwolfCavalry extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterControlledCreaturePermanent("other creature you control");
-
-    static {
-        filter.add(AnotherPredicate.instance);
-    }
 
     public ThunderwolfCavalry(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{W}");
@@ -40,7 +31,7 @@ public final class ThunderwolfCavalry extends CardImpl {
 
         // Crushing Teeth -- Whenever Thunderwolf Cavalry deals combat damage to a player, put a +1/+1 counter on each other creature you control.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), false
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE), false
         ).withFlavorWord("Crushing Teeth"));
     }
 

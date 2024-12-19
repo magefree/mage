@@ -1,11 +1,12 @@
-
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.DealsDamageGainLifeSourceTriggeredAbility;
+import mage.abilities.common.DealsDamageSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.PreventDamageAndRemoveCountersEffect;
+import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -36,7 +37,7 @@ public final class PhantomNishoba extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(7), true), "with seven +1/+1 counters on it"));
 
         // Whenever Phantom Nishoba deals damage, you gain that much life.
-        this.addAbility(new DealsDamageGainLifeSourceTriggeredAbility());
+        this.addAbility(new DealsDamageSourceTriggeredAbility(new GainLifeEffect(SavedDamageValue.MUCH)));
 
         // If damage would be dealt to Phantom Nishoba, prevent that damage. Remove a +1/+1 counter from Phantom Nishoba.
         this.addAbility(new SimpleStaticAbility(

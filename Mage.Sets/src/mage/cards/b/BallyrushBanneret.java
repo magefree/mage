@@ -35,7 +35,7 @@ public final class BallyrushBanneret extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Kithkin spells and Soldier spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
     }
 
     private BallyrushBanneret(final BallyrushBanneret card) {

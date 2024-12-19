@@ -1,7 +1,7 @@
 package mage.cards.e;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,7 +45,7 @@ public final class EldraziMonument extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, sacrifice a creature. If you can't, sacrifice Eldrazi Monument.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EldraziMonumentEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EldraziMonumentEffect()));
     }
 
     private EldraziMonument(final EldraziMonument card) {

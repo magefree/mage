@@ -25,7 +25,7 @@ public final class HorseshoeCrab extends CardImpl {
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ColoredManaCost(ColoredManaSymbol.U)));
+        this.addAbility(new SimpleActivatedAbility(new UntapSourceEffect(), new ColoredManaCost(ColoredManaSymbol.U)));
     }
 
     private HorseshoeCrab(final HorseshoeCrab card) {

@@ -33,7 +33,7 @@ public final class SigardaHostOfHerons extends CardImpl {
         this.addAbility(HexproofAbility.getInstance());
 
         // Spells and abilities your opponents control can't cause you to sacrifice permanents.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SigardaHostOfHeronsEffect()));
+        this.addAbility(new SimpleStaticAbility(new SigardaHostOfHeronsEffect()));
     }
 
     private SigardaHostOfHerons(final SigardaHostOfHerons card) {

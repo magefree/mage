@@ -27,7 +27,7 @@ public final class StormcallersBoon extends CardImpl {
 
 
         // Sacrifice Stormcaller's Boon: Creatures you control gain flying until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures")), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures")), new SacrificeSourceCost()));
         this.addAbility(new CascadeAbility());
     }
 

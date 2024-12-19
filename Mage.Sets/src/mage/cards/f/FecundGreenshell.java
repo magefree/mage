@@ -59,7 +59,7 @@ public final class FecundGreenshell extends CardImpl {
         // Whenever Fecund Greenshell or another creature you control with toughness greater than its power enters,
         // look at the top card of your library. If it's a land card, you may put it onto the battlefield tapped. Otherwise, put it into your hand.
         this.addAbility(new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new FecundGreenshellEffect(), filter, false, true));
+                new FecundGreenshellEffect(), filter, false, false));
     }
 
     private FecundGreenshell(final FecundGreenshell card) {

@@ -32,7 +32,7 @@ public final class HotPursuitStarWars extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{B}{R}{G}");
 
         // Each creature your opponent's control with a bounty counter on it gets -1/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostOpponentsEffect(-1, -1, Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new BoostOpponentsEffect(-1, -1, Duration.WhileOnBattlefield, filter)));
 
         // <i>Bounty</i> &mdash; Whenever a creature an opponent controls with a bounty counter on it dies, you may put a bounty counter on target creature an opponent controls.
         Ability ability = new BountyAbility(new AddCountersTargetEffect(CounterType.BOUNTY.createInstance()), true);

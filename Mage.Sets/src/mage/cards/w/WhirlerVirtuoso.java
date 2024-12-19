@@ -32,7 +32,7 @@ public final class WhirlerVirtuoso extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(3)));
 
         // Pay {E}{E}{E}: Create a 1/1 colorless Thopter artifact creature token with flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new ThopterColorlessToken()), new PayEnergyCost(3)));
+        this.addAbility(new SimpleActivatedAbility(new CreateTokenEffect(new ThopterColorlessToken()), new PayEnergyCost(3)));
     }
 
     private WhirlerVirtuoso(final WhirlerVirtuoso card) {

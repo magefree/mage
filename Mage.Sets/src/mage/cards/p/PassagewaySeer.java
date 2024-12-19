@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.HaveInitiativeCondition;
 import mage.abilities.effects.common.TakeTheInitiativeEffect;
@@ -13,7 +13,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -39,8 +38,8 @@ public final class PassagewaySeer extends CardImpl {
 
         // At the beginning of your end step, if you have the initiative, put a +1/+1 counter on Passageway Seer.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, HaveInitiativeCondition.instance, false
+                TargetController.YOU, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                false, HaveInitiativeCondition.instance
         ).addHint(InitiativeHint.instance));
     }
 

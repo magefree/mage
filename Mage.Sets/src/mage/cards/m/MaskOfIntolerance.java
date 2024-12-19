@@ -1,7 +1,7 @@
 package mage.cards.m;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.IntCompareCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -29,7 +29,7 @@ public final class MaskOfIntolerance extends CardImpl {
 
         // At the beginning of each player's upkeep, if there are four or more basic land types among lands that player controls, Mask of Intolerance deals 3 damage to that player.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(
-                new DamageTargetEffect(3), TargetController.ANY, false
+                TargetController.ANY, new DamageTargetEffect(3), false
         ), condition, "At the beginning of each player's upkeep, if there are four or more basic land types " +
                 "among lands that player controls, {this} deals 3 damage to that player.").addHint(DomainHint.instance));
     }

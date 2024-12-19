@@ -1,7 +1,7 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -35,8 +35,8 @@ public final class Stenchskipper extends CardImpl {
 
         // At the beginning of the end step, if you control no Goblins, sacrifice Stenchskipper.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                Zone.BATTLEFIELD, new SacrificeSourceEffect(),
-                TargetController.NEXT, condition, false
+                TargetController.NEXT, new SacrificeSourceEffect(),
+                false, condition
         ));
     }
 

@@ -43,7 +43,7 @@ public final class ShardPhoenix extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // Sacrifice Shard Phoenix: Shard Phoenix deals 2 damage to each creature without flying.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(2, "it", filter), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DamageAllEffect(2, "it", filter), new SacrificeSourceCost()));
         
         // {R}{R}{R}: Return Shard Phoenix from your graveyard to your hand. Activate this ability only during your upkeep.
         this.addAbility(new ConditionalActivatedAbility(Zone.GRAVEYARD, 

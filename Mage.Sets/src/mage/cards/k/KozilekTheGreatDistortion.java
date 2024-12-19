@@ -56,7 +56,7 @@ public final class KozilekTheGreatDistortion extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // Discard a card with converted mana cost X: Counter target spell with converted mana cost X.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new KozilekDiscardCost());
+        Ability ability = new SimpleActivatedAbility(new CounterTargetEffect(), new KozilekDiscardCost());
         ability.addTarget(new TargetSpell(new FilterSpell("spell with mana value X")));
         this.addAbility(ability);
     }

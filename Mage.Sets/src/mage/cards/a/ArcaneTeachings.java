@@ -33,7 +33,7 @@ public final class ArcaneTeachings extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
 
         Ability staticAbility = new SimpleStaticAbility(new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield));
-        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability gainedAbility = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         gainedAbility.addTarget(new TargetAnyTarget());
         staticAbility.addEffect(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA)
                 .setText("and has \"" + gainedAbility.getRule("This creature") + '\"'));

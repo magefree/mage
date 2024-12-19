@@ -39,12 +39,12 @@ public final class UtopiaVow extends CardImpl {
         this.addAbility(ability);
         
         // Enchanted creature can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
         
         // Enchanted creature has "{tap}: Add one mana of any color."
         Effect effect = new GainAbilityAttachedEffect(new AnyColorManaAbility(), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature has \"{T}: Add one mana of any color.\"");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private UtopiaVow(final UtopiaVow card) {

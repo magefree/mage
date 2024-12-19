@@ -47,7 +47,7 @@ public final class SoratamiMirrorGuard extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         
         // {2}, Return a land you control to its owner's hand: Target creature with power 2 or less can't be blocked this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new CantBeBlockedTargetEffect(), new GenericManaCost(2));
         ability.addCost(new ReturnToHandChosenControlledPermanentCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetCreaturePermanent(filterCreature));
         this.addAbility(ability);

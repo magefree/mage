@@ -25,7 +25,7 @@ public final class GoblinSpy extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Play with the top card of your library revealed.
-      this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
+      this.addAbility(new SimpleStaticAbility(new PlayWithTheTopCardRevealedEffect()));
     }
 
     private GoblinSpy(final GoblinSpy card) {

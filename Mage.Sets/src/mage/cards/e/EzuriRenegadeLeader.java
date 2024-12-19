@@ -42,12 +42,12 @@ public final class EzuriRenegadeLeader extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {G}: Regenerate another target Elf.
-        Ability ezuriRegen = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl<>("{G}"));
+        Ability ezuriRegen = new SimpleActivatedAbility(new RegenerateTargetEffect(), new ManaCostsImpl<>("{G}"));
         ezuriRegen.addTarget(new TargetPermanent(anotherFilter));
         this.addAbility(ezuriRegen);
 
         // {2}{G}{G}{G}: Elf creatures you control get +3/+3 and gain trample until end of turn.
-        Ability ezuriBoost = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ezuriBoost = new SimpleActivatedAbility(
                 new BoostControlledEffect(3, 3, Duration.EndOfTurn, elfFilter, false)
                         .setText("Elf creatures you control get +3/+3"),
                 new ManaCostsImpl<>("{2}{G}{G}{G}"));

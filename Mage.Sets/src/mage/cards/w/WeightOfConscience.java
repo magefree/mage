@@ -43,10 +43,10 @@ public final class WeightOfConscience extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackAttachedEffect(AttachmentType.AURA)));
 
         // Tap two untapped creatures you control that share a creature type: Exile enchanted creature.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileAttachedEffect(), new TapTargetCost(new WeightOfConscienceTarget())));
+        this.addAbility(new SimpleActivatedAbility(new ExileAttachedEffect(), new TapTargetCost(new WeightOfConscienceTarget())));
     }
 
     private WeightOfConscience(final WeightOfConscience card) {

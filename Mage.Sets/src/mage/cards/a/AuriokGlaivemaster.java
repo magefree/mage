@@ -33,9 +33,9 @@ public final class AuriokGlaivemaster extends CardImpl {
         this.toughness = new MageInt(1);
 
         ConditionalContinuousEffect effect1 = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), EquippedSourceCondition.instance, rule1);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
+        this.addAbility(new SimpleStaticAbility(effect1));
         ConditionalContinuousEffect effect2 = new ConditionalContinuousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), EquippedSourceCondition.instance, rule2);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
+        this.addAbility(new SimpleStaticAbility(effect2));
     }
 
     private AuriokGlaivemaster(final AuriokGlaivemaster card) {

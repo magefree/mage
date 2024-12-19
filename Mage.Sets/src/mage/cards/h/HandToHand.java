@@ -23,7 +23,7 @@ public final class HandToHand extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
 
         // During combat, players can't cast instant spells or activate abilities that aren't mana abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HandToHandEffect()));
+        this.addAbility(new SimpleStaticAbility(new HandToHandEffect()));
     }
 
     private HandToHand(final HandToHand card) {

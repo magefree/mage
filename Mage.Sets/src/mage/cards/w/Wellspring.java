@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -44,7 +44,7 @@ public final class Wellspring extends CardImpl {
 
         // At the beginning of your upkeep, untap enchanted land. You gain control of that land until end of turn.
         ability = new BeginningOfUpkeepTriggeredAbility(
-                new UntapAttachedEffect(AttachmentType.AURA, "land"), TargetController.YOU, false
+                new UntapAttachedEffect(AttachmentType.AURA, "land")
         );
         ability.addEffect(new WellspringEffect("You gain control of that land until end of turn"));
         this.addAbility(ability);

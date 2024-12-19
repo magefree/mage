@@ -43,7 +43,7 @@ public final class CapturedByTheConsulate extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't attack.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackAttachedEffect(AttachmentType.AURA)));
 
         // Whenever an opponent casts a spell, if it has a single target, change the target to enchanted creature if able.
         this.addAbility(new CapturedByTheConsulateTriggeredAbility(Zone.BATTLEFIELD, new CapturedByTheConsulateEffect()));

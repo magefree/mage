@@ -40,7 +40,7 @@ public final class SpurredWolverine extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Tap two untapped Beasts you control: Target creature gains first strike until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
             FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -54,7 +54,6 @@ public final class LathlissDragonQueen extends CardImpl {
         ));
         // {1}{R}: Dragons you control get +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostControlledEffect(
                         1, 0, Duration.EndOfTurn,
                         filter2, false

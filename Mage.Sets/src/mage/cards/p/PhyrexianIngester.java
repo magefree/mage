@@ -46,7 +46,7 @@ public final class PhyrexianIngester extends CardImpl {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability.setAbilityWord(AbilityWord.IMPRINT));
         // Phyrexian Ingester gets +X/+Y, where X is the exiled creature card's power and Y is its toughness.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianIngesterBoostEffect()));
+        this.addAbility(new SimpleStaticAbility(new PhyrexianIngesterBoostEffect()));
     }
 
     private PhyrexianIngester(final PhyrexianIngester card) {

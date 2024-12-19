@@ -3,7 +3,7 @@ package mage.cards.i;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SourceOnBattlefieldCondition;
 import mage.abilities.condition.common.SourceRemainsInZoneCondition;
@@ -47,14 +47,14 @@ public final class InfernalDenizen extends CardImpl {
         this.toughness = new MageInt(7);
 
         // At the beginning of your upkeep, sacrifice two Swamps. If you can't, tap Infernal Denizen, and an opponent may gain control of a creature you control of their choice for as long as Infernal Denizen remains on the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InfernalDenizenEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InfernalDenizenEffect()));
 
         // {tap}: Gain control of target creature for as long as Infernal Denizen remains on the battlefield.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new GainControlTargetEffect(Duration.Custom, true),
                 new SourceRemainsInZoneCondition(Zone.BATTLEFIELD),
                 "gain control of target creature for as long as {this} remains on the battlefield");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

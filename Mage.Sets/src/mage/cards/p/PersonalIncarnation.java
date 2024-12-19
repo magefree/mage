@@ -37,7 +37,7 @@ public final class PersonalIncarnation extends CardImpl {
         this.toughness = new MageInt(6);
 
         // {0}: The next 1 damage that would be dealt to Personal Incarnation this turn is dealt to its owner instead. Only Personal Incarnation's owner may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PersonalIncarnationRedirectEffect(), new GenericManaCost(0));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new PersonalIncarnationRedirectEffect(), new GenericManaCost(0));
         ability.setMayActivate(TargetController.OWNER);
         this.addAbility(ability);
         // When Personal Incarnation dies, its owner loses half their life, rounded up.

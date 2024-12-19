@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import java.util.UUID;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.constants.*;
@@ -38,8 +38,8 @@ public final class MaddeningWind extends CardImpl {
         // At the beginning of the upkeep of enchanted creature's controller, Maddening Wind deals 2 damage to that player.
         Effect effect = new DamageTargetEffect(2);
         effect.setText("{this} deals 2 damage to that player");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, effect,
-                TargetController.CONTROLLER_ATTACHED_TO, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, effect,
+                false));
     }
 
     private MaddeningWind(final MaddeningWind card) {

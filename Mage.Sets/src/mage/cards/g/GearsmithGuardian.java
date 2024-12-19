@@ -38,7 +38,6 @@ public final class GearsmithGuardian extends CardImpl {
 
         // Gearsmith Guardian gets +2/+0 as long as you control a blue creature.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new BoostSourceEffect(2, 0, Duration.WhileOnBattlefield),
                         new PermanentsOnTheBattlefieldCondition(filter),

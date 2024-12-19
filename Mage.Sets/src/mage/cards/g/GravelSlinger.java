@@ -31,7 +31,7 @@ public final class GravelSlinger extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {tap}: Gravel Slinger deals 1 damage to target attacking or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(new FilterAttackingOrBlockingCreature()));
         this.addAbility(ability);
         // Morph {1}{W}

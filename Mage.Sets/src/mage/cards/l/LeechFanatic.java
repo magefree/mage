@@ -31,7 +31,7 @@ public final class LeechFanatic extends CardImpl {
         // As long as it's your turn, Leech Fanatic has lifelink.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield),
-                MyTurnCondition.instance, "as long as it's your turn, {this} has lifelink"
+                MyTurnCondition.instance, "during your turn, {this} has lifelink"
         )).addHint(MyTurnHint.instance));
     }
 

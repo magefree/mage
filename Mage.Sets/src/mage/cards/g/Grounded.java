@@ -36,7 +36,7 @@ public final class Grounded extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature loses flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LoseAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new LoseAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
     }
 
     private Grounded(final Grounded card) {

@@ -1,6 +1,6 @@
 package mage.game.command.emblems;
 
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -16,8 +16,8 @@ public final class DomriChaosBringerEmblem extends Emblem {
     public DomriChaosBringerEmblem() {
         super("Emblem Domri");
         this.getAbilities().add(new BeginningOfEndStepTriggeredAbility(
-                Zone.COMMAND, new CreateTokenEffect(new RedGreenBeastToken()),
-                TargetController.ANY, null, false
+                Zone.COMMAND, TargetController.ANY, new CreateTokenEffect(new RedGreenBeastToken()),
+                false, null
         ));
     }
 

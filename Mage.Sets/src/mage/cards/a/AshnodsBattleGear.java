@@ -28,7 +28,7 @@ public final class AshnodsBattleGear extends CardImpl {
         // You may choose not to untap Ashnod's Battle Gear during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
         // {2}, {tap}: Target creature you control gets +2/-2 for as long as Ashnod's Battle Gear remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        Ability ability = new SimpleActivatedAbility(new ConditionalContinuousEffect(
                 new BoostTargetEffect(2, -2, Duration.Custom), SourceTappedCondition.TAPPED,
                 "target creature you control gets +2/-2 for as long as {this} remains tapped"), new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());

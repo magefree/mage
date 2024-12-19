@@ -3,8 +3,7 @@ package mage.cards.g;
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.EntersBattlefieldWithXCountersEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -23,8 +22,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class GoldveinHydra extends CardImpl {
-
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
 
     public GoldveinHydra(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{X}{G}");
@@ -49,7 +46,7 @@ public final class GoldveinHydra extends CardImpl {
 
         // When Goldvein Hydra dies, create a number of tapped Treasure tokens equal to its power.
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(
-                new TreasureToken(), xValue, true, false
+                new TreasureToken(), SourcePermanentPowerValue.NOT_NEGATIVE, true, false
         ).setText("create a number of tapped Treasure tokens equal to its power")));
     }
 

@@ -27,7 +27,7 @@ public class PrototypeAbility extends SpellAbility {
         this.setSpellAbilityCastMode(SpellAbilityCastMode.PROTOTYPE);
         this.setTiming(TimingRule.SORCERY);
         this.addSubAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD, new PrototypeEffect(power, toughness, manaString)
+                new PrototypeEffect(power, toughness, manaString)
         ).setRuleVisible(false));
         this.rule = "Prototype " + manaString + " &mdash; " + power + "/" + toughness +
                 " <i>(You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)</i>";

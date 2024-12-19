@@ -1,7 +1,7 @@
 package mage.cards.g;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandFromGraveyardAllEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -43,8 +43,7 @@ public final class Gleancrawler extends CardImpl {
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new ReturnToHandFromGraveyardAllEffect(filter, TargetController.YOU)
                         .setText("return to your hand all creature cards in your graveyard " +
-                                "that were put there from the battlefield this turn"),
-                TargetController.YOU, false
+                                "that were put there from the battlefield this turn")
         ), new CardsPutIntoGraveyardWatcher());
     }
 

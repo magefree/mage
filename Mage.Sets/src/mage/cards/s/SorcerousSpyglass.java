@@ -31,7 +31,7 @@ public final class SorcerousSpyglass extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseACardNameEffect(ChooseACardNameEffect.TypeOfName.ALL, true)));
 
         // Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SorcerousSpyglassActivationEffect()));
+        this.addAbility(new SimpleStaticAbility(new SorcerousSpyglassActivationEffect()));
     }
 
     private SorcerousSpyglass(final SorcerousSpyglass card) {

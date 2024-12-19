@@ -39,7 +39,7 @@ public final class CopperhoofVorrac extends CardImpl {
 
         // Copperhoof Vorrac gets +1/+1 for each untapped permanent your opponents control.
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
     }
 
     private CopperhoofVorrac(final CopperhoofVorrac card) {

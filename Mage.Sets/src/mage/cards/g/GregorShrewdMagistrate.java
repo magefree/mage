@@ -2,8 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.keyword.SkulkAbility;
 import mage.cards.CardImpl;
@@ -19,8 +18,6 @@ import java.util.UUID;
  */
 public final class GregorShrewdMagistrate extends CardImpl {
 
-    private static final DynamicValue xValue = new SourcePermanentPowerCount(false);
-
     public GregorShrewdMagistrate(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{W}{U}");
 
@@ -35,7 +32,7 @@ public final class GregorShrewdMagistrate extends CardImpl {
 
         // Whenever Glenn deals combat damage to a player, draw cards equal to his power.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DrawCardSourceControllerEffect(xValue).setText("draw cards equal to its power"), false
+                new DrawCardSourceControllerEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("draw cards equal to its power"), false
         ));
     }
 

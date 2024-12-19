@@ -38,7 +38,6 @@ public final class BomatCourier extends CardImpl {
 
         // {R}, Discard your hand, Sacrifice Bomat Courier: Put all cards exiled with Bomat Courier into their owners' hands.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new ReturnFromExileForSourceEffect(Zone.HAND).withText(true, true, true),
                 new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new DiscardHandCost());

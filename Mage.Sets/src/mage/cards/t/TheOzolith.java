@@ -1,9 +1,8 @@
 package mage.cards.t;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldAllTriggeredAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCountersCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -12,7 +11,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.filter.StaticFilters;
@@ -40,7 +38,7 @@ public final class TheOzolith extends CardImpl {
         // At the beginning of combat on your turn, if The Ozolith has counters on it, you may move all counters from The Ozolith onto target creature.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new TheOzolithMoveCountersEffect(), TargetController.YOU, true
+                        new TheOzolithMoveCountersEffect(), true
                 ), SourceHasCountersCondition.instance, "At the beginning of combat on your turn, " +
                 "if {this} has counters on it, you may move all counters from {this} onto target creature."
         );

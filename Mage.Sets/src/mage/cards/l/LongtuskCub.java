@@ -31,7 +31,7 @@ public final class LongtuskCub extends CardImpl {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new GetEnergyCountersControllerEffect(2), false));
 
         // Pay {E}{E}: Put a +1/+1 counter on Longtusk Cub.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new PayEnergyCost(2)));
+        this.addAbility(new SimpleActivatedAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new PayEnergyCost(2)));
     }
 
     private LongtuskCub(final LongtuskCub card) {

@@ -1,5 +1,7 @@
 package mage.client.dialog;
 
+import mage.client.cards.BigCard;
+import mage.client.components.MageTextArea;
 import mage.constants.ColoredManaSymbol;
 import mage.util.MultiAmountMessage;
 
@@ -11,20 +13,24 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
  * Game GUI: dialog to distribute values between multiple items
  * (used for some cards and add lands in cheat menu, search by MultiAmountMessage)
  *
- * @author weirddan455
+ * @author weirddan455, JayDi85
  */
 public class PickMultiNumberDialog extends MageDialog {
 
     private boolean cancel;
     private PickMultiNumberCallback callback = null;
+
+    private UUID gameId = null;
+    private BigCard bigCard = null;
     
-    private List<JLabel> labelList = null;
+    private List<MageTextArea> infoList = null;
     private List<JSpinner> spinnerList = null;
 
     public PickMultiNumberDialog() {
@@ -34,6 +40,11 @@ public class PickMultiNumberDialog extends MageDialog {
 
     public interface PickMultiNumberCallback {
         void onChoiceDone();
+    }
+
+    public void init(UUID gameId, BigCard bigCard) {
+        this.gameId = gameId;
+        this.bigCard = bigCard;
     }
 
     public void showDialog(List<MultiAmountMessage> messages, int min, int max, Map<String, Serializable> options, PickMultiNumberCallback callback) {
@@ -46,9 +57,10 @@ public class PickMultiNumberDialog extends MageDialog {
         boolean canCancel = options.get("canCancel") != null && (boolean) options.get("canCancel");
         btnCancel.setVisible(canCancel);
 
-        if (labelList != null) {
-            for (JLabel label : labelList) {
-                jPanel1.remove(label);
+        // clean
+        if (infoList != null) {
+            for (MageTextArea info : infoList) {
+                jPanel1.remove(info);
             }
         }
         if (spinnerList != null) {
@@ -56,14 +68,15 @@ public class PickMultiNumberDialog extends MageDialog {
                 jPanel1.remove(spinner);
             }
         }
+
         int size = messages.size();
-        labelList = new ArrayList<>(size);
+        infoList = new ArrayList<>(size);
         spinnerList = new ArrayList<>(size);
         jPanel1.setLayout(new GridBagLayout());
-        GridBagConstraints labelC = new GridBagConstraints();
-        GridBagConstraints spinnerC = new GridBagConstraints();
         for (int i = 0; i < size; i++) {
-            JLabel label = new JLabel();
+            MageTextArea info = new MageTextArea();
+            info.enableTextLabelMode();
+            info.setGameData(this.gameId, this.bigCard);
 
             // mana mode
             String manaText = null;
@@ -86,24 +99,23 @@ public class PickMultiNumberDialog extends MageDialog {
                     break;
             }
             if (manaText != null) {
-                label.setText("<html>" + manaText);
-                Image image = ManaSymbols.getSizedManaSymbol(input);
-                if (image != null) {
-                    label.setIcon(new ImageIcon(image));
-                }
+                // mana mode
+                info.setText("{" + input + "}" + "&nbsp;" + manaText);
             } else {
                 // text mode
-                label.setText("<html>" + ManaSymbols.replaceSymbolsWithHTML(input, ManaSymbols.Type.DIALOG));
+                info.setText(input);
             }
 
-            labelC.weightx = 0.5;
-            labelC.gridx = 0;
-            labelC.gridy = i;
-            jPanel1.add(label, labelC);
-            labelList.add(label);
+            GridBagConstraints infoC = new GridBagConstraints();
+            infoC.weightx = 0.5;
+            infoC.gridx = 0;
+            infoC.gridy = i;
+            jPanel1.add(info, infoC);
+            infoList.add(info);
 
             JSpinner spinner = new JSpinner();
             spinner.setModel(new SpinnerNumberModel(messages.get(i).defaultValue, messages.get(i).min, messages.get(i).max, 1));
+            GridBagConstraints spinnerC = new GridBagConstraints();
             spinnerC.weightx = 0.5;
             spinnerC.gridx = 1;
             spinnerC.gridy = i;

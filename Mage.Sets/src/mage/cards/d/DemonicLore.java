@@ -1,6 +1,6 @@
 package mage.cards.d;
 
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
@@ -10,7 +10,6 @@ import mage.abilities.effects.common.LoseLifeSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -30,8 +29,7 @@ public final class DemonicLore extends CardImpl {
         // At the beginning of your end step, you lose 2 life for each card in your hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
                 new LoseLifeSourceControllerEffect(xValue)
-                        .setText("you lose 2 life for each card in your hand"),
-                TargetController.YOU, false
+                        .setText("you lose 2 life for each card in your hand")
         ));
     }
 

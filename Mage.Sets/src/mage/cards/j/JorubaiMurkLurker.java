@@ -43,12 +43,12 @@ public final class JorubaiMurkLurker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Jorubai Murk Lurker gets +1/+1 as long as you control a Swamp.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield),
                 new PermanentsOnTheBattlefieldCondition(filter), rule)));
 
         // {1}{B}: Target creature gains lifelink until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new SimpleActivatedAbility(
                 new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

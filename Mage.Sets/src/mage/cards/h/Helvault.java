@@ -27,13 +27,13 @@ public final class Helvault extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // {1}, {T}: Exile target creature you control.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new GenericManaCost(1));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
 
         // {7}, {T}: Exile target creature you don't control.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect(), new GenericManaCost(7));
+        ability = new SimpleActivatedAbility(new ExileTargetForSourceEffect(), new GenericManaCost(7));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(StaticFilters.FILTER_CREATURE_YOU_DONT_CONTROL));
         this.addAbility(ability);

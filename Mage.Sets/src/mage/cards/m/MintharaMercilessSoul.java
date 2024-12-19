@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.dynamicvalue.common.SourceControllerCountersCount;
@@ -39,8 +39,8 @@ public final class MintharaMercilessSoul extends CardImpl {
 
         // At the beginning of your end step, if a permanent you controlled left the battlefield this turn, you get an experience counter.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new AddCountersPlayersEffect(CounterType.EXPERIENCE.createInstance(), TargetController.YOU),
-                TargetController.YOU, RevoltCondition.instance, false
+                TargetController.YOU, new AddCountersPlayersEffect(CounterType.EXPERIENCE.createInstance(), TargetController.YOU),
+                false, RevoltCondition.instance
         ).addHint(RevoltCondition.getHint()), new RevoltWatcher());
 
         // Creatures you control get +1/+0 for each experience counter you have.

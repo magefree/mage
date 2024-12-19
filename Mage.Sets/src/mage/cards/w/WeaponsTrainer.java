@@ -39,7 +39,7 @@ public final class WeaponsTrainer extends CardImpl {
         // Other creatures you control get +1/+0 as long as you control an Equipment.
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, true),
                 new PermanentsOnTheBattlefieldCondition(filter), rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private WeaponsTrainer(final WeaponsTrainer card) {

@@ -25,7 +25,7 @@ public final class TrainedPronghorn extends CardImpl {
         this.toughness = new MageInt(1);
 
         //Discard a card: Prevent all damage that would be dealt to Trained Pronghorn this turn
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventAllDamageToSourceEffect(Duration.EndOfTurn), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(new PreventAllDamageToSourceEffect(Duration.EndOfTurn), new DiscardCardCost()));
 
     }
 
@@ -38,5 +38,3 @@ public final class TrainedPronghorn extends CardImpl {
         return new TrainedPronghorn(this);
     }
 }
-
-

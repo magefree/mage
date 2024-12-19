@@ -41,7 +41,7 @@ public final class Lifespinner extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {t}, Sacrifice three Spirits: Search your library for a legendary Spirit permanent card and put it onto the battlefield. Then shuffle your library.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)),
                 new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(3, filterSac));

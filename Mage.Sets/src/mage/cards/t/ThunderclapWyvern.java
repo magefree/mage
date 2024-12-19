@@ -44,7 +44,7 @@ public final class ThunderclapWyvern extends CardImpl {
         // Other creatures you control with flying get +1/+1.
         Effect effect = new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true);
         effect.setText("Other creatures you control with flying get +1/+1");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
 
     }
 

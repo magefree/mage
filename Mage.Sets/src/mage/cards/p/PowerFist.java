@@ -26,7 +26,7 @@ public final class PowerFist extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has trample and "Whenever this creature deals combat damage to a player, put that many +1/+1 counters on it."
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT));
+        Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(TrampleAbility.getInstance(), AttachmentType.EQUIPMENT));
         ability.addEffect(new GainAbilityAttachedEffect(
                 new DealsCombatDamageToAPlayerTriggeredAbility(new AddCountersSourceEffect(
                         CounterType.P1P1.createInstance(), SavedDamageValue.MANY, false

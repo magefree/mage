@@ -3,7 +3,7 @@ package mage.cards.e;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -13,7 +13,6 @@ import mage.abilities.effects.common.combat.CantAttackYouAllEffect;
 import mage.abilities.hint.ValueHint;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.EnchantedBySourceControllerPredicate;
@@ -49,7 +48,7 @@ public final class ErietteOfTheCharmedApple extends CardImpl {
 
         // At the beginning of your end step, each opponent loses X life and you gain X life, where X is the number of Auras you control.
         Ability ability = new BeginningOfEndStepTriggeredAbility(new LoseLifeOpponentsEffect(count)
-                .setText("each opponent loses X life"), TargetController.YOU, false);
+                .setText("each opponent loses X life"));
         ability.addEffect(new GainLifeEffect(count)
                 .setText("and you gain X life, where X is the number of Auras you control"));
         ability.addHint(new ValueHint("Number of Auras you control", count));

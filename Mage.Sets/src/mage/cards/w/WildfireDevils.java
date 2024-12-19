@@ -2,7 +2,7 @@ package mage.cards.w;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.meta.OrTriggeredAbility;
@@ -36,7 +36,7 @@ public final class WildfireDevils extends CardImpl {
                 Zone.BATTLEFIELD, new WildfireDevilsEffect(), false,
                 "When {this} enters and at the beginning of your upkeep, ",
                 new EntersBattlefieldTriggeredAbility(null, false),
-                new BeginningOfUpkeepTriggeredAbility(null, TargetController.YOU, false)
+                new BeginningOfUpkeepTriggeredAbility(null)
         ));
     }
 

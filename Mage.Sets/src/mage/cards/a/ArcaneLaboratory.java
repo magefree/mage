@@ -21,7 +21,7 @@ public final class ArcaneLaboratory extends CardImpl {
 
 
         // Each player can't cast more than one spell each turn.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCastMoreThanOneSpellEffect(TargetController.ANY)));
+        this.addAbility(new SimpleStaticAbility(new CantCastMoreThanOneSpellEffect(TargetController.ANY)));
     }
 
     private ArcaneLaboratory(final ArcaneLaboratory card) {

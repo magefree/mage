@@ -36,7 +36,7 @@ public final class BitterFeud extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new BitterFeudEntersBattlefieldEffect()));
 
         // If a source controlled by one of the chosen players would deal damage to the other chosen player or a permanent that player controls, that source deals double that damage to that player or permanent instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BitterFeudEffect()));
+        this.addAbility(new SimpleStaticAbility(new BitterFeudEffect()));
     }
 
     private BitterFeud(final BitterFeud card) {

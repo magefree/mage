@@ -1,10 +1,10 @@
 
 package mage.cards.f;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.replacement.GraveyardFromAnywhereExileReplacementEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -14,11 +14,10 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
+
+import java.util.UUID;
 
 /**
  *
@@ -30,9 +29,9 @@ public final class ForbiddenCrypt extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{B}{B}");
 
         // If you would draw a card, return a card from your graveyard to your hand instead. If you can't, you lose the game.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ForbiddenCryptDrawCardReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new ForbiddenCryptDrawCardReplacementEffect()));
         // If a card would be put into your graveyard from anywhere, exile that card instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ForbiddenCryptPutIntoYourGraveyardReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new GraveyardFromAnywhereExileReplacementEffect(true, false)));
     }
 
     private ForbiddenCrypt(final ForbiddenCrypt card) {
@@ -94,49 +93,6 @@ class ForbiddenCryptDrawCardReplacementEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return event.getPlayerId().equals(source.getControllerId());
-    }
-
-}
-
-class ForbiddenCryptPutIntoYourGraveyardReplacementEffect extends ReplacementEffectImpl {
-
-    ForbiddenCryptPutIntoYourGraveyardReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        this.staticText = "If a card would be put into your graveyard from anywhere, exile that card instead";
-    }
-
-    private ForbiddenCryptPutIntoYourGraveyardReplacementEffect(final ForbiddenCryptPutIntoYourGraveyardReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ForbiddenCryptPutIntoYourGraveyardReplacementEffect copy() {
-        return new ForbiddenCryptPutIntoYourGraveyardReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
-            Card card = game.getCard(event.getTargetId());
-            if (card != null && card.isOwnedBy(source.getControllerId())) {
-                Permanent permanent = ((ZoneChangeEvent) event).getTarget();
-                if (!(permanent instanceof PermanentToken)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
 }

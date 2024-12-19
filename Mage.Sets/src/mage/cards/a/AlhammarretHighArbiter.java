@@ -40,7 +40,7 @@ public final class AlhammarretHighArbiter extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
         // As Alhammarret, High Arbiter enters the battlefield, each opponent reveals their hand. You choose the name of a nonland card revealed this way.
         // Your opponents can't cast spells with the chosen name.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new AlhammarretHighArbiterEffect(), "")));
+        this.addAbility(new SimpleStaticAbility(new EntersBattlefieldEffect(new AlhammarretHighArbiterEffect(), "")));
     }
 
     private AlhammarretHighArbiter(final AlhammarretHighArbiter card) {

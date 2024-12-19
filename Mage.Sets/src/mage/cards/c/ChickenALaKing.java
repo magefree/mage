@@ -46,7 +46,7 @@ public final class ChickenALaKing extends CardImpl {
         this.addAbility(new ChickenALaKingTriggeredAbility());
 
         // Tap an untapped Bird you control: Roll a six-sided die.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RollDiceEffect(6), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
+        this.addAbility(new SimpleActivatedAbility(new RollDiceEffect(6), new TapTargetCost(new TargetControlledPermanent(1, 1, filter, false))));
     }
 
     private ChickenALaKing(final ChickenALaKing card) {

@@ -33,10 +33,10 @@ public final class GravitationalShift extends CardImpl {
 
 
         // Creatures with flying get +2/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, filter1, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, filter1, false)));
 
         // Creatures without flying get -2/-0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-2, 0, Duration.WhileOnBattlefield, filter2, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(-2, 0, Duration.WhileOnBattlefield, filter2, false)));
     }
 
     private GravitationalShift(final GravitationalShift card) {

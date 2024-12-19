@@ -28,12 +28,12 @@ public final class SenateGuildmage extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {W}, {T}: You gain 2 life.
-        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new ManaCostsImpl<>("{W}"));
+        Ability ability1 = new SimpleActivatedAbility(new GainLifeEffect(2), new ManaCostsImpl<>("{W}"));
         ability1.addCost(new TapSourceCost());
         this.addAbility(ability1);
 
         // {U}, {T}: Draw a card, then discard a card.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new ManaCostsImpl<>("{U}"));
+        Ability ability2 = new SimpleActivatedAbility(new DrawDiscardControllerEffect(), new ManaCostsImpl<>("{U}"));
         ability2.addCost(new TapSourceCost());
         this.addAbility(ability2);
     }

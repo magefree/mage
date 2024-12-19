@@ -31,7 +31,7 @@ public final class BloodshedFever extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature attacks each turn if able.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new AttacksIfAbleAttachedEffect(Duration.WhileOnBattlefield, AttachmentType.AURA)));
     }
 

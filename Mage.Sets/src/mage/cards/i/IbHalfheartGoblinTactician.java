@@ -53,7 +53,6 @@ public final class IbHalfheartGoblinTactician extends CardImpl {
 
         // Sacrifice two Mountains: Create two 1/1 red Goblin creature tokens.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new CreateTokenEffect(new GoblinToken(), 2),
                 new SacrificeTargetCost(2, filter)));
 

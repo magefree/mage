@@ -38,7 +38,7 @@ public final class MartyrsOfKorlis extends CardImpl {
                 SourceTappedCondition.UNTAPPED,
                 null);
         effect.setText("{this} redirects artifact damage from controller as long as it's untapped");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private MartyrsOfKorlis(final MartyrsOfKorlis card) {

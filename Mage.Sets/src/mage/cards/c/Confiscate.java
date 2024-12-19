@@ -34,7 +34,7 @@ public final class Confiscate extends CardImpl {
         this.addAbility(ability);
 
         // You control enchanted permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect("permanent")));
+        this.addAbility(new SimpleStaticAbility(new ControlEnchantedEffect("permanent")));
     }
 
     private Confiscate(final Confiscate card) {

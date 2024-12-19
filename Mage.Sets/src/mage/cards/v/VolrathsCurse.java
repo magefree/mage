@@ -44,13 +44,13 @@ public final class VolrathsCurse extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block, and its activated abilities can't be activated. That creature's controller may sacrifice a permanent for that player to ignore this effect until end of turn.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new VolrathsCurseRestrictionEffect());
+        ability = new SimpleStaticAbility(new VolrathsCurseRestrictionEffect());
         ability.addEffect(new VolrathsCurseCantActivateAbilitiesEffect());
         this.addAbility(ability);
         this.addAbility(new VolrathsCurseSpecialAction());
 
         // {1}{U}: Return Volrath's Curse to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(new ReturnToHandSourceEffect(true), new ManaCostsImpl<>("{1}{U}")));
 
     }
 

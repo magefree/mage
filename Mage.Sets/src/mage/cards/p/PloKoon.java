@@ -29,7 +29,7 @@ public final class PloKoon extends CardImpl {
         this.toughness = new MageInt(4);
 
         // You may activate meditate abilities any time you could cast an instant.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(MeditateAbility.class, "meditate abilities")));
+        this.addAbility(new SimpleStaticAbility(new ActivateAbilitiesAnyTimeYouCouldCastInstantEffect(MeditateAbility.class, "meditate abilities")));
 
         // Meditate {1}{W}
         this.addAbility(new MeditateAbility(new ManaCostsImpl<>("{1}{W}")));

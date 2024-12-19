@@ -42,7 +42,7 @@ public final class CowedByWisdom extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block unless its controller pays {1} for each card in your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CowedByWisdomayCostToAttackBlockEffect()));
+        this.addAbility(new SimpleStaticAbility(new CowedByWisdomayCostToAttackBlockEffect()));
     }
 
     private CowedByWisdom(final CowedByWisdom card) {

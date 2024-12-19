@@ -35,10 +35,10 @@ public final class HedgeTroll extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Hedge Troll gets +1/+1 as long as you control a Plains.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceWhileControlsEffect(filter, 1, 1)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceWhileControlsEffect(filter, 1, 1)));
         
         // {W}: Regenerate Hedge Troll.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{W}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{W}")));
     }
 
     private HedgeTroll(final HedgeTroll card) {

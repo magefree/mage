@@ -1,5 +1,6 @@
 package mage.cards.g;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -10,6 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPlayer;
@@ -52,7 +54,7 @@ public final class GrievousWound extends CardImpl {
     }
 }
 
-class GrievousWoundTriggeredAbility extends TriggeredAbilityImpl {
+class GrievousWoundTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     GrievousWoundTriggeredAbility() {
         super(Zone.BATTLEFIELD, new LoseHalfLifeTargetEffect().setText("they lose half their life, rounded up"));

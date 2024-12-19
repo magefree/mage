@@ -44,7 +44,6 @@ public final class UrbanUtopia extends CardImpl {
 
         // Enchanted land has "{T}: Add one mana of any color."
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityAttachedEffect(
                         new AnyColorManaAbility(), AttachmentType.AURA
                 ).setText("Enchanted land has "

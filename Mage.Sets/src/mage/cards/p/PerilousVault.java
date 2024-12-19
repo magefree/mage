@@ -25,7 +25,6 @@ public final class PerilousVault extends CardImpl {
 
         // {5}, {T}, Exile Perilous Vault: Exile all nonland permanents.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new ExileAllEffect(StaticFilters.FILTER_PERMANENTS_NON_LAND),
                 new GenericManaCost(5)
         );

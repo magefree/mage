@@ -41,7 +41,7 @@ public final class StrengthOfLunacy extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
         // Enchanted creature gets +2/+1 and has protection from white.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(ProtectionAbility.from(ObjectColor.WHITE), AttachmentType.AURA);
         effect.setText("and has protection from white");
         ability.addEffect(effect);

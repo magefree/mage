@@ -35,7 +35,7 @@ public final class FortuneThief extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Damage that would reduce your life total to less than 1 reduces it to 1 instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FortuneThiefReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new FortuneThiefReplacementEffect()));
         // Morph {R}{R}
         this.addAbility(new MorphAbility(this, new ManaCostsImpl<>("{R}{R}")));
     }

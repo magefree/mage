@@ -27,7 +27,7 @@ public final class RavenousBloodseeker extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Discard a card: Ravenous Bloodseeker gets +2/-2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -2, Duration.EndOfTurn), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(2, -2, Duration.EndOfTurn), new DiscardCardCost()));
     }
 
     private RavenousBloodseeker(final RavenousBloodseeker card) {

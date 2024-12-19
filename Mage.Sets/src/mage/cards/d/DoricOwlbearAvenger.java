@@ -2,7 +2,7 @@ package mage.cards.d;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.TransformIntoSourceTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
@@ -54,7 +54,7 @@ public final class DoricOwlbearAvenger extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, transform Doric.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect()));
     }
 
     private DoricOwlbearAvenger(final DoricOwlbearAvenger card) {

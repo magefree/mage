@@ -1,4 +1,3 @@
-
 package mage.cards.r;
 
 import java.util.Collections;
@@ -114,6 +113,8 @@ class RicochetEffect extends OneShotEffect {
                     playerRolls.put(player, 7);
                 }
             }
+
+            // roll until only 1 min result
             do {
                 for (Player player : playerRolls.keySet()) {
                     playerRolls.put(player, player.rollDice(Outcome.Detriment, source, game, 6)); // bad outcome - ai must choose lowest value

@@ -39,7 +39,6 @@ public final class PhyrexianBoon extends CardImpl {
 
         // Enchanted creature gets +2/+1 as long as it's black. Otherwise, it gets -1/-2.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new BoostEnchantedEffect(2, 1),
                         new BoostEnchantedEffect(-1, -2),

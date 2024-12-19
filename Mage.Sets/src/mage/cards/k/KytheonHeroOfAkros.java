@@ -6,7 +6,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.Pronoun;
+import mage.constants.Pronoun;
 import mage.abilities.common.EndOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
@@ -46,7 +46,7 @@ public final class KytheonHeroOfAkros extends CardImpl {
                 + "then return him to the battlefield transformed under his owner's control."), new AttackedOrBlockedThisCombatWatcher());
 
         // {2}{W}: Kytheon gains indestructible until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{W}")));
 
     }
 

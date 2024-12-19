@@ -36,7 +36,7 @@ public final class KitsuneDiviner extends CardImpl {
         this.toughness = new MageInt(1);
         
         // {T}: Tap target Spirit.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

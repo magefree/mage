@@ -82,7 +82,7 @@ public class ManifestEffect extends OneShotEffect {
         this(amount, isPlural, false);
     }
 
-    private ManifestEffect(DynamicValue amount, boolean isPlural, boolean cloakNotManifest) {
+    public ManifestEffect(DynamicValue amount, boolean isPlural, boolean cloakNotManifest) {
         super(Outcome.PutCreatureInPlay);
         this.amount = amount;
         this.isPlural = isPlural;

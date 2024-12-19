@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.DescendedThisTurnCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -10,7 +10,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.DescendedThisTurnCount;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MenaceAbility;
@@ -30,7 +30,7 @@ import java.util.UUID;
  */
 public final class StalactiteStalker extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(new SourcePermanentPowerCount(), -1);
+    private static final DynamicValue xValue = new MultipliedValue(SourcePermanentPowerValue.NOT_NEGATIVE, -1);
 
     public StalactiteStalker(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
@@ -45,8 +45,8 @@ public final class StalactiteStalker extends CardImpl {
 
         // At the beginning of your end step, if you descended this turn, put a +1/+1 counter on Stalactite Stalker.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
-                TargetController.YOU, DescendedThisTurnCondition.instance, false
+                TargetController.YOU, new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                false, DescendedThisTurnCondition.instance
         ).addHint(DescendedThisTurnCount.getHint()), new DescendedWatcher());
 
         // {2}{B}, Sacrifice Stalactite Stalker: Target creature gets -X/-X until end of turn, where X is Stalactite Stalker's power.

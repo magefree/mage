@@ -2,7 +2,7 @@ package mage.cards.m;
 
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ModeChoiceSourceCondition;
@@ -36,12 +36,12 @@ public final class MonasterySiege extends CardImpl {
 
         // * Khans - At the beginning of your draw step, draw an additional card, then discard a card.
         this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfDrawTriggeredAbility(new DrawDiscardControllerEffect(1, 1), TargetController.YOU, false),
+                new BeginningOfDrawTriggeredAbility(new DrawDiscardControllerEffect(1, 1), false),
                 new ModeChoiceSourceCondition("Khans"),
                 "&bull; Khans &mdash; At the beginning of your draw step, draw an additional card, then discard a card."));
 
         // * Dragons - Spells your opponents cast that target you or a permanent you control cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MonasterySiegeCostIncreaseEffect()));
+        this.addAbility(new SimpleStaticAbility(new MonasterySiegeCostIncreaseEffect()));
     }
 
     private MonasterySiege(final MonasterySiege card) {
@@ -56,7 +56,7 @@ public final class MonasterySiege extends CardImpl {
 
 class MonasterySiegeCostIncreaseEffect extends CostModificationEffectImpl {
 
-    private static ModeChoiceSourceCondition modeDragons = new ModeChoiceSourceCondition("Dragons");
+    private static final ModeChoiceSourceCondition modeDragons = new ModeChoiceSourceCondition("Dragons");
 
     MonasterySiegeCostIncreaseEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
@@ -100,7 +100,6 @@ class MonasterySiegeCostIncreaseEffect extends CostModificationEffectImpl {
             if (allTargets.stream().anyMatch(target -> !isTargetCompatible(target, source, game))) {
                 return false;
             }
-            ;
         }
 
         return allTargets.stream().anyMatch(target -> isTargetCompatible(target, source, game));

@@ -27,7 +27,7 @@ public final class SinewSliver extends CardImpl {
         this.toughness = new MageInt(1);
 
         // All Sliver creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.SLIVER, "All Sliver creatures"), false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(SubType.SLIVER, "All Sliver creatures"), false)));
     }
 
     private SinewSliver(final SinewSliver card) {

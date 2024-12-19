@@ -32,7 +32,7 @@ public final class Edgewalker extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Cleric spells you cast cost {W}{B} less to cast. This effect reduces only the amount of colored mana you pay.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, new ManaCostsImpl<>("{W}{B}"))));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, new ManaCostsImpl<>("{W}{B}"))));
     }
 
     private Edgewalker(final Edgewalker card) {

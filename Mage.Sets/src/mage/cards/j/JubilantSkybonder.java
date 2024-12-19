@@ -41,7 +41,7 @@ public final class JubilantSkybonder extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Creatures you control with flying have "Spells your opponents cast that target this creature cost {2} more to cast."
-        Ability gainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD,
+        Ability gainAbility = new SimpleStaticAbility(
                 new SpellsCostModificationThatTargetSourceEffect(2, new FilterCard("Spells"), TargetController.OPPONENT)
                         .withTargetName("this creature")
         );

@@ -34,7 +34,7 @@ public final class LlanowarDruid extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {tap}, Sacrifice Llanowar Druid: Untap all Forests.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new LlanowarDruidEffect(),
                 new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

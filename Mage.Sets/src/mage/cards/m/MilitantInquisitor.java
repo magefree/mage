@@ -36,7 +36,7 @@ public final class MilitantInquisitor extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Miltant Inquisitor gets +1/+0 for each Equipment you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(new PermanentsOnBattlefieldCount(filter), StaticValue.get(0), Duration.WhileOnBattlefield)));
     }
 
     private MilitantInquisitor(final MilitantInquisitor card) {

@@ -24,7 +24,7 @@ public final class DictateOfHeliod extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // Creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2,2,Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(2,2,Duration.WhileOnBattlefield)));
     }
 
     private DictateOfHeliod(final DictateOfHeliod card) {

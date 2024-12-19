@@ -173,12 +173,12 @@ class HedonistsTroveWatcher extends Watcher {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() != GameEvent.EventType.SPELL_CAST
-                || event.getAdditionalReference() == null) {
+                || event.getApprovingObject() == null) {
             return;
         }
         playerMap
                 .computeIfAbsent(event.getPlayerId(), x -> new HashSet<>())
-                .add(event.getAdditionalReference().getApprovingMageObjectReference());
+                .add(event.getApprovingObject().getApprovingMageObjectReference());
         playerMap.get(event.getPlayerId()).removeIf(Objects::isNull);
     }
 

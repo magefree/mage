@@ -2,7 +2,7 @@ package mage.cards.o;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -40,8 +40,8 @@ public final class ObliviousBookworm extends CardImpl {
         this.toughness = new MageInt(3);
 
         // At the beginning of your end step, you may draw a card. If you do, discard a card unless a permanent entered the battlefield face down under your control this turn or you turned a permanent face up this turn.
-        Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1), TargetController.YOU, true
+        Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.YOU,
+                new DrawCardSourceControllerEffect(1), true
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new DiscardControllerEffect(1), ObliviousBookwormCondition.instance, "If you do, discard " +

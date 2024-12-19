@@ -30,7 +30,6 @@ public final class AmuletOfSafekeeping extends CardImpl {
 
         // Creature tokens get -1/-0.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostAllEffect(
                         -1, 0, Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_CREATURE_TOKENS, false

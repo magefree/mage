@@ -34,7 +34,7 @@ public final class BenevolentUnicorn extends CardImpl {
         this.toughness = new MageInt(2);
 
         // If a spell would deal damage to a permanent or player, it deals that much damage minus 1 to that permanent or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BenevolentUnicornEffect()));
+        this.addAbility(new SimpleStaticAbility(new BenevolentUnicornEffect()));
     }
 
     private BenevolentUnicorn(final BenevolentUnicorn card) {

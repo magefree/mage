@@ -24,7 +24,7 @@ public final class SongOfSerenity extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
 
         // Creatures that are enchanted can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SongOfSerenityRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(new SongOfSerenityRestrictionEffect()));
 
     }
 

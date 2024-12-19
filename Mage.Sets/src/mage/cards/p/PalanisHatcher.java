@@ -2,7 +2,7 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.DinosaurEggToken;
@@ -54,8 +53,7 @@ public final class PalanisHatcher extends CardImpl {
         // At the beginning of combat on your turn, if you control one or more Eggs, sacrifice an Egg, then create a 3/3 green Dinosaur creature token.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfCombatTriggeredAbility(
-                        new SacrificeControllerEffect(filterEgg, 1, ""),
-                        TargetController.YOU, false
+                        new SacrificeControllerEffect(filterEgg, 1, "")
                 ), new PermanentsOnTheBattlefieldCondition(filterEgg),
                 "At the beginning of combat on your turn, if you control one or more Eggs, "
                         + "sacrifice an Egg, then create a 3/3 green Dinosaur creature token."

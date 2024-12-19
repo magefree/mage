@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -33,7 +33,7 @@ public final class AsylumVisitor extends CardImpl {
 
         // At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1, true), TargetController.ANY, false),
+                new BeginningOfUpkeepTriggeredAbility(TargetController.ANY, new DrawCardSourceControllerEffect(1, true), false),
                 new CardsInHandCondition(ComparisonType.EQUAL_TO, 0, TargetController.ACTIVE),
                 "At the beginning of each player's upkeep, if that player has no cards in hand, you draw a card and you lose 1 life.");
         Effect effect = new LoseLifeSourceControllerEffect(1);

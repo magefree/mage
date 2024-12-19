@@ -33,7 +33,7 @@ public final class AccursedWitch extends CardImpl {
         this.secondSideCardClazz = mage.cards.i.InfectiousCurse.class;
 
         // Spells your opponents cast that target Accursed Witch cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new SpellsCostModificationThatTargetSourceEffect(-1, new FilterCard("Spells"), TargetController.OPPONENT))
         );
 

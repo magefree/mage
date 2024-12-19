@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MyTurnCondition;
@@ -60,7 +60,7 @@ public final class BlacksmithsTalent extends CardImpl {
 
         // At the beginning of combat on your turn, attach target Equipment you control to up to one target creature you control.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new BlacksmithsTalentEffect(), TargetController.YOU, false
+                new BlacksmithsTalentEffect()
         );
         ability.addTarget(new TargetPermanent(filter));
         ability.addTarget(new TargetControlledCreaturePermanent(0, 1));

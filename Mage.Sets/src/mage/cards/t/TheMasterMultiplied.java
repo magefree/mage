@@ -46,7 +46,7 @@ public final class TheMasterMultiplied extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LegendRuleDoesntApplyEffect(filter)));
 
         // Triggered abilities you control can't cause you to sacrifice or exile creature tokens you control.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TheMasterMultipliedEffect()));
+        this.addAbility(new SimpleStaticAbility(new TheMasterMultipliedEffect()));
     }
 
     private TheMasterMultiplied(final TheMasterMultiplied card) {

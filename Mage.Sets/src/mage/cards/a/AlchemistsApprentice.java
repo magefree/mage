@@ -27,7 +27,7 @@ public final class AlchemistsApprentice extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Sacrifice Alchemist's Apprentice: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1),
+        this.addAbility(new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1),
                 new SacrificeSourceCost()));
     }
 

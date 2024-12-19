@@ -1,14 +1,12 @@
-
 package mage.cards.w;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -21,8 +19,9 @@ import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.TargetPlayer;
+
+import java.util.UUID;
 
 /**
  *
@@ -45,9 +44,9 @@ public final class WallOfLimbs extends CardImpl {
         this.addAbility(new WallOfLimbsTriggeredAbility());
         
         // {5}{B}{B}, Sacrifice Wall of Limbs: Target player loses X life, where X is Wall of Limbs's power.
-        Effect effect = new LoseLifeTargetEffect(new SourcePermanentPowerCount());
+        Effect effect = new LoseLifeTargetEffect(SourcePermanentPowerValue.NOT_NEGATIVE);
         effect.setText("Target player loses X life, where X is {this}'s power.");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{5}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{5}{B}{B}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

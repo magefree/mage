@@ -33,7 +33,7 @@ public final class LairwatchGiant extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Lairwatch Giant can block an additional creature each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(1)));
+        this.addAbility(new SimpleStaticAbility(new CanBlockAdditionalCreatureEffect(1)));
 
         // Whenever Lairwatch Giant blocks two or more creatures, it gains first strike until end of turn.
         this.addAbility(new LairwatchGiantTriggeredAbility());

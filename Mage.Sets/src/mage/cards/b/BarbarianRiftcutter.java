@@ -29,7 +29,7 @@ public final class BarbarianRiftcutter extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         // {R}, Sacrifice Barbarian Riftcutter: Destroy target land.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ColoredManaCost(ColoredManaSymbol.R));
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);

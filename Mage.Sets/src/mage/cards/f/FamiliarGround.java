@@ -21,7 +21,7 @@ public final class FamiliarGround extends CardImpl {
 
 
         // Each creature you control can't be blocked by more than one creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByMoreThanOneAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE)));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByMoreThanOneAllEffect(StaticFilters.FILTER_CONTROLLED_CREATURE)));
     }
 
     private FamiliarGround(final FamiliarGround card) {

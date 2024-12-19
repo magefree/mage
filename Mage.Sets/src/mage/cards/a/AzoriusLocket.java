@@ -28,7 +28,7 @@ public final class AzoriusLocket extends CardImpl {
         this.addAbility(new BlueManaAbility());
 
         // {W/U}{W/U}{W/U}{W/U}, {T}, Sacrifice Azorius Locket: Draw two cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{W/U}{W/U}{W/U}{W/U}"));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(2), new ManaCostsImpl<>("{W/U}{W/U}{W/U}{W/U}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

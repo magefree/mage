@@ -42,7 +42,7 @@ public final class VisionsOfBrutality extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantBlockAttachedEffect(AttachmentType.AURA)));
 
         // Whenever enchanted creature deals damage, its controller loses that much life.
         this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD, new VisionsOfBrutalityEffect(), false));

@@ -41,12 +41,12 @@ public final class KrovikanSorcerer extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}, Discard a nonblack card: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(filterNonBlack)));
         this.addAbility(ability);
         
         // {tap}, Discard a black card: Draw two cards, then discard one of them.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardOneOfThemEffect(2), new TapSourceCost());
+        ability = new SimpleActivatedAbility(new DrawDiscardOneOfThemEffect(2), new TapSourceCost());
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(filterBlack)));
         this.addAbility(ability);
     }

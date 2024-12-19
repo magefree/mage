@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.condition.common.HateCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -43,7 +43,7 @@ public final class SithMagic extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{U}{B}{R}");
 
         // <i>Hate</i> &mdash; At the beggining of each combat, if opponent lost life from a source other than combat damage this turn, you may return target card from a graveyard to the battlefield under your control. It gains lifelink and haste. Exile it at the beginning of the next end step or if it would leave the battlefield.
-        TriggeredAbility triggeredAbility = new BeginningOfCombatTriggeredAbility(new SithMagicEffect(), TargetController.ANY, true);
+        TriggeredAbility triggeredAbility = new BeginningOfCombatTriggeredAbility(TargetController.ANY, new SithMagicEffect(), true);
         triggeredAbility.addEffect(new SithMagicReplacementEffect());
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,

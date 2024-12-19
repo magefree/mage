@@ -27,7 +27,7 @@ public final class KarplusanYeti extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {T}: Karplusan Yeti deals damage equal to its power to target creature. That creature deals damage equal to its power to Karplusan Yeti.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEachOtherEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageEachOtherEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

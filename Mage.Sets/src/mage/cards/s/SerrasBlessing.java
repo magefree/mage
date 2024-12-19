@@ -23,7 +23,7 @@ public final class SerrasBlessing extends CardImpl {
 
 
         // Creatures you control have vigilance.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))));
     }
 
     private SerrasBlessing(final SerrasBlessing card) {

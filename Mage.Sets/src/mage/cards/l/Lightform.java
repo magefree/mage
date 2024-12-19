@@ -30,7 +30,7 @@ public final class Lightform extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new BecomesAuraAttachToManifestSourceEffect()));
 
         // Enchanted creature has flying and lifelink.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield);
         effect.setText("and lifelink");
         ability.addEffect(effect);
@@ -46,5 +46,3 @@ public final class Lightform extends CardImpl {
         return new Lightform(this);
     }
 }
-
-

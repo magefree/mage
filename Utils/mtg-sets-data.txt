@@ -12,6 +12,7 @@ Alchemy: Dominaria|YDMU|
 Alchemy: Innistrad|Y22|
 Adventures in the Forgotten Realms|AFR|
 Forgotten Realms Commander|AFC|
+Aetherdrift|DFT|
 Aether Revolt|AER|
 Amonkhet|AKH|
 Shards of Alara|ALA|
@@ -112,6 +113,7 @@ Fallen Empires|FEM|
 Friday Night Magic|FNMP|
 Fate Reforged|FRF|
 Foundations|FDN|
+Foundations Jumpstar|J25|
 Future Sight|FUT|
 Global Series: Jiang Yanggu & Mu Yanling|GS1|
 Guildpact|GPT|

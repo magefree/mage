@@ -3,8 +3,7 @@ package mage.cards.w;
 import mage.MageInt;
 import mage.abilities.common.CardsLeaveGraveyardTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -20,8 +19,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class WillowGeist extends CardImpl {
-
-    private static final DynamicValue xValue = new SourcePermanentPowerCount();
 
     public WillowGeist(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{G}");
@@ -41,7 +38,7 @@ public final class WillowGeist extends CardImpl {
 
         // When Willow Geist dies, you gain life equal to its power.
         this.addAbility(new DiesSourceTriggeredAbility(
-                new GainLifeEffect(xValue).setText("you gain life equal to its power")
+                new GainLifeEffect(SourcePermanentPowerValue.NOT_NEGATIVE).setText("you gain life equal to its power")
         ));
     }
 

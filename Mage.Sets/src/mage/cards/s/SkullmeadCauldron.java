@@ -22,11 +22,11 @@ public final class SkullmeadCauldron extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {tap}: You gain 1 life.
-        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new TapSourceCost());
+        Ability ability1 = new SimpleActivatedAbility(new GainLifeEffect(1), new TapSourceCost());
         this.addAbility(ability1);
         
         // {tap}, Discard a card: You gain 3 life.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new TapSourceCost());
+        Ability ability2 = new SimpleActivatedAbility(new GainLifeEffect(3), new TapSourceCost());
         ability2.addCost(new DiscardCardCost());
         this.addAbility(ability2);
     }

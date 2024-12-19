@@ -36,7 +36,7 @@ public final class GhastlordOfFugue extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ghastlord of Fugue can't be blocked.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new CantBeBlockedSourceEffect(Duration.WhileOnBattlefield)));
 
         // Whenever Ghastlord of Fugue deals combat damage to a player, 

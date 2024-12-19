@@ -34,10 +34,10 @@ public final class AshlingsPrerogative extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Odd or even?", "Odd", "Even"), null, "As {this} enters, choose odd or even. <i>(Zero is even.)</i>", ""));
 
         // Each creature with converted mana cost of the chosen value has haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AshlingsPrerogativeCorrectOddityEffect()));
+        this.addAbility(new SimpleStaticAbility(new AshlingsPrerogativeCorrectOddityEffect()));
 
         // Each creature without converted mana cost of the chosen value enters the battlefield tapped.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AshlingsPrerogativeIncorrectOddityEffect()));
+        this.addAbility(new SimpleStaticAbility(new AshlingsPrerogativeIncorrectOddityEffect()));
 
     }
 

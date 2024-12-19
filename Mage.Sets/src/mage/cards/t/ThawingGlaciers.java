@@ -31,7 +31,7 @@ public final class ThawingGlaciers extends CardImpl {
         // Thawing Glaciers enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {1}, {tap}: Search your library for a basic land card, put that card onto the battlefield tapped, then shuffle your library. Return Thawing Glaciers to its owner's hand at the beginning of the next cleanup step.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true, true), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextCleanupDelayedTriggeredAbility(new ReturnToHandSourceEffect(true))));

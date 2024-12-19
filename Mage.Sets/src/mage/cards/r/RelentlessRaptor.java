@@ -32,7 +32,7 @@ public final class RelentlessRaptor extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Relentless Raptor attacks or blocks each combat if able.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield, true).setText("{this} attacks"));
+        Ability ability = new SimpleStaticAbility(new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield, true).setText("{this} attacks"));
         ability.addEffect(new BlocksIfAbleSourceEffect(Duration.WhileOnBattlefield).setText("or blocks each combat if able"));
         this.addAbility(ability);
     }

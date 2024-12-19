@@ -42,7 +42,7 @@ public final class StuffyDoll extends CardImpl {
         // Whenever Stuffy Doll is dealt damage, it deals that much damage to the chosen player.
         this.addAbility(new DealtDamageToSourceTriggeredAbility(new StuffyDollEffect(), false));
         // {T}: Stuffy Doll deals 1 damage to itself.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageSelfEffect(1), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new DamageSelfEffect(1), new TapSourceCost()));
     }
 
     private StuffyDoll(final StuffyDoll card) {

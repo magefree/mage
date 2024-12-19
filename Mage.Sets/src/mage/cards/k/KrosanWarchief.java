@@ -40,9 +40,9 @@ public final class KrosanWarchief extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Beast spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
         // {1}{G}: Regenerate target Beast.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new RegenerateTargetEffect(),
                 new ManaCostsImpl<>("{1}{G}"));
         Target target = new TargetCreaturePermanent(filterTarget);

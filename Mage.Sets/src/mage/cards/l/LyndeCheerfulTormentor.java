@@ -6,7 +6,7 @@ import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -49,7 +49,7 @@ public final class LyndeCheerfulTormentor extends CardImpl {
         this.addAbility(new LyndeCheerfulTormentorCurseDiesTriggeredAbility());
 
         // At the beginning of your upkeep, you may attach a Curse attached to you to one of your opponents. If you do, draw two cards.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LyndeCheerfulTormentorAttachCurseEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new LyndeCheerfulTormentorAttachCurseEffect(), true));
     }
 
     private LyndeCheerfulTormentor(final LyndeCheerfulTormentor card) {
@@ -70,6 +70,7 @@ class LyndeCheerfulTormentorCurseDiesTriggeredAbility extends TriggeredAbilityIm
                         new LyndeCheerfulTormentorReturnCurseEffect()
                 )
         ));
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private LyndeCheerfulTormentorCurseDiesTriggeredAbility(final LyndeCheerfulTormentorCurseDiesTriggeredAbility ability) {
@@ -102,8 +103,8 @@ class LyndeCheerfulTormentorCurseDiesTriggeredAbility extends TriggeredAbilityIm
     }
 
     @Override
-    public boolean isInUseableZone(Game game, MageObject source, GameEvent event) {
-        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, event, game);
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 
     @Override

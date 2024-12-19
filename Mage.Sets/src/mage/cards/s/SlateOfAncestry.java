@@ -25,7 +25,7 @@ public final class SlateOfAncestry extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {4}, {tap}, Discard your hand: Draw a card for each creature you control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new SimpleActivatedAbility(
                 new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED)),
                 new GenericManaCost(4));
         ability.addCost(new TapSourceCost());

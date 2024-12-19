@@ -32,7 +32,7 @@ public final class MunghaWurm extends CardImpl {
         this.toughness = new MageInt(5);
 
         // You can't untap more than one land during your untap step.
-         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MunghaWurmEffect()));
+         this.addAbility(new SimpleStaticAbility(new MunghaWurmEffect()));
     }
 
     private MunghaWurm(final MunghaWurm card) {

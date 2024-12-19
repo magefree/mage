@@ -39,10 +39,10 @@ public final class NightscapeFamiliar extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Blue spells and red spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // {1}{B}: Regenerate Nightscape Familiar.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ManaCostsImpl<>("{1}{B}")));
     }
 
     private NightscapeFamiliar(final NightscapeFamiliar card) {

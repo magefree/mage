@@ -36,7 +36,7 @@ public final class ExavaRakdosBloodWitch extends CardImpl {
         // Unleash
         this.addAbility(new UnleashAbility());
         // Each other creature you control with a +1/+1 counter on it has haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 HasteAbility.getInstance(),
                 Duration.WhileOnBattlefield,
                 StaticFilters.FILTER_OTHER_CONTROLLED_CREATURE_P1P1,

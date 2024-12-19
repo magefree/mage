@@ -300,7 +300,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
         Assert.assertNotEquals(prefix + " - wrong image number", Integer.valueOf(0), object.getImageNumber());
 
         // characteristic checks instead new test
-        Assert.assertEquals(prefix + " - wrong name", EmptyNames.FACE_DOWN_CREATURE.toString(), object.getName());
+        Assert.assertEquals(prefix + " - wrong name", EmptyNames.FACE_DOWN_CREATURE.getObjectName(), object.getName());
         Assert.assertEquals(prefix + " - wrong power", 2, object.getPower().getValue());
         Assert.assertEquals(prefix + " - wrong toughness", 2, object.getToughness().getValue());
         Assert.assertEquals(prefix + " - wrong color", "", object.getColor(currentGame).toString());
@@ -746,7 +746,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), faceDownAmount);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), faceDownAmount);
         assert_FaceDownMorphImageNumber(Arrays.asList(1, 2, 3));
     }
 
@@ -765,7 +765,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), faceDownAmount);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), faceDownAmount);
         assert_FaceDownMorphImageNumber(Arrays.asList(1, 2, 3));
     }
 
@@ -844,7 +844,7 @@ public class TokenImagesTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
     }
 
     @Test
@@ -856,16 +856,16 @@ public class TokenImagesTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Aerie Bowmasters using Morph");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         runCode("on face down", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 1);
+            assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 1);
             assertPermanentCount(playerA, "Aerie Bowmasters", 0);
-            Permanent permanent = getPermanent(EmptyNames.FACE_DOWN_CREATURE.toString(), playerA);
+            Permanent permanent = getPermanent(EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), playerA);
             assertFaceDownCharacteristics("permanent", permanent, TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MORPH);
         });
 
         // face up it and find counter
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{5}{G}: Turn this");
         runCode("on face up", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
-            assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 0);
+            assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 0);
             assertPermanentCount(playerA, "Aerie Bowmasters", 1);
             assertCounterCount(playerA, "Aerie Bowmasters", CounterType.P1P1, 1);
         });

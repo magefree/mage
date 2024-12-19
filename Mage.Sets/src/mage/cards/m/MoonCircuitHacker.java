@@ -41,7 +41,7 @@ public final class MoonCircuitHacker extends CardImpl {
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new DiscardControllerEffect(1), condition,
-                "If you do, discard a card unless {this} entered the battlefield this turn"
+                "If you do, discard a card unless {this} entered this turn"
         ));
         this.addAbility(ability);
     }

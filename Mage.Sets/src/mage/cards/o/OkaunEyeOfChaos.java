@@ -1,11 +1,10 @@
-
 package mage.cards.o;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.WinsCoinFlipTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
 import mage.abilities.dynamicvalue.common.SourcePermanentToughnessValue;
 import mage.abilities.effects.common.FlipUntilLoseEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
@@ -21,7 +20,7 @@ import java.util.UUID;
  */
 public final class OkaunEyeOfChaos extends CardImpl {
 
-    private static final DynamicValue sourcePower = new SourcePermanentPowerCount();
+    private static final DynamicValue sourcePower = SourcePermanentPowerValue.NOT_NEGATIVE;
 
     public OkaunEyeOfChaos(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}");
@@ -36,13 +35,13 @@ public final class OkaunEyeOfChaos extends CardImpl {
         this.addAbility(new PartnerWithAbility("Zndrsplt, Eye of Wisdom", true));
 
         // At the beginning of combat on your turn, flip a coin until you lose a flip.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new FlipUntilLoseEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new FlipUntilLoseEffect()));
 
         // Whenever a player wins a coin flip, double Okaun's power and toughness until end of turn.
         this.addAbility(new WinsCoinFlipTriggeredAbility(
                 new BoostSourceEffect(
-                        sourcePower,
-                        SourcePermanentToughnessValue.getInstance(),
+                        SourcePermanentPowerValue.ALLOW_NEGATIVE,
+                        SourcePermanentToughnessValue.instance,
                         Duration.EndOfTurn
                 ).setText("double {this}'s power and toughness until end of turn")
         ));

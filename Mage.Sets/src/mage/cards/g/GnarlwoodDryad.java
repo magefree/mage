@@ -36,7 +36,7 @@ public final class GnarlwoodDryad extends CardImpl {
         ConditionalContinuousEffect effect = new ConditionalContinuousEffect(
                 new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; {this} gets +2/+2 as long as there are four or more card types among cards in your graveyard.");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         ability.addHint(CardTypesInGraveyardHint.YOU);
         this.addAbility(ability);
     }

@@ -31,10 +31,10 @@ public final class VanguardsShield extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +0/+3 and can block an additional creature each combat.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 3)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(0, 3)));
 
         // Equipped creature can block an additional creature each combat. (static abilit of equipment, no ability that will be gained to equiped creature!)
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VanguardsShieldEffect()));
+        this.addAbility(new SimpleStaticAbility(new VanguardsShieldEffect()));
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));

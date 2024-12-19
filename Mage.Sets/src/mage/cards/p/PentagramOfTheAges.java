@@ -23,7 +23,7 @@ public final class PentagramOfTheAges extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{4}");
 
         // {4}, {tap}: The next time a source of your choice would deal damage to you this turn, prevent that damage.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new PreventNextDamageFromChosenSourceToYouEffect(Duration.EndOfTurn), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

@@ -193,7 +193,7 @@ class SerraParagonWatcher extends Watcher {
                 || event.getType() == GameEvent.EventType.LAND_PLAYED)
                 && event.hasApprovingIdentifier(MageIdentifier.SerraParagonWatcher)) {
             map.computeIfAbsent(
-                    event.getAdditionalReference()
+                    event.getApprovingObject()
                             .getApprovingMageObjectReference(),
                     x -> new HashSet<>()
             ).add(event.getPlayerId());

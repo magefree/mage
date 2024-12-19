@@ -31,7 +31,7 @@ public final class TreeOfRedemption extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // {T}: Exchange your life total with Tree of Redemption's toughness.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new TreeOfRedemptionEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new TreeOfRedemptionEffect(), new TapSourceCost()));
     }
 
     private TreeOfRedemption(final TreeOfRedemption card) {

@@ -39,7 +39,7 @@ public final class GravespawnSovereign extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Tap five untapped Zombies you control: Put target creature card from a graveyard onto the battlefield under your control.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(5, 5, filter, true)));
+        Ability ability = new SimpleActivatedAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(5, 5, filter, true)));
         ability.addTarget(new TargetCardInGraveyard(StaticFilters.FILTER_CARD_CREATURE_A_GRAVEYARD));
         this.addAbility(ability);
 

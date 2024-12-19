@@ -50,7 +50,7 @@ public final class OsgirTheReconstructor extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // {1}, Sacrifice an artifact: Target creature you control gets +2/+0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
+        Ability ability = new SimpleActivatedAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ManaCostsImpl<>("{1}"));
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN));
         this.addAbility(ability);

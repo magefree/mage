@@ -60,7 +60,7 @@ class BrimazKingOfOreskosEffect extends OneShotEffect {
 
     BrimazKingOfOreskosEffect() {
         super(Outcome.Benefit);
-        this.staticText = "create a 1/1 white Cat Soldier creature token with vigilance blocking that creature";
+        this.staticText = "create a 1/1 white Cat Soldier creature token with vigilance that's blocking that creature";
     }
 
     private BrimazKingOfOreskosEffect(final BrimazKingOfOreskosEffect effect) {

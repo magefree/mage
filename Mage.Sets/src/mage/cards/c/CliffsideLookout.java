@@ -28,7 +28,7 @@ public final class CliffsideLookout extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {4}{W}: Creatures you control get +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{4}{W}")));
+        this.addAbility(new SimpleActivatedAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl<>("{4}{W}")));
     }
 
     private CliffsideLookout(final CliffsideLookout card) {

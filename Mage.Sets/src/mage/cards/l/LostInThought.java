@@ -44,7 +44,7 @@ public final class LostInThought extends CardImpl {
 
         // Enchanted creature can't attack or block, and its activated abilities can't be activated.
         // Its controller may exile three cards from their graveyard for that player to ignore this effect until end of turn.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new LostInThoughtRestrictionEffect());
+        ability = new SimpleStaticAbility(new LostInThoughtRestrictionEffect());
         ability.addEffect(new LostInThoughtCantActivateAbilitiesEffect());
         this.addAbility(ability);
         this.addAbility(new LostInThoughtSpecialAction());

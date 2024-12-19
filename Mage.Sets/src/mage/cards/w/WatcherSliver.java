@@ -28,7 +28,7 @@ public final class WatcherSliver extends CardImpl {
         this.toughness = new MageInt(2);
 
         // All Sliver creatures get +0/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(0, 2, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(0, 2, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private WatcherSliver(final WatcherSliver card) {

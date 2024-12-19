@@ -48,8 +48,8 @@ public class CopyAITest extends CardTestPlayerBaseWithAIHelps {
         //
         addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1); // 2/2
 
-        // clone (AI must choose most valueable permanent - own)
-        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // clone (AI must choose most valuable permanent - own)
+        aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -70,8 +70,8 @@ public class CopyAITest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1); // 2/2
         addCard(Zone.BATTLEFIELD, playerB, "Spectral Bears", 1); // 3/3
 
-        // clone (AI must choose most valueable permanent - opponent)
-        aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        // clone (AI must choose most valuable permanent - opponent)
+        aiPlayStep(1, PhaseStep.PRECOMBAT_MAIN, playerA);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);

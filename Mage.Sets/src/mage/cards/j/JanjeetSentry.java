@@ -35,7 +35,7 @@ public final class JanjeetSentry extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(2)));
 
         // Tap, Pay {E}{E}: You may tap or untap target artifact or creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new MayTapOrUntapTargetEffect(), new TapSourceCost());
         ability.addCost(new PayEnergyCost(2));
         ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ARTIFACT_OR_CREATURE));
         this.addAbility(ability);

@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -11,10 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -33,7 +30,7 @@ public final class CosmicLarva extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
         // At the beginning of your upkeep, sacrifice Cosmic Larva unless you sacrifice two lands.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(
-                new SacrificeTargetCost(2, StaticFilters.FILTER_LANDS)), TargetController.YOU, false));
+                new SacrificeTargetCost(2, StaticFilters.FILTER_LANDS))));
     }
 
     private CosmicLarva(final CosmicLarva card) {

@@ -87,7 +87,6 @@ class KnickknackOuphePutOntoBattlefieldEffect extends OneShotEffect {
                 
                 if (cards.count(filter, controller.getId(), source, game) > 0) {
                     TargetCard targetAuras = new TargetCard(0, count, Zone.LIBRARY, filter);
-                    targetAuras.setRequired(false);
 
                     if (controller.choose(Outcome.PutCardInPlay, cards, targetAuras, source, game)) {
                         targetAuras.getTargets().stream().forEach(t -> {

@@ -251,7 +251,7 @@ public class BecomesFaceDownCreatureEffect extends ContinuousEffectImpl {
         String originalObjectInfo = object.toString();
 
         // warning, it's a direct changes to the object (without game state, so no game param here)
-        object.setName(EmptyNames.FACE_DOWN_CREATURE.toString());
+        object.setName(EmptyNames.FACE_DOWN_CREATURE.getObjectName());
         object.removeAllSuperTypes();
         object.getSubtype().clear();
         object.removeAllCardTypes();

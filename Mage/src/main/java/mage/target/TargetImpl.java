@@ -109,17 +109,22 @@ public abstract class TargetImpl implements Target {
             sb.append(" or more ");
         } else if (!targetName.startsWith("X ") && (min != 1 || max != 1)) {
             targetName = targetName.replace("another", "other"); //If non-singular, use "other" instead of "another"
-            if (min < max && max != Integer.MAX_VALUE) {
-                if (min == 1 && max == 2) {
-                    sb.append("one or ");
-                } else if (min == 1 && max == 3) {
-                    sb.append("one, two, or ");
-                } else {
-                    sb.append("up to ");
+
+            if (getUseAnyNumber()) {
+                sb.append(("any number of "));
+            } else {
+                if (min < max && max != Integer.MAX_VALUE) {
+                    if (min == 1 && max == 2) {
+                        sb.append("one or ");
+                    } else if (min == 1 && max == 3) {
+                        sb.append("one, two, or ");
+                    } else {
+                        sb.append("up to ");
+                    }
                 }
+                sb.append(CardUtil.numberToText(max));
+                sb.append(' ');
             }
-            sb.append(CardUtil.numberToText(max));
-            sb.append(' ');
         }
         boolean addTargetWord = false;
         if (!isNotTarget()) {
@@ -127,7 +132,8 @@ public abstract class TargetImpl implements Target {
             if (targetName.contains("target ")) {
                 addTargetWord = false;
             } else if (targetName.endsWith("any target")
-                    || targetName.endsWith("any other target")) {
+                    || targetName.endsWith("any other target")
+                    || targetName.endsWith("targets")) {
                 addTargetWord = false;
             }
             // endsWith needs to be specific.
@@ -142,6 +148,15 @@ public abstract class TargetImpl implements Target {
             sb.append(targetName);
         }
         return sb.toString();
+    }
+
+    /**
+     * Used for generating text description. Needed so that subclasses may override.
+     */
+    protected boolean getUseAnyNumber() {
+        int min = getMinNumberOfTargets();
+        int max = getMaxNumberOfTargets();
+        return min == 0 && max == Integer.MAX_VALUE;
     }
 
     @Override
@@ -370,7 +385,7 @@ public abstract class TargetImpl implements Target {
                 }
             } else {
                 // Try to autochoosen
-                UUID autoChosenId = required ? tryToAutoChoose(playerId, source, game) : null;
+                UUID autoChosenId = tryToAutoChoose(playerId, source, game);
                 if (autoChosenId != null) {
                     addTarget(autoChosenId, source, game);
                 } else if (!targetController.chooseTarget(outcome, this, source, game)) { // If couldn't autochoose ask player

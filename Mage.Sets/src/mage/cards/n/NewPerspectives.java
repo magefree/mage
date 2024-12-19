@@ -31,7 +31,7 @@ public final class NewPerspectives extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(3)));
 
         // As long as you have seven or more cards in hand, you may pay {0} rather than pay cycling costs.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NewPerspectivesCostModificationEffect()));
+        this.addAbility(new SimpleStaticAbility(new NewPerspectivesCostModificationEffect()));
     }
 
     private NewPerspectives(final NewPerspectives card) {

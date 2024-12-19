@@ -4,9 +4,9 @@ import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.abilities.effects.common.ReturnFromYourGraveyardToBattlefieldAllEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -23,11 +23,9 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
-import java.util.stream.Collectors;
-
-import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -47,6 +45,7 @@ public final class CalixDestinysHand extends CardImpl {
     }
 
     private static final FilterPermanent filter3 = new FilterControlledEnchantmentPermanent();
+    private static final FilterCard filter4 = new FilterEnchantmentCard("enchantment cards");
 
     public CalixDestinysHand(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{W}");
@@ -71,7 +70,7 @@ public final class CalixDestinysHand extends CardImpl {
         this.addAbility(ability);
 
         // −7: Return all enchantment cards from your graveyard to the battlefield.
-        this.addAbility(new LoyaltyAbility(new CalixDestinysHandReturnEffect(), -7));
+        this.addAbility(new LoyaltyAbility(new ReturnFromYourGraveyardToBattlefieldAllEffect(filter4), -7));
     }
 
     private CalixDestinysHand(final CalixDestinysHand card) {
@@ -165,38 +164,5 @@ class CalixDestinysHandDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public CalixDestinysHandDelayedTriggeredAbility copy() {
         return new CalixDestinysHandDelayedTriggeredAbility(this);
-    }
-}
-
-class CalixDestinysHandReturnEffect extends OneShotEffect {
-
-    CalixDestinysHandReturnEffect() {
-        super(Outcome.Benefit);
-        staticText = "return all enchantment cards from your graveyard to the battlefield";
-    }
-
-    private CalixDestinysHandReturnEffect(final CalixDestinysHandReturnEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CalixDestinysHandReturnEffect copy() {
-        return new CalixDestinysHandReturnEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        return player.moveCards(
-                player.getGraveyard()
-                        .getCards(game)
-                        .stream()
-                        .filter(card -> card.isEnchantment(game))
-                        .collect(Collectors.toSet()),
-                Zone.BATTLEFIELD, source, game
-        );
     }
 }

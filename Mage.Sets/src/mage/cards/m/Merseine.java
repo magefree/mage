@@ -47,7 +47,7 @@ public final class Merseine extends CardImpl {
         this.addAbility(new EntersBattlefieldAbility(effect));
 
         // Enchanted creature doesn't untap during its controller's untap step if Merseine has a net counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepEnchantedEffect(),
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousRuleModifyingEffect(new DontUntapInControllersUntapStepEnchantedEffect(),
                 new SourceHasCounterCondition(CounterType.NET)).setText("Enchanted creature doesn't untap during its controller's untap step if Merseine has a net counter on it")));
 
         // Pay enchanted creature's mana cost: Remove a net counter from Merseine. Any player may activate this ability, but only if they control the enchanted creature.

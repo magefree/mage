@@ -31,7 +31,7 @@ public final class SawtoothThresher extends CardImpl {
         // Sunburst
         this.addAbility(new SunburstAbility(this));
         // Remove two +1/+1 counters from Sawtooth Thresher: Sawtooth Thresher gets +4/+4 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(4, 4, Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
     }
 
     private SawtoothThresher(final SawtoothThresher card) {

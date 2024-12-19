@@ -51,12 +51,12 @@ public final class MinotaurTactician extends CardImpl {
         // Minotaur Tactician gets +1/+1 as long as you control a white creature.
         Condition conditionWhite = new PermanentsOnTheBattlefieldCondition(filterWhite);
         Effect effectWhite = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), conditionWhite, ruleWhite);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effectWhite));
+        this.addAbility(new SimpleStaticAbility(effectWhite));
 
         // Minotaur Tactician gets +1/+1 as long as you control a blue creature.
         Condition conditionBlue = new PermanentsOnTheBattlefieldCondition(filterBlue);
         Effect effectBlue = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), conditionBlue, ruleBlue);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effectBlue));
+        this.addAbility(new SimpleStaticAbility(effectBlue));
     }
 
     private MinotaurTactician(final MinotaurTactician card) {

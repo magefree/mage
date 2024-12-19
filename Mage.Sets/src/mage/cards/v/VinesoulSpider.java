@@ -1,7 +1,7 @@
 package mage.cards.v;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.PutRandomCardFromLibraryIntoGraveyardEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.*;
@@ -26,7 +26,7 @@ public final class VinesoulSpider extends CardImpl {
 
         // At the beginning of your end step, put a random land card from your library into your graveyard.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new PutRandomCardFromLibraryIntoGraveyardEffect(StaticFilters.FILTER_CARD_LAND), TargetController.YOU, false
+                new PutRandomCardFromLibraryIntoGraveyardEffect(StaticFilters.FILTER_CARD_LAND)
         ));
 
     }
@@ -40,7 +40,3 @@ public final class VinesoulSpider extends CardImpl {
         return new VinesoulSpider(this);
     }
 }
-
-
-
-

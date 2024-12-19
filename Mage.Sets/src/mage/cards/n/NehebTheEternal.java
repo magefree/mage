@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
 import mage.abilities.effects.mana.DynamicManaEffect;
 import mage.abilities.keyword.AfflictAbility;
@@ -35,12 +35,11 @@ public final class NehebTheEternal extends CardImpl {
 
         // At the beginning of your postcombat main phase, add {R} for each 1 life your opponents have lost this turn.
         this.addAbility(
-                new BeginningOfPostCombatMainTriggeredAbility(
+                new BeginningOfPostcombatMainTriggeredAbility(
                         new DynamicManaEffect(
                                 Mana.RedMana(1),
                                 OpponentsLostLifeCount.instance,
                                 "add {R} for each 1 life your opponents have lost this turn"),
-                        TargetController.YOU,
                         false));
     }
 

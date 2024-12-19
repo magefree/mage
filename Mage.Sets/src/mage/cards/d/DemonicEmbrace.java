@@ -45,7 +45,7 @@ public final class DemonicEmbrace extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +3/+1, has flying, and is a Demon in addition to its other types.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 1, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(3, 1, Duration.WhileOnBattlefield));
         Effect effect = new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA);
         effect.setText(", has flying");
         ability.addEffect(effect);

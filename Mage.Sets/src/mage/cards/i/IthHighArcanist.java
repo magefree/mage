@@ -39,7 +39,7 @@ public final class IthHighArcanist extends CardImpl {
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
         // {T}: Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());                                                                                           Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());                                                                                           Effect effect = new PreventDamageByTargetEffect(Duration.EndOfTurn, true);
         effect.setText("Prevent all combat damage that would be dealt to");
         ability.addEffect(effect);
         effect = new PreventDamageToTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE, true);

@@ -60,6 +60,7 @@ class KayasGhostformTriggeredAbility extends TriggeredAbilityImpl {
 
     KayasGhostformTriggeredAbility() {
         super(Zone.ALL, new ReturnToBattlefieldUnderYourControlAttachedEffect(), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private KayasGhostformTriggeredAbility(final KayasGhostformTriggeredAbility ability) {

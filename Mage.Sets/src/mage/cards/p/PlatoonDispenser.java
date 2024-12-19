@@ -1,7 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -47,8 +47,8 @@ public final class PlatoonDispenser extends CardImpl {
 
         // At the beginning of your end step, if you control two or more other creatures, draw a card.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DrawCardSourceControllerEffect(1),
-                TargetController.YOU, condition, false
+                TargetController.YOU, new DrawCardSourceControllerEffect(1),
+                false, condition
         ));
 
         // {3}{W}: Create a 1/1 colorless Soldier Artifact creature token.

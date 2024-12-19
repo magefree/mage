@@ -2,8 +2,8 @@ package mage.cards.b;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ThresholdCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -35,7 +35,7 @@ public final class Bloodcurdler extends CardImpl {
 
         // At the beginning of your upkeep, put the top card of your library into your graveyard.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new MillCardsControllerEffect(1), TargetController.YOU, false
+                new MillCardsControllerEffect(1)
         ));
 
         // Threshold - As long as seven or more cards are in your graveyard, Bloodcurdler gets +1/+1 and has "At the beginning of your end step, exile two cards from your graveyard."
@@ -45,7 +45,7 @@ public final class Bloodcurdler extends CardImpl {
         ));
         thresholdAbility.addEffect(new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new BeginningOfEndStepTriggeredAbility(
-                        new ExileCardFromOwnGraveyardControllerEffect(2), TargetController.YOU, false
+                        new ExileCardFromOwnGraveyardControllerEffect(2)
                 )), ThresholdCondition.instance,
                 "and has \"At the beginning of your end step, exile two cards from your graveyard.\""
         ));

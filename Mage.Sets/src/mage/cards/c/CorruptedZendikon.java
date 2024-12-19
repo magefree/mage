@@ -39,7 +39,7 @@ public final class CorruptedZendikon extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted land is a 3/3 black Ooze creature. It's still a land.
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD,
+        Ability ability2 = new SimpleStaticAbility(
                 new BecomesCreatureAttachedEffect(new CorruptedZendikonOozeToken(),
                         "Enchanted land is a 3/3 black Ooze creature. It's still a land.", Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR));
         this.addAbility(ability2);

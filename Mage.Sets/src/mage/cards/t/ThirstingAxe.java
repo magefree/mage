@@ -4,7 +4,7 @@ package mage.cards.t;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.CompoundCondition;
 import mage.abilities.condition.Condition;
@@ -40,10 +40,10 @@ public final class ThirstingAxe extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +4/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, 0)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(4, 0)));
 
         // At the beginning of your end step, if equipped creature didn't deal combat damage to a creature this turn, sacrifice it.
-        TriggeredAbility ability = new BeginningOfYourEndStepTriggeredAbility(new SacrificeEquippedEffect(), false);
+        TriggeredAbility ability = new BeginningOfEndStepTriggeredAbility(new SacrificeEquippedEffect());
         Condition condition = new CompoundCondition(
                 AttachedCondition.instance,
                 new InvertCondition(new EquippedDealtCombatDamageToCreatureCondition()));

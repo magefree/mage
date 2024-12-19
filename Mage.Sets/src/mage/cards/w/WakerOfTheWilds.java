@@ -37,7 +37,6 @@ public final class WakerOfTheWilds extends CardImpl {
 
         // {X}{G}{G}: Put X +1/+1 counters on target land you control. That land becomes a 0/0 Elemental creature with haste that's still a land.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(
                         CounterType.P1P1.createInstance(0),
                         GetXValue.instance

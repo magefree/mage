@@ -1,4 +1,3 @@
-
 package mage.cards.s;
 
 import mage.abilities.effects.common.CounterTargetEffect;
@@ -33,9 +32,7 @@ public final class SwanSong extends CardImpl {
 
         // Counter target enchantment, instant or sorcery spell. Its controller creates a 2/2 blue Bird creature token with flying.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(
-                new SwanSongBirdToken(), CreateTokenControllerTargetEffect.TargetKind.SPELL
-        ));
+        this.getSpellAbility().addEffect(new CreateTokenControllerTargetEffect(new SwanSongBirdToken()));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
     }
 

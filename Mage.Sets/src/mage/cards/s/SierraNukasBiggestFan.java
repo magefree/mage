@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.SacrificePermanentTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CountersSourceCount;
@@ -39,7 +39,7 @@ public final class SierraNukasBiggestFan extends CardImpl {
 
         // The Nuka-Cola Challenge -- Whenever one or more creatures you control deal combat damage to a player,
         // put a quest counter on Sierra, Nuka's Biggest Fan and create a Food token.
-        Ability ability = new DealCombatDamageControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()));
+        Ability ability = new OneOrMoreCombatDamagePlayerTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()));
         ability.addEffect(new CreateTokenEffect(new FoodToken()).concatBy("and"));
         this.addAbility(ability.withFlavorWord("The Nuka-Cola Challenge"));
 

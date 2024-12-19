@@ -31,7 +31,7 @@ public final class DragonArch extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{5}");
 
         // {2}, {T}: You may put a multicolored creature card from your hand onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutCardFromHandOntoBattlefieldEffect(filter),
+        Ability ability = new SimpleActivatedAbility(new PutCardFromHandOntoBattlefieldEffect(filter),
             new ManaCostsImpl<>("{2}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

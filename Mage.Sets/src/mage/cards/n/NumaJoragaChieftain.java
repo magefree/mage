@@ -2,7 +2,7 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -13,11 +13,10 @@ import mage.abilities.keyword.PartnerAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCreaturePermanentAmount;
+import mage.target.common.TargetPermanentAmount;
 
 import java.util.UUID;
 
@@ -37,7 +36,7 @@ public final class NumaJoragaChieftain extends CardImpl {
 
         // At the beginning of combat on your turn, you may pay {X}{X}. When you do, distribute X +1/+1 counters among any number of target Elves.
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                new NumaJoragaChieftainEffect(), TargetController.YOU, false
+                new NumaJoragaChieftainEffect()
         ));
 
         // Partner
@@ -88,10 +87,10 @@ class NumaJoragaChieftainEffect extends OneShotEffect {
             return false;
         }
         ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
-                new DistributeCountersEffect(CounterType.P1P1, costX, false, ""),
+                new DistributeCountersEffect(),
                 false, "distribute " + costX + " +1/+1 counters among any number of target Elves"
         );
-        ability.addTarget(new TargetCreaturePermanentAmount(costX, filter));
+        ability.addTarget(new TargetPermanentAmount(costX, 0, filter));
         game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }

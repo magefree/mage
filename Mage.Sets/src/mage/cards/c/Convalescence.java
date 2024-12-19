@@ -3,13 +3,12 @@ package mage.cards.c;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -24,7 +23,7 @@ public final class Convalescence extends CardImpl {
 
 
         // At the beginning of your upkeep, if you have 10 or less life, you gain 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConvalescenceEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConvalescenceEffect()));
     }
 
     private Convalescence(final Convalescence card) {

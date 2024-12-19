@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -31,7 +31,7 @@ public final class AidFromTheCowl extends CardImpl {
 
         // <i>Revolt</i> &mdash; At the beginning of your end step, if a permanent you controlled left the battlefield this turn,
         // reveal the top card of your library. If it is a permanent card, you may put it onto the battlefield. Otherwise, put it on the bottom of your library.
-        TriggeredAbility ability = new BeginningOfYourEndStepTriggeredAbility(new AidFromTheCowlEffect(), false);
+        TriggeredAbility ability = new BeginningOfEndStepTriggeredAbility(new AidFromTheCowlEffect());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, RevoltCondition.instance, ruleText).addHint(RevoltCondition.getHint()), new RevoltWatcher());
     }
 

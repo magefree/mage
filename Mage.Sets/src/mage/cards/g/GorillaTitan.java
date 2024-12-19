@@ -34,7 +34,7 @@ public final class GorillaTitan extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Gorilla Titan gets +4/+4 as long as there are no cards in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(4,4, Duration.WhileInGraveyard),
                 new GorillaTitanCondition(),
                 "{this} gets +4/+4 as long as there are no cards in your graveyard"

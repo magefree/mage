@@ -37,7 +37,7 @@ public final class CuombajjWitches extends CardImpl {
         // {T}: Cuombajj Witches deals 1 damage to any target and 1 damage to any target of an opponent's choice.
         Effect effect = new DamageTargetEffect(1);
         effect.setText("{this} deals 1 damage to any target and 1 damage to any target of an opponent's choice");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         ability.addTarget(new TargetAnyTarget());
         ability.setTargetAdjuster(CuombajjWitchesAdjuster.instance);

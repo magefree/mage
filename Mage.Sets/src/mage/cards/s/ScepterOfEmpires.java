@@ -24,7 +24,7 @@ public final class ScepterOfEmpires extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {tap}: Scepter of Empires deals 1 damage to target player. It deals 3 damage to that player instead if you control artifacts named Crown of Empires and Throne of Empires.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScepterOfEmpiresEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new ScepterOfEmpiresEffect(), new TapSourceCost());
         ability.addTarget(new TargetPlayerOrPlaneswalker());
         this.addAbility(ability);
     }

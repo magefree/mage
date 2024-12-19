@@ -31,7 +31,7 @@ public final class SlaughterDrone extends CardImpl {
         // Devoid
         this.addAbility(new DevoidAbility(this.color));
         // {C}: Slaughter Drone gains deathtouch until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn),
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl<>("{C}")));
 
     }

@@ -24,7 +24,7 @@ public final class DragonEggDragonToken extends TokenImpl {
         toughness = new MageInt(2);
 
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn)
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn)
                 .setText("This creature gets +1/+0 until end of turn"), new ManaCostsImpl<>("{R}")));
     }
 

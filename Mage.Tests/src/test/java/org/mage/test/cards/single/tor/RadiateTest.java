@@ -59,7 +59,7 @@ public class RadiateTest extends CardTestPlayerBaseWithAIHelps {
         addCard(Zone.BATTLEFIELD, playerB, "Kitesail Corsair", 2);
 
         // cast bolt and copy spell for each another target
-        // must call commands manually cause it's a bad scenario and AI don't cast it itself
+        // must call commands manually because it's a bad scenario and AI don't cast it itself
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Radiate", "Lightning Bolt", "Lightning Bolt");
         aiPlayPriority(1, PhaseStep.PRECOMBAT_MAIN, playerA); // but AI can choose targets

@@ -34,7 +34,7 @@ public final class HeraldOfThePantheon extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Enchantment spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));     
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));     
         
         // Whenever you cast an enchantment spell, you gain 1 life.
         this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(1), StaticFilters.FILTER_SPELL_AN_ENCHANTMENT, false));

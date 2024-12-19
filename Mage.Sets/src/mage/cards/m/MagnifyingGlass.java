@@ -26,7 +26,7 @@ public final class MagnifyingGlass extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // {4}, {T}: Investigate.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new InvestigateEffect(), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(new InvestigateEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

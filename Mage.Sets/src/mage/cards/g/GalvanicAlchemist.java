@@ -35,8 +35,8 @@ public final class GalvanicAlchemist extends CardImpl {
         this.addAbility(new SoulbondAbility());
 
         // As long as Galvanic Alchemist is paired with another creature, each of those creatures has "{2}{U}: Untap this creature."
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl<>("{2}{U}"));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));
+        Ability ability = new SimpleActivatedAbility(new UntapSourceEffect(), new ManaCostsImpl<>("{2}{U}"));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityPairedEffect(ability, ruleText)));
     }
 
     private GalvanicAlchemist(final GalvanicAlchemist card) {

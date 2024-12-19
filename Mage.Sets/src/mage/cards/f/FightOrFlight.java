@@ -1,7 +1,7 @@
 package mage.cards.f;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.CantAttackAllEffect;
 import mage.cards.CardImpl;
@@ -35,7 +35,7 @@ public final class FightOrFlight extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{3}{W}");
 
         // At the beginning of combat on each opponent’s turn, separate all creatures that player controls into two piles. Only creatures in the pile of their choice can attack this turn.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new FightOrFlightEffect(), TargetController.OPPONENT, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(TargetController.OPPONENT, new FightOrFlightEffect(), false));
     }
 
     private FightOrFlight(final FightOrFlight card) {
@@ -75,7 +75,6 @@ class FightOrFlightEffect extends OneShotEffect {
         filter.add(new ControllerIdPredicate(targetPlayer.getId()));
         TargetCreaturePermanent creatures = new TargetCreaturePermanent(0, Integer.MAX_VALUE, filter, true);
         List<Permanent> pile1 = new ArrayList<>();
-        creatures.setRequired(false);
         if (player.choose(Outcome.Neutral, creatures, source, game)) {
             List<UUID> targets = creatures.getTargets();
             for (UUID targetId : targets) {

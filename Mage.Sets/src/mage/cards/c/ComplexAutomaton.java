@@ -2,7 +2,7 @@
 package mage.cards.c;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
 
@@ -39,8 +38,7 @@ public final class ComplexAutomaton extends CardImpl {
         // At the beginning of your upkeep, if you control seven or more permanents, return Complex Automaton to its owner's hand.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new ReturnToHandSourceEffect(true),
-                        TargetController.YOU, false
+                        new ReturnToHandSourceEffect(true), false
                 ), condition, "At the beginning of your upkeep, " +
                 "if you control seven or more permanents, return {this} to its owner's hand."
         ).addHint(new ValueHint("Permanents you control", new PermanentsOnBattlefieldCount(new FilterControlledPermanent()))));

@@ -42,7 +42,7 @@ public final class SidarKondoOfJamuraa extends CardImpl {
         this.addAbility(new FlankingAbility());
 
         // Creatures your opponents control without flying or reach can't block creatures with power 2 or less.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SidarKondoOfJamuraaCantBlockCreaturesSourceEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(new SidarKondoOfJamuraaCantBlockCreaturesSourceEffect(filter)));
 
         // Partner
         this.addAbility(PartnerAbility.getInstance());

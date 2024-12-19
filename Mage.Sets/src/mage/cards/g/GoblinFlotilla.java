@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.BlocksOrBlockedByCreatureSourceTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -48,8 +48,7 @@ public final class GoblinFlotilla extends CardImpl {
         );
         effect.setText("unless you pay {R}, whenever {this} blocks or becomes blocked by a creature this combat, that creature gains first strike until end of turn.");
         this.addAbility(new BeginningOfCombatTriggeredAbility(
-                effect,
-                TargetController.ANY,
+                TargetController.ANY, effect,
                 false
         ));
 

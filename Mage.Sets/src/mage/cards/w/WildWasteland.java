@@ -1,6 +1,6 @@
 package mage.cards.w;
 
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.SkipDrawStepEffect;
@@ -8,7 +8,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -26,7 +25,7 @@ public final class WildWasteland extends CardImpl {
 
         // At the beginning of your upkeep, exile the top two cards of your library. You may play those cards this turn.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ExileTopXMayPlayUntilEffect(2, Duration.EndOfTurn), TargetController.YOU, false));
+                new ExileTopXMayPlayUntilEffect(2, Duration.EndOfTurn)));
     }
 
     private WildWasteland(final WildWasteland card) {

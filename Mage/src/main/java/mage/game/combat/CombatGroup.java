@@ -966,7 +966,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         return false;
     }
 
-    private static int getLethalDamage(Permanent damaged, Permanent damaging, Game game) {
-        return damaged.getLethalDamage(damaging.getId(), game);
+    private static int getLethalDamage(Permanent blocker, Permanent attacker, Game game) {
+        return blocker.getLethalDamage(attacker.getId(), game);
     }
 }

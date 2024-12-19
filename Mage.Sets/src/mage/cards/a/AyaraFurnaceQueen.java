@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -50,7 +50,7 @@ public final class AyaraFurnaceQueen extends CardImpl {
 
         // At the beginning of combat on your turn, return up to one target artifact or creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step.
         Ability ability = new BeginningOfCombatTriggeredAbility(
-                new AyaraFurnaceQueenEffect(), TargetController.YOU, false
+                new AyaraFurnaceQueenEffect()
         );
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, filter));
         this.addAbility(ability);

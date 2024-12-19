@@ -52,7 +52,7 @@ public final class TheThirdDoctor extends CardImpl {
 
         // The Third Doctor gets +1/+1 for each noncreature token you control.
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(count, count, Duration.WhileOnBattlefield)));
 
         // When The Third Doctor enters the battlefield, create your choice of a Clue token, a Food token, or a Treasure token.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TheThirdDoctorEffect()));

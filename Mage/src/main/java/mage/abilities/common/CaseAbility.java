@@ -11,6 +11,7 @@ import mage.abilities.decorator.ConditionalReplacementEffect;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.constants.Zone;
@@ -114,8 +115,8 @@ public class CaseAbility extends SimpleStaticAbility {
 class CaseSolveAbility extends BeginningOfEndStepTriggeredAbility {
 
     CaseSolveAbility(Condition condition) {
-        super(new SolveEffect(), TargetController.YOU,
-                new CompoundCondition(condition, SolvedSourceCondition.UNSOLVED), false);
+        super(TargetController.YOU, new SolveEffect(),
+                false, new CompoundCondition(condition, SolvedSourceCondition.UNSOLVED));
         withFlavorWord("To solve"); // TODO: technically this shouldn't be italicized
         setTriggerPhrase(CardUtil.getTextWithFirstCharUpperCase(trimIf(condition.toString())));
     }

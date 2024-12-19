@@ -51,6 +51,7 @@ class MycoidShepherdTriggeredAbility extends TriggeredAbilityImpl {
 
     public MycoidShepherdTriggeredAbility() {
         super(Zone.BATTLEFIELD, new GainLifeEffect(5), true);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private MycoidShepherdTriggeredAbility(final MycoidShepherdTriggeredAbility ability) {
@@ -90,5 +91,10 @@ class MycoidShepherdTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public MycoidShepherdTriggeredAbility copy() {
         return new MycoidShepherdTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }

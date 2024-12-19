@@ -29,7 +29,7 @@ public final class MoggCannon extends CardImpl {
         // {tap}: Target creature you control gets +1/+0 and gains flying until end of turn. Destroy that creature at the beginning of the next end step.
         Effect effect = new BoostTargetEffect(1, 0, Duration.EndOfTurn);
         effect.setText("target creature you control gets +1/+0");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
         effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying until end of turn");
         ability.addEffect(effect);

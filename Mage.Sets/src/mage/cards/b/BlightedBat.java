@@ -32,7 +32,7 @@ public final class BlightedBat extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}: Blighted Bat gains haste until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(1)));
     }
 
     private BlightedBat(final BlightedBat card) {

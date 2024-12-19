@@ -22,7 +22,6 @@ public final class MarkOfAsylum extends CardImpl {
 
         // Prevent all noncombat damage that would be dealt to creatures you control.
         this.addAbility(new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new PreventAllNonCombatDamageToAllEffect(
                         Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_CONTROLLED_CREATURES

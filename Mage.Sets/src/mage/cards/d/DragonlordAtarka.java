@@ -43,11 +43,8 @@ public final class DragonlordAtarka extends CardImpl {
         this.addAbility(TrampleAbility.getInstance());
 
         // When Dragonlord Atarka enters the battlefield, it deals 5 damage divided as you choose among any number of target creatures and/or planeswalkers your opponents control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect(5, "it"), false);
-        TargetCreatureOrPlaneswalkerAmount target = new TargetCreatureOrPlaneswalkerAmount(5, filter);
-        target.setMinNumberOfTargets(1);
-        target.setMaxNumberOfTargets(5);
-        ability.addTarget(target);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DamageMultiEffect("it"), false);
+        ability.addTarget(new TargetCreatureOrPlaneswalkerAmount(5, filter));
         this.addAbility(ability);
     }
 

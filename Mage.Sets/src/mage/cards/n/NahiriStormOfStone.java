@@ -50,7 +50,7 @@ public final class NahiriStormOfStone extends CardImpl {
                 new GainAbilityControlledEffect(
                         FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield,
                         StaticFilters.FILTER_PERMANENT_CREATURE
-                ), MyTurnCondition.instance, "As long as it's your turn, " +
+                ), MyTurnCondition.instance, "During your turn, " +
                 "creatures you control have first strike"
         ));
         ability.addEffect(new ConditionalCostModificationEffect(

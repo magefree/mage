@@ -36,7 +36,7 @@ public final class PrismaticCircle extends CardImpl {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect(Outcome.Neutral)));
 
         // {1}: The next time a source of your choice of the chosen color would deal damage to you this turn, prevent that damage.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PrismaticCircleEffect(), new ManaCostsImpl<>("{1}")));
+        this.addAbility(new SimpleActivatedAbility(new PrismaticCircleEffect(), new ManaCostsImpl<>("{1}")));
     }
 
     private PrismaticCircle(final PrismaticCircle card) {

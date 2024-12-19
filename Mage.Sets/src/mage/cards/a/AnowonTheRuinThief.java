@@ -2,7 +2,7 @@ package mage.cards.a;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.OneShotEffect;
@@ -39,7 +39,7 @@ public final class AnowonTheRuinThief extends CardImpl {
         ));
 
         // Whenever one or more Rogues you control deal combat damage to a player, that player mills a card for each 1 damage dealt to them. If the player mills at least one creature card this way, you draw a card.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(Zone.BATTLEFIELD, new AnowonTheRuinThiefEffect(),
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(Zone.BATTLEFIELD, new AnowonTheRuinThiefEffect(),
                 filter, SetTargetPointer.PLAYER, false));
     }
 

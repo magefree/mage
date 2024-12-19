@@ -39,7 +39,6 @@ public final class ProdigiousGrowth extends CardImpl {
 
         // Enchanted creature gets +7/+7 and has trample.
         ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new BoostEnchantedEffect(7, 7, Duration.WhileOnBattlefield)
         );
         ability.addEffect(new GainAbilityAttachedEffect(

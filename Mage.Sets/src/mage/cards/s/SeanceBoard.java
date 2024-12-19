@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -36,10 +36,8 @@ public final class SeanceBoard extends CardImpl {
 
         // Morbid -- At the beginning of each end step, if a creature died this turn, put a soul counter on Seance Board.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new AddCountersSourceEffect(CounterType.SOUL.createInstance()),
-                TargetController.ANY,
-                MorbidCondition.instance,
-                false
+                TargetController.ANY, new AddCountersSourceEffect(CounterType.SOUL.createInstance()),
+                false, MorbidCondition.instance
         ).addHint(MorbidHint.instance).setAbilityWord(AbilityWord.MORBID));
 
         // {T}: Add X mana of any one color, where X is the number of soul counters on Seance Board.

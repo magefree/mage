@@ -1,5 +1,6 @@
 package mage.cards.p;
 
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
@@ -13,7 +14,10 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.DamagedBatchForOnePlayerEvent;
+import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -46,7 +50,7 @@ public final class PopularEntertainer extends CardImpl {
     }
 }
 
-class PopularEntertainerAbility extends TriggeredAbilityImpl {
+class PopularEntertainerAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPlayerEvent> {
 
     PopularEntertainerAbility() {
         super(Zone.BATTLEFIELD, new GoadTargetEffect(), false);
@@ -67,22 +71,24 @@ class PopularEntertainerAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEvent(DamagedPlayerEvent event, Game game) {
+        if (!event.isCombatDamage() || event.getAmount() <= 0) {
+            return false;
+        }
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
+        return permanent != null && isControlledBy(permanent.getControllerId());
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        DamagedBatchForOnePlayerEvent dEvent = (DamagedBatchForOnePlayerEvent) event;
-
-        int damage = dEvent.getEvents()
-                .stream()
-                .filter(ev -> ev.getSourceId().equals(controllerId))
-                .mapToInt(GameEvent::getAmount)
-                .sum();
-
-        if (!dEvent.isCombatDamage() || damage < 1){
+        Player player = game.getPlayer(event.getTargetId());
+        if (player == null || getFilteredEvents((DamagedBatchForOnePlayerEvent) event, game).isEmpty()) {
             return false;
         }
         FilterPermanent filter = new FilterCreaturePermanent(
-                "creature controlled by " + game.getPlayer(dEvent.getTargetId()).getName()
+                "creature controlled by " + player.getName()
         );
-        filter.add(new ControllerIdPredicate(dEvent.getTargetId()));
+        filter.add(new ControllerIdPredicate(player.getId()));
         this.getTargets().clear();
         this.addTarget(new TargetPermanent(filter));
         return true;

@@ -36,7 +36,7 @@ public final class DoorOfDestinies extends CardImpl {
         this.addAbility(new AddCounterAbility());
 
         // Creatures you control of the chosen type get +1/+1 for each charge counter on Door of Destinies.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostCreatureEffectEffect()));
+        this.addAbility(new SimpleStaticAbility(new BoostCreatureEffectEffect()));
     }
 
     private DoorOfDestinies(final DoorOfDestinies card) {

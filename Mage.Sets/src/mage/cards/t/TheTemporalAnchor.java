@@ -3,7 +3,7 @@ package mage.cards.t;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -34,7 +34,7 @@ public final class TheTemporalAnchor extends CardImpl {
 
         // At the beginning of your upkeep, scry 2.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new ScryEffect(2, false), TargetController.YOU, false
+                new ScryEffect(2, false)
         ));
 
         // Whenever you choose to put one or more cards on the bottom of your library while scrying, exile that many cards from the bottom of your library.

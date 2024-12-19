@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -44,7 +44,7 @@ public final class AssaultSuit extends CardImpl {
 
         // At the beginning of each opponent's upkeep, you may have that player gain control of equipped creature until end of turn. If you do, untap it.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new AssaultSuitGainControlEffect(), TargetController.OPPONENT, false
+                TargetController.OPPONENT, new AssaultSuitGainControlEffect(), false
         ));
 
         // Equip {3}

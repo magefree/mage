@@ -1,7 +1,7 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class RuthlessWinnower extends CardImpl {
 
         // At the beginning of each player's upkeep, that player sacrifices a non-Elf creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new SacrificeEffect(filter, 1, "that player"), TargetController.ANY, false
+                TargetController.EACH_PLAYER, new SacrificeEffect(filter, 1, "that player"), false
         ));
     }
 

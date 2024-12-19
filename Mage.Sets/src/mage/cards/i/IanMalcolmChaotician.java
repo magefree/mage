@@ -224,7 +224,7 @@ class IanMalcolmChaoticianWatcher extends Watcher {
         if (event.getType() == GameEvent.EventType.SPELL_CAST &&
                 event.hasApprovingIdentifier(MageIdentifier.IanMalcolmChaoticianWatcher)) {
             usedMap.computeIfAbsent(
-                    event.getAdditionalReference()
+                    event.getApprovingObject()
                             .getApprovingMageObjectReference(),
                     x -> new HashSet<>()
             ).add(event.getPlayerId());

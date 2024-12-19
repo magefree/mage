@@ -33,13 +33,13 @@ public final class BurningTreeBloodscale extends CardImpl {
         this.addAbility(new BloodthirstAbility(1));
         
         // {2}{R}: Target creature can't block Burning-Tree Bloodscale this turn.
-        Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn), 
+        Ability ability1 = new SimpleActivatedAbility(new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn),
         		new ManaCostsImpl<>("{2}{R}"));
         ability1.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability1);
         
         // {2}{G}: Target creature blocks Burning-Tree Bloodscale this turn if able.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByTargetSourceEffect(Duration.EndOfTurn), 
+        Ability ability2 = new SimpleActivatedAbility(new MustBeBlockedByTargetSourceEffect(Duration.EndOfTurn),
         		new ManaCostsImpl<>("{2}{G}"));
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);

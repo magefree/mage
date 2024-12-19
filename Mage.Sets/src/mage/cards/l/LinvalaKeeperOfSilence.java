@@ -30,7 +30,7 @@ public final class LinvalaKeeperOfSilence extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Activated abilities of creatures your opponents control can't be activated.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LinvalaKeeperOfSilenceCantActivateEffect()));
+        this.addAbility(new SimpleStaticAbility(new LinvalaKeeperOfSilenceCantActivateEffect()));
     }
 
     private LinvalaKeeperOfSilence(final LinvalaKeeperOfSilence card) {

@@ -30,7 +30,7 @@ public final class DimirKeyrune extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // {U}{B}: Dimir Keyrune becomes a 2/2 blue and black Horror and can't be blocked this turn
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(
+        this.addAbility(new SimpleActivatedAbility(new BecomesCreatureSourceEffect(
                 new CreatureToken(2, 2, "2/2 blue and black Horror creature that can't be blocked")
                 .withColor("UB")
                 .withSubType(SubType.HORROR)

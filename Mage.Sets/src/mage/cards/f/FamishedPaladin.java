@@ -27,7 +27,7 @@ public final class FamishedPaladin extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Famished Paladin doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
         // Whenever you gain life, untap Famished Paladin.
         this.addAbility(new GainLifeControllerTriggeredAbility(new UntapSourceEffect(), false));
     }

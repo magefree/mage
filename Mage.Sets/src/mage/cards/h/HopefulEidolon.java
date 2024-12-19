@@ -35,7 +35,7 @@ public final class HopefulEidolon extends CardImpl {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
         // Echanted creature gets +1/+1 and has lifelink.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityAttachedEffect(LifelinkAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield,
                 "and has lifelink"));
         this.addAbility(ability);

@@ -25,7 +25,7 @@ public final class LifeAndLimb extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
 
         // All Forests and all Saprolings are 1/1 green Saproling creatures and Forest lands in addition to their other types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LifeAndLimbEffect()));
+        this.addAbility(new SimpleStaticAbility(new LifeAndLimbEffect()));
     }
 
     private LifeAndLimb(final LifeAndLimb card) {

@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -16,7 +16,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,7 +49,7 @@ public final class SteelDromedary extends CardImpl {
 
         // At the beginning of combat on your turn, you may move a +1/+1 counter from Steel Dromedary onto target creature.
         ability = new BeginningOfCombatTriggeredAbility(
-                new MoveCountersFromSourceToTargetEffect(), TargetController.YOU, true
+                new MoveCountersFromSourceToTargetEffect(), true
         );
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

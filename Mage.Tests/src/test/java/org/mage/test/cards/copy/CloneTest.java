@@ -271,7 +271,7 @@ public class CloneTest extends CardTestPlayerBase {
 
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
         setChoice(playerA, true);
-        setChoice(playerA, EmptyNames.FACE_DOWN_CREATURE.toString());
+        setChoice(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand());
 
         setStrictChooseMode(true);
         setStopAt(3, PhaseStep.BEGIN_COMBAT);
@@ -283,8 +283,8 @@ public class CloneTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Ixidron", 1);
         assertPowerToughness(playerA, "Ixidron", 1, 1);
 
-        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2);
-        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.toString(), 2, 2, Filter.ComparisonScope.All);
+        assertPermanentCount(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2);
+        assertPowerToughness(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand(), 2, 2, Filter.ComparisonScope.All);
     }
     
 }

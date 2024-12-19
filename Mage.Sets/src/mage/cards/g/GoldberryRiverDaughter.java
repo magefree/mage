@@ -137,21 +137,22 @@ class GoldberryRiverDaughterToEffect extends OneShotEffect {
         }
 
         List<Counter> counters = new ArrayList<>(fromPermanent.getCounters(game).values());
-        counters.sort((c1, c2) -> c1.getName().compareTo(c2.getName()));
+        counters.sort(Comparator.comparing(Counter::getName));
 
         List<MultiAmountMessage> messages = counters.stream()
                 .map(c -> new MultiAmountMessage(c.getName() + " (" + c.getCount() + ")", 0, c.getCount()))
                 .collect(Collectors.toList());
-        int max = messages.stream().map(m -> m.max).reduce(0, Integer::sum);
+        int totalMin = 1;
+        int totalMax = messages.stream().mapToInt(m -> m.max).sum();
 
         int total;
         List<Integer> choices;
         do {
-            choices = controller.getMultiAmountWithIndividualConstraints(Outcome.Neutral, messages, 1,
-                    max, MultiAmountType.COUNTERS, game);
+            choices = controller.getMultiAmountWithIndividualConstraints(Outcome.Neutral, messages, totalMin,
+                    totalMax, MultiAmountType.COUNTERS, game);
 
-            total = choices.stream().reduce(0, Integer::sum);
-        } while (total < 1);
+            total = choices.stream().mapToInt(x -> x).sum();
+        } while (total < totalMin && controller.canRespond());
 
         // Move the counters. Make sure some counters were actually moved.
         boolean movedCounters = false;

@@ -1,9 +1,8 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -50,7 +49,7 @@ public final class DarigaazReincarnated extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // If Darigaaz Reincarnated would die, instead exile it with three egg counters on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DarigaazReincarnatedDiesEffect()));
+        this.addAbility(new SimpleStaticAbility(new DarigaazReincarnatedDiesEffect()));
 
         // At the beginning of your upkeep, if Darigaaz is exiled with an egg counter on it, remove an egg counter from it. Then if Darigaaz has no egg counters on it, return it to the battlefield.
         this.addAbility(new DarigaazReincarnatedInterveningIfTriggeredAbility());
@@ -112,7 +111,7 @@ class DarigaazReincarnatedDiesEffect extends ReplacementEffectImpl {
 class DarigaazReincarnatedInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
 
     public DarigaazReincarnatedInterveningIfTriggeredAbility() {
-        super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new DarigaazReincarnatedReturnEffect(), TargetController.YOU, false),
+        super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, TargetController.YOU, new DarigaazReincarnatedReturnEffect(), false),
                 DarigaazReincarnatedCondition.instance,
                 "At the beginning of your upkeep, if {this} is exiled with an egg counter on it, "
                         + "remove an egg counter from it. Then if {this} has no egg counters on it, return it to the battlefield");

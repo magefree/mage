@@ -36,7 +36,7 @@ public final class NosyGoblin extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}, Sacrifice Nosy Goblin: Destroy target face-down creature.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DestroyTargetEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

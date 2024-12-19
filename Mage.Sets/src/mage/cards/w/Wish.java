@@ -121,7 +121,7 @@ class WishWatcher extends Watcher {
     public void watch(GameEvent event, Game game) {
         if ((GameEvent.EventType.SPELL_CAST.equals(event.getType()) || GameEvent.EventType.LAND_PLAYED.equals(event.getType()))
                 && event.hasApprovingIdentifier(MageIdentifier.WishWatcher)) {
-            usedFrom.add(event.getAdditionalReference().getApprovingMageObjectReference());
+            usedFrom.add(event.getApprovingObject().getApprovingMageObjectReference());
         }
     }
 

@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.constants.SubType;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -47,8 +47,8 @@ public final class MindWhip extends CardImpl {
                 "");
         effect.setText("that player may pay {3}. If they don't, {this} deals 2 damage to that player and you tap that creature.");
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                effect,
-                TargetController.CONTROLLER_ATTACHED_TO, false));
+                TargetController.CONTROLLER_ATTACHED_TO, effect,
+                false));
 
     }
 

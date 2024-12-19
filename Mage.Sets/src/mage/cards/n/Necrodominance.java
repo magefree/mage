@@ -1,23 +1,18 @@
 package mage.cards.n;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.SkipDrawStepEffect;
 import mage.abilities.effects.common.continuous.MaximumHandSizeControllerEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.replacement.GraveyardFromAnywhereExileReplacementEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 
 import java.util.UUID;
@@ -37,7 +32,7 @@ public final class Necrodominance extends CardImpl {
 
         // At the beginning of your end step, you may pay any amount of life. If you do, draw that many cards.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new NecrodominanceEffect(), TargetController.YOU, false
+                new NecrodominanceEffect()
         ));
 
         // Your maximum hand size is five.
@@ -50,7 +45,7 @@ public final class Necrodominance extends CardImpl {
         ));
 
         // If a card or token would be put into your graveyard from anywhere, exile it instead.
-        this.addAbility(new SimpleStaticAbility(new NecrodominanceReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new GraveyardFromAnywhereExileReplacementEffect(true, true)));
     }
 
     private Necrodominance(final Necrodominance card) {
@@ -95,50 +90,4 @@ class NecrodominanceEffect extends OneShotEffect {
         return true;
     }
 
-}
-
-// Inspired by [Rest in Peace] and [Wheel of Sun and Moon]
-class NecrodominanceReplacementEffect extends ReplacementEffectImpl {
-
-    NecrodominanceReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Exile);
-        staticText = "If a card or token would be put into your graveyard from anywhere, exile it instead";
-    }
-
-    private NecrodominanceReplacementEffect(final NecrodominanceReplacementEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public NecrodominanceReplacementEffect copy() {
-        return new NecrodominanceReplacementEffect(this);
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        ((ZoneChangeEvent) event).setToZone(Zone.EXILED);
-        return false;
-    }
-
-    @Override
-    public boolean checksEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.ZONE_CHANGE;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-        if (zEvent.getToZone() != Zone.GRAVEYARD) {
-            return false;
-        }
-        Card card = game.getCard(event.getTargetId());
-        if (card != null && card.isOwnedBy(source.getControllerId())) {
-            return true;
-        }
-        Permanent token = game.getPermanent(event.getTargetId());
-        if (token != null && token instanceof PermanentToken && token.isOwnedBy(source.getControllerId())) {
-            return true;
-        }
-        return false;
-    }
 }

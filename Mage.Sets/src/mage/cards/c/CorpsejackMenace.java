@@ -37,7 +37,7 @@ public final class CorpsejackMenace extends CardImpl {
         this.toughness = new MageInt(4);
 
         // If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on it instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CorpsejackMenaceReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new CorpsejackMenaceReplacementEffect()));
 
     }
 

@@ -37,7 +37,6 @@ public final class TeysaKarlov extends CardImpl {
 
         // Creature tokens you control have vigilance and lifelink.
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(
                         VigilanceAbility.getInstance(),
                         Duration.WhileOnBattlefield,

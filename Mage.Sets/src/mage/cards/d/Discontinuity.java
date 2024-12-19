@@ -24,7 +24,7 @@ public final class Discontinuity extends CardImpl {
         // As long as it's your turn, this spell costs {2}{U}{U} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SpellCostReductionSourceEffect(
                 new ManaCostsImpl<>("{2}{U}{U}"), MyTurnCondition.instance
-        ).setText("as long as it's your turn, this spell costs {2}{U}{U} less to cast"))
+        ).setText("during your turn, this spell costs {2}{U}{U} less to cast"))
                 .setRuleAtTheTop(true)
                 .addHint(MyTurnHint.instance));
 

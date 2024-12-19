@@ -18,6 +18,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -31,7 +32,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public final class SwoopingPteranodon extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.DINOSAUR, "Dinosaur with flying");
+    private static final FilterPermanent filter = new FilterControlledPermanent(SubType.DINOSAUR, "Dinosaur you control with flying");
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
@@ -55,7 +56,7 @@ public final class SwoopingPteranodon extends CardImpl {
         // It gains flying and haste until end of turn.
         // At the beginning of the next end step, target land deals 3 damage to that creature.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
-                new GainControlTargetEffect(Duration.EndOfTurn), filter, false, true);
+                new GainControlTargetEffect(Duration.EndOfTurn), filter, false, false);
         ability.addEffect(new UntapTargetEffect().setText("Untap that creature"));
         ability.addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn).setText("It gains flying"));
         ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn).setText("and haste until end of turn."));

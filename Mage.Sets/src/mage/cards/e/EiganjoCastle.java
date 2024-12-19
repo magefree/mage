@@ -30,7 +30,7 @@ public final class EiganjoCastle extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.supertype.add(SuperType.LEGENDARY);
         this.addAbility(new WhiteManaAbility());
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ColoredManaCost(ColoredManaSymbol.W));
+        Ability ability = new SimpleActivatedAbility(new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

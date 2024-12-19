@@ -1,6 +1,7 @@
 package mage.abilities.effects.common;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -25,16 +26,6 @@ public class DrawDiscardTargetEffect extends OneShotEffect {
         this.cardsToDraw = cardsToDraw;
         this.cardsToDiscard = cardsToDiscard;
         this.random = random;
-        staticText = new StringBuilder("target player draws ")
-                .append(CardUtil.numberToText(cardsToDraw, "a"))
-                .append(" card")
-                .append(cardsToDraw > 1 ? "s" : "")
-                .append(", then discards ")
-                .append(CardUtil.numberToText(cardsToDiscard, "a"))
-                .append(" card")
-                .append(cardsToDiscard > 1 ? "s" : "")
-                .append(random ? " at random" : "")
-                .toString();
     }
 
     private DrawDiscardTargetEffect(final DrawDiscardTargetEffect effect) {
@@ -59,4 +50,16 @@ public class DrawDiscardTargetEffect extends OneShotEffect {
         }
         return false;
     }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
+        return getTargetPointer().describeTargets(mode.getTargets(), "that player") + " draws " +
+                CardUtil.numberToText(cardsToDraw, "a") + " card" + (cardsToDraw > 1 ? "s" : "") +
+                ", then discards " + CardUtil.numberToText(cardsToDiscard, "a") +
+                " card" + (cardsToDiscard > 1 ? "s" : "") + (random ? " at random" : "");
+    }
+
 }

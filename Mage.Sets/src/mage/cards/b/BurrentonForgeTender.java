@@ -39,7 +39,7 @@ public final class BurrentonForgeTender extends CardImpl {
         this.addAbility(ProtectionAbility.from(ObjectColor.RED));
         
         // Sacrifice Burrenton Forge-Tender: Prevent all damage a red source of your choice would deal this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,  new PreventDamageBySourceEffect(filterObject), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility( new PreventDamageBySourceEffect(filterObject), new SacrificeSourceCost()));
 
     }
 

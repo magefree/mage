@@ -1,7 +1,7 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -32,13 +32,13 @@ public final class AvariceAmulet extends CardImpl {
         // Equipped creature gets +2/+0
         Effect effect = new BoostEquippedEffect(2, 0);
         effect.setText("Equipped creature gets +2/+0");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         // and has vigilance
         effect = new GainAbilityAttachedEffect(VigilanceAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and has vigilance");
         ability.addEffect(effect);
         //and "At the beginning of your upkeep, draw a card."
-        effect = new GainAbilityAttachedEffect(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1), TargetController.YOU, false), AttachmentType.EQUIPMENT);
+        effect = new GainAbilityAttachedEffect(new BeginningOfUpkeepTriggeredAbility(new DrawCardSourceControllerEffect(1)), AttachmentType.EQUIPMENT);
         effect.setText("and \"At the beginning of your upkeep, draw a card.\"");
         ability.addEffect(effect);
         this.addAbility(ability);

@@ -36,12 +36,11 @@ public final class TidewaterMinion extends CardImpl {
         
         // {4}: Tidewater Minion loses defender until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, 
                 new LoseAbilitySourceEffect(DefenderAbility.getInstance(), Duration.EndOfTurn), 
                 new ManaCostsImpl<>("{4}")));
         
         // {tap}: Untap target permanent.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new UntapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

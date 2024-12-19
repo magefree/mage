@@ -38,7 +38,7 @@ public final class Pariah extends CardImpl {
         this.addAbility(new EnchantAbility(auraTarget));
         
         // All damage that would be dealt to you is dealt to enchanted creature instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PariahEffect()));
+        this.addAbility(new SimpleStaticAbility(new PariahEffect()));
     }
 
     private Pariah(final Pariah card) {

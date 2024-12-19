@@ -2,7 +2,7 @@ package mage.cards.t;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -53,7 +53,7 @@ public final class TheThirteenthDoctor extends CardImpl {
 
         // Team TARDIS -- At the beginning of your end step, untap each creature you control with a counter on it.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new UntapAllEffect(filter2), TargetController.YOU, false
+                new UntapAllEffect(filter2)
         ).withFlavorWord("Team TARDIS"));
 
     }

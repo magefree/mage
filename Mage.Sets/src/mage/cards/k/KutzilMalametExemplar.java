@@ -1,7 +1,7 @@
 package mage.cards.k;
 
 import mage.MageInt;
-import mage.abilities.common.DealCombatDamageControlledTriggeredAbility;
+import mage.abilities.common.OneOrMoreCombatDamagePlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.ruleModifying.CantCastDuringYourTurnEffect;
@@ -39,7 +39,7 @@ public final class KutzilMalametExemplar extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new CantCastDuringYourTurnEffect()));
 
         // Whenever one or more creatures you control each with power greater than its base power deals combat damage to a player, draw a card.
-        this.addAbility(new DealCombatDamageControlledTriggeredAbility(new DrawCardSourceControllerEffect(1), filter)
+        this.addAbility(new OneOrMoreCombatDamagePlayerTriggeredAbility(new DrawCardSourceControllerEffect(1), filter)
                 .setTriggerPhrase("Whenever one or more creatures you control each with power greater than its base power"
                         + " deals combat damage to a player, ")
         );

@@ -32,7 +32,7 @@ public final class ShipwreckMoray extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GetEnergyCountersControllerEffect(4)));
 
         // Pay {E}: Shipwreck Moray gets +2/-2 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -2, Duration.EndOfTurn), new PayEnergyCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(2, -2, Duration.EndOfTurn), new PayEnergyCost(1)));
     }
 
     private ShipwreckMoray(final ShipwreckMoray card) {

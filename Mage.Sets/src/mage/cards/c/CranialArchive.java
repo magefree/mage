@@ -27,7 +27,7 @@ public final class CranialArchive extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{2}");
 
         // {2}, Exile Cranial Archive: Target player shuffles their graveyard into their library. Draw a card.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CranialArchiveEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new CranialArchiveEffect(), new GenericManaCost(2));
         ability.addCost(new ExileSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

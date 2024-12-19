@@ -42,7 +42,7 @@ public final class RealmSeekers extends CardImpl {
                 "with X +1/+1 counters on it, where X is the total number of cards in all players' hands"));
         
         // {2}{G}, Remove a +1/+1 counter from Realm Seekers: Search your library for a land card, reveal it, put it into your hand, then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterLandCard()), true), new ManaCostsImpl<>("{2}{G}"));
+        Ability ability = new SimpleActivatedAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterLandCard()), true), new ManaCostsImpl<>("{2}{G}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         this.addAbility(ability);
     }

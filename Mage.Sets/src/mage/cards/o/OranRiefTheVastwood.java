@@ -31,7 +31,7 @@ public final class OranRiefTheVastwood extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.LAND},null);
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new GreenManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OranRiefTheVastwoodEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new OranRiefTheVastwoodEffect(), new TapSourceCost()));
     }
 
     private OranRiefTheVastwood(final OranRiefTheVastwood card) {

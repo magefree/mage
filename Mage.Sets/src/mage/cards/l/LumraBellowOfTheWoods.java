@@ -5,17 +5,18 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.LandsYouControlCount;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
+import mage.abilities.effects.common.ReturnFromYourGraveyardToBattlefieldAllEffect;
 import mage.abilities.effects.common.continuous.SetBasePowerToughnessSourceEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.SubType;
+import mage.constants.SuperType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -46,7 +47,7 @@ public final class LumraBellowOfTheWoods extends CardImpl {
 
         // When Lumra enters, mill four cards. Then return all land cards from your graveyard to the battlefield tapped.
         Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(4));
-        ability.addEffect(new LumraBellowOfTheWoodsEffect());
+        ability.addEffect(new ReturnFromYourGraveyardToBattlefieldAllEffect(StaticFilters.FILTER_CARD_LANDS, true).concatBy("Then"));
         this.addAbility(ability);
     }
 
@@ -57,31 +58,5 @@ public final class LumraBellowOfTheWoods extends CardImpl {
     @Override
     public LumraBellowOfTheWoods copy() {
         return new LumraBellowOfTheWoods(this);
-    }
-}
-
-class LumraBellowOfTheWoodsEffect extends OneShotEffect {
-
-    LumraBellowOfTheWoodsEffect() {
-        super(Outcome.Benefit);
-        staticText = "Then return all land cards from your graveyard to the battlefield tapped";
-    }
-
-    private LumraBellowOfTheWoodsEffect(final LumraBellowOfTheWoodsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LumraBellowOfTheWoodsEffect copy() {
-        return new LumraBellowOfTheWoodsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        return player != null && player.moveCards(
-                player.getGraveyard().getCards(StaticFilters.FILTER_CARD_LAND, game),
-                Zone.BATTLEFIELD, source, game, true, false, false, null
-        );
     }
 }

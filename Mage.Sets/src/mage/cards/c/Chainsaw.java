@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.DiesOneOrMoreCreaturesTriggeredAbility;
+import mage.abilities.common.DiesOneOrMoreTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -16,6 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
+import mage.filter.StaticFilters;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -38,7 +39,8 @@ public final class Chainsaw extends CardImpl {
         this.addAbility(ability);
 
         // Whenever one or more creatures die, put a rev counter on Chainsaw.
-        this.addAbility(new DiesOneOrMoreCreaturesTriggeredAbility(new AddCountersSourceEffect(CounterType.REV.createInstance())));
+        this.addAbility(new DiesOneOrMoreTriggeredAbility(new AddCountersSourceEffect(CounterType.REV.createInstance()),
+                StaticFilters.FILTER_PERMANENT_CREATURES, false));
 
         // Equipped creature gets +X/+0, where X is the number of rev counters on Chainsaw.
         this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(xValue, StaticValue.get(0))));

@@ -36,10 +36,10 @@ public final class OppressiveRays extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature can't attack or block unless its controller pays {3}.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockUnlessPaysAttachedEffect(new ManaCostsImpl<>("{3}"), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockUnlessPaysAttachedEffect(new ManaCostsImpl<>("{3}"), AttachmentType.AURA)));
 
         // Activated abilities of enchanted creature cost {3} more to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OppressiveRaysCostModificationEffect()));
+        this.addAbility(new SimpleStaticAbility(new OppressiveRaysCostModificationEffect()));
     }
 
     private OppressiveRays(final OppressiveRays card) {

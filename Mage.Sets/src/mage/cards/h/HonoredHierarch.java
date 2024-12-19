@@ -40,7 +40,7 @@ public final class HonoredHierarch extends CardImpl {
                 new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield),
                 RenownedSourceCondition.instance,
                 "As long as {this} is renowned, it has vigilance");
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
+        Ability ability = new SimpleStaticAbility(effect);
         effect = new ConditionalContinuousEffect(
                 new GainAbilitySourceEffect(new AnyColorManaAbility(), Duration.WhileOnBattlefield),
                 RenownedSourceCondition.instance,

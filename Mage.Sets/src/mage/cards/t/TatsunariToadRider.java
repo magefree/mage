@@ -40,10 +40,8 @@ public final class TatsunariToadRider extends CardImpl {
 
     static {
         filter.add(new NamePredicate("Keimi"));
-        filter2.add(Predicates.or(
-                new AbilityPredicate(FlyingAbility.class),
-                new AbilityPredicate(ReachAbility.class)
-        ));
+        filter2.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
+        filter2.add(Predicates.not(new AbilityPredicate(ReachAbility.class)));
     }
 
     private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter, ComparisonType.EQUAL_TO, 0);

@@ -26,7 +26,7 @@ public final class GraftedWargear extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 2)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(3, 2)));
 
         // Whenever Grafted Wargear becomes unattached from a permanent, sacrifice that permanent.
         this.addAbility(new UnattachedTriggeredAbility(new SacrificeTargetEffect().setText("sacrifice that permanent"), false));

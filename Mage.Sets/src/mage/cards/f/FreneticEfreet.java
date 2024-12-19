@@ -34,7 +34,6 @@ public final class FreneticEfreet extends CardImpl {
 
         // {0}: Flip a coin. If you win the flip, Frenetic Efreet phases out. If you lose the flip, sacrifice Frenetic Efreet.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new FreneticEfreetEffect(),
                 new GenericManaCost(0)
         ));

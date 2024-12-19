@@ -28,7 +28,7 @@ public final class KozileksPathfinder extends CardImpl {
         this.toughness = new MageInt(5);
 
         // {C}: Target creature can't block Kozilek's Pathfinder this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn),
+        Ability ability = new SimpleActivatedAbility(new CantBeBlockedByTargetSourceEffect(Duration.EndOfTurn),
                 new ManaCostsImpl<>("{C}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

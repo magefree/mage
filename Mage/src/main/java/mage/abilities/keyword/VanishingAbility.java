@@ -1,7 +1,7 @@
 package mage.abilities.keyword;
 
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.SourceHasCounterCondition;
@@ -9,7 +9,6 @@ import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -30,8 +29,7 @@ public class VanishingAbility extends EntersBattlefieldAbility {
         this.amount = amount;
         this.addSubAbility(new ConditionalInterveningIfTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(
-                        new RemoveCounterSourceEffect(CounterType.TIME.createInstance()),
-                        TargetController.YOU, false
+                        new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), false
                 ), condition, "At the beginning of your upkeep, if this permanent " +
                 "has a time counter on it, remove a time counter from it."
         ).setRuleVisible(false));

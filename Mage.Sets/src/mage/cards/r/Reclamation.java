@@ -26,7 +26,7 @@ public final class Reclamation extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{W}");
 
         // Black creatures can't attack unless their controller sacrifices a land for each black creature they control that's attacking.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ReclamationCostToAttackBlockEffect()));
+        this.addAbility(new SimpleStaticAbility(new ReclamationCostToAttackBlockEffect()));
         
     }
 

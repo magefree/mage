@@ -36,7 +36,7 @@ public final class GodhunterOctopus extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Godhunter Octopus can't attack unless defending player controls an enchantment or an enchanted permanent.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackUnlessDefenderControllsPermanent(filter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackUnlessDefenderControllsPermanent(filter)));
     }
 
     private GodhunterOctopus(final GodhunterOctopus card) {

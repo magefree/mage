@@ -37,10 +37,10 @@ public final class DaruWarchief extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Soldier spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Soldier creatures you control get +1/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 2, Duration.WhileOnBattlefield, filterCreatures, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(1, 2, Duration.WhileOnBattlefield, filterCreatures, false)));
     }
 
     private DaruWarchief(final DaruWarchief card) {

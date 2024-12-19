@@ -1,6 +1,7 @@
 package mage.cards.m;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -64,7 +65,7 @@ public class MariTheKillingQuill extends CardImpl {
         //  "Whenever this creature deals combat damage to a player, you may remove a hit counter from a card that player owns in exile.
         //   If you do, draw a card and create two Treasure tokens."
         GainAbilityControlledEffect gainDeathTouchEffect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter);
-        Ability mainAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, gainDeathTouchEffect);
+        Ability mainAbility = new SimpleStaticAbility(gainDeathTouchEffect);
 
         // NOTE: Optional part is handled inside the effect
         Ability dealsDamageAbility = new DealsCombatDamageToAPlayerTriggeredAbility(new MariTheKillingQuillDealsDamageEffect(), false, true);
@@ -165,6 +166,7 @@ class MariTheKillingQuillCreatureDiesAbility extends TriggeredAbilityImpl {
 
     public MariTheKillingQuillCreatureDiesAbility() {
         super(Zone.BATTLEFIELD, new MariTheKillingQuillExileCreatureEffect(), false);
+        setLeavesTheBattlefieldTrigger(true);
     }
 
     private MariTheKillingQuillCreatureDiesAbility(final MariTheKillingQuillCreatureDiesAbility ability) {
@@ -201,6 +203,11 @@ class MariTheKillingQuillCreatureDiesAbility extends TriggeredAbilityImpl {
     @Override
     public String getRule() {
         return "Whenever a creature an opponent controls dies, exile it with a hit counter on it.";
+    }
+
+    @Override
+    public boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event) {
+        return TriggeredAbilityImpl.isInUseableZoneDiesTrigger(this, sourceObject, event, game);
     }
 }
 

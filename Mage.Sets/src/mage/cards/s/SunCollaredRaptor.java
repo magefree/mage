@@ -32,7 +32,6 @@ public final class SunCollaredRaptor extends CardImpl {
 
         // {2}{R}: Sun-Collared Raptor gets +3/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                Zone.BATTLEFIELD,
                 new BoostSourceEffect(3, 0, Duration.EndOfTurn),
                 new ManaCostsImpl<>("{2}{R}"))
         );

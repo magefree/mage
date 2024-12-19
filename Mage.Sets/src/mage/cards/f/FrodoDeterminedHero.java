@@ -50,7 +50,7 @@ public final class FrodoDeterminedHero extends CardImpl {
         // As long as it's your turn, prevent all damage that would be dealt to Frodo.
         this.addAbility(new SimpleStaticAbility(new ConditionalPreventionEffect(
                 new PreventAllDamageToSourceEffect(Duration.WhileOnBattlefield), MyTurnCondition.instance,
-                "as long as it's your turn, prevent all damage that would be dealt to {this}"
+                "during your turn, prevent all damage that would be dealt to {this}"
         )));
     }
 

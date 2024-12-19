@@ -29,7 +29,7 @@ public final class LightningGreaves extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has haste and shroud.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT));
+        Ability ability = new SimpleStaticAbility(new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT));
         Effect effect = new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT);
         effect.setText("and shroud");
         ability.addEffect(effect);

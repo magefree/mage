@@ -40,7 +40,7 @@ public final class EchoBaseCommando extends CardImpl {
         this.addAbility(new ProtectionAbility(filter));
 
         // Activated abilities of creatures your opponent controls cost {2} more to activate.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EchoBaseCommandoEffect()));
+        this.addAbility(new SimpleStaticAbility(new EchoBaseCommandoEffect()));
 
     }
 

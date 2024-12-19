@@ -45,7 +45,7 @@ public final class MairsilThePretender extends CardImpl {
 
         // Mairsil, the Pretender has all activated abilities of all cards you own in exile with cage counters on them. 
         // You may activate each of those abilities only once each turn.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new MairsilThePretenderGainAbilitiesEffect());
+        Ability ability = new SimpleStaticAbility(new MairsilThePretenderGainAbilitiesEffect());
         this.addAbility(ability);
     }
 

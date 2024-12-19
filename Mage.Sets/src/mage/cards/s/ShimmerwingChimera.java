@@ -2,14 +2,13 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledEnchantmentPermanent;
 import mage.filter.predicate.mageobject.AnotherPredicate;
@@ -41,7 +40,7 @@ public final class ShimmerwingChimera extends CardImpl {
 
         // At the beginning of your upkeep, return up to one other target enchantment you control to its owner's hand.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(
-                new ReturnToHandTargetEffect(), TargetController.YOU, false
+                new ReturnToHandTargetEffect()
         );
         ability.addTarget(new TargetPermanent(0, 1, filter, false));
         this.addAbility(ability);

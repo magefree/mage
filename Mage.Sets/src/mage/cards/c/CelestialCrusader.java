@@ -48,7 +48,7 @@ public final class CelestialCrusader extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Other white creatures get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
     }
 
     private CelestialCrusader(final CelestialCrusader card) {

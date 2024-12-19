@@ -42,7 +42,7 @@ public final class TempestDjinn extends CardImpl {
 
         // Tempest Djinn gets +1/+0 for each basic Island you control.
         PermanentsOnBattlefieldCount count = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(count, StaticValue.get(0), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(count, StaticValue.get(0), Duration.WhileOnBattlefield)));
     }
 
     private TempestDjinn(final TempestDjinn card) {

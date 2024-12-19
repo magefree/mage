@@ -37,7 +37,7 @@ public final class SokenzanSpellblade extends CardImpl {
         // {1}{R}: Sokenzan Spellblade gets +X/+0 until end of turn, where X is the number of cards in your hand.
         Effect effect = new BoostSourceEffect(CardsInControllerHandCount.instance, StaticValue.get(0), Duration.EndOfTurn);
         effect.setText("{this} gets +X/+0 until end of turn, where X is the number of cards in your hand");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(
                 effect, new ManaCostsImpl<>("{1}{R}")
         ));
     }

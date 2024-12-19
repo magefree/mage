@@ -2,7 +2,7 @@ package mage.cards.s;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -50,8 +50,8 @@ public final class SawbladeSkinripper extends CardImpl {
 
         // At the beginning of your end step, if you sacrificed one or more permanents this turn, Sawblade Skinripper deals that much damage to any target.
         ability = new BeginningOfEndStepTriggeredAbility(
-                new DamageTargetEffect(SawbladeSkinripperValue.instance), TargetController.YOU,
-                SawbladeSkinripperCondition.instance, false
+                TargetController.YOU, new DamageTargetEffect(SawbladeSkinripperValue.instance),
+                false, SawbladeSkinripperCondition.instance
         );
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability, new PermanentsSacrificedWatcher());

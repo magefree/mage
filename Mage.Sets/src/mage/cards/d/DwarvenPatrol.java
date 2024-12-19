@@ -37,7 +37,7 @@ public final class DwarvenPatrol extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Dwarven Patrol doesn't untap during your untap step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapInControllersUntapStepSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
         // Whenever you cast a nonred spell, untap Dwarven Patrol.
         this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, false));
     }

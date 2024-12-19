@@ -34,7 +34,7 @@ public final class FallenFerromancer extends CardImpl {
         this.addAbility(InfectAbility.getInstance());
         
         // {1}{R}, {T}: Fallen Ferromancer deals 1 damage to any target.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addCost(new ManaCostsImpl<>("{1}{R}"));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

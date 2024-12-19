@@ -1,8 +1,8 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfDrawTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfDrawTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.discard.DiscardHandTargetEffect;
@@ -37,15 +37,15 @@ public final class CurseOfObsession extends CardImpl {
 
         // At the beginning of enchanted player's draw step, that player draws two additional cards.
         this.addAbility(new BeginningOfDrawTriggeredAbility(
-                new DrawCardTargetEffect(2)
+                TargetController.ENCHANTED, new DrawCardTargetEffect(2)
                         .setText("that player draws two additional cards"),
-                TargetController.ENCHANTED, false
+                false
         ));
 
         // At the beginning of enchanted player's end step, that player discards their hand.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new DiscardHandTargetEffect(),
-                TargetController.ENCHANTED, false
+                TargetController.ENCHANTED, new DiscardHandTargetEffect(),
+                false
         ));
     }
 

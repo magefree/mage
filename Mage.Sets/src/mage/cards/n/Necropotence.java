@@ -37,13 +37,13 @@ public final class Necropotence extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}{B}");
 
         // Skip your draw step.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipDrawStepEffect()));
+        this.addAbility(new SimpleStaticAbility(new SkipDrawStepEffect()));
         // Whenever you discard a card, exile that card from your graveyard.
         Effect effect = new ExileTargetEffect(null, "", Zone.GRAVEYARD);
         effect.setText("exile that card from your graveyard");
         this.addAbility(new NecropotenceTriggeredAbility(effect));
         // Pay 1 life: Exile the top card of your library face down. Put that card into your hand at the beginning of your next end step.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new NecropotenceEffect(), new PayLifeCost(1)));
+        this.addAbility(new SimpleActivatedAbility(new NecropotenceEffect(), new PayLifeCost(1)));
 
     }
 

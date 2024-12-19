@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfPostCombatMainTriggeredAbility;
+import mage.abilities.triggers.BeginningOfPostcombatMainTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.condition.common.RaidCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -43,12 +43,12 @@ public final class BrazenCannonade extends CardImpl {
 
         // Raid -- At the beginning of your postcombat main phase, if you attacked with a creature this turn, exile the top card of your library. Until end of combat on your next turn, you may play that card.
         Ability ability = new ConditionalInterveningIfTriggeredAbility(
-                new BeginningOfPostCombatMainTriggeredAbility(
+                new BeginningOfPostcombatMainTriggeredAbility(
                         new ExileTopXMayPlayUntilEffect(
                                 1, Duration.UntilEndCombatOfYourNextTurn
-                        ), TargetController.YOU, false
-                ), RaidCondition.instance, "At the beginning of your postcombat main phase, " +
-                "if you attacked with a creature this turn, exile the top card of your library. " +
+                        ), false
+                ), RaidCondition.instance, "At the beginning of each of your postcombat main phases, " +
+                "if you attacked this turn, exile the top card of your library. " +
                 "Until end of combat on your next turn, you may play that card."
         );
         this.addAbility(ability.setAbilityWord(AbilityWord.RAID).addHint(RaidHint.instance), new PlayerAttackedWatcher());

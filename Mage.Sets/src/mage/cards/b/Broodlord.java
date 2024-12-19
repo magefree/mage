@@ -16,7 +16,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-import mage.target.common.TargetPermanentAmount;
+import mage.target.common.TargetCreaturePermanentAmount;
 
 import java.util.UUID;
 
@@ -37,7 +37,7 @@ public final class Broodlord extends CardImpl {
 
         // Brood Telepathy -- When Broodlord enters the battlefield, distribute X +1/+1 counters among any number of other target creatures you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BroodlordEffect());
-        ability.addTarget(new TargetPermanentAmount(GetXValue.instance, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
+        ability.addTarget(new TargetCreaturePermanentAmount(GetXValue.instance, StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE));
         this.addAbility(ability.withFlavorWord("Brood Telepathy"));
     }
 

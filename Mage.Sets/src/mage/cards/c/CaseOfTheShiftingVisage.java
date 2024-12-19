@@ -1,7 +1,7 @@
 package mage.cards.c;
 
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.CaseAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -38,7 +38,7 @@ public final class CaseOfTheShiftingVisage extends CardImpl {
         this.subtype.add(SubType.CASE);
 
         // At the beginning of your upkeep, surveil 1.
-        Ability initialAbility = new BeginningOfUpkeepTriggeredAbility(new SurveilEffect(1, false), TargetController.YOU, false);
+        Ability initialAbility = new BeginningOfUpkeepTriggeredAbility(new SurveilEffect(1, false));
         // To solve — There are fifteen or more cards in your graveyard.
         Condition toSolveCondition = new CardsInControllerGraveyardCondition(15);
         // Solved — Whenever you cast a nonlegendary creature spell, copy that spell.

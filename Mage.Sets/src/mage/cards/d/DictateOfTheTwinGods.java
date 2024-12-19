@@ -31,7 +31,7 @@ public final class DictateOfTheTwinGods extends CardImpl {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // If a source would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DictateOfTheTwinGodsEffect()));
+        this.addAbility(new SimpleStaticAbility(new DictateOfTheTwinGodsEffect()));
 
     }
 

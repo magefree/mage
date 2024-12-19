@@ -40,7 +40,7 @@ public final class ShieldmageAdvocate extends CardImpl {
         // {tap}: Return target card from an opponent's graveyard to their hand. Prevent all damage that would be dealt to any target this turn by a source of your choice.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();
         effect.setText("Return target card from an opponent's graveyard to their hand");
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(effect, new TapSourceCost());
 
         effect = new ShieldmageAdvocateEffect();
         effect.setTargetPointer(new SecondTargetPointer());

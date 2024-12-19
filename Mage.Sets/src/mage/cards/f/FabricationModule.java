@@ -34,7 +34,7 @@ public final class FabricationModule extends CardImpl {
         this.addAbility(ability);
 
         // {4}, {T}: You get {E}.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GetEnergyCountersControllerEffect(1), new GenericManaCost(4));
+        ability = new SimpleActivatedAbility(new GetEnergyCountersControllerEffect(1), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

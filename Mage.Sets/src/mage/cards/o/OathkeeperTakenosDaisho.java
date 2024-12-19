@@ -32,7 +32,7 @@ public final class OathkeeperTakenosDaisho extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +3/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(3, 1, Duration.WhileOnBattlefield)));
 
         // Whenever equipped creature dies, return that card to the battlefield under your control if it's a Samurai card.
         this.addAbility(new DiesAttachedTriggeredAbility(new ConditionalOneShotEffect(

@@ -36,7 +36,7 @@ public final class PrognosticSphinx extends CardImpl {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Discard a card: Prognostic Sphinx gains hexproof until end of turn. Tap it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost());
+        Ability ability = new SimpleActivatedAbility(new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost());
         Effect effect = new TapSourceEffect();
         effect.setText("Tap it");
         ability.addEffect(effect);

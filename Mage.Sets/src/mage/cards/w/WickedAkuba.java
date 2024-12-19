@@ -41,7 +41,7 @@ public final class WickedAkuba extends CardImpl {
         this.toughness = new MageInt(2);
 
         // {B}: Target player dealt damage by Wicked Akuba this turn loses 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.B));
+        Ability ability = new SimpleActivatedAbility(new LoseLifeTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.B));
         ability.addTarget(new TargetPlayer(1, 1, false, filter));
         this.addAbility(ability);
     }

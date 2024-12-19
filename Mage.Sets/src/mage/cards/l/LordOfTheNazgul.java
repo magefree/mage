@@ -54,7 +54,7 @@ public final class LordOfTheNazgul extends CardImpl {
         this.addAbility(FlyingAbility.getInstance());
 
         // Wraiths you control have protection from Ring-bearers.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 new ProtectionAbility(filterRingBearer), Duration.WhileOnBattlefield, filterWraith
         )));
 

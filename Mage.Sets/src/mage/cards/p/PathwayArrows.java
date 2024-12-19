@@ -33,10 +33,10 @@ public final class PathwayArrows extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature has "{2}, {T}: This creature deals 1 damage to target creature. If a colorless creature is dealt damage this way, tap it."
-        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PathwayArrowsEffect(), new GenericManaCost(2));
+        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(new PathwayArrowsEffect(), new GenericManaCost(2));
         ability2.addCost(new TapSourceCost());
         ability2.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(ability2, AttachmentType.EQUIPMENT)));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2), false));

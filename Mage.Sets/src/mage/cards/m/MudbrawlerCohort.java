@@ -51,7 +51,7 @@ public final class MudbrawlerCohort extends CardImpl {
         // Mudbrawler Cohort gets +1/+1 as long as you control another red creature.
         Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
         Effect effect = new ConditionalContinuousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), condition, rule);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
     }
 
     private MudbrawlerCohort(final MudbrawlerCohort card) {

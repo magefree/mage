@@ -25,7 +25,7 @@ public final class WanderingWolf extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Creatures with power less than Wandering Wolf's power can't block it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByCreaturesWithLessPowerEffect()));
+        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesWithLessPowerEffect()));
     }
 
     private WanderingWolf(final WanderingWolf card) {

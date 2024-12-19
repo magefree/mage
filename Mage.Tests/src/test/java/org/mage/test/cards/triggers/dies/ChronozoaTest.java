@@ -23,7 +23,7 @@ public class ChronozoaTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         // Flying
         // Vanishing 3 (This permanent enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)
-        // When Chronozoa is put into a graveyard from play, if it had no time counters on it, create two tokens that are copies of it.
+        // When Chronozoa dies, if it had no time counters on it, create two tokens that are copies of it.
         addCard(Zone.HAND, playerA, "Chronozoa"); // {3}{U}
         addCard(Zone.GRAVEYARD, playerA, "Chronozoa");
         // Sacrifice a creature: Scry 1. (To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)

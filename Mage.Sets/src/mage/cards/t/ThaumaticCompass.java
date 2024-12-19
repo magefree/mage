@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -18,7 +18,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.ComparisonType;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterLandPermanent;
@@ -34,7 +33,7 @@ public final class ThaumaticCompass extends CardImpl {
         this.secondSideCardClazz = mage.cards.s.SpiresOfOrazca.class;
 
         // {3}, {T}: Search your library for a basic land card, reveal it, put it into your hand, then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND), true),
                 new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
@@ -42,7 +41,7 @@ public final class ThaumaticCompass extends CardImpl {
 
         // At the beginning of your end step, if you control seven or more lands, transform Thaumatic Compass.
         this.addAbility(new TransformAbility());
-        TriggeredAbility ability2 = new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect(), TargetController.YOU, false);
+        TriggeredAbility ability2 = new BeginningOfEndStepTriggeredAbility(new TransformSourceEffect());
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability2,
                 new PermanentsOnTheBattlefieldCondition(new FilterLandPermanent(), ComparisonType.MORE_THAN, 6, true),

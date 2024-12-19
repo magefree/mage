@@ -2,7 +2,7 @@ package mage.cards.k;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.PutCounterOnCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.combat.GoadTargetEffect;
@@ -36,8 +36,8 @@ public final class KrosDefenseContractor extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, put a shield counter on target creature an opponent controls.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD,
-                new AddCountersTargetEffect(CounterType.SHIELD.createInstance()), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(
+                new AddCountersTargetEffect(CounterType.SHIELD.createInstance()));
         ability.addTarget(new TargetOpponentsCreaturePermanent());
         this.addAbility(ability);
 

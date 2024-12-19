@@ -26,7 +26,7 @@ public final class CrucibleOfFire extends CardImpl {
 
 
         // Dragon creatures you control get +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(3, 3, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(3, 3, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private CrucibleOfFire(final CrucibleOfFire card) {

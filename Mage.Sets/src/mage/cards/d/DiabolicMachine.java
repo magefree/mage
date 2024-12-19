@@ -25,7 +25,7 @@ public final class DiabolicMachine extends CardImpl {
         this.toughness = new MageInt(4);
 
         // {3}: Regenerate Diabolic Machine.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new GenericManaCost(3)));
     }
 
     private DiabolicMachine(final DiabolicMachine card) {

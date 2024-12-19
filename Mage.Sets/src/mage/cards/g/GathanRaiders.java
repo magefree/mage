@@ -31,7 +31,7 @@ public final class GathanRaiders extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Hellbent - Gathan Raiders gets +2/+2 as long as you have no cards in hand.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinuousEffect(
+        this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostSourceEffect(2,2,Duration.WhileOnBattlefield), HellbentCondition.instance,
                 "<i>Hellbent</i> &mdash; {this} gets +2/+2 as long as you have no cards in hand")));
         // Morph-Discard a card.

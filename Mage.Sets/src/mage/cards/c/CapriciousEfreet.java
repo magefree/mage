@@ -3,7 +3,7 @@ package mage.cards.c;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,7 +43,7 @@ public final class CapriciousEfreet extends CardImpl {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, choose target nonland permanent you control and up to two target nonland permanents you don't control. Destroy one of them at random.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CapriciousEfreetEffect(), TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CapriciousEfreetEffect());
         ability.addTarget(new TargetPermanent(filterControlled));
         ability.addTarget(new TargetPermanent(0, 2, filterNotControlled, false));
         this.addAbility(ability);

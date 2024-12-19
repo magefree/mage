@@ -40,7 +40,7 @@ public final class VishgrazTheDoomhive extends CardImpl {
 
         // Vishgraz gets +1/+1 for each poison counter your opponents have.
         DynamicValue value = OpponentsPoisonCountersCount.instance;
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)));
     }
 
     private VishgrazTheDoomhive(final VishgrazTheDoomhive card) {

@@ -51,7 +51,7 @@ public final class GarnaTheBloodflame extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GarnaTheBloodflameEffect(), false), new GarnaTheBloodflameWatcher());
 
         // Other creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES, true)));
     }
 

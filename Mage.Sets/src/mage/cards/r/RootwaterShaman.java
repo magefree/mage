@@ -39,7 +39,7 @@ public final class RootwaterShaman extends CardImpl {
         this.toughness = new MageInt(2);
 
         // You may cast Aura spells with enchant creature as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new CastAsThoughItHadFlashAllEffect(Duration.WhileOnBattlefield, filter, false)));
     }
 
     private RootwaterShaman(final RootwaterShaman card) {

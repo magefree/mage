@@ -37,7 +37,7 @@ public final class AccursedHorde extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {1}{B}: Target attacking Zombie gains indestructible until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{1}{B}"));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

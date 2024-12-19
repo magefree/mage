@@ -18,7 +18,7 @@ public final class SkeletonRegenerateToken extends TokenImpl {
         color.setBlack(true);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
+        this.addAbility(new SimpleActivatedAbility(new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
     private SkeletonRegenerateToken(final SkeletonRegenerateToken token) {

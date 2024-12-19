@@ -34,7 +34,7 @@ public final class Sandskin extends CardImpl {
         this.addAbility(ability);
 
         // Prevent all combat damage that would be dealt to and dealt by enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToAndByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", true)));
+        this.addAbility(new SimpleStaticAbility(new PreventAllDamageToAndByAttachedEffect(Duration.WhileOnBattlefield, "enchanted creature", true)));
     }
 
     private Sandskin(final Sandskin card) {

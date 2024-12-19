@@ -38,7 +38,7 @@ public final class SurvivorOfTheUnseen extends CardImpl {
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl<>("{2}")));
 
         // {T}: Draw two cards, then put a card from your hand on top of your library.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SurvivorOfTheUnseenEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new SurvivorOfTheUnseenEffect(), new TapSourceCost()));
     }
 
     private SurvivorOfTheUnseen(final SurvivorOfTheUnseen card) {

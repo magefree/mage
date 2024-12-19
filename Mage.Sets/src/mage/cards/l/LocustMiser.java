@@ -36,7 +36,7 @@ public final class LocustMiser extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Each opponent's maximum hand size is reduced by two.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(
                 new MaximumHandSizeControllerEffect(2, Duration.WhileOnBattlefield, HandSizeModification.REDUCE, TargetController.OPPONENT)));
     }
 

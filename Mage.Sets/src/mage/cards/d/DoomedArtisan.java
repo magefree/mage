@@ -1,7 +1,7 @@
 package mage.cards.d;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.combat.CantAttackBlockAllEffect;
@@ -41,7 +41,7 @@ public final class DoomedArtisan extends CardImpl {
 
         // At the beginning of your end step, create a colorless Sculpture artifact creature token with "This creature's power and toughness are equal to the number of Sculptures you control"
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new DoomedArtisanToken()), TargetController.YOU, false)
+                new CreateTokenEffect(new DoomedArtisanToken()))
         );
     }
 

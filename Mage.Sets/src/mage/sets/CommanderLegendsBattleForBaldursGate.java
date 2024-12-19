@@ -305,6 +305,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Hedron Archive", 861, Rarity.UNCOMMON, mage.cards.h.HedronArchive.class));
         cards.add(new SetCardInfo("Herald's Horn", 862, Rarity.UNCOMMON, mage.cards.h.HeraldsHorn.class));
         cards.add(new SetCardInfo("Hex", 757, Rarity.RARE, mage.cards.h.Hex.class));
+        cards.add(new SetCardInfo("Hezrou", 131, Rarity.COMMON, mage.cards.h.Hezrou.class));
         cards.add(new SetCardInfo("High Priest of Penance", 848, Rarity.RARE, mage.cards.h.HighPriestOfPenance.class));
         cards.add(new SetCardInfo("Highland Forest", 896, Rarity.COMMON, mage.cards.h.HighlandForest.class));
         cards.add(new SetCardInfo("Hoarding Ogre", 181, Rarity.COMMON, mage.cards.h.HoardingOgre.class));
@@ -403,6 +404,7 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Minsc & Boo, Timeless Heroes", 285, Rarity.MYTHIC, mage.cards.m.MinscBooTimelessHeroes.class));
         cards.add(new SetCardInfo("Minthara, Merciless Soul", 286, Rarity.UNCOMMON, mage.cards.m.MintharaMercilessSoul.class));
         cards.add(new SetCardInfo("Mirror Entity", 701, Rarity.RARE, mage.cards.m.MirrorEntity.class));
+        cards.add(new SetCardInfo("Mirror of Life Trapping", 326, Rarity.RARE, mage.cards.m.MirrorOfLifeTrapping.class));
         cards.add(new SetCardInfo("Mizzium Mortars", 803, Rarity.RARE, mage.cards.m.MizziumMortars.class));
         cards.add(new SetCardInfo("Mocking Doppelganger", 667, Rarity.RARE, mage.cards.m.MockingDoppelganger.class));
         cards.add(new SetCardInfo("Modify Memory", 83, Rarity.UNCOMMON, mage.cards.m.ModifyMemory.class));

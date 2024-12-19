@@ -43,7 +43,7 @@ public final class TitanOfLittjara extends CardImpl {
         // Titan of Littjara is the chosen type in addition to its other types.
         ability.addEffect(new EnterAttributeAddChosenSubtypeEffect());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddChosenSubtypeEffect()));
+        this.addAbility(new SimpleStaticAbility(new AddChosenSubtypeEffect()));
 
         // Whenever Titan of Littjara enters the battlefield or attacks, you may draw a card for each other creature you control that shares a creature type with it. If you do, discard a card.
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(

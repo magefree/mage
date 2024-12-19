@@ -30,7 +30,7 @@ public final class DaringApprentice extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {tap}, Sacrifice Daring Apprentice: Counter target spell.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new CounterTargetEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);

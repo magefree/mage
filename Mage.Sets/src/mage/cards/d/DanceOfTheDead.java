@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.AnimateDeadTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
@@ -58,7 +58,7 @@ public final class DanceOfTheDead extends CardImpl {
         this.addAbility(ability);
 
         // At the beginning of the upkeep of enchanted creature's controller, that player may pay {1}{B}. If they do, untap that creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DanceOfTheDeadDoIfCostPaidEffect(), TargetController.CONTROLLER_ATTACHED_TO, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.CONTROLLER_ATTACHED_TO, new DanceOfTheDeadDoIfCostPaidEffect(), false));
     }
 
     private DanceOfTheDead(final DanceOfTheDead card) {

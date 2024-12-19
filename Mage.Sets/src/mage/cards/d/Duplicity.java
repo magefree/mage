@@ -7,8 +7,8 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.StaticAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
@@ -21,7 +21,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -41,10 +40,10 @@ public final class Duplicity extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DuplicityEffect(), false));
 
         // At the beginning of your upkeep, you may exile all cards from your hand face down. If you do, put all other cards you own exiled with Duplicity into your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DuplicityExileHandEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DuplicityExileHandEffect(), true));
 
         // At the beginning of your end step, discard a card.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new DiscardControllerEffect(1), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DiscardControllerEffect(1)));
 
         // When you lose control of Duplicity, put all cards exiled with Duplicity into their owner's graveyard.
         this.addAbility(new DuplicityEntersBattlefieldAbility(new CreateDelayedTriggeredAbilityEffect(new LoseControlDuplicity())));

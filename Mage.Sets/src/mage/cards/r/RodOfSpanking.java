@@ -30,7 +30,7 @@ public final class RodOfSpanking extends CardImpl {
 
         // 2, T: Rod of Spanking deals 1 damage to target player. Then untap Rod of
         // Spanking unless that player says "Thank you, sir. May I have another?"
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RodOfSpankingEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new RodOfSpankingEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

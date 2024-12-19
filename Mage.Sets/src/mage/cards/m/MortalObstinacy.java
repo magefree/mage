@@ -46,7 +46,7 @@ public final class MortalObstinacy extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1,1, Duration.WhileOnBattlefield)));
         // Whenever enchanted creature deals combat damage to a player, you may sacrifice Mortal Obstinacy. If you do, destroy target enchantment.
         this.addAbility(new MortalObstinacyAbility());
 
@@ -91,4 +91,3 @@ class MortalObstinacyAbility extends TriggeredAbilityImpl {
         return damageEvent.isCombatDamage() && damageMakingCreature != null && damageMakingCreature.getAttachments().contains(this.getSourceId());
     }
 }
-

@@ -42,7 +42,7 @@ public final class ForerunnerOfSlaughter extends CardImpl {
         this.addAbility(new DevoidAbility(this.color));
 
         // {1}: Target colorless creature gains haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new GenericManaCost(1));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

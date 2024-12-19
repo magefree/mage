@@ -38,7 +38,7 @@ public final class OhranYeti extends CardImpl {
         this.toughness = new MageInt(3);
 
         // {2}{S}: Target snow creature gains first strike until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(
+        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(
             FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl<>("{2}{S}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

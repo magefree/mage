@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.OneShotEffect;
@@ -14,7 +14,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -36,7 +35,7 @@ public final class LightshieldArray extends CardImpl {
 
         // At the beginning of your end step, put a +1/+1 counter on each creature that attacked this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new LightshieldArrayEffect(), TargetController.YOU, false
+                new LightshieldArrayEffect()
         ));
 
         // Sacrifice Lightshield Array: Creatures you control gain hexproof and indestructible until end of turn.

@@ -39,7 +39,7 @@ public final class Scourgemark extends CardImpl {
         // When Scourgemark enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1), false));
         // Enchanted creature gets +1/+0.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1,0, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1,0, Duration.WhileOnBattlefield)));
     }
 
     private Scourgemark(final Scourgemark card) {

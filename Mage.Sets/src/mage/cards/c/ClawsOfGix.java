@@ -22,7 +22,7 @@ public final class ClawsOfGix extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.ARTIFACT},"{0}");
 
         //{1}, Sacrifice a permanent: You gain 1 life.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(new GainLifeEffect(1), new GenericManaCost(1));
         ability.addCost(new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT));
         this.addAbility(ability);
     }

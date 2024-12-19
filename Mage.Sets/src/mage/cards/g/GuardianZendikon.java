@@ -43,7 +43,7 @@ public final class GuardianZendikon extends CardImpl {
         Ability ability = new EnchantAbility(auraTarget);
         this.addAbility(ability);
 
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(
+        Ability ability2 = new SimpleStaticAbility(new BecomesCreatureAttachedEffect(
                 new GuardianZendikonWallToken(), "Enchanted land is a 2/6 white Wall creature with defender. It's still a land", Duration.WhileOnBattlefield, BecomesCreatureAttachedEffect.LoseType.COLOR));
         this.addAbility(ability2);
 

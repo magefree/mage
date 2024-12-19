@@ -42,7 +42,7 @@ public final class EyeOfDoom extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new EyeOfDoomEffect(), false));
 
         // {2}, {tap}, Sacrifice Eye of Doom: Destroy each permanent with a doom counter on it.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyAllEffect(filter), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(new DestroyAllEffect(filter), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

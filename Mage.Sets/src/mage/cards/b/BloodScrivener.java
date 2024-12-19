@@ -30,7 +30,7 @@ public final class BloodScrivener  extends CardImpl {
         this.toughness = new MageInt(1);
 
         // If you would draw a card while you have no cards in hand, instead draw two cards and lose 1 life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BloodScrivenerReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(new BloodScrivenerReplacementEffect()));
 
     }
 

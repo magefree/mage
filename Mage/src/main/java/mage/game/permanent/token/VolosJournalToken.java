@@ -135,7 +135,9 @@ class VolosJournalTokenEffect extends OneShotEffect {
                 return true;
         }
 
-        player.choose(outcome, choice, game);
+        if (!player.choose(outcome, choice, game)) {
+            return false;
+        }
         notedTypes.add(choice.getChoiceKey());
         return true;
     }

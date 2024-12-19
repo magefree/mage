@@ -43,8 +43,8 @@ public final class Aurification extends CardImpl {
         BecomesSubtypeAllEffect becomesSubtypeAllEffect = new BecomesSubtypeAllEffect(Duration.WhileOnBattlefield, Arrays.asList(SubType.WALL), filter, false);
         becomesSubtypeAllEffect.setText("");
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, becomesSubtypeAllEffect));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield, filter, rule)));
+        this.addAbility(new SimpleStaticAbility(becomesSubtypeAllEffect));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(DefenderAbility.getInstance(), Duration.WhileOnBattlefield, filter, rule)));
 
         // When Aurification leaves the battlefield, remove all gold counters from all creatures.
         this.addAbility(new LeavesBattlefieldTriggeredAbility(new RemoveAllCountersAllEffect(

@@ -37,7 +37,7 @@ public final class BasalSliver extends CardImpl {
 
         // All Slivers have "Sacrifice this permanent: Add {B}{B}."
         Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana(2), new SacrificeSourceCost());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
                 ability, Duration.WhileOnBattlefield,
                 filter, "All Slivers have \"Sacrifice this permanent: Add {B}{B}.\"")));
     }

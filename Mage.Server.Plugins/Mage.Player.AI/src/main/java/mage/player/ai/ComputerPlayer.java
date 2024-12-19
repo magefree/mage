@@ -2233,13 +2233,6 @@ public class ComputerPlayer extends PlayerImpl {
     }
 
     @Override
-    public void assignDamage(int damage, List<UUID> targets, String singleTargetName, UUID attackerId, Ability source, Game game) {
-        log.debug("assignDamage");
-        //TODO: improve this
-        game.getPermanent(targets.get(0)).damage(damage, attackerId, source, game);
-    }
-
-    @Override
     // TODO: add AI support with outcome and replace random with min/max
     public int getAmount(int min, int max, String message, Game game) {
         log.debug("getAmount");
@@ -2254,11 +2247,11 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public List<Integer> getMultiAmountWithIndividualConstraints(Outcome outcome, List<MultiAmountMessage> messages,
-                                                                 int min, int max, MultiAmountType type, Game game) {
+                                                                 int totalMin, int totalMax, MultiAmountType type, Game game) {
         log.debug("getMultiAmount");
 
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, min, max);
+        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, totalMin, totalMax);
         if (needCount == 0) {
             return defaultList;
         }
@@ -2273,7 +2266,7 @@ public class ComputerPlayer extends PlayerImpl {
         // GOOD effect
         // values must be stable, so AI must able to simulate it and choose correct actions
         // fill max values as much as possible
-        return MultiAmountType.prepareMaxValues(messages, min, max);
+        return MultiAmountType.prepareMaxValues(messages, totalMin, totalMax);
     }
 
     @Override

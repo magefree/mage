@@ -39,7 +39,7 @@ public final class TezzeretsSimulacrum extends CardImpl {
 
         // {T}: Target opponent loses 1 life. If you control a Tezzeret planeswalker, that player loses 3 life instead.
         Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new ConditionalOneShotEffect(new LoseLifeTargetEffect(3), new LoseLifeTargetEffect(1),
                         condition,
                         "Target opponent loses 1 life. If you control a Tezzeret planeswalker, that player loses 3 life instead"), new TapSourceCost());

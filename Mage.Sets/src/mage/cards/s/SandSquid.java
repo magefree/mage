@@ -35,7 +35,7 @@ public final class SandSquid extends CardImpl {
         // You may choose not to untap Sand Squid during your untap step.
         this.addAbility(new SkipUntapOptionalAbility());
         // {tap}: Tap target creature. That creature doesn't untap during its controller's untap step for as long as Sand Squid remains tapped.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new TapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         ability.addEffect(new DontUntapAsLongAsSourceTappedEffect());
         this.addAbility(ability);

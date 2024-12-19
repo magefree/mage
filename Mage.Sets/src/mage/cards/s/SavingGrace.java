@@ -50,7 +50,7 @@ public final class SavingGrace extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SavingGraceReplacementEffect(), false));
 
         // Enchanted creature gets +0/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(0, 3, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(0, 3, Duration.WhileOnBattlefield)));
     }
 
     private SavingGrace(final SavingGrace card) {

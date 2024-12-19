@@ -38,7 +38,7 @@ public final class StasisCocoon extends CardImpl {
         // Enchanted artifact can't attack or block, and its activated abilities can't be activated.
         Effect effect = new CantBlockAttackActivateAttachedEffect();
         effect.setText("Enchanted artifact can't attack or block, and its activated abilities can't be activated");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
         
     }
 

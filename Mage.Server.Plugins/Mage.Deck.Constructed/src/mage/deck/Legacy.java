@@ -59,6 +59,7 @@ public class Legacy extends Constructed {
         banned.add("Necropotence");
         banned.add("Oath of Druids");
         banned.add("Oko, Thief of Crowns");
+        banned.add("Psychic Frog");
         banned.add("Ragavan, Nimble Pilferer");
         banned.add("Sensei's Divining Top");
         banned.add("Skullclamp");
@@ -73,6 +74,7 @@ public class Legacy extends Constructed {
         banned.add("Treasure Cruise");
         banned.add("Underworld Breach");
         banned.add("Vampiric Tutor");
+        banned.add("Vexing Bauble");
         banned.add("Wheel of Fortune");
         banned.add("Windfall");
         banned.add("Wrenn and Six");

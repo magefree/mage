@@ -33,7 +33,7 @@ public final class Broodwarden extends CardImpl {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         // Eldrazi Spawn creatures you control get +2/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 1, Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostControlledEffect(2, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     private Broodwarden(final Broodwarden card) {

@@ -3,7 +3,7 @@ package mage.cards.e;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -46,11 +46,11 @@ public final class ElendaAndAzor extends CardImpl {
 
         // At the beginning of each end step, you may pay 4 life. If you do, create a number of 1/1 black Vampire
         // Knight creature tokens with lifelink equal to the number of cards you've drawn this turn.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new DoIfCostPaid(new CreateTokenEffect(
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new DoIfCostPaid(new CreateTokenEffect(
                 new VampireKnightToken(), CardsDrawnThisTurnDynamicValue.instance)
                 .setText("create a number of 1/1 black Vampire Knight creature tokens with lifelink " +
                         "equal to the number of cards you've drawn this turn"), new PayLifeCost(4)),
-                TargetController.ANY, false).addHint(CardsDrawnThisTurnDynamicValue.getHint()));
+                false).addHint(CardsDrawnThisTurnDynamicValue.getHint()));
     }
 
     private ElendaAndAzor(final ElendaAndAzor card) {

@@ -3,7 +3,7 @@ package mage.cards.v;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
@@ -31,8 +31,8 @@ public final class ViashinoSandstalker extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // At the beginning of the end step, return Viashino Sandstalker to its owner's hand.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(new ReturnToHandSourceEffect(true),
-            TargetController.ANY, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(TargetController.ANY, new ReturnToHandSourceEffect(true),
+                false));
     }
 
     private ViashinoSandstalker(final ViashinoSandstalker card) {

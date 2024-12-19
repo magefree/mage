@@ -36,7 +36,7 @@ public final class SoulLink extends CardImpl {
         this.addAbility(new DealsDamageAttachedTriggeredAbility(Zone.BATTLEFIELD,
             new GainLifeEffect(SavedDamageValue.MUCH), false));
         // Whenever enchanted creature is dealt damage, you gain that much life.
-        this.addAbility(new DealtDamageAttachedTriggeredAbility(new GainLifeEffect(SavedDamageValue.MUCH), false));
+        this.addAbility(new DealtDamageAttachedTriggeredAbility(new GainLifeEffect(SavedDamageValue.MUCH)));
     }
 
     private SoulLink(final SoulLink card) {

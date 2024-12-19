@@ -42,7 +42,7 @@ public final class IronHeartChimera extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Sacrifice Iron-Heart Chimera: Put a +2/+2 counter on target Chimera creature. It gains vigilance.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(new AddCountersTargetEffect(CounterType.P2P2.createInstance()), new SacrificeSourceCost());
         ability.addEffect(new GainAbilityTargetEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield)
                 .setText("It gains vigilance. <i>(This effect lasts indefinitely.)</i>"));
         ability.addTarget(new TargetCreaturePermanent(filter));

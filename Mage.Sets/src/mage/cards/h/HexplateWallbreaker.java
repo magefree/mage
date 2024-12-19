@@ -34,7 +34,7 @@ public final class HexplateWallbreaker extends CardImpl {
         this.addAbility(new ForMirrodinAbility());
 
         // Equipped creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(2, 2)));
 
         // Whenever equipped creature attacks, if it's the first combat phase of the turn, untap
         // each attacking creature. After this phase, there is an additional combat phase.

@@ -32,7 +32,7 @@ public final class DauntingDefender extends CardImpl {
         this.toughness = new MageInt(3);
 
         // If a source would deal damage to a Cleric creature you control, prevent 1 of that damage.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DauntingDefenderEffect(1)));
+        this.addAbility(new SimpleStaticAbility(new DauntingDefenderEffect(1)));
     }
 
     private DauntingDefender(final DauntingDefender card) {

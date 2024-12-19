@@ -34,7 +34,7 @@ public final class FireShrineKeeper extends CardImpl {
         this.addAbility(new MenaceAbility(false));
 
         // {7}{R}, {T}, Sacrifice Fire Shrine Keeper: It deals 3 damage to each of up to two target creatures.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+        Ability ability = new SimpleActivatedAbility(
                 new DamageTargetEffect(3).setText("It deals 3 damage to each of up to two target creatures"), new ManaCostsImpl<>("{7}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

@@ -30,7 +30,7 @@ public final class NooseConstrictor extends CardImpl {
         this.addAbility(ReachAbility.getInstance());
 
         // Discard a card: Noose Constrictor gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), new DiscardCardCost()));
     }
 
     private NooseConstrictor(final NooseConstrictor card) {

@@ -39,7 +39,7 @@ public final class GlaringAegis extends CardImpl {
         this.addAbility(ability2);
         
         // Enchanted creature gets +1/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 3, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(1, 3, Duration.WhileOnBattlefield)));
     }
 
     private GlaringAegis(final GlaringAegis card) {

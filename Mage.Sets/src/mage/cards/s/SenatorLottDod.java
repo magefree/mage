@@ -31,10 +31,10 @@ public final class SenatorLottDod extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Spells your opponents cast that target you cost {2} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SenatorLottDodSpellsTargetingYouCostModificationEffect()));
+        this.addAbility(new SimpleStaticAbility(new SenatorLottDodSpellsTargetingYouCostModificationEffect()));
 
         // Spell your opponents cast that target a creature you control cost {1} more to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SenatorLottDodSpellsTargetingCreatureCostModificationEffect()));
+        this.addAbility(new SimpleStaticAbility(new SenatorLottDodSpellsTargetingCreatureCostModificationEffect()));
     }
 
     private SenatorLottDod(final SenatorLottDod card) {

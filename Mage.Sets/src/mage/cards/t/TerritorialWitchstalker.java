@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.combat.CanAttackAsThoughItDidntHaveDefenderSourceEffect;
@@ -16,7 +16,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -35,7 +34,7 @@ public final class TerritorialWitchstalker extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // At the beginning of combat on your turn, if you control a creature with power 4 or greater, Territorial Witchstalker gets +1/+0 until end of turn and can attack this turn as though it didn't have defender.
-        TriggeredAbility ability = new BeginningOfCombatTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfCombatTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn));
         ability.addEffect(new CanAttackAsThoughItDidntHaveDefenderSourceEffect(Duration.EndOfTurn));
         ability.addHint(FerociousHint.instance);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(

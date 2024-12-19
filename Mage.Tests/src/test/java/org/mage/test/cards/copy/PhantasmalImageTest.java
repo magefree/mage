@@ -668,4 +668,66 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         assertTrue("Cloak and Dagger should be a Rogue", cloakB.hasSubtype(SubType.ROGUE, currentGame));
         assertTrue("Cloak and Dagger should be an Equipment", cloakB.hasSubtype(SubType.EQUIPMENT, currentGame));
     }
+
+    @Test
+    public void test_SelfExploit_SidisiUndeadVizier_Normal() {
+        // bug https://github.com/magefree/mage/issues/5925
+        // You may have Phantasmal Image enter the battlefield as a copy of any creature on the battlefield,
+        // except it's an Illusion in addition to its other types and it has "When this creature becomes the
+        // target of a spell or ability, sacrifice it."
+        addCard(Zone.HAND, playerA, "Phantasmal Image"); // {1}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        //
+        // Exploit (When this creature enters the battlefield, you may sacrifice a creature.)
+        // When Sidisi, Undead Vizier exploits a creature, you may search your library for a card, put it into your hand, then shuffle your library.
+        addCard(Zone.BATTLEFIELD, playerA, "Sidisi, Undead Vizier");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // use copy
+        setChoice(playerA, "Sidisi, Undead Vizier"); // to copy
+        setChoice(playerA, "Sidisi, Undead Vizier[only copy]"); // legendary rule, keep copy
+        setChoice(playerA, true); // use exploit on etb
+        setChoice(playerA, "Sidisi, Undead Vizier[only copy]"); // sacrifice itself on exploit
+        setChoice(playerA, true); // use exploit trigger (search lib)
+        addTarget(playerA, "Mountain"); // tutor mountain
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, "Mountain", 1);
+    }
+
+    @Test
+    public void test_SelfExploit_SidisiUndeadVizier_Exile() {
+        // exploit look for sacrifice only, not a dies conditional - so it must work with exile replace
+
+        // You may have Phantasmal Image enter the battlefield as a copy of any creature on the battlefield,
+        // except it's an Illusion in addition to its other types and it has "When this creature becomes the
+        // target of a spell or ability, sacrifice it."
+        addCard(Zone.HAND, playerA, "Phantasmal Image"); // {1}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        //
+        // Exploit (When this creature enters the battlefield, you may sacrifice a creature.)
+        // When Sidisi, Undead Vizier exploits a creature, you may search your library for a card, put it into your hand, then shuffle your library.
+        addCard(Zone.BATTLEFIELD, playerA, "Sidisi, Undead Vizier");
+        //
+        // If a card or token would be put into a graveyard from anywhere, exile it instead.
+        addCard(Zone.BATTLEFIELD, playerA, "Rest in Peace");
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // use copy
+        setChoice(playerA, "Sidisi, Undead Vizier"); // to copy
+        setChoice(playerA, "Sidisi, Undead Vizier[only copy]"); // legendary rule, keep copy
+        setChoice(playerA, true); // use exploit on etb
+        setChoice(playerA, "Sidisi, Undead Vizier[only copy]"); // sacrifice itself on exploit
+        setChoice(playerA, true); // use exploit trigger (search lib)
+        addTarget(playerA, "Mountain"); // tutor mountain
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, "Mountain", 1);
+    }
 }

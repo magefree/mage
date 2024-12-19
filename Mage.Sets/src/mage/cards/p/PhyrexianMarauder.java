@@ -41,7 +41,7 @@ public final class PhyrexianMarauder extends CardImpl {
         this.addAbility(new CantBlockAbility());
 
         // Phyrexian Marauder can't attack unless you pay {1} for each +1/+1 counter on it.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhyrexianMarauderCantAttackUnlessYouPayEffect()));
+        this.addAbility(new SimpleStaticAbility(new PhyrexianMarauderCantAttackUnlessYouPayEffect()));
     }
 
     private PhyrexianMarauder(final PhyrexianMarauder card) {

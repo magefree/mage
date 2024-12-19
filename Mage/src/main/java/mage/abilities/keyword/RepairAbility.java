@@ -2,10 +2,8 @@ package mage.abilities.keyword;
 
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.condition.common.SourceHasCounterCondition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
@@ -27,28 +25,28 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class RepairAbility extends DiesSourceTriggeredAbility {
 
-    private final String ruleText;
+    private final int count;
 
     public RepairAbility(int count) {
         super(new AddCountersSourceEffect(
                 CounterType.REPAIR.createInstance(), StaticValue.get(count), false, true));
-        addSubAbility(new RepairBeginningOfUpkeepInterveningIfTriggeredAbility());
+        addSubAbility(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
+                TargetController.YOU, new RemoveCounterSourceEffect(CounterType.REPAIR.createInstance()), false)
+                .setRuleVisible(false));
         addSubAbility(new RepairCastFromGraveyardTriggeredAbility());
-
-        ruleText = "Repair " + count + " <i>(When this creature dies, put " + count
-                + " repair counters on it. At the beginning of your upkeep, remove a repair counter. "
-                + "Whenever the last is removed, you may cast it from graveyard until end of turn.)</i>";
-
+        this.count = count;
     }
 
     protected RepairAbility(final RepairAbility ability) {
         super(ability);
-        this.ruleText = ability.ruleText;
+        this.count = ability.count;
     }
 
     @Override
     public String getRule() {
-        return ruleText;
+        return "Repair " + count + " <i>(When this creature dies, put " + count
+                + " repair counters on it. At the beginning of your upkeep, remove a repair counter. "
+                + "Whenever the last is removed, you may cast it from graveyard until end of turn.)</i>";
     }
 
     @Override
@@ -59,7 +57,7 @@ public class RepairAbility extends DiesSourceTriggeredAbility {
 
 class RepairedCastFromGraveyardEffect extends OneShotEffect {
 
-    public RepairedCastFromGraveyardEffect() {
+    RepairedCastFromGraveyardEffect() {
         super(Outcome.Benefit);
     }
 
@@ -75,11 +73,8 @@ class RepairedCastFromGraveyardEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-        Card card = game.getCard(source.getSourceId());
-        if (card == null) {
+        Card card = source.getSourceCardIfItStillExists(game);
+        if (controller == null || card == null) {
             return false;
         }
         game.addEffect(new PlayFromNotOwnHandZoneTargetEffect(Zone.GRAVEYARD, Duration.UntilYourNextEndStep)
@@ -90,12 +85,12 @@ class RepairedCastFromGraveyardEffect extends OneShotEffect {
 
 class RepairCastFromGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
-    public RepairCastFromGraveyardTriggeredAbility() {
+    RepairCastFromGraveyardTriggeredAbility() {
         super(Zone.GRAVEYARD, new RepairedCastFromGraveyardEffect());
         setRuleVisible(false);
     }
 
-    public RepairCastFromGraveyardTriggeredAbility(RepairCastFromGraveyardTriggeredAbility ability) {
+    private RepairCastFromGraveyardTriggeredAbility(RepairCastFromGraveyardTriggeredAbility ability) {
         super(ability);
     }
 
@@ -109,6 +104,7 @@ class RepairCastFromGraveyardTriggeredAbility extends TriggeredAbilityImpl {
         if (event.getTargetId().equals(getSourceId())) {
             Card card = game.getCard(getSourceId());
             return card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD
+                    && event.getData().equals(CounterType.REPAIR.getName())
                     && card.getCounters(game).getCount(CounterType.REPAIR) == 0;
         }
         return false;
@@ -122,25 +118,5 @@ class RepairCastFromGraveyardTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public RepairCastFromGraveyardTriggeredAbility copy() {
         return new RepairCastFromGraveyardTriggeredAbility(this);
-    }
-}
-
-class RepairBeginningOfUpkeepInterveningIfTriggeredAbility extends ConditionalInterveningIfTriggeredAbility {
-
-    public RepairBeginningOfUpkeepInterveningIfTriggeredAbility() {
-        super(new BeginningOfUpkeepTriggeredAbility(Zone.GRAVEYARD,
-                        new RemoveCounterSourceEffect(CounterType.REPAIR.createInstance()), TargetController.YOU, false),
-                new SourceHasCounterCondition(CounterType.REPAIR),
-                "At the beginning of your upkeep, remove a repair counter from {this}");
-        this.setRuleVisible(false);
-    }
-
-    protected RepairBeginningOfUpkeepInterveningIfTriggeredAbility(final RepairBeginningOfUpkeepInterveningIfTriggeredAbility effect) {
-        super(effect);
-    }
-
-    @Override
-    public RepairBeginningOfUpkeepInterveningIfTriggeredAbility copy() {
-        return new RepairBeginningOfUpkeepInterveningIfTriggeredAbility(this);
     }
 }

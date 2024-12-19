@@ -2,7 +2,7 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -46,10 +46,10 @@ public final class HungryLynx extends CardImpl {
         // Cats you control have protection from Rats.
         Effect effect = new GainAbilityAllEffect(new ProtectionAbility(filterProRat), Duration.WhileOnBattlefield, filterCat);
         effect.setText("Cats you control have protection from Rats. <i>(They can't be blocked, targeted, or dealt damage by Rats.)</i>");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(effect));
         
         // At the beginning of your end step, target opponent creates a 1/1 black Rat creature token with deathtouch. 
-        Ability ability = new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenTargetEffect(new DeathtouchRatToken()), TargetController.YOU, null, false);
+        Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new CreateTokenTargetEffect(new DeathtouchRatToken()), false, null);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
         

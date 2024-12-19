@@ -34,7 +34,7 @@ public final class ScissorsLizard extends CardImpl {
         this.toughness = new MageInt(3);
 
         //  Creatures named Paper Tiger can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAllEffect(Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(new CantAttackBlockAllEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     private ScissorsLizard(final ScissorsLizard card) {

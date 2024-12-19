@@ -2,7 +2,7 @@ package mage.cards.l;
 
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
@@ -39,7 +39,7 @@ public final class LavabrinkFloodgates extends CardImpl {
 
         // At the beginning of each player's upkeep, that player may put a doom counter on Lavabrink Floodgates or remove a doom counter from it. Then if it has three or more doom counters on it, sacrifice it. When you do, it deals 6 damage to each creature.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
-                new LavabrinkFloodgatesEffect(), TargetController.ACTIVE, false
+                TargetController.EACH_PLAYER, new LavabrinkFloodgatesEffect(), false
         ));
     }
 

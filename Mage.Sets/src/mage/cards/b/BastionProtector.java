@@ -37,7 +37,7 @@ public final class BastionProtector extends CardImpl {
         this.toughness = new MageInt(3);
 
         // Commander creatures you control get +2/+2 and have indestructible.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter));
+        Ability ability = new SimpleStaticAbility(new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter));
         Effect effect = new GainAbilityControlledEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter);
         effect.setText("and have indestructible");
         ability.addEffect(effect);

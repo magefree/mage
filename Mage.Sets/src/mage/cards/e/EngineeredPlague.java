@@ -25,7 +25,7 @@ public final class EngineeredPlague extends CardImpl {
         // As Engineered Plague enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseCreatureTypeEffect(Outcome.UnboostCreature)));
         // All creatures of the chosen type get -1/-1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllOfChosenSubtypeEffect(-1, -1, Duration.WhileOnBattlefield, false)));
+        this.addAbility(new SimpleStaticAbility(new BoostAllOfChosenSubtypeEffect(-1, -1, Duration.WhileOnBattlefield, false)));
     }
 
     private EngineeredPlague(final EngineeredPlague card) {

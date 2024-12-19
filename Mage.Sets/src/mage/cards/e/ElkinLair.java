@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -38,7 +38,7 @@ public final class ElkinLair extends CardImpl {
         // At the beginning of each player's upkeep, that player exiles a card at random from their hand.
         // The player may play that card this turn.
         // At the beginning of the next end step, if the player hasn't played the card, they put it into their graveyard.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ElkinLairUpkeepEffect(), TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(TargetController.EACH_PLAYER, new ElkinLairUpkeepEffect(), false));
 
     }
 

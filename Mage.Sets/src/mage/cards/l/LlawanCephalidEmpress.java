@@ -47,7 +47,7 @@ public final class LlawanCephalidEmpress extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter), false));
 
         // Your opponents can't cast blue creature spells.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LlawanCephalidRuleModifyingEffect()));
+        this.addAbility(new SimpleStaticAbility(new LlawanCephalidRuleModifyingEffect()));
     }
 
     private LlawanCephalidEmpress(final LlawanCephalidEmpress card) {

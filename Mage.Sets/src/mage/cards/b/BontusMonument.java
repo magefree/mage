@@ -38,7 +38,7 @@ public final class BontusMonument extends CardImpl {
         this.supertype.add(SuperType.LEGENDARY);
 
         // Black creature spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionControllerEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(new SpellsCostReductionControllerEffect(filter, 1)));
 
         // Whenever you cast a creature spell, each opponent loses 1 life and you gain 1 life.
         Ability ability = new SpellCastControllerTriggeredAbility(new LoseLifeOpponentsEffect(1), StaticFilters.FILTER_SPELL_A_CREATURE, false);

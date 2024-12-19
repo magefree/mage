@@ -2,7 +2,7 @@ package mage.cards.v;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -49,10 +49,10 @@ public final class VrenTheRelentless extends CardImpl {
         // At the beginning of each end step, create X 1/1 black Rat creature tokens with "This creature gets +1/+1 for each
         // other Rat you control," where X is the number of creatures your opponents controlled that were exiled this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenEffect(new VrenRatToken(), VrenTheRelentlessCount.instance)
+                TargetController.ANY, new CreateTokenEffect(new VrenRatToken(), VrenTheRelentlessCount.instance)
                         .setText("create X 1/1 black Rat creature tokens with \"This creature gets +1/+1 for each other Rat you " +
                                 "control,\" where X is the number of creatures your opponents controlled that were exiled this turn"),
-                TargetController.ANY, false
+                false
         ).addHint(new ValueHint("Creatures exiled under opponents' control this turn", VrenTheRelentlessCount.instance)), new VrenTheRelentlessWatcher());
     }
 

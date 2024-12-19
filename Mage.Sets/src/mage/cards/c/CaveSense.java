@@ -40,7 +40,7 @@ public final class CaveSense extends CardImpl {
         // Enchanted creature gets +1/+1 and has mountainwalk.
         Effect effect = new GainAbilityAttachedEffect(new MountainwalkAbility(), AttachmentType.AURA);
         effect.setText("and has mountainwalk");
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 1));
+        ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1));
         ability.addEffect(effect);
         this.addAbility(ability);
     }

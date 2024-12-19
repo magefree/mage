@@ -35,7 +35,6 @@ public final class DarkbladeAgent extends CardImpl {
 
         // As long as you've surveilled this turn, Darkblade Agent has deathtouch and "Whenever this creature deals combat damage to a player, draw a card."
         Ability ability = new SimpleStaticAbility(
-                Zone.BATTLEFIELD,
                 new ConditionalContinuousEffect(
                         new GainAbilitySourceEffect(
                                 DeathtouchAbility.getInstance(),

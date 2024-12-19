@@ -3,7 +3,7 @@ package mage.cards.z;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.WinsCoinFlipTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.FlipUntilLoseEffect;
@@ -13,7 +13,6 @@ import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 
 /**
  *
@@ -33,7 +32,7 @@ public final class ZndrspltEyeOfWisdom extends CardImpl {
         this.addAbility(new PartnerWithAbility("Okaun, Eye of Chaos", true));
 
         // At the beginning of combat on your turn, flip a coin until you lose a flip.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new FlipUntilLoseEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new FlipUntilLoseEffect()));
 
         // Whenever a player wins a coin flip, draw a card.
         this.addAbility(new WinsCoinFlipTriggeredAbility(new DrawCardSourceControllerEffect(1)));

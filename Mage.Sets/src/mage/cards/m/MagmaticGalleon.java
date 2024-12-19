@@ -2,6 +2,7 @@ package mage.cards.m;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.BatchTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -13,9 +14,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.events.DamagedBatchForPermanentsEvent;
-import mage.game.events.DamagedEvent;
-import mage.game.events.GameEvent;
+import mage.game.events.*;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.TreasureToken;
 import mage.target.common.TargetOpponentsCreaturePermanent;
@@ -57,7 +56,7 @@ public final class MagmaticGalleon extends CardImpl {
     }
 }
 
-class MagmaticGalleonTriggeredAbility extends TriggeredAbilityImpl {
+class MagmaticGalleonTriggeredAbility extends TriggeredAbilityImpl implements BatchTriggeredAbility<DamagedPermanentEvent> {
 
     MagmaticGalleonTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CreateTokenEffect(new TreasureToken()));
@@ -79,18 +78,18 @@ class MagmaticGalleonTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     @Override
+    public boolean checkEvent(DamagedPermanentEvent event, Game game) {
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getTargetId());
+        return permanent != null
+                && permanent.isCreature(game)
+                && game.getOpponents(getControllerId()).contains(permanent.getControllerId())
+                && !event.isCombatDamage();
+    }
+
+    @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        int damage = ((DamagedBatchForPermanentsEvent) event)
-                .getEvents()
+        int damage = getFilteredEvents((DamagedBatchForPermanentsEvent) event, game)
                 .stream()
-                .filter(damagedEvent -> {
-                    if (damagedEvent.isCombatDamage()) {
-                        return false;
-                    }
-                    Permanent permanent = game.getPermanentOrLKIBattlefield(damagedEvent.getTargetId());
-                    return permanent != null && permanent.isCreature(game)
-                            && game.getOpponents(this.getControllerId()).contains(permanent.getControllerId());
-                })
                 .mapToInt(DamagedEvent::getExcess)
                 .sum();
         return damage >= 1;

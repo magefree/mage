@@ -34,7 +34,7 @@ public final class DefenderEnVec extends CardImpl {
         this.addAbility(new FadingAbility(4, this));
         
         // Remove a fade counter from Defender en-Vec: Prevent the next 2 damage that would be dealt to any target this turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+        Ability ability = new SimpleActivatedAbility(
                 new PreventDamageToTargetEffect(Duration.EndOfTurn, 2), new RemoveCountersSourceCost(CounterType.FADE.createInstance()));
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);

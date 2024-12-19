@@ -37,7 +37,7 @@ public final class JeskaWarriorAdept extends CardImpl {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // {tap}: Jeska, Warrior Adept deals 1 damage to any target.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAnyTarget());
         this.addAbility(ability);
     }

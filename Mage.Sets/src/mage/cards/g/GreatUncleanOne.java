@@ -2,7 +2,7 @@ package mage.cards.g;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -11,7 +11,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.token.PlaguebearerOfNurgleToken;
 import mage.players.Player;
@@ -33,7 +32,7 @@ public final class GreatUncleanOne extends CardImpl {
 
         // Reverberating Summons -- At the beginning of your end step, each opponent loses 2 life. Then for each opponent who has less life than you, create a 1/3 black Demon creature token named Plaguebearer of Nurgle.
         Ability ability = new BeginningOfEndStepTriggeredAbility(
-                new LoseLifeOpponentsEffect(2), TargetController.YOU, false
+                new LoseLifeOpponentsEffect(2)
         );
         ability.addEffect(new CreateTokenEffect(
                 new PlaguebearerOfNurgleToken(), GreatUncleanOneValue.instance

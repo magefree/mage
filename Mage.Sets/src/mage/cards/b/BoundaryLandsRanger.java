@@ -1,7 +1,7 @@
 package mage.cards.b;
 
 import mage.MageInt;
-import mage.abilities.common.BeginningOfCombatTriggeredAbility;
+import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.condition.common.FerociousCondition;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -12,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.TargetController;
 
 import java.util.UUID;
 
@@ -34,7 +33,7 @@ public final class BoundaryLandsRanger extends CardImpl {
                 new BeginningOfCombatTriggeredAbility(
                         new DoIfCostPaid(
                                 new DrawCardSourceControllerEffect(1), new DiscardCardCost()
-                        ), TargetController.YOU, false
+                        )
                 ), FerociousCondition.instance, "At the beginning of combat on your turn, if you control " +
                 "a creature with power 4 or greater, you may discard a card. If you do, draw a card."
         ).addHint(FerociousHint.instance));

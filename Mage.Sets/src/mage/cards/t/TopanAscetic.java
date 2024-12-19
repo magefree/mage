@@ -37,7 +37,7 @@ public final class TopanAscetic extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Tap an untapped creature you control: Topan Ascetic gets +1/+1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
+        this.addAbility(new SimpleActivatedAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true))));
     }
 
     private TopanAscetic(final TopanAscetic card) {
