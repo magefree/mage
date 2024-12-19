@@ -3,6 +3,9 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.collation.BoosterCollator;
 import mage.collation.BoosterStructure;
 import mage.collation.CardRun;
@@ -709,7 +712,7 @@ class FoundationsCollator implements BoosterCollator {
     // If commonRuns8 were combined would need 17057x ABBBBCCC, 17057x ABBBCCCC, 36806x BBBBCCCC
     private final RarityConfiguration commonRuns8A = new RarityConfiguration(ABBBBCCC, ABBBCCCC);
     private final RarityConfiguration commonRuns8BC = new RarityConfiguration(BBBBCCCC);
-    private static RarityConfiguration commonRuns(int runLength){
+    private static final RarityConfiguration commonRuns(int runLength){
         return ( 6< runLength ? 7< runLength ? RandomUtil.nextInt(35460) <17057 ?
             commonRuns8A : commonRuns8BC : commonRuns7 : commonRuns6 );
     }
@@ -723,7 +726,7 @@ class FoundationsCollator implements BoosterCollator {
     private final RarityConfiguration uncommonRuns3A = new RarityConfiguration(ABC);
     private final RarityConfiguration uncommonRuns3BC = new RarityConfiguration(BBC, BCC);
     private final RarityConfiguration uncommonRuns4 = new RarityConfiguration(ABBC, ABCC);
-    private static RarityConfiguration uncommonRuns(int runLength){
+    private static final RarityConfiguration uncommonRuns(int runLength){
         return ( 4> runLength ? RandomUtil.nextInt(505) <454 ?
             uncommonRuns3A : commonRuns3BC : uncommonRuns4 );
     }
@@ -731,7 +734,7 @@ class FoundationsCollator implements BoosterCollator {
     // 5/24 packs contain a second rare, 1/24 packs contain a borderless common/uncommon
     private final RarityConfiguration rareRuns1 = new RarityConfiguration(R1);
     private final RarityConfiguration rareRuns2 = new RarityConfiguration(R2, R2, R2, R2, R2, Rb);
-    private static RarityConfiguration rareRuns(int runLength){
+    private static final RarityConfiguration rareRuns(int runLength){
         return ( 1< runLength ? rareRuns2 : rareRuns1 );
     }
 
