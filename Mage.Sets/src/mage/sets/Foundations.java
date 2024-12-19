@@ -30,7 +30,7 @@ public final class Foundations extends ExpansionSet {
         super("Foundations", "FDN", ExpansionSet.buildDate(2024, 11, 15), SetType.EXPANSION);
         this.blockName = "Foundations"; // for sorting in GUI
         this.hasBasicLands = true;
-        this.hasBoosters = false; // temporary
+        this.hasBoosters = true;
 
         cards.add(new SetCardInfo("Abrade", 188, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Abyssal Harvester", 54, Rarity.RARE, mage.cards.a.AbyssalHarvester.class));
