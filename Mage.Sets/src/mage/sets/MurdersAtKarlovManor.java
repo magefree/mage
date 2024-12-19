@@ -598,11 +598,11 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
 
     private final BoosterStructure R1 = new BoosterStructure(rare);
     private final BoosterStructure R2 = new BoosterStructure(rare,rare);
-    private final BoosterStructure R3 = new BoosterStructure(rare,rareLand);
+    private final BoosterStructure Rd = new BoosterStructure(rare,rareLand);
     private final BoosterStructure L1 = new BoosterStructure(land);
-    private final BoosterStructure S1 = new BoosterStructure(list);
-    private final BoosterStructure S2 = new BoosterStructure(listRare);
-    private final BoosterStructure S3 = new BoosterStructure(listGuest);
+    private final BoosterStructure Scu = new BoosterStructure(list);
+    private final BoosterStructure Srm = new BoosterStructure(listRare);
+    private final BoosterStructure Ssg = new BoosterStructure(listGuest);
     private final BoosterStructure fcA = new BoosterStructure(commonA);
     private final BoosterStructure fcBC = new BoosterStructure(commonFoilBC);
     private final BoosterStructure fuA = new BoosterStructure(uncommonA);
@@ -616,81 +616,19 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
     // 3.25 B commons (2812 / 864)       7 Commons ( 22 / 32 ) or (594 / 864) 
     // 3.25 C commons (2812 / 864)       8 Commons (  7 / 32 ) or (189 / 864) 9*21=189
     private final RarityConfiguration commonRuns6 = new RarityConfiguration(BBBCCC);
-    private final RarityConfiguration commonRuns7 = new RarityConfiguration(
-        BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC,
-        BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC,
-        BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC,
-        BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC,
-        BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC,
-        BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC,
-        BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC,
-        BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC,
-        BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC,
-        BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC,
-
-        BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC,
-        BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC, BBBCCCC,
-
-        BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC,
-        BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC,
-        BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC,
-        BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC,
-        BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC,
-        BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC,
-        BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC,
-        BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC,
-        BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC,
-        BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC,
-
-        BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC,
-        BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC, BBBBCCC,
-
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC,
-        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC
-    );
+    // If commonRuns7 were combined would need 115x BBBCCCC, 115x BBBBCCC, 364x ABBBCCC
+    private final RarityConfiguration commonRuns7A = new RarityConfiguration(ABBBCCC);
+    private final RarityConfiguration commonRuns7BC = new RarityConfiguration(BBBCCCC, BBBBCCC);
     private final RarityConfiguration commonRuns8 = new RarityConfiguration(
         ABBBCCCC, ABBBCCCC, ABBBCCCC, ABBBCCCC,
         ABBBBCCC, ABBBBCCC, ABBBBCCC, ABBBBCCC,
         BBBBCCCC
     );
+    private static final RarityConfiguration commonRuns(int runLength){
+        return ( 6< runLength ? 8> runLength ? RandomUtil.nextInt(297) <115 ?
+            commonRuns7BC : commonRuns7A : commonRuns8 : commonRuns6 );
+    }
+
     // In order for equal numbers of each uncommon to exist, the average booster must contain:
     // 0.25 A uncommons ( 49 / 200)       3 Uncommons (1 / 2) or (100 / 200)
     // 1.96 B uncommons (392 / 200)       4 Uncommons (1 / 2) or (100 / 200) 25*4=100
@@ -712,9 +650,17 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
         BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC,
         ABBC, ABBC, ABBC, ABBC, ABBC, ABBC, ABBC
     );
+    private static final RarityConfiguration uncommonRuns(int runLength){
+        return ( 3< runLength ? uncommonRuns4 : uncommonRuns3 );
+    }
+
+
     // 1/6 packs have rare land as second rare, estimate 1/4 packs have two rares
     private final RarityConfiguration rareRuns1 = new RarityConfiguration(R1);
-    private final RarityConfiguration rareRuns2 = new RarityConfiguration(R2,R3,R3);
+    private final RarityConfiguration rareRuns2 = new RarityConfiguration(R2,Rd,Rd);
+    private static final RarityConfiguration rareRuns(int runLength){
+        return ( 1< runLength ? rareRuns2 : rareRuns1 );
+    }
 
     private final RarityConfiguration landRuns = new RarityConfiguration(L1);
     // 1 in 8 Play Boosters (12.5%) features a card from Special Guests or The List
@@ -722,10 +668,11 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
     // The List has rare and mythic rare reprints replacing a common card 1.56% of the time.
     // Which means 1/8 List packs have Special Guest, 1/8 have rare/mythic
     private final RarityConfiguration listRuns = new RarityConfiguration(
-        S1, S1, S1, S1, S1, S1,
-        S2,
-        S3
+        Scu, Scu, Scu, Scu, Scu, Scu,
+        Srm,
+        Ssg
     );
+
     private final RarityConfiguration foilCommonRuns = new RarityConfiguration(
         fcA,  fcA,  fcA,  fcA,  fcA,  fcA,  fcA,
         fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC, fcBC,
@@ -763,48 +710,40 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
         boolean wildUncommon = false;
         // observed the rate [of uncommon wildcard] at about 52% over 7 boxes
         // that is close to 50% - using 50% uncommon, 25% common, 25% rare
-        if (RandomUtil.nextBoolean()) {
+        int wildNum = RandomUtil.nextInt(4);
+        if (wildNum <2) {
             wildUncommon = true;
-        } else if (RandomUtil.nextBoolean()) {
+        } else if (wildNum <3) {
             ++numCommon;
         } else {
             wildRare = true;
         }
+
         booster.addAll(landRuns.getNext().makeRun());
+
         // 1 in 8 Play Boosters (12.5%) features a card from Special Guests or The List instead of the seventh common card.
         if (RandomUtil.nextInt(8) ==1) {
             booster.addAll(listRuns.getNext().makeRun());
             --numCommon;
         }
+
         // foil wildcard separate, watched 327 pack openings and using the observed rates.
         // 245 common, 99 uncommon, 30 rare, 3 rareland
-        int wildFoil = RandomUtil.nextInt(377);
-        if (wildFoil < 245) {
+        wildNum = RandomUtil.nextInt(377);
+        if (wildNum < 245) {
             booster.addAll(foilCommonRuns.getNext().makeRun());
-        } else if (wildFoil < 344) {
+        } else if (wildNum < 344) {
             booster.addAll(foilUncommonRuns.getNext().makeRun());
-        } else if (wildFoil < 374) {
+        } else if (wildNum < 374) {
             booster.addAll(foilRareRuns.getNext().makeRun());
         } else {
             booster.addAll(foilRareLandRuns.getNext().makeRun());
         }
-        if (wildRare) {
-            booster.addAll(rareRuns2.getNext().makeRun());
-        } else {
-            booster.addAll(rareRuns1.getNext().makeRun());
-        }
-        if (wildUncommon) {
-            booster.addAll(uncommonRuns4.getNext().makeRun());
-        } else {
-            booster.addAll(uncommonRuns3.getNext().makeRun());
-        }
-        if (numCommon < 7) {
-            booster.addAll(commonRuns6.getNext().makeRun());
-        } else if (numCommon > 7) {
-            booster.addAll(commonRuns8.getNext().makeRun());
-        } else {
-            booster.addAll(commonRuns7.getNext().makeRun());
-        }
+
+        booster.addAll(rareRuns(wildRare ? 2 : 1).getNext().makeRun());
+        booster.addAll(uncommonRuns(wildUncommon ? 4 : 3).getNext().makeRun());
+        booster.addAll(commonRuns(numCommon).getNext().makeRun());
+
         return booster;
     }
 }
