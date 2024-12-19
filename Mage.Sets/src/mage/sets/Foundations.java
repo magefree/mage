@@ -603,7 +603,7 @@ public final class Foundations extends ExpansionSet {
 
 // Booster collation info from https://vm1.substation33.com/tiera/t/lethe/fdn.html
 // Using Japanese collation plus other info inferred from various sources
-class MurdersAtKarlovManorCollator implements BoosterCollator {
+class FoundationsCollator implements BoosterCollator {
 
     private final CardRun commonA = new CardRun(false, "13", "18", "20", "21", "24", "28");
     private final CardRun commonB = new CardRun(true, "95", "170", "262", "208", "59", "196", "90", "169", "252", "192", "62", "143", "87", "64", "15", "83", "75", "139", "189", "178", "3", "196", "177", "209", "68", "252", "195", "172", "130", "95", "174", "150", "83", "60", "210", "208", "178", "89", "64", "253", "200", "70", "262", "90", "59", "150", "189", "169", "170", "203", "181", "143", "210", "62", "15", "87", "174", "89", "60", "3", "209", "75", "172", "90", "181", "139", "196", "62", "253", "203", "177", "195", "170", "208", "200", "64", "143", "192", "70", "252", "83", "59", "130", "209", "174", "253", "189", "172", "262", "95", "68", "150", "192", "178", "200", "169", "15", "210", "75", "130", "195", "60", "139", "87", "177", "3", "89", "68", "203", "70", "181");
@@ -709,8 +709,9 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
     // If commonRuns8 were combined would need 17057x ABBBBCCC, 17057x ABBBCCCC, 36806x BBBBCCCC
     private final RarityConfiguration commonRuns8A = new RarityConfiguration(ABBBBCCC, ABBBCCCC);
     private final RarityConfiguration commonRuns8BC = new RarityConfiguration(BBBBCCCC);
-    private static RarityConfiguration commonRuns8(){
-        return ( RandomUtil.nextInt(35460) <17057 ? commonRuns8A : commonRuns8BC );
+    private static RarityConfiguration commonRuns(int runLength){
+        return ( 6< runLength ? 7< runLength ? RandomUtil.nextInt(35460) <17057 ?
+            commonRuns8A : commonRuns8BC : commonRuns7 : commonRuns6 );
     }
 
     // 7/12 packs contain an extra uncommon
@@ -721,14 +722,18 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
     // If commonRuns3 were combined would need 908 ABC, 51x BBC, 51x BCC
     private final RarityConfiguration uncommonRuns3A = new RarityConfiguration(ABC);
     private final RarityConfiguration uncommonRuns3BC = new RarityConfiguration(BBC, BCC);
-    private static RarityConfiguration uncommonRuns3(){
-        return ( RandomUtil.nextInt(505) <454 ? uncommonRuns3A : commonRuns3BC );
-    }
     private final RarityConfiguration uncommonRuns4 = new RarityConfiguration(ABBC, ABCC);
+    private static RarityConfiguration uncommonRuns(int runLength){
+        return ( 4> runLength ? RandomUtil.nextInt(505) <454 ?
+            uncommonRuns3A : commonRuns3BC : uncommonRuns4 );
+    }
 
     // 5/24 packs contain a second rare, 1/24 packs contain a borderless common/uncommon
     private final RarityConfiguration rareRuns1 = new RarityConfiguration(R1);
     private final RarityConfiguration rareRuns2 = new RarityConfiguration(R2, R2, R2, R2, R2, Rb);
+    private static RarityConfiguration rareRuns(int runLength){
+        return ( 1< runLength ? rareRuns2 : rareRuns1 );
+    }
 
     // 50% of packs contain a common dual land
     private final RarityConfiguration landRuns = new RarityConfiguration(Lb, Ld);
@@ -798,11 +803,7 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
             booster.addAll(foilBorderlessRuns.getNext().makeRun());
         };
 
-        if (wildRare) {
-            booster.addAll(rareRuns2.getNext().makeRun());
-        } else {
-            booster.addAll(rareRuns1.getNext().makeRun());
-        }
+        booster.addAll(rareRuns( wildRare ? 2 : 1 ).getNext().makeRun());
 
         // 1.5% of  Play Boosters features a Special Guests card displacing a common card.
         if (RandomUtil.nextInt(200) <3) {
@@ -810,19 +811,9 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
             --numCommon;
         }
 
-        if (wildUncommon) {
-            booster.addAll(uncommonRuns4.getNext().makeRun());
-        } else {
-            booster.addAll(uncommonRuns3().getNext().makeRun());
-        }
+        booster.addAll(uncommonRuns( wildUncommon ? 4 : 3 ).getNext().makeRun());
+        booster.addAll(commonRuns( numCommon ).getNext().makeRun());
 
-        if (numCommon < 7) {
-            booster.addAll(commonRuns6.getNext().makeRun());
-        } else if (numCommon > 7) {
-            booster.addAll(commonRuns8().getNext().makeRun());
-        } else {
-            booster.addAll(commonRuns7.getNext().makeRun());
-        }
         return booster;
     }
 }
