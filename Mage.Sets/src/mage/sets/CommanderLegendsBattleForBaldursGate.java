@@ -857,7 +857,7 @@ class CommanderLegendsBattleForBaldursGateCollator implements BoosterCollator {
     private final RarityConfiguration commonRunsB = new RarityConfiguration(AAAAAABCCCCCC);
     private final RarityConfiguration commonRunsBB = new RarityConfiguration(AAAAAABBCCCCC, AAAAABBCCCCCC);
     private static final RarityConfiguration commonRuns(){
-        int runRoll = RandomUtil.nextInt(816)
+        int runRoll = RandomUtil.nextInt(816);
         return ( 475> runRoll ? 136> runRoll ? commonRunsD : commonRunsBB : commonRunsB );
     }
 
@@ -875,7 +875,7 @@ class CommanderLegendsBattleForBaldursGateCollator implements BoosterCollator {
     private final RarityConfiguration uncommonRunsUU = new RarityConfiguration(AAUU);
     private final RarityConfiguration uncommonRunsUR = new RarityConfiguration(AAUR);
     private static final RarityConfiguration uncommonRuns(){
-        int runRoll = RandomUtil.nextInt(204480)
+        int runRoll = RandomUtil.nextInt(204480);
         return ( 168377> runRoll ? 113245> runRoll ? 14564> runRoll ? 14564> runRoll ?
             uncommonRunsA : uncommonRunsM : uncommonRunsB : uncommonRunsUU : uncommonRunsUR );
     }
@@ -936,7 +936,7 @@ class CommanderLegendsBattleForBaldursGateCollator implements BoosterCollator {
     );
     // using /2066 - 1360 C , 300 U , 94 R , 17 M , 120 background , (legend: 120 U, 50 R, 5 M)
     private static final RarityConfiguration foilRuns(){
-        int runRoll = RandomUtil.nextInt(2066)
+        int runRoll = RandomUtil.nextInt(2066);
         return ( 1891> runRoll ? 1771> runRoll ? 1660> runRoll ? 1360> runRoll ?
             foilRunsC : foilRunsU : foilRunsRM : foilRunsBk : foilRunsLeg );
     }
