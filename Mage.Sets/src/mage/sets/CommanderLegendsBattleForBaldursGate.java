@@ -932,7 +932,7 @@ class CommanderLegendsBattleForBaldursGateCollator implements BoosterCollator {
         fuR, fuR, fuR, fuR, fuR, fuR, fuR, fuR, fuR, fuR,
         fuR, fuR, fuR, fuR, fuR,
 
-        fuM,
+        fuM
     );
     // using /2066 - 1360 C , 300 U , 94 R , 17 M , 120 background , (legend: 120 U, 50 R, 5 M)
     private static final RarityConfiguration foilRuns(){
