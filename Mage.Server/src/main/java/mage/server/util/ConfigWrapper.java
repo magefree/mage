@@ -87,8 +87,12 @@ public class ConfigWrapper implements ConfigSettings {
         return config.getServer().isSaveGameActivated();
     }
 
-    public Boolean isAuthenticationActivated() {
-        return config.getServer().isAuthenticationActivated();
+    public Boolean isRegistrationEnabled() {
+        return config.getServer().isRegistrationEnabled();
+    }
+
+    public Boolean shouldCheckUsers() {
+        return config.getServer().isCheckUsers();
     }
 
     public String getGoogleAccount() {

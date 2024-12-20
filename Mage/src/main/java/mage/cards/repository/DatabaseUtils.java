@@ -12,7 +12,7 @@ public class DatabaseUtils {
     // warning, do not change names or db format
     // h2
     public static final String DB_NAME_FEEDBACK = "feedback.h2";
-    public static final String DB_NAME_USERS = "authorized_user.h2";
+    public static final String DB_NAME_USERS = "authorized_users.db";
     public static final String DB_NAME_CARDS = "cards.h2";
     // sqlite (usage reason: h2 database works bad with 1GB+ files and can break it)
     public static final String DB_NAME_RECORDS = "table_record.db";
