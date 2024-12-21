@@ -794,13 +794,13 @@ class FoundationsCollator implements BoosterCollator {
         booster.addAll(landRuns.getNext().makeRun());
 
         // foil wildcard rarity distribution not specified, so derived from observed pack openings
-        // 180 packs, 101 common, 60 uncommon, 15 rare/mythic, 4 borderless common/uncommon
-        wildNum = RandomUtil.nextInt(180);
-        if( wildNum < 101 ){
+        // 229 packs, 127 common, 78 uncommon, 19 rare/mythic, 5 borderless common/uncommon
+        wildNum = RandomUtil.nextInt(229);
+        if( wildNum < 127 ){
             booster.addAll(foilCommonRuns.getNext().makeRun());
-        }else if( wildNum < 161 ){
+        }else if( wildNum < 205 ){
             booster.addAll(foilUncommonRuns.getNext().makeRun());
-        }else if( wildNum < 176 ){
+        }else if( wildNum < 224 ){
             booster.addAll(foilRareRuns.getNext().makeRun());
         }else{
             booster.addAll(foilBorderlessRuns.getNext().makeRun());
