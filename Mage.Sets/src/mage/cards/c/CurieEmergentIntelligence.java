@@ -60,12 +60,12 @@ public final class CurieEmergentIntelligence extends CardImpl {
 
         // Whenever Curie, Emergent Intelligence deals combat damage to a player, draw cards equal to its base power.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-            new DrawCardSourceControllerEffect(new CurieEmergentIntelligenceValue()).setText("draw cards equal to its base power"), false
+            new DrawCardSourceControllerEffect(CurieEmergentIntelligenceValue.NON_NEGATIVE).setText("draw cards equal to its base power"), false
         ));
 
         // {1}{U}, Exile another nontoken artifact creature you control: Curie becomes a copy of the exiled creature, except it has 
         // "Whenever this creature deals combat damage to a player, draw cards equal to its base power."
-        Ability ability = new SimpleActivatedAbility(new CurieCopyEffect(), new ManaCostsImpl<>("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(new CurieEmergentIntelligenceCopyEffect(), new ManaCostsImpl<>("{1}{U}"));
         ability.addCost(new ExileTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }
@@ -80,7 +80,9 @@ public final class CurieEmergentIntelligence extends CardImpl {
     }
 }
 
-class CurieEmergentIntelligenceValue implements DynamicValue {
+enum CurieEmergentIntelligenceValue implements DynamicValue {
+    NON_NEGATIVE;
+
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         Permanent sourcePermanent = sourceAbility.getSourcePermanentOrLKI(game);
@@ -108,30 +110,30 @@ class CurieEmergentIntelligenceValue implements DynamicValue {
     }
 }
 
-class CurieCopyEffect extends OneShotEffect {
+class CurieEmergentIntelligenceCopyEffect extends OneShotEffect {
 
     private static final CopyApplier applier = new CopyApplier() {
         @Override
         public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
             blueprint.getAbilities().add(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DrawCardSourceControllerEffect(new CurieEmergentIntelligenceValue()).setText("draw cards equal to its base power"), false
+                new DrawCardSourceControllerEffect(CurieEmergentIntelligenceValue.NON_NEGATIVE).setText("draw cards equal to its base power"), false
             ));
             return true;
         }
     };
 
-    CurieCopyEffect() {
+    CurieEmergentIntelligenceCopyEffect() {
         super(Outcome.Benefit);
         this.setText("{this} becomes a copy of the exiled creature, except it has \"Whenever this creature deals combat damage to a player, draw cards equal to its base power.\"");
     }
 
-    private CurieCopyEffect(final CurieCopyEffect effect) {
+    private CurieEmergentIntelligenceCopyEffect(final CurieEmergentIntelligenceCopyEffect effect) {
         super(effect);
     }
 
     @Override
-    public CurieCopyEffect copy() {
-        return new CurieCopyEffect(this);
+    public CurieEmergentIntelligenceCopyEffect copy() {
+        return new CurieEmergentIntelligenceCopyEffect(this);
     }
 
     @Override
