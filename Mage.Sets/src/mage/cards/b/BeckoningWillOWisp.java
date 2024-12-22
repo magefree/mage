@@ -70,7 +70,7 @@ enum BeckoningWillOWispPredicate implements ObjectSourcePlayerPredicate<Permanen
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         UUID playerId = (UUID) game.getState().getValue(input.getSourceId() + "_" + game.getState().getZoneChangeCounter(input.getSourceId()) + "_chosenOpponent");
-        return playerId != null && playerId.equals(game.getCombat().getDefendingPlayerId(input.getObject().getId(), game));
+        return playerId != null && playerId.equals(game.getCombat().getDefendingPlayerId(input.getObject().getId(), game, false));
     }
 }
 

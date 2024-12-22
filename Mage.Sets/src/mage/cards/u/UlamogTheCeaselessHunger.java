@@ -19,7 +19,6 @@ import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -113,7 +112,7 @@ class UlamogAttackTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent sourcePermanent = game.getPermanent(this.getSourceId());
+        Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(this.getSourceId());
         if (sourcePermanent != null
                 && event.getSourceId() != null
                 && event.getSourceId().equals(this.getSourceId())) {

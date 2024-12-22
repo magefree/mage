@@ -13,7 +13,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -73,7 +72,7 @@ class WardscaleDragonRuleEffect extends ContinuousRuleModifyingEffectImpl {
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null && sourcePermanent.isAttacking()) {
-            return event.getPlayerId().equals(game.getCombat().getDefendingPlayerId(sourcePermanent.getId(), game));
+            return event.getPlayerId().equals(game.getCombat().getDefendingPlayerId(sourcePermanent.getId(), game, false));
         }
         return false;
     }
