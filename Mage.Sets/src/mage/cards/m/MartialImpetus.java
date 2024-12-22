@@ -81,7 +81,7 @@ enum MartialImpetusPredicate implements ObjectSourcePlayerPredicate<Permanent> {
                     && input.getObject() != attachedTo // must be other creature
                     && input.getObject().isAttacking() // attacking
                     && game.getOpponents(auraControllerId) // check for opponents of aura's controller
-                    .contains(game.getCombat().getDefendingPlayerId(input.getObject().getId(), game, true))) {
+                    .contains(game.getCombat().getDefendingPlayerId(input.getObject().getId(), game))) {
                 return true;
             }
         }

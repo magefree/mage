@@ -84,7 +84,7 @@ class GraspOfTheHieromancerTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (game.getCombat().getAttackers().contains(getSourceId()) ) {
-            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(getSourceId(), game, true);
+            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
             if (defendingPlayerId != null) {                
                 this.getTargets().clear();
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");

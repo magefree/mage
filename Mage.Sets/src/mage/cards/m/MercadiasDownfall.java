@@ -69,7 +69,7 @@ class MercadiasDownfallEffect extends OneShotEffect {
                 StaticFilters.FILTER_ATTACKING_CREATURE, source.getControllerId(), source, game
         )) {
             int count = game.getBattlefield().count(
-                    filter, game.getCombat().getDefendingPlayerId(permanent.getId(), game, true), source, game
+                    filter, game.getCombat().getDefendingPlayerId(permanent.getId(), game), source, game
             );
             game.addEffect(new BoostTargetEffect(
                     count, 0, Duration.EndOfTurn

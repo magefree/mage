@@ -186,6 +186,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public void clear() {
         groups.clear();
+        formerGroups.clear();
         blockingGroups.clear();
         defenders.clear();
         attackingPlayerId = null;
@@ -1664,7 +1665,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @return
      */
     public UUID getDefendingPlayerId(UUID attackingCreatureId, Game game) {
-        return getDefendingPlayerId(attackingCreatureId, game, false);
+        return getDefendingPlayerId(attackingCreatureId, game, true);
     }
 
     /**
@@ -1677,6 +1678,17 @@ public class Combat implements Serializable, Copyable<Combat> {
      */
     public UUID getDefendingPlayerId(UUID attackingCreatureId, Game game, boolean allowFormer) {
         if (allowFormer) {
+            /*
+             * 802.2a. Any rule, object, or effect that refers to a "defending player" refers to one specific defending
+             * player, not to all of the defending players. If an ability of an attacking creature refers to a
+             * defending player, or a spell or ability refers to both an attacking creature and a defending player,
+             * then unless otherwise specified, the defending player it's referring to is the player that creature is
+             * attacking, the controller of the planeswalker that creature is attacking, or the protector of the battle
+             * that player is attacking. If that creature is no longer attacking, the defending player it's referring
+             * to is the player that creature was attacking before it was removed from combat, the controller of the
+             * planeswalker that creature was attacking before it was removed from combat, or the protector of the
+             * battle that player was attacking before it was removed from combat.
+             */
             return Stream.concat(groups.stream(), formerGroups.stream())
                     .filter(group -> (group.getAttackers().contains(attackingCreatureId) || group.getFormerAttackers().contains(attackingCreatureId)))
                     .map(CombatGroup::getDefendingPlayerId)

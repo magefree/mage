@@ -77,7 +77,7 @@ class GoblinGuideTriggeredAbility extends TriggeredAbilityImpl {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(this.getSourceId())) {
-            UUID defenderId = game.getCombat().getDefendingPlayerId(getSourceId(), game, true);
+            UUID defenderId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
             if (defenderId != null) {
                 for (Effect effect : this.getEffects()) {
                     // set here because attacking creature can be removed until effect resolves

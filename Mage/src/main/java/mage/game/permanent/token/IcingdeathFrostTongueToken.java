@@ -70,7 +70,7 @@ enum IcingdeathFrostTonguePredicate implements ObjectSourcePlayerPredicate<Perma
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
         return Optional.ofNullable(input.getSource().getSourcePermanentOrLKI(game))
                 .map(Permanent::getAttachedTo)
-                .map(uuid -> game.getCombat().getDefendingPlayerId(uuid, game, true))
+                .map(uuid -> game.getCombat().getDefendingPlayerId(uuid, game))
                 .map(input.getObject()::isControlledBy)
                 .orElse(false);
     }

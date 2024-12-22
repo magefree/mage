@@ -58,7 +58,7 @@ class JanglingAutomatonEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID defenderId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game, true);
+        UUID defenderId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
         if (defenderId != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new ControllerIdPredicate(defenderId));

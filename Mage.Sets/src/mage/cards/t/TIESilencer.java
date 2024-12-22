@@ -64,7 +64,7 @@ class TIESilencerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID defender = game.getCombat().getDefendingPlayerId(source.getSourceId(), game, true);
+        UUID defender = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
         if(defender != null) {
             game.damagePlayerOrPermanent(defender, 1, source.getSourceId(), source, game, false, true);
 

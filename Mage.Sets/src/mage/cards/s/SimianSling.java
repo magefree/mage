@@ -83,7 +83,7 @@ class SimianSlingTriggeredAbility extends TriggeredAbilityImpl {
             }
         }
         getEffects().setValue("attacker", event.getTargetId());
-        getEffects().setTargetPointer(new FixedTarget(game.getCombat().getDefendingPlayerId(event.getTargetId(), game, true)));
+        getEffects().setTargetPointer(new FixedTarget(game.getCombat().getDefendingPlayerId(event.getTargetId(), game)));
         return true;
     }
 

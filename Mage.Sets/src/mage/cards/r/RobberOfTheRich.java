@@ -71,7 +71,7 @@ enum RobberOfTheRichAttacksCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Player player = game.getPlayer(game.getCombat().getDefendingPlayerId(source.getSourceId(), game, true));
+        Player player = game.getPlayer(game.getCombat().getDefendingPlayerId(source.getSourceId(), game));
         return controller != null 
                 && player != null 
                 && controller.getHand().size() < player.getHand().size();

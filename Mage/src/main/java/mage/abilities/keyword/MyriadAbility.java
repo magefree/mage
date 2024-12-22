@@ -69,7 +69,7 @@ class MyriadEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         Permanent sourceObject = game.getPermanentOrLKIBattlefield(source.getSourceId());
         if (controller != null && sourceObject != null) {
-            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game, true);
+            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
             if (defendingPlayerId == null) {
                 Logger.getLogger(MyriadEffect.class).error("defending player == null source: " + sourceObject.getName() + " attacking: " + (sourceObject.isAttacking() ? "Y" : "N"));
                 return false;

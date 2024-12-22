@@ -68,7 +68,7 @@ class OgreMarauderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game, true);
+        UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
         MageObject sourceObject = game.getObject(source);
         Player defender = game.getPlayer(defendingPlayerId);
         if (defender != null && sourceObject != null) {

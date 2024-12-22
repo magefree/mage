@@ -69,7 +69,7 @@ class CountersOnDefendingPlayerCreaturesCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
         int count = 0;
-        UUID defender = game.getCombat().getDefendingPlayerId(sourceAbility.getSourceId(), game, true);
+        UUID defender = game.getCombat().getDefendingPlayerId(sourceAbility.getSourceId(), game);
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, defender, game)) {
             count += permanent.getCounters(game).getCount(counterType);
         }
