@@ -9,7 +9,8 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerValue;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -59,7 +60,7 @@ public final class CurieEmergentIntelligence extends CardImpl {
 
         // Whenever Curie, Emergent Intelligence deals combat damage to a player, draw cards equal to its base power.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
-            new DrawCardSourceControllerEffect(1).setText("draw cards equal to its base power"), false
+            new DrawCardSourceControllerEffect(new CurieEmergentIntelligenceValue()).setText("draw cards equal to its base power"), false
         ));
 
         // {1}{U}, Exile another nontoken artifact creature you control: Curie becomes a copy of the exiled creature, except it has 
@@ -79,16 +80,41 @@ public final class CurieEmergentIntelligence extends CardImpl {
     }
 }
 
+class CurieEmergentIntelligenceValue implements DynamicValue {
+    @Override
+    public int calculate(Game game, Ability sourceAbility, Effect effect) {
+        Permanent sourcePermanent = sourceAbility.getSourcePermanentOrLKI(game);
+        if (sourcePermanent == null) {
+            return 0;
+        }
+
+        // Minimum of 0 needed to account for Spinal Parasite
+        return Math.max(0, sourcePermanent.getPower().getModifiedBaseValue());
+    }
+
+    @Override
+    public CurieEmergentIntelligenceValue copy() {
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "X";
+    }
+
+    @Override
+    public String getMessage() {
+        return "{this}'s power";
+    }
+}
+
 class CurieCopyEffect extends OneShotEffect {
 
     private static final CopyApplier applier = new CopyApplier() {
         @Override
         public boolean apply(Game game, MageObject blueprint, Ability source, UUID targetObjectId) {
-            // Needed to account for Spinal Parasite
-            int basePower = Math.max(0, blueprint.getPower().getValue());
-
             blueprint.getAbilities().add(new DealsCombatDamageToAPlayerTriggeredAbility(
-                new DrawCardSourceControllerEffect(basePower).setText("draw cards equal to its base power"), false
+                new DrawCardSourceControllerEffect(new CurieEmergentIntelligenceValue()).setText("draw cards equal to its base power"), false
             ));
             return true;
         }
