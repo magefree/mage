@@ -83,6 +83,7 @@ class SharaeOfNumbingDepthsTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         return permanent != null
-                && StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE.match(permanent, event.getPlayerId(), this, game);
+                && isControlledBy(event.getPlayerId()) // whenever you tap
+                && StaticFilters.FILTER_OPPONENTS_PERMANENT_CREATURE.match(permanent, this.getControllerId(), this, game);
     }
 }
