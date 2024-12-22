@@ -40,7 +40,7 @@ public final class CombatUtil {
             }
         }
 
-        sortByPower(blockableAttackers, true);
+        sortByPower(blockableAttackers, false); // most powerfull go to first
 
         // imagine that most powerful will be blocked as 1-vs-1
         List<Permanent> attackersThatWontBeBlocked = new ArrayList<>(blockableAttackers);
@@ -87,9 +87,9 @@ public final class CombatUtil {
             @Override
             public int compare(Permanent o1, Permanent o2) {
                 if (ascending) {
-                    return o2.getPower().getValue() - o1.getPower().getValue();
-                } else {
                     return o1.getPower().getValue() - o2.getPower().getValue();
+                } else {
+                    return o2.getPower().getValue() - o1.getPower().getValue();
                 }
             }
         });

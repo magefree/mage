@@ -898,7 +898,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 return;
             }
 
-            CombatUtil.sortByPower(attackers, false);
+            CombatUtil.sortByPower(attackers, false); // most powerfull go to first
 
             CombatInfo combatInfo = CombatUtil.blockWithGoodTrade2(game, attackers, possibleBlockers);
             Player player = game.getPlayer(playerId);
