@@ -86,7 +86,7 @@ class GoblinVandalTriggeredAbility extends TriggeredAbilityImpl {
         if (sourcePermanent.isAttacking()) {
             for (CombatGroup combatGroup: game.getCombat().getGroups()) {
                 if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(getSourceId())) {
-                    UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
+                    UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(getSourceId(), game, true);
                     FilterPermanent filter = new FilterArtifactPermanent();
                     filter.add(new ControllerIdPredicate(defendingPlayerId));
                     Target target = new TargetPermanent(filter);

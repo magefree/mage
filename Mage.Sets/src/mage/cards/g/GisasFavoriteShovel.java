@@ -78,7 +78,7 @@ class LucilleEffect extends OneShotEffect {
         if (equipment == null) {
             return false;
         }
-        Player player = game.getPlayer(game.getCombat().getDefendingPlayerId(equipment.getAttachedTo(), game));
+        Player player = game.getPlayer(game.getCombat().getDefendingPlayerId(equipment.getAttachedTo(), game, true));
         if (player == null) {
             return false;
         }

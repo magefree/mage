@@ -94,7 +94,7 @@ class SiegeDragonAttacksTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
+        UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(getSourceId(), game, true);
         return defendingPlayerId != null && game.getBattlefield().countAll(filter, defendingPlayerId, game) < 1;
     }
 
@@ -121,7 +121,7 @@ class SiegeDragonDamageEffect extends OneShotEffect {
     
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
+        UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game, true);
         if (defendingPlayerId != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new ControllerIdPredicate(defendingPlayerId));

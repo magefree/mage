@@ -18,7 +18,6 @@ import mage.filter.predicate.mageobject.ToughnessPredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -70,7 +69,7 @@ class SkymarkRocAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getSourceId().equals(this.getSourceId())) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls with toughness 2 or less");
-            UUID defenderId = game.getCombat().getDefendingPlayerId(sourceId, game);
+            UUID defenderId = game.getCombat().getDefendingPlayerId(sourceId, game, true);
             filter.add(new ControllerIdPredicate(defenderId));
             filter.add(new ToughnessPredicate(ComparisonType.FEWER_THAN, 3));
 

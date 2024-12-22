@@ -64,7 +64,7 @@ enum EliteScaleguardTargetAdjuster implements TargetAdjuster {
         FilterCreaturePermanent filterDefender = new FilterCreaturePermanent("creature defending player controls");
         for (Effect effect : ability.getEffects()) {
             if (effect instanceof TapTargetEffect) {
-                filterDefender.add(new ControllerIdPredicate(game.getCombat().getDefendingPlayerId(effect.getTargetPointer().getFirst(game, ability), game)));
+                filterDefender.add(new ControllerIdPredicate(game.getCombat().getDefendingPlayerId(effect.getTargetPointer().getFirst(game, ability), game, true)));
                 effect.setTargetPointer(new FirstTargetPointer());// reset target pointer to first target to tap correct target
                 break;
             }

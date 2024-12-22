@@ -84,13 +84,13 @@ class SpitefulReturnedTriggeredAbility extends TriggeredAbilityImpl {
         if (sourcePermanent.isCreature(game)) {
             if (event.getSourceId() != null
                     && event.getSourceId().equals(this.getSourceId())) {
-                UUID defender = game.getCombat().getDefendingPlayerId(this.getSourceId(), game);
+                UUID defender = game.getCombat().getDefendingPlayerId(this.getSourceId(), game, true);
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
                 return true;
             }
         } else {
             if (sourcePermanent.isAttachedTo(event.getSourceId())) {
-                UUID defender = game.getCombat().getDefendingPlayerId(sourcePermanent.getAttachedTo(), game);
+                UUID defender = game.getCombat().getDefendingPlayerId(sourcePermanent.getAttachedTo(), game, true);
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
                 return true;
             }

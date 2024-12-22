@@ -80,7 +80,7 @@ class BrutalHordechiefTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent source = game.getPermanent(event.getSourceId());
         if (source != null && source.isControlledBy(getControllerId())) {
-            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
+            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(event.getSourceId(), game, true);
             this.getEffects().setTargetPointer(new FixedTarget(defendingPlayerId));
             return true;
         }

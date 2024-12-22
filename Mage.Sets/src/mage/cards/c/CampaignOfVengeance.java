@@ -62,7 +62,7 @@ class CampaignOfVengeanceTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent source = game.getPermanent(event.getSourceId());
         if (source != null && source.isControlledBy(controllerId)) {
-            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(event.getSourceId(), game);
+            UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(event.getSourceId(), game, true);
             this.getEffects().get(0).setTargetPointer(new FixedTarget(defendingPlayerId));
             return true;
         }

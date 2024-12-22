@@ -84,7 +84,7 @@ enum NazahnReveredBladesmithAdjuster implements TargetAdjuster {
         FilterCreaturePermanent filterDefender = new FilterCreaturePermanent("creature defending player controls");
         for (Effect effect : ability.getEffects()) {
             if (effect instanceof NazahnTapEffect) {
-                filterDefender.add(new ControllerIdPredicate(game.getCombat().getDefendingPlayerId(effect.getTargetPointer().getFirst(game, ability), game)));
+                filterDefender.add(new ControllerIdPredicate(game.getCombat().getDefendingPlayerId(effect.getTargetPointer().getFirst(game, ability), game, true)));
                 break;
             }
         }

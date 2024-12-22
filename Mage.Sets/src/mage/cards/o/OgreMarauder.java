@@ -21,7 +21,6 @@ import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -69,7 +68,7 @@ class OgreMarauderEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
+        UUID defendingPlayerId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game, true);
         MageObject sourceObject = game.getObject(source);
         Player defender = game.getPlayer(defendingPlayerId);
         if (defender != null && sourceObject != null) {

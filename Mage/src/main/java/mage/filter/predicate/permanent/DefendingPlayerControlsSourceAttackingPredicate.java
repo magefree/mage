@@ -18,7 +18,7 @@ public enum DefendingPlayerControlsSourceAttackingPredicate implements ObjectSou
 
     @Override
     public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
-        return input.getObject().isControlledBy(game.getCombat().getDefendingPlayerId(input.getSourceId(), game));
+        return input.getObject().isControlledBy(game.getCombat().getDefendingPlayerId(input.getSourceId(), game, true));
     }
 
     @Override

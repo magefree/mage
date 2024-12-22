@@ -54,7 +54,7 @@ enum ErithizonAdjuster implements TargetAdjuster {
     public void adjustTargets(Ability ability, Game game) {
         TargetCreaturePermanent target = new TargetCreaturePermanent();
         target.setAbilityController(ability.getControllerId());
-        target.setTargetController(game.getCombat().getDefendingPlayerId(ability.getSourceId(), game));
+        target.setTargetController(game.getCombat().getDefendingPlayerId(ability.getSourceId(), game, true));
         ability.getTargets().clear();
         ability.getTargets().add(target);
     }

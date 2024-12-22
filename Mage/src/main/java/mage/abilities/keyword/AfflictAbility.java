@@ -26,7 +26,7 @@ public class AfflictAbility extends BecomesBlockedSourceTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
-            UUID defenderId = game.getCombat().getDefendingPlayerId(getSourceId(), game);
+            UUID defenderId = game.getCombat().getDefendingPlayerId(getSourceId(), game, true);
             if (defenderId != null) {
                 this.getEffects().setTargetPointer(new FixedTarget(defenderId));
                 return true;

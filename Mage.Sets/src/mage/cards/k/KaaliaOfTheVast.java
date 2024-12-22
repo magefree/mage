@@ -124,7 +124,7 @@ class KaaliaOfTheVastEffect extends OneShotEffect {
                 UUID cardId = target.getFirstTarget();
                 Card card = game.getCard(cardId);
                 if (card != null && game.getCombat() != null) {
-                    UUID defenderId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game);
+                    UUID defenderId = game.getCombat().getDefendingPlayerId(source.getSourceId(), game, true);
                     if (defenderId != null) {
                         controller.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
                         Permanent creature = game.getPermanent(cardId);
