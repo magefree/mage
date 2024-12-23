@@ -876,7 +876,7 @@ class CommanderLegendsBattleForBaldursGateCollator implements BoosterCollator {
     private final RarityConfiguration uncommonRunsUR = new RarityConfiguration(AAUR);
     private static final RarityConfiguration uncommonRuns(){
         int runRoll = RandomUtil.nextInt(204480);
-        return ( 168377> runRoll ? 113245> runRoll ? 14564> runRoll ? 14564> runRoll ?
+        return ( 168377> runRoll ? 113245> runRoll ? 14564> runRoll ? 8804> runRoll ?
             uncommonRunsA : uncommonRunsM : uncommonRunsB : uncommonRunsUU : uncommonRunsUR );
     }
 
