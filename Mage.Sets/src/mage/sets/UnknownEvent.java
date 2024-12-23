@@ -21,6 +21,6 @@ public final class UnknownEvent extends ExpansionSet {
         this.hasBasicLands = false;
         this.hasBoosters = false;
 
-        cards.add(new SetCardInfo("More of That Strange Oil", "CU13", Rarity.COMMON, mage.cards.m.MoreOfThatStrangeOil.class));
+        cards.add(new SetCardInfo("More of That Strange Oil...", "CU13", Rarity.COMMON, mage.cards.m.MoreOfThatStrangeOil.class));
     }
 }
