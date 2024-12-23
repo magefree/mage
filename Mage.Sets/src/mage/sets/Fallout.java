@@ -103,6 +103,7 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Crucible of Worlds", 357, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class));
         cards.add(new SetCardInfo("Crush Contraband", 158, Rarity.UNCOMMON, mage.cards.c.CrushContraband.class));
         cards.add(new SetCardInfo("Cultivate", 196, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
+        cards.add(new SetCardInfo("Curie, Emergent Intelligence", 30, Rarity.RARE, mage.cards.c.CurieEmergentIntelligence.class));
         cards.add(new SetCardInfo("Darkwater Catacombs", 260, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Deadly Dispute", 184, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
         cards.add(new SetCardInfo("Desdemona, Freedom's Edge", 101, Rarity.RARE, mage.cards.d.DesdemonaFreedomsEdge.class, NON_FULL_USE_VARIOUS));
