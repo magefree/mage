@@ -858,6 +858,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         // map with attackers (UUID) that must be blocked by at least one blocker and a set of all creatures that can block it and don't block yet
         Map<UUID, Set<UUID>> mustBeBlockedByAtLeastX = new HashMap<>();
         Map<UUID, Integer> minNumberOfBlockersMap = new HashMap<>();
+        Map<UUID, Integer> minPossibleBlockersMap = new HashMap<>();
 
         // check mustBlock requirements of creatures from opponents of attacking player
         for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED, player.getId(), game)) {
@@ -876,6 +877,12 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 CombatGroup toBeBlockedGroup = findGroup(toBeBlockedCreature);
                                 if (toBeBlockedGroup != null && toBeBlockedGroup.getDefendingPlayerId().equals(creature.getControllerId())) {
                                     minNumberOfBlockersMap.put(toBeBlockedCreature, effect.getMinNumberOfBlockers());
+                                    Permanent toBeBlockedCreaturePermanent = game.getPermanent(toBeBlockedCreature);
+                                    if (toBeBlockedCreaturePermanent != null) {
+                                        minPossibleBlockersMap.put(toBeBlockedCreature, toBeBlockedCreaturePermanent.getMinBlockedBy());
+                                    } else {
+                                        minPossibleBlockersMap.put(toBeBlockedCreature, 1);
+                                    }
                                     Set<UUID> potentialBlockers;
                                     if (mustBeBlockedByAtLeastX.containsKey(toBeBlockedCreature)) {
                                         potentialBlockers = mustBeBlockedByAtLeastX.get(toBeBlockedCreature);
@@ -973,6 +980,12 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 CombatGroup toBeBlockedGroup = findGroup(toBeBlockedCreature);
                                 if (toBeBlockedGroup != null && toBeBlockedGroup.getDefendingPlayerId().equals(creature.getControllerId())) {
                                     minNumberOfBlockersMap.put(toBeBlockedCreature, effect.getMinNumberOfBlockers());
+                                    Permanent toBeBlockedCreaturePermanent = game.getPermanent(toBeBlockedCreature);
+                                    if (toBeBlockedCreaturePermanent != null) {
+                                        minPossibleBlockersMap.put(toBeBlockedCreature, toBeBlockedCreaturePermanent.getMinBlockedBy());
+                                    } else {
+                                        minPossibleBlockersMap.put(toBeBlockedCreature, 1);
+                                    }
                                     Set<UUID> potentialBlockers;
                                     if (mustBeBlockedByAtLeastX.containsKey(toBeBlockedCreature)) {
                                         potentialBlockers = mustBeBlockedByAtLeastX.get(toBeBlockedCreature);
@@ -1059,6 +1072,13 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (UUID toBeBlockedCreatureId : mustBeBlockedByAtLeastX.keySet()) {
             for (CombatGroup combatGroup : game.getCombat().getGroups()) {
                 if (combatGroup.getAttackers().contains(toBeBlockedCreatureId)) {
+                    // Neyith of the Dire Hunt: If the target creature has menace, two creatures must block it if able.
+                    // (2020-06-23)
+                    // This is a basic check to avoid deadlocking on one blocker plus 'must be blocked if able' with menace;
+                    // a full solution is more complicated but this prevents the most common case.
+                    if (mustBeBlockedByAtLeastX.get(toBeBlockedCreatureId).size() < minPossibleBlockersMap.get(toBeBlockedCreatureId)) {
+                        continue;
+                    }
                     boolean requirementFulfilled = false;
                     // Check whether an applicable creature is blocking.
                     for (UUID blockerId : combatGroup.getBlockers()) {
