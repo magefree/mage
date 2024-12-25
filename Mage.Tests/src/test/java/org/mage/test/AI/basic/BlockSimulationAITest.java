@@ -32,7 +32,8 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
     @Test
     public void test_Block_1_small_attacker_vs_2_big_blockers() {
         addCard(Zone.BATTLEFIELD, playerA, "Arbor Elf", 1); // 1/1
-        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 2); // 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1); // 2/2
+        addCard(Zone.BATTLEFIELD, playerB, "Spectral Bears", 1); // 3/3
 
         attack(1, playerA, "Arbor Elf");
 
@@ -161,6 +162,31 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
         assertPermanentCount(playerB, "Spectral Bears", 1);
     }
 
+    @Test
+    public void test_Block_1_attacker_vs_many_blockers() {
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1); // 2/2
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Arbor Elf", 1); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Spectral Bears", 1); // 3/3
+        addCard(Zone.BATTLEFIELD, playerB, "Deadbridge Goliath", 1); // 5/5
+        addCard(Zone.BATTLEFIELD, playerB, "Colossal Dreadmaw", 1); // 6/6
+
+        attack(1, playerA, "Balduvian Bears");
+
+        // ai must use smaller blocker and survive (3/3 must block 2/2)
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, "Balduvian Bears", 1);
+        assertDamageReceived(playerB, "Spectral Bears", 2);
+    }
+
+    // TODO: add tests with multi blocker requirement effects
     // TODO: add tests for DeathtouchAbility
     // TODO: add tests for FirstStrikeAbility
     // TODO: add tests for DoubleStrikeAbility

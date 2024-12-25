@@ -909,6 +909,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 List<Permanent> blockers = entry.getValue();
                 if (blockers != null) {
                     for (Permanent blocker : blockers) {
+                        // TODO: buggy or miss on multi blocker requirements?!
                         player.declareBlocker(player.getId(), blocker.getId(), attackerId, game);
                         blocked = true;
                     }
