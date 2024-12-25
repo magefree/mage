@@ -39,6 +39,7 @@ import org.apache.log4j.Logger;
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -59,6 +60,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     private final List<FilterCreaturePermanent> useToughnessForDamageFilters = new ArrayList<>();
 
     protected List<CombatGroup> groups = new ArrayList<>();
+    protected List<CombatGroup> formerGroups = new ArrayList<>();
     protected Map<UUID, CombatGroup> blockingGroups = new HashMap<>();
     // all possible defenders (players, planeswalkers or battle)
     protected Set<UUID> defenders = new HashSet<>();
@@ -82,6 +84,9 @@ public class Combat implements Serializable, Copyable<Combat> {
         this.attackingPlayerId = combat.attackingPlayerId;
         for (CombatGroup group : combat.groups) {
             groups.add(group.copy());
+        }
+        for (CombatGroup group : combat.formerGroups) {
+            formerGroups.add(group.copy());
         }
         defenders.addAll(combat.defenders);
         for (Map.Entry<UUID, CombatGroup> group : combat.blockingGroups.entrySet()) {
@@ -181,6 +186,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public void clear() {
         groups.clear();
+        formerGroups.clear();
         blockingGroups.clear();
         defenders.clear();
         attackingPlayerId = null;
@@ -1679,6 +1685,36 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @return
      */
     public UUID getDefendingPlayerId(UUID attackingCreatureId, Game game) {
+        return getDefendingPlayerId(attackingCreatureId, game, true);
+    }
+
+    /**
+     * Returns the playerId of the player that is attacked by given attacking
+     * creature or formerly-attacking creature.
+     *
+     * @param attackingCreatureId
+     * @param game
+     * @return
+     */
+    public UUID getDefendingPlayerId(UUID attackingCreatureId, Game game, boolean allowFormer) {
+        if (allowFormer) {
+            /*
+             * 802.2a. Any rule, object, or effect that refers to a "defending player" refers to one specific defending
+             * player, not to all of the defending players. If an ability of an attacking creature refers to a
+             * defending player, or a spell or ability refers to both an attacking creature and a defending player,
+             * then unless otherwise specified, the defending player it's referring to is the player that creature is
+             * attacking, the controller of the planeswalker that creature is attacking, or the protector of the battle
+             * that player is attacking. If that creature is no longer attacking, the defending player it's referring
+             * to is the player that creature was attacking before it was removed from combat, the controller of the
+             * planeswalker that creature was attacking before it was removed from combat, or the protector of the
+             * battle that player was attacking before it was removed from combat.
+             */
+            return Stream.concat(groups.stream(), formerGroups.stream())
+                    .filter(group -> (group.getAttackers().contains(attackingCreatureId) || group.getFormerAttackers().contains(attackingCreatureId)))
+                    .map(CombatGroup::getDefendingPlayerId)
+                    .findFirst()
+                    .orElse(null);
+        }
         return groups
                 .stream()
                 .filter(group -> group.getAttackers().contains(attackingCreatureId))
@@ -1743,6 +1779,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                 }
                 if (group.attackers.isEmpty()) {
+                    formerGroups.add(group);
                     groups.remove(group);
                 }
                 return;
