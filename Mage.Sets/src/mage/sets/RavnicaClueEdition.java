@@ -24,6 +24,7 @@ public final class RavnicaClueEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Affectionate Indrik", 155, Rarity.UNCOMMON, mage.cards.a.AffectionateIndrik.class));
         cards.add(new SetCardInfo("Afterlife Insurance", 23, Rarity.UNCOMMON, mage.cards.a.AfterlifeInsurance.class));
         cards.add(new SetCardInfo("Ajani's Pridemate", 52, Rarity.UNCOMMON, mage.cards.a.AjanisPridemate.class));
+        cards.add(new SetCardInfo("Amzu, Swarm's Hunger", 24, Rarity.RARE, mage.cards.a.AmzuSwarmsHunger.class));
         cards.add(new SetCardInfo("Angel of Vitality", 53, Rarity.UNCOMMON, mage.cards.a.AngelOfVitality.class));
         cards.add(new SetCardInfo("Apothecary White", 1, Rarity.RARE, mage.cards.a.ApothecaryWhite.class));
         cards.add(new SetCardInfo("Azorius Arrester", 54, Rarity.COMMON, mage.cards.a.AzoriusArrester.class));
