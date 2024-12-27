@@ -8,6 +8,9 @@ import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.command.Emblem;
 
+/**
+ * @author jackd149
+ */
 public final class KaitoBaneOfNightmaresEmblem extends Emblem {
 
     public KaitoBaneOfNightmaresEmblem() {
