@@ -578,22 +578,12 @@ public final class Foundations extends ExpansionSet {
         super.generateBoosterMap();
         
         CardInfo cardInfo;
-        for( int cn = 19 ; cn < 29 ; cn++ ){
+        for( int cn = 74 ; cn < 84 ; cn++ ){
             cardInfo = CardRepository.instance.findCard("SPG", "" + cn);
             if( cardInfo != null ){
                 inBoosterMap.put("SPG_" + cn, cardInfo);
             }else{
                 throw new IllegalArgumentException("Card not found: " + "SPG_" + cn);
-            }
-        }
-        String[] lstCards = {"SPG_74", "SPG_75", "SPG_76", "SPG_77", "SPG_78", "SPG_79", "SPG_80", "SPG_81", "SPG_82", "SPG_83"};
-        for( String itm : lstCards ){
-            int i = itm.indexOf("_");
-            cardInfo = CardRepository.instance.findCard(itm.substring(0,i), itm.substring(i+1));
-            if( cardInfo != null ){
-                inBoosterMap.put(itm, cardInfo);
-            }else{
-                throw new IllegalArgumentException("Card not found: " + itm);
             }
         }
     }
@@ -772,6 +762,14 @@ class FoundationsCollator implements BoosterCollator {
 
     private final RarityConfiguration foilRareRuns = new RarityConfiguration(fr);
     private final RarityConfiguration foilBorderlessRuns = new RarityConfiguration(fb);
+        // foil wildcard rarity distribution not specified, so derived from observed pack openings
+        // 229 packs, 127 common, 78 uncommon, 19 rare/mythic, 5 borderless common/uncommon
+    private static final RarityConfiguration foilRuns(){
+        int wildNum = RandomUtil.nextInt(229);
+        return ( wildNum < 224 ? wildNum < 205 ? wildNum < 127 ?
+            foilCommonRuns : foilUncommonRuns : foilRareRuns : foilBorderlessRuns );
+    }
+
 
     @Override
     public List<String> makeBooster() {
@@ -792,20 +790,7 @@ class FoundationsCollator implements BoosterCollator {
         };
 
         booster.addAll(landRuns.getNext().makeRun());
-
-        // foil wildcard rarity distribution not specified, so derived from observed pack openings
-        // 229 packs, 127 common, 78 uncommon, 19 rare/mythic, 5 borderless common/uncommon
-        wildNum = RandomUtil.nextInt(229);
-        if( wildNum < 127 ){
-            booster.addAll(foilCommonRuns.getNext().makeRun());
-        }else if( wildNum < 205 ){
-            booster.addAll(foilUncommonRuns.getNext().makeRun());
-        }else if( wildNum < 224 ){
-            booster.addAll(foilRareRuns.getNext().makeRun());
-        }else{
-            booster.addAll(foilBorderlessRuns.getNext().makeRun());
-        };
-
+        booster.addAll(foilRuns().getNext().makeRun());
         booster.addAll(rareRuns( wildRare ? 2 : 1 ).getNext().makeRun());
 
         // 1.5% of  Play Boosters features a Special Guests card displacing a common card.
