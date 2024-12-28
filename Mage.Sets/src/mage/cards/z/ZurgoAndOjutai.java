@@ -98,6 +98,9 @@ class ZurgoAndOjutaiTriggeredAbility extends TriggeredAbilityImpl implements Bat
 
     @Override
     public boolean checkEvent(DamagedEvent event, Game game) {
+        if (!event.isCombatDamage()) {
+            return false;
+        }
         Permanent permanent = game.getPermanent(event.getSourceId());
         Permanent defender = game.getPermanent(event.getTargetId());
         return permanent != null

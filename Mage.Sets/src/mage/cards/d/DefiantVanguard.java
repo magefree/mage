@@ -1,7 +1,6 @@
 
 package mage.cards.d;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -16,11 +15,7 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.ComparisonType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.common.FilterPermanentCard;
 import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
@@ -29,13 +24,17 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.targetpointer.FixedTarget;
 
+import java.util.UUID;
+
 /**
- *
  * @author bunchOfDevs
  */
 public final class DefiantVanguard extends CardImpl {
 
+    protected static final String EFFECT_KEY = "DefiantVanguardEffect_";
+
     private static final FilterPermanentCard filter = new FilterPermanentCard("Rebel permanent card with mana value 4 or less");
+
 
     static {
         filter.add(SubType.REBEL.getPredicate());
@@ -100,8 +99,8 @@ class DefiantVanguardTriggeredAbility extends TriggeredAbilityImpl {
         Permanent blocked = game.getPermanent(event.getTargetId());
         if (blocker != null
                 && blocked != null) {
-            game.getState().setValue(blocked.toString(), blocked.getZoneChangeCounter(game)); // in case the attacker changes zone
-            game.getState().setValue(blocker.toString(), blocker.getZoneChangeCounter(game)); // in case the blocker changes zone
+            game.getState().setValue(DefiantVanguard.EFFECT_KEY + blocked.getId(), blocked.getZoneChangeCounter(game)); // in case the attacker changes zone
+            game.getState().setValue(DefiantVanguard.EFFECT_KEY + blocker.getId(), blocker.getZoneChangeCounter(game)); // in case the blocker changes zone
             getAllEffects().setTargetPointer(new FixedTarget(blocked.getId()));
             return true;
         }
@@ -131,13 +130,13 @@ class DefiantVanguardEffect extends OneShotEffect {
         Permanent blockedCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         Permanent defiantVanguard = game.getPermanent(source.getSourceId());
         if (blockedCreature != null) {
-            if (game.getState().getValue(blockedCreature.toString()).equals(blockedCreature.getZoneChangeCounter(game))) { // true if it did not change zones
+            if (game.getState().getValue(DefiantVanguard.EFFECT_KEY + blockedCreature.getId()).equals(blockedCreature.getZoneChangeCounter(game))) { // true if it did not change zones
                 blockedCreature.destroy(source, game, false);
                 result = true;
             }
         }
         if (defiantVanguard != null) {
-            if (game.getState().getValue(defiantVanguard.toString()).equals(defiantVanguard.getZoneChangeCounter(game))) { // true if it did not change zones
+            if (game.getState().getValue(DefiantVanguard.EFFECT_KEY + defiantVanguard.getId()).equals(defiantVanguard.getZoneChangeCounter(game))) { // true if it did not change zones
                 defiantVanguard.destroy(source, game, false);
                 result = true;
             }
