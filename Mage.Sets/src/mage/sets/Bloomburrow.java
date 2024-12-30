@@ -462,7 +462,9 @@ class BloomburrowCollator implements BoosterCollator {
     private final RarityConfiguration uncommonRuns4A = new RarityConfiguration(ABCC);
     private final RarityConfiguration uncommonRuns4BC = new RarityConfiguration(BBCC, BCCC, BCCC);
     private static final RarityConfiguration uncommonRuns(int runLength){
-        return ( 3< runLength ? RandomUtil.nextInt(25) <22 ?
+        // return ( 3< runLength ? RandomUtil.nextInt(25) <22 ?
+        // adjusted numbers to account for one less A uncommon due to Heirloom Epic being omitted
+        return ( 3< runLength ? RandomUtil.nextInt(18) <15 ?
             uncommonRuns4A : uncommonRuns4BC : uncommonRuns3 );
     }
 
