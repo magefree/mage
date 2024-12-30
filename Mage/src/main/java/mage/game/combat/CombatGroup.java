@@ -976,4 +976,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     private static int getLethalDamage(Permanent blocker, Permanent attacker, Game game) {
         return blocker.getLethalDamage(attacker.getId(), game);
     }
+
+    @Override
+    public String toString() {
+        return String.format("%d attackers, %d blockers",
+                this.getAttackers().size(),
+                this.getBlockers().size()
+        );
+    }
 }

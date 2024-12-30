@@ -663,26 +663,47 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (defender == null) {
                 continue;
             }
-            boolean choose = true;
             if (blockController == null) {
                 controller = defender;
             } else {
                 controller = blockController;
             }
-            while (choose) {
+
+            // choosing until good block configuration
+            while (true) {
+                // declare normal blockers
+                // TODO: need reseach - is it possible to concede on bad blocker configuration (e.g. user can't continue)
                 controller.selectBlockers(source, game, defenderId);
                 if (game.isPaused() || game.checkIfGameIsOver() || game.executingRollback()) {
                     return;
                 }
-                if (!game.getCombat().checkBlockRestrictions(defender, game)) {
-                    if (controller.isHuman()) { // only human player can decide to do the block in another way
-                        continue;
-                    }
+
+                // check multiple restrictions by permanents and effects, reset on invalid blocking configuration, try to auto-fix
+                // TODO: wtf, some checks contains AI related code inside -- it must be reworked and moved to computer classes?!
+
+                // check 1 of 3
+                boolean isValidBlock = game.getCombat().checkBlockRestrictions(defender, game);
+                if (!isValidBlock) {
+                    makeSureItsNotComputer(controller);
+                    continue;
                 }
-                choose = !game.getCombat().checkBlockRequirementsAfter(defender, controller, game);
-                if (!choose) {
-                    choose = !game.getCombat().checkBlockRestrictionsAfter(defender, controller, game);
+
+                // check 2 of 3
+                isValidBlock = game.getCombat().checkBlockRequirementsAfter(defender, controller, game);
+                if (!isValidBlock) {
+                    makeSureItsNotComputer(controller);
+                    continue;
                 }
+
+                // check 3 of 3
+                isValidBlock = game.getCombat().checkBlockRestrictionsAfter(defender, controller, game);
+                if (!isValidBlock) {
+                    makeSureItsNotComputer(controller);
+                    continue;
+                }
+
+                // all valid, can finish now
+                break;
             }
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
 
@@ -693,6 +714,15 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         // tool to catch the bug about flyers blocked by non flyers or intimidate blocked by creatures with other colors
         TraceUtil.traceCombatIfNeeded(game, game.getCombat());
+    }
+
+    private void makeSureItsNotComputer(Player controller) {
+        if (controller.isComputer() || !controller.isHuman()) {
+            // TODO: wtf, AI will freeze forever here in games with attacker/blocker restrictions,
+            //   but it pass in some use cases due random choices. AI must deside blocker configuration
+            //   in one attempt
+            throw new IllegalStateException("AI can't find good blocker configuration, report it to github");
+        }
     }
 
     /**
@@ -852,10 +882,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * attacking creature fulfills both the restriction and the requirement, so
      * that's the only option.
      *
-     * @param player
-     * @param controller
-     * @param game
-     * @return
+     * @return false on invalid block configuration e.g. player must choose new blockers
      */
     public boolean checkBlockRequirementsAfter(Player player, Player controller, Game game) {
         // Get once a list of all opponents in range
@@ -1274,10 +1301,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * Checks the canBeBlockedCheckAfter RestrictionEffect Is the block still
      * valid after all block decisions are done
      *
-     * @param player
-     * @param controller
-     * @param game
-     * @return
+     * @return false on invalid block configuration e.g. player must choose new blockers
      */
     public boolean checkBlockRestrictionsAfter(Player player, Player controller, Game game) {
         // Restrictions applied to blocking creatures
@@ -1906,4 +1930,18 @@ public class Combat implements Serializable, Copyable<Combat> {
         return new Combat(this);
     }
 
+    @Override
+    public String toString() {
+        List<String> res = new ArrayList<>();
+        for (int i = 0; i < this.groups.size(); i++) {
+            res.add(String.format("group %d with %s",
+                    i + 1,
+                    this.groups.get(i)
+            ));
+        }
+        return String.format("%d groups%s",
+                this.groups.size(),
+                this.groups.size() > 0 ? ": " + String.join("; ", res) : ""
+        );
+    }
 }
