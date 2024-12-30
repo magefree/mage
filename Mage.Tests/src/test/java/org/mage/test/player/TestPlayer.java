@@ -28,10 +28,7 @@ import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.SummoningSicknessPredicate;
-import mage.game.Game;
-import mage.game.GameImpl;
-import mage.game.Graveyard;
-import mage.game.Table;
+import mage.game.*;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
 import mage.game.draft.Draft;
@@ -52,6 +49,7 @@ import mage.target.common.*;
 import mage.util.CardUtil;
 import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
+import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 
@@ -839,6 +837,20 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check attacking: attackers list
+                        if (params[0].equals(CHECK_COMMAND_ATTACKERS) && params.length == 2) {
+                            assertAttackers(action, game, computerPlayer, params[1]);
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // check attacking: attackers list
+                        if (params[0].equals(CHECK_COMMAND_BLOCKERS) && params.length == 2) {
+                            assertBlockers(action, game, computerPlayer, params[1]);
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check playable ability: ability text, must have
                         if (params[0].equals(CHECK_COMMAND_PLAYABLE_ABILITY) && params.length == 3) {
                             assertPlayableAbility(action, game, computerPlayer, params[1], Boolean.parseBoolean(params[2]));
@@ -1415,6 +1427,64 @@ public class TestPlayer implements Player {
             printAbilities(game, computerPlayer.getPlayable(game, true));
             printEnd();
             Assert.fail("Must not have playable ability, but found: " + abilityStartText);
+        }
+    }
+
+    private void assertAttackers(PlayerAction action, Game game, Player player, String attackers) {
+        AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
+        Assert.assertNotNull(watcher);
+
+        List<String> actualAttackers = watcher.getAttackedThisTurnCreatures().stream()
+                .map(mor -> game.getObject(mor.getSourceId()))// no needs in zcc/lki
+                .filter(Objects::nonNull)
+                .filter(o -> o instanceof ControllableOrOwnerable)
+                .map(o -> (ControllableOrOwnerable) o)
+                .filter(o -> o.getControllerOrOwnerId().equals(player.getId()))
+                .map(o -> ((MageObject) o).getName())
+                .sorted()
+                .collect(Collectors.toList());
+        List<String> needAttackers = Arrays.stream(attackers.split("\\^"))
+                .filter(s -> !s.equals(TestPlayer.ATTACK_SKIP))
+                .sorted()
+                .collect(Collectors.toList());
+
+        if (!actualAttackers.equals(needAttackers)) {
+            printStart(game, action.getActionName());
+            System.out.println(String.format("Need attackers: %d", needAttackers.size()));
+            needAttackers.forEach(s -> System.out.println(" - " + s));
+            System.out.println(String.format("Actual attackers: %d", actualAttackers.size()));
+            actualAttackers.forEach(s -> System.out.println(" - " + s));
+            printEnd();
+            Assert.fail("Found wrong attackers");
+        }
+    }
+
+    private void assertBlockers(PlayerAction action, Game game, Player player, String blockers) {
+        AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
+        Assert.assertNotNull(watcher);
+
+        List<String> actualBlockers = watcher.getBlockedThisTurnCreatures().stream()
+                .map(mor -> game.getObject(mor.getSourceId()))// no needs in zcc/lki
+                .filter(Objects::nonNull)
+                .filter(o -> o instanceof ControllableOrOwnerable)
+                .map(o -> (ControllableOrOwnerable) o)
+                .filter(o -> o.getControllerOrOwnerId().equals(player.getId()))
+                .map(o -> ((MageObject) o).getName())
+                .sorted()
+                .collect(Collectors.toList());
+        List<String> needBlockers = Arrays.stream(blockers.split("\\^"))
+                .filter(s -> !s.equals(TestPlayer.BLOCK_SKIP))
+                .sorted()
+                .collect(Collectors.toList());
+
+        if (!actualBlockers.equals(needBlockers)) {
+            printStart(game, action.getActionName());
+            System.out.println(String.format("Need blockers: %d", needBlockers.size()));
+            needBlockers.forEach(s -> System.out.println(" - " + s));
+            System.out.println(String.format("Actual blockers: %d", actualBlockers.size()));
+            actualBlockers.forEach(s -> System.out.println(" - " + s));
+            printEnd();
+            Assert.fail("Found wrong blockers");
         }
     }
 
