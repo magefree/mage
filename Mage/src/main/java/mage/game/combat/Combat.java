@@ -893,7 +893,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         Map<UUID, Integer> minNumberOfBlockersMap = new HashMap<>();
         Map<UUID, Integer> minPossibleBlockersMap = new HashMap<>();
 
-        // check mustBlock requirements of creatures from opponents of attacking player
+        // FIND attackers and potential blockers for "must be blocked" effects
         for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED, player.getId(), game)) {
             // creature is controlled by an opponent of the attacker
             if (opponents.contains(creature.getControllerId())) {
@@ -1012,7 +1012,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                             if (toBeBlockedCreature != null) {
                                 CombatGroup toBeBlockedGroup = findGroup(toBeBlockedCreature);
                                 if (toBeBlockedGroup != null && toBeBlockedGroup.getDefendingPlayerId().equals(creature.getControllerId())) {
-                                    minNumberOfBlockersMap.put(toBeBlockedCreature, effect.getMinNumberOfBlockers());
+                                    minNumberOfBlockersMap.put(toBeBlockedCreature, effect.getMinNumberOfBlockers()); // TODO: fail on multiple effects 1 + 2 min blockers?
                                     Permanent toBeBlockedCreaturePermanent = game.getPermanent(toBeBlockedCreature);
                                     if (toBeBlockedCreaturePermanent != null) {
                                         minPossibleBlockersMap.put(toBeBlockedCreature, toBeBlockedCreaturePermanent.getMinBlockedBy());
@@ -1096,12 +1096,10 @@ public class Combat implements Serializable, Copyable<Combat> {
 
                     }
                 }
-
             }
-
         }
 
-        // check if for attacking creatures with mustBeBlockedByAtLeastX requirements are fulfilled
+        // APPLY potential blockers to attackers with "must be blocked" effects
         for (UUID toBeBlockedCreatureId : mustBeBlockedByAtLeastX.keySet()) {
             for (CombatGroup combatGroup : game.getCombat().getGroups()) {
                 if (combatGroup.getAttackers().contains(toBeBlockedCreatureId)) {
@@ -1124,6 +1122,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                     if (!requirementFulfilled) {
                         // creature is not blocked but has possible blockers
                         if (controller.isHuman()) {
+                            // HUMAN logic - send warning about wrong blocker config and repeat declare
+                            // TODO: replace isHuman by !isComputer for working unit tests
                             Permanent toBeBlockedCreature = game.getPermanent(toBeBlockedCreatureId);
                             if (toBeBlockedCreature != null) {
                                 // check if all possible blocker block other creatures they are forced to block
@@ -1142,9 +1142,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                                     }
                                 }
                             }
-
                         } else {
-                            // take the first potential blocker from the set to block for the AI
+                            // AI logic - auto-fix wrong blocker config (take the first potential blocker)
                             for (UUID possibleBlockerId : mustBeBlockedByAtLeastX.get(toBeBlockedCreatureId)) {
                                 String blockRequiredMessage = isCreatureDoingARequiredBlock(
                                         possibleBlockerId, toBeBlockedCreatureId, mustBeBlockedByAtLeastX, game);
@@ -1167,8 +1166,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                 }
             }
-
         }
+
         // check if creatures are forced to block but do not block at all or block creatures they are not forced to block
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<UUID, Set<UUID>> entry : creatureMustBlockAttackers.entrySet()) {
