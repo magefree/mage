@@ -873,8 +873,6 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore
-    // TODO: need auto-fix cause AI use it (it must ignore bad blocker configuration and allow to pass without blockers at all)
     public void test_MustBeBlockedWithMenace_low_blockers_auto() {
         // At the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature’s
         // power until end of turn. That creature must be blocked this combat if able.
