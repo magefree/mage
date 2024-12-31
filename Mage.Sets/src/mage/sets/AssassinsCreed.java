@@ -138,6 +138,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("The Spear of Leonidas", 38, Rarity.RARE, mage.cards.t.TheSpearOfLeonidas.class));
         cards.add(new SetCardInfo("Towering Viewpoint", 77, Rarity.UNCOMMON, mage.cards.t.ToweringViewpoint.class));
         cards.add(new SetCardInfo("Tranquilize", 284, Rarity.COMMON, mage.cards.t.Tranquilize.class));
+        cards.add(new SetCardInfo("Viewpoint Synchronization", 43, Rarity.UNCOMMON, mage.cards.v.ViewpointSynchronization.class));
         cards.add(new SetCardInfo("Waterlogged Grove", 116, Rarity.RARE, mage.cards.w.WaterloggedGrove.class));
         cards.add(new SetCardInfo("Yggdrasil, Rebirth Engine", 78, Rarity.MYTHIC, mage.cards.y.YggdrasilRebirthEngine.class));
     }
