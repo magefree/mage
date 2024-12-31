@@ -721,7 +721,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             // TODO: wtf, AI will freeze forever here in games with attacker/blocker restrictions,
             //   but it pass in some use cases due random choices. AI must deside blocker configuration
             //   in one attempt
-            throw new IllegalStateException("AI can't find good blocker configuration, report it to github");
+            //throw new IllegalStateException("AI can't find good blocker configuration, report it to github");
         }
     }
 
