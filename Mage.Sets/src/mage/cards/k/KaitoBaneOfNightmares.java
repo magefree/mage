@@ -46,6 +46,7 @@ public final class KaitoBaneOfNightmares extends CardImpl {
         // Ninjutsu {1}{U}{B}
         this.addAbility(new NinjutsuAbility("{1}{U}{B}"));
 
+        // During your turn, as long as Kaito has one or more loyalty counters on him, he's a 3/4 Ninja creature and has hexproof.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BecomesCreatureSourceEffect(
                         new CreatureToken(3, 4, "3/4 Ninja creature")
@@ -60,7 +61,7 @@ public final class KaitoBaneOfNightmares extends CardImpl {
 
         // 0: Surveil 2. Then draw a card for each opponent who lost life this turn.
         Ability ability = new LoyaltyAbility(new SurveilEffect(2), 0);
-        ability.addEffect(new DrawCardSourceControllerEffect(NumberOfOpponentsWhoLostLife.instance));
+        ability.addEffect(new DrawCardSourceControllerEffect(KaitoBaneOfNightmaresCount.instance));
         this.addAbility(ability, new PlayerLostLifeWatcher());
 
         // -2: Tap target creature. Put two stun counters on it.
@@ -102,24 +103,20 @@ enum KaitoBaneOfNightmaresCondition implements Condition {
     }
 }
 
-enum NumberOfOpponentsWhoLostLife implements DynamicValue {
+enum KaitoBaneOfNightmaresCount implements DynamicValue {
     instance;
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return this.calculate(game, sourceAbility.getControllerId());
-    }
-
-    public int calculate(Game game, UUID controllerId) {
         PlayerLostLifeWatcher watcher = game.getState().getWatcher(PlayerLostLifeWatcher.class);
         if (watcher != null) {
-            return watcher.getNumberOfOpponentsWhoLostLife(controllerId, game);
+            return watcher.getNumberOfOpponentsWhoLostLife(sourceAbility.getControllerId(), game);
         }
         return 0;
     }
 
     @Override
-    public NumberOfOpponentsWhoLostLife copy() {
+    public KaitoBaneOfNightmaresCount copy() {
         return instance;
     }
 
