@@ -37,6 +37,8 @@ public final class CryptidInspector extends CardImpl {
         this.subtype.add(SubType.WARRIOR);
         this.addAbility(VigilanceAbility.getInstance());
 
+        // Whenever a face-down permanent you control enters and whenever Cryptid Inspector or another permanent you control is turned face up,
+        // put a +1/+1 counter on Cryptid Inspector.
         this.addAbility(new OrTriggeredAbility(
             Zone.BATTLEFIELD,
             new AddCountersSourceEffect(CounterType.P1P1.createInstance()), 
