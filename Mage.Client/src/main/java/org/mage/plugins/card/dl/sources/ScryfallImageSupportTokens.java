@@ -2457,6 +2457,9 @@ public class ScryfallImageSupportTokens {
             // BLC
             put("BLC/Raccoon", "https://api.scryfall.com/cards/tblc/29/en?format=image");
 
+            // DSK
+            put("DSK/Emblem Kaito", "https://api.scryfall.com/cards/tdsk/17/en?format=image");
+            
             // FDN
             put("FDN/Beast/1", "https://api.scryfall.com/cards/tfdn/32/en?format=image");
             put("FDN/Beast/2", "https://api.scryfall.com/cards/tfdn/33/en?format=image");

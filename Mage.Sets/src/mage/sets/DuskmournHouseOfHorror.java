@@ -131,6 +131,10 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Irreverent Gremlin", 142, Rarity.UNCOMMON, mage.cards.i.IrreverentGremlin.class));
         cards.add(new SetCardInfo("Island", 273, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Jump Scare", 17, Rarity.COMMON, mage.cards.j.JumpScare.class));
+        cards.add(new SetCardInfo("Kaito, Bane of Nightmares", 220, Rarity.MYTHIC, mage.cards.k.KaitoBaneOfNightmares.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kaito, Bane of Nightmares", 328, Rarity.MYTHIC, mage.cards.k.KaitoBaneOfNightmares.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kaito, Bane of Nightmares", 354, Rarity.MYTHIC, mage.cards.k.KaitoBaneOfNightmares.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kaito, Bane of Nightmares", 409, Rarity.MYTHIC, mage.cards.k.KaitoBaneOfNightmares.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Killer's Mask", 104, Rarity.UNCOMMON, mage.cards.k.KillersMask.class));
         cards.add(new SetCardInfo("Kona, Rescue Beastie", 187, Rarity.RARE, mage.cards.k.KonaRescueBeastie.class));
         cards.add(new SetCardInfo("Lakeside Shack", 262, Rarity.COMMON, mage.cards.l.LakesideShack.class));
