@@ -76,6 +76,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Caesar, Legion's Emperor", 529, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Caesar, Legion's Emperor", 867, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Caesar, Legion's Emperor", 1064, Rarity.MYTHIC, mage.cards.c.CaesarLegionsEmperor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cait, Cage Brawler", 96, Rarity.RARE, mage.cards.c.CaitCageBrawler.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cait, Cage Brawler", 409, Rarity.RARE, mage.cards.c.CaitCageBrawler.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cait, Cage Brawler", 624, Rarity.RARE, mage.cards.c.CaitCageBrawler.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cait, Cage Brawler", 937, Rarity.RARE, mage.cards.c.CaitCageBrawler.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Canopy Vista", 255, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Canyon Slough", 256, Rarity.RARE, mage.cards.c.CanyonSlough.class));
         cards.add(new SetCardInfo("Captain of the Watch", 157, Rarity.RARE, mage.cards.c.CaptainOfTheWatch.class));
@@ -103,7 +107,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Crucible of Worlds", 357, Rarity.MYTHIC, mage.cards.c.CrucibleOfWorlds.class));
         cards.add(new SetCardInfo("Crush Contraband", 158, Rarity.UNCOMMON, mage.cards.c.CrushContraband.class));
         cards.add(new SetCardInfo("Cultivate", 196, Rarity.UNCOMMON, mage.cards.c.Cultivate.class));
-        cards.add(new SetCardInfo("Curie, Emergent Intelligence", 30, Rarity.RARE, mage.cards.c.CurieEmergentIntelligence.class));
+        cards.add(new SetCardInfo("Curie, Emergent Intelligence", 30, Rarity.RARE, mage.cards.c.CurieEmergentIntelligence.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Curie, Emergent Intelligence", 374, Rarity.RARE, mage.cards.c.CurieEmergentIntelligence.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Curie, Emergent Intelligence", 558, Rarity.RARE, mage.cards.c.CurieEmergentIntelligence.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Curie, Emergent Intelligence", 902, Rarity.RARE, mage.cards.c.CurieEmergentIntelligence.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darkwater Catacombs", 260, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Deadly Dispute", 184, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
         cards.add(new SetCardInfo("Desdemona, Freedom's Edge", 101, Rarity.RARE, mage.cards.d.DesdemonaFreedomsEdge.class, NON_FULL_USE_VARIOUS));
@@ -431,7 +438,10 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Windbrisk Heights", 315, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
         cards.add(new SetCardInfo("Winding Constrictor", 223, Rarity.UNCOMMON, mage.cards.w.WindingConstrictor.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 316, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
-        cards.add(new SetCardInfo("Yes Man, Personal Securitron", 29, Rarity.RARE, mage.cards.y.YesManPersonalSecuritron.class));
+        cards.add(new SetCardInfo("Yes Man, Personal Securitron", 29, Rarity.RARE, mage.cards.y.YesManPersonalSecuritron.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yes Man, Personal Securitron", 373, Rarity.RARE, mage.cards.y.YesManPersonalSecuritron.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yes Man, Personal Securitron", 557, Rarity.RARE, mage.cards.y.YesManPersonalSecuritron.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Yes Man, Personal Securitron", 901, Rarity.RARE, mage.cards.y.YesManPersonalSecuritron.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Young Deathclaws", 125, Rarity.UNCOMMON, mage.cards.y.YoungDeathclaws.class));
 
         cards.removeIf(setCardInfo -> IkoriaLairOfBehemoths.mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
