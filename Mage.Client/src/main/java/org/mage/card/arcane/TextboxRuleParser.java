@@ -143,7 +143,7 @@ public final class TextboxRuleParser {
                         index += 5;
                         ++outputIndex;
                     } else {
-                        LOGGER.error("Bad &...; sequence `" + rule.substring(index + 1, index + 10) + "` in rule.");
+                        LOGGER.error("Bad &...; sequence `" + rule.substring(index, Math.max(rule.length(), index + 10)) + "` in rule.");
                         build.append('&');
                         ++index;
                         ++outputIndex;
