@@ -98,8 +98,8 @@ public class MageActionCallback implements ActionCallback {
     private MageCard prevCardPanel;
     private boolean startedDragging;
     private boolean isDragging; // TODO: remove drag hand code to the hand panels
-    private Point initialCardPos;
-    private Point initialMousePos;
+    private Point initialCardPos = null;
+    private Point initialMousePos = null;
     private final Set<MageCard> draggingCards = new HashSet<>();
 
     public MageActionCallback() {
@@ -348,6 +348,11 @@ public class MageActionCallback implements ActionCallback {
         }
         if (!SwingUtilities.isLeftMouseButton(e)) {
             // only allow draging with the left mouse button
+            return;
+        }
+
+        if (this.initialMousePos == null || this.initialCardPos == null) {
+            // only allow really mouse pressed, e.g. ignore draft/game update on active card draging/pressing
             return;
         }
 
