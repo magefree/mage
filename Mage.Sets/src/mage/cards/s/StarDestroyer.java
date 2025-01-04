@@ -1,7 +1,5 @@
-
 package mage.cards.s;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -14,7 +12,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -22,8 +19,9 @@ import mage.game.permanent.token.TIEFighterToken;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Styxo
  */
 public final class StarDestroyer extends CardImpl {
@@ -33,7 +31,7 @@ public final class StarDestroyer extends CardImpl {
 
     static {
         filter1.add(CardType.ARTIFACT.getPredicate());
-        filter3.getCreatureFilter().add(Predicates.not(SubType.STARSHIP.getPredicate()));
+        filter3.getPermanentFilter().add(Predicates.not(SubType.STARSHIP.getPredicate()));
     }
 
     public StarDestroyer(UUID ownerId, CardSetInfo setInfo) {
