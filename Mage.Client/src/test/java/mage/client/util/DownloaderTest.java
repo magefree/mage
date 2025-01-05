@@ -60,4 +60,21 @@ public class DownloaderTest {
         Assert.assertNotNull(stream);
         Assert.assertTrue("must have image data", image.getWidth() > 0);
     }
+
+    @Test
+    public void test_DownloadFromWindowsServers() throws IOException {
+        // symbols download from gatherer website
+        // error example: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+        InputStream stream = XmageURLConnection.downloadBinary("https://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=BIG&size=small&rarity=C");
+        Assert.assertNotNull(stream);
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(stream);
+        } catch (IOException e) {
+            Assert.fail("Can't download image file due error: " + e);
+        }
+        Assert.assertNotNull(stream);
+        Assert.assertNotNull(image);
+        Assert.assertTrue("must have image data", image.getWidth() > 0);
+    }
 }

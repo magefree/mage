@@ -898,7 +898,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 return;
             }
 
-            CombatUtil.sortByPower(attackers, false);
+            CombatUtil.sortByPower(attackers, false); // most powerfull go to first
 
             CombatInfo combatInfo = CombatUtil.blockWithGoodTrade2(game, attackers, possibleBlockers);
             Player player = game.getPlayer(playerId);
@@ -909,6 +909,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
                 List<Permanent> blockers = entry.getValue();
                 if (blockers != null) {
                     for (Permanent blocker : blockers) {
+                        // TODO: buggy or miss on multi blocker requirements?!
                         player.declareBlocker(player.getId(), blocker.getId(), attackerId, game);
                         blocked = true;
                     }
