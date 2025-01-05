@@ -711,7 +711,7 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
     private static final RarityConfiguration foilRuns() {
         // foil wildcard separate, received numbers from lethe for 540 packs
         // using 115 common, 49 uncommon, 15 rare, 1 rareland
-        wildNum = RandomUtil.nextInt(180);
+        int wildNum = RandomUtil.nextInt(180);
         if (wildNum < 115) {
             return foilCommonRuns;
         } else if (wildNum < 164) {
