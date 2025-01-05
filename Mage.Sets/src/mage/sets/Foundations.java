@@ -578,11 +578,11 @@ public final class Foundations extends ExpansionSet {
         super.generateBoosterMap();
         
         CardInfo cardInfo;
-        for( int cn = 74 ; cn < 84 ; cn++ ){
+        for( int cn = 74 ; cn < 84 ; cn++ ) {
             cardInfo = CardRepository.instance.findCard("SPG", "" + cn);
-            if( cardInfo != null ){
+            if( cardInfo != null ) {
                 inBoosterMap.put("SPG_" + cn, cardInfo);
-            }else{
+            } else {
                 throw new IllegalArgumentException("Card not found: " + "SPG_" + cn);
             }
         }
@@ -702,9 +702,18 @@ class FoundationsCollator implements BoosterCollator {
     // If commonRuns8 were combined would need 17057x ABBBBCCC, 17057x ABBBCCCC, 36806x BBBBCCCC
     private final RarityConfiguration commonRuns8A = new RarityConfiguration(ABBBBCCC, ABBBCCCC);
     private final RarityConfiguration commonRuns8BC = new RarityConfiguration(BBBBCCCC);
-    private static final RarityConfiguration commonRuns(int runLength){
-        return ( 6< runLength ? 7< runLength ? RandomUtil.nextInt(35460) <17057 ?
-            commonRuns8A : commonRuns8BC : commonRuns7 : commonRuns6 );
+    private static final RarityConfiguration commonRuns(int runLength) {
+        // return ( runLength > 6 ? runLength > 7 ? RandomUtil.nextInt(35460) <17057 ?
+            // commonRuns8A : commonRuns8BC : commonRuns7 : commonRuns6 );
+        if (runLength < 7) {
+          return commonRuns6;
+        } else if (runLength < 8) {
+          return commonRuns7;
+        } else if (RandomUtil.nextInt(35460) < 17057) {
+          return commonRuns8A;
+        } else {
+          return commonRunsBC;
+        }
     }
 
     // 7/12 packs contain an extra uncommon
@@ -716,16 +725,23 @@ class FoundationsCollator implements BoosterCollator {
     private final RarityConfiguration uncommonRuns3A = new RarityConfiguration(ABC);
     private final RarityConfiguration uncommonRuns3BC = new RarityConfiguration(BBC, BCC);
     private final RarityConfiguration uncommonRuns4 = new RarityConfiguration(ABBC, ABCC);
-    private static final RarityConfiguration uncommonRuns(int runLength){
-        return ( 4> runLength ? RandomUtil.nextInt(505) <454 ?
-            uncommonRuns3A : commonRuns3BC : uncommonRuns4 );
+    private static final RarityConfiguration uncommonRuns(int runLength) {
+        // return ( runLength < 4 ? RandomUtil.nextInt(505) < 454 ?
+            // uncommonRuns3A : uncommonRuns3BC : uncommonRuns4 );
+        if (runLength > 3) {
+          return uncommonRuns4;
+        } else if (RandomUtil.nextInt(505) < 454) {
+          return uncommonRuns3A;
+        } else {
+          return uncommonRuns3BC;
+        }
     }
 
     // 5/24 packs contain a second rare, 1/24 packs contain a borderless common/uncommon
     private final RarityConfiguration rareRuns1 = new RarityConfiguration(R1);
     private final RarityConfiguration rareRuns2 = new RarityConfiguration(R2, R2, R2, R2, R2, Rb);
-    private static final RarityConfiguration rareRuns(int runLength){
-        return ( 1< runLength ? rareRuns2 : rareRuns1 );
+    private static final RarityConfiguration rareRuns(int runLength) {
+        return ( runLength > 1 ? rareRuns2 : rareRuns1 );
     }
 
     // 50% of packs contain a common dual land
@@ -764,10 +780,19 @@ class FoundationsCollator implements BoosterCollator {
     private final RarityConfiguration foilBorderlessRuns = new RarityConfiguration(fb);
         // foil wildcard rarity distribution not specified, so derived from observed pack openings
         // 229 packs, 127 common, 78 uncommon, 19 rare/mythic, 5 borderless common/uncommon
-    private static final RarityConfiguration foilRuns(){
+    private static final RarityConfiguration foilRuns() {
         int wildNum = RandomUtil.nextInt(229);
-        return ( wildNum < 224 ? wildNum < 205 ? wildNum < 127 ?
-            foilCommonRuns : foilUncommonRuns : foilRareRuns : foilBorderlessRuns );
+        // return ( wildNum < 224 ? wildNum < 205 ? wildNum < 127 ?
+            // foilCommonRuns : foilUncommonRuns : foilRareRuns : foilBorderlessRuns );
+        if (wildnum < 127) {
+            return foilCommonRuns;
+        } else if (wildNum < 205) {
+            return foilUncommonRuns;
+        } else if (wildNum < 224) {
+            return foilRareRuns;
+        } else {
+            return foilBorderlessRuns;
+        }
     }
 
 
@@ -781,11 +806,11 @@ class FoundationsCollator implements BoosterCollator {
         int numCommon = 7;
         boolean wildRare = false;
         boolean wildUncommon = false;
-        if( wildNum < 2 ){
+        if( wildNum < 2 ) {
             numCommon++;
-        }else if( wildNum < 9 ){
+        } else if( wildNum < 9 ) {
             wildUncommon = true;
-        }else{
+        } else {
             wildRare = true;
         };
 
@@ -794,7 +819,7 @@ class FoundationsCollator implements BoosterCollator {
         booster.addAll(rareRuns( wildRare ? 2 : 1 ).getNext().makeRun());
 
         // 1.5% of  Play Boosters features a Special Guests card displacing a common card.
-        if (RandomUtil.nextInt(200) <3) {
+        if (RandomUtil.nextInt(200) < 3) {
             booster.addAll(listRuns.getNext().makeRun());
             --numCommon;
         }
