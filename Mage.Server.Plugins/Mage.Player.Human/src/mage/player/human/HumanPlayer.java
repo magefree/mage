@@ -2928,7 +2928,7 @@ public class HumanPlayer extends PlayerImpl {
 
     protected boolean passWithManaPoolCheck(Game game) {
         if (userData.confirmEmptyManaPool()
-                && game.getStack().isEmpty() && getManaPool().count() > 0) {
+                && game.getStack().isEmpty() && getManaPool().count() > 0 && getManaPool().canLostManaOnEmpty()) {
             String activePlayerText;
             if (game.isActivePlayer(playerId)) {
                 activePlayerText = "Your turn";
@@ -2940,7 +2940,7 @@ public class HumanPlayer extends PlayerImpl {
                 priorityPlayerText = " / priority " + game.getPlayer(game.getPriorityPlayerId()).getName();
             }
             // TODO: chooseUse and other dialogs must be under controlling player
-            if (!chooseUse(Outcome.Detriment, GameLog.getPlayerConfirmColoredText("You still have mana in your mana pool. Pass regardless?")
+            if (!chooseUse(Outcome.Detriment, GameLog.getPlayerConfirmColoredText("You still have mana in your mana pool and it will be lose. Pass anyway?")
                     + GameLog.getSmallSecondLineText(activePlayerText + " / " + game.getTurnStepType().toString() + priorityPlayerText), null, game)) {
                 sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, game, null);
                 return false;
