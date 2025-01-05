@@ -489,21 +489,21 @@ public final class MurdersAtKarlovManor extends ExpansionSet {
         super.generateBoosterMap();
         
         CardInfo cardInfo;
-        for( int cn = 19 ; cn < 29 ; cn++ ){
+        for( int cn = 19 ; cn < 29 ; cn++ ) {
             cardInfo = CardRepository.instance.findCard("SPG", "" + cn);
-            if( cardInfo != null ){
+            if( cardInfo != null ) {
                 inBoosterMap.put("SPG_" + cn, cardInfo);
-            }else{
+            } else {
                 throw new IllegalArgumentException("Card not found: " + "SPG_" + cn);
             }
         }
         String[] lstCards = {"XLN_91", "DKA_4", "MH2_191", "HOU_149", "RAV_277", "ARB_68", "DIS_173", "ISD_183", "DOM_130", "MH2_46", "RNA_182", "ONS_272", "SOM_96", "VOW_207", "MBS_10", "UMA_138", "DDU_50", "2X2_17", "KLD_221", "M14_213", "UMA_247", "CLB_85", "JOU_153", "APC_117", "STX_220", "SOI_262", "DIS_33", "DKA_143", "ELD_107", "C16_47", "STX_64", "M20_167", "DST_40", "ONS_89", "WAR_54", "MRD_99", "SOM_98", "C21_19", "MH1_21", "RTR_140"};
-        for( String itm : lstCards ){
+        for( String itm : lstCards ) {
             int i = itm.indexOf("_");
             cardInfo = CardRepository.instance.findCard(itm.substring(0,i), itm.substring(i+1));
-            if( cardInfo != null ){
+            if( cardInfo != null ) {
                 inBoosterMap.put(itm, cardInfo);
-            }else{
+            } else {
                 throw new IllegalArgumentException("Card not found: " + itm);
 
             }
@@ -624,9 +624,18 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
         ABBBBCCC, ABBBBCCC, ABBBBCCC, ABBBBCCC,
         BBBBCCCC
     );
-    private static final RarityConfiguration commonRuns(int runLength){
-        return ( 6< runLength ? 8> runLength ? RandomUtil.nextInt(297) <115 ?
-            commonRuns7BC : commonRuns7A : commonRuns8 : commonRuns6 );
+    private static final RarityConfiguration commonRuns(int runLength) {
+        // return ( 6< runLength ? 8> runLength ? RandomUtil.nextInt(297) <115 ?
+            // commonRuns7BC : commonRuns7A : commonRuns8 : commonRuns6 );
+        if (runLength < 7) {
+          return commonRuns6;
+        } else if (runLength > 7) {
+          return commonRuns8;
+        } else if (RandomUtil.nextInt(297) < 115) {
+          return commonRuns7BC;
+        } else {
+          return commonRuns7A;
+        }
     }
 
     // In order for equal numbers of each uncommon to exist, the average booster must contain:
@@ -650,16 +659,16 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
         BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC, BBCC,
         ABBC, ABBC, ABBC, ABBC, ABBC, ABBC, ABBC
     );
-    private static final RarityConfiguration uncommonRuns(int runLength){
-        return ( 3< runLength ? uncommonRuns4 : uncommonRuns3 );
+    private static final RarityConfiguration uncommonRuns(int runLength) {
+        return ( runLength > 3 ? uncommonRuns4 : uncommonRuns3 );
     }
 
 
     // 1/6 packs have rare land as second rare, estimate 1/4 packs have two rares
     private final RarityConfiguration rareRuns1 = new RarityConfiguration(R1);
     private final RarityConfiguration rareRuns2 = new RarityConfiguration(R2,Rd,Rd);
-    private static final RarityConfiguration rareRuns(int runLength){
-        return ( 1< runLength ? rareRuns2 : rareRuns1 );
+    private static final RarityConfiguration rareRuns(int runLength) {
+        return ( runLength > 1 ? rareRuns2 : rareRuns1 );
     }
 
     private final RarityConfiguration landRuns = new RarityConfiguration(L1);
@@ -699,6 +708,20 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
     );
     private final RarityConfiguration foilRareRuns = new RarityConfiguration(frR);
     private final RarityConfiguration foilRareLandRuns = new RarityConfiguration(frL);
+    private static final RarityConfiguration foilRuns() {
+        // foil wildcard separate, received numbers from lethe for 540 packs
+        // using 115 common, 49 uncommon, 15 rare, 1 rareland
+        wildNum = RandomUtil.nextInt(180);
+        if (wildNum < 115) {
+            return foilCommonRuns;
+        } else if (wildNum < 164) {
+            return foilUncommonRuns;
+        } else if (wildNum < 179) {
+            return foilRareRuns;
+        } else {
+            return foilRareLandRuns;
+        }
+    }
 
     @Override
     public List<String> makeBooster() {
@@ -711,9 +734,9 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
         // observed the rate [of uncommon wildcard] at about 52% over 7 boxes
         // that is close to 50% - using 50% uncommon, 25% common, 25% rare
         int wildNum = RandomUtil.nextInt(4);
-        if (wildNum <2) {
+        if (wildNum < 2) {
             wildUncommon = true;
-        } else if (wildNum <3) {
+        } else if (wildNum < 3) {
             ++numCommon;
         } else {
             wildRare = true;
@@ -722,24 +745,12 @@ class MurdersAtKarlovManorCollator implements BoosterCollator {
         booster.addAll(landRuns.getNext().makeRun());
 
         // 1 in 8 Play Boosters (12.5%) features a card from Special Guests or The List instead of the seventh common card.
-        if (RandomUtil.nextInt(8) ==1) {
+        if (RandomUtil.nextInt(8) == 1) {
             booster.addAll(listRuns.getNext().makeRun());
             --numCommon;
         }
 
-        // foil wildcard separate, watched 327 pack openings and using the observed rates.
-        // 245 common, 99 uncommon, 30 rare, 3 rareland
-        wildNum = RandomUtil.nextInt(377);
-        if (wildNum < 245) {
-            booster.addAll(foilCommonRuns.getNext().makeRun());
-        } else if (wildNum < 344) {
-            booster.addAll(foilUncommonRuns.getNext().makeRun());
-        } else if (wildNum < 374) {
-            booster.addAll(foilRareRuns.getNext().makeRun());
-        } else {
-            booster.addAll(foilRareLandRuns.getNext().makeRun());
-        }
-
+        booster.addAll(foilRuns().getNext().makeRun());
         booster.addAll(rareRuns(wildRare ? 2 : 1).getNext().makeRun());
         booster.addAll(uncommonRuns(wildUncommon ? 4 : 3).getNext().makeRun());
         booster.addAll(commonRuns(numCommon).getNext().makeRun());
