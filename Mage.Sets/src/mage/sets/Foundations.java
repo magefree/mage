@@ -712,7 +712,7 @@ class FoundationsCollator implements BoosterCollator {
         } else if (RandomUtil.nextInt(35460) < 17057) {
           return commonRuns8A;
         } else {
-          return commonRunsBC;
+          return commonRuns8BC;
         }
     }
 
