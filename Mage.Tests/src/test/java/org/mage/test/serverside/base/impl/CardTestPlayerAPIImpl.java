@@ -87,6 +87,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public static final String CHECK_COMMAND_LIFE = "LIFE";
     public static final String CHECK_COMMAND_ABILITY = "ABILITY";
     public static final String CHECK_COMMAND_PLAYABLE_ABILITY = "PLAYABLE_ABILITY";
+    public static final String CHECK_COMMAND_ATTACKERS = "ATTACKERS";
+    public static final String CHECK_COMMAND_BLOCKERS = "BLOCKERS";
     public static final String CHECK_COMMAND_MAY_ATTACK_DEFENDER = "MAY_ATTACK_DEFENDER";
     public static final String CHECK_COMMAND_PERMANENT_COUNT = "PERMANENT_COUNT";
     public static final String CHECK_COMMAND_PERMANENT_TAPPED = "PERMANENT_TAPPED";
@@ -428,7 +430,33 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     }
 
     /**
-     * Checks whether or not a creature can attack on a given turn a defender (player only for now, could be extended to permanents)
+     * Make sure in last declared attackers
+     *
+     * @param attackers in any order, use empty string or params for no attackers check
+     */
+    public void checkAttackers(String checkName, int turnNum, TestPlayer player, String... attackers) {
+        String list = String.join("^", attackers);
+        if (list.isEmpty()) {
+            list = TestPlayer.ATTACK_SKIP;
+        }
+        check(checkName, turnNum, PhaseStep.DECLARE_ATTACKERS, player, CHECK_COMMAND_ATTACKERS, list);
+    }
+
+    /**
+     * Make sure in last declared blockers
+     *
+     * @param blockers in any order, use empty string or params for no blockers check
+     */
+    public void checkBlockers(String checkName, int turnNum, TestPlayer player, String... blockers) {
+        String list = String.join("^", blockers);
+        if (list.isEmpty()) {
+            list = TestPlayer.BLOCK_SKIP;
+        }
+        check(checkName, turnNum, PhaseStep.DECLARE_BLOCKERS, player, CHECK_COMMAND_BLOCKERS, list);
+    }
+
+    /**
+     * Checks whether a creature can attack on a given turn a defender (player only for now, could be extended to permanents)
      *
      * @param checkName       String to show up if the check fails, for display purposes only.
      * @param turnNum         The turn number to check on.

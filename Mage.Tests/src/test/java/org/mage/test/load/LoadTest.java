@@ -27,6 +27,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 /**
  * Intended to test Mage server under different load patterns.
@@ -214,7 +215,7 @@ public class LoadTest {
         }
     }
 
-    public void playTwoAIGame(String gameName, long randomSeed, String deckColors, String deckAllowedSets, LoadTestGameResult gameResult) {
+    public void playTwoAIGame(String gameName, Integer taskNumber, TasksProgress tasksProgress, long randomSeed, String deckColors, String deckAllowedSets, LoadTestGameResult gameResult) {
         Assert.assertFalse("need deck colors", deckColors.isEmpty());
         Assert.assertFalse("need allowed sets", deckAllowedSets.isEmpty());
 
@@ -249,9 +250,13 @@ public class LoadTest {
             TableView checkGame = monitor.getTable(tableId).orElse(null);
             TableState state = (checkGame == null ? null : checkGame.getTableState());
 
+            tasksProgress.update(taskNumber, state == TableState.FINISHED, gameView == null ? 0 : gameView.getTurn());
+            String globalProgress = tasksProgress.getInfo();
+
             if (gameView != null && checkGame != null) {
-                logger.info(checkGame.getTableName() + ": ---");
-                logger.info(String.format("%s: turn %d, step %s, state %s",
+                logger.info(globalProgress + ", " + checkGame.getTableName() + ": ---");
+                logger.info(String.format("%s, %s: turn %d, step %s, state %s",
+                        globalProgress,
                         checkGame.getTableName(),
                         gameView.getTurn(),
                         gameView.getStep().toString(),
@@ -278,7 +283,8 @@ public class LoadTest {
                             if (Objects.equals(gameView.getActivePlayerId(), p.getPlayerId())) {
                                 activeInfo = " (active)";
                             }
-                            logger.info(String.format("%s, status: %s - Life=%d; Lib=%d;%s",
+                            logger.info(String.format("%s, %s, status: %s - Life=%d; Lib=%d;%s",
+                                    globalProgress,
                                     checkGame.getTableName(),
                                     p.getName(),
                                     p.getLife(),
@@ -286,7 +292,7 @@ public class LoadTest {
                                     activeInfo
                             ));
                         });
-                logger.info(checkGame.getTableName() + ": ---");
+                logger.info(globalProgress + ", " + checkGame.getTableName() + ": ---");
             }
 
             // ping to keep active session
@@ -312,7 +318,9 @@ public class LoadTest {
         LoadTestGameResultsList gameResults = new LoadTestGameResultsList();
         long randomSeed = RandomUtil.nextInt();
         LoadTestGameResult gameResult = gameResults.createGame(0, "test game", randomSeed);
-        playTwoAIGame("Single AI game", randomSeed, "WGUBR", TEST_AI_RANDOM_DECK_SETS, gameResult);
+        TasksProgress tasksProgress = new TasksProgress();
+        tasksProgress.update(1, true, 0);
+        playTwoAIGame("Single AI game", 1, tasksProgress, randomSeed, "WGUBR", TEST_AI_RANDOM_DECK_SETS, gameResult);
 
         printGameResults(gameResults);
     }
@@ -347,15 +355,16 @@ public class LoadTest {
 
         LoadTestGameResultsList gameResults = new LoadTestGameResultsList();
         try {
+            TasksProgress tasksProgress = new TasksProgress();
             for (int i = 0; i < seedsList.size(); i++) {
                 int gameIndex = i;
+                tasksProgress.update(gameIndex + 1, true, 0);
                 long randomSeed = seedsList.get(i);
                 logger.info("Game " + (i + 1) + " of " + seedsList.size() + ", RANDOM seed: " + randomSeed);
-
                 Future gameTask = executerService.submit(() -> {
                     String gameName = "AI game #" + (gameIndex + 1);
                     LoadTestGameResult gameResult = gameResults.createGame(gameIndex + 1, gameName, randomSeed);
-                    playTwoAIGame(gameName, randomSeed, TEST_AI_RANDOM_DECK_COLORS_FOR_AI_GAME, TEST_AI_RANDOM_DECK_SETS, gameResult);
+                    playTwoAIGame(gameName, gameIndex + 1, tasksProgress, randomSeed, TEST_AI_RANDOM_DECK_COLORS_FOR_AI_GAME, TEST_AI_RANDOM_DECK_SETS, gameResult);
                 });
 
                 if (!isRunParallel) {
@@ -569,6 +578,40 @@ public class LoadTest {
 
     private MatchOptions createSimpleGameOptionsForAI(GameTypeView gameTypeView, Session session, String gameName) {
         return createSimpleGameOptions(gameName, gameTypeView, session, PlayerType.COMPUTER_MAD);
+    }
+
+    private static class TasksProgress {
+
+        private String info;
+        private final Map<Integer, Boolean> finishes = new LinkedHashMap<>();
+        private final Map<Integer, Integer> turns = new LinkedHashMap<>();
+
+        synchronized public void update(Integer taskNumber, boolean newFinish, Integer newTurn) {
+            Boolean oldFinish = this.finishes.getOrDefault(taskNumber, false);
+            Integer oldTurn = this.turns.getOrDefault(taskNumber, 0);
+            if (!this.finishes.containsKey(taskNumber)
+                    || !Objects.equals(oldFinish, newFinish)
+                    || !Objects.equals(oldTurn, newTurn)) {
+                this.finishes.put(taskNumber, newFinish);
+                this.turns.put(taskNumber, newTurn);
+                updateInfo();
+            }
+        }
+
+        private void updateInfo() {
+            // example: progress [=00, +01, +01, =12, =15, =01, +61]
+            String res = this.finishes.keySet().stream()
+                    .map(taskNumber -> String.format("%s%02d",
+                            this.finishes.getOrDefault(taskNumber, false) ? "=" : "+",
+                            this.turns.getOrDefault(taskNumber, 0)
+                    ))
+                    .collect(Collectors.joining(", "));
+            this.info = String.format("progress [%s]", res);
+        }
+
+        public String getInfo() {
+            return this.info;
+        }
     }
 
     private class LoadPlayer {
@@ -798,23 +841,23 @@ public class LoadTest {
         }
 
         public int getLife1() {
-            return this.finalGameView.getPlayers().get(0).getLife();
+            return finalGameView == null ? 0 : this.finalGameView.getPlayers().get(0).getLife();
         }
 
         public int getLife2() {
-            return this.finalGameView.getPlayers().get(1).getLife();
+            return finalGameView == null ? 0 : this.finalGameView.getPlayers().get(1).getLife();
         }
 
         public int getTurn() {
-            return this.finalGameView.getTurn();
+            return finalGameView == null ? 0 : this.finalGameView.getTurn();
         }
 
         public int getDurationMs() {
-            return (int) ((this.timeEnded.getTime() - this.timeStarted.getTime()));
+            return finalGameView == null ? 0 : ((int) ((this.timeEnded.getTime() - this.timeStarted.getTime())));
         }
 
         public int getTotalErrorsCount() {
-            return this.finalGameView.getTotalErrorsCount();
+            return finalGameView == null ? 0 : this.finalGameView.getTotalErrorsCount();
         }
     }
 
@@ -886,15 +929,15 @@ public class LoadTest {
         }
 
         private int getAvgTurn() {
-            return this.values().stream().mapToInt(LoadTestGameResult::getTurn).sum() / this.size();
+            return this.size() == 0 ? 0 : this.values().stream().mapToInt(LoadTestGameResult::getTurn).sum() / this.size();
         }
 
         private int getAvgLife1() {
-            return this.values().stream().mapToInt(LoadTestGameResult::getLife1).sum() / this.size();
+            return this.size() == 0 ? 0 : this.values().stream().mapToInt(LoadTestGameResult::getLife1).sum() / this.size();
         }
 
         private int getAvgLife2() {
-            return this.values().stream().mapToInt(LoadTestGameResult::getLife2).sum() / this.size();
+            return this.size() == 0 ? 0 : this.values().stream().mapToInt(LoadTestGameResult::getLife2).sum() / this.size();
         }
 
         private int getTotalDurationMs() {
@@ -902,11 +945,12 @@ public class LoadTest {
         }
 
         private int getAvgDurationMs() {
-            return this.values().stream().mapToInt(LoadTestGameResult::getDurationMs).sum() / this.size();
+            return this.size() == 0 ? 0 : this.values().stream().mapToInt(LoadTestGameResult::getDurationMs).sum() / this.size();
         }
 
         private int getAvgDurationPerTurnMs() {
-            return getAvgDurationMs() / getAvgTurn();
+            int turns = getAvgTurn();
+            return turns == 0 ? 0 : getAvgDurationMs() / getAvgTurn();
         }
     }
 
@@ -952,5 +996,9 @@ public class LoadTest {
         gameResults.printResultHeader();
         gameResults.printResultData();
         gameResults.printResultTotal();
+
+        if (gameResults.getAvgTurn() == 0) {
+            Assert.fail("Games can't start, make sure you are run a localhost server before running current load test");
+        }
     }
 }
