@@ -48,6 +48,12 @@ public class XmageURLConnection {
     private static final AtomicLong debugLastRequestTimeMs = new AtomicLong(0);
     private static final ReentrantLock debugLogsWriterlock = new ReentrantLock();
 
+    static {
+        // add Authority Information Access (AIA) Extension support for certificates from Windows servers like gatherer website
+        // fix download errors like sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+        System.setProperty("com.sun.security.enableAIAcaIssuers", "true");
+    }
+
     final String url;
     Proxy proxy = null;
     HttpURLConnection connection = null;

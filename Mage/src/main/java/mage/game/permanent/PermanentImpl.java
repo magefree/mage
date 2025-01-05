@@ -21,7 +21,7 @@ import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
-import mage.filter.*;
+import mage.filter.FilterOpponent;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.ZoneChangeInfo;
@@ -210,8 +210,11 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
                 + ", " + getBasicMageObject().getClass().getSimpleName()
                 + ", " + imageInfo
                 + ", " + this.getPower() + "/" + this.getToughness()
+                + (this.getDamage() > 0 ? ", damage " + this.getDamage() : "")
                 + (this.isCopy() ? ", copy" : "")
-                + (this.isTapped() ? ", tapped" : "");
+                + (this.isTapped() ? ", tapped" : "")
+                + (this.isAttacking() ? ", attacking" : "")
+                + (this.getBlocking() > 0 ? ", blocking" : "");
     }
 
     @Override

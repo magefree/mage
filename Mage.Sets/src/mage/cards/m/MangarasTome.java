@@ -16,7 +16,6 @@ import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
@@ -112,6 +111,7 @@ class MangarasTomeReplacementEffect extends ReplacementEffectImpl {
                 controller.moveCards(card, Zone.HAND, source, game);
             }
         }
+        used = true; // one time use
         return true;
     }
 
@@ -122,6 +122,6 @@ class MangarasTomeReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return source.isControlledBy(event.getPlayerId());
+        return !used && source.isControlledBy(event.getPlayerId());
     }
 }

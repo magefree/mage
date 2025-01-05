@@ -40,7 +40,7 @@ public final class CombatUtil {
             }
         }
 
-        sortByPower(blockableAttackers, true);
+        sortByPower(blockableAttackers, false); // most powerfull go to first
 
         // imagine that most powerful will be blocked as 1-vs-1
         List<Permanent> attackersThatWontBeBlocked = new ArrayList<>(blockableAttackers);
@@ -83,28 +83,17 @@ public final class CombatUtil {
     }
 
     public static void sortByPower(List<Permanent> permanents, final boolean ascending) {
-        Collections.sort(permanents, new Comparator<Permanent>() {
-            @Override
-            public int compare(Permanent o1, Permanent o2) {
-                if (ascending) {
-                    return o2.getPower().getValue() - o1.getPower().getValue();
-                } else {
-                    return o1.getPower().getValue() - o2.getPower().getValue();
-                }
-            }
-        });
+        permanents.sort(Comparator.comparingInt(p -> p.getPower().getValue()));
+        if (!ascending) {
+            Collections.reverse(permanents);
+        }
     }
 
     public static Permanent getWorstCreature(List<Permanent> creatures) {
         if (creatures.isEmpty()) {
             return null;
         }
-        Collections.sort(creatures, new Comparator<Permanent>() {
-            @Override
-            public int compare(Permanent o1, Permanent o2) {
-                return o2.getPower().getValue() - o1.getPower().getValue();
-            }
-        });
+        creatures.sort(Comparator.comparingInt(p -> p.getPower().getValue()));
         return creatures.get(0);
     }
 

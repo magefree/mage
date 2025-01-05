@@ -1423,6 +1423,7 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new CreaturesDiedWatcher());
         newWatchers.add(new TemptedByTheRingWatcher());
         newWatchers.add(new SpellsCastWatcher());
+        newWatchers.add(new AttackedOrBlockedThisCombatWatcher()); // required for tests
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {
@@ -3635,7 +3636,7 @@ public abstract class GameImpl implements Game {
 
     /**
      * Reset objects stored for Last Known Information. (Happens if all effects
-     * are applied und stack is empty)
+     * are applied and stack is empty)
      */
     @Override
     public void resetLKI() {

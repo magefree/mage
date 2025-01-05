@@ -39,6 +39,7 @@ import org.apache.log4j.Logger;
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -59,6 +60,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     private final List<FilterCreaturePermanent> useToughnessForDamageFilters = new ArrayList<>();
 
     protected List<CombatGroup> groups = new ArrayList<>();
+    protected List<CombatGroup> formerGroups = new ArrayList<>();
     protected Map<UUID, CombatGroup> blockingGroups = new HashMap<>();
     // all possible defenders (players, planeswalkers or battle)
     protected Set<UUID> defenders = new HashSet<>();
@@ -82,6 +84,9 @@ public class Combat implements Serializable, Copyable<Combat> {
         this.attackingPlayerId = combat.attackingPlayerId;
         for (CombatGroup group : combat.groups) {
             groups.add(group.copy());
+        }
+        for (CombatGroup group : combat.formerGroups) {
+            formerGroups.add(group.copy());
         }
         defenders.addAll(combat.defenders);
         for (Map.Entry<UUID, CombatGroup> group : combat.blockingGroups.entrySet()) {
@@ -181,6 +186,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public void clear() {
         groups.clear();
+        formerGroups.clear();
         blockingGroups.clear();
         defenders.clear();
         attackingPlayerId = null;
@@ -657,26 +663,47 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (defender == null) {
                 continue;
             }
-            boolean choose = true;
             if (blockController == null) {
                 controller = defender;
             } else {
                 controller = blockController;
             }
-            while (choose) {
+
+            // choosing until good block configuration
+            while (true) {
+                // declare normal blockers
+                // TODO: need reseach - is it possible to concede on bad blocker configuration (e.g. user can't continue)
                 controller.selectBlockers(source, game, defenderId);
                 if (game.isPaused() || game.checkIfGameIsOver() || game.executingRollback()) {
                     return;
                 }
-                if (!game.getCombat().checkBlockRestrictions(defender, game)) {
-                    if (controller.isHuman()) { // only human player can decide to do the block in another way
-                        continue;
-                    }
+
+                // check multiple restrictions by permanents and effects, reset on invalid blocking configuration, try to auto-fix
+                // TODO: wtf, some checks contains AI related code inside -- it must be reworked and moved to computer classes?!
+
+                // check 1 of 3
+                boolean isValidBlock = game.getCombat().checkBlockRestrictions(defender, game);
+                if (!isValidBlock) {
+                    makeSureItsNotComputer(controller);
+                    continue;
                 }
-                choose = !game.getCombat().checkBlockRequirementsAfter(defender, controller, game);
-                if (!choose) {
-                    choose = !game.getCombat().checkBlockRestrictionsAfter(defender, controller, game);
+
+                // check 2 of 3
+                isValidBlock = game.getCombat().checkBlockRequirementsAfter(defender, controller, game);
+                if (!isValidBlock) {
+                    makeSureItsNotComputer(controller);
+                    continue;
                 }
+
+                // check 3 of 3
+                isValidBlock = game.getCombat().checkBlockRestrictionsAfter(defender, controller, game);
+                if (!isValidBlock) {
+                    makeSureItsNotComputer(controller);
+                    continue;
+                }
+
+                // all valid, can finish now
+                break;
             }
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
 
@@ -687,6 +714,15 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
         // tool to catch the bug about flyers blocked by non flyers or intimidate blocked by creatures with other colors
         TraceUtil.traceCombatIfNeeded(game, game.getCombat());
+    }
+
+    private void makeSureItsNotComputer(Player controller) {
+        if (controller.isComputer() || !controller.isHuman()) {
+            // TODO: wtf, AI will freeze forever here in games with attacker/blocker restrictions,
+            //   but it pass in some use cases due random choices. AI must deside blocker configuration
+            //   in one attempt
+            //throw new IllegalStateException("AI can't find good blocker configuration, report it to github");
+        }
     }
 
     /**
@@ -846,10 +882,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * attacking creature fulfills both the restriction and the requirement, so
      * that's the only option.
      *
-     * @param player
-     * @param controller
-     * @param game
-     * @return
+     * @return false on invalid block configuration e.g. player must choose new blockers
      */
     public boolean checkBlockRequirementsAfter(Player player, Player controller, Game game) {
         // Get once a list of all opponents in range
@@ -858,8 +891,9 @@ public class Combat implements Serializable, Copyable<Combat> {
         // map with attackers (UUID) that must be blocked by at least one blocker and a set of all creatures that can block it and don't block yet
         Map<UUID, Set<UUID>> mustBeBlockedByAtLeastX = new HashMap<>();
         Map<UUID, Integer> minNumberOfBlockersMap = new HashMap<>();
+        Map<UUID, Integer> minPossibleBlockersMap = new HashMap<>();
 
-        // check mustBlock requirements of creatures from opponents of attacking player
+        // FIND attackers and potential blockers for "must be blocked" effects
         for (Permanent creature : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED, player.getId(), game)) {
             // creature is controlled by an opponent of the attacker
             if (opponents.contains(creature.getControllerId())) {
@@ -876,6 +910,12 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 CombatGroup toBeBlockedGroup = findGroup(toBeBlockedCreature);
                                 if (toBeBlockedGroup != null && toBeBlockedGroup.getDefendingPlayerId().equals(creature.getControllerId())) {
                                     minNumberOfBlockersMap.put(toBeBlockedCreature, effect.getMinNumberOfBlockers());
+                                    Permanent toBeBlockedCreaturePermanent = game.getPermanent(toBeBlockedCreature);
+                                    if (toBeBlockedCreaturePermanent != null) {
+                                        minPossibleBlockersMap.put(toBeBlockedCreature, toBeBlockedCreaturePermanent.getMinBlockedBy());
+                                    } else {
+                                        minPossibleBlockersMap.put(toBeBlockedCreature, 1);
+                                    }
                                     Set<UUID> potentialBlockers;
                                     if (mustBeBlockedByAtLeastX.containsKey(toBeBlockedCreature)) {
                                         potentialBlockers = mustBeBlockedByAtLeastX.get(toBeBlockedCreature);
@@ -972,7 +1012,13 @@ public class Combat implements Serializable, Copyable<Combat> {
                             if (toBeBlockedCreature != null) {
                                 CombatGroup toBeBlockedGroup = findGroup(toBeBlockedCreature);
                                 if (toBeBlockedGroup != null && toBeBlockedGroup.getDefendingPlayerId().equals(creature.getControllerId())) {
-                                    minNumberOfBlockersMap.put(toBeBlockedCreature, effect.getMinNumberOfBlockers());
+                                    minNumberOfBlockersMap.put(toBeBlockedCreature, effect.getMinNumberOfBlockers()); // TODO: fail on multiple effects 1 + 2 min blockers?
+                                    Permanent toBeBlockedCreaturePermanent = game.getPermanent(toBeBlockedCreature);
+                                    if (toBeBlockedCreaturePermanent != null) {
+                                        minPossibleBlockersMap.put(toBeBlockedCreature, toBeBlockedCreaturePermanent.getMinBlockedBy());
+                                    } else {
+                                        minPossibleBlockersMap.put(toBeBlockedCreature, 1);
+                                    }
                                     Set<UUID> potentialBlockers;
                                     if (mustBeBlockedByAtLeastX.containsKey(toBeBlockedCreature)) {
                                         potentialBlockers = mustBeBlockedByAtLeastX.get(toBeBlockedCreature);
@@ -1050,15 +1096,20 @@ public class Combat implements Serializable, Copyable<Combat> {
 
                     }
                 }
-
             }
-
         }
 
-        // check if for attacking creatures with mustBeBlockedByAtLeastX requirements are fulfilled
+        // APPLY potential blockers to attackers with "must be blocked" effects
         for (UUID toBeBlockedCreatureId : mustBeBlockedByAtLeastX.keySet()) {
             for (CombatGroup combatGroup : game.getCombat().getGroups()) {
                 if (combatGroup.getAttackers().contains(toBeBlockedCreatureId)) {
+                    // Neyith of the Dire Hunt: If the target creature has menace, two creatures must block it if able.
+                    // (2020-06-23)
+                    // This is a basic check to avoid deadlocking on one blocker plus 'must be blocked if able' with menace;
+                    // a full solution is more complicated but this prevents the most common case.
+                    if (mustBeBlockedByAtLeastX.get(toBeBlockedCreatureId).size() < minPossibleBlockersMap.get(toBeBlockedCreatureId)) {
+                        continue;
+                    }
                     boolean requirementFulfilled = false;
                     // Check whether an applicable creature is blocking.
                     for (UUID blockerId : combatGroup.getBlockers()) {
@@ -1071,6 +1122,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                     if (!requirementFulfilled) {
                         // creature is not blocked but has possible blockers
                         if (controller.isHuman()) {
+                            // HUMAN logic - send warning about wrong blocker config and repeat declare
+                            // TODO: replace isHuman by !isComputer for working unit tests
                             Permanent toBeBlockedCreature = game.getPermanent(toBeBlockedCreatureId);
                             if (toBeBlockedCreature != null) {
                                 // check if all possible blocker block other creatures they are forced to block
@@ -1089,9 +1142,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                                     }
                                 }
                             }
-
                         } else {
-                            // take the first potential blocker from the set to block for the AI
+                            // AI logic - auto-fix wrong blocker config (take the first potential blocker)
                             for (UUID possibleBlockerId : mustBeBlockedByAtLeastX.get(toBeBlockedCreatureId)) {
                                 String blockRequiredMessage = isCreatureDoingARequiredBlock(
                                         possibleBlockerId, toBeBlockedCreatureId, mustBeBlockedByAtLeastX, game);
@@ -1114,8 +1166,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                 }
             }
-
         }
+
         // check if creatures are forced to block but do not block at all or block creatures they are not forced to block
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<UUID, Set<UUID>> entry : creatureMustBlockAttackers.entrySet()) {
@@ -1248,10 +1300,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * Checks the canBeBlockedCheckAfter RestrictionEffect Is the block still
      * valid after all block decisions are done
      *
-     * @param player
-     * @param controller
-     * @param game
-     * @return
+     * @return false on invalid block configuration e.g. player must choose new blockers
      */
     public boolean checkBlockRestrictionsAfter(Player player, Player controller, Game game) {
         // Restrictions applied to blocking creatures
@@ -1659,6 +1708,36 @@ public class Combat implements Serializable, Copyable<Combat> {
      * @return
      */
     public UUID getDefendingPlayerId(UUID attackingCreatureId, Game game) {
+        return getDefendingPlayerId(attackingCreatureId, game, true);
+    }
+
+    /**
+     * Returns the playerId of the player that is attacked by given attacking
+     * creature or formerly-attacking creature.
+     *
+     * @param attackingCreatureId
+     * @param game
+     * @return
+     */
+    public UUID getDefendingPlayerId(UUID attackingCreatureId, Game game, boolean allowFormer) {
+        if (allowFormer) {
+            /*
+             * 802.2a. Any rule, object, or effect that refers to a "defending player" refers to one specific defending
+             * player, not to all of the defending players. If an ability of an attacking creature refers to a
+             * defending player, or a spell or ability refers to both an attacking creature and a defending player,
+             * then unless otherwise specified, the defending player it's referring to is the player that creature is
+             * attacking, the controller of the planeswalker that creature is attacking, or the protector of the battle
+             * that player is attacking. If that creature is no longer attacking, the defending player it's referring
+             * to is the player that creature was attacking before it was removed from combat, the controller of the
+             * planeswalker that creature was attacking before it was removed from combat, or the protector of the
+             * battle that player was attacking before it was removed from combat.
+             */
+            return Stream.concat(groups.stream(), formerGroups.stream())
+                    .filter(group -> (group.getAttackers().contains(attackingCreatureId) || group.getFormerAttackers().contains(attackingCreatureId)))
+                    .map(CombatGroup::getDefendingPlayerId)
+                    .findFirst()
+                    .orElse(null);
+        }
         return groups
                 .stream()
                 .filter(group -> group.getAttackers().contains(attackingCreatureId))
@@ -1723,6 +1802,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                 }
                 if (group.attackers.isEmpty()) {
+                    formerGroups.add(group);
                     groups.remove(group);
                 }
                 return;
@@ -1849,4 +1929,18 @@ public class Combat implements Serializable, Copyable<Combat> {
         return new Combat(this);
     }
 
+    @Override
+    public String toString() {
+        List<String> res = new ArrayList<>();
+        for (int i = 0; i < this.groups.size(); i++) {
+            res.add(String.format("group %d with %s",
+                    i + 1,
+                    this.groups.get(i)
+            ));
+        }
+        return String.format("%d groups%s",
+                this.groups.size(),
+                this.groups.size() > 0 ? ": " + String.join("; ", res) : ""
+        );
+    }
 }

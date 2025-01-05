@@ -106,4 +106,30 @@ public class RemoveFromCombatTest extends CardTestPlayerBase {
         assertLife(playerB, 20 - 2);
         assertGraveyardCount(playerB, "Jace, Memory Adept", 1);
     }
+
+    /**
+     * Validate rule 806.2a: Abilities which refer to Defending Player still mean that defending player, even if the
+     * attacking creature is removed from combat.
+     */
+    @Test
+    public void test_RemoveAttackerWithDefendingPlayerTriggeredAbilityOnStack() {
+
+        addCard(Zone.HAND, playerA, "Swords to Plowshares", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Agate-Blade Assassin", 1); // 2/2
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
+
+        // attack player
+        attack(1, playerA, "Agate-Blade Assassin", playerB);
+        // remove Agate-Blade Assassin from combat
+        castSpell(1, PhaseStep.DECLARE_ATTACKERS, playerA, "Swords to Plowshares");
+        addTarget(playerA, "Agate-Blade Assassin");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 1);
+        assertLife(playerA, 20 + 1 /* StP */ + 1 /* Agate-Blade Assassin trigger */);
+    }
+
 }

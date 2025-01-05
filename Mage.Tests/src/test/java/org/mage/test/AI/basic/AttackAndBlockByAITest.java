@@ -6,6 +6,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseAI;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 /**
  * @author JayDi85
  */
@@ -21,6 +24,8 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         // 2 x 2/2 vs 0 - can't lose any attackers
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 2); // 2/2
 
+        checkAttackers("x2 attack", 1, playerA, "Balduvian Bears", "Balduvian Bears");
+
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
@@ -34,6 +39,8 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         // 2 x 2/2 vs 1 x 1/1 - can't lose any attackers
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 2); // 2/2
         addCard(Zone.BATTLEFIELD, playerB, "Arbor Elf", 1); // 1/1
+
+        checkAttackers("x2 attack", 1, playerA, "Balduvian Bears", "Balduvian Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -49,6 +56,8 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1); // 2/2
         addCard(Zone.BATTLEFIELD, playerB, "Arbor Elf", 2); // 1/1
 
+        checkAttackers("x1 attack", 1, playerA, "Balduvian Bears");
+
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
@@ -63,6 +72,8 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 2); // 2/2
         addCard(Zone.BATTLEFIELD, playerB, "Arbor Elf", 2); // 1/1
 
+        checkAttackers("x2 attack", 1, playerA, "Balduvian Bears", "Balduvian Bears");
+
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
@@ -74,6 +85,8 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
     @Test
     public void test_Attack_1_small_vs_0() {
         addCard(Zone.BATTLEFIELD, playerA, "Arbor Elf", 1); // 1/1
+
+        checkAttackers("x1 attack", 1, playerA, "Arbor Elf");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -88,6 +101,8 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         addCard(Zone.BATTLEFIELD, playerA, "Arbor Elf", 1); // 1/1
         addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1); // 2/2
 
+        checkAttackers("no attack", 1, playerA, "");
+
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
@@ -101,6 +116,8 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         addCard(Zone.BATTLEFIELD, playerA, "Arbor Elf", 2); // 1/1
         addCard(Zone.BATTLEFIELD, playerB, "Balduvian Bears", 1); // 2/2
 
+        checkAttackers("no attack", 1, playerA, "");
+
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();
@@ -113,6 +130,11 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
     public void test_Attack_15_small_vs_1_big_kill_stike() {
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 15); // 2/2
         addCard(Zone.BATTLEFIELD, playerB, "Ancient Brontodon", 1); // 9/9
+
+        String needAttackers = IntStream.rangeClosed(1, 15)
+                .mapToObj(x -> "Balduvian Bears")
+                .collect(Collectors.joining("^"));
+        checkAttackers("x15 attack", 1, playerA, needAttackers);
 
         block(1, playerB, "Ancient Brontodon", "Balduvian Bears");
 
@@ -131,6 +153,10 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         addCard(Zone.BATTLEFIELD, playerB, "Ancient Brontodon", 1); // 9/9
 
         block(1, playerB, "Ancient Brontodon", "Balduvian Bears");
+        String needAttackers = IntStream.rangeClosed(1, 10)
+                .mapToObj(x -> "Balduvian Bears")
+                .collect(Collectors.joining("^"));
+        checkAttackers("x10 attack", 1, playerA, needAttackers);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -146,6 +172,7 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         addCard(Zone.BATTLEFIELD, playerB, "Ancient Brontodon", 1); // 9/9
 
         block(1, playerB, "Ancient Brontodon", "Goblin Brigand");
+        checkAttackers("forced x1 attack", 1, playerA, "Goblin Brigand");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -163,6 +190,7 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
 
         block(1, playerB, "Ancient Brontodon:0", "Goblin Brigand:0");
         block(1, playerB, "Ancient Brontodon:1", "Goblin Brigand:1");
+        checkAttackers("forced x2 attack", 1, playerA, "Goblin Brigand", "Goblin Brigand");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -183,6 +211,7 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         addCard(Zone.BATTLEFIELD, playerB, "Trove of Temptation", 1); // 9/9
 
         block(1, playerB, "Ancient Brontodon", "Arbor Elf");
+        checkAttackers("forced x1 attack", 1, playerA, "Arbor Elf");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -201,6 +230,7 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         addCard(Zone.BATTLEFIELD, playerB, "Seeker of Slaanesh", 1); // 3/3
 
         block(1, playerB, "Seeker of Slaanesh", "Arbor Elf");
+        checkAttackers("forced x1 attack", 1, playerA, "Arbor Elf");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -216,6 +246,8 @@ public class AttackAndBlockByAITest extends CardTestPlayerBaseAI {
         // chainbreaker real stats is 1/1, it's can be saftly attacked
         addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1); // 2/2
         addCard(Zone.BATTLEFIELD, playerB, "Chainbreaker", 1); // 3/3, but with 2x -1/-1 counters
+
+        checkAttackers("x1 attack", 1, playerA, "Balduvian Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);

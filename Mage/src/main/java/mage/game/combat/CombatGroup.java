@@ -27,6 +27,7 @@ import java.util.stream.Stream;
 public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     protected List<UUID> attackers = new ArrayList<>();
+    protected List<UUID> formerAttackers = new ArrayList<>();
     protected List<UUID> blockers = new ArrayList<>();
     protected List<UUID> blockerOrder = new ArrayList<>();
     protected List<UUID> attackerOrder = new ArrayList<>();
@@ -49,6 +50,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     protected CombatGroup(final CombatGroup group) {
         this.attackers.addAll(group.attackers);
+        this.formerAttackers.addAll(group.formerAttackers);
         this.blockers.addAll(group.blockers);
         this.blockerOrder.addAll(group.blockerOrder);
         this.attackerOrder.addAll(group.attackerOrder);
@@ -79,6 +81,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     public List<UUID> getAttackers() {
         return attackers;
+    }
+
+    public List<UUID> getFormerAttackers() {
+        return formerAttackers;
     }
 
     public List<UUID> getBlockers() {
@@ -737,6 +743,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     public boolean remove(UUID creatureId) {
         boolean result = false;
         if (attackers.contains(creatureId)) {
+            formerAttackers.add(creatureId);
             attackers.remove(creatureId);
             result = true;
             attackerOrder.remove(creatureId);
@@ -968,5 +975,13 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     private static int getLethalDamage(Permanent blocker, Permanent attacker, Game game) {
         return blocker.getLethalDamage(attacker.getId(), game);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d attackers, %d blockers",
+                this.getAttackers().size(),
+                this.getBlockers().size()
+        );
     }
 }
