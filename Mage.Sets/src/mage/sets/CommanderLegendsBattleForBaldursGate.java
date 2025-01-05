@@ -41,6 +41,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Agent of the Iron Throne", 107, Rarity.UNCOMMON, mage.cards.a.AgentOfTheIronThrone.class));
         cards.add(new SetCardInfo("Agent of the Shadow Thieves", 108, Rarity.UNCOMMON, mage.cards.a.AgentOfTheShadowThieves.class));
         cards.add(new SetCardInfo("Agitator Ant", 776, Rarity.RARE, mage.cards.a.AgitatorAnt.class));
+        // cards.add(new SetCardInfo("Alaundo the Seer", 264, Rarity.UNCOMMON, mage.cards.a.AlaundoTheSeer.class));
+        // when implementing, uncomment full CardRun legendR and delete the adjusted one, so that this card may be included in boosters
         cards.add(new SetCardInfo("Alora, Merry Thief", 55, Rarity.UNCOMMON, mage.cards.a.AloraMerryThief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Alora, Merry Thief", 381, Rarity.UNCOMMON, mage.cards.a.AloraMerryThief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Altar of Bhaal", 109, Rarity.RARE, mage.cards.a.AltarOfBhaal.class));
@@ -161,6 +163,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Cloudkill", 121, Rarity.UNCOMMON, mage.cards.c.Cloudkill.class));
         cards.add(new SetCardInfo("Colossal Badger", 223, Rarity.COMMON, mage.cards.c.ColossalBadger.class));
         cards.add(new SetCardInfo("Command Tower", 351, Rarity.COMMON, mage.cards.c.CommandTower.class));
+        // cards.add(new SetCardInfo("Commander Liara Portyr", 270, Rarity.UNCOMMON, mage.cards.c.CommanderLiaraPortyr.class));
+        // when implementing, uncomment full CardRun legendU and CardRun foilLegendU and delete the adjusted ones, so that this card may be included in boosters
         cards.add(new SetCardInfo("Compulsive Research", 715, Rarity.COMMON, mage.cards.c.CompulsiveResearch.class));
         cards.add(new SetCardInfo("Cone of Cold", 61, Rarity.UNCOMMON, mage.cards.c.ConeOfCold.class));
         cards.add(new SetCardInfo("Consuming Aberration", 840, Rarity.RARE, mage.cards.c.ConsumingAberration.class));
@@ -708,6 +712,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Wilson, Refined Grizzly", 261, Rarity.UNCOMMON, mage.cards.w.WilsonRefinedGrizzly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wilson, Refined Grizzly", 411, Rarity.UNCOMMON, mage.cards.w.WilsonRefinedGrizzly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Windbrisk Heights", 930, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
+        // cards.add(new SetCardInfo("Windshaper Planetar", 50, Rarity.RARE, mage.cards.w.WindshaperPlanetar.class));
+        // when implementing, uncomment full CardRun rare and delete the adjusted one, so that this card may be included in boosters
         cards.add(new SetCardInfo("Winter Eladrin", 104, Rarity.COMMON, mage.cards.w.WinterEladrin.class));
         cards.add(new SetCardInfo("Wizards of Thay", 105, Rarity.RARE, mage.cards.w.WizardsOfThay.class));
         cards.add(new SetCardInfo("Woe Strider", 774, Rarity.RARE, mage.cards.w.WoeStrider.class));
@@ -768,6 +774,7 @@ class CommanderLegendsBattleForBaldursGateCollator implements BoosterCollator {
     private final CardRun foilCommonB = new CardRun(false, "335", "320", "321", "307", "313", "384", "309", "327", "307", "349", "359", "320", "356", "337", "309", "445", "335", "359", "349", "337", "401", "335", "313", "74", "447", "327", "350", "335", "359", "305", "349", "449", "309", "187", "327", "321", "359", "446", "307", "350", "356", "337", "359", "443", "305", "321", "337", "187", "350", "384", "349", "305", "356", "335", "313", "187", "305", "321", "444", "187", "327", "350", "349", "320", "335", "442", "307", "350", "337", "74", "359", "445", "307", "305", "349", "356", "307", "401", "313", "349", "350", "320", "321", "448", "335", "309", "356", "320", "447", "74", "313", "350", "305", "309", "356", "443", "327", "309", "74", "449", "359", "320", "74", "187", "444", "337", "349", "359", "327", "74", "446", "356", "335", "448", "350", "321", "442", "187", "313", "356");
     private final CardRun foilCommonC = new CardRun(false, "259", "88", "131", "310", "211", "58", "329", "223", "51", "308", "248", "97", "151", "333", "347", "227", "95", "140", "36", "184", "249", "346", "133", "23", "202", "330", "92", "154", "310", "205", "351", "65", "130", "53", "342", "249", "97", "133", "185", "318", "302", "352", "151", "44", "344", "354", "243", "318", "137", "182", "340", "225", "92", "334", "322", "190", "239", "342", "306", "38", "330", "177", "87", "152", "52", "185", "259", "82", "150", "23", "211", "15", "65", "340", "225", "205", "58", "351", "137", "52", "329", "243", "95", "131", "53", "177", "263", "346", "150", "33", "227", "352", "51", "182", "308", "223", "154", "334", "322", "38", "190", "263", "82", "152", "248", "333", "302", "88", "306", "44", "202", "347", "140", "344", "33", "15", "239", "87", "184", "36", "130");
     private final CardRun foilUncommonA = new CardRun(false, "79", "201", "315", "78", "257", "206", "316", "14", "332", "247", "311", "251", "147", "312", "224", "319", "141", "164", "317", "178", "336", "323", "183", "119", "59", "121", "203", "325", "12", "245", "256", "299", "160", "57", "10", "232", "85", "110", "229", "20", "297", "298", "198", "304", "341", "8", "69", "45", "94", "331", "83", "303", "153", "39", "128", "43", "353", "84", "339", "315", "316", "257", "201", "157", "206", "147", "14", "332", "311", "141", "79", "251", "78", "323", "319", "59", "312", "336", "247", "325", "224", "164", "119", "317", "121", "245", "203", "256", "178", "299", "183", "12", "160", "10", "57", "232", "110", "298", "20", "85", "229", "198", "69", "297", "341", "94", "304", "43", "84", "303", "45", "128", "8", "83", "331", "157", "39", "339", "153", "353");
+    // private final CardRun foilLegendU = new CardRun(false, "16", "282", "234", "32", "270", "395", "180", "293", "290", "410", "156", "295", "269", "387", "281", "280", "77", "426", "143", "188", "176", "391", "90", "37", "55", "16", "407", "2", "261", "180", "393", "286", "439", "295", "32", "159", "429", "290", "156", "102",        "281", "380", "269", "261", "188", "144", "398", "234", "280", "230", "90", "399", "255", "279", "385", "16", "293", "159", "394", "286", "2", "55", "428", "148", "379", "295", "188", "144", "290", "143", "408", "282", "280",        "255", "90", "269", "279", "381", "176", "102", "2", "230", "148", "377", "159", "432", "37", "156", "261", "77", "281", "390", "282",        "180", "402", "255", "234", "32", "427", "144", "279", "436", "77", "55", "417", "143", "386", "293", "176", "440", "102", "37", "230", "375", "148", "286", "411");
     private final CardRun foilLegendU = new CardRun(false, "16", "282", "234", "32",        "395", "180", "293", "290", "410", "156", "295", "269", "387", "281", "280", "77", "426", "143", "188", "176", "391", "90", "37", "55", "16", "407", "2", "261", "180", "393", "286", "439", "295", "32", "159", "429", "290", "156", "102",        "281", "380", "269", "261", "188", "144", "398", "234", "280", "230", "90", "399", "255", "279", "385", "16", "293", "159", "394", "286", "2", "55", "428", "148", "379", "295", "188", "144", "290", "143", "408", "282", "280",        "255", "90", "269", "279", "381", "176", "102", "2", "230", "148", "377", "159", "432", "37", "156", "261", "77", "281", "390", "282",        "180", "402", "255", "234", "32", "427", "144", "279", "436", "77", "55", "417", "143", "386", "293", "176", "440", "102", "37", "230", "375", "148", "286", "411");
 
     private final BoosterStructure AAAAABCCCCCCD = new BoosterStructure(
@@ -856,9 +863,16 @@ class CommanderLegendsBattleForBaldursGateCollator implements BoosterCollator {
     private final RarityConfiguration commonRunsD = new RarityConfiguration(AAAAABCCCCCCD, AAAAAABCCCCCD);
     private final RarityConfiguration commonRunsB = new RarityConfiguration(AAAAAABCCCCCC);
     private final RarityConfiguration commonRunsBB = new RarityConfiguration(AAAAAABBCCCCC, AAAAABBCCCCCC);
-    private static final RarityConfiguration commonRuns(){
+    private static final RarityConfiguration commonRuns() {
         int runRoll = RandomUtil.nextInt(816);
-        return ( 475> runRoll ? 136> runRoll ? commonRunsD : commonRunsBB : commonRunsB );
+        // return ( runRoll < 475 ? runRoll < 136 ? commonRunsD : commonRunsBB : commonRunsB );
+        if (runRoll < 136) {
+            return commonRunsD;
+        } else if (runRoll < 475) {
+            return commonRunsBB;
+        } else {
+            return commonRunsB;
+        }
     }
 
     // Using legend - 2/71 M , 20/71 R , 49/71 U - which matches 31% rare/mythic stated
@@ -874,10 +888,21 @@ class CommanderLegendsBattleForBaldursGateCollator implements BoosterCollator {
     private final RarityConfiguration uncommonRunsB = new RarityConfiguration(AABU, AABU, AABU, AABU, AABR);
     private final RarityConfiguration uncommonRunsUU = new RarityConfiguration(AAUU);
     private final RarityConfiguration uncommonRunsUR = new RarityConfiguration(AAUR);
-    private static final RarityConfiguration uncommonRuns(){
+    private static final RarityConfiguration uncommonRuns() {
         int runRoll = RandomUtil.nextInt(204480);
-        return ( 168377> runRoll ? 113245> runRoll ? 14564> runRoll ? 8804> runRoll ?
-            uncommonRunsA : uncommonRunsM : uncommonRunsB : uncommonRunsUU : uncommonRunsUR );
+        // return ( 168377> runRoll ? 113245> runRoll ? 14564> runRoll ? 8804> runRoll ?
+            // uncommonRunsA : uncommonRunsM : uncommonRunsB : uncommonRunsUU : uncommonRunsUR );
+        if (runRoll < 8804) {
+            return uncommonRunsA;
+        } else if (runRoll < 14564) {
+            return uncommonRunsM;
+        } else if (runRoll < 113245) {
+            return uncommonRunsB;
+        } else if (runRoll < 168377) {
+            return uncommonRunsUU;
+        } else {
+            return uncommonRunsUR;
+        }
     }
 
     private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
@@ -935,10 +960,21 @@ class CommanderLegendsBattleForBaldursGateCollator implements BoosterCollator {
         fuM
     );
     // using /2066 - 1360 C , 300 U , 94 R , 17 M , 120 background , (legend: 120 U, 50 R, 5 M)
-    private static final RarityConfiguration foilRuns(){
+    private static final RarityConfiguration foilRuns() {
         int runRoll = RandomUtil.nextInt(2066);
-        return ( 1891> runRoll ? 1771> runRoll ? 1660> runRoll ? 1360> runRoll ?
-            foilRunsC : foilRunsU : foilRunsRM : foilRunsBk : foilRunsLeg );
+        // return ( 1891> runRoll ? 1771> runRoll ? 1660> runRoll ? 1360> runRoll ?
+            // foilRunsC : foilRunsU : foilRunsRM : foilRunsBk : foilRunsLeg );
+        if (runRoll < 1360) {
+            return foilRunsC;
+        } else if (runRoll < 1660) {
+            return foilRunsU;
+        } else if (runRoll < 1771) {
+            return foilRunsRM;
+        } else if (runRoll < 1891) {
+            return foilRunsBk;
+        } else {
+            return foilRunsLeg;
+        }
     }
 
     @Override
