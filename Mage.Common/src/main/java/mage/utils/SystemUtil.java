@@ -24,6 +24,8 @@ import mage.game.command.Plane;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
+import mage.target.Target;
+import mage.target.TargetPlayer;
 import mage.util.CardUtil;
 import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
@@ -66,6 +68,8 @@ public final class SystemUtil {
     // [@mana add] -> MANA ADD
     private static final String COMMAND_CARDS_ADD_TO_HAND = "@card add to hand";
     private static final String COMMAND_LANDS_ADD_TO_BATTLEFIELD = "@lands add";
+    private static final String COMMAND_OPPONENT_UNDER_CONTROL_START = "@opponent under control start";
+    private static final String COMMAND_OPPONENT_UNDER_CONTROL_END = "@opponent under control end";
     private static final String COMMAND_MANA_ADD = "@mana add"; // TODO: not implemented
     private static final String COMMAND_RUN_CUSTOM_CODE = "@run custom code"; // TODO: not implemented
     private static final String COMMAND_SHOW_OPPONENT_HAND = "@show opponent hand";
@@ -80,6 +84,8 @@ public final class SystemUtil {
         supportedCommands.put(COMMAND_CARDS_ADD_TO_HAND, "CARDS: ADD TO HAND");
         supportedCommands.put(COMMAND_MANA_ADD, "MANA ADD");
         supportedCommands.put(COMMAND_LANDS_ADD_TO_BATTLEFIELD, "LANDS: ADD TO BATTLEFIELD");
+        supportedCommands.put(COMMAND_OPPONENT_UNDER_CONTROL_START, "OPPONENT CONTROL: ENABLE");
+        supportedCommands.put(COMMAND_OPPONENT_UNDER_CONTROL_END, "OPPONENT CONTROL: DISABLE");
         supportedCommands.put(COMMAND_RUN_CUSTOM_CODE, "RUN CUSTOM CODE");
         supportedCommands.put(COMMAND_SHOW_OPPONENT_HAND, "SHOW OPPONENT HAND");
         supportedCommands.put(COMMAND_SHOW_OPPONENT_LIBRARY, "SHOW OPPONENT LIBRARY");
@@ -255,7 +261,7 @@ public final class SystemUtil {
      *
      * @param game
      * @param commandsFilePath file path with commands in init.txt format
-     * @param feedbackPlayer player to execute that cheats (will see choose dialogs)
+     * @param feedbackPlayer   player to execute that cheats (will see choose dialogs)
      */
     public static void executeCheatCommands(Game game, String commandsFilePath, Player feedbackPlayer) {
 
@@ -301,6 +307,8 @@ public final class SystemUtil {
             // add default commands
             initLines.add(0, String.format("[%s]", COMMAND_LANDS_ADD_TO_BATTLEFIELD));
             initLines.add(1, String.format("[%s]", COMMAND_CARDS_ADD_TO_HAND));
+            initLines.add(2, String.format("[%s]", COMMAND_OPPONENT_UNDER_CONTROL_START));
+            initLines.add(3, String.format("[%s]", COMMAND_OPPONENT_UNDER_CONTROL_END));
 
             // collect all commands
             CommandGroup currentGroup = null;
@@ -544,6 +552,34 @@ public final class SystemUtil {
                         break;
                     }
 
+                    case COMMAND_OPPONENT_UNDER_CONTROL_START: {
+                        Target target = new TargetPlayer().withNotTarget(true).withChooseHint("to take under your control");
+                        if (feedbackPlayer.chooseTarget(Outcome.GainControl, target, fakeSourceAbilityTemplate, game)) {
+                            Player targetPlayer = game.getPlayer(target.getFirstTarget());
+                            if (targetPlayer != null && targetPlayer != feedbackPlayer) {
+                                CardUtil.takeControlUnderPlayerStart(game, fakeSourceAbilityTemplate, feedbackPlayer, targetPlayer, false);
+                                // allow priority play again in same step (for better cheat UX)
+                                targetPlayer.resetPassed();
+                            }
+                            // workaround for refresh priority dialog like avatar click (cheats called from priority in 99%)
+                            game.firePriorityEvent(feedbackPlayer.getId());
+                        }
+                        break;
+                    }
+
+                    case COMMAND_OPPONENT_UNDER_CONTROL_END: {
+                        Target target = new TargetPlayer().withNotTarget(true).withChooseHint("to free from your control");
+                        if (feedbackPlayer.chooseTarget(Outcome.GainControl, target, fakeSourceAbilityTemplate, game)) {
+                            Player targetPlayer = game.getPlayer(target.getFirstTarget());
+                            if (targetPlayer != null && targetPlayer != feedbackPlayer && !targetPlayer.isGameUnderControl()) {
+                                CardUtil.takeControlUnderPlayerEnd(game, fakeSourceAbilityTemplate, feedbackPlayer, targetPlayer);
+                            }
+                            // workaround for refresh priority dialog like avatar click (cheats called from priority in 99%)
+                            game.firePriorityEvent(feedbackPlayer.getId());
+                        }
+                        break;
+                    }
+
                     default: {
                         String mes = String.format("Unknown system command: %s", runGroup.name);
                         errorsList.add(mes);
@@ -551,7 +587,6 @@ public final class SystemUtil {
                         break;
                     }
                 }
-                sendCheatCommandsFeedback(game, feedbackPlayer, errorsList);
                 return;
             }
 

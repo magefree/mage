@@ -248,7 +248,6 @@ public class Turn implements Serializable {
         // add new under control
         TurnMod newControllerMod = game.getState().getTurnMods().useNextNewController(activePlayerId);
         if (newControllerMod != null && !newControllerMod.getNewControllerId().equals(activePlayerId)) {
-            // set player under new control
             // game logs added in child's call (controlPlayersTurn)
             game.getPlayer(newControllerMod.getNewControllerId()).controlPlayersTurn(game, activePlayerId, newControllerMod.getInfo());
         }
