@@ -554,10 +554,11 @@ public final class SystemUtil {
 
                     case COMMAND_OPPONENT_UNDER_CONTROL_START: {
                         Target target = new TargetPlayer().withNotTarget(true).withChooseHint("to take under your control");
-                        if (feedbackPlayer.chooseTarget(Outcome.GainControl, target, fakeSourceAbilityTemplate, game)) {
+                        Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
+                        if (feedbackPlayer.chooseTarget(Outcome.GainControl, target, fakeSourceAbility, game)) {
                             Player targetPlayer = game.getPlayer(target.getFirstTarget());
                             if (targetPlayer != null && targetPlayer != feedbackPlayer) {
-                                CardUtil.takeControlUnderPlayerStart(game, fakeSourceAbilityTemplate, feedbackPlayer, targetPlayer, false);
+                                CardUtil.takeControlUnderPlayerStart(game, fakeSourceAbility, feedbackPlayer, targetPlayer, false);
                                 // allow priority play again in same step (for better cheat UX)
                                 targetPlayer.resetPassed();
                             }
@@ -569,10 +570,11 @@ public final class SystemUtil {
 
                     case COMMAND_OPPONENT_UNDER_CONTROL_END: {
                         Target target = new TargetPlayer().withNotTarget(true).withChooseHint("to free from your control");
-                        if (feedbackPlayer.chooseTarget(Outcome.GainControl, target, fakeSourceAbilityTemplate, game)) {
+                        Ability fakeSourceAbility = fakeSourceAbilityTemplate.copy();
+                        if (feedbackPlayer.chooseTarget(Outcome.GainControl, target, fakeSourceAbility, game)) {
                             Player targetPlayer = game.getPlayer(target.getFirstTarget());
                             if (targetPlayer != null && targetPlayer != feedbackPlayer && !targetPlayer.isGameUnderControl()) {
-                                CardUtil.takeControlUnderPlayerEnd(game, fakeSourceAbilityTemplate, feedbackPlayer, targetPlayer);
+                                CardUtil.takeControlUnderPlayerEnd(game, fakeSourceAbility, feedbackPlayer, targetPlayer);
                             }
                             // workaround for refresh priority dialog like avatar click (cheats called from priority in 99%)
                             game.firePriorityEvent(feedbackPlayer.getId());
