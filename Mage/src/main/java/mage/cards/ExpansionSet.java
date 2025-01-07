@@ -226,10 +226,22 @@ public abstract class ExpansionSet implements Serializable {
         if (theBooster.size() > 15 && theBooster.get(0).getRarity() == Rarity.LAND) {
             theBooster.remove(0);
         }
+        int keepCards = 4;
+        ArrayList<rarity> dontRemove = new ArrayList<>(Arrays.asList(Rarity.UNCOMMON, Rarity.RARE, Rarity.MYTHIC));
+        int toRemove;
         while (theBooster.size() > 15) {
-            theBooster.remove(RandomUtil.nextInt(theBooster.size() - 4));
+          if (theBooster.size() > keepCards) {
+            toRemove = RandomUtil.nextInt(theBooster.size() - keepCards);
+            if( dontRemove.contains( theBooster.get(toRemove).getRarity() )) {
+                keepCards = theBooster.size() - toRemove ;
+            } else {
+                theBooster.remove(toRemove);
+            }
+          } else {
+              theBooster.remove(0);
+          }
         }
-
+    
         return theBooster;
     }
 
