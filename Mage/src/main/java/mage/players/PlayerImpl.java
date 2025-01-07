@@ -7,7 +7,6 @@ import mage.abilities.ActivatedAbility.ActivationStatus;
 import mage.abilities.common.PassAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.common.WhileSearchingPlayFromLibraryAbility;
-import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
 import mage.abilities.costs.*;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
@@ -15,7 +14,6 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
-import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
@@ -609,11 +607,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!playerUnderControl.hasLeft() && !playerUnderControl.hasLost()) {
                 playerUnderControl.setGameUnderYourControl(false);
             }
-            DelayedTriggeredAbility ability = new AtTheEndOfTurnStepPostDelayedTriggeredAbility(
-                    new LoseControlOnOtherPlayersControllerEffect(this.getLogName(), playerUnderControl.getLogName()));
-            ability.setSourceId(getId());
-            ability.setControllerId(getId());
-            game.addDelayedTriggeredAbility(ability, null);
+            // control will reset on start of the turn
         }
     }
 

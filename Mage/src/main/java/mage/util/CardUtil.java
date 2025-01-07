@@ -2127,9 +2127,10 @@ public final class CardUtil {
             return null;
         }
 
-        // not started game
+        // T0 - for not started game
+        // T2 - for starting of the turn
         if (gameState.getTurn().getStep() == null) {
-            return "T0";
+            return "T" + gameState.getTurnNum();
         }
 
         // normal game

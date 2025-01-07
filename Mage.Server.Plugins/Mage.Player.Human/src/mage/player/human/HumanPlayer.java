@@ -37,6 +37,7 @@ import mage.game.tournament.Tournament;
 import mage.players.Player;
 import mage.players.PlayerImpl;
 import mage.players.PlayerList;
+import mage.players.net.UserData;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
@@ -93,7 +94,7 @@ public class HumanPlayer extends PlayerImpl {
     // * - GAME thread: open response for income command and wait (go to sleep by response.wait)
     // * - CALL thread: on closed response - waiting open status of player's response object (if it's too long then cancel the answer)
     // * - CALL thread: on opened response - save answer to player's response object and notify GAME thread about it by response.notifyAll
-    // * - GAME thread: on nofify from response - check new answer value and process it (if it bad then repeat and wait the next one);
+    // * - GAME thread: on notify from response - check new answer value and process it (if it bad then repeat and wait the next one);
     private transient Boolean responseOpenedForAnswer = false; // GAME thread waiting new answer
     private transient long responseLastWaitingThreadId = 0;
     private final transient PlayerResponse response = new PlayerResponse();
@@ -1159,25 +1160,27 @@ public class HumanPlayer extends PlayerImpl {
         // TODO: change pass and other states like passedUntilStackResolved for controlling player, not for "this"
         // TODO: check and change all "this" to controling player calls, many bugs with hand, mana, skips - https://github.com/magefree/mage/issues/2088
         // TODO: use controlling player in all choose dialogs (and canRespond too, what's with take control of player AI?!)
+        UserData controllingUserData = this.userData;
         if (canRespond()) {
-            HumanPlayer controllingPlayer = this;
-            if (isGameUnderControl()) { // TODO: must be ! to get real controlling player
+            if (!isGameUnderControl()) {
                 Player player = game.getPlayer(getTurnControlledBy());
                 if (player instanceof HumanPlayer) {
-                    controllingPlayer = (HumanPlayer) player;
+                    controllingUserData = player.getUserData();
+                } else {
+                    // TODO: add computer opponent here?!
                 }
             }
 
             // TODO: check that all skips and stops used from real controlling player
             //  like holdingPriority (is it a bug here?)
             if (getJustActivatedType() != null && !holdingPriority) {
-                if (controllingPlayer.getUserData().isPassPriorityCast()
+                if (controllingUserData.isPassPriorityCast()
                         && getJustActivatedType() == AbilityType.SPELL) {
                     setJustActivatedType(null);
                     pass(game);
                     return false;
                 }
-                if (controllingPlayer.getUserData().isPassPriorityActivation()
+                if (controllingUserData.isPassPriorityActivation()
                         && getJustActivatedType().isNonManaActivatedAbility()) {
                     setJustActivatedType(null);
                     pass(game);
@@ -1252,7 +1255,7 @@ public class HumanPlayer extends PlayerImpl {
                             // it's main step
                             if (!skippedAtLeastOnce
                                     || (!playerId.equals(game.getActivePlayerId())
-                                    && !controllingPlayer.getUserData().getUserSkipPrioritySteps().isStopOnAllMainPhases())) {
+                                    && !controllingUserData.getUserSkipPrioritySteps().isStopOnAllMainPhases())) {
                                 skippedAtLeastOnce = true;
                                 if (passWithManaPoolCheck(game)) {
                                     return false;
@@ -1274,8 +1277,7 @@ public class HumanPlayer extends PlayerImpl {
                             // it's end of turn step
                             if (!skippedAtLeastOnce
                                     || (playerId.equals(game.getActivePlayerId())
-                                    && !controllingPlayer
-                                    .getUserData()
+                                    && !controllingUserData
                                     .getUserSkipPrioritySteps()
                                     .isStopOnAllEndPhases())) {
                                 skippedAtLeastOnce = true;
@@ -1295,7 +1297,7 @@ public class HumanPlayer extends PlayerImpl {
                     }
 
                     if (!dontCheckPassStep
-                            && checkPassStep(game, controllingPlayer)) {
+                            && checkPassStep(game, controllingUserData)) {
                         if (passWithManaPoolCheck(game)) {
                             return false;
                         }
@@ -1308,8 +1310,7 @@ public class HumanPlayer extends PlayerImpl {
                     if (passedUntilStackResolved) {
                         if (haveNewObjectsOnStack
                                 && (playerId.equals(game.getActivePlayerId())
-                                && controllingPlayer
-                                .getUserData()
+                                && controllingUserData
                                 .getUserSkipPrioritySteps()
                                 .isStopOnStackNewObjects())) {
                             // new objects on stack -- disable "pass until stack resolved"
@@ -1433,17 +1434,17 @@ public class HumanPlayer extends PlayerImpl {
         return response.getUUID();
     }
 
-    private boolean checkPassStep(Game game, HumanPlayer controllingPlayer) {
+    private boolean checkPassStep(Game game, UserData controllingUserData) {
         try {
 
             if (playerId.equals(game.getActivePlayerId())) {
-                return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getTurnStepType());
+                return !controllingUserData.getUserSkipPrioritySteps().getYourTurn().isPhaseStepSet(game.getTurnStepType());
             } else {
-                return !controllingPlayer.getUserData().getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getTurnStepType());
+                return !controllingUserData.getUserSkipPrioritySteps().getOpponentTurn().isPhaseStepSet(game.getTurnStepType());
             }
         } catch (NullPointerException ex) {
-            if (controllingPlayer.getUserData() != null) {
-                if (controllingPlayer.getUserData().getUserSkipPrioritySteps() != null) {
+            if (controllingUserData != null) {
+                if (controllingUserData.getUserSkipPrioritySteps() != null) {
                     if (game.getStep() != null) {
                         if (game.getTurnStepType() == null) {
                             logger.error("game.getTurnStepType() == null");
@@ -2929,19 +2930,8 @@ public class HumanPlayer extends PlayerImpl {
     protected boolean passWithManaPoolCheck(Game game) {
         if (userData.confirmEmptyManaPool()
                 && game.getStack().isEmpty() && getManaPool().count() > 0 && getManaPool().canLostManaOnEmpty()) {
-            String activePlayerText;
-            if (game.isActivePlayer(playerId)) {
-                activePlayerText = "Your turn";
-            } else {
-                activePlayerText = game.getPlayer(game.getActivePlayerId()).getName() + "'s turn";
-            }
-            String priorityPlayerText = "";
-            if (!isGameUnderControl()) {
-                priorityPlayerText = " / priority " + game.getPlayer(game.getPriorityPlayerId()).getName();
-            }
-            // TODO: chooseUse and other dialogs must be under controlling player
-            if (!chooseUse(Outcome.Detriment, GameLog.getPlayerConfirmColoredText("You still have mana in your mana pool and it will be lose. Pass anyway?")
-                    + GameLog.getSmallSecondLineText(activePlayerText + " / " + game.getTurnStepType().toString() + priorityPlayerText), null, game)) {
+            String message = GameLog.getPlayerConfirmColoredText("You still have mana in your mana pool and it will be lose. Pass anyway?");
+            if (!chooseUse(Outcome.Detriment, message, null, game)) {
                 sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, game, null);
                 return false;
             }

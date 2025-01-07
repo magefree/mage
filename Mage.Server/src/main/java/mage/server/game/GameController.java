@@ -906,14 +906,14 @@ public class GameController implements GameCallback {
         perform(playerId, playerId1 -> getGameSession(playerId1).getMultiAmount(messages, min, max, options));
     }
 
-    private void informOthers(UUID playerId) {
+    private void informOthers(UUID waitingPlayerId) {
         StringBuilder message = new StringBuilder();
         if (game.getStep() != null) {
             message.append(game.getTurnStepType().toString()).append(" - ");
         }
-        message.append("Waiting for ").append(game.getPlayer(playerId).getLogName());
+        message.append("Waiting for ").append(game.getPlayer(waitingPlayerId).getLogName());
         for (final Entry<UUID, GameSessionPlayer> entry : getGameSessionsMap().entrySet()) {
-            if (!entry.getKey().equals(playerId)) {
+            if (!entry.getKey().equals(waitingPlayerId)) {
                 entry.getValue().inform(message.toString());
             }
         }
@@ -1030,7 +1030,7 @@ public class GameController implements GameCallback {
         // TODO: if watcher disconnects then game freezes with active timer, must be fix for such use case
         //  same for another player (can be fixed by super-duper connection)
         if (informOthers) {
-            informOthers(playerId);
+            informOthers(realPlayerController.getId());
         }
     }
 

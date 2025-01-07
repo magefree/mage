@@ -366,7 +366,7 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean isGameUnderControl();
 
     /**
-     * Returns false in case you don't control the game.
+     * False in case you don't control the game.
      * <p>
      * Note: For effects like "You control target player during that player's
      * next turn".
