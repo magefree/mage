@@ -227,7 +227,7 @@ public abstract class ExpansionSet implements Serializable {
             theBooster.remove(0);
         }
         int keepCards = 4;
-        ArrayList<rarity> dontRemove = new ArrayList<>(Arrays.asList(Rarity.UNCOMMON, Rarity.RARE, Rarity.MYTHIC));
+        ArrayList<Rarity> dontRemove = new ArrayList<>(Arrays.asList(Rarity.UNCOMMON, Rarity.RARE, Rarity.MYTHIC));
         int toRemove;
         while (theBooster.size() > 15) {
           if (theBooster.size() > keepCards) {
