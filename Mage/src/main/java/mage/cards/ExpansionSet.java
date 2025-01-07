@@ -145,7 +145,6 @@ public abstract class ExpansionSet implements Serializable {
     protected boolean hasAlternateBoosterPrintings = true; // not counting basic lands; e.g. Fallen Empires true, but Tenth Edition false
 
     protected int maxCardNumberInBooster; // used to omit cards with collector numbers beyond the regular cards in a set for boosters
-    protected int maxCardNumberBasePrint; // used to omit limit boosters to only contain cards with a base printing
 
     protected final EnumMap<Rarity, List<CardInfo>> savedCards = new EnumMap<>(Rarity.class);
     protected final EnumMap<Rarity, List<CardInfo>> savedSpecialCards = new EnumMap<>(Rarity.class);
@@ -224,7 +223,7 @@ public abstract class ExpansionSet implements Serializable {
         // removing positional cards from collated boosters is going to mess with balancing and as-fan
         // also for sets with common lands in the land slot, this may eliminate the majority of fixing from a pack
         // instead removing a random card that is not in the last four (where rare and uncommons usually are - though some uncommons may be displayed by cards with special collation - eg DFC or bonus sheet).
-        if (this.Booster.size() > 15 && this.Booster.get(0).getRarity() == Rarity.LAND) {
+        if (theBooster.size() > 15 && theBooster.get(0).getRarity() == Rarity.LAND) {
             theBooster.remove(0);
         }
         while (theBooster.size() > 15) {
