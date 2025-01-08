@@ -95,7 +95,7 @@ class NowhereToRunWardEffect extends ContinuousRuleModifyingEffectImpl {
 
     NowhereToRunWardEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Ward abilities of those creatures don???t trigger.";
+        staticText = "Ward abilities of those creatures don't trigger.";
     }
 
     private NowhereToRunWardEffect(final NowhereToRunWardEffect effect) {
