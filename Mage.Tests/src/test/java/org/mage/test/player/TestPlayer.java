@@ -2286,13 +2286,10 @@ public class TestPlayer implements Player {
 
             // TODO: Allow to choose a player with TargetPermanentOrPlayer
             if ((target.getOriginalTarget() instanceof TargetPermanent)
-                    || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) // player target not implemented yet
                     || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)) { // player target not implemented yet
                 FilterPermanent filterPermanent;
                 if (target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
                     filterPermanent = ((TargetPermanentOrPlayer) target.getOriginalTarget()).getFilterPermanent();
-                } else if (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) {
-                    filterPermanent = ((TargetCreatureOrPlayer) target.getOriginalTarget()).getFilterCreature();
                 } else {
                     filterPermanent = ((TargetPermanent) target.getOriginalTarget()).getFilter();
                 }
@@ -2516,8 +2513,6 @@ public class TestPlayer implements Player {
 
             // player
             if (target.getOriginalTarget() instanceof TargetPlayer
-                    || target.getOriginalTarget() instanceof TargetAnyTarget
-                    || target.getOriginalTarget() instanceof TargetCreatureOrPlayer
                     || target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
                 for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                     if (!targetDefinition.startsWith("targetPlayer=")) {
@@ -2539,8 +2534,6 @@ public class TestPlayer implements Player {
             // permanent in battlefield
             if ((target.getOriginalTarget() instanceof TargetPermanent)
                     || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)
-                    || (target.getOriginalTarget() instanceof TargetAnyTarget)
-                    || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer)
                     || (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard)) {
                 for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                     if (targetDefinition.startsWith("targetPlayer=")) {
@@ -2564,9 +2557,6 @@ public class TestPlayer implements Player {
                             }
                         }
                         Filter filter = target.getOriginalTarget().getFilter();
-                        if (filter instanceof FilterCreatureOrPlayer) {
-                            filter = ((FilterCreatureOrPlayer) filter).getCreatureFilter();
-                        }
                         if (filter instanceof FilterPermanentOrPlayer) {
                             filter = ((FilterPermanentOrPlayer) filter).getPermanentFilter();
                         }
