@@ -74,6 +74,7 @@ class NowhereToRunHexproofEffect extends AsThoughEffectImpl {
         if (affectedControllerId.equals(source.getControllerId())) {
             Permanent creature = game.getPermanent(sourceId);
             return creature != null
+                    && creature.isCreature(game)
                     && game.getOpponents(source.getControllerId()).contains(creature.getControllerId());
         }
         return false;
