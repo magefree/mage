@@ -725,8 +725,8 @@ public class DownloadPicturesService extends DefaultBoundedRangeModel implements
             try {
                 TVFS.umount();
             } catch (FsSyncException e) {
-                logger.fatal("Couldn't unmount zip files " + e, e);
-                MageFrame.getInstance().showErrorDialog("Couldn't unmount zip files " + e, e);
+                logger.error("Couldn't unmount zip files " + e, e);
+                // this is not a critical error - just need to run it again - see issue #12833
             }
         }
 
