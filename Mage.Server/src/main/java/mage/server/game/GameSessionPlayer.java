@@ -183,7 +183,7 @@ public class GameSessionPlayer extends GameSessionWatcher {
         game.getPlayer(playerId).setResponseString(data);
     }
 
-    public void sendPlayerManaType(ManaType manaType, UUID manaTypePlayerId) {
+    public void sendPlayerManaType(UUID manaTypePlayerId, ManaType manaType) {
         game.getPlayer(playerId).setResponseManaType(manaTypePlayerId, manaType);
     }
 

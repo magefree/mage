@@ -5373,11 +5373,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public String getHistory() {
-        return "no available";
-    }
-
-    @Override
     public boolean hasDesignation(DesignationType designationName) {
         for (Designation designation : designations) {
             if (designation.getDesignationType().equals(designationName)) {

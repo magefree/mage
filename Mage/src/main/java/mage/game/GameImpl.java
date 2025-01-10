@@ -845,6 +845,10 @@ public abstract class GameImpl implements Game {
             // concede for itself
             // stop current player dialog and execute concede
             currentPriorityPlayer.signalPlayerConcede(true);
+        } else if (currentPriorityPlayer.getTurnControlledBy().equals(playerId)) {
+            // concede for itself while controlling another player
+            // stop current player dialog and execute concede
+            currentPriorityPlayer.signalPlayerConcede(true);
         } else {
             // concede for another player
             // allow current player to continue and check concede on any next priority

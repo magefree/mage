@@ -4544,10 +4544,6 @@ public class TestPlayer implements Player {
         return AIPlayer;
     }
 
-    public String getHistory() {
-        return computerPlayer.getHistory();
-    }
-
     @Override
     public PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
         return computerPlayer.rollPlanarDie(outcome, source, game, numberChaosSides, numberPlanarSides);

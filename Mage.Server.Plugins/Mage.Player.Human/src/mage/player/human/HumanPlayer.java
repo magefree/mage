@@ -97,7 +97,7 @@ public class HumanPlayer extends PlayerImpl {
     // * - GAME thread: on notify from response - check new answer value and process it (if it bad then repeat and wait the next one);
     private transient Boolean responseOpenedForAnswer = false; // GAME thread waiting new answer
     private transient long responseLastWaitingThreadId = 0;
-    private final transient PlayerResponse response = new PlayerResponse();
+    private final transient PlayerResponse response; // data receiver from a client side (must be shared for one player between multiple clients)
     private final int RESPONSE_WAITING_TIME_SECS = 30; // waiting time before cancel current response
     private final int RESPONSE_WAITING_CHECK_MS = 100; // timeout for open status check
 
@@ -105,7 +105,7 @@ public class HumanPlayer extends PlayerImpl {
     protected static FilterCreatureForCombat filterCreatureForCombat = new FilterCreatureForCombat();
     protected static FilterAttackingCreature filterAttack = new FilterAttackingCreature();
     protected static FilterBlockingCreature filterBlock = new FilterBlockingCreature();
-    protected final Choice replacementEffectChoice;
+    protected Choice replacementEffectChoice = null;
     private static final Logger logger = Logger.getLogger(HumanPlayer.class);
 
     protected HashSet<String> autoSelectReplacementEffects = new LinkedHashSet<>(); // must be sorted
@@ -131,8 +131,12 @@ public class HumanPlayer extends PlayerImpl {
 
     public HumanPlayer(String name, RangeOfInfluence range, int skill) {
         super(name, range);
-        human = true;
+        this.human = true;
+        this.response = new PlayerResponse();
+        initReplacementDialog();
+    }
 
+    private void initReplacementDialog() {
         replacementEffectChoice = new ChoiceImpl(true);
         replacementEffectChoice.setMessage("Choose replacement effect to resolve first");
         replacementEffectChoice.setSpecial(
@@ -143,8 +147,20 @@ public class HumanPlayer extends PlayerImpl {
         );
     }
 
+    /**
+     *  Make fake player from any other
+     */
+    public HumanPlayer(final PlayerImpl sourcePlayer, final PlayerResponse sourceResponse) {
+        super(sourcePlayer);
+        this.human = true;
+        this.response = sourceResponse; // need for sync and wait user's response from a network
+        initReplacementDialog();
+    }
+
     public HumanPlayer(final HumanPlayer player) {
         super(player);
+        this.response = player.response;
+
         this.replacementEffectChoice = player.replacementEffectChoice;
         this.autoSelectReplacementEffects.addAll(player.autoSelectReplacementEffects);
         this.currentlyUnpaidMana = player.currentlyUnpaidMana;
@@ -2940,11 +2956,6 @@ public class HumanPlayer extends PlayerImpl {
         return true;
     }
 
-    @Override
-    public String getHistory() {
-        return "no available";
-    }
-
     private boolean gameInCheckPlayableState(Game game) {
         return gameInCheckPlayableState(game, false);
     }
@@ -2961,5 +2972,15 @@ public class HumanPlayer extends PlayerImpl {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Player prepareControllableProxy(Player playerUnderControl) {
+        // make fake player, e.g. transform computer player to human player for choose dialogs under control
+        HumanPlayer fakePlayer = new HumanPlayer((PlayerImpl) playerUnderControl, this.response);
+        if (!fakePlayer.getTurnControlledBy().equals(this.getId())) {
+            throw new IllegalArgumentException("Wrong code usage: controllable proxy must be controlled by " + this.getName());
+        }
+        return fakePlayer;
     }
 }
