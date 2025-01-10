@@ -5,7 +5,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.combat.CantBlockSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -31,7 +31,7 @@ public final class VampireGourmand extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new DoIfCostPaid(
                 new DrawCardSourceControllerEffect(1),
                 new SacrificeTargetCost(StaticFilters.FILTER_ANOTHER_CREATURE)
-        ).addEffect(new CantBlockSourceEffect(Duration.EndOfTurn).concatBy("and"))));
+        ).addEffect(new CantBeBlockedSourceEffect(Duration.EndOfTurn).concatBy("and"))));
     }
 
     private VampireGourmand(final VampireGourmand card) {
