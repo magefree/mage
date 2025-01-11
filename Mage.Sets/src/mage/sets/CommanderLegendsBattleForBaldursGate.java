@@ -3,6 +3,17 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
+import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -19,19 +30,24 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         super("Commander Legends: Battle for Baldur's Gate", "CLB", ExpansionSet.buildDate(2022, 6, 10), SetType.SUPPLEMENTAL);
         this.blockName = "Commander Legends";
         this.hasBasicLands = true;
-        this.hasBoosters = false; // temporary
+        this.hasBoosters = true;
 
         cards.add(new SetCardInfo("Aarakocra Sneak", 54, Rarity.COMMON, mage.cards.a.AarakocraSneak.class));
-        cards.add(new SetCardInfo("Abdel Adrian, Gorion's Ward", 2, Rarity.UNCOMMON, mage.cards.a.AbdelAdrianGorionsWard.class));
+        cards.add(new SetCardInfo("Abdel Adrian, Gorion's Ward", 2, Rarity.UNCOMMON, mage.cards.a.AbdelAdrianGorionsWard.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Abdel Adrian, Gorion's Ward", 375, Rarity.UNCOMMON, mage.cards.a.AbdelAdrianGorionsWard.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aboleth Spawn", 662, Rarity.RARE, mage.cards.a.AbolethSpawn.class));
         cards.add(new SetCardInfo("Acolyte of Bahamut", 212, Rarity.UNCOMMON, mage.cards.a.AcolyteOfBahamut.class));
         cards.add(new SetCardInfo("Aether Gale", 712, Rarity.RARE, mage.cards.a.AetherGale.class));
         cards.add(new SetCardInfo("Agent of the Iron Throne", 107, Rarity.UNCOMMON, mage.cards.a.AgentOfTheIronThrone.class));
         cards.add(new SetCardInfo("Agent of the Shadow Thieves", 108, Rarity.UNCOMMON, mage.cards.a.AgentOfTheShadowThieves.class));
         cards.add(new SetCardInfo("Agitator Ant", 776, Rarity.RARE, mage.cards.a.AgitatorAnt.class));
-        cards.add(new SetCardInfo("Alora, Merry Thief", 55, Rarity.UNCOMMON, mage.cards.a.AloraMerryThief.class));
+        // cards.add(new SetCardInfo("Alaundo the Seer", 264, Rarity.UNCOMMON, mage.cards.a.AlaundoTheSeer.class));
+        // when implementing, uncomment full CardRun legendR and delete the adjusted one, so that this card may be included in boosters
+        cards.add(new SetCardInfo("Alora, Merry Thief", 55, Rarity.UNCOMMON, mage.cards.a.AloraMerryThief.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Alora, Merry Thief", 381, Rarity.UNCOMMON, mage.cards.a.AloraMerryThief.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Altar of Bhaal", 109, Rarity.RARE, mage.cards.a.AltarOfBhaal.class));
-        cards.add(new SetCardInfo("Amber Gristle O'Maul", 159, Rarity.UNCOMMON, mage.cards.a.AmberGristleOMaul.class));
+        cards.add(new SetCardInfo("Amber Gristle O'Maul", 159, Rarity.UNCOMMON, mage.cards.a.AmberGristleOMaul.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Amber Gristle O'Maul", 395, Rarity.UNCOMMON, mage.cards.a.AmberGristleOMaul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ambition's Cost", 110, Rarity.UNCOMMON, mage.cards.a.AmbitionsCost.class));
         cards.add(new SetCardInfo("Ambitious Dragonborn", 213, Rarity.COMMON, mage.cards.a.AmbitiousDragonborn.class));
         cards.add(new SetCardInfo("Amethyst Dragon", 160, Rarity.UNCOMMON, mage.cards.a.AmethystDragon.class));
@@ -108,7 +124,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Burnished Hart", 303, Rarity.UNCOMMON, mage.cards.b.BurnishedHart.class));
         cards.add(new SetCardInfo("Butcher of Malakir", 741, Rarity.RARE, mage.cards.b.ButcherOfMalakir.class));
         cards.add(new SetCardInfo("Bygone Bishop", 689, Rarity.RARE, mage.cards.b.BygoneBishop.class));
-        cards.add(new SetCardInfo("Cadira, Caller of the Small", 269, Rarity.UNCOMMON, mage.cards.c.CadiraCallerOfTheSmall.class));
+        cards.add(new SetCardInfo("Cadira, Caller of the Small", 269, Rarity.UNCOMMON, mage.cards.c.CadiraCallerOfTheSmall.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cadira, Caller of the Small", 417, Rarity.UNCOMMON, mage.cards.c.CadiraCallerOfTheSmall.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Calculating Lich", 742, Rarity.MYTHIC, mage.cards.c.CalculatingLich.class));
         cards.add(new SetCardInfo("Call to the Void", 118, Rarity.RARE, mage.cards.c.CallToTheVoid.class));
         cards.add(new SetCardInfo("Campfire", 304, Rarity.UNCOMMON, mage.cards.c.Campfire.class));
@@ -128,7 +145,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Chaos Dragon", 784, Rarity.RARE, mage.cards.c.ChaosDragon.class));
         cards.add(new SetCardInfo("Chaos Wand", 855, Rarity.RARE, mage.cards.c.ChaosWand.class));
         cards.add(new SetCardInfo("Chaos Warp", 785, Rarity.RARE, mage.cards.c.ChaosWarp.class));
-        cards.add(new SetCardInfo("Charcoal Diamond", 305, Rarity.COMMON, mage.cards.c.CharcoalDiamond.class));
+        cards.add(new SetCardInfo("Charcoal Diamond", 305, Rarity.COMMON, mage.cards.c.CharcoalDiamond.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Charcoal Diamond", 442, Rarity.COMMON, mage.cards.c.CharcoalDiamond.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chardalyn Dragon", 306, Rarity.COMMON, mage.cards.c.ChardalynDragon.class));
         cards.add(new SetCardInfo("Chasm Skulker", 714, Rarity.RARE, mage.cards.c.ChasmSkulker.class));
         cards.add(new SetCardInfo("Choked Estuary", 886, Rarity.RARE, mage.cards.c.ChokedEstuary.class));
@@ -137,13 +155,16 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Citadel Gate", 349, Rarity.COMMON, mage.cards.c.CitadelGate.class));
         cards.add(new SetCardInfo("Clan Crafter", 651, Rarity.MYTHIC, mage.cards.c.ClanCrafter.class));
         cards.add(new SetCardInfo("Cliffgate", 350, Rarity.COMMON, mage.cards.c.Cliffgate.class));
-        cards.add(new SetCardInfo("Cloak of the Bat", 307, Rarity.COMMON, mage.cards.c.CloakOfTheBat.class));
+        cards.add(new SetCardInfo("Cloak of the Bat", 307, Rarity.COMMON, mage.cards.c.CloakOfTheBat.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cloak of the Bat", 443, Rarity.COMMON, mage.cards.c.CloakOfTheBat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cloakwood Hermit", 221, Rarity.UNCOMMON, mage.cards.c.CloakwoodHermit.class));
         cards.add(new SetCardInfo("Cloakwood Swarmkeeper", 222, Rarity.COMMON, mage.cards.c.CloakwoodSwarmkeeper.class));
         cards.add(new SetCardInfo("Clockwork Fox", 308, Rarity.COMMON, mage.cards.c.ClockworkFox.class));
         cards.add(new SetCardInfo("Cloudkill", 121, Rarity.UNCOMMON, mage.cards.c.Cloudkill.class));
         cards.add(new SetCardInfo("Colossal Badger", 223, Rarity.COMMON, mage.cards.c.ColossalBadger.class));
         cards.add(new SetCardInfo("Command Tower", 351, Rarity.COMMON, mage.cards.c.CommandTower.class));
+        // cards.add(new SetCardInfo("Commander Liara Portyr", 270, Rarity.UNCOMMON, mage.cards.c.CommanderLiaraPortyr.class));
+        // when implementing, uncomment full CardRun legendU and CardRun foilLegendU and delete the adjusted ones, so that this card may be included in boosters
         cards.add(new SetCardInfo("Compulsive Research", 715, Rarity.COMMON, mage.cards.c.CompulsiveResearch.class));
         cards.add(new SetCardInfo("Cone of Cold", 61, Rarity.UNCOMMON, mage.cards.c.ConeOfCold.class));
         cards.add(new SetCardInfo("Consuming Aberration", 840, Rarity.RARE, mage.cards.c.ConsumingAberration.class));
@@ -169,7 +190,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Dawnbringer Cleric", 15, Rarity.COMMON, mage.cards.d.DawnbringerCleric.class));
         cards.add(new SetCardInfo("Deadly Dispute", 124, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
         cards.add(new SetCardInfo("Death Kiss", 675, Rarity.RARE, mage.cards.d.DeathKiss.class));
-        cards.add(new SetCardInfo("Decanter of Endless Water", 309, Rarity.COMMON, mage.cards.d.DecanterOfEndlessWater.class));
+        cards.add(new SetCardInfo("Decanter of Endless Water", 309, Rarity.COMMON, mage.cards.d.DecanterOfEndlessWater.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Decanter of Endless Water", 444, Rarity.COMMON, mage.cards.d.DecanterOfEndlessWater.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deep Gnome Terramancer", 658, Rarity.RARE, mage.cards.d.DeepGnomeTerramancer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Deep Gnome Terramancer", 607, Rarity.RARE, mage.cards.d.DeepGnomeTerramancer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Delayed Blast Fireball", 676, Rarity.RARE, mage.cards.d.DelayedBlastFireball.class));
@@ -213,7 +235,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Eight-and-a-Half-Tails", 692, Rarity.RARE, mage.cards.e.EightAndAHalfTails.class));
         cards.add(new SetCardInfo("Elder Brain", 125, Rarity.RARE, mage.cards.e.ElderBrain.class));
         cards.add(new SetCardInfo("Eldritch Pact", 126, Rarity.RARE, mage.cards.e.EldritchPact.class));
-        cards.add(new SetCardInfo("Ellyn Harbreeze, Busybody", 16, Rarity.UNCOMMON, mage.cards.e.EllynHarbreezeBusybody.class));
+        cards.add(new SetCardInfo("Ellyn Harbreeze, Busybody", 16, Rarity.UNCOMMON, mage.cards.e.EllynHarbreezeBusybody.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ellyn Harbreeze, Busybody", 377, Rarity.UNCOMMON, mage.cards.e.EllynHarbreezeBusybody.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Elminster", 274, Rarity.MYTHIC, mage.cards.e.Elminster.class));
         cards.add(new SetCardInfo("Elminster's Simulacrum", 68, Rarity.MYTHIC, mage.cards.e.ElminstersSimulacrum.class));
         cards.add(new SetCardInfo("Elturel Survivors", 172, Rarity.RARE, mage.cards.e.ElturelSurvivors.class));
@@ -222,7 +245,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Endless Evil", 665, Rarity.RARE, mage.cards.e.EndlessEvil.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Endless Evil", 615, Rarity.RARE, mage.cards.e.EndlessEvil.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("End-Raze Forerunners", 822, Rarity.RARE, mage.cards.e.EndRazeForerunners.class));
-        cards.add(new SetCardInfo("Erinis, Gloom Stalker", 230, Rarity.UNCOMMON, mage.cards.e.ErinisGloomStalker.class));
+        cards.add(new SetCardInfo("Erinis, Gloom Stalker", 230, Rarity.UNCOMMON, mage.cards.e.ErinisGloomStalker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Erinis, Gloom Stalker", 407, Rarity.UNCOMMON, mage.cards.e.ErinisGloomStalker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Escape to the Wilds", 843, Rarity.RARE, mage.cards.e.EscapeToTheWilds.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 793, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
         cards.add(new SetCardInfo("Ettercap", 231, Rarity.COMMON, mage.cards.e.Ettercap.class));
@@ -244,7 +268,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Feywild Caretaker", 69, Rarity.UNCOMMON, mage.cards.f.FeywildCaretaker.class));
         cards.add(new SetCardInfo("Feywild Visitor", 70, Rarity.UNCOMMON, mage.cards.f.FeywildVisitor.class));
         cards.add(new SetCardInfo("Firbolg Flutist", 174, Rarity.RARE, mage.cards.f.FirbolgFlutist.class));
-        cards.add(new SetCardInfo("Fire Diamond", 313, Rarity.COMMON, mage.cards.f.FireDiamond.class));
+        cards.add(new SetCardInfo("Fire Diamond", 313, Rarity.COMMON, mage.cards.f.FireDiamond.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fire Diamond", 445, Rarity.COMMON, mage.cards.f.FireDiamond.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fireball", 175, Rarity.UNCOMMON, mage.cards.f.Fireball.class));
         cards.add(new SetCardInfo("Firja's Retribution", 846, Rarity.RARE, mage.cards.f.FirjasRetribution.class));
         cards.add(new SetCardInfo("Firkraag, Cunning Instigator", 648, Rarity.MYTHIC, mage.cards.f.FirkraagCunningInstigator.class));
@@ -262,7 +287,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Gale's Redirection", 73, Rarity.RARE, mage.cards.g.GalesRedirection.class));
         cards.add(new SetCardInfo("Galepowder Mage", 694, Rarity.RARE, mage.cards.g.GalepowderMage.class));
         cards.add(new SetCardInfo("Game Trail", 894, Rarity.RARE, mage.cards.g.GameTrail.class));
-        cards.add(new SetCardInfo("Ganax, Astral Hunter", 176, Rarity.UNCOMMON, mage.cards.g.GanaxAstralHunter.class));
+        cards.add(new SetCardInfo("Ganax, Astral Hunter", 176, Rarity.UNCOMMON, mage.cards.g.GanaxAstralHunter.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ganax, Astral Hunter", 398, Rarity.UNCOMMON, mage.cards.g.GanaxAstralHunter.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Gate Colossus", 315, Rarity.UNCOMMON, mage.cards.g.GateColossus.class));
         cards.add(new SetCardInfo("Genasi Enforcers", 177, Rarity.COMMON, mage.cards.g.GenasiEnforcers.class));
         cards.add(new SetCardInfo("Geode Golem", 316, Rarity.UNCOMMON, mage.cards.g.GeodeGolem.class));
@@ -275,7 +301,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Gluntch, the Bestower", 275, Rarity.RARE, mage.cards.g.GluntchTheBestower.class));
         cards.add(new SetCardInfo("Gnoll War Band", 178, Rarity.UNCOMMON, mage.cards.g.GnollWarBand.class));
         cards.add(new SetCardInfo("Goblin Spymaster", 795, Rarity.RARE, mage.cards.g.GoblinSpymaster.class));
-        cards.add(new SetCardInfo("Goggles of Night", 74, Rarity.COMMON, mage.cards.g.GogglesOfNight.class));
+        cards.add(new SetCardInfo("Goggles of Night", 74, Rarity.COMMON, mage.cards.g.GogglesOfNight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Goggles of Night", 384, Rarity.COMMON, mage.cards.g.GogglesOfNight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Goliath Paladin", 21, Rarity.COMMON, mage.cards.g.GoliathPaladin.class));
         cards.add(new SetCardInfo("Gond Gate", 353, Rarity.UNCOMMON, mage.cards.g.GondGate.class));
         cards.add(new SetCardInfo("Gonti, Lord of Luxury", 753, Rarity.RARE, mage.cards.g.GontiLordOfLuxury.class));
@@ -295,8 +322,10 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Guild Artisan", 179, Rarity.UNCOMMON, mage.cards.g.GuildArtisan.class));
         cards.add(new SetCardInfo("Guildsworn Prowler", 130, Rarity.COMMON, mage.cards.g.GuildswornProwler.class));
         cards.add(new SetCardInfo("Guiltfeeder", 756, Rarity.RARE, mage.cards.g.Guiltfeeder.class));
-        cards.add(new SetCardInfo("Gut, True Soul Zealot", 180, Rarity.UNCOMMON, mage.cards.g.GutTrueSoulZealot.class));
-        cards.add(new SetCardInfo("Halsin, Emerald Archdruid", 234, Rarity.UNCOMMON, mage.cards.h.HalsinEmeraldArchdruid.class));
+        cards.add(new SetCardInfo("Gut, True Soul Zealot", 180, Rarity.UNCOMMON, mage.cards.g.GutTrueSoulZealot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Gut, True Soul Zealot", 399, Rarity.UNCOMMON, mage.cards.g.GutTrueSoulZealot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Halsin, Emerald Archdruid", 234, Rarity.UNCOMMON, mage.cards.h.HalsinEmeraldArchdruid.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Halsin, Emerald Archdruid", 408, Rarity.UNCOMMON, mage.cards.h.HalsinEmeraldArchdruid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hammers of Moradin", 25, Rarity.UNCOMMON, mage.cards.h.HammersOfMoradin.class));
         cards.add(new SetCardInfo("Hardy Outlander", 235, Rarity.UNCOMMON, mage.cards.h.HardyOutlander.class));
         cards.add(new SetCardInfo("Harper Recruiter", 659, Rarity.RARE, mage.cards.h.HarperRecruiter.class));
@@ -317,7 +346,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Ignite the Future", 797, Rarity.RARE, mage.cards.i.IgniteTheFuture.class));
         cards.add(new SetCardInfo("Illithid Harvester", 76, Rarity.RARE, mage.cards.i.IllithidHarvester.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Illithid Harvester", 564, Rarity.RARE, mage.cards.i.IllithidHarvester.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Imoen, Mystic Trickster", 77, Rarity.UNCOMMON, mage.cards.i.ImoenMysticTrickster.class));
+        cards.add(new SetCardInfo("Imoen, Mystic Trickster", 77, Rarity.UNCOMMON, mage.cards.i.ImoenMysticTrickster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Imoen, Mystic Trickster", 385, Rarity.UNCOMMON, mage.cards.i.ImoenMysticTrickster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("In Garruk's Wake", 759, Rarity.RARE, mage.cards.i.InGarruksWake.class));
         cards.add(new SetCardInfo("Ingenious Artillerist", 182, Rarity.COMMON, mage.cards.i.IngeniousArtillerist.class));
         cards.add(new SetCardInfo("Inspired Tinkering", 183, Rarity.UNCOMMON, mage.cards.i.InspiredTinkering.class));
@@ -344,7 +374,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Jon Irenicus, Shattered One", 536, Rarity.RARE, mage.cards.j.JonIrenicusShatteredOne.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Journey to the Lost City", 681, Rarity.RARE, mage.cards.j.JourneyToTheLostCity.class));
         cards.add(new SetCardInfo("Juvenile Mist Dragon", 79, Rarity.UNCOMMON, mage.cards.j.JuvenileMistDragon.class));
-        cards.add(new SetCardInfo("Kagha, Shadow Archdruid", 279, Rarity.UNCOMMON, mage.cards.k.KaghaShadowArchdruid.class));
+        cards.add(new SetCardInfo("Kagha, Shadow Archdruid", 279, Rarity.UNCOMMON, mage.cards.k.KaghaShadowArchdruid.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kagha, Shadow Archdruid", 426, Rarity.UNCOMMON, mage.cards.k.KaghaShadowArchdruid.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Karlach, Fury of Avernus", 186, Rarity.MYTHIC, mage.cards.k.KarlachFuryOfAvernus.class));
         cards.add(new SetCardInfo("Kazuul, Tyrant of the Cliffs", 800, Rarity.RARE, mage.cards.k.KazuulTyrantOfTheCliffs.class));
         cards.add(new SetCardInfo("Keiga, the Tide Star", 725, Rarity.RARE, mage.cards.k.KeigaTheTideStar.class));
@@ -353,7 +384,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Kher Keep", 899, Rarity.RARE, mage.cards.k.KherKeep.class));
         cards.add(new SetCardInfo("Kindred Discovery", 81, Rarity.RARE, mage.cards.k.KindredDiscovery.class));
         cards.add(new SetCardInfo("Kodama's Reach", 826, Rarity.COMMON, mage.cards.k.KodamasReach.class));
-        cards.add(new SetCardInfo("Korlessa, Scale Singer", 280, Rarity.UNCOMMON, mage.cards.k.KorlessaScaleSinger.class));
+        cards.add(new SetCardInfo("Korlessa, Scale Singer", 280, Rarity.UNCOMMON, mage.cards.k.KorlessaScaleSinger.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Korlessa, Scale Singer", 427, Rarity.UNCOMMON, mage.cards.k.KorlessaScaleSinger.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lae'zel's Acrobatics", 30, Rarity.RARE, mage.cards.l.LaezelsAcrobatics.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lae'zel's Acrobatics", 556, Rarity.RARE, mage.cards.l.LaezelsAcrobatics.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lae'zel, Vlaakith's Champion", 29, Rarity.RARE, mage.cards.l.LaezelVlaakithsChampion.class));
@@ -363,25 +395,32 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Legion Loyalty", 31, Rarity.MYTHIC, mage.cards.l.LegionLoyalty.class));
         cards.add(new SetCardInfo("Leyline of Anticipation", 726, Rarity.RARE, mage.cards.l.LeylineOfAnticipation.class));
         cards.add(new SetCardInfo("Light Up the Stage", 802, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
-        cards.add(new SetCardInfo("Lightning Bolt", 187, Rarity.COMMON, mage.cards.l.LightningBolt.class));
+        cards.add(new SetCardInfo("Lightning Bolt", 187, Rarity.COMMON, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lightning Bolt", 401, Rarity.COMMON, mage.cards.l.LightningBolt.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lightning Greaves", 864, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
-        cards.add(new SetCardInfo("Livaan, Cultist of Tiamat", 188, Rarity.UNCOMMON, mage.cards.l.LivaanCultistOfTiamat.class));
+        cards.add(new SetCardInfo("Livaan, Cultist of Tiamat", 188, Rarity.UNCOMMON, mage.cards.l.LivaanCultistOfTiamat.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Livaan, Cultist of Tiamat", 402, Rarity.UNCOMMON, mage.cards.l.LivaanCultistOfTiamat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Loot Dispute", 677, Rarity.RARE, mage.cards.l.LootDispute.class));
         cards.add(new SetCardInfo("Lovestruck Beast", 827, Rarity.RARE, mage.cards.l.LovestruckBeast.class));
-        cards.add(new SetCardInfo("Lozhan, Dragons' Legacy", 281, Rarity.UNCOMMON, mage.cards.l.LozhanDragonsLegacy.class));
-        cards.add(new SetCardInfo("Lulu, Loyal Hollyphant", 32, Rarity.UNCOMMON, mage.cards.l.LuluLoyalHollyphant.class));
+        cards.add(new SetCardInfo("Lozhan, Dragons' Legacy", 281, Rarity.UNCOMMON, mage.cards.l.LozhanDragonsLegacy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lozhan, Dragons' Legacy", 428, Rarity.UNCOMMON, mage.cards.l.LozhanDragonsLegacy.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lulu, Loyal Hollyphant", 32, Rarity.UNCOMMON, mage.cards.l.LuluLoyalHollyphant.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Lulu, Loyal Hollyphant", 379, Rarity.UNCOMMON, mage.cards.l.LuluLoyalHollyphant.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lurking Green Dragon", 239, Rarity.COMMON, mage.cards.l.LurkingGreenDragon.class));
         cards.add(new SetCardInfo("Luxury Suite", 355, Rarity.RARE, mage.cards.l.LuxurySuite.class));
         cards.add(new SetCardInfo("Mage's Attendant", 698, Rarity.UNCOMMON, mage.cards.m.MagesAttendant.class));
         cards.add(new SetCardInfo("Magus of the Balance", 699, Rarity.RARE, mage.cards.m.MagusOfTheBalance.class));
-        cards.add(new SetCardInfo("Mahadi, Emporium Master", 282, Rarity.UNCOMMON, mage.cards.m.MahadiEmporiumMaster.class));
+        cards.add(new SetCardInfo("Mahadi, Emporium Master", 282, Rarity.UNCOMMON, mage.cards.m.MahadiEmporiumMaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mahadi, Emporium Master", 429, Rarity.UNCOMMON, mage.cards.m.MahadiEmporiumMaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Majestic Genesis", 240, Rarity.MYTHIC, mage.cards.m.MajesticGenesis.class));
         cards.add(new SetCardInfo("Malakir Blood-Priest", 760, Rarity.COMMON, mage.cards.m.MalakirBloodPriest.class));
         cards.add(new SetCardInfo("Managorger Hydra", 828, Rarity.RARE, mage.cards.m.ManagorgerHydra.class));
         cards.add(new SetCardInfo("Manifold Key", 319, Rarity.UNCOMMON, mage.cards.m.ManifoldKey.class));
         cards.add(new SetCardInfo("Manor Gate", 356, Rarity.COMMON, mage.cards.m.ManorGate.class));
-        cards.add(new SetCardInfo("Marble Diamond", 320, Rarity.COMMON, mage.cards.m.MarbleDiamond.class));
-        cards.add(new SetCardInfo("Marching Duodrone", 321, Rarity.COMMON, mage.cards.m.MarchingDuodrone.class));
+        cards.add(new SetCardInfo("Marble Diamond", 320, Rarity.COMMON, mage.cards.m.MarbleDiamond.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Marble Diamond", 446, Rarity.COMMON, mage.cards.m.MarbleDiamond.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Marching Duodrone", 321, Rarity.COMMON, mage.cards.m.MarchingDuodrone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Marching Duodrone", 447, Rarity.COMMON, mage.cards.m.MarchingDuodrone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mardu Strike Leader", 761, Rarity.RARE, mage.cards.m.MarduStrikeLeader.class));
         cards.add(new SetCardInfo("Martial Impetus", 33, Rarity.COMMON, mage.cards.m.MartialImpetus.class));
         cards.add(new SetCardInfo("Marut", 322, Rarity.COMMON, mage.cards.m.Marut.class));
@@ -402,7 +441,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Mindcrank", 866, Rarity.UNCOMMON, mage.cards.m.Mindcrank.class));
         cards.add(new SetCardInfo("Minimus Containment", 34, Rarity.COMMON, mage.cards.m.MinimusContainment.class));
         cards.add(new SetCardInfo("Minsc & Boo, Timeless Heroes", 285, Rarity.MYTHIC, mage.cards.m.MinscBooTimelessHeroes.class));
-        cards.add(new SetCardInfo("Minthara, Merciless Soul", 286, Rarity.UNCOMMON, mage.cards.m.MintharaMercilessSoul.class));
+        cards.add(new SetCardInfo("Minthara, Merciless Soul", 286, Rarity.UNCOMMON, mage.cards.m.MintharaMercilessSoul.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Minthara, Merciless Soul", 432, Rarity.UNCOMMON, mage.cards.m.MintharaMercilessSoul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mirror Entity", 701, Rarity.RARE, mage.cards.m.MirrorEntity.class));
         cards.add(new SetCardInfo("Mirror of Life Trapping", 326, Rarity.RARE, mage.cards.m.MirrorOfLifeTrapping.class));
         cards.add(new SetCardInfo("Mizzium Mortars", 803, Rarity.RARE, mage.cards.m.MizziumMortars.class));
@@ -413,7 +453,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Moonshae Pixie", 84, Rarity.UNCOMMON, mage.cards.m.MoonshaePixie.class));
         cards.add(new SetCardInfo("Morphic Pool", 357, Rarity.RARE, mage.cards.m.MorphicPool.class));
         cards.add(new SetCardInfo("Mortuary Mire", 900, Rarity.COMMON, mage.cards.m.MortuaryMire.class));
-        cards.add(new SetCardInfo("Moss Diamond", 327, Rarity.COMMON, mage.cards.m.MossDiamond.class));
+        cards.add(new SetCardInfo("Moss Diamond", 327, Rarity.COMMON, mage.cards.m.MossDiamond.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Moss Diamond", 448, Rarity.COMMON, mage.cards.m.MossDiamond.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mossfire Valley", 901, Rarity.RARE, mage.cards.m.MossfireValley.class));
         cards.add(new SetCardInfo("Mosswort Bridge", 902, Rarity.RARE, mage.cards.m.MosswortBridge.class));
         cards.add(new SetCardInfo("Mother of Runes", 702, Rarity.UNCOMMON, mage.cards.m.MotherOfRunes.class));
@@ -449,7 +490,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Noble's Purse", 331, Rarity.UNCOMMON, mage.cards.n.NoblesPurse.class));
         cards.add(new SetCardInfo("Nothic", 138, Rarity.UNCOMMON, mage.cards.n.Nothic.class));
         cards.add(new SetCardInfo("Oceanus Dragon", 87, Rarity.COMMON, mage.cards.o.OceanusDragon.class));
-        cards.add(new SetCardInfo("Oji, the Exquisite Blade", 290, Rarity.UNCOMMON, mage.cards.o.OjiTheExquisiteBlade.class));
+        cards.add(new SetCardInfo("Oji, the Exquisite Blade", 290, Rarity.UNCOMMON, mage.cards.o.OjiTheExquisiteBlade.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oji, the Exquisite Blade", 436, Rarity.UNCOMMON, mage.cards.o.OjiTheExquisiteBlade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Order of Whiteclay", 703, Rarity.RARE, mage.cards.o.OrderOfWhiteclay.class));
         cards.add(new SetCardInfo("Orzhov Basilica", 906, Rarity.UNCOMMON, mage.cards.o.OrzhovBasilica.class));
         cards.add(new SetCardInfo("Orzhov Signet", 867, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
@@ -495,7 +537,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Raging Ravine", 910, Rarity.RARE, mage.cards.r.RagingRavine.class));
         cards.add(new SetCardInfo("Raised by Giants", 250, Rarity.RARE, mage.cards.r.RaisedByGiants.class));
         cards.add(new SetCardInfo("Raphael, Fiendish Savior", 292, Rarity.RARE, mage.cards.r.RaphaelFiendishSavior.class));
-        cards.add(new SetCardInfo("Rasaad yn Bashir", 37, Rarity.UNCOMMON, mage.cards.r.RasaadYnBashir.class));
+        cards.add(new SetCardInfo("Rasaad yn Bashir", 37, Rarity.UNCOMMON, mage.cards.r.RasaadYnBashir.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rasaad yn Bashir", 380, Rarity.UNCOMMON, mage.cards.r.RasaadYnBashir.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ravenloft Adventurer", 142, Rarity.RARE, mage.cards.r.RavenloftAdventurer.class));
         cards.add(new SetCardInfo("Ravenous Chupacabra", 770, Rarity.UNCOMMON, mage.cards.r.RavenousChupacabra.class));
         cards.add(new SetCardInfo("Reckless Barbarian", 193, Rarity.COMMON, mage.cards.r.RecklessBarbarian.class));
@@ -504,10 +547,12 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Reflections of Littjara", 733, Rarity.RARE, mage.cards.r.ReflectionsOfLittjara.class));
         cards.add(new SetCardInfo("Reins of Power", 734, Rarity.RARE, mage.cards.r.ReinsOfPower.class));
         cards.add(new SetCardInfo("Reliquary Tower", 911, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
-        cards.add(new SetCardInfo("Renari, Merchant of Marvels", 90, Rarity.UNCOMMON, mage.cards.r.RenariMerchantOfMarvels.class));
+        cards.add(new SetCardInfo("Renari, Merchant of Marvels", 90, Rarity.UNCOMMON, mage.cards.r.RenariMerchantOfMarvels.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Renari, Merchant of Marvels", 386, Rarity.UNCOMMON, mage.cards.r.RenariMerchantOfMarvels.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rescuer Chwinga", 39, Rarity.UNCOMMON, mage.cards.r.RescuerChwinga.class));
         cards.add(new SetCardInfo("Return of the Wildspeaker", 831, Rarity.RARE, mage.cards.r.ReturnOfTheWildspeaker.class));
-        cards.add(new SetCardInfo("Rilsa Rael, Kingpin", 293, Rarity.UNCOMMON, mage.cards.r.RilsaRaelKingpin.class));
+        cards.add(new SetCardInfo("Rilsa Rael, Kingpin", 293, Rarity.UNCOMMON, mage.cards.r.RilsaRaelKingpin.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rilsa Rael, Kingpin", 439, Rarity.UNCOMMON, mage.cards.r.RilsaRaelKingpin.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("River of Tears", 912, Rarity.RARE, mage.cards.r.RiverOfTears.class));
         cards.add(new SetCardInfo("Robe of the Archmagi", 91, Rarity.RARE, mage.cards.r.RobeOfTheArchmagi.class));
         cards.add(new SetCardInfo("Rogue's Passage", 913, Rarity.UNCOMMON, mage.cards.r.RoguesPassage.class));
@@ -518,13 +563,15 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Run Away Together", 92, Rarity.COMMON, mage.cards.r.RunAwayTogether.class));
         cards.add(new SetCardInfo("Ryusei, the Falling Star", 806, Rarity.RARE, mage.cards.r.RyuseiTheFallingStar.class));
         cards.add(new SetCardInfo("Saddle of the Cavalier", 251, Rarity.UNCOMMON, mage.cards.s.SaddleOfTheCavalier.class));
-        cards.add(new SetCardInfo("Safana, Calimport Cutthroat", 143, Rarity.UNCOMMON, mage.cards.s.SafanaCalimportCutthroat.class));
+        cards.add(new SetCardInfo("Safana, Calimport Cutthroat", 143, Rarity.UNCOMMON, mage.cards.s.SafanaCalimportCutthroat.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Safana, Calimport Cutthroat", 390, Rarity.UNCOMMON, mage.cards.s.SafanaCalimportCutthroat.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sailors' Bane", 93, Rarity.UNCOMMON, mage.cards.s.SailorsBane.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 832, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));
         cards.add(new SetCardInfo("Sandwurm Convergence", 833, Rarity.RARE, mage.cards.s.SandwurmConvergence.class));
         cards.add(new SetCardInfo("Sapphire Dragon", 94, Rarity.UNCOMMON, mage.cards.s.SapphireDragon.class));
         cards.add(new SetCardInfo("Sarevok's Tome", 685, Rarity.RARE, mage.cards.s.SarevoksTome.class));
-        cards.add(new SetCardInfo("Sarevok, Deathbringer", 144, Rarity.UNCOMMON, mage.cards.s.SarevokDeathbringer.class));
+        cards.add(new SetCardInfo("Sarevok, Deathbringer", 144, Rarity.UNCOMMON, mage.cards.s.SarevokDeathbringer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sarevok, Deathbringer", 391, Rarity.UNCOMMON, mage.cards.s.SarevokDeathbringer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Scaled Nurturer", 252, Rarity.COMMON, mage.cards.s.ScaledNurturer.class));
         cards.add(new SetCardInfo("Scion of Halaster", 145, Rarity.COMMON, mage.cards.s.ScionOfHalaster.class));
         cards.add(new SetCardInfo("Scouting Hawk", 41, Rarity.COMMON, mage.cards.s.ScoutingHawk.class));
@@ -544,12 +591,15 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Shiny Impetus", 194, Rarity.COMMON, mage.cards.s.ShinyImpetus.class));
         cards.add(new SetCardInfo("Sigil of Myrkul", 147, Rarity.UNCOMMON, mage.cards.s.SigilOfMyrkul.class));
         cards.add(new SetCardInfo("Silvanus's Invoker", 254, Rarity.COMMON, mage.cards.s.SilvanussInvoker.class));
-        cards.add(new SetCardInfo("Sivriss, Nightmare Speaker", 148, Rarity.UNCOMMON, mage.cards.s.SivrissNightmareSpeaker.class));
-        cards.add(new SetCardInfo("Skanos Dragonheart", 255, Rarity.UNCOMMON, mage.cards.s.SkanosDragonheart.class));
+        cards.add(new SetCardInfo("Sivriss, Nightmare Speaker", 148, Rarity.UNCOMMON, mage.cards.s.SivrissNightmareSpeaker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sivriss, Nightmare Speaker", 393, Rarity.UNCOMMON, mage.cards.s.SivrissNightmareSpeaker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skanos Dragonheart", 255, Rarity.UNCOMMON, mage.cards.s.SkanosDragonheart.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skanos Dragonheart", 410, Rarity.UNCOMMON, mage.cards.s.SkanosDragonheart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skullclamp", 870, Rarity.UNCOMMON, mage.cards.s.Skullclamp.class));
         cards.add(new SetCardInfo("Skullport Merchant", 149, Rarity.UNCOMMON, mage.cards.s.SkullportMerchant.class));
         cards.add(new SetCardInfo("Skullwinder", 256, Rarity.UNCOMMON, mage.cards.s.Skullwinder.class));
-        cards.add(new SetCardInfo("Sky Diamond", 337, Rarity.COMMON, mage.cards.s.SkyDiamond.class));
+        cards.add(new SetCardInfo("Sky Diamond", 337, Rarity.COMMON, mage.cards.s.SkyDiamond.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sky Diamond", 449, Rarity.COMMON, mage.cards.s.SkyDiamond.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Slaughter the Strong", 43, Rarity.UNCOMMON, mage.cards.s.SlaughterTheStrong.class));
         cards.add(new SetCardInfo("Sludge Monster", 735, Rarity.RARE, mage.cards.s.SludgeMonster.class));
         cards.add(new SetCardInfo("Sly Instigator", 736, Rarity.RARE, mage.cards.s.SlyInstigator.class));
@@ -609,7 +659,8 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("The Council of Four", 271, Rarity.RARE, mage.cards.t.TheCouncilOfFour.class));
         cards.add(new SetCardInfo("Thieves' Tools", 152, Rarity.COMMON, mage.cards.t.ThievesTools.class));
         cards.add(new SetCardInfo("Thought Vessel", 879, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class));
-        cards.add(new SetCardInfo("Thrakkus the Butcher", 295, Rarity.UNCOMMON, mage.cards.t.ThrakkusTheButcher.class));
+        cards.add(new SetCardInfo("Thrakkus the Butcher", 295, Rarity.UNCOMMON, mage.cards.t.ThrakkusTheButcher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thrakkus the Butcher", 440, Rarity.UNCOMMON, mage.cards.t.ThrakkusTheButcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Three Visits", 837, Rarity.UNCOMMON, mage.cards.t.ThreeVisits.class));
         cards.add(new SetCardInfo("Thunder Dragon", 810, Rarity.RARE, mage.cards.t.ThunderDragon.class));
         cards.add(new SetCardInfo("Thunderwave", 201, Rarity.UNCOMMON, mage.cards.t.Thunderwave.class));
@@ -637,8 +688,11 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Venture Forth", 683, Rarity.RARE, mage.cards.v.VentureForth.class));
         cards.add(new SetCardInfo("Veteran Soldier", 48, Rarity.UNCOMMON, mage.cards.v.VeteranSoldier.class));
         cards.add(new SetCardInfo("Vexing Puzzlebox", 343, Rarity.MYTHIC, mage.cards.v.VexingPuzzlebox.class));
+        cards.add(new SetCardInfo("Vhal, Candlekeep Researcher", 102, Rarity.UNCOMMON, mage.cards.v.VhalCandlekeepResearcher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vhal, Candlekeep Researcher", 387, Rarity.UNCOMMON, mage.cards.v.VhalCandlekeepResearcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vicious Battlerager", 155, Rarity.COMMON, mage.cards.v.ViciousBattlerager.class));
-        cards.add(new SetCardInfo("Viconia, Drow Apostate", 156, Rarity.UNCOMMON, mage.cards.v.ViconiaDrowApostate.class));
+        cards.add(new SetCardInfo("Viconia, Drow Apostate", 156, Rarity.UNCOMMON, mage.cards.v.ViconiaDrowApostate.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Viconia, Drow Apostate", 394, Rarity.UNCOMMON, mage.cards.v.ViconiaDrowApostate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Vivien, Champion of the Wilds", 838, Rarity.RARE, mage.cards.v.VivienChampionOfTheWilds.class));
         cards.add(new SetCardInfo("Volcanic Torrent", 813, Rarity.UNCOMMON, mage.cards.v.VolcanicTorrent.class));
         cards.add(new SetCardInfo("Volo, Itinerant Scholar", 103, Rarity.MYTHIC, mage.cards.v.VoloItinerantScholar.class));
@@ -655,8 +709,11 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Wild Magic Surge", 206, Rarity.UNCOMMON, mage.cards.w.WildMagicSurge.class));
         cards.add(new SetCardInfo("Wild-Magic Sorcerer", 816, Rarity.RARE, mage.cards.w.WildMagicSorcerer.class));
         cards.add(new SetCardInfo("Will Kenrith", 738, Rarity.MYTHIC, mage.cards.w.WillKenrith.class));
-        cards.add(new SetCardInfo("Wilson, Refined Grizzly", 261, Rarity.UNCOMMON, mage.cards.w.WilsonRefinedGrizzly.class));
+        cards.add(new SetCardInfo("Wilson, Refined Grizzly", 261, Rarity.UNCOMMON, mage.cards.w.WilsonRefinedGrizzly.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wilson, Refined Grizzly", 411, Rarity.UNCOMMON, mage.cards.w.WilsonRefinedGrizzly.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Windbrisk Heights", 930, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
+        // cards.add(new SetCardInfo("Windshaper Planetar", 50, Rarity.RARE, mage.cards.w.WindshaperPlanetar.class));
+        // when implementing, uncomment full CardRun rare and delete the adjusted one, so that this card may be included in boosters
         cards.add(new SetCardInfo("Winter Eladrin", 104, Rarity.COMMON, mage.cards.w.WinterEladrin.class));
         cards.add(new SetCardInfo("Wizards of Thay", 105, Rarity.RARE, mage.cards.w.WizardsOfThay.class));
         cards.add(new SetCardInfo("Woe Strider", 774, Rarity.RARE, mage.cards.w.WoeStrider.class));
@@ -676,6 +733,259 @@ public final class CommanderLegendsBattleForBaldursGate extends ExpansionSet {
         cards.add(new SetCardInfo("Zevlor, Elturel Exile", 296, Rarity.RARE, mage.cards.z.ZevlorElturelExile.class));
         cards.add(new SetCardInfo("Zhentarim Bandit", 158, Rarity.COMMON, mage.cards.z.ZhentarimBandit.class));
         cards.add(new SetCardInfo("Zulaport Cutthroat", 775, Rarity.UNCOMMON, mage.cards.z.ZulaportCutthroat.class));
-        cards.add(new SetCardInfo("Vhal, Candlekeep Researcher", 102, Rarity.UNCOMMON, mage.cards.v.VhalCandlekeepResearcher.class));
+    }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new CommanderLegendsBattleForBaldursGateCollator();
+    }
+}
+
+// Booster collation info from https://www.lethe.xyz/mtg/collation/clb.html
+// Using Belgian collation plus other info inferred from various sources
+class CommanderLegendsBattleForBaldursGateCollator implements BoosterCollator {
+
+    private final CardRun commonA = new CardRun(true, "244", "89", "115", "7", "163", "252", "80", "127", "41", "181", "213", "66", "134", "34", "171", "254", "75", "124", "22", "210", "216", "106", "112", "24", "173", "231", "101", "127", "11", "194", "252", "99", "115", "22", "191", "244", "104", "129", "40", "181", "215", "64", "112", "27", "165", "220", "89", "155", "19", "166", "226", "66", "113", "34", "163", "215", "106", "124", "11", "193", "222", "86", "134", "21", "195", "219", "62", "158", "27", "191", "213", "75", "136", "46", "168", "216", "86", "129", "6", "173", "220", "99", "158", "19", "166", "226", "62", "120", "41", "193", "231", "54", "135", "46", "168", "236", "64", "113", "24", "195", "219", "80", "155", "6", "194", "254", "101", "136", "40", "171", "236", "54", "135", "7", "210", "222", "104", "120", "21", "165", "354");
+    private final CardRun commonB = new CardRun(true, "335", "320", "321", "307", "313", "384", "309", "327", "307", "349", "359", "320", "356", "337", "309", "445", "335", "359", "349", "337", "401", "335", "313", "74", "447", "327", "350", "335", "359", "305", "349", "449", "309", "187", "327", "321", "359", "446", "307", "350", "356", "337", "359", "443", "305", "321", "337", "187", "350", "384", "349", "305", "356", "335", "313", "187", "305", "321", "444", "187", "327", "350", "349", "320", "335", "442", "307", "350", "337", "74", "359", "445", "307", "305", "349", "356", "307", "401", "313", "349", "350", "320", "321", "448", "335", "309", "356", "320", "447", "74", "313", "350", "305", "309", "356", "443", "327", "309", "74", "449", "359", "320", "74", "187", "444", "337", "349", "359", "327", "74", "446", "356", "335", "448", "350", "321", "442", "187", "313", "356");
+    private final CardRun commonC = new CardRun(true, "259", "88", "131", "310", "211", "58", "329", "223", "51", "308", "248", "97", "151", "333", "347", "227", "95", "140", "36", "184", "249", "346", "133", "23", "202", "330", "92", "154", "310", "205", "351", "65", "130", "53", "342", "249", "97", "133", "185", "318", "302", "352", "151", "44", "344", "354", "243", "318", "137", "182", "340", "225", "92", "334", "322", "190", "239", "342", "306", "38", "330", "177", "87", "152", "52", "185", "259", "82", "150", "23", "211", "15", "65", "340", "225", "205", "58", "351", "137", "52", "329", "243", "95", "131", "53", "177", "263", "346", "150", "33", "227", "352", "51", "182", "308", "223", "154", "334", "322", "38", "190", "263", "82", "152", "248", "333", "302", "88", "306", "44", "202", "347", "140", "344", "33", "15", "239", "87", "184", "36", "130");
+    private final CardRun commonD = new CardRun(true, "1");
+    private final CardRun uncommonA = new CardRun(true, "79", "201", "315", "78", "257", "206", "316", "14", "332", "247", "311", "251", "147", "312", "224", "319", "141", "164", "317", "178", "336", "323", "183", "119", "59", "121", "203", "325", "12", "245", "256", "299", "160", "57", "10", "232", "85", "110", "229", "20", "297", "298", "198", "304", "341", "8", "69", "45", "94", "331", "83", "303", "153", "39", "128", "43", "353", "84", "339", "315", "316", "257", "201", "157", "206", "147", "14", "332", "311", "141", "79", "251", "78", "323", "319", "59", "312", "336", "247", "325", "224", "164", "119", "317", "121", "245", "203", "256", "178", "299", "183", "12", "160", "10", "57", "232", "110", "298", "20", "85", "229", "198", "69", "297", "341", "94", "304", "43", "84", "303", "45", "128", "8", "83", "331", "157", "39", "339", "153", "353");
+    private final CardRun uncommonB = new CardRun(false, "117", "61", "13", "175", "233", "25", "189", "138", "93", "253", "149", "338", "199", "47", "262");
+ // removed Commander Liara Portyr (not yet implemented)
+ // private final CardRun legendU = new CardRun(true, "16", "282", "234", "32", "270", "395", "180", "293", "290", "410", "156", "295", "269", "387", "281", "280", "77", "426", "143", "188", "176", "391", "90", "37", "55", "16", "407", "2", "261", "180", "393", "286", "439", "295", "32", "159", "429", "290", "156", "102", "270", "281", "380", "269", "261", "188", "144", "398", "234", "280", "230", "90", "399", "255", "279", "385", "16", "293", "159", "394", "286", "2", "55", "428", "148", "379", "295", "188", "144", "290", "143", "408", "282", "280", "270", "255", "90", "269", "279", "381", "176", "102", "2", "230", "148", "377", "159", "432", "37", "156", "261", "77", "281", "390", "282", "418", "180", "402", "255", "234", "32", "427", "144", "279", "436", "77", "55", "417", "143", "386", "293", "176", "440", "102", "37", "230", "375", "148", "286", "411");
+    private final CardRun legendU = new CardRun(true, "16", "282", "234", "32",        "395", "180", "293", "290", "410", "156", "295", "269", "387", "281", "280", "77", "426", "143", "188", "176", "391", "90", "37", "55", "16", "407", "2", "261", "180", "393", "286", "439", "295", "32", "159", "429", "290", "156", "102",        "281", "380", "269", "261", "188", "144", "398", "234", "280", "230", "90", "399", "255", "279", "385", "16", "293", "159", "394", "286", "2", "55", "428", "148", "379", "295", "188", "144", "290", "143", "408", "282", "280",        "255", "90", "269", "279", "381", "176", "102", "2", "230", "148", "377", "159", "432", "37", "156", "261", "77", "281", "390", "282",        "180", "402", "255", "234", "32", "427", "144", "279", "436", "77", "55", "417", "143", "386", "293", "176", "440", "102", "37", "230", "375", "148", "286", "411");
+ // removed Alaundo the Seer (not yet implemented)
+ // private final CardRun legendR = new CardRun(false, "264", "264", "265", "265", "266", "266", "267", "267", "268", "268", "272", "272", "273", "273", "72", "72", "275", "275", "276", "276", "237", "237", "277", "277", "278", "278", "29", "29", "283", "283", "284", "284", "287", "287", "288", "288", "289", "289", "291", "291", "292", "292", "146", "146", "271", "271", "208", "208", "296", "296");
+    private final CardRun legendR = new CardRun(false,               "265", "265", "266", "266", "267", "267", "268", "268", "272", "272", "273", "273", "72", "72", "275", "275", "276", "276", "237", "237", "277", "277", "278", "278", "29", "29", "283", "283", "284", "284", "287", "287", "288", "288", "289", "289", "291", "291", "292", "292", "146", "146", "271", "271", "208", "208", "296", "296");
+    private final CardRun legendM = new CardRun(false, "274", "186", "285", "294", "103");
+    private final CardRun background = new CardRun(false, "60", "18", "241", "145", "200"
+                                                        , "60", "18", "241", "145", "200"
+                                                        , "60", "18", "241", "145", "200"
+                                                        , "60", "18", "241", "145", "200"
+                                                        , "60", "18", "241", "145", "200"
+                                                        , "212", "212", "107", "108", "221", "122", "170", "67", "17", "70", "179", "235", "28", "197", "98", "48"
+                                                        , "212", "212", "107", "108", "221", "122", "170", "67", "17", "70", "179", "235", "28", "197", "98", "48"
+                                                        , "123", "35", "192", "250", "96");
+ // removed Windshaper Planetar (not yet implemented)
+ // private final CardRun rare = new CardRun(false, "109", "109", "4", "4", "5", "5", "114", "114", "345", "345", "217", "217", "300", "300", "301", "301", "348", "348", "118", "118", "167", "167", "169", "169", "63", "63", "228", "228", "125", "125", "126", "126", "172", "172", "174", "174", "314", "314", "73", "73", "26", "26", "76", "76", "132", "132", "238", "238", "81", "81", "30", "30", "355", "355", "324", "324", "326", "326", "242", "242", "357", "357", "246", "246", "142", "142", "358", "358", "91", "91", "42", "42", "360", "360", "361", "361", "100", "100", "258", "258", "260", "260", "204", "204", "49", "49", "50", "50", "105", "105", "207", "207", "209", "209", "111", "214", "161", "3", "56", "162", "9", "116", "218", "68", "71", "31", "240", "328", "139", "196", "343");
+    private final CardRun rare = new CardRun(false, "109", "109", "4", "4", "5", "5", "114", "114", "345", "345", "217", "217", "300", "300", "301", "301", "348", "348", "118", "118", "167", "167", "169", "169", "63", "63", "228", "228", "125", "125", "126", "126", "172", "172", "174", "174", "314", "314", "73", "73", "26", "26", "76", "76", "132", "132", "238", "238", "81", "81", "30", "30", "355", "355", "324", "324", "326", "326", "242", "242", "357", "357", "246", "246", "142", "142", "358", "358", "91", "91", "42", "42", "360", "360", "361", "361", "100", "100", "258", "258", "260", "260", "204", "204", "49", "49",             "105", "105", "207", "207", "209", "209", "111", "214", "161", "3", "56", "162", "9", "116", "218", "68", "71", "31", "240", "328", "139", "196", "343");
+
+    private final CardRun foilCommonA = new CardRun(false, "244", "89", "115", "7", "163", "252", "80", "127", "41", "181", "213", "66", "134", "34", "171", "254", "75", "124", "22", "210", "216", "106", "112", "24", "173", "231", "101", "127", "11", "194", "252", "99", "115", "22", "191", "244", "104", "129", "40", "181", "215", "64", "112", "27", "165", "220", "89", "155", "19", "166", "226", "66", "113", "34", "163", "215", "106", "124", "11", "193", "222", "86", "134", "21", "195", "219", "62", "158", "27", "191", "213", "75", "136", "46", "168", "216", "86", "129", "6", "173", "220", "99", "158", "19", "166", "226", "62", "120", "41", "193", "231", "54", "135", "46", "168", "236", "64", "113", "24", "195", "219", "80", "155", "6", "194", "254", "101", "136", "40", "171", "236", "54", "135", "7", "210", "222", "104", "120", "21", "165", "354");
+    private final CardRun foilCommonB = new CardRun(false, "335", "320", "321", "307", "313", "384", "309", "327", "307", "349", "359", "320", "356", "337", "309", "445", "335", "359", "349", "337", "401", "335", "313", "74", "447", "327", "350", "335", "359", "305", "349", "449", "309", "187", "327", "321", "359", "446", "307", "350", "356", "337", "359", "443", "305", "321", "337", "187", "350", "384", "349", "305", "356", "335", "313", "187", "305", "321", "444", "187", "327", "350", "349", "320", "335", "442", "307", "350", "337", "74", "359", "445", "307", "305", "349", "356", "307", "401", "313", "349", "350", "320", "321", "448", "335", "309", "356", "320", "447", "74", "313", "350", "305", "309", "356", "443", "327", "309", "74", "449", "359", "320", "74", "187", "444", "337", "349", "359", "327", "74", "446", "356", "335", "448", "350", "321", "442", "187", "313", "356");
+    private final CardRun foilCommonC = new CardRun(false, "259", "88", "131", "310", "211", "58", "329", "223", "51", "308", "248", "97", "151", "333", "347", "227", "95", "140", "36", "184", "249", "346", "133", "23", "202", "330", "92", "154", "310", "205", "351", "65", "130", "53", "342", "249", "97", "133", "185", "318", "302", "352", "151", "44", "344", "354", "243", "318", "137", "182", "340", "225", "92", "334", "322", "190", "239", "342", "306", "38", "330", "177", "87", "152", "52", "185", "259", "82", "150", "23", "211", "15", "65", "340", "225", "205", "58", "351", "137", "52", "329", "243", "95", "131", "53", "177", "263", "346", "150", "33", "227", "352", "51", "182", "308", "223", "154", "334", "322", "38", "190", "263", "82", "152", "248", "333", "302", "88", "306", "44", "202", "347", "140", "344", "33", "15", "239", "87", "184", "36", "130");
+    private final CardRun foilUncommonA = new CardRun(false, "79", "201", "315", "78", "257", "206", "316", "14", "332", "247", "311", "251", "147", "312", "224", "319", "141", "164", "317", "178", "336", "323", "183", "119", "59", "121", "203", "325", "12", "245", "256", "299", "160", "57", "10", "232", "85", "110", "229", "20", "297", "298", "198", "304", "341", "8", "69", "45", "94", "331", "83", "303", "153", "39", "128", "43", "353", "84", "339", "315", "316", "257", "201", "157", "206", "147", "14", "332", "311", "141", "79", "251", "78", "323", "319", "59", "312", "336", "247", "325", "224", "164", "119", "317", "121", "245", "203", "256", "178", "299", "183", "12", "160", "10", "57", "232", "110", "298", "20", "85", "229", "198", "69", "297", "341", "94", "304", "43", "84", "303", "45", "128", "8", "83", "331", "157", "39", "339", "153", "353");
+    // private final CardRun foilLegendU = new CardRun(false, "16", "282", "234", "32", "270", "395", "180", "293", "290", "410", "156", "295", "269", "387", "281", "280", "77", "426", "143", "188", "176", "391", "90", "37", "55", "16", "407", "2", "261", "180", "393", "286", "439", "295", "32", "159", "429", "290", "156", "102",        "281", "380", "269", "261", "188", "144", "398", "234", "280", "230", "90", "399", "255", "279", "385", "16", "293", "159", "394", "286", "2", "55", "428", "148", "379", "295", "188", "144", "290", "143", "408", "282", "280",        "255", "90", "269", "279", "381", "176", "102", "2", "230", "148", "377", "159", "432", "37", "156", "261", "77", "281", "390", "282",        "180", "402", "255", "234", "32", "427", "144", "279", "436", "77", "55", "417", "143", "386", "293", "176", "440", "102", "37", "230", "375", "148", "286", "411");
+    private final CardRun foilLegendU = new CardRun(false, "16", "282", "234", "32",        "395", "180", "293", "290", "410", "156", "295", "269", "387", "281", "280", "77", "426", "143", "188", "176", "391", "90", "37", "55", "16", "407", "2", "261", "180", "393", "286", "439", "295", "32", "159", "429", "290", "156", "102",        "281", "380", "269", "261", "188", "144", "398", "234", "280", "230", "90", "399", "255", "279", "385", "16", "293", "159", "394", "286", "2", "55", "428", "148", "379", "295", "188", "144", "290", "143", "408", "282", "280",        "255", "90", "269", "279", "381", "176", "102", "2", "230", "148", "377", "159", "432", "37", "156", "261", "77", "281", "390", "282",        "180", "402", "255", "234", "32", "427", "144", "279", "436", "77", "55", "417", "143", "386", "293", "176", "440", "102", "37", "230", "375", "148", "286", "411");
+
+    private final BoosterStructure AAAAABCCCCCCD = new BoosterStructure(
+            commonA, commonA, commonA, commonA, commonA,
+            commonB,
+            commonC, commonC, commonC, commonC, commonC, commonC,
+            commonD
+    );
+    private final BoosterStructure AAAAAABCCCCCD = new BoosterStructure(
+            commonA, commonA, commonA, commonA, commonA, commonA,
+            commonB,
+            commonC, commonC, commonC, commonC, commonC,
+            commonD
+    );
+    private final BoosterStructure AAAAAABCCCCCC = new BoosterStructure(
+            commonA, commonA, commonA, commonA, commonA, commonA,
+            commonB,
+            commonC, commonC, commonC, commonC, commonC, commonC
+    );
+    private final BoosterStructure AAAAAABBCCCCC = new BoosterStructure(
+            commonA, commonA, commonA, commonA, commonA, commonA,
+            commonB, commonB,
+            commonC, commonC, commonC, commonC, commonC
+    );
+    private final BoosterStructure AAAAABBCCCCCC = new BoosterStructure(
+            commonA, commonA, commonA, commonA, commonA,
+            commonB, commonB,
+            commonC, commonC, commonC, commonC, commonC, commonC
+    );
+
+    private final BoosterStructure AAAU = new BoosterStructure(
+            uncommonA, uncommonA, uncommonA,
+            legendU,
+            background
+    );
+    private final BoosterStructure AAAR = new BoosterStructure(
+            uncommonA, uncommonA, uncommonA,
+            background,
+            legendR
+    );
+    private final BoosterStructure AABU = new BoosterStructure(
+            uncommonA, uncommonA,
+            uncommonB,
+            legendU,
+            background
+    );
+    private final BoosterStructure AABR = new BoosterStructure(
+            uncommonA, uncommonA,
+            uncommonB,
+            background,
+            legendR
+    );
+    private final BoosterStructure AABM = new BoosterStructure(
+            uncommonA, uncommonA,
+            uncommonB,
+            legendM,
+            background
+    );
+    private final BoosterStructure AAUU = new BoosterStructure(
+            uncommonA, uncommonA,
+            legendU, legendU,
+            background
+    );
+    private final BoosterStructure AAUR = new BoosterStructure(
+            uncommonA, uncommonA,
+            legendU,
+            background,
+            legendR
+    );
+
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+    private final BoosterStructure fcA = new BoosterStructure(foilCommonA);
+    private final BoosterStructure fcB = new BoosterStructure(foilCommonB);
+    private final BoosterStructure fcC = new BoosterStructure(foilCommonC);
+    private final BoosterStructure fuA = new BoosterStructure(foilUncommonA);
+    private final BoosterStructure fuB = new BoosterStructure(uncommonB);
+    private final BoosterStructure fbk = new BoosterStructure(background);
+    private final BoosterStructure fuL = new BoosterStructure(legendU);
+    private final BoosterStructure frL = new BoosterStructure(legendR);
+    private final BoosterStructure fmL = new BoosterStructure(legendM);
+
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 5.7 A commons (9317 / 1632)
+    // 1.4 B commons (2310 / 1632)
+    // 5.7 C commons (9317 / 1632)
+    private final RarityConfiguration commonRunsD = new RarityConfiguration(AAAAABCCCCCCD, AAAAAABCCCCCD);
+    private final RarityConfiguration commonRunsB = new RarityConfiguration(AAAAAABCCCCCC);
+    private final RarityConfiguration commonRunsBB = new RarityConfiguration(AAAAAABBCCCCC, AAAAABBCCCCCC);
+    private static final RarityConfiguration commonRuns() {
+        int runRoll = RandomUtil.nextInt(816);
+        // return ( runRoll < 475 ? runRoll < 136 ? commonRunsD : commonRunsBB : commonRunsB );
+        if (runRoll < 136) {
+            return commonRunsD;
+        } else if (runRoll < 475) {
+            return commonRunsBB;
+        } else {
+            return commonRunsB;
+        }
+    }
+
+    // Using legend - 2/71 M , 20/71 R , 49/71 U - which matches 31% rare/mythic stated
+    // Using background - 2/24 R , 11/24 U , 11/24 C - which matches 1/12 rare stated
+    // In order for equal numbers of each uncommon A & B to exist, the average booster must contain:
+    // 2.04 A uncommons (2088820 / 1022400)
+    // 0.51 B uncommons ( 522205 / 1022400)
+    // 1.14 U legends   (1161775 / 1022400)       
+    // 0.28 R legends   ( 288000 / 1022400)       
+    // 0.03 M legends   (  28800 / 1022400)       
+    private final RarityConfiguration uncommonRunsA = new RarityConfiguration(AAAU, AAAU, AAAU, AAAU, AAAR);
+    private final RarityConfiguration uncommonRunsM = new RarityConfiguration(AABM);
+    private final RarityConfiguration uncommonRunsB = new RarityConfiguration(AABU, AABU, AABU, AABU, AABR);
+    private final RarityConfiguration uncommonRunsUU = new RarityConfiguration(AAUU);
+    private final RarityConfiguration uncommonRunsUR = new RarityConfiguration(AAUR);
+    private static final RarityConfiguration uncommonRuns() {
+        int runRoll = RandomUtil.nextInt(204480);
+        // return ( 168377> runRoll ? 113245> runRoll ? 14564> runRoll ? 8804> runRoll ?
+            // uncommonRunsA : uncommonRunsM : uncommonRunsB : uncommonRunsUU : uncommonRunsUR );
+        if (runRoll < 8804) {
+            return uncommonRunsA;
+        } else if (runRoll < 14564) {
+            return uncommonRunsM;
+        } else if (runRoll < 113245) {
+            return uncommonRunsB;
+        } else if (runRoll < 168377) {
+            return uncommonRunsUU;
+        } else {
+            return uncommonRunsUR;
+        }
+    }
+
+    private final RarityConfiguration rareRuns = new RarityConfiguration(R1);
+
+    // Foil - 136 C , 75 U , 47 R , 17 M , 25 background (5 C + 15 U + 5 R) 60 legend (30 U + 25 R + 5 M)
+    // using /2066 - 1360 C , 300 U , 94 R , 17 M , 120 background , (legend: 120 U, 50 R, 5 M)
+    private final RarityConfiguration foilRunsC = new RarityConfiguration(
+        fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA,
+        fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA,
+        fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA,
+        fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA,
+        fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA,
+        fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA,
+
+        fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA,
+        fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA,
+        fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA,
+        fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA,
+        fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA,
+        fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA, fcA,
+
+        fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB,
+        fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB,
+        fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB,
+
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC
+    );
+    private final RarityConfiguration foilRunsU = new RarityConfiguration(fuA, fuA, fuA, fuA, fuB);
+    private final RarityConfiguration foilRunsRM = new RarityConfiguration(R1);
+    private final RarityConfiguration foilRunsBk = new RarityConfiguration(fbk);
+    private final RarityConfiguration foilRunsLeg = new RarityConfiguration(
+        fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL,
+        fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL,
+        fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL,
+        fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL,
+        fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL,
+        fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL, fuL,
+
+        fuR, fuR, fuR, fuR, fuR, fuR, fuR, fuR, fuR, fuR,
+        fuR, fuR, fuR, fuR, fuR, fuR, fuR, fuR, fuR, fuR,
+        fuR, fuR, fuR, fuR, fuR,
+
+        fuM
+    );
+    // using /2066 - 1360 C , 300 U , 94 R , 17 M , 120 background , (legend: 120 U, 50 R, 5 M)
+    private static final RarityConfiguration foilRuns() {
+        int runRoll = RandomUtil.nextInt(2066);
+        // return ( 1891> runRoll ? 1771> runRoll ? 1660> runRoll ? 1360> runRoll ?
+            // foilRunsC : foilRunsU : foilRunsRM : foilRunsBk : foilRunsLeg );
+        if (runRoll < 1360) {
+            return foilRunsC;
+        } else if (runRoll < 1660) {
+            return foilRunsU;
+        } else if (runRoll < 1771) {
+            return foilRunsRM;
+        } else if (runRoll < 1891) {
+            return foilRunsBk;
+        } else {
+            return foilRunsLeg;
+        }
+    }
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+
+        booster.addAll(commonRuns().getNext().makeRun());
+        booster.addAll(uncommonRuns().getNext().makeRun());
+        booster.addAll(rareRuns.getNext().makeRun());
+        booster.addAll(foilRuns().getNext().makeRun());
+
+        return booster;
     }
 }
