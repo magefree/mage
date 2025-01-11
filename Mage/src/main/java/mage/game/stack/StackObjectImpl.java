@@ -6,6 +6,7 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.costs.mana.ActivationManaAbilityStep;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.choices.Choice;
 import mage.choices.ChoiceHintType;
@@ -31,6 +32,7 @@ import java.util.stream.Collectors;
 public abstract class StackObjectImpl implements StackObject {
 
     protected boolean targetChanged; // for Psychic Battle
+    protected ActivationManaAbilityStep currentActivatingManaAbilitiesStep = ActivationManaAbilityStep.BEFORE;
 
     @Override
     public void createCopyOnStack(Game game, Ability source, UUID newControllerId, boolean chooseNewTargets) {
@@ -484,5 +486,16 @@ public abstract class StackObjectImpl implements StackObject {
     @Override
     public void setTargetChanged(boolean targetChanged) {
         this.targetChanged = targetChanged;
+    }
+
+
+    @Override
+    public ActivationManaAbilityStep getCurrentActivatingManaAbilitiesStep() {
+        return this.currentActivatingManaAbilitiesStep;
+    }
+
+    @Override
+    public void setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep currentActivatingManaAbilitiesStep) {
+        this.currentActivatingManaAbilitiesStep = currentActivatingManaAbilitiesStep;
     }
 }

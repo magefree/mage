@@ -64,7 +64,6 @@ public class Spell extends StackObjectImpl implements Card {
     private int startingLoyalty;
     private int startingDefense;
 
-    private ActivationManaAbilityStep currentActivatingManaAbilitiesStep = ActivationManaAbilityStep.BEFORE;
 
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone, Game game) {
         this(card, ability, controllerId, fromZone, game, false);
@@ -505,14 +504,6 @@ public class Spell extends StackObjectImpl implements Card {
         if (player != null) {
             putCard.moveCard(player, card, source, game, "countered spell");
         }
-    }
-
-    public ActivationManaAbilityStep getCurrentActivatingManaAbilitiesStep() {
-        return this.currentActivatingManaAbilitiesStep;
-    }
-
-    public void setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep currentActivatingManaAbilitiesStep) {
-        this.currentActivatingManaAbilitiesStep = currentActivatingManaAbilitiesStep;
     }
 
     @Override
