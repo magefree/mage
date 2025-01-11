@@ -3080,8 +3080,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
-        computerPlayer.controlPlayersTurn(game, playerUnderControlId, info);
+    public boolean controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
+        return computerPlayer.controlPlayersTurn(game, playerUnderControlId, info);
     }
 
     @Override

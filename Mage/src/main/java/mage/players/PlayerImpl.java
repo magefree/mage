@@ -598,8 +598,17 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
+    public boolean controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
         Player playerUnderControl = game.getPlayer(playerUnderControlId);
+
+        // TODO: add support computer over computer
+        // TODO: add support computer over human
+        if (this.isComputer()) {
+            // not supported yet
+            game.informPlayers(getLogName() + " is AI and can't take control over " + playerUnderControl.getLogName() + info);
+            return false;
+        }
+
         playerUnderControl.setTurnControlledBy(this.getId());
         game.informPlayers(getLogName() + " taken turn control of " + playerUnderControl.getLogName() + info);
         if (!playerUnderControlId.equals(this.getId())) {
@@ -609,6 +618,8 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
             // control will reset on start of the turn
         }
+
+        return true;
     }
 
     @Override
@@ -777,10 +788,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         // if this method was called from a replacement event, pass the number of cards back through
         // (uncomment conditions if correct ruling is to only count cards drawn by the same player)
-        if (event instanceof DrawCardEvent /* && event.getPlayerId().equals(getId()) */ ) {
+        if (event instanceof DrawCardEvent /* && event.getPlayerId().equals(getId()) */) {
             ((DrawCardEvent) event).incrementCardsDrawn(numDrawn);
         }
-        if (event instanceof DrawTwoOrMoreCardsEvent /* && event.getPlayerId().equals(getId()) */ ) {
+        if (event instanceof DrawTwoOrMoreCardsEvent /* && event.getPlayerId().equals(getId()) */) {
             ((DrawTwoOrMoreCardsEvent) event).incrementCardsDrawn(numDrawn);
         }
         return numDrawn;

@@ -360,9 +360,14 @@ public class HumanPlayer extends PlayerImpl {
 
             // async command: cheat by current player
             if (response.getAsyncWantCheat()) {
-                // execute cheats and continue
+                // run cheats
                 SystemUtil.executeCheatCommands(game, null, this);
-                game.fireUpdatePlayersEvent(); // need force to game update for new possible data
+                // force to game update for new possible data
+                game.fireUpdatePlayersEvent();
+                // must stop current dialog on changed control, so game can give priority to actual player
+                if (this.isGameUnderControl() != game.getPlayer(this.getId()).isGameUnderControl()) {
+                    return;
+                }
                 // wait another answer
                 if (canRespond()) {
                     loop = true;

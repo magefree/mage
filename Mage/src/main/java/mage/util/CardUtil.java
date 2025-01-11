@@ -1358,7 +1358,11 @@ public final class CardUtil {
      */
     public static void takeControlUnderPlayerStart(Game game, Ability source, Player controller, Player playerUnderControl, boolean givePauseForResponse) {
         // game logs added in child's call
-        controller.controlPlayersTurn(game, playerUnderControl.getId(), CardUtil.getSourceLogName(game, source));
+        if (!controller.controlPlayersTurn(game, playerUnderControl.getId(), CardUtil.getSourceLogName(game, source))) {
+            return;
+        }
+
+        // give pause, so new controller can look around battlefield and hands before finish controlling choose dialog
         if (givePauseForResponse) {
             while (controller.canRespond()) {
                 if (controller.chooseUse(Outcome.Benefit, "You got control of " + playerUnderControl.getLogName()

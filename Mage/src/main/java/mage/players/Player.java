@@ -341,8 +341,9 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @param playerUnderControlId
      * @param info                 additional info to show in game logs like source
+     * @return false on failed taken control, e.g. on unsupported player type
      */
-    void controlPlayersTurn(Game game, UUID playerUnderControlId, String info);
+    boolean controlPlayersTurn(Game game, UUID playerUnderControlId, String info);
 
     /**
      * Sets player {@link UUID} who controls this player's turn.
