@@ -204,7 +204,9 @@ public class ComputerPlayer extends PlayerImpl {
             for (Permanent permanent : targets) {
                 if (origTarget.canTarget(abilityControllerId, permanent.getId(), source, game, false) && !target.getTargets().contains(permanent.getId())) {
                     target.add(permanent.getId(), game);
-                    return true;
+                    if (target.isChosen(game)) {
+                        return true;
+                    }
                 }
             }
             return false;
