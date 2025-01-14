@@ -51,7 +51,9 @@ public class AddCardTypeSourceEffect extends ContinuousEffectImpl {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null
-                && (affectedObjectList.contains(new MageObjectReference(permanent, game)) || !duration.isOnlyValidIfNoZoneChange())) {
+                && (affectedObjectList.contains(new MageObjectReference(permanent, game))
+                // Workaround to support abilities like "As long as __, this permanent is a __ in addition to its other types."
+                || !duration.isOnlyValidIfNoZoneChange())) {
             for (CardType cardType : addedCardTypes) {
                 permanent.addCardType(game, cardType);
             }
