@@ -70,8 +70,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
         //20091005 - 603.4
         if (checkInterveningIfClause(game)) {
-            setLastTrigger(game);
-            updateTriggerCount(game);
+            updateTurnCount(game);
+            updateGameCount(game);
             game.addTriggeredAbility(this, triggeringEvent);
         }
     }
@@ -80,13 +80,6 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     private String getKeyLastTurnTriggered(Game game) {
         return CardUtil.getCardZoneString(
                 "lastTurnTriggered|" + getOriginalId(), getSourceId(), game
-        );
-    }
-
-    // Used for triggers with a per-game limit.
-    private String getKeyAlreadyTriggered(Game game) {
-        return CardUtil.getCardZoneString(
-                "alreadyTriggered|" + getOriginalId(), getSourceId(), game
         );
     }
 
@@ -104,7 +97,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         );
     }
 
-    private void setLastTrigger(Game game) {
+    private void updateTurnCount(Game game) {
         if (triggerLimitEachTurn == Integer.MAX_VALUE) {
             return;
         }
@@ -123,22 +116,14 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         }
     }
 
-    private void updateTriggerCount(Game game) {
+    private void updateGameCount(Game game) {
         if (triggerLimitEachGame == Integer.MAX_VALUE) {
             return;
         }
-        String keyAlreadyTriggered = getKeyAlreadyTriggered(game);
         String keyGameTriggeredCount = getKeyGameTriggeredCount(game);
-        Boolean alreadyTriggered = (Boolean) game.getState().getValue(keyAlreadyTriggered);
-        if (alreadyTriggered != null && alreadyTriggered) {
-            // Ability already triggered this game, incrementing the count.
-            int lastCount = Optional.ofNullable((Integer) game.getState().getValue(keyGameTriggeredCount)).orElse(0);
-            game.getState().setValue(keyGameTriggeredCount, lastCount + 1);
-        } else {
-            // first trigger for Ability this game.
-            game.getState().setValue(keyAlreadyTriggered, Boolean.TRUE);
-            game.getState().setValue(keyGameTriggeredCount, 1);
-        }
+        int lastCount = Optional.ofNullable((Integer) game.getState().getValue(keyGameTriggeredCount)).orElse(0);
+        // Incrementing the count.
+        game.getState().setValue(keyGameTriggeredCount, lastCount + 1);
     }
 
     @Override
@@ -209,17 +194,9 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         if (triggerLimitEachGame == Integer.MAX_VALUE) {
             return Integer.MAX_VALUE;
         }
-        String keyAlreadyTriggered = getKeyAlreadyTriggered(game);
-        Boolean alreadyTriggered = (Boolean) game.getState().getValue(keyAlreadyTriggered);
-        if (alreadyTriggered != null && alreadyTriggered.equals(Boolean.TRUE)) {
-            // Ability already triggered this game, so returning the limit minus the count this game
-            String keyGameTriggeredCount = getKeyGameTriggeredCount(game);
-            int count = Optional.ofNullable((Integer) game.getState().getValue(keyGameTriggeredCount)).orElse(0);
-            return Math.max(0, triggerLimitEachGame - count);
-        } else {
-            // Ability did not trigger this turn, so returning the limit
-            return triggerLimitEachGame;
-        }
+        String keyGameTriggeredCount = getKeyGameTriggeredCount(game);
+        int count = Optional.ofNullable((Integer) game.getState().getValue(keyGameTriggeredCount)).orElse(0);
+        return Math.max(0, triggerLimitEachGame - count);
     }
 
     @Override
