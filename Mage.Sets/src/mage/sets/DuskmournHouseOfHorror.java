@@ -240,6 +240,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Twist Reality", 77, Rarity.COMMON, mage.cards.t.TwistReality.class));
         cards.add(new SetCardInfo("Twitching Doll", 201, Rarity.RARE, mage.cards.t.TwitchingDoll.class));
         cards.add(new SetCardInfo("Tyvar, the Pummeler", 202, Rarity.MYTHIC, mage.cards.t.TyvarThePummeler.class));
+        cards.add(new SetCardInfo("Unable to Scream", 78, Rarity.COMMON, mage.cards.u.UnableToScream.class));
         cards.add(new SetCardInfo("Under the Skin", 203, Rarity.UNCOMMON, mage.cards.u.UnderTheSkin.class));
         cards.add(new SetCardInfo("Unidentified Hovership", 37, Rarity.RARE, mage.cards.u.UnidentifiedHovership.class));
         cards.add(new SetCardInfo("Unnerving Grasp", 80, Rarity.UNCOMMON, mage.cards.u.UnnervingGrasp.class));
