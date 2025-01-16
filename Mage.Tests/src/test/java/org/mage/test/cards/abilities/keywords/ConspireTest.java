@@ -47,6 +47,7 @@ public class ConspireTest extends CardTestPlayerBase {
         setChoice(playerA, "Goblin Roughrider^Raging Goblin"); // tap for conspire
         setChoice(playerA, false); // don't change target
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -54,7 +55,6 @@ public class ConspireTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Burn Trail", 1);
         assertTapped("Goblin Roughrider", true);
         assertTapped("Raging Goblin", true);
-
     }
 
     @Test
@@ -67,6 +67,7 @@ public class ConspireTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Burn Trail", playerB);
         setChoice(playerA, false);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -103,7 +104,6 @@ public class ConspireTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Wort, the Raidmother", 1);
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertLife(playerB, 20 - 3 - 3);
-
     }
 
     @Test
@@ -137,7 +137,6 @@ public class ConspireTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Lightning Bolt", 1);
         assertTapped("Raging Goblin", false);
         assertLife(playerB, 20 - 3 - 3 - 2);
-
     }
 
     @Test
@@ -158,8 +157,10 @@ public class ConspireTest extends CardTestPlayerBase {
         setChoice(playerA, "Goblin Warrior Token", 2); // tap for conspire
         setChoice(playerA, false); // keep targets
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+
         assertPermanentCount(playerA, "Wort, the Raidmother", 1);
         assertLife(playerB, 20 - 3 - 3);
         assertLife(playerA, 20);
@@ -181,22 +182,20 @@ public class ConspireTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Burn Trail", playerB);
         setChoice(playerA, true); // use Conspire from Burn Trail itself
         setChoice(playerA, true); // use Conspire gained from Wort, the Raidmother
-        setChoice(playerA, "When you pay the conspire"); // order triggers
-
         setChoice(playerA, "Goblin Warrior Token", 2); // tap for conspire
-        setChoice(playerA, false); // keep targets
-
         setChoice(playerA, "Raging Goblin", 2); // tap for conspire
+        setChoice(playerA, "When you pay the conspire"); // order triggers
+        setChoice(playerA, false); // keep targets
         setChoice(playerA, false); // keep targets
 
-
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+
         assertPermanentCount(playerA, "Wort, the Raidmother", 1);
         assertLife(playerB, 20 - 3 - 3 - 3);
         assertLife(playerA, 20);
         assertGraveyardCount(playerA, "Burn Trail", 1);
-
     }
 
     @Test
@@ -221,8 +220,10 @@ public class ConspireTest extends CardTestPlayerBase {
         setChoice(playerA, "Goblin Warrior Token", 2); // tap for conspire
         setChoice(playerA, false); // keep targets
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+
         assertPermanentCount(playerA, "Wort, the Raidmother", 1);
         assertPermanentCount(playerA, "Sakashima the Impostor", 1);
         assertLife(playerB, 20 - 3 - 3);
@@ -248,15 +249,16 @@ public class ConspireTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
         setChoice(playerA, true); // use Conspire gained from Wort, the Raidmother
         setChoice(playerA, true); // use Conspire gained from Sakashima the Imposter
+        setChoice(playerA, "Goblin Warrior Token", 2); // tap for conspire
+        setChoice(playerA, "Goblin Warrior Token", 2); // tap for conspire
         setChoice(playerA, "When you pay the conspire"); // order triggers
-
-        setChoice(playerA, "Goblin Warrior Token", 2); // tap for conspire
         setChoice(playerA, false); // keep targets
-        setChoice(playerA, "Goblin Warrior Token", 2); // tap for conspire
         setChoice(playerA, false); // keep targets
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
+
         assertPermanentCount(playerA, "Wort, the Raidmother", 1);
         assertPermanentCount(playerA, "Sakashima the Impostor", 1);
         assertLife(playerB, 20 - 3 - 3 - 3);

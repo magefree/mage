@@ -181,8 +181,8 @@ public class PrimalClayTest extends CardTestPlayerBase {
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, clone);
         setChoice(playerB, true); // whether to copy
-        setFlipCoinResult(playerB, false);
         setChoice(playerB, sentry); // what to copy
+        setFlipCoinResult(playerB, false);
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.BEGIN_COMBAT);
@@ -218,7 +218,7 @@ public class PrimalClayTest extends CardTestPlayerBase {
         // Target creature you control gets +2/+2 until end of turn if its power is 2. Then it fights target creature you don’t control.
         addCard(Zone.BATTLEFIELD, playerB, "Siege Mastodon", 1); // 3/5 creature for fighting
 
-        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aquamorph+" using Morph");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, aquamorph + " using Morph");
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Savage Swipe");
         addTarget(playerA, EmptyNames.FACE_DOWN_CREATURE.getTestCommand()); // morph

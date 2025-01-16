@@ -2293,7 +2293,8 @@ public class TestPlayer implements Player {
                 } else {
                     filterPermanent = ((TargetPermanent) target.getOriginalTarget()).getFilter();
                 }
-                for (String choiceRecord : choices) {
+                while (!choices.isEmpty()) {
+                    String choiceRecord = choices.get(0);
                     String[] targetList = choiceRecord.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
@@ -2332,9 +2333,17 @@ public class TestPlayer implements Player {
                             }
                         }
                     }
-                    if (targetFound) {
-                        choices.remove(choiceRecord);
-                        return true;
+
+                    try {
+                        if (target.isChosen(game)) {
+                            return true;
+                        } else {
+                            if (!targetFound) {
+                                Assert.fail(String.format("Found wrong choice command:\n%s\n%s\n%s", choiceRecord, getInfo(target, game), getInfo(source, game)));
+                            }
+                        }
+                    } finally {
+                        choices.remove(0);
                     }
                 }
             }
