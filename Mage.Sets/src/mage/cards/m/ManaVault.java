@@ -36,7 +36,7 @@ public final class ManaVault extends CardImpl {
         // At the beginning of your upkeep, you may pay {4}. If you do, untap Mana Vault.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DoIfCostPaid(new UntapSourceEffect(), new GenericManaCost(4), "Pay {4} to untap {this}?")
-                        .withChooseHint(new ConditionHint(SourceTappedCondition.TAPPED))
+                        .withChooseHint(new ConditionHint(SourceTappedCondition.UNTAPPED))
         ));
 
         // At the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.
