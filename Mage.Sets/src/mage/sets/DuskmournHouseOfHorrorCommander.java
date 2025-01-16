@@ -105,7 +105,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Explosive Vegetation", 177, Rarity.UNCOMMON, mage.cards.e.ExplosiveVegetation.class));
         cards.add(new SetCardInfo("Extravagant Replication", 117, Rarity.RARE, mage.cards.e.ExtravagantReplication.class));
         cards.add(new SetCardInfo("Ezuri's Predation", 178, Rarity.RARE, mage.cards.e.EzurisPredation.class));
-        cards.add(new SetCardInfo("Falkenrath Noble", 140, Rarity.UNCOMMON, mage.cards.f.FalkenrathNoble.class));
+        cards.add(new SetCardInfo("Falkenrath Noble", 140, Rarity.COMMON, mage.cards.f.FalkenrathNoble.class));
         cards.add(new SetCardInfo("Fate Unraveler", 141, Rarity.RARE, mage.cards.f.FateUnraveler.class));
         cards.add(new SetCardInfo("Fear of Sleep Paralysis", 12, Rarity.RARE, mage.cards.f.FearOfSleepParalysis.class));
         cards.add(new SetCardInfo("Feed the Swarm", 78, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
