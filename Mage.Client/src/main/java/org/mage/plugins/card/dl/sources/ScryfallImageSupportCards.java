@@ -565,6 +565,7 @@ public class ScryfallImageSupportCards {
             add("DSC"); // Duskmourn: House of Horror Commander
             add("FDN"); // Foundations
             add("J25"); // Foundations Jumpstart
+            add("INR"); // Innistrad Remastered
             add("DFT"); // Aetherdrift
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
