@@ -38,9 +38,10 @@ public class LoseAllAbilitiesAttachedEffect extends ContinuousEffectImpl {
             Permanent creature = game.getPermanent(equipment.getAttachedTo());
             if (creature != null) {
                 creature.removeAllAbilities(source.getSourceId(), game);
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     private void setText() {

@@ -37,8 +37,7 @@ public final class UnableToScream extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget));
 
-        // Enchanted creature loses all abilities and is a Toy artifact creature with base power and toughness 0/2
-        // in addition to its other types.
+        // Enchanted creature loses all abilities and is a Toy artifact creature with base power and toughness 0/2 in addition to its other types.
         Ability ability = new SimpleStaticAbility(new LoseAllAbilitiesAttachedEffect(AttachmentType.AURA));
         ability.addEffect(new AddCardSubtypeAttachedEffect(SubType.TOY, AttachmentType.AURA).setText(" and is a Toy"));
         ability.addEffect(new AddCardTypeAttachedEffect(CardType.ARTIFACT, AttachmentType.AURA).setText(" artifact creature"));
@@ -78,12 +77,14 @@ class UnableToScreamPreventingEffect extends ContinuousRuleModifyingEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent aura = game.getPermanent(source.getSourceId());
-        if (aura == null)
+        if (aura == null) {
             return false;
+        }
 
         Permanent creature = game.getPermanent(aura.getAttachedTo());
-        if (creature == null)
+        if (creature == null) {
             return false;
+        }
 
         return creature.isFaceDown(game) && event.getTargetId().equals(creature.getId());
     }
