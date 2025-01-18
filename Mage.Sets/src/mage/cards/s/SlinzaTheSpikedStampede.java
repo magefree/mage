@@ -35,6 +35,7 @@ public final class SlinzaTheSpikedStampede extends CardImpl {
     private static final FilterPermanent filter3 = new FilterCreaturePermanent("creature with power 4 or greater");
 
     static {
+        filter.add(SubType.BEAST.getPredicate());
         filter3.add(new PowerPredicate(ComparisonType.MORE_THAN, 3));
     }
 
