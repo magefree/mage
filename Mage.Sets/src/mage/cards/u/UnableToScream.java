@@ -2,7 +2,6 @@ package mage.cards.u;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.AddCardSubtypeAttachedEffect;
@@ -90,7 +89,7 @@ class UnableToScreamPreventingEffect extends ContinuousRuleModifyingEffectImpl {
     }
 
     @Override
-    public ContinuousEffect copy() {
+    public UnableToScreamPreventingEffect copy() {
         return new UnableToScreamPreventingEffect(this);
     }
 }
