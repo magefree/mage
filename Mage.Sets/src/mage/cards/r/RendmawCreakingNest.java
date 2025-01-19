@@ -117,10 +117,7 @@ class RendmawCreakingNestEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game)) {
-            if (!game.getPlayer(playerId).isInGame()) {
-                continue;
-            }
+        for (UUID playerId : game.getState().getPlayersInRange(source.getControllerId(), game, true)) {
             Token token = new Black22BirdToken();
             token.putOntoBattlefield(1, game, source, playerId, true, false);
             token.getLastAddedTokenIds().forEach(id -> game.addEffect(
