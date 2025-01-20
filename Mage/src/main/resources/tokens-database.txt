@@ -2366,6 +2366,30 @@
 |Generate|TOK:BLC|Wolf|1||GarrukCursedHuntsmanToken|
 |Generate|TOK:BLC|Wolf|2||WolfToken|
 
+# DSC
+|Generate|TOK:DSC|Angel|||AngelToken|
+|Generate|TOK:DSC|Beast|||BeastToken|
+|Generate|TOK:DSC|Bird|||Black22BirdToken|
+|Generate|TOK:DSC|Demon|||DemonToken|
+|Generate|TOK:DSC|Devil|||DevilToken|
+|Generate|TOK:DSC|Elemental|||TitaniaProtectorOfArgothElementalToken|
+|Generate|TOK:DSC|Fractal|||FractalToken|
+|Generate|TOK:DSC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:DSC|Inkling|||InklingToken|
+|Generate|TOK:DSC|Insect|1||IzoniInsectToken|
+|Generate|TOK:DSC|Insect|2||InsectToken|
+|Generate|TOK:DSC|Insect|3||InsectToken|
+|Generate|TOK:DSC|Insect|4||InsectDeathToken|
+|Generate|TOK:DSC|Ooze|1||OozeToken|
+|Generate|TOK:DSC|Ooze|2||BiogenicOozeToken|
+|Generate|TOK:DSC|Phyrexian Beast|||PhyrexianBeastToken|
+|Generate|TOK:DSC|Shapeshifter|||ShapeshifterDeathtouchToken|
+|Generate|TOK:DSC|Shark|||SharkToken|
+|Generate|TOK:DSC|Spider|||SpiderToken|
+|Generate|TOK:DSC|Treefolk|||WrennAndSevenTreefolkToken|
+|Generate|TOK:DSC|Wurm|1||Wurm55Token|
+|Generate|TOK:DSC|Wurm|2||WurmWithTrampleToken|
+
 # FDN
 |Generate|TOK:FDN|Beast|1||BeastToken|
 |Generate|TOK:FDN|Beast|2||BeastToken2|

@@ -2493,7 +2493,31 @@ public class ScryfallImageSupportTokens {
 
             // DSK
             put("DSK/Emblem Kaito", "https://api.scryfall.com/cards/tdsk/17/en?format=image");
-            
+
+            // DSC
+            put("DSC/Angel", "https://api.scryfall.com/cards/tdsc/2/en?format=image");
+            put("DSC/Beast", "https://api.scryfall.com/cards/tdsc/8/en?format=image");
+            put("DSC/Bird", "https://api.scryfall.com/cards/tdsc/5/en?format=image");
+            put("DSC/Demon", "https://api.scryfall.com/cards/tdsc/6/en?format=image");
+            put("DSC/Devil", "https://api.scryfall.com/cards/tdsc/7/en?format=image");
+            put("DSC/Elemental", "https://api.scryfall.com/cards/tdsc/9/en?format=image");
+            put("DSC/Fractal", "https://api.scryfall.com/cards/tdsc/20/en?format=image");
+            put("DSC/Human Soldier", "https://api.scryfall.com/cards/tdsc/3/en?format=image");
+            put("DSC/Inkling", "https://api.scryfall.com/cards/tdsc/21/en?format=image");
+            put("DSC/Insect/1", "https://api.scryfall.com/cards/tdsc/22/en?format=image");
+            put("DSC/Insect/2", "https://api.scryfall.com/cards/tdsc/10/en?format=image");
+            put("DSC/Insect/3", "https://api.scryfall.com/cards/tdsc/11/en?format=image");
+            put("DSC/Insect/4", "https://api.scryfall.com/cards/tdsc/12/en?format=image");
+            put("DSC/Ooze/1", "https://api.scryfall.com/cards/tdsc/14/en?format=image");
+            put("DSC/Ooze/2", "https://api.scryfall.com/cards/tdsc/13/en?format=image");
+            put("DSC/Phyrexian Beast", "https://api.scryfall.com/cards/tdsc/15/en?format=image");
+            put("DSC/Shapeshifter", "https://api.scryfall.com/cards/tdsc/1/en?format=image");
+            put("DSC/Shark", "https://api.scryfall.com/cards/tdsc/4/en?format=image");
+            put("DSC/Spider", "https://api.scryfall.com/cards/tdsc/16/en?format=image");
+            put("DSC/Treefolk", "https://api.scryfall.com/cards/tdsc/17/en?format=image");
+            put("DSC/Wurm/1", "https://api.scryfall.com/cards/tdsc/18/en?format=image");
+            put("DSC/Wurm/2", "https://api.scryfall.com/cards/tdsc/19/en?format=image");
+
             // FDN
             put("FDN/Beast/1", "https://api.scryfall.com/cards/tfdn/32/en?format=image");
             put("FDN/Beast/2", "https://api.scryfall.com/cards/tfdn/33/en?format=image");
