@@ -1,6 +1,7 @@
 package mage.cards.k;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -98,36 +99,30 @@ class KassandraEagleBearerEffect extends OneShotEffect {
             }
         }
 
-        // Hand is a hidden zone - you may fail to find a Spear of Leonidas that's in your hand.
-        // 701.19b. If a player is searching a hidden zone for cards with a stated quality, such as a card with a
-        //   certain card type or color, that player isn't required to find some or all of those cards even if they're
-        //   present in that zone.
-        // This is true even if your hand is revealed:
-        // 400.2. ... Hidden zones are zones in which not all players can be expected to see the cards' faces.
-        //   Library and hand are hidden zones, even if all the cards in one such zone happen to be revealed.
         if (spearCard == null) {
             FilterCard filter2 = new FilterCard("card from your hand named The Spear of Leonidas");
             filter2.add(new NamePredicate(spearName));
-            TargetCard target = new TargetCard(0, 1, Zone.HAND, filter2);
-            target.withNotTarget(true);
-            Cards cards = new CardsImpl();
-            cards.addAllCards(controller.getHand().getCards(filter, source.getControllerId(), source, game));
-            if (!cards.isEmpty()) {
-                controller.choose(outcome, cards, target, source, game);
-                for (UUID id : target.getTargets()) {
-                    spearCard = game.getCard(id);
-                }
+            Cards spears = new CardsImpl();
+            spears.addAllCards(controller.getHand().getCards(filter, source.getControllerId(), source, game));
+            Set<Card> spearsInGraveyard = controller.getGraveyard().getCards(filter, source.getControllerId(), source, game);
+            TargetCard target;
+            if (spearsInGraveyard.isEmpty()) {
+                // Hand is a hidden zone - you may fail to find a Spear of Leonidas that's in your hand.
+                // 701.19b. If a player is searching a hidden zone for cards with a stated quality, such as a card with a
+                //   certain card type or color, that player isn't required to find some or all of those cards even if they're
+                //   present in that zone.
+                // This is true even if your hand is revealed:
+                // 400.2. ... Hidden zones are zones in which not all players can be expected to see the cards' faces.
+                //   Library and hand are hidden zones, even if all the cards in one such zone happen to be revealed.
+                target = new TargetCard(0, 1, Zone.HAND, filter);
+            } else {
+                spears.addAllCards(spearsInGraveyard);
+                // You cannot fail to find a spear if there is one in your graveyard, because the graveyard is not hidden.
+                target = new TargetCard(1, 1, Zone.HAND, filter);
             }
-        }
-
-        // You cannot fail to find a spear if there is one in your graveyard, because the graveyard is not hidden.
-        if (spearCard == null) {
-            TargetCard target = new TargetCard(1, 1, Zone.GRAVEYARD, filter);
             target.withNotTarget(true);
-            Cards cards = new CardsImpl();
-            cards.addAllCards(controller.getGraveyard().getCards(filter, source.getControllerId(), source, game));
-            if (!cards.isEmpty()) {
-                controller.choose(outcome, cards, target, source, game);
+            if (!spears.isEmpty()) {
+                controller.choose(outcome, spears, target, source, game);
                 for (UUID id : target.getTargets()) {
                     spearCard = game.getCard(id);
                 }
