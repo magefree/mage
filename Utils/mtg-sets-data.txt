@@ -13,6 +13,7 @@ Alchemy: Innistrad|Y22|
 Adventures in the Forgotten Realms|AFR|
 Forgotten Realms Commander|AFC|
 Aetherdrift|DFT|
+Aetherdrift Commander|DRC|
 Aether Revolt|AER|
 Amonkhet|AKH|
 Shards of Alara|ALA|

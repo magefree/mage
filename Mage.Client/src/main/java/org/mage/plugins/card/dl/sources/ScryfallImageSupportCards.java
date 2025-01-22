@@ -567,6 +567,7 @@ public class ScryfallImageSupportCards {
             add("J25"); // Foundations Jumpstart
             add("INR"); // Innistrad Remastered
             add("DFT"); // Aetherdrift
+            add("DRC"); // Aetherdrift Commander
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
