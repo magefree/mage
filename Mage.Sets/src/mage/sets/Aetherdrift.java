@@ -42,6 +42,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Riverpyre Verge", 260, Rarity.RARE, mage.cards.r.RiverpyreVerge.class));
         cards.add(new SetCardInfo("Rugged Highlands", 262, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Scoured Barrens", 263, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
+        cards.add(new SetCardInfo("Sunbillow Verge", 264, Rarity.RARE, mage.cards.s.SunbillowVerge.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 265, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
         cards.add(new SetCardInfo("Thornwood Falls", 266, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
