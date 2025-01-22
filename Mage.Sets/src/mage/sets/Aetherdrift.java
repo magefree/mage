@@ -25,6 +25,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Bloodfell Caves", 251, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Bloodghast", 77, Rarity.RARE, mage.cards.b.Bloodghast.class));
         cards.add(new SetCardInfo("Blossoming Sands", 252, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
+        cards.add(new SetCardInfo("Boosted Sloop", 190, Rarity.UNCOMMON, mage.cards.b.BoostedSloop.class));
         cards.add(new SetCardInfo("Brightglass Gearhulk", 191, Rarity.MYTHIC, mage.cards.b.BrightglassGearhulk.class));
         cards.add(new SetCardInfo("Daretti, Rocketeer Engineer", 120, Rarity.RARE, mage.cards.d.DarettiRocketeerEngineer.class));
         cards.add(new SetCardInfo("Dismal Backwater", 254, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
