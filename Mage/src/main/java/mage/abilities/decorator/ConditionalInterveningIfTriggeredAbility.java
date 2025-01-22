@@ -7,6 +7,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.abilities.hint.Hint;
 import mage.constants.EffectType;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -14,6 +15,7 @@ import mage.game.events.GameEvent;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -109,6 +111,13 @@ public class ConditionalInterveningIfTriggeredAbility extends TriggeredAbilityIm
     @Override
     public void addWatcher(Watcher watcher) {
         ability.addWatcher(watcher);
+    }
+
+    @Override
+    public List<Hint> getHints() {
+        List<Hint> res = new ArrayList<>(super.getHints());
+        res.addAll(ability.getHints());
+        return res;
     }
 
     @Override
