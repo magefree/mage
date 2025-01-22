@@ -18,7 +18,7 @@ public final class Aetherdrift extends ExpansionSet {
     private Aetherdrift() {
         super("Aetherdrift", "DFT", ExpansionSet.buildDate(2025, 2, 14), SetType.EXPANSION);
         this.blockName = "Aetherdrift"; // for sorting in GUI
-        this.hasBasicLands = false; // temporary
+        this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 
         cards.add(new SetCardInfo("Air Response Unit", 1, Rarity.UNCOMMON, mage.cards.a.AirResponseUnit.class));
