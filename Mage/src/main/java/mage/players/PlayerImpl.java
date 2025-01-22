@@ -366,7 +366,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary();
         this.drawsFromBottom = player.isDrawsFromBottom();
         this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
-        this.alternativeSourceCosts = CardUtil.deepCopyObject(player.getAlternativeSourceCosts());
+        this.alternativeSourceCosts = CardUtil.deepCopyObject(((PlayerImpl) player).alternativeSourceCosts);
 
         this.topCardRevealed = player.isTopCardRevealed();
 
