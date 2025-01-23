@@ -19,6 +19,7 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
 
         // ai must block
         aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("x1 blocker", 1, playerB, "Balduvian Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -37,8 +38,9 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
 
         attack(1, playerA, "Arbor Elf");
 
-        // ai must block
+        // ai must block by optimal blocker
         aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("x1 optimal blocker", 1, playerB, "Balduvian Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -58,6 +60,7 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
 
         // ai must block
         aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("x1 blocker", 1, playerB, "Arbor Elf");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -78,6 +81,7 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
 
         // ai must not block
         aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("no blockers", 1, playerB, "");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -100,6 +104,7 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
 
         // ai must not block
         aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("no blockers", 1, playerB, "");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -123,6 +128,7 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
 
         // ai must block bigger attacker and survive (6/6 must block 5/5)
         aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("x1 optimal blocker", 1, playerB, "Colossal Dreadmaw");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -151,6 +157,7 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
 
         // ai must block bigger attacker and survive (3/3 must block 2/2)
         aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("x1 optimal blocker", 1, playerB, "Spectral Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
@@ -175,6 +182,7 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
 
         // ai must use smaller blocker and survive (3/3 must block 2/2)
         aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("x1 optimal blocker", 1, playerB, "Spectral Bears");
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);

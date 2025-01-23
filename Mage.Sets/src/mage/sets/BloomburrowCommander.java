@@ -104,6 +104,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Farseek", 119, Rarity.UNCOMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Fellwar Stone", 269, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Ferrous Lake", 303, Rarity.RARE, mage.cards.f.FerrousLake.class));
+        cards.add(new SetCardInfo("Fisher's Talent", 36, Rarity.RARE, mage.cards.f.FishersTalent.class));
         cards.add(new SetCardInfo("Flooded Grove", 304, Rarity.RARE, mage.cards.f.FloodedGrove.class));
         cards.add(new SetCardInfo("Flubs, the Fool", 356, Rarity.MYTHIC, mage.cards.f.FlubsTheFool.class));
         cards.add(new SetCardInfo("Forgotten Ancient", 217, Rarity.RARE, mage.cards.f.ForgottenAncient.class));

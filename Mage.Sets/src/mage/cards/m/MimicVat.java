@@ -42,7 +42,7 @@ public final class MimicVat extends CardImpl {
         // Imprint - Whenever a nontoken creature dies, you may exile that card. If you do, return each other card exiled with Mimic Vat to its owner's graveyard.
         this.addAbility(new MimicVatTriggeredAbility());
 
-        // {3}, {tap}: Create a token that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
+        // {3}, {T}: Create a token that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(new MimicVatCreateTokenEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

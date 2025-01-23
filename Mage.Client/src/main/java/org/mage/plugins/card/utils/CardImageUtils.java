@@ -185,7 +185,7 @@ public final class CardImageUtils {
         try {
             TVFS.umount();
         } catch (FsSyncException e) {
-            LOGGER.fatal("Couldn't unmount zip files on searching broken images " + e, e);
+            LOGGER.error("Couldn't unmount zip files on searching broken images " + e, e);
         }
 
         // real images check is slow, so it used on images download only (not here)

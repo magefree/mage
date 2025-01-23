@@ -3,6 +3,7 @@ Alchemy: Innistrad|AlchemyInnistrad|
 Adventures in the Forgotten Realms|AdventuresInTheForgottenRealms|
 Forgotten Realms Commander|ForgottenRealmsCommander|
 Aetherdrift|Aetherdrift|
+Aetherdrift Commander|AetherdriftCommander|
 Aether Revolt|AetherRevolt|
 Alara Reborn|AlaraReborn|
 Alliances|Alliances|

@@ -78,8 +78,9 @@ public class RemoveCounterCost extends CostImpl {
 
         Outcome outcome;
         if (target instanceof TargetPermanent) {
-            outcome = Outcome.UnboostCreature;
-        } else if (target instanceof TargetCard) {  // For Mari, the Killing Quill
+            outcome = Outcome.AIDontUseIt;
+        } else if (target instanceof TargetCard) {
+            // Mari, the Killing Quill - AI can safely use it all the time
             outcome = Outcome.Neutral;
         } else {
             throw new IllegalArgumentException(
@@ -123,7 +124,7 @@ public class RemoveCounterCost extends CostImpl {
                 }
                 choice.setChoices(choices);
                 choice.setMessage("Choose a counter to remove from " + targetObject.getLogName());
-                if (!controller.choose(Outcome.UnboostCreature, choice, game)) {
+                if (!controller.choose(outcome, choice, game)) {
                     return false;
                 }
                 counterName = choice.getChoice();
@@ -135,7 +136,7 @@ public class RemoveCounterCost extends CostImpl {
                 int numberOfCountersSelected = 1;
                 if (countersLeft > 1 && countersOnPermanent > 1) {
                     numberOfCountersSelected = controller.getAmount(1, Math.min(countersLeft, countersOnPermanent),
-                            "Remove how many counters from " + targetObject.getIdName(), game);
+                            "Choose how many counters (" + counterName + ") to remove from " + targetObject.getLogName() + " as payment", game);
                 }
                 targetObject.removeCounters(counterName, numberOfCountersSelected, source, game);
                 countersRemoved += numberOfCountersSelected;

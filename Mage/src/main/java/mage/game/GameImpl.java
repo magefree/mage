@@ -845,6 +845,10 @@ public abstract class GameImpl implements Game {
             // concede for itself
             // stop current player dialog and execute concede
             currentPriorityPlayer.signalPlayerConcede(true);
+        } else if (currentPriorityPlayer.getTurnControlledBy().equals(playerId)) {
+            // concede for itself while controlling another player
+            // stop current player dialog and execute concede
+            currentPriorityPlayer.signalPlayerConcede(true);
         } else {
             // concede for another player
             // allow current player to continue and check concede on any next priority
@@ -1423,6 +1427,7 @@ public abstract class GameImpl implements Game {
         newWatchers.add(new CreaturesDiedWatcher());
         newWatchers.add(new TemptedByTheRingWatcher());
         newWatchers.add(new SpellsCastWatcher());
+        newWatchers.add(new AttackedOrBlockedThisCombatWatcher()); // required for tests
 
         // runtime check - allows only GAME scope (one watcher per game)
         newWatchers.forEach(watcher -> {
@@ -2986,13 +2991,27 @@ public abstract class GameImpl implements Game {
         }
         String message;
         if (this.canPlaySorcery(playerId)) {
-            message = "Play spells and abilities.";
+            message = "Play spells and abilities";
         } else {
-            message = "Play instants and activated abilities.";
+            message = "Play instants and activated abilities";
         }
-        playerQueryEventSource.select(playerId, message);
+
+        message += getControllingPlayerHint(playerId);
+
+        Player player = this.getPlayer(playerId);
+        playerQueryEventSource.select(player.getTurnControlledBy(), message);
         getState().clearLookedAt();
         getState().clearRevealed();
+    }
+
+    private String getControllingPlayerHint(UUID playerId) {
+        Player player = this.getPlayer(playerId);
+        Player controllingPlayer = this.getPlayer(player.getTurnControlledBy());
+        if (player != controllingPlayer) {
+            return " (as " + player.getLogName() + ")";
+        } else {
+            return "";
+        }
     }
 
     @Override
@@ -3000,7 +3019,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.select(playerId, message);
+        playerQueryEventSource.select(playerId, message + getControllingPlayerHint(playerId));
     }
 
     @Override
@@ -3008,7 +3027,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.select(playerId, message, options);
+        playerQueryEventSource.select(playerId, message + getControllingPlayerHint(playerId), options);
     }
 
     @Override
@@ -3016,7 +3035,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.playMana(playerId, message, options);
+        playerQueryEventSource.playMana(playerId, message + getControllingPlayerHint(playerId), options);
     }
 
     @Override
@@ -3024,7 +3043,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.playXMana(playerId, message);
+        playerQueryEventSource.playXMana(playerId, message + getControllingPlayerHint(playerId));
     }
 
     @Override
@@ -3037,7 +3056,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.ask(playerId, message.getMessage(), source, addMessageToOptions(message, options));
+        playerQueryEventSource.ask(playerId, message.getMessage() + getControllingPlayerHint(playerId), source, addMessageToOptions(message, options));
     }
 
     @Override
@@ -3049,7 +3068,7 @@ public abstract class GameImpl implements Game {
         if (object != null) {
             objectName = object.getName();
         }
-        playerQueryEventSource.chooseAbility(playerId, message, objectName, choices);
+        playerQueryEventSource.chooseAbility(playerId, message + getControllingPlayerHint(playerId), objectName, choices);
     }
 
     @Override
@@ -3057,7 +3076,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.chooseMode(playerId, message, modes);
+        playerQueryEventSource.chooseMode(playerId, message + getControllingPlayerHint(playerId), modes);
     }
 
     @Override
@@ -3065,7 +3084,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message.getMessage(), targets, required, addMessageToOptions(message, options));
+        playerQueryEventSource.target(playerId, message.getMessage() + getControllingPlayerHint(playerId), targets, required, addMessageToOptions(message, options));
     }
 
     @Override
@@ -3073,7 +3092,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message.getMessage(), cards, required, addMessageToOptions(message, options));
+        playerQueryEventSource.target(playerId, message.getMessage() + getControllingPlayerHint(playerId), cards, required, addMessageToOptions(message, options));
     }
 
     /**
@@ -3086,7 +3105,7 @@ public abstract class GameImpl implements Game {
      */
     @Override
     public void fireSelectTargetTriggeredAbilityEvent(UUID playerId, String message, List<TriggeredAbility> abilities) {
-        playerQueryEventSource.target(playerId, message, abilities);
+        playerQueryEventSource.target(playerId, message + getControllingPlayerHint(playerId), abilities);
     }
 
     @Override
@@ -3094,7 +3113,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.target(playerId, message, perms, required);
+        playerQueryEventSource.target(playerId, message + getControllingPlayerHint(playerId), perms, required);
     }
 
     @Override
@@ -3102,7 +3121,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.amount(playerId, message, min, max);
+        playerQueryEventSource.amount(playerId, message + getControllingPlayerHint(playerId), min, max);
     }
 
     @Override
@@ -3127,7 +3146,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        playerQueryEventSource.choosePile(playerId, message, pile1, pile2);
+        playerQueryEventSource.choosePile(playerId, message + getControllingPlayerHint(playerId), pile1, pile2);
     }
 
     @Override
@@ -3635,7 +3654,7 @@ public abstract class GameImpl implements Game {
 
     /**
      * Reset objects stored for Last Known Information. (Happens if all effects
-     * are applied und stack is empty)
+     * are applied and stack is empty)
      */
     @Override
     public void resetLKI() {

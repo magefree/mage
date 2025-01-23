@@ -1,4 +1,3 @@
-
 package mage.abilities.effects.common.continuous;
 
 import mage.abilities.Ability;
@@ -9,6 +8,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * Each player may play an additional land on each of their turns.
@@ -49,14 +49,10 @@ public class PlayAdditionalLandsAllEffect extends ContinuousEffectImpl {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(game.getActivePlayerId());
-        if (player != null) {
-            if (numExtraLands == Integer.MAX_VALUE) {
-                player.setLandsPerTurn(Integer.MAX_VALUE);
-            } else {
-                player.setLandsPerTurn(player.getLandsPerTurn() + numExtraLands);
-            }
-            return true;
+        if (player == null) {
+            return false;
         }
+        player.setLandsPerTurn(CardUtil.overflowInc(player.getLandsPerTurn(), numExtraLands));
         return true;
     }
 }

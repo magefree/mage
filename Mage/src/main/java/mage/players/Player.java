@@ -46,7 +46,15 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- * @author BetaSteward_at_googlemail.com
+ * Warning, if you add new choose dialogs then must implement it for:
+ * - PlayerImpl (only if it use another default dialogs inside)
+ * - HumanPlayer (support client-server in human games)
+ * - ComputerPlayer (support AI in computer games)
+ * - StubPlayer (temp)
+ * - ComputerPlayerControllableProxy (support control of one player type over another player type)
+ * - TestPlayer (support unit tests)
+ *
+ * @author BetaSteward_at_googlemail.com, JayDi85
  */
 public interface Player extends MageItem, Copyable<Player> {
 
@@ -333,8 +341,9 @@ public interface Player extends MageItem, Copyable<Player> {
      * @param game
      * @param playerUnderControlId
      * @param info                 additional info to show in game logs like source
+     * @return false on failed taken control, e.g. on unsupported player type
      */
-    void controlPlayersTurn(Game game, UUID playerUnderControlId, String info);
+    boolean controlPlayersTurn(Game game, UUID playerUnderControlId, String info);
 
     /**
      * Sets player {@link UUID} who controls this player's turn.
@@ -366,7 +375,7 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean isGameUnderControl();
 
     /**
-     * Returns false in case you don't control the game.
+     * False in case you don't control the game.
      * <p>
      * Note: For effects like "You control target player during that player's
      * next turn".
@@ -1212,8 +1221,6 @@ public interface Player extends MageItem, Copyable<Player> {
      */
     boolean addTargets(Ability ability, Game game);
 
-    String getHistory();
-
     boolean hasDesignation(DesignationType designationName);
 
     void addDesignation(Designation designation);
@@ -1253,4 +1260,8 @@ public interface Player extends MageItem, Copyable<Player> {
      * so that's method helps to find real player that used by a game (in most use cases it's a PlayerImpl)
      */
     Player getRealPlayer();
+
+    default Player prepareControllableProxy(Player playerUnderControl) {
+        return this;
+    }
 }

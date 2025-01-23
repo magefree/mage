@@ -107,7 +107,7 @@ public final class Legends extends ExpansionSet {
         cards.add(new SetCardInfo("Feint", 146, Rarity.COMMON, mage.cards.f.Feint.class));
         cards.add(new SetCardInfo("Field of Dreams", 55, Rarity.RARE, mage.cards.f.FieldOfDreams.class));
         cards.add(new SetCardInfo("Fire Sprites", 186, Rarity.COMMON, mage.cards.f.FireSprites.class));
-        cards.add(new SetCardInfo("Firestorm Phoenix", 145, Rarity.RARE, mage.cards.f.FirestormPhoenix.class));
+        cards.add(new SetCardInfo("Firestorm Phoenix", 147, Rarity.RARE, mage.cards.f.FirestormPhoenix.class));
         cards.add(new SetCardInfo("Flash Counter", 56, Rarity.COMMON, mage.cards.f.FlashCounter.class));
         cards.add(new SetCardInfo("Flash Flood", 57, Rarity.COMMON, mage.cards.f.FlashFlood.class));
         cards.add(new SetCardInfo("Floral Spuzzem", 187, Rarity.UNCOMMON, mage.cards.f.FloralSpuzzem.class));

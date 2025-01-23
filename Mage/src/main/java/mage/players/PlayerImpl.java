@@ -7,7 +7,6 @@ import mage.abilities.ActivatedAbility.ActivationStatus;
 import mage.abilities.common.PassAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.common.WhileSearchingPlayFromLibraryAbility;
-import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
 import mage.abilities.costs.*;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
@@ -15,7 +14,6 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
-import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
 import mage.abilities.keyword.*;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
@@ -368,7 +366,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary();
         this.drawsFromBottom = player.isDrawsFromBottom();
         this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
-        this.alternativeSourceCosts = CardUtil.deepCopyObject(player.getAlternativeSourceCosts());
+        this.alternativeSourceCosts = CardUtil.deepCopyObject(((PlayerImpl) player).alternativeSourceCosts);
 
         this.topCardRevealed = player.isTopCardRevealed();
 
@@ -600,8 +598,17 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
+    public boolean controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
         Player playerUnderControl = game.getPlayer(playerUnderControlId);
+
+        // TODO: add support computer over computer
+        // TODO: add support computer over human
+        if (this.isComputer()) {
+            // not supported yet
+            game.informPlayers(getLogName() + " is AI and can't take control over " + playerUnderControl.getLogName() + info);
+            return false;
+        }
+
         playerUnderControl.setTurnControlledBy(this.getId());
         game.informPlayers(getLogName() + " taken turn control of " + playerUnderControl.getLogName() + info);
         if (!playerUnderControlId.equals(this.getId())) {
@@ -609,12 +616,10 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!playerUnderControl.hasLeft() && !playerUnderControl.hasLost()) {
                 playerUnderControl.setGameUnderYourControl(false);
             }
-            DelayedTriggeredAbility ability = new AtTheEndOfTurnStepPostDelayedTriggeredAbility(
-                    new LoseControlOnOtherPlayersControllerEffect(this.getLogName(), playerUnderControl.getLogName()));
-            ability.setSourceId(getId());
-            ability.setControllerId(getId());
-            game.addDelayedTriggeredAbility(ability, null);
+            // control will reset on start of the turn
         }
+
+        return true;
     }
 
     @Override
@@ -783,10 +788,10 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
         // if this method was called from a replacement event, pass the number of cards back through
         // (uncomment conditions if correct ruling is to only count cards drawn by the same player)
-        if (event instanceof DrawCardEvent /* && event.getPlayerId().equals(getId()) */ ) {
+        if (event instanceof DrawCardEvent /* && event.getPlayerId().equals(getId()) */) {
             ((DrawCardEvent) event).incrementCardsDrawn(numDrawn);
         }
-        if (event instanceof DrawTwoOrMoreCardsEvent /* && event.getPlayerId().equals(getId()) */ ) {
+        if (event instanceof DrawTwoOrMoreCardsEvent /* && event.getPlayerId().equals(getId()) */) {
             ((DrawTwoOrMoreCardsEvent) event).incrementCardsDrawn(numDrawn);
         }
         return numDrawn;
@@ -5376,11 +5381,6 @@ public abstract class PlayerImpl implements Player, Serializable {
     ) {
         // only used for TestPlayer to preSet Targets
         return true;
-    }
-
-    @Override
-    public String getHistory() {
-        return "no available";
     }
 
     @Override

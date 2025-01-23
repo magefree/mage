@@ -78,12 +78,7 @@ class BelloBardOfTheBramblesEffect extends ContinuousEffectImpl {
                 "\"Whenever this creature deals combat damage to a player, draw a card.\"";
 
         this.dependendToTypes.add(DependencyType.EnchantmentAddingRemoving); // Enchanted Evening
-        this.dependendToTypes.add(DependencyType.AuraAddingRemoving); // Cloudform
-        this.dependendToTypes.add(DependencyType.BecomeForest); // Song of the Dryads
-        this.dependendToTypes.add(DependencyType.BecomeMountain);
-        this.dependendToTypes.add(DependencyType.BecomePlains);
-        this.dependendToTypes.add(DependencyType.BecomeSwamp);
-        this.dependendToTypes.add(DependencyType.BecomeIsland);
+        this.dependendToTypes.add(DependencyType.ArtifactAddingRemoving); // March of the Machines
 
         this.dependencyTypes.add(DependencyType.BecomeCreature);  // Conspiracy
     }

@@ -1,6 +1,5 @@
 package mage.cards.t;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -10,24 +9,22 @@ import mage.abilities.keyword.SpaceflightAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.common.FilterCreatureOrPlayer;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.target.common.TargetCreatureOrPlayer;
 
+import java.util.UUID;
+
 /**
- *
  * @author NinthWorld
  */
 public final class ThermalDetonator extends CardImpl {
 
     private static final FilterCreatureOrPlayer filter = new FilterCreatureOrPlayer("creature without spaceflight or target player");
-    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent();
 
     static {
-        filter.getCreatureFilter().add(Predicates.not(new AbilityPredicate(SpaceflightAbility.class)));
+        filter.getPermanentFilter().add(Predicates.not(new AbilityPredicate(SpaceflightAbility.class)));
     }
 
     public ThermalDetonator(UUID ownerId, CardSetInfo setInfo) {

@@ -104,18 +104,17 @@ public class LoadCallbackClient implements CallbackClient {
                 GameClientMessage message = (GameClientMessage) callback.getData();
                 this.gameView = message.getGameView();
                 log.info(getLogStartInfo() + " target: " + message.getMessage());
-                switch (message.getMessage()) {
-                    case "Select a starting player":
-                        session.sendPlayerUUID(gameId, playerId);
-                        return;
-                    case "Select a card to discard":
-                        log.info(getLogStartInfo() + "hand size: " + gameView.getMyHand().size());
-                        SimpleCardView card = gameView.getMyHand().values().iterator().next();
-                        session.sendPlayerUUID(gameId, card.getId());
-                        return;
-                    default:
-                        log.error(getLogStartInfo() + "unknown GAME_TARGET message: " + message.toString());
-                        return;
+                if (message.getMessage().startsWith("Select a starting player")) {
+                    session.sendPlayerUUID(gameId, playerId);
+                    return;
+                } else if (message.getMessage().startsWith("Select a card to discard")) {
+                    log.info(getLogStartInfo() + "hand size: " + gameView.getMyHand().size());
+                    SimpleCardView card = gameView.getMyHand().values().iterator().next();
+                    session.sendPlayerUUID(gameId, card.getId());
+                    return;
+                } else {
+                    log.error(getLogStartInfo() + "unknown GAME_TARGET message: " + message.toString());
+                    return;
                 }
             }
 

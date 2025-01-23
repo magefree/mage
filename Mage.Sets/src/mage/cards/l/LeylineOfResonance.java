@@ -24,7 +24,7 @@ public final class LeylineOfResonance extends CardImpl {
     );
 
     static {
-        filter.add(new HasOnlySingleTargetPermanentPredicate(StaticFilters.FILTER_PERMANENT_CREATURE));
+        filter.add(new HasOnlySingleTargetPermanentPredicate(StaticFilters.FILTER_CONTROLLED_CREATURE));
     }
 
     public LeylineOfResonance(UUID ownerId, CardSetInfo setInfo) {

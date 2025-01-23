@@ -107,12 +107,16 @@ public class Turn implements Serializable {
             ));
             return true;
         }
-        logStartOfTurn(game, activePlayer);
 
-        checkTurnIsControlledByOtherPlayer(game, activePlayer.getId());
+        logStartOfTurn(game, activePlayer);
+        resetCounts();
 
         this.activePlayerId = activePlayer.getId();
-        resetCounts();
+        this.currentPhase = null;
+
+        // turn control must be called after potential turn skip due 720.1.
+        checkTurnIsControlledByOtherPlayer(game, activePlayer.getId());
+
         game.getPlayer(activePlayer.getId()).beginTurn(game);
         for (Phase phase : phases) {
             if (game.isPaused() || game.checkIfGameIsOver()) {
@@ -220,6 +224,28 @@ public class Turn implements Serializable {
     }
 
     private void checkTurnIsControlledByOtherPlayer(Game game, UUID activePlayerId) {
+        // 720.1.
+        // Some cards allow a player to control another player during that player’s next turn.
+        // This effect applies to the next turn that the affected player actually takes.
+        // The affected player is controlled during the entire turn; the effect doesn’t end until
+        // the beginning of the next turn.
+        //
+        // 720.1b
+        // If a turn is skipped, any pending player-controlling effects wait until the player who would be
+        // affected actually takes a turn.
+
+        // remove old under control
+        game.getPlayers().values().forEach(player -> {
+            if (player.isInGame() && !player.isGameUnderControl()) {
+                Player controllingPlayer = game.getPlayer(player.getTurnControlledBy());
+                if (player != controllingPlayer && controllingPlayer != null) {
+                    game.informPlayers(controllingPlayer.getLogName() + " lost control over " + player.getLogName());
+                }
+                player.setGameUnderYourControl(true);
+            }
+        });
+
+        // add new under control
         TurnMod newControllerMod = game.getState().getTurnMods().useNextNewController(activePlayerId);
         if (newControllerMod != null && !newControllerMod.getNewControllerId().equals(activePlayerId)) {
             // game logs added in child's call (controlPlayersTurn)

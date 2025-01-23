@@ -550,6 +550,12 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     @Deprecated // TODO: must research usage and remove it from all non engine code (example: Bestow ability, ProcessActions must be used instead)
     boolean checkStateAndTriggered();
 
+    /**
+     * Play priority by all players
+     *
+     * @param activePlayerId starting priority player
+     * @param resuming false to reset passed priority and ask it again
+     */
     void playPriority(UUID activePlayerId, boolean resuming);
 
     void resetControlAfterSpellResolve(UUID topId);

@@ -23,6 +23,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
 
         cards.add(new SetCardInfo("Abandoned Campground", 255, Rarity.COMMON, mage.cards.a.AbandonedCampground.class));
         cards.add(new SetCardInfo("Abhorrent Oculus", 42, Rarity.MYTHIC, mage.cards.a.AbhorrentOculus.class));
+        cards.add(new SetCardInfo("Acrobatic Cheerleader", 1, Rarity.COMMON, mage.cards.a.AcrobaticCheerleader.class));
         cards.add(new SetCardInfo("Altanak, the Thrice-Called", 166, Rarity.UNCOMMON, mage.cards.a.AltanakTheThriceCalled.class));
         cards.add(new SetCardInfo("Anthropede", 167, Rarity.COMMON, mage.cards.a.Anthropede.class));
         cards.add(new SetCardInfo("Appendage Amalgam", 83, Rarity.COMMON, mage.cards.a.AppendageAmalgam.class));
@@ -52,6 +53,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Conductive Machete", 244, Rarity.UNCOMMON, mage.cards.c.ConductiveMachete.class));
         cards.add(new SetCardInfo("Coordinated Clobbering", 173, Rarity.UNCOMMON, mage.cards.c.CoordinatedClobbering.class));
         cards.add(new SetCardInfo("Cracked Skull", 88, Rarity.COMMON, mage.cards.c.CrackedSkull.class));
+        cards.add(new SetCardInfo("Cryptid Inspector", 174, Rarity.COMMON, mage.cards.c.CryptidInspector.class));
         cards.add(new SetCardInfo("Cult Healer", 2, Rarity.COMMON, mage.cards.c.CultHealer.class));
         cards.add(new SetCardInfo("Cursed Recording", 131, Rarity.RARE, mage.cards.c.CursedRecording.class));
         cards.add(new SetCardInfo("Cursed Windbreaker", 47, Rarity.UNCOMMON, mage.cards.c.CursedWindbreaker.class));
@@ -165,6 +167,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Neglected Manor", 264, Rarity.COMMON, mage.cards.n.NeglectedManor.class));
         cards.add(new SetCardInfo("Niko, Light of Hope", 224, Rarity.MYTHIC, mage.cards.n.NikoLightOfHope.class));
         cards.add(new SetCardInfo("Norin, Swift Survivalist", 145, Rarity.UNCOMMON, mage.cards.n.NorinSwiftSurvivalist.class));
+        cards.add(new SetCardInfo("Nowhere to Run", 111, Rarity.UNCOMMON, mage.cards.n.NowhereToRun.class));
         cards.add(new SetCardInfo("Oblivious Bookworm", 225, Rarity.UNCOMMON, mage.cards.o.ObliviousBookworm.class));
         cards.add(new SetCardInfo("Omnivorous Flytrap", 192, Rarity.RARE, mage.cards.o.OmnivorousFlytrap.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Omnivorous Flytrap", 322, Rarity.RARE, mage.cards.o.OmnivorousFlytrap.class, NON_FULL_USE_VARIOUS));
@@ -238,6 +241,7 @@ public final class DuskmournHouseOfHorror extends ExpansionSet {
         cards.add(new SetCardInfo("Twist Reality", 77, Rarity.COMMON, mage.cards.t.TwistReality.class));
         cards.add(new SetCardInfo("Twitching Doll", 201, Rarity.RARE, mage.cards.t.TwitchingDoll.class));
         cards.add(new SetCardInfo("Tyvar, the Pummeler", 202, Rarity.MYTHIC, mage.cards.t.TyvarThePummeler.class));
+        cards.add(new SetCardInfo("Unable to Scream", 78, Rarity.COMMON, mage.cards.u.UnableToScream.class));
         cards.add(new SetCardInfo("Under the Skin", 203, Rarity.UNCOMMON, mage.cards.u.UnderTheSkin.class));
         cards.add(new SetCardInfo("Unidentified Hovership", 37, Rarity.RARE, mage.cards.u.UnidentifiedHovership.class));
         cards.add(new SetCardInfo("Unnerving Grasp", 80, Rarity.UNCOMMON, mage.cards.u.UnnervingGrasp.class));

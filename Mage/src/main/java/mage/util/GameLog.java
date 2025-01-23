@@ -160,10 +160,6 @@ public final class GameLog {
         return "<font color='" + LOG_COLOR_PLAYER_CONFIRM + "'>" + name + "</font>";
     }
 
-    public static String getSmallSecondLineText(String text) {
-        return "<div style='font-size:11pt'>" + text + "</div>";
-    }
-
     private static String getColorName(ObjectColor objectColor) {
         if (objectColor.isMulticolored()) {
             return LOG_COLOR_MULTI;

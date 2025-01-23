@@ -30,8 +30,10 @@ import mage.constants.*;
 import mage.game.events.PlayerQueryEvent;
 import mage.players.PlayableObjectStats;
 import mage.players.PlayableObjectsList;
+import mage.util.CardUtil;
 import mage.util.DebugUtil;
 import mage.util.MultiAmountMessage;
+import mage.util.StreamUtils;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
@@ -53,6 +55,7 @@ import java.util.*;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static mage.client.dialog.PreferencesDialog.*;
 import static mage.constants.PlayerAction.*;
@@ -1810,7 +1813,36 @@ public final class GamePanel extends javax.swing.JPanel {
 
         // hand
         if (needZone == Zone.HAND || needZone == Zone.ALL) {
+            // my hand
             for (CardView card : lastGameData.game.getMyHand().values()) {
+                if (needSelectable.contains(card.getId())) {
+                    card.setChoosable(true);
+                }
+                if (needChosen.contains(card.getId())) {
+                    card.setSelected(true);
+                }
+                if (needPlayable.containsObject(card.getId())) {
+                    card.setPlayableStats(needPlayable.getStats(card.getId()));
+                }
+            }
+
+            // opponent hands (switching by GUI's button with my hand)
+            List<SimpleCardView> list = lastGameData.game.getOpponentHands().values().stream().flatMap(s -> s.values().stream()).collect(Collectors.toList());
+            for (SimpleCardView card : list) {
+                if (needSelectable.contains(card.getId())) {
+                    card.setChoosable(true);
+                }
+                if (needChosen.contains(card.getId())) {
+                    card.setSelected(true);
+                }
+                if (needPlayable.containsObject(card.getId())) {
+                    card.setPlayableStats(needPlayable.getStats(card.getId()));
+                }
+            }
+
+            // watched hands (switching by GUI's button with my hand)
+            list = lastGameData.game.getWatchedHands().values().stream().flatMap(s -> s.values().stream()).collect(Collectors.toList());
+            for (SimpleCardView card : list) {
                 if (needSelectable.contains(card.getId())) {
                     card.setChoosable(true);
                 }

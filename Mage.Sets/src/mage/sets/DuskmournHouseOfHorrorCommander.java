@@ -105,7 +105,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Explosive Vegetation", 177, Rarity.UNCOMMON, mage.cards.e.ExplosiveVegetation.class));
         cards.add(new SetCardInfo("Extravagant Replication", 117, Rarity.RARE, mage.cards.e.ExtravagantReplication.class));
         cards.add(new SetCardInfo("Ezuri's Predation", 178, Rarity.RARE, mage.cards.e.EzurisPredation.class));
-        cards.add(new SetCardInfo("Falkenrath Noble", 140, Rarity.UNCOMMON, mage.cards.f.FalkenrathNoble.class));
+        cards.add(new SetCardInfo("Falkenrath Noble", 140, Rarity.COMMON, mage.cards.f.FalkenrathNoble.class));
         cards.add(new SetCardInfo("Fate Unraveler", 141, Rarity.RARE, mage.cards.f.FateUnraveler.class));
         cards.add(new SetCardInfo("Fear of Sleep Paralysis", 12, Rarity.RARE, mage.cards.f.FearOfSleepParalysis.class));
         cards.add(new SetCardInfo("Feed the Swarm", 78, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
@@ -194,6 +194,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Oversimplify", 228, Rarity.RARE, mage.cards.o.Oversimplify.class));
         cards.add(new SetCardInfo("Overwhelming Stampede", 192, Rarity.RARE, mage.cards.o.OverwhelmingStampede.class));
         cards.add(new SetCardInfo("Persistent Constrictor", 22, Rarity.RARE, mage.cards.p.PersistentConstrictor.class));
+        cards.add(new SetCardInfo("Phenomenon Investigators", 38, Rarity.RARE, mage.cards.p.PhenomenonInvestigators.class));
         cards.add(new SetCardInfo("Ponder", 73, Rarity.COMMON, mage.cards.p.Ponder.class));
         cards.add(new SetCardInfo("Portent", 74, Rarity.COMMON, mage.cards.p.Portent.class));
         cards.add(new SetCardInfo("Primordial Mist", 123, Rarity.RARE, mage.cards.p.PrimordialMist.class));
@@ -212,6 +213,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Reanimate", 155, Rarity.RARE, mage.cards.r.Reanimate.class));
         cards.add(new SetCardInfo("Redress Fate", 9, Rarity.RARE, mage.cards.r.RedressFate.class));
         cards.add(new SetCardInfo("Reliquary Tower", 295, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
+        cards.add(new SetCardInfo("Rendmaw, Creaking Nest", 5, Rarity.MYTHIC, mage.cards.r.RendmawCreakingNest.class));
         cards.add(new SetCardInfo("Retreat to Coralhelm", 126, Rarity.UNCOMMON, mage.cards.r.RetreatToCoralhelm.class));
         cards.add(new SetCardInfo("Return to Dust", 102, Rarity.UNCOMMON, mage.cards.r.ReturnToDust.class));
         cards.add(new SetCardInfo("Sakura-Tribe Elder", 194, Rarity.COMMON, mage.cards.s.SakuraTribeElder.class));

@@ -3,6 +3,8 @@ package mage.cards.g;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.condition.common.SourceTappedCondition;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -31,7 +33,8 @@ public final class GoblinWarWagon extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new DontUntapInControllersUntapStepSourceEffect()));
         // At the beginning of your upkeep, you may pay {2}. If you do, untap Goblin War Wagon.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DoIfCostPaid(
-            new UntapSourceEffect(), new ManaCostsImpl<>("{2}"))));
+            new UntapSourceEffect(), new ManaCostsImpl<>("{2}"))
+                .withChooseHint(new ConditionHint(SourceTappedCondition.UNTAPPED))));
     }
 
     private GoblinWarWagon(final GoblinWarWagon card) {

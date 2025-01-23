@@ -28,10 +28,7 @@ import mage.filter.common.*;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.SummoningSicknessPredicate;
-import mage.game.Game;
-import mage.game.GameImpl;
-import mage.game.Graveyard;
-import mage.game.Table;
+import mage.game.*;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
 import mage.game.draft.Draft;
@@ -52,6 +49,7 @@ import mage.target.common.*;
 import mage.util.CardUtil;
 import mage.util.MultiAmountMessage;
 import mage.util.RandomUtil;
+import mage.watchers.common.AttackedOrBlockedThisCombatWatcher;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 
@@ -839,6 +837,20 @@ public class TestPlayer implements Player {
                             wasProccessed = true;
                         }
 
+                        // check attacking: attackers list
+                        if (params[0].equals(CHECK_COMMAND_ATTACKERS) && params.length == 2) {
+                            assertAttackers(action, game, computerPlayer, params[1]);
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
+                        // check attacking: attackers list
+                        if (params[0].equals(CHECK_COMMAND_BLOCKERS) && params.length == 2) {
+                            assertBlockers(action, game, computerPlayer, params[1]);
+                            actions.remove(action);
+                            wasProccessed = true;
+                        }
+
                         // check playable ability: ability text, must have
                         if (params[0].equals(CHECK_COMMAND_PLAYABLE_ABILITY) && params.length == 3) {
                             assertPlayableAbility(action, game, computerPlayer, params[1], Boolean.parseBoolean(params[2]));
@@ -1415,6 +1427,64 @@ public class TestPlayer implements Player {
             printAbilities(game, computerPlayer.getPlayable(game, true));
             printEnd();
             Assert.fail("Must not have playable ability, but found: " + abilityStartText);
+        }
+    }
+
+    private void assertAttackers(PlayerAction action, Game game, Player player, String attackers) {
+        AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
+        Assert.assertNotNull(watcher);
+
+        List<String> actualAttackers = watcher.getAttackedThisTurnCreatures().stream()
+                .map(mor -> game.getObject(mor.getSourceId()))// no needs in zcc/lki
+                .filter(Objects::nonNull)
+                .filter(o -> o instanceof ControllableOrOwnerable)
+                .map(o -> (ControllableOrOwnerable) o)
+                .filter(o -> o.getControllerOrOwnerId().equals(player.getId()))
+                .map(o -> ((MageObject) o).getName())
+                .sorted()
+                .collect(Collectors.toList());
+        List<String> needAttackers = Arrays.stream(attackers.split("\\^"))
+                .filter(s -> !s.equals(TestPlayer.ATTACK_SKIP))
+                .sorted()
+                .collect(Collectors.toList());
+
+        if (!actualAttackers.equals(needAttackers)) {
+            printStart(game, action.getActionName());
+            System.out.println(String.format("Need attackers: %d", needAttackers.size()));
+            needAttackers.forEach(s -> System.out.println(" - " + s));
+            System.out.println(String.format("Actual attackers: %d", actualAttackers.size()));
+            actualAttackers.forEach(s -> System.out.println(" - " + s));
+            printEnd();
+            Assert.fail("Found wrong attackers");
+        }
+    }
+
+    private void assertBlockers(PlayerAction action, Game game, Player player, String blockers) {
+        AttackedOrBlockedThisCombatWatcher watcher = game.getState().getWatcher(AttackedOrBlockedThisCombatWatcher.class);
+        Assert.assertNotNull(watcher);
+
+        List<String> actualBlockers = watcher.getBlockedThisTurnCreatures().stream()
+                .map(mor -> game.getObject(mor.getSourceId()))// no needs in zcc/lki
+                .filter(Objects::nonNull)
+                .filter(o -> o instanceof ControllableOrOwnerable)
+                .map(o -> (ControllableOrOwnerable) o)
+                .filter(o -> o.getControllerOrOwnerId().equals(player.getId()))
+                .map(o -> ((MageObject) o).getName())
+                .sorted()
+                .collect(Collectors.toList());
+        List<String> needBlockers = Arrays.stream(blockers.split("\\^"))
+                .filter(s -> !s.equals(TestPlayer.BLOCK_SKIP))
+                .sorted()
+                .collect(Collectors.toList());
+
+        if (!actualBlockers.equals(needBlockers)) {
+            printStart(game, action.getActionName());
+            System.out.println(String.format("Need blockers: %d", needBlockers.size()));
+            needBlockers.forEach(s -> System.out.println(" - " + s));
+            System.out.println(String.format("Actual blockers: %d", actualBlockers.size()));
+            actualBlockers.forEach(s -> System.out.println(" - " + s));
+            printEnd();
+            Assert.fail("Found wrong blockers");
         }
     }
 
@@ -2216,17 +2286,15 @@ public class TestPlayer implements Player {
 
             // TODO: Allow to choose a player with TargetPermanentOrPlayer
             if ((target.getOriginalTarget() instanceof TargetPermanent)
-                    || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) // player target not implemented yet
                     || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)) { // player target not implemented yet
                 FilterPermanent filterPermanent;
                 if (target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
                     filterPermanent = ((TargetPermanentOrPlayer) target.getOriginalTarget()).getFilterPermanent();
-                } else if (target.getOriginalTarget() instanceof TargetCreatureOrPlayer) {
-                    filterPermanent = ((TargetCreatureOrPlayer) target.getOriginalTarget()).getFilterCreature();
                 } else {
                     filterPermanent = ((TargetPermanent) target.getOriginalTarget()).getFilter();
                 }
-                for (String choiceRecord : choices) {
+                while (!choices.isEmpty()) {
+                    String choiceRecord = choices.get(0);
                     String[] targetList = choiceRecord.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
@@ -2265,23 +2333,45 @@ public class TestPlayer implements Player {
                             }
                         }
                     }
-                    if (targetFound) {
-                        choices.remove(choiceRecord);
-                        return true;
+
+                    try {
+                        if (target.isChosen(game)) {
+                            return true;
+                        } else {
+                            if (!targetFound) {
+                                failOnLastBadChoice(game, source, target, choiceRecord, "unknown or can't target");
+                            }
+                        }
+                    } finally {
+                        choices.remove(0);
                     }
                 }
             }
 
             if (target instanceof TargetPlayer) {
-                for (Player player : game.getPlayers().values()) {
-                    for (String choose2 : choices) {
-                        if (player.getName().equals(choose2)) {
+                while (!choices.isEmpty()) {
+                    String choiceRecord = choices.get(0);
+                    boolean targetFound = false;
+                    for (Player player : game.getPlayers().values()) {
+                        if (player.getName().equals(choiceRecord)) {
                             if (target.canTarget(abilityControllerId, player.getId(), null, game) && !target.getTargets().contains(player.getId())) {
                                 target.add(player.getId(), game);
-                                choices.remove(choose2);
-                                return true;
+                                targetFound = true;
+                            } else {
+                                failOnLastBadChoice(game, source, target, choiceRecord, "can't target");
                             }
                         }
+                    }
+
+                    try {
+                        if (target.isChosen(game)) {
+                            return true;
+                        }
+                        if (!targetFound) {
+                            failOnLastBadChoice(game, source, target, choiceRecord, "unknown target");
+                        }
+                    } finally {
+                        choices.remove(0);
                     }
                 }
             }
@@ -2446,8 +2536,6 @@ public class TestPlayer implements Player {
 
             // player
             if (target.getOriginalTarget() instanceof TargetPlayer
-                    || target.getOriginalTarget() instanceof TargetAnyTarget
-                    || target.getOriginalTarget() instanceof TargetCreatureOrPlayer
                     || target.getOriginalTarget() instanceof TargetPermanentOrPlayer) {
                 for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                     if (!targetDefinition.startsWith("targetPlayer=")) {
@@ -2469,8 +2557,6 @@ public class TestPlayer implements Player {
             // permanent in battlefield
             if ((target.getOriginalTarget() instanceof TargetPermanent)
                     || (target.getOriginalTarget() instanceof TargetPermanentOrPlayer)
-                    || (target.getOriginalTarget() instanceof TargetAnyTarget)
-                    || (target.getOriginalTarget() instanceof TargetCreatureOrPlayer)
                     || (target.getOriginalTarget() instanceof TargetPermanentOrSuspendedCard)) {
                 for (String targetDefinition : targets.stream().limit(takeMaxTargetsPerChoose).collect(Collectors.toList())) {
                     if (targetDefinition.startsWith("targetPlayer=")) {
@@ -2494,9 +2580,6 @@ public class TestPlayer implements Player {
                             }
                         }
                         Filter filter = target.getOriginalTarget().getFilter();
-                        if (filter instanceof FilterCreatureOrPlayer) {
-                            filter = ((FilterCreatureOrPlayer) filter).getCreatureFilter();
-                        }
                         if (filter instanceof FilterPermanentOrPlayer) {
                             filter = ((FilterPermanentOrPlayer) filter).getPermanentFilter();
                         }
@@ -3020,8 +3103,8 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public void controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
-        computerPlayer.controlPlayersTurn(game, playerUnderControlId, info);
+    public boolean controlPlayersTurn(Game game, UUID playerUnderControlId, String info) {
+        return computerPlayer.controlPlayersTurn(game, playerUnderControlId, info);
     }
 
     @Override
@@ -4484,10 +4567,6 @@ public class TestPlayer implements Player {
         return AIPlayer;
     }
 
-    public String getHistory() {
-        return computerPlayer.getHistory();
-    }
-
     @Override
     public PlanarDieRollResult rollPlanarDie(Outcome outcome, Ability source, Game game, int numberChaosSides, int numberPlanarSides) {
         return computerPlayer.rollPlanarDie(outcome, source, game, numberChaosSides, numberPlanarSides);
@@ -4626,6 +4705,15 @@ public class TestPlayer implements Player {
 
         // non-strict mode allows computer assisted choices (for old tests compatibility only)
         return !this.strictChooseMode;
+    }
+
+    private void failOnLastBadChoice(Game game, Ability source, Target target, String lastChoice, String reason) {
+        Assert.fail(String.format("Found wrong choice command (%s):\n%s\n%s\n%s",
+                reason,
+                lastChoice,
+                getInfo(target, game),
+                getInfo(source, game)
+        ));
     }
 
     private void assertWrongChoiceUsage(String choice) {

@@ -1358,7 +1358,11 @@ public final class CardUtil {
      */
     public static void takeControlUnderPlayerStart(Game game, Ability source, Player controller, Player playerUnderControl, boolean givePauseForResponse) {
         // game logs added in child's call
-        controller.controlPlayersTurn(game, playerUnderControl.getId(), CardUtil.getSourceLogName(game, source));
+        if (!controller.controlPlayersTurn(game, playerUnderControl.getId(), CardUtil.getSourceLogName(game, source))) {
+            return;
+        }
+
+        // give pause, so new controller can look around battlefield and hands before finish controlling choose dialog
         if (givePauseForResponse) {
             while (controller.canRespond()) {
                 if (controller.chooseUse(Outcome.Benefit, "You got control of " + playerUnderControl.getLogName()
@@ -1380,7 +1384,7 @@ public final class CardUtil {
     public static void takeControlUnderPlayerEnd(Game game, Ability source, Player controller, Player playerUnderControl) {
         playerUnderControl.setGameUnderYourControl(true, false);
         if (!playerUnderControl.getTurnControlledBy().equals(controller.getId())) {
-            game.informPlayers(controller + " return control of the turn to " + playerUnderControl.getLogName() + CardUtil.getSourceLogName(game, source));
+            game.informPlayers(controller.getLogName() + " return control of the turn to " + playerUnderControl.getLogName() + CardUtil.getSourceLogName(game, source));
             controller.getPlayersUnderYourControl().remove(playerUnderControl.getId());
         }
     }
@@ -2127,9 +2131,10 @@ public final class CardUtil {
             return null;
         }
 
-        // not started game
+        // T0 - for not started game
+        // T2 - for starting of the turn
         if (gameState.getTurn().getStep() == null) {
-            return "T0";
+            return "T" + gameState.getTurnNum();
         }
 
         // normal game

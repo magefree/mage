@@ -4,16 +4,14 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.util.RandomUtil;
 import org.junit.Test;
-import org.mage.test.sba.PlaneswalkerRuleTest;
 import org.mage.test.serverside.base.CardTestPlayerBase;
-
-import java.util.Random;
 
 /**
  * Reported bugs: https://github.com/magefree/mage/issues/8980
- *      Cards like Soldevi Excavations, Heart of Yavimaya, and Lake of the Dead
- *      will sometimes immediately go to the graveyard without asking the controller if they wish to sacrifice a land
- *      even though they had one available
+ * Cards like Soldevi Excavations, Heart of Yavimaya, and Lake of the Dead
+ * will sometimes immediately go to the graveyard without asking the controller if they wish to sacrifice a land
+ * even though they had one available
+ *
  * @author Alex-Vasile
  */
 public class SacrificeLandTest extends CardTestPlayerBase {
@@ -35,14 +33,21 @@ public class SacrificeLandTest extends CardTestPlayerBase {
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, soldeviExcavations);
         setChoice(playerA, sacFirstLand);
+        if (sacFirstLand) {
+            setChoice(playerA, "Island");
+        }
 
         rollbackTurns(1, PhaseStep.PRECOMBAT_MAIN, playerA, 0);
 
         rollbackAfterActionsStart();
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, soldeviExcavations);
         setChoice(playerA, sacSecondLand);
+        if (sacSecondLand) {
+            setChoice(playerA, "Island");
+        }
         rollbackAfterActionsEnd();
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
@@ -73,14 +78,18 @@ public class SacrificeLandTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Swamp");
 
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, soldeviExcavations);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes"); // use sacrifice to keep soldevi
+        setChoice(playerA, "Island"); // sacrifice
 
         playLand(3, PhaseStep.PRECOMBAT_MAIN, playerA, heartofYavimaya);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes"); // use sacrifice to keep heart
+        setChoice(playerA, "Forest"); // sacrifice
 
         playLand(5, PhaseStep.PRECOMBAT_MAIN, playerA, lakeOfTheDead);
-        setChoice(playerA, "Yes");
+        setChoice(playerA, "Yes"); // use sacrifice to keep lake
+        setChoice(playerA, "Swamp"); // sacrifice
 
+        setStrictChooseMode(true);
         setStopAt(5, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
