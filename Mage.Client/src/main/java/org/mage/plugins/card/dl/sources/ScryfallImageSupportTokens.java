@@ -2517,9 +2517,6 @@ public class ScryfallImageSupportTokens {
             put("DSC/Treefolk", "https://api.scryfall.com/cards/tdsc/17/en?format=image");
             put("DSC/Wurm/1", "https://api.scryfall.com/cards/tdsc/18/en?format=image");
             put("DSC/Wurm/2", "https://api.scryfall.com/cards/tdsc/19/en?format=image");
-
-            // DSK
-            put("DSK/Emblem Kaito", "https://api.scryfall.com/cards/tdsk/17/en?format=image");
             
             // FDN
             put("FDN/Beast/1", "https://api.scryfall.com/cards/tfdn/32/en?format=image");
