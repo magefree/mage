@@ -169,7 +169,7 @@ class ImproviseEffect extends OneShotEffect {
                     game.informPlayers("Improvise: " + controller.getLogName() + " taps " + perm.getLogName() + " to pay {1}");
                 }
 
-                // can't use mana abilities after that (improvise cost must be payed after mana abilities only)
+                // can't use mana abilities after that (improvise cost must be paid after mana abilities only)
                 spell.setCurrentActivatingManaAbilitiesStep(ActivationManaAbilityStep.AFTER);
             }
 

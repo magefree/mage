@@ -1,6 +1,7 @@
 package mage.abilities.costs.mana;
 
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.game.Game;
 
@@ -38,4 +39,11 @@ public interface AlternateManaPaymentAbility {
      * @return
      */
     ActivationManaAbilityStep useOnActivationManaAbilityStep();
+
+    /**
+     * @return true if this AlternateManaPaymentAbility should apply to the given ability (by default checks if it is a SpellAbility)
+     */
+    default boolean appliesToAbility(Ability ability) {
+        return ability instanceof SpellAbility;
+    }
 }
