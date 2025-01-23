@@ -4,11 +4,15 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
 public final class Aetherdrift extends ExpansionSet {
 
+    private static final List<String> unfinished = Arrays.asList("Amonkhet Raceway", "Avishkar Raceway", "Far Fortune, End Boss", "Goblin Surveyor", "Hazoret, Godseeker", "Hour of Victory", "Mendicant Core, Guidelight", "Momentum Breaker", "Muraganda Raceway", "Samut, the Driving Force", "Starting Column", "Streaking Oilgorger", "Vnwxt, Verbose Host", "Zahur, Glory's Past");
     private static final Aetherdrift instance = new Aetherdrift();
 
     public static Aetherdrift getInstance() {
@@ -49,6 +53,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Rocketeer Boostbuggy", 220, Rarity.UNCOMMON, mage.cards.r.RocketeerBoostbuggy.class));
         cards.add(new SetCardInfo("Rugged Highlands", 262, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Scoured Barrens", 263, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
+        cards.add(new SetCardInfo("Streaking Oilgorger", 107, Rarity.COMMON, mage.cards.s.StreakingOilgorger.class));
         cards.add(new SetCardInfo("Sunbillow Verge", 264, Rarity.RARE, mage.cards.s.SunbillowVerge.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 265, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
@@ -60,5 +65,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Wastewood Verge", 268, Rarity.RARE, mage.cards.w.WastewoodVerge.class));
         cards.add(new SetCardInfo("Willowrush Verge", 270, Rarity.RARE, mage.cards.w.WillowrushVerge.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 271, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
+
+        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
 }
