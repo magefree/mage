@@ -795,4 +795,6 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
     boolean isGameStopped();
 
     boolean isTurnOrderReversed();
+
+    int getPlayerAutoTargetLevel(UUID abilityControllerId);
 }
