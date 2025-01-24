@@ -19,7 +19,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.game.permanent.token.PilotToken;
+import mage.game.permanent.token.PilotCrewToken;
 import mage.game.permanent.token.TreasureToken;
 
 import java.util.UUID;
@@ -48,7 +48,7 @@ public final class ReckonerBankbuster extends CardImpl {
                 new DrawCardSourceControllerEffect(1), new GenericManaCost(2)
         );
         ability.addEffect(new ConditionalOneShotEffect(
-                new CreateTokenEffect(new TreasureToken()).withAdditionalTokens(new PilotToken()), condition,
+                new CreateTokenEffect(new TreasureToken()).withAdditionalTokens(new PilotCrewToken()), condition,
                 "Then if there are no charge counters on {this}, create a Treasure token and a 1/1 colorless " +
                         "Pilot creature token with \"This creature crews Vehicles as though its power were 2 greater.\""
         ));

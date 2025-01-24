@@ -624,6 +624,8 @@ public class ScryfallImageSupportCards {
             put("SLD/Darksteel Colossus/1081b", "https://api.scryfall.com/cards/sld/1081/en?format=image&face=back");
             put("SLD/Death Baron/1458b", "https://api.scryfall.com/cards/sld/1458/en?format=image&face=back");
             put("SLD/Doubling Cube/1080b", "https://api.scryfall.com/cards/sld/1080/en?format=image&face=back");
+            put("SLD/Estrid's Invocation/1325b", "https://api.scryfall.com/cards/sld/1325/en?format=image&face=back");
+            put("SLD/Estrid, the Masked/1327b", "https://api.scryfall.com/cards/sld/1327/en?format=image&face=back");
             put("SLD/Etali, Primal Storm/1123b", "https://api.scryfall.com/cards/sld/1123/en?format=image&face=back");
             put("SLD/Garruk Wildspeaker/749b", "https://api.scryfall.com/cards/sld/749/en?format=image&face=back");
             put("SLD/Garruk Wildspeaker/1457b", "https://api.scryfall.com/cards/sld/1457/en?format=image&face=back");
@@ -649,8 +651,10 @@ public class ScryfallImageSupportCards {
             put("SLD/Rin and Seri, Inseparable/1554b", "https://api.scryfall.com/cards/sld/1554/en?format=image&face=back");
             put("SLD/Sakashima of a Thousand Faces/1541b", "https://api.scryfall.com/cards/sld/1541/en?format=image&face=back");
             put("SLD/Sol Ring/1512b", "https://api.scryfall.com/cards/sld/1512/en?format=image&face=back");
+            put("SLD/Steely Resolve/1326b", "https://api.scryfall.com/cards/sld/1326/en?format=image&face=back");
             put("SLD/Stitch in Time/382b", "https://api.scryfall.com/cards/sld/382/en?format=image&face=back");
             put("SLD/Terror/750b", "https://api.scryfall.com/cards/sld/750/en?format=image&face=back");
+            put("SLD/Tuvasa the Sunlit/1328b", "https://api.scryfall.com/cards/sld/1328/en?format=image&face=back");
             put("SLD/Ulamog, the Ceaseless Hunger/1122b", "https://api.scryfall.com/cards/sld/1122/en?format=image&face=back");
             put("SLD/Unholy Grotto/1462b", "https://api.scryfall.com/cards/sld/1462/en?format=image&face=back");
             put("SLD/Yargle, Glutton of Urborg/1542b", "https://api.scryfall.com/cards/sld/1542/en?format=image&face=back");

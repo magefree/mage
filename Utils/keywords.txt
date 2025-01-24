@@ -122,6 +122,7 @@ Skulk|new|
 Spectacle|card, cost|
 Spree|card|
 Squad|cost|
+Start your engines!|new|
 Storm|new|
 Sunburst|new|
 Suspend|number, cost, card|

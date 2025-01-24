@@ -7,6 +7,7 @@ import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -35,7 +36,9 @@ public final class PygmyKavu extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When Pygmy Kavu enters the battlefield, draw a card for each black creature your opponents control.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(new PermanentsOnBattlefieldCount(filter)))
+                .addHint(new ValueHint("Black creatures your opponents control", new PermanentsOnBattlefieldCount(filter)))
+        );
     }
 
     private PygmyKavu(final PygmyKavu card) {

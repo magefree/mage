@@ -1361,6 +1361,7 @@
 |Generate|TOK:SLD|Walker|3||WalkerToken|
 |Generate|TOK:SLD|Walker|4||WalkerToken|
 |Generate|TOK:SLD|Walker|5||WalkerToken|
+# TODO: Add new SLD token images
 
 # 2XM
 |Generate|TOK:2XM|Angel|||AngelToken|
