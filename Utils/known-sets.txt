@@ -30,11 +30,11 @@ Chronicles|Chronicles|
 Clash Pack|ClashPack|
 Classic Sixth Edition|ClassicSixthEdition|
 Coldsnap|Coldsnap|
-Commander 2013 Edition|Commander2013Edition|
-Commander 2014 Edition|Commander2014Edition|
-Commander 2015 Edition|Commander2015Edition|
-Commander 2016 Edition|Commander2016Edition|
-Commander 2017 Edition|Commander2017Edition|
+Commander 2013|Commander2013Edition|
+Commander 2014|Commander2014Edition|
+Commander 2015|Commander2015Edition|
+Commander 2016|Commander2016Edition|
+Commander 2017|Commander2017Edition|
 Commander 2018|Commander2018Edition|
 Commander 2019|Commander2019Edition|
 Commander 2020|Commander2020Edition|
@@ -272,7 +272,7 @@ Urza's Legacy|UrzasLegacy|
 Urza's Saga|UrzasSaga|
 Vintage Masters|VintageMasters|
 Visions|Visions|
-Warhammer 40,000|Warhammer40000|
+Warhammer 40,000 Commander|Warhammer40000Commander|
 War of the Spark|WarOfTheSpark|
 Weatherlight|Weatherlight|
 Welcome Deck 2016|WelcomeDeck2016|

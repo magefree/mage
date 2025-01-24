@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * @author TheElk801
  */
-public final class Commander2021Edition extends ExpansionSet {
+public final class Commander2021 extends ExpansionSet {
 
-    private static final Commander2021Edition instance = new Commander2021Edition();
+    private static final Commander2021 instance = new Commander2021();
 
-    public static Commander2021Edition getInstance() {
+    public static Commander2021 getInstance() {
         return instance;
     }
 
-    private Commander2021Edition() {
-        super("Commander 2021 Edition", "C21", ExpansionSet.buildDate(2021, 4, 23), SetType.SUPPLEMENTAL);
+    private Commander2021() {
+        super("Commander 2021", "C21", ExpansionSet.buildDate(2021, 4, 23), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         this.hasBasicLands = false;
 

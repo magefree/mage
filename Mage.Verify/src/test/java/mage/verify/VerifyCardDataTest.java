@@ -904,6 +904,7 @@ public class VerifyCardDataTest {
             String needClassName = Arrays.stream(
                     set.getName()
                             .replaceAll("&", "And")
+                            .replaceAll("30th", "Thirtieth")
                             .replace("-", " ")
                             .replaceAll("[.+-/:\"']", "")
                             .split(" ")

@@ -9,16 +9,16 @@ import mage.constants.SetType;
  *
  * @author fireshoes
  */
-public final class Commander2015Edition extends ExpansionSet {
+public final class Commander2015 extends ExpansionSet {
 
-    private static final Commander2015Edition instance = new Commander2015Edition();
+    private static final Commander2015 instance = new Commander2015();
 
-    public static Commander2015Edition getInstance() {
+    public static Commander2015 getInstance() {
         return instance;
     }
 
-    private Commander2015Edition() {
-        super("Commander 2015 Edition", "C15", ExpansionSet.buildDate(2015, 11, 13), SetType.SUPPLEMENTAL);
+    private Commander2015() {
+        super("Commander 2015", "C15", ExpansionSet.buildDate(2015, 11, 13), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Acidic Slime", 173, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));
         cards.add(new SetCardInfo("Act of Aggression", 141, Rarity.UNCOMMON, mage.cards.a.ActOfAggression.class));

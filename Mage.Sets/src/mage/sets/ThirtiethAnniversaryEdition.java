@@ -18,7 +18,7 @@ public class ThirtiethAnniversaryEdition extends ExpansionSet {
     }
 
     private ThirtiethAnniversaryEdition() {
-        super("Thirtieth Anniversary Edition", "30A", ExpansionSet.buildDate(2022, 11, 28), SetType.PROMOTIONAL);
+        super("30th Anniversary Edition", "30A", ExpansionSet.buildDate(2022, 11, 28), SetType.PROMOTIONAL);
         this.hasBasicLands = true;
         this.numBoosterLands = 3;
         this.numBoosterCommon = 7;

@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * @author TheElk801
  */
-public final class Commander2019Edition extends ExpansionSet {
+public final class Commander2019 extends ExpansionSet {
 
-    private static final Commander2019Edition instance = new Commander2019Edition();
+    private static final Commander2019 instance = new Commander2019();
 
-    public static Commander2019Edition getInstance() {
+    public static Commander2019 getInstance() {
         return instance;
     }
 
-    private Commander2019Edition() {
-        super("Commander 2019 Edition", "C19", ExpansionSet.buildDate(2019, 8, 23), SetType.SUPPLEMENTAL);
+    private Commander2019() {
+        super("Commander 2019", "C19", ExpansionSet.buildDate(2019, 8, 23), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
 
         cards.add(new SetCardInfo("Ainok Survivalist", 156, Rarity.COMMON, mage.cards.a.AinokSurvivalist.class));

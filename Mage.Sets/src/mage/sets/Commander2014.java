@@ -9,16 +9,16 @@ import mage.constants.SetType;
  *
  * @author LevelX2
  */
-public final class Commander2014Edition extends ExpansionSet {
+public final class Commander2014 extends ExpansionSet {
 
-    private static final Commander2014Edition instance = new Commander2014Edition();
+    private static final Commander2014 instance = new Commander2014();
 
-    public static Commander2014Edition getInstance() {
+    public static Commander2014 getInstance() {
         return instance;
     }
 
-    private Commander2014Edition() {
-        super("Commander 2014 Edition", "C14", ExpansionSet.buildDate(2014, 11, 7), SetType.SUPPLEMENTAL);
+    private Commander2014() {
+        super("Commander 2014", "C14", ExpansionSet.buildDate(2014, 11, 7), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Abyssal Persecutor", 132, Rarity.MYTHIC, mage.cards.a.AbyssalPersecutor.class));
         cards.add(new SetCardInfo("Adarkar Valkyrie", 63, Rarity.RARE, mage.cards.a.AdarkarValkyrie.class));

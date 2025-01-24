@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * @author TheElk801
  */
-public final class Warhammer40000 extends ExpansionSet {
+public final class Warhammer40000Commander extends ExpansionSet {
 	
-    private static final Warhammer40000 instance = new Warhammer40000();
+    private static final Warhammer40000Commander instance = new Warhammer40000Commander();
 
-    public static Warhammer40000 getInstance() {
+    public static Warhammer40000Commander getInstance() {
         return instance;
     }
 
-    private Warhammer40000() {
-        super("Warhammer 40,000", "40K", ExpansionSet.buildDate(2022, 4, 29), SetType.SUPPLEMENTAL);
+    private Warhammer40000Commander() {
+        super("Warhammer 40,000 Commander", "40K", ExpansionSet.buildDate(2022, 4, 29), SetType.SUPPLEMENTAL);
         this.hasBasicLands = true;
         this.hasBoosters = false;
 

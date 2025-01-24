@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * @author fireshoes
  */
-public final class Commander2017Edition extends ExpansionSet {
+public final class Commander2017 extends ExpansionSet {
 
-    private static final Commander2017Edition instance = new Commander2017Edition();
+    private static final Commander2017 instance = new Commander2017();
 
-    public static Commander2017Edition getInstance() {
+    public static Commander2017 getInstance() {
         return instance;
     }
 
-    private Commander2017Edition() {
-        super("Commander 2017 Edition", "C17", ExpansionSet.buildDate(2017, 8, 25), SetType.SUPPLEMENTAL);
+    private Commander2017() {
+        super("Commander 2017", "C17", ExpansionSet.buildDate(2017, 8, 25), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
 
         cards.add(new SetCardInfo("Abundance", 145, Rarity.RARE, mage.cards.a.Abundance.class));

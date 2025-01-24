@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author TheElk801
  */
-public final class Commander2020Edition extends ExpansionSet {
+public final class Commander2020 extends ExpansionSet {
 
     private static final List<String> mutateNames = Arrays.asList(
             "Mindleecher",
@@ -19,14 +19,14 @@ public final class Commander2020Edition extends ExpansionSet {
             "Souvenir Snatcher"
     );
 
-    private static final Commander2020Edition instance = new Commander2020Edition();
+    private static final Commander2020 instance = new Commander2020();
 
-    public static Commander2020Edition getInstance() {
+    public static Commander2020 getInstance() {
         return instance;
     }
 
-    private Commander2020Edition() {
-        super("Commander 2020 Edition", "C20", ExpansionSet.buildDate(2020, 4, 24), SetType.SUPPLEMENTAL);
+    private Commander2020() {
+        super("Commander 2020", "C20", ExpansionSet.buildDate(2020, 4, 24), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         this.hasBasicLands = false;
 

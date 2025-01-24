@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * @author TheElk801
  */
-public final class Commander2018Edition extends ExpansionSet {
+public final class Commander2018 extends ExpansionSet {
 
-    private static final Commander2018Edition instance = new Commander2018Edition();
+    private static final Commander2018 instance = new Commander2018();
 
-    public static Commander2018Edition getInstance() {
+    public static Commander2018 getInstance() {
         return instance;
     }
 
-    private Commander2018Edition() {
-        super("Commander 2018 Edition", "C18", ExpansionSet.buildDate(2018, 8, 10), SetType.SUPPLEMENTAL);
+    private Commander2018() {
+        super("Commander 2018", "C18", ExpansionSet.buildDate(2018, 8, 10), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
 
         cards.add(new SetCardInfo("Acidic Slime", 127, Rarity.UNCOMMON, mage.cards.a.AcidicSlime.class));

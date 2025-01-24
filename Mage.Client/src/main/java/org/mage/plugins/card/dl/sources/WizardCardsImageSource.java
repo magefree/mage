@@ -282,7 +282,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("BOK", "Betrayers of Kamigawa");
         setsAliases.put("BRB", "Battle Royale Box Set");
         setsAliases.put("BTD", "Beatdown Box Set");
-        setsAliases.put("C13", "Commander 2013 Edition");
+        setsAliases.put("C13", "Commander 2013");
         setsAliases.put("C14", "Commander 2014");
         setsAliases.put("C15", "Commander 2015");
         setsAliases.put("C16", "Commander 2016");

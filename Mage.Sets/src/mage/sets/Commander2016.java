@@ -9,16 +9,16 @@ import mage.constants.SetType;
  *
  * @author fireshoeS
  */
-public final class Commander2016Edition extends ExpansionSet {
+public final class Commander2016 extends ExpansionSet {
 
-    private static final Commander2016Edition instance = new Commander2016Edition();
+    private static final Commander2016 instance = new Commander2016();
 
-    public static Commander2016Edition getInstance() {
+    public static Commander2016 getInstance() {
         return instance;
     }
 
-    private Commander2016Edition() {
-        super("Commander 2016 Edition", "C16", ExpansionSet.buildDate(2016, 11, 11), SetType.SUPPLEMENTAL);
+    private Commander2016() {
+        super("Commander 2016", "C16", ExpansionSet.buildDate(2016, 11, 11), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
         cards.add(new SetCardInfo("Abzan Charm", 177, Rarity.UNCOMMON, mage.cards.a.AbzanCharm.class));
         cards.add(new SetCardInfo("Abzan Falconer", 57, Rarity.UNCOMMON, mage.cards.a.AbzanFalconer.class));

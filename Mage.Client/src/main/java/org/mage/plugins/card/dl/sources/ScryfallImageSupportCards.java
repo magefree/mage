@@ -467,7 +467,7 @@ public class ScryfallImageSupportCards {
             // add("DD3"); // Duel Decks Anthology
             // add("PZ1"); // Legendary Cube
             add("IKO"); // Ikoria: Lair of Behemoths
-            add("C20"); // Commander 2020 Edition
+            add("C20"); // Commander 2020
             add("M21"); // Core Set 2021
             add("JMP"); // Jumpstart
             add("PH19"); // 2019 Heroes of the Realm
@@ -488,7 +488,7 @@ public class ScryfallImageSupportCards {
             add("STA"); // Strixhaven Mystical Archive
             add("HA4"); // Historic Anthology 4
             add("HA5"); // Historic Anthology 5
-            add("C21"); // Commander 2021 Edition
+            add("C21"); // Commander 2021
             add("MH2"); // Modern Horizons 2
             add("H1R"); // Modern Horizons 1 Timeshifts
             add("PLG21"); // Love Your LGS 2021
@@ -514,7 +514,7 @@ public class ScryfallImageSupportCards {
             add("DMU"); // Dominaria United
             add("DMC"); // Dominaria United Commander
             add("YDMU"); // Alchemy: Dominaria
-            add("40K"); // Warhammer 40,000
+            add("40K"); // Warhammer 40,000 Commander
             add("UNF"); // Unfinity
             add("GN3"); // Game Night: Free-for-All
             add("BRO"); // The Brothers' War
@@ -534,7 +534,7 @@ public class ScryfallImageSupportCards {
             add("MOC"); // March of the Machine Commander
             add("MAT"); // March of the Machine: The Aftermath
             add("MUL"); // Multiverse Legends
-            add("30A"); // Thirtieth Anniversary Edition
+            add("30A"); // 30th Anniversary Edition
             add("LTR"); // The Lord of the Rings: Tales of Middle-Earth
             add("LTC"); // Tales of Middle-Earth Commander
             add("CMM"); // Commander Masters
