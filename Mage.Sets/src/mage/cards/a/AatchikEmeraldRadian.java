@@ -26,7 +26,9 @@ import mage.constants.SubType;
  */
 public final class AatchikEmeraldRadian extends CardImpl {
     private static final FilterCard filter1 = new FilterCard("artifact and/or creature card");
-    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.INSECT, "another insect you control");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent(SubType.INSECT, "another Insect you control");
+    private static final CardsInControllerGraveyardCount count = new CardsInControllerGraveyardCount(filter1);
+    
     static {
         filter1.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
         filter2.add(AnotherPredicate.instance);
@@ -41,8 +43,8 @@ public final class AatchikEmeraldRadian extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         
-        // When Aatchik, Emerald Radian enters, create a 1/1 green insect creature token for each actifact and/or creature card in your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new InsectToken(), new CardsInControllerGraveyardCount(filter1))));
+        // When Aatchik, Emerald Radian enters, create a 1/1 green Insect creature token for each actifact and/or creature card in your graveyard.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new InsectToken(), count)));
         
         // Whenever another insect you control dies, put a +1/+1 counter on Aatchik. Each opponent loses 1 life.
         DiesCreatureTriggeredAbility otherInsectDiesAbility = new DiesCreatureTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false, filter2);
