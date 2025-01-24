@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class Aetherdrift extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Aether Syphon", "Amonkhet Raceway", "Avishkar Raceway", "Far Fortune, End Boss", "Goblin Surveyor", "Hazoret, Godseeker", "Hour of Victory", "Mendicant Core, Guidelight", "Momentum Breaker", "Muraganda Raceway", "Samut, the Driving Force", "Starting Column", "Streaking Oilgorger", "Vnwxt, Verbose Host", "Zahur, Glory's Past");
+    private static final List<String> unfinished = Arrays.asList("Aether Syphon", "Amonkhet Raceway", "Avishkar Raceway", "Endrider Catalyzer", "Far Fortune, End Boss", "Goblin Surveyor", "Hazoret, Godseeker", "Hour of Victory", "Mendicant Core, Guidelight", "Momentum Breaker", "Muraganda Raceway", "Nesting Bot", "Perilous Snare", "Samut, the Driving Force", "Starting Column", "Streaking Oilgorger", "Vnwxt, Verbose Host", "Zahur, Glory's Past");
     private static final Aetherdrift instance = new Aetherdrift();
 
     public static Aetherdrift getInstance() {
