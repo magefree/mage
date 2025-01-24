@@ -163,6 +163,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Wayward Servant", 121, Rarity.UNCOMMON, mage.cards.w.WaywardServant.class));
         cards.add(new SetCardInfo("Whirler Rogue", 85, Rarity.UNCOMMON, mage.cards.w.WhirlerRogue.class));
         cards.add(new SetCardInfo("Whirler Virtuoso", 122, Rarity.UNCOMMON, mage.cards.w.WhirlerVirtuoso.class));
+        cards.add(new SetCardInfo("Wizened Mentor", 8, Rarity.RARE, mage.cards.w.WizenedMentor.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 184, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
     }
 }
