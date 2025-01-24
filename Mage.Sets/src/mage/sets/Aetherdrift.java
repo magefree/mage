@@ -94,7 +94,5 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Wild Roads", 269, Rarity.UNCOMMON, mage.cards.w.WildRoads.class));
         cards.add(new SetCardInfo("Willowrush Verge", 270, Rarity.RARE, mage.cards.w.WillowrushVerge.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 271, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
 }

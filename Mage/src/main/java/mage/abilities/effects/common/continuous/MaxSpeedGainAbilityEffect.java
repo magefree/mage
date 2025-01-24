@@ -26,6 +26,7 @@ public class MaxSpeedGainAbilityEffect extends ContinuousEffectImpl {
 
     public MaxSpeedGainAbilityEffect(Ability ability) {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        ability.setRuleVisible(false);
         this.ability = ability;
     }
 

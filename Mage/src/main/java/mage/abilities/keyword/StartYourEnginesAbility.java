@@ -1,17 +1,25 @@
 package mage.abilities.keyword;
 
+import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
-import mage.constants.Zone;
+import mage.abilities.dynamicvalue.common.ControllerSpeedCount;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
+import mage.constants.*;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
- * TODO: Implement this
- *
  * @author TheElk801
  */
 public class StartYourEnginesAbility extends StaticAbility {
 
+    private static final Hint hint = new ValueHint("Your current speed", ControllerSpeedCount.instance);
+
     public StartYourEnginesAbility() {
-        super(Zone.BATTLEFIELD, null);
+        super(Zone.BATTLEFIELD, new StartYourEnginesEffect());
+        this.addHint(hint);
     }
 
     private StartYourEnginesAbility(final StartYourEnginesAbility ability) {
@@ -25,6 +33,32 @@ public class StartYourEnginesAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "Start your engines!";
+        return "start your engines!";
+    }
+}
+
+class StartYourEnginesEffect extends ContinuousEffectImpl {
+
+    StartYourEnginesEffect() {
+        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
+    }
+
+    private StartYourEnginesEffect(final StartYourEnginesEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public StartYourEnginesEffect copy() {
+        return new StartYourEnginesEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null || !player.initSpeed()) {
+            return false;
+        }
+        game.informPlayers(player.getLogName() + "'s speed is now 1.");
+        return true;
     }
 }

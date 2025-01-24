@@ -3978,6 +3978,21 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public int getSpeed() {
+        return computerPlayer.getSpeed();
+    }
+
+    @Override
+    public boolean initSpeed() {
+        return computerPlayer.initSpeed();
+    }
+
+    @Override
+    public void increaseSpeed() {
+        computerPlayer.increaseSpeed();
+    }
+
+    @Override
     public void setPayManaMode(boolean payManaMode) {
         computerPlayer.setPayManaMode(payManaMode);
     }
