@@ -3,33 +3,31 @@ package mage.abilities.dynamicvalue;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
+import mage.util.CardUtil;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Creates a {@link DynamicValue} that finds the maximum of multiple
+ * {@link DynamicValue}s.
+ */
 public class MaximumDynamicValue implements DynamicValue {
 
     private final List<DynamicValue> dynamicValues;
 
-    /**
-     * Creates a {@link DynamicValue} that finds the maximum of multiple
-     * {@link DynamicValue}s.
-     *
-     * @param dynamicValues The dynamic values to add together.
-     */
     public MaximumDynamicValue(DynamicValue... dynamicValues) {
-        this.dynamicValues = Arrays.asList(dynamicValues);
+        this(Arrays.asList(dynamicValues));
     }
 
-    /**
-     * Creates a {@link DynamicValue} that finds the maximum of multiple
-     * {@link DynamicValue}s.
-     *
-     * @param dynamicValues The dynamic values to add together.
-     */
     public MaximumDynamicValue(List<DynamicValue> dynamicValues) {
-        this.dynamicValues = dynamicValues;
+        this.dynamicValues = new ArrayList<>(dynamicValues);
+    }
+
+    private MaximumDynamicValue(final MaximumDynamicValue value) {
+        this.dynamicValues = CardUtil.deepCopyObject(value.dynamicValues);
     }
 
     @Override
@@ -39,7 +37,7 @@ public class MaximumDynamicValue implements DynamicValue {
 
     @Override
     public MaximumDynamicValue copy() {
-        return new MaximumDynamicValue(this.dynamicValues);
+        return new MaximumDynamicValue(this);
     }
 
     @Override
