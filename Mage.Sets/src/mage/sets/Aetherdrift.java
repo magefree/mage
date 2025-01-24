@@ -41,6 +41,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Brightglass Gearhulk", 191, Rarity.MYTHIC, mage.cards.b.BrightglassGearhulk.class));
         cards.add(new SetCardInfo("Cloudspire Captain", 9, Rarity.UNCOMMON, mage.cards.c.CloudspireCaptain.class));
         cards.add(new SetCardInfo("Count on Luck", 118, Rarity.RARE, mage.cards.c.CountOnLuck.class));
+        cards.add(new SetCardInfo("Country Roads", 253, Rarity.UNCOMMON, mage.cards.c.CountryRoads.class));
         cards.add(new SetCardInfo("Daretti, Rocketeer Engineer", 120, Rarity.RARE, mage.cards.d.DarettiRocketeerEngineer.class));
         cards.add(new SetCardInfo("Dismal Backwater", 254, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Earthrumbler", 160, Rarity.UNCOMMON, mage.cards.e.Earthrumbler.class));

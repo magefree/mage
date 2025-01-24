@@ -8,9 +8,9 @@ import mage.constants.SubType;
 /**
  * @author TheElk801
  */
-public final class PilotToken extends TokenImpl {
+public final class PilotCrewToken extends TokenImpl {
 
-    public PilotToken() {
+    public PilotCrewToken() {
         super("Pilot Token", "1/1 colorless Pilot creature token with \"This creature crews Vehicles as though its power were 2 greater.\"");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.PILOT);
@@ -19,11 +19,11 @@ public final class PilotToken extends TokenImpl {
         addAbility(new CrewIncreasedPowerAbility());
     }
 
-    private PilotToken(final PilotToken token) {
+    private PilotCrewToken(final PilotCrewToken token) {
         super(token);
     }
 
-    public PilotToken copy() {
-        return new PilotToken(this);
+    public PilotCrewToken copy() {
+        return new PilotCrewToken(this);
     }
 }

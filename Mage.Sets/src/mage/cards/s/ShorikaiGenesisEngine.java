@@ -14,7 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.SuperType;
-import mage.game.permanent.token.PilotToken;
+import mage.game.permanent.token.PilotCrewToken;
 
 import java.util.UUID;
 
@@ -35,7 +35,7 @@ public final class ShorikaiGenesisEngine extends CardImpl {
         Ability ability = new SimpleActivatedAbility(
                 new DrawDiscardControllerEffect(2, 1), new GenericManaCost(1)
         );
-        ability.addEffect(new CreateTokenEffect(new PilotToken()));
+        ability.addEffect(new CreateTokenEffect(new PilotCrewToken()));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
 
