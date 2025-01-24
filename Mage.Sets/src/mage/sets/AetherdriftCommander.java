@@ -68,6 +68,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Runner", 103, Rarity.MYTHIC, mage.cards.l.LightningRunner.class));
         cards.add(new SetCardInfo("Loyal Apprentice", 104, Rarity.UNCOMMON, mage.cards.l.LoyalApprentice.class));
         cards.add(new SetCardInfo("Midnight Clock", 79, Rarity.RARE, mage.cards.m.MidnightClock.class));
+        cards.add(new SetCardInfo("On Wings of Gold", 5, Rarity.RARE, mage.cards.o.OnWingsOfGold.class));
         cards.add(new SetCardInfo("One with the Machine", 80, Rarity.RARE, mage.cards.o.OneWithTheMachine.class));
         cards.add(new SetCardInfo("Ornithopter of Paradise", 133, Rarity.COMMON, mage.cards.o.OrnithopterOfParadise.class));
         cards.add(new SetCardInfo("Overflowing Basin", 165, Rarity.RARE, mage.cards.o.OverflowingBasin.class));
