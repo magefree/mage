@@ -25,6 +25,7 @@ public final class Aetherdrift extends ExpansionSet {
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 
+        cards.add(new SetCardInfo("Aether Syphon", 38, Rarity.UNCOMMON, mage.cards.a.AetherSyphon.class));
         cards.add(new SetCardInfo("Air Response Unit", 1, Rarity.UNCOMMON, mage.cards.a.AirResponseUnit.class));
         cards.add(new SetCardInfo("Bleachbone Verge", 250, Rarity.RARE, mage.cards.b.BleachboneVerge.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 251, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
