@@ -16,7 +16,7 @@ public final class PilotToken extends TokenImpl {
         subtype.add(SubType.PILOT);
         power = new MageInt(1);
         toughness = new MageInt(1);
-        addAbility(new CrewIncreasedPowerAbility("this creature"));
+        addAbility(new CrewIncreasedPowerAbility());
     }
 
     private PilotToken(final PilotToken token) {
