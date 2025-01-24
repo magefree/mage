@@ -86,6 +86,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Cove", 267, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Venomsac Lagac", 185, Rarity.COMMON, mage.cards.v.VenomsacLagac.class));
         cards.add(new SetCardInfo("Wastewood Verge", 268, Rarity.RARE, mage.cards.w.WastewoodVerge.class));
+        cards.add(new SetCardInfo("Wild Roads", 269, Rarity.UNCOMMON, mage.cards.w.WildRoads.class));
         cards.add(new SetCardInfo("Willowrush Verge", 270, Rarity.RARE, mage.cards.w.WillowrushVerge.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 271, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
 
