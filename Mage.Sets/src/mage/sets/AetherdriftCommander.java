@@ -76,6 +76,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Path of Ancestry", 166, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Peema Aether-Seer", 113, Rarity.UNCOMMON, mage.cards.p.PeemaAetherSeer.class));
         cards.add(new SetCardInfo("Pia and Kiran Nalaar", 105, Rarity.RARE, mage.cards.p.PiaAndKiranNalaar.class));
+        cards.add(new SetCardInfo("Prophet of the Scarab", 9, Rarity.RARE, mage.cards.p.ProphetOfTheScarab.class));
         cards.add(new SetCardInfo("Reality Shift", 39, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Reckless Fireweaver", 106, Rarity.COMMON, mage.cards.r.RecklessFireweaver.class));
         cards.add(new SetCardInfo("Retrofitter Foundry", 136, Rarity.RARE, mage.cards.r.RetrofitterFoundry.class));
