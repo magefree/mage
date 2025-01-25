@@ -42,6 +42,45 @@ public abstract class ExpansionSet implements Serializable {
     public static final CardGraphicInfo FULL_ART = new CardGraphicInfo(FrameStyle.MPOP_FULL_ART_BASIC, false);
     public static final CardGraphicInfo FULL_ART_USE_VARIOUS = new CardGraphicInfo(FrameStyle.MPOP_FULL_ART_BASIC, true);
 
+    // TODO: enable after mutate implementation
+    public static final boolean HIDE_MUTATE_CARDS = true;
+    public static final Set<String> MUTATE_CARD_NAMES = new HashSet<>(Arrays.asList(
+            "Archipelagore",
+            "Auspicious Starrix",
+            "Boneyard Lurker",
+            "Cavern Whisperer",
+            "Chittering Harvester",
+            "Cloudpiercer",
+            "Cubwarden",
+            "Dirge Bat",
+            "Dreamtail Heron",
+            "Everquill Phoenix",
+            "Gemrazer",
+            "Glowstone Recluse",
+            "Huntmaster Liger",
+            "Illuna, Apex of Wishes",
+            "Insatiable Hemophage",
+            "Lore Drakkis",
+            "Majestic Auricorn",
+            "Mindleecher",
+            "Migratory Greathorn",
+            "Necropanther",
+            "Nethroi, Apex of Death",
+            "Otrimi, the Ever-Playful",
+            "Parcelbeast",
+            "Porcuparrot",
+            "Pouncing Shoreshark",
+            "Regal Leosaur",
+            "Sawtusk Demolisher",
+            "Sea-Dasher Octopus",
+            "Snapdax, Apex of the Hunt",
+            "Souvenir Snatcher",
+            "Sawtusk Demolisher",
+            "Trumpeting Gnarr",
+            "Vadrok, Apex of Thunder",
+            "Vulpikeet"
+    ));
+
     public static class SetCardInfo implements Serializable {
 
         private final String name;

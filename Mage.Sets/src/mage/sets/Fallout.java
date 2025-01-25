@@ -444,6 +444,6 @@ public final class Fallout extends ExpansionSet {
         cards.add(new SetCardInfo("Yes Man, Personal Securitron", 901, Rarity.RARE, mage.cards.y.YesManPersonalSecuritron.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Young Deathclaws", 125, Rarity.UNCOMMON, mage.cards.y.YoungDeathclaws.class));
 
-        cards.removeIf(setCardInfo -> IkoriaLairOfBehemoths.mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
+        cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
     }
 }

@@ -1990,6 +1990,8 @@ public class VerifyCardDataTest {
 
         // special check: mutate is not supported yet, so must be removed from sets
         if (card.getAbilities().containsClass(MutateAbility.class)) {
+            // how-to fix: add that code at the end of the set
+            // cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
             fail(card, "abilities", "mutate cards aren't implemented and shouldn't be available");
         }
 

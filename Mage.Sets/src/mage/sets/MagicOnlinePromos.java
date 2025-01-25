@@ -4,6 +4,9 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * https://scryfall.com/sets/prm
  */
@@ -23,6 +26,8 @@ public class MagicOnlinePromos extends ExpansionSet {
         // workaround to fix compilation error: java: code too large
         addPart1(); // A-L
         addPart2(); // K-Z
+
+        cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
     }
 
     private void addPart1() {

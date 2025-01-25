@@ -13,39 +13,6 @@ import java.util.List;
  */
 public final class IkoriaLairOfBehemoths extends ExpansionSet {
 
-    public static final List<String> mutateNames = Arrays.asList(
-            "Archipelagore",
-            "Auspicious Starrix",
-            "Boneyard Lurker",
-            "Brokkos, Apex of Forever",
-            "Cavern Whisperer",
-            "Chittering Harvester",
-            "Cloudpiercer",
-            "Cubwarden",
-            "Dirge Bat",
-            "Dreamtail Heron",
-            "Everquill Phoenix",
-            "Gemrazer",
-            "Glowstone Recluse",
-            "Huntmaster Liger",
-            "Illuna, Apex of Wishes",
-            "Insatiable Hemophage",
-            "Lore Drakkis",
-            "Majestic Auricorn",
-            "Migratory Greathorn",
-            "Necropanther",
-            "Nethroi, Apex of Death",
-            "Parcelbeast",
-            "Porcuparrot",
-            "Pouncing Shoreshark",
-            "Regal Leosaur",
-            "Sea-Dasher Octopus",
-            "Snapdax, Apex of the Hunt",
-            "Trumpeting Gnarr",
-            "Vadrok, Apex of Thunder",
-            "Vulpikeet"
-    );
-
     private static final IkoriaLairOfBehemoths instance = new IkoriaLairOfBehemoths();
 
     public static IkoriaLairOfBehemoths getInstance() {
@@ -453,7 +420,7 @@ public final class IkoriaLairOfBehemoths extends ExpansionSet {
         cards.add(new SetCardInfo("Zirda, the Dawnwaker", 233, Rarity.RARE, mage.cards.z.ZirdaTheDawnwaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zirda, the Dawnwaker", 360, Rarity.RARE, mage.cards.z.ZirdaTheDawnwaker.class, NON_FULL_USE_VARIOUS));
 
-        cards.removeIf(setCardInfo -> mutateNames.contains(setCardInfo.getName())); // remove when mutate is implemented
+        cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
     }
 
     @Override
