@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * @author JayDi85
  */
-public final class RavnicaAllegianceGuildKits extends ExpansionSet {
+public final class RNAGuildKit extends ExpansionSet {
 
-    private static final RavnicaAllegianceGuildKits instance = new RavnicaAllegianceGuildKits();
+    private static final RNAGuildKit instance = new RNAGuildKit();
 
-    public static RavnicaAllegianceGuildKits getInstance() {
+    public static RNAGuildKit getInstance() {
         return instance;
     }
 
-    private RavnicaAllegianceGuildKits() {
-        super("Ravnica Allegiance Guild Kits", "GK2", ExpansionSet.buildDate(2019, 2, 15), SetType.SUPPLEMENTAL);
+    private RNAGuildKit() {
+        super("RNA Guild Kit", "GK2", ExpansionSet.buildDate(2019, 2, 15), SetType.SUPPLEMENTAL);
         this.blockName = "Guild Kits";
         this.hasBasicLands = true;
 

@@ -10,16 +10,16 @@ import mage.constants.SetType;
  * https://scryfall.com/sets/cmb1
  *
  */
-public class MysteryBoosterPlaytest extends ExpansionSet {
+public class MysteryBoosterPlaytestCards2019 extends ExpansionSet {
 
-    private static final MysteryBoosterPlaytest instance = new MysteryBoosterPlaytest();
+    private static final MysteryBoosterPlaytestCards2019 instance = new MysteryBoosterPlaytestCards2019();
 
-    public static MysteryBoosterPlaytest getInstance() {
+    public static MysteryBoosterPlaytestCards2019 getInstance() {
         return instance;
     }
 
-    private MysteryBoosterPlaytest() {
-        super("Mystery Booster Playtest", "CMB1", ExpansionSet.buildDate(2019, 11, 7), SetType.JOKE_SET);
+    private MysteryBoosterPlaytestCards2019() {
+        super("Mystery Booster Playtest Cards 2019", "CMB1", ExpansionSet.buildDate(2019, 11, 7), SetType.JOKE_SET);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

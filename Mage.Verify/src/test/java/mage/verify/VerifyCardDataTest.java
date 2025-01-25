@@ -904,13 +904,14 @@ public class VerifyCardDataTest {
             String needClassName = Arrays.stream(
                     set.getName()
                             .replaceAll("&", "And")
-                            .replaceAll("30th", "Thirtieth")
+                            .replaceAll("^(\\d+)", "The$1") // replace starting "2007 xxx" by "The2007"
                             .replace("-", " ")
                             .replaceAll("[.+-/:\"']", "")
                             .split(" ")
             ).map(CardUtil::getTextWithFirstCharUpperCase).reduce("", String::concat);
 
             if (!className.equals(needClassName)) {
+                // if set name start with a numbers then add "The" at the start
                 errorsList.add("Error: set's class name must be equal to set name: "
                         + className + " from " + set.getClass().getName() + ", caption: " + set.getName() + ", need name: " + needClassName);
             }

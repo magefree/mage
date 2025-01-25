@@ -543,7 +543,7 @@ public class ScryfallImageSupportCards {
             add("WOT"); // Wilds of Eldraine: Enchanting Tales
             add("WOC"); // Wilds of Eldraine Commander
             add("LCI"); // The Lost Caverns of Ixalan
-            add("LCC"); // The Lost Caverns of Ixalan Commander
+            add("LCC"); // The The Lost Caverns of Ixalan Commander
             add("REX"); // Jurassic World Collection
             add("SPG"); // Special Guests
             add("RVR"); // Ravnica Remastered

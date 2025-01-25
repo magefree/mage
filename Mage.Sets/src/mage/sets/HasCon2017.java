@@ -8,16 +8,16 @@ import mage.constants.SetType;
 /**
  * @author Saga
  */
-public final class HASCONPromo2017 extends ExpansionSet {
+public final class HasCon2017 extends ExpansionSet {
 
-    private static final HASCONPromo2017 instance = new HASCONPromo2017();
+    private static final HasCon2017 instance = new HasCon2017();
 
-    public static HASCONPromo2017 getInstance() {
+    public static HasCon2017 getInstance() {
         return instance;
     }
 
-    private HASCONPromo2017() {
-        super("HASCON Promo 2017", "H17", ExpansionSet.buildDate(2017, 9, 8), SetType.JOKE_SET);
+    private HasCon2017() {
+        super("HasCon 2017", "H17", ExpansionSet.buildDate(2017, 9, 8), SetType.JOKE_SET);
         this.hasBasicLands = false;
 
         cards.add(new ExpansionSet.SetCardInfo("Grimlock, Dinobot Leader", 1, Rarity.MYTHIC, mage.cards.g.GrimlockDinobotLeader.class));

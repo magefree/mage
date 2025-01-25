@@ -9,15 +9,15 @@ import mage.constants.SetType;
  *
  * @author JayDi85
  */
-public class ThirtiethAnniversaryEdition extends ExpansionSet {
+public class The30thAnniversaryEdition extends ExpansionSet {
 
-    private static final ThirtiethAnniversaryEdition instance = new ThirtiethAnniversaryEdition();
+    private static final The30thAnniversaryEdition instance = new The30thAnniversaryEdition();
 
-    public static ThirtiethAnniversaryEdition getInstance() {
+    public static The30thAnniversaryEdition getInstance() {
         return instance;
     }
 
-    private ThirtiethAnniversaryEdition() {
+    private The30thAnniversaryEdition() {
         super("30th Anniversary Edition", "30A", ExpansionSet.buildDate(2022, 11, 28), SetType.PROMOTIONAL);
         this.hasBasicLands = true;
         this.numBoosterLands = 3;

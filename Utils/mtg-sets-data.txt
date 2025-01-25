@@ -62,10 +62,10 @@ Conflux|CON|
 Coldsnap|CSP|
 Doctor Who|WHO|
 Duel Decks: Jace vs. Chandra|DD2|
-Duel Decks: Anthology, Divine vs. Demonic|DVD|
-Duel Decks: Anthology, Elves vs. Goblins|EVG|
-Duel Decks: Anthology, Garruk vs. Liliana|GVL|
-Duel Decks: Anthology, Jace vs. Chandra|JVC|
+Duel Decks Anthology: Divine vs. Demonic|DVD|
+Duel Decks Anthology: Elves vs. Goblins|EVG|
+Duel Decks Anthology: Garruk vs. Liliana|GVL|
+Duel Decks Anthology: Jace vs. Chandra|JVC|
 Duel Decks: Divine vs. Demonic|DDC|
 Duel Decks: Garruk vs. Liliana|DDD|
 Duel Decks: Phyrexia vs. the Coalition|DDE|
@@ -116,7 +116,7 @@ Fate Reforged|FRF|
 Foundations|FDN|
 Foundations Jumpstar|J25|
 Future Sight|FUT|
-Global Series: Jiang Yanggu & Mu Yanling|GS1|
+Global Series Jiang Yanggu & Mu Yanling|GS1|
 Guildpact|GPT|
 Guilds of Ravnica|GRN|
 Grand Prix|PGPX|
@@ -134,7 +134,7 @@ Ikoria: Lair of Behemoths|IKO|
 Invasion|INV|
 Innistrad|ISD|
 The Lost Caverns of Ixalan|LCI|
-Lost Caverns of Ixalan Commander|LCC|
+The Lost Caverns of Ixalan Commander|LCC|
 Innistrad: Midnight Hunt|MID|
 Midnight Hunt Commander|MIC|
 Innistrad: Crimson Vow|VOW|
@@ -265,7 +265,7 @@ Unhinged|UNH|
 Unfinity|UNF|
 Urza's Saga|USG|
 Unstable|UST|
-HASCON Promo 2017|H17|
+HasCon 2017|H17|
 From the Vault: Exiled|V09|
 From the Vault: Relics|V10|
 From the Vault: Legends|V11|

@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * https://scryfall.com/sets/g17
  */
-public class GiftPack2017 extends ExpansionSet {
+public class The2017GiftPack extends ExpansionSet {
 
-    private static final GiftPack2017 instance = new GiftPack2017();
+    private static final The2017GiftPack instance = new The2017GiftPack();
 
-    public static GiftPack2017 getInstance() {
+    public static The2017GiftPack getInstance() {
         return instance;
     }
 
-    private GiftPack2017() {
-        super("Gift Pack 2017", "G17", ExpansionSet.buildDate(2017, 10, 20), SetType.PROMOTIONAL);
+    private The2017GiftPack() {
+        super("2017 Gift Pack", "G17", ExpansionSet.buildDate(2017, 10, 20), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

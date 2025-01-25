@@ -8,16 +8,16 @@ import mage.constants.SetType;
 /**
  * @author TheElk801
  */
-public final class GuildsOfRavnicaGuildKits extends ExpansionSet {
+public final class GRNGuildKit extends ExpansionSet {
 
-    private static final GuildsOfRavnicaGuildKits instance = new GuildsOfRavnicaGuildKits();
+    private static final GRNGuildKit instance = new GRNGuildKit();
 
-    public static GuildsOfRavnicaGuildKits getInstance() {
+    public static GRNGuildKit getInstance() {
         return instance;
     }
 
-    private GuildsOfRavnicaGuildKits() {
-        super("Guilds of Ravnica Guild Kits", "GK1", ExpansionSet.buildDate(2018, 11, 2), SetType.SUPPLEMENTAL);
+    private GRNGuildKit() {
+        super("GRN Guild Kit", "GK1", ExpansionSet.buildDate(2018, 11, 2), SetType.SUPPLEMENTAL);
         this.blockName = "Guild Kits";
         this.hasBasicLands = true;
         

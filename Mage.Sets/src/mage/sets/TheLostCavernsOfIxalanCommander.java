@@ -8,16 +8,16 @@ import mage.constants.SetType;
 /**
  * @author Susucr
  */
-public final class LostCavernsOfIxalanCommander extends ExpansionSet {
+public final class TheLostCavernsOfIxalanCommander extends ExpansionSet {
 
-    private static final LostCavernsOfIxalanCommander instance = new LostCavernsOfIxalanCommander();
+    private static final TheLostCavernsOfIxalanCommander instance = new TheLostCavernsOfIxalanCommander();
 
-    public static LostCavernsOfIxalanCommander getInstance() {
+    public static TheLostCavernsOfIxalanCommander getInstance() {
         return instance;
     }
 
-    private LostCavernsOfIxalanCommander() {
-        super("Lost Caverns of Ixalan Commander", "LCC", ExpansionSet.buildDate(2023, 11, 17), SetType.SUPPLEMENTAL);
+    private TheLostCavernsOfIxalanCommander() {
+        super("The Lost Caverns of Ixalan Commander", "LCC", ExpansionSet.buildDate(2023, 11, 17), SetType.SUPPLEMENTAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

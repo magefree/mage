@@ -7,15 +7,15 @@ import mage.constants.SetType;
 /**
  * https://scryfall.com/sets/slc
  */
-public class SecretLairThirtiethAnniversaryCountdownKit extends ExpansionSet {
+public class SecretLair30thAnniversaryCountdownKit extends ExpansionSet {
 
-    private static final SecretLairThirtiethAnniversaryCountdownKit instance = new SecretLairThirtiethAnniversaryCountdownKit();
+    private static final SecretLair30thAnniversaryCountdownKit instance = new SecretLair30thAnniversaryCountdownKit();
 
-    public static SecretLairThirtiethAnniversaryCountdownKit getInstance() {
+    public static SecretLair30thAnniversaryCountdownKit getInstance() {
         return instance;
     }
 
-    private SecretLairThirtiethAnniversaryCountdownKit() {
+    private SecretLair30thAnniversaryCountdownKit() {
         super("Secret Lair 30th Anniversary Countdown Kit", "SLC", ExpansionSet.buildDate(2022, 11, 1), SetType.PROMOTIONAL);
         this.hasBasicLands = false;
 
