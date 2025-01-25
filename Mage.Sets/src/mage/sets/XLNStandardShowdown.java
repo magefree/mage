@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * https://scryfall.com/sets/pss2
  */
-public class IxalanStandardShowdown extends ExpansionSet {
+public class XLNStandardShowdown extends ExpansionSet {
 
-    private static final IxalanStandardShowdown instance = new IxalanStandardShowdown();
+    private static final XLNStandardShowdown instance = new XLNStandardShowdown();
 
-    public static IxalanStandardShowdown getInstance() {
+    public static XLNStandardShowdown getInstance() {
         return instance;
     }
 
-    private IxalanStandardShowdown() {
-        super("Ixalan Standard Showdown", "PSS2", ExpansionSet.buildDate(2017, 9, 29), SetType.PROMOTIONAL);
+    private XLNStandardShowdown() {
+        super("XLN Standard Showdown", "PSS2", ExpansionSet.buildDate(2017, 9, 29), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

@@ -8,16 +8,16 @@ import mage.constants.SetType;
  * https://scryfall.com/sets/ph17
  * @author PurpleCrowbar
  */
-public class HeroesOfTheRealm2017 extends ExpansionSet {
+public class The2017HeroesOfTheRealm extends ExpansionSet {
 
-    private static final HeroesOfTheRealm2017 instance = new HeroesOfTheRealm2017();
+    private static final The2017HeroesOfTheRealm instance = new The2017HeroesOfTheRealm();
 
-    public static HeroesOfTheRealm2017 getInstance() {
+    public static The2017HeroesOfTheRealm getInstance() {
         return instance;
     }
 
-    private HeroesOfTheRealm2017() {
-        super("Heroes of the Realm 2017", "PH17", ExpansionSet.buildDate(2018, 8, 1), SetType.JOKE_SET);
+    private The2017HeroesOfTheRealm() {
+        super("2017 Heroes of the Realm", "PH17", ExpansionSet.buildDate(2018, 8, 1), SetType.JOKE_SET);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

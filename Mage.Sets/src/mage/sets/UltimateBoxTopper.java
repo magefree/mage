@@ -8,16 +8,16 @@ import mage.constants.SetType;
 /**
  * @author JayDi85
  */
-public final class UltimateBoxTopperPromos extends ExpansionSet {
+public final class UltimateBoxTopper extends ExpansionSet {
 
-    private static final UltimateBoxTopperPromos instance = new UltimateBoxTopperPromos();
+    private static final UltimateBoxTopper instance = new UltimateBoxTopper();
 
-    public static UltimateBoxTopperPromos getInstance() {
+    public static UltimateBoxTopper getInstance() {
         return instance;
     }
 
-    private UltimateBoxTopperPromos() {
-        super("Ultimate Box Topper Promos", "PUMA", ExpansionSet.buildDate(2018, 12, 7), SetType.PROMOTIONAL);
+    private UltimateBoxTopper() {
+        super("Ultimate Box Topper", "PUMA", ExpansionSet.buildDate(2018, 12, 7), SetType.PROMOTIONAL);
         this.hasBasicLands = false;
         this.hasBoosters = false;
 

@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * https://scryfall.com/sets/pmei
  */
-public class MagazineInserts extends ExpansionSet {
+public class MediaAndCollaborationPromos extends ExpansionSet {
 
-    private static final MagazineInserts instance = new MagazineInserts();
+    private static final MediaAndCollaborationPromos instance = new MediaAndCollaborationPromos();
 
-    public static MagazineInserts getInstance() {
+    public static MediaAndCollaborationPromos getInstance() {
         return instance;
     }
 
-    private MagazineInserts() {
-        super("Magazine Inserts", "PMEI", ExpansionSet.buildDate(2020, 3, 26), SetType.PROMOTIONAL);
+    private MediaAndCollaborationPromos() {
+        super("Media and Collaboration Promos", "PMEI", ExpansionSet.buildDate(2020, 3, 26), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

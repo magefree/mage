@@ -8,16 +8,16 @@ import mage.constants.SetType;
  * https://scryfall.com/sets/ph19
  * @author PurpleCrowbar
  */
-public class HeroesOfTheRealm2019 extends ExpansionSet {
+public class The2019HeroesOfTheRealm extends ExpansionSet {
 
-    private static final HeroesOfTheRealm2019 instance = new HeroesOfTheRealm2019();
+    private static final The2019HeroesOfTheRealm instance = new The2019HeroesOfTheRealm();
 
-    public static HeroesOfTheRealm2019 getInstance() {
+    public static The2019HeroesOfTheRealm getInstance() {
         return instance;
     }
 
-    private HeroesOfTheRealm2019() {
-        super("Heroes of the Realm 2019", "PH19", ExpansionSet.buildDate(2020, 8, 1), SetType.JOKE_SET);
+    private The2019HeroesOfTheRealm() {
+        super("2019 Heroes of the Realm", "PH19", ExpansionSet.buildDate(2020, 8, 1), SetType.JOKE_SET);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

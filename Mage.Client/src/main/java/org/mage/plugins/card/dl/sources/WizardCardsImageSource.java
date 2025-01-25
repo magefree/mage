@@ -386,7 +386,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("ODY", "Odyssey");
         setsAliases.put("ONS", "Onslaught");
         setsAliases.put("ORI", "Magic Origins");
-        setsAliases.put("PC2", "Planechase 2012 Edition");
+        setsAliases.put("PC2", "Planechase 2012");
         setsAliases.put("PCY", "Prophecy");
         setsAliases.put("PD2", "Premium Deck Series: Fire and Lightning");
         setsAliases.put("PLC", "Planar Chaos");
@@ -409,7 +409,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("TMP", "Tempest");
         setsAliases.put("TOR", "Torment");
         setsAliases.put("TPR", "Tempest Remastered");
-        setsAliases.put("TSB", "Time Spiral \"Timeshifted\"");
+        setsAliases.put("TSB", "Time Spiral Timeshifted");
         setsAliases.put("TSP", "Time Spiral");
         setsAliases.put("UDS", "Urza's Destiny");
         setsAliases.put("UGL", "Unglued");

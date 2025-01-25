@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * @author LevelX2
  */
-public final class Planechase2012Edition extends ExpansionSet {
+public final class Planechase2012 extends ExpansionSet {
 
-    private static final Planechase2012Edition instance = new Planechase2012Edition();
+    private static final Planechase2012 instance = new Planechase2012();
 
-    public static Planechase2012Edition getInstance() {
+    public static Planechase2012 getInstance() {
         return instance;
     }
 
-    private Planechase2012Edition() {
-        super("Planechase 2012 Edition", "PC2", ExpansionSet.buildDate(2012, 6, 1), SetType.SUPPLEMENTAL);
+    private Planechase2012() {
+        super("Planechase 2012", "PC2", ExpansionSet.buildDate(2012, 6, 1), SetType.SUPPLEMENTAL);
         this.blockName = "Command Zone";
 
         cards.add(new SetCardInfo("Arc Trail", 39, Rarity.UNCOMMON, mage.cards.a.ArcTrail.class));

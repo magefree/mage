@@ -405,7 +405,7 @@ public class ScryfallImageSupportCards {
             add("XANA"); // Arena New Player Experience Extras
             add("OANA"); // Arena New Player Experience Cards
             add("PS18"); // San Diego Comic-Con 2018
-            add("PH17"); // Heroes of the Realm 2017
+            add("PH17"); // 2017 Heroes of the Realm
             add("C18"); // Commander 2018
             add("PGRN"); // Guilds of Ravnica Promos
             add("PRWK"); // GRN Ravnica Weekend
@@ -457,7 +457,7 @@ public class ScryfallImageSupportCards {
             //add("FMB1"); // Mystery Booster Retail Edition Foils
             add("HA2"); // Historic Anthology 2
             add("SLD"); // Secret Lair Drop
-            add("PMEI"); // Magazine Inserts
+            add("PMEI"); // Media and Collaboration Promos
             add("SLU"); // Secret Lair: Ultimate Edition
             add("SS3"); // Signature Spellbook: Chandra
             add("HA3"); // Historic Anthology 3

@@ -213,7 +213,7 @@ Magic Origins|ORI|
 Phyrexia: All Will Be One|ONE|
 Phyrexia: All Will Be One Commander|ONC|
 Portal Second Age|P02|
-Planechase 2012 Edition|PC2|
+Planechase 2012|PC2|
 Planechase Anthology|PCA|
 Prophecy|PCY|
 Premium Deck Series: Fire and Lightning|PD2|
@@ -254,7 +254,7 @@ Tempest|TMP|
 Throne of Eldraine|ELD|
 Torment|TOR|
 Tempest Remastered|TPR|
-Time Spiral "Timeshifted"|TSB|
+Time Spiral Timeshifted|TSB|
 Time Spiral|TSP|
 Transformers|BOT|
 Urza's Destiny|UDS|

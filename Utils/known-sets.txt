@@ -211,7 +211,7 @@ Phyrexia: All Will Be One|PhyrexiaAllWillBeOne|
 Phyrexia: All Will Be One Commander|PhyrexiaAllWillBeOneCommander|
 Planar Chaos|PlanarChaos|
 Planechase|Planechase|
-Planechase 2012 Edition|Planechase2012Edition|
+Planechase 2012|Planechase2012Edition|
 Planechase Anthology|PlanechaseAnthology|
 Planeshift|Planeshift|
 Portal|Portal|
@@ -258,7 +258,7 @@ Theros|Theros|
 Theros Beyond Death|TherosBeyondDeath|
 Throne of Eldraine|ThroneOfEldraine|
 Time Spiral|TimeSpiral|
-Time Spiral "Timeshifted"|TimeSpiralTimeshifted|
+Time Spiral Timeshifted|TimeSpiralTimeshifted|
 Torment|Torment|
 Transformers|Transformers|
 Ugin's Fate|UginsFate|

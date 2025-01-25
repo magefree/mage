@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * https://scryfall.com/sets/pxtc
  */
-public class IxalanTreasureChest extends ExpansionSet {
+public class XLNTreasureChest extends ExpansionSet {
 
-    private static final IxalanTreasureChest instance = new IxalanTreasureChest();
+    private static final XLNTreasureChest instance = new XLNTreasureChest();
 
-    public static IxalanTreasureChest getInstance() {
+    public static XLNTreasureChest getInstance() {
         return instance;
     }
 
-    private IxalanTreasureChest() {
-        super("Ixalan Treasure Chest", "PXTC", ExpansionSet.buildDate(2017, 11, 24), SetType.PROMOTIONAL);
+    private XLNTreasureChest() {
+        super("XLN Treasure Chest", "PXTC", ExpansionSet.buildDate(2017, 11, 24), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

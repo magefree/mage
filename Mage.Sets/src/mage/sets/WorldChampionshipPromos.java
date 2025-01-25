@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * https://scryfall.com/sets/pwor
  */
-public class Worlds extends ExpansionSet {
+public class WorldChampionshipPromos extends ExpansionSet {
 
-    private static final Worlds instance = new Worlds();
+    private static final WorldChampionshipPromos instance = new WorldChampionshipPromos();
 
-    public static Worlds getInstance() {
+    public static WorldChampionshipPromos getInstance() {
         return instance;
     }
 
-    private Worlds() {
-        super("Worlds", "PWOR", ExpansionSet.buildDate(1999, 8, 4), SetType.PROMOTIONAL);
+    private WorldChampionshipPromos() {
+        super("World Championship Promos", "PWOR", ExpansionSet.buildDate(1999, 8, 4), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

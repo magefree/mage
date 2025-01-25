@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * https://scryfall.com/sets/p15a
  */
-public class FifteenthAnniversaryCards extends ExpansionSet {
+public class The15thAnniversaryCards extends ExpansionSet {
 
-    private static final FifteenthAnniversaryCards instance = new FifteenthAnniversaryCards();
+    private static final The15thAnniversaryCards instance = new The15thAnniversaryCards();
 
-    public static FifteenthAnniversaryCards getInstance() {
+    public static The15thAnniversaryCards getInstance() {
         return instance;
     }
 
-    private FifteenthAnniversaryCards() {
-        super("Fifteenth Anniversary Cards", "P15A", ExpansionSet.buildDate(2008, 4, 1), SetType.PROMOTIONAL);
+    private The15thAnniversaryCards() {
+        super("15th Anniversary Cards", "P15A", ExpansionSet.buildDate(2008, 4, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 

@@ -8,16 +8,16 @@ import mage.constants.SetType;
  * https://scryfall.com/sets/phtr
  * @author TheElk801
  */
-public final class HeroesOfTheRealm2016 extends ExpansionSet {
+public final class The2016HeroesOfTheRealm extends ExpansionSet {
 
-    private static final HeroesOfTheRealm2016 instance = new HeroesOfTheRealm2016();
+    private static final The2016HeroesOfTheRealm instance = new The2016HeroesOfTheRealm();
 
-    public static HeroesOfTheRealm2016 getInstance() {
+    public static The2016HeroesOfTheRealm getInstance() {
         return instance;
     }
 
-    private HeroesOfTheRealm2016() {
-        super("Heroes of the Realm 2016", "PHTR", ExpansionSet.buildDate(2017, 9, 20), SetType.JOKE_SET);
+    private The2016HeroesOfTheRealm() {
+        super("2016 Heroes of the Realm", "PHTR", ExpansionSet.buildDate(2017, 9, 20), SetType.JOKE_SET);
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Chandra, Gremlin Wrangler", 1, Rarity.MYTHIC, mage.cards.c.ChandraGremlinWrangler.class));

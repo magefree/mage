@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * https://scryfall.com/sets/prw2
  */
-public class RavnicaAllegianceRavnicaWeekend extends ExpansionSet {
+public class RNARavnicaWeekend extends ExpansionSet {
 
-    private static final RavnicaAllegianceRavnicaWeekend instance = new RavnicaAllegianceRavnicaWeekend();
+    private static final RNARavnicaWeekend instance = new RNARavnicaWeekend();
 
-    public static RavnicaAllegianceRavnicaWeekend getInstance() {
+    public static RNARavnicaWeekend getInstance() {
         return instance;
     }
 
-    private RavnicaAllegianceRavnicaWeekend() {
-        super("Ravnica Allegiance Ravnica Weekend", "PRW2", ExpansionSet.buildDate(2019, 2, 16), SetType.PROMOTIONAL);
+    private RNARavnicaWeekend() {
+        super("RNA Ravnica Weekend", "PRW2", ExpansionSet.buildDate(2019, 2, 16), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = true;
 

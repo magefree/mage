@@ -7,16 +7,16 @@ import mage.constants.SetType;
 /**
  * https://scryfall.com/sets/sum
  */
-public class SummerMagic extends ExpansionSet {
+public class SummerMagicEdgar extends ExpansionSet {
 
-    private static final SummerMagic instance = new SummerMagic();
+    private static final SummerMagicEdgar instance = new SummerMagicEdgar();
 
-    public static SummerMagic getInstance() {
+    public static SummerMagicEdgar getInstance() {
         return instance;
     }
 
-    private SummerMagic() {
-        super("Summer Magic", "SUM", ExpansionSet.buildDate(1994, 6, 21), SetType.CORE);
+    private SummerMagicEdgar() {
+        super("Summer Magic / Edgar", "SUM", ExpansionSet.buildDate(1994, 6, 21), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;
