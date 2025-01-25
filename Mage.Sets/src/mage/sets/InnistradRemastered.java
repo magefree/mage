@@ -1,8 +1,6 @@
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
-import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -30,8 +28,6 @@ public class InnistradRemastered extends ExpansionSet {
         this.ratioBoosterMythic = 8;
         this.numBoosterDoubleFaced = -1;
         this.maxCardNumberInBooster = 480; // play boosters #1–480, collector boosters #1–491
-
-        final CardGraphicInfo FULL_ART = new CardGraphicInfo(FrameStyle.MPOP_FULL_ART_BASIC, true);
 
         cards.add(new SetCardInfo("Aberrant Researcher", 454, Rarity.UNCOMMON, mage.cards.a.AberrantResearcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aberrant Researcher", 52, Rarity.UNCOMMON, mage.cards.a.AberrantResearcher.class, NON_FULL_USE_VARIOUS));
@@ -72,7 +68,7 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Aurora of Emrakul", 260, Rarity.UNCOMMON, mage.cards.a.AuroraOfEmrakul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aurora of Emrakul", 472, Rarity.UNCOMMON, mage.cards.a.AuroraOfEmrakul.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacyn, Angel of Hope", 477, Rarity.MYTHIC, mage.cards.a.AvacynAngelOfHope.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Avacyn, Angel of Hope", 482, Rarity.MYTHIC, mage.cards.a.AvacynAngelOfHope.class, FULL_ART));
+        cards.add(new SetCardInfo("Avacyn, Angel of Hope", 482, Rarity.MYTHIC, mage.cards.a.AvacynAngelOfHope.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacyn, the Purifier", 11, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacyn, the Purifier", 449, Rarity.MYTHIC, mage.cards.a.AvacynThePurifier.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Avacynian Priest", 12, Rarity.COMMON, mage.cards.a.AvacynianPriest.class, NON_FULL_USE_VARIOUS));
@@ -129,13 +125,13 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Cackling Counterpart", 55, Rarity.UNCOMMON, mage.cards.c.CacklingCounterpart.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captivating Vampire", 100, Rarity.RARE, mage.cards.c.CaptivatingVampire.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Captivating Vampire", 374, Rarity.RARE, mage.cards.c.CaptivatingVampire.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Captivating Vampire", 484, Rarity.RARE, mage.cards.c.CaptivatingVampire.class, FULL_ART));
+        cards.add(new SetCardInfo("Captivating Vampire", 484, Rarity.RARE, mage.cards.c.CaptivatingVampire.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Cathar Commando", 15, Rarity.COMMON, mage.cards.c.CatharCommando.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cathar Commando", 336, Rarity.COMMON, mage.cards.c.CatharCommando.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cathar's Call", 16, Rarity.UNCOMMON, mage.cards.c.CatharsCall.class));
         cards.add(new SetCardInfo("Cathars' Crusade", 17, Rarity.RARE, mage.cards.c.CatharsCrusade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cathars' Crusade", 337, Rarity.RARE, mage.cards.c.CatharsCrusade.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Cathars' Crusade", 483, Rarity.RARE, mage.cards.c.CatharsCrusade.class, FULL_ART));
+        cards.add(new SetCardInfo("Cathars' Crusade", 483, Rarity.RARE, mage.cards.c.CatharsCrusade.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Chalice of Death", 257, Rarity.UNCOMMON, mage.cards.c.ChaliceOfDeath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chalice of Death", 471, Rarity.UNCOMMON, mage.cards.c.ChaliceOfDeath.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chalice of Life", 257, Rarity.UNCOMMON, mage.cards.c.ChaliceOfLife.class, NON_FULL_USE_VARIOUS));
@@ -207,13 +203,13 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Edgar Markov", 234, Rarity.MYTHIC, mage.cards.e.EdgarMarkov.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Edgar Markov", 328, Rarity.MYTHIC, mage.cards.e.EdgarMarkov.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Edgar Markov", 428, Rarity.MYTHIC, mage.cards.e.EdgarMarkov.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Edgar Markov", 491, Rarity.MYTHIC, mage.cards.e.EdgarMarkov.class, FULL_ART));
+        cards.add(new SetCardInfo("Edgar Markov", 491, Rarity.MYTHIC, mage.cards.e.EdgarMarkov.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Edgar's Awakening", 108, Rarity.UNCOMMON, mage.cards.e.EdgarsAwakening.class));
         cards.add(new SetCardInfo("Elder Deep-Fiend", 4, Rarity.RARE, mage.cards.e.ElderDeepFiend.class));
         cards.add(new SetCardInfo("Eldritch Evolution", 195, Rarity.RARE, mage.cards.e.EldritchEvolution.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Eldritch Evolution", 410, Rarity.RARE, mage.cards.e.EldritchEvolution.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Emrakul, the Promised End", 330, Rarity.MYTHIC, mage.cards.e.EmrakulThePromisedEnd.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Emrakul, the Promised End", 481, Rarity.MYTHIC, mage.cards.e.EmrakulThePromisedEnd.class, FULL_ART));
+        cards.add(new SetCardInfo("Emrakul, the Promised End", 481, Rarity.MYTHIC, mage.cards.e.EmrakulThePromisedEnd.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Emrakul, the Promised End", 5, Rarity.MYTHIC, mage.cards.e.EmrakulThePromisedEnd.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Epitaph Golem", 262, Rarity.COMMON, mage.cards.e.EpitaphGolem.class));
         cards.add(new SetCardInfo("Erupting Dreadwolf", 171, Rarity.UNCOMMON, mage.cards.e.EruptingDreadwolf.class, NON_FULL_USE_VARIOUS));
@@ -270,7 +266,7 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Grimgrin, Corpse-Born", 239, Rarity.MYTHIC, mage.cards.g.GrimgrinCorpseBorn.class));
         cards.add(new SetCardInfo("Griselbrand", 115, Rarity.MYTHIC, mage.cards.g.Griselbrand.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Griselbrand", 381, Rarity.MYTHIC, mage.cards.g.Griselbrand.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Griselbrand", 485, Rarity.MYTHIC, mage.cards.g.Griselbrand.class, FULL_ART));
+        cards.add(new SetCardInfo("Griselbrand", 485, Rarity.MYTHIC, mage.cards.g.Griselbrand.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Grisly Anglerfish", 458, Rarity.UNCOMMON, mage.cards.g.GrislyAnglerfish.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grisly Anglerfish", 67, Rarity.UNCOMMON, mage.cards.g.GrislyAnglerfish.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Grizzled Angler", 458, Rarity.UNCOMMON, mage.cards.g.GrizzledAngler.class, NON_FULL_USE_VARIOUS));
@@ -295,7 +291,7 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Heartless Summoning", 383, Rarity.RARE, mage.cards.h.HeartlessSummoning.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Helvault", 266, Rarity.RARE, mage.cards.h.Helvault.class));
         cards.add(new SetCardInfo("Hermit Druid", 202, Rarity.RARE, mage.cards.h.HermitDruid.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Hermit Druid", 488, Rarity.RARE, mage.cards.h.HermitDruid.class, FULL_ART));
+        cards.add(new SetCardInfo("Hermit Druid", 488, Rarity.RARE, mage.cards.h.HermitDruid.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Hinterland Logger", 203, Rarity.COMMON, mage.cards.h.HinterlandLogger.class));
         cards.add(new SetCardInfo("Honeymoon Hearse", 159, Rarity.UNCOMMON, mage.cards.h.HoneymoonHearse.class));
         cards.add(new SetCardInfo("Hopeful Initiate", 27, Rarity.RARE, mage.cards.h.HopefulInitiate.class, NON_FULL_USE_VARIOUS));
@@ -414,7 +410,7 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Odric, Lunarch Marshal", 298, Rarity.RARE, mage.cards.o.OdricLunarchMarshal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Odric, Lunarch Marshal", 36, Rarity.RARE, mage.cards.o.OdricLunarchMarshal.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Olivia Voldaren", 246, Rarity.MYTHIC, mage.cards.o.OliviaVoldaren.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Olivia Voldaren", 490, Rarity.MYTHIC, mage.cards.o.OliviaVoldaren.class, FULL_ART));
+        cards.add(new SetCardInfo("Olivia Voldaren", 490, Rarity.MYTHIC, mage.cards.o.OliviaVoldaren.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Olivia's Dragoon", 127, Rarity.COMMON, mage.cards.o.OliviasDragoon.class));
         cards.add(new SetCardInfo("Ormendahl, Profane Prince", 287, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ormendahl, Profane Prince", 474, Rarity.RARE, mage.cards.o.OrmendahlProfanePrince.class, NON_FULL_USE_VARIOUS));
@@ -517,21 +513,21 @@ public class InnistradRemastered extends ExpansionSet {
         cards.add(new SetCardInfo("Thalia, Heretic Cathar", 44, Rarity.RARE, mage.cards.t.ThaliaHereticCathar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Gitrog Monster", 238, Rarity.MYTHIC, mage.cards.t.TheGitrogMonster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Gitrog Monster", 431, Rarity.MYTHIC, mage.cards.t.TheGitrogMonster.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Gitrog Monster", 489, Rarity.MYTHIC, mage.cards.t.TheGitrogMonster.class, FULL_ART));
+        cards.add(new SetCardInfo("The Gitrog Monster", 489, Rarity.MYTHIC, mage.cards.t.TheGitrogMonster.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("The Meathook Massacre", 122, Rarity.MYTHIC, mage.cards.t.TheMeathookMassacre.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Meathook Massacre", 387, Rarity.MYTHIC, mage.cards.t.TheMeathookMassacre.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("The Meathook Massacre", 486, Rarity.MYTHIC, mage.cards.t.TheMeathookMassacre.class, FULL_ART));
+        cards.add(new SetCardInfo("The Meathook Massacre", 486, Rarity.MYTHIC, mage.cards.t.TheMeathookMassacre.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Thermo-Alchemist", 174, Rarity.UNCOMMON, mage.cards.t.ThermoAlchemist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thermo-Alchemist", 403, Rarity.UNCOMMON, mage.cards.t.ThermoAlchemist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thing in the Ice", 460, Rarity.RARE, mage.cards.t.ThingInTheIce.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thing in the Ice", 91, Rarity.RARE, mage.cards.t.ThingInTheIce.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Think Twice", 369, Rarity.COMMON, mage.cards.t.ThinkTwice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Think Twice", 92, Rarity.COMMON, mage.cards.t.ThinkTwice.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Thraben Inspector", 301, Rarity.COMMON, mage.cards.t.ThrabenInspector.class, FULL_ART));
+        cards.add(new SetCardInfo("Thraben Inspector", 301, Rarity.COMMON, mage.cards.t.ThrabenInspector.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Thraben Inspector", 45, Rarity.COMMON, mage.cards.t.ThrabenInspector.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Through the Breach", 175, Rarity.MYTHIC, mage.cards.t.ThroughTheBreach.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Through the Breach", 404, Rarity.MYTHIC, mage.cards.t.ThroughTheBreach.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Through the Breach", 487, Rarity.MYTHIC, mage.cards.t.ThroughTheBreach.class, FULL_ART));
+        cards.add(new SetCardInfo("Through the Breach", 487, Rarity.MYTHIC, mage.cards.t.ThroughTheBreach.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Timber Shredder", 203, Rarity.COMMON, mage.cards.t.TimberShredder.class));
         cards.add(new SetCardInfo("Tireless Tracker", 219, Rarity.RARE, mage.cards.t.TirelessTracker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tireless Tracker", 318, Rarity.RARE, mage.cards.t.TirelessTracker.class, NON_FULL_USE_VARIOUS));

@@ -1,8 +1,6 @@
 package mage.sets;
 
-import mage.cards.CardGraphicInfo;
 import mage.cards.ExpansionSet;
-import mage.cards.FrameStyle;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
@@ -21,8 +19,6 @@ public class AvacynRestoredPromos extends ExpansionSet {
         super("Avacyn Restored Promos", "PAVR", ExpansionSet.buildDate(2012, 4, 28), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
-
-        final CardGraphicInfo FULL_ART = new CardGraphicInfo(FrameStyle.MPOP_FULL_ART_BASIC, false);
 
         cards.add(new SetCardInfo("Angel of Glory's Rise", "A9", Rarity.RARE, mage.cards.a.AngelOfGlorysRise.class));
         cards.add(new SetCardInfo("Killing Wave", 111, Rarity.RARE, mage.cards.k.KillingWave.class, FULL_ART));

@@ -24,10 +24,23 @@ import java.util.stream.Collectors;
 public abstract class ExpansionSet implements Serializable {
 
     private static final Logger logger = Logger.getLogger(ExpansionSet.class);
-    public static final CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true);
+
+    // TODO: remove all usage to default (see below), keep bfz/zen/ust art styles for specific sets only
+    //  the main different in art styles - full art lands can have big mana icon at the bottom
     public static final CardGraphicInfo FULL_ART_BFZ_VARIOUS = new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true);
     public static final CardGraphicInfo FULL_ART_ZEN_VARIOUS = new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true);
     public static final CardGraphicInfo FULL_ART_UST_VARIOUS = new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true);
+
+    // default art styles in single set:
+    // - normal M15/image art (default)
+    // - normal M15/image art for multiple cards in set with same name
+    // - full art
+    // - full art for multiple cards in set with same name
+    // TODO: find or implement really full art in m15 render mode (without card name header)
+    public static final CardGraphicInfo NORMAL_ART = null;
+    public static final CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true); // TODO: rename to NORMAL_ART_USE_VARIOUS
+    public static final CardGraphicInfo FULL_ART = new CardGraphicInfo(FrameStyle.MPOP_FULL_ART_BASIC, false);
+    public static final CardGraphicInfo FULL_ART_USE_VARIOUS = new CardGraphicInfo(FrameStyle.MPOP_FULL_ART_BASIC, true);
 
     public static class SetCardInfo implements Serializable {
 
