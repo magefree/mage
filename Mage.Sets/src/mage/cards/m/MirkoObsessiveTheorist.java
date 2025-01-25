@@ -75,6 +75,6 @@ enum MirkoObsessiveTheoristPredicate implements ObjectSourcePlayerPredicate<Card
     @Override
     public boolean apply(ObjectSourcePlayer<Card> input, Game game) {
         Permanent sourcePermanent = input.getSource().getSourcePermanentOrLKI(game);
-        return sourcePermanent != null && input.getObject().getPower().getValue() <= sourcePermanent.getPower().getValue();
+        return sourcePermanent != null && input.getObject().getPower().getValue() < sourcePermanent.getPower().getValue();
     }
 }
