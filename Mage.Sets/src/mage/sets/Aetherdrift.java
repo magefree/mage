@@ -31,6 +31,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Amonkhet Raceway", 248, Rarity.UNCOMMON, mage.cards.a.AmonkhetRaceway.class));
         cards.add(new SetCardInfo("Apocalypse Runner", 188, Rarity.UNCOMMON, mage.cards.a.ApocalypseRunner.class));
         cards.add(new SetCardInfo("Avishkar Raceway", 249, Rarity.COMMON, mage.cards.a.AvishkarRaceway.class));
+        cards.add(new SetCardInfo("Beastrider Vanguard", 154, Rarity.COMMON, mage.cards.b.BeastriderVanguard.class));
         cards.add(new SetCardInfo("Bestow Greatness", 155, Rarity.COMMON, mage.cards.b.BestowGreatness.class));
         cards.add(new SetCardInfo("Bleachbone Verge", 250, Rarity.RARE, mage.cards.b.BleachboneVerge.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 251, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
