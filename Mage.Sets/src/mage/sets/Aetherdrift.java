@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class Aetherdrift extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Aether Syphon", "Amonkhet Raceway", "Avishkar Raceway", "Endrider Catalyzer", "Far Fortune, End Boss", "Goblin Surveyor", "Hazoret, Godseeker", "Hour of Victory", "Mendicant Core, Guidelight", "Momentum Breaker", "Muraganda Raceway", "Nesting Bot", "Perilous Snare", "Samut, the Driving Force", "Starting Column", "Streaking Oilgorger", "Vnwxt, Verbose Host", "Zahur, Glory's Past");
+    private static final List<String> unfinished = Arrays.asList("Aether Syphon", "Amonkhet Raceway", "Avishkar Raceway", "Embalmed Ascendant", "Endrider Catalyzer", "Far Fortune, End Boss", "Goblin Surveyor", "Hazoret, Godseeker", "Hour of Victory", "Mendicant Core, Guidelight", "Momentum Breaker", "Muraganda Raceway", "Nesting Bot", "Perilous Snare", "Samut, the Driving Force", "Starting Column", "Streaking Oilgorger", "Vnwxt, Verbose Host", "Zahur, Glory's Past");
     private static final Aetherdrift instance = new Aetherdrift();
 
     public static Aetherdrift getInstance() {
@@ -48,6 +48,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Daretti, Rocketeer Engineer", 120, Rarity.RARE, mage.cards.d.DarettiRocketeerEngineer.class));
         cards.add(new SetCardInfo("Dismal Backwater", 254, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Earthrumbler", 160, Rarity.UNCOMMON, mage.cards.e.Earthrumbler.class));
+        cards.add(new SetCardInfo("Embalmed Ascendant", 201, Rarity.UNCOMMON, mage.cards.e.EmbalmedAscendant.class));
         cards.add(new SetCardInfo("Endrider Catalyzer", 124, Rarity.COMMON, mage.cards.e.EndriderCatalyzer.class));
         cards.add(new SetCardInfo("Forest", 289, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Foul Roads", 255, Rarity.UNCOMMON, mage.cards.f.FoulRoads.class));
