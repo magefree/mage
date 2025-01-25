@@ -87,7 +87,7 @@ class SilentHallcreeperEffect extends OneShotEffect {
         Permanent sourcePermanent = source.getSourcePermanentIfItStillExists(game);
         Permanent copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (sourcePermanent != null && copyFromPermanent != null) {
-            game.copyPermanent(Duration.EndOfTurn, copyFromPermanent, sourcePermanent.getId(), source, new EmptyCopyApplier());
+            game.copyPermanent(Duration.Custom, copyFromPermanent, sourcePermanent.getId(), source, new EmptyCopyApplier());
             return true;
         }
         return false;
