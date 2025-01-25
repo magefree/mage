@@ -8,7 +8,8 @@ import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.constants.*;
 import mage.game.Game;
-import mage.players.Player;
+
+import java.util.Optional;
 
 /**
  * @author TheElk801
@@ -54,11 +55,9 @@ class StartYourEnginesEffect extends ContinuousEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.initSpeed()) {
-            return false;
-        }
-        game.informPlayers(player.getLogName() + "'s speed is now 1.");
+        Optional.ofNullable(source.getControllerId())
+                .map(game::getPlayer)
+                .ifPresent(player -> player.initSpeed(game));
         return true;
     }
 }

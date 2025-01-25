@@ -218,9 +218,9 @@ public interface Player extends MageItem, Copyable<Player> {
 
     int getSpeed();
 
-    boolean initSpeed();
+    void initSpeed(Game game);
 
-    void increaseSpeed();
+    void increaseSpeed(Game game);
 
     /**
      * Returns alternative casting costs a player can cast spells for

@@ -27,6 +27,7 @@ import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
+import mage.designations.Speed;
 import mage.filter.FilterCard;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
@@ -4684,18 +4685,20 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
-    public boolean initSpeed() {
-        if (speed < 1) {
-            speed = 1;
-            return true;
+    public void initSpeed(Game game) {
+        if (speed > 0) {
+            return;
         }
-        return false;
+        speed = 1;
+        game.getState().addDesignation(new Speed(), game, getId());
+        game.informPlayers(this.getLogName() + "'s speed is now 1.");
     }
 
     @Override
-    public void increaseSpeed() {
+    public void increaseSpeed(Game game) {
         if (speed < 4) {
             speed++;
+            game.informPlayers(this.getLogName() + "'s speed has increased to " + speed);
         }
     }
 

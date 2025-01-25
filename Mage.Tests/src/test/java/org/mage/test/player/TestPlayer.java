@@ -3983,13 +3983,13 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public boolean initSpeed() {
-        return computerPlayer.initSpeed();
+    public void initSpeed(Game game) {
+        computerPlayer.initSpeed(game);
     }
 
     @Override
-    public void increaseSpeed() {
-        computerPlayer.increaseSpeed();
+    public void increaseSpeed(Game game) {
+        computerPlayer.increaseSpeed(game);
     }
 
     @Override
