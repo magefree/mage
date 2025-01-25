@@ -365,7 +365,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("M13", "Magic 2013");
         setsAliases.put("M14", "Magic 2014");
         setsAliases.put("M15", "Magic 2015");
-        setsAliases.put("PMEI", "Media Inserts");
+        setsAliases.put("PMEI", "Media and Collaboration Promos");
         setsAliases.put("MBS", "Mirrodin Besieged");
         setsAliases.put("ME2", "Masters Edition II");
         setsAliases.put("ME3", "Masters Edition III");

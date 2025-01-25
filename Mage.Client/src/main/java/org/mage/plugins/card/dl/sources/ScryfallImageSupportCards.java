@@ -145,7 +145,7 @@ public class ScryfallImageSupportCards {
             add("PAL06"); // Arena League 2006
             //add("PMPS06"); // Magic Premiere Shop 2006
             add("PHUK"); // Hachette UK
-            add("PDCI"); // DCI Promos
+            add("DCI"); // DCI Promos
             add("P06"); // Magic Player Rewards 2006
             add("G06"); // Judge Gift Cards 2006
             add("F06"); // Friday Night Magic 2006
@@ -190,7 +190,6 @@ public class ScryfallImageSupportCards {
             add("P09"); // Magic Player Rewards 2009
             add("G09"); // Judge Gift Cards 2009
             add("F09"); // Friday Night Magic 2009
-            add("PBOOK"); // Miscellaneous Book Promos
             add("CON"); // Conflux
             add("DDC"); // Duel Decks: Divine vs. Demonic
             add("ARB"); // Alara Reborn
