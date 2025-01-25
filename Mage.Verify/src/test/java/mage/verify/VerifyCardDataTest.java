@@ -28,10 +28,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.repository.*;
 import mage.choices.Choice;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.SubType;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -968,21 +965,26 @@ public class VerifyCardDataTest {
 
         // CHECK: wrong set name
         for (ExpansionSet set : sets) {
-            if (true) {
-                continue; // TODO: enable after merge of 40k's cards pull requests (needs before set rename)
-            }
-            MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
-            if (jsonSet == null) {
-                // unofficial or inner set
+            if (set.getSetType().equals(SetType.CUSTOM_SET)) {
+                // skip unofficial sets like Star Wars
                 continue;
             }
-            if (!Objects.equals(set.getName(), jsonSet.name)) {
-                // how-to fix: rename xmage set to the json version or fix a set's code
-                // also don't forget to change names in mtg-cards-data.txt
-                errorsList.add(String.format("Error: wrong set name or set code: %s (mtgjson set for same code: %s)",
-                        set.getCode() + " - " + set.getName(),
-                        jsonSet.name
+
+            MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
+            if (jsonSet == null) {
+                errorsList.add(String.format("Error: unknown official set: %s - %s (make sure it use correct set code or mark it as SetType.CUSTOM_SET)",
+                        set.getCode(),
+                        set.getName()
                 ));
+            } else {
+                if (!Objects.equals(set.getName(), jsonSet.name)) {
+                    // how-to fix: rename xmage set to the json version or fix a set's code
+                    // also don't forget to change names in mtg-cards-data.txt
+                    errorsList.add(String.format("Error: wrong set name or set code: %s (mtgjson set for same code: %s)",
+                            set.getCode() + " - " + set.getName(),
+                            jsonSet.name
+                    ));
+                }
             }
         }
 
