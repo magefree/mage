@@ -19,15 +19,8 @@ public class InnistradRemastered extends ExpansionSet {
 
     private InnistradRemastered() {
         super("Innistrad Remastered", "INR", ExpansionSet.buildDate(2025, 1, 24), SetType.SUPPLEMENTAL);
-        this.hasBoosters = true; // TODO: after set release - improve rarity distribution or implement collation
-        this.hasBasicLands = true;
-        this.numBoosterLands = 1;
-        this.numBoosterCommon = 7 + 1; // +1 instead the list
-        this.numBoosterUncommon = 3 + 1; // +1 instead 1 of 2 wildcards
-        this.numBoosterRare = 1 + 1; // +1 instead 2 of 2 wildcards
-        this.ratioBoosterMythic = 8;
+        this.enablePlayOrArenaBooster(480); // play boosters #1–480, collector boosters #1–491
         this.numBoosterDoubleFaced = -1;
-        this.maxCardNumberInBooster = 480; // play boosters #1–480, collector boosters #1–491
 
         cards.add(new SetCardInfo("Aberrant Researcher", 454, Rarity.UNCOMMON, mage.cards.a.AberrantResearcher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aberrant Researcher", 52, Rarity.UNCOMMON, mage.cards.a.AberrantResearcher.class, NON_FULL_USE_VARIOUS));

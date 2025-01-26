@@ -741,4 +741,52 @@ public abstract class ExpansionSet implements Serializable {
         }
     }
 
+    /**
+     * Old default booster configuration (before 2024 - MKM)
+     */
+    public void enableDraftBooster(int maxCardNumberInBooster) {
+        // https://draftsim.com/draft-booster-vs-set-booster-mtg/
+        this.hasBoosters = true;
+        this.maxCardNumberInBooster = maxCardNumberInBooster;
+
+        this.hasBasicLands = true;
+        this.numBoosterLands = 1;
+        this.numBoosterCommon = 10;
+        this.numBoosterUncommon = 3;
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 8;
+    }
+
+    /**
+     * New default booster configuration (after 2024 - MKM)
+     */
+    public void enablePlayOrArenaBooster(int maxCardNumberInBooster) {
+        // https://mtg.fandom.com/wiki/Play_Booster
+        this.hasBoosters = true;
+        this.maxCardNumberInBooster = maxCardNumberInBooster;
+
+        // #1-6 Common
+        this.numBoosterCommon = 6;
+
+        // #7 Common or The List
+        // simplify: ignore 1.5% chance of a Special Guest card
+        this.numBoosterCommon++;
+
+        // #8-10 Uncommon
+        this.numBoosterUncommon = 3;
+
+        // #12 Rare or Mythic Rare
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 8; // 12.5% chance of a mythic rare
+
+        // #13 Basic land
+        this.hasBasicLands = true;
+        this.numBoosterLands = 1;
+
+        // #11 Non-foil Wildcard (A card of any rarity from the set. Guaranteed to be non-foil.)
+        // #14 Foil Wildcard (A card of any rarity from the set. Guaranteed to be foil.)
+        // simplify: use U + R instead x2 wild cards
+        this.numBoosterUncommon++;
+        this.numBoosterRare++;
+    }
 }
