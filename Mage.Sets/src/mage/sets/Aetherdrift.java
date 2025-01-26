@@ -54,6 +54,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Earthrumbler", 160, Rarity.UNCOMMON, mage.cards.e.Earthrumbler.class));
         cards.add(new SetCardInfo("Embalmed Ascendant", 201, Rarity.UNCOMMON, mage.cards.e.EmbalmedAscendant.class));
         cards.add(new SetCardInfo("Endrider Catalyzer", 124, Rarity.COMMON, mage.cards.e.EndriderCatalyzer.class));
+        cards.add(new SetCardInfo("Fearless Swashbuckler", 204, Rarity.RARE, mage.cards.f.FearlessSwashbuckler.class));
         cards.add(new SetCardInfo("Forest", 289, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Foul Roads", 255, Rarity.UNCOMMON, mage.cards.f.FoulRoads.class));
         cards.add(new SetCardInfo("Gilded Ghoda", 130, Rarity.COMMON, mage.cards.g.GildedGhoda.class));
