@@ -528,6 +528,8 @@ public class ScryfallImageSupportCards {
             add("ONC"); // Phyrexia: All Will Be One Commander
             add("PL23"); // Year of the Rabbit 2023
             add("DA1"); // Unknown Event
+            add("SIS"); // Shadows of the Past
+            add("SIR"); // Shadows over Innistrad Remastered
             add("SLP"); // Secret Lair Showdown
             add("MOM"); // March of the Machine
             add("MOC"); // March of the Machine Commander
@@ -564,6 +566,7 @@ public class ScryfallImageSupportCards {
             add("DSC"); // Duskmourn: House of Horror Commander
             add("FDN"); // Foundations
             add("J25"); // Foundations Jumpstart
+            add("PIO"); // Pioneer Masters
             add("INR"); // Innistrad Remastered
             add("DFT"); // Aetherdrift
             add("DRC"); // Aetherdrift Commander
