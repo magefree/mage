@@ -19,13 +19,10 @@ public class The30thAnniversaryEdition extends ExpansionSet {
 
     private The30thAnniversaryEdition() {
         super("30th Anniversary Edition", "30A", ExpansionSet.buildDate(2022, 11, 28), SetType.PROMOTIONAL);
-        this.hasBasicLands = true;
-        this.numBoosterLands = 3;
-        this.numBoosterCommon = 7;
-        this.numBoosterUncommon = 3;
-        this.numBoosterRare = 1;
-        this.numBoosterSpecial = 1;
-        this.ratioBoosterMythic = 8;
+
+        // https://mtg.fandom.com/wiki/30th_Anniversary_Edition
+        // Approximately three out of every ten packs will contain a rare retro frame card
+        this.enableDraftBooster(Integer.MAX_VALUE, 3, 7, 3, 1 + 1); // +1 to rare instead retro frame
 
         cards.add(new SetCardInfo("Air Elemental", 343, Rarity.UNCOMMON, mage.cards.a.AirElemental.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Air Elemental", 46, Rarity.UNCOMMON, mage.cards.a.AirElemental.class, NON_FULL_USE_VARIOUS));
@@ -89,8 +86,8 @@ public class The30thAnniversaryEdition extends ExpansionSet {
         cards.add(new SetCardInfo("Celestial Prism", 527, Rarity.UNCOMMON, mage.cards.c.CelestialPrism.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Channel", 184, Rarity.UNCOMMON, mage.cards.c.Channel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Channel", 481, Rarity.UNCOMMON, mage.cards.c.Channel.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Chaos Orb", 231, Rarity.RARE, mage.cards.c.ChaosOrb.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Chaos Orb", 528, Rarity.RARE, mage.cards.c.ChaosOrb.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Chaos Orb", 231, Rarity.RARE, mage.cards.c.ChaosOrb.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Chaos Orb", 528, Rarity.RARE, mage.cards.c.ChaosOrb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaoslace", 136, Rarity.RARE, mage.cards.c.Chaoslace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Chaoslace", 433, Rarity.RARE, mage.cards.c.Chaoslace.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Circle of Protection: Black", 10, Rarity.COMMON, mage.cards.c.CircleOfProtectionBlack.class, NON_FULL_USE_VARIOUS));

@@ -189,7 +189,7 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterCommon;
     protected int numBoosterUncommon;
     protected int numBoosterRare;
-    protected int numBoosterDoubleFaced; // -1 = include normally 0 = exclude  1-n = include explicit
+    protected int numBoosterDoubleFaced; // -1 = include by rarity slots, 0 = fail on tests, 1-n = include explicit
     protected double ratioBoosterMythic;
 
     protected boolean hasUnbalancedColors = false;
@@ -744,17 +744,18 @@ public abstract class ExpansionSet implements Serializable {
     /**
      * Old default booster configuration (before 2024 - MKM)
      */
-    public void enableDraftBooster(int maxCardNumberInBooster) {
+    public void enableDraftBooster(int maxCardNumberInBooster, int land, int common, int uncommon, int rare) {
         // https://draftsim.com/draft-booster-vs-set-booster-mtg/
         this.hasBoosters = true;
         this.maxCardNumberInBooster = maxCardNumberInBooster;
 
-        this.hasBasicLands = true;
-        this.numBoosterLands = 1;
-        this.numBoosterCommon = 10;
-        this.numBoosterUncommon = 3;
-        this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 8;
+        this.numBoosterLands = land;
+        this.hasBasicLands = land > 0;
+
+        this.numBoosterCommon = common;
+        this.numBoosterUncommon = uncommon;
+        this.numBoosterRare = rare;
+        this.ratioBoosterMythic = 8; // 12.5% chance of a mythic rare
     }
 
     /**

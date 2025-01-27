@@ -17,8 +17,14 @@ public final class InnistradDoubleFeature extends ExpansionSet {
 
     private InnistradDoubleFeature() {
         super("Innistrad: Double Feature", "DBL", ExpansionSet.buildDate(2021, 1, 28), SetType.SUPPLEMENTAL);
+
+        // https://magic.wizards.com/en/news/feature/innistrad-double-feature-product-overview-2021-11-15
+        // #535 Endless Ranks of the Dead is promo card, not in booster
+        // contains cards from x2 sets: Midnight Hunt and Crimson Vow
+        // simplified booster generation to use shared cards from both sets (real booster use 50/50 distribution)
+        this.enableDraftBooster(534, 0, 8 + 1, 4, 2);
         this.hasBasicLands = false;
-        // TODO: add booster generation
+        this.numBoosterDoubleFaced = -1;
 
         cards.add(new SetCardInfo("Abandon the Post", 127, Rarity.COMMON, mage.cards.a.AbandonThePost.class));
         cards.add(new SetCardInfo("Abrade", 406, Rarity.COMMON, mage.cards.a.Abrade.class));
@@ -328,8 +334,8 @@ public final class InnistradDoubleFeature extends ExpansionSet {
         cards.add(new SetCardInfo("Howlpack Avenger", 429, Rarity.RARE, mage.cards.h.HowlpackAvenger.class));
         cards.add(new SetCardInfo("Howlpack Piper", 472, Rarity.RARE, mage.cards.h.HowlpackPiper.class));
         cards.add(new SetCardInfo("Hullbreaker Horror", 330, Rarity.RARE, mage.cards.h.HullbreakerHorror.class));
-        cards.add(new SetCardInfo("Hungry Ridgewolf", 428, Rarity.COMMON, mage.cards.h.HungryRidgewolf.class));
         cards.add(new SetCardInfo("Hungry for More", 228, Rarity.UNCOMMON, mage.cards.h.HungryForMore.class));
+        cards.add(new SetCardInfo("Hungry Ridgewolf", 428, Rarity.COMMON, mage.cards.h.HungryRidgewolf.class));
         cards.add(new SetCardInfo("Ill-Tempered Loner", 429, Rarity.RARE, mage.cards.i.IllTemperedLoner.class));
         cards.add(new SetCardInfo("Immolation", 144, Rarity.COMMON, mage.cards.i.Immolation.class));
         cards.add(new SetCardInfo("Infernal Grasp", 107, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
