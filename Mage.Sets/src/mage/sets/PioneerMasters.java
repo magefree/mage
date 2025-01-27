@@ -23,7 +23,7 @@ public class PioneerMasters extends ExpansionSet {
         // bonus sheet already included in the PIO set in scryfall, so simplify it (e.g. use all cards)
         // TODO: implement special slot with x1 card from bonus sheet
         //   https://mtg.fandom.com/wiki/Pioneer_Masters/Bonus_sheet
-        this.enablePlayOrArenaBooster(Integer.MAX_VALUE);
+        this.enableArenaBooster(Integer.MAX_VALUE);
         this.hasBasicLands = false;
         this.numBoosterDoubleFaced = -1;
 

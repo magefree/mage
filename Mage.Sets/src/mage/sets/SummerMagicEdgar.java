@@ -17,12 +17,8 @@ public class SummerMagicEdgar extends ExpansionSet {
 
     private SummerMagicEdgar() {
         super("Summer Magic / Edgar", "SUM", ExpansionSet.buildDate(1994, 6, 21), SetType.CORE);
-        this.hasBoosters = true;
-        this.numBoosterLands = 0;
-        this.numBoosterCommon = 11;
-        this.numBoosterUncommon = 3;
-        this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 0;
+        this.hasBoosters = false;
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Air Elemental", 47, Rarity.UNCOMMON, mage.cards.a.AirElemental.class));
         cards.add(new SetCardInfo("Aladdin's Lamp", 231, Rarity.RARE, mage.cards.a.AladdinsLamp.class));

@@ -19,7 +19,7 @@ public class InnistradRemastered extends ExpansionSet {
 
     private InnistradRemastered() {
         super("Innistrad Remastered", "INR", ExpansionSet.buildDate(2025, 1, 24), SetType.SUPPLEMENTAL);
-        this.enablePlayOrArenaBooster(480); // play boosters #1–480, collector boosters #1–491
+        this.enablePlayBooster(480); // play boosters #1–480, collector boosters #1–491
         this.numBoosterDoubleFaced = -1;
 
         cards.add(new SetCardInfo("Aberrant Researcher", 454, Rarity.UNCOMMON, mage.cards.a.AberrantResearcher.class, NON_FULL_USE_VARIOUS));

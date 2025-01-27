@@ -19,7 +19,7 @@ public class ShadowsOverInnistradRemastered extends ExpansionSet {
 
     private ShadowsOverInnistradRemastered() {
         super("Shadows over Innistrad Remastered", "SIR", ExpansionSet.buildDate(2023, 3, 21), SetType.MAGIC_ARENA);
-        this.enablePlayOrArenaBooster(Integer.MAX_VALUE);
+        this.enableArenaBooster(Integer.MAX_VALUE);
         this.numBoosterDoubleFaced = -1;
 
         // TODO: implement special slot with x1 card from SIS - Shadows of the Past

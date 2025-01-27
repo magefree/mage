@@ -760,7 +760,7 @@ public abstract class ExpansionSet implements Serializable {
     /**
      * New default booster configuration (after 2024 - MKM)
      */
-    public void enablePlayOrArenaBooster(int maxCardNumberInBooster) {
+    public void enablePlayBooster(int maxCardNumberInBooster) {
         // https://mtg.fandom.com/wiki/Play_Booster
         this.hasBoosters = true;
         this.maxCardNumberInBooster = maxCardNumberInBooster;
@@ -788,5 +788,29 @@ public abstract class ExpansionSet implements Serializable {
         // simplify: use U + R instead x2 wild cards
         this.numBoosterUncommon++;
         this.numBoosterRare++;
+    }
+
+    public void enableArenaBooster(int maxCardNumberInBooster) {
+        // same as play booster on 2024
+        enablePlayBooster(maxCardNumberInBooster);
+    }
+
+    public void enableCollectorBooster(int maxCardNumberInBooster) {
+        // simplified rarity distribution
+        enableCollectorBooster(maxCardNumberInBooster, 1, 5, 4, 5);
+    }
+
+    public void enableCollectorBooster(int maxCardNumberInBooster, int land, int common, int uncommon, int rare) {
+        // https://mtg.fandom.com/wiki/Collector_Booster
+        this.hasBoosters = true;
+        this.maxCardNumberInBooster = maxCardNumberInBooster;
+
+        this.numBoosterLands = land;
+        this.hasBasicLands = land > 0;
+
+        this.numBoosterCommon = common;
+        this.numBoosterUncommon = uncommon;
+        this.numBoosterRare = rare;
+        this.ratioBoosterMythic = 8; // 12.5% chance of a mythic rare
     }
 }

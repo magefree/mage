@@ -27,9 +27,9 @@ import java.util.UUID;
 /**
  * @author notgreat
  */
-public final class BehemothOfVault extends CardImpl {
+public final class BehemothOfVault0 extends CardImpl {
 
-    public BehemothOfVault(UUID ownerId, CardSetInfo setInfo) {
+    public BehemothOfVault0(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
 
         this.subtype.add(SubType.ROBOT);
@@ -49,13 +49,13 @@ public final class BehemothOfVault extends CardImpl {
         this.addAbility(ability);
     }
 
-    private BehemothOfVault(final BehemothOfVault card) {
+    private BehemothOfVault0(final BehemothOfVault0 card) {
         super(card);
     }
 
     @Override
-    public BehemothOfVault copy() {
-        return new BehemothOfVault(this);
+    public BehemothOfVault0 copy() {
+        return new BehemothOfVault0(this);
     }
 }
 
