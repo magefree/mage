@@ -18,6 +18,7 @@ public final class Jumpstart2022 extends ExpansionSet {
     private Jumpstart2022() {
         super("Jumpstart 2022", "J22", ExpansionSet.buildDate(2020, 12, 2), SetType.SUPPLEMENTAL);
         this.blockName = "Jumpstart";
+        this.hasBoosters = false; // TODO: share code with JumpstartPoolGenerator and add single booster
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Academy Journeymage", 267, Rarity.COMMON, mage.cards.a.AcademyJourneymage.class));
@@ -686,15 +687,15 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Sling-Gang Lieutenant", 469, Rarity.UNCOMMON, mage.cards.s.SlingGangLieutenant.class));
         cards.add(new SetCardInfo("Smoldering Efreet", 600, Rarity.COMMON, mage.cards.s.SmolderingEfreet.class));
         cards.add(new SetCardInfo("Snapping Gnarlid", 730, Rarity.COMMON, mage.cards.s.SnappingGnarlid.class));
-        cards.add(new SetCardInfo("Snow-Covered Island", 833, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Island", 833, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class));
         cards.add(new SetCardInfo("So Tiny", 349, Rarity.COMMON, mage.cards.s.SoTiny.class));
         cards.add(new SetCardInfo("Sokenzan Smelter", 601, Rarity.UNCOMMON, mage.cards.s.SokenzanSmelter.class));
         cards.add(new SetCardInfo("Solemn Simulacrum", 797, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Soul Read", 17, Rarity.COMMON, mage.cards.s.SoulRead.class));
         cards.add(new SetCardInfo("Soul's Might", 731, Rarity.COMMON, mage.cards.s.SoulsMight.class));
         cards.add(new SetCardInfo("Soulcage Fiend", 470, Rarity.COMMON, mage.cards.s.SoulcageFiend.class));
-        cards.add(new SetCardInfo("Spark Reaper", 471, Rarity.COMMON, mage.cards.s.SparkReaper.class));
         cards.add(new SetCardInfo("Spark of Creativity", 602, Rarity.UNCOMMON, mage.cards.s.SparkOfCreativity.class));
+        cards.add(new SetCardInfo("Spark Reaper", 471, Rarity.COMMON, mage.cards.s.SparkReaper.class));
         cards.add(new SetCardInfo("Sparkmage Apprentice", 603, Rarity.COMMON, mage.cards.s.SparkmageApprentice.class));
         cards.add(new SetCardInfo("Sparktongue Dragon", 604, Rarity.COMMON, mage.cards.s.SparktongueDragon.class));
         cards.add(new SetCardInfo("Spawning Pit", 136, Rarity.UNCOMMON, mage.cards.s.SpawningPit.class));
@@ -731,8 +732,8 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Swamp", 104, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 105, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 106, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Swarm Shambler", 734, Rarity.RARE, mage.cards.s.SwarmShambler.class));
         cards.add(new SetCardInfo("Swarm of Bloodflies", 127, Rarity.UNCOMMON, mage.cards.s.SwarmOfBloodflies.class));
+        cards.add(new SetCardInfo("Swarm Shambler", 734, Rarity.RARE, mage.cards.s.SwarmShambler.class));
         cards.add(new SetCardInfo("Swift Kick", 612, Rarity.COMMON, mage.cards.s.SwiftKick.class));
         cards.add(new SetCardInfo("Synchronized Eviction", 18, Rarity.UNCOMMON, mage.cards.s.SynchronizedEviction.class));
         cards.add(new SetCardInfo("Syr Alin, the Lion's Claw", 252, Rarity.UNCOMMON, mage.cards.s.SyrAlinTheLionsClaw.class));
@@ -782,8 +783,8 @@ public final class Jumpstart2022 extends ExpansionSet {
         cards.add(new SetCardInfo("Triplicate Spirits", 258, Rarity.COMMON, mage.cards.t.TriplicateSpirits.class));
         cards.add(new SetCardInfo("Triskaidekaphobia", 479, Rarity.RARE, mage.cards.t.Triskaidekaphobia.class));
         cards.add(new SetCardInfo("Triton Shorestalker", 365, Rarity.COMMON, mage.cards.t.TritonShorestalker.class));
-        cards.add(new SetCardInfo("Trove Warden", 259, Rarity.RARE, mage.cards.t.TroveWarden.class));
         cards.add(new SetCardInfo("Trove of Temptation", 616, Rarity.UNCOMMON, mage.cards.t.TroveOfTemptation.class));
+        cards.add(new SetCardInfo("Trove Warden", 259, Rarity.RARE, mage.cards.t.TroveWarden.class));
         cards.add(new SetCardInfo("Turntimber Basilisk", 736, Rarity.UNCOMMON, mage.cards.t.TurntimberBasilisk.class));
         cards.add(new SetCardInfo("Typhoid Rats", 480, Rarity.COMMON, mage.cards.t.TyphoidRats.class));
         cards.add(new SetCardInfo("Uktabi Orangutan", 133, Rarity.UNCOMMON, mage.cards.u.UktabiOrangutan.class));

@@ -17,7 +17,6 @@ public final class Foundations extends ExpansionSet {
 
     private Foundations() {
         super("Foundations", "FDN", ExpansionSet.buildDate(2024, 11, 15), SetType.EXPANSION);
-        this.blockName = "Foundations"; // for sorting in GUI
         this.hasBasicLands = true;
         this.hasBoosters = false; // temporary
 
