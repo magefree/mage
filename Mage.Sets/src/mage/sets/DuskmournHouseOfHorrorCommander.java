@@ -151,6 +151,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kederekt Parasite", 144, Rarity.RARE, mage.cards.k.KederektParasite.class));
         cards.add(new SetCardInfo("Kefnet the Mindful", 118, Rarity.MYTHIC, mage.cards.k.KefnetTheMindful.class));
         cards.add(new SetCardInfo("Kheru Spellsnatcher", 119, Rarity.RARE, mage.cards.k.KheruSpellsnatcher.class));
+        cards.add(new SetCardInfo("Kianne, Corrupted Memory", 2, Rarity.MYTHIC, mage.cards.k.KianneCorruptedMemory.class));
         cards.add(new SetCardInfo("Leechridden Swamp", 286, Rarity.UNCOMMON, mage.cards.l.LeechriddenSwamp.class));
         cards.add(new SetCardInfo("Life Insurance", 224, Rarity.RARE, mage.cards.l.LifeInsurance.class));
         cards.add(new SetCardInfo("Light Up the Stage", 166, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));
