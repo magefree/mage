@@ -37,7 +37,7 @@ public final class DetentionChariot extends CardImpl {
         this.addAbility(new CrewAbility(3));
 
         // Cycling {W}
-        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{W} ({W}")));
+        this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{W}")));
     }
 
     private DetentionChariot(final DetentionChariot card) {
