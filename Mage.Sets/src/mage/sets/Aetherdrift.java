@@ -28,6 +28,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Aatchik, Emerald Radian", 187, Rarity.RARE, mage.cards.a.AatchikEmeraldRadian.class));
         cards.add(new SetCardInfo("Aether Syphon", 38, Rarity.UNCOMMON, mage.cards.a.AetherSyphon.class));
         cards.add(new SetCardInfo("Aetherjacket", 230, Rarity.COMMON, mage.cards.a.Aetherjacket.class));
+        cards.add(new SetCardInfo("Afterburner Expert", 150, Rarity.RARE, mage.cards.a.AfterburnerExpert.class));
         cards.add(new SetCardInfo("Agonasaur Rex", 151, Rarity.RARE, mage.cards.a.AgonasaurRex.class));
         cards.add(new SetCardInfo("Air Response Unit", 1, Rarity.UNCOMMON, mage.cards.a.AirResponseUnit.class));
         cards.add(new SetCardInfo("Amonkhet Raceway", 248, Rarity.UNCOMMON, mage.cards.a.AmonkhetRaceway.class));
