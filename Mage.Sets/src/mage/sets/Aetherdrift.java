@@ -122,6 +122,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Valor's Flagship", 35, Rarity.MYTHIC, mage.cards.v.ValorsFlagship.class));
         cards.add(new SetCardInfo("Veloheart Bike", 184, Rarity.COMMON, mage.cards.v.VeloheartBike.class));
         cards.add(new SetCardInfo("Venomsac Lagac", 185, Rarity.COMMON, mage.cards.v.VenomsacLagac.class));
+        cards.add(new SetCardInfo("Voyage Home", 227, Rarity.UNCOMMON, mage.cards.v.VoyageHome.class));
         cards.add(new SetCardInfo("Wastewood Verge", 268, Rarity.RARE, mage.cards.w.WastewoodVerge.class));
         cards.add(new SetCardInfo("Wild Roads", 269, Rarity.UNCOMMON, mage.cards.w.WildRoads.class));
         cards.add(new SetCardInfo("Willowrush Verge", 270, Rarity.RARE, mage.cards.w.WillowrushVerge.class));
