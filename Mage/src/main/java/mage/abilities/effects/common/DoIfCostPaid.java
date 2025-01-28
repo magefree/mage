@@ -8,6 +8,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.hint.Hint;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
@@ -20,6 +21,7 @@ public class DoIfCostPaid extends OneShotEffect {
     protected final Cost cost;
     private final String chooseUseText;
     private final boolean optional;
+    private Hint chooseHint = null;
 
     public DoIfCostPaid(Effect effectOnPaid, Cost cost) {
         this(effectOnPaid, cost, null);
@@ -63,6 +65,7 @@ public class DoIfCostPaid extends OneShotEffect {
         this.cost = effect.cost.copy();
         this.chooseUseText = effect.chooseUseText;
         this.optional = effect.optional;
+        this.chooseHint = effect.chooseHint;
     }
 
     public DoIfCostPaid addEffect(Effect effect) {
@@ -75,6 +78,19 @@ public class DoIfCostPaid extends OneShotEffect {
         return this;
     }
 
+    /**
+     * Allow to add additional info in pay dialog, so user can split it in diff use cases to remember by right click
+     * Example: ignore untap payment for already untapped permanent like Mana Vault
+     */
+    public DoIfCostPaid withChooseHint(Hint chooseHint) {
+        if (!this.optional) {
+            throw new IllegalArgumentException("Wrong code usage: chooseHint can be used for optional dialogs only");
+        }
+
+        this.chooseHint = chooseHint;
+        return this;
+    }
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = getPayingPlayer(game, source);
@@ -82,11 +98,16 @@ public class DoIfCostPaid extends OneShotEffect {
         if (player == null || mageObject == null) {
             return false;
         }
-        String message = CardUtil.replaceSourceName(makeChooseText(source), mageObject.getName());
+
+        // nothing to pay (do not support mana cost - it's true all the time)
+        if (!this.cost.canPay(source, source, player.getId(), game)) {
+            return false;
+        }
+
+        String message = CardUtil.replaceSourceName(makeChooseText(game, source), mageObject.getName());
         Outcome payOutcome = executingEffects.getOutcome(source, this.outcome);
-        boolean canPay = cost.canPay(source, source, player.getId(), game);
         boolean didPay = false;
-        if (canPay && (!optional || player.chooseUse(payOutcome, message, source, game))) {
+        if (!optional || player.chooseUse(payOutcome, message, source, game)) {
             cost.clearPaid();
             int bookmark = game.bookmarkState();
             if (cost.pay(source, game, source, player.getId(), false)) {
@@ -121,18 +142,26 @@ public class DoIfCostPaid extends OneShotEffect {
         }
     }
 
-    private String makeChooseText(Ability source) {
-        if (chooseUseText != null && !chooseUseText.isEmpty()) {
-            return chooseUseText;
+    private String makeChooseText(Game game, Ability source) {
+        // static
+        String res = chooseUseText;
+
+        // dynamic
+        if (res == null || res.isEmpty()) {
+            String effectText = executingEffects.getText(source.getModes().getMode());
+            if (!effectText.isEmpty() && effectText.charAt(effectText.length() - 1) == '.') {
+                effectText = effectText.substring(0, effectText.length() - 1);
+            }
+            res = CardUtil.addCostVerb(cost.getText()) + (effectText.isEmpty() ? "" : " and " + effectText) + "?";
+            res = Character.toUpperCase(res.charAt(0)) + res.substring(1);
         }
-        String message;
-        String effectText = executingEffects.getText(source.getModes().getMode());
-        if (!effectText.isEmpty() && effectText.charAt(effectText.length() - 1) == '.') {
-            effectText = effectText.substring(0, effectText.length() - 1);
+
+        // additional hint, so user can remember it
+        if (this.chooseHint != null) {
+            res += String.format(" (%s)", this.chooseHint.getText(game, source));
         }
-        message = CardUtil.addCostVerb(cost.getText()) + (effectText.isEmpty() ? "" : " and " + effectText) + "?";
-        message = Character.toUpperCase(message.charAt(0)) + message.substring(1);
-        return message;
+
+        return res;
     }
 
     protected Player getPayingPlayer(Game game, Ability source) {

@@ -10,9 +10,7 @@ import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.BatchEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeBatchEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -31,6 +29,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     private Condition interveningIfCondition;
     private boolean leavesTheBattlefieldTrigger;
     private int triggerLimitEachTurn = Integer.MAX_VALUE; // for "triggers only once|twice each turn"
+    private int triggerLimitEachGame = Integer.MAX_VALUE; // for "triggers only once|twice"
     private boolean doOnlyOnceEachTurn = false;
     private boolean replaceRuleText = false; // if true, replace "{this}" with "it" in effect text
     private GameEvent triggerEvent = null;
@@ -60,6 +59,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         this.interveningIfCondition = ability.interveningIfCondition;
         this.leavesTheBattlefieldTrigger = ability.leavesTheBattlefieldTrigger;
         this.triggerLimitEachTurn = ability.triggerLimitEachTurn;
+        this.triggerLimitEachGame = ability.triggerLimitEachGame;
         this.doOnlyOnceEachTurn = ability.doOnlyOnceEachTurn;
         this.replaceRuleText = ability.replaceRuleText;
         this.triggerEvent = ability.triggerEvent;
@@ -70,7 +70,8 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     public void trigger(Game game, UUID controllerId, GameEvent triggeringEvent) {
         //20091005 - 603.4
         if (checkInterveningIfClause(game)) {
-            setLastTrigger(game);
+            updateTurnCount(game);
+            updateGameCount(game);
             game.addTriggeredAbility(this, triggeringEvent);
         }
     }
@@ -89,7 +90,14 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
         );
     }
 
-    private void setLastTrigger(Game game) {
+    // Used for triggers with a per-game limit.
+    private String getKeyGameTriggeredCount(Game game) {
+        return CardUtil.getCardZoneString(
+                "gameTriggeredCount|" + getOriginalId(), getSourceId(), game
+        );
+    }
+
+    private void updateTurnCount(Game game) {
         if (triggerLimitEachTurn == Integer.MAX_VALUE) {
             return;
         }
@@ -106,6 +114,16 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             game.getState().setValue(keyLastTurnTriggered, currentTurn);
             game.getState().setValue(keyLastTurnTriggeredCount, 1);
         }
+    }
+
+    private void updateGameCount(Game game) {
+        if (triggerLimitEachGame == Integer.MAX_VALUE) {
+            return;
+        }
+        String keyGameTriggeredCount = getKeyGameTriggeredCount(game);
+        int lastCount = Optional.ofNullable((Integer) game.getState().getValue(keyGameTriggeredCount)).orElse(0);
+        // Incrementing the count.
+        game.getState().setValue(keyGameTriggeredCount, lastCount + 1);
     }
 
     @Override
@@ -126,7 +144,7 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
 
     @Override
     public boolean checkTriggeredLimit(Game game) {
-        return getRemainingTriggersLimitEachTurn(game) > 0;
+        return getRemainingTriggersLimitEachGame(game) > 0 && getRemainingTriggersLimitEachTurn(game) > 0;
     }
 
     @Override
@@ -147,6 +165,12 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
+    public TriggeredAbility setTriggersLimitEachGame(int limit) {
+        this.triggerLimitEachGame = limit;
+        return this;
+    }
+
+    @Override
     public int getRemainingTriggersLimitEachTurn(Game game) {
         if (triggerLimitEachTurn == Integer.MAX_VALUE) {
             return Integer.MAX_VALUE;
@@ -163,6 +187,16 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
             // Ability did not trigger this turn, so returning the limit
             return triggerLimitEachTurn;
         }
+    }
+
+    @Override
+    public int getRemainingTriggersLimitEachGame(Game game) {
+        if (triggerLimitEachGame == Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+        String keyGameTriggeredCount = getKeyGameTriggeredCount(game);
+        int count = Optional.ofNullable((Integer) game.getState().getValue(keyGameTriggeredCount)).orElse(0);
+        return Math.max(0, triggerLimitEachGame - count);
     }
 
     @Override
@@ -299,6 +333,21 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
                         sb.append(CardUtil.numberToText(triggerLimitEachTurn)).append(" times");
                 }
                 sb.append(" each turn.");
+            }
+            if (triggerLimitEachGame != Integer.MAX_VALUE) {
+                sb.append(" This ability triggers only ");
+                switch (triggerLimitEachGame) {
+                    case 1:
+                        sb.append("once.");
+                        break;
+                    case 2:
+                        // No card with that behavior yet, so feel free to change the text once one exist
+                        sb.append("twice.");
+                        break;
+                    default:
+                        // No card with that behavior yet, so feel free to change the text once one exist
+                        sb.append(CardUtil.numberToText(triggerLimitEachGame)).append(" times.");
+                }
             }
             if (doOnlyOnceEachTurn) {
                 sb.append(" Do this only once each turn.");

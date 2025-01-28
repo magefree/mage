@@ -1361,6 +1361,7 @@
 |Generate|TOK:SLD|Walker|3||WalkerToken|
 |Generate|TOK:SLD|Walker|4||WalkerToken|
 |Generate|TOK:SLD|Walker|5||WalkerToken|
+# TODO: Add new SLD token images
 
 # 2XM
 |Generate|TOK:2XM|Angel|||AngelToken|
@@ -2330,7 +2331,65 @@
 |Generate|TOK:BLB|Wall|||WallWhiteToken|
 
 # BLC
-|Generate|TOK:BLC|Racoon|||RaccoonToken|
+|Generate|TOK:BLC|Beast|1||BeastToken|
+|Generate|TOK:BLC|Beast|2||BeastToken2|
+|Generate|TOK:BLC|Bird|1||SwanSongBirdToken|
+|Generate|TOK:BLC|Bird|2||BirdToken|
+|Generate|TOK:BLC|Blood|||BloodToken|
+|Generate|TOK:BLC|Cat|||GreenCat2Token|
+|Generate|TOK:BLC|Citizen|||CitizenGreenWhiteToken|
+|Generate|TOK:BLC|Clue|||ClueArtifactToken|
+|Generate|TOK:BLC|Eldrazi|||EldraziToken|
+|Generate|TOK:BLC|Elemental|||WhiteElementalToken|
+|Generate|TOK:BLC|Elephant|||ElephantToken|
+|Generate|TOK:BLC|Faerie|||FaerieToken|
+|Generate|TOK:BLC|Frog Lizard|||FrogLizardToken|
+|Generate|TOK:BLC|Goat|||GoatToken|
+|Generate|TOK:BLC|Goblin|||GoblinToken|
+|Generate|TOK:BLC|Hamster|||HamsterToken|
+|Generate|TOK:BLC|Human|||HumanToken|
+|Generate|TOK:BLC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:BLC|Illusion|||CustomIllusionToken|
+|Generate|TOK:BLC|Octopus|||OctopusToken|
+|Generate|TOK:BLC|Pest|||Pest11GainLifeToken|
+|Generate|TOK:BLC|Phyrexian Golem|||PhyrexianGolemToken|
+|Generate|TOK:BLC|Raccoon|||RaccoonToken|
+|Generate|TOK:BLC|Rat|||RatToken|
+|Generate|TOK:BLC|Saproling|||SaprolingToken|
+|Generate|TOK:BLC|Shapeshifter|||ShapeshifterBlueToken|
+|Generate|TOK:BLC|Shark|||Shark33Token|
+|Generate|TOK:BLC|Soldier|||SoldierToken|
+|Generate|TOK:BLC|Spider|||SpiderToken|
+|Generate|TOK:BLC|Spirit|||SpiritWhiteToken|
+|Generate|TOK:BLC|Squid|||SquidToken|
+|Generate|TOK:BLC|Storm Crow|||StormCrowToken|
+|Generate|TOK:BLC|Thopter|||ThopterColorlessToken|
+|Generate|TOK:BLC|Wolf|1||GarrukCursedHuntsmanToken|
+|Generate|TOK:BLC|Wolf|2||WolfToken|
+
+# DSC
+|Generate|TOK:DSC|Angel|||AngelToken|
+|Generate|TOK:DSC|Beast|||BeastToken|
+|Generate|TOK:DSC|Bird|||Black22BirdToken|
+|Generate|TOK:DSC|Demon|||DemonToken|
+|Generate|TOK:DSC|Devil|||DevilToken|
+|Generate|TOK:DSC|Elemental|||TitaniaProtectorOfArgothElementalToken|
+|Generate|TOK:DSC|Fractal|||FractalToken|
+|Generate|TOK:DSC|Human Soldier|||HumanSoldierToken|
+|Generate|TOK:DSC|Inkling|||InklingToken|
+|Generate|TOK:DSC|Insect|1||IzoniInsectToken|
+|Generate|TOK:DSC|Insect|2||InsectToken|
+|Generate|TOK:DSC|Insect|3||InsectToken|
+|Generate|TOK:DSC|Insect|4||InsectDeathToken|
+|Generate|TOK:DSC|Ooze|1||OozeToken|
+|Generate|TOK:DSC|Ooze|2||BiogenicOozeToken|
+|Generate|TOK:DSC|Phyrexian Beast|||PhyrexianBeastToken|
+|Generate|TOK:DSC|Shapeshifter|||ShapeshifterDeathtouchToken|
+|Generate|TOK:DSC|Shark|||SharkToken|
+|Generate|TOK:DSC|Spider|||SpiderToken|
+|Generate|TOK:DSC|Treefolk|||WrennAndSevenTreefolkToken|
+|Generate|TOK:DSC|Wurm|1||Wurm55Token|
+|Generate|TOK:DSC|Wurm|2||WurmWithTrampleToken|
 
 # FDN
 |Generate|TOK:FDN|Beast|1||BeastToken|

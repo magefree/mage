@@ -282,7 +282,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("BOK", "Betrayers of Kamigawa");
         setsAliases.put("BRB", "Battle Royale Box Set");
         setsAliases.put("BTD", "Beatdown Box Set");
-        setsAliases.put("C13", "Commander 2013 Edition");
+        setsAliases.put("C13", "Commander 2013");
         setsAliases.put("C14", "Commander 2014");
         setsAliases.put("C15", "Commander 2015");
         setsAliases.put("C16", "Commander 2016");
@@ -365,7 +365,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("M13", "Magic 2013");
         setsAliases.put("M14", "Magic 2014");
         setsAliases.put("M15", "Magic 2015");
-        setsAliases.put("PMEI", "Media Inserts");
+        setsAliases.put("PMEI", "Media and Collaboration Promos");
         setsAliases.put("MBS", "Mirrodin Besieged");
         setsAliases.put("ME2", "Masters Edition II");
         setsAliases.put("ME3", "Masters Edition III");
@@ -386,7 +386,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("ODY", "Odyssey");
         setsAliases.put("ONS", "Onslaught");
         setsAliases.put("ORI", "Magic Origins");
-        setsAliases.put("PC2", "Planechase 2012 Edition");
+        setsAliases.put("PC2", "Planechase 2012");
         setsAliases.put("PCY", "Prophecy");
         setsAliases.put("PD2", "Premium Deck Series: Fire and Lightning");
         setsAliases.put("PLC", "Planar Chaos");
@@ -409,7 +409,7 @@ public enum WizardCardsImageSource implements CardImageSource {
         setsAliases.put("TMP", "Tempest");
         setsAliases.put("TOR", "Torment");
         setsAliases.put("TPR", "Tempest Remastered");
-        setsAliases.put("TSB", "Time Spiral \"Timeshifted\"");
+        setsAliases.put("TSB", "Time Spiral Timeshifted");
         setsAliases.put("TSP", "Time Spiral");
         setsAliases.put("UDS", "Urza's Destiny");
         setsAliases.put("UGL", "Unglued");

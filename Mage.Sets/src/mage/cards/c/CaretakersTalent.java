@@ -56,7 +56,7 @@ public final class CaretakersTalent extends CardImpl {
         this.addAbility(ability);
 
         // {3}{W}: Level 3
-        this.addAbility(new ClassLevelAbility(3, "{2}{W}"));
+        this.addAbility(new ClassLevelAbility(3, "{3}{W}"));
 
         // Creature tokens you control get +2/+2.
         this.addAbility(new SimpleStaticAbility(new GainClassAbilitySourceEffect(new BoostControlledEffect(

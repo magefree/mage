@@ -244,7 +244,8 @@ public class TriggeredAbilities extends LinkedHashMap<String, TriggeredAbility> 
                     NumberOfTriggersEvent numberOfTriggersEvent = new NumberOfTriggersEvent(ability, event);
                     // event == null - state based triggers like StateTriggeredAbility, must be ignored for number event
                     if (event == null || !game.replaceEvent(numberOfTriggersEvent, ability)) {
-                        int numTriggers = Integer.min(ability.getRemainingTriggersLimitEachTurn(game), numberOfTriggersEvent.getAmount());
+                        int limit = Integer.min(ability.getRemainingTriggersLimitEachGame(game), ability.getRemainingTriggersLimitEachTurn(game));
+                        int numTriggers = Integer.min(limit, numberOfTriggersEvent.getAmount());
                         for (int i = 0; i < numTriggers; i++) {
                             if (this.enableIntegrityLogs) {
                                 logger.info("trigger will be USED: " + ability);

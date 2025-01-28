@@ -24,7 +24,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.IzoniInsectToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlaneswalker;
 
 import java.util.Arrays;

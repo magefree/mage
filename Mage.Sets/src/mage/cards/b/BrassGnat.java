@@ -3,6 +3,8 @@ package mage.cards.b;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.condition.common.SourceTappedCondition;
+import mage.abilities.hint.ConditionHint;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -35,6 +37,7 @@ public final class BrassGnat extends CardImpl {
         // At the beginning of your upkeep, you may pay {1}. If you do, untap Brass Gnat.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
                 new DoIfCostPaid(new UntapSourceEffect(), new GenericManaCost(1))
+                        .withChooseHint(new ConditionHint(SourceTappedCondition.UNTAPPED))
         ));
     }
 

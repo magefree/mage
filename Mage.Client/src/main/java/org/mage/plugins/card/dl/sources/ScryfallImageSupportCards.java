@@ -145,7 +145,7 @@ public class ScryfallImageSupportCards {
             add("PAL06"); // Arena League 2006
             //add("PMPS06"); // Magic Premiere Shop 2006
             add("PHUK"); // Hachette UK
-            add("PDCI"); // DCI Promos
+            add("DCI"); // DCI Promos
             add("P06"); // Magic Player Rewards 2006
             add("G06"); // Judge Gift Cards 2006
             add("F06"); // Friday Night Magic 2006
@@ -190,7 +190,6 @@ public class ScryfallImageSupportCards {
             add("P09"); // Magic Player Rewards 2009
             add("G09"); // Judge Gift Cards 2009
             add("F09"); // Friday Night Magic 2009
-            add("PBOOK"); // Miscellaneous Book Promos
             add("CON"); // Conflux
             add("DDC"); // Duel Decks: Divine vs. Demonic
             add("ARB"); // Alara Reborn
@@ -405,7 +404,7 @@ public class ScryfallImageSupportCards {
             add("XANA"); // Arena New Player Experience Extras
             add("OANA"); // Arena New Player Experience Cards
             add("PS18"); // San Diego Comic-Con 2018
-            add("PH17"); // Heroes of the Realm 2017
+            add("PH17"); // 2017 Heroes of the Realm
             add("C18"); // Commander 2018
             add("PGRN"); // Guilds of Ravnica Promos
             add("PRWK"); // GRN Ravnica Weekend
@@ -457,7 +456,7 @@ public class ScryfallImageSupportCards {
             //add("FMB1"); // Mystery Booster Retail Edition Foils
             add("HA2"); // Historic Anthology 2
             add("SLD"); // Secret Lair Drop
-            add("PMEI"); // Magazine Inserts
+            add("PMEI"); // Media and Collaboration Promos
             add("SLU"); // Secret Lair: Ultimate Edition
             add("SS3"); // Signature Spellbook: Chandra
             add("HA3"); // Historic Anthology 3
@@ -467,7 +466,7 @@ public class ScryfallImageSupportCards {
             // add("DD3"); // Duel Decks Anthology
             // add("PZ1"); // Legendary Cube
             add("IKO"); // Ikoria: Lair of Behemoths
-            add("C20"); // Commander 2020 Edition
+            add("C20"); // Commander 2020
             add("M21"); // Core Set 2021
             add("JMP"); // Jumpstart
             add("PH19"); // 2019 Heroes of the Realm
@@ -488,7 +487,7 @@ public class ScryfallImageSupportCards {
             add("STA"); // Strixhaven Mystical Archive
             add("HA4"); // Historic Anthology 4
             add("HA5"); // Historic Anthology 5
-            add("C21"); // Commander 2021 Edition
+            add("C21"); // Commander 2021
             add("MH2"); // Modern Horizons 2
             add("H1R"); // Modern Horizons 1 Timeshifts
             add("PLG21"); // Love Your LGS 2021
@@ -514,7 +513,7 @@ public class ScryfallImageSupportCards {
             add("DMU"); // Dominaria United
             add("DMC"); // Dominaria United Commander
             add("YDMU"); // Alchemy: Dominaria
-            add("40K"); // Warhammer 40,000
+            add("40K"); // Warhammer 40,000 Commander
             add("UNF"); // Unfinity
             add("GN3"); // Game Night: Free-for-All
             add("BRO"); // The Brothers' War
@@ -529,12 +528,14 @@ public class ScryfallImageSupportCards {
             add("ONC"); // Phyrexia: All Will Be One Commander
             add("PL23"); // Year of the Rabbit 2023
             add("DA1"); // Unknown Event
+            add("SIS"); // Shadows of the Past
+            add("SIR"); // Shadows over Innistrad Remastered
             add("SLP"); // Secret Lair Showdown
             add("MOM"); // March of the Machine
             add("MOC"); // March of the Machine Commander
             add("MAT"); // March of the Machine: The Aftermath
             add("MUL"); // Multiverse Legends
-            add("30A"); // Thirtieth Anniversary Edition
+            add("30A"); // 30th Anniversary Edition
             add("LTR"); // The Lord of the Rings: Tales of Middle-Earth
             add("LTC"); // Tales of Middle-Earth Commander
             add("CMM"); // Commander Masters
@@ -543,7 +544,7 @@ public class ScryfallImageSupportCards {
             add("WOT"); // Wilds of Eldraine: Enchanting Tales
             add("WOC"); // Wilds of Eldraine Commander
             add("LCI"); // The Lost Caverns of Ixalan
-            add("LCC"); // The Lost Caverns of Ixalan Commander
+            add("LCC"); // The The Lost Caverns of Ixalan Commander
             add("REX"); // Jurassic World Collection
             add("SPG"); // Special Guests
             add("RVR"); // Ravnica Remastered
@@ -565,7 +566,10 @@ public class ScryfallImageSupportCards {
             add("DSC"); // Duskmourn: House of Horror Commander
             add("FDN"); // Foundations
             add("J25"); // Foundations Jumpstart
+            add("PIO"); // Pioneer Masters
+            add("INR"); // Innistrad Remastered
             add("DFT"); // Aetherdrift
+            add("DRC"); // Aetherdrift Commander
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
@@ -612,39 +616,55 @@ public class ScryfallImageSupportCards {
             // SLD
             // fake double faced cards
             put("SLD/Adrix and Nev, Twincasters/1544b", "https://api.scryfall.com/cards/sld/1544/en?format=image&face=back");
+            put("SLD/Ajani Goldmane/745b", "https://api.scryfall.com/cards/sld/745/en?format=image&face=back");
             put("SLD/Ajani Goldmane/1453b", "https://api.scryfall.com/cards/sld/1453/en?format=image&face=back");
             put("SLD/Anointed Procession/1511b", "https://api.scryfall.com/cards/sld/1453/en?format=image&face=back");
+            put("SLD/Birds of Paradise/1675b", "https://api.scryfall.com/cards/sld/1675/en?format=image&face=back");
             put("SLD/Blightsteel Colossus/1079b", "https://api.scryfall.com/cards/sld/1079/en?format=image&face=back");
+            put("SLD/Chandra Nalaar/748b", "https://api.scryfall.com/cards/sld/748/en?format=image&face=back");
             put("SLD/Chandra Nalaar/1456b", "https://api.scryfall.com/cards/sld/1456/en?format=image&face=back");
             put("SLD/Darksteel Colossus/1081b", "https://api.scryfall.com/cards/sld/1081/en?format=image&face=back");
             put("SLD/Death Baron/1458b", "https://api.scryfall.com/cards/sld/1458/en?format=image&face=back");
             put("SLD/Doubling Cube/1080b", "https://api.scryfall.com/cards/sld/1080/en?format=image&face=back");
+            put("SLD/Estrid's Invocation/1325b", "https://api.scryfall.com/cards/sld/1325/en?format=image&face=back");
+            put("SLD/Estrid, the Masked/1327b", "https://api.scryfall.com/cards/sld/1327/en?format=image&face=back");
             put("SLD/Etali, Primal Storm/1123b", "https://api.scryfall.com/cards/sld/1123/en?format=image&face=back");
+            put("SLD/Garruk Wildspeaker/749b", "https://api.scryfall.com/cards/sld/749/en?format=image&face=back");
             put("SLD/Garruk Wildspeaker/1457b", "https://api.scryfall.com/cards/sld/1457/en?format=image&face=back");
             put("SLD/Ghalta, Primal Hunger/1124b", "https://api.scryfall.com/cards/sld/1124/en?format=image&face=back");
             put("SLD/Grimgrin, Corpse-Born/1461b", "https://api.scryfall.com/cards/sld/1461/en?format=image&face=back");
+            put("SLD/Jace Beleren/746b", "https://api.scryfall.com/cards/sld/746/en?format=image&face=back");
             put("SLD/Jace Beleren/1454b", "https://api.scryfall.com/cards/sld/1454/en?format=image&face=back");
             put("SLD/Jetmir, Nexus of Revels/1509b", "https://api.scryfall.com/cards/sld/1509/en?format=image&face=back");
+            put("SLD/Jetmir, Nexus of Revels/1555b", "https://api.scryfall.com/cards/sld/1555/en?format=image&face=back");
             put("SLD/Jinnie Fay, Jetmir's Second/1510b", "https://api.scryfall.com/cards/sld/1510/en?format=image&face=back");
+            put("SLD/Jinnie Fay, Jetmir's Second/1556b", "https://api.scryfall.com/cards/sld/1556/en?format=image&face=back");
+            put("SLD/Kardur, Doomscourge/1807b", "https://api.scryfall.com/cards/sld/1807/en?format=image&face=back");
             put("SLD/Krark's Thumb/383b", "https://api.scryfall.com/cards/sld/383/en?format=image&face=back");
             put("SLD/Krark, the Thumbless/1543b", "https://api.scryfall.com/cards/sld/1543/en?format=image&face=back");
+            put("SLD/Liliana Vess/747b", "https://api.scryfall.com/cards/sld/747/en?format=image&face=back");
             put("SLD/Liliana Vess/1455b", "https://api.scryfall.com/cards/sld/1455/en?format=image&face=back");
+            put("SLD/Norin the Wary/827b", "https://api.scryfall.com/cards/sld/827/en?format=image&face=back");
             put("SLD/Noxious Ghoul/1459b", "https://api.scryfall.com/cards/sld/1459/en?format=image&face=back");
             put("SLD/Okaun, Eye of Chaos/380b", "https://api.scryfall.com/cards/sld/380/en?format=image&face=back");
-            put("SLD/Okaun, Eye of Chaos/380b*", "https://api.scryfall.com/cards/sld/380★/en?format=image&face=back");
+            put("SLD/Okaun, Eye of Chaos/380*b", "https://api.scryfall.com/cards/sld/380★/en?format=image&face=back");
             put("SLD/Propaganda/381b", "https://api.scryfall.com/cards/sld/381/en?format=image&face=back");
             put("SLD/Rin and Seri, Inseparable/1508b", "https://api.scryfall.com/cards/sld/1508/en?format=image&face=back");
+            put("SLD/Rin and Seri, Inseparable/1554b", "https://api.scryfall.com/cards/sld/1554/en?format=image&face=back");
             put("SLD/Sakashima of a Thousand Faces/1541b", "https://api.scryfall.com/cards/sld/1541/en?format=image&face=back");
             put("SLD/Sol Ring/1512b", "https://api.scryfall.com/cards/sld/1512/en?format=image&face=back");
+            put("SLD/Steely Resolve/1326b", "https://api.scryfall.com/cards/sld/1326/en?format=image&face=back");
             put("SLD/Stitch in Time/382b", "https://api.scryfall.com/cards/sld/382/en?format=image&face=back");
             put("SLD/Terror/750b", "https://api.scryfall.com/cards/sld/750/en?format=image&face=back");
+            put("SLD/Tuvasa the Sunlit/1328b", "https://api.scryfall.com/cards/sld/1328/en?format=image&face=back");
             put("SLD/Ulamog, the Ceaseless Hunger/1122b", "https://api.scryfall.com/cards/sld/1122/en?format=image&face=back");
             put("SLD/Unholy Grotto/1462b", "https://api.scryfall.com/cards/sld/1462/en?format=image&face=back");
             put("SLD/Yargle, Glutton of Urborg/1542b", "https://api.scryfall.com/cards/sld/1542/en?format=image&face=back");
             put("SLD/Zndrsplt, Eye of Wisdom/379b", "https://api.scryfall.com/cards/sld/379/en?format=image&face=back");
-            put("SLD/Zndrsplt, Eye of Wisdom/379b*", "https://api.scryfall.com/cards/sld/379★/en?format=image&face=back");
+            put("SLD/Zndrsplt, Eye of Wisdom/379*b", "https://api.scryfall.com/cards/sld/379★/en?format=image&face=back");
             put("SLD/Zombie Master/1460b", "https://api.scryfall.com/cards/sld/1460/en?format=image&face=back");
             // normal cards
+            put("SLD/Counterspell/99999SCTLR", "https://api.scryfall.com/cards/sld/SCTLR/"); // see issue 11157
             put("SLD/Viscera Seer/99999VS", "https://api.scryfall.com/cards/sld/VS/"); // see issue 11157
 
             // CALC - custom alchemy version of cards.

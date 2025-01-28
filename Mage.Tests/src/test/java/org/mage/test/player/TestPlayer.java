@@ -2293,7 +2293,8 @@ public class TestPlayer implements Player {
                 } else {
                     filterPermanent = ((TargetPermanent) target.getOriginalTarget()).getFilter();
                 }
-                for (String choiceRecord : choices) {
+                while (!choices.isEmpty()) {
+                    String choiceRecord = choices.get(0);
                     String[] targetList = choiceRecord.split("\\^");
                     boolean targetFound = false;
                     for (String targetName : targetList) {
@@ -2332,23 +2333,45 @@ public class TestPlayer implements Player {
                             }
                         }
                     }
-                    if (targetFound) {
-                        choices.remove(choiceRecord);
-                        return true;
+
+                    try {
+                        if (target.isChosen(game)) {
+                            return true;
+                        } else {
+                            if (!targetFound) {
+                                failOnLastBadChoice(game, source, target, choiceRecord, "unknown or can't target");
+                            }
+                        }
+                    } finally {
+                        choices.remove(0);
                     }
                 }
             }
 
             if (target instanceof TargetPlayer) {
-                for (Player player : game.getPlayers().values()) {
-                    for (String choose2 : choices) {
-                        if (player.getName().equals(choose2)) {
+                while (!choices.isEmpty()) {
+                    String choiceRecord = choices.get(0);
+                    boolean targetFound = false;
+                    for (Player player : game.getPlayers().values()) {
+                        if (player.getName().equals(choiceRecord)) {
                             if (target.canTarget(abilityControllerId, player.getId(), null, game) && !target.getTargets().contains(player.getId())) {
                                 target.add(player.getId(), game);
-                                choices.remove(choose2);
-                                return true;
+                                targetFound = true;
+                            } else {
+                                failOnLastBadChoice(game, source, target, choiceRecord, "can't target");
                             }
                         }
+                    }
+
+                    try {
+                        if (target.isChosen(game)) {
+                            return true;
+                        }
+                        if (!targetFound) {
+                            failOnLastBadChoice(game, source, target, choiceRecord, "unknown target");
+                        }
+                    } finally {
+                        choices.remove(0);
                     }
                 }
             }
@@ -4682,6 +4705,15 @@ public class TestPlayer implements Player {
 
         // non-strict mode allows computer assisted choices (for old tests compatibility only)
         return !this.strictChooseMode;
+    }
+
+    private void failOnLastBadChoice(Game game, Ability source, Target target, String lastChoice, String reason) {
+        Assert.fail(String.format("Found wrong choice command (%s):\n%s\n%s\n%s",
+                reason,
+                lastChoice,
+                getInfo(target, game),
+                getInfo(source, game)
+        ));
     }
 
     private void assertWrongChoiceUsage(String choice) {

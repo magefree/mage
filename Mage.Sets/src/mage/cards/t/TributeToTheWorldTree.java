@@ -63,7 +63,7 @@ class TributeToTheWorldTreeEffect extends OneShotEffect {
         }
 
         // We need to ask the game for the actualized object for the entering permanent.
-        Permanent permanent = game.getPermanent(permanentEntering.getId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(permanentEntering.getId());
         if (permanent == null) {
             return false;
         }

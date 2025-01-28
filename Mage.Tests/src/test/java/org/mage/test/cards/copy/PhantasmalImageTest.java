@@ -9,12 +9,13 @@ import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static org.junit.Assert.*;
 
 /**
- * @author noxx
+ * @author noxx, JayDi85
  * <p>
  * Card: You may have {this} enter the battlefield as a copy of any creature on
  * the battlefield, except it's an Illusion in addition to its other types and
@@ -30,7 +31,10 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // use copy on etb
+        setChoice(playerA, "Craw Wurm"); // copy
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -51,7 +55,10 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Howling Banshee");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // use copy on etb
+        setChoice(playerA, "Howling Banshee"); // copy
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -79,7 +86,10 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         }
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
+        setChoice(playerB, true); // use copy on etb
+        setChoice(playerB, "Transcendent Master"); // copy
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -112,10 +122,14 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Illusionary Servant");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image", true);
+        setChoice(playerA, true); // use copy on etb
         setChoice(playerA, "Illusionary Servant");
+
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // use copy on etb
         setChoice(playerA, "Illusionary Servant-M10");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -147,16 +161,28 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         // Enchantment - Creatures you control have hexproof.
         addCard(Zone.HAND, playerA, "Asceticism");
 
+        // Huntmaster of the Fells:
         // Whenever this creature enters the battlefield or transforms into
         // Huntmaster of the Fells, put a 2/2 green Wolf creature token onto
         // the battlefield and you gain 2 life.
         // At the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells. ==> Ravager of the Fells
+        // Ravager of the Fells:
+        // Whenever this creature transforms into Ravager of the Fells, it deals 2 damage to target opponent and 2 damage to up to one target creature that player controls.
         addCard(Zone.BATTLEFIELD, playerA, "Huntmaster of the Fells");
 
+        // transform on upkeep to Ravager of the Fells
+        addTarget(playerA, playerB); // x2 damage on transform (player)
+        addTarget(playerA, TestPlayer.TARGET_SKIP); // x2 damage on transform (creature)
+
+        // copy transformed
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // copy target: Ravergers of the Fells
+        setChoice(playerB, true); // use copy on etb
+        setChoice(playerB, "Ravager of the Fells"); // copy
+
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Asceticism");
         castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerB, "Titanic Growth", "Ravager of the Fells");
 
+        setStrictChooseMode(true);
         setStopAt(3, PhaseStep.END_TURN);
         execute();
 
@@ -167,7 +193,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         // check playerB's creature was sacrificed
         assertGraveyardCount(playerB, "Phantasmal Image", 1);
         assertPermanentCount(playerB, "Ravager of the Fells", 0);
-
     }
 
     /**
@@ -175,7 +200,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      * Messenger: Geralf's Messenger enters the battlefield tapped
      */
     @Test
-    public void testCopyEntersTapped() {
+    public void testCopyEntersTappedAndEtb() {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         // You may have Phantasmal Image enter the battlefield as a copy of any creature
         // on the battlefield, except it's an Illusion in addition to its other types and
@@ -184,7 +209,11 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Geralf's Messenger");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // use copy on etb
+        setChoice(playerA, "Geralf's Messenger"); // copy
+        addTarget(playerA, playerB); // x2 damage from etb of copied
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -211,11 +240,14 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         // When you control no permanents of the chosen color, sacrifice Lurebound Scarecrow.
         addCard(Zone.HAND, playerA, "Lurebound Scarecrow");
 
-        setChoice(playerA, "Green");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lurebound Scarecrow");
-        setChoice(playerA, "Red");
+        setChoice(playerA, "Green");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // use copy on etb
+        setChoice(playerA, "Lurebound Scarecrow"); // copy
+        setChoice(playerA, "Red");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -235,11 +267,14 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Phantasmal Image");
         addCard(Zone.HAND, playerA, "Lurebound Scarecrow");
 
-        setChoice(playerA, "Green");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lurebound Scarecrow");
-        setChoice(playerA, "Red");
+        setChoice(playerA, "Green");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // use copy on etb
+        setChoice(playerA, "Lurebound Scarecrow"); // copy
+        setChoice(playerA, "Red");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -257,12 +292,16 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // use copy on etb
+        setChoice(playerA, "Azure Drake"); // copy
+
         attack(1, playerA, "Azure Drake");
         block(1, playerB, "Llanowar Elves", "Azure Drake");
 
         attack(2, playerB, "Azure Drake");
         block(2, playerA, "Elite Vanguard", "Azure Drake");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -288,13 +327,15 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         setChoice(playerA, "X=0");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
-        setChoice(playerB, "Steel Hellkite");
+        setChoice(playerB, true); // use copy on etb
+        setChoice(playerB, "Steel Hellkite"); // copy
 
         attack(4, playerB, "Steel Hellkite");
 
         activateAbility(4, PhaseStep.POSTCOMBAT_MAIN, playerB, "{X}:");
         setChoice(playerB, "X=0");
 
+        setStrictChooseMode(true);
         setStopAt(4, PhaseStep.END_TURN);
         execute();
 
@@ -306,7 +347,6 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Chalice of the Void", 0);
         assertGraveyardCount(playerA, "Chalice of the Void", 1);
-
     }
 
     /**
@@ -317,38 +357,59 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopiedFrostTitan() {
-        // Whenever Frost Titan becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays {2}.
-        // Whenever Frost Titan enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
+        // Whenever Frost Titan becomes the target of a spell or ability an opponent controls,
+        // counter that spell or ability unless its controller pays 2.
+        // Whenever Frost Titan enters the battlefield or attacks, tap target permanent. It doesn't
+        // untap during its controller's next untap step.
         addCard(Zone.BATTLEFIELD, playerA, "Frost Titan");
-        addCard(Zone.HAND, playerA, "Terror");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2); // for counter pay
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2); // for counter pay
+        //
         // {1}{U} - Target creature gains shroud until end of turn and can't be blocked this turn.
-        addCard(Zone.HAND, playerA, "Veil of Secrecy");
-        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, "Veil of Secrecy", 1);
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
-
+        addCard(Zone.HAND, playerB, "Veil of Secrecy", 1);
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
-        addCard(Zone.HAND, playerB, "Phantasmal Image");
+        //
+        addCard(Zone.HAND, playerB, "Phantasmal Image"); // {1}{U}
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Veil of Secrecy", "Frost Titan"); // so it's no longer targetable
-        setChoice(playerB, "Frost Titan");
+        // prepare copy
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
+        setChoice(playerB, true); // use copy on etb
+        setChoice(playerB, "Frost Titan"); // copy
+        addTarget(playerB, "Island"); // tap on etb
+        waitStackResolved(2, PhaseStep.PRECOMBAT_MAIN);
 
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Terror", "Frost Titan"); // of player Bs Phantasmal Image copying Frost Titan
-        // should be countered if not paying {2}
+        // make sure both has titan permanent
+        checkPermanentCount("after prepare", 2, PhaseStep.PRECOMBAT_MAIN, playerB, playerA, "Frost Titan", 1);
+        checkPermanentCount("after prepare", 2, PhaseStep.PRECOMBAT_MAIN, playerB, playerB, "Frost Titan", 1);
 
+        // try original target trigger (B cast into A's titan and ask to anti-counter pay)
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Veil of Secrecy");
+        addTarget(playerB, "Frost Titan[no copy]");
+        setChoice(playerB, true); // pay to stop counter
+        waitStackResolved(2, PhaseStep.POSTCOMBAT_MAIN);
+
+        // try copied target trigger (A cast into B's titan and ask to anti-counter pay)
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Veil of Secrecy");
+        addTarget(playerA, "Frost Titan[only copy]");
+        setChoice(playerB, "When {this} becomes the target of a spell or ability, sacrifice it."); // x2 triggers (make sure illusion's will go first)
+        setChoice(playerA, true); // pay to stop counter (it's useless here, but will sure trigger works fine)
+
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
-
-        assertGraveyardCount(playerA, "Veil of Secrecy", 1);
-        assertGraveyardCount(playerA, "Terror", 1);
 
         assertLife(playerB, 20);
         assertLife(playerA, 20);
 
         assertPermanentCount(playerA, "Frost Titan", 1);
+        assertPermanentCount(playerB, "Frost Titan", 0);
+        assertGraveyardCount(playerB, "Phantasmal Image", 1);
 
-        assertGraveyardCount(playerB, "Phantasmal Image", 1); // if triggered ability did not work, the Titan would be in the graveyard instaed
-
+        // 2 from cast Phantasmal + 4 from cast Veil + 4 from counter pay
+        assertTappedCount("Island", true, 2 + 2 * 2 + 2 * 2);
     }
 
     // I've casted a Phantasmal Image targeting opponent's Wurmcoil Engine
@@ -365,12 +426,14 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.HAND, playerB, "Phantasmal Image");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
-        setChoice(playerB, "Wurmcoil Engine");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
+        setChoice(playerB, true); // use copy on etb
+        setChoice(playerB, "Wurmcoil Engine"); // copy
 
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Wurmcoil Engine"); // of player Bs Phantasmal Image copying Frost Titan
-        // should be countered if not paying {2}
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution");
+        addTarget(playerA, "Wurmcoil Engine[only copy]");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -403,11 +466,14 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.HAND, playerB, "Phantasmal Image");
 
-        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
-        setChoice(playerB, "Thalakos Seer");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
+        setChoice(playerB, true); // use copy on etb
+        setChoice(playerB, "Thalakos Seer"); // copy
 
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Thalakos Seer");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution");
+        addTarget(playerA, "Thalakos Seer[only copy]");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -474,11 +540,16 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kitchen Finks");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
+        setChoice(playerB, true); // use copy on etb
+        setChoice(playerB, "Kitchen Finks"); // copy
+
+        // destroy and return to battlefield by persist
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution");
+        addTarget(playerA, "Kitchen Finks[only copy]");
+        setChoice(playerB, true); // use copy on etb
         setChoice(playerB, "Kitchen Finks");
 
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Kitchen Finks");
-        setChoice(playerB, "Kitchen Finks");
-
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -515,11 +586,16 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Butcher Ghoul");
 
         castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image"); // not targeted
-        setChoice(playerB, "Butcher Ghoul");
+        setChoice(playerB, true); // use copy on etb
+        setChoice(playerB, "Butcher Ghoul"); // copy
 
-        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution", "Butcher Ghoul");
-        setChoice(playerB, "Butcher Ghoul");
+        // destroy and return to battlefield by undying
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Public Execution");
+        addTarget(playerA, "Butcher Ghoul[only copy]");
+        setChoice(playerB, true); // use copy on etb
+        setChoice(playerB, "Butcher Ghoul"); // copy
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
         execute();
 
@@ -559,10 +635,13 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Phantasmal Image");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image"); // not targeted
+        setChoice(playerA, true); // use copy on etb
         setChoice(playerA, "Wurmcoil Engine");
 
         attack(2, playerB, "Wurmcoil Engine");
         block(2, playerA, "Wurmcoil Engine", "Wurmcoil Engine");
+
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -591,10 +670,13 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.HAND, playerA, "Phantasmal Image");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image"); // not targeted
+        setChoice(playerA, true); // use copy on etb
         setChoice(playerA, "Voice of Resurgence");
 
         attack(2, playerB, "Voice of Resurgence");
         block(2, playerA, "Voice of Resurgence", "Voice of Resurgence");
+
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
@@ -615,12 +697,14 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
         addCard(Zone.HAND, playerA, "Phantasmal Image");
 
-        setChoice(playerB, "X=1");
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{X}");
+        setChoice(playerB, "X=1");
 
-        setChoice(playerA, "Chimeric Staff");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // use copy on etb
+        setChoice(playerA, "Chimeric Staff"); // copy
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -646,9 +730,11 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Karn's Touch", "Cloak and Dagger");
 
-        setChoice(playerA, "Cloak and Dagger");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
+        setChoice(playerA, true); // use copy on etb
+        setChoice(playerA, "Cloak and Dagger"); // copy
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

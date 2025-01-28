@@ -3,33 +3,31 @@ package mage.abilities.dynamicvalue;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
+import mage.util.CardUtil;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Creates a {@link DynamicValue} from that adds together multiple
+ * {@link DynamicValue}s.
+ */
 public class AdditiveDynamicValue implements DynamicValue {
 
     private final List<DynamicValue> dynamicValues;
 
-    /**
-     * Creates a {@link DynamicValue} from that adds together multiple
-     * {@link DynamicValue}s.
-     *
-     * @param dynamicValues The dynamic values to add together.
-     */
     public AdditiveDynamicValue(DynamicValue... dynamicValues) {
-        this.dynamicValues = Arrays.asList(dynamicValues);
+        this(Arrays.asList(dynamicValues));
     }
 
-    /**
-     * Creates a {@link DynamicValue} from that adds together multiple
-     * {@link DynamicValue}s.
-     *
-     * @param dynamicValues The dynamic values to add together.
-     */
     public AdditiveDynamicValue(List<DynamicValue> dynamicValues) {
-        this.dynamicValues = dynamicValues;
+        this.dynamicValues = new ArrayList<>(dynamicValues);
+    }
+
+    private AdditiveDynamicValue(final AdditiveDynamicValue value) {
+        this.dynamicValues = CardUtil.deepCopyObject(value.dynamicValues);
     }
 
     @Override
@@ -39,7 +37,7 @@ public class AdditiveDynamicValue implements DynamicValue {
 
     @Override
     public AdditiveDynamicValue copy() {
-        return new AdditiveDynamicValue(this.dynamicValues);
+        return new AdditiveDynamicValue(this);
     }
 
     @Override

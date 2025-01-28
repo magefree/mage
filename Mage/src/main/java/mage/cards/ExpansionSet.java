@@ -24,10 +24,62 @@ import java.util.stream.Collectors;
 public abstract class ExpansionSet implements Serializable {
 
     private static final Logger logger = Logger.getLogger(ExpansionSet.class);
-    public static final CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true);
+
+    // TODO: remove all usage to default (see below), keep bfz/zen/ust art styles for specific sets only
+    //  the main different in art styles - full art lands can have big mana icon at the bottom
     public static final CardGraphicInfo FULL_ART_BFZ_VARIOUS = new CardGraphicInfo(FrameStyle.BFZ_FULL_ART_BASIC, true);
     public static final CardGraphicInfo FULL_ART_ZEN_VARIOUS = new CardGraphicInfo(FrameStyle.ZEN_FULL_ART_BASIC, true);
     public static final CardGraphicInfo FULL_ART_UST_VARIOUS = new CardGraphicInfo(FrameStyle.UST_FULL_ART_BASIC, true);
+
+    // default art styles in single set:
+    // - normal M15/image art (default)
+    // - normal M15/image art for multiple cards in set with same name
+    // - full art
+    // - full art for multiple cards in set with same name
+    // TODO: find or implement really full art in m15 render mode (without card name header)
+    public static final CardGraphicInfo NORMAL_ART = null;
+    public static final CardGraphicInfo NON_FULL_USE_VARIOUS = new CardGraphicInfo(null, true); // TODO: rename to NORMAL_ART_USE_VARIOUS
+    public static final CardGraphicInfo FULL_ART = new CardGraphicInfo(FrameStyle.MPOP_FULL_ART_BASIC, false);
+    public static final CardGraphicInfo FULL_ART_USE_VARIOUS = new CardGraphicInfo(FrameStyle.MPOP_FULL_ART_BASIC, true);
+
+    // TODO: enable after mutate implementation
+    public static final boolean HIDE_MUTATE_CARDS = true;
+    public static final Set<String> MUTATE_CARD_NAMES = new HashSet<>(Arrays.asList(
+            "Archipelagore",
+            "Auspicious Starrix",
+            "Boneyard Lurker",
+            "Cavern Whisperer",
+            "Chittering Harvester",
+            "Cloudpiercer",
+            "Cubwarden",
+            "Dirge Bat",
+            "Dreamtail Heron",
+            "Everquill Phoenix",
+            "Gemrazer",
+            "Glowstone Recluse",
+            "Huntmaster Liger",
+            "Illuna, Apex of Wishes",
+            "Insatiable Hemophage",
+            "Lore Drakkis",
+            "Majestic Auricorn",
+            "Mindleecher",
+            "Migratory Greathorn",
+            "Necropanther",
+            "Nethroi, Apex of Death",
+            "Otrimi, the Ever-Playful",
+            "Parcelbeast",
+            "Porcuparrot",
+            "Pouncing Shoreshark",
+            "Regal Leosaur",
+            "Sawtusk Demolisher",
+            "Sea-Dasher Octopus",
+            "Snapdax, Apex of the Hunt",
+            "Souvenir Snatcher",
+            "Sawtusk Demolisher",
+            "Trumpeting Gnarr",
+            "Vadrok, Apex of Thunder",
+            "Vulpikeet"
+    ));
 
     public static class SetCardInfo implements Serializable {
 
@@ -137,7 +189,7 @@ public abstract class ExpansionSet implements Serializable {
     protected int numBoosterCommon;
     protected int numBoosterUncommon;
     protected int numBoosterRare;
-    protected int numBoosterDoubleFaced; // -1 = include normally 0 = exclude  1-n = include explicit
+    protected int numBoosterDoubleFaced; // -1 = include by rarity slots, 0 = fail on tests, 1-n = include explicit
     protected double ratioBoosterMythic;
 
     protected boolean hasUnbalancedColors = false;
@@ -689,4 +741,77 @@ public abstract class ExpansionSet implements Serializable {
         }
     }
 
+    /**
+     * Old default booster configuration (before 2024 - MKM)
+     */
+    public void enableDraftBooster(int maxCardNumberInBooster, int land, int common, int uncommon, int rare) {
+        // https://draftsim.com/draft-booster-vs-set-booster-mtg/
+        this.hasBoosters = true;
+        this.maxCardNumberInBooster = maxCardNumberInBooster;
+
+        this.numBoosterLands = land;
+        this.hasBasicLands = land > 0;
+
+        this.numBoosterCommon = common;
+        this.numBoosterUncommon = uncommon;
+        this.numBoosterRare = rare;
+        this.ratioBoosterMythic = 8; // 12.5% chance of a mythic rare
+    }
+
+    /**
+     * New default booster configuration (after 2024 - MKM)
+     */
+    public void enablePlayBooster(int maxCardNumberInBooster) {
+        // https://mtg.fandom.com/wiki/Play_Booster
+        this.hasBoosters = true;
+        this.maxCardNumberInBooster = maxCardNumberInBooster;
+
+        // #1-6 Common
+        this.numBoosterCommon = 6;
+
+        // #7 Common or The List
+        // simplify: ignore 1.5% chance of a Special Guest card
+        this.numBoosterCommon++;
+
+        // #8-10 Uncommon
+        this.numBoosterUncommon = 3;
+
+        // #12 Rare or Mythic Rare
+        this.numBoosterRare = 1;
+        this.ratioBoosterMythic = 8; // 12.5% chance of a mythic rare
+
+        // #13 Basic land
+        this.hasBasicLands = true;
+        this.numBoosterLands = 1;
+
+        // #11 Non-foil Wildcard (A card of any rarity from the set. Guaranteed to be non-foil.)
+        // #14 Foil Wildcard (A card of any rarity from the set. Guaranteed to be foil.)
+        // simplify: use U + R instead x2 wild cards
+        this.numBoosterUncommon++;
+        this.numBoosterRare++;
+    }
+
+    public void enableArenaBooster(int maxCardNumberInBooster) {
+        // same as play booster on 2024
+        enablePlayBooster(maxCardNumberInBooster);
+    }
+
+    public void enableCollectorBooster(int maxCardNumberInBooster) {
+        // simplified rarity distribution
+        enableCollectorBooster(maxCardNumberInBooster, 1, 5, 4, 5);
+    }
+
+    public void enableCollectorBooster(int maxCardNumberInBooster, int land, int common, int uncommon, int rare) {
+        // https://mtg.fandom.com/wiki/Collector_Booster
+        this.hasBoosters = true;
+        this.maxCardNumberInBooster = maxCardNumberInBooster;
+
+        this.numBoosterLands = land;
+        this.hasBasicLands = land > 0;
+
+        this.numBoosterCommon = common;
+        this.numBoosterUncommon = uncommon;
+        this.numBoosterRare = rare;
+        this.ratioBoosterMythic = 8; // 12.5% chance of a mythic rare
+    }
 }

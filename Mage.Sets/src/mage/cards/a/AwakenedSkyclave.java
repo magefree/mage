@@ -35,7 +35,7 @@ public final class AwakenedSkyclave extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // As long as Awakened Skyclave is on the battlefield, it's a land in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(new AddCardTypeSourceEffect(Duration.WhileOnBattlefield)
+        this.addAbility(new SimpleStaticAbility(new AddCardTypeSourceEffect(Duration.WhileOnBattlefield, CardType.LAND)
                 .setText("as long as {this} is on the battlefield, it's a land in addition to its other types")));
 
         // {T}: Add one mana of any color.

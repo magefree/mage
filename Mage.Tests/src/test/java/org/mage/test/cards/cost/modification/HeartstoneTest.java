@@ -1,4 +1,3 @@
-
 package org.mage.test.cards.cost.modification;
 
 import mage.constants.PhaseStep;
@@ -7,7 +6,6 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**
- *
  * @author LevelX2
  */
 public class HeartstoneTest extends CardTestPlayerBase {
@@ -29,8 +27,12 @@ public class HeartstoneTest extends CardTestPlayerBase {
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
         activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{U}", "Lightning Bolt", "Lightning Bolt");
-        setChoice(playerA, true);
-        addTarget(playerA, playerB);
+        setChoice(playerA, "Fugitive Wizard"); // tap cost 1 of 2
+        setChoice(playerA, "Sigil Tracer"); // tap cost 2 of 2
+        setChoice(playerA, true); // change target
+        addTarget(playerA, playerB); // new target
+
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -41,7 +43,6 @@ public class HeartstoneTest extends CardTestPlayerBase {
         assertLife(playerB, 17);
 
         assertTappedCount("Island", true, 1);
-
     }
 
 }

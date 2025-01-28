@@ -2,6 +2,7 @@ package mage.client.util;
 
 import mage.client.remote.XmageURLConnection;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;
@@ -62,6 +63,7 @@ public class DownloaderTest {
     }
 
     @Test
+    @Ignore // TODO: enable after gatherer server maintenance done
     public void test_DownloadFromWindowsServers() throws IOException {
         // symbols download from gatherer website
         // error example: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target

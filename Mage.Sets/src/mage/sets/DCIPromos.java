@@ -5,7 +5,7 @@ import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
- * https://scryfall.com/sets/pdci
+ * https://scryfall.com/sets/dci
  */
 public class DCIPromos extends ExpansionSet {
 
@@ -16,7 +16,7 @@ public class DCIPromos extends ExpansionSet {
     }
 
     private DCIPromos() {
-        super("DCI Promos", "PDCI", ExpansionSet.buildDate(2006, 1, 1), SetType.PROMOTIONAL);
+        super("DCI Promos", "DCI", ExpansionSet.buildDate(2006, 1, 1), SetType.PROMOTIONAL);
         this.hasBoosters = false;
         this.hasBasicLands = false;
 
