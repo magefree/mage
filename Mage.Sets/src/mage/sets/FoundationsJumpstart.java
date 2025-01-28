@@ -234,7 +234,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Entomber Exarch", 434, Rarity.UNCOMMON, mage.cards.e.EntomberExarch.class));
         cards.add(new SetCardInfo("Epicure of Blood", 435, Rarity.COMMON, mage.cards.e.EpicureOfBlood.class));
         cards.add(new SetCardInfo("Eternal Taskmaster", 117, Rarity.UNCOMMON, mage.cards.e.EternalTaskmaster.class));
-        //cards.add(new SetCardInfo("Evereth, Viceroy of Plunder", 41, Rarity.RARE, mage.cards.e.EverethViceroyOfPlunder.class));
+        cards.add(new SetCardInfo("Evereth, Viceroy of Plunder", 41, Rarity.RARE, mage.cards.e.EverethViceroyOfPlunder.class));
         cards.add(new SetCardInfo("Evolving Wilds", 765, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exclusion Mage", 306, Rarity.UNCOMMON, mage.cards.e.ExclusionMage.class));
         cards.add(new SetCardInfo("Expedition Champion", 541, Rarity.COMMON, mage.cards.e.ExpeditionChampion.class));
