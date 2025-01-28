@@ -983,6 +983,87 @@ public class ModalDoubleFacedCardsTest extends CardTestPlayerBase {
     }
 
     @Test
+    public void test_Copy_TokenFromPermanent_MainSide() {
+        addCard(Zone.HAND, playerA, "Akoum Warrior", 1); // {5}{R}
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        //
+        // Demonstrate
+        // Create a token that's a copy of target permanent you control.
+        addCard(Zone.HAND, playerA, "Replication Technique", 1); // {4}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+
+        // cast mdf card (main side)
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {R}", 6);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // copy permanent
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Replication Technique");
+        addTarget(playerA, "Akoum Warrior"); // to copy
+        setChoice(playerA, false); // ignore demonstrate
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Warrior", 2);
+        runCode("must copy main side", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            PermanentToken permanent = (PermanentToken) game.getBattlefield().getAllPermanents()
+                    .stream()
+                    .filter(p -> p.getName().equals("Akoum Warrior"))
+                    .filter(p -> p instanceof PermanentToken)
+                    .findFirst()
+                    .orElse(null);
+            Assert.assertNotNull(permanent);
+            Assert.assertEquals(info + " - name", "Akoum Warrior", permanent.getName());
+            Assert.assertEquals(info + " - color", "R", permanent.getColor(game).toString());
+            Assert.assertEquals(info + " - power", 4, permanent.getPower().getValue());
+            Assert.assertEquals(info + " - toughness", 5, permanent.getToughness().getValue());
+            Assert.assertEquals(info + " - card type", "[Creature]", permanent.getCardType(game).toString());
+            Assert.assertEquals(info + " - card subtype", "[Minotaur, Warrior]", permanent.getSubtype(game).toString());
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
+    public void test_Copy_TokenFromPermanent_SecondSide() {
+        addCard(Zone.HAND, playerA, "Akoum Warrior", 1);
+        //
+        // Demonstrate
+        // Create a token that's a copy of target permanent you control.
+        addCard(Zone.HAND, playerA, "Replication Technique", 1); // {4}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+
+        // cast mdf card (second side)
+        playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Teeth");
+
+        // copy permanent
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Replication Technique");
+        addTarget(playerA, "Akoum Teeth"); // to copy
+        setChoice(playerA, false); // ignore demonstrate
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkPermanentCount("after", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Akoum Teeth", 2);
+        runCode("must copy second side", 1, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+            PermanentToken permanent = (PermanentToken) game.getBattlefield().getAllPermanents()
+                    .stream()
+                    .filter(p -> p.getName().equals("Akoum Teeth"))
+                    .filter(p -> p instanceof PermanentToken)
+                    .findFirst()
+                    .orElse(null);
+            Assert.assertNotNull(permanent);
+            Assert.assertEquals(info + " - name", "Akoum Teeth", permanent.getName());
+            Assert.assertEquals(info + " - color", "", permanent.getColor(game).toString());
+            Assert.assertEquals(info + " - power", 0, permanent.getPower().getValue());
+            Assert.assertEquals(info + " - toughness", 0, permanent.getToughness().getValue());
+            Assert.assertEquals(info + " - card type", "[Land]", permanent.getCardType(game).toString());
+            Assert.assertEquals(info + " - card subtype", "[]", permanent.getSubtype(game).toString());
+        });
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+    }
+
+    @Test
     public void test_Copy_TokenFromCard_MustIgnoreSecondSide() {
         // bug: copied tokens of MDF cards has abilities from both sides
         // https://github.com/magefree/mage/issues/8476
