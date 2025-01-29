@@ -91,6 +91,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Diabolic Vision", 87, Rarity.UNCOMMON, mage.cards.d.DiabolicVision.class));
         cards.add(new SetCardInfo("Dig Through Time", 115, Rarity.RARE, mage.cards.d.DigThroughTime.class));
         cards.add(new SetCardInfo("Dimir Aqueduct", 270, Rarity.UNCOMMON, mage.cards.d.DimirAqueduct.class));
+        cards.add(new SetCardInfo("Disorienting Choice", 32, Rarity.RARE, mage.cards.d.DisorientingChoice.class));
         cards.add(new SetCardInfo("Doomwake Giant", 138, Rarity.RARE, mage.cards.d.DoomwakeGiant.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 271, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Dream Eater", 116, Rarity.MYTHIC, mage.cards.d.DreamEater.class));
