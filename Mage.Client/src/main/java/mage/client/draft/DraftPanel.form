@@ -343,7 +343,6 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="4"/>
                     <Property name="text" type="java.lang.String" value="player 2"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="alignmentX" type="float" value="1.0"/>
                     <Property name="alignmentY" type="float" value="0.0"/>
                     <Property name="focusable" type="boolean" value="false"/>
@@ -523,7 +522,6 @@
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="text" type="java.lang.String" value="player 12"/>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="focusable" type="boolean" value="false"/>
                     <Property name="requestFocusEnabled" type="boolean" value="false"/>
                     <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
