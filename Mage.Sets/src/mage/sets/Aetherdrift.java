@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class Aetherdrift extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Aether Syphon", "Amonkhet Raceway", "Avishkar Raceway", "Embalmed Ascendant", "Endrider Catalyzer", "Far Fortune, End Boss", "Gas Guzzler", "Gastal Raider", "Goblin Surveyor", "Hazoret, Godseeker", "Hour of Victory", "Loxodon Surveyor", "Mendicant Core, Guidelight", "Momentum Breaker", "Muraganda Raceway", "Nesting Bot", "Perilous Snare", "Pride of the Road", "Racers' Scoreboard", "Risen Necroregent", "Samut, the Driving Force", "Slick Imitator", "Starting Column", "Streaking Oilgorger", "The Speed Demon", "Vnwxt, Verbose Host", "Zahur, Glory's Past");
+    private static final List<String> unfinished = Arrays.asList("Aether Syphon", "Amonkhet Raceway", "Avishkar Raceway", "Burnout Bashtronaut", "Embalmed Ascendant", "Endrider Catalyzer", "Far Fortune, End Boss", "Gas Guzzler", "Gastal Raider", "Goblin Surveyor", "Hazoret, Godseeker", "Hour of Victory", "Howlsquad Heavy", "Loxodon Surveyor", "Mendicant Core, Guidelight", "Momentum Breaker", "Muraganda Raceway", "Nesting Bot", "Perilous Snare", "Point the Way", "Pride of the Road", "Racers' Scoreboard", "Risen Necroregent", "Samut, the Driving Force", "Slick Imitator", "Starting Column", "Streaking Oilgorger", "The Speed Demon", "Vnwxt, Verbose Host", "Zahur, Glory's Past");
     private static final Aetherdrift instance = new Aetherdrift();
 
     public static Aetherdrift getInstance() {
