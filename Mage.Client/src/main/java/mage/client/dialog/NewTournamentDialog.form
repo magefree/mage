@@ -35,7 +35,6 @@
         <MenuItem class="javax.swing.JMenuItem" name="menuLoadSettingsLast">
           <Properties>
             <Property name="text" type="java.lang.String" value="Load from last time"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLoadSettingsLastActionPerformed"/>
@@ -46,7 +45,6 @@
         <MenuItem class="javax.swing.JMenuItem" name="menuLoadSettings1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Load from config 1"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLoadSettings1ActionPerformed"/>
@@ -65,7 +63,6 @@
         <MenuItem class="javax.swing.JMenuItem" name="menuLoadSettingsDefault">
           <Properties>
             <Property name="text" type="java.lang.String" value="Load default settings"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuLoadSettingsDefaultActionPerformed"/>
@@ -663,7 +660,6 @@
             <EtchetBorder/>
           </Border>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
@@ -677,7 +673,6 @@
     </Component>
     <Component class="javax.swing.JSpinner" name="spnQuitRatio">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblMinimumRating">

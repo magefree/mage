@@ -207,7 +207,6 @@ public class TableWaitingDialog extends MageDialog {
         jSplitPane1.setDividerLocation(300);
         jSplitPane1.setDividerSize(3);
         jSplitPane1.setResizeWeight(1.0);
-        jSplitPane1.setToolTipText("");
 
         jTableSeats.setModel(tableWaitModel);
         jTableSeats.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);

@@ -2108,7 +2108,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         lbSelectLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbSelectLabel.setText("GUI color style:");
-        lbSelectLabel.setToolTipText("");
         lbSelectLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         lbSelectLabel.setPreferredSize(new java.awt.Dimension(110, 16));
         lbSelectLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
@@ -2391,34 +2390,28 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         cbStopAttack.setSelected(true);
         cbStopAttack.setText("STOP skips on declare attackers if attackers are available");
-        cbStopAttack.setToolTipText("");
         cbStopAttack.setActionCommand("");
         phases_stopSettings.add(cbStopAttack);
 
         cbStopBlockWithAny.setSelected(true);
         cbStopBlockWithAny.setText("STOP skips on declare blockers if ANY blockers are available");
-        cbStopBlockWithAny.setToolTipText("");
         cbStopBlockWithAny.setActionCommand("");
         phases_stopSettings.add(cbStopBlockWithAny);
 
         cbStopBlockWithZero.setText("STOP skips on declare blockers if ZERO blockers are available");
-        cbStopBlockWithZero.setToolTipText("");
         cbStopBlockWithZero.setActionCommand("");
         phases_stopSettings.add(cbStopBlockWithZero);
 
         cbStopOnNewStackObjects.setText("Skip to STACK resolved (F10): stop on new objects added (on) or stop until empty (off)");
-        cbStopOnNewStackObjects.setToolTipText("");
         cbStopOnNewStackObjects.setActionCommand("");
         cbStopOnNewStackObjects.setPreferredSize(new java.awt.Dimension(300, 25));
         phases_stopSettings.add(cbStopOnNewStackObjects);
 
         cbStopOnAllMain.setText("Skip to MAIN step (F7): stop on any main steps (on) or stop on your main step (off)");
-        cbStopOnAllMain.setToolTipText("");
         cbStopOnAllMain.setActionCommand("");
         phases_stopSettings.add(cbStopOnAllMain);
 
         cbStopOnAllEnd.setText("Skip to END step (F5): stop on any end steps (on) or stop on opponents end step (off)");
-        cbStopOnAllEnd.setToolTipText("");
         cbStopOnAllEnd.setActionCommand("");
         cbStopOnAllEnd.setPreferredSize(new java.awt.Dimension(300, 25));
         phases_stopSettings.add(cbStopOnAllEnd);
@@ -2743,7 +2736,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         jLabel16.setText("Playing from folder:");
-        jLabel16.setToolTipText("");
 
         btnBattlefieldBGMBrowse.setText("Browse...");
         btnBattlefieldBGMBrowse.addActionListener(new java.awt.event.ActionListener() {

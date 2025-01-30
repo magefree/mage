@@ -271,7 +271,6 @@ public class AddLandDialog extends MageDialog {
 
         spnForest.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        lblForestIcon.setToolTipText("");
         lblForestIcon.setMaximumSize(new java.awt.Dimension(22, 20));
         lblForestIcon.setMinimumSize(new java.awt.Dimension(22, 20));
         lblForestIcon.setPreferredSize(new java.awt.Dimension(22, 20));

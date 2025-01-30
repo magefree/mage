@@ -300,7 +300,6 @@
             <StringItem index="0" value="loading..."/>
           </StringArray>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Events>
         <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboCardColorItemStateChanged"/>
@@ -382,7 +381,6 @@
                         <StringItem index="2" value="Dead"/>
                       </StringArray>
                     </Property>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="alignmentX" type="float" value="0.0"/>
                   </Properties>
                   <Events>
