@@ -773,7 +773,6 @@
         labelPlayer02.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer02.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelPlayer02.setText("player 2");
-        labelPlayer02.setToolTipText("");
         labelPlayer02.setAlignmentX(1.0F);
         labelPlayer02.setAlignmentY(0.0F);
         labelPlayer02.setFocusable(false);
@@ -887,7 +886,6 @@
         labelPlayer12.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         labelPlayer12.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         labelPlayer12.setText("player 12");
-        labelPlayer12.setToolTipText("");
         labelPlayer12.setFocusable(false);
         labelPlayer12.setRequestFocusEnabled(false);
         labelPlayer12.setVerifyInputWhenFocusTarget(false);

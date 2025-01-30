@@ -444,7 +444,6 @@ public class TournamentPanel extends javax.swing.JPanel {
         );
 
         jSplitPane2.setResizeWeight(1.0);
-        jSplitPane2.setToolTipText("");
 
         jSplitPane1.setDividerLocation(230);
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);

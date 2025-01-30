@@ -203,7 +203,6 @@ public class NewTournamentDialog extends MageDialog {
         popupSaveSettings.add(menuSaveSettings2);
 
         menuLoadSettingsLast.setText("Load from last time");
-        menuLoadSettingsLast.setToolTipText("");
         menuLoadSettingsLast.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuLoadSettingsLastActionPerformed(evt);
@@ -213,7 +212,6 @@ public class NewTournamentDialog extends MageDialog {
         popupLoadSettings.add(separator1);
 
         menuLoadSettings1.setText("Load from config 1");
-        menuLoadSettings1.setToolTipText("");
         menuLoadSettings1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuLoadSettings1ActionPerformed(evt);
@@ -231,7 +229,6 @@ public class NewTournamentDialog extends MageDialog {
         popupLoadSettings.add(separator2);
 
         menuLoadSettingsDefault.setText("Load default settings");
-        menuLoadSettingsDefault.setToolTipText("");
         menuLoadSettingsDefault.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuLoadSettingsDefaultActionPerformed(evt);
@@ -411,12 +408,9 @@ public class NewTournamentDialog extends MageDialog {
         });
 
         pnlRandomPacks.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        pnlRandomPacks.setToolTipText("");
         pnlRandomPacks.setLayout(new javax.swing.BoxLayout(pnlRandomPacks, javax.swing.BoxLayout.Y_AXIS));
 
         lblQuitRatio.setText("Allowed quit %");
-
-        spnQuitRatio.setToolTipText("");
 
         lblMinimumRating.setText("Minimum rating:");
         lblMinimumRating.setToolTipText("Players with rating less than this value can't join this table");
