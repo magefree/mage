@@ -111,6 +111,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Roadside Blowout", 58, Rarity.UNCOMMON, mage.cards.r.RoadsideBlowout.class));
         cards.add(new SetCardInfo("Rocketeer Boostbuggy", 220, Rarity.UNCOMMON, mage.cards.r.RocketeerBoostbuggy.class));
         cards.add(new SetCardInfo("Rocky Roads", 261, Rarity.UNCOMMON, mage.cards.r.RockyRoads.class));
+        cards.add(new SetCardInfo("Rover Blades", 241, Rarity.UNCOMMON, mage.cards.r.RoverBlades.class));
         cards.add(new SetCardInfo("Rugged Highlands", 262, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Sab-Sunen, Luxa Embodied", 221, Rarity.MYTHIC, mage.cards.s.SabSunenLuxaEmbodied.class));
         cards.add(new SetCardInfo("Scoured Barrens", 263, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
