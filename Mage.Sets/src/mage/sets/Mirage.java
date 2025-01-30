@@ -289,6 +289,7 @@ public final class Mirage extends ExpansionSet {
         cards.add(new SetCardInfo("Serene Heart", 242, Rarity.COMMON, mage.cards.s.SereneHeart.class));
         cards.add(new SetCardInfo("Sewer Rats", 139, Rarity.COMMON, mage.cards.s.SewerRats.class));
         cards.add(new SetCardInfo("Shadow Guildmage", 140, Rarity.COMMON, mage.cards.s.ShadowGuildmage.class));
+        cards.add(new SetCardInfo("Shadowbane", 38, Rarity.UNCOMMON, mage.cards.s.Shadowbane.class));
         cards.add(new SetCardInfo("Shallow Grave", 141, Rarity.RARE, mage.cards.s.ShallowGrave.class));
         cards.add(new SetCardInfo("Shaper Guildmage", 91, Rarity.COMMON, mage.cards.s.ShaperGuildmage.class));
         cards.add(new SetCardInfo("Shauku's Minion", 283, Rarity.UNCOMMON, mage.cards.s.ShaukusMinion.class));
