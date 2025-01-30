@@ -57,6 +57,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Country Roads", 253, Rarity.UNCOMMON, mage.cards.c.CountryRoads.class));
         cards.add(new SetCardInfo("Daretti, Rocketeer Engineer", 120, Rarity.RARE, mage.cards.d.DarettiRocketeerEngineer.class));
         cards.add(new SetCardInfo("Daring Mechanic", 11, Rarity.COMMON, mage.cards.d.DaringMechanic.class));
+        cards.add(new SetCardInfo("Debris Beetle", 199, Rarity.RARE, mage.cards.d.DebrisBeetle.class));
         cards.add(new SetCardInfo("Defend the Rider", 157, Rarity.UNCOMMON, mage.cards.d.DefendTheRider.class));
         cards.add(new SetCardInfo("Detention Chariot", 12, Rarity.UNCOMMON, mage.cards.d.DetentionChariot.class));
         cards.add(new SetCardInfo("Dismal Backwater", 254, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
