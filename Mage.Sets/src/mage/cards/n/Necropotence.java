@@ -22,7 +22,6 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
@@ -111,7 +110,7 @@ class NecropotenceEffect extends OneShotEffect {
             Card card = controller.getLibrary().getFromTop(game);
             if (card != null && controller.moveCardsToExile(card, source, game, false,
                     CardUtil.getCardExileZoneId(game, source),
-                    CardUtil.createObjectRealtedWindowTitle(source, game, null))) {
+                    CardUtil.createObjectRelatedWindowTitle(source, game, null))) {
                 card.setFaceDown(true, game);
                 Effect returnToHandEffect = new ReturnToHandTargetEffect();
                 returnToHandEffect.setText("put that face down card into your hand");

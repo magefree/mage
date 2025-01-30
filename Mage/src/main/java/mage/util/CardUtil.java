@@ -749,7 +749,7 @@ public final class CardUtil {
         return true;
     }
 
-    public static String createObjectRealtedWindowTitle(Ability source, Game game, String textSuffix) {
+    public static String createObjectRelatedWindowTitle(Ability source, Game game, String textSuffix) {
         String title;
         if (source != null) {
             MageObject sourceObject = game.getObject(source);

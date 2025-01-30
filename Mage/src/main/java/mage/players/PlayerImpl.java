@@ -1895,9 +1895,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             return;
         }
         if (postToLog) {
-            game.getState().getRevealed().add(CardUtil.createObjectRealtedWindowTitle(source, game, titleSuffix), cards);
+            game.getState().getRevealed().add(CardUtil.createObjectRelatedWindowTitle(source, game, titleSuffix), cards);
         } else {
-            game.getState().getRevealed().update(CardUtil.createObjectRealtedWindowTitle(source, game, titleSuffix), cards);
+            game.getState().getRevealed().update(CardUtil.createObjectRelatedWindowTitle(source, game, titleSuffix), cards);
         }
         if (postToLog && !game.isSimulation()) {
             StringBuilder sb = new StringBuilder(getLogName()).append(" reveals ");
@@ -1928,7 +1928,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void lookAtCards(Ability source, String titleSuffix, Cards cards, Game game) {
-        game.getState().getLookedAt(this.playerId).add(CardUtil.createObjectRealtedWindowTitle(source, game, titleSuffix), cards);
+        game.getState().getLookedAt(this.playerId).add(CardUtil.createObjectRelatedWindowTitle(source, game, titleSuffix), cards);
         game.fireUpdatePlayersEvent();
     }
 

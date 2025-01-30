@@ -109,7 +109,7 @@ class VivienChampionOfTheWildsEffect extends OneShotEffect {
         Card cardToExile = game.getCard(target.getFirstTarget());
         if (!player.moveCardsToExile(cardToExile, source, game, false,
                 CardUtil.getCardExileZoneId(game, source),
-                CardUtil.createObjectRealtedWindowTitle(source, game, " (look and cast)"))) {
+                CardUtil.createObjectRelatedWindowTitle(source, game, " (look and cast)"))) {
             return false;
         }
         cardToExile.setFaceDown(true, game);

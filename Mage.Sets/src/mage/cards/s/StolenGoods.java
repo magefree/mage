@@ -3,8 +3,6 @@ package mage.cards.s;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
 import mage.cards.Card;
@@ -14,7 +12,6 @@ import mage.constants.*;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 /**
@@ -69,7 +66,7 @@ class StolenGoodsEffect extends OneShotEffect {
                 break;
             }
             if (card.isLand(game)) {
-                if (!opponent.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, null))) {
+                if (!opponent.moveCardsToExile(card, source, game, true, source.getSourceId(), CardUtil.createObjectRelatedWindowTitle(source, game, null))) {
                     break;
                 }
             } else {

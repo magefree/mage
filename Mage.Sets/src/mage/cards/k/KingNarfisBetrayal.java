@@ -95,7 +95,7 @@ class KingNarfisBetrayalFirstEffect extends OneShotEffect {
                 TargetCard target = new TargetCardInYourGraveyard(filter);
                 target.withNotTarget(true);
                 if (controller.chooseTarget(outcome, controller.getGraveyard(), target, source, game)) {
-                    controller.moveCardsToExile(game.getCard(target.getFirstTarget()), source, game, true, CardUtil.getCardExileZoneId(game, source), CardUtil.createObjectRealtedWindowTitle(source, game, null));
+                    controller.moveCardsToExile(game.getCard(target.getFirstTarget()), source, game, true, CardUtil.getCardExileZoneId(game, source), CardUtil.createObjectRelatedWindowTitle(source, game, null));
                 }
             }
         }
@@ -112,7 +112,7 @@ class KingNarfisBetrayalFirstEffect extends OneShotEffect {
                     TargetCard target = new TargetCardInOpponentsGraveyard(1, 1, filter, true);
                     target.withNotTarget(true);
                     if (controller.chooseTarget(outcome, opponent.getGraveyard(), target, source, game)) {
-                        controller.moveCardsToExile(game.getCard(target.getFirstTarget()), source, game, true, CardUtil.getCardExileZoneId(game, source), CardUtil.createObjectRealtedWindowTitle(source, game, null));
+                        controller.moveCardsToExile(game.getCard(target.getFirstTarget()), source, game, true, CardUtil.getCardExileZoneId(game, source), CardUtil.createObjectRelatedWindowTitle(source, game, null));
                     }
                 }
             }
