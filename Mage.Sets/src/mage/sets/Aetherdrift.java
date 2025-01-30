@@ -105,6 +105,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Quag Feast", 100, Rarity.RARE, mage.cards.q.QuagFeast.class));
         cards.add(new SetCardInfo("Rangers' Refueler", 55, Rarity.UNCOMMON, mage.cards.r.RangersRefueler.class));
         cards.add(new SetCardInfo("Reef Roads", 259, Rarity.UNCOMMON, mage.cards.r.ReefRoads.class));
+        cards.add(new SetCardInfo("Regal Imperiosaur", 177, Rarity.RARE, mage.cards.r.RegalImperiosaur.class));
         cards.add(new SetCardInfo("Ripclaw Wrangler", 101, Rarity.COMMON, mage.cards.r.RipclawWrangler.class));
         cards.add(new SetCardInfo("Risen Necroregent", 102, Rarity.UNCOMMON, mage.cards.r.RisenNecroregent.class));
         cards.add(new SetCardInfo("Riverpyre Verge", 260, Rarity.RARE, mage.cards.r.RiverpyreVerge.class));
