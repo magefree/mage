@@ -48,6 +48,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Brightfield Mustang", 5, Rarity.COMMON, mage.cards.b.BrightfieldMustang.class));
         cards.add(new SetCardInfo("Brightglass Gearhulk", 191, Rarity.MYTHIC, mage.cards.b.BrightglassGearhulk.class));
         cards.add(new SetCardInfo("Bulwark Ox", 7, Rarity.RARE, mage.cards.b.BulwarkOx.class));
+        cards.add(new SetCardInfo("Caelorna, Coral Tyrant", 40, Rarity.UNCOMMON, mage.cards.c.CaelornaCoralTyrant.class));
         cards.add(new SetCardInfo("Caradora, Heart of Alacria", 195, Rarity.RARE, mage.cards.c.CaradoraHeartOfAlacria.class));
         cards.add(new SetCardInfo("Clamorous Ironclad", 117, Rarity.COMMON, mage.cards.c.ClamorousIronclad.class));
         cards.add(new SetCardInfo("Cloudspire Captain", 9, Rarity.UNCOMMON, mage.cards.c.CloudspireCaptain.class));
