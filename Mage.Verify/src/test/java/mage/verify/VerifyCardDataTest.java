@@ -1038,6 +1038,57 @@ public class VerifyCardDataTest {
             }
         }
 
+        // CHECK: miss booster settings
+        Set<String> ignoreBoosterSets = new HashSet<>();
+        // temporary, TODO: remove after set release and mtgjson get info
+        ignoreBoosterSets.add("Innistrad Remastered");
+        // jumpstart, TODO: must implement from JumpstartPoolGenerator, see #13264
+        ignoreBoosterSets.add("Jumpstart");
+        ignoreBoosterSets.add("Jumpstart 2022");
+        ignoreBoosterSets.add("Foundations Jumpstart");
+        ignoreBoosterSets.add("Ravnica: Clue Edition");
+        // joke or un-sets, low implemented cards
+        ignoreBoosterSets.add("Unglued");
+        ignoreBoosterSets.add("Unhinged");
+        ignoreBoosterSets.add("Unstable");
+        ignoreBoosterSets.add("Unfinity");
+        // other
+        ignoreBoosterSets.add("Secret Lair Drop"); // cards shop
+        ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
+        ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
+
+        for (ExpansionSet set : sets) {
+            MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
+            if (jsonSet == null) {
+                continue;
+            }
+            boolean needBooster = jsonSet.booster != null && !jsonSet.booster.isEmpty();
+            if (set.hasBoosters() != needBooster) {
+                if (ignoreBoosterSets.contains(set.getName())) {
+                    continue;
+                }
+                // error example: wrong booster settings (set MUST HAVE booster, but haven't) - 2020 - J22 - Jumpstart 2022 - boosters: [jumpstart]
+                errorsList.add(String.format("Error: wrong booster settings (set %s booster, but %s) - %s%s",
+                        (needBooster ? "MUST HAVE" : "MUST HAVEN'T"),
+                        (set.hasBoosters() ? "have" : "haven't"),
+                        set.getReleaseYear() + " - " + set.getCode() + " - " + set.getName(),
+                        (jsonSet.booster == null ? "" : " - boosters: " + jsonSet.booster.keySet())
+                ));
+            }
+        }
+
+        // CHECK: missing important sets for draft format
+        Set<String> implementedSets = sets.stream().map(ExpansionSet::getCode).collect(Collectors.toSet());
+        MtgJsonService.sets().values().forEach(jsonSet -> {
+            if (jsonSet.booster != null && !jsonSet.booster.isEmpty() && !implementedSets.contains(jsonSet.code)) {
+                errorsList.add(String.format("Error: missing set implementation (important for draft format) - %s - %s - boosters: %s",
+                        jsonSet.code,
+                        jsonSet.name,
+                        jsonSet.booster.keySet()
+                ));
+            }
+        });
+
         // TODO: add test to check num cards for rarity (rarityStats > 0 and numRarity > 0)
         printMessages(warningsList);
         printMessages(errorsList);
