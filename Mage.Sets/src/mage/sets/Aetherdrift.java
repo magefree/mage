@@ -149,6 +149,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Shefet Archfiend", 104, Rarity.UNCOMMON, mage.cards.s.ShefetArchfiend.class));
         cards.add(new SetCardInfo("Silken Strength", 180, Rarity.COMMON, mage.cards.s.SilkenStrength.class));
         cards.add(new SetCardInfo("Skybox Ferry", 243, Rarity.COMMON, mage.cards.s.SkyboxFerry.class));
+        cards.add(new SetCardInfo("Skycrash", 146, Rarity.UNCOMMON, mage.cards.s.Skycrash.class));
         cards.add(new SetCardInfo("Spell Pierce", 64, Rarity.UNCOMMON, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Spotcycle Scouter", 30, Rarity.COMMON, mage.cards.s.SpotcycleScouter.class));
         cards.add(new SetCardInfo("Starting Column", 244, Rarity.COMMON, mage.cards.s.StartingColumn.class));
