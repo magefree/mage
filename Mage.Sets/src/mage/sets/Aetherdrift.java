@@ -87,6 +87,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Gastal Thrillroller", 129, Rarity.RARE, mage.cards.g.GastalThrillroller.class));
         cards.add(new SetCardInfo("Gearseeker Serpent", 43, Rarity.COMMON, mage.cards.g.GearseekerSerpent.class));
         cards.add(new SetCardInfo("Gilded Ghoda", 130, Rarity.COMMON, mage.cards.g.GildedGhoda.class));
+        cards.add(new SetCardInfo("Glitch Ghost Surveyor", 44, Rarity.COMMON, mage.cards.g.GlitchGhostSurveyor.class));
         cards.add(new SetCardInfo("Gloryheath Lynx", 14, Rarity.UNCOMMON, mage.cards.g.GloryheathLynx.class));
         cards.add(new SetCardInfo("Goblin Surveyor", 131, Rarity.COMMON, mage.cards.g.GoblinSurveyor.class));
         cards.add(new SetCardInfo("Greasewrench Goblin", 132, Rarity.UNCOMMON, mage.cards.g.GreasewrenchGoblin.class));
