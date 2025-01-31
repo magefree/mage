@@ -82,6 +82,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Guidelight Pathmaker", 206, Rarity.UNCOMMON, mage.cards.g.GuidelightPathmaker.class));
         cards.add(new SetCardInfo("Haunted Hellride", 208, Rarity.UNCOMMON, mage.cards.h.HauntedHellride.class));
         cards.add(new SetCardInfo("Hazoret, Godseeker", 133, Rarity.MYTHIC, mage.cards.h.HazoretGodseeker.class));
+        cards.add(new SetCardInfo("Howler's Heavy", 46, Rarity.COMMON, mage.cards.h.HowlersHeavy.class));
         cards.add(new SetCardInfo("Hulldrifter", 47, Rarity.COMMON, mage.cards.h.Hulldrifter.class));
         cards.add(new SetCardInfo("Interface Ace", 17, Rarity.COMMON, mage.cards.i.InterfaceAce.class));
         cards.add(new SetCardInfo("Intimidation Tactics", 92, Rarity.UNCOMMON, mage.cards.i.IntimidationTactics.class));
