@@ -14,9 +14,7 @@ import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterStackObject;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.game.stack.StackObject;
+import mage.filter.predicate.other.ExhaustAbilityPredicate;
 
 import java.util.UUID;
 
@@ -28,7 +26,7 @@ public final class AfterburnerExpert extends CardImpl {
     private static final FilterStackObject filter = new FilterStackObject("an exhaust ability");
 
     static {
-        filter.add(AfterburnerExpertPredicate.instance);
+        filter.add(ExhaustAbilityPredicate.instance);
     }
 
     public AfterburnerExpert(UUID ownerId, CardSetInfo setInfo) {
@@ -57,14 +55,5 @@ public final class AfterburnerExpert extends CardImpl {
     @Override
     public AfterburnerExpert copy() {
         return new AfterburnerExpert(this);
-    }
-}
-
-enum AfterburnerExpertPredicate implements Predicate<StackObject> {
-    instance;
-
-    @Override
-    public boolean apply(StackObject input, Game game) {
-        return input.getStackAbility() instanceof ExhaustAbility;
     }
 }
