@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class Aetherdrift extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Aether Syphon", "Amonkhet Raceway", "Avishkar Raceway", "Burnout Bashtronaut", "Embalmed Ascendant", "Endrider Catalyzer", "Far Fortune, End Boss", "Gas Guzzler", "Gastal Raider", "Goblin Surveyor", "Hazoret, Godseeker", "Hour of Victory", "Howlsquad Heavy", "Loxodon Surveyor", "Mendicant Core, Guidelight", "Momentum Breaker", "Muraganda Raceway", "Nesting Bot", "Perilous Snare", "Point the Way", "Pride of the Road", "Racers' Scoreboard", "Risen Necroregent", "Samut, the Driving Force", "Slick Imitator", "Starting Column", "Streaking Oilgorger", "The Speed Demon", "Vnwxt, Verbose Host", "Zahur, Glory's Past");
+    private static final List<String> unfinished = Arrays.asList("Aether Syphon", "Amonkhet Raceway", "Avishkar Raceway", "Burnout Bashtronaut", "Embalmed Ascendant", "Endrider Catalyzer", "Far Fortune, End Boss", "Gas Guzzler", "Gastal Raider", "Goblin Surveyor", "Hazoret, Godseeker", "Hour of Victory", "Howlsquad Heavy", "Kickoff Celebrations", "Lightwheel Enhancements", "Loxodon Surveyor", "Mendicant Core, Guidelight", "Momentum Breaker", "Muraganda Raceway", "Nesting Bot", "Outpace Oblivion", "Perilous Snare", "Point the Way", "Pride of the Road", "Racers' Scoreboard", "Risen Necroregent", "Samut, the Driving Force", "Slick Imitator", "Starting Column", "Streaking Oilgorger", "The Speed Demon", "Vnwxt, Verbose Host", "Zahur, Glory's Past");
     private static final Aetherdrift instance = new Aetherdrift();
 
     public static Aetherdrift getInstance() {
@@ -88,6 +88,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Jungle Hollow", 256, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Kalakscion, Hunger Tyrant", 93, Rarity.UNCOMMON, mage.cards.k.KalakscionHungerTyrant.class));
         cards.add(new SetCardInfo("Lagorin, Soul of Alacria", 211, Rarity.UNCOMMON, mage.cards.l.LagorinSoulOfAlacria.class));
+        cards.add(new SetCardInfo("Lightning Strike", 136, Rarity.COMMON, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Lightshield Parry", 19, Rarity.COMMON, mage.cards.l.LightshieldParry.class));
         cards.add(new SetCardInfo("Marketback Walker", 235, Rarity.RARE, mage.cards.m.MarketbackWalker.class));
         cards.add(new SetCardInfo("Marshals' Pathcruiser", 236, Rarity.UNCOMMON, mage.cards.m.MarshalsPathcruiser.class));
@@ -119,6 +120,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Rugged Highlands", 262, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Sab-Sunen, Luxa Embodied", 221, Rarity.MYTHIC, mage.cards.s.SabSunenLuxaEmbodied.class));
         cards.add(new SetCardInfo("Scoured Barrens", 263, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
+        cards.add(new SetCardInfo("Spell Pierce", 64, Rarity.UNCOMMON, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Spotcycle Scouter", 30, Rarity.COMMON, mage.cards.s.SpotcycleScouter.class));
         cards.add(new SetCardInfo("Starting Column", 244, Rarity.COMMON, mage.cards.s.StartingColumn.class));
         cards.add(new SetCardInfo("Stock Up", 67, Rarity.UNCOMMON, mage.cards.s.StockUp.class));
