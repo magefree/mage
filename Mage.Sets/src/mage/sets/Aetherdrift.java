@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class Aetherdrift extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Aether Syphon", "Amonkhet Raceway", "Avishkar Raceway", "Burnout Bashtronaut", "Embalmed Ascendant", "Endrider Catalyzer", "Far Fortune, End Boss", "Gas Guzzler", "Gastal Raider", "Goblin Surveyor", "Hazoret, Godseeker", "Hour of Victory", "Howlsquad Heavy", "Kickoff Celebrations", "Lightwheel Enhancements", "Loxodon Surveyor", "Mendicant Core, Guidelight", "Momentum Breaker", "Muraganda Raceway", "Nesting Bot", "Outpace Oblivion", "Perilous Snare", "Point the Way", "Pride of the Road", "Racers' Scoreboard", "Risen Necroregent", "Samut, the Driving Force", "Slick Imitator", "Starting Column", "Streaking Oilgorger", "The Speed Demon", "Vnwxt, Verbose Host", "Zahur, Glory's Past");
+    private static final List<String> unfinished = Arrays.asList("Aether Syphon", "Amonkhet Raceway", "Avishkar Raceway", "Burnout Bashtronaut", "Embalmed Ascendant", "Endrider Catalyzer", "Endrider Spikespitter", "Far Fortune, End Boss", "Gas Guzzler", "Gastal Raider", "Gastal Thrillseeker", "Glitch Ghost Surveyor", "Goblin Surveyor", "Hazoret, Godseeker", "Hour of Victory", "Howlsquad Heavy", "Kickoff Celebrations", "Leonin Surveyor", "Lightwheel Enhancements", "Loxodon Surveyor", "Mendicant Core, Guidelight", "Momentum Breaker", "Muraganda Raceway", "Mutant Surveyor", "Nesting Bot", "Outpace Oblivion", "Perilous Snare", "Point the Way", "Pride of the Road", "Racers' Scoreboard", "Risen Necroregent", "Samut, the Driving Force", "Slick Imitator", "Starting Column", "Streaking Oilgorger", "Swiftwing Assailant", "The Speed Demon", "Vnwxt, Verbose Host", "Walking Sarcophagus", "Zahur, Glory's Past");
     private static final Aetherdrift instance = new Aetherdrift();
 
     public static Aetherdrift getInstance() {
@@ -48,6 +48,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Brightfield Glider", 4, Rarity.COMMON, mage.cards.b.BrightfieldGlider.class));
         cards.add(new SetCardInfo("Brightfield Mustang", 5, Rarity.COMMON, mage.cards.b.BrightfieldMustang.class));
         cards.add(new SetCardInfo("Brightglass Gearhulk", 191, Rarity.MYTHIC, mage.cards.b.BrightglassGearhulk.class));
+        cards.add(new SetCardInfo("Broken Wings", 156, Rarity.COMMON, mage.cards.b.BrokenWings.class));
         cards.add(new SetCardInfo("Bulwark Ox", 7, Rarity.RARE, mage.cards.b.BulwarkOx.class));
         cards.add(new SetCardInfo("Burnout Bashtronaut", 115, Rarity.RARE, mage.cards.b.BurnoutBashtronaut.class));
         cards.add(new SetCardInfo("Caelorna, Coral Tyrant", 40, Rarity.UNCOMMON, mage.cards.c.CaelornaCoralTyrant.class));
@@ -79,6 +80,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Fuel the Flames", 126, Rarity.UNCOMMON, mage.cards.f.FuelTheFlames.class));
         cards.add(new SetCardInfo("Gas Guzzler", 85, Rarity.RARE, mage.cards.g.GasGuzzler.class));
         cards.add(new SetCardInfo("Gastal Thrillroller", 129, Rarity.RARE, mage.cards.g.GastalThrillroller.class));
+        cards.add(new SetCardInfo("Gearseeker Serpent", 43, Rarity.COMMON, mage.cards.g.GearseekerSerpent.class));
         cards.add(new SetCardInfo("Gilded Ghoda", 130, Rarity.COMMON, mage.cards.g.GildedGhoda.class));
         cards.add(new SetCardInfo("Gloryheath Lynx", 14, Rarity.UNCOMMON, mage.cards.g.GloryheathLynx.class));
         cards.add(new SetCardInfo("Goblin Surveyor", 131, Rarity.COMMON, mage.cards.g.GoblinSurveyor.class));
