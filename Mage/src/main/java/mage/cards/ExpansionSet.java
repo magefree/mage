@@ -759,6 +759,48 @@ public abstract class ExpansionSet implements Serializable {
     }
 
     /**
+     * Old default booster configuration (after 2020 - ZNR and before 2024 - MKM)
+     */
+    public void enableSetBooster(int maxCardNumberInBooster) {
+        // https://draftsim.com/draft-booster-vs-set-booster-mtg/
+        this.hasBoosters = true;
+        this.maxCardNumberInBooster = maxCardNumberInBooster;
+
+        this.hasBasicLands = true;
+        this.numBoosterLands = 0;
+        this.numBoosterCommon = 0;
+        this.numBoosterUncommon = 0;
+        this.numBoosterRare = 0;
+
+        // Set boosters contain 12 cards — fewer cards than a Draft booster — but the distribution is much more complex:
+        // 1 art card (5% chance of having a gold signature)
+        this.numBoosterCommon += 1;
+        // 1 basic land (15% chance of being foil)
+        this.numBoosterLands += 1;
+        // 6 commons/uncommons (different combinations possible, the most common is 4 commons and 2 uncommons)
+        this.numBoosterCommon += 4;
+        this.numBoosterUncommon += 2;
+        // 1 unique common/uncommon
+        this.numBoosterCommon += 1;
+        // 2 “wild cards” (any rarity from common to mythic)
+        this.numBoosterUncommon += 1;
+        this.numBoosterRare += 1;
+        // 1 rare (13.5% chance of being a mythic)
+        this.numBoosterRare += 1;
+        this.ratioBoosterMythic = 8;
+        // 1 foil card
+        // - ignore
+        // 1 marketing card/token (25% chance of being a card from The List)
+        // - ignore
+
+        // total 12:
+        // 1 land
+        // 6 common
+        // 3 uncommon
+        // 2 rare
+    }
+
+    /**
      * New default booster configuration (after 2024 - MKM)
      */
     public void enablePlayBooster(int maxCardNumberInBooster) {

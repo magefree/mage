@@ -16,9 +16,9 @@ public final class Unfinity extends ExpansionSet {
     }
 
     private Unfinity() {
-        super("Unfinity", "UNF", ExpansionSet.buildDate(2022, 4, 1), SetType.SUPPLEMENTAL);
+        super("Unfinity", "UNF", ExpansionSet.buildDate(2022, 4, 1), SetType.JOKE_SET);
         this.hasBasicLands = true;
-        this.hasBoosters = false; // not likely to be able to drafts at any point
+        this.hasBoosters = false; // un-set, low implemented cards
 
         cards.add(new SetCardInfo("\"Name Sticker\" Goblin", "107m", Rarity.COMMON, mage.cards.n.NameStickerGoblin.class));
         cards.add(new SetCardInfo("Atomwheel Acrobats", 130, Rarity.COMMON, mage.cards.a.AtomwheelAcrobats.class));
