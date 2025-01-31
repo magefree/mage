@@ -57,6 +57,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Collision Course", 10, Rarity.COMMON, mage.cards.c.CollisionCourse.class));
         cards.add(new SetCardInfo("Count on Luck", 118, Rarity.RARE, mage.cards.c.CountOnLuck.class));
         cards.add(new SetCardInfo("Country Roads", 253, Rarity.UNCOMMON, mage.cards.c.CountryRoads.class));
+        cards.add(new SetCardInfo("Crash and Burn", 119, Rarity.COMMON, mage.cards.c.CrashAndBurn.class));
         cards.add(new SetCardInfo("Daretti, Rocketeer Engineer", 120, Rarity.RARE, mage.cards.d.DarettiRocketeerEngineer.class));
         cards.add(new SetCardInfo("Daring Mechanic", 11, Rarity.COMMON, mage.cards.d.DaringMechanic.class));
         cards.add(new SetCardInfo("Deathless Pilot", 82, Rarity.COMMON, mage.cards.d.DeathlessPilot.class));
