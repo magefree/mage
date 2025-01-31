@@ -620,6 +620,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * <p>
      * Warning, if you use it from continuous effect, then check with extra call
      * isCanLookAtNextTopLibraryCard
+     * If you use revealCards with face-down permanents, they will be revealed face up.
      *
      * @param source
      * @param name

@@ -1905,7 +1905,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             int last = cards.size();
             for (Card card : cards.getCards(game)) {
                 current++;
-                sb.append(GameLog.getColoredObjectName(card)); // TODO: see same usage in OfferingAbility for hide card's id (is it needs for reveal too?!)
+                if (card instanceof PermanentCard && card.isFaceDown(game)) {
+                    sb.append(GameLog.getColoredObjectName(card.getMainCard()));
+                } else {
+                    sb.append(GameLog.getColoredObjectName(card)); // TODO: see same usage in OfferingAbility for hide card's id (is it needs for reveal too?!)
+                }
                 if (current < last) {
                     sb.append(", ");
                 }
