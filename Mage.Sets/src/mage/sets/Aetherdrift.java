@@ -118,6 +118,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Monument to Endurance", 237, Rarity.RARE, mage.cards.m.MonumentToEndurance.class));
         cards.add(new SetCardInfo("Mountain", 286, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Muraganda Raceway", 257, Rarity.RARE, mage.cards.m.MuragandaRaceway.class));
+        cards.add(new SetCardInfo("Mutant Surveyor", 98, Rarity.COMMON, mage.cards.m.MutantSurveyor.class));
         cards.add(new SetCardInfo("Nesting Bot", 22, Rarity.UNCOMMON, mage.cards.n.NestingBot.class));
         cards.add(new SetCardInfo("Night Market", 258, Rarity.COMMON, mage.cards.n.NightMarket.class));
         cards.add(new SetCardInfo("Pacesetter Paragon", 140, Rarity.UNCOMMON, mage.cards.p.PacesetterParagon.class));
