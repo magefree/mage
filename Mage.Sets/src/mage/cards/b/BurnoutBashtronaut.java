@@ -1,12 +1,11 @@
 package mage.cards.b;
 
 import mage.MageInt;
+import mage.abilities.common.MaxSpeedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.MaxSpeedGainAbilityEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.MenaceAbility;
 import mage.abilities.keyword.StartYourEnginesAbility;
@@ -43,7 +42,7 @@ public final class BurnoutBashtronaut extends CardImpl {
         ));
 
         // Max speed -- This creature has double strike.
-        this.addAbility(new SimpleStaticAbility(new MaxSpeedGainAbilityEffect(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance()))));
+        this.addAbility(new MaxSpeedAbility(new GainAbilitySourceEffect(DoubleStrikeAbility.getInstance())));
     }
 
     private BurnoutBashtronaut(final BurnoutBashtronaut card) {

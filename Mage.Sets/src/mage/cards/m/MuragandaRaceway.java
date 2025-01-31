@@ -1,9 +1,8 @@
 package mage.cards.m;
 
 import mage.Mana;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.MaxSpeedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.MaxSpeedGainAbilityEffect;
 import mage.abilities.keyword.StartYourEnginesAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
@@ -29,9 +28,9 @@ public final class MuragandaRaceway extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // Max speed -- {T}: Add {C}{C}.
-        this.addAbility(new SimpleStaticAbility(new MaxSpeedGainAbilityEffect(
+        this.addAbility(new MaxSpeedAbility(
                 new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost())
-        )));
+        ));
     }
 
     private MuragandaRaceway(final MuragandaRaceway card) {

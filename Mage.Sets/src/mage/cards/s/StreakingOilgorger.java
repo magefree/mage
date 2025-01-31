@@ -1,9 +1,8 @@
 package mage.cards.s;
 
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.MaxSpeedAbility;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.effects.common.continuous.MaxSpeedGainAbilityEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.LifelinkAbility;
@@ -38,8 +37,8 @@ public final class StreakingOilgorger extends CardImpl {
         this.addAbility(new StartYourEnginesAbility());
 
         // Max speed -- This creature has lifelink.
-        this.addAbility(new SimpleStaticAbility(new MaxSpeedGainAbilityEffect(
-                new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield)
+        this.addAbility(new MaxSpeedAbility(new GainAbilitySourceEffect(
+                LifelinkAbility.getInstance(), Duration.WhileOnBattlefield
         )));
     }
 
