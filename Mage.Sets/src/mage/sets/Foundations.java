@@ -3,6 +3,17 @@ package mage.sets;
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.collation.BoosterCollator;
+import mage.collation.BoosterStructure;
+import mage.collation.CardRun;
+import mage.collation.RarityConfiguration;
+import mage.util.RandomUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -18,7 +29,7 @@ public final class Foundations extends ExpansionSet {
     private Foundations() {
         super("Foundations", "FDN", ExpansionSet.buildDate(2024, 11, 15), SetType.EXPANSION);
         this.hasBasicLands = true;
-        this.hasBoosters = false; // temporary
+        this.hasBoosters = true;
 
         cards.add(new SetCardInfo("Abrade", 188, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Abyssal Harvester", 54, Rarity.RARE, mage.cards.a.AbyssalHarvester.class));
@@ -33,7 +44,8 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Ajani, Caller of the Pride", 134, Rarity.MYTHIC, mage.cards.a.AjaniCallerOfThePride.class));
         cards.add(new SetCardInfo("Alesha, Who Laughs at Fate", 115, Rarity.RARE, mage.cards.a.AleshaWhoLaughsAtFate.class));
         cards.add(new SetCardInfo("Ambush Wolf", 98, Rarity.COMMON, mage.cards.a.AmbushWolf.class));
-        cards.add(new SetCardInfo("An Offer You Can't Refuse", 160, Rarity.UNCOMMON, mage.cards.a.AnOfferYouCantRefuse.class));
+        cards.add(new SetCardInfo("An Offer You Can't Refuse", 160, Rarity.UNCOMMON, mage.cards.a.AnOfferYouCantRefuse.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("An Offer You Can't Refuse", 311, Rarity.UNCOMMON, mage.cards.a.AnOfferYouCantRefuse.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ancestor Dragon", 489, Rarity.RARE, mage.cards.a.AncestorDragon.class));
         cards.add(new SetCardInfo("Angel of Finality", 136, Rarity.UNCOMMON, mage.cards.a.AngelOfFinality.class));
         cards.add(new SetCardInfo("Angel of Vitality", 706, Rarity.UNCOMMON, mage.cards.a.AngelOfVitality.class));
@@ -207,7 +219,9 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Fleeting Distraction", 155, Rarity.COMMON, mage.cards.f.FleetingDistraction.class));
         cards.add(new SetCardInfo("Fleeting Flight", 13, Rarity.COMMON, mage.cards.f.FleetingFlight.class));
         cards.add(new SetCardInfo("Fog Bank", 591, Rarity.UNCOMMON, mage.cards.f.FogBank.class));
-        cards.add(new SetCardInfo("Forest", 280, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 280, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 290, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 291, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frenzied Goblin", 199, Rarity.UNCOMMON, mage.cards.f.FrenziedGoblin.class));
         cards.add(new SetCardInfo("Fumigate", 575, Rarity.RARE, mage.cards.f.Fumigate.class));
         cards.add(new SetCardInfo("Fynn, the Fangbearer", 637, Rarity.UNCOMMON, mage.cards.f.FynnTheFangbearer.class));
@@ -255,7 +269,8 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Herald of Eternal Dawn", 17, Rarity.MYTHIC, mage.cards.h.HeraldOfEternalDawn.class));
         cards.add(new SetCardInfo("Herald of Faith", 494, Rarity.UNCOMMON, mage.cards.h.HeraldOfFaith.class));
         cards.add(new SetCardInfo("Heraldic Banner", 254, Rarity.UNCOMMON, mage.cards.h.HeraldicBanner.class));
-        cards.add(new SetCardInfo("Hero's Downfall", 175, Rarity.UNCOMMON, mage.cards.h.HerosDownfall.class));
+        cards.add(new SetCardInfo("Hero's Downfall", 175, Rarity.UNCOMMON, mage.cards.h.HerosDownfall.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hero's Downfall", 319, Rarity.UNCOMMON, mage.cards.h.HerosDownfall.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Heroes' Bane", 639, Rarity.RARE, mage.cards.h.HeroesBane.class));
         cards.add(new SetCardInfo("Heroic Reinforcements", 241, Rarity.UNCOMMON, mage.cards.h.HeroicReinforcements.class));
         cards.add(new SetCardInfo("Hidetsugu's Second Rite", 202, Rarity.UNCOMMON, mage.cards.h.HidetsugusSecondRite.class));
@@ -281,7 +296,9 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Inspiring Paladin", 18, Rarity.COMMON, mage.cards.i.InspiringPaladin.class));
         cards.add(new SetCardInfo("Into the Roil", 509, Rarity.COMMON, mage.cards.i.IntoTheRoil.class));
         cards.add(new SetCardInfo("Involuntary Employment", 203, Rarity.COMMON, mage.cards.i.InvoluntaryEmployment.class));
-        cards.add(new SetCardInfo("Island", 274, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 274, Rarity.LAND, mage.cards.basiclands.Island.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Island", 284, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 285, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Izzet Guildgate", 691, Rarity.COMMON, mage.cards.i.IzzetGuildgate.class));
         cards.add(new SetCardInfo("Jazal Goldmane", 497, Rarity.RARE, mage.cards.j.JazalGoldmane.class));
         cards.add(new SetCardInfo("Joraga Invocation", 555, Rarity.UNCOMMON, mage.cards.j.JoragaInvocation.class));
@@ -338,7 +355,9 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Moment of Triumph", 500, Rarity.COMMON, mage.cards.m.MomentOfTriumph.class));
         cards.add(new SetCardInfo("Mortify", 662, Rarity.UNCOMMON, mage.cards.m.Mortify.class));
         cards.add(new SetCardInfo("Mossborn Hydra", 107, Rarity.RARE, mage.cards.m.MossbornHydra.class));
-        cards.add(new SetCardInfo("Mountain", 278, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 278, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 288, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 289, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Muldrotha, the Gravetide", 243, Rarity.MYTHIC, mage.cards.m.MuldrothaTheGravetide.class));
         cards.add(new SetCardInfo("Myojin of Night's Reach", 610, Rarity.RARE, mage.cards.m.MyojinOfNightsReach.class));
         cards.add(new SetCardInfo("Mystic Archaeologist", 511, Rarity.RARE, mage.cards.m.MysticArchaeologist.class));
@@ -365,7 +384,9 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Phyrexian Arena", 180, Rarity.RARE, mage.cards.p.PhyrexianArena.class));
         cards.add(new SetCardInfo("Pilfer", 181, Rarity.COMMON, mage.cards.p.Pilfer.class));
         cards.add(new SetCardInfo("Pirate's Cutlass", 563, Rarity.COMMON, mage.cards.p.PiratesCutlass.class));
-        cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 282, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 283, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prayer of Binding", 502, Rarity.UNCOMMON, mage.cards.p.PrayerOfBinding.class));
         cards.add(new SetCardInfo("Predator Ooze", 642, Rarity.RARE, mage.cards.p.PredatorOoze.class));
         cards.add(new SetCardInfo("Preposterous Proportions", 109, Rarity.RARE, mage.cards.p.PreposterousProportions.class));
@@ -391,9 +412,11 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Ravenous Amulet", 131, Rarity.UNCOMMON, mage.cards.r.RavenousAmulet.class));
         cards.add(new SetCardInfo("Ravenous Giant", 630, Rarity.UNCOMMON, mage.cards.r.RavenousGiant.class));
         cards.add(new SetCardInfo("Reassembling Skeleton", 182, Rarity.UNCOMMON, mage.cards.r.ReassemblingSkeleton.class));
-        cards.add(new SetCardInfo("Reclamation Sage", 231, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class));
+        cards.add(new SetCardInfo("Reclamation Sage", 231, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Reclamation Sage", 340, Rarity.UNCOMMON, mage.cards.r.ReclamationSage.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Redcap Gutter-Dweller", 631, Rarity.RARE, mage.cards.r.RedcapGutterDweller.class));
-        cards.add(new SetCardInfo("Refute", 48, Rarity.COMMON, mage.cards.r.Refute.class));
+        cards.add(new SetCardInfo("Refute", 48, Rarity.COMMON, mage.cards.r.Refute.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Refute", 313, Rarity.COMMON, mage.cards.r.Refute.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Regal Caracal", 579, Rarity.RARE, mage.cards.r.RegalCaracal.class));
         cards.add(new SetCardInfo("Release the Dogs", 580, Rarity.UNCOMMON, mage.cards.r.ReleaseTheDogs.class));
         cards.add(new SetCardInfo("Resolute Reinforcements", 145, Rarity.UNCOMMON, mage.cards.r.ResoluteReinforcements.class));
@@ -463,9 +486,12 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Surrak, the Hunt Caller", 647, Rarity.RARE, mage.cards.s.SurrakTheHuntCaller.class));
         cards.add(new SetCardInfo("Suspicious Shambler", 527, Rarity.COMMON, mage.cards.s.SuspiciousShambler.class));
         cards.add(new SetCardInfo("Swab Goblin", 548, Rarity.COMMON, mage.cards.s.SwabGoblin.class));
-        cards.add(new SetCardInfo("Swamp", 276, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 276, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 286, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 287, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftblade Vindicator", 246, Rarity.RARE, mage.cards.s.SwiftbladeVindicator.class));
-        cards.add(new SetCardInfo("Swiftfoot Boots", 258, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class));
+        cards.add(new SetCardInfo("Swiftfoot Boots", 258, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swiftfoot Boots", 355, Rarity.UNCOMMON, mage.cards.s.SwiftfootBoots.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 268, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
         cards.add(new SetCardInfo("Sylvan Scavenging", 113, Rarity.RARE, mage.cards.s.SylvanScavenging.class));
         cards.add(new SetCardInfo("Syr Alin, the Lion's Claw", 582, Rarity.UNCOMMON, mage.cards.s.SyrAlinTheLionsClaw.class));
@@ -485,7 +511,8 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Silence", 704, Rarity.RARE, mage.cards.t.TempleOfSilence.class));
         cards.add(new SetCardInfo("Temple of Triumph", 705, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
         cards.add(new SetCardInfo("Terror of Mount Velus", 549, Rarity.RARE, mage.cards.t.TerrorOfMountVelus.class));
-        cards.add(new SetCardInfo("Think Twice", 165, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
+        cards.add(new SetCardInfo("Think Twice", 165, Rarity.COMMON, mage.cards.t.ThinkTwice.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Think Twice", 315, Rarity.COMMON, mage.cards.t.ThinkTwice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thornweald Archer", 559, Rarity.COMMON, mage.cards.t.ThornwealdArcher.class));
         cards.add(new SetCardInfo("Thornwood Falls", 269, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thousand-Year Storm", 248, Rarity.RARE, mage.cards.t.ThousandYearStorm.class));
@@ -519,7 +546,8 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Vampire Spawn", 532, Rarity.COMMON, mage.cards.v.VampireSpawn.class));
         cards.add(new SetCardInfo("Vampiric Rites", 615, Rarity.UNCOMMON, mage.cards.v.VampiricRites.class));
         cards.add(new SetCardInfo("Vanguard Seraph", 28, Rarity.COMMON, mage.cards.v.VanguardSeraph.class));
-        cards.add(new SetCardInfo("Vengeful Bloodwitch", 76, Rarity.UNCOMMON, mage.cards.v.VengefulBloodwitch.class));
+        cards.add(new SetCardInfo("Vengeful Bloodwitch", 76, Rarity.UNCOMMON, mage.cards.v.VengefulBloodwitch.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Vengeful Bloodwitch", 325, Rarity.UNCOMMON, mage.cards.v.VengefulBloodwitch.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Venom Connoisseur", 648, Rarity.UNCOMMON, mage.cards.v.VenomConnoisseur.class));
         cards.add(new SetCardInfo("Viashino Pyromancer", 634, Rarity.COMMON, mage.cards.v.ViashinoPyromancer.class));
         cards.add(new SetCardInfo("Vile Entomber", 616, Rarity.UNCOMMON, mage.cards.v.VileEntomber.class));
@@ -536,10 +564,268 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Wind-Scarred Crag", 271, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Wishclaw Talisman", 617, Rarity.RARE, mage.cards.w.WishclawTalisman.class));
         cards.add(new SetCardInfo("Witness Protection", 168, Rarity.COMMON, mage.cards.w.WitnessProtection.class));
-        cards.add(new SetCardInfo("Youthful Valkyrie", 149, Rarity.UNCOMMON, mage.cards.y.YouthfulValkyrie.class));
+        cards.add(new SetCardInfo("Youthful Valkyrie", 149, Rarity.UNCOMMON, mage.cards.y.YouthfulValkyrie.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Youthful Valkyrie", 303, Rarity.UNCOMMON, mage.cards.y.YouthfulValkyrie.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 584, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
         cards.add(new SetCardInfo("Zimone, Paradox Sculptor", 126, Rarity.MYTHIC, mage.cards.z.ZimoneParadoxSculptor.class));
         cards.add(new SetCardInfo("Zombify", 187, Rarity.UNCOMMON, mage.cards.z.Zombify.class));
         cards.add(new SetCardInfo("Zul Ashur, Lich Lord", 77, Rarity.RARE, mage.cards.z.ZulAshurLichLord.class));
+    }
+
+    @Override
+    protected void generateBoosterMap() {
+        super.generateBoosterMap();
+        
+        CardInfo cardInfo;
+        for( int cn = 74 ; cn < 84 ; cn++ ) {
+            cardInfo = CardRepository.instance.findCard("SPG", "" + cn);
+            if( cardInfo != null ) {
+                inBoosterMap.put("SPG_" + cn, cardInfo);
+            } else {
+                throw new IllegalArgumentException("Card not found: " + "SPG_" + cn);
+            }
+        }
+    }
+
+    @Override
+    public BoosterCollator createCollator() {
+        return new FoundationsCollator();
+    }
+}
+
+// Booster collation info from https://vm1.substation33.com/tiera/t/lethe/fdn.html
+// Using Japanese collation plus other info inferred from various sources
+class FoundationsCollator implements BoosterCollator {
+
+    private final CardRun commonA = new CardRun(false, "13", "18", "20", "21", "24", "28");
+    private final CardRun commonB = new CardRun(true, "95", "170", "262", "208", "59", "196", "90", "169", "252", "192", "62", "143", "87", "64", "15", "83", "75", "139", "189", "178", "3", "196", "177", "209", "68", "252", "195", "172", "130", "95", "174", "150", "83", "60", "210", "208", "178", "89", "64", "253", "200", "70", "262", "90", "59", "150", "189", "169", "170", "203", "181", "143", "210", "62", "15", "87", "174", "89", "60", "3", "209", "75", "172", "90", "181", "139", "196", "62", "253", "203", "177", "195", "170", "208", "200", "64", "143", "192", "70", "252", "83", "59", "130", "209", "174", "253", "189", "172", "262", "95", "68", "150", "192", "178", "200", "169", "15", "210", "75", "130", "195", "60", "139", "87", "177", "3", "89", "68", "203", "70", "181");
+    private final CardRun commonC = new CardRun(true, "142", "53", "224", "12", "162", "225", "71", "42", "100", "16", "52", "235", "36", "103", "214", "167", "218", "251", "31", "225", "9", "155", "212", "82", "36", "114", "71", "52", "99", "227", "48", "101", "12", "157", "223", "159", "98", "138", "37", "212", "251", "155", "227", "218", "162", "215", "168", "167", "224", "165", "225", "82", "31", "100", "142", "37", "99", "71", "53", "215", "16", "168", "218", "9", "157", "235", "138", "48", "212", "98", "36", "214", "52", "223", "142", "155", "100", "165", "42", "103", "9", "162", "114", "16", "159", "224", "31", "214", "251", "167", "103", "12", "37", "101", "82", "165", "98", "227", "157", "114", "138", "53", "223", "168", "42", "101", "235", "159", "215", "48", "99");
+    private final CardRun uncommonA = new CardRun(false, "135", "136", "237", "250", "4", "6", "8", "10", "118", "239", "120", "128", "240", "14", "19", "255", "256", "144", "124", "131", "145", "146", "147", "148", "25", "125", "149");
+    private final CardRun uncommonB = new CardRun(true, "26", "80", "171", "202", "69", "43", "79", "185", "213", "65", "267", "187", "33", "173", "32", "249", "151", "205", "74", "49", "182", "264", "231", "160", "197", "152", "254", "158", "102", "163", "79", "156", "233", "171", "226", "185", "236", "26", "69", "267", "80", "258", "220", "202", "187", "199", "43", "182", "160", "231", "254", "74", "205", "33", "173", "197", "49", "220", "249", "236", "65", "151", "213", "158", "102", "156", "264", "32", "171", "202", "43", "185", "79", "152", "26", "233", "258", "187", "160", "69", "205", "163", "226", "74", "249", "80", "267", "33", "199", "231", "254", "158", "182", "213", "65", "236", "264", "197", "49", "102", "151", "173", "156", "226", "32", "258", "152", "233", "163", "199", "220");
+    private final CardRun uncommonC = new CardRun(true, "63", "241", "217", "73", "164", "78", "175", "86", "56", "105", "188", "39", "110", "94", "108", "201", "55", "206", "229", "38", "88", "47", "104", "245", "228", "76", "230", "96", "67", "50", "84", "186", "211", "29", "247", "63", "153", "217", "175", "241", "164", "191", "39", "94", "73", "86", "55", "188", "56", "110", "206", "104", "201", "245", "105", "78", "108", "47", "229", "76", "38", "228", "50", "96", "29", "63", "88", "230", "153", "211", "73", "247", "217", "67", "84", "164", "175", "94", "241", "186", "108", "245", "191", "55", "105", "86", "39", "78", "110", "188", "228", "88", "104", "96", "56", "201", "47", "206", "67", "153", "191", "50", "229", "29", "230", "38", "186", "247", "84", "76", "211");
+    // ToDo: Implement borderless printings for rares and mythics
+    private final CardRun rare = new CardRun(false, "134", "58", "81", "216", "17", "44", "176", "243", "123", "161", "244", "111", "183", "92", "1", "51", "97", "27", "234", "126", "54", "54", "115", "115", "116", "116", "2", "2", "30", "30", "117", "117", "137", "137", "127", "127", "57", "57", "190", "190", "5", "5", "238", "238", "7", "7", "34", "34", "140", "140", "35", "35", "193", "193", "85", "85", "119", "119", "219", "219", "194", "194", "11", "11", "154", "154", "198", "198", "221", "221", "222", "222", "141", "141", "40", "40", "61", "61", "41", "41", "91", "91", "45", "45", "121", "121", "204", "204", "122", "122", "242", "242", "129", "129", "106", "106", "46", "46", "107", "107", "66", "66", "179", "179", "180", "180", "322", "322", "109", "109", "22", "22", "184", "184", "232", "232", "132", "132", "93", "93", "23", "23", "207", "207", "257", "257", "729", "729", "133", "133", "112", "112", "246", "246", "113", "113", "248", "248", "166", "166", "72", "72", "77", "77");
+    private final CardRun borderlessCU = new CardRun(false, "327", "293", "311", "319", "340", "355", "325", "303", "313", "313", "313", "315", "315", "315");
+    private final CardRun landBasic = new CardRun(false, "272", "273", "274", "275", "276", "277", "278", "279", "280", "281", "282", "283", "284", "285", "286", "287", "288", "289", "290", "291");
+    private final CardRun landDual = new CardRun(false, "259", "260", "261", "263", "265", "266", "268", "269", "270", "271");
+    private final CardRun listGuest = new CardRun(false, "SPG_74", "SPG_75", "SPG_76", "SPG_77", "SPG_78", "SPG_79", "SPG_80", "SPG_81", "SPG_82", "SPG_83");
+
+    // because a foil card is independant from sorted runs, repeated as unsorted runs
+    private final CardRun commonFoilB = new CardRun(false, "95", "170", "262", "208", "59", "196", "90", "169", "252", "192", "62", "143", "87", "64", "15", "83", "75", "139", "189", "178", "3", "196", "177", "209", "68", "252", "195", "172", "130", "95", "174", "150", "83", "60", "210", "208", "178", "89", "64", "253", "200", "70", "262", "90", "59", "150", "189", "169", "170", "203", "181", "143", "210", "62", "15", "87", "174", "89", "60", "3", "209", "75", "172", "90", "181", "139", "196", "62", "253", "203", "177", "195", "170", "208", "200", "64", "143", "192", "70", "252", "83", "59", "130", "209", "174", "253", "189", "172", "262", "95", "68", "150", "192", "178", "200", "169", "15", "210", "75", "130", "195", "60", "139", "87", "177", "3", "89", "68", "203", "70", "181");
+    private final CardRun commonFoilC = new CardRun(false, "142", "53", "224", "12", "162", "225", "71", "42", "100", "16", "52", "235", "36", "103", "214", "167", "218", "251", "31", "225", "9", "155", "212", "82", "36", "114", "71", "52", "99", "227", "48", "101", "12", "157", "223", "159", "98", "138", "37", "212", "251", "155", "227", "218", "162", "215", "168", "167", "224", "165", "225", "82", "31", "100", "142", "37", "99", "71", "53", "215", "16", "168", "218", "9", "157", "235", "138", "48", "212", "98", "36", "214", "52", "223", "142", "155", "100", "165", "42", "103", "9", "162", "114", "16", "159", "224", "31", "214", "251", "167", "103", "12", "37", "101", "82", "165", "98", "227", "157", "114", "138", "53", "223", "168", "42", "101", "235", "159", "215", "48", "99");
+    private final CardRun uncommonFoilB = new CardRun(false, "26", "80", "171", "202", "69", "43", "79", "185", "213", "65", "267", "187", "33", "173", "32", "249", "151", "205", "74", "49", "182", "264", "231", "160", "197", "152", "254", "158", "102", "163", "79", "156", "233", "171", "226", "185", "236", "26", "69", "267", "80", "258", "220", "202", "187", "199", "43", "182", "160", "231", "254", "74", "205", "33", "173", "197", "49", "220", "249", "236", "65", "151", "213", "158", "102", "156", "264", "32", "171", "202", "43", "185", "79", "152", "26", "233", "258", "187", "160", "69", "205", "163", "226", "74", "249", "80", "267", "33", "199", "231", "254", "158", "182", "213", "65", "236", "264", "197", "49", "102", "151", "173", "156", "226", "32", "258", "152", "233", "163", "199", "220");
+    private final CardRun uncommonFoilC = new CardRun(false, "63", "241", "217", "73", "164", "78", "175", "86", "56", "105", "188", "39", "110", "94", "108", "201", "55", "206", "229", "38", "88", "47", "104", "245", "228", "76", "230", "96", "67", "50", "84", "186", "211", "29", "247", "63", "153", "217", "175", "241", "164", "191", "39", "94", "73", "86", "55", "188", "56", "110", "206", "104", "201", "245", "105", "78", "108", "47", "229", "76", "38", "228", "50", "96", "29", "63", "88", "230", "153", "211", "73", "247", "217", "67", "84", "164", "175", "94", "241", "186", "108", "245", "191", "55", "105", "86", "39", "78", "110", "188", "228", "88", "104", "96", "56", "201", "47", "206", "67", "153", "191", "50", "229", "29", "230", "38", "186", "247", "84", "76", "211");
+
+    private final BoosterStructure BBBCCC = new BoosterStructure(
+            commonB, commonB, commonB,
+            commonC, commonC, commonC
+    );
+    private final BoosterStructure BBBCCCC = new BoosterStructure(
+            commonB, commonB, commonB,
+            commonC, commonC, commonC, commonC
+    );
+    private final BoosterStructure BBBBCCC = new BoosterStructure(
+            commonB, commonB, commonB, commonB,
+            commonC, commonC, commonC
+    );
+    private final BoosterStructure ABBBCCC = new BoosterStructure(
+            commonA,
+            commonB, commonB, commonB,
+            commonC, commonC, commonC
+    );
+    private final BoosterStructure ABBBCCCC = new BoosterStructure(
+            commonA,
+            commonB, commonB, commonB,
+            commonC, commonC, commonC, commonC
+    );
+    private final BoosterStructure ABBBBCCC = new BoosterStructure(
+            commonA,
+            commonB, commonB, commonB, commonB,
+            commonC, commonC, commonC
+    );
+    private final BoosterStructure BBBBCCCC = new BoosterStructure(
+            commonB, commonB, commonB, commonB,
+            commonC, commonC, commonC, commonC
+    );
+
+    private final BoosterStructure ABC = new BoosterStructure(
+            uncommonA,
+            uncommonB,
+            uncommonC
+    );
+    private final BoosterStructure BBC = new BoosterStructure(
+            uncommonB, uncommonB,
+            uncommonC
+    );
+    private final BoosterStructure BCC = new BoosterStructure(
+            uncommonB,
+            uncommonC, uncommonC
+    );
+    private final BoosterStructure ABCC = new BoosterStructure(
+            uncommonA,
+            uncommonB,
+            uncommonC, uncommonC
+    );
+    private final BoosterStructure ABBC = new BoosterStructure(
+            uncommonA,
+            uncommonB, uncommonB,
+            uncommonC
+    );
+
+    private final BoosterStructure R1 = new BoosterStructure(rare);
+    private final BoosterStructure R2 = new BoosterStructure(rare,rare);
+    private final BoosterStructure Rb = new BoosterStructure(rare,borderlessCU);
+    private final BoosterStructure Lb = new BoosterStructure(landBasic);
+    private final BoosterStructure Ld = new BoosterStructure(landDual);
+    private final BoosterStructure Sg = new BoosterStructure(listGuest);
+    private final BoosterStructure fcA = new BoosterStructure(commonA);
+    private final BoosterStructure fcB = new BoosterStructure(commonFoilB);
+    private final BoosterStructure fcC = new BoosterStructure(commonFoilC);
+    private final BoosterStructure fuA = new BoosterStructure(uncommonA);
+    private final BoosterStructure fuB = new BoosterStructure(uncommonFoilB);
+    private final BoosterStructure fuC = new BoosterStructure(uncommonFoilC);
+    private final BoosterStructure fr = R1;
+    private final BoosterStructure fb = new BoosterStructure(borderlessCU);
+
+    // 1/6 packs contain an 8th common, 1.5% of packs have a common replaced with a special guest card
+    // In order for equal numbers of each common to exist, the average booster must contain:
+    // 0.54 A commons ( 25746 / 48000)       6 Commons ( 15 / 1200) or (  600 / 48000)
+    // 3.31 B commons (158767 / 48000)       7 Commons (988 / 1200) or (39520 / 48000)
+    // 3.31 C commons (158767 / 48000)       8 Commons (197 / 1200) or ( 7880 / 48000)
+    private final RarityConfiguration commonRuns6 = new RarityConfiguration(BBBCCC);
+    private final RarityConfiguration commonRuns7 = new RarityConfiguration(
+        BBBBCCC, BBBBCCC,
+        BBBCCCC, BBBCCCC,
+        ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC, ABBBCCC
+    );
+    // If commonRuns8 were combined would need 17057x ABBBBCCC, 17057x ABBBCCCC, 36806x BBBBCCCC
+    private final RarityConfiguration commonRuns8A = new RarityConfiguration(ABBBBCCC, ABBBCCCC);
+    private final RarityConfiguration commonRuns8BC = new RarityConfiguration(BBBBCCCC);
+    private static final RarityConfiguration commonRuns(int runLength) {
+        // return ( runLength > 6 ? runLength > 7 ? RandomUtil.nextInt(35460) <17057 ?
+            // commonRuns8A : commonRuns8BC : commonRuns7 : commonRuns6 );
+        if (runLength < 7) {
+          return commonRuns6;
+        } else if (runLength < 8) {
+          return commonRuns7;
+        } else if (RandomUtil.nextInt(35460) < 17057) {
+          return commonRuns8A;
+        } else {
+          return commonRuns8BC;
+        }
+    }
+
+    // 7/12 packs contain an extra uncommon
+    // In order for equal numbers of each uncommon to exist, the average booster must contain:
+    // 0.96 A uncommons (1161 / 1212)       3 Uncommons (5 / 12) or (505 / 1212)
+    // 1.31 B uncommons (1591 / 1212)       4 Uncommons (7 / 12) or (707 / 1212)
+    // 1.31 C uncommons (1591 / 1212)       
+    // If commonRuns3 were combined would need 908 ABC, 51x BBC, 51x BCC
+    private final RarityConfiguration uncommonRuns3A = new RarityConfiguration(ABC);
+    private final RarityConfiguration uncommonRuns3BC = new RarityConfiguration(BBC, BCC);
+    private final RarityConfiguration uncommonRuns4 = new RarityConfiguration(ABBC, ABCC);
+    private static final RarityConfiguration uncommonRuns(int runLength) {
+        // return ( runLength < 4 ? RandomUtil.nextInt(505) < 454 ?
+            // uncommonRuns3A : uncommonRuns3BC : uncommonRuns4 );
+        if (runLength > 3) {
+          return uncommonRuns4;
+        } else if (RandomUtil.nextInt(505) < 454) {
+          return uncommonRuns3A;
+        } else {
+          return uncommonRuns3BC;
+        }
+    }
+
+    // 5/24 packs contain a second rare, 1/24 packs contain a borderless common/uncommon
+    private final RarityConfiguration rareRuns1 = new RarityConfiguration(R1);
+    private final RarityConfiguration rareRuns2 = new RarityConfiguration(R2, R2, R2, R2, R2, Rb);
+    private static final RarityConfiguration rareRuns(int runLength) {
+        return ( runLength > 1 ? rareRuns2 : rareRuns1 );
+    }
+
+    // 50% of packs contain a common dual land
+    private final RarityConfiguration landRuns = new RarityConfiguration(Lb, Ld);
+
+    // 1.5% of packs contain a special guest card
+    private final RarityConfiguration listRuns = new RarityConfiguration(Sg);
+
+    private final RarityConfiguration foilCommonRuns = new RarityConfiguration(
+        fcA, fcA, fcA, fcA, fcA, fcA,
+        fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB,
+        fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB,
+        fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB, fcB,
+        fcB, fcB, fcB, fcB, fcB, fcB, fcB,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC, fcC,
+        fcC, fcC, fcC, fcC, fcC, fcC, fcC
+    );
+
+    private final RarityConfiguration foilUncommonRuns = new RarityConfiguration(
+        fuA, fuA, fuA, fuA, fuA, fuA, fuA, fuA, fuA, fuA,
+        fuA, fuA, fuA, fuA, fuA, fuA, fuA, fuA, fuA, fuA,
+        fuA, fuA, fuA, fuA, fuA, fuA, fuA,
+        fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB,
+        fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB,
+        fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB, fuB,
+        fuB, fuB, fuB, fuB, fuB, fuB, fuB,
+        fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC,
+        fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC,
+        fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC, fuC,
+        fuC, fuC, fuC, fuC, fuC, fuC, fuC
+    );
+
+    private final RarityConfiguration foilRareRuns = new RarityConfiguration(fr);
+    private final RarityConfiguration foilBorderlessRuns = new RarityConfiguration(fb);
+        // foil wildcard rarity distribution not specified, so derived from observed pack openings
+        // 229 packs, 127 common, 78 uncommon, 19 rare/mythic, 5 borderless common/uncommon
+    private static final RarityConfiguration foilRuns() {
+        int wildNum = RandomUtil.nextInt(229);
+        // return ( wildNum < 224 ? wildNum < 205 ? wildNum < 127 ?
+            // foilCommonRuns : foilUncommonRuns : foilRareRuns : foilBorderlessRuns );
+        if (wildnum < 127) {
+            return foilCommonRuns;
+        } else if (wildNum < 205) {
+            return foilUncommonRuns;
+        } else if (wildNum < 224) {
+            return foilRareRuns;
+        } else {
+            return foilBorderlessRuns;
+        }
+    }
+
+
+    @Override
+    public List<String> makeBooster() {
+        List<String> booster = new ArrayList<>();
+        // 1-2 rares, 3-4 uncommons, and 6-8 commons
+        // wildcard 1/6 common, 7/12 uncommon, 1/4 rare (incl borderless c/u)
+        int wildNum = RandomUtil.nextInt(12);
+
+        int numCommon = 7;
+        boolean wildRare = false;
+        boolean wildUncommon = false;
+        if( wildNum < 2 ) {
+            numCommon++;
+        } else if( wildNum < 9 ) {
+            wildUncommon = true;
+        } else {
+            wildRare = true;
+        };
+
+        booster.addAll(landRuns.getNext().makeRun());
+        booster.addAll(foilRuns().getNext().makeRun());
+        booster.addAll(rareRuns( wildRare ? 2 : 1 ).getNext().makeRun());
+
+        // 1.5% of  Play Boosters features a Special Guests card displacing a common card.
+        if (RandomUtil.nextInt(200) < 3) {
+            booster.addAll(listRuns.getNext().makeRun());
+            --numCommon;
+        }
+
+        booster.addAll(uncommonRuns( wildUncommon ? 4 : 3 ).getNext().makeRun());
+        booster.addAll(commonRuns( numCommon ).getNext().makeRun());
+
+        return booster;
     }
 }
