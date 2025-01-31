@@ -18,7 +18,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
     private FoundationsJumpstart() {
         super("Foundations Jumpstart", "J25", ExpansionSet.buildDate(2024, 11, 15), SetType.SUPPLEMENTAL);
         this.blockName = "Jumpstart";
-        this.hasBoosters = false; // TODO: share code with JumpstartPoolGenerator and add single booster
+        this.hasBoosters = false; // TODO: share code with JumpstartPoolGenerator and add single booster, see #13264
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Abandon Reason", 513, Rarity.UNCOMMON, mage.cards.a.AbandonReason.class));
