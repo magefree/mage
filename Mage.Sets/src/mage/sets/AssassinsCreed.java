@@ -147,7 +147,7 @@ public final class AssassinsCreed extends ExpansionSet {
         //cards.add(new SetCardInfo("Fall of the First Civilization", 4, Rarity.UNCOMMON, mage.cards.f.FallOfTheFirstCivilization.class));
         cards.add(new SetCardInfo("Fatal Push", 204, Rarity.UNCOMMON, mage.cards.f.FatalPush.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fatal Push", 90, Rarity.UNCOMMON, mage.cards.f.FatalPush.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Fiery Islet", 112, Rarity.RARE, mage.cards.f.FieryIslet.class, FULL_ART));
+        cards.add(new SetCardInfo("Fiery Islet", 112, Rarity.RARE, mage.cards.f.FieryIslet.class));
         cards.add(new SetCardInfo("Forest", 109, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Forest", 110, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Go for the Throat", 205, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class, NON_FULL_USE_VARIOUS));
@@ -219,7 +219,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 305, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Murder", 208, Rarity.UNCOMMON, mage.cards.m.Murder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Murder", 92, Rarity.UNCOMMON, mage.cards.m.Murder.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Nurturing Peatland", 114, Rarity.RARE, mage.cards.n.NurturingPeatland.class, FULL_ART));
+        cards.add(new SetCardInfo("Nurturing Peatland", 114, Rarity.RARE, mage.cards.n.NurturingPeatland.class));
         cards.add(new SetCardInfo("Origin of the Hidden Ones", 36, Rarity.UNCOMMON, mage.cards.o.OriginOfTheHiddenOnes.class));
         //cards.add(new SetCardInfo("Overpowering Attack", 218, Rarity.UNCOMMON, mage.cards.o.OverpoweringAttack.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Overpowering Attack", 37, Rarity.UNCOMMON, mage.cards.o.OverpoweringAttack.class, NON_FULL_USE_VARIOUS));
@@ -274,7 +274,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Sigurd, Jarl of Ravensthorpe", 154, Rarity.RARE, mage.cards.s.SigurdJarlOfRavensthorpe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sigurd, Jarl of Ravensthorpe", 249, Rarity.RARE, mage.cards.s.SigurdJarlOfRavensthorpe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sigurd, Jarl of Ravensthorpe", 66, Rarity.RARE, mage.cards.s.SigurdJarlOfRavensthorpe.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Silent Clearing", 115, Rarity.RARE, mage.cards.s.SilentClearing.class, FULL_ART));
+        cards.add(new SetCardInfo("Silent Clearing", 115, Rarity.RARE, mage.cards.s.SilentClearing.class));
         cards.add(new SetCardInfo("Smoke Bomb", 259, Rarity.UNCOMMON, mage.cards.s.SmokeBomb.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Smoke Bomb", 75, Rarity.UNCOMMON, mage.cards.s.SmokeBomb.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Sokrates, Athenian Teacher", 121, Rarity.RARE, mage.cards.s.SokratesAthenianTeacher.class, NON_FULL_USE_VARIOUS));
@@ -287,7 +287,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Staff of Eden, Vault's Key", 76, Rarity.MYTHIC, mage.cards.s.StaffOfEdenVaultsKey.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stone Quarry", 300, Rarity.UNCOMMON, mage.cards.s.StoneQuarry.class));
         cards.add(new SetCardInfo("Submerged Boneyard", 301, Rarity.UNCOMMON, mage.cards.s.SubmergedBoneyard.class));
-        cards.add(new SetCardInfo("Sunbaked Canyon", 111, Rarity.RARE, mage.cards.s.SunbakedCanyon.class, FULL_ART));
+        cards.add(new SetCardInfo("Sunbaked Canyon", 111, Rarity.RARE, mage.cards.s.SunbakedCanyon.class));
         cards.add(new SetCardInfo("Surtr, Fiery Jotun", 293, Rarity.RARE, mage.cards.s.SurtrFieryJotun.class));
         cards.add(new SetCardInfo("Swamp", 105, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Swamp", 106, Rarity.LAND, mage.cards.basiclands.Swamp.class, FULL_ART_USE_VARIOUS));
@@ -323,7 +323,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquilize", 284, Rarity.COMMON, mage.cards.t.Tranquilize.class));
         //cards.add(new SetCardInfo("Viewpoint Synchronization", 223, Rarity.UNCOMMON, mage.cards.v.ViewpointSynchronization.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Viewpoint Synchronization", 43, Rarity.UNCOMMON, mage.cards.v.ViewpointSynchronization.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Waterlogged Grove", 116, Rarity.RARE, mage.cards.w.WaterloggedGrove.class, FULL_ART));
+        cards.add(new SetCardInfo("Waterlogged Grove", 116, Rarity.RARE, mage.cards.w.WaterloggedGrove.class));
         //cards.add(new SetCardInfo("What Must Be Done", 11, Rarity.RARE, mage.cards.w.WhatMustBeDone.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("What Must Be Done", 157, Rarity.RARE, mage.cards.w.WhatMustBeDone.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("What Must Be Done", 184, Rarity.RARE, mage.cards.w.WhatMustBeDone.class, NON_FULL_USE_VARIOUS));

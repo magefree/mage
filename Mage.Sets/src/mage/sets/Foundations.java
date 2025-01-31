@@ -53,8 +53,8 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Destiny", 565, Rarity.MYTHIC, mage.cards.a.AngelicDestiny.class));
         cards.add(new SetCardInfo("Angelic Edict", 490, Rarity.COMMON, mage.cards.a.AngelicEdict.class));
         cards.add(new SetCardInfo("Anthem of Champions", 116, Rarity.RARE, mage.cards.a.AnthemOfChampions.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Anthem of Champions", 344, Rarity.RARE, mage.cards.a.AnthemOfChampions.class, FULL_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Anthem of Champions", 405, Rarity.RARE, mage.cards.a.AnthemOfChampions.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Anthem of Champions", 344, Rarity.RARE, mage.cards.a.AnthemOfChampions.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Anthem of Champions", 405, Rarity.RARE, mage.cards.a.AnthemOfChampions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Anthem of Champions", 477, Rarity.RARE, mage.cards.a.AnthemOfChampions.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Apothecary Stomper", 99, Rarity.COMMON, mage.cards.a.ApothecaryStomper.class));
         cards.add(new SetCardInfo("Arahbo, the First Fang", 2, Rarity.RARE, mage.cards.a.ArahboTheFirstFang.class, NON_FULL_USE_VARIOUS));
@@ -403,7 +403,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Koma, World-Eater", 480, Rarity.RARE, mage.cards.k.KomaWorldEater.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Krenko, Mob Boss", 204, Rarity.RARE, mage.cards.k.KrenkoMobBoss.class));
         cards.add(new SetCardInfo("Kykar, Zephyr Awakener", 122, Rarity.RARE, mage.cards.k.KykarZephyrAwakener.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Kykar, Zephyr Awakener", 348, Rarity.RARE, mage.cards.k.KykarZephyrAwakener.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kykar, Zephyr Awakener", 348, Rarity.RARE, mage.cards.k.KykarZephyrAwakener.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kykar, Zephyr Awakener", 409, Rarity.RARE, mage.cards.k.KykarZephyrAwakener.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Kykar, Zephyr Awakener", 481, Rarity.RARE, mage.cards.k.KykarZephyrAwakener.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lathliss, Dragon Queen", 627, Rarity.RARE, mage.cards.l.LathlissDragonQueen.class));
@@ -476,8 +476,8 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Negate", 710, Rarity.COMMON, mage.cards.n.Negate.class));
         cards.add(new SetCardInfo("Nessian Hornbeetle", 229, Rarity.UNCOMMON, mage.cards.n.NessianHornbeetle.class));
         cards.add(new SetCardInfo("New Horizons", 557, Rarity.COMMON, mage.cards.n.NewHorizons.class));
-        cards.add(new SetCardInfo("Nine-Lives Familiar", 321, Rarity.RARE, mage.cards.n.NineLivesFamiliar.class, FULL_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Nine-Lives Familiar", 385, Rarity.RARE, mage.cards.n.NineLivesFamiliar.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nine-Lives Familiar", 321, Rarity.RARE, mage.cards.n.NineLivesFamiliar.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nine-Lives Familiar", 385, Rarity.RARE, mage.cards.n.NineLivesFamiliar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nine-Lives Familiar", 462, Rarity.RARE, mage.cards.n.NineLivesFamiliar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nine-Lives Familiar", 66, Rarity.RARE, mage.cards.n.NineLivesFamiliar.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Niv-Mizzet, Visionary", 123, Rarity.MYTHIC, mage.cards.n.NivMizzetVisionary.class, NON_FULL_USE_VARIOUS));
@@ -488,8 +488,8 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Obliterating Bolt", 629, Rarity.UNCOMMON, mage.cards.o.ObliteratingBolt.class));
         cards.add(new SetCardInfo("Offer Immortality", 525, Rarity.COMMON, mage.cards.o.OfferImmortality.class));
         cards.add(new SetCardInfo("Omniscience", 161, Rarity.MYTHIC, mage.cards.o.Omniscience.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Omniscience", 312, Rarity.MYTHIC, mage.cards.o.Omniscience.class, FULL_ART_USE_VARIOUS));
-        cards.add(new SetCardInfo("Omniscience", 379, Rarity.MYTHIC, mage.cards.o.Omniscience.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Omniscience", 312, Rarity.MYTHIC, mage.cards.o.Omniscience.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Omniscience", 379, Rarity.MYTHIC, mage.cards.o.Omniscience.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Opt", 512, Rarity.COMMON, mage.cards.o.Opt.class));
         cards.add(new SetCardInfo("Ordeal of Nylea", 641, Rarity.UNCOMMON, mage.cards.o.OrdealOfNylea.class));
         cards.add(new SetCardInfo("Orzhov Guildgate", 692, Rarity.COMMON, mage.cards.o.OrzhovGuildgate.class));
@@ -616,7 +616,7 @@ public final class Foundations extends ExpansionSet {
         cards.add(new SetCardInfo("Soulstone Sanctuary", 487, Rarity.RARE, mage.cards.s.SoulstoneSanctuary.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sower of Chaos", 95, Rarity.COMMON, mage.cards.s.SowerOfChaos.class));
         cards.add(new SetCardInfo("Spectral Sailor", 164, Rarity.UNCOMMON, mage.cards.s.SpectralSailor.class));
-        cards.add(new SetCardInfo("Sphinx of Forgotten Lore", 314, Rarity.MYTHIC, mage.cards.s.SphinxOfForgottenLore.class, FULL_ART_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sphinx of Forgotten Lore", 314, Rarity.MYTHIC, mage.cards.s.SphinxOfForgottenLore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sphinx of Forgotten Lore", 380, Rarity.MYTHIC, mage.cards.s.SphinxOfForgottenLore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sphinx of Forgotten Lore", 457, Rarity.MYTHIC, mage.cards.s.SphinxOfForgottenLore.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sphinx of Forgotten Lore", 51, Rarity.MYTHIC, mage.cards.s.SphinxOfForgottenLore.class, NON_FULL_USE_VARIOUS));
