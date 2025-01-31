@@ -674,6 +674,7 @@ public class VerifyCardDataTest {
 
                 // CHECK: only lands can use full art in current version;
                 // Another cards must be in text render mode as normal, example: https://scryfall.com/card/sld/76/athreos-god-of-passage
+                // TODO: add support textless cards like https://scryfall.com/card/sch/12/thalia-and-the-gitrog-monster
                 boolean isLand = card.getRarity().equals(Rarity.LAND);
                 if (card.isFullArt() && !isLand) {
                     errorsList.add("Error: only lands can use full art setting: "
@@ -963,7 +964,7 @@ public class VerifyCardDataTest {
             }
         }
 
-        // CHECK: wrong set name
+        // CHECK: unknown set or wrong name
         for (ExpansionSet set : sets) {
             if (set.getSetType().equals(SetType.CUSTOM_SET)) {
                 // skip unofficial sets like Star Wars
@@ -989,6 +990,7 @@ public class VerifyCardDataTest {
         }
 
         // CHECK: parent and block info
+        // TODO: it's UX problem, see https://github.com/magefree/mage/issues/10184
         for (ExpansionSet set : sets) {
             if (true) {
                 continue; // TODO: comments it and run to find a problems
