@@ -107,6 +107,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Lagorin, Soul of Alacria", 211, Rarity.UNCOMMON, mage.cards.l.LagorinSoulOfAlacria.class));
         cards.add(new SetCardInfo("Lightning Strike", 136, Rarity.COMMON, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Lightshield Parry", 19, Rarity.COMMON, mage.cards.l.LightshieldParry.class));
+        cards.add(new SetCardInfo("Locust Spray", 95, Rarity.UNCOMMON, mage.cards.l.LocustSpray.class));
         cards.add(new SetCardInfo("Loxodon Surveyor", 167, Rarity.COMMON, mage.cards.l.LoxodonSurveyor.class));
         cards.add(new SetCardInfo("Marketback Walker", 235, Rarity.RARE, mage.cards.m.MarketbackWalker.class));
         cards.add(new SetCardInfo("Marshals' Pathcruiser", 236, Rarity.UNCOMMON, mage.cards.m.MarshalsPathcruiser.class));
