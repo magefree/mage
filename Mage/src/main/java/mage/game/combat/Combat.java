@@ -201,7 +201,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         StringBuilder sb = new StringBuilder();
         sb.append(attackingPlayerId).append(defenders);
         for (CombatGroup group : groups) {
-            sb.append(group.defenderId).append(group.attackers).append(group.attackerOrder).append(group.blockers).append(group.blockerOrder);
+            sb.append(group.defenderId).append(group.attackers).append(group.blockers);
         }
         return sb.toString();
     }
@@ -756,7 +756,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                 if (attackerExists) {
                     if (!group.getBlockers().isEmpty()) {
                         sb.append("blocked by ");
-                        for (UUID blockingCreatureId : group.getBlockerOrder()) {
+                        for (UUID blockingCreatureId : group.getBlockers()) {
                             Permanent blockingCreature = game.getPermanent(blockingCreatureId);
                             if (blockingCreature != null) {
                                 sb.append(blockingCreature.getLogName()).append(" (");
@@ -1772,24 +1772,11 @@ public class Combat implements Serializable, Copyable<Combat> {
         return playerDefenders;
     }
 
-    public void damageAssignmentOrder(Game game) {
-        for (CombatGroup group : groups) {
-            group.pickBlockerOrder(attackingPlayerId, game);
-        }
-        for (Map.Entry<UUID, CombatGroup> blockingGroup : blockingGroups.entrySet()) {
-            Permanent blocker = game.getPermanent(blockingGroup.getKey());
-            if (blocker != null) {
-                blockingGroup.getValue().pickAttackerOrder(blocker.getControllerId(), game);
-            }
-        }
-    }
-
     @SuppressWarnings("deprecation")
     public void removeAttacker(UUID attackerId, Game game) {
         for (CombatGroup group : groups) {
             if (group.attackers.contains(attackerId)) {
                 group.attackers.remove(attackerId);
-                group.attackerOrder.remove(attackerId);
                 for (Set<UUID> attackingCreatures : numberCreaturesDefenderAttackedBy.values()) {
                     attackingCreatures.remove(attackerId);
                 }
@@ -1842,7 +1829,6 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
             for (CombatGroup group : groupsToCheck) {
                 group.blockers.remove(blockerId);
-                group.blockerOrder.remove(blockerId);
                 if (group.blockers.isEmpty()) {
                     group.blocked = false;
                 }
@@ -1858,11 +1844,9 @@ public class Combat implements Serializable, Copyable<Combat> {
                     if (blockGroup.blockers.contains(blockerId)) {
                         for (UUID attackerId : group.getAttackers()) {
                             blockGroup.attackers.remove(attackerId);
-                            blockGroup.attackerOrder.remove(attackerId);
                         }
                         if (creature.getBlocking() == 0) {
                             blockGroup.blockers.remove(blockerId);
-                            blockGroup.attackerOrder.clear();
                         }
                     }
                     if (blockGroup.blockers.isEmpty()) {
@@ -1887,7 +1871,6 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (CombatGroup group : groups) {
             if (group.blockers.contains(blockerId)) {
                 group.blockers.remove(blockerId);
-                group.blockerOrder.remove(blockerId);
                 if (group.blockers.isEmpty()) {
                     group.blocked = false;
                 }
@@ -1897,7 +1880,6 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (CombatGroup group : getBlockingGroups()) {
             if (group.blockers.contains(blockerId)) {
                 group.blockers.remove(blockerId);
-                group.attackerOrder.clear();
             }
             if (group.blockers.isEmpty()) {
                 canRemove = true;

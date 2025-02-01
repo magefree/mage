@@ -4458,19 +4458,6 @@ public class TestPlayer implements Player {
     }
 
     @Override
-    public UUID chooseAttackerOrder(List<Permanent> attacker, Game game
-    ) {
-        return computerPlayer.chooseAttackerOrder(attacker, game);
-    }
-
-    @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup,
-                                   List<UUID> blockerOrder, Game game
-    ) {
-        return computerPlayer.chooseBlockerOrder(blockers, combatGroup, blockerOrder, game);
-    }
-
-    @Override
     public void sideboard(Match match, Deck deck
     ) {
         computerPlayer.sideboard(match, deck);
