@@ -109,6 +109,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Jibbirik Omnivore", 166, Rarity.COMMON, mage.cards.j.JibbirikOmnivore.class));
         cards.add(new SetCardInfo("Jungle Hollow", 256, Rarity.COMMON, mage.cards.j.JungleHollow.class));
         cards.add(new SetCardInfo("Kalakscion, Hunger Tyrant", 93, Rarity.UNCOMMON, mage.cards.k.KalakscionHungerTyrant.class));
+        cards.add(new SetCardInfo("Keen Buccaneer", 48, Rarity.COMMON, mage.cards.k.KeenBuccaneer.class));
         cards.add(new SetCardInfo("Lagorin, Soul of Alacria", 211, Rarity.UNCOMMON, mage.cards.l.LagorinSoulOfAlacria.class));
         cards.add(new SetCardInfo("Leonin Surveyor", 18, Rarity.COMMON, mage.cards.l.LeoninSurveyor.class));
         cards.add(new SetCardInfo("Lightning Strike", 136, Rarity.COMMON, mage.cards.l.LightningStrike.class));
