@@ -49,6 +49,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Brightfield Glider", 4, Rarity.COMMON, mage.cards.b.BrightfieldGlider.class));
         cards.add(new SetCardInfo("Brightfield Mustang", 5, Rarity.COMMON, mage.cards.b.BrightfieldMustang.class));
         cards.add(new SetCardInfo("Brightglass Gearhulk", 191, Rarity.MYTHIC, mage.cards.b.BrightglassGearhulk.class));
+        cards.add(new SetCardInfo("Broadcast Rambler", 6, Rarity.COMMON, mage.cards.b.BroadcastRambler.class));
         cards.add(new SetCardInfo("Broadside Barrage", 192, Rarity.UNCOMMON, mage.cards.b.BroadsideBarrage.class));
         cards.add(new SetCardInfo("Broken Wings", 156, Rarity.COMMON, mage.cards.b.BrokenWings.class));
         cards.add(new SetCardInfo("Bulwark Ox", 7, Rarity.RARE, mage.cards.b.BulwarkOx.class));
