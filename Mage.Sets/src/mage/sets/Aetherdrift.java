@@ -165,6 +165,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Stock Up", 67, Rarity.UNCOMMON, mage.cards.s.StockUp.class));
         cards.add(new SetCardInfo("Streaking Oilgorger", 107, Rarity.COMMON, mage.cards.s.StreakingOilgorger.class));
         cards.add(new SetCardInfo("Sunbillow Verge", 264, Rarity.RARE, mage.cards.s.SunbillowVerge.class));
+        cards.add(new SetCardInfo("Sundial, Dawn Tyrant", 31, Rarity.UNCOMMON, mage.cards.s.SundialDawnTyrant.class));
         cards.add(new SetCardInfo("Swamp", 274, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 265, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
         cards.add(new SetCardInfo("Syphon Fuel", 108, Rarity.COMMON, mage.cards.s.SyphonFuel.class));
