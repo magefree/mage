@@ -712,7 +712,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodscent", "Sonorous Howlbonder");
 
         attack(1, playerA, "Sonorous Howlbonder");
-        setChoiceAmount(playerA, 1); // assign damage to 1 of 3 blocking memnites
+        setChoiceAmount(playerA, 1, 1, 0); // assign damage to blocking memnites
         checkAttackers("x1 attacker", 1, playerA, "Sonorous Howlbonder");
         checkBlockers("x3 blockers", 1, playerB, "Memnite", "Memnite", "Memnite");
 
@@ -742,7 +742,6 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodscent", "Sonorous Howlbonder");
 
         attack(1, playerA, "Sonorous Howlbonder");
-        setChoiceAmount(playerA, 1); // assign damage to 1 of 3 blocking memnites
         checkAttackers("x1 attacker", 1, playerA, "Sonorous Howlbonder");
         checkBlockers("all blockers", 1, playerB, "Memnite", "Memnite", "Memnite", "Memnite", "Memnite");
 
@@ -776,7 +775,6 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodscent", "Sonorous Howlbonder");
 
         attack(1, playerA, "Sonorous Howlbonder");
-        setChoiceAmount(playerA, 1); // assign damage to 1 of 3 blocking memnites
         checkAttackers("x1 attacker", 1, playerA, "Sonorous Howlbonder");
         checkBlockers("one possible blocker", 1, playerB, "Memnite");
 

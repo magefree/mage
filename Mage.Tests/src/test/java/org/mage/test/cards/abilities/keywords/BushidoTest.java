@@ -58,8 +58,6 @@ public class BushidoTest extends CardTestPlayerBase {
         attack(2, playerB, "Isao, Enlightened Bushi");
         block(2, playerA, "Llanowar Elves", "Isao, Enlightened Bushi");
         block(2, playerA, "Elvish Mystic", "Isao, Enlightened Bushi");
-        setChoice(playerB, "X=1"); // assign damage
-        setChoice(playerB, "X=1"); // assign damage
 
         setStopAt(2, PhaseStep.END_COMBAT);
         execute();

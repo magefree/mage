@@ -43,8 +43,6 @@ public class LifelinkInCombatTest extends CardTestPlayerBase {
         attack(1, playerA, "Brion Stoutarm");
         block(1, playerB, "Boros Recruit", "Brion Stoutarm");
         block(1, playerB, "Suntail Hawk", "Brion Stoutarm");
-        setChoice(playerA, "X=1"); // Damage assignment
-        setChoice(playerA, "X=1"); // Damage assignment
         addTarget(playerA, "Brion Stoutarm");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
 

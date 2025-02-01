@@ -57,7 +57,7 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
 
     private void assertDefaultValuesUnconstrained(String need, int count, int min, int max) {
         List<MultiAmountMessage> constraints = getUnconstrainedConstraints(count);
-        List<Integer> defaultValues = MultiAmountType.prepareDefaltValues(constraints, min, max);
+        List<Integer> defaultValues = MultiAmountType.prepareDefaultValues(constraints, min, max);
         String current = defaultValues
                 .stream()
                 .map(String::valueOf)
@@ -122,7 +122,7 @@ public class TargetMultiAmountTest extends CardTestPlayerBaseWithAIHelps {
                 getUnconstrainedConstraints(4));
 
         // good values are checking in test_DefaultValues, it's an additional
-        List<Integer> list = MultiAmountType.prepareDefaltValues(constraints.get(3), 0, 0);
+        List<Integer> list = MultiAmountType.prepareDefaultValues(constraints.get(3), 0, 0);
 
         // count (0, 0, 0)
         Assert.assertFalse("count", MultiAmountType.isGoodValues(list, constraints.get(0), 0, 0));

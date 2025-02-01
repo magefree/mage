@@ -39,12 +39,6 @@ public class RiteOfPassageTest extends CardTestPlayerBase {
         block(1, playerB, "Memnite", "Watchwolf");
         block(1, playerB, "Agent of Stromgald", "Watchwolf");
 
-        // Assign this much damage to Memnite
-        setChoice(playerA, "X=1");
-
-        // Assign this much damage to Agent of Stromgald
-        setChoice(playerA, "X=1");
-
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);
         execute();

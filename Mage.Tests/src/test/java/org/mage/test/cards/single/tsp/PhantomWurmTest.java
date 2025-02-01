@@ -32,9 +32,6 @@ public class PhantomWurmTest extends CardTestPlayerBase {
         block(1, playerB, "Memnite", wurm);
         block(1, playerB, "Eager Cadet", wurm);
 
-        setChoice(playerA, "X=1"); // damage assignment
-        setChoice(playerA, "X=3"); // damage assignment
-
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -116,9 +113,6 @@ public class PhantomWurmTest extends CardTestPlayerBase {
         block(1, playerB, "Memnite", wurm);
         block(1, playerB, "Goblin Striker", wurm);
 
-        setChoice(playerA, "X=1"); // damage assignment
-        setChoice(playerA, "X=3"); // damage assignment
-
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -139,9 +133,6 @@ public class PhantomWurmTest extends CardTestPlayerBase {
         attack(1, playerA, wurm, playerB);
         block(1, playerB, "Boros Recruit", wurm);
         block(1, playerB, "Goblin Striker", wurm);
-
-        setChoice(playerA, "X=1"); // damage assignment
-        setChoice(playerA, "X=3"); // damage assignment
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

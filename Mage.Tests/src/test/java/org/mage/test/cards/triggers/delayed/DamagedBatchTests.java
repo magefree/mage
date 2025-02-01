@@ -26,9 +26,6 @@ public class DamagedBatchTests extends CardTestCommander4Players {
         block(1, playerB, "Memnite", "Donna Noble");
         block(1, playerB, "Expedition Envoy", "Donna Noble");
 
-        //Assign this much damage to the first blocking creature
-        setChoice(playerA, "X=1");
-
         //Target this player with Donna Noble
         addTarget(playerA, playerB);
 

@@ -33,12 +33,6 @@ public class DonnaNobleTests extends CardTestCommander4Players {
         block(5, playerB, "Memnite", "Impervious Greatwurm");
         block(5, playerB, "Expedition Envoy", "Impervious Greatwurm");
 
-        //Assign this much damage to the first blocking creature
-        setChoice(playerA, "X=1");
-
-        //Assign this much damage to the second blocking creature
-        setChoice(playerA, "X=1");
-
         //Target this player with Donna Noble
         addTarget(playerA, playerB);
 

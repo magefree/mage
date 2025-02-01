@@ -79,7 +79,6 @@ public class BloatflySwarmTest extends CardTestPlayerBase {
         attack(1, playerA, swarm);
         block(1, playerB, "Wind Drake", swarm);
         block(1, playerB, "Giant Spider", swarm);
-        setChoice(playerA, "X=5"); // damage attribution
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
