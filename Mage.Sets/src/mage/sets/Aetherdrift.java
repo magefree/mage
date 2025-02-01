@@ -4,15 +4,11 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class Aetherdrift extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Aether Syphon", "Amonkhet Raceway", "Avishkar Raceway", "Burnout Bashtronaut", "Embalmed Ascendant", "Endrider Catalyzer", "Endrider Spikespitter", "Far Fortune, End Boss", "Gas Guzzler", "Gastal Raider", "Gastal Thrillseeker", "Glitch Ghost Surveyor", "Goblin Surveyor", "Hazoret, Godseeker", "Hour of Victory", "Howlsquad Heavy", "Kickoff Celebrations", "Leonin Surveyor", "Lightwheel Enhancements", "Loxodon Surveyor", "Mendicant Core, Guidelight", "Momentum Breaker", "Muraganda Raceway", "Mutant Surveyor", "Nesting Bot", "Outpace Oblivion", "Perilous Snare", "Point the Way", "Pride of the Road", "Racers' Scoreboard", "Risen Necroregent", "Samut, the Driving Force", "Slick Imitator", "Starting Column", "Streaking Oilgorger", "Swiftwing Assailant", "The Speed Demon", "Vnwxt, Verbose Host", "Walking Sarcophagus", "Zahur, Glory's Past");
     private static final Aetherdrift instance = new Aetherdrift();
 
     public static Aetherdrift getInstance() {
