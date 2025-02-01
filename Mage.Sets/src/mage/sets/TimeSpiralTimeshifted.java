@@ -17,7 +17,7 @@ public final class TimeSpiralTimeshifted extends ExpansionSet {
     }
 
     private TimeSpiralTimeshifted() {
-        super("Time Spiral \"Timeshifted\"", "TSB", ExpansionSet.buildDate(2006, 9, 9), SetType.EXPANSION);
+        super("Time Spiral Timeshifted", "TSB", ExpansionSet.buildDate(2006, 9, 9), SetType.EXPANSION);
         this.blockName = "Time Spiral";
         this.parentSet = TimeSpiral.getInstance();
         this.hasBasicLands = false;

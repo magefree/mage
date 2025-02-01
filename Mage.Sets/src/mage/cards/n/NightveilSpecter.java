@@ -83,7 +83,7 @@ class NightveilSpecterExileEffect extends OneShotEffect {
         if (player != null) {
             Card card = player.getLibrary().getFromTop(game);
             if (card != null) {
-                player.moveCardsToExile(card, source, game, true, CardUtil.getCardExileZoneId(game, source), CardUtil.createObjectRealtedWindowTitle(source, game, null));
+                player.moveCardsToExile(card, source, game, true, CardUtil.getCardExileZoneId(game, source), CardUtil.createObjectRelatedWindowTitle(source, game, null));
                 return true;
             }
         }

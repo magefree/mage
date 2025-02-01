@@ -77,7 +77,7 @@ class FlamesOfRemembranceExileEffect extends OneShotEffect {
         if (controller != null) {
             Cards cards = new CardsImpl(controller.getLibrary().getTopCards(game, amount.calculate(game, source, this)));
             if (!cards.isEmpty()) {
-                controller.moveCardsToExile(cards.getCards(game), source, game, true, source.getSourceId(), CardUtil.createObjectRealtedWindowTitle(source, game, ""));
+                controller.moveCardsToExile(cards.getCards(game), source, game, true, source.getSourceId(), CardUtil.createObjectRelatedWindowTitle(source, game, ""));
                 ContinuousEffect effect = new FlamesOfRemembranceMayPlayExiledEffect();
                 effect.setTargetPointer(new FixedTargets(cards, game));
                 game.addEffect(effect, source);

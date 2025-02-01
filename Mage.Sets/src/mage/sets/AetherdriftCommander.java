@@ -19,7 +19,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         super("Aetherdrift Commander", "DRC", ExpansionSet.buildDate(2025, 1, 21), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
-        cards.add(new SetCardInfo("Academy Ruins", 58, Rarity.COMMON, mage.cards.a.AcademyRuins.class));
+        cards.add(new SetCardInfo("Academy Ruins", 58, Rarity.RARE, mage.cards.a.AcademyRuins.class));
         cards.add(new SetCardInfo("Adarkar Wastes", 144, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Aether Hub", 145, Rarity.UNCOMMON, mage.cards.a.AetherHub.class));
         cards.add(new SetCardInfo("Aethersquall Ancient", 68, Rarity.RARE, mage.cards.a.AethersquallAncient.class));
@@ -45,7 +45,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Chain Reaction", 47, Rarity.RARE, mage.cards.c.ChainReaction.class));
         cards.add(new SetCardInfo("Champion of Wits", 72, Rarity.RARE, mage.cards.c.ChampionOfWits.class));
         cards.add(new SetCardInfo("Chaos Warp", 48, Rarity.RARE, mage.cards.c.ChaosWarp.class));
-        cards.add(new SetCardInfo("Chromatic Lantern", 53, Rarity.COMMON, mage.cards.c.ChromaticLantern.class));
+        cards.add(new SetCardInfo("Chromatic Lantern", 53, Rarity.RARE, mage.cards.c.ChromaticLantern.class));
         cards.add(new SetCardInfo("Combustible Gearhulk", 102, Rarity.MYTHIC, mage.cards.c.CombustibleGearhulk.class));
         cards.add(new SetCardInfo("Command Tower", 59, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Sphere", 125, Rarity.COMMON, mage.cards.c.CommandersSphere.class));
@@ -68,7 +68,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Dread Summons", 90, Rarity.RARE, mage.cards.d.DreadSummons.class));
         cards.add(new SetCardInfo("Dreadhorde Invasion", 91, Rarity.RARE, mage.cards.d.DreadhordeInvasion.class));
         cards.add(new SetCardInfo("Drowned Catacomb", 152, Rarity.RARE, mage.cards.d.DrownedCatacomb.class));
-        cards.add(new SetCardInfo("Druid of Purification", 49, Rarity.COMMON, mage.cards.d.DruidOfPurification.class));
+        cards.add(new SetCardInfo("Druid of Purification", 49, Rarity.RARE, mage.cards.d.DruidOfPurification.class));
         cards.add(new SetCardInfo("Duplicant", 54, Rarity.RARE, mage.cards.d.Duplicant.class));
         cards.add(new SetCardInfo("Dusk // Dawn", 65, Rarity.RARE, mage.cards.d.DuskDawn.class));
         cards.add(new SetCardInfo("Elder Gargaroth", 111, Rarity.MYTHIC, mage.cards.e.ElderGargaroth.class));
@@ -96,7 +96,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Isolated Chapel", 162, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Karplusan Forest", 163, Rarity.RARE, mage.cards.k.KarplusanForest.class));
         cards.add(new SetCardInfo("Lazotep Chancellor", 117, Rarity.UNCOMMON, mage.cards.l.LazotepChancellor.class));
-        cards.add(new SetCardInfo("Lightning Greaves", 55, Rarity.COMMON, mage.cards.l.LightningGreaves.class));
+        cards.add(new SetCardInfo("Lightning Greaves", 55, Rarity.UNCOMMON, mage.cards.l.LightningGreaves.class));
         cards.add(new SetCardInfo("Lightning Runner", 103, Rarity.MYTHIC, mage.cards.l.LightningRunner.class));
         cards.add(new SetCardInfo("Liliana, Death's Majesty", 94, Rarity.MYTHIC, mage.cards.l.LilianaDeathsMajesty.class));
         cards.add(new SetCardInfo("Lord of the Accursed", 95, Rarity.UNCOMMON, mage.cards.l.LordOfTheAccursed.class));
@@ -165,5 +165,6 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Whirler Virtuoso", 122, Rarity.UNCOMMON, mage.cards.w.WhirlerVirtuoso.class));
         cards.add(new SetCardInfo("Wizened Mentor", 8, Rarity.RARE, mage.cards.w.WizenedMentor.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 184, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
+        cards.add(new SetCardInfo("Zombie Master", 46, Rarity.RARE, mage.cards.z.ZombieMaster.class));
     }
 }

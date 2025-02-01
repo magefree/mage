@@ -145,7 +145,7 @@ public class ScryfallImageSupportCards {
             add("PAL06"); // Arena League 2006
             //add("PMPS06"); // Magic Premiere Shop 2006
             add("PHUK"); // Hachette UK
-            add("PDCI"); // DCI Promos
+            add("DCI"); // DCI Promos
             add("P06"); // Magic Player Rewards 2006
             add("G06"); // Judge Gift Cards 2006
             add("F06"); // Friday Night Magic 2006
@@ -190,7 +190,6 @@ public class ScryfallImageSupportCards {
             add("P09"); // Magic Player Rewards 2009
             add("G09"); // Judge Gift Cards 2009
             add("F09"); // Friday Night Magic 2009
-            add("PBOOK"); // Miscellaneous Book Promos
             add("CON"); // Conflux
             add("DDC"); // Duel Decks: Divine vs. Demonic
             add("ARB"); // Alara Reborn
@@ -405,7 +404,7 @@ public class ScryfallImageSupportCards {
             add("XANA"); // Arena New Player Experience Extras
             add("OANA"); // Arena New Player Experience Cards
             add("PS18"); // San Diego Comic-Con 2018
-            add("PH17"); // Heroes of the Realm 2017
+            add("PH17"); // 2017 Heroes of the Realm
             add("C18"); // Commander 2018
             add("PGRN"); // Guilds of Ravnica Promos
             add("PRWK"); // GRN Ravnica Weekend
@@ -457,7 +456,7 @@ public class ScryfallImageSupportCards {
             //add("FMB1"); // Mystery Booster Retail Edition Foils
             add("HA2"); // Historic Anthology 2
             add("SLD"); // Secret Lair Drop
-            add("PMEI"); // Magazine Inserts
+            add("PMEI"); // Media and Collaboration Promos
             add("SLU"); // Secret Lair: Ultimate Edition
             add("SS3"); // Signature Spellbook: Chandra
             add("HA3"); // Historic Anthology 3
@@ -529,6 +528,8 @@ public class ScryfallImageSupportCards {
             add("ONC"); // Phyrexia: All Will Be One Commander
             add("PL23"); // Year of the Rabbit 2023
             add("DA1"); // Unknown Event
+            add("SIS"); // Shadows of the Past
+            add("SIR"); // Shadows over Innistrad Remastered
             add("SLP"); // Secret Lair Showdown
             add("MOM"); // March of the Machine
             add("MOC"); // March of the Machine Commander
@@ -543,7 +544,7 @@ public class ScryfallImageSupportCards {
             add("WOT"); // Wilds of Eldraine: Enchanting Tales
             add("WOC"); // Wilds of Eldraine Commander
             add("LCI"); // The Lost Caverns of Ixalan
-            add("LCC"); // The Lost Caverns of Ixalan Commander
+            add("LCC"); // The The Lost Caverns of Ixalan Commander
             add("REX"); // Jurassic World Collection
             add("SPG"); // Special Guests
             add("RVR"); // Ravnica Remastered
@@ -565,6 +566,7 @@ public class ScryfallImageSupportCards {
             add("DSC"); // Duskmourn: House of Horror Commander
             add("FDN"); // Foundations
             add("J25"); // Foundations Jumpstart
+            add("PIO"); // Pioneer Masters
             add("INR"); // Innistrad Remastered
             add("DFT"); // Aetherdrift
             add("DRC"); // Aetherdrift Commander

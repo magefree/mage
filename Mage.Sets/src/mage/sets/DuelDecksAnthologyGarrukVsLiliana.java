@@ -17,7 +17,7 @@ public final class DuelDecksAnthologyGarrukVsLiliana extends ExpansionSet {
     }
 
     private DuelDecksAnthologyGarrukVsLiliana() {
-        super("Duel Decks: Anthology, Garruk vs. Liliana", "GVL", ExpansionSet.buildDate(2014, 12, 5),
+        super("Duel Decks Anthology: Garruk vs. Liliana", "GVL", ExpansionSet.buildDate(2014, 12, 5),
                 SetType.SUPPLEMENTAL);
         this.blockName = "Duel Decks: Anthology";
         this.hasBasicLands = true;

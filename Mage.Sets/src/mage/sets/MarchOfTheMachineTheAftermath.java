@@ -19,7 +19,7 @@ public final class MarchOfTheMachineTheAftermath extends ExpansionSet {
         super("March of the Machine: The Aftermath", "MAT", ExpansionSet.buildDate(2023, 5, 12), SetType.SUPPLEMENTAL_STANDARD_LEGAL);
         this.blockName = "March of the Machine";
         this.hasBasicLands = false;
-        this.hasBoosters = false;
+        this.hasBoosters = false; // epilogue boosters aren't for draft
 
         cards.add(new SetCardInfo("Animist's Might", 120, Rarity.UNCOMMON, mage.cards.a.AnimistsMight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Animist's Might", 20, Rarity.UNCOMMON, mage.cards.a.AnimistsMight.class, NON_FULL_USE_VARIOUS));

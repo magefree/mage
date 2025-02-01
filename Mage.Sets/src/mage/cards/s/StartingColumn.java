@@ -1,12 +1,11 @@
 package mage.cards.s;
 
 import mage.abilities.Ability;
+import mage.abilities.common.MaxSpeedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.abilities.effects.common.continuous.MaxSpeedGainAbilityEffect;
 import mage.abilities.keyword.StartYourEnginesAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
@@ -34,7 +33,7 @@ public final class StartingColumn extends CardImpl {
                 new DrawDiscardControllerEffect(2, 1), new TapSourceCost()
         );
         ability.addCost(new SacrificeSourceCost());
-        this.addAbility(new SimpleStaticAbility(new MaxSpeedGainAbilityEffect(ability)));
+        this.addAbility(new MaxSpeedAbility(ability));
     }
 
     private StartingColumn(final StartingColumn card) {

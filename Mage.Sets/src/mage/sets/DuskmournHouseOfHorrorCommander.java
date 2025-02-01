@@ -91,6 +91,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Diabolic Vision", 87, Rarity.UNCOMMON, mage.cards.d.DiabolicVision.class));
         cards.add(new SetCardInfo("Dig Through Time", 115, Rarity.RARE, mage.cards.d.DigThroughTime.class));
         cards.add(new SetCardInfo("Dimir Aqueduct", 270, Rarity.UNCOMMON, mage.cards.d.DimirAqueduct.class));
+        cards.add(new SetCardInfo("Disorienting Choice", 32, Rarity.RARE, mage.cards.d.DisorientingChoice.class));
         cards.add(new SetCardInfo("Doomwake Giant", 138, Rarity.RARE, mage.cards.d.DoomwakeGiant.class));
         cards.add(new SetCardInfo("Dragonskull Summit", 271, Rarity.RARE, mage.cards.d.DragonskullSummit.class));
         cards.add(new SetCardInfo("Dream Eater", 116, Rarity.MYTHIC, mage.cards.d.DreamEater.class));
@@ -151,6 +152,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Kederekt Parasite", 144, Rarity.RARE, mage.cards.k.KederektParasite.class));
         cards.add(new SetCardInfo("Kefnet the Mindful", 118, Rarity.MYTHIC, mage.cards.k.KefnetTheMindful.class));
         cards.add(new SetCardInfo("Kheru Spellsnatcher", 119, Rarity.RARE, mage.cards.k.KheruSpellsnatcher.class));
+        cards.add(new SetCardInfo("Kianne, Corrupted Memory", 2, Rarity.MYTHIC, mage.cards.k.KianneCorruptedMemory.class));
         cards.add(new SetCardInfo("Leechridden Swamp", 286, Rarity.UNCOMMON, mage.cards.l.LeechriddenSwamp.class));
         cards.add(new SetCardInfo("Life Insurance", 224, Rarity.RARE, mage.cards.l.LifeInsurance.class));
         cards.add(new SetCardInfo("Light Up the Stage", 166, Rarity.UNCOMMON, mage.cards.l.LightUpTheStage.class));

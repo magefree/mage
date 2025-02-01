@@ -86,11 +86,12 @@ class DecoyGambitEffect extends OneShotEffect {
                 continue;
             }
             if (player.chooseUse(outcome, "Have " + controller.getName() + " draw a card? If you don't, "
-                    + permanent.getName() + " will be returned to its owner's hand.", source, game)) {
+                    + permanent.getLogName() + " will be returned to its owner's hand.", source, game)) {
                 game.informPlayers(player.getLogName() + " chose to have " + controller.getName() + " draw a card.");
                 numberOfCardsToDraw += 1;
             } else {
-                game.informPlayers(player.getLogName() + " chose to have their creature returned to their hand.");
+                game.informPlayers(player.getLogName() + " chose to have their creature " + permanent.getLogName()
+                        + " returned to their hand.");
                 permanentToHand.add(permanent);
             }
         }

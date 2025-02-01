@@ -16,10 +16,10 @@ public final class FoundationsJumpstart extends ExpansionSet {
     }
 
     private FoundationsJumpstart() {
-        super("Foundations Jumpstart", "J25", ExpansionSet.buildDate(2024, 11, 15), SetType.EXPANSION);
-        this.blockName = "Foundations"; // for sorting in GUI
+        super("Foundations Jumpstart", "J25", ExpansionSet.buildDate(2024, 11, 15), SetType.SUPPLEMENTAL);
+        this.blockName = "Jumpstart";
+        this.hasBoosters = false; // TODO: share code with JumpstartPoolGenerator and add single booster, see #13264
         this.hasBasicLands = true;
-        this.hasBoosters = false;
 
         cards.add(new SetCardInfo("Abandon Reason", 513, Rarity.UNCOMMON, mage.cards.a.AbandonReason.class));
         cards.add(new SetCardInfo("Academy Journeymage", 281, Rarity.COMMON, mage.cards.a.AcademyJourneymage.class));
@@ -51,6 +51,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Angelic Edict", 164, Rarity.COMMON, mage.cards.a.AngelicEdict.class));
         cards.add(new SetCardInfo("Angelic Gift", 165, Rarity.COMMON, mage.cards.a.AngelicGift.class));
         cards.add(new SetCardInfo("Anje's Ravager", 517, Rarity.RARE, mage.cards.a.AnjesRavager.class));
+        //cards.add(new SetCardInfo("Aphelia, Viper Whisperer", 40, Rarity.MYTHIC, mage.cards.a.ApheliaViperWhisperer.class));
         cards.add(new SetCardInfo("Arbor Armament", 628, Rarity.COMMON, mage.cards.a.ArborArmament.class));
         cards.add(new SetCardInfo("Archaeomancer", 285, Rarity.COMMON, mage.cards.a.Archaeomancer.class));
         cards.add(new SetCardInfo("Archfiend's Vessel", 398, Rarity.UNCOMMON, mage.cards.a.ArchfiendsVessel.class));
@@ -118,7 +119,8 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Brigone, Soldier of Meletis", 30, Rarity.RARE, mage.cards.b.BrigoneSoldierOfMeletis.class));
         cards.add(new SetCardInfo("Brimaz, King of Oreskos", 58, Rarity.MYTHIC, mage.cards.b.BrimazKingOfOreskos.class));
         cards.add(new SetCardInfo("Brineborn Cutthroat", 291, Rarity.UNCOMMON, mage.cards.b.BrinebornCutthroat.class));
-        cards.add(new SetCardInfo("Brothers Yamazaki", 72, Rarity.UNCOMMON, mage.cards.b.BrothersYamazaki.class));
+        cards.add(new SetCardInfo("Brothers Yamazaki", 72, Rarity.UNCOMMON, mage.cards.b.BrothersYamazaki.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brothers Yamazaki", 73, Rarity.UNCOMMON, mage.cards.b.BrothersYamazaki.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brushstrider", 640, Rarity.UNCOMMON, mage.cards.b.Brushstrider.class));
         cards.add(new SetCardInfo("Brute Strength", 528, Rarity.COMMON, mage.cards.b.BruteStrength.class));
         cards.add(new SetCardInfo("Bury in Books", 292, Rarity.COMMON, mage.cards.b.BuryInBooks.class));
@@ -232,6 +234,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Entomber Exarch", 434, Rarity.UNCOMMON, mage.cards.e.EntomberExarch.class));
         cards.add(new SetCardInfo("Epicure of Blood", 435, Rarity.COMMON, mage.cards.e.EpicureOfBlood.class));
         cards.add(new SetCardInfo("Eternal Taskmaster", 117, Rarity.UNCOMMON, mage.cards.e.EternalTaskmaster.class));
+        cards.add(new SetCardInfo("Evereth, Viceroy of Plunder", 41, Rarity.RARE, mage.cards.e.EverethViceroyOfPlunder.class));
         cards.add(new SetCardInfo("Evolving Wilds", 765, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exclusion Mage", 306, Rarity.UNCOMMON, mage.cards.e.ExclusionMage.class));
         cards.add(new SetCardInfo("Expedition Champion", 541, Rarity.COMMON, mage.cards.e.ExpeditionChampion.class));
@@ -275,6 +278,8 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Flutterfox", 200, Rarity.COMMON, mage.cards.f.Flutterfox.class));
         cards.add(new SetCardInfo("For the Family", 657, Rarity.COMMON, mage.cards.f.ForTheFamily.class));
         cards.add(new SetCardInfo("Forest", 93, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 94, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Forest", 95, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Forgotten Ancient", 147, Rarity.RARE, mage.cards.f.ForgottenAncient.class));
         cards.add(new SetCardInfo("Forgotten Cave", 766, Rarity.UNCOMMON, mage.cards.f.ForgottenCave.class));
         cards.add(new SetCardInfo("Foul Play", 442, Rarity.UNCOMMON, mage.cards.f.FoulPlay.class));
@@ -307,8 +312,8 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Gluttonous Guest", 445, Rarity.COMMON, mage.cards.g.GluttonousGuest.class));
         cards.add(new SetCardInfo("Gnarlid Colony", 664, Rarity.COMMON, mage.cards.g.GnarlidColony.class));
         cards.add(new SetCardInfo("Gnawing Zombie", 446, Rarity.COMMON, mage.cards.g.GnawingZombie.class));
-        cards.add(new SetCardInfo("Go Forth", 20, Rarity.COMMON, mage.cards.g.GoForth.class));
         cards.add(new SetCardInfo("Go for the Throat", 447, Rarity.UNCOMMON, mage.cards.g.GoForTheThroat.class));
+        cards.add(new SetCardInfo("Go Forth", 20, Rarity.COMMON, mage.cards.g.GoForth.class));
         cards.add(new SetCardInfo("Goblin Arsonist", 555, Rarity.COMMON, mage.cards.g.GoblinArsonist.class));
         cards.add(new SetCardInfo("Goblin Dark-Dwellers", 556, Rarity.RARE, mage.cards.g.GoblinDarkDwellers.class));
         cards.add(new SetCardInfo("Goblin Fireslinger", 136, Rarity.COMMON, mage.cards.g.GoblinFireslinger.class));
@@ -343,8 +348,8 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Heartstabber Mosquito", 454, Rarity.COMMON, mage.cards.h.HeartstabberMosquito.class));
         cards.add(new SetCardInfo("Heir of the Ancient Fang", 669, Rarity.COMMON, mage.cards.h.HeirOfTheAncientFang.class));
         cards.add(new SetCardInfo("Hellkite Whelp", 562, Rarity.UNCOMMON, mage.cards.h.HellkiteWhelp.class));
-        cards.add(new SetCardInfo("Herald of War", 207, Rarity.RARE, mage.cards.h.HeraldOfWar.class));
         cards.add(new SetCardInfo("Herald of the Sun", 206, Rarity.UNCOMMON, mage.cards.h.HeraldOfTheSun.class));
+        cards.add(new SetCardInfo("Herald of War", 207, Rarity.RARE, mage.cards.h.HeraldOfWar.class));
         cards.add(new SetCardInfo("Hero of the Games", 563, Rarity.COMMON, mage.cards.h.HeroOfTheGames.class));
         cards.add(new SetCardInfo("Hexgold Hoverwings", 208, Rarity.UNCOMMON, mage.cards.h.HexgoldHoverwings.class));
         cards.add(new SetCardInfo("High-Rise Sawjack", 670, Rarity.COMMON, mage.cards.h.HighRiseSawjack.class));
@@ -368,6 +373,8 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Ipnu Rivulet", 767, Rarity.UNCOMMON, mage.cards.i.IpnuRivulet.class));
         cards.add(new SetCardInfo("Isareth the Awakener", 68, Rarity.RARE, mage.cards.i.IsarethTheAwakener.class));
         cards.add(new SetCardInfo("Island", 84, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 85, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Island", 86, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ivora, Insatiable Heir", 50, Rarity.UNCOMMON, mage.cards.i.IvoraInsatiableHeir.class));
         cards.add(new SetCardInfo("Ivy Lane Denizen", 674, Rarity.COMMON, mage.cards.i.IvyLaneDenizen.class));
         cards.add(new SetCardInfo("Ixalli's Diviner", 675, Rarity.COMMON, mage.cards.i.IxallisDiviner.class));
@@ -397,9 +404,9 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Lat-Nam Adept", 320, Rarity.COMMON, mage.cards.l.LatNamAdept.class));
         cards.add(new SetCardInfo("Lathliss, Dragon Queen", 74, Rarity.RARE, mage.cards.l.LathlissDragonQueen.class));
         cards.add(new SetCardInfo("Leaf-Crowned Visionary", 683, Rarity.RARE, mage.cards.l.LeafCrownedVisionary.class));
+        cards.add(new SetCardInfo("Leonin of the Lost Pride", 215, Rarity.COMMON, mage.cards.l.LeoninOfTheLostPride.class));
         cards.add(new SetCardInfo("Leonin Scimitar", 152, Rarity.COMMON, mage.cards.l.LeoninScimitar.class));
         cards.add(new SetCardInfo("Leonin Vanguard", 216, Rarity.UNCOMMON, mage.cards.l.LeoninVanguard.class));
-        cards.add(new SetCardInfo("Leonin of the Lost Pride", 215, Rarity.COMMON, mage.cards.l.LeoninOfTheLostPride.class));
         cards.add(new SetCardInfo("Light of Hope", 217, Rarity.COMMON, mage.cards.l.LightOfHope.class));
         cards.add(new SetCardInfo("Light of the Legion", 218, Rarity.RARE, mage.cards.l.LightOfTheLegion.class));
         cards.add(new SetCardInfo("Light the Way", 219, Rarity.COMMON, mage.cards.l.LightTheWay.class));
@@ -453,6 +460,8 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Morkrut Behemoth", 465, Rarity.COMMON, mage.cards.m.MorkrutBehemoth.class));
         cards.add(new SetCardInfo("Morkrut Necropod", 466, Rarity.UNCOMMON, mage.cards.m.MorkrutNecropod.class));
         cards.add(new SetCardInfo("Mountain", 90, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 91, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mountain", 92, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mowu, Loyal Companion", 79, Rarity.UNCOMMON, mage.cards.m.MowuLoyalCompanion.class));
         cards.add(new SetCardInfo("Mu Yanling, Sky Dancer", 329, Rarity.MYTHIC, mage.cards.m.MuYanlingSkyDancer.class));
         cards.add(new SetCardInfo("Murasa Ranger", 691, Rarity.UNCOMMON, mage.cards.m.MurasaRanger.class));
@@ -515,6 +524,8 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Pitiless Plunderer", 476, Rarity.UNCOMMON, mage.cards.p.PitilessPlunderer.class));
         cards.add(new SetCardInfo("Plagon, Lord of the Beach", 37, Rarity.RARE, mage.cards.p.PlagonLordOfTheBeach.class));
         cards.add(new SetCardInfo("Plains", 81, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 82, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Plains", 83, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plate Armor", 100, Rarity.UNCOMMON, mage.cards.p.PlateArmor.class));
         cards.add(new SetCardInfo("Play with Fire", 586, Rarity.UNCOMMON, mage.cards.p.PlayWithFire.class));
         cards.add(new SetCardInfo("Pol Jamaar, Illusionist", 38, Rarity.MYTHIC, mage.cards.p.PolJamaarIllusionist.class));
@@ -527,6 +538,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Primeval Herald", 702, Rarity.UNCOMMON, mage.cards.p.PrimevalHerald.class));
         cards.add(new SetCardInfo("Prophetic Prism", 758, Rarity.COMMON, mage.cards.p.PropheticPrism.class));
         cards.add(new SetCardInfo("Prosperous Thief", 346, Rarity.UNCOMMON, mage.cards.p.ProsperousThief.class));
+        //cards.add(new SetCardInfo("Psemilla, Meletian Poet", 31, Rarity.UNCOMMON, mage.cards.p.PsemillaMeletianPoet.class));
         cards.add(new SetCardInfo("Purple-Crystal Crab", 347, Rarity.COMMON, mage.cards.p.PurpleCrystalCrab.class));
         cards.add(new SetCardInfo("Pyrophobia", 587, Rarity.COMMON, mage.cards.p.Pyrophobia.class));
         cards.add(new SetCardInfo("Qala, Ajani's Pridemate", 32, Rarity.UNCOMMON, mage.cards.q.QalaAjanisPridemate.class));
@@ -553,6 +565,7 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Resistance Reunited", 243, Rarity.UNCOMMON, mage.cards.r.ResistanceReunited.class));
         cards.add(new SetCardInfo("Resistance Skywarden", 591, Rarity.UNCOMMON, mage.cards.r.ResistanceSkywarden.class));
         cards.add(new SetCardInfo("Retreat to Kazandu", 707, Rarity.UNCOMMON, mage.cards.r.RetreatToKazandu.class));
+        cards.add(new SetCardInfo("Rev, Tithe Extractor", 45, Rarity.RARE, mage.cards.r.RevTitheExtractor.class));
         cards.add(new SetCardInfo("Revitalize", 244, Rarity.COMMON, mage.cards.r.Revitalize.class));
         cards.add(new SetCardInfo("Revoke Demise", 10, Rarity.COMMON, mage.cards.r.RevokeDemise.class));
         cards.add(new SetCardInfo("Rhox Faithmender", 245, Rarity.RARE, mage.cards.r.RhoxFaithmender.class));
@@ -645,8 +658,8 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Steadfast Unicorn", 103, Rarity.COMMON, mage.cards.s.SteadfastUnicorn.class));
         cards.add(new SetCardInfo("Stinging Lionfish", 367, Rarity.UNCOMMON, mage.cards.s.StingingLionfish.class));
         cards.add(new SetCardInfo("Stitched Drake", 368, Rarity.COMMON, mage.cards.s.StitchedDrake.class));
-        cards.add(new SetCardInfo("Stolen Vitality", 602, Rarity.COMMON, mage.cards.s.StolenVitality.class));
         cards.add(new SetCardInfo("Stolen by the Fae", 369, Rarity.RARE, mage.cards.s.StolenByTheFae.class));
+        cards.add(new SetCardInfo("Stolen Vitality", 602, Rarity.COMMON, mage.cards.s.StolenVitality.class));
         cards.add(new SetCardInfo("Stone Haven Outfitter", 263, Rarity.RARE, mage.cards.s.StoneHavenOutfitter.class));
         cards.add(new SetCardInfo("Stony Strength", 720, Rarity.COMMON, mage.cards.s.StonyStrength.class));
         cards.add(new SetCardInfo("Stronghold Confessor", 490, Rarity.COMMON, mage.cards.s.StrongholdConfessor.class));
@@ -660,6 +673,8 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Supreme Will", 370, Rarity.UNCOMMON, mage.cards.s.SupremeWill.class));
         cards.add(new SetCardInfo("Sutina, Speaker of the Tajuru", 56, Rarity.UNCOMMON, mage.cards.s.SutinaSpeakerOfTheTajuru.class));
         cards.add(new SetCardInfo("Swamp", 87, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 88, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Swamp", 89, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swarm of Bloodflies", 492, Rarity.UNCOMMON, mage.cards.s.SwarmOfBloodflies.class));
         cards.add(new SetCardInfo("Swift Response", 269, Rarity.COMMON, mage.cards.s.SwiftResponse.class));
         cards.add(new SetCardInfo("Syr Elenora, the Discerning", 64, Rarity.UNCOMMON, mage.cards.s.SyrElenoraTheDiscerning.class));
@@ -732,8 +747,8 @@ public final class FoundationsJumpstart extends ExpansionSet {
         cards.add(new SetCardInfo("Valkyrie's Sword", 276, Rarity.UNCOMMON, mage.cards.v.ValkyriesSword.class));
         cards.add(new SetCardInfo("Valorous Stance", 277, Rarity.UNCOMMON, mage.cards.v.ValorousStance.class));
         cards.add(new SetCardInfo("Vampire Nighthawk", 503, Rarity.UNCOMMON, mage.cards.v.VampireNighthawk.class));
-        cards.add(new SetCardInfo("Vampire Scrivener", 505, Rarity.UNCOMMON, mage.cards.v.VampireScrivener.class));
         cards.add(new SetCardInfo("Vampire of the Dire Moon", 504, Rarity.UNCOMMON, mage.cards.v.VampireOfTheDireMoon.class));
+        cards.add(new SetCardInfo("Vampire Scrivener", 505, Rarity.UNCOMMON, mage.cards.v.VampireScrivener.class));
         cards.add(new SetCardInfo("Vampiric Fury", 610, Rarity.COMMON, mage.cards.v.VampiricFury.class));
         cards.add(new SetCardInfo("Vault of Whispers", 780, Rarity.COMMON, mage.cards.v.VaultOfWhispers.class));
         cards.add(new SetCardInfo("Venerated Loxodon", 278, Rarity.RARE, mage.cards.v.VeneratedLoxodon.class));

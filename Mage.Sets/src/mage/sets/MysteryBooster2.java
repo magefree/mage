@@ -17,8 +17,9 @@ public class MysteryBooster2 extends ExpansionSet {
 
     private MysteryBooster2() {
         super("Mystery Booster 2", "MB2", ExpansionSet.buildDate(2024, 8, 2), SetType.REMIX);
-        this.hasBoosters = false; // booster generation needs to be implemented
-        this.hasBasicLands = true;
+
+        // https://mtg.fandom.com/wiki/Mystery_Booster_2
+        this.enablePlayBooster(Integer.MAX_VALUE);
 
         cards.add(new SetCardInfo("Abrupt Decay", 78, Rarity.RARE, mage.cards.a.AbruptDecay.class));
         cards.add(new SetCardInfo("Aether Vial", 216, Rarity.UNCOMMON, mage.cards.a.AetherVial.class));
@@ -218,12 +219,12 @@ public class MysteryBooster2 extends ExpansionSet {
         cards.add(new SetCardInfo("Simian Spirit Guide", 61, Rarity.COMMON, mage.cards.s.SimianSpiritGuide.class));
         cards.add(new SetCardInfo("Skyclave Apparition", 18, Rarity.RARE, mage.cards.s.SkyclaveApparition.class));
         cards.add(new SetCardInfo("Smokestack", 232, Rarity.RARE, mage.cards.s.Smokestack.class));
-        cards.add(new SetCardInfo("Snow-Covered Forest", 120, Rarity.LAND, mage.cards.s.SnowCoveredForest.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Island", 117, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Mountain", 119, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Plains", 116, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Swamp", 118, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Snow-Covered Wastes", 121, Rarity.UNCOMMON, mage.cards.s.SnowCoveredWastes.class, FULL_ART_BFZ_VARIOUS));
+        cards.add(new SetCardInfo("Snow-Covered Forest", 120, Rarity.LAND, mage.cards.s.SnowCoveredForest.class));
+        cards.add(new SetCardInfo("Snow-Covered Island", 117, Rarity.LAND, mage.cards.s.SnowCoveredIsland.class));
+        cards.add(new SetCardInfo("Snow-Covered Mountain", 119, Rarity.LAND, mage.cards.s.SnowCoveredMountain.class));
+        cards.add(new SetCardInfo("Snow-Covered Plains", 116, Rarity.LAND, mage.cards.s.SnowCoveredPlains.class));
+        cards.add(new SetCardInfo("Snow-Covered Swamp", 118, Rarity.LAND, mage.cards.s.SnowCoveredSwamp.class));
+        cards.add(new SetCardInfo("Snow-Covered Wastes", 121, Rarity.UNCOMMON, mage.cards.s.SnowCoveredWastes.class));
         cards.add(new SetCardInfo("Snuff Out", 187, Rarity.COMMON, mage.cards.s.SnuffOut.class));
         cards.add(new SetCardInfo("Sol Ring", 233, Rarity.UNCOMMON, mage.cards.s.SolRing.class));
         cards.add(new SetCardInfo("Soul of Theros", 19, Rarity.MYTHIC, mage.cards.s.SoulOfTheros.class));
