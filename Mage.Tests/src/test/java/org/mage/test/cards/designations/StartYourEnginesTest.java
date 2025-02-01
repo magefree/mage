@@ -25,6 +25,7 @@ public class StartYourEnginesTest extends CardTestPlayerBase {
         execute();
 
         assertSpeed(playerA, 0);
+        assertSpeed(playerB, 0);
     }
 
     @Test
@@ -39,6 +40,7 @@ public class StartYourEnginesTest extends CardTestPlayerBase {
         execute();
 
         assertSpeed(playerA, 1);
+        assertSpeed(playerB, 0);
         assertPowerToughness(playerA, sarcophagus, 2, 1);
     }
 
@@ -59,6 +61,7 @@ public class StartYourEnginesTest extends CardTestPlayerBase {
         execute();
 
         assertSpeed(playerA, 2);
+        assertSpeed(playerB, 0);
         assertPowerToughness(playerA, sarcophagus, 2, 1);
     }
 
@@ -77,6 +80,7 @@ public class StartYourEnginesTest extends CardTestPlayerBase {
         execute();
 
         assertSpeed(playerA, 1);
+        assertSpeed(playerB, 0);
         assertPowerToughness(playerA, sarcophagus, 2, 1);
     }
 
@@ -97,6 +101,7 @@ public class StartYourEnginesTest extends CardTestPlayerBase {
         execute();
 
         assertSpeed(playerA, 3);
+        assertSpeed(playerB, 0);
         assertPowerToughness(playerA, sarcophagus, 2, 1);
     }
 
@@ -119,6 +124,7 @@ public class StartYourEnginesTest extends CardTestPlayerBase {
         execute();
 
         assertSpeed(playerA, 4);
+        assertSpeed(playerB, 0);
         assertPowerToughness(playerA, sarcophagus, 2 + 1, 1 + 2);
     }
 
@@ -142,6 +148,7 @@ public class StartYourEnginesTest extends CardTestPlayerBase {
         execute();
 
         assertSpeed(playerA, 4);
+        assertSpeed(playerB, 0);
         assertGraveyardCount(playerA, surveyor, 0);
         assertExileCount(playerA, surveyor, 1);
     }
