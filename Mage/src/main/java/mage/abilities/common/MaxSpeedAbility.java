@@ -41,6 +41,7 @@ class MaxSpeedAbilityEffect extends ContinuousEffectImpl {
     MaxSpeedAbilityEffect(Ability ability) {
         super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
+        this.ability.setRuleVisible(false);
     }
 
     private MaxSpeedAbilityEffect(final MaxSpeedAbilityEffect effect) {
