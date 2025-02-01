@@ -136,6 +136,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Night Market", 258, Rarity.COMMON, mage.cards.n.NightMarket.class));
         cards.add(new SetCardInfo("Nimble Thopterist", 53, Rarity.COMMON, mage.cards.n.NimbleThopterist.class));
         cards.add(new SetCardInfo("Outpace Oblivion", 139, Rarity.UNCOMMON, mage.cards.o.OutpaceOblivion.class));
+        cards.add(new SetCardInfo("Oviya, Automech Artisan", 173, Rarity.RARE, mage.cards.o.OviyaAutomechArtisan.class));
         cards.add(new SetCardInfo("Pacesetter Paragon", 140, Rarity.UNCOMMON, mage.cards.p.PacesetterParagon.class));
         cards.add(new SetCardInfo("Pedal to the Metal", 141, Rarity.COMMON, mage.cards.p.PedalToTheMetal.class));
         cards.add(new SetCardInfo("Plains", 272, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
