@@ -152,4 +152,26 @@ public class StartYourEnginesTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, surveyor, 0);
         assertExileCount(playerA, surveyor, 1);
     }
+
+    private static final String mindControl = "Mind Control";
+
+    @Test
+    public void testSpeedChangeControl() {
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
+        addCard(Zone.HAND, playerA, sarcophagus);
+        addCard(Zone.HAND, playerB, mindControl);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sarcophagus);
+
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, mindControl, sarcophagus);
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertSpeed(playerA, 1);
+        assertSpeed(playerB, 1);
+        assertPowerToughness(playerB, sarcophagus, 2, 1);
+    }
 }
