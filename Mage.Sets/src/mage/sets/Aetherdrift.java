@@ -164,6 +164,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Skybox Ferry", 243, Rarity.COMMON, mage.cards.s.SkyboxFerry.class));
         cards.add(new SetCardInfo("Skycrash", 146, Rarity.UNCOMMON, mage.cards.s.Skycrash.class));
         cards.add(new SetCardInfo("Skystreak Engineer", 61, Rarity.COMMON, mage.cards.s.SkystreakEngineer.class));
+        cards.add(new SetCardInfo("Spectral Interference", 63, Rarity.COMMON, mage.cards.s.SpectralInterference.class));
         cards.add(new SetCardInfo("Spell Pierce", 64, Rarity.UNCOMMON, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Spin Out", 106, Rarity.COMMON, mage.cards.s.SpinOut.class));
         cards.add(new SetCardInfo("Spotcycle Scouter", 30, Rarity.COMMON, mage.cards.s.SpotcycleScouter.class));
