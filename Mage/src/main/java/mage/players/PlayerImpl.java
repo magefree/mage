@@ -27,6 +27,7 @@ import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
+import mage.designations.Speed;
 import mage.filter.FilterCard;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
@@ -153,6 +154,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean canPlotFromTopOfLibrary = false;
     protected boolean drawsFromBottom = false;
     protected boolean drawsOnOpponentsTurn = false;
+    protected int speed = 0;
 
     protected FilterPermanent sacrificeCostFilter;
     protected List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
@@ -252,6 +254,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary;
         this.drawsFromBottom = player.drawsFromBottom;
         this.drawsOnOpponentsTurn = player.drawsOnOpponentsTurn;
+        this.speed = player.speed;
 
         this.attachments.addAll(player.attachments);
 
@@ -367,6 +370,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.drawsFromBottom = player.isDrawsFromBottom();
         this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
         this.alternativeSourceCosts = CardUtil.deepCopyObject(((PlayerImpl) player).alternativeSourceCosts);
+        this.speed = player.getSpeed();
 
         this.topCardRevealed = player.isTopCardRevealed();
 
@@ -480,6 +484,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canPlotFromTopOfLibrary = false;
         this.drawsFromBottom = false;
         this.drawsOnOpponentsTurn = false;
+        this.speed = 0;
 
         this.sacrificeCostFilter = null;
         this.alternativeSourceCosts.clear();
@@ -4672,6 +4677,29 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean isDrawsOnOpponentsTurn() {
         return drawsOnOpponentsTurn;
+    }
+
+    @Override
+    public int getSpeed() {
+        return speed;
+    }
+
+    @Override
+    public void initSpeed(Game game) {
+        if (speed > 0) {
+            return;
+        }
+        speed = 1;
+        game.getState().addDesignation(new Speed(), game, getId());
+        game.informPlayers(this.getLogName() + "'s speed is now 1.");
+    }
+
+    @Override
+    public void increaseSpeed(Game game) {
+        if (speed < 4) {
+            speed++;
+            game.informPlayers(this.getLogName() + "'s speed has increased to " + speed);
+        }
     }
 
     @Override

@@ -2862,6 +2862,11 @@ public abstract class GameImpl implements Game {
                     }
                 }
             }
+            if (perm.getAbilities(this).containsClass(StartYourEnginesAbility.class)) {
+                Optional.ofNullable(perm.getControllerId())
+                        .map(this::getPlayer)
+                        .ifPresent(player -> player.initSpeed(this));
+            }
         }
         //201300713 - 704.5k
         // If a player controls two or more legendary permanents with the same name, that player

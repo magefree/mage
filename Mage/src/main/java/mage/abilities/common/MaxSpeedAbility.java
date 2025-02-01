@@ -38,9 +38,21 @@ class MaxSpeedAbilityEffect extends ContinuousEffectImpl {
 
     private final Ability ability;
 
+    private static Duration getDuration(Ability ability) {
+        switch (ability.getZone()) {
+            case BATTLEFIELD:
+                return Duration.WhileOnBattlefield;
+            case GRAVEYARD:
+                return Duration.WhileInGraveyard;
+            default:
+                return Duration.Custom;
+        }
+    }
+
     MaxSpeedAbilityEffect(Ability ability) {
-        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        super(getDuration(ability), Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
+        this.ability.setRuleVisible(false);
     }
 
     private MaxSpeedAbilityEffect(final MaxSpeedAbilityEffect effect) {
