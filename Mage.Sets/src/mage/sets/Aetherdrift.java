@@ -83,6 +83,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Forest", 289, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Foul Roads", 255, Rarity.UNCOMMON, mage.cards.f.FoulRoads.class));
         cards.add(new SetCardInfo("Fuel the Flames", 126, Rarity.UNCOMMON, mage.cards.f.FuelTheFlames.class));
+        cards.add(new SetCardInfo("Gallant Strike", 13, Rarity.UNCOMMON, mage.cards.g.GallantStrike.class));
         cards.add(new SetCardInfo("Gas Guzzler", 85, Rarity.RARE, mage.cards.g.GasGuzzler.class));
         cards.add(new SetCardInfo("Gastal Thrillroller", 129, Rarity.RARE, mage.cards.g.GastalThrillroller.class));
         cards.add(new SetCardInfo("Gearseeker Serpent", 43, Rarity.COMMON, mage.cards.g.GearseekerSerpent.class));
