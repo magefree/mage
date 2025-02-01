@@ -11,6 +11,7 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
 
 /**
  * Test restrictions for choosing attackers and blockers.
@@ -712,9 +713,9 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodscent", "Sonorous Howlbonder");
 
         attack(1, playerA, "Sonorous Howlbonder");
-        setChoiceAmount(playerA, 1, 1, 0); // assign damage to blocking memnites
         checkAttackers("x1 attacker", 1, playerA, "Sonorous Howlbonder");
         checkBlockers("x3 blockers", 1, playerB, "Memnite", "Memnite", "Memnite");
+        setChoice(playerA, CHOICE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -744,6 +745,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         attack(1, playerA, "Sonorous Howlbonder");
         checkAttackers("x1 attacker", 1, playerA, "Sonorous Howlbonder");
         checkBlockers("all blockers", 1, playerB, "Memnite", "Memnite", "Memnite", "Memnite", "Memnite");
+        setChoice(playerA, CHOICE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);

@@ -6,6 +6,8 @@ import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 public class RiteOfPassageTest extends CardTestPlayerBase {
 
 
@@ -38,6 +40,7 @@ public class RiteOfPassageTest extends CardTestPlayerBase {
         attack(1, playerA, "Watchwolf", playerB);
         block(1, playerB, "Memnite", "Watchwolf");
         block(1, playerB, "Agent of Stromgald", "Watchwolf");
+        setChoice(playerA, CHOICE_SKIP);
 
         setStopAt(1, PhaseStep.END_TURN);
         setStrictChooseMode(true);

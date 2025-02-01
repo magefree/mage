@@ -5,6 +5,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 /**
  *
  * @author jimga150
@@ -32,6 +34,7 @@ public class DonnaNobleTests extends CardTestCommander4Players {
         attack(5, playerA, "Impervious Greatwurm", playerB);
         block(5, playerB, "Memnite", "Impervious Greatwurm");
         block(5, playerB, "Expedition Envoy", "Impervious Greatwurm");
+        setChoice(playerA, CHOICE_SKIP);
 
         //Target this player with Donna Noble
         addTarget(playerA, playerB);

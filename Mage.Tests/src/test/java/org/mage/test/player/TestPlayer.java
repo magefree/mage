@@ -2974,11 +2974,6 @@ public class TestPlayer implements Player {
                                                                  int totalMin, int totalMax, MultiAmountType type, Game game) {
         assertAliasSupportInChoices(false);
 
-        boolean skippable = (totalMin == totalMax &&
-                messages.stream().mapToInt(m -> m.defaultValue).sum() == totalMin);
-        //If Min == Max and defaults equal that, don't require a choices setup
-        //This is used for combat as of FDN release
-
         int needCount = messages.size();
         List<Integer> defaultList = MultiAmountType.prepareDefaultValues(messages, totalMin, totalMax);
         if (needCount == 0) {
@@ -2993,7 +2988,6 @@ public class TestPlayer implements Player {
                 if (!choices.isEmpty()) {
                     // normal choice
                     if (choices.get(0).startsWith("X=")) {
-                        skippable = false; //If setting any damage amounts, must set all of them
                         answer.set(i, Integer.parseInt(choices.get(0).substring(2)));
                         choices.remove(0);
                         continue;
@@ -3003,9 +2997,6 @@ public class TestPlayer implements Player {
                         choices.remove(0);
                         break;
                     }
-                }
-                if (skippable) {
-                    break;
                 }
                 Assert.fail(String.format("Missing choice in multi amount: %s (pos %d - %s)", type.getHeader(), i, messages));
             }
@@ -3021,9 +3012,7 @@ public class TestPlayer implements Player {
             return answer;
         }
 
-        if (!skippable) {
-            this.chooseStrictModeFailed("choice", game, "Multi amount: " + type.getHeader());
-        }
+        this.chooseStrictModeFailed("choice", game, "Multi amount: " + type.getHeader());
         return computerPlayer.getMultiAmountWithIndividualConstraints(outcome, messages, totalMin, totalMax, type, game);
     }
 

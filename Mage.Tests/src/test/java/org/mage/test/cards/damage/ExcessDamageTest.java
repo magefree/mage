@@ -5,6 +5,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 /**
  * @author TheElk801
  */
@@ -158,6 +160,7 @@ public class ExcessDamageTest extends CardTestPlayerBase {
         block(2, playerA, bear, myrSuperion);
         block(2, playerA, envoy, myrSuperion);
         block(2, playerA, bondedConstruct, myrSuperion);
+        setChoice(playerB, CHOICE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
