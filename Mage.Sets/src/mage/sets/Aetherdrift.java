@@ -53,6 +53,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Broadside Barrage", 192, Rarity.UNCOMMON, mage.cards.b.BroadsideBarrage.class));
         cards.add(new SetCardInfo("Broken Wings", 156, Rarity.COMMON, mage.cards.b.BrokenWings.class));
         cards.add(new SetCardInfo("Bulwark Ox", 7, Rarity.RARE, mage.cards.b.BulwarkOx.class));
+        cards.add(new SetCardInfo("Burner Rocket", 114, Rarity.COMMON, mage.cards.b.BurnerRocket.class));
         cards.add(new SetCardInfo("Burnout Bashtronaut", 115, Rarity.RARE, mage.cards.b.BurnoutBashtronaut.class));
         cards.add(new SetCardInfo("Caelorna, Coral Tyrant", 40, Rarity.UNCOMMON, mage.cards.c.CaelornaCoralTyrant.class));
         cards.add(new SetCardInfo("Camera Launcher", 232, Rarity.COMMON, mage.cards.c.CameraLauncher.class));
