@@ -128,6 +128,31 @@ public class StartYourEnginesTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, sarcophagus, 2 + 1, 1 + 2);
     }
 
+    @Test
+    public void testSpeed5() {
+        addCard(Zone.BATTLEFIELD, playerA, "Wastes", 2);
+        addCard(Zone.BATTLEFIELD, playerA, goblet);
+        addCard(Zone.HAND, playerA, sarcophagus);
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, sarcophagus);
+
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Target", playerB);
+
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Target", playerB);
+
+        activateAbility(5, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Target", playerB);
+
+        activateAbility(7, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}: Target", playerB);
+
+        setStrictChooseMode(true);
+        setStopAt(7, PhaseStep.POSTCOMBAT_MAIN);
+        execute();
+
+        assertSpeed(playerA, 4);
+        assertSpeed(playerB, 0);
+        assertPowerToughness(playerA, sarcophagus, 2 + 1, 1 + 2);
+    }
+
     private static final String surveyor = "Loxodon Surveyor";
 
     @Test
