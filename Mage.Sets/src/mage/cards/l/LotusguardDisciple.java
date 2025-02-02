@@ -11,8 +11,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -21,15 +20,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class LotusguardDisciple extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("creature or Vehicle");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                SubType.VEHICLE.getPredicate()
-        ));
-    }
 
     public LotusguardDisciple(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -47,7 +37,7 @@ public final class LotusguardDisciple extends CardImpl {
                 .setText("target creature or Vehicle gains lifelink"));
         ability.addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance())
                 .setText("and indestructible until end of turn"));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_VEHICLE));
         this.addAbility(ability);
     }
 

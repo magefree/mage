@@ -754,6 +754,17 @@ public final class StaticFilters {
         FILTER_PERMANENT_CREATURE_OR_LAND.setLockedFilter(true);
     }
 
+    public static final FilterPermanent FILTER_PERMANENT_CREATURE_OR_VEHICLE = new FilterPermanent("creature or Vehicle");
+
+    static {
+        FILTER_PERMANENT_CREATURE_OR_VEHICLE.add(
+                Predicates.or(
+                        CardType.CREATURE.getPredicate(),
+                        SubType.VEHICLE.getPredicate()
+                ));
+        FILTER_PERMANENT_CREATURE_OR_VEHICLE.setLockedFilter(true);
+    }
+
     public static final FilterCreaturePermanent FILTER_PERMANENT_A_CREATURE = new FilterCreaturePermanent("a creature");
 
     static {

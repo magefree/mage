@@ -14,8 +14,7 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -25,22 +24,13 @@ import java.util.UUID;
  */
 public final class FloodTheEngine extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature or Vehicle");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                SubType.VEHICLE.getPredicate()
-        ));
-    }
-
     public FloodTheEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
 
         this.subtype.add(SubType.AURA);
 
         // Enchant creature or Vehicle
-        TargetPermanent auraTarget = new TargetPermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_VEHICLE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget));

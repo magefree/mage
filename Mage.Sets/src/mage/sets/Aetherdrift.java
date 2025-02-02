@@ -118,6 +118,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Leonin Surveyor", 18, Rarity.COMMON, mage.cards.l.LeoninSurveyor.class));
         cards.add(new SetCardInfo("Lightning Strike", 136, Rarity.COMMON, mage.cards.l.LightningStrike.class));
         cards.add(new SetCardInfo("Lightshield Parry", 19, Rarity.COMMON, mage.cards.l.LightshieldParry.class));
+        cards.add(new SetCardInfo("Lightwheel Enhancements", 20, Rarity.COMMON, mage.cards.l.LightwheelEnhancements.class));
         cards.add(new SetCardInfo("Locust Spray", 95, Rarity.UNCOMMON, mage.cards.l.LocustSpray.class));
         cards.add(new SetCardInfo("Lotusguard Disciple", 21, Rarity.COMMON, mage.cards.l.LotusguardDisciple.class));
         cards.add(new SetCardInfo("Loxodon Surveyor", 167, Rarity.COMMON, mage.cards.l.LoxodonSurveyor.class));

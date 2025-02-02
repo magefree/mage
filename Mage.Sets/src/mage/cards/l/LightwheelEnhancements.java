@@ -1,15 +1,15 @@
-package mage.cards.s;
+package mage.cards.l;
 
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.MaxSpeedAbility;
+import mage.abilities.common.MayCastFromGraveyardSourceAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.UntapAttachedEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlashAbility;
-import mage.abilities.keyword.ReachAbility;
+import mage.abilities.keyword.StartYourEnginesAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AttachmentType;
@@ -24,15 +24,12 @@ import java.util.UUID;
 /**
  * @author TheElk801
  */
-public final class SilkenStrength extends CardImpl {
+public final class LightwheelEnhancements extends CardImpl {
 
-    public SilkenStrength(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
+    public LightwheelEnhancements(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
 
         this.subtype.add(SubType.AURA);
-
-        // Flash
-        this.addAbility(FlashAbility.getInstance());
 
         // Enchant creature or Vehicle
         TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_VEHICLE);
@@ -40,26 +37,27 @@ public final class SilkenStrength extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget));
 
-        // When this Aura enters, untap enchanted permanent.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new UntapAttachedEffect(AttachmentType.AURA, "permanent")
-        ));
+        // Start your engines!
+        this.addAbility(new StartYourEnginesAbility());
 
-        // Enchanted permanent gets +1/+2 and has reach.
-        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 2)
-                .setText("enchanted permanent gets +1/+2"));
+        // Enchanted permanent gets +1/+1 and has vigilance.
+        Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 1)
+                .setText("enchanted permanent gets +1/+1"));
         ability.addEffect(new GainAbilityAttachedEffect(
-                ReachAbility.getInstance(), AttachmentType.AURA
-        ).setText("and has reach"));
+                VigilanceAbility.getInstance(), AttachmentType.AURA
+        ).setText("and has vigilance"));
         this.addAbility(ability);
+
+        // Max speed -- You may cast this card from your graveyard.
+        this.addAbility(new MaxSpeedAbility(new MayCastFromGraveyardSourceAbility()));
     }
 
-    private SilkenStrength(final SilkenStrength card) {
+    private LightwheelEnhancements(final LightwheelEnhancements card) {
         super(card);
     }
 
     @Override
-    public SilkenStrength copy() {
-        return new SilkenStrength(this);
+    public LightwheelEnhancements copy() {
+        return new LightwheelEnhancements(this);
     }
 }

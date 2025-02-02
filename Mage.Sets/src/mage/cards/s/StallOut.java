@@ -7,10 +7,8 @@ import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -20,15 +18,6 @@ import java.util.UUID;
  */
 public final class StallOut extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent("creature or Vehicle");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                SubType.VEHICLE.getPredicate()
-        ));
-    }
-
     public StallOut(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{1}{U}");
 
@@ -36,7 +25,7 @@ public final class StallOut extends CardImpl {
         this.getSpellAbility().addEffect(new TapTargetEffect());
         this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.STUN.createInstance(3))
                 .setText(", then put three stun counters on it"));
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_VEHICLE));
 
         // Cycling {2}
         this.addAbility(new CyclingAbility(new ManaCostsImpl<>("{2}")));
