@@ -213,5 +213,6 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Wreck Remover", 247, Rarity.COMMON, mage.cards.w.WreckRemover.class));
         cards.add(new SetCardInfo("Wreckage Wickerfolk", 110, Rarity.COMMON, mage.cards.w.WreckageWickerfolk.class));
         cards.add(new SetCardInfo("Wretched Doll", 111, Rarity.UNCOMMON, mage.cards.w.WretchedDoll.class));
+        cards.add(new SetCardInfo("Zahur, Glory's Past", 229, Rarity.RARE, mage.cards.z.ZahurGlorysPast.class));
     }
 }
