@@ -11,6 +11,8 @@ import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.mana.AddConditionalManaOfAnyColorEffect;
+import mage.abilities.effects.mana.ManaEffect;
+import mage.abilities.keyword.CrewAbility;
 import mage.abilities.keyword.ExhaustAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.ManaCondition;
@@ -20,6 +22,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.target.common.TargetAnyTarget;
 
 import java.util.UUID;
 
@@ -36,12 +39,18 @@ public final class Boommobile extends CardImpl {
         this.toughness = new MageInt(5);
         
         // When this Vehicle enters, add four mana of any one color. Spend this mana only to activate abilities.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddConditionalManaOfAnyColorEffect(4, new BoommobileManaBuilder())));
+        ManaEffect entersEffect = new AddConditionalManaOfAnyColorEffect(4, new BoommobileManaBuilder());
+        entersEffect.setText("add four mana of any one color. Spend this mana only to activate abilities.");
+        this.addAbility(new EntersBattlefieldTriggeredAbility(entersEffect));
         
         // Exhaust -- {X}{2}{R}: This vehicle deals X damage to any target. Put a +1/+1 counter on this Vehicle.
-        ExhaustAbility exhaustAbility = new ExhaustAbility(new DamageTargetEffect(GetXValue.instance), new ManaCostsImpl<>("{X}{2}{R}"));
+        Ability exhaustAbility = new ExhaustAbility(new DamageTargetEffect(GetXValue.instance), new ManaCostsImpl<>("{X}{2}{R}"));
         exhaustAbility.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        exhaustAbility.addTarget(new TargetAnyTarget());
         this.addAbility(exhaustAbility);
+
+        // Crew 2
+        this.addAbility(new CrewAbility(2));
     }
 
     private Boommobile(final Boommobile card) {
