@@ -176,6 +176,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Spell Pierce", 64, Rarity.UNCOMMON, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Spin Out", 106, Rarity.COMMON, mage.cards.s.SpinOut.class));
         cards.add(new SetCardInfo("Spotcycle Scouter", 30, Rarity.COMMON, mage.cards.s.SpotcycleScouter.class));
+        cards.add(new SetCardInfo("Stall Out", 66, Rarity.COMMON, mage.cards.s.StallOut.class));
         cards.add(new SetCardInfo("Stampeding Scurryfoot", 181, Rarity.COMMON, mage.cards.s.StampedingScurryfoot.class));
         cards.add(new SetCardInfo("Starting Column", 244, Rarity.COMMON, mage.cards.s.StartingColumn.class));
         cards.add(new SetCardInfo("Stock Up", 67, Rarity.UNCOMMON, mage.cards.s.StockUp.class));
