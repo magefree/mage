@@ -49,6 +49,7 @@ public final class GoblinSkiPatrol extends CardImpl {
         // {1}{R}: Goblin Ski Patrol gets +2/+0 and gains flying. Its controller sacrifices it at the beginning of the next end step. Activate only once and only if you control a snow Mountain.
         Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
         effect.setText("{this} gets +2/+0");
+// This should be ActivateOncePerGameActivatedAbility but I couldn't work out how to apply a condition, so used LimitedTimesPerTurnActivatedAbility instead. This will only be an issue if Goblin Ski Patrol somehow avoids being sacrificed.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{R}"), 1, condition);
         effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying.");
@@ -56,6 +57,7 @@ public final class GoblinSkiPatrol extends CardImpl {
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect())
         ).setText("Its controller sacrifices it at the beginning of the next end step."));
+// I believe that this needs correcting to still force the controller to sacrifice even if it changes controllers between activation and end-of-turn
         this.addAbility(ability);
     }
 
