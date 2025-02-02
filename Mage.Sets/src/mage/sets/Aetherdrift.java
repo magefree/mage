@@ -57,6 +57,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Caradora, Heart of Alacria", 195, Rarity.RARE, mage.cards.c.CaradoraHeartOfAlacria.class));
         cards.add(new SetCardInfo("Clamorous Ironclad", 117, Rarity.COMMON, mage.cards.c.ClamorousIronclad.class));
         cards.add(new SetCardInfo("Cloudspire Captain", 9, Rarity.UNCOMMON, mage.cards.c.CloudspireCaptain.class));
+        cards.add(new SetCardInfo("Cloudspire Coordinator", 196, Rarity.UNCOMMON, mage.cards.c.CloudspireCoordinator.class));
         cards.add(new SetCardInfo("Collision Course", 10, Rarity.COMMON, mage.cards.c.CollisionCourse.class));
         cards.add(new SetCardInfo("Count on Luck", 118, Rarity.RARE, mage.cards.c.CountOnLuck.class));
         cards.add(new SetCardInfo("Country Roads", 253, Rarity.UNCOMMON, mage.cards.c.CountryRoads.class));
