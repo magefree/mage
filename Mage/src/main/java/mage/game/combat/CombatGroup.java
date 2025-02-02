@@ -442,39 +442,47 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (blocker == null) {
             return;
         }
-        boolean oldRuleDamage = attackerAssignsCombatDamage(game); // handles banding
-        Player player = game.getPlayer(oldRuleDamage ? game.getCombat().getAttackingPlayerId() : blocker.getControllerId());
+        //Handle Banding
+        Player player = game.getPlayer(attackerAssignsCombatDamage(game) ? game.getCombat().getAttackingPlayerId() : blocker.getControllerId());
         int damage = getDamageValueFromPermanent(blocker, game);
 
         if (dealsDamageThisStep(blocker, first, game)) {
             Map<UUID, Integer> assigned = new HashMap<>();
+            List<MultiAmountMessage> damageDivision = new ArrayList<>();
+            List<UUID> attackersCopy = new ArrayList<>(attackers);
+            int remainingDamage = damage;
             for (UUID attackerId : attackers) {
                 Permanent attacker = game.getPermanent(attackerId);
                 if (attacker != null) {
-                    int lethalDamage = getLethalDamage(attacker, blocker, game);
-                    if (lethalDamage >= damage) {
-                        if (!oldRuleDamage) {
-                            assigned.put(attackerId, damage);
-                            damage = 0;
-                            break;
-                        } else if (damage == 0) {
-                            break;
-                        }
-                    }
-                    int damageAssigned = 0;
-                    damageAssigned = player.getAmount(0, damage, "Assign damage to " + attacker.getName(), game);
-                    assigned.put(attackerId, damageAssigned);
-                    damage -= damageAssigned;
+                    int defaultDamage = Math.min(remainingDamage, attacker.getLethalDamage(blocker.getId(), game));
+                    remainingDamage -= defaultDamage;
+                    String message = String.format("%s, P/T: %d/%d",
+                            attacker.getLogName(),
+                            attacker.getPower().getValue(),
+                            attacker.getToughness().getValue());
+                    damageDivision.add(new MultiAmountMessage(message, 0, damage, defaultDamage));
                 }
             }
-            if (damage > 0) {
-                // Assign the damage left to first attacker
-                assigned.put(attackers.get(0), assigned.get(attackers.get(0)) + damage);
+            List<Integer> amounts;
+            if (remainingDamage > 0){
+                damageDivision.get(0).defaultValue += remainingDamage;
             }
-
+            if (damageDivision.size() > 1) {
+                amounts = player.getMultiAmountWithIndividualConstraints(Outcome.Damage, damageDivision, damage, damage, MultiAmountType.DAMAGE, game);
+            } else {
+                amounts = new LinkedList<>();
+                amounts.add(damage);
+            }
+            if (!damageDivision.isEmpty()){
+                for (int i=0; i<attackersCopy.size(); i++) {
+                    assigned.put(attackersCopy.get(i), amounts.get(i));
+                }
+            }
             for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
                 Permanent attacker = game.getPermanent(entry.getKey());
-                attacker.markDamage(entry.getValue(), blocker.getId(), null, game, true, true);
+                if (attacker != null) {
+                    attacker.markDamage(entry.getValue(), blocker.getId(), null, game, true, true);
+                }
             }
         }
     }
