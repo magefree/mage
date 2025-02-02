@@ -3,7 +3,7 @@ package mage.cards.g;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateOncePerGameActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -11,7 +11,9 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.constants.SubType;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
+import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -19,9 +21,19 @@ import mage.constants.Duration;
 
 /**
  *
- * @author tiera3 - based on PyricSalamander, AkroanLineBreaker
+ * @author tiera3 - based on PyricSalamander, AkroanLineBreaker, RonomSerpent, GeneralsEnforcer, MildManneredLibrarian, BlazemireVerge
  */
 public final class GoblinSkiPatrol extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent(SubType.MOUNTAIN, "a snow-covered Mountain");
+
+    static {
+        filter.add(SuperType.SNOW.getPredicate());
+    }
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
+    private static final Hint hint = new ConditionHint(condition, "You control a snow-covered Mountain");
+
 
     public GoblinSkiPatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -33,7 +45,7 @@ public final class GoblinSkiPatrol extends CardImpl {
         // {1}{R}: Goblin Ski Patrol gets +2/+0 and gains flying. Its controller sacrifices it at the beginning of the next end step. Activate only once and only if you control a snow Mountain.
         Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
         effect.setText("{this} gets +2/+0");
-        Ability ability = new SimpleActivatedAbility(effect, new ManaCostsImpl<>("{1}{R}"));
+        Ability ability = new ActivateOncePerGameActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl<>("{1}{R}"), 1, condition);
         effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         effect.setText("and gains flying.");
         ability.addEffect(effect);
