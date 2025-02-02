@@ -3993,6 +3993,11 @@ public class TestPlayer implements Player {
     }
 
     @Override
+    public void decreaseSpeed(Game game) {
+        computerPlayer.decreaseSpeed(game);
+    }
+
+    @Override
     public void setPayManaMode(boolean payManaMode) {
         computerPlayer.setPayManaMode(payManaMode);
     }

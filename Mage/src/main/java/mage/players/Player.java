@@ -222,6 +222,8 @@ public interface Player extends MageItem, Copyable<Player> {
 
     void increaseSpeed(Game game);
 
+    void decreaseSpeed(Game game);
+
     /**
      * Returns alternative casting costs a player can cast spells for
      *

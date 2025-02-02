@@ -4703,6 +4703,14 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     @Override
+    public void decreaseSpeed(Game game) {
+        if (speed > 1) {
+            speed--;
+            game.informPlayers(this.getLogName() + "'s speed has decreased to " + speed);
+        }
+    }
+
+    @Override
     public boolean autoLoseGame() {
         return false;
     }
