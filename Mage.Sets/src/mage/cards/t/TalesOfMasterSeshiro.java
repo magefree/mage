@@ -13,9 +13,7 @@ import mage.constants.CardType;
 import mage.constants.SagaChapter;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -24,16 +22,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class TalesOfMasterSeshiro extends CardImpl {
-
-    private static final FilterPermanent filter
-            = new FilterControlledPermanent("creature or Vehicle you control");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                SubType.VEHICLE.getPredicate()
-        ));
-    }
 
     public TalesOfMasterSeshiro(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{G}");
@@ -51,7 +39,7 @@ public final class TalesOfMasterSeshiro extends CardImpl {
                         new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                         new GainAbilityTargetEffect(VigilanceAbility.getInstance())
                                 .setText("It gains vigilance until end of turn")
-                ), new TargetPermanent(filter)
+                ), new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_CREATURE_OR_VEHICLE)
         );
 
         // III — Exile this Saga, then return it to the battlefield transformed under your control.
