@@ -127,6 +127,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Surveyor", 167, Rarity.COMMON, mage.cards.l.LoxodonSurveyor.class));
         cards.add(new SetCardInfo("Lumbering Worldwagon", 168, Rarity.RARE, mage.cards.l.LumberingWorldwagon.class));
         cards.add(new SetCardInfo("Magmakin Artillerist", 137, Rarity.COMMON, mage.cards.m.MagmakinArtillerist.class));
+        cards.add(new SetCardInfo("Marauding Mako", 138, Rarity.UNCOMMON, mage.cards.m.MaraudingMako.class));
         cards.add(new SetCardInfo("Marketback Walker", 235, Rarity.RARE, mage.cards.m.MarketbackWalker.class));
         cards.add(new SetCardInfo("Marshals' Pathcruiser", 236, Rarity.UNCOMMON, mage.cards.m.MarshalsPathcruiser.class));
         cards.add(new SetCardInfo("Maximum Overdrive", 96, Rarity.COMMON, mage.cards.m.MaximumOverdrive.class));
