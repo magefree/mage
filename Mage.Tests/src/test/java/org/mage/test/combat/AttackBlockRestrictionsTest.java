@@ -7,7 +7,7 @@ import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestPlayerBase;
+import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -17,7 +17,7 @@ import static org.junit.Assert.fail;
  *
  * @author noxx, JayDi85
  */
-public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
+public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
 
     @Test
     public void testFlyingVsNonFlying() {
@@ -936,6 +936,83 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         setChoice(playerA, true); // boost target
         attack(1, playerA, "Alley Strangler");
         block(1, playerB, "Memnite", "Alley Strangler");
+        checkAttackers("x1 attacker", 1, playerA, "Alley Strangler");
+        checkBlockers("no blockers", 1, playerB, "");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 4);
+        assertGraveyardCount(playerA, "Alley Strangler", 0);
+    }
+
+    @Test
+    public void test_MustBeBlockedWithMenace_low_small_blockers_AI() {
+        // At the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature’s
+        // power until end of turn. That creature must be blocked this combat if able.
+        addCard(Zone.BATTLEFIELD, playerA, "Neyith of the Dire Hunt"); // 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        //
+        // Menace
+        addCard(Zone.BATTLEFIELD, playerA, "Alley Strangler", 1); // 2/3
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 1); // 1/1
+
+        // If the target creature has menace, two creatures must block it if able.
+        // (2020-06-23)
+        //
+        // If a creature is required to block a creature with menace, another creature must also block that creature
+        // if able. If none can, the creature that’s required to block can block another creature or not block at all.
+        // (2020-04-17)
+
+        // auto-fix block config inside
+        // AI must ignore such use case
+
+        addTarget(playerA, "Alley Strangler"); // boost target
+        setChoice(playerA, true); // boost target
+        attack(1, playerA, "Alley Strangler");
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkAttackers("x1 attacker", 1, playerA, "Alley Strangler");
+        checkBlockers("no blockers", 1, playerB, "");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 4);
+        assertGraveyardCount(playerA, "Alley Strangler", 0);
+    }
+
+    @Test
+    @Ignore // TODO: need to fix
+    public void test_MustBeBlockedWithMenace_low_big_blockers_AI() {
+        // bug: #13290, AI can try to use bigger creature to block
+
+        // At the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature’s
+        // power until end of turn. That creature must be blocked this combat if able.
+        addCard(Zone.BATTLEFIELD, playerA, "Neyith of the Dire Hunt"); // 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        //
+        // Menace
+        addCard(Zone.BATTLEFIELD, playerA, "Alley Strangler", 1); // 2/3
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Deadbridge Goliath", 1); // 5/5
+
+        // If the target creature has menace, two creatures must block it if able.
+        // (2020-06-23)
+        //
+        // If a creature is required to block a creature with menace, another creature must also block that creature
+        // if able. If none can, the creature that’s required to block can block another creature or not block at all.
+        // (2020-04-17)
+
+        // auto-fix block config inside
+        // AI must ignore BIG creature to wrongly block
+
+        addTarget(playerA, "Alley Strangler"); // boost target
+        setChoice(playerA, true); // boost target
+        attack(1, playerA, "Alley Strangler");
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
         checkAttackers("x1 attacker", 1, playerA, "Alley Strangler");
         checkBlockers("no blockers", 1, playerB, "");
 
