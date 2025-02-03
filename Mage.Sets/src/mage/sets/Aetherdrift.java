@@ -216,6 +216,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Thopter Fabricator", 68, Rarity.RARE, mage.cards.t.ThopterFabricator.class));
         cards.add(new SetCardInfo("Thornwood Falls", 266, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thundering Broodwagon", 225, Rarity.UNCOMMON, mage.cards.t.ThunderingBroodwagon.class));
+        cards.add(new SetCardInfo("Ticket Tortoise", 245, Rarity.COMMON, mage.cards.t.TicketTortoise.class));
         cards.add(new SetCardInfo("Trade the Helm", 69, Rarity.UNCOMMON, mage.cards.t.TradeTheHelm.class));
         cards.add(new SetCardInfo("Tranquil Cove", 267, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Transit Mage", 70, Rarity.UNCOMMON, mage.cards.t.TransitMage.class));
