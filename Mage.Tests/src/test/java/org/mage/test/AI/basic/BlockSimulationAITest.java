@@ -52,7 +52,7 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
-    public void test_Block_1_small_attacker_vs_1_small_blocker() {
+    public void test_Block_1_small_attacker_vs_1_small_blocker_same() {
         addCard(Zone.BATTLEFIELD, playerA, "Arbor Elf", 1); // 1/1
         addCard(Zone.BATTLEFIELD, playerB, "Arbor Elf", 1); // 1/1
 
@@ -70,6 +70,54 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, "Arbor Elf", 1);
         assertGraveyardCount(playerB, "Arbor Elf", 1);
+    }
+
+    @Test
+    public void test_Block_1_small_attacker_vs_1_small_blocker_better() {
+        addCard(Zone.BATTLEFIELD, playerA, "Arbor Elf", 1); // 1/1
+        //addCard(Zone.BATTLEFIELD, playerB, "Elvish Archers"); // 2/1 first strike
+        addCard(Zone.BATTLEFIELD, playerB, "Dregscape Zombie", 1); // 2/1
+
+        attack(1, playerA, "Arbor Elf");
+
+        // ai must ignore block to keep better creature alive
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("no blockers", 1, playerB, "");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20 - 1);
+        assertPermanentCount(playerA, "Arbor Elf", 1);
+        assertPermanentCount(playerB, "Dregscape Zombie", 1);
+    }
+
+    @Test
+    public void test_Block_1_small_attacker_vs_1_small_blocker_better_but_player_die() {
+        addCustomEffect_TargetDamage(playerA, 19);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Arbor Elf", 1); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Dregscape Zombie", 1); // 2/1
+
+        // prepare 1 life
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "target damage 19", playerB);
+
+        attack(1, playerA, "Arbor Elf");
+
+        // ai must keep better blocker in normal case, but now it must protect from lose and sacrifice it
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("x1 blocker", 1, playerB, "Dregscape Zombie");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 1);
+        assertGraveyardCount(playerA, "Arbor Elf", 1);
+        assertGraveyardCount(playerB, "Dregscape Zombie", 1);
     }
 
     @Test

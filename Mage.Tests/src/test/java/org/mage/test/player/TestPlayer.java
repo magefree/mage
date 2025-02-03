@@ -1996,7 +1996,7 @@ public class TestPlayer implements Player {
                 }
             }
         }
-        checkMultipleBlockers(game, blockedCreaturesList);
+        checkMultipleBlockers(game, blockedCreaturesList); // search wrong block commands
 
         // AI FULL play if no actions available
         if (!mustBlockByAction && (this.AIPlayer || this.AIRealGameSimulation)) {

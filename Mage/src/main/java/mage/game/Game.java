@@ -174,7 +174,7 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
      *
      *  Warning, it will return leaved players until end of turn. For dialogs and one shot effects use excludeLeavedPlayers
      */
-    // TODO: check usage of getOpponents in cards and replace with correct call of excludeLeavedPlayers
+    // TODO: check usage of getOpponents in cards and replace with correct call of excludeLeavedPlayers, see #13289
     default Set<UUID> getOpponents(UUID playerId) {
         return getOpponents(playerId, false);
     }
