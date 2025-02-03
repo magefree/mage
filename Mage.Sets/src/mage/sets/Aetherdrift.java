@@ -215,6 +215,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Veloheart Bike", 184, Rarity.COMMON, mage.cards.v.VeloheartBike.class));
         cards.add(new SetCardInfo("Venomsac Lagac", 185, Rarity.COMMON, mage.cards.v.VenomsacLagac.class));
         cards.add(new SetCardInfo("Veteran Beastrider", 226, Rarity.UNCOMMON, mage.cards.v.VeteranBeastrider.class));
+        cards.add(new SetCardInfo("Vnwxt, Verbose Host", 73, Rarity.RARE, mage.cards.v.VnwxtVerboseHost.class));
         cards.add(new SetCardInfo("Voyage Home", 227, Rarity.UNCOMMON, mage.cards.v.VoyageHome.class));
         cards.add(new SetCardInfo("Voyager Quickwelder", 37, Rarity.COMMON, mage.cards.v.VoyagerQuickwelder.class));
         cards.add(new SetCardInfo("Walking Sarcophagus", 246, Rarity.COMMON, mage.cards.w.WalkingSarcophagus.class));
