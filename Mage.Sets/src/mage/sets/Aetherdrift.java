@@ -187,6 +187,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Salvation Engine", 27, Rarity.MYTHIC, mage.cards.s.SalvationEngine.class));
         cards.add(new SetCardInfo("Scoured Barrens", 263, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Scrap Compactor", 242, Rarity.COMMON, mage.cards.s.ScrapCompactor.class));
+        cards.add(new SetCardInfo("Scrounging Skyray", 60, Rarity.UNCOMMON, mage.cards.s.ScroungingSkyray.class));
         cards.add(new SetCardInfo("Shefet Archfiend", 104, Rarity.UNCOMMON, mage.cards.s.ShefetArchfiend.class));
         cards.add(new SetCardInfo("Silken Strength", 180, Rarity.COMMON, mage.cards.s.SilkenStrength.class));
         cards.add(new SetCardInfo("Skybox Ferry", 243, Rarity.COMMON, mage.cards.s.SkyboxFerry.class));
