@@ -225,6 +225,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Swiftwing Assailant", 32, Rarity.COMMON, mage.cards.s.SwiftwingAssailant.class));
         cards.add(new SetCardInfo("Syphon Fuel", 108, Rarity.COMMON, mage.cards.s.SyphonFuel.class));
         cards.add(new SetCardInfo("Terrian, World Tyrant", 182, Rarity.UNCOMMON, mage.cards.t.TerrianWorldTyrant.class));
+        cards.add(new SetCardInfo("The Aetherspark", 231, Rarity.MYTHIC, mage.cards.t.TheAetherspark.class));
         cards.add(new SetCardInfo("The Last Ride", 94, Rarity.MYTHIC, mage.cards.t.TheLastRide.class));
         cards.add(new SetCardInfo("The Speed Demon", 105, Rarity.MYTHIC, mage.cards.t.TheSpeedDemon.class));
         cards.add(new SetCardInfo("Thopter Fabricator", 68, Rarity.RARE, mage.cards.t.ThopterFabricator.class));
