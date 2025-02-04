@@ -57,6 +57,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Camera Launcher", 232, Rarity.COMMON, mage.cards.c.CameraLauncher.class));
         cards.add(new SetCardInfo("Caradora, Heart of Alacria", 195, Rarity.RARE, mage.cards.c.CaradoraHeartOfAlacria.class));
         cards.add(new SetCardInfo("Chandra, Spark Hunter", 116, Rarity.MYTHIC, mage.cards.c.ChandraSparkHunter.class));
+        cards.add(new SetCardInfo("Chitin Gravestalker", 79, Rarity.COMMON, mage.cards.c.ChitinGravestalker.class));
         cards.add(new SetCardInfo("Clamorous Ironclad", 117, Rarity.COMMON, mage.cards.c.ClamorousIronclad.class));
         cards.add(new SetCardInfo("Cloudspire Captain", 9, Rarity.UNCOMMON, mage.cards.c.CloudspireCaptain.class));
         cards.add(new SetCardInfo("Cloudspire Coordinator", 196, Rarity.UNCOMMON, mage.cards.c.CloudspireCoordinator.class));
