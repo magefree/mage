@@ -1001,10 +1001,10 @@ public class MageServerImpl implements MageServer {
     }
 
     public void handleException(Exception ex) throws MageException {
-        if (!ex.getMessage().equals("No message")) {
-            logger.fatal("", ex);
+        if (ex.getMessage() != null && !ex.getMessage().equals("No message")) {
             throw new MageException("Server error: " + ex.getMessage());
         }
+        logger.error("unknown error", ex); // TODO: on logs spamming (e.g. connection problems) move it inside condition block above
     }
 
     @Override

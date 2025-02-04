@@ -314,7 +314,9 @@ public interface Game extends MageItem, Serializable, Copyable<Game> {
 
     Player getLosingPlayer();
 
-    int getTotalErrorsCount();
+    int getTotalErrorsCount(); // debug only
+
+    int getTotalEffectsCount(); // debug only
 
     //client event methods
     void addTableEventListener(Listener<TableEvent> listener);

@@ -3547,11 +3547,6 @@ public abstract class GameImpl implements Game {
 
     }
 
-    protected void removeCreaturesFromCombat() {
-        //20091005 - 511.3
-        getCombat().endCombat(this);
-    }
-
     @Override
     public ContinuousEffects getContinuousEffects() {
         return state.getContinuousEffects();
@@ -3692,6 +3687,11 @@ public abstract class GameImpl implements Game {
     @Override
     public int getTotalErrorsCount() {
         return this.totalErrorsCount.get();
+    }
+
+    @Override
+    public int getTotalEffectsCount() {
+        return this.getContinuousEffects().getTotalEffectsCount();
     }
 
     @Override

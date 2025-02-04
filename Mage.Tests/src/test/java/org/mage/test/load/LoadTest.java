@@ -321,7 +321,7 @@ public class LoadTest {
         long randomSeed = RandomUtil.nextInt();
         LoadTestGameResult gameResult = gameResults.createGame(0, "test game", randomSeed);
         TasksProgress tasksProgress = new TasksProgress();
-        tasksProgress.update(1, true, 0);
+        tasksProgress.update(1, false, 0);
         playTwoAIGame("Single AI game", 1, tasksProgress, randomSeed, "WGUBR", TEST_AI_RANDOM_DECK_SETS, gameResult);
 
         printGameResults(gameResults);
@@ -333,12 +333,13 @@ public class LoadTest {
         // play multiple AI games with CLIENT side code (catch every GameView changes from the server)
 
         int singleGameSID = 0; // set sid for same deck games, set 0 for random decks
-        int gamesAmount = 5; // games per run
-        boolean isRunParallel = true; // can generate too much logs in test run, so search server logs for possible errors
+
+        int runTotalGames = 10;
+        int runMaxParallelGames = 5; // use 1 to run one by one (warning, it's limited by COMPUTER_MAX_THREADS_FOR_SIMULATIONS)
 
         ExecutorService executerService;
-        if (isRunParallel) {
-            executerService = Executors.newFixedThreadPool(gamesAmount, new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TESTS_AI_VS_AI_GAMES));
+        if (runMaxParallelGames > 1) {
+            executerService = Executors.newFixedThreadPool(runMaxParallelGames, new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TESTS_AI_VS_AI_GAMES));
         } else {
             executerService = Executors.newSingleThreadExecutor(new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TESTS_AI_VS_AI_GAMES));
         }
@@ -346,11 +347,11 @@ public class LoadTest {
         // save random seeds for repeated results (in decks generating)
         List<Integer> seedsList = new ArrayList<>();
         if (singleGameSID != 0) {
-            for (int i = 1; i <= gamesAmount; i++) {
+            for (int i = 1; i <= runTotalGames; i++) {
                 seedsList.add(singleGameSID);
             }
         } else {
-            for (int i = 1; i <= gamesAmount; i++) {
+            for (int i = 1; i <= runTotalGames; i++) {
                 seedsList.add(RandomUtil.nextInt());
             }
         }
@@ -360,7 +361,7 @@ public class LoadTest {
             TasksProgress tasksProgress = new TasksProgress();
             for (int i = 0; i < seedsList.size(); i++) {
                 int gameIndex = i;
-                tasksProgress.update(gameIndex + 1, true, 0);
+                tasksProgress.update(gameIndex + 1, false, 0);
                 long randomSeed = seedsList.get(i);
                 logger.info("Game " + (i + 1) + " of " + seedsList.size() + ", RANDOM seed: " + randomSeed);
                 Future gameTask = executerService.submit(() -> {
@@ -369,12 +370,12 @@ public class LoadTest {
                     playTwoAIGame(gameName, gameIndex + 1, tasksProgress, randomSeed, TEST_AI_RANDOM_DECK_COLORS_FOR_AI_GAME, TEST_AI_RANDOM_DECK_SETS, gameResult);
                 });
 
-                if (!isRunParallel) {
+                if (runMaxParallelGames <= 1) {
                     // run one by one
                     gameTask.get();
                 }
             }
-            if (isRunParallel) {
+            if (runMaxParallelGames > 1) {
                 // run parallel
                 executerService.shutdown();
                 Assert.assertTrue(executerService.awaitTermination(1, TimeUnit.HOURS));
@@ -601,14 +602,18 @@ public class LoadTest {
         }
 
         private void updateInfo() {
-            // example: progress [=00, +01, +01, =12, =15, =01, +61]
+            // example: progress 70% [=00, +01, +01, =12, =15, =01, +61]
+
+            int completed = this.finishes.values().stream().mapToInt(x -> x ? 1 : 0).sum();
+            int completedPercent = this.finishes.size() == 0 ? 0 : completed * 100 / this.finishes.size();
+
             String res = this.finishes.keySet().stream()
                     .map(taskNumber -> String.format("%s%02d",
                             this.finishes.getOrDefault(taskNumber, false) ? "=" : "+",
                             this.turns.getOrDefault(taskNumber, 0)
                     ))
                     .collect(Collectors.joining(", "));
-            this.info = String.format("progress [%s]", res);
+            this.info = String.format("progress %d%% [%s]", completedPercent, res);
         }
 
         public String getInfo() {
@@ -877,12 +882,16 @@ public class LoadTest {
         public int getTotalErrorsCount() {
             return finalGameView == null ? 0 : this.finalGameView.getTotalErrorsCount();
         }
+
+        public int getTotalEffectsCount() {
+            return finalGameView == null ? 0 : this.finalGameView.getTotalEffectsCount();
+        }
     }
 
     private static class LoadTestGameResultsList extends HashMap<Integer, LoadTestGameResult> {
 
-        private static final String tableFormatHeader = "|%-10s|%-15s|%-20s|%-10s|%-10s|%-10s|%-10s|%-15s|%-15s|%-10s|%n";
-        private static final String tableFormatData = "|%-10s|%15s|%20s|%10s|%10s|%10s|%10s|%15s|%15s|%10s|%n";
+        private static final String tableFormatHeader = "|%-10s|%-15s|%-20s|%-10s|%-10s|%-10s|%-10s|%-10s|%-15s|%-15s|%-10s|%n";
+        private static final String tableFormatData = "|%-10s|%15s|%20s|%10s|%10s|%10s|%10s|%10s|%15s|%15s|%10s|%n";
 
         public LoadTestGameResult createGame(int index, String name, long randomSeed) {
             if (this.containsKey(index)) {
@@ -899,6 +908,7 @@ public class LoadTest {
                     "name",
                     "random sid",
                     "errors",
+                    "effects",
                     "turn",
                     "life p1",
                     "life p2",
@@ -920,6 +930,7 @@ public class LoadTest {
                     gameResult.name, //"name",
                     String.valueOf(gameResult.randomSeed), // "random sid",
                     String.valueOf(gameResult.getTotalErrorsCount()), // "errors",
+                    String.valueOf(gameResult.getTotalEffectsCount()), // "effects",
                     String.valueOf(gameResult.getTurn()), //"turn",
                     String.valueOf(gameResult.getLife1()), //"life p1",
                     String.valueOf(gameResult.getLife2()), //"life p2",
@@ -937,6 +948,7 @@ public class LoadTest {
                     String.valueOf(this.size()), //"name",
                     "total, secs: " + String.format("%.3f", (float) this.getTotalDurationMs() / 1000), // "random sid",
                     String.valueOf(this.getTotalErrorsCount()), // errors
+                    String.valueOf(this.getAvgEffectsCount()), // effects
                     String.valueOf(this.getAvgTurn()), // turn
                     String.valueOf(this.getAvgLife1()), // life p1
                     String.valueOf(this.getAvgLife2()), // life p2
@@ -950,6 +962,10 @@ public class LoadTest {
 
         private int getTotalErrorsCount() {
             return this.values().stream().mapToInt(LoadTestGameResult::getTotalErrorsCount).sum();
+        }
+
+        private int getAvgEffectsCount() {
+            return this.size() == 0 ? 0 : this.values().stream().mapToInt(LoadTestGameResult::getTotalEffectsCount).sum() / this.size();
         }
 
         private int getAvgTurn() {
