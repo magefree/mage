@@ -204,8 +204,8 @@ public class DamageDistributionTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Catacomb Crocodile"); // 3/7
 
         addCard(Zone.BATTLEFIELD, playerB, "Brave the Sands"); //can block 2
-        addCard(Zone.BATTLEFIELD, playerB, "Fortress Crab"); // 1/6
         addCard(Zone.BATTLEFIELD, playerB, "Marsh Hulk"); // 4/6
+        addCard(Zone.BATTLEFIELD, playerB, "Fortress Crab"); // 1/6
 
         attack(1, playerA, "Catacomb Slug");
         attack(1, playerA, "Catacomb Crocodile");
