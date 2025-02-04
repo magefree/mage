@@ -51,7 +51,7 @@ public class LoadTest {
     private static final Boolean TEST_SHOW_GAME_LOGS_AS_HTML = false; // html is original format with full data, but can be too bloated
     private static final String TEST_AI_GAME_MODE = "Freeform Commander Free For All";
     private static final String TEST_AI_DECK_TYPE = "Variant Magic - Freeform Commander";
-    private static final String TEST_AI_RANDOM_DECK_SETS = "LCI,LCC,WHO"; // set for random generated decks (empty for all sets usage, PELP for lands only - communication test)
+    private static final String TEST_AI_RANDOM_DECK_SETS = "DFT,DRC"; // set for random generated decks (empty for all sets usage, PELP for lands only - communication test)
     private static final String TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME = "GR";  // colors list for deck generation, empty for all colors
     private static final String TEST_AI_RANDOM_DECK_COLORS_FOR_AI_GAME = "WUBRG";
     private static final String TEST_AI_CUSTOM_DECK_PATH_1 = ""; // custom deck file instead random for player 1 (empty for random)
@@ -369,7 +369,7 @@ public class LoadTest {
                 long randomSeed = seedsList.get(i);
                 logger.info("Game " + (i + 1) + " of " + seedsList.size() + ", RANDOM seed: " + randomSeed);
                 Future gameTask = executerService.submit(() -> {
-                    String gameName = "AI game #" + (gameIndex + 1);
+                    String gameName = String.format("AI game #%02d", gameIndex + 1);
                     LoadTestGameResult gameResult = gameResults.createGame(gameIndex + 1, gameName, randomSeed);
                     playTwoAIGame(gameName, gameIndex + 1, tasksProgress, randomSeed, TEST_AI_RANDOM_DECK_COLORS_FOR_AI_GAME, TEST_AI_RANDOM_DECK_SETS, gameResult);
                 });
@@ -606,7 +606,7 @@ public class LoadTest {
         }
 
         private void updateInfo() {
-            // example: progress 33% [=20.cd, +21, +17], AI game #9: ---
+            // example: progress 33% [20.cd, 21.__, 17.__], AI game #09: ---
 
             int completed = this.finishes.values().stream().mapToInt(x -> x.isEmpty() ? 0 : 1).sum();
             int completedPercent = this.finishes.size() == 0 ? 0 : completed * 100 / this.finishes.size();
@@ -617,10 +617,10 @@ public class LoadTest {
                         String finishInfo = this.finishes.getOrDefault(taskNumber, "");
                         if (finishInfo.isEmpty()) {
                             // active
-                            return "+" + turn;
+                            return turn + ".__";
                         } else {
                             // done
-                            return "=" + turn + "." + finishInfo;
+                            return turn + "." + finishInfo;
                         }
                     })
                     .collect(Collectors.joining(", "));

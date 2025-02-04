@@ -34,7 +34,7 @@ public class LoadCallbackClient implements CallbackClient {
 
     private final String logsPrefix;
     private final Boolean showLogsAsHtml; // original game logs in HTML, but it can be converted to txt for more readable console
-    private String globalProgress = ""; // progress 33% [=20.cd, +21, +17], AI game #9: ---
+    private String globalProgress = ""; // example: progress 33% [20.cd, 21.__, 17.__], AI game #09: ---
 
     public LoadCallbackClient(boolean joinGameChat, String logsPrefix, Boolean showLogsAsHtml) {
         this.joinGameChat = joinGameChat;
