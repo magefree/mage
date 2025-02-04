@@ -31,6 +31,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Alacrian Jaguar", 152, Rarity.COMMON, mage.cards.a.AlacrianJaguar.class));
         cards.add(new SetCardInfo("Amonkhet Raceway", 248, Rarity.UNCOMMON, mage.cards.a.AmonkhetRaceway.class));
         cards.add(new SetCardInfo("Apocalypse Runner", 188, Rarity.UNCOMMON, mage.cards.a.ApocalypseRunner.class));
+        cards.add(new SetCardInfo("Autarch Mammoth", 153, Rarity.UNCOMMON, mage.cards.a.AutarchMammoth.class));
         cards.add(new SetCardInfo("Avishkar Raceway", 249, Rarity.COMMON, mage.cards.a.AvishkarRaceway.class));
         cards.add(new SetCardInfo("Back on Track", 76, Rarity.UNCOMMON, mage.cards.b.BackOnTrack.class));
         cards.add(new SetCardInfo("Basri, Tomorrow's Champion", 3, Rarity.RARE, mage.cards.b.BasriTomorrowsChampion.class));
