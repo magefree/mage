@@ -176,6 +176,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Rangers' Aetherhive", 217, Rarity.UNCOMMON, mage.cards.r.RangersAetherhive.class));
         cards.add(new SetCardInfo("Rangers' Refueler", 55, Rarity.UNCOMMON, mage.cards.r.RangersRefueler.class));
         cards.add(new SetCardInfo("Reckless Velocitaur", 144, Rarity.UNCOMMON, mage.cards.r.RecklessVelocitaur.class));
+        cards.add(new SetCardInfo("Redshift, Rocketeer Chief", 218, Rarity.RARE, mage.cards.r.RedshiftRocketeerChief.class));
         cards.add(new SetCardInfo("Reef Roads", 259, Rarity.UNCOMMON, mage.cards.r.ReefRoads.class));
         cards.add(new SetCardInfo("Regal Imperiosaur", 177, Rarity.RARE, mage.cards.r.RegalImperiosaur.class));
         cards.add(new SetCardInfo("Ride's End", 25, Rarity.COMMON, mage.cards.r.RidesEnd.class));
