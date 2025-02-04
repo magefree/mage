@@ -89,7 +89,10 @@ class BoommobileManaCondition extends ManaCondition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return source != null && source.isActivated();
+        if (source != null && source.isActivated()) {
+            return source.isActivatedAbility();
+        }
+        return false;
     }
 
     @Override
