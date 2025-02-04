@@ -88,7 +88,6 @@ class LifecraftEngineAddSubTypeAllEffect extends ContinuousEffectImpl {
             return false;
         }
 
-        // creatures you control
         List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(
                 filter, controllerId, game);
         for (Permanent creature : creatures) {
