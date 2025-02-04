@@ -822,7 +822,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 // too few blockers
                 if (attacker.getMinBlockedBy() > 1 && !blockers.isEmpty() && blockers.size() < attacker.getMinBlockedBy()) {
                     for (UUID blockerId : new ArrayList<>(blockers)) {
-                        game.getCombat().removeBlocker(blockerId, game); // !
+                        game.getCombat().removeBlocker(blockerId, game);
                     }
                     blockers.clear();
                     blockerOrder.clear();

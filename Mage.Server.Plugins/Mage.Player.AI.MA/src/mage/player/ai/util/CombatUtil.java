@@ -179,15 +179,15 @@ public final class CombatUtil {
                 nonBlockingDiffScore.put(s.getBlocker(), s.getDiffNonblockingScore());
             });
 
-            // split blockers usage priority
+            // split blockers by usage priority
             List<Permanent> survivedAndKillBlocker = new ArrayList<>();
-            List<Permanent> survivedBlockers2 = new ArrayList<>();
+            List<Permanent> survivedBlockers = new ArrayList<>();
             List<Permanent> diedBlockers = new ArrayList<>();
             blockerStats.forEach(stats -> {
                 if (stats.isAttackerDied() && !stats.isBlockerDied()) {
                     survivedAndKillBlocker.add(stats.getBlocker());
                 } else if (!stats.isBlockerDied()) {
-                    survivedBlockers2.add(stats.getBlocker());
+                    survivedBlockers.add(stats.getBlocker());
                 } else {
                     diedBlockers.add(stats.getBlocker());
                 }
@@ -196,10 +196,10 @@ public final class CombatUtil {
             int blockedCount = 0;
 
             // find good blocker
-            Permanent blocker = getWorstCreature(survivedAndKillBlocker, survivedBlockers2);
+            Permanent blocker = getWorstCreature(survivedAndKillBlocker, survivedBlockers);
             if (blocker != null) {
                 combatInfo.addPair(attacker, blocker);
-                removeWorstCreature(blocker, blockers, survivedAndKillBlocker, survivedBlockers2);
+                removeWorstCreature(blocker, blockers, survivedAndKillBlocker, survivedBlockers);
                 blockedCount++;
             }
 
@@ -208,13 +208,15 @@ public final class CombatUtil {
             // TODO: there are many triggers on damage, attack, etc - it can't be processed without real game simulations
             if (blocker == null) {
                 blocker = getWorstCreature(diedBlockers);
-                int diffBlockingScore = blockingDiffScore.getOrDefault(blocker, 0);
-                int diffNonBlockingScore = nonBlockingDiffScore.getOrDefault(blocker, 0);
-                if (diffBlockingScore >= 0 || diffBlockingScore > diffNonBlockingScore) {
-                    // it's good use case - can block and kill
-                    combatInfo.addPair(attacker, blocker);
-                    removeWorstCreature(blocker, blockers, diedBlockers);
-                    blockedCount++;
+                if (blocker != null) {
+                    int diffBlockingScore = blockingDiffScore.getOrDefault(blocker, 0);
+                    int diffNonBlockingScore = nonBlockingDiffScore.getOrDefault(blocker, 0);
+                    if (diffBlockingScore >= 0 || diffBlockingScore > diffNonBlockingScore) {
+                        // it's good - can sacrifice and get better game state, also protect from game loose
+                        combatInfo.addPair(attacker, blocker);
+                        removeWorstCreature(blocker, blockers, diedBlockers);
+                        blockedCount++;
+                    }
                 }
             }
 
@@ -230,10 +232,10 @@ public final class CombatUtil {
                 // effects support: can't be blocked except by xxx or more creatures
                 if (blockedCount > 0 && attacker.getMinBlockedBy() > blockedCount) {
                     // it already has 1 blocker (killer in best use case), so no needs in second killer
-                    blocker = getWorstCreature(survivedBlockers2, survivedAndKillBlocker, diedBlockers);
+                    blocker = getWorstCreature(survivedBlockers, survivedAndKillBlocker, diedBlockers);
                     if (blocker != null) {
                         combatInfo.addPair(attacker, blocker);
-                        removeWorstCreature(blocker, blockers, survivedBlockers2, survivedAndKillBlocker, diedBlockers);
+                        removeWorstCreature(blocker, blockers, survivedBlockers, survivedAndKillBlocker, diedBlockers);
                         blockedCount++;
                         continue; // try to find next required blocker
                     } else {
