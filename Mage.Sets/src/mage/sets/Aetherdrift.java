@@ -104,6 +104,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Greasewrench Goblin", 132, Rarity.UNCOMMON, mage.cards.g.GreasewrenchGoblin.class));
         cards.add(new SetCardInfo("Greenbelt Guardian", 164, Rarity.UNCOMMON, mage.cards.g.GreenbeltGuardian.class));
         cards.add(new SetCardInfo("Grim Bauble", 88, Rarity.COMMON, mage.cards.g.GrimBauble.class));
+        cards.add(new SetCardInfo("Grim Javelineer", 89, Rarity.COMMON, mage.cards.g.GrimJavelineer.class));
         cards.add(new SetCardInfo("Guardian Sunmare", 15, Rarity.RARE, mage.cards.g.GuardianSunmare.class));
         cards.add(new SetCardInfo("Guidelight Pathmaker", 206, Rarity.UNCOMMON, mage.cards.g.GuidelightPathmaker.class));
         cards.add(new SetCardInfo("Guidelight Synergist", 16, Rarity.UNCOMMON, mage.cards.g.GuidelightSynergist.class));
