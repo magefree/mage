@@ -72,7 +72,16 @@ public class ComputerPlayer extends PlayerImpl {
     // debug only: set TRUE to debug simulation's code/games (on false sim thread will be stopped after few secs by timeout)
     protected boolean COMPUTER_DISABLE_TIMEOUT_IN_GAME_SIMULATIONS = false;
 
-    final static int COMPUTER_MAX_THREADS_FOR_SIMULATIONS = 1; // TODO: rework simulations logic to use multiple calcs instead one by one
+    // AI agents uses game simulation thread for all calcs and it's high CPU consumption
+    // More AI threads - more parallel AI games can be calculate
+    // If you catch errors like ConcurrentModificationException, then AI implementation works with wrong data
+    // (e.g. with original game instead copy) or AI use wrong logic (one sim result depends on another sim result)
+    // How-to use:
+    // * 1 for debug or stable
+    // * 5 for good performance on average computer
+    // * use your's CPU cores for best performance
+    // TODO: add server config to control max AI threads (with CPU cores by default)
+    final static int COMPUTER_MAX_THREADS_FOR_SIMULATIONS = 5;
 
     private final transient Map<Mana, Card> unplayable = new TreeMap<>();
     private final transient List<Card> playableNonInstant = new ArrayList<>();
