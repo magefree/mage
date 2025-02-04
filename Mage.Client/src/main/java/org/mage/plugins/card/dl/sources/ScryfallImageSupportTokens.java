@@ -2555,6 +2555,35 @@ public class ScryfallImageSupportTokens {
             // H17
             put("H17/Dragon", "https://api.scryfall.com/cards/h17/4/en?format=image");
 
+            // INR
+            put("INR/Emblem Arlinn", "https://api.scryfall.com/cards/tinr/23/en?format=image");
+            put("INR/Blood", "https://api.scryfall.com/cards/tinr/21/en?format=image");
+            put("INR/Emblem Chandra", "https://api.scryfall.com/cards/tinr/24/en?format=image");
+            put("INR/Clue", "https://api.scryfall.com/cards/tinr/22/en?format=image");
+            put("INR/Demon", "https://api.scryfall.com/cards/tinr/6/en?format=image");
+            put("INR/Eldrazi Horror", "https://api.scryfall.com/cards/tinr/1/en?format=image");
+            put("INR/Elemental", "https://api.scryfall.com/cards/tinr/13/en?format=image");
+            put("INR/Human/1", "https://api.scryfall.com/cards/tinr/14/en?format=image");
+            put("INR/Human/2", "https://api.scryfall.com/cards/tinr/2/en?format=image");
+            put("INR/Human Cleric", "https://api.scryfall.com/cards/tinr/19/en?format=image");
+            put("INR/Human Soldier/1", "https://api.scryfall.com/cards/tinr/3/en?format=image");
+            put("INR/Human Soldier/2", "https://api.scryfall.com/cards/tinr/20/en?format=image");
+            put("INR/Human Wizard", "https://api.scryfall.com/cards/tinr/5/en?format=image");
+            put("INR/Insect", "https://api.scryfall.com/cards/tinr/15/en?format=image");
+            put("INR/Emblem Jace", "https://api.scryfall.com/cards/tinr/25/en?format=image");
+            put("INR/Spider", "https://api.scryfall.com/cards/tinr/16/en?format=image");
+            put("INR/Spirit", "https://api.scryfall.com/cards/tinr/4/en?format=image");
+            put("INR/Emblem Tamiyo", "https://api.scryfall.com/cards/tinr/26/en?format=image");
+            put("INR/Treefolk", "https://api.scryfall.com/cards/tinr/17/en?format=image");
+            put("INR/Vampire/1", "https://api.scryfall.com/cards/tinr/7/en?format=image");
+            put("INR/Vampire/2", "https://api.scryfall.com/cards/tinr/8/en?format=image");
+            put("INR/Wolf/1", "https://api.scryfall.com/cards/tinr/9/en?format=image");
+            put("INR/Wolf/2", "https://api.scryfall.com/cards/tinr/18/en?format=image");
+            put("INR/Emblem Wrenn", "https://api.scryfall.com/cards/tinr/27/en?format=image");
+            put("INR/Zombie/1", "https://api.scryfall.com/cards/tinr/12/en?format=image");
+            put("INR/Zombie/2", "https://api.scryfall.com/cards/tinr/10/en?format=image");
+            put("INR/Zombie/3", "https://api.scryfall.com/cards/tinr/11/en?format=image");
+
             // DFT
             put("DFT/Emblem Chandra", "https://api.scryfall.com/cards/tdft/13/en?format=image");
 

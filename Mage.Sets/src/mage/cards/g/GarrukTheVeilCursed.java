@@ -20,7 +20,6 @@ import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.WolfTokenWithDeathtouch;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
 

@@ -139,6 +139,11 @@
 |Generate|EMBLEM:DSK|Emblem Kaito|||KaitoBaneOfNightmaresEmblem|
 |Generate|EMBLEM:FDN|Emblem Kaito|||KaitoCunningInfiltratorEmblem|
 |Generate|EMBLEM:FDN|Emblem Vivien|||VivienReidEmblem|
+|Generate|EMBLEM:INR|Emblem Arlinn|||ArlinnEmbracedByTheMoonEmblem|
+|Generate|EMBLEM:INR|Emblem Chandra|||ChandraDressedToKillEmblem|
+|Generate|EMBLEM:INR|Emblem Jace|||JaceUnravelerOfSecretsEmblem|
+|Generate|EMBLEM:INR|Emblem Tamiyo|||TamiyoFieldResearcherEmblem|
+|Generate|EMBLEM:INR|Emblem Wrenn|||WrennAndSevenEmblem|
 |Generate|EMBLEM:DFT|Emblem Chandra|||ChandraSparkHunterEmblem|
 
 
@@ -2424,3 +2429,27 @@
 |Generate|TOK:FDN|Spirit|||SpiritWhiteToken|
 |Generate|TOK:FDN|Treasure|||TreasureToken|
 |Generate|TOK:FDN|Zombie|||ZombieToken|
+
+# INR
+|Generate|TOK:INR|Blood|||BloodToken|
+|Generate|TOK:INR|Clue|||ClueArtifactToken|
+|Generate|TOK:INR|Demon|||DemonToken|
+|Generate|TOK:INR|Eldrazi Horror|||EldraziHorrorToken|
+|Generate|TOK:INR|Elemental|||SeizeTheStormElementalToken|
+|Generate|TOK:INR|Human|1||RedHumanToken|
+|Generate|TOK:INR|Human|2||HumanToken|
+|Generate|TOK:INR|Human Cleric|||HumanClericToken|
+|Generate|TOK:INR|Human Soldier|1||HumanSoldierToken|
+|Generate|TOK:INR|Human Soldier|2||HumanSoldierTrainingToken|
+|Generate|TOK:INR|Human Wizard|||HumanWizardToken|
+|Generate|TOK:INR|Insect|||InsectToken|
+|Generate|TOK:INR|Spider|||SpiderToken|
+|Generate|TOK:INR|Spirit|||SpiritWhiteToken|
+|Generate|TOK:INR|Treefolk|||WrennAndSevenTreefolkToken|
+|Generate|TOK:INR|Vampire|1||EdgarMarkovToken|
+|Generate|TOK:INR|Vampire|2||VampireToken|
+|Generate|TOK:INR|Wolf|1||WolfTokenWithDeathtouch|
+|Generate|TOK:INR|Wolf|2||WolfToken|
+|Generate|TOK:INR|Zombie|1||ZombieToken2|
+|Generate|TOK:INR|Zombie|2||ZombieToken|
+|Generate|TOK:INR|Zombie|3||ZombieDecayedToken|
