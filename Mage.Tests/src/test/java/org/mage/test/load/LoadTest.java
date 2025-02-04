@@ -252,6 +252,7 @@ public class LoadTest {
 
             tasksProgress.update(taskNumber, state == TableState.FINISHED, gameView == null ? 0 : gameView.getTurn());
             String globalProgress = tasksProgress.getInfo();
+            monitor.client.updateGlobalProgress(globalProgress);
 
             if (gameView != null && checkGame != null) {
                 logger.info(globalProgress + ", " + checkGame.getTableName() + ": ---");
@@ -283,12 +284,13 @@ public class LoadTest {
                             if (Objects.equals(gameView.getActivePlayerId(), p.getPlayerId())) {
                                 activeInfo = " (active)";
                             }
-                            logger.info(String.format("%s, %s, status: %s - Life=%d; Lib=%d;%s",
+                            logger.info(String.format("%s, %s, status: %s - Life=%d; Lib=%d; CRs=%d%s;",
                                     globalProgress,
                                     checkGame.getTableName(),
                                     p.getName(),
                                     p.getLife(),
                                     p.getLibraryCount(),
+                                    p.getBattlefield().values().stream().filter(CardView::isCreature).mapToInt(x -> 1).sum(),
                                     activeInfo
                             ));
                         });
@@ -331,7 +333,7 @@ public class LoadTest {
         // play multiple AI games with CLIENT side code (catch every GameView changes from the server)
 
         int singleGameSID = 0; // set sid for same deck games, set 0 for random decks
-        int gamesAmount = 10; // games per run
+        int gamesAmount = 5; // games per run
         boolean isRunParallel = true; // can generate too much logs in test run, so search server logs for possible errors
 
         ExecutorService executerService;
@@ -848,6 +850,22 @@ public class LoadTest {
             return finalGameView == null ? 0 : this.finalGameView.getPlayers().get(1).getLife();
         }
 
+        public int getCreaturesCount1() {
+            return finalGameView == null ? 0 : this.finalGameView.getPlayers().get(0).getBattlefield().values()
+                    .stream()
+                    .filter(CardView::isCreature)
+                    .mapToInt(x -> 1)
+                    .sum();
+        }
+
+        public int getCreaturesCount2() {
+            return finalGameView == null ? 0 : this.finalGameView.getPlayers().get(1).getBattlefield().values()
+                    .stream()
+                    .filter(CardView::isCreature)
+                    .mapToInt(x -> 1)
+                    .sum();
+        }
+
         public int getTurn() {
             return finalGameView == null ? 0 : this.finalGameView.getTurn();
         }
@@ -863,8 +881,8 @@ public class LoadTest {
 
     private static class LoadTestGameResultsList extends HashMap<Integer, LoadTestGameResult> {
 
-        private static final String tableFormatHeader = "|%-10s|%-15s|%-20s|%-10s|%-10s|%-15s|%-15s|%-10s|%-20s|%n";
-        private static final String tableFormatData = "|%-10s|%15s|%20s|%10s|%10s|%15s|%15s|%10s|%20s|%n";
+        private static final String tableFormatHeader = "|%-10s|%-15s|%-20s|%-10s|%-10s|%-10s|%-10s|%-15s|%-15s|%-10s|%n";
+        private static final String tableFormatData = "|%-10s|%15s|%20s|%10s|%10s|%10s|%10s|%15s|%15s|%10s|%n";
 
         public LoadTestGameResult createGame(int index, String name, long randomSeed) {
             if (this.containsKey(index)) {
@@ -882,8 +900,10 @@ public class LoadTest {
                     "random sid",
                     "errors",
                     "turn",
-                    "player 1",
-                    "player 2",
+                    "life p1",
+                    "life p2",
+                    "creatures p1",
+                    "creatures p2",
                     "time, sec",
                     "time per turn, sec"
             );
@@ -901,8 +921,10 @@ public class LoadTest {
                     String.valueOf(gameResult.randomSeed), // "random sid",
                     String.valueOf(gameResult.getTotalErrorsCount()), // "errors",
                     String.valueOf(gameResult.getTurn()), //"turn",
-                    String.valueOf(gameResult.getLife1()), //"player 1",
-                    String.valueOf(gameResult.getLife2()), //"player 2",
+                    String.valueOf(gameResult.getLife1()), //"life p1",
+                    String.valueOf(gameResult.getLife2()), //"life p2",
+                    String.valueOf(gameResult.getCreaturesCount1()), //"creatures p1",
+                    String.valueOf(gameResult.getCreaturesCount2()), //"creatures p2",
                     String.format("%.3f", (float) gameResult.getDurationMs() / 1000), //"time, sec",
                     String.format("%.3f", ((float) gameResult.getDurationMs() / 1000) / gameResult.getTurn()) //"per turn, sec"
             );
@@ -916,8 +938,10 @@ public class LoadTest {
                     "total, secs: " + String.format("%.3f", (float) this.getTotalDurationMs() / 1000), // "random sid",
                     String.valueOf(this.getTotalErrorsCount()), // errors
                     String.valueOf(this.getAvgTurn()), // turn
-                    String.valueOf(this.getAvgLife1()), // player 1
-                    String.valueOf(this.getAvgLife2()), // player 2
+                    String.valueOf(this.getAvgLife1()), // life p1
+                    String.valueOf(this.getAvgLife2()), // life p2
+                    String.valueOf(this.getAvgCreaturesCount1()), // creatures p1
+                    String.valueOf(this.getAvgCreaturesCount2()), // creatures p2
                     String.valueOf(String.format("%.3f", (float) this.getAvgDurationMs() / 1000)), // time, sec
                     String.valueOf(String.format("%.3f", (float) this.getAvgDurationPerTurnMs() / 1000)) // time per turn, sec
             );
@@ -938,6 +962,14 @@ public class LoadTest {
 
         private int getAvgLife2() {
             return this.size() == 0 ? 0 : this.values().stream().mapToInt(LoadTestGameResult::getLife2).sum() / this.size();
+        }
+
+        private int getAvgCreaturesCount1() {
+            return this.size() == 0 ? 0 : this.values().stream().mapToInt(LoadTestGameResult::getCreaturesCount1).sum() / this.size();
+        }
+
+        private int getAvgCreaturesCount2() {
+            return this.size() == 0 ? 0 : this.values().stream().mapToInt(LoadTestGameResult::getCreaturesCount2).sum() / this.size();
         }
 
         private int getTotalDurationMs() {

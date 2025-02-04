@@ -33,11 +33,16 @@ public class LoadCallbackClient implements CallbackClient {
 
     private final String logsPrefix;
     private final Boolean showLogsAsHtml; // original game logs in HTML, but it can be converted to txt for more readable console
+    private String globalProgress = ""; // progress [=20, +21, +17], AI game #9: ---
 
     public LoadCallbackClient(boolean joinGameChat, String logsPrefix, Boolean showLogsAsHtml) {
         this.joinGameChat = joinGameChat;
         this.logsPrefix = logsPrefix;
         this.showLogsAsHtml = showLogsAsHtml;
+    }
+
+    protected void updateGlobalProgress(String globalProgress) {
+        this.globalProgress = globalProgress;
     }
 
     @Override
@@ -199,7 +204,7 @@ public class LoadCallbackClient implements CallbackClient {
             mes += "T" + this.gameView.getTurn() + "-" + this.gameView.getStep().getIndex() + ", L:" + p.getLibraryCount() + ", H:" + getPlayer().getHandCount() + ": ";
         }
 
-        return logsPrefix + ": " + mes;
+        return globalProgress + ", " + logsPrefix + ": " + mes;
     }
 
     public void setSession(Session session) {
