@@ -3,42 +3,26 @@ package mage.cards.l;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.RevoltCondition;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ChooseCreatureTypeEffect;
-import mage.abilities.effects.common.continuous.AddCreatureSubTypeAllMultiZoneEffect;
-import mage.abilities.effects.common.continuous.AddCreatureTypeAdditionEffect;
-import mage.abilities.effects.common.continuous.BecomesSubtypeAllEffect;
 import mage.abilities.effects.common.continuous.BoostAllOfChosenSubtypeEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.CrewAbility;
-import mage.abilities.keyword.TrampleAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
-import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterControlledCreatureSpell;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterOwnedCreatureCard;
 import mage.game.Game;
-import mage.game.command.CommandObject;
-import mage.game.command.Commander;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
-import mage.watchers.common.RevoltWatcher;
 
 import java.util.List;
 import java.util.UUID;
 
 /**
  *
- * @author fireshoes
+ * @author jackd149
  */
 public final class LifecraftEngine extends CardImpl {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
@@ -56,7 +40,9 @@ public final class LifecraftEngine extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LifecraftEngineAddSubTypeAllEffect()));
 
         // Each creature you control of the chosen type other than this Vehicle gets +1/+1.
-        this.addAbility(new SimpleStaticAbility(new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        BoostAllOfChosenSubtypeEffect effect = new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, filter, true);
+        effect.setText("Each creature you control of the chosen type other than this Vehicle gets +1/+1.");
+        this.addAbility(new SimpleStaticAbility(effect));
 
         // Crew 3
         this.addAbility(new CrewAbility(3));
