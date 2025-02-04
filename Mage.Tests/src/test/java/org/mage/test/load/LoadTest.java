@@ -250,7 +250,11 @@ public class LoadTest {
             TableView checkGame = monitor.getTable(tableId).orElse(null);
             TableState state = (checkGame == null ? null : checkGame.getTableState());
 
-            tasksProgress.update(taskNumber, state == TableState.FINISHED, gameView == null ? 0 : gameView.getTurn());
+            String finishInfo = "";
+            if (state == TableState.FINISHED) {
+                finishInfo = gameView == null ? "??" : gameView.getStep().getStepShortText().toLowerCase(Locale.ENGLISH);
+            }
+            tasksProgress.update(taskNumber, finishInfo, gameView == null ? 0 : gameView.getTurn());
             String globalProgress = tasksProgress.getInfo();
             monitor.client.updateGlobalProgress(globalProgress);
 
@@ -321,7 +325,7 @@ public class LoadTest {
         long randomSeed = RandomUtil.nextInt();
         LoadTestGameResult gameResult = gameResults.createGame(0, "test game", randomSeed);
         TasksProgress tasksProgress = new TasksProgress();
-        tasksProgress.update(1, false, 0);
+        tasksProgress.update(1, "", 0);
         playTwoAIGame("Single AI game", 1, tasksProgress, randomSeed, "WGUBR", TEST_AI_RANDOM_DECK_SETS, gameResult);
 
         printGameResults(gameResults);
@@ -361,7 +365,7 @@ public class LoadTest {
             TasksProgress tasksProgress = new TasksProgress();
             for (int i = 0; i < seedsList.size(); i++) {
                 int gameIndex = i;
-                tasksProgress.update(gameIndex + 1, false, 0);
+                tasksProgress.update(gameIndex + 1, "", 0);
                 long randomSeed = seedsList.get(i);
                 logger.info("Game " + (i + 1) + " of " + seedsList.size() + ", RANDOM seed: " + randomSeed);
                 Future gameTask = executerService.submit(() -> {
@@ -586,11 +590,11 @@ public class LoadTest {
     private static class TasksProgress {
 
         private String info;
-        private final Map<Integer, Boolean> finishes = new LinkedHashMap<>();
-        private final Map<Integer, Integer> turns = new LinkedHashMap<>();
+        private final Map<Integer, String> finishes = new LinkedHashMap<>(); // game number, finish on step
+        private final Map<Integer, Integer> turns = new LinkedHashMap<>(); // game number, current turn
 
-        synchronized public void update(Integer taskNumber, boolean newFinish, Integer newTurn) {
-            Boolean oldFinish = this.finishes.getOrDefault(taskNumber, false);
+        synchronized public void update(Integer taskNumber, String newFinish, Integer newTurn) {
+            String oldFinish = this.finishes.getOrDefault(taskNumber, "");
             Integer oldTurn = this.turns.getOrDefault(taskNumber, 0);
             if (!this.finishes.containsKey(taskNumber)
                     || !Objects.equals(oldFinish, newFinish)
@@ -602,16 +606,23 @@ public class LoadTest {
         }
 
         private void updateInfo() {
-            // example: progress 70% [=00, +01, +01, =12, =15, =01, +61]
+            // example: progress 33% [=20.cd, +21, +17], AI game #9: ---
 
-            int completed = this.finishes.values().stream().mapToInt(x -> x ? 1 : 0).sum();
+            int completed = this.finishes.values().stream().mapToInt(x -> x.isEmpty() ? 0 : 1).sum();
             int completedPercent = this.finishes.size() == 0 ? 0 : completed * 100 / this.finishes.size();
 
             String res = this.finishes.keySet().stream()
-                    .map(taskNumber -> String.format("%s%02d",
-                            this.finishes.getOrDefault(taskNumber, false) ? "=" : "+",
-                            this.turns.getOrDefault(taskNumber, 0)
-                    ))
+                    .map(taskNumber -> {
+                        String turn = String.format("%02d", this.turns.getOrDefault(taskNumber, 0));
+                        String finishInfo = this.finishes.getOrDefault(taskNumber, "");
+                        if (finishInfo.isEmpty()) {
+                            // active
+                            return "+" + turn;
+                        } else {
+                            // done
+                            return "=" + turn + "." + finishInfo;
+                        }
+                    })
                     .collect(Collectors.joining(", "));
             this.info = String.format("progress %d%% [%s]", completedPercent, res);
         }
@@ -875,6 +886,12 @@ public class LoadTest {
             return finalGameView == null ? 0 : this.finalGameView.getTurn();
         }
 
+        public String getTurnInfo() {
+            int turn = finalGameView == null ? 0 : this.finalGameView.getTurn();
+            String stepInfo = finalGameView == null ? "??" : this.finalGameView.getStep().getStepShortText().toLowerCase(Locale.ENGLISH);
+            return String.format("%02d.%s", turn, stepInfo);
+        }
+
         public int getDurationMs() {
             return finalGameView == null ? 0 : ((int) ((this.timeEnded.getTime() - this.timeStarted.getTime())));
         }
@@ -931,7 +948,7 @@ public class LoadTest {
                     String.valueOf(gameResult.randomSeed), // "random sid",
                     String.valueOf(gameResult.getTotalErrorsCount()), // "errors",
                     String.valueOf(gameResult.getTotalEffectsCount()), // "effects",
-                    String.valueOf(gameResult.getTurn()), //"turn",
+                    gameResult.getTurnInfo(), //"turn",
                     String.valueOf(gameResult.getLife1()), //"life p1",
                     String.valueOf(gameResult.getLife2()), //"life p2",
                     String.valueOf(gameResult.getCreaturesCount1()), //"creatures p1",
