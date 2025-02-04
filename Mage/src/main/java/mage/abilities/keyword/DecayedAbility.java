@@ -32,6 +32,6 @@ public class DecayedAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "decayed <i>(This creature can’t block. When it attacks, sacrifice it at end of combat.)</i>";
+        return "decayed <i>(This creature can't block. When it attacks, sacrifice it at end of combat.)</i>";
     }
 }
