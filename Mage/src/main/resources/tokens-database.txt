@@ -139,6 +139,8 @@
 |Generate|EMBLEM:DSK|Emblem Kaito|||KaitoBaneOfNightmaresEmblem|
 |Generate|EMBLEM:FDN|Emblem Kaito|||KaitoCunningInfiltratorEmblem|
 |Generate|EMBLEM:FDN|Emblem Vivien|||VivienReidEmblem|
+|Generate|EMBLEM:DFT|Emblem Chandra|||ChandraSparkHunterEmblem|
+
 
 # ALL PLANES
 # Usage hints:

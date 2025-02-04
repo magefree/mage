@@ -2555,6 +2555,9 @@ public class ScryfallImageSupportTokens {
             // H17
             put("H17/Dragon", "https://api.scryfall.com/cards/h17/4/en?format=image");
 
+            // DFT
+            put("DFT/Emblem Chandra", "https://api.scryfall.com/cards/tdft/13/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {
