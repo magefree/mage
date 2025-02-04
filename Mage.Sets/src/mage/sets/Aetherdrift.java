@@ -90,6 +90,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Endrider Spikespitter", 125, Rarity.UNCOMMON, mage.cards.e.EndriderSpikespitter.class));
         cards.add(new SetCardInfo("Engine Rat", 84, Rarity.COMMON, mage.cards.e.EngineRat.class));
         cards.add(new SetCardInfo("Fang Guardian", 162, Rarity.UNCOMMON, mage.cards.f.FangGuardian.class));
+        cards.add(new SetCardInfo("Far Fortune, End Boss", 203, Rarity.RARE, mage.cards.f.FarFortuneEndBoss.class));
         cards.add(new SetCardInfo("Fearless Swashbuckler", 204, Rarity.RARE, mage.cards.f.FearlessSwashbuckler.class));
         cards.add(new SetCardInfo("Flood the Engine", 42, Rarity.COMMON, mage.cards.f.FloodTheEngine.class));
         cards.add(new SetCardInfo("Forest", 289, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
