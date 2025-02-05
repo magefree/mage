@@ -81,6 +81,7 @@ public class ComputerPlayer extends PlayerImpl {
     // * 5 for good performance on average computer
     // * use your's CPU cores for best performance
     // TODO: add server config to control max AI threads (with CPU cores by default)
+    // TODO: rework AI implementation to use multiple sims calculation instead one by one
     final static int COMPUTER_MAX_THREADS_FOR_SIMULATIONS = 5;
 
     private final transient Map<Mana, Card> unplayable = new TreeMap<>();
