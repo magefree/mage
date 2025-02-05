@@ -51,7 +51,7 @@ public class LoadTest {
     private static final Boolean TEST_SHOW_GAME_LOGS_AS_HTML = false; // html is original format with full data, but can be too bloated
     private static final String TEST_AI_GAME_MODE = "Freeform Commander Free For All";
     private static final String TEST_AI_DECK_TYPE = "Variant Magic - Freeform Commander";
-    private static final String TEST_AI_RANDOM_DECK_SETS = "DFT,DRC"; // set for random generated decks (empty for all sets usage, PELP for lands only - communication test)
+    private static final String TEST_AI_RANDOM_DECK_SETS = ""; // sets list for random generated decks (GRN,ACR for specific sets, empty for all sets, PELP for lands only - communication test)
     private static final String TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME = "GR";  // colors list for deck generation, empty for all colors
     private static final String TEST_AI_RANDOM_DECK_COLORS_FOR_AI_GAME = "WUBRG";
     private static final String TEST_AI_CUSTOM_DECK_PATH_1 = ""; // custom deck file instead random for player 1 (empty for random)
@@ -217,7 +217,6 @@ public class LoadTest {
 
     public void playTwoAIGame(String gameName, Integer taskNumber, TasksProgress tasksProgress, long randomSeed, String deckColors, String deckAllowedSets, LoadTestGameResult gameResult) {
         Assert.assertFalse("need deck colors", deckColors.isEmpty());
-        Assert.assertFalse("need allowed sets", deckAllowedSets.isEmpty());
 
         // monitor and game source
         LoadPlayer monitor = new LoadPlayer("mon", true, gameName + ", mon");
@@ -363,6 +362,7 @@ public class LoadTest {
         LoadTestGameResultsList gameResults = new LoadTestGameResultsList();
         try {
             TasksProgress tasksProgress = new TasksProgress();
+            List<Future> gameTasks = new ArrayList<>();
             for (int i = 0; i < seedsList.size(); i++) {
                 int gameIndex = i;
                 tasksProgress.update(gameIndex + 1, "", 0);
@@ -373,6 +373,7 @@ public class LoadTest {
                     LoadTestGameResult gameResult = gameResults.createGame(gameIndex + 1, gameName, randomSeed);
                     playTwoAIGame(gameName, gameIndex + 1, tasksProgress, randomSeed, TEST_AI_RANDOM_DECK_COLORS_FOR_AI_GAME, TEST_AI_RANDOM_DECK_SETS, gameResult);
                 });
+                gameTasks.add(gameTask);
 
                 if (runMaxParallelGames <= 1) {
                     // run one by one
@@ -382,7 +383,21 @@ public class LoadTest {
             if (runMaxParallelGames > 1) {
                 // run parallel
                 executerService.shutdown();
-                Assert.assertTrue(executerService.awaitTermination(1, TimeUnit.HOURS));
+                Assert.assertTrue("running too long", executerService.awaitTermination(1, TimeUnit.HOURS));
+            }
+
+            // check errors
+            int errorsCount = 0;
+            for (Future task : gameTasks) {
+                try {
+                    task.get();
+                } catch (InterruptedException | ExecutionException e) {
+                    errorsCount++;
+                    logger.error(e, e);
+                }
+            }
+            if (errorsCount > 0) {
+                Assert.fail(String.format("Found %d critical errors in running games, see logs above", errorsCount));
             }
         } catch (InterruptedException | ExecutionException e) {
             logger.error(e, e);
