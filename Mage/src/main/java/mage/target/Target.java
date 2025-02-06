@@ -79,6 +79,9 @@ public interface Target extends Serializable {
 
     boolean isLegal(Ability source, Game game);
 
+    /**
+     * AI related code. Returns all possible different target combinations
+     */
     List<? extends Target> getTargetOptions(Ability source, Game game);
 
     boolean canChoose(UUID sourceControllerId, Game game);

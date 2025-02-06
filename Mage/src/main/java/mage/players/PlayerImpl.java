@@ -4457,11 +4457,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     /**
-     * Only used for AIs
-     *
-     * @param ability
-     * @param game
-     * @return
+     * AI related code
      */
     @Override
     public List<Ability> getPlayableOptions(Ability ability, Game game) {
@@ -4482,6 +4478,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         return options;
     }
 
+    /**
+     * AI related code
+     */
     private void addModeOptions(List<Ability> options, Ability option, Game game) {
         // TODO: support modal spells with more than one selectable mode (also must use max modes filter)
         for (Mode mode : option.getModes().values()) {
@@ -4504,11 +4503,18 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
+    /**
+     * AI related code
+     */
     protected void addVariableXOptions(List<Ability> options, Ability option, int targetNum, Game game) {
         addTargetOptions(options, option, targetNum, game);
     }
 
+    /**
+     * AI related code
+     */
     protected void addTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
+        // TODO: target options calculated for triggered ability too, but do not used in real game
         for (Target target : option.getTargets().getUnchosen(game).get(targetNum).getTargetOptions(option, game)) {
             Ability newOption = option.copy();
             if (target instanceof TargetAmount) {
@@ -4521,7 +4527,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     newOption.getTargets().get(targetNum).addTarget(targetId, newOption, game, true);
                 }
             }
-            if (targetNum < option.getTargets().size() - 2) {
+            if (targetNum < option.getTargets().size() - 2) { // wtf
                 addTargetOptions(options, newOption, targetNum + 1, game);
             } else if (!option.getCosts().getTargets().isEmpty()) {
                 addCostTargetOptions(options, newOption, 0, game);
@@ -4531,6 +4537,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
+    /**
+     * AI related code
+     */
     private void addCostTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
         for (UUID targetId : option.getCosts().getTargets().get(targetNum).possibleTargets(playerId, option, game)) {
             Ability newOption = option.copy();
