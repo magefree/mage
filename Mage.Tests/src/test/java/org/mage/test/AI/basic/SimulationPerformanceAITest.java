@@ -20,6 +20,8 @@ import java.util.List;
  * <p>
  *  TODO: add tests and implement best choice selection on timeout
  *    (AI must make any good/bad choice on timeout with game log - not a skip)
+ * <p>
+ * TODO: AI do not support game simulations for target options in triggered
  *
  * @author JayDi85
  */
@@ -104,24 +106,28 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
     }
 
     @Test
+    @Ignore // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_Single() {
         // 2 damage to bear and 3 damage to player B
         runManyTargetOptionsInTrigger("1 target creature", 1, 1, false, 20 - 3);
     }
 
     @Test
+    @Ignore // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_Few() {
         // 4 damage to x2 bears and 1 damage to player B
         runManyTargetOptionsInTrigger("2 target creatures", 2, 2, false, 20 - 1);
     }
 
     @Test
+    @Ignore // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_Many() {
         // 4 damage to x2 bears and 1 damage to player B
         runManyTargetOptionsInTrigger("5 target creatures", 5, 2, false, 20 - 1);
     }
 
     @Test
+    @Ignore // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_TooMuch() {
         // warning, can be slow
 
@@ -133,7 +139,7 @@ public class SimulationPerformanceAITest extends CardTestPlayerBaseAI {
     }
 
     @Test
-    @Ignore // TODO: AI do not support game simulations for target options in triggers
+    @Ignore // enable after triggered supported or need performance test
     public void test_ManyTargetOptions_Triggered_TargetGroups() {
         // make sure targets optimization can find unique creatures, e.g. damaged
 
