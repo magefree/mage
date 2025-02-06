@@ -4,6 +4,8 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.repository.TokenInfo;
+import mage.cards.repository.TokenRepository;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -20,6 +22,18 @@ public class Speed extends Designation {
     public Speed() {
         super(DesignationType.SPEED);
         addAbility(new SpeedTriggeredAbility());
+
+        TokenInfo foundInfo = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_SPEED, null);
+        if (foundInfo != null) {
+            this.setExpansionSetCode(foundInfo.getSetCode());
+            this.setUsesVariousArt(true);
+            this.setCardNumber("");
+            this.setImageFileName(""); // use default
+            this.setImageNumber(foundInfo.getImageNumber());
+        } else {
+            // how-to fix: add image to the tokens-database TokenRepository->loadXmageTokens
+            throw new IllegalArgumentException("Wrong code usage: can't find xmage token info for: " + TokenRepository.XMAGE_IMAGE_NAME_SPEED);
+        }
     }
 
     private Speed(final Speed card) {
