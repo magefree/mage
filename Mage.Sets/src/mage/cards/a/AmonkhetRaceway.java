@@ -1,11 +1,10 @@
 package mage.cards.a;
 
 import mage.abilities.Ability;
+import mage.abilities.common.MaxSpeedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.abilities.effects.common.continuous.MaxSpeedGainAbilityEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.StartYourEnginesAbility;
 import mage.abilities.mana.ColorlessManaAbility;
@@ -31,9 +30,11 @@ public final class AmonkhetRaceway extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
 
         // Max speed -- {T}: Target creature gains haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(new GainAbilityTargetEffect(HasteAbility.getInstance()), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(
+                new GainAbilityTargetEffect(HasteAbility.getInstance()), new TapSourceCost()
+        );
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(new MaxSpeedGainAbilityEffect(ability)));
+        this.addAbility(new MaxSpeedAbility(ability));
     }
 
     private AmonkhetRaceway(final AmonkhetRaceway card) {

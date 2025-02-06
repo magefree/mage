@@ -1,5 +1,6 @@
 package mage.verify.mtgjson;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,6 +20,9 @@ public final class MtgJsonSet {
     public String name;
     public String releaseDate;
     public int totalSetSize;
+
+    // mtgjson contains detailed stats, but verify needs only booster types info
+    public HashMap<String, Object> booster;
 
     public String block;
 

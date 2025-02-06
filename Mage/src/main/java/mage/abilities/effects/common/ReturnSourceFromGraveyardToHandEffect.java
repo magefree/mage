@@ -1,6 +1,5 @@
 package mage.abilities.effects.common;
 
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -16,7 +15,7 @@ public class ReturnSourceFromGraveyardToHandEffect extends OneShotEffect {
 
     public ReturnSourceFromGraveyardToHandEffect() {
         super(Outcome.PutCreatureInPlay);
-        staticText = "return {this} from your graveyard to your hand";
+        staticText = "return this card from your graveyard to your hand";
     }
 
     protected ReturnSourceFromGraveyardToHandEffect(final ReturnSourceFromGraveyardToHandEffect effect) {

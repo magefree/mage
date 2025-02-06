@@ -64,7 +64,7 @@ class VoiceOfManyEffect extends OneShotEffect {
                 StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game
         ).size();
         int toDraw = game
-                .getOpponents(source.getControllerId())
+                .getOpponents(source.getControllerId(), true)
                 .stream()
                 .mapToInt(uuid -> game.getBattlefield().getAllActivePermanents(
                         StaticFilters.FILTER_PERMANENT_CREATURE, uuid, game

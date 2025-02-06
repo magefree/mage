@@ -2862,6 +2862,13 @@ public abstract class GameImpl implements Game {
                     }
                 }
             }
+
+            // Start Your Engines // Max Speed
+            if (perm.getAbilities(this).containsClass(StartYourEnginesAbility.class)) {
+                Optional.ofNullable(perm.getControllerId())
+                        .map(this::getPlayer)
+                        .ifPresent(player -> player.initSpeed(this));
+            }
         }
         //201300713 - 704.5k
         // If a player controls two or more legendary permanents with the same name, that player
@@ -3169,6 +3176,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.INFO, message, this);
     }
 
@@ -3177,6 +3185,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.STATUS, message, withTime, withTurnInfo, this);
     }
 
@@ -3185,7 +3194,7 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        logger.trace("fireUpdatePlayersEvent");
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.UPDATE, null, this);
         getState().clearLookedAt();
         getState().clearRevealed();
@@ -3196,13 +3205,25 @@ public abstract class GameImpl implements Game {
         if (simulation) {
             return;
         }
-        logger.trace("fireGameEndIfo");
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.END_GAME_INFO, null, this);
     }
 
     @Override
     public void fireErrorEvent(String message, Exception ex) {
+        makeSureCalledOutsideLayerEffects();
         tableEventSource.fireTableEvent(EventType.ERROR, message, ex, this);
+    }
+
+    private void makeSureCalledOutsideLayerEffects() {
+        // very slow, enable/comment it for debug or load/stability tests only
+        // TODO: enable check and remove/rework all wrong usages
+        if (true) return;
+        Arrays.stream(Thread.currentThread().getStackTrace()).forEach(e -> {
+            if (e.toString().contains("GameState.applyEffects")) {
+                throw new IllegalStateException("Wrong code usage: client side events can't be called from layers effects (wrong informPlayers usage?)");
+            }
+        });
     }
 
     @Override
@@ -3528,11 +3549,6 @@ public abstract class GameImpl implements Game {
 
     }
 
-    protected void removeCreaturesFromCombat() {
-        //20091005 - 511.3
-        getCombat().endCombat(this);
-    }
-
     @Override
     public ContinuousEffects getContinuousEffects() {
         return state.getContinuousEffects();
@@ -3673,6 +3689,11 @@ public abstract class GameImpl implements Game {
     @Override
     public int getTotalErrorsCount() {
         return this.totalErrorsCount.get();
+    }
+
+    @Override
+    public int getTotalEffectsCount() {
+        return this.getContinuousEffects().getTotalEffectsCount();
     }
 
     @Override
@@ -3871,6 +3892,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void initTimer(UUID playerId) {
         if (priorityTime > 0) {
+            makeSureCalledOutsideLayerEffects();
             tableEventSource.fireTableEvent(EventType.INIT_TIMER, playerId, null, this);
         }
     }
@@ -3878,6 +3900,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void resumeTimer(UUID playerId) {
         if (priorityTime > 0) {
+            makeSureCalledOutsideLayerEffects();
             tableEventSource.fireTableEvent(EventType.RESUME_TIMER, playerId, null, this);
         }
     }
@@ -3885,6 +3908,7 @@ public abstract class GameImpl implements Game {
     @Override
     public void pauseTimer(UUID playerId) {
         if (priorityTime > 0) {
+            makeSureCalledOutsideLayerEffects();
             tableEventSource.fireTableEvent(EventType.PAUSE_TIMER, playerId, null, this);
         }
     }

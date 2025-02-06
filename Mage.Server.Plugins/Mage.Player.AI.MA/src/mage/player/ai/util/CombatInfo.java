@@ -15,11 +15,7 @@ public class CombatInfo {
     private Map<Permanent, List<Permanent>> combat = new HashMap<>();
 
     public void addPair(Permanent attacker, Permanent blocker) {
-        List<Permanent> blockers = combat.get(attacker);
-        if (blockers == null) {
-            blockers = new ArrayList<>();
-            combat.put(attacker, blockers);
-        }
+        List<Permanent> blockers = combat.computeIfAbsent(attacker, k -> new ArrayList<>());
         blockers.add(blocker);
     }
 

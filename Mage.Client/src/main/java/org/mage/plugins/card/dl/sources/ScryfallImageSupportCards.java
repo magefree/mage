@@ -479,6 +479,7 @@ public class ScryfallImageSupportCards {
             add("KLR"); // Kaladesh Remastered
             add("CMR"); // Commander Legends
             add("CC1"); // Commander Collection: Green
+            add("PJ21"); // Judge Gift Cards 2021
             add("PL21"); // Year of the Ox 2021
             add("KHM"); // Kaldheim
             add("KHC"); // Kaldheim Commander
@@ -490,6 +491,7 @@ public class ScryfallImageSupportCards {
             add("C21"); // Commander 2021
             add("MH2"); // Modern Horizons 2
             add("H1R"); // Modern Horizons 1 Timeshifts
+            add("PW21"); // Wizards Play Network 2021
             add("PLG21"); // Love Your LGS 2021
             add("AFR"); // Adventures in the Forgotten Realms
             add("AFC"); // Forgotten Realms Commander
@@ -499,12 +501,15 @@ public class ScryfallImageSupportCards {
             add("VOW"); // Innistrad: Crimson Vow
             add("VOC"); // Crimson Vow Commander
             add("YMID"); // Alchemy: Innistrad
+            add("P22"); // Judge Gift Cards 2022
             add("DBL"); // Innistrad: Double Feature
             add("CC2"); // Commander Collection: Black
             add("NEO"); // Kamigawa: Neon Dynasty
             add("YNEO"); // Alchemy: Kamigawa
             add("NEC"); // Neon Dynasty Commander
             add("PL22"); // Year of the Tiger 2022
+            add("PW22"); // Wizards Play Network 2022
+            add("GDY"); // Game Day Promos
             add("SNC"); // Streets of New Capenna
             add("NCC"); // New Capenna Commander
             add("SLX"); // Universes Within
@@ -522,6 +527,8 @@ public class ScryfallImageSupportCards {
             add("BOT"); // Transformers
             add("J22"); // Jumpstart 2022
             add("SCD"); // Starter Commander Decks
+            add("PW23"); // Wizards Play Network 2023
+            add("P23"); // Judge Gift Cards 2023
             add("SLC"); // Secret Lair 30th Anniversary Countdown Kit
             add("DMR"); // Dominaria Remastered
             add("ONE"); // Phyrexia: All Will Be One
@@ -547,6 +554,7 @@ public class ScryfallImageSupportCards {
             add("LCC"); // The The Lost Caverns of Ixalan Commander
             add("REX"); // Jurassic World Collection
             add("SPG"); // Special Guests
+            add("PW24"); // Wizards Play Network 2024
             add("RVR"); // Ravnica Remastered
             add("PIP"); // Fallout
             add("MKM"); // Murders at Karlov Manor
@@ -567,6 +575,7 @@ public class ScryfallImageSupportCards {
             add("FDN"); // Foundations
             add("J25"); // Foundations Jumpstart
             add("PIO"); // Pioneer Masters
+            add("PW25"); // Wizards Play Network 2025
             add("INR"); // Innistrad Remastered
             add("DFT"); // Aetherdrift
             add("DRC"); // Aetherdrift Commander

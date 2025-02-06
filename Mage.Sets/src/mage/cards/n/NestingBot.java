@@ -2,10 +2,9 @@ package mage.cards.n;
 
 import mage.MageInt;
 import mage.abilities.common.DiesSourceTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.MaxSpeedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.continuous.MaxSpeedGainAbilityEffect;
 import mage.abilities.keyword.StartYourEnginesAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +34,7 @@ public final class NestingBot extends CardImpl {
         this.addAbility(new DiesSourceTriggeredAbility(new CreateTokenEffect(new ServoToken())));
 
         // Max speed -- This creature gets +1/+0.
-        this.addAbility(new SimpleStaticAbility(new MaxSpeedGainAbilityEffect(new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield))));
+        this.addAbility(new MaxSpeedAbility(new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield)));
     }
 
     private NestingBot(final NestingBot card) {

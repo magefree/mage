@@ -216,6 +216,14 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean isDrawsOnOpponentsTurn();
 
+    int getSpeed();
+
+    void initSpeed(Game game);
+
+    void increaseSpeed(Game game);
+
+    void decreaseSpeed(Game game);
+
     /**
      * Returns alternative casting costs a player can cast spells for
      *

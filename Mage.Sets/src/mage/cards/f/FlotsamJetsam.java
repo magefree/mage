@@ -77,7 +77,7 @@ class JetsamEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        Set<Player> opponents = game.getOpponents(source.getControllerId())
+        Set<Player> opponents = game.getOpponents(source.getControllerId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)

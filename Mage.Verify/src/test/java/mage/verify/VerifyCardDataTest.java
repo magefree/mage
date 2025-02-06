@@ -143,14 +143,12 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-        skipListAddName(SKIP_LIST_TYPE, "DFT", "Venomsac Lagac"); // temporary
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
-        skipListAddName(SKIP_LIST_SUBTYPE, "DFT", "Venomsac Lagac"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -674,6 +672,7 @@ public class VerifyCardDataTest {
 
                 // CHECK: only lands can use full art in current version;
                 // Another cards must be in text render mode as normal, example: https://scryfall.com/card/sld/76/athreos-god-of-passage
+                // TODO: add support textless cards like https://scryfall.com/card/sch/12/thalia-and-the-gitrog-monster
                 boolean isLand = card.getRarity().equals(Rarity.LAND);
                 if (card.isFullArt() && !isLand) {
                     errorsList.add("Error: only lands can use full art setting: "
@@ -963,7 +962,7 @@ public class VerifyCardDataTest {
             }
         }
 
-        // CHECK: wrong set name
+        // CHECK: unknown set or wrong name
         for (ExpansionSet set : sets) {
             if (set.getSetType().equals(SetType.CUSTOM_SET)) {
                 // skip unofficial sets like Star Wars
@@ -989,6 +988,7 @@ public class VerifyCardDataTest {
         }
 
         // CHECK: parent and block info
+        // TODO: it's UX problem, see https://github.com/magefree/mage/issues/10184
         for (ExpansionSet set : sets) {
             if (true) {
                 continue; // TODO: comments it and run to find a problems
@@ -1035,6 +1035,57 @@ public class VerifyCardDataTest {
                 ));
             }
         }
+
+        // CHECK: miss booster settings
+        Set<String> ignoreBoosterSets = new HashSet<>();
+        // temporary, TODO: remove after set release and mtgjson get info
+        ignoreBoosterSets.add("Innistrad Remastered");
+        // jumpstart, TODO: must implement from JumpstartPoolGenerator, see #13264
+        ignoreBoosterSets.add("Jumpstart");
+        ignoreBoosterSets.add("Jumpstart 2022");
+        ignoreBoosterSets.add("Foundations Jumpstart");
+        ignoreBoosterSets.add("Ravnica: Clue Edition");
+        // joke or un-sets, low implemented cards
+        ignoreBoosterSets.add("Unglued");
+        ignoreBoosterSets.add("Unhinged");
+        ignoreBoosterSets.add("Unstable");
+        ignoreBoosterSets.add("Unfinity");
+        // other
+        ignoreBoosterSets.add("Secret Lair Drop"); // cards shop
+        ignoreBoosterSets.add("Zendikar Rising Expeditions"); // box toppers
+        ignoreBoosterSets.add("March of the Machine: The Aftermath"); // epilogue boosters aren't for draft
+
+        for (ExpansionSet set : sets) {
+            MtgJsonSet jsonSet = MtgJsonService.sets().getOrDefault(set.getCode().toUpperCase(Locale.ENGLISH), null);
+            if (jsonSet == null) {
+                continue;
+            }
+            boolean needBooster = jsonSet.booster != null && !jsonSet.booster.isEmpty();
+            if (set.hasBoosters() != needBooster) {
+                if (ignoreBoosterSets.contains(set.getName())) {
+                    continue;
+                }
+                // error example: wrong booster settings (set MUST HAVE booster, but haven't) - 2020 - J22 - Jumpstart 2022 - boosters: [jumpstart]
+                errorsList.add(String.format("Error: wrong booster settings (set %s booster, but %s) - %s%s",
+                        (needBooster ? "MUST HAVE" : "MUST HAVEN'T"),
+                        (set.hasBoosters() ? "have" : "haven't"),
+                        set.getReleaseYear() + " - " + set.getCode() + " - " + set.getName(),
+                        (jsonSet.booster == null ? "" : " - boosters: " + jsonSet.booster.keySet())
+                ));
+            }
+        }
+
+        // CHECK: missing important sets for draft format
+        Set<String> implementedSets = sets.stream().map(ExpansionSet::getCode).collect(Collectors.toSet());
+        MtgJsonService.sets().values().forEach(jsonSet -> {
+            if (jsonSet.booster != null && !jsonSet.booster.isEmpty() && !implementedSets.contains(jsonSet.code)) {
+                errorsList.add(String.format("Error: missing set implementation (important for draft format) - %s - %s - boosters: %s",
+                        jsonSet.code,
+                        jsonSet.name,
+                        jsonSet.booster.keySet()
+                ));
+            }
+        });
 
         // TODO: add test to check num cards for rarity (rarityStats > 0 and numRarity > 0)
         printMessages(warningsList);
@@ -2043,7 +2094,7 @@ public class VerifyCardDataTest {
                     continue;
                 }
                 boolean isDiesAbility = rules.contains("die ")
-                        || rules.contains("dies ")
+                        || (rules.contains("dies ") && !rules.contains("dies this turn"))
                         || rules.contains("die,")
                         || rules.contains("dies,");
                 boolean isPutToGraveAbility = rules.contains("put into")
