@@ -1,10 +1,13 @@
 package mage.player.ai.util;
 
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.InfectAbility;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.combat.Combat;
+import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.turn.CombatDamageStep;
@@ -203,7 +206,7 @@ public final class CombatUtil {
                 blockedCount++;
             }
 
-            // find good sacrifices
+            // find good sacrifices (chump blocks also supported due bad game score on loose)
             // TODO: add chump blocking support here?
             // TODO: there are many triggers on damage, attack, etc - it can't be processed without real game simulations
             if (blocker == null) {
@@ -339,13 +342,38 @@ public final class CombatUtil {
         // so blocker will block same creature with same score without penalty
         int startScore = GameStateEvaluator2.evaluate(defendingPlayerId, sim, false).getTotalScore();
 
-        // fake game simulation (manual PT calculation)
+        // fake combat simulation (simple damage simulation)
+        Permanent simAttacker = sim.getPermanent(attacker.getId());
+        Permanent simBlocker = sim.getPermanent(blocker.getId());
+        if (simAttacker == null || simBlocker == null) {
+            throw new IllegalArgumentException("Broken sim game, can't find attacker or blocker");
+        }
+        // don't ask about that hacks - just replace to real combat simulation someday (another hack but with full stack resolve)
+        // first damage step
+        simulateCombatDamage(sim, simBlocker, simAttacker, true);
+        simulateCombatDamage(sim, simAttacker, simBlocker, true);
+        simAttacker.applyDamage(sim);
+        simBlocker.applyDamage(sim);
+        sim.checkStateAndTriggered();
+        sim.processAction();
+        // second damage step
+        if (sim.getPermanent(simBlocker.getId()) != null && sim.getPermanent(simAttacker.getId()) != null) {
+            simulateCombatDamage(sim, simBlocker, simAttacker, false);
+            simulateCombatDamage(sim, simAttacker, simBlocker, false);
+            simAttacker.applyDamage(sim);
+            simBlocker.applyDamage(sim);
+            sim.checkStateAndTriggered();
+            sim.processAction();
+        }
+
+        /* old manual PT compare
         if (attacker.getPower().getValue() >= blocker.getToughness().getValue()) {
             sim.getBattlefield().removePermanent(blocker.getId());
         }
         if (attacker.getToughness().getValue() <= blocker.getPower().getValue()) {
             sim.getBattlefield().removePermanent(attacker.getId());
         }
+         */
 
         // fake non-block simulation
         simNonBlocking.getPlayer(defendingPlayerId).damage(
@@ -356,6 +384,7 @@ public final class CombatUtil {
                 true,
                 true
         );
+        simNonBlocking.checkStateAndTriggered();
         simNonBlocking.processAction();
 
         int endBlockingScore = GameStateEvaluator2.evaluate(defendingPlayerId, sim, false).getTotalScore();
@@ -366,6 +395,15 @@ public final class CombatUtil {
                 endBlockingScore - startScore,
                 endNonBlockingScore - startScore
         );
+    }
+
+    private static void simulateCombatDamage(Game sim, Permanent fromCreature, Permanent toCreature, boolean isFirstDamageStep) {
+        Ability fakeAbility = new SimpleStaticAbility(null);
+        if (CombatGroup.dealsDamageThisStep(fromCreature, isFirstDamageStep, sim)) {
+            fakeAbility.setSourceId(fromCreature.getId());
+            fakeAbility.setControllerId(fromCreature.getControllerId());
+            toCreature.damage(fromCreature.getPower().getValue(), fromCreature.getId(), fakeAbility, sim, true, true);
+        }
     }
 
     private static void simulateStep(Game sim, Step step) {
