@@ -5,7 +5,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.GreatestPowerAmongControlledCreaturesValue;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.CyclingAbility;
@@ -67,9 +66,7 @@ class RhetTombMysticEffect extends ContinuousEffectImpl {
             return false;
 
         controller.getHand().getCards(StaticFilters.FILTER_CARD_CREATURE, game)
-                .forEach(card -> {
-                    game.getState().addOtherAbility(card, new CyclingAbility(new ManaCostsImpl<>("{1}{B}")));
-                });
+                .forEach(card -> game.getState().addOtherAbility(card, new CyclingAbility(new ManaCostsImpl<>("{1}{B}"))));
 
         return true;
     }
