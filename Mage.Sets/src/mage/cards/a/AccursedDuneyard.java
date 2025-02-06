@@ -40,7 +40,7 @@ public final class AccursedDuneyard extends CardImpl {
         // {T}: Add {C}.
         this.addAbility(new ColorlessManaAbility());
         // {2}, {T}: Regenerate target Shade, Skeleton, Specter, Spirit, Vampire, Wraith, or Zombie.
-        Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new ManaCostsImpl<>("{2}"));
+        final Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new ManaCostsImpl<>("{2}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
