@@ -6,10 +6,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class TheRollercrusherRide extends CardImpl {
         // it deals double that damage instead.
         this.addAbility(new SimpleStaticAbility(new TheRollercrusherRideEffect())
                 .setAbilityWord(AbilityWord.DELIRIUM)
-                .addHint(CardTypesInGraveyardHint.YOU));
+                .addHint(CardTypesInGraveyardCount.YOU.getHint()));
 
         // When The Rollercrusher Ride enters, it deals X damage to each of up to X target creatures.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DamageTargetEffect(GetXValue.instance)

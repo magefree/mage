@@ -2,12 +2,12 @@ package mage.cards.p;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.MillCardsControllerEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -31,7 +31,7 @@ public final class PatchworkBeastie extends CardImpl {
         // Delirium -- Patchwork Beastie can't attack or block unless there are four or more card types among cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(new PatchworkBeastieEffect())
                 .setAbilityWord(AbilityWord.DELIRIUM)
-                .addHint(CardTypesInGraveyardHint.YOU));
+                .addHint(CardTypesInGraveyardCount.YOU.getHint()));
 
         // At the beginning of your upkeep, you may mill a card.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

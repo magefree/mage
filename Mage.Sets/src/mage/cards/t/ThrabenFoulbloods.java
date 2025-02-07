@@ -7,16 +7,15 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 
 /**
  * @author LevelX2
@@ -35,7 +34,7 @@ public final class ThrabenFoulbloods extends CardImpl {
         Ability ability = new SimpleStaticAbility(effect);
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(new MenaceAbility()), DeliriumCondition.instance,
                 "and has menace as long as there are four or more card types among cards in your graveyard. <i>(A creature with menace can't be blocked except by two or more creatures.)</i>"));
-        ability.addHint(CardTypesInGraveyardHint.YOU);
+        ability.addHint(CardTypesInGraveyardCount.YOU.getHint());
         this.addAbility(ability);
     }
 

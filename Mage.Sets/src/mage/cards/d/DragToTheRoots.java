@@ -2,9 +2,9 @@ package mage.cards.d;
 
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -26,7 +26,7 @@ public final class DragToTheRoots extends CardImpl {
         this.addAbility(new SimpleStaticAbility(
                 Zone.ALL, new SpellCostReductionSourceEffect(2, DeliriumCondition.instance)
                 .setText("this spell costs {2} less to cast as long as there are four or more card types among cards in your graveyard")
-        ).setRuleAtTheTop(true).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardHint.YOU));
+        ).setRuleAtTheTop(true).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
 
         // Destroy target nonland permanent.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

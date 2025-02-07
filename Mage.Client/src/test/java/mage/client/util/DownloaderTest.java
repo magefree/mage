@@ -13,6 +13,7 @@ import java.io.InputStream;
 /**
  * @author JayDi85
  */
+@Ignore // TODO: too many fails due third party servers downtime, migrate to more stable resources or just run it manually
 public class DownloaderTest {
 
     @Test

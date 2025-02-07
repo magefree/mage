@@ -7,7 +7,6 @@ import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CastSourceTriggeredAbility;
 import mage.abilities.effects.common.cost.SpellCostReductionForEachSourceEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.TrampleAbility;
@@ -46,7 +45,7 @@ public final class EmrakulThePromisedEnd extends CardImpl {
                 new SpellCostReductionForEachSourceEffect(
                         1, CardTypesInGraveyardCount.YOU
                 ).setText("this spell costs {1} less to cast for each card type among cards in your graveyard")
-        ).setRuleAtTheTop(true).addHint(CardTypesInGraveyardHint.YOU));
+        ).setRuleAtTheTop(true).addHint(CardTypesInGraveyardCount.YOU.getHint()));
 
         // When you cast Emrakul, you gain control of target opponent during that player's next turn. After that turn, that player takes an extra turn.
         Ability ability = new CastSourceTriggeredAbility(new EmrakulThePromisedEndGainControlEffect());

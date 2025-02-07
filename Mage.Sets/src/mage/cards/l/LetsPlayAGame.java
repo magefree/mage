@@ -2,12 +2,12 @@ package mage.cards.l;
 
 import mage.abilities.Mode;
 import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
 import mage.abilities.effects.common.discard.DiscardEachPlayerEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -32,7 +32,7 @@ public final class LetsPlayAGame extends CardImpl {
         );
         this.getSpellAbility().getModes().setMoreCondition(3, DeliriumCondition.instance);
         this.getSpellAbility().setAbilityWord(AbilityWord.DELIRIUM);
-        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
+        this.getSpellAbility().addHint(CardTypesInGraveyardCount.YOU.getHint());
 
         // * Creatures your opponents control get -1/-1 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(
