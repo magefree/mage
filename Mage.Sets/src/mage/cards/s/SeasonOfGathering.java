@@ -56,6 +56,7 @@ public final class SeasonOfGathering extends CardImpl {
                         .setText("Draw cards equal to the greatest power among creatures you control.")
         );
         this.getSpellAbility().addMode(mode3.withPawPrintValue(3));
+        this.getSpellAbility().addHint(GreatestPowerAmongControlledCreaturesValue.getHint());
     }
 
     private SeasonOfGathering(final SeasonOfGathering card) {

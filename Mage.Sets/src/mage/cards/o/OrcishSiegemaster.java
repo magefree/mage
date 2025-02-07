@@ -63,7 +63,7 @@ public final class OrcishSiegemaster extends CardImpl {
                         GreatestPowerAmongControlledCreaturesValue.instance,
                         StaticValue.get(0), Duration.EndOfTurn, "it"
                 )
-        ));
+        ).addHint(GreatestPowerAmongControlledCreaturesValue.getHint()));
     }
 
     private OrcishSiegemaster(final OrcishSiegemaster card) {

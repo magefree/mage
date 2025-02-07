@@ -7,13 +7,11 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.keyword.NightboundAbility;
 import mage.abilities.keyword.TransformAbility;
-import mage.cards.Card;
-import mage.cards.LevelerCard;
-import mage.cards.ModalDoubleFacedCard;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.constants.SpellAbilityType;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
+import mage.players.Player;
 
 import java.util.UUID;
 
@@ -185,7 +183,10 @@ public class PermanentCard extends PermanentImpl {
             // 701.34g. If a manifested permanent that's represented by an instant or sorcery card would turn face up,
             //   its controller reveals it and leaves it face down. Abilities that trigger whenever a permanent
             //   is turned face up won't trigger.
-            // TODO: add reveal effect
+            Player player = game.getPlayer(source.getControllerId());
+            if (player != null) {
+                player.revealCards(source, new CardsImpl(this), game);
+            }
             return false;
         }
         if (super.turnFaceUp(source, game, playerId)) {

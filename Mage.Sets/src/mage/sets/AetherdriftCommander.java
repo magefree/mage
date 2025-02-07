@@ -21,6 +21,7 @@ public final class AetherdriftCommander extends ExpansionSet {
 
         cards.add(new SetCardInfo("Academy Ruins", 58, Rarity.RARE, mage.cards.a.AcademyRuins.class));
         cards.add(new SetCardInfo("Accursed Duneyard", 20, Rarity.RARE, mage.cards.a.AccursedDuneyard.class));
+        cards.add(new SetCardInfo("Adaptive Omnitool", 16, Rarity.RARE, mage.cards.a.AdaptiveOmnitool.class));
         cards.add(new SetCardInfo("Adarkar Wastes", 144, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Aether Hub", 145, Rarity.UNCOMMON, mage.cards.a.AetherHub.class));
         cards.add(new SetCardInfo("Aethersquall Ancient", 68, Rarity.RARE, mage.cards.a.AethersquallAncient.class));
@@ -116,6 +117,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Panharmonicon", 135, Rarity.RARE, mage.cards.p.Panharmonicon.class));
         cards.add(new SetCardInfo("Path of Ancestry", 61, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Peema Aether-Seer", 113, Rarity.UNCOMMON, mage.cards.p.PeemaAetherSeer.class));
+        cards.add(new SetCardInfo("Peema Trailblazer", 14, Rarity.RARE, mage.cards.p.PeemaTrailblazer.class));
         cards.add(new SetCardInfo("Pia and Kiran Nalaar", 105, Rarity.RARE, mage.cards.p.PiaAndKiranNalaar.class));
         cards.add(new SetCardInfo("Plague Belcher", 97, Rarity.RARE, mage.cards.p.PlagueBelcher.class));
         cards.add(new SetCardInfo("Prairie Stream", 167, Rarity.RARE, mage.cards.p.PrairieStream.class));
@@ -124,6 +126,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Reality Shift", 39, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Reckless Fireweaver", 106, Rarity.COMMON, mage.cards.r.RecklessFireweaver.class));
         cards.add(new SetCardInfo("Retrofitter Foundry", 136, Rarity.RARE, mage.cards.r.RetrofitterFoundry.class));
+        cards.add(new SetCardInfo("Rhet-Tomb Mystic", 10, Rarity.RARE, mage.cards.r.RhetTombMystic.class));
         cards.add(new SetCardInfo("Rogue Refiner", 118, Rarity.UNCOMMON, mage.cards.r.RogueRefiner.class));
         cards.add(new SetCardInfo("Rootbound Crag", 168, Rarity.RARE, mage.cards.r.RootboundCrag.class));
         cards.add(new SetCardInfo("Rot Hulk", 98, Rarity.MYTHIC, mage.cards.r.RotHulk.class));
