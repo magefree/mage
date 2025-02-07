@@ -18,8 +18,9 @@ public final class FungalSprouting extends CardImpl {
     public FungalSprouting(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
-        // create X 1/1 green Saproling creature tokens, where X is the greatest power among creatures you control.
+        // Create X 1/1 green Saproling creature tokens, where X is the greatest power among creatures you control.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), GreatestPowerAmongControlledCreaturesValue.instance));
+        this.getSpellAbility().addHint(GreatestPowerAmongControlledCreaturesValue.getHint());
     }
 
     private FungalSprouting(final FungalSprouting card) {

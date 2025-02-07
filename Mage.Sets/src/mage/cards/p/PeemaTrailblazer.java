@@ -1,6 +1,5 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -11,15 +10,16 @@ import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
 import mage.abilities.keyword.ExhaustAbility;
-import mage.constants.SubType;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.counters.CounterType;
 
+import java.util.UUID;
+
 /**
- *
  * @author sobiech
  */
 public final class PeemaTrailblazer extends CardImpl {
@@ -37,12 +37,14 @@ public final class PeemaTrailblazer extends CardImpl {
 
         // Whenever this creature deals combat damage to a player, you get that many {E}.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new GetEnergyCountersControllerEffect(SavedDamageValue.MANY)));
+
         // Exhaust -- Pay six {E}: Put two +1/+1 counters on this creature. Then draw cards equal to the greatest power among creatures you control.
-        final Ability peemaTrailblazerAbility = new ExhaustAbility(
+        final Ability ability = new ExhaustAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), new PayEnergyCost(6)
         );
-        peemaTrailblazerAbility.addEffect(new DrawCardSourceControllerEffect(GreatestPowerAmongControlledCreaturesValue.instance));
-        this.addAbility(peemaTrailblazerAbility);
+        ability.addEffect(new DrawCardSourceControllerEffect(GreatestPowerAmongControlledCreaturesValue.instance));
+        ability.addHint(GreatestPowerAmongControlledCreaturesValue.getHint());
+        this.addAbility(ability);
 
 
     }

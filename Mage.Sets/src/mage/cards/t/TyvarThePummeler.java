@@ -58,7 +58,7 @@ public final class TyvarThePummeler extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BoostControlledEffect(
                 GreatestPowerAmongControlledCreaturesValue.instance,
                 GreatestPowerAmongControlledCreaturesValue.instance, Duration.EndOfTurn
-        ), new ManaCostsImpl<>("{3}{G}{G}")));
+        ), new ManaCostsImpl<>("{3}{G}{G}")).addHint(GreatestPowerAmongControlledCreaturesValue.getHint()));
     }
 
     private TyvarThePummeler(final TyvarThePummeler card) {

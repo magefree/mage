@@ -31,6 +31,7 @@ public final class RishkarsExpertise extends CardImpl {
         Effect effect = new DrawCardSourceControllerEffect(GreatestPowerAmongControlledCreaturesValue.instance);
         effect.setText("Draw cards equal to the greatest power among creatures you control");
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addHint(GreatestPowerAmongControlledCreaturesValue.getHint());
 
         // You may cast a card with converted mana cost 5 or less from your hand without paying its mana cost.
         this.getSpellAbility().addEffect(new CastFromHandForFreeEffect(filter).concatBy("<br>"));
