@@ -20,6 +20,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Academy Ruins", 58, Rarity.RARE, mage.cards.a.AcademyRuins.class));
+        cards.add(new SetCardInfo("Accursed Duneyard", 20, Rarity.RARE, mage.cards.a.AccursedDuneyard.class));
         cards.add(new SetCardInfo("Adaptive Omnitool", 16, Rarity.RARE, mage.cards.a.AdaptiveOmnitool.class));
         cards.add(new SetCardInfo("Adarkar Wastes", 144, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Aether Hub", 145, Rarity.UNCOMMON, mage.cards.a.AetherHub.class));
