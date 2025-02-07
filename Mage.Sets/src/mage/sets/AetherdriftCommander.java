@@ -22,6 +22,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Academy Ruins", 58, Rarity.RARE, mage.cards.a.AcademyRuins.class));
         cards.add(new SetCardInfo("Adarkar Wastes", 144, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Aether Hub", 145, Rarity.UNCOMMON, mage.cards.a.AetherHub.class));
+        cards.add(new SetCardInfo("Aetherflux Conduit", 17, Rarity.RARE, mage.cards.a.AetherfluxConduit.class));
         cards.add(new SetCardInfo("Aethersquall Ancient", 68, Rarity.RARE, mage.cards.a.AethersquallAncient.class));
         cards.add(new SetCardInfo("Aethertide Whale", 69, Rarity.RARE, mage.cards.a.AethertideWhale.class));
         cards.add(new SetCardInfo("Aetherwind Basker", 107, Rarity.MYTHIC, mage.cards.a.AetherwindBasker.class));
