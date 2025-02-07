@@ -6,8 +6,8 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -52,7 +52,7 @@ public final class ShiftingWoodland extends CardImpl {
         );
         ability.addTarget(new TargetCardInYourGraveyard(1, filterCard));
         ability.setAbilityWord(AbilityWord.DELIRIUM);
-        this.addAbility(ability.addHint(CardTypesInGraveyardHint.YOU));
+        this.addAbility(ability.addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private ShiftingWoodland(final ShiftingWoodland card) {

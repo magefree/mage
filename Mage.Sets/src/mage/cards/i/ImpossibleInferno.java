@@ -2,9 +2,9 @@ package mage.cards.i;
 
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -33,7 +33,7 @@ public final class ImpossibleInferno extends CardImpl {
                 "four or more card types among cards in your graveyard, exile the top card of your library. " +
                 "You may play it until the end of your next turn"
         ));
-        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
+        this.getSpellAbility().addHint(CardTypesInGraveyardCount.YOU.getHint());
     }
 
     private ImpossibleInferno(final ImpossibleInferno card) {

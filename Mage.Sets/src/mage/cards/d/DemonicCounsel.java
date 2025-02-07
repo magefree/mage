@@ -2,8 +2,8 @@ package mage.cards.d;
 
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -38,7 +38,7 @@ public final class DemonicCounsel extends CardImpl {
                 "If there are four or more card types among cards in your graveyard, " +
                 "instead search your library for any card, put it into your hand, then shuffle."
         ));
-        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
+        this.getSpellAbility().addHint(CardTypesInGraveyardCount.YOU.getHint());
     }
 
     private DemonicCounsel(final DemonicCounsel card) {

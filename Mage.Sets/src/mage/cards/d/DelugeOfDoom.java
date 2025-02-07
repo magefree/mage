@@ -4,7 +4,6 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continuous.BoostAllEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -25,7 +24,7 @@ public final class DelugeOfDoom extends CardImpl {
         // All creatures get -X/-X until end of turn, where X is the number of card types among cards in your graveyard.
         this.getSpellAbility().addEffect(new BoostAllEffect(xValue, xValue, Duration.EndOfTurn)
                 .setText("all creatures get -X/-X until end of turn, where X is the number of card types among cards in your graveyard"));
-        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
+        this.getSpellAbility().addHint(CardTypesInGraveyardCount.YOU.getHint());
     }
 
     private DelugeOfDoom(final DelugeOfDoom card) {

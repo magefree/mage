@@ -21,8 +21,6 @@ import java.util.UUID;
  */
 public final class ConsumingBlob extends CardImpl {
 
-    private static final DynamicValue powerValue = CardTypesInGraveyardCount.YOU;
-
     public ConsumingBlob(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         
@@ -31,7 +29,9 @@ public final class ConsumingBlob extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Consuming Blob's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessPlusOneSourceEffect(powerValue)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SetBasePowerToughnessPlusOneSourceEffect(CardTypesInGraveyardCount.YOU)
+        ).addHint(CardTypesInGraveyardCount.YOU.getHint()));
 
         // At the beginning of your end step, create a green Ooze creature token with "This creature's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1".
         this.addAbility(new BeginningOfEndStepTriggeredAbility(

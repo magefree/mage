@@ -7,9 +7,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -45,7 +45,7 @@ public final class RavingVisionary extends CardImpl {
                 new ManaCostsImpl<>("{2}{U}"), DeliriumCondition.instance
         );
         ability.addCost(new TapSourceCost());
-        this.addAbility(ability.addHint(CardTypesInGraveyardHint.YOU).setAbilityWord(AbilityWord.DELIRIUM));
+        this.addAbility(ability.addHint(CardTypesInGraveyardCount.YOU.getHint()).setAbilityWord(AbilityWord.DELIRIUM));
     }
 
     private RavingVisionary(final RavingVisionary card) {

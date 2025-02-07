@@ -3,6 +3,7 @@ package mage.cards.c;
 import java.util.UUID;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -10,7 +11,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -42,7 +42,7 @@ public final class CropSigil extends CardImpl {
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_CREATURE));
         ability.addTarget(new TargetCardInYourGraveyard(0, 1, StaticFilters.FILTER_CARD_LAND));
         ability.setAbilityWord(AbilityWord.DELIRIUM);
-        ability.addHint(CardTypesInGraveyardHint.YOU);
+        ability.addHint(CardTypesInGraveyardCount.YOU.getHint());
         this.addAbility(ability);
     }
 

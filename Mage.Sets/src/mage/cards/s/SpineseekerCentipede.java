@@ -6,10 +6,10 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -48,7 +48,7 @@ public final class SpineseekerCentipede extends CardImpl {
                 new GainAbilitySourceEffect(VigilanceAbility.getInstance()), DeliriumCondition.instance,
                 "and has vigilance as long as there are four or more card types among cards in your graveyard"
         ));
-        this.addAbility(ability.addHint(CardTypesInGraveyardHint.YOU).setAbilityWord(AbilityWord.DELIRIUM));
+        this.addAbility(ability.addHint(CardTypesInGraveyardCount.YOU.getHint()).setAbilityWord(AbilityWord.DELIRIUM));
     }
 
     private SpineseekerCentipede(final SpineseekerCentipede card) {

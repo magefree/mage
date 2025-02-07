@@ -5,9 +5,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
@@ -43,7 +43,7 @@ public final class WildfireWickerfolk extends CardImpl {
                 new GainAbilitySourceEffect(TrampleAbility.getInstance()), DeliriumCondition.instance,
                 "and has trample as long as there are four or more card types among cards in your graveyard"
         ));
-        this.addAbility(ability.setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardHint.YOU));
+        this.addAbility(ability.setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private WildfireWickerfolk(final WildfireWickerfolk card) {
