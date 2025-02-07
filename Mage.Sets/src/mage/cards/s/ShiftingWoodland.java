@@ -12,6 +12,7 @@ import mage.abilities.mana.GreenManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -90,6 +91,9 @@ class ShiftingWoodlandCopyEffect extends OneShotEffect {
         Card copyFromCard = game.getCard(getTargetPointer().getFirst(game, source));
         if (copyFromCard == null) {
             return false;
+        }
+        if (copyFromCard instanceof ModalDoubleFacedCard) {
+            copyFromCard = ((ModalDoubleFacedCard) copyFromCard).getLeftHalfCard();
         }
         Permanent blueprint = new PermanentCard(copyFromCard, source.getControllerId(), game);
         game.copyPermanent(Duration.EndOfTurn, blueprint, sourcePermanent.getId(), source, new EmptyCopyApplier());
