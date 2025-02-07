@@ -22,6 +22,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 import mage.util.functions.EmptyCopyApplier;
 
 import java.util.UUID;
@@ -92,10 +93,7 @@ class ShiftingWoodlandCopyEffect extends OneShotEffect {
         if (copyFromCard == null) {
             return false;
         }
-        if (copyFromCard instanceof ModalDoubleFacedCard) {
-            copyFromCard = ((ModalDoubleFacedCard) copyFromCard).getLeftHalfCard();
-        }
-        Permanent blueprint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+        Permanent blueprint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, copyFromCard), source.getControllerId(), game);
         game.copyPermanent(Duration.EndOfTurn, blueprint, sourcePermanent.getId(), source, new EmptyCopyApplier());
         return true;
     }
