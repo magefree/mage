@@ -6,6 +6,22 @@ import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 /**
+ * Combat's blocking tests
+ * <p>
+ * TODO: add tests with multi blocker requirement effects
+ * <p>
+ * Supported abilities:
+ * - DeathtouchAbility - supported, has tests
+ * - FirstStrikeAbility - supported, has tests
+ * - DoubleStrikeAbility - ?
+ * - IndestructibleAbility - supported, need tests
+ * - FlyingAbility - ?
+ * - ReachAbility - ?
+ * - ExaltedAbility - ?
+ * - Trample + Deathtouch
+ * - combat damage and die triggers - need to implement full combat simulation with stack resolve, see CombatUtil->willItSurviveSimple
+ * - other use cases, see https://github.com/magefree/mage/issues/4485
+ *
  * @author JayDi85
  */
 public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
@@ -242,12 +258,55 @@ public class BlockSimulationAITest extends CardTestPlayerBaseWithAIHelps {
         assertDamageReceived(playerB, "Spectral Bears", 2);
     }
 
-    // TODO: add tests with multi blocker requirement effects
-    // TODO: add tests for DeathtouchAbility
-    // TODO: add tests for FirstStrikeAbility
-    // TODO: add tests for DoubleStrikeAbility
-    // TODO: add tests for IndestructibleAbility
-    // TODO: add tests for FlyingAbility
-    // TODO: add tests for ReachAbility
-    // TODO: add tests for ExaltedAbility???
+    @Test
+    public void test_Block_1_attacker_vs_first_strike() {
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1); // 2/2
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Arbor Elf", 1); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "White Knight", 1); // 2/2 with first strike
+        addCard(Zone.BATTLEFIELD, playerB, "Spectral Bears", 1); // 3/3
+        addCard(Zone.BATTLEFIELD, playerB, "Deadbridge Goliath", 1); // 5/5
+        addCard(Zone.BATTLEFIELD, playerB, "Colossal Dreadmaw", 1); // 6/6
+
+        attack(1, playerA, "Balduvian Bears");
+
+        // ai must use smaller blocker and survive (2/2 with first strike must block 2/2)
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("x1 optimal blocker", 1, playerB, "White Knight");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, "Balduvian Bears", 1);
+        assertDamageReceived(playerB, "White Knight", 0); // due first strike
+    }
+
+    @Test
+    public void test_Block_1_attacker_vs_deathtouch() {
+        addCard(Zone.BATTLEFIELD, playerA, "Balduvian Bears", 1); // 2/2
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Arbor Elf", 1); // 1/1
+        addCard(Zone.BATTLEFIELD, playerB, "Arashin Cleric", 1); // 1/3
+        addCard(Zone.BATTLEFIELD, playerB, "Graveblade Marauder", 1); // 1/4 with deathtouch
+        addCard(Zone.BATTLEFIELD, playerB, "Deadbridge Goliath", 1); // 5/5
+        addCard(Zone.BATTLEFIELD, playerB, "Colossal Dreadmaw", 1); // 6/6
+
+        attack(1, playerA, "Balduvian Bears");
+
+        // ai must use smaller blocker to kill and survive (1/4 with deathtouch must block 2/2 -- not a smaller 1/3)
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkBlockers("x1 optimal blocker", 1, playerB, "Graveblade Marauder");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, "Balduvian Bears", 1);
+        assertDamageReceived(playerB, "Graveblade Marauder", 2);
+    }
 }

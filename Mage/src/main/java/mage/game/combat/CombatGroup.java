@@ -243,7 +243,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * @param first true for first strike damage step, false for normal damage step
      * @return true if permanent should deal damage this step
      */
-    private boolean dealsDamageThisStep(Permanent perm, boolean first, Game game) {
+    public static boolean dealsDamageThisStep(Permanent perm, boolean first, Game game) {
         if (perm == null) {
             return false;
         }
