@@ -34,7 +34,7 @@ public final class AetherfluxConduit extends CardImpl {
 
         // {T}, Pay fifty {E}: Draw seven cards. You may cast any number of spells from your hand without paying their mana costs.
         final Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(7), new TapSourceCost());
-        ability.addCost(new PayEnergyCost(50));
+        ability.addCost(new PayEnergyCost(50).setText("Pay fifty {E}"));
         ability.addEffect(new CastFromHandWithoutPayingManaCostEffect());
         this.addAbility(ability);
     }
