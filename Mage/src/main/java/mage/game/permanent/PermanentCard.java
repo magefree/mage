@@ -45,7 +45,7 @@ public class PermanentCard extends PermanentImpl {
         }
 
         // usage check: you must put to play only real card's part
-        // if you use it in test code then call CardUtil.getDefaultCardSideForBattlefield for default side
+        // if you use it in test code or for permanent's copy effects then call CardUtil.getDefaultCardSideForBattlefield for default side
         // it's a basic check and still allows to create permanent from instant or sorcery
         boolean goodForBattlefield = true;
         if (card instanceof ModalDoubleFacedCard) {

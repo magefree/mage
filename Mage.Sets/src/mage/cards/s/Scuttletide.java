@@ -7,9 +7,9 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -42,7 +42,7 @@ public final class Scuttletide extends CardImpl {
                         1, 1, Duration.WhileOnBattlefield, filter, false
                 ), DeliriumCondition.instance, "Crabs you control get +1/+1 as long " +
                 "as there are four or more card types among cards in your graveyard"
-        )).addHint(CardTypesInGraveyardHint.YOU).setAbilityWord(AbilityWord.DELIRIUM));
+        )).addHint(CardTypesInGraveyardCount.YOU.getHint()).setAbilityWord(AbilityWord.DELIRIUM));
     }
 
     private Scuttletide(final Scuttletide card) {

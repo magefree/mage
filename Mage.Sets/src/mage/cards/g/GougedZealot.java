@@ -4,8 +4,8 @@ import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.DamageAllControlledTargetEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +37,7 @@ public final class GougedZealot extends CardImpl {
                 new AttacksTriggeredAbility(new DamageAllControlledTargetEffect(1), false, null, SetTargetPointer.PLAYER),
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; Whenever {this} attacks, if there are four or more card types among cards in your graveyard, {this} deals 1 damage to each creature defending player controls."
-        ).addHint(CardTypesInGraveyardHint.YOU));
+        ).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private GougedZealot(final GougedZealot card) {
