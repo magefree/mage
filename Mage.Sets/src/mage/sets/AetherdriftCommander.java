@@ -115,6 +115,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Panharmonicon", 135, Rarity.RARE, mage.cards.p.Panharmonicon.class));
         cards.add(new SetCardInfo("Path of Ancestry", 61, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Peema Aether-Seer", 113, Rarity.UNCOMMON, mage.cards.p.PeemaAetherSeer.class));
+        cards.add(new SetCardInfo("Peema Trailblazer", 14, Rarity.RARE, mage.cards.p.PeemaTrailblazer.class));
         cards.add(new SetCardInfo("Pia and Kiran Nalaar", 105, Rarity.RARE, mage.cards.p.PiaAndKiranNalaar.class));
         cards.add(new SetCardInfo("Plague Belcher", 97, Rarity.RARE, mage.cards.p.PlagueBelcher.class));
         cards.add(new SetCardInfo("Prairie Stream", 167, Rarity.RARE, mage.cards.p.PrairieStream.class));
