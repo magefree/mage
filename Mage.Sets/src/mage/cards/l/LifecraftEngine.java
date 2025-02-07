@@ -11,8 +11,8 @@ import mage.abilities.keyword.CrewAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -21,11 +21,10 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- *
  * @author jackd149
  */
 public final class LifecraftEngine extends CardImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+
     public LifecraftEngine(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
@@ -40,7 +39,7 @@ public final class LifecraftEngine extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new LifecraftEngineAddSubTypeAllEffect()));
 
         // Each creature you control of the chosen type other than this Vehicle gets +1/+1.
-        BoostAllOfChosenSubtypeEffect effect = new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, filter, true);
+        BoostAllOfChosenSubtypeEffect effect = new BoostAllOfChosenSubtypeEffect(1, 1, Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURE_CONTROLLED, true);
         effect.setText("Each creature you control of the chosen type other than this Vehicle gets +1/+1.");
         this.addAbility(new SimpleStaticAbility(effect));
 
@@ -59,11 +58,13 @@ public final class LifecraftEngine extends CardImpl {
 }
 
 class LifecraftEngineAddSubTypeAllEffect extends ContinuousEffectImpl {
+    
     static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
         filter.add(SubType.VEHICLE.getPredicate());
     }
+
     public LifecraftEngineAddSubTypeAllEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
 
