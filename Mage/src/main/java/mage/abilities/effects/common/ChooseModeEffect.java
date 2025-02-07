@@ -13,6 +13,7 @@ import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author LevelX2
@@ -49,7 +50,7 @@ public class ChooseModeEffect extends OneShotEffect {
         }
         if (controller != null && sourcePermanent != null) {
             Choice choice = new ChoiceImpl(true);
-            choice.setMessage(choiceMessage);
+            choice.setMessage(choiceMessage + CardUtil.getSourceLogName(game, source));
             choice.getChoices().addAll(modes);
             if (controller.choose(Outcome.Neutral, choice, game)) {
                 if (!game.isSimulation()) {
