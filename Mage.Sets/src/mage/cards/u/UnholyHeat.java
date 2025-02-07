@@ -2,8 +2,8 @@ package mage.cards.u;
 
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -28,7 +28,7 @@ public final class UnholyHeat extends CardImpl {
                 "if there are four or more card types among cards in your graveyard."
         ));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlaneswalker());
-        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
+        this.getSpellAbility().addHint(CardTypesInGraveyardCount.YOU.getHint());
     }
 
     private UnholyHeat(final UnholyHeat card) {

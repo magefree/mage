@@ -5,8 +5,8 @@ import java.util.UUID;
 import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -37,7 +37,7 @@ public final class ToTheSlaughter extends CardImpl {
                 new SacrificeEffect(StaticFilters.FILTER_PERMANENT_PLANESWALKER, 1, "Target player"),
                 DeliriumCondition.instance, "and a planeswalker."));
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
+        this.getSpellAbility().addHint(CardTypesInGraveyardCount.YOU.getHint());
     }
 
     private ToTheSlaughter(final ToTheSlaughter card) {

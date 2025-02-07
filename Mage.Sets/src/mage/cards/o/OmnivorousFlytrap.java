@@ -9,7 +9,6 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.DistributeCountersEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -42,7 +41,7 @@ public final class OmnivorousFlytrap extends CardImpl {
                 new OmnivorousFlytrapCondition())
                 .concatBy("Then"));
         ability.addTarget(new TargetCreaturePermanentAmount(2));
-        ability.addHint(CardTypesInGraveyardHint.YOU);
+        ability.addHint(CardTypesInGraveyardCount.YOU.getHint());
         this.addAbility(ability.setAbilityWord(AbilityWord.DELIRIUM));
     }
 

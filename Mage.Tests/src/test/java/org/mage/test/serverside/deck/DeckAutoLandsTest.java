@@ -148,12 +148,15 @@ public class DeckAutoLandsTest extends MageTestPlayerBase {
         Deck deck = prepareDeck(Arrays.asList(
                 new DeckCardInfo("Amulet of Kroog", "36", "ATQ", 1) // ATQ without lands
         ));
-        // must find 2 random sets
-        List<String> possibleSets1 = TournamentUtil.getLandSetCodeForDeckSets(deck.getExpansionSetCodes()).stream().sorted().collect(Collectors.toList());
-        List<String> possibleSets2 = TournamentUtil.getLandSetCodeForDeckSets(deck.getExpansionSetCodes()).stream().sorted().collect(Collectors.toList());
-        Assert.assertEquals("must find 1 random set, try 1", 1, possibleSets1.size());
-        Assert.assertEquals("must find 1 random set, try 2", 1, possibleSets2.size());
-        Assert.assertNotEquals("must find random sets, try 3", possibleSets1.get(0), possibleSets2.get(0));
+
+        // must find random sets
+        int tries = 3;
+        List<String> possibleSets = new ArrayList<>();
+        for (int i = 0; i < tries; ++i) {
+            possibleSets.addAll(TournamentUtil.getLandSetCodeForDeckSets(deck.getExpansionSetCodes()).stream().sorted().collect(Collectors.toList()));
+        }
+        Assert.assertEquals("must find 1 set per request, but get " + possibleSets, tries, possibleSets.size());
+        Assert.assertNotEquals("must find different random sets, but get " + possibleSets, 1, possibleSets.stream().distinct().count());
     }
 
     private void assertPossibleSets(

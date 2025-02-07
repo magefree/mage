@@ -6,12 +6,13 @@ import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.condition.common.YouControlPermanentCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
@@ -21,6 +22,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.util.CardUtil;
 import mage.util.functions.EmptyCopyApplier;
 
 import java.util.UUID;
@@ -52,7 +54,7 @@ public final class ShiftingWoodland extends CardImpl {
         );
         ability.addTarget(new TargetCardInYourGraveyard(1, filterCard));
         ability.setAbilityWord(AbilityWord.DELIRIUM);
-        this.addAbility(ability.addHint(CardTypesInGraveyardHint.YOU));
+        this.addAbility(ability.addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private ShiftingWoodland(final ShiftingWoodland card) {
@@ -91,7 +93,7 @@ class ShiftingWoodlandCopyEffect extends OneShotEffect {
         if (copyFromCard == null) {
             return false;
         }
-        Permanent blueprint = new PermanentCard(copyFromCard, source.getControllerId(), game);
+        Permanent blueprint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, copyFromCard), source.getControllerId(), game);
         game.copyPermanent(Duration.EndOfTurn, blueprint, sourcePermanent.getId(), source, new EmptyCopyApplier());
         return true;
     }

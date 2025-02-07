@@ -41,8 +41,9 @@ public final class SoulsOfTheLost extends CardImpl {
         ));
 
         // Fathomless descent -- Souls of the Lost's power is equal to the number of permanent cards in your graveyard and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessPlusOneSourceEffect(xValue))
-                .setAbilityWord(AbilityWord.FATHOMLESS_DESCENT).addHint(DescendCondition.getHint()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SetBasePowerToughnessPlusOneSourceEffect(xValue)
+        ).setAbilityWord(AbilityWord.FATHOMLESS_DESCENT).addHint(DescendCondition.getHint()));
     }
 
     private SoulsOfTheLost(final SoulsOfTheLost card) {

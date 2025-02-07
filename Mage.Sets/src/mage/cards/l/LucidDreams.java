@@ -2,7 +2,6 @@ package mage.cards.l;
 
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,7 +19,7 @@ public final class LucidDreams extends CardImpl {
         // Draw X cards, where X is the number of card types among cards in your graveyard.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(CardTypesInGraveyardCount.YOU)
                 .setText("draw X cards, where X is the number of card types among cards in your graveyard"));
-        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
+        this.getSpellAbility().addHint(CardTypesInGraveyardCount.YOU.getHint());
     }
 
     private LucidDreams(final LucidDreams card) {

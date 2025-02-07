@@ -26,7 +26,7 @@ public final class HeapedHarvest extends CardImpl {
         this.subtype.add(SubType.FOOD);
 
         // When Heaped Harvest enters and when you sacrifice it, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
-        this.addAbility(new OrTriggeredAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(
+        this.addAbility(new OrTriggeredAbility(Zone.ALL, new SearchLibraryPutInPlayEffect(
                 new TargetCardInLibrary(StaticFilters.FILTER_CARD_BASIC_LAND_A), true), true,
                 "When {this} enters and when you sacrifice it, ",
                 new EntersBattlefieldTriggeredAbility(null), new SacrificeSourceTriggeredAbility(null)
