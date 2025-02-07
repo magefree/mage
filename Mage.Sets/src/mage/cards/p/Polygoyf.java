@@ -20,8 +20,6 @@ import mage.constants.Zone;
  */
 public final class Polygoyf extends CardImpl {
 
-    private static final DynamicValue powerValue = CardTypesInGraveyardCount.ALL;
-
     public Polygoyf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{G}");
         
@@ -36,7 +34,9 @@ public final class Polygoyf extends CardImpl {
         this.addAbility(new MyriadAbility());
 
         // Polygoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessPlusOneSourceEffect(powerValue)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SetBasePowerToughnessPlusOneSourceEffect(CardTypesInGraveyardCount.ALL)
+        ).addHint(CardTypesInGraveyardCount.ALL.getHint()));
     }
 
     private Polygoyf(final Polygoyf card) {

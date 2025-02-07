@@ -944,7 +944,7 @@ public class CardView extends SimpleCardView {
         this(true);
         this.gameObject = true;
         this.id = designation.getId();
-        this.mageObjectType = MageObjectType.NULL;
+        this.mageObjectType = MageObjectType.DESIGNATION;
         this.name = designation.getName();
         this.displayName = name;
         this.displayFullName = name;
@@ -955,9 +955,8 @@ public class CardView extends SimpleCardView {
         this.frameStyle = FrameStyle.M15_NORMAL;
         this.cardNumber = designation.getCardNumber();
         this.expansionSetCode = designation.getExpansionSetCode();
-        this.cardNumber = "";
-        this.imageFileName = "";
-        this.imageNumber = 0;
+        this.imageFileName = designation.getImageFileName();
+        this.imageNumber = designation.getImageNumber();
         this.rarity = Rarity.SPECIAL;
 
         // no playable/chooseable marks for designations

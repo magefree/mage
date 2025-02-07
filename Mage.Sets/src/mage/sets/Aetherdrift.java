@@ -18,8 +18,8 @@ public final class Aetherdrift extends ExpansionSet {
     private Aetherdrift() {
         super("Aetherdrift", "DFT", ExpansionSet.buildDate(2025, 2, 14), SetType.EXPANSION);
         this.blockName = "Aetherdrift"; // for sorting in GUI
-        this.hasBasicLands = true;
-        this.hasBoosters = false; // temporary
+
+        this.enablePlayBooster(Integer.MAX_VALUE);
 
         cards.add(new SetCardInfo("Aatchik, Emerald Radian", 187, Rarity.RARE, mage.cards.a.AatchikEmeraldRadian.class));
         cards.add(new SetCardInfo("Adrenaline Jockey", 112, Rarity.UNCOMMON, mage.cards.a.AdrenalineJockey.class));
@@ -182,6 +182,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Redshift, Rocketeer Chief", 218, Rarity.RARE, mage.cards.r.RedshiftRocketeerChief.class));
         cards.add(new SetCardInfo("Reef Roads", 259, Rarity.UNCOMMON, mage.cards.r.ReefRoads.class));
         cards.add(new SetCardInfo("Regal Imperiosaur", 177, Rarity.RARE, mage.cards.r.RegalImperiosaur.class));
+        cards.add(new SetCardInfo("Repurposing Bay", 56, Rarity.RARE, mage.cards.r.RepurposingBay.class));
         cards.add(new SetCardInfo("Ride's End", 25, Rarity.COMMON, mage.cards.r.RidesEnd.class));
         cards.add(new SetCardInfo("Ripclaw Wrangler", 101, Rarity.COMMON, mage.cards.r.RipclawWrangler.class));
         cards.add(new SetCardInfo("Rise from the Wreck", 178, Rarity.UNCOMMON, mage.cards.r.RiseFromTheWreck.class));

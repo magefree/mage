@@ -7,11 +7,11 @@ import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
 import mage.abilities.decorator.ConditionalRequirementEffect;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -55,7 +55,7 @@ public final class DragonsRageChanneler extends CardImpl {
                 DeliriumCondition.instance, ", and attacks each combat if able"
         ));
         ability.setAbilityWord(AbilityWord.DELIRIUM);
-        this.addAbility(ability.addHint(CardTypesInGraveyardHint.YOU));
+        this.addAbility(ability.addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private DragonsRageChanneler(final DragonsRageChanneler card) {

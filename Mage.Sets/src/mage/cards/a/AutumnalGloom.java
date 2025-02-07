@@ -3,20 +3,19 @@ package mage.cards.a;
 import java.util.UUID;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.MillCardsControllerEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.TargetController;
-import mage.constants.Zone;
 
 /**
  * @author LevelX2
@@ -34,7 +33,7 @@ public final class AutumnalGloom extends CardImpl {
         this.addAbility(new TransformAbility());
         Ability ability = new BeginningOfEndStepTriggeredAbility(TargetController.YOU, new TransformSourceEffect(), false, DeliriumCondition.instance);
         ability.setAbilityWord(AbilityWord.DELIRIUM);
-        ability.addHint(CardTypesInGraveyardHint.YOU);
+        ability.addHint(CardTypesInGraveyardCount.YOU.getHint());
         this.addAbility(ability);
     }
 

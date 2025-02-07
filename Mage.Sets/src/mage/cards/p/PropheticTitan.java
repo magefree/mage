@@ -4,9 +4,9 @@ import mage.MageInt;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -58,7 +58,7 @@ class PropheticTitanTriggeredAbility extends EntersBattlefieldTriggeredAbility {
                 "choose one. If there are four or more card types among cards in your graveyard, choose both instead."
         );
         this.addTarget(new TargetAnyTarget());
-        this.addHint(CardTypesInGraveyardHint.YOU);
+        this.addHint(CardTypesInGraveyardCount.YOU.getHint());
         this.setAbilityWord(AbilityWord.DELIRIUM);
     }
 

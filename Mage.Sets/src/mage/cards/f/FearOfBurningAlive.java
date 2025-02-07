@@ -4,10 +4,10 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -60,7 +60,7 @@ class FearOfBurningAliveTriggeredAbility extends TriggeredAbilityImpl {
         this.setTriggerPhrase("Whenever a source you control deals noncombat damage to an opponent, " +
                 "if there are four or more card types among cards in your graveyard, ");
         this.setAbilityWord(AbilityWord.DELIRIUM);
-        this.addHint(CardTypesInGraveyardHint.YOU);
+        this.addHint(CardTypesInGraveyardCount.YOU.getHint());
     }
 
     private FearOfBurningAliveTriggeredAbility(final FearOfBurningAliveTriggeredAbility ability) {
