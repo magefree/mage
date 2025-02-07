@@ -839,10 +839,10 @@ public final class Fallout extends ExpansionSet {
         //cards.add(new SetCardInfo("Strong, the Brutish Thespian", 612, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Strong, the Brutish Thespian", 84, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Strong, the Brutish Thespian", 931, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Struggle for Project Purity", 380, Rarity.RARE, mage.cards.s.StruggleForProjectPurity.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Struggle for Project Purity", 39, Rarity.RARE, mage.cards.s.StruggleForProjectPurity.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Struggle for Project Purity", 567, Rarity.RARE, mage.cards.s.StruggleForProjectPurity.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Struggle for Project Purity", 908, Rarity.RARE, mage.cards.s.StruggleForProjectPurity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Struggle for Project Purity", 380, Rarity.RARE, mage.cards.s.StruggleForProjectPurity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Struggle for Project Purity", 39, Rarity.RARE, mage.cards.s.StruggleForProjectPurity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Struggle for Project Purity", 567, Rarity.RARE, mage.cards.s.StruggleForProjectPurity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Struggle for Project Purity", 908, Rarity.RARE, mage.cards.s.StruggleForProjectPurity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sulfur Falls", 1040, Rarity.RARE, mage.cards.s.SulfurFalls.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sulfur Falls", 294, Rarity.RARE, mage.cards.s.SulfurFalls.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sulfur Falls", 512, Rarity.RARE, mage.cards.s.SulfurFalls.class, NON_FULL_USE_VARIOUS));
