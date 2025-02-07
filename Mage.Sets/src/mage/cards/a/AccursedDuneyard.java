@@ -11,16 +11,16 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author sobiech
  */
 public final class AccursedDuneyard extends CardImpl {
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Shade, Skeleton, Specter, Spirit, Vampire, Wraith, or Zombie");
+    private static final FilterPermanent filter = new FilterPermanent("Shade, Skeleton, Specter, Spirit, Vampire, Wraith, or Zombie");
 
     static {
         filter.add(Predicates.or(
@@ -41,7 +41,7 @@ public final class AccursedDuneyard extends CardImpl {
         this.addAbility(new ColorlessManaAbility());
         // {2}, {T}: Regenerate target Shade, Skeleton, Specter, Spirit, Vampire, Wraith, or Zombie.
         final Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new ManaCostsImpl<>("{2}"));
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
