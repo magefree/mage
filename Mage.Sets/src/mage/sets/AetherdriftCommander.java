@@ -20,6 +20,8 @@ public final class AetherdriftCommander extends ExpansionSet {
         this.hasBasicLands = false;
 
         cards.add(new SetCardInfo("Academy Ruins", 58, Rarity.RARE, mage.cards.a.AcademyRuins.class));
+        cards.add(new SetCardInfo("Accursed Duneyard", 20, Rarity.RARE, mage.cards.a.AccursedDuneyard.class));
+        cards.add(new SetCardInfo("Adaptive Omnitool", 16, Rarity.RARE, mage.cards.a.AdaptiveOmnitool.class));
         cards.add(new SetCardInfo("Adarkar Wastes", 144, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Aether Hub", 145, Rarity.UNCOMMON, mage.cards.a.AetherHub.class));
         cards.add(new SetCardInfo("Aetheric Amplifier", 18, Rarity.RARE, mage.cards.a.AethericAmplifier.class));
@@ -125,6 +127,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Reality Shift", 39, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Reckless Fireweaver", 106, Rarity.COMMON, mage.cards.r.RecklessFireweaver.class));
         cards.add(new SetCardInfo("Retrofitter Foundry", 136, Rarity.RARE, mage.cards.r.RetrofitterFoundry.class));
+        cards.add(new SetCardInfo("Rhet-Tomb Mystic", 10, Rarity.RARE, mage.cards.r.RhetTombMystic.class));
         cards.add(new SetCardInfo("Rogue Refiner", 118, Rarity.UNCOMMON, mage.cards.r.RogueRefiner.class));
         cards.add(new SetCardInfo("Rootbound Crag", 168, Rarity.RARE, mage.cards.r.RootboundCrag.class));
         cards.add(new SetCardInfo("Rot Hulk", 98, Rarity.MYTHIC, mage.cards.r.RotHulk.class));
