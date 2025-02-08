@@ -72,8 +72,9 @@ class AethericAmplifierDoublePermanentEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         final Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
 
-        if (permanent == null)
+        if (permanent == null) {
             return false;
+        }
 
         final Set<Counter> counters = permanent
                 .getCounters(game)
@@ -84,8 +85,9 @@ class AethericAmplifierDoublePermanentEffect extends OneShotEffect {
                         .createInstance(counter.getCount()))
                 .collect(Collectors.toSet());
 
-        if (counters.isEmpty())
+        if (counters.isEmpty()) {
             return false;
+        }
 
         counters.forEach(counter -> permanent.addCounters(counter, source, game));
 
@@ -93,7 +95,7 @@ class AethericAmplifierDoublePermanentEffect extends OneShotEffect {
     }
 
     @Override
-    public OneShotEffect copy() {
+    public AethericAmplifierDoublePermanentEffect copy() {
         return new AethericAmplifierDoublePermanentEffect(this);
     }
 }
@@ -113,8 +115,9 @@ class AethericAmplifierDoubleControllerEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         final Player controller = game.getPlayer(source.getControllerId());
 
-        if (controller == null)
+        if (controller == null) {
             return false;
+        }
 
         final Set<Counter> counters = controller.getCountersAsCopy()
                 .values()
@@ -124,12 +127,13 @@ class AethericAmplifierDoubleControllerEffect extends OneShotEffect {
                         .createInstance(counter.getCount()))
                 .collect(Collectors.toSet());
 
-        if (counters.isEmpty())
+        if (counters.isEmpty()) {
             return false;
+        }
 
         counters.forEach(counter -> controller.addCounters(
                 counter,
-                controller.getTurnControlledBy(),
+                source.getControllerId(),
                 source,
                 game));
 
@@ -137,7 +141,7 @@ class AethericAmplifierDoubleControllerEffect extends OneShotEffect {
     }
 
     @Override
-    public OneShotEffect copy() {
+    public AethericAmplifierDoubleControllerEffect copy() {
         return new AethericAmplifierDoubleControllerEffect(this);
     }
 }
