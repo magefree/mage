@@ -24,6 +24,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Adaptive Omnitool", 16, Rarity.RARE, mage.cards.a.AdaptiveOmnitool.class));
         cards.add(new SetCardInfo("Adarkar Wastes", 144, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Aether Hub", 145, Rarity.UNCOMMON, mage.cards.a.AetherHub.class));
+        cards.add(new SetCardInfo("Aetherflux Conduit", 17, Rarity.RARE, mage.cards.a.AetherfluxConduit.class));
         cards.add(new SetCardInfo("Aetheric Amplifier", 18, Rarity.RARE, mage.cards.a.AethericAmplifier.class));
         cards.add(new SetCardInfo("Aethersquall Ancient", 68, Rarity.RARE, mage.cards.a.AethersquallAncient.class));
         cards.add(new SetCardInfo("Aethertide Whale", 69, Rarity.RARE, mage.cards.a.AethertideWhale.class));
