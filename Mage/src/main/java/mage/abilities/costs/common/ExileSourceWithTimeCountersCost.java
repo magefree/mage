@@ -78,7 +78,7 @@ public class ExileSourceWithTimeCountersCost extends CostImpl {
 
     @Override
     public boolean canPay(Ability ability, Ability source, UUID controllerId, Game game) {
-        return game.getCard(source.getSourceId()) != null;
+        return (game.getCard(source.getSourceId()) != null && (fromZone == null || fromZone == game.getState().getZone(source.getSourceId())));
     }
 
     @Override
