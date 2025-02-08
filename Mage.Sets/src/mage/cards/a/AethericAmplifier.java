@@ -1,27 +1,60 @@
 package mage.cards.a;
 
+import java.util.Collection;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ColorlessManaCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoubleCountersTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
+import mage.abilities.effects.common.counter.GetEnergyCountersControllerEffect;
+import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.counters.Counter;
+import mage.counters.CounterType;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+import mage.target.TargetPermanent;
 
 /**
- *
  * @author sobiech
  */
 public final class AethericAmplifier extends CardImpl {
 
     public AethericAmplifier(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
-        
 
         // {T}: Add one mana of any color.
+        this.addAbility(new AnyColorManaAbility());
+
         // {4}, {T}: Choose one. Activate only as a sorcery.
         // * Double the number of each kind of counter on target permanent.
+        final Ability ability = new ActivateAsSorceryActivatedAbility(new AethericAmplifierDoublePermanentEffect(), new GenericManaCost(4));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetPermanent());
+//        ability.setRuleAtTheTop(true);
+
         // * Double the number of each kind of counter you have.
+        ability.addMode(new Mode(new AethericAmplifierDoubleControllerEffect()));
+
+        this.addAbility(ability);
     }
 
     private AethericAmplifier(final AethericAmplifier card) {
+
         super(card);
     }
 
@@ -30,3 +63,91 @@ public final class AethericAmplifier extends CardImpl {
         return new AethericAmplifier(this);
     }
 }
+
+class AethericAmplifierDoublePermanentEffect extends OneShotEffect {
+    //todo abstract? or at least note ArnaKennerudSkycaptain TheFirstTyrannicWar
+
+    AethericAmplifierDoublePermanentEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "double the number of each kind of counter on target permanent";
+    }
+
+    private AethericAmplifierDoublePermanentEffect(OneShotEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        final Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+
+        if (permanent == null)
+            return false;
+
+        final Set<Counter> counters = permanent
+                .getCounters(game)
+                .values()
+                .stream()
+                .map(counter -> CounterType
+                        .findByName(counter.getName())
+                        .createInstance(counter.getCount()))
+                .collect(Collectors.toSet());
+
+        if (counters.isEmpty())
+            return false;
+
+        counters.forEach(counter -> permanent.addCounters(counter, source, game));
+
+        return true;
+    }
+
+    @Override
+    public OneShotEffect copy() {
+        return new AethericAmplifierDoublePermanentEffect(this);
+    }
+}
+
+class AethericAmplifierDoubleControllerEffect extends OneShotEffect {
+
+    AethericAmplifierDoubleControllerEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "double the number of each kind of counter you have";
+    }
+
+    private AethericAmplifierDoubleControllerEffect(OneShotEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        final Player controller = game.getPlayer(source.getControllerId());
+
+        if (controller == null)
+            return false;
+
+        final Set<Counter> counters = controller.getCountersAsCopy()
+                .values()
+                .stream()
+                .map(counter -> CounterType
+                        .findByName(counter.getName())
+                        .createInstance(counter.getCount()))
+                .collect(Collectors.toSet());
+
+        if (counters.isEmpty())
+            return false;
+
+        counters.forEach(counter -> controller.addCounters(
+                counter,
+                controller.getTurnControlledBy(),
+                source,
+                game));
+
+        return true;
+    }
+
+    @Override
+    public OneShotEffect copy() {
+        return new AethericAmplifierDoubleControllerEffect(this);
+    }
+}
+
+
