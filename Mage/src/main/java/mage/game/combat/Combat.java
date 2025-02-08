@@ -312,7 +312,23 @@ public class Combat implements Serializable, Copyable<Combat> {
             Player player = game.getPlayer(attackingPlayerId);
             if (player != null) {
                 if (groups.size() > 0) {
-                    game.informPlayers(player.getLogName() + " attacks with " + groups.size() + (groups.size() == 1 ? " creature" : " creatures"));
+                    String defendersInfo = groups.stream()
+                            .map(g -> g.defenderId)
+                            .distinct()
+                            .map(id -> {
+                                Player defPlayer = game.getPlayer(id);
+                                if (defPlayer != null) {
+                                    return defPlayer.getLogName();
+                                }
+                                Permanent defPermanent = game.getPermanentOrLKIBattlefield(id);
+                                if (defPermanent != null) {
+                                    return defPermanent.getLogName();
+                                }
+                                return null;
+                            })
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.joining(", "));
+                    game.informPlayers(player.getLogName() + " attacks " + defendersInfo + " with " + groups.size() + (groups.size() == 1 ? " creature" : " creatures"));
                 } else {
                     game.informPlayers(player.getLogName() + " skip attack");
                 }
