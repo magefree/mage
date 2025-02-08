@@ -35,9 +35,11 @@ public final class AethericAmplifier extends CardImpl {
 
         // {4}, {T}: Choose one. Activate only as a sorcery.
         // * Double the number of each kind of counter on target permanent.
-        final Ability ability = new ActivateAsSorceryActivatedAbility(new AethericAmplifierDoublePermanentEffect(), new GenericManaCost(4));
+        final Ability ability = new ActivateAsSorceryActivatedAbility(new AethericAmplifierDoublePermanentEffect(), new GenericManaCost(4))
+                .withShowActivateText(false);
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent());
+        ability.getModes().setChooseText("choose one. Activate only as a sorcery.");
 
         // * Double the number of each kind of counter you have.
         ability.addMode(new Mode(new AethericAmplifierDoubleControllerEffect()));
