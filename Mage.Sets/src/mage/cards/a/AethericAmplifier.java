@@ -45,7 +45,6 @@ public final class AethericAmplifier extends CardImpl {
         final Ability ability = new ActivateAsSorceryActivatedAbility(new AethericAmplifierDoublePermanentEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent());
-//        ability.setRuleAtTheTop(true);
 
         // * Double the number of each kind of counter you have.
         ability.addMode(new Mode(new AethericAmplifierDoubleControllerEffect()));
@@ -54,7 +53,6 @@ public final class AethericAmplifier extends CardImpl {
     }
 
     private AethericAmplifier(final AethericAmplifier card) {
-
         super(card);
     }
 
@@ -65,7 +63,6 @@ public final class AethericAmplifier extends CardImpl {
 }
 
 class AethericAmplifierDoublePermanentEffect extends OneShotEffect {
-    //todo abstract? or at least note ArnaKennerudSkycaptain TheFirstTyrannicWar
 
     AethericAmplifierDoublePermanentEffect() {
         super(Outcome.Benefit);
