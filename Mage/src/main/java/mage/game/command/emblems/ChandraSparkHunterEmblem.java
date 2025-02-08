@@ -20,8 +20,8 @@ public final class ChandraSparkHunterEmblem extends Emblem {
     public ChandraSparkHunterEmblem() {
         super("Emblem Chandra");
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
-                Zone.COMMAND, new DamageTargetEffect(3),
-                StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT_AN, false
+                Zone.COMMAND, new DamageTargetEffect(3, "this emblem"),
+                StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT, false
         );
         ability.addTarget(new TargetAnyTarget());
         this.getAbilities().add(ability);

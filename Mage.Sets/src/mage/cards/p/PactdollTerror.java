@@ -29,7 +29,7 @@ public final class PactdollTerror extends CardImpl {
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(
                 new LoseLifeOpponentsEffect(1),
                 StaticFilters.FILTER_CONTROLLED_PERMANENT_ARTIFACT,
-                true, false
+                false, false
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
         this.addAbility(ability);

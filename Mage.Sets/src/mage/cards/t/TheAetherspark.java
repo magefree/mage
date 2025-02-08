@@ -68,7 +68,7 @@ public final class TheAetherspark extends CardImpl {
         this.addAbility(new LoyaltyAbility(new DrawCardSourceControllerEffect(2), -5));
 
         // -10: Add ten mana of any one color.
-        this.addAbility(new LoyaltyAbility(new AddManaOfAnyColorEffect(3), -10));
+        this.addAbility(new LoyaltyAbility(new AddManaOfAnyColorEffect(10), -10));
     }
 
     private TheAetherspark(final TheAetherspark card) {

@@ -95,6 +95,6 @@ class PitAutomatonTriggeredAbility extends DelayedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "When you next activate an exhaust ability this turn, copy it. You may choose new targets for the copy.";
+        return "When you next activate an exhaust ability that isn't a mana ability this turn, copy it. You may choose new targets for the copy.";
     }
 }

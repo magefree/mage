@@ -26,7 +26,7 @@ public final class HauntTheNetwork extends CardImpl {
         this.getSpellAbility().addEffect(new InfoEffect("choose target opponent"));
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ThopterColorlessToken(), 2));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(ArtifactYouControlCount.instance)
-                .setText("then the chosen player loses X life"));
+                .setText("Then the chosen player loses X life"));
         this.getSpellAbility().addEffect(new GainLifeEffect(
                 ArtifactYouControlCount.instance, "and you gain X life, " +
                 "where X is the number of artifacts you control"

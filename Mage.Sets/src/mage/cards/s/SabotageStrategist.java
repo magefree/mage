@@ -62,7 +62,7 @@ public final class SabotageStrategist extends CardImpl {
 class SabotageStrategistTriggeredAbility extends TriggeredAbilityImpl {
 
     SabotageStrategistTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BoostTargetEffect(-1, 0));
+        super(Zone.BATTLEFIELD, new BoostTargetEffect(-1, 0).setText("those creatures get -1/-0 until end of turn"));
         this.setTriggerPhrase("Whenever one or more creatures attack you, ");
     }
 

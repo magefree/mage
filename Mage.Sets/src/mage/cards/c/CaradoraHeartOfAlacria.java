@@ -43,7 +43,7 @@ public final class CaradoraHeartOfAlacria extends CardImpl {
 
         // When Caradora enters, you may search your library for a Mount or Vehicle card, reveal it, put it into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true)
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true
         ));
 
         // If one or more +1/+1 counters would be put on a creature or Vehicle you control, that many plus one +1/+1 counters are put on it instead.

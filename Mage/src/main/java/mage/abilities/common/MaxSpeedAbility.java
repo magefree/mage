@@ -10,6 +10,7 @@ import mage.cards.Card;
 import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  * @author TheElk801
@@ -85,6 +86,6 @@ class MaxSpeedAbilityEffect extends ContinuousEffectImpl {
 
     @Override
     public String getText(Mode mode) {
-        return "Max speed &mdash; " + ability.getRule();
+        return "Max speed &mdash; " + CardUtil.getTextWithFirstCharUpperCase(ability.getRule());
     }
 }

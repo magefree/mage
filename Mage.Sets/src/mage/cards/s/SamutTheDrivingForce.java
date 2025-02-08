@@ -60,6 +60,7 @@ public final class SamutTheDrivingForce extends CardImpl {
         // Noncreature spells you cast cost {X} less to cast, where X is your speed.
         this.addAbility(new SimpleStaticAbility(
                 new SpellsCostReductionControllerEffect(filter, ControllerSpeedCount.instance)
+                        .setText("noncreature spells you cast cost {X} less to cast, where X is your speed")
         ));
     }
 

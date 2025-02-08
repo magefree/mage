@@ -16,7 +16,7 @@ import java.util.UUID;
 public class ExileSourceFromGraveCost extends CostImpl {
 
     public ExileSourceFromGraveCost() {
-        this.text = "exile {this} from your graveyard";
+        this.text = "exile this card from your graveyard";
     }
 
     private ExileSourceFromGraveCost(final ExileSourceFromGraveCost cost) {

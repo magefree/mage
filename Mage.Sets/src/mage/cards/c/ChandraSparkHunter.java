@@ -64,7 +64,7 @@ public final class ChandraSparkHunter extends CardImpl {
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new VehicleToken()), 0));
 
         // -7: You get an emblem with "Whenever an artifact you control enters, this emblem deals 3 damage to any target."
-        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new ChandraSparkHunterEmblem())));
+        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new ChandraSparkHunterEmblem()), -7));
     }
 
     private ChandraSparkHunter(final ChandraSparkHunter card) {

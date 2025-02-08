@@ -35,7 +35,7 @@ public final class CarrionCruiser extends CardImpl {
         this.toughness = new MageInt(2);
 
         // When this Vehicle enters, mill two cards. Then return a creature or Vehicle card from your graveyard to your hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(3));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MillCardsControllerEffect(2));
         ability.addEffect(new CarrionCruiserEffect());
         this.addAbility(ability);
 
@@ -66,7 +66,7 @@ class CarrionCruiserEffect extends OneShotEffect {
 
     CarrionCruiserEffect() {
         super(Outcome.Benefit);
-        staticText = "then return a creature or Vehicle card from your graveyard to your hand";
+        staticText = "Then return a creature or Vehicle card from your graveyard to your hand";
     }
 
     private CarrionCruiserEffect(final CarrionCruiserEffect effect) {

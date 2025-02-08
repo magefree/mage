@@ -33,7 +33,8 @@ public final class TicketTortoise extends CardImpl {
         this.addAbility(DefenderAbility.getInstance());
 
         // When this creature enters, if an opponent controls more lands than you, you create a Treasure token.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken())).withInterveningIf(condition));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new TreasureToken())
+                .setText("you create a Treasure token")).withInterveningIf(condition));
     }
 
     private TicketTortoise(final TicketTortoise card) {

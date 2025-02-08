@@ -42,7 +42,7 @@ public final class KickoffCelebrations extends CardImpl {
 
         // When this enchantment enters, you may discard a card. If you do, draw two cards.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new DoIfCostPaid(new DrawCardSourceControllerEffect(1), new DiscardCardCost())
+                new DoIfCostPaid(new DrawCardSourceControllerEffect(2), new DiscardCardCost())
         ));
 
         // Max speed -- Sacrifice this enchantment: Creatures and Vehicles you control gain haste until end of turn.

@@ -39,7 +39,7 @@ public final class GreenbeltGuardian extends CardImpl {
 
         // Exhaust -- {3}{G}: Put three +1/+1 counters on this creature.
         this.addAbility(new ExhaustAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl<>("{3}{G}")
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), new ManaCostsImpl<>("{3}{G}")
         ));
     }
 
