@@ -104,4 +104,6 @@ public interface TriggeredAbility extends Ability {
     GameEvent getTriggerEvent();
 
     TriggeredAbility setTriggerPhrase(String triggerPhrase);
+
+    String getTriggerPhrase();
 }

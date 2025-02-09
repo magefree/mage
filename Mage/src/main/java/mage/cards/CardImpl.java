@@ -343,6 +343,20 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 }
             }
         }
+
+        // rules fix: workaround to add text auto-replacement for creature's ETB
+        if (this.isCreature() && ability.getRule().startsWith("When {this} enters") && ability instanceof  TriggeredAbility) {
+            TriggeredAbility triggeredAbility = ((TriggeredAbility) ability);
+            if (triggeredAbility.getTriggerPhrase() != null) {
+                // TODO: delete or enable after wizards update all cards, not last sets only, see https://github.com/magefree/mage/issues/12791
+                //triggeredAbility.setTriggerPhrase(triggeredAbility.getTriggerPhrase().replace("{this}", "this creature"));
+            }
+        }
+        // verify check: all creatures with ETB must use "When this creature enters" instead "When {this} enters"
+        if (this.isCreature() && ability.getRule().startsWith("When {this} enters")) {
+            // see above
+            //throw new IllegalArgumentException("Wrong code usage: creature's ETB ability must use text like \"When this creature enters\"");
+        }
     }
 
     protected void addAbility(Ability ability, Watcher watcher) {

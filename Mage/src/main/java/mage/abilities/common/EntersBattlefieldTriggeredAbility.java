@@ -17,7 +17,11 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
     public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
         super(Zone.ALL, effect, optional); // Zone.All because a creature with trigger can be put into play and be sacrificed during the resolution of an effect (discard Obstinate Baloth with Smallpox)
-        this.withRuleTextReplacement(true); // default true to replace "{this}" with "it"
+        this.withRuleTextReplacement(true); // default true to replace "{this}" with "it" or "this creature"
+
+        // warning, it's impossible to add text auto-replacement for creatures here (When this creature enters),
+        // so it was implemented in CardImpl.addAbility instead
+        // see https://github.com/magefree/mage/issues/12791
         setTriggerPhrase("When {this} enters, ");
     }
 
