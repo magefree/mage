@@ -8,24 +8,24 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum MultiAmountType {
+public class MultiAmountType {
 
-    MANA("Add mana", "Distribute mana among colors"),
-    DAMAGE("Assign damage", "Assign damage among targets"),
-    DAMAGE_TRAMPLE("Assign damage", "Assign damage among targets, excess damage dealt to defender"),
-    P1P1("Add +1/+1 counters", "Distribute +1/+1 counters among creatures"),
-    COUNTERS("Choose counters", "Move counters"),
-    CHEAT_LANDS("Choose lands", "Add lands to your battlefield", true);
+    public static final MultiAmountType MANA = new MultiAmountType("Add mana", "Distribute mana among colors");
+    public static final MultiAmountType DAMAGE = new MultiAmountType("Assign damage", "Assign damage among targets");
+
+    public static final MultiAmountType P1P1 = new MultiAmountType("Add +1/+1 counters", "Distribute +1/+1 counters among creatures");
+    public static final MultiAmountType COUNTERS = new MultiAmountType("Choose counters", "Move counters");
+    public static final MultiAmountType CHEAT_LANDS = new MultiAmountType("Choose lands", "Add lands to your battlefield", true);
 
     private final String title;
     private final String header;
     private final boolean canCancel; // choice dialog will return null instead default values
 
-    MultiAmountType(String title, String header) {
+    public MultiAmountType(String title, String header) {
         this(title, header, false);
     }
 
-    MultiAmountType(String title, String header, boolean canCancel) {
+    public MultiAmountType(String title, String header, boolean canCancel) {
         this.title = title;
         this.header = header;
         this.canCancel = canCancel;

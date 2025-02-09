@@ -292,8 +292,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 }
                 List<Integer> amounts;
                 if (hasTrample(attacker)){
-                    amounts = player.getMultiAmountWithIndividualConstraints(Outcome.Damage, damageDivision, damage-remainingDamage, damage, MultiAmountType.DAMAGE_TRAMPLE, game);
-                    int trampleDamage = damage-(amounts.stream().mapToInt(x -> x).sum());
+                    MultiAmountType dialogue = new MultiAmountType("Assign combat damage (with trample)",
+                            String.format("Assign combat damage among creatures blocking %s, P/T: %d/%d (Unassigned damage tramples through)",
+                                    attacker.getLogName(), attacker.getPower().getValue(), attacker.getToughness().getValue()));
+                    amounts = player.getMultiAmountWithIndividualConstraints(Outcome.Damage, damageDivision, damage - remainingDamage, damage, dialogue, game);
+                    int trampleDamage = damage - (amounts.stream().mapToInt(x -> x).sum());
                     if (trampleDamage > 0) {
                         defenderDamage(attacker, trampleDamage, game, false);
                     }
@@ -302,7 +305,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                         damageDivision.get(0).defaultValue += remainingDamage;
                     }
                     if (damageDivision.size() > 1) {
-                        amounts = player.getMultiAmountWithIndividualConstraints(Outcome.Damage, damageDivision, damage, damage, MultiAmountType.DAMAGE, game);
+                        MultiAmountType dialogue = new MultiAmountType("Assign combat damage",
+                                String.format("Assign combat damage among creatures blocking %s, P/T: %d/%d",
+                                        attacker.getLogName(), attacker.getPower().getValue(), attacker.getToughness().getValue()));
+                        amounts = player.getMultiAmountWithIndividualConstraints(Outcome.Damage, damageDivision, damage, damage, dialogue, game);
                     } else {
                         amounts = new LinkedList<>();
                         amounts.add(damage);
@@ -468,7 +474,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 damageDivision.get(0).defaultValue += remainingDamage;
             }
             if (damageDivision.size() > 1) {
-                amounts = player.getMultiAmountWithIndividualConstraints(Outcome.Damage, damageDivision, damage, damage, MultiAmountType.DAMAGE, game);
+                MultiAmountType dialogue = new MultiAmountType("Assign blocker combat damage",
+                        String.format("Assign combat damage among creatures blocked by %s, P/T: %d/%d",
+                                blocker.getLogName(), blocker.getPower().getValue(), blocker.getToughness().getValue()));
+                amounts = player.getMultiAmountWithIndividualConstraints(Outcome.Damage, damageDivision, damage, damage, dialogue, game);
             } else {
                 amounts = new LinkedList<>();
                 amounts.add(damage);
