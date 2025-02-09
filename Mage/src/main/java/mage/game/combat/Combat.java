@@ -61,7 +61,7 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     protected List<CombatGroup> groups = new ArrayList<>();
     protected List<CombatGroup> formerGroups = new ArrayList<>();
-    protected Map<UUID, CombatGroup> blockingGroups = new HashMap<>();
+    protected Map<UUID, CombatGroup> blockingGroups = new LinkedHashMap<>();
     // all possible defenders (players, planeswalkers or battle)
     protected Set<UUID> defenders = new HashSet<>();
     // how many creatures attack defending player
