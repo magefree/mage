@@ -391,82 +391,82 @@ public class CommandersCastTest extends CardTestCommander4PlayersWithAIHelps {
 
         // commander tax: 0
         // both sides are playable
-        checkCommandCardCount("before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
-        checkPlayableAbility("before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", true);
-        checkPlayableAbility("before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
+        checkCommandCardCount("1: before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
+        checkPlayableAbility("1: before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", true);
+        checkPlayableAbility("1: before cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
 
         // cast adventure spell
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
         setChoice(playerA, true); // return commander
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkCommandCardCount("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
-        checkPermanentCount("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food Token", 1);
+        checkCommandCardCount("2: after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
+        checkPermanentCount("2: after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food Token", 1);
         // commander tax: 1x
         // can't cast due commander cost added (we stil have 2x mana)
-        checkPlayableAbility("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
-        checkPlayableAbility("after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
+        checkPlayableAbility("2: after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("2: after first cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
 
         // commander tax: 1x
         // play land number 1 and give extra {G}, so total 3x
         playLand(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
-        checkPlayableAbility("after mana add", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
-        checkPlayableAbility("after mana add", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
+        checkPlayableAbility("3: after mana add", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("3: after mana add", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
 
         // play adventure spell, but keep it
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Treats to Share");
         setChoice(playerA, false); // do not return commander
         waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food Token", 2);
-        checkPlayableAbility("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
-        checkPlayableAbility("after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
+        checkPermanentCount("4: after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Food Token", 2);
+        checkPlayableAbility("4: after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("4: after second cast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
 
         // wait next turn
         // commander tax: 2x BUT it doesn't apply to exile zone (e.g. must use 2x mana instead 6x)
         // it doesn't add commander tax too
         castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
         waitStackResolved(5, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after exile cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
-        checkPermanentTapped("after exile cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest", true, 4 - 2);
+        checkPermanentCount("5: after exile cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
+        checkPermanentTapped("5: after exile cast", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest", true, 4 - 2);
 
         // return commander to command zone
         activateAbility(5, PhaseStep.PRECOMBAT_MAIN, playerA, "target damage 10", "Curious Pair");
         setChoice(playerA, true); // return to command zone
         // can't cast - only {2} mana, but need {G} + {2} + {2}
-        checkPlayableAbility("after return 2", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
-        checkPlayableAbility("after return 2", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
+        checkPlayableAbility("6: after return 2", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("6: after return 2", 5, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
 
         // turn 9
         // commander tax: 2x
         // mana: {G}{G}{G}{G}
         // can't cast adventure spell for {G} + {2} + {2}
         // can't cast creature spell for {G}{G} + {2} + {2}
-        runCode("check commander tax 2x", 9, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+        runCode("7: check commander tax 2x", 9, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             AdventureCard card = (AdventureCard) game.getCommanderCardsFromCommandZone(player, CommanderCardType.ANY).stream().findFirst().get();
             Assert.assertEquals(2, CommanderCastCountValue.instance.calculate(game, card.getSpellAbility(), null));
             Assert.assertEquals(2, CommanderCastCountValue.instance.calculate(game, card.getSpellCard().getSpellAbility(), null));
         });
-        checkPlayableAbility("before last cast 1", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
-        checkPlayableAbility("before last cast 1", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
+        checkPlayableAbility("7: before last cast 1", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("7: before last cast 1", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", false);
         // play land number 2 - can play adventure spell
         playLand(9, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
         // commander tax: 2x
         // mana: {G}{G}{G}{G}{G}
-        checkPlayableAbility("before last cast 2", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
-        checkPlayableAbility("before last cast 2", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
+        checkPlayableAbility("8: before last cast 2", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", false);
+        checkPlayableAbility("8: before last cast 2", 9, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
 
         // turn 13
         // play land number 3 - can play all parts
         playLand(13, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest");
         // commander tax: 2x
         // mana: {G}{G}{G}{G}{G}{G}
-        checkPlayableAbility("before last cast 3", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", true);
-        checkPlayableAbility("before last cast 3", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
+        checkPlayableAbility("9: before last cast 3", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Curious Pair", true);
+        checkPlayableAbility("9: before last cast 3", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Treats to Share", true);
         // cast creature
         castSpell(13, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair");
         waitStackResolved(13, PhaseStep.PRECOMBAT_MAIN);
-        checkPermanentCount("after last cast", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
-        checkPermanentTapped("after last cast", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest", true, 2 + 2 + 2);
-        runCode("check commander tax 3x", 13, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
+        checkPermanentCount("10: after last cast", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Curious Pair", 1);
+        checkPermanentTapped("10: after last cast", 13, PhaseStep.PRECOMBAT_MAIN, playerA, "Forest", true, 2 + 2 + 2);
+        runCode("10: check commander tax 3x", 13, PhaseStep.PRECOMBAT_MAIN, playerA, (info, player, game) -> {
             AdventureCard card = (AdventureCard) game.getCard(game.getCommandersIds(player, CommanderCardType.ANY, false).stream().findFirst().get());
             Assert.assertEquals(3, CommanderCastCountValue.instance.calculate(game, card.getSpellAbility(), null));
             Assert.assertEquals(3, CommanderCastCountValue.instance.calculate(game, card.getSpellCard().getSpellAbility(), null));

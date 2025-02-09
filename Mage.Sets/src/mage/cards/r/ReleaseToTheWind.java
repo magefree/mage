@@ -2,17 +2,17 @@ package mage.cards.r;
 
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.PlayFromNotOwnHandZoneTargetEffect;
+import mage.abilities.effects.common.MayCastTargetCardEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TargetController;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetNonlandPermanent;
+import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -62,8 +62,17 @@ class ReleaseToTheWindEffect extends OneShotEffect {
         if (controller == null || targetPermanent == null) {
             return false;
         }
-
-        return PlayFromNotOwnHandZoneTargetEffect.exileAndPlayFromExile(game, source, targetPermanent,
-                TargetController.OWNER, Duration.Custom, true, false, true);
+        UUID exileId = CardUtil.getExileZoneId("ReleaseToTheWind::" + targetPermanent.getOwnerId(), game);
+        String exileName = "exiled by Release to the Wind";
+        if (!targetPermanent.moveToExile(exileId, exileName, source, game)) {
+            return false;
+        }
+        Card card = game.getCard(targetPermanent.getMainCard().getId());
+        if (card == null || game.getState().getZone(card.getId()) != Zone.EXILED) {
+            return true;
+        }
+        return new MayCastTargetCardEffect(Duration.Custom, CastManaAdjustment.WITHOUT_PAYING_MANA_COST, TargetController.OWNER, false)
+                .setTargetPointer(new FixedTarget(card, game))
+                .apply(game, source);
     }
 }
