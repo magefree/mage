@@ -33,7 +33,7 @@ public final class WatcherForTomorrow extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Hideaway
-        this.addAbility(new HideawayAbility(4));
+        this.addAbility(new HideawayAbility(this, 4));
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // When Watcher for Tomorrow leaves the battlefield, put the exiled card into its owner's hand.

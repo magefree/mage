@@ -102,7 +102,8 @@ public class VerifyCardDataTest {
             "shroud", "banding", "flanking", "horsemanship", "legendary landwalk"
     );
 
-    private static final List<String> doubleWords = new ArrayList<>();
+    private static final List<String> doubleWords = new ArrayList<>(); // for inner calc
+    private static final List<String> etbTriggerPhrases = new ArrayList<>(); // for inner calc
 
     static {
         // numbers
@@ -1989,6 +1990,7 @@ public class VerifyCardDataTest {
         }
 
         String refLowerText = ref.text.toLowerCase(Locale.ENGLISH);
+        String cardLowerText = String.join("\n", card.getRules()).toLowerCase(Locale.ENGLISH);
 
         // special check: kicker ability must be in rules
         if (card.getAbilities().containsClass(MultikickerAbility.class) && card.getRules().stream().noneMatch(rule -> rule.contains("Multikicker"))) {
@@ -2046,6 +2048,21 @@ public class VerifyCardDataTest {
             // how-to fix: add that code at the end of the set
             // cards.removeIf(card -> HIDE_MUTATE_CARDS && MUTATE_CARD_NAMES.contains(card.getName()));
             fail(card, "abilities", "mutate cards aren't implemented and shouldn't be available");
+        }
+
+        // special check: some new creature's ETB must use When this creature enters instead When {this} enters
+        if (EntersBattlefieldTriggeredAbility.ENABLE_TRIGGER_PHRASE_AUTO_FIX) {
+            if (etbTriggerPhrases.isEmpty()) {
+                etbTriggerPhrases.addAll(EntersBattlefieldTriggeredAbility.getPossibleTriggerPhrases());
+                Assert.assertTrue(etbTriggerPhrases.get(0).startsWith("when"));
+            }
+            if (refLowerText.contains("when")) {
+                for (String needTriggerPhrase : etbTriggerPhrases) {
+                    if (refLowerText.contains(needTriggerPhrase) && !cardLowerText.contains(needTriggerPhrase)) {
+                        fail(card, "abilities", "wrong creature's ETB trigger phrase, must use: " + needTriggerPhrase);
+                    }
+                }
+            }
         }
 
         // special check: wrong dies triggers (there are also a runtime check on wrong usage, see isInUseableZoneDiesTrigger)

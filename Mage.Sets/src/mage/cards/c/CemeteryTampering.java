@@ -23,7 +23,7 @@ public final class CemeteryTampering extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // Hideaway 5
-        this.addAbility(new HideawayAbility(5));
+        this.addAbility(new HideawayAbility(this, 5));
 
         // At the beginning of your upkeep, you may mill three cards. Then if there are twenty or more cards in your graveyard, you may play the exiled card without paying its mana cost.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(

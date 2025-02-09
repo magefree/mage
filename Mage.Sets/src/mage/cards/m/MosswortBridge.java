@@ -28,7 +28,7 @@ public final class MosswortBridge extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
         // Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)
-        this.addAbility(new HideawayAbility(4));
+        this.addAbility(new HideawayAbility(this, 4));
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {T}: Add {G}.

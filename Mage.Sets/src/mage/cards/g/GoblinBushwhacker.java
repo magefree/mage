@@ -34,7 +34,7 @@ public final class GoblinBushwhacker extends CardImpl {
         // Kicker {R} (You may pay an additional {R} as you cast this spell.)
         this.addAbility(new KickerAbility("{R}"));
 
-        // When Goblin Bushwhacker enters the battlefield, if it was kicked, creatures you control get +1/+0 and gain haste until end of turn.
+        // When this creature enters, if it was kicked, creatures you control get +1/+0 and gain haste until end of turn.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn), false);
         ability.addEffect(new GainAbilityControlledEffect(
                 HasteAbility.getInstance(), 
@@ -44,7 +44,7 @@ public final class GoblinBushwhacker extends CardImpl {
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 ability,
                 KickedCondition.ONCE,
-                "When {this} enters, "
+                "When this creature enters, "
                 + "if it was kicked, "
                 + "creatures you control get +1/+0 and gain haste until end of turn."
         ));

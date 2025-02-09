@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.abilities.*;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
@@ -344,18 +345,17 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
             }
         }
 
-        // rules fix: workaround to add text auto-replacement for creature's ETB
-        if (this.isCreature() && ability.getRule().startsWith("When {this} enters") && ability instanceof  TriggeredAbility) {
-            TriggeredAbility triggeredAbility = ((TriggeredAbility) ability);
-            if (triggeredAbility.getTriggerPhrase() != null) {
-                // TODO: delete or enable after wizards update all cards, not last sets only, see https://github.com/magefree/mage/issues/12791
-                //triggeredAbility.setTriggerPhrase(triggeredAbility.getTriggerPhrase().replace("{this}", "this creature"));
+        // rules fix: workaround to fix "When {this} enters" into "When this xxx enters"
+        if (EntersBattlefieldTriggeredAbility.ENABLE_TRIGGER_PHRASE_AUTO_FIX) {
+            if (ability instanceof TriggeredAbility) {
+                TriggeredAbility triggeredAbility = ((TriggeredAbility) ability);
+                if (triggeredAbility.getTriggerPhrase() != null && triggeredAbility.getTriggerPhrase().startsWith("When {this} enters")) {
+                    // there are old sets with old oracle, but it's ok for newer sets, so keep that rules fix
+                    // see https://github.com/magefree/mage/issues/12791
+                    String etbDescription = EntersBattlefieldTriggeredAbility.getThisObjectDescription(this);
+                    triggeredAbility.setTriggerPhrase(triggeredAbility.getTriggerPhrase().replace("{this}", etbDescription));
+                }
             }
-        }
-        // verify check: all creatures with ETB must use "When this creature enters" instead "When {this} enters"
-        if (this.isCreature() && ability.getRule().startsWith("When {this} enters")) {
-            // see above
-            //throw new IllegalArgumentException("Wrong code usage: creature's ETB ability must use text like \"When this creature enters\"");
         }
     }
 

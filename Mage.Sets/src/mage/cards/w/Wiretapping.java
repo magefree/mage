@@ -28,7 +28,7 @@ public final class Wiretapping extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{U}");
 
         // Hideaway 5
-        this.addAbility(new HideawayAbility(5));
+        this.addAbility(new HideawayAbility(this, 5));
 
         // Whenever you draw your first card during each of your draw steps, draw a card. Then if you have nine or more cards in hand, you may play the exiled card without paying its mana cost.
         this.addAbility(new WiretappingTriggeredAbility());
