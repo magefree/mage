@@ -10,6 +10,7 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SavedDamageValue;
+import mage.abilities.dynamicvalue.common.SavedDiscardValue;
 import mage.abilities.dynamicvalue.common.SavedGainedLifeValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffect;
@@ -749,7 +750,7 @@ public final class CardUtil {
         return true;
     }
 
-    public static String createObjectRealtedWindowTitle(Ability source, Game game, String textSuffix) {
+    public static String createObjectRelatedWindowTitle(Ability source, Game game, String textSuffix) {
         String title;
         if (source != null) {
             MageObject sourceObject = game.getObject(source);
@@ -967,7 +968,9 @@ public final class CardUtil {
         boolean xValue = amount.toString().equals("X");
         if (xValue) {
             sb.append("X ").append(counter.getName()).append(" counters");
-        } else if (amount == SavedDamageValue.MANY || amount == SavedGainedLifeValue.MANY) {
+        } else if (amount == SavedDamageValue.MANY
+                || amount == SavedGainedLifeValue.MANY
+                || amount == SavedDiscardValue.MANY) {
             sb.append("that many ").append(counter.getName()).append(" counters");
         } else {
             sb.append(counter.getDescription());
@@ -1176,7 +1179,7 @@ public final class CardUtil {
                 .sum();
         int remainingValue = maxValue - selectedValue;
         Set<UUID> validTargets = new HashSet<>();
-        for (UUID id: possibleTargets) {
+        for (UUID id : possibleTargets) {
             MageObject mageObject = game.getObject(id);
             if (mageObject != null && valueMapper.applyAsInt(mageObject) <= remainingValue) {
                 validTargets.add(id);

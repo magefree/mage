@@ -16,7 +16,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
@@ -69,8 +68,7 @@ class LightUpTheNightEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        // Normal cast + Flashback cast
-        int damage = CardUtil.getSourceCostsTag(game, source, "X", 0) + GetXValue.instance.calculate(game, source, this);
+        int damage = GetXValue.instance.calculate(game, source, this);
         UUID targetId = getTargetPointer().getFirst(game, source);
         Player player = game.getPlayer(targetId);
         if (player != null) {

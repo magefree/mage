@@ -92,8 +92,8 @@ class GandalfOfTheSecretFireEffect extends ReplacementEffectImpl {
     private final MageObjectReference mor;
 
     GandalfOfTheSecretFireEffect(Spell spell, Game game) {
-        super(Duration.WhileOnStack, Outcome.Benefit);
-        this.mor = new MageObjectReference(spell, game);
+        super(Duration.OneUse, Outcome.Benefit);
+        this.mor = new MageObjectReference(spell.getCard(), game);
     }
 
     private GandalfOfTheSecretFireEffect(final GandalfOfTheSecretFireEffect effect) {
@@ -136,7 +136,7 @@ class GandalfOfTheSecretFireEffect extends ReplacementEffectImpl {
                 || zEvent.getToZone() != Zone.GRAVEYARD
                 || event.getSourceId() == null
                 || !event.getSourceId().equals(event.getTargetId())
-                || mor.getZoneChangeCounter() != game.getState().getZoneChangeCounter(event.getSourceId())) {
+                || !mor.equals(new MageObjectReference(event.getTargetId(), game))) {
             return false;
         }
         Spell spell = game.getStack().getSpell(mor.getSourceId());

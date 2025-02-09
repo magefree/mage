@@ -51,7 +51,7 @@ public class LoadTest {
     private static final Boolean TEST_SHOW_GAME_LOGS_AS_HTML = false; // html is original format with full data, but can be too bloated
     private static final String TEST_AI_GAME_MODE = "Freeform Commander Free For All";
     private static final String TEST_AI_DECK_TYPE = "Variant Magic - Freeform Commander";
-    private static final String TEST_AI_RANDOM_DECK_SETS = "LCI,LCC,WHO"; // set for random generated decks (empty for all sets usage, PELP for lands only - communication test)
+    private static final String TEST_AI_RANDOM_DECK_SETS = ""; // sets list for random generated decks (GRN,ACR for specific sets, empty for all sets, PELP for lands only - communication test)
     private static final String TEST_AI_RANDOM_DECK_COLORS_FOR_EMPTY_GAME = "GR";  // colors list for deck generation, empty for all colors
     private static final String TEST_AI_RANDOM_DECK_COLORS_FOR_AI_GAME = "WUBRG";
     private static final String TEST_AI_CUSTOM_DECK_PATH_1 = ""; // custom deck file instead random for player 1 (empty for random)
@@ -217,7 +217,6 @@ public class LoadTest {
 
     public void playTwoAIGame(String gameName, Integer taskNumber, TasksProgress tasksProgress, long randomSeed, String deckColors, String deckAllowedSets, LoadTestGameResult gameResult) {
         Assert.assertFalse("need deck colors", deckColors.isEmpty());
-        Assert.assertFalse("need allowed sets", deckAllowedSets.isEmpty());
 
         // monitor and game source
         LoadPlayer monitor = new LoadPlayer("mon", true, gameName + ", mon");
@@ -250,8 +249,13 @@ public class LoadTest {
             TableView checkGame = monitor.getTable(tableId).orElse(null);
             TableState state = (checkGame == null ? null : checkGame.getTableState());
 
-            tasksProgress.update(taskNumber, state == TableState.FINISHED, gameView == null ? 0 : gameView.getTurn());
+            String finishInfo = "";
+            if (state == TableState.FINISHED) {
+                finishInfo = gameView == null ? "??" : gameView.getStep().getStepShortText().toLowerCase(Locale.ENGLISH);
+            }
+            tasksProgress.update(taskNumber, finishInfo, gameView == null ? 0 : gameView.getTurn());
             String globalProgress = tasksProgress.getInfo();
+            monitor.client.updateGlobalProgress(globalProgress);
 
             if (gameView != null && checkGame != null) {
                 logger.info(globalProgress + ", " + checkGame.getTableName() + ": ---");
@@ -283,12 +287,13 @@ public class LoadTest {
                             if (Objects.equals(gameView.getActivePlayerId(), p.getPlayerId())) {
                                 activeInfo = " (active)";
                             }
-                            logger.info(String.format("%s, %s, status: %s - Life=%d; Lib=%d;%s",
+                            logger.info(String.format("%s, %s, status: %s - Life=%d; Lib=%d; CRs=%d%s;",
                                     globalProgress,
                                     checkGame.getTableName(),
                                     p.getName(),
                                     p.getLife(),
                                     p.getLibraryCount(),
+                                    p.getBattlefield().values().stream().filter(CardView::isCreature).mapToInt(x -> 1).sum(),
                                     activeInfo
                             ));
                         });
@@ -319,7 +324,7 @@ public class LoadTest {
         long randomSeed = RandomUtil.nextInt();
         LoadTestGameResult gameResult = gameResults.createGame(0, "test game", randomSeed);
         TasksProgress tasksProgress = new TasksProgress();
-        tasksProgress.update(1, true, 0);
+        tasksProgress.update(1, "", 0);
         playTwoAIGame("Single AI game", 1, tasksProgress, randomSeed, "WGUBR", TEST_AI_RANDOM_DECK_SETS, gameResult);
 
         printGameResults(gameResults);
@@ -331,12 +336,13 @@ public class LoadTest {
         // play multiple AI games with CLIENT side code (catch every GameView changes from the server)
 
         int singleGameSID = 0; // set sid for same deck games, set 0 for random decks
-        int gamesAmount = 10; // games per run
-        boolean isRunParallel = true; // can generate too much logs in test run, so search server logs for possible errors
+
+        int runTotalGames = 10;
+        int runMaxParallelGames = 5; // use 1 to run one by one (warning, it's limited by COMPUTER_MAX_THREADS_FOR_SIMULATIONS)
 
         ExecutorService executerService;
-        if (isRunParallel) {
-            executerService = Executors.newFixedThreadPool(gamesAmount, new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TESTS_AI_VS_AI_GAMES));
+        if (runMaxParallelGames > 1) {
+            executerService = Executors.newFixedThreadPool(runMaxParallelGames, new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TESTS_AI_VS_AI_GAMES));
         } else {
             executerService = Executors.newSingleThreadExecutor(new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_TESTS_AI_VS_AI_GAMES));
         }
@@ -344,11 +350,11 @@ public class LoadTest {
         // save random seeds for repeated results (in decks generating)
         List<Integer> seedsList = new ArrayList<>();
         if (singleGameSID != 0) {
-            for (int i = 1; i <= gamesAmount; i++) {
+            for (int i = 1; i <= runTotalGames; i++) {
                 seedsList.add(singleGameSID);
             }
         } else {
-            for (int i = 1; i <= gamesAmount; i++) {
+            for (int i = 1; i <= runTotalGames; i++) {
                 seedsList.add(RandomUtil.nextInt());
             }
         }
@@ -356,26 +362,42 @@ public class LoadTest {
         LoadTestGameResultsList gameResults = new LoadTestGameResultsList();
         try {
             TasksProgress tasksProgress = new TasksProgress();
+            List<Future> gameTasks = new ArrayList<>();
             for (int i = 0; i < seedsList.size(); i++) {
                 int gameIndex = i;
-                tasksProgress.update(gameIndex + 1, true, 0);
+                tasksProgress.update(gameIndex + 1, "", 0);
                 long randomSeed = seedsList.get(i);
                 logger.info("Game " + (i + 1) + " of " + seedsList.size() + ", RANDOM seed: " + randomSeed);
                 Future gameTask = executerService.submit(() -> {
-                    String gameName = "AI game #" + (gameIndex + 1);
+                    String gameName = String.format("AI game #%02d", gameIndex + 1);
                     LoadTestGameResult gameResult = gameResults.createGame(gameIndex + 1, gameName, randomSeed);
                     playTwoAIGame(gameName, gameIndex + 1, tasksProgress, randomSeed, TEST_AI_RANDOM_DECK_COLORS_FOR_AI_GAME, TEST_AI_RANDOM_DECK_SETS, gameResult);
                 });
+                gameTasks.add(gameTask);
 
-                if (!isRunParallel) {
+                if (runMaxParallelGames <= 1) {
                     // run one by one
                     gameTask.get();
                 }
             }
-            if (isRunParallel) {
+            if (runMaxParallelGames > 1) {
                 // run parallel
                 executerService.shutdown();
-                Assert.assertTrue(executerService.awaitTermination(1, TimeUnit.HOURS));
+                Assert.assertTrue("running too long", executerService.awaitTermination(1, TimeUnit.HOURS));
+            }
+
+            // check errors
+            int errorsCount = 0;
+            for (Future task : gameTasks) {
+                try {
+                    task.get();
+                } catch (InterruptedException | ExecutionException e) {
+                    errorsCount++;
+                    logger.error(e, e);
+                }
+            }
+            if (errorsCount > 0) {
+                Assert.fail(String.format("Found %d critical errors in running games, see logs above", errorsCount));
             }
         } catch (InterruptedException | ExecutionException e) {
             logger.error(e, e);
@@ -583,11 +605,11 @@ public class LoadTest {
     private static class TasksProgress {
 
         private String info;
-        private final Map<Integer, Boolean> finishes = new LinkedHashMap<>();
-        private final Map<Integer, Integer> turns = new LinkedHashMap<>();
+        private final Map<Integer, String> finishes = new LinkedHashMap<>(); // game number, finish on step
+        private final Map<Integer, Integer> turns = new LinkedHashMap<>(); // game number, current turn
 
-        synchronized public void update(Integer taskNumber, boolean newFinish, Integer newTurn) {
-            Boolean oldFinish = this.finishes.getOrDefault(taskNumber, false);
+        synchronized public void update(Integer taskNumber, String newFinish, Integer newTurn) {
+            String oldFinish = this.finishes.getOrDefault(taskNumber, "");
             Integer oldTurn = this.turns.getOrDefault(taskNumber, 0);
             if (!this.finishes.containsKey(taskNumber)
                     || !Objects.equals(oldFinish, newFinish)
@@ -599,14 +621,25 @@ public class LoadTest {
         }
 
         private void updateInfo() {
-            // example: progress [=00, +01, +01, =12, =15, =01, +61]
+            // example: progress 33% [20.cd, 21.__, 17.__], AI game #09: ---
+
+            int completed = this.finishes.values().stream().mapToInt(x -> x.isEmpty() ? 0 : 1).sum();
+            int completedPercent = this.finishes.size() == 0 ? 0 : completed * 100 / this.finishes.size();
+
             String res = this.finishes.keySet().stream()
-                    .map(taskNumber -> String.format("%s%02d",
-                            this.finishes.getOrDefault(taskNumber, false) ? "=" : "+",
-                            this.turns.getOrDefault(taskNumber, 0)
-                    ))
+                    .map(taskNumber -> {
+                        String turn = String.format("%02d", this.turns.getOrDefault(taskNumber, 0));
+                        String finishInfo = this.finishes.getOrDefault(taskNumber, "");
+                        if (finishInfo.isEmpty()) {
+                            // active
+                            return turn + ".__";
+                        } else {
+                            // done
+                            return turn + "." + finishInfo;
+                        }
+                    })
                     .collect(Collectors.joining(", "));
-            this.info = String.format("progress [%s]", res);
+            this.info = String.format("progress %d%% [%s]", completedPercent, res);
         }
 
         public String getInfo() {
@@ -848,8 +881,30 @@ public class LoadTest {
             return finalGameView == null ? 0 : this.finalGameView.getPlayers().get(1).getLife();
         }
 
+        public int getCreaturesCount1() {
+            return finalGameView == null ? 0 : this.finalGameView.getPlayers().get(0).getBattlefield().values()
+                    .stream()
+                    .filter(CardView::isCreature)
+                    .mapToInt(x -> 1)
+                    .sum();
+        }
+
+        public int getCreaturesCount2() {
+            return finalGameView == null ? 0 : this.finalGameView.getPlayers().get(1).getBattlefield().values()
+                    .stream()
+                    .filter(CardView::isCreature)
+                    .mapToInt(x -> 1)
+                    .sum();
+        }
+
         public int getTurn() {
             return finalGameView == null ? 0 : this.finalGameView.getTurn();
+        }
+
+        public String getTurnInfo() {
+            int turn = finalGameView == null ? 0 : this.finalGameView.getTurn();
+            String stepInfo = finalGameView == null ? "??" : this.finalGameView.getStep().getStepShortText().toLowerCase(Locale.ENGLISH);
+            return String.format("%02d.%s", turn, stepInfo);
         }
 
         public int getDurationMs() {
@@ -859,12 +914,16 @@ public class LoadTest {
         public int getTotalErrorsCount() {
             return finalGameView == null ? 0 : this.finalGameView.getTotalErrorsCount();
         }
+
+        public int getTotalEffectsCount() {
+            return finalGameView == null ? 0 : this.finalGameView.getTotalEffectsCount();
+        }
     }
 
     private static class LoadTestGameResultsList extends HashMap<Integer, LoadTestGameResult> {
 
-        private static final String tableFormatHeader = "|%-10s|%-15s|%-20s|%-10s|%-10s|%-15s|%-15s|%-10s|%-20s|%n";
-        private static final String tableFormatData = "|%-10s|%15s|%20s|%10s|%10s|%15s|%15s|%10s|%20s|%n";
+        private static final String tableFormatHeader = "|%-10s|%-15s|%-20s|%-10s|%-10s|%-10s|%-10s|%-10s|%-15s|%-15s|%-10s|%n";
+        private static final String tableFormatData = "|%-10s|%15s|%20s|%10s|%10s|%10s|%10s|%10s|%15s|%15s|%10s|%n";
 
         public LoadTestGameResult createGame(int index, String name, long randomSeed) {
             if (this.containsKey(index)) {
@@ -881,9 +940,12 @@ public class LoadTest {
                     "name",
                     "random sid",
                     "errors",
+                    "effects",
                     "turn",
-                    "player 1",
-                    "player 2",
+                    "life p1",
+                    "life p2",
+                    "creatures p1",
+                    "creatures p2",
                     "time, sec",
                     "time per turn, sec"
             );
@@ -900,9 +962,12 @@ public class LoadTest {
                     gameResult.name, //"name",
                     String.valueOf(gameResult.randomSeed), // "random sid",
                     String.valueOf(gameResult.getTotalErrorsCount()), // "errors",
-                    String.valueOf(gameResult.getTurn()), //"turn",
-                    String.valueOf(gameResult.getLife1()), //"player 1",
-                    String.valueOf(gameResult.getLife2()), //"player 2",
+                    String.valueOf(gameResult.getTotalEffectsCount()), // "effects",
+                    gameResult.getTurnInfo(), //"turn",
+                    String.valueOf(gameResult.getLife1()), //"life p1",
+                    String.valueOf(gameResult.getLife2()), //"life p2",
+                    String.valueOf(gameResult.getCreaturesCount1()), //"creatures p1",
+                    String.valueOf(gameResult.getCreaturesCount2()), //"creatures p2",
                     String.format("%.3f", (float) gameResult.getDurationMs() / 1000), //"time, sec",
                     String.format("%.3f", ((float) gameResult.getDurationMs() / 1000) / gameResult.getTurn()) //"per turn, sec"
             );
@@ -915,9 +980,12 @@ public class LoadTest {
                     String.valueOf(this.size()), //"name",
                     "total, secs: " + String.format("%.3f", (float) this.getTotalDurationMs() / 1000), // "random sid",
                     String.valueOf(this.getTotalErrorsCount()), // errors
+                    String.valueOf(this.getAvgEffectsCount()), // effects
                     String.valueOf(this.getAvgTurn()), // turn
-                    String.valueOf(this.getAvgLife1()), // player 1
-                    String.valueOf(this.getAvgLife2()), // player 2
+                    String.valueOf(this.getAvgLife1()), // life p1
+                    String.valueOf(this.getAvgLife2()), // life p2
+                    String.valueOf(this.getAvgCreaturesCount1()), // creatures p1
+                    String.valueOf(this.getAvgCreaturesCount2()), // creatures p2
                     String.valueOf(String.format("%.3f", (float) this.getAvgDurationMs() / 1000)), // time, sec
                     String.valueOf(String.format("%.3f", (float) this.getAvgDurationPerTurnMs() / 1000)) // time per turn, sec
             );
@@ -926,6 +994,10 @@ public class LoadTest {
 
         private int getTotalErrorsCount() {
             return this.values().stream().mapToInt(LoadTestGameResult::getTotalErrorsCount).sum();
+        }
+
+        private int getAvgEffectsCount() {
+            return this.size() == 0 ? 0 : this.values().stream().mapToInt(LoadTestGameResult::getTotalEffectsCount).sum() / this.size();
         }
 
         private int getAvgTurn() {
@@ -938,6 +1010,14 @@ public class LoadTest {
 
         private int getAvgLife2() {
             return this.size() == 0 ? 0 : this.values().stream().mapToInt(LoadTestGameResult::getLife2).sum() / this.size();
+        }
+
+        private int getAvgCreaturesCount1() {
+            return this.size() == 0 ? 0 : this.values().stream().mapToInt(LoadTestGameResult::getCreaturesCount1).sum() / this.size();
+        }
+
+        private int getAvgCreaturesCount2() {
+            return this.size() == 0 ? 0 : this.values().stream().mapToInt(LoadTestGameResult::getCreaturesCount2).sum() / this.size();
         }
 
         private int getTotalDurationMs() {

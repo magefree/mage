@@ -36,7 +36,7 @@ public final class VeteranBeastrider extends CardImpl {
 
         // {2}{G}{W}: Creatures you control get +1/+1 until end of turn.
         this.addAbility(new SimpleActivatedAbility(new BoostControlledEffect(
-                1, 1, Duration.EndOfTurn, true
+                1, 1, Duration.EndOfTurn, false
         ), new ManaCostsImpl<>("{2}{G}{W}")));
     }
 

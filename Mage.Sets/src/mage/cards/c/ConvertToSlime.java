@@ -2,8 +2,8 @@ package mage.cards.c;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.common.DeliriumCondition;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -33,7 +33,7 @@ public final class ConvertToSlime extends CardImpl {
         this.getSpellAbility().addTarget(new TargetArtifactPermanent(0, 1));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 1));
         this.getSpellAbility().addTarget(new TargetEnchantmentPermanent(0, 1));
-        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
+        this.getSpellAbility().addHint(CardTypesInGraveyardCount.YOU.getHint());
     }
 
     private ConvertToSlime(final ConvertToSlime card) {

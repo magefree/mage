@@ -24,7 +24,9 @@ public final class TarmogoyfToken extends TokenImpl {
         toughness = new MageInt(1);
 
         // Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessPlusOneSourceEffect(CardTypesInGraveyardCount.ALL)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SetBasePowerToughnessPlusOneSourceEffect(CardTypesInGraveyardCount.ALL)
+        ).addHint(CardTypesInGraveyardCount.ALL.getHint()));
     }
 
     private TarmogoyfToken(final TarmogoyfToken token) {

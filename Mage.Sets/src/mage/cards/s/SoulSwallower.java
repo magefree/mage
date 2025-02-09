@@ -3,11 +3,11 @@ package mage.cards.s;
 import java.util.UUID;
 
 import mage.MageInt;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -35,7 +35,7 @@ public final class SoulSwallower extends CardImpl {
                 DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; At the beginning of your upkeep, if there are four or more card types among cards in your graveyard, "
                         + "put three +1/+1 counters on Soul Swallower.")
-                .addHint(CardTypesInGraveyardHint.YOU));
+                .addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private SoulSwallower(final SoulSwallower card) {

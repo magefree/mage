@@ -215,6 +215,14 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean isDrawsOnOpponentsTurn();
 
+    int getSpeed();
+
+    void initSpeed(Game game);
+
+    void increaseSpeed(Game game);
+
+    void decreaseSpeed(Game game);
+
     /**
      * Returns alternative casting costs a player can cast spells for
      *
@@ -619,6 +627,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * <p>
      * Warning, if you use it from continuous effect, then check with extra call
      * isCanLookAtNextTopLibraryCard
+     * If you use revealCards with face-down permanents, they will be revealed face up.
      *
      * @param source
      * @param name

@@ -35,7 +35,7 @@ class MayCastFromGraveyardEffect extends AsThoughEffectImpl {
 
     MayCastFromGraveyardEffect() {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.EndOfGame, Outcome.PutCreatureInPlay);
-        staticText = "you may cast {this} from your graveyard";
+        staticText = "you may cast this card from your graveyard";
     }
 
     private MayCastFromGraveyardEffect(final MayCastFromGraveyardEffect effect) {

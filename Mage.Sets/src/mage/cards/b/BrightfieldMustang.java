@@ -29,7 +29,7 @@ public final class BrightfieldMustang extends CardImpl {
 
         // Whenever this creature attacks while saddled, untap it and put a +1/+1 counter on it.
         Ability ability = new AttacksWhileSaddledTriggeredAbility(new UntapSourceEffect().setText("untap it"));
-        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()).setText("and put a +1/+1 counter on it"));
         this.addAbility(ability);
 
         // Saddle 1

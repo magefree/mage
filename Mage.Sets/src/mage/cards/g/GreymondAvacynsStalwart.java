@@ -7,9 +7,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -60,7 +62,7 @@ public final class GreymondAvacynsStalwart extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(
                 new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter),
                 condition, "as long as you control four or more Humans, Humans you control get +2/+2"
-        )));
+        )).addHint(new ValueHint("Humans you control", new PermanentsOnBattlefieldCount(filter2))));
     }
 
     private GreymondAvacynsStalwart(final GreymondAvacynsStalwart card) {

@@ -74,7 +74,7 @@ class FeatherTheRedeemedTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.SPELL_CAST;
+        return (event.getType() == GameEvent.EventType.SPELL_CAST);
     }
 
     @Override
@@ -83,7 +83,7 @@ class FeatherTheRedeemedTriggeredAbility extends TriggeredAbilityImpl {
             return false;
         }
         Spell spell = game.getStack().getSpell(event.getTargetId());
-        if (spell == null) {
+        if ((spell == null) || !spell.isInstantOrSorcery(game)) {
             return false;
         }
         SpellAbility sa = spell.getSpellAbility();
@@ -95,7 +95,7 @@ class FeatherTheRedeemedTriggeredAbility extends TriggeredAbilityImpl {
                     if (permanent != null && permanent.isCreature(game)
                             && permanent.isControlledBy(getControllerId())) {
                         this.getEffects().clear();
-                        this.addEffect(new FeatherTheRedeemedEffect(new MageObjectReference(spell, game)));
+                        this.addEffect(new FeatherTheRedeemedEffect(new MageObjectReference(spell.getCard(), game)));
                         return true;
                     }
                 }
@@ -106,7 +106,7 @@ class FeatherTheRedeemedTriggeredAbility extends TriggeredAbilityImpl {
                     if (permanent != null && permanent.isCreature(game)
                             && permanent.isControlledBy(getControllerId())) {
                         this.getEffects().clear();
-                        this.addEffect(new FeatherTheRedeemedEffect(new MageObjectReference(spell, game)));
+                        this.addEffect(new FeatherTheRedeemedEffect(new MageObjectReference(spell.getCard(), game)));
                         return true;
                     }
                 }
@@ -126,9 +126,9 @@ class FeatherTheRedeemedTriggeredAbility extends TriggeredAbilityImpl {
 class FeatherTheRedeemedEffect extends ReplacementEffectImpl {
 
     private final MageObjectReference mor;
-
+   
     FeatherTheRedeemedEffect(MageObjectReference mor) {
-        super(Duration.WhileOnStack, Outcome.Benefit);
+        super(Duration.OneUse, Outcome.Benefit);
         this.mor = mor;
     }
 
@@ -166,12 +166,11 @@ class FeatherTheRedeemedEffect extends ReplacementEffectImpl {
                 || zEvent.getToZone() != Zone.GRAVEYARD
                 || event.getSourceId() == null
                 || !event.getSourceId().equals(event.getTargetId())
-                || mor.getZoneChangeCounter() != game.getState().getZoneChangeCounter(event.getSourceId())) {
-            return false;
+                || !mor.equals(new MageObjectReference(event.getTargetId(), game))) {
+    	    return false;
         }
-        Spell spell = game.getStack().getSpell(mor.getSourceId());
-        return spell != null && spell.isInstantOrSorcery(game);
-    }
+            return true;
+	}
 
     @Override
     public FeatherTheRedeemedEffect copy() {

@@ -165,7 +165,6 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblStatus">
       <Properties>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtServer">
@@ -212,7 +211,6 @@
           <ComponentRef name="txtEmail"/>
         </Property>
         <Property name="text" type="java.lang.String" value="(used for password reset)"/>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
   </SubComponents>

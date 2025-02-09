@@ -1,10 +1,10 @@
 package mage.cards.i;
 
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.effects.common.DiscardOneOrMoreCardsTriggeredAbility;
 import mage.abilities.effects.common.DoWhenCostPaid;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
@@ -12,10 +12,11 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.SubType;
+import mage.constants.SuperType;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.target.common.TargetAttackingCreature;
 
 import java.util.UUID;
@@ -46,7 +47,10 @@ public final class IntiSeneschalOfTheSun extends CardImpl {
         ), 1));
 
         // Whenever you discard one or more cards, exile the top card of your library. You may play that card until your next end step.
-        this.addAbility(new IntiSeneschalOfTheSunTriggeredAbility());
+        this.addAbility(new DiscardOneOrMoreCardsTriggeredAbility(
+                new ExileTopXMayPlayUntilEffect(1, Duration.UntilYourNextEndStep)
+                        .withTextOptions("that card", true)
+        ));
     }
 
     private IntiSeneschalOfTheSun(final IntiSeneschalOfTheSun card) {
@@ -56,33 +60,5 @@ public final class IntiSeneschalOfTheSun extends CardImpl {
     @Override
     public IntiSeneschalOfTheSun copy() {
         return new IntiSeneschalOfTheSun(this);
-    }
-}
-
-class IntiSeneschalOfTheSunTriggeredAbility extends TriggeredAbilityImpl {
-
-    IntiSeneschalOfTheSunTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new ExileTopXMayPlayUntilEffect(1, Duration.UntilYourNextEndStep)
-                .withTextOptions("that card", true));
-        this.setTriggerPhrase("Whenever you discard one or more cards, ");
-    }
-
-    private IntiSeneschalOfTheSunTriggeredAbility(final IntiSeneschalOfTheSunTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public IntiSeneschalOfTheSunTriggeredAbility copy() {
-        return new IntiSeneschalOfTheSunTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkEventType(GameEvent event, Game game) {
-        return event.getType() == GameEvent.EventType.DISCARDED_CARDS;
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        return isControlledBy(event.getPlayerId());
     }
 }

@@ -18,7 +18,7 @@ public class DecayedAbility extends StaticAbility {
         super(Zone.BATTLEFIELD, new CantBlockSourceEffect(Duration.WhileOnBattlefield));
         this.addSubAbility(new AttacksTriggeredAbility(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheEndOfCombatDelayedTriggeredAbility(new SacrificeSourceEffect())
-        ).setText("sacrifice it at end of combat")).setTriggerPhrase("When {this} attacks, "));
+        ).setText("sacrifice it at end of combat")).setTriggerPhrase("When {this} attacks, ").setRuleVisible(false));
     }
 
     private DecayedAbility(final DecayedAbility ability) {
@@ -32,6 +32,6 @@ public class DecayedAbility extends StaticAbility {
 
     @Override
     public String getRule() {
-        return "decayed";
+        return "decayed <i>(This creature can't block. When it attacks, sacrifice it at end of combat.)</i>";
     }
 }

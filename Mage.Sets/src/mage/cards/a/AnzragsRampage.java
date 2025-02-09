@@ -144,7 +144,7 @@ class AnzragsRampageEffect extends OneShotEffect {
         controller.moveCardsToExile(
                 cards.getCards(game), source, game, true,
                 CardUtil.getExileZoneId(game, source),
-                CardUtil.createObjectRealtedWindowTitle(source, game, null));
+                CardUtil.createObjectRelatedWindowTitle(source, game, null));
 
         // You may put a creature card exiled this way onto the battlefield.
         TargetCard targetCard = new TargetCardInExile(

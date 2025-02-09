@@ -27,6 +27,7 @@ import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.designations.Designation;
 import mage.designations.DesignationType;
+import mage.designations.Speed;
 import mage.filter.FilterCard;
 import mage.filter.FilterMana;
 import mage.filter.FilterPermanent;
@@ -153,6 +154,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     protected boolean canPlotFromTopOfLibrary = false;
     protected boolean drawsFromBottom = false;
     protected boolean drawsOnOpponentsTurn = false;
+    protected int speed = 0;
 
     protected FilterPermanent sacrificeCostFilter;
     protected List<AlternativeSourceCosts> alternativeSourceCosts = new ArrayList<>();
@@ -252,6 +254,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canPlotFromTopOfLibrary = player.canPlotFromTopOfLibrary;
         this.drawsFromBottom = player.drawsFromBottom;
         this.drawsOnOpponentsTurn = player.drawsOnOpponentsTurn;
+        this.speed = player.speed;
 
         this.attachments.addAll(player.attachments);
 
@@ -367,6 +370,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.drawsFromBottom = player.isDrawsFromBottom();
         this.drawsOnOpponentsTurn = player.isDrawsOnOpponentsTurn();
         this.alternativeSourceCosts = CardUtil.deepCopyObject(((PlayerImpl) player).alternativeSourceCosts);
+        this.speed = player.getSpeed();
 
         this.topCardRevealed = player.isTopCardRevealed();
 
@@ -480,6 +484,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         this.canPlotFromTopOfLibrary = false;
         this.drawsFromBottom = false;
         this.drawsOnOpponentsTurn = false;
+        this.speed = 0;
 
         this.sacrificeCostFilter = null;
         this.alternativeSourceCosts.clear();
@@ -1895,9 +1900,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             return;
         }
         if (postToLog) {
-            game.getState().getRevealed().add(CardUtil.createObjectRealtedWindowTitle(source, game, titleSuffix), cards);
+            game.getState().getRevealed().add(CardUtil.createObjectRelatedWindowTitle(source, game, titleSuffix), cards);
         } else {
-            game.getState().getRevealed().update(CardUtil.createObjectRealtedWindowTitle(source, game, titleSuffix), cards);
+            game.getState().getRevealed().update(CardUtil.createObjectRelatedWindowTitle(source, game, titleSuffix), cards);
         }
         if (postToLog && !game.isSimulation()) {
             StringBuilder sb = new StringBuilder(getLogName()).append(" reveals ");
@@ -1905,7 +1910,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             int last = cards.size();
             for (Card card : cards.getCards(game)) {
                 current++;
-                sb.append(GameLog.getColoredObjectName(card)); // TODO: see same usage in OfferingAbility for hide card's id (is it needs for reveal too?!)
+                if (card instanceof PermanentCard && card.isFaceDown(game)) {
+                    sb.append(GameLog.getColoredObjectName(card.getMainCard()));
+                } else {
+                    sb.append(GameLog.getColoredObjectName(card)); // TODO: see same usage in OfferingAbility for hide card's id (is it needs for reveal too?!)
+                }
                 if (current < last) {
                     sb.append(", ");
                 }
@@ -1928,7 +1937,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
     @Override
     public void lookAtCards(Ability source, String titleSuffix, Cards cards, Game game) {
-        game.getState().getLookedAt(this.playerId).add(CardUtil.createObjectRealtedWindowTitle(source, game, titleSuffix), cards);
+        game.getState().getLookedAt(this.playerId).add(CardUtil.createObjectRelatedWindowTitle(source, game, titleSuffix), cards);
         game.fireUpdatePlayersEvent();
     }
 
@@ -4452,11 +4461,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     /**
-     * Only used for AIs
-     *
-     * @param ability
-     * @param game
-     * @return
+     * AI related code
      */
     @Override
     public List<Ability> getPlayableOptions(Ability ability, Game game) {
@@ -4477,6 +4482,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         return options;
     }
 
+    /**
+     * AI related code
+     */
     private void addModeOptions(List<Ability> options, Ability option, Game game) {
         // TODO: support modal spells with more than one selectable mode (also must use max modes filter)
         for (Mode mode : option.getModes().values()) {
@@ -4499,11 +4507,18 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
+    /**
+     * AI related code
+     */
     protected void addVariableXOptions(List<Ability> options, Ability option, int targetNum, Game game) {
         addTargetOptions(options, option, targetNum, game);
     }
 
+    /**
+     * AI related code
+     */
     protected void addTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
+        // TODO: target options calculated for triggered ability too, but do not used in real game
         for (Target target : option.getTargets().getUnchosen(game).get(targetNum).getTargetOptions(option, game)) {
             Ability newOption = option.copy();
             if (target instanceof TargetAmount) {
@@ -4516,7 +4531,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                     newOption.getTargets().get(targetNum).addTarget(targetId, newOption, game, true);
                 }
             }
-            if (targetNum < option.getTargets().size() - 2) {
+            if (targetNum < option.getTargets().size() - 2) { // wtf
                 addTargetOptions(options, newOption, targetNum + 1, game);
             } else if (!option.getCosts().getTargets().isEmpty()) {
                 addCostTargetOptions(options, newOption, 0, game);
@@ -4526,6 +4541,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
     }
 
+    /**
+     * AI related code
+     */
     private void addCostTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
         for (UUID targetId : option.getCosts().getTargets().get(targetNum).possibleTargets(playerId, option, game)) {
             Ability newOption = option.copy();
@@ -4672,6 +4690,37 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public boolean isDrawsOnOpponentsTurn() {
         return drawsOnOpponentsTurn;
+    }
+
+    @Override
+    public int getSpeed() {
+        return speed;
+    }
+
+    @Override
+    public void initSpeed(Game game) {
+        if (speed > 0) {
+            return;
+        }
+        speed = 1;
+        game.getState().addDesignation(new Speed(), game, getId());
+        game.informPlayers(this.getLogName() + "'s speed is now 1.");
+    }
+
+    @Override
+    public void increaseSpeed(Game game) {
+        if (speed < 4) {
+            speed++;
+            game.informPlayers(this.getLogName() + "'s speed has increased to " + speed);
+        }
+    }
+
+    @Override
+    public void decreaseSpeed(Game game) {
+        if (speed > 1) {
+            speed--;
+            game.informPlayers(this.getLogName() + "'s speed has decreased to " + speed);
+        }
     }
 
     @Override

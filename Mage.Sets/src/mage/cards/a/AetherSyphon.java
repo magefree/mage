@@ -2,13 +2,12 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.common.DrawCardControllerTriggeredAbility;
+import mage.abilities.common.MaxSpeedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.MillCardsEachPlayerEffect;
-import mage.abilities.effects.common.continuous.MaxSpeedGainAbilityEffect;
 import mage.abilities.keyword.StartYourEnginesAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,9 +33,9 @@ public final class AetherSyphon extends CardImpl {
         this.addAbility(ability);
 
         // Max speed -- Whenever you draw a card, each opponent mills two cards.
-        this.addAbility(new SimpleStaticAbility(new MaxSpeedGainAbilityEffect(new DrawCardControllerTriggeredAbility(
+        this.addAbility(new MaxSpeedAbility(new DrawCardControllerTriggeredAbility(
                 new MillCardsEachPlayerEffect(2, TargetController.OPPONENT), false
-        ))));
+        )));
     }
 
     private AetherSyphon(final AetherSyphon card) {

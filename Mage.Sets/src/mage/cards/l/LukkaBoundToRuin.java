@@ -56,6 +56,7 @@ public class LukkaBoundToRuin extends CardImpl {
                 "where X is the greatest power among creatures you control as you activate this ability.");
         ability = new LoyaltyAbility(damageMultiEffect, -4);
         ability.setTargetAdjuster(LukkaBoundToRuinAdjuster.instance);
+        ability.addHint(GreatestPowerAmongControlledCreaturesValue.getHint());
         this.addAbility(ability);
     }
 

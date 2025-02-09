@@ -9,7 +9,6 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -63,13 +62,16 @@ class DredgeEffect extends ReplacementEffectImpl {
         if (sourceCard == null) {
             return false;
         }
-        Player owner = game.getPlayer(game.getCard(source.getSourceId()).getOwnerId());
-        if (owner != null
-                && owner.getLibrary().size() >= amount
-                && owner.chooseUse(outcome, new StringBuilder("Dredge ").append(sourceCard.getLogName()).
-                append("? (").append(amount).append(" cards are milled)").toString(), source, game)) {
+        Player owner = game.getPlayer(sourceCard.getOwnerId());
+        if (owner == null) {
+            return false;
+        }
+
+        String message = "Dredge " + sourceCard.getLogName() + "? (" + amount + " cards are milled)";
+
+        if (owner.getLibrary().size() >= amount && owner.chooseUse(outcome, message, source, game)) {
             if (!game.isSimulation()) {
-                game.informPlayers(new StringBuilder(owner.getLogName()).append(" dredges ").append(sourceCard.getLogName()).toString());
+                game.informPlayers(owner.getLogName() + " dredges " + sourceCard.getLogName() + CardUtil.getSourceLogName(game, source));
             }
             owner.millCards(amount, source, game);
             owner.moveCards(sourceCard, Zone.HAND, source, game);
@@ -85,9 +87,14 @@ class DredgeEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Player owner = game.getPlayer(game.getCard(source.getSourceId()).getOwnerId());
-        return (owner != null
-                && event.getPlayerId().equals(owner.getId())
-                && owner.getLibrary().size() >= amount);
+        Card card = game.getCard(source.getSourceId());
+        if (card == null) {
+            return false;
+        }
+        Player owner = game.getPlayer(card.getOwnerId());
+        if (owner == null) {
+            return false;
+        }
+        return event.getPlayerId().equals(owner.getId()) && owner.getLibrary().size() >= amount;
     }
 }

@@ -1996,7 +1996,7 @@ public class TestPlayer implements Player {
                 }
             }
         }
-        checkMultipleBlockers(game, blockedCreaturesList);
+        checkMultipleBlockers(game, blockedCreaturesList); // search wrong block commands
 
         // AI FULL play if no actions available
         if (!mustBlockByAction && (this.AIPlayer || this.AIRealGameSimulation)) {
@@ -3976,6 +3976,26 @@ public class TestPlayer implements Player {
     @Override
     public boolean isDrawsOnOpponentsTurn() {
         return computerPlayer.isDrawsOnOpponentsTurn();
+    }
+
+    @Override
+    public int getSpeed() {
+        return computerPlayer.getSpeed();
+    }
+
+    @Override
+    public void initSpeed(Game game) {
+        computerPlayer.initSpeed(game);
+    }
+
+    @Override
+    public void increaseSpeed(Game game) {
+        computerPlayer.increaseSpeed(game);
+    }
+
+    @Override
+    public void decreaseSpeed(Game game) {
+        computerPlayer.decreaseSpeed(game);
     }
 
     @Override

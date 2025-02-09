@@ -14,8 +14,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -24,15 +23,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class AgonasaurRex extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("creature or Vehicle");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                SubType.VEHICLE.getPredicate()
-        ));
-    }
 
     public AgonasaurRex(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
@@ -51,7 +41,7 @@ public final class AgonasaurRex extends CardImpl {
         Ability ability = new CycleTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2)));
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance()).setText("it gains trample"));
         ability.addEffect(new GainAbilityTargetEffect(IndestructibleAbility.getInstance()).setText("and indestructible until end of turn"));
-        ability.addTarget(new TargetPermanent(0, 1, filter));
+        ability.addTarget(new TargetPermanent(0, 1, StaticFilters.FILTER_PERMANENT_CREATURE_OR_VEHICLE));
         this.addAbility(ability);
     }
 

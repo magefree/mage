@@ -312,7 +312,23 @@ public class Combat implements Serializable, Copyable<Combat> {
             Player player = game.getPlayer(attackingPlayerId);
             if (player != null) {
                 if (groups.size() > 0) {
-                    game.informPlayers(player.getLogName() + " attacks with " + groups.size() + (groups.size() == 1 ? " creature" : " creatures"));
+                    String defendersInfo = groups.stream()
+                            .map(g -> g.defenderId)
+                            .distinct()
+                            .map(id -> {
+                                Player defPlayer = game.getPlayer(id);
+                                if (defPlayer != null) {
+                                    return defPlayer.getLogName();
+                                }
+                                Permanent defPermanent = game.getPermanentOrLKIBattlefield(id);
+                                if (defPermanent != null) {
+                                    return defPermanent.getLogName();
+                                }
+                                return null;
+                            })
+                            .filter(Objects::nonNull)
+                            .collect(Collectors.joining(", "));
+                    game.informPlayers(player.getLogName() + " attacks " + defendersInfo + " with " + groups.size() + (groups.size() == 1 ? " creature" : " creatures"));
                 } else {
                     game.informPlayers(player.getLogName() + " skip attack");
                 }
@@ -670,9 +686,25 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
 
             // choosing until good block configuration
+            int aiTries = 0;
             while (true) {
+                aiTries++;
+
+                if (controller.isComputer() && aiTries > 20) {
+                    // TODO: AI must use real attacker/blocker configuration with all possible combination
+                    //  (current human like logic will fail sometime, e.g. with menace and big/low creatures)
+                    // real game: send warning
+                    // test: fast fail
+                    game.informPlayers(controller.getLogName() + ": WARNING - AI can't find good blocker combination and will skip it - report your battlefield to github - " + game.getCombat());
+                    if (controller.isTestsMode()) {
+                        // how-to fix: AI code must support failed abilities or use cases
+                        throw new IllegalArgumentException("AI can't find good blocker combination");
+                    }
+                    break;
+                }
+
                 // declare normal blockers
-                // TODO: need reseach - is it possible to concede on bad blocker configuration (e.g. user can't continue)
+                // TODO: need research - is it possible to concede on bad blocker configuration (e.g. user can't continue)
                 controller.selectBlockers(source, game, defenderId);
                 if (game.isPaused() || game.checkIfGameIsOver() || game.executingRollback()) {
                     return;
@@ -776,18 +808,16 @@ public class Combat implements Serializable, Copyable<Combat> {
     /**
      * Check the block restrictions
      *
-     * @param player
-     * @param game
      * @return false - if block restrictions were not complied
      */
-    public boolean checkBlockRestrictions(Player player, Game game) {
+    public boolean checkBlockRestrictions(Player defender, Game game) {
         int count = 0;
         boolean blockWasLegal = true;
         for (CombatGroup group : groups) {
             count += group.getBlockers().size();
         }
         for (CombatGroup group : groups) {
-            blockWasLegal &= group.checkBlockRestrictions(game, count);
+            blockWasLegal &= group.checkBlockRestrictions(game, defender, count);
         }
         return blockWasLegal;
     }

@@ -54,7 +54,7 @@ public final class SabSunenLuxaEmbodied extends CardImpl {
         );
         ability.addEffect(new ConditionalOneShotEffect(
                 new DrawCardSourceControllerEffect(2), SabSunenLuxaEmbodiedCondition.ODD,
-                "then if it has an odd number of counters on it, draw two cards"
+                "Then if it has an odd number of counters on it, draw two cards"
         ));
         this.addAbility(ability);
     }

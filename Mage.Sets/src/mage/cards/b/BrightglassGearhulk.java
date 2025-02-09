@@ -50,7 +50,7 @@ public final class BrightglassGearhulk extends CardImpl {
         // When this creature enters, you may search your library for up to two artifact, creature, and/or enchantment cards with mana value 1 or less, reveal them, put them into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(
                 new TargetCardInLibrary(0, 2, filter), true
-        )));
+        ), true));
     }
 
     private BrightglassGearhulk(final BrightglassGearhulk card) {

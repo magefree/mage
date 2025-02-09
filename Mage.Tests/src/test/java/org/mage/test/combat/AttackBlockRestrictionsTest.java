@@ -7,7 +7,7 @@ import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestPlayerBase;
+import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -18,7 +18,7 @@ import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
  *
  * @author noxx, JayDi85
  */
-public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
+public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
 
     @Test
     public void testFlyingVsNonFlying() {
@@ -572,7 +572,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_MustBeBlocked_nothing() {
+    public void test_MustBeBlocked_nothing_human() {
         // Fear of Being Hunted must be blocked if able.
         addCard(Zone.BATTLEFIELD, playerA, "Fear of Being Hunted"); // 4/2
 
@@ -588,12 +588,30 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_MustBeBlocked_1_blocker() {
+    public void test_MustBeBlocked_nothing_AI() {
+        // Fear of Being Hunted must be blocked if able.
+        addCard(Zone.BATTLEFIELD, playerA, "Fear of Being Hunted"); // 4/2
+
+        attack(1, playerA, "Fear of Being Hunted");
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkAttackers("x1 attacker", 1, playerA, "Fear of Being Hunted");
+        checkBlockers("no blocker", 1, playerB, "");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 4);
+    }
+
+    @Test
+    public void test_MustBeBlocked_1_blocker_human() {
         // Fear of Being Hunted must be blocked if able.
         addCard(Zone.BATTLEFIELD, playerA, "Fear of Being Hunted"); // 4/2
         //
         addCard(Zone.BATTLEFIELD, playerB, "Alpha Myr", 1); // 2/1
 
+        // auto-choose blocker
         attack(1, playerA, "Fear of Being Hunted");
         checkAttackers("x1 attacker", 1, playerA, "Fear of Being Hunted");
         checkBlockers("forced x1 blocker", 1, playerB, "Alpha Myr");
@@ -607,15 +625,36 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_MustBeBlocked_many_blockers_good() {
+    public void test_MustBeBlocked_1_blocker_AI() {
+        // Fear of Being Hunted must be blocked if able.
+        addCard(Zone.BATTLEFIELD, playerA, "Fear of Being Hunted"); // 4/2
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Alpha Myr", 1); // 2/1
+
+        // auto-choose blocker with AI
+        attack(1, playerA, "Fear of Being Hunted");
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkAttackers("x1 attacker", 1, playerA, "Fear of Being Hunted");
+        checkBlockers("forced x1 blocker", 1, playerB, "Alpha Myr");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, "Fear of Being Hunted", 1);
+    }
+
+    @Test
+    public void test_MustBeBlocked_many_blockers_good_AI() {
         // Fear of Being Hunted must be blocked if able.
         addCard(Zone.BATTLEFIELD, playerA, "Fear of Being Hunted"); // 4/2
         //
         addCard(Zone.BATTLEFIELD, playerB, "Spectral Bears", 10); // 3/3
 
-        // TODO: human logic can't be tested (until isHuman replaced by ~isComputer), so current use case will
-        //  take first available blocker
+        // ai must choose any bear
         attack(1, playerA, "Fear of Being Hunted");
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
         checkAttackers("x1 attacker", 1, playerA, "Fear of Being Hunted");
         checkBlockers("x1 optimal blocker", 1, playerB, "Spectral Bears");
 
@@ -628,15 +667,15 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_MustBeBlocked_many_blockers_bad() {
+    public void test_MustBeBlocked_many_blockers_bad_AI() {
         // Fear of Being Hunted must be blocked if able.
         addCard(Zone.BATTLEFIELD, playerA, "Fear of Being Hunted"); // 4/2
         //
         addCard(Zone.BATTLEFIELD, playerB, "Memnite", 10); // 1/1
 
-        // TODO: human logic can't be tested (until isHuman replaced by ~isComputer), so current use case will
-        //  take first available blocker
+        // ai don't want but must choose any bad memnite
         attack(1, playerA, "Fear of Being Hunted");
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
         checkAttackers("x1 attacker", 1, playerA, "Fear of Being Hunted");
         checkBlockers("x1 optimal blocker", 1, playerB, "Memnite");
 
@@ -646,12 +685,11 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
         assertLife(playerB, 20);
         assertPermanentCount(playerA, "Fear of Being Hunted", 1);
+        assertGraveyardCount(playerB, "Memnite", 1); // x1 blocker die
     }
 
     @Test
-    @Ignore
-    // TODO: enable and duplicate for AI -- after implement choose blocker logic and isHuman replace by ~isComputer
-    public void test_MustBeBlocked_many_blockers_optimal() {
+    public void test_MustBeBlocked_many_blockers_optimal_AI() {
         // Fear of Being Hunted must be blocked if able.
         addCard(Zone.BATTLEFIELD, playerA, "Fear of Being Hunted"); // 4/2
         //
@@ -660,7 +698,9 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Spectral Bears", 1); // 3/3
         addCard(Zone.BATTLEFIELD, playerB, "Deadbridge Goliath", 1); // 5/5
 
+        // ai must choose optimal creature to kill but survive
         attack(1, playerA, "Fear of Being Hunted");
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
         checkAttackers("x1 attacker", 1, playerA, "Fear of Being Hunted");
         checkBlockers("x1 optimal blocker", 1, playerB, "Deadbridge Goliath");
 
@@ -670,6 +710,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, "Fear of Being Hunted", 1);
+        assertGraveyardCount(playerB, 0);
     }
 
     @Test
@@ -698,7 +739,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_MustBlocking_full_blockers() {
+    public void test_MustBlocking_full_blockers_human() {
         // All creatures able to block target creature this turn do so.
         addCard(Zone.HAND, playerA, "Bloodscent"); // {3}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4); // {3}{G}
@@ -726,7 +767,37 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     }
 
     @Test
-    public void test_MustBlocking_many_blockers() {
+    public void test_MustBlocking_full_blockers_AI() {
+        // All creatures able to block target creature this turn do so.
+        addCard(Zone.HAND, playerA, "Bloodscent"); // {3}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4); // {3}{G}
+        //
+        // Menace
+        // Each creature you control with menace can't be blocked except by three or more creatures.
+        addCard(Zone.BATTLEFIELD, playerA, "Sonorous Howlbonder"); // 2/2
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 3); // 1/1
+
+        // prepare
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodscent", "Sonorous Howlbonder");
+
+        // ai must choose all blockers anyway
+        attack(1, playerA, "Sonorous Howlbonder");
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        setChoiceAmount(playerA, 1); // assign damage to 1 of 3 blocking memnites
+        checkAttackers("x1 attacker", 1, playerA, "Sonorous Howlbonder");
+        checkBlockers("x3 blockers", 1, playerB, "Memnite", "Memnite", "Memnite");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, "Sonorous Howlbonder", 1);
+    }
+
+    @Test
+    public void test_MustBlocking_many_blockers_human() {
         // possible bug: AI's blockers auto-fix assign too many blockers (e.g. x10 instead x3 by required effect)
 
         // All creatures able to block target creature this turn do so.
@@ -746,6 +817,38 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         checkAttackers("x1 attacker", 1, playerA, "Sonorous Howlbonder");
         checkBlockers("all blockers", 1, playerB, "Memnite", "Memnite", "Memnite", "Memnite", "Memnite");
         setChoice(playerA, CHOICE_SKIP);
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, "Sonorous Howlbonder", 1);
+    }
+
+    @Test
+    public void test_MustBlocking_many_blockers_AI() {
+        // possible bug: AI's blockers auto-fix assign too many blockers (e.g. x10 instead x3 by required effect)
+
+        // All creatures able to block target creature this turn do so.
+        addCard(Zone.HAND, playerA, "Bloodscent"); // {3}{G}
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4); // {3}{G}
+        //
+        // Menace
+        // Each creature you control with menace can't be blocked except by three or more creatures.
+        addCard(Zone.BATTLEFIELD, playerA, "Sonorous Howlbonder"); // 2/2
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 5); // 1/1
+
+        // prepare
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodscent", "Sonorous Howlbonder");
+
+        // ai must choose all blockers
+        attack(1, playerA, "Sonorous Howlbonder");
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        setChoiceAmount(playerA, 1); // assign damage to 1 of 3 blocking memnites
+        checkAttackers("x1 attacker", 1, playerA, "Sonorous Howlbonder");
+        checkBlockers("all blockers", 1, playerB, "Memnite", "Memnite", "Memnite", "Memnite", "Memnite");
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -814,6 +917,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
     @Test
     @Ignore // TODO: need improve of block configuration auto-fix (block by x2 instead x1)
+    //           looks like it's impossible for auto-fix (it's can remove blocker, but not add)
     public void test_MustBeBlockedWithMenace_all_blockers() {
         // At the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature’s
         // power until end of turn. That creature must be blocked this combat if able.
@@ -844,7 +948,8 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
     @Test
     @Ignore // TODO: need improve of block configuration auto-fix (block by x2 instead x1)
-    public void test_MustBeBlockedWithMenace_many_blockers() {
+    //           looks like it's impossible for auto-fix (it's can remove blocker, but not add)
+    public void test_MustBeBlockedWithMenace_many_low_blockers_human() {
         // At the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature’s
         // power until end of turn. That creature must be blocked this combat if able.
         addCard(Zone.BATTLEFIELD, playerA, "Neyith of the Dire Hunt"); // 3/3
@@ -870,6 +975,42 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
         assertLife(playerB, 20);
         assertGraveyardCount(playerA, "Alley Strangler", 0);
+    }
+
+    @Test
+    @Ignore // TODO: blockWithGoodTrade2 must support additional restrictions
+    public void test_MustBeBlockedWithMenace_many_low_blockers_AI() {
+        // At the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature’s
+        // power until end of turn. That creature must be blocked this combat if able.
+        addCard(Zone.BATTLEFIELD, playerA, "Neyith of the Dire Hunt"); // 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        //
+        // Menace
+        addCard(Zone.BATTLEFIELD, playerA, "Alley Strangler", 1); // 2/3
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 10); // 1/1
+
+        // If the target creature has menace, two creatures must block it if able.
+        // (2020-06-23)
+
+        // AI must be forced to choose min x2 low blockers (it's possible to fail here after AI logic improve someday)
+
+        addTarget(playerA, "Alley Strangler"); // boost target
+        setChoice(playerA, true); // boost target
+        attack(1, playerA, "Alley Strangler");
+        setChoiceAmount(playerA, 1); // assign damage to 1 of 2 blocking memnites
+        setChoiceAmount(playerA, 1); // assign damage to 2 of 2 blocking memnites
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkAttackers("x1 attacker", 1, playerA, "Alley Strangler");
+        checkBlockers("x2 blockers", 1, playerB, "Memnite", "Memnite");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20);
+        assertGraveyardCount(playerA, "Alley Strangler", 0);
+        assertGraveyardCount(playerB, "Memnite", 2); // x2 blockers must die
     }
 
     @Test
@@ -936,6 +1077,82 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         setChoice(playerA, true); // boost target
         attack(1, playerA, "Alley Strangler");
         block(1, playerB, "Memnite", "Alley Strangler");
+        checkAttackers("x1 attacker", 1, playerA, "Alley Strangler");
+        checkBlockers("no blockers", 1, playerB, "");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 4);
+        assertGraveyardCount(playerA, "Alley Strangler", 0);
+    }
+
+    @Test
+    public void test_MustBeBlockedWithMenace_low_small_blockers_AI() {
+        // At the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature’s
+        // power until end of turn. That creature must be blocked this combat if able.
+        addCard(Zone.BATTLEFIELD, playerA, "Neyith of the Dire Hunt"); // 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        //
+        // Menace
+        addCard(Zone.BATTLEFIELD, playerA, "Alley Strangler", 1); // 2/3
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Memnite", 1); // 1/1
+
+        // If the target creature has menace, two creatures must block it if able.
+        // (2020-06-23)
+        //
+        // If a creature is required to block a creature with menace, another creature must also block that creature
+        // if able. If none can, the creature that’s required to block can block another creature or not block at all.
+        // (2020-04-17)
+
+        // auto-fix block config inside
+        // AI must ignore such use case
+
+        addTarget(playerA, "Alley Strangler"); // boost target
+        setChoice(playerA, true); // boost target
+        attack(1, playerA, "Alley Strangler");
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
+        checkAttackers("x1 attacker", 1, playerA, "Alley Strangler");
+        checkBlockers("no blockers", 1, playerB, "");
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 20 - 4);
+        assertGraveyardCount(playerA, "Alley Strangler", 0);
+    }
+
+    @Test
+    public void test_MustBeBlockedWithMenace_low_big_blockers_AI() {
+        // bug: #13290, AI can try to use bigger creature to block
+
+        // At the beginning of combat on your turn, you may pay {2}{R/G}. If you do, double target creature’s
+        // power until end of turn. That creature must be blocked this combat if able.
+        addCard(Zone.BATTLEFIELD, playerA, "Neyith of the Dire Hunt"); // 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        //
+        // Menace
+        addCard(Zone.BATTLEFIELD, playerA, "Alley Strangler", 1); // 2/3
+        //
+        addCard(Zone.BATTLEFIELD, playerB, "Deadbridge Goliath", 1); // 5/5
+
+        // If the target creature has menace, two creatures must block it if able.
+        // (2020-06-23)
+        //
+        // If a creature is required to block a creature with menace, another creature must also block that creature
+        // if able. If none can, the creature that’s required to block can block another creature or not block at all.
+        // (2020-04-17)
+
+        // auto-fix block config inside
+        // AI must ignore BIG creature to wrongly block
+
+        addTarget(playerA, "Alley Strangler"); // boost target
+        setChoice(playerA, true); // boost target
+        attack(1, playerA, "Alley Strangler");
+        aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
         checkAttackers("x1 attacker", 1, playerA, "Alley Strangler");
         checkBlockers("no blockers", 1, playerB, "");
 

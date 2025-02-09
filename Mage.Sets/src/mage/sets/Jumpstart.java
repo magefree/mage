@@ -18,7 +18,7 @@ public final class Jumpstart extends ExpansionSet {
     private Jumpstart() {
         super("Jumpstart", "JMP", ExpansionSet.buildDate(2020, 7, 17), SetType.SUPPLEMENTAL);
         this.blockName = "Jumpstart";
-        this.hasBoosters = false; // TODO: share code with JumpstartPoolGenerator and add single booster
+        this.hasBoosters = false; // TODO: share code with JumpstartPoolGenerator and add single booster, see #13264
         this.hasBasicLands = true;
 
         //cards.add(new SetCardInfo("A-Blood Artist", "A-206", Rarity.UNCOMMON, mage.cards.a.ABloodArtist.class));

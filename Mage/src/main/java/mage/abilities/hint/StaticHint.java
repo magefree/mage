@@ -30,7 +30,7 @@ public class StaticHint implements Hint {
     }
 
     @Override
-    public Hint copy() {
+    public StaticHint copy() {
         return new StaticHint(this);
     }
 }

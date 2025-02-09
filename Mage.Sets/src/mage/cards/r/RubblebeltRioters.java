@@ -34,7 +34,7 @@ public final class RubblebeltRioters extends CardImpl {
         this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(
                 GreatestPowerAmongControlledCreaturesValue.instance, StaticValue.get(0),
                 Duration.EndOfTurn
-        ), false));
+        ), false).addHint(GreatestPowerAmongControlledCreaturesValue.getHint()));
     }
 
     private RubblebeltRioters(final RubblebeltRioters card) {

@@ -10,7 +10,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.keyword.SurveilEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -45,7 +44,7 @@ public final class Broodspinner extends CardImpl {
                 new ManaCostsImpl<>("{4}{B}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability.addHint(CardTypesInGraveyardHint.YOU));
+        this.addAbility(ability.addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private Broodspinner(final Broodspinner card) {

@@ -18,7 +18,11 @@ public final class Unfinity extends ExpansionSet {
     private Unfinity() {
         super("Unfinity", "UNF", ExpansionSet.buildDate(2022, 4, 1), SetType.SUPPLEMENTAL);
         this.hasBasicLands = true;
-        this.hasBoosters = false; // not likely to be able to drafts at any point
+        this.hasBoosters = false; // un-set, low implemented cards
+
+        // set contains both legal and joke cards, so must use SetType.SUPPLEMENTAL:
+        // https://mtg.fandom.com/wiki/Unfinity
+        // The set is the first Un-set to include a mix of eternal-legal cards and acorn cards.
 
         cards.add(new SetCardInfo("\"Name Sticker\" Goblin", "107m", Rarity.COMMON, mage.cards.n.NameStickerGoblin.class));
         cards.add(new SetCardInfo("Atomwheel Acrobats", 130, Rarity.COMMON, mage.cards.a.AtomwheelAcrobats.class));
@@ -50,6 +54,7 @@ public final class Unfinity extends ExpansionSet {
         cards.add(new SetCardInfo("Pair o' Dice Lost", 149, Rarity.UNCOMMON, mage.cards.p.PairODiceLost.class));
         cards.add(new SetCardInfo("Plains", 235, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_UST_VARIOUS));
         cards.add(new SetCardInfo("Plains", 240, Rarity.LAND, mage.cards.basiclands.Plains.class, FULL_ART_UST_VARIOUS));
+        cards.add(new SetCardInfo("Priority Boarding", 119, Rarity.UNCOMMON, mage.cards.p.PriorityBoarding.class));
         cards.add(new SetCardInfo("Sacred Foundry", 285, Rarity.RARE, mage.cards.s.SacredFoundry.class));
         cards.add(new SetCardInfo("Saw in Half", 88, Rarity.RARE, mage.cards.s.SawInHalf.class));
         cards.add(new SetCardInfo("Six-Sided Die", 92, Rarity.COMMON, mage.cards.s.SixSidedDie.class));

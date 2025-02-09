@@ -736,7 +736,6 @@ public class TestCardRenderDialog extends MageDialog {
         labelCardColor.setText("Card color:");
 
         comboCardColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "loading..." }));
-        comboCardColor.setToolTipText("");
         comboCardColor.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboCardColorItemStateChanged(evt);
@@ -774,7 +773,6 @@ public class TestCardRenderDialog extends MageDialog {
         playerOptions.add(checkPlayerSmallMode);
 
         comboPlayerStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Inactive", "Dead" }));
-        comboPlayerStatus.setToolTipText("");
         comboPlayerStatus.setAlignmentX(0.0F);
         comboPlayerStatus.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {

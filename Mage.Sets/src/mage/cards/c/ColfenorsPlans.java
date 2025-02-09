@@ -73,7 +73,7 @@ class ColfenorsPlansExileEffect extends OneShotEffect {
             Cards toExile = new CardsImpl(controller.getLibrary().getTopCards(game, 7));
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             controller.moveCardsToExile(toExile.getCards(game), source, game, false,
-                    exileId, CardUtil.createObjectRealtedWindowTitle(source, game, null));
+                    exileId, CardUtil.createObjectRelatedWindowTitle(source, game, null));
             ExileZone exileZone = game.getExile().getExileZone(exileId);
             if (exileZone != null) {
                 for (Card card : exileZone.getCards(game)) {

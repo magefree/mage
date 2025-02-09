@@ -2,9 +2,8 @@ package mage.cards.e;
 
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.MaxSpeedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continuous.MaxSpeedGainAbilityEffect;
 import mage.abilities.keyword.StartYourEnginesAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -32,8 +31,8 @@ public final class EndriderCatalyzer extends CardImpl {
         this.addAbility(new StartYourEnginesAbility());
 
         // Max speed -- {T}: Add {R}{R}.
-        this.addAbility(new SimpleStaticAbility(new MaxSpeedGainAbilityEffect(
-                new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost())
+        this.addAbility(new MaxSpeedAbility(new SimpleManaAbility(
+                Zone.BATTLEFIELD, Mana.RedMana(2), new TapSourceCost()
         )));
     }
 

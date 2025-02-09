@@ -27,8 +27,6 @@ public final class Pyrogoyf extends CardImpl {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(SubType.LHURGOYF, "Lhurgoyf creature");
 
-    private static final DynamicValue powerValue = CardTypesInGraveyardCount.ALL;
-
     public Pyrogoyf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.subtype.add(SubType.LHURGOYF);
@@ -37,7 +35,9 @@ public final class Pyrogoyf extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Pyrogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessPlusOneSourceEffect(powerValue)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SetBasePowerToughnessPlusOneSourceEffect(CardTypesInGraveyardCount.ALL)
+        ).addHint(CardTypesInGraveyardCount.ALL.getHint()));
 
         // Whenever Pyrogoyf or another Lhurgoyf creature you control enters, that creature deals damage equal to its power to any target.
         Ability ability = new EntersBattlefieldThisOrAnotherTriggeredAbility(

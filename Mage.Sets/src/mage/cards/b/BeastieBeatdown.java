@@ -2,10 +2,10 @@ package mage.cards.b;
 
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.DamageWithPowerFromOneToAnotherTargetEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.AbilityWord;
@@ -37,7 +37,7 @@ public final class BeastieBeatdown extends CardImpl {
                 DeliriumCondition.instance, AbilityWord.DELIRIUM.formatWord() + "If there are four or more " +
                 "card types among cards in your graveyard, put two +1/+1 counters on the creature you control."
         ).concatBy("<br>"));
-        this.getSpellAbility().addHint(CardTypesInGraveyardHint.YOU);
+        this.getSpellAbility().addHint(CardTypesInGraveyardCount.YOU.getHint());
 
         // The creature you control deals damage equal to its power to the creature an opponent controls.
         this.getSpellAbility().addEffect(new DamageWithPowerFromOneToAnotherTargetEffect()

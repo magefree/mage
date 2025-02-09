@@ -73,7 +73,7 @@ class CloneShellEffect extends OneShotEffect {
                 Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    controller.moveCardsToExile(card, source, game, false, CardUtil.getCardExileZoneId(game, source), CardUtil.createObjectRealtedWindowTitle(source, game, "(Imprint)"));
+                    controller.moveCardsToExile(card, source, game, false, CardUtil.getCardExileZoneId(game, source), CardUtil.createObjectRelatedWindowTitle(source, game, "(Imprint)"));
                     card.setFaceDown(true, game);
                     Permanent permanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
                     if (permanent != null) {

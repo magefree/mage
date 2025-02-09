@@ -5,8 +5,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -34,7 +34,7 @@ public final class WickerfolkThresher extends CardImpl {
                 DeliriumCondition.instance, "Whenever {this} attacks, if there are four or more card types " +
                 "among cards in your graveyard, look at the top card of your library. If it's a land card, you may " +
                 "put it onto the battlefield. If you don't put the card onto the battlefield, put it into your hand."
-        ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardHint.YOU));
+        ).setAbilityWord(AbilityWord.DELIRIUM).addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private WickerfolkThresher(final WickerfolkThresher card) {

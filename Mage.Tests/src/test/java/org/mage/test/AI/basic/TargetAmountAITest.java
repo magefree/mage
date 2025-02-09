@@ -31,6 +31,8 @@ public class TargetAmountAITest extends CardTestPlayerBaseWithAIHelps {
 
     @Test
     public void test_AI_SimulateTargets() {
+        // warning, test depends on targets list optimization by AI
+
         // Distribute four +1/+1 counters among any number of target creatures.
         addCard(Zone.HAND, playerA, "Blessings of Nature", 1); // {4}{G}
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);

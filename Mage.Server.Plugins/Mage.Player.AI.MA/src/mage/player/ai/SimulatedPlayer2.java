@@ -346,7 +346,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
         logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " triggered ability option");
         for (Target target : ability.getTargets()) {
             for (UUID targetId : target.getTargets()) {
-                newNode.getTargets().add(targetId);
+                newNode.getTargets().add(targetId); // save for info only (real targets in newNode.ability already)
             }
         }
         parent.children.add(newNode);

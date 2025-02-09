@@ -17,9 +17,7 @@ import mage.constants.SetTargetPointer;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.FilterStackObject;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.game.stack.StackObject;
+import mage.filter.predicate.other.ExhaustAbilityPredicate;
 
 import java.util.UUID;
 
@@ -31,7 +29,7 @@ public final class RangersRefueler extends CardImpl {
     private static final FilterStackObject filter = new FilterStackObject("an exhaust ability");
 
     static {
-        filter.add(RangersRefuelerPredicate.instance);
+        filter.add(ExhaustAbilityPredicate.instance);
     }
 
     public RangersRefueler(UUID ownerId, CardSetInfo setInfo) {
@@ -65,14 +63,5 @@ public final class RangersRefueler extends CardImpl {
     @Override
     public RangersRefueler copy() {
         return new RangersRefueler(this);
-    }
-}
-
-enum RangersRefuelerPredicate implements Predicate<StackObject> {
-    instance;
-
-    @Override
-    public boolean apply(StackObject input, Game game) {
-        return input.getStackAbility() instanceof ExhaustAbility;
     }
 }

@@ -6,16 +6,15 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DeliriumCondition;
 import mage.abilities.decorator.ConditionalContinuousEffect;
+import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
-import mage.abilities.hint.common.CardTypesInGraveyardHint;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -41,7 +40,7 @@ public final class StrangeAugmentation extends CardImpl {
         // <i>Delirium</i> &mdash Enchanted creature gets an additional +2/+2 as long as there are four or more card types among cards in your graveyard.
         this.addAbility(new SimpleStaticAbility(new ConditionalContinuousEffect(new BoostEnchantedEffect(2, 2), DeliriumCondition.instance,
                 "<i>Delirium</i> &mdash; Enchanted creature gets an additional +2/+2 as long as there are four or more card types among cards in your graveyard."))
-                .addHint(CardTypesInGraveyardHint.YOU));
+                .addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private StrangeAugmentation(final StrangeAugmentation card) {

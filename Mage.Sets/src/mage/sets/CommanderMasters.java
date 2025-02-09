@@ -15,8 +15,11 @@ public final class CommanderMasters extends ExpansionSet {
     private CommanderMasters() {
         super("Commander Masters", "CMM", ExpansionSet.buildDate(2023, 8, 4), SetType.SUPPLEMENTAL);
         this.blockName = "Commander Masters";
-        this.hasBasicLands = true;
-        this.hasBoosters = false; //temporary
+
+        // possible boosters: set, draft, collector (simplified to use set booster with any cards)
+        // https://mtg.fandom.com/wiki/Commander_Masters
+        // https://magic.wizards.com/en/news/feature/collecting-commander-masters
+        this.enableSetBooster(Integer.MAX_VALUE);
 
         cards.add(new SetCardInfo("Abrade", 203, Rarity.COMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Abstruse Archaic", 712, Rarity.RARE, mage.cards.a.AbstruseArchaic.class, NON_FULL_USE_VARIOUS));
@@ -84,9 +87,9 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Balefire Dragon", 697, Rarity.MYTHIC, mage.cards.b.BalefireDragon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bane of Bala Ged", 802, Rarity.UNCOMMON, mage.cards.b.BaneOfBalaGed.class));
         cards.add(new SetCardInfo("Bastion of Remembrance", 138, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
-        cards.add(new SetCardInfo("Battle Screech", 17, Rarity.COMMON, mage.cards.b.BattleScreech.class));
         cards.add(new SetCardInfo("Battle at the Helvault", 719, Rarity.RARE, mage.cards.b.BattleAtTheHelvault.class));
         cards.add(new SetCardInfo("Battle for Bretagard", 916, Rarity.RARE, mage.cards.b.BattleForBretagard.class));
+        cards.add(new SetCardInfo("Battle Screech", 17, Rarity.COMMON, mage.cards.b.BattleScreech.class));
         cards.add(new SetCardInfo("Beanstalk Giant", 275, Rarity.UNCOMMON, mage.cards.b.BeanstalkGiant.class));
         cards.add(new SetCardInfo("Binding the Old Gods", 917, Rarity.UNCOMMON, mage.cards.b.BindingTheOldGods.class));
         cards.add(new SetCardInfo("Blade Sliver", 871, Rarity.UNCOMMON, mage.cards.b.BladeSliver.class));
@@ -834,7 +837,7 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Smothering Tithe", 693, Rarity.MYTHIC, mage.cards.s.SmotheringTithe.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Snakeskin Veil", 323, Rarity.COMMON, mage.cards.s.SnakeskinVeil.class));
         cards.add(new SetCardInfo("Sol Ring", 410, Rarity.UNCOMMON, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Sol Ring", 703, Rarity.UNCOMMON, mage.cards.s.SolRing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sol Ring", 703, Rarity.UNCOMMON, mage.cards.s.SolRing.class, FULL_ART_USE_VARIOUS));
         cards.add(new SetCardInfo("Solemn Simulacrum", 973, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Song of the Dryads", 324, Rarity.RARE, mage.cards.s.SongOfTheDryads.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Song of the Dryads", 572, Rarity.RARE, mage.cards.s.SongOfTheDryads.class, NON_FULL_USE_VARIOUS));
@@ -925,8 +928,8 @@ public final class CommanderMasters extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Malady", 1043, Rarity.RARE, mage.cards.t.TempleOfMalady.class));
         cards.add(new SetCardInfo("Temple of Plenty", 1044, Rarity.RARE, mage.cards.t.TempleOfPlenty.class));
         cards.add(new SetCardInfo("Temple of Silence", 1045, Rarity.RARE, mage.cards.t.TempleOfSilence.class));
-        cards.add(new SetCardInfo("Temple of Triumph", 1047, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
         cards.add(new SetCardInfo("Temple of the False God", 1046, Rarity.UNCOMMON, mage.cards.t.TempleOfTheFalseGod.class));
+        cards.add(new SetCardInfo("Temple of Triumph", 1047, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
         cards.add(new SetCardInfo("Tempt with Vengeance", 263, Rarity.RARE, mage.cards.t.TemptWithVengeance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tempt with Vengeance", 551, Rarity.RARE, mage.cards.t.TemptWithVengeance.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Temur Battle Rage", 264, Rarity.COMMON, mage.cards.t.TemurBattleRage.class));

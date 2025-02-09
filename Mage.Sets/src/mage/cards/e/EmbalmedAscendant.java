@@ -4,11 +4,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.MaxSpeedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
-import mage.abilities.effects.common.continuous.MaxSpeedGainAbilityEffect;
 import mage.abilities.keyword.StartYourEnginesAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -43,7 +42,7 @@ public final class EmbalmedAscendant extends CardImpl {
                 StaticFilters.FILTER_CONTROLLED_A_CREATURE
         );
         ability.addEffect(new GainLifeEffect(1).concatBy("and"));
-        this.addAbility(new SimpleStaticAbility(new MaxSpeedGainAbilityEffect(ability)));
+        this.addAbility(new MaxSpeedAbility(ability));
     }
 
     private EmbalmedAscendant(final EmbalmedAscendant card) {

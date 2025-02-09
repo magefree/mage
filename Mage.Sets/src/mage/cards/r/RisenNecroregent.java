@@ -1,9 +1,8 @@
 package mage.cards.r;
 
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.MaxSpeedAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continuous.MaxSpeedGainAbilityEffect;
 import mage.abilities.keyword.StartYourEnginesAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
 import mage.cards.CardImpl;
@@ -32,9 +31,9 @@ public final class RisenNecroregent extends CardImpl {
         this.addAbility(new StartYourEnginesAbility());
 
         // Max speed -- At the beginning of your end step, create a 2/2 black Zombie creature token.
-        this.addAbility(new SimpleStaticAbility(new MaxSpeedGainAbilityEffect(
+        this.addAbility(new MaxSpeedAbility(
                 new BeginningOfEndStepTriggeredAbility(new CreateTokenEffect(new ZombieToken()))
-        )));
+        ));
     }
 
     private RisenNecroregent(final RisenNecroregent card) {
