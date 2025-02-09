@@ -101,13 +101,18 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
             newConnection.setPort(ConsoleFrame.getPreferences().getInt("serverPort", 17171));
             newConnection.setUsername(SessionImpl.ADMIN_NAME);
             newConnection.setAdminPassword(ConsoleFrame.getPreferences().get("password", ""));
-            newConnection.setProxyType(Connection.ProxyType.valueOf(ConsoleFrame.getPreferences().get("proxyType", "NONE").toUpperCase(Locale.ENGLISH)));
-            if (!newConnection.getProxyType().equals(Connection.ProxyType.NONE)) {
-                newConnection.setProxyHost(ConsoleFrame.getPreferences().get("proxyAddress", ""));
-                newConnection.setProxyPort(ConsoleFrame.getPreferences().getInt("proxyPort", 0));
-                newConnection.setProxyUsername(ConsoleFrame.getPreferences().get("proxyUsername", ""));
-                newConnection.setProxyPassword(ConsoleFrame.getPreferences().get("proxyPassword", ""));
+            if (false) { // TODO: delete proxy at all after few releases, 2025-02-09
+                newConnection.setProxyType(Connection.ProxyType.valueOf(ConsoleFrame.getPreferences().get("proxyType", "NONE").toUpperCase(Locale.ENGLISH)));
+                if (!newConnection.getProxyType().equals(Connection.ProxyType.NONE)) {
+                    newConnection.setProxyHost(ConsoleFrame.getPreferences().get("proxyAddress", ""));
+                    newConnection.setProxyPort(ConsoleFrame.getPreferences().getInt("proxyPort", 0));
+                    newConnection.setProxyUsername(ConsoleFrame.getPreferences().get("proxyUsername", ""));
+                    newConnection.setProxyPassword(ConsoleFrame.getPreferences().get("proxyPassword", ""));
+                }
+            } else {
+                newConnection.setProxyType(Connection.ProxyType.NONE);
             }
+
             status = connect(newConnection);
         }
         return status;
