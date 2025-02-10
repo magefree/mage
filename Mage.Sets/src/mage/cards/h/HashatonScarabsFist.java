@@ -4,7 +4,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -12,22 +11,16 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DiscardCardControllerTriggeredAbility;
 import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.FlyingAbility;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
-import mage.watchers.common.DiscardedCardWatcher;
 
 /**
  * @author sobiech
