@@ -5,6 +5,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 /**
  * @author Susucr
  */
@@ -33,6 +35,7 @@ public class BindingAgonyTest extends CardTestPlayerBase {
         attack(1, playerA, "Grizzly Bears");
         block(1, playerB, "Centaur Courser", "Grizzly Bears");
         block(1, playerB, "Memnite", "Grizzly Bears");
+        setChoice(playerA, CHOICE_SKIP);
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

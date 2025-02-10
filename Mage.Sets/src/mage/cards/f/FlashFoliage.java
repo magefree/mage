@@ -90,7 +90,6 @@ class FlashFoliageEffect extends OneShotEffect {
                             game.getCombat().addBlockingGroup(tokenId, attackingCreature.getId(), controller.getId(), game);
                         }
                     }
-                    combatGroup.pickBlockerOrder(attackingCreature.getControllerId(), game);
                 }
             }
             return true;
