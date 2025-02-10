@@ -1180,10 +1180,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Weeping Angel", 773, Rarity.RARE, mage.cards.w.WeepingAngel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wibbly-wobbly, Timey-wimey", 62, Rarity.COMMON, mage.cards.w.WibblyWobblyTimeyWimey.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wibbly-wobbly, Timey-wimey", 667, Rarity.COMMON, mage.cards.w.WibblyWobblyTimeyWimey.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Wilfred Mott", 32, Rarity.RARE, mage.cards.w.WilfredMott.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Wilfred Mott", 350, Rarity.RARE, mage.cards.w.WilfredMott.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Wilfred Mott", 637, Rarity.RARE, mage.cards.w.WilfredMott.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Wilfred Mott", 941, Rarity.RARE, mage.cards.w.WilfredMott.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wilfred Mott", 32, Rarity.RARE, mage.cards.w.WilfredMott.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wilfred Mott", 350, Rarity.RARE, mage.cards.w.WilfredMott.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wilfred Mott", 637, Rarity.RARE, mage.cards.w.WilfredMott.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Wilfred Mott", 941, Rarity.RARE, mage.cards.w.WilfredMott.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wound Reflection", 1062, Rarity.RARE, mage.cards.w.WoundReflection.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wound Reflection", 223, Rarity.RARE, mage.cards.w.WoundReflection.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wound Reflection", 471, Rarity.RARE, mage.cards.w.WoundReflection.class, NON_FULL_USE_VARIOUS));
