@@ -82,7 +82,7 @@ public class ComputerPlayer extends PlayerImpl {
     // * use your's CPU cores for best performance
     // TODO: add server config to control max AI threads (with CPU cores by default)
     // TODO: rework AI implementation to use multiple sims calculation instead one by one
-    final static int COMPUTER_MAX_THREADS_FOR_SIMULATIONS = 5;//DebugUtil.AI_ENABLE_DEBUG_MODE ? 1 : 5;
+    public final static int COMPUTER_MAX_THREADS_FOR_SIMULATIONS = DebugUtil.AI_ENABLE_DEBUG_MODE ? 1 : 5;
 
 
 
