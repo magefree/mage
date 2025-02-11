@@ -4,7 +4,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.common.ActivateOncePerGameActivatedAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
@@ -21,14 +21,24 @@ import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
  *
- * @author tiera3 - based on ArmorOfThorns, AkroanLineBreaker, RonomSerpent, GeneralsEnforcer, MildManneredLibrarian, BlazemireVerge, ThoughtShucker
+ * @author tiera3 - based on PyricSalamander, ArmorOfThorns, AkroanLineBreaker, RonomSerpent, GeneralsEnforcer, MildManneredLibrarian, BlazemireVerge
  */
 public final class GoblinSkiPatrol extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent(SubType.MOUNTAIN, "a snow-covered Mountain");
+
+    static {
+        filter.add(SuperType.SNOW.getPredicate());
+    }
+
+    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
+    private static final Hint hint = new ConditionHint(condition, "You control a snow-covered Mountain");
+
+
     public GoblinSkiPatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
@@ -37,7 +47,16 @@ public final class GoblinSkiPatrol extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}{R}: Goblin Ski Patrol gets +2/+0 and gains flying. Its controller sacrifices it at the beginning of the next end step. Activate only once and only if you control a snow Mountain.
-        this.addAbility(new GoblinSkiPatrolActivatedAbility());
+        Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
+        effect.setText("{this} gets +2/+0");
+        Ability ability = new ActivateOncePerGameActivatedAbility(effect, new ManaCostsImpl<>("{1}{R}"), condition);
+        effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("and gains flying");
+        ability.addEffect(effect);
+        ability.addEffect(new CreateDelayedTriggeredAbilityEffect(
+                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect(true))
+        ).setText("Its controller sacrifices it at the beginning of the next end step."));
+        this.addAbility(ability);
     }
 
     private GoblinSkiPatrol(final GoblinSkiPatrol card) {
@@ -48,36 +67,4 @@ public final class GoblinSkiPatrol extends CardImpl {
     public GoblinSkiPatrol copy() {
         return new GoblinSkiPatrol(this);
     }
-}
-
-class GoblinSkiPatrolActivatedAbility extends ConditionalActivatedAbility {
-    GoblinSkiPatrolActivatedAbility() {
-        super(new BoostSourceEffect(2, 0, Duration.EndOfTurn).setText("{this} gets +2/+0"),
-                new ManaCostsImpl<>("{1}{R}"), 
-                new PermanentsOnTheBattlefieldCondition(
-                    new FilterPermanent(SubType.MOUNTAIN, "a snow-covered Mountain").add(SuperType.SNOW.getPredicate())) );
-        addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn
-            ).setText("gains flying").concatBy("and"));
-        addEffect(new CreateDelayedTriggeredAbilityEffect(
-                new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect(true))
-            ).setText("Its controller sacrifices it at the beginning of the next end step."));
-        maxActivationsPerGame = 1;
-    }
-
-    protected GoblinSkiPatrolActivatedAbility(final GoblinSkiPatrolActivatedAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GoblinSkiPatrolActivatedAbility copy() {
-        return new GoblinSkiPatrolActivatedAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        String rule = super.getRule();
-        int len = rule.length();
-        return rule.substring(0, len - 1) + " and only once.";
-    }
-
 }
