@@ -58,6 +58,7 @@ public final class GoblinSkiPatrol extends CardImpl {
     public GoblinSkiPatrol copy() {
         return new GoblinSkiPatrol(this);
     }
+}
 
 class GoblinSkiPatrolActivatedAbility extends ConditionalActivatedAbility {
     GoblinSkiPatrolActivatedAbility() {
