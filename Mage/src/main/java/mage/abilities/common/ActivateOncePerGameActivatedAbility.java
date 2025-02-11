@@ -1,6 +1,7 @@
 package mage.abilities.common;
 
 import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.constants.TimingRule;
