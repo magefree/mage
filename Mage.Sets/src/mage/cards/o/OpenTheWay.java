@@ -76,7 +76,8 @@ class OpenTheWayEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         int xValue = CardUtil.getSourceCostsTag(game, source, "X", 0);
-        if (player == null || xValue < 1) {
+        int playerCount = game.getPlayers().size();
+        if (player == null || xValue < 1 || xValue > playerCount) {
             return false;
         }
         Cards toReveal = new CardsImpl();
