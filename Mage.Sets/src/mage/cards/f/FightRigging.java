@@ -37,7 +37,7 @@ public final class FightRigging extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
 
         // Hideaway 5
-        this.addAbility(new HideawayAbility(5));
+        this.addAbility(new HideawayAbility(this, 5));
 
         // At the beginning of combat on your turn, put a +1/+1 counter on target creature you control. Then if you control a creature with power 7 or greater, you may play the exiled card without paying its mana cost.
         Ability ability = new BeginningOfCombatTriggeredAbility(

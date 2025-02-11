@@ -8,11 +8,10 @@ import mage.abilities.effects.common.cost.SpellCostReductionSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 
@@ -23,15 +22,10 @@ import java.util.UUID;
  */
 public final class RidesEnd extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("a tapped creature");
-    private static final FilterPermanent filter2 = new FilterPermanent("creature or Vehicle");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("a tapped permanent");
 
     static {
         filter.add(TappedPredicate.TAPPED);
-        filter2.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                SubType.VEHICLE.getPredicate()
-        ));
     }
 
     private static final Condition condition = new SourceTargetsPermanentCondition(filter);
@@ -46,7 +40,7 @@ public final class RidesEnd extends CardImpl {
 
         // Exile target creature or Vehicle.
         this.getSpellAbility().addEffect(new ExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter2));
+        this.getSpellAbility().addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_VEHICLE));
     }
 
     private RidesEnd(final RidesEnd card) {

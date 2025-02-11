@@ -1001,10 +1001,18 @@ public class MageServerImpl implements MageServer {
     }
 
     public void handleException(Exception ex) throws MageException {
-        if (!ex.getMessage().equals("No message")) {
-            logger.fatal("", ex);
+        if (ex.getMessage() != null && !ex.getMessage().equals("No message")) {
             throw new MageException("Server error: " + ex.getMessage());
         }
+
+        if (ex instanceof ConcurrentModificationException) {
+            // how-to fix: game objects must be accessible by game thread only, all other threads must work with copies
+            logger.error("wrong threads sync error", ex);
+        } else {
+            // TODO: on logs spamming (e.g. connection problems) move it inside condition block above
+            logger.error("unknown error", ex);
+        }
+
     }
 
     @Override

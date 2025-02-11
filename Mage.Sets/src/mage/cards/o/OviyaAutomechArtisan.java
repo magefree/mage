@@ -34,7 +34,7 @@ import java.util.UUID;
 public final class OviyaAutomechArtisan extends CardImpl {
 
     private static final FilterPermanent filter
-            = new FilterCreaturePermanent("creature that's attacking one of your opponents");
+            = new FilterCreaturePermanent("each creature that's attacking one of your opponents");
 
     static {
         filter.add(OviyaAutomechArtisanPredicate.instance);

@@ -949,11 +949,15 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             } catch (SocketException ex) {
             }
             currentConnection.setUserIdStr(System.getProperty("user.name") + ":" + System.getProperty("os.name") + ":" + MagePreferences.getUserNames() + ":" + allMAC);
-            currentConnection.setProxyType(proxyType);
-            currentConnection.setProxyHost(proxyServer);
-            currentConnection.setProxyPort(proxyPort);
-            currentConnection.setProxyUsername(proxyUsername);
-            currentConnection.setProxyPassword(proxyPassword);
+            if (PreferencesDialog.NETWORK_ENABLE_PROXY_SUPPORT) {
+                currentConnection.setProxyType(proxyType);
+                currentConnection.setProxyHost(proxyServer);
+                currentConnection.setProxyPort(proxyPort);
+                currentConnection.setProxyUsername(proxyUsername);
+                currentConnection.setProxyPassword(proxyPassword);
+            } else {
+                currentConnection.setProxyType(ProxyType.NONE);
+            }
             setUserPrefsToConnection(currentConnection);
         }
 

@@ -4,6 +4,7 @@ import mage.MageObject;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.abilities.*;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continuous.HasSubtypesSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
@@ -340,6 +341,19 @@ public abstract class CardImpl extends MageObjectImpl implements Card {
                 if (manaAbility.isUndoPossible()) {
                     throw new IllegalArgumentException("Ability contains draw/reveal effect, but isUndoPossible is true. Ability: "
                             + ability.getClass().getSimpleName() + "; " + ability.getRule());
+                }
+            }
+        }
+
+        // rules fix: workaround to fix "When {this} enters" into "When this xxx enters"
+        if (EntersBattlefieldTriggeredAbility.ENABLE_TRIGGER_PHRASE_AUTO_FIX) {
+            if (ability instanceof TriggeredAbility) {
+                TriggeredAbility triggeredAbility = ((TriggeredAbility) ability);
+                if (triggeredAbility.getTriggerPhrase() != null && triggeredAbility.getTriggerPhrase().startsWith("When {this} enters")) {
+                    // there are old sets with old oracle, but it's ok for newer sets, so keep that rules fix
+                    // see https://github.com/magefree/mage/issues/12791
+                    String etbDescription = EntersBattlefieldTriggeredAbility.getThisObjectDescription(this);
+                    triggeredAbility.setTriggerPhrase(triggeredAbility.getTriggerPhrase().replace("{this}", etbDescription));
                 }
             }
         }

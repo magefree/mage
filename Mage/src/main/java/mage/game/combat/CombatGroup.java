@@ -243,7 +243,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
      * @param first true for first strike damage step, false for normal damage step
      * @return true if permanent should deal damage this step
      */
-    private boolean dealsDamageThisStep(Permanent perm, boolean first, Game game) {
+    public static boolean dealsDamageThisStep(Permanent perm, boolean first, Game game) {
         if (perm == null) {
             return false;
         }
@@ -773,11 +773,27 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
     }
 
-    public boolean checkBlockRestrictions(Game game, int blockersCount) {
+    public boolean checkBlockRestrictions(Game game, Player defender, int blockersCount) {
         boolean blockWasLegal = true;
         if (attackers.isEmpty()) {
             return blockWasLegal;
         }
+
+        // collect possible blockers
+        Map<UUID, Set<UUID>> possibleBlockers = new HashMap<>();
+        for (UUID attackerId : attackers) {
+            Permanent attacker = game.getPermanent(attackerId);
+            Set<UUID> goodBlockers = new HashSet<>();
+            for (Permanent blocker : game.getBattlefield().getActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURES_CONTROLLED, defender.getId(), game)) {
+                if (blocker.canBlock(attackerId, game)) {
+                    goodBlockers.add(blocker.getId());
+                }
+            }
+            possibleBlockers.put(attacker.getId(), goodBlockers);
+        }
+
+        // effects: can't block alone
+        // too much blockers
         if (blockersCount == 1) {
             List<UUID> toBeRemoved = new ArrayList<>();
             for (UUID blockerId : getBlockers()) {
@@ -802,7 +818,8 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         for (UUID uuid : attackers) {
             Permanent attacker = game.getPermanent(uuid);
             if (attacker != null && this.blocked) {
-                // Check if there are enough blockers to have a legal block
+                // effects: can't be blocked except by xxx or more creatures
+                // too few blockers
                 if (attacker.getMinBlockedBy() > 1 && !blockers.isEmpty() && blockers.size() < attacker.getMinBlockedBy()) {
                     for (UUID blockerId : new ArrayList<>(blockers)) {
                         game.getCombat().removeBlocker(blockerId, game);
@@ -812,9 +829,16 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     if (!game.isSimulation()) {
                         game.informPlayers(attacker.getLogName() + " can't be blocked except by " + attacker.getMinBlockedBy() + " or more creatures. Blockers discarded.");
                     }
-                    blockWasLegal = false;
+
+                    // if there aren't any possible blocker configuration then it's legal due mtg rules
+                    // warning, it's affect AI related logic like other block auto-fixes does, see https://github.com/magefree/mage/pull/13182
+                    if (attacker.getMinBlockedBy() <= possibleBlockers.getOrDefault(attacker.getId(), Collections.emptySet()).size()) {
+                        blockWasLegal = false;
+                    }
                 }
-                // Check if there are too many blockers (maxBlockedBy = 0 means no restrictions)
+
+                // effects: can't be blocked by more than xxx creature
+                // too much blockers
                 if (attacker.getMaxBlockedBy() > 0 && attacker.getMaxBlockedBy() < blockers.size()) {
                     for (UUID blockerId : new ArrayList<>(blockers)) {
                         game.getCombat().removeBlocker(blockerId, game);
@@ -827,6 +851,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                                 .append(attacker.getMaxBlockedBy() == 1 ? " creature." : " creatures.")
                                 .append(" Blockers discarded.").toString());
                     }
+
                     blockWasLegal = false;
                 }
             }

@@ -1,50 +1,48 @@
 package mage.player.ai.util;
 
-import mage.players.Player;
+import mage.game.permanent.Permanent;
 
 /**
- * @author noxx
+ * AI: combat simulation result
+ *
+ * @author noxx, JayDi85
  */
 public class SurviveInfo {
-    private boolean attackerDied;
-    private boolean blockerDied;
+    private final boolean attackerDied;
+    private final boolean blockerDied;
+    private final int diffBlockingScore;
+    private final int diffNonblockingScore;
 
-    private Player defender;
-    private boolean triggered;
+    private Permanent blocker; // for final result
 
-    public SurviveInfo(boolean attackerDied, boolean blockerDied, Player defender, boolean triggered) {
+    public SurviveInfo(boolean attackerDied, boolean blockerDied, int diffBlockingScore, int diffNonblockingScore) {
         this.attackerDied = attackerDied;
         this.blockerDied = blockerDied;
-        this.defender = defender;
-        this.triggered = triggered;
+        this.diffBlockingScore = diffBlockingScore;
+        this.diffNonblockingScore = diffNonblockingScore;
     }
 
-    public SurviveInfo(boolean attackerDied, boolean blockerDied) {
-        this.attackerDied = attackerDied;
-        this.blockerDied = blockerDied;
+    public void setBlocker(Permanent blocker) {
+        this.blocker = blocker;
+    }
+
+    public Permanent getBlocker() {
+        return this.blocker;
+    }
+
+    public int getDiffBlockingScore() {
+        return this.diffBlockingScore;
+    }
+
+    public int getDiffNonblockingScore() {
+        return this.diffNonblockingScore;
     }
 
     public boolean isAttackerDied() {
         return attackerDied;
     }
 
-    public void setAttackerDied(boolean attackerDied) {
-        this.attackerDied = attackerDied;
-    }
-
     public boolean isBlockerDied() {
         return blockerDied;
-    }
-
-    public void setBlockerDied(boolean blockerDied) {
-        this.blockerDied = blockerDied;
-    }
-
-    public Player getDefender() {
-        return defender;
-    }
-
-    public boolean isTriggered() {
-        return triggered;
     }
 }

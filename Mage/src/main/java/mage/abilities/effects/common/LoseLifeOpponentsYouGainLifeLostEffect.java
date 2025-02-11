@@ -43,7 +43,7 @@ public class LoseLifeOpponentsYouGainLifeLostEffect extends OneShotEffect {
             return true;
         }
         int totalLifeLost = game
-                .getOpponents(source.getControllerId())
+                .getOpponents(source.getControllerId(), true)
                 .stream()
                 .map(game::getPlayer)
                 .filter(Objects::nonNull)

@@ -155,7 +155,7 @@ public class ComputerPlayer6 extends ComputerPlayer {
                         + (p.isTapped() ? ",tapped" : "")
                         + (p.isAttacking() ? ",attacking" : "")
                         + (p.getBlocking() > 0 ? ",blocking" : "")
-                        + ":" + GameStateEvaluator2.evaluatePermanent(p, game))
+                        + ":" + GameStateEvaluator2.evaluatePermanent(p, game, true))
                 .collect(Collectors.joining("; "));
         sb.append("-> Permanents: [").append(ownPermanentsInfo).append("]");
         logger.info(sb.toString());

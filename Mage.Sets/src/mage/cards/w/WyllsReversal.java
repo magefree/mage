@@ -38,6 +38,7 @@ public final class WyllsReversal extends CardImpl {
         // 15+ | You may choose new targets for that spell or ability. Then copy it. You may choose new targets for the copy.
         this.getSpellAbility().addEffect(new WyllsReversalEffect());
         this.getSpellAbility().addTarget(new TargetStackObject());
+        this.getSpellAbility().addHint(GreatestPowerAmongControlledCreaturesValue.getHint());
     }
 
     private WyllsReversal(final WyllsReversal card) {

@@ -24,8 +24,6 @@ import java.util.UUID;
  */
 public final class Barrowgoyf extends CardImpl {
 
-    private static final DynamicValue powerValue = CardTypesInGraveyardCount.ALL;
-
     public Barrowgoyf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.subtype.add(SubType.LHURGOYF);
@@ -40,7 +38,9 @@ public final class Barrowgoyf extends CardImpl {
         this.addAbility(LifelinkAbility.getInstance());
 
         // Barrowgoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessPlusOneSourceEffect(powerValue)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SetBasePowerToughnessPlusOneSourceEffect(CardTypesInGraveyardCount.ALL)
+        ).addHint(CardTypesInGraveyardCount.ALL.getHint()));
 
         // Whenever Barrowgoyf deals combat damage to a player, you may mill that many cards. If you do, you may put a creature card from among them into your hand.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(

@@ -32,7 +32,7 @@ public final class RoverBlades extends CardImpl {
 
         // Equipped creature has double strike.
         this.addAbility(new SimpleStaticAbility(new GainAbilityAttachedEffect(
-                DoubleStrikeAbility.getInstance(), AttachmentType.AURA
+                DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT
         )));
 
         // Equip {4}

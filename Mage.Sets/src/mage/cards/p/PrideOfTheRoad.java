@@ -12,9 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -23,15 +21,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class PrideOfTheRoad extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterControlledPermanent("creature or Vehicle you control");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                SubType.VEHICLE.getPredicate()
-        ));
-    }
 
     public PrideOfTheRoad(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{3}{W}");
@@ -50,7 +39,7 @@ public final class PrideOfTheRoad extends CardImpl {
 
         // Max speed -- At the beginning of combat on your turn, target creature or Vehicle you control gains double strike until end of turn.
         Ability ability = new BeginningOfCombatTriggeredAbility(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance()));
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_CONTROLLED_PERMANENT_CREATURE_OR_VEHICLE));
         this.addAbility(new MaxSpeedAbility(ability));
     }
 

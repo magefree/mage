@@ -133,6 +133,11 @@ public abstract class TriggeredAbilityImpl extends AbilityImpl implements Trigge
     }
 
     @Override
+    public String getTriggerPhrase() {
+        return this.triggerPhrase;
+    }
+
+    @Override
     public void setTriggerEvent(GameEvent triggerEvent) {
         this.triggerEvent = triggerEvent;
     }

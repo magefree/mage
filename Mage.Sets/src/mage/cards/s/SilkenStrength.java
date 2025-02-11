@@ -16,8 +16,7 @@ import mage.constants.AttachmentType;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.SubType;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.Predicates;
+import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
 
 import java.util.UUID;
@@ -26,15 +25,6 @@ import java.util.UUID;
  * @author TheElk801
  */
 public final class SilkenStrength extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent("creature or Vehicle");
-
-    static {
-        filter.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
-                SubType.VEHICLE.getPredicate()
-        ));
-    }
 
     public SilkenStrength(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
@@ -45,7 +35,7 @@ public final class SilkenStrength extends CardImpl {
         this.addAbility(FlashAbility.getInstance());
 
         // Enchant creature or Vehicle
-        TargetPermanent auraTarget = new TargetPermanent(filter);
+        TargetPermanent auraTarget = new TargetPermanent(StaticFilters.FILTER_PERMANENT_CREATURE_OR_VEHICLE);
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget));
@@ -57,7 +47,7 @@ public final class SilkenStrength extends CardImpl {
 
         // Enchanted permanent gets +1/+2 and has reach.
         Ability ability = new SimpleStaticAbility(new BoostEnchantedEffect(1, 2)
-                .setText("enchanted permanent has +1/+2"));
+                .setText("enchanted permanent gets +1/+2"));
         ability.addEffect(new GainAbilityAttachedEffect(
                 ReachAbility.getInstance(), AttachmentType.AURA
         ).setText("and has reach"));

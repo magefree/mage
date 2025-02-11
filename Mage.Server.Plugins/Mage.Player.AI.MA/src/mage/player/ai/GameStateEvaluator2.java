@@ -26,6 +26,10 @@ public final class GameStateEvaluator2 {
     public static final int HAND_CARD_SCORE = 5;
 
     public static PlayerEvaluateScore evaluate(UUID playerId, Game game) {
+        return evaluate(playerId, game, true);
+    }
+
+    public static PlayerEvaluateScore evaluate(UUID playerId, Game game, boolean useCombatPermanentScore) {
         // TODO: add multi opponents support, so AI can take better actions
         Player player = game.getPlayer(playerId);
         Player opponent = game.getPlayer(game.getOpponents(playerId).stream().findFirst().orElse(null));
@@ -63,7 +67,7 @@ public final class GameStateEvaluator2 {
 
             // add values of player
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(playerId)) {
-                int onePermScore = evaluatePermanent(permanent, game);
+                int onePermScore = evaluatePermanent(permanent, game, useCombatPermanentScore);
                 playerPermanentsScore += onePermScore;
                 if (logger.isDebugEnabled()) {
                     sbPlayer.append(permanent.getName()).append('[').append(onePermScore).append("] ");
@@ -77,7 +81,7 @@ public final class GameStateEvaluator2 {
 
             // add values of opponent
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(opponent.getId())) {
-                int onePermScore = evaluatePermanent(permanent, game);
+                int onePermScore = evaluatePermanent(permanent, game, useCombatPermanentScore);
                 opponentPermanentsScore += onePermScore;
                 if (logger.isDebugEnabled()) {
                     sbOpponent.append(permanent.getName()).append('[').append(onePermScore).append("] ");
@@ -121,7 +125,7 @@ public final class GameStateEvaluator2 {
                 opponentLifeScore, opponentHandScore, opponentPermanentsScore);
     }
 
-    public static int evaluatePermanent(Permanent permanent, Game game) {
+    public static int evaluatePermanent(Permanent permanent, Game game, boolean useCombatPermanentScore) {
         // prevent AI from attaching bad auras to its own permanents ex: Brainwash and Demonic Torment (no immediate penalty on the battlefield)
         int value = 0;
         if (!permanent.getAttachments().isEmpty()) {
@@ -137,14 +141,11 @@ public final class GameStateEvaluator2 {
                 }
             }
         }
-        value += ArtificialScoringSystem.getFixedPermanentScore(game, permanent)
-                + ArtificialScoringSystem.getVariablePermanentScore(game, permanent);
-        return value;
-    }
-
-    public static int evaluateCreature(Permanent creature, Game game) {
-        int value = ArtificialScoringSystem.getFixedPermanentScore(game, creature)
-                + ArtificialScoringSystem.getVariablePermanentScore(game, creature);
+        value += ArtificialScoringSystem.getFixedPermanentScore(game, permanent);
+        value += ArtificialScoringSystem.getDynamicPermanentScore(game, permanent);
+        if (useCombatPermanentScore) {
+            value += ArtificialScoringSystem.getCombatPermanentScore(game, permanent);
+        }
         return value;
     }
 

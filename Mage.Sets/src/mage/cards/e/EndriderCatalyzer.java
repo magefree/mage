@@ -32,7 +32,7 @@ public final class EndriderCatalyzer extends CardImpl {
 
         // Max speed -- {T}: Add {R}{R}.
         this.addAbility(new MaxSpeedAbility(new SimpleManaAbility(
-                Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()
+                Zone.BATTLEFIELD, Mana.RedMana(2), new TapSourceCost()
         )));
     }
 

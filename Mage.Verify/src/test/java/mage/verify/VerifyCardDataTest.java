@@ -70,7 +70,7 @@ public class VerifyCardDataTest {
 
     private static final Logger logger = Logger.getLogger(VerifyCardDataTest.class);
 
-    private static final String FULL_ABILITIES_CHECK_SET_CODES = "MH3;M3C"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
+    private static final String FULL_ABILITIES_CHECK_SET_CODES = "DFT"; // check ability text due mtgjson, can use multiple sets like MAT;CMD or * for all
     private static final boolean CHECK_ONLY_ABILITIES_TEXT = false; // use when checking text locally, suppresses unnecessary checks and output messages
     private static final boolean CHECK_COPYABLE_FIELDS = true; // disable for better verify test performance
 
@@ -102,7 +102,8 @@ public class VerifyCardDataTest {
             "shroud", "banding", "flanking", "horsemanship", "legendary landwalk"
     );
 
-    private static final List<String> doubleWords = new ArrayList<>();
+    private static final List<String> doubleWords = new ArrayList<>(); // for inner calc
+    private static final List<String> etbTriggerPhrases = new ArrayList<>(); // for inner calc
 
     static {
         // numbers
@@ -143,14 +144,12 @@ public class VerifyCardDataTest {
         skipListAddName(SKIP_LIST_TYPE, "UNH", "Old Fogey"); // uses summon word as a joke card
         skipListAddName(SKIP_LIST_TYPE, "UND", "Old Fogey");
         skipListAddName(SKIP_LIST_TYPE, "UST", "capital offense"); // uses "instant" instead "Instant" as a joke card
-        skipListAddName(SKIP_LIST_TYPE, "DFT", "Venomsac Lagac"); // temporary
 
         // subtype
         // skipListAddName(SKIP_LIST_SUBTYPE, set, cardName);
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Miss Demeanor"); // uses multiple types as a joke card: Lady, of, Proper, Etiquette
         skipListAddName(SKIP_LIST_SUBTYPE, "UGL", "Elvish Impersonators"); // subtype is "Elves" pun
         skipListAddName(SKIP_LIST_SUBTYPE, "UND", "Elvish Impersonators");
-        skipListAddName(SKIP_LIST_SUBTYPE, "DFT", "Venomsac Lagac"); // temporary
 
         // number
         // skipListAddName(SKIP_LIST_NUMBER, set, cardName);
@@ -1991,6 +1990,7 @@ public class VerifyCardDataTest {
         }
 
         String refLowerText = ref.text.toLowerCase(Locale.ENGLISH);
+        String cardLowerText = String.join("\n", card.getRules()).toLowerCase(Locale.ENGLISH);
 
         // special check: kicker ability must be in rules
         if (card.getAbilities().containsClass(MultikickerAbility.class) && card.getRules().stream().noneMatch(rule -> rule.contains("Multikicker"))) {
@@ -2050,6 +2050,21 @@ public class VerifyCardDataTest {
             fail(card, "abilities", "mutate cards aren't implemented and shouldn't be available");
         }
 
+        // special check: some new creature's ETB must use When this creature enters instead When {this} enters
+        if (EntersBattlefieldTriggeredAbility.ENABLE_TRIGGER_PHRASE_AUTO_FIX) {
+            if (etbTriggerPhrases.isEmpty()) {
+                etbTriggerPhrases.addAll(EntersBattlefieldTriggeredAbility.getPossibleTriggerPhrases());
+                Assert.assertTrue(etbTriggerPhrases.get(0).startsWith("when"));
+            }
+            if (refLowerText.contains("when")) {
+                for (String needTriggerPhrase : etbTriggerPhrases) {
+                    if (refLowerText.contains(needTriggerPhrase) && !cardLowerText.contains(needTriggerPhrase)) {
+                        fail(card, "abilities", "wrong creature's ETB trigger phrase, must use: " + needTriggerPhrase);
+                    }
+                }
+            }
+        }
+
         // special check: wrong dies triggers (there are also a runtime check on wrong usage, see isInUseableZoneDiesTrigger)
         Set<String> ignoredCards = new HashSet<>();
         ignoredCards.add("Caller of the Claw");
@@ -2096,7 +2111,7 @@ public class VerifyCardDataTest {
                     continue;
                 }
                 boolean isDiesAbility = rules.contains("die ")
-                        || rules.contains("dies ")
+                        || (rules.contains("dies ") && !rules.contains("dies this turn"))
                         || rules.contains("die,")
                         || rules.contains("dies,");
                 boolean isPutToGraveAbility = rules.contains("put into")

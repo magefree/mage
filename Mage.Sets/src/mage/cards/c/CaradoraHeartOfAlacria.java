@@ -12,8 +12,7 @@ import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
 import mage.target.common.TargetCardInLibrary;
 
@@ -25,15 +24,10 @@ import java.util.UUID;
 public final class CaradoraHeartOfAlacria extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("Mount or Vehicle card");
-    private static final FilterPermanent filter2 = new FilterControlledPermanent("creature or Vehicle you control");
 
     static {
         filter.add(Predicates.or(
                 SubType.MOUNT.getPredicate(),
-                SubType.VEHICLE.getPredicate()
-        ));
-        filter2.add(Predicates.or(
-                CardType.CREATURE.getPredicate(),
                 SubType.VEHICLE.getPredicate()
         ));
     }
@@ -49,11 +43,11 @@ public final class CaradoraHeartOfAlacria extends CardImpl {
 
         // When Caradora enters, you may search your library for a Mount or Vehicle card, reveal it, put it into your hand, then shuffle.
         this.addAbility(new EntersBattlefieldTriggeredAbility(
-                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true)
+                new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), true
         ));
 
         // If one or more +1/+1 counters would be put on a creature or Vehicle you control, that many plus one +1/+1 counters are put on it instead.
-        this.addAbility(new SimpleStaticAbility(new ModifyCountersAddedEffect(filter2, CounterType.P1P1)));
+        this.addAbility(new SimpleStaticAbility(new ModifyCountersAddedEffect(StaticFilters.FILTER_CONTROLLED_PERMANENT_CREATURE_OR_VEHICLE, CounterType.P1P1)));
     }
 
     private CaradoraHeartOfAlacria(final CaradoraHeartOfAlacria card) {

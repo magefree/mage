@@ -7,6 +7,7 @@ import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
+import org.junit.Assert;
 
 import java.util.List;
 import java.util.UUID;
@@ -33,11 +34,16 @@ public class LoadCallbackClient implements CallbackClient {
 
     private final String logsPrefix;
     private final Boolean showLogsAsHtml; // original game logs in HTML, but it can be converted to txt for more readable console
+    private String globalProgress = ""; // example: progress 33% [20.cd, 21.__, 17.__], AI game #09: ---
 
     public LoadCallbackClient(boolean joinGameChat, String logsPrefix, Boolean showLogsAsHtml) {
         this.joinGameChat = joinGameChat;
         this.logsPrefix = logsPrefix;
         this.showLogsAsHtml = showLogsAsHtml;
+    }
+
+    protected void updateGlobalProgress(String globalProgress) {
+        this.globalProgress = globalProgress;
     }
 
     @Override
@@ -69,6 +75,12 @@ public class LoadCallbackClient implements CallbackClient {
                 }
                 break;
 
+            case GAME_UPDATE:
+                GameView newGameView = (GameView) callback.getData();
+                Assert.assertNotNull("game update event must return game view object", newGameView);
+                this.gameView = newGameView;
+                break;
+
             case CHATMESSAGE: {
                 ChatMessage message = (ChatMessage) callback.getData();
                 String mes = this.showLogsAsHtml ? message.getMessage() : Jsoup.parse(message.getMessage()).text();
@@ -89,7 +101,7 @@ public class LoadCallbackClient implements CallbackClient {
             case GAME_UPDATE_AND_INFORM:
             case GAME_INFORM_PERSONAL: {
                 GameClientMessage message = (GameClientMessage) callback.getData();
-                gameView = message.getGameView();
+                this.gameView = message.getGameView();
                 // ignore play priority log
                 break;
             }
@@ -169,7 +181,6 @@ public class LoadCallbackClient implements CallbackClient {
                 break;
 
             // skip callbacks (no need to react)
-            case GAME_UPDATE:
             case JOINED_TABLE:
                 break;
 
@@ -199,7 +210,7 @@ public class LoadCallbackClient implements CallbackClient {
             mes += "T" + this.gameView.getTurn() + "-" + this.gameView.getStep().getIndex() + ", L:" + p.getLibraryCount() + ", H:" + getPlayer().getHandCount() + ": ";
         }
 
-        return logsPrefix + ": " + mes;
+        return globalProgress + ", " + logsPrefix + ": " + mes;
     }
 
     public void setSession(Session session) {

@@ -55,6 +55,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private static PreferencesDialog instance; // shared dialog instance
 
+    public static final boolean NETWORK_ENABLE_PROXY_SUPPORT = false; // TODO: delete proxy at all after few releases, 2025-02-09
+
     // WARNING, do not change const values - it must be same for compatibility with user's saved settings
     public static final String KEY_SHOW_TOOLTIPS_DELAY = "showTooltipsDelay";
     public static final String KEY_SHOW_CARD_NAMES = "showCardNames";
@@ -2795,7 +2797,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel.addTab("Sounds", tabSounds);
 
-        connection_Proxy.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Proxy for server connection and images download"));
+        connection_Proxy.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Proxy for server connection and images download (DO NOT SUPPORTED)"));
 
         cbProxyType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -3314,6 +3316,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static void setProxyInformation(Connection connection) {
         ProxyType configProxyType = Connection.ProxyType.valueByText(getCachedValue(KEY_PROXY_TYPE, "None"));
         if (configProxyType == null) {
+            return;
+        }
+
+        if (!NETWORK_ENABLE_PROXY_SUPPORT) {
+            connection.setProxyType(ProxyType.NONE);
             return;
         }
 

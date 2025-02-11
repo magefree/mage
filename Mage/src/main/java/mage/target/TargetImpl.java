@@ -446,13 +446,6 @@ public abstract class TargetImpl implements Target {
         return !targets.isEmpty();
     }
 
-    /**
-     * Returns all possible different target combinations
-     *
-     * @param source
-     * @param game
-     * @return
-     */
     @Override
     public List<? extends TargetImpl> getTargetOptions(Ability source, Game game) {
         List<TargetImpl> options = new ArrayList<>();

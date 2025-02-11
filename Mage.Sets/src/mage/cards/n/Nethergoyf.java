@@ -34,8 +34,6 @@ import java.util.stream.Collectors;
  */
 public final class Nethergoyf extends CardImpl {
 
-    private static final DynamicValue powerValue = CardTypesInGraveyardCount.YOU;
-
     public Nethergoyf(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{B}");
 
@@ -44,7 +42,9 @@ public final class Nethergoyf extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Nethergoyf's power is equal to the number of card types among cards in your graveyard and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessPlusOneSourceEffect(powerValue)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL,
+                new SetBasePowerToughnessPlusOneSourceEffect(CardTypesInGraveyardCount.YOU)
+        ).addHint(CardTypesInGraveyardCount.YOU.getHint()));
 
         // Escape--{2}{B}, Exile any number of other cards from your graveyard with four or more card types among them.
         CostsImpl<Cost> additionalCost = new CostsImpl();

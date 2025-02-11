@@ -62,6 +62,7 @@ public final class ArniSlaysTheTroll extends CardImpl {
                         "You gain life equal to the greatest power among creatures you control"
                 )
         );
+        sagaAbility.addHint(GreatestPowerAmongControlledCreaturesValue.getHint());
         this.addAbility(sagaAbility);
     }
 

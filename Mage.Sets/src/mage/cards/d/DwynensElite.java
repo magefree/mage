@@ -35,12 +35,12 @@ public final class DwynensElite extends CardImpl {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // When Dwynen's Elite enters the battlefield, if you control another Elf, create a 1/1 green Elf Warrior creature token.
+        // When this creature enters, if you control another Elf, create a 1/1 green Elf Warrior creature token.
         TriggeredAbility triggeredAbility = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new ElfWarriorToken()));
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
                 triggeredAbility,
                 new PermanentsOnTheBattlefieldCondition(filter),
-                "When {this} enters, if you control another Elf, create a 1/1 green Elf Warrior creature token."));
+                "When this creature enters, if you control another Elf, create a 1/1 green Elf Warrior creature token."));
     }
 
     private DwynensElite(final DwynensElite card) {

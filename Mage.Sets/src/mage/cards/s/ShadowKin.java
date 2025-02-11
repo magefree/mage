@@ -15,6 +15,7 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;
+import mage.util.CardUtil;
 import mage.util.functions.CopyApplier;
 
 import java.util.UUID;
@@ -94,7 +95,7 @@ class ShadowKinEffect extends OneShotEffect {
             return true;
         }
         controller.moveCards(card, Zone.EXILED, source, game);
-        Permanent blueprint = new PermanentCard(card, source.getControllerId(), game);
+        Permanent blueprint = new PermanentCard(CardUtil.getDefaultCardSideForBattlefield(game, card), source.getControllerId(), game);
         blueprint.assignNewId();
         CopyApplier applier = new ShadowKinApplier();
         applier.apply(game, blueprint, source, sourcePermanent.getId());

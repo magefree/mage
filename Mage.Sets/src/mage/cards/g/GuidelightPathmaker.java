@@ -37,7 +37,7 @@ public final class GuidelightPathmaker extends CardImpl {
         this.addAbility(VigilanceAbility.getInstance());
 
         // When this Vehicle enters, you may search your library for an artifact card and reveal it. Put it onto the battlefield if its mana value is 2 or less. Otherwise, put it into your hand. Then shuffle.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GuidelightPathmakerEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GuidelightPathmakerEffect(), true));
 
         // Crew 2
         this.addAbility(new CrewAbility(2));

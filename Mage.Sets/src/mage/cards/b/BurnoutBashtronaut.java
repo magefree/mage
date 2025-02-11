@@ -38,7 +38,7 @@ public final class BurnoutBashtronaut extends CardImpl {
 
         // {2}: This creature gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(
-                new BoostSourceEffect(2, 0, Duration.EndOfTurn), new GenericManaCost(2)
+                new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(2)
         ));
 
         // Max speed -- This creature has double strike.
