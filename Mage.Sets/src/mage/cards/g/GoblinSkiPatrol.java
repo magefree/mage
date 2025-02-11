@@ -21,6 +21,7 @@ import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.SubType;
 import mage.constants.Duration;
 
 /**
@@ -28,17 +29,6 @@ import mage.constants.Duration;
  * @author tiera3 - based on ArmorOfThorns, AkroanLineBreaker, RonomSerpent, GeneralsEnforcer, MildManneredLibrarian, BlazemireVerge, ThoughtShucker
  */
 public final class GoblinSkiPatrol extends CardImpl {
-
-    private static final FilterPermanent filter = new FilterPermanent(SubType.MOUNTAIN, "a snow-covered Mountain");
-
-    static {
-        filter.add(SuperType.SNOW.getPredicate());
-    }
-
-    private static final Condition condition = new PermanentsOnTheBattlefieldCondition(filter);
-    private static final Hint hint = new ConditionHint(condition, "You control a snow-covered Mountain");
-
-
     public GoblinSkiPatrol(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{1}{R}");
 
@@ -62,15 +52,15 @@ public final class GoblinSkiPatrol extends CardImpl {
 
 class GoblinSkiPatrolActivatedAbility extends ConditionalActivatedAbility {
     GoblinSkiPatrolActivatedAbility() {
-        Effect effect = new BoostSourceEffect(2, 0, Duration.EndOfTurn);
-        effect.setText("{this} gets +2/+0");
-        super(effect, new ManaCostsImpl<>("{1}{R}"), condition);
-        effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
-        effect.setText("gains flying until end of turn");
-        addEffect(effect.concatBy("and"));
+        super(new BoostSourceEffect(2, 0, Duration.EndOfTurn).setText("{this} gets +2/+0"),
+                new ManaCostsImpl<>("{1}{R}"), 
+                new PermanentsOnTheBattlefieldCondition(
+                    new FilterPermanent(SubType.MOUNTAIN, "a snow-covered Mountain").add(SuperType.SNOW.getPredicate())) );
+        addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn
+            ).setText("gains flying").concatBy("and"));
         addEffect(new CreateDelayedTriggeredAbilityEffect(
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect(true))
-        ).setText("Its controller sacrifices it at the beginning of the next end step."));
+            ).setText("Its controller sacrifices it at the beginning of the next end step."));
         maxActivationsPerGame = 1;
     }
 
