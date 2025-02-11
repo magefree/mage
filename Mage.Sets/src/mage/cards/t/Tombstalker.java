@@ -26,10 +26,9 @@ public final class Tombstalker extends CardImpl {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Delve
-        Ability ability = new DelveAbility();
-        ability.setRuleAtTheTop(false);
-        this.addAbility(ability);
+        this.addAbility(new DelveAbility(false));
     }
 
     private Tombstalker(final Tombstalker card) {

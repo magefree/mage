@@ -19,7 +19,8 @@ public final class TemporalTrespass extends CardImpl {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{8}{U}{U}{U}");
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
+
         // Take an extra turn after this one. Exile Temporal Trespass.
         this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());
         this.getSpellAbility().addEffect(new ExileSpellEffect());

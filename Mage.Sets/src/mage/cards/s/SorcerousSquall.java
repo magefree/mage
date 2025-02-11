@@ -33,7 +33,7 @@ public final class SorcerousSquall extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{6}{U}{U}{U}");
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
 
         // Target opponent mills nine cards, then you may cast an instant or sorcery spell from that player's graveyard without paying its mana cost. If that spell would be put into a graveyard, exile it instead.
         this.getSpellAbility().addEffect(new MillCardsTargetEffect(9));

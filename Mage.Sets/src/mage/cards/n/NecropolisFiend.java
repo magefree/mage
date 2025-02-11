@@ -48,7 +48,7 @@ public final class NecropolisFiend extends CardImpl {
         this.toughness = new MageInt(5);
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

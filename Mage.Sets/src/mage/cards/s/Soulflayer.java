@@ -31,7 +31,7 @@ public final class Soulflayer extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(true));
 
         // If a creature card with flying was exiled with Soulflayer's delve ability, Soulflayer has flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, reach, trample, and vigilance.
         this.addAbility(new SimpleStaticAbility(new SoulflayerEffect()));

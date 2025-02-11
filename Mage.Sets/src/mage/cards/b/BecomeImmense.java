@@ -20,7 +20,8 @@ public final class BecomeImmense extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{5}{G}");
 
         // Delve (Each card you exile from your graveyard while casting this spell pays for {1}.)
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
+
         // Target creature gets +6/+6 until end of turn
         this.getSpellAbility().addEffect(new BoostTargetEffect(6, 6, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

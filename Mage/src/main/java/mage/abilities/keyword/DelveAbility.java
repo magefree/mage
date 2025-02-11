@@ -63,10 +63,16 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
 
     private static final DynamicValue cardsInGraveyard = new CardsInControllerGraveyardCount();
 
-    public DelveAbility() {
+    private boolean useSourceExileZone;
+
+    /**
+     * @param useSourceExileZone - keep exiled cards in linked source zone, so next ability can find it
+     */
+    public DelveAbility(boolean useSourceExileZone) {
         super(Zone.ALL, null);
         this.setRuleAtTheTop(true);
         this.addHint(new ValueHint("Cards in your graveyard", cardsInGraveyard));
+        this.useSourceExileZone = useSourceExileZone;
     }
 
     protected DelveAbility(final DelveAbility ability) {
@@ -101,8 +107,11 @@ public class DelveAbility extends SimpleStaticAbility implements AlternateManaPa
                     unpaidAmount = 1;
                 }
                 specialAction.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(
-                        0, Math.min(controller.getGraveyard().size(), unpaidAmount),
-                        new FilterCard("cards from your graveyard"), true)));
+                        0,
+                        Math.min(controller.getGraveyard().size(), unpaidAmount),
+                        new FilterCard("cards from your graveyard"),
+                        true
+                )).withSourceExileZone(this.useSourceExileZone));
                 if (specialAction.canActivate(source.getControllerId(), game).canActivate()) {
                     game.getState().getSpecialActions().add(specialAction);
                 }

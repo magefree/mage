@@ -1,4 +1,3 @@
-
 package mage.cards.t;
 
 import java.util.UUID;
@@ -17,9 +16,9 @@ public final class TreasureCruise extends CardImpl {
     public TreasureCruise(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{7}{U}");
 
-
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
+
         // Draw 3 Cards
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(3));
     }

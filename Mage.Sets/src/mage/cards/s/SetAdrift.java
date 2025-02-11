@@ -20,7 +20,8 @@ public final class SetAdrift extends CardImpl {
 
 
         // Delve
-        this.addAbility(new DelveAbility());
+        this.addAbility(new DelveAbility(false));
+
         // Put target nonland permanent on top of its owner's library
         this.getSpellAbility().addEffect(new PutOnLibraryTargetEffect(true));
         this.getSpellAbility().addTarget(new TargetNonlandPermanent());
