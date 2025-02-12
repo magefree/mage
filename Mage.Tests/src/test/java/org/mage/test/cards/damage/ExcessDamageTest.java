@@ -160,7 +160,7 @@ public class ExcessDamageTest extends CardTestPlayerBase {
         block(2, playerA, bear, myrSuperion);
         block(2, playerA, envoy, myrSuperion);
         block(2, playerA, bondedConstruct, myrSuperion);
-        setChoice(playerB, CHOICE_SKIP);
+        setChoice(playerB, CHOICE_SKIP); // Assign default damage
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);

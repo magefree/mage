@@ -37,7 +37,7 @@ public class AfflictTest extends CardTestPlayerBase {
         attack(1, playerA, khenra);
         block(1, playerB, elves + ":0", khenra);
         block(1, playerB, elves + ":1", khenra);
-        setChoice(playerA, CHOICE_SKIP);
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

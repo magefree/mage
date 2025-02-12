@@ -34,6 +34,7 @@ public class BloatflySwarmTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, swarm, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", swarm);
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -57,8 +58,9 @@ public class BloatflySwarmTest extends CardTestPlayerBase {
         attack(1, playerA, swarm);
         block(1, playerB, "Brimstone Dragon", swarm);
         block(1, playerB, "Giant Spider", swarm);
-        setChoice(playerA, CHOICE_SKIP);
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -82,8 +84,9 @@ public class BloatflySwarmTest extends CardTestPlayerBase {
         attack(1, playerA, swarm);
         block(1, playerB, "Wind Drake", swarm);
         block(1, playerB, "Giant Spider", swarm);
-        setChoice(playerA, CHOICE_SKIP);
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 

@@ -251,7 +251,7 @@ public class TheRingEmblemTest extends CardTestPlayerBase {
         block(3, playerB, "Alaborn Trooper", "Ashiok's Skulker");
         setChoice(playerA, "Mountain"); // draw/discard on attack trigger
         setChoice(playerA, "Whenever your Ring-bearer becomes blocked"); // 2x triggers from two blockers
-        setChoice(playerA, CHOICE_SKIP); // Divide damage
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
         setChoice(playerA, "At end of combat, that permanent"); // 2x triggers from two blockers
         checkPermanentCount("after attack on 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, playerA, "Ashiok's Skulker", 1);
         checkPermanentCount("after attack on 3", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, playerB, "Academy Manufactor", 0);

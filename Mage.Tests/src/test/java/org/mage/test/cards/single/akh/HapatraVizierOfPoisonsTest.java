@@ -7,8 +7,6 @@ import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
-import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
-
 /**
  *
  * @author escplan9
@@ -126,7 +124,6 @@ public class HapatraVizierOfPoisonsTest extends CardTestPlayerBase {
 
         attack(1, playerA, "Saproling Token");
         block(1, playerB, krakenHatchling, "Saproling Token");
-        setChoice(playerA, CHOICE_SKIP);
         setStopAt(1, PhaseStep.END_COMBAT);
         setStrictChooseMode(true);
         execute();

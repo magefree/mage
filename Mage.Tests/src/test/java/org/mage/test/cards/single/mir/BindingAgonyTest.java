@@ -35,8 +35,9 @@ public class BindingAgonyTest extends CardTestPlayerBase {
         attack(1, playerA, "Grizzly Bears");
         block(1, playerB, "Centaur Courser", "Grizzly Bears");
         block(1, playerB, "Memnite", "Grizzly Bears");
-        setChoice(playerA, CHOICE_SKIP);
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
         execute();
 
@@ -56,6 +57,7 @@ public class BindingAgonyTest extends CardTestPlayerBase {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, agony, "Grizzly Bears", true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Grizzly Bears");
 
+        setStrictChooseMode(true);
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 

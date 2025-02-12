@@ -27,7 +27,7 @@ public class DamagedBatchTests extends CardTestCommander4Players {
         attack(1, playerA, "Donna Noble", playerB);
         block(1, playerB, "Memnite", "Donna Noble");
         block(1, playerB, "Expedition Envoy", "Donna Noble");
-        setChoice(playerA, CHOICE_SKIP);
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
         //Target this player with Donna Noble
         addTarget(playerA, playerB);

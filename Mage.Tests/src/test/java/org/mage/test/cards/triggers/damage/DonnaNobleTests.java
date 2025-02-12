@@ -34,7 +34,7 @@ public class DonnaNobleTests extends CardTestCommander4Players {
         attack(5, playerA, "Impervious Greatwurm", playerB);
         block(5, playerB, "Memnite", "Impervious Greatwurm");
         block(5, playerB, "Expedition Envoy", "Impervious Greatwurm");
-        setChoice(playerA, CHOICE_SKIP);
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
         //Target this player with Donna Noble
         addTarget(playerA, playerB);

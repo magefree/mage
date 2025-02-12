@@ -69,7 +69,7 @@ public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
         attack(3, playerA, "Magma Pummeler", playerB);
         block(3, playerB, "Memnite", "Magma Pummeler");
         block(3, playerB, "Goblin Piker", "Magma Pummeler");
-        setChoice(playerA, CHOICE_SKIP);
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
         addTarget(playerA, playerB); // For the one trigger
 
         setStopAt(3, PhaseStep.END_TURN);
@@ -119,7 +119,7 @@ public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
         attack(3, playerA, "Magma Pummeler", playerB);
         block(3, playerB, "Centaur Courser", "Magma Pummeler");
         block(3, playerB, "Air Elemental", "Magma Pummeler");
-        setChoice(playerA, CHOICE_SKIP);
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
         addTarget(playerA, playerB); // For the one trigger
 
         setStopAt(3, PhaseStep.END_TURN);
@@ -150,7 +150,7 @@ public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
         attack(1, playerA, "Undergrowth Champion", playerB);
         block(1, playerB, "Grizzly Bears", "Undergrowth Champion");
         block(1, playerB, "Elite Vanguard", "Undergrowth Champion");
-        setChoice(playerA, CHOICE_SKIP);
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
