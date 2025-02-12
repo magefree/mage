@@ -218,10 +218,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Dan Lewis", 683, Rarity.RARE, mage.cards.d.DanLewis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dan Lewis", 78, Rarity.RARE, mage.cards.d.DanLewis.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dan Lewis", 971, Rarity.RARE, mage.cards.d.DanLewis.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Danny Pink", 356, Rarity.RARE, mage.cards.d.DannyPink.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Danny Pink", 39, Rarity.RARE, mage.cards.d.DannyPink.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Danny Pink", 644, Rarity.RARE, mage.cards.d.DannyPink.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Danny Pink", 947, Rarity.RARE, mage.cards.d.DannyPink.class, NON_FULL_USE_VARIOUS));
+        //cards.add(new SetCardInfo("Danny Pink", 356, Rarity.RARE, mage.cards.d.DannyPink.class, NON_FULL_USE_VARIOUS));
+        //cards.add(new SetCardInfo("Danny Pink", 39, Rarity.RARE, mage.cards.d.DannyPink.class, NON_FULL_USE_VARIOUS));
+        //cards.add(new SetCardInfo("Danny Pink", 644, Rarity.RARE, mage.cards.d.DannyPink.class, NON_FULL_USE_VARIOUS));
+        //cards.add(new SetCardInfo("Danny Pink", 947, Rarity.RARE, mage.cards.d.DannyPink.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darkwater Catacombs", 1078, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darkwater Catacombs", 269, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Darkwater Catacombs", 487, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class, NON_FULL_USE_VARIOUS));
