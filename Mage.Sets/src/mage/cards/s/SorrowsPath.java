@@ -176,14 +176,8 @@ class SorrowsPathSwitchBlockersEffect extends OneShotEffect {
                 group.addBlockerToGroup(blocker.getId(), blocker.getControllerId(), game);
                 game.getCombat().addBlockingGroup(blocker.getId(), attacker.getId(), blocker.getControllerId(), game);
                 game.fireEvent(new BlockerDeclaredEvent(attacker.getId(), blocker.getId(), blocker.getControllerId()));
-                group.pickBlockerOrder(attacker.getControllerId(), game);
             }
         }
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.CREATURE_BLOCKS, blocker.getId(), source, null));
-        CombatGroup blockGroup = findBlockingGroup(blocker, game); // a new blockingGroup is formed, so it's necessary to find it again
-        if (blockGroup != null) {
-            blockGroup.pickAttackerOrder(blocker.getControllerId(), game);
-        }
     }
-
 }
