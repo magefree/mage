@@ -292,10 +292,17 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 }
                 List<Integer> amounts;
                 if (hasTrample(attacker)){
-                    MultiAmountType dialogue = new MultiAmountType("Assign combat damage (with trample)",
-                            String.format("Assign combat damage among creatures blocking %s, P/T: %d/%d (Unassigned damage tramples through)",
-                                    attacker.getLogName(), attacker.getPower().getValue(), attacker.getToughness().getValue()));
-                    amounts = player.getMultiAmountWithIndividualConstraints(Outcome.Damage, damageDivision, damage - remainingDamage, damage, dialogue, game);
+                    if (remainingDamage > 0 || damageDivision.size() > 1) {
+                        MultiAmountType dialogue = new MultiAmountType("Assign combat damage (with trample)",
+                                String.format("Assign combat damage among creatures blocking %s, P/T: %d/%d (Unassigned damage tramples through)",
+                                        attacker.getLogName(), attacker.getPower().getValue(), attacker.getToughness().getValue()));
+                        amounts = player.getMultiAmountWithIndividualConstraints(Outcome.Damage, damageDivision, damage - remainingDamage, damage, dialogue, game);
+                    } else {
+                        amounts = new ArrayList<>();
+                        if (damageDivision.size() == 1) { // Assign all damage to one blocker
+                            amounts.add(damage);
+                        }
+                    }
                     int trampleDamage = damage - (amounts.stream().mapToInt(x -> x).sum());
                     if (trampleDamage > 0) {
                         defenderDamage(attacker, trampleDamage, game, false);
@@ -311,7 +318,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                         amounts = player.getMultiAmountWithIndividualConstraints(Outcome.Damage, damageDivision, damage, damage, dialogue, game);
                     } else {
                         amounts = new LinkedList<>();
-                        amounts.add(damage);
+                        if (damageDivision.size() == 1) { // Assign all damage to one blocker
+                            amounts.add(damage);
+                        }
                     }
                 }
                 if (!damageDivision.isEmpty()){
