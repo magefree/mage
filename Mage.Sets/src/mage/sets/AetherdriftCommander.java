@@ -95,6 +95,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("God-Pharaoh's Gift", 131, Rarity.RARE, mage.cards.g.GodPharaohsGift.class));
         cards.add(new SetCardInfo("Grave Titan", 42, Rarity.MYTHIC, mage.cards.g.GraveTitan.class));
         cards.add(new SetCardInfo("Gravecrawler", 43, Rarity.RARE, mage.cards.g.Gravecrawler.class));
+        cards.add(new SetCardInfo("Hashaton, Scarab's Fist", 1, Rarity.MYTHIC, mage.cards.h.HashatonScarabsFist.class));
         cards.add(new SetCardInfo("Hinterland Harbor", 160, Rarity.RARE, mage.cards.h.HinterlandHarbor.class));
         cards.add(new SetCardInfo("Irrigated Farmland", 161, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class));
         cards.add(new SetCardInfo("Isolated Chapel", 162, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
