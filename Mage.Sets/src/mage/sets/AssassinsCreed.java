@@ -307,7 +307,7 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Temporal Trespass", 86, Rarity.MYTHIC, mage.cards.t.TemporalTrespass.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terminate", 251, Rarity.UNCOMMON, mage.cards.t.Terminate.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Terminate", 98, Rarity.UNCOMMON, mage.cards.t.Terminate.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Aesir Escape Valhalla", 39, Rarity.UNCOMMON, mage.cards.t.TheAesirEscapeValhalla.class));
+        cards.add(new SetCardInfo("The Aesir Escape Valhalla", 39, Rarity.UNCOMMON, mage.cards.t.TheAesirEscapeValhalla.class));
         cards.add(new SetCardInfo("The Animus", 168, Rarity.RARE, mage.cards.t.TheAnimus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Animus", 253, Rarity.RARE, mage.cards.t.TheAnimus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Animus", 69, Rarity.RARE, mage.cards.t.TheAnimus.class, NON_FULL_USE_VARIOUS));
