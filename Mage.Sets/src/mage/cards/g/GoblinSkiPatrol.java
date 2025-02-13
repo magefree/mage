@@ -16,7 +16,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
-import mage.filter.FilterPermanent;
+import mage.filter.FilterControlledPermanent;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -29,7 +29,7 @@ import mage.constants.Duration;
  */
 public final class GoblinSkiPatrol extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterPermanent(SubType.MOUNTAIN, "a snow-covered Mountain");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.MOUNTAIN, "a snow-covered Mountain");
 
     static {
         filter.add(SuperType.SNOW.getPredicate());
