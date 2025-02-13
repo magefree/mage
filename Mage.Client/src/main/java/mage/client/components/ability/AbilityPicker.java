@@ -152,7 +152,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         setBackgroundPainter(mwPanelPainter);
 
         title = new ColorPane();
-        title.setFont(new Font("Times New Roman", 1, sizeMod(15)));
+        title.setFont(new Font("Times New Roman", Font.BOLD, sizeMod(15)));
         title.setEditable(false);
         title.setFocusCycleRoot(false);
         title.setOpaque(false);
@@ -186,11 +186,12 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
         rows.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent evt) {
-                if (SwingUtilities.isLeftMouseButton(evt)) {
+                if (SwingUtilities.isLeftMouseButton(evt) && !rows.isSelectionEmpty()) {
                     objectMouseClicked(evt);
                 }
             }
         });
+
         rows.setSelectedIndex(0);
         rows.setFont(new Font("Times New Roman", 1, sizeMod(17)));
         rows.setBorder(BorderFactory.createEmptyBorder());
@@ -233,18 +234,16 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-        int notches = e.getWheelRotation();
-        int index = rows.getSelectedIndex();
-
-        if (notches < 0) {
-            if (index > 0) {
-                rows.setSelectedIndex(index - 1);
-                rows.repaint();
-            }
-        } else if (index < choices.size() - 1) {
-            rows.setSelectedIndex(index + 1);
-            rows.repaint();
+        int direction = e.getWheelRotation() < 0 ? -1 : +1;
+        int index = rows.getSelectedIndex() + direction;
+        if (index < 0) {
+            index = 0;
+        } else if (index >= choices.size()) {
+            index = choices.size() - 1;
         }
+
+        rows.setSelectedIndex(index);
+        rows.repaint();
     }
 
     private void objectMouseClicked(MouseEvent event) {
