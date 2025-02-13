@@ -112,6 +112,7 @@ public final class MastersEditionII extends ExpansionSet {
         cards.add(new SetCardInfo("Giant Trap Door Spider", 195, Rarity.UNCOMMON, mage.cards.g.GiantTrapDoorSpider.class));
         cards.add(new SetCardInfo("Glacial Chasm", 229, Rarity.RARE, mage.cards.g.GlacialChasm.class));
         cards.add(new SetCardInfo("Glacial Crevasses", 127, Rarity.RARE, mage.cards.g.GlacialCrevasses.class));
+        cards.add(new SetCardInfo("Goblin Ski Patrol", 128, Rarity.COMMON, mage.cards.g.GoblinSkiPatrol.class));
         cards.add(new SetCardInfo("Gorilla Shaman", 129, Rarity.UNCOMMON, mage.cards.g.GorillaShaman.class));
         cards.add(new SetCardInfo("Grandmother Sengir", 93, Rarity.RARE, mage.cards.g.GrandmotherSengir.class));
         cards.add(new SetCardInfo("Gustha's Scepter", 209, Rarity.RARE, mage.cards.g.GusthasScepter.class));
