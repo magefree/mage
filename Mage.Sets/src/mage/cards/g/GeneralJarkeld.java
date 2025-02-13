@@ -1,10 +1,6 @@
 
 package mage.cards.g;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.IsStepCondition;
@@ -13,17 +9,17 @@ import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.SubType;
-import mage.constants.Outcome;
-import mage.constants.SuperType;
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetAttackingCreature;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -138,11 +134,9 @@ class GeneralJarkeldSwitchBlockersEffect extends OneShotEffect {
                     // the ability doesn't unblock a group that loses all blockers, however it will newly block a previously unblocked group if it gains a blocker this way
                     if (!(chosenGroup1.getBlockers().isEmpty())) {
                         chosenGroup1.setBlocked(true, game);
-                        chosenGroup1.pickBlockerOrder(attacker1.getControllerId(), game);
                     }
                     if (!(chosenGroup2.getBlockers().isEmpty())) {
                         chosenGroup2.setBlocked(true, game);
-                        chosenGroup2.pickBlockerOrder(attacker2.getControllerId(), game);
                     }
                     return true;
                 }
@@ -197,7 +191,6 @@ class GeneralJarkeldSwitchBlockersEffect extends OneShotEffect {
                         // 10/4/2004 	The new blocker does not trigger any abilities which trigger on creatures becoming blockers, because the creatures were already blockers and the simple change of who is blocking does not trigger such abilities.
                         game.getCombat().addBlockingGroup(blocker.getId(), attacker, controller.getId(), game);
                     }
-                    blockGroup.pickAttackerOrder(blocker.getControllerId(), game);
                 }
             }
         }

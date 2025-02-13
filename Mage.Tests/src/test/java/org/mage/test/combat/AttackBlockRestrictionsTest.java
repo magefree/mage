@@ -11,6 +11,7 @@ import org.mage.test.serverside.base.CardTestPlayerBaseWithAIHelps;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
 
 /**
  * Test restrictions for choosing attackers and blockers.
@@ -753,9 +754,9 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodscent", "Sonorous Howlbonder");
 
         attack(1, playerA, "Sonorous Howlbonder");
-        setChoiceAmount(playerA, 1); // assign damage to 1 of 3 blocking memnites
         checkAttackers("x1 attacker", 1, playerA, "Sonorous Howlbonder");
         checkBlockers("x3 blockers", 1, playerB, "Memnite", "Memnite", "Memnite");
+        setChoice(playerA, CHOICE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -783,7 +784,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
         // ai must choose all blockers anyway
         attack(1, playerA, "Sonorous Howlbonder");
         aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
-        setChoiceAmount(playerA, 1); // assign damage to 1 of 3 blocking memnites
+        setChoiceAmount(playerA, 1, 1, 0); // assign damage to blocking memnites
         checkAttackers("x1 attacker", 1, playerA, "Sonorous Howlbonder");
         checkBlockers("x3 blockers", 1, playerB, "Memnite", "Memnite", "Memnite");
 
@@ -813,9 +814,9 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodscent", "Sonorous Howlbonder");
 
         attack(1, playerA, "Sonorous Howlbonder");
-        setChoiceAmount(playerA, 1); // assign damage to 1 of 3 blocking memnites
         checkAttackers("x1 attacker", 1, playerA, "Sonorous Howlbonder");
         checkBlockers("all blockers", 1, playerB, "Memnite", "Memnite", "Memnite", "Memnite", "Memnite");
+        setChoice(playerA, CHOICE_SKIP);
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.END_TURN);
@@ -845,7 +846,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
         // ai must choose all blockers
         attack(1, playerA, "Sonorous Howlbonder");
         aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
-        setChoiceAmount(playerA, 1); // assign damage to 1 of 3 blocking memnites
+        setChoiceAmount(playerA, 1, 1, 0, 0, 0); // assign damage to blocking memnites
         checkAttackers("x1 attacker", 1, playerA, "Sonorous Howlbonder");
         checkBlockers("all blockers", 1, playerB, "Memnite", "Memnite", "Memnite", "Memnite", "Memnite");
 
@@ -879,7 +880,6 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bloodscent", "Sonorous Howlbonder");
 
         attack(1, playerA, "Sonorous Howlbonder");
-        setChoiceAmount(playerA, 1); // assign damage to 1 of 3 blocking memnites
         checkAttackers("x1 attacker", 1, playerA, "Sonorous Howlbonder");
         checkBlockers("one possible blocker", 1, playerB, "Memnite");
 
@@ -998,8 +998,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBaseWithAIHelps {
         addTarget(playerA, "Alley Strangler"); // boost target
         setChoice(playerA, true); // boost target
         attack(1, playerA, "Alley Strangler");
-        setChoiceAmount(playerA, 1); // assign damage to 1 of 2 blocking memnites
-        setChoiceAmount(playerA, 1); // assign damage to 2 of 2 blocking memnites
+        setChoiceAmount(playerA, 1, 1); // assign damage to blocking memnites
         aiPlayStep(1, PhaseStep.DECLARE_BLOCKERS, playerB);
         checkAttackers("x1 attacker", 1, playerA, "Alley Strangler");
         checkBlockers("x2 blockers", 1, playerB, "Memnite", "Memnite");
