@@ -177,7 +177,7 @@ public class CardInfoWindowDialog extends MageDialog implements MageDesktopIconi
         super.show();
 
         // auto-position on first usage
-        if (positioned) {
+        if (!positioned) {
             showAndPositionWindow();
         }
     }
@@ -190,9 +190,23 @@ public class CardInfoWindowDialog extends MageDialog implements MageDesktopIconi
                 Point centered = SettingsManager.instance.getComponentPosition(width, height);
                 if (!positioned) {
                     // starting position
+
+                    // auto-resize window, but keep it GUI friendly on too many cards (do not overlap a full screen)
+                    int minWidth = CardInfoWindowDialog.this.getWidth();
+                    int maxWidth = SettingsManager.instance.getScreenWidth() / 2;
+                    int needWidth = CardInfoWindowDialog.this.cards.getPreferredSize().width;
+                    needWidth = Math.max(needWidth, minWidth);
+                    needWidth = Math.min(needWidth, maxWidth);
+                    needWidth += GUISizeHelper.scrollBarSize; // more space, so no horizontal scrolls
+                    int needHeight = CardInfoWindowDialog.this.getHeight(); // keep default height
+                    CardInfoWindowDialog.this.setPreferredSize(new Dimension(needWidth, needHeight));
+                    CardInfoWindowDialog.this.pack();
+                    centered = SettingsManager.instance.getComponentPosition(needWidth, needHeight);
+
                     // little randomize to see multiple opened windows
                     int xPos = centered.x / 2 + RandomUtil.nextInt(50);
                     int yPos = centered.y / 2 + RandomUtil.nextInt(50);
+
                     CardInfoWindowDialog.this.setLocation(xPos, yPos);
                     show();
                     positioned = true;
