@@ -16,7 +16,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.hint.ConditionHint;
 import mage.abilities.hint.Hint;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.FilterControlledPermanent;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
