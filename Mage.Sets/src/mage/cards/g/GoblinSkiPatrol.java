@@ -29,9 +29,10 @@ import mage.constants.Duration;
  */
 public final class GoblinSkiPatrol extends CardImpl {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent(SubType.MOUNTAIN, "a snow-covered Mountain");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a snow-covered Mountain");
 
     static {
+        filter.add(SubType.MOUNTAIN.getPredicate());
         filter.add(SuperType.SNOW.getPredicate());
     }
 
