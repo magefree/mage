@@ -5,7 +5,6 @@ import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.ExileFromZoneTargetEffect;
-import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.keyword.FadingAbility;
 import mage.cards.CardImpl;
