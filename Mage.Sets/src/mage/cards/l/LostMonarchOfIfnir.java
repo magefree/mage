@@ -138,11 +138,11 @@ enum LostMonarchOfIfnirCondition implements Condition {
 }
 
 class LostMonarchOfIfnirWatcher extends Watcher {
-    private boolean deltDamage; //by a zombie this turn
+    private boolean dealtDamage; //by a zombie this turn
 
      LostMonarchOfIfnirWatcher() {
          super(WatcherScope.GAME);
-         this.deltDamage = false;
+         this.dealtDamage = false;
     }
 
     @Override
@@ -154,17 +154,17 @@ class LostMonarchOfIfnirWatcher extends Watcher {
                 .filter(DamagedEvent::isCombatDamage)
                 .map(damagedPlayerEvent -> game.getPermanentOrLKIBattlefield(event.getSourceId()))
                 .filter(permanent -> permanent.hasSubtype(SubType.ZOMBIE, game))
-                .ifPresent(ignored -> this.deltDamage = true);
+                .ifPresent(ignored -> this.dealtDamage = true);
     }
 
     @Override
     public void reset() {
         super.reset();
-        this.deltDamage = false;
+        this.dealtDamage = false;
     }
 
     boolean wasDealtDamage() {
-        return this.deltDamage;
+        return this.dealtDamage;
     }
 }
 
