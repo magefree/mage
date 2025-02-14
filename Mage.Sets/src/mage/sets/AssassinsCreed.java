@@ -30,9 +30,9 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Adewale, Breaker of Chains", 44, Rarity.UNCOMMON, mage.cards.a.AdewaleBreakerOfChains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Adrestia", 252, Rarity.UNCOMMON, mage.cards.a.Adrestia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Adrestia", 68, Rarity.UNCOMMON, mage.cards.a.Adrestia.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Alexios, Deimos of Kosmos", 134, Rarity.UNCOMMON, mage.cards.a.AlexiosDeimosOfKosmos.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Alexios, Deimos of Kosmos", 214, Rarity.UNCOMMON, mage.cards.a.AlexiosDeimosOfKosmos.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Alexios, Deimos of Kosmos", 33, Rarity.UNCOMMON, mage.cards.a.AlexiosDeimosOfKosmos.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Alexios, Deimos of Kosmos", 134, Rarity.UNCOMMON, mage.cards.a.AlexiosDeimosOfKosmos.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Alexios, Deimos of Kosmos", 214, Rarity.UNCOMMON, mage.cards.a.AlexiosDeimosOfKosmos.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Alexios, Deimos of Kosmos", 33, Rarity.UNCOMMON, mage.cards.a.AlexiosDeimosOfKosmos.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Altair Ibn-La'Ahad", 137, Rarity.MYTHIC, mage.cards.a.AltairIbnLaAhad.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Altair Ibn-La'Ahad", 225, Rarity.MYTHIC, mage.cards.a.AltairIbnLaAhad.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Altair Ibn-La'Ahad", 268, Rarity.MYTHIC, mage.cards.a.AltairIbnLaAhad.class, NON_FULL_USE_VARIOUS));
