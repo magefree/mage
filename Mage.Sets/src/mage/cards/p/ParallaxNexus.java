@@ -6,6 +6,7 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.ExileFromZoneTargetEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.keyword.FadingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -37,7 +38,7 @@ public final class ParallaxNexus extends CardImpl {
         this.addAbility(ability);
 
         // When Parallax Nexus leaves the battlefield, each player returns to their hand all cards they own exiled with Parallax Nexus.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileEffect(Zone.HAND).setText("each player returns to their hand all cards they own exiled with {this}"), false));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.HAND).setText("each player returns to their hand all cards they own exiled with {this}"), false));
     }
 
     private ParallaxNexus(final ParallaxNexus card) {
