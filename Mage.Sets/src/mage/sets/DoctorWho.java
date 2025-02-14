@@ -95,10 +95,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Bessie, the Doctor's Roadster", 776, Rarity.RARE, mage.cards.b.BessieTheDoctorsRoadster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bigger on the Inside", 115, Rarity.UNCOMMON, mage.cards.b.BiggerOnTheInside.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bigger on the Inside", 720, Rarity.UNCOMMON, mage.cards.b.BiggerOnTheInside.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Bill Potts", 379, Rarity.RARE, mage.cards.b.BillPotts.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Bill Potts", 681, Rarity.RARE, mage.cards.b.BillPotts.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Bill Potts", 76, Rarity.RARE, mage.cards.b.BillPotts.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Bill Potts", 970, Rarity.RARE, mage.cards.b.BillPotts.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bill Potts", 379, Rarity.RARE, mage.cards.b.BillPotts.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bill Potts", 681, Rarity.RARE, mage.cards.b.BillPotts.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bill Potts", 76, Rarity.RARE, mage.cards.b.BillPotts.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Bill Potts", 970, Rarity.RARE, mage.cards.b.BillPotts.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blasphemous Act", 1063, Rarity.RARE, mage.cards.b.BlasphemousAct.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blasphemous Act", 224, Rarity.RARE, mage.cards.b.BlasphemousAct.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blasphemous Act", 472, Rarity.RARE, mage.cards.b.BlasphemousAct.class, NON_FULL_USE_VARIOUS));
