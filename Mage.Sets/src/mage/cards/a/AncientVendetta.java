@@ -8,6 +8,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.target.common.TargetOpponent;
+
 import java.util.UUID;
 
 
@@ -39,7 +40,7 @@ public final class AncientVendetta extends CardImpl {
 class AncientVendettaEffect extends SearchTargetGraveyardHandLibraryForCardNameAndExileEffect {
 
     AncientVendettaEffect() {
-        super(false, "target opponent's", "up to four cards with that name", false, 4);
+        super(true, "target opponent's", "up to four cards with that name", false, 4);
     }
 
     private AncientVendettaEffect(final AncientVendettaEffect effect) {
