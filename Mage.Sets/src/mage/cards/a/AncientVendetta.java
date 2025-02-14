@@ -8,7 +8,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.game.Game;
 import mage.target.common.TargetOpponent;
-
 import java.util.UUID;
 
 
