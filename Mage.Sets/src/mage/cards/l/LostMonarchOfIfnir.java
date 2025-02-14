@@ -122,7 +122,7 @@ class LostMonarchOfIfnirEffect extends OneShotEffect {
     }
 
     @Override
-    public OneShotEffect copy() {
+    public LostMonarchOfIfnirEffect copy() {
         return new LostMonarchOfIfnirEffect(this);
     }
 }
