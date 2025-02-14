@@ -85,14 +85,13 @@ public final class BillPotts extends CardImpl {
     }
 }
 
-// copied from Silver Wyvern.
 enum BillPottsPredicate implements ObjectSourcePlayerPredicate<StackObject> {
     instance;
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
-        return makeStream(input, game).anyMatch(input.getSourceId()::equals)
-                && makeStream(input, game).allMatch(input.getSourceId()::equals);
+        return (makeStream(input, game).findAny().isPresent()
+	        && makeStream(input, game).allMatch(input.getSourceId()::equals)) ;
     }
 
     private static final Stream<UUID> makeStream(ObjectSourcePlayer<StackObject> input, Game game) {
@@ -102,8 +101,6 @@ enum BillPottsPredicate implements ObjectSourcePlayerPredicate<StackObject> {
                 .stream()
                 .map(Target::getTargets)
                 .flatMap(Collection::stream)
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .map(MageItem::getId);
+                .filter(Objects::nonNull);
     }
 }
