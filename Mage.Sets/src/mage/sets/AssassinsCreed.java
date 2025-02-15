@@ -77,8 +77,8 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Bleeding Effect", 232, Rarity.UNCOMMON, mage.cards.b.BleedingEffect.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bleeding Effect", 51, Rarity.UNCOMMON, mage.cards.b.BleedingEffect.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brotherhood Ambushers", 285, Rarity.UNCOMMON, mage.cards.b.BrotherhoodAmbushers.class));
-        //cards.add(new SetCardInfo("Brotherhood Headquarters", 266, Rarity.UNCOMMON, mage.cards.b.BrotherhoodHeadquarters.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Brotherhood Headquarters", 80, Rarity.UNCOMMON, mage.cards.b.BrotherhoodHeadquarters.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brotherhood Headquarters", 266, Rarity.UNCOMMON, mage.cards.b.BrotherhoodHeadquarters.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Brotherhood Headquarters", 80, Rarity.UNCOMMON, mage.cards.b.BrotherhoodHeadquarters.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brotherhood Patriarch", 286, Rarity.COMMON, mage.cards.b.BrotherhoodPatriarch.class));
         cards.add(new SetCardInfo("Brotherhood Regalia", 255, Rarity.UNCOMMON, mage.cards.b.BrotherhoodRegalia.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Brotherhood Regalia", 71, Rarity.UNCOMMON, mage.cards.b.BrotherhoodRegalia.class, NON_FULL_USE_VARIOUS));
