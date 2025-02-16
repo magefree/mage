@@ -8,6 +8,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -22,7 +23,6 @@ import java.util.UUID;
  * @author jimga150
  */
 public final class SeasonOfLoss extends CardImpl {
-
     public SeasonOfLoss(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
 
@@ -41,9 +41,11 @@ public final class SeasonOfLoss extends CardImpl {
         this.getSpellAbility().addMode(mode2.withPawPrintValue(2));
 
         // {P}{P}{P} -- Each opponent loses X life, where X is the number of creature cards in your graveyard.
-        Mode mode3 = new Mode(new LoseLifeOpponentsEffect(new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURES))
+        DynamicValue creatureCardsInGraveyard = new CardsInControllerGraveyardCount(StaticFilters.FILTER_CARD_CREATURES);
+        Mode mode3 = new Mode(new LoseLifeOpponentsEffect(creatureCardsInGraveyard)
                 .setText("Each opponent loses X life, where X is the number of creature cards in your graveyard."));
         this.getSpellAbility().addMode(mode3.withPawPrintValue(3));
+        this.getSpellAbility().addHint(new ValueHint("Creature cards in your graveyard", creatureCardsInGraveyard));
     }
 
     private SeasonOfLoss(final SeasonOfLoss card) {
