@@ -551,7 +551,7 @@ public enum SubType {
 
         @Override
         public String toString() {
-            return "Subtype(" + subtype + ')';
+            return "Subtype(" + subtype + ')'; // warning, do not change until refactor code like predicate.toString().equals
         }
     }
 

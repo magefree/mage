@@ -77,7 +77,8 @@ enum CanTargetOnlyWallsPredicate implements Predicate<MageObject> {
             return false;
         }
         boolean canTargetOnlyWalls = false;
-        for (Mode mode : stackObject.getStackAbility().getModes().values()) {
+        for (UUID modeId : stackObject.getStackAbility().getModes().getSelectedModes()) {
+            Mode mode = stackObject.getStackAbility().getModes().get(modeId);
             for (Target target : mode.getTargets()) {
                 Filter filter = target.getFilter();
                 if (!(filter instanceof FilterPermanent)) {

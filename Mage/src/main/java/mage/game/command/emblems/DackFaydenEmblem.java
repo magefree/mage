@@ -70,7 +70,8 @@ class DackFaydenEmblemTriggeredAbility extends TriggeredAbilityImpl {
                 Spell spell = game.getStack().getSpell(event.getTargetId());
                 if (spell != null) {
                     SpellAbility spellAbility = spell.getSpellAbility();
-                    for (Mode mode : spellAbility.getModes().values()) {
+                    for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+                        Mode mode = spellAbility.getModes().get(modeId);
                         for (Target target : mode.getTargets()) {
                             if (!target.isNotTarget()) {
                                 for (UUID targetId : target.getTargets()) {
