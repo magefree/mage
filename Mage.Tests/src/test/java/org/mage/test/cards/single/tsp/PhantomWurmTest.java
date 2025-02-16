@@ -6,6 +6,8 @@ import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 /**
  * @author Susucr
  */
@@ -31,9 +33,7 @@ public class PhantomWurmTest extends CardTestPlayerBase {
         attack(1, playerA, wurm, playerB);
         block(1, playerB, "Memnite", wurm);
         block(1, playerB, "Eager Cadet", wurm);
-
-        setChoice(playerA, "X=1"); // damage assignment
-        setChoice(playerA, "X=3"); // damage assignment
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -115,9 +115,7 @@ public class PhantomWurmTest extends CardTestPlayerBase {
         attack(1, playerA, wurm, playerB);
         block(1, playerB, "Memnite", wurm);
         block(1, playerB, "Goblin Striker", wurm);
-
-        setChoice(playerA, "X=1"); // damage assignment
-        setChoice(playerA, "X=3"); // damage assignment
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
@@ -139,9 +137,7 @@ public class PhantomWurmTest extends CardTestPlayerBase {
         attack(1, playerA, wurm, playerB);
         block(1, playerB, "Boros Recruit", wurm);
         block(1, playerB, "Goblin Striker", wurm);
-
-        setChoice(playerA, "X=1"); // damage assignment
-        setChoice(playerA, "X=3"); // damage assignment
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();
