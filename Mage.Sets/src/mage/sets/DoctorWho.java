@@ -955,8 +955,8 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Fugitive Doctor", 417, Rarity.RARE, mage.cards.t.TheFugitiveDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Fugitive Doctor", 541, Rarity.RARE, mage.cards.t.TheFugitiveDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Fugitive Doctor", 735, Rarity.RARE, mage.cards.t.TheFugitiveDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Girl in the Fireplace", 21, Rarity.RARE, mage.cards.t.TheGirlInTheFireplace.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Girl in the Fireplace", 626, Rarity.RARE, mage.cards.t.TheGirlInTheFireplace.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Girl in the Fireplace", 21, Rarity.RARE, mage.cards.t.TheGirlInTheFireplace.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Girl in the Fireplace", 626, Rarity.RARE, mage.cards.t.TheGirlInTheFireplace.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Lux Foundation Library", 588, Rarity.COMMON, mage.cards.t.TheLuxFoundationLibrary.class));
         //cards.add(new SetCardInfo("The Master, Formed Anew", 1017, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Master, Formed Anew", 1133, Rarity.RARE, mage.cards.t.TheMasterFormedAnew.class, NON_FULL_USE_VARIOUS));

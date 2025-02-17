@@ -2169,6 +2169,8 @@ public class ScryfallImageSupportTokens {
 
             // WHO
             put("WHO/Alien Insect", "https://api.scryfall.com/cards/twho/19/en?format=image");
+            put("WHO/Human Noble", "https://api.scryfall.com/cards/twho/7/en?format=image");
+            put("WHO/Horse", "https://api.scryfall.com/cards/twho/4/en?format=image");
 
             // 8ED
             put("8ED/Rukh", "https://api.scryfall.com/cards/p03/7/en?format=image");
