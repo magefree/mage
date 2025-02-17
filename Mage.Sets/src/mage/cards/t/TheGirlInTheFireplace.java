@@ -91,7 +91,7 @@ class TheGirlInTheFireplaceTriggeredAbility extends DelayedTriggeredAbility {
         if (!((DamagedPlayerEvent) event).isCombatDamage()) {
             return false;
         }
-        Permanent permanent = game.getPermanent(event.getSourceId());
+        Permanent permanent = game.getPermanentOrLKIBattlefield(event.getSourceId());
         if (!filter.match(permanent, getControllerId(), this, game)) {
             return false;
         }
