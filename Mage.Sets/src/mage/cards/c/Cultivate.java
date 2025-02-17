@@ -1,6 +1,6 @@
 package mage.cards.c;
 
-import mage.abilities.effects.common.search.SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutOntoBattlefieldTappedRestInHandEffect;
 import mage.cards.*;
 import mage.constants.CardType;
 import mage.filter.StaticFilters;
@@ -17,7 +17,7 @@ public final class Cultivate extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{G}");
 
         // Search your library for up to two basic land cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle.
-        this.getSpellAbility().addEffect(new SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect(
+        this.getSpellAbility().addEffect(new SearchLibraryPutOntoBattlefieldTappedRestInHandEffect(
                 new TargetCardInLibrary(0, 2, StaticFilters.FILTER_CARD_BASIC_LANDS)));
 
     }

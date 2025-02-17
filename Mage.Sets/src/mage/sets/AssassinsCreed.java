@@ -321,8 +321,8 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Towering Viewpoint", 263, Rarity.UNCOMMON, mage.cards.t.ToweringViewpoint.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Towering Viewpoint", 77, Rarity.UNCOMMON, mage.cards.t.ToweringViewpoint.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tranquilize", 284, Rarity.COMMON, mage.cards.t.Tranquilize.class));
-        //cards.add(new SetCardInfo("Viewpoint Synchronization", 223, Rarity.UNCOMMON, mage.cards.v.ViewpointSynchronization.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Viewpoint Synchronization", 43, Rarity.UNCOMMON, mage.cards.v.ViewpointSynchronization.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Viewpoint Synchronization", 223, Rarity.UNCOMMON, mage.cards.v.ViewpointSynchronization.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Viewpoint Synchronization", 43, Rarity.UNCOMMON, mage.cards.v.ViewpointSynchronization.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Waterlogged Grove", 116, Rarity.RARE, mage.cards.w.WaterloggedGrove.class));
         //cards.add(new SetCardInfo("What Must Be Done", 11, Rarity.RARE, mage.cards.w.WhatMustBeDone.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("What Must Be Done", 157, Rarity.RARE, mage.cards.w.WhatMustBeDone.class, NON_FULL_USE_VARIOUS));

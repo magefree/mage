@@ -9,7 +9,7 @@ import mage.abilities.common.TurnedFaceUpSourceTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continuous.BoostSourceEffect;
-import mage.abilities.effects.common.search.SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutOntoBattlefieldTappedRestInHandEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.constants.Duration;
@@ -56,7 +56,7 @@ public final class FlourishingBloomKin extends CardImpl {
         // When Flourishing Bloom-Kin is turned face up, search your library for up to two Forest cards and reveal them.
         // Put one of them onto the battlefield tapped and the other into your hand, then shuffle.
         this.addAbility(new TurnedFaceUpSourceTriggeredAbility(
-                new SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect(new TargetCardInLibrary(0, 2, filterForestCards))
+                new SearchLibraryPutOntoBattlefieldTappedRestInHandEffect(new TargetCardInLibrary(0, 2, filterForestCards))
                         .setText("search your library for up to two Forest cards and reveal them. Put one of them onto the battlefield tapped and the other into your hand, then shuffle")));
     }
 
