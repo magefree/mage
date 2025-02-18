@@ -5,7 +5,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.search.SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutOntoBattlefieldTappedRestInHandEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
@@ -32,7 +32,7 @@ public final class NavigationOrb extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
         // {2}, {T}, Sacrifice Navigation Orb: Search your library for up to two basic land cards and/or Gate cards, reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle.
-        Ability ability = new SimpleActivatedAbility(new SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect(
+        Ability ability = new SimpleActivatedAbility(new SearchLibraryPutOntoBattlefieldTappedRestInHandEffect(
                 new TargetCardInLibrary(0, 2, filter)), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

@@ -12,27 +12,37 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com, edited by Cguy7777
  */
-public class SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect extends SearchEffect {
+public class SearchLibraryPutOntoBattlefieldTappedRestInHandEffect extends SearchEffect {
 
-    private static final FilterCard filter = new FilterCard("card to put on the battlefield tapped");
+    private final FilterCard filter;
+    private final int numToBattlefield;
 
-    public SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect(TargetCardInLibrary target) {
+    public SearchLibraryPutOntoBattlefieldTappedRestInHandEffect(TargetCardInLibrary target, int numToBattlefield) {
         super(target, Outcome.PutLandInPlay);
         staticText = "search your library for " + target.getDescription() +
-                ", reveal those cards, put one onto the battlefield tapped and the other into your hand, then shuffle";
+                ", reveal those cards, put " + CardUtil.numberToText(numToBattlefield) + " onto the battlefield tapped and the other into your hand, then shuffle";
+        this.filter = new FilterCard((numToBattlefield > 1 ? "cards" : "card") + "to put on the battlefield tapped");
+        this.numToBattlefield = numToBattlefield;
     }
 
-    protected SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect(final SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect effect) {
+    public SearchLibraryPutOntoBattlefieldTappedRestInHandEffect(TargetCardInLibrary target) {
+        this(target, 1);
+    }
+
+    protected SearchLibraryPutOntoBattlefieldTappedRestInHandEffect(final SearchLibraryPutOntoBattlefieldTappedRestInHandEffect effect) {
         super(effect);
+        this.filter = effect.filter.copy();
+        this.numToBattlefield = effect.numToBattlefield;
     }
 
     @Override
-    public SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect copy() {
-        return new SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect(this);
+    public SearchLibraryPutOntoBattlefieldTappedRestInHandEffect copy() {
+        return new SearchLibraryPutOntoBattlefieldTappedRestInHandEffect(this);
     }
 
     @Override
@@ -49,14 +59,15 @@ public class SearchLibraryPutOneOntoBattlefieldTappedRestInHandEffect extends Se
                 controller.revealCards(sourceObject.getIdName(), revealed, game);
 
                 if (target.getTargets().size() >= 2) {
-                    TargetCardInLibrary targetCardToBattlefield = new TargetCardInLibrary(filter);
-                    controller.choose(Outcome.PutLandInPlay, revealed, targetCardToBattlefield, source, game);
+                    int maxToBattlefield = Math.min(numToBattlefield, target.getTargets().size());
+                    TargetCardInLibrary targetCardsToBattlefield = new TargetCardInLibrary(maxToBattlefield, filter);
+                    controller.choose(Outcome.PutLandInPlay, revealed, targetCardsToBattlefield, source, game);
 
-                    Card cardToBattlefield = revealed.get(targetCardToBattlefield.getFirstTarget(), game);
+                    Cards cardsToBattlefield = new CardsImpl(targetCardsToBattlefield.getTargets());
                     Cards cardsToHand = new CardsImpl(revealed);
-                    if (cardToBattlefield != null) {
-                        controller.moveCards(cardToBattlefield, Zone.BATTLEFIELD, source, game, true, false, false, null);
-                        cardsToHand.remove(cardToBattlefield);
+                    if (!cardsToBattlefield.isEmpty()) {
+                        controller.moveCards(cardsToBattlefield.getCards(game), Zone.BATTLEFIELD, source, game, true, false, false, null);
+                        cardsToHand.removeAll(cardsToBattlefield);
                     }
 
                     controller.moveCardsToHandWithInfo(cardsToHand, source, game, true);
