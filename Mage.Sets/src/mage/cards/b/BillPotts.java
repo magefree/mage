@@ -1,8 +1,11 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.MageItem;
+import mage.abilities.Ability;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
+import mage.abilities.Mode;
 import mage.abilities.common.ActivateAbilityTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CopyStackObjectEffect;
@@ -15,7 +18,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SetTargetPointer;
 import mage.constants.Zone;
-import mage.filter.common.FilterActivatedOrTriggeredAbility;
 import mage.filter.common.FilterInstantOrSorcerySpell;
 import mage.filter.FilterSpell;
 import mage.filter.FilterStackObject;
@@ -23,11 +25,16 @@ import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
 import mage.game.stack.StackObject;
+import mage.game.stack.Spell;
 import mage.target.Target;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.UUID;
 
 /**
  *
@@ -90,17 +97,28 @@ enum BillPottsPredicate implements ObjectSourcePlayerPredicate<StackObject> {
 
     @Override
     public boolean apply(ObjectSourcePlayer<StackObject> input, Game game) {
-        return (makeStream(input, game).findAny().isPresent()
-	        && makeStream(input, game).allMatch(input.getSourceId()::equals)) ;
+	List<UUID> oneTargetList = Arrays.asList(input.getSourceId()); 
+        return (makeStream(input, game).collect(Collectors.toList()).equals(oneTargetList));
     }
 
     private static final Stream<UUID> makeStream(ObjectSourcePlayer<StackObject> input, Game game) {
-        return input.getObject()
-                .getStackAbility()
-                .getTargets()
-                .stream()
+        Abilities<Ability> objectAbilities = new AbilitiesImpl<>();
+        if (input.getObject() instanceof Spell) {
+            objectAbilities.addAll(((Spell) input.getObject()).getSpellAbilities());
+        } else {
+            objectAbilities.add(input.getObject().getStackAbility());
+        }
+	return objectAbilities
+		.stream()
+      		.map(Ability::getModes)
+                .flatMap(m -> m.getSelectedModes().stream().map(m::get))
+                .filter(Objects::nonNull)
+                .map(Mode::getTargets)
+                .flatMap(Collection::stream)
+                .filter(t -> !t.isNotTarget())
                 .map(Target::getTargets)
                 .flatMap(Collection::stream)
-                .filter(Objects::nonNull);
+                .filter(Objects::nonNull)
+                .distinct();
     }
 }
