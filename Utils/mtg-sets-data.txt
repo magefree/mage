@@ -111,6 +111,7 @@ Exodus|EXO|
 Zendikar Expeditions|EXP|
 Fallout|PIP|
 Fallen Empires|FEM|
+Final Fantasy Commander|FIC|
 Friday Night Magic|FNMP|
 Fate Reforged|FRF|
 Foundations|FDN|

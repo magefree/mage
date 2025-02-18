@@ -579,6 +579,7 @@ public class ScryfallImageSupportCards {
             add("INR"); // Innistrad Remastered
             add("DFT"); // Aetherdrift
             add("DRC"); // Aetherdrift Commander
+            add("FIC"); // Final Fantasy Commander
 
             // Custom sets using Scryfall images - must provide a direct link for each card in directDownloadLinks
             add("CALC"); // Custom Alchemized versions of existing cards
