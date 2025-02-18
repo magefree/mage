@@ -16,8 +16,9 @@ public final class FinalFantasy extends ExpansionSet {
     }
 
     private FinalFantasy() {
-        super("Final Fantasty", "FIN", ExpansionSet.buildDate(2025, 6, 13), SetType.EXPANSION);
-        this.blockName = "Final Fantasty"; // for sorting in GUI
+        super("Final Fantasy", "FIN", ExpansionSet.buildDate(2025, 6, 13), SetType.EXPANSION);
+        this.blockName = "Final Fantasy"; // for sorting in GUI
+        this.hasBasicLands = false; // temporary
 
         cards.add(new SetCardInfo("Sazh's Chocobo", 200, Rarity.UNCOMMON, mage.cards.s.SazhsChocobo.class));
     }
