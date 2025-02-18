@@ -10,18 +10,22 @@ import mage.abilities.keyword.FreerunningAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
-import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.filter.Filter;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
 
 import java.util.UUID;
 
 public class BrotherhoodHeadquarters extends CardImpl {
+
+    private static final Predicate<MageObject> predicate = new AbilityPredicate(FreerunningAbility.class);
+
     public BrotherhoodHeadquarters(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.LAND}, "");
 
@@ -82,7 +86,8 @@ public class BrotherhoodHeadquarters extends CardImpl {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            return source instanceof FreerunningAbility;
+            MageObject sourceObject = game.getObject(source);
+            return sourceObject != null && predicate.apply(sourceObject, game);
         }
     }
 
