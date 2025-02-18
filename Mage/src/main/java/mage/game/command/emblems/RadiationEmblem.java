@@ -16,6 +16,7 @@ import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.command.Emblem;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 
 /**
@@ -106,8 +107,13 @@ class RadiationEffect extends OneShotEffect {
         Cards milled = player.millCards(amount, source, game);
         int countNonLand = milled.count(StaticFilters.FILTER_CARD_NON_LAND, player.getId(), source, game);
         if (countNonLand > 0) {
-            // TODO: support gaining life instead with [[Strong, the Brutish Thespian]]
-            player.loseLife(countNonLand, game, source, false);
+            GameEvent event = new GameEvent(GameEvent.EventType.RADIATION_GAIN_LIFE, null, source, player.getId(), amount, false);
+            if (game.replaceEvent(event)) {
+                player.gainLife(countNonLand, game, source);
+            } else {
+                player.loseLife(countNonLand, game, source, false);
+            }
+
             player.loseCounters(CounterType.RAD.getName(), countNonLand, source, game);
         }
         return true;

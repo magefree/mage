@@ -672,6 +672,9 @@ public class GameEvent implements Serializable {
          playerId   player who gave the gift
          */
         GAVE_GIFT,
+        /* rad counter life loss/gain effect
+         */
+        RADIATION_GAIN_LIFE,
         // custom events - must store some unique data to track
         CUSTOM_EVENT;
 

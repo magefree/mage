@@ -835,10 +835,10 @@ public final class Fallout extends ExpansionSet {
         //cards.add(new SetCardInfo("Strong Back", 611, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Strong Back", 83, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Strong Back", 930, Rarity.RARE, mage.cards.s.StrongBack.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strong, the Brutish Thespian", 403, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strong, the Brutish Thespian", 612, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strong, the Brutish Thespian", 84, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Strong, the Brutish Thespian", 931, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strong, the Brutish Thespian", 403, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strong, the Brutish Thespian", 612, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strong, the Brutish Thespian", 84, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Strong, the Brutish Thespian", 931, Rarity.RARE, mage.cards.s.StrongTheBrutishThespian.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Struggle for Project Purity", 380, Rarity.RARE, mage.cards.s.StruggleForProjectPurity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Struggle for Project Purity", 39, Rarity.RARE, mage.cards.s.StruggleForProjectPurity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Struggle for Project Purity", 567, Rarity.RARE, mage.cards.s.StruggleForProjectPurity.class, NON_FULL_USE_VARIOUS));
