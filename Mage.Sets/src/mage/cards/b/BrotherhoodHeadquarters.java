@@ -4,12 +4,14 @@ import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.keyword.FreerunningAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -56,20 +58,20 @@ public class BrotherhoodHeadquarters extends CardImpl {
 
         public BrotherhoodHeadquartersConditionalMana(Mana mana) {
             super(mana);
-            addCondition(new BrotherhoodHeadquartersCreatureManaCondition());
+            addCondition(new BrotherhoodHeadquartersAssassinSpellManaCondition());
             addCondition(new BrotherhoodHeadquartersFreerunningManaCondition());
             addCondition(new BrotherhoodHeadquartersAssassinSourceManaCondition());
             setComparisonScope(Filter.ComparisonScope.Any);
         }
     }
 
-    class BrotherhoodHeadquartersCreatureManaCondition extends CreatureCastManaCondition {
+    class BrotherhoodHeadquartersAssassinSpellManaCondition implements Condition {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            if (super.apply(game, source)) {
-                MageObject object = game.getObject(source.getSourceId());
-                return object != null && object.hasSubtype(SubType.ASSASSIN, game);
+            if (source instanceof SpellAbility) {
+                Card card = game.getCard(source.getSourceId());
+                return card != null && card.hasSubtype(SubType.ASSASSIN, game);
             }
 
             return false;
