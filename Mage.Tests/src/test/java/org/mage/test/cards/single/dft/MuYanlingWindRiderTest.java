@@ -38,6 +38,7 @@ public class MuYanlingWindRiderTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
         addCard(Zone.HAND, playerA, muyanling);
         addCard(Zone.HAND, playerA, "Memnite");
+        addCard(Zone.BATTLEFIELD, playerA, "Ankle Biter");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, muyanling, true);
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Memnite", true);
@@ -47,6 +48,7 @@ public class MuYanlingWindRiderTest extends CardTestPlayerBase {
 
         attack(3, playerA, "Vehicle Token", playerB);
         attack(3, playerA, muyanling, playerB);
+        attack(3, playerA, "Ankle Biter", playerB);
 
         setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         setStrictChooseMode(true);
