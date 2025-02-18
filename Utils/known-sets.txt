@@ -98,6 +98,7 @@ Fallen Empires|FallenEmpires|
 Fate Reforged|FateReforged|
 Fifth Dawn|FifthDawn|
 Fifth Edition|FifthEdition|
+Final Fantasy|FinalFantasy|
 Final Fantasy Commander|FinalFantasyCommander|
 Foundations|Foundations|
 Foundations Jumpstart|FoundationsJumpstart|
