@@ -4,7 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.EnchantedAttachedCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continuous.BoostEnchantedEffect;
@@ -24,7 +24,6 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.common.TargetControlledCreaturePermanent;
 
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -48,9 +47,10 @@ public final class MantleOfTheAncients extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MantleOfTheAncientsEffect()));
 
         // Enchanted creature gets +1/+1 for each Aura and Equipment attached to it.
-        this.addAbility(new SimpleStaticAbility(new BoostEnchantedEffect(
-                MantleOfTheAncientsValue.instance, MantleOfTheAncientsValue.instance
-        )));
+        DynamicValue auraAndEquipmentCount = new EnchantedAttachedCount(SubType.AURA, SubType.EQUIPMENT);
+        this.addAbility(new SimpleStaticAbility(
+                new BoostEnchantedEffect(auraAndEquipmentCount, auraAndEquipmentCount)
+                        .setText("enchanted creature gets +1/+1 for each Aura and Equipment attached to it")));
     }
 
     private MantleOfTheAncients(final MantleOfTheAncients card) {
@@ -129,41 +129,5 @@ class MantleOfTheAncientsPredicate implements Predicate<Card> {
                     .anyMatch(target -> target.getFilter().match(permanent, game));
         }
         return input.hasSubtype(SubType.EQUIPMENT, game);
-    }
-}
-
-enum MantleOfTheAncientsValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        Permanent sourcePermanent = sourceAbility.getSourcePermanentOrLKI(game);
-        if (sourcePermanent == null) {
-            return 0;
-        }
-        Permanent permanent = game.getPermanent(sourcePermanent.getAttachedTo());
-        return permanent == null ? 0 : permanent
-                .getAttachments()
-                .stream()
-                .map(game::getPermanentOrLKIBattlefield)
-                .filter(Objects::nonNull)
-                .map(p -> p.hasSubtype(SubType.EQUIPMENT, game) || p.hasSubtype(SubType.AURA, game))
-                .mapToInt(b -> b ? 1 : 0)
-                .sum();
-    }
-
-    @Override
-    public MantleOfTheAncientsValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "Aura and Equipment attached to it";
-    }
-
-    @Override
-    public String toString() {
-        return "1";
     }
 }
