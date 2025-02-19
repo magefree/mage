@@ -9,6 +9,7 @@ import mage.cards.Card;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -62,7 +63,7 @@ public class SpellsCostReductionAttachedEffect extends SpellsCostReductionEffect
             Permanent attached = game.getPermanent(attachedId);
             return attached != null && abilityToModify.getTargets()
                     .stream()
-                    .map(target -> target.getTargets())
+                    .map(Target::getTargets)
                     .flatMap(Collection::stream)
                     .anyMatch(targetId -> targetId.equals(attachedId));
         }

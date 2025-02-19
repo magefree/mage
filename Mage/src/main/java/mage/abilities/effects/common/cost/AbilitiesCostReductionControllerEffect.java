@@ -7,11 +7,11 @@ import mage.game.Game;
 public class AbilitiesCostReductionControllerEffect extends AbilitiesCostReductionEffect {
 
     public AbilitiesCostReductionControllerEffect(Class<? extends ActivatedAbility> activatedAbility, String activatedAbilityName) {
-        super(activatedAbility, activatedAbilityName, 1);
+        this(activatedAbility, activatedAbilityName, 1);
     }
 
     public AbilitiesCostReductionControllerEffect(Class<? extends ActivatedAbility> activatedAbility, String activatedAbilityName, int amount) {
-        super(activatedAbility, activatedAbilityName, amount, false);
+        this(activatedAbility, activatedAbilityName, amount, false);
     }
 
     public AbilitiesCostReductionControllerEffect(Class<? extends ActivatedAbility> activatedAbility, String activatedAbilityName, int amount, boolean excludeSource) {
