@@ -2177,9 +2177,6 @@ public class ComputerPlayer extends PlayerImpl {
     // TODO: add AI support with outcome and replace random with min/max
     public int getAmount(int min, int max, String message, Game game) {
         log.debug("getAmount");
-        if (message.startsWith("Assign damage to ")) {
-            return min;
-        }
         if (min < max && min == 0) {
             return RandomUtil.nextInt(CardUtil.overflowInc(max, 1));
         }
@@ -2192,7 +2189,7 @@ public class ComputerPlayer extends PlayerImpl {
         log.debug("getMultiAmount");
 
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, totalMin, totalMax);
+        List<Integer> defaultList = MultiAmountType.prepareDefaultValues(messages, totalMin, totalMax);
         if (needCount == 0) {
             return defaultList;
         }
@@ -2208,18 +2205,6 @@ public class ComputerPlayer extends PlayerImpl {
         // values must be stable, so AI must able to simulate it and choose correct actions
         // fill max values as much as possible
         return MultiAmountType.prepareMaxValues(messages, totalMin, totalMax);
-    }
-
-    @Override
-    public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
-        //TODO: improve this
-        return attackers.iterator().next().getId();
-    }
-
-    @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
-        //TODO: improve this
-        return blockers.iterator().next().getId();
     }
 
     @Override

@@ -5,6 +5,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 /**
  * @author noxx
  */
@@ -21,6 +23,7 @@ public class BushidoTest extends CardTestPlayerBase {
         attack(2, playerB, "Isao, Enlightened Bushi");
         block(2, playerA, "Elite Vanguard", "Isao, Enlightened Bushi");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_COMBAT);
         execute();
 
@@ -39,6 +42,7 @@ public class BushidoTest extends CardTestPlayerBase {
         attack(2, playerB, "Elite Vanguard");
         block(2, playerA, "Isao, Enlightened Bushi", "Elite Vanguard");
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_COMBAT);
         execute();
 
@@ -58,9 +62,9 @@ public class BushidoTest extends CardTestPlayerBase {
         attack(2, playerB, "Isao, Enlightened Bushi");
         block(2, playerA, "Llanowar Elves", "Isao, Enlightened Bushi");
         block(2, playerA, "Elvish Mystic", "Isao, Enlightened Bushi");
-        setChoice(playerB, "X=1"); // assign damage
-        setChoice(playerB, "X=1"); // assign damage
+        setChoice(playerB, CHOICE_SKIP); // Assign default damage
 
+        setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_COMBAT);
         execute();
 
