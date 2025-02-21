@@ -7,6 +7,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.target.targetpointer.TargetPointer;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -67,8 +68,7 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
             return staticText;
         }
         if (ability.getRuleVisible()) {
-            String tmp = ability.getRule();
-            return rulePrefix + tmp.substring(0, 1).toLowerCase() + tmp.substring(1);
+            return rulePrefix + CardUtil.getTextWithFirstCharLowerCase(ability.getRule());
         } else {
             return "";
         }
