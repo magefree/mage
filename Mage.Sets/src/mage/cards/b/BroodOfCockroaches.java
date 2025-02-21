@@ -30,8 +30,7 @@ public final class BroodOfCockroaches extends CardImpl {
 
         AtTheBeginOfNextEndStepDelayedTriggeredAbility delayed =
                 new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new LoseLifeSourceControllerEffect(1));
-
-        delayed.addEffect(new ReturnSourceFromGraveyardToHandEffect().concatBy("and"));
+        delayed.addEffect(new ReturnSourceFromGraveyardToHandEffect().concatBy("and").setText("return this card to your hand"));
         CreateDelayedTriggeredAbilityEffect delayedEffect = new CreateDelayedTriggeredAbilityEffect(delayed);
 
         this.addAbility(new PutIntoGraveFromBattlefieldSourceTriggeredAbility(delayedEffect, false, true));

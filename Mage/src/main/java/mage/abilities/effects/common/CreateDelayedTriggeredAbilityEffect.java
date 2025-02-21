@@ -67,7 +67,8 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect {
             return staticText;
         }
         if (ability.getRuleVisible()) {
-            return rulePrefix + ability.getRule();
+            String tmp = ability.getRule();
+            return rulePrefix + tmp.substring(0, 1).toLowerCase() + tmp.substring(1);
         } else {
             return "";
         }
