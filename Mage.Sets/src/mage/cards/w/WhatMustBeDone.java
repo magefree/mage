@@ -57,7 +57,8 @@ public final class WhatMustBeDone extends CardImpl {
                 new WhatMustBeDoneReplacementEffect(
                 )).addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect()
         ).addTarget(new TargetCardInYourGraveyard(filterHistoricPermanentCard)
-        ).addEffect(new InfoEffect("It enters with two additional +1/+1 counters on it if it's a creature.")
+        ).addEffect(new InfoEffect("It enters with two additional +1/+1 counters on it if it's a creature. "
+                + "<i>(Artifacts, legendaries, and Sagas are historic.)</i>" )
         ).withFlavorWord("Release Juno"));
     }
 
@@ -88,18 +89,17 @@ class WhatMustBeDoneReplacementEffect extends ReplacementEffectImpl {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        return creature != null && creature.isCreature(game)
-                && !event.getTargetId().equals(source.getSourceId());
+        return getTargetPointer().getTargets(game, source).contains(event.getTargetId());
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = ((EntersTheBattlefieldEvent) event).getTarget();
-        if (creature != null) {
-            creature.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game, event.getAppliedEffects());
-            discard();
+        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
+        if (permanent == null || !permanent.isCreature(game)) {
+            return false;
         }
+        permanent.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game, event.getAppliedEffects());
+        discard();
         return false;
     }
 
