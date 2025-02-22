@@ -18,6 +18,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
     private TarkirDragonstorm() {
         super("Tarkir: Dragonstorm", "TDM", ExpansionSet.buildDate(2025, 4, 11), SetType.EXPANSION);
         this.blockName = "Tarkir: Dragonstorm"; // for sorting in GUI
+        this.hasBasicLands = false; // temporary
 
         cards.add(new SetCardInfo("Mox Jasper", 246, Rarity.MYTHIC, mage.cards.m.MoxJasper.class));
         cards.add(new SetCardInfo("Skirmish Rhino", 224, Rarity.UNCOMMON, mage.cards.s.SkirmishRhino.class));
