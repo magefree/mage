@@ -5,6 +5,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.game.Game;
 import mage.watchers.common.SpellsCastWatcher;
 
@@ -20,11 +21,11 @@ public enum InstantAndSorceryCastThisTurn implements DynamicValue
 	OPPONENTS("your opponents have cast");
 
 	private final String message;
-	private final InstantAndSorceryCastThisTurnHint hint;
+	private final ValueHint hint;
 
 	InstantAndSorceryCastThisTurn(String message) {
 		this.message = "Instant and sorcery spells " + message + " this turn";
-		this.hint = new InstantAndSorceryCastThisTurnHint(this);
+		this.hint = new ValueHint(this.message, this);
 	}
 
 	@Override
@@ -71,24 +72,5 @@ public enum InstantAndSorceryCastThisTurn implements DynamicValue
 			.filter(Objects::nonNull)
 			.filter(spell -> spell.isInstantOrSorcery(game))
 			.count();
-	}
-}
-
-class InstantAndSorceryCastThisTurnHint implements Hint {
-	InstantAndSorceryCastThisTurn value;
-
-	public InstantAndSorceryCastThisTurnHint(InstantAndSorceryCastThisTurn value) {
-		this.value = value;
-	}
-
-	@Override
-	public String getText(Game game, Ability ability) {
-		int count = value.calculate(game, ability, null);
-		return value.getMessage() + ": " + count;
-	}
-
-	@Override
-	public Hint copy() {
-		return new InstantAndSorceryCastThisTurnHint(this.value);
 	}
 }
