@@ -3,7 +3,6 @@ package mage.game.turn;
 import mage.abilities.Ability;
 import mage.constants.PhaseStep;
 import mage.constants.TurnPhase;
-import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.PhaseChangedEvent;
 import mage.game.permanent.Permanent;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -391,26 +391,18 @@ public class Turn implements Serializable {
     }
 
     private void logStartOfTurn(Game game, Player player) {
-        StringBuilder sb = new StringBuilder("Turn ");
-        sb.append(game.getState().getTurnNum()).append(' ');
-        if (game.getState().isExtraTurn()) {
-            sb.append("(extra) ");
-        }
-        sb.append(player.getLogName());
-        sb.append(" (");
-        int delimiter = game.getPlayers().size() - 1;
-        for (Player gamePlayer : game.getPlayers().values()) {
-            sb.append(gamePlayer.getLife());
-            int poison = gamePlayer.getCountersCount(CounterType.POISON);
-            if (poison > 0) {
-                sb.append("[P:").append(poison).append(']');
-            }
-            if (delimiter > 0) {
-                sb.append(" - ");
-                delimiter--;
-            }
-        }
-        sb.append(')');
-        game.fireStatusEvent(sb.toString(), true, false);
+        // example: 0:40: TURN 1 for Human (40 - 40)
+
+        String infoTurn = String.format("TURN %d%s for %s",
+                game.getState().getTurnNum(),
+                game.getState().isExtraTurn() ? " (extra)" : "",
+                player.getLogName()
+        );
+
+        String infoLife = game.getPlayers().values().stream()
+                .map(p -> String.valueOf(p.getLife()))
+                .collect(Collectors.joining(" - "));
+
+        game.fireStatusEvent(infoTurn + " " + infoLife, true, false);
     }
 }

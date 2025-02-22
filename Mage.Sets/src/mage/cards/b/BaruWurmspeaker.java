@@ -61,7 +61,7 @@ public final class BaruWurmspeaker extends CardImpl {
         ).setText("and have trample"));
         this.addAbility(ability);
 
-        // {7}{G}, {T}: Create a 4/4 green Wurm creature token. This ability costs {X} less to activate, whre X is the greatest power among Wurms you control.
+        // {7}{G}, {T}: Create a 4/4 green Wurm creature token. This ability costs {X} less to activate, where X is the greatest power among Wurms you control.
         ability = new SimpleActivatedAbility(new CreateTokenEffect(new Wurm44Token()), new ManaCostsImpl<>("{7}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new InfoEffect("this ability costs {X} less to activate, " +
