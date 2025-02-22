@@ -2,6 +2,7 @@ package mage.cards.r;
 
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.InstantAndSorceryCastThisTurn;
 import mage.constants.Pronoun;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
@@ -45,7 +46,8 @@ public final class RalMonsoonMage extends CardImpl {
 
         // Whenever you cast an instant or sorcery spell during your turn, flip a coin. If you lose the flip, Ral, Monsoon Mage deals 1 damage to you. If you win the flip, you may exile Ral. If you do, return him to the battlefield transformed under his owner control.
         this.addAbility(new TransformAbility());
-        this.addAbility(new RalMonsoonMageTriggeredAbility());
+        this.addAbility(new RalMonsoonMageTriggeredAbility()
+                            .addHint(InstantAndSorceryCastThisTurn.YOU.getHint()));
     }
 
     private RalMonsoonMage(final RalMonsoonMage card) {

@@ -250,6 +250,8 @@ New Capenna Commander|NewCapennaCommander|
 Strixhaven: School of Mages|StrixhavenSchoolOfMages|
 Stronghold|Stronghold|
 Super Series|SuperSeries|
+Tarkir: Dragonstorm|TarkirDragonstorm|
+Tarkir: Dragonstorm Commander|TarkirDragonstormCommander|
 Tempest|Tempest|
 Tempest Remastered|TempestRemastered|
 Tenth Edition|TenthEdition|

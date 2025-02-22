@@ -248,6 +248,8 @@ New Capenna Commander|NCC|
 Stronghold|STH|
 Special Guests|SPG|
 Super Series|SUS|
+Tarkir: Dragonstorm|TDM|
+Tarkir: Dragonstorm Commander|TDC|
 Theros|THS|
 Theros Beyond Death|THB|
 The Brothers' War|BRO|

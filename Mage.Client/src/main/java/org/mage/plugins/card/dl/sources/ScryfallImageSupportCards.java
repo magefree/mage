@@ -579,6 +579,8 @@ public class ScryfallImageSupportCards {
             add("INR"); // Innistrad Remastered
             add("DFT"); // Aetherdrift
             add("DRC"); // Aetherdrift Commander
+            add("TDM"); // Tarkir: Dragonstorm
+            add("TDC"); // Tarkir: Dragonstorm Commander
             add("FIN"); // Final Fantasy
             add("FIC"); // Final Fantasy Commander
 

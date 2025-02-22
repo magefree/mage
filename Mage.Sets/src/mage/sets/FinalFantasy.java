@@ -20,6 +20,7 @@ public final class FinalFantasy extends ExpansionSet {
         this.blockName = "Final Fantasy"; // for sorting in GUI
         this.hasBasicLands = false; // temporary
 
+        cards.add(new SetCardInfo("Jumbo Cactuar", 191, Rarity.RARE, mage.cards.j.JumboCactuar.class));
         cards.add(new SetCardInfo("Sazh's Chocobo", 200, Rarity.UNCOMMON, mage.cards.s.SazhsChocobo.class));
     }
 }
