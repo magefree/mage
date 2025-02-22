@@ -4,16 +4,14 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.game.Game;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -25,11 +23,11 @@ public enum CardsInExileCount implements DynamicValue {
     OPPONENTS("your opponents'");
 
     private final String message;
-    private final CardsInExileHint hint;
+    private final ValueHint hint;
 
     CardsInExileCount(String message) {
         this.message = "The number of cards owned by " + message + " in exile";
-        this.hint = new CardsInExileHint(this);
+        this.hint = new ValueHint(this.message, this);
     }
 
     @Override
@@ -79,32 +77,5 @@ public enum CardsInExileCount implements DynamicValue {
                 .map(player -> game.getExile().getAllCards(game, player.getId()))
                 .flatMap(Collection::stream)
                 .filter(Objects::nonNull);
-    }
-}
-
-class CardsInExileHint implements Hint {
-
-    CardsInExileCount value;
-
-    CardsInExileHint(CardsInExileCount value) {
-        this.value = value;
-    }
-
-    private CardsInExileHint(final CardsInExileHint hint) {
-        this.value = hint.value;
-    }
-
-    @Override
-    public String getText(Game game, Ability ability) {
-        int count = value.getExileCards(game, ability)
-                .mapToInt(x -> 1)
-                .sum();
-
-        return this.value.getMessage() + ": " + count;
-    }
-
-    @Override
-    public CardsInExileHint copy() {
-        return new CardsInExileHint(this);
     }
 }
