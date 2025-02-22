@@ -33,7 +33,6 @@ import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetDefender;
 import mage.util.CardUtil;
 import mage.util.Copyable;
-import mage.util.trace.TraceUtil;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
@@ -744,8 +743,6 @@ public class Combat implements Serializable, Copyable<Combat> {
                 game.getCombat().logBlockerInfo(defender, game);
             }
         }
-        // tool to catch the bug about flyers blocked by non flyers or intimidate blocked by creatures with other colors
-        TraceUtil.traceCombatIfNeeded(game, game.getCombat());
     }
 
     private void makeSureItsNotComputer(Player controller) {
@@ -761,7 +758,7 @@ public class Combat implements Serializable, Copyable<Combat> {
      * Add info about attacker blocked by blocker to the game log
      */
     private void logBlockerInfo(Player defender, Game game) {
-        boolean shownDefendingPlayer = game.getPlayers().size() < 3; // only two players no need to saw the attacked player
+        boolean shownDefendingPlayer = game.getPlayers().size() <= 2; // 1 vs 1 game, no need to saw the attacked player
         for (CombatGroup group : game.getCombat().getGroups()) {
             if (group.defendingPlayerId.equals(defender.getId())) {
                 if (!shownDefendingPlayer) {
