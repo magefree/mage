@@ -3814,7 +3814,7 @@ public abstract class GameImpl implements Game {
 
     @Override
     public boolean endTurn(Ability source) {
-        getTurn().endTurn(this, getActivePlayerId(), source);
+        getTurn().endTurn(this, source);
         return true;
     }
 

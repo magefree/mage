@@ -53,13 +53,6 @@ public class Turn implements Serializable {
 
     }
 
-    public TurnPhase getPhaseType() {
-        if (currentPhase != null) {
-            return currentPhase.getType();
-        }
-        return null;
-    }
-
     public Phase getPhase() {
         return currentPhase;
     }
@@ -85,14 +78,9 @@ public class Turn implements Serializable {
     }
 
     /**
-     * @param game
-     * @param activePlayer
      * @return true if turn is skipped
      */
     public boolean play(Game game, Player activePlayer) {
-        // uncomment this to trace triggered abilities and/or continous effects 
-        // TraceUtil.traceTriggeredAbilities(game);
-        // game.getState().getContinuousEffects().traceContinuousEffects(game);
         activePlayer.becomesActivePlayer();
         this.setDeclareAttackersStepStarted(false);
         if (game.isPaused() || game.checkIfGameIsOver()) {
@@ -150,7 +138,12 @@ public class Turn implements Serializable {
             game.saveState(false);
 
             //20091005 - 500.8
-            while (playExtraPhases(game, phase.getType())) ;
+            while (true) {
+                // TODO: make sure it work fine (without freeze) on game errors inside extra phases
+                if (!playExtraPhases(game, phase.getType())) {
+                    break;
+                }
+            }
         }
         return false;
     }
@@ -158,7 +151,6 @@ public class Turn implements Serializable {
     public void resumePlay(Game game, boolean wasPaused) {
         activePlayerId = game.getActivePlayerId();
         Player activePlayer = game.getPlayer(activePlayerId);
-        UUID priorityPlayerId = game.getPriorityPlayerId();
         TurnPhase needPhaseType = game.getTurnPhaseType();
         PhaseStep needStepType = game.getTurnStepType();
 
@@ -259,10 +251,16 @@ public class Turn implements Serializable {
         }
     }
 
+    /**
+     * Play additional phases one by one
+     *
+     * @return false to finish
+     */
     private boolean playExtraPhases(Game game, TurnPhase afterPhase) {
         while (true) {
             TurnMod extraPhaseMod = game.getState().getTurnMods().useNextExtraPhase(activePlayerId, afterPhase);
             if (extraPhaseMod == null) {
+                // no more extra phases
                 return false;
             }
             TurnPhase extraPhase = extraPhaseMod.getExtraPhase();
@@ -316,12 +314,8 @@ public class Turn implements Serializable {
 
     /**
      * Used for some spells with end turn effect (e.g. Time Stop).
-     *
-     * @param game
-     * @param activePlayerId
-     * @param source
      */
-    public void endTurn(Game game, UUID activePlayerId, Ability source) {
+    public void endTurn(Game game, Ability source) {
         // Ending the turn this way (Time Stop) means the following things happen in order:
 
         setEndTurnRequested(true);
@@ -403,6 +397,6 @@ public class Turn implements Serializable {
                 .map(p -> String.valueOf(p.getLife()))
                 .collect(Collectors.joining(" - "));
 
-        game.fireStatusEvent(infoTurn + " " + infoLife, true, false);
+        game.fireStatusEvent(infoTurn + " (" + infoLife + ")", true, false);
     }
 }
