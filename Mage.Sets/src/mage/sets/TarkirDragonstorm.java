@@ -19,6 +19,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         super("Tarkir: Dragonstorm", "TDM", ExpansionSet.buildDate(2025, 4, 11), SetType.EXPANSION);
         this.blockName = "Tarkir: Dragonstorm"; // for sorting in GUI
 
+        cards.add(new SetCardInfo("Mox Jasper", 246, Rarity.MYTHIC, mage.cards.m.MoxJasper.class));
         cards.add(new SetCardInfo("Stormscale Scion", 123, Rarity.MYTHIC, mage.cards.s.StormscaleScion.class));
     }
 }
