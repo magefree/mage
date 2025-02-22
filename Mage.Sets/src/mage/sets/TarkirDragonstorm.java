@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -17,5 +18,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
     private TarkirDragonstorm() {
         super("Tarkir: Dragonstorm", "TDM", ExpansionSet.buildDate(2025, 4, 11), SetType.EXPANSION);
         this.blockName = "Tarkir: Dragonstorm"; // for sorting in GUI
+
+        cards.add(new SetCardInfo("Stormscale Scion", 123, Rarity.MYTHIC, mage.cards.s.StormscaleScion.class));
     }
 }
