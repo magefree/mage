@@ -10,9 +10,8 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.InstantAndSorceryCastThisTurn;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageMultiEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
@@ -34,9 +33,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetAnyTargetAmount;
 import mage.util.CardUtil;
-import mage.watchers.common.SpellsCastWatcher;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -67,9 +64,11 @@ public final class RalLeylineProdigy extends CardImpl {
 
         // Ral, Leyline Prodigy enters the battlefield with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(), RalLeylineProdigyValue.instance, false)
-                        .setText("with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn")
-        ));
+                new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(), InstantAndSorceryCastThisTurn.YOU,
+                    false)
+                        .setText("with an additional loyalty counter on him for each instant and sorcery spell you've cast this turn"))
+                            .addHint(InstantAndSorceryCastThisTurn.YOU.getHint())
+        );
 
         // +1: Until your next turn, instant and sorcery spells you cast cost {1} less to cast.
         this.addAbility(new LoyaltyAbility(new RalLeylineProdigyCostReductionEffect(), 1));
@@ -123,35 +122,6 @@ class RalLeylineProdigyCostReductionEffect extends OneShotEffect {
         effect.setDuration(Duration.UntilYourNextTurn);
         game.addEffect(effect, source);
         return true;
-    }
-}
-
-enum RalLeylineProdigyValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        if (watcher == null) {
-            return 0;
-        }
-        return watcher
-                .getSpellsCastThisTurn(sourceAbility.getControllerId())
-                .stream()
-                .filter(Objects::nonNull)
-                .filter(spell -> spell.isInstantOrSorcery(game))
-                .mapToInt(spell -> 1)
-                .sum();
-    }
-
-    @Override
-    public RalLeylineProdigyValue copy() {
-        return instance;
-    }
-
-    @Override
-    public String getMessage() {
-        return "instant and sorcery spell you've cast this turn";
     }
 }
 
