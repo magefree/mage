@@ -1,6 +1,7 @@
 package mage.sets;
 
 import mage.cards.ExpansionSet;
+import mage.constants.Rarity;
 import mage.constants.SetType;
 
 /**
@@ -17,5 +18,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
     private TarkirDragonstormCommander() {
         super("Tarkir: Dragonstorm Commander", "TDC", ExpansionSet.buildDate(2025, 4, 11), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
+
+        cards.add(new SetCardInfo("Teval, the Balanced Scale", 8, Rarity.MYTHIC, mage.cards.t.TevalTheBalancedScale.class));
     }
 }
