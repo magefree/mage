@@ -10,6 +10,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -39,6 +40,7 @@ public final class GnostroVoiceOfTheCrags extends CardImpl {
         // {T}: Choose one. X is the number of spells you've cast this turn.
         // • Scry X.
         Ability ability = new SimpleActivatedAbility(new GnostroVoiceOfTheCragsEffect(), new TapSourceCost());
+        ability.addHint(new ValueHint("Number of spells you've cast this turn", GnostroVoiceOfTheCragsValue.instance));
         ability.getModes().setChooseText("choose one. X is the number of spells you've cast this turn.");
 
         // • Gnostro, Voice of the Crags deals X damage to target creature.
@@ -104,7 +106,7 @@ class GnostroVoiceOfTheCragsEffect extends OneShotEffect {
         if (player == null) {
             return false;
         }
-        return player.scry (
+        return player.scry(
                 GnostroVoiceOfTheCragsValue.instance.calculate(game, source, this), source, game
         );
     }
