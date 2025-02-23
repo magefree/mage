@@ -63,6 +63,8 @@ public final class SummonShiva extends CardImpl {
             ability.withFlavorWord("Diamond Dust");
             ability.addHint(hint);
         });
+
+        this.addAbility(sagaAbility);
     }
 
     private SummonShiva(final SummonShiva card) {
