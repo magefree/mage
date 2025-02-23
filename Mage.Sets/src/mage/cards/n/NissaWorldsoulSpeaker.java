@@ -59,7 +59,7 @@ class NissaWorldsoulSpeakerEffect extends ContinuousEffectImpl {
 
     public NissaWorldsoulSpeakerEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "You may pay eight {E} rather than pay the mana cost of permanent spells you cast";
+        staticText = "You may pay eight {E} rather than pay the mana cost for permanent spells you cast";
     }
 
     private NissaWorldsoulSpeakerEffect(final NissaWorldsoulSpeakerEffect effect) {
