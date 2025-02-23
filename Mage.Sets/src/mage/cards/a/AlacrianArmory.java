@@ -42,7 +42,6 @@ public final class AlacrianArmory extends CardImpl {
     private static final FilterPermanent mountOrVehicleFilter = new FilterPermanent("Mount or Vehicle you control");
 
     static {
-        creatureFilter.add(TargetController.YOU.getControllerPredicate());
         mountOrVehicleFilter.add(Predicates.or(
             SubType.MOUNT.getPredicate(),
             SubType.VEHICLE.getPredicate()
