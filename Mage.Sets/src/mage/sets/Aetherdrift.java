@@ -87,6 +87,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Draconautics Engineer", 121, Rarity.RARE, mage.cards.d.DraconauticsEngineer.class));
         cards.add(new SetCardInfo("Dracosaur Auxiliary", 122, Rarity.UNCOMMON, mage.cards.d.DracosaurAuxiliary.class));
         cards.add(new SetCardInfo("Dredger's Insight", 159, Rarity.UNCOMMON, mage.cards.d.DredgersInsight.class));
+        cards.add(new SetCardInfo("Dune Drifter", 200, Rarity.UNCOMMON, mage.cards.d.DuneDrifter.class));
         cards.add(new SetCardInfo("Dynamite Diver", 123, Rarity.COMMON, mage.cards.d.DynamiteDiver.class));
         cards.add(new SetCardInfo("Earthrumbler", 160, Rarity.UNCOMMON, mage.cards.e.Earthrumbler.class));
         cards.add(new SetCardInfo("Embalmed Ascendant", 201, Rarity.UNCOMMON, mage.cards.e.EmbalmedAscendant.class));
