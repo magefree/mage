@@ -49,7 +49,7 @@ public final class CoalstokeGearhulk extends CardImpl {
     }
     public CoalstokeGearhulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{B}{B}{R}{R}");
-        
+
         this.subtype.add(SubType.CONSTRUCT);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
@@ -63,6 +63,14 @@ public final class CoalstokeGearhulk extends CardImpl {
         // When this creature enters, put target creature card with mana value 4 or less from a graveyard onto the battlefield under your control with a finality counter on it. That creature gains menace, deathtouch, and haste. At the beginnning of your next end step, exile that creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.FINALITY.createInstance()))
                               .setTriggerPhrase("When this creature enters, ");
+        ability.addEffect(new GainAbilityTargetEffect(new MenaceAbility())
+                              .setText("That creature gains menace"));
+        ability.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance())
+                              .setText("deathtouch")
+                              .concatBy(","));
+        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance())
+                              .setText("haste")
+                              .concatBy(", and"));
         ability.addEffect(new CoalstokeGearhulkEffect());
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
@@ -81,8 +89,7 @@ public final class CoalstokeGearhulk extends CardImpl {
 class CoalstokeGearhulkEffect extends OneShotEffect {
     public CoalstokeGearhulkEffect() {
         super(Outcome.Benefit);
-        this.staticText = "That creature gains menace, deathtouch, and haste. " +
-                              "At the beginning of your next end step, exile that creature.";
+        this.staticText = "At the beginning of your next end step, exile that creature.";
     }
 
     public CoalstokeGearhulkEffect(final CoalstokeGearhulkEffect effect) {
@@ -96,28 +103,11 @@ class CoalstokeGearhulkEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(getTargetPointer().getFirst(game, source));
-        if (card == null) {
-            return false;
-        }
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null || !controller.moveCards(card, Zone.BATTLEFIELD, source, game)) {
-            return false;
-        }
-        Permanent permanent = game.getPermanent(card.getId());
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent == null) {
             return false;
         }
-        ContinuousEffect menaceEffect = new GainAbilityTargetEffect(new MenaceAbility(), Duration.Custom);
-        ContinuousEffect deathtouchEffect = new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.Custom);
-        ContinuousEffect hasteEffect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
-        menaceEffect.setTargetPointer(new FixedTarget(permanent, game));
-        deathtouchEffect.setTargetPointer(new FixedTarget(permanent, game));
-        hasteEffect.setTargetPointer(new FixedTarget(permanent, game));
-        game.addEffect(menaceEffect, source);
-        game.addEffect(deathtouchEffect, source);
-        game.addEffect(hasteEffect, source);
-        ExileTargetEffect exileEffect = new ExileTargetEffect("exile " + permanent.getLogName());
+        ExileTargetEffect exileEffect = new ExileTargetEffect("At the beginning of your next end step, exile " + permanent.getLogName());
         exileEffect.setTargetPointer(new FixedTarget(permanent, game));
         DelayedTriggeredAbility delayedAbility = new AtTheBeginOfNextEndStepDelayedTriggeredAbility(exileEffect, TargetController.YOU);
         game.addDelayedTriggeredAbility(delayedAbility, source);
