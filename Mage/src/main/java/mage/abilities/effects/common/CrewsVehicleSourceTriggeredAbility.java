@@ -44,7 +44,7 @@ public class CrewsVehicleSourceTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (yourMainPhaseOnly && (!game.isMainPhase() || event.getPlayerId() != game.getActivePlayerId())) {
+        if (yourMainPhaseOnly && !(game.isMainPhase() && this.isControlledBy(game.getActivePlayerId()))) {
             return false;
         }
         if (event.getTargetId().equals(getSourceId())) {
