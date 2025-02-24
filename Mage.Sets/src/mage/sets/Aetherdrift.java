@@ -61,6 +61,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Burnout Bashtronaut", 115, Rarity.RARE, mage.cards.b.BurnoutBashtronaut.class));
         cards.add(new SetCardInfo("Caelorna, Coral Tyrant", 40, Rarity.UNCOMMON, mage.cards.c.CaelornaCoralTyrant.class));
         cards.add(new SetCardInfo("Camera Launcher", 232, Rarity.COMMON, mage.cards.c.CameraLauncher.class));
+        cards.add(new SetCardInfo("Canyon Vaulter", 8, Rarity.UNCOMMON, mage.cards.c.CanyonVaulter.class));
         cards.add(new SetCardInfo("Caradora, Heart of Alacria", 195, Rarity.RARE, mage.cards.c.CaradoraHeartOfAlacria.class));
         cards.add(new SetCardInfo("Carrion Cruiser", 78, Rarity.UNCOMMON, mage.cards.c.CarrionCruiser.class));
         cards.add(new SetCardInfo("Chandra, Spark Hunter", 116, Rarity.MYTHIC, mage.cards.c.ChandraSparkHunter.class));
