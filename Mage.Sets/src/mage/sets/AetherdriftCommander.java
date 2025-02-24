@@ -110,6 +110,8 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Midnight Reaper", 44, Rarity.RARE, mage.cards.m.MidnightReaper.class));
         cards.add(new SetCardInfo("Murderous Rider", 45, Rarity.RARE, mage.cards.m.MurderousRider.class));
         cards.add(new SetCardInfo("Never // Return", 96, Rarity.RARE, mage.cards.n.NeverReturn.class));
+        cards.add(new SetCardInfo("Nissa, Worldsoul Speaker", 13, Rarity.RARE, mage.cards.n.NissaWorldsoulSpeaker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Nissa, Worldsoul Speaker", 29, Rarity.RARE, mage.cards.n.NissaWorldsoulSpeaker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("On Wings of Gold", 5, Rarity.RARE, mage.cards.o.OnWingsOfGold.class));
         cards.add(new SetCardInfo("One with the Machine", 80, Rarity.RARE, mage.cards.o.OneWithTheMachine.class));
         cards.add(new SetCardInfo("Ornithopter of Paradise", 133, Rarity.COMMON, mage.cards.o.OrnithopterOfParadise.class));

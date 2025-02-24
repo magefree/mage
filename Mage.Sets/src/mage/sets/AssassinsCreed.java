@@ -324,9 +324,9 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Viewpoint Synchronization", 223, Rarity.UNCOMMON, mage.cards.v.ViewpointSynchronization.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Viewpoint Synchronization", 43, Rarity.UNCOMMON, mage.cards.v.ViewpointSynchronization.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Waterlogged Grove", 116, Rarity.RARE, mage.cards.w.WaterloggedGrove.class));
-        //cards.add(new SetCardInfo("What Must Be Done", 11, Rarity.RARE, mage.cards.w.WhatMustBeDone.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("What Must Be Done", 157, Rarity.RARE, mage.cards.w.WhatMustBeDone.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("What Must Be Done", 184, Rarity.RARE, mage.cards.w.WhatMustBeDone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("What Must Be Done", 11, Rarity.RARE, mage.cards.w.WhatMustBeDone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("What Must Be Done", 157, Rarity.RARE, mage.cards.w.WhatMustBeDone.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("What Must Be Done", 184, Rarity.RARE, mage.cards.w.WhatMustBeDone.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yggdrasil, Rebirth Engine", 126, Rarity.MYTHIC, mage.cards.y.YggdrasilRebirthEngine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yggdrasil, Rebirth Engine", 264, Rarity.MYTHIC, mage.cards.y.YggdrasilRebirthEngine.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Yggdrasil, Rebirth Engine", 78, Rarity.MYTHIC, mage.cards.y.YggdrasilRebirthEngine.class, NON_FULL_USE_VARIOUS));
