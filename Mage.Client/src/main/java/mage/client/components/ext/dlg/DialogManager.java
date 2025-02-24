@@ -40,8 +40,21 @@ public class DialogManager extends JComponent implements MouseListener, MouseMot
     }
 
     public enum MTGDialogs {
-        NONE, ABOUT, MESSAGE, ASSIGN_DAMAGE, MANA_CHOICE, CHOICE, EMBLEMS, GRAVEYARD, DialogContainer, COMBAT,
-        CHOOSE_DECK, CHOOSE_COMMON, REVEAL, EXILE
+        NONE, ABOUT, MESSAGE, ASSIGN_DAMAGE, MANA_CHOICE, CHOICE, EMBLEMS(MTGEmblemsDialog.class), GRAVEYARD(MTGGraveyardDialog.class), DialogContainer, COMBAT,
+        CHOOSE_DECK, CHOOSE_COMMON, REVEAL, EXILE(MTGExileDialog.class);
+
+        MTGDialogs() {
+
+        }
+        private Class<? extends MTGDialog> dialogClass;
+
+        MTGDialogs(Class<? extends MTGDialog> dialogClass) {
+            this.dialogClass = dialogClass;
+        }
+
+        public Class<? extends MTGDialog> getDialogClass() {
+            return dialogClass;
+        }
     }
 
     /**
