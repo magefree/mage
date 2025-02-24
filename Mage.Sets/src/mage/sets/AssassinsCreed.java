@@ -157,9 +157,9 @@ public final class AssassinsCreed extends ExpansionSet {
         //cards.add(new SetCardInfo("Havi, the All-Father", 56, Rarity.RARE, mage.cards.h.HaviTheAllFather.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haystack", 175, Rarity.UNCOMMON, mage.cards.h.Haystack.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Haystack", 5, Rarity.UNCOMMON, mage.cards.h.Haystack.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Haytham Kenway", 147, Rarity.RARE, mage.cards.h.HaythamKenway.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Haytham Kenway", 238, Rarity.RARE, mage.cards.h.HaythamKenway.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Haytham Kenway", 57, Rarity.RARE, mage.cards.h.HaythamKenway.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Haytham Kenway", 57, Rarity.RARE, mage.cards.h.HaythamKenway.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Haytham Kenway", 147, Rarity.RARE, mage.cards.h.HaythamKenway.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Haytham Kenway", 238, Rarity.RARE, mage.cards.h.HaythamKenway.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Headsplitter", 289, Rarity.COMMON, mage.cards.h.Headsplitter.class));
         cards.add(new SetCardInfo("Hemlock Vial", 206, Rarity.UNCOMMON, mage.cards.h.HemlockVial.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hemlock Vial", 26, Rarity.UNCOMMON, mage.cards.h.HemlockVial.class, NON_FULL_USE_VARIOUS));
