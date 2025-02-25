@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class DuneDrifter extends CardImpl {
 
-    private static final FilterCard filter = new FilterCard("artifact or creature card with mana value X or less");
+    private static final FilterCard filter = new FilterCard("artifact or creature card with mana value X or less from your graveyard");
 
     static {
         filter.add(Predicates.or(CardType.ARTIFACT.getPredicate(), CardType.CREATURE.getPredicate()));
@@ -37,7 +37,7 @@ public final class DuneDrifter extends CardImpl {
 
         // When this Vehicle enters, return target artifact or creature card with mana value X or less from your graveyard to the battlefield.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect());
-        ability.addTarget(new TargetCardInYourGraveyard());
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         ability.setTargetAdjuster(new XManaValueTargetAdjuster(ComparisonType.OR_LESS));
         this.addAbility(ability);
 
