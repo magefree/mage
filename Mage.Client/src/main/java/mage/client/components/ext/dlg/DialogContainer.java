@@ -81,7 +81,7 @@ public class DialogContainer extends JPanel {
             case EMBLEMS: {
                 backgroundColor = new Color(0, 0, 50, 110);
                 alpha = 0;
-                ChoiceDialog dlg = new ChoiceDialog(params, "Command Zone (Commander, Emblems and Planes)");
+                ChoiceDialog dlg = new ChoiceDialog(params, "Command Zone (Commanders, Emblems, and Planes)");
                 add(dlg);
                 dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
                 dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
