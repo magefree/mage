@@ -21,7 +21,7 @@ import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
-import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -44,7 +44,7 @@ public final class CurseclothWrappings extends CardImpl {
                 new CurseClothWrappingsEffect(),
                 new TapSourceCost()
         );
-        ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card in your graveyard")));
+        ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card in your graveyard")));
         this.addAbility(ability);
     }
 
@@ -81,8 +81,6 @@ class CurseClothWrappingsEffect extends ContinuousEffectImpl {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             EmbalmAbility embalmAbility = new EmbalmAbility(card.getManaCost(), card);
-            embalmAbility.setSourceId(source.getSourceId());
-            embalmAbility.setControllerId(source.getControllerId());
             game.getState().addOtherAbility(card, embalmAbility);
             return true;
         }
