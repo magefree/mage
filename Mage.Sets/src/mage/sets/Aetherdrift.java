@@ -97,6 +97,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Dredger's Insight", 159, Rarity.UNCOMMON, mage.cards.d.DredgersInsight.class));
         cards.add(new SetCardInfo("Dynamite Diver", 123, Rarity.COMMON, mage.cards.d.DynamiteDiver.class));
         cards.add(new SetCardInfo("Earthrumbler", 160, Rarity.UNCOMMON, mage.cards.e.Earthrumbler.class));
+        cards.add(new SetCardInfo("Elvish Refueler", 161, Rarity.UNCOMMON, mage.cards.e.ElvishRefueler.class));
         cards.add(new SetCardInfo("Embalmed Ascendant", 201, Rarity.UNCOMMON, mage.cards.e.EmbalmedAscendant.class));
         cards.add(new SetCardInfo("Endrider Catalyzer", 124, Rarity.COMMON, mage.cards.e.EndriderCatalyzer.class));
         cards.add(new SetCardInfo("Endrider Spikespitter", 125, Rarity.UNCOMMON, mage.cards.e.EndriderSpikespitter.class));
