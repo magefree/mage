@@ -75,8 +75,8 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Cryptcaller Chariot", 80, Rarity.RARE, mage.cards.c.CryptcallerChariot.class));
         cards.add(new SetCardInfo("Cursecloth Wrappings", 81, Rarity.RARE, mage.cards.c.CurseclothWrappings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cursecloth Wrappings", 383, Rarity.RARE, mage.cards.c.CurseclothWrappings.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Cursecloth Wrappings", 400, Rarity.RARE, mage.cards.c.CurseclothWrappings.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Cursecloth Wrappings", 410, Rarity.RARE, mage.cards.c.CurseclothWrappings.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cursecloth Wrappings", 400, Rarity.MYTHIC, mage.cards.c.CurseclothWrappings.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Cursecloth Wrappings", 410, Rarity.MYTHIC, mage.cards.c.CurseclothWrappings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Cursecloth Wrappings", 447, Rarity.RARE, mage.cards.c.CurseclothWrappings.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Daretti, Rocketeer Engineer", 120, Rarity.RARE, mage.cards.d.DarettiRocketeerEngineer.class));
         cards.add(new SetCardInfo("Daring Mechanic", 11, Rarity.COMMON, mage.cards.d.DaringMechanic.class));
