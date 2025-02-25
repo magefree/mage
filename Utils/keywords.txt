@@ -1,3 +1,4 @@
+Affinity for artifacts|new|
 Afflict|number|
 Afterlife|number|
 Annihilator|number|

@@ -78,6 +78,10 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Deathless Pilot", 82, Rarity.COMMON, mage.cards.d.DeathlessPilot.class));
         cards.add(new SetCardInfo("Debris Beetle", 199, Rarity.RARE, mage.cards.d.DebrisBeetle.class));
         cards.add(new SetCardInfo("Defend the Rider", 157, Rarity.UNCOMMON, mage.cards.d.DefendTheRider.class));
+        cards.add(new SetCardInfo("Demonic Junker", 83, Rarity.RARE, mage.cards.d.DemonicJunker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Demonic Junker", 307, Rarity.RARE, mage.cards.d.DemonicJunker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Demonic Junker", 448, Rarity.RARE, mage.cards.d.DemonicJunker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Demonic Junker", 524, Rarity.RARE, mage.cards.d.DemonicJunker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Detention Chariot", 12, Rarity.UNCOMMON, mage.cards.d.DetentionChariot.class));
         cards.add(new SetCardInfo("Dismal Backwater", 254, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("District Mascot", 158, Rarity.RARE, mage.cards.d.DistrictMascot.class));
