@@ -591,7 +591,7 @@ public class GameController implements GameCallback {
                 if (playerId != null) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        game.informPlayers(player.getLogName() + " want to concede");
+                        game.informPlayers(player.getLogName() + " wants to concede");
                         game.setConcedingPlayer(getPlayerId(userId));
                     }
                 }

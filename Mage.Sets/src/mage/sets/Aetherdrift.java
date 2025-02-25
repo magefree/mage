@@ -28,6 +28,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Afterburner Expert", 150, Rarity.RARE, mage.cards.a.AfterburnerExpert.class));
         cards.add(new SetCardInfo("Agonasaur Rex", 151, Rarity.RARE, mage.cards.a.AgonasaurRex.class));
         cards.add(new SetCardInfo("Air Response Unit", 1, Rarity.UNCOMMON, mage.cards.a.AirResponseUnit.class));
+        cards.add(new SetCardInfo("Alacrian Armory", 2, Rarity.UNCOMMON, mage.cards.a.AlacrianArmory.class));
         cards.add(new SetCardInfo("Alacrian Jaguar", 152, Rarity.COMMON, mage.cards.a.AlacrianJaguar.class));
         cards.add(new SetCardInfo("Amonkhet Raceway", 248, Rarity.UNCOMMON, mage.cards.a.AmonkhetRaceway.class));
         cards.add(new SetCardInfo("Ancient Vendetta", 75, Rarity.UNCOMMON, mage.cards.a.AncientVendetta.class));
@@ -70,6 +71,10 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Cloudspire Captain", 9, Rarity.UNCOMMON, mage.cards.c.CloudspireCaptain.class));
         cards.add(new SetCardInfo("Cloudspire Coordinator", 196, Rarity.UNCOMMON, mage.cards.c.CloudspireCoordinator.class));
         cards.add(new SetCardInfo("Cloudspire Skycycle", 197, Rarity.UNCOMMON, mage.cards.c.CloudspireSkycycle.class));
+        cards.add(new SetCardInfo("Coalstoke Gearhulk", 198, Rarity.MYTHIC, mage.cards.c.CoalstokeGearhulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Coalstoke Gearhulk", 349, Rarity.MYTHIC, mage.cards.c.CoalstokeGearhulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Coalstoke Gearhulk", 477, Rarity.MYTHIC, mage.cards.c.CoalstokeGearhulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Coalstoke Gearhulk", 548, Rarity.MYTHIC, mage.cards.c.CoalstokeGearhulk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Collision Course", 10, Rarity.COMMON, mage.cards.c.CollisionCourse.class));
         cards.add(new SetCardInfo("Count on Luck", 118, Rarity.RARE, mage.cards.c.CountOnLuck.class));
         cards.add(new SetCardInfo("Country Roads", 253, Rarity.UNCOMMON, mage.cards.c.CountryRoads.class));
