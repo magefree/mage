@@ -2951,7 +2951,7 @@ public class HumanPlayer extends PlayerImpl {
     protected boolean passWithManaPoolCheck(Game game) {
         if (userData.confirmEmptyManaPool()
                 && game.getStack().isEmpty() && getManaPool().count() > 0 && getManaPool().canLostManaOnEmpty()) {
-            String message = GameLog.getPlayerConfirmColoredText("You still have mana in your mana pool and it will be lose. Pass anyway?");
+            String message = GameLog.getPlayerConfirmColoredText("You still have mana in your mana pool and it will be lost. Pass anyway?");
             if (!chooseUse(Outcome.Detriment, message, null, game)) {
                 sendPlayerAction(PlayerAction.PASS_PRIORITY_CANCEL_ALL_ACTIONS, game, null);
                 return false;
