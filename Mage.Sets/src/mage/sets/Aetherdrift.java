@@ -62,6 +62,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Burnout Bashtronaut", 115, Rarity.RARE, mage.cards.b.BurnoutBashtronaut.class));
         cards.add(new SetCardInfo("Caelorna, Coral Tyrant", 40, Rarity.UNCOMMON, mage.cards.c.CaelornaCoralTyrant.class));
         cards.add(new SetCardInfo("Camera Launcher", 232, Rarity.COMMON, mage.cards.c.CameraLauncher.class));
+        cards.add(new SetCardInfo("Canyon Vaulter", 8, Rarity.UNCOMMON, mage.cards.c.CanyonVaulter.class));
         cards.add(new SetCardInfo("Caradora, Heart of Alacria", 195, Rarity.RARE, mage.cards.c.CaradoraHeartOfAlacria.class));
         cards.add(new SetCardInfo("Carrion Cruiser", 78, Rarity.UNCOMMON, mage.cards.c.CarrionCruiser.class));
         cards.add(new SetCardInfo("Chandra, Spark Hunter", 116, Rarity.MYTHIC, mage.cards.c.ChandraSparkHunter.class));
@@ -69,6 +70,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Clamorous Ironclad", 117, Rarity.COMMON, mage.cards.c.ClamorousIronclad.class));
         cards.add(new SetCardInfo("Cloudspire Captain", 9, Rarity.UNCOMMON, mage.cards.c.CloudspireCaptain.class));
         cards.add(new SetCardInfo("Cloudspire Coordinator", 196, Rarity.UNCOMMON, mage.cards.c.CloudspireCoordinator.class));
+        cards.add(new SetCardInfo("Cloudspire Skycycle", 197, Rarity.UNCOMMON, mage.cards.c.CloudspireSkycycle.class));
         cards.add(new SetCardInfo("Coalstoke Gearhulk", 198, Rarity.MYTHIC, mage.cards.c.CoalstokeGearhulk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Coalstoke Gearhulk", 349, Rarity.MYTHIC, mage.cards.c.CoalstokeGearhulk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Coalstoke Gearhulk", 477, Rarity.MYTHIC, mage.cards.c.CoalstokeGearhulk.class, NON_FULL_USE_VARIOUS));
@@ -95,6 +97,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Draconautics Engineer", 121, Rarity.RARE, mage.cards.d.DraconauticsEngineer.class));
         cards.add(new SetCardInfo("Dracosaur Auxiliary", 122, Rarity.UNCOMMON, mage.cards.d.DracosaurAuxiliary.class));
         cards.add(new SetCardInfo("Dredger's Insight", 159, Rarity.UNCOMMON, mage.cards.d.DredgersInsight.class));
+        cards.add(new SetCardInfo("Dune Drifter", 200, Rarity.UNCOMMON, mage.cards.d.DuneDrifter.class));
         cards.add(new SetCardInfo("Dynamite Diver", 123, Rarity.COMMON, mage.cards.d.DynamiteDiver.class));
         cards.add(new SetCardInfo("Earthrumbler", 160, Rarity.UNCOMMON, mage.cards.e.Earthrumbler.class));
         cards.add(new SetCardInfo("Embalmed Ascendant", 201, Rarity.UNCOMMON, mage.cards.e.EmbalmedAscendant.class));
