@@ -3,11 +3,9 @@ package mage.cards.d;
 import java.util.*;
 
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.abilities.keyword.AffinityForArtifactsAbility;
@@ -15,7 +13,6 @@ import mage.abilities.keyword.CrewAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -24,6 +21,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.TargetAdjuster;
+import mage.target.targetpointer.EachTargetPointer;
 
 /**
  *
@@ -42,8 +40,10 @@ public final class DemonicJunker extends CardImpl {
         this.addAbility(new AffinityForArtifactsAbility());
 
         // When this Vehicle enters, for each player, destroy up to one target creature that player controls. If a creature you controlled was destroyed this way, put two +1/+1 counters on this Vehicle.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new DemonicJunkerEffect())
-                .setTriggerPhrase("When this Vehicle enters, "));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DemonicJunkerEffect()
+                .setTargetPointer(new EachTargetPointer()))
+                .setTriggerPhrase("When this Vehicle enters, ");
+        this.addAbility(ability.setTargetAdjuster(DemonicJunkerAdjuster.instance));
 
         // Crew 2
         this.addAbility(new CrewAbility(2));
@@ -57,6 +57,24 @@ public final class DemonicJunker extends CardImpl {
     @Override
     public DemonicJunker copy() {
         return new DemonicJunker(this);
+    }
+}
+
+enum DemonicJunkerAdjuster implements TargetAdjuster {
+    instance;
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        ability.getTargets().clear();
+        for (UUID playerId : game.getState().getPlayersInRange(ability.getControllerId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player == null) {
+                continue;
+            }
+            String playerName = ability.isControlledBy(playerId) ? "you" : player.getName();
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature controlled by " + playerName);
+            filter.add(new ControllerIdPredicate(playerId));
+            ability.addTarget(new TargetPermanent(0, 1, filter));
+        }
     }
 }
 
@@ -78,34 +96,16 @@ class DemonicJunkerEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID controllerId = source.getControllerId();
-        Player controller = game.getPlayer(controllerId);
-        if (controller == null) {
-            return false;
-        }
-        List<Permanent> chosenCreatures = new ArrayList<>();
-        for (UUID playerId : game.getState().getPlayersInRange(controllerId, game)) {
-            Player currPlayer = game.getPlayer(playerId);
-            if (currPlayer == null) {
+        boolean giveCounters = false;
+        for (UUID permanentId : getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(permanentId);
+            if (permanent == null) {
                 continue;
             }
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature controlled by " + currPlayer.getName());
-            filter.add(new ControllerIdPredicate(playerId));
-            TargetPermanent target = new TargetPermanent(0, 1, filter, true);
-            controller.chooseTarget(Outcome.DestroyPermanent, target, source, game);
-            Permanent choice = game.getPermanent(target.getFirstTarget());
-            if (choice != null) {
-                chosenCreatures.add(choice);
+            if (permanent.destroy(source, game, false)) {
+                giveCounters = permanent.getControllerId().equals(source.getControllerId());
             }
-        }
-        List<Permanent> destroyedCreatures = new ArrayList<>();
-        for (Permanent creature : chosenCreatures) {
-            if (creature.destroy(source, game, false)) {
-                destroyedCreatures.add(creature);
-            }
-        }
-        for (Permanent destroyedCreature : destroyedCreatures) {
-            if (destroyedCreature.getControllerId().equals(controllerId)) {
+            if (giveCounters) {
                 Permanent vehicle = game.getPermanent(source.getSourceId());
                 if (vehicle != null) {
                     vehicle.addCounters(CounterType.P1P1.createInstance(2), source.getControllerId(), source, game);
