@@ -129,6 +129,8 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Pull from Tomorrow", 81, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
         cards.add(new SetCardInfo("Reality Shift", 39, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Reckless Fireweaver", 106, Rarity.COMMON, mage.cards.r.RecklessFireweaver.class));
+        cards.add(new SetCardInfo("Renewed Solidarity", 7, Rarity.RARE, mage.cards.r.RenewedSolidarity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Renewed Solidarity", 23, Rarity.RARE, mage.cards.r.RenewedSolidarity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Retrofitter Foundry", 136, Rarity.RARE, mage.cards.r.RetrofitterFoundry.class));
         cards.add(new SetCardInfo("Rhet-Tomb Mystic", 10, Rarity.RARE, mage.cards.r.RhetTombMystic.class));
         cards.add(new SetCardInfo("Rogue Refiner", 118, Rarity.UNCOMMON, mage.cards.r.RogueRefiner.class));
