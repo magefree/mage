@@ -1,9 +1,7 @@
 package mage.cards.p;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.common.CreaturesYouControlDiedCount;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.triggers.BeginningOfEndStepTriggeredAbility;
@@ -13,8 +11,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.watchers.common.CreaturesDiedWatcher;
 
 import java.util.UUID;
 
@@ -34,7 +30,7 @@ public class PriestOfTheCrossing extends CardImpl {
 
         // At the beginning of each end step, put X +1/+1 counters on each creature you control, where X is the number of creatures that died under your control this turn.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new AddCountersAllEffect(CounterType.P1P1.createInstance(), PriestOfTheCrossingValue.instance, StaticFilters.FILTER_CONTROLLED_CREATURE)
+                new AddCountersAllEffect(CounterType.P1P1.createInstance(), CreaturesYouControlDiedCount.instance, StaticFilters.FILTER_CONTROLLED_CREATURE)
                         .setText("put X +1/+1 counters on each creature you control, where X is the number of creatures that died under your control this turn")));
     }
 
@@ -45,31 +41,5 @@ public class PriestOfTheCrossing extends CardImpl {
     @Override
     public PriestOfTheCrossing copy() {
         return new PriestOfTheCrossing(this);
-    }
-
-    enum PriestOfTheCrossingValue implements DynamicValue {
-        instance;
-
-        @Override
-        public int calculate(Game game, Ability sourceAbility, Effect effect) {
-            return game.getState()
-                    .getWatcher(CreaturesDiedWatcher.class)
-                    .getAmountOfCreaturesDiedThisTurnByController(sourceAbility.getControllerId());
-        }
-
-        @Override
-        public PriestOfTheCrossingValue copy() {
-            return this;
-        }
-
-        @Override
-        public String getMessage() {
-            return "creature that died under your control this turn";
-        }
-
-        @Override
-        public String toString() {
-            return "1";
-        }
     }
 }
