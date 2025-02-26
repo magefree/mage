@@ -687,11 +687,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         zonesPanel.setLayout(null);
         zonesPanel.setOpaque(false);
 
-        // tools button like hints
+        // hints
         toolHintsHelper = new JButton();
         toolHintsHelper.setFont(this.getFont());
-        toolHintsHelper.setText("hints");
-        toolHintsHelper.setToolTipText("Open new card hints helper window");
+        toolHintsHelper.setText("Hints");
+        toolHintsHelper.setToolTipText("Open card hints helper window");
         toolHintsHelper.addActionListener(this::btnToolHintsHelperActionPerformed);
         toolHintsHelper.setBounds(sizeMod(3), sizeMod(2 + 21 + 2), sizeMod(73), sizeMod(21));
         zonesPanel.add(toolHintsHelper);
@@ -701,7 +701,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         image = ImageHelper.getImageFromResources("/info/command_zone.png");
         resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
         commandZone = new HoverButton(null, resized, resized, resized, r, this.guiScaleMod);
-        commandZone.setToolTipText("Command Zone (Commanders, Emblems and Planes)");
+        commandZone.setToolTipText("Command Zone (Commanders, Emblems, and Planes)");
         commandZone.setOpaque(false);
         commandZone.setObserver(() -> btnCommandZoneActionPerformed(null));
         commandZone.setBounds(sizeMod(3), 0, sizeMod(21), sizeMod(21));
