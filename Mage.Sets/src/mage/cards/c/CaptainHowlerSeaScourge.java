@@ -10,12 +10,10 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.MultipliedValue;
 import mage.abilities.dynamicvalue.common.SavedDiscardValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DiscardOneOrMoreCardsTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
-import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -23,7 +21,6 @@ import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -32,7 +29,6 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public final class CaptainHowlerSeaScourge extends CardImpl {
     private static final DynamicValue powerValue = new MultipliedValue(SavedDiscardValue.MANY, 2);
-    private static final DynamicValue toughnessValue = new MultipliedValue(SavedDiscardValue.MANY, 0);
 
     public CaptainHowlerSeaScourge(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{U}{R}");
@@ -44,12 +40,12 @@ public final class CaptainHowlerSeaScourge extends CardImpl {
         this.toughness = new MageInt(4);
 
         // Ward--{2}, Pay 2 life.
-        CompositeCost cost = new CompositeCost(new ManaCostsImpl<>("{2}"), new PayLifeCost(2), "pays {2} and 2 life");
-        this.addAbility(new WardAbility(cost));
+        CompositeCost cost = new CompositeCost(new ManaCostsImpl<>("{2}"), new PayLifeCost(2), "{2}, Pay 2 life");
+        this.addAbility(new WardAbility(cost, false));
 
         // Whenever you discard one or more cards, target creature gets +2/+0 until end of turn for each card discarded this way. Whenever that creature deals combat damage to a player this turn, you draw a card.
         Ability ability = new DiscardOneOrMoreCardsTriggeredAbility(
-                new BoostTargetEffect(powerValue, toughnessValue)
+                new BoostTargetEffect(powerValue, StaticValue.get(0))
                         .setText("target creature gets +2/+0 until end of turn for each card discarded this way")
         );
         ability.addEffect(new GainAbilityTargetEffect(
