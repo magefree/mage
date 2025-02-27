@@ -19,8 +19,12 @@ import mage.game.turn.TurnMod;
 public class AddCombatAndMainPhaseEffect extends OneShotEffect {
 
     public AddCombatAndMainPhaseEffect() {
+        this("After this main phase, there is an additional combat phase followed by an additional main phase");
+    }
+
+    public AddCombatAndMainPhaseEffect(String staticText) {
         super(Outcome.Benefit);
-        staticText = "After this main phase, there is an additional combat phase followed by an additional main phase";
+        this.staticText = staticText;
     }
 
     protected AddCombatAndMainPhaseEffect(final AddCombatAndMainPhaseEffect effect) {
