@@ -3,7 +3,6 @@ package org.mage.test.cards.single.mh3;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -108,7 +107,6 @@ public class BirthingRitualTest extends CardTestPlayerBase {
         assertHandCount(playerA, "Centaur Courser", 1);
     }
 
-    @Ignore // TODO: something weird with unit test, will be fixed separately.
     @Test
     public void test_Trigger_Sacrifice_MVRestriction() {
         setStrictChooseMode(true);
