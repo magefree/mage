@@ -142,6 +142,15 @@ public class SpellAbility extends ActivatedAbilityImpl {
 
     @Override
     public ActivationStatus canActivate(UUID playerId, Game game) {
+        return canActivate(getSpellAbilityCastMode(), playerId, game);
+    }
+
+    /**
+     * On some occasion, we have to check that the activation can be done under
+     * a different cast mode (e.g. PLOT, FORETELL), which may make the activation
+     * decision different (for Adventure spells for instance).
+     */
+    public ActivationStatus canActivate(SpellAbilityCastMode castMode, UUID playerId, Game game) {
         // spells can be cast from non hand zones, so must use custom check
         // no super.canActivate() call
         Set<MageIdentifier> allowedIdentifiers = this.spellCanBeActivatedNow(playerId, game);
