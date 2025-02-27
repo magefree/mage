@@ -30,7 +30,7 @@ public final class RecklessVelocitaur extends CardImpl {
 
         // Whenever this creature saddles a Mount or crews a Vehicle during your main phase, that Mount or Vehicle gets +2/+0 and gains trample until end of turn.
 
-        Effect boostEffect = new BoostTargetEffect(1, 1, Duration.EndOfTurn)
+        Effect boostEffect = new BoostTargetEffect(2, 0, Duration.EndOfTurn)
                 .setText("that Mount or Vehicle gets +2/+0");
         Effect abilityGainEffect = new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn)
                 .setText("and gains trample until end of turn");
