@@ -5,6 +5,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
 
     @Test
@@ -67,7 +69,7 @@ public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
         attack(3, playerA, "Magma Pummeler", playerB);
         block(3, playerB, "Memnite", "Magma Pummeler");
         block(3, playerB, "Goblin Piker", "Magma Pummeler");
-        setChoice(playerA, "X=5"); // damage for Pummeler, does not really matter for this test.
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
         addTarget(playerA, playerB); // For the one trigger
 
         setStopAt(3, PhaseStep.END_TURN);
@@ -117,7 +119,7 @@ public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
         attack(3, playerA, "Magma Pummeler", playerB);
         block(3, playerB, "Centaur Courser", "Magma Pummeler");
         block(3, playerB, "Air Elemental", "Magma Pummeler");
-        setChoice(playerA, "X=5"); // damage for Pummeler, does not really matter for this test.
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
         addTarget(playerA, playerB); // For the one trigger
 
         setStopAt(3, PhaseStep.END_TURN);
@@ -148,7 +150,7 @@ public class PreventDamageRemoveCountersTest extends CardTestPlayerBase {
         attack(1, playerA, "Undergrowth Champion", playerB);
         block(1, playerB, "Grizzly Bears", "Undergrowth Champion");
         block(1, playerB, "Elite Vanguard", "Undergrowth Champion");
-        setChoice(playerA, "X=2"); // damage attribution
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();

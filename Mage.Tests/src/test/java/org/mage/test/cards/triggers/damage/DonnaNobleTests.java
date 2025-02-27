@@ -5,6 +5,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 /**
  *
  * @author jimga150
@@ -32,12 +34,7 @@ public class DonnaNobleTests extends CardTestCommander4Players {
         attack(5, playerA, "Impervious Greatwurm", playerB);
         block(5, playerB, "Memnite", "Impervious Greatwurm");
         block(5, playerB, "Expedition Envoy", "Impervious Greatwurm");
-
-        //Assign this much damage to the first blocking creature
-        setChoice(playerA, "X=1");
-
-        //Assign this much damage to the second blocking creature
-        setChoice(playerA, "X=1");
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
         //Target this player with Donna Noble
         addTarget(playerA, playerB);
