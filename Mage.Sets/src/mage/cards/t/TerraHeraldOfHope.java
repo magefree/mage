@@ -51,7 +51,7 @@ public final class TerraHeraldOfHope extends CardImpl {
         ReflexiveTriggeredAbility reflexiveAbility = new ReflexiveTriggeredAbility(
                 new ReturnFromGraveyardToBattlefieldTargetEffect(true), false
         );
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        reflexiveAbility.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(
                 new DoWhenCostPaid(reflexiveAbility, new GenericManaCost(2), "Pay {2}?")
         ));
