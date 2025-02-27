@@ -62,7 +62,7 @@ public enum AsThoughEffectType {
     ALLOW_FORETELL_ANYTIME,
     // ALLOW_EXHAUST_ACTIVE_ABILITY:
     // Elvish Refueler effect allows Exhaust on your turn as though it hasn't been activated
-    ALLOW_EXHAUST_ACTIVE_ABILITY(true, false);
+    ALLOW_EXHAUST_PER_TURN(true, false);
 
     private final boolean needAffectedAbility; // mark what AsThough check must be called for specific ability, not full object (example: spell check)
     private final boolean needPlayCardAbility; // mark what AsThough check must be called for play/cast abilities

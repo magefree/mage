@@ -118,7 +118,7 @@ class ElvishRefuelerEffect extends AsThoughEffectImpl {
     private final FilterPermanent filter;
 
     ElvishRefuelerEffect(FilterPermanent filter) {
-        super(AsThoughEffectType.ALLOW_EXHAUST_ACTIVE_ABILITY, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.ALLOW_EXHAUST_PER_TURN, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
         staticText = "During your turn, as long as you haven't activated an exhaust ability this turn, " +
                 "you may activate exhaust abilities as though they haven't been activated";
