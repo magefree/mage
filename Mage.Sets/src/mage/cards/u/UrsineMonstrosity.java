@@ -47,7 +47,7 @@ public final class UrsineMonstrosity extends CardImpl {
                 .setText("gets +1/+1 for each card type among cards in your graveyard.")
                 .concatBy("and")
         );
-        this.addAbility(ability);
+        this.addAbility(ability.addHint(CardTypesInGraveyardCount.YOU.getHint()));
     }
 
     private UrsineMonstrosity(final UrsineMonstrosity card) {
