@@ -111,6 +111,11 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Endrider Catalyzer", 124, Rarity.COMMON, mage.cards.e.EndriderCatalyzer.class));
         cards.add(new SetCardInfo("Endrider Spikespitter", 125, Rarity.UNCOMMON, mage.cards.e.EndriderSpikespitter.class));
         cards.add(new SetCardInfo("Engine Rat", 84, Rarity.COMMON, mage.cards.e.EngineRat.class));
+        cards.add(new SetCardInfo("Explosive Getaway", 202, Rarity.RARE, mage.cards.e.ExplosiveGetaway.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Explosive Getaway", 390, Rarity.RARE, mage.cards.e.ExplosiveGetaway.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Explosive Getaway", 403, Rarity.MYTHIC, mage.cards.e.ExplosiveGetaway.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Explosive Getaway", 413, Rarity.MYTHIC, mage.cards.e.ExplosiveGetaway.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Explosive Getaway", 479, Rarity.RARE, mage.cards.e.ExplosiveGetaway.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Fang Guardian", 162, Rarity.UNCOMMON, mage.cards.f.FangGuardian.class));
         cards.add(new SetCardInfo("Fang-Druid Summoner", 163, Rarity.UNCOMMON, mage.cards.f.FangDruidSummoner.class));
         cards.add(new SetCardInfo("Far Fortune, End Boss", 203, Rarity.RARE, mage.cards.f.FarFortuneEndBoss.class));
