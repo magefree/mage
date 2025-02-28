@@ -204,6 +204,11 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Pyrewood Gearhulk", 216, Rarity.MYTHIC, mage.cards.p.PyrewoodGearhulk.class));
         cards.add(new SetCardInfo("Quag Feast", 100, Rarity.RARE, mage.cards.q.QuagFeast.class));
         cards.add(new SetCardInfo("Racers' Scoreboard", 239, Rarity.UNCOMMON, mage.cards.r.RacersScoreboard.class));
+        cards.add(new SetCardInfo("Radiant Lotus", 240, Rarity.MYTHIC, mage.cards.r.RadiantLotus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Radiant Lotus", 395, Rarity.MYTHIC, mage.cards.r.RadiantLotus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Radiant Lotus", 406, Rarity.MYTHIC, mage.cards.r.RadiantLotus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Radiant Lotus", 416, Rarity.MYTHIC, mage.cards.r.RadiantLotus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Radiant Lotus", 500, Rarity.MYTHIC, mage.cards.r.RadiantLotus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rangers' Aetherhive", 217, Rarity.UNCOMMON, mage.cards.r.RangersAetherhive.class));
         cards.add(new SetCardInfo("Rangers' Refueler", 55, Rarity.UNCOMMON, mage.cards.r.RangersRefueler.class));
         cards.add(new SetCardInfo("Reckless Velocitaur", 144, Rarity.UNCOMMON, mage.cards.r.RecklessVelocitaur.class));
