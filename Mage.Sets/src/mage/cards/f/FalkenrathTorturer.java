@@ -3,21 +3,19 @@ package mage.cards.f;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Cost;
+import mage.abilities.condition.common.SacrificedPermanentCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.continuous.GainAbilitySourceEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -37,7 +35,9 @@ public final class FalkenrathTorturer extends CardImpl {
         SimpleActivatedAbility ability = new SimpleActivatedAbility(
                 new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE));
-        ability.addEffect(new FalkenrathAristocratEffect());
+        ability.addEffect(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()),
+                new SacrificedPermanentCondition(new FilterCreaturePermanent(SubType.HUMAN, "a Human")))
+                .setText("If the sacrificed creature was a Human, put a +1/+1 counter on {this}"));
         this.addAbility(ability);
     }
 
@@ -48,37 +48,5 @@ public final class FalkenrathTorturer extends CardImpl {
     @Override
     public FalkenrathTorturer copy() {
         return new FalkenrathTorturer(this);
-    }
-}
-
-class FalkenrathTorturerEffect extends OneShotEffect {
-
-    FalkenrathTorturerEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "If the sacrificed creature was a Human, put a +1/+1 counter on {this}";
-    }
-
-    private FalkenrathTorturerEffect(final FalkenrathTorturerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public FalkenrathTorturerEffect copy() {
-        return new FalkenrathTorturerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost) {
-                Permanent sacrificedCreature = ((SacrificeTargetCost) cost).getPermanents().get(0);
-                Permanent sourceCreature = game.getPermanent(source.getSourceId());
-                if (sacrificedCreature.hasSubtype(SubType.HUMAN, game) && sourceCreature != null) {
-                    sourceCreature.addCounters(CounterType.P1P1.createInstance(), source.getControllerId(), source, game);
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

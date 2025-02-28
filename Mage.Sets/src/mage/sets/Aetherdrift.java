@@ -142,6 +142,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Haunted Hellride", 208, Rarity.UNCOMMON, mage.cards.h.HauntedHellride.class));
         cards.add(new SetCardInfo("Hazard of the Dunes", 165, Rarity.COMMON, mage.cards.h.HazardOfTheDunes.class));
         cards.add(new SetCardInfo("Hazoret, Godseeker", 133, Rarity.MYTHIC, mage.cards.h.HazoretGodseeker.class));
+        cards.add(new SetCardInfo("Hellish Sideswipe", 90, Rarity.UNCOMMON, mage.cards.h.HellishSideswipe.class));
         cards.add(new SetCardInfo("Hour of Victory", 91, Rarity.UNCOMMON, mage.cards.h.HourOfVictory.class));
         cards.add(new SetCardInfo("Howler's Heavy", 46, Rarity.COMMON, mage.cards.h.HowlersHeavy.class));
         cards.add(new SetCardInfo("Howlsquad Heavy", 134, Rarity.RARE, mage.cards.h.HowlsquadHeavy.class));

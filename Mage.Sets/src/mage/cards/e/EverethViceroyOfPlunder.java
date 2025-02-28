@@ -6,8 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.costs.Cost;
+import mage.abilities.condition.common.SacrificedPermanentCondition;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinuousEffect;
@@ -24,14 +23,18 @@ import mage.cards.CardSetInfo;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
  * @author Grath
  */
 public final class EverethViceroyOfPlunder extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("a treasure");
+
+    static {
+        filter.add(SubType.TREASURE.getPredicate());
+    }
 
     public EverethViceroyOfPlunder(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{B}");
@@ -51,7 +54,7 @@ public final class EverethViceroyOfPlunder extends CardImpl {
                 new SacrificeTargetCost(StaticFilters.FILTER_CONTROLLED_ANOTHER_CREATURE_OR_ARTIFACT)
         );
         ability.addEffect(new ConditionalContinuousEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn),
-                EverethViceroyOfPlunderCondition.instance,
+                new SacrificedPermanentCondition(filter),
                 "If the sacrificed permanent was a Treasure, Evereth gains lifelink until end of turn."
         ));
         this.addAbility(ability);
@@ -72,34 +75,5 @@ public final class EverethViceroyOfPlunder extends CardImpl {
     @Override
     public EverethViceroyOfPlunder copy() {
         return new EverethViceroyOfPlunder(this);
-    }
-}
-
-enum EverethViceroyOfPlunderCondition implements Condition {
-    instance;
-
-    private static final FilterPermanent filter = new FilterPermanent("a treasure");
-
-    static {
-        filter.add(SubType.TREASURE.getPredicate());
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost) {
-                for (Permanent permanent : ((SacrificeTargetCost) cost).getPermanents()) {
-                    if (filter.match(permanent, source.getControllerId(), source, game)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "the sacrificed permanent was a Treasure";
     }
 }

@@ -4,12 +4,12 @@ package mage.cards.e;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.condition.common.SacrificedPermanentCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.LimitedTimesPerTurnActivatedAbility;
 import mage.abilities.condition.common.IsStepCondition;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -19,8 +19,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -47,7 +46,9 @@ public final class EbonPraetor extends CardImpl {
         // Sacrifice a creature: Remove a -2/-2 counter from Ebon Praetor. If the sacrificed creature was a Thrull, put a +1/+0 counter on Ebon Praetor. Activate this ability only during your upkeep and only once each turn.
         Ability ability = new LimitedTimesPerTurnActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.M2M2.createInstance()),
                 new SacrificeTargetCost(StaticFilters.FILTER_PERMANENT_CREATURE), 1, new IsStepCondition(PhaseStep.UPKEEP));
-        ability.addEffect(new EbonPraetorEffect());
+        ability.addEffect(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P0.createInstance()),
+                new SacrificedPermanentCondition(new FilterCreaturePermanent(SubType.THRULL, "a Thrull"), "If the sacrificed creature was a Thrull")
+        ));
         this.addAbility(ability);
     }
 
@@ -58,37 +59,5 @@ public final class EbonPraetor extends CardImpl {
     @Override
     public EbonPraetor copy() {
         return new EbonPraetor(this);
-    }
-}
-
-class EbonPraetorEffect extends OneShotEffect {
-
-    EbonPraetorEffect() {
-        super(Outcome.BoostCreature);
-        this.staticText = "If the sacrificed creature was a Thrull, put a +1/+0 counter on {this}";
-    }
-
-    private EbonPraetorEffect(final EbonPraetorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public EbonPraetorEffect copy() {
-        return new EbonPraetorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Cost cost : source.getCosts()) {
-            if (cost instanceof SacrificeTargetCost) {
-                Permanent sacrificedCreature = ((SacrificeTargetCost) cost).getPermanents().get(0);
-                Permanent sourceCreature = game.getPermanent(source.getSourceId());
-                if (sacrificedCreature.hasSubtype(SubType.THRULL, game) && sourceCreature != null) {
-                    sourceCreature.addCounters(CounterType.P1P0.createInstance(), source.getControllerId(), source, game);
-                    return true;
-                }
-            }
-        }
-        return true;
     }
 }
