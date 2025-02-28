@@ -172,6 +172,11 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Lumbering Worldwagon", 168, Rarity.RARE, mage.cards.l.LumberingWorldwagon.class));
         cards.add(new SetCardInfo("Magmakin Artillerist", 137, Rarity.COMMON, mage.cards.m.MagmakinArtillerist.class));
         cards.add(new SetCardInfo("Marauding Mako", 138, Rarity.UNCOMMON, mage.cards.m.MaraudingMako.class));
+        cards.add(new SetCardInfo("March of the World Ooze", 169, Rarity.MYTHIC, mage.cards.m.MarchOfTheWorldOoze.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("March of the World Ooze", 388, Rarity.MYTHIC, mage.cards.m.MarchOfTheWorldOoze.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("March of the World Ooze", 402, Rarity.MYTHIC, mage.cards.m.MarchOfTheWorldOoze.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("March of the World Ooze", 412, Rarity.MYTHIC, mage.cards.m.MarchOfTheWorldOoze.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("March of the World Ooze", 468, Rarity.MYTHIC, mage.cards.m.MarchOfTheWorldOoze.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Marketback Walker", 235, Rarity.RARE, mage.cards.m.MarketbackWalker.class));
         cards.add(new SetCardInfo("Marshals' Pathcruiser", 236, Rarity.UNCOMMON, mage.cards.m.MarshalsPathcruiser.class));
         cards.add(new SetCardInfo("Maximum Overdrive", 96, Rarity.COMMON, mage.cards.m.MaximumOverdrive.class));
