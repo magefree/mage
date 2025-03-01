@@ -178,6 +178,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Migrating Ketradon", 170, Rarity.COMMON, mage.cards.m.MigratingKetradon.class));
         cards.add(new SetCardInfo("Mindspring Merfolk", 51, Rarity.RARE, mage.cards.m.MindspringMerfolk.class));
         cards.add(new SetCardInfo("Molt Tender", 171, Rarity.UNCOMMON, mage.cards.m.MoltTender.class));
+        cards.add(new SetCardInfo("Momentum Breaker", 97, Rarity.UNCOMMON, mage.cards.m.MomentumBreaker.class));
         cards.add(new SetCardInfo("Monument to Endurance", 237, Rarity.RARE, mage.cards.m.MonumentToEndurance.class));
         cards.add(new SetCardInfo("Mountain", 286, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mu Yanling, Wind Rider", 52, Rarity.MYTHIC, mage.cards.m.MuYanlingWindRider.class));
