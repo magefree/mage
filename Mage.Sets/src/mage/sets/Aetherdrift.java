@@ -231,6 +231,10 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Repurposing Bay", 56, Rarity.RARE, mage.cards.r.RepurposingBay.class));
         cards.add(new SetCardInfo("Ride's End", 25, Rarity.COMMON, mage.cards.r.RidesEnd.class));
         cards.add(new SetCardInfo("Ripclaw Wrangler", 101, Rarity.COMMON, mage.cards.r.RipclawWrangler.class));
+        cards.add(new SetCardInfo("Riptide Gearhulk", 219, Rarity.MYTHIC, mage.cards.r.RiptideGearhulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Riptide Gearhulk", 353, Rarity.MYTHIC, mage.cards.r.RiptideGearhulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Riptide Gearhulk", 490, Rarity.MYTHIC, mage.cards.r.RiptideGearhulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Riptide Gearhulk", 552, Rarity.MYTHIC, mage.cards.r.RiptideGearhulk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rise from the Wreck", 178, Rarity.UNCOMMON, mage.cards.r.RiseFromTheWreck.class));
         cards.add(new SetCardInfo("Risen Necroregent", 102, Rarity.UNCOMMON, mage.cards.r.RisenNecroregent.class));
         cards.add(new SetCardInfo("Risky Shortcut", 103, Rarity.COMMON, mage.cards.r.RiskyShortcut.class));
