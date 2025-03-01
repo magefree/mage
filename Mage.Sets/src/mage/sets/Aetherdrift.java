@@ -286,6 +286,8 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Cove", 267, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Transit Mage", 70, Rarity.UNCOMMON, mage.cards.t.TransitMage.class));
         cards.add(new SetCardInfo("Trip Up", 71, Rarity.COMMON, mage.cards.t.TripUp.class));
+        cards.add(new SetCardInfo("Tune Up", 33, Rarity.UNCOMMON, mage.cards.t.TuneUp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tune Up", 417, Rarity.UNCOMMON, mage.cards.t.TuneUp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tyrox, Saurid Tyrant", 149, Rarity.UNCOMMON, mage.cards.t.TyroxSauridTyrant.class));
         cards.add(new SetCardInfo("Unstoppable Plan", 72, Rarity.RARE, mage.cards.u.UnstoppablePlan.class));
         cards.add(new SetCardInfo("Unswerving Sloth", 34, Rarity.UNCOMMON, mage.cards.u.UnswervingSloth.class));
