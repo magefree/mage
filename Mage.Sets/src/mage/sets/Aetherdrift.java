@@ -186,6 +186,10 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Nesting Bot", 22, Rarity.UNCOMMON, mage.cards.n.NestingBot.class));
         cards.add(new SetCardInfo("Night Market", 258, Rarity.COMMON, mage.cards.n.NightMarket.class));
         cards.add(new SetCardInfo("Nimble Thopterist", 53, Rarity.COMMON, mage.cards.n.NimbleThopterist.class));
+        cards.add(new SetCardInfo("Oildeep Gearhulk", 215, Rarity.MYTHIC, mage.cards.o.OildeepGearhulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oildeep Gearhulk", 351, Rarity.MYTHIC, mage.cards.o.OildeepGearhulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oildeep Gearhulk", 487, Rarity.MYTHIC, mage.cards.o.OildeepGearhulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oildeep Gearhulk", 550, Rarity.MYTHIC, mage.cards.o.OildeepGearhulk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ooze Patrol", 172, Rarity.UNCOMMON, mage.cards.o.OozePatrol.class));
         cards.add(new SetCardInfo("Outpace Oblivion", 139, Rarity.UNCOMMON, mage.cards.o.OutpaceOblivion.class));
         cards.add(new SetCardInfo("Oviya, Automech Artisan", 173, Rarity.RARE, mage.cards.o.OviyaAutomechArtisan.class));
