@@ -259,6 +259,9 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Scrounging Skyray", 60, Rarity.UNCOMMON, mage.cards.s.ScroungingSkyray.class));
         cards.add(new SetCardInfo("Shefet Archfiend", 104, Rarity.UNCOMMON, mage.cards.s.ShefetArchfiend.class));
         cards.add(new SetCardInfo("Silken Strength", 180, Rarity.COMMON, mage.cards.s.SilkenStrength.class));
+        cards.add(new SetCardInfo("Sita Varma, Masked Racer", 223, Rarity.RARE, mage.cards.s.SitaVarmaMaskedRacer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sita Varma, Masked Racer", 368, Rarity.RARE, mage.cards.s.SitaVarmaMaskedRacer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sita Varma, Masked Racer", 493, Rarity.RARE, mage.cards.s.SitaVarmaMaskedRacer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skybox Ferry", 243, Rarity.COMMON, mage.cards.s.SkyboxFerry.class));
         cards.add(new SetCardInfo("Skycrash", 146, Rarity.UNCOMMON, mage.cards.s.Skycrash.class));
         cards.add(new SetCardInfo("Skystreak Engineer", 61, Rarity.COMMON, mage.cards.s.SkystreakEngineer.class));
