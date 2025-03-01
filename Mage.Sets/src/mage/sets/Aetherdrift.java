@@ -272,6 +272,11 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Skyserpent Seeker", 420, Rarity.UNCOMMON, mage.cards.s.SkyserpentSeeker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skystreak Engineer", 61, Rarity.COMMON, mage.cards.s.SkystreakEngineer.class));
         cards.add(new SetCardInfo("Slick Imitator", 62, Rarity.UNCOMMON, mage.cards.s.SlickImitator.class));
+        cards.add(new SetCardInfo("Spectacular Pileup", 29, Rarity.RARE, mage.cards.s.SpectacularPileup.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spectacular Pileup", 378, Rarity.RARE, mage.cards.s.SpectacularPileup.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spectacular Pileup", 398, Rarity.MYTHIC, mage.cards.s.SpectacularPileup.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spectacular Pileup", 408, Rarity.MYTHIC, mage.cards.s.SpectacularPileup.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Spectacular Pileup", 433, Rarity.RARE, mage.cards.s.SpectacularPileup.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Spectral Interference", 63, Rarity.COMMON, mage.cards.s.SpectralInterference.class));
         cards.add(new SetCardInfo("Spell Pierce", 64, Rarity.UNCOMMON, mage.cards.s.SpellPierce.class));
         cards.add(new SetCardInfo("Spikeshell Harrier", 65, Rarity.UNCOMMON, mage.cards.s.SpikeshellHarrier.class));
