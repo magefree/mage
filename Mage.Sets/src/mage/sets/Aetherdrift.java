@@ -303,6 +303,10 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Thornwood Falls", 266, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thunderhead Gunner", 148, Rarity.COMMON, mage.cards.t.ThunderheadGunner.class));
         cards.add(new SetCardInfo("Thundering Broodwagon", 225, Rarity.UNCOMMON, mage.cards.t.ThunderingBroodwagon.class));
+        cards.add(new SetCardInfo("Thunderous Velocipede", 183, Rarity.MYTHIC, mage.cards.t.ThunderousVelocipede.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thunderous Velocipede", 317, Rarity.MYTHIC, mage.cards.t.ThunderousVelocipede.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thunderous Velocipede", 471, Rarity.MYTHIC, mage.cards.t.ThunderousVelocipede.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thunderous Velocipede", 529, Rarity.MYTHIC, mage.cards.t.ThunderousVelocipede.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ticket Tortoise", 245, Rarity.COMMON, mage.cards.t.TicketTortoise.class));
         cards.add(new SetCardInfo("Trade the Helm", 69, Rarity.UNCOMMON, mage.cards.t.TradeTheHelm.class));
         cards.add(new SetCardInfo("Tranquil Cove", 267, Rarity.COMMON, mage.cards.t.TranquilCove.class));
