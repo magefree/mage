@@ -212,6 +212,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Pothole Mole", 176, Rarity.COMMON, mage.cards.p.PotholeMole.class));
         cards.add(new SetCardInfo("Pride of the Road", 24, Rarity.UNCOMMON, mage.cards.p.PrideOfTheRoad.class));
         cards.add(new SetCardInfo("Prowcatcher Specialist", 142, Rarity.COMMON, mage.cards.p.ProwcatcherSpecialist.class));
+        cards.add(new SetCardInfo("Push the Limit", 143, Rarity.UNCOMMON, mage.cards.p.PushTheLimit.class));
         cards.add(new SetCardInfo("Pyrewood Gearhulk", 216, Rarity.MYTHIC, mage.cards.p.PyrewoodGearhulk.class));
         cards.add(new SetCardInfo("Quag Feast", 100, Rarity.RARE, mage.cards.q.QuagFeast.class));
         cards.add(new SetCardInfo("Racers' Scoreboard", 239, Rarity.UNCOMMON, mage.cards.r.RacersScoreboard.class));
