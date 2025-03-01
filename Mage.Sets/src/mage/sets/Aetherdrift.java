@@ -253,6 +253,8 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Skyseer's Chariot", 296, Rarity.RARE, mage.cards.s.SkyseersChariot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skyseer's Chariot", 432, Rarity.RARE, mage.cards.s.SkyseersChariot.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skyseer's Chariot", 518, Rarity.RARE, mage.cards.s.SkyseersChariot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skyserpent Seeker", 224, Rarity.UNCOMMON, mage.cards.s.SkyserpentSeeker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skyserpent Seeker", 420, Rarity.UNCOMMON, mage.cards.s.SkyserpentSeeker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skystreak Engineer", 61, Rarity.COMMON, mage.cards.s.SkystreakEngineer.class));
         cards.add(new SetCardInfo("Slick Imitator", 62, Rarity.UNCOMMON, mage.cards.s.SlickImitator.class));
         cards.add(new SetCardInfo("Spectral Interference", 63, Rarity.COMMON, mage.cards.s.SpectralInterference.class));
