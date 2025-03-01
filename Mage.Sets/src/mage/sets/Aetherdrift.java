@@ -238,6 +238,9 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Rise from the Wreck", 178, Rarity.UNCOMMON, mage.cards.r.RiseFromTheWreck.class));
         cards.add(new SetCardInfo("Risen Necroregent", 102, Rarity.UNCOMMON, mage.cards.r.RisenNecroregent.class));
         cards.add(new SetCardInfo("Risky Shortcut", 103, Rarity.COMMON, mage.cards.r.RiskyShortcut.class));
+        cards.add(new SetCardInfo("Riverchurn Monument", 57, Rarity.RARE, mage.cards.r.RiverchurnMonument.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Riverchurn Monument", 381, Rarity.RARE, mage.cards.r.RiverchurnMonument.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Riverchurn Monument", 440, Rarity.RARE, mage.cards.r.RiverchurnMonument.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Riverpyre Verge", 260, Rarity.RARE, mage.cards.r.RiverpyreVerge.class));
         cards.add(new SetCardInfo("Road Rage", 145, Rarity.UNCOMMON, mage.cards.r.RoadRage.class));
         cards.add(new SetCardInfo("Roadside Assistance", 26, Rarity.UNCOMMON, mage.cards.r.RoadsideAssistance.class));
