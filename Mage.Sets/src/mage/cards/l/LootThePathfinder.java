@@ -47,12 +47,10 @@ public final class LootThePathfinder extends CardImpl {
                 new CompositeCost(new ManaCostsImpl<>("{G}"), new TapSourceCost(), "{G}, {T}")));
         // Exhaust -- {U}, {T}: Draw three cards.
         this.addAbility(new ExhaustAbility(new DrawCardSourceControllerEffect(3),
-                new CompositeCost(new ManaCostsImpl<>("{U}"), new TapSourceCost(), "{U}, {T}"))
-                .withReminderText(false));
+                new CompositeCost(new ManaCostsImpl<>("{U}"), new TapSourceCost(), "{U}, {T}"),false));
         // Exhaust -- {R}, {T}: Loot deals 3 damage to any target.
         this.addAbility(new ExhaustAbility(new DamageTargetEffect(3),
-                new CompositeCost(new ManaCostsImpl<>("{R}"), new TapSourceCost(), "{R}, {T}"))
-                .withReminderText(false));
+                new CompositeCost(new ManaCostsImpl<>("{R}"), new TapSourceCost(), "{R}, {T}"), false));
     }
 
     private LootThePathfinder(final LootThePathfinder card) {
