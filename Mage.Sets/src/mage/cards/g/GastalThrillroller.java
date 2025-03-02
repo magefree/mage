@@ -16,6 +16,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -48,7 +49,7 @@ public final class GastalThrillroller extends CardImpl {
 
         // {2}{R}, Discard a card: Return this card from your graveyard to the battlefield with a finality counter on it. Activate only as a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(
-                new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(
+                Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldWithCounterEffect(
                         CounterType.FINALITY.createInstance(), false
                 ), new ManaCostsImpl<>("{2}{R}")
         );

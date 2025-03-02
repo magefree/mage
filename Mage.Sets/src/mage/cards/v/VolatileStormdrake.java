@@ -4,11 +4,10 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.PayEnergyCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DoIfCostPaid;
-import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continuous.ExchangeControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofBaseAbility;
@@ -138,10 +137,13 @@ class VolatileStormdrakeEffect extends OneShotEffect {
         game.addEffect(effect, source);
         game.processAction();
         controller.addCounters(CounterType.ENERGY.createInstance(4), controller.getId(), source, game);
-        new DoIfCostPaid(
-                null, new SacrificeTargetEffect("", controller.getId()),
-                new PayEnergyCost(targetPermanent.getManaValue()), true
-        ).apply(game, source);
+        Cost cost = new PayEnergyCost(targetPermanent.getManaValue());
+        if (cost.canPay(source, source, controller.getId(), game) &&
+                controller.chooseUse(Outcome.Benefit, "Pay " + cost.getText() + " to prevent sacrifice?", source, game) &&
+                cost.pay(source, game, source, controller.getId(), false)) {
+            return true;
+        }
+        targetPermanent.sacrifice(source, game);
         return true;
     }
 }
