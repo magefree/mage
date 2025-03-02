@@ -31,12 +31,18 @@ import mage.target.common.TargetControlledPermanent;
 public final class SpireMechcycle extends CardImpl {
 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another untapped Mount or Vehicle you control");
-    private static final DynamicValue mountAndVehicleCount = new PermanentsOnBattlefieldCount(filter);
+    private static final FilterControlledPermanent mountAndVehicleFilter = new FilterControlledPermanent("Mount and/or Vehicle you control other than this Vehicle");
+    private static final DynamicValue mountAndVehicleCount = new PermanentsOnBattlefieldCount(mountAndVehicleFilter);
 
     static {
         filter.add(AnotherPredicate.instance);
         filter.add(TappedPredicate.UNTAPPED);
         filter.add(Predicates.or(
+                SubType.MOUNT.getPredicate(),
+                SubType.VEHICLE.getPredicate()
+        ));
+        mountAndVehicleFilter.add(AnotherPredicate.instance);
+        mountAndVehicleFilter.add(Predicates.or(
                 SubType.MOUNT.getPredicate(),
                 SubType.VEHICLE.getPredicate()
         ));
