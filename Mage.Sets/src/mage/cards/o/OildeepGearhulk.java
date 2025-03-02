@@ -45,8 +45,7 @@ public final class OildeepGearhulk extends CardImpl {
         this.addAbility(new WardAbility(new ManaCostsImpl<>("{1}")));
 
         // When this creature enters, look at target player's hand. You may choose a card from it. If you do, that player discards that card, then draws a card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new LookAtTargetPlayerHandEffect());
-        ability.addEffect(new OildeepGearhulkEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new OildeepGearhulkEffect());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
