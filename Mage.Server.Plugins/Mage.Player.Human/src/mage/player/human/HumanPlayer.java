@@ -2122,56 +2122,6 @@ public class HumanPlayer extends PlayerImpl {
         }
     }
 
-    @Override
-    public UUID chooseAttackerOrder(java.util.List<Permanent> attackers, Game game) {
-        if (gameInCheckPlayableState(game)) {
-            return null;
-        }
-
-        while (canRespond()) {
-            prepareForResponse(game);
-            if (!isExecutingMacro()) {
-                game.fireSelectTargetEvent(playerId, "Pick attacker", attackers, true);
-            }
-            waitForResponse(game);
-
-            UUID responseId = getFixedResponseUUID(game);
-            if (responseId != null) {
-                for (Permanent perm : attackers) {
-                    if (perm.getId().equals(responseId)) {
-                        return perm.getId();
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public UUID chooseBlockerOrder(java.util.List<Permanent> blockers, CombatGroup combatGroup, java.util.List<UUID> blockerOrder, Game game) {
-        if (gameInCheckPlayableState(game)) {
-            return null;
-        }
-
-        while (canRespond()) {
-            prepareForResponse(game);
-            if (!isExecutingMacro()) {
-                game.fireSelectTargetEvent(playerId, "Pick blocker", blockers, true);
-            }
-            waitForResponse(game);
-
-            UUID responseId = getFixedResponseUUID(game);
-            if (responseId != null) {
-                for (Permanent perm : blockers) {
-                    if (perm.getId().equals(responseId)) {
-                        return perm.getId();
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
     protected void selectCombatGroup(UUID defenderId, UUID blockerId, Game game) {
         if (gameInCheckPlayableState(game)) {
             return;
@@ -2260,7 +2210,7 @@ public class HumanPlayer extends PlayerImpl {
             Game game
     ) {
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, totalMin, totalMax);
+        List<Integer> defaultList = MultiAmountType.prepareDefaultValues(messages, totalMin, totalMax);
         if (needCount == 0 || (needCount == 1 && totalMin == totalMax)
                 || messages.stream().map(m -> m.min == m.max).reduce(true, Boolean::logicalAnd)) {
             // nothing to choose
