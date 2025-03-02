@@ -17,14 +17,25 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.TargetPermanent;
 
 /**
  *
  * @author Jmlundeen
  */
 public final class HellishSideswipe extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent("creature or Vehicle");
+
+    static {
+        filter.add(Predicates.or(
+                CardType.CREATURE.getPredicate(),
+                SubType.VEHICLE.getPredicate()
+        ));
+    }
 
     public HellishSideswipe(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{B}");
@@ -38,6 +49,7 @@ public final class HellishSideswipe extends CardImpl {
                 new DrawCardSourceControllerEffect(1),
                 new SacrificedPermanentCondition(new FilterPermanent(SubType.VEHICLE, "a Vehicle"))
         ));
+        this.getSpellAbility().addTarget(new TargetPermanent(filter));
     }
 
     private HellishSideswipe(final HellishSideswipe card) {
