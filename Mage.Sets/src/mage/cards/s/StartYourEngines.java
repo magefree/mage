@@ -6,6 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continuous.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.VehiclesBecomeArtifactCreatureEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
@@ -22,7 +23,7 @@ public final class StartYourEngines extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Vehicles you control becomes artifact creatures until end of turn.
-        Effect effect = new StartYourEnginesEffect();
+        Effect effect = new VehiclesBecomeArtifactCreatureEffect(Duration.EndOfTurn);
         this.getSpellAbility().addEffect(effect);
 
         // Creatures you control get +2/+0 until end of turn.
@@ -37,40 +38,4 @@ public final class StartYourEngines extends CardImpl {
     public StartYourEngines copy() {
         return new StartYourEngines(this);
     }
-}
-
-class StartYourEnginesEffect extends ContinuousEffectImpl {
-
-    StartYourEnginesEffect() {
-        super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
-        staticText = "Vehicles you control become artifact creatures until end of turn";
-    }
-
-    private StartYourEnginesEffect(final StartYourEnginesEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public StartYourEnginesEffect copy() {
-        return new StartYourEnginesEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent != null && permanent.hasSubtype(SubType.VEHICLE, game)) {
-                if (sublayer == SubLayer.NA) {
-                    permanent.addCardType(game, CardType.ARTIFACT);
-                    permanent.addCardType(game, CardType.CREATURE);// TODO: Check if giving CREATURE Type is correct
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
 }
