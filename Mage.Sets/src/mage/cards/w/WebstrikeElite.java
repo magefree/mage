@@ -4,6 +4,7 @@ import mage.MageInt;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
@@ -58,7 +59,7 @@ public final class WebstrikeElite extends CardImpl {
 class WebstrikeEliteTriggeredAbility extends ZoneChangeTriggeredAbility {
 
     WebstrikeEliteTriggeredAbility() {
-        super(Zone.ALL, null, "", false);
+        super(Zone.ALL, new DestroyTargetEffect(), "", false);
     }
 
     private WebstrikeEliteTriggeredAbility(final WebstrikeEliteTriggeredAbility ability) {
