@@ -75,7 +75,7 @@ class NotDeadAfterAllEffect extends OneShotEffect {
             return false;
         }
 
-        player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, false, null);
+        player.moveCards(card, Zone.BATTLEFIELD, source, game, true, false, true, null);
         Permanent permanent = game.getPermanent(card.getId());
         if (permanent == null) {
             return false;
