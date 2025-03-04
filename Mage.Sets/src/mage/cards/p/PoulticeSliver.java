@@ -1,7 +1,5 @@
-
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -13,17 +11,21 @@ import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.SubType;
+import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.target.TargetPermanent;
+
+import java.util.UUID;
 
 /**
  *
  * @author anonymous
  */
 public final class PoulticeSliver extends CardImpl {
+
+    private static final FilterPermanent filter = new FilterPermanent(SubType.SLIVER, "Sliver");
 
     public PoulticeSliver(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -35,7 +37,7 @@ public final class PoulticeSliver extends CardImpl {
         // All Slivers have "{2}, {tap}: Regenerate target Sliver."
         Ability ability = new SimpleActivatedAbility(new RegenerateTargetEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetPermanent(StaticFilters.FILTER_PERMANENT_ALL_SLIVERS));
+        ability.addTarget(new TargetPermanent(filter));
 
         this.addAbility(new SimpleStaticAbility(
                 new GainAbilityAllEffect(ability,
