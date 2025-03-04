@@ -168,6 +168,9 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Marshals' Pathcruiser", 236, Rarity.UNCOMMON, mage.cards.m.MarshalsPathcruiser.class));
         cards.add(new SetCardInfo("Maximum Overdrive", 96, Rarity.COMMON, mage.cards.m.MaximumOverdrive.class));
         cards.add(new SetCardInfo("Memory Guardian", 49, Rarity.UNCOMMON, mage.cards.m.MemoryGuardian.class));
+        cards.add(new SetCardInfo("Mendicant Core, Guidelight", 213, Rarity.RARE, mage.cards.m.MendicantCoreGuidelight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mendicant Core, Guidelight", 365, Rarity.RARE, mage.cards.m.MendicantCoreGuidelight.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mendicant Core, Guidelight", 485, Rarity.RARE, mage.cards.m.MendicantCoreGuidelight.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Midnight Mangler", 50, Rarity.COMMON, mage.cards.m.MidnightMangler.class));
         cards.add(new SetCardInfo("Migrating Ketradon", 170, Rarity.COMMON, mage.cards.m.MigratingKetradon.class));
         cards.add(new SetCardInfo("Mindspring Merfolk", 51, Rarity.RARE, mage.cards.m.MindspringMerfolk.class));
