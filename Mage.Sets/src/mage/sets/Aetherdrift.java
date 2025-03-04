@@ -153,6 +153,9 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Kalakscion, Hunger Tyrant", 93, Rarity.UNCOMMON, mage.cards.k.KalakscionHungerTyrant.class));
         cards.add(new SetCardInfo("Keen Buccaneer", 48, Rarity.COMMON, mage.cards.k.KeenBuccaneer.class));
         cards.add(new SetCardInfo("Kickoff Celebrations", 135, Rarity.COMMON, mage.cards.k.KickoffCelebrations.class));
+        cards.add(new SetCardInfo("Kolodin, Triumph Caster", 210, Rarity.RARE, mage.cards.k.KolodinTriumphCaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kolodin, Triumph Caster", 364, Rarity.RARE, mage.cards.k.KolodinTriumphCaster.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Kolodin, Triumph Caster", 483, Rarity.RARE, mage.cards.k.KolodinTriumphCaster.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lagorin, Soul of Alacria", 211, Rarity.UNCOMMON, mage.cards.l.LagorinSoulOfAlacria.class));
         cards.add(new SetCardInfo("Leonin Surveyor", 18, Rarity.COMMON, mage.cards.l.LeoninSurveyor.class));
         cards.add(new SetCardInfo("Lifecraft Engine", 234, Rarity.RARE, mage.cards.l.LifecraftEngine.class));
