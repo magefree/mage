@@ -170,6 +170,11 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Memory Guardian", 49, Rarity.UNCOMMON, mage.cards.m.MemoryGuardian.class));
         cards.add(new SetCardInfo("Midnight Mangler", 50, Rarity.COMMON, mage.cards.m.MidnightMangler.class));
         cards.add(new SetCardInfo("Migrating Ketradon", 170, Rarity.COMMON, mage.cards.m.MigratingKetradon.class));
+        cards.add(new SetCardInfo("Mimeoplasm, Revered One", 214, Rarity.MYTHIC, mage.cards.m.MimeoplasmReveredOne.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mimeoplasm, Revered One", 392, Rarity.MYTHIC, mage.cards.m.MimeoplasmReveredOne.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mimeoplasm, Revered One", 405, Rarity.MYTHIC, mage.cards.m.MimeoplasmReveredOne.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mimeoplasm, Revered One", 415, Rarity.MYTHIC, mage.cards.m.MimeoplasmReveredOne.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Mimeoplasm, Revered One", 486, Rarity.MYTHIC, mage.cards.m.MimeoplasmReveredOne.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mindspring Merfolk", 51, Rarity.RARE, mage.cards.m.MindspringMerfolk.class));
         cards.add(new SetCardInfo("Molt Tender", 171, Rarity.UNCOMMON, mage.cards.m.MoltTender.class));
         cards.add(new SetCardInfo("Monument to Endurance", 237, Rarity.RARE, mage.cards.m.MonumentToEndurance.class));
