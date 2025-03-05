@@ -166,6 +166,8 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temple of Epiphany", 177, Rarity.RARE, mage.cards.t.TempleOfEpiphany.class));
         cards.add(new SetCardInfo("Temple of Silence", 178, Rarity.RARE, mage.cards.t.TempleOfSilence.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 179, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
+        cards.add(new SetCardInfo("Territorial Aetherkite", 12, Rarity.RARE, mage.cards.t.TerritorialAetherkite.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Territorial Aetherkite", 28, Rarity.RARE, mage.cards.t.TerritorialAetherkite.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Scarab God", 120, Rarity.MYTHIC, mage.cards.t.TheScarabGod.class));
         cards.add(new SetCardInfo("Thopter Spy Network", 83, Rarity.RARE, mage.cards.t.ThopterSpyNetwork.class));
         cards.add(new SetCardInfo("Timeless Dragon", 67, Rarity.RARE, mage.cards.t.TimelessDragon.class));
