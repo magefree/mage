@@ -4,7 +4,6 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.ExileXFromYourGraveCost;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -22,7 +21,6 @@ import mage.abilities.keyword.WardAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -50,7 +48,7 @@ public final class WinterCursedRider extends CardImpl {
         this.toughness = new MageInt(2);
 
         // Ward--Pay 2 life.
-        this.addAbility(new WardAbility(new ManaCostsImpl<>("")));
+        this.addAbility(new WardAbility(new PayLifeCost(2)));
 
         // Artifacts you control have "Ward--Pay 2 life."
         WardAbility wardAbility = new WardAbility(new PayLifeCost(2));
