@@ -12,11 +12,6 @@ import mage.abilities.keyword.ProwessAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.filter.FilterCard;
-import mage.filter.StaticFilters;
-import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.mageobject.PermanentPredicate;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetNonlandPermanent;
 import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
 import mage.target.targetpointer.EachTargetPointer;
@@ -41,10 +36,9 @@ public final class RiptideGearhulk extends CardImpl {
 
         // When this creature enters, for each opponent, put up to one target nonland permanent that player controls into its owner's library third from the top.
         Effect effect = new PutIntoLibraryNFromTopTargetEffect(3)
-                .setText("put up to one target nonland permanent that player controls into its owner's library third from the top")
+                .setText("for each opponent, put up to one target nonland permanent that player controls into its owner's library third from the top")
                 .setTargetPointer(new EachTargetPointer());
-        Ability ability = new EntersBattlefieldTriggeredAbility(effect)
-                .setTriggerPhrase("When {this} creature enters, for each opponent, ");
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect);
         ability.addTarget(new TargetNonlandPermanent(0, 1));
         ability.setTargetAdjuster(new ForEachOpponentTargetsAdjuster());
         this.addAbility(ability);
