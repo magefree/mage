@@ -142,6 +142,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rogue Refiner", 118, Rarity.UNCOMMON, mage.cards.r.RogueRefiner.class));
         cards.add(new SetCardInfo("Rootbound Crag", 168, Rarity.RARE, mage.cards.r.RootboundCrag.class));
         cards.add(new SetCardInfo("Rot Hulk", 98, Rarity.MYTHIC, mage.cards.r.RotHulk.class));
+        cards.add(new SetCardInfo("Saheeli, Radiant Creator", 3, Rarity.MYTHIC, mage.cards.s.SaheeliRadiantCreator.class));
         cards.add(new SetCardInfo("Saheeli, Sublime Artificer", 119, Rarity.UNCOMMON, mage.cards.s.SaheeliSublimeArtificer.class));
         cards.add(new SetCardInfo("Sai, Master Thopterist", 82, Rarity.RARE, mage.cards.s.SaiMasterThopterist.class));
         cards.add(new SetCardInfo("Servant of the Conduit", 114, Rarity.UNCOMMON, mage.cards.s.ServantOfTheConduit.class));
