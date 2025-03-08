@@ -48,6 +48,23 @@ public class SaddleAbility extends SimpleActivatedAbility {
         this.value = ability.value;
     }
 
+    public static boolean applySaddle(Permanent permanent, Game game) {
+        if (permanent == null) {
+            return false;
+        }
+        SaddleAbility saddleAbility = permanent.getAbilities().stream()
+                .filter(a -> a instanceof SaddleAbility)
+                .map(a -> (SaddleAbility) a)
+                .findFirst()
+                .orElse(null);
+        if (saddleAbility != null) {
+            SaddleEventEffect effect = new SaddleEventEffect();
+            effect.apply(game, saddleAbility);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public SaddleAbility copy() {
         return new SaddleAbility(this);
