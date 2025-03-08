@@ -15,7 +15,7 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 /**
- * @author JayDi85
+ * @author Jmlundeen
  */
 public enum CardsInExileCount implements DynamicValue {
     YOU("you"),

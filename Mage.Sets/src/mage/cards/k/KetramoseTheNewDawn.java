@@ -51,8 +51,7 @@ public final class KetramoseTheNewDawn extends CardImpl {
 
         // Ketramose can't attack or block unless there are seven or more cards in exile.
         this.addAbility(new SimpleStaticAbility(
-            new CantAttackBlockUnlessConditionSourceEffect(new CardsInExileCondition(ComparisonType.MORE_THAN, 6, CardsInExileCount.ALL))
-                .setText("{this} can't attack or block unless there are seven or more cards in exile")
+            new CantAttackBlockUnlessConditionSourceEffect(new CardsInExileCondition(ComparisonType.OR_GREATER, 7))
         ).addHint(CardsInExileCount.ALL.getHint()));
 
         // Whenever one or more cards are put into exile from graveyards and/or the battlefield during your turn, you draw a card and lose 1 life.
