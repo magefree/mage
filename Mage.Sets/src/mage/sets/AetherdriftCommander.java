@@ -125,6 +125,8 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Pia and Kiran Nalaar", 105, Rarity.RARE, mage.cards.p.PiaAndKiranNalaar.class));
         cards.add(new SetCardInfo("Plague Belcher", 97, Rarity.RARE, mage.cards.p.PlagueBelcher.class));
         cards.add(new SetCardInfo("Prairie Stream", 167, Rarity.RARE, mage.cards.p.PrairieStream.class));
+        cards.add(new SetCardInfo("Priest of the Crossing", 6, Rarity.RARE, mage.cards.p.PriestOfTheCrossing.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Priest of the Crossing", 22, Rarity.RARE, mage.cards.p.PriestOfTheCrossing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prophet of the Scarab", 9, Rarity.RARE, mage.cards.p.ProphetOfTheScarab.class));
         cards.add(new SetCardInfo("Pull from Tomorrow", 81, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
         cards.add(new SetCardInfo("Reality Shift", 39, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
