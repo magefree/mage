@@ -361,7 +361,7 @@ public class SecretLairDrop extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 362, Rarity.LAND, mage.cards.basiclands.Mountain.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Forest", 363, Rarity.LAND, mage.cards.basiclands.Forest.class, FULL_ART_BFZ_VARIOUS));
         cards.add(new SetCardInfo("Swords to Plowshares", 364, Rarity.RARE, mage.cards.s.SwordsToPlowshares.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Grim Tutor", 365, Rarity.RARE, mage.cards.g.GrimTutor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Grim Tutor", 365, Rarity.MYTHIC, mage.cards.g.GrimTutor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Blood Moon", 366, Rarity.RARE, mage.cards.b.BloodMoon.class));
         cards.add(new SetCardInfo("Cut // Ribbons", 367, Rarity.RARE, mage.cards.c.CutRibbons.class));
         cards.add(new SetCardInfo("Teferi's Puzzle Box", 368, Rarity.RARE, mage.cards.t.TeferisPuzzleBox.class));
