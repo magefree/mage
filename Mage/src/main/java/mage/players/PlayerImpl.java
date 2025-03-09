@@ -1346,6 +1346,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 castEvent.setZone(fromZone);
                 game.fireEvent(castEvent);
                 if (spell.activate(game, allowedIdentifiers, noMana)) {
+                    game.processAction();
                     GameEvent castedEvent = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST,
                             ability.getId(), ability, playerId, approvingObject);
                     castedEvent.setZone(fromZone);
