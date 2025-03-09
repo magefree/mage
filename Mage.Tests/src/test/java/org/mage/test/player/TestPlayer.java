@@ -2975,10 +2975,11 @@ public class TestPlayer implements Player {
         assertAliasSupportInChoices(false);
 
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, totalMin, totalMax);
+        List<Integer> defaultList = MultiAmountType.prepareDefaultValues(messages, totalMin, totalMax);
         if (needCount == 0) {
             return defaultList;
         }
+
 
         List<Integer> answer = new ArrayList<>(defaultList);
         if (!choices.isEmpty()) {
@@ -4475,19 +4476,6 @@ public class TestPlayer implements Player {
         }
 
         return computerPlayer.playMana(ability, unpaid, promptText, game);
-    }
-
-    @Override
-    public UUID chooseAttackerOrder(List<Permanent> attacker, Game game
-    ) {
-        return computerPlayer.chooseAttackerOrder(attacker, game);
-    }
-
-    @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup,
-                                   List<UUID> blockerOrder, Game game
-    ) {
-        return computerPlayer.chooseBlockerOrder(blockers, combatGroup, blockerOrder, game);
     }
 
     @Override
