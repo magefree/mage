@@ -6,7 +6,6 @@ import mage.game.permanent.Permanent;
 import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
- * Requires AttackedThisTurnWatcher to be added to the card
  *
  * @author balazskristof
  */
