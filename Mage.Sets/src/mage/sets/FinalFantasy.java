@@ -23,8 +23,14 @@ public final class FinalFantasy extends ExpansionSet {
         cards.add(new SetCardInfo("Chaos, the Endless", 221, Rarity.UNCOMMON, mage.cards.c.ChaosTheEndless.class));
         cards.add(new SetCardInfo("Cloud, Planet's Champion", 552, Rarity.MYTHIC, mage.cards.c.CloudPlanetsChampion.class));
         cards.add(new SetCardInfo("Cooking Campsite", 31, Rarity.UNCOMMON, mage.cards.c.CookingCampsite.class));
+        cards.add(new SetCardInfo("Emet-Selch, Unsundered", 218, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Emet-Selch, Unsundered", 394, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Emet-Selch, Unsundered", 483, Rarity.MYTHIC, mage.cards.e.EmetSelchUnsundered.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Garland, Knight of Cornelia", 221, Rarity.UNCOMMON, mage.cards.g.GarlandKnightOfCornelia.class));
         cards.add(new SetCardInfo("Gladiolus Amicitia", 224, Rarity.UNCOMMON, mage.cards.g.GladiolusAmicitia.class));
+        cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 218, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 394, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Hades, Sorcerer of Eld", 483, Rarity.MYTHIC, mage.cards.h.HadesSorcererOfEld.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jumbo Cactuar", 191, Rarity.RARE, mage.cards.j.JumboCactuar.class));
         cards.add(new SetCardInfo("Sazh's Chocobo", 200, Rarity.UNCOMMON, mage.cards.s.SazhsChocobo.class));
         cards.add(new SetCardInfo("Sephiroth, Planet's Heir", 553, Rarity.MYTHIC, mage.cards.s.SephirothPlanetsHeir.class));
