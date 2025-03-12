@@ -12,8 +12,12 @@ import mage.game.permanent.Permanent;
 public class TransformSourceEffect extends OneShotEffect {
 
     public TransformSourceEffect() {
+        this(false);
+    }
+
+    public TransformSourceEffect(boolean it) {
         super(Outcome.Transform);
-        staticText = "transform {this}";
+        staticText = "transform " + (it ? "it" : "{this}");
     }
 
     protected TransformSourceEffect(final TransformSourceEffect effect) {
