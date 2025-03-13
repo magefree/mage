@@ -2,6 +2,8 @@ package mage.cards.o;
 
 import java.util.UUID;
 
+import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.keyword.FreerunningAbility;
@@ -10,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AttackedThisTurnPredicate;
-import mage.watchers.common.AttackedThisTurnWatcher;
 
 /**
  *
@@ -33,8 +34,7 @@ public final class OverpoweringAttack extends CardImpl {
 
         // Untap all creatures you control that attacked this turn. If it's your main phase, there is an additional combat phase after this phase, followed by an additional main phase.
         this.getSpellAbility().addEffect(new UntapAllControllerEffect(filter, "untap all creatures you control that attacked this turn"));
-        this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect("If it's your main phase, there is an additional combat phase after this phase, followed by an additional main phase."));
-        this.getSpellAbility().addWatcher(new AttackedThisTurnWatcher());
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new AddCombatAndMainPhaseEffect(), MyTurnCondition.instance, "If it's your main phase, there is an additional combat phase after this phase, followed by an additional main phase."));
     }
 
     private OverpoweringAttack(final OverpoweringAttack card) {
