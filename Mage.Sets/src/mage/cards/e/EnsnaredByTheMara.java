@@ -91,7 +91,7 @@ class EnsnaredByTheMaraFirstChoice extends VillainousChoice {
 
 class EnsnaredByTheMaraSecondChoice extends VillainousChoice {
     EnsnaredByTheMaraSecondChoice() {
-        super("that player exiles the top four cards of their library and Ensnared by the Mara deals damage equal to the total mana value of those exiled cards to that player","exile four cards and take damage");
+        super("that player exiles the top four cards of their library and {this} deals damage equal to the total mana value of those exiled cards to that player","exile four cards and take damage");
     }
 
     @Override
