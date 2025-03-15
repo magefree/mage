@@ -86,7 +86,7 @@ class OildeepGearhulkEffect extends OneShotEffect {
 
         controller.lookAtCards(targetPlayer.getName() + " Hand", targetPlayer.getHand(), game);
         TargetCard chosenCard = new TargetCardInHand(0, 1, new FilterCard("card to discard"));
-        if (controller.choose(outcome, targetPlayer.getHand(), chosenCard, source, game)) {
+        if (controller.choose(Outcome.Discard, targetPlayer.getHand(), chosenCard, source, game)) {
             Card card = game.getCard(chosenCard.getFirstTarget());
             targetPlayer.discard(card, false, source, game);
             targetPlayer.drawCards(1, source, game);

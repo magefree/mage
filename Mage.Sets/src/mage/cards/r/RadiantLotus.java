@@ -51,7 +51,7 @@ public final class RadiantLotus extends CardImpl {
 class RadiantLotusEffect extends OneShotEffect {
 
     public RadiantLotusEffect() {
-        super(Outcome.Benefit);
+        super(Outcome.AIDontUseIt);
         staticText = "Choose a color. Target player adds three mana of the chosen color for each artifact sacrificed this way";
     }
 

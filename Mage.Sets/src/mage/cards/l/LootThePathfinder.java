@@ -2,6 +2,7 @@ package mage.cards.l;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.costs.CompositeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -17,6 +18,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.target.common.TargetAnyTarget;
 
 /**
  *
@@ -43,14 +45,20 @@ public final class LootThePathfinder extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Exhaust -- {G}, {T}: Add three mana of any one color.
-        this.addAbility(new ExhaustAbility(new AddManaOfAnyColorEffect(3),
-                new CompositeCost(new ManaCostsImpl<>("{G}"), new TapSourceCost(), "{G}, {T}")));
+        Ability abilityOne = new ExhaustAbility(new AddManaOfAnyColorEffect(3), new ManaCostsImpl<>("G"));
+        abilityOne.addCost(new TapSourceCost());
+        this.addAbility(abilityOne);
+
         // Exhaust -- {U}, {T}: Draw three cards.
-        this.addAbility(new ExhaustAbility(new DrawCardSourceControllerEffect(3),
-                new CompositeCost(new ManaCostsImpl<>("{U}"), new TapSourceCost(), "{U}, {T}"),false));
+        Ability abilityTwo = new ExhaustAbility(new DrawCardSourceControllerEffect(3), new ManaCostsImpl<>("U"), false);
+        abilityTwo.addCost(new TapSourceCost());
+        this.addAbility(abilityTwo);
+
         // Exhaust -- {R}, {T}: Loot deals 3 damage to any target.
-        this.addAbility(new ExhaustAbility(new DamageTargetEffect(3),
-                new CompositeCost(new ManaCostsImpl<>("{R}"), new TapSourceCost(), "{R}, {T}"), false));
+        Ability abilityThree = new ExhaustAbility(new DamageTargetEffect(3), new ManaCostsImpl<>("R"), false);
+        abilityThree.addCost(new TapSourceCost());
+        abilityThree.addTarget(new TargetAnyTarget());
+        this.addAbility(abilityThree);
     }
 
     private LootThePathfinder(final LootThePathfinder card) {

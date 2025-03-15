@@ -45,9 +45,8 @@ public final class MomentumBreaker extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new MomentumBreakerEffect()));
         // {2}, Sacrifice this enchantment: You gain life equal to your speed.
         Effect gainLifeEffect = new GainLifeEffect(ControllerSpeedCount.instance).setText("You gain life equal to your speed");
-        Ability ability = (new SimpleActivatedAbility(gainLifeEffect,
-                new CompositeCost(new ManaCostsImpl<>("{2}"), new SacrificeSourceCost(), "{2}, Sacrifice this enchantment")
-                ));
+        Ability ability = new SimpleActivatedAbility(gainLifeEffect,new ManaCostsImpl<>("{2}"));
+        ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
 
@@ -89,13 +88,11 @@ class MomentumBreakerEffect extends OneShotEffect {
                         SubType.VEHICLE.getPredicate()
                 ));
                 filter.add(new ControllerIdPredicate(opponent));
-                if (game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game).isEmpty()) {
-                    player.discard(1, false, false, source, game);
-                } else {
                     Effect effect = new SacrificeEffect(filter, 1, null);
                     effect.setTargetPointer(new FixedTarget(player.getId(), game));
-                    effect.apply(game, source);
-                }
+                    if (!effect.apply(game, source)) {
+                        player.discard(1, false, false, source, game);
+                    }
             }
         });
         return true;
