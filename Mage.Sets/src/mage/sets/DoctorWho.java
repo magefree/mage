@@ -1031,10 +1031,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("The Sixth Doctor", 443, Rarity.RARE, mage.cards.t.TheSixthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Sixth Doctor", 557, Rarity.RARE, mage.cards.t.TheSixthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Sixth Doctor", 764, Rarity.RARE, mage.cards.t.TheSixthDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Sound of Drums", 391, Rarity.RARE, mage.cards.t.TheSoundOfDrums.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Sound of Drums", 702, Rarity.RARE, mage.cards.t.TheSoundOfDrums.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Sound of Drums", 97, Rarity.RARE, mage.cards.t.TheSoundOfDrums.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Sound of Drums", 982, Rarity.RARE, mage.cards.t.TheSoundOfDrums.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Sound of Drums", 391, Rarity.RARE, mage.cards.t.TheSoundOfDrums.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Sound of Drums", 702, Rarity.RARE, mage.cards.t.TheSoundOfDrums.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Sound of Drums", 97, Rarity.RARE, mage.cards.t.TheSoundOfDrums.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Sound of Drums", 982, Rarity.RARE, mage.cards.t.TheSoundOfDrums.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Tenth Doctor", "561z", Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Tenth Doctor", 1037, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Tenth Doctor", 1152, Rarity.MYTHIC, mage.cards.t.TheTenthDoctor.class, NON_FULL_USE_VARIOUS));
