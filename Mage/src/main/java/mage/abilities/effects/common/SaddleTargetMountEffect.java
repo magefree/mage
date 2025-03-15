@@ -34,11 +34,7 @@ public class SaddleTargetMountEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent targetMount = game.getPermanent(getTargetPointer().getFirst(game, source));
-        if (targetMount == null || !targetMount.hasSubtype(SubType.MOUNT, game)) {
-            return false;
-        }
-        return SaddleAbility.applySaddle(targetMount, game);
+        return SaddleAbility.applySaddle(game.getPermanent(getTargetPointer().getFirst(game, source)), game);
     }
 
 }

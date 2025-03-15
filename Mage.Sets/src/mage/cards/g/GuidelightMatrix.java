@@ -41,9 +41,8 @@ public final class GuidelightMatrix extends CardImpl {
         // When this artifact enters, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardSourceControllerEffect(1)));
         // {2}, {T}: Target Mount you control becomes saddled until end of turn. Activate only as a sorcery.
-        Ability saddledAbility = new ActivateAsSorceryActivatedAbility(new SaddleTargetMountEffect(),
-                new CompositeCost(new ManaCostsImpl<>("{2}"), new TapSourceCost(), "{2}, {T}")
-        );
+        Ability saddledAbility = new ActivateAsSorceryActivatedAbility(new SaddleTargetMountEffect(), new ManaCostsImpl<>("{2}"));
+        saddledAbility.addCost(new TapSourceCost());
         saddledAbility.addTarget(new TargetPermanent(mountFilter));
         this.addAbility(saddledAbility);
         // {2}, {T}: Target Vehicle you control becomes an artifact creature until end of turn.
