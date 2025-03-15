@@ -61,10 +61,20 @@ public class YouMaySpendManaAsAnyColorToCastTargetEffect extends AsThoughEffectI
         objectId = CardUtil.getMainCardId(game, objectId); // for split cards
         FixedTarget fixedTarget = ((FixedTarget) getTargetPointer());
         UUID targetId = CardUtil.getMainCardId(game, fixedTarget.getTarget()); // Affects to all card's parts (example: Hostage Taker exile mdf card)
-        return (playerId == null ? source.isControlledBy(affectedControllerId) : playerId.equals(affectedControllerId))
-                && Objects.equals(objectId, targetId)
-                && game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
-                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED);
+
+        // does Object match target?
+        if (!(playerId == null ? source.isControlledBy(affectedControllerId) : playerId.equals(affectedControllerId))
+                || !Objects.equals(objectId, targetId)) {
+            return false;
+        }
+        // Is the object still affected?
+        if (game.getState().getZoneChangeCounter(objectId) <= fixedTarget.getZoneChangeCounter() + 1
+                && (game.getState().getZone(objectId) == Zone.STACK || game.getState().getZone(objectId) == Zone.EXILED)) {
+            return true;
+        }
+        // Object is no longer affected.
+        discard();
+        return false;
     }
 
     @Override
