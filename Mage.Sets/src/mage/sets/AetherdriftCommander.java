@@ -104,6 +104,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Lightning Runner", 103, Rarity.MYTHIC, mage.cards.l.LightningRunner.class));
         cards.add(new SetCardInfo("Liliana, Death's Majesty", 94, Rarity.MYTHIC, mage.cards.l.LilianaDeathsMajesty.class));
         cards.add(new SetCardInfo("Lord of the Accursed", 95, Rarity.UNCOMMON, mage.cards.l.LordOfTheAccursed.class));
+        cards.add(new SetCardInfo("Lost Monarch of Ifnir", 11, Rarity.RARE, mage.cards.l.LostMonarchOfIfnir.class));
         cards.add(new SetCardInfo("Loyal Apprentice", 104, Rarity.UNCOMMON, mage.cards.l.LoyalApprentice.class));
         cards.add(new SetCardInfo("Maskwood Nexus", 132, Rarity.RARE, mage.cards.m.MaskwoodNexus.class));
         cards.add(new SetCardInfo("Midnight Clock", 79, Rarity.RARE, mage.cards.m.MidnightClock.class));
