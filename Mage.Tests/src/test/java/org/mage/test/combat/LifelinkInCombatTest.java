@@ -5,6 +5,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 public class LifelinkInCombatTest extends CardTestPlayerBase {
     @Test
     public void testOneBlockerTrample() {
@@ -43,8 +45,7 @@ public class LifelinkInCombatTest extends CardTestPlayerBase {
         attack(1, playerA, "Brion Stoutarm");
         block(1, playerB, "Boros Recruit", "Brion Stoutarm");
         block(1, playerB, "Suntail Hawk", "Brion Stoutarm");
-        setChoice(playerA, "X=1"); // Damage assignment
-        setChoice(playerA, "X=1"); // Damage assignment
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
         addTarget(playerA, "Brion Stoutarm");
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
 

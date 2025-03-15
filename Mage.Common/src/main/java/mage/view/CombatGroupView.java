@@ -40,7 +40,7 @@ public class CombatGroupView implements Serializable {
                 attackers.put(id, new PermanentView(attacker, game.getCard(attacker.getId()),null, game));
             }
         }
-        for (UUID id: combatGroup.getBlockerOrder()) {
+        for (UUID id: combatGroup.getBlockers()) {
             Permanent blocker = game.getPermanent(id);
             if (blocker != null) {
                 blockers.put(id, new PermanentView(blocker, game.getCard(blocker.getId()), null, game));
