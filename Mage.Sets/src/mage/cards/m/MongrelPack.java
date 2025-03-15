@@ -1,14 +1,13 @@
 package mage.cards.m;
 
 import mage.MageInt;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
+import mage.abilities.common.DiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.TurnPhase;
-import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.GreenDogToken;
@@ -41,10 +40,11 @@ public final class MongrelPack extends CardImpl {
     }
 }
 
-class MongrelPackAbility extends ZoneChangeTriggeredAbility {
+class MongrelPackAbility extends DiesSourceTriggeredAbility {
 
     MongrelPackAbility() {
-        super(Zone.BATTLEFIELD, Zone.GRAVEYARD, new CreateTokenEffect(new GreenDogToken(), 4), "When {this} dies during combat, ", false);
+        super(new CreateTokenEffect(new GreenDogToken(), 4));
+        setTriggerPhrase("When {this} dies during combat, ");
     }
 
     private MongrelPackAbility(MongrelPackAbility ability) {
@@ -58,11 +58,6 @@ class MongrelPackAbility extends ZoneChangeTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (super.checkTrigger(event, game)) {
-            if (game.getTurnPhaseType() == TurnPhase.COMBAT) {
-                return true;
-            }
-        }
-        return false;
+        return game.getTurnPhaseType() == TurnPhase.COMBAT && super.checkTrigger(event, game);
     }
 }
