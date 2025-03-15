@@ -1,19 +1,18 @@
 package mage.cards.p;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnFromYourGraveyardToBattlefieldAllEffect;
-import mage.abilities.effects.common.SacrificeAllEffect;
-import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.*;
 import mage.abilities.effects.common.continuous.BecomesSubtypeAllEffect;
 import mage.abilities.effects.common.continuous.CreaturesBecomeOtherTypeEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -28,9 +27,11 @@ import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.MageObjectReferencePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTargets;
 
 /**
  *
@@ -61,43 +62,7 @@ public final class PushTheLimit extends CardImpl {
     }
 }
 
-class PushTheLimitSacrificeEffect extends OneShotEffect {
-
-    private final Set<Card> cards;
-
-    public PushTheLimitSacrificeEffect(Set<Card> cards) {
-        super(Outcome.Sacrifice);
-        this.cards = cards;
-    }
-
-    public PushTheLimitSacrificeEffect(final PushTheLimitSacrificeEffect effect) {
-        super(effect);
-        this.cards = effect.cards;
-    }
-
-    @Override
-    public PushTheLimitSacrificeEffect copy() {
-        return new PushTheLimitSacrificeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Set<Permanent> permanents = cards.stream()
-                .map(Card::getId)
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toSet());
-        if (permanents.isEmpty()) {
-            return false;
-        }
-        permanents.forEach(permanent -> {
-            permanent.sacrifice(source, game);
-        });
-        return true;
-    }
-}
-
-class PushTheLimitEffect extends ReturnFromYourGraveyardToBattlefieldAllEffect {
+class PushTheLimitEffect extends OneShotEffect {
     private static final FilterCard filter = new FilterCard("Mount and Vehicle cards");
     static {
         filter.add(Predicates.or(
@@ -106,8 +71,9 @@ class PushTheLimitEffect extends ReturnFromYourGraveyardToBattlefieldAllEffect {
         ));
     }
     public PushTheLimitEffect() {
-        super(filter);
-        staticText += ". Sacrifice them at the beginning of the next end step.";
+        super(Outcome.PutCreatureInPlay);
+        staticText = "return all " + filter.getMessage() + " from your graveyard to the battlefield. " +
+                "Sacrifice them at the beginning of the next end step.";
     }
 
     public PushTheLimitEffect(final PushTheLimitEffect effect) {
@@ -126,11 +92,15 @@ class PushTheLimitEffect extends ReturnFromYourGraveyardToBattlefieldAllEffect {
             return false;
         }
         Set<Card> cards = controller.getGraveyard().getCards(filter, source.getControllerId(), source, game);
-        boolean result = controller.moveCards(controller.getGraveyard().getCards(filter, source.getControllerId(), source, game),
-                Zone.BATTLEFIELD, source, game, false, false, false, null);
+        boolean result = controller.moveCards(cards, Zone.BATTLEFIELD, source, game,
+                false, false, false, null);
         if (result) {
-
-            Effect sacrificeEffect = new PushTheLimitSacrificeEffect(cards);
+            List<Permanent> permanentsToSac = cards.stream()
+                    .map(card -> game.getPermanent(card.getId()))
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+            Effect sacrificeEffect = new SacrificeTargetEffect("sacrifice them", source.getControllerId());
+            sacrificeEffect.setTargetPointer(new FixedTargets(permanentsToSac, game));
             game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
         }
         return result;
