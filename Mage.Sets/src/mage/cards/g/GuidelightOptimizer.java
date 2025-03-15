@@ -53,7 +53,7 @@ class ArtifactOrActivatedManaBuilder extends ConditionalManaBuilder {
 
     @Override
     public String getRule() {
-        return "Spend this mana only to cast artifact spells or activate abilities of artifacts";
+        return "Spend this mana only to cast an artifact spells or activate an ability";
     }
 }
 
@@ -61,7 +61,7 @@ class ArtifactOrActivatedConditionalMana extends ConditionalMana {
 
     public ArtifactOrActivatedConditionalMana(Mana mana) {
         super(mana);
-        staticText = "Spend this mana only to cast artifact spells or activate abilities of artifacts";
+        staticText = "Spend this mana only to cast an artifact spells or activate an ability";
         addCondition(new ArtifactOrActivatedManaCondition());
     }
 }

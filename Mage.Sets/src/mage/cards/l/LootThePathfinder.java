@@ -45,17 +45,17 @@ public final class LootThePathfinder extends CardImpl {
         this.addAbility(HasteAbility.getInstance());
 
         // Exhaust -- {G}, {T}: Add three mana of any one color.
-        Ability abilityOne = new ExhaustAbility(new AddManaOfAnyColorEffect(3), new ManaCostsImpl<>("G"));
+        Ability abilityOne = new ExhaustAbility(new AddManaOfAnyColorEffect(3), new ManaCostsImpl<>("{G}"));
         abilityOne.addCost(new TapSourceCost());
         this.addAbility(abilityOne);
 
         // Exhaust -- {U}, {T}: Draw three cards.
-        Ability abilityTwo = new ExhaustAbility(new DrawCardSourceControllerEffect(3), new ManaCostsImpl<>("U"), false);
+        Ability abilityTwo = new ExhaustAbility(new DrawCardSourceControllerEffect(3), new ManaCostsImpl<>("{U}"), false);
         abilityTwo.addCost(new TapSourceCost());
         this.addAbility(abilityTwo);
 
         // Exhaust -- {R}, {T}: Loot deals 3 damage to any target.
-        Ability abilityThree = new ExhaustAbility(new DamageTargetEffect(3), new ManaCostsImpl<>("R"), false);
+        Ability abilityThree = new ExhaustAbility(new DamageTargetEffect(3), new ManaCostsImpl<>("{R}"), false);
         abilityThree.addCost(new TapSourceCost());
         abilityThree.addTarget(new TargetAnyTarget());
         this.addAbility(abilityThree);
