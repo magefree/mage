@@ -289,6 +289,8 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Trygon Predator", 238, Rarity.UNCOMMON, mage.cards.t.TrygonPredator.class));
         cards.add(new SetCardInfo("Twilight Mire", 320, Rarity.RARE, mage.cards.t.TwilightMire.class));
         cards.add(new SetCardInfo("Underground River", 321, Rarity.RARE, mage.cards.u.UndergroundRiver.class));
+        cards.add(new SetCardInfo("Ursine Monstrosity", 36, Rarity.RARE, mage.cards.u.UrsineMonstrosity.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ursine Monstrosity", 63, Rarity.RARE, mage.cards.u.UrsineMonstrosity.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Utter End", 91, Rarity.RARE, mage.cards.u.UtterEnd.class));
         cards.add(new SetCardInfo("Valgavoth, Harrower of Souls", 6, Rarity.MYTHIC, mage.cards.v.ValgavothHarrowerOfSouls.class));
         cards.add(new SetCardInfo("Vault of Whispers", 322, Rarity.COMMON, mage.cards.v.VaultOfWhispers.class));
