@@ -291,10 +291,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Ecstatic Beauty", 688, Rarity.RARE, mage.cards.e.EcstaticBeauty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ecstatic Beauty", 83, Rarity.RARE, mage.cards.e.EcstaticBeauty.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ecstatic Beauty", 974, Rarity.RARE, mage.cards.e.EcstaticBeauty.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ensnared by the Mara", 384, Rarity.RARE, mage.cards.e.EnsnaredByTheMara.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ensnared by the Mara", 689, Rarity.RARE, mage.cards.e.EnsnaredByTheMara.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ensnared by the Mara", 84, Rarity.RARE, mage.cards.e.EnsnaredByTheMara.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Ensnared by the Mara", 975, Rarity.RARE, mage.cards.e.EnsnaredByTheMara.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ensnared by the Mara", 384, Rarity.RARE, mage.cards.e.EnsnaredByTheMara.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ensnared by the Mara", 689, Rarity.RARE, mage.cards.e.EnsnaredByTheMara.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ensnared by the Mara", 84, Rarity.RARE, mage.cards.e.EnsnaredByTheMara.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ensnared by the Mara", 975, Rarity.RARE, mage.cards.e.EnsnaredByTheMara.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Everybody Lives!", 18, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Everybody Lives!", 338, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("Everybody Lives!", 623, Rarity.RARE, mage.cards.e.EverybodyLives.class, NON_FULL_USE_VARIOUS));
