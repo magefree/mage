@@ -147,6 +147,7 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Solemn Simulacrum", 138, Rarity.RARE, mage.cards.s.SolemnSimulacrum.class));
         cards.add(new SetCardInfo("Soul-Guide Lantern", 139, Rarity.UNCOMMON, mage.cards.s.SoulGuideLantern.class));
         cards.add(new SetCardInfo("Spire of Industry", 172, Rarity.RARE, mage.cards.s.SpireOfIndustry.class));
+        cards.add(new SetCardInfo("Stridehangar Automaton", 19, Rarity.RARE, mage.cards.s.StridehangarAutomaton.class));
         cards.add(new SetCardInfo("Sulfur Falls", 173, Rarity.RARE, mage.cards.s.SulfurFalls.class));
         cards.add(new SetCardInfo("Sunken Hollow", 174, Rarity.RARE, mage.cards.s.SunkenHollow.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 37, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
