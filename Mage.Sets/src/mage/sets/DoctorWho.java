@@ -988,8 +988,8 @@ public final class DoctorWho extends ExpansionSet {
         //cards.add(new SetCardInfo("The Moment", 459, Rarity.RARE, mage.cards.t.TheMoment.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Moment", 785, Rarity.RARE, mage.cards.t.TheMoment.class, NON_FULL_USE_VARIOUS));
         //cards.add(new SetCardInfo("The Moonbase", 591, Rarity.COMMON, mage.cards.t.TheMoonbase.class));
-        //cards.add(new SetCardInfo("The Night of the Doctor", 24, Rarity.RARE, mage.cards.t.TheNightOfTheDoctor.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("The Night of the Doctor", 629, Rarity.RARE, mage.cards.t.TheNightOfTheDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Night of the Doctor", 24, Rarity.RARE, mage.cards.t.TheNightOfTheDoctor.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("The Night of the Doctor", 629, Rarity.RARE, mage.cards.t.TheNightOfTheDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ninth Doctor", "560z", Rarity.RARE, mage.cards.t.TheNinthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ninth Doctor", 1023, Rarity.RARE, mage.cards.t.TheNinthDoctor.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("The Ninth Doctor", 1151, Rarity.RARE, mage.cards.t.TheNinthDoctor.class, NON_FULL_USE_VARIOUS));
