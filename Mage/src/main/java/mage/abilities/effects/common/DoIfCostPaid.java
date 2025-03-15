@@ -98,16 +98,12 @@ public class DoIfCostPaid extends OneShotEffect {
         if (player == null || mageObject == null) {
             return false;
         }
-
-        // nothing to pay (do not support mana cost - it's true all the time)
-        if (!this.cost.canPay(source, source, player.getId(), game)) {
-            return false;
-        }
-
         String message = CardUtil.replaceSourceName(makeChooseText(game, source), mageObject.getName());
         Outcome payOutcome = executingEffects.getOutcome(source, this.outcome);
+        // nothing to pay (do not support mana cost - it's true all the time)
+        boolean canPay = cost.canPay(source, source, player.getId(), game);
         boolean didPay = false;
-        if (!optional || player.chooseUse(payOutcome, message, source, game)) {
+        if (canPay && (!optional || player.chooseUse(payOutcome, message, source, game))) {
             cost.clearPaid();
             int bookmark = game.bookmarkState();
             if (cost.pay(source, game, source, player.getId(), false)) {
