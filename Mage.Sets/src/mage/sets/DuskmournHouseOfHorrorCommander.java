@@ -246,6 +246,7 @@ public final class DuskmournHouseOfHorrorCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Stitcher's Supplier", 157, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
         cards.add(new SetCardInfo("Stormfist Crusader", 234, Rarity.RARE, mage.cards.s.StormfistCrusader.class));
         cards.add(new SetCardInfo("Sulfurous Springs", 301, Rarity.RARE, mage.cards.s.SulfurousSprings.class));
+        cards.add(new SetCardInfo("Suspended Sentence", 25, Rarity.RARE, mage.cards.s.SuspendedSentence.class));
         cards.add(new SetCardInfo("Suspicious Bookcase", 95, Rarity.UNCOMMON, mage.cards.s.SuspiciousBookcase.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 106, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Syr Konrad, the Grim", 158, Rarity.UNCOMMON, mage.cards.s.SyrKonradTheGrim.class));
