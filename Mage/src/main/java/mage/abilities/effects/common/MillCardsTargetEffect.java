@@ -10,6 +10,8 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.UUID;
+
 /**
  * @author LevelX2
  */
@@ -38,12 +40,13 @@ public class MillCardsTargetEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            player.millCards(numberCards.calculate(game, source, this), source, game);
-            return true;
+        for (UUID playerId : getTargetPointer().getTargets(game, source)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                player.millCards(numberCards.calculate(game, source, this), source, game);
+            }
         }
-        return false;
+        return true;
     }
 
     @Override

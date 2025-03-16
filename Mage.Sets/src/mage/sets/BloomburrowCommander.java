@@ -97,6 +97,7 @@ public final class BloomburrowCommander extends ExpansionSet {
         cards.add(new SetCardInfo("End-Raze Forerunners", 214, Rarity.RARE, mage.cards.e.EndRazeForerunners.class));
         cards.add(new SetCardInfo("Esika's Chariot", 215, Rarity.RARE, mage.cards.e.EsikasChariot.class));
         cards.add(new SetCardInfo("Etali, Primal Storm", 196, Rarity.RARE, mage.cards.e.EtaliPrimalStorm.class));
+        cards.add(new SetCardInfo("Evercoat Ursine", 30, Rarity.RARE, mage.cards.e.EvercoatUrsine.class));
         cards.add(new SetCardInfo("Evolving Wilds", 302, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Exotic Orchard", 131, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Explore", 216, Rarity.COMMON, mage.cards.e.Explore.class));

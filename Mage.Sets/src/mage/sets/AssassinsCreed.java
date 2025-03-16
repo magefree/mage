@@ -221,8 +221,8 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Murder", 92, Rarity.UNCOMMON, mage.cards.m.Murder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Nurturing Peatland", 114, Rarity.RARE, mage.cards.n.NurturingPeatland.class));
         cards.add(new SetCardInfo("Origin of the Hidden Ones", 36, Rarity.UNCOMMON, mage.cards.o.OriginOfTheHiddenOnes.class));
-        //cards.add(new SetCardInfo("Overpowering Attack", 218, Rarity.UNCOMMON, mage.cards.o.OverpoweringAttack.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Overpowering Attack", 37, Rarity.UNCOMMON, mage.cards.o.OverpoweringAttack.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Overpowering Attack", 218, Rarity.UNCOMMON, mage.cards.o.OverpoweringAttack.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Overpowering Attack", 37, Rarity.UNCOMMON, mage.cards.o.OverpoweringAttack.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Palazzo Archers", 222, Rarity.UNCOMMON, mage.cards.p.PalazzoArchers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Palazzo Archers", 42, Rarity.UNCOMMON, mage.cards.p.PalazzoArchers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Path to Exile", 178, Rarity.UNCOMMON, mage.cards.p.PathToExile.class, NON_FULL_USE_VARIOUS));

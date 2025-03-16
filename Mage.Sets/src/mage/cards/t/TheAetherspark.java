@@ -100,7 +100,7 @@ class TheAethersparkEffect extends RestrictionEffect {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         return Optional
-                .ofNullable(source.getControllerId())
+                .ofNullable(source.getSourceId())
                 .map(game::getPermanent)
                 .map(Permanent::getAttachedTo)
                 .map(game::getPermanent)

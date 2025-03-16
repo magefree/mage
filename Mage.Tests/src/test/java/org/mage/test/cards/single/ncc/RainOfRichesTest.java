@@ -2,7 +2,6 @@ package org.mage.test.cards.single.ncc;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -63,7 +62,6 @@ public class RainOfRichesTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore("Does not work until actions are processed between the last mana being paid and the spell being cast.")
     public void test_Cast_Two_Using_Treasures() {
         setStrictChooseMode(true);
         skipInitShuffling();
@@ -91,7 +89,6 @@ public class RainOfRichesTest extends CardTestPlayerBase {
     }
 
     @Test
-    @Ignore("Does not work until actions are processed between the last mana being paid and the spell being cast.")
     public void test_Cast_SomethingElse_Then_Cast_Using_Treasure() {
         setStrictChooseMode(true);
 

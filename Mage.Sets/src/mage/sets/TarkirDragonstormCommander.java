@@ -19,6 +19,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         super("Tarkir: Dragonstorm Commander", "TDC", ExpansionSet.buildDate(2025, 4, 11), SetType.SUPPLEMENTAL);
         this.hasBasicLands = false;
 
+        cards.add(new SetCardInfo("Betor, Ancestor's Voice", 1, Rarity.MYTHIC, mage.cards.b.BetorAncestorsVoice.class));
         cards.add(new SetCardInfo("Teval, the Balanced Scale", 8, Rarity.MYTHIC, mage.cards.t.TevalTheBalancedScale.class));
     }
 }
