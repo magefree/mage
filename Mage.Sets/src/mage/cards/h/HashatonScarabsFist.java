@@ -7,10 +7,13 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenCopyTargetEffect;
 import mage.abilities.effects.common.DiscardCardControllerTriggeredAbility;
 import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.hint.StaticHint;
+import mage.cards.Card;
 import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.constants.SuperType;
@@ -38,7 +41,9 @@ public final class HashatonScarabsFist extends CardImpl {
 
         // Whenever you discard a creature card, you may pay {2}{U}. If you do, create a tapped token that's a copy of that card, except it's a 4/4 black Zombie.
         final Ability ability = new DiscardCardControllerTriggeredAbility(
-                new DoIfCostPaid(new HashatonScarabsFistEffect(), new ManaCostsImpl<>("{2}{U}")), false, StaticFilters.FILTER_CARD_CREATURE_A
+                new DoIfCostPaid(new HashatonScarabsFistEffect(), new ManaCostsImpl<>("{2}{U}"))
+                        .withChooseHint(new HashatonScarabsFistHint()),
+                false, StaticFilters.FILTER_CARD_CREATURE_A
         );
         this.addAbility(ability);
     }
@@ -50,6 +55,27 @@ public final class HashatonScarabsFist extends CardImpl {
     @Override
     public HashatonScarabsFist copy() {
         return new HashatonScarabsFist(this);
+    }
+}
+
+class HashatonScarabsFistHint extends StaticHint {
+
+    public HashatonScarabsFistHint() {
+        super("");
+    }
+
+    @Override
+    public String getText(Game game, Ability source) {
+        if (source.getEffects().isEmpty()) {
+            return "";
+        }
+        for (Effect effect : source.getEffects()) {
+            Card discardedCard = (Card) effect.getValue("discardedCard");
+            if (discardedCard != null) {
+                return "Discarded card: " + discardedCard.getName();
+            }
+        }
+        return "";
     }
 }
 
