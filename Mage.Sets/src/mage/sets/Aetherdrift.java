@@ -141,6 +141,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Grim Bauble", 88, Rarity.COMMON, mage.cards.g.GrimBauble.class));
         cards.add(new SetCardInfo("Grim Javelineer", 89, Rarity.COMMON, mage.cards.g.GrimJavelineer.class));
         cards.add(new SetCardInfo("Guardian Sunmare", 15, Rarity.RARE, mage.cards.g.GuardianSunmare.class));
+        cards.add(new SetCardInfo("Guidelight Optimizer", 45, Rarity.COMMON, mage.cards.g.GuidelightOptimizer.class));
         cards.add(new SetCardInfo("Guidelight Pathmaker", 206, Rarity.UNCOMMON, mage.cards.g.GuidelightPathmaker.class));
         cards.add(new SetCardInfo("Guidelight Synergist", 16, Rarity.UNCOMMON, mage.cards.g.GuidelightSynergist.class));
         cards.add(new SetCardInfo("Haunt the Network", 207, Rarity.UNCOMMON, mage.cards.h.HauntTheNetwork.class));
@@ -170,6 +171,11 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Lightshield Parry", 19, Rarity.COMMON, mage.cards.l.LightshieldParry.class));
         cards.add(new SetCardInfo("Lightwheel Enhancements", 20, Rarity.COMMON, mage.cards.l.LightwheelEnhancements.class));
         cards.add(new SetCardInfo("Locust Spray", 95, Rarity.UNCOMMON, mage.cards.l.LocustSpray.class));
+        cards.add(new SetCardInfo("Loot, the Pathfinder", 212, Rarity.MYTHIC, mage.cards.l.LootThePathfinder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Loot, the Pathfinder", 391, Rarity.MYTHIC, mage.cards.l.LootThePathfinder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Loot, the Pathfinder", 404, Rarity.MYTHIC, mage.cards.l.LootThePathfinder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Loot, the Pathfinder", 414, Rarity.MYTHIC, mage.cards.l.LootThePathfinder.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Loot, the Pathfinder", 484, Rarity.MYTHIC, mage.cards.l.LootThePathfinder.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lotusguard Disciple", 21, Rarity.COMMON, mage.cards.l.LotusguardDisciple.class));
         cards.add(new SetCardInfo("Loxodon Surveyor", 167, Rarity.COMMON, mage.cards.l.LoxodonSurveyor.class));
         cards.add(new SetCardInfo("Lumbering Worldwagon", 168, Rarity.RARE, mage.cards.l.LumberingWorldwagon.class));
@@ -191,6 +197,7 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Migrating Ketradon", 170, Rarity.COMMON, mage.cards.m.MigratingKetradon.class));
         cards.add(new SetCardInfo("Mindspring Merfolk", 51, Rarity.RARE, mage.cards.m.MindspringMerfolk.class));
         cards.add(new SetCardInfo("Molt Tender", 171, Rarity.UNCOMMON, mage.cards.m.MoltTender.class));
+        cards.add(new SetCardInfo("Momentum Breaker", 97, Rarity.UNCOMMON, mage.cards.m.MomentumBreaker.class));
         cards.add(new SetCardInfo("Monument to Endurance", 237, Rarity.RARE, mage.cards.m.MonumentToEndurance.class));
         cards.add(new SetCardInfo("Mountain", 286, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mu Yanling, Wind Rider", 52, Rarity.MYTHIC, mage.cards.m.MuYanlingWindRider.class));
@@ -199,6 +206,10 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Nesting Bot", 22, Rarity.UNCOMMON, mage.cards.n.NestingBot.class));
         cards.add(new SetCardInfo("Night Market", 258, Rarity.COMMON, mage.cards.n.NightMarket.class));
         cards.add(new SetCardInfo("Nimble Thopterist", 53, Rarity.COMMON, mage.cards.n.NimbleThopterist.class));
+        cards.add(new SetCardInfo("Oildeep Gearhulk", 215, Rarity.MYTHIC, mage.cards.o.OildeepGearhulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oildeep Gearhulk", 351, Rarity.MYTHIC, mage.cards.o.OildeepGearhulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oildeep Gearhulk", 487, Rarity.MYTHIC, mage.cards.o.OildeepGearhulk.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Oildeep Gearhulk", 550, Rarity.MYTHIC, mage.cards.o.OildeepGearhulk.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ooze Patrol", 172, Rarity.UNCOMMON, mage.cards.o.OozePatrol.class));
         cards.add(new SetCardInfo("Outpace Oblivion", 139, Rarity.UNCOMMON, mage.cards.o.OutpaceOblivion.class));
         cards.add(new SetCardInfo("Oviya, Automech Artisan", 173, Rarity.RARE, mage.cards.o.OviyaAutomechArtisan.class));
@@ -218,6 +229,11 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Pyrewood Gearhulk", 216, Rarity.MYTHIC, mage.cards.p.PyrewoodGearhulk.class));
         cards.add(new SetCardInfo("Quag Feast", 100, Rarity.RARE, mage.cards.q.QuagFeast.class));
         cards.add(new SetCardInfo("Racers' Scoreboard", 239, Rarity.UNCOMMON, mage.cards.r.RacersScoreboard.class));
+        cards.add(new SetCardInfo("Radiant Lotus", 240, Rarity.MYTHIC, mage.cards.r.RadiantLotus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Radiant Lotus", 395, Rarity.MYTHIC, mage.cards.r.RadiantLotus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Radiant Lotus", 406, Rarity.MYTHIC, mage.cards.r.RadiantLotus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Radiant Lotus", 416, Rarity.MYTHIC, mage.cards.r.RadiantLotus.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Radiant Lotus", 500, Rarity.MYTHIC, mage.cards.r.RadiantLotus.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rangers' Aetherhive", 217, Rarity.UNCOMMON, mage.cards.r.RangersAetherhive.class));
         cards.add(new SetCardInfo("Rangers' Refueler", 55, Rarity.UNCOMMON, mage.cards.r.RangersRefueler.class));
         cards.add(new SetCardInfo("Reckless Velocitaur", 144, Rarity.UNCOMMON, mage.cards.r.RecklessVelocitaur.class));
@@ -255,8 +271,17 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Scrounging Skyray", 60, Rarity.UNCOMMON, mage.cards.s.ScroungingSkyray.class));
         cards.add(new SetCardInfo("Shefet Archfiend", 104, Rarity.UNCOMMON, mage.cards.s.ShefetArchfiend.class));
         cards.add(new SetCardInfo("Silken Strength", 180, Rarity.COMMON, mage.cards.s.SilkenStrength.class));
+        cards.add(new SetCardInfo("Sita Varma, Masked Racer", 223, Rarity.RARE, mage.cards.s.SitaVarmaMaskedRacer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sita Varma, Masked Racer", 368, Rarity.RARE, mage.cards.s.SitaVarmaMaskedRacer.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sita Varma, Masked Racer", 493, Rarity.RARE, mage.cards.s.SitaVarmaMaskedRacer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skybox Ferry", 243, Rarity.COMMON, mage.cards.s.SkyboxFerry.class));
         cards.add(new SetCardInfo("Skycrash", 146, Rarity.UNCOMMON, mage.cards.s.Skycrash.class));
+        cards.add(new SetCardInfo("Skyseer's Chariot", 28, Rarity.RARE, mage.cards.s.SkyseersChariot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skyseer's Chariot", 296, Rarity.RARE, mage.cards.s.SkyseersChariot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skyseer's Chariot", 432, Rarity.RARE, mage.cards.s.SkyseersChariot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skyseer's Chariot", 518, Rarity.RARE, mage.cards.s.SkyseersChariot.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skyserpent Seeker", 224, Rarity.UNCOMMON, mage.cards.s.SkyserpentSeeker.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Skyserpent Seeker", 420, Rarity.UNCOMMON, mage.cards.s.SkyserpentSeeker.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Skystreak Engineer", 61, Rarity.COMMON, mage.cards.s.SkystreakEngineer.class));
         cards.add(new SetCardInfo("Slick Imitator", 62, Rarity.UNCOMMON, mage.cards.s.SlickImitator.class));
         cards.add(new SetCardInfo("Spectacular Pileup", 29, Rarity.RARE, mage.cards.s.SpectacularPileup.class, NON_FULL_USE_VARIOUS));
@@ -299,6 +324,8 @@ public final class Aetherdrift extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Cove", 267, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Transit Mage", 70, Rarity.UNCOMMON, mage.cards.t.TransitMage.class));
         cards.add(new SetCardInfo("Trip Up", 71, Rarity.COMMON, mage.cards.t.TripUp.class));
+        cards.add(new SetCardInfo("Tune Up", 33, Rarity.UNCOMMON, mage.cards.t.TuneUp.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Tune Up", 417, Rarity.UNCOMMON, mage.cards.t.TuneUp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Tyrox, Saurid Tyrant", 149, Rarity.UNCOMMON, mage.cards.t.TyroxSauridTyrant.class));
         cards.add(new SetCardInfo("Unstoppable Plan", 72, Rarity.RARE, mage.cards.u.UnstoppablePlan.class));
         cards.add(new SetCardInfo("Unswerving Sloth", 34, Rarity.UNCOMMON, mage.cards.u.UnswervingSloth.class));
