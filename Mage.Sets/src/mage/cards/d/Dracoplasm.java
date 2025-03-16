@@ -118,6 +118,7 @@ class DracoplasmEffect extends ReplacementEffectImpl {
         }
         ContinuousEffect effect = new SetBasePowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield);
         game.addEffect(effect, source);
+        this.discard(); // prevent multiple replacements e.g. on blink
         return false;
     }
 }

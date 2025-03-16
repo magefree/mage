@@ -107,6 +107,7 @@ class WoodElementalEffect extends ReplacementEffectImpl {
             }
         }
         game.addEffect(new SetBasePowerToughnessSourceEffect(value, value, Duration.WhileOnBattlefield), source);
+        this.discard(); // prevent multiple replacements e.g. on blink
         return false;
     }
 }

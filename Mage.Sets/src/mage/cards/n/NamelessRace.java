@@ -123,6 +123,7 @@ class NamelessRaceEffect extends ReplacementEffectImpl {
                 payAmount, payAmount, Duration.WhileOnBattlefield
         ), source);
         creature.addInfo("life paid", CardUtil.addToolTipMarkTags("Life paid: " + payAmount), game);
+        this.discard(); // prevent multiple replacements e.g. on blink
         return false;
     }
 }

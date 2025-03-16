@@ -32,4 +32,26 @@ public class MinionOfTheWastesTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, minion, 3, 3);
     }
 
+    @Test
+    public void testFlicker() {
+        addCard(Zone.BATTLEFIELD, playerA, "Scrubland", 7);
+        addCard(Zone.HAND, playerA, minion);
+        addCard(Zone.HAND, playerA, "Cloudshift"); // flicker
+
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, minion);
+        setChoice(playerA, "X=3");
+
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", minion);
+        setChoice(playerA, "X=2");
+
+        setStrictChooseMode(true);
+        setStopAt(2, PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerA, 15);
+        assertPowerToughness(playerA, minion, 2, 2);
+    }
+
+    // Note similar cards: Wood Elemental, Nameless Race, Dracoplasm
+
 }
