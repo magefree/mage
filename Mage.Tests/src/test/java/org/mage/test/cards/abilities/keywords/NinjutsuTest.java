@@ -45,6 +45,7 @@ public class NinjutsuTest extends CardTestPlayerBase {
         setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
+        assertLife(playerB, 17);
         assertPowerToughness(playerA, shinobi, 3, 2);
         assertPermanentCount(playerA, "Illusion Token", 1);
         assertHandCount(playerA, drake, 1);
