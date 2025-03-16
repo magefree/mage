@@ -63,8 +63,7 @@ enum MimeoPlasmReveredOneTargetAdjuster implements TargetAdjuster {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         ability.getTargets().clear();
-        int zccOffset = game.getCard(ability.getSourceId()).getZoneChangeCounter(game);
-        ability.addTarget(new TargetCardInExile(StaticFilters.FILTER_CARD_CREATURES, CardUtil.getExileZoneId(game, ability, -zccOffset)));
+        ability.addTarget(new TargetCardInExile(StaticFilters.FILTER_CARD_CREATURES, CardUtil.getExileZoneId(game, ability, -1)));
     }
 }
 
@@ -105,9 +104,10 @@ class MimeoplasmReveredOneEntersEffect extends OneShotEffect {
         for (UUID targetId : target.getTargets()) {
             cards.add(controller.getGraveyard().get(targetId, game));
         }
-
+        int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
+        UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), zcc);
         if (!controller.moveCardsToExile(cards.getCards(game), source, game, true,
-                CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source))) {
+                exileId, CardUtil.getSourceName(game, source))) {
             return false;
         }
         int counters = cards.count(StaticFilters.FILTER_CARD_CREATURE, game) * 3;
