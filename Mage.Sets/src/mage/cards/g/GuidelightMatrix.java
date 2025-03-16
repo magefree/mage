@@ -49,7 +49,8 @@ public final class GuidelightMatrix extends CardImpl {
         Ability animateVehicleAbility = new SimpleActivatedAbility(
                 new AddCardTypeTargetEffect(Duration.EndOfTurn, CardType.ARTIFACT, CardType.CREATURE)
                         .setText("Target Vehicle you control becomes an artifact creature until end of turn."),
-                new CompositeCost(new ManaCostsImpl<>("{2}"), new TapSourceCost(), "{2}, {T}"));
+                new ManaCostsImpl<>("{2}"));
+        animateVehicleAbility.addCost(new TapSourceCost());
         animateVehicleAbility.addTarget(new TargetPermanent(vehicleFilter));
         this.addAbility(animateVehicleAbility);
     }
