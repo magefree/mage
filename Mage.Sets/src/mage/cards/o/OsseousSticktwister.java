@@ -10,6 +10,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.common.CardTypesInGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
 
+import java.util.HashMap;
 import java.util.Set;
 import java.util.UUID;
 import mage.MageInt;
@@ -63,7 +64,7 @@ class OsseousSticktwisterEffect extends OneShotEffect {
     OsseousSticktwisterEffect() {
         super(Outcome.Benefit);
         this.staticText = "each opponent may sacrifice a nonland permanent or discard a card. Then {this} "
-                       + "deals damage equal to it's power to each opponent who didn't sacrifice a permanent or discard a card in this way.";
+                       + "deals damage equal to its power to each opponent who didn't sacrifice a permanent or discard a card in this way.";
     }
 
     OsseousSticktwisterEffect(final OsseousSticktwisterEffect effect) {
@@ -80,6 +81,7 @@ class OsseousSticktwisterEffect extends OneShotEffect {
 
         Set<UUID> opponentsIds = game.getOpponents(source.getControllerId());
 
+        HashMap<UUID, MageInt> damageMap = new HashMap<UUID, MageInt>();
         for (UUID id : game.getState().getPlayerList(source.getControllerId())) {
             if (!opponentsIds.contains(id)) {
                 continue;
@@ -100,8 +102,7 @@ class OsseousSticktwisterEffect extends OneShotEffect {
             MageInt dmg = game.getPermanent(source.getSourceId()).getPower();
             boolean canPay = cost.canPay(source, source, id, game);
 
-            if (canPay)
-            {
+            if (canPay) {
                 // Face the choice.
                 boolean choice = opponent.chooseUse(
                     Outcome.Detriment, 
@@ -114,8 +115,11 @@ class OsseousSticktwisterEffect extends OneShotEffect {
                 }
             }
             // They either can't discard or sacrifice or chose not to.
-            opponent.damage(dmg.getValue(), source.getSourceId(), source, game);
+            damageMap.put(id, dmg);
         } // End for
+
+        // Do the damage to the opponents that chose not to pay the cost.
+        damageMap.forEach((id, dmg) -> game.getPlayer(id).damage(dmg.getValue(), source.getSourceId(), source, game));
 
         return true;
     }
