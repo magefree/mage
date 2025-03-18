@@ -90,7 +90,7 @@ class SinSpirasPunishmentEffect extends OneShotEffect {
             effect.apply(game, source);
             game.processAction();
             // If the exiled card is a land card, repeat this process
-            repeat = card.getCardType().contains(CardType.LAND);
+            repeat = card.getCardType(game).contains(CardType.LAND);
         }
         return true;
     }
