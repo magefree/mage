@@ -121,6 +121,17 @@ public class CreateTokenEffect extends OneShotEffect {
         return lastAddedTokenIds;
     }
 
+    public void sacrificeTokensCreatedAtNextEndStep(Game game, Ability source) {
+        for (UUID tokenId : this.getLastAddedTokenIds()) {
+            Permanent tokenPermanent = game.getPermanent(tokenId);
+            if (tokenPermanent != null) {
+                SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect();
+                sacrificeEffect.setTargetPointer(new FixedTarget(tokenPermanent, game));
+                game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(sacrificeEffect), source);
+            }
+        }
+    }
+
     public void exileTokensCreatedAtNextEndStep(Game game, Ability source) {
         for (UUID tokenId : this.getLastAddedTokenIds()) {
             Permanent tokenPermanent = game.getPermanent(tokenId);
