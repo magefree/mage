@@ -19,7 +19,7 @@ import mage.players.Player;
 
 /**
  *
- * @author padfoot
+ * @author padfoothelix
  */
 public final class TheSecondDoctor extends CardImpl {
 
@@ -71,22 +71,20 @@ class TheSecondDoctorEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    if (player.chooseUse(Outcome.DrawCard, "Draw a card ?", source, game)) {
-			    player.drawCards(1, source, game);
-			if (game.getOpponents(source.getControllerId()).contains(playerId)) {
-			    RestrictionEffect effect = new TheSecondDoctorCantAttackEffect(player.getId());
-			    game.addEffect(effect, source);
-			}
-                    }
-                }
-            }
-            return true;
+        if (controller == null) {
+	    return false;
+	}
+        for (UUID playerId : game.getState().getPlayersInRange(controller.getId(), game)) {
+            Player player = game.getPlayer(playerId);
+            if (player != null
+	            && player.chooseUse(Outcome.DrawCard, "Draw a card ?", source, game)
+		    && player.drawCards(1, source, game) > 0
+		    && game.getOpponents(controller.getId()).contains(playerId)) {
+	        RestrictionEffect effect = new TheSecondDoctorCantAttackEffect(player.getId());
+		game.addEffect(effect, source);
+	    }
         }
-        return false;
+        return true;
     }
 }
 
@@ -138,8 +136,9 @@ class TheSecondDoctorCantAttackEffect extends RestrictionEffect {
 	     return true;
 	}
 	// defender is a permanent
-	if (game.getPermanent(defenderId) != null) {
-	     return !game.getPermanent(defenderId).getControllerId().equals(controllerId);
+	Permanent defender = game.getPermanent(defenderId);
+	if (defender != null) {
+	     return !defender.isControlledBy(controllerId);
 	}
 	// defender is a player
         return !defenderId.equals(controllerId);
