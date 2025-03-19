@@ -91,6 +91,7 @@ class GristTheHungerTideTypeEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Outcome.Benefit);
         staticText = "as long as {this} isn't on the battlefield, " +
                 "it's a 1/1 Insect creature in addition to its other types";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private GristTheHungerTideTypeEffect(final GristTheHungerTideTypeEffect effect) {

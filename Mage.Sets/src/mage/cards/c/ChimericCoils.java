@@ -24,7 +24,7 @@ public final class ChimericCoils extends CardImpl {
     public ChimericCoils(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{1}");
 
-        // {X}{1}: Chimeric Coils becomes an X/X Construct artifact creature. Sacrifice it at the beginning of thhe next end step.
+        // {X}{1}: Chimeric Coils becomes an X/X Construct artifact creature. Sacrifice it at the beginning of the next end step.
         Ability ability = new SimpleActivatedAbility(new ChimericCoilsEffect(), new ManaCostsImpl<>("{X}{1}"));
         ability.addEffect(new CreateDelayedTriggeredAbilityEffect(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(new SacrificeSourceEffect())));
         this.addAbility(ability);
@@ -45,6 +45,7 @@ class ChimericCoilsEffect extends ContinuousEffectImpl {
     ChimericCoilsEffect() {
         super(Duration.Custom, Outcome.BecomeCreature);
         staticText = "{this} becomes an X/X Construct artifact creature";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private ChimericCoilsEffect(final ChimericCoilsEffect effect) {

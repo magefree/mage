@@ -144,6 +144,7 @@ class TezzeretBetrayerOfFleshTypeEffect extends ContinuousEffectImpl {
         super(Duration.Custom, Outcome.BecomeCreature);
         staticText = "target artifact becomes an artifact creature. " +
                 "If it isn't a Vehicle, it has base power and toughness 4/4";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private TezzeretBetrayerOfFleshTypeEffect(final TezzeretBetrayerOfFleshTypeEffect effect) {

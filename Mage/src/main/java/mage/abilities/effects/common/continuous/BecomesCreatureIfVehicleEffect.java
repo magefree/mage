@@ -16,6 +16,7 @@ public class BecomesCreatureIfVehicleEffect extends ContinuousEffectImpl {
     public BecomesCreatureIfVehicleEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.staticText = "As long as enchanted permanent is a Vehicle, it's a creature in addition to its other types";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     protected BecomesCreatureIfVehicleEffect(final BecomesCreatureIfVehicleEffect effect) {

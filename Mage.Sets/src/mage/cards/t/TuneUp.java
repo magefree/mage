@@ -3,14 +3,11 @@ package mage.cards.t;
 import java.util.UUID;
 
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
-import mage.abilities.effects.common.ReturnFromYourGraveyardToBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -42,11 +39,12 @@ public final class TuneUp extends CardImpl {
     }
 }
 
-class TuneUpEffect extends OneShotEffect {
+class TuneUpEffect extends ContinuousEffectImpl {
 
     TuneUpEffect() {
-        super(Outcome.BecomeCreature);
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.staticText = "If it's a Vehicle, it becomes an artifact creature";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private TuneUpEffect(final TuneUpEffect effect) {
