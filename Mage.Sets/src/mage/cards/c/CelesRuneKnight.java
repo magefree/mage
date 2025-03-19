@@ -86,10 +86,19 @@ class CelesRuneKnightEffect extends OneShotEffect {
 
 class CelesRuneKnightTriggeredAbility extends EntersBattlefieldOneOrMoreTriggeredAbility {
 
-    public CelesRuneKnightTriggeredAbility() {
+    CelesRuneKnightTriggeredAbility() {
         super(new AddCountersAllEffect(CounterType.P1P1.createInstance(), StaticFilters.FILTER_CONTROLLED_CREATURE), StaticFilters.FILTER_OTHER_CONTROLLED_CREATURES, TargetController.YOU);
         setTriggerPhrase("Whenever one or more other creatures you control enter, "
             + "if one or more of them entered from a graveyard or was cast from a graveyard, ");
+    }
+
+    private CelesRuneKnightTriggeredAbility(final CelesRuneKnightTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public CelesRuneKnightTriggeredAbility copy() {
+        return new CelesRuneKnightTriggeredAbility(this);
     }
     
     @Override
