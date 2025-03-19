@@ -10,6 +10,8 @@ import mage.abilities.effects.common.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AttackedThisTurnPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.turn.Turn;
@@ -26,7 +28,7 @@ public final class FullThrottle extends CardImpl {
 
         // After this main phase, there are two additional combat phases.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new AdditionalCombatPhaseEffect(2, TargetController.ANY),
+                new AdditionalCombatPhaseEffect(2),
                 new OrCondition(new IsPhaseCondition(TurnPhase.PRECOMBAT_MAIN), new IsPhaseCondition(TurnPhase.POSTCOMBAT_MAIN)),
                 "After this main phase, there are two additional combat phases."
         ));
@@ -46,9 +48,13 @@ public final class FullThrottle extends CardImpl {
 }
 
 class FullThrottleTriggeredAbility extends DelayedTriggeredAbility {
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures that attacked this turn");
 
+    static {
+        filter.add(AttackedThisTurnPredicate.instance);
+    }
     public FullThrottleTriggeredAbility() {
-        super(new UntapAllThatAttackedEffect(), Duration.EndOfTurn, false);
+        super(new UntapAllEffect(filter), Duration.EndOfTurn, false);
         setTriggerPhrase("At the beginning of each combat this turn, ");
     }
 
