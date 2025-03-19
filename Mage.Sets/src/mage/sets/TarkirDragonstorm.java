@@ -43,6 +43,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Narset, Jeskai Waymaster", 209, Rarity.RARE, mage.cards.n.NarsetJeskaiWaymaster.class));
         cards.add(new SetCardInfo("Plains", 277, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Rally the Monastery", 19, Rarity.UNCOMMON, mage.cards.r.RallyTheMonastery.class));
+        cards.add(new SetCardInfo("Reigning Victor", 216, Rarity.COMMON, mage.cards.r.ReigningVictor.class));
         cards.add(new SetCardInfo("Ringing Strike Mastery", 53, Rarity.COMMON, mage.cards.r.RingingStrikeMastery.class));
         cards.add(new SetCardInfo("Roiling Dragonstorm", 55, Rarity.UNCOMMON, mage.cards.r.RoilingDragonstorm.class));
         cards.add(new SetCardInfo("Rugged Highlands", 265, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
