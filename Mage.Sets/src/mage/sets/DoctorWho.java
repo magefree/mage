@@ -590,10 +590,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Path of Ancestry", 884, Rarity.COMMON, mage.cards.p.PathOfAncestry.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Path to Exile", 210, Rarity.UNCOMMON, mage.cards.p.PathToExile.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Path to Exile", 801, Rarity.UNCOMMON, mage.cards.p.PathToExile.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Peri Brown", 26, Rarity.RARE, mage.cards.p.PeriBrown.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Peri Brown", 344, Rarity.RARE, mage.cards.p.PeriBrown.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Peri Brown", 631, Rarity.RARE, mage.cards.p.PeriBrown.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Peri Brown", 935, Rarity.RARE, mage.cards.p.PeriBrown.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Peri Brown", 26, Rarity.RARE, mage.cards.p.PeriBrown.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Peri Brown", 344, Rarity.RARE, mage.cards.p.PeriBrown.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Peri Brown", 631, Rarity.RARE, mage.cards.p.PeriBrown.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Peri Brown", 935, Rarity.RARE, mage.cards.p.PeriBrown.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 1156, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 1157, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Plains", 196, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
