@@ -1,19 +1,12 @@
 package mage.cards.a;
 
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.costs.common.ExileSourceFromGraveCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.common.RenewAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
 
@@ -31,14 +24,7 @@ public final class AgentOfKotis extends CardImpl {
         this.toughness = new MageInt(1);
 
         // Renew -- {3}{U}, Exile this card from your graveyard: Put two +1/+1 counters on target creature. Activate only as a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(
-                Zone.GRAVEYARD,
-                new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                new ManaCostsImpl<>("{3}{U}")
-        );
-        ability.addCost(new ExileSourceFromGraveCost());
-        ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability.setAbilityWord(AbilityWord.RENEW));
+        this.addAbility(new RenewAbility("{3}{U}", CounterType.P1P1.createInstance(2)));
     }
 
     private AgentOfKotis(final AgentOfKotis card) {
