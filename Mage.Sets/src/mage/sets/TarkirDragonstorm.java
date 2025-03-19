@@ -18,7 +18,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
     private TarkirDragonstorm() {
         super("Tarkir: Dragonstorm", "TDM", ExpansionSet.buildDate(2025, 4, 11), SetType.EXPANSION);
         this.blockName = "Tarkir: Dragonstorm"; // for sorting in GUI
-        this.hasBasicLands = false; // temporary
+        this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Agent of Kotis", 36, Rarity.COMMON, mage.cards.a.AgentOfKotis.class));
         cards.add(new SetCardInfo("Barrensteppe Siege", 171, Rarity.RARE, mage.cards.b.BarrensteppeSiege.class));
