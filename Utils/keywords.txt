@@ -85,6 +85,7 @@ Melee|new|
 Menace|new|
 Mentor|new|
 Miracle|manaString|
+Mobilize|number|
 Modular|card, number|
 Mountaincycling|cost|
 Mountainwalk|new|
