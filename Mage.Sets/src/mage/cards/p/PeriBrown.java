@@ -31,7 +31,7 @@ public final class PeriBrown extends CardImpl {
 
     private static final String rule = "The first historic spell you cast each turn has convoke. " +
             "<i>(Your creatures can help cast it. Each creature you tap while casting it pays for {1} " +
-            "or one mana of that creature’s color.)</i>";
+            "or one mana of that creature's color.)</i>";
     private static final FilterNonlandCard filter = new FilterNonlandCard("the first historic spell you cast each turn");
     static {
         filter.add(PeriBrownFirstHistoricCastSpellPredicate.instance);
