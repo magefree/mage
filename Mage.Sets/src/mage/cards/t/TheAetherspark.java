@@ -61,7 +61,7 @@ public final class TheAetherspark extends CardImpl {
         ), 1);
         ability.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance())
                 .setText("put a +1/+1 counter on that creature"));
-        ability.addTarget(new TargetControlledCreaturePermanent());
+        ability.addTarget(new TargetControlledCreaturePermanent(0, 1));
         this.addAbility(ability);
 
         // -5: Draw two cards.
