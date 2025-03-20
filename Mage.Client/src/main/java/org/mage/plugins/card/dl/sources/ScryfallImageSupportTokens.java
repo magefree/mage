@@ -2587,7 +2587,19 @@ public class ScryfallImageSupportTokens {
             put("INR/Zombie/3", "https://api.scryfall.com/cards/tinr/11/en?format=image");
 
             // DFT
+            put("DFT/Cat", "https://api.scryfall.com/cards/tdft/2/en?format=image");
             put("DFT/Emblem Chandra", "https://api.scryfall.com/cards/tdft/13/en?format=image");
+            put("DFT/Dinosaur Dragon", "https://api.scryfall.com/cards/tdft/4/en?format=image");
+            put("DFT/Elephant", "https://api.scryfall.com/cards/tdft/6/en?format=image");
+            put("DFT/Goblin", "https://api.scryfall.com/cards/tdft/5/en?format=image");
+            put("DFT/Insect", "https://api.scryfall.com/cards/tdft/7/en?format=image");
+            put("DFT/Pilot", "https://api.scryfall.com/cards/tdft/1/en?format=image");
+            put("DFT/Servo", "https://api.scryfall.com/cards/tdft/8/en?format=image");
+            put("DFT/Thopter/1", "https://api.scryfall.com/cards/tdft/9/en?format=image");
+            put("DFT/Thopter/2", "https://api.scryfall.com/cards/tdft/10/en?format=image");
+            put("DFT/Treasure", "https://api.scryfall.com/cards/tdft/11/en?format=image");
+            put("DFT/Vehicle", "https://api.scryfall.com/cards/tdft/12/en?format=image");
+            put("DFT/Zombie", "https://api.scryfall.com/cards/tdft/3/en?format=image");
 
             // generate supported sets
             supportedSets.clear();
