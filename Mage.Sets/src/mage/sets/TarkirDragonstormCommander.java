@@ -82,6 +82,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Sulfur Falls", 396, Rarity.RARE, mage.cards.s.SulfurFalls.class));
         cards.add(new SetCardInfo("Swords to Plowshares", 134, Rarity.UNCOMMON, mage.cards.s.SwordsToPlowshares.class));
         cards.add(new SetCardInfo("Talisman of Progress", 333, Rarity.UNCOMMON, mage.cards.t.TalismanOfProgress.class));
+        cards.add(new SetCardInfo("Tempest Technique", 16, Rarity.RARE, mage.cards.t.TempestTechnique.class));
         cards.add(new SetCardInfo("Temple of Enlightenment", 401, Rarity.RARE, mage.cards.t.TempleOfEnlightenment.class));
         cards.add(new SetCardInfo("Temple of Epiphany", 402, Rarity.RARE, mage.cards.t.TempleOfEpiphany.class));
         cards.add(new SetCardInfo("Temple of Triumph", 407, Rarity.RARE, mage.cards.t.TempleOfTriumph.class));
