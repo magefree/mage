@@ -54,6 +54,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Ringing Strike Mastery", 53, Rarity.COMMON, mage.cards.r.RingingStrikeMastery.class));
         cards.add(new SetCardInfo("Roiling Dragonstorm", 55, Rarity.UNCOMMON, mage.cards.r.RoilingDragonstorm.class));
         cards.add(new SetCardInfo("Rugged Highlands", 265, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
+        cards.add(new SetCardInfo("Sarkhan's Resolve", 158, Rarity.COMMON, mage.cards.s.SarkhansResolve.class));
         cards.add(new SetCardInfo("Scoured Barrens", 267, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Shiko, Paragon of the Way", 223, Rarity.MYTHIC, mage.cards.s.ShikoParagonOfTheWay.class));
         cards.add(new SetCardInfo("Skirmish Rhino", 224, Rarity.UNCOMMON, mage.cards.s.SkirmishRhino.class));
