@@ -49,6 +49,7 @@ public abstract class DeckValidator implements Serializable {
         maxCopiesMap.put("Slime Against Humanity", Integer.MAX_VALUE);
         maxCopiesMap.put("Templar Knight", Integer.MAX_VALUE);
         maxCopiesMap.put("Hare Apparent", Integer.MAX_VALUE);
+        maxCopiesMap.put("Tempest Hawk", Integer.MAX_VALUE);
         maxCopiesMap.put("Once More with Feeling", 1);
         maxCopiesMap.put("Seven Dwarves", 7);
         maxCopiesMap.put("Nazgul", 9);
