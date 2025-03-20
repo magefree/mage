@@ -32,6 +32,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Betor, Ancestor's Voice", 1, Rarity.MYTHIC, mage.cards.b.BetorAncestorsVoice.class));
         cards.add(new SetCardInfo("Big Score", 206, Rarity.COMMON, mage.cards.b.BigScore.class));
         cards.add(new SetCardInfo("Boros Signet", 314, Rarity.UNCOMMON, mage.cards.b.BorosSignet.class));
+        cards.add(new SetCardInfo("Caldera Pyremaw", 33, Rarity.RARE, mage.cards.c.CalderaPyremaw.class));
         cards.add(new SetCardInfo("Cascade Bluffs", 345, Rarity.RARE, mage.cards.c.CascadeBluffs.class));
         cards.add(new SetCardInfo("Clifftop Retreat", 351, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
         cards.add(new SetCardInfo("Command Tower", 107, Rarity.COMMON, mage.cards.c.CommandTower.class));
