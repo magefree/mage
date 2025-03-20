@@ -18,8 +18,12 @@ public class EndureSourceEffect extends OneShotEffect {
     private final int amount;
 
     public EndureSourceEffect(int amount) {
+        this(amount, "it");
+    }
+
+    public EndureSourceEffect(int amount, String selfText) {
         super(Outcome.Benefit);
-        staticText = "it endures " + amount;
+        staticText = selfText + " endures " + amount;
         this.amount = amount;
     }
 
