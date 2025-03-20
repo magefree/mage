@@ -21,6 +21,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         this.hasBasicLands = true;
 
         cards.add(new SetCardInfo("Agent of Kotis", 36, Rarity.COMMON, mage.cards.a.AgentOfKotis.class));
+        cards.add(new SetCardInfo("Auroral Procession", 169, Rarity.UNCOMMON, mage.cards.a.AuroralProcession.class));
         cards.add(new SetCardInfo("Barrensteppe Siege", 171, Rarity.RARE, mage.cards.b.BarrensteppeSiege.class));
         cards.add(new SetCardInfo("Bearer of Glory", 4, Rarity.COMMON, mage.cards.b.BearerOfGlory.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 250, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
