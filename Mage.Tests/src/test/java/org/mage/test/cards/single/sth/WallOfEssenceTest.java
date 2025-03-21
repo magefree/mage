@@ -48,7 +48,7 @@ public class WallOfEssenceTest extends CardTestPlayerBase {
         block(1, playerB, "Memnite", "Grizzly Bears");
         block(1, playerB, wall, "Grizzly Bears");
 
-        setChoice(playerA, "X=2"); // 2 damage on Memnite, no damage to Wall
+        setChoiceAmount(playerA, 2, 0); // 2 damage on Memnite, no damage to Wall
 
         setStopAt(1, PhaseStep.END_TURN);
         execute();

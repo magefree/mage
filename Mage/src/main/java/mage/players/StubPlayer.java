@@ -18,10 +18,8 @@ import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.filter.FilterMana;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
 import mage.game.match.Match;
-import mage.game.permanent.Permanent;
 import mage.game.tournament.Tournament;
 import mage.target.Target;
 import mage.target.TargetAmount;
@@ -188,16 +186,6 @@ public class StubPlayer extends PlayerImpl {
     @Override
     public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
 
-    }
-
-    @Override
-    public UUID chooseAttackerOrder(List<Permanent> attacker, Game game) {
-        return null;
-    }
-
-    @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
-        return null;
     }
 
     @Override
