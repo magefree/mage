@@ -370,7 +370,7 @@ public final class Main {
                 // no need to keep session
                 logger.info("CLIENT DISCONNECTED - " + sessionInfo);
                 logger.debug("- cause: client called disconnect command");
-                managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.DisconnectedByUser, true);
+                managerFactory.sessionManager().disconnect(client.getSessionId(), DisconnectReason.LostConnection, true);
             } else if (throwable == null) {
                 // lease timeout (ping), so server lost connection with a client
                 // must keep tables
