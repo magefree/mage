@@ -46,6 +46,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Fortress Kin-Guard", 12, Rarity.COMMON, mage.cards.f.FortressKinGuard.class));
         cards.add(new SetCardInfo("Fresh Start", 46, Rarity.UNCOMMON, mage.cards.f.FreshStart.class));
         cards.add(new SetCardInfo("Frontier Bivouac", 256, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
+        cards.add(new SetCardInfo("Heritage Reclamation", 145, Rarity.COMMON, mage.cards.h.HeritageReclamation.class));
         cards.add(new SetCardInfo("Inevitable Defeat", 194, Rarity.RARE, mage.cards.i.InevitableDefeat.class));
         cards.add(new SetCardInfo("Island", 279, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Jade-Cast Sentinel", 243, Rarity.COMMON, mage.cards.j.JadeCastSentinel.class));
