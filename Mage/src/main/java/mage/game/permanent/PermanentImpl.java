@@ -444,7 +444,19 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
         // other abilities -- any amount of instances
         if (!abilities.containsKey(ability.getId())) {
             Ability copyAbility = ability.copy();
-            copyAbility.newId(); // needed so that source can get an ability multiple times (e.g. Raging Ravine)
+
+            // needed so that source can get an ability multiple times (e.g. Raging Ravine)
+            // Generate deterministically from sourceId, ability ID, and Permanent's ID
+            // so that future calls to addAbility will always give the resulting ability the same ID
+            String seedString = getId().toString();
+            if (sourceId != null) {
+                seedString += sourceId.toString();
+            }
+            if (ability.getId() != null) {
+                seedString += ability.getId().toString();
+            }
+            copyAbility.newDeterministicId(seedString);
+
             copyAbility.setControllerId(controllerId);
             copyAbility.setSourceId(objectId);
             // triggered abilities must be added to the state().triggers
