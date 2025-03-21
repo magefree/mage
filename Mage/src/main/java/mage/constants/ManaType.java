@@ -1,16 +1,12 @@
 package mage.constants;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import mage.Mana;
 import mage.choices.Choice;
 import mage.choices.ChoiceColor;
 
+import java.util.*;
+
 /**
- *
  * @author North
  */
 public enum ManaType {
@@ -34,7 +30,7 @@ public enum ManaType {
         return text;
     }
 
-    public static Choice getChoiceOfManaTypes(Set<ManaType> types, boolean onlyColors) {
+    public static Choice getChoiceOfManaTypes(Collection<ManaType> types, boolean onlyColors) {
         Choice choice = new ChoiceColor(true);
         choice.getChoices().clear();
         choice.setMessage("Pick a mana " + (onlyColors ? "color" : "type"));
@@ -124,8 +120,8 @@ public enum ManaType {
      * <p>
      * Used for things like mapping back to a ManaType after the user chose from several of them.
      *
-     * @param name  The name of the mana to find
-     * @return      The ManaType representing that mana (or null)
+     * @param name The name of the mana to find
+     * @return The ManaType representing that mana (or null)
      */
     public static ManaType findByName(String name) {
         switch (name) {
@@ -153,6 +149,7 @@ public enum ManaType {
         }
         return manaTypes;
     }
+
     public static Set<ManaType> getTrueManaTypes() {
         return EnumSet.of(BLACK, BLUE, GREEN, RED, WHITE, COLORLESS);
     }
