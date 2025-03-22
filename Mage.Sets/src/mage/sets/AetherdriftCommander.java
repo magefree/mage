@@ -131,6 +131,8 @@ public final class AetherdriftCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Priest of the Crossing", 22, Rarity.RARE, mage.cards.p.PriestOfTheCrossing.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Prophet of the Scarab", 9, Rarity.RARE, mage.cards.p.ProphetOfTheScarab.class));
         cards.add(new SetCardInfo("Pull from Tomorrow", 81, Rarity.RARE, mage.cards.p.PullFromTomorrow.class));
+        cards.add(new SetCardInfo("Rampaging Aetherhood", 15, Rarity.RARE, mage.cards.r.RampagingAetherhood.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Rampaging Aetherhood", 31, Rarity.RARE, mage.cards.r.RampagingAetherhood.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Reality Shift", 39, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Reckless Fireweaver", 106, Rarity.COMMON, mage.cards.r.RecklessFireweaver.class));
         cards.add(new SetCardInfo("Retrofitter Foundry", 136, Rarity.RARE, mage.cards.r.RetrofitterFoundry.class));
