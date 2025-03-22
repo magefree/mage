@@ -47,7 +47,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cascade Bluffs", 345, Rarity.RARE, mage.cards.c.CascadeBluffs.class));
         cards.add(new SetCardInfo("Castle Ardenvale", 346, Rarity.RARE, mage.cards.c.CastleArdenvale.class));
         cards.add(new SetCardInfo("Castle Embereth", 347, Rarity.RARE, mage.cards.c.CastleEmbereth.class));
-        cards.add(new SetCardInfo("Casualties of War", 98, Rarity.COMMON, mage.cards.c.CasualtiesOfWar.class));
+        cards.add(new SetCardInfo("Casualties of War", 98, Rarity.RARE, mage.cards.c.CasualtiesOfWar.class));
         cards.add(new SetCardInfo("Caves of Koilos", 348, Rarity.RARE, mage.cards.c.CavesOfKoilos.class));
         cards.add(new SetCardInfo("Cephalid Coliseum", 349, Rarity.UNCOMMON, mage.cards.c.CephalidColiseum.class));
         cards.add(new SetCardInfo("Chittering Witch", 175, Rarity.RARE, mage.cards.c.ChitteringWitch.class));
@@ -82,7 +82,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Expansion // Explosion", 287, Rarity.RARE, mage.cards.e.ExpansionExplosion.class));
         cards.add(new SetCardInfo("Expressive Iteration", 288, Rarity.UNCOMMON, mage.cards.e.ExpressiveIteration.class));
         cards.add(new SetCardInfo("Faithless Looting", 213, Rarity.COMMON, mage.cards.f.FaithlessLooting.class));
-        cards.add(new SetCardInfo("Farseek", 255, Rarity.UNCOMMON, mage.cards.f.Farseek.class));
+        cards.add(new SetCardInfo("Farseek", 255, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Fellwar Stone", 318, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
         cards.add(new SetCardInfo("Ferrous Lake", 361, Rarity.RARE, mage.cards.f.FerrousLake.class));
         cards.add(new SetCardInfo("Fetid Heath", 362, Rarity.RARE, mage.cards.f.FetidHeath.class));
@@ -98,7 +98,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Golgari Rot Farm", 368, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Grand Crescendo", 118, Rarity.RARE, mage.cards.g.GrandCrescendo.class));
         cards.add(new SetCardInfo("Grapple with the Past", 257, Rarity.COMMON, mage.cards.g.GrappleWithThePast.class));
-        cards.add(new SetCardInfo("Gravecrawler", 93, Rarity.COMMON, mage.cards.g.Gravecrawler.class));
+        cards.add(new SetCardInfo("Gravecrawler", 93, Rarity.RARE, mage.cards.g.Gravecrawler.class));
         cards.add(new SetCardInfo("Grenzo, Havoc Raiser", 216, Rarity.RARE, mage.cards.g.GrenzoHavocRaiser.class));
         cards.add(new SetCardInfo("Grisly Salvage", 290, Rarity.COMMON, mage.cards.g.GrislySalvage.class));
         cards.add(new SetCardInfo("Guttersnipe", 217, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
@@ -133,7 +133,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Manaform Hellkite", 224, Rarity.MYTHIC, mage.cards.m.ManaformHellkite.class));
         cards.add(new SetCardInfo("Mangara, the Diplomat", 124, Rarity.RARE, mage.cards.m.MangaraTheDiplomat.class));
         cards.add(new SetCardInfo("Memorial to Folly", 377, Rarity.UNCOMMON, mage.cards.m.MemorialToFolly.class));
-        cards.add(new SetCardInfo("Meren of Clan Nel Toth", 297, Rarity.RARE, mage.cards.m.MerenOfClanNelToth.class));
+        cards.add(new SetCardInfo("Meren of Clan Nel Toth", 297, Rarity.MYTHIC, mage.cards.m.MerenOfClanNelToth.class));
         cards.add(new SetCardInfo("Millikin", 321, Rarity.UNCOMMON, mage.cards.m.Millikin.class));
         cards.add(new SetCardInfo("Mindblade Render", 187, Rarity.RARE, mage.cards.m.MindbladeRender.class));
         cards.add(new SetCardInfo("Monastery Mentor", 125, Rarity.MYTHIC, mage.cards.m.MonasteryMentor.class));
