@@ -2467,3 +2467,17 @@
 |Generate|TOK:DFT|Treasure|||TreasureToken|
 |Generate|TOK:DFT|Vehicle|||VehicleToken|
 |Generate|TOK:DFT|Zombie|||ZombieToken|
+
+# DRC
+|Generate|TOK:DRC|Beast|1||BeastToken|
+|Generate|TOK:DRC|Beast|2||ArchitectOfTheUntamedBeastToken|
+|Generate|TOK:DRC|Construct|||Construct4Token|
+|Generate|TOK:DRC|Golem|1||GolemFlyingToken|
+|Generate|TOK:DRC|Golem|2||GolemTrampleToken|
+|Generate|TOK:DRC|Golem|3||GolemVigilanceToken|
+|Generate|TOK:DRC|Nalaar Aetherjet|||NalaarAetherjetToken|
+|Generate|TOK:DRC|Shapeshifter|||ShapeshifterToken|
+|Generate|TOK:DRC|Zombie|1||ZombieWhiteToken|
+|Generate|TOK:DRC|Zombie|2||ZombieDecayedToken|
+|Generate|TOK:DRC|Zombie Army|||ZombieArmyToken|
+|Generate|TOK:DRC|Zombie Warrior|||GodEternalOketraToken|
