@@ -88,6 +88,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Stormscale Scion", 123, Rarity.MYTHIC, mage.cards.s.StormscaleScion.class));
         cards.add(new SetCardInfo("Sultai Devotee", 160, Rarity.COMMON, mage.cards.s.SultaiDevotee.class));
         cards.add(new SetCardInfo("Summit Intimidator", 125, Rarity.COMMON, mage.cards.s.SummitIntimidator.class));
+        cards.add(new SetCardInfo("Sunset Strikemaster", 126, Rarity.UNCOMMON, mage.cards.s.SunsetStrikemaster.class));
         cards.add(new SetCardInfo("Swamp", 281, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 268, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
         cards.add(new SetCardInfo("Tempest Hawk", 31, Rarity.COMMON, mage.cards.t.TempestHawk.class));
