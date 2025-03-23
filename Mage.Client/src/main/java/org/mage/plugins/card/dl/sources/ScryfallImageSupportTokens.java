@@ -2601,6 +2601,20 @@ public class ScryfallImageSupportTokens {
             put("DFT/Vehicle", "https://api.scryfall.com/cards/tdft/12/en?format=image");
             put("DFT/Zombie", "https://api.scryfall.com/cards/tdft/3/en?format=image");
 
+            // DTC
+            put("DRC/Beast/1", "https://api.scryfall.com/cards/tdrc/10/en?format=image");
+            put("DRC/Beast/2", "https://api.scryfall.com/cards/tdrc/11/en?format=image");
+            put("DRC/Construct", "https://api.scryfall.com/cards/tdrc/12/en?format=image");
+            put("DRC/Golem/1", "https://api.scryfall.com/cards/tdrc/13/en?format=image");
+            put("DRC/Golem/2", "https://api.scryfall.com/cards/tdrc/14/en?format=image");
+            put("DRC/Golem/3", "https://api.scryfall.com/cards/tdrc/15/en?format=image");
+            put("DRC/Nalaar Aetherjet", "https://api.scryfall.com/cards/tdrc/16/en?format=image");
+            put("DRC/Shapeshifter", "https://api.scryfall.com/cards/tdrc/4/en?format=image");
+            put("DRC/Zombie/1", "https://api.scryfall.com/cards/tdrc/3/en?format=image");
+            put("DRC/Zombie/2", "https://api.scryfall.com/cards/tdrc/7/en?format=image");
+            put("DRC/Zombie Army", "https://api.scryfall.com/cards/tdrc/8/en?format=image");
+            put("DRC/Zombie Warrior", "https://api.scryfall.com/cards/tdrc/9/en?format=image");
+
             // generate supported sets
             supportedSets.clear();
             for (String cardName : this.keySet()) {

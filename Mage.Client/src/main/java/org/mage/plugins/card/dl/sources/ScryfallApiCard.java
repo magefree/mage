@@ -41,6 +41,7 @@ public class ScryfallApiCard {
     //public String watermark; // background watermark image for some cards
 
     public void prepareCompatibleData() {
+        // take images from main card
         if (this.image_uris != null) {
             this.imageSmall = this.image_uris.getOrDefault("small", "");
             this.imageNormal = this.image_uris.getOrDefault("normal", "");
@@ -48,6 +49,7 @@ public class ScryfallApiCard {
             this.image_uris = null;
         }
 
+        // take first available images from one of the faces
         if (this.card_faces != null) {
             this.card_faces.forEach(ScryfallApiCardFace::prepareCompatibleData);
         }
@@ -88,11 +90,33 @@ public class ScryfallApiCard {
         // - scryfall: Command Tower // Command Tower
         // - xmage: Command Tower (second side as diff card and direct link image), example: https://scryfall.com/card/rex/26/command-tower-command-tower
         if (this.layout.equals("reversible_card")) {
-            if (!this.card_faces.get(0).name.equals(this.card_faces.get(1).name)) {
-                throw new IllegalArgumentException("Scryfall: unsupported data type, reversible_card has diff faces "
-                        + this.set + " - " + this.collector_number + " - " + this.name);
+            if (this.card_faces.get(0).layout == null || this.card_faces.get(0).layout.equals("normal")) {
+                // simple card
+                // Command Tower // Command Tower
+                // https://scryfall.com/card/rex/26/command-tower-command-tower
+                if (!this.card_faces.get(0).name.equals(this.card_faces.get(1).name)) {
+                    throw new IllegalArgumentException("Scryfall: unsupported data type, normal reversible_card must have same name in faces"
+                            + this.set + " - " + this.collector_number + " - " + this.name);
+                }
+                this.name = this.card_faces.get(0).name;
+            } else if (this.card_faces.get(0).layout.equals("adventure")) {
+                // adventure card
+                // Bloomvine Regent // Claim Territory
+                // https://scryfall.com/card/tdm/381/bloomvine-regent-claim-territory-bloomvine-regent
+                this.name = this.card_faces.get(0).name;
+                if (this.card_faces.get(0).name.equals(this.card_faces.get(1).name)) {
+                    throw new IllegalArgumentException("Scryfall: unsupported data type, adventure's reversible_card must have diff names in faces "
+                            + this.set + " - " + this.collector_number + " - " + this.name);
+                }
+            } else if (this.card_faces.get(0).layout.equals("token")) {
+                // token (it's not used for xmage's tokens, but must pass checks here anyway)
+                // Mechtitan // Mechtitan
+                // https://scryfall.com/card/sld/1969/mechtitan-mechtitan
+                this.name = this.card_faces.get(0).name;
+            } else {
+                throw new IllegalArgumentException("Scryfall: unsupported layout type in reversible_card - "
+                        + this.card_faces.get(0).layout + " - " + this.set + " - " + this.collector_number + " - " + this.name);
             }
-            this.name = this.card_faces.get(0).name;
         }
 
         // workaround for non ascii names
@@ -104,7 +128,6 @@ public class ScryfallApiCard {
         // - scryfall uses unicode numbers for reprints like Chandra Nalaar - dd2 - 34★ https://scryfall.com/card/dd2/34%E2%98%85/
         // - xmage uses ascii alternative Chandra Nalaar - dd2 - 34*
         this.collector_number = transformCardNumberFromScryfallToXmage(this.collector_number);
-
     }
 
     public static String transformCardNumberFromXmageToScryfall(String cardNumber) {
