@@ -4,6 +4,7 @@ package mage.abilities.mana;
 import mage.MageIdentifier;
 import mage.Mana;
 import mage.abilities.costs.Cost;
+import mage.abilities.effects.mana.AddManaFromColorChoicesEffect;
 import mage.abilities.effects.mana.AddManaOfAnyColorEffect;
 import mage.abilities.effects.mana.BasicManaEffect;
 import mage.abilities.effects.mana.ManaEffect;
@@ -35,6 +36,14 @@ public class LimitedTimesPerTurnActivatedManaAbility extends ActivatedManaAbilit
     public LimitedTimesPerTurnActivatedManaAbility(Zone zone, AddManaOfAnyColorEffect effect, Cost cost, int maxActivationPerTurn) {
         this(zone, effect, cost, maxActivationPerTurn,
                 new Mana(0, 0, 0, 0, 0, 0, effect.getAmount(), 0));
+    }
+
+    public LimitedTimesPerTurnActivatedManaAbility(AddManaFromColorChoicesEffect effect, Cost cost) {
+        this(effect, cost, 1);
+    }
+
+    public LimitedTimesPerTurnActivatedManaAbility(AddManaFromColorChoicesEffect effect, Cost cost, int maxActivationPerTurn) {
+        this(Zone.BATTLEFIELD, effect, cost, maxActivationPerTurn, effect.getNetMana());
     }
 
     public LimitedTimesPerTurnActivatedManaAbility(Zone zone, ManaEffect effect, Cost cost, int maxActivationPerTurn, Mana mana) {
