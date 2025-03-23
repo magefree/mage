@@ -26,6 +26,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Alesha's Legacy", 72, Rarity.COMMON, mage.cards.a.AleshasLegacy.class));
         cards.add(new SetCardInfo("Anafenza, Unyielding Lineage", 2, Rarity.RARE, mage.cards.a.AnafenzaUnyieldingLineage.class));
         cards.add(new SetCardInfo("Auroral Procession", 169, Rarity.UNCOMMON, mage.cards.a.AuroralProcession.class));
+        cards.add(new SetCardInfo("Awaken the Honored Dead", 170, Rarity.RARE, mage.cards.a.AwakenTheHonoredDead.class));
         cards.add(new SetCardInfo("Barrensteppe Siege", 171, Rarity.RARE, mage.cards.b.BarrensteppeSiege.class));
         cards.add(new SetCardInfo("Bearer of Glory", 4, Rarity.COMMON, mage.cards.b.BearerOfGlory.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 250, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
