@@ -71,6 +71,7 @@ class WeatherlightCompleatedEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "as long as {this} has four or more phyresis counters on it, " +
                 "it's a Phyrexian creature in addition to its other types";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private WeatherlightCompleatedEffect(final WeatherlightCompleatedEffect effect) {

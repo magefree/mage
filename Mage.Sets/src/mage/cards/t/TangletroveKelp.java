@@ -60,6 +60,7 @@ class TangletroveKelpEffect extends ContinuousEffectImpl {
     TangletroveKelpEffect() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         staticText = "other Clues you control become 6/6 Plant creatures in addition to their other types until end of turn";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private TangletroveKelpEffect(final TangletroveKelpEffect effect) {

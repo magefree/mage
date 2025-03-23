@@ -14,27 +14,23 @@ import mage.util.CardUtil;
  *
  * @author Jmlundeen
  */
-public class CardsInExileCondition implements Condition
-{
+public class CardsInExileCondition implements Condition {
 	private final ComparisonType type;
 	private final int count;
 	private final DynamicValue cardsInExileCount;
 
-	public CardsInExileCondition(ComparisonType type, int count)
-	{
+	public CardsInExileCondition(ComparisonType type, int count) {
 		this(type, count, CardsInExileCount.ALL);
 	}
 
-	public CardsInExileCondition(ComparisonType type, int count, DynamicValue cardsInExileCount)
-	{
+	public CardsInExileCondition(ComparisonType type, int count, DynamicValue cardsInExileCount) {
 		this.type = type;
 		this.count = count;
 		this.cardsInExileCount = cardsInExileCount;
 	}
 
 	@Override
-	public boolean apply(Game game, Ability source)
-	{
+	public boolean apply(Game game, Ability source) {
 		int exileCards = cardsInExileCount.calculate(game, source, null);
 		return ComparisonType.compare(exileCards, type, count);
 	}

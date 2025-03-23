@@ -29,7 +29,7 @@ public class EntersBattlefieldOneOrMoreTriggeredAbility extends TriggeredAbility
         setTriggerPhrase(generateTriggerPhrase());
     }
 
-    private EntersBattlefieldOneOrMoreTriggeredAbility(final EntersBattlefieldOneOrMoreTriggeredAbility ability) {
+    protected EntersBattlefieldOneOrMoreTriggeredAbility(final EntersBattlefieldOneOrMoreTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.targetController = ability.targetController;

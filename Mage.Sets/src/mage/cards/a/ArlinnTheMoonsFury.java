@@ -59,6 +59,7 @@ class ArlinnTheMoonsFuryEffect extends ContinuousEffectImpl {
     ArlinnTheMoonsFuryEffect() {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "until end of turn, {this} becomes a 5/5 Werewolf creature with trample, indestructible, and haste";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private ArlinnTheMoonsFuryEffect(final ArlinnTheMoonsFuryEffect effect) {

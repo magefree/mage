@@ -45,6 +45,7 @@ class XenograftAddSubtypeEffect extends ContinuousEffectImpl {
     XenograftAddSubtypeEffect() {
         super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "Each creature you control is the chosen type in addition to its other types";
+        this.dependendToTypes.add(DependencyType.BecomeCreature);
     }
 
     private XenograftAddSubtypeEffect(final XenograftAddSubtypeEffect effect) {

@@ -79,6 +79,7 @@ class ZurEternalSchemerEffect extends ContinuousEffectImpl {
         super(Duration.EndOfGame, Outcome.BecomeCreature);
         staticText = "Target non-Aura enchantment you control becomes a creature in addition to its other types " +
                 "and has base power and base toughness each equal to its mana value.";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private ZurEternalSchemerEffect(final ZurEternalSchemerEffect effect) {

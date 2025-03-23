@@ -103,6 +103,7 @@ class TezzeretTheSeekerEffect3 extends ContinuousEffectImpl {
     public TezzeretTheSeekerEffect3() {
         super(Duration.EndOfTurn, Outcome.BecomeCreature);
         this.staticText = "Artifacts you control become artifact creatures with base power and toughness 5/5 until end of turn";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private TezzeretTheSeekerEffect3(final TezzeretTheSeekerEffect3 effect) {

@@ -87,7 +87,7 @@ class EccentricApprenticeEffect extends ContinuousEffectImpl {
         switch (layer) {
             case TypeChangingEffects_4:
                 permanent.removeAllCreatureTypes(game);
-                permanent.removeSubType(game, SubType.BIRD);
+                permanent.addSubType(game, SubType.BIRD);
                 return true;
             case AbilityAddingRemovingEffects_6:
                 permanent.addAbility(FlyingAbility.getInstance(), source.getSourceId(), game);

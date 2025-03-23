@@ -51,6 +51,7 @@ class TestamentOfFaithEffect extends ContinuousEffectImpl {
     TestamentOfFaithEffect() {
         super(Duration.EndOfTurn, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.BecomeCreature);
         staticText = " Wall creature";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private TestamentOfFaithEffect(final TestamentOfFaithEffect effect) {

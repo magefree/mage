@@ -54,6 +54,7 @@ class SparkRuptureEffect extends ContinuousEffectImpl {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "each planeswalker with one or more loyalty counters on it loses all abilities " +
                 "and is a creature with power and toughness each equal to the number of loyalty counters on it";
+        this.dependencyTypes.add(DependencyType.BecomeCreature);
     }
 
     private SparkRuptureEffect(final SparkRuptureEffect effect) {
