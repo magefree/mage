@@ -2060,6 +2060,11 @@
 
 # WHO
 |Generate|TOK:WHO|Alien Insect|||AlienInsectToken|
+|Generate|TOK:WHO|Alien Rhino|||AlienRhinoToken|
+|Generate|TOK:WHO|Horse|||TheGirlInTheFireplaceHorseToken|
+|Generate|TOK:WHO|Human|||Human11WithWard2Token|
+#|Generate|TOK:WHO|Human|2||TheEleventhHourToken|
+|Generate|TOK:WHO|Human Noble|||TheGirlInTheFireplaceHumanNobleToken|
 
 # PIP
 |Generate|TOK:PIP|Robot|||RobotToken|

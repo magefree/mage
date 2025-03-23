@@ -376,8 +376,8 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Frostboil Snarl", 282, Rarity.RARE, mage.cards.f.FrostboilSnarl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frostboil Snarl", 498, Rarity.RARE, mage.cards.f.FrostboilSnarl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frostboil Snarl", 873, Rarity.RARE, mage.cards.f.FrostboilSnarl.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Fugitive of the Judoon", 103, Rarity.RARE, mage.cards.f.FugitiveOfTheJudoon.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Fugitive of the Judoon", 708, Rarity.RARE, mage.cards.f.FugitiveOfTheJudoon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fugitive of the Judoon", 103, Rarity.RARE, mage.cards.f.FugitiveOfTheJudoon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Fugitive of the Judoon", 708, Rarity.RARE, mage.cards.f.FugitiveOfTheJudoon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Furycalm Snarl", 1090, Rarity.RARE, mage.cards.f.FurycalmSnarl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Furycalm Snarl", 283, Rarity.RARE, mage.cards.f.FurycalmSnarl.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Furycalm Snarl", 499, Rarity.RARE, mage.cards.f.FurycalmSnarl.class, NON_FULL_USE_VARIOUS));
