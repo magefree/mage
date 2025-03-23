@@ -30,9 +30,8 @@ public final class AbzanDevotee extends CardImpl {
         this.toughness = new MageInt(1);
 
         // {1}: Add {W}, {B}, or {G}. Activate only once each turn.
-        AddManaFromColorChoicesEffect manaEffect = new AddManaFromColorChoicesEffect(ManaType.WHITE, ManaType.BLACK, ManaType.GREEN);
         this.addAbility(new LimitedTimesPerTurnActivatedManaAbility(
-                Zone.BATTLEFIELD, manaEffect, new GenericManaCost(1), 1, manaEffect.getNetMana()
+                new AddManaFromColorChoicesEffect(ManaType.WHITE, ManaType.BLACK, ManaType.GREEN), new GenericManaCost(1)
         ));
 
         // {2}{B}: Return this card from your graveyard to your hand.
