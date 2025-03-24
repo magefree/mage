@@ -9,7 +9,6 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 
 /**
- *
  * @author TheElk801
  */
 public class MostCommonColorCondition implements Condition {
@@ -31,7 +30,7 @@ public class MostCommonColorCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterPermanent[] colorFilters = new FilterPermanent[6];
+        FilterPermanent[] colorFilters = new FilterPermanent[5];
         int i = 0;
         for (ObjectColor color : ObjectColor.getAllColors()) {
             colorFilters[i] = new FilterPermanent();
@@ -41,7 +40,7 @@ public class MostCommonColorCondition implements Condition {
             }
             i++;
         }
-        int[] colorCounts = new int[6];
+        int[] colorCounts = new int[5];
         i = 0;
         for (ObjectColor color : ObjectColor.getAllColors()) {
             colorFilters[i].add(new ColorPredicate(color));

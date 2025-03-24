@@ -13,7 +13,11 @@ public final class DragonTokenGold extends TokenImpl {
     public DragonTokenGold() {
         super("Dragon Token", "4/4 gold Dragon creature token with flying");
         cardType.add(CardType.CREATURE);
-        color.setGold(true);
+        color.setWhite(true);
+        color.setBlue(true);
+        color.setBlack(true);
+        color.setRed(true);
+        color.setGreen(true);
         subtype.add(SubType.DRAGON);
         power = new MageInt(4);
         toughness = new MageInt(4);
