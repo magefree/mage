@@ -20,7 +20,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
 
     public static final ObjectColor COLORLESS = new ObjectColor();
 
-    public static final ObjectColor GOLD = new ObjectColor("O"); // Not multicolored - Sword of Dungeons & Dragons
+    public static final ObjectColor GOLD = new ObjectColor("O"); // Not multicolored - Sword of Dungeons & Dragons TODO: remove this, it shouldn't have been added
 
     private boolean white;
     private boolean blue;
@@ -516,8 +516,6 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
         colors.add(ObjectColor.BLACK);
         colors.add(ObjectColor.RED);
         colors.add(ObjectColor.GREEN);
-
-        colors.add(ObjectColor.GOLD);
         return colors;
     }
 }
