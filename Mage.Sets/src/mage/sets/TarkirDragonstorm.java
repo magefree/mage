@@ -101,6 +101,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Temur Monument", 248, Rarity.UNCOMMON, mage.cards.t.TemurMonument.class));
         cards.add(new SetCardInfo("Thornwood Falls", 269, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Tranquil Cove", 270, Rarity.COMMON, mage.cards.t.TranquilCove.class));
+        cards.add(new SetCardInfo("Underfoot Underdogs", 129, Rarity.COMMON, mage.cards.u.UnderfootUnderdogs.class));
         cards.add(new SetCardInfo("Undergrowth Leopard", 165, Rarity.COMMON, mage.cards.u.UndergrowthLeopard.class));
         cards.add(new SetCardInfo("United Battlefront", 32, Rarity.RARE, mage.cards.u.UnitedBattlefront.class));
         cards.add(new SetCardInfo("Unrooted Ancestor", 96, Rarity.UNCOMMON, mage.cards.u.UnrootedAncestor.class));
