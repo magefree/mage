@@ -106,6 +106,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Skirmish Rhino", 224, Rarity.UNCOMMON, mage.cards.s.SkirmishRhino.class));
         cards.add(new SetCardInfo("Smile at Death", 24, Rarity.MYTHIC, mage.cards.s.SmileAtDeath.class));
         cards.add(new SetCardInfo("Snakeskin Veil", 159, Rarity.COMMON, mage.cards.s.SnakeskinVeil.class));
+        cards.add(new SetCardInfo("Spectral Denial", 58, Rarity.UNCOMMON, mage.cards.s.SpectralDenial.class));
         cards.add(new SetCardInfo("Stormplain Detainment", 28, Rarity.COMMON, mage.cards.s.StormplainDetainment.class));
         cards.add(new SetCardInfo("Stormscale Scion", 123, Rarity.MYTHIC, mage.cards.s.StormscaleScion.class));
         cards.add(new SetCardInfo("Sultai Devotee", 160, Rarity.COMMON, mage.cards.s.SultaiDevotee.class));
