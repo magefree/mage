@@ -67,6 +67,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Mountain", 283, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mox Jasper", 246, Rarity.MYTHIC, mage.cards.m.MoxJasper.class));
         cards.add(new SetCardInfo("Mystic Monastery", 262, Rarity.UNCOMMON, mage.cards.m.MysticMonastery.class));
+        cards.add(new SetCardInfo("Narset's Rebuke", 114, Rarity.COMMON, mage.cards.n.NarsetsRebuke.class));
         cards.add(new SetCardInfo("Narset, Jeskai Waymaster", 209, Rarity.RARE, mage.cards.n.NarsetJeskaiWaymaster.class));
         cards.add(new SetCardInfo("Nomad Outpost", 263, Rarity.UNCOMMON, mage.cards.n.NomadOutpost.class));
         cards.add(new SetCardInfo("Opulent Palace", 264, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
