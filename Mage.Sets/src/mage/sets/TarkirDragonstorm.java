@@ -44,6 +44,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Coordinated Maneuver", 6, Rarity.COMMON, mage.cards.c.CoordinatedManeuver.class));
         cards.add(new SetCardInfo("Cori Mountain Stalwart", 175, Rarity.UNCOMMON, mage.cards.c.CoriMountainStalwart.class));
         cards.add(new SetCardInfo("Cori-Steel Cutter", 103, Rarity.RARE, mage.cards.c.CoriSteelCutter.class));
+        cards.add(new SetCardInfo("Corroding Dragonstorm", 75, Rarity.UNCOMMON, mage.cards.c.CorrodingDragonstorm.class));
         cards.add(new SetCardInfo("Craterhoof Behemoth", 138, Rarity.MYTHIC, mage.cards.c.CraterhoofBehemoth.class));
         cards.add(new SetCardInfo("Cruel Truths", 76, Rarity.COMMON, mage.cards.c.CruelTruths.class));
         cards.add(new SetCardInfo("Dalkovan Packbeasts", 7, Rarity.UNCOMMON, mage.cards.d.DalkovanPackbeasts.class));
