@@ -585,6 +585,11 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             dayNightButton.setVisible(true); // show T button for any cards and permanents
             dayNightButton.setIcon(new ImageIcon(transformIcon));
         }
+        // Remove transform button for non-transformable cards
+        else if (dayNightButton != null && this.cardSideOther == null) {
+            buttonPanel.remove(dayNightButton);
+            dayNightButton = null;
+        }
     }
 
     @Override
@@ -948,7 +953,15 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
                 // from main side
                 this.cardSideMain = gameCard;
                 this.cardSideOther = gameCard.getSecondCardFace();
-            } else {
+            } else if (this.cardSideMain.getName().startsWith("Morph") && !gameCard.getName().startsWith("Morph")
+                && !isTransformed()) {
+                // fix main side morph: if morphed card was main side, updated card should become main side
+                // so the button can be removed
+                this.cardSideMain = gameCard;
+                this.cardSideOther = null;
+                return;
+            }
+            else {
                 // from other side
                 this.cardSideOther = gameCard;
                 return;

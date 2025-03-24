@@ -368,11 +368,11 @@ public class CardView extends SimpleCardView {
                     || card instanceof Permanent) {
                 this.power = Integer.toString(card.getPower().getValue());
                 this.toughness = Integer.toString(card.getToughness().getValue());
-                this.cardTypes = new ArrayList<>(card.getCardType());
+                this.cardTypes = new ArrayList<>(card.getCardType(game));
                 this.color = card.getColor(null).copy();
-                this.superTypes = new ArrayList<>(card.getSuperType());
-                this.subTypes = card.getSubtype().copy();
-                this.rules = new ArrayList<>(card.getRules());
+                this.superTypes = new ArrayList<>(card.getSuperType(game));
+                this.subTypes = card.getSubtype(game).copy();
+                this.rules = new ArrayList<>(card.getRules(game));
             }
 
             // GUI: enable day/night button to view original face up card
