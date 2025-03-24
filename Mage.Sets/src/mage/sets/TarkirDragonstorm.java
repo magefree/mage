@@ -4,11 +4,15 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author TheElk801
  */
 public final class TarkirDragonstorm extends ExpansionSet {
 
+    private static final List<String> unfinished = Arrays.asList("Channeled Dragonfire", "Roamer's Routine", "Ureni's Rebuff", "Winternight Stories");
     private static final TarkirDragonstorm instance = new TarkirDragonstorm();
 
     public static TarkirDragonstorm getInstance() {
@@ -36,6 +40,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Bone-Cairn Butcher", 173, Rarity.UNCOMMON, mage.cards.b.BoneCairnButcher.class));
         cards.add(new SetCardInfo("Boulderborn Dragon", 239, Rarity.COMMON, mage.cards.b.BoulderbornDragon.class));
         cards.add(new SetCardInfo("Caustic Exhale", 74, Rarity.COMMON, mage.cards.c.CausticExhale.class));
+        cards.add(new SetCardInfo("Channeled Dragonfire", 423, Rarity.UNCOMMON, mage.cards.c.ChanneledDragonfire.class));
         cards.add(new SetCardInfo("Coordinated Maneuver", 6, Rarity.COMMON, mage.cards.c.CoordinatedManeuver.class));
         cards.add(new SetCardInfo("Cori Mountain Stalwart", 175, Rarity.UNCOMMON, mage.cards.c.CoriMountainStalwart.class));
         cards.add(new SetCardInfo("Cori-Steel Cutter", 103, Rarity.RARE, mage.cards.c.CoriSteelCutter.class));
@@ -117,5 +122,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Voice of Victory", 33, Rarity.RARE, mage.cards.v.VoiceOfVictory.class));
         cards.add(new SetCardInfo("Watcher of the Wayside", 249, Rarity.COMMON, mage.cards.w.WatcherOfTheWayside.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 271, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
+
+        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
 }
