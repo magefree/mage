@@ -35,6 +35,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Awaken the Honored Dead", 170, Rarity.RARE, mage.cards.a.AwakenTheHonoredDead.class));
         cards.add(new SetCardInfo("Barrensteppe Siege", 171, Rarity.RARE, mage.cards.b.BarrensteppeSiege.class));
         cards.add(new SetCardInfo("Bearer of Glory", 4, Rarity.COMMON, mage.cards.b.BearerOfGlory.class));
+        cards.add(new SetCardInfo("Bewildering Blizzard", 38, Rarity.UNCOMMON, mage.cards.b.BewilderingBlizzard.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 250, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Blossoming Sands", 251, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
         cards.add(new SetCardInfo("Bone-Cairn Butcher", 173, Rarity.UNCOMMON, mage.cards.b.BoneCairnButcher.class));
