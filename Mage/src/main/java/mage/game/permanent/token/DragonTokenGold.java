@@ -6,6 +6,8 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
+ * This token is supposed to be "gold" but the game rules don't support gold as a color in black border
+ *
  * @author Saga
  */
 public final class DragonTokenGold extends TokenImpl {
