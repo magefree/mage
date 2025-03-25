@@ -5,10 +5,7 @@ import mage.constants.ColoredManaSymbol;
 import mage.util.Copyable;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class ObjectColor implements Serializable, Copyable<ObjectColor>, Comparable<ObjectColor> {
 
@@ -19,7 +16,7 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     public static final ObjectColor GREEN = new ObjectColor("G");
 
     public static final ObjectColor COLORLESS = new ObjectColor();
-
+private static final List<ObjectColor>allColors= Arrays.asList(WHITE,BLUE,BLACK,RED,GREEN);
     private boolean white;
     private boolean blue;
     private boolean black;
@@ -440,12 +437,6 @@ public class ObjectColor implements Serializable, Copyable<ObjectColor>, Compara
     }
 
     public static List<ObjectColor> getAllColors() {
-        List<ObjectColor> colors = new ArrayList<>();
-        colors.add(ObjectColor.WHITE);
-        colors.add(ObjectColor.BLUE);
-        colors.add(ObjectColor.BLACK);
-        colors.add(ObjectColor.RED);
-        colors.add(ObjectColor.GREEN);
-        return colors;
+        return allColors;
     }
 }
