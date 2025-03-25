@@ -14,7 +14,6 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 
 import java.util.UUID;
@@ -24,7 +23,7 @@ import java.util.UUID;
  */
 public final class CoriMountainMonastery extends CardImpl {
 
-    private static final FilterPermanent filter = new FilterLandPermanent("a Plains or an Island");
+    private static final FilterPermanent filter = new FilterPermanent("a Plains or an Island");
 
     static {
         filter.add(Predicates.or(
