@@ -2481,3 +2481,27 @@
 |Generate|TOK:DRC|Zombie|2||ZombieDecayedToken|
 |Generate|TOK:DRC|Zombie Army|||ZombieArmyToken|
 |Generate|TOK:DRC|Zombie Warrior|||GodEternalOketraToken|
+
+# TDC
+|Generate|TOK:TDC|Angel|||AngelVigilanceToken|
+|Generate|TOK:TDC|Citizen|||CitizenGreenWhiteToken|
+|Generate|TOK:TDC|Dog|||WhiteDogToken|
+|Generate|TOK:TDC|Dragon Illusion|||DragonIllusionToken|
+|Generate|TOK:TDC|Eldrazi|||EldraziToken|
+|Generate|TOK:TDC|Elemental|1||RedElementalToken|
+|Generate|TOK:TDC|Elemental|2||Elemental11HasteToken|
+|Generate|TOK:TDC|Elemental|3||Elemental44Token|
+|Generate|TOK:TDC|First Mate Ragavan|||FirstMateRagavanToken|
+|Generate|TOK:TDC|Goat|||GoatToken|
+|Generate|TOK:TDC|Gold|||GoldToken|
+|Generate|TOK:TDC|Human|||HumanToken|
+|Generate|TOK:TDC|Insect|||InsectToken|
+|Generate|TOK:TDC|Myr|||MyrToken|
+|Generate|TOK:TDC|Plant|||PlantToken|
+|Generate|TOK:TDC|Rat|||RatToken|
+|Generate|TOK:TDC|Salamander Warrior|||SalamanderWarriorToken|
+|Generate|TOK:TDC|Servo|||ServoToken|
+|Generate|TOK:TDC|Snake|||OphiomancerSnakeToken|
+|Generate|TOK:TDC|Soldier|||SoldierArtifactToken|
+|Generate|TOK:TDC|Spirit|||SpiritWhiteToken|
+|Generate|TOK:TDC|Thopter|||ThopterColorlessToken|

@@ -2601,7 +2601,7 @@ public class ScryfallImageSupportTokens {
             put("DFT/Vehicle", "https://api.scryfall.com/cards/tdft/12/en?format=image");
             put("DFT/Zombie", "https://api.scryfall.com/cards/tdft/3/en?format=image");
 
-            // DTC
+            // DRC
             put("DRC/Beast/1", "https://api.scryfall.com/cards/tdrc/10/en?format=image");
             put("DRC/Beast/2", "https://api.scryfall.com/cards/tdrc/11/en?format=image");
             put("DRC/Construct", "https://api.scryfall.com/cards/tdrc/12/en?format=image");
@@ -2614,6 +2614,30 @@ public class ScryfallImageSupportTokens {
             put("DRC/Zombie/2", "https://api.scryfall.com/cards/tdrc/7/en?format=image");
             put("DRC/Zombie Army", "https://api.scryfall.com/cards/tdrc/8/en?format=image");
             put("DRC/Zombie Warrior", "https://api.scryfall.com/cards/tdrc/9/en?format=image");
+
+            // TDC
+            put("TDC/Angel", "https://api.scryfall.com/cards/ttdc/2/en?format=image");
+            put("TDC/Citizen", "https://api.scryfall.com/cards/ttdc/26/en?format=image");
+            put("TDC/Dog", "https://api.scryfall.com/cards/ttdc/3/en?format=image");
+            put("TDC/Dragon Illusion", "https://api.scryfall.com/cards/ttdc/15/en?format=image");
+            put("TDC/Eldrazi", "https://api.scryfall.com/cards/ttdc/1/en?format=image");
+            put("TDC/Elemental/1", "https://api.scryfall.com/cards/ttdc/16/en?format=image");
+            put("TDC/Elemental/2", "https://api.scryfall.com/cards/ttdc/17/en?format=image");
+            put("TDC/Elemental/3", "https://api.scryfall.com/cards/ttdc/27/en?format=image");
+            put("TDC/First Mate Ragavan", "https://api.scryfall.com/cards/ttdc/18/en?format=image");
+            put("TDC/Goat", "https://api.scryfall.com/cards/ttdc/4/en?format=image");
+            put("TDC/Gold", "https://api.scryfall.com/cards/ttdc/29/en?format=image");
+            put("TDC/Human", "https://api.scryfall.com/cards/ttdc/5/en?format=image");
+            put("TDC/Insect", "https://api.scryfall.com/cards/ttdc/22/en?format=image");
+            put("TDC/Myr", "https://api.scryfall.com/cards/ttdc/30/en?format=image");
+            put("TDC/Plant", "https://api.scryfall.com/cards/ttdc/24/en?format=image");
+            put("TDC/Rat", "https://api.scryfall.com/cards/ttdc/9/en?format=image");
+            put("TDC/Salamander Warrior", "https://api.scryfall.com/cards/ttdc/8/en?format=image");
+            put("TDC/Servo", "https://api.scryfall.com/cards/ttdc/31/en?format=image");
+            put("TDC/Snake", "https://api.scryfall.com/cards/ttdc/10/en?format=image");
+            put("TDC/Soldier", "https://api.scryfall.com/cards/ttdc/32/en?format=image");
+            put("TDC/Spirit", "https://api.scryfall.com/cards/ttdc/6/en?format=image");
+            put("TDC/Thopter", "https://api.scryfall.com/cards/ttdc/33/en?format=image");
 
             // generate supported sets
             supportedSets.clear();
