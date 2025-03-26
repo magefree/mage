@@ -100,6 +100,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Neriv, Heart of the Storm", 210, Rarity.MYTHIC, mage.cards.n.NerivHeartOfTheStorm.class));
         cards.add(new SetCardInfo("Nomad Outpost", 263, Rarity.UNCOMMON, mage.cards.n.NomadOutpost.class));
         cards.add(new SetCardInfo("Opulent Palace", 264, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
+        cards.add(new SetCardInfo("Piercing Exhale", 151, Rarity.COMMON, mage.cards.p.PiercingExhale.class));
         cards.add(new SetCardInfo("Plains", 277, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Qarsi Revenant", 86, Rarity.RARE, mage.cards.q.QarsiRevenant.class));
         cards.add(new SetCardInfo("Rakshasa's Bargain", 214, Rarity.UNCOMMON, mage.cards.r.RakshasasBargain.class));
