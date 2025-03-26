@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class TarkirDragonstorm extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Channeled Dragonfire", "Glacial Dragonhunt", "Nature's Rhythm", "Roamer's Routine", "Songcrafter Mage", "Unending Whisper", "Ureni's Rebuff", "Winternight Stories");
+    private static final List<String> unfinished = Arrays.asList("Channeled Dragonfire", "Glacial Dragonhunt", "Nature's Rhythm", "Roamer's Routine", "Songcrafter Mage", "Synchronized Charge", "Unending Whisper", "Ureni's Rebuff", "Winternight Stories");
     private static final TarkirDragonstorm instance = new TarkirDragonstorm();
 
     public static TarkirDragonstorm getInstance() {
