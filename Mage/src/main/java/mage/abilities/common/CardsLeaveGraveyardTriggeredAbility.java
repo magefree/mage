@@ -18,20 +18,27 @@ import java.util.Objects;
 public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
     private final FilterCard filter;
+    private final boolean yourTurn;
 
     public CardsLeaveGraveyardTriggeredAbility(Effect effect) {
         this(effect, StaticFilters.FILTER_CARD_CARDS);
     }
 
     public CardsLeaveGraveyardTriggeredAbility(Effect effect, FilterCard filter) {
+        this(effect, filter, false);
+    }
+
+    public CardsLeaveGraveyardTriggeredAbility(Effect effect, FilterCard filter, boolean yourTurn) {
         super(Zone.BATTLEFIELD, effect, false);
         this.filter = filter;
-        setTriggerPhrase("Whenever one or more " + filter + " leave your graveyard, ");
+        this.yourTurn = yourTurn;
+        setTriggerPhrase("Whenever one or more " + filter + " leave your graveyard" + (yourTurn ? " during your turn" : "") + ", ");
     }
 
     private CardsLeaveGraveyardTriggeredAbility(final CardsLeaveGraveyardTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
+        this.yourTurn = ability.yourTurn;
     }
 
     @Override
@@ -41,6 +48,9 @@ public class CardsLeaveGraveyardTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (yourTurn && !isControlledBy(game.getActivePlayerId())) {
+            return false;
+        }
         ZoneChangeGroupEvent zEvent = (ZoneChangeGroupEvent) event;
         return zEvent != null
                 && Zone.GRAVEYARD == zEvent.getFromZone()
