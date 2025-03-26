@@ -85,6 +85,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Loxodon Battle Priest", 15, Rarity.UNCOMMON, mage.cards.l.LoxodonBattlePriest.class));
         cards.add(new SetCardInfo("Mardu Devotee", 16, Rarity.COMMON, mage.cards.m.MarduDevotee.class));
         cards.add(new SetCardInfo("Mardu Monument", 245, Rarity.UNCOMMON, mage.cards.m.MarduMonument.class));
+        cards.add(new SetCardInfo("Meticulous Artisan", 112, Rarity.COMMON, mage.cards.m.MeticulousArtisan.class));
         cards.add(new SetCardInfo("Monastery Messenger", 208, Rarity.COMMON, mage.cards.m.MonasteryMessenger.class));
         cards.add(new SetCardInfo("Mountain", 283, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Mox Jasper", 246, Rarity.MYTHIC, mage.cards.m.MoxJasper.class));
