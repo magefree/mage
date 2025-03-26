@@ -132,6 +132,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Ugin, Eye of the Storms", 1, Rarity.MYTHIC, mage.cards.u.UginEyeOfTheStorms.class));
         cards.add(new SetCardInfo("Underfoot Underdogs", 129, Rarity.COMMON, mage.cards.u.UnderfootUnderdogs.class));
         cards.add(new SetCardInfo("Undergrowth Leopard", 165, Rarity.COMMON, mage.cards.u.UndergrowthLeopard.class));
+        cards.add(new SetCardInfo("Unending Whisper", 62, Rarity.COMMON, mage.cards.u.UnendingWhisper.class));
         cards.add(new SetCardInfo("United Battlefront", 32, Rarity.RARE, mage.cards.u.UnitedBattlefront.class));
         cards.add(new SetCardInfo("Unrooted Ancestor", 96, Rarity.UNCOMMON, mage.cards.u.UnrootedAncestor.class));
         cards.add(new SetCardInfo("Ureni's Rebuff", 63, Rarity.UNCOMMON, mage.cards.u.UrenisRebuff.class));
