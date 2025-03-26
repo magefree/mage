@@ -140,6 +140,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Voice of Victory", 33, Rarity.RARE, mage.cards.v.VoiceOfVictory.class));
         cards.add(new SetCardInfo("Watcher of the Wayside", 249, Rarity.COMMON, mage.cards.w.WatcherOfTheWayside.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 271, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
+        cards.add(new SetCardInfo("Wingspan Stride", 66, Rarity.COMMON, mage.cards.w.WingspanStride.class));
         cards.add(new SetCardInfo("Winternight Stories", 67, Rarity.RARE, mage.cards.w.WinternightStories.class));
         cards.add(new SetCardInfo("Worthy Cost", 99, Rarity.COMMON, mage.cards.w.WorthyCost.class));
         cards.add(new SetCardInfo("Yathan Tombguard", 100, Rarity.UNCOMMON, mage.cards.y.YathanTombguard.class));
