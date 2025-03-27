@@ -76,6 +76,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Frontier Bivouac", 256, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
         cards.add(new SetCardInfo("Glacial Dragonhunt", 188, Rarity.UNCOMMON, mage.cards.g.GlacialDragonhunt.class));
         cards.add(new SetCardInfo("Great Arashin City", 257, Rarity.RARE, mage.cards.g.GreatArashinCity.class));
+        cards.add(new SetCardInfo("Hardened Tactician", 191, Rarity.UNCOMMON, mage.cards.h.HardenedTactician.class));
         cards.add(new SetCardInfo("Heritage Reclamation", 145, Rarity.COMMON, mage.cards.h.HeritageReclamation.class));
         cards.add(new SetCardInfo("Inevitable Defeat", 194, Rarity.RARE, mage.cards.i.InevitableDefeat.class));
         cards.add(new SetCardInfo("Island", 279, Rarity.LAND, mage.cards.basiclands.Island.class, NON_FULL_USE_VARIOUS));
