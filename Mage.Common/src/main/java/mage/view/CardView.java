@@ -16,7 +16,6 @@ import mage.abilities.icon.CardIcon;
 import mage.abilities.icon.CardIconImpl;
 import mage.abilities.icon.CardIconType;
 import mage.abilities.keyword.AftermathAbility;
-import mage.abilities.keyword.ForetellAbility;
 import mage.cards.*;
 import mage.cards.mock.MockCard;
 import mage.cards.repository.CardInfo;
@@ -328,13 +327,6 @@ public class CardView extends SimpleCardView {
         // show real name and day/night button for controller or any player at the game's end
         boolean showHiddenFaceDownData = showAsControlled || (game != null && game.hasEnded());
 
-        // default image info
-        this.expansionSetCode = card.getExpansionSetCode();
-        this.cardNumber = card.getCardNumber();
-        this.imageFileName = card.getImageFileName();
-        this.imageNumber = card.getImageNumber();
-        this.usesVariousArt = card.getUsesVariousArt();
-
         // permanent data
         if (showFaceUp) {
             this.setOriginalValues(card);
@@ -348,148 +340,321 @@ public class CardView extends SimpleCardView {
             }
         }
 
+        this.setSharedInfo(game, card);
+
         // FACE DOWN
         if (!showFaceUp) {
-            this.fillEmptyWithImageInfo(game, card, true);
-
-            // can show face up card name for controller or game end
-            // TODO: add exception on non empty name of the faced-down card here
-            String visibleName = CardUtil.getCardNameForGUI(showHiddenFaceDownData ? sourceName : "", this.imageFileName);
-            this.name = visibleName;
-            this.displayName = visibleName;
-            this.displayFullName = visibleName;
-            this.alternateName = visibleName;
-
-            // TODO: remove workaround - all actual characteristics must get from a card -- same as normal card do
-            // TODO: must use same code in all zones
-            // workaround to add PT, creature type and face up ability text (for stack and battlefield zones only)
-            // in other zones it has only face down status/name
-            if (sourceCard instanceof Spell
-                    || card instanceof Permanent) {
-                this.power = Integer.toString(card.getPower().getValue());
-                this.toughness = Integer.toString(card.getToughness().getValue());
-                this.cardTypes = new ArrayList<>(card.getCardType(game));
-                this.color = card.getColor(null).copy();
-                this.superTypes = new ArrayList<>(card.getSuperType(game));
-                this.subTypes = card.getSubtype(game).copy();
-                this.rules = new ArrayList<>(card.getRules(game));
-            }
-
-            // GUI: enable day/night button to view original face up card
-            if (showHiddenFaceDownData) {
-                this.transformable = true;
-                this.secondCardFace = new CardView(sourceCard.getMainCard()); // do not use game param, so it will take default card
-                this.alternateName = sourceCard.getMainCard().getName();
-            }
+            this.setFaceDownInfo(card, sourceCard, showHiddenFaceDownData, sourceName);
         }
 
-        // FACE UP and shared data like counters
-
+        // FACE UP INFO
         if (showFaceUp) {
-            SplitCard splitCard = null;
-            if (card instanceof SplitCard) {
-                splitCard = (SplitCard) card;
-                rotate = (card.getSpellAbility().getSpellAbilityType()) != SpellAbilityType.SPLIT_AFTERMATH;
-            } else if (card instanceof Spell) {
-                switch (card.getSpellAbility().getSpellAbilityType()) {
-                    case SPLIT_FUSED:
-                        splitCard = (SplitCard) ((Spell) card).getCard();
-                        rotate = true;
-                        break;
-                    case SPLIT_AFTERMATH:
-                        splitCard = (SplitCard) ((Spell) card).getCard();
-                        rotate = false;
-                        break;
-                    case SPLIT_LEFT:
-                    case SPLIT_RIGHT:
-                        rotate = true;
-                        break;
-                    case MODAL_LEFT:
-                    case MODAL_RIGHT:
-                        rotate = false;
-                        break;
-                }
-            }
-
-            String fullCardName;
-            if (splitCard != null) {
-                this.isSplitCard = true;
-                leftSplitName = splitCard.getLeftHalfCard().getName();
-                leftSplitCostsStr = String.join("", splitCard.getLeftHalfCard().getManaCostSymbols());
-                leftSplitRules = splitCard.getLeftHalfCard().getRules(game);
-                leftSplitTypeLine = getCardTypeLine(game, splitCard.getLeftHalfCard());
-                rightSplitName = splitCard.getRightHalfCard().getName();
-                rightSplitCostsStr = String.join("", splitCard.getRightHalfCard().getManaCostSymbols());
-                rightSplitRules = splitCard.getRightHalfCard().getRules(game);
-                rightSplitTypeLine = getCardTypeLine(game, splitCard.getRightHalfCard());
-
-                fullCardName = card.getName(); // split card contains full name as normal
-                this.manaCostLeftStr = splitCard.getLeftHalfCard().getManaCostSymbols();
-                this.manaCostRightStr = splitCard.getRightHalfCard().getManaCostSymbols();
-            } else if (card instanceof ModalDoubleFacedCard) {
-                this.isModalDoubleFacedCard = true;
-                ModalDoubleFacedCard mainCard = ((ModalDoubleFacedCard) card);
-                fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
-                this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
-                this.manaCostRightStr = mainCard.getRightHalfCard().getManaCostSymbols();
-            } else if (card instanceof AdventureCard) {
-                this.isSplitCard = true;
-                AdventureCard adventureCard = ((AdventureCard) card);
-                leftSplitName = adventureCard.getName();
-                leftSplitCostsStr = String.join("", adventureCard.getManaCostSymbols());
-                leftSplitRules = adventureCard.getSharedRules(game);
-                leftSplitTypeLine = getCardTypeLine(game, adventureCard);
-                AdventureCardSpell adventureCardSpell = adventureCard.getSpellCard();
-                rightSplitName = adventureCardSpell.getName();
-                rightSplitCostsStr = String.join("", adventureCardSpell.getManaCostSymbols());
-                rightSplitRules = adventureCardSpell.getRules(game);
-                rightSplitTypeLine = getCardTypeLine(game, adventureCardSpell);
-                fullCardName = adventureCard.getName() + MockCard.ADVENTURE_NAME_SEPARATOR + adventureCardSpell.getName();
-                this.manaCostLeftStr = adventureCard.getManaCostSymbols();
-                this.manaCostRightStr = adventureCardSpell.getManaCostSymbols();
-            } else if (card instanceof MockCard) {
-                // deck editor cards
-                fullCardName = ((MockCard) card).getFullName(true);
-                this.manaCostLeftStr = ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.LEFT);
-                this.manaCostRightStr = ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.RIGHT);
-            } else {
-                fullCardName = card.getName();
-                this.manaCostLeftStr = card.getManaCostSymbols();
-                this.manaCostRightStr = new ArrayList<>();
-            }
-
-            this.name = card.getName();
-            this.displayName = card.getName();
-            this.displayFullName = fullCardName;
-            this.rules = new ArrayList<>(card.getRules(game));
+            this.setFaceUpName(game, card);
+            this.setFaceUpInfo(game, card);
+            this.setFaceUpFrameInfo(game, card);
             this.manaValue = card.getManaValue();
         }
 
-        // shared info - counters and other
-        if (card instanceof Permanent) {
-            this.mageObjectType = MageObjectType.PERMANENT;
-            Permanent permanent = (Permanent) card;
-            if (game != null) {
-                if (permanent.getCounters(game) != null && !permanent.getCounters(game).isEmpty()) {
-                    this.loyalty = Integer.toString(permanent.getCounters(game).getCount(CounterType.LOYALTY));
-                    this.defense = Integer.toString(permanent.getCounters(game).getCount(CounterType.DEFENSE));
-                    counters = new ArrayList<>();
-                    for (Counter counter : permanent.getCounters(game).values()) {
-                        counters.add(new CounterView(counter));
-                    }
-                }
-                this.pairedCard = permanent.getPairedCard() != null ? permanent.getPairedCard().getSourceId() : null;
-                this.bandedCards = new ArrayList<>();
-                for (UUID bandedCard : permanent.getBandedCards()) {
-                    bandedCards.add(bandedCard);
-                }
-                if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
-                    controlledByOwner = false;
-                }
-                if (permanent.isTransformed()) {
-                    transformed = true;
+        // shared info - targets
+        if (card instanceof Spell) {
+            this.setSpellTargets(game, (Spell) card);
+        }
+    }
+
+    private void setSpellTargets(Game game, Spell card) {
+        this.mageObjectType = MageObjectType.SPELL;
+        for (SpellAbility spellAbility : card.getSpellAbilities()) {
+            for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
+                Mode mode = spellAbility.getModes().get(modeId);
+                if (!mode.getTargets().isEmpty()) {
+                    addTargets(mode.getTargets(), mode.getEffects(), spellAbility, game);
                 }
             }
+        }
+
+        // show for modal spell, which mode was chosen
+        if (card.getSpellAbility().isModal()) {
+            for (UUID modeId : card.getSpellAbility().getModes().getSelectedModes()) {
+                Mode mode = card.getSpellAbility().getModes().get(modeId);
+                this.rules.add("<span color='green'><i>Chosen mode: " + mode.getEffects().getText(mode) + "</i></span>");
+            }
+        }
+
+        // show target of a spell on the stack
+        if (!card.getSpellAbility().getTargets().isEmpty()) {
+            StackObject stackObjectTarget = null;
+            for (Target target : card.getSpellAbility().getTargets()) {
+                for (UUID targetId : target.getTargets()) {
+                    MageObject mo = game.getObject(targetId);
+                    if (mo instanceof StackObject) {
+                        stackObjectTarget = (StackObject) mo;
+                    }
+                    if (stackObjectTarget != null) {
+                        this.rules.add("<span color='green'><i>Target on stack: " + stackObjectTarget.getIdName());
+                    }
+                }
+            }
+        }
+    }
+
+    private void setFaceUpFrameInfo(Game game, Card card) {
+        if (card instanceof Spell) {
+            Spell spell = (Spell) card;
+            // Determine what part of the art to slice out for spells on the stack which originate
+            // from a split, fuse, or aftermath split card.
+            // Modal double faces cards draws as normal cards
+            SpellAbilityType ty = spell.getSpellAbility().getSpellAbilityType();
+            if (ty == SpellAbilityType.SPLIT_RIGHT || ty == SpellAbilityType.SPLIT_LEFT || ty == SpellAbilityType.SPLIT_FUSED) {
+                // Needs a special art rect
+                if (ty == SpellAbilityType.SPLIT_FUSED) {
+                    artRect = ArtRect.SPLIT_FUSED;
+                } else if (spell.getCard() != null) {
+                    SplitCard wholeCard = ((SplitCardHalf) spell.getCard()).getParentCard();
+                    Abilities<Ability> aftermathHalfAbilities = wholeCard.getRightHalfCard().getAbilities(game);
+                    if (aftermathHalfAbilities.stream().anyMatch(AftermathAbility.class::isInstance)) {
+                        if (ty == SpellAbilityType.SPLIT_RIGHT) {
+                            artRect = ArtRect.AFTERMATH_BOTTOM;
+                        } else {
+                            artRect = ArtRect.AFTERMATH_TOP;
+                        }
+                    } else if (ty == SpellAbilityType.SPLIT_RIGHT) {
+                        artRect = ArtRect.SPLIT_RIGHT;
+                    } else {
+                        artRect = ArtRect.SPLIT_LEFT;
+                    }
+                }
+            }
+        }
+
+        // Cases, classes and sagas have portrait art
+        if (card.getSubtype(game).contains(SubType.CASE) ||
+                card.getSubtype(game).contains(SubType.CLASS)) {
+            artRect = ArtRect.FULL_LENGTH_LEFT;
+        } else if (card.getSubtype(game).contains(SubType.SAGA)) {
+            artRect = ArtRect.FULL_LENGTH_RIGHT;
+        }
+
+        // Frame color
+        this.frameColor = card.getFrameColor(game).copy();
+
+        // Frame style
+        this.frameStyle = card.getFrameStyle();
+
+        // Get starting loyalty
+        this.startingLoyalty = CardUtil.convertLoyaltyOrDefense(card.getStartingLoyalty());
+
+        // Get starting defense
+        this.startingDefense = CardUtil.convertLoyaltyOrDefense(card.getStartingDefense());
+
+        // add card icons at the end, so it will have full card view data
+        this.generateCardIcons(null, card, game);
+    }
+
+    private void setFaceUpInfo(Game game, Card card) {
+        if (card instanceof PermanentToken) {
+            this.isToken = true;
+            this.mageObjectType = MageObjectType.TOKEN;
+            this.rarity = Rarity.SPECIAL;
+            this.rules = new ArrayList<>(card.getRules(game));
+        } else {
+            this.rarity = card.getRarity();
+            this.isToken = false;
+        }
+
+        this.extraDeckCard = card.isExtraDeckCard();
+
+        // transformable, double faces cards
+        this.transformable = card.isTransformable();
+
+        Card secondSideCard = card.getSecondCardFace();
+        if (secondSideCard != null) {
+            this.secondCardFace = new CardView(secondSideCard, game);
+            this.alternateName = secondCardFace.getName();
+        }
+
+        this.flipCard = card.isFlipCard();
+        if (card.isFlipCard() && card.getFlipCardName() != null) {
+            this.alternateName = card.getFlipCardName();
+        }
+
+        if (card instanceof ModalDoubleFacedCard) {
+            this.transformable = true; // enable GUI day/night button
+            ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card;
+            this.secondCardFace = new CardView(mdfCard.getRightHalfCard(), game);
+            this.alternateName = mdfCard.getRightHalfCard().getName();
+        }
+
+        Card meldsToCard = card.getMeldsToCard();
+        if (meldsToCard != null) {
+            this.transformable = true; // enable GUI day/night button
+            this.secondCardFace = new CardView(meldsToCard, game);
+            this.alternateName = meldsToCard.getName();
+        }
+
+        if (card instanceof PermanentToken && card.isTransformable()) {
+            Token backFace = (Token) ((PermanentToken) card).getOtherFace();
+            this.secondCardFace = new CardView(backFace, game);
+            this.alternateName = backFace.getName();
+        }
+    }
+
+    private void setFaceUpName(Game game, Card card) {
+        SplitCard splitCard = null;
+        if (card instanceof SplitCard) {
+            splitCard = (SplitCard) card;
+            rotate = (card.getSpellAbility().getSpellAbilityType()) != SpellAbilityType.SPLIT_AFTERMATH;
+        } else if (card instanceof Spell) {
+            switch (card.getSpellAbility().getSpellAbilityType()) {
+                case SPLIT_FUSED:
+                    splitCard = (SplitCard) ((Spell) card).getCard();
+                    rotate = true;
+                    break;
+                case SPLIT_AFTERMATH:
+                    splitCard = (SplitCard) ((Spell) card).getCard();
+                    rotate = false;
+                    break;
+                case SPLIT_LEFT:
+                case SPLIT_RIGHT:
+                    rotate = true;
+                    break;
+                case MODAL_LEFT:
+                case MODAL_RIGHT:
+                    rotate = false;
+                    break;
+            }
+        }
+
+        String fullCardName;
+        if (splitCard != null) {
+            this.isSplitCard = true;
+            leftSplitName = splitCard.getLeftHalfCard().getName();
+            leftSplitCostsStr = String.join("", splitCard.getLeftHalfCard().getManaCostSymbols());
+            leftSplitRules = splitCard.getLeftHalfCard().getRules(game);
+            leftSplitTypeLine = getCardTypeLine(game, splitCard.getLeftHalfCard());
+            rightSplitName = splitCard.getRightHalfCard().getName();
+            rightSplitCostsStr = String.join("", splitCard.getRightHalfCard().getManaCostSymbols());
+            rightSplitRules = splitCard.getRightHalfCard().getRules(game);
+            rightSplitTypeLine = getCardTypeLine(game, splitCard.getRightHalfCard());
+
+            fullCardName = card.getName(); // split card contains full name as normal
+            this.manaCostLeftStr = splitCard.getLeftHalfCard().getManaCostSymbols();
+            this.manaCostRightStr = splitCard.getRightHalfCard().getManaCostSymbols();
+        } else if (card instanceof ModalDoubleFacedCard) {
+            this.isModalDoubleFacedCard = true;
+            ModalDoubleFacedCard mainCard = ((ModalDoubleFacedCard) card);
+            fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
+            this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
+            this.manaCostRightStr = mainCard.getRightHalfCard().getManaCostSymbols();
+        } else if (card instanceof AdventureCard) {
+            this.isSplitCard = true;
+            AdventureCard adventureCard = ((AdventureCard) card);
+            leftSplitName = adventureCard.getName();
+            leftSplitCostsStr = String.join("", adventureCard.getManaCostSymbols());
+            leftSplitRules = adventureCard.getSharedRules(game);
+            leftSplitTypeLine = getCardTypeLine(game, adventureCard);
+            AdventureCardSpell adventureCardSpell = adventureCard.getSpellCard();
+            rightSplitName = adventureCardSpell.getName();
+            rightSplitCostsStr = String.join("", adventureCardSpell.getManaCostSymbols());
+            rightSplitRules = adventureCardSpell.getRules(game);
+            rightSplitTypeLine = getCardTypeLine(game, adventureCardSpell);
+            fullCardName = adventureCard.getName() + MockCard.ADVENTURE_NAME_SEPARATOR + adventureCardSpell.getName();
+            this.manaCostLeftStr = adventureCard.getManaCostSymbols();
+            this.manaCostRightStr = adventureCardSpell.getManaCostSymbols();
+        } else if (card instanceof MockCard) {
+            // deck editor cards
+            fullCardName = ((MockCard) card).getFullName(true);
+            this.manaCostLeftStr = ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.LEFT);
+            this.manaCostRightStr = ((MockCard) card).getManaCostStr(CardInfo.ManaCostSide.RIGHT);
+        } else {
+            fullCardName = card.getName();
+            this.manaCostLeftStr = card.getManaCostSymbols();
+            this.manaCostRightStr = new ArrayList<>();
+        }
+
+        this.name = card.getName();
+        this.displayName = card.getName();
+        this.displayFullName = fullCardName;
+    }
+
+    private void setFaceDownInfo(Card card, Card sourceCard, boolean showHiddenFaceDownData, String sourceName) {
+        setImageInfo(card);
+        boolean hideFaceDownInfo = !(sourceCard instanceof Spell) && !(card instanceof Permanent);
+        // TODO: replace hideFaceDownInfo workaround to have methods return proper values if face down
+        if (hideFaceDownInfo) {
+            this.power = "";
+            this.toughness = "";
+            this.cardTypes = new ArrayList<>();
+            this.subTypes = new SubTypes();
+            this.superTypes = new ArrayList<>();
+            this.color = new ObjectColor();
+            this.rules = new ArrayList<>();
+        }
+
+        // can show face up card name for controller or game end
+        // TODO: add exception on non empty name of the faced-down card here
+        String visibleName = CardUtil.getCardNameForGUI(showHiddenFaceDownData ? sourceName : "", this.imageFileName);
+        this.name = visibleName;
+        this.displayName = visibleName;
+        this.displayFullName = visibleName;
+        this.alternateName = visibleName;
+        this.frameColor = new ObjectColor();
+        this.frameStyle = FrameStyle.M15_NORMAL;
+        this.manaCostLeftStr = new ArrayList<>();
+        this.manaCostRightStr = new ArrayList<>();
+        this.manaValue = 0;
+        this.rarity = Rarity.SPECIAL; // hide rarity info
+
+        // GUI: enable day/night button to view original face up card
+        if (showHiddenFaceDownData) {
+            this.transformable = true;
+            this.secondCardFace = new CardView(sourceCard.getMainCard()); // do not use game param, so it will take default card
+            this.alternateName = sourceCard.getMainCard().getName();
+        }
+    }
+
+    private void setPermanentInfo(Game game, Permanent card) {
+        this.mageObjectType = MageObjectType.PERMANENT;
+        if (game != null) {
+            if (card.getCounters(game) != null && !card.getCounters(game).isEmpty()) {
+                this.loyalty = Integer.toString(card.getCounters(game).getCount(CounterType.LOYALTY));
+                this.defense = Integer.toString(card.getCounters(game).getCount(CounterType.DEFENSE));
+                counters = new ArrayList<>();
+                for (Counter counter : card.getCounters(game).values()) {
+                    counters.add(new CounterView(counter));
+                }
+            }
+            this.pairedCard = card.getPairedCard() != null ? card.getPairedCard().getSourceId() : null;
+            this.bandedCards = new ArrayList<>();
+            bandedCards.addAll(card.getBandedCards());
+            if (!card.getControllerId().equals(card.getOwnerId())) {
+                controlledByOwner = false;
+            }
+            if (card.isTransformed()) {
+                transformed = true;
+            }
+        }
+    }
+
+    private void setSharedInfo(Game game, Card card) {
+        this.power = Integer.toString(card.getPower().getValue());
+        this.toughness = Integer.toString(card.getToughness().getValue());
+        this.cardTypes = new ArrayList<>(card.getCardType(game));
+        this.subTypes = card.getSubtype(game).copy();
+        this.superTypes = new ArrayList<>(card.getSuperType(game));
+        this.color = card.getColor(game).copy();
+        this.rules = new ArrayList<>(card.getRules(game));
+        this.flipCard = card.isFlipCard();
+
+        // default image info
+        this.expansionSetCode = card.getExpansionSetCode();
+        this.cardNumber = card.getCardNumber();
+        this.imageFileName = card.getImageFileName();
+        this.imageNumber = card.getImageNumber();
+        this.usesVariousArt = card.getUsesVariousArt();
+
+        // shared info - counters and other
+        if (card instanceof Permanent) {
+            setPermanentInfo(game, (Permanent) card);
         } else {
             if (card.isCopy()) {
                 this.mageObjectType = MageObjectType.COPY_CARD;
@@ -504,157 +669,6 @@ public class CardView extends SimpleCardView {
                     counters.add(new CounterView(counter));
                 }
             }
-        }
-
-        // FACE UP INFO
-        if (showFaceUp) {
-            // TODO: extract characteristics setup to shared code (same for face down and normal cards)
-            //  PT, card types/subtypes/super/color/rules
-            this.power = Integer.toString(card.getPower().getValue());
-            this.toughness = Integer.toString(card.getToughness().getValue());
-            this.cardTypes = new ArrayList<>(card.getCardType(game));
-            this.subTypes = card.getSubtype(game).copy();
-            this.superTypes = card.getSuperType(game);
-            this.color = card.getColor(game).copy();
-            this.flipCard = card.isFlipCard();
-
-            if (card instanceof PermanentToken) {
-                this.isToken = true;
-                this.mageObjectType = MageObjectType.TOKEN;
-                this.rarity = Rarity.SPECIAL;
-                this.rules = new ArrayList<>(card.getRules(game));
-            } else {
-                this.rarity = card.getRarity();
-                this.isToken = false;
-            }
-
-            this.extraDeckCard = card.isExtraDeckCard();
-
-            // transformable, double faces cards
-            this.transformable = card.isTransformable();
-
-            Card secondSideCard = card.getSecondCardFace();
-            if (secondSideCard != null) {
-                this.secondCardFace = new CardView(secondSideCard, game);
-                this.alternateName = secondCardFace.getName();
-            }
-
-            this.flipCard = card.isFlipCard();
-            if (card.isFlipCard() && card.getFlipCardName() != null) {
-                this.alternateName = card.getFlipCardName();
-            }
-
-            if (card instanceof ModalDoubleFacedCard) {
-                this.transformable = true; // enable GUI day/night button
-                ModalDoubleFacedCard mdfCard = (ModalDoubleFacedCard) card;
-                this.secondCardFace = new CardView(mdfCard.getRightHalfCard(), game);
-                this.alternateName = mdfCard.getRightHalfCard().getName();
-            }
-
-            Card meldsToCard = card.getMeldsToCard();
-            if (meldsToCard != null) {
-                this.transformable = true; // enable GUI day/night button
-                this.secondCardFace = new CardView(meldsToCard, game);
-                this.alternateName = meldsToCard.getName();
-            }
-
-            if (card instanceof PermanentToken && card.isTransformable()) {
-                Token backFace = (Token) ((PermanentToken) card).getOtherFace();
-                this.secondCardFace = new CardView(backFace, game);
-                this.alternateName = backFace.getName();
-            }
-        }
-
-        // shared info - targets
-        if (card instanceof Spell) {
-            this.mageObjectType = MageObjectType.SPELL;
-            Spell spell = (Spell) card;
-            for (SpellAbility spellAbility : spell.getSpellAbilities()) {
-                for (UUID modeId : spellAbility.getModes().getSelectedModes()) {
-                    Mode mode = spellAbility.getModes().get(modeId);
-                    if (!mode.getTargets().isEmpty()) {
-                        addTargets(mode.getTargets(), mode.getEffects(), spellAbility, game);
-                    }
-                }
-            }
-
-            // show for modal spell, which mode was chosen
-            if (spell.getSpellAbility().isModal()) {
-                for (UUID modeId : spell.getSpellAbility().getModes().getSelectedModes()) {
-                    Mode mode = spell.getSpellAbility().getModes().get(modeId);
-                    this.rules.add("<span color='green'><i>Chosen mode: " + mode.getEffects().getText(mode) + "</i></span>");
-                }
-            }
-
-            // show target of a spell on the stack
-            if (!spell.getSpellAbility().getTargets().isEmpty()) {
-                StackObject stackObjectTarget = null;
-                for (Target target : spell.getSpellAbility().getTargets()) {
-                    for (UUID targetId : target.getTargets()) {
-                        MageObject mo = game.getObject(targetId);
-                        if (mo instanceof StackObject) {
-                            stackObjectTarget = (StackObject) mo;
-                        }
-                        if (stackObjectTarget != null) {
-                            this.rules.add("<span color='green'><i>Target on stack: " + stackObjectTarget.getIdName());
-                        }
-                    }
-                }
-            }
-        }
-
-        // render info
-        if (showFaceUp) {
-            if (card instanceof Spell) {
-                Spell spell = (Spell) card;
-                // Determine what part of the art to slice out for spells on the stack which originate
-                // from a split, fuse, or aftermath split card.
-                // Modal double faces cards draws as normal cards
-                SpellAbilityType ty = spell.getSpellAbility().getSpellAbilityType();
-                if (ty == SpellAbilityType.SPLIT_RIGHT || ty == SpellAbilityType.SPLIT_LEFT || ty == SpellAbilityType.SPLIT_FUSED) {
-                    // Needs a special art rect
-                    if (ty == SpellAbilityType.SPLIT_FUSED) {
-                        artRect = ArtRect.SPLIT_FUSED;
-                    } else if (spell.getCard() != null) {
-                        SplitCard wholeCard = ((SplitCardHalf) spell.getCard()).getParentCard();
-                        Abilities<Ability> aftermathHalfAbilities = wholeCard.getRightHalfCard().getAbilities(game);
-                        if (aftermathHalfAbilities.stream().anyMatch(AftermathAbility.class::isInstance)) {
-                            if (ty == SpellAbilityType.SPLIT_RIGHT) {
-                                artRect = ArtRect.AFTERMATH_BOTTOM;
-                            } else {
-                                artRect = ArtRect.AFTERMATH_TOP;
-                            }
-                        } else if (ty == SpellAbilityType.SPLIT_RIGHT) {
-                            artRect = ArtRect.SPLIT_RIGHT;
-                        } else {
-                            artRect = ArtRect.SPLIT_LEFT;
-                        }
-                    }
-                }
-            }
-
-            // Cases, classes and sagas have portrait art
-            if (card.getSubtype(game).contains(SubType.CASE) ||
-                    card.getSubtype(game).contains(SubType.CLASS)) {
-                artRect = ArtRect.FULL_LENGTH_LEFT;
-            } else if (card.getSubtype(game).contains(SubType.SAGA)) {
-                artRect = ArtRect.FULL_LENGTH_RIGHT;
-            }
-
-            // Frame color
-            this.frameColor = card.getFrameColor(game).copy();
-
-            // Frame style
-            this.frameStyle = card.getFrameStyle();
-
-            // Get starting loyalty
-            this.startingLoyalty = CardUtil.convertLoyaltyOrDefense(card.getStartingLoyalty());
-
-            // Get starting defense
-            this.startingDefense = CardUtil.convertLoyaltyOrDefense(card.getStartingDefense());
-
-            // add card icons at the end, so it will have full card view data
-            this.generateCardIcons(null, card, game);
         }
     }
 
@@ -967,7 +981,7 @@ public class CardView extends SimpleCardView {
         if (!empty) {
             throw new IllegalArgumentException("Not supported.");
         }
-        fillEmptyWithImageInfo(null, null, false);
+        fillEmptyWithImageInfo();
     }
 
     public static boolean cardViewEquals(CardView a, CardView b) { // TODO: This belongs in CardView
@@ -1014,7 +1028,7 @@ public class CardView extends SimpleCardView {
                 && aa.getDamage() == bb.getDamage();
     }
 
-    private void fillEmptyWithImageInfo(Game game, Card imageSourceCard, boolean isFaceDown) {
+    private void fillEmptyWithImageInfo() {
         this.name = "";
         this.displayName = "";
         this.displayFullName = "";
@@ -1041,7 +1055,9 @@ public class CardView extends SimpleCardView {
         this.manaCostRightStr = new ArrayList<>();
         this.manaValue = 0;
         this.rarity = Rarity.SPECIAL; // hide rarity info
+    }
 
+    private void setImageInfo(Card imageSourceCard) {
         if (imageSourceCard != null) {
             // keep inner images info (server side card already contain actual info)
             String imageSetCode = imageSourceCard.getExpansionSetCode();
@@ -1070,31 +1086,13 @@ public class CardView extends SimpleCardView {
             }
         }
 
-        // make default face down image
-        // TODO: implement diff backface images someday and insert here (user data + card owner)
-        if (isFaceDown && this.imageFileName.isEmpty()) {
-            this.name = "";
-            this.displayName = this.name;
-            this.displayFullName = this.name;
-
-            // as foretell face down
-            // TODO: it's not ok to use that code - server side objects must has all data, see BecomesFaceDownCreatureEffect.makeFaceDownObject
-            //  it must be a more global bug for card characteristics, not client side viewer
-            if (game != null && imageSourceCard != null && ForetellAbility.isCardInForetell(imageSourceCard, game)) {
-                TokenInfo tokenInfo = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL, this.getId());
-                if (tokenInfo != null) {
-                    this.expansionSetCode = tokenInfo.getSetCode();
-                    this.cardNumber = "0";
-                    this.imageFileName = tokenInfo.getName();
-                    this.imageNumber = tokenInfo.getImageNumber();
-                    this.usesVariousArt = false;
-                }
-                return;
-            }
+        if (this.imageFileName.isEmpty()) {
+            // make default face down image
+            // TODO: implement diff backface images someday and insert here (user data + card owner)
 
             // as normal face down
             TokenInfo tokenInfo = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_MANUAL, this.getId());
-            if (tokenInfo != null) {
+            if (this.imageFileName.isEmpty() && tokenInfo != null) {
                 this.expansionSetCode = tokenInfo.getSetCode();
                 this.cardNumber = "0";
                 this.imageFileName = tokenInfo.getName();
