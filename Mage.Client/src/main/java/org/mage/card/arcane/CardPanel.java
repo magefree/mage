@@ -150,32 +150,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
 
         // Both card rendering implementations have a transform button
         if (this.getGameCard().canTransform()) {
-            // Create the day night button
-            dayNightButton = new JButton("");
-            dayNightButton.setSize(32, 32);
-            dayNightButton.setToolTipText("This permanent is a double faced card. To see the card's other face, push this button or move mouse wheel down while hovering over it.");
-            BufferedImage day = ImageManagerImpl.instance.getDayImage();
-            dayNightButton.setIcon(new ImageIcon(day));
-            dayNightButton.addActionListener(e -> {
-                // if card is rotating then ignore it
-                if (animationInProgress) {
-                    return;
-                }
-
-                // if card is tapped then no visual transforming is possible, so switch it immediately
-                if (isTapped()) {
-                    // toggle without animation
-                    this.getTopPanelRef().toggleTransformed();
-                    this.getTopPanelRef().repaint();
-                    return;
-                }
-
-                // normal animation
-                Animation.transformCard(this);
-            });
-
-            // Add it
-            buttonPanel.add(dayNightButton);
+            createDayNightButton();
         }
 
         // Both card rendering implementations have a view copy source button
@@ -215,6 +190,35 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         // Animation setup
         setTappedAngle(isTapped() ? CardPanel.TAPPED_ANGLE : 0);
         setFlippedAngle(isFlipped() ? CardPanel.FLIPPED_ANGLE : 0);
+    }
+
+    private void createDayNightButton() {
+        // Create the day night button
+        dayNightButton = new JButton("");
+        dayNightButton.setSize(32, 32);
+        dayNightButton.setToolTipText("This permanent is a double faced card. To see the card's other face, push this button or move mouse wheel down while hovering over it.");
+        BufferedImage day = ImageManagerImpl.instance.getDayImage();
+        dayNightButton.setIcon(new ImageIcon(day));
+        dayNightButton.addActionListener(e -> {
+            // if card is rotating then ignore it
+            if (animationInProgress) {
+                return;
+            }
+
+            // if card is tapped then no visual transforming is possible, so switch it immediately
+            if (isTapped()) {
+                // toggle without animation
+                this.getTopPanelRef().toggleTransformed();
+                this.getTopPanelRef().repaint();
+                return;
+            }
+
+            // normal animation
+            Animation.transformCard(this);
+        });
+
+        // Add it
+        buttonPanel.add(dayNightButton);
     }
 
     @Override
@@ -585,10 +589,13 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             dayNightButton.setVisible(true); // show T button for any cards and permanents
             dayNightButton.setIcon(new ImageIcon(transformIcon));
         }
-        // Remove transform button for non-transformable cards
-        else if (dayNightButton != null && this.cardSideOther == null) {
-            buttonPanel.remove(dayNightButton);
-            dayNightButton = null;
+        // Card became transformable
+        if (card.canTransform() && dayNightButton == null) {
+            createDayNightButton();
+        }
+        // Card became non-transformable
+        if (!card.canTransform() && !this.cardSideMain.canTransform() && dayNightButton != null) {
+            dayNightButton.setVisible(false);
         }
     }
 
@@ -949,19 +956,12 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
             this.cardSideOther = gameCard.getSecondCardFace();
         } else {
             // updated card
-            if (this.cardSideMain.getName().equals(gameCard.getName())) {
+            if (this.cardSideMain.getName().equals(gameCard.getName())
+                    || (gameCard instanceof PermanentView && !(gameCard.getName().equals(this.cardSideMain.getName())))) {
                 // from main side
                 this.cardSideMain = gameCard;
                 this.cardSideOther = gameCard.getSecondCardFace();
-            } else if (this.cardSideMain.getName().startsWith("Morph") && !gameCard.getName().startsWith("Morph")
-                && !isTransformed()) {
-                // fix main side morph: if morphed card was main side, updated card should become main side
-                // so the button can be removed
-                this.cardSideMain = gameCard;
-                this.cardSideOther = null;
-                return;
-            }
-            else {
+            } else {
                 // from other side
                 this.cardSideOther = gameCard;
                 return;
