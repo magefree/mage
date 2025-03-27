@@ -31,6 +31,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Alesha's Legacy", 72, Rarity.COMMON, mage.cards.a.AleshasLegacy.class));
         cards.add(new SetCardInfo("Ambling Stormshell", 37, Rarity.RARE, mage.cards.a.AmblingStormshell.class));
         cards.add(new SetCardInfo("Anafenza, Unyielding Lineage", 2, Rarity.RARE, mage.cards.a.AnafenzaUnyieldingLineage.class));
+        cards.add(new SetCardInfo("Armament Dragon", 168, Rarity.UNCOMMON, mage.cards.a.ArmamentDragon.class));
         cards.add(new SetCardInfo("Attuned Hunter", 135, Rarity.UNCOMMON, mage.cards.a.AttunedHunter.class));
         cards.add(new SetCardInfo("Auroral Procession", 169, Rarity.UNCOMMON, mage.cards.a.AuroralProcession.class));
         cards.add(new SetCardInfo("Avenger of the Fallen", 73, Rarity.RARE, mage.cards.a.AvengerOfTheFallen.class));
