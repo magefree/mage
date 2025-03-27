@@ -55,6 +55,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Craterhoof Behemoth", 138, Rarity.MYTHIC, mage.cards.c.CraterhoofBehemoth.class));
         cards.add(new SetCardInfo("Cruel Truths", 76, Rarity.COMMON, mage.cards.c.CruelTruths.class));
         cards.add(new SetCardInfo("Dalkovan Packbeasts", 7, Rarity.UNCOMMON, mage.cards.d.DalkovanPackbeasts.class));
+        cards.add(new SetCardInfo("Defibrillating Current", 177, Rarity.UNCOMMON, mage.cards.d.DefibrillatingCurrent.class));
         cards.add(new SetCardInfo("Delta Bloodflies", 77, Rarity.COMMON, mage.cards.d.DeltaBloodflies.class));
         cards.add(new SetCardInfo("Descendant of Storms", 8, Rarity.UNCOMMON, mage.cards.d.DescendantOfStorms.class));
         cards.add(new SetCardInfo("Devoted Duelist", 104, Rarity.COMMON, mage.cards.d.DevotedDuelist.class));
