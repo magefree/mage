@@ -157,6 +157,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Winternight Stories", 67, Rarity.RARE, mage.cards.w.WinternightStories.class));
         cards.add(new SetCardInfo("Worthy Cost", 99, Rarity.COMMON, mage.cards.w.WorthyCost.class));
         cards.add(new SetCardInfo("Yathan Tombguard", 100, Rarity.UNCOMMON, mage.cards.y.YathanTombguard.class));
+        cards.add(new SetCardInfo("Zurgo's Vanguard", 133, Rarity.UNCOMMON, mage.cards.z.ZurgosVanguard.class));
 
         cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
