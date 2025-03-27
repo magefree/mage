@@ -93,7 +93,7 @@ class TheSecondDoctorCantAttackEffect extends RestrictionEffect {
     private final UUID opponentId;
 
     public TheSecondDoctorCantAttackEffect(UUID opponentId) {
-        super(Duration.Custom);
+        super(Duration.UntilEndOfYourNextTurn);
 	this.opponentId = opponentId;
 	staticText = "";
     }
@@ -116,11 +116,6 @@ class TheSecondDoctorCantAttackEffect extends RestrictionEffect {
         } else {
             discard();
         }
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-	return game.getTurnPhaseType() == TurnPhase.END && this.isYourNextTurn(game);
     }
 
     @Override
