@@ -1,18 +1,14 @@
 package mage.cards.g;
 
-import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
-import mage.abilities.effects.common.asthought.MayLookAtTargetCardEffect;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.FilterSpell;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
@@ -22,6 +18,8 @@ import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -154,13 +152,11 @@ class GontiExileEffect extends OneShotEffect {
         }
         UUID exileZoneId = CardUtil.getExileZoneId(game, controller.getId(), source.getSourceObjectZoneChangeCounter());
         String exileName = CardUtil.getSourceName(game, source) + " - " + controller.getName();
-        if (controller.moveCardsToExile(card, source, game, false, exileZoneId, exileName)) {
-            card.setFaceDown(true, game);
-            CardUtil.makeCardPlayable(game, source, card, false, Duration.Custom, true, controller.getId(), null);
+
+        if (!CardUtil.moveCardToExileFaceDown(game, source, controller, card, exileZoneId, exileName, true)) {
+            return false;
         }
-        ContinuousEffect effect = new MayLookAtTargetCardEffect(controller.getId());
-        effect.setTargetPointer(new FixedTarget(card.getId()));
-        game.addEffect(effect, source);
+        CardUtil.makeCardPlayable(game, source, card, false, Duration.Custom, true, controller.getId(), null);
         return true;
     }
 }
