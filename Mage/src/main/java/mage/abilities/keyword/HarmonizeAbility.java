@@ -4,8 +4,11 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
+import mage.abilities.costs.VariableCostImpl;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffect;
@@ -16,16 +19,19 @@ import mage.cards.ModalDoubleFacedCard;
 import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.filter.StaticFilters;
+import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
-import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -41,10 +47,8 @@ public class HarmonizeAbility extends SpellAbility {
         this.setAdditionalCostsRuleVisible(false);
         this.name = "Harmonize " + manaString;
         this.addCost(new ManaCostsImpl<>(manaString));
-        this.addCost(new TapTargetCost(new TargetControlledPermanent(
-                0, 1, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE, true
-        )));
-        this.addEffect(new HarmonizeCostReductionEffect());
+        this.addCost(new HarmonizeCost());
+        this.addSubAbility(new SimpleStaticAbility(Zone.ALL, new HarmonizeCostReductionEffect()).setRuleVisible(false));
         this.timing = card.isSorcery() ? TimingRule.SORCERY : TimingRule.INSTANT;
     }
 
@@ -144,6 +148,11 @@ public class HarmonizeAbility extends SpellAbility {
         }
         return spellAbilityToResolve.getCosts();
     }
+
+    @Override
+    public String getRule() {
+        return name;
+    }
 }
 
 class HarmonizeReplacementEffect extends ReplacementEffectImpl {
@@ -202,16 +211,15 @@ class HarmonizeCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        if (!game.inCheckPlayableState()) {
+        if (game.inCheckPlayableState()) {
             return true;
         }
         SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        List<Permanent> permanents = (List<Permanent>) getValue("tappedPermanents");
-        if (permanents == null) {
-            return true;
-        }
-        int power = permanents
-                .stream()
+        int power = CardUtil
+                .castStream(spellAbility.getCosts().stream(), HarmonizeCost.class)
+                .map(HarmonizeCost::getChosenCreature)
+                .map(game::getPermanent)
+                .filter(Objects::nonNull)
                 .map(MageObject::getPower)
                 .mapToInt(MageInt::getValue)
                 .map(x -> Math.max(x, 0))
@@ -231,5 +239,71 @@ class HarmonizeCostReductionEffect extends CostModificationEffectImpl {
     @Override
     public HarmonizeCostReductionEffect copy() {
         return new HarmonizeCostReductionEffect(this);
+    }
+}
+
+class HarmonizeCost extends VariableCostImpl {
+
+    private UUID chosenCreature = null;
+
+    HarmonizeCost() {
+        super(VariableCostType.ADDITIONAL, "", "");
+    }
+
+    private HarmonizeCost(final HarmonizeCost cost) {
+        super(cost);
+        this.chosenCreature = cost.chosenCreature;
+    }
+
+    @Override
+    public HarmonizeCost copy() {
+        return new HarmonizeCost(this);
+    }
+
+    @Override
+    public void clearPaid() {
+        super.clearPaid();
+        chosenCreature = null;
+    }
+
+    @Override
+    public int getMaxValue(Ability source, Game game) {
+        return game.getBattlefield().contains(StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE, source, game, 1) ? 1 : 0;
+    }
+
+    @Override
+    public int announceXValue(Ability source, Game game) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player == null || !game.getBattlefield().contains(
+                StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE, source, game, 1
+        )) {
+            return 0;
+        }
+        TargetPermanent target = new TargetPermanent(
+                0, 1, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE, true
+        );
+        target.withChooseHint("for harmonize");
+        player.choose(Outcome.PlayForFree, target, source, game);
+        Permanent permanent = game.getPermanent(target.getFirstTarget());
+        if (permanent == null) {
+            return 0;
+        }
+        chosenCreature = permanent.getId();
+        return 1;
+    }
+
+    private FilterControlledPermanent makeFilter() {
+        FilterControlledPermanent filter = new FilterControlledPermanent("tap the chosen creature");
+        filter.add(new PermanentIdPredicate(chosenCreature));
+        return filter;
+    }
+
+    @Override
+    public Cost getFixedCostsFromAnnouncedValue(int xValue) {
+        return new TapTargetCost(new TargetControlledPermanent(xValue, xValue, makeFilter(), true));
+    }
+
+    public UUID getChosenCreature() {
+        return chosenCreature;
     }
 }
