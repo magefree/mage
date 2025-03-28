@@ -113,13 +113,7 @@ class BaneAlleyBrokerDrawExileEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        if (!controller.moveCardsToExile(
-                card, source, game, false, CardUtil.getExileZoneId(game, source), CardUtil.getSourceName(game, source)
-        )) {
-            return false;
-        }
-        card.setFaceDown(true, game);
-        return true;
+        return CardUtil.moveCardToExileFaceDown(game, source, controller, card);
     }
 
     @Override
@@ -189,12 +183,21 @@ class BaneAlleyBrokerLookAtCardEffect extends AsThoughEffectImpl {
 
     @Override
     public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (!source.isControlledBy(affectedControllerId)) {
+        Card card = game.getCard(objectId);
+        if (!source.isControlledBy(affectedControllerId) || card == null) {
             return false;
         }
-        Card card = game.getCard(objectId);
-        ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source));
-        return card != null && exile != null && exile.getCards(game).contains(card);
+        int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
+        ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, zcc));
+        if (exile == null || exile.isEmpty() || !exile.contains(card.getId())) {
+            return false;
+        }
+        boolean canLookAtCard = exile.isPlayerAllowedToSeeCard(affectedControllerId, card);
+        if (canLookAtCard) {
+            return true;
+        }
+        exile.letPlayerSeeCards(affectedControllerId, card);
+        return true;
     }
 
 }
