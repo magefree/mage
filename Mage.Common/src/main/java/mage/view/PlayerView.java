@@ -87,7 +87,7 @@ public class PlayerView implements Serializable {
         for (ExileZone exileZone : game.getExile().getExileZones()) {
             for (Card card : exileZone.getCards(game)) {
                 if (player.getId().equals(card.getOwnerId())) {
-                    exile.put(card.getId(), new CardView(card, game, CardUtil.canShowAsControlled(card, createdForPlayerId)));
+                    exile.put(card.getId(), new CardView(card, game, exileZone.isPlayerAllowedToSeeCard(createdForPlayerId, card)));
                 }
             }
         }
