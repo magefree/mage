@@ -16,6 +16,7 @@ import mage.abilities.icon.CardIcon;
 import mage.abilities.icon.CardIconImpl;
 import mage.abilities.icon.CardIconType;
 import mage.abilities.keyword.AftermathAbility;
+import mage.abilities.keyword.ForetellAbility;
 import mage.cards.*;
 import mage.cards.mock.MockCard;
 import mage.cards.repository.CardInfo;
@@ -344,7 +345,7 @@ public class CardView extends SimpleCardView {
 
         // FACE DOWN
         if (!showFaceUp) {
-            this.setFaceDownInfo(card, sourceCard, showHiddenFaceDownData, sourceName);
+            this.setFaceDownInfo(game, card, sourceCard, showHiddenFaceDownData, sourceName);
         }
 
         // FACE UP INFO
@@ -576,8 +577,8 @@ public class CardView extends SimpleCardView {
         this.displayFullName = fullCardName;
     }
 
-    private void setFaceDownInfo(Card card, Card sourceCard, boolean showHiddenFaceDownData, String sourceName) {
-        setImageInfo(card);
+    private void setFaceDownInfo(Game game, Card card, Card sourceCard, boolean showHiddenFaceDownData, String sourceName) {
+        setImageInfo(game, card);
         boolean hideFaceDownInfo = !(sourceCard instanceof Spell) && !(card instanceof Permanent);
         // TODO: replace hideFaceDownInfo workaround to have methods return proper values if face down
         if (hideFaceDownInfo) {
@@ -1057,7 +1058,7 @@ public class CardView extends SimpleCardView {
         this.rarity = Rarity.SPECIAL; // hide rarity info
     }
 
-    private void setImageInfo(Card imageSourceCard) {
+    private void setImageInfo(Game game, Card imageSourceCard) {
         if (imageSourceCard != null) {
             // keep inner images info (server side card already contain actual info)
             String imageSetCode = imageSourceCard.getExpansionSetCode();
@@ -1087,6 +1088,21 @@ public class CardView extends SimpleCardView {
         }
 
         if (this.imageFileName.isEmpty()) {
+            // as foretell face down
+            // TODO: it's not ok to use that code - server side objects must has all data, see BecomesFaceDownCreatureEffect.makeFaceDownObject
+            //  it must be a more global bug for card characteristics, not client side viewer
+            if (game != null && imageSourceCard != null && ForetellAbility.isCardInForetell(imageSourceCard, game)) {
+                TokenInfo tokenInfo = TokenRepository.instance.findPreferredTokenInfoForXmage(TokenRepository.XMAGE_IMAGE_NAME_FACE_DOWN_FORETELL, this.getId());
+                if (tokenInfo != null) {
+                    this.expansionSetCode = tokenInfo.getSetCode();
+                    this.cardNumber = "0";
+                    this.imageFileName = tokenInfo.getName();
+                    this.imageNumber = tokenInfo.getImageNumber();
+                    this.usesVariousArt = false;
+                }
+                return;
+            }
+
             // make default face down image
             // TODO: implement diff backface images someday and insert here (user data + card owner)
 
