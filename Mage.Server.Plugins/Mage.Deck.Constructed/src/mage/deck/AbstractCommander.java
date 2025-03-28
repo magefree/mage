@@ -844,8 +844,8 @@ public abstract class AbstractCommander extends Constructed {
                     || cn.equals("yawgmoth's will")
                     || cn.equals("zealous conscripts")
                     || cn.equals("zur the enchanter")) {
-                    thisMaxPower = Math.max(thisMaxPower, 12);
-                }
+                thisMaxPower = Math.max(thisMaxPower, 12);
+            }
 
             // Parts of infinite combos
             if (cn.equals("animate artifact") || cn.equals("animar, soul of element")
@@ -905,10 +905,10 @@ public abstract class AbstractCommander extends Constructed {
                     || cn.equals("workhorse") || cn.equals("worldgorger dragon")
                     || cn.equals("worthy cause") || cn.equals("yawgmoth's will")
                     || cn.equals("zealous conscripts")) {
-                    thisMaxPower = Math.max(thisMaxPower, 15);
-                    numberInfinitePieces++;
-                }
-        
+                thisMaxPower = Math.max(thisMaxPower, 15);
+                numberInfinitePieces++;
+            }
+
             // Game changers
             if (cn.equals("ad nauseam")
                     || cn.equals("ancient tomb")
@@ -950,9 +950,10 @@ public abstract class AbstractCommander extends Constructed {
                     || cn.equals("vorinclex, voice of hunger")
                     || cn.equals("winota, joiner of forces")
                     || cn.equals("yuriko, the tiger's shadow")) {
-                    thisMaxPower = Math.max(thisMaxPower, 20);
-                }
-            
+                thisMaxPower = Math.max(thisMaxPower, 20);
+            }
+        }
+
         ObjectColor color = null;
         for (Card commander : deck.getSideboard()) {
             int thisMaxPower = 0;
