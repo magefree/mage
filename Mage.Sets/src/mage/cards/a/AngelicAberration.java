@@ -17,8 +17,8 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.filter.predicate.mageobject.ToughnessPredicate;
+import mage.filter.predicate.mageobject.BasePowerPredicate;
+import mage.filter.predicate.mageobject.BaseToughnessPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.EldraziAngelToken;
@@ -70,8 +70,8 @@ class AngelicAberrationEffect extends OneShotEffect {
 
     static {
         filter.add(Predicates.or(
-                new PowerPredicate(ComparisonType.OR_LESS, 1),
-                new ToughnessPredicate(ComparisonType.OR_LESS, 1)
+                new BasePowerPredicate(ComparisonType.OR_LESS, 1),
+                new BaseToughnessPredicate(ComparisonType.OR_LESS, 1)
         ));
     }
 
