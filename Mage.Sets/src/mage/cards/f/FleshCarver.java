@@ -24,7 +24,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.FleshCarverHorrorToken;
+import mage.game.permanent.token.HorrorXXBlackToken;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
 
@@ -110,7 +110,7 @@ class FleshCarverEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int xValue = (Integer) getValue("power");
-            return new CreateTokenEffect(new FleshCarverHorrorToken(xValue)).apply(game, source);
+            return new CreateTokenEffect(new HorrorXXBlackToken(xValue)).apply(game, source);
         }
         return false;
     }

@@ -12,7 +12,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.SpoilsOfBloodHorrorToken;
+import mage.game.permanent.token.HorrorXXBlackToken;
 import mage.players.Player;
 
 /**
@@ -54,7 +54,7 @@ class SpoilsOfBloodEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             new CreateTokenEffect(
-                    new SpoilsOfBloodHorrorToken(CreaturesDiedThisTurnCount.instance.calculate(game, source, this)))
+                    new HorrorXXBlackToken(CreaturesDiedThisTurnCount.instance.calculate(game, source, this)))
                     .apply(game, source);
             return true;
         }

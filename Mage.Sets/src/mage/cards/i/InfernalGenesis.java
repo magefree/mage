@@ -10,7 +10,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
 import mage.game.Game;
-import mage.game.permanent.token.MinionToken2;
+import mage.game.permanent.token.MinionToken;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
 
@@ -42,7 +42,7 @@ public final class InfernalGenesis extends CardImpl {
 
 class InfernalGenesisEffect extends OneShotEffect {
 
-    private static final Token token = new MinionToken2();
+    private static final Token token = new MinionToken();
 
     InfernalGenesisEffect() {
         super(Outcome.PutCreatureInPlay);

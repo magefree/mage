@@ -5,25 +5,20 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 
 /**
- * @author FenrisulfrX
+ * @author Quercitron
  */
 public final class MinionToken extends TokenImpl {
 
     public MinionToken() {
-        this("DDE");
-    }
-
-    public MinionToken(String setCode) {
-        super("Phyrexian Minion Token", "X/X black Phyrexian Minion creature token");
+        super("Minion Token", "1/1 black Minion creature token");
         cardType.add(CardType.CREATURE);
-        subtype.add(SubType.PHYREXIAN);
         subtype.add(SubType.MINION);
         color.setBlack(true);
-        power = new MageInt(0);
-        toughness = new MageInt(0);
+        power = new MageInt(1);
+        toughness = new MageInt(1);
     }
 
-    private MinionToken(final MinionToken token) {
+    protected MinionToken(final MinionToken token) {
         super(token);
     }
 

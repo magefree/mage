@@ -10,7 +10,7 @@ import mage.constants.SubType;
 public final class HumanRogueToken extends TokenImpl {
 
     public HumanRogueToken() {
-        super("Human Token", "1/1 white Human Rogue creature token");
+        super("Human Rogue Token", "1/1 white Human Rogue creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add(SubType.HUMAN);

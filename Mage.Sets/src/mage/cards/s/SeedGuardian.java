@@ -14,7 +14,7 @@ import mage.constants.Outcome;
 import mage.constants.SubType;
 import mage.filter.StaticFilters;
 import mage.game.Game;
-import mage.game.permanent.token.SeedGuardianToken;
+import mage.game.permanent.token.ElementalXXGreenToken;
 import mage.players.Player;
 
 /**
@@ -66,7 +66,7 @@ class SeedGuardianEffect extends OneShotEffect {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             int creaturesInGraveyard = controller.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game);
-            return new CreateTokenEffect(new SeedGuardianToken(creaturesInGraveyard)).apply(game, source);
+            return new CreateTokenEffect(new ElementalXXGreenToken(creaturesInGraveyard)).apply(game, source);
         }
         return false;
     }

@@ -439,7 +439,7 @@ public class ScryfallImageSupportCards {
             add("ELD"); // Throne of Eldraine
             //add("PTG"); // Ponies: The Galloping
             add("CMB1"); // Mystery Booster Playtest Cards 2019
-            //add("MB1"); // Mystery Booster
+            add("MB1"); // Mystery Booster
             add("GN2"); // Game Night 2019
             add("HA1"); // Historic Anthology 1
             //add("HHO"); // Happy Holidays
@@ -685,6 +685,10 @@ public class ScryfallImageSupportCards {
 
             // LTR - 0 number for tokens only
             put("LTR/The One Ring/001", "https://api.scryfall.com/cards/ltr/0/");
+
+            // MB1
+            put("MB1/Goblin Trenches", "https://api.scryfall.com/cards/plst/EMA-203/");
+            put("MB1/Prophetic Bolt", "https://api.scryfall.com/cards/plst/C15-231/");
 
             // REX - double faced lands (xmage uses two diff lands for it)
             put("REX/Command Tower/26b", "https://api.scryfall.com/cards/rex/26/en?format=image&face=back");

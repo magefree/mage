@@ -12,7 +12,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.token.RallyTheHordeWarriorToken;
+import mage.game.permanent.token.RedWarriorToken;
 import mage.players.Player;
 
 /**
@@ -72,7 +72,7 @@ class RallyTheHordeEffect extends OneShotEffect {
                     nonLandCardsExiled += nonLands;
                 }
             }
-            return new CreateTokenEffect(new RallyTheHordeWarriorToken(), nonLandCardsExiled).apply(game, source);
+            return new CreateTokenEffect(new RedWarriorToken(), nonLandCardsExiled).apply(game, source);
 
         }
         return false;

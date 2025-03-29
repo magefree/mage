@@ -11,7 +11,7 @@ import mage.constants.SubType;
 public final class DinDragonToken extends TokenImpl {
 
     public DinDragonToken() {
-        super("Dragon Token", "4/4 red Dinosaur Dragon creature token with flying");
+        super("Dinosaur Dragon Token", "4/4 red Dinosaur Dragon creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add(SubType.DINOSAUR);

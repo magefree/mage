@@ -7,13 +7,13 @@ import mage.constants.SubType;
 /**
  * @author spjspj
  */
-public final class SeedGuardianToken extends TokenImpl {
+public final class ElementalXXGreenToken extends TokenImpl {
 
-    public SeedGuardianToken() {
+    public ElementalXXGreenToken() {
         this(1);
     }
 
-    public SeedGuardianToken(int xValue) {
+    public ElementalXXGreenToken(int xValue) {
         super("Elemental Token", "X/X green Elemental creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
@@ -22,11 +22,11 @@ public final class SeedGuardianToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    private SeedGuardianToken(final SeedGuardianToken token) {
+    private ElementalXXGreenToken(final ElementalXXGreenToken token) {
         super(token);
     }
 
-    public SeedGuardianToken copy() {
-        return new SeedGuardianToken(this);
+    public ElementalXXGreenToken copy() {
+        return new ElementalXXGreenToken(this);
     }
 }
