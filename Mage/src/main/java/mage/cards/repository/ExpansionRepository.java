@@ -117,6 +117,7 @@ public enum ExpansionRepository {
         List<String> setCodes = new ArrayList<>();
         try {
             List<ExpansionInfo> expansions = expansionDao.queryForAll();
+            expansions.sort((item1,item2)->{return item1.getCode().compareTo(item2.getCode()); });
             for (ExpansionInfo expansion : expansions) {
                 setCodes.add(expansion.getCode());
             }

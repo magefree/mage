@@ -7,13 +7,13 @@ import mage.constants.SubType;
 /**
  * @author spjspj
  */
-public final class FleshCarverHorrorToken extends TokenImpl {
+public final class HorrorXXBlackToken extends TokenImpl {
 
-    public FleshCarverHorrorToken() {
+    public HorrorXXBlackToken() { 
         this(1);
     }
 
-    public FleshCarverHorrorToken(int xValue) {
+    public HorrorXXBlackToken(int xValue) {
         super("Horror Token", "X/X black Horror creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
@@ -22,11 +22,11 @@ public final class FleshCarverHorrorToken extends TokenImpl {
         toughness = new MageInt(xValue);
     }
 
-    private FleshCarverHorrorToken(final FleshCarverHorrorToken token) {
+    private HorrorXXBlackToken(final HorrorXXBlackToken token) {
         super(token);
     }
 
-    public FleshCarverHorrorToken copy() {
-        return new FleshCarverHorrorToken(this);
+    public HorrorXXBlackToken copy() {
+        return new HorrorXXBlackToken(this);
     }
 }

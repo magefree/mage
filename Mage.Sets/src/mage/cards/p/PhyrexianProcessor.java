@@ -15,7 +15,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.MinionToken;
+import mage.game.permanent.token.PhyrexianMinionToken;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -111,7 +111,7 @@ class PhyrexianProcessorCreateTokenEffect extends OneShotEffect {
         Object object = game.getState().getValue(key);
         if (object instanceof Integer) {
             int lifePaid = (int) object;
-            MinionToken token = new MinionToken();
+            PhyrexianMinionToken token = new PhyrexianMinionToken();
             token.setPower(lifePaid);
             token.setToughness(lifePaid);
             token.putOntoBattlefield(1, game, source, source.getControllerId());
