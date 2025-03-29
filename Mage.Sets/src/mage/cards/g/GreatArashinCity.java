@@ -16,7 +16,7 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.StaticFilters;
 import mage.filter.predicate.Predicates;
-import mage.game.permanent.token.SpiritWhiteToken;
+import mage.game.permanent.token.NoFlyingSpiritWhiteToken;
 import mage.target.common.TargetCardInYourGraveyard;
 
 import java.util.UUID;
@@ -47,9 +47,9 @@ public final class GreatArashinCity extends CardImpl {
         this.addAbility(new BlackManaAbility());
 
         // {1}{B}, {T}, Exile a creature card from your graveyard: Create a 1/1 white Spirit creature token.
-        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new SpiritWhiteToken()), new ManaCostsImpl<>("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(new CreateTokenEffect(new NoFlyingSpiritWhiteToken()), new ManaCostsImpl<>("{1}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE)));
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE)).withSourceExileZone(false));
         this.addAbility(ability);
     }
 
