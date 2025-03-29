@@ -304,6 +304,8 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Temur Ascendancy", 305, Rarity.RARE, mage.cards.t.TemurAscendancy.class));
         cards.add(new SetCardInfo("Terramorphic Expanse", 408, Rarity.COMMON, mage.cards.t.TerramorphicExpanse.class));
         cards.add(new SetCardInfo("Territorial Hellkite", 240, Rarity.RARE, mage.cards.t.TerritorialHellkite.class));
+        cards.add(new SetCardInfo("Teval's Judgement", 28, Rarity.RARE, mage.cards.t.TevalsJudgement.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Teval's Judgement", 68, Rarity.RARE, mage.cards.t.TevalsJudgement.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Teval, the Balanced Scale", 8, Rarity.MYTHIC, mage.cards.t.TevalTheBalancedScale.class));
         cards.add(new SetCardInfo("Thalisse, Reverent Medium", 306, Rarity.UNCOMMON, mage.cards.t.ThalisseReverentMedium.class));
         cards.add(new SetCardInfo("Think Twice", 168, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
