@@ -16,9 +16,9 @@ import java.util.UUID;
 /**
  * @author PurpleCrowbar
  */
-public final class TevalsJudgement extends CardImpl {
+public final class TevalsJudgment extends CardImpl {
 
-    public TevalsJudgement(UUID ownerId, CardSetInfo setInfo) {
+    public TevalsJudgment(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
 
         // Whenever one or more cards leave your graveyard, choose one that hasn’t been chosen this turn --
@@ -36,12 +36,12 @@ public final class TevalsJudgement extends CardImpl {
         this.addAbility(ability);
     }
 
-    private TevalsJudgement(final TevalsJudgement card) {
+    private TevalsJudgment(final TevalsJudgment card) {
         super(card);
     }
 
     @Override
-    public TevalsJudgement copy() {
-        return new TevalsJudgement(this);
+    public TevalsJudgment copy() {
+        return new TevalsJudgment(this);
     }
 }
