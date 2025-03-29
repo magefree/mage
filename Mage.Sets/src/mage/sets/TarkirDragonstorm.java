@@ -180,6 +180,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Venerated Stormsinger", 97, Rarity.UNCOMMON, mage.cards.v.VeneratedStormsinger.class));
         cards.add(new SetCardInfo("Voice of Victory", 33, Rarity.RARE, mage.cards.v.VoiceOfVictory.class));
         cards.add(new SetCardInfo("Watcher of the Wayside", 249, Rarity.COMMON, mage.cards.w.WatcherOfTheWayside.class));
+        cards.add(new SetCardInfo("Wild Ride", 132, Rarity.COMMON, mage.cards.w.WildRide.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 271, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
         cards.add(new SetCardInfo("Wingblade Disciple", 65, Rarity.UNCOMMON, mage.cards.w.WingbladeDisciple.class));
         cards.add(new SetCardInfo("Wingspan Stride", 66, Rarity.COMMON, mage.cards.w.WingspanStride.class));
