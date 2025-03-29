@@ -54,7 +54,7 @@ public final class GlarbCalamitysAugur extends CardImpl {
         this.addAbility(new SimpleStaticAbility(new PlayFromTopOfLibraryEffect(filter)));
 
         // {T}: Surveil 2.
-        this.addAbility(new SimpleActivatedAbility(new SurveilEffect(2), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(new SurveilEffect(2, false), new TapSourceCost()));
     }
 
     private GlarbCalamitysAugur(final GlarbCalamitysAugur card) {

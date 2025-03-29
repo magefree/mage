@@ -29,9 +29,11 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Adorned Crocodile", 69, Rarity.COMMON, mage.cards.a.AdornedCrocodile.class));
         cards.add(new SetCardInfo("Aegis Sculptor", 35, Rarity.UNCOMMON, mage.cards.a.AegisSculptor.class));
         cards.add(new SetCardInfo("Agent of Kotis", 36, Rarity.COMMON, mage.cards.a.AgentOfKotis.class));
+        cards.add(new SetCardInfo("Alchemist's Assistant", 71, Rarity.UNCOMMON, mage.cards.a.AlchemistsAssistant.class));
         cards.add(new SetCardInfo("Alesha's Legacy", 72, Rarity.COMMON, mage.cards.a.AleshasLegacy.class));
         cards.add(new SetCardInfo("Ambling Stormshell", 37, Rarity.RARE, mage.cards.a.AmblingStormshell.class));
         cards.add(new SetCardInfo("Anafenza, Unyielding Lineage", 2, Rarity.RARE, mage.cards.a.AnafenzaUnyieldingLineage.class));
+        cards.add(new SetCardInfo("Arashin Sunshield", 3, Rarity.COMMON, mage.cards.a.ArashinSunshield.class));
         cards.add(new SetCardInfo("Armament Dragon", 168, Rarity.UNCOMMON, mage.cards.a.ArmamentDragon.class));
         cards.add(new SetCardInfo("Attuned Hunter", 135, Rarity.UNCOMMON, mage.cards.a.AttunedHunter.class));
         cards.add(new SetCardInfo("Auroral Procession", 169, Rarity.UNCOMMON, mage.cards.a.AuroralProcession.class));
@@ -89,6 +91,8 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Gurmag Nightwatch", 190, Rarity.COMMON, mage.cards.g.GurmagNightwatch.class));
         cards.add(new SetCardInfo("Hardened Tactician", 191, Rarity.UNCOMMON, mage.cards.h.HardenedTactician.class));
         cards.add(new SetCardInfo("Heritage Reclamation", 145, Rarity.COMMON, mage.cards.h.HeritageReclamation.class));
+        cards.add(new SetCardInfo("Humbling Elder", 48, Rarity.COMMON, mage.cards.h.HumblingElder.class));
+        cards.add(new SetCardInfo("Iceridge Serpent", 49, Rarity.COMMON, mage.cards.i.IceridgeSerpent.class));
         cards.add(new SetCardInfo("Inevitable Defeat", 194, Rarity.RARE, mage.cards.i.InevitableDefeat.class));
         cards.add(new SetCardInfo("Inspirited Vanguard", 146, Rarity.UNCOMMON, mage.cards.i.InspiritedVanguard.class));
         cards.add(new SetCardInfo("Iridescent Tiger", 109, Rarity.UNCOMMON, mage.cards.i.IridescentTiger.class));
@@ -134,6 +138,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Rebellious Strike", 20, Rarity.COMMON, mage.cards.r.RebelliousStrike.class));
         cards.add(new SetCardInfo("Reigning Victor", 216, Rarity.COMMON, mage.cards.r.ReigningVictor.class));
         cards.add(new SetCardInfo("Reputable Merchant", 217, Rarity.COMMON, mage.cards.r.ReputableMerchant.class));
+        cards.add(new SetCardInfo("Rescue Leopard", 116, Rarity.COMMON, mage.cards.r.RescueLeopard.class));
         cards.add(new SetCardInfo("Ringing Strike Mastery", 53, Rarity.COMMON, mage.cards.r.RingingStrikeMastery.class));
         cards.add(new SetCardInfo("Roamer's Routine", 154, Rarity.COMMON, mage.cards.r.RoamersRoutine.class));
         cards.add(new SetCardInfo("Roar of Endless Song", 220, Rarity.RARE, mage.cards.r.RoarOfEndlessSong.class));
@@ -172,6 +177,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Tranquil Cove", 270, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Twin Bolt", 128, Rarity.COMMON, mage.cards.t.TwinBolt.class));
         cards.add(new SetCardInfo("Ugin, Eye of the Storms", 1, Rarity.MYTHIC, mage.cards.u.UginEyeOfTheStorms.class));
+        cards.add(new SetCardInfo("Unburied Earthcarver", 95, Rarity.COMMON, mage.cards.u.UnburiedEarthcarver.class));
         cards.add(new SetCardInfo("Underfoot Underdogs", 129, Rarity.COMMON, mage.cards.u.UnderfootUnderdogs.class));
         cards.add(new SetCardInfo("Undergrowth Leopard", 165, Rarity.COMMON, mage.cards.u.UndergrowthLeopard.class));
         cards.add(new SetCardInfo("Unending Whisper", 62, Rarity.COMMON, mage.cards.u.UnendingWhisper.class));
