@@ -1093,10 +1093,10 @@ public final class DoctorWho extends ExpansionSet {
         cards.add(new SetCardInfo("Thijarian Witness", 716, Rarity.UNCOMMON, mage.cards.t.ThijarianWitness.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Think Twice", 220, Rarity.COMMON, mage.cards.t.ThinkTwice.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Think Twice", 811, Rarity.COMMON, mage.cards.t.ThinkTwice.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("This Is How It Ends", 373, Rarity.RARE, mage.cards.t.ThisIsHowItEnds.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("This Is How It Ends", 675, Rarity.RARE, mage.cards.t.ThisIsHowItEnds.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("This Is How It Ends", 70, Rarity.RARE, mage.cards.t.ThisIsHowItEnds.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("This Is How It Ends", 964, Rarity.RARE, mage.cards.t.ThisIsHowItEnds.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("This Is How It Ends", 373, Rarity.RARE, mage.cards.t.ThisIsHowItEnds.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("This Is How It Ends", 675, Rarity.RARE, mage.cards.t.ThisIsHowItEnds.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("This Is How It Ends", 70, Rarity.RARE, mage.cards.t.ThisIsHowItEnds.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("This Is How It Ends", 964, Rarity.RARE, mage.cards.t.ThisIsHowItEnds.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thought Vessel", 255, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Thought Vessel", 846, Rarity.UNCOMMON, mage.cards.t.ThoughtVessel.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Three Visits", 235, Rarity.UNCOMMON, mage.cards.t.ThreeVisits.class, NON_FULL_USE_VARIOUS));
