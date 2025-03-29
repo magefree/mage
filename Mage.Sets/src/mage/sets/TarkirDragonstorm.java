@@ -29,6 +29,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Adorned Crocodile", 69, Rarity.COMMON, mage.cards.a.AdornedCrocodile.class));
         cards.add(new SetCardInfo("Aegis Sculptor", 35, Rarity.UNCOMMON, mage.cards.a.AegisSculptor.class));
         cards.add(new SetCardInfo("Agent of Kotis", 36, Rarity.COMMON, mage.cards.a.AgentOfKotis.class));
+        cards.add(new SetCardInfo("Ainok Wayfarer", 134, Rarity.COMMON, mage.cards.a.AinokWayfarer.class));
         cards.add(new SetCardInfo("Alchemist's Assistant", 71, Rarity.UNCOMMON, mage.cards.a.AlchemistsAssistant.class));
         cards.add(new SetCardInfo("Alesha's Legacy", 72, Rarity.COMMON, mage.cards.a.AleshasLegacy.class));
         cards.add(new SetCardInfo("Ambling Stormshell", 37, Rarity.RARE, mage.cards.a.AmblingStormshell.class));
