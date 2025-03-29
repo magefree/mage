@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class TarkirDragonstorm extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Channeled Dragonfire", "Glacial Dragonhunt", "Mammoth Bellow", "Nature's Rhythm", "Roamer's Routine", "Songcrafter Mage", "Synchronized Charge", "Unending Whisper", "Ureni's Rebuff", "Winternight Stories");
+    private static final List<String> unfinished = Arrays.asList("Channeled Dragonfire", "Glacial Dragonhunt", "Mammoth Bellow", "Nature's Rhythm", "Roamer's Routine", "Songcrafter Mage", "Synchronized Charge", "Unending Whisper", "Ureni's Rebuff", "Wild Ride", "Winternight Stories");
     private static final TarkirDragonstorm instance = new TarkirDragonstorm();
 
     public static TarkirDragonstorm getInstance() {
@@ -150,14 +150,14 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Sunset Strikemaster", 126, Rarity.UNCOMMON, mage.cards.s.SunsetStrikemaster.class));
         cards.add(new SetCardInfo("Swamp", 281, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 268, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
-        cards.add(new SetCardInfo("Teeming Dragonstorm", 30, Rarity.UNCOMMON, mage.cards.t.TeemingDragonstorm.class, NON_FULL_USE_VARIOUS));
-        cards.add(new SetCardInfo("Teeming Dragonstorm", 293, Rarity.UNCOMMON, mage.cards.t.TeemingDragonstorm.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Teeming Dragonstorm", 30, Rarity.UNCOMMON, mage.cards.t.TeemingDragonstorm.class));
         cards.add(new SetCardInfo("Tempest Hawk", 31, Rarity.COMMON, mage.cards.t.TempestHawk.class));
         cards.add(new SetCardInfo("Temur Devotee", 61, Rarity.COMMON, mage.cards.t.TemurDevotee.class));
         cards.add(new SetCardInfo("Temur Monument", 248, Rarity.UNCOMMON, mage.cards.t.TemurMonument.class));
         cards.add(new SetCardInfo("Temur Tawnyback", 229, Rarity.COMMON, mage.cards.t.TemurTawnyback.class));
         cards.add(new SetCardInfo("Thornwood Falls", 269, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Tranquil Cove", 270, Rarity.COMMON, mage.cards.t.TranquilCove.class));
+        cards.add(new SetCardInfo("Twin Bolt", 128, Rarity.COMMON, mage.cards.t.TwinBolt.class));
         cards.add(new SetCardInfo("Ugin, Eye of the Storms", 1, Rarity.MYTHIC, mage.cards.u.UginEyeOfTheStorms.class));
         cards.add(new SetCardInfo("Underfoot Underdogs", 129, Rarity.COMMON, mage.cards.u.UnderfootUnderdogs.class));
         cards.add(new SetCardInfo("Undergrowth Leopard", 165, Rarity.COMMON, mage.cards.u.UndergrowthLeopard.class));
