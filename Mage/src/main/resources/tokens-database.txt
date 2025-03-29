@@ -2482,6 +2482,23 @@
 |Generate|TOK:DRC|Zombie Army|||ZombieArmyToken|
 |Generate|TOK:DRC|Zombie Warrior|||GodEternalOketraToken|
 
+# TDM
+|Generate|TOK:TDM|Bird|||BirdToken|
+|Generate|TOK:TDM|Dragon|||DragonToken|
+|Generate|TOK:TDM|Elephant|||Elephant55Token|
+|Generate|TOK:TDM|Goblin|||GoblinToken|
+|Generate|TOK:TDM|Monk|||MonasteryMentorToken|
+|Generate|TOK:TDM|Reliquary Dragon|||ReliquaryDragonToken|
+|Generate|TOK:TDM|Soldier|1||SoldierToken|
+|Generate|TOK:TDM|Soldier|2||Soldier22Token|
+|Generate|TOK:TDM|Spirit|1||SpiritXXToken|
+|Generate|TOK:TDM|Spirit|2||NoFlyingSpiritWhiteToken|
+# TODO: 2/2 Spirit (no relevant cards revealed, token not implemented)
+# TODO: 3/3 Spirit (no relevant cards revealed, token not implemented)
+|Generate|TOK:TDM|Treasure|||TreasureToken|
+|Generate|TOK:TDM|Warrior|||RedWarriorToken|
+|Generate|TOK:TDM|Zombie Druid|||ZombieDruidToken|
+
 # TDC
 |Generate|TOK:TDC|Angel|||AngelVigilanceToken|
 |Generate|TOK:TDC|Citizen|||CitizenGreenWhiteToken|
