@@ -1,4 +1,3 @@
-
 package mage.sets;
 
 import mage.cards.ExpansionSet;
@@ -17,7 +16,7 @@ public final class UnknownEvent extends ExpansionSet {
     }
 
     private UnknownEvent() {
-        super("Unknown Event", "DA1", ExpansionSet.buildDate(2023, 2, 15), SetType.JOKE_SET);
+        super("Unknown Event", "UNK", ExpansionSet.buildDate(2023, 2, 15), SetType.JOKE_SET);
         this.hasBasicLands = false;
         this.hasBoosters = false;
 
