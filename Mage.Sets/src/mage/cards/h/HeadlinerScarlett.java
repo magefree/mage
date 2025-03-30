@@ -2,23 +2,21 @@ package mage.cards.h;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.asthought.MayLookAtTargetCardEffect;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 
 import java.util.UUID;
@@ -120,14 +118,12 @@ class HeadlinerScarlettExileEffect extends OneShotEffect {
         UUID exileId = CardUtil.getExileZoneId("HeadlinerScarlett::" + source.getSourceId() + "::" + game.getTurn(), game);
         String exileName = CardUtil.getSourceIdName(game, source) + " turn:" + game.getTurnNum();
 
-        card.setFaceDown(true, game);
-        controller.moveCardsToExile(card, source, game, false, exileId, exileName);
-        if (game.getState().getZone(card.getId()) == Zone.EXILED) {
-            card.setFaceDown(true, game);
+        if (CardUtil.moveCardToExileFaceDown(game, source, controller, card, exileId, exileName, true)) {
             CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
-            ContinuousEffect effect = new MayLookAtTargetCardEffect(controller.getId());
-            effect.setTargetPointer(new FixedTarget(card, game));
-            game.addEffect(effect, source);
+            ExileZone exileZone = game.getExile().getExileZone(exileId);
+            if (exileZone != null) {
+                exileZone.setCleanupOnEndTurn(true);
+            }
         }
         return true;
     }
