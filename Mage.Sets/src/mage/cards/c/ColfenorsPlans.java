@@ -1,7 +1,6 @@
 
 package mage.cards.c;
 
-import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -10,16 +9,14 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SkipDrawStepEffect;
 import mage.abilities.effects.common.continuous.CantCastMoreThanOneSpellEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.CardSetInfo;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
+import mage.cards.*;
 import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -72,16 +69,8 @@ class ColfenorsPlansExileEffect extends OneShotEffect {
         if (controller != null) {
             Cards toExile = new CardsImpl(controller.getLibrary().getTopCards(game, 7));
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
-            controller.moveCardsToExile(toExile.getCards(game), source, game, false,
-                    exileId, CardUtil.createObjectRelatedWindowTitle(source, game, null));
-            ExileZone exileZone = game.getExile().getExileZone(exileId);
-            if (exileZone != null) {
-                for (Card card : exileZone.getCards(game)) {
-                    if (card != null) {
-                        card.setFaceDown(true, game);
-                    }
-                }
-            }
+            CardUtil.moveCardsToExileFaceDown(game, source, controller, toExile, exileId,
+                    CardUtil.createObjectRelatedWindowTitle(source, game, null), true);
             return true;
         }
         return false;
@@ -156,7 +145,15 @@ class ColfenorsPlansLookAtCardEffect extends AsThoughEffectImpl {
                 }
                 UUID exileId = CardUtil.getCardExileZoneId(game, source);
                 ExileZone exile = game.getExile().getExileZone(exileId);
-                return exile != null && exile.contains(objectId);
+                if (exile == null || exile.isEmpty() || !exile.contains(card.getId())) {
+                    return false;
+                }
+                boolean canLookAtCard = exile.isPlayerAllowedToSeeCard(affectedControllerId, card);
+                if (canLookAtCard) {
+                    return true;
+                }
+                exile.letPlayerSeeCards(affectedControllerId, card);
+                return true;
             }
         }
         return false;
