@@ -91,12 +91,13 @@ class HoardingBroodlordEffect extends OneShotEffect {
         TargetCardInLibrary target = new TargetCardInLibrary();
         player.searchLibrary(target, source, game);
         Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
-        player.shuffleLibrary(source, game);
-        if (card != null) {
-            player.moveCards(card, Zone.EXILED, source, game);
-            card.setFaceDown(true, game);
+        if (card == null) {
+            return false;
+        }
+        if (CardUtil.moveCardToExileFaceDown(game, source, player, card, true)) {
             CardUtil.makeCardPlayable(game, source, card, false, Duration.Custom, false);
         }
+        player.shuffleLibrary(source, game);
         return true;
     }
 }
