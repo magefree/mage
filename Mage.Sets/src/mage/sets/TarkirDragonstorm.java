@@ -180,6 +180,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Temur Devotee", 61, Rarity.COMMON, mage.cards.t.TemurDevotee.class));
         cards.add(new SetCardInfo("Temur Monument", 248, Rarity.UNCOMMON, mage.cards.t.TemurMonument.class));
         cards.add(new SetCardInfo("Temur Tawnyback", 229, Rarity.COMMON, mage.cards.t.TemurTawnyback.class));
+        cards.add(new SetCardInfo("The Sibsig Ceremony", 91, Rarity.RARE, mage.cards.t.TheSibsigCeremony.class));
         cards.add(new SetCardInfo("Thornwood Falls", 269, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Tranquil Cove", 270, Rarity.COMMON, mage.cards.t.TranquilCove.class));
         cards.add(new SetCardInfo("Twin Bolt", 128, Rarity.COMMON, mage.cards.t.TwinBolt.class));
