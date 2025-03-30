@@ -111,6 +111,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Kishla Skimmer", 201, Rarity.UNCOMMON, mage.cards.k.KishlaSkimmer.class));
         cards.add(new SetCardInfo("Kishla Trawlers", 50, Rarity.UNCOMMON, mage.cards.k.KishlaTrawlers.class));
         cards.add(new SetCardInfo("Kishla Village", 259, Rarity.RARE, mage.cards.k.KishlaVillage.class));
+        cards.add(new SetCardInfo("Kotis, the Fangkeeper", 202, Rarity.RARE, mage.cards.k.KotisTheFangkeeper.class));
         cards.add(new SetCardInfo("Krotiq Nestguard", 148, Rarity.COMMON, mage.cards.k.KrotiqNestguard.class));
         cards.add(new SetCardInfo("Lightfoot Technique", 14, Rarity.COMMON, mage.cards.l.LightfootTechnique.class));
         cards.add(new SetCardInfo("Loxodon Battle Priest", 15, Rarity.UNCOMMON, mage.cards.l.LoxodonBattlePriest.class));
