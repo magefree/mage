@@ -2265,6 +2265,22 @@ public final class CardUtil {
      * @param source        ability that exiles the card
      * @param controller    player moving the card
      * @param cards         cards to exile
+     * @param canLookAtCard if the controller can look at the card
+     * @return true if card was moved to exile
+     */
+    public static boolean moveCardsToExileFaceDown(Game game, Ability source, Player controller, Cards cards, boolean canLookAtCard) {
+        UUID zoneId = getExileZoneId(game, source);
+        String zoneName = getSourceName(game, source);
+        return moveCardsToExileFaceDown(game, source, controller, cards, zoneId, zoneName, canLookAtCard);
+    }
+
+    /**
+     * Move multiple cards to exile face down and optionally let the controller look at it
+     *
+     * @param game
+     * @param source        ability that exiles the card
+     * @param controller    player moving the card
+     * @param cards         cards to exile
      * @param zoneId        zone to exile the card to
      * @param zoneName      name of the zone to exile the card to
      * @param canLookAtCard if the controller can look at the card
