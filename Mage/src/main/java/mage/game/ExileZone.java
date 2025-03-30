@@ -4,9 +4,9 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 
-import java.util.UUID;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -68,6 +68,26 @@ public class ExileZone extends CardsImpl {
 
     public Map<UUID, Cards> getPlayerCardMap() {
         return playerCardMap;
+    }
+
+    public void copyCardVisibility(Card card, ExileZone targetZone) {
+        for (Map.Entry<UUID, Cards> entry : playerCardMap.entrySet()) {
+            Cards cards = entry.getValue();
+            if (cards.contains(card.getId())) {
+                targetZone.letPlayerSeeCards(entry.getKey(), card);
+            }
+        }
+    }
+
+    @Override
+    public boolean remove(Card card) {
+        boolean result = super.remove(card);
+        if (result) {
+            for (Cards cards : playerCardMap.values()) {
+                cards.remove(card.getId());
+            }
+        }
+        return result;
     }
 
     @Override
