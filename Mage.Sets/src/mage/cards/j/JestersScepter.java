@@ -4,17 +4,14 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
 import mage.constants.*;
 import mage.filter.FilterCard;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
@@ -34,13 +31,10 @@ public final class JestersScepter extends CardImpl {
     public JestersScepter(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{3}");
 
-        // When Jester's Scepter enters the battlefield, exile the top five cards of target player's library face down.
+        // When Jester's Scepter enters the battlefield, exile the top five cards of target player's library face down. You may look at those cards for as long as they remain exiled.
         Ability ability = new EntersBattlefieldTriggeredAbility(new JestersScepterEffect(), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-
-        // You may look at those cards for as long as they remain exiled.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new JestersScepterLookAtCardEffect()));
 
         // {2}, {tap}, Put a card exiled with Jester's Scepter into its owner's graveyard: Counter target spell if it has the same name as that card.
         Ability ability2 = new SimpleActivatedAbility(new JestersScepterCounterEffect(), new ManaCostsImpl<>("{2}"));
@@ -82,11 +76,7 @@ class JestersScepterEffect extends OneShotEffect {
                 && sourceObject != null) {
             if (targetedPlayer.getLibrary().hasCards()) {
                 Set<Card> cardsToExile = targetedPlayer.getLibrary().getTopCards(game, 5);
-                for (Card card : cardsToExile) {
-                    if (card.moveToExile(CardUtil.getCardExileZoneId(game, source), sourceObject.getName(), source, game)) {
-                        card.setFaceDown(true, game);
-                    }
-                }
+                CardUtil.moveCardsToExileFaceDown(game, source, controller, cardsToExile, true);
             }
             return true;
         }
@@ -96,46 +86,6 @@ class JestersScepterEffect extends OneShotEffect {
     @Override
     public JestersScepterEffect copy() {
         return new JestersScepterEffect(this);
-    }
-}
-
-class JestersScepterLookAtCardEffect extends AsThoughEffectImpl {
-
-    JestersScepterLookAtCardEffect() {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may look at cards exiled with {this}";
-    }
-
-    private JestersScepterLookAtCardEffect(final JestersScepterLookAtCardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public JestersScepterLookAtCardEffect copy() {
-        return new JestersScepterLookAtCardEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (affectedControllerId.equals(source.getControllerId())) {
-            Card card = game.getCard(objectId);
-            if (card != null) {
-                MageObject sourceObject = game.getObject(source);
-                if (sourceObject == null) {
-                    return false;
-                }
-                UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                ExileZone exile = game.getExile().getExileZone(exileId);
-                return exile != null
-                        && exile.contains(objectId);
-            }
-        }
-        return false;
     }
 }
 
