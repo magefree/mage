@@ -1,29 +1,28 @@
 package mage.cards.h;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 import mage.MageIdentifier;
 import mage.MageObject;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.Card;
-import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
+import mage.constants.*;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
 import mage.watchers.Watcher;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  *
@@ -83,53 +82,10 @@ class HaukensInsightExileEffect extends OneShotEffect {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                 MageObject sourceObject = source.getSourceObject(game);
                 String exileName = sourceObject == null ? null : sourceObject.getIdName();
-                card.setFaceDown(true, game);
-                controller.moveCardsToExile(card, source, game, false, exileId, exileName);
-                if (game.getState().getZone(card.getId()) == Zone.EXILED) {
-                    card.setFaceDown(true, game);
-                    HaukensInsightLookEffect effect = new HaukensInsightLookEffect(controller.getId());
-                    effect.setTargetPointer(new FixedTarget(card, game));
-                    game.addEffect(effect, source);
-                    return true;
-                }
+                CardUtil.moveCardToExileFaceDown(game, source, controller, card, exileId, exileName, true);
             }
         }
         return false;
-    }
-}
-
-class HaukensInsightLookEffect extends AsThoughEffectImpl {
-
-    private final UUID authorizedPlayerId;
-
-    public HaukensInsightLookEffect(UUID authorizedPlayerId) {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        this.authorizedPlayerId = authorizedPlayerId;
-    }
-
-    private HaukensInsightLookEffect(final HaukensInsightLookEffect effect) {
-        super(effect);
-        this.authorizedPlayerId = effect.authorizedPlayerId;
-    }
-
-    @Override
-    public HaukensInsightLookEffect copy() {
-        return new HaukensInsightLookEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID cardId = getTargetPointer().getFirst(game, source);
-        if (cardId == null) {
-            this.discard(); // card is no longer in the origin zone, effect can be discarded
-        }
-        return affectedControllerId.equals(authorizedPlayerId)
-                && objectId.equals(cardId);
     }
 }
 
