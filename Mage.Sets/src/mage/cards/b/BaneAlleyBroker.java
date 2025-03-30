@@ -113,7 +113,7 @@ class BaneAlleyBrokerDrawExileEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        return CardUtil.moveCardToExileFaceDown(game, source, controller, card);
+        return CardUtil.moveCardsToExileFaceDown(game, source, controller, card, true);
     }
 
     @Override

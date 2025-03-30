@@ -82,7 +82,7 @@ class HaukensInsightExileEffect extends OneShotEffect {
                 UUID exileId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
                 MageObject sourceObject = source.getSourceObject(game);
                 String exileName = sourceObject == null ? null : sourceObject.getIdName();
-                CardUtil.moveCardToExileFaceDown(game, source, controller, card, exileId, exileName, true);
+                CardUtil.moveCardsToExileFaceDown(game, source, controller, card, exileId, exileName, true);
             }
         }
         return false;

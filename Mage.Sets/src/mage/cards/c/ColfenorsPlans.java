@@ -16,6 +16,7 @@ import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
 
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -67,7 +68,7 @@ class ColfenorsPlansExileEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Cards toExile = new CardsImpl(controller.getLibrary().getTopCards(game, 7));
+            Set<Card> toExile = controller.getLibrary().getTopCards(game, 7);
             UUID exileId = CardUtil.getCardExileZoneId(game, source);
             CardUtil.moveCardsToExileFaceDown(game, source, controller, toExile, exileId,
                     CardUtil.createObjectRelatedWindowTitle(source, game, null), true);

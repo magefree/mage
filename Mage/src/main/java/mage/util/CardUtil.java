@@ -2238,42 +2238,21 @@ public final class CardUtil {
      * @return true if card was moved to exile
      */
 
-    public static boolean moveCardToExileFaceDown(Game game, Ability source, Player controller, Card card) {
-        UUID zoneId = getExileZoneId(game, source);
-        String zoneName = getSourceName(game, source);
-        return moveCardsToExileFaceDown(game, source, controller, new CardsImpl(card), zoneId, zoneName, true);
+    public static boolean moveCardsToExileFaceDown(Game game, Ability source, Player controller, Card card, boolean canLookAtCard) {
+        UUID exileId = getExileZoneId(game, source);
+        String exileName = getSourceName(game, source);
+        return moveCardsToExileFaceDown(game, source, controller, new HashSet<>(Collections.singleton(card)), exileId, exileName, canLookAtCard);
     }
 
-    public static boolean moveCardToExileFaceDown(Game game, Ability ability, Player controller, Card card, boolean canLookAtCard) {
-        UUID exileId = getExileZoneId(game, ability);
-        String exileName = getSourceName(game, ability);
-        return moveCardsToExileFaceDown(game, ability, controller, new CardsImpl(card), exileId, exileName, canLookAtCard);
+    public static boolean moveCardsToExileFaceDown(Game game, Ability source, Player controller, Card card, UUID exileId, String exileName, boolean canLookAtCard) {
+        return moveCardsToExileFaceDown(game, source, controller, new HashSet<>(Collections.singleton(card)), exileId, exileName, canLookAtCard);
     }
 
-    public static boolean moveCardToExileFaceDown(Game game, Ability source, Player controller, Card card, UUID exileId, String exileName) {
-        return moveCardsToExileFaceDown(game, source, controller, new CardsImpl(card), exileId, exileName, true);
-    }
-
-    public static boolean moveCardToExileFaceDown(Game game, Ability source, Player controller, Card card, UUID exileId, String exileName, boolean canLookAtCard) {
-        return moveCardsToExileFaceDown(game, source, controller, new CardsImpl(card), exileId, exileName, canLookAtCard);
-    }
-
-    /**
-     * Move multiple cards to exile face down and optionally let the controller look at it
-     *
-     * @param game
-     * @param source        ability that exiles the card
-     * @param controller    player moving the card
-     * @param cards         cards to exile
-     * @param canLookAtCard if the controller can look at the card
-     * @return true if card was moved to exile
-     */
-    public static boolean moveCardsToExileFaceDown(Game game, Ability source, Player controller, Cards cards, boolean canLookAtCard) {
+    public static boolean moveCardsToExileFaceDown(Game game, Ability source, Player controller, Set<Card> cards, boolean canLookAtCard) {
         UUID zoneId = getExileZoneId(game, source);
         String zoneName = getSourceName(game, source);
         return moveCardsToExileFaceDown(game, source, controller, cards, zoneId, zoneName, canLookAtCard);
     }
-
     /**
      * Move multiple cards to exile face down and optionally let the controller look at it
      *
@@ -2286,13 +2265,12 @@ public final class CardUtil {
      * @param canLookAtCard if the controller can look at the card
      * @return true if card was moved to exile
      */
-    public static boolean moveCardsToExileFaceDown(Game game, Ability source, Player controller, Cards cards, UUID zoneId, String zoneName, boolean canLookAtCard) {
-        Set<Card> cardsToExile = cards.getCards(game);
-        if (!controller.moveCardsToExile(cardsToExile, source, game, false, zoneId, zoneName)) {
+    public static boolean moveCardsToExileFaceDown(Game game, Ability source, Player controller, Set<Card> cards, UUID zoneId, String zoneName, boolean canLookAtCard) {
+        if (!controller.moveCardsToExile(cards, source, game, false, zoneId, zoneName)) {
             return false;
         }
         ExileZone exile = game.getExile().getExileZone(zoneId);
-        cardsToExile.forEach(card -> {
+        cards.forEach(card -> {
             card.setFaceDown(true, game);
             if (canLookAtCard) {
                 exile.letPlayerSeeCards(controller.getId(), card);

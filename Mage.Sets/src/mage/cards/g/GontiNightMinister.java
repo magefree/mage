@@ -153,7 +153,7 @@ class GontiExileEffect extends OneShotEffect {
         UUID exileZoneId = CardUtil.getExileZoneId(game, controller.getId(), source.getSourceObjectZoneChangeCounter());
         String exileName = CardUtil.getSourceName(game, source) + " - " + controller.getName();
 
-        if (!CardUtil.moveCardToExileFaceDown(game, source, controller, card, exileZoneId, exileName, true)) {
+        if (!CardUtil.moveCardsToExileFaceDown(game, source, controller, card, exileZoneId, exileName, true)) {
             return false;
         }
         CardUtil.makeCardPlayable(game, source, card, false, Duration.Custom, true, controller.getId(), null);

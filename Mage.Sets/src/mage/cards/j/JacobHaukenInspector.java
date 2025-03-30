@@ -82,7 +82,7 @@ class JacobHaukenInspectorExileEffect extends OneShotEffect {
             controller.chooseTarget(outcome, controller.getHand(), target, source, game);
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                CardUtil.moveCardToExileFaceDown(game, source , controller, card,true);
+                CardUtil.moveCardsToExileFaceDown(game, source , controller, card,true);
             }
         }
         return true;

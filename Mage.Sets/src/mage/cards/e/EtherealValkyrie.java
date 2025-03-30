@@ -125,7 +125,7 @@ class EtherealValkyrieEffect extends OneShotEffect {
 
         // All card types (including lands) must be exiled
         UUID exileId = CardUtil.getExileZoneId(exileCard.getMainCard().getId().toString() + "foretellAbility", game);
-        CardUtil.moveCardToExileFaceDown(game, source, controller, exileCard, exileId, " Foretell Turn Number: " + game.getTurnNum(), true);
+        CardUtil.moveCardsToExileFaceDown(game, source, controller, exileCard, exileId, " Foretell Turn Number: " + game.getTurnNum(), true);
 
         // all done pre-processing so stick the foretell cost effect onto the main card
         // note that the card is not foretold into exile, it is put into exile and made foretold

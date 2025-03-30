@@ -118,7 +118,7 @@ class HeadlinerScarlettExileEffect extends OneShotEffect {
         UUID exileId = CardUtil.getExileZoneId("HeadlinerScarlett::" + source.getSourceId() + "::" + game.getTurn(), game);
         String exileName = CardUtil.getSourceIdName(game, source) + " turn:" + game.getTurnNum();
 
-        if (CardUtil.moveCardToExileFaceDown(game, source, controller, card, exileId, exileName, true)) {
+        if (CardUtil.moveCardsToExileFaceDown(game, source, controller, card, exileId, exileName, true)) {
             CardUtil.makeCardPlayable(game, source, card, false, Duration.EndOfTurn, false);
             ExileZone exileZone = game.getExile().getExileZone(exileId);
             if (exileZone != null) {

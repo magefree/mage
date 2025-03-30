@@ -74,7 +74,7 @@ class GusthasScepterExileEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        CardUtil.moveCardToExileFaceDown(game, source, controller, card, true);
+        CardUtil.moveCardsToExileFaceDown(game, source, controller, card, true);
         return true;
     }
 
