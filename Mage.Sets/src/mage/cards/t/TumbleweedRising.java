@@ -10,7 +10,7 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.token.SeedGuardianToken;
+import mage.game.permanent.token.ElementalXXGreenToken;
 
 import java.util.UUID;
 
@@ -61,6 +61,6 @@ class TumbleweedRisingEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         int xvalue = GreatestPowerAmongControlledCreaturesValue.instance.calculate(game, source, this);
-        return new CreateTokenEffect(new SeedGuardianToken(xvalue)).apply(game, source);
+        return new CreateTokenEffect(new ElementalXXGreenToken(xvalue)).apply(game, source);
     }
 }

@@ -12,7 +12,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.filter.common.FilterNonlandPermanent;
-import mage.game.permanent.token.CrushOfTentaclesToken;
+import mage.game.permanent.token.OctopusToken;
 
 /**
  *
@@ -25,7 +25,7 @@ public final class CrushOfTentacles extends CardImpl {
 
         // Return all nonland permanents to their owners' hands. If Crush of Tentacles surge cost was paid, create an 8/8 blue Octopus creature token.
         getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterNonlandPermanent("nonland permanents")));
-        Effect effect = new ConditionalOneShotEffect(new CreateTokenEffect(new CrushOfTentaclesToken()), SurgedCondition.instance);
+        Effect effect = new ConditionalOneShotEffect(new CreateTokenEffect(new OctopusToken()), SurgedCondition.instance);
         effect.setText("If this spell's surge cost was paid, create an 8/8 blue Octopus creature token");
         getSpellAbility().addEffect(effect);
 
