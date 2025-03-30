@@ -151,7 +151,9 @@ public class HarmonizeAbility extends SpellAbility {
 
     @Override
     public String getRule() {
-        return name;
+        return name + " <i>(You may cast this card from your graveyard for its harmonize cost. " +
+                "You may tap a creature you control to reduce that cost by {X}, " +
+                "where X is its power. Then exile this spell.)</i>";
     }
 }
 
