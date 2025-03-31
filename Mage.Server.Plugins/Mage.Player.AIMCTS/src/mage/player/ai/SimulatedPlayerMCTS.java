@@ -375,22 +375,6 @@ public final class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public UUID chooseAttackerOrder(List<Permanent> attackers, Game game) {
-        if (this.isHuman()) {
-            return attackers.get(RandomUtil.nextInt(attackers.size())).getId();
-        }
-        return super.chooseAttackerOrder(attackers, game);
-    }
-
-    @Override
-    public UUID chooseBlockerOrder(List<Permanent> blockers, CombatGroup combatGroup, List<UUID> blockerOrder, Game game) {
-        if (this.isHuman()) {
-            return blockers.get(RandomUtil.nextInt(blockers.size())).getId();
-        }
-        return super.chooseBlockerOrder(blockers, combatGroup, blockerOrder, game);
-    }
-
-    @Override
     public int getAmount(int min, int max, String message, Game game) {
         if (this.isHuman()) {
             return RandomUtil.nextInt(max - min) + min;
