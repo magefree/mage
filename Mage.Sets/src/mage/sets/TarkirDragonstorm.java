@@ -82,6 +82,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Embermouth Sentinel", 242, Rarity.COMMON, mage.cards.e.EmbermouthSentinel.class));
         cards.add(new SetCardInfo("Encroaching Dragonstorm", 142, Rarity.UNCOMMON, mage.cards.e.EncroachingDragonstorm.class));
         cards.add(new SetCardInfo("Equilibrium Adept", 106, Rarity.UNCOMMON, mage.cards.e.EquilibriumAdept.class));
+        cards.add(new SetCardInfo("Essence Anchor", 44, Rarity.UNCOMMON, mage.cards.e.EssenceAnchor.class));
         cards.add(new SetCardInfo("Evolving Wilds", 255, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Fangkeeper's Familiar", 183, Rarity.RARE, mage.cards.f.FangkeepersFamiliar.class));
         cards.add(new SetCardInfo("Felothar, Dawn of the Abzan", 184, Rarity.RARE, mage.cards.f.FelotharDawnOfTheAbzan.class));
