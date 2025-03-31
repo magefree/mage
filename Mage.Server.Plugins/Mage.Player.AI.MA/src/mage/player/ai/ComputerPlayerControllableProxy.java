@@ -13,10 +13,8 @@ import mage.constants.MultiAmountType;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
-import mage.game.combat.CombatGroup;
 import mage.game.draft.Draft;
 import mage.game.match.Match;
-import mage.game.permanent.Permanent;
 import mage.game.tournament.Tournament;
 import mage.players.Player;
 import mage.target.Target;
@@ -284,24 +282,6 @@ public class ComputerPlayerControllableProxy extends ComputerPlayer7 {
             super.selectBlockers(source, game, defendingPlayerId);
         } else {
             getControllingPlayer(game).selectBlockers(source, game, defendingPlayerId);
-        }
-    }
-
-    @Override
-    public UUID chooseAttackerOrder(java.util.List<Permanent> attackers, Game game) {
-        if (isUnderMe(game)) {
-            return super.chooseAttackerOrder(attackers, game);
-        } else {
-            return getControllingPlayer(game).chooseAttackerOrder(attackers, game);
-        }
-    }
-
-    @Override
-    public UUID chooseBlockerOrder(java.util.List<Permanent> blockers, CombatGroup combatGroup, java.util.List<UUID> blockerOrder, Game game) {
-        if (isUnderMe(game)) {
-            return super.chooseBlockerOrder(blockers, combatGroup, blockerOrder, game);
-        } else {
-            return getControllingPlayer(game).chooseBlockerOrder(blockers, combatGroup, blockerOrder, game);
         }
     }
 
