@@ -144,6 +144,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Plains", 277, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Poised Practitioner", 18, Rarity.COMMON, mage.cards.p.PoisedPractitioner.class));
         cards.add(new SetCardInfo("Qarsi Revenant", 86, Rarity.RARE, mage.cards.q.QarsiRevenant.class));
+        cards.add(new SetCardInfo("Rainveil Rejuvenator", 152, Rarity.UNCOMMON, mage.cards.r.RainveilRejuvenator.class));
         cards.add(new SetCardInfo("Rakshasa's Bargain", 214, Rarity.UNCOMMON, mage.cards.r.RakshasasBargain.class));
         cards.add(new SetCardInfo("Rally the Monastery", 19, Rarity.UNCOMMON, mage.cards.r.RallyTheMonastery.class));
         cards.add(new SetCardInfo("Rebellious Strike", 20, Rarity.COMMON, mage.cards.r.RebelliousStrike.class));
