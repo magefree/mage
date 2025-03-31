@@ -6,12 +6,15 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continuous.LookAtCardsExiledWithThisEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -68,7 +71,7 @@ public final class BaneAlleyBroker extends CardImpl {
         this.addAbility(new SimpleActivatedAbility(new BaneAlleyBrokerDrawExileEffect(), new TapSourceCost()));
 
         // You may look at cards exiled with Bane Alley Broker.
-        this.addAbility(new SimpleStaticAbility(new BaneAlleyBrokerLookAtCardEffect()));
+        this.addAbility(new SimpleStaticAbility(new LookAtCardsExiledWithThisEffect()));
 
         // {U}{B}, {tap}: Return a card exiled with Bane Alley Broker to its owner's hand.
         Ability ability = new SimpleActivatedAbility(new BaneAlleyBrokerReturnToHandEffect(), new ManaCostsImpl<>("{U}{B}"));
@@ -158,46 +161,4 @@ class BaneAlleyBrokerReturnToHandEffect extends OneShotEffect {
         }
         return player.moveCards(card, Zone.HAND, source, game);
     }
-}
-
-class BaneAlleyBrokerLookAtCardEffect extends AsThoughEffectImpl {
-
-    BaneAlleyBrokerLookAtCardEffect() {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-        staticText = "You may look at cards exiled with {this}";
-    }
-
-    private BaneAlleyBrokerLookAtCardEffect(final BaneAlleyBrokerLookAtCardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public BaneAlleyBrokerLookAtCardEffect copy() {
-        return new BaneAlleyBrokerLookAtCardEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        Card card = game.getCard(objectId);
-        if (!source.isControlledBy(affectedControllerId) || card == null) {
-            return false;
-        }
-        int zcc = CardUtil.getActualSourceObjectZoneChangeCounter(game, source);
-        ExileZone exile = game.getExile().getExileZone(CardUtil.getExileZoneId(game, source, zcc));
-        if (exile == null || exile.isEmpty() || !exile.contains(card.getId())) {
-            return false;
-        }
-        boolean canLookAtCard = exile.isPlayerAllowedToSeeCard(affectedControllerId, card);
-        if (canLookAtCard) {
-            return true;
-        }
-        exile.letPlayerSeeCards(affectedControllerId, card);
-        return true;
-    }
-
 }
