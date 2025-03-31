@@ -213,19 +213,30 @@ class HarmonizeCostReductionEffect extends CostModificationEffectImpl {
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        if (game.inCheckPlayableState()) {
-            return true;
-        }
         SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        int power = CardUtil
-                .castStream(spellAbility.getCosts().stream(), HarmonizeCost.class)
-                .map(HarmonizeCost::getChosenCreature)
-                .map(game::getPermanent)
-                .filter(Objects::nonNull)
-                .map(MageObject::getPower)
-                .mapToInt(MageInt::getValue)
-                .map(x -> Math.max(x, 0))
-                .sum();
+        int power;
+        if (game.inCheckPlayableState()) {
+            power = game
+                    .getBattlefield()
+                    .getActivePermanents(
+                            StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE,
+                            source.getControllerId(), source, game
+                    ).stream()
+                    .map(MageObject::getPower)
+                    .mapToInt(MageInt::getValue)
+                    .max()
+                    .orElse(0);
+        } else {
+            power = CardUtil
+                    .castStream(spellAbility.getCosts().stream(), HarmonizeCost.class)
+                    .map(HarmonizeCost::getChosenCreature)
+                    .map(game::getPermanent)
+                    .filter(Objects::nonNull)
+                    .map(MageObject::getPower)
+                    .mapToInt(MageInt::getValue)
+                    .map(x -> Math.max(x, 0))
+                    .sum();
+        }
         if (power > 0) {
             CardUtil.adjustCost(spellAbility, power);
         }
@@ -278,12 +289,13 @@ class HarmonizeCost extends VariableCostImpl {
         Player player = game.getPlayer(source.getControllerId());
         if (player == null || !game.getBattlefield().contains(
                 StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE, source, game, 1
+        ) || !player.chooseUse(
+                Outcome.Benefit, "Tap an untapped creature you control for harmonize?", source, game
         )) {
             return 0;
         }
-        TargetPermanent target = new TargetPermanent(
-                0, 1, StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE, true
-        );
+        TargetPermanent target = new TargetPermanent(StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE);
+        target.withNotTarget(true);
         target.withChooseHint("for harmonize");
         player.choose(Outcome.PlayForFree, target, source, game);
         Permanent permanent = game.getPermanent(target.getFirstTarget());
