@@ -203,6 +203,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Thunder of Unity", 231, Rarity.RARE, mage.cards.t.ThunderOfUnity.class));
         cards.add(new SetCardInfo("Trade Route Envoy", 163, Rarity.COMMON, mage.cards.t.TradeRouteEnvoy.class));
         cards.add(new SetCardInfo("Tranquil Cove", 270, Rarity.COMMON, mage.cards.t.TranquilCove.class));
+        cards.add(new SetCardInfo("Traveling Botanist", 164, Rarity.UNCOMMON, mage.cards.t.TravelingBotanist.class));
         cards.add(new SetCardInfo("Twin Bolt", 128, Rarity.COMMON, mage.cards.t.TwinBolt.class));
         cards.add(new SetCardInfo("Ugin, Eye of the Storms", 1, Rarity.MYTHIC, mage.cards.u.UginEyeOfTheStorms.class));
         cards.add(new SetCardInfo("Unburied Earthcarver", 95, Rarity.COMMON, mage.cards.u.UnburiedEarthcarver.class));
