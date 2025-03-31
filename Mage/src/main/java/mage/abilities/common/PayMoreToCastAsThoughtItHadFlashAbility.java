@@ -16,24 +16,30 @@ import mage.util.CardUtil;
 public class PayMoreToCastAsThoughtItHadFlashAbility extends SpellAbility {
 
     private final Cost costsToAdd;
+    private final String rule;
 
     public PayMoreToCastAsThoughtItHadFlashAbility(Card card, Cost costsToAdd) {
+        this(card, costsToAdd, null);
+    }
+
+    public PayMoreToCastAsThoughtItHadFlashAbility(Card card, Cost costsToAdd, String rule) {
         super(card.getSpellAbility().getManaCosts().copy(), card.getName(), Zone.HAND, SpellAbilityType.BASE_ALTERNATE);
         this.costsToAdd = costsToAdd;
+        this.rule = rule;
         this.timing = TimingRule.INSTANT;
         this.setRuleAtTheTop(true);
 
-        if(costsToAdd instanceof ManaCosts<?>) {
+        if (costsToAdd instanceof ManaCosts<?>) {
             ManaCosts<ManaCost> manaCosts = (ManaCosts<ManaCost>) costsToAdd;
             CardUtil.increaseCost(this, manaCosts);
-        }
-        else {
+        } else {
             this.addCost(costsToAdd);
         }
     }
 
     protected PayMoreToCastAsThoughtItHadFlashAbility(final PayMoreToCastAsThoughtItHadFlashAbility ability) {
         super(ability);
+        this.rule = ability.rule;
         this.costsToAdd = ability.costsToAdd;
     }
 
@@ -46,8 +52,12 @@ public class PayMoreToCastAsThoughtItHadFlashAbility extends SpellAbility {
     public String getRule(boolean all) {
         return getRule();
     }
+
     @Override
     public String getRule() {
+        if (rule != null && !rule.isEmpty()) {
+            return rule;
+        }
         if (costsToAdd instanceof ManaCosts) {
             return "You may cast {this} as though it had flash if you pay " + costsToAdd.getText() + " more to cast it. <i>(You may cast it any time you could cast an instant.)</i>";
         } else {

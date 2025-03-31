@@ -1,17 +1,15 @@
 package mage.cards.v;
 
-import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
-import mage.abilities.effects.common.DoUnlessControllerPaysEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.effects.common.continuous.BecomesCreatureSourceEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -20,6 +18,8 @@ import mage.constants.SubType;
 import mage.filter.FilterSpell;
 import mage.filter.StaticFilters;
 import mage.game.permanent.token.TokenImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -33,7 +33,7 @@ public final class VeiledApparition extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
 
         // When an opponent casts a spell, if Veiled Apparition is an enchantment, Veiled Apparition becomes a 3/3 Illusion creature with flying and "At the beginning of your upkeep, sacrifice Veiled Apparition unless you pay {1}{U}."
-         TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new VeilApparitionToken(), null, Duration.WhileOnBattlefield),
+         TriggeredAbility ability = new SpellCastOpponentTriggeredAbility(new BecomesCreatureSourceEffect(new VeiledApparitionToken(), null, Duration.WhileOnBattlefield),
                 filter, false);
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(ability, new SourceMatchesFilterCondition(StaticFilters.FILTER_PERMANENT_ENCHANTMENT),
                 "When an opponent casts a spell, if {this} is an enchantment, {this} becomes a 3/3 Illusion creature with flying and \"At the beginning of your upkeep, sacrifice Veiled Apparition unless you pay {1}{U}.\""));
@@ -50,23 +50,25 @@ public final class VeiledApparition extends CardImpl {
     }
 }
 
-class VeilApparitionToken extends TokenImpl {
+class VeiledApparitionToken extends TokenImpl {
 
-    public VeilApparitionToken() {
+    VeiledApparitionToken() {
         super("Illusion", "3/3 Illusion creature with flying and \"At the beginning of your upkeep, sacrifice Veiled Apparition unless you pay {1}{U}.");
         cardType.add(CardType.CREATURE);
         subtype.add(SubType.ILLUSION);
         power = new MageInt(3);
         toughness = new MageInt(3);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DoUnlessControllerPaysEffect(new SacrificeSourceEffect(), new ManaCostsImpl<>("{1}{U}")));
-        this.addAbility(ability);
+        this.addAbility(FlyingAbility.getInstance());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(
+                new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl<>("{1}{U}"))
+        ));
     }
 
-    private VeilApparitionToken(final VeilApparitionToken token) {
+    private VeiledApparitionToken(final VeiledApparitionToken token) {
         super(token);
     }
 
-    public VeilApparitionToken copy() {
-        return new VeilApparitionToken(this);
+    public VeiledApparitionToken copy() {
+        return new VeiledApparitionToken(this);
     }
 }

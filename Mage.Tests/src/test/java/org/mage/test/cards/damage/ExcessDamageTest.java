@@ -5,6 +5,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 /**
  * @author TheElk801
  */
@@ -158,15 +160,7 @@ public class ExcessDamageTest extends CardTestPlayerBase {
         block(2, playerA, bear, myrSuperion);
         block(2, playerA, envoy, myrSuperion);
         block(2, playerA, bondedConstruct, myrSuperion);
-
-        //Assign this much damage to the first blocking creature
-        setChoice(playerB, "X=2");
-
-        //Assign this much damage to the second blocking creature
-        setChoice(playerB, "X=1");
-
-        //Assign this much damage to the third blocking creature
-        setChoice(playerB, "X=1");
+        setChoice(playerB, CHOICE_SKIP); // Assign default damage
 
         setStrictChooseMode(true);
         setStopAt(2, PhaseStep.END_TURN);
