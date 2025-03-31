@@ -163,6 +163,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Sage of the Fang", 155, Rarity.UNCOMMON, mage.cards.s.SageOfTheFang.class));
         cards.add(new SetCardInfo("Sagu Pummeler", 156, Rarity.COMMON, mage.cards.s.SaguPummeler.class));
         cards.add(new SetCardInfo("Salt Road Packbeast", 23, Rarity.COMMON, mage.cards.s.SaltRoadPackbeast.class));
+        cards.add(new SetCardInfo("Salt Road Skirmish", 88, Rarity.UNCOMMON, mage.cards.s.SaltRoadSkirmish.class));
         cards.add(new SetCardInfo("Sandskitter Outrider", 89, Rarity.COMMON, mage.cards.s.SandskitterOutrider.class));
         cards.add(new SetCardInfo("Sandsteppe Citadel", 266, Rarity.UNCOMMON, mage.cards.s.SandsteppeCitadel.class));
         cards.add(new SetCardInfo("Sarkhan's Resolve", 158, Rarity.COMMON, mage.cards.s.SarkhansResolve.class));
