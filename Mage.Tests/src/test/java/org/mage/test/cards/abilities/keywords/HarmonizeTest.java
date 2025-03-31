@@ -28,6 +28,8 @@ public class HarmonizeTest extends CardTestPlayerBase {
 
         assertTapped(bear, false);
         assertLife(playerB, 20 - 2);
+        assertExileCount(playerA, dragonfire, 1);
+        assertTappedCount("Mountain", true, 7);
     }
 
     @Test
@@ -47,5 +49,7 @@ public class HarmonizeTest extends CardTestPlayerBase {
 
         assertTapped(bear, true);
         assertLife(playerB, 20 - 2);
+        assertExileCount(playerA, dragonfire, 1);
+        assertTappedCount("Mountain", true, 5);
     }
 }
