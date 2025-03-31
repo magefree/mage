@@ -173,6 +173,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Snakeskin Veil", 159, Rarity.COMMON, mage.cards.s.SnakeskinVeil.class));
         cards.add(new SetCardInfo("Snowmelt Stag", 57, Rarity.COMMON, mage.cards.s.SnowmeltStag.class));
         cards.add(new SetCardInfo("Songcrafter Mage", 225, Rarity.RARE, mage.cards.s.SongcrafterMage.class));
+        cards.add(new SetCardInfo("Sonic Shrieker", 226, Rarity.UNCOMMON, mage.cards.s.SonicShrieker.class));
         cards.add(new SetCardInfo("Spectral Denial", 58, Rarity.UNCOMMON, mage.cards.s.SpectralDenial.class));
         cards.add(new SetCardInfo("Stadium Headliner", 122, Rarity.RARE, mage.cards.s.StadiumHeadliner.class));
         cards.add(new SetCardInfo("Stormbeacon Blade", 27, Rarity.UNCOMMON, mage.cards.s.StormbeaconBlade.class));
