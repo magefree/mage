@@ -149,6 +149,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Rakshasa's Bargain", 214, Rarity.UNCOMMON, mage.cards.r.RakshasasBargain.class));
         cards.add(new SetCardInfo("Rally the Monastery", 19, Rarity.UNCOMMON, mage.cards.r.RallyTheMonastery.class));
         cards.add(new SetCardInfo("Rebellious Strike", 20, Rarity.COMMON, mage.cards.r.RebelliousStrike.class));
+        cards.add(new SetCardInfo("Rediscover the Way", 215, Rarity.RARE, mage.cards.r.RediscoverTheWay.class));
         cards.add(new SetCardInfo("Reigning Victor", 216, Rarity.COMMON, mage.cards.r.ReigningVictor.class));
         cards.add(new SetCardInfo("Reputable Merchant", 217, Rarity.COMMON, mage.cards.r.ReputableMerchant.class));
         cards.add(new SetCardInfo("Rescue Leopard", 116, Rarity.COMMON, mage.cards.r.RescueLeopard.class));
