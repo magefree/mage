@@ -78,6 +78,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Dragonstorm Globe", 241, Rarity.COMMON, mage.cards.d.DragonstormGlobe.class));
         cards.add(new SetCardInfo("Dusyut Earthcarver", 141, Rarity.COMMON, mage.cards.d.DusyutEarthcarver.class));
         cards.add(new SetCardInfo("Duty Beyond Death", 10, Rarity.UNCOMMON, mage.cards.d.DutyBeyondDeath.class));
+        cards.add(new SetCardInfo("Elspeth, Storm Slayer", 11, Rarity.MYTHIC, mage.cards.e.ElspethStormSlayer.class));
         cards.add(new SetCardInfo("Embermouth Sentinel", 242, Rarity.COMMON, mage.cards.e.EmbermouthSentinel.class));
         cards.add(new SetCardInfo("Encroaching Dragonstorm", 142, Rarity.UNCOMMON, mage.cards.e.EncroachingDragonstorm.class));
         cards.add(new SetCardInfo("Equilibrium Adept", 106, Rarity.UNCOMMON, mage.cards.e.EquilibriumAdept.class));
