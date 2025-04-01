@@ -1341,18 +1341,45 @@
 |Generate|TOK:NEC|Thopter|||ThopterColorlessToken|
 
 # SLD
+|Generate|TOK:SLD|Angel|||AngelToken|
+|Generate|TOK:SLD|Cat|1||GreenCatToken|
+|Generate|TOK:SLD|Cat|2||CatToken2|
+|Generate|TOK:SLD|Cat|3||CatToken2|
 |Generate|TOK:SLD|Clue|||ClueArtifactToken|
+|Generate|TOK:SLD|Dog|||WhiteDogToken|
+|Generate|TOK:SLD|Egg|||AtlaPalaniToken|
 |Generate|TOK:SLD|Faerie Rogue|1||FaerieRogueToken|
 |Generate|TOK:SLD|Faerie Rogue|2||FaerieRogueToken|
 |Generate|TOK:SLD|Faerie Rogue|3||FaerieRogueToken|
 |Generate|TOK:SLD|Faerie Rogue|4||FaerieRogueToken|
-|Generate|TOK:SLD|Treasure|||TreasureToken|
+|Generate|TOK:SLD|Food|1||FoodToken|
+|Generate|TOK:SLD|Food|2||FoodToken|
+|Generate|TOK:SLD|Food|3||FoodToken|
+|Generate|TOK:SLD|Food|4||FoodToken|
+|Generate|TOK:SLD|Food|5||FoodToken|
+|Generate|TOK:SLD|Goblin|||GoblinToken|
+|Generate|TOK:SLD|Hydra|||ZaxaraTheExemplaryHydraToken|
+|Generate|TOK:SLD|Icingdeath, Frost Tongue|||IcingdeathFrostTongueToken|
+|Generate|TOK:SLD|Marit Lage|||MaritLageToken|
+|Generate|TOK:SLD|Mechtitan|||MechtitanToken|
+|Generate|TOK:SLD|Saproling|||SaprolingToken|
+|Generate|TOK:SLD|Shrine|||ShrineToken|
+|Generate|TOK:SLD|Spirit|1||SpiritWhiteToken|
+|Generate|TOK:SLD|Spirit|2||SpiritToken|
+|Generate|TOK:SLD|Squirrel|||SquirrelToken|
+|Generate|TOK:SLD|Treasure|1||TreasureToken|
+|Generate|TOK:SLD|Treasure|2||TreasureToken|
+|Generate|TOK:SLD|Treasure|3||TreasureToken|
+|Generate|TOK:SLD|Treasure|4||TreasureToken|
 |Generate|TOK:SLD|Walker|1||WalkerToken|
 |Generate|TOK:SLD|Walker|2||WalkerToken|
 |Generate|TOK:SLD|Walker|3||WalkerToken|
 |Generate|TOK:SLD|Walker|4||WalkerToken|
 |Generate|TOK:SLD|Walker|5||WalkerToken|
-# TODO: Add new SLD token images
+|Generate|TOK:SLD|Warrior|||WarriorToken|
+|Generate|TOK:SLD|Wolf|||WolfToken|
+|Generate|TOK:SLD|Wurm|||WurmWithTrampleToken|
+|Generate|TOK:SLD|Zombie|||ZombieToken|
 
 # 2XM
 |Generate|TOK:2XM|Angel|||AngelToken|
@@ -2595,3 +2622,61 @@
 |Generate|TOK:UGL|Soldier|||SoldierToken|
 |Generate|TOK:UGL|Squirrel|||SquirrelToken|
 |Generate|TOK:UGL|Zombie|||ZombieToken|
+
+# F12
+|Generate|TOK:F12|Human|||HumanToken|
+|Generate|TOK:F12|Wolf|||WolfToken|
+
+# F17
+|Generate|TOK:F17|Dinosaur|||DinosaurToken|
+|Generate|TOK:F17|Pirate|||PirateToken|
+|Generate|TOK:F17|Vampire|||IxalanVampireToken|
+|Generate|TOK:F17|Treasure|1||TreasureToken|
+|Generate|TOK:F17|Treasure|2||TreasureToken|
+|Generate|TOK:F17|Treasure|3||TreasureToken|
+
+# HHO
+|Generate|TOK:HHO|Treasure|||TreasureToken|
+
+# J12
+|Generate|TOK:J12|Centaur|||CentaurToken|
+
+# J13
+|Generate|TOK:J13|Golem|||HammerOfPurphorosGolemToken|
+
+# MPR
+|Generate|TOK:MPR|Bear|||BearToken|
+|Generate|TOK:MPR|Beast|||BeastToken2|
+|Generate|TOK:MPR|Bird|||BlueBirdToken|
+|Generate|TOK:MPR|Elephant|||ElephantToken|
+|Generate|TOK:MPR|Goblin Soldier|||GoblinSoldierToken|
+|Generate|TOK:MPR|Saproling|||SaprolingToken|
+|Generate|TOK:MPR|Spirit|||SpiritWhiteToken|
+
+# P03
+|Generate|TOK:P03|Bear|||BearToken|
+|Generate|TOK:P03|Demon|||DemonFlyingToken|
+|Generate|TOK:P03|Goblin|||GoblinToken|
+|Generate|TOK:P03|Insect|||InsectToken|
+|Generate|TOK:P03|Bird|||RukhEggBirdToken|
+|Generate|TOK:P03|Sliver|||SliverToken|
+
+# P04
+|Generate|TOK:P04|Angel|||AngelToken|
+|Generate|TOK:P04|Beast|||BeastToken|
+|Generate|TOK:P04|Myr|||MyrToken|
+|Generate|TOK:P04|Pentavite|||PentaviteToken|
+|Generate|TOK:P04|Spirit|||SpiritToken|
+
+# PEMN
+|Generate|TOK:PEMN|Zombie|1||ZombieToken|
+|Generate|TOK:PEMN|Zombie|2||ZombieToken|
+
+# PHEL
+|Generate|TOK:PHEL|Angel|||AngelToken|
+
+# PL21
+|Generate|TOK:PL21|Minotaur|||MinotaurToken|
+
+# PL23
+|Generate|TOK:PL23|Food|||FoodToken|
