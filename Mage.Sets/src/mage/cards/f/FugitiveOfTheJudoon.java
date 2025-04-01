@@ -14,14 +14,12 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SagaChapter;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.permanent.token.AlienRhinoToken;
 import mage.game.permanent.token.Human11WithWard2Token;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 
 /**
@@ -31,7 +29,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public final class FugitiveOfTheJudoon extends CardImpl {
 
     private static final FilterCard filter = new FilterCard("a Doctor card");
-    private static final FilterControlledCreaturePermanent filterHuman = new FilterControlledCreaturePermanent(SubType.HUMAN,"a Human"); 
+    private static final FilterControlledPermanent filterHuman = new FilterControlledPermanent(SubType.HUMAN,"a Human you control"); 
     private static final FilterControlledArtifactPermanent filterArtifact = new FilterControlledArtifactPermanent("an artifact you control"); 
 
     static {
@@ -61,7 +59,7 @@ public final class FugitiveOfTheJudoon extends CardImpl {
 		new DoIfCostPaid(
 			new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)),
 			new CompositeCost(
-				new ExileTargetCost(new TargetControlledCreaturePermanent(1, 1, filterHuman, true)), 
+				new ExileTargetCost(new TargetControlledPermanent(1, 1, filterHuman, true)), 
 				new ExileTargetCost(new TargetControlledPermanent(1, 1, filterArtifact, true)),
 				"exile a Human you control and an artifact you control"
 			),
