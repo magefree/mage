@@ -17,6 +17,7 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.watchers.common.CountersAddedFirstTimeWatcher;
 
 /**
@@ -81,15 +82,22 @@ class DannyPinkTriggeredAbility extends TriggeredAbilityImpl {
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(event.getTargetId());
         boolean entersWithCounters = false;
+        // a non-token creature entering with counters does not see the COUNTERS_ADDED event.
+        // therefore, we return true in either of two cases :
+        // 1. a non-token creature enters with counters on it (no need to check the watcher)
+        // 2. a COUNTERS_ADDED event occurs and the watcher is valid
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Counters counters = permanent.getCounters(game);
             entersWithCounters = !counters.values().stream().mapToInt(Counter::getCount).noneMatch(x -> x > 0);
+            return entersWithCounters
+                    && !(permanent instanceof PermanentToken) 
+                    && this.getSourceId().equals(event.getTargetId());
         }
-        // true if counters are added and the watcher is valid, or if the creature enters with counters (in that case, no need to check the watcher).
-        return ((event.getType() == GameEvent.EventType.COUNTERS_ADDED 
-                && CountersAddedFirstTimeWatcher.checkEvent(event, permanent, game, 0))
-                || (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && entersWithCounters))
-                && this.getSourceId().equals(event.getTargetId());
+        if (event.getType() == GameEvent.EventType.COUNTERS_ADDED) {
+            return CountersAddedFirstTimeWatcher.checkEvent(event, permanent, game, 0)
+                    && this.getSourceId().equals(event.getTargetId());
+        }
+        return false;
     }
     
     @Override
