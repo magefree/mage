@@ -241,7 +241,6 @@
 |Generate|TOK:ARB|Dragon|||DragonBroodmotherDragonToken|
 |Generate|TOK:ARB|Lizard|||LizardToken|
 |Generate|TOK:ARB|Zombie Wizard|||ZombieWizardToken|
-|Generate|TOK:ARN|Djinn|||DjinnToken|
 |Generate|TOK:AVR|Angel|||AngelToken|
 |Generate|TOK:AVR|Demon|||DemonToken|
 |Generate|TOK:AVR|Human|1||ThatcherHumanToken|
