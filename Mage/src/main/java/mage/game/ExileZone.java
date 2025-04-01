@@ -6,6 +6,7 @@ import mage.cards.CardsImpl;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -57,6 +58,15 @@ public class ExileZone extends CardsImpl {
             return;
         }
         playerCardMap.computeIfAbsent(playerId, k -> new CardsImpl()).addAll(cards);
+    }
+
+    public void letPlayerSeeCards(UUID playerId, Set<Card> cards) {
+        if (playerId == null || cards == null) {
+            return;
+        }
+        for (Card card : cards) {;
+            playerCardMap.computeIfAbsent(playerId, k -> new CardsImpl()).add(card);
+        }
     }
 
     public boolean isPlayerAllowedToSeeCard(UUID playerId, Card card) {
