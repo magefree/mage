@@ -210,22 +210,6 @@
 |Generate|TOK:AKH|Warrior|||WarriorVigilantToken|
 |Generate|TOK:AKH|Wurm|||Wurm55Token|
 |Generate|TOK:AKH|Zombie|||ZombieToken|
-#TOK:AKH - some tokens from real cards (see Embalm ability)
-#|Generate|TOK:AKH|Angel of Sanctions||
-#|Generate|TOK:AKH|Anointer Priest||
-#|Generate|TOK:AKH|Aven Initiate||
-#|Generate|TOK:AKH|Aven Wind Guide||
-#|Generate|TOK:AKH|Glyph Keeper||
-#|Generate|TOK:AKH|Heart-Piercer Manticore||
-#|Generate|TOK:AKH|Honored Hydra||
-#|Generate|TOK:AKH|Labyrinth Guardian||
-#|Generate|TOK:AKH|Oketra's Attendant||
-#|Generate|TOK:AKH|Sacred Cat||
-#|Generate|TOK:AKH|Tah-Crop Skirmisher||
-#|Generate|TOK:AKH|Temmet, Vizier of Naktamun||
-#|Generate|TOK:AKH|Trueheart Duelist||
-#|Generate|TOK:AKH|Unwavering Initiate||
-#|Generate|TOK:AKH|Vizier of Many Faces||
 
 |Generate|TOK:ALA|Beast|||GodSireBeastToken|
 |Generate|TOK:ALA|Dragon|||DragonToken|
@@ -562,17 +546,6 @@
 |Generate|TOK:HOU|Horse|||CrestedSunmareToken|
 |Generate|TOK:HOU|Insect|||TheLocustGodInsectToken|
 |Generate|TOK:HOU|Snake|||RhonassLastStandToken|
-#TOK:HOU - some tokens from real cards (see Eternalize ability)
-#TOK:HOU - Cat, Warrior and Zombie tokens from AKH set
-#|Generate|TOK:HOU|Adorned Pouncer||||
-#|Generate|TOK:HOU|Champion of Wits||||
-#|Generate|TOK:HOU|Dreamstealer||||
-#|Generate|TOK:HOU|Earthshaker Khenra||||
-#|Generate|TOK:HOU|Proven Combatant||||
-#|Generate|TOK:HOU|Resilient Khenra||||
-#|Generate|TOK:HOU|Sinuous Striker||||
-#|Generate|TOK:HOU|Steadfast Sentinel||||
-#|Generate|TOK:HOU|Sunscourge Champion||||
 |Generate|TOK:ISD|Angel|||AngelToken|
 |Generate|TOK:ISD|Demon|||DemonToken|
 |Generate|TOK:ISD|Homunculus|||StitchersApprenticeHomunculusToken|
@@ -1180,8 +1153,6 @@
 |Generate|TOK:C21|Beast|1||BeastToken|
 |Generate|TOK:C21|Beast|2||BeastToken2|
 |Generate|TOK:C21|Boar|||Boar2Token|
-# no need tokens for Eternalize ability, but scryfall have it: https://scryfall.com/card/tc21/6/champion-of-wits
-# no need tokens for Copy, but scryfall have it: https://scryfall.com/card/tc21/30/copy
 |Generate|TOK:C21|Construct|1||MetallurgicSummoningsConstructToken|
 |Generate|TOK:C21|Construct|2||KarnConstructToken|
 |Generate|TOK:C21|Demon|||DemonFlyingToken|
@@ -1224,8 +1195,6 @@
 |Generate|TOK:MH2|Phyrexian Germ|||PhyrexianGermToken|
 |Generate|TOK:MH2|Squirrel|||SquirrelToken|
 |Generate|TOK:MH2|Thopter|||ThopterColorlessToken|
-# no need tokens for Eternalize ability, but scryfall have it: https://scryfall.com/card/tmh2/4/timeless-dragon
-# no need tokens for Eternalize ability, but scryfall have it: https://scryfall.com/card/tmh2/5/timeless-witness
 |Generate|TOK:MH2|Treasure|1||TreasureToken|
 |Generate|TOK:MH2|Treasure|2||TreasureToken|
 |Generate|TOK:MH2|Zombie|||ZombieToken|
@@ -1251,7 +1220,6 @@
 # AFC
 |Generate|TOK:AFC|Angel|||AngelToken|
 |Generate|TOK:AFC|Beast|||BeastToken|
-# no need tokens for Eternalize ability, but scryfall have it: https://scryfall.com/card/tafc/4/champion-of-wits
 |Generate|TOK:AFC|Clue|||ClueArtifactToken|
 |Generate|TOK:AFC|Dragon|||DragonToken2|
 |Generate|TOK:AFC|Dragon Spirit|||VrondissRageOfAncientsToken|
