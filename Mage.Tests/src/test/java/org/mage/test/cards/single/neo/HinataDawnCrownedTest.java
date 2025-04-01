@@ -96,6 +96,10 @@ public class HinataDawnCrownedTest extends CardTestCommander4Players {
             // Enough mana to cast Volcanic Offering only if opponent chooses poorly.
             addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5 - 3);
 
+            // Make sure the game thinks we should be allowed to cast Volcanic Offering
+            checkPlayableAbility("canCast", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + volcanic_offering, true);
+
+            // But when actually casting and poor targets are chosen we don't have enough mana
             castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, volcanic_offering, true);
             addTarget(playerA, nonbasic_land[0]);
             addTarget(playerA, playerB);
