@@ -17,7 +17,7 @@ import mage.constants.Duration;
 import mage.constants.SuperType;
 import mage.filter.StaticFilters;
 import mage.game.command.emblems.SorinSolemnVisitorEmblem;
-import mage.game.permanent.token.SorinSolemnVisitorVampireToken;
+import mage.game.permanent.token.VampireToken;
 
 /**
  *
@@ -42,7 +42,7 @@ public final class SorinSolemnVisitor extends CardImpl {
         this.addAbility(loyaltyAbility);
 
         // -2: Create a 2/2 black Vampire creature token with flying.
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SorinSolemnVisitorVampireToken()), -2));
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new VampireToken()), -2));
 
         // -6: You get an emblem with "At the beginning of each opponent's upkeep, that player sacrifices a creature."
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new SorinSolemnVisitorEmblem()), -6));
