@@ -3,6 +3,7 @@ package mage.abilities.effects.common.continuous;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.ModalDoubleFacedCardHalf;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -10,6 +11,7 @@ import mage.constants.SubLayer;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentCard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +48,7 @@ public class BecomesFaceDownCreatureAllEffect extends ContinuousEffectImpl {
 
         // save permanents to become face down (one time usage on resolve)
         for (Permanent perm : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source, game)) {
-            if (!perm.isFaceDown(game)) {
+            if (!perm.isFaceDown(game) && !perm.isTransformable() && !(((PermanentCard) perm).getCard() instanceof ModalDoubleFacedCardHalf)) {
                 affectedObjectList.add(new MageObjectReference(perm, game));
                 perm.setFaceDown(true, game);
             }
