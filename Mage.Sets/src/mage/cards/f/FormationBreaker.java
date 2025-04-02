@@ -1,6 +1,7 @@
 package mage.cards.f;
 
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.PermanentsOnTheBattlefieldCondition;
@@ -17,8 +18,13 @@ import mage.constants.SubType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.filter.predicate.permanent.CounterAnyPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -30,6 +36,7 @@ public final class FormationBreaker extends CardImpl {
     private static final FilterPermanent filter2 = new FilterControlledCreaturePermanent();
 
     static {
+        filter.add(FormationBreakerPredicate.instance);
         filter2.add(CounterAnyPredicate.instance);
     }
 
@@ -61,5 +68,19 @@ public final class FormationBreaker extends CardImpl {
     @Override
     public FormationBreaker copy() {
         return new FormationBreaker(this);
+    }
+}
+
+enum FormationBreakerPredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        return Optional
+                .ofNullable(input.getSource().getSourcePermanentIfItStillExists(game))
+                .map(MageObject::getPower)
+                .map(MageInt::getValue)
+                .map(x -> input.getObject().getPower().getValue() < x)
+                .orElse(false);
     }
 }
