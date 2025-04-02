@@ -94,7 +94,7 @@ class LotuslightDancersTarget extends TargetCardInLibrary {
             = new FilterCard("a black card, a green card, and a blue card");
 
     static {
-        filter.add(Predicates.and(
+        filter.add(Predicates.or(
             new ColorPredicate(ObjectColor.BLUE),
             new ColorPredicate(ObjectColor.BLACK),
             new ColorPredicate(ObjectColor.GREEN)
