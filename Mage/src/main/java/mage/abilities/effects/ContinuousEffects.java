@@ -967,6 +967,11 @@ public class ContinuousEffects implements Serializable {
                 effect.apply(Layer.CopyEffects_1, SubLayer.CopyEffects_1a, ability, game);
             }
         }
+        // copy effects can cause new face-down effects e.g. Clone a morph creature and turned face down
+        if (!layer.isEmpty()) {
+            activeLayerEffects = getLayeredEffects(game, "layer_1");
+            layer = filterLayeredEffects(activeLayerEffects, Layer.CopyEffects_1);
+        }
         for (ContinuousEffect effect : layer) {
             Set<Ability> abilities = layeredEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
