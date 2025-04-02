@@ -242,7 +242,7 @@
 |Generate|TOK:ARN|Djinn|||DjinnToken|
 |Generate|TOK:AVR|Angel|||AngelToken|
 |Generate|TOK:AVR|Demon|||DemonToken|
-|Generate|TOK:AVR|Human|1||RedHumanToken|
+|Generate|TOK:AVR|Human|1||ThatcherHumanToken|
 |Generate|TOK:AVR|Human|2||HumanToken|
 |Generate|TOK:AVR|Spirit|1||SpiritBlueToken|
 |Generate|TOK:AVR|Spirit|2||SpiritWhiteToken|
@@ -257,7 +257,7 @@
 |Generate|TOK:BFZ|Knight Ally|||KnightAllyToken|
 |Generate|TOK:BFZ|Kor Ally|||KorAllyToken|
 |Generate|TOK:BFZ|Octopus|||OctopusToken|
-|Generate|TOK:BFZ|Plant|||GrovetenderDruidsPlantToken|
+|Generate|TOK:BFZ|Plant|||Plant11Token|
 |Generate|TOK:BNG|Bird|1||EnchantmentBirdToken|
 |Generate|TOK:BNG|Bird|2||BirdToken|
 |Generate|TOK:BNG|Cat Soldier|||CatSoldierCreatureToken|
@@ -284,7 +284,7 @@
 |Generate|TOK:C14|Phyrexian Germ|||PhyrexianGermToken|
 |Generate|TOK:C14|Goat|||GoatToken|
 |Generate|TOK:C14|Goblin|||GoblinToken|
-|Generate|TOK:C14|Horror|||SpoilsOfBloodHorrorToken|
+|Generate|TOK:C14|Horror|||HorrorXXBlackToken|
 |Generate|TOK:C14|Kor Soldier|||KorSoldierToken|
 |Generate|TOK:C14|Kraken|||Kraken99Token|
 |Generate|TOK:C14|Myr|||MyrToken|
@@ -395,7 +395,7 @@
 |Generate|TOK:C19|Phyrexian Horror|||PhyrexianRebirthHorrorToken|
 |Generate|TOK:C19|Human|||HumanToken|
 |Generate|TOK:C19|Pegasus|||PegasusToken|
-|Generate|TOK:C19|Plant|||GrismoldPlantToken|
+|Generate|TOK:C19|Plant|||Plant11Token|
 |Generate|TOK:C19|Rhino|||RhinoToken|
 |Generate|TOK:C19|Saproling|||SaprolingToken|
 |Generate|TOK:C19|Sculpture|||DoomedArtisanToken|
@@ -457,7 +457,7 @@
 |Generate|TOK:DDD|Beast|2||BeastToken2|
 |Generate|TOK:DDD|Elephant|||ElephantToken|
 |Generate|TOK:DDE|Hornet|||HornetToken|
-|Generate|TOK:DDE|Minion|||MinionToken|
+|Generate|TOK:DDE|Phyrexian Minion|||PhyrexianMinionToken|
 |Generate|TOK:DDE|Saproling|||SaprolingToken|
 |Generate|TOK:DDF|Soldier|||SoldierToken|
 |Generate|TOK:DDG|Goblin|||GoblinToken|
@@ -612,7 +612,7 @@
 # LGN don't have tokens, from wiki: A Sliver token for Brood Sliver and a Goblin token for Warbreak Trumpeter were featured as a Magic Player Reward.
 |Generate|TOK:LRW|Avatar|||AvatarToken|
 |Generate|TOK:LRW|Beast|||BeastToken|
-|Generate|TOK:LRW|Elemental|1||WalkerOfTheGroveToken|
+|Generate|TOK:LRW|Elemental|1||Elemental44GreenToken|
 |Generate|TOK:LRW|Elemental|2||WhiteElementalToken|
 |Generate|TOK:LRW|Elemental Shaman|||ElementalShamanToken|
 |Generate|TOK:LRW|Elf Warrior|||ElfWarriorToken|
@@ -724,7 +724,7 @@
 |Generate|TOK:MM3|Zombie|||ZombieToken|
 |Generate|TOK:MMA|Bat|||BatToken|
 |Generate|TOK:MMA|Dragon|||DragonToken|
-|Generate|TOK:MMA|Elemental|||WalkerOfTheGroveToken|
+|Generate|TOK:MMA|Elemental|||Elemental44GreenToken|
 |Generate|TOK:MMA|Faerie Rogue|||OonaQueenFaerieRogueToken|
 |Generate|TOK:MMA|Giant Warrior|||GiantWarriorToken|
 |Generate|TOK:MMA|Goblin Rogue|||GoblinRogueToken|
@@ -757,7 +757,7 @@
 |Generate|TOK:OGW|Eldrazi Scion|4||EldraziScionToken|
 |Generate|TOK:OGW|Eldrazi Scion|5||EldraziScionToken|
 |Generate|TOK:OGW|Eldrazi Scion|6||EldraziScionToken|
-|Generate|TOK:OGW|Elemental|1||SeedGuardianToken|
+|Generate|TOK:OGW|Elemental|1||ElementalXXGreenToken|
 |Generate|TOK:OGW|Elemental|2||ElementalTokenWithHaste|
 |Generate|TOK:OGW|Plant|||PlantToken|
 |Generate|TOK:OGW|Zombie|||ZombieToken|
@@ -1073,7 +1073,7 @@
 # OonaQueenFaerieRogueToken is FaerieRogueToken with additional blue color, but ZNC contains only one token - so don't use normal token for it
 #|Generate|TOK:ZNC|Faerie Rogue|||OonaQueenFaerieRogueToken|
 # Germ token uses in chest and antology, but scryfall put it here
-#|Generate|TOK:ZNC|Phyrexian Germ|||PhyrexianGermToken|
+|Generate|TOK:ZNC|Phyrexian Germ|||PhyrexianGermToken|
 #
 |Generate|TOK:ZNC|Goblin Rogue|||GoblinRogueToken|
 |Generate|TOK:ZNC|Kor Ally|||KorAllyToken|
@@ -1308,7 +1308,7 @@
 # UMA
 |Generate|TOK:UMA|Citizen|||CitizenToken|
 |Generate|TOK:UMA|Drake|||DrakeToken|
-|Generate|TOK:UMA|Elemental|1||WalkerOfTheGroveToken|
+|Generate|TOK:UMA|Elemental|1||Elemental44GreenToken|
 |Generate|TOK:UMA|Elemental|2||RedElementalToken|
 |Generate|TOK:UMA|Elemental|3||RedElementalToken|
 |Generate|TOK:UMA|Faerie Rogue|||FaerieRogueToken|
@@ -1536,7 +1536,7 @@
 |Generate|TOK:DDR|Eldrazi Scion|||EldraziScionToken|
 |Generate|TOK:DDR|Demon|||DemonToken|
 |Generate|TOK:DDR|Zombie Giant|||QuestForTheGravelordZombieToken|
-|Generate|TOK:DDR|Elemental|||WalkerOfTheGroveToken|
+|Generate|TOK:DDR|Elemental|||Elemental44GreenToken|
 |Generate|TOK:DDR|Plant|||PlantToken|
 
 # DDS
@@ -2176,7 +2176,7 @@
 |Generate|TOK:OTJ|Bird|||BlueBirdToken|
 |Generate|TOK:OTJ|Clue|||ClueArtifactToken|
 |Generate|TOK:OTJ|Dinosaur|||Dinosaur31Token|
-|Generate|TOK:OTJ|Elemental|||SeedGuardianToken|
+|Generate|TOK:OTJ|Elemental|||ElementalXXGreenToken|
 |Generate|TOK:OTJ|Elk|||ElkToken|
 |Generate|TOK:OTJ|Mercenary|||MercenaryToken|
 |Generate|TOK:OTJ|Meteorite|||MeteoriteToken|
@@ -2460,7 +2460,7 @@
 |Generate|TOK:DFT|Elephant|||ElephantToken|
 |Generate|TOK:DFT|Goblin|||GoblinToken|
 |Generate|TOK:DFT|Insect|||InsectToken|
-|Generate|TOK:DFT|Pilot|||PilotCrewToken|
+|Generate|TOK:DFT|Pilot|||PilotSaddleCrewToken|
 |Generate|TOK:DFT|Servo|||ServoToken|
 |Generate|TOK:DFT|Thopter|1||ThopterColorlessToken|
 |Generate|TOK:DFT|Thopter|2||ThopterColorlessToken|

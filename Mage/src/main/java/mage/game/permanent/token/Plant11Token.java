@@ -4,9 +4,12 @@ import mage.MageInt;
 import mage.constants.CardType;
 import mage.constants.SubType;
 
-public final class GrismoldPlantToken extends TokenImpl {
+/**
+ * @author spjspj
+ */
+public final class Plant11Token extends TokenImpl {
 
-    public GrismoldPlantToken() {
+    public Plant11Token() {
         super("Plant Token", "1/1 green Plant creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
@@ -15,11 +18,11 @@ public final class GrismoldPlantToken extends TokenImpl {
         toughness = new MageInt(1);
     }
 
-    private GrismoldPlantToken(final GrismoldPlantToken token) {
+    private Plant11Token(final Plant11Token token) {
         super(token);
     }
 
-    public GrismoldPlantToken copy() {
-        return new GrismoldPlantToken(this);
+    public Plant11Token copy() {
+        return new Plant11Token(this);
     }
 }
