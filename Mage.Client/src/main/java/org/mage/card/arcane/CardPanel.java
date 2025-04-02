@@ -957,6 +957,7 @@ public abstract class CardPanel extends MagePermanent implements ComponentListen
         } else {
             // updated card
             if (this.cardSideMain.getName().equals(gameCard.getName())
+                    || (!(this.cardSideMain instanceof PermanentView) && !gameCard.getName().equals(this.cardSideMain.getName()) && gameCard.getSecondCardFace() != null)
                     || (gameCard instanceof PermanentView && !(gameCard.getName().equals(this.cardSideMain.getName())))) {
                 // from main side
                 this.cardSideMain = gameCard;
