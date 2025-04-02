@@ -26,7 +26,7 @@ import mage.constants.Outcome;
 
 /**
  *
- * @author anonymous
+ * @author androosss
  */
 public final class LotuslightDancers extends CardImpl {
 
