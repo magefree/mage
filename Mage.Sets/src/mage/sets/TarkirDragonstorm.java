@@ -52,6 +52,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Caustic Exhale", 74, Rarity.COMMON, mage.cards.c.CausticExhale.class));
         cards.add(new SetCardInfo("Champion of Dusan", 137, Rarity.COMMON, mage.cards.c.ChampionOfDusan.class));
         cards.add(new SetCardInfo("Channeled Dragonfire", 102, Rarity.UNCOMMON, mage.cards.c.ChanneledDragonfire.class));
+        cards.add(new SetCardInfo("Clarion Conqueror", 5, Rarity.RARE, mage.cards.c.ClarionConqueror.class));
         cards.add(new SetCardInfo("Constrictor Sage", 39, Rarity.UNCOMMON, mage.cards.c.ConstrictorSage.class));
         cards.add(new SetCardInfo("Coordinated Maneuver", 6, Rarity.COMMON, mage.cards.c.CoordinatedManeuver.class));
         cards.add(new SetCardInfo("Cori Mountain Monastery", 252, Rarity.RARE, mage.cards.c.CoriMountainMonastery.class));
