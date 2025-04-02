@@ -114,6 +114,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Jeskai Monument", 244, Rarity.UNCOMMON, mage.cards.j.JeskaiMonument.class));
         cards.add(new SetCardInfo("Jeskai Shrinekeeper", 197, Rarity.UNCOMMON, mage.cards.j.JeskaiShrinekeeper.class));
         cards.add(new SetCardInfo("Jungle Hollow", 258, Rarity.COMMON, mage.cards.j.JungleHollow.class));
+        cards.add(new SetCardInfo("Karakyk Guardian", 198, Rarity.UNCOMMON, mage.cards.k.KarakykGuardian.class));
         cards.add(new SetCardInfo("Kheru Goldkeeper", 199, Rarity.UNCOMMON, mage.cards.k.KheruGoldkeeper.class));
         cards.add(new SetCardInfo("Kin-Tree Nurturer", 83, Rarity.COMMON, mage.cards.k.KinTreeNurturer.class));
         cards.add(new SetCardInfo("Kin-Tree Severance", 200, Rarity.UNCOMMON, mage.cards.k.KinTreeSeverance.class));
