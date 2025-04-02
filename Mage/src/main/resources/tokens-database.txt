@@ -583,7 +583,6 @@
 |Generate|TOK:KTK|Warrior|1||WarriorToken|
 |Generate|TOK:KTK|Warrior|2||WarriorToken|
 |Generate|TOK:KTK|Zombie|||ZombieToken|
-# LGN don't have tokens, from wiki: A Sliver token for Brood Sliver and a Goblin token for Warbreak Trumpeter were featured as a Magic Player Reward.
 |Generate|TOK:LRW|Avatar|||AvatarToken|
 |Generate|TOK:LRW|Beast|||BeastToken|
 |Generate|TOK:LRW|Elemental|1||Elemental44GreenToken|
@@ -1058,12 +1057,9 @@
 |Generate|TOK:ZNC|Elemental|1||OmnathElementalToken|
 |Generate|TOK:ZNC|Elemental|2||ZendikarsRoilElementalToken|
 |Generate|TOK:ZNC|Faerie Rogue|||FaerieRogueToken|
-#
 # OonaQueenFaerieRogueToken is FaerieRogueToken with additional blue color, but ZNC contains only one token - so don't use normal token for it
 #|Generate|TOK:ZNC|Faerie Rogue|||OonaQueenFaerieRogueToken|
-# Germ token uses in chest and antology, but scryfall put it here
 |Generate|TOK:ZNC|Phyrexian Germ|||PhyrexianGermToken|
-#
 |Generate|TOK:ZNC|Goblin Rogue|||GoblinRogueToken|
 |Generate|TOK:ZNC|Kor Ally|||KorAllyToken|
 |Generate|TOK:ZNC|Rat|||RatToken|
