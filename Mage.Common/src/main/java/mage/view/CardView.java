@@ -313,7 +313,7 @@ public class CardView extends SimpleCardView {
         //       - face down status, face down image
 
         // find real name from original card, cause face down status can be applied to card/spell
-        String sourceName = sourceCard.getMainCard().getName();
+        String sourceName = sourceCard.isCopy() ? sourceCard.getCopyFrom().getName() : sourceCard.getMainCard().getName();
 
         // find real spell characteristics before resolve
         Card card = sourceCard.copy();
@@ -590,6 +590,11 @@ public class CardView extends SimpleCardView {
             this.color = new ObjectColor();
             this.rules = new ArrayList<>();
         }
+        else if (sourceCard.isCopy()) {
+            this.subTypes = new SubTypes();
+            this.superTypes = new ArrayList<>();
+            this.color = new ObjectColor();
+        }
 
         // can show face up card name for controller or game end
         // TODO: add exception on non empty name of the faced-down card here
@@ -606,10 +611,15 @@ public class CardView extends SimpleCardView {
         this.rarity = Rarity.SPECIAL; // hide rarity info
 
         // GUI: enable day/night button to view original face up card
-        if (showHiddenFaceDownData) {
+        if (showHiddenFaceDownData && !sourceCard.isCopy()) {
             this.transformable = true;
             this.secondCardFace = new CardView(sourceCard.getMainCard()); // do not use game param, so it will take default card
             this.alternateName = sourceCard.getMainCard().getName();
+        }
+        else if (showHiddenFaceDownData && sourceCard.getCopyFrom() instanceof Card) {
+            this.transformable = true;
+            this.secondCardFace = new CardView(((Card) sourceCard.getCopyFrom()).getMainCard());
+            this.alternateName = sourceCard.getCopyFrom().getName();
         }
     }
 
