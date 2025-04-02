@@ -4,20 +4,21 @@ import java.util.List;
 import java.util.UUID;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.StaticFilters;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetpointer.EachTargetPointer;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -69,15 +70,16 @@ class LieInWaitTargetEffect extends OneShotEffect {
         if (card == null) {
             return false;
         }
-        int power = card.getPower().getBaseValue();
         List<UUID> targets = getTargetPointer().getTargets(game, source);
-        boolean result = new ReturnFromGraveyardToHandTargetEffect()
-                .setTargetPointer(new FixedTarget(card.getId(), game))
-                .apply(game, source);
-        if (targets.size() >= 2) {
-            result |= new DamageTargetEffect(power)
-                        .setTargetPointer(new FixedTarget(targets.get(1), game))
-                        .apply(game, source);
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        boolean result = game.getState().getZone(targets.get(0)) == Zone.GRAVEYARD && card.moveToZone(Zone.HAND, source, game,false);
+        if (result && targets.size() >= 2) {
+            int power = card.getPower().getValue();
+            Permanent permanent = game.getPermanent(targets.get(1));
+            permanent.damage(StaticValue.get(power).calculate(game, source, this), source, game);       
         }
         return result;
     }
