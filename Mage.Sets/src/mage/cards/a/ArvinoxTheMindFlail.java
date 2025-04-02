@@ -96,7 +96,7 @@ class ArvinoxTheMindFlailExileEffect extends OneShotEffect {
             }
             cards.add(opponent.getLibrary().getFromBottom(game));
         }
-        if (CardUtil.moveCardsToExileFaceDown(game, source, controller, cards, true)) {
+        if (CardUtil.moveCardsToExileFaceDown(game, source, controller, cards.getCards(game), true)) {
             for (Card card : cards.getCards(game)) {
                 if (card.isPermanent(game)) {
                     CardUtil.makeCardPlayable(game, source, card, true, Duration.Custom, true);
