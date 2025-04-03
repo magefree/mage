@@ -98,6 +98,8 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Fresh Start", 46, Rarity.UNCOMMON, mage.cards.f.FreshStart.class));
         cards.add(new SetCardInfo("Frontier Bivouac", 256, Rarity.UNCOMMON, mage.cards.f.FrontierBivouac.class));
         cards.add(new SetCardInfo("Frontline Rush", 186, Rarity.UNCOMMON, mage.cards.f.FrontlineRush.class));
+        cards.add(new SetCardInfo("Frostcliff Siege", 187, Rarity.RARE, mage.cards.f.FrostcliffSiege.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Frostcliff Siege", 385, Rarity.RARE, mage.cards.f.FrostcliffSiege.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glacial Dragonhunt", 188, Rarity.UNCOMMON, mage.cards.g.GlacialDragonhunt.class));
         cards.add(new SetCardInfo("Great Arashin City", 257, Rarity.RARE, mage.cards.g.GreatArashinCity.class));
         cards.add(new SetCardInfo("Gurmag Nightwatch", 190, Rarity.COMMON, mage.cards.g.GurmagNightwatch.class));
