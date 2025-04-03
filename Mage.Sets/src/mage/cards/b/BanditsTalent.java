@@ -144,10 +144,9 @@ class BanditsTalentDiscardEffect extends OneShotEffect {
     }
 }
 
-
 enum BanditsTalentValue implements DynamicValue {
     instance;
-    private static final Hint hint = new ValueHint("opponents who have one or fewer cards in hand", instance);
+    private static final Hint hint = new ValueHint("Opponents who have one or fewer cards in hand", instance);
 
     public static Hint getHint() {
         return hint;
