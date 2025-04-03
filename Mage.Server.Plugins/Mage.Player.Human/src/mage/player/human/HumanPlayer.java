@@ -2084,16 +2084,16 @@ public class HumanPlayer extends PlayerImpl {
         if (skipButtonActivated && !canStopOnAny && !canStopOnZero) {
             return;
         }
-        java.util.List<UUID> possibleBlockers = game.getBattlefield().getActivePermanents(filter, playerId, game).stream()
-                .map(p -> p.getId())
-                .collect(Collectors.toList());
         // Skip prompt to select blockers if player has none
-        if (possibleBlockers.isEmpty()) return;
+        if (possibleBlockersCount == 0) return;
 
         while (canRespond()) {
             prepareForResponse(game);
             if (!isExecutingMacro()) {
                 Map<String, Serializable> options = new HashMap<>();
+                java.util.List<UUID> possibleBlockers = game.getBattlefield().getActivePermanents(filter, playerId, game).stream()
+                        .map(p -> p.getId())
+                        .collect(Collectors.toList());
                 options.put(Constants.Option.POSSIBLE_BLOCKERS, (Serializable) possibleBlockers);
                 game.fireSelectEvent(playerId, "Select blockers", options);
             }
