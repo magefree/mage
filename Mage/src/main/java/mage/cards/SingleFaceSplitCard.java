@@ -17,14 +17,14 @@ public abstract class SingleFaceSplitCard extends CardImpl {
     /* The adventure/omen spell card, i.e. Swift End. */
     protected SingleFaceSplitCardSpell spellCard;
 
-    public SingleFaceSplitCard(final SingleFaceSplitCard card) {
+    public SingleFaceSplitCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, String costs) {
+        super(ownerId, setInfo, types, costs);
+    }
+
+    public SingleFaceSplitCard(SingleFaceSplitCard card) {
         super(card);
         this.spellCard = card.getSpellCard().copy();
         this.spellCard.setParentCard(this);
-    }
-
-    public SingleFaceSplitCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, String costs) {
-        super(ownerId, setInfo, types, costs);
     }
 
     public SingleFaceSplitCardSpell getSpellCard() {

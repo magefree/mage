@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 /**
  * @author phulin
  */
-public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpell {
+public class AdventureCardSpellImpl extends CardImpl implements SingleFaceSplitCardSpell {
 
     private AdventureCard adventureCardParent;
 
@@ -35,7 +35,7 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
         this.adventureCardParent = adventureCardParent;
     }
 
-    public void finalizeAdventure() {
+    public void finalizeSpell() {
         if (spellAbility instanceof AdventureCardSpellAbility) {
             ((AdventureCardSpellAbility) spellAbility).finalizeAdventure();
         }
@@ -88,8 +88,8 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
     }
 
     @Override
-    public void setParentCard(AdventureCard card) {
-        this.adventureCardParent = card;
+    public void setParentCard(SingleFaceSplitCard card) {
+        this.adventureCardParent = (AdventureCard) card;
     }
 
     @Override
