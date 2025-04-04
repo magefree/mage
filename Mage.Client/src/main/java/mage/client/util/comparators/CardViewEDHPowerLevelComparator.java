@@ -1,7 +1,6 @@
 package mage.client.util.comparators;
 
 import mage.view.CardView;
-
 import java.util.Locale;
 
 /**
@@ -319,9 +318,12 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
         }
 
         String cn = card.getName().toLowerCase(Locale.ENGLISH);
+
+        // Saltiest cards (edhrec)
         if (cn.equals("acid rain")
                 || cn.equals("agent of treachery")
                 || cn.equals("anafenza, the foremost")
+                || cn.equals("ancient tomb")
                 || cn.equals("animar, soul of element")
                 || cn.equals("animate artifact")
                 || cn.equals("apocalypse")
@@ -366,6 +368,7 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
                 || cn.equals("contamination")
                 || cn.equals("craterhoof behemoth")
                 || cn.equals("cryptic gateway")
+                || cn.equals("cyclonic rift")
                 || cn.equals("deadeye navigator")
                 || cn.equals("death cloud")
                 || cn.equals("decree of annihilation")
@@ -393,20 +396,25 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
                 || cn.equals("entomb")
                 || cn.equals("epicenter")
                 || cn.equals("erratic portal")
+                || cn.equals("expropriate")
                 || cn.equals("exquisite blood")
                 || cn.equals("fall of the thran")
                 || cn.equals("farewell")
+                || cn.equals("fierce guardianship")
                 || cn.equals("flashfires")
                 || cn.equals("food chain")
                 || cn.equals("force of negation")
+                || cn.equals("force of will")
                 || cn.equals("future sight")
                 || cn.equals("gaddock teeg")
+                || cn.equals("gaea's cradle")
                 || cn.equals("genesis chamber")
                 || cn.equals("ghave, guru of spores")
                 || cn.equals("gilded drake")
                 || cn.equals("glenn, the voice of calm")
                 || cn.equals("global ruin")
                 || cn.equals("golos, tireless pilgrim")
+                || cn.equals("grand arbiter augustin iv")
                 || cn.equals("grave pact")
                 || cn.equals("grave titan")
                 || cn.equals("great whale")
@@ -420,10 +428,12 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
                 || cn.equals("hokori, dust drinker")
                 || cn.equals("humility")
                 || cn.equals("impending disaster")
+                || cn.equals("imperial seal")
                 || cn.equals("intruder alarm")
                 || cn.equals("invoke prejudice")
                 || cn.equals("iona, shield of emeria")
                 || cn.equals("jeweled lotus")
+                || cn.equals("jin-gitaxias, core augur")
                 || cn.equals("jin-gitaxias, progress tyrant")
                 || cn.equals("jokulhaups")
                 || cn.equals("kaalia of the vast")
@@ -434,6 +444,7 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
                 || cn.equals("kataki, war's wage")
                 || cn.equals("keldon firebombers")
                 || cn.equals("kiki-jiki, mirror breaker")
+                || cn.equals("kinnan, bonder prodigy")
                 || cn.equals("knowledge pool")
                 || cn.equals("koma, cosmos serpent")
                 || cn.equals("korvold, fae-cursed king")
@@ -457,6 +468,7 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
                 || cn.equals("mana breach")
                 || cn.equals("mana crypt")
                 || cn.equals("mana drain")
+                || cn.equals("mana vault")
                 || cn.equals("mana vortex")
                 || cn.equals("master of cruelties")
                 || cn.equals("memnarch")
@@ -489,6 +501,7 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
                 || cn.equals("oloro, ageless ascetic")
                 || cn.equals("omniscience")
                 || cn.equals("opalescence")
+                || cn.equals("opposition agent")
                 || cn.equals("oppression")
                 || cn.equals("orcish bowmasters")
                 || cn.equals("ornithopter")
@@ -506,6 +519,7 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
                 || cn.equals("purphoros, god of the forge")
                 || cn.equals("ravages of war")
                 || cn.equals("reclamation sage")
+                || cn.equals("rhystic study")
                 || cn.equals("rick, steadfast leader")
                 || cn.equals("rings of brighthearth")
                 || cn.equals("rising waters")
@@ -516,11 +530,13 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
                 || cn.equals("seedborn muse")
                 || cn.equals("sen triplets")
                 || cn.equals("sensei's divining top")
+                || cn.equals("serra's sanctum")
                 || cn.equals("sheoldred, the apocalypse")
                 || cn.equals("sheoldred, whispering one")
                 || cn.equals("sire of insanity")
                 || cn.equals("skithiryx, the blight dragon")
                 || cn.equals("smokestack")
+                || cn.equals("smothering tithe")
                 || cn.equals("sol ring")
                 || cn.equals("sorin markov")
                 || cn.equals("splinter twin")
@@ -532,6 +548,7 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
                 || cn.equals("storm cauldron")
                 || cn.equals("strip mine")
                 || cn.equals("sunder")
+                || cn.equals("survival of the fittest")
                 || cn.equals("tainted aether")
                 || cn.equals("tangle wire")
                 || cn.equals("tectonic break")
@@ -541,8 +558,11 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
                 || cn.equals("teferi, master of time")
                 || cn.equals("teferi, time raveler")
                 || cn.equals("temporal manipulation")
+                || cn.equals("tergrid, god of fright")
                 || cn.equals("tezzeret the seeker")
+                || cn.equals("thassa's oracle")
                 || cn.equals("the chain veil")
+                || cn.equals("the tabernacle at pendrell vale")
                 || cn.equals("thieves' auction")
                 || cn.equals("thoughts of ruin")
                 || cn.equals("thrasios, triton hero")
@@ -566,10 +586,12 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
                 || cn.equals("ulamog, the infinite gyre")
                 || cn.equals("umbral mantle")
                 || cn.equals("urabrask the hidden")
+                || cn.equals("urza, lord high artificer")
                 || cn.equals("uyo, silent prophet")
                 || cn.equals("void winnower")
                 || cn.equals("voltaic key")
                 || cn.equals("vorinclex, monstrous raider")
+                || cn.equals("vorinclex, voice of hunger")
                 || cn.equals("wake of destruction")
                 || cn.equals("warp world")
                 || cn.equals("winter moon")
@@ -691,7 +713,4 @@ public class CardViewEDHPowerLevelComparator implements CardViewComparator {
                 }
         return thisMaxPower;
     }
-
 }
-
-
