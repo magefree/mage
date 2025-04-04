@@ -13,6 +13,7 @@ public enum SubType {
     ADVENTURE("Adventure", SubTypeSet.SpellType),
     ARCANE("Arcane", SubTypeSet.SpellType),
     LESSON("Lesson", SubTypeSet.SpellType),
+    OMEN("Omen", SubTypeSet.SpellType),
     TRAP("Trap", SubTypeSet.SpellType),
 
     // Battle subtypes
