@@ -209,10 +209,11 @@ public class Spell extends StackObjectImpl implements Card {
                     + " using " + this.getSpellAbility().getSpellAbilityCastMode();
         }
 
-        if (card instanceof AdventureCardSpell) {
-            AdventureCard adventureCard = ((AdventureCardSpell) card).getParentCard();
-            return GameLog.replaceNameByColoredName(card, getSpellAbility().toString(), adventureCard)
-                    + " as Adventure spell of " + GameLog.getColoredObjectIdName(adventureCard);
+        if (card instanceof SingleFaceSplitCardSpell) {
+            SingleFaceSplitCard parentCard = ((SingleFaceSplitCardSpell) card).getParentCard();
+            String type = ((SingleFaceSplitCardSpell) card).getSpellType();
+            return GameLog.replaceNameByColoredName(card, getSpellAbility().toString(), parentCard)
+                    + " as " + type + " spell of " + GameLog.getColoredObjectIdName(parentCard);
         }
 
         if (card instanceof ModalDoubleFacedCardHalf) {
@@ -539,8 +540,8 @@ public class Spell extends StackObjectImpl implements Card {
     public String getIdName() {
         String idName;
         if (card != null) {
-            if (card instanceof AdventureCardSpell) {
-                idName = ((AdventureCardSpell) card).getParentCard().getId().toString().substring(0, 3);
+            if (card instanceof SingleFaceSplitCardSpell) {
+                idName = ((SingleFaceSplitCardSpell) card).getParentCard().getId().toString().substring(0, 3);
             } else {
                 idName = card.getId().toString().substring(0, 3);
             }

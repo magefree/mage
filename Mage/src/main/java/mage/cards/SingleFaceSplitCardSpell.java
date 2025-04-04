@@ -6,4 +6,6 @@ public interface SingleFaceSplitCardSpell extends SubCard<SingleFaceSplitCard> {
     SingleFaceSplitCardSpell copy();
 
     void finalizeSpell();
+
+    String getSpellType();
 }

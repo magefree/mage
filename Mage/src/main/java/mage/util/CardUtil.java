@@ -2069,8 +2069,8 @@ public final class CardUtil {
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
-        } else if (object instanceof AdventureCard || object instanceof AdventureCardSpell) {
-            AdventureCard mainCard = (AdventureCard) ((Card) object).getMainCard();
+        } else if (object instanceof SingleFaceSplitCard || object instanceof SingleFaceSplitCardSpell) {
+            SingleFaceSplitCard mainCard = (SingleFaceSplitCard) ((Card) object).getMainCard();
             res.add(mainCard);
             res.add(mainCard.getSpellCard());
         } else if (object instanceof Spell) {

@@ -12,6 +12,9 @@ import mage.util.CardUtil;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * @author phulin, jmlundeen
+ */
 public abstract class SingleFaceSplitCard extends CardImpl {
 
     /* The adventure/omen spell card, i.e. Swift End. */

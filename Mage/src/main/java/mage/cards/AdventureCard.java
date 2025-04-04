@@ -15,7 +15,7 @@ public abstract class AdventureCard extends SingleFaceSplitCard {
 
     public AdventureCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, CardType[] typesSpell, String costs, String adventureName, String costsSpell) {
         super(ownerId, setInfo, types, costs);
-        this.spellCard = new AdventureCardSpellImpl(ownerId, setInfo, adventureName, typesSpell, costsSpell, this);
+        this.spellCard = new AdventureCardSpell(ownerId, setInfo, adventureName, typesSpell, costsSpell, this);
     }
 
     public AdventureCard(AdventureCard card) {

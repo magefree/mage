@@ -56,7 +56,7 @@ public class CardTextPredicate implements Predicate<Card> {
             } else if (input instanceof ModalDoubleFacedCard) {
                 fullName = input.getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + ((ModalDoubleFacedCard) input).getRightHalfCard().getName();
             } else if (input instanceof AdventureCard) {
-                fullName = input.getName() + MockCard.ADVENTURE_NAME_SEPARATOR + ((AdventureCard) input).getSpellCard().getName();
+                fullName = input.getName() + MockCard.SINGLE_FACE_SPLIT_NAME_SEPARATOR + ((AdventureCard) input).getSpellCard().getName();
             }
 
             if (fullName.toLowerCase(Locale.ENGLISH).contains(text.toLowerCase(Locale.ENGLISH))) {
