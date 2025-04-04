@@ -163,7 +163,7 @@ class OmenCardSpellAbility extends SpellAbility {
         } else {
             sbRule.append(getModes().getText());
         }
-        sbRule.append(" <i>(Then shuffle this card into its owner’s library.)<i>");
+        sbRule.append(" <i>(Then shuffle this card into its owner's library.)<i>");
         return sbRule.toString();
     }
 
