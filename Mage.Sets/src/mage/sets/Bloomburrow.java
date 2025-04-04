@@ -69,9 +69,9 @@ public final class Bloomburrow extends ExpansionSet {
         cards.add(new SetCardInfo("Carrot Cake", 7, Rarity.COMMON, mage.cards.c.CarrotCake.class));
         cards.add(new SetCardInfo("Charmed Sleep", 388, Rarity.COMMON, mage.cards.c.CharmedSleep.class));
         cards.add(new SetCardInfo("Cindering Cutthroat", 208, Rarity.COMMON, mage.cards.c.CinderingCutthroat.class));
-        //cards.add(new SetCardInfo("Clement, the Worrywort", 209, Rarity.RARE, mage.cards.c.ClementTheWorrywort.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Clement, the Worrywort", 329, Rarity.RARE, mage.cards.c.ClementTheWorrywort.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Clement, the Worrywort", 347, Rarity.RARE, mage.cards.c.ClementTheWorrywort.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Clement, the Worrywort", 209, Rarity.RARE, mage.cards.c.ClementTheWorrywort.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Clement, the Worrywort", 329, Rarity.RARE, mage.cards.c.ClementTheWorrywort.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Clement, the Worrywort", 347, Rarity.RARE, mage.cards.c.ClementTheWorrywort.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Clifftop Lookout", 168, Rarity.UNCOMMON, mage.cards.c.ClifftopLookout.class));
         cards.add(new SetCardInfo("Coiling Rebirth", 309, Rarity.RARE, mage.cards.c.CoilingRebirth.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Coiling Rebirth", 86, Rarity.RARE, mage.cards.c.CoilingRebirth.class, NON_FULL_USE_VARIOUS));
