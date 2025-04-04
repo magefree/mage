@@ -1641,7 +1641,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             ((ModalDoubleFacedCard) copiedCard).setParts(leftCopied, rightCopied);
         } else if (copiedCard instanceof SingleFaceSplitCard) {
             // right
-            SingleFaceSplitCardSpell rightOriginal = ((AdventureCard) copiedCard).getSpellCard();
+            SingleFaceSplitCardSpell rightOriginal = ((SingleFaceSplitCard) copiedCard).getSpellCard();
             SingleFaceSplitCardSpell rightCopied = rightOriginal.copy();
             prepareCardForCopy(rightOriginal, rightCopied, newController);
             copiedParts.add(rightCopied);

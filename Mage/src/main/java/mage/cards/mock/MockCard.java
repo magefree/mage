@@ -71,8 +71,8 @@ public class MockCard extends CardImpl implements MockableCard {
             this.secondSideCard = new MockCard(CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber()));
         }
 
-        if (card.isAdventureCard()) {
-            this.adventureSpellName = card.getAdventureSpellName();
+        if (card.isSingleFaceSplitCard()) {
+            this.adventureSpellName = card.getSingleFaceSplitCardSpellName();
         }
 
         if (card.isModalDoubleFacedCard()) {

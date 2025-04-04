@@ -147,8 +147,8 @@ public enum CardRepository {
         if (card.getMeldsToCardName() != null && !card.getMeldsToCardName().isEmpty()) {
             namesList.add(card.getMeldsToCardName());
         }
-        if (card.getAdventureSpellName() != null && !card.getAdventureSpellName().isEmpty()) {
-            namesList.add(card.getAdventureSpellName());
+        if (card.getSingleFaceSplitCardSpellName() != null && !card.getSingleFaceSplitCardSpellName().isEmpty()) {
+            namesList.add(card.getSingleFaceSplitCardSpellName());
         }
     }
 
