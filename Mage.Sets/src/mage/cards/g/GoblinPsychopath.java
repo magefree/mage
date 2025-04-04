@@ -5,6 +5,8 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.StaticHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -14,8 +16,12 @@ import mage.constants.SubType;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -68,6 +74,9 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
         }
 
         this.wonFlip = controller.flipCoin(source, game, true);
+        game.informPlayers("The next time " + game.getObject(source.getSourceId()).getLogName()
+                + " would deal combat damage this turn, it deals that damage to " + controller.getLogName()
+                + " instead.");
     }
 
     @Override
@@ -109,5 +118,21 @@ class GoblinPsychopathEffect extends ReplacementEffectImpl {
         game.informPlayers(sourceLogName + "Redirected " + event.getAmount() + " damage to " + controller.getLogName());
         this.discard();
         return true;
+    }
+
+    @Override
+    public boolean hasHint() {
+        return true;
+    }
+
+    @Override
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
+        if (wonFlip || !permanent.getId().equals(source.getSourceId())) {
+            return Collections.emptyList();
+        }
+
+        return Arrays.asList(
+                new StaticHint("The next time {this} would deal combat damage this turn, it deals that damage to "
+                        + game.getPlayer(source.getControllerId()).getLogName() + " instead."));
     }
 }

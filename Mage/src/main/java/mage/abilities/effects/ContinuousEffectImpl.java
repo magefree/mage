@@ -3,12 +3,14 @@ package mage.abilities.effects;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.CompoundAbility;
+import mage.abilities.hint.Hint;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.*;
 import mage.filter.Filter;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -516,9 +518,18 @@ public abstract class ContinuousEffectImpl extends EffectImpl implements Continu
         return true;
     }
 
+    public boolean hasHint() {
+        return false;
+    }
+
+    public List<Hint> getAffectedHints(Permanent permanent, Ability source, Game game) {
+        return Collections.emptyList();
+    }
+
     @Override
     public ContinuousEffect setText(String staticText) {
         super.setText(staticText);
         return this;
+
     }
 }
