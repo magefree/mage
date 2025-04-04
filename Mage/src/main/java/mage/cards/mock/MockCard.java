@@ -34,7 +34,7 @@ public class MockCard extends CardImpl implements MockableCard {
     protected List<String> manaCostLeftStr;
     protected List<String> manaCostRightStr;
     protected List<String> manaCostStr;
-    protected String adventureSpellName;
+    protected String singleFaceSplitSpellName;
     protected boolean isModalDoubleFacedCard;
     protected int manaValue;
 
@@ -72,7 +72,7 @@ public class MockCard extends CardImpl implements MockableCard {
         }
 
         if (card.isSingleFaceSplitCard()) {
-            this.adventureSpellName = card.getSingleFaceSplitCardSpellName();
+            this.singleFaceSplitSpellName = card.getSingleFaceSplitCardSpellName();
         }
 
         if (card.isModalDoubleFacedCard()) {
@@ -101,7 +101,7 @@ public class MockCard extends CardImpl implements MockableCard {
         this.manaCostLeftStr = new ArrayList<>(card.manaCostLeftStr);
         this.manaCostRightStr = new ArrayList<>(card.manaCostRightStr);
         this.manaCostStr = new ArrayList<>(card.manaCostStr);
-        this.adventureSpellName = card.adventureSpellName;
+        this.singleFaceSplitSpellName = card.singleFaceSplitSpellName;
         this.isModalDoubleFacedCard = card.isModalDoubleFacedCard;
         this.manaValue = card.manaValue;
     }
@@ -155,8 +155,8 @@ public class MockCard extends CardImpl implements MockableCard {
             return getName();
         }
 
-        if (adventureSpellName != null) {
-            return getName() + SINGLE_FACE_SPLIT_NAME_SEPARATOR + adventureSpellName;
+        if (singleFaceSplitSpellName != null) {
+            return getName() + SINGLE_FACE_SPLIT_NAME_SEPARATOR + singleFaceSplitSpellName;
         } else if (isModalDoubleFacedCard) {
             return getName() + MODAL_DOUBLE_FACES_NAME_SEPARATOR + this.getSecondCardFace().getName();
         } else {
