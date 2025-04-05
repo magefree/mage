@@ -187,6 +187,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Shock Brigade", 120, Rarity.COMMON, mage.cards.s.ShockBrigade.class));
         cards.add(new SetCardInfo("Shocking Sharpshooter", 121, Rarity.UNCOMMON, mage.cards.s.ShockingSharpshooter.class));
         cards.add(new SetCardInfo("Sibsig Appraiser", 56, Rarity.COMMON, mage.cards.s.SibsigAppraiser.class));
+        cards.add(new SetCardInfo("Sidisi, Regent of the Mire", 92, Rarity.RARE, mage.cards.s.SidisiRegentOfTheMire.class));
         cards.add(new SetCardInfo("Sinkhole Surveyor", 93, Rarity.RARE, mage.cards.s.SinkholeSurveyor.class));
         cards.add(new SetCardInfo("Skirmish Rhino", 224, Rarity.UNCOMMON, mage.cards.s.SkirmishRhino.class));
         cards.add(new SetCardInfo("Smile at Death", 24, Rarity.MYTHIC, mage.cards.s.SmileAtDeath.class));
