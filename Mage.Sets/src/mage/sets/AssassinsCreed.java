@@ -189,9 +189,9 @@ public final class AssassinsCreed extends ExpansionSet {
         cards.add(new SetCardInfo("Kassandra, Eagle Bearer", 59, Rarity.MYTHIC, mage.cards.k.KassandraEagleBearer.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Keen-Eyed Raven", 279, Rarity.UNCOMMON, mage.cards.k.KeenEyedRaven.class));
         cards.add(new SetCardInfo("Labyrinth Adversary", 290, Rarity.UNCOMMON, mage.cards.l.LabyrinthAdversary.class));
-        //cards.add(new SetCardInfo("Layla Hassan", 127, Rarity.RARE, mage.cards.l.LaylaHassan.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Layla Hassan", 177, Rarity.RARE, mage.cards.l.LaylaHassan.class, NON_FULL_USE_VARIOUS));
-        //cards.add(new SetCardInfo("Layla Hassan", 7, Rarity.RARE, mage.cards.l.LaylaHassan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Layla Hassan", 127, Rarity.RARE, mage.cards.l.LaylaHassan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Layla Hassan", 177, Rarity.RARE, mage.cards.l.LaylaHassan.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Layla Hassan", 7, Rarity.RARE, mage.cards.l.LaylaHassan.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo da Vinci", "118z", Rarity.MYTHIC, mage.cards.l.LeonardoDaVinci.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo da Vinci", 118, Rarity.MYTHIC, mage.cards.l.LeonardoDaVinci.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Leonardo da Vinci", 193, Rarity.MYTHIC, mage.cards.l.LeonardoDaVinci.class, NON_FULL_USE_VARIOUS));
