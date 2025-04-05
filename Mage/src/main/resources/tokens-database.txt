@@ -2235,6 +2235,7 @@
 # WHO
 |Generate|TOK:WHO|Alien|||AlienToken|
 |Generate|TOK:WHO|Alien Insect|||AlienInsectToken|
+|Generate|TOK:WHO|Alien Rhino|||AlienRhinoToken|
 |Generate|TOK:WHO|Alien Salamander|||AlienSalamanderToken|
 |Generate|TOK:WHO|Alien Warrior|||AlienWarriorToken|
 |Generate|TOK:WHO|Beast|||BeastToken|
@@ -2248,7 +2249,8 @@
 |Generate|TOK:WHO|Food|2||FoodToken|
 |Generate|TOK:WHO|Food|3||FoodToken|
 |Generate|TOK:WHO|Horse|||TheGirlInTheFireplaceHorseToken|
-|Generate|TOK:WHO|Human|||TheEleventhHourToken|
+|Generate|TOK:WHO|Human|1||Human11WithWard2Token|
+|Generate|TOK:WHO|Human|2||TheEleventhHourToken|
 |Generate|TOK:WHO|Human Noble|||TheGirlInTheFireplaceHumanNobleToken|
 |Generate|TOK:WHO|Mark of the Rani|||MarkOfTheRaniToken|
 |Generate|TOK:WHO|Soldier|||SoldierToken|
