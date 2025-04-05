@@ -5,6 +5,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 public class AfflictTest extends CardTestPlayerBase {
 
     private final String khenra = "Khenra Eternal";
@@ -35,7 +37,7 @@ public class AfflictTest extends CardTestPlayerBase {
         attack(1, playerA, khenra);
         block(1, playerB, elves + ":0", khenra);
         block(1, playerB, elves + ":1", khenra);
-        setChoice(playerA, "X=1"); // assign damage
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
         setStrictChooseMode(true);
         setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);

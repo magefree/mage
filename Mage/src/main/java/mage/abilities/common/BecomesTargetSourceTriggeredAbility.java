@@ -57,7 +57,7 @@ public class BecomesTargetSourceTriggeredAbility extends TriggeredAbilityImpl {
         if (!event.getTargetId().equals(getSourceId())) {
             return false;
         }
-        StackObject targetingObject = CardUtil.getTargetingStackObject(event, game);
+        StackObject targetingObject = CardUtil.getTargetingStackObject(this.getId().toString(), event, game);
         if (targetingObject == null || !filter.match(targetingObject, getControllerId(), this, game)) {
             return false;
         }

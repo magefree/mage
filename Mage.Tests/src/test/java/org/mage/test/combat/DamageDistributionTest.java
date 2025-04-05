@@ -197,4 +197,35 @@ public class DamageDistributionTest extends CardTestPlayerBase {
 
         assertLife(playerB, 20 - 5);
     }
+
+    @Test
+    public void test2x2Block() {
+        addCard(Zone.BATTLEFIELD, playerA, "Catacomb Slug"); // 2/6
+        addCard(Zone.BATTLEFIELD, playerA, "Catacomb Crocodile"); // 3/7
+
+        addCard(Zone.BATTLEFIELD, playerB, "Brave the Sands"); //can block 2
+        addCard(Zone.BATTLEFIELD, playerB, "Marsh Hulk"); // 4/6
+        addCard(Zone.BATTLEFIELD, playerB, "Fortress Crab"); // 1/6
+
+        attack(1, playerA, "Catacomb Slug");
+        attack(1, playerA, "Catacomb Crocodile");
+        block(1, playerB, "Fortress Crab", "Catacomb Slug");
+        block(1, playerB, "Fortress Crab", "Catacomb Crocodile");
+        block(1, playerB, "Marsh Hulk", "Catacomb Slug");
+        block(1, playerB, "Marsh Hulk", "Catacomb Crocodile");
+
+        setChoiceAmount(playerA, 1, 1); // Catacomb Slug
+        setChoiceAmount(playerA, 1, 2); // Catacomb Crocodile
+        setChoiceAmount(playerB, 1, 0); // Fortress Crab
+        setChoiceAmount(playerB, 2, 2); // Marsh Hulk
+
+        setStopAt(1, PhaseStep.END_TURN);
+        setStrictChooseMode(true);
+        execute();
+
+        assertDamageReceived(playerA, "Catacomb Slug", 3);
+        assertDamageReceived(playerA, "Catacomb Crocodile", 2);
+        assertDamageReceived(playerB, "Fortress Crab", 2);
+        assertDamageReceived(playerB, "Marsh Hulk", 3);
+    }
 }

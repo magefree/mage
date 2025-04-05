@@ -77,7 +77,7 @@ public class WardAbility extends TriggeredAbilityImpl {
         if (!getSourceId().equals(event.getTargetId())) {
             return false;
         }
-        StackObject targetingObject = CardUtil.getTargetingStackObject(event, game);
+        StackObject targetingObject = CardUtil.getTargetingStackObject(this.getId().toString(), event, game);
         if (targetingObject == null || !game.getOpponents(getControllerId()).contains(targetingObject.getControllerId())) {
             return false;
         }

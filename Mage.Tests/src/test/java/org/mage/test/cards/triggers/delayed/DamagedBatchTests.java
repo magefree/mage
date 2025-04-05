@@ -6,6 +6,8 @@ import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestCommander4Players;
 
+import static org.mage.test.player.TestPlayer.CHOICE_SKIP;
+
 /**
  *
  * @author jimga150
@@ -25,9 +27,7 @@ public class DamagedBatchTests extends CardTestCommander4Players {
         attack(1, playerA, "Donna Noble", playerB);
         block(1, playerB, "Memnite", "Donna Noble");
         block(1, playerB, "Expedition Envoy", "Donna Noble");
-
-        //Assign this much damage to the first blocking creature
-        setChoice(playerA, "X=1");
+        setChoice(playerA, CHOICE_SKIP); // Assign default damage
 
         //Target this player with Donna Noble
         addTarget(playerA, playerB);

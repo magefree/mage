@@ -16,7 +16,7 @@ import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.TokenPredicate;
-import mage.game.permanent.token.GrismoldPlantToken;
+import mage.game.permanent.token.Plant11Token;
 
 import java.util.UUID;
 
@@ -45,7 +45,7 @@ public final class GrismoldTheDreadsower extends CardImpl {
 
         // At the beginning of your end step, each player creates a 1/1 green Plant creature token.
         this.addAbility(new BeginningOfEndStepTriggeredAbility(
-                new CreateTokenAllEffect(new GrismoldPlantToken(), TargetController.EACH_PLAYER)
+                new CreateTokenAllEffect(new Plant11Token(), TargetController.EACH_PLAYER)
         ));
 
         // Whenever a creature token dies, put a +1/+1 counter on Grismold, the Dreadsower.

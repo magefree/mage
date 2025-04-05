@@ -1086,13 +1086,22 @@ public final class CardUtil {
      * @param game  the Game from checkTrigger() or watch()
      * @return the StackObject which targeted the source, or null if not found
      */
-    public static StackObject getTargetingStackObject(GameEvent event, Game game) {
+    public static StackObject getTargetingStackObject(String checkingReference, GameEvent event, Game game) {
         // In case of multiple simultaneous triggered abilities from the same source,
         // need to get the actual one that targeted, see #8026, #8378
         // Also avoids triggering on cancelled selections, see #8802
+        String stateKey = "targetedMap" + checkingReference;
+        Map<UUID, Set<UUID>> targetMap = (Map<UUID, Set<UUID>>) game.getState().getValue(stateKey);
+        // targetMap: key - targetId; value - Set of stackObject Ids
+        if (targetMap == null) {
+            targetMap = new HashMap<>();
+        } else {
+            targetMap = new HashMap<>(targetMap); // must have new object reference if saved back to game state
+        }
+        Set<UUID> targetingObjects = targetMap.computeIfAbsent(event.getTargetId(), k -> new HashSet<>());
         for (StackObject stackObject : game.getStack()) {
             Ability stackAbility = stackObject.getStackAbility();
-            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
+            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId()) || targetingObjects.contains(stackObject.getId())) {
                 continue;
             }
             if (CardUtil.getAllSelectedTargets(stackAbility, game).contains(event.getTargetId())) {

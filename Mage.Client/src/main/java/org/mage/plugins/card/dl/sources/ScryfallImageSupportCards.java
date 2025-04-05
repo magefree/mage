@@ -439,7 +439,7 @@ public class ScryfallImageSupportCards {
             add("ELD"); // Throne of Eldraine
             //add("PTG"); // Ponies: The Galloping
             add("CMB1"); // Mystery Booster Playtest Cards 2019
-            //add("MB1"); // Mystery Booster
+            add("MB1"); // Mystery Booster
             add("GN2"); // Game Night 2019
             add("HA1"); // Historic Anthology 1
             //add("HHO"); // Happy Holidays
@@ -534,7 +534,7 @@ public class ScryfallImageSupportCards {
             add("ONE"); // Phyrexia: All Will Be One
             add("ONC"); // Phyrexia: All Will Be One Commander
             add("PL23"); // Year of the Rabbit 2023
-            add("DA1"); // Unknown Event
+            add("UNK"); // Unknown Event
             add("SIS"); // Shadows of the Past
             add("SIR"); // Shadows over Innistrad Remastered
             add("SLP"); // Secret Lair Showdown
@@ -683,8 +683,16 @@ public class ScryfallImageSupportCards {
             // CALC - custom alchemy version of cards.
             put("CALC/C-Pillar of the Paruns", "https://api.scryfall.com/cards/dis/176/");
 
+            // MB1
+            put("MB1/Goblin Trenches", "https://api.scryfall.com/cards/plst/EMA-203/");
+            put("MB1/Prophetic Bolt", "https://api.scryfall.com/cards/plst/C15-231/");
+
             // LTR - 0 number for tokens only
-            put("LTR/The One Ring/001", "https://api.scryfall.com/cards/ltr/0/");
+            // Scryfall has a bug, for some reason this link doesn't work with ?format=image even though it works with ?format=json
+            // and ?format=text. Base url fails because language is qya and not en and alternate url fails because of this bug
+            // TODO: This should be reverted when Scryfall fixes the bug 
+            // put("LTR/The One Ring/001", "https://api.scryfall.com/cards/ltr/0/");
+            put("LTR/The One Ring/001", "https://api.scryfall.com/cards/ltr/0/qya?format=image");
 
             // REX - double faced lands (xmage uses two diff lands for it)
             put("REX/Command Tower/26b", "https://api.scryfall.com/cards/rex/26/en?format=image&face=back");

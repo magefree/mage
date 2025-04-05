@@ -2072,7 +2072,6 @@ public class HumanPlayer extends PlayerImpl {
         // stop skip on any/zero permanents available
         int possibleBlockersCount = game.getBattlefield().count(filter, playerId, source, game);
         boolean canStopOnAny = possibleBlockersCount != 0 && getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockersWithAnyPermanents();
-        boolean canStopOnZero = possibleBlockersCount == 0 && getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockersWithZeroPermanents();
 
         // skip declare blocker step
         // as opposed to declare attacker - it can be skipped by ANY skip button TODO: make same for declare attackers and rework skip buttons (normal and forced)
@@ -2081,9 +2080,11 @@ public class HumanPlayer extends PlayerImpl {
                 || passedTurn
                 || passedUntilEndOfTurn
                 || passedUntilNextMain;
-        if (skipButtonActivated && !canStopOnAny && !canStopOnZero) {
+        if (skipButtonActivated && !canStopOnAny) {
             return;
         }
+        // Skip prompt to select blockers if player has none
+        if (possibleBlockersCount == 0) return;
 
         while (canRespond()) {
             prepareForResponse(game);
@@ -2120,56 +2121,6 @@ public class HumanPlayer extends PlayerImpl {
                 }
             }
         }
-    }
-
-    @Override
-    public UUID chooseAttackerOrder(java.util.List<Permanent> attackers, Game game) {
-        if (gameInCheckPlayableState(game)) {
-            return null;
-        }
-
-        while (canRespond()) {
-            prepareForResponse(game);
-            if (!isExecutingMacro()) {
-                game.fireSelectTargetEvent(playerId, "Pick attacker", attackers, true);
-            }
-            waitForResponse(game);
-
-            UUID responseId = getFixedResponseUUID(game);
-            if (responseId != null) {
-                for (Permanent perm : attackers) {
-                    if (perm.getId().equals(responseId)) {
-                        return perm.getId();
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public UUID chooseBlockerOrder(java.util.List<Permanent> blockers, CombatGroup combatGroup, java.util.List<UUID> blockerOrder, Game game) {
-        if (gameInCheckPlayableState(game)) {
-            return null;
-        }
-
-        while (canRespond()) {
-            prepareForResponse(game);
-            if (!isExecutingMacro()) {
-                game.fireSelectTargetEvent(playerId, "Pick blocker", blockers, true);
-            }
-            waitForResponse(game);
-
-            UUID responseId = getFixedResponseUUID(game);
-            if (responseId != null) {
-                for (Permanent perm : blockers) {
-                    if (perm.getId().equals(responseId)) {
-                        return perm.getId();
-                    }
-                }
-            }
-        }
-        return null;
     }
 
     protected void selectCombatGroup(UUID defenderId, UUID blockerId, Game game) {
@@ -2260,7 +2211,7 @@ public class HumanPlayer extends PlayerImpl {
             Game game
     ) {
         int needCount = messages.size();
-        List<Integer> defaultList = MultiAmountType.prepareDefaltValues(messages, totalMin, totalMax);
+        List<Integer> defaultList = MultiAmountType.prepareDefaultValues(messages, totalMin, totalMax);
         if (needCount == 0 || (needCount == 1 && totalMin == totalMax)
                 || messages.stream().map(m -> m.min == m.max).reduce(true, Boolean::logicalAnd)) {
             // nothing to choose

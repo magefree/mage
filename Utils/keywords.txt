@@ -63,6 +63,7 @@ For Mirrodin!|new|
 Freerunning|manaString|
 Friends forever|instance|
 Gift|card|
+Harmonize|card, manaString|
 Haste|instance|
 Hexproof|instance|
 Hideaway|number|
