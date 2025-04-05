@@ -10,8 +10,9 @@ import mage.abilities.costs.VariableCostImpl;
 import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.effects.Effect;
+import mage.abilities.dynamicvalue.AdditiveDynamicValue;
+import mage.abilities.dynamicvalue.common.GetXValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.constants.*;
 import mage.cards.CardImpl;
@@ -25,7 +26,6 @@ import mage.filter.predicate.mageobject.ManaValuePredicate;
 import mage.game.Game;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.target.targetadjustment.ManaValueTargetAdjuster;
-import mage.util.CardUtil;
 
 /**
  *
@@ -63,34 +63,10 @@ public final class SidisiRegentOfTheMire extends CardImpl {
     }
 }
 
-enum GetXPlusOneValue implements DynamicValue {
-    instance;
-
-    @Override
-    public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        return CardUtil.getSourceCostsTag(game, sourceAbility, "X", 0) + 1;
-    }
-
-    @Override
-    public GetXPlusOneValue copy() {
-        return GetXPlusOneValue.instance;
-    }
-
-    @Override
-    public String toString() {
-        return "X + 1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
-    }
-}
-
 class SidisiRegentOfTheMireAdjuster extends ManaValueTargetAdjuster {
 
     public SidisiRegentOfTheMireAdjuster() {
-        super(GetXPlusOneValue.instance, ComparisonType.EQUAL_TO);
+        super(new AdditiveDynamicValue(GetXValue.instance, StaticValue.get(1)), ComparisonType.EQUAL_TO);
     }
 
 }
