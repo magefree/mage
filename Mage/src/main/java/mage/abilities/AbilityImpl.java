@@ -483,6 +483,7 @@ public abstract class AbilityImpl implements Ability {
             // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
             switch (((SpellAbility) this).getSpellAbilityCastMode()) {
                 case FLASHBACK:
+                case HARMONIZE:
                 case MADNESS:
                 case TRANSFORMED:
                 case DISTURB:
