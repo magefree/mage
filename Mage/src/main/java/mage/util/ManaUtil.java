@@ -13,10 +13,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.mana.*;
-import mage.cards.AdventureCard;
-import mage.cards.Card;
-import mage.cards.ModalDoubleFacedCard;
-import mage.cards.SplitCard;
+import mage.cards.*;
 import mage.choices.Choice;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
@@ -644,8 +641,8 @@ public final class ManaUtil {
         Card secondSide;
         if (card instanceof SplitCard) {
             secondSide = ((SplitCard) card).getRightHalfCard();
-        } else if (card instanceof AdventureCard) {
-            secondSide = ((AdventureCard) card).getSpellCard();
+        } else if (card instanceof SingleFaceSplitCard) {
+            secondSide = ((SingleFaceSplitCard) card).getSpellCard();
         } else if (card instanceof ModalDoubleFacedCard) {
             secondSide = ((ModalDoubleFacedCard) card).getRightHalfCard();
         } else {

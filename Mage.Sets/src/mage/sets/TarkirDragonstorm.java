@@ -66,6 +66,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Delta Bloodflies", 77, Rarity.COMMON, mage.cards.d.DeltaBloodflies.class));
         cards.add(new SetCardInfo("Descendant of Storms", 8, Rarity.UNCOMMON, mage.cards.d.DescendantOfStorms.class));
         cards.add(new SetCardInfo("Devoted Duelist", 104, Rarity.COMMON, mage.cards.d.DevotedDuelist.class));
+        cards.add(new SetCardInfo("Dirgur Island Dragon", 40, Rarity.COMMON, mage.cards.d.DirgurIslandDragon.class));
         cards.add(new SetCardInfo("Dismal Backwater", 254, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Dispelling Exhale", 41, Rarity.COMMON, mage.cards.d.DispellingExhale.class));
         cards.add(new SetCardInfo("Dracogenesis", 105, Rarity.MYTHIC, mage.cards.d.Dracogenesis.class));

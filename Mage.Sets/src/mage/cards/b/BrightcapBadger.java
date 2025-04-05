@@ -52,7 +52,7 @@ public final class BrightcapBadger extends AdventureCard {
         // Fungus Frolic
         // Create two 1/1 green Saproling creature tokens.
         this.getSpellCard().getSpellAbility().addEffect(new CreateTokenEffect(new SaprolingToken(), 2));
-        this.getSpellCard().finalizeAdventure();
+        this.finalizeAdventure();
     }
 
     private BrightcapBadger(final BrightcapBadger card) {

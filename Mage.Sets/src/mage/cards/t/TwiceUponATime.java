@@ -47,7 +47,7 @@ public final class TwiceUponATime extends AdventureCard {
         // Unlikely Meeting
         // Search your library for a Doctor card, reveal it, put it into your hand, then shuffle.
         this.getSpellCard().getSpellAbility().addEffect(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter2), true));
-        this.getSpellCard().finalizeAdventure();
+        this.finalizeAdventure();
     }
 
     private TwiceUponATime(final TwiceUponATime card) {
