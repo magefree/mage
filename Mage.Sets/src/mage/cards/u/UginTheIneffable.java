@@ -6,7 +6,6 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -111,11 +110,7 @@ class UginTheIneffableEffect extends OneShotEffect {
 
         // exile and look
         UUID exileZoneId = CardUtil.getExileZoneId(game, source.getSourceId(), source.getSourceObjectZoneChangeCounter());
-        if (player.moveCardsToExile(card, source, game, false, exileZoneId, sourceObject.getIdName() + " (" + player.getName() + ")")) {
-            card.turnFaceDown(source, game, source.getControllerId());
-            player.lookAtCards(player.getName() + " - " + card.getIdName() + " - " + CardUtil.sdf.format(System.currentTimeMillis()), card, game);
-        }
-
+        CardUtil.moveCardsToExileFaceDown(game, source, player, card, exileZoneId, sourceObject.getIdName() + " (" + player.getName() + ")", true);
         // create token
         Set<MageObjectReference> tokenObjs = new HashSet<>();
         CreateTokenEffect effect = new CreateTokenEffect(new UginTheIneffableToken());
@@ -129,11 +124,6 @@ class UginTheIneffableEffect extends OneShotEffect {
             GainAbilityTargetEffect gainAbilityEffect = new GainAbilityTargetEffect(sa, Duration.WhileOnBattlefield);
             gainAbilityEffect.setTargetPointer(new FixedTarget(addedTokenId));
             game.addEffect(gainAbilityEffect, source);
-
-            // look at face-down card in exile
-            UginTheIneffableLookAtFaceDownEffect lookAtEffect = new UginTheIneffableLookAtFaceDownEffect();
-            lookAtEffect.setTargetPointer(new FixedTarget(card.getId(), game));
-            game.addEffect(lookAtEffect, source);
 
             tokenObjs.add(new MageObjectReference(addedTokenId, game));
             game.addDelayedTriggeredAbility(new UginTheIneffableDelayedTriggeredAbility(
@@ -188,37 +178,5 @@ class UginTheIneffableDelayedTriggeredAbility extends DelayedTriggeredAbility {
     @Override
     public String getRule() {
         return "When this token leaves the battlefield, put the exiled card into your hand.";
-    }
-}
-
-class UginTheIneffableLookAtFaceDownEffect extends AsThoughEffectImpl {
-
-    UginTheIneffableLookAtFaceDownEffect() {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
-    }
-
-    private UginTheIneffableLookAtFaceDownEffect(final UginTheIneffableLookAtFaceDownEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public UginTheIneffableLookAtFaceDownEffect copy() {
-        return new UginTheIneffableLookAtFaceDownEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        UUID cardId = getTargetPointer().getFirst(game, source);
-        if (cardId == null) {
-            this.discard();
-        }
-        return affectedControllerId.equals(source.getControllerId())
-                && objectId.equals(cardId)
-                && game.getState().getExile().containsId(cardId, game);
     }
 }
