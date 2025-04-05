@@ -90,7 +90,7 @@ class AgrusKosEternalSoldierTriggeredAbility extends TriggeredAbilityImpl {
         if (!event.getTargetId().equals(getSourceId())) {
             return false;
         }
-        StackObject targetingObject = CardUtil.getTargetingStackObject(event, game);
+        StackObject targetingObject = CardUtil.getTargetingStackObject(this.getId().toString(), event, game);
         if (targetingObject == null || targetingObject instanceof Spell) {
             return false;
         }
