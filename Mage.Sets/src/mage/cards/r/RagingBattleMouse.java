@@ -4,7 +4,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.triggers.BeginningOfCombatTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CelebrationCondition;
 import mage.abilities.decorator.ConditionalCostModificationEffect;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
@@ -14,10 +13,9 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.*;
 import mage.filter.StaticFilters;
-import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.watchers.common.PermanentsEnteredBattlefieldWatcher;
-import mage.watchers.common.SpellsCastWatcher;
+import mage.abilities.condition.common.YouCastExactOneSpellThisTurnCondition;
 
 import java.util.UUID;
 
@@ -61,15 +59,5 @@ public final class RagingBattleMouse extends CardImpl {
     @Override
     public RagingBattleMouse copy() {
         return new RagingBattleMouse(this);
-    }
-}
-
-enum YouCastExactOneSpellThisTurnCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        SpellsCastWatcher watcher = game.getState().getWatcher(SpellsCastWatcher.class);
-        return watcher != null && watcher.getSpellsCastThisTurn(source.getControllerId()).size() == 1;
     }
 }

@@ -104,6 +104,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Gurmag Rakshasa", 81, Rarity.UNCOMMON, mage.cards.g.GurmagRakshasa.class));
         cards.add(new SetCardInfo("Hardened Tactician", 191, Rarity.UNCOMMON, mage.cards.h.HardenedTactician.class));
         cards.add(new SetCardInfo("Heritage Reclamation", 145, Rarity.COMMON, mage.cards.h.HeritageReclamation.class));
+        cards.add(new SetCardInfo("Highspire Bell-Ringer", 47, Rarity.COMMON, mage.cards.h.HighspireBellRinger.class));
         cards.add(new SetCardInfo("Humbling Elder", 48, Rarity.COMMON, mage.cards.h.HumblingElder.class));
         cards.add(new SetCardInfo("Iceridge Serpent", 49, Rarity.COMMON, mage.cards.i.IceridgeSerpent.class));
         cards.add(new SetCardInfo("Inevitable Defeat", 194, Rarity.RARE, mage.cards.i.InevitableDefeat.class));
