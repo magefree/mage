@@ -1,11 +1,11 @@
 package mage.sets;
 
-import java.util.Arrays;
-import java.util.List;
-
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -209,6 +209,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Swiftwater Cliffs", 268, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
         cards.add(new SetCardInfo("Teeming Dragonstorm", 30, Rarity.UNCOMMON, mage.cards.t.TeemingDragonstorm.class));
         cards.add(new SetCardInfo("Tempest Hawk", 31, Rarity.COMMON, mage.cards.t.TempestHawk.class));
+        cards.add(new SetCardInfo("Temur Battlecrier", 228, Rarity.RARE, mage.cards.t.TemurBattlecrier.class));
         cards.add(new SetCardInfo("Temur Devotee", 61, Rarity.COMMON, mage.cards.t.TemurDevotee.class));
         cards.add(new SetCardInfo("Temur Monument", 248, Rarity.UNCOMMON, mage.cards.t.TemurMonument.class));
         cards.add(new SetCardInfo("Temur Tawnyback", 229, Rarity.COMMON, mage.cards.t.TemurTawnyback.class));
