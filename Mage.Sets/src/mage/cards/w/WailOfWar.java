@@ -1,15 +1,16 @@
 package mage.cards.w;
 
 import mage.abilities.Mode;
-import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetCardInGraveyard;
 
 import java.util.UUID;
 
@@ -28,15 +29,15 @@ public final class WailOfWar extends CardImpl {
             new FilterCreaturePermanent("creatures target opponent controls")
         ));
         debuffOpponentCreaturesMode.addTarget(new TargetPlayer()); // Target a single opponent
-        debuffOpponentCreaturesMode.setText("Creatures target opponent controls get -1/-1 until end of turn.");
+        debuffOpponentCreaturesMode.getEffects().get(0).setText("Creatures target opponent controls get -1/-1 until end of turn.");
         this.getSpellAbility().addMode(debuffOpponentCreaturesMode);
 
         // Mode 2: Return creatures from graveyard
         Mode returnCreaturesFromGraveyardMode = new Mode(new ReturnFromGraveyardToHandTargetEffect());
-        returnCreaturesFromGraveyardMode.addTarget(new TargetCreaturePermanent(
-            0, 2, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD, false
+        returnCreaturesFromGraveyardMode.addTarget(new TargetCardInGraveyard(
+            0, 2, StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD
         ));
-        returnCreaturesFromGraveyardMode.setText("Return up to two target creatures from your graveyard to your hand.");
+        returnCreaturesFromGraveyardMode.getEffects().get(0).setText("Return up to two target creatures from your graveyard to your hand.");
         this.getSpellAbility().addMode(returnCreaturesFromGraveyardMode);
     }
 
