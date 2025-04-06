@@ -391,7 +391,12 @@ public class CardView extends SimpleCardView {
                         stackObjectTarget = (StackObject) mo;
                     }
                     if (stackObjectTarget != null) {
-                        this.rules.add("<span color='green'><i>Target on stack: " + stackObjectTarget.getIdName() + "</i></span>");
+                        String idName = stackObjectTarget.getIdName();
+                        if (stackObjectTarget instanceof Spell && ((Spell) stackObjectTarget).isFaceDown(game)
+                            && card.getControllerId() != stackObjectTarget.getControllerId()) {
+                            idName = "face down spell " + "[" + stackObjectTarget.getId().toString().substring(0, 3) + "]";
+                        }
+                        this.rules.add("<span color='green'><i>Target on stack: " + idName + "</i></span>");
                     }
                 }
             }
