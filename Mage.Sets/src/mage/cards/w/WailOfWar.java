@@ -1,7 +1,7 @@
 package mage.cards.w;
 
 import mage.abilities.Mode;
-import mage.abilities.effects.common.BoostControlledEffect;
+import mage.abilities.effects.common.continuous.BoostControlledEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
