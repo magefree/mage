@@ -1,6 +1,8 @@
 package mage.cards.a;
 
 import java.util.UUID;
+
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
@@ -10,7 +12,8 @@ import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  * Aggressive Negotiations implementation
@@ -22,13 +25,16 @@ public final class AggressiveNegotiations extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Target opponent reveals their hand. You choose a nonland card from it. That player exiles that card.
+        Effect effect1 = new ExileCardYouChooseTargetOpponentEffect(StaticFilters.FILTER_CARD_NON_LAND);
+        effect1.setText("Target player reveals their hand. You choose a nonland card from it and exile that card.");
+        this.getSpellAbility().addEffect(effect1);
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addEffect(new ExileCardYouChooseTargetOpponentEffect(StaticFilters.FILTER_CARD_NON_LAND));
 
         // Put a +1/+1 counter on target creature you control.
-        TargetCreaturePermanent targetCreature = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(targetCreature);
-        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(1), Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AddCountersTargetEffect(
+                CounterType.P1P1.createInstance()
+        ).setTargetPointer(new SecondTargetPointer()));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(0, 1));
     }
 
     private AggressiveNegotiations(final AggressiveNegotiations card) {
