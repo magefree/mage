@@ -1,11 +1,11 @@
 package mage.sets;
 
+import java.util.Arrays;
+import java.util.List;
+
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author TheElk801
@@ -42,6 +42,9 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Awaken the Honored Dead", 170, Rarity.RARE, mage.cards.a.AwakenTheHonoredDead.class));
         cards.add(new SetCardInfo("Barrensteppe Siege", 171, Rarity.RARE, mage.cards.b.BarrensteppeSiege.class));
         cards.add(new SetCardInfo("Bearer of Glory", 4, Rarity.COMMON, mage.cards.b.BearerOfGlory.class));
+        cards.add(new SetCardInfo("Betor, Kin to All", 172, Rarity.MYTHIC, mage.cards.b.BetorKinToAll.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Betor, Kin to All", 308, Rarity.MYTHIC, mage.cards.b.BetorKinToAll.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Betor, Kin to All", 353, Rarity.MYTHIC, mage.cards.b.BetorKinToAll.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bewildering Blizzard", 38, Rarity.UNCOMMON, mage.cards.b.BewilderingBlizzard.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 250, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Blossoming Sands", 251, Rarity.COMMON, mage.cards.b.BlossomingSands.class));
