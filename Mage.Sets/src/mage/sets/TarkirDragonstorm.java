@@ -234,6 +234,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Veteran Ice Climber", 64, Rarity.UNCOMMON, mage.cards.v.VeteranIceClimber.class));
         cards.add(new SetCardInfo("Voice of Victory", 33, Rarity.RARE, mage.cards.v.VoiceOfVictory.class));
         cards.add(new SetCardInfo("War Effort", 131, Rarity.UNCOMMON, mage.cards.w.WarEffort.class));
+        cards.add(new SetCardInfo("Wail of War", 98, Rarity.UNCOMMON, mage.cards.w.WailOfWar.class));
         cards.add(new SetCardInfo("Watcher of the Wayside", 249, Rarity.COMMON, mage.cards.w.WatcherOfTheWayside.class));
         cards.add(new SetCardInfo("Wayspeaker Bodyguard", 34, Rarity.UNCOMMON, mage.cards.w.WayspeakerBodyguard.class));
         cards.add(new SetCardInfo("Wild Ride", 132, Rarity.COMMON, mage.cards.w.WildRide.class));
