@@ -532,16 +532,13 @@ public class Spell extends StackObjectImpl implements Card {
 
     @Override
     public String getName() {
-        if (faceDown) {
-            return "face down spell";
-        }
         return card.getName();
     }
 
     @Override
     public String getIdName() {
         String idName;
-        if (card != null && !faceDown) {
+        if (card != null) {
             if (card instanceof AdventureCardSpell) {
                 idName = ((AdventureCardSpell) card).getParentCard().getId().toString().substring(0, 3);
             } else {
