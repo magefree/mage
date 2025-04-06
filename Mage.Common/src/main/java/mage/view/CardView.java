@@ -391,7 +391,7 @@ public class CardView extends SimpleCardView {
                         stackObjectTarget = (StackObject) mo;
                     }
                     if (stackObjectTarget != null) {
-                        this.rules.add("<span color='green'><i>Target on stack: " + stackObjectTarget.getIdName());
+                        this.rules.add("<span color='green'><i>Target on stack: " + stackObjectTarget.getIdName() + "</i></span>");
                     }
                 }
             }
