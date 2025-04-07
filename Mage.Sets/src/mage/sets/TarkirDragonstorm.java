@@ -94,6 +94,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Evolving Wilds", 255, Rarity.COMMON, mage.cards.e.EvolvingWilds.class));
         cards.add(new SetCardInfo("Fangkeeper's Familiar", 183, Rarity.RARE, mage.cards.f.FangkeepersFamiliar.class));
         cards.add(new SetCardInfo("Felothar, Dawn of the Abzan", 184, Rarity.RARE, mage.cards.f.FelotharDawnOfTheAbzan.class));
+        cards.add(new SetCardInfo("Feral Deathgorger", 80, Rarity.COMMON, mage.cards.f.FeralDeathgorger.class));
         cards.add(new SetCardInfo("Fire-Rim Form", 107, Rarity.COMMON, mage.cards.f.FireRimForm.class));
         cards.add(new SetCardInfo("Flamehold Grappler", 185, Rarity.RARE, mage.cards.f.FlameholdGrappler.class));
         cards.add(new SetCardInfo("Fleeting Effigy", 108, Rarity.UNCOMMON, mage.cards.f.FleetingEffigy.class));
