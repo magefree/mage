@@ -1,14 +1,14 @@
 package mage.cards.d;
 
-import mage.abilities.common.DiesSourceTriggeredAbility;
+import mage.abilities.common.delayed.WhenTargetDiesDelayedTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
-import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continuous.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
+import mage.constants.SetTargetPointer;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -26,9 +26,12 @@ public final class DesperateMeasures extends CardImpl {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // When it dies under your control this turn, draw two cards.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new WhenTargetDiesDelayedTriggeredAbility(
-                new DrawCardSourceControllerEffect(2), Duration.EndOfTurn
-        )));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(
+                new WhenTargetDiesDelayedTriggeredAbility(
+                        new DrawCardSourceControllerEffect(2),
+                        SetTargetPointer.NONE
+                )
+        ));
     }
 
     private DesperateMeasures(final DesperateMeasures card) {
