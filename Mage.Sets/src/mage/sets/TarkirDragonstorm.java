@@ -221,6 +221,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Temur Devotee", 61, Rarity.COMMON, mage.cards.t.TemurDevotee.class));
         cards.add(new SetCardInfo("Temur Monument", 248, Rarity.UNCOMMON, mage.cards.t.TemurMonument.class));
         cards.add(new SetCardInfo("Temur Tawnyback", 229, Rarity.COMMON, mage.cards.t.TemurTawnyback.class));
+        cards.add(new SetCardInfo("Tersa Lightshatter", 127, Rarity.RARE, mage.cards.t.TersaLightshatter.class));
         cards.add(new SetCardInfo("The Sibsig Ceremony", 91, Rarity.RARE, mage.cards.t.TheSibsigCeremony.class));
         cards.add(new SetCardInfo("Thornwood Falls", 269, Rarity.COMMON, mage.cards.t.ThornwoodFalls.class));
         cards.add(new SetCardInfo("Thunder of Unity", 231, Rarity.RARE, mage.cards.t.ThunderOfUnity.class));
