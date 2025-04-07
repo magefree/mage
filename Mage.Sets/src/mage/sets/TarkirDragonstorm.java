@@ -71,6 +71,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Dirgur Island Dragon", 40, Rarity.COMMON, mage.cards.d.DirgurIslandDragon.class));
         cards.add(new SetCardInfo("Dismal Backwater", 254, Rarity.COMMON, mage.cards.d.DismalBackwater.class));
         cards.add(new SetCardInfo("Dispelling Exhale", 41, Rarity.COMMON, mage.cards.d.DispellingExhale.class));
+        cards.add(new SetCardInfo("Disruptive Stormbrood", 178, Rarity.UNCOMMON, mage.cards.d.DisruptiveStormbrood.class));
         cards.add(new SetCardInfo("Dracogenesis", 105, Rarity.MYTHIC, mage.cards.d.Dracogenesis.class));
         cards.add(new SetCardInfo("Dragon Sniper", 139, Rarity.UNCOMMON, mage.cards.d.DragonSniper.class));
         cards.add(new SetCardInfo("Dragon's Prey", 79, Rarity.COMMON, mage.cards.d.DragonsPrey.class));
