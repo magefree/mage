@@ -220,6 +220,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Stormbeacon Blade", 27, Rarity.UNCOMMON, mage.cards.s.StormbeaconBlade.class));
         cards.add(new SetCardInfo("Stormplain Detainment", 28, Rarity.COMMON, mage.cards.s.StormplainDetainment.class));
         cards.add(new SetCardInfo("Stormscale Scion", 123, Rarity.MYTHIC, mage.cards.s.StormscaleScion.class));
+        cards.add(new SetCardInfo("Stormshriek Feral", 124, Rarity.COMMON, mage.cards.s.StormshriekFeral.class));
         cards.add(new SetCardInfo("Strategic Betrayal", 94, Rarity.UNCOMMON, mage.cards.s.StrategicBetrayal.class));
         cards.add(new SetCardInfo("Sultai Devotee", 160, Rarity.COMMON, mage.cards.s.SultaiDevotee.class));
         cards.add(new SetCardInfo("Sultai Monument", 247, Rarity.UNCOMMON, mage.cards.s.SultaiMonument.class));
