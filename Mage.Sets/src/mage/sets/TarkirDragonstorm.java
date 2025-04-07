@@ -187,6 +187,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Roar of Endless Song", 220, Rarity.RARE, mage.cards.r.RoarOfEndlessSong.class));
         cards.add(new SetCardInfo("Roiling Dragonstorm", 55, Rarity.UNCOMMON, mage.cards.r.RoilingDragonstorm.class));
         cards.add(new SetCardInfo("Rugged Highlands", 265, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
+        cards.add(new SetCardInfo("Runescale Stormbrood", 221, Rarity.UNCOMMON, mage.cards.r.RunescaleStormbrood.class));
         cards.add(new SetCardInfo("Sage of the Fang", 155, Rarity.UNCOMMON, mage.cards.s.SageOfTheFang.class));
         cards.add(new SetCardInfo("Sagu Pummeler", 156, Rarity.COMMON, mage.cards.s.SaguPummeler.class));
         cards.add(new SetCardInfo("Salt Road Packbeast", 23, Rarity.COMMON, mage.cards.s.SaltRoadPackbeast.class));
