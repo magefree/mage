@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
 /**
  * @author phulin
  */
-public class AdventureCardSpell extends CardImpl implements SingleFaceSplitCardSpell {
+public class AdventureSpellCard extends CardImpl implements SpellOptionCard {
 
     private AdventureCard adventureCardParent;
 
-    public AdventureCardSpell(UUID ownerId, CardSetInfo setInfo, String adventureName, CardType[] cardTypes, String costs, AdventureCard adventureCardParent) {
+    public AdventureSpellCard(UUID ownerId, CardSetInfo setInfo, String adventureName, CardType[] cardTypes, String costs, AdventureCard adventureCardParent) {
         super(ownerId, setInfo, cardTypes, costs, SpellAbilityType.ADVENTURE_SPELL);
         this.subtype.add(SubType.ADVENTURE);
 
@@ -41,7 +41,7 @@ public class AdventureCardSpell extends CardImpl implements SingleFaceSplitCardS
         }
     }
 
-    protected AdventureCardSpell(final AdventureCardSpell card) {
+    protected AdventureSpellCard(final AdventureSpellCard card) {
         super(card);
         this.adventureCardParent = card.adventureCardParent;
     }
@@ -83,12 +83,12 @@ public class AdventureCardSpell extends CardImpl implements SingleFaceSplitCardS
     }
 
     @Override
-    public AdventureCardSpell copy() {
-        return new AdventureCardSpell(this);
+    public AdventureSpellCard copy() {
+        return new AdventureSpellCard(this);
     }
 
     @Override
-    public void setParentCard(SingleFaceSplitCard card) {
+    public void setParentCard(CardWithSpellOption card) {
         this.adventureCardParent = (AdventureCard) card;
     }
 
@@ -146,8 +146,8 @@ class AdventureCardSpellAbility extends SpellAbility {
     public ActivationStatus canActivate(UUID playerId, Game game) {
         ExileZone adventureExileZone = game.getExile().getExileZone(ExileAdventureSpellEffect.adventureExileId(playerId, game));
         Card spellCard = game.getCard(this.getSourceId());
-        if (spellCard instanceof AdventureCardSpell) {
-            Card card = ((AdventureCardSpell) spellCard).getParentCard();
+        if (spellCard instanceof AdventureSpellCard) {
+            Card card = ((AdventureSpellCard) spellCard).getParentCard();
             if (adventureExileZone != null && adventureExileZone.contains(card.getId())) {
                 return ActivationStatus.getFalse();
             }

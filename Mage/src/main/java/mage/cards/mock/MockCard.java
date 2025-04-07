@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class MockCard extends CardImpl implements MockableCard {
 
-    public static String SINGLE_FACE_SPLIT_NAME_SEPARATOR = " // ";
+    public static String CARD_WITH_SPELL_OPTION_NAME_SEPARATOR = " // ";
     public static String MODAL_DOUBLE_FACES_NAME_SEPARATOR = " // ";
 
     // Needs to be here, as it is normally calculated from the
@@ -34,7 +34,7 @@ public class MockCard extends CardImpl implements MockableCard {
     protected List<String> manaCostLeftStr;
     protected List<String> manaCostRightStr;
     protected List<String> manaCostStr;
-    protected String singleFaceSplitSpellName;
+    protected String spellOptionName;
     protected boolean isModalDoubleFacedCard;
     protected int manaValue;
 
@@ -71,8 +71,8 @@ public class MockCard extends CardImpl implements MockableCard {
             this.secondSideCard = new MockCard(CardRepository.instance.findCardWithPreferredSetAndNumber(card.getSecondSideName(), card.getSetCode(), card.getCardNumber()));
         }
 
-        if (card.isSingleFaceSplitCard()) {
-            this.singleFaceSplitSpellName = card.getSingleFaceSplitCardSpellName();
+        if (card.isCardWithSpellOption()) {
+            this.spellOptionName = card.getSpellOptionCardName();
         }
 
         if (card.isModalDoubleFacedCard()) {
@@ -101,7 +101,7 @@ public class MockCard extends CardImpl implements MockableCard {
         this.manaCostLeftStr = new ArrayList<>(card.manaCostLeftStr);
         this.manaCostRightStr = new ArrayList<>(card.manaCostRightStr);
         this.manaCostStr = new ArrayList<>(card.manaCostStr);
-        this.singleFaceSplitSpellName = card.singleFaceSplitSpellName;
+        this.spellOptionName = card.spellOptionName;
         this.isModalDoubleFacedCard = card.isModalDoubleFacedCard;
         this.manaValue = card.manaValue;
     }
@@ -155,8 +155,8 @@ public class MockCard extends CardImpl implements MockableCard {
             return getName();
         }
 
-        if (singleFaceSplitSpellName != null) {
-            return getName() + SINGLE_FACE_SPLIT_NAME_SEPARATOR + singleFaceSplitSpellName;
+        if (spellOptionName != null) {
+            return getName() + CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + spellOptionName;
         } else if (isModalDoubleFacedCard) {
             return getName() + MODAL_DOUBLE_FACES_NAME_SEPARATOR + this.getSecondCardFace().getName();
         } else {

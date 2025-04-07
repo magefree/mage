@@ -106,9 +106,9 @@ public class CardInfo {
     @DatabaseField
     protected String secondSideName;
     @DatabaseField
-    protected boolean singleFaceSplitCard;
+    protected boolean cardWithSpellOption;
     @DatabaseField
-    protected String singleFaceSplitCardSpellName;
+    protected String spellOptionCardName;
     @DatabaseField
     protected boolean modalDoubleFacedCard;
     @DatabaseField
@@ -157,9 +157,9 @@ public class CardInfo {
             this.secondSideName = secondSide.getName();
         }
 
-        if (card instanceof SingleFaceSplitCard) {
-            this.singleFaceSplitCard = true;
-            this.singleFaceSplitCardSpellName = ((SingleFaceSplitCard) card).getSpellCard().getName();
+        if (card instanceof CardWithSpellOption) {
+            this.cardWithSpellOption = true;
+            this.spellOptionCardName = ((CardWithSpellOption) card).getSpellCard().getName();
         }
 
         if (card instanceof ModalDoubleFacedCard) {
@@ -189,8 +189,8 @@ public class CardInfo {
             List<String> manaCostLeft = ((ModalDoubleFacedCard) card).getLeftHalfCard().getManaCostSymbols();
             List<String> manaCostRight = ((ModalDoubleFacedCard) card).getRightHalfCard().getManaCostSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
-        } else if (card instanceof SingleFaceSplitCard) {
-            List<String> manaCostLeft = ((SingleFaceSplitCard) card).getSpellCard().getManaCostSymbols();
+        } else if (card instanceof CardWithSpellOption) {
+            List<String> manaCostLeft = ((CardWithSpellOption) card).getSpellCard().getManaCostSymbols();
             List<String> manaCostRight = card.getManaCostSymbols();
             this.setManaCosts(CardUtil.concatManaSymbols(SPLIT_MANA_SEPARATOR_FULL, manaCostLeft, manaCostRight));
         } else {
@@ -469,12 +469,12 @@ public class CardInfo {
         return secondSideName;
     }
 
-    public boolean isSingleFaceSplitCard() {
-        return singleFaceSplitCard;
+    public boolean isCardWithSpellOption() {
+        return cardWithSpellOption;
     }
 
-    public String getSingleFaceSplitCardSpellName() {
-        return singleFaceSplitCardSpellName;
+    public String getSpellOptionCardName() {
+        return spellOptionCardName;
     }
 
     public boolean isModalDoubleFacedCard() {

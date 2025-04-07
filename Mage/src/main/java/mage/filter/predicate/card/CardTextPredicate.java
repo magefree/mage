@@ -52,8 +52,8 @@ public class CardTextPredicate implements Predicate<Card> {
                 fullName = ((MockCard) input).getFullName(true);
             } else if (input instanceof ModalDoubleFacedCard) {
                 fullName = input.getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + ((ModalDoubleFacedCard) input).getRightHalfCard().getName();
-            } else if (input instanceof SingleFaceSplitCard) {
-                fullName = input.getName() + MockCard.SINGLE_FACE_SPLIT_NAME_SEPARATOR + ((SingleFaceSplitCard) input).getSpellCard().getName();
+            } else if (input instanceof CardWithSpellOption) {
+                fullName = input.getName() + MockCard.CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + ((CardWithSpellOption) input).getSpellCard().getName();
             }
 
             if (fullName.toLowerCase(Locale.ENGLISH).contains(text.toLowerCase(Locale.ENGLISH))) {
@@ -104,8 +104,8 @@ public class CardTextPredicate implements Predicate<Card> {
                         }
                     }
 
-                    if (input instanceof SingleFaceSplitCard) {
-                        for (String rule : ((SingleFaceSplitCard) input).getSpellCard().getRules(game)) {
+                    if (input instanceof CardWithSpellOption) {
+                        for (String rule : ((CardWithSpellOption) input).getSpellCard().getRules(game)) {
                             if (rule.toLowerCase(Locale.ENGLISH).contains(token)) {
                                 found = true;
                                 break;

@@ -432,19 +432,19 @@ public class CardView extends SimpleCardView {
                 fullCardName = mainCard.getLeftHalfCard().getName() + MockCard.MODAL_DOUBLE_FACES_NAME_SEPARATOR + mainCard.getRightHalfCard().getName();
                 this.manaCostLeftStr = mainCard.getLeftHalfCard().getManaCostSymbols();
                 this.manaCostRightStr = mainCard.getRightHalfCard().getManaCostSymbols();
-            } else if (card instanceof SingleFaceSplitCard) {
+            } else if (card instanceof CardWithSpellOption) {
                 this.isSplitCard = true;
-                SingleFaceSplitCard mainCard = ((SingleFaceSplitCard) card);
+                CardWithSpellOption mainCard = ((CardWithSpellOption) card);
                 leftSplitName = mainCard.getName();
                 leftSplitCostsStr = String.join("", mainCard.getManaCostSymbols());
                 leftSplitRules = mainCard.getSharedRules(game);
                 leftSplitTypeLine = getCardTypeLine(game, mainCard);
-                SingleFaceSplitCardSpell splitCardSpell = mainCard.getSpellCard();
+                SpellOptionCard splitCardSpell = mainCard.getSpellCard();
                 rightSplitName = splitCardSpell.getName();
                 rightSplitCostsStr = String.join("", splitCardSpell.getManaCostSymbols());
                 rightSplitRules = splitCardSpell.getRules(game);
                 rightSplitTypeLine = getCardTypeLine(game, splitCardSpell);
-                fullCardName = mainCard.getName() + MockCard.SINGLE_FACE_SPLIT_NAME_SEPARATOR + splitCardSpell.getName();
+                fullCardName = mainCard.getName() + MockCard.CARD_WITH_SPELL_OPTION_NAME_SEPARATOR + splitCardSpell.getName();
                 this.manaCostLeftStr = mainCard.getManaCostSymbols();
                 this.manaCostRightStr = splitCardSpell.getManaCostSymbols();
             } else if (card instanceof MockCard) {

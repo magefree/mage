@@ -8,11 +8,11 @@ import mage.game.Game;
 
 import java.util.UUID;
 
-public abstract class OmenCard extends SingleFaceSplitCard {
+public abstract class OmenCard extends CardWithSpellOption {
 
     public OmenCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, CardType[] typesSpell, String costs, String omenName, String costsSpell) {
         super(ownerId, setInfo, types, costs);
-        this.spellCard = new OmenCardSpell(ownerId, setInfo, omenName, typesSpell, costsSpell, this);
+        this.spellCard = new OmenSpellCard(ownerId, setInfo, omenName, typesSpell, costsSpell, this);
     }
 
     public OmenCard(OmenCard card) {

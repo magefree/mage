@@ -170,7 +170,7 @@ public class ModernCardRenderer extends CardRenderer {
     protected String manaCostString;
 
     // Is an adventure
-    protected boolean isSingleFaceSplit = false;
+    protected boolean isCardWithSpellOption = false;
 
     public ModernCardRenderer(CardView card) {
         // Pass off to parent
@@ -180,13 +180,13 @@ public class ModernCardRenderer extends CardRenderer {
         manaCostString = ManaSymbols.getClearManaCost(cardView.getManaCostStr());
 
         if (cardView.isSplitCard()) {
-            isSingleFaceSplit = cardView.getRightSplitTypeLine().contains(SUB_TYPE_ADVENTURE)
+            isCardWithSpellOption = cardView.getRightSplitTypeLine().contains(SUB_TYPE_ADVENTURE)
                                 || cardView.getRightSplitTypeLine().contains(SUB_TYPE_OMEN);
         }
     }
 
-    protected boolean isSingleFaceSplit() {
-        return isSingleFaceSplit;
+    protected boolean isCardWithSpellOption() {
+        return isCardWithSpellOption;
     }
 
     @Override
@@ -662,7 +662,7 @@ public class ModernCardRenderer extends CardRenderer {
             drawRulesText(g, textboxKeywords, textboxRules,
                     contentWidth / 2 + totalContentInset + 4, totalContentInset + boxHeight + 2,
                     contentWidth / 2 - 8, typeLineY - totalContentInset - boxHeight - 6, false);
-        } else if (isSingleFaceSplit) {
+        } else if (isCardWithSpellOption) {
             drawRulesText(g, textboxKeywords, textboxRules,
                     contentWidth / 2 + totalContentInset + 4, typeLineY + boxHeight + 2,
                     contentWidth / 2 - 8, cardHeight - typeLineY - boxHeight - 4 - borderWidth * 3, false);

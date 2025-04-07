@@ -1263,7 +1263,7 @@ public final class CardUtil {
         Card permCard;
         if (card instanceof SplitCard) {
             permCard = card;
-        } else if (card instanceof SingleFaceSplitCard) {
+        } else if (card instanceof CardWithSpellOption) {
             permCard = card;
         } else if (card instanceof ModalDoubleFacedCard) {
             permCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
@@ -1451,9 +1451,9 @@ public final class CardUtil {
         if (cardToCast instanceof CardWithHalves) {
             cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
             cards.add(((CardWithHalves) cardToCast).getRightHalfCard());
-        } else if (cardToCast instanceof SingleFaceSplitCard) {
+        } else if (cardToCast instanceof CardWithSpellOption) {
             cards.add(cardToCast);
-            cards.add(((SingleFaceSplitCard) cardToCast).getSpellCard());
+            cards.add(((CardWithSpellOption) cardToCast).getSpellCard());
         } else {
             cards.add(cardToCast);
         }
@@ -1642,9 +1642,9 @@ public final class CardUtil {
         }
 
         // handle adventure cards
-        if (card instanceof SingleFaceSplitCard) {
+        if (card instanceof CardWithSpellOption) {
             Card creatureCard = card.getMainCard();
-            Card spellCard = ((SingleFaceSplitCard) card).getSpellCard();
+            Card spellCard = ((CardWithSpellOption) card).getSpellCard();
             if (manaCost != null) {
                 // get additional cost if any
                 Costs<Cost> additionalCostsCreature = creatureCard.getSpellAbility().getCosts();
@@ -1682,9 +1682,9 @@ public final class CardUtil {
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
         }
-        if (card instanceof SingleFaceSplitCard) {
+        if (card instanceof CardWithSpellOption) {
             Card creatureCard = card.getMainCard();
-            Card spellCard = ((SingleFaceSplitCard) card).getSpellCard();
+            Card spellCard = ((CardWithSpellOption) card).getSpellCard();
             game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), null);
         }
@@ -2069,8 +2069,8 @@ public final class CardUtil {
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
-        } else if (object instanceof SingleFaceSplitCard || object instanceof SingleFaceSplitCardSpell) {
-            SingleFaceSplitCard mainCard = (SingleFaceSplitCard) ((Card) object).getMainCard();
+        } else if (object instanceof CardWithSpellOption || object instanceof SpellOptionCard) {
+            CardWithSpellOption mainCard = (CardWithSpellOption) ((Card) object).getMainCard();
             res.add(mainCard);
             res.add(mainCard.getSpellCard());
         } else if (object instanceof Spell) {

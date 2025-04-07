@@ -4068,9 +4068,9 @@ public abstract class PlayerImpl implements Player, Serializable {
             getPlayableFromObjectSingle(game, fromZone, mainCard.getLeftHalfCard(), mainCard.getLeftHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard.getRightHalfCard(), mainCard.getRightHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard, mainCard.getSharedAbilities(game), availableMana, output);
-        } else if (object instanceof SingleFaceSplitCard) {
+        } else if (object instanceof CardWithSpellOption) {
             // adventure must use different card characteristics for different spells (main or adventure)
-            SingleFaceSplitCard sfSplitCard = (SingleFaceSplitCard) object;
+            CardWithSpellOption sfSplitCard = (CardWithSpellOption) object;
             getPlayableFromObjectSingle(game, fromZone, sfSplitCard.getSpellCard(), sfSplitCard.getSpellCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, sfSplitCard, sfSplitCard.getSharedAbilities(game), availableMana, output);
         } else if (object instanceof Card) {

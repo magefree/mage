@@ -16,11 +16,11 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class OmenCardSpell extends CardImpl implements SingleFaceSplitCardSpell {
+public class OmenSpellCard extends CardImpl implements SpellOptionCard {
 
     private OmenCard omenCardParent;
 
-    public OmenCardSpell(UUID ownerId, CardSetInfo setInfo, String omenName, CardType[] cardTypes, String costs, OmenCard omenCard) {
+    public OmenSpellCard(UUID ownerId, CardSetInfo setInfo, String omenName, CardType[] cardTypes, String costs, OmenCard omenCard) {
         super(ownerId, setInfo, cardTypes, costs, SpellAbilityType.OMEN_SPELL);
         this.subtype.add(SubType.OMEN);
 
@@ -38,7 +38,7 @@ public class OmenCardSpell extends CardImpl implements SingleFaceSplitCardSpell 
         }
     }
 
-    protected OmenCardSpell(final OmenCardSpell card) {
+    protected OmenSpellCard(final OmenSpellCard card) {
         super(card);
         this.omenCardParent = card.omenCardParent;
     }
@@ -80,12 +80,12 @@ public class OmenCardSpell extends CardImpl implements SingleFaceSplitCardSpell 
     }
 
     @Override
-    public OmenCardSpell copy() {
-        return new OmenCardSpell(this);
+    public OmenSpellCard copy() {
+        return new OmenSpellCard(this);
     }
 
     @Override
-    public void setParentCard(SingleFaceSplitCard card) {
+    public void setParentCard(CardWithSpellOption card) {
         this.omenCardParent = (OmenCard) card;
     }
 

@@ -15,26 +15,26 @@ import java.util.UUID;
 /**
  * @author phulin, jmlundeen
  */
-public abstract class SingleFaceSplitCard extends CardImpl {
+public abstract class CardWithSpellOption extends CardImpl {
 
     /* The adventure/omen spell card, i.e. Swift End. */
-    protected SingleFaceSplitCardSpell spellCard;
+    protected SpellOptionCard spellCard;
 
-    public SingleFaceSplitCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, String costs) {
+    public CardWithSpellOption(UUID ownerId, CardSetInfo setInfo, CardType[] types, String costs) {
         super(ownerId, setInfo, types, costs);
     }
 
-    public SingleFaceSplitCard(SingleFaceSplitCard card) {
+    public CardWithSpellOption(CardWithSpellOption card) {
         super(card);
         this.spellCard = card.getSpellCard().copy();
         this.spellCard.setParentCard(this);
     }
 
-    public SingleFaceSplitCardSpell getSpellCard() {
+    public SpellOptionCard getSpellCard() {
         return spellCard;
     }
 
-    public void setParts(SingleFaceSplitCardSpell cardSpell) {
+    public void setParts(SpellOptionCard cardSpell) {
         // for card copy only - set new parts
         this.spellCard = cardSpell;
         cardSpell.setParentCard(this);
