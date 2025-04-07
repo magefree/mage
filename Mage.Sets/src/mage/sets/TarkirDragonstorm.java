@@ -132,6 +132,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Knockout Maneuver", 147, Rarity.UNCOMMON, mage.cards.k.KnockoutManeuver.class));
         cards.add(new SetCardInfo("Kotis, the Fangkeeper", 202, Rarity.RARE, mage.cards.k.KotisTheFangkeeper.class));
         cards.add(new SetCardInfo("Krotiq Nestguard", 148, Rarity.COMMON, mage.cards.k.KrotiqNestguard.class));
+        cards.add(new SetCardInfo("Lie in Wait", 203, Rarity.UNCOMMON, mage.cards.l.LieInWait.class));
         cards.add(new SetCardInfo("Lightfoot Technique", 14, Rarity.COMMON, mage.cards.l.LightfootTechnique.class));
         cards.add(new SetCardInfo("Lotuslight Dancers", 204, Rarity.RARE, mage.cards.l.LotuslightDancers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lotuslight Dancers", 363, Rarity.RARE, mage.cards.l.LotuslightDancers.class, NON_FULL_USE_VARIOUS));
