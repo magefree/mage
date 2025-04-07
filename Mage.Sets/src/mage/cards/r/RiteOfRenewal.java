@@ -24,13 +24,11 @@ public final class RiteOfRenewal extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{G}");
 
         // Return up to two target permanent cards from your graveyard to your hand.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect()
-            .setText("Return up to two target permanent cards from your graveyard to your hand"));
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(0, 2, new FilterCard("permanent cards from your graveyard")));
 
         // Target player shuffles up to four target cards from their graveyard into their library.
-        this.getSpellAbility().addEffect(new ShuffleIntoLibraryTargetEffect()
-                .setText("Target player shuffles up to four target cards from their graveyard into their library"));
+        this.getSpellAbility().addEffect(new ShuffleIntoLibraryTargetEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(0, 4, new FilterCard("cards from their graveyard")));
         // Exile Rite of Renewal.
