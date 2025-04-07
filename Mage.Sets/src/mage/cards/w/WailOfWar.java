@@ -10,8 +10,8 @@ import mage.constants.Duration;
 import mage.constants.TargetController;
 import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetOpponent;
 
 import java.util.UUID;
 
@@ -21,7 +21,7 @@ import java.util.UUID;
  */
 public final class WailOfWar extends CardImpl {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures target player controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures target opponent controls");
 
     static {
         filter.add(TargetController.SOURCE_TARGETS.getControllerPredicate());
@@ -33,9 +33,8 @@ public final class WailOfWar extends CardImpl {
         // Mode 1: Creatures target player controls get -1/-1 until end of turn.
         this.getSpellAbility().addEffect(new BoostAllEffect(
             -1, -1, Duration.EndOfTurn, filter, false
-        ).setText("Creatures target opponent controls get -1/-1 until end of turn."
         ));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetOpponent());
 
         // Mode 2: Return creatures from graveyard
         Mode returnCreaturesFromGraveyardMode = new Mode(new ReturnFromGraveyardToHandTargetEffect());
