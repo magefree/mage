@@ -25,8 +25,7 @@ public final class AggressiveNegotiations extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{2}{B}");
 
         // Target opponent reveals their hand. You choose a nonland card from it. That player exiles that card.
-        Effect effect1 = new ExileCardYouChooseTargetOpponentEffect(StaticFilters.FILTER_CARD_NON_LAND);
-        effect1.setText("Target player reveals their hand. You choose a nonland card from it and exile that card.");
+        Effect effect1 = new ExileCardYouChooseTargetOpponentEffect(StaticFilters.FILTER_CARD_A_NON_LAND);
         this.getSpellAbility().addEffect(effect1);
         this.getSpellAbility().addTarget(new TargetPlayer());
 
