@@ -238,6 +238,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Unrooted Ancestor", 96, Rarity.UNCOMMON, mage.cards.u.UnrootedAncestor.class));
         cards.add(new SetCardInfo("Unsparing Boltcaster", 130, Rarity.UNCOMMON, mage.cards.u.UnsparingBoltcaster.class));
         cards.add(new SetCardInfo("Ureni's Rebuff", 63, Rarity.UNCOMMON, mage.cards.u.UrenisRebuff.class));
+        cards.add(new SetCardInfo("Ureni, the Song Unending", 233, Rarity.MYTHIC, mage.cards.u.UreniTheSongUnending.class));
         cards.add(new SetCardInfo("Venerated Stormsinger", 97, Rarity.UNCOMMON, mage.cards.v.VeneratedStormsinger.class));
         cards.add(new SetCardInfo("Veteran Ice Climber", 64, Rarity.UNCOMMON, mage.cards.v.VeteranIceClimber.class));
         cards.add(new SetCardInfo("Voice of Victory", 33, Rarity.RARE, mage.cards.v.VoiceOfVictory.class));
