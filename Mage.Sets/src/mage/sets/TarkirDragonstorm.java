@@ -179,6 +179,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Reputable Merchant", 217, Rarity.COMMON, mage.cards.r.ReputableMerchant.class));
         cards.add(new SetCardInfo("Rescue Leopard", 116, Rarity.COMMON, mage.cards.r.RescueLeopard.class));
         cards.add(new SetCardInfo("Revival of the Ancestors", 218, Rarity.RARE, mage.cards.r.RevivalOfTheAncestors.class));
+        cards.add(new SetCardInfo("Riling Dawnbreaker", 21, Rarity.COMMON, mage.cards.r.RilingDawnbreaker.class));
         cards.add(new SetCardInfo("Ringing Strike Mastery", 53, Rarity.COMMON, mage.cards.r.RingingStrikeMastery.class));
         cards.add(new SetCardInfo("Riverwalk Technique", 54, Rarity.COMMON, mage.cards.r.RiverwalkTechnique.class));
         cards.add(new SetCardInfo("Riverwheel Sweep", 219, Rarity.UNCOMMON, mage.cards.r.RiverwheelSweep.class));
