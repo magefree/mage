@@ -2,7 +2,7 @@ package mage.cards.o;
 
 import java.util.UUID;
 
-import mage.abilities.condition.common.MyTurnCondition;
+import mage.abilities.condition.common.IsYourMainPhaseCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
@@ -26,15 +26,19 @@ public final class OverpoweringAttack extends CardImpl {
     }
 
     public OverpoweringAttack(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        
+        super(ownerId, setInfo, new CardType[] { CardType.SORCERY }, "{3}{R}{R}");
 
         // Freerunning {2}{R}
         this.addAbility(new FreerunningAbility("{2}{R}"));
 
-        // Untap all creatures you control that attacked this turn. If it's your main phase, there is an additional combat phase after this phase, followed by an additional main phase.
-        this.getSpellAbility().addEffect(new UntapAllControllerEffect(filter, "untap all creatures you control that attacked this turn"));
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new AddCombatAndMainPhaseEffect(), MyTurnCondition.instance, "If it's your main phase, there is an additional combat phase after this phase, followed by an additional main phase."));
+        // Untap all creatures you control that attacked this turn. If it's your main
+        // phase, there is an additional combat phase after this phase, followed by an
+        // additional main phase.
+        this.getSpellAbility().addEffect(
+                new UntapAllControllerEffect(filter, "untap all creatures you control that attacked this turn"));
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new AddCombatAndMainPhaseEffect(),
+                IsYourMainPhaseCondition.instance,
+                "If it's your main phase, there is an additional combat phase after this phase, followed by an additional main phase."));
     }
 
     private OverpoweringAttack(final OverpoweringAttack card) {
