@@ -32,7 +32,6 @@ public final class SharedFate extends CardImpl {
 
         // Each player may look at and play cards they exiled with Shared Fate.
         this.addAbility(new SimpleStaticAbility(new SharedFatePlayEffect()));
-        this.addAbility(new SimpleStaticAbility(new SharedFateLookEffect()));
     }
 
     private SharedFate(final SharedFate card) {
@@ -108,8 +107,7 @@ class SharedFateReplacementEffect extends ReplacementEffectImpl {
 
         UUID exileId = CardUtil.getExileZoneId(SharedFate.prepareExileKey(game, source, sourcePermanent, playerToDraw.getId()), game);
         String exileName = sourcePermanent.getIdName() + "-" + sourcePermanent.getZoneChangeCounter(game) + " (" + playerToDraw.getName() + ')';
-        playerToDraw.moveCardsToExile(card, source, game, false, exileId, exileName);
-        card.setFaceDown(true, game);
+        CardUtil.moveCardsToExileFaceDown(game, source, playerToDraw, card, exileId, exileName, true);
         return true;
     }
 
@@ -152,42 +150,6 @@ class SharedFatePlayEffect extends AsThoughEffectImpl {
             UUID exileId = CardUtil.getExileZoneId(SharedFate.prepareExileKey(game, source, sourcePermanent, affectedControllerId), game);
             ExileZone exileZone = game.getExile().getExileZone(exileId);
             return exileZone != null && exileZone.contains(objectId);
-        }
-        return false;
-    }
-}
-
-class SharedFateLookEffect extends AsThoughEffectImpl {
-
-    SharedFateLookEffect() {
-        super(AsThoughEffectType.LOOK_AT_FACE_DOWN, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Each player may look at the cards exiled with {this}";
-    }
-
-    private SharedFateLookEffect(final SharedFateLookEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public SharedFateLookEffect copy() {
-        return new SharedFateLookEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID objectId, Ability source, UUID affectedControllerId, Game game) {
-        if (game.getState().getZone(objectId) == Zone.EXILED) {
-            Permanent sourcePermanent = game.getPermanentOrLKIBattlefield(source.getSourceId());
-            UUID exileId = CardUtil.getExileZoneId(SharedFate.prepareExileKey(game, source, sourcePermanent, affectedControllerId), game);
-            ExileZone exileZone = game.getExile().getExileZone(exileId);
-            if (exileZone != null && exileZone.contains(objectId)) {
-                Card card = game.getCard(objectId);
-                return card != null && game.getState().getZone(objectId) == Zone.EXILED;
-            }
         }
         return false;
     }

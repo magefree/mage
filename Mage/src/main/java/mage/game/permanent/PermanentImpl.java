@@ -1922,9 +1922,9 @@ public abstract class PermanentImpl extends CardImpl implements Permanent {
     public String getLogName() {
         if (name.isEmpty()) {
             if (faceDown) {
-                return GameLog.getNeutralColoredText("face down creature");
+                return GameLog.getNeutralObjectIdName("face down creature", getId());
             } else {
-                return GameLog.getNeutralColoredText("a creature without name");
+                return GameLog.getNeutralObjectIdName("a creature without name", getId());
             }
         }
         return GameLog.getColoredObjectIdName(this);
