@@ -202,6 +202,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Stadium Headliner", 122, Rarity.RARE, mage.cards.s.StadiumHeadliner.class));
         cards.add(new SetCardInfo("Starry-Eyed Skyrider", 25, Rarity.UNCOMMON, mage.cards.s.StarryEyedSkyrider.class));
         cards.add(new SetCardInfo("Static Snare", 26, Rarity.UNCOMMON, mage.cards.s.StaticSnare.class));
+        cards.add(new SetCardInfo("Stillness in Motion", 59, Rarity.RARE, mage.cards.s.StillnessInMotion.class));
         cards.add(new SetCardInfo("Stormbeacon Blade", 27, Rarity.UNCOMMON, mage.cards.s.StormbeaconBlade.class));
         cards.add(new SetCardInfo("Stormplain Detainment", 28, Rarity.COMMON, mage.cards.s.StormplainDetainment.class));
         cards.add(new SetCardInfo("Stormscale Scion", 123, Rarity.MYTHIC, mage.cards.s.StormscaleScion.class));
