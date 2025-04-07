@@ -149,7 +149,6 @@ public class KessDissidentMageTest extends CardTestPlayerBase {
         checkPlayableAbility("creature", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + unicorn, false);
         checkPlayableAbility("adventure", 3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast " + rider, true);
         castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, rider);
-        setChoice(playerA, "Kess, Dissident Mage"); // Test sees 2 ways to cast the Adventure, actual game only shows the one.
 
         checkPlayableAbility("already used", 3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cast " + lifegain, false);
 

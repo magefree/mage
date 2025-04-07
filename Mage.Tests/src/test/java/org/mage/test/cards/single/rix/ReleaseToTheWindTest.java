@@ -71,4 +71,113 @@ public class ReleaseToTheWindTest extends CardTestPlayerBase {
 
         assertPermanentCount(playerA, "Akoum Warrior", 1);
     }
+
+    @Test
+    public void test_Exile_Adventure() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        // Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost.
+        addCard(Zone.HAND, playerA, "Release to the Wind"); // {2}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        // Bramble Familiar {1}{G}
+        // Creature — Elemental Raccoon
+        // 2/2
+        // {T}: Add {G}.
+        // {1}{G}, {T}, Discard a card: Return Bramble Familiar to its owner's hand.
+        // Fetch Quest {5}{G}{G}
+        // Sorcery — Adventure
+        // Mill seven cards. Then put a creature, enchantment, or land card from among the milled cards onto the battlefield.
+        addCard(Zone.HAND, playerA, "Bramble Familiar");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.LIBRARY, playerA, "Relentless Rats", 7);
+
+        // cast Bramble Familiar
+        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Add {G}", 2);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bramble Familiar");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN, playerA);
+        checkPermanentCount("prepare", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bramble Familiar", 1);
+
+        // exile adventure creature
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Release to the Wind", "Bramble Familiar");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("after exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bramble Familiar", 1);
+
+        // you can cast both sides
+        checkPlayableAbility("after exile - can play creature", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Bramble Familiar", true);
+        checkPlayableAbility("after exile - can play adventure side", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cast Fetch Quest", true);
+
+        // cast adventure side for free
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fetch Quest");
+        setChoice(playerA, "Relentless Rats");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertExileCount(playerA, "Bramble Familiar", 1); // On an adventure
+        assertPermanentCount(playerA, "Relentless Rats", 1);
+        assertGraveyardCount(playerA, "Relentless Rats", 6);
+    }
+
+    @Test
+    public void test_Exile_MisthollowGriffin_PlayWithMana() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        // Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost.
+        addCard(Zone.HAND, playerA, "Release to the Wind"); // {2}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3 + 4);
+        // Misthollow Griffin {2}{U}{U}
+        // Creature — Griffin
+        // Flying
+        // You may cast Misthollow Griffin from exile.
+        // 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Misthollow Griffin");
+
+        // exile Griffin
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Release to the Wind", "Misthollow Griffin");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("after exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Misthollow Griffin", 1);
+
+        // cast using Misthollow Griffin alternative cost (so paying mana.)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Misthollow Griffin");
+        setChoice(playerA, "Misthollow Griffin"); // Choose the alternative cast.
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Misthollow Griffin", 1);
+        assertTappedCount("Island", true, 3 + 4);
+    }
+
+    @Test
+    public void test_Exile_MisthollowGriffin_PlayWithoutPayingManacost() {
+        setStrictChooseMode(true);
+        skipInitShuffling();
+
+        // Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost.
+        addCard(Zone.HAND, playerA, "Release to the Wind"); // {2}{U}
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3 + 4);
+        // Misthollow Griffin {2}{U}{U}
+        // Creature — Griffin
+        // Flying
+        // You may cast Misthollow Griffin from exile.
+        // 3/3
+        addCard(Zone.BATTLEFIELD, playerA, "Misthollow Griffin");
+
+        // exile Griffin
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Release to the Wind", "Misthollow Griffin");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+        checkExileCount("after exile", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "Misthollow Griffin", 1);
+
+        // cast using Misthollow Griffin alternative cost (so not paying mana.)
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Misthollow Griffin");
+        setChoice(playerA, "Release to the Wind"); // Choose the alternative cast.
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertPermanentCount(playerA, "Misthollow Griffin", 1);
+        assertTappedCount("Island", true, 3);
+    }
 }
