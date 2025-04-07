@@ -22,16 +22,13 @@ public final class DesperateMeasures extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{B}");
 
         // Target creature gets +1/-1 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(1, -1, Duration.EndOfTurn)
-                .setText("Target creature gets +1/-1 until end of turn"));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(1, -1, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
-        // Until end of turn, that creature gains "When this creature dies, draw two cards."
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(
-                new DiesSourceTriggeredAbility(new DrawCardSourceControllerEffect(2)),
-                Duration.EndOfTurn,
-                "Until end of turn, that creature gains \"When this creature dies, draw two cards.\""
-        ));
+        // When it dies under your control this turn, draw two cards.
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new WhenTargetDiesDelayedTriggeredAbility(
+                new DrawCardSourceControllerEffect(2), Duration.EndOfTurn
+        )));
     }
 
     private DesperateMeasures(final DesperateMeasures card) {
