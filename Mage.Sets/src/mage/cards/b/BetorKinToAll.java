@@ -5,12 +5,11 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.FlyingAbility;
@@ -34,7 +33,7 @@ import mage.players.Player;
 public final class BetorKinToAll extends CardImpl {
 
     private static final Hint hint = new ValueHint(
-            "Total toughness of creatures you control", BetorKinToAllValue.instance);
+            "Total toughness of creatures you control", ControlledCreaturesToughnessValue.instance);
 
     public BetorKinToAll(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{2}{W}{B}{G}");
@@ -53,10 +52,10 @@ public final class BetorKinToAll extends CardImpl {
         // total toughness 20 or greater, untap each creature you control. Then if
         // creatures you control have total toughness 40 or greater, each opponent loses
         // half their life, rounded up.
-        this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                (TriggeredAbility) new BeginningOfEndStepTriggeredAbility(new BetorKinToAllEffect()).addHint(hint),
-                BetorKinToAllCondition.instance,
-                ""));
+        Ability betorAbility = new BeginningOfEndStepTriggeredAbility(new DrawCardSourceControllerEffect(1))
+                .withInterveningIf(BetorKinToAllCondition.instance).addHint(hint);
+        betorAbility.addEffect(new BetorKinToAllEffect());
+        this.addAbility(betorAbility);
     }
 
     private BetorKinToAll(final BetorKinToAll card) {
@@ -72,22 +71,9 @@ public final class BetorKinToAll extends CardImpl {
 enum BetorKinToAllCondition implements Condition {
     instance;
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
     @Override
     public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null) {
-            return false;
-        }
-
-        int sumToughness = 0;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(),
-                game)) {
-            sumToughness += permanent.getToughness().getValue();
-        }
-
-        return sumToughness >= 10;
+        return ControlledCreaturesToughnessValue.instance.calculate(game, source, null) >= 10;
     }
 
 }
@@ -98,7 +84,7 @@ class BetorKinToAllEffect extends OneShotEffect {
 
     BetorKinToAllEffect() {
         super(Outcome.Benefit);
-        this.staticText = "if creatures you control have total toughness 10 or greater, draw a card. Then if creatures you control have total toughness 20 or greater, untap each creature you control. Then if creatures you control have total toughness 40 or greater, each opponent loses half their life, rounded up.";
+        this.staticText = "Then if creatures you control have total toughness 20 or greater, untap each creature you control. Then if creatures you control have total toughness 40 or greater, each opponent loses half their life, rounded up.";
     }
 
     private BetorKinToAllEffect(final BetorKinToAllEffect effect) {
@@ -113,17 +99,11 @@ class BetorKinToAllEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        if (controller == null || !controller.canRespond()) {
+        if (controller == null) {
             return false;
         }
 
-        controller.drawCards(1, source, game);
-
-        int sumToughness = 0;
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(),
-                game)) {
-            sumToughness += permanent.getToughness().getValue();
-        }
+        int sumToughness = ControlledCreaturesToughnessValue.instance.calculate(game, source, null);
 
         if (sumToughness >= 20) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(),
@@ -149,7 +129,7 @@ class BetorKinToAllEffect extends OneShotEffect {
     }
 }
 
-enum BetorKinToAllValue implements DynamicValue {
+enum ControlledCreaturesToughnessValue implements DynamicValue {
     instance;
 
     @Override
@@ -166,13 +146,13 @@ enum BetorKinToAllValue implements DynamicValue {
     }
 
     @Override
-    public BetorKinToAllValue copy() {
+    public ControlledCreaturesToughnessValue copy() {
         return this;
     }
 
     @Override
     public String getMessage() {
-        return "";
+        return "x";
     }
 
     @Override
