@@ -2403,7 +2403,12 @@ public class VerifyCardDataTest {
 
             System.out.println();
             System.out.println(card.getName() + " " + card.getManaCost().getText());
-            if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
+            if (card instanceof CardWithSpellOption) {
+                // format to print main card then spell card
+                card.getInitAbilities().getRules().forEach(this::printAbilityText);
+                ((CardWithSpellOption) card).getSpellCard().getAbilities().getRules().forEach(r -> printAbilityText(r.replace("&mdash; ", "\n")));
+            }
+            else if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
                 card.getAbilities().getRules().forEach(this::printAbilityText);
             } else {
                 card.getRules().forEach(this::printAbilityText);
@@ -2412,12 +2417,20 @@ public class VerifyCardDataTest {
             // ref card
             System.out.println();
             MtgJsonCard ref = MtgJsonService.card(card.getName());
+            MtgJsonCard ref2 = null;
+            if (card instanceof CardWithSpellOption) {
+                ref2 = MtgJsonService.card(((CardWithSpellOption) card).getSpellCard().getName());
+            }
             if (ref == null) {
                 ref = MtgJsonService.cardByClassName(foundClassName);
             }
             if (ref != null) {
                 System.out.println("ref: " + ref.getNameAsFace() + " " + ref.manaCost);
                 System.out.println(ref.text);
+                if (ref2 != null) {
+                    System.out.println(ref2.getNameAsFace() + " " + ref2.manaCost);
+                    System.out.println(ref2.text);
+                }
             } else {
                 System.out.println("WARNING, can't find mtgjson ref for " + card.getName());
             }
