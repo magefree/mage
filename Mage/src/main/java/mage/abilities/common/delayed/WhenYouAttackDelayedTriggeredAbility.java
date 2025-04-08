@@ -48,6 +48,6 @@ public class WhenYouAttackDelayedTriggeredAbility extends DelayedTriggeredAbilit
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID attackerId = game.getCombat().getAttackingPlayerId();
-        return attackerId != null && attackerId == getControllerId();
+        return attackerId != null && attackerId == getControllerId() && game.getCombat().getAttackers().size() > 0;
     }
 }
