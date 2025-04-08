@@ -54,7 +54,7 @@ public class ScryfallApiCard {
             this.card_faces.forEach(ScryfallApiCardFace::prepareCompatibleData);
         }
 
-        // workaround for adventure card name fix:
+        // workaround for adventure/omen card name fix:
         // - scryfall: Ondu Knotmaster // Throw a Line
         // - xmage: Ondu Knotmaster
         if (this.layout.equals("adventure")) {
@@ -100,12 +100,12 @@ public class ScryfallApiCard {
                 }
                 this.name = this.card_faces.get(0).name;
             } else if (this.card_faces.get(0).layout.equals("adventure")) {
-                // adventure card
+                // adventure/omen card
                 // Bloomvine Regent // Claim Territory
                 // https://scryfall.com/card/tdm/381/bloomvine-regent-claim-territory-bloomvine-regent
                 this.name = this.card_faces.get(0).name;
                 if (this.card_faces.get(0).name.equals(this.card_faces.get(1).name)) {
-                    throw new IllegalArgumentException("Scryfall: unsupported data type, adventure's reversible_card must have diff names in faces "
+                    throw new IllegalArgumentException("Scryfall: unsupported data type, adventure/omen's reversible_card must have diff names in faces "
                             + this.set + " - " + this.collector_number + " - " + this.name);
                 }
             } else if (this.card_faces.get(0).layout.equals("token")) {

@@ -2560,12 +2560,20 @@ public class VerifyCardDataTest {
                         refRules[i];
             }
         }
-
+        if (ref.subtypes.contains("Omen")) {
+            for (int i = 0; i < refRules.length; i++) {
+                refRules[i] = "Omen " +
+                        ref.types.get(0) + " - " +
+                        ref.faceName + ' ' +
+                        ref.manaCost + " - " +
+                        refRules[i];
+            }
+        }
 
         String[] cardRules = card
                 .getRules()
                 .stream()
-                .filter(s -> !(card instanceof CardWithSpellOption) || !s.startsWith("Adventure ") || !s.startsWith("Omen "))
+                .filter(s -> !(card instanceof CardWithSpellOption) || !(s.startsWith("Adventure ") || s.startsWith("Omen ")))
                 .collect(Collectors.joining("\n"))
                 .replace("<br>", "\n")
                 .replace("<br/>", "\n")
