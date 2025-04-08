@@ -39,12 +39,19 @@ public class EndureSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        return doEndure(source.getSourcePermanentOrLKI(game), 1, game, source);
+    }
+
+    public static boolean doEndure(Permanent permanent, int amount, Game game, Ability source) {
+        if (permanent == null || amount < 1) {
             return false;
         }
-        Permanent permanent = source.getSourcePermanentIfItStillExists(game);
-        if (permanent != null && player.chooseUse(
+        Player controller = game.getPlayer(permanent.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+        if (permanent.getZoneChangeCounter(game) == game.getState().getZoneChangeCounter(permanent.getId())
+                && controller.chooseUse(
                 Outcome.BoostCreature, "Put " + CardUtil.numberToText(amount, "a") + " +1/+1 counter" +
                         (amount > 1 ? "s" : "") + " on " + permanent.getName() + " or create " +
                         CardUtil.addArticle("" + amount) + ' ' + amount + '/' + amount + " Spirit token?",
