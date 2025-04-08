@@ -36,7 +36,7 @@ public final class DugganPrivateDetective extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Duggan's power and toughness are each equal to the number of cards in your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CardsInControllerHandCount.instance)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CardsInControllerHandCount.ANY)));
 
         // Whenever Duggan enters the battlefield or attacks, investigate.
         this.addAbility(new EntersBattlefieldOrAttacksSourceTriggeredAbility(new InvestigateEffect().setText("investigate")));

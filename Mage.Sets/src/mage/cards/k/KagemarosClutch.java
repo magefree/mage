@@ -17,7 +17,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -40,7 +39,7 @@ public final class KagemarosClutch extends CardImpl {
         this.addAbility(ability);
 
         // Enchanted creature gets -X/-X, where X is the number of cards in your hand.
-        DynamicValue xMinusValue = new SignInversionDynamicValue(CardsInControllerHandCount.instance);
+        DynamicValue xMinusValue = new SignInversionDynamicValue(CardsInControllerHandCount.ANY);
         Effect effect = new BoostEnchantedEffect(xMinusValue, xMinusValue, Duration.WhileOnBattlefield);
         effect.setText("Enchanted creature gets -X/-X, where X is the number of cards in your hand");
         this.addAbility(new SimpleStaticAbility(effect));

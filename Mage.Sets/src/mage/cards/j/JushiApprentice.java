@@ -19,7 +19,6 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.ComparisonType;
 import mage.constants.SuperType;
-import mage.constants.Zone;
 import mage.game.permanent.token.TokenImpl;
 import mage.target.TargetPlayer;
 
@@ -70,7 +69,7 @@ class TomoyaTheRevealer extends TokenImpl {
         toughness = new MageInt(3);
 
         // {3}{U}{U},{T} : Target player draws X cards, where X is the number of cards in your hand.
-        Ability ability = new SimpleActivatedAbility(new DrawCardTargetEffect(CardsInControllerHandCount.instance), new ManaCostsImpl<>("{3}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(new DrawCardTargetEffect(CardsInControllerHandCount.ANY), new ManaCostsImpl<>("{3}{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

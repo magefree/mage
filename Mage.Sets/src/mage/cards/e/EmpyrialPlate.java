@@ -12,7 +12,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Outcome;
-import mage.constants.Zone;
 
 /**
  *
@@ -25,7 +24,7 @@ public final class EmpyrialPlate extends CardImpl {
         this.subtype.add(SubType.EQUIPMENT);
 
         // Equipped creature gets +1/+1 for each card in your hand.
-        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(CardsInControllerHandCount.instance, CardsInControllerHandCount.instance)));
+        this.addAbility(new SimpleStaticAbility(new BoostEquippedEffect(CardsInControllerHandCount.ANY, CardsInControllerHandCount.ANY)));
         
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2), false));

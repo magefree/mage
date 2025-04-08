@@ -12,7 +12,6 @@ import mage.players.Player;
 
 public enum CardsInControllerHandCount implements DynamicValue {
 
-    instance(StaticFilters.FILTER_CARD_CARDS), // TODO: replace usage to ANY
     ANY(StaticFilters.FILTER_CARD_CARDS),
     CREATURES(StaticFilters.FILTER_CARD_CREATURES),
     LANDS(StaticFilters.FILTER_CARD_LANDS);
