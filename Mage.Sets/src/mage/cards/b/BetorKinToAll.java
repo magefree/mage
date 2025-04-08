@@ -105,23 +105,26 @@ class BetorKinToAllEffect extends OneShotEffect {
 
         int sumToughness = ControlledCreaturesToughnessValue.instance.calculate(game, source, null);
 
-        if (sumToughness >= 20) {
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(),
-                    game)) {
-                permanent.untap(game);
-            }
+        if (sumToughness < 20) {
+            return true;
+        }
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(),
+                game)) {
+            permanent.untap(game);
         }
 
-        if (sumToughness >= 40) {
-            for (UUID playerId : game.getOpponents(controller.getId())) {
-                Player opponent = game.getPlayer(playerId);
-                if (opponent != null) {
-                    int amount = (int) Math.ceil(opponent.getLife() / 2f);
-                    if (amount > 0) {
-                        opponent.loseLife(amount, game, source, false);
-                        return true;
-                    }
-                }
+        if (sumToughness < 40) {
+            return true;
+        }
+
+        for (UUID playerId : game.getOpponents(controller.getId())) {
+            Player opponent = game.getPlayer(playerId);
+            if (opponent == null) {
+                continue;
+            }
+            int amount = (int) Math.ceil(opponent.getLife() / 2f);
+            if (amount > 0) {
+                opponent.loseLife(amount, game, source, false);
             }
         }
 
@@ -152,11 +155,11 @@ enum ControlledCreaturesToughnessValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "x";
+        return "total toughness of creatures you control";
     }
 
     @Override
     public String toString() {
-        return "";
+        return "X";
     }
 }
