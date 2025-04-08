@@ -6,8 +6,8 @@ import mage.MageObject;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.keyword.FlashAbility;
-import mage.cards.AdventureCardSpell;
 import mage.cards.Card;
+import mage.cards.SpellOptionCard;
 import mage.cards.SplitCard;
 import mage.constants.*;
 import mage.game.Game;
@@ -99,7 +99,7 @@ public class SpellAbility extends ActivatedAbilityImpl {
         // forced to cast (can be part id or main id)
         Set<UUID> idsToCheck = new HashSet<>();
         idsToCheck.add(object.getId());
-        if (object instanceof Card && !(object instanceof AdventureCardSpell)) {
+        if (object instanceof Card && !(object instanceof SpellOptionCard)) {
             idsToCheck.add(((Card) object).getMainCard().getId());
         }
         for (UUID idToCheck : idsToCheck) {

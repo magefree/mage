@@ -8,27 +8,24 @@ import mage.game.Game;
 
 import java.util.UUID;
 
-/**
- * @author phulin
- */
-public abstract class AdventureCard extends CardWithSpellOption {
+public abstract class OmenCard extends CardWithSpellOption {
 
-    public AdventureCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, CardType[] typesSpell, String costs, String adventureName, String costsSpell) {
+    public OmenCard(UUID ownerId, CardSetInfo setInfo, CardType[] types, CardType[] typesSpell, String costs, String omenName, String costsSpell) {
         super(ownerId, setInfo, types, costs);
-        this.spellCard = new AdventureSpellCard(ownerId, setInfo, adventureName, typesSpell, costsSpell, this);
+        this.spellCard = new OmenSpellCard(ownerId, setInfo, omenName, typesSpell, costsSpell, this);
     }
 
-    public AdventureCard(AdventureCard card) {
+    public OmenCard(OmenCard card) {
         super(card);
     }
 
-    public void finalizeAdventure() {
+    public void finalizeOmen() {
         spellCard.finalizeSpell();
     }
 
     @Override
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
-        if (ability.getSpellAbilityType() == SpellAbilityType.ADVENTURE_SPELL) {
+        if (ability.getSpellAbilityType() == SpellAbilityType.OMEN_SPELL) {
             return this.getSpellCard().cast(game, fromZone, ability, controllerId);
         }
         this.getSpellCard().getSpellAbility().setControllerId(controllerId);

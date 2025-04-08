@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
 /**
  * @author phulin
  */
-public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpell {
+public class AdventureSpellCard extends CardImpl implements SpellOptionCard {
 
     private AdventureCard adventureCardParent;
 
-    public AdventureCardSpellImpl(UUID ownerId, CardSetInfo setInfo, String adventureName, CardType[] cardTypes, String costs, AdventureCard adventureCardParent) {
+    public AdventureSpellCard(UUID ownerId, CardSetInfo setInfo, String adventureName, CardType[] cardTypes, String costs, AdventureCard adventureCardParent) {
         super(ownerId, setInfo, cardTypes, costs, SpellAbilityType.ADVENTURE_SPELL);
         this.subtype.add(SubType.ADVENTURE);
 
@@ -35,13 +35,13 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
         this.adventureCardParent = adventureCardParent;
     }
 
-    public void finalizeAdventure() {
+    public void finalizeSpell() {
         if (spellAbility instanceof AdventureCardSpellAbility) {
             ((AdventureCardSpellAbility) spellAbility).finalizeAdventure();
         }
     }
 
-    protected AdventureCardSpellImpl(final AdventureCardSpellImpl card) {
+    protected AdventureSpellCard(final AdventureSpellCard card) {
         super(card);
         this.adventureCardParent = card.adventureCardParent;
     }
@@ -83,13 +83,13 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
     }
 
     @Override
-    public AdventureCardSpellImpl copy() {
-        return new AdventureCardSpellImpl(this);
+    public AdventureSpellCard copy() {
+        return new AdventureSpellCard(this);
     }
 
     @Override
-    public void setParentCard(AdventureCard card) {
-        this.adventureCardParent = card;
+    public void setParentCard(CardWithSpellOption card) {
+        this.adventureCardParent = (AdventureCard) card;
     }
 
     @Override
@@ -101,6 +101,11 @@ public class AdventureCardSpellImpl extends CardImpl implements AdventureCardSpe
     public String getIdName() {
         // id must send to main card (popup card hint in game logs)
         return getName() + " [" + adventureCardParent.getId().toString().substring(0, 3) + ']';
+    }
+
+    @Override
+    public String getSpellType() {
+        return "Adventure";
     }
 }
 
@@ -141,8 +146,8 @@ class AdventureCardSpellAbility extends SpellAbility {
     public ActivationStatus canActivate(UUID playerId, Game game) {
         ExileZone adventureExileZone = game.getExile().getExileZone(ExileAdventureSpellEffect.adventureExileId(playerId, game));
         Card spellCard = game.getCard(this.getSourceId());
-        if (spellCard instanceof AdventureCardSpell) {
-            Card card = ((AdventureCardSpell) spellCard).getParentCard();
+        if (spellCard instanceof AdventureSpellCard) {
+            Card card = ((AdventureSpellCard) spellCard).getParentCard();
             if (adventureExileZone != null && adventureExileZone.contains(card.getId())) {
                 return ActivationStatus.getFalse();
             }
