@@ -306,9 +306,9 @@ public class VerifyCardDataTest {
             if (card instanceof CardWithHalves) {
                 check(((CardWithHalves) card).getLeftHalfCard(), cardIndex);
                 check(((CardWithHalves) card).getRightHalfCard(), cardIndex);
-            } else if (card instanceof AdventureCard) {
+            } else if (card instanceof CardWithSpellOption) {
                 check(card, cardIndex);
-                check(((AdventureCard) card).getSpellCard(), cardIndex);
+                check(((CardWithSpellOption) card).getSpellCard(), cardIndex);
             } else {
                 check(card, cardIndex);
             }
@@ -2161,8 +2161,8 @@ public class VerifyCardDataTest {
         );
         // card can contain rules text from both sides, so must search ref card for all sides too
         String additionalName;
-        if (card instanceof AdventureCard) {
-            additionalName = ((AdventureCard) card).getSpellCard().getName();
+        if (card instanceof CardWithSpellOption) {
+            additionalName = ((CardWithSpellOption) card).getSpellCard().getName();
         } else if (card.isTransformable() && !card.isNightCard()) {
             additionalName = card.getSecondCardFace().getName();
         } else {
@@ -2552,7 +2552,7 @@ public class VerifyCardDataTest {
         String[] cardRules = card
                 .getRules()
                 .stream()
-                .filter(s -> !(card instanceof AdventureCard) || !s.startsWith("Adventure "))
+                .filter(s -> !(card instanceof CardWithSpellOption) || !s.startsWith("Adventure ") || !s.startsWith("Omen "))
                 .collect(Collectors.joining("\n"))
                 .replace("<br>", "\n")
                 .replace("<br/>", "\n")

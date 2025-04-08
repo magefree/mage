@@ -180,7 +180,7 @@ class DraugrNecromancerSpendAnyManaEffect extends AsThoughEffectImpl implements 
             CardState cardState;
             if (card instanceof SplitCard) {
                 cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
-            } else if (card instanceof AdventureCard) {
+            } else if (card instanceof CardWithSpellOption) {
                 cardState = game.getLastKnownInformationCard(card.getId(), Zone.EXILED);
             } else if (card instanceof ModalDoubleFacedCard) {
                 cardState = game.getLastKnownInformationCard(((ModalDoubleFacedCard) card).getLeftHalfCard().getId(), Zone.EXILED);

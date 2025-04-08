@@ -100,9 +100,9 @@ class EdginLarcenousLutenistEffect extends ContinuousEffectImpl {
                         foretellAbility = new ForetellAbility(card, leftHalfCost, rightHalfCost);
                     }
                 }
-            } else if (card instanceof AdventureCard) {
+            } else if (card instanceof CardWithSpellOption) {
                 String creatureCost = CardUtil.reduceCost(card.getMainCard().getManaCost(), 2).getText();
-                String spellCost = CardUtil.reduceCost(((AdventureCard) card).getSpellCard().getManaCost(), 2).getText();
+                String spellCost = CardUtil.reduceCost(((CardWithSpellOption) card).getSpellCard().getManaCost(), 2).getText();
                 foretellAbility = new ForetellAbility(card, creatureCost, spellCost);
             } else {
                 String costText = CardUtil.reduceCost(card.getManaCost(), 2).getText();

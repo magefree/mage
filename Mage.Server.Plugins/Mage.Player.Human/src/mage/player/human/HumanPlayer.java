@@ -2379,7 +2379,7 @@ public class HumanPlayer extends PlayerImpl {
         Card mainCard = game.getCard(CardUtil.getMainCardId(game, ability.getSourceId()));
         if (mainCard != null && !Zone.BATTLEFIELD.equals(game.getState().getZone(mainCard.getId()))) {
             if (mainCard instanceof SplitCard
-                    || mainCard instanceof AdventureCard
+                    || mainCard instanceof CardWithSpellOption
                     || mainCard instanceof ModalDoubleFacedCard) {
                 return false;
             }
