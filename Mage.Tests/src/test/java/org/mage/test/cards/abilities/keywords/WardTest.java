@@ -30,4 +30,54 @@ public class WardTest extends CardTestPlayerBase {
         assertGraveyardCount(playerA, "Solitude", 1);
         assertPermanentCount(playerB, "Waterfall Aerialist", 1);
     }
+
+    @Test
+    public void wardPanharmonicon() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Panharmonicon");
+        addCard(Zone.BATTLEFIELD, playerA, "Young Red Dragon");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
+        addCard(Zone.BATTLEFIELD, playerB, "Roaming Throne");
+        addCard(Zone.HAND, playerA, "Scourge of Valkas");
+
+        setChoice(playerB, "Dragon");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scourge of Valkas");
+        setChoice(playerA, "Whenever {this} or another Dragon");
+        addTarget(playerA, "Roaming Throne");
+        addTarget(playerA, "Roaming Throne");
+        setChoice(playerB, "ward {2}");
+        setChoice(playerA, "Yes");
+        setChoice(playerA, "No");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerB, "Roaming Throne", 1);
+        assertDamageReceived(playerB, "Roaming Throne", 2);
+    }
+
+    @Test
+    public void wardPanharmoniconCounter() {
+        setStrictChooseMode(true);
+
+        addCard(Zone.BATTLEFIELD, playerA, "Panharmonicon");
+        addCard(Zone.BATTLEFIELD, playerA, "Young Red Dragon");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerB, "Roaming Throne");
+        addCard(Zone.HAND, playerA, "Scourge of Valkas");
+
+        setChoice(playerB, "Dragon");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Scourge of Valkas");
+        setChoice(playerA, "Whenever {this} or another Dragon");
+        addTarget(playerA, "Roaming Throne");
+        addTarget(playerA, "Roaming Throne");
+        setChoice(playerB, "ward {2}");
+        setChoice(playerA, "No");
+        setChoice(playerA, "No");
+
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+        assertPermanentCount(playerB, "Roaming Throne", 1);
+        assertDamageReceived(playerB, "Roaming Throne", 0);
+    }
 }

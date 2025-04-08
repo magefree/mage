@@ -107,6 +107,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Electrodominance", 212, Rarity.RARE, mage.cards.e.Electrodominance.class));
         cards.add(new SetCardInfo("Elemental Bond", 254, Rarity.UNCOMMON, mage.cards.e.ElementalBond.class));
         cards.add(new SetCardInfo("Eliminate the Competition", 179, Rarity.RARE, mage.cards.e.EliminateTheCompetition.class));
+        cards.add(new SetCardInfo("Elsha, Threefold Master", 2, Rarity.MYTHIC, mage.cards.e.ElshaThreefoldMaster.class));
         cards.add(new SetCardInfo("Emeria Angel", 114, Rarity.RARE, mage.cards.e.EmeriaAngel.class));
         cards.add(new SetCardInfo("Exotic Orchard", 360, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Expansion // Explosion", 287, Rarity.RARE, mage.cards.e.ExpansionExplosion.class));
@@ -320,6 +321,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Tree of Redemption", 97, Rarity.MYTHIC, mage.cards.t.TreeOfRedemption.class));
         cards.add(new SetCardInfo("Twilight Drover", 136, Rarity.RARE, mage.cards.t.TwilightDrover.class));
         cards.add(new SetCardInfo("Twilight Mire", 409, Rarity.RARE, mage.cards.t.TwilightMire.class));
+        cards.add(new SetCardInfo("Ureni of the Unwritten", 9, Rarity.MYTHIC, mage.cards.u.UreniOfTheUnwritten.class));
         cards.add(new SetCardInfo("Vanquish the Horde", 91, Rarity.RARE, mage.cards.v.VanquishTheHorde.class));
         cards.add(new SetCardInfo("Vault of the Archangel", 410, Rarity.RARE, mage.cards.v.VaultOfTheArchangel.class));
         cards.add(new SetCardInfo("Velomachus Lorehold", 309, Rarity.MYTHIC, mage.cards.v.VelomachusLorehold.class));

@@ -4068,11 +4068,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             getPlayableFromObjectSingle(game, fromZone, mainCard.getLeftHalfCard(), mainCard.getLeftHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard.getRightHalfCard(), mainCard.getRightHalfCard().getAbilities(game), availableMana, output);
             getPlayableFromObjectSingle(game, fromZone, mainCard, mainCard.getSharedAbilities(game), availableMana, output);
-        } else if (object instanceof AdventureCard) {
+        } else if (object instanceof CardWithSpellOption) {
             // adventure must use different card characteristics for different spells (main or adventure)
-            AdventureCard adventureCard = (AdventureCard) object;
-            getPlayableFromObjectSingle(game, fromZone, adventureCard.getSpellCard(), adventureCard.getSpellCard().getAbilities(game), availableMana, output);
-            getPlayableFromObjectSingle(game, fromZone, adventureCard, adventureCard.getSharedAbilities(game), availableMana, output);
+            CardWithSpellOption cardWithSpellOption = (CardWithSpellOption) object;
+            getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption.getSpellCard(), cardWithSpellOption.getSpellCard().getAbilities(game), availableMana, output);
+            getPlayableFromObjectSingle(game, fromZone, cardWithSpellOption, cardWithSpellOption.getSharedAbilities(game), availableMana, output);
         } else if (object instanceof Card) {
             getPlayableFromObjectSingle(game, fromZone, object, ((Card) object).getAbilities(game), availableMana, output);
         } else if (object instanceof StackObject) {

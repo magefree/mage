@@ -2072,7 +2072,6 @@ public class HumanPlayer extends PlayerImpl {
         // stop skip on any/zero permanents available
         int possibleBlockersCount = game.getBattlefield().count(filter, playerId, source, game);
         boolean canStopOnAny = possibleBlockersCount != 0 && getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockersWithAnyPermanents();
-        boolean canStopOnZero = possibleBlockersCount == 0 && getControllingPlayersUserData(game).getUserSkipPrioritySteps().isStopOnDeclareBlockersWithZeroPermanents();
 
         // skip declare blocker step
         // as opposed to declare attacker - it can be skipped by ANY skip button TODO: make same for declare attackers and rework skip buttons (normal and forced)
@@ -2081,9 +2080,11 @@ public class HumanPlayer extends PlayerImpl {
                 || passedTurn
                 || passedUntilEndOfTurn
                 || passedUntilNextMain;
-        if (skipButtonActivated && !canStopOnAny && !canStopOnZero) {
+        if (skipButtonActivated && !canStopOnAny) {
             return;
         }
+        // Skip prompt to select blockers if player has none
+        if (possibleBlockersCount == 0) return;
 
         while (canRespond()) {
             prepareForResponse(game);

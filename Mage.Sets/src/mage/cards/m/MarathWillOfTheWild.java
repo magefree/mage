@@ -15,6 +15,7 @@ import mage.abilities.dynamicvalue.common.ManaSpentToCastCount;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
@@ -27,11 +28,10 @@ import mage.constants.SuperType;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.MarathWillOfTheWildElementalToken;
-import mage.game.permanent.token.Token;
 import mage.players.Player;
 import mage.target.common.TargetAnyTarget;
 import mage.target.common.TargetCreaturePermanent;
+import mage.game.permanent.token.ElementalXXGreenToken;
 
 import java.util.UUID;
 
@@ -110,12 +110,8 @@ class MarathWillOfTheWildCreateTokenEffect extends OneShotEffect {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int amount = GetXValue.instance.calculate(game, source, this);
-            Token token = new MarathWillOfTheWildElementalToken();
-            token.setPower(amount);
-            token.setToughness(amount);
-            token.putOntoBattlefield(1, game, source, source.getControllerId());
-            return true;
+            int xvalue = GetXValue.instance.calculate(game, source, this);
+            return new CreateTokenEffect(new ElementalXXGreenToken(xvalue)).apply(game, source);
         }
         return false;
     }

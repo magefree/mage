@@ -1086,13 +1086,22 @@ public final class CardUtil {
      * @param game  the Game from checkTrigger() or watch()
      * @return the StackObject which targeted the source, or null if not found
      */
-    public static StackObject getTargetingStackObject(GameEvent event, Game game) {
+    public static StackObject getTargetingStackObject(String checkingReference, GameEvent event, Game game) {
         // In case of multiple simultaneous triggered abilities from the same source,
         // need to get the actual one that targeted, see #8026, #8378
         // Also avoids triggering on cancelled selections, see #8802
+        String stateKey = "targetedMap" + checkingReference;
+        Map<UUID, Set<UUID>> targetMap = (Map<UUID, Set<UUID>>) game.getState().getValue(stateKey);
+        // targetMap: key - targetId; value - Set of stackObject Ids
+        if (targetMap == null) {
+            targetMap = new HashMap<>();
+        } else {
+            targetMap = new HashMap<>(targetMap); // must have new object reference if saved back to game state
+        }
+        Set<UUID> targetingObjects = targetMap.computeIfAbsent(event.getTargetId(), k -> new HashSet<>());
         for (StackObject stackObject : game.getStack()) {
             Ability stackAbility = stackObject.getStackAbility();
-            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId())) {
+            if (stackAbility == null || !stackAbility.getSourceId().equals(event.getSourceId()) || targetingObjects.contains(stackObject.getId())) {
                 continue;
             }
             if (CardUtil.getAllSelectedTargets(stackAbility, game).contains(event.getTargetId())) {
@@ -1263,7 +1272,7 @@ public final class CardUtil {
         Card permCard;
         if (card instanceof SplitCard) {
             permCard = card;
-        } else if (card instanceof AdventureCard) {
+        } else if (card instanceof CardWithSpellOption) {
             permCard = card;
         } else if (card instanceof ModalDoubleFacedCard) {
             permCard = ((ModalDoubleFacedCard) card).getLeftHalfCard();
@@ -1451,9 +1460,9 @@ public final class CardUtil {
         if (cardToCast instanceof CardWithHalves) {
             cards.add(((CardWithHalves) cardToCast).getLeftHalfCard());
             cards.add(((CardWithHalves) cardToCast).getRightHalfCard());
-        } else if (cardToCast instanceof AdventureCard) {
+        } else if (cardToCast instanceof CardWithSpellOption) {
             cards.add(cardToCast);
-            cards.add(((AdventureCard) cardToCast).getSpellCard());
+            cards.add(((CardWithSpellOption) cardToCast).getSpellCard());
         } else {
             cards.add(cardToCast);
         }
@@ -1642,9 +1651,9 @@ public final class CardUtil {
         }
 
         // handle adventure cards
-        if (card instanceof AdventureCard) {
+        if (card instanceof CardWithSpellOption) {
             Card creatureCard = card.getMainCard();
-            Card spellCard = ((AdventureCard) card).getSpellCard();
+            Card spellCard = ((CardWithSpellOption) card).getSpellCard();
             if (manaCost != null) {
                 // get additional cost if any
                 Costs<Cost> additionalCostsCreature = creatureCard.getSpellAbility().getCosts();
@@ -1682,9 +1691,9 @@ public final class CardUtil {
             game.getState().setValue("PlayFromNotOwnHandZone" + leftHalfCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + rightHalfCard.getId(), null);
         }
-        if (card instanceof AdventureCard) {
+        if (card instanceof CardWithSpellOption) {
             Card creatureCard = card.getMainCard();
-            Card spellCard = ((AdventureCard) card).getSpellCard();
+            Card spellCard = ((CardWithSpellOption) card).getSpellCard();
             game.getState().setValue("PlayFromNotOwnHandZone" + creatureCard.getId(), null);
             game.getState().setValue("PlayFromNotOwnHandZone" + spellCard.getId(), null);
         }
@@ -2069,8 +2078,8 @@ public final class CardUtil {
             res.add(mainCard);
             res.add(mainCard.getLeftHalfCard());
             res.add(mainCard.getRightHalfCard());
-        } else if (object instanceof AdventureCard || object instanceof AdventureCardSpell) {
-            AdventureCard mainCard = (AdventureCard) ((Card) object).getMainCard();
+        } else if (object instanceof CardWithSpellOption || object instanceof SpellOptionCard) {
+            CardWithSpellOption mainCard = (CardWithSpellOption) ((Card) object).getMainCard();
             res.add(mainCard);
             res.add(mainCard.getSpellCard());
         } else if (object instanceof Spell) {

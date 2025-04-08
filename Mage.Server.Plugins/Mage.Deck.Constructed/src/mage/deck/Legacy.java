@@ -64,6 +64,7 @@ public class Legacy extends Constructed {
         banned.add("Sensei's Divining Top");
         banned.add("Skullclamp");
         banned.add("Sol Ring");
+        banned.add("Sowing Mycospawn");
         banned.add("Strip Mine");
         banned.add("Survival of the Fittest");
         banned.add("Time Vault");
@@ -72,6 +73,7 @@ public class Legacy extends Constructed {
         banned.add("Tinker");
         banned.add("Tolarian Academy");
         banned.add("Treasure Cruise");
+        banned.add("Troll of Khazad-dum");
         banned.add("Underworld Breach");
         banned.add("Vampiric Tutor");
         banned.add("Vexing Bauble");

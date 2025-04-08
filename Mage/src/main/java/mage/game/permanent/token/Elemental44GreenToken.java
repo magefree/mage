@@ -7,9 +7,9 @@ import mage.constants.SubType;
 /**
  * @author spjspj
  */
-public final class EyesOfTheWisentElementalToken extends TokenImpl {
+public final class Elemental44GreenToken extends TokenImpl {
 
-    public EyesOfTheWisentElementalToken() {
+    public Elemental44GreenToken() {
         super("Elemental Token", "4/4 green Elemental creature token");
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
@@ -18,11 +18,11 @@ public final class EyesOfTheWisentElementalToken extends TokenImpl {
         toughness = new MageInt(4);
     }
 
-    private EyesOfTheWisentElementalToken(final EyesOfTheWisentElementalToken token) {
+    private Elemental44GreenToken(final Elemental44GreenToken token) {
         super(token);
     }
 
-    public EyesOfTheWisentElementalToken copy() {
-        return new EyesOfTheWisentElementalToken(this);
+    public Elemental44GreenToken copy() {
+        return new Elemental44GreenToken(this);
     }
 }

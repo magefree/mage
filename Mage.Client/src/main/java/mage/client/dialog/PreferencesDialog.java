@@ -2396,15 +2396,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         phases_stopSettings.add(cbStopAttack);
 
         cbStopBlockWithAny.setSelected(true);
-        cbStopBlockWithAny.setText("STOP skips on declare blockers if ANY blockers are available");
+        cbStopBlockWithAny.setText("STOP skips when attacked and on declare blockers if ANY blockers are available");
         cbStopBlockWithAny.setActionCommand("");
         phases_stopSettings.add(cbStopBlockWithAny);
 
-        cbStopBlockWithZero.setText("STOP skips on declare blockers if ZERO blockers are available");
+        cbStopBlockWithZero.setText("STOP skips when attacked if ZERO blockers are available");
         cbStopBlockWithZero.setActionCommand("");
         phases_stopSettings.add(cbStopBlockWithZero);
 
-        cbStopOnNewStackObjects.setText("Skip to STACK resolved (F10): stop on new objects added (on) or stop until empty (off)");
+        cbStopOnNewStackObjects.setText("Skip to STACK resolved (F10): stop on new objects added (on) or stop when stack empty (off)");
         cbStopOnNewStackObjects.setActionCommand("");
         cbStopOnNewStackObjects.setPreferredSize(new java.awt.Dimension(300, 25));
         phases_stopSettings.add(cbStopOnNewStackObjects);

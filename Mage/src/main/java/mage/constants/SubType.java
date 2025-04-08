@@ -13,6 +13,7 @@ public enum SubType {
     ADVENTURE("Adventure", SubTypeSet.SpellType),
     ARCANE("Arcane", SubTypeSet.SpellType),
     LESSON("Lesson", SubTypeSet.SpellType),
+    OMEN("Omen", SubTypeSet.SpellType),
     TRAP("Trap", SubTypeSet.SpellType),
 
     // Battle subtypes
@@ -274,6 +275,7 @@ public enum SubType {
     MONGOOSE("Mongoose", SubTypeSet.CreatureType),
     MONK("Monk", SubTypeSet.CreatureType),
     MONKEY("Monkey", SubTypeSet.CreatureType),
+    MOOGLE("Moogle", SubTypeSet.CreatureType),
     MOONFOLK("Moonfolk", SubTypeSet.CreatureType),
     MOUNT("Mount", SubTypeSet.CreatureType),
     MOUSE("Mouse", SubTypeSet.CreatureType),

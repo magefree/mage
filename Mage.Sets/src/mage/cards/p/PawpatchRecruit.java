@@ -96,7 +96,7 @@ class PawpatchRecruitTriggeredAbility extends TriggeredAbilityImpl {
         if (permanent == null || !filterTarget.match(permanent, getControllerId(), this, game)) {
             return false;
         }
-        StackObject targetingObject = CardUtil.getTargetingStackObject(event, game);
+        StackObject targetingObject = CardUtil.getTargetingStackObject(this.getId().toString(), event, game);
         if (targetingObject == null || !filterStack.match(targetingObject, getControllerId(), this, game)) {
             return false;
         }

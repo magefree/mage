@@ -9,7 +9,7 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.game.permanent.token.GrovetenderDruidsPlantToken;
+import mage.game.permanent.token.Plant11Token;
 
 import java.util.UUID;
 
@@ -29,7 +29,7 @@ public final class GrovetenderDruids extends CardImpl {
         // <i>Rally</i>-Whenever Grovetender Druids or another Ally you control enters, you may pay {1}.
         // If you do, create a 1/1 green Plant creature token.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new DoIfCostPaid(
-                new CreateTokenEffect(new GrovetenderDruidsPlantToken()), new GenericManaCost(1)
+                new CreateTokenEffect(new Plant11Token()), new GenericManaCost(1)
         ), false));
     }
 
