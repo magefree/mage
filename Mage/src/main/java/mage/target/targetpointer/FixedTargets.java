@@ -50,7 +50,7 @@ public class FixedTargets extends TargetPointerImpl {
                 .collect(Collectors.toList()), game);
     }
 
-    public FixedTargets(List<MageObjectReference> morList) {
+    public FixedTargets(Collection<MageObjectReference> morList) {
         super();
         targets.addAll(morList);
         this.setInitialized(); // no need dynamic init
