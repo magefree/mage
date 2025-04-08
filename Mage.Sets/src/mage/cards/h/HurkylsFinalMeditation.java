@@ -49,7 +49,7 @@ enum HurkylsFinalMeditationAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void increaseCost(Ability ability, Game game) {
         if (!game.isActivePlayer(ability.getControllerId())) {
             CardUtil.increaseCost(ability, 3);
         }

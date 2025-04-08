@@ -1863,8 +1863,11 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public int announceXMana(int min, int max, String message, Game game, Ability ability) {
-        log.debug("announceXMana");
-        //TODO: improve this
+        // current logic - use max possible mana
+
+        // TODO: add good/bad effects support
+        // TODO: add simple game simulations like declare blocker?
+
         int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
         if (numAvailable < 0) {
             numAvailable = 0;
@@ -1881,12 +1884,17 @@ public class ComputerPlayer extends PlayerImpl {
 
     @Override
     public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variablCost) {
-        log.debug("announceXCost");
+        // current logic - use random non-zero value
+
+        // TODO: add good/bad effects support
+        // TODO: remove random logic
+
         int value = RandomUtil.nextInt(CardUtil.overflowInc(max, 1));
         if (value < min) {
             value = min;
         }
         if (value < max) {
+            // do not use zero values
             value++;
         }
         return value;

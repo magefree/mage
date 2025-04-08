@@ -69,7 +69,7 @@ enum RazorlashTransmograntAdjuster implements CostAdjuster {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         if (makeMap(game, ability).values().stream().anyMatch(x -> x >= 4)) {
             CardUtil.reduceCost(ability, 4);
         }

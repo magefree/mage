@@ -3679,8 +3679,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             if (!copy.canActivate(playerId, game).canActivate()) {
                 return false;
             }
+
+            // apply dynamic costs and cost modification
+            copy.adjustX(game);
             if (availableMana != null) {
-                copy.adjustCosts(game);
+                // TODO: need research, why it look at availableMana here - can delete condition?
                 game.getContinuousEffects().costModification(copy, game);
             }
             boolean canBeCastRegularly = true;
@@ -3891,7 +3894,8 @@ public abstract class PlayerImpl implements Player, Serializable {
                 copyAbility = ability.copy();
                 copyAbility.clearManaCostsToPay();
                 copyAbility.addManaCostsToPay(manaCosts.copy());
-                copyAbility.adjustCosts(game);
+                // apply dynamic costs and cost modification
+                copyAbility.adjustX(game);
                 game.getContinuousEffects().costModification(copyAbility, game);
 
                 // reduced all cost
@@ -3963,12 +3967,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                 // alternative cost reduce
                 copyAbility = ability.copy();
                 copyAbility.clearManaCostsToPay();
-                // TODO: IDE warning:
-                //              Unchecked assignment: 'mage.abilities.costs.mana.ManaCosts' to
-                //              'java.util.Collection<? extends mage.abilities.costs.mana.ManaCost>'.
-                //              Reason: 'manaCosts' has raw type, so result of copy is erased
                 copyAbility.addManaCostsToPay(manaCosts.copy());
-                copyAbility.adjustCosts(game);
+                // apply dynamic costs and cost modification
+                copyAbility.adjustX(game);
                 game.getContinuousEffects().costModification(copyAbility, game);
 
                 // reduced all cost

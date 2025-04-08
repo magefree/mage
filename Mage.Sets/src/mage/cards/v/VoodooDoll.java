@@ -72,7 +72,7 @@ enum VoodooDollAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void prepareCost(Ability ability, Game game) {
         Permanent sourcePermanent = game.getPermanent(ability.getSourceId());
         if (sourcePermanent != null) {
             int pin = sourcePermanent.getCounters(game).getCount(CounterType.PIN);

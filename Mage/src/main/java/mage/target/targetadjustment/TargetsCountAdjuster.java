@@ -25,8 +25,13 @@ public class TargetsCountAdjuster extends GenericTargetAdjuster {
 
     @Override
     public void adjustTargets(Ability ability, Game game) {
-        Target newTarget = blueprintTarget.copy();
         int count = dynamicValue.calculate(game, ability, ability.getEffects().get(0));
+        ability.getTargets().clear();
+        if (count <= 0) {
+            return;
+        }
+
+        Target newTarget = blueprintTarget.copy();
         newTarget.setMaxNumberOfTargets(count);
         Filter filter = newTarget.getFilter();
         if (blueprintTarget.getMinNumberOfTargets() != 0) {
@@ -35,7 +40,6 @@ public class TargetsCountAdjuster extends GenericTargetAdjuster {
         } else {
             newTarget.withTargetName(filter.getMessage() + " (up to " + count + " targets)");
         }
-        ability.getTargets().clear();
         ability.addTarget(newTarget);
     }
 }

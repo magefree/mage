@@ -5,7 +5,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
@@ -36,12 +35,8 @@ public final class AladdinsLamp extends CardImpl {
         // {X}, {T}: The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.
         Ability ability = new SimpleActivatedAbility(new AladdinsLampEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
-        for (Object cost : ability.getManaCosts()) {
-            if (cost instanceof VariableManaCost) {
-                ((VariableManaCost) cost).setMinX(1);
-                break;
-            }
-        }
+        ability.setVariableCostsMinMax(1, Integer.MAX_VALUE);
+        // TODO: add costAdjuster for min/max values due library size
         this.addAbility(ability);
     }
 

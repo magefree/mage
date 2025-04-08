@@ -439,7 +439,7 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                     this.add(new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
                 } else // check X wasn't added before
                     if (modifierForX == 0) {
-                        // count X occurence
+                        // count X occurrence
                         for (String s : symbols) {
                             if (s.equals("X")) {
                                 modifierForX++;

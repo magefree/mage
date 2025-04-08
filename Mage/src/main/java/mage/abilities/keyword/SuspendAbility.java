@@ -132,6 +132,8 @@ public class SuspendAbility extends SpecialAction {
         this.addEffect(new SuspendExileEffect(suspend));
         this.usesStack = false;
         if (suspend == Integer.MAX_VALUE) {
+            // example: Suspend X-{X}{W}{W}. X can't be 0.
+            // TODO: replace by costAdjuster for shared logic
             VariableManaCost xCosts = new VariableManaCost(VariableCostType.ALTERNATIVE);
             xCosts.setMinX(1);
             this.addCost(xCosts);

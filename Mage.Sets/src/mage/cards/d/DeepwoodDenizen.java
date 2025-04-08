@@ -62,7 +62,7 @@ enum DeepwoodDenizenAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         CardUtil.reduceCost(ability, DeepwoodDenizenValue.instance.calculate(game, ability, null));
     }
 }

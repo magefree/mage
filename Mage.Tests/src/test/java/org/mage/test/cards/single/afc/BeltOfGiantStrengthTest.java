@@ -13,8 +13,12 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class BeltOfGiantStrengthTest extends CardTestPlayerBase {
 
+    /**
+     * Equipped creature has base power and toughness 10/10.
+     * Equip {10}. This ability costs {X} less to activate where X is the power of the creature it targets.
+     */
     private static final String belt = "Belt of Giant Strength";
-    private static final String gigantosauras = "Gigantosaurus";
+    private static final String gigantosauras = "Gigantosaurus"; // 10/10
 
     @Test
     public void testWithManaAvailable() {

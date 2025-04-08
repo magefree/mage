@@ -63,7 +63,7 @@ enum NemesisOfMortalsAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller != null) {
             CardUtil.reduceCost(ability, controller.getGraveyard().count(StaticFilters.FILTER_CARD_CREATURE, game));

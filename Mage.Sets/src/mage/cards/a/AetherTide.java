@@ -1,27 +1,18 @@
 package mage.cards.a;
 
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.CostAdjuster;
-import mage.abilities.costs.common.DiscardTargetCost;
+import mage.abilities.costs.costadjusters.DiscardXCardsCostAdjuster;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.InfoEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.Zone;
 import mage.filter.StaticFilters;
-import mage.game.Game;
-import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.XTargetsCountAdjuster;
-import mage.util.CardUtil;
 
 import java.util.UUID;
 
 /**
- *
  * @author jeffwadsworth
  */
 public final class AetherTide extends CardImpl {
@@ -29,10 +20,8 @@ public final class AetherTide extends CardImpl {
     public AetherTide(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{U}");
 
-        // As an additional cost to cast Aether Tide, discard X creature cards.
-        Ability ability = new SimpleStaticAbility(Zone.ALL, new InfoEffect("As an additional cost to cast this spell, discard X creature cards"));
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
+        // As an additional cost to cast this spell, discard X creature cards.
+        DiscardXCardsCostAdjuster.addAdjusterAndMessage(this, StaticFilters.FILTER_CARD_CREATURES);
 
         // Return X target creatures to their owners' hands.
         Effect effect = new ReturnToHandTargetEffect();
@@ -40,8 +29,6 @@ public final class AetherTide extends CardImpl {
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().setTargetAdjuster(new XTargetsCountAdjuster());
-        this.getSpellAbility().setCostAdjuster(AetherTideCostAdjuster.instance);
-
     }
 
     private AetherTide(final AetherTide card) {
@@ -51,17 +38,5 @@ public final class AetherTide extends CardImpl {
     @Override
     public AetherTide copy() {
         return new AetherTide(this);
-    }
-}
-
-enum AetherTideCostAdjuster implements CostAdjuster {
-    instance;
-
-    @Override
-    public void adjustCosts(Ability ability, Game game) {
-        int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
-        if (xValue > 0) {
-            ability.addCost(new DiscardTargetCost(new TargetCardInHand(xValue, xValue, StaticFilters.FILTER_CARD_CREATURES)));
-        }
     }
 }

@@ -126,7 +126,7 @@ public interface Ability extends Controllable, Serializable {
     /**
      * Gets all {@link ManaCosts} associated with this ability. These returned
      * costs should never be modified as they represent the base costs before
-     * any modifications.
+     * any modifications (only cost adjusters can change it, e.g. set min/max values)
      *
      * @return All {@link ManaCosts} that must be paid.
      */
@@ -150,6 +150,17 @@ public interface Ability extends Controllable, Serializable {
     ManaCosts<ManaCost> getManaCostsToPay();
 
     void addManaCostsToPay(ManaCost manaCost);
+
+    /**
+     * Helper method to setup actual min/max limits of current X costs BEFORE player's X announcement
+     */
+    void setVariableCostsMinMax(int min, int max);
+
+    /**
+     * Helper method to replace X by direct value BEFORE player's X announcement
+     * If you need additional target for X then use CostAdjuster + EarlyTargetCost (example: Bargaining Table)
+     */
+    void setVariableCostsValue(int xValue);
 
     /**
      * Gets a map of the cost tags (set while casting/activating) of this ability, can be null if no tags have been set yet.
@@ -356,7 +367,7 @@ public interface Ability extends Controllable, Serializable {
      * - for dies triggers - override and use TriggeredAbilityImpl.isInUseableZoneDiesTrigger inside + set setLeavesTheBattlefieldTrigger(true)
      *
      * @param sourceObject can be null for static continues effects checking like rules modification (example: Yixlid Jailer)
-     * @param event can be null for state base effects checking like "when you control seven or more" (example: Endrek Sahr, Master Breeder)
+     * @param event        can be null for state base effects checking like "when you control seven or more" (example: Endrek Sahr, Master Breeder)
      */
     boolean isInUseableZone(Game game, MageObject sourceObject, GameEvent event);
 
@@ -533,11 +544,25 @@ public interface Ability extends Controllable, Serializable {
 
     void adjustTargets(Game game);
 
+    /**
+     * Dynamic X and cost modification, see CostAdjuster for more details on usage
+     */
     Ability setCostAdjuster(CostAdjuster costAdjuster);
 
-    CostAdjuster getCostAdjuster();
+    /**
+     * Prepare {X} settings for announce
+     */
+    void adjustX(Game game);
 
-    void adjustCosts(Game game);
+    /**
+     * Prepare costs (generate due game state or announce)
+     */
+    void adjustCostsPrepare(Game game);
+
+    /**
+     * Apply additional cost modifications logic/effects
+     */
+    void adjustCostsModify(Game game, CostModificationType costModificationType);
 
     List<Hint> getHints();
 

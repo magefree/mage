@@ -19,10 +19,7 @@ import mage.abilities.hint.ValueHint;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.SubType;
-import mage.constants.SuperType;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -116,7 +113,7 @@ enum BaruWurmspeakerAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         int value = BaruWurmspeakerValue.instance.calculate(game, ability, null);
         if (value > 0) {
             CardUtil.reduceCost(ability, value);

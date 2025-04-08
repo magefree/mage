@@ -72,7 +72,7 @@ public abstract class ManaCostImpl extends CostImpl implements ManaCost {
     }
 
     @Override
-    public ManaOptions getOptions() {
+    public final ManaOptions getOptions() {
         return getOptions(true);
     }
 
