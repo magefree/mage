@@ -1,11 +1,8 @@
 
 package mage.cards.a;
 
-import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.ModeChoiceSourceCondition;
 import mage.abilities.effects.common.ChooseModeEffect;
 import mage.abilities.effects.common.PermanentsEnterBattlefieldTappedEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
@@ -14,31 +11,44 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.ModeChoice;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
+import java.util.UUID;
+
 /**
- *
  * @author Eirkei
  */
 public final class AshlingsPrerogative extends CardImpl {
 
+    private static final FilterPermanent filterMatch
+            = new FilterCreaturePermanent("each creature with mana value of the chosen quality");
+    private static final FilterPermanent filterNotMatch
+            = new FilterCreaturePermanent("each creature without mana value of the chosen quality");
+
+    static {
+        filterMatch.add(AshlingsPrerogativePredicate.WITH);
+        filterNotMatch.add(AshlingsPrerogativePredicate.WITHOUT);
+    }
+
     public AshlingsPrerogative(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.ENCHANTMENT},"{1}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
 
         // As Ashling's Prerogative enters the battlefield, choose odd or even.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Odd or even?", "Odd", "Even"), null, "As {this} enters, choose odd or even. <i>(Zero is even.)</i>", ""));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseModeEffect(ModeChoice.ODD, ModeChoice.EVEN)));
 
         // Each creature with converted mana cost of the chosen value has haste.
-        this.addAbility(new SimpleStaticAbility(new AshlingsPrerogativeCorrectOddityEffect()));
+        this.addAbility(new SimpleStaticAbility(new GainAbilityAllEffect(
+                HasteAbility.getInstance(), Duration.WhileOnBattlefield, filterMatch
+        )));
 
         // Each creature without converted mana cost of the chosen value enters the battlefield tapped.
-        this.addAbility(new SimpleStaticAbility(new AshlingsPrerogativeIncorrectOddityEffect()));
-
+        this.addAbility(new SimpleStaticAbility(new PermanentsEnterBattlefieldTappedEffect(filterNotMatch)));
     }
 
     private AshlingsPrerogative(final AshlingsPrerogative card) {
@@ -51,67 +61,23 @@ public final class AshlingsPrerogative extends CardImpl {
     }
 }
 
-class AshlingsPrerogativeIncorrectOddityEffect extends PermanentsEnterBattlefieldTappedEffect {
+enum AshlingsPrerogativePredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    WITH(true),
+    WITHOUT(false);
+    private final boolean match;
 
-    private static final FilterCreaturePermanent creaturefilter = new FilterCreaturePermanent("Each creature without mana value of the chosen quality");
-    private static final ModeChoiceSourceCondition oddCondition = new ModeChoiceSourceCondition("Odd");
-
-    public AshlingsPrerogativeIncorrectOddityEffect() {
-        super(creaturefilter);
-        staticText = "Each creature without mana value of the chosen quality enters the battlefield tapped.";
-    }
-    
-    private AshlingsPrerogativeIncorrectOddityEffect(final AshlingsPrerogativeIncorrectOddityEffect effect) {
-        super(effect);   
+    AshlingsPrerogativePredicate(boolean match) {
+        this.match = match;
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        int incorrectModResult;
-
-        if (oddCondition.apply(game, source)) {
-            incorrectModResult = 0;
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        if (ModeChoice.ODD.checkMode(game, input.getSource())) {
+            return (input.getObject().getManaValue() % 2 == 1) == match;
+        } else if (ModeChoice.EVEN.checkMode(game, input.getSource())) {
+            return (input.getObject().getManaValue() % 2 == 0) == match;
         } else {
-            incorrectModResult = 1;
+            return false;
         }
-
-        Permanent permanent = ((EntersTheBattlefieldEvent) event).getTarget();
-
-        return permanent != null && creaturefilter.match(permanent, game) && permanent.getManaValue() % 2 == incorrectModResult;
-    }
-    
-    @Override
-    public AshlingsPrerogativeIncorrectOddityEffect copy() {
-        return new AshlingsPrerogativeIncorrectOddityEffect(this);
-    }
-}
-
-class AshlingsPrerogativeCorrectOddityEffect extends GainAbilityAllEffect {
-
-    private static final FilterCreaturePermanent creaturefilter = new FilterCreaturePermanent("Each creature with mana value of the chosen quality");
-    private static final ModeChoiceSourceCondition oddCondition = new ModeChoiceSourceCondition("Odd");
-
-    public AshlingsPrerogativeCorrectOddityEffect() {
-        super(HasteAbility.getInstance(), Duration.WhileOnBattlefield, creaturefilter);
-        staticText = "Each creature with mana value of the chosen quality has haste.";
-    }
-    private AshlingsPrerogativeCorrectOddityEffect(final AshlingsPrerogativeCorrectOddityEffect effect) {
-        super(effect);   
-    }
-
-    @Override
-    protected boolean selectedByRuntimeData(Permanent permanent, Ability source, Game game) {
-        int correctModResult;
-        if (oddCondition.apply(game, source)) {
-            correctModResult = 1;
-        } else {
-            correctModResult = 0;
-        }
-        return permanent != null && creaturefilter.match(permanent, game) && permanent.getManaValue() % 2 == correctModResult;
-    }
-    
-    @Override
-    public AshlingsPrerogativeCorrectOddityEffect copy() {
-        return new AshlingsPrerogativeCorrectOddityEffect(this);
     }
 }

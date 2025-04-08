@@ -1,57 +1,44 @@
 package mage.cards.r;
 
-import java.util.UUID;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.BecomesTappedTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.common.ModeChoiceSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.ChooseModeEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ModeChoice;
 import mage.constants.SubType;
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.ObjectSourcePlayer;
+import mage.filter.predicate.ObjectSourcePlayerPredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
- *
  * @author fubs
  */
 public final class RootsOfLife extends CardImpl {
 
-    private static final String ruleTrigger1 = "&bull Island &mdash; Whenever an Island an opponent controls becomes tapped, you gain 1 life";
-    private static final String ruleTrigger2 = "&bull Swamp &mdash; Whenever a Swamp an opponent controls becomes tapped, you gain 1 life";
-
-    private static final FilterPermanent islandFilter = new FilterPermanent("an Island an opponent controls");
-    private static final FilterPermanent swampFilter = new FilterPermanent("a Swamp an opponent controls");
+    private static final FilterPermanent filter = new FilterLandPermanent("a land of the chosen type an opponent controls");
 
     static {
-        islandFilter.add(SubType.ISLAND.getPredicate());
-        islandFilter.add(TargetController.OPPONENT.getControllerPredicate());
-        swampFilter.add(SubType.SWAMP.getPredicate());
-        swampFilter.add(TargetController.OPPONENT.getControllerPredicate());
+        filter.add(TargetController.OPPONENT.getControllerPredicate());
+        filter.add(RootsOfLifePredicate.instance);
     }
 
     public RootsOfLife(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}{G}");
 
         // As Roots of Life enters the battlefield, choose Island or Swamp.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Island or Swamp?", "Island", "Swamp"), null,
-                "As {this} enters, choose Island or Swamp.", ""));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseModeEffect(ModeChoice.ISLAND, ModeChoice.SWAMP)));
 
         // Whenever a land of the chosen type an opponent controls becomes tapped, you gain 1 life.
-        // * Island chosen
-        this.addAbility(new ConditionalTriggeredAbility(
-                new BecomesTappedTriggeredAbility(new GainLifeEffect(1), false, islandFilter),
-                new ModeChoiceSourceCondition("Island"),
-                ruleTrigger1));
-
-        // * Swamp chosen
-        this.addAbility(new ConditionalTriggeredAbility(
-                new BecomesTappedTriggeredAbility(new GainLifeEffect(1), false, swampFilter),
-                new ModeChoiceSourceCondition("Swamp"),
-                ruleTrigger2));
+        this.addAbility(new BecomesTappedTriggeredAbility(new GainLifeEffect(1), false, filter));
     }
 
     private RootsOfLife(final RootsOfLife card) {
@@ -61,5 +48,20 @@ public final class RootsOfLife extends CardImpl {
     @Override
     public RootsOfLife copy() {
         return new RootsOfLife(this);
+    }
+}
+
+enum RootsOfLifePredicate implements ObjectSourcePlayerPredicate<Permanent> {
+    instance;
+
+    @Override
+    public boolean apply(ObjectSourcePlayer<Permanent> input, Game game) {
+        if (ModeChoice.ISLAND.checkMode(game, input.getSource())) {
+            return input.getObject().hasSubtype(SubType.ISLAND, game);
+        } else if (ModeChoice.SWAMP.checkMode(game, input.getSource())) {
+            return input.getObject().hasSubtype(SubType.SWAMP, game);
+        } else {
+            return false;
+        }
     }
 }
