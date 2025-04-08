@@ -62,9 +62,6 @@ hand:Human:Angelic Edict:3
 battlefield:Computer:Grizzly Bears:2
 battlefield:Human:Grizzly Bears:2
 
-// special command, see SystemUtil for more special commands list
-[@activate opponent ability]
-
 [diff set codes example]
 battlefield:Human:XLN-Island:1
 battlefield:Human:UST-Island:1
