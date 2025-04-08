@@ -11,9 +11,9 @@ import java.io.Serializable;
  * <p>
  * Possible use cases:
  * - define {X} costs like X cards to discard (mana and non-mana values);
- * - define {X} limits before announce (to help in UX and AI logic)
- * - define any dynamic costs
- * - use as simple cost increase/reduce effect
+ * - define {X} limits before announce (to help in UX and AI logic);
+ * - define any dynamic costs;
+ * - use as simple cost increase/reduce effect;
  * <p>
  * Calls order by game engine:
  * - ... early cost target selection for EarlyTargetCost ...
