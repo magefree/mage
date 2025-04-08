@@ -34,7 +34,7 @@ public class MockCard extends CardImpl implements MockableCard {
     protected List<String> manaCostLeftStr;
     protected List<String> manaCostRightStr;
     protected List<String> manaCostStr;
-    protected String spellOptionName;
+    protected String spellOptionName; // adventure/omen spell name
     protected boolean isModalDoubleFacedCard;
     protected int manaValue;
 

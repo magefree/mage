@@ -169,7 +169,7 @@ public class ModernCardRenderer extends CardRenderer {
     // Processed mana cost string
     protected String manaCostString;
 
-    // Is an adventure
+    // Is an adventure or omen
     protected boolean isCardWithSpellOption = false;
 
     public ModernCardRenderer(CardView card) {

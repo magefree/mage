@@ -473,6 +473,10 @@ public class CardInfo {
         return cardWithSpellOption;
     }
 
+    /**
+     * used for spell card portion of adventure/omen cards
+     * @return name of the spell
+     */
     public String getSpellOptionCardName() {
         return spellOptionCardName;
     }
