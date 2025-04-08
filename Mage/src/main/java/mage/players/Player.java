@@ -743,10 +743,14 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean shuffleCardsToLibrary(Card card, Game game, Ability source);
 
-    // set the value for X mana spells and abilities
+    /**
+     * Set the value for X mana spells and abilities
+     */
     int announceXMana(int min, int max, String message, Game game, Ability ability);
 
-    // set the value for non mana X costs
+    /**
+     * Set the value for non mana X costs
+     */
     int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost);
 
     // TODO: rework to use pair's list of effect + ability instead string's map

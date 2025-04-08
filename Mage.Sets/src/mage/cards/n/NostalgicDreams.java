@@ -22,8 +22,8 @@ public final class NostalgicDreams extends CardImpl {
     public NostalgicDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{G}{G}");
 
-        // As an additional cost to cast Nostalgic Dreams, discard X cards.
-        this.getSpellAbility().addCost(new DiscardXTargetCost(new FilterCard("cards"), true));
+        // As an additional cost to cast this spell, discard X cards.
+        this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS, true));
 
         // Return X target cards from your graveyard to your hand.
         Effect effect = new ReturnFromGraveyardToHandTargetEffect();

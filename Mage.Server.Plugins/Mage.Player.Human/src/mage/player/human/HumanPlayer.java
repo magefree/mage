@@ -1709,6 +1709,8 @@ public class HumanPlayer extends PlayerImpl {
             if (response.getInteger() != null) {
                 break;
             }
+
+            // TODO: add response verify here
         }
 
         if (response.getInteger() != null) {

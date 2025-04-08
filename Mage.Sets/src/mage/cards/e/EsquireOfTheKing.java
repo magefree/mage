@@ -64,7 +64,7 @@ enum EsquireOfTheKingAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         if (game.getBattlefield().contains(StaticFilters.FILTER_CONTROLLED_CREATURE_LEGENDARY, ability, game, 1)) {
             CardUtil.reduceCost(ability, 2);
         }

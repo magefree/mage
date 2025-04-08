@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class StingerbackTerror extends CardImpl {
 
-    private static final DynamicValue xValue = new SignInversionDynamicValue(CardsInControllerHandCount.instance);
+    private static final DynamicValue xValue = new SignInversionDynamicValue(CardsInControllerHandCount.ANY);
 
     public StingerbackTerror(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");

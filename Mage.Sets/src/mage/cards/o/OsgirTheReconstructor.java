@@ -33,7 +33,6 @@ import mage.util.CardUtil;
 import java.util.UUID;
 
 /**
- *
  * @author Arketec
  */
 public final class OsgirTheReconstructor extends CardImpl {
@@ -81,15 +80,15 @@ enum OsgirTheReconstructorCostAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void prepareCost(Ability ability, Game game) {
         int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller == null) {
             return;
         }
-        FilterCard filter = new FilterArtifactCard("an artifact card with mana value "+xValue+" from your graveyard");
+        FilterCard filter = new FilterArtifactCard("an artifact card with mana value " + xValue + " from your graveyard");
         filter.add(new ManaValuePredicate(ComparisonType.EQUAL_TO, xValue));
-        for (Cost cost: ability.getCosts()) {
+        for (Cost cost : ability.getCosts()) {
             if (cost instanceof ExileFromGraveCost) {
                 cost.getTargets().set(0, new TargetCardInYourGraveyard(filter));
             }
@@ -104,7 +103,7 @@ class OsgirTheReconstructorCreateArtifactTokensEffect extends OneShotEffect {
         this.staticText = "Create two tokens that are copies of the exiled card.";
     }
 
-    private OsgirTheReconstructorCreateArtifactTokensEffect(final OsgirTheReconstructorCreateArtifactTokensEffect effect)  {
+    private OsgirTheReconstructorCreateArtifactTokensEffect(final OsgirTheReconstructorCreateArtifactTokensEffect effect) {
         super(effect);
     }
 
@@ -127,11 +126,11 @@ class OsgirTheReconstructorCreateArtifactTokensEffect extends OneShotEffect {
         effect.setTargetPointer(new FixedTarget(card.getId(), game.getState().getZoneChangeCounter(card.getId())));
         effect.apply(game, source);
 
-        return  true;
+        return true;
     }
 
     @Override
-    public OsgirTheReconstructorCreateArtifactTokensEffect  copy() {
+    public OsgirTheReconstructorCreateArtifactTokensEffect copy() {
         return new OsgirTheReconstructorCreateArtifactTokensEffect(this);
     }
 }

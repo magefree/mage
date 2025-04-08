@@ -1079,6 +1079,53 @@ public final class CardUtil {
                 .collect(Collectors.toSet());
     }
 
+    public static Set<UUID> getAllPossibleTargets(Cost cost, Game game, Ability source) {
+        return cost.getTargets()
+                .stream()
+                .map(t -> t.possibleTargets(source.getControllerId(), source, game))
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Distribute values between min and max and make sure that the values will be evenly distributed
+     * Use it to limit possible values list like mana options
+     */
+    public static List<Integer> distributeValues(int count, int min, int max) {
+        List<Integer> res = new ArrayList<>();
+        if (count <= 0 || min > max) {
+            return res;
+        }
+
+        if (min == max) {
+            res.add(min);
+            return res;
+        }
+
+        int range = max - min + 1;
+
+        // low possible amount
+        if (range <= count) {
+            for (int i = 0; i < range; i++) {
+                res.add(min + i);
+            }
+            return res;
+        }
+
+        // big possible amount, so skip some values
+        double step = (double) (max - min) / (count - 1);
+        for (int i = 0; i < count; i++) {
+            res.add(min + (int) Math.round(i * step));
+        }
+        // make sure first and last elements are good
+        res.set(0, min);
+        if (res.size() > 1) {
+            res.set(res.size() - 1, max);
+        }
+
+        return res;
+    }
+
     /**
      * For finding the spell or ability on the stack for "becomes the target" triggers.
      *
@@ -1906,6 +1953,10 @@ public final class CardUtil {
             return (T) value;
         }
         return defaultValue;
+    }
+
+    public static int getSourceCostsTagX(Game game, Ability source, int defaultValue) {
+        return getSourceCostsTag(game, source, "X", defaultValue);
     }
 
     public static String addCostVerb(String text) {

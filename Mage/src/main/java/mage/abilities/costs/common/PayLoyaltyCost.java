@@ -35,10 +35,10 @@ public class PayLoyaltyCost extends CostImpl {
 
         int loyaltyCost = amount;
 
-        // apply cost modification
+        // apply dynamic costs and cost modification
         if (ability instanceof LoyaltyAbility) {
             LoyaltyAbility copiedAbility = ((LoyaltyAbility) ability).copy();
-            copiedAbility.adjustCosts(game);
+            copiedAbility.adjustX(game);
             game.getContinuousEffects().costModification(copiedAbility, game);
             loyaltyCost = 0;
             for (Cost cost : copiedAbility.getCosts()) {

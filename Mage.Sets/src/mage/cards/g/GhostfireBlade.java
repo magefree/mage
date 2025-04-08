@@ -55,9 +55,9 @@ enum GhostfireBladeAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        // checking state
+    public void reduceCost(Ability ability, Game game) {
         if (game.inCheckPlayableState()) {
+            // possible
             if (CardUtil
                     .getAllPossibleTargets(ability, game)
                     .stream()
@@ -67,6 +67,7 @@ enum GhostfireBladeAdjuster implements CostAdjuster {
                 return;
             }
         } else {
+            // real
             Permanent permanent = game.getPermanent(ability.getFirstTarget());
             if (permanent == null || !permanent.getColor(game).isColorless()) {
                 return;

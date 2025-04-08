@@ -65,7 +65,7 @@ enum SanctumOfTranquilLightAdjuster implements CostAdjuster {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller != null) {
             CardUtil.reduceCost(ability, count.calculate(game, ability, null));

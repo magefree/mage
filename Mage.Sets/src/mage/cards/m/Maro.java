@@ -26,7 +26,7 @@ public final class Maro extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Maro's power and toughness are each equal to the number of cards in your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CardsInControllerHandCount.instance)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(CardsInControllerHandCount.ANY)));
     }
 
     private Maro(final Maro card) {

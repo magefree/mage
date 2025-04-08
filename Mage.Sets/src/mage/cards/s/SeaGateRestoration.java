@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public final class SeaGateRestoration extends ModalDoubleFacedCard {
 
-    private static final DynamicValue xValue = new IntPlusDynamicValue(1, CardsInControllerHandCount.instance);
+    private static final DynamicValue xValue = new IntPlusDynamicValue(1, CardsInControllerHandCount.ANY);
 
     public SeaGateRestoration(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo,

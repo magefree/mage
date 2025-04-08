@@ -20,7 +20,7 @@ public final class UnionOfTheThirdPath extends CardImpl {
 
         // Draw a card, then you gain life equal to the number of cards in your hand.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        this.getSpellAbility().addEffect(new GainLifeEffect(CardsInControllerHandCount.instance).concatBy(", then"));
+        this.getSpellAbility().addEffect(new GainLifeEffect(CardsInControllerHandCount.ANY).concatBy(", then"));
     }
 
     private UnionOfTheThirdPath(final UnionOfTheThirdPath card) {

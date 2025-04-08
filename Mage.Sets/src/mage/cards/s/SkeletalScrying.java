@@ -61,7 +61,7 @@ enum SkeletalScryingAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void prepareCost(Ability ability, Game game) {
         int xValue = CardUtil.getSourceCostsTag(game, ability, "X", 0);
         if (xValue > 0) {
             ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(xValue, xValue, StaticFilters.FILTER_CARDS_FROM_YOUR_GRAVEYARD)));

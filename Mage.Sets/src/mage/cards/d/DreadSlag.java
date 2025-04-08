@@ -15,7 +15,6 @@ import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Duration;
-import mage.constants.Zone;
 
 /**
  *
@@ -32,7 +31,7 @@ public final class DreadSlag extends CardImpl {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Dread Slag gets -4/-4 for each card in your hand.
-        DynamicValue amount = new MultipliedValue(CardsInControllerHandCount.instance, -4);
+        DynamicValue amount = new MultipliedValue(CardsInControllerHandCount.ANY, -4);
         Effect effect = new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield);
         effect.setText("{this} gets -4/-4 for each card in your hand");
         this.addAbility(new SimpleStaticAbility(effect));

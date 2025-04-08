@@ -23,7 +23,7 @@ public final class MasterTheWay extends CardImpl {
 
         // Draw a card. Master the Way deals damage to any target equal to the number of cards in your hand.
         this.getSpellAbility().addEffect(new DrawCardSourceControllerEffect(1));
-        Effect effect = new DamageTargetEffect(CardsInControllerHandCount.instance);
+        Effect effect = new DamageTargetEffect(CardsInControllerHandCount.ANY);
         effect.setText("{this} deals damage to any target equal to the number of cards in your hand");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetAnyTarget());

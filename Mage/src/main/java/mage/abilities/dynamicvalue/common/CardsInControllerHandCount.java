@@ -3,11 +3,26 @@ package mage.abilities.dynamicvalue.common;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.Effect;
+import mage.abilities.hint.Hint;
+import mage.abilities.hint.ValueHint;
+import mage.filter.FilterCard;
+import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.players.Player;
 
 public enum CardsInControllerHandCount implements DynamicValue {
-    instance;
+
+    ANY(StaticFilters.FILTER_CARD_CARDS),
+    CREATURES(StaticFilters.FILTER_CARD_CREATURES),
+    LANDS(StaticFilters.FILTER_CARD_LANDS);
+
+    FilterCard filter;
+    ValueHint hint;
+
+    CardsInControllerHandCount(FilterCard filter) {
+        this.filter = filter;
+        this.hint = new ValueHint(filter.getMessage() + " in your hand", this);
+    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
@@ -22,16 +37,20 @@ public enum CardsInControllerHandCount implements DynamicValue {
 
     @Override
     public CardsInControllerHandCount copy() {
-        return CardsInControllerHandCount.instance;
+        return this;
     }
 
     @Override
     public String getMessage() {
-        return "cards in your hand";
+        return this.filter.getMessage() + " in your hand";
     }
 
     @Override
     public String toString() {
         return "1";
+    }
+
+    public Hint getHint() {
+        return this.hint;
     }
 }

@@ -4,6 +4,9 @@ import mage.MageObject;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.ContinuousEffectsList;
+import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -29,6 +32,7 @@ import mage.players.Player;
 import mage.server.game.GameSessionPlayer;
 import mage.util.CardUtil;
 import mage.util.ThreadUtils;
+import mage.utils.StreamUtils;
 import mage.utils.SystemUtil;
 import mage.view.GameView;
 import org.junit.Assert;
@@ -320,6 +324,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         }
 
         assertAllCommandsUsed();
+
+        //assertNoDuplicatedEffects();
     }
 
     protected TestPlayer createNewPlayer(String playerName, RangeOfInfluence rangeOfInfluence) {
@@ -1699,6 +1705,57 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             assertActionsMustBeEmpty(testPlayer);
             assertChoicesCount(testPlayer, 0);
             assertTargetsCount(testPlayer, 0);
+        }
+    }
+
+    /**
+     * Make sure game state do not contain any duplicated effects, e.g. all effect's durations are fine
+     */
+    private void assertNoDuplicatedEffects() {
+        // to find bugs like https://github.com/magefree/mage/issues/12932
+
+        // TODO: simulate full end turn to end all effects and make it default?
+
+        // some effects can generate duplicated effects by design
+        // example: Tamiyo, Inquisitive Student + x2 attack in TamiyoInquisitiveStudentTest.test_PlusTwo
+        // +2: Until your next turn, whenever a creature attacks you or a planeswalker you control, it gets -1/-0 until end of turn.
+        // TODO: add targets and affected objects check to unique key?
+
+        // one effect can be used multiple times by different sources
+        // so use group key like: effect + ability + source
+        Map<String, List<ContinuousEffect>> groups = new HashMap<>();
+        for (ContinuousEffectsList layer : currentGame.getState().getContinuousEffects().allEffectsLists) {
+            for (Object effectObj : layer) {
+                ContinuousEffect effect = (ContinuousEffect) effectObj;
+                for (Object abilityObj : layer.getAbility(effect.getId())) {
+                    Ability ability = (Ability) abilityObj;
+                    MageObject sourceObject = currentGame.getObject(ability.getSourceId());
+                    String groupKey = "effectClass_" + effect.getClass().getCanonicalName()
+                            + "_abilityClass_" + ability.getClass().getCanonicalName()
+                            + "_sourceName_" + (sourceObject == null ? "null" : sourceObject.getIdName());
+                    List<ContinuousEffect> groupList = groups.getOrDefault(groupKey, null);
+                    if (groupList == null) {
+                        groupList = new ArrayList<>();
+                        groups.put(groupKey, groupList);
+                    }
+                    groupList.add(effect);
+                }
+            }
+        }
+
+        // analyse
+        List<String> duplicatedGroups = groups.keySet().stream()
+                .filter(groupKey -> groups.get(groupKey).size() > 1)
+                .collect(Collectors.toList());
+        if (duplicatedGroups.size() > 0) {
+            System.out.println("Duplicated effect groups: " + duplicatedGroups.size());
+            duplicatedGroups.forEach(groupKey -> {
+                System.out.println("group " + groupKey + ": ");
+                groups.get(groupKey).forEach(e -> {
+                    System.out.println(" - " + e.getId() + " - " + e.getDuration() + " - " + e);
+                });
+            });
+            Assert.fail("Found duplicated effects: " + duplicatedGroups.size());
         }
     }
 

@@ -6,20 +6,11 @@ import mage.players.Player;
 
 /**
  * @author Grath
- * Costs which extend this class need to have targets chosen, and those targets must be chosen during 601.2b step.
+ * <p>
+ * Support 601.2b rules for ealry target choice before X announce and other actions
  */
-public abstract class EarlyTargetCost extends CostImpl {
+public interface EarlyTargetCost {
 
-    protected EarlyTargetCost() {
-        super();
-    }
+    void chooseTarget(Game game, Ability source, Player controller);
 
-    protected EarlyTargetCost(final EarlyTargetCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public abstract EarlyTargetCost copy();
-
-    public abstract void chooseTarget(Game game, Ability source, Player controller);
 }

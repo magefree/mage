@@ -2,11 +2,11 @@ package mage.cards.f;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.CostAdjuster;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.CostModificationType;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -24,8 +24,8 @@ public final class Fireball extends CardImpl {
     public Fireball(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{X}{R}");
 
-        // Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.
-        // Fireball costs 1 more to cast for each target beyond the first.
+        // This spell costs {1} more to cast for each target beyond the first.
+        // Fireball deals X damage divided evenly, rounded down, among any number of targets.
         this.getSpellAbility().addTarget(new FireballTargetCreatureOrPlayer(0, Integer.MAX_VALUE));
         this.getSpellAbility().addEffect(new FireballEffect());
         this.getSpellAbility().setCostAdjuster(FireballAdjuster.instance);
@@ -45,10 +45,10 @@ enum FireballAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void increaseCost(Ability ability, Game game) {
         int numTargets = ability.getTargets().isEmpty() ? 0 : ability.getTargets().get(0).getTargets().size();
         if (numTargets > 1) {
-            ability.addManaCostsToPay(new GenericManaCost(numTargets - 1));
+            CardUtil.increaseCost(ability, numTargets - 1);
         }
     }
 }

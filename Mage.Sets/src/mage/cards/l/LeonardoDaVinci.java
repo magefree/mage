@@ -43,7 +43,7 @@ public final class LeonardoDaVinci extends CardImpl {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        DynamicValue xValue = CardsInControllerHandCount.instance;
+        DynamicValue xValue = CardsInControllerHandCount.ANY;
         // {3}{U}{U}: Until end of turn, Thopters you control have base power and toughness X/X, where X is the number of cards in your hand.
         this.addAbility(new SimpleActivatedAbility(new BoostControlledEffect(xValue, xValue, Duration.EndOfTurn, filter, false).setText(
                 "Until end of turn, Thopters you control have base power and toughness X/X, where X is the number of cards in your hand."
