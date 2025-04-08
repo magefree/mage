@@ -468,6 +468,36 @@ public class AdjusterCostTest extends CardTestPlayerBaseWithAIHelps {
     }
 
     @Test
+    public void test_prepareX_AladdinsLamp() {
+        skipInitShuffling();
+
+        // {X}, {T}: The next time you would draw a card this turn, instead look at the top X cards of your library,
+        // put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.
+        addCard(Zone.BATTLEFIELD, playerA, "Aladdin's Lamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        // {T}: Draw a card.
+        addCard(Zone.BATTLEFIELD, playerA, "Archivist");
+        addCard(Zone.LIBRARY, playerA, "Island", 1);
+        addCard(Zone.LIBRARY, playerA, "Grizzly Bears", 1);
+        addCard(Zone.LIBRARY, playerA, "Island", 3);
+
+        // prepare effect
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{X}, {T}: The next time");
+        setChoice(playerA, "X=5");
+        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
+
+        // improved draw
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw");
+        setChoice(playerA, "Grizzly Bears"); // keep on top and draw
+
+        setStrictChooseMode(true);
+        setStopAt(1, PhaseStep.END_TURN);
+        execute();
+
+        assertHandCount(playerA, "Grizzly Bears", 1);
+    }
+
+    @Test
     public void test_modifyCost_Fireball() {
         // This spell costs {1} more to cast for each target beyond the first.
         // Fireball deals X damage divided evenly, rounded down, among any number of targets.

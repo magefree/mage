@@ -3,6 +3,7 @@ package mage.cards.a;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.CostAdjuster;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -35,8 +36,8 @@ public final class AladdinsLamp extends CardImpl {
         // {X}, {T}: The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card. X can't be 0.
         Ability ability = new SimpleActivatedAbility(new AladdinsLampEffect(), new ManaCostsImpl<>("{X}"));
         ability.addCost(new TapSourceCost());
-        ability.setVariableCostsMinMax(1, Integer.MAX_VALUE);
-        // TODO: add costAdjuster for min/max values due library size
+        ability.setCostAdjuster(AladdinsLampCostAdjuster.instance);
+
         this.addAbility(ability);
     }
 
@@ -94,5 +95,19 @@ class AladdinsLampEffect extends ReplacementEffectImpl {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         return source.isControlledBy(event.getPlayerId());
+    }
+}
+
+enum AladdinsLampCostAdjuster implements CostAdjuster {
+    instance;
+
+    @Override
+    public void prepareX(Ability ability, Game game) {
+        Player controller = game.getPlayer(ability.getControllerId());
+        if (controller == null) {
+            return;
+        }
+
+        ability.setVariableCostsMinMax(1, Math.max(1, controller.getLibrary().size()));
     }
 }
