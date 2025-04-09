@@ -166,6 +166,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Izzet Signet", 320, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
         cards.add(new SetCardInfo("Jaddi Offshoot", 260, Rarity.UNCOMMON, mage.cards.j.JaddiOffshoot.class));
         cards.add(new SetCardInfo("Jarad, Golgari Lich Lord", 293, Rarity.MYTHIC, mage.cards.j.JaradGolgariLichLord.class));
+        cards.add(new SetCardInfo("Jaws of Defeat", 27, Rarity.RARE, mage.cards.j.JawsOfDefeat.class));
         cards.add(new SetCardInfo("Junji, the Midnight Sky", 183, Rarity.MYTHIC, mage.cards.j.JunjiTheMidnightSky.class));
         cards.add(new SetCardInfo("Karplusan Forest", 374, Rarity.RARE, mage.cards.k.KarplusanForest.class));
         cards.add(new SetCardInfo("Kaya, Geist Hunter", 294, Rarity.MYTHIC, mage.cards.k.KayaGeistHunter.class));
