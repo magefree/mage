@@ -238,6 +238,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Sunset Strikemaster", 126, Rarity.UNCOMMON, mage.cards.s.SunsetStrikemaster.class));
         cards.add(new SetCardInfo("Swamp", 281, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 268, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
+        cards.add(new SetCardInfo("Synchronized Charge", 162, Rarity.UNCOMMON, mage.cards.s.SynchronizedCharge.class));
         cards.add(new SetCardInfo("Teeming Dragonstorm", 30, Rarity.UNCOMMON, mage.cards.t.TeemingDragonstorm.class));
         cards.add(new SetCardInfo("Tempest Hawk", 31, Rarity.COMMON, mage.cards.t.TempestHawk.class));
         cards.add(new SetCardInfo("Temur Battlecrier", 228, Rarity.RARE, mage.cards.t.TemurBattlecrier.class));
