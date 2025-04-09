@@ -7,8 +7,12 @@ import mage.abilities.hint.Hint;
 import mage.abilities.hint.ValueHint;
 import mage.filter.FilterCard;
 import mage.filter.StaticFilters;
+import mage.game.Controllable;
 import mage.game.Game;
 import mage.players.Player;
+
+import java.util.Optional;
+import java.util.Set;
 
 public enum CardsInControllerHandCount implements DynamicValue {
 
@@ -16,8 +20,8 @@ public enum CardsInControllerHandCount implements DynamicValue {
     CREATURES(StaticFilters.FILTER_CARD_CREATURES),
     LANDS(StaticFilters.FILTER_CARD_LANDS);
 
-    FilterCard filter;
-    ValueHint hint;
+    private final FilterCard filter;
+    private final ValueHint hint;
 
     CardsInControllerHandCount(FilterCard filter) {
         this.filter = filter;
@@ -26,13 +30,13 @@ public enum CardsInControllerHandCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility, Effect effect) {
-        if (sourceAbility != null) {
-            Player controller = game.getPlayer(sourceAbility.getControllerId());
-            if (controller != null) {
-                return controller.getHand().size();
-            }
-        }
-        return 0;
+        return Optional
+                .ofNullable(sourceAbility)
+                .map(Controllable::getControllerId)
+                .map(game::getPlayer)
+                .map(Player::getHand)
+                .map(Set::size)
+                .orElse(0);
     }
 
     @Override

@@ -184,6 +184,7 @@ public enum CounterType {
     PREY("prey"),
     PUPA("pupa"),
     RAD("rad"),
+    RALLY("rally"),
     REACH("reach"),
     REJECTION("rejection"),
     REPAIR("repair"),
