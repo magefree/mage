@@ -21,7 +21,7 @@ public class DragonfireBladeTest extends CardTestPlayerBase {
     public void colorsTest() {
         setStrictChooseMode(true);
 
-        addCard(Zone.BATTLEFIELD, playerA, blade, 1);
+        addCard(Zone.BATTLEFIELD, playerA, blade);
         addCard(Zone.BATTLEFIELD, playerA, "Forest", 4 + 3 + 2 + 1);
         addCard(Zone.BATTLEFIELD, playerA, ornithopter);
         addCard(Zone.BATTLEFIELD, playerA, turtle);

@@ -1,5 +1,6 @@
 package mage.cards.d;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -40,7 +41,7 @@ public final class DragonfireBlade extends CardImpl {
         this.addAbility(ability);
 
         // Equip {4}. This ability costs {1} less to activate for each color of the creature it targets.
-        DragonfireBladeEquipAbility equipAbility = new DragonfireBladeEquipAbility(4);
+        EquipAbility equipAbility = new EquipAbility(4);
         equipAbility.setCostAdjuster(DragonfireBladeCostAdjuster.instance);
         equipAbility.setCostReduceText("This ability costs {1} less to activate for each color of the creature it targets.");
         this.addAbility(equipAbility);
@@ -56,49 +57,27 @@ public final class DragonfireBlade extends CardImpl {
     }
 }
 
-class DragonfireBladeEquipAbility extends EquipAbility {
-
-    public DragonfireBladeEquipAbility(int cost) {
-        super(cost);
-    }
-
-    public DragonfireBladeEquipAbility(DragonfireBladeEquipAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ManaOptions getMinimumCostToActivate(UUID playerId, Game game) {
-        Player player = game.getPlayer(playerId);
-        ManaOptions manaOptions = getManaCostsToPay().getOptions(player.canPayLifeCost(this));
-        Set<Integer> colorCounts = game.getBattlefield().getAllActivePermanents(playerId)
-                .stream()
-                .filter(Permanent::isCreature)
-                .filter(permanent -> permanent.getColor(game).getColorCount() > 0)
-                .map(permanent -> permanent.getColor(game).getColorCount())
-                .collect(Collectors.toSet());
-        for (int count : colorCounts) {
-            int cost = Math.max(0, 4 - count);
-            manaOptions.add(new Mana(ManaType.GENERIC, cost));
-        }
-        return manaOptions;
-    }
-
-    @Override
-    public DragonfireBladeEquipAbility copy() {
-        return new DragonfireBladeEquipAbility(this);
-    }
-}
-
 enum DragonfireBladeCostAdjuster implements CostAdjuster {
     instance;
 
     @Override
     public void reduceCost(Ability ability, Game game) {
-        Permanent target = game.getPermanent(ability.getFirstTarget());
-        if (target == null) {
-            return;
+        int reduceCount = 0;
+        if (game.inCheckPlayableState()) {
+            reduceCount = game.getBattlefield().getAllActivePermanents(ability.getControllerId())
+                    .stream()
+                    .filter(Permanent::isCreature)
+                    .mapToInt(permanent -> permanent.getColor(game).getColorCount())
+                    .max()
+                    .orElse(reduceCount);
         }
-        int colors = target.getColor(game).getColorCount();
-        CardUtil.reduceCost(ability, colors);
+        else {
+            Permanent target = game.getPermanent(ability.getFirstTarget());
+            if (target != null) {
+                reduceCount = target.getColor(game).getColorCount();
+            }
+
+        }
+        CardUtil.reduceCost(ability, reduceCount);
     }
 }
