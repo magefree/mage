@@ -198,6 +198,8 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Rugged Highlands", 265, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Runescale Stormbrood", 221, Rarity.UNCOMMON, mage.cards.r.RunescaleStormbrood.class));
         cards.add(new SetCardInfo("Sage of the Fang", 155, Rarity.UNCOMMON, mage.cards.s.SageOfTheFang.class));
+        cards.add(new SetCardInfo("Sage of the Skies", 22, Rarity.RARE, mage.cards.s.SageOfTheSkies.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sage of the Skies", 328, Rarity.RARE, mage.cards.s.SageOfTheSkies.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sagu Pummeler", 156, Rarity.COMMON, mage.cards.s.SaguPummeler.class));
         cards.add(new SetCardInfo("Sagu Wildling", 157, Rarity.COMMON, mage.cards.s.SaguWildling.class));
         cards.add(new SetCardInfo("Salt Road Packbeast", 23, Rarity.COMMON, mage.cards.s.SaltRoadPackbeast.class));
