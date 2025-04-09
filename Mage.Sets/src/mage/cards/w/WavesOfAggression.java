@@ -3,6 +3,8 @@ package mage.cards.w;
 
 import java.util.UUID;
 
+import mage.abilities.condition.common.IsMainPhaseCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
 import mage.abilities.effects.common.UntapAllEffect;
 import mage.abilities.keyword.RetraceAbility;
@@ -25,11 +27,12 @@ public final class WavesOfAggression extends CardImpl {
     }
 
     public WavesOfAggression(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R/W}{R/W}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R/W}{R/W}");
 
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
         this.getSpellAbility().addEffect(new UntapAllEffect(filter));
-        this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect());
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new AddCombatAndMainPhaseEffect(), IsMainPhaseCondition.ANY));
         // Retrace
         this.addAbility(new RetraceAbility(this));
     }

@@ -1,12 +1,10 @@
 package mage.cards.g;
 
-import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.IsYourMainPhaseCondition;
+import mage.abilities.condition.common.IsMainPhaseCondition;
 import mage.abilities.condition.common.MorbidCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.Effect;
@@ -21,19 +19,14 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.AbilityWord;
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.CostModificationType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
-import mage.constants.Zone;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -42,15 +35,16 @@ import mage.util.CardUtil;
 public final class GrimReapersSprint extends CardImpl {
 
     public GrimReapersSprint(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.ENCHANTMENT }, "{4}{R}");
-
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");
+        
         this.subtype.add(SubType.AURA);
 
         // Morbid -- This spell costs {3} less to cast if a creature died this turn.
         this.addAbility(
                 new SimpleStaticAbility(Zone.ALL, new GrimReapersSprintCostModificationEffect())
                         .addHint(MorbidHint.instance)
-                        .setAbilityWord(AbilityWord.MORBID));
+                        .setAbilityWord(AbilityWord.MORBID)
+        );
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -58,18 +52,14 @@ public final class GrimReapersSprint extends CardImpl {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget));
 
-        // When Grim Reaper's Sprint enters the battlefield, untap each creature you
-        // control. If it's your main phase, there is an additional combat phase after
-        // this phase.
+        // When Grim Reaper's Sprint enters the battlefield, untap each creature you control. If it's your main phase, there is an additional combat phase after this phase.
         Ability triggeredAbility = new EntersBattlefieldTriggeredAbility(
                 new UntapAllControllerEffect(
                         StaticFilters.FILTER_CONTROLLED_CREATURES,
-                        "untap each creature you control"),
-                false);
-        triggeredAbility.addEffect(new ConditionalOneShotEffect(new AdditionalCombatPhaseEffect(),
-                IsYourMainPhaseCondition.instance,
-                "If it's your main phase, there is an additional combat phase after this phase."));
-
+                        "untap each creature you control"
+                ), false
+        );
+        triggeredAbility.addEffect(new ConditionalOneShotEffect(new AdditionalCombatPhaseEffect(), IsMainPhaseCondition.YOUR, "If it's your main phase, there is an additional combat phase after this phase."));
         this.addAbility(triggeredAbility);
 
         // Enchanted creature gets +2/+2 and has haste.

@@ -37,10 +37,6 @@ public class WhenYouAttackDelayedTriggeredAbility extends DelayedTriggeredAbilit
     }
 
     @Override
-    public void init(Game game) {
-    }
-
-    @Override
     public boolean checkEventType(GameEvent event, Game game) {
         return event.getType() == GameEvent.EventType.DECLARED_ATTACKERS;
     }
@@ -48,6 +44,6 @@ public class WhenYouAttackDelayedTriggeredAbility extends DelayedTriggeredAbilit
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         UUID attackerId = game.getCombat().getAttackingPlayerId();
-        return attackerId != null && attackerId == getControllerId() && game.getCombat().getAttackers().size() > 0;
+        return attackerId != null && attackerId.equals(getControllerId()) && !game.getCombat().getAttackers().isEmpty();
     }
 }

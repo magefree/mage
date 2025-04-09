@@ -7,8 +7,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.WhenYouAttackDelayedTriggeredAbility;
-import mage.abilities.condition.common.IsYourMainPhaseCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.condition.common.IsMainPhaseCondition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
@@ -29,30 +28,21 @@ import mage.filter.StaticFilters;
 public final class AllOutAssault extends CardImpl {
 
     public AllOutAssault(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.ENCHANTMENT }, "{2}{R}{W}{B}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{W}{B}");
 
         // Creatures you control get +1/+1 and have deathtouch.
         Ability anthemAbility = new SimpleStaticAbility(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield));
-        Effect effect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield,
-                StaticFilters.FILTER_PERMANENT_CREATURES);
+        Effect effect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, StaticFilters.FILTER_PERMANENT_CREATURES);
         effect.setText("and have deathtouch");
         anthemAbility.addEffect(effect);
         this.addAbility(anthemAbility);
 
-        // When this enchantment enters, if it's your main phase, there is an additional
-        // combat phase after this phase followed by an additional main phase. When you
-        // next attack this turn, untap each creature you control.
+        // When this enchantment enters, if it's your main phase, there is an additional combat phase after this phase followed by an additional main phase. When you next attack this turn, untap each creature you control.
         TriggeredAbility extraCombatAbility = new EntersBattlefieldTriggeredAbility(new AddCombatAndMainPhaseEffect());
         extraCombatAbility.addEffect(new CreateDelayedTriggeredAbilityEffect(new WhenYouAttackDelayedTriggeredAbility(
                 new UntapAllControllerEffect(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE,
-                        "Untap each creature you control"),
-                Duration.EndOfTurn,
-                true)));
-        this.addAbility(new ConditionalTriggeredAbility(
-                extraCombatAbility,
-                IsYourMainPhaseCondition.instance,
-                "When this enchantment enters, if it's your main phase, there is an additional combat phase after this phase followed by an additional main phase. When you next attack this turn, untap each creature you control."));
+                        StaticFilters.FILTER_CONTROLLED_CREATURE, "Untap each creature you control"), Duration.EndOfTurn, true)));
+        this.addAbility(extraCombatAbility.withInterveningIf(IsMainPhaseCondition.YOUR));
 
     }
 

@@ -1,28 +1,19 @@
 package mage.cards.m;
 
 import java.util.UUID;
-
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.IsYourMainPhaseCondition;
+import mage.abilities.condition.common.IsMainPhaseCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
-import mage.constants.SubType;
-import mage.constants.SuperType;
-import mage.constants.TurnPhase;
-import mage.constants.WatcherScope;
+import mage.constants.*;
 import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -37,7 +28,7 @@ import mage.watchers.common.AttackedThisTurnWatcher;
 public final class MoraugFuryOfAkoum extends CardImpl {
 
     public MoraugFuryOfAkoum(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.CREATURE }, "{4}{R}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
 
         this.supertype.add(SuperType.LEGENDARY);
         this.subtype.add(SubType.MINOTAUR);
@@ -48,15 +39,13 @@ public final class MoraugFuryOfAkoum extends CardImpl {
         // Each creature you control gets +1/+0 for each time it has attacked this turn.
         this.addAbility(new SimpleStaticAbility(new MoraugFuryOfAkoumBoostEffect()));
 
-        // Landfall — Whenever a land you control enters, if it's your main phase,
-        // there's an additional combat phase after this phase. At the beginning of that
-        // combat, untap all creatures you control.
+        // Landfall — Whenever a land you control enters, if it's your main phase, there's an additional combat phase after this phase. At the beginning of that combat, untap all creatures you control.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new LandfallAbility(new MoraugFuryOfAkoumCombatEffect()), IsYourMainPhaseCondition.instance,
+                new LandfallAbility(new MoraugFuryOfAkoumCombatEffect()), IsMainPhaseCondition.YOUR,
                 "<i>Landfall</i> &mdash; Whenever a land you control enters, " +
                         "if it's your main phase, there's an additional combat phase after this phase. " +
-                        "At the beginning of that combat, untap all creatures you control."),
-                new MoraugFuryOfAkoumWatcher());
+                        "At the beginning of that combat, untap all creatures you control."
+        ), new MoraugFuryOfAkoumWatcher());
     }
 
     private MoraugFuryOfAkoum(final MoraugFuryOfAkoum card) {
@@ -91,8 +80,7 @@ class MoraugFuryOfAkoumBoostEffect extends ContinuousEffectImpl {
         if (watcher == null) {
             return false;
         }
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE,
-                source.getControllerId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(StaticFilters.FILTER_PERMANENT_CREATURE, source.getControllerId(), game)) {
             permanent.addPower(watcher.getAttackCount(permanent, game));
         }
         return true;
@@ -142,7 +130,8 @@ class MoraugFuryOfAkoumDelayedTriggeredAbility extends DelayedTriggeredAbility {
 
     MoraugFuryOfAkoumDelayedTriggeredAbility(UUID connectedTurnMod) {
         super(new UntapAllControllerEffect(
-                StaticFilters.FILTER_PERMANENT_CREATURE), Duration.EndOfTurn, true, false);
+                StaticFilters.FILTER_PERMANENT_CREATURE
+        ), Duration.EndOfTurn, true, false);
         this.connectedTurnMod = connectedTurnMod;
     }
 
