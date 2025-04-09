@@ -125,6 +125,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fetid Heath", 362, Rarity.RARE, mage.cards.f.FetidHeath.class));
         cards.add(new SetCardInfo("Fetid Pools", 363, Rarity.RARE, mage.cards.f.FetidPools.class));
         cards.add(new SetCardInfo("Flooded Grove", 364, Rarity.RARE, mage.cards.f.FloodedGrove.class));
+        cards.add(new SetCardInfo("Floral Evoker", 46, Rarity.RARE, mage.cards.f.FloralEvoker.class));
         cards.add(new SetCardInfo("Forbidden Alchemy", 152, Rarity.COMMON, mage.cards.f.ForbiddenAlchemy.class));
         cards.add(new SetCardInfo("Foreboding Landscape", 365, Rarity.COMMON, mage.cards.f.ForebodingLandscape.class));
         cards.add(new SetCardInfo("Fortified Village", 366, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
