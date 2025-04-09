@@ -1,11 +1,11 @@
 package mage.sets;
 
-import java.util.Arrays;
-import java.util.List;
-
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author TheElk801
@@ -23,6 +23,8 @@ public final class TarkirDragonstorm extends ExpansionSet {
         super("Tarkir: Dragonstorm", "TDM", ExpansionSet.buildDate(2025, 4, 11), SetType.EXPANSION);
         this.blockName = "Tarkir: Dragonstorm"; // for sorting in GUI
         this.hasBasicLands = true;
+
+        this.enablePlayBooster(Integer.MAX_VALUE);
 
         cards.add(new SetCardInfo("Abzan Devotee", 68, Rarity.COMMON, mage.cards.a.AbzanDevotee.class));
         cards.add(new SetCardInfo("Abzan Monument", 238, Rarity.UNCOMMON, mage.cards.a.AbzanMonument.class));
