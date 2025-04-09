@@ -136,6 +136,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Glacial Fortress", 367, Rarity.RARE, mage.cards.g.GlacialFortress.class));
         cards.add(new SetCardInfo("Glorybringer", 215, Rarity.RARE, mage.cards.g.Glorybringer.class));
         cards.add(new SetCardInfo("Goblin Electromancer", 99, Rarity.COMMON, mage.cards.g.GoblinElectromancer.class));
+        cards.add(new SetCardInfo("Goldlust Triad", 34, Rarity.RARE, mage.cards.g.GoldlustTriad.class));
         cards.add(new SetCardInfo("Goldnight Commander", 117, Rarity.UNCOMMON, mage.cards.g.GoldnightCommander.class));
         cards.add(new SetCardInfo("Golgari Rot Farm", 368, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Grand Crescendo", 118, Rarity.RARE, mage.cards.g.GrandCrescendo.class));
