@@ -59,6 +59,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Boros Signet", 314, Rarity.UNCOMMON, mage.cards.b.BorosSignet.class));
         cards.add(new SetCardInfo("Bountiful Landscape", 342, Rarity.COMMON, mage.cards.b.BountifulLandscape.class));
         cards.add(new SetCardInfo("Caldera Pyremaw", 33, Rarity.RARE, mage.cards.c.CalderaPyremaw.class));
+        cards.add(new SetCardInfo("Canopy Gargantuan", 45, Rarity.RARE, mage.cards.c.CanopyGargantuan.class));
         cards.add(new SetCardInfo("Canopy Vista", 343, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Canyon Slough", 344, Rarity.RARE, mage.cards.c.CanyonSlough.class));
         cards.add(new SetCardInfo("Carven Caryatid", 250, Rarity.UNCOMMON, mage.cards.c.CarvenCaryatid.class));
