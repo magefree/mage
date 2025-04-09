@@ -105,6 +105,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Fire-Rim Form", 107, Rarity.COMMON, mage.cards.f.FireRimForm.class));
         cards.add(new SetCardInfo("Flamehold Grappler", 185, Rarity.RARE, mage.cards.f.FlameholdGrappler.class));
         cards.add(new SetCardInfo("Fleeting Effigy", 108, Rarity.UNCOMMON, mage.cards.f.FleetingEffigy.class));
+        cards.add(new SetCardInfo("Focus the Mind", 45, Rarity.COMMON, mage.cards.f.FocusTheMind.class));
         cards.add(new SetCardInfo("Forest", 285, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Formation Breaker", 143, Rarity.UNCOMMON, mage.cards.f.FormationBreaker.class));
         cards.add(new SetCardInfo("Fortress Kin-Guard", 12, Rarity.COMMON, mage.cards.f.FortressKinGuard.class));
