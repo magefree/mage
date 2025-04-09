@@ -47,6 +47,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bastion of Remembrance", 171, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
         cards.add(new SetCardInfo("Battlefield Forge", 340, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
         cards.add(new SetCardInfo("Beast Within", 249, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
+        cards.add(new SetCardInfo("Become the Avalanche", 43, Rarity.RARE, mage.cards.b.BecomeTheAvalanche.class));
         cards.add(new SetCardInfo("Beetleback Chief", 205, Rarity.UNCOMMON, mage.cards.b.BeetlebackChief.class));
         cards.add(new SetCardInfo("Behind the Scenes", 172, Rarity.UNCOMMON, mage.cards.b.BehindTheScenes.class));
         cards.add(new SetCardInfo("Betor, Ancestor's Voice", 1, Rarity.MYTHIC, mage.cards.b.BetorAncestorsVoice.class));
