@@ -16,6 +16,7 @@ import mage.constants.CardType;
 import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.CounterType;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetadjustment.TargetsCountAdjuster;
 
 import java.util.UUID;
@@ -46,6 +47,7 @@ public final class RotCurseRakshasa extends CardImpl {
                 new ManaCostsImpl<>("{X}{B}{B}")
         );
         ability.addCost(new ExileSourceFromGraveCost());
+        ability.addTarget(new TargetCreaturePermanent());
         ability.setTargetAdjuster(new TargetsCountAdjuster(GetXValue.instance));
         this.addAbility(ability.setAbilityWord(AbilityWord.RENEW));
     }
