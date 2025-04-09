@@ -99,7 +99,7 @@ class ColossalGraveReaverEffect extends OneShotEffect {
                     break;
                 default:
                     cardsToMove = new HashSet<>();
-                    TargetCard target = new TargetCard(0, 1, Zone.ALL, defaultFilter);
+                    TargetCard target = new TargetCard(1, 1, Zone.ALL, defaultFilter);
                     target.withNotTarget(true);
                     controller.choose(Outcome.PlayForFree, cardsToChooseFrom, target, source, game);
                     cardsToMove.add(cardsToChooseFrom.get(target.getFirstTarget(), game));
