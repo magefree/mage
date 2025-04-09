@@ -75,6 +75,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cinder Glade", 350, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("Clifftop Retreat", 351, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
         cards.add(new SetCardInfo("Colfenor's Urn", 315, Rarity.RARE, mage.cards.c.ColfenorsUrn.class));
+        cards.add(new SetCardInfo("Colossal Grave-Reaver", 50, Rarity.RARE, mage.cards.c.ColossalGraveReaver.class));
         cards.add(new SetCardInfo("Command Beacon", 352, Rarity.RARE, mage.cards.c.CommandBeacon.class));
         cards.add(new SetCardInfo("Command Tower", 107, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Insignia", 111, Rarity.RARE, mage.cards.c.CommandersInsignia.class));
