@@ -2161,10 +2161,13 @@ public class VerifyCardDataTest {
         );
         // card can contain rules text from both sides, so must search ref card for all sides too
         String additionalName;
-        if (card instanceof CardWithSpellOption) {
-            additionalName = ((CardWithSpellOption) card).getSpellCard().getName();
+        if (card instanceof AdventureCard) { // temporary, change when mtgjson is fixed
+            additionalName = ((AdventureCard) card).getSpellCard().getName();
         } else if (card.isTransformable() && !card.isNightCard()) {
             additionalName = card.getSecondCardFace().getName();
+        } else if (card instanceof OmenCard) { // temporary, change when mtgjson is fixed
+            checkMissNonTargeted = false;
+            additionalName = null;
         } else {
             additionalName = null;
         }
@@ -2407,8 +2410,7 @@ public class VerifyCardDataTest {
                 // format to print main card then spell card
                 card.getInitAbilities().getRules().forEach(this::printAbilityText);
                 ((CardWithSpellOption) card).getSpellCard().getAbilities().getRules().forEach(r -> printAbilityText(r.replace("&mdash; ", "\n")));
-            }
-            else if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
+            } else if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
                 card.getAbilities().getRules().forEach(this::printAbilityText);
             } else {
                 card.getRules().forEach(this::printAbilityText);
