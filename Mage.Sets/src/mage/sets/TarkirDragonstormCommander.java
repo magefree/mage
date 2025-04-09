@@ -21,6 +21,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
 
         cards.add(new SetCardInfo("Abrade", 203, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Access Tunnel", 337, Rarity.UNCOMMON, mage.cards.a.AccessTunnel.class));
+        cards.add(new SetCardInfo("Adaptive Training Post", 18, Rarity.RARE, mage.cards.a.AdaptiveTrainingPost.class));
         cards.add(new SetCardInfo("Adarkar Wastes", 338, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Adeline, Resplendent Cathar", 108, Rarity.RARE, mage.cards.a.AdelineResplendentCathar.class));
         cards.add(new SetCardInfo("Amphin Mutineer", 143, Rarity.RARE, mage.cards.a.AmphinMutineer.class));
