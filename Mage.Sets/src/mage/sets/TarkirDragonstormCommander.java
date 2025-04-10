@@ -357,6 +357,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Wall of Roots", 278, Rarity.COMMON, mage.cards.w.WallOfRoots.class));
         cards.add(new SetCardInfo("Wayfarer's Bauble", 335, Rarity.COMMON, mage.cards.w.WayfarersBauble.class));
         cards.add(new SetCardInfo("Weathered Sentinels", 336, Rarity.RARE, mage.cards.w.WeatheredSentinels.class));
+        cards.add(new SetCardInfo("Welcome the Dead", 30, Rarity.RARE, mage.cards.w.WelcomeTheDead.class));
         cards.add(new SetCardInfo("Welcoming Vampire", 140, Rarity.RARE, mage.cards.w.WelcomingVampire.class));
         cards.add(new SetCardInfo("Whirlwind of Thought", 311, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class));
         cards.add(new SetCardInfo("Windbrisk Heights", 411, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
