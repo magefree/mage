@@ -116,6 +116,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Eliminate the Competition", 179, Rarity.RARE, mage.cards.e.EliminateTheCompetition.class));
         cards.add(new SetCardInfo("Elsha, Threefold Master", 2, Rarity.MYTHIC, mage.cards.e.ElshaThreefoldMaster.class));
         cards.add(new SetCardInfo("Emeria Angel", 114, Rarity.RARE, mage.cards.e.EmeriaAngel.class));
+        cards.add(new SetCardInfo("Eshki, Temur's Roar", 3, Rarity.MYTHIC, mage.cards.e.EshkiTemursRoar.class));
         cards.add(new SetCardInfo("Exotic Orchard", 360, Rarity.RARE, mage.cards.e.ExoticOrchard.class));
         cards.add(new SetCardInfo("Expansion // Explosion", 287, Rarity.RARE, mage.cards.e.ExpansionExplosion.class));
         cards.add(new SetCardInfo("Expel the Interlopers", 115, Rarity.RARE, mage.cards.e.ExpelTheInterlopers.class));
