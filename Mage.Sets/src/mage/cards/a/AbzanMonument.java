@@ -9,8 +9,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GreatestToughnessAmongControlledCreaturesValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
-import mage.abilities.hint.Hint;
-import mage.abilities.hint.ValueHint;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -41,11 +39,6 @@ public final class AbzanMonument extends CardImpl {
         ));
     }
 
-    private static final Hint hint = new ValueHint(
-            "Greatest toughness among creatures you control",
-            GreatestToughnessAmongControlledCreaturesValue.instance
-    );
-
     public AbzanMonument(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{2}");
 
@@ -60,7 +53,7 @@ public final class AbzanMonument extends CardImpl {
         );
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        this.addAbility(ability.addHint(hint));
+        this.addAbility(ability.addHint(GreatestToughnessAmongControlledCreaturesValue.ALL.getHint()));
     }
 
     private AbzanMonument(final AbzanMonument card) {
@@ -93,9 +86,7 @@ class AbzanMonumentEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         return new SpiritXXToken(
-                GreatestToughnessAmongControlledCreaturesValue
-                        .instance
-                        .calculate(game, source, this)
+                GreatestToughnessAmongControlledCreaturesValue.ALL.calculate(game, source, this)
         ).putOntoBattlefield(1, game, source);
     }
 }

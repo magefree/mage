@@ -30,6 +30,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Angel of Invention", 109, Rarity.MYTHIC, mage.cards.a.AngelOfInvention.class));
         cards.add(new SetCardInfo("Anguished Unmaking", 279, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class));
         cards.add(new SetCardInfo("Arasta of the Endless Web", 244, Rarity.RARE, mage.cards.a.ArastaOfTheEndlessWeb.class));
+        cards.add(new SetCardInfo("Arbor Adherent", 42, Rarity.RARE, mage.cards.a.ArborAdherent.class));
         cards.add(new SetCardInfo("Arboreal Grazer", 245, Rarity.COMMON, mage.cards.a.ArborealGrazer.class));
         cards.add(new SetCardInfo("Arcane Signet", 105, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archmage Emeritus", 145, Rarity.RARE, mage.cards.a.ArchmageEmeritus.class));
