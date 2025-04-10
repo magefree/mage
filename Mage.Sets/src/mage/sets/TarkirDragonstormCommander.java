@@ -94,6 +94,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Darkwater Catacombs", 355, Rarity.RARE, mage.cards.d.DarkwaterCatacombs.class));
         cards.add(new SetCardInfo("Dauthi Voidwalker", 176, Rarity.RARE, mage.cards.d.DauthiVoidwalker.class));
         cards.add(new SetCardInfo("Deadly Dispute", 177, Rarity.COMMON, mage.cards.d.DeadlyDispute.class));
+        cards.add(new SetCardInfo("Deceptive Frostkite", 19, Rarity.RARE, mage.cards.d.DeceptiveFrostkite.class));
         cards.add(new SetCardInfo("Deceptive Landscape", 356, Rarity.COMMON, mage.cards.d.DeceptiveLandscape.class));
         cards.add(new SetCardInfo("Deep Analysis", 150, Rarity.COMMON, mage.cards.d.DeepAnalysis.class));
         cards.add(new SetCardInfo("Despark", 284, Rarity.UNCOMMON, mage.cards.d.Despark.class));
