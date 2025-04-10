@@ -4,9 +4,7 @@ import java.util.UUID;
 
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
-import mage.abilities.condition.common.IsMainPhaseCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.cards.CardImpl;
@@ -26,8 +24,7 @@ public final class AggravatedAssault extends CardImpl {
 
         // {3}{R}{R}: Untap all creatures you control. After this main phase, there is an additional combat phase followed by an additional main phase. Activate this ability only any time you could cast a sorcery.
         Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new UntapAllControllerEffect(StaticFilters.FILTER_CONTROLLED_CREATURES, "Untap all creatures you control"), new ManaCostsImpl<>("{3}{R}{R}"));
-        ability.addEffect(new ConditionalOneShotEffect(
-                new AddCombatAndMainPhaseEffect(), IsMainPhaseCondition.ANY));
+        ability.addEffect(new AddCombatAndMainPhaseEffect());
         this.addAbility(ability);
     }
 

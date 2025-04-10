@@ -4,10 +4,8 @@ package mage.cards.f;
 import java.util.UUID;
 
 import mage.ObjectColor;
-import mage.abilities.condition.common.IsMainPhaseCondition;
 import mage.abilities.costs.AlternativeCostSourceAbility;
 import mage.abilities.costs.common.ExileFromHandCost;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
 import mage.abilities.effects.common.UntapAllEffect;
 import mage.cards.CardImpl;
@@ -41,8 +39,7 @@ public final class FuryOfTheHorde extends CardImpl {
 
         // Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
         this.getSpellAbility().addEffect(new UntapAllEffect(filter2));
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new AddCombatAndMainPhaseEffect(), IsMainPhaseCondition.ANY));
+        this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect());
     }
 
     private FuryOfTheHorde(final FuryOfTheHorde card) {

@@ -3,9 +3,7 @@ package mage.cards.s;
 
 import java.util.UUID;
 
-import mage.abilities.condition.common.IsMainPhaseCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -26,8 +24,7 @@ public final class SeizeTheDay extends CardImpl {
         // Untap target creature. After this main phase, there is an additional combat phase followed by an additional main phase.
         this.getSpellAbility().addEffect(new UntapTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new AddCombatAndMainPhaseEffect(), IsMainPhaseCondition.ANY));
+        this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect());
 
         // Flashback {2}{R}
         this.addAbility(new FlashbackAbility(this, new ManaCostsImpl<>("{2}{R}")));

@@ -2,8 +2,6 @@ package mage.cards.r;
 
 import java.util.UUID;
 
-import mage.abilities.condition.common.IsMainPhaseCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityControlledEffect;
@@ -52,10 +50,7 @@ public final class ResponseResurgence extends SplitCard {
                 ).setText("and vigilance until end of turn")
         );
         this.getRightHalfCard().getSpellAbility().addEffect(
-                new ConditionalOneShotEffect(
-                        new AddCombatAndMainPhaseEffect(),
-                        IsMainPhaseCondition.ANY
-                )
+                new AddCombatAndMainPhaseEffect()
         );
     }
 
