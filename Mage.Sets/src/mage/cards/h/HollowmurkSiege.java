@@ -40,14 +40,15 @@ public final class HollowmurkSiege extends CardImpl {
 
         // * Sultai -- Whenever a counter is put on a creature you control, draw a card.
         // This ability triggers only once each turn.
-        this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(new HollowmurkSiegeSultaiTriggeredAbility(), ModeChoice.SULTAI)));
+        this.addAbility(new SimpleStaticAbility(
+                new GainAnchorWordAbilitySourceEffect(new HollowmurkSiegeSultaiTriggeredAbility(), ModeChoice.SULTAI)));
 
         // * Abzan -- Whenever you attack, put a +1/+1 counter on target attacking
         // creature. It gains menace until end of turn.
         TriggeredAbility abzanAbility = new AttacksWithCreaturesTriggeredAbility(
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)), 1);
         abzanAbility.addEffect(
-                new GainAbilityTargetEffect(new MenaceAbility()));
+                new GainAbilityTargetEffect(new MenaceAbility(false)).setText("It gains menace until end of turn"));
         abzanAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_ATTACKING_CREATURE));
         this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(abzanAbility, ModeChoice.ABZAN)));
     }
@@ -66,6 +67,7 @@ class HollowmurkSiegeSultaiTriggeredAbility extends TriggeredAbilityImpl {
 
     HollowmurkSiegeSultaiTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
+        setTriggerPhrase("Whenever a counter is put on a creature you control, ");
         setTriggersLimitEachTurn(1);
     }
 
@@ -85,16 +87,8 @@ class HollowmurkSiegeSultaiTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getData().equals(CounterType.P1P1.getName())) {
-            Permanent permanent = Optional.ofNullable(game.getPermanentOrLKIBattlefield(event.getTargetId())).orElse(game.getPermanentEntering(event.getTargetId()));
+        Permanent permanent = Optional.ofNullable(game.getPermanentOrLKIBattlefield(event.getTargetId())).orElse(game.getPermanentEntering(event.getTargetId()));
 
-            return permanent != null && permanent.isCreature(game) && permanent.getControllerId() == getControllerId();
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a counter is put on a creature you control, draw a card. This ability triggers only once each turn.";
+        return permanent != null && permanent.isCreature(game) && permanent.isControlledBy(getControllerId());
     }
 }
