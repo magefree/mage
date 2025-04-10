@@ -167,6 +167,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Indulging Patrician", 292, Rarity.UNCOMMON, mage.cards.i.IndulgingPatrician.class));
         cards.add(new SetCardInfo("Infantry Shield", 35, Rarity.RARE, mage.cards.i.InfantryShield.class));
         cards.add(new SetCardInfo("Infernal Grasp", 182, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
+        cards.add(new SetCardInfo("Ironwill Forger", 13, Rarity.RARE, mage.cards.i.IronwillForger.class));
         cards.add(new SetCardInfo("Irrigated Farmland", 372, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class));
         cards.add(new SetCardInfo("Isolated Chapel", 373, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Izzet Signet", 320, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
