@@ -82,8 +82,8 @@ public class CircularList<E> implements List<E>, Iterable<E>, Serializable {
      */
     @Override
     public E get(int index) {
-        if (list.size() > this.index) {
-            return list.get(this.index);
+        if (list.size() > index) {
+            return list.get(index);
         }
         return null;
     }
