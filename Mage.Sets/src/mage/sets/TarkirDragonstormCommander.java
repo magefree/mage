@@ -355,6 +355,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Whirlwind of Thought", 311, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class));
         cards.add(new SetCardInfo("Windbrisk Heights", 411, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
         cards.add(new SetCardInfo("Wingmantle Chaplain", 141, Rarity.UNCOMMON, mage.cards.w.WingmantleChaplain.class));
+        cards.add(new SetCardInfo("Within Range", 32, Rarity.RARE, mage.cards.w.WithinRange.class));
         cards.add(new SetCardInfo("Woe Strider", 201, Rarity.RARE, mage.cards.w.WoeStrider.class));
         cards.add(new SetCardInfo("Wonder", 170, Rarity.UNCOMMON, mage.cards.w.Wonder.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 412, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));
