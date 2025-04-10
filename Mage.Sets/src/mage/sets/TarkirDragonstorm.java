@@ -4,15 +4,11 @@ import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * @author TheElk801
  */
 public final class TarkirDragonstorm extends ExpansionSet {
 
-    private static final List<String> unfinished = Arrays.asList("Channeled Dragonfire", "Glacial Dragonhunt", "Mammoth Bellow", "Nature's Rhythm", "Roamer's Routine", "Songcrafter Mage", "Synchronized Charge", "Unending Whisper", "Ureni's Rebuff", "Wild Ride", "Winternight Stories");
     private static final TarkirDragonstorm instance = new TarkirDragonstorm();
 
     public static TarkirDragonstorm getInstance() {
@@ -297,7 +293,5 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Yathan Tombguard", 100, Rarity.UNCOMMON, mage.cards.y.YathanTombguard.class));
         cards.add(new SetCardInfo("Zurgo's Vanguard", 133, Rarity.UNCOMMON, mage.cards.z.ZurgosVanguard.class));
         cards.add(new SetCardInfo("Zurgo, Thunder's Decree", 237, Rarity.RARE, mage.cards.z.ZurgoThundersDecree.class));
-
-        cards.removeIf(setCardInfo -> unfinished.contains(setCardInfo.getName()));
     }
 }
