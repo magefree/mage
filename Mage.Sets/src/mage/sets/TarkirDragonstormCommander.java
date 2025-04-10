@@ -126,6 +126,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Farseek", 255, Rarity.COMMON, mage.cards.f.Farseek.class));
         cards.add(new SetCardInfo("Feed the Swarm", 180, Rarity.COMMON, mage.cards.f.FeedTheSwarm.class));
         cards.add(new SetCardInfo("Fellwar Stone", 318, Rarity.UNCOMMON, mage.cards.f.FellwarStone.class));
+        cards.add(new SetCardInfo("Felothar the Steadfast", 4, Rarity.MYTHIC, mage.cards.f.FelotharTheSteadfast.class));
         cards.add(new SetCardInfo("Ferrous Lake", 361, Rarity.RARE, mage.cards.f.FerrousLake.class));
         cards.add(new SetCardInfo("Fetid Heath", 362, Rarity.RARE, mage.cards.f.FetidHeath.class));
         cards.add(new SetCardInfo("Fetid Pools", 363, Rarity.RARE, mage.cards.f.FetidPools.class));
