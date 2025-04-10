@@ -291,6 +291,8 @@ public abstract class AbilityImpl implements Ability {
 
         // fused or spliced spells contain multiple abilities (e.g. fused, left, right)
         // optional costs and cost modification must be applied only to the first/main ability
+        // TODO: need tests with X announced costs, cost modification effects, CostAdjuster, early cost target, etc
+        //  can be bugged due multiple calls (not all code parts below use isMainPartAbility)
         boolean isMainPartAbility = !CardUtil.isFusedPartAbility(this, game);
 
         /* 20220908 - 601.2b
@@ -324,6 +326,16 @@ public abstract class AbilityImpl implements Ability {
         //}
         if (getAbilityType() == AbilityType.SPELL && (getManaCostsToPay().isEmpty() && getCosts().isEmpty()) && !noMana) {
             return false;
+        }
+
+        // 20241022 - 601.2b
+        // Choose targets for costs that have to be chosen early
+        // Not yet included in 601.2b but this is where it will be
+        handleChooseCostTargets(game, controller);
+
+        // prepare dynamic costs (must be called before any x announce)
+        if (isMainPartAbility) {
+            adjustX(game);
         }
 
         // 20121001 - 601.2b
@@ -402,7 +414,7 @@ public abstract class AbilityImpl implements Ability {
                 // Note: ActivatedAbility does include SpellAbility & PlayLandAbility, but those should be able to be canceled too.
                 boolean canCancel = this instanceof ActivatedAbility && controller.isHuman();
                 if (!getTargets().chooseTargets(outcome, this.controllerId, this, noMana, game, canCancel)) {
-                    // was canceled during targer selection
+                    // was canceled during target selection
                     return false;
                 }
             }
@@ -428,7 +440,7 @@ public abstract class AbilityImpl implements Ability {
 
         //20101001 - 601.2e
         if (isMainPartAbility) {
-            adjustCosts(game); // still needed for CostAdjuster objects (to handle some types of dynamic costs)
+            // adjustX already called before any announces
             game.getContinuousEffects().costModification(this, game);
         }
 
@@ -726,6 +738,11 @@ public abstract class AbilityImpl implements Ability {
                 ((EarlyTargetCost) cost).chooseTarget(game, this, controller);
             }
         }
+        for (ManaCost cost : getManaCostsToPay()) {
+            if (cost instanceof EarlyTargetCost && cost.getTargets().isEmpty()) {
+                ((EarlyTargetCost) cost).chooseTarget(game, this, controller);
+            }
+        }
     }
 
     /**
@@ -764,8 +781,15 @@ public abstract class AbilityImpl implements Ability {
             if (!variableManaCost.isPaid()) { // should only happen for human players
                 int xValue;
                 if (!noMana || variableManaCost.getCostType().canUseAnnounceOnFreeCast()) {
-                    xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(),
-                            "Announce the value for " + variableManaCost.getText(), game, this);
+                    if (variableManaCost.wasAnnounced()) {
+                        // announce by rules
+                        xValue = variableManaCost.getAmount();
+                    } else {
+                        // announce by player
+                        xValue = controller.announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(),
+                                "Announce the value for " + variableManaCost.getText(), game, this);
+                    }
+
                     int amountMana = xValue * variableManaCost.getXInstancesCount();
                     StringBuilder manaString = threadLocalBuilder.get();
                     if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isGeneric()) {
@@ -1069,6 +1093,60 @@ public abstract class AbilityImpl implements Ability {
             manaCostsToPay.addAll((ManaCosts) manaCost);
         } else {
             manaCostsToPay.add(manaCost);
+        }
+    }
+
+    @Override
+    public void setVariableCostsMinMax(int min, int max) {
+        // modify all values (mtg rules allow only one type of X, so min/max must be shared between all X instances)
+
+        // base cost
+        for (ManaCost cost : getManaCosts()) {
+            if (cost instanceof MinMaxVariableCost) {
+                MinMaxVariableCost minMaxCost = (MinMaxVariableCost) cost;
+                minMaxCost.setMinX(min);
+                minMaxCost.setMaxX(max);
+            }
+        }
+
+        // prepared cost
+        for (ManaCost cost : getManaCostsToPay()) {
+            if (cost instanceof MinMaxVariableCost) {
+                MinMaxVariableCost minMaxCost = (MinMaxVariableCost) cost;
+                minMaxCost.setMinX(min);
+                minMaxCost.setMaxX(max);
+            }
+        }
+    }
+
+    @Override
+    public void setVariableCostsValue(int xValue) {
+        // only mana cost supported
+
+        // base cost
+        boolean foundBaseCost = false;
+        for (ManaCost cost : getManaCosts()) {
+            if (cost instanceof VariableManaCost) {
+                foundBaseCost = true;
+                ((VariableManaCost) cost).setMinX(xValue);
+                ((VariableManaCost) cost).setMaxX(xValue);
+                ((VariableManaCost) cost).setAmount(xValue, xValue, false);
+            }
+        }
+
+        // prepared cost
+        boolean foundPreparedCost = false;
+        for (ManaCost cost : getManaCostsToPay()) {
+            if (cost instanceof VariableManaCost) {
+                foundPreparedCost = true;
+                ((VariableManaCost) cost).setMinX(xValue);
+                ((VariableManaCost) cost).setMaxX(xValue);
+                ((VariableManaCost) cost).setAmount(xValue, xValue, false);
+            }
+        }
+
+        if (!foundPreparedCost || !foundBaseCost) {
+            throw new IllegalArgumentException("Wrong code usage: auto-announced X values allowed in mana costs only");
         }
     }
 
@@ -1676,17 +1754,6 @@ public abstract class AbilityImpl implements Ability {
         }
     }
 
-    /**
-     * Dynamic cost modification for ability.<br>
-     * Example: if it need stack related info (like real targets) then must
-     * check two states (game.inCheckPlayableState): <br>
-     * 1. In playable state it must check all possible use cases (e.g. allow to
-     * reduce on any available target and modes) <br>
-     * 2. In real cast state it must check current use case (e.g. real selected
-     * targets and modes)
-     *
-     * @param costAdjuster
-     */
     @Override
     public AbilityImpl setCostAdjuster(CostAdjuster costAdjuster) {
         this.costAdjuster = costAdjuster;
@@ -1694,14 +1761,23 @@ public abstract class AbilityImpl implements Ability {
     }
 
     @Override
-    public CostAdjuster getCostAdjuster() {
-        return costAdjuster;
+    public void adjustX(Game game) {
+        if (costAdjuster != null) {
+            costAdjuster.prepareX(this, game);
+        }
     }
 
     @Override
-    public void adjustCosts(Game game) {
+    public void adjustCostsPrepare(Game game) {
         if (costAdjuster != null) {
-            costAdjuster.adjustCosts(this, game);
+            costAdjuster.prepareCost(this, game);
+        }
+    }
+
+    @Override
+    public void adjustCostsModify(Game game, CostModificationType costModificationType) {
+        if (costAdjuster != null) {
+            costAdjuster.modifyCost(this, game, costModificationType);
         }
     }
 

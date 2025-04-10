@@ -6,6 +6,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.ChooseModeEffect;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.ModeChoice;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -18,9 +19,6 @@ import java.util.UUID;
  * @author TheElk801, Susucr
  */
 public class PlayerCanOnlyAttackInDirectionRestrictionEffect extends RestrictionEffect {
-
-    public static final String ALLOW_ATTACKING_LEFT = "Allow attacking left";
-    public static final String ALLOW_ATTACKING_RIGHT = "Allow attacking right";
 
     public PlayerCanOnlyAttackInDirectionRestrictionEffect(Duration duration, String directionText) {
         super(duration, Outcome.Neutral);
@@ -39,10 +37,7 @@ public class PlayerCanOnlyAttackInDirectionRestrictionEffect extends Restriction
     }
 
     public static Effect choiceEffect() {
-        return new ChooseModeEffect(
-                "Choose a direction to allow attacking in.",
-                ALLOW_ATTACKING_LEFT, ALLOW_ATTACKING_RIGHT
-        ).setText("choose left or right");
+        return new ChooseModeEffect(ModeChoice.LEFT, ModeChoice.RIGHT);
     }
 
     @Override
@@ -55,10 +50,13 @@ public class PlayerCanOnlyAttackInDirectionRestrictionEffect extends Restriction
         if (defenderId == null) {
             return true;
         }
-
-        String allowedDirection = (String) game.getState().getValue(source.getSourceId() + "_modeChoice");
-        if (allowedDirection == null) {
-            return true; // If no choice was made, the ability has no effect.
+        boolean left;
+        if (ModeChoice.LEFT.checkMode(game, source)) {
+            left = true;
+        } else if (ModeChoice.RIGHT.checkMode(game, source)) {
+            left = false;
+        } else {
+            return false; // If no choice was made, the ability has no effect.
         }
 
         Player playerAttacking = game.getPlayer(attacker.getControllerId());
@@ -83,18 +81,7 @@ public class PlayerCanOnlyAttackInDirectionRestrictionEffect extends Restriction
         }
 
         PlayerList playerList = game.getState().getPlayerList(playerAttacking.getId());
-        if (allowedDirection.equals(ALLOW_ATTACKING_LEFT)
-                && !playerList.getNext().equals(playerDefending.getId())) {
-            // the defender is not the player to the left
-            return false;
-        }
-        if (allowedDirection.equals(ALLOW_ATTACKING_RIGHT)
-                && !playerList.getPrevious().equals(playerDefending.getId())) {
-            // the defender is not the player to the right
-            return false;
-        }
-
-        return true;
+        return (!left || playerList.getNext().equals(playerDefending.getId()))
+                && (left || playerList.getPrevious().equals(playerDefending.getId()));
     }
-
 }

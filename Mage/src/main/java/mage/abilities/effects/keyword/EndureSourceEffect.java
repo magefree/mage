@@ -1,6 +1,8 @@
 package mage.abilities.effects.keyword;
 
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
 import mage.counters.CounterType;
@@ -15,13 +17,17 @@ import mage.util.CardUtil;
  */
 public class EndureSourceEffect extends OneShotEffect {
 
-    private final int amount;
+    private final DynamicValue amount;
 
     public EndureSourceEffect(int amount) {
         this(amount, "it");
     }
 
     public EndureSourceEffect(int amount, String selfText) {
+        this(StaticValue.get(amount), selfText);
+    }
+
+    public EndureSourceEffect(DynamicValue amount, String selfText) {
         super(Outcome.Benefit);
         staticText = selfText + " endures " + amount;
         this.amount = amount;
@@ -39,7 +45,11 @@ public class EndureSourceEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return doEndure(source.getSourcePermanentOrLKI(game), 1, game, source);
+        return doEndure(
+                source.getSourcePermanentOrLKI(game),
+                amount.calculate(game, source, this),
+                game, source
+        );
     }
 
     public static boolean doEndure(Permanent permanent, int amount, Game game, Ability source) {

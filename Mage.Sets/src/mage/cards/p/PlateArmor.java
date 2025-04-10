@@ -81,7 +81,7 @@ enum PlateArmorAdjuster implements CostAdjuster {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller != null) {
             int count = equipmentCount.calculate(game, ability, null);

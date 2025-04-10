@@ -170,7 +170,7 @@ enum ThroneOfEldraineAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void prepareCost(Ability ability, Game game) {
         ObjectColor color = (ObjectColor) game.getState().getValue(ability.getSourceId() + "_color");
         if (color == null) {
             return;

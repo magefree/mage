@@ -74,7 +74,7 @@ enum GrimGiganotosaurusAdjuster implements CostAdjuster {
     private static final DynamicValue xValue = new PermanentsOnBattlefieldCount(filter);
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         Player controller = game.getPlayer(ability.getControllerId());
         if (controller != null) {
             CardUtil.reduceCost(ability, xValue.calculate(game, ability, null));

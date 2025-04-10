@@ -18,7 +18,7 @@ import java.util.UUID;
  */
 public final class DemonicLore extends CardImpl {
 
-    private static final DynamicValue xValue = new MultipliedValue(CardsInControllerHandCount.instance, 2);
+    private static final DynamicValue xValue = new MultipliedValue(CardsInControllerHandCount.ANY, 2);
 
     public DemonicLore(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");

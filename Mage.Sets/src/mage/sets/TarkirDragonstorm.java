@@ -24,6 +24,8 @@ public final class TarkirDragonstorm extends ExpansionSet {
         this.blockName = "Tarkir: Dragonstorm"; // for sorting in GUI
         this.hasBasicLands = true;
 
+        this.enablePlayBooster(Integer.MAX_VALUE);
+
         cards.add(new SetCardInfo("Abzan Devotee", 68, Rarity.COMMON, mage.cards.a.AbzanDevotee.class));
         cards.add(new SetCardInfo("Abzan Monument", 238, Rarity.UNCOMMON, mage.cards.a.AbzanMonument.class));
         cards.add(new SetCardInfo("Adorned Crocodile", 69, Rarity.COMMON, mage.cards.a.AdornedCrocodile.class));
@@ -43,6 +45,9 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Awaken the Honored Dead", 170, Rarity.RARE, mage.cards.a.AwakenTheHonoredDead.class));
         cards.add(new SetCardInfo("Barrensteppe Siege", 171, Rarity.RARE, mage.cards.b.BarrensteppeSiege.class));
         cards.add(new SetCardInfo("Bearer of Glory", 4, Rarity.COMMON, mage.cards.b.BearerOfGlory.class));
+        cards.add(new SetCardInfo("Betor, Kin to All", 172, Rarity.MYTHIC, mage.cards.b.BetorKinToAll.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Betor, Kin to All", 308, Rarity.MYTHIC, mage.cards.b.BetorKinToAll.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Betor, Kin to All", 353, Rarity.MYTHIC, mage.cards.b.BetorKinToAll.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Bewildering Blizzard", 38, Rarity.UNCOMMON, mage.cards.b.BewilderingBlizzard.class));
         cards.add(new SetCardInfo("Bloodfell Caves", 250, Rarity.COMMON, mage.cards.b.BloodfellCaves.class));
         cards.add(new SetCardInfo("Bloomvine Regent", 136, Rarity.RARE, mage.cards.b.BloomvineRegent.class));
@@ -83,6 +88,8 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Dragonback Lancer", 9, Rarity.COMMON, mage.cards.d.DragonbackLancer.class));
         cards.add(new SetCardInfo("Dragonbroods' Relic", 140, Rarity.UNCOMMON, mage.cards.d.DragonbroodsRelic.class));
         cards.add(new SetCardInfo("Dragonclaw Strike", 180, Rarity.UNCOMMON, mage.cards.d.DragonclawStrike.class));
+        cards.add(new SetCardInfo("Dragonfire Blade", 240, Rarity.RARE, mage.cards.d.DragonfireBlade.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Dragonfire Blade", 324, Rarity.RARE, mage.cards.d.DragonfireBlade.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Dragonologist", 42, Rarity.RARE, mage.cards.d.Dragonologist.class));
         cards.add(new SetCardInfo("Dragonstorm Forecaster", 43, Rarity.UNCOMMON, mage.cards.d.DragonstormForecaster.class));
         cards.add(new SetCardInfo("Dragonstorm Globe", 241, Rarity.COMMON, mage.cards.d.DragonstormGlobe.class));
@@ -102,6 +109,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Fire-Rim Form", 107, Rarity.COMMON, mage.cards.f.FireRimForm.class));
         cards.add(new SetCardInfo("Flamehold Grappler", 185, Rarity.RARE, mage.cards.f.FlameholdGrappler.class));
         cards.add(new SetCardInfo("Fleeting Effigy", 108, Rarity.UNCOMMON, mage.cards.f.FleetingEffigy.class));
+        cards.add(new SetCardInfo("Focus the Mind", 45, Rarity.COMMON, mage.cards.f.FocusTheMind.class));
         cards.add(new SetCardInfo("Forest", 285, Rarity.LAND, mage.cards.basiclands.Forest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Formation Breaker", 143, Rarity.UNCOMMON, mage.cards.f.FormationBreaker.class));
         cards.add(new SetCardInfo("Fortress Kin-Guard", 12, Rarity.COMMON, mage.cards.f.FortressKinGuard.class));
@@ -110,6 +118,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Frontline Rush", 186, Rarity.UNCOMMON, mage.cards.f.FrontlineRush.class));
         cards.add(new SetCardInfo("Frostcliff Siege", 187, Rarity.RARE, mage.cards.f.FrostcliffSiege.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Frostcliff Siege", 385, Rarity.RARE, mage.cards.f.FrostcliffSiege.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Furious Forebear", 13, Rarity.UNCOMMON, mage.cards.f.FuriousForebear.class));
         cards.add(new SetCardInfo("Glacial Dragonhunt", 188, Rarity.UNCOMMON, mage.cards.g.GlacialDragonhunt.class));
         cards.add(new SetCardInfo("Glacierwood Siege", 189, Rarity.RARE, mage.cards.g.GlacierwoodSiege.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Glacierwood Siege", 386, Rarity.RARE, mage.cards.g.GlacierwoodSiege.class, NON_FULL_USE_VARIOUS));
@@ -117,10 +126,12 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Gurmag Nightwatch", 190, Rarity.COMMON, mage.cards.g.GurmagNightwatch.class));
         cards.add(new SetCardInfo("Gurmag Rakshasa", 81, Rarity.UNCOMMON, mage.cards.g.GurmagRakshasa.class));
         cards.add(new SetCardInfo("Hardened Tactician", 191, Rarity.UNCOMMON, mage.cards.h.HardenedTactician.class));
+        cards.add(new SetCardInfo("Herd Heirloom", 144, Rarity.RARE, mage.cards.h.HerdHeirloom.class));
         cards.add(new SetCardInfo("Heritage Reclamation", 145, Rarity.COMMON, mage.cards.h.HeritageReclamation.class));
         cards.add(new SetCardInfo("Highspire Bell-Ringer", 47, Rarity.COMMON, mage.cards.h.HighspireBellRinger.class));
         cards.add(new SetCardInfo("Hollowmurk Siege", 192, Rarity.RARE, mage.cards.h.HollowmurkSiege.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Hollowmurk Siege", 387, Rarity.RARE, mage.cards.h.HollowmurkSiege.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Host of the Hereafter", 193, Rarity.UNCOMMON, mage.cards.h.HostOfTheHereafter.class));
         cards.add(new SetCardInfo("Humbling Elder", 48, Rarity.COMMON, mage.cards.h.HumblingElder.class));
         cards.add(new SetCardInfo("Iceridge Serpent", 49, Rarity.COMMON, mage.cards.i.IceridgeSerpent.class));
         cards.add(new SetCardInfo("Inevitable Defeat", 194, Rarity.RARE, mage.cards.i.InevitableDefeat.class));
@@ -143,12 +154,14 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Knockout Maneuver", 147, Rarity.UNCOMMON, mage.cards.k.KnockoutManeuver.class));
         cards.add(new SetCardInfo("Kotis, the Fangkeeper", 202, Rarity.RARE, mage.cards.k.KotisTheFangkeeper.class));
         cards.add(new SetCardInfo("Krotiq Nestguard", 148, Rarity.COMMON, mage.cards.k.KrotiqNestguard.class));
+        cards.add(new SetCardInfo("Krumar Initiate", 84, Rarity.UNCOMMON, mage.cards.k.KrumarInitiate.class));
         cards.add(new SetCardInfo("Lasyd Prowler", 149, Rarity.RARE, mage.cards.l.LasydProwler.class));
         cards.add(new SetCardInfo("Lie in Wait", 203, Rarity.UNCOMMON, mage.cards.l.LieInWait.class));
         cards.add(new SetCardInfo("Lightfoot Technique", 14, Rarity.COMMON, mage.cards.l.LightfootTechnique.class));
         cards.add(new SetCardInfo("Lotuslight Dancers", 204, Rarity.RARE, mage.cards.l.LotuslightDancers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Lotuslight Dancers", 363, Rarity.RARE, mage.cards.l.LotuslightDancers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Loxodon Battle Priest", 15, Rarity.UNCOMMON, mage.cards.l.LoxodonBattlePriest.class));
+        cards.add(new SetCardInfo("Maelstrom of the Spirit Dragon", 260, Rarity.RARE, mage.cards.m.MaelstromOfTheSpiritDragon.class));
         cards.add(new SetCardInfo("Mammoth Bellow", 205, Rarity.UNCOMMON, mage.cards.m.MammothBellow.class));
         cards.add(new SetCardInfo("Marang River Regent", 51, Rarity.RARE, mage.cards.m.MarangRiverRegent.class));
         cards.add(new SetCardInfo("Mardu Devotee", 16, Rarity.COMMON, mage.cards.m.MarduDevotee.class));
@@ -184,6 +197,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Reigning Victor", 216, Rarity.COMMON, mage.cards.r.ReigningVictor.class));
         cards.add(new SetCardInfo("Reputable Merchant", 217, Rarity.COMMON, mage.cards.r.ReputableMerchant.class));
         cards.add(new SetCardInfo("Rescue Leopard", 116, Rarity.COMMON, mage.cards.r.RescueLeopard.class));
+        cards.add(new SetCardInfo("Reverberating Summons", 117, Rarity.UNCOMMON, mage.cards.r.ReverberatingSummons.class));
         cards.add(new SetCardInfo("Revival of the Ancestors", 218, Rarity.RARE, mage.cards.r.RevivalOfTheAncestors.class));
         cards.add(new SetCardInfo("Riling Dawnbreaker", 21, Rarity.COMMON, mage.cards.r.RilingDawnbreaker.class));
         cards.add(new SetCardInfo("Ringing Strike Mastery", 53, Rarity.COMMON, mage.cards.r.RingingStrikeMastery.class));
@@ -192,9 +206,12 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Roamer's Routine", 154, Rarity.COMMON, mage.cards.r.RoamersRoutine.class));
         cards.add(new SetCardInfo("Roar of Endless Song", 220, Rarity.RARE, mage.cards.r.RoarOfEndlessSong.class));
         cards.add(new SetCardInfo("Roiling Dragonstorm", 55, Rarity.UNCOMMON, mage.cards.r.RoilingDragonstorm.class));
+        cards.add(new SetCardInfo("Rot-Curse Rakshasa", 87, Rarity.MYTHIC, mage.cards.r.RotCurseRakshasa.class));
         cards.add(new SetCardInfo("Rugged Highlands", 265, Rarity.COMMON, mage.cards.r.RuggedHighlands.class));
         cards.add(new SetCardInfo("Runescale Stormbrood", 221, Rarity.UNCOMMON, mage.cards.r.RunescaleStormbrood.class));
         cards.add(new SetCardInfo("Sage of the Fang", 155, Rarity.UNCOMMON, mage.cards.s.SageOfTheFang.class));
+        cards.add(new SetCardInfo("Sage of the Skies", 22, Rarity.RARE, mage.cards.s.SageOfTheSkies.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Sage of the Skies", 328, Rarity.RARE, mage.cards.s.SageOfTheSkies.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Sagu Pummeler", 156, Rarity.COMMON, mage.cards.s.SaguPummeler.class));
         cards.add(new SetCardInfo("Sagu Wildling", 157, Rarity.COMMON, mage.cards.s.SaguWildling.class));
         cards.add(new SetCardInfo("Salt Road Packbeast", 23, Rarity.COMMON, mage.cards.s.SaltRoadPackbeast.class));
@@ -235,6 +252,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Sunset Strikemaster", 126, Rarity.UNCOMMON, mage.cards.s.SunsetStrikemaster.class));
         cards.add(new SetCardInfo("Swamp", 281, Rarity.LAND, mage.cards.basiclands.Swamp.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Swiftwater Cliffs", 268, Rarity.COMMON, mage.cards.s.SwiftwaterCliffs.class));
+        cards.add(new SetCardInfo("Synchronized Charge", 162, Rarity.UNCOMMON, mage.cards.s.SynchronizedCharge.class));
         cards.add(new SetCardInfo("Teeming Dragonstorm", 30, Rarity.UNCOMMON, mage.cards.t.TeemingDragonstorm.class));
         cards.add(new SetCardInfo("Tempest Hawk", 31, Rarity.COMMON, mage.cards.t.TempestHawk.class));
         cards.add(new SetCardInfo("Temur Battlecrier", 228, Rarity.RARE, mage.cards.t.TemurBattlecrier.class));
@@ -272,6 +290,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Whirlwing Stormbrood", 234, Rarity.UNCOMMON, mage.cards.w.WhirlwingStormbrood.class));
         cards.add(new SetCardInfo("Wild Ride", 132, Rarity.COMMON, mage.cards.w.WildRide.class));
         cards.add(new SetCardInfo("Wind-Scarred Crag", 271, Rarity.COMMON, mage.cards.w.WindScarredCrag.class));
+        cards.add(new SetCardInfo("Windcrag Siege", 235, Rarity.RARE, mage.cards.w.WindcragSiege.class));
         cards.add(new SetCardInfo("Wingblade Disciple", 65, Rarity.UNCOMMON, mage.cards.w.WingbladeDisciple.class));
         cards.add(new SetCardInfo("Wingspan Stride", 66, Rarity.COMMON, mage.cards.w.WingspanStride.class));
         cards.add(new SetCardInfo("Winternight Stories", 67, Rarity.RARE, mage.cards.w.WinternightStories.class));

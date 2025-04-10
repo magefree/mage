@@ -101,7 +101,7 @@ enum WaytaTrainerProdigyAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         if (game.inCheckPlayableState()) {
             int controllerTargets = 0; //number of possible targets controlled by the ability's controller
             for (UUID permId : CardUtil.getAllPossibleTargets(ability, game)) {

@@ -21,13 +21,16 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
 
         cards.add(new SetCardInfo("Abrade", 203, Rarity.UNCOMMON, mage.cards.a.Abrade.class));
         cards.add(new SetCardInfo("Access Tunnel", 337, Rarity.UNCOMMON, mage.cards.a.AccessTunnel.class));
+        cards.add(new SetCardInfo("Adaptive Training Post", 18, Rarity.RARE, mage.cards.a.AdaptiveTrainingPost.class));
         cards.add(new SetCardInfo("Adarkar Wastes", 338, Rarity.RARE, mage.cards.a.AdarkarWastes.class));
         cards.add(new SetCardInfo("Adeline, Resplendent Cathar", 108, Rarity.RARE, mage.cards.a.AdelineResplendentCathar.class));
+        cards.add(new SetCardInfo("Aligned Heart", 12, Rarity.RARE, mage.cards.a.AlignedHeart.class));
         cards.add(new SetCardInfo("Amphin Mutineer", 143, Rarity.RARE, mage.cards.a.AmphinMutineer.class));
         cards.add(new SetCardInfo("Ancestral Vision", 144, Rarity.RARE, mage.cards.a.AncestralVision.class));
         cards.add(new SetCardInfo("Angel of Invention", 109, Rarity.MYTHIC, mage.cards.a.AngelOfInvention.class));
         cards.add(new SetCardInfo("Anguished Unmaking", 279, Rarity.RARE, mage.cards.a.AnguishedUnmaking.class));
         cards.add(new SetCardInfo("Arasta of the Endless Web", 244, Rarity.RARE, mage.cards.a.ArastaOfTheEndlessWeb.class));
+        cards.add(new SetCardInfo("Arbor Adherent", 42, Rarity.RARE, mage.cards.a.ArborAdherent.class));
         cards.add(new SetCardInfo("Arboreal Grazer", 245, Rarity.COMMON, mage.cards.a.ArborealGrazer.class));
         cards.add(new SetCardInfo("Arcane Signet", 105, Rarity.UNCOMMON, mage.cards.a.ArcaneSignet.class));
         cards.add(new SetCardInfo("Archmage Emeritus", 145, Rarity.RARE, mage.cards.a.ArchmageEmeritus.class));
@@ -45,6 +48,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Bastion of Remembrance", 171, Rarity.UNCOMMON, mage.cards.b.BastionOfRemembrance.class));
         cards.add(new SetCardInfo("Battlefield Forge", 340, Rarity.RARE, mage.cards.b.BattlefieldForge.class));
         cards.add(new SetCardInfo("Beast Within", 249, Rarity.UNCOMMON, mage.cards.b.BeastWithin.class));
+        cards.add(new SetCardInfo("Become the Avalanche", 43, Rarity.RARE, mage.cards.b.BecomeTheAvalanche.class));
         cards.add(new SetCardInfo("Beetleback Chief", 205, Rarity.UNCOMMON, mage.cards.b.BeetlebackChief.class));
         cards.add(new SetCardInfo("Behind the Scenes", 172, Rarity.UNCOMMON, mage.cards.b.BehindTheScenes.class));
         cards.add(new SetCardInfo("Betor, Ancestor's Voice", 1, Rarity.MYTHIC, mage.cards.b.BetorAncestorsVoice.class));
@@ -57,6 +61,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Boros Signet", 314, Rarity.UNCOMMON, mage.cards.b.BorosSignet.class));
         cards.add(new SetCardInfo("Bountiful Landscape", 342, Rarity.COMMON, mage.cards.b.BountifulLandscape.class));
         cards.add(new SetCardInfo("Caldera Pyremaw", 33, Rarity.RARE, mage.cards.c.CalderaPyremaw.class));
+        cards.add(new SetCardInfo("Canopy Gargantuan", 45, Rarity.RARE, mage.cards.c.CanopyGargantuan.class));
         cards.add(new SetCardInfo("Canopy Vista", 343, Rarity.RARE, mage.cards.c.CanopyVista.class));
         cards.add(new SetCardInfo("Canyon Slough", 344, Rarity.RARE, mage.cards.c.CanyonSlough.class));
         cards.add(new SetCardInfo("Carven Caryatid", 250, Rarity.UNCOMMON, mage.cards.c.CarvenCaryatid.class));
@@ -71,6 +76,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Cinder Glade", 350, Rarity.RARE, mage.cards.c.CinderGlade.class));
         cards.add(new SetCardInfo("Clifftop Retreat", 351, Rarity.RARE, mage.cards.c.ClifftopRetreat.class));
         cards.add(new SetCardInfo("Colfenor's Urn", 315, Rarity.RARE, mage.cards.c.ColfenorsUrn.class));
+        cards.add(new SetCardInfo("Colossal Grave-Reaver", 50, Rarity.RARE, mage.cards.c.ColossalGraveReaver.class));
         cards.add(new SetCardInfo("Command Beacon", 352, Rarity.RARE, mage.cards.c.CommandBeacon.class));
         cards.add(new SetCardInfo("Command Tower", 107, Rarity.COMMON, mage.cards.c.CommandTower.class));
         cards.add(new SetCardInfo("Commander's Insignia", 111, Rarity.RARE, mage.cards.c.CommandersInsignia.class));
@@ -122,6 +128,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Fetid Heath", 362, Rarity.RARE, mage.cards.f.FetidHeath.class));
         cards.add(new SetCardInfo("Fetid Pools", 363, Rarity.RARE, mage.cards.f.FetidPools.class));
         cards.add(new SetCardInfo("Flooded Grove", 364, Rarity.RARE, mage.cards.f.FloodedGrove.class));
+        cards.add(new SetCardInfo("Floral Evoker", 46, Rarity.RARE, mage.cards.f.FloralEvoker.class));
         cards.add(new SetCardInfo("Forbidden Alchemy", 152, Rarity.COMMON, mage.cards.f.ForbiddenAlchemy.class));
         cards.add(new SetCardInfo("Foreboding Landscape", 365, Rarity.COMMON, mage.cards.f.ForebodingLandscape.class));
         cards.add(new SetCardInfo("Fortified Village", 366, Rarity.RARE, mage.cards.f.FortifiedVillage.class));
@@ -133,6 +140,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Glacial Fortress", 367, Rarity.RARE, mage.cards.g.GlacialFortress.class));
         cards.add(new SetCardInfo("Glorybringer", 215, Rarity.RARE, mage.cards.g.Glorybringer.class));
         cards.add(new SetCardInfo("Goblin Electromancer", 99, Rarity.COMMON, mage.cards.g.GoblinElectromancer.class));
+        cards.add(new SetCardInfo("Goldlust Triad", 34, Rarity.RARE, mage.cards.g.GoldlustTriad.class));
         cards.add(new SetCardInfo("Goldnight Commander", 117, Rarity.UNCOMMON, mage.cards.g.GoldnightCommander.class));
         cards.add(new SetCardInfo("Golgari Rot Farm", 368, Rarity.UNCOMMON, mage.cards.g.GolgariRotFarm.class));
         cards.add(new SetCardInfo("Grand Crescendo", 118, Rarity.RARE, mage.cards.g.GrandCrescendo.class));
@@ -141,6 +149,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Grenzo, Havoc Raiser", 216, Rarity.RARE, mage.cards.g.GrenzoHavocRaiser.class));
         cards.add(new SetCardInfo("Grisly Salvage", 290, Rarity.COMMON, mage.cards.g.GrislySalvage.class));
         cards.add(new SetCardInfo("Guttersnipe", 217, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
+        cards.add(new SetCardInfo("Hammerhead Tyrant", 21, Rarity.RARE, mage.cards.h.HammerheadTyrant.class));
         cards.add(new SetCardInfo("Harbinger of the Hunt", 291, Rarity.RARE, mage.cards.h.HarbingerOfTheHunt.class));
         cards.add(new SetCardInfo("Harrow", 258, Rarity.COMMON, mage.cards.h.Harrow.class));
         cards.add(new SetCardInfo("Haughty Djinn", 154, Rarity.RARE, mage.cards.h.HaughtyDjinn.class));
@@ -156,12 +165,15 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Ikra Shidiqi, the Usurper", 100, Rarity.MYTHIC, mage.cards.i.IkraShidiqiTheUsurper.class));
         cards.add(new SetCardInfo("Indomitable Ancients", 121, Rarity.RARE, mage.cards.i.IndomitableAncients.class));
         cards.add(new SetCardInfo("Indulging Patrician", 292, Rarity.UNCOMMON, mage.cards.i.IndulgingPatrician.class));
+        cards.add(new SetCardInfo("Infantry Shield", 35, Rarity.RARE, mage.cards.i.InfantryShield.class));
         cards.add(new SetCardInfo("Infernal Grasp", 182, Rarity.UNCOMMON, mage.cards.i.InfernalGrasp.class));
+        cards.add(new SetCardInfo("Ironwill Forger", 13, Rarity.RARE, mage.cards.i.IronwillForger.class));
         cards.add(new SetCardInfo("Irrigated Farmland", 372, Rarity.RARE, mage.cards.i.IrrigatedFarmland.class));
         cards.add(new SetCardInfo("Isolated Chapel", 373, Rarity.RARE, mage.cards.i.IsolatedChapel.class));
         cards.add(new SetCardInfo("Izzet Signet", 320, Rarity.COMMON, mage.cards.i.IzzetSignet.class));
         cards.add(new SetCardInfo("Jaddi Offshoot", 260, Rarity.UNCOMMON, mage.cards.j.JaddiOffshoot.class));
         cards.add(new SetCardInfo("Jarad, Golgari Lich Lord", 293, Rarity.MYTHIC, mage.cards.j.JaradGolgariLichLord.class));
+        cards.add(new SetCardInfo("Jaws of Defeat", 27, Rarity.RARE, mage.cards.j.JawsOfDefeat.class));
         cards.add(new SetCardInfo("Junji, the Midnight Sky", 183, Rarity.MYTHIC, mage.cards.j.JunjiTheMidnightSky.class));
         cards.add(new SetCardInfo("Karplusan Forest", 374, Rarity.RARE, mage.cards.k.KarplusanForest.class));
         cards.add(new SetCardInfo("Kaya, Geist Hunter", 294, Rarity.MYTHIC, mage.cards.k.KayaGeistHunter.class));
@@ -229,6 +241,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rapid Hybridization", 162, Rarity.UNCOMMON, mage.cards.r.RapidHybridization.class));
         cards.add(new SetCardInfo("Reality Shift", 163, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Reassembling Skeleton", 195, Rarity.UNCOMMON, mage.cards.r.ReassemblingSkeleton.class));
+        cards.add(new SetCardInfo("Redoubled Stormsinger", 37, Rarity.RARE, mage.cards.r.RedoubledStormsinger.class));
         cards.add(new SetCardInfo("Reflections of Littjara", 164, Rarity.RARE, mage.cards.r.ReflectionsOfLittjara.class));
         cards.add(new SetCardInfo("Release the Dogs", 127, Rarity.UNCOMMON, mage.cards.r.ReleaseTheDogs.class));
         cards.add(new SetCardInfo("Reliquary Tower", 386, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
@@ -314,6 +327,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Thunderbreak Regent", 241, Rarity.RARE, mage.cards.t.ThunderbreakRegent.class));
         cards.add(new SetCardInfo("Time Wipe", 308, Rarity.RARE, mage.cards.t.TimeWipe.class));
         cards.add(new SetCardInfo("Timeless Witness", 274, Rarity.UNCOMMON, mage.cards.t.TimelessWitness.class));
+        cards.add(new SetCardInfo("Tip the Scales", 29, Rarity.RARE, mage.cards.t.TipTheScales.class));
         cards.add(new SetCardInfo("Tocasia's Welcome", 135, Rarity.RARE, mage.cards.t.TocasiasWelcome.class));
         cards.add(new SetCardInfo("Tower Defense", 275, Rarity.UNCOMMON, mage.cards.t.TowerDefense.class));
         cards.add(new SetCardInfo("Towering Titan", 276, Rarity.MYTHIC, mage.cards.t.ToweringTitan.class));
@@ -343,6 +357,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Whirlwind of Thought", 311, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class));
         cards.add(new SetCardInfo("Windbrisk Heights", 411, Rarity.RARE, mage.cards.w.WindbriskHeights.class));
         cards.add(new SetCardInfo("Wingmantle Chaplain", 141, Rarity.UNCOMMON, mage.cards.w.WingmantleChaplain.class));
+        cards.add(new SetCardInfo("Within Range", 32, Rarity.RARE, mage.cards.w.WithinRange.class));
         cards.add(new SetCardInfo("Woe Strider", 201, Rarity.RARE, mage.cards.w.WoeStrider.class));
         cards.add(new SetCardInfo("Wonder", 170, Rarity.UNCOMMON, mage.cards.w.Wonder.class));
         cards.add(new SetCardInfo("Woodland Cemetery", 412, Rarity.RARE, mage.cards.w.WoodlandCemetery.class));

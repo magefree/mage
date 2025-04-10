@@ -36,7 +36,7 @@ import java.util.UUID;
 public final class TheArchimandrite extends CardImpl {
 
     private static final DynamicValue xValue = new AdditiveDynamicValue(
-            CardsInControllerHandCount.instance, StaticValue.get(-4)
+            CardsInControllerHandCount.ANY, StaticValue.get(-4)
     );
     private static final FilterPermanent filter = new FilterControlledPermanent();
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent();

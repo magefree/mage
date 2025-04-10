@@ -32,7 +32,7 @@ public final class TishanaVoiceOfThunder extends CardImpl {
         this.toughness = new MageInt(0);
 
         // Tishana, Voice of Thunder's power and toughness are each equal to the number of cards in your hand.
-        DynamicValue xValue = CardsInControllerHandCount.instance;
+        DynamicValue xValue = CardsInControllerHandCount.ANY;
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetBasePowerToughnessSourceEffect(xValue)));
 
         // You have no maximum hand size.

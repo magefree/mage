@@ -1,25 +1,28 @@
 package mage.cards.b;
 
-import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.CostAdjuster;
+import mage.abilities.costs.EarlyTargetCost;
+import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.InfoEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetOpponent;
-import mage.util.CardUtil;
+
+import java.util.Objects;
+import java.util.UUID;
 
 /**
- *
- * @author awjackson
+ * @author awjackson, JayDi85
  */
 public final class BargainingTable extends CardImpl {
 
@@ -27,13 +30,10 @@ public final class BargainingTable extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{5}");
 
         // {X}, {T}: Draw a card. X is the number of cards in an opponent's hand.
-        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new ManaCostsImpl<>("{X}"));
+        Ability ability = new SimpleActivatedAbility(new DrawCardSourceControllerEffect(1), new BargainingTableXCost());
         ability.addCost(new TapSourceCost());
         ability.addEffect(new InfoEffect("X is the number of cards in an opponent's hand"));
-        // You choose an opponent on announcement. This is not targeted, but a choice is still made.
-        // This choice is made before determining the value for X that is used in the cost. (2004-10-04)
-        ability.addTarget(new TargetOpponent(true));
-        ability.setCostAdjuster(BargainingTableAdjuster.instance);
+        ability.setCostAdjuster(BargainingTableCostAdjuster.instance);
         this.addAbility(ability);
     }
 
@@ -47,26 +47,70 @@ public final class BargainingTable extends CardImpl {
     }
 }
 
-enum BargainingTableAdjuster implements CostAdjuster {
+class BargainingTableXCost extends VariableManaCost implements EarlyTargetCost {
+
+    // You choose an opponent on announcement. This is not targeted, but a choice is still made.
+    // This choice is made before determining the value for X that is used in the cost.
+    // (2004-10-04)
+
+    public BargainingTableXCost() {
+        super(VariableCostType.NORMAL, 1);
+    }
+
+    public BargainingTableXCost(final BargainingTableXCost cost) {
+        super(cost);
+    }
+
+    @Override
+    public void chooseTarget(Game game, Ability source, Player controller) {
+        Target targetOpponent = new TargetOpponent(true);
+        controller.choose(Outcome.Benefit, targetOpponent, source, game);
+        addTarget(targetOpponent);
+    }
+
+    @Override
+    public BargainingTableXCost copy() {
+        return new BargainingTableXCost(this);
+    }
+}
+
+enum BargainingTableCostAdjuster implements CostAdjuster {
     instance;
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        int handSize = Integer.MAX_VALUE;
-        if (game.inCheckPlayableState()) {
-            for (UUID playerId : CardUtil.getAllPossibleTargets(ability, game)) {
-                Player player = game.getPlayer(playerId);
-                if (player != null) {
-                    handSize = Math.min(handSize, player.getHand().size());
-                }
-            }
-        } else {
-            Player player = game.getPlayer(ability.getFirstTarget());
-            if (player != null) {
-                handSize = player.getHand().size();
-            }
+    public void prepareX(Ability ability, Game game) {
+        // make sure early target used
+        BargainingTableXCost cost = ability.getManaCostsToPay().getVariableCosts().stream()
+                .filter(c -> c instanceof BargainingTableXCost)
+                .map(c -> (BargainingTableXCost) c)
+                .findFirst()
+                .orElse(null);
+        if (cost == null) {
+            throw new IllegalArgumentException("Wrong code usage: cost item lost");
         }
-        ability.clearManaCostsToPay();
-        ability.addManaCostsToPay(new GenericManaCost(handSize));
+
+        if (game.inCheckPlayableState()) {
+            // possible X
+            int minHandSize = game.getOpponents(ability.getControllerId(), true).stream()
+                    .map(game::getPlayer)
+                    .filter(Objects::nonNull)
+                    .mapToInt(p -> p.getHand().size())
+                    .min()
+                    .orElse(0);
+            int maxHandSize = game.getOpponents(ability.getControllerId(), true).stream()
+                    .map(game::getPlayer)
+                    .filter(Objects::nonNull)
+                    .mapToInt(p -> p.getHand().size())
+                    .max()
+                    .orElse(Integer.MAX_VALUE);
+            ability.setVariableCostsMinMax(minHandSize, maxHandSize);
+        } else {
+            // real X
+            Player opponent = game.getPlayer(cost.getTargets().getFirstTarget());
+            if (opponent == null) {
+                throw new IllegalStateException("Wrong code usage: cost target lost");
+            }
+            ability.setVariableCostsValue(opponent.getHand().size());
+        }
     }
 }

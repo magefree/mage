@@ -1696,7 +1696,7 @@ public class VerifyCardDataTest {
                 checkCardCanBeCopied(card);
             }
         }
-        checkWrongAbilitiesText(card, ref, cardIndex);
+        checkWrongAbilitiesText(card, ref, cardIndex, false);
     }
 
     private void checkColors(Card card, MtgJsonCard ref) {
@@ -2407,8 +2407,7 @@ public class VerifyCardDataTest {
                 // format to print main card then spell card
                 card.getInitAbilities().getRules().forEach(this::printAbilityText);
                 ((CardWithSpellOption) card).getSpellCard().getAbilities().getRules().forEach(r -> printAbilityText(r.replace("&mdash; ", "\n")));
-            }
-            else if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
+            } else if (card instanceof SplitCard || card instanceof ModalDoubleFacedCard) {
                 card.getAbilities().getRules().forEach(this::printAbilityText);
             } else {
                 card.getRules().forEach(this::printAbilityText);
@@ -2416,23 +2415,30 @@ public class VerifyCardDataTest {
 
             // ref card
             System.out.println();
-            MtgJsonCard ref = MtgJsonService.card(card.getName());
-            MtgJsonCard ref2 = null;
+            MtgJsonCard refMain = MtgJsonService.card(card.getName());
+            MtgJsonCard refSpell = null;
             if (card instanceof CardWithSpellOption) {
-                ref2 = MtgJsonService.card(((CardWithSpellOption) card).getSpellCard().getName());
+                refSpell = MtgJsonService.card(((CardWithSpellOption) card).getSpellCard().getName());
             }
-            if (ref == null) {
-                ref = MtgJsonService.cardByClassName(foundClassName);
+            if (refMain == null) {
+                refMain = MtgJsonService.cardByClassName(foundClassName);
             }
-            if (ref != null) {
-                System.out.println("ref: " + ref.getNameAsFace() + " " + ref.manaCost);
-                System.out.println(ref.text);
-                if (ref2 != null) {
-                    System.out.println(ref2.getNameAsFace() + " " + ref2.manaCost);
-                    System.out.println(ref2.text);
+            if (refMain != null) {
+                System.out.println("ref: " + refMain.getNameAsFace() + " " + refMain.manaCost);
+                System.out.println(refMain.text);
+                if (refSpell != null) {
+                    System.out.println(refSpell.getNameAsFace() + " " + refSpell.manaCost);
+                    System.out.println(refSpell.text);
                 }
             } else {
                 System.out.println("WARNING, can't find mtgjson ref for " + card.getName());
+            }
+
+            // additional check to simulate diff in rules
+            if (refMain != null) {
+                checkWrongAbilitiesText(card, refMain, 0, true);
+            } else if (refSpell != null) {
+                checkWrongAbilitiesText(((CardWithSpellOption) card).getSpellCard(), refSpell, 0, true);
             }
         });
     }
@@ -2484,9 +2490,9 @@ public class VerifyCardDataTest {
         System.out.println();
     }
 
-    private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex) {
+    private void checkWrongAbilitiesText(Card card, MtgJsonCard ref, int cardIndex, boolean forceToCheck) {
         // checks missing or wrong text
-        if (!FULL_ABILITIES_CHECK_SET_CODES.equals("*") && !FULL_ABILITIES_CHECK_SET_CODES.contains(card.getExpansionSetCode())) {
+        if (!forceToCheck && !FULL_ABILITIES_CHECK_SET_CODES.equals("*") && !FULL_ABILITIES_CHECK_SET_CODES.contains(card.getExpansionSetCode())) {
             return;
         }
         if (wasCheckedByAbilityText(ref)) {
@@ -2560,12 +2566,20 @@ public class VerifyCardDataTest {
                         refRules[i];
             }
         }
-
+        if (ref.subtypes.contains("Omen")) {
+            for (int i = 0; i < refRules.length; i++) {
+                refRules[i] = "Omen " +
+                        ref.types.get(0) + " - " +
+                        ref.faceName + ' ' +
+                        ref.manaCost + " - " +
+                        refRules[i];
+            }
+        }
 
         String[] cardRules = card
                 .getRules()
                 .stream()
-                .filter(s -> !(card instanceof CardWithSpellOption) || !s.startsWith("Adventure ") || !s.startsWith("Omen "))
+                .filter(s -> !(card instanceof CardWithSpellOption) || !(s.startsWith("Adventure ") || s.startsWith("Omen ")))
                 .collect(Collectors.joining("\n"))
                 .replace("<br>", "\n")
                 .replace("<br/>", "\n")
@@ -2620,10 +2634,10 @@ public class VerifyCardDataTest {
         }
 
         // extra message for easy checks
-        if (!isFine) {
+        if (forceToCheck || !isFine) {
             System.out.println();
 
-            System.out.println("Wrong card " + cardIndex + ": " + card.getName());
+            System.out.println((isFine ? "Good" : "Wrong") + " card " + cardIndex + ": " + card.getName());
             Arrays.sort(cardRules);
             for (String s : cardRules) {
                 System.out.println(s);

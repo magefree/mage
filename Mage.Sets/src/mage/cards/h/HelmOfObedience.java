@@ -2,9 +2,8 @@ package mage.cards.h;
 
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.VariableCostType;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.VariableManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.*;
@@ -29,9 +28,8 @@ public final class HelmOfObedience extends CardImpl {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT}, "{4}");
 
         // {X}, {T}: Target opponent puts cards from the top of their library into their graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0.
-        VariableManaCost xCosts = new VariableManaCost(VariableCostType.NORMAL);
-        xCosts.setMinX(1);
-        Ability ability = new SimpleActivatedAbility(new HelmOfObedienceEffect(), xCosts);
+        Ability ability = new SimpleActivatedAbility(new HelmOfObedienceEffect(), new ManaCostsImpl<>("{X}"));
+        ability.setVariableCostsMinMax(1, Integer.MAX_VALUE);
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);

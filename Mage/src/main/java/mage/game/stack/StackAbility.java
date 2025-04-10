@@ -427,6 +427,16 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
+    public void setVariableCostsMinMax(int min, int max) {
+        ability.setVariableCostsMinMax(min, max);
+    }
+
+    @Override
+    public void setVariableCostsValue(int xValue) {
+        ability.setVariableCostsValue(xValue);
+    }
+
+    @Override
     public Map<String, Object> getCostsTagMap() {
         return ability.getCostsTagMap();
     }
@@ -778,14 +788,23 @@ public class StackAbility extends StackObjectImpl implements Ability {
     }
 
     @Override
-    public CostAdjuster getCostAdjuster() {
-        return costAdjuster;
+    public void adjustX(Game game) {
+        if (costAdjuster != null) {
+            costAdjuster.prepareX(this, game);
+        }
     }
 
     @Override
-    public void adjustCosts(Game game) {
+    public void adjustCostsPrepare(Game game) {
         if (costAdjuster != null) {
-            costAdjuster.adjustCosts(this, game);
+            costAdjuster.prepareCost(this, game);
+        }
+    }
+
+    @Override
+    public void adjustCostsModify(Game game, CostModificationType costModificationType) {
+        if (costAdjuster != null) {
+            costAdjuster.modifyCost(this, game, costModificationType);
         }
     }
 

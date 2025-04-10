@@ -380,9 +380,13 @@ public class HumanPlayer extends PlayerImpl {
         }
     }
 
+    private boolean canCallFeedback(Game game) {
+        return !gameInCheckPlayableState(game) && !game.isSimulation();
+    }
+
     @Override
     public boolean chooseMulligan(Game game) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return true;
         }
 
@@ -509,7 +513,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
-        if (gameInCheckPlayableState(game, true)) { // ignore warning logs until double call for TAPPED_FOR_MANA will be fix
+        if (gameInCheckPlayableState(game, true) || game.isSimulation()) { // TODO: ignore warning logs until double call for TAPPED_FOR_MANA will be fix
             return 0;
         }
 
@@ -615,7 +619,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return true;
         }
 
@@ -678,7 +682,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return true;
         }
 
@@ -782,7 +786,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return true;
         }
 
@@ -862,7 +866,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return true;
         }
 
@@ -944,7 +948,7 @@ public class HumanPlayer extends PlayerImpl {
     // choose one or multiple target cards
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return true;
         }
 
@@ -1025,7 +1029,7 @@ public class HumanPlayer extends PlayerImpl {
     public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
         // choose amount
         // human can choose or un-choose MULTIPLE targets at once
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return true;
         }
 
@@ -1486,8 +1490,8 @@ public class HumanPlayer extends PlayerImpl {
     @Override
     public TriggeredAbility chooseTriggeredAbility(java.util.List<TriggeredAbility> abilities, Game game) {
         // choose triggered abilitity from list
-        if (gameInCheckPlayableState(game)) {
-            return null;
+        if (!canCallFeedback(game)) {
+            return abilities.isEmpty() ? null : abilities.get(0);
         }
 
         // automatically order triggers with same ability, rules text, and targets
@@ -1615,7 +1619,7 @@ public class HumanPlayer extends PlayerImpl {
 
     protected boolean playManaHandling(Ability abilityToCast, ManaCost unpaid, String promptText, Game game) {
         // choose mana to pay (from permanents or from pool)
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return true;
         }
 
@@ -1661,7 +1665,7 @@ public class HumanPlayer extends PlayerImpl {
      * @return
      */
     public int announceRepetitions(Game game) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return 0;
         }
 
@@ -1694,8 +1698,8 @@ public class HumanPlayer extends PlayerImpl {
      */
     @Override
     public int announceXMana(int min, int max, String message, Game game, Ability ability) {
-        if (gameInCheckPlayableState(game)) {
-            return 0;
+        if (!canCallFeedback(game)) {
+            return min;
         }
 
         int xValue = 0;
@@ -1709,6 +1713,8 @@ public class HumanPlayer extends PlayerImpl {
             if (response.getInteger() != null) {
                 break;
             }
+
+            // TODO: add response verify here
         }
 
         if (response.getInteger() != null) {
@@ -1719,8 +1725,8 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost) {
-        if (gameInCheckPlayableState(game)) {
-            return 0;
+        if (!canCallFeedback(game)) {
+            return min;
         }
 
         int xValue = 0;
@@ -1792,7 +1798,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return;
         }
 
@@ -2062,7 +2068,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return;
         }
 
@@ -2124,7 +2130,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected void selectCombatGroup(UUID defenderId, UUID blockerId, Game game) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return;
         }
         TargetAttackingCreature target = new TargetAttackingCreature();
@@ -2178,8 +2184,8 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public int getAmount(int min, int max, String message, Game game) {
-        if (gameInCheckPlayableState(game)) {
-            return 0;
+        if (!canCallFeedback(game)) {
+            return min;
         }
 
         while (canRespond()) {
@@ -2218,7 +2224,7 @@ public class HumanPlayer extends PlayerImpl {
             return defaultList;
         }
 
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return defaultList;
         }
 
@@ -2286,7 +2292,7 @@ public class HumanPlayer extends PlayerImpl {
      * @param unpaidForManaAction - set unpaid for mana actions like convoke
      */
     protected void activateSpecialAction(Game game, ManaCost unpaidForManaAction) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return;
         }
 
@@ -2317,7 +2323,7 @@ public class HumanPlayer extends PlayerImpl {
     }
 
     protected void activateAbility(Map<UUID, ? extends ActivatedAbility> abilities, MageObject object, Game game) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return;
         }
 
@@ -2402,7 +2408,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public SpellAbility chooseAbilityForCast(Card card, Game game, boolean noMana) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return null;
         }
 
@@ -2442,7 +2448,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public ActivatedAbility chooseLandOrSpellAbility(Card card, Game game, boolean noMana) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return null;
         }
 
@@ -2489,7 +2495,7 @@ public class HumanPlayer extends PlayerImpl {
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         // choose mode to activate
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return null;
         }
 
@@ -2617,7 +2623,7 @@ public class HumanPlayer extends PlayerImpl {
 
     @Override
     public boolean choosePile(Outcome outcome, String message, java.util.List<? extends Card> pile1, java.util.List<? extends Card> pile2, Game game) {
-        if (gameInCheckPlayableState(game)) {
+        if (!canCallFeedback(game)) {
             return true;
         }
 

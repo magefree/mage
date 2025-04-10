@@ -37,7 +37,7 @@ public final class SkirgeFamiliar extends CardImpl {
                 new DiscardCardCost(false),
                 // not perfect but for hand cards correct, activated abilities on Battlefield will miss one possible available mana
                 // to solve this we have to do possible mana calculation per pell/ability to use.
-                new IntPlusDynamicValue(-1, CardsInControllerHandCount.instance)
+                new IntPlusDynamicValue(-1, CardsInControllerHandCount.ANY)
                 ));
     }
 

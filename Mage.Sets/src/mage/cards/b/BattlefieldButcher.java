@@ -58,7 +58,7 @@ enum BattlefieldButcherAdjuster implements CostAdjuster {
     private static final Hint hint = new ValueHint("Creature cards in your graveyard", xValue);
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
+    public void reduceCost(Ability ability, Game game) {
         CardUtil.reduceCost(ability, xValue.calculate(game, ability, null));
     }
 

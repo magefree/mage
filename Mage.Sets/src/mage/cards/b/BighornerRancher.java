@@ -14,7 +14,6 @@ import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
 import mage.constants.SubType;
-import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -42,8 +41,10 @@ public final class BighornerRancher extends CardImpl {
 
         // Sacrifice Bighorner Rancher: You gain life equal to the greatest toughness among other creatures you control.
         this.addAbility(new SimpleActivatedAbility(
-                new GainLifeEffect(GreatestToughnessAmongControlledCreaturesValue.instance).setText("You gain life equal to the greatest toughness among other creatures you control."),
-                new SacrificeSourceCost()));
+                new GainLifeEffect(GreatestToughnessAmongControlledCreaturesValue.OTHER)
+                        .setText("You gain life equal to the greatest toughness among other creatures you control."),
+                new SacrificeSourceCost()
+        ).addHint(GreatestToughnessAmongControlledCreaturesValue.OTHER.getHint()));
     }
 
     private BighornerRancher(final BighornerRancher card) {

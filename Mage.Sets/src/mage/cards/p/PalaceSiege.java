@@ -1,55 +1,43 @@
 package mage.cards.p;
 
-import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.common.ModeChoiceSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.AsEntersBattlefieldAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseModeEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.abilities.effects.common.continuous.GainAnchorWordAbilitySourceEffect;
+import mage.abilities.triggers.BeginningOfUpkeepTriggeredAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ModeChoice;
 import mage.filter.StaticFilters;
 import mage.target.common.TargetCardInYourGraveyard;
 
+import java.util.UUID;
+
 /**
- *
  * @author LevelX2
  */
 public final class PalaceSiege extends CardImpl {
-
-    private static final String ruleTrigger1 = "&bull  Khans &mdash; At the beginning of your upkeep, return target creature card from your graveyard to your hand.";
-    private static final String ruleTrigger2 = "&bull  Dragons &mdash; At the beginning of your upkeep, each opponent loses 2 life and you gain 2 life.";
 
     public PalaceSiege(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{3}{B}{B}");
 
         // As Palace Siege enters the battlefield, choose Khans or Dragons.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Khans or Dragons?", "Khans", "Dragons"), null,
-                "As {this} enters, choose Khans or Dragons.", ""));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseModeEffect(ModeChoice.KHANS, ModeChoice.DRAGONS)));
 
         // * Khans - At the beginning of your upkeep, return target creature card from your graveyard to your hand.
-        Ability ability1 = new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect()),
-                new ModeChoiceSourceCondition("Khans"),
-                ruleTrigger1);
+        Ability ability1 = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect());
         ability1.addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE));
-        this.addAbility(ability1);
+        this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(ability1, ModeChoice.KHANS)));
 
         // * Dragons - At the beginning of your upkeep, each opponent loses 2 life and you gain 2 life.
-        Ability ability2 = new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(new LoseLifeOpponentsEffect(2)),
-                new ModeChoiceSourceCondition("Dragons"),
-                ruleTrigger2);
-        Effect effect = new GainLifeEffect(2);
-        effect.setText("and you gain 2 life");
-        ability2.addEffect(effect);
-        this.addAbility(ability2);
+        Ability ability2 = new BeginningOfUpkeepTriggeredAbility(new LoseLifeOpponentsEffect(2));
+        ability2.addEffect(new GainLifeEffect(2).setText("and you gain 2 life"));
+        this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(ability2, ModeChoice.DRAGONS)));
 
     }
 

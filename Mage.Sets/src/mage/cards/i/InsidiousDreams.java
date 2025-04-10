@@ -25,7 +25,7 @@ public final class InsidiousDreams extends CardImpl {
     public InsidiousDreams(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{3}{B}");
 
-        // As an additional cost to cast Insidious Dreams, discard X cards.
+        // As an additional cost to cast this spell, discard X cards.
         this.getSpellAbility().addCost(new DiscardXTargetCost(StaticFilters.FILTER_CARD_CARDS, true));
 
         // Search your library for X cards. Then shuffle your library and put those cards on top of it in any order.

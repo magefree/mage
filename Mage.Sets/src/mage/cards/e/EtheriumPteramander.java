@@ -80,8 +80,7 @@ enum EtheriumPteramanderAdjuster implements CostAdjuster {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        int count = artifactCount.calculate(game, ability, null);
-        CardUtil.reduceCost(ability, count);
+    public void reduceCost(Ability ability, Game game) {
+        CardUtil.reduceCost(ability, artifactCount.calculate(game, ability, null));
     }
 }

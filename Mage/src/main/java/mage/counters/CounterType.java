@@ -54,6 +54,7 @@ public enum CounterType {
     CURRENCY("currency"),
     DEATH("death"),
     DEATHTOUCH("deathtouch"),
+    DECAYED("decayed"),
     DEFENSE("defense"),
     DELAY("delay"),
     DEPLETION("depletion"),
@@ -184,6 +185,7 @@ public enum CounterType {
     PREY("prey"),
     PUPA("pupa"),
     RAD("rad"),
+    RALLY("rally"),
     REACH("reach"),
     REJECTION("rejection"),
     REPAIR("repair"),
@@ -314,6 +316,8 @@ public enum CounterType {
                 return new BoostCounter(-2, -2, amount);
             case DEATHTOUCH:
                 return new AbilityCounter(DeathtouchAbility.getInstance(), amount);
+            case DECAYED:
+                return new AbilityCounter(new DecayedAbility(), amount);
             case DOUBLE_STRIKE:
                 return new AbilityCounter(DoubleStrikeAbility.getInstance(), amount);
             case EXALTED:
