@@ -68,7 +68,7 @@ class DelayEffect extends OneShotEffect {
         if (controller != null && spell != null) {
             Effect effect = new CounterTargetWithReplacementEffect(PutCards.EXILED);
             effect.setTargetPointer(this.getTargetPointer().copy());
-            Card card = game.getCard(spell.getSourceId());
+            Card card = spell.getMainCard();
             if (card != null && effect.apply(game, source) && game.getState().getZone(card.getId()) == Zone.EXILED) {
                 boolean hasSuspend = card.getAbilities(game).containsClass(SuspendAbility.class);
                 UUID exileId = SuspendAbility.getSuspendExileId(controller.getId(), game);
