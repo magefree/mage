@@ -32,7 +32,7 @@ public final class GracefulRestoration extends CardImpl {
 
         // Choose one —
         // • Return target creature card from your graveyard to the battlefield with an additional +1/+1 counter on it.
-        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(CounterType.P1P1.createInstance(), true));
+        this.getSpellAbility().addEffect(new ReturnFromGraveyardToBattlefieldWithCounterTargetEffect(true, CounterType.P1P1.createInstance()));
         this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(StaticFilters.FILTER_CARD_CREATURE_YOUR_GRAVEYARD));
 
         // • Return up to two target creature cards with power 2 or less from your graveyard to the battlefield.

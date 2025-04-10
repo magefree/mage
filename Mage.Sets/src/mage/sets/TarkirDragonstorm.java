@@ -181,6 +181,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Opulent Palace", 264, Rarity.UNCOMMON, mage.cards.o.OpulentPalace.class));
         cards.add(new SetCardInfo("Osseous Exhale", 17, Rarity.COMMON, mage.cards.o.OsseousExhale.class));
         cards.add(new SetCardInfo("Overwhelming Surge", 115, Rarity.UNCOMMON, mage.cards.o.OverwhelmingSurge.class));
+        cards.add(new SetCardInfo("Perennation", 212, Rarity.MYTHIC, mage.cards.p.Perennation.class));
         cards.add(new SetCardInfo("Piercing Exhale", 151, Rarity.COMMON, mage.cards.p.PiercingExhale.class));
         cards.add(new SetCardInfo("Plains", 277, Rarity.LAND, mage.cards.basiclands.Plains.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Poised Practitioner", 18, Rarity.COMMON, mage.cards.p.PoisedPractitioner.class));
