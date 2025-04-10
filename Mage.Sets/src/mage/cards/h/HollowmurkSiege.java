@@ -5,18 +5,19 @@ import java.util.UUID;
 
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.common.ModeChoiceSourceCondition;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.ChooseModeEffect;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.continuous.GainAbilityTargetEffect;
+import mage.abilities.effects.common.continuous.GainAnchorWordAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.MenaceAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
+import mage.constants.ModeChoice;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.StaticFilters;
@@ -32,15 +33,14 @@ import mage.target.TargetPermanent;
 public final class HollowmurkSiege extends CardImpl {
 
     public HollowmurkSiege(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[] { CardType.ENCHANTMENT }, "{B}{G}");
+        super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}");
 
         // As this enchantment enters, choose Sultai or Abzan.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseModeEffect("Sultai or Abzan?", "Sultai", "Abzan"), null,
-                "As {this} enters, choose Sultai or Abzan.", ""));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseModeEffect(ModeChoice.SULTAI, ModeChoice.ABZAN)));
 
         // * Sultai -- Whenever a counter is put on a creature you control, draw a card.
         // This ability triggers only once each turn.
-        this.addAbility(new HollowmurkSiegeSultaiTriggeredAbility());
+        this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(new HollowmurkSiegeSultaiTriggeredAbility(), ModeChoice.SULTAI)));
 
         // * Abzan -- Whenever you attack, put a +1/+1 counter on target attacking
         // creature. It gains menace until end of turn.
@@ -49,12 +49,7 @@ public final class HollowmurkSiege extends CardImpl {
         abzanAbility.addEffect(
                 new GainAbilityTargetEffect(new MenaceAbility()));
         abzanAbility.addTarget(new TargetPermanent(StaticFilters.FILTER_ATTACKING_CREATURE));
-
-        this.addAbility(new ConditionalTriggeredAbility(
-                abzanAbility,
-                new ModeChoiceSourceCondition("Abzan"),
-                "&bull; Abzan &mdash; Whenever you attack, put a +1/+1 counter on target attacking creature. It gains menace until end of turn.")
-                .setTriggersLimitEachTurn(1));
+        this.addAbility(new SimpleStaticAbility(new GainAnchorWordAbilitySourceEffect(abzanAbility, ModeChoice.ABZAN)));
     }
 
     private HollowmurkSiege(final HollowmurkSiege card) {
@@ -68,7 +63,6 @@ public final class HollowmurkSiege extends CardImpl {
 }
 
 class HollowmurkSiegeSultaiTriggeredAbility extends TriggeredAbilityImpl {
-    private static ModeChoiceSourceCondition choiceCondition = new ModeChoiceSourceCondition("Sultai");
 
     HollowmurkSiegeSultaiTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DrawCardSourceControllerEffect(1));
@@ -91,13 +85,8 @@ class HollowmurkSiegeSultaiTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (!choiceCondition.apply(game, this)) {
-            return false;
-        }
         if (event.getData().equals(CounterType.P1P1.getName())) {
-            Permanent permanent = Optional
-                    .ofNullable(game.getPermanentOrLKIBattlefield(event.getTargetId()))
-                    .orElse(game.getPermanentEntering(event.getTargetId()));
+            Permanent permanent = Optional.ofNullable(game.getPermanentOrLKIBattlefield(event.getTargetId())).orElse(game.getPermanentEntering(event.getTargetId()));
 
             return permanent != null && permanent.isCreature(game) && permanent.getControllerId() == getControllerId();
         }
@@ -106,6 +95,6 @@ class HollowmurkSiegeSultaiTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "&bull; Sultai &mdash; Whenever a counter is put on a creature you control, draw a card. This ability triggers only once each turn.";
+        return "Whenever a counter is put on a creature you control, draw a card. This ability triggers only once each turn.";
     }
 }
