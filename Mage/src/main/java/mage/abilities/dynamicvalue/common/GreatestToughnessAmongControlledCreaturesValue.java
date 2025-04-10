@@ -39,7 +39,7 @@ public enum GreatestToughnessAmongControlledCreaturesValue implements DynamicVal
 
     @Override
     public GreatestToughnessAmongControlledCreaturesValue copy() {
-        return GreatestToughnessAmongControlledCreaturesValue.ALL;
+        return this;
     }
 
     @Override
