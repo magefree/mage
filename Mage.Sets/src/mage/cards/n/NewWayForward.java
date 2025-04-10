@@ -1,8 +1,11 @@
-package mage.cards.d;
+package mage.cards.n;
 
 import mage.abilities.Ability;
+import mage.abilities.common.delayed.ReflexiveTriggeredAbility;
 import mage.abilities.effects.PreventionEffectData;
 import mage.abilities.effects.PreventionEffectImpl;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
@@ -10,53 +13,53 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.players.Player;
 import mage.target.TargetSource;
+import mage.target.targetpointer.FixedTarget;
 
 import java.util.UUID;
 
 /**
- * @author LevelX2
+ * @author TheElk801
  */
-public final class DeflectingPalm extends CardImpl {
+public final class NewWayForward extends CardImpl {
 
-    public DeflectingPalm(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{R}{W}");
+    public NewWayForward(UUID ownerId, CardSetInfo setInfo) {
+        super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{2}{U}{R}{W}");
 
-        // The next time a source of your choice would deal damage to you this turn, prevent that damage. If damage is prevented this way, Deflecting Palm deals that much damage to that source's controller.
-        this.getSpellAbility().addEffect(new DeflectingPalmEffect());
+        // The next time a source of your choice would deal damage to you this turn, prevent that damage. When damage is prevented this way, New Way Forward deals that much damage to that source's controller and you draw that many cards.
+        this.getSpellAbility().addEffect(new NewWayForwardEffect());
     }
 
-    private DeflectingPalm(final DeflectingPalm card) {
+    private NewWayForward(final NewWayForward card) {
         super(card);
     }
 
     @Override
-    public DeflectingPalm copy() {
-        return new DeflectingPalm(this);
+    public NewWayForward copy() {
+        return new NewWayForward(this);
     }
 }
 
-class DeflectingPalmEffect extends PreventionEffectImpl {
+class NewWayForwardEffect extends PreventionEffectImpl {
 
     private final TargetSource target;
 
-    DeflectingPalmEffect() {
+    NewWayForwardEffect() {
         super(Duration.EndOfTurn, Integer.MAX_VALUE, false, false);
         this.staticText = "the next time a source of your choice would deal damage to you this turn, " +
-                "prevent that damage. If damage is prevented this way, " +
-                "{this} deals that much damage to that source's controller";
+                "prevent that damage. When damage is prevented this way, " +
+                "{this} deals that much damage to that source's controller and you draw that many cards";
         this.target = new TargetSource();
     }
 
-    private DeflectingPalmEffect(final DeflectingPalmEffect effect) {
+    private NewWayForwardEffect(final NewWayForwardEffect effect) {
         super(effect);
         this.target = effect.target.copy();
     }
 
     @Override
-    public DeflectingPalmEffect copy() {
-        return new DeflectingPalmEffect(this);
+    public NewWayForwardEffect copy() {
+        return new NewWayForwardEffect(this);
     }
 
     @Override
@@ -74,11 +77,13 @@ class DeflectingPalmEffect extends PreventionEffectImpl {
             return true;
         }
         UUID objectControllerId = game.getControllerId(target.getFirstTarget());
-        Player objectController = game.getPlayer(objectControllerId);
-        if (objectController == null) {
-            return true;
-        }
-        objectController.damage(preventionData.getPreventedDamage(), source.getSourceId(), source, game);
+        ReflexiveTriggeredAbility ability = new ReflexiveTriggeredAbility(
+                new DamageTargetEffect(preventionData.getPreventedDamage())
+                        .setTargetPointer(new FixedTarget(objectControllerId)),
+                false
+        );
+        ability.addEffect(new DrawCardSourceControllerEffect(preventionData.getPreventedDamage()));
+        game.fireReflexiveTriggeredAbility(ability, source);
         return true;
     }
 
