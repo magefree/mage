@@ -241,6 +241,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Rapid Hybridization", 162, Rarity.UNCOMMON, mage.cards.r.RapidHybridization.class));
         cards.add(new SetCardInfo("Reality Shift", 163, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
         cards.add(new SetCardInfo("Reassembling Skeleton", 195, Rarity.UNCOMMON, mage.cards.r.ReassemblingSkeleton.class));
+        cards.add(new SetCardInfo("Redoubled Stormsinger", 37, Rarity.RARE, mage.cards.r.RedoubledStormsinger.class));
         cards.add(new SetCardInfo("Reflections of Littjara", 164, Rarity.RARE, mage.cards.r.ReflectionsOfLittjara.class));
         cards.add(new SetCardInfo("Release the Dogs", 127, Rarity.UNCOMMON, mage.cards.r.ReleaseTheDogs.class));
         cards.add(new SetCardInfo("Reliquary Tower", 386, Rarity.UNCOMMON, mage.cards.r.ReliquaryTower.class));
