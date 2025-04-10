@@ -124,8 +124,8 @@ public class PlayersListAndOrderTest extends CardTestMultiPlayerBase {
         players.add(playerB.getId());
         players.add(playerC.getId());
         players.add(playerD.getId());
-        Assert.assertEquals("last added player must be current", players.get(0), playerD.getId());
         List<UUID> staticList = new ArrayList<>(players);
+        Assert.assertEquals("last added player must be current", staticList.get(0), playerD.getId());
 
         // normal
         Assert.assertEquals(players.get(0), staticList.get(0));
