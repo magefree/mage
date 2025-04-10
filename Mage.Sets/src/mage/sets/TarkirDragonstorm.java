@@ -1,8 +1,5 @@
 package mage.sets;
 
-import java.util.Arrays;
-import java.util.List;
-
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -222,6 +219,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Scavenger Regent", 90, Rarity.RARE, mage.cards.s.ScavengerRegent.class));
         cards.add(new SetCardInfo("Scoured Barrens", 267, Rarity.COMMON, mage.cards.s.ScouredBarrens.class));
         cards.add(new SetCardInfo("Seize Opportunity", 119, Rarity.COMMON, mage.cards.s.SeizeOpportunity.class));
+        cards.add(new SetCardInfo("Severance Priest", 222, Rarity.RARE, mage.cards.s.SeverancePriest.class));
         cards.add(new SetCardInfo("Shiko, Paragon of the Way", 223, Rarity.MYTHIC, mage.cards.s.ShikoParagonOfTheWay.class));
         cards.add(new SetCardInfo("Shock Brigade", 120, Rarity.COMMON, mage.cards.s.ShockBrigade.class));
         cards.add(new SetCardInfo("Shocking Sharpshooter", 121, Rarity.UNCOMMON, mage.cards.s.ShockingSharpshooter.class));
