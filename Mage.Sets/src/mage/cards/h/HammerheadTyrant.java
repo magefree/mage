@@ -34,6 +34,7 @@ public final class HammerheadTyrant extends CardImpl {
 
     static {
         filter.add(TargetController.OPPONENT.getControllerPredicate());
+        filter.add(HammerheadTyrantPredicate.instance);
     }
 
     public HammerheadTyrant(UUID ownerId, CardSetInfo setInfo) {
