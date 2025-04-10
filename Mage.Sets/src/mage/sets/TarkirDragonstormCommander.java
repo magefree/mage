@@ -149,6 +149,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Grenzo, Havoc Raiser", 216, Rarity.RARE, mage.cards.g.GrenzoHavocRaiser.class));
         cards.add(new SetCardInfo("Grisly Salvage", 290, Rarity.COMMON, mage.cards.g.GrislySalvage.class));
         cards.add(new SetCardInfo("Guttersnipe", 217, Rarity.UNCOMMON, mage.cards.g.Guttersnipe.class));
+        cards.add(new SetCardInfo("Hammerhead Tyrant", 21, Rarity.RARE, mage.cards.h.HammerheadTyrant.class));
         cards.add(new SetCardInfo("Harbinger of the Hunt", 291, Rarity.RARE, mage.cards.h.HarbingerOfTheHunt.class));
         cards.add(new SetCardInfo("Harrow", 258, Rarity.COMMON, mage.cards.h.Harrow.class));
         cards.add(new SetCardInfo("Haughty Djinn", 154, Rarity.RARE, mage.cards.h.HaughtyDjinn.class));
