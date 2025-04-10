@@ -368,6 +368,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Yahenni, Undying Partisan", 202, Rarity.RARE, mage.cards.y.YahenniUndyingPartisan.class));
         cards.add(new SetCardInfo("Yavimaya Coast", 413, Rarity.RARE, mage.cards.y.YavimayaCoast.class));
         cards.add(new SetCardInfo("Young Pyromancer", 95, Rarity.UNCOMMON, mage.cards.y.YoungPyromancer.class));
+        cards.add(new SetCardInfo("Zenith Festival", 41, Rarity.RARE, mage.cards.z.ZenithFestival.class));
         cards.add(new SetCardInfo("Zetalpa, Primal Dawn", 142, Rarity.RARE, mage.cards.z.ZetalpaPrimalDawn.class));
     }
 }
