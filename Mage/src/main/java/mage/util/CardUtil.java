@@ -2236,6 +2236,19 @@ public final class CardUtil {
         return sb.toString();
     }
 
+    public static <T> T getEffectValueFromAbility(Ability ability, String key, Class<T> clazz) {
+        return getEffectValueFromAbility(ability, key, clazz, null);
+    }
+
+    public static <T> T getEffectValueFromAbility(Ability ability, String key, Class<T> clazz, T defaultValue) {
+        return castStream(
+                ability.getAllEffects()
+                        .stream()
+                        .map(effect -> effect.getValue(key)),
+                clazz
+        ).findFirst().orElse(defaultValue);
+    }
+
     public static <T> Stream<T> castStream(Collection<?> collection, Class<T> clazz) {
         return castStream(collection.stream(), clazz);
     }
