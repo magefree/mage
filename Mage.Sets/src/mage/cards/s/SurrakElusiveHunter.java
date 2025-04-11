@@ -92,7 +92,7 @@ class SurrakElusiveHunterTriggeredAbility extends TriggeredAbilityImpl {
         }
         StackObject targetingObject = CardUtil.getTargetingStackObject(this.getId().toString(), event, game);
         return targetingObject != null
-                && !game.getOpponents(getControllerId()).contains(targetingObject.getControllerId())
+                && game.getOpponents(getControllerId()).contains(targetingObject.getControllerId())
                 && !CardUtil.checkTargetedEventAlreadyUsed(this.getId().toString(), targetingObject, event, game);
     }
 }
