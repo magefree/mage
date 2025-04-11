@@ -26,6 +26,8 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Adeline, Resplendent Cathar", 108, Rarity.RARE, mage.cards.a.AdelineResplendentCathar.class));
         cards.add(new SetCardInfo("Afterlife from the Loam", 25, Rarity.RARE, mage.cards.a.AfterlifeFromTheLoam.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Afterlife from the Loam", 65, Rarity.RARE, mage.cards.a.AfterlifeFromTheLoam.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ainok Strike Leader", 11, Rarity.RARE, mage.cards.a.AinokStrikeLeader.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Ainok Strike Leader", 51, Rarity.RARE, mage.cards.a.AinokStrikeLeader.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Aligned Heart", 12, Rarity.RARE, mage.cards.a.AlignedHeart.class));
         cards.add(new SetCardInfo("Amphin Mutineer", 143, Rarity.RARE, mage.cards.a.AmphinMutineer.class));
         cards.add(new SetCardInfo("Ancestral Vision", 144, Rarity.RARE, mage.cards.a.AncestralVision.class));
