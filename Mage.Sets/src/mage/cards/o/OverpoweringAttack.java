@@ -30,8 +30,8 @@ public final class OverpoweringAttack extends CardImpl {
         this.addAbility(new FreerunningAbility("{2}{R}"));
 
         // Untap all creatures you control that attacked this turn. If it's your main phase, there is an additional combat phase after this phase, followed by an additional main phase.
-        this.getSpellAbility().addEffect(new UntapAllControllerEffect(filter, "untap all creatures you control that attacked this turn"));
-        this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect());
+        this.getSpellAbility().addEffect(new UntapAllControllerEffect(filter, "Untap all creatures you control that attacked this turn"));
+        this.getSpellAbility().addEffect(new AddCombatAndMainPhaseEffect().setText("If it's your main phase, there is an additional combat phase after this phase, followed by an additional main phase"));
     }
 
     private OverpoweringAttack(final OverpoweringAttack card) {

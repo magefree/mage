@@ -38,10 +38,10 @@ public final class AllOutAssault extends CardImpl {
         this.addAbility(anthemAbility);
 
         // When this enchantment enters, if it's your main phase, there is an additional combat phase after this phase followed by an additional main phase. When you next attack this turn, untap each creature you control.
-        TriggeredAbility extraCombatAbility = new EntersBattlefieldTriggeredAbility(new AddCombatAndMainPhaseEffect());
+        TriggeredAbility extraCombatAbility = new EntersBattlefieldTriggeredAbility(new AddCombatAndMainPhaseEffect().setText("there is an additional combat phase after this phase followed by an additional main phase")).setTriggerPhrase("When this enchantement enters, ");
         extraCombatAbility.addEffect(new CreateDelayedTriggeredAbilityEffect(new WhenYouAttackDelayedTriggeredAbility(
                 new UntapAllControllerEffect(
-                        StaticFilters.FILTER_CONTROLLED_CREATURE, "Untap each creature you control"), Duration.EndOfTurn, true)));
+                        StaticFilters.FILTER_CONTROLLED_CREATURE, "untap each creature you control"), Duration.EndOfTurn, true)));
         this.addAbility(extraCombatAbility.withInterveningIf(IsMainPhaseCondition.YOUR));
 
     }
