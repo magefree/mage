@@ -3,7 +3,7 @@ package mage.cards.d;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.IsMainPhaseCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DrawCardSourceControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -11,12 +11,8 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TurnPhase;
 import mage.filter.FilterSpell;
-import mage.game.Game;
 
-import java.util.EnumSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -42,7 +38,7 @@ public final class DovinsAcuity extends CardImpl {
         this.addAbility(new ConditionalTriggeredAbility(
                 new SpellCastControllerTriggeredAbility(
                         new ReturnToHandSourceEffect(true), filter, true
-                ), DovinsAcuityCondition.instance,
+                ), IsMainPhaseCondition.YOUR,
                 "Whenever you cast an instant spell during your main phase, " +
                         "you may return {this} to its owner's hand."
         ));
@@ -55,17 +51,5 @@ public final class DovinsAcuity extends CardImpl {
     @Override
     public DovinsAcuity copy() {
         return new DovinsAcuity(this);
-    }
-}
-
-enum DovinsAcuityCondition implements Condition {
-
-    instance;
-    private static final Set<TurnPhase> turnPhases = EnumSet.of(TurnPhase.PRECOMBAT_MAIN, TurnPhase.POSTCOMBAT_MAIN);
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.isActivePlayer(source.getControllerId())
-                && turnPhases.contains(game.getTurn().getPhase().getType());
     }
 }

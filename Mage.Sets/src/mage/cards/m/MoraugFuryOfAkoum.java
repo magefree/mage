@@ -6,7 +6,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.IsMainPhaseCondition;
 import mage.abilities.decorator.ConditionalInterveningIfTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -41,7 +41,7 @@ public final class MoraugFuryOfAkoum extends CardImpl {
 
         // Landfall — Whenever a land you control enters, if it's your main phase, there's an additional combat phase after this phase. At the beginning of that combat, untap all creatures you control.
         this.addAbility(new ConditionalInterveningIfTriggeredAbility(
-                new LandfallAbility(new MoraugFuryOfAkoumCombatEffect()), MoraugFuryOfAkoumCondition.instance,
+                new LandfallAbility(new MoraugFuryOfAkoumCombatEffect()), IsMainPhaseCondition.YOUR,
                 "<i>Landfall</i> &mdash; Whenever a land you control enters, " +
                         "if it's your main phase, there's an additional combat phase after this phase. " +
                         "At the beginning of that combat, untap all creatures you control."
@@ -55,15 +55,6 @@ public final class MoraugFuryOfAkoum extends CardImpl {
     @Override
     public MoraugFuryOfAkoum copy() {
         return new MoraugFuryOfAkoum(this);
-    }
-}
-
-enum MoraugFuryOfAkoumCondition implements Condition {
-    instance;
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return game.isActivePlayer(source.getControllerId()) && game.getTurnPhaseType().isMain();
     }
 }
 

@@ -2,6 +2,7 @@
 package mage.cards.s;
 
 import java.util.UUID;
+
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AddCombatAndMainPhaseEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -9,7 +10,6 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
 import mage.constants.CardType;
-import mage.constants.TimingRule;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -19,7 +19,7 @@ import mage.target.common.TargetCreaturePermanent;
 public final class SeizeTheDay extends CardImpl {
 
     public SeizeTheDay(UUID ownerId, CardSetInfo setInfo) {
-        super(ownerId,setInfo,new CardType[]{CardType.SORCERY},"{3}{R}");
+        super(ownerId, setInfo, new CardType[]{CardType.SORCERY}, "{3}{R}");
 
         // Untap target creature. After this main phase, there is an additional combat phase followed by an additional main phase.
         this.getSpellAbility().addEffect(new UntapTargetEffect());

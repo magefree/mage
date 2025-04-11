@@ -3,8 +3,7 @@ package mage.cards.f;
 import java.util.UUID;
 
 import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.condition.OrCondition;
-import mage.abilities.condition.common.IsPhaseCondition;
+import mage.abilities.condition.common.IsMainPhaseCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.*;
 import mage.cards.CardImpl;
@@ -29,7 +28,7 @@ public final class FullThrottle extends CardImpl {
         // After this main phase, there are two additional combat phases.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new AdditionalCombatPhaseEffect(2),
-                new OrCondition(new IsPhaseCondition(TurnPhase.PRECOMBAT_MAIN), new IsPhaseCondition(TurnPhase.POSTCOMBAT_MAIN)),
+                IsMainPhaseCondition.ANY,
                 "After this main phase, there are two additional combat phases."
         ));
         // At the beginning of each combat this turn, untap all creatures that attacked this turn.

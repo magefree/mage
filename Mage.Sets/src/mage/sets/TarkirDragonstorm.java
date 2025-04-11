@@ -1,5 +1,8 @@
 package mage.sets;
 
+import java.util.Arrays;
+import java.util.List;
+
 import mage.cards.ExpansionSet;
 import mage.constants.Rarity;
 import mage.constants.SetType;
@@ -31,6 +34,10 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Ainok Wayfarer", 134, Rarity.COMMON, mage.cards.a.AinokWayfarer.class));
         cards.add(new SetCardInfo("Alchemist's Assistant", 71, Rarity.UNCOMMON, mage.cards.a.AlchemistsAssistant.class));
         cards.add(new SetCardInfo("Alesha's Legacy", 72, Rarity.COMMON, mage.cards.a.AleshasLegacy.class));
+        cards.add(new SetCardInfo("All-Out Assault", 167, Rarity.MYTHIC, mage.cards.a.AllOutAssault.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("All-Out Assault", 352, Rarity.MYTHIC, mage.cards.a.AllOutAssault.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("All-Out Assault", 405, Rarity.MYTHIC, mage.cards.a.AllOutAssault.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("All-Out Assault", 415, Rarity.MYTHIC, mage.cards.a.AllOutAssault.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Ambling Stormshell", 37, Rarity.RARE, mage.cards.a.AmblingStormshell.class));
         cards.add(new SetCardInfo("Anafenza, Unyielding Lineage", 2, Rarity.RARE, mage.cards.a.AnafenzaUnyieldingLineage.class));
         cards.add(new SetCardInfo("Arashin Sunshield", 3, Rarity.COMMON, mage.cards.a.ArashinSunshield.class));
