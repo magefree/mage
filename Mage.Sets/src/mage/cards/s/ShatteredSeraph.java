@@ -32,7 +32,7 @@ public final class ShatteredSeraph extends CardImpl {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(3)));
 
         // {2}, Exile Shattered Seraph from your hand: Target land gains "{T}: Add {W}, {U}, or {B}" until Shattered Seraph is cast from exile. You may cast Shattered Seraph for as long as it remains exiled.
-        this.addAbility(new GiveManaAbilityAndCastSourceAbility("WUB"));
+        this.addAbility(new GiveManaAbilityAndCastSourceAbility("WUB",2));
     }
 
     private ShatteredSeraph(final ShatteredSeraph card) {
