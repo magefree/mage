@@ -159,6 +159,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Lotuslight Dancers", 363, Rarity.RARE, mage.cards.l.LotuslightDancers.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Loxodon Battle Priest", 15, Rarity.UNCOMMON, mage.cards.l.LoxodonBattlePriest.class));
         cards.add(new SetCardInfo("Maelstrom of the Spirit Dragon", 260, Rarity.RARE, mage.cards.m.MaelstromOfTheSpiritDragon.class));
+        cards.add(new SetCardInfo("Magmatic Hellkite", 111, Rarity.RARE, mage.cards.m.MagmaticHellkite.class));
         cards.add(new SetCardInfo("Mammoth Bellow", 205, Rarity.UNCOMMON, mage.cards.m.MammothBellow.class));
         cards.add(new SetCardInfo("Marang River Regent", 51, Rarity.RARE, mage.cards.m.MarangRiverRegent.class));
         cards.add(new SetCardInfo("Mardu Devotee", 16, Rarity.COMMON, mage.cards.m.MarduDevotee.class));
