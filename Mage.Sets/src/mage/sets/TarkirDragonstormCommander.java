@@ -58,6 +58,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Blasphemous Act", 207, Rarity.RARE, mage.cards.b.BlasphemousAct.class));
         cards.add(new SetCardInfo("Blight Pile", 174, Rarity.UNCOMMON, mage.cards.b.BlightPile.class));
         cards.add(new SetCardInfo("Bojuka Bog", 341, Rarity.COMMON, mage.cards.b.BojukaBog.class));
+        cards.add(new SetCardInfo("Bone Devourer", 26, Rarity.RARE, mage.cards.b.BoneDevourer.class));
         cards.add(new SetCardInfo("Boros Signet", 314, Rarity.UNCOMMON, mage.cards.b.BorosSignet.class));
         cards.add(new SetCardInfo("Bountiful Landscape", 342, Rarity.COMMON, mage.cards.b.BountifulLandscape.class));
         cards.add(new SetCardInfo("Caldera Pyremaw", 33, Rarity.RARE, mage.cards.c.CalderaPyremaw.class));
