@@ -242,6 +242,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Putrefy", 300, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
         cards.add(new SetCardInfo("Radiant Grove", 385, Rarity.COMMON, mage.cards.r.RadiantGrove.class));
         cards.add(new SetCardInfo("Rampant Growth", 265, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
+        cards.add(new SetCardInfo("Rampart Architect", 47, Rarity.RARE, mage.cards.r.RampartArchitect.class));
         cards.add(new SetCardInfo("Rapacious Dragon", 229, Rarity.UNCOMMON, mage.cards.r.RapaciousDragon.class));
         cards.add(new SetCardInfo("Rapid Hybridization", 162, Rarity.UNCOMMON, mage.cards.r.RapidHybridization.class));
         cards.add(new SetCardInfo("Reality Shift", 163, Rarity.UNCOMMON, mage.cards.r.RealityShift.class));
