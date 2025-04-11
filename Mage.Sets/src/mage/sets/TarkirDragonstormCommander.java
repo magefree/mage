@@ -107,6 +107,8 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Disciple of Bolas", 178, Rarity.RARE, mage.cards.d.DiscipleOfBolas.class));
         cards.add(new SetCardInfo("Dismantling Wave", 112, Rarity.RARE, mage.cards.d.DismantlingWave.class));
         cards.add(new SetCardInfo("Divine Visitation", 113, Rarity.MYTHIC, mage.cards.d.DivineVisitation.class));
+        cards.add(new SetCardInfo("Diviner of Mist", 20, Rarity.RARE, mage.cards.d.DivinerOfMist.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Diviner of Mist", 60, Rarity.RARE, mage.cards.d.DivinerOfMist.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Draconic Lore", 151, Rarity.COMMON, mage.cards.d.DraconicLore.class));
         cards.add(new SetCardInfo("Dragon Tempest", 94, Rarity.UNCOMMON, mage.cards.d.DragonTempest.class));
         cards.add(new SetCardInfo("Dragon's Hoard", 317, Rarity.RARE, mage.cards.d.DragonsHoard.class));
