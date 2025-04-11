@@ -167,6 +167,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Mardu Siegebreaker", 206, Rarity.RARE, mage.cards.m.MarduSiegebreaker.class));
         cards.add(new SetCardInfo("Marshal of the Lost", 207, Rarity.UNCOMMON, mage.cards.m.MarshalOfTheLost.class));
         cards.add(new SetCardInfo("Meticulous Artisan", 112, Rarity.COMMON, mage.cards.m.MeticulousArtisan.class));
+        cards.add(new SetCardInfo("Mistrise Village", 261, Rarity.RARE, mage.cards.m.MistriseVillage.class));
         cards.add(new SetCardInfo("Molten Exhale", 113, Rarity.COMMON, mage.cards.m.MoltenExhale.class));
         cards.add(new SetCardInfo("Monastery Messenger", 208, Rarity.COMMON, mage.cards.m.MonasteryMessenger.class));
         cards.add(new SetCardInfo("Mountain", 283, Rarity.LAND, mage.cards.basiclands.Mountain.class, NON_FULL_USE_VARIOUS));
