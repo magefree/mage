@@ -336,6 +336,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Tocasia's Welcome", 135, Rarity.RARE, mage.cards.t.TocasiasWelcome.class));
         cards.add(new SetCardInfo("Tower Defense", 275, Rarity.UNCOMMON, mage.cards.t.TowerDefense.class));
         cards.add(new SetCardInfo("Towering Titan", 276, Rarity.MYTHIC, mage.cards.t.ToweringTitan.class));
+        cards.add(new SetCardInfo("Transforming Flourish", 39, Rarity.RARE, mage.cards.t.TransformingFlourish.class));
         cards.add(new SetCardInfo("Treasure Cruise", 169, Rarity.COMMON, mage.cards.t.TreasureCruise.class));
         cards.add(new SetCardInfo("Tree of Redemption", 97, Rarity.MYTHIC, mage.cards.t.TreeOfRedemption.class));
         cards.add(new SetCardInfo("Twilight Drover", 136, Rarity.RARE, mage.cards.t.TwilightDrover.class));
