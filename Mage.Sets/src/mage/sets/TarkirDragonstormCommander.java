@@ -249,6 +249,8 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Prairie Stream", 384, Rarity.RARE, mage.cards.p.PrairieStream.class));
         cards.add(new SetCardInfo("Preordain", 161, Rarity.COMMON, mage.cards.p.Preordain.class));
         cards.add(new SetCardInfo("Prismari Command", 299, Rarity.RARE, mage.cards.p.PrismariCommand.class));
+        cards.add(new SetCardInfo("Protector of the Wastes", 14, Rarity.RARE, mage.cards.p.ProtectorOfTheWastes.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Protector of the Wastes", 54, Rarity.RARE, mage.cards.p.ProtectorOfTheWastes.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Putrefy", 300, Rarity.UNCOMMON, mage.cards.p.Putrefy.class));
         cards.add(new SetCardInfo("Radiant Grove", 385, Rarity.COMMON, mage.cards.r.RadiantGrove.class));
         cards.add(new SetCardInfo("Rampant Growth", 265, Rarity.COMMON, mage.cards.r.RampantGrowth.class));
