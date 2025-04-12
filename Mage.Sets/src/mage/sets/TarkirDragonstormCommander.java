@@ -191,6 +191,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Keiga, the Tide Star", 156, Rarity.RARE, mage.cards.k.KeigaTheTideStar.class));
         cards.add(new SetCardInfo("Kessig Wolf Run", 375, Rarity.RARE, mage.cards.k.KessigWolfRun.class));
         cards.add(new SetCardInfo("Kodama's Reach", 261, Rarity.COMMON, mage.cards.k.KodamasReach.class));
+        cards.add(new SetCardInfo("Kotis, Sibsig Champion", 5, Rarity.MYTHIC, mage.cards.k.KotisSibsigChampion.class));
         cards.add(new SetCardInfo("Lathliss, Dragon Queen", 219, Rarity.RARE, mage.cards.l.LathlissDragonQueen.class));
         cards.add(new SetCardInfo("Legion Loyalty", 122, Rarity.MYTHIC, mage.cards.l.LegionLoyalty.class));
         cards.add(new SetCardInfo("Legion Warboss", 220, Rarity.RARE, mage.cards.l.LegionWarboss.class));

@@ -4,6 +4,9 @@ import mage.MageIdentifier;
 import mage.MageObjectReference;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.constants.*;
@@ -28,7 +31,11 @@ import java.util.UUID;
 public class CastFromGraveyardOnceEachTurnAbility extends SimpleStaticAbility {
 
     public CastFromGraveyardOnceEachTurnAbility(FilterCard filter) {
-        super(new CastFromGraveyardOnceEffect(filter));
+        this(filter, null);
+    }
+
+    public CastFromGraveyardOnceEachTurnAbility(FilterCard filter, Cost additionalCost) {
+        super(new CastFromGraveyardOnceEffect(filter, additionalCost));
         this.addWatcher(new CastFromGraveyardOnceWatcher());
         this.setIdentifier(MageIdentifier.CastFromGraveyardOnceWatcher);
     }
@@ -46,17 +53,21 @@ public class CastFromGraveyardOnceEachTurnAbility extends SimpleStaticAbility {
 class CastFromGraveyardOnceEffect extends AsThoughEffectImpl {
 
     private final FilterCard filter;
+    private final Cost additionalCost;
 
-    CastFromGraveyardOnceEffect(FilterCard filter) {
+    CastFromGraveyardOnceEffect(FilterCard filter, Cost additionalCost) {
         super(AsThoughEffectType.CAST_FROM_NOT_OWN_HAND_ZONE, Duration.WhileOnBattlefield, Outcome.Benefit);
         this.filter = filter;
         this.staticText = "Once during each of your turns, you may cast " + filter.getMessage()
-                + (filter.getMessage().contains("your graveyard") ? "" : " from your graveyard");
+                + (filter.getMessage().contains("your graveyard") ? "" : " from your graveyard")
+                + (additionalCost == null ? "" : " by " + additionalCost.getText() + " in addition to paying its other costs.");
+        this.additionalCost = additionalCost;
     }
 
     private CastFromGraveyardOnceEffect(final CastFromGraveyardOnceEffect effect) {
         super(effect);
         this.filter = effect.filter;
+        this.additionalCost = effect.additionalCost;
     }
 
     @Override
@@ -97,7 +108,14 @@ class CastFromGraveyardOnceEffect extends AsThoughEffectImpl {
             }
             Set<MageIdentifier> allowedToBeCastNow = spellAbility.spellCanBeActivatedNow(playerId, game);
             if (allowedToBeCastNow.contains(MageIdentifier.Default)) {
-                return filter.match(cardToCheck, playerId, source, game);
+                boolean matched = filter.match(cardToCheck, playerId, source, game);
+                if (matched && additionalCost != null) {
+                    Costs<Cost> costs = new CostsImpl<>();
+                    costs.add(additionalCost);
+                    controller.setCastSourceIdWithAlternateMana(objectId, spellAbility.getManaCosts(),
+                            costs, MageIdentifier.CastFromGraveyardOnceWatcher);
+                }
+                return matched;
             }
         }
         return false;
