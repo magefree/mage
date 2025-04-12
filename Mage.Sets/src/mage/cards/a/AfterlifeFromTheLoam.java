@@ -1,6 +1,5 @@
 package mage.cards.a;
 
-import java.security.acl.Owner;
 import java.util.UUID;
 
 import mage.abilities.Ability;
@@ -14,7 +13,6 @@ import mage.constants.Duration;
 import mage.constants.SubType;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.card.OwnerIdPredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInGraveyard;

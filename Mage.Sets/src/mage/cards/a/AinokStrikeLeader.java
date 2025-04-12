@@ -7,17 +7,13 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksWithCreaturesTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.continuous.GainAbilityAllEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.constants.*;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.filter.StaticFilters;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -25,11 +21,6 @@ import mage.filter.predicate.mageobject.CommanderPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.GoblinToken;
-import mage.target.TargetPlayer;
-import mage.target.common.TargetOpponent;
-import mage.target.targetadjustment.ForEachOpponentTargetsAdjuster;
-import mage.target.targetpointer.EachTargetPointer;
-import mage.util.CardUtil;
 
 /**
  *
