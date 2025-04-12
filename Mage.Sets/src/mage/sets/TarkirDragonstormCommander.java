@@ -225,6 +225,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Narset's Reversal", 92, Rarity.RARE, mage.cards.n.NarsetsReversal.class));
         cards.add(new SetCardInfo("Necromantic Selection", 189, Rarity.RARE, mage.cards.n.NecromanticSelection.class));
         cards.add(new SetCardInfo("Necropolis Fiend", 190, Rarity.RARE, mage.cards.n.NecropolisFiend.class));
+        cards.add(new SetCardInfo("Neriv, Crackling Vanguard", 6, Rarity.MYTHIC, mage.cards.n.NerivCracklingVanguard.class));
         cards.add(new SetCardInfo("Nesting Dragon", 225, Rarity.RARE, mage.cards.n.NestingDragon.class));
         cards.add(new SetCardInfo("Nogi, Draco-Zealot", 226, Rarity.MYTHIC, mage.cards.n.NogiDracoZealot.class));
         cards.add(new SetCardInfo("Noxious Gearhulk", 191, Rarity.MYTHIC, mage.cards.n.NoxiousGearhulk.class));
