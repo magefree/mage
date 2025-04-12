@@ -239,6 +239,8 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Orzhov Signet", 323, Rarity.COMMON, mage.cards.o.OrzhovSignet.class));
         cards.add(new SetCardInfo("Overgrown Battlement", 264, Rarity.UNCOMMON, mage.cards.o.OvergrownBattlement.class));
         cards.add(new SetCardInfo("Overgrown Farmland", 381, Rarity.RARE, mage.cards.o.OvergrownFarmland.class));
+        cards.add(new SetCardInfo("Parapet Thrasher", 36, Rarity.RARE, mage.cards.p.ParapetThrasher.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Parapet Thrasher", 76, Rarity.RARE, mage.cards.p.ParapetThrasher.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Path of Ancestry", 382, Rarity.COMMON, mage.cards.p.PathOfAncestry.class));
         cards.add(new SetCardInfo("Perilous Landscape", 383, Rarity.COMMON, mage.cards.p.PerilousLandscape.class));
         cards.add(new SetCardInfo("Phyrexian Reclamation", 194, Rarity.UNCOMMON, mage.cards.p.PhyrexianReclamation.class));
