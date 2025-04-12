@@ -21,6 +21,7 @@ import mage.target.targetpointer.EachTargetPointer;
  * @author Jmlundeen
  */
 public final class RiptideGearhulk extends CardImpl {
+
     public RiptideGearhulk(UUID ownerId, CardSetInfo setInfo) {
         super(ownerId, setInfo, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}{W}{U}{U}");
         
