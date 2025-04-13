@@ -385,6 +385,8 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Welcoming Vampire", 140, Rarity.RARE, mage.cards.w.WelcomingVampire.class));
         cards.add(new SetCardInfo("Whirlwind of Thought", 311, Rarity.RARE, mage.cards.w.WhirlwindOfThought.class));
         cards.add(new SetCardInfo("Will of the Abzan", 31, Rarity.RARE, mage.cards.w.WillOfTheAbzan.class));
+        cards.add(new SetCardInfo("Will of the Jeskai", 40, Rarity.RARE, mage.cards.w.WillOfTheJeskai.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Will of the Jeskai", 80, Rarity.RARE, mage.cards.w.WillOfTheJeskai.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Will of the Mardu", 17, Rarity.RARE, mage.cards.w.WillOfTheMardu.class));
         cards.add(new SetCardInfo("Will of the Sultai", 49, Rarity.RARE, mage.cards.w.WillOfTheSultai.class));
         cards.add(new SetCardInfo("Will of the Temur", 24, Rarity.RARE, mage.cards.w.WillOfTheTemur.class));
