@@ -63,11 +63,8 @@ public class BecomesTargetControllerTriggeredAbility extends TriggeredAbilityImp
                 return false;
             }
         }
-        StackObject targetingObject = CardUtil.getTargetingStackObject(this.getId().toString(), event, game);
+        StackObject targetingObject = CardUtil.findTargetingStackObject(this.getId().toString(), event, game);
         if (targetingObject == null || !filterStack.match(targetingObject, getControllerId(), this, game)) {
-            return false;
-        }
-        if (CardUtil.checkTargetedEventAlreadyUsed(this.getId().toString(), targetingObject, event, game)) {
             return false;
         }
         switch (setTargetPointer) {
