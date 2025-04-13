@@ -1135,11 +1135,11 @@ public final class CardUtil {
      * @param checkingReference must be unique for each usage (this.getId().toString() of the TriggeredAbility, or this.getKey() of the watcher)
      * @param event the GameEvent.EventType.TARGETED from checkTrigger() or watch()
      * @param game  the Game from checkTrigger() or watch()
-     * @return the StackObject which targeted the source, or null if not found
+     * @return the StackObject which targeted the source, or null if already used or not found
      */
     public static StackObject findTargetingStackObject(String checkingReference, GameEvent event, Game game) {
         // In case of multiple simultaneous triggered abilities from the same source,
-        // need to get the actual one that targeted, see #8026, #8378
+        // need to get the actual one that targeted, see #8026, #8378, rulings for Battle Mammoth
         // In case of copied triggered abilities, need to trigger on each independently, see #13498
         // Also avoids triggering on cancelled selections, see #8802
         String stateKey = "targetedMap" + checkingReference;
