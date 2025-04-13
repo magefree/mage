@@ -302,6 +302,8 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Springbloom Druid", 271, Rarity.COMMON, mage.cards.s.SpringbloomDruid.class));
         cards.add(new SetCardInfo("Staff of Compleation", 326, Rarity.MYTHIC, mage.cards.s.StaffOfCompleation.class));
         cards.add(new SetCardInfo("Steel Hellkite", 327, Rarity.RARE, mage.cards.s.SteelHellkite.class));
+        cards.add(new SetCardInfo("Steward of the Harvest", 48, Rarity.RARE, mage.cards.s.StewardOfTheHarvest.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Steward of the Harvest", 88, Rarity.RARE, mage.cards.s.StewardOfTheHarvest.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Stitcher's Supplier", 196, Rarity.UNCOMMON, mage.cards.s.StitchersSupplier.class));
         cards.add(new SetCardInfo("Storm's Wrath", 236, Rarity.RARE, mage.cards.s.StormsWrath.class));
         cards.add(new SetCardInfo("Storm-Kiln Artist", 235, Rarity.UNCOMMON, mage.cards.s.StormKilnArtist.class));
