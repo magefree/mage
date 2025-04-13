@@ -82,6 +82,15 @@ class ClementTheWorrywortTriggeredAbility extends EntersBattlefieldThisOrAnother
                 StaticFilters.FILTER_PERMANENT_CREATURE, false, true);
     }
 
+    ClementTheWorrywortTriggeredAbility(final ClementTheWorrywortTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public ClementTheWorrywortTriggeredAbility copy() {
+        return new ClementTheWorrywortTriggeredAbility(this);
+    }
+
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
