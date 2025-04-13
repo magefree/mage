@@ -347,6 +347,8 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Think Twice", 168, Rarity.COMMON, mage.cards.t.ThinkTwice.class));
         cards.add(new SetCardInfo("Third Path Iconoclast", 307, Rarity.UNCOMMON, mage.cards.t.ThirdPathIconoclast.class));
         cards.add(new SetCardInfo("Thunderbreak Regent", 241, Rarity.RARE, mage.cards.t.ThunderbreakRegent.class));
+        cards.add(new SetCardInfo("Thundermane Dragon", 38, Rarity.RARE, mage.cards.t.ThundermaneDragon.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Thundermane Dragon", 78, Rarity.RARE, mage.cards.t.ThundermaneDragon.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Time Wipe", 308, Rarity.RARE, mage.cards.t.TimeWipe.class));
         cards.add(new SetCardInfo("Timeless Witness", 274, Rarity.UNCOMMON, mage.cards.t.TimelessWitness.class));
         cards.add(new SetCardInfo("Tip the Scales", 29, Rarity.RARE, mage.cards.t.TipTheScales.class));
