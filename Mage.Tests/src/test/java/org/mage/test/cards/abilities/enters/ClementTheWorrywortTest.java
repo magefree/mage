@@ -22,7 +22,7 @@ public class ClementTheWorrywortTest extends CardTestPlayerBase{
       addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
 
       castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, frog);
-      setChoice(playerA, "Spore Frog");
+      addTarget(playerA, "Spore Frog");
 
       setStrictChooseMode(true);
       setStopAt(1, PhaseStep.BEGIN_COMBAT);
@@ -56,7 +56,8 @@ public class ClementTheWorrywortTest extends CardTestPlayerBase{
       addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
 
       castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Haze Frog");
-      setChoice(playerA, frog);
+      setChoice(playerA, "Whenever"); // order triggers
+      addTarget(playerA, frog);
 
       setStrictChooseMode(true);
       setStopAt(1, PhaseStep.BEGIN_COMBAT);
