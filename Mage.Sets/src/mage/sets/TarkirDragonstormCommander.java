@@ -370,6 +370,8 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Veyran, Voice of Duality", 310, Rarity.MYTHIC, mage.cards.v.VeyranVoiceOfDuality.class));
         cards.add(new SetCardInfo("Victimize", 198, Rarity.UNCOMMON, mage.cards.v.Victimize.class));
         cards.add(new SetCardInfo("Viscera Seer", 199, Rarity.COMMON, mage.cards.v.VisceraSeer.class));
+        cards.add(new SetCardInfo("Voracious Bibliophile", 23, Rarity.RARE, mage.cards.v.VoraciousBibliophile.class, NON_FULL_USE_VARIOUS));
+        cards.add(new SetCardInfo("Voracious Bibliophile", 63, Rarity.RARE, mage.cards.v.VoraciousBibliophile.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Wakestone Gargoyle", 137, Rarity.RARE, mage.cards.w.WakestoneGargoyle.class));
         cards.add(new SetCardInfo("Walking Bulwark", 334, Rarity.UNCOMMON, mage.cards.w.WalkingBulwark.class));
         cards.add(new SetCardInfo("Wall of Blossoms", 277, Rarity.UNCOMMON, mage.cards.w.WallOfBlossoms.class));
