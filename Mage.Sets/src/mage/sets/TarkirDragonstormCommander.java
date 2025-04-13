@@ -285,6 +285,7 @@ public final class TarkirDragonstormCommander extends ExpansionSet {
         cards.add(new SetCardInfo("Shattered Sanctum", 391, Rarity.RARE, mage.cards.s.ShatteredSanctum.class));
         cards.add(new SetCardInfo("Sheltered Thicket", 392, Rarity.RARE, mage.cards.s.ShelteredThicket.class));
         cards.add(new SetCardInfo("Shigeki, Jukai Visionary", 270, Rarity.RARE, mage.cards.s.ShigekiJukaiVisionary.class));
+        cards.add(new SetCardInfo("Shiko and Narset, Unified", 7, Rarity.MYTHIC, mage.cards.s.ShikoAndNarsetUnified.class));
         cards.add(new SetCardInfo("Shiny Impetus", 231, Rarity.COMMON, mage.cards.s.ShinyImpetus.class));
         cards.add(new SetCardInfo("Shivan Reef", 393, Rarity.RARE, mage.cards.s.ShivanReef.class));
         cards.add(new SetCardInfo("Sidar Kondo of Jamuraa", 303, Rarity.MYTHIC, mage.cards.s.SidarKondoOfJamuraa.class));
