@@ -9,23 +9,17 @@ import mage.abilities.Mode;
 import mage.abilities.common.OneOrMoreDamagePlayerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ExileTopXMayPlayUntilEffect;
 import mage.abilities.hint.common.ModesAlreadyUsedHint;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.SubType;
+import mage.constants.*;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.CardSetInfo;
-import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.events.DamagedPlayerEvent;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.targetadjustment.DamagedPlayerControlsTargetAdjuster;
@@ -51,7 +45,8 @@ public final class ParapetThrasher extends CardImpl {
 
         // Whenever one or more Dragons you control deal combat damage to an opponent, choose one that hasn't been chosen this turn --
         // * Destroy target artifact that opponent controls.
-        Ability ability = new OneOrMoreDamagePlayerTriggeredAbility(new DestroyTargetEffect(), filter, true, true)
+        Ability ability = new OneOrMoreDamagePlayerTriggeredAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(),
+                filter, true, true, SetTargetPointer.PLAYER, false)
                 .setTriggerPhrase("Whenever one or more Dragons you control deal combat damage to an opponent, ");
         ability.addTarget(new TargetPermanent(artifactFilter));
         ability.setTargetAdjuster(new DamagedPlayerControlsTargetAdjuster());
