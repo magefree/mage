@@ -71,6 +71,7 @@ public final class TarkirDragonstorm extends ExpansionSet {
         cards.add(new SetCardInfo("Corroding Dragonstorm", 75, Rarity.UNCOMMON, mage.cards.c.CorrodingDragonstorm.class));
         cards.add(new SetCardInfo("Craterhoof Behemoth", 138, Rarity.MYTHIC, mage.cards.c.CraterhoofBehemoth.class));
         cards.add(new SetCardInfo("Cruel Truths", 76, Rarity.COMMON, mage.cards.c.CruelTruths.class));
+        cards.add(new SetCardInfo("Dalkovan Encampment", 253, Rarity.RARE, mage.cards.d.DalkovanEncampment.class));
         cards.add(new SetCardInfo("Dalkovan Packbeasts", 7, Rarity.UNCOMMON, mage.cards.d.DalkovanPackbeasts.class));
         cards.add(new SetCardInfo("Death Begets Life", 176, Rarity.MYTHIC, mage.cards.d.DeathBegetsLife.class, NON_FULL_USE_VARIOUS));
         cards.add(new SetCardInfo("Death Begets Life", 354, Rarity.MYTHIC, mage.cards.d.DeathBegetsLife.class, NON_FULL_USE_VARIOUS));
